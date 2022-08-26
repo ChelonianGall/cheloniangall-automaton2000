@@ -1,2 +1,1 @@
-# cheloniangall-automaton2000
-The Automaton2000 implementation for ChelonianGall.
+Repository of the [ChelonianGall](https://github.com/ChelonianGall) Automaton2000 implementation.
