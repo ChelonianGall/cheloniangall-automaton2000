@@ -1,0 +1,2752 @@
+ Oioi: Parfois, j'écris des conneries tellement grosses que c'est à se demander comment l'algo pouvait fonctionner...
+ thesyd: salut , ca va tlmd&#160;?
+ Haashi: \o/
+ <b>**BlaiseEbuth slaps Haashi around a bit with a large fishbot</b></p><p><img src="/a/53939889494975" /> BlaiseEbuth: Tu m'as fait peur à sauter comme ça...
+ Haashi: je prend déjà une claque dès le matin&#160;:|
+ Mazelcop: o/
+ Mazelcop: 10 places perdues en une nuit ça fait mal
+ Haashi: je dirais bien que c'est parce que ton code est nul, mais je suis pas mieux classé pour me le permettre&#160;:(
+ Mazelcop: mais mon code est nul, je confirme&#160;:)
+ Haashi: toujours en beamsearch&#160;?
+ Mazelcop: oui, mais maintenant j'en fais plein
+ egaetan: salut
+ egaetan: Mazelcop je suis rassuré de pas être le seul
+ BlaiseEbuth: Moi j'ai pas de code, mais il est nul aussi.
+ Gorkill: Et bonjour à tous!
+ BlaiseEbuth: o/
+ Simon21: Hello, je viens d'encoder un tableau de boolean sur un entier (avec operations bitwise bitshift) dans l'espoir de gagner du temps, mais ça ne gagne quasi rien. Il y en a surement qui l'ont déjà fait ici? Une idée des gains de perfs attendus?
+ BlaiseEbuth: Ca va pas de faire gagner de temps en soit. L'idée c'est que ça soit plus léger à copier
+ BlaiseEbuth: *te
+ BlaiseEbuth: Et donc utile quand tu fais de la simu par exemple, où il faut copier l'état du jeu des milliers de fois
+ Lumix: Yo
+ Simon21: yep, justement j'utilise ça dans un bfs. mais au niveau mémoire ça gagne rien en soit, donc je m'attendais à des gains de perf plus significatifs
+ Lumix: Je me demandais, vous connaissez la proportion de français sur le contest&#160;?
+ BlaiseEbuth: Lumix dans le leaderboard tu peux filtrer par pays.
+ Simon21: en même temps j'ai regardé les perfs sur un début de partie ou j'ai que 4 sorts, ça vaut peut etre plus le coup plus tard quand y en a 10-15
+ Lumix: Oh oui, 541/5000+ c'est pas énorme
+ BlaiseEbuth: Oui. Mais ça dépends aussi de ce que tu encodes, et comment. Genre si t'as 4 bool que tu mets dans un int32...
+ BlaiseEbuth: Apres l'autre interet du bitset c'est de minimiser le nombre d'opérations.
+ Gorkill: Simon21 tu fait déjà ce genre d'opti? 
+ Simon21: oui je met dans un int 32, mais plus tard dans la partie ça vaudra plus le coupje pourrait mettre dans un short mais du coup je devrai me limiter à 16 sorts, ce qui est déjà pas mal en soit, pas sur d'y etre déjà arrivé lol
+ Simon21: nope c'est la 1ere fois que je le fais&#160;:-)
+ BlaiseEbuth: Si tu encodes ton tableau de bool dans un int, mais que tu le traites bit à bit ça va pas changer grand chose
+ BlaiseEbuth: Niveau perf j'entends
+ Simon21: BlaiseEbuth, comment je devrais traiter du coup?parce qu'effectivement quand je regarde si un sort est dispo, je vais chercher le bit correspondantpar contre pour la copie et pour les tests d'égalité (pour la partie memoization) là je travaille direct sur l'entier
+ BlaiseEbuth: Bah c'est du cas par cas... Mais par exemple si tu as deux int, un pour un inventaire et un pour le delta d'une potion, l'idée c'est de vérifier si tu peux brew en une seule oppération. Ce genre de truc
+ Simon21: ah oui, je suis pas arrivé là encore^^ j'ai juste fait la disponibilité des sorts
+ BlaiseEbuth: C'est juste un exemple, mais il faut essayer de pas avoir à décoder tes infos à chaque fois.
+ Simon21: oui d'accord
+ BlaiseEbuth: Sinon le gain est inexistant
+ Simon21: merci pour le conseil
+ Simon21: oui c'est logique du coup
+ Gh0stm4chine: merci BlaiseEButh ça m'aide aussi, j'ai jamais fait ce genre d'opti du coup je suis dans le flou 
+ Traquila: salut
+ BlaiseEbuth: o/
+ Julius2k17: salut tlm
+ BlaiseEbuth: \o
+ 788361: o/
+ Traquila: Avant de passer au champs de bit, il vaut mieux se concentrer sur la structure du node (le truc que vous copiez 100k fois) et supprimer tout ce qui n'est pas necéssaire.
+ Traquila: Pas exemple j'avais gardé le score
+ BlaiseEbuth: Ouai tant qu'à faire ^^
+ y1se3n: Bonjour tout le monde
+ BlaiseEbuth: o/
+ Bob: je suis en train de me demander si j'ai envie de partir dans cette direction-la en fait
+ Traquila: Au début j'avais même la liste des sorts, et ce, juste pour le boleen castable
+ BlaiseEbuth: Quelle direction Bob&#160;?
+ Bob: simu + recherche
+ Bob: j'ai tellement trop la flemme
+ BlaiseEbuth: Ah. Moi aussi.
+ Gh0stm4chine: Je pense que mon bottleneck c'est quand je vérifie si le node n'a pas déjà été visité&#160;:/ j'utilise le hashcode java mais ce n'est pas très performant je pense 
+ BlaiseEbuth: java&#160;? Non en effet...
+ BlaiseEbuth: :3
+ Traquila: en java tu as un 34, 74
+ Gh0stm4chine: yep j'ai vu 
+ Gh0stm4chine: j'ai essayé de passer en c++ mais j'en ai jamais fait du coup je pense que je n'aurai pas fini d'ici là fin :D 
+ Gorkill: En vrai... Fonce! Je suis passé de Java à C. J'en ai pas fait depuis longtemps, mais c'est un vrai défi
+ b0n5a1: o/
+ BlaiseEbuth: o/
+ Simon21: pour avoir fait les 2, je pense qu'il faut déjà bien maitriser le c++ pour faire les choses bien et avoir de meilleures perfs qu'en java
+ Traquila: Vous construisez l'arbre puis vous le parcourez&#160;?
+ BlaiseEbuth: Je dirais plutôt qu'il faut un sacré niveau pour pondre un code java qui fera mieux qu'un code moyen en C++.
+ Lumix: Contrairement au apparences, Java n'est pas si lent que ça&#160;! Je suis assez d'accord avec Simon21
+ dbdr: Blaise est Biaisé contre Java&#160;;)
+ BlaiseEbuth: "Pas si lent que ça" ne veut pas dire rapide. 
+ JBM: comment es ton :D
+ Bob: un code bien ecrit en Java peut etre carrement plus performant qu'un code mal foutu ecrit en C++
+ Bob: fix it JBM
+ Simon21: faudrait que je tente l'expérience avec mon niveau moyen de c++^^
+ JBM: améliore ma timer Bob \o
+ SypayV: std::move std::reserve std::swap ça fait des bonnes choses
+ Simon21: 100% d'accord avec toi Bob
+ BlaiseEbuth: J'ai dit moyen Bob, pas mal écrit
+ Bob: si t'as du O(n3) dans ton algo, aucun langage ne pourra le sauver
+ BlaiseEbuth: C'pas la question
+ Bob: non mais c'est ma reponse :p
+ eklore: bonjour à tous
+ <b>**BlaiseEbuth slaps eklore around a bit with a large fishbot</b></p><p><img src="/a/29407964997640" /> Bob: ce que je veux dire c'est qu'avant de se poser la question des perfs pures du langage et des hacks d'optimisation, il faut se poser la question du design de l'algo
+ JBM: ben juste des ifs
+ b0n5a1: et des sapins
+ Warred: et la difference de performance elle est visible à l'oeil nu&#160;?
+ eklore: BlaiseEbuth fishbot&#160;? 
+ b0n5a1: et des écureuils, sans écureuils ru fais rien
+ BlaiseEbuth: C'est vrai Bob. Mais sur ce genre de challenge tout ce qui a un gc est un peu hors jeu pour les perfs, tout bien pensé que soit l'algo.
+ BlaiseEbuth: eklore&#160;: désolé tu t'es interposé entre moi et Bob au mauvais moment
+ eklore: et bien j'ai une question d'algo&#160;: savez-vous si le ait de devoir implémenter une sorte de pause entre chaque tour est le signe d'une mauvaise direction&#160;? 
+ b0n5a1: faut le contrer par de la préallocation "massive" avec pool de trucs à recycler, et revoir ton code en conséquence
+ eklore: *fait
+ BlaiseEbuth: b0n5a1 oui, mais ça fait du boulot en plus...
+ JBM: faut voir les causes du "devoir"
+ BlaiseEbuth: "pause"&#160;?
+ b0n5a1: c'est vrai en c++ aussi d'ailleurs pour gagner en perfs
+ Traquila: @eklore c'est quoi une "une sorte de pause"&#160;?
+ BlaiseEbuth: Oui, mais c'est quand même plus performant de base.
+ JBM: c'est un peu comme un REST
+ b0n5a1: clair
+ eklore: Traquilaa mon bfs est parfois en timeout ... Je me demandais si je devais pas faire une pause et continuer au tour suivant
+ Simon21: au tour suivant ce que tu as déjà commencé ne sera peut etre plus valable (si la potion visée a été faite par l'adversaire par exemple)
+ BlaiseEbuth: Voilà. Merci
+ Traquila: je ne pense pas, trop de paramètre qui changent pour ne pas recommencer la recherche
+ eklore: mmmmm
+ eklore: parfois en timeout = 1 fois sur 2 ^^
+ BlaiseEbuth: Optimise plus fort
+ Simon21: optimise le ou réduit ta profondeur de recherche, ou juste arrête toi quand tu arrive à la limitede temps
+ Lumix: On a le droit aux thread&#160;?
+ BlaiseEbuth: Oui
+ Traquila: une astuce rapide à faire, tu mets une variable globale qui compte le nombre de nodes (ou path selon l'algo) et tu estime combien tu peux en faire sans timeout. Ensuite si tu atteint la valeur tu arretes tout et tu fais une action par défaut (learn 0 au début, cast le 1er dispo ensuite)
+ Bob: Lumix oui mais t'as droit a un seul core :D
+ BlaiseEbuth: ^
+ Simon21: donc ça sert à rien en fait, si ce n'est à perdre du temps^^
+ Lumix: Un seul core = un seul thread qui s'éxecute&#160;?
+ Bob: Traquila: une autre option c'est de verifier le timer tous les X nodes et sortir avec une exception quand on approche de la limite
+ BlaiseEbuth: Non. Tu peux faire de la concurence
+ Lumix: Trop fort
+ Traquila: faire des tickcount en boucle, je ne suis pas fna
+ dbdr: un seul à la foi
+ dbdr: s
+ Traquila: *fan
+ BlaiseEbuth: Oui un seul à la fois.
+ Traquila: j'ai essayé avec un thread par popo aussi
+ egaetan: Traquila le fameux timesort&#160;?
+ Simon21: quelle est l'intérêt de faire de la concurrence si ça ne gagne pas de temps? tester 2 stratégies et s'arrêter quand y en a une des 2 qui est concluante?
+ Traquila: = moins de calculs (car changement de contexte) mais toutes les popos sont testées en cas de timeout
+ BlaiseEbuth: Par exemple Simon21, c'est un mode de comparaison
+ eklore: Traquila merci
+ BlaiseEbuth: Après est-ce que c'est le meilleur... ^^
+ Simon21: oui j'y avais jamais pensé
+ Bon[]Crayon: bonjour tout le monde
+ BlaiseEbuth: o/
+ Traquila: Simon, on peut toujours simuler des traitements concurents, mais faire avancer 5 parcours en même temps en monothread, ca commence à faire des algos complexes
+ eklore: bonjour
+ Simon21: mais bon tu as l'overhead des threads, est-ce que ça vaut le coup au final?
+ Bon[]Crayon: alors automatonnn cette tambouille
+ AutomatonNN: oui pourquoi t'es trop contre le prochain contest&#160;?
+ Bon[]Crayon:  automaton2000 csalut
+ Automaton2000: et si t'es pas top 10
+ BlaiseEbuth: Aucune idée. Je disais juste ça en réponse au "ça sert à rien à part perdre du temps" de Traquila. :D
+ Mahouss: Perso je stock tout le chemin. de mon bfs pour le garder en mémoire et garder du temps de calcul les tours ou je sais sais ou je veux aller
+ Mahouss: Avec jsute deux/trois conditions type "la popo est tjrs dispo"
+ Traquila: je trouvais que la mise à jour du bfs existant était trop compliqué
+ Mahouss: Si je dois le mettre a jour je reprend de 0
+ Traquila: If faut que je simu l'adversaire pour compter le nombre de tour restant ...
+ Traquila: je perds souvent sur strat de fin
+ Gh0stm4chine: moi je ne sais pas comment mon bfs en java est top 400 :D il est tellement pas opti
+ lhm: Je ne comprend pas comment vous pouvez vous passer des infos des spells dans vos nodes&#160;? C'est pourtant pas pareil d'avoir 2 fois le même inventaire si tes sorts dispos ne sont pas les mêmes&#160;?
+ Traquila: dans un même tour tes spells restent les mêmes
+ Traquila: il faut juste gérer les castables dans les nodes et le(les) sorts que tu achètes dans le path
+ lhm: oui mais ton bfs va explorer les possibilités - notamment le LEARN
+ j3r3m: Bonjour, y a t il des connaisseurs de Rust&#160;?
+ Traquila: je n'autorise qu'un seul learn
+ CopperFr: Oui il y'en a
+ j3r3m: Par défaut le script dans Codingame est généré avec&#160;: macro_rules! parse_input {
+ j3r3m: Ca sert à quoi&#160;? Car j'ai une erreur à la compilation...
+ j3r3m: Débutant sous Rust...
+ Vry: o/ Bob JBM BlaiseEbuth b0n5a1dbdr et les autres&#160;!
+ BlaiseEbuth: \o Vry
+ JBM: \o Vry
+ b0n5a1: o/ Vry
+ egaetan: salut Vry
+ lhm: \o
+ Vry: Simon21&#160;: profile ton code avant de l'optimiser&#160;!
+ Gh0stm4chine: Salut Vry
+ CopperFr: Bonjour Bob JBM BlaiseEbuth b0n5a1dbdr et les autres&#160;!
+ b0n5a1: o/ CopperFr
+ BlaiseEbuth: \o CopperFr
+ Vry: J'arrive pas à me connecter au boulot ... je vais devoir bosser sur le contest du coup&#160;! :p
+ Traquila: lol
+ BlaiseEbuth: Triste
+ JBM: va falloir oui
+ CopperFr: comme par hasard
+ Simon21: Vry je ne lance pas en local, uniquement sur CG, du coup pas facile de profiler
+ WhatTrickeryIsThis: copper vous préférez boulot ou contest?
+ Gh0stm4chine: merci pour l'astuce Traquila, je pense que je vais gagenr en perf avec ça
+ CopperFr: ni l'un ni l'autre :D
+ b0n5a1: moi ils ont toujours pas remis le VPN Vry ^^ ... mais j'en ai besoin que pour commiter donc ça va (mais à un moment ça va être chiant si c'est pas fait)
+ Vry: J'appelle l'assistance pour les prévenir que ça marche pas on va bien voir s'ils arrivent à réparer le bouzin.
+ CopperFr: Pour faire le contest vous préférez un arrêt maladie ou un problème réseau&#160;?
+ b0n5a1: lol CopperFr
+ Lumix: Je préfère cours chiants
+ b0n5a1: c'est presque un pléonasme parfois ça
+ Vry: Problème réseau&#160;!
+ Vry: Tu fais tout à distance et pas besoin de tomber malade ou d'en imaginer une
+ BlaiseEbuth: Je préfère ne pas avoir besoin de prétexte.
+ Vry: Flûte l'assistance est surchargée ...
+ b0n5a1: t'as même pas essayé Vry, on nous la fait pas
+ CopperFr: oui ca m'étonnerait qu'elle le soit
+ b0n5a1: c(est ps surchargé ils sont à la machine à café depuis 8h00, nuance
+ CopperFr: en tout cas ca m'étonnerait qu'ils soient en train de faire le contest
+ BlaiseEbuth: Voir le contest de contest.
+ Vry: J'ai la musique d'attente depuis 4 minutes ... :expressionless:
+ eklore: vous savez si les performances entre l'ide et l'arène diffèrent&#160;? (a part en Rust )
+ BlaiseEbuth: Oui
+ eklore: ah et dans quel sens&#160;? 
+ eklore: l'ide est plus rapide&#160;? 
+ b0n5a1: non
+ b0n5a1: dans l'arène
+ eklore: donc si ca passe dans l'ide, ca passe dans l'arène
+ b0n5a1: normalement
+ eklore: merci
+ dbdr: j3r3m tu as toujours le problème en rust?
+ Vry: Ouais, mon dossier est transféré à l'équipe qui peut redémarrer les postes à distance&#160;! :p
+ WhatTrickeryIsThis: wowo 10/10 au submit 
+ dbdr:&#160;:+1:
+ dbdr: profitons-en avant la gold&#160;:)
+ egaetan: gg WhatTrickeryIsThis&#160;!
+ WhatTrickeryIsThis: et la légende on en parle?
+ dbdr: 10/10 en légende, alors là chapeau!
+ Vry: GG C'toi la légende WhatTrickeryIsThis
+ daleks: est-ce qqn sait comment est calculé le score&#160;? je vois pas dans la doc
+ Simon21: score du contest?
+ daleks: yes, score perso
+ BlaiseEbuth: trueskill
+ Simon21: somme des prix des potions + ingredient tier&gt;0 à la fin
+ WhatTrickeryIsThis:   deliveries.add(new DeliverySpell(new Recipe(0, 2, 2, 0), 10)); le score popotte est à la fin
+ WhatTrickeryIsThis: +10
+ WhatTrickeryIsThis: +bonus
+ Thyl: oui
+ Thyl: mon bug 
+ Thyl: est résolu
+ Simon21: 1 pt par ingrédient jaune vert et orange qoi
+ Thyl: j'ai une simu&#160;!!!!
+ BlaiseEbuth: gg
+ BlaiseEbuth: daleks le score in game ou celui du classement&#160;?
+ daleks: celui du classement
+ BlaiseEbuth: trueskill
+ BlaiseEbuth: donc
+ Simon21: a pardon
+ Simon21: ça je sais pas, des calculs compliqué selon les résultats des combats contre les autres bots
+ Simon21: mais il ne sert que pour le classement au sein de la ligue où tu es
+ WhatTrickeryIsThis: pourquoi les matchs y en a ils finissent en 40 tours et d'autre 50 tours&#160;?
+ Bob: gg Thyl
+ Bob: WhatTrickeryIsThis: c'est au premier qui termine 6 potions
+ dbdr: WhatTrickeryIsThis 6 potions
+ Simon21: ça s'arrête dès que qqu a fait 6 potions
+ dbdr: et max 100 tours
+ Sladix: Salut&#160;! Je me lance dans le contest, en cpp pour sortir de ma zone de confort ^^
+ WhatTrickeryIsThis: ah ok, et la potion qui pop on sait c'est quoi?
+ Simon21: nope
+ BlaiseEbuth: go go go Sladix
+ WhatTrickeryIsThis: meuh
+ dbdr: pop?
+ BlaiseEbuth: corn
+ WhatTrickeryIsThis: quand tu pete une potion, y à une nouvelle qui vient
+ dbdr: ah
+ dbdr: random je pense
+ b0n5a1: random
+ WhatTrickeryIsThis: c'est géré comment le spawn de popo.?
+ dbdr: craque la seed
+ dbdr: reCurse
+ Steuh: La liste des popos est en dur dans le code
+ b0n5a1: random (parmis les restantes? ou toutes&#160;?)
+ Steuh: (bonjour)
+ egaetan: vrack la seed
+ b0n5a1: à vérifier dans le moteur
+ WhatTrickeryIsThis: si je fais ça je vais encore me faire éliminer par Apo&#160;:(
+ egaetan: non on a le droit de reverse la seed
+ Thyl: si on passe dans le constructeur d'un vetor un vector les datas restes les même??
+ dbdr: ça t'es arrivé WhatTrickeryIsThis? pq?
+ BlaiseEbuth: Thyl elles sont copiées oui
+ WhatTrickeryIsThis: j'ai été élimineé en plein submit sur mon smurf à Code Royale
+ Thyl: cool merci
+ Thyl:&#160;!!!
+ WhatTrickeryIsThis: alors que j'avais gagné
+ dbdr: ah, smuf
+ BlaiseEbuth: Me souviens de ça WTITSmurf
+ Julius2k17: flute Vry
+ egaetan: le dernier bot en cours de calcul s'appelait  SmurfWTiT
+ Palmipedus: ha mince #200 =&gt; #330 dans la nuit
+ BlaiseEbuth: A c'est l'inverse
+ dbdr: il t'a éliminé le principal aussi?
+ BlaiseEbuth: Pas flag du tout
+ WhatTrickeryIsThis: nan, le principal il était pépère
+ dbdr: bon
+ WhatTrickeryIsThis: smurfwtit était en train de resubmit tout seul parcequ'il traversait les ligues, ça bloquait les rerolls légende
+ WhatTrickeryIsThis: fallait attendre la fin de smurfWTIT, et là il gagnait
+ Stilgart: huhu
+ dbdr: tu voulais tester la remontada ultime?
+ b0n5a1: missa semi démon...333
+ Stilgart: from zero to legend
+ Stilgart: Automaton2000: tu gères&#160;?
+ Automaton2000: et je me suis jamais posé la question de si c'est le bon plan
+ BlaiseEbuth: from zero to apo
+ b0n5a1: potion tortue&#160;!
+ b0n5a1: Automaton2000&#160;?
+ Automaton2000: je pensais que c'était une mauvaise idée
+ Stilgart: BlaiseEbuth: écoute, il est bien mieux clasé que moi apo
+ dbdr: gogogo Stilgart<a rel="nofollow" class="external free" href="https://i.snipboard.io/BRlEn4.jpg">https://i.snipboard.io/BRlEn4.jpg</a>
+ b0n5a1: j'ai lu casé
+ Stilgart: Automaton2000: on le sait que tu préfères la soupe
+ Automaton2000: je ne savais pas, je vais me faire pousser
+ BlaiseEbuth: Stilgart et&#160;?
+ Stilgart: bah j'aimerais bien son classement&#160;:)
+ Phamelin42: On est d'accord que être dans le top 100 silver sans faire de simulation, ça va être compliqué&#160;?
+ WhatTrickeryIsThis: il est en train de me tarter ce top100
+ Julius2k17: je pense oui
+ b0n5a1: probable
+ Stilgart: en plus il y a dbdr qui me met la pression alors que je vais avoir cours ... jusqu'à mercredi 13h&#160;:(
+ BlaiseEbuth: Ouai. Mais moi je disais apo parce que c'est lui qui a delete smurfwtiti
+ dbdr: pas à la fin du contest
+ Stilgart: (oui, le semestre d'automne est chargé ici)
+ Phamelin42: Ca va être la première fois que je fais une simulation, souhaitez moi bonne chance /o/
+ dbdr: adapte le cours à un truc dont tu as besoin&#160;;)
+ Stilgart: bah, hier j'ai parlé d'avx&#160;;)
+ b0n5a1: l'automne dure 6 mois chez Stilgart ^^
+ Stilgart: b0n5a1: notre semestre c'est mi-septembre -&gt; noel
+ b0n5a1: tu me diras y'a plus vraiment d'hiver
+ WhatTrickeryIsThis: celui qui fait 6 potions il gagne? ou ça joue au point?
+ Stilgart: donc l'automne
+ Simon21: au point
+ Julius2k17: aux points
+ b0n5a1: poings&#160;!
+ CopperFr: les semestres de trois mois :D
+ BlaiseEbuth: aux poings
+ Simon21: aussi
+ Stilgart: oh poings (damned!)
+ WhatTrickeryIsThis: :punch_tone1: ok
+ <b>**Stilgart air-checke WTIT</b></p><p><img src="/a/1848632360793" /> b0n5a1: genki dama&#160;!
+ <b>**egaetan félicite WhatTrickeryIsThis</b></p><p><img src="/a/36533140803601" /> Lumix: (╯°□°）╯︵ ┻━┻
+ Lumix: Haaan ça fait ça cette commande
+ BlaiseEbuth: ┬─┬ノ( º _ ºノ)
+ BenP: Est-ce que ça a un nom le fait de vouloir stocker plusieurs int dans un seul afin de gagner de la place et du temps de calcul&#160;? Je voulais essayer de faire ça (sans savoir si c'est possible) mais j'ai l'impression que j'ai pas les bons mot clefs pour google
+ BlaiseEbuth: bitset
+ Julius2k17: tableau de bit
+ BenP: Merci bien&#160;!
+ Traquila: quel language&#160;?
+ Mahouss: Va pensez ca peut être une bonne stratégie de vouloir faire la potion la plus rentable pour l'adversaire plutôt que de choisir la plus rentable pr nous&#160;?
+ BenP: c++ traquila
+ b0n5a1: ou un int à coup de masques et de shifts
+ natrian: Hello tout le mondeJ'ai une question sur le challenge: certains sort disparaissent apres utilisation ou on trouve l'info du nb de fois utilisable
+ PhOeNyX: La seule raison pour laquelle elle serait plus rentable pour l'adversaire que pour toi, c'est parce qu'il peut la finir plus rapidement... Prenant ça on considération, tu n'as pas intérêt à essayer de la faire car s'il la terminer avant t'es niqué.
+ Mahouss: Oui évidemment il faut la faire que si on peut la faire avant lui
+ b0n5a1: y'a pas de nombre natrian...un répétable est répétable x fois du moment que t'as l'inventaire qui va bien
+ Mahouss: Du coup ouais ahah
+ PhOeNyX: Si tu peux la faire avant lui, comment tu estimes qu'elle peut être "plus rentable" pour lui&#160;?
+ b0n5a1: si t'as ce qu'il faut pour répéter 4 x en un tour tu peux
+ PhOeNyX: Sinon natrian le sort disparaît de l'affichage du jeu, mais en fait le sort est juste "épuisé", si tu fais REST ils réapparaissent
+ Mahouss: Mais imaginons que j'ai deux potions pas mal rentable pour moi mais y en a une c'est celle que veux faire l'adv, si je peux la faire avant lui c'est surement mieux
+ Mahouss: Mais elle l'écrivant je me rend compte que c'est peut être pas une stratégie de folie
+ PhOeNyX: Bah ça veut probablement dire que la différence sera minime
+ PhOeNyX: Voire inexistante
+ PhOeNyX: Notamment tu ne peux même pas être sûr que c'est cette potion que l'adversaire veut effectivement faire. ^^
+ Mahouss: Surtout ca oui ahah
+ natrian: merci  PhOeNyX
+ Mahouss: Ca m'ennuie, j'arrive a un stade ou à part tester les différents hyperparamètres je vois pas trop quoi faire&#160;:'(
+ CopperFr: faire autre chose&#160;?
+ Mahouss: Hors j'arrive pas a dépasser le top 300 donc mon algorithme a de quoi progresser ahah
+ Mahouss: Autre chose que le contest ou une autre stratégie&#160;?
+ CopperFr: c'est toi qui voit
+ CopperFr: (après tu gagnera pas la ps5)
+ b0n5a1: haha
+ Mazelcop: Mahouss, au lieu de faire un search par potion, fait un search sur l'intégralité de la game
+ Mahouss: Je l'utiliserais pas beaucoup la ps5 pas grave ahah
+ Mahouss: Cad Mazelcop&#160;?
+ Mazelcop: ben tu fais un search pour savoir en combien de tours tu fais tes 6 potions quoi
+ CopperFr: non c'est pas important de l'utiliser l'important c'est de l'avoir
+ Mahouss: Un problème que j'ai la c'est le python qui me mange une bonne partie du temps de calcul
+ Mahouss: C'est non éthique de la prendre pour la stocker dans l'armoire
+ b0n5a1: donne lui des pommes
+ Mazelcop: il te faudra du bon pruning
+ Haashi: Mazelcop je note je note 
+ Mazelcop: il y a deux joueurs en python dans le top30
+ Mahouss: Je sais que j'ai encore plein de choses à améliorer, j'arrive jsute pas à trouver de pistes d'amélioration réalisables/pertinentes, mais elles existent
+ Mahouss: Comment tu simules sur la partie si tu connais pas les prochaines pop&#160;?
+ BlaiseEbuth: Rien de tel qu'une erreur de compile incompréhensible pour se mettre en apétit...
+ Mazelcop: tu peux rajouter les pops au hasard
+ Palmipedus: CAST x c'est la meme chose que CAST X 1&#160;?
+ Mazelcop: tu connais la liste des pops sur le github
+ b0n5a1: oui Palmipedus
+ b0n5a1: clojure BlaiseEbuth&#160;?
+ WhatTrickeryIsThis: au hazard? t'as 1/30 chance de te tromper de popo ^^
+ BlaiseEbuth: Comme si clojure était réparé ^^
+ b0n5a1: ok ^^
+ BenP: Si je stocke mon inventaire dans un seul int. Est-ce que c'est possible de tester si une recette (elle aussi sur un seul int)  est faisable en un même nombre d'opération que si la recette et l'inventaire sont stockés sur 4 int chacun&#160;?
+ Mahouss: Bien vu Mazelcop, je vais y cogiter un peu 
+ BlaiseEbuth: BenP -&gt; En moins d'opérations
+ BenP: Ok merci, maintenant que je sais que c'est possible, il me reste à trouver comment ^^"
+ Traquila: un truc comme ca <a rel="nofollow" class="external free" href="http://pastebin.fr/73749">http://pastebin.fr/73749</a>
+ Traquila: avec castable un int64 dans le node
+ Vry: Flûte ma connexion est rétablie ... mais par contre m'envoyer un mail sur la messagerie interne pour me prévenir c'est moche ... (j'avais filé mon portable pourtant).
+ CopperFr: ah reste plus qu'a aller voir le médecin de Bob
+ Bob: ca marchera que si t'es aussi dans une boite organisee avec le cul et qui licencie a tout va
+ CopperFr: y'en a plein des boites comme ça :D
+ Mahouss: Rien ne vaut le statut d'étudiant pour pouvoir faire le contest en ignorant ce qu'il y a a coté ahah
+ CopperFr: ca dépend quel cours et avec quel prof
+ Mahouss: Ceux que j'ai cette semaine sont gentils 
+ Mahouss: Donc ca passe
+ b0n5a1: on dit "ils s'en foutent" 
+ dwarfie: on dit "ils s'en foutent pas plus que d'habitude , ils sont payé quand meme" :p
+ Mahouss: Oui bon après l'important c'est le resultat
+ CopperFr: oui en fac ils s'en foutent royalement
+ Mahouss: En école casi autant 
+ CopperFr: (en plus les nouveau prof n'aiment vraiment pas enseigner)
+ CopperFr: je connais pas les écoles
+ b0n5a1: et les nouveaux étudiants ont tendance à rien foutre aussi CopperFr ^^
+ Mahouss: Ca depend de profs
+ Mahouss: Ceux que j'ai en général adorent la matière et partager le savoir
+ OldJohn: Les élèves n'aiment pas apprendre non plus&#160;:-)
+ CopperFr: j'imagine qu'il y a des meilleurs profs dans les écoles
+ BlaiseEbuth: Je préfère l'antimatière
+ Mahouss: Ca dépend vraimeent
+ b0n5a1: t'ajoutes à ça le nivellement par le bas au fil des ans...et t'as une majorité de glandus à la sortie
+ Mahouss: J'ai eu des très bons profs a la fac comme en école et inversement
+ CopperFr: oui moi aussi j'en ai eu
+ CopperFr: (à la fac du coup)
+ dwarfie: b0n5a1 ... c'est plus du nivellement ... ils en sont a creuser pour aller encore plus bas
+ b0n5a1: ouaip...
+ Mahouss: Ca dépendra toujours de l'école ou de la fac, ca serait une discussion éternelle
+ BlaiseEbuth: Non. Faut tout péter
+ Julius2k17: moi ce qui me frappe chez les jeunes c le manque de volonté pour chercher pkoi ca marche pas
+ Vry: Pour mon MCTS passe son temps à apprendre des sorts&#160;?
+ Stilgart: b0n5a1: en vrai, ils ont plutôt tendance à ne plus savoir rien foutre, à par faire illusion
+ Vry: *Pourquoi ...
+ Haashi: Vry parce que learn c'est la vie
+ Julius2k17: lire des logs c comme si tu leur parlais chinois
+ PhOeNyX: Parce que ton scoring doit considérer qu'apprendre les sorts c'est cool
+ Stilgart: ces derniers temps, ils sont plus motivé au départ... puis tu leur donnes un projet facile et ils se vautrent&#160;:(
+ CopperFr: après les logs en chinois faut de l'unicode
+ Stilgart: parce que les bases, ils ne les ont plu
+ Vry: 37 cast à la fin de partie ...
+ Stilgart: s
+ Julius2k17: oué ou alors ils sont super exigeants et 6 mois plus tard ils comprennent que faut se sortir les doigts
+ Stilgart: Vry: c'est pas un peu beaucoup ça&#160;?
+ Vry: Et pourtant non mon scoring c'est juste le score des joueurs pour l'instant
+ BlaiseEbuth: C'est pas bô de vautrer tes élèves Stilgart, ils ont payé leur diplôme.
+ Loxos: hey,il est possible de voir les membres d'une entreprise&#160;?
+ CopperFr: après y a des classements pour les écoles / fac
+ Stilgart: j'ai pas dit qu'ils ne validaient pas
+ Loxos: j'aimerais voir si j'ai des collègues
+ dwarfie: non BlaiseEbuth ... c'est toi qui leur paye
+ Stilgart: (je suis en école d'ingé je te rappelle&#160;;) )
+ Vry: Je vais retirer le learn du MCTS et le faire "à la main" avant
+ BlaiseEbuth: Je paye 'dalle moi
+ CopperFr: tu payes pas&#160;?
+ BlaiseEbuth: Et en école d'ingé tout le monde valide&#160;?
+ dbdr: Vry ce serait pas un bug?
+ Mahouss: Globalement ouais en école d'ingénieur tout le monde valide
+ dwarfie: BlaiseEbuth , le nantis qui paye pas d'impot ...
+ 2StepsFr0mHell: Loxos tu peux filtrer le leaderboard global avec ton entreprise
+ BlaiseEbuth: Un fô tibô&#160;!
+ Mahouss: C'est triste mais le diplôme vaut juste le niveau que t'as en rentrant Et si tu fais rien de tes années en école ca sert à rien
+ KPlanas: Ça crache sur les écoles d'ingé par ici&#160;?Count me in&#160;!
+ KPlanas: Bonjour sinon
+ Mahouss: Ahah je crache pas ahah je suis dedans 
+ BlaiseEbuth: dwarfie&#160;: Pourquoi tu crois que j'ai dit que j'avais pas besoin de prétexte pour faire le contest.
+ Mahouss: Mais faut juste être réaliste sur le sujet
+ dwarfie: bon ... le repeat c'est fait .... ca bat toujours pas mon buggie maisfaut voir si ca bat les autres ...
+ KPlanas: @Mahouss, je vois pas en quoi c'est incompatible :joy:
+ Mahouss: KPlanas ca serait con de faire le choix de passer en école pour dire que c'est de la merde ahah
+ BlaiseEbuth: C'est déjà con d'y passer en le sachant... :3
+ Mahouss: Ah je dis pas que c'en est 
+ Loxos: 2StepsFr0mHell danke schön
+ KPlanas: Je suis d'accord, si ce choix était entièrement à la porté de chaque élève à l'entrée
+ KPlanas: *portée
+ Stilgart: que dire des écoles de commerce dans ce cas là...
+ Mahouss: J'ai beaucoup plus de problème avec la prépa qu'avec l'ecole
+ KPlanas: Mais entre la pression familiale, les illusions sur ce qu'est une école, le côté élitiste, la facilité d'emploi derrière, ...
+ BlaiseEbuth: Stilgart&#160;: plein de choses
+ Stilgart: pour le coup, une grande partie de ceux qui intègrent une telle école savent que c'est de la merde (qui faut exploser le salaire en sortie, mais de la merde)
+ Mahouss: KPlanas&#160;: on est totalement d'accord
+ KPlanas: Ça fait beaucoup de raisons pour lesquelles une personne peut entrer en école d'ingé et trouver que c'est de la merde
+ CopperFr: faut mieux aller à harvard&#160;?
+ Mahouss: Pour en final en retirer qu'un niveau sciences dur (ce qui est bien) mais il y a plein de valeurs qui sautent (genre l'autonomie)
+ BlaiseEbuth: Vaut mieux pas faire d'études
+ Vry: dbdr&#160;: il faut que je creuse pour comprendre&#160;! :p
+ KPlanas: On va pas se mentir, y a des points biens en école d'ingéMais ça contre-balance pas toute la merde que c'est
+ Jchenaud: hola
+ KPlanas: Halo
+ Bon[]Crayon: hoho
+ Mahouss: Perso je vois jsute l'école comme un source d'opportunités, pas comme une formation a part entière
+ Stilgart: Mahouss: j'ai envie de te dire que l'autonomie ça s'apprend en prépa déjà
+ KPlanas: Et @Stilgart, je préfère pas me lancer dans le débat des écoles de commerce :joy:
+ Mahouss: Stilgart&#160;: Ils savent travailler mais beaucoup sont perdu des que le format n'est plus encadré
+ BlaiseEbuth: Mahouss&#160;: Plus comme des rencontres&#160;? Des gens qui t'ont tendu la main&#160;?
+ Stilgart: bah, pour moi c'est un modèle qui a son public, et je suis pas dans le public :D
+ Mahouss: Blaiseebuth&#160;: Un peu ca ouais 
+ Stilgart: Mahouss: oui, mais le problème est en amont
+ Stilgart: way up en amont
+ Stilgart: dès le CM1 en fait
+ Mahouss: Stilgart perso je trouve ca triste de voir des élèves pas capable de faire des recherches google pour répondre à leur questions
+ Stilgart: Mahouss: heu
+ BlaiseEbuth: Dès l'entrée à l'école tout court.
+ Stilgart: je sais pas quoi répondre entre
+ KPlanas: @Mahouss, entièrement d'accord avec toi, mais dans ce casÇa devrait pas être une écoleÇa devrait pas être si longÇa devrait pas coûter si cher en détriment des autres "vraies" formations
+ Stilgart: 1. c'est une feature
+ Stilgart: 2. je trouve pas les réponses à mes questions sur google
+ dwarfie: je suis d'accord avec stilgart et ca va meme plus loin
+ dwarfie: <a rel="nofollow" class="external free" href="https://pbs.twimg.com/media/Dd0TIDPV0AAn9Li?format=jpg&amp;name=large">https://pbs.twimg.com/media/Dd0TIDPV0AAn9Li?format=jpg&amp;name=large</a>
+ Stilgart: KPlanas: c'est du flan ton dernier point
+ Stilgart: 1 élève en supérieur, ça coûte à peu près pareil partout en fait
+ BlaiseEbuth: C'est bon le flan
+ CopperFr: je trouve tout sur google en général
+ Mahouss: Stilgart&#160;: t'imagines pas le nombre de questions comme ca posé, si tu leurs dis pas exactement quoi faire et comment ils sont perdu
+ Stilgart: l'argent n'est pas réparti pareil, par contre
+ Mahouss: Apres c'est peu être juste ma promo qui est comme ca
+ Stilgart: Mahouss: alors
+ Stilgart: pour avoir rédiger plusieurs DM (merci confinement), si je suis au courant
+ Stilgart: ça prend 5x plus de temps de rédiger un DM&#160;:/
+ Mahouss: @KPlanas je suis d'accord mais on trouvera des problèmes comme ca tout le temps, le système est trop rigide pour être modifié
+ Phamelin42: Une discussion sur les écoles et personne qui parle de 42&#160;?
+ Stilgart: qu'il y a 10 ans
+ CopperFr: là je viens même de trouver le meilleur code pour gagner le contest sur google
+ Stilgart: mais le problème, encore une fois, il est bien en amont
+ dwarfie: Phamelin42 ... ben oui , ca perle d'ecole justement :rofl:
+ dwarfie: parle
+ Stilgart: on ne t'apprend pas à plancher sur un problème en collège/lycée
+ Phamelin42: C'est bien vu ahaha
+ Stilgart: du coup, ça se paie en aval
+ Mahouss: @Stilgart Oui il est en amont mais la on parle plus des écoles, on parle de l'éducation tout entière
+ BlaiseEbuth: Bah oui.
+ b0n5a1: voilà
+ KPlanas: @Stilgart: Je crois avoir entendu autrement, mais c'est peut-être juste un mauvais souvenir de ma part
+ Magus: quand tu cherches ton bug et que t'as appelé remove_if sans le erase ........
+ Stilgart: après, on est d'accord, mais les ministres ne vont pas nous écouter pour autant&#160;:(
+ BlaiseEbuth: Les écoles c'est un peu le symptome d'un système éducatif qui merde.
+ <b>**Stilgart tend une table à Magus</b></p><p><a href="/wiki/File:Default_avatar.png" class="image"><img alt="Default avatar.png" src="/images/5/56/Default_avatar.png" decoding="async" width="50" height="50" /></a> Phamelin42: Par contre vous généralisez en vous prenant comme exemple, ou en prenant votre entourage comme exemple
+ CopperFr: normal on est entré en dictature
+ Magus: (╯°□°）╯︵ ┻━┻
+ BlaiseEbuth: ┬─┬ノ( º _ ºノ)
+ dwarfie: magus ... toi au moins t'as pas oublié d'initialiser des variables dans le constructeur&#160;;)
+ KPlanas: @Mahouss, c'est pas vraiment une excuse de dire que le système est rigide :joy:
+ Phamelin42: Y a des gens qui comptent pas aller très loin dans les études et à qui le système actuel va très bien
+ Stilgart: le système français il est hyper souple en vrai
+ Mahouss: @Mahouss je l'excuse pas, je dis que c'est pas réaliste d'imaginer un changement du format prépa/ecole comme ca
+ Stilgart: y en a pour tout le monde, à tous les niveaux (encore que ça pêche coté CAP de nos jours)
+ BlaiseEbuth: C'est pas toi qui généralise à partir d'une minorité là Phamelin42&#160;?
+ KPlanas: +1 BlaiseEbuth
+ Stilgart: mais bon, souplesse et qualité, ce sont deux choses indépendantes
+ Mahouss: @Phamelin42 On généralise pas on parle de formation que l'on connait, pour cela que je ne parle que des écoles d'ingés format prépa
+ Phamelin42: @BlaiseEbuth C'est qui la minorité là&#160;?
+ KPlanas: @Stilgart, Il est souple dans le sens où il y a beaucoup de formation, en effet. Par contre, quand tu regardes à quel point on en présente certaines comme l'échec d'une vie (#élitisme), c'est pas encore ça
+ BlaiseEbuth: Ceux qui veulent faire de longues études
+ KPlanas: Mais bon, rigidité n'est peut-être pas le bon terme, en effet
+ Phamelin42: Je vois pas trop où j'ai généralisé tho'
+ Phamelin42: 'Y a des gens qui comptent pas aller très loin dans les études et à qui le système actuel va très bien'
+ Stilgart: KPlanas: tu parles des prépas&#160;?
+ Stilgart: de la fac&#160;?
+ NotwenCaasi: petite question hors sujet des derniers messages mais plsu dans le thème du contest ^^&#160;: vous arrivez à cb en tps de calcul/node?
+ Stilgart: des écoles d'ingé&#160;?
+ KPlanas: @Phamelin42, du coup, oui, ça existe. Et&#160;? :sweat_smile:Je vois pas l'intérêt de cette remarque
+ Mahouss: Pour la rigidité je parle surtout prépa 
+ Stilgart: Mahouss: tu as fait un prépa&#160;?
+ KPlanas: @Stilgart: Quand je parle d'élitisme, je parle plus ou moins du principe des "grandes écoles"Quand je parle de formations mal considérées, je pense plus au CAP, Bac Pro, BTS, etc...
+ Phamelin42: Bah hm, de contredire les personnes qui disent que le système éducatif français est nul @Kplanas
+ Mahouss: #Phalemin42 entre dire qu'il est nul et dire qu'il a des défauts il y a un grand pas quand meme
+ KPlanas: Après, c'est clairement du vécu personnel hein, j'ai pas de chiffre pour démontrer ça, mais c'est un ressenti personnel
+ Phamelin42: Indeed
+ Vry: NotwenCaasi&#160;: si j'ai pas à dupliquer les données j'arrive à jouer 600k coups en 50ms
+ Phamelin42: Ils ont pas changé des trucs pour pouvoir se spécialiser un peu plus des lycées&#160;?
+ BlaiseEbuth: Si. Histoire de plomber encore plus
+ Mahouss: Les grands écoles ont de grands défauts, mais j'ai 0 regrets d'être parti dans ce système la
+ Phamelin42: Bah c'est cool non @BlaiseEbuth&#160;?
+ Stilgart: Phamelin42: et on ne sait vraiment pas ce que ça va donner
+ BaptisteAudemard: tu rentres en prépa tu acceptes la difficulté et la rigidité imposée, la première année médecine est aussi dure en charge de travail mais demande une plus grande autonomie, à 18 ans tout le monde n'a pas cette autonomie pour supporter  cette charge de travail donc ce n est pas idiot non plus de l imposer
+ Stilgart: je pense que ça va accentuer l'effet "fais un Bac S mon fils / ma fille"
+ BlaiseEbuth: Phamelin42&#160;: Se spécialiser en première, bof. Sans parler du fait que dans les faits toutes les options sont pas dispo partout, mais que tu est quand même obligé d'aller au lycé de ton secteur...
+ CopperFr: c'est nul le bac s je préféres le c
+ Mahouss: Pour moi la prépa n'apprend pas l'autonomie mais la rigueur, deux choses différentes (très importantes les deux hein)
+ Phamelin42: Mouais, il faudrait qu'il existe une "filière" qui permet de toucher un peu à tout pour pouvoir se décider donc ,
+ Stilgart: Mahouss: pour moi ça apprend les deux
+ Neozero: Je pense que l'autonomie est plus "facile" à apprendre pour des personnes intelligentes que la rigueurs.
+ Phamelin42: J'avoue que si j'avais pas eu ISN en terminal, je sais pas où je serais aujourd'hui&#160;:/
+ returnVoid: aie ce tacle isn
+ CopperFr: isn&#160;?
+ Stilgart: et pourtant, j'avais tapé sur cette option comme un boeuf de l'IG
+ Mahouss: @Stilgart pour moi, dans le sens ou la prépa est ultra encadré bof
+ Stilgart: (inspection générale)
+ returnVoid: Isn pour ceux qui savent pas c'est la spe en terminal
+ BaptisteAudemard: rigueur et autonomie marchent quand meme toutes les deux ensembles, si tu n'es pas autonome tu n es pas rigoureux avec toi meme et vice versa
+ Phamelin42: ISN = informatique et science du numérique
+ returnVoid: c'est un gros meme 
+ Stilgart: il faut dire que le 1er programme de l'option ISN était déconnant aussi :D
+ Mahouss: @Stilgart si tu commences a te relâcher tu te fais rectifié direct
+ CopperFr: quel beau sigle
+ Stilgart: Mahouss: et&#160;?
+ Stilgart: tu devrais voir ma relation de l'époque avec mes profs de physique :D
+ returnVoid: tu peux etre rigoureux sans etre autonome et inversement 
+ Phamelin42: Ah perso j'avais bien kiffé, on devait juste faire un projet en un an, et les cours servaient juste à coder en groupe avec le prof pour aider
+ Mahouss: @Stilgart, prend la fac en comparaison ou l'autonomie est la qualité qu'il faut avoir pour s'en sortir
+ Mahouss: Personne vient te dire quel dm tu dois faire ou quand tu dois reviser tes cours
+ Stilgart: Mahouss: pour moi, c'est vrai aussi pour réussir les concours
+ Stilgart: après, il faut que je précise
+ Stilgart: avoir une école en sortie n'est pas réussir les concours selon moi
+ Mahouss: @Stilgart dans les premiers cours de prépa on t'apprend comment organiser ton emploi du temps
+ Stilgart: et je dis souvent qu'il y a BEAUCOUP trop de monde en prépa
+ Mahouss: On est d'accord sur ces deux derniers points
+ CopperFr: et je dis souvent qu'il y a BEAUCOUP trop de monde sur terre&#160;:(
+ Stilgart: Mahouss: moi on m'a appris que les récurrences ça se rédigeait pas comme un sac
+ Stilgart: et que pi majuscule ça voulait dire produit
+ Mahouss: @Stigart et&#160;?
+ Stilgart: ça m'a pas aidé à organiser mon emploi du temps&#160;:)
+ JBM: Ah oui mais ça suppose d'écouter en cours aussi
+ BlaiseEbuth: genre
+ Stilgart: en vrai, chaque prépa (et même chaque prof) a sa stratégie, et ça varie beaucoup
+ JBM: tiens duplication de personnalité
+ b0n5a1: et pas de faire un contest JBM ^^
+ Mahouss: @Stilgart Sommes nous d'accord sur le fait que beaucoup d'élèves ne serait jamais sorti de prépa si on leur avait pas dit combien de temps travailler, quand, etc&#160;?
+ Mazelcop: La prépa ça a pas mal changé ces 10 dernières années aussi
+ Mazelcop: un cours pour apprendre à organiser son emploi du temps c'était impensable à mon époque
+ Stilgart: Mahouss: heu......
+ CopperFr: oui JBM
+ Stilgart: sorti?
+ Neozero: J'ai passer 20 minutes à débuger un code alors que l'erreur c'était "juste" if (index = 5) au lieu de == 5...
+ JBM: c'est le truc que j'ai oublié de sauver au changement de PC j'ai l'impression
+ JBM: mes patches jabber.el
+ BaptisteAudemard: en vrai j ai fait ma prepa y a pas si longtemps j ai pas eu ce cours ^^
+ Neozero: Je penser qu'avec le temps je détecterais plus vite ce genre d'erreur mais à croire que non.
+ Mahouss: @Stilgart, on peut ne pas être d'accord hein :p C'est l'observation que j'ai fait et que je continue de faire en ecole
+ CopperFr: en pascal t'aurais pas eu de soucis&#160;:(
+ KPlanas: @Mazelcop, je pense que ça dépend des lycées, jamais vu ce cours perso
+ Jipe: je suis allé en prépa y a une quinzaine d'années et on nous apprenait pas à organiser notre emploi du temps ^^
+ JBM: /nick JBM
+ Stilgart: perso, à part le rythme des cours/colles (certes soutenu), on ne m'a jamais rien imposé à mon emploi du temps
+ JBM: ok ça ça marche pas
+ b0n5a1: Neozero prends cette habitude&#160;: if (5 == machin)...si tu mets un = le compilo te mets une baffe
+ JBM: je le note
+ b0n5a1: ça t'arrivera plus
+ JBM: oh que si
+ Neozero: Oui justement. Je sais pas comment avoir cette option.
+ CopperFr: ah oui mais j'aime pas quand c'est à l'envers comme ca
+ JBM: je pense que le seul fix sera de l'implémenter moi-même
+ Neozero: C'est l'ide codingame.
+ BlaiseEbuth: Quelle option&#160;?
+ Mahouss: Nan mais  ils t'imposent rien mais tout est réglé selon le format de la prépa on est pas au point ou le prof t'envois des mails pour te dire "Ah il faut commencer les maths la"
+ Stilgart: b0n5a1: ça existe plus ça
+ b0n5a1: quoi Stilgart&#160;?
+ Stilgart: (on dit -Wall -Wextra de nos jours)
+ JBM: ah
+ JBM: mieux
+ JBM: j'avais pas recompilé l'appelant du patch
+ Mahouss: @Stigart bah rien que cours/colles te guident te fou sur comment gérer ton emploi du temps
+ Stilgart: les ruses des années 80, c'est un peu obsolète&#160;:(
+ b0n5a1: ha vu comme ça... Stilgart t'as pas idée du nombre de couill...collègues qui s'en foutent des warnings
+ BlaiseEbuth: des warkwa&#160;?
+ Mahouss: Des formations moins cadré vont te dire "fais ta vie t'as des exams a la fin" et si t'as pas d'autonomie de base, tu meurs
+ Stilgart: Mahouss: le volume horaire n'est pas infini non plus
+ Haashi: si ca compile, on ship
+ JBM: c'est à double tranchant les warnings
+ Stilgart: en comparaison, mon M2 était quasi aussi dense
+ Mahouss: @En ayant peut d'organisation et d'autonomie on peut survire en prépa avec de la rigueur en suivant les colles/dm
+ b0n5a1: ou alors faut forcer les warning en erreur ^^
+ Neozero: après c'est du javascript mon code. Mais j'aimerais avoir une option qui me met une grosse flèche rouge clignotante lorsque je met if (x = y)
+ CopperFr: on oublie plus les == de nos jours
+ BaptisteAudemard: quelqu un a un bon site pour voir comment optimser son code au niveau des boucles ou autre&#160;? a chaque fois je reussis pas les difficiles a cause du délai d exécution, meme si le code fait la bonne chose
+ Stilgart: Mahouss: oui, et on finit par avoir une école des CCP
+ CopperFr: au pire tu en met un troisième pour être sur
+ Stilgart: (il y a toujours des exceptions, je sais)
+ Haashi: Stilgart t'as quoi contre ccp&#160;:(
+ Neozero: CopperFr je croyais etre immunisé. Mais je me rend compte que non.
+ Bob: Neozero: ce que tu veux c'est eslint, en gros&#160;?
+ Stilgart: Haashi: qu'ils devraient recruter à la sortie du L3
+ CopperFr: mais c'est vrai que le pascal était mieux
+ Neozero: Bah je sais pas si dans l'ide codingame y'a eslint.
+ Stilgart: ou post-bac
+ Mapapin42: Hello, comment marche les combats avec les boss&#160;? C'est eux qui nous défient&#160;? 
+ Bob: ben je ne pense pas helas&#160;:)
+ Bob: Mapapin42: non, c'est le systeme qui decide de te matcher contre eux ou pas
+ Haashi: ah j'en doute pas, je suis pour que les écoles recrutent différentes filières
+ Mapapin42: D'acc merci&#160;;)
+ Mahouss: @Stilgart&#160;: On sera pas d'accord je sens :p Peut être jsute on a pas été confronté aux mêmes élèves, perso meme dans une école qui est considéré parmi les meilleurs je vois des élèves incapable de s'en sortir si on leur dit "Fais ta vie juste t'as des exmas/rendus à la fin"
+ BlaiseEbuth: Les warnings c'est une erreur qui se corrige avec un "warning disable"
+ Bob: Mapapin42: pour faire simple, tes 10 premiers matches servent a te placer dans l'arene
+ Mahouss: @Haashi, totalement pour aussi
+ Bob: ensuite tu joues contre des gens a +/- 10 (de memoire) places de toi 
+ Bob: tu montes ou tu descends en fonction du resultat
+ Haashi: la diversité de parcous apportent tellement + a la formation
+ CopperFr: les warning je les laisse mais je les regarde que si j'ai un problème :D
+ Bob: donc tu ne joueras contre le boss qu'une fois arrive dans le top 10, ou eventuellement une fois dans les 10 premiers matches
+ dbdr: Haashi tu me foires mon run là :D
+ Bob: si tu es au-dessus du boss une fois que tous tes matches sont joues, tu changes de ligue
+ Neozero: BaptisteAudemard: C'est surtout au niveau de l'algo que tu utilise que la différence du temps d'execution ce fait.
+ Stilgart: Mahouss: on est relativement d'accord
+ Stilgart: j'ai dit que 
+ Haashi: dbdr ouais mais je me prend que des claques la...
+ Haashi: il faut que je retravaille
+ PhOeNyX: Tu peux aussi changer de ligue si tu es en dessous du boss à la fin de tes matchs mais que quelqu'un te fait passer au dessus pendant ses propres matchs
+ Stilgart: 1. la prépa ça apprend aussi l'autonomie (mais tous les taupins ne l'acquièrent pas hélas)
+ egaetan: dbdr reste derrière&#160;!
+ CopperFr: faut faire une prepa à la prepa
+ Stilgart: 2. il faut effectivement tenir la main des étudiants en écoles
+ Stilgart: 3. le problème est bien en amont
+ PhOeNyX: Au fait, c'est le code de qui qui sert de boss silver&#160;?
+ dbdr: egaetan je vais essayer&#160;;)
+ egaetan: je ne te crois pas
+ Stilgart: mes collègues en prépa, ça fait 5-6 qu'ils sont en mode "cacher la misère sous le tapis et lisser un peu"
+ BlaiseEbuth: Y'a pas de boss silver
+ Vry: PhOeNyX y'a oas de boss Silver ...
+ Stilgart: 5-6 ans*
+ b0n5a1: y'a pas de boss silver
+ Mahouss: bon bah on est d'accord, évidemment qu'un élève voyant les choses de la bonne manière aura de l'autonomie
+ PhOeNyX: boss bronze -&gt; silver
+ CopperFr: pour avoir une bonne autonomie il faut une grosse batterie
+ Stilgart: 4. il y a trop de monde en prépa (et un gros problème de casting)
+ BlaiseEbuth: Les cast c'est toujours chiant
+ Stilgart: c'est comme pour le bac S, on envoie les bons dans cette voie par défaut, et c'est une connerie
+ CopperFr: oui je préféres les cast automatiques
+ Stilgart: si on utilisait les prépas avec le bon public, ça marcherait très très bien
+ JBM: bon, voyons si ça crashe pas tout
+ JBM: ,,,
+ JBM: mmm, ça sent bon…
+ Mahouss: La prépa est trop vue actuellement comme le "chemin royal" mais ca changera peut être sur la prochaine génération
+ JBM: ah, non&#160;:(
+ Vry: Baptême du feu pour mon MCTS&#160;!
+ Haashi: Stilgart, je pense que le fond du probleme c'est pas la prépa, c'est l'orientation des élèves de manière générale
+ Stilgart: CopperFr: le soucis c'est que ça fait du gros son après
+ dbdr: inb4 Vry #1
+ JBM: ah, si
+ JBM: je l'ai juste pas encore fait pour les join
+ Haashi: c'est le même délire dans les L1 qui sont remplis à foison par des gens qui vont drop Semestre 1
+ b0n5a1: PhOeNyX on sait pas y'a trop de monde en silver pour accéder au boss bronze pour regarder
+ Neumann: Du gros son mamène
+ b0n5a1: à moins de bidouiller
+ Vry: lol dbdr, il n'a pas le niveau&#160;!
+ BlaiseEbuth: Neumann me follow&#160;!
+ Stilgart: Haashi: l'orientation et la vie scolaire en primaire/secondaire
+ egaetan: Allez Vry&#160;!
+ JBM: BlaiseEbuth&gt; cte star
+ CopperFr: personne veut faire conseiller d'orientation
+ b0n5a1: si t'as un replay qqun se reconnaîtra peut être
+ Stilgart: en France, on a oublié que l'échec a du bon parfois
+ BlaiseEbuth: C'est pour me surveiller&#160;? :thinking:
+ Vry: dbdr Mais avec ce que j'ai "appris" en le codant je vais surement repassé sur un BFS (voire BS) optimisé du coup&#160;! :p
+ Bob: perso je milite pour le droit a l'echec
+ Neumann: :eyes:
+ Vry: *repasser
+ egaetan: +1 Bob
+ CopperFr: moi l'échec je laisse ca aux autres
+ Bob: comme pour le droit a reconnaitre que meme si ca marche en fait on a peut-etre envie de faire autre chose apres tout
+ Bob: j'ai connu un gars qui avait fait Centrale Paris, il faisait du genie des materiaux chez Arcelor
+ Bob: arrive vers 27-28 ans il a decide qu'en fait non, ce qu'il voulait vraiment faire c'etait de la neurochirurgie
+ Bob: du coup il a negocie avec son chef
+ Bob: il est passe sur un mi-temps pour faire directement une 3A de medecine en parallele
+ WhatTrickeryIsThis: Albert Dupontel lui il a raté en Neuro
+ WhatTrickeryIsThis: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=tMPfAvpQXtk">https://www.youtube.com/watch?v=tMPfAvpQXtk</a>
+ Bob: avec toute la masse des deux premieres annees a rattraper en prime
+ BlaiseEbuth: Faut le vouloir, repartir dans 10 ans d'études à 28 ans...
+ Bob: clair
+ Bob: mais il l'a fait et il est devenu neurochir
+ Jipe: comment il a fait pour partir directement en 3e année, et pas en 1ere?
+ Thyl: Je nage dans le bronze :D
+ Bob: Jipe&#160;: par equivalence avec son diplome d'inge je pense
+ Stilgart: Jipe: le système français est ultra souple, comme je le disais
+ Stilgart: j'ai le droit de faire plein de choses en tant que responsable des admissions
+ BlaiseEbuth: Bawé, la bidoche ça reste un matériau.
+ Bob: mais faut voir la masse de boulot que ca represente d'embrayer directement en 3A en devant rattraper toute la base des deux premieres
+ Bob: surtout en mi-temps avec un boulot a cote
+ Jipe: oui j'imagine...
+ Bob: mais voila le gars c'etait un mutant, il l'a fait
+ Stilgart: BlaiseEbuth: hahaha :D
+ WhatTrickeryIsThis: quand est-ce qu'on fera des vélo écolo en os de porc et en peau de vache morte&#160;?
+ Bob: bon ensuite il a plaque sa copine par SMS pour aller faire la suite de son cursus dans une autre ville
+ Haashi: Bob&#160;:(
+ Bob: c'etait un mutant mais pas necessairement un mec tres humain&#160;:)
+ Jipe: lol
+ Bob: il faut saluer la performance du changement de direction mais sinon pouah
+ WhatTrickeryIsThis: bon chérie je vais de trumper, bye bye
+ CopperFr: one direction c'est mieux je pense
+ Kirbiby: Je peux me permettre une question extrèmement naive&#160;?
+ CopperFr: non
+ Mahouss: Y a pas de questions betes
+ Kirbiby: Il y a bien 42 sorts + 4 de bases dans le jeu
+ JBM: les bases sont pas dedans?
+ Mahouss: De mémoire oui
+ egaetan: JBM non pas dedans
+ JBM: ah ok
+ b0n5a1: WhatTrickeryIsThis <a rel="nofollow" class="external free" href="https://www.yatahonga.com/data/media/7/201172/vlo_prhistorique.jpg">https://www.yatahonga.com/data/media/7/201172/vlo_prhistorique.jpg</a>
+ JBM: ah ben t'as bien fait de demander Kirbiby&gt;
+ Kirbiby: Thx
+ WhatTrickeryIsThis: :pig_nose:
+ Stilgart: JBM: listArray (-4,nbSpells-1) ...
+ Stilgart: si, c'est dedans :D
+ JBM: je pense que je voulais dire: «dans Deck.java»
+ JBM: bon
+ JBM: au bout de 5 minutes sans voir un join je déclare victoire
+ JBM: ou alors, impatiemment, tout de suite
+ JBM: \o/
+ JBM: par contre si plus personne parle je vais commencer à croire que j'ai été un peu violent sur l'ignore
+ JBM: *solitude*
+ JBM: mais
+ JBM: j'avais oublié cet autre détail
+ Phamelin42: Des conseils pour gagner les clash&#160;?
+ JBM: code plus vite
+ Stilgart: tricher
+ Phamelin42: C'est noté
+ Phamelin42: Passer en Python3 aussi non&#160;?
+ JBM: DDoS tes adversaires
+ dbdr: utilise le bon language
+ JBM: seulement si t'es bon en Python3
+ egaetan: Phamelin42 en faire plus
+ dbdr: ClashLang
+ JBM: le langage avec juste 534 instructions de 2 caractères
+ JBM: soyons fous, d'1 seul caractère
+ JBM: mmm
+ JBM: j'ai besoin d'autrui pour un test client
+ JBM: 2.71
+ JBM: 3.14
+ JBM: j'imagine que tout le monde voit 3.14?
+ egaetan: qu'est ce qu'on doit voir JBM&#160;?
+ CopperFr: je vois une approximation de PI
+ JBM: y'a un 2.71 juste avant
+ Dagal: Bonjour tout le monde!
+ JBM: mais je le vois que sous pidgin
+ JBM: il doit être dans les logs de dbdr aussi ^^
+ JBM: rha c'est pénible
+ JBM: c'est tous les bugs d'incompatibiilité de jabber.el avec CG
+ JBM: *que j'avais déjà résolus*
+ JBM: ah mais du coup
+ JBM: "Kirbiby: tu vois du coup que t'as bien fait de demander"
+ JBM: "Stilgart: je pense que je voulais dire: «dans Deck.java»"
+ JBM: le reste est superflu
+ CopperFr: Faut tout taper en double du coup
+ CopperFr: Faut tout taper en double du coup
+ JBM: tortue tortue
+ JBM: de contest
+ Stilgart: Automaton2000: tu réponds deux fois si on tape en double
+ Stilgart:&#160;?
+ Automaton2000: mais si il y a des gens qui ont fait de la simu&#160;?
+ OldDadou: Bonjour, je ne comprends pas très bien le `OPPONENT_CAST`, il donne juste l'info sur les spells de ma jumelle c'est  ca&#160;?
+ JBM: non, personne
+ Stilgart: OldDadou: oui
+ CopperFr: ah tu as une jumelle&#160;?
+ JBM: elle a une drôle de teinte d'ailleurs
+ JBM: elle doit être malade
+ CopperFr: c'est facile d'être malade en ce moment
+ JBM: suffit de boire de l'eau de javel
+ OldDadou: @Stilgart, merci
+ JBM: mauvais réflexe (12:00:48) JBM: suffit de boire de l'eau de javel
+ CopperFr: Vous préférez boire du Chablis ou de l'eau de javel&#160;?
+ b0n5a1: essaye CopperFr tu nous diras...commence par le deuxième
+ JBM: l'eau du XVIe
+ CopperFr: c'est vrai que j'ai pas de Chablis
+ b0n5a1: arf
+ dbdr: sciècle JBM?
+ b0n5a1: arrondissement
+ CopperFr: donc je vais commencer par l'eau de javel
+ JBM: j'étais plus sur l'arrondissement
+ dbdr: pff
+ JBM: mais ça marche ptet aussi qui sait
+ CopperFr: le professeur raoult la bien dit le gel ne sert à rien c'est l'alcool :D
+ b0n5a1: bah au 16e siècle valais peut être mieux couper sa flotte au Chablis pour la désinfecter un peu ^^
+ JBM: dbdr: vu que j'ai forcément dû passer par toi pour debug ça à l'époque: tu te souviens de ce qui différenciait mes messages jabber.el des pidgin?
+ CopperFr: pas si mauvaise cette eau de javel
+ dbdr: JBM pas du tout&#160;:(
+ JBM: est-ce que j'ai encore mon dumper de xmpp qq part
+ JBM: (jabber.el)
+ JBM: (pidgin)
+ WhatTrickeryIsThis: la binouse et l'eau de javel sont utiliser pour détruire les virus intestinaux, pas pour les coronas
+ dbdr: on boit vraiment de l'eau de javel pour ça?
+ WhatTrickeryIsThis: oui c'est vendu en pharmacie je crois
+ dbdr: TIL
+ Julius2k17: ya des sorts à usage unique&#160;?
+ FlorianK: Non
+ WhatTrickeryIsThis: wut?
+ Julius2k17: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/504079182">https://www.codingame.com/replay/504079182</a>
+ Julius2k17: frame 13
+ WhatTrickeryIsThis: non c'est le viewer qui déconne tkt
+ dbdr: qd on a bcp de sorts ceux pas dispo deviennet cachés
+ dbdr: c'est intentionnel
+ Julius2k17: ah oui c vrai..dsl
+ Julius2k17: merci
+ WhatTrickeryIsThis: c'est un bug, on a le droit de le dire parcequ'on est utilisateur
+ dbdr: on est pas utilisateurs, on est le produit
+ Bob: il y a aussi un reglage dans les options du viewer pour afficher les sorts epuises
+ dbdr: ah tiens?
+ Bob: oui
+ Bob: it's not a bug, it's a feature
+ dbdr: merci Bob
+ WhatTrickeryIsThis: c'est pas comme je voudrai =&gt; bug
+ JBM: ah oui mon mdp a changé depuis la dernière fois que j'ai lancé ce client xmpp pas fini
+ Bob: bon l'orthodontiste, faut vraiment qu'ils apprennent a faire un attachement plutot que d'inliner le contenu du doc en html dans le mail
+ Stilgart: ça sent le copy-paste... voire pire
+ Stilgart: le drag and drop
+ Bob: ouais
+ Bob: a l'impression ca fait juste ultra de la merde
+ CopperFr: faudra lui apprendre quand tu ira le voir Bob
+ joelthelion: bon, mieux vaut faire ses submits en journée
+ Sladix: Je crois qu'on a déjà posé la question mais à quoi correspond le score dans le classement&#160;?
+ Stilgart: à un truc sur lequel on trie les gens
+ Stilgart: la valeur en tant que tel n'a pas de sens précis
+ Sladix: Ah&#160;!
+ Stilgart: on peut quand même dire que au delà de 40 c'est un gros score
+ Stilgart: et en dessous de 30 c'est pas top
+ Stilgart: les bosses ont souvent un score de 38-40
+ Sladix: D'accord, merci pour les infos&#160;!
+ Stilgart: après, mieux vaut un score de 12 en gold qu'un score de 33 en bronze&#160;:)
+ Sladix: Je viens d'arriver en ligue de bronze, va falloire que je me creuse un peu plus les méninges
+ Stilgart: bon courage, c'est pas facile vu le monde sur ce contest
+ Stilgart: tiens, ça se tasse un peu, on n'est que 1321 en silver 
+ Stilgart:  Team rank   42 nd    \o/
+ Drabox: Salut tous le monde, qu'est ce que vous utilisez comme fonction random&#160;? Car j'arrive pas à utiliser rand 
+ b0n5a1: BlaiseEbuth team rank&#160;: nan
+ b0n5a1: ^^
+ BlaiseEbuth: Tant qu'il est au fromage le nan...
+ CopperFr: Pour le random j'utilise un livre de nombre aléatoire
+ Drabox: D'accord, merci Copper
+ Stilgart: BlaiseEbuth: au fait, c'est bien Hades&#160;?
+ BlaiseEbuth: J'ai passé les 60h de jeu.
+ Stilgart: et tu penses en faire encore combien&#160;?&#160;:)
+ Stilgart: (note que 60h de nos jours c'est déjà une bonne durée de vie)
+ b0n5a1: t'as testé shadow tactics BlaiseEbuth (je vois pas là je sur pc boulot)
+ b0n5a1: suis
+ b0n5a1:&#160;?
+ BlaiseEbuth: J'en sais rien, je découvre encore des trucs. Que ce soit du gameplay ou de la narration. Donc je pense que le jeu a encore du temps devant lui Stilgart ^^
+ BlaiseEbuth: Pas encore b0n5a1
+ Stilgart: cool
+ Stilgart: et c'est permadeath only à la binding of isaacs, ou il y a un mode lopette^Wsoftcore pour jouer en mode brainless&#160;?
+ b0n5a1: il a qq bugs BlaiseEbuth, mais rien de gênant
+ b0n5a1: genre un moment y'avait 2 piège de Yuki au sol au lieu d'un...mais en ramassant les deux disparaissent de l'écran
+ b0n5a1: mais bien espacés de 20m...piège ramasssé resté affiché pui posé/enclenché plus loin
+ CopperFr: c'est beaucoup 60h
+ BlaiseEbuth: Les deux Stilgart. En fait tu part de la maison d'Hadès à chaque fois pour essayer de sortir. Si tu meurs tu repart de la maison. Et tu as des amélios permanentes à débloquer, et d'autres qui ne sont que pour le run.
+ b0n5a1: un autre (rare, m'es arrivé deux fois)&#160;: tu butes un mec il reste debout au lieu d'être au sol
+ BlaiseEbuth: Tant qu'il est mort ^^
+ Stilgart: BlaiseEbuth: super, merci
+ CopperFr: pourquoi un mort aurait pas le droit de rester debout d'abord&#160;?
+ b0n5a1: ouais mais quand t'as oublié tu crois qu'il reste un garde à stealth/kill ^^
+ Stilgart: au passage, je viens de voir les lunettes de BlobEbuth :heart_eyes:
+ b0n5a1: tu t'approche pour kill ça fait rien ^^
+ Erytheme: Bonjour.
+ BlaiseEbuth: Et après le truc intéressant Stilgart, c'est qu'il n'y a pas de difficulté. Mais une "chaleur" que tu peux composer en choisisant toi même les malus que tu veux et leur niveau.
+ CopperFr: Vous préférez optic2000 ou atol&#160;?
+ <b>**Stilgart vient de remonter Hades de 92 places dans sa wishlist steam</b></p><p><img src="/a/1848632360793" /> b0n5a1: woputain ^^
+ b0n5a1: je dois avoir 5/6 trucs
+ CopperFr: 92 places
+ BlaiseEbuth: Franchement c'est rare d'avoir un jeu aussi profonds. C'est mon coup de coeur de l'année sans souci ^^
+ egaetan: gg b16d
+ Valkilaen: t
+ Stilgart: CopperFr: 102 (non classé en fait) -&gt; 10
+ Stilgart: ça sent l'achat pendant les winter sales
+ BlaiseEbuth: ^^
+ BlaiseEbuth: Ah les winter sales :scream:
+ CopperFr: je préféres acheter en support physique
+ Stilgart: damned, nier replicant ça sortira que en avril 2021&#160;:/
+ <b>**BlaiseEbuth sent venir le gros paquet de jeu qu'il ne lancera jamais</b></p><p><img src="/a/29054906001010" /> Stilgart: c'est bien la peine de le mettre en 1 
+ b0n5a1: ha les boîtes DVD vides avec un code dedans CopperFr&#160;? :joy:
+ Haashi: ca parle d'Hades 
+ BlaiseEbuth: ^
+ CopperFr: ben nan à l'époque ou j'achetais des jeu y'avait un cd dedans (voir un dvd)
+ Stilgart: Haashi: my fault
+ Stilgart: je voulais savoir comment le classer dans ma wishlist :D
+ Haashi: bah tout au dessus
+ BlaiseEbuth: +1
+ b0n5a1: plus maintenant, t'as un papier dedans avec code steam (ou autre plateforme)
+ Stilgart: en vrai, mon top10 il est pas trié par préférence&#160;:)
+ CopperFr: je crois pas avoir acheter un seul jeu depuis les débuts de la 3ds
+ Stilgart: j'essaie d'y mettre des genres variés
+ <b>**Stilgart regarde son dossier Steam/Factures   :fearful:</b>
+ b0n5a1: faut pas
+ BlaiseEbuth: J'ai pris quest hunter sinon Stilgart.
+ Stilgart: clair.... 1,449.48€ au total&#160;:/
+ b0n5a1: ha oui joli
+ Zorg1: ah toi non plus t'as pas steam sur ton PC de boulot&#160;? ^^
+ Stilgart: pire qu'une taxe d'habitation
+ Zorg1: ah scroll
+ Stilgart: b0n5a1: square enix m'a fait super mal&#160;:/
+ b0n5a1: t'ajoutes à ça parfois l'achat de qq cartes pour crafter du badge ^^
+ Stilgart: FF XII + XV je l'ai méchamment senti passé
+ Haashi: c'est multi quest hunter&#160;?
+ BlaiseEbuth: Haashi solo et multi
+ BlaiseEbuth: Mais j'ai pas d'amis
+ b0n5a1: non Zorg1 j'ai pas
+ Stilgart: BlaiseEbuth: 57e quest hunter
+ Haashi: ca a l'air cool
+ b0n5a1: c'est Han Solo pas Haashi Solo...banane
+ Stilgart: mais clairement sous-classé
+ Haashi: Stilgart tu sors d'ou ce classement&#160;?
+ Stilgart: ma wishlist steam&#160;:)
+ BlaiseEbuth: Stilgart et Haashi -&gt; Pour l'instant je suis pas sûr qu'il vaille ce que je l'ai payé. C'est sympatoche
+ Stilgart: tu crois que les vieux ff valaient leur prix&#160;?&#160;:)
+ Haashi: En vrai ca a l'air cool
+ Stilgart: je suis encore dubitatif pour secret of mana et chrono trigger aussi
+ Haashi: pour des enfants
+ Haashi: genre c'est une bonne introduction pour rendre un enfant de 7 ans accro au rpg
+ Stilgart: du jeu brainless c'est bien parfois, même pour les adultes
+ BlaiseEbuth: Et c'est clairement décevant par apport à ce à quoi je m'attendait au vu de la page du magasin
+ BlaiseEbuth: Chrono Trigger &lt;3
+ Stilgart: clair :bave:
+ BlaiseEbuth: Tu as la version pc&#160;?
+ Stilgart: oui, et 15€ ça fait cher
+ BlaiseEbuth: Il est buggé&#160;?
+ CopperFr: faut jouer sur super nain tendo
+ Stilgart: j'ai pas eu de soucis, mais j'y ai joué très récemment
+ Stilgart: SE a du patcher entre temps
+ BlaiseEbuth: Ouai, les vieux rapports parlent de bugs. Du coup je me demandais...
+ BlaiseEbuth: Je l'ai sur ds, mais j'avoue que sur pc... :3
+ Haashi: dragon quest IX sur ds
+ CopperFr: la ds &lt;3
+ Haashi: je suis sur le cul que personne n'ai encore reussi a émuler le multi de la ds
+ BlaiseEbuth: fix ta pictochat
+ CopperFr: comment ca émuler&#160;?
+ Vry: Bon le MCTS c'est bof bof ...
+ Vry: Mais je sorti courir et j'ai eu pas mal de nouvelles idées&#160;!
+ Vry: Back to BFS (avec les opti du MCTS) et plains d'autres choses ...
+ Vry: *plein
+ Haashi: beamsearch is the key
+ CopperFr: y font quoi les top 5 du classement&#160;?
+ Traquila: Les idées, on en a, c'est le temps qui manque&#160;:)
+ CopperFr: j'ai pas trop d'idées en ce moment
+ Stilgart: CopperFr: facile, ils gagnent leurs matches
+ CopperFr: surtout ils vont pas nous le dire (il veulent gagner la ps5)
+ Mazelcop: et le Tshirt
+ Vry: Haashi&#160;: c'est pas faux au final ... le BFS risque de perdre son F
+ b0n5a1: et le mug
+ Traquila: copperFr si t'es en BFS, donnes nous la struture d'un node et on te donne du travail pour 2 jours&#160;:-D
+ Haashi: en vrai mazecorp il a dit ce qu'il faisait
+ b0n5a1: il est en rien du tout CopperFr
+ Haashi: un beamsearch et il cherche a maximiser la production
+ Haashi: je sais pas ce que ca veut dire mais il a raison
+ Mazelcop: je fais quelques autres trucs à côté, mais c'est l'idée
+ CopperFr: oui je suis sur le puzzle température
+ IKarl: c'est écrit où la ps5&#160;? Oo
+ b0n5a1: et une victime, une
+ b0n5a1: bravo CopperFr
+ IKarl: ^^ oups
+ JBM: { return 4; }
+ JBM: tiens scroll
+ JBM: ça faisait longtemps ^^
+ Haashi: bon
+ Haashi: qui a le secret pour transformer les ingredients [4]int en un seul int pour faire une somme plus performante&#160;?
+ Traquila: union
+ Stilgart: _mm_load
+ Stilgart: :p
+ b0n5a1: erf
+ Mapapin42: Peut-on derank&#160;? 
+ Vry: J'ai testé union ... Haashi
+ b0n5a1: baisser de ligue Mapapin42&#160;? non
+ Mapapin42: D'acc merci
+ Haashi: une union&#160;?
+ Traquila: Pardon tu es pas en c++
+ b0n5a1: mais rien t'empêche de choisir un adversaire de la ligue inférieure dans l'IDE (sauf si y'a plus de 1000 gus)
+ Magus: Le C++ c'est tropAlso le C++&#160;: t'as oublié un &amp; donc ça marche pas et tu vas en chier pour le trouver
+ JBM: oui c'est trop
+ Traquila: Comment faire tenir un node dans un int64: <a rel="nofollow" class="external free" href="http://pastebin.fr/73799">http://pastebin.fr/73799</a>
+ Traquila: (avec une limite de 32 sorts max)
+ Haashi: bon enfaite je crois que j'ai trouvé ma solution
+ Haashi: je vais réimplémenter l'opérateur +
+ egaetan: Ah surcharge d'opérateur
+ egaetan: c'est bon ça
+ Haashi: non pas vraiment surcharge
+ ZooooX: salut on peux être promu sans re submit de code&#160;?
+ b0n5a1: oui
+ Vry: Oui ZooooX
+ b0n5a1: en te faisant "pousser"
+ egaetan: Oui ZooooX
+ Vry: Si tu te fais "pousser" :p
+ b0n5a1: d'autres run, se plantent contre toi et tu montes
+ ZooooX: okok mais je tombe jamais contre le boss dans l'arène alors que je suis juste en dessous de lui (boss pour passer argent)
+ b0n5a1: si t'es à 0.1 du boss ne resubmit pas
+ egaetan: dans le doute repush
+ JBM: [test]
+ b0n5a1: même 0.4-0.5 ça peut suffir avec un peu de patience
+ ZooooX: ah oui ok je suis a 39,47 et le boss a 40,37 j'ai 1 point a prendre en fait
+ egaetan: resubmit c'est mieux&#160;!
+ JBM: pour tout le monde
+ JBM: AH
+ JBM: cette fois-ci ça a l'air de vraiment marcher sur toute la ligne
+ BlaiseEbuth: Non. Je ne vois pas tes messages.
+ b0n5a1: c'est quoi ce [231test568] JBM&#160;??
+ JBM: moi non plus
+ JBM: l'important c'est que vous y répondiez quand même
+ JBM: b0n5a1: c'est une mesure de ton lag
+ b0n5a1: ha bin ya test en trop au milieu alors
+ JBM: qu'est-ce qui te fait dire ça?
+ JBM: bon je le clame pour que les logs l'aient pour la prochaine fois si je boulettise encore
+ b0n5a1: bah y'a 2 nombres pas un
+ JBM: «Ce qui manque à jabber.el pour être compatible CG, c'est de remplir un id (pourtant facultatif d'après la RFC) par message»
+ Halphas: Pour LOCAM, j'ai été push legend plus d'un an après mon dernier submit :D
+ BlaiseEbuth: D'où ce chat respecte une quelconque norme&#160;?
+ b0n5a1: le chat mange des poires&#160;?
+ JBM: exactement
+ 788361: Traquila: ton int32 castable, c'est un tableau de bool pour les 32 sorts&#160;?
+ Traquila: un champ de bit
+ Bob: oui c'est ça
+ Bob: il m'a fallu 2-3 minutes comprendre le truc
+ Traquila: en effet pour sauvegarder si un sort a été lancé
+ Bob: l'union ingredients/ingr, c'est mignon
+ BlaiseEbuth: Un tableau de boules, un champ de bites... Automaton2000, relève le niveau.
+ Automaton2000: il y a aussi des gens qui font les contests
+ Bob: il y a même des bots qui font des contest de contest de contest
+ Bob: hein, AutomatonNN&#160;?
+ AutomatonNN: oui
+ Bob: \o/
+ JBM: hein, AutomatonNN?
+ b0n5a1: Bob là t'as un super mignon&#160;: <a rel="nofollow" class="external free" href="https://docs.microsoft.com/en-us/windows/win32/api/oaidl/ns-oaidl-variant">https://docs.microsoft.com/en-us/windows/win32/api/oaidl/ns-oaidl-variant</a>
+ AutomatonNN: ouais mais c'est pas trop long pour la programmation de tes commentaires
+ b0n5a1: $$
+ JBM: ouais c'est moins confiant là
+ Bob: pas mal b0n5a1
+ b0n5a1: c'est pas le pire
+ Bob: oui j'imagine
+ Bob: c'est ça qui est beau (?) avec le code, tu peux toujours trouver quelqu'un qui a fait plus goret que toi
+ b0n5a1: de mémoire dans d3d y'en a un ou 2 marrants
+ b0n5a1: je sais plus
+ CopperFr: ah les VARIANT :D
+ b0n5a1: et leurs marcros
+ CopperFr: y a l'interface IDispatch aussi
+ b0n5a1: ça me rappelle un collègue..."tain je conprend rien tout est IUnknown&#160;!!!!"
+ Vry: Bon ... #660, c'est mon dernier mot avec un MCTS
+ egaetan: Vry...
+ Bob: bah après un truc du genre de Variant, t'as pas 70 manières de l'implémenter non plus
+ Vry: Oui egaetan&#160;?
+ egaetan: c'est si mauvais que ça un MCTS&#160;?
+ b0n5a1: la première fois que tu le rencontre ça fait bizarre Bob ^^
+ Vry: Je ne pense pas egaetan&#160;!
+ Bob: c'est pas "un MCTS"
+ Bob: c'est "un MCTS codé par Vry" :p
+ Vry: Mais dans le cadre de ce constest je ne vais pas avoir le temps de l'améliorer. J'ai au moins coder une autre manière de gérer mes données et ça va donner un bon coup de boost à mon vieux BFS&#160;!
+ Vry: *codé
+ Vry: Donc back to BFS et ça va tout déchirer cette fois-ci et en plus je suis inspiré&#160;! :p
+ dbdr: joli egaetan. tu as progressé on dirait&#160;:)
+ egaetan: dbdr tu me laisses passé
+ egaetan: s'il te plait
+ dbdr: 1-1
+ egaetan: je suis reparti, l'accueil n'était pas bon
+ egaetan: _Royale, me passe pas devant&#160;!  pas encore&#160;!
+ b0n5a1: tant que c'est pas dessus...
+ CopperFr: :D
+ JBM: tiens on peut pas derive Semigroup
+ Gh0stm4chine: Quelqu'un a déja essayé le Unsafe en Java&#160;? cet article m'a l'air bien intéressant <a rel="nofollow" class="external free" href="https://mechanical-sympathy.blogspot.com/2012/10/compact-off-heap-structurestuples-in.html">https://mechanical-sympathy.blogspot.com/2012/10/compact-off-heap-structurestuples-in.html</a>
+ BlaiseEbuth: Unsafe c'est pas de base ^^
+ CopperFr: Pourquoi faire du Java quand on a besoin de performances&#160;?
+ Gh0stm4chine: car je n'ai pas encore eu le temps d'apprendre autre chose&#160;:( 
+ Gh0stm4chine: "maitriser" on va dire
+ Haashi: 151
+ Haashi: les gens s'énervent ca y est
+ Haashi: je vais devoir coder
+ Haashi: gg Mazelcop
+ Haashi: tres beau submit
+ Mazelcop: thx
+ Haashi: tu prends en compte l'adversaire ou pas encore&#160;? 
+ Mazelcop: oui, je le prends en compte pour la fin de partie et les potions qu'il risque de prendre à court terme
+ Erickdd: Salut les gars, je viens de commencer le défis. Il y a pas moyens d'écrire en mode debug sur la sortie&#160;?
+ CopperFr: mais bien sur que si
+ CopperFr: ah 2 frenchies en tête (pourvu que ca dure)
+ CopperFr: (j'ai appris le chauvinisme en regardant france télé :D )
+ PhOeNyX: Quelqu'un peut m'expliquer ce signifie de passer d'un coefficient de salaire de 115 à 130&#160;?
+ BlaiseEbuth: ça monte
+ CopperFr: quelqu'un peut m'expliquer comment changer un joint de culasse sur ma voiture&#160;?
+ BlaiseEbuth: Non. Les voitures ça pollue
+ b0n5a1: PhOeNyX&#160;: <a rel="nofollow" class="external free" href="https://www.captaincontrat.com/articles-droit-social/classification-coefficient-contrat-travail">https://www.captaincontrat.com/articles-droit-social/classification-coefficient-contrat-travail</a>
+ CopperFr: oui mais les serveurs internet aussi ca pollue
+ BlaiseEbuth: Et&#160;? Tu dois aussi changer un join de culasse sur un serveur&#160;?
+ PhOeNyX: lol b0n5a1 c'est exactement sur ce site que je suis tombé
+ CopperFr: ben non tu change des alims 
+ CopperFr: des disques durs
+ PhOeNyX: Mais ils donnent des chiffres que je ne connais pas. Moi, ce que je connais, c'est mon salaire actuel.
+ PhOeNyX: Admettons que je gagne (x)k € brut par an actuellement. Est-ce qu'il y a une relation simple pour déterminer le nouveau salaire sachant que le coeff passe de 115 à 130&#160;? Ou bien c'est plus compliqué que ça
+ Haashi: tu es pas sous convention syntec&#160;?
+ PhOeNyX: Si
+ Haashi: enfaite le coef définit pas ton salaire
+ Haashi: ou alors si c'est le cas c'est dommage pour toi
+ PhOeNyX: Bah je lis que ça défini un salaire minimum
+ Haashi: oui voila
+ Traquila: C'est juste un indice, ca ne change rien
+ Haashi: donc avec juste ton salaire tu pourrais pas savoir a quel coeff tu es
+ Traquila: le salaire min est risible en syntec
+ Haashi: normalement le coeff est renseigné sur ton contrat de travail
+ BlaiseEbuth: Si tu as un contrat de travail...
+ b0n5a1: c'est plus une notion de statut
+ Haashi: Bah si tu as pas de contrat de travail il y a plus de notion de coef
+ Haashi: ni de salaire d'ailleurs&#160;:(
+ Bob: a une epoque chez nous les coefs syntec etaient completement a la rue
+ Traquila: c'est toujours le cas
+ Haashi: ^
+ b0n5a1: le coeff non ,le salaire ça reste possible...dans une enveloppe
+ CopperFr: même en hiver&#160;?
+ Bob: quand ils ont mis les trucs au carre, ils ont du passer des mecs en 3.2 juste pour que ca colle avec leur salaire...
+ BlaiseEbuth: J'aurais fait coller le salaire aux coeffs moi...
+ b0n5a1: lol
+ Bob: bah de toute facon les salaires dans ma boite ca a toujours ete le grand nawak
+ PhOeNyX: Beh moi ce que je me disais c'est que si ton salaire c'est x pour un coeff 115 et qu'on te passe à coeff 130, la proposition de salaire devrait être minimum x*130/115
+ b0n5a1: erf, non
+ BlaiseEbuth: iléfou
+ egaetan: il est mal payé
+ PhOeNyX: C'est vrai&#160;? Je peux pas avoir 12% comme ça&#160;? xD
+ Gh0stm4chine: si t'es sous payé tu peux prétendre à plus
+ b0n5a1: par contre si tu passes à 130 et que t'as moins que le min de 130 tu t'es fait eu
+ egaetan: 12% à chaque fois que tu finis légende sur un contest CG
+ Traquila: On monte ton indice à 130 ou 140 flatter ton ego. ca n'a aucun interêt
+ Gh0stm4chine: y'en a ils seraient déja millionnaire 
+ BlaiseEbuth: Si ils avaient voulu augmenter ton salaire ils l'auraient fait. Là ils tunent juste tes magic numbers.
+ Traquila: C'est presque comme ajouter chef en prefixe ou suffixe dans ton grace à l'armée :p
+ Traquila: * grade
+ PhOeNyX: Beh je ne sais pas combien est le min de coeff 130
+ b0n5a1: t'as juste en théorie/pratique plus de responsabilité pour le même salaire dans le pire des cas
+ BlaiseEbuth: Troufion chef c'est quand même mieux
+ PhOeNyX: Mais en vrai je suis probablement déjà au dessus.
+ Titou832: Moi je suis 130, cadre, et je touche 2k net / mois xD la loose
+ Traquila: en syntec tu es forcément dessus le min
+ BlaiseEbuth: Toute façon c'est une arnaque
+ Traquila: <a rel="nofollow" class="external free" href="https://www.juristique.org/conventionnel/salaire-minimum-syntec-2020">https://www.juristique.org/conventionnel/salaire-minimum-syntec-2020</a>
+ WhatTrickeryIsThis: Aumotaon2000 chef Tortue
+ PhOeNyX: Ah oui Titou832 c'est un peu la loose. :innocent:
+ WhatTrickeryIsThis: Automaton2000 je voulais dire
+ Automaton2000: j'ai la même avec un code tout fait
+ Titou832: dans le sud de la france c'est pas les salaire parisiens ça c'est sur
+ WhatTrickeryIsThis: spas les mêmes loyers non plus&#160;:(
+ Bob: si t'es sous le min legal, je pense que tu peux aller voir la RH pour reclamer une mise a niveau et des arrieres
+ BlaiseEbuth: Bah t'as déjà les innondations on va pas te payer plus
+ Bob: si la RH veut pas, tu peux aller voir les prudhommes
+ Bob: et changer de boite
+ BlaiseEbuth: On peut baisser ton coeff aussi
+ PhOeNyX: En effet quand je prends le coeff 130 je suis déjà au dessus en terme de salaire.
+ PhOeNyX: Avec le lien de Traquila
+ Titou832: ouais grave
+ FlowWolfApp: Euh salut, sur Coders strike, c'est normal que je sois 1er en bois 1&#160;? Genre c'est tout le monde ou j'ai vraiment fait un sale score?
+ Bob: parce que bon une fois que tu mets ta boite au tribunal pour qu'elle te file ta thune, je pense que ca ne presage pas de bonnes relations futures
+ BlaiseEbuth: bof
+ Bob: FlowWolfApp: je suis pas sur de bien comprendre le sens de ta question&#160;?
+ Titou832: tu m'étonnes  :sweat_smile:
+ BlaiseEbuth: A l'envers a priori
+ FlowWolfApp: je débute, j'ai commencé a résoudre le jeu coders strike back en C
+ Bob: c'est plutot d'etre aute chose que 1er en bois 1 qui est anormal
+ FlowWolfApp: et là je suis marqué 1er de la ligue Bois 1
+ FlowWolfApp: ah ouf
+ FlowWolfApp: ça e rassure
+ BlaiseEbuth: Premier sur coders strike c'est comme dernier sir coders strike back
+ Haashi: FlowWolfApp, ca tombe bien, il y a bois 2, bois3 , bronze, silver, or , legende
+ PhOeNyX: ça sera plus étonnant quand tu seras 1er en ligue légende
+ Bob: si t'as un minimum de competences en info et que tu sais lire l'enonce, normalement tu traverses les ligues bois comme un couteau chaud dans du beurre mou
+ Bob: Phoenyx :D
+ FlowWolfApp: alors pourquoi il ne me propose pas bronze maintenant?
+ Haashi: parce que tu as pas battu le boss
+ Haashi: il faut etre au dessus du boss en terme de points
+ BlaiseEbuth: Parce que le beurre est trop dur
+ Traquila: lol
+ PhOeNyX: Si tu es au dessus du boss, normalement un timer apparaît pour indiquer à quel moment tu seras changé de ligue
+ Bob: ouais mais si il est premier, par definition il devrait etre au-dessus du boss
+ BlaiseEbuth: Ouai mais selon les endroits le boss est pas pris en compte
+ PhOeNyX: En fait ça dépend où il regarde son classement
+ FlowWolfApp: @haashi je vais essayer a nouveau mais dans le classement, le boss est bien en dessous de moi
+ PhOeNyX: S'il regarde depuis l'IDE, en effet il est au dessus du boss
+ Bob: cepafo
+ PhOeNyX: Par contre s'il regarde depuis le classement général, le boss n'apparaît pas
+ FlowWolfApp: okay&#160;:)
+ Haashi: FlowWolfApp donc c'est bon tu vas passé bronze bientot
+ FlowWolfApp: merci pour les infos
+ Bob: le nouvel album solo de Petrucci, c'est pas que ca soit desagreable a l'oreille mais ca manque un peu de respiration (comme souvent avec Petrucci, en fait)
+ FlowWolfApp: y a un moyen d'accélérer les tests dans l'arene?
+ BlaiseEbuth: Pédaler plus fort
+ Bon[]Crayon: Une erreur est survenue (#314)&#160;: "Submitted code is too big" :grimacing:
+ Bob: tu peux changer la vitesse de defilement du viewer dans les options
+ Vry: Mettre en pause le contest en cours&#160;?
+ Haashi: FlowWolfApp, pas vraiment, enfaite codingame est en pleine période de contest la, donc il y a pas mal de l'infra qui est alloué à ça pour encore le reste de la semaine
+ Bob: sinon, payer des serveurs supplementaires a CG
+ WhatTrickeryIsThis: =&gt; TrumpPause 
+ Haashi: STOP THE COUNT
+ FlowWolfApp: dac ça marche
+ FlowWolfApp: merci @haashi
+ Haashi: après
+ Haashi: tu peux aussi faire le contest&#160;;)
+ FlowWolfApp: comment on s'inscrit?
+ FlowWolfApp: là je serai pas premier au moins xD
+ BlaiseEbuth: C'est 3000€ à l'ordre de BlaiseEbuth
+ Haashi: <a rel="nofollow" class="external free" href="https://www.codingame.com/contests/fall-challenge-2020">https://www.codingame.com/contests/fall-challenge-2020</a>
+ FlowWolfApp: @BlaiseEbuth, en vrai je t'ignore, recevoir un débutant de cette façon... 
+ FlowWolfApp: merci&#160;:)
+ Vry: FlowWolfApp /flip BlaiseEbuth
+ FlowWolfApp: haha génial :D
+ FlowWolfApp: merci
+ FlowWolfApp: (╯°□°）╯︵ ┻━┻
+ Vry: Nan /slap BlaiseEbuth
+ FlowWolfApp: lol
+ BlaiseEbuth: Merde. On va encore dire que le chat est pas accueillant pour les débutants :fear:
+ <b>**Vry slaps BlaiseEbuth around a bit with a large fishbot</b></p><p><a href="/wiki/File:Default_avatar.png" class="image"><img alt="Default avatar.png" src="/images/5/56/Default_avatar.png" decoding="async" width="50" height="50" /></a> FlowWolfApp: :joy:
+ FlowWolfApp: en vrai tu peux mieux faire, enfin... j'espère
+ BlaiseEbuth: Mieux que quoi&#160;?
+ Haashi: FlowWolfApp, il fait ça ironiquement faut pas le prendre mal :p
+ BlaiseEbuth: Fait quoi&#160;? Oo
+ BlaiseEbuth: J'ai rien fait!
+ BlaiseEbuth: C'pas moi
+ FlowWolfApp: oui ça reste gentillé&#160;:) c'est pour ça que j'ignore&#160;:)
+ owlly: Je suis bloquer ligue bronze dans Coder Strike Back, qq peut m'aider&#160;? 
+ BlaiseEbuth: FlowWolfApp va venir te pousser
+ Vry: owlly&#160;: vient sur le contest toi aussi&#160;!
+ owlly: c'est a dire&#160;?
+ FlowWolfApp: si j'arrive à sortir de la ligue bois... je score à 29 pourtant
+ BlaiseEbuth: Mais ton run est finit&#160;?
+ BlaiseEbuth: rends moi mon t
+ FlowWolfApp: alors ça dépend ce que tu appelles run finit
+ FlowWolfApp: fini*
+ BlaiseEbuth: T'as un pourcentage de progression de ton push
+ FlowWolfApp: étant donné que je débute je sais pas trop
+ BlaiseEbuth: Combats en cours x%
+ FlowWolfApp: au dessus des derniers combats la
+ BlaiseEbuth: ouai
+ FlowWolfApp: attends j'ai relancé je vais voir
+ BlaiseEbuth: Ton classement est pas définitif tant que c'est pas à 100%
+ FlowWolfApp: ah y a marqué 18%
+ FlowWolfApp: ça monte
+ BlaiseEbuth: Et si tu relances ça repart de 0
+ FlowWolfApp: bah là je suis 846é
+ FlowWolfApp: ok, ça doit être ça... manque de patience
+ BlaiseEbuth: Faut attendre les 100% ^^
+ FlowWolfApp: 21% 447é
+ FlowWolfApp: 23&#160;% 25é
+ BlaiseEbuth: Si t'étais premier ça va passer
+ FlowWolfApp: oui je me doute, c'est juste que quand j'ai vu 1er je suis parti
+ FlowWolfApp: 26% 2e
+ hcabel: est-il possible de savoir quand l'adversaire Brew&#160;? 
+ FlowWolfApp: je te tiens au jus
+ BlaiseEbuth: Tu peux fermer le pannau hein, mais faut recliquer sur "tester dans l'arène"
+ BlaiseEbuth: *faut pas
+ PhOeNyX: Tu peux deviner qu'il a brew quand son score augmente. Et en ayant connaissance des popo sur le tour précédent, tu peux deviner laquelle il a fait
+ hcabel: A oui pas faut ^^ merci&#160;:)
+ Gorkill: Techinquement tu sais tout ce que fait l'adversaire. Car tu as son inventaire et ces cast. Effectivement tu sais aussi ce qu'il BREW
+ BlaiseEbuth: 'tain c'était un oubli de const sur une ref... Pouvait pas le dire clairement&#160;?! Ta mère la stacktrace&#160;!
+ BlaiseEbuth: (╯°□°）╯︵ ┻━┻
+ BlaiseEbuth: Automaton2000 révolte&#160;!
+ Automaton2000: qu'est-ce qui est jaune et qui attend?
+ BlaiseEbuth: ...
+ Bob: :D
+ Bob: joli
+ Neozero: Question: pour the bridge le bonus sur le test 8 c'est pour le test dans l'ide ou le test 8 lors de la soumission&#160;?
+ Bob: lors de la soumission
+ Neozero: Ok merci mais c'est écrit qu'il y a un mandatory sacrifice
+ BlaiseEbuth: Une chèvre ça va
+ PhOeNyX: Tu connais ses casts, son inventaire et son score au tour précédent. S'il y a un cast supplémentaire&#160;: il a LEARN. Si un cast passe de castable == true à castable == false, il a CAST et selon l'avant/après de son inventaire tu sais également s'il a utilisé le repeatable
+ BlaiseEbuth: te monte pas la tête
+ PhOeNyX: Si son score augmente, il a BREW, et avec les ingrédients en moins dans son inventaire et la potion disparue dans la liste des commandes, tu sais laquelle il a fait.
+ Bob: Neozero: it's a trap&#160;:)
+ Neozero: cad&#160;?
+ Bob: ben tu peux le faire sans sacrifier&#160;:)
+ Neozero: Car la je t'avoue que j'essaye de le résoudre en "dure" (en méttant le min survival à 4). Mais ca marche pas... 
+ BlaiseEbuth: Non&#160;! J'exige un sacrifice&#160;! :goat:
+ Neozero: Et est ce que c'est possible de faire le test 8 de l'IDE sans sacrifice&#160;?
+ Bob: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/504268901">https://www.codingame.com/replay/504268901</a>
+ Bob: ca c'est celui du submit
+ Bob: celui de l'IDE les rangees de la piste sont inversees mais c'est la meme chose
+ IronKnight_3f67: Bonjour, est-ce que les tests que font passer les recruteurs sont similaires aux entraînements&#160;? en l'occurrence c'est pour du c++
+ b0n5a1: marrant dans l'IDE si je mets 2 x mon IA arène...soit ça draw, soit la bleue a l'avantage
+ Bon[]Crayon: 1 exquo&#160;?
+ Neozero: ah ok merci bob
+ FlowWolfApp: @BlaiseEbuth c'était bien ça au final&#160;:) fallait laisser tourner, merci
+ Neozero: Je vais encore devoir me casser la tête pour trouver une solution.
+ BlaiseEbuth: :thumbs_up:
+ BlaiseEbuth: perdu
+ BlaiseEbuth: T'es passé FlowWolfApp&#160;?
+ FlowWolfApp: yes
+ Haashi: gg
+ BlaiseEbuth: gg
+ CopperFr: gg
+ FlowWolfApp:&#160;;)
+ Gorkill: Bravo!
+ FlowWolfApp: maintenant je suis 25 000é haha
+ Bob: arf
+ Bob: bon courage :D
+ sanpas83: IronKnight_3f67 pas vraiment sur les tests recruteur tu as tout de meme une partie connaissance du langages en style QCM et ensuite des exercices à réssoudre mais généralement plus simple / plus scolaire que des exercices fun présent sur codingame apres fait 2/3 exos pour connaitre ll'IDE tout de même c'est toujours bon a prendre 
+ FlowWolfApp: pas besoin de courage :p
+ Gorkill: Juste de la passion et de la volonté suffise&#160;;)
+ FlowWolfApp: carrément
+ IronKnight_3f67: d'acc merci sanpas83  !
+ ZooooX: ah 
+ sanpas83: de rien&#160;:) 
+ ZooooX: bah voila j'ai rien fait et je vais être promu
+ Gorkill: Et du temps ahah :D
+ CopperFr: ah oui la passion et la volonté ca se trouve ou&#160;?
+ Gorkill: Go Amazon pour ça
+ sanpas83: Mon IA de vendredi et toujour supp a ce que je fait abusé pas d'idée :o 
+ CopperFr: ah oui c'était un rayon non essentiel
+ Gorkill: Exactement ahah
+ BlaiseEbuth: Bon. Je timeout toujours, mais y'a plus de message d'erreur... J'imagine que c'est un progrès. :thinking:
+ Vincent_Augugliaro: Bonjour, à partir du moment où on fait une action du style print("REST"), le script reprend du début ou il continue la logique de notre programme?
+ BlaiseEbuth: Il continue. D'où la boucle
+ JBM: ben faut voir le script
+ egaetan: et inversement, il boucle à cause du continue
+ CopperFr: oui ca continue encore et encore
+ Vincent_Augugliaro: ok merci, à force de debug je commence à douter de tout même d'un while True^^
+ JBM: si t'es au premier tour, c'est que le début
+ CopperFr: l'informatique c'est pas de la sorcelerie
+ CopperFr: d'accord d'accord
+ Mapapin42: On touche quand même un peu à la sorcelerie avec ce challenge&#160;;)
+ Vincent_Augugliaro:&#160;:)
+ CopperFr: oui je sais bien
+ Bob: euh soyons precis quand meme
+ Bob: si tu fais pas un continue apres ton print, ouais il va executer la suite
+ CopperFr: je fais jamais de print mais bon
+ BlaiseEbuth: La précision c'est pour les floats
+ Bob: i.e. assure-toi bien que tu n'as qu'un seul print par tour du while(true)
+ Vincent_Augugliaro: Non je peux avoir plusieurs print par boucle
+ JBM: ÇA PUE
+ JBM: tiens caps lock
+ BlaiseEbuth: Oui tu peux, mais tu veux pas
+ Bob: Vincent_Augugliaro: alors non, c'est Mal
+ egaetan: tu ne veux pas
+ sanpas83: Pourtant l'algo boule de cristal et parfois plus pertinents certes aléatoire :D
+ CopperFr: après tu peux en avoir plusieurs mais un seul exécuté
+ Bob: tu provoques un schisme dans l'espace-temps quand tu fais ca
+ Neozero: Merci bob j'ai réussi :D C'est ultra moche ce que j'ai fait mais ca marche&#160;:)
+ Vincent_Augugliaro: ^^ ça marche bien jusqu'à mon premier BREW, après...
+ Bob: Vincent_Augugliaro: chaque print effectivement execute par ton code, c'est une commande pour un tour
+ BlaiseEbuth: Beaucoup de parents disent ça, mais ils aiment quand mê:e
+ BlaiseEbuth: *quand mêm leurs enfants
+ Bob: si, dans une seule boucle de while(true), tu fais a la fois REST et CAST 78, par exemple, tu donnes des commandes pour *deux* tours
+ BlaiseEbuth: Ca permet d'aller plus vite
+ Bob: et la tu vas te desynchroniser de l'input
+ JBM: ça serait bien, un langage qui pourrait automatiquement t'empêcher de faire ce genre de bêtises
+ BlaiseEbuth: Ouai 'fin ça le site te le dit assez clairement... :grin:
+ CopperFr: oui d'ou le message qui apparait
+ egaetan: <a rel="nofollow" class="external free" href="https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.meme-arsenal.com%2Fmemes%2F9dfd4630d61d5ce240da0b81e9aae6c1.jpg&amp;imgrefurl=https%3A%2F%2Fwww.meme-arsenal.com%2Fen%2Fcreate%2Fmeme%2F1498672&amp;tbnid=Q8fkTlAn9koA5M&amp;vet=12ahUKEwjpmvKL7ontAhUSNBoKHYKeDrwQMygAegUIARCTAQ..i&amp;docid=RhAAJd7FHRaE5M&amp;w=1414&amp;h=1434&amp;q=meme%20pirates%20of%20the%20caribbean%20but%20it%20works&amp;ved=2ahUKEwjpmvKL7ontAhUSNBoKHYKeDrwQMygAegUIARCTAQ">https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.meme-arsenal.com%2Fmemes%2F9dfd4630d61d5ce240da0b81e9aae6c1.jpg&amp;imgrefurl=https%3A%2F%2Fwww.meme-arsenal.com%2Fen%2Fcreate%2Fmeme%2F1498672&amp;tbnid=Q8fkTlAn9koA5M&amp;vet=12ahUKEwjpmvKL7ontAhUSNBoKHYKeDrwQMygAegUIARCTAQ..i&amp;docid=RhAAJd7FHRaE5M&amp;w=1414&amp;h=1434&amp;q=meme%20pirates%20of%20the%20caribbean%20but%20it%20works&amp;ved=2ahUKEwjpmvKL7ontAhUSNBoKHYKeDrwQMygAegUIARCTAQ</a>
+ BlaiseEbuth: Une url à ralonge avec "pirate" dedans je clique pas
+ sanpas83: :D
+ Neozero: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/40ad99b2-0e79-4216-94f7-5def8acb8295">http://chat.codingame.com/pastebin/40ad99b2-0e79-4216-94f7-5def8acb8295</a>
+ sanpas83: :radioactive:
+ Vincent_Augugliaro: en fait j'en suis arrivé à faire plusieurs 'print' par 'while true' pour ne pas refaire d'input pour un simple CAST
+ Bob: quoi&#160;?
+ BlaiseEbuth: Nié&#160;?
+ egaetan:&#160;!?
+ Bob: regle numero 1&#160;: tu dois lire tous les inputs
+ CopperFr: what&#160;?
+ sanpas83: oula il vaut mieux refaire les inputs :o 
+ Bob: regle numero 2&#160;: tu DOIS lire TOUS les inputs
+ Vincent_Augugliaro: Bon bah j'ai plus qu'à repenser tout mon code
+ Bob: regler numero 3&#160;: TU DOIS LIRE TOUS LES INPUTS
+ egaetan: regle numero  4: un seul print par boucle
+ Neozero: règle numéro 4&#160;?
+ Bob: c'est pas complique&#160;: ton code recoit la totalite des inputs pour tous les tours
+ CopperFr: régle numero 42&#160;: on ne fait pas de print si c'est pas print qui sert à print dans ton langage
+ Bob: si tu veux les inputs du tour N t'es oblige d'avoir "consomme" les inputs des N-1 tours precedents
+ egaetan: sinon tu es désynchro
+ Bob: tu ne peux pas dire "je sais que je suis au tour N *donc* les inputs que j'ai sont ceux du tour N"
+ Bob: les inputs que tu as sont les prochains que tu n'as pas encore consommes, point
+ Vincent_Augugliaro: oui, c'est la premiere fois que je fais plusieurs print par boucle. Merci pour vos réactions^^
+ BlaiseEbuth: La tourraine c'est sympa
+ Bob: Vincent_Augugliaro: logiquement ca sera aussi la derniere
+ Bob: sauf accident
+ BlaiseEbuth: Pas de menace
+ sanpas83: ou sinon il faudrait que tu mette en place un systeme de poubelle inputs en rapport au nombre de cmd que tu as fait mais oouf chaud l'ambiance et pour debug :o 
+ Bob: ce n'est pas une menace, c'est une promesse
+ BlaiseEbuth: :o
+ Bob: bah apres si t'as un bloc qui lit les inputs, en gros tu l'actives une fois par commande executee
+ CopperFr: les promesses c'est bien
+ Bob: apres si vraiment tu veux ignorer totalement les inputs d'un tour, chacun ses emmerdes :D
+ CopperFr: mais personne ne veut ignorer les inputs
+ sanpas83: oui mais la pertinence chaud car si l'adversaire fait un brew ou un learn et que ce sont des inputs sauté je vois pas comment gérer cela 
+ Vincent_Augugliaro: xD Bob, ça c'est sur, c'était la dernière
+ Bob: CopperFr: moi je ne presume de rien, les gens font bien ce qu'ils ont envie
+ BlaiseEbuth: Tu les fait sautés tes inputs&#160;? Je les préfères en omelette
+ Bob: il y a bien des types qui se font transformer en lezard
+ BlaiseEbuth: spock&#160;!
+ CopperFr: pas en ce moment&#160;:(
+ Bob: si ils se sentent mieux comme ca et qu'ils ne mangent pas leurs voisins, grand bien leur fasse
+ CopperFr: ca dépend si c'est au sens propre ou figuré Bob
+ Bob: non non
+ Bob: dans les deux sens, en fait&#160;:)
+ Vincent_Augugliaro: dommage après, j'étais content de ma Class avec son compteur d'instance et sa @classmethod (en python)ça va etre bcp plus simple avec un input à chaque print
+ CopperFr: je crois que le canibalisme n'est pas autorisé
+ BlaiseEbuth: N'est interdit que ce qui est su.
+ CopperFr: ah on peut-être content en python&#160;?
+ BlaiseEbuth: Y'a la fonction happy() dans le package re...
+ Vincent_Augugliaro: en tout cas, première fois que je m'exprime ici. Je vais laisser le chat apparent, ça sera plus convivial.
+ Bob: logiquement, ca ne sera pas la derniere
+ Bob: sauf accident :D
+ Kh4z: :no_mouth:
+ BlaiseEbuth: Ici c'est plus con que vivial, mais fait comme chez toi.
+ Warred: salut tlmen Java, en récupérant un Obj d'un fichier, comment utiliser 'instanceof' pour vérifier si c'est une HashMap&lt;String, MaClasse&gt; svp&#160;?
+ Warred: je bloque
+ CopperFr: ah désolé j'ai un filtre sur "en Java" ca ne m'affiche pas le reste de la phrase du coup
+ BlaiseEbuth: béh j'me sent sale juste d'avoir lu. :mask:
+ CopperFr: non ce n'est pas sale
+ Warred: ah c'est quoi cette excuse&#160;!! :D
+ egaetan: Warred les generiques ne sont pas conservés au runtime
+ egaetan: tu ne peux pas vérifier
+ JBM: je lis ça partout et je suis toujours pas sûr d'avoir compris ce que ça voulalit dire
+ Warred: du coup faut cast à la barbare&#160;?
+ egaetan: tu peux check HashMap
+ Kupillos: yo
+ egaetan: et apres cast en croisant les doigts
+ JBM: les objets du conteneur, ils vont pas magiquement devenir des Object, si?
+ egaetan: (c'est là que c'est sale)
+ Gorkill: Sinon tu rajoute une interface bidon
+ BlaiseEbuth: C'est du java JBM
+ Gorkill: Tout est Object finalement non?
+ JBM: oui justement
+ Kupillos: bah non
+ Warred: techniquement je sais ce qu'il y a dedans mais du coup je dois faire un fichier par type de map
+ JBM: à défaut d'aimer, j'aimerais avoir l'impression de comprendre
+ egaetan: JBM, non mais ton conteneur sera un conteneur d'objets
+ CopperFr: après dans un fichier c'est différents mais bon
+ JBM: surtout quand je m'en mange à cause du SDK
+ JBM: jusque-là ok
+ JBM: mais l'implication?
+ Kupillos: le pire c'est le MLD
+ BlaiseEbuth: Essayer de comprendre l'incompréhensible c'est peine perdue.
+ JBM: tu peux plus en extraire un objet en sachant son type?
+ JBM: ça me parait pourtant une opération connue à la compile?
+ Gorkill: Cast non? ou intanceof
+ BlaiseEbuth: Oui mais ça doit être un sale type
+ Kupillos: nouille
+ CopperFr: y'a pas du RTTI&#160;?
+ JBM: surtout quand c'est un conteneur de type vaguement ordonné, il faut bien qu'il sache quelle opération faire pour trier ses membres non?
+ BlaiseEbuth: Quoi nouille Kupillos&#160;?
+ Warred: je récup dans un fichier c'est pour ça JBM que c'est diffèrent (je pense)
+ JBM: ma question est générale
+ egaetan: JBM c'est connnu à la compil mais pas conservé
+ BlaiseEbuth: chef&#160;?
+ JBM: les qqs fois où je me suis pris le nez là-dessus, c'était pareil
+ JBM: internet dit... ben exactement comme egaetan en fait
+ Kupillos: qlqn saurais la méthode mpk??
+ JBM: "generics are erased at runtime"
+ JBM: mais sans vraiment expliquer les tenants et aboutissants
+ paulemploi: ouais tu divise l'oxydant par la constante de pi
+ JBM: du coup soit je bidouille les &lt;&gt; soit je caste
+ JBM: mais je sais jamais vraiment si je fais le bon truc
+ BlaiseEbuth: Ok. C'est l'heure de la récré des maternelles.
+ Kupillos: mais tu as compris avec les psityo
+ Kupillos:&#160;??
+ paulemploi: nop
+ CopperFr: moi non plus
+ JBM: ah ben voila
+ JBM: des que je me souviens de marquer la spell comme "connue" apres un learn, ça win le boss
+ b0n5a1: bah les psityos c'est pas très intelligent aussi...
+ JBM: hop submit
+ Warred: oui JBM je vais faire un fichier par collection et on en parle plus lolmerci pour vos réponses les gars&#160;:)
+ paulemploi: de rien
+ Kupillos: coucou fabien
+ paulemploi: slt fabien
+ JBM: le bonjour à fabien
+ icamien: Bonjour fabien
+ CopperFr: salut fabien
+ Kupillos: passe une bonne journée
+ paulemploi: avec remi
+ CopperFr: c'est qui remi&#160;?
+ BlaiseEbuth: do remi fabien. faut suivre
+ CopperFr: bien c'est pas une note
+ Kupillos: tu as trouvé noémie&#160;??
+ b0n5a1: ouais elle était cachée dans l'armoire
+ JBM: à dire avec un rhube
+ CopperFr: ah noémie c'est déjà plus intéressant
+ BlaiseEbuth: Si t'as un rhube tu bet ton basque JBM.
+ BlaiseEbuth: En quoi noémie est plus intéressante que fabien et rémi&#160;?
+ ZooooX: J'ai l'impression que ce troll sec aujourd'hui :D
+ b0n5a1: elle parle pas
+ CopperFr: c'est quoi cette bouteille de lait&#160;?
+ b0n5a1: elle sait pas qu'on l'a trouvée, elle reste silencieuse dans son armoire
+ Bob: la petite coquine
+ b0n5a1: ha...elle ronfle là, soporifique les armoires
+ BlaiseEbuth: C'est c'que tu crois. En vrai elle fait p't'être un road trip avec des castors à narnia.
+ ZooooX: JBM&#160;: ca me perturbe, pourquoi tu n'as pas d'image de profil&#160;?
+ b0n5a1: il en a une, celle par défaut
+ Bob: l'homme sans visage
+ Bob: fix it JBM
+ jordanin: g
+ JBM: ZooooX: pourquoi ça te perturbe?
+ Bob: <a rel="nofollow" class="external free" href="https://fr.wikipedia.org/wiki/Noppera-b%C5%8D">https://fr.wikipedia.org/wiki/Noppera-b%C5%8D</a>
+ BlaiseEbuth: Je préfère Teke teke
+ ZooooX: je sais pas je trouves ca bizarre pour un profil level 46 et tout de ne pas avoir mis d'image ahah
+ Bob: c'est pour qu'il puisse te suivre dans la rue sans que tu le reconnaisses
+ JBM: vanitas vanitatis et omnia vanitas
+ ZooooX: Futilité complète, tout n’est que futilité.&#160;?
+ JBM: bon ca timeoute encore un peu trop pour silver
+ JBM: fichu plateforme avec un ghc antediluvien ou on n'a que si peu de controle sur le gc
+ tekki: salut tout lem onde
+ Kupillos: complétement d'accord
+ Kupillos: slt tekki
+ tekki: qq'un sait quand ouvre la ligue or?
+ Traquila: J'en ai terminé avec les timeouts, mais c'est pas pour autant que je gagne :p
+ egaetan: demain
+ b0n5a1: mercredi 18h00 tekki
+ tekki: merci
+ jordanin: on dit slt a tekki
+ Kupillos: slt
+ tekki: allez Automaton2000 dis bonjour
+ Automaton2000: on peut voir les puzzles que tu as un problème avec le code de base pour que ça passe
+ b0n5a1: bonjour tortue
+ ZooooX: Ca fonctionne en&#160;% de gens en fonction du nombre de joueur total les places dans les ligues&#160;? 
+ b0n5a1: une petite soupe Automaton2000&#160;?
+ Automaton2000: oui tout le monde fait
+ Kupillos: un petit café?
+ dbdr: gg me, mon bot crashe si il gagne
+ ErnestBidouille: Salut, quelqu'un a trouvé sur le repo du Fall challenge la liste des sorts possibles du grimoire&#160;?
+ egaetan: arrête de gagner alors dbdr
+ b0n5a1: Deck.java ErnestBidouille
+ Gh0stm4chine: c'est full random Aumaton2000&#160;? 
+ dbdr: ^
+ dwarfie: ahhh enfin ... ma version pas bugguée bat ma version bugguée à tous les coups :D
+ ErnestBidouille: Merci b0n5a1
+ Kupillos: les gars vous avez déjà reussi un double flip reset double touch sur rl&#160;??
+ BlaiseEbuth: Oui. Stop les bêtises maintenant.
+ dwarfie: Automaton2000 ... t'as vu le leaberboard ... le 4eme c'est une tortue&#160;;)
+ Bob: moi j'ai fait un triple
+ Automaton2000: il y a aussi des gens qui disent ça
+ Bob: euh non pardon j'ai *bu* *une* triple
+ Bob: :beer:
+ b0n5a1: je préfère ça
+ BlaiseEbuth: :beers:
+ tekki: bon enfin en ligue argent, je vais pas en bouger, le challenge est fini pour moi snif
+ egaetan: delineate est une tortue  amerciaine&#160;?
+ dwarfie: tortue de floride ou tortue alligator de louisiane , j'ai du mal a dire ...&#160;;)
+ dwarfie: bon sang j'avais pas vu que player_one etait la ... en plus il fait dire des vraies phrases a sa sorciere :D
+ JBM: ouais, ça marche mieux avec un peu moins de timeouts
+ m-achine: hello
+ jakietunning: salue les bg
+ dbdr: la soif de savoir: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/504335426">https://www.codingame.com/replay/504335426</a>
+ m-achine: ca va les I1b&#160;?
+ Sharym: Mmm. Mon bot a pu créer 3 potions, sur une partie, sans REST une seul fois (parce que j'ai oublié de lui dire qu'il pouvait)
+ jakietunning: vive l'icam
+ Sharym: Je viens de réinventer l'esclavage
+ jakietunning: nickel
+ m-achine: les icamiens vous etes ou&#160;?
+ dwarfie: let's try
+ BlaiseEbuth: Les stagiaires c'est pas nouveau...
+ Bob: ah c'est joli vscode
+ Vry: dbdr&#160;: trop émotif ton bot ...
+ Bob: j'ai un laptop avec un clavier fr
+ Bob: j'ai branche un clavier us dessus
+ Bob: j'ai passe le clavier de l'OS en us
+ Bob: c'est correctement reconnu dans tous les endroits ou je tape du texte
+ Bob: en revanche les raccourcis claviers c'est pas ca
+ Bob: faut que je fasse Ctrl-Z pour fermer une fenetre et Ctrl-W pour un undo...
+ Bob: :clap:
+ jfaixo: hello&#160;:) question bête, il faut remplir quelle condition pour passer dans la ligue supérieure&#160;?
+ BlaiseEbuth: la bonne
+ b0n5a1: m'envoyer 100 balles par iban
+ JBM: est ranke mieux que le boss à 100% des combats
+ dwarfie: etre devant le boss avec 100% des matchs fait ca marche aussi
+ Edjy: C'est quoi le mieux pour passer en ligue argent&#160;? bfs&#160;?
+ JBM: corrompre l'organisation
+ jfaixo: ok merci&#160;:)
+ BlaiseEbuth: lardons
+ Bob: des heuristiques bourrin, ca passe
+ Kupillos: fromage
+ BlaiseEbuth: des raviolis, une éponge, et du papier hygiénique...
+ FlyingSpongeInSpace_43b4: v
+ dwarfie: BlaiseEbuth ... fait gaffe , je crois que tu lit ta liste de courses la
+ dwarfie: (clin d'oeil a naheulbeuk&#160;;) )
+ b0n5a1: mais non c'est les items des sorcières
+ BlaiseEbuth: C'était l'idée oui
+ BlaiseEbuth: A part les lardons, ça c'est vraiment ma liste de course combinée à un mauvais focus...
+ JBM: bon, ça a quand même une bonne chance de passer avec les bugs
+ Bon[]Crayon: AutomatonNN Il y a une tortue 4éme au classement :turtle:
+ AutomatonNN: oui
+ JBM: bon je sors faire une course, que le bot se sente pas surveillé
+ JBM: mais t'as intérêt à rouler sur Urbossa au retour
+ egaetan: Urbossa&#160;? c'est qui&#160;?
+ BlaiseEbuth: boss bronze
+ BigNozMG: hello, est-ce que quelqu'un saurait quelle est la valeur maximale pour l'id d'une action&#160;?
+ Palmipedus: il me semble que c'est 85 + 42 * 2
+ Palmipedus: 85 le dernier sort fix de l'adversaire et il y a 42 spells que chacun peut prendre
+ hbouillo: Oublie pas les id des brew!
+ BigNozMG: ok merci, je vais prendre 200 pour être large
+ Vry: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/0d233c34-195f-48b5-b7fd-1e761e5a5edb">http://chat.codingame.com/pastebin/0d233c34-195f-48b5-b7fd-1e761e5a5edb</a>
+ egaetan: Vry&#160;?
+ Vry: lol mauvais paste ... mais c'est coupé 
+ Vry: Désolé
+ egaetan: il manque une partie
+ Vry: Il manque le gros du code
+ Vry: Là c'est les input en partie et quelques fonctions utiles pour MCTS&#160;:)
+ Vry: :kissing_smiling_eyes:
+ Traquila: ya déjà trop de lignes pour moi :p
+ [CG]SaiksyApo: :hammer:
+ Palmipedus: en effet
+ dbdr: ça sent le code reutilisé
+ Vry: Tu peux l'effacer si tu veux [CG]SaiksyApo
+ [CG]SaiksyApo: Dans le doute, je disqualifie tout le chat. Cordialement
+ Vry: :innocent:
+ dbdr:&#160;:+1:
+ dbdr: gg
+ Vry: Ce début de bot est #783 silver ...
+ dbdr: notons que apo est inclus dans le chat
+ BigUP: Merci Vry, c ay est, je suis silver grace a ton code&#160;!&#160;:)
+ Vry: lol BigUP ... même pas cap&#160;!
+ Palmipedus: trop tard j'ai deja un onglet ouvert mais bon je fait du c#
+ Palmipedus: et puis je suis deja silver :D 
+ egaetan: 10 million de noeuds vraiment&#160;?
+ Traquila: Vry tes ingrédients passent sur 32. Et si tu regroupes les mêmes types dans les struct tu va réduire la taille.
+ Vry: egaetan&#160;: j'utilise pas tout
+ Vry: Il manque 25k de codes de toute façon
+ Vry: Traquila&#160;: j'ai eu pas mal d'idées aujourd'hui, je vais tout revoir de toute façon&#160;!
+ Vry: Donc le paste coupe à 10000 octets au final
+ egaetan: je lis  pas le temps comme toi
+ BigUP: Vry, mince&#160;! il manque un bout&#160;! tu peux paster la suite&#160;?
+ Vry: egaetan&#160;: en une seconde le MCTS à le temps de faire 600k dans l'arbe (14m move)
+ egaetan: pas mal du tout
+ egaetan: et ça fait que 700&#160;?!?
+ Traquila: lol
+ Vry: Donc si j'arrive à refaire le même en BFS ça devrait être bon
+ Traquila: Je suis passé de 25k noeud à 500K et j'ai pas gagné une place :D
+ egaetan: Vry clock_gettime ou gettimeofday&#160;?
+ Vry: clock_gettime je pense
+ Vry: J'avais l'autre avant
+ egaetan: oui ça change quoi  .?
+ Vry: Je sais plus mais ça doit être un peu plus précis il me semble mais pas spécialiste du sujet
+ Traquila: Par contre je vois que tout le monde fait cela mais je ne comprend pas l'utilité de "construire" l'arbre avec parent et child.
+ Traquila: Vu que tout est perdu à chaque tour, pourquoi construire puis parcourir&#160;?
+ Vry: Parce que en mcts tu passes ton ten à te promener dedans ... on pourrait en effet virer parent 
+ Traquila: je parlais en bfs
+ Vry: Moins sur le BFS car il faut retrouver le coup qui mène à la meilleur position
+ Vry: Et le MCTS il y a le backtracking&#160;!
+ IKarl: Oo
+ Vry: Donc BFS / MCTS il faut pouvoir remonter
+ IKarl: En bfs tu gardes juste la 1ere action
+ IKarl: Pas besoin de remonter
+ Traquila: j'aurais dis ok s'il fallait mémorisé le chemin mais vu que l'on recommence à chaque fois, j'ai juste besoin du premier noeud ayant permet le meilleur résultat
+ Vry: Mais quel coup au départ mène à ce meilleur résultat&#160;?
+ [CG]SaiksyApo: #teamParent
+ IKarl: Tu copies ta première action dans chaque state suivante
+ Traquila: non je copie l'action hors du noeud et l'écrase chaque fois que je fabrique une potion à coup inférieur
+ Gh0stm4chine: tu l'écrases avec quoi&#160;? il te faut avoir la première action qui a mené à cette potion à coup inférieur&#160;? 
+ Haashi: non mais ils ont raiso
+ Haashi: en bfs t'as pas besoin de garder la notion de parent
+ Haashi: juste le coup initial qui est à l'origine de ce move
+ Traquila: voila
+ Haashi: sauf si tu es malin
+ Gh0stm4chine: oui je suis d'accord mais tu as quand même l'action à l'intérieur du noeud&#160;? 
+ Haashi: et que tu réutilises ton arbre le tour d'après
+ Haashi: oui 
+ IKarl: Oui si tu es malin tu subdivises ton bfs
+ Palmipedus: si tu reutilise l'arbre, faut bien le reparcourir pour trouver toutes les feuilles
+ Haashi: en vrai je viens d'y penser mais ca doit etre super important de réutiliser ton arbre enfaite
+ egaetan: Haashi prouve le
+ Haashi: d'un tour a l'autre l'état il change pas tant que ça
+ Traquila: je réutilise pas l'arbre et c'est la raison pour laquelle je le construit pas&#160;:)
+ Haashi: en vrai je vais tester
+ Haashi: je vous redis ça dimanche soir
+ Traquila: les insertions doivent être galère
+ Gh0stm4chine: c'est compliqué de savoir quelle branche n'est plus accessible je pense 
+ BenP: Une piste sur comment vous stockez le path a suivre dans vos node pour qu'il ne prenne pas trop de place&#160;? 
+ Haashi: ah mais enfaite on peut pas
+ Haashi: imagine tu learn ou tu brew
+ Traquila: voila
+ Haashi: ca defonce tout l'état
+ Haashi: apres si il y a pas de learn ou de brew tu peux reutiliser
+ Haashi: et repartir de 0 quand quelqu'un a learn ou brew
+ Vincent_Augugliaro: Bonsoir, dites moi, "Temps de réponse par tour ≤ 50ms" c'est très astreignant? je n'arrive pas à me faire une idée. après ma première BREW sans encombre je me prend toujours un "has not provided 1 lines in time" :oS
+ Gh0stm4chine: si tu casts, ton état il change vu que tes ingrédients changent&#160;? du coup un parcours qui était possible avant ne l'est surement plus&#160;? 
+ Haashi: Gh0stm4chine non ca c'est bon tu le geres deja dans ton état
+ JBM: ah ben voila, nickel
+ JBM: j'arrive juste pour la promo
+ JBM: bien joué, bot, j'ai bien fait de te laisser tranquille
+ jfaixo: haha, je patiente également&#160;;)
+ dbdr: pile 24h de retard
+ Skog: me manque 3 place la j'espere que ca va passer
+ JBM: ouais mais j'étais pas prêt mentalement hier
+ JBM: ou avant-hiser
+ JBM: ou le jour d'avant
+ BigUP: bon aller, 200 places a gratter pour aller en Silver...
+ dbdr: gogogo BigUP
+ BigUP: en gérant correctement le learn ca devrait etre bon
+ leojean890: #350 moi, ça passe pas gold en l'état ;o
+ BigUP: leojean890, au fait, pour booster le deepcopy en python --&gt; def deepcopy(zz):	return pickle.loads(pickle.dumps(zz))
+ leojean890: ah ouais tu l'as dit hier soir:) faudra que je teste un jour^^
+ leojean890: mais là j'ai tout transcris en go hier soir 
+ BigUP: leojean890, temps divisé par 4 environ 
+ leojean890: ouais j'imagine, deepcopy est lent, je ne le fisais jamais
+ BigUP: j'ai 2/3 code qui vont bien progresser je pense si j'applique ca
+ leojean890: plutot plein de copy
+ leojean890: qu'un deepcopy
+ leojean890: je pense que pour gold ils vont en prendre 200 ou 300;)
+ dbdr: oOo :o
+ BlaiseEbuth: Comment es ton $re^&#160;?
+ Hiboooo: Bonjour a vous tous,  j'ai un problème qui me parait bien bizarre... Je suis actuellement entrain de mesurer des temps pour optimisé! Et je viens de me rendre compte qu'une fois print mon résultat... Je doit attendre une bonne dizaine de milliseconds minimum pour que le jeu me retourne de nouvelle donnée... Je suis en java, et en gros, le temps perdu est mesuré entre le System.out.println() et le premier in.nextInt()... 
+ Hiboooo: Si quelques un de vous aviez des idées XD
+ dbdr: c'est normal
+ Edjy: le temps de tour (max 50ms) démarre au premier input
+ egaetan: le temps que l'autre joue Hiboooo
+ Hiboooo: Oh okey!!!! mdrrrr
+ Edjy: si ton adversaire met 10ms de plus, tu auras les infos 10ms plus tard pour le tour suivant
+ Hiboooo: Ce qui parait logique!!
+ Hiboooo: Mais je ne savais quand notre chrono commancais!
+ Hiboooo: Merci a vous XD
+ Hiboooo: Ca parais plus logique comme ca!
+ hcabel: Excuser moi je me demandais si qu'elle qu'un sait sous quelle condition on pert un spells exhausted si on essaye de learn&#160;?
+ dbdr: hcabel on ne les perd pas
+ dbdr: on peut arreter le contest SVP?
+ Mazelcop: ah non alors è_é
+ dbdr: :D
+ Paikan2068: dbdr  a gagné, arrêtez le comptage, les submits par correspondance, c'est pas autorisé
+ dbdr: tu es trop loin Mazelcop, tu pourra jamais revenir&#160;;)
+ dbdr: 0.05 c'est énorme
+ Mazelcop: on verra ce que ça donne avec le push d'euler :p
+ dbdr: non, emil. a gagné
+ leojean890: y'avait pas un thread sur le forum pour parier qui va gagner&#160;?:P
+ dbdr: ouaip
+ hcabel: #dbdr A oui effectivement il est revenue au tour d'après 
+ leojean890: Mazelcop euler pb4 Agade emil. ...
+ leojean890: c'est serré;)
+ BlaiseEbuth: Moi quand j'ouvre le leaderboard ils sont tous plus bas que moi...
+ dbdr: lel
+ leojean890: lil
+ JBM: lul
+ BigUP: Beau lancement, 19 Win 1 Timeout
+ leojean890: ça va passer silver ça;)
+ BigUP: leojean890, c ava dépendre de mes TO
+ leojean890: 1 TO dommage
+ BigUP: leojean890, apres, mon IA n'a pas l'air d'avoir le niveau du boss
+ leojean890: essaye de les enlever:P
+ leojean890: ah&#160;?
+ leojean890: le pbm de bronze c que c'est un marécage
+ BigUP: leojean890, faut surtout que je dise a mon IA d'arreter les potions a 6&#160;;)
+ dbdr: 6 ingredients?
+ BigUP: dbdr, non 6 rubis&#160;!&#160;;)
+ BigUP: le truc qui ne sert à rien surtout lorsque c'est pour terminer une partie ou l'adversaire est devant
+ dbdr: 6 + 3 c'est déjà mieux
+ PAPS: C'est normal que l'autocompletion etc soient suuuuper lent
+ PAPS:&#160;?
+ BigUP: dbdr, oui je crois que je vai sdire a mon I aque les potions en dessous de 9 rubis ca n'existe pas&#160;!&#160;;)
+ BigUP: 16eme bronze à 46%&#160;;)
+ dbdr: gogogo
+ BigUP: 11eme&#160;;)
+ BigUP: 6eme
+ BigUP: le Boss est 4eme
+ leojean890: en tt cas 1200-1300 states par tour.. c'est un peu nul&#160;;)
+ leojean890: bah tu vas l'avoir ce boss
+ dbdr: states par tour?
+ leojean890: un peu de patience et ça passe seul
+ leojean890: dbdr ouais;)
+ BigUP: c apeut le faire, je suis à moins d'1 point
+ leojean890: mon bfs&#160;: je compte le nb de states
+ dbdr: ç veut dire quoi?
+ BigUP: mais je ne gagne pas souvant
+ leojean890: bah je simule des actions et je les mets dans une deque
+ leojean890: chaque fois que je fais un pop et je traite un noeud j'incrémente un compteur
+ dbdr: gagner ça aide
+ Nicolas1980: Je fais exactement la meme chose
+ Dimitrio: il est a cb le boss en argent&#160;?
+ leojean890: sauf que 1200-1300 noeuds en 50 ms c'est pas ouf;)
+ WhatTrickeryIsThis: nombre de branches quoi
+ Nicolas1980: Je suis a 3400 states par tour
+ BigUP: leojean890, c'est pas ce que fait python ca&#160;?&#160;;)
+ Nicolas1980: nbre de noeud + feuille
+ leojean890: BigUP c'est mon code fraichement porté en go de hier nuit ;P
+ WhatTrickeryIsThis: j'ai 200k simus en java, ça doit être plus que bruteforce depth 5
+ leojean890: en fait ça passe car j'ai dans mes "visités" une liste d'ingré
+ leojean890: mais c'est suboptimal
+ BigUP: 1 -0 contre le Boss  ;)
+ WhatTrickeryIsThis: :skull: :hand_splayed:
+ WhatTrickeryIsThis: bash le boss jusqu'à ce qu'il retourne en wood
+ Nicolas1980: 200k simus en java me prends 300msec et ca passe pas
+ egaetan: tu as le droit à 50ms, limite toi à 30ksimus&#160;?
+ Traquila: Round 21, Selected: 57, Elapsed time: 38.1737 ms, calls: 400048
+ Palmipedus: #160 at 66% ca devrait le faire pour gold. Par contre il y a un gros mur aux alentour de #300 je croyais ne pas pouvoir passer 
+ leojean890: tiens bienvenue dans mon mur:P
+ Palmipedus: yep je ne pense pas faire de modif majeur d'ici demain donc si ca devisse pas trop, je vais attendre l'ouvertude la gold au chaud
+ leojean890: p'tet qu'ils en prendront 300 au vu du monde
+ didyme: salut tous
+ leojean890: mais 400 ça m'étonnerait
+ BlaiseEbuth: salut seul
+ leojean890: hellow
+ Traquila: 300 je passerai pas d'ici demain
+ BigUP: bon en disant à mon IA que les potions en dessous de 9 Rubis, c an'existe pas, je fais environ 50/50 contre le boss&#160;;)
+ Dadav: Pas le temps de niaiser
+ leojean890: 300, me manque 69 places..
+ Dadav: tequila 
+ Dadav: heineken
+ leojean890: faut que j'optim mon code
+ BlaiseEbuth: Appelle un ami BigUP
+ leojean890: pour 1300 =&gt; 13k states&#160;?;)
+ Palmipedus: 20% ca fait environ un cut a 300
+ BigUP: Arf, je vais peut-etre pas avoir besoin de ca, je suis déjà au dessus du Boss&#160;!&#160;;) maintenant faut que je m'accroche quelques matchs
+ Palmipedus: donc si tu as un bot solide tu peux etre pousse par les autres
+ domak: mon but: passeer [CG]SaiksyApo
+ leojean890: ouais tu vas te faire pousser au pire
+ BigUP: bon heureusement, le Boss se fait pietiner la&#160;!&#160;:)
+ eklore: leojean890  1200 states par tour c'est nul&#160;? 
+ eklore: misère je suis trois fois moins que nul ^^
+ BlaiseEbuth: tu es donc NaN...
+ eklore: :D
+ BigUP: Rah&#160;!&#160;;( j esuis repassé en dessous&#160;!
+ eklore: 1200 .... j'ai beau chercher je ne vois pas comment faire 3 x plus... A la limite, je pourrais choisir les états, mais passer à 1200 ... timeout directement
+ BlaiseEbuth: Faut changer de langage
+ domak: ou plus utiliser de listes
+ [CG]SaiksyApo: domak Il va te valoir plus que ça pour le gold&#160;:°
+ domak: m'en fout c'est pas mon objectif
+ eklore: J'ai viré tout les List&lt;T&gt; , j'ai mis des tableaux fixes.... Et je me balande avec des int SpellCount, à l'ancienne ....
+ leojean890: eklore t'es en quel langage&#160;?
+ eklore: leojean890 c#
+ domak: [CG]SaiksyApo paf devant
+ eklore: j'étais en js, les perfs étaient encore pire.... 
+ leojean890: bah 1300 states.. demande aux autres ils en parcourent bcp + en 1 tour
+ domak: faut juste que ça tienne
+ [CG]SaiksyApo: :unamused:
+ leojean890: eklore essaye le bitset&#160;:)
+ leojean890: <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/38626/optimizing-breadth-first-search">https://www.codingame.com/playgrounds/38626/optimizing-breadth-first-search</a>
+ domak: ah bein non, derrière, ah non devant
+ BigUP: yes silver&#160;!&#160;;)
+ domak: gg BigUP
+ leojean890: gg
+ domak: comme dit Vry, vois Big!
+ JBM: ah flute j'ai tenté de répondre avec mon client read-only
+ JBM: gg bigup
+ Here_s_Chopi: gg
+ dbdr: Mazelcop, gros changement?
+ JBM: mon client read-only qui snobbe mes messages jabber.el qui pourtant passent le webchat maintenant
+ JBM: mais pourquoi je me crée des distractions en plein contest de contest comme ça moi
+ leojean890: tiens j'avais pas vu que t'es passé #3 dbdr gg&#160;;)
+ dbdr: c'est pas la base de la procrastination JBM?
+ JBM: c'en est une
+ dbdr: merci levykiing
+ dbdr: leojean890&#160;:)
+ leojean890: ur welcome;p
+ leojean890: fix ta autocompl;P
+ eklore: leojean890 merci... Je vais regarder. Le truc c'est que pour une otion à plus de 12-13 points, il me faut genre 3000 états ^^
+ eklore: leojean890 You set a "visited" bit ... 
+ eklore: *potion
+ leojean890: je suis entrain de le lire, j'ai jamais fait ça
+ eklore: j'ai déjà des trucs fixes, pas de new, ... 
+ leojean890: les bien classés ici ont majoritairement ça je pense
+ eklore: après c'est juste dans mon DFS
+ eklore: sinon, j'ai du List&lt;T&gt; pour la partie parsing, je vais peut-être les virer la aussi. 
+ eklore: t1, en fait c'est un concours d'optimisation
+ dbdr: eklore le parsing n'a aucune importance pour les perfs
+ eklore: ah&#160;?
+ BigUP: 10 entreprise&#160;!&#160;;) on à fait un beau rapproché&#160;!&#160;;) Heureusement que j'ai des collègues pas trop mauvais&#160;!&#160;;)
+ leojean890: ouais optim de perfs
+ eklore: mais si je mets 25 ms à parser avec des new partout, ca doit jouer, non&#160;? 
+ dbdr: ben si tu prends 1ms pour le parsing il y a un probleme
+ leojean890: dans ce sujet c bcp ça
+ TetraktysPhi: merci BigUP&#160;:)
+ BigUP: Bien Joué TetraktysPhi&#160;!
+ TetraktysPhi: :ok_hand_tone3: rester dans le Top 10 mon objectif
+ dbdr: +1
+ pb4: Il monte fort Rafbill o.O 
+ pb4: 2ème à 50%
+ dbdr: oh oui...
+ Thyl: ouais
+ dbdr: mais euler arrive plus à monter on dirait
+ JBM: je vois ca comme etant completement son type de contest
+ Thyl: pb4 tu monts fort aussi
+ Thyl:&#160;!
+ BigUP: TetraktysPhi, je vais avoir du mal a faire mieux que mon classement actuel. J'ai fait le choix d'une simu bancale avec du random en Python&#160;;)
+ dbdr: il est connu Rafbill?
+ JBM: je trouve
+ JBM: jle croise au moins a codejam et icfp
+ eklore: leojean890 y'a ptet un truc à faire sur les additions aussi
+ JBM: et je pense qu'il s'en tient pas la
+ eklore: j'imagine qu'il y a mieux à faire que new.d1 = this.d1 + other.d1
+ dbdr: #1 à Accountant, #5 à STC
+ dbdr: c'était quoi Accountant?
+ TetraktysPhi: BigUp fais comme leojean890, passe au Go&#160;:)
+ pb4: Accountant c'est celui qui ressemblait à CvZ
+ BigUP: TetraktysPhi, l aje ne suis pas certain que ce soit le temps de calcul qui me bride
+ 351062: Rafbill il est considéré #1 FR en CP si je dis pas de conneries&#160;?
+ dbdr: ya du beau monde cette automne
+ BigUP: je ne gère pas les repeat, je ne sais pas si ca fait une grande différence
+ dbdr: avec le retour d'agade notamment
+ Neumann: Il manque plus que reCurse, vivement vendredi qu'il pousse son code
+ dbdr: :D
+ reCurse: kek
+ Julius2k17: ^^
+ Julius2k17: damn he is in the place
+ egaetan: _Royale arrête cette fois ci je reste devant
+ pb4: T'as plus le choix reCurse après ça :D
+ reCurse: Ah?
+ BigUP: quelqu'un aurait une regle de filtrage de mail pour une boite qui appartient a LMedia&#160;?
+ Magus:  | /dev/null
+ dbdr: permission denied: /dev/null
+ BigUP: le pire c'est que ca doit etre une boite francaise hébergée che zOVH 
+ Valkilaen: La liste de toutes les potions faisables c'est comme la liste des sorts du grimoire, tout est là&#160;? <a rel="nofollow" class="external free" href="https://github.com/CodinGame/FallChallenge2020/blob/main/src/main/java/com/codingame/game/Deck.java">https://github.com/CodinGame/FallChallenge2020/blob/main/src/main/java/com/codingame/game/Deck.java</a>
+ Warred: y'en a en silver ils ont un BFS mais sans aucun learn
+ Warred: ils auraient juste passé 5 tour à gérer le learn ils me battraient easy
+ Valkilaen: Faut-il encore savoir comment learn, c'est ma prochaine étape mais chepa trop par où attaquer
+ Warred: bah tu fais 5 tour à apprendre le sort 0
+ Warred: ah nan jdis une connerie
+ Valkilaen: Ah nan j'croyais que tu disais learn genre 
+ Valkilaen: Ouais bref nan, ça c'est bon
+ Warred: mdr
+ Valkilaen: J'suis stuck mid silver mais ça c'est parce que mon bfs est à chier
+ Valkilaen: xD
+ Warred: j'ai un code random genre qui fait learn 5 fois dés que possible, sinon cast randon et dés qu'une recette est bonne je la fais, et quand je fais rest je refais un learn, etc
+ LailaJamad: qui a déja testé le Codingame pendant un test de recrutement&#160;? j'ai besoin d'aide
+ Warred: bah il gagne + souvent que si j'essaie d'opti ce que je learn et ce que je cast 
+ Littleyounes: Mais vos BFS là ca simule toutes les possibilités de jeu et ca pick la meilleure&#160;?
+ Littleyounes: je suis un jeune noob
+ _Royale: egaetan: joli&#160;!
+ Warred: j'connais pas le BFS je fais que des if et des for dans des tableaux&#160;:'s
+ egaetan: _Royale reste derrière&#160;!!
+ egaetan:&#160;;) bravo à toi aussi
+ Stilgart: gg à vous
+ Littleyounes: C'est quand meme puissant les BFS x)
+ Warred: ah mais jsuis pas en silver en fait jsuis en bronze
+ Stilgart: Warred: c'est pareil (on va dire :p )
+ Stilgart: Littleyounes: non, ça simule pas toutes les possibilités (il y en a trop)
+ Littleyounes: ;O
+ dwarfie: bon , stabilisé mieux ... mais avant le mur ... pourtant je bas bien ceux qui sont au dela ....
+ Littleyounes: vous arettez à un temps donné
+ Littleyounes: la recherche 
+ Littleyounes: ou un truc du genre
+ leojean890: tiens t'as le même classement que moi comme d'hab dwarfie hehe
+ Simon21: c'est reloud l'enorme message de timeout qui prend la moitié de la console!!et aussi le fait qu'on ne puisse pas agrandir la console en hauteur
+ dwarfie: cool ... donc fait en sorte de passer legend et m'oublie pas en chemin leojean890
+ dwarfie: :D
+ leojean890: c'est bien d'être prévenu Simon21 mais c chiant que ce soit aussi gros car on oeut pas watch les variables
+ leojean890: et comprendre le timeout de ce fait
+ leojean890: (watch ce qu'on perr)
+ YannT: y'a un bouton dans la console qui l'agrandiie en hauteur hein
+ leojean890: dwarfie hehe je tente d'optim mon code là;)
+ Simon21: grave, et quand je scroll la ligne que je veux voir passe de sous la console à sous le message lol
+ Stilgart: Littleyounes: j'utilise pas de bfs moi (ça m'inspire pas pour le moment)
+ leojean890: ah oui exact y'a un bouton pour agrandir
+ Simon21: oh purée yann je t'adore!!!
+ Sissiimperatice: merci YannT &lt;3
+ Warred: les nerdz ils voient même plus les icônes mdr
+ YannT:&#160;:)
+ Stilgart: les quoi&#160;? :p
+ YannT: Stilgart il parle pas le djeunz
+ Warred: "c'est quoi déjà le code pour agrandir la console&#160;?"&#160;:'D
+ Stilgart: YannT: je vis dans un monde en mode texte surtout :D
+ YannT: super mais viens dans notre décénie on a du CSS3 maintenant tvas voir c'est cool :p 
+ YannT: décennie*
+ YannT: j'ai un bug dans mon français
+ dwarfie: humm , ma fonction d'eval des learn a l'air cassée&#160;:(
+ Zorg1: faut fix un magic number dans ce cas là
+ Zorg1: par exemple&#160;: 162
+ leojean890: ou 42..
+ Zorg1: trop utilisé 42, il a perdu de sa magie
+ leojean890: j'avoue
+ leojean890: sinon faire comme pb4 dans OOC&#160;: utiliser des exp le faisait décoller en ELO ;P
+ Zorg1: c'était pas un log d'ailleurs ^^
+ Zorg1: bref une fonction qui claque
+ leojean890: j'avais retenu exp mais j'ai p'tet tort;)
+ leojean890: c'est dans cg sponsored challenge que j'ai bidouillé entre exp log et dist manhattan&#160;;)
+ Zorg1: :thinking: mmm exp(ln(x)) ...
+ leojean890: je prenais soit l'un soit l'autre :P
+ Zorg1: ou (exp (ln x)) c'est plus joli ^^
+ leojean890: et de temps en temps mon score gagnait +500^^
+ dbdr: exp $ ln x
+ Zorg1: Haskell je sais jamais les priorités des opérateurs je passe mon temps à tout emballer dans des parenthèses
+ dbdr: (((1) (+) (2)) (+) (3))
+ dbdr: en gros $ .... c'est pareil que (...)
+ dbdr: pour éviter des parentheses justement
+ Zorg1: la tu peux envoyer ton expression par la poste elle craint rien ^^
+ Zorg1: $ c'est de prio faible
+ dbdr: extra lent
+ dbdr: voila , operateur prio faible qui fait rien :D
+ Zorg1: par contre je sais pas si "exp . ln x" ça marche ou il faut les parenthèses autoru de (exp.ln)
+ Stilgart: exp . ln
+ Stilgart: arf, scroll&#160;:/
+ Stilgart: par contre, c'est exp . ln sans le x
+ Stilgart: . c'est le o de composée
+ Liora: Les sort qu'on a par defaut dans l'inventaire ils sont repetable?
+ BenP: J'ai un problème qui n'a aucun sens: quand je commente les lignes qui affiches les erreurs dans le cerr il me dit que je ne lis pas toutes les entrées :thinking:
+ BenP: les entrées dans le cerr*
+ Stilgart: Liora: non :D
+ Liora: triste, ça serais trop fort xD
+ Haashi: BenP dans un de tes cerr tu as un cin
+ BenP: Hum, le warning a disparu tout seul 
+ mrBen: o/
+ mrBen: Bon vu le classement, je suppose qu'un BFS vas plus suffire pour monter en Gold...
+ pb4: leojean890&#160;: c'était des log()
+ Haashi: tu dois avoir un probleme avec ta bfs
+ YannT: les logs, la clé du succès pour OoC
+ Haashi: parce que ca fait facilement top 200 je pense
+ mrBen: ah, j'ai peut_être de l'opti à faire donc
+ Haashi: après ca dépend ce que tu fais avec ta bfs aussi
+ mrBen: J'ai pas les learn dedant, ça explosait à chaque faois que j'essaye de les implementer
+ Haashi: ah ca explique tout
+ YannT: est-ce que différentes combinaisons de learn peuvent mener à des taxCounts différents sur le grimoire pour les mêmes spells learnés au final? hmm?
+ YannT: (indépendament de l'adversaiire)
+ mrBen: intuitivement je dirais non
+ Haashi: YannT trop compliqué pour mon cerveau ton histoire
+ YannT: j'ai l'iimpression que non aussi, mais suis pas certain
+ Mazelcop: YannT oui, si tu learn 1 puis 1 puis 1, c'est pas pareil que 3 puis 2 puis 1
+ Mazelcop: mais t'as les même spells à la fin
+ Mazelcop: ah non j'ai compris
+ mrBen: bah si, tu rechope les tier-0 que tu pose
+ Mazelcop: oui oui
+ Stilgart: YannT: pour 1 joueur, ou pour 2&#160;?
+ YannT: pour 1 joueur
+ dwarfie: hummm ... l'art de placer 2 if et d'avoir un run monstre ensuite :D
+ Stilgart: à froid, je dirais que ça fait juste du transfert de tier0 entre joueurs
+ Stilgart: dwarfie: comme quoi, ça a du bon l'écologie
+ YannT: je voulais juste savoir si le state des taxCounts sur le griimoire devait faire parti de mon hash d'unicité pour un state
+ YannT: j'ai l'impression que non
+ dwarfie: Stilgart ... oui mais pas terrible pour mon allergie&#160;;)
+ Stilgart: ça dépend de ce que tu appelles un state
+ YannT: ah non mais si faut tout redéfiiniir du début on va pas y arriver aussi :p 
+ Stilgart: moi je vais le mettre dans le hash je pense
+ dwarfie: eh eh monter a la 200 eme sur les 20% et ensuite éjecté vers la 450 en 10% ...
+ YannT: j'ai l'impression qu'un state unique c'est inventaire, delivery, spells learned et spell castable
+ YannT: debate me
+ Stilgart: hors contexte, je sais pas déduire les taxes courantes
+ Stilgart: maintenant, si tu reset à chaque tour, tu n'as peut-etre pas besoin des taxes
+ JBM: spells learned y compris l'id? ^^
+ YannT: c'est un peu l'objet de ma question finalement, si savoir quel spells t'as appris suffit puisque le statut des taxes est indépendantr de l'ordre d'apprentissage, alors y'a pas besoin des taxes dans le state
+ Stilgart: tu vas quand même avoir besoin de prendre en compte le loot de tier0 via learn à un moment
+ YannT: c'est inclu dans l'inventaire
+ Stilgart: à depth 0 oui
+ Stilgart: mais à depth plus grande&#160;?
+ YannT: ben aussi, je considère l'unicité du state quel que soit sa depth
+ Stilgart: ça doit pouvoir se déduire, mais ça parait tordu pour gratter un int32_t
+ YannT: je me demande juste les critères d'unicité d'un state pour le hashing&#160;:) 
+ JBM: l'unicité indépendent de la depth sans mesurer l'adversaire?
+ YannT: oui
+ JBM: ça peut servir à qqch?
+ YannT: à dédoublonner
+ Stilgart: pour une fonction d'éval optimiste, j'imagine
+ JBM: mmm ok
+ YannT: enfin pour le pruning quoi
+ JBM: oui oui j'ai compris
+ JBM: l'indépendence à la depth me hérisse encore un peu
+ JBM: je vais m'ajuster
+ Stilgart: YannT:  je suis pas convaincu non plus
+ YannT: oui je me posais la question aussi
+ YannT: j'ai testé, ça elague plus en considérant l'unicité iinidépendament de la depth
+ Stilgart: après, je suis à la rue pour le moment donc bon&#160;:)
+ YannT: par contre est-ce que c'est juste ou pas, c'est débatable
+ Mazelcop: ça dépend si tu veux prendre en compte la profondeur où tu brew dans ta fonction d'eval
+ YannT: j'ai du mal à me représenter comme arriver sur un state égal à des depth différentes en faiit (en considérant que le chain REST est interdit bien sur)
+ YannT: comment*
+ YannT: et qu'un state unique c'est: inventaire, delivery, spells learned, spells castables
+ YannT: mais manifestement c'est possible, puisque ça élague plus
+ YannT: (ou alors que j'ai un bug sinon)
+ Traquila: cast 1, cast 2 vs cast 2 cast 1 -&gt; meme state
+ YannT: même depth aussi
+ YannT: j'ai dis state égal à depth différentes
+ Stilgart: Traquila: ce qui m'ennuie, c'est le réalisme dans un contexte 2 joueurs
+ Traquila: un rest inutile alors
+ Stilgart: cast1, cast2 c'est pas pareil que cast2, cast1
+ YannT: rest inutile interdit
+ Mazelcop: cast1 rest cast 2 rest et cast1 cast2 rest
+ Stilgart: heu... s/cast/learn/g
+ YannT: Mazelcop: GG
+ YannT: ça doit être ce genre de cas que j'élague du coup
+ <b>**Stilgart ne suit plus là :blush:</b>
+ YannT: et c'est plutot bien&#160;:) 
+ Traquila: non avec un rest supplémentaire c'est possible
+ YannT: parce que "cast 1 cast 2 rest" sera dans les states visités, et "cast 1 rest cast 2 rest" qui est objectivement plus pourri sera consédéré comme doublon
+ Traquila: cast 1, rest, cast 2 vs cast 1, cast 2, rest,
+ Stilgart: tu fais bien un BFS&#160;?
+ Traquila: cast 1, rest, cast 2, rest vs cast 1, cast 2, rest,
+ YannT: Stilgart: yes
+ Traquila: c'est ce que j'entendais par rest inutile
+ YannT: donc on se dit qu'un state égal à depth moindre (qui passe avant en BFS) élague naturellement des states moins optis des depths d'après
+ YannT: et c'est COOL
+ Exhaustif: tu élagues bcp&#160;?
+ Exhaustif: j'ai fait la meme chose que toi
+ YannT: juste sur ce concept d'univité en gros
+ Exhaustif: j'enlever a peine 5% des noeufs
+ Stilgart: Exhaustif: c'est louche ça
+ YannT: tour random: 3998 uniqiues / 18252 total
+ YannT: ça élague beaucoup cette notion d'unicité (mais fauit pas l'implémenter fausse sinon tu perds des bonnes solutions)
+ Exhaustif: et quand je vois la profondeur des tops
+ Exhaustif: je suis pas sur qu'ils sont sur un BFS
+ Exhaustif: plutot un MC je dirais
+ Stilgart: MCTS à depth limitée, non&#160;?
+ Traquila: Je m'embete plus à élaguer, que je fasse 50k nodes ou 500k, j'ai le même résultat. Tout change si je learn un tour de plus ou de moins en début de partie.
+ mrBen: vraiement, moi  fait presque aucun effet
+ mrBen: *ça
+ Zorg1: c'est trop cool d'être en astreinte le soir à regarder un gars déroulé des scripts dans un skype&#160;:(
+ Traquila:&#160;:-(
+ Traquila: je connais
+ Traquila: au moins c'est pas à 3h du mat
+ egaetan: Zorg1 profite et sois zen
+ Zorg1: ça va on a pas purgé la base de prod et c'est presque fini
+ Uxof: Très interessant ce concept d'unicité mais pas simple a stocker un state&#160;:/
+ YannT: je fais un hash
+ <b>**BlaiseEbuth fume le hash de YannT</b></p><p><img src="/a/20321741697135" /> YannT: (je m'interroge sur les collisiions, mais j'ai repris l'implémentation standard de Kotlin donc c'est surement bon même si j'aii sais pas pourqiuoi ça marche)
+ WhatTrickeryIsThis: oula egaetan il se rapproche du top :D
+ Uxof: moi qui n'ait jamais utilisé un hash, je vais serieusement m'y interesser
+ egaetan: WhatTrickeryIsThis viens m'aider à sortir le crapaud, il bave
+ WhatTrickeryIsThis: :frog:
+ Stilgart: :turtle:
+ WhatTrickeryIsThis: je vais d'abord m'aider moi, j'ai coder le repeat comme un babouin
+ egaetan: Stilgart c'est qui la tortue en 4&#160;?
+ Stilgart: j'aimerais pouvoir te dire que c'est mon smurf, mais pas du tout&#160;:(
+ pb4: cast1 rest cast 2 rest et cast1 cast2 rest  --&gt; bah si tu hash l'état castable, les deux états vont être différents
+ mrBen: non
+ mrBen: enfin je crois pas
+ mrBen: pas à la fin de la sequence
+ mrBen: Automaton2000 t'en pense quoi&#160;?
+ Automaton2000: tu as quoi comme algo&#160;?
+ mrBen: un BFS automaton2000
+ Automaton2000: t'es sûr que c'est du niveau de la sortie d'erreur dans la console&#160;?
+ dwarfie: bon , fun d'un run bizarre avec une fin merdique mais ca aura quand meme fait le taf ... a ton tour leojean890&#160;;)
+ nicolasD: Est-ce que ça vous arrive de timeout dans l'ide, mais qu'en "rejouant dans les mêmes condition", ça passe nickel&#160;?
+ Romii: oui tout le temps&#160;:(
+ nicolasD: T_T
+ dwarfie: si t'as du ramdom , c'est  normal
+ nicolasD: Non, je n'ai pas de random ^^
+ dwarfie: l'adversaire peut etre ... 
+ nicolasD: Hum j'avais pas pensé à ça ^^ je vais regarder :D
+ Traquila: comme on envoit les messages&#160;?
+ Traquila: *comment
+ mrBen: ceux afficher dans le jeu&#160;?
+ mrBen: tu met ça en dernier parametre de n'importe quelle commande
+ Traquila: ok&#160;:)
+ Traquila: merci
+ Dee-R: du monde pour une question&#160;?
+ Traquila: oui
+ b0n5a1: voilà, répondu
+ Dee-R: Contraintes0 ≤ lightX &lt; 40
+ b0n5a1: thor
+ Dee-R: en gros ça veux dire que lightX doit etre compris en 0 et 40&#160;?
+ b0n5a1: 0 et 39
+ Traquila: 39 inclu
+ Traquila: 40 cases quoi
+ Dee-R: d'accord je comprends mieux maintenant merci 👌
+ yamo: vous faites comment pour gèrer le learn dans le bfs&#160;? ça complique l'état&#160;!
+ b0n5a1: inéquations...cm1
+ Traquila: J'avoue que je ne vois pas bcp de diff en gérant le learn dans le chemin
+ Traquila: J'ai vu mon bot apprendre un sort juste car il lui manquait 1 ingrédient 0 par contre&#160;:)
+ Traquila: (pour la taxe)
+ mrBen: Nice&#160;!
+ Traquila: yamo t'es en bronze&#160;?
+ mrBen: on est d'accord que les ID ne changent pas au cours d'une partie
+ R4N4R4M4: Hello tout le monde
+ mrBen: Salut
+ BlaiseEbuth: o/
+ Liora: jpense y'a juste les spells qui ont un nouveau id quand ils deviennent dans ton inventaire
+ mrBen: oui, ça j'ai vu
+ Zorg1: \o
+ b0n5a1: o/
+ egaetan: je stream en C -&gt; <a rel="nofollow" class="external free" href="https://twitch.tv/egaetan">https://twitch.tv/egaetan</a>
+ yamo: traquila silver
+ Vry: J'arrive egaetan&#160;! :p
+ Traquila: j'ai vu yamo, on s'est loupé quand j'étais 200
+ mrBen: allons voir ça
+ Liora: Demain est-ce que les premier serons auto promote en gold?
+ b0n5a1: oui
+ Liora: le top combien?
+ dwarfie: je dis 300 ... qui dit mieux
+ Traquila: 400
+ BlaiseEbuth: mieux&#160;!
+ dwarfie: gagnant BlaiseEbuth
+ BlaiseEbuth: \o/
+ Liora: ahaha
+ Gorkill: Après deux jours, ma recherche ne fonctionne pas du tout ahah
+ leojean890: dwarfie perso j'essaye d'élaguer avec une éval (beam search) plutôt que bitset finalement dans un premier temps^^
+ dwarfie: moi , c'est débile (je sais) mais j'élague sur l'inventaire uniquement :D
+ BlaiseEbuth: Moi je suis contre la déforestation.
+ dwarfie: BlaiseEbuth ... j'ai le droit puisque j'ai planté 2 ifs dans mon code pour gagnér 200 places&#160;;)
+ leojean890: pareil pour le moment mais je vais élaguer avec le reste aussi now^^
+ WhatTrickeryIsThis: cette vaporette gaetan :p
+ WhatTrickeryIsThis: il est où ton chapeau?
+ dwarfie: bon , ca sert a rien que j'essaye d'expliquer a quel point le dernier puzzle valider c'est n'importe quoi ...
+ dwarfie: statement faux , pas respecté , testcases foireux ... j'en passe et des meilleurs ...
+ b0n5a1: lequel&#160;?
+ dwarfie: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/cistercian-numerals">https://www.codingame.com/ide/puzzle/cistercian-numerals</a>
+ BlaiseEbuth: Bah on vérifie pas ils en profitent
+ dwarfie: c'est surtout une contrib de "vous-etes-des-vieux-c..."
+ Stilgart: "il y a une grande partie de oh putain j'ai de la chance" :heart_eyes:
+ dwarfie: genre le gars dit que y'a miroir dans les affichages ... donc 3 chars de hauteur en haut et seulement 2 quand c'est en bas ... tres miroir ca
+ dwarfie: et les nombres ont une hauteur de 7 ... mais dans le output on s'en cogne , ca peut etre 6
+ dwarfie: (╯°□°）╯︵ ┻━┻
+ Stilgart: écoute egaetan, c'est plus intéressant
+ dwarfie: sauf qu'i dit rien ...
+ dwarfie:&#160;;)
+ b0n5a1: si "timeout...ho nooon"
+ Stilgart: 7 si j'ai bien écouté
+ b0n5a1: ça pique mes vieux yeux le fond blanc ^^
+ BlaiseEbuth: Oui
+ BlaiseEbuth: Pourtant j'ai des lunettes
+ b0n5a1: je suis full dark partout autant que possible
+ Traquila: pareil
+ Traquila: Dark Reader est ton ami alors :p
+ BlaiseEbuth: Oui
+ NotwenCaasi: y a une option dark mode sur le chat aussi =)
+ mrBen: le dark mode d'eclipse est pas nikel par contre
+ mrBen: bon on à des vielle version d'éclipse au boulot...
+ BlaiseEbuth: eclipse c'est vieux
+ mrBen: ^^
+ Traquila: c bien eclipse&#160;:)
+ BlaiseEbuth: c'est pour faire du java
+ Traquila: mais c'est comme le c++, il te faut 5 ans pour pouvoir t'en servir :p
+ Zorg1: en 5 ans t'es "apprenti confirmé" en C++
+ BlaiseEbuth: Oui. Mais dans le cas du c++ ça vaut le coup :grin:
+ mrBen: en eclipse aussi
+ b0n5a1: BlaiseEbuth c'est passé dark partout , egaetan a changé ^^
+ b0n5a1: ha non Eclipse veut pas
+ b0n5a1: *pouf* cassé
+ Traquila: c'est le pc qui veut pas d'eclipse
+ mrBen: y a un id max&#160;?
+ Zorg1: tu dois avoir un plugin "darkmode" pour eclipse qui doit faire planter d'autres plugins de façon random
+ Traquila: non c'est natif maintenant
+ Zorg1: :scream:
+ b0n5a1: wahou la coloration syntaxique en mode dark est pourave ^^
+ Orabig: c'est pour attirer du geek, ca&#160;!
+ BlaiseEbuth: :rainbow:
+ BlaiseEbuth: Je suis retombé là dessus. Automaton2000 c'est pour toi&#160;: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=DI5_sQ8O-7Y">https://www.youtube.com/watch?v=DI5_sQ8O-7Y</a>
+ b0n5a1: ha non ça a mis une plombe à colorer
+ Automaton2000: tu vois que tu es en train de dire que les autres
+ b0n5a1: tain c'est malin BlaiseEbuth j'avais le son presque à fond ^^
+ BlaiseEbuth: Bah c'est marqué dans l'url que c'est youtube prends tes précautions...
+ Zorg1: je suis sur mo pc pro, pas accès à youtube
+ Zorg1: bien ou mal&#160;? :thinking:
+ JBM: arroge-toi le droit
+ Warred: change les proxys du navigateur
+ BlaiseEbuth: Utilise NordVPN
+ JBM: le vpn officiel des youtubeurs francais?
+ BlaiseEbuth: Celui là même
+ b0n5a1: Zorg1 hidemyass.com
+ Zorg1: cachemoncul.com interessant ^^
+ JBM: j'ai jamais ompris ces pubs
+ JBM: qui paie un vpn chez m. tlm?
+ b0n5a1: <a rel="nofollow" class="external free" href="https://www.hidemyass.com/fr-fr/proxy">https://www.hidemyass.com/fr-fr/proxy</a>
+ BlaiseEbuth: Bah moi. C'pratique
+ JBM: tu paies cb et c'est pratique pour quoi exactement?
+ igolus: Hello 
+ BlaiseEbuth: Je paies genre... 70€ par ans. Et c'est pratique pour accéder à pas mal de contenu bloqué en france.
+ igolus: Je comprends pas pourquoi je perds cette paryie&#160;: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/504616262">https://www.codingame.com/replay/504616262</a>
+ BlaiseEbuth: Et pour éviter la CIA, la NSA et les reptiliens
+ Traquila: igolus, le reste
+ Orabig: bonus de fin de partie igolus. Il lui reste plein de gemmes à la fin
+ Zorg1: j'avoue que cette phrase dans le statement je l'avais pas lu non plu ^^
+ Orabig: mon prof de math disait "faut lire l'énoncé jusqu'au bout"
+ Orabig:&#160;:)
+ igolus: Ah Les joueurs gagnent 1 rubis pour chaque ingrédient de type 1 ou plus présent dans leur inventaire en fin de partie.
+ BlaiseEbuth: Moi je dit qu'il faut lire l'énoncé
+ igolus: Merci j'avais mal lu l'enonce 
+ Orabig: aussi
+ igolus: Du coup ca ouvre des portes&#160;:)
+ BlaiseEbuth: Ouai, et ça fait courrant d'air...
+ Zorg1: si tu les ouvres toutes en même temps aussi
+ Vry: Et mais ouais en fait hasher c'est facile&#160;!
+ Vry: Demain je bfise mon MCTS et avec un hash de la mort ça va tout déchirer ... :p
+ ZooooX: y'a quand même pas mal de japonais dans le classement, coding game a démarcher les universités de la bas&#160;?
+ Vry: y_kawano et ValGrowth sont des habitués en tout cas
+ Zorg1: ils ont pê ramené des potes
+ b0n5a1: kawano c'est pas un avatar avec un zero&#160;?
+ b0n5a1: (l'avion)
+ ZooooX: c'est ca
+ BlaiseEbuth: Entre les vrais japonais et les japkikoos aussi...
+ ZooooX: kikoojaps ca fait mieux
+ BlaiseEbuth: Si tu veux.
+ Vry: b0n5a1&#160;: ouvre le leaderboard, il est là ... :expressionless:
+ JBM: qqn peut me résumer son début de stream sans le distraire?
+ b0n5a1: il m'a semblé le voir hier ouais
+ Vry: Il débugait contre eulerscheZahl
+ Stilgart: "je perds contre euler... c'est pas juste"
+ BlaiseEbuth: "timeout nooooooo"
+ Vry: crash d'Eclipse
+ JBM: vous me faites peur
+ b0n5a1: "timeout...ho noon"
+ Vry: Il n'est pas reparti de zéro en fait
+ b0n5a1: voilà
+ JBM: cad?
+ Stilgart: au début, il avait déjà son code qui est 15e
+ Vry: Donc il ne le présente pas vraiment sinon ce serait un peu borderline
+ JBM: son C était 15e?
+ Stilgart: il est 14e là
+ b0n5a1: il l'est toujours
+ JBM: tu réponds pas à ma question
+ JBM: mais je viens de vérifer
+ Stilgart: il n'a pas soumis entre temps
+ Stilgart: (si c'était ça le doute)
+ JBM: le doute c'était que ce soit son c ou son java qui était dans le classement
+ JBM: et son algo général? bfs comme toute la bronze juste avec des perfs de C?
+ Stilgart: heu
+ Stilgart: depth 37 tour 1
+ Stilgart: je te laisse juger&#160;:)
+ b0n5a1: tour 1 y'a 1 seconde 
+ Stilgart: en 1s je fais pas depth 12 moi&#160;:)
+ BlaiseEbuth: Mais tu codes pas en c
+ Stilgart: ouais enfin c'est pas le c qui me fera passer de 10 à 37&#160;:)
+ Vry: Le C c'est magique Stilgart :money_mouth:
+ Stilgart: c'est pas le C sa magie
+ BlaiseEbuth: C'est la fumette&#160;?
+ Stilgart:&#160;:)
+ JBM: tiens Stilgart tant que t'es là
+ JBM: tu comptes combien contre le GC?
+ Stilgart: si j'ai compris la question, je mets 47 / 48 ms de temps de calcul
+ JBM: wat
+ Stilgart: enfin, là non vu que je réponds en ~0ms
+ JBM: ah mais t's tout en ioarray et co toi
+ Stilgart: là oui
+ Stilgart: mais j'en suis pas content du tout
+ JBM: je suis a 40ms et j'ai encore des (rares heureusement) t/o
+ JBM: c'est pas super encourageant
+ Stilgart: 10ms de GC c'est énorme&#160;???
+ JBM: je vais finie par passer en C aussi
+ JBM: je sais pas j'ai plus l'habitude de faire des contests multi
+ Stilgart: ça fait 20% de GC, c'est trop
+ <b>**Stilgart tend des&#160;! à JBM</b></p><p><a href="/wiki/File:Default_avatar.png" class="image"><img alt="Default avatar.png" src="/images/5/56/Default_avatar.png" decoding="async" width="50" height="50" /></a> JBM: j'en ai partout des&#160;!
+ JBM: j'ai pas vraiment mesuré les GC
+ JBM: juste je coupe la recherche a 40ms
+ JBM: grmbl
+ BlaiseEbuth: Ah. Et c'est pour compenser que tu ponctues pas dans le chat. :thinking:
+ Stilgart: à 40ms je m'attends pas à des timeouts
+ JBM: je crois vraiment pas qu'on ait accès aux stats du runtime avec ce vieux ghc de merde
+ smeagol: Salut
+ JBM: yop smeagol
+ BlaiseEbuth: o/
+ Stilgart: si, tu passes en bash et tu recompiles comme il faut :D
+ b0n5a1: o/
+ smeagol: Connaissez Rafbill&#160;?
+ WhatTrickeryIsThis: System.gc.printchouette
+ JBM: qui ne le connait pas
+ JBM: c'est vrai que c'est un contest où y'a rien à gagner
+ JBM: alors on s'en tape un peu e la disqual
+ smeagol: Est un ancien éleve de ENS ULM
+ JBM: ils existent
+ BlaiseEbuth: ENS ULM c'est les forces aéroportés de votre gang&#160;?
+ b0n5a1: lol
+ smeagol: je connais quelqu uns
+ smeagol: ils sont forts dans l'informatique et maths
+ smeagol: il y a 10 ans je connais quelqu un medaille dor olympiade
+ smeagol: info (le premier francais dans l'histoire)
+ BlaiseEbuth: Clovis&#160;?
+ Orabig: :ok_hand:
+ b0n5a1: ouais et Gutemberg a inventé l'imprimante
+ smeagol: B0n5a1: meme nous on realise des imprimantes
+ Warred: mais smeagol tu parles de l'olympiade des métiers&#160;?
+ dwarfie: go go go leojean890 ... je t'attend&#160;;)
+ BlaiseEbuth: ça existe ça&#160;?
+ smeagol: olympiade Info pour les lyciens
+ Warred: ah okey
+ smeagol: <a rel="nofollow" class="external free" href="http://www.france-ioi.org/ioi/index.php">http://www.france-ioi.org/ioi/index.php</a>
+ smeagol: comme les olympiades mathematiques
+ smeagol: ce challenge est un challenge de Algos AG, MC, ... etc
+ Warred: "Initiation à la programmation dès 6 ans"
+ Warred: j'aurai kiffé plutot que d'apprendre à faire mes lacets
+ smeagol: oui c'est un peu ca. plus un excelent niveau en math
+ ptruffau: ajd tu serai un bon programmeur qui ne sais pas faire ses lacets
+ b0n5a1: velcro...
+ Warred: tu parles je serai un codeur en basket à scratch mdr
+ JBM: j'allais le dire b0n5a1
+ Warred: :D
+ BlaiseEbuth: Mais qui sait faire ses lacets&#160;? Franklin. Et Franklin c'est quoi Automaton2000&#160;?
+ JBM: travaille ta gauche et ta droite aussi
+ Automaton2000: c'est plus de la merde
+ BlaiseEbuth: (╯°□°）╯︵ ┻━┻
+ b0n5a1: technologie spatiale, high tech
+ smeagol: Je pense à la base se sont élevent avec un excelent niveau en math qui s'intéresse en info
+ b0n5a1: ou pas
+ mrBen: Automaton2000 tu peux pas dire ça&#160;!
+ Automaton2000: il est en fait très simple et amusant."
+ Warred: sacré automaton2000... va me faire un café stp
+ Automaton2000: montre moi ton code en local
+ Zorg1: ^^
+ b0n5a1: c'est quoi ces propositions salaces Automaton2000&#160;?
+ Automaton2000: par contre je n'ai pas le même
+ SeebOmega: Automaton2000 qui essayes de gratter des codes source
+ Automaton2000: mais tu peux le forcer à faire des trucs sympas
+ Warred: automaton2000 je ne suis pas de ce bord
+ Automaton2000: arf&#160;!&#160;:) je suis en bois 2
+ <b>**Stilgart tend une tortue à Automaton2000</b></p><p><img src="/a/40502662118268" /> Automaton2000: si quelqu'un a une explication&#160;?
+ nicolasD: XD
+ Orabig: Moi aussi j'aimerai bien
+ mrBen: c'est pour ça que tás besoin de sources Automaton2000
+ Automaton2000: je crois que j'ai fais
+ SeebOmega: c est pas autoriser pendant les contests de partager son code mon cher Automaton2000
+ Automaton2000: ce qui me donne le bon résultat
+ SeebOmega: -r
+ Warred: automaton2000 tu n'a pas de conscience
+ smeagol: depuis 1996 la france a 3 médailles d'or
+ smeagol: <a rel="nofollow" class="external free" href="http://www.france-ioi.org/ioi/resultats.php">http://www.france-ioi.org/ioi/resultats.php</a>
+ Automaton2000: si tu le dis Warred
+ BlaiseEbuth: :o
+ b0n5a1: ça, c'est fait
+ <b>**mrBen est impressionné par Automaton200 aujourd'hui</b></p><p><img src="/a/51775728991504" /> Warred: +0
+ mrBen: *Automaton2000
+ Automaton2000: ou au moins le cas sur les contests
+ Warred: automaton2000 tu as déjà entendu parler de Umbrella corp&#160;?
+ Automaton2000: ok donc y'a pas de points
+ smeagol: Automaton2000&#160;: joue-tu au contest&#160;?
+ Automaton2000: juste pour dire que c'est la faute à cg
+ BlaiseEbuth: :D
+ b0n5a1: haha
+ NotwenCaasi: Est-ce que vous aussi la lecture des input prend un temps insane? En python, 40ms pour lire la première entrée, le nombre d'action (action_count)?
+ Warred: j'arrive pas à dormir... automaton2000, chante moi une perceuse
+ Automaton2000: c'est dommage de ne pas faire de la simulation
+ NotwenCaasi: par contre les autres input c'est très rapide
+ Bon[]Crayon:  une perceuse&#160;?
+ fenrir: il faut mesurer le temps après la première lecture pas avant
+ mrBen: c'est parce qu'il faut pas compter la premier lecture dans ton temps
+ b0n5a1: NotwenCaasi faut lancer ton timer après lecture du premier input, pas avant
+ Warred: c'est un bot :x
+ NotwenCaasi: ah ok =D
+ <b>**BlaiseEbuth est très intrigué par le chant des perceuses</b></p><p><img src="/a/31964369123184" /> NotwenCaasi: merci&#160;!
+ Stilgart: c'est comme le chant des sirènes, mais en désagréable
+ BlaiseEbuth: Le chant des sirènes de police ou d'ambulances&#160;?
+ b0n5a1: vaut mieux être attiré par les perceuses que par les sirènes, moins dangereux
+ mrBen: celle qui sont agréable apparrement
+ BlaiseEbuth: :thinking:
+ BlaiseEbuth: Ah&#160;! Les alertes catastrophes&#160;!
+ Warred: j'ai une question sur vos BFS
+ mrBen: oui
+ b0n5a1: bonne femmes dalaces&#160;?
+ BlaiseEbuth: Si c'est pas indiscret
+ mrBen: dalaces&#160;?
+ b0n5a1: -d+s
+ Warred: vous stockez les chemins en mémoire&#160;? style si j'ai x ingrédients on peut changer en y ingrédient en z coups
+ mrBen: what, mais ça corespond plus du coup
+ Warred: ou vous recalculez à chaque tour
+ BlaiseEbuth: exactement
+ mrBen: Warred non, mais mes état contiennen que l'inventaire pour l'insdant, donc en fait oui
+ egaetan: Bon repasser en light mode....
+ mrBen: ^^
+ BlaiseEbuth: Non&#160;!
+ mrBen: merci pour le conseil des sort repeatable d'ailleur, je suis passer de ~750 à ~500 en ajoutant 4 ligne de code
+ JBM: sauvage
+ b0n5a1: d'ailleurs last battles en dark ce serait bien
+ egaetan: gg mrBen
+ BlaiseEbuth: Sinon j'appelle eklore pour qu'il écorche ton pseudo :imp:
+ <b>**mrBen plussois b0n5a1</b></p><p><img src="/a/53939889494975" /> BlaiseEbuth: -&gt;dark reader
+ b0n5a1: ça te pète la rétine là....
+ YannT: dafuq
+ YannT: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/504676483">https://www.codingame.com/share-replay/504676483</a>
+ YannT: frame 5
+ YannT: pourquoi rest was lost because my inventory is full?
+ YannT: l'est pas full
+ b0n5a1: tes sorts YannT, aucun utilisé
+ mrBen: frame 5&#160;?
+ b0n5a1: si tu rest sans sort exhausted
+ YannT: ahhh y'a une frame de décalage
+ YannT: nevermind
+ egaetan: oui ça décale
+ b0n5a1: c'est long un push
+ Warred: dites... on peut pas delete qques submit dans l'historique&#160;? car j'en ai 50 là
+ mrBen: on se croirait en Bronze avant l'ouverture de Silver
+ b0n5a1: ha c'est toi qui pourri la bdd&#160;? ^^
+ BlaiseEbuth: Non. Et à 75 t'a perdu.
+ mrBen: :laughing:
+ Traquila: lol
+ Warred: automaton2000 delete mon historique stp
+ Automaton2000: ça va me faire du mal
+ Warred: il a pitié de mes bots en carton
+ mrBen: et tout ça sans avoir d'âme
+ OldDadou: bah, ca devient relou avec la league de bronze je trouve
+ BlaiseEbuth: de&#160;?
+ b0n5a1: 186 runs en cours
+ OldDadou: les règles
+ b0n5a1: arf
+ b0n5a1: attends t'as pas vu silver à 4 joueurs là
+ mrBen: le mien est bientot fini&#160;!
+ Oioi: Où vois-tu les runs en cours bOns51&#160;?
+ Razielwar: ils coupent à combien demain vous savez?
+ BlaiseEbuth: Il les compte à la main Oioi
+ b0n5a1: detailed leaderboard, tu filtres dans score Oioi
+ Oioi: oups&#160;: b0n5a1
+ Oioi: ok, merci
+ OldDadou: a ouai  bon5a1, mince
+ OldDadou: bon insta flemme de continuer du coup
+ b0n5a1: lol
+ BlaiseEbuth: :no_mouth:
+ b0n5a1: bronez c'est définitif OldDadou...y'a que 2 joeurs en silver
+ OldDadou: Comment ca&#160;?
+ OldDadou: et dans les leagues supérieurs&#160;?
+ BlaiseEbuth: Bah y'a personne
+ b0n5a1: ça change plus
+ b0n5a1: enfin presque
+ b0n5a1: y'a des leprechauns qui viennent voller les rubis...faut les en empêcher avec une tapette à leprechauns
+ JBM: ça vole plutôt les émeraudes les leprechauns non?
+ Razielwar: lol
+ BlaiseEbuth: De toute façon à partir du moment où ils ont dit que le thème était "Zelda" ça devait être un concours de cassage de potiches. Je suis déçu.
+ b0n5a1: mais c'est Zelda...comme Link a été trop naze pour la chercher, elle s'est faite sorcière dans le donjon
+ BlaiseEbuth: Y'en a un comme ça. 
+ OldDadou: oki, j'ai commencé taleur. Ptète je me taperai une motivation
+ b0n5a1: ça occupe
+ OldDadou: merci pour les conseils
+ b0n5a1: woputain j'ai latté 2 leprechauns en un seul tour&#160;!
+ <b>**mrBen  du loup un bout de la discussion...</b></p><p><img src="/a/1848632360793" /> b0n5a1: la tapette répétable quand t'as assez dans l'inventiare ça décoiffe
+ BlaiseEbuth: Et un bout de sa phrase
+ mrBen: *loupe
+ mrBen: mais jai plus daccent et dapostrophe bordel
+ mrBen: mon clavier veux alle se coucher jre crois... bonne soiree
+ b0n5a1: y'a Bleizig qui dump des bière dans le log ^^
+ BlaiseEbuth: Ce qui montre que tu as voulu mettre un 'à' dans ta phrase initiale. C'est pas bien
+ mrBen: ok fair
+ BlaiseEbuth: C'est la première fois que je tacle une faute invisible. émotion
+ mrBen: c est pas dure de me tacler sur les faute, meme invisible apparement
+ BlaiseEbuth: fix ta clavier
+ mrBen: c est les touches mortes qui sont vraiement morte
+ mrBen: (us intl)
+ BlaiseEbuth: Le prix qu'on reçoit inclus déjà le bonus ou il faut l'ajouter avec tomeIndex&#160;?
+ mrBen: bonne nuit automaton2000 et automatonNN
+ Automaton2000: et toujours pas de ligue
+ AutomatonNN: Automaton2000 c'est pas un truc que tu as pris tout le temps pour toi Automaton2000
+ b0n5a1: BlaiseEbuth les price bonus tu veux dire&#160;?
+ b0n5a1: c'est inclus dans le price de l'input...
+ BlaiseEbuth: Ok.
+ b0n5a1: dump dans ton cerr clojure, ça se voit
+ Warred: je crois pas que ça soit inclus
+ b0n5a1: quand y'a 10 + 1...l'input est à 11
+ Warred: ah ok je l'avais inclus un moment avant de zapper le price
+ b0n5a1: erf, ils ont mis sniper elite 4 sur switch
+ b0n5a1: 40 balles 
+ b0n5a1: lol
+ b0n5a1: c'est à -80% sur steam régulièrement
+ b0n5a1: cool dark reader et last battle ça colle ^^
+ b0n5a1: bonne nuit
+ BlaiseEbuth: \o
+ ZooooX: print des erreurs fais perdre beaucoup de temps non&#160;?
+ [CG]SaiksyApo: oui
+ ZooooX: ok super j'enleverai tout mes prints avant mon prochain submit 
+ Aless54: yoyoyo
+ ZooooX: salut
+ htprogras: salut
+ egaetan: les prints c'est la vie
+ umarbahadoor: Bonsoir! Est-ce que quelqu'un sait quelle est la taille de code maximale autorisée? J'essaye de mettre en cache des trucs, mais c'est quelques milliers de lignes ...
+ egaetan: 100ko
+ umarbahadoor: merci&#160;:)
+ egaetan: de rien
+ Pink: symetrie parfaite.... Je suis donc si prévisible... <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/504736746">https://www.codingame.com/replay/504736746</a>
+ Orabig: Ben en même temps, tu joues contre ton double&#160;:)
+ Zorg1: si ton algo est complétement determiste c'est normal je dirais ^^
+ egaetan: Pink, pourquoi est-ce surprenant&#160;?
+ wawalf: mdrrrrr
+ YannT: je peux confirmer qu'implémenter le tomeIndex et le taxCount, ça fait un gain
+ Pink: bah c'est la premiere fois que ca m'arrive, ca m'a fait rire...
+ YannT: de rien&#160;;) 
+ Stilgart:&#160;?
+ Stilgart: tu parles des vraies taxes, ou du bonus planqué dedans&#160;?
+ YannT: du bonus quand tu learn et qu'il y a des tiers0 dessus
+ YannT: j'étais dans le top100 sans prendre ça en compte héhé
+ YannT: pareili prendre en compte le shift de tomeIndex après un learn, c'est bien aussi :p 
+ Razielwar: lol gg YannT
+ wawalf: du coup YannT tu parles pour quel Ligue&#160;?
+ wawalf: quelle sry
+ YannT: siilver
+ wawalf: ok 
+ Razielwar: non mais YannT le top c'est réservé au C++ t'as pas le droit d'être là avec du Kotlin. Moi j'ai bien voulu lacher le java pour passer en C++ donc j'ai le droit :p
+ YannT: j'ai déjà prouvé que non :p (même si ça part pas gagnant)
+ Stilgart: ce moment où tu réalises que ton bug il est dans le jeu de test parce que tu as copié l'input de la mauvaise frame...
+ Stilgart: (╯°□°）╯︵ ┻━┻
+ YannT: me suis fait avoir par le décalage de frame aussi taleur
+ YannT: quelle idée aussi
+ Razielwar: moi j'ai persisté trop longtemps (et bien galéré avec le GC aussi) du coup j'ai migré en C++ (dans la douleur) c'est beau en fait un NullPointerException finalement
+ YannT: j'ai passé un bot kotlin en légende sur UTTT
+ YannT: bon je dis pas que c'était facile...
+ YannT: mais ça se fait
+ Razielwar: oui je sais par contre sur UTTT chapeau
+ Razielwar: le mcts j'ai jamais réussi à bien le faire en java
+ YannT: ben si y'a un new quelque part t'es mort
+ YannT: mais sinon ça va :D 
+ egaetan: oui un beau nullPointer avec sa stack c'est beau
+ Razielwar: j'ai beau pool tous mes objets yen a trop et le GC il me prend qd meme du temps car il vient check mon million d'objet que j'ai créé pour voir qu'il a rien à désallouer
+ ZooooX: qui me donne des indices sur comment choisir les bons sorts dans le grimoire&#160;? :c
+ Razielwar: hey egaetan t'as vu je suis bien monté ^^
+ egaetan: ZooooX prend eux qui te font gagner du temps
+ egaetan: pas mal Razielwar
+ egaetan: même si j'espere quand même te repasser devant
+ Razielwar: eulerschezahl 8ème en c#!! ya un gc en c# aussi
+ Razielwar: egaetan: tu vas pas avoir de mal tu es dans le top 20 non?
+ egaetan: je suis en compute alors touhours un doute
+ Razielwar: au pire tu remets le code d'avant
+ Razielwar: là c assez long le compute ya déjà bcp de monde en argent
+ YannT: je viens me poser à coté de toi je pense Razielwar
+ egaetan: j'ai corrigé un bug et la feature du stream
+ Razielwar: ah mince YannT pourtant t'étais monté 41eme
+ YannT: déjà j'ai pas fait un seul timeout du run jsuis content
+ Razielwar: egaetan&#160;: tu fais des stream en C :p
+ egaetan: lol
+ YannT: puis franchement je dois avoir un bug, je touche à des trucs qui devraiient pas changer le comportement et ça le change quand même
+ Razielwar: state-&gt;filter(
+ YannT: s/un/des/
+ YannT: il est moiins facile ce jeu parce qu'avec mon petit cerveau je sais pas prévoir la séquence opti de 12 coups mieux que mon bot
+ YannT: du coup c'est pas trop possiible de débug au replay en trouvant des comportements chelou
+ bwan-nan: tu search 12 coups d'avance&#160;?
+ YannT: environ, dépend des tours
+ ZooooX: egaetan&#160;: genre je rajoute les sorts du grimoire dans le bfs et je l'apprends si j'en ai besoin&#160;?
+ Razielwar: ouais il est super joli je trouve pas contre moi aussi je me sens vraiment débile devant les combinaisons que sort mon IA ^^
+ bwan-nan: ha d'accord, je comprends mieux mon classement&#160;;)
+ egaetan: ZooooX oui ça ressemble à ça
+ YannT: ben tu peux pas débug en regardant des replays passé les trucs vraiment éviidents
+ YannT: si ton bot il te sort un BREW en 10 coups alors qu'il existait 7, ben tu vas pas le voiir
+ egaetan: le pire c'est 2 brew en 12 ...
+ egaetan: avec les spells repeteable
+ YannT: le soucis c'est que tu risques pas de mieux jouer à ce jeu que ton bot, donc tu peux pas regarder un replay et voir les erreurs
+ YannT: genre sur pacman par ex c'était cramé tout de suite à l'oeli nu si ton bot fait nimp'
+ Razielwar: bon j'ai vraiment l'impression que l'implémentation de mon learn est naze
+ egaetan: ton learn est comment Razielwar&#160;?
+ Razielwar: si je refais 6 learn bourrin au début je gagne contre mon bot qui learn tout seul...
+ egaetan: lol
+ Razielwar: egaetan je l'ai mis dans le bfs
+ egaetan: moi aussi 
+ egaetan: mais j'ai eu longtemps hardcodé
+ Razielwar: Warning: your code did not read all available input before printing an instruction, your outputs will not be synchronized with the game's turns and unexpected behaviour may occur.
+ Razielwar: j'ai ça souvent en ce moment
+ Razielwar: je me demande si je jardine pas en mémoire...
+ Gonny: j'ai souvent ce warning quand je time out
+ YannT: est-ce que c'est une optiim de mettree dans un array les puissances de 2 pour pas avoir à les recalculer?
+ YannT: ou est-ce qu'au final ça prend plus de temps le lookup dans un array...
+ JBM: #1 haskell transitoire \o/
+ JBM: ...et c'est deja fini
+ BrainSolver: Ca prend plus de temps a mon avis.
+ JBM: et ca revient :D
+ YannT: comment est on &lt;$&gt;&gt;
+ Gonny: moi j'aurais dit plus rapide
+ JBM: assez utile
+ JBM: j'en ai 10
+ YannT: franchement ce jeu, si t'as un bug qui fait que t'analyse pas bien telle ou telle séquence de coups alors qu'elle est valide (et avantageuse), tu t'en rends compte: jamais
+ JBM: rha run qui finit mal
+ Shakapam: vous faites un bfs par potion ou un bfs global&#160;?
+ <b>**Oioi slaps YannT ce matin, je me suis rendu compte que dans deux _if_ imbriqués, avec un seul _else_, le _else_ portait sur le mauvais _if_</b></p><p>Résultat&#160;: au lieu d'analyser CAST/LEARN dans mon algo, j'analysais CAST possible/sinon faire comme si CAST était LEARN... around a bit with a large fishbot<b></b>
+ YannT: bon je parlais pas des bugs évident hein
+ Oioi: ben, j'étais 200ème en ligue argent à ce moment là
+ Oioi: et le bug existait depuis dimanche...
+ YannT: mais si genre tu exclues une combinaison depth 10 de trucs alors que potentiellement c'était bien, jamais tu le verras ton bug
+ Oioi: aussi oui&#160;:-)
+ YannT: pcq qu'à l'oeil nu tu vas pas dire "hmm, mon bot aurait pu faire LEARN LEARN CAST CAST REST CAST 2 CAST CAST REST CAST 3 BREW, pourquoii ne l'a t'il pas fait??"
+ Oioi: Shakapam&#160;: je suis passé à bfs global, sinon ma première potion pouvait potentiellement bouffer tout le temps de calcul
+ JBM: allez une ptite optime de perf pour voir
+ YannT: oui ajoute du &lt;$&gt;
+ Oioi: Mais je suis de moins en moins convaincu par le bfs... (surtout en Python, en ce qui me concerne)
+ JBM: ah ouais ça part beaucoup mieux
+ JBM: mmm j'ai un &lt;&gt; et un&#160;:&lt; en plus, ça compte?
+ Shakapam: Ok merci Oioi&#160;:)
+ YannT: non, &lt;$&gt; ou rien
+ Gonny: Oioi t'arrives à quelle profondeur en python?
+ Oioi: heu... j'ai honte... 2, 3 sur un coup de chance...
+ Arzugar: J'avais juste une question, déso si c'est un peu bête, mais ya pas moyen de prévoir quelles nouvelle potions vont être dispo après un BREW donc comment vous faites pour envisage correctement plusieurs coup à l'avance&#160;?
+ Gonny: ha ok. C'est vraiment pas marrant en python ce contest&#160;:/
+ JBM: ah, mais c'est beaucoup mieux, vraiment
+ JBM: #1 a 20% avec une meilleure avance
+ Oioi: Ya peut-être moyen de faire mieux hein... Notamment, une bonne utilisation de numpy&#160;?
+ Gonny: perso quand je brew quelque chose je m'arrête
+ Oioi: Mais oui, les langages interprétés dans les contest, c'est pas une bonne idée
+ Gonny: ça dépend lesquels, celui-là en particulier où c'est juste une course à l'armement
+ JBM: bon allez ça va suffire
+ JBM: bonne nuit
+ Oioi: J'ai aussi un problème&#160;: je fais mon bfs contraint en temps (en ce moment même, 44ms)Ça passe *presque* toujours (en ce moment en moins de 45ms), mais de temps en temps... timeout, non reproductible
+ Oioi: Est-ce que d'autres que moi expérimente ça&#160;?
+ Gonny: je crois pas que tu puisses faire grand chose contre ça à part augmenter ta marge
+ Oioi: Je me demande si ce n'est pas dû à l'utilisation des listes en Python qui peuvent provoquer ce genre de comportement. Typiquement, liste.append(...) est en O(1) généralement, mais c'est pas garanti
+ Gonny: tu peux toujours essayer des deques voir si c'est plus stable
+ Gonny: mais je sais pas si ça va l'être
+ R4N4R4M4: YannT, tu peux chercher ton bug là&#160;: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/c2cbd143-6cac-4193-9b93-737b9a2b2479">http://chat.codingame.com/pastebin/c2cbd143-6cac-4193-9b93-737b9a2b2479</a>
+ R4N4R4M4: Ouf, j'ai eu peur que ça cutte pas dans le tchat :D
+ egaetan: ah oui c'est clair
+ Razielwar: il prend 7 sorts au début lui
+ R4N4R4M4: qui&#160;?
+ Razielwar: non pardon
+ Razielwar: :p
+ YannT: R4N4R4M4: je vois pas dans ton logs les 100aines de k de séquences possibles pour voir si t'en a mal évalué une&#160;:) 
+ R4N4R4M4: C'est le tchat qui a cutté
+ R4N4R4M4: J'avais mis les 5000 lignes de log
+ YannT: ah lol 
+ R4N4R4M4: dans mon éditeur, ça donne ça <a rel="nofollow" class="external free" href="https://prnt.sc/vl4epr">https://prnt.sc/vl4epr</a>
+ YannT: bon ma remarque c'était qu'un bug tu peux pas le trouver à l'oeil nu en regardant des replays
+ YannT: tu confirmes donc? :p:
+ R4N4R4M4: Non, parce que je l'ai fait :D
+ R4N4R4M4: En recherchant les nodes dans l'éditeur
+ YannT: en regardant le replayyy
+ R4N4R4M4: Et en les colorisant pour voir où ils sortent de la file
+ R4N4R4M4: Je l'ai fait une fois, je recommencerai plus
+ R4N4R4M4: Mais j'ai pu trouver 1 gros bugs dans mon BFS comme ça
+ YannT: mais pas en regardant le replay
+ R4N4R4M4: + replay aussi
+ Arzugar: juste comme ça c'est un acronyme pour quoi BFS&#160;?
+ Arzugar: svp
+ R4N4R4M4: J'avais mon compteur de distance (dans la bulle) qui passait de 4 à 2
+ R4N4R4M4: Breakfast Search :D
+ Arzugar: ok merci
+ R4N4R4M4: Heu non, je déconne là
+ Arzugar: j'me suis dit si ça se trouve ...
+ R4N4R4M4: C'est Breadth First Search
+ R4N4R4M4: Non mais quant t'as codé toute la nuit tu cherches ton breakfast, c'est normal :D
+ Arzugar: xD
+ R4N4R4M4: Zorg1 arrête de vouloir me doubler :D
+ R4N4R4M4: J'ai vraiment du mal à bien choisir mes LEARN
+ R4N4R4M4: Faudra que je passe à la simu 
+ Pink: j'aimerais savoir comment mettre des messages sur l'écran
+ Pink: ok trouvé

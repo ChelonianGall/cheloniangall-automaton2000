@@ -1,0 +1,290 @@
+ MSmits: Marchete are you there?
+ MSmits: I found another example where you can see mikla does not even finish endgames properly and here he loses because of it:
+ MSmits: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/569610594">https://www.codingame.com/replay/569610594</a>
+ MSmits: (frame 97)
+ MSmits: he should have just taken all 4 boxes and he would have won 24-25, instead he gives them all to me as he is just using a heuristic to play endgames
+ MSmits: it almost never matters because control almost always gives you the win, except in close games like this
+ MSmits: my bot does not adjust it's expected score to 25-24 because it only does so after a search and my bot didn't need one
+ opitt: Do you know if/where coc puzzles are stored? I want to redo my code but forgot the test cases …
+ MSmits: you can view them in contributions if you have done enough clashes
+ MSmits: not sure how many you need
+ punter147: MSmits what do you use for solving dots and boxes?
+ punter147: mcts?
+ MSmits: negamax
+ MSmits: mcts is good for solving in general, but I don't think it would work very well here
+ MSmits: you need transpositions
+ MSmits: ab pruning + TT still makes my head hurt
+ MSmits: I generally just mess around with it until a 100 million sample produces no errors
+ punter147: oh i see. transpositions is like a dynamic programming approach, in which you dont calculate the answer to already seen state again and again...
+ MSmits: yeah, which is easy without ab pruning
+ MSmits: but ab pruning makes it so that you dont finish the exact calculation but still want to store the result
+ MSmits: so you use upper and lower limits in the TT
+ MSmits: which is where my head starts to hurt
+ punter147: lol if your head would hurt, a lot of things will hurt on my side :joy: . Just kidding, thanks for the tip MSmits i will start studying ab pruning and transposition tables.
+ MSmits: D&amp;B makes it even weirder because the same board can occur from player 1 and from player 2's perspective
+ MSmits: <a rel="nofollow" class="external free" href="https://homepages.cwi.nl/~paulk/theses/Carolus.pdf">https://homepages.cwi.nl/~paulk/theses/Carolus.pdf</a>
+ MSmits: best source for ab + TT
+ MSmits: it has good pseudo code
+ MSmits: i adapted it for D&amp;B though, because of the symmetry I just mentioned
+ punter147: aah yes D&amp;B does not distinguish among the lines right, unlike chess positions which are distinguished by the color and the rank of the piece...
+ MSmits: exactly, and not just that, but because you can have multiple lines in 1 turn because of what you choose to do, the same board can occur at turn 56 or at turn 58 and such
+ MSmits: mmh not sure i said that correctly
+ MSmits: I should say, it could be player 1's turn or player 2's turn at the same frame and board, depending on what happened before
+ MSmits: because you get another play if you're the one finishing a box
+ MSmits: and sometimes you can finish 2 boxes at the same time but get only 1 extra turn, which switches the parity
+ punter147: yes you are right MSmits, i was just looking at D&amp;B plays, once you finish a box, you get another chance, again if you make another box, another chance and the party continues...
+ MSmits: exactly, it's quite messy to code a bot for but mathematically really interesting
+ MSmits: if you want to practice negamax and such, dont do it here really
+ MSmits: i mean not in D&amp;B
+ Marchete: are you using minimax?
+ MSmits: negamax yes, same thing i guess
+ MSmits: with ab/tt
+ punter147: MSmits oh, are there any games simple enough to get our feet wet in negamax? 
+ MSmits: pre-end game a move is a line, in the end game, a move is offering a full string/chain or when offered, it's the choice between doubledealing or not
+ MSmits: punter147 yes many
+ MSmits: find a simple board game you know you can simulate properly
+ MSmits: not sure which is easiest, people tend to go for ultimate tic tac toe even though mcts works better there
+ Marchete: I mean not MCTS
+ MSmits: nope not mcts
+ MSmits: TT is extremely strong here because of the colorless board
+ MSmits: using TT with mcts is not very effective most of the time
+ Marchete: do you think he just randomly put lines until a certain moment?
+ MSmits: I think he has a chaincounting negamax running until he solves the chaincount result
+ MSmits: and if he doesnt solve, he randoms
+ Marchete: so no avoiding complex chains?
+ Marchete: or loops or whatever
+ MSmits: I don't think so. Avoiding them doesn't really help either player specifically. It just makes the game easier to solve
+ MSmits: but that goes for both sides
+ MSmits: I have been considering doing a complexity mcts
+ MSmits: where i try to get the most complex connection of short chains and such in the end game
+ MSmits: so that mikla cant deal with it&#160;:)
+ MSmits: it would lead to funny endgames i think, but its a lot of work
+ MSmits: I am trying to get those sacrifices into my solver now
+ MSmits: hard to detect them without building a graph
+ MSmits: i think it can be done with bitboards but not easily
+ Marchete: early game give bonus for number of chains
+ Marchete: or whatever target the enemy can't deal
+ Marchete: I'd say daisy chains are hard
+ Marchete: or whatever it was called
+ Marchete: 3-way loop + ground chain
+ MSmits: well that makes sense, but it's not the current number of chains that matter, it's the amount at the end of the game
+ MSmits: so if you have half finished structures and empty spaces, you're not gonna know how many chains are gonna be there
+ Marchete: if you play with that target
+ Marchete: more than with pure random
+ MSmits: you can do mcts and randomly rollout until the end game happens, then analyze
+ MSmits: but thats what i was planning to do already&#160;:)
+ MSmits: except with negamax
+ MSmits: but i might do it with mcts later. I just don't think it'll be better
+ MSmits: the problem is that there is no neat progression from a "bad state" to a "good state" by several good moves
+ MSmits: they are separated by 1 wrong line
+ MSmits: so my sense is that you need a full solve to make any prediction
+ MSmits: in games like chess and such you can make your boardstate progressively better or worse with good or bad moves. That's just not the case here
+ MSmits: it's a coin you can flip between loss and win, except you have no idea which way it is facing before you flip. So it becomes in effect a totally random coin flip
+ MSmits: I suppose mcts might still give *some*  improvement if you pick moves that are more likely to lead to a beneficial flip
+ Marchete: I was thinking like I said
+ Marchete: trying to have better patters (like chain types and similar)
+ Marchete: and try to reach them
+ Marchete: but as you say
+ Marchete: going from win to loss is really near
+ Marchete: but I still think
+ Marchete: if enemies can't handle daisy chains easily
+ Marchete: it will be harder for them to solve
+ MSmits: i dont think you should call them daisy chains
+ Marchete: I can't remember its name
+ MSmits: no, thats fine, but you'll get jacek all excited with that term :P
+ jacek: shackles
+ Marchete: :D
+ MSmits: dont you just mean loops?
+ Marchete: I mean a loop
+ MSmits: ah ok
+ Marchete: with a ground chain attached
+ Marchete: like a flower
+ MSmits: oh that's called a dipper in literature
+ Marchete: ahh
+ MSmits: you always capture the attached chain first
+ MSmits: then it becomes a loop
+ Marchete: yes
+ MSmits: doesnt have to be grounded either
+ MSmits: the string can be connected to something else
+ MSmits: it will still be better to do the string before the loop
+ MSmits: there's a lot of little rules like that that makes the solving faster if you put them in
+ Marchete: but you need to detect it
+ MSmits: yes
+ MSmits: if (joins[0] == joins[1])	{		if (joins[0]-&gt;ActiveLinks() == 3)			return false;
+ MSmits: joins[0] == joins[1] finds a string that is connected to the same join ( a loop)
+ MSmits: if the join happens to have exactly 3 strings connected, then it's a dipper
+ MSmits: so i disallow the doubly connected string to be played in that case
+ swapbee: hello
+ Marchete: but all the 3-way chains are hard to evaluate, and maybe promoting it in the eval is positive
+ Marchete: as the enemy will have a harder time to eval
+ MSmits: they are hard to solve yes
+ MSmits: but anything like that will hurt both sides
+ MSmits: so this only works if you know you are especially good at dealing with it
+ Marchete: one will be hurt harder
+ MSmits: and everyone else isnt
+ Marchete: exactly
+ MSmits: it's a good point
+ Marchete: anyways everyone else seems to mean 1 guy
+ Marchete: maybe 2 when I tackle the game
+ MSmits: in this case yeah, he's the only one doing the chain counting efficiently
+ MSmits: though some other guys seem to make sacrifices really short before the end game (2-3 plays) where he does them 15 plays before the end game
+ MSmits: my leaderboard version also makes sacrifices really short before the end game
+ MSmits: thats why i am 2nd really, not because my solver is good
+ Marchete: remi is near you in score
+ Marchete: so it must be good too
+ MSmits: yeah, but he makes sacrifices too easily, even when he's not supposed to. This costs him boxes
+ MSmits: I think he might be using a chain-counting mcts like we discussed
+ MSmits: but if you havent fully solved, you should not sacrifice
+ jacek: join #ru and ask him directly
+ MSmits: remi is french :P
+ jacek: oh i thought you meant milka
+ MSmits: ahh no, i dont need to ask really. I kinda know what he does. He wasnt really secretive about it either
+ MSmits: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/569616446">https://www.codingame.com/replay/569616446</a> here you see remi do sacrifice at frame 25 even
+ MSmits: there is no way he knows it will help
+ MSmits: and he loses the game so...
+ Marchete: too early it seems
+ jacek: premature sacrifice eh
+ MSmits: exactly :P
+ Marchete: I'll ad a damn NN and let it do the guessing :D
+ Marchete: add*
+ MSmits: yeah for early game this might work
+ MSmits: or at least, give some small edge
+ Marchete: and endgame, damn too :D
+ MSmits: nn will also have trouble converging on a good set of weights, but it only has to be better than nothing
+ Marchete: just throw more games
+ MSmits: yeah, but if the data seems too random to it, it wont help
+ MSmits: your training loss will get smaller but the test/validation loss wont change
+ Marchete: win/loss will be brought back from endgame
+ MSmits: but as i said, it only has to generalize just a teeny bit
+ Marchete: like jace_k does
+ Marchete: but jk
+ Marchete: the game is huge in search space
+ MSmits: yeah
+ MSmits: I was thinking of trying my solver on smaller versions of D&amp;B to see how it stacks up against the solvers in those papers
+ MSmits: up to 5x5 has been solved
+ MSmits: the increase in time required goes up extremely fast with 1 size added
+ HassanAli4651: can any one help me with this?
+ MSmits: so 7x7 is miles away, I think even outside of googles range
+ MSmits: this... what?
+ HassanAli4651: mars lander ep1
+ MSmits: simple if/else solution will work
+ HassanAli4651: i tried
+ MSmits: if you're going too fast, activate the thrust
+ MSmits: otherwise just fall
+ MSmits: dont do any other movement
+ Marchete: I want someday to try AlphaZero but with graph/features and not the board representation directly, and possible moves as something of high level (like cut a dipper)
+ jacek: graph game eh
+ MSmits: seems hard Marchete
+ MSmits: but many things worth doing are
+ Marchete: game -&gt; abstraction-&gt;AZ-&gt;high level move
+ MSmits: you need a lot of output though, the game can have many suchs constructs and in many combinations
+ MSmits: not sure how to code the policy here
+ Marchete: I think less than x,y,side output
+ MSmits: I think there are thousands of possible objects
+ Marchete: identify possible chains, and possible cuts inside them
+ Marchete: and 1 random 
+ Marchete: thousands types-&gt;
+ Marchete: on the same type, it will be a best to cut
+ MSmits: just looking at a dipper for example. It matters how long the loop type is and also how long the attached chain is
+ Marchete: by size and similar
+ MSmits: so you have like 10 x 10 options right there
+ MSmits: for differen dippers
+ Marchete: that's true
+ MSmits: and that does not include ungrounded dippers
+ MSmits: those will have a massive amount of variation
+ MSmits: I think x, y side might be easier to do&#160;:)
+ MSmits: btw, I made a lookup table for simple endgames
+ MSmits: so just isolated chains and loops
+ MSmits: I only needed 6k values
+ MSmits: but using the lookup table wasnt faster than just running the function
+ MSmits: (the one i shared)
+ MSmits: that error by mikla's bot i shared earlier would have been 1 of the lookup values
+ SlickSteel: Hey yall! 
+ jacek: ohai
+ sakuraiuto001: hey 
+ CodeAce:&#160;?
+ Marchete: ¿
+ doomento: hi
+ Plantchant: hello
+ client2233: hello
+ mokupnik: Is there some issue on the site? Because i can't make a contribution, building just goes on forever. Even when I upload he project that was already accepted.
+ jacek: try again
+ binjn: hello everyone
+ walker2k: hello binjn
+ walker2k: :D
+ binjn: oh hello
+ FriendlyKh: y
+ TheIceJetski_9b4a: hello 
+ Konrad_O: Hello!
+ AntiSquid: oh look CSB with lazors 
+ jacek:&#160;?
+ QuickMathzs: :poop:
+ BugKiller_328: hi
+ BugKiller_328: anyone here now&#160;?
+ BlaiseEbuth: No.
+ BugKiller_328: :smile:
+ BugKiller_328: in 'PRACTICE' puzzles, (easy, medium, hard), is there any way to search puzzles which has specific learning opportunity&#160;?
+ BugKiller_328: for example, search problems which have 'backtracking' as its 'LEARNING OPPORTUNITY'
+ BlaiseEbuth: Not from this location. But you can click the 'tag' corresponding to what you want to practice to get a list of all the puzzles that have it.
+ BugKiller_328: cool, clicking tag will list me the puzzles associated with it&#160;?
+ BugKiller_328: Thanks..
+ BlaiseEbuth: yup
+ BugKiller_328: any location to display list of tags&#160;?
+ BlaiseEbuth: And if you want a full list of tags with the puzzles associated check <a rel="nofollow" class="external free" href="https://chadok.info/codingame/tags_list.html">https://chadok.info/codingame/tags_list.html</a>
+ BlaiseEbuth: ^^
+ BugKiller_328: yes, this is what I want exactly.
+ BugKiller_328: I'm spending much time here these days to learn &amp; have fun..
+ BugKiller_328: @BlaiseEbuth  thanks.
+ BlaiseEbuth: :thumbsup:
+ BlaiseEbuth: THe @ isn't required btw BugKiller_328
+ BugKiller_328: haha..  this is also I didn't know.just write name and it will work&#160;?BlaiseEbuth test.
+ BlaiseEbuth: Yup that works
+ BugKiller_328: my test message is displayed in red on your side&#160;?
+ BlaiseEbuth: Yes
+ BugKiller_328: in my side, no any diff
+ BugKiller_328: ok. thanks. (maybe platform highlights the text which has my nickname )
+ jacek: also when you write your password it will be masked automatically. like ********
+ BlaiseEbuth: Same for your bank card code
+ Counterbalance: wtf <a rel="nofollow" class="external free" href="https://www.codingame.com/learn/%F0%9F%92%A1%F0%9F%92%A1%F0%9F%92%A1%F0%9F%92%A1%F0%9F%92%A1">https://www.codingame.com/learn/%F0%9F%92%A1%F0%9F%92%A1%F0%9F%92%A1%F0%9F%92%A1%F0%9F%92%A1</a>
+ Counterbalance: emojis in urls.. ieuw...
+ BlaiseEbuth: <a rel="nofollow" class="external free" href="https://www.emojicode.org/">https://www.emojicode.org/</a>
+ BugKiller_328: :rolling_eyes:
+ jacek: <a rel="nofollow" class="external free" href="https://img-9gag-fun.9cache.com/photo/aoMq21A_460svav1.mp4">https://img-9gag-fun.9cache.com/photo/aoMq21A_460svav1.mp4</a>
+ BlaiseEbuth: :D
+ jacek: i wonder if that game would fit in CG
+ BlaiseEbuth: Only one command "play"... The branching will not be too important.
+ jacek: you can choose pawn
+ BlaiseEbuth: Oh my! Oo
+ BlaiseEbuth: Simulation will be complicated though with the random...
+ BlaiseEbuth: How to transform a quick fix into a big one:Correct an old version of the code, then copy-paste it over the actual code, and finaly, commit.Good. You can now fix your bullshits.
+ Westicles: Do we know the date when chat is going to die?
+ BlaiseEbuth: There's nothing planned about that.
+ Westicles: Ah, good to hear
+ BlaiseEbuth: CG don't want to spend time updating/recoding the chat, so they spoke about its suppression. But some of the CG devs are against it, so for now it will just stay as it.
+ BlaiseEbuth: Why this question btw?
+ Astrobytes: 2061 it will die
+ Westicles: Us non-mods just have to try and read the tea leaves
+ Astrobytes: We get no special info for the most part unless there's a specific issue
+ Astrobytes: To their credit, CG are pretty transparent in that regard
+ pci: Sokoban -- I finally figured out what I was doing wrong and why I was struggling to solve some of the test cases within 10 seconds...
+ pci: the way I was encoding the state for my visited test was preserving the order of the boxes... by removing that suddenly my 15 second times turned to 1.5 seconds
+ pci: Unfortunately I tried a lot of different algorithms before discovering this... then went back to my original and that was all that was needed. :P
+ Lordam: Hi all, its very embarassing but even after reading the forum about the puzzle "Encryption/Decryption of Enigma Machine" I cannot figure out why the test cases 4 and 5 always fail (ingame all test cases are green). Anyone any hint? :S
+ Lordam: got some help from Westicles already, thanks!!
+ Wontonimo: what?  world chat could go away?
+ Wontonimo: just getting caught up on the chat from hours ago
+ ElderMan: there isn't any bare bones tutorials on here, is there?
+ ElderMan: I'm extremely new.
+ GarethEddies: I'm looking for someone who can provide some feedback on a code challenge submission before I send it for draft submission
+ BobLob: I have some time if you haven't gotten a response yet.
+ Eeveee: World Chat could be great way to learn new things from many people, it just doesn't make sense that they are considering to kill it just because it's difficult to maintain
+ BobLob: I'm just hearing about this tonight, but it would be rather ironic if a company that was trying to sell its expertise in the coding field found  a chat service difficult to maintain.
+ BobLob: Or, maybe maintenance isn't the issue?  Maybe it's lack of use.  There have been 7 messages in the last 6 hours.
+ juice0: is the discord channel more popular?
+ Wontonimo: nope, the discord channel is pretty dead
+ Wontonimo: it gets busy a couple times a week, and very busy during a multi challenge
+ Wontonimo: it = here on world chat
+ bitwiseio: im handycaped, im drunken :D
+ CodeAce: Hello World
+ CodeAce: In Real World 
+ CodeAce: :joy:

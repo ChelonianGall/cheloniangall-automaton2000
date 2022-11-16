@@ -1,0 +1,889 @@
+ thethiny: is this the same struct dude that is a mod or what exactly
+ Mykes: WeirdChamp
+ Westicles: Lisa, they are too long
+ Andriamanitra: yeah i just checked them but saw too much text and got intimidated
+ GroutchKeu: o/
+ blop200: don't bother to read the text jsut read the test cases and code. i have not read anything over 2 sentences long in over 4 years
+ Phorrelle: lol
+ YesORNOYOUCANCHOOSE: kys
+ Ayza: not cool
+ AryanTripathi: sup gm guys
+ Ayza: gm
+ AryanTripathi: aye hru doing ayza
+ Ayza: doing good, hbu
+ rael77: jbc LOXIV
+ Ayza: agreed
+ AryanTripathi: I am doing good ayza
+ rael77: polska gurom 
+ AryanTripathi: just came to see my contribution
+ rael77: Wojtek siembida is greeting from poland 
+ rael77: Text me on facebook Wojtek Siembida im home alone
+ AryanTripathi: bruh
+ jacek: huh
+ rael77: Free dick pics in pv
+ psparsa: bruh
+ psparsa: u should go tinder
+ MrDebugger: xD
+ trique667: hello guys!
+ trique667: boobies?
+ trique667: ANYONE?
+ hassan_bendouz: hello
+ Akex06: hey
+ emh: wowza! bit-optimized normal BFS for connected components with neighbour lookup table is just as fast as my advanced algorithm.. damn.. and I spent so much time on it
+ jacek: premature...
+ emh: hehe
+ emh: still no luck with AVX though.. my parallel version was slower
+ jacek: do you want something to work on? long ago i made something that i thought would give 2x speedup at most, but it gave 10x ;o
+ emh: what do you mean? you made it already or it's not finished?
+ jacek: <a rel="nofollow" class="external free" href="https://godbolt.org/z/v1E5MnKeE">https://godbolt.org/z/v1E5MnKeE</a>  trying to figure out that asm
+ jacek: its not for stc
+ emh: looks like neural network
+ jacek: eeyup
+ jacek: normally there are 14 * hidden lookups in input. but cached version does 7 * hidden, so in theory at most 2x speedup
+ jacek: but i see there is some aggresive autovectorization going on
+ emh: aha. that's nice
+ emh: what are you trying to do exactly?
+ emh: what's the problem with the asm?
+ emh: I probably will stick to StC but just curious
+ jacek: nothing. i just dont understand :p it works better than expected and i dont know how
+ emh: ok hehe
+ emh: I'm going to have a beer to celebrate my shiny new BFS
+ emh: jacek which version is faster, gcc 11 or gcc 12?
+ emh: my code has a problem with gcc 11 and autovectorization. it works on gcc 12. is it same?
+ jacek: dunno, i have only gcc11
+ jacek: i was just curious about 12
+ emh: I installed Intel VTune on Windows so I installed mingw gcc compiler and it came with version 12, so that's why I discovered
+ emh: vtune is good benchmarking tool
+ emh: easy to use as well
+ emh: maybe it's silly to benchmark on a different version than I'm using but well..
+ emh: I hope the hotspots should be mostly the same
+ struct: why not run wsl and run gcc on linux emh?
+ struct: It has problems though, perf and vtune dont really work
+ emh: I do use wsl 2 and gcc normally. just vtune I use mingw
+ emh: I tried also to use vtune with ssh to my wsl as it supports it
+ emh: but it wasn't as good
+ emh: couldn't use hardware measurements and was something funky about results I think
+ struct: yeah
+ struct: it can run but its useless imo
+ emh: anyone experienced any perf increase with #pragma GCC unroll &lt;int&gt; in front of loops? seems to do not much. maybe they are auto-unrolled anyway
+ j4at: Windows users KEKW
+ emh: damn.. what's wrong with gcc. just deleted a lot of unnecessary code for publication and my code took a 30% performance hit.. what gives?
+ jacek: <a rel="nofollow" class="external free" href="https://preview.redd.it/hfnl7xo8yovy.gif?format=mp4&amp;s=702740ed2de621aa05b5e06450e55a1b8a5cdca6">https://preview.redd.it/hfnl7xo8yovy.gif?format=mp4&amp;s=702740ed2de621aa05b5e06450e55a1b8a5cdca6</a>
+ emh: hehe
+ struct: are you using any compiler flags?
+ emh: -g3 -std=c++17
+ emh: and -lpthread (for some reason)
+ emh: it might just be the random seed, I initialize less random stuff after deleting
+ emh: yeah it was depending on seed
+ emh: now only to choose a good seed so my code looks performant on tech.io muhahaha
+ jacek: MSmits why so low in oware :v
+ struct: lol jacek
+ emh: ok I documented my BFS at <a rel="nofollow" class="external free" href="https://tech.io/playgrounds/75040/fast-6x12-connected-components-using-bit-optimized-bfs">https://tech.io/playgrounds/75040/fast-6x12-connected-components-using-bit-optimized-bfs</a>
+ emh: just 600 lines. I removed 1400 lines of failed optimization attempts lol
+ struct: Do you have a bot yet emh?
+ emh: a very old one
+ emh: not using my new techniques
+ struct: ok same as me then
+ struct: I guess we both do the same, waste time on early optimization
+ emh: yeah. it's addictive&#160;:)
+ therealbeef: I don't think the target pragma does anything. arch=native already tells the compiler to use vectorization if possible, iirc.
+ emh: ohh but it does
+ emh: if I remove the avx2 target around popcount code then performance plummets to about half
+ jacek: really?
+ emh: or 50% say. from 7.5M to 5M, on my laptop
+ emh: using gcc 9 in wsl that is
+ therealbeef: but you wrote above the code that setting avx target doesn't matter
+ emh: ahh yes. globally
+ emh: I have local avx targets spread around the code
+ emh: mainly for popcount
+ emh: I should clarify
+ emh: ok updated the article
+ emh: ahh ok yes in this code it's only for popcount
+ therealbeef: hmm, so if i understand correctly there's one popcount implementation in your code and it compiles with and without the avx2 target, but just runs much faster with the target?
+ therealbeef: (although I think the pragma affects all the code after it)
+ emh: therealbeef your first statement is correct, but all the options (including targets) are pushed and popped so I think it only affects the section between push and pop
+ Astrobytes: e.g <a rel="nofollow" class="external free" href="https://gcc.gnu.org/onlinedocs/gcc/Loop-Specific-Pragmas.html">https://gcc.gnu.org/onlinedocs/gcc/Loop-Specific-Pragmas.html</a>
+ emh: Astrobytes interesting
+ emh: therealbeef check <a rel="nofollow" class="external free" href="https://godbolt.org/z/EWYTh8jo3">https://godbolt.org/z/EWYTh8jo3</a>
+ emh: in there I compiled two versions in same code, one calls popcountdi2 while other uses popcount instruction
+ therealbeef: yeah i just did the same&#160;;-) interesting
+ emh: hehe
+ struct: you can also do 
+ struct: __attribute__((__target__("avx2")))inline uint8_t mypopcount (const __uint128_t&amp; data) {
+ struct: instead
+ emh: ahh ok thanks
+ emh: I'll just keep it as is though
+ Crosility: The Spider Attack bot challenge is so fun :P
+ struct: sup Astrobytes
+ struct: are you joining the next contest?
+ therealbeef: hmm, but when i add arch=native, without the avx target, godbolt gives me the optimized version
+ Astrobytes: hey struct, yeah will check it out at the least
+ Astrobytes: starts tomorrow right?
+ struct: yeah
+ struct: as a normal pragma therealbeef?
+ struct: or as a compilation option?
+ Astrobytes: Been playing Diablo Immortal in my ex-CG free time, guess I can take a break from it for 11 days :P
+ struct: Is that the new one?
+ Astrobytes: Yeah
+ struct: is it any good?
+ Astrobytes: Open Beta
+ struct: I also saw they are making diablo 4
+ Astrobytes: I love it. What I hate is the MTX part, talk about pay to win
+ Astrobytes: The game itself is awesome
+ struct: I heard a bit about the p2w stuff
+ struct: but this is becoming the norm
+ Astrobytes: It takes it to the extreme, MTX users are way OP
+ therealbeef: only when using it as compilation option indeed struct, not as pragma option
+ struct: Countries need to start doing what netherlands did
+ Astrobytes: and yeah, D4 next year
+ struct: and ban lootboxes
+ Astrobytes: Indeed struct. Though the big corps don't care, they just target other markets.
+ Crosility: Lootboxes, gachas, NFTs that have 0 value...
+ Crosility: Yup, astrobytes is right.
+ Astrobytes: I feel sad for devs who have to work on this crap, not like they make money from it
+ Astrobytes: anyway. gotta go for now, back later&#160;:)
+ struct: cya
+ Crosility: :v:
+ VisualDev-FR: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/2460548c866ae26228708ea157d3b9d25323bb7">https://www.codingame.com/clashofcode/clash/2460548c866ae26228708ea157d3b9d25323bb7</a>
+ eulerscheZahl: Astrobytes leaves, /me joins
+ eulerscheZahl: hi
+ struct: hi
+ emh: hello
+ jacek: "Countries need to start doing what netherlands did" legalizing some stuff?
+ eulerscheZahl: more bike lanes!
+ emh: more SIMD lanes!
+ therealbeef: i think by now weed is more legal in other countries than in the netherlands
+ eulerscheZahl: who cares about weed?
+ emh: the noble steed
+ therealbeef: not much else is legal there&#160;;)
+ emh: the noble steed. he eats out of greed. soon he can't plead. he switched to drinking honey mead. I hope I soon will take StC lead
+ struct: I hope I can finish it someday
+ eulerscheZahl: but first: contest
+ struct: yes
+ struct: im currently doing csb to pass some time
+ struct: yesterday I managed to apply GA on Search race but its not that good
+ struct: maybe I need to fit parameters or something
+ struct: I never did GA before
+ jacek: gah!
+ struct: it plays better than monte carlo but worse than beam
+ jacek: comparing half-assed ga to optimized your search eh
+ struct: my beam is not optimized
+ struct: its just a copy paste from my spring challenge 2021 b eam
+ struct: beam*
+ Wontonimo: GA is very sensitive to parameter tweaking 
+ eulerscheZahl: my beam is: create lots of nodes =&gt; LINQ OrderBy(...).Take(...)
+ eulerscheZahl: good enough, not the bottleneck
+ eulerscheZahl: for chokudai you should use a priority queue for sure
+ eulerscheZahl: .net got one just recently. but not available on CG yet
+ struct: I dont use priority queue
+ struct: I use nth_element instead
+ struct: and I alternate between 2 arrays so I dont have to copy
+ eulerscheZahl: i just write slow and inefficient code, as always
+ struct: For most of the games it doesnt matter that much
+ therealbeef: going fast is no use if you're going in the wrong direction
+ struct: I mostly do it because I enjoy it
+ struct: I submitted my c4 bot a few days ago with 5% of the current performance and it still placed around the same rank
+ eulerscheZahl: i know. but then you don't utilize your sim and combine it with a proper scoring
+ darkhorse64: Because you enjoy saying to euler your code runs 10x faster than his
+ eulerscheZahl: no, struct doesn't have a rivalry with me
+ eulerscheZahl: illedan would surely tell me if his bot was faster
+ jacek: your bubble sort makes 10x more operations per second than quicksort :tada:
+ emh: haha
+ Astrobytes: back again
+ struct: wb
+ Tourteau: Hi, just got a weird thing on a clash, seems to get the good output but it says im wrong. Any idea where i could get that checked and see if im the problem&#160;?
+ Astrobytes: <a rel="nofollow" class="external free" href="https://eulerschezahl.herokuapp.com/codingame/puzzles/">https://eulerschezahl.herokuapp.com/codingame/puzzles/</a>
+ Astrobytes: search for it there
+ Tourteau: Thanks will try to see that
+ jacek: its good CG staff think about such stuff
+ Astrobytes: :salt:
+ eulerscheZahl: somehow users don't understand that they can search for more than 1 word i think
+ eulerscheZahl: "tree" is not the best search
+ Astrobytes: :D
+ eulerscheZahl: and the neighbor is still power-washing his garden, going on for days&#160;:(
+ eulerscheZahl: damn Kärcher
+ Astrobytes: Ouch. I empathise with that, several of mine do this throughout the summer months
+ Tourteau: I can see it without stress and seems i skipped reading a line about what to needed to be done multiple time...
+ Tourteau: I searched "tree" but i found it easily in the list ^^
+ Astrobytes: :tada:
+ jacek: search tree and all i found was connected acyclic graphs
+ Astrobytes: :smirk:
+ wlesavo: si this power-washing very loud or just anoying?
+ wlesavo: is*
+ Astrobytes: I am guessing both :P
+ Astrobytes: playing tomorrow wlesavo?
+ struct: I would tell euler to put some music on but he doesnt like music iirc
+ Astrobytes: correct&#160;:)
+ jacek: he doesnt like fun
+ Astrobytes: that's a bit harsh lol
+ jacek: <a rel="nofollow" class="external free" href="http://img2.joyreactor.com/pics/post/auto-9gag-1200635.jpeg">http://img2.joyreactor.com/pics/post/auto-9gag-1200635.jpeg</a>
+ Astrobytes: ffs :D
+ jacek: schmetterling!
+ eulerscheZahl: you better close your window when you are in a business call. just this permanenet background noise
+ wlesavo: Astrobytes i planning to, but for sure wont have a lot of time for this one, will have to miss both weekends, so i hope it will also be available in multi
+ Akex06: hey
+ Astrobytes: Ah I see. I think the jury is still out on whether it will return since it's sponsored, hopefully it will.
+ struct: The question is will it have fog?
+ Astrobytes: Most likely :P
+ wlesavo: and RPC elements =)
+ jacek: RPC?
+ Astrobytes: RNG?
+ eulerscheZahl: i think it will not be the card game you were talking about
+ eulerscheZahl: because that's <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/19749e3c7941292b90f1bd77005c29eabd039">https://www.codingame.com/contribute/view/19749e3c7941292b90f1bd77005c29eabd039</a>
+ Astrobytes: Ah Nimmt/Take 6
+ Astrobytes: Haven't played that in years
+ eulerscheZahl: same
+ eulerscheZahl: but the more players, the more fun it gets
+ wlesavo: i meant rock paper scissors, and now i realize it have different letters :smiley:
+ Astrobytes: Yes, true
+ Astrobytes: wlesavo :rofl:
+ eulerscheZahl: SSP
+ eulerscheZahl: Stein Schere Papier
+ struct: maybe you can recognize the board game they played on the video astro
+ Astrobytes: Statutory Sick Pay
+ struct: <a rel="nofollow" class="external free" href="https://imgur.com/Q93cXXx">https://imgur.com/Q93cXXx</a>
+ Astrobytes: well it aint nimmt
+ eulerscheZahl: some map in the center
+ eulerscheZahl: but not Siedler von Catan
+ eulerscheZahl: i always wonder if you understand me when i name these games. a lot of board games are German, so that's their original name
+ Astrobytes: looks *vaguely* familiar, as in I may have seen it before but I don't think I've played it
+ Astrobytes: euler, that's called Catan or Settlers of Catan
+ Astrobytes: not hard to work out :DSometimes I understand the German, if not I have to look it up
+ eulerscheZahl: i totally could have guessed the "Settlers of" part
+ Astrobytes: hah!
+ VizGhar: euler. u will attend the contest? :P next week off work?
+ eulerscheZahl: we'll see. i plan to give it a try
+ eulerscheZahl: if i take off, it must be on really short notice, my boss is about to return from a 2 week vacation so i couldn't place a request
+ eulerscheZahl: and i want to see the game first before i decide
+ VizGhar: sure... Or maybe you will just get "sick"
+ eulerscheZahl: no, would never do that
+ Astrobytes: Good work ethic; I approve
+ eulerscheZahl: my colleagues know about me being active on CG, too easy to spot me playing while sick&#160;;)also morally wrong
+ VizGhar: :thumbsup:
+ eulerscheZahl: and i was sick for 2 days just recently
+ nyancat: psyduck
+ Astrobytes: The collarbone?
+ eulerscheZahl: yes, wouldn't recommend
+ Astrobytes: Indeed. Not a good thing to break.
+ Astrobytes: Stick to fingers and toes instead.
+ VizGhar: I got lucky now... I switched to part-time (because of newborn) and school is already over... I'll have a little bit of time for this contest
+ eulerscheZahl: break has 2 meanings - and both fit here
+ eulerscheZahl: oh, congrats Viz
+ VizGhar: :thumbsup: tnx
+ Astrobytes: Yes, congrats indeed&#160;:)
+ Astrobytes: I notice #de is more active than ever :P
+ eulerscheZahl: keeping up traditions for a last time
+ eulerscheZahl: before chat dies permanently
+ Astrobytes:&#160;:(
+ struct: at least I think we still have another contest with chat
+ eulerscheZahl: hopefully
+ Astrobytes: :fingers_crossed:
+ R4N4R4M4: #sncf
+ thethiny: yo guys I would appreciate the feedback
+ thethiny: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/21597f3e678f45d631f55249d2784d107d0ad">https://www.codingame.com/contribute/view/21597f3e678f45d631f55249d2784d107d0ad</a>
+ Astrobytes: I don't do clashes sorry. Idea seems OK on a quick viewing
+ VizGhar: and now you wait
+ Astrobytes: indeed
+ jacek: ceasar cipher?
+ Astrobytes: with an xor flavour
+ Astrobytes: an xor or a xor? :thinking:
+ TrebledJ: the xor? :thinking:
+ VizGhar: Just dont use in sentence and you are good
+ Astrobytes: :D
+ VizGhar: You won't impress them women using proper a/an before xor in any sentence
+ jacek: thats what she said?
+ Astrobytes: lol
+ VizGhar: Idk jace k never tried :P
+ eulerscheZahl: an houra unit
+ Astrobytes: daft language isn't it :D
+ TrebledJ: I suppose it depends on how you pronounce xor: (a) sore or (an) ex o ar
+ eulerscheZahl: Latin has less exceptions in their rules
+ eulerscheZahl: *German accept* ix-or
+ eulerscheZahl: accent
+ Astrobytes: Yeah, though I say 'zor' but usually write as if it's 'x-or' in accordance with grammar&#160;:)
+ eulerscheZahl: "z" - zett or cee?
+ Astrobytes: zed :P
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://i.imgur.com/7uQ86k6.png">https://i.imgur.com/7uQ86k6.png</a>order ID 18, so low
+ eulerscheZahl: if i ever build such a website, i will initialize the ID with a non-0 just to make it look more busy than it really is
+ Astrobytes: :D
+ VizGhar: maybe they just reuse IDs :P
+ VizGhar: sounds fun
+ Astrobytes: lol, what could *possibly* go wrong with that :D
+ Astrobytes: Sounds like something from dailywtf
+ eulerscheZahl: great website
+ Astrobytes: It really is.
+ eulerscheZahl: i should quote it more often
+ Astrobytes: The 'brillant' Paula Bean still makes me laugh after all these years
+ HugoXu: 0
+ eulerscheZahl: still not sure if Bean is her last name or Java Bean as a design concept
+ Astrobytes: Java Bean
+ jacek: w00t <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/641321880">https://www.codingame.com/replay/641321880</a>
+ antiwonto: [auto] Hey jacek, here is a :taco: for loggin in today while it is quiet.  You now have 19 tacos
+ jacek: :tada:
+ jacek: :taco: Astrobytes
+ antiwonto: [auto] Spread the love.  Give tacos to someone else, not someone you spam with tacos.
+ jacek: :rage:
+ jacek: :taco: derjack
+ antiwonto: [auto] jacek has awarded derjack 10 tacos. derjack now has 45 taco. jacek now has 20 taco
+ Astrobytes: what? I haven't even been here in ages, how can I get taco spammed
+ struct: :taco: jacek
+ antiwonto: [auto] Spread the love.  Give tacos to someone else, not someone you spam with tacos.
+ struct: :taco: antiwonto
+ antiwonto: [auto] That's a bot.  Bots don't eat tacos
+ jacek: :taco: Automaton2000
+ antiwonto: [auto] Sorry but you can only award tacos once per day
+ Automaton2000: but you need to use it for some reason
+ struct: I hate csb viewer, always breaking
+ Anth: How can I find a link to the green circle contest?
+ struct: <a rel="nofollow" class="external free" href="https://www.codingame.com/contests/green-circle">https://www.codingame.com/contests/green-circle</a>
+ Anth: where on the site can I find a link to the green circle contest?
+ eulerscheZahl: activities =&gt; events
+ Anth: ty
+ eulerscheZahl: or twitter link at the bottom
+ TimothyAlexisVass: ... <a rel="nofollow" class="external free" href="https://youtu.be/FCXA4ft5Weo">https://youtu.be/FCXA4ft5Weo</a> This was really funny seeing how he got genuinely hypnotized.
+ TimothyAlexisVass: Had to share it&#160;;)
+ eulerscheZahl: expected hypnotoad, now i'm disaapointed
+ eulerscheZahl: dinner time
+ Astrobytes: guten appetit
+ reaper_007: :taco:
+ antiwonto: [auto] ':taco:' was defined as ' A currency to some, sustenance for others '
+ Razovsky: :taco:
+ antiwonto: [auto] ':taco:' was defined as ' A currency to some, sustenance for others '
+ TimothyAlexisVass: :taco: Dynamolten.
+ antiwonto: [auto] Hey TimothyAlexisVass, here is a :taco: for loggin in today while it is quiet.  You now have 12 tacos
+ TimothyAlexisVass: :taco: Priler
+ Dynamolten.: :taco: Timothy
+ TimothyAlexisVass: :taco: slempel
+ TimothyAlexisVass: Hmm
+ jacek: :upside_down:
+ antiwonto: [auto] ':upside_down:' was defined as ' ɥǝllo '
+ jacek: oh
+ Astrobytes: :taco: jacek
+ antiwonto: [auto] Spread the love.  Give tacos to someone else, not someone you spam with tacos.
+ Astrobytes: :taco: TimothyAlexisVass
+ antiwonto: [auto] Astrobytes has awarded TimothyAlexisVass 10 tacos. TimothyAlexisVass now has 22 taco. Astrobytes now has 45 taco
+ Westicles: :taco: BlaiseEbuth
+ antiwonto: [auto] Westicles has awarded BlaiseEbuth 10 tacos. BlaiseEbuth now has 56 taco. Westicles now has 81 taco
+ jacek: Automaton2000 do you like tacos?
+ Automaton2000: this isn't the place probably. try codecademy.com , 'the coding train' on youtube, or first levels in codewars.com
+ jacek: oh my
+ Astrobytes: heh heh
+ jacek: Automaton2000 where is your MLP
+ Automaton2000: can i ask a question
+ TimothyAlexisVass: :taco: Westicles
+ antiwonto: [auto] TimothyAlexisVass has awarded Westicles 10 tacos. Westicles now has 91 taco. TimothyAlexisVass now has 23 taco
+ Dynamolten.: i like :taco:
+ TheRapture: I like big  :taco:
+ jacek: wheres MSmits when you need him :unamused:
+ Astrobytes: not here?
+ jacek: his code doesnt work
+ Astrobytes: which code?
+ jacek: oware endbooks
+ Astrobytes: ah, I still haven't got around to that
+ Astrobytes: I did save it though :P
+ Astrobytes: definitely not pebcac?
+ jacek: unlikely
+ jacek: there are some parts i dont get
+ jacek: like why &lt; 11, where there are 12 houses
+ jacek: maybe he obfuscated for trollz
+ Astrobytes: isn't that seedcount?
+ GNye22: Does anyone know if there's a way to run your program normally through the built-in IDE that will print everything out rather than just stop after the first output doesn't match what its looking for?
+ jacek: print to stderr
+ struct: print to stderr
+ jacek: slowpoke
+ Astrobytes: oh no I see it (just opened the code)
+ GNye22: ohhhhhh never thought of that
+ GNye22: thx guys
+ jacek: it says in the comments
+ YurkovAS: endbook show diff between scores
+ Astrobytes: yeah but he's got house = 0; house &lt; 11; house++
+ YurkovAS: &gt; 0 = win&lt; 0 = lose
+ jacek: huh
+ Astrobytes: now I'm confused too.
+ struct: what are you talking about?
+ Astrobytes: no one knows
+ Astrobytes: Oware endbooks
+ Astrobytes: Specifically MSmits code to generate
+ struct: the playground?
+ jacek: eeyup
+ Astrobytes: Yep
+ jacek: and the code crashes when i implement ApplyMove()
+ jacek: capital function names... yuck
+ YurkovAS: if scores: 5 | 5endbook give: +5final scores: 5+5 | 5this is not solved, we need 25+ score 
+ jacek: :drooling_face:
+ jacek: oh my &lt; Caturday&gt; 1 BTC - 20818 USD, 19789 EUR, 16902 GBP
+ struct: still dropping?
+ Astrobytes: isn't the score here independent from the actual game score?
+ jacek: yes, only the diff
+ Astrobytes: woohoo, 1 lucky win against tric in LoA
+ jacek: oh my
+ eulerscheZahl: should have sold my BTC long ago
+ Astrobytes: are there any board games you haven't pwned jacek?
+ eulerscheZahl: there are some he has ponied
+ eulerscheZahl: right, derjack?
+ Astrobytes: lol
+ jacek: this isnt even my final form
+ Astrobytes: I don't get this cryptocurrency madness. It's just a more or less unregulated stock market with very little protection for the investor.
+ Astrobytes: In terms of financial decisions, unless you are already well seasoned in the stock market and finance it's idiotic to bother.
+ Astrobytes: The tech part, sure.
+ eulerscheZahl: i bought 1 BTC for 440€ or so years ago
+ eulerscheZahl: spent most of it
+ eulerscheZahl: then someone raided share-online-biz&#160;:(
+ Astrobytes: I like the shady part. Lots of nice things you can buy with crypto these days :zipper_mouth:
+ Astrobytes: My mate Thomas works in finance in Belgium, and he's involved with helping customers 'not do stupid things' (his words). And he has a lot of work involving  crypto investment these days, which irks him somewhat.
+ eulerscheZahl: and then there are the (mostly elderly) folks buying BTC or gift cards because some tax agent or tech support told them on the phone
+ Astrobytes: Yeah, predatory finance 'advisors' - where have we seen that before? :D
+ jacek: in the mirror
+ <b>**jacek runz</b></p><p><img src="/a/60413902297900" /> Astrobytes: lol, I wouldn't call myself a financial advisor in any capacity
+ Astrobytes: I can manage my own, not yours
+ Astrobytes: we get CP for this sponsored contest?
+ jacek: apparently yes
+ struct: yes
+ Astrobytes: was just reading eulers post in de
+ Astrobytes: how do we know?
+ struct: thibaud said so
+ jacek: :scream:
+ Astrobytes: thanks struct
+ Astrobytes: another win against tric :tada:
+ Westicles: still not clear if it will be available after
+ Astrobytes: yeah, always the way with sponsored
+ jacek: :tada:
+ Astrobytes: and another!
+ Astrobytes: struct: silly question but you have mcts in LoA right?
+ struct: no
+ struct: minimax
+ Astrobytes: ahhh
+ jacek: as you can see, i have book in loa :v
+ Astrobytes: woohoo 3rd win against tric
+ jacek: mcts?
+ antiwonto: [auto] 'MCTS' was defined as ' Monte Carlo Tree Search '
+ Astrobytes: Yeah jacek, it's nice!
+ Astrobytes: no to mcts
+ Astrobytes: I need to rewrite the whole search tbh, but I made a few changes to improve it today. Just alphabeta
+ jacek: cout &lt;&lt; " book". kthxbai
+ Astrobytes: took me about an hour to understand my code anyway, 8 months since I looked at it
+ jacek: IIRC when i used alphabeta, i got popcount(center 6x6) - number of independent chains as eval
+ struct: my eval is pretty bad
+ struct: is like piece count or something
+ Astrobytes: Connected groups are the strongest param in mine yeah
+ Astrobytes: But needs to be better. Made some notes for after the contest
+ jacek: that one miss tho <a rel="nofollow" class="external free" href="https://streamable.com/whm56t">https://streamable.com/whm56t</a>
+ Astrobytes: looking good! Did you submit?
+ Astrobytes: haven't checked that game in a long while
+ jacek: i didnt submit anything new in that game
+ jacek: still playing around with evolution strategies
+ struct: good game to avx collisions
+ struct: 8+8+8
+ Astrobytes: ah I see
+ Astrobytes: Yes struct, in fact, there is an example somewhere :thinking: :P
+ jacek: can you avx search race?
+ struct: yes
+ struct: I can play 8 games at once
+ struct: or you can even try 8 moves at once instead
+ struct: not that hard to do
+ struct: the only hard part is handling the collisions, but its pretty similar to normal version
+ YurkovAS: or hard code moves (book) :smiley:
+ struct: There are 2 options when avxing csb as far as I know
+ struct: you either play 8 games at once, not that usefull
+ struct: or avx the collisions
+ DomiKo: hmmm
+ DomiKo: so struct you can check collisions with 8 different checkpoints at once? and then update them?
+ struct: yes
+ DomiKo: I understand how you can check if pod collide with checkpoint
+ DomiKo: but how would you update them
+ Astrobytes: YurkovAS: Anyone who did it offline did that&#160;:)
+ struct: What do you mean update?
+ struct: like change the id?
+ DomiKo: yeah
+ DomiKo: like move to the next checkpoint
+ DomiKo: ohhh
+ struct: so you have 8 pods
+ struct: ok I guess you understand
+ Astrobytes: heh heh, I think we all heard the penny drop there
+ struct: For search race it might be usefull to play 8 at once for some kind of searches
+ DomiKo: So let me check. You will store and vector of ids. And when you check collisions you basically do vector++ but with mask
+ Astrobytes: DomiKo, YurkovAS: playing tomorrow?
+ jacek: GA is quite parallelizable
+ struct: for csb if you use smitsimax its useless, avxing collisions only its way better
+ DomiKo: Astrobytes: ofc all day long
+ struct: well either that or you can do
+ YurkovAS: Astrobytes yes
+ struct: if you have for example
+ struct: __m256 nc_x, nc_y
+ struct: nc[0] = value
+ Astrobytes: Nice&#160;:)
+ struct: it works
+ struct: I didnt do it that way on csb
+ struct: let me  check my old old code
+ DomiKo: kk
+ lolispakh: Hello am new here
+ Astrobytes: hi new here
+ jacek: :door:
+ struct: so to load checkpoints I used gather on csb
+ struct: pods[i].checkpointX = _mm256_i32gather_ps(this-&gt;checkpointsX, pods[i].nextCheckpointId, sizeof(int32_t));pods[i].checkpointY = _mm256_i32gather_ps(this-&gt;checkpointsY, pods[i].nextCheckpointId, sizeof(int32_t));
+ struct: to update
+ struct: I used  mask to update nextCheckpointId
+ struct: increase if it collided
+ struct: And the use gather again
+ struct: to load based on new nextcheckpoint id
+ struct: then* use gather
+ PedroRocs: Salve Salve pessoal, novo aqui.
+ DomiKo: got it
+ struct: _mm256_blendv_ps(nextcheckpointId + 1, nextCheckpoint, CollideMask);
+ struct: I might try to write it on search race just to test
+ struct: Hi PedroRocs
+ Astrobytes: Nice.
+ struct: are you going to try this on search race DomiKo?
+ struct: or something else?
+ Astrobytes: oí Pedro
+ DomiKo: I was just curious
+ struct: ah ok
+ DomiKo: One day I will start AVXing stuff
+ struct: to avx collisions only its a bit harder imo
+ struct: instead of playing 8 games
+ struct: you play 1 game but calculate 8 collisions at once each time
+ Astrobytes: Same DomiKo; I experiment with it but lazy to apply to my bots :D
+ jacek: i rely on compiler smartness
+ DomiKo: right now I've only done AVX for NN, so very simple operations
+ struct: There is no way that compiler is smart enough to auto vectorize collisions
+ jacek: i rely on autovectorizing for loops
+ struct: ah 
+ struct: you dont use avx at all jacek?=
+ struct: beside auto vectorization?
+ jacek: no
+ DomiKo: no AVX for NN?
+ jacek: im just a poor boy from a poor family
+ struct: auto vectorization works if done well DomiKo
+ Astrobytes: (he needs no sympathy)
+ jacek: well today i tried to analyze why my trick gave super speedup
+ Astrobytes: trick?
+ struct: did you manage to find why?
+ DomiKo: trick?
+ DomiKo: Astrobytes :D
+ Astrobytes: hehehe
+ jacek: <a rel="nofollow" class="external free" href="https://godbolt.org/z/eM8efToWE">https://godbolt.org/z/eM8efToWE</a>
+ jacek: the cached version is 10x faster
+ DomiKo: that's a lot of code
+ jacek: by simple logic, its 7 * hidden versus 14 * hidden, so at most 2x
+ Astrobytes: 10?
+ jacek: aside from avx stuff, maybe it fits into cache
+ Astrobytes: hm, yes that's possible. Did you check the asm side by side?
+ jacek: well, it gave over 2.5x rollouts in oware at some point
+ jacek: yes but im too dumb for asm
+ Astrobytes: you can figure it out
+ Astrobytes: start looking at the asm for some snippets of your code, take a look at the standard for the platform,&#160;?, profit
+ Astrobytes: all seriousness though, take something like a function with a loop, then try to figure out what's going on.
+ Astrobytes: then go back to whatever calls that function and look at that.
+ Astrobytes: if possible, run through a debugger so you can set breakpoints and analyze it easier
+ Astrobytes: once you know what's in memory addresses it's a lot easier to read
+ jacek: :drooling_face:
+ Astrobytes: registers I meant, also other addresses
+ jacek: ill just check the tutorial <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=AQ2U4zXyDPE">https://www.youtube.com/watch?v=AQ2U4zXyDPE</a>
+ DomiKo: bro
+ DomiKo: never click links ehhh
+ Astrobytes: I'm not clicking any of your YT links jacek
+ jacek: you clicked it, i know
+ Astrobytes: neeeope
+ DomiKo: jacek I know why!
+ jacek: why what
+ DomiKo: why it is that much faster
+ jacek: huh!?
+ DomiKo: it makes sense
+ DomiKo: cache [k * hidden i] -&gt; here you iterate through the cache, looking at each cell, 1, 2, 3.... 
+ jacek: woah!
+ DomiKo: so when you are using hiddenWeights, you are loading a lot of stuff to cache, and you don't use it 
+ Astrobytes: good shout DomiKo
+ DomiKo: but in cache, you load in to real cache and use it all! so you don't waste anything
+ DomiKo: thanks :D
+ jacek: nice. now to use it in other board games
+ Astrobytes: Kill DomiKo now
+ Astrobytes: :P
+ DomiKo: :neutral_face:
+ Astrobytes: kidding!!!
+ Astrobytes: giving jacek any help is like digging your board game grave!
+ DomiKo: by looking at this code, I don't know if I ever will have a chance at oware&#160;:/
+ Astrobytes: jacek: I still advise doing what I said with the asm, it's interesting
+ Astrobytes: DomiKo: I've kinda given up since it's all NN / database dominated now
+ jacek: DomiKo is using NN
+ DomiKo: yeah...
+ jacek: and MSmits counterbooked top 15
+ struct: jacek check perf
+ DomiKo: I would say I'm trying to use NN
+ struct: it gives cache misses
+ struct: cache hits and such
+ Astrobytes: that tells you how long since I even looked at the lb
+ struct: might help if you dont want to read asm
+ Astrobytes: but reading asm is educational!
+ jacek: i wonder if i do the NN forward kinda backwards. probably i should transpose some things
+ struct: but DomiKo is right
+ struct: this is your indexes you are checking
+ struct: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/c95fc348-2ff2-4f04-95ec-6733b2979585">http://chat.codingame.com/pastebin/c95fc348-2ff2-4f04-95ec-6733b2979585</a>
+ struct: on first iterations
+ DomiKo: cache misses won't say you much
+ DomiKo: it still will be less &lt;1%
+ DomiKo: Astrobytes my score in lb, won't tell you that I'm using NN :sweat_smile:
+ DomiKo: I wasted many hours, but still it doesn't work that well
+ DomiKo: Secrets of self play are still before me
+ Astrobytes: DomiKo: it does, because myself, darkhorse (and tric) had solid bots second only to MSmits around where you are now. In fact I was 9th at some point. Then the NNs took over :D
+ Astrobytes: OldJohn is booking too?
+ jacek: unlikely
+ Astrobytes: He had NN previously
+ DomiKo: I believe he said no
+ jacek: i think ~top 15 (except MSmits) are NN only
+ Astrobytes: Just the similarity in scores with MSmits
+ jacek: he even booked me. but i once again trained from scratch and scratch his book ~
+ Astrobytes: robo top though, come on people
+ Astrobytes: 2021 submit
+ DomiKo: Robo NN too strong
+ Astrobytes: we said that about recurse nn
+ DomiKo: still top1
+ TheRapture: whats your favorite coding language
+ Astrobytes: Morse
+ DomiKo: Robo in Spring 2021 PM, wrote number of iterations, and its huge... my NN is sooo slow compared to his
+ TheRapture: Have u tried Rust
+ jacek: and i told him about one-hots&#160;:(
+ Astrobytes: Yeah, to be expected tbh, since he spent a lot of time on a framework, and yes jacek, shame on you
+ DomiKo: about one-hots? about that caching or in general?
+ jacek: he had 14 inputs float
+ DomiKo: ohhh ok
+ jacek: he said it took lest than 10% games to surpass his old bot
+ BugKiller_328: hi, guys, how to list all puzzles which are about specific skill?
+ BugKiller_328: for example, list all puzzles about BFS
+ Astrobytes: click on the tag
+ Astrobytes: if it has one
+ BugKiller_328: where's the page which lists all available tags then?
+ Astrobytes: lol there isn't one
+ TheRapture: can u help me with there is no spoon
+ Astrobytes: BugKiller_328: this might be more useful
+ Astrobytes: <a rel="nofollow" class="external free" href="https://eulerschezahl.herokuapp.com/codingame/puzzles/">https://eulerschezahl.herokuapp.com/codingame/puzzles/</a>
+ TheRapture: Thanks
+ TheRapture: owe u one
+ BugKiller_328: @Astrobytes: Thanks.
+ Astrobytes: BugKiller_328 np&#160;:)
+ Westicles: easier to list puzzles not about bfs
+ Astrobytes: :D not wrong
+ Westicles: the #fr are complaining I approved too many crap puzzles :P
+ DomiKo: :joy:\
+ Westicles: there has been quite a run of heavy math puzzles.  maybe I should break out 1 million digits of pi again...
+ struct: why stop at 1Million?
+ TheRapture: U know whats a annoying
+ jacek: try pi backwards
+ DomiKo: <a rel="nofollow" class="external free" href="https://cloud.google.com/blog/products/compute/calculating-100-trillion-digits-of-pi-on-google-cloud">https://cloud.google.com/blog/products/compute/calculating-100-trillion-digits-of-pi-on-google-cloud</a>
+ TheRapture: WOWOWOWOOW
+ Westicles: hmmm, well it does seem to work up to 11 million, but might be tough in slower languages
+ Astrobytes: I liked zeno's BBP puzzle
+ Westicles: BBP?
+ Astrobytes: Bailey-Borwin-Plouffe
+ Astrobytes: *Borwein
+ Astrobytes: For calculating nth digit of pi
+ Westicles: oh, yeah.  I don't know why everybody else gets to make math puzzles but all the autists go into "purity of the programming site" mode when I make one
+ Astrobytes: cause they hate you?
+ Westicles: oh, well yeah
+ Astrobytes: :rofl:
+ jk_java: anyone interested in music and socre notation?
+ jk_java: got a music notation Clash of code in contributions, happy for upvotes
+ jk_java: (y)
+ jk_java: :musical_score:
+ Astrobytes: I am but I hate clashes :DJust wait patiently and approval/comments/critique/disapprovals will come
+ jk_java: hi hi&#160;:)
+ jk_java: wait patiently... for 1... 2...   1234 ta taaaa
+ Astrobytes: :D
+ Westicles: lots of people don't bother with WIPs
+ Astrobytes: I do for multis
+ jacek: have you seen backgammon
+ Astrobytes: Is it almost ready?
+ jk_java: just turned it from WIP to Ready
+ jk_java: lets see if others think so as well
+ Astrobytes: heh I was talking to jacek but ok, you will get more views this way jk_java&#160;:)
+ jk_java: oh
+ jk_java:&#160;:) sry
+ Astrobytes: lol, all good&#160;:)
+ Astrobytes: struct, jacek: 28.09 and 5th place in LoA. Just you wait till I bitboard it
+ struct: nice
+ jk_java: codigame is fun, haven't been coding profesionally for 10+ years, forgot almost how much fun it is
+ Astrobytes: do you do the multiplayers and contests jk_java?
+ jk_java: i am new here, mostly clash
+ Astrobytes: I highly recommend the multiplayer bot programming and/or optims too
+ jk_java: thanks , will try
+ Astrobytes: Nice learning opportunity and fun too
+ Astrobytes: there's a competition tomorrow jk_java
+ Astrobytes: 11 day contest
+ jk_java: ok, will try that, thanks
+ Astrobytes: Nemáte zač
+ chewskot: pěkný
+ Py47: when you get 100% on a clash math do you win smtg?
+ jk_java: your Czech is nice&#160;:)
+ Astrobytes: points
+ chewskot: díky xd
+ jk_java: ahoj to chewskot
+ chewskot: ahoj jk_java
+ Astrobytes: Ne. I only know a little bit. At an old workplace we had an office in Lomnice nad Popelkou 
+ Astrobytes: I spent a few months there in total
+ jk_java: CZ is a nice place to visit, "dobre pivo"
+ jacek: czech language sounds childish for poles
+ Py47: thanks @Astrobytes
+ jk_java: polish sound funny to czechs&#160;:)
+ chewskot: true
+ jk_java: good on poland re: ukraine btw
+ Astrobytes: jk_java ano vím! (i hope I got that right)
+ jk_java: @astrobytes ano
+ Astrobytes:&#160;:)
+ Astrobytes: Py47: for what?
+ Astrobytes: oh I see, my bad&#160;:)
+ jacek: you havent bitboarded loa yet? oO
+ Astrobytes: No. Still my primitive bot
+ jacek: can it beat MIA tho
+ Astrobytes: MIA?
+ jacek: the one from mcts solver&#160;:?
+ Astrobytes: aha, forgot about that
+ jacek: no one forgets mcts solver paper
+ Astrobytes: I don't forget a certain part of the paper
+ jacek: hm?
+ Astrobytes: the pseudocode
+ jacek: :scream:
+ Astrobytes:&#160;;#'
+ Astrobytes: '#
+ Astrobytes: sorry
+ Astrobytes: cat
+ Astrobytes: Monte Carlo paw search
+ Astrobytes: jacek: a draw with you
+ Astrobytes: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/641379947">https://www.codingame.com/replay/641379947</a>
+ struct: delete
+ Astrobytes:&#160;:)
+ Astrobytes: struct I was robbed of 3rd place
+ struct: by who?
+ Astrobytes: the only 2 battles I lost against Eric
+ Astrobytes: pulled me back down
+ Astrobytes: 2 lost, 9 won
+ struct: well if you submit again you should pass him
+ Astrobytes: Perhaps. I'm a little tired though, I might be tempted to make unwise alterations
+ Astrobytes: resubmitted. Attention on youtube livestream rn so shouldn't be too tempted :D
+ struct: gl
+ Astrobytes: don't expect much tbh, the only thing I'm tweaking rn is eval, bitboarding will improve the bot I think
+ Astrobytes: your fault this time struct :D
+ struct: sorry :p
+ struct: My bot plays always the same game
+ Astrobytes: hahaha
+ struct: or almost always
+ Astrobytes: I have a version that annihilates you but it doesn't fare so well against others
+ Astrobytes: anyway, I'm happy with some improvement there
+ Astrobytes: 10+ points improvement
+ struct: thats good
+ struct: and without bitboards
+ Astrobytes: Yeah.
+ Astrobytes: Could probably waste time on making a better version of this but it is begging for a bitboarded version, much easier
+ Astrobytes: *to work with
+ struct: bitboards are tricky here
+ Astrobytes: doesn't look so tricky, whats the catch?
+ struct: the move gen is not so simple
+ struct: you need to take into account distance
+ struct: its not too bad
+ struct: I use lookup
+ struct: U64 RAYS[64][4]
+ Astrobytes: seems doable, nothing too harsh
+ struct: yeah
+ Astrobytes: anyways, off to chill with these tunes on YT for a bit
+ Astrobytes: nice to be back, see ya tomorrow struct
+ struct: cya
+ Lisa-Has-Ideas: I spent all day placing 100 characters on about 50 pages at exactly the right x,y coordinates.  I hope everyone had a more interesting day than me&#160;:)
+ Ayza: should've wrote a program to do it for you :slight_smile:
+ Lisa-Has-Ideas: Ugh, you're probably right&#160;:)
+ Westicles: 0,0 is upper left, do it over
+ Ahmed_AGM: :eye::tongue::eye:
+ Ahmed_AGM: My bad, wrong regex
+ Crosility: Sucks when you can visualize/understand the solution to something. But you are stuck trying to figure out a not janky way to implement it.
+ antiwonto: [auto] Hey Crosility, here is a :taco: for loggin in today while it is quiet.  You now have 1 tacos
+ Crosility: ./eat_taco Thanks.
+ antiwonto: [auto] That taco command has moved to the #taco channel
+ Dynamolten.: greetings 
+ struct: hi
+ mateusedival: hi
+ waterproofsodium: gm
+ [4G]: gg
+ [4G]: Objective-C 0.o
+ waterproofsodium: nice try game
+ waterproofsodium: wanted to put me in a clash with 3 bots..
+ waterproofsodium: struct can I blame you for this?&#160;:)
+ struct: well you can but I have no power
+ struct: im just a chat moderator
+ struct: Im not part of CG
+ waterproofsodium: :p
+ waterproofsodium: I wish I had more motivation for practicing
+ Dynamolten.: how do i know who the bots are
+ struct: I think it says in their profile
+ Wild_Python: probaly a lot of bots, just guess&#160;:)
+ Dynamolten.: is Tychkorg a bot
+ Wild_Python: yea
+ Dynamolten.: figured so!
+ Wild_Python: AlkhilJohn ot either
+ Wild_Python: some bots did hard ques in 5 sec&#160;:)))
+ Dynamolten.: ahaha yeah those are the main ones
+ Wild_Python: BitWolf too
+ Dynamolten.: sad
+ struct: you can also check the leaderboard
+ struct: <a rel="nofollow" class="external free" href="https://www.codingame.com/leaderboards/clash/global?column=clashescount&amp;value=DECREASING">https://www.codingame.com/leaderboards/clash/global?column=clashescount&amp;value=DECREASING</a>
+ Wild_Python: bro, that's a lot of bots
+ struct: 11
+ struct: no that many
+ struct: not*
+ Lisa-Has-Ideas: What is the point of the bots?  The reason for them?
+ Wild_Python: all level 7&#160;:)
+ struct: I guess its to fill the lobbies a bit
+ Wild_Python: fill up all the slot in coding game acctually?
+ Wild_Python:&#160;:)
+ struct: Site is not very active during some time zones 
+ Lisa-Has-Ideas: Right, but they'll join a clash and then leave it BEFORE it starts -- WHY??
+ Wild_Python: idk
+ struct: Because it has enough players I guess
+ Wild_Python: but the craxy thing is
+ Wild_Python: they can do 5 clashes in 1 moment
+ Wild_Python: i test it :D
+ bobth: Lisa-Has-Ideas those are bots, they'll often leave once there are enough real players
+ bobth: If no one else joins for around forty seconds three bots will join you
+ bobth: The bots are officially part of the site too
+ C0c0: Hi everyone
+ Husoski: Wild_Python If you read the link in the bots' user profiles, it tells you what they are for.
+ Husoski: <a rel="nofollow" class="external free" href="https://www.codingame.com/blog/clash-of-code-time-has-come-for-clash/">https://www.codingame.com/blog/clash-of-code-time-has-come-for-clash/</a>
+ bobth: yep, just click on their profiles the lobby and it link you that in their bio
+ Husoski: Scroll down to "CodinGame Official Bots".
+ Husoski: BTW, I think they do more harm that good to CoC, but my opinion doesn't weigh much around here.
+ Husoski: s/that/than/
+ bobth: I mean gets more newer players to join so you have a game but that's it
+ bobth: otherwise they just are kinda pointless
+ Ayza: It's annoying though when they solve the clash in seconds
+ Ayza: or faster than the players in general
+ Husoski: ...and the solutions are all plagiarized.
+ Husoski: (copy-pasted from a real user's submission in a previous clash.)
+ C0c0: How do u know if a specific user is a bot?
+ Ayza: wonder if one of my solutions got stolen :slight_smile:
+ bobth: click their profile C0c0
+ C0c0: ok thanks
+ Ayza: you shall differentiate between them and real players when you play more clashes
+ Ayza: they are only a few
+ Husoski: You'll get to know them, eventually, but go to the CoC Leaderboard and sort the list by number of clashes.  They're all at the top..
+ Husoski: (if you sorted in decreasing order, of course)
+ bobth: yeah haha that's one way to find them quickly
+ Husoski: The bot with the least clashes has 82,218 of them, the human (?) with the most has 9,973.
+ Ayza: 175K, dang
+ Husoski: Add up all those numbers for the bots and you get the total number of wasted clash spots.
+ bobth: ayy finally broke top 100 CoC
+ Husoski: Oops...past dinnertime here.  Today is "Global Wind Day", so I'm having chili.
+ bobth: I didn't know that lol. ...interesting...way to celebrate
+ Husoski: bobth congrats on getting to top 100!
+ antiwonto: [auto] Hey Husoski, here is a :taco: for loggin in today while it is quiet.  You now have 24 tacos
+ Westicles: I am 81,253, is that good?
+ j4at: Westicles, yes we are proud of you
+ PythonicCode: w
+ PythonicCode: w
+ PythonicCode: w
+ PythonicCode: w
+ PythonicCode: w
+ waterproofsodium: I love how I  am place 1 or 2 for fastest code but place &gt;= 6 for shortest code
+ waterproofsodium: suggestion: make a shortest code "adjustment factor" for every language
+ waterproofsodium: based on statistics for each language
+ waterproofsodium: e.g. python x1 and C# x0.3&#160;:)
+ waterproofsodium: or don't and continue to compare eggs with eggplants
+ Westicles: right, and let's make a basketball rule where short people score up to 50 points a basket
+ AbrahamJLR: It is illogical to do that. I started using python to finish faster (I use c# for work), and started using perl and ruby for short mode. Just get out of your comfort zone.
+ waterproofsodium: Westicles you know paralympics?
+ antiwonto: [auto] Hey waterproofsodium, here is a :taco: for loggin in today while it is quiet.  You now have 47 tacos

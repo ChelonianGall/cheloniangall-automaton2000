@@ -1,0 +1,3551 @@
+ Marchete: or just recode all to use int pointers to big arrays
+ BrunoFelthes: yeah.. in one day i will not be able to do it... So, low legend is enough... no MCTS for me&#160;:/
+ BrunoFelthes: i think thta MCTS is the best search... what the top players are using?
+ Marchete: how do you manage simultaneous?
+ UndercoverToad: they don't tell
+ struct:&#160;:(
+ UndercoverToad: val growth tweeted something about DUCT
+ Marchete: in multi I'd try smitsi
+ struct: I read duct but I discarded it
+ Marchete: right now I can't make a GROW move score better than wait....
+ Kellthazar: I think that they are using some kind of witchcraft.
+ BrunoFelthes: I dont manage Marchete
+ struct: I dont have enough time to implement it
+ Marchete: how not Bruno
+ Marchete: MCTS must be some kind of simultaneous
+ BrunoFelthes: I do my play, and then the opponent play... If i use a seed space, the opponent cant use...
+ Marchete: either linear with sim each two levels
+ BrunoFelthes: it is close enough
+ Marchete: or DUCT/smitsi/UCT forest
+ Zenoscave: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/79558fe5-12e0-46e5-9134-40c208026c3b">http://chat.codingame.com/pastebin/79558fe5-12e0-46e5-9134-40c208026c3b</a>
+ PatrickMcGinnisII: BrunoFelthes i tried seed blocking, wasted my time
+ BrunoFelthes: but i think that simultaneous with intesection is too rare, it is not so hard to implement it at a normal MCTS tree...
+ Marchete: in C# Zeno?
+ Zenoscave: yes MArchete
+ Zenoscave: there's a syntax issue. I'm aware
+ Marchete: struct Move	{		unsafe public fixed ulong trees[4,2];	}
+ Marchete: probably, I should check at tech.io
+ UndercoverToad: shouldn't [,] be faster than [][]?
+ Zenoscave: No idea
+ Marchete: this struct is C++ like
+ UndercoverToad: [][] is an array of arrays
+ BrunoFelthes: the think that you can do simultaneous is seed and complete, that i think that is easy to manage... If you opponent chop a tree, just check the node before it, if it is a tree chop too, add one point...
+ Marchete: you don't need new
+ UndercoverToad: [,] is a 2D array, just an abstraction of 1 big array
+ UndercoverToad: less indirection
+ Zenoscave: gotcha
+ struct: For completes I store the gain on the action itself
+ UndercoverToad: [][] is called "jagged array"
+ Kiat: c# here i also using [,]
+ Zenoscave: And how do you populate one 2D array from another?
+ Whiskee: I have a precalculated bool[,,,,] Shadow for all sizes, please send help
+ Zenoscave: other = arr.Clone as ulong[,];&#160;???
+ UndercoverToad: Array.Copy I think
+ Kiat: ya
+ UndercoverToad: not sure if it handles 2D
+ Zenoscave: so not clone
+ UndercoverToad: no
+ Marchete: copy?
+ Kiat: copy faster
+ Marchete: Array.Copy probably, yes
+ Marchete: if you want super ugly C#
+ Marchete: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/abf34db9-0116-4512-82a1-557178fe92d9">http://chat.codingame.com/pastebin/abf34db9-0116-4512-82a1-557178fe92d9</a>
+ PatrickMcGinnisII: BrunoFelthes i guess testing seed bounce is just a memcompare on boardstates
+ Marchete: m and m2 are different
+ Zenoscave: unsafe ugly is fine. Need a bit more sims I think.
+ Marchete: so m2=m; is deep copy
+ Zenoscave: got it. thanks
+ Zenoscave: for 2D array in Array.Copy I would do 8 elements not 4?
+ UndercoverToad: yes
+ UndercoverToad: just try it and see&#160;;)
+ Marchete: also a lot of:
+ Marchete: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/4c27ca56-50cd-44a3-a031-72880a8611c4">http://chat.codingame.com/pastebin/4c27ca56-50cd-44a3-a031-72880a8611c4</a>
+ Marchete: knowing how to copy, you can copy full structs as a whole
+ Zenoscave: why is there a void pointer in c# That's awful
+ Zenoscave: I don't like that.
+ Zenoscave: I feel gross
+ Marchete: :D
+ Marchete: it's dirty
+ Zenoscave: very
+ Marchete: but instead of manually copying 20 fields
+ Marchete: ok ok
+ Marchete: nvm it's really ugly
+ Zenoscave: If only I could figure out how to make a struct work with my Fast Priority queue. I need a class sadly
+ Zenoscave: but this giives me enough to improve I think
+ Marchete: class { struct k;}
+ Marchete: but it's ugly too
+ Zenoscave: you are getting too good at ugly C#
+ Marchete: I'm corrupted by C++
+ Marchete: before C++ I never liked pointers or arrays or similar
+ Marchete: so don't do it
+ Lysk: CouscousAgha I just pushed you
+ Lysk: also 5H4dy
+ CouscousAgha: I love you Lysk
+ Lysk: :blush:
+ CouscousAgha: i was tempted to resubmit
+ CouscousAgha: and you came with the clutch
+ Lysk: it was my pleasure, I hope I get to legend too
+ CouscousAgha: im cheering for u
+ ClockSort: aaugh i resubmitted and missed the help of Lysk
+ CouscousAgha: Lysk clutched it
+ Lysk: tiraptor also helping!
+ PatrickMcGinnisII: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/d05f96f9-bfbf-4a1e-b2c4-c337081dad5f">http://chat.codingame.com/pastebin/d05f96f9-bfbf-4a1e-b2c4-c337081dad5f</a>
+ PatrickMcGinnisII: does that work?
+ ClockSort: :eyes:
+ PatrickMcGinnisII: i guess not
+ PatrickMcGinnisII: been awhile
+ Lysk: yay
+ CouscousAgha: welcome to legend Lysk
+ Marchete: see? that's pure evil uglyness
+ PatrickMcGinnisII: :thermometer_face:
+ CouscousAgha: This is my first ever CG challenge and I managed to get to Legend with only heuristic 
+ CouscousAgha: I think that's a cool achievement 
+ Kellthazar: Indeed
+ UndercoverToad: and now even another toad entered the game
+ Marchete: who?
+ UndercoverToad: around rank 20, daiver
+ UndercoverToad: known from topcoder
+ Marchete: ahh
+ Marchete: it's like the evil toad
+ UndercoverToad: according to ceg i'm the evil toad
+ UndercoverToad: so that guy must be the good twin
+ Marchete: like in evil bart :D
+ UndercoverToad: but then i'd have a giant scar on my side
+ Marchete: :eyes:
+ aCat: morning euler&#160;;-)
+ UndercoverToad: hi
+ aCat: yesterday I couldn't do anything with code
+ aCat: today I should have time
+ aCat: final straight
+ UndercoverToad: done with reviews?
+ aCat: yeah
+ aCat: 6 in one day
+ aCat: damn
+ UndercoverToad: that was fast
+ UndercoverToad: my prof needed at least to months for my master thesis
+ aCat: I've read some papers before but didn't wrote the revir=ews down
+ aCat: papers are short&#160;;]
+ aCat: and most of them crap
+ aCat: one was good
+ UndercoverToad: so just one to be published?
+ aCat: and 2 out of 4 reviewers were negative talking about author doing something with MCTS
+ aCat: while the paper was NOT about MCTS but NRPA
+ UndercoverToad: what's wrong with MCTS?
+ UndercoverToad: ah. would have to read about NRPA to see how far that is off
+ aCat: th point is there were 'confident' reviews that didn't get that the algo is different
+ aCat: quite
+ aCat: single player
+ aCat: it uses monte carlo pleyauts ofc
+ aCat: but otherwise meh
+ aCat: no idea about the final decisions made by the chairs yet
+ aCat: regard=ing acc/rejection
+ aCat: but really the reviewing system is strange / unfair and really random
+ UndercoverToad: because reviewers aren't always experts in that field?
+ aCat: thets only a pertial problem
+ aCat: you evaluate your confidence, not only score
+ aCat: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/ea567375-08c5-48f6-a382-4aa23079bcaa">http://chat.codingame.com/pastebin/ea567375-08c5-48f6-a382-4aa23079bcaa</a>
+ aCat: but people tend to claim they are expersts
+ aCat: and also have different meaning of scores
+ aCat: you san see very similar review as text
+ aCat: and oune sais weak accept, and other strong reject
+ Zenoscave: I have a very flat scoring system for inner day moves I realized
+ Zenoscave: Most of my top scores are equal as long as the same moves are applied in a day
+ Zenoscave: What's the best way to get around this? turn decay?
+ Numby: top player in legend is 10 score above 2nd O.o (reCurse at 42, 2nd player at 33)
+ Numby: O.o
+ Zaphus: oh, look at that... when I stop accessing arrays past their bounds, I jump from ~800th to ~500th&#160;:-)  I can't even work out how I got that high with such broken code!
+ miklla: reCurse vs the world&#160;: 142 - 5
+ Numby: that's insane I thought the game was super close at top positions and everyone plays close to optimal
+ Zenoscave: Close. but recurs_e is closer
+ JohnCM: i've come to ignore reviewers, especially those who give irrelevant comments
+ JohnCM: does more harm than good listening to non-constructive feedback anyway
+ JohnCM: hmm... how to beat gold boss with heuristics
+ JohnCM: i'm at 10 pts difference from gold boss alr
+ JohnCM: now just need to code some useful stuff
+ Westicles: Wow, team North America takes a big lead
+ NinjaDoggy: wait is this real?
+ NinjaDoggy: reCurse is 9 points ahead of second? -_-
+ NinjaDoggy: reCurse explaing yourself -_-
+ NinjaDoggy: explain*
+ aCat: JohnCM you can ignore them, but if they decide your paper is rejected and you have nowhere to shout that they make mistakes it is frustrating
+ JohnCM: indeed, but you got to believe in yourself. surely there's another venue to submit to
+ Zenoscave: I really broke my bot. I can't find the right eval anymore
+ NinjaDoggy: Recurse is like an alien racing coming to earth and teaching us plebians how to really play chess&#160;:)
+ JohnCM: go history and get your previous code
+ aCat: this si problem if youre forced to aim for top conferences
+ aCat: otherwise its not much a big deal
+ Zenoscave: JohnCM There's 201 submits...
+ Zenoscave: I can't remember which was best
+ JohnCM: wow. time to start from scratch, maybe you'll code something better
+ Zenoscave: Seeing how I'm in legend I doubt it&#160;;)
+ NinjaDoggy: I'm going to recode after watching a few hundred recurse replays&#160;;)
+ JohnCM: haha legend is good enough tbh
+ Zenoscave: not enough time left in competition
+ Marchete: WARNING: Illegal reflective access by com.google.inject.internal.cglib.core.$ReflectUtils$2
+ JohnCM: i have a feeling recurse didn't do heuristics
+ NinjaDoggy: the game is supposed to be played completely differently apparently&#160;;)
+ Marchete: what's that error in my mvn brutaltester?
+ NinjaDoggy: I feel like the only way was he did some NN stuff&#160;:/
+ Zenoscave: what jdk are you using?
+ NinjaDoggy: otherwise gap shouldn't be this massive
+ JohnCM: if NN will be quite impressive
+ JohnCM: you have to test it locally and then port the weights over
+ Westicles: Naw, probably smitsimax with lots of booking
+ NinjaDoggy: no way it's smitsi...
+ NinjaDoggy: maybe simul MCTS
+ JohnCM: haha if codingame has a tensorflow/pytorch support library, i would use NN too
+ Marchete: it seems the referee
+ JohnCM: but don't think codingame wants to go that direction
+ Numby: prolly too many people would go for NN if there was an easy way to do it
+ Numby: yeah that would be not as interesting
+ Marchete: hmm, why not?
+ Zenoscave: They had mnist as a medium problem once upon a time
+ Marchete: I mean
+ JohnCM: i actually kinda like the fact that heuristics can get gold
+ Marchete: the point is creating the best AI bot
+ NinjaDoggy: who has the best muZero clone contest&#160;;)
+ Zenoscave: Yup. My bot'll be bottom barrel legend&#160;:/
+ Zenoscave: probably shouldn't be in legend at all
+ NinjaDoggy: legend is legend&#160;:)
+ NinjaDoggy: no difference until top 20&#160;:)
+ Zenoscave: fair
+ NinjaDoggy: and it's never over until the last day :D
+ SterlingA: Do you guy know any heuristic bot in legend&#160;? 
+ Zenoscave: I'm exhausted. I've done easily 100 hours
+ JohnCM: this comp i took a diff strategy. i coded till bronze, took a weeks' break, then came back over the weekend
+ JohnCM: good to have the silver and gold bosses ready for the benchmarking
+ Zenoscave: I keep forgetting to eat
+ PaarthThePro: No way!
+ Marchete: Zenoscave, do you know what can cause this?
+ Marchete: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/aadf2db5-c87b-4f74-a478-23e7528e77b7">http://chat.codingame.com/pastebin/aadf2db5-c87b-4f74-a478-23e7528e77b7</a>
+ UndercoverToad: NinjaDoggy 08:10AMRecurse is like an alien racing coming to earth
+ Marchete: on referee or mvn or JDK11 or whatever
+ UndercoverToad: <a rel="nofollow" class="external free" href="https://twitter.com/valgrowth?lang=en">https://twitter.com/valgrowth?lang=en</a>
+ ddreams: Marchete too new java
+ ddreams: get java8
+ NinjaDoggy: you link me his twitter but I can't find a tweet about recurse&#160;:(
+ Marchete: thanks ddreams
+ NinjaDoggy: it's also not translated to english&#160;:(
+ ddreams: wow 41.13 vs second place of 32.79
+ ddreams: that's impressive
+ Marchete: I love how Java is so incompatible between versions. C# lacks that and I'm furious
+ UndercoverToad: re curse was called an "extraterrestrial" if I can trust deepl
+ Westicles: Ask him his approach and he'll be as forthcoming as one of those arrival hexapods
+ Westicles: *heptapods
+ Marchete: on brutaltester "Negative score during game 1 p0:-1"&#160;?
+ UndercoverToad: a crash
+ UndercoverToad: or timeout
+ ddreams: start the game without brutaltester and see
+ ddreams: depends on the referee, you may have one that does not give you possibleactions
+ ddreams: or you're playing in wood league
+ JohnCM: if only codingame has a library like OpenAI, where you can env.step() all your actions without coding out the entire environment haha
+ JohnCM: then monte carlo will be easier
+ UndercoverToad: how does that work with local testing?
+ Marchete: it seems crashes, yes
+ Marchete: but if I run on VSstudio
+ Marchete: there is none
+ UndercoverToad: i tend to have an
+ Marchete: nvm
+ Marchete: I'm more stupid that I can even imagine
+ Marchete: I compiled DEBUG and not release
+ OBenjOne: I had almost no time to work on this challenge... It would be nice to make it to legend though
+ UndercoverToad: hah, I got what's wrong&#160;:)
+ Marchete: and release was indeed crashing
+ Marchete: yeah
+ UndercoverToad: well, almost
+ NinjaDoggy: on a side note, why use brutal tester instead of own arena? :P
+ NinjaDoggy: (assuming you already have full sim)
+ OBenjOne: what's brutaltester? Sorry I'm new to this
+ OBenjOne: Should I be using it?
+ UndercoverToad: program to help you test offline
+ UndercoverToad: play a bunch of games, 2 program versions vs each other
+ OBenjOne: That seems really useful, I'll look into it
+ PatrickMcGinnisII: i can't believe i'm still finding bugs
+ UndercoverToad: the more bugs you find, the more likely it is that you still have some more remaining
+ PatrickMcGinnisII: was gonna expand depth, but bug would just make it worse
+ dbdr: so there are infinitely many bugs UndercoverToad? :D
+ PatrickMcGinnisII: toad²
+ UndercoverToad: don't use logic against me :D
+ UndercoverToad: just quoting pretty much the only thing I remember from my software reliability class
+ dbdr: :D
+ dbdr: reminds me of: for cheeses with holes in them, the more cheese you have, the more holes you have. and the more holes you have, the less cheese you have. so the more cheese you have, the less cheese you have
+ PatrickMcGinnisII: so cheezy
+ ddreams: makes sense
+ ddreams: kind of like the companies that tell you "the more you spend, the more you save!"
+ PaarthThePro: I like that quote
+ PaarthThePro: The more I live the less I live
+ PaarthThePro: I am immortal
+ PatrickMcGinnisII: ouch
+ PatrickMcGinnisII: ok, rock out with your chicken out
+ PatrickMcGinnisII: :poultry_leg:
+ PatrickMcGinnisII: i think that hurt my ranking
+ shitizen: 冲国人？
+ PatrickMcGinnisII: :baby_bottle:
+ Westicles: something middle something man?
+ ddreams: I think he's looking for other chinese people
+ ddreams: guessing based on google's guess
+ PatrickMcGinnisII: well my rank is better by fixing the bug, that's a first
+ ddreams: board with ten holes: seed=8472451449982904300
+ ddreams: actually 132 to 129, but I suspect it wasn't really close
+ shitizen: 你们上班要996吗
+ shitizen: you are so free
+ ddreams: you are not?
+ shitizen: do you start working at 9am to 9pm for six days?
+ ddreams: often, but not because I am forced to
+ ddreams: I get paid per hour, so I like to work a lot in periods and then take time off
+ shitizen: that's a good idea
+ UndercoverToad: I work 7:15am-3pm
+ Bari: Hi
+ NinjaDoggy: reCurse's sun effeciency early game is actually insane :O
+ PatrickMcGinnisII: can't see, post replay
+ shitizen: how do you learn englishmy english is so poor and bad
+ ddreams: when I was a kid, I played English games looking up everything in a dictionary
+ shitizen: one word often include many meaning
+ ddreams: practice
+ shitizen: it's too hard to remember
+ shitizen: i often look up the words that i don't know but after a while i forget what it is 
+ ddreams: language has to be used, or you'll forget
+ shitizen: you sent "take time off" just now.but i didn't know what it is until i translate it by online translater
+ ddreams: well, now you know&#160;:) 
+ Michael_Howard: NinjaDoggy what does he do? Please can you post a reply for us poor Goldies who can't see up there?
+ UndercoverToad: <a rel="nofollow" class="external free" href="https://www.codingame.com/contests/spring-challenge-2021/leaderboard">https://www.codingame.com/contests/spring-challenge-2021/leaderboard</a>
+ UndercoverToad: of course you can see it
+ UndercoverToad: "view last battles"
+ Michael_Howard: Thanks, I forgot you could do that on other leagues&#160;:)
+ shitizen: but english still have great many phrases that i even don't see them
+ PatrickMcGinnisII: ok finally in top 1k, i can go to bed
+ PatrickMcGinnisII: ahh yes, tx UCT
+ LelouchVC2: I'll make 1000 accounts and make them all top 1000
+ LelouchVC2: Just to deprive you of that pleasure
+ ddreams: too late, he's already dreaming about it
+ LLG: ClockSort boutta hit legend
+ jrke: wut reCurse 1st only under 24 h
+ jrke: with 8 points lead
+ jacek: legend on 1 submit or delete
+ ddreams: #1 on 1 submit or delete
+ jrke: is that NN
+ UndercoverToad: we don't know
+ jrke: but he made rank 1 under 15-16 h think
+ UndercoverToad: but it's to be assumed that he was testing with an alt account before. he knew that this would be a #1 submit
+ jrke: even less than that
+ UndercoverToad: an impressive performance nontheless
+ UndercoverToad: he won 2 contests before. but this is by far the most dominant win I can remember (among all contests, not only among his wins)
+ jacek: if server kept down that would be quite a fail for him
+ Westicles: not a win yet
+ kovi: no way to beat nn
+ jacek: i bet it is NNish
+ UndercoverToad: the only thing that can stop him now is staff
+ jacek: or some 9mms
+ jrke: <a rel="nofollow" class="external free" href="http://cgstats.magusgeek.com/app/spring-challenge-2021/reCurse">http://cgstats.magusgeek.com/app/spring-challenge-2021/reCurse</a>
+ UndercoverToad: nice, I even got the honor to play against him
+ UndercoverToad: dropping his score by losing to him probably
+ Westicles: Staff?  Like obfuscation ruling?
+ UndercoverToad: i don't think it will happen
+ UndercoverToad: just a deus ex machina that's more likely than any player beating him in the arena
+ jacek: a modified game to make it sequential with known moves
+ kovi: i was afraid of this gonna happen. game is too "simple", single search + "heuristics" (which within search can be best captured by nn)it kinda takes away motivation...today...and for long term as well
+ jacek: thats why he waited so long&#160;:?
+ davilla: are alt accounts legit here?
+ derjack: ban
+ dbdr: no
+ UndercoverToad: they are not? :scream:
+ dbdr: :D
+ jacek: at least dont submit in contest
+ dbdr: yeah
+ VirtusDomo: god its hajrd to get momentum
+ VirtusDomo: i swear i'm always stuck
+ ddreams: ask recursive for tips, virtus
+ ddreams: he's good at getting momentum
+ VirtusDomo: recursive&gt;?
+ davilla: well there's your deus ex
+ davilla: banned account
+ VirtusDomo: lol is that like a known thing here?
+ VirtusDomo: im new
+ ddreams: top player miles ahead of the rest
+ VirtusDomo: ahhh i see i see
+ ddreams: in one submit
+ VirtusDomo: yeah i'm just trying to get good enough for internships lol
+ davilla: I wouldn't ban the guy honestly, but maybe force him to use the other account
+ davilla: well now I don't feel so bad for dropping out during wood
+ ddreams: true, wood leagues were challenging
+ davilla: it's more that I couldn't get my head in it, motivationally
+ davilla: my program actually made it to silver without any further mods
+ davilla: don't ask me how
+ ddreams: I'm in legend and just found out I calculated resource points incorrectly
+ davilla: sorry, I meant bronze
+ ddreams: maybe fixing it will put me in top 100
+ davilla: cool&#160;:)
+ ddreams: anyway, gtg family stuff, bbl
+ Selwyn: man I feel like I'm an intermediate developer but I can't even do any challenges here 
+ Selwyn: I feel like I'm so badd bahaha
+ VirtusDomo: lol same man same
+ VirtusDomo: even the easy ones have me googling
+ Selwyn: sameee
+ thanos98: Hi guys anyone has some materials about the challenge code4life?
+ ikustom: tes.
+ ikustom: yes*
+ thanos98: Can you share it?
+ thanos98:&#160;???
+ UndercoverToad: <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/code4life-feedback-strategy/2835">https://www.codingame.com/forum/t/code4life-feedback-strategy/2835</a>happy reading thanos98
+ thanos98: Thx!!
+ Scarfield: i see both smitsi and zeno made it in legend :muscle:
+ Scarfield: Rebless using NN or just chat guessing?
+ jacek: how else he would lead that much?
+ Scarfield: secret sauce, idk
+ Scarfield: jacekMax maybe
+ jacek: that would give him 100% win
+ jacek: it cant be that
+ Scarfield: xD
+ DomiKo: Wait
+ DomiKo: what
+ UndercoverToad: you opened the leaderboard?
+ DomiKo: yes
+ UndercoverToad: you spilled your morning coffee?
+ DomiKo: if I had one
+ UndercoverToad: good, coffee tastes horrible and has a disgusting smell
+ Scarfield: :scream:
+ DomiKo: some smell goood
+ DomiKo: OK I run 3 games with him, and he beats me +2-5 points every game
+ DomiKo: like how
+ UndercoverToad: like he's not even trying
+ DomiKo: maybe it's his worst version
+ jacek: <a rel="nofollow" class="external free" href="https://www.reddit.com/r/cats/comments/hfjr6r/he_buries_coffee_because_he_doesnt_like_the_smell/">https://www.reddit.com/r/cats/comments/hfjr6r/he_buries_coffee_because_he_doesnt_like_the_smell/</a>
+ jacek: win is a win
+ dbf: with 5 ms timelimit
+ Noyotens: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/556574644">https://www.codingame.com/replay/556574644</a>
+ Noyotens: what i need to make my code 10/10
+ VizGhar: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/556546205">https://www.codingame.com/replay/556546205</a> hmm timeout or wroung output?
+ jacek: suicide
+ jacek: maybe he cant handle simultant seeds
+ Astrobytes: reBless, wtaf
+ MyCCODE: I wanna compete
+ MyCCODE: I wanna compete
+ MyCCODE: I wanna compete
+ MyCCODE: I wanna competeI wanna competeI wanna compete
+ UndercoverToad: "I wanna get kicked"?
+ MyCCODE: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/c66e7c93-5abc-47fc-bb8e-c1aaae67dbe0">http://chat.codingame.com/pastebin/c66e7c93-5abc-47fc-bb8e-c1aaae67dbe0</a>
+ UndercoverToad: Astrobytes would you be so kind?&#160;;)
+ MSmits: it makes sense Astrobytes, a simple positional game like this seems right for an eval with NN. Just the input seems a bit hard to structure
+ Astrobytes: My pleasure Toad.
+ Astrobytes: MSmits. Yeah, I was thinking this. Will be interesting to hear about it.
+ MSmits: we all find that this game is hard to eval, nn takes care of i
+ MSmits: it
+ MSmits: not saying that it's easy write a nn here, just saying it makes sense to do it if you can
+ UndercoverToad: or it fails hard <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/556411886">https://www.codingame.com/share-replay/556411886</a>
+ Astrobytes: Yes, I agree MSmits
+ UndercoverToad: but in 99% it's just overwhelming
+ MSmits: weird that it would fail so hard
+ dbdr: maybe it predicts a loss
+ MSmits: yeah, all output close to 0, one loss being much like another, just by a different margin
+ Astrobytes: Either way, I'm quite impressed
+ MSmits: same
+ MSmits: but not completely surprised tbh
+ dbdr: that's why I find it more satisfying to optimize the margin
+ Astrobytes: Yeah, same here Smits
+ AntiSquid: are you sure it's NN&#160;?
+ dbdr: but maybe win/loss has advantages
+ MSmits: AntiSquid pretty sure
+ MSmits: reCurs e doesnt do anything else these days
+ MSmits: and the margin is insane
+ Astrobytes: Which we know about from the other board game leads
+ Astrobytes: *that he has/other NNs have
+ AntiSquid: cool, then which type of algo, was looking at ReBeL just because of this contest
+ MSmits: I do feel a bit sorry for the people leading the leaderboard before recurs e took it
+ MSmits: i know the feeling from being wrecked by nn's on board games
+ MSmits: bit hopeless
+ Astrobytes: All's fair in love and CG Contests
+ MSmits: sure, i just feel sorry for them i sall&#160;:)
+ MSmits: empathy and all that sht
+ kovi: thx
+ Astrobytes: Oh for sure!
+ AntiSquid: but . there's a HUGE chance it's not NN, for the simple fact that all you need to do is find right heuristics, so theoretically with decent data analysis you can just figure the right heuristics out
+ AntiSquid: to get to legend at least
+ UndercoverToad: i still don't get the hiding and last minute submit. isn't it a more fun experience without
+ UndercoverToad:&#160;?
+ MSmits: UndercoverToad probably he wanst sure his nn would succeed
+ MSmits:  a poor nn migh tnot even get out of wood
+ AntiSquid: hide until 1st place is secure lol
+ MSmits: they are kind of all or nothing in a way
+ UndercoverToad: i'm pretty sure he knew before the servers died yesterday
+ MSmits: pretty sure he would have submitted if it would end top 10 :P
+ MSmits: instead of 1
+ UndercoverToad: i'll just wait for the post mortem instead of guessing any further
+ MSmits: yeah, sure
+ Astrobytes: Yeah. Should be a good read.
+ LLG: e
+ MSmits: gotta code some more, somewhat satisfied with top 100, but can do better maybe
+ Pick8chu: Hey MSmits
+ MSmits: hey Pick8chu, was just heading out
+ AntiSquid: my win rate just drastically improved by adding 1 extra condition ... if i guess few more i will make it to legend with just that . 
+ Pick8chu: oh
+ dbdr: "maybe"
+ Pick8chu: alright good luck man and congrats on 100
+ MSmits: thanks, ttyl&#160;:)
+ Pick8chu:&#160;:)
+ Pick8chu: Would anyone give me some thoughts on improvement? 
+ Pick8chu: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/556597597">https://www.codingame.com/replay/556597597</a>
+ AntiSquid: add random heuristics and test
+ UndercoverToad: seed on 9 is in your own shadow range
+ Pick8chu: is it?
+ UndercoverToad: wait, i was looking at blue
+ Pick8chu: haha okay
+ UndercoverToad: seed on 6 then
+ UndercoverToad: 15 too
+ Pick8chu: How could i apply random heuristics?
+ UndercoverToad: when the tree grows to size 3, you have a problem
+ Pick8chu: I complete them too early?
+ Butanium: Hey
+ UndercoverToad: yes, was about to say that
+ Pick8chu: AntiSquid How could i apply random heuristics?
+ UndercoverToad: and the positioning at 1 and 4 isn't optimal again
+ Pick8chu: 1 and 4 you meant turn?
+ Butanium: I want to do MCTS for the challenge and I'm thinking about making playout returning none discrete value depending on the score delta between the two players
+ UndercoverToad: 2000 places doesn't mean much in a contest this size&#160;;)
+ NotSureWhyThisWorks: UndercoverToad you used beam search right?
+ Butanium: do you think that's a good idea?
+ UndercoverToad: cell 1 and 4
+ UndercoverToad: turn on debug mode
+ MUkhtadirshaikh: hello word
+ MUkhtadirshaikh: world
+ UndercoverToad: yes, beam all the way
+ Pick8chu: they have debug mode???
+ UndercoverToad: settings, gear icon
+ MUkhtadirshaikh: yup they have it
+ Pick8chu: lmao
+ UndercoverToad: even mentioned in the statement&#160;;)
+ MUkhtadirshaikh: lets clash
+ NotSureWhyThisWorks: did you have to limit the possible moves so that it was possible?
+ UndercoverToad: i'm in this debug mode the whole contest already
+ dbdr: there is a non-debug mode?
+ UndercoverToad: some limitations on spawns to generate less states
+ UndercoverToad: not going too much into detail during the contest
+ NotSureWhyThisWorks: yeah fair enough
+ NotSureWhyThisWorks: will there be post-mortems after the contest finishes? I am interested to see how the legends did it
+ UndercoverToad: yes, there are always some
+ UndercoverToad: not sure if i'll write anything yet. my bot doesn't have any interesting thoughts in it
+ jacek: so you copied your brain into it?
+ NotSureWhyThisWorks: surely a nice eval function or something
+ NotSureWhyThisWorks: you are 11th
+ Astrobytes: offf buuuuurn
+ Astrobytes: jacek bringing the cheek
+ UndercoverToad: that was inappropriate jacek
+ jacek:&#160;:(
+ Astrobytes:  /kick
+ UndercoverToad: i extended my board state and realized I forgot to add this field to hash+equals
+ UndercoverToad: when adding it, the offline batch gets worse
+ Astrobytes: lol
+ UndercoverToad: maybe because the beam gets more narrow that way
+ Pick8chu: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/556609594">https://www.codingame.com/share-replay/556609594</a>
+ Pick8chu: Slightly better
+ NotSureWhyThisWorks: I realised when I was pruning I wasn't sorting beforehand so I changed it and it got worse
+ jacek: username checks out
+ BrunoFelthes: OMG reCurse started the contest with 94% win rate
+ NotSureWhyThisWorks: lol
+ BrunoFelthes: this guy is insane
+ UndercoverToad: no, he didn't. his wood bot wasn't impressive at all
+ Butanium: do you think I could do any improvement on my heuristic?
+ Butanium: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/556555961">https://www.codingame.com/share-replay/556555961</a>
+ Butanium: I'm about to switch to a MCTS but I won't have the time to siubmit it before the end
+ Butanium: I'd like to end up in legend x)
+ AntiSquid: then do heuristics instead LOL
+ Pick8chu: AntiSquid how do you do that tho?
+ Pick8chu: like generate random numbers and see if what gives you the best result?
+ UndercoverToad: random actions you mean?
+ Pick8chu: heuristics
+ UndercoverToad: that can be an option. you still have to define how a good result looks like
+ UndercoverToad: then i don't understand
+ UndercoverToad: back to my code
+ Pick8chu: how do you mean? you define what a good result is?
+ Butanium: AntiSquid: Do you think I could improve my evaluation function without doing random search&#160;? x)
+ AlMualem: guys what is the strategy to win the silver bot...(complete as fast as you can,complete the ones with the sallest index for more points,seed with distance &gt;=2 each tree from another...)any other thoughts?
+ AlMualem: smallest index*
+ particleflux: lol only just now realized that richer soil == smaller index
+ cegprakash: reCurse 93% win rate in legend wow.. Nice way to troll everyone on legend. Looks like he cracked this contest.
+ AlMualem: hahaha
+ Pick8chu: that's jsut crazy lol
+ AlMualem: i have implemented all these thoughts to my code and still can win silver bot in every match&#160;:(
+ AlMualem: cant*
+ actualCoderTrevor: Do you consider shadows?
+ lionandmouse: try to maintain some trees for stable income in good positions and then farm. Shadows can be disregarded until gold.
+ actualCoderTrevor: You can only get so far without doing that
+ Sanguigno: lca
+ AlMualem: i took them (the shadows) a little bit under consideration,,,i mean that is the reason i am seeding with distance greater or equal than 2
+ TootiFlooti: what division are yall in
+ AlMualem: whats left is to implement , is seeding in the smallest possible index
+ TootiFlooti: im still working on getting to silver&#160;:(
+ AlMualem: i am 222th on silver mate
+ TootiFlooti: nice 
+ TootiFlooti: i have a stable build and just waiting tto get thru bronze im beatingf everyone so far but sadly i was not able to work on this all week&#160;:(
+ AlMualem: i am working as we speak :P
+ TootiFlooti: im going to try to beat you almualem thats my new goal lol
+ Pick8chu: AlMualem as far as I know, everyone here implemented with weights. Basically, among possible actions, what is the best option
+ TootiFlooti: im to sleepy now ill work on it tomorrw
+ TootiFlooti: goodnight all
+ AlMualem: bb
+ Pick8chu: good night man
+ AlMualem: pIckachu? when we talk about best actions...regarding what?
+ Pick8chu: let's say on one day you get grow and seed and complete and wait
+ TootiFlooti: aslo quick question is there a prize for winning contest 
+ TootiFlooti: im jsut doing it for practice 
+ Pick8chu: among 4 of them, you weight them  using the information you have like sun, or shadows, or how much sun point i have 
+ jacek: a dinner with chosen mod
+ Pick8chu: and pick the biggest weight
+ TootiFlooti: ty jacek
+ k4ng0u: if you manage to beat reCurse, you will likely earn the respect of the whole community
+ TootiFlooti: lmao
+ Pick8chu: lol 
+ Astrobytes: jacek :rofl:
+ TootiFlooti: true i like that. respect like fast and furious classic
+ AlMualem: pica pica i changed a number and now i have won the last 4 game scenarios against silver bot...that number indicated the number of trees i shoulf have on deck...and of after a certain day to stop stop seeding and try to grow and complete whats left
+ michaelzlatkin1: How do you even get out of the first bronze league? It really just feels like the winner is determined by who gets the luckiest bump...
+ KelvinAndHubbles: Woot Woot! 4 days hardstuck top 100 Silver, makes some tweaks every day and friken finally past it
+ peerdb: michaelzlatkin1try seeding your new plants in gridlike patterns, so they dont block each others sunlight
+ Pick8chu: Good job man!
+ Pick8chu: KelvinAndHubbles congrats
+ michaelzlatkin1: plants...?
+ AntiSquid: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/556639948">https://www.codingame.com/replay/556639948</a> 2nd win, Automaton2000 give me some dumb ideas
+ Automaton2000: how can i send a private message
+ peerdb: click on someones name in chat here Automaton2000
+ Automaton2000: i'm not a fast coder
+ AlMualem: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/556638953">https://www.codingame.com/replay/556638953</a> pic8chu this is my last battle with boss
+ Whatar: it doesn't matter, we all know that you are the real OG Automaton2000
+ Automaton2000: i'm pretty sure it is the same as the other ones
+ AlMualem: i am testing it right now in arena
+ peerdb: Is there an easy way to check where the segfault happens in my code (c++)?
+ Pick8chu: AlMualem looking good
+ AntiSquid: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/556639948">https://www.codingame.com/replay/556639948</a> making my bot dumber really helps
+ CarbonBlack: Hi
+ Pick8chu: i don't get why edge has benefits
+ AlMualem: AntiSquid i see you are seeding a lot on the outskirts and win...first of all gj mate...second you thing its more important to complete first or complete (smaller index=more points?
+ Pick8chu: *edges
+ AlMualem: think*
+ Mistblinde: Less shadows on the edge
+ geppoz: edge of course have at least 1/2 of "a week" without shadows
+ geppoz: mid can have all week shadow
+ AlMualem: less shadows --&gt; more sun points---&gt;complete first...right?
+ Pick8chu: hmm okay let me try that
+ peerdb: yeah I was using my trees on the edges to farm sunpoints and the trees in the center to farm score
+ nam4.nguyen: My first algo reach top 1k but after modifing something I feel make more sense, my new bot got worse rank. Idk why my first stupid bot can be that good&#160;:|
+ Pick8chu: actually that's very good idea peerdb
+ peerdb: :nerd:
+ BlitzProg: I'm looking at mcts tutorials but there's something like "win amount divided simulation amount"
+ BlitzProg: can I just replace "win" by something like my score?
+ BlitzProg: maybe divide it by a number to keep it between 0 and 1
+ AlMualem: my strategy is to first reach 6 trees at level 3 and complete the 2 with the smaller index(with this strategy i farm the ones closer to the center and let the rest to farm...after a certain day of the game i complete every tree i can starting from the ones that are already 3 level
+ AntiSquid: i don't understand the questions, i just added some random heuristics
+ Pick8chu: How do you do hat
+ AlMualem: with my last submit i went from 222nd to 76 and still going (i am at 72%)
+ AlMualem: until now i haven't battle the boss&#160;:/
+ AlMualem: 56th at 76%
+ MSmits: BlitzProg you can do that
+ AlMualem: 22th at 79%
+ MSmits: you dont need to keep it between 0 and 1 either, no point to that
+ MSmits: just adjust your exploration parameter
+ MSmits: until it explores properly
+ BlitzProg: MSmits thanks20 hours lefts, never tried mcts but i'm so desperate lol
+ MSmits: if your scores are between 50 and 100, your exploration parameter should be of the order of 50 or so
+ MSmits: same if your scores are between 450 and 500
+ MSmits: it's the score interval that matters
+ MSmits: the size of it i mean
+ BlitzProg: Oooh I see
+ MSmits: but you do need to fit it, i am just giving you an estimate
+ AntiSquid: Pick8chu, think of a random condition and write that into code. Here's the pseudocode:"if (something is true) then do this action."
+ CrystallineCore: In coders strike back, sometimes my bot revolves around the same checkpoint multiple times before going to the next checkpoint. Is this the problem of my code?
+ Pick8chu: Like super random?
+ MSmits: CrystallineCore yes, you are overshooting it
+ Pick8chu: Like if(tree_size = 2) seed?
+ BlitzProg: Well, here goes nothing then, I'll spend some hours coding that and see what happens
+ MSmits: you need to reduce speed or aim away from the checkpoint 
+ MSmits: to correct for overshooting
+ MSmits: BlitzProg mcts is pretty hard to debug, at leas that is my experience. It might take a while to start workinf
+ MSmits: unlike something like beamsearch which could have some reasonable results fairly quickly
+ Mazelcop: hello folks
+ BlitzProg: Beam search requires an eval tho
+ Mazelcop: anyone knows why my local CG referee starts each player twice&#160;?
+ MSmits: BlitzProg yeah
+ MSmits: well mcts does too, if the depth is too great
+ AlMualem: DAAAAmn i finished 3rd....
+ MSmits: how much rating below boss?
+ AlMualem: and i played only once against the boss should i try again with the same code?
+ peerdb: just wait AlMualem , you might get bumped up a spot or 2
+ peerdb: what is the boss' arena score vs yours?
+ AlMualem: the boss 43,59 me 42,79
+ MSmits: if you are 2 pts or more below boss, you have no chance of that
+ MSmits: that might be doable
+ MSmits: resubmit i'd say
+ peerdb: id wait 15 minutes
+ MSmits: sure yeah
+ wlesavo: depends on league
+ AlMualem: why wait peerdb?
+ BlitzProg: Stakes are higher for me this contest so I'm pretty willing to try many things to get into legend, but it has been hard
+ peerdb: when other people play their matches they also play you, so it impacts your score.
+ AlMualem: 43,62 the boss 42,96 me
+ Nerchio: Mazelcop i didn't notice anything like this but i was timeouting a lot so maybe i have same problem i just didnt notice? :D
+ BlitzProg: Since Monday nothing did better than what I sent that day
+ AlMualem: ok i will wait
+ peerdb: same goes for the boss,so you have a chance to win some matches while the boss loses and you go above him AlMualem
+ AlMualem: i will wait 10 minutes
+ peerdb: sure
+ AlMualem: and submit the same code again?
+ peerdb: thats up to you
+ Sanguigno: elca
+ VRtheKing: how to clear the quest called moderate a contribution
+ AlMualem: if i submit the same code is there a chance to promote? i am 4th at the moment....43,36 the boss 42,96 me
+ MSmits: there's a chance 
+ MSmits: though hard to say how much of one
+ MSmits: it depends a lot on other players and luck
+ peerdb: perhaps you can get slightly better results by changing your strategy just a little (harvest earlier/later)
+ AlMualem: i will submit one more time with the same code and if i dont promote i will test when its better to seed
+ AnthonyHilala: comment voir le classement du boss&#160;? :s
+ peerdb: okay good luck AlMualem
+ AlMualem: mt difference with boss is 0,4
+ AlMualem: ty mate
+ peerdb: 0.4 is not much
+ AlMualem: sorry for spamming i am ultra hyped right now
+ ItsNotABug: wow, recurse has smashed legend
+ peerdb: AlMualem how far below boss now?
+ cegprakash: ppl in top legend be like.. oh noo it's time to switch to NN
+ AlMualem: i promoteeeeeed automatically  :D :D :D :D :D :D :D
+ peerdb: whoooo
+ peerdb: congrats
+ AlMualem: ty mate &lt;3
+ AlMualem: i dont have a lot of experience in coding...but i am really into coding want to be a full stack developer one day
+ Neon_Tuts: Hello World
+ Zanoshky: Hello Neon
+ AlMualem: hiiiiii
+ The_ZimaBlue: can you guys check out:<a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/67177d35db600c4defaf302f9fdeea1f6c3f">https://www.codingame.com/contribute/view/67177d35db600c4defaf302f9fdeea1f6c3f</a>
+ cegprakash: what is the maximum number of possible actions that we can get in input
+ cegprakash: numberOfPossibleActions has any upper limit
+ AlMualem: there must be a max number because our map i limited but how can this be helpful?
+ cegprakash: I generate possible moves and I care about memory :P
+ cegprakash: I used 300 and it crashed some games
+ solistice: 37 * 7 + I guess
+ cegprakash: so I increased to 2000 now
+ solistice: that's without thinking about stuff
+ solistice: think 300 should suffice
+ solistice: but that's not at all a calculated value
+ AlMualem: why youdo you generate and not reading the input from possible_action list?
+ cegprakash: for future turns
+ cegprakash: for opponents
+ cegprakash: things like that
+ AlMualem: hm...i see...ok...so lets calculate it...
+ AlMualem: you said you need it for the opponent move,not yours...right?
+ cegprakash: for ours too during future turns
+ cegprakash: when u simulate the future like Doctor Strange 
+ AlMualem: ok ok for both
+ AlMualem: ahahaha
+ cegprakash: u can look 2million possible outcomes
+ cegprakash: and choose the path with 1 winning outcome
+ AlMualem: do you want to take under consideration the sun points? (i suppose yes)
+ UndercoverToad: of course
+ Pick8chu: So you try all the possible outcomes till your memory allows and decide on that?
+ TobiasA: the only way for your bot to win is for it to use the infinity stones to snap the opponent away and die in the process
+ Pick8chu: lol
+ TobiasA: it really works
+ Pick8chu: but how&#160;? that's just crazy
+ TobiasA: doctor strange said it is the only way
+ TobiasA: strange never lies
+ Pick8chu: so you can have 7 boards so start try 7 possible ways?
+ Sanguigno: elca
+ solistice: 14 million possible outcomes
+ solistice: only 1 is winning
+ TobiasA: my bot found the reality stone:hushed:
+ Pick8chu: could you help me to understand?
+ UndercoverToad: there are many different ways what to do with the simulations. You have to ask the right question for a meaningful answer
+ AntiSquid: Pick8chu what's your job role at samsung&#160;?
+ TobiasA: first harvest all your trees and craft a gauntlet
+ Pick8chu: web developing for now, as a full stack developer
+ Pick8chu: I get how you should weight the possible actions
+ AntiSquid: cool
+ Pick8chu: but I don't get how to simulate with those actions and see what brings the best outcome
+ TobiasA: wow you work at samsung
+ AlMualem: so...depending on the number of the trees you own and their size.,,, <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/0f136a7d-8e71-4c78-b35d-590fd38684f8">http://chat.codingame.com/pastebin/0f136a7d-8e71-4c78-b35d-590fd38684f8</a>
+ UndercoverToad: usually you don't weight actions but states
+ UndercoverToad: start with a board, create all possible following boards
+ Pick8chu: oh
+ UndercoverToad: then rate these based on some criteria (game points, suns, ...)
+ AntiSquid: Pick8chu try this page first&#160;: <a rel="nofollow" class="external free" href="https://www.chessprogramming.org/Best-First">https://www.chessprogramming.org/Best-First</a>
+ UndercoverToad: remove a few if there are too many (would get too slow)
+ UndercoverToad: and further expand the rest
+ UndercoverToad: that's basically how beam search works
+ Pick8chu: AntiSquid thanks! 
+ Cjx_1: Am starting to think like a sprite, I can see gold in sight! Its gonna be a good day :D
+ Pick8chu: lvl 50? that's crazy
+ Pick8chu: UndercoverToad okay thanks, i think i got what you meant a little
+ Pick8chu: I'll have to measure the state not actions
+ UndercoverToad: exactly
+ AntiSquid: that toad has a level 55 account, who's crazy now?
+ Pick8chu: wait what?
+ eulerscheZahl: hi
+ Pick8chu: that's just crazy lol
+ Pick8chu: hey
+ Pick8chu: wait
+ Pick8chu: that's the real one
+ UndercoverToad: yes
+ UndercoverToad: chat gets laggy with my main account
+ Pick8chu: that's why you are undercover toad!!!
+ Pick8chu: LMAO
+ UndercoverToad: i'm using the other one for the contest duration
+ Cjx_1: out of curiousity (im running a pure heuristic bot) what do the states map to, integers or rationals?
+ jacek: having frog avatar in french site :thinking:
+ UndercoverToad: up to you, I have doubles
+ Cjx_1: ^^ lol L'absurditie
+ UndercoverToad: and chromium just asked me if i want to wait or kill the other tab
+ AntiSquid: you think they'll stare at his legs jacek?
+ Cjx_1: good will to live in that one
+ UndercoverToad: they can eat daiver if they want
+ Cjx_1: rofl
+ struct: hi
+ UndercoverToad: hi legendary struct
+ struct: you didnt know euler?
+ UndercoverToad: i did
+ struct: ah 
+ struct: thanks
+ UndercoverToad: this will be your cognomen from now on
+ UndercoverToad: until the next contest
+ struct: lol
+ struct: all it took was starting the contest 14 days earlier
+ UndercoverToad: you can do that again if thibaud needs testers
+ struct: probably wont do it again
+ UndercoverToad: competing is more fun
+ struct: yeah
+ struct: on first days I had no motivation at all
+ UndercoverToad: at least you did some testing, not like some other testers
+ BrunoFelthes: how many testes cg have?
+ struct: 4 + cg staff
+ UndercoverToad: how many testers did submit?
+ struct: all submited
+ BrunoFelthes: i was a tester for 1 contest... I did a good code, but after this they never call me again
+ struct: but a good ai?
+ struct: 0
+ struct: mine had 100% win rate
+ UndercoverToad: which contest did you test bruno?
+ struct: and i had a bot that had 99% win rate vs that one
+ BrunoFelthes: the one with baracks... 
+ UndercoverToad: code royale
+ BrunoFelthes: this one
+ UndercoverToad: so the other testers did the equivalent of getting stuck in wood?
+ struct: all are &gt; 2000
+ struct: ok above rank 2000
+ Noyotens: my rank is 1659 TH
+ struct: The names are on the forum I think
+ Noyotens: THIS IS GOOD RANK&#160;??
+ UndercoverToad: depends on your goals
+ Noyotens: MY GAL IS TO BE WITH FIRST 1000
+ Cjx_1: THEN, WE GOTTA KEEP GRINDING HARDER nOY :d  &lt;3
+ Cjx_1: sry
+ UndercoverToad: CAPSLOCK IS ALWAYS GREAT
+ AlMualem: you need to be heard!!!!!
+ Cjx_1: when i loose in an fps its normally because shift key&#160;!= caps key lol
+ UndercoverToad: reconfigure the key in your system settings
+ Cjx_1: double shift? Provocative.... Powerful....
+ iMobile: is it possible to retry a specific clash
+ UndercoverToad: <a rel="nofollow" class="external free" href="https://eulerschezahl.herokuapp.com/codingame/puzzles/">https://eulerschezahl.herokuapp.com/codingame/puzzles/</a>
+ Noyotens: I WANT LEARN AI ANY TuTorial
+ iMobile: ty
+ Cjx_1: iMobile, you can recreate the seed using added parameters at least. Not sure if you could get a specific opponents bot, short of coding their moves to be recreated.Others would know better though.
+ Cjx_1: Ooooh :8
+ Cjx_1: thats awesome
+ AlMualem: guys i want to say ,i am really happy for the developers community...there is so much sharing  :D 
+ UndercoverToad: only during contests
+ UndercoverToad: next week the chat will be less active again
+ AlMualem: yes but there are forums and sites with questions and answers
+ UndercoverToad: and tons of helpful writeups for previous contests
+ michaelzlatkin1: Guys I'm so lost as to what you're supposed to do to prevent losing because a bot bumped you out of the way. Do you write avoidance? But wouldn't that just make you slower than if you just take the hit?
+ MSmits: are you talking about coders strikes back michaelzlatkin1?
+ MSmits: most players are currently doing a different game on this website
+ michaelzlatkin1: Yeah, sorry didn't realize this was a global chat!
+ MSmits: there is no other chat really, unless you're French or russian
+ michaelzlatkin1: Alas, I'm not
+ MSmits: it's ok to ask here
+ struct: euler you dont predict enemy right?
+ michaelzlatkin1: Thanks&#160;:)
+ MSmits: so anyways, if you get to the point where collisions matter, you need to start thinkign about a real simulation and search in your bot
+ MSmits: simple heuristics won't be enough then
+ MSmits: there's some sources on the csb main page
+ MSmits: but if you're looking to learn how to write a search/sim, csb might not be the simplest game to do this for the first time
+ elderlybeginner: to start brutaltester, do I need cg-brutaltester or I can go directly to the referee fork and clone the repo?
+ MSmits: I generally recommend playing this game until you get to this point, then try a different game, like a board game, to practice search/sim
+ MSmits: can always go back later
+ michaelzlatkin1: I see, yeah it's a bit unfortunate as I'm pretty junior and a company asked me to do this challenge as a code test
+ MSmits: I see, what is your current rank?
+ michaelzlatkin1: AI is really not my strong suit so it's been a challenge haha
+ michaelzlatkin1: Bronze 1
+ StevenV: haha bot programming for coders test
+ michaelzlatkin1: Or 3
+ MSmits: ah, let's take this to pm
+ michaelzlatkin1: Sounds good
+ MSmits: I'll help
+ michaelzlatkin1: Thank you so much!
+ BrunoFelthes: Anyone know a tool to merge java files into one?
+ NickSaidSomethingWonderful: <a rel="nofollow" class="external free" href="https://github.com/Savinvadim1312/Java-File-Merger">https://github.com/Savinvadim1312/Java-File-Merger</a>
+ BrunoFelthes: tks
+ NickSaidSomethingWonderful: I am using this one
+ Hmills: am i going to fail my gcse tomorrow&#160;?
+ BrunoFelthes: is it works withut intelij?
+ StevenV: how to beat miyaza bot?
+ NickSaidSomethingWonderful: it uses a plugin in Intellij sothat it auto merges the files, without intellij, i am not sure
+ Sanguigno: ca
+ elderlybeginner: I'm looking for some help with brutaltester. Anyone willing to help?
+ DaNinja: ask away
+ Donotalo: how company rank is calculated?
+ aCat: score of top 5 players
+ aCat: sum of individual scores
+ elderlybeginner: I cloned: <a rel="nofollow" class="external free" href="https://github.com/LSmith-Zenoscave/SpringChallenge2021">https://github.com/LSmith-Zenoscave/SpringChallenge2021</a>mvn pakagegot: INFO] BUILD SUCCESSwith some warnings
+ struct: feel free to hire me to climb
+ Donotalo: sum of top 5 players from the company?
+ DomiKo: yes
+ Donotalo: thanks
+ elderlybeginner: trying:java -jar original-spring-2021-1.0-SNAPSHOT.jar -r "java -jar spring-2021-1.0-SNAPSHOT.jar" -p1 "python sc2021.py" -p2 "python sc2021.py" -t 2 -n 5orjava -jar spring-2021-1.0-SNAPSHOT.jar -p1 "python sc2021.py" -p2 "python sc2021.py" 
+ DaNinja: run brutaltester like this:
+ DaNinja: java -jar cg-brutaltester-1.0.0.jar -r "java -jar -Dleague.level=3 -Dlog4j.configurationFile=log4j2.xml ./target/spring-2021-1.0-SNAPSHOT.jar" -p1 "../x64/Release/Spring2021-ai1.exe" -p2 "../x64/Release/Spring2021.exe" -t 2 -n 30 -l "./logs/"
+ elderlybeginner: and getting respectively:<a rel="nofollow" class="external free" href="https://imgur.com/vt7Eq5w.png">https://imgur.com/vt7Eq5w.png</a><a rel="nofollow" class="external free" href="https://imgur.com/Gi2oknI.png">https://imgur.com/Gi2oknI.png</a>
+ Arces: ok
+ Chainman: Why y'all running brutaltester?
+ elderlybeginner: cg-brutal can be replaced with original-spring from referee clone or should I clone <a rel="nofollow" class="external free" href="https://github.com/dreignier/cg-brutaltester">https://github.com/dreignier/cg-brutaltester</a> as well?
+ DaNinja: you need brutaltester to test spring
+ Pick8chu: Sigh
+ ddreams: elderlybeginner for the second error message, you have too new java
+ ddreams: install java8
+ AlMualem: sum of top 3 players with &gt;=5 participants
+ elderlybeginner: i'm getting errors, but it seems to workopenjdk 11.0.11 2021-04-20
+ elderlybeginner: <a rel="nofollow" class="external free" href="https://imgur.com/ttfHkdE.png">https://imgur.com/ttfHkdE.png</a>seems to be legit thank you for your help
+ Chainman: Hello
+ jrke: damn today I was in wood 1 of OOC someone pushed me in bronze and same code is now 1st in bronze lol
+ AlMualem: :D
+ AlMualem: gl mate
+ Marchete: no elderlybeginner
+ Marchete: use Java8
+ Marchete: in linux you can install as alternative
+ solistice: looking to implement prio queue in c#.. but that's slow, no?
+ Nerchio: its fine
+ UndercoverToad: too bad there is none in the default C# library
+ solistice: haven't found one&#160;:(
+ UndercoverToad: give me a moment, i have one that i copied from elsewhere
+ BoBot: is there a (relatively) simple function for (cellindex1, cellindex2) =&gt; areOnTheSameDiagonal?
+ UndercoverToad: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/e074ca3c-33a7-48aa-ae6a-1e865a138fe1">http://chat.codingame.com/pastebin/e074ca3c-33a7-48aa-ae6a-1e865a138fe1</a>
+ solistice: thx!
+ kovi: wow, nice euler
+ BoBot: I am looking at the numbers and I don't see it (and yea, I know I am about a week late with this :D )
+ UndercoverToad: thanks kovi. got a bit of code working finally
+ Cjx_1: bobot, consider what parameters are baked into the board. Maybe the cell neighbors can help you
+ kovi: you were beating me already last days, and now you also beat others&#160;:)
+ UndercoverToad: equal rights for all
+ UndercoverToad: except terry, that one hurts
+ elderlybeginner: Marchete I will.BTW, what's not computed here?WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+ BoBot: @Cjx_1 thanks, I will try some more - I know how to do it with "normal" coordinates and neighbor "deltas", but there are large jumps here :D
+ BoBot: oh, ffs, they are giving us the neighbors, nvm, I really should have started sooner...I am also trying out a new language
+ alchemsti: So, I'm suddenly getting a bad_alloc error in C++, which suggests to me running out of memory -- but tonnes of memory i s available (768MB I believe) and I'm pretty sure I'm not using that
+ alchemsti: (of course probably I am)
+ alchemsti: But -- has anyone else seen this? Coudl they have reduced limits?
+ alchemsti: I'm seeing it at early setup,where I really haven't allocated much of anything...
+ Marchete: incompatible Java versions, so better avoid any ERROR by using Java8. I had exactly that problem and changed to openjdk 8 while maintaining JDK11
+ Marchete: no errors so far
+ elderlybeginner: what do you brutaltester you bot against? Your other bot?
+ Marchete: me? crying with that many bugs
+ alchemsti: Hmm, I wonder if I have something too big on the stack...?
+ Marchete: for others is to change parameters and keep the better
+ elderlybeginner: so it's brutaltesting against your bots with different parameters. No access to boss thou
+ Marchete: yep
+ elderlybeginner: and you finish winning with your previous bot with 100% rate and loosing with everybody else :joy:
+ Marchete: inbreeding
+ Marchete: and it happens a lot
+ Marchete: it's like two children playing basketball
+ Marchete: and one of them always win
+ Marchete: and he try to play against NBA
+ Marchete: tries*
+ UndercoverToad: my 58% offline winrate translated pretty well
+ ClockSort: wtfffffffffffffff my bot has been predicting shade wrong this entire time i think
+ ClockSort: still looking into it...
+ Marchete: I have so many bugs I'll need another week
+ Marchete: wow euler
+ Marchete: congrats
+ UndercoverToad: thanks&#160;:)
+ Marchete: new feature?
+ UndercoverToad: yes
+ Marchete: great
+ Marchete: you still have new magic tricks after a week
+ Marchete: if you are topN will you write a PM?
+ Marchete: I always like these
+ Marchete: N is decided by you :D
+ StevenV: it is end of challenge now
+ struct: wow top 5
+ struct: grats
+ UndercoverToad: we'll see. there isn't much interesting in my bot even. but i have off tomorrow
+ StevenV: tomorrow will be ended
+ kovi: poor illedan
+ UndercoverToad: and I want to win Germany at least. that Philipp is strong
+ StevenV: still don't know how to go to legend
+ JohnCM: oh so exciting, i'm only 5-10 pts diff from the gold boss
+ MSmits: only?
+ StevenV:&#160;?
+ JohnCM:&#160;?
+ StevenV:&#160;:?
+ MSmits: or do you mean ranks?
+ JohnCM: nono i mean points as in game points
+ MSmits: 5-10 is a lot
+ MSmits: &lt; 2 is a little
+ JohnCM: well this morning it was 60
+ MSmits: oh ok
+ MSmits: well good job then
+ JohnCM: yep just plain old heuristics
+ JohnCM: although i coded quite an elaborate one-ply search for growing
+ Chainman: really?
+ Chainman: I'm stuck in bottom of gold with heuristics.
+ JohnCM: yea prioritize growth which leads to a good outcome
+ StevenV: I keep getting this error
+ JohnCM: like gain more sun overall for yourself and blocks off opponent
+ StevenV: OupsAn error occurred (#407): "You reached the limit of plays for a period of time.".
+ StevenV: :persevere:
+ JohnCM: yea i get the same error
+ JohnCM: i guess thre is a limit to the number of tries
+ StevenV: So I think this is why a lot of devs recommend brutal test
+ MSmits: yeah, it is much faster
+ StevenV: But I don't really know how to use it
+ Chainman: oh crap
+ JohnCM: i think the hardest part for my bot is that it doesn't adapt very well to the opponent fast strat
+ JohnCM: i take my time to grow trees, but if opp keeps harvesting, i lose a bunch of pts
+ MSmits: someone should really share how to do this halfway through the contest. If you look at chat history, you will find some tidbits about how to use it here and there
+ MSmits: forum post would be nicer though
+ StevenV: thanks
+ MSmits: can someone share the wiki chat history thingy
+ StevenV: I mean tomorrow is over, So I will try to use it later
+ JohnCM: MSmits, how're you doing for this challenge?
+ Chainman: I also didn't have time to figure out brutaltester.
+ JohnCM: have you broke into legend alr?
+ Chainman: I need to focus just on coding.
+ MSmits: JohnCM I am in legend yeah. I dont think i'll be going up much higher though. Hope for a place halfway through legend
+ MSmits: trying one or two more things, then it's done
+ JohnCM: all the best!
+ MSmits: thanks
+ JohnCM: haha i'm thinking of monte carlo now, since my bot doesn't adapt well. haha maybe i should have started off with that
+ Chainman: good luck
+ StevenV: I still in gold, but really can't figure out how to be legend
+ MSmits: a lot of things work JohnCM, but whatever you do is going to have to be supported by heuristics and pruning and some evaluation
+ Chainman: you are doing not that bad in gold JohnCM.  I'm behind you.
+ JohnCM: definitely, i have plenty of heuristics and pruning
+ Pick8chu: Man
+ JohnCM: haha thanks Chainman, let's see if i can hit legend after a few heuristic tweaks
+ StevenV: some of my friends use monte but they can't even win silver boss
+ Pick8chu: these few days I was working on the challenge and learned so much through this chat lol
+ Pick8chu: you guys are so smart
+ JohnCM: silver boss not that tough compared to gold
+ Chainman: my last submit seems to be worse lol, I'm still like 100 places lower in this submit.
+ JohnCM: the main thing is to ensure your pieces are in "knights move" so they don't block each other. and harvest once you have &gt;4 trees
+ JohnCM: should be able to get gold with that
+ StevenV: I mean hard to use Monte for this challenge
+ StevenV: I am already in gold
+ Chainman: <a rel="nofollow" class="external free" href="https://www.mathsisfun.com/games/knights-move-2.html">https://www.mathsisfun.com/games/knights-move-2.html</a> lol
+ Chainman: yeah keep them distance 2 to have knights move
+ Chainman: except for that one diagonal
+ MSmits: Monte works fine StevenV, you just need to do it in Python
+ Chainman: actuall you just need to check if it is collinear with distance 2 for it to be knights move
+ Chainman: I mean it should not be collinear
+ StevenV: I will try after this challenge end
+ MSmits: I was kidding :P
+ StevenV: I don't think I have time to implement monte now
+ MSmits: it'd be Monte Python is all
+ JohnCM: haha
+ JohnCM: i get the joke
+ JohnCM: but really, monte implement in C++ or C# is better
+ JohnCM: you get more iterations
+ MSmits: yup
+ JohnCM: python is for lazy coders like me who want to just get gold with heuristics
+ MSmits: well c# wont do that much better than java really
+ StevenV: I use java, which have problems with performance
+ JohnCM: so it's C++ then
+ MSmits: or Rust&#160;:)
+ StevenV: It's 3 years since I last use C++ in school
+ StevenV: :D
+ StevenV: really don't remember much of it syntax
+ Marchete: no MSmits
+ Marchete: you are wrong
+ Marchete: C# &gt;&gt;&gt; Java
+ MSmits: i'm sure it's faster, but isnt it similar order of magnitude
+ MSmits: I mean c++ was always 2-3 times faster than both of these
+ Marchete: sometimes is
+ Marchete: I recoded something to C#
+ Marchete: got same performance
+ Marchete: using AVX2 and such
+ MSmits: you mean from c++ to C#?
+ StevenV: C# same performance as C++ really?
+ Marchete: yeah
+ MSmits: well i suppose using the same intrinsics, where these operations are the bottleneck, it makes sense
+ struct: omg top 30
+ struct: I cant look
+ JohnCM: the containers are very efficient
+ struct: o.o
+ Marchete: <a rel="nofollow" class="external free" href="https://raw.githubusercontent.com/marchete/Mokka/main/img/Test2a.JPG">https://raw.githubusercontent.com/marchete/Mokka/main/img/Test2a.JPG</a>
+ Marchete: <a rel="nofollow" class="external free" href="https://raw.githubusercontent.com/marchete/NetMokka/main/img/Test2a.JPG">https://raw.githubusercontent.com/marchete/NetMokka/main/img/Test2a.JPG</a>
+ Marchete: NN inference engine, doing MNIST
+ Marchete: 12us/sample
+ Chainman: legend struct?
+ TobiasA: what does the circle beside the number on the leaderboard mean?
+ Marchete: good job struct
+ dbdr: progress status TobiasA
+ TobiasA: of submit?
+ dbdr: yes
+ Marchete: euler is going strong
+ MSmits: lol I accidentally set my beamsearch to exit when day &gt;= beamwidth and it performed ok anyways
+ MSmits: i guess time runs out
+ peerdb: how small is your beamwidth?
+ dbdr: how did you manage that?
+ MSmits: 1000 :P
+ peerdb: &lt; 24 then
+ MSmits: was gonna use BEAM_DEPTH, but typed BEAM_WIDTH
+ peerdb: ah gotcha
+ dbdr: if day &gt; 1000, you can exit, yes&#160;;)
+ MSmits: this contest is just full of funny errors for me
+ dbdr: long term planning
+ MSmits: looooong term
+ StevenV: I use Java and really don't know to do simulation without timeout errors
+ MSmits: dont make new objects
+ MSmits: generate a big store of them in the first 1 second
+ struct: thanks
+ MSmits: and then just reuse them
+ Trottel-Nit: Two tricks: Create most objects in the first turn (no "new" durcing game turns, use your own pool-arrays). B) "Warmup" the JIT, run some game loops on the first turn
+ struct: I didnt think my change would be this big
+ StevenV: Thanks
+ Trottel-Nit: that is a B ) ... no fun in there ...
+ Marchete: what change?
+ dbdr: nice struct! where were you before?
+ struct: 66
+ struct: not massive improvement but ill take it :D
+ flyingferret: wowfirst time here...and ouch i'm rusty 
+ StevenV: Do we have any gift if we rank high?
+ struct: top 20 gets shirt
+ struct: top 3 gets art
+ StevenV: art?
+ struct: a canvas
+ StevenV: picture?
+ KelvinAndHubbles: the timer in the top left jus randomly turn red for anyone?
+ Cjx_1: bout to explode
+ Cjx_1: run
+ CouscousAgha: we are now in the end game
+ Chainman: yep
+ JohnCM: ok i can't test in ide anymore
+ Chainman: It's getting exciting for the day. 
+ JohnCM: time to go rest i guess haha
+ JohnCM: see how it goes tomorrow with my new untested submit
+ Chainman: yeah that was me yesterday, and then I slept for 10 hours 
+ Chainman: and cleared up my issue in like 5 minutes when wake up. 
+ JohnCM: i'm losing by 5 pts to this super mario dp guy
+ JohnCM: aginer.. haha so frustrating
+ Chainman: dynamic programming?
+ JohnCM: display pic
+ Chainman: oh
+ ClockSort: super mario dp... haha
+ ClockSort: dp[mario][luigi]
+ TheBatMan_TM: hey guys
+ Marchete: reCurs_e plays completely different
+ TheBatMan_TM: how do i run sudo in repl.it?
+ Marchete: he has more than 1 seed in the board
+ Marchete: and not the usual starting moves
+ Marchete: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/556410456">https://www.codingame.com/replay/556410456</a>
+ Marchete: SEED 24 11?
+ Marchete: at frame 6
+ ClockSort: i'm going to legend
+ ClockSort: gg
+ JohnCM: nice one clocksort
+ Cjx_1: grats
+ ClockSort: i had a bug where my MCTS thought small trees could shade large ones.
+ ClockSort: i fixed it and now I've won 43 in a row, no losses, in gold division
+ JohnCM: i actually removed the knights move requirement and my code is performing better
+ JohnCM: wow MCTS really works wonders
+ struct: yeah marchete
+ struct: but it makes sense in the future
+ ClockSort: mcts is magic
+ JohnCM: how many moves did you lookahead till
+ JohnCM: for mcts
+ kovi: competition is heavy for 3rd place
+ ClockSort: i get about 10k rollouts from a new position on day 7
+ JohnCM: or just random rollouts till game end (which is a little too much)
+ ClockSort: but then day 8 i often predicted my opponent's move so i can build off that tree
+ ClockSort: yes it's rollouts to the end position
+ Chainman: you removed knight moves, crap
+ Chainman: I need to learn mcts after this contest
+ Chainman: not enough time in 16 hours.
+ JohnCM: haha i don't think i can do that kind of rollout in python
+ Marchete: simplify to rollout 6
+ JohnCM: but i did a 2-day lookahead for tree growing to see if i should grow in a particular spot
+ Marchete: waits
+ Chainman: crap I was going to try the knight moves thing. 
+ Chainman: It's worse though?
+ Pick8chu: gosh dang ittttttttttt
+ Pick8chu: oh. post4k sorry i'm not sure
+ KelvinAndHubbles: post4k, no quite way, you just have to guess
+ post4k: hehe
+ post4k: Ill just guess then&#160;:)
+ KelvinAndHubbles: just do every clash chat and hope people dont think your crazy
+ Pick8chu: I changed to cpp from JS and totally forgot divisionbetween int give you int
+ Pick8chu: .....
+ ClockSort: 65 matches complete in gold so far, 100% wins.  o_O
+ Chainman: wow
+ Chainman: that's awesome
+ Pick8chu: that really is, good for you
+ Wontonimo: i'm taking credit for popularizing "knights move" thing here.  Do it Chainman!
+ ClockSort: oh, you mean Chainman's Opening?
+ Wontonimo: Hey Chainman - this video on MCTS is great.  He even gives exact calculations so you can make unit tests of it <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=UXW2yZndl7U">https://www.youtube.com/watch?v=UXW2yZndl7U</a>
+ Chainman: lol
+ Chainman: I'm doing knight move
+ Chainman: but I noticed bossoot from silver was doing  knight's move as well.  
+ Chainman: I just didn't do it, but try in gold. 
+ Chainman: crap, maybe I'll try to learn mcts, I'm like 965 in gold now&#160;:(
+ Wontonimo: JohnCM - my MCTS bot easily gets to depth 27 with only 3K rollouts
+ Marchete: 3k rollouts to end?
+ dbdr: that might be too deep and not wide enough, not enough exploration
+ rohrokz: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/1755144530fa86c4f2f3b265568cb9f926d4e10">https://www.codingame.com/clashofcode/clash/1755144530fa86c4f2f3b265568cb9f926d4e10</a>
+ Scarfield: But less depth means one has to make an effort of making an eval function :p
+ Wontonimo: dbdr thanks, you are probably correct
+ dbdr: I suppose the depth only count the tree part. you can still use rollouts to avoid an eval
+ CouscousAgha: you got this ClockSort
+ ClockSort: i know lol, it's not close
+ ClockSort: did you hear about my bug?
+ Wontonimo: Marchete - yes, 3k rollouts to end on around day 4.  Day 1 only 2k.
+ Wontonimo: i've got some performance issues.  it should be around 10-15k
+ Marchete: linear MCTS?
+ Marchete: like p1 first sim then p2 sim
+ Chainman: 3 ms for a turn with just heuristics lol&#160;:(
+ Chainman: so far I look better than my original bot with just addition of knight's move
+ Wontonimo: 1 player mcts.  i may work on DUCT in a few hours
+ Chainman: I've won 4/4 with knight's move against myself
+ Chainman: I think it's an improvement
+ Chainman: okay 6/7 I guess
+ Wontonimo: it is.  my theory is that it encourages growth into your opponents area and is a proxy for avoiding your own shadows of that one tree
+ AntiSquid: damn, should have done this strategy from day one&#160;:/
+ Chainman: I'm debating to try mcts or just add some search algos. 
+ AntiSquid: fastest rank improvement
+ Chainman: what AntiSquid?
+ AntiSquid: random heuristics
+ Chainman: what's that?
+ Wontonimo: return actions[ rand()%len(actions) ]
+ AntiSquid: something that can get you legend Chainman
+ SirLoxley: Darn&#160;:/ I wanted to debug my simulator ... tried to use the offline coding game tool, didn't work and deleted it ... and ended up deleting my simulator, too. Guess that's game over for me. Good luck to all who still compete
+ Pick8chu: When you guys run on brutaltester, do you fight with your own bot?
+ Chainman: without search algos?
+ ddreams: Pick8chu yes
+ UndercoverToad: yes Pick8chu
+ UndercoverToad: :D
+ Wontonimo: oh man , that 's doo bad. SirLoxley&#160;!
+ Pick8chu: I seeee
+ Pick8chu: ddreams yo!
+ Pick8chu: morning man
+ ddreams: or, an older version of the bot
+ Chainman: git SirLoxley
+ ddreams: morning, having fun?&#160;:)
+ Pick8chu: I made it work with c++ haha
+ struct: ok now im a bit more motivated to keep going
+ Wontonimo: several older versions - so as to not overfit just the last one
+ struct: lets see if I can get top 20
+ struct: But cant get a shirt&#160;:'(
+ Wontonimo: go struct go!
+ AntiSquid: because of what i said struct right&#160;?
+ Pick8chu: and was working on it but jsut found out that I've been dividing int/int which only gave me 1 or 0
+ Chainman: lol random heuristics doesn't even make sense
+ SirLoxley: I am more of a mercurial guy ... anyway that would not have helped me.
+ AntiSquid: ok what is your best gold rank Chainman&#160;?
+ Chainman: umm I was 965, but just submitted with knight's move.
+ Chainman: hopefully break 800 now or something idk
+ Wontonimo: i think he meant "a heuristic, not anyone one in particular that has been discussed here" Chainman
+ Scarfield: what is knights move? seeding in "triangles"?
+ SirLoxley: I still have the compiled binary and an earlier core file. Not sure there's a lot I can do
+ AntiSquid: so look at my rank and of couirse it doesn't make sense but i am correct Chainman
+ Chainman: Sure, but I think I need to know what you mean by random heuristics. 
+ Wontonimo: from chess Scarfield, step 2 in line, then one to the side.
+ Chainman: Cause just using some random heuristic obviously wouldn't work, or choosing random actions.
+ Wontonimo: basically, not in a straight line from the seeding tree
+ Chainman: or I'd be doing better right now lol
+ AntiSquid: from 900 to 440 now :D
+ Scarfield: yea got it wonto ty&#160;:)
+ Chainman: Scarfield <a rel="nofollow" class="external free" href="https://www.mathsisfun.com/games/knights-move-2.html">https://www.mathsisfun.com/games/knights-move-2.html</a>
+ AntiSquid: 414
+ AllYourTrees: nice AntiSquid
+ AntiSquid: 397 lol
+ Chainman: wow
+ ddreams: if you're doing really badly, the best strategy is to do the opposite of what you think is good aka. the reverse self-psychology strategy
+ Marchete: the opposite of bad is worse
+ AntiSquid: anyways i do agree it doesn't make sense because obviously the game is balanced and favors skill, right right?
+ Wontonimo: hey AntiSquid, what was your rank before knight move&#160;?
+ AntiSquid: i don't have knight move
+ Chainman: you mean me probably
+ Chainman: I am not doing much better on submit with knight's move, but it was beating my version 6/7 when I tested it.
+ Marchete: knight move is automatically executed if you eval some kind of shadow alignment
+ Chainman: I'm still 900 rank 
+ Scarfield: queen move is better obviously, because queen better than knight :p
+ Chainman: but I'm only 20%
+ ClockSort: go for pawn move, you might promote
+ AntiSquid: if (!bfs_mask[seed_idx]) gp-&gt;score+=10;
+ Chainman: all reverse psychology, just play chess 
+ Scarfield: lol clock
+ Wontonimo: bfs_mask&#160;?
+ Wontonimo: brute force search mask&#160;?
+ AntiSquid: don't think about it, just do it
+ ddreams: Best FriendS mask
+ Scarfield: breath first Seed
+ Wontonimo: oh, i'm stupid
+ Wontonimo: thanks
+ AntiSquid: damn i have some timeouts for games i should have won&#160;:'( <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/556845158">https://www.codingame.com/share-replay/556845158</a>
+ ddreams: AntiSquid I'm getting an error about bfs_mask not defined.. help?
+ Chainman: lolololololol
+ Chainman: I have same problem
+ ClockSort: that's happening to me too
+ Wontonimo: how long are submits taking now?
+ struct: they are fast
+ Chainman: for me I'm 27% in like 5 minutes +
+ AntiSquid: 9/10 wow that's an amazing start @_@
+ ddreams: 13% in 10 minutes
+ struct: mine took around 1 hour?
+ AntiSquid: hope it keeps up! 
+ Chainman: NameError: name 'bfs_mask' is not defined
+ CharmyRosewolf: So close to beating gold bot. I don't know if I can take this pain any longer :sob:
+ Chainman: I tried the random heuristics AntiSquid but I lose 39 - 151 to my bot lol
+ UndercoverToad: that's significant
+ Chainman: I do wonder if it is best to take like 5 best moves and just choose randomly
+ UndercoverToad: why not take the best?
+ dbdr: might be too good
+ PRO_G_r_AM_m_ER: will see what this does (hoarding ftw) <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/556865650">https://www.codingame.com/replay/556865650</a>
+ ddreams: surprise the opponent
+ Chainman: lol, nerf the bot, he is too strong
+ UndercoverToad: right, we don't need a 2nd recurs e. random of top5 is allowed
+ ddreams: maybe that's his strat
+ UndercoverToad: not nerfing it? that's not fair
+ ClockSort: ok i made it into legend
+ Scarfield: nice!
+ ClockSort: and i'm still rocking it :scream:
+ ClockSort: #34 and climbing
+ UndercoverToad: don't worry, reality will hit you when you fight #1
+ UndercoverToad: but well done for going that high after promotion
+ Chainman: whoah congrats ClockSort
+ ClockSort: i'm weak against bots who stockpile suns
+ ddreams: nice, cs
+ ClockSort: @UndercoverToad i had a bug where i let small trees shade big ones. I was top of gold with that bug (!)
+ ClockSort: fixing that bug launched me, um, very high.
+ UndercoverToad: that's a horrible bug :D
+ ClockSort: i know, it's crazy that i won any matches
+ Chainman: wonderful bug for others though.
+ struct: its still mcts ClockSort?
+ ClockSort: @struct yep, duct mcts
+ kovi: gratz clock, duct has a chance for top20
+ Chainman: <a rel="nofollow" class="external free" href="http://mlanctot.info/files/papers/sm-tron-bnaic2013.pdf">http://mlanctot.info/files/papers/sm-tron-bnaic2013.pdf</a>
+ Chainman: is this duct mcts?
+ DomiKo: 4.2 yes
+ UndercoverToad: 4.2 what?
+ Chainman: section
+ UndercoverToad: february the 4th?
+ UndercoverToad: aah, sorry
+ Smelty: nah, april the second
+ Smelty: oop
+ UndercoverToad: somehow I filter links while reading
+ Scarfield: 1/100 of a good time
+ ClockSort: i invented duct and then discovered it had a name and then found that paper :P
+ UndercoverToad: smits needed 2 years to find a paper about it
+ Scarfield: duct is smitsi?
+ UndercoverToad: it's not? i didn't read all the details
+ Scarfield: no idea, havent looked into it
+ RoboStac: no - smitsi has separate trees per player, duct is one tree 
+ Scarfield: saw da_po call it UCT forest
+ dbdr: I think there's a paper for what MSmits does too, isn't there
+ Smelty: wait w0t
+ MSmits: I'm not sure
+ RoboStac: yeah, theres a few very similar things. Can't remember the names though
+ Smelty: yes
+ UndercoverToad: oh, we summoned him
+ MSmits: :P
+ Smelty: h-him?
+ UndercoverToad: smits is a he
+ MSmits: did not get around to trying smitsimax in this contest btew
+ Smelty: he?
+ Smelty: hmmyes
+ UndercoverToad: you told me to try it but I never intended to give it a try&#160;:(
+ UndercoverToad: should I feel guilty now?
+ MSmits: nope
+ Scarfield: yes!
+ MSmits: I am not sure if it is worth trying
+ MSmits: this game has me unsure about everything
+ CogitoErgoProxy: hi guys i've not undestood how do i recognize a undiagnosed sample from a diagnosed in code4life, do you have hint?
+ MSmits: err... that's pretty random
+ MSmits: I understand csb questions, but...
+ UndercoverToad: score -1 i think
+ struct: I think its time for an all nighter :D
+ MSmits: not me, i am quitting in an hour or two i think
+ MSmits: maybe i'll do some netflix 'n brutaltest (no chill)
+ struct: maybe ill do some aws and wait
+ UndercoverToad: maybe my computer has to sleep in the bath tonight
+ Chainman: hahahaha
+ Chainman: alright I'm rank in top 800 now in gold.  I'm ready for searching.
+ MSmits: mmh I just wrote opponent prediction beamsearch, integrated into my own beamsearch and I get the same wr.... thats just annoying
+ MSmits: i mean, if it was much worse... ok, but 50%, wth
+ UndercoverToad: congrats, for me it got worse
+ Chainman: how do deal with score when searching moves ahead? 
+ UndercoverToad: yes
+ Chainman: I'm not sure, do I just add score for a path, and take path with greatest score
+ Chainman: instead of just choosing next move with greatest score.
+ Cruiser18: Is there a way to try some of the Clash Of Code challenges, without actually being pitted against other people?
+ MSmits: depends on your search Chainman
+ MSmits: i dont know what you are doing
+ MSmits: is this a beamsearch?
+ Chainman: I'm going to be doing a beginner simple search algorithm, maybe prune it to be like beam_search
+ MSmits: then i dont know what to tell you except yeah you somehow take the best path/highest score
+ MSmits: searches are all different
+ Chainman: I think I'm going to be doing beam search lol
+ MSmits: with that one you take the highest scoring state at the last finished depth level and pick the first move of its path
+ Chainman: I mean I tried earlier, but gave up on it, and now I have better heuristics. 
+ MSmits: so make sure you can reconstruct the path or at least keep a reference to the move done
+ Chainman: I had made it too complicated and it was super slow. 
+ Chainman: I see thanks MSmits
+ MSmits: np
+ AntiSquid: #366 Chainman
+ Chainman: nice, still not sure what you did lol
+ azriel1rf: Now, I'm in Legend!
+ azriel1rf: in Spring Challenge
+ AntiSquid: are you looking for a job or you wrote that for fun in your profile azriel1rf&#160;?
+ azriel1rf: i have no job,,
+ azriel1rf: is it prohibited to write such thing?
+ ddreams: no
+ azriel1rf: ok
+ AntiSquid: no was about to ask if that's why you were committed to get legend :P
+ azriel1rf: lol
+ MSmits: could change it to: *WILL WORK FOR $$$"
+ azriel1rf: you said it
+ azriel1rf: i use much time to 
+ azriel1rf: this challenge
+ aangairbender: wow top1 is so far ahead
+ MSmits: yep, mostly unbeatable
+ aangairbender: neural network?
+ AntiSquid: go NN or go home
+ MSmits: it is my guess yes
+ Westicles: opening book+SA+closing book
+ BrunoFelthes: i won 1 against reCurse, then i realize that he timeout
+ AntiSquid: no, we are past that question . which algo is it is the question
+ azriel1rf: learn locally and implement it into code?
+ MSmits: share with us how to make him timeout :P
+ LoganWlv: Haha
+ Kellthazar: Jeez...
+ Michael_Howard: I'm losing with "-" score in Arena games I win when send game parameters to IDE - is that definitely timeouts?
+ AntiSquid: Scarfield hi how's it going, what did you do for your bot? :P
+ ddreams: or crashes
+ ddreams: or memory limit exceeded
+ AntiSquid: MSmits beam or mcts  ?
+ Michael_Howard: I don't have a tree&#160;:)
+ ClockSort: @Michael_Howard I am getting the same results
+ MSmits: beam AntiSquid
+ Scarfield: hi squiddy, "guided" MC both players UCT for first action
+ ClockSort: sometimes '-' in battles
+ Westicles: Is dapo a NN guy?
+ MSmits: might have tried a different one if i did not spend so much time fixing dumb bugs
+ Scarfield: rest actions random
+ Scarfield: sim till end of game
+ MSmits: Westicles doubt it, he won that sponsored contest without NN
+ AntiSquid: Westicles why are you asking about him&#160;?
+ BrunoFelthes: i'm using GA
+ Westicles: Just wondering if anyone can swoop in and win
+ MSmits: the only way to do that is to somehow find out what makes re curses bot fail and keep it hidden until the last moment
+ MSmits: not the way i would want to win though
+ AntiSquid: probably if the contest prizes were as big as for the private one Westicles
+ ddreams: lol, did a change that looked good to me just testing losing games without testing it in brutal
+ ddreams: much better arena rank
+ ddreams: 36% wins in brutaltester
+ MSmits: arena is pretty random though
+ ClockSort: is grow 33 a mistake on round 4 in this game against Mazelcop? <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/556895891">https://www.codingame.com/share-replay/556895891</a>
+ BrunoFelthes: what is the prizes for private contests AntiSquid?
+ MSmits: check how much your rank increase corresponds with in terms of rating ddreams
+ MSmits: if it's less than a point, it could just be random
+ BlitzProg: MCTS being built... looks hard to stabilize
+ BlitzProg: so far, 0.4ms per rollout but crashes eventually
+ solistice: someone please kill me
+ UndercoverToad: it's certainly not optimal ClockSort. but i'm not sure if my bot would even do the same bad action
+ solistice: been working for hours fixing something and not figuring out why I coulnd't reach gold
+ UndercoverToad: do you have the input for that turn? i'd want to know what I would do
+ kovi: talking about surprise - RoboStac is also capable of doing mcts-nn
+ solistice: saw that I stopped after 1 iteration of Iterative Deepening for testing purposes
+ UndercoverToad: 1 or 2 days ago he said he's stuck
+ solistice: so was consantly looking depth 2
+ ddreams: MSmits is there a way to check what rank I had?
+ MSmits: no, but i would guess you knew, because you said it was doing better?
+ ddreams: well, I never broke top 100 before
+ UndercoverToad: and he's not the guy for last minute surprises. was leading code royale from start to finish
+ kovi: true
+ MSmits: robo does not hide I think
+ JBM: who does though
+ BlitzProg: nvm, wasn't reseting action count when rolling, surprised it wasn't crashing earlier lol
+ BlitzProg: it's... somehow better than my MC so far? that's insane
+ kovi: i didnt meant hiding, just getting nn ready over a pure/nonheuristic mcts/duct
+ ClockSort: @UndercoverToad i don't know how to get the input
+ ClockSort: the reason i play grow33 here is because i'm favoring large trees in a heuristic. <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/556895891">https://www.codingame.com/replay/556895891</a>
+ UndercoverToad: i always print stdin directly to stderr
+ ddreams: Illedan still improving your bot, or do I have a shot at #1 in the country?&#160;:)
+ ClockSort: i think i can just remove that heuristic and rely on mcts
+ UndercoverToad: then i can copy-paste from the replay info
+ UndercoverToad: Illedan promised no sleep until he beats me
+ struct: lol
+ Chainman: let's go I'm 670 in gold
+ ClockSort: i am going to try removing all opening heuristics and see if my less-buggy-mcts can outthink them
+ ddreams: clearly inspired by Harald Hårfagre.. the king who refused to cut his hair until Norway was one kingdom
+ AntiSquid: is this stuck at 300&#160;? annoying @_@
+ Scarfield: i caught up to you againg though, whats your approach squid?
+ AntiSquid: Chokudai no kensaku arugorizumu
+ UndercoverToad: new keyboard layout?
+ ClockSort: ok, i removed my opening,  now mcts handles that too.
+ azriel1rf: chokudai search? (beam search with efficiency to time management)
+ Scarfield: according to google translate, Chokudai no kensaku arugorizumu = A little sickness
+ struct: Im using chokudai
+ struct: I think
+ azriel1rf: chokudai no kensaku arugorizumu = chokudai's search algorithm
+ struct: thats the translation?
+ azriel1rf: yes
+ AntiSquid: oh it's supposwed to be time efficient? when the width expands too much my bot times out
+ Scarfield: not according to google translate :p
+ struct: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/e4493ade-9281-421a-9a4b-429c02f8c180">http://chat.codingame.com/pastebin/e4493ade-9281-421a-9a4b-429c02f8c180</a>
+ azriel1rf: no = の = 'skensaku = 検索 = search
+ ddreams: you may be Japanese, but Scarfield trusts google
+ AntiSquid: Scarfield look at his location, who do you trust? google or the native speaker?
+ Scarfield: i believe you, just found it funny it was translated into "a little sickness"
+ ddreams: well.. when I ask google voice translate to translate "it's martina's birthday and she's very happy" it thinks I'm saying "it's my pen*s birthday and she's very happy"
+ AntiSquid: you use a vector for it struct or what&#160;?
+ struct: yes
+ Scarfield: thats because it always listens, and translates what you are most likely saying :p
+ AntiSquid: tried anything else&#160;? linked list or somesuch&#160;?
+ ddreams: I was trying to demonstrate that her mother and I could use google translate to communicate (she's italian)
+ ddreams: lol
+ Scarfield: xD
+ struct: vector is fast enough
+ struct: I barely use it
+ struct: I use it like 10 times per turn at most
+ AntiSquid: maybe i implemented something wrong
+ struct: maybe I also did :p
+ Chainman: so basically I kind of have to simulate gamestate in my beam_search, only thing that makes sense. 
+ Zeph.: .
+ Chainman: I want to beat gold boss at least once.
+ Scarfield: thats the point of "searching" Chainman. you look some moves/actions ahead, evaluate the state, pick the move which leads to the most promising state
+ Chainman: yeah just checking it's my first time.  
+ cegprakash: Chainman just mimic gold boss
+ Chainman: wasn't sure I was doing too much/unecessary work
+ Scarfield: important node, if you havent thought about it, assume your opponent is trying to get the best score as well
+ Scarfield: node = note
+ Chainman: I like to assume my opponent is bad though :stuck_out_tongue_winking_eye:
+ Chainman: Wow recurse is far in lead.
+ UndercoverToad: he's no fun playing against
+ DomiKo: top20 is hard now&#160;:/
+ UndercoverToad: fix it
+ DomiKo: i'm trying :sob:
+ UndercoverToad: 408 in submit
+ DomiKo: I can't add any feature to eval that don't break my bot :9
+ DomiKo:&#160;:(
+ UndercoverToad: been there, dumped eval and started at 0
+ DomiKo: ehhhh
+ struct: I think the only way I can climb now is if I had any enemy prediction
+ struct: I still have 0
+ ddreams: 408 in submit? is it broken again?
+ UndercoverToad: top 20 is possible without prediction
+ struct:&#160;:'(
+ jrke: i won't be in legend another contest again :disappointed:
+ ddreams: I'm at 73% after two hours&#160;:&lt;
+ UndercoverToad: 56%, 1h 17
+ jrke: gn
+ ddreams: perhaps ping thib already?
+ UndercoverToad: not sure if system problem or sunday business
+ ClockSort: not sure if sunday problem or system business
+ UndercoverToad: i have an echo
+ Alexiada: y
+ Alexiada: h
+ ddreams: echo off
+ Alexiada: salut
+ dbf: good that I don't need to submit now&#160;:) can see that it is not better from 10 games&#160;:(
+ ddreams: just passed Illedan.. I hope he's sleeping already
+ UndercoverToad: it's 7:43pm for him
+ Krakenus00: Wow, you were prepared
+ ddreams: and me
+ UndercoverToad: and he's online on discord
+ ddreams: here too
+ UndercoverToad: i didn't realize you are from Norway too :D
+ struct: ping him&#160;:)
+ UndercoverToad: thibaud?
+ ddreams: nooo, let him sleep
+ struct: Illedan
+ dbf: or cut his internet cable
+ struct: ok 14 hours left
+ UndercoverToad: time to start coding
+ struct: yes
+ ddreams: time to completely reimplement everything
+ struct: its time for clash 
+ struct: I will rush now
+ struct: my brain is fresh
+ ddreams: try the escape room?
+ struct: already did them
+ UndercoverToad: i did half for a room
+ Zenoscave: time to fix my eval issues
+ UndercoverToad: half of*
+ struct: You didnt like it euler?
+ UndercoverToad: meh
+ struct: yeah its not for everyone
+ struct: I enjoyed it tbf
+ ddreams: I love real escape rooms
+ UndercoverToad: i want clear tasks, no riddles where I have to find out what to do
+ ddreams: zeno, you're throwing away points in the last day
+ AntiSquid: you didn't see the worst part of it UndercoverToad
+ Zenoscave:  does anyone know who in top 20 uses Beam Search?
+ struct: im top 30
+ struct: 31&#160;:(
+ Zenoscave: with beam?
+ UndercoverToad: i know that I use beam
+ kovi: me2
+ struct: chokudai
+ casmith789: waiting for all the games played is nailbiting stuff
+ Zenoscave: how many sims (turn sims not day sims) do you guys finish?
+ struct: 1.5mill +-
+ Zenoscave: welp...
+ Zenoscave: 50K isn't gonna help then
+ peerdb: 1.5m is insane
+ ddreams: depends on your eval zeno
+ ddreams: 50k is sufficient
+ ClockSort: 1.5m sims??!
+ Eglerion: I should go switch language. Only at about 2k in PHP&#160;:(
+ Zenoscave: It's absolute trash
+ UndercoverToad: 40k for me&#160;:(
+ ddreams: 200k for me
+ ClockSort: in fall 2020 i was getting 150k and it was pretty lean. hard to imagine 1.5 million. are you storing them in an array?
+ DomiKo: a lot of seeds I guess
+ UndercoverToad: them = nodes?
+ ClockSort: yes, the object that contains, for example, the height map
+ struct: What do you mean array?
+ Zenoscave: I only allow one seed at a time. Is that not a valid pruning?
+ struct: I store the states on an array yes for bs
+ UndercoverToad: big fat static array
+ Marchete: struct 1.5mill?
+ Marchete: that's a lot
+ struct: yes
+ struct: GameState* Agent::states[3] = {new GameState[1000000], new GameState[1000000], new GameState[1000000]};
+ struct: GameState* currentStates = &amp;states[0][0];GameState* nextStates = &amp;states[1][0];GameState* finishedStates = &amp;states[2][0];
+ ClockSort: yeah, I use this:
+ ClockSort: well i use a vector and alloc on Init, so it goes on the heap
+ Zenoscave: fix it ClockSort
+ ClockSort: @Zenoscave what do you mean, what's to fix?
+ UndercoverToad: first turn will be WAIT, using more time for that sounds useless
+ struct: my state is 96 bytes
+ AntiSquid: why not prune some of them lol
+ ClockSort: pruning takes time
+ ddreams: UndercoverToad even so, it's nice to have the number
+ Zenoscave: ClockSort stack tends to be faster here, iirc
+ peerdb: damn, 96, my state is double that
+ AntiSquid: anyone successfully transfering the search tree from turn to turn?#
+ struct: What do you mean by transfering?
+ UndercoverToad: 136 bytes per state for me
+ ddreams: rerooting
+ AntiSquid: first turn i get 330k but that's useless :D
+ ClockSort: my state is huge, i don't even know how big. it has an array of 37 ints for each height. not the best, ha
+ ddreams: I get 2.5m first turn
+ AntiSquid: so what do you do with it afterwards?
+ ddreams: throw it away of course
+ struct: array of 37 ints?
+ Zenoscave: 288 bytes here
+ struct: oh god
+ ClockSort: yeah
+ ddreams: that's how I started too
+ ClockSort: how do you store heights and check shadows?
+ ddreams: now I have four uint64_t's
+ struct: bitboard
+ ddreams: bitboarding
+ ClockSort: any reference/link for details?
+ Zenoscave: struct do you not store forward days of shadows?
+ AntiSquid: bitset
+ struct: nope
+ Zenoscave: trees[player][size] |= 1ul &lt;&lt; cellIndex
+ struct: <a rel="nofollow" class="external free" href="https://core.ac.uk/download/pdf/33500946.pdf">https://core.ac.uk/download/pdf/33500946.pdf</a>
+ ddreams: do you cache sun/shadow computations?
+ ddreams:&#160;?
+ struct: nope
+ ddreams: oops, double q
+ struct: my shadowing takes 10 nanoseconds
+ struct: so idc
+ UndercoverToad: what's that zeno?
+ ddreams: the bitboarding pdf by cameron browne
+ ClockSort: thank you struct for the link
+ struct: n+
+ struct: np*+
+ jacek: np-complete+
+ Zenoscave: for clocksort that's a basic bitboard encoding
+ Scarfield: <a rel="nofollow" class="external free" href="https://eprints.qut.edu.au/85005/1/__staffhome.qut.edu.au_staffgroupm%24_meaton_Desktop_bits-7.pdf">https://eprints.qut.edu.au/85005/1/__staffhome.qut.edu.au_staffgroupm%24_meaton_Desktop_bits-7.pdf</a> ClockSort
+ struct: I could share my bitboard structure
+ struct: is not amazing but I guess I could
+ struct: after it ends
+ struct: I think more people use it anyways
+ Scarfield: dammit you won struct, even a cleaner link
+ ClockSort: mcts was so hard to code (my first time) that i haven't spent much focus on making the state lean
+ ddreams: well, you did beautifully apparently
+ UndercoverToad: MCTS gets significantly better with more sims
+ Scarfield: after contest i can recommend clobber for playing with bitboards, probably the simplest game to do that for, or maybe breakthrough
+ ClockSort: very true @UndercoverToad
+ struct: I still have time for mcts
+ struct: but I have no idea how to implement duct
+ ddreams: how many rollouts did you say you get, clocksort?
+ ClockSort: roughly 10k from day 4, luckily i often predict the opponent's move and can reuse the tree on the following turn
+ struct: 10k rollouts is how many sims?
+ ddreams: 250k?
+ ClockSort: my rollout is not a full sim. i cheat a lot, for example, don't check seed distances when seeding during rollout
+ ClockSort: i just let them seed anywhere, it seems to work :grin:
+ Scarfield: :scream:
+ UndercoverToad: surprising
+ struct: o.o
+ ddreams: I've heard about such shortcuts, but didn't think it'd work here
+ ClockSort: after midgame the whole board is reachable anyway
+ kurnevsky: I had ~1500 sims in my mcts&#160;:)
+ struct: ok im gonna implement it
+ ClockSort: @kurnevsky me too, the O3 optimization helped
+ ddreams: duct too, kurnevsky?
+ struct: I have it coded already anyways
+ kurnevsky: But probably I did something wrong - seems too small&#160;:)
+ ddreams: I coded it up for fall.. perhaps I should try too
+ kurnevsky: No, I don't use mcts because of this&#160;:)
+ ddreams: aha.. beam search?
+ kurnevsky: Plain minimax&#160;:)
+ ddreams: nice, didn't think it'd work here
+ UndercoverToad: even a non-parallel algo where the opponent can move after you?
+ kurnevsky: Yes.
+ UndercoverToad: and that huge branching
+ AntiSquid: read chat history (wiki page) i said anything would work :P
+ casmith789: finally legend&#160;:)
+ UndercoverToad: i discarded the idea on the first evening already
+ AntiSquid: gz casmith789
+ casmith789: ty
+ UndercoverToad: dbdr still owes us some days of chat history
+ kurnevsky: I had parallel version but then realized that it actually executed on single core&#160;:)
+ UndercoverToad: and he should lock out the spammers that make the server lag
+ ddreams: wiki page?
+ dbdr: easy to say :P
+ UndercoverToad: with non-parallel I mean sequential (you take a step, then the opponent)
+ UndercoverToad: dbdr isn't there a setting that you have to approve profiles before they can edit?
+ Kellthazar: Im watching the alphago documentary to, maybe, have some idea to improve my heuristc XD
+ kovi: recurse submit
+ dbdr: yes, that's a good idea
+ emagnidoc: hello, i m not sure if this is the right place to ask questions but i m having a weird issue where my test cases are green but the test case during submit is not. thx in advance
+ UndercoverToad: while the game itself is concurrent, not sequential. which made me think that minimax would be too paranoid
+ ddreams: takes hours for submissions now
+ UndercoverToad: ping staff again or sit it out?
+ dbdr: it's a broken reCurse submit I think
+ struct: do it euler
+ ddreams: I think pinging staff is worth it
+ ddreams: costs me nothing
+ UndercoverToad: your turn this time struct
+ UndercoverToad: i already did on saturday, you can fully ruin the weekend
+ struct: lol
+ kurnevsky: &gt; with non-parallel I mean sequential (you take a step, then the opponent)
+ struct: ill just wait for some random to ping them
+ UndercoverToad: only mods can ping @staff
+ dbf: maybe they have on-call rota and there is a next person already&#160;:)
+ UndercoverToad: submit count is stable around 400
+ UndercoverToad: i still remember my 1st contest here (HyperSonic)submits on the last day were extremely slow. like 10h
+ UndercoverToad: servers were crying in pain
+ Chainman: RIP
+ Zenoscave: ok 150k sims in 100ms now
+ UndercoverToad: still 40k&#160;:(
+ UndercoverToad: but heavy eval
+ Zenoscave: well that's my local number. I'm sure submit will be slower
+ Zenoscave: 60% timeouts&#160;:/
+ kurnevsky: Is it number of full game evaluations till the end?&#160;:)
+ UndercoverToad: 40k is my number of single actions I can simulate
+ kovi: 80k heavy eval
+ Scarfield: i wonder how expensive it is to increment the simcount
+ natofp: Why does it make sense to run random algorithm in MCTS instead of using heuristic to evaluate the position?
+ joelthelion: natofp your heuristic will bias your rollouts and that will make your MCTS miss possible counterplay
+ UndercoverToad: it's just hard to come up with a good eval. but adding some domain knowledge can still help if done right
+ joelthelion: I think slightly biasing your rollouts can work, but it's tricky business
+ ddreams: the number of seed actions vastly outnumber the rest, so
+ ddreams: I guess you can cheat
+ natofp: but how does it make sense in chess for example? most of the games would end in a draw so you should probably eval after some random rounds?
+ joelthelion: well, MCTS doesn't work too well for chess
+ kurnevsky: Biased eval should work, at least pachi uses it.
+ DomiKo: rebless recalc?
+ DomiKo: now 100% winrate is coming?
+ reCurse: Trying
+ Scarfield: looks much better than the prev resubmit :muscle:
+ UndercoverToad: i got a lucky win vs your last in arena but didn't save it
+ Scarfield: 100% or delete account?
+ kovi: i saw it...was thinking to finetune vs. recurse weakness for finals
+ VizGhar: so its NN right?
+ reCurse: :zipper_mouth:
+ kovi: but now im too weak for top3 anyway
+ Zenoscave: A Magician never reveals his secrets
+ Zenoscave: their*
+ UndercoverToad: tuning vs recurse gives you a good boost for each win
+ ddreams: you had some timeouts?
+ Zenoscave: if you can tune that is.
+ UndercoverToad: outweights at least 2 losses vs equally ranked bots
+ reCurse: I can't do anything about the timeouts
+ reCurse: Server hiccups are impossible to plan against
+ ddreams: just use 5% of your cpu to check the clock like me :p
+ reCurse: Just trying to fix its moments of stupidity
+ jacek: sidechannel attacks for you eval?
+ UndercoverToad: you mean the moments where it completely stops playing and loses by 50 points?
+ reCurse: Among other things
+ UndercoverToad: does it try to get a high score even? or just win/loss?
+ reCurse: :zipper_mouth:
+ UndercoverToad: ok
+ Astrobytes: nn confirmed :P
+ UndercoverToad: will you tell tomorrow?
+ PRO_G_r_AM_m_ER: ok, hope to finally  beat silver, omg
+ reCurse: Sure, trying to stay focused
+ reCurse: Gonna close chat soon
+ UndercoverToad: ?disableChat
+ Zenoscave: ttyl reCurse GL on the 100%
+ struct: is your goal 100% winrate?
+ Astrobytes: It'll be a good PM, well done reCurse
+ reCurse: Minus hiccups yes
+ Scarfield: yea jebus, you are just being mean at this point :p
+ reCurse: Sorry
+ ddreams: sorry not sorry I believe
+ jacek: hes canadian, the sorry is legit
+ Scarfield: xD
+ Astrobytes: :rofl:
+ reCurse: That man canadians
+ peerdb: whats PM?
+ Scarfield: post mortem
+ peerdb: aah gotchu thanks
+ Scarfield: or private message in some cases, but not this time&#160;:)
+ ddreams: 100% completed battles now, up to rank 70, even if brutaltester gave 36% wins :o
+ Zenoscave: which I always thought was a weird nomeclature
+ Scarfield: ^
+ peerdb: yeah RIP recurse I guess
+ Astrobytes: Wonder if the Canadians got the 'sorry' thing from us Scots, we vastly overuse it
+ ddreams: number of concurrent submits have started to drop, ,nice
+ Zenoscave: dbdr <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/556973528">https://www.codingame.com/share-replay/556973528</a>
+ ddreams: maybe staff pinging helped
+ Astrobytes: don't think anyone pinged staff
+ Zenoscave: I lose 60% of the bottom league. you got a bug
+ Scarfield: stru ct did i think(?)
+ struct: nope
+ Zenoscave: oh Hai mark
+ ddreams: the toad did, I though
+ ddreams: t
+ dbdr: yes Zenoscave?&#160;:)
+ ddreams: maybe not
+ Astrobytes: Nothing on discord, unless it was in DMs
+ Zenoscave: you've got a bug. I shouldn't beable to even tie your bot 
+ Zenoscave: Bad search perhaps?
+ dbdr: that's broad :D
+ Scarfield: fix it
+ UndercoverToad: i did not ping staff
+ ddreams: zeno's bot is optimized to beat dbdr
+ UndercoverToad: told struct that it's his turn today
+ Zenoscave: I don't know how to be less broad. just suprised at a  win with a test bot that rarely wins
+ ddreams: ah, right, looks improved anyway
+ UndercoverToad: and submit count even below 400 again
+ ddreams: yeah, my last battles suddenly finished too
+ UndercoverToad: might be just a busy day. it always gets a little slower at the end
+ UndercoverToad: and start of the contest as well
+ Scarfield: temperature of server room :thinking:
+ Zenoscave: is a true skill elo of 9.3 bad&#160;?
+ Scarfield: that depends
+ ddreams: val got a win against recurse... time to delete
+ reCurse: Happier about that loss than some others I saw before
+ UndercoverToad: 2 points difference and you were on the bottom side
+ ddreams: some maps are very biased too
+ UndercoverToad: which I consider at disadvantage
+ ryoukai: What time does CP update daily?
+ UndercoverToad: 3am CEST or something like that
+ UndercoverToad: which would be in 6-7h
+ Illedan: Hmm, ddreams above me. Ok, can't have this
+ ryoukai: Thanks 
+ peerdb: Question: Im trying to write a beamsort and to prune my nodes I have to sort them on value somehow. std::sort seems very slow, what are good ways to prune gamestates
+ ddreams: bring it&#160;;)
+ UndercoverToad: you can't have me about you either Illedan. do something about it&#160;;)
+ Zenoscave: I hate having a toad about me
+ Illedan: I have 4 hours before bed. Wasn't allowed to be tierd tomorrow :D
+ Astrobytes: zeno :rofl:
+ UndercoverToad: a toad about you?
+ UndercoverToad: is that a pun that I don't get?
+ Astrobytes: UndercoverToad 07:39PMyou can't have me about you either 
+ UndercoverToad:&#160;:(
+ Scarfield: xD
+ Zenoscave: :P
+ Astrobytes: :D
+ ddreams: toad doesn't even know what he's saying at this point
+ Scarfield: MansplainstroBytes
+ UndercoverToad: my fingers just don't obey me anymore
+ Zenoscave: I think it's sleeping time toady
+ Astrobytes: Cat petting time
+ Chainman: yeah
+ UndercoverToad: got a version which is 52% to 48% in local
+ UndercoverToad: no idea how that translates to the arena
+ SabertheLost: If the shadowsize is 2, then a tree size 3 get zero? Correct. But I´m looking at a board where blue prints get 17 but on board it should only get 12
+ ddreams: lol, I have no faith in brutaltesting myself anymore
+ ddreams: I'm happy I submitted this version without testingit
+ ddreams: gave me like 50 ranks
+ peerdb: what is this brutaltest youre talking about?
+ ddreams: even if brutal said 36% or so wins
+ UndercoverToad: play offline vs yourself, several games in parallel
+ ddreams: peerdb a program that pits your bot against itself many times
+ Chainman: SabertheLost you get sun points at the beginning of the day
+ akagami101: lol
+ Scarfield: trees only cast spooky shadows on trees of same size or smaller SabertheLost
+ SabertheLost: Chainman. Is that that before or afte the sun is moved?
+ ddreams: SabertheLost a size 2 tree does not spookyshadow a size 3
+ SabertheLost: Is that a change of the rules from the first days?
+ ddreams: no
+ Scarfield: no
+ ddreams: They will find the shadow on a cell spooky if any of the trees casting a shadow is of equal or greater size than the tree on that cell
+ UndercoverToad: still 200 players missing to hit the count of last contest
+ SabertheLost: ah crap another rule that hidden in text.  Or was it explained different in the youtube viedo? I think that viedo might done more harm...
+ Scarfield: "They will find the shadow on a cell spooky if any of the trees casting a shadow is of equal or greater size than the tree on that cell. " last part of Sun &amp; shadows
+ ddreams: the text really emphasizes the wrong things
+ Scarfield: ^
+ Scarfield: yea you have to read carefully
+ ddreams: Helping the wood spirits are LESSER SPIRITS hiding among all the trees.They will find the shadow on a cell SPOOKY if any of the trees casting a shadow is of equal or greater size than the tree on that cell.
+ ddreams: the bolding is just misdirection
+ ddreams: In between each day, the sun MOVES to point towards the next direction
+ Scarfield: :o didnt even notice
+ Scarfield: it is hard to write a concise and easy to understand statement though
+ SabertheLost: That makes my whole algo bad. 
+ Scarfield: good news, "easy fix" to gain in rank maybe&#160;;)
+ SabertheLost: I think I was confused that the distance did not matter and assumed that distance ment also size
+ SabertheLost: and no my algo sucks.&#160;:) 
+ Scarfield: xD
+ SabertheLost: It´s just number of trees shading an square
+ Scarfield: no no, not the number of trees, only their sizes matters
+ Chainman: alright, I'm getting 40 ms with a very simple beam search of width=1 and depth = 4 lol.  Much better than last time.  But I'm also not consider opponent, and not consider shadows yet.
+ Chainman: I need to count the number of nodes I can get this time. 
+ ddreams: 4 days?
+ Chainman: nope
+ Chainman: 4 actions
+ Chainman: wait and my width was 1
+ Chainman: wtf, that's sad
+ ddreams: better compare nodes after wait
+ ddreams: *for move selection
+ InternalErrror: Why is the Python Interpreter here still not 3.8 or higher?
+ InternalErrror: Walrus would be great for Clash of Code shortest mode
+ struct: its 3.9.2&#160;?
+ InternalErrror: no, walrus operator is always marked as invalid syntax
+ InternalErrror:&#160;:=
+ struct: but does it compile?
+ InternalErrror: no, syntax error
+ UndercoverToad: can still work
+ UndercoverToad: highlighting is not the same version as the language itself
+ jacek: who needs walrus, sounds pascalic
+ struct: it compiles
+ InternalErrror: It's assignment + return the value in one operator
+ jacek: oh i know! CG needs new language, delphi!
+ UndercoverToad: that's Pascal in OOP
+ UndercoverToad: on paradigm that's really missing: Prolog
+ ZarthaxX: hate prolo
+ ZarthaxX: g
+ annaproxy: Yess prolog
+ UndercoverToad: never tried it
+ ZarthaxX: used it on uni
+ ZarthaxX: damn man
+ UndercoverToad: just saying: we have a lot of OOP, some functional
+ UndercoverToad: prolog is a thing for itself
+ struct: whats prolog used for?
+ CouscousAgha: can i debug print in the console output?
+ UndercoverToad: prolog is a logic language
+ InternalErrror: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/e8064795-fd40-4332-a538-e5b9e35dc69d">http://chat.codingame.com/pastebin/e8064795-fd40-4332-a538-e5b9e35dc69d</a>
+ UndercoverToad: do you know the Einstein riddle?
+ struct: true ai?
+ struct: no
+ reCurse: Ew prolog
+ UndercoverToad: where different persons live in houses, have favorite food and nationality, houses have colors
+ UndercoverToad: you are given a bunch of relations
+ UndercoverToad: and have to find the actual assignments
+ UndercoverToad: for prolog you just give the relations and the program will solve it for you
+ UndercoverToad: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/hard/einsteins-riddle-solver">https://www.codingame.com/training/hard/einsteins-riddle-solver</a>
+ InternalErrror: what now it works
+ InternalErrror: just one clash ago it didn't
+ struct: cg staff is fast
+ struct: they just updated based on feedback
+ struct: ill check it afte contest euler
+ ddreams: updated what?
+ InternalErrror: insert * flash meme *
+ ddreams: python version?
+ InternalErrror: yeas
+ UndercoverToad: obviously struct is trolling
+ UndercoverToad: * it's sunday
+ jacek: crashing is done fast
+ struct: ok i Need to fix my damn bot
+ ddreams: also changing python version in the just as a contest is finishing :D
+ struct: I said this 3 hours ago
+ ddreams: - in the
+ UndercoverToad: i think i'm making mine worse
+ UndercoverToad: or i was lucky before
+ ddreams: doing mcts struct?
+ struct: no
+ struct: beam
+ ddreams: thought you'd test it
+ struct: Maybe I will
+ UndercoverToad: top20 or delete
+ struct: But I dont know duct
+ struct: and I think i cant understand it
+ ddreams: I'm trying to get my fall mcts to work
+ struct: I dont feel like top 20 is realistic
+ ddreams: delete
+ struct: maybe on next contest
+ struct: im safe on this one
+ jacek: tomorrows contest ends and we can finally go back to clashes, the main point of CG
+ struct: ok its time for me to close the chat 
+ struct: cya in 12 hours
+ ddreams: ciao
+ Donotalo: server becomes so slow during the last 24h of the contests, this is frustrating&#160;:(
+ Donotalo: it takes a lot of time before knowing my new bot's position
+ Donotalo: why don't CG do anything about it?
+ DomiKo: what they can do?
+ Donotalo: may be increase number of servers?
+ DomiKo: and who will pay for this?
+ Donotalo: just thinking, as it happens always
+ Donotalo: ha ha, yea, that's the question
+ skotz: maybe get some corporate sponsors
+ Donotalo: in last 4-6 hours, i hesitate to submit any new code because of this slowness
+ ddreams: I'd pay for it personally
+ ddreams: cost of joining a contest instead of working for clients is pretty high 
+ skotz: same here so long as it was "support the contest" and not in any way "pay to win"
+ ddreams: of course
+ ddreams: just adding some servers during the contest period
+ UndercoverToad: in the past contests were even sponsored
+ UndercoverToad: maybe 20 companies. you could select some that may contact you for a job
+ UndercoverToad: mostly in fr
+ reCurse: I'm pretty sure you'd need to pay a lot before it starts making a difference
+ reCurse: Clouds aren't cheap
+ ddreams: not that expensive either
+ jacek: you just need to vapor some water. ezpz
+ darkhorse64: I leave the contest for a long weekend. When I return, the first has a 7 point ELO lead. Is there an anti doping control scheduled for tomorrow&#160;?
+ Illedan: I would pay for more games through the cg platform for myself
+ MSmits: they need to monetize us
+ DomiKo: pay to play?
+ Illedan: Nah, just for a serious amout of extra games
+ Astrobytes: darkhorse64 :D
+ Illedan: Without the new restrictions
+ Astrobytes: The new restrictions are fking awful
+ jacek: new restrictions?
+ MSmits: only for losing cg bench i think. I havent hit the limit just from trying the IDE
+ Illedan: I hit it the first day
+ Illedan: when all games were fast
+ MSmits: hmm, i guess  i am slow
+ struct: I hit during testing
+ ddreams: I'd pay for everyone to have a better experience.. don't think so many more servers would be needed
+ darkhorse64: does that counter hiders&#160;?
+ ddreams: like a 16-core 64gb machine costs like $180 per month
+ ddreams: err, 180 for 14 days
+ peerdb: what restrictions?
+ ddreams: if you play too much in the IDE, you get locked out for a while
+ peerdb: oh ive never had that happen
+ peerdb: thanks
+ Astrobytes: Try tweaking some constants in the IDE and playing matches. Dead in minutes
+ Illedan: Max 600 a day
+ ddreams: me neither, but I test mostly locally
+ peerdb: 600 a day is fine.assume you spend 16 hours here a day (cus im a nerd), its 38 per hour
+ peerdb: yeah i dont hit that
+ Astrobytes: There are other limits. Plays per n seconds, minutes, hours
+ peerdb: ah okay I didnt know
+ MSmits: btw.. I rammed out my fastest mcts ever..  took me 2hrs, unfortunately it sucked compared to my beamsearch 
+ BlitzProg: Hey MSmits
+ ZarthaxX:&#160;:(
+ ddreams: how many rollouts did you get?
+ BlitzProg: I got My MCTS up too lol
+ MSmits: 12k or so
+ BlitzProg: oh my god, first turn?
+ MSmits: no
+ ddreams: did you try the seed cheat?
+ MSmits: 2nd turn
+ MSmits: whats that ddreams
+ ZarthaxX: talking with the mcts master here BlitzProg what did you expect
+ ddreams: don't check if it's legal to seed somewhere
+ MSmits: mmh for use in mcts?
+ ddreams: yep
+ BlitzProg: Well I'm expecting at least to not feel so ridiculously bad in comparison lol
+ struct: a bug that works
+ struct: ...
+ MSmits: ah, i gues that might work yes
+ JudgeAL: r u guys talking about spring challenge?
+ BlitzProg: but there I am, with my 330 rollouts turn 2
+ MSmits: mine was just a SP mcts, not a 2p mcts. 
+ Astrobytes: Yes JudgeAL
+ BlitzProg: So is mine
+ MSmits: ah ok
+ ZarthaxX: MSmits i think that clocks has some good eval, besides using mcts
+ JudgeAL: ahh i see, how do u train stuff and upload it?
+ ZarthaxX: i dont think that's the real magic only
+ MSmits: yeah, i am not saying that mcts wont work
+ MSmits: i was hoping it could somehow benefit from not needing a midgame eval
+ ZarthaxX: you mean *will* work
+ MSmits: like beam does
+ ZarthaxX: like super easily
+ ZarthaxX: ahhhh
+ ZarthaxX: agree
+ Astrobytes: JudgeAL: Most of the search algos are online, I suspect there is at least one NN though. For that you need to train offline and embed weights
+ ddreams: how about beam search until midgame?
+ ddreams: I call it dream search
+ MSmits: yeah i have been considering combining multiple searches, but dont have the time anymore
+ BlitzProg: I am mentally exhausted about all of this, but there's some good news: there are 12 hours left
+ Astrobytes: I think different searches (or evals) for different stages are appropriate for this
+ Illedan: I have so many timers in my code :D
+ Astrobytes: lol
+ MSmits: maybe i should add some
+ Illedan: if Day &gt; Nif Num3 &gt; K...
+ ddreams: lol, the missing piece
+ ddreams: timers
+ JudgeAL: ohh, dang just manually copy and paste weights.
+ ddreams: why do you call that timers though?
+ MSmits: because he uses 1 eval until time runs out
+ MSmits: then uses another
+ ddreams: oh
+ reCurse: Losses are often suspiciously bunched together.
+ reCurse: I think servers are up to something
+ Illedan: Isn't 80 ms enough to solve that?
+ reCurse: You think I have milliseconds to spare
+ reCurse: Besides I've seen jumps in the 30ms
+ Astrobytes: 30 :o
+ ddreams: it seems like you can afford a couple of losses without losing rank
+ Illedan: I think he really wants 100% win :P
+ ddreams: yeah, jk
+ BlitzProg: MCTS sounds like it won't help me past legend, I'll see if I can set up a BS with the time I have left
+ reCurse: Sorry wasn't meant as whining
+ reCurse: I'm just puzzled at what's going on
+ ddreams: didn't take it like that, was just jabbing at your complete domination
+ reCurse: When something's too weird I need to know why
+ MSmits: jabbing is all we got left reCurse :P
+ Illedan: :D
+ Astrobytes: hehehe
+ BoBot: has this kind of domination in a contest occurred before? :D
+ Astrobytes: Yes.
+ MSmits: mmh i did halfway through a contest once
+ MSmits: then the other guy caught up and we dominated together
+ Illedan:&#160;:)
+ MSmits: and i ended 2 :P
+ Illedan: Which was that?
+ MSmits: xmas
+ ZarthaxX: joli 1 rigth
+ MSmits: yep
+ Astrobytes: yeah
+ MSmits: no nn's though
+ MSmits: this is something else
+ MSmits: dont think anyone has done this in an official contest here
+ Illedan: Wont know for sure until recalc
+ Illedan: Someone might appear
+ struct: im still hiding
+ MSmits: we can see you
+ reCurse: Good thing there's no PS5 on this one
+ Illedan: haha
+ Astrobytes: lol
+ struct: my current bot is from testing phase
+ ddreams: ps5?
+ Zenoscave: lol Do you still fear the dapo with this bot?
+ reCurse: Just saying
+ MSmits: reCurse didnt you also have a huge lead on ice and fire?
+ reCurse: Hmm
+ reCurse: Maybe
+ MSmits: I think it was +5 for a long time there too
+ Zenoscave: Ninja remember Ice and Fire?
+ ClockSort: i'm getting '-' timeouts at random, are others seeing this
+ MSmits: maybe not at the very end though
+ reCurse: Yes
+ NinjaDoggy: I will always remember ice and fire&#160;:(
+ NinjaDoggy: teccles and I were like 0.5 apart fighting for first
+ NinjaDoggy: and then recurse comes in with a +4 lead or something&#160;:(
+ Illedan: xD
+ reCurse: See that couldn't happen now
+ MSmits: yeah thats what i remember
+ reCurse: I was batching all day
+ BlitzProg: Maybe I should write another PHP heuristic
+ Cappefra: recurse you're insane
+ DomiKo: he always was
+ NinjaDoggy: nah recurse is noob, not even 42 points :P
+ ZarthaxX: famous last words :D
+ NinjaDoggy:&#160;;)
+ Illedan: It's like the rest of us is not even trying..
+ Cappefra: Everybody fighting for 0.2 points and there's a bot leading by +7
+ reCurse: Here's a better way to put it, you have a better life balance
+ ddreams: uhh..
+ Cappefra: when did you start with this bot, out of curiosity?
+ Illedan: I wish that was the tradeoff
+ reCurse: Day 1
+ Cappefra: I didn't see your name until like yesterday
+ ddreams: he was coding in secret
+ Numby: reCurse when did you do first submission
+ reCurse: Yesterday
+ Numby: LOL
+ ddreams: struggling to get through wood league
+ Cappefra: hahahaha
+ reCurse: I was hiding but did zero batch
+ Numby: that's so stealthy
+ reCurse: Just FYI
+ ddreams: truth, but only because servers were basically broken
+ JBM: we believe you
+ NinjaDoggy: zero batch?
+ ZarthaxX: wow
+ ddreams: when you say batch, do you mean playing with an alt?
+ reCurse: Maybe a few hundred of IDE plays total
+ ZarthaxX: didnt test against anyone??
+ reCurse: Just to validate it was working
+ ZarthaxX: beast recurse
+ JBM: well that's certainly more than *I* lol
+ Cappefra: so you submitted in wood 2 with your legend bot
+ reCurse: Doesn't work
+ Numby: that's so insane :D
+ reCurse: In bronze though yeah
+ Cappefra: ok
+ dloukadakis: you can get to gold by playing randomly lol
+ Numby: did you submit simple bot to get to gold then submit your main directly?
+ ddreams: you could have detected wood leagues based on trees
+ Cappefra: did the bronze boss self-destruct after that?
+ Cappefra: did it say "woah chill bruh, take it easy jeez"
+ MSmits: ddreams he needs the codespace 
+ MSmits: no fancy unnecessary code
+ reCurse: Final bot minus a change or two in bronze
+ reCurse: I encountered something funny
+ reCurse: But that's a story for another day
+ NinjaDoggy: hey recurse you should start working on PM now that first is secured&#160;:)
+ reCurse: I did, inspiration is a bit dry though
+ kovi: rollover in uint8_t score or sun?
+ Cappefra: whar's pm again?
+ ddreams: postmortem
+ Astrobytes: post mortem (report)
+ reCurse: Oh if it was just rollover
+ NinjaDoggy: recap of your bot
+ Cappefra: aah ok lol didn't get the joke
+ jacek: trollover?
+ Astrobytes: That is what I call a solid submit reCurse.
+ NinjaDoggy: whelp he got to 42...
+ NinjaDoggy: nah recurse is noob not even 42.69 :P
+ Vova_s: does anyone know, how the score is calculated?
+ Astrobytes: lol
+ ZarthaxX: NinjaDoggy hahahaa
+ Astrobytes: TrueSkill algo Vova_s
+ ZarthaxX: astroooo!
+ Astrobytes: zarthaaaa
+ ddreams: Illedan resubmits.. let's see
+ Astrobytes:&#160;!
+ Illedan: Pff
+ Illedan: Random changes
+ Illedan: No motivation for 1 week doesn't help :D
+ Astrobytes: I only went to gold because the Toad insisted
+ Astrobytes: Was gonna go all in yesterday but, well, yesterday :P
+ reCurse: I find that hard to believe given your previous statements
+ reCurse: Did you decide to go all in yesterday today?
+ Astrobytes: No I got gold the other day
+ Astrobytes: And I was gonna give up, but was motivated yesterday until the server stuff
+ 1XC: :expressionless:
+ reCurse: You were motivated? :o
+ Astrobytes: Just been submitting random crap today
+ Astrobytes: Not 'motivated' as such. Call it a buoyant enthusiasm.
+ reCurse: I don't know if it baffles me more
+ reCurse: :P
+ Astrobytes: :D
+ Codechaos: Will the spring challenge be playable after tomorrow? Don't have time to improve my bot any further right now
+ NinjaDoggy: it will come back as a multi
+ peerdb: yeah Codechaos, a few hours after it finishes it becomes available again
+ NinjaDoggy: don't think it's instantly back though?
+ NinjaDoggy: :O a few hours? :O
+ Astrobytes: Yeah it will return as a regular multi at some point next day or so
+ reCurse: Last time it was more or less right after rerun ended
+ reCurse: If I recall
+ Astrobytes: Yep.
+ NinjaDoggy: oh cool
+ peerdb: yeah after reruns
+ Codechaos: That's great, thank you!
+ peerdb: not that I'd know anything about reruns in legend but ye
+ Illedan: I love how you simply give up when you lose reCurse :O 
+ reCurse: FFF
+ ashiknur: can we see the source code of top participants?
+ Illedan: Like you assume I wont do anything stupid lol
+ Astrobytes: No ashiknur
+ Illedan: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/557076400">https://www.codingame.com/replay/557076400</a>
+ NinjaDoggy: @illedan nah the bot is just confused because it's never been there&#160;;)
+ jacek: hm <a rel="nofollow" class="external free" href="https://img-9gag-fun.9cache.com/photo/aLp47jA_700bwp.webp">https://img-9gag-fun.9cache.com/photo/aLp47jA_700bwp.webp</a>
+ MSmits: is that a MTG meme?
+ Astrobytes: ashiknur: there will be post-contest reports though
+ jacek: maybe
+ Illedan: Win 1 game in IDE vs re Curse. 10 loss on submit :rocket:
+ Illedan: :explosion:
+ reCurse: I give up
+ reCurse: Also in real life
+ reCurse: Dunno how to fix that
+ reCurse: I tried
+ jacek: oO
+ Astrobytes: I think you're safe without fixing it. Multi might be a different story.
+ MSmits: well if you have some codespace and want my beamsearch&#160;? :P
+ MSmits: it ought to be better than suicide
+ 1XC: I keep getting fast and I hate fast 
+ reCurse: Maybe with more time but now I'm fed up
+ Astrobytes: Loads of codespace over here MSmits. Beam me up laddie!
+ NinjaDoggy: recurse missed a win here? :O
+ NinjaDoggy: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/557075088">https://www.codingame.com/share-replay/557075088</a>
+ Astrobytes: :P
+ MSmits: lol
+ NinjaDoggy: max seed = 2&#160;;)
+ reCurse: Ok this one pisses me off actually lol
+ reCurse: God damnit
+ NinjaDoggy: LOL
+ Queuebee: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/afdb0f11-3fed-4e2a-b1c3-8c1886812fa5">http://chat.codingame.com/pastebin/afdb0f11-3fed-4e2a-b1c3-8c1886812fa5</a>
+ Queuebee: sorry wrong chat. I mean. I'm drunk. I mean. Just kidding.
+ MSmits: count trees like this: 
+ MSmits:  int seedCost = __builtin_popcountl(parent.trees[0] &amp; parent.owner);
+ reCurse: Wait wait wait that game is a complete nonsense
+ NinjaDoggy: why?
+ JBM: that would have been my main question actually
+ reCurse: It said guaranteed win at the end
+ JBM: do you actually "understand" your AI's games?
+ Illedan: He wrote an AI to understand it..
+ reCurse: The answer is I try
+ MSmits: decreasingly less these days JBM, he doesnt need to :P
+ JBM: yeah a good position to be in
+ Queuebee: Oo thanks MSmits
+ CharmyRosewolf: Okay that's it gold 900+ ftw. I quit!
+ MSmits: Queuebee thats for a bitboard in c++
+ NinjaDoggy: reCurse it is guarenteed win... if you plant 1 more seed ;0
+ peerdb: when doing beamsearch is it better to make the array of gamestates an array of pointers or nah?
+ CharmyRosewolf: It was fun while it lasted. :D
+ BoBot: that looked like a pretty extreme sun point collection by Magus
+ reCurse: One sec panic debug session
+ linjoehan: Ok time to start for real
+ Astrobytes: It certainly was
+ Astrobytes: BoBot
+ Magus: extreme sun point collection&#160;?
+ linjoehan: What's the meta before I begin?
+ NinjaDoggy: ahh yes the typical 7 point lead panic debug session&#160;;)
+ BoBot: havent seen any other bot play like that yet, maybe there are some exploitative opportunities 
+ ddreams: linje: copy recurse's games
+ RoboStac: it looks like an mcts that knows it's lost so all moves are bad and then lucks into recurse failing to convert
+ RoboStac: especially given the debug prints
+ BoBot: @Magus - your bot was banking 60+ sun points in the shared replay that you drew vs reCurse
+ kovi: maybe no draw rule
+ BoBot: I had not seen that strategy before
+ Queuebee: Oo reCurse I see you joined the competition
+ Queuebee: When did that happen
+ Astrobytes: good spot robo
+ BoBot: @RoboStac or that :D
+ reCurse: Oh. I see.
+ Magus: My bot only gather maximum of sun because this is the best way to maximize score + sun/3 at the end
+ Magus: (since reCurse can't COMPLETE a tree before the end, there is no reason for my bot to complete a tree)
+ reCurse: There was a bug
+ reCurse: But the game is also a forced draw
+ DomiKo: :scream:
+ reCurse: Planting a seed costs 3 energy = 1 less point
+ reCurse: So... all good I guess?
+ kovi: 2
+ kovi: 11-2=9
+ DomiKo: yeah
+ reCurse: And I'm a monumental shame
+ JBM: why are you almost always red
+ ddreams: red is closest to recurse than blue, doh
+ Astrobytes: It's the allergies
+ Astrobytes:&#160;;)
+ reCurse: I'm blue on that replay
+ JBM: i'm on your curent agent's last battles page
+ ddreams: jbm, it's completely random
+ ddreams: on the left means he's always winning
+ JBM: oh right
+ JBM: i forgot how to read that one
+ JBM: thanks ddreams, i needed the readjustment
+ Illedan: reCurse having 10+ people debugging his games
+ Astrobytes: How many years JBM... :D
+ JBM: too much, and counting
+ Astrobytes: hehehe
+ reCurse: I'll only fix that bug if there is another game where it happens
+ NinjaDoggy: doesn't planting a seed cost 2 there?
+ Astrobytes: Illedan - you're missing the public debugging/rubber ducking session. Fix it.
+ reCurse: Yes yes
+ reCurse: I can't math
+ NinjaDoggy: because it would be your 3rd seed?
+ JBM: ask pb4
+ JBM: he's available this time
+ reCurse: Pruning got a little too aggressive
+ reCurse: It literally can't seed
+ ddreams: that's my problem too, keep pruning the winning moves...
+ peerdb: do you guys prune after each turn or after each day?
+ JBM: every chance i get
+ peerdb: how far do you prune?
+ reCurse: In his case he may have pruned the contest
+ peerdb: im pruning my sanity tbf
+ Astrobytes: I always prune to just above the new bud.
+ MSmits: well you're a professional
+ Astrobytes: lol
+ reCurse: So it turns out my random thought of the other day kinda matters
+ MSmits: what was that?
+ reCurse: Assuming you have perfect play (not making implications here, bear with me for this example) and the opponent doesn't
+ Astrobytes: Which one? You had a few iirc
+ reCurse: You start in a position solved as a loss
+ reCurse: How do you play?
+ MSmits: oh right, i've had some time to think about that as well
+ MSmits: did not find a solution myself
+ MSmits: well some imperfect ones
+ reCurse: I have a weaker variant of that problem I think
+ Astrobytes: So maximising/drawing out the game length (As in Oware) doesn't work then
+ MSmits: your bot hasn't learned to discriminate between bad states and really bad states
+ RoboStac: I've always gone for the move with the most visits as usually that means the loss was hard to solve and maybe they'll miss it. Doesn't really work here as it just ends up spamming seeds
+ reCurse: But that doesn't mean it's the good way
+ reCurse: The theroetical best way is what the opponent expects least
+ RoboStac: yeah
+ reCurse: But defining that is...
+ MSmits: what you can do is play the moves that have the most losing replies
+ Astrobytes: A problem requiring more than 11 days
+ RoboStac: I guess you'd possibly need to analyze it more like chess where keeping it as complicated as possible (keeping pieces on the board to have more options) is probably better?
+ Astrobytes: MSmits that was what I was getting at with the Oware comment
+ RoboStac: though again hard to apply that here
+ MSmits: yeah
+ reCurse: Indeed
+ Vova_s: you can go for the path that will grant you less difference in points
+ reCurse: Because some of the maps are god awful
+ MSmits: Vova_s he might not be measuring points
+ kurnevsky: There is a dynamic komi technique, but not sure how well it  will work here&#160;:)
+ kurnevsky: Allows to maximize score in loosing positions.
+ RoboStac: yeah, but that probably doesn't maximise winning chances 
+ reCurse: Supervised learning on top 10 maybe lol
+ reCurse: The contempt NN
+ MSmits: mmh thats sort of what i do :P
+ Astrobytes: It might work if the opponent blunders, even to force a draw
+ MSmits: your best bet is to have a bot so good, it wont get into losing situations
+ reCurse: See my previous point about god awful maps
+ ThunderbirdOne: ah, just my luck
+ ThunderbirdOne: forgot about this comp
+ Astrobytes: yeah
+ RoboStac: yeah, but that only works for one of us
+ ThunderbirdOne: i remember 11hours before it ends
+ MSmits: right, only one person can have a bot that never loses&#160;:)
+ Astrobytes: Wondered where you went ThunderbirdOne
+ ThunderbirdOne: haha
+ reCurse: A swindling AI would be pretty funny
+ ThunderbirdOne: i got distracted
+ ThunderbirdOne: and then discord became a thiing
+ ThunderbirdOne: and life
+ Chainman: my heuristics doesn't really work with beam search 
+ ThunderbirdOne: haven't really been coding much outside workhours either
+ Astrobytes: You were fixing your house last time iirc
+ ThunderbirdOne: aye, ground floor is pretty much done
+ ThunderbirdOne: saving for all the rest now lulz
+ ThunderbirdOne: shit is so expensive&#160;:')
+ AntiSquid: hi ThunderbirdOne how's life&#160;?
+ ThunderbirdOne: pretty good actually
+ ThunderbirdOne: anything i missed here? :D
+ AntiSquid: awesome, glad to hear
+ Astrobytes: haha, nice, you'll get it done eventually
+ AntiSquid: you missed a lot of frustration imo with this contest, pretty lucky actually to come when it ends :P
+ ThunderbirdOne: oh lol
+ ThunderbirdOne: how come?
+ AntiSquid: it's my opinion .
+ ThunderbirdOne: lulz
+ AntiSquid: it's not a fun game imo
+ ddreams: my frustration was only about the servers
+ Astrobytes: imo it's the contest that no-one really likes but did it anyway.For me.
+ ddreams: game was nice enough
+ ThunderbirdOne: Haven't seen our Russian friend in the chat tonight... (I even forgot his name)
+ Astrobytes: Personally speaking.
+ AntiSquid: hah that's me astro .
+ ddreams: I liked that you could get far without search
+ ThunderbirdOne: Wood battles are so slow btw
+ ThunderbirdOne: holy smokes
+ wlesavo: Astrobytes thats basically summarize my view on this :slight_smile:
+ AntiSquid: madao is MIA most of the time if that's who you mean
+ ThunderbirdOne: right, Maddy
+ ThunderbirdOne: MIA, that's unlike him
+ ThunderbirdOne: good to see the regulars are still around though
+ ZarthaxX: hey ThunderbirdOne!!!
+ AntiSquid: he's usually here before contest starts and then disappears
+ ZarthaxX: oh wlesavo alive :O
+ reCurse: We're up to a count of 2
+ ThunderbirdOne: i havent been here in a year or something
+ reCurse: Stop it
+ Astrobytes: wlesavo: I'm glad I have a few supporters of this view lol
+ ThunderbirdOne: Hiya ZarthaxX!
+ ZarthaxX: how are you maaaaan
+ ThunderbirdOne: pretty good, found some spare time and noticed the comp :D might as well
+ ZarthaxX: doing it?
+ ThunderbirdOne: i'm just glad people still remember me tbh&#160;:')
+ ZarthaxX: last second legend?
+ ZarthaxX: cant forget the rocket
+ ZarthaxX:&#160;:)
+ ThunderbirdOne: going through the first league now&#160;:')
+ ZarthaxX: haha ok
+ ThunderbirdOne: winning every battle, but its slow so... just waiting
+ ZarthaxX: rush gold&#160;:)
+ Astrobytes: Count of 2 reCurse?
+ wlesavo: ZarthaxX i missed first half, and im pretty slow, so yeah, half alive i would say =) 
+ reCurse: Say the name 3 times...
+ ThunderbirdOne: going to bed in a bit i think... conference next 2 days (digital though)
+ Astrobytes: reCurse: Ah gotcha :D
+ Zenoscave: we really should stop pinging the curse
+ ZarthaxX: wlesavo oh rushing legend?
+ reCurse: I wasn't worried about that
+ AntiSquid: reCurse so it's a 3rd time 
+ ZarthaxX: ThunderbirdOne sounds exhausting :P
+ Astrobytes: No you missed the point
+ Zenoscave: * &lt;--- point
+ ThunderbirdOne: what league is CatBoss btw?
+ Astrobytes: I'm gold, thanks for asking
+ reCurse: Most awesome boss name
+ wlesavo: nah, i gave up on legend, cant improove my beam search anymore, may be ill finish it after reading some pms. top gold is fine  
+ reCurse: Bronze
+ ThunderbirdOne: oh okay
+ ThunderbirdOne: hard to get past bronze?
+ ThunderbirdOne: doable in a couple of hours?
+ Astrobytes: No and yes
+ ThunderbirdOne: alright, nvm then&#160;:')
+ Chainman: crap my beam search is way worse than not doing it rn.
+ Astrobytes: You can definitely get Silver at least
+ wlesavo: i got gold with completely broken shadows 
+ Astrobytes: I got gold without any shadows
+ wlesavo: broken worse then none :smiley:
+ Chainman: what are shadows?
+ Chainman: :stuck_out_tongue:
+ AntiSquid: ThunderbirdOne just throw in a bunch of random conditions, make sure 50% of them are bugged and you will promote easily
+ ThunderbirdOne: cool cool
+ ThunderbirdOne: im in Wood 1 now...
+ Chainman: I did the beam search, but according to my eval, it doesn't know what to do.  Like I need to redo my eval completely.  
+ ddreams: Chainman make sure your beamsearch isn't bugged first
+ Chainman: it's not it's choosing correctly
+ Astrobytes: gn wlesavo
+ Chainman: but i had a bunch of if, else in my eval that would depend on if it was the beginning, middle or end of game. 
+ ddreams: when choosing the action, you should only compare full days, not same depths
+ ddreams: ie. choose best action from wait nodes at same day
+ ddreams: comparing nodes for different days is not working well
+ Chainman: oh crap, that's genius I believe, thanks
+ Chainman: yeah because your heuristics can depend on the day.
+ Chainman: especially mine. 
+ ddreams: the IDE should have a swap sides button
+ Ashargin: I've been stuck in top gold for days. Can't find the right heuristics to beat the boss...
+ ymoukhli: same
+ ddreams: just fixing bugs and misunderstandings was more than enough to get me past the gold boss
+ ddreams: was struggling next to it for a long time too
+ MomoLand: hey 
+ MomoLand: any interesting projects out there you doing&#160;? 
+ Chainman: using beam search to beat gold boss?
+ Numby: So I have consistently this 55ms spike on turn 6 or 7 and I cant figure out what causes it&#160;:( I tried timing each of my big functions and sometimes it's one function sometimes its another where the spike occurs. It's also weird that this only happens early in the game
+ MomoLand: what gold boss guys&#160;? 
+ PiterYeh: ddreams i with i could send your advice about day nodes to my past self 10 hours in the past. I'll try that now, thanks
+ Numby: Because of the spike I gotta keep my timeout to 50ms or I go over the limit
+ ddreams: gl PiterYeh, still time&#160;:)
+ Chainman: the day nodes is key, in fact.  I think changing depth to number of days. 
+ ddreams: you can rest when you're dead
+ ashiknur: what's this?An error occurred (#407): "You reached the limit of plays for a period of time."
+ Ashargin: It's pretty self-explanatory
+ ddreams: means you need to test locally for a bit
+ Zenoscave: do you order moves in a certain some order?
+ Chainman: Those who are near beating gold boss do you win sometimes? 
+ Ashargin: Yeah I win like 30% of the time maybe
+ Ashargin: I'm not sure what I should improve&#160;:/
+ AeroFufel: Is it possible to make the chat bigger, in a separate page maybe? a hint anybody?
+ Pduhard-: i was beating gold boss 75% times but was loosing against other top bots, stuck near top 10 for a while before the upgrade which got me legend
+ ThunderbirdOne: lets see if this gets out of wood 1&#160;:')
+ Chainman: yeah
+ Chainman: my eval was giving score according to the day, and the actions, should it be giving score according to the gamestate with beam search?
+ Chainman: hmmm I think it should work with actions.
+ Chainman: just want it to look 2 days in advance maybe.
+ linjoehan: ThunderbirdOne I did movelist[max(movelist.size()-1,1)] to get out of wood
+ ThunderbirdOne: oh im just upgrading the biggest tree i have enough sun for at this point lol
+ linjoehan: or was that min no it was min
+ Illedan: ddreams&#160;:)
+ ddreams: are you coming for me?
+ Illedan: Above atm, but ranks are very close around us
+ ddreams: we had one match so far, 152-115
+ ddreams: I am almost ready to resubmit too
+ Illedan: :scream:
+ Illedan: I just yoloed some params
+ ddreams: I changed nothing, but drastically sped up the algo
+ ddreams: not sure if that translates into playing strength
+ Illedan: Depends how you use that speed
+ ddreams: I'm beam searching for 90ms, so it could help look a bit further
+ Illedan: True, unless you prune the good moves early&#160;:)
+ ddreams: yeah, I could perhaps widen the beam
+ Michael_Howard: What's the best tactic for seed wars like this? I mean, it's annoying both sides equally, not sure if I should do anything in particular. <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/557125733">https://www.codingame.com/replay/557125733</a>
+ ddreams: well, in the end you won
+ Michael_Howard: Yeah but it sapped my arena bot's confidence &amp; now he's run out of the Gold top 100 &amp; won't go back.
+ AndreMarasca: symmetrical game, I thought I was going to get stuck throwing seeds in the middle
+ Chainman: I don't think you can use beam search if your eval function is scoring actions based only on gamestate day and not the gamestate. 
+ ddreams: why not?
+ ddreams: day is part of gamestate imo
+ ashiknur: I was at 650 in gold and I submitted an upgraded code for a better hope and I tucked at 1235. :persevere:
+ Chainman: yeah but that is the only thing I'm using from gamestate.
+ Chainman: it's like my algo sees a really good action on day 3, but there are multiple paths there and it chooses the wrong one.
+ Chainman: let's say I'm looking 2 days in advance.
+ Michael_Howard: AndreMarasca yeah kinda kaleidoscopic.
+ Chainman: normally on day 1 I'd prefer to grow tree to size 2. 
+ Chainman: But it sees that on day 3 there is a equivalent good score for the path that starts with just waiting on day 1&#160;:(
+ ddreams: why do those have the same score if you think it's worse?
+ ClockSort: i had that problem in fall2020 challenge. it would see a good state in future and start with a REST action.
+ ClockSort: my simple solution here was to just break ties in GROW -&gt; COMPLETE -&gt; REST order
+ Illedan: Why not add value to the beams along the way?
+ Zenoscave: what do you mean ille?
+ ddreams: as in longer sequence is better?
+ Illedan: As in doing something earlier is more score
+ Zenoscave: got it.
+ PatrickMcGinnisII: what's recurse's secret?
+ ddreams: win all the fights
+ ddreams: sshh
+ BoBot: it is obvious by the name, isn't it? ^^
+ AeroFufel: A friendship with the tester and an early start ))   or kidding ))
+ ProG_r_aM_m_er: I think he found the finite number of possible actions&#160;;)
+ ddreams: I find that incredibly hard to balance, Illedan
+ ddreams: often waiting really is better
+ ClockSort: you have 1000ms during the first turn, so just explore all possible future game states during it
+ Astrobytes: *just*
+ ClockSort: is my bot getting worse or is top-20 getting a lot tougher over the past 6 hours?
+ Chainman: waiting a lot
+ natofp: what is happening if you submit code 5 mins before end of the contest and not all battles are plated?
+ natofp: played*
+ RoboStac: it'll finish playing all the battles
+ ClockSort: they get plated after deadline
+ ddreams: you risk it all
+ natofp: ok
+ natofp: just battles get played right?
+ natofp: and after this
+ natofp: this will be the final position?
+ ddreams: I did that in legend once, top 20 or delete yolo, and it just kept timing out and I ended up at the very bottom
+ BoBot: you might win the contest with 100% winrate ^^
+ natofp: xD
+ RoboStac: yes (there are some extra battles played between the top 100 in legend once all bots have finished)
+ natofp: so there is a cutoff
+ natofp: like
+ natofp: &gt; 100 players are fixed
+ natofp: and &lt;= 100 players are playing to permute their order possibly?
+ RoboStac: I'm not actually sure what the rules are on the 100 boundary 
+ ProG_r_aM_m_er: when i beat silver, i already beat half of gold
+ RoboStac: my guess is if you are just outside the top 100 your score is still affected as you can be used as an opponent 
+ ClockSort: @PRO_G_r_AM_m_ER when i beat gold boss, i also beat 70% of legend too :P
+ ProG_r_aM_m_er: if you play against yourself and you sometimes win/loose, in the beginning shadows determine victory
+ ProG_r_aM_m_er: yeah, well maybe in the future I will have more time and better strategies to work out
+ Chainman: interesting, it thinks I can grow infinite times on my second turn. 
+ ClockSort: maybe it is right
+ Illedan: Cached the cost?
+ ddreams: forgot to set it to dormant
+ ddreams: early on I found I planted several seeds at the same location.. forgot to mark it as taken in the anytrees-bitboard
+ Chainman: yeah I forgot the dormant
+ Chainman: and my generator is generating impossible moves
+ Illedan: The feeling when you hit play limit while tweaking some param on the last night -.-
+ Illedan: (╯°□°）╯︵ ┻━┻
+ Chainman: couple o' bugs up in here.
+ Chainman: ooooh no
+ ddreams: that's crap illedan
+ Astrobytes: Param tweaking in IDE pissed me off sooooooooooooooo much this contest
+ Illedan: Yeah
+ ddreams: is it allowed to share bot executables?
+ Zenoscave: I don't think so ddreams
+ Astrobytes: And it was introduced before it too. I thought I was going nuts when I was tweaking my other multi bots
+ ddreams: don't see how that is cheating though
+ Astrobytes: Between users I suppose ddreams but not publicly
+ Astrobytes: And not during contest I'd say
+ Zenoscave: and definitely not the source. just the binary
+ Zenoscave: Although that doesn't stop decompilation i guess
+ Astrobytes: ^
+ ddreams: yeah, would be a stripped binary
+ Astrobytes: Yeah, after contest that would be fine imo
+ ProG_r_aM_m_er: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/557155732">https://www.codingame.com/replay/557155732</a>  vs <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/557156282">https://www.codingame.com/replay/557156282</a> random growing for gold bot :D
+ ddreams: after contest you could share code I guess
+ Astrobytes: No
+ Zenoscave: No, Never code.
+ Astrobytes: Snippets yes
+ Zenoscave: This isn't commonly allowed in competitive code. Snippets are ok, like astro says
+ Zenoscave: as long as it isn't too much
+ ddreams: but streaming is encouraged tho?
+ Zenoscave: For lower leagues.
+ Astrobytes: Unless it's legend
+ Zenoscave: You'll note many streams stop at gold at the very most
+ Astrobytes: OR high gold etc
+ Chainman: I want to see recurse stream :innocent:
+ Astrobytes: He has one on youtube
+ Zenoscave: after locam i doubt that'll happen lol
+ Astrobytes: There was definitely not another stream about another game that isn't available.
+ Chainman: I need to watch some videos and stream after contest actually to learn. 
+ ddreams: I want to see him stream while coding his bronze bot
+ Illedan: I learnt more from streaming than watching streams :P
+ Chainman: what is locam?
+ ddreams: Can you elaborate, Illedan?
+ Numby: viewers give you tips?
+ Chainman: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=BU9b445CpaM">https://www.youtube.com/watch?v=BU9b445CpaM</a>
+ Illedan: I watched my own streams to learn more about myself 
+ Chainman: he has two videos
+ ddreams: that's an answer I didn't expect
+ ddreams: what did you learn?
+ Illedan: About my problem solving skills while under pressure of the stream. And how I tackle it. And about my english speaking
+ Zenoscave: I remember your english was great from my pov.
+ Zenoscave: despite mic problems&#160;;)
+ Illedan: shhh
+ Astrobytes: Tbh Illedan, your English speaking has been rather excellent. Volume skills however....
+ Zenoscave: now help my stupid eval
+ Illedan: Yeah, don't get me started on this new Mic i bought which is no good
+ Astrobytes: -3suns
+ Zenoscave: I swear the moment I get a good eval. top 20
+ Zenoscave: it'll be on next sunday
+ Illedan: I wish
+ Illedan: I guess I'll accept 2nd NO&#160;:(
+ theycallmedavid: End of game 100       50.00% 50.00%
+ Astrobytes: Weird game. I still don't like it.
+ ddreams: just wait until I submit my new bot and destroy myself
+ Illedan: ^^
+ Astrobytes: lol
+ Zenoscave: The same bot I submit varies from 100-200
+ Zenoscave: there are only 200 in Legend btw
+ ddreams: ok, I'm submitting.. how long does it take for a run now?
+ Zenoscave: about an hour
+ Zenoscave: My guess
+ Astrobytes: There is always that effect though zeno. Gold and legend, every contest.
+ Zenoscave: That wide of variance though?
+ ClockSort: a quarter of a run is good enough to get placement if you aren't near the top
+ ddreams: here goes then
+ Astrobytes: With many active submits possibly
+ ddreams: only 340 now
+ ddreams: so going down
+ Illedan: Night time is upon us
+ Illedan: And I was supposed to go to bed 40 min ago
+ ddreams: 5 out of 10 initial battles
+ Chainman: I hope to get top 300 sooon 
+ ddreams: no sleep until you beat euler, remember
+ Zenoscave: 3/ 10&#160;:/
+ Illedan: I gave that up last sunday :P
+ Illedan: But I can't accept 2nd NO. So here I am
+ Astrobytes: The duties of life Illedan
+ ddreams: hehe, you're 1st now
+ Illedan: But this blocked IDE games will kill me
+ ddreams: enjoy it
+ Illedan: Screenshotted, printed and put on my wall
+ CouscousAgha: what could happen if the timer hits 0 and someone is still submitting 
+ ddreams: we're almost as many competitors as from italy
+ Zenoscave: CouscousAgha you're immediately hated
+ CouscousAgha: how so
+ Chainman: lol
+ Zenoscave: It won't let the legend rerun until all submits complete
+ Astrobytes: ^
+ Zenoscave: And pray no one knows your address if you submit last second in gold near top
+ Astrobytes: hehehe
+ Zenoscave: Because that could mean a promotion and re submit in legend
+ CouscousAgha: all legends will automatically resubmit?
+ Zenoscave: Of course I aim to do this every time.top 100 legends get a re-ranking
+ emagnidoc: hello guys, how can i approve a contribution from another user?
+ Astrobytes: Yes. After the submits finish, the top 100 recalc
+ Zenoscave: be a higher level emagnidoc
+ Whatar: lvl 20 required
+ Zenoscave: to keep from spam
+ RoboStac: you can approve clashes after 50 public clashes can't you?
+ emagnidoc: okay, thanks ... i was just wondering because i have the quest ... but couldnt find a way to solve it
+ Astrobytes: Something like that yeah RoboStac
+ Zenoscave: I think so
+ Whatar: but you also need to be lvl 20 I think
+ RoboStac: no, lvl 20 for puzzles
+ RoboStac: 50 public clashes for clash
+ Whatar: oh, ok, so I should be able to do it
+ Whatar: let me check
+ emagnidoc: @Whatar ... its the blue branch on the bottom right
+ Zenoscave: emagnidoc just don't approve crap to complete a quest.
+ Zenoscave: Put effort into finding a good one
+ Astrobytes: Looks like Smits gave up, unless he has something up his proverbial sleeve.What about you RoboStac?
+ Whatar: I don't have the button to approve it
+ emagnidoc: @Whatar .. .same here thats why i was asking
+ ddreams: looks like my new and improved bot is getting beat
+ Whatar: oh, probably because its wip
+ Whatar: let me search better
+ RoboStac: Whatar - are you sure its not wip?
+ RoboStac: ah
+ RoboStac: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/6663b740cc323c93fdacb7cdb7c58ffb8402">https://www.codingame.com/contribute/view/6663b740cc323c93fdacb7cdb7c58ffb8402</a>&#160;?
+ Astrobytes: Standard procedure for CG bots ddreams&#160;:)
+ RoboStac: I'm just trying random things to try and get back into the top 20 Astrobytes
+ RoboStac: though its so slow I've no idea what is really happening
+ cegprakash: someone plz share me a replay between me and Robostac
+ cegprakash: someone in legend
+ RoboStac: you aren't ranked high enough for me to find you
+ Astrobytes: Fair. It's been ridiculously slow this time around.
+ Astrobytes: It's not just me is it? 
+ RoboStac: I gave up on my rewritten version and went back to wednesdays version as I couldn't make duct work
+ linjoehan: I've never been able to get duct to work
+ Whatar: any Idea on what my bot is doing wrong?
+ Whatar: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/557169150">https://www.codingame.com/replay/557169150</a>
+ linjoehan: well not fast enough to work
+ Chainman: I think I'm gonig to call it quites on beam search 
+ Chainman: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/557174647">https://www.codingame.com/share-replay/557174647</a> wth 
+ Astrobytes: Whatar: Firstly - it's losing. That's the wrong thing to do :P
+ ddreams: I agree with Astro here
+ ddreams: Stop doing that
+ Whatar: True Astro
+ Whatar: but that, I don't know how to fix
+ Illedan: I'm off. GG everyone. Cya next contest ^^&#160;:)
+ Astrobytes: Honestly, count me out of serious discussions right now. My brain hurts :D
+ Chainman: bye
+ ddreams: gn illedan
+ Whatar: gg
+ Chainman: I think Whatar you were close though
+ sasquatch: Question for someone in legendary. How do I get to play MiyazaBoss in the gold league? My best bot ranks about 50th in gold
+ Astrobytes: see ya next week Illedan&#160;:)
+ Chainman: have good dreams illedan
+ Chainman: dream of your bot winning
+ ddreams: get to top 5 or so sasquatch
+ RoboStac: Whatar - you gather less sun on 17 of 24 days
+ sasquatch: I see! Thanks ddreams
+ RoboStac: mostly only by 1/2 (though day 12 is 9 vs 17) but it adds up
+ ddreams: oh right, I removed all my move pruning as an experiment
+ Whatar: yeah, my fat totoro tells me the difference in sun gains and I am a lot negative by the end of the match
+ ddreams: is there any time it's better not to complete first thing in a round?
+ ddreams: maybe if there's a seed location competition
+ RoboStac: if you wait till opponent is asleep you might be able to get multiple nutrient bonuses in a row
+ ddreams: you think the opponent decides to complete if you do it first thing in a round?
+ ddreams: clocksort resubmitting too, I see
+ ddreams: 6/10 initial battles this time
+ ClockSort: i think i'm making my bot worse with every iteration :sweat_smile:
+ ddreams: I wonder why the game doesn't start you with 0 trees... 
+ ddreams: instead we have this asymmetric hell
+ reCurse: How would that solve symmetry
+ ClockSort: yeah @ddreams it's an unfair start
+ reCurse: You'd end up with a PR1 situation
+ reCurse: Nobody wants PR1
+ ClockSort: but you have to start somerwhere
+ ddreams: pr1?
+ ClockSort: what's PR1?
+ reCurse: Pacific Rift 1
+ elderlybeginner: should be at lease rabbit round
+ elderlybeginner: least
+ ClockSort: not familiar with that situation
+ Magus: Platinum Rift 1&#160;?
+ reCurse: lol
+ reCurse: Yes sorry
+ reCurse: Mind went to strange place
+ ddreams: it's impossible to get started?
+ ddreams: if both players want the same starting spots
+ reCurse: Everyone places on the best spot so you either have to suffer instant defeat or compromise to a worse position
+ ddreams: right
+ reCurse: There is no solving for symmetry with this game design
+ reCurse: You need a new game
+ Magus: PR1 is a 1v1v1v1 game and suffers a lot from "shifumi" games. Like if another player wants to spawn at the same place as you; you just lose the game and you can't do anything about it.
+ ClockSort: yeah the sun is screwy, literally
+ ddreams: yeah, that sucks more than this
+ reCurse: PR1 had the same issue in 1v1
+ PatrickMcGinnisII: recurse skips a seed to avoid a bad position, and next turn seeds next to a tree he's gonna complete...i';m like wtf
+ ddreams: all battles run twice on the same map then?
+ reCurse: Yes that would be the alternative
+ reCurse: However it costs more
+ reCurse: They used to do that
+ reCurse: But that makes everything twice as slow
+ reCurse: You want 2x slower submit?
+ ClockSort: sign me up
+ ddreams: Yes, and more servers
+ Astrobytes: You were simply being very Pacific reCurse
+ reCurse: I think my mind was on Pacific Rim
+ reCurse: Not sure why
+ Astrobytes: woo chat scroll, sorry
+ Astrobytes: Yes, looks that way
+ elderlybeginner: why it's makes submits x2 slower? Amount of fights could be the same
+ reCurse: Maybe some inner need to have giant robots smash giant aliens
+ Astrobytes: Never a bad thing imo
+ reCurse: No because the result of a pair of games still counts as one game
+ ddreams: why?
+ reCurse: You need 2 games to determine the final result
+ RoboStac: either way it still only gives you 45 opponents instead of 90 so the rankings will be much less stable
+ reCurse: Well I guess that's the crappier alternative
+ ddreams: I think adding a few servers seem like a good solution
+ PatrickMcGinnisII: I'm unstable, I'm 1/2 the square of the root of the 2nd participle away from death by analysis
+ Astrobytes: I think you should tell CG this ddreams. 
+ ddreams: Like joining this contest has cost me maybe $10-15k
+ Astrobytes:&#160;?
+ Whatar: healthcare?
+ ddreams: not working for money
+ PatrickMcGinnisII: google ads, rofl..i have no idea
+ ddreams: my clients pay me a lot
+ PatrickMcGinnisII: norwegians have OnlyFans?
+ Astrobytes: Welllll.... I see your point. But... fun needs no repayment
+ linjoehan: lol joining this contest has cost me sleep
+ Westicles: ddreams, you dance on the webcam too?
+ ddreams: yeah, but I'm totally willing to pay for a bit of server time
+ ddreams: Westicles when I forget they are watching
+ Astrobytes: I'm with you on that yeah
+ Chainman: :sweat_smile:
+ linjoehan: Ok first version of sim complete now where is that MCTS... just copy and paste and it should all work...
+ Chainman: nice, I think I'm giving up on beam search, it's too hard for me.
+ Chainman: I need to read/learn more 
+ PatrickMcGinnisII: My daughter is suggesting we play Minecraft, why does that sound less insane than poking wood sprites with hot pokers
+ Chainman: hmmmmmm
+ Astrobytes: Anyways, I'm outta here. Well done and good luck wherever it applies
+ Astrobytes: RoboStac: submit looks good
+ PatrickMcGinnisII: glhf Astrobytes
+ ddreams: ciao astro
+ Chainman: have a good on 
+ Chainman: one*
+ RoboStac: Chainman - hypersonic is a good beam search game that is quite a bit simpler (no turn/day complexities) if you want to try it somewhere easier
+ Westicles: Hah, look at tbali going for the language badge in objC
+ DomiKo: or Fall Challange
+ Chainman: okay thanks,
+ Chainman: I think I need a simpler game yeah for starting.
+ Westicles: And pardouin for clojure
+ Westicles: Looks like Bash is the easiest one to go for now
+ ddreams: what about pascal?
+ Westicles: Some guy has gold already
+ cegprakash: wth
+ cegprakash: I started to win boss locally
+ cegprakash: legend?
+ ddreams: gl
+ cegprakash: added 1 flag in constructor
+ cegprakash: and that's changing my win rate drastically
+ cegprakash: wth
+ linjoehan: Man my MCTS only completes 25 games in time. Plan B then.
+ ClockSort: get really lucky.
+ solistice: ugggggh 7th in silver
+ solistice: would really love to hit gold
+ ddreams: share a replay, sol
+ solistice: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/557205507">https://www.codingame.com/share-replay/557205507</a>
+ ddreams: what immediately stands out is that you're shadowing yourself a lot
+ Whatar: yeah, even just planting your trees one block away can bring improvements
+ Whatar: one more I mean
+ Whatar: but if you can avoid shadowing yourself entierly, that would be good
+ elderlybeginner: solistice the main rule is not to seed in the line
+ ddreams: yeah, but just looking the neighbors of a seed if you have any trees there would probably improve it a lot
+ ddreams: like whatar said
+ ddreams: it's not so hard to go further, but...
+ ClockSort: my MCTS has a problem when the opponent has 50 suns. it's not lucky enough to try the sequence where none are spent, so it thinks it is winning even when it will lose by a hoarding-sun opponent. any suggestions?
+ Bozo: for those who implemented a MC tree search, what is its max depth&#160;? just out of curiosity 
+ ClockSort: @Bozo i play to endgame
+ Bozo: nice
+ ddreams: ClockSort give a boost to wait actions?
+ Bozo: my tree search is not a MC, and is quite short depth
+ Bozo: its a shame, i didn't know MC before tonight
+ Bozo:&#160;;-)
+ ddreams: or ensure runs where no complete actions are taken until last day perhaps
+ JohnCM: clocksort you can artificially increase the explore portion of the no action component in end game turns (day 19-24)
+ ClockSort: :bulb:
+ JohnCM: or if the opponent has no lvl 3 trees remaining, then give a huge boost to the explore component of the wait action
+ JohnCM: cause typically ppl cash out all their trees they're not going to build new ones already
+ ddreams: hoarders typically have many level 3 trees though
+ JohnCM: haha then this strat doesn't really work
+ JohnCM: cause in gold it is typically the fast cash out strategy
+ ClockSort: when i am the opponent then everybody is a hoarder
+ ClockSort: i cash out so fast that you must hoard to win :D
+ ddreams: yeah, you probably induce it by grabbing all the nutrients
+ ddreams: I think I finally found an actual eval improvement
+ cegprakash: timer is red
+ cegprakash: I'm doomed
+ ddreams: still 8 hours, come on
+ ddreams: lol Westicles
+ ddreams: going for pascal
+ PatrickMcGinnisII: finally beat the darn gold boss
+ ClockSort: congrats @PatrickMcGinnisII&#160;!!
+ ddreams: grats&#160;:)
+ ddreams: just in time
+ PatrickMcGinnisII: only once gheesh
+ PatrickMcGinnisII: be back later, groceries
+ PatrickMcGinnisII: tx tho
+ Westicles: ddreams, I'll have to settle for top3, I don't have a silver
+ ddreams: I wonder why I have a top 3 in a language ranking
+ solistice: will cobol ever be supported?
+ solistice: just asking for a friend
+ sgalasso: How the hell is it possible that some bot manage to have a good base score AND cumulate sun at endgame, just how
+ ddreams: lots of sun I guess
+ sgalasso: Yes i know, but I mean my algo try to use optimaly sun I ahve during the match, theirs do it plus they accumuate x) I have no clue about how they do it
+ ddreams: compare how much sun you and they have accumulated on the first complete
+ sgalasso: almost same, it's mainly at the endgame
+ ddreams: when does it start to differ?
+ sgalasso: ~17 in average I would say
+ ddreams: perhaps you're undervaluing the bonus values for score
+ solistice: sweet, I'm gonna reach gold! :D thanks for the neighbor seed tip!
+ ddreams: hard to guess
+ ddreams: np
+ peerdb: well, here goes nothing! lets push
+ .TN: ssa
+ .TN: hello
+ AlexanderGuk: where top players usually post their PMs? would like to read some
+ ddreams: forum
+ AlexanderGuk: just as replies to some admin thread after the contest?
+ ddreams: <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/spring-challenge-2020-feedback-strategy/184113/62">https://www.codingame.com/forum/t/spring-challenge-2020-feedback-strategy/184113/62</a> for example
+ AlexanderGuk: cool, thank you!
+ theycallmedavid: I'm getting better at beating myself. I wonder if it will work on others too.
+ aCat: yes
+ aCat: they will be better at beating you too
+ peerdb: :sad:
+ theycallmedavid: Yes, against the boss that is exactly what happens
+ struct: hello
+ struct: im back for the all nighter
+ struct:&#160;:'(
+ ddreams: then there's two of us
+ ddreams: I wish my improvements actually improved things
+ struct: ping me if any action is needed in chat
+ struct: it will be minimized
+ ddreams: you got a plan?
+ struct: a plan?
+ ddreams: for the last 7 hours
+ struct: nope
+ struct: :D
+ ddreams: spamming tweaks until the IDE locks you out?
+ struct: im not using ide to test stuff
+ struct: I run it localy
+ ddreams: I gave up trying mcts when I thought I saw some eval improvements
+ ddreams: but they don't pan out
+ Lucky30_: i am tired, and tomorrow i have an interview, should i keep going with the contest, or just give up
+ Cjx_1: this contest prly wont pay ya friend :P
+ ddreams: clearly the best option to bomb the interview because you were so passionate about coding
+ Cjx_1: lol
+ peerdb: submit you contest code for the interview
+ Lucky30_: hhhhhh
+ Lucky30_: you guys sure now how to cheer up someone
+ Lucky30_: i guess i could try my luck at legend after the contest
+ ddreams: if you were in top gold, I'd probably have stayed if I were you&#160;:)
+ Lucky30_: 764 gold =&gt;top 1 does not sound like possible right now
+ cegprakash: I am unable to test in local arena code against boss it automatically switches to IDE code
+ ddreams: but you're probably quite far off
+ cegprakash: is it a feature or a bug
+ ddreams: maybe you're pushing replay in same conditions
+ cegprakash: yes
+ ddreams: same conditions include the players
+ peerdb: ^^
+ cegprakash: I want to test under same conditions with arena bot
+ cegprakash:&#160;:(
+ peerdb: you can save the seed
+ ddreams: then go to options and choose manual
+ Lucky30_: anyways, i tryed hard in this contest, but not hard enought, next time i will do better
+ Lucky30_: goodluck everyone
+ ddreams: gl to you in your interview too
+ Lucky30_: thanks ddreams
+ stefan-gg: im so stuck in silver do you guys have any general tips&#160;?
+ ddreams: don't seed next to your own trees
+ peerdb: gl everyone, might check in in the morning, but i need some sleep
+ stefan-gg: is it worth to occupy the green area early on&#160;?
+ ddreams: no, it gets shaded a lot
+ peerdb: it can be stefan-gg, but most importantly, space your trees evenly throught the board
+ cegprakash: I'm at 40 points in gold and boss is at 47.. is there anything amazing I can do to get 7 points :P
+ peerdb: pay thibaud
+ ddreams: win 100% of your fights
+ ddreams: that's be amazing
+ ddreams: and give you 7 points or more
+ stefan-gg: yea you are right but this is my first competiton so i was kinda scared a little bit
+ peerdb: cegprakash is it just me or are top 150 gold mostly 50-50
+ cegprakash: ddreams funny
+ cegprakash: I'll laugh after contest
+ ddreams:&#160;:)
+ AllYourTrees: omg i copied recurses strategy and have won first 18 games of submit in gold :O
+ ddreams: what's his strategy again?
+ AllYourTrees: my previous best was 500 in gold lol
+ PRO_G_r_AM_m_ER: what is his strategy :D&#160;?
+ Pick8chu: yeah what's his?
+ Numby: teach us to copy 
+ AllYourTrees: watch his games&#160;:)
+ AllYourTrees: aww i lost some, maybe not a perfect copy haha
+ Pick8chu: he barely put seeds on the middle
+ ProG_r_aM_m_er: I think I cannot improve my code anymore top 400 good enough for my if then else code
+ Numby: i could use some good if-else for my pruning right now
+ AllYourTrees: ya i gave up on my approach
+ ddreams: it's not a dumb idea
+ CouscousAgha: my if then code made it to top 115 legend
+ struct: nice
+ CouscousAgha: im satisfied with that
+ AllYourTrees: nice!!
+ Pick8chu: you made your if then to top 115?
+ Pick8chu: that's really impressive
+ CouscousAgha: yes
+ Numby: teach us heuristics :D
+ CouscousAgha: and this is my first coding game challenge ever
+ CouscousAgha: Numby notebook and a pen
+ CouscousAgha: and start brainstorming 
+ CouscousAgha: you will notice a pattern and just prototype it 
+ CouscousAgha: notice repeated processes 
+ CouscousAgha: turn them into functions 
+ CouscousAgha: test and see what u did wrong
+ CouscousAgha: and repeat
+ Cjx_1: ok, here towards the end. Who cares about highest elo. Who has the most dubmits. Ik its not me with a measley 80
+ Cjx_1: *submits
+ ddreams: 26 submits
+ KelvinAndHubbles: ... 149
+ struct: 27
+ AllYourTrees: wow this might actually do it
+ codingWhale: Congrats.&#160;:)
+ AllYourTrees: OMG last battle was loss against boss but IT DID IT
+ Cjx_1: &lt;3 big grats friend
+ ddreams: gz
+ struct: grats
+ Queuebee: allyourtrees
+ Queuebee: congratz!
+ AllYourTrees: tyty!!
+ CouscousAgha: congrats!
+ Queuebee: nice name for this challange :P
+ CouscousAgha: welcome to legend
+ AllYourTrees: haha i may or may not have changed my name just for it :D
+ AllYourTrees: ty CouscousAgha
+ cegprakash: AllYourTrees what did u add
+ AllYourTrees: i copied reCurse's strategy as best I could &gt;.&gt;
+ cegprakash: oh come on :P
+ cegprakash: now plz share a replay
+ cegprakash: with me vs recurse
+ ddreams: lol Illedan sneaky resubmits
+ AllYourTrees: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/557297550">https://www.codingame.com/replay/557297550</a>
+ ddreams: not bad
+ BrunoFelthes: Are you using search, or most of heuristics AllYourTrees?
+ AllYourTrees: only heuristics
+ struct: bruno any progress?
+ AllYourTrees: well theres some rules that require a check of next round
+ AllYourTrees: idk if you consider that search BrunoFelthes
+ ddreams: that's still heuristics imo
+ AllYourTrees: fair
+ cegprakash: AllYourTrees plz give a replay me vs recurse
+ AllYourTrees: i linked above cegprakash!
+ cegprakash: that's u vs recurse
+ AllYourTrees: oh wait what do you want?
+ AllYourTrees: ohhh yourself
+ Westicles: cegprakash whatever joke you are making, we don't get it
+ cegprakash: yes me vs recurse
+ cegprakash: choose me in the IDE
+ AllYourTrees: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/557299811">https://www.codingame.com/replay/557299811</a>
+ AllYourTrees: cegprakash ^
+ cegprakash: thx
+ Queuebee: How did you get that O_o
+ AllYourTrees: i guess you can play 2 players that aren't yourself in the web ide Queuebee
+ BrunoFelthes: no struct, i didnt work today
+ ZarthaxX: gave up bruno?
+ CouscousAgha: cegprakash you should work on your seeds
+ BrunoFelthes: sort of it... i was trying to do a MCTS, but the GC killed me
+ struct: bruno you dont like c++?
+ ZarthaxX:&#160;:(
+ BrunoFelthes: no... i tried to learn rust, but i m not confortable with it yet
+ Numby: I had same issue and had to do rediculous things with a pool of nodes and copying into existing nodes
+ ddreams: it's not such a big step from C# to C++
+ AllYourTrees: rust MCTS is a pain
+ Numby: But it's not very good cuz of all the extra crap I put in
+ kresteodymium: hi guys
+ kresteodymium: hello world
+ struct: hi
+ AllYourTrees: :wave:
+ kresteodymium: hi struct and AllYourTrees
+ struct: my ears :scream:
+ ddreams: pinging with headphones?
+ struct: yes
+ CouscousAgha: alright i guess that's it for me
+ CouscousAgha: this week was a rollercoaster but im proud of my accomplishments 
+ CouscousAgha: see you in the next time boys and gals 
+ CouscousAgha: thank you for hosting this contest!
+ AllYourTrees: cyas CouscousAgha! nice work!
+ AllYourTrees: don't forget to read the post mortems CouscousAgha
+ CouscousAgha: oh where and when should I expect that&#160;? AllYourTrees
+ ddreams: the forum
+ AllYourTrees: ppl post their approaches on the forum in the days after it ends
+ ddreams: most of the top players explain what they did
+ CouscousAgha: idk if im eligible enough to do one myself
+ AllYourTrees: oh anyone can, ppl in gold/silver/legend all post
+ Numby: where do people post
+ ddreams: even bronze
+ AllYourTrees: i think they usually email out the forum link
+ BlitzProg: I'll definitively put one to write how ashamed I am of my performance
+ struct: any changes I do, do nothing&#160;:(
+ ddreams: I'm following in All_YourTrees' footsteps and copying rules from the cursed 
+ eulerscheZahl: happy 4am
+ Queuebee: No u
+ struct: hi euler 
+ AllYourTrees: nice ddreams :D
+ ZarthaxX: hey toad
+ CouscousAgha: where's the gold boss at now?
+ codingWhale: And I thought, you go to bed to a proper time, e... :upside_down:
+ struct: I wont go to sleep until I get legend
+ ddreams: you know how old people wake up in the middle of the night?
+ ZarthaxX: struct but :P
+ CouscousAgha: struct arent you top 50? lol
+ AllYourTrees: drink a lot of water before you fall asleep?
+ struct: im 51th
+ struct: not good enough
+ struct: I wanted top 50
+ eulerscheZahl: i do codingWhale. getting up is another story
+ struct: oh im 50
+ struct: bye gn
+ AllYourTrees: lol!
+ CouscousAgha: LMAO
+ codingWhale: Wow, that's impressive.&#160;:)
+ CouscousAgha: well u will get a rerun so dw
+ ZarthaxX: there will be a rerun struct :D
+ Queuebee: what's a rerun
+ struct: Tshirt is so close
+ struct: yet so far&#160;:(
+ CouscousAgha: u might keep the top 50 as well as lose it!
+ ZarthaxX: rerun started from actual positions tho right?
+ eulerscheZahl: in my bed right now. with laptop
+ struct: yes ZarthaxX
+ ZarthaxX: struct 30 ranks lmao
+ struct: euler send help
+ ZarthaxX: so there is no chance to get top 20 from top 50 structo
+ Westicles: maybe pb 4 will push you
+ BlitzProg: I feel tired and a bit sick, but there's 6 hours left
+ struct: 6 hours is enough time
+ struct: I could have writen my current bot in that time
+ ZarthaxX: :rofl:
+ BlitzProg: And that's what I'm doing
+ ddreams: rewriting struct's bot?
+ ddreams: hm
+ struct: no lol
+ eulerscheZahl: will this be another BlitzProg story about trying to get legend the last night?
+ eulerscheZahl: you always write these as your post mortems
+ struct: euler I even rented aws machine
+ struct: to test lol
+ AllYourTrees: :O
+ BlitzProg: I have very low hopes at this point, but I'm not giving up until I'm absolutely sure I have tried everything
+ actualCoderTrevor: lol I considered that
+ eulerscheZahl: but you are a MS guy
+ eulerscheZahl: no azure?
+ VincentBab: Stop improving your magic numbers guys, let me have that tshirt please :P
+ struct: I never used any of them
+ eulerscheZahl: never
+ struct: I just picked one randomly
+ CouscousAgha: I just noticed im the 10th c# player
+ ddreams: how much did it cost you?
+ CouscousAgha: do i get anything for that?
+ BlitzProg: If this heuristic bot doesn't get me back top 200 gold, then I know nothing else was possible for me
+ struct: the aws machine im using is using windows server so
+ struct: ddreams no idea lol
+ struct: pricing calculator was saying 0.5$ an hour
+ Numby: is it possible to play in IDE vs someone from different league?
+ Numby: like to test your gold bot vs the legends
+ BlitzProg: legend can test vs gold, but not the other way around
+ Westicles: CouscousAgha, you get +50 xp
+ AllYourTrees: who do you want to play against Numby?
+ ddreams: ok, so a cheap one
+ CouscousAgha: Numby you can only test vs top 1000 of your league /and league below u if there are less than 1000 in your league
+ struct: its 16 threads
+ ddreams: well, $12 per day
+ struct: yeah
+ Numby: I
+ struct: But I rented i only used it today
+ Numby: I'd test vs reCurse
+ struct: on last hours
+ Numby: :D
+ CouscousAgha: u want a test vs recurse?
+ actualCoderTrevor: Numby I've heard you can do it with cgbench but can't confirm
+ BlitzProg: recurse has like 95% win rate against at least every other players in the entire contest
+ BlitzProg: it's pretty amazing
+ <b>**Queuebee just now realised that swapping players swap them in the game and this game is skewed</b></p><p><a href="/wiki/File:Default_avatar.png" class="image"><img alt="Default avatar.png" src="/images/5/56/Default_avatar.png" decoding="async" width="50" height="50" /></a> actualCoderTrevor: Oh wait you said in the IDE
+ AllYourTrees: Numby you don't appear when i search you for some reason :thinking:
+ Numby: Hm weird my latest submit is scored at 1260
+ Numby: gold
+ CouscousAgha: he must be rank 800+ in gold
+ CouscousAgha: yeah
+ CouscousAgha: only top 1000 people are shown for us
+ CouscousAgha: Westicles good enough for me
+ nam4.nguyen: Hi
+ nam4.nguyen: First time for this kind of contest. and I got top 500 but I feel I was so lucky to reach that
+ struct: grats
+ AllYourTrees: gz!
+ nam4.nguyen: Thank you but I wonder about my bot
+ Counterbalance: nooooo.. 0.18 pts under boss
+ struct: counter just wait
+ struct: you will get pushed
+ struct: I hope
+ Counterbalance: me too&#160;:)
+ Counterbalance: i'm out of params to tweak
+ struct: the machine run 300k tweaking params
+ struct: didnt change anything
+ struct: ...
+ nam4.nguyen: I didn't know anything you guys talk about like brutal-tester or beam search etc
+ ZarthaxX: Counterbalance ebicochineal will push you&#160;:)
+ Counterbalance: yeak i'm watching it&#160;:)
+ struct: brutal tester is a tool to run games localy vs versions of your other bots
+ struct: beam search is an algorithm
+ ZarthaxX: oh no
+ Counterbalance: oh no
+ ZarthaxX: he beated you
+ ZarthaxX: D:
+ ZarthaxX: ah you will prob get there
+ ZarthaxX: 2 guys submitting
+ ZarthaxX: you got a win!
+ Counterbalance: down to 4 now&#160;:(
+ Counterbalance: fingers crossed..
+ nam4.nguyen: Do you have any docs or something for newbies like me
+ ZarthaxX: damn&#160;;(
+ Counterbalance: i'll just resubmit when he's promoted :D
+ ddreams: nam, you can find cg-brutaltester on github
+ ddreams: it's a bit of work to set up
+ nam4.nguyen: Thank you I will try it in next contest
+ nam4.nguyen: I'm familiar with CP but it's way more diff to this contest
+ Queuebee: Good night everyone. Good luck!
+ ddreams: gn queenbee
+ nam4.nguyen: no best solution, just optimal and try&#160;:((
+ Lysk: just removed opponent sim and boom ranks goes up
+ Kellthazar: Where I can get the referee jar for the spring2021? I tried to build from source code but didnt work
+ ddreams: <a rel="nofollow" class="external free" href="https://github.com/LSmith-Zenoscave/SpringChallenge2021">https://github.com/LSmith-Zenoscave/SpringChallenge2021</a>
+ Lysk: or <a rel="nofollow" class="external free" href="https://github.com/dreignier/SpringChallenge2021">https://github.com/dreignier/SpringChallenge2021</a>
+ Lysk: zeno built it though
+ Kellthazar: Oh, thank you folks
+ JohnCM: how long do i need to wait to be able to play again if i have an error message
+ JohnCM: i think i did self-test for too many times
+ struct: i hate when first matches are 100% winrate
+ struct: then my dreams get shatered 16 battles after
+ JohnCM: i'm achieving 80% win rate now in gold
+ JohnCM: but still cannot beat the boss
+ ddreams: re_curse resubmitted
+ Kellthazar: brutaltester worked... nice!
+ Kellthazar: Released the Kraken
+ Chainman: :sweat_smile:
+ struct: im getting tired&#160;:(
+ Chainman: same only few hours left
+ struct: what time is it there?
+ Chainman: usa it is 9:46PM in Central Time Zone
+ struct: damn 03:47 am here&#160;:(
+ Chainman: rough, I know I'm about to lose mental ability soon. 
+ Chainman: It exponentially decreases at a time. 
+ BlitzProg: 4:48am here
+ Counterbalance: hmm
+ Counterbalance: i thought my clock was off but it was just silent for 7 minutes&#160;:)
+ eulerscheZahl: :boom:
+ eulerscheZahl: better?
+ Counterbalance: :bird:
+ ddreams: the toad is gone
+ struct: I think im going to rewrite eval
+ eulerscheZahl: now?
+ Wontonimo: 5 hours, that's most of a business day
+ ddreams: it's painful to recalibrate it
+ ddreams: but yeah, I'm doing it too
+ struct: euler I have no ideas
+ struct:&#160;:(
+ struct: also 5 hours is plenty of time
+ struct: my current eval is not great
+ JohnCM: i accidentally shrunk my code in the ide, anyone knows how to expand it
+ ddreams: ctrl-scrollwheel
+ eulerscheZahl: the &gt; and v on the left, next to the lines
+ eulerscheZahl: uncollapse it
+ Chainman: the touchpad by moving fingers away from each other.
+ ddreams: I thought he meant zooming
+ JohnCM: which ones?
+ JohnCM: yea i zoomed mine to tiny font
+ JohnCM: i want to unzoom it
+ ddreams: ctrl-scrollwheel
+ eulerscheZahl: ctrl+p, type zoom
+ ddreams: over the text
+ Chainman: try alt+f4?
+ ddreams: kick
+ ddreams: :p
+ Wontonimo: command + scroll wheel if you are on mac
+ Chainman: :sweat_smile:
+ eulerscheZahl: delete your cookies and reopen the site
+ JohnCM: ah ok euler's method works
+ JohnCM: i zoomed in to a decent size
+ Counterbalance: control-+
+ JohnCM: for a while i count see 100 lines at once
+ JohnCM: could*
+ ddreams: well, so far my new eval has a 3.13% win rate
+ Chainman: I think that's different control +
+ ddreams: I zoom it tiny on purpose, since I copy/paste it from my own editor
+ JohnCM: yea i use mac, but i don't have a mouse
+ Chainman: that's the entire webpage
+ JohnCM: i think it was probably cmd + mouse movement that caused it, though i couldn't replicate
+ Wontonimo: command + 2 finger swipe up or down
+ ddreams: 2 finger swipe == scrollwheel
+ Counterbalance: move closer to the screen, or further away
+ Wontonimo: ^^
+ Chainman: hmmm
+ JohnCM: oh gosh finally won gold boss<a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/557333095">https://www.codingame.com/share-replay/557333095</a>
+ eulerscheZahl: buy a bigger screen
+ ddreams: gz
+ ddreams: now get above him
+ ddreams: *it
+ JohnCM: haha but the league is really hard to win
+ Wontonimo: well, the last 8 hours have not been kind to me for coding, so no more submits for me
+ JohnCM: ok i've got this, around 70% wins of the gold boss after mass tweaking of heuristics
+ struct: ill only submit if I get a 65%+ version
+ Wontonimo: first official contest, and i have to say i enjoyed it
+ JohnCM: oh won my first 12 arena games, let's see where this goes
+ BrunoFelthes: welcome Wontonimo
+ Wontonimo: seeing everyone online at once has been great
+ JohnCM: hi Wontonimo, thanks for your tips
+ xoarianuh: I am struggling with this Ghost in the Cell game. What am I supposed to do to produce new cyborgs? 
+ Wontonimo: hey JohnCM , no prob!  Did they work?
+ eulerscheZahl: for his finger tips? are you the Mafia?
+ JohnCM: the seeding technique works.i also added in my own move order arrangement tactic to prioritize low cost moves first
+ JohnCM: save more sun points to react to opponent's growing of trees
+ Wontonimo: wow!  look at you go!
+ cegprakash: JohnCM what seeding technique
+ JohnCM: oh doing good in league, won first 17 games
+ JohnCM: haha Wontonimo, you ok if i share the seeding technique?
+ eulerscheZahl: low cost first? shouldnt it be high cost?
+ Wontonimo: go for it
+ Chainman: oh
+ eulerscheZahl: grow from 2 to 3, then you have less of size 2
+ eulerscheZahl: so 1=&gt; 2 will get cheaper
+ JohnCM: yea so basically knights move awayand you should seed 1 seed each move as it is 0 cost.grow the seed each round so the seeding move will be 0 cost
+ ZarthaxX: i think all the people do that
+ ZarthaxX: :P
+ JohnCM: yes euler, the growing of seeds to trees are prioritized first
+ eulerscheZahl: no ZarthaxX, that's pro tactics
+ JohnCM: but i'm saying i like do actions like harvest, seeding
+ Chainman: lol
+ JohnCM: before grow
+ kovi: morning
+ struct: I dont do that
+ JohnCM: so like grow is last action to take each round
+ Chainman: I've been saying that this all today 
+ BrunoFelthes: wow, morning kovi
+ struct: hi kov i
+ Chainman: hello
+ BrunoFelthes: but i think that people here do not sleep yet :P
+ AlexiusCzar: how to go back to problem after submtng solution??
+ struct: I wont sleep until its over
+ Wontonimo: it's over for me
+ ddreams: I'm resubmitting my 11 hour old code...
+ BrunoFelthes: will you not work tomorrow struct?
+ eulerscheZahl: today*
+ struct: no, im a student
+ BrunoFelthes: Oh, nice
+ ddreams: at least I will beat Ille :p
+ eulerscheZahl: 4:10 am for him
+ nam4.nguyen: I'm struggling at rank 300 gold league, you guys have any suggestions? And I wonder when I should haverst trees
+ JohnCM: my tree harvesting action is tiered based on nutrients remaining
+ ddreams: you have to post an interesting replay, nam
+ JohnCM: so if i see opp past a threshold nutrient, i harvest mine too
+ Wontonimo: hey nam4.nguyen , i'll take a look at your replays ... give me a sec
+ BrunoFelthes: I was considering take vacations... Im too addicted to work and play..
+ JohnCM: ohoh rank 30 gold league
+ eulerscheZahl: i did that BrunoFelthes
+ JohnCM: haha though i doubt i can win boss, my code doesn't win all the time
+ eulerscheZahl: and then mostly prorastinated
+ nam4.nguyen: Thank you guys
+ ddreams: there euler, I pushed you a bit
+ BrunoFelthes: ahuahhu, here in Brazil we can have 1 week vacation... but my wife didnt like the idea :P
+ Chainman: oooh finally I lose to gold boss again, 
+ Chainman: wow
+ JohnCM: you mean you were winning?
+ BrunoFelthes: did you liked this game eulerscheZahl?
+ Chainman: nope, but still losing
+ Chainman: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/557337518">https://www.codingame.com/replay/557337518</a>
+ Chainman: I feel I'm using sun points quite efficiently now.
+ nam4.nguyen: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/557332292">https://www.codingame.com/replay/557332292</a>
+ nam4.nguyen: I'm losing boss almost the time
+ eulerscheZahl: board games are never my favorite
+ eulerscheZahl: it's hard for me as a human to understand what's going on
+ ddreams: you may consider to only have one seed on the board, nam
+ JohnCM: i think i'm just gonna sit this one and see where my bot pushes me to. it is around top 30 gold now
+ eulerscheZahl: so it mostly feels like throwing CPU at it and testing random things to see if it's any better
+ Wontonimo: hey nam4.nguyen i can't see anything glaring
+ JohnCM: perfect info board games can use monte carlo tree search
+ struct: exactly what hapened to me on this contest euler
+ ZarthaxX: same
+ Wontonimo: nam4.nguyen i did see in <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/557336843">https://www.codingame.com/replay/557336843</a> that you finished a few s3 trees too soon and by frame 81 your production is a bit low
+ struct: even during testing
+ Chainman: I need one more push
+ Chainman: seems your bot beats mine nam4.
+ ddreams: I don't think that looks too low at 81, wonto
+ eulerscheZahl: JohnCM yes, but the state explosion is enormous. that makes it hard for MCTS
+ BrunoFelthes: but eulerscheZahl, do you prefer games with physics, like meanmax?
+ JohnCM: what method did you use euler
+ JohnCM: i mean if you're ok to share
+ eulerscheZahl: i like grid games like pacman
+ JohnCM: oh yes i like pacman
+ eulerscheZahl: i don't like fog of war
+ JohnCM: rank 23 now:) wonder if this push can make it
+ Wontonimo: ddreams - you are correct ... lots of S2 trees
+ BlitzProg: Ah, that feel of resignation, telling me it's finally time to give up
+ eulerscheZahl: what's the boss score?
+ BrunoFelthes: i like games with physics, but i think that the lasts with physics do not had too much success...
+ BlitzProg: I'll try to push some of my old PHP AIs to see which are best, then I'm off
+ Chainman: 81 moves in the game. 
+ JustAProgrammer01234: some cool song I discovered<a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">https://www.youtube.com/watch?v=dQw4w9WgXcQ</a>
+ Chainman: Is it best to complete s3 trees when you have 3 or 4 of them on board?
+ JohnCM: for me, never have more than 4 big trees
+ JohnCM: cause it will increase the cost of lvl 3 grow too much
+ Chainman: okay same
+ JustAProgrammer01234: did anyone check out the cool song I discovered
+ eulerscheZahl: no
+ JustAProgrammer01234: ok then
+ JustAProgrammer01234: here<a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">https://www.youtube.com/watch?v=dQw4w9WgXcQ</a>
+ ddreams: no, stop spamming tho
+ JustAProgrammer01234: Im not even spammin
+ JustAProgrammer01234: bruh
+ ddreams: also rick rolling is incredibly old by now
+ ddreams: so try to make it fresh
+ JustAProgrammer01234: nah
+ JustAProgrammer01234: still funny
+ JustAProgrammer01234: you clicked the link didn't you
+ BlitzProg: ends with XcQ
+ BlitzProg: ends with me not clicking on it
+ JustAProgrammer01234:&#160;:(
+ JustAProgrammer01234: ):
+ JustAProgrammer01234: way better
+ ClockSort: every internet veteran knows dQw4w9WgXcQ
+ eulerscheZahl: i just know that i shouldn't click when it's praised as music
+ JohnCM: well to be fair it's a nice song
+ ClockSort: i know lol, i always listen :D
+ KnightMoves: spent the last few hours watching reCurse replays and tweaking my eval function. Finally made it to legend
+ ddreams: yeah, 99% of the time when someone posts actual music they like it's not something I like anyway
+ ClockSort: i had to revert back 8 hours of dev time. I was making my bot worse :P
+ ddreams: really just a waste of time
+ eulerscheZahl: 100% for me. i don't like musics
+ ClockSort: ddreams I know a song you would like but i won't post it
+ ddreams: thanks&#160;:)
+ codingWhale: Nice, KnightMoves! But why did you leave me behind? :expressionless:
+ ClockSort: i even fixed bugs and that made my bot worse too
+ eulerscheZahl: i'm the kind of person who skips a 30s movie scene because it's just playing music
+ ddreams: same clocksort
+ ddreams: I reverted 11 hours
+ ddreams: at least that bot got into top100
+ ZarthaxX: ClockSort first time legend?
+ ClockSort: my mcts uses a buggy UCT function because that works better than tracking visits properly, haha
+ ZarthaxX: o.o
+ ClockSort: @ZarthaxX yes and rank 21! I'm stoked
+ ddreams: how is it buggy?
+ ZarthaxX: dude you smashed it gz!
+ KnightMoves: codingWhale you're so close!
+ ddreams: maybe you've innovated
+ ClockSort: it uses global visit count on every node
+ ZarthaxX: potential t shirt
+ JohnCM: clocksort your monte carlo is working very well
+ ClockSort: tracking node visits is extra computation because i store visits on the edges
+ Wontonimo: global visits?
+ Wontonimo: instead of parent?
+ JohnCM: how do you store your mcts search between turns though
+ JohnCM: is there global memory
+ ClockSort: yes, the visits of the root node every time :sweat_smile:
+ codingWhale: I'll just go to bed and hope someone pushes me over.&#160;:)
+ Wontonimo: cheers to you for making that work!
+ eulerscheZahl: ok, good morning codingWhale
+ JohnCM: i can't test with my ide anymore, so i'm just testing with arena now
+ codingWhale: yeah, good night
+ ClockSort: i don't think i'll make any changes in these last 4 hours
+ ClockSort: i don't know how to improve
+ JohnCM: haha clocksort you did well this competition alr
+ ClockSort: i guess optimising mcts for speed would help
+ JohnCM: but is there global memory where you can store variables between turns?
+ ddreams: you don't even use bitboards, right?
+ Wontonimo: how many simulations are you doing per 100ms ClockSort?
+ ZarthaxX: bitboarding :D
+ ClockSort: yes. static State STATES[800000];
+ JohnCM: i guess any variable outside of the while loop for the game is a global variable?
+ ClockSort: @wontonimo 12000 rollouts on avg from opening, but on later turns i reuse the tree if possible
+ Wontonimo: sigh, i'm at 3000 ... too many performance issues
+ ClockSort: @ddreams that's right, it's an array of 37 ints. horrible :laughing:
+ JohnCM: yea you probably also prune quite a lot of moves that don't make sense, like one space seeding
+ Wontonimo: and i've run out of car
+ Wontonimo: care
+ eulerscheZahl: others run out of gas
+ Wontonimo: lol
+ eulerscheZahl: but not Wontonimo. he runs out of cars
+ Wontonimo: either I'm balling, or a car thief
+ JohnCM: codingwhale almost there for legend
+ eulerscheZahl: whale is gone
+ Counterbalance: it's blinking
+ MADDY-1: hii guys
+ ZarthaxX: annoying blink
+ Chainman: I can't think anymore, will need to take a nap soon.
+ Chainman: I think I've been making my bot worse.
+ ddreams: yeah, I'm off too
+ ddreams: I'm ok with top 100 this time :p
+ Chainman: nice,
+ BrunoFelthes: hope that someone explain how to deal with bitboards at this contest, my bitboard was worsts than the regular class...
+ ZarthaxX: haha
+ ZarthaxX: :P
+ eulerscheZahl: struct has a nice representation
+ BrunoFelthes: he exposed it?
+ Chainman: struct has shared?
+ Chainman: nani?
+ eulerscheZahl: i just know that he can do the shadow without unsetting bits
+ struct: o.o
+ Chainman: hmmmmmm
+ eulerscheZahl: will you write about it after the contest?
+ BrunoFelthes: struct, please share it :D
+ struct: I can sure
+ ddreams: why would you unset bits for shadow?
+ ZarthaxX: best bitboard representation ever
+ ZarthaxX:&#160;:)
+ ClockSort: struct is da man
+ ZarthaxX: he meant filter somebits in the process ddreams
+ Chainman: is bitboarding just a mask for where your trees and opponent are?  Also I use mask for dormant trees.
+ eulerscheZahl: not to wrap around. leaving the map on one side and going back in on the other side
+ struct: BrunoFelthes ill share it after contest ends
+ ZarthaxX: because calculating shadows requires shifts and depending on your representation wraparound is a problem
+ ClockSort: you can use a mask to find shadows without a loop
+ BrunoFelthes: sure
+ ClockSort: i haven't figured out how though :D
+ ddreams: hmm.. you can do the 3-shadow without once filtering, struct?
+ struct: yes
+ cegprakash: An error occurred (#407): "You reached the limit of plays for a period of time.".
+ BrunoFelthes: oh, i can see now... , one mask for each position
+ ZarthaxX: position?
+ ddreams: hmm.. maybe I'm filtering for no reason
+ ZarthaxX: size of trees
+ Counterbalance: shadows[angle][size] &amp; 1ULL&lt;&lt;cellidx&#160;?
+ eulerscheZahl: 1-hot encoding for the trees
+ struct: I dont use masks
+ struct: I use shifts
+ struct: to get seeds I do use masks
+ struct: but thats about it
+ eulerscheZahl: just that you use your own cell index and not the one given by the referee
+ Chainman: that's it I'm out, I still can't beat gold boss&#160;:(
+ ZarthaxX: Chainman gg
+ ddreams: yeah, I shift too, but I filter once against the bitmask you call "inside"
+ ddreams: perhaps it's unecessary

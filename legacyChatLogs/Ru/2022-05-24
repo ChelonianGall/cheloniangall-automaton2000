@@ -1,0 +1,16 @@
+ aangairbender: Кто какой рандом использует для высокого перформанса? я провожу небольшое сравнение, пока что лидирует xorshift64
+ Uljahn: слышал про fastrand
+ aangairbender: для генерации u32: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/eb1f65d8-6794-4401-aa66-07fe1990b9c0">http://chat.codingame.com/pastebin/eb1f65d8-6794-4401-aa66-07fe1990b9c0</a>
+ aangairbender: для генерации u32: xorshift64 &lt; fastrand &lt; java randomдля генерации u64: xorshift &lt; java random &lt; fastrand
+ aangairbender: пока только эти три алгоритма есть
+ aangairbender: при том что это супер странно, что java random что fastrand одинаково ипсользуют next_u32 для генерации u64
+ wlesavo: у меня украденый у амура fastrand просто(((g_seed &gt;&gt; 16) &amp; 0x7FFF) * mod) &gt;&gt; 15
+ tutubalin: у меня модификация вот этого: <a rel="nofollow" class="external free" href="https://lemire.me/blog/2019/03/19/the-fastest-conventional-random-number-generator-that-can-pass-big-crush/">https://lemire.me/blog/2019/03/19/the-fastest-conventional-random-number-generator-that-can-pass-big-crush/</a>
+ tutubalin: на асме примерно 12 тиков процессора.
+ tutubalin: запросто проходит Big Crush и другие тесты рандомности
+ aangairbender: wlesavo этот fastrand у меня медленней даже чем java.util.random
+ aangairbender: вообще умножения замедляют как я понял, поэтому xorshift топ
+ aangairbender: в расте есть SmallRng генератор, он использует Xorshiro256++
+ aangairbender: быстрей него мне не вышло накодить
+ aangairbender: там только битовые сдвиги, прибавления и xor
+ aangairbender: кстати о c#In version 6, Microsoft's .NET framework has adopted xoshiro256** and xoshiro128** as default PRNGs.

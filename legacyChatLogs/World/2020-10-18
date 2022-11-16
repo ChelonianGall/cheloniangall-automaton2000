@@ -1,0 +1,943 @@
+ LinhT.Nguyen: it's numpy!!
+ Allis: For transpose?
+ LinhT.Nguyen: yeah
+ LinhT.Nguyen: but i think i found something
+ LinhT.Nguyen: else
+ LinhT.Nguyen: fck my brain alright xD
+ Allis: @LinhT.Nguyen Here ya go: <a rel="nofollow" class="external free" href="https://ideone.com/IPpiJg">https://ideone.com/IPpiJg</a>
+ jdsfklsd: braed
+ jdsfklsd: bread
+ jdsfklsd: brioche
+ Allis: Having  to explicitly say list() everywhere is annoying, but being able to transpose just by zipping the splat is very nice.
+ BiMathAx: Hello, i tonna to do thé puzzle happy number but i don’t understabd Thais&#160;: «&#160;of irse digits ion base-ten&#160;»... What is this, please 
+ eulerscheZahl: «of its digits in base-ten»that's what the statement says
+ riccoraga: @MathieuGanesan
+ jacek: oO
+ jacek: meh, checkers is so drawish in the top
+ MSmits: yeah, especially because of loops
+ MSmits: endgame books would fix this, but they are really big in checkers. 3-4 pieces is the best you can do 
+ MSmits: mostly because you need a DTM as opposed to WLD endgame base. You need the time to win instead of the W/L/D value. If you know the time to win of a state, you can end the game as fast as possible
+ MSmits: time to win is at least 8 bit as opposed to WLD, which is 3 bit
+ MSmits: err less than 2 bit even
+ jacek: mmh
+ MSmits: you can generate it on the fly in some way, but you need a very efficient algo. But then at least space wont matter much
+ MSmits: i do it on the fly in oware. Last night I  boosted the performance to being able to do 8 seeds in 300 ms&#160;:)
+ MSmits: my original was 6 seeds and also took 300 ms, now 20 ms. Crazy boost
+ jacek: at first turn?
+ MSmits: yeah
+ jacek: and how does it affect winrate
+ MSmits: a little, it's really really hard to tell because there is a huge gap between the 4 NN's and the number 5
+ jacek: at least self winrate
+ MSmits: hmm I should test that. I will have to submit without both books, then do a CG bench with 8 seed endgame book
+ jacek: so you dont have some local arena? you do it all via cgbench? :O
+ MSmits: I do I think, I havent used it in a year o rmore
+ MSmits: i generally dont run more than 5-10 games or so, i just need to find one i lose to create the opening book with
+ MSmits: and I lose a lot vs you
+ MSmits: the sad thing is, my 9 seed takes about 1200 ms =/
+ MSmits: i can calculate it over the next few turns i think, but that's so messy
+ jacek: until you find a more efficient algo
+ MSmits: this is pretty efficient though. This one is able to create a db roughly 14 million states with their end game seed count
+ MSmits: 75582 different states * 185 turns (because turn matters)
+ MSmits: thats in 300 ms. So it could do 50 million in the full 1s
+ MSmits: my local DB goes up to 15 seeds in an hour, with this boost I could make it go much faster, but 16 seeds will still take 100 times longer because 15 seed db fits exactly in 4 GB memory, I would have to use  harddrive memory&#160;:(
+ jacek: 4GB RAM? what year is it
+ MSmits: its not the ram limitation
+ MSmits: the arrays required cant be bigger than some value
+ MSmits: the compilers just wont let you
+ jacek: C# limitation?
+ MSmits: c++
+ MSmits: in VS anyway
+ jacek: w00t
+ MSmits: I could get up to 22 seeds with 100 GB HD the way i am storing it now
+ MSmits: more seeds is nice, because you can local sim and end with a lookup at 22 as opposed to simming till 15
+ MSmits: it's faster, but also more accurate
+ MSmits: I think this perfectly reflects my winrate vs the NN's now:
+ MSmits: <a rel="nofollow" class="external free" href="http://cgstats.magusgeek.com/app/multi-oware-abapa/msmits">http://cgstats.magusgeek.com/app/multi-oware-abapa/msmits</a>
+ MSmits: recurse's last submit was always very strong vs my bot and you and robo submitted a very strong bot at the end. I was 0-10% vs them without my opening book. Agade was always 55%
+ jacek: better than agade, neat
+ jacek: huh, robo so down, he was 2nd
+ MSmits: i did a lot of submits
+ MSmits: and i have an opening book vs you and robo, not so much vs recurse and agade
+ MSmits: he can resubmit and get back up
+ MSmits: preferably a few times, so i get boosted to 3rd :p
+ MSmits: btw, I thought your bot was very deterministic, but that random chance does produce some offshoots in the tree. On average one split every 5-10 plies
+ MSmits: robo's has one split in the full opening book tree. Almost completely deterministic
+ MSmits: it's a smart move
+ MSmits: noticed this in Othello as well
+ MSmits: must be difficult to balance this. If you make the random thingy too large, your bot gets worse
+ jacek: my UCT is [0.9,1.1] * eval + exploration
+ MSmits: ahh yes, that's what i would have expected
+ jacek: so it isnt completely deterministic even with fixed rollouts
+ MSmits: it only changes stuff around when several moves are nearly equally good
+ jacek: its good for testing the strength, because either it would be 100% or 0%
+ jacek: and against boomers
+ jacek: bookers*
+ jacek: :D
+ MSmits: yea, it does help a lot
+ MSmits: i wonder if this would help me fit parameters by self play
+ MSmits: i could even create an opening book while using it at the same time 
+ MSmits: btw i checked earlier and the book only has 707 moves in it still and that includes the opponents moves i dont play, just to build the tree. That's after months of calctime
+ MSmits: so you can see why i havent needed that unicode thing before
+ Allis: Months?!
+ MSmits: well yeah, i have it running in the background on a single core
+ MSmits: Games played: 2546303 
+ MSmits: a game takes 1-3 seconds
+ MSmits: every game adds a node to the tree
+ jacek: yeah, only months
+ MSmits:&#160;:)
+ MSmits: I've done this for yavalath, uttt and othello as well
+ MSmits: for uttt with little success except vs other people that use books
+ AntiSquid: how come you didn't have your own NN attempt yet MSmits?
+ jacek: he has - its book
+ AntiSquid: that's different
+ jacek: only cool kids have NN
+ AntiSquid: only the top NNs are cool :P
+ jacek: AutomatonNN is it true?
+ AutomatonNN: I come to the beach and sure&#160;:)
+ YurkovAS: jacek do you have open book in uttt?
+ jacek: no. only teccles'
+ AntiSquid: are we going to see some nasty bail-ins AutomatonNN&#160;?
+ AutomatonNN: yeah
+ JefMacatugob: hi
+ Q12: Why sometime I have this message:"Warning: your code did not read all available input before printing an instruction, your outputs will not be synchronized with the game's turns and unexpected behaviour may occur."and after I click run test case again (the same test case), without changing a thing, it disappear.Do you know why this is happening?
+ eulerscheZahl: that's because of the goblin living on one of the CG servers
+ MSmits: I'm pretty sure it's a toad
+ LastRick: Like most warnings, I just ignore it. I'm sure that's fine.
+ A.F: hi
+ A.F: how to do coders strike back
+ A.F: :grin:
+ jacek:&#160;?
+ jacek: the more you know <a rel="nofollow" class="external free" href="https://en.wikipedia.org/wiki/Cheskers">https://en.wikipedia.org/wiki/Cheskers</a>
+ Robin: Hey guys, sorry to disturb. Just a question. Do you know the recursion limit of the CodinGame evaluator?
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/faq">https://www.codingame.com/faq</a>the defaults of your language
+ jacek: what is the defaults of french?
+ eulerscheZahl: numbers go up to 60. then you have to use math
+ Robin: Thanks for that. But it's doesn't answer my question unfortunately.. It says how much memory is available. Not how big the call stack can be..
+ eulerscheZahl: it gives a a list of compiler versions used
+ eulerscheZahl: consult the docs for that specific language and version
+ jacek: medical docs?
+ Robin: Not trivial. It depends on how much memory has been allocated to the stack. With java it can be done with the -Xss flag.
+ Robin: Anyway, I'll never know..
+ jacek: so make some experiments
+ Robin: By doing a simple infinite recursion, I can go to over 10000 calls before it crashes.
+ Robin: With my program, it fails with fewer than 5000.
+ Robin: Screw this, I don't want to remove the recursion...
+ besirgunduz: hello guys
+ jacek: ohai
+ FuriousT: I assume you've accounted for any parameters passed in your recursion experiment + locals of the function you are recursing. 
+ jacek: damm you recursion <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/493782102">https://www.codingame.com/replay/493782102</a>
+ MSmits: bug in your sim jacek?
+ MSmits: I know your pain, it's hard
+ MSmits: are you doing it on a bitboard?
+ jacek: i copied some bitboard implementation in python to c++
+ jacek: i think the sim is good but translating move to this notation is bugged
+ MSmits: ah yeah, thats annoying as well
+ MSmits: it's different for different games too I think
+ MSmits: sometimes the top is 1, sometimes bottom
+ MSmits: yay, seed 9 book finished calculating on ply 10
+ MSmits: so that should work in most games unless my opponent plays ridiculous moves that aren't in the opening book
+ MSmits: wonder if it's worth doing a 10 seed one
+ MSmits: probably finish at ply 70 or something :P
+ jacek: so you pick book move and calculate the endgame in rest of the turn?
+ MSmits: yeah
+ jacek: x.x
+ MSmits: first time i do something crazy like that
+ kaanersoy12: Guys hi, how can i get hint about game i am a new i want to learn
+ Emreunsal: mal aq
+ MSmits: which game?
+ kaanersoy12: The Descent
+ jacek: there are some hints for puzzles.
+ jacek: on the left
+ MSmits: yeah there's a thingy you can click
+ kaanersoy12: there is mountains so scary&#160;:/
+ MSmits: the descent is mostly about going through the loop and outputting the highest one
+ MSmits: it looks a bit weird because you're already in a loop, but this is the game loop
+ MSmits: you have to write your own loop where you pick the highest mountain
+ MSmits: and output this
+ kaanersoy12: Okey i can understand it is a good one&#160;:) 
+ kaanersoy12: thanks.
+ kaanersoy12: a lot
+ MSmits: np
+ Astrobytes: up to 9 seeds for your book now MSmits? Impressive!
+ Emreunsal: mal aq
+ kaanersoy12: How can i get the heighest mountain value?
+ Emreunsal: :heart_eyes:
+ kaanersoy12: i can't do it till 30 minutes lol&#160;:)
+ kaanersoy12: i can't do it
+ kaanersoy12: How can i get the highest mountain value in The Descent game&#160;? please help
+ Emreunsal: help help
+ Emreunsal: heeeeeeelp
+ Emreunsal: HEEEEEELP
+ Emreunsal:&#160;!!!
+ jacek: :thinking:
+ Emreunsal: List&lt;Checkpoint&gt; checkpoints = new List&lt;Checkpoint&gt;();
+ MSmits: Astrobytes yeah, still ironing out some bugs, but 9 seeds seems to be doable. Maybe 10 seeds too but probably not realistic
+ jacek: you gotta pump those numbers up
+ jacek: up to 48
+ MSmits: lol
+ eulerscheZahl: and add a 20 before
+ jacek: then maybe youll have chance
+ MSmits: :grin:
+ eulerscheZahl: promoting stuff like jacek does with paper soccer :P
+ MSmits: main limit is cache efficiency. You need to do a lot of lookups during the generation of the db. Once the db gets to 30 million entries...
+ MSmits: no way around that really
+ MSmits: i did some profiling and 70% of the calc time was just getting a value out of the db and it's a plain array lookup, cant be made faster
+ Astrobytes: oof
+ MSmits: i just tried to code a progress indicator for the seed9 book and multiplied the steps done by 100 and divide by the total steps. There are so many steps that I got a negative percentage... went out of 32 bit range :P
+ AntiSquid: paper soccer is not real football, change my mind
+ eulerscheZahl: and chess is no sport
+ eulerscheZahl: neither is e-sport
+ jacek: paper soccer was once puzzle of the week... during contest...&#160;:(
+ eulerscheZahl: bad timing
+ MSmits: that's just mean
+ eulerscheZahl: onitama gained 100 players in that 1 weekand dots and boxes even more
+ AntiSquid: sorry for you man, it's like winning lottery when there's a huge&#160;% tax on it :P
+ MSmits: I don't dislike paper soccer really. I just always seem to have 2 or 3 games that rank higher for me. 
+ jacek: 258 on d&amp;b, when there was less than 50 week before
+ jacek: just like coronavirus cases
+ jacek: i would have thought more people played it at school. but its apparently only popular in poland and mid/eastern europe
+ MSmits: yeah i didnt play it at school, only D&amp;B I think
+ eulerscheZahl: i did neither
+ eulerscheZahl: only four in a row (rarely)
+ jacek: euler had no chill at school
+ AntiSquid: i played d&amp;b in school was #1, beat the guy who was addicted to it, totally meaningless achievement, but since we are on the topic ...
+ MSmits: that's cool AntiSquid
+ MSmits: I bet he still visits the psych talking about you
+ jacek: and yet youre at the bottom of leaderboard
+ jacek: plot twist: that was Crazy_Remi
+ AntiSquid: i put 0 time into it 
+ LucaInPython: hi
+ jacek: is it true <a rel="nofollow" class="external free" href="https://img-9gag-fun.9cache.com/photo/aQdBpod_700bwp.webp">https://img-9gag-fun.9cache.com/photo/aQdBpod_700bwp.webp</a>
+ MSmits: eh never heard of that
+ MSmits: why?, did you stub your toe and looking to move here?
+ MaliciouslyCrypticUsername: loool
+ jacek: maybe
+ Astrobytes: Does a back/bone problem qualify as a disability? Asking for a friend... :P
+ jacek: first weed and now this?
+ jacek: how can you get even cooler than that?
+ Astrobytes: Apartments without heating
+ AntiSquid: physics professors skipping class @jacek
+ AntiSquid: and python was born there
+ MSmits: I dunno, the coolness must be focused in a different part of my country, Not feelin it here
+ eulerscheZahl: was a discussion here as well <a rel="nofollow" class="external free" href="https://www.spiegel.de/gesundheit/sex/sexualbegleitung-fuer-behinderte-umsetzung-von-grundrecht-oder-prostitution-a-1129343.html">https://www.spiegel.de/gesundheit/sex/sexualbegleitung-fuer-behinderte-umsetzung-von-grundrecht-oder-prostitution-a-1129343.html</a>
+ Astrobytes: "Some sex care workers admitted to being ‘sneaked’ into the house of their clients, especially through their backdoors"
+ eulerscheZahl: check the last paragraph, even mentions the Netherlands as an example
+ eulerscheZahl: (sorry for German)
+ jacek: :scream:
+ MSmits: I was honestly just surprised about the government funding part
+ MSmits: not sure that is true, seems unlikely
+ eulerscheZahl: google time? have fun clearing your history afterwards :D
+ MSmits: lol
+ MSmits: good tip
+ Astrobytes: Not sure it is govt funded from what I've read
+ Astrobytes: But it's regarded as acceptable
+ jacek: its nothing. in here government f**k us everytime
+ Astrobytes: lol jacek
+ Astrobytes: would be funnier if it wasn't true
+ AntiSquid: why does this give an error on CG: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/0d379c6b-b52e-4849-bbb5-471dc05f90d1">http://chat.codingame.com/pastebin/0d379c6b-b52e-4849-bbb5-471dc05f90d1</a>
+ jacek: hm?
+ MSmits: eulerscheZahl says it's the goblin
+ AntiSquid: struct move {  }; vector&lt;move&gt; moves;  // gives error
+ AntiSquid: struct Move {  }; vector&lt;Move&gt; moves; // works
+ Astrobytes: the move keyword?
+ Astrobytes: std::move?
+ jacek: <a rel="nofollow" class="external free" href="https://loadingartist.com/comic/out-of-sight/">https://loadingartist.com/comic/out-of-sight/</a>
+ jacek: AutomatonNN where is struct?
+ AntiSquid: oh i forgot it exists
+ AutomatonNN: why?
+ jacek: AutomatonNN because his gone and he didn't delete account yet
+ AutomatonNN: eulerscheZahl is there a way to see the code royale bot to start with your submit to stay in the lea
+ eulerscheZahl: and that's why you don'tusing namespace std
+ Astrobytes:&#160;;)
+ Astrobytes: LOL
+ Astrobytes: no mercy for the Automaton
+ eulerscheZahl: AutomatonNN will be back i fear
+ eulerscheZahl: takes longer than i thought
+ jacek: huh
+ Astrobytes: he kicked NN
+ eulerscheZahl: nothing to see here
+ AntiSquid: AutomatonNN was just peacefully protesting
+ Astrobytes: doesn't he come back after chat reset or something
+ Astrobytes: Or does he need a restart himself, I don't remember
+ jacek: Automaton2000 why that frog kicked your brother?
+ Automaton2000: i see no way to know if my bot is so stupid
+ eulerscheZahl: we'll find out. i wouldn't be surprised to see it back tomorrow
+ Astrobytes: better not ban it I guess :P
+ Scarfield: i think it comes back with chat reset, undyingmaton
+ AntiSquid: make a chat bot that pings its creator
+ Astrobytes: Autoscarf o/
+ Scarfield: autoBytes oi
+ AntiSquid: zombie chatbot
+ eulerscheZahl: Autohotkey
+ Astrobytes: Zombitron9000
+ Scarfield: make a bot that kicks NN
+ Astrobytes: Or an NN that kicks bots :thinking:
+ AntiSquid: he'd have to use his account
+ eulerscheZahl: give a bot mod rights. and you have a 1% chance to get kicked when you ping it
+ Astrobytes: hah
+ eulerscheZahl: oh, astro was faster with that suggestion :o
+ eulerscheZahl: i've gotten slow
+ AntiSquid: he also golfed it
+ jacek: youre getting old
+ Astrobytes: what multi you working on AntiSquid?
+ AntiSquid: idk&#160;?
+ AntiSquid: why?
+ Astrobytes: Just wondering, since you posted about the move/Move thing
+ AntiSquid: i opened up ice and fire earlier then went to read a book i downloaded
+ AntiSquid: then came back and fooling around with dots and boxes
+ AntiSquid: look my rank improved there
+ Astrobytes: Ah. I gave up doing anything on ice and fire, tried some stuff for low hanging fruit but I need a rewrite so I gave up
+ Astrobytes: Just did my first d&amp;b the other day, not written a proper one yet, just enough to get into next league
+ AntiSquid: didn't do anything on CG for really long 
+ Astrobytes: Same
+ AntiSquid: trying to avoid a slow start next contest :P
+ Astrobytes: lol also same 
+ AntiSquid: i should probably look at referee . i am like the "what does the statement say" people in chat when it comes to the referee code
+ Astrobytes: No need for getting out of wood 2
+ AntiSquid: no but then i might have to rewrite the structure
+ Astrobytes: I don't get serious until next league unless it's necessary
+ AntiSquid: doing this very halfhearted . 
+ Astrobytes: Just sort the available moves by something, prefer certain moves if available, if not use the sorted
+ Astrobytes: boxes, not moves 
+ Astrobytes: you'll figure it out
+ AntiSquid: i am writing it, i am just slow
+ AntiSquid: not import libs here
+ Astrobytes: import libs?
+ AntiSquid: import kerasadd layeradd layer
+ Astrobytes: Not using python here either
+ Astrobytes: Type faster
+ Astrobytes: :P
+ AntiSquid: wait, you're distracting me
+ Astrobytes: :grin:
+ AntiSquid: Automaton2000 tell him i need to be polite and answer
+ Automaton2000: thanks for all the other stuff
+ Astrobytes: haha, well shut up and code then! 
+ AntiSquid: Automaton2000 starting pinging this guy
+ Automaton2000: i've got the same problem
+ AntiSquid: let's wait for him outside when he takes the bins out Automaton2000
+ Automaton2000: i am in the train
+ AntiSquid: you're done for, automaton is on his way Astrobytes
+ Astrobytes: (and I'm the distracting one :rolling_eyes: )
+ Astrobytes: lol
+ AntiSquid: i think this promotes me
+ Astrobytes: looks that way yep
+ AntiSquid: what's the best structure to store the board? any theories&#160;? :p
+ eulerscheZahl: class Board
+ Astrobytes: didn't get that far yet, first thought was a graph (edges, vertices style)
+ AntiSquid: i think next contest will be about hunting toads and dropping them in the witches' cauldron
+ AntiSquid: ok bad joke, killed chat, Automaton2000
+ Automaton2000: i'll do it in time
+ Astrobytes: coding killed my chat, not your joke
+ FuriousT: what does this mean "angle for the rotation angle in degrees" for the input? 
+ vatsalsharma376: I have some fair experience in competitive programming but I don't know how to start with codingame. Are there any good #resources&#160;?
+ Astrobytes: Depends on your experience really, there's puzzles, multiplayer bot programming, optimistation, code golf
+ Astrobytes: *optimisation
+ magaiti: FuriousT, angle is the variable name, "rotation angle in degrees" is the variable value
+ magaiti: or rather, variable meaning
+ magaiti: meaning of the variable value. duh
+ AntiSquid: don't like the referee implementation for the board on d&amp;b, thinking of how to do a nicer one
+ AntiSquid: maybe a checkerboard of sorts .
+ MSmits: AntiSquid do you mean for a sim in your not?
+ MSmits: bot
+ MSmits: I can share my board implementation, but not sure you'll like it :P
+ AntiSquid: for my bot . i only use one representation usually
+ MSmits: ah ok
+ AntiSquid: and i think i can do with 1 here
+ MSmits: well mine is uint64_t hor and uint64_t ver
+ AntiSquid: A1 R == B1 L is part of what i want to add into the way i access the edges
+ MSmits: ah I see
+ AntiSquid: what does that mean MSmits
+ MSmits: I just have all horizontal lines in one bitboard and all vertical lines in another bitboard
+ MSmits: both are 64 bit
+ AntiSquid: oh i get it .
+ Astrobytes: but what about box edges
+ MSmits: i didn't know what kind of search i was gonna do so i figured if it is mcts i could keep the board on the node
+ MSmits: well they are just lines also
+ MSmits: first vertical line on the left is bit 1
+ AntiSquid: so you have 2 boards per node&#160;?
+ MSmits: yeah
+ MSmits: mind you i never got a search for wood 2. I used this method in my local solver
+ MSmits: I randomly create endgame boards by placing lines on it until all lines lead to boxes given away
+ MSmits: wood 1 i mean
+ MSmits: I did have a whole mcts thing in wood 2
+ MSmits: including the bitboards... but kinda overkill with that small a board
+ Astrobytes: I just sorted the boxes and edges by a heuristic lol
+ MSmits: oh, I solved the whole thing on turn 1 and then my bot just gave up when it was p2 
+ Astrobytes: fk effort for wood 2
+ MSmits: because 3 -1 
+ MSmits: I'll go back to D&amp;B once I get this AI course done, will be in 2 months o rso
+ Astrobytes: how's it going? 
+ MSmits: got too distracted by other games. Glad I am done with oware now though, no more seeds. 9 is the limit
+ AntiSquid: well my board would have 225 places once i implement it, only 112 used though
+ Astrobytes: lol, not tempted with 10 then
+ MSmits: going ok, did not get that much done in my vacation week, but got some good videos and animations ready to put in there
+ Astrobytes: awesome, did you end up using the interactive one?
+ MSmits: well after all the bugs were fixed, seed 9 DB is done between ply 15-40, 10 db would take twice as long and cause cache issues for the rest of the bot
+ MSmits: yeah i did
+ MSmits: i put it as an i-frame 
+ AntiSquid: wait i could use uint128_t is that slower than 2 uint64_t&#160;?
+ MSmits: had to dust of some archaic html skills
+ Astrobytes: Ah, yeah given your access time for the db that figures lol
+ Astrobytes: ah cool
+ MSmits: AntiSquid that depends on how you use it, if you're gonna access the 64 bit thingies separately all the time then it might cause overhead to do the 128 bit version
+ MSmits: I used the 128 bit for hypersonic because it made sense there
+ MSmits: visual studio hates it though
+ Astrobytes: that's why I never used 128 bit tbh
+ DomiKo: omg so close to top20 in UTTT
+ MSmits: gj DomiKo, you did teccles already right?
+ DomiKo: yes yes
+ DomiKo: i can't improve performance
+ MSmits: penalty on selection for moves that give away a free move to opponent?
+ FuriousT: magaiti . no doubt.  However, what I meant is which angle.  In any case it matters not as the angle is non-sensical until you actually start moving.  My issue was with the angle reading initially.
+ DomiKo: but I'm tuning some parameters
+ DomiKo: and testing how some "enchacements" work
+ MSmits: what enhancements are those? Or is this a trade secret?
+ Astrobytes: enchantments or enhancements? If you're using magic I wanna know :P
+ MSmits: I have maybe 2 things I never shared, but most of what i do is common knowledge
+ magaiti: FuriousT, initially your angle is -1 which means it is not defined. you can start moving in any direction
+ Astrobytes: (just playing on the spelling mistake&#160;:) )
+ MSmits: yeah it was almost enchantments
+ magaiti: after that, your pod has a defined arientation
+ DomiKo: at some point, I don't know what I'm doing
+ DomiKo: so I can say it could be magic
+ MSmits: this is mcts though?
+ DomiKo: yes
+ MSmits: ah ok
+ Nerchio: MSmits already knows everythhing about MCTS boring :D
+ DomiKo: i have to say that I did like 100+ submits
+ MSmits: I am never bored talking about mcts&#160;:)
+ MSmits: oo did my rank change
+ DomiKo: and leaderboard in top 11-30 changed a lot
+ AntiSquid: MCsmiTS
+ DomiKo: that because amur and Yurkov submited a lot too
+ Astrobytes: MCTS Bitboards is actually MSmits' name
+ DomiKo: I moved some guys fromtop11 to top25
+ DomiKo: some from top30 to to18
+ MSmits: nice work DomiKo
+ MSmits: wow amurushkin must have improved his bot a lot
+ MSmits: well at least a little
+ AntiSquid: you shuffled the leaderboard . 
+ AntiSquid: if there were continuous games it would readjust itself :P
+ MSmits: i have to be careful... uttt has some serious power... I get drawn back in :P
+ Astrobytes: what's the hot multi in #ru these days? I haven't checked for a while
+ DomiKo: that's my job
+ DomiKo: shuffling is my second name
+ MSmits: good luck finding a wife with that
+ Astrobytes: Mrs Shuffling
+ DomiKo: :rolling_eyes:
+ AntiSquid: was a reply to your "moved people in ranks", RPS effect there for sure imo
+ Astrobytes: Nerchio, how's COIF legend?
+ AntiSquid: CIF
+ Astrobytes: that's a cleaning product
+ AntiSquid: then CIAF
+ Nerchio: I left it already :D
+ Astrobytes: CoIaF is what it should be
+ Nerchio: trying to learn some MCTS in UTTT now
+ Astrobytes: ah cool
+ Nerchio: cause last time i tried it was a disaster
+ MSmits: yeah, that was my first mcts
+ AntiSquid: i said it from the start i am calling it CIF
+ MSmits: it's hard to get it right the first time
+ DomiKo: yes
+ AntiSquid: what's the best node selection formula&#160;?
+ MSmits: do you just mean the selection part of mcts?
+ AntiSquid: yes
+ MSmits: lemme share mine for oware, they are all similar
+ Astrobytes: depends on the application, there are variants on plain UCT
+ AntiSquid: UCB
+ DomiKo: you can try SHOT
+ Astrobytes: applied to trees
+ Astrobytes: UCT
+ Astrobytes: or SHAT
+ MSmits: <a rel="nofollow" class="external free" href="https://pastebin.com/yK08Xa1y">https://pastebin.com/yK08Xa1y</a>
+ MSmits: oh did you mean the uct formula
+ MSmits: I just use plain uct with a fitted exploration usually
+ AntiSquid: upper confidence bound
+ Astrobytes: applied to trees
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/74cc2de0-8f38-4db7-b53b-d160366d58b3">http://chat.codingame.com/pastebin/74cc2de0-8f38-4db7-b53b-d160366d58b3</a>
+ MSmits: damnit, not even a small functio
+ MSmits: <a rel="nofollow" class="external free" href="https://pastebin.com/VsXhFTit">https://pastebin.com/VsXhFTit</a>
+ MSmits: this is for a single child node. I pass the statistics of the parent as a parameter
+ MSmits: invsqrt(x) = 1/sqrt(x)
+ MSmits: takes a bit of math to work it out, but it's just the normal ucb 
+ MSmits: this is optimized
+ Astrobytes: and works nicely
+ MSmits: inline float rsqrt_fast(float x) { return _mm_cvtss_f32(_mm_rsqrt_ss(_mm_set_ss(x))); }
+ MSmits: use that
+ AntiSquid: is shat latest trend or what Astrobytes
+ MSmits: people been :poop: ing since the dawn of history AntiSquid
+ AntiSquid: ah that thing Jacek linked in chat yesterday?
+ Astrobytes: Sequential Halving Applied to Trees
+ Astrobytes: yea
+ Astrobytes: h
+ MSmits: oh
+ MSmits: lemme check that out
+ Astrobytes: I wasn't satisfied with "We propose to adapt Sequential Halving toMonte Carlo Tree Search and to name the resultingalgorithm SHOT"
+ AntiSquid: <a rel="nofollow" class="external free" href="https://i.kym-cdn.com/entries/icons/mobile/000/023/065/LmgY0hm5dUCBnf606pjHrMuoJjRCzCQjV7SuTBq2dGE.jpg">https://i.kym-cdn.com/entries/icons/mobile/000/023/065/LmgY0hm5dUCBnf606pjHrMuoJjRCzCQjV7SuTBq2dGE.jpg</a>
+ Astrobytes: <a rel="nofollow" class="external free" href="https://hal.archives-ouvertes.fr/hal-01436255/document">https://hal.archives-ouvertes.fr/hal-01436255/document</a>
+ AntiSquid: i have it . added it to my google drive for later :P
+ Astrobytes:&#160;;)
+ AntiSquid: using google drive so i don't have to move pdf from device to device
+ AntiSquid: then i can read when i am bored
+ Astrobytes: yep, sensible
+ AntiSquid: cool MSmits, do you always use the same formula?
+ MSmits: lately yeah, I have experimented with different ones on uttt a long time ago
+ MSmits: never got noticable results, but I have to admit i didnt do it very scientifically
+ Astrobytes: there's a whole bunch of variations on it
+ Astrobytes: some require mods to the actual algo
+ Astrobytes: Can't say I've experimented much
+ MSmits: the one i like is where you do an evaluation of the children and store that and during selection you prefer this eval on low visits and the statistics become more important than the eval as you visit the node more
+ MSmits: kind of a mix between minimax and mcts i suppose
+ MSmits: you just have to tune it right
+ jacek: progressive bias?
+ Astrobytes: that's a nice one
+ MSmits: that could be it yeah, i forgot the name
+ jacek: just use jacekmax and enjoy being 1st in every game
+ Astrobytes: "you just have to tune it right" goes without saying for any eval function :P
+ MSmits: i mean the balance between statistics and eval, on top of tuning the actual eval
+ MSmits: what was jacekmax again?
+ jacek: hyperparameter tuning eh
+ jacek: best-first minimax with uct
+ MSmits: oh right
+ MSmits: sounds good
+ Astrobytes: there's material on it, jacek probably has the paper links
+ jacek: linked here <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/55004/best-first-minimax-search-with-uct">https://www.codingame.com/playgrounds/55004/best-first-minimax-search-with-uct</a>
+ MSmits: is this shat or shot thing usable for fixed time limits?
+ MSmits: oh great
+ Astrobytes: ah yeah, forgot you did that playground
+ MSmits: thanks jacek
+ jacek: they claim shot is slightly better than uct with the same time
+ MSmits: oh btw, I thought i was the only one that use depth 0 ept jacek&#160;?
+ MSmits: or did someone else also do 0?
+ Astrobytes: Me
+ jacek: zerobytes
+ MSmits: oh and it was bette rfor you too?
+ Astrobytes: yep
+ MSmits: ah cool
+ Astrobytes: I told you to try 0 depth
+ MSmits: ohh
+ MSmits: I talk too much about stuff, forget who told me what
+ Astrobytes: you're just better than me is all
+ Astrobytes: :D
+ MSmits: you also told me about the custom hash
+ Astrobytes: yep
+ MSmits: I should remember better what you say
+ Astrobytes: As long as I'm around to remind you don't worry :P
+ MSmits: kk&#160;:)
+ jacek: kkk even
+ MSmits: :scream_cat:
+ MSmits: does jacekmax come with a solver?
+ MSmits: oh i guess it's minimax so its natural?
+ jacek: its implied
+ MSmits: right
+ MSmits: it's so easy to understand 
+ MSmits: i should do an oware version of this
+ jacek: :scream:
+ MSmits: it's probably going to suck at first
+ MSmits: because the parameters arent tuned for this
+ MSmits: move's eval value + log(move's visits)
+ MSmits: this is not uct is it?
+ MSmits: oh final selection nvm
+ jacek: thats final selection
+ MSmits: didnt know you meant the move selection for that turn
+ MSmits: allright got it
+ MSmits: you also use this in onitama right?
+ jacek: yes
+ MSmits: and othello
+ jacek: yes
+ jacek: the three big Os and B
+ MSmits: B?
+ jacek: bt
+ MSmits: oh for me B is Bandas
+ jacek: as its written in the article ~
+ MSmits: I read like :poop:
+ Astrobytes: lol
+ Astrobytes: and ntuples too
+ MSmits: you didnt compare it with ept did you?.
+ MSmits: i mean could be your NN is just awesome and it would be even more awesome in oware if you did ept
+ jacek: not much
+ MSmits: i had the same experience switching to ept from other algo's
+ MSmits: it might have similar performance
+ jacek: it came from the ept. somewhat by accident i overwrote instead of adding and it sticked
+ AntiSquid: ept?
+ MSmits: early playout termination
+ jacek: i bet its just a scaling problem. and tuning
+ Astrobytes: early playout termination
+ MSmits: mcts with a short simulation or in my case, no simulation
+ MSmits: so you backpropagate an eval score
+ Astrobytes: you eval instead
+ MSmits: this is like  a journalist at a covid press conference, summarizing the prime minister
+ jacek: the paper i linked use only eval instead of uct
+ Astrobytes: lol
+ jacek: but, do you propagate -1, 1 or eval score?
+ MSmits: i actually did it differently in different games, i barely see much of a difference either way
+ MSmits: if you do eval score and you scale it down to between --1 and 1, thats the same as scaling up the exploration parameter instead
+ MSmits: the only thing that makes a real difference is clamping
+ Astrobytes: I tried the -1,1 and scaled, no difference really
+ Astrobytes: ffs lol
+ MSmits: thanks again for that summary
+ MSmits: I tried clamping, no clamping or a sigmoid
+ jacek: dunno. for me scaling to -1, 1 was meh. perhaps if NN tells you if something is 0.2 or 0.8 that eval is more accurate
+ MSmits: scaling is pointless though, the exploration can be scaled as well, so any difference will be fitted away 
+ MSmits: but clamping and sigmoid thingies will change it
+ Astrobytes: yeah I used tanh in oware I think
+ MSmits: i checked earlier and it seems like i use nothing
+ MSmits: no clamping, no sigmoid, just the eval
+ Astrobytes: I need to get back to that Oware soon
+ MSmits: it's a bit dangerous as you can get some extreme eval scores throwing off your search
+ MSmits: but apparently it doesnt hurt my bot (much?)
+ Astrobytes: I think I tried every method with Oware lol
+ MSmits: yeah I tried too... but its so hard to test things because of 2 things:
+ MSmits: 1) RPS
+ Astrobytes: Yeah but you've got MegaBook Monster Bot
+ MSmits: 2) huge gap between NN's and the rest
+ AntiSquid: looking at relu makes me think, just make up your own function and calculate the derivative
+ Astrobytes: yeah true MSmits
+ MSmits: well for me the gap is worst, because I am in the middle of it. You can use my bot as a bridge at least, when you test
+ MSmits: I got nothing
+ AntiSquid: but book is fixed, NN are supposed to generalize and therefore beat book ... maybe a book for corner cases to aid the NN
+ MSmits: AntiSquid in my experience most NN's for board games on CG are very deterministic and easily counterbooked
+ Astrobytes: shh, this will trigger a big Oware discussion
+ MSmits: jacek's is the exception because he included a random component in his move selection on purpose
+ AntiSquid: maybe they're overfitted MSmits and therefore work like a book :P
+ MSmits: but even his book is deterministic if he removes that
+ MSmits: bot that is
+ Astrobytes: works great though
+ MSmits: AntiSquid i dunno if they are overfitted. They work well against all sorts of bots. Overfitting is not the same as being deterministic
+ MSmits: for example, a bot that always plays the best move is not overfitted but perfectly deterministic
+ MSmits: most NN's are like that on CG
+ MSmits: they play very very well, but once in 100 turns they make a mistake
+ MSmits: and because they are deterministic, i will find it
+ Astrobytes: MSmits - The Terminator
+ MSmits: Robo's bot makes a mistake around ply 20 or so, with the moves I make and then he doesn't recover. The only reason I dont always win is that I can't make my book go all the way to turn 200 and my bot will also make mistakes
+ MSmits: well I can actually... since he is so deterministic, but havent gotten around to that :P
+ MSmits: jacek keeping me busy
+ jacek: woah so you can tell at what ply bots make mistake
+ MSmits: my mcts score will suddenly jump 2 whole points at that node
+ MSmits: and it never goes down again
+ MSmits: 2 points being 2 expected seed advantage
+ MSmits: i cant be 100% sure of course, but once i found that node, my bot went from 10% to 40-50% winrate
+ MSmits: so i am guessing it's real
+ Astrobytes: you've had that 'feature' for some time now iirc
+ MSmits: what do you mean
+ Astrobytes: figuring out which ply the NNs make a mistake on (or any other player)
+ MSmits: yeah, but that's mostly because I am crazy enough to manually enter opponent moves into meta mcts and search through those branches
+ Astrobytes: The 'how' doesn't matter, only the end result :P
+ MSmits: true
+ jacek: like analyzing carlsen or karpov games
+ MSmits: thats really what it's about for me. I mean getting a better rank is fun, but for most of these games its also fun to figure out what moves are good
+ MSmits: for oware it's mostly about beating the NN's though, I can't make rhyme or reason out of my meta mcts for this game
+ MSmits: it makes no sense
+ Astrobytes: I rely on others analyses for that jacek lol
+ AntiSquid: great data analysis MSmits
+ MSmits: <a rel="nofollow" class="external free" href="https://pastebin.com/5HXtdv29">https://pastebin.com/5HXtdv29</a>
+ MSmits: here's the nide
+ MSmits: node
+ MSmits: Robo's move is 2
+ MSmits: your move is 5
+ MSmits: (jacek)
+ jacek: M?
+ AntiSquid: i completely forgot what my bots were doing ... can't even figure out what the hell my pacman or xr bot variables stand for :D
+ MSmits: marked, means my opening book wants an answer to this move
+ MSmits: the * means it's forcing the search through this move
+ MSmits: it's forcing through your move
+ MSmits: (for obvious reasons)
+ jacek: <a rel="nofollow" class="external free" href="https://media1.tenor.com/images/1fe6dde8e3b8d0d6dac9de18f5b51d33/tenor.gif?itemid=11666212">https://media1.tenor.com/images/1fe6dde8e3b8d0d6dac9de18f5b51d33/tenor.gif?itemid=11666212</a>
+ MSmits: so your move is -1 on average it says, which means i should win more, but my bot isn't able to capitalize on the advantage most of the time... too many turns left, too good of a NN
+ MSmits: (mind you this search goes 80 plies deep in some cases, which means still 120 turns left)
+ MSmits: if you're interested jacek, check out this game:
+ MSmits: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/493811348">https://www.codingame.com/share-replay/493811348</a>  at ply 19, you'll do exactly what my meta mcts says you do
+ MSmits: this is just the first game i found with me as p1 on the leaderboard, which tells you how common this is
+ jacek: mhm
+ MSmits: the thing is your random thingy only happens when moves are close to equally good, that doesnt happen too often
+ MSmits: but with 200 turns, it does happen often enough
+ MSmits: rarely your first move as p2 will be in house 11, but usually it's house 7
+ MSmits: rarely as in, maybe 1 in 20
+ jacek: hmm
+ MSmits: you could retrain your bot. Will be interesting to see what changes 
+ MSmits: is it like a 1 hr thing?
+ MSmits: or does it train for days?
+ jacek: how can you tell its 1 in 20?
+ jacek: moves.push_back(getMove(nullptr,game-&gt;getCurrentPlayer(),rand()%100&lt;95?7:11));
+ MSmits: cuz i look up lost games to find more nodes to mark in my tree
+ MSmits: and almost always it's house 7
+ MSmits: very rare 5
+ MSmits: err i mean 11
+ MSmits: (i think in 0 to 5 for both players)
+ jacek: actually for 1st move as p2 i use this 'opening' 95% 7 and 5% 11
+ Astrobytes: the 'other 5'
+ MSmits: haha
+ jacek: its neat you could reverse engineer that
+ MSmits: nice estimate by me then?
+ Nerchio: btw guys
+ Astrobytes: impressive
+ MSmits: it's just by watching so many games jacek
+ Nerchio: in MCTS when i expand node but have like 50 possible moves
+ Nerchio: it doesnt kinda make sense to expand all 50 states or is there
+ MSmits: hmm expanding is a misleading term sometimes Nerchio
+ jacek: MSmits i can retrain oware overnight, thats 6h-8h.
+ Nerchio: i mean in UTTT right now
+ MSmits: ahh ok
+ MSmits: Nerchio what i mean is, you select a node right, an unexpanded one
+ Nerchio: when you can play on any position on the board its up to like 80 positions so why would i create all 80 states for this
+ MSmits: then you give it children
+ Nerchio: yeah i talk about giving it children
+ MSmits: is that what you mean by expanding?
+ MSmits: ah
+ MSmits: what do you do for each child?
+ jacek: i always expands by all available moves. each child will have then 0 score / 0 visits
+ Nerchio: nothing yet im asking before I implement it
+ MSmits: i sort of do what jacek says i think
+ Nerchio: well from what i understand you create a node/state for each child but
+ Nerchio: you're not going to visit all of them anyway
+ Nerchio: so whats the point of creatin all of them
+ MSmits: sometimes i set the visit count to 1 to avoid some division by zero somewhere
+ MSmits: Nerchio in some games i immediately simulate from each child
+ MSmits: so i backpropagate 50 simulation results at once
+ MSmits: not in uttt though, but some other players do
+ Nerchio: yea so its like looking for a win depth 1
+ Nerchio:&#160;?
+ jacek: its implementation detail, you may expand by 1 child or all children. in early days of mcts, memory was constrained so they expanded one child per visit(s)
+ Astrobytes: ^
+ Nerchio: i will be coding mcts for uTTT in java i am already constrained :D
+ jacek: i expand all children also because i look for mate-in-one
+ MSmits: some games have a fixed number of children
+ MSmits: like Bandas and Yavalath
+ MSmits: so what i do is just reserve the memory and do nothign else
+ MSmits: expansion -&gt; nodindex += 4
+ MSmits: (for Bandas)
+ Nerchio: well I guess I will try first with expanding all the children but i will probably try to prune it later in UTTT
+ Nerchio: seems like a massive waste of time and space:D
+ MSmits: you have to remember that you will very rarely have those moves that give 50 children
+ MSmits: most will have on average 7 moves
+ Nerchio: I guess that's true
+ jacek: UTTT branching factor is usually &lt; 9
+ Astrobytes: and it's all bit ops anyway so not gonna be a massive hit
+ MSmits: expansion is less than 2% of my runtime
+ MSmits: and i expand all
+ jacek: rarely you will see more than 9. those will happen in late midgame or endgames with few moves left anyway
+ Astrobytes: (not that I've done UTTT, I'm slightly allergic)
+ MSmits: selection and simulation are most expensive
+ Nerchio: well Astrobytes i don't start with bitboard :D
+ MSmits: no need to start with bitboard, the trick to learn mcts is to make the sim as simple as possible for you
+ MSmits: otherwise you have two sources of bugs
+ Astrobytes: Oh yeah, your first MCTS, my bad
+ Nerchio: yeah first time i got to bronze but i think i was creating a new state when doing random playouts instead of playing it out on 1 state :D
+ Astrobytes: yeah, don't do that until it's working
+ Nerchio: its 2nd MCTS :D
+ Nerchio: but first was kinda fail
+ Astrobytes: ah right
+ MSmits: oh so your first mcts was mostly monte carlo?
+ Nerchio: no i think it was MCTS with many mistakes :P
+ MSmits: most people make the mistake of creating the whole tree during the random sim
+ MSmits: meaning they grow a huge tree very quickly
+ jacek: struct?
+ Nerchio: yeah thats what i was doing i think
+ MSmits: struct did, mad knight did also and i noticed others do it too
+ MSmits: problem is that you get a working bot that way
+ Astrobytes: mk did too?
+ MSmits: its just not very good
+ MSmits: at first yeah
+ MSmits: he knows how to do it now
+ Nerchio: ok so another question i had which you guys probably know the answer for
+ Astrobytes: I only knew struct did it
+ MSmits: people pm me sometimes about mcts
+ Nerchio: when you create a tree and like 50k states
+ Nerchio: why not save parts of the tree that you go down into next rounds?
+ Astrobytes: you can
+ MSmits: i do
+ Astrobytes: tree reuse
+ jacek: tree reuse
+ MSmits: almost always
+ Nerchio: thats kinda what im thinking i want to do
+ MSmits: but in some games you create so many nodes it's not feasible
+ Nerchio: since java is so slow
+ MSmits: but mostly you can
+ Astrobytes: just make your start node the one you wish to start from
+ MSmits: dont do treereuse immediately
+ MSmits: it complicates things
+ jacek: focus on the proper mcts. leave the fancy rest for later
+ MSmits: also tree reuse actually means you make *more* nodes if you use an object pool
+ MSmits: since you can reset to index 0 of the pool
+ Nerchio: kk just wanted to know if this 'tree reuse' is something that people use :P
+ MSmits: you keep moving through the pool
+ Nerchio: so how many nodes do you guys reach in simulation
+ Astrobytes: can get hairy really fast
+ Nerchio: i think i managed to create only 300k for java but will probably use like 10% of that :D
+ MSmits: depends on the game, but uttt needs 30-40 million for me sometimes
+ Nerchio: :grin:
+ MSmits: and i only have 20-25 in my object pool
+ MSmits: but i often reset for other reasons, so it usually doesnt matter
+ jacek: huh
+ MSmits: and i do a check
+ jacek: i can only do around 100k in second in 1st turn
+ MSmits: 100k nodes?
+ jacek: 100k steps. select expand rollout backpropagate
+ MSmits: oh, i do between 90 and 130k in the second turn at 100 ms
+ MSmits: of those rollouts as you defined it
+ MSmits: lemme get a better estimate, i am running a testgame
+ MSmits: Rollouts: 816384 first turn
+ MSmits: Rollouts: 92928
+ MSmits: second turn
+ Nerchio: I would just like to enter legend in UTTT :D
+ MSmits: wait a min jacek... how do you get so few rollouts and rank 8
+ MSmits: what magic is this
+ Astrobytes: 20k+ rollouts needed iirc for UTTT legend
+ MSmits: yeah with no fancy stuff
+ MSmits: thats in turn 2
+ MSmits: so around 5x slower than my bot
+ jacek: hmm but 100k * 7-8 is close to what you have. maybe its difference in counting
+ MSmits: whats the 7-8?
+ jacek: and i got into legend with java bot as well
+ MSmits: a rollout for me is a single move through the tree and a single simulation
+ jacek: average branching factor in the 7-8 beginniing
+ MSmits: so i dont sim all children
+ jacek: hmm but i dont do much fancy stuff, my sim is pretty simple
+ MSmits: i wonder if it is just different ways of counting or do you also do some jacekmax(gic)
+ MSmits: no fancy selection, UCT modifications, weighted sims etc?
+ MSmits: rank 8 is really really good. There's at least 30 people in uttt as obsessed with it as I am in most games. Strong opposition
+ jacek: well in UCT there is bonus for winning small board and penalty for giving opponent mobility
+ jacek: + mcts solver of course
+ MSmits: oh right, well those are good bonuses I guess, gives you +5 or +10&#160;% winrate when everything else is the same
+ jacek: as for sim, there is mate-in-one checking and more chance for winning small board
+ Astrobytes: seems smart
+ DomiKo: 90K on second round wow
+ DomiKo: i got like 45K right now...
+ MSmits: 130k sometimes, depends on the cpu
+ MSmits: re curse says he has 180k
+ Astrobytes: nice
+ DomiKo: Karliso then 200K? XD
+ MSmits: kar liso said near 400k but he counts differently 
+ MSmits: still has way better performance somehow
+ MSmits: his way of counting woul dget me to 250k or so
+ Astrobytes: he's still #1?
+ darkhorse64: karliso does not talk he just gets #1
+ MSmits: he is yeah
+ MSmits: also he removed his book I believe
+ Astrobytes: oh really?
+ MSmits: so I can no longer wreck him 100% :P
+ Astrobytes: darkhorse64: he does talk sometimes
+ darkhorse64: look at his profile. He is #1 in all hisbots or nearly
+ MSmits: yeah karliso is nice, he's a bit like robo in that he doesn't talk much, but when he does, it's golden
+ darkhorse64: Then I missed what he says
+ MSmits: yeah it's getting annoying how he is always slightly stronger than me in every board game :P
+ Astrobytes: sure he reads more than he talks
+ MSmits: he sometimes asks very basic questions
+ MSmits: like nerchio just did
+ MSmits: totally weird for such a strong player
+ Nerchio: thanks!
+ Astrobytes: yeah, that's quite confusing at times
+ MSmits: hey i am comparing you to the best board game player nerchio :0
+ Astrobytes: But he doesn't give away his initial approach fully, he might figure out interesting heuristics initially etc
+ MSmits: he asks how mcts works and such, then he writes a mcts and a week later he is nr 1
+ MSmits: he opened up a bit later on, at first he said nothing
+ MSmits: he shares a little bit now 
+ Astrobytes: Oh ok, didn't see him for a bit. My absence, no doubt
+ MSmits: the thing is that if he didn't have such success, we would have had no problem with him just asking questions
+ MSmits: but he asks questions, we help him and then he wrecks us :P
+ MSmits: so now he has to share some too&#160;:)
+ Astrobytes: hehehe, sharing is caring 
+ jacek: friendship is magic
+ MSmits: for a long time i thought he was daporan messing with us :P
+ MSmits: but he's not
+ jacek: daporan?
+ MSmits: ah, was this before your time jacek?
+ Astrobytes: No, defo not dapo. I spoke with dapo back when I was diagnosed with my back issues, last time I've seen him
+ MSmits: he always showed up for contests with prizes, took the win, shared nothing an dleft
+ MSmits: really strong player
+ MSmits: also had nr 1 csb for a long time
+ Astrobytes: actually, if you talked to him he would share stuff
+ jacek: hmm google search for dapron reveals youtube ai videos
+ MSmits: yeah he did later when i talked with him sometimes
+ MSmits: but that's how he is viewed generally
+ MSmits: he doesnt write post mortems and such
+ MSmits: yeah i think thats him jacek
+ Astrobytes: No, he didn't like the hating because he did the hiding thing
+ MSmits: he did one for mean max
+ MSmits: he won it with a GA
+ MSmits: and then made the video
+ Astrobytes: He's a really nice guy actually
+ MSmits: Astrobytes yeah the hiding thing didnt help his image 
+ MSmits: he is i guess
+ MSmits: maybe just misunderstood
+ Astrobytes: He just didn't like the hating
+ MSmits: I can see that
+ MSmits: that stuff happened mostly before i was here, but it echoed a lot after on chat here
+ Astrobytes: hence 1 less CG player
+ AntiSquid: no the hiding wasn't the issue lol
+ MSmits: ah here's a vet that knows
+ DomiKo: board game's are hard
+ MSmits: easy to sim, hard to win
+ DomiKo: because you have to make quick board class
+ MSmits: a class, whats that?
+ MSmits: uint64_t board
+ DomiKo: but making fast random moves
+ DomiKo: and generating moves
+ DomiKo: that the really hard part of board games
+ MSmits: my only class is usually Node{}
+ MSmits: sometimes i have a State class for a hash table for opening books or something but thats it
+ MSmits: DomiKo you mean fast sim in general, in uttt it is fast random, but i dont even use random in most games
+ jacek: well only the uttt is optim fest, other board games could be slower with smart heuristic
+ DomiKo: that could be true
+ DomiKo: in UTTT heuristic really don't do that well
+ DomiKo: or I don't know how to use them&#160;:((
+ jacek: -3vel
+ codeing: <a rel="nofollow" class="external free" href="https://people.eecs.ku.edu/~hossein/Teaching/Fa16/810/Readings/UML-diagrams.pdf">https://people.eecs.ku.edu/~hossein/Teaching/Fa16/810/Readings/UML-diagrams.pdf</a>
+ MSmits: add the free move thing DomiKo
+ MSmits: a move that gives the opponent a free move is bad
+ MSmits: add a penalty to UCT for this move
+ MSmits: helped me a bunch
+ codeing: look at this
+ codeing: <a rel="nofollow" class="external free" href="https://people.eecs.ku.edu/~hossein/Teaching/Fa16/810/Readings/UML-diagrams.pdf">https://people.eecs.ku.edu/~hossein/Teaching/Fa16/810/Readings/UML-diagrams.pdf</a>
+ Astrobytes: You posted it already
+ codeing: you'd not looked it
+ Astrobytes: Why would I look at it
+ codeing: because it's important
+ Astrobytes: I covered UML in a course a long time ago, why would I look at it
+ darkhorse64: UML is boring and useless
+ Astrobytes: ^
+ codeing: what&#160;?
+ Astrobytes: Can be useful for a quick sketch on a whiteboard but then so can random squares and circles
+ codeing: darkhorse64
+ codeing: how you code a software  without uml&#160;?
+ darkhorse64: Really easily
+ codeing: i understand,  you are not architect
+ codeing: or something like thaht
+ codeing: ez
+ darkhorse64: I have  been involved in several multi-million lines of code projects
+ codeing: and&#160;?
+ darkhorse64: UML does not help
+ codeing: what help so&#160;?
+ codeing: how do you establish the architecture of your software?
+ darkhorse64: Paper cannot capture the dynamics of data nor it can capture all the small details that will make your paper design baly fail
+ darkhorse64: *badly*
+ Astrobytes: I only have limited experience but even that taught me that a working model is better than some hopeful diagram
+ darkhorse64: UML is like a battle plan. After 15 mn, no plan will resist fire
+ Astrobytes: I wish I could have written that on my exam paper :P
+ codeing: what your level Astrobytes&#160;?
+ Astrobytes: level? I'm a biologist. I've done some CS study is all
+ darkhorse64: My experience is that a good design will look at how data flows. Then, you can model objects, threads
+ codeing: CS&#160;?
+ HelloWorld183L: computer science
+ codeing: in CS, what your level at university&#160;?
+ Astrobytes: I have a masters in cell biology, not CS, I've just done additional study in CS
+ codeing: what does biologists do there&#160;?
+ HelloWorld183L: what programming paradigms would be most useful for a biologist?
+ codeing: joking
+ Astrobytes: It's all about data and stats
+ Astrobytes: When I was doing more biology-related things I left that to the bioinformatics department
+ Astrobytes: Lots of python and R
+ codeing: ez
+ Astrobytes: These days I tick boxes, tell people off and write reports
+ Astrobytes: codeing: the extra CS study was for my own interest
+ codeing: no doubt on
+ Astrobytes: gn all
+ fdoanay: hello guys
+ artofwaraabb: hi
+ ezra555: hi
+ AntiSquid: hi codeine how's it going?
+ MACKEYTH: Will games remember your code if you leave and come back?
+ Harrogin: yes
+ Harrogin: i always run my code before i leave just to be safe
+ Dekster: Good Morning Guys
+ Bahnschrift: phat

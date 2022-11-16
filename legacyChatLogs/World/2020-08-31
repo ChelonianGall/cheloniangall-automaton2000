@@ -1,0 +1,638 @@
+ Yasho25: print("Hello World")
+ Automaton2000: but you are welcome&#160;:)
+ Marchete: new ideas, jrke?
+ jrke: jo not new ideas just trying to fix bugs
+ jrke: no*
+ MadKnight: hey Marchete
+ dbdr: jrke: fixing bugs is a good idea&#160;:)
+ dbdr: MadKnight, are you working on a bot now?
+ jrke: but 0 bugs fixed till now or maybe some new i introduced
+ dbdr: cannot you reproduce those endgame mistakes that MSmits mentioned?
+ jrke: endgame bugs are too diffucult to fix in my current bot
+ dbdr: why?
+ jrke: code became messy
+ dbdr: time to refactor
+ jrke: yeah
+ jrke: dbdr:do you made any other change or resubmit
+ dbdr: changed
+ jrke: k
+ dbdr: do you resubmit just to see if you get lucky?&#160;;)
+ jrke: no im changing small things and checking will it work or not
+ dbdr: probably you would get more benefits from fixing the endgame bugs
+ jrke: yeah the major bug or you can say weakness of my bot
+ jrke: did you went heuristic in endgame?
+ Vasyakin: 5051
+ dbdr: yes
+ jrke: means turns &gt; 56 for game and 23&gt; for a single player right?
+ dbdr: not precisely, but that's roughly when endgames starts, yes
+ jrke: ok
+ Sevi1: hello
+ dbdr: hi
+ jrke: hey
+ jrke: dbdr nice submission
+ dbdr: thank
+ dbdr: s
+ Sevi1: what you doing on this page
+ dbdr: nobody knows
+ Ethan.B: hello?
+ Marc19: hey
+ AntiSquid: hi
+ AntiSquid: it's a hello world page, now make your own Sevi1
+ Marchete: dbdr_: 8-41 against jrke?
+ dbdr: it happened
+ dbdr: thanks for being here Marcheteso we don't need to be last at 0%&#160;;)
+ dbdr: played: 34lost: 0played against #1: 0
+ dbdr: .
+ Marchete: :S
+ Marchete: good bless debuggers
+ dbdr: and those writing them?
+ Marchete: D&amp;B seems a top3 game right now
+ dbdr: and top 3 make some stupid mistakes
+ dbdr: it's unusual
+ m0rsmordre: hello there
+ Marchete: maybe people tend to go with simple heuristics
+ Illedan: My bot is dead stupid, no idea why you are not getting 100&#160;% wins vs it :P
+ darkhorse64: No double dealing, chain/loop stuff&#160;?
+ Illedan: Double dealing?
+ Marchete: there is a simple way to know if a line create two separated chains?
+ Marchete: lol Illedan_ :D
+ darkhorse64: OK, really dead stupid bot
+ Marchete: so: D&amp;B seems a top2 game right now
+ Marchete: no offense :D
+ Illedan: I know
+ Illedan: But I don't get how they don't crush my bot
+ darkhorse64: double dealing is a trick to keep control when farming boxes in the endgame
+ Illedan: To split a 4 chain into 2 doubles?
+ Marchete: it's about control
+ Marchete: give boxes for a greater gain
+ Marchete: "sacrifice"
+ Illedan: Yeah, I do those things. But I never check if it is worth it :P 
+ Marchete: then you are using it
+ Marchete: maybe you call it "Illedeal", but it's probably de double dealing
+ Marchete: the*
+ darkhorse64: When you farm boxes, you sacrifice the last two boxes in the chain to force your opponent to open a new chain and leave the hand to you
+ Illedan: Yeah, that is easy to do with a simple IF
+ darkhorse64: Actually, when there is no single box with three borders left, you are in the endgame and there are algos to ply optimally. The real deal is building chains so that you win in the end. Othersise said, it happens between move 1 to 56, after it's strictly determinisitic
+ darkhorse64: *Otherwise*
+ Illedan: Yeah, I was expecting the top to create those chains already :P 
+ Marchete: :unamused:
+ Marchete: you are the -3vel of D&amp;B Illedan
+ Illedan: Most advanced stuff I have is a floodfill :P 
+ Marchete: wow!
+ darkhorse64: Have you heard about string and coins&#160;? It's the dual game compared to B&amp;D and it provides a data representation that allows esay chain computation
+ darkhorse64: No floodfill needed
+ darkhorse64: Unless you need for other purposes
+ darkhorse64: *need it*
+ Illedan: I just save the chucks and the number of edges, using it to determine my logic :P
+ Illedan: Didn't even try to model this stuff correctly
+ Illedan: Still using both edges provided for 1 edge :D 
+ darkhorse64: No search&#160;? Just reasoning on topology&#160;?
+ darkhorse64: I mean no deep search
+ darkhorse64: No MCTS or Minimax have been harmed during this multi
+ JBM: you like that phrasing
+ darkhorse64: a chat meme&#160;?
+ JBM: like we need more
+ darkhorse64: OK. Twice the same day is too much but I used two different chats
+ Marchete: depth = 0 bot :D
+ darkhorse64: TrueAI bot
+ MSmits: I gathered some statistics of the nature of simple loony endgames in 7x7 D&amp;B
+ MSmits: Turns out that by the definition of simple used by those papers with heuristics that are written for 5 x 5, about 0,3% of endgames are simple
+ MSmits: meaning that if I generate 1 million endgames, I get 3k simple ones :P
+ dbdr: randomly?
+ MSmits: yes
+ jrke: so what you discovered from that Ms?
+ MSmits: that the heuristics as formulated are useless unless expanded. That will be my project :P
+ MSmits: also there is one heuristic that says if the controlled value is &gt;= 2, you can just take it as the real value
+ jrke: how many possible outcomes could be?
+ MSmits: out of all the simple games, that is almost always true
+ MSmits: so the more complex heuristics are useful in about 0,02% of cases
+ jrke: so you will go with heuristic approach?
+ MSmits: sry, 0,002%
+ jrke: with expansion
+ MSmits: I will try it, it's a fun exercise. Not lookign good though&#160;:)
+ MSmits: bte
+ MSmits: btw
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/1894abf5-98c9-473b-af72-d3062e9bb88e">http://chat.codingame.com/pastebin/1894abf5-98c9-473b-af72-d3062e9bb88e</a>
+ MSmits: thats one of those super rare simple loony end games where complicated heuristics are useful
+ MSmits: controlled value is negative, so you got some control switching back and forth
+ MSmits: people will actually take the boxes in the loops, instead of giving them away
+ jrke: yeah i think i will lupdate my bot to turn heuristic at endgame
+ MSmits: yeah, but that's not easy at all and as i said, almost never useful unless you expand on the current research knowledge base of D&amp;B
+ MSmits: so if you succeed, you could publish a paper on it
+ MSmits: it's hard for me to even test if i implemented the heuristics correctly, because I have to look so hard for a suitable game
+ MSmits: I'm going to try and code a minimax to solve the end games that way and see if it lines up with the heuristic result
+ MSmits: then I can cook up some new heuristics, run a million games and see if they still agree
+ MSmits: fun fun
+ jrke: million games offline?
+ darkhorse64: If there are still 3+ connections, it's not yet an endgame but you have to search until the board comes to that point (or find an heuristic for these) right&#160;?
+ MSmits: yeah, what i actually mean is, try 1 million seeds (takes a few seconds) and only take the games handled by the heuristics and minimax those
+ MSmits: darkhorse64 that's not true, a 3+ connection thing can be an endgame
+ MSmits: it's just not a simple endgame
+ MSmits: because you can't place a line on any of the 3 places that are empty due to neighbors
+ MSmits: (that already have 2 lines)
+ MSmits: even a 4 way split is possible in an endgame
+ MSmits: I found 2 end games with 12 splits in a single floodfilled structure, out of 1 million games
+ MSmits: so that's lots of crossroads
+ MSmits: lemme find one and share it
+ darkhorse64: OK. You are in the endgame if any move results in giving away a box
+ darkhorse64: something called a grid lock state
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/58fd10f9-6c63-4017-9f5d-43e2068077c2">http://chat.codingame.com/pastebin/58fd10f9-6c63-4017-9f5d-43e2068077c2</a>
+ MSmits: right
+ MSmits: look at my example
+ MSmits: everything is connected
+ MSmits: still an endgame
+ MSmits: very non-simple
+ dbdr: single chain&#160;:)
+ MSmits: not this one, but sure, single chain is possible
+ MSmits: single chain is actually a simple end game
+ dbdr: right, chain is not the right word
+ jrke: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/484083437">https://www.codingame.com/replay/484083437</a>
+ MSmits: yeah jrke, my heuristics work for that one&#160;:)
+ MSmits: but it's trivial
+ dbdr: MSmits, what year can we expect your bot?&#160;;)
+ MSmits: 2020 hopefully :P
+ MSmits: honestly not sure
+ MSmits: 2 things can happen. Either I keep trying to do this heuristic thing and finally succeed. Or I give up and just make some basic search bot and give up.
+ MSmits: thats giving up twice :P
+ MSmits: I like a challenge though, we'll see
+ reCurse: Giving up is writing an opening book
+ MSmits: can't write an opening book without a good bot
+ MSmits: or anyway, not one that wins
+ dbdr: also I think OB is useless here
+ MSmits: depends on how others do their bot. if they dont use appropriate randomness, then it might not be
+ MSmits: but should be easy to do 
+ dbdr: useless against decent bots&#160;;)
+ MSmits: should be yeah
+ dbdr: initially, I meant rather useless for the general case
+ dbdr: as opposed to beating a few specific bots
+ MSmits: ah yeah, it sure is useless for that
+ MSmits: not in ever game btw. 
+ dbdr: definitely
+ MSmits: btw, I do have two expansions on the basic heuristics that might work. If you want to discuss them, I am not 100% sure
+ dbdr: there must be a typology of games
+ dbdr: or we must create one
+ MSmits: sure
+ dbdr: does branching go up, down, or up-then-down, for instance
+ MSmits: that exists
+ MSmits: is called diverging or converging
+ dbdr: that has a name?
+ MSmits: yeah
+ dbdr: ah nice
+ MSmits: read that ina  paper on solving games
+ MSmits: othelo diverges, then converges
+ dbdr: right
+ dbdr: D&amp;B converges
+ MSmits: so, I was thinking, you always open 1 chains first, then 2 right?
+ dbdr: yes
+ MSmits: so isn't that also the case when  the 1's and 2's are connected to a split?
+ dbdr: what's "that"?
+ MSmits: that you would take them first
+ MSmits: so if they arent isolated
+ MSmits: but connected to a 3-way or 4 way
+ dbdr: I haven't proved it's optimal
+ dbdr: just seemed logical
+ MSmits: me neither, but I did some examples and it did seem logical
+ MSmits: another one is
+ MSmits: say a split has only chains attached to it
+ MSmits: , for example 3 chain, 4 chain, 5 chain and 6 chain
+ MSmits: all connected by 4 way split
+ MSmits: would it ever be worse to open the smallest first?
+ MSmits: since the rule for simple games is to always open the smaller chains before the larger ones
+ dbdr: I always do smallest first
+ MSmits: ah yes and thats certainly optimal for simple games
+ MSmits: I am just wondering if it's true for games with splits also
+ dbdr: but if you open, you have lost control, and it's not often that you can win
+ MSmits: true, but there might be a bunch of loops you took earlier
+ MSmits: loops are beneficial for the defender (non-controller)
+ dbdr: yeah, and 2s
+ dbdr: well, 2s you switch
+ Stilgart: MSmits, dbdr: do you use a hardcode solution for CvZ&#160;?
+ MSmits: sure, but 2's go back and forth so it only helps for an odd amount
+ MSmits: the penalty for short chains is at most 1 or 2
+ dbdr: Stilgart: offline, yes
+ dbdr: why?
+ MSmits: i do too, I even used unity for this one
+ Stilgart: i am trying to figure out what is the best non-harcoded score in the leaderboard
+ Stilgart: 700k sounds reachable without hardcoding
+ MSmits: Robo's non-hardcoded
+ MSmits: rank 24 with 463k
+ MSmits: my fallback solver has like 200-300k points only. It's a basic MC
+ dbdr: it's a thin line between offline and online spamsubmit
+ MSmits: I think the difference between nr 1 and lower ranked players might just be 1 validator
+ dbdr: theorem: as the number of submits tends to infinity, it is undistinguishable from offline search
+ MSmits: infinity yeah
+ MSmits: but the calculation time is used less efficiently
+ reCurse: Theorem: infinity does not exist
+ darkhorse64: You have to love cars, stairs, traffic lights and busses 
+ dbdr: "tends to", not sure if that's the right word
+ MSmits: the difference between doing a meta mcts or just using the same calculation time for MC
+ MSmits: when you just do MC, you lose all information gained from previous iterations
+ MSmits: nothing is stored
+ dbdr: reCurse: of course infinity exists&#160;:)
+ MSmits: I dont even understand what "exists" means in this case
+ darkhorse64: AG, HC should be better in this respect
+ dbdr: has a precise meaning
+ MSmits: whats AG and HC?
+ MSmits: also what do you mean by precise dbdr? That exists means it has a precise meaning or that infinity has precise meaning
+ darkhorse64: AG-&gt;GA= Genetic algorithm, Hill Climbing
+ MSmits: ohh ok
+ darkhorse64: AG is french
+ MSmits: I see
+ dbdr: I was trying to come up with a definition of "exists". not saying it's the ultimate one
+ MSmits: ahh ok
+ MSmits: also it's your definition
+ reCurse: So dragons exist? I have a precise meaning for it
+ MSmits: we need to all share the same definition to use it in a conversation effectively&#160;:)
+ Stilgart: yeap, dragons exist
+ dbdr: there has been debates whether 0 exists, or negative numbers, or complex ones, ...
+ dbdr: at least in math
+ dbdr: if you can give a precise definition of dragons in math language, then yes they exist in math&#160;:)
+ MSmits: physics is the subset of math that exists
+ dbdr: troll :D
+ MSmits: maybe&#160;:)
+ dbdr: "what exists is what I understand"&#160;;)
+ MSmits: solipsism?
+ reCurse: He's kinda right though
+ darkhorse64: phisics is to math what military music is to music
+ Stilgart: dbdr: it's a cylinder with spikes that spits fire
+ dbdr: isn't that ""what exists is I only"&#160;?&#160;:)
+ MSmits: yeah 
+ dbdr: darkhorse64 I heard that about military justice
+ darkhorse64: It's valid too
+ darkhorse64: Or you can say the same for Strauss and Mozart
+ dbdr: the mandelbrot fractal exists, but you cannot make a physical object of it
+ MSmits: the idea of it exists in your mind, but part of the idea is the infinity part. 
+ dbdr: you can define it and calculate properties, you can visialize any part of it on a computer, ...
+ MSmits: yeah
+ reCurse: Exist in your mind is contradictory
+ dbdr: that's exactly the definition of "towards infinity": it's not that you can see it all at once
+ dbdr: it's that there is no end
+ MSmits: reCurse that hinges on the definition of "exists" again 
+ dbdr: and you can always see further
+ reCurse: If that's the definition then everything exists
+ reCurse: Not very useful
+ MSmits: noone said it had to be useful
+ MSmits: well you just did I suppose
+ dbdr: there are very few things that can be defined precisely
+ dbdr: so it's a very useful concept
+ dbdr: infinite but few. like natural numbers compared to real ones
+ reCurse: So everything exists
+ MSmits: I had a discussion about that with a professor when I was in high school
+ MSmits: got a little heated
+ MSmits: I said there were more real numbers than natural ones and he claimed they were both infinite so the amount is equal
+ dbdr: define "everything"&#160;;)
+ dbdr: you were right MSmits
+ dbdr: I thought you were the one who didn't get this
+ LinhT.Nguyen: indeed
+ MSmits: no I get it, it just didnt make sense to me that all infinities are the same
+ dbdr: and there is a precise definition of "more"
+ SydM107: all infinities are not the same...
+ dbdr: they are not the same
+ MSmits: right
+ dbdr: reCurse derailed the chat with his obscurantism&#160;;)
+ MSmits: allright gonna try to do some coding on this minimax, been a while since i coded one
+ dbdr: ok, report back in 10 minutes
+ MSmits: 10 hrs probably :P
+ dbdr: for minimax?&#160;;)
+ MSmits: nah it's mostly the move generation
+ dbdr: right
+ MSmits: instead of playing lines i need to pick  chains and loops to play
+ dbdr: or lines
+ MSmits: not in endgames
+ MSmits: simple ones anyway
+ dbdr: ah, only for endgame
+ dbdr: right
+ reCurse: Obscurantism pfft
+ MSmits: i need the minimax to check if my heuristics are correct
+ dbdr: "infinity does not exist" is basically rejecting science
+ reCurse: lol ok...
+ MSmits: what if you're saying the earth is flat and infinite&#160;?
+ reCurse: Nice troll
+ MSmits:&#160;:)
+ JBM: and of homogeneous resistivity
+ MSmits: damn now i have two things to google
+ <b>**MSmits googles obscurantism and homogeneous resistivity</b></p><p><img src="/a/43448306132121" /> dbdr: the earth is fractal, it has finite volume and infinite surface
+ JBM: got it wrong, it was "uniform density" <a rel="nofollow" class="external free" href="https://xkcd.com/669/">https://xkcd.com/669/</a> sorry MSmits
+ MSmits: still doesnt make sense :P
+ MSmits: infinite flat earth violates gravity pretty much though
+ JBM: you don't say
+ JBM: just make gravity a constant uniform field, duh
+ MSmits: oh, right
+ JBM: it's how *my* physics teachers did it
+ MSmits: that's actually an easy solution
+ JBM: then again you might have your own tricks
+ MSmits: no no, that's what we do 
+ JBM: see
+ dbdr: do we even know what causes gravity?
+ JBM: your mom
+ reCurse: lol
+ JBM: there, done.
+ MSmits: perfect burn
+ dbdr: :clap:
+ MSmits: if you're asking why stuff is attracted to other stuff it's answerable
+ MSmits: it's the curvature of spacetime
+ MSmits: if you want to know why mass curves spacetime, we dont know
+ SydM107: more of a how than a why
+ MSmits: yeah, the how is hard enough 
+ MSmits: without worrying about the why
+ dbdr: yeah, why question ftw&#160;:)
+ Marchete: nice output
+ MSmits: there's much simpler questions physicists can't answer
+ MSmits: like, what is electrical charge?
+ MSmits: we know perfectly what it does, but not what it *is*
+ MSmits: true for any elementary property I suppose
+ Marchete: I think any N chains of degrees &lt; 3 are solvable with theorems
+ Marchete: but not checked
+ MSmits: &lt; 3 or &lt;= 3?
+ Marchete: &lt; 3 like your example
+ MSmits: yeah they are for sure in simple end games
+ MSmits: thats what the papers say
+ Marchete: ok then :D
+ MSmits: but what if they're connected to a  split
+ MSmits: 3-way or 4-way
+ Marchete: then it's not a endgame for me :D
+ MSmits: your definition of an endgame is different from what the papers say then
+ MSmits: arbitrary endgames are games where you cant place a line without giving away a  box
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/9ac30b07-fa27-45e7-82db-0530e056389d">http://chat.codingame.com/pastebin/9ac30b07-fa27-45e7-82db-0530e056389d</a>
+ MSmits: is this an endgame for you Marchete?
+ dbdr: MSmits: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=2rjbtsX7twc">https://www.youtube.com/watch?v=2rjbtsX7twc</a>
+ MSmits: lol
+ dbdr: you know it?
+ dbdr: "these infinities are real" is also dedicated to reCurse&#160;:)
+ Marchete: not an endgame at all
+ reCurse: My point didn't make it through so forget it
+ reCurse: Easier to just say I'm a troll or "obscurantism"
+ reCurse: w/e
+ MSmits: Marchete you cant play a line anywhere though
+ Marchete: there is a special case of a loop joined to a ground chain
+ Marchete: but with a T
+ MSmits: without giving away a box
+ Marchete: I can't say a lot
+ MSmits: with your definition, you might have to wait till the last few lines till it becomes an endgame
+ MSmits: there's no reason those exceptions will be opened first
+ dbdr: reCurse: I spoke about "approaching infinity", which is the basis of calculus. saying "infinity does not exist" misses the point
+ dbdr: it's not "reaches infinity"
+ jrke: the thing you imagined is not infinity
+ MSmits: dbdr i understood about 30% of that song :P
+ MSmits: enough for it to be fun
+ dbdr: me probably 5 or 10%&#160;:)
+ dbdr: but still fun, I can see what it's doing
+ MSmits: whats cool is that the guy shared his masters thesis in the description
+ MSmits: so he's not just singin it
+ dbdr: yeah, you need to know a lot just to write the lyrics
+ MSmits: yea
+ MSmits: it's really nicely edited too
+ MSmits: could be a professional music video easily
+ dbdr: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=i6rVHr6OwjI">https://www.youtube.com/watch?v=i6rVHr6OwjI</a>this one is good too
+ JBM: it's one of his earliest
+ JBM: they got much better
+ JBM: i love the hamilton one
+ dbdr: he had to learn to speak that one backwards. definitely huge work
+ MSmits: yeah
+ MSmits: he sang it backwards
+ MSmits: I think
+ dbdr: well, pretended at least, for the lips
+ dbdr: I'm sure the sound track is still recorded forward
+ MSmits: i'm not sure, some guy in the description says there's a making-of video where he sings it backwards
+ dbdr: for the lips
+ MSmits: but i cant imagine singing backwards
+ jrke: i just made my 200th submission in D&amp;B
+ jrke: gn
+ MSmits: nice jrke&#160;:)
+ dbdr: really? 200
+ MSmits: I have 4 submissions of which 2 failed in wood 2 :P
+ MSmits: cuz the bot was too good
+ dbdr: classic
+ dbdr: I have 40
+ MSmits: he sang it backwards
+ MSmits: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=54nAOaEe_Fw">https://www.youtube.com/watch?v=54nAOaEe_Fw</a>
+ MSmits: dude is crazy
+ JBM: i love him
+ dbdr: right, but if you reverse this track does it give the final one?
+ JBM: he's one of the very rare youtubers i've actually sent money to
+ dbdr: also, the final track has many voices at once
+ MSmits: no idea dbdr, maybe he explains it in the video, still watching
+ EveryOS: On the home tab, how did i get the collaboration badge under "Unlocked Certifications"
+ EveryOS:&#160;?
+ MSmits: maybe they thought you were EricSMSO, that's what keeps happening to me
+ MSmits: <a rel="nofollow" class="external free" href="https://www.codingame.com/profile/f5f8fd68a484329ecd629d610c8d05755689841">https://www.codingame.com/profile/f5f8fd68a484329ecd629d610c8d05755689841</a> this guy
+ EveryOS: Ah gotcha, that's weird
+ MSmits: i dont actually think thats why you got the badge, but i do get confused a lot
+ IcedCrescent: does anyone have "Activating C# language assist" when choosing C# in the editor? It seems that intellisense never works
+ MSmits: I don't code much in the IDE, but when I do, the assist annoys me (using c++)
+ MSmits: sometimes the error reporting helps a bit
+ MSmits: I suggest you code locally for anything bigger than a puzzle
+ MSmits: especially in C# when you can run VS
+ IcedCrescent: Yeah, I retorted to using RoslynPad to write snippets (It's like LinqPad but free)
+ DoxLee: Hi
+ reCurse: I tried it a bit and it worked very well with C++ actually
+ reCurse: Light years ahead of the old editor anyway
+ MSmits: I guess I am just annoyed that it slows things down when you're not using it
+ MSmits: loading the IDE with it takes more time
+ jacek: reCurse light years are units of distance, not time
+ jacek: common mistake
+ jacek: :v
+ MSmits: I'd say you're trolling, but I am blown away by the correctness of your physics
+ jacek: so, no trolling?
+ JBM: how far away?
+ reCurse: I was talking about a distance
+ reCurse: Should go without saying
+ <b>**JBM torn between "that's not how common mistakes work" and "that's not how analogies work"</b></p><p><img src="/a/29364943044767" /> <b>**reCurse torn between sticking to Discord and still giving webchat a try</b></p><p><a href="/wiki/File:Default_avatar.png" class="image"><img alt="Default avatar.png" src="/images/5/56/Default_avatar.png" decoding="async" width="50" height="50" /></a> JBM: any action on discord nowadays?
+ reCurse: No but the signal to noise ratio is much better
+ JBM: i've given it a read this afternoon to marke much as caught up
+ jacek: why dont bridge discord and webchat?
+ JBM: so i disagree
+ jacek: that solution would be light years ahead
+ JBM: but i suppose it's self-selecting
+ JBM: jacek: i'll tell the devs about it
+ reCurse: Webchat is mostly filled with trolls anyway
+ JBM: or
+ JBM: webchat is mostly filled with trolls *when you're there*
+ JBM: hard to tell
+ reCurse: Case in point
+ MSmits: wait... are you saying you're a troll when you're here, but not on discord?  :confused: 
+ JBM: that's my reading
+ reCurse: No I'm saying this is another prime example of trolling
+ reCurse: Or pointless discussion
+ MSmits: there's more points on discord?
+ JBM: after the infinities' inexistence, that's rich XD
+ reCurse: Alright you guys win
+ reCurse: Bye
+ MSmits: I blame this on you JBM
+ JBM: there's probably some gamification thingy i'm missing on discord
+ JBM: MSmits: hey discord doesn't want me ok
+ MSmits: possibly
+ JBM: by a very personal choice of him, dare i add ^^'
+ MSmits: honestly though, I don't mind light banter with no point and I like discussion of the game mechanics also 
+ MSmits: of D&amp;B for example
+ jacek: or UTTT
+ MSmits: are you trying to make sure re curse is really gone now jacek
+ JBM: what? he's got a problem with uttt?
+ MSmits: sort of i guess
+ MSmits: not sure how deep it goes 
+ jacek: deeper than your book
+ MSmits: oof
+ JBM: i'm surprised, i'd have thought that's the kind of multi he'c crave
+ JBM: readjusting framing... complete
+ MSmits: nah he doesnt like it and he does kind of have  a point
+ jacek: its love-hare relationship
+ jacek: hate even
+ JBM: i'd follow on the uninterestingness aspect of the game
+ MSmits: it's very hard to get a reading on that game as a human
+ JBM: but there's a MIPS aspect i'd expect him to shine in
+ MSmits: some weak heuristics you can use, but other than that you just try all sorts of random enhancements on mcts to see what sticks
+ MSmits: he was hoping NN would help, but that failed also
+ MSmits: I still have one thing on my list for uttt
+ MSmits: wanted to try to solve it with proof number search 
+ MSmits: probably out of reach, but the statespace is far smaller than most people think
+ MSmits: maybe if the advantage of p1 is large enough, you can put lots of heuristics in that preserve the win for p1, you dont need to explore the entire tree that way
+ MSmits: at worst, I end up with a nice solver to add to my meta mcts. Anyways, thats a long term idea
+ AntiSquid: what NN did you do msd9126
+ AntiSquid: MSmits
+ MSmits: i didnt, recur se did
+ MSmits: for uttt
+ AntiSquid: always pinging wrong person lol
+ JBM: and unpinging someone who left
+ AntiSquid: ah i thought you did one for the dots games
+ MSmits: he also played millions of games in a meta mcts to find patterns to help design his NN I think
+ MSmits: nahh, i just ran a random sim to generate end games to test heuristics for
+ AntiSquid: how come there's so many people to ping but hardly anyone typing stuff in chat&#160;?
+ MSmits: turns out the heuristics from papers cover 0,3&#160;% of 7x7 endgames
+ JBM: they're all on discord
+ JBM: alternatively: "blame chat autojoin"
+ JBM: 7x7 endgames?
+ JBM: are we still on UTTT?
+ MSmits: thats the D&amp;B size on CG
+ MSmits: papers were written for 5x5 
+ JBM: yeah that's what i thought
+ JBM: i just missed the topicchange
+ MSmits: the paper results are general to any size, just not useful
+ MSmits: yeah I am lightning fast
+ JBM: and subtle
+ MSmits: so anyway, this kind of means my bot is 0,3% done :P
+ MSmits: needs more heuristics
+ dbdr: 7x7x7x7 uTTT would be a monster
+ MSmits: how would the board switching work?
+ eulerscheZahl: AntiSquid  07:59PMalways pinging wrong person lol
+ eulerscheZahl: too many users online to auto-complete with just 2 letters
+ MSmits: also dbdr... uttt? with 7 cells per miniboard?
+ jacek: EveryOS?
+ MSmits: I think I know why you're not top 10 in uttt :P
+ AntiSquid: what's the secret to climbin in UTTT these days? quite sure my bot was around 60 at some point, #136 all of a sudden @_@
+ MSmits: nothing new
+ MSmits: I think top 20 or so have some heuristics
+ MSmits: though, the teccles heuristic is quite powerful, maybe that caught on
+ MSmits: if you put that in, you might get a good amount of ranks
+ MSmits: if you dont know what it is, it's basically an early game heuristic for player 1
+ AntiSquid: i remember it
+ MSmits: if you arrive at an empty board, play the cell with the same index as the board itself, so the opponent is sent to the board you're already in
+ MSmits: kk
+ MSmits: put it in
+ MSmits: test it
+ AntiSquid: send opponent back to same cell or something
+ MSmits: yes
+ MSmits: my bot has it, even though it's not perfect
+ AntiSquid: nah don't feel like it @_@ didn't even get the new games done yet
+ jacek: my bot went from ~15 to ~7
+ jacek: when i added this
+ MSmits: nice
+ AntiSquid: salad tomatoes #3
+ MSmits: it's mostly because in the early game the rollout-statistics are very bad
+ jacek: why tilde is more like minus here
+ MSmits: so you need a heuristic that almost guarantees a good move
+ AntiSquid: looks more like a tilde on ubuntu 
+ MSmits: there's some for player 2, but they are worse, might not be worth it
+ AntiSquid: or maybe it's the screen, not sure
+ jacek: <a rel="nofollow" class="external free" href="https://i.imgur.com/w2MnNTf.png">https://i.imgur.com/w2MnNTf.png</a>
+ MSmits: yea it looks like a minus for me too
+ MSmits: at first i thought it was jacek-humor 
+ AntiSquid: <a rel="nofollow" class="external free" href="https://imgur.com/a/B6HkjEi">https://imgur.com/a/B6HkjEi</a>
+ jacek: nyoro~n
+ AntiSquid: or maybe there's different font installed
+ AntiSquid: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=A5Fpr7g7plE">https://www.youtube.com/watch?v=A5Fpr7g7plE</a>
+ Hjax: recently when im home, the chat doesnt load on this site
+ Hjax: anyone experienced that before?
+ Hjax: theres just a white box where the chat is supposed to be 
+ jacek: thats racist
+ Hjax: :thinking:
+ eulerscheZahl: black boxes matter?
+ Ace-Code: :D
+ Ace-Code: XD
+ eulerscheZahl: on a more serious note: chat is working fine for me
+ Hjax: its only my desktop it doesnt work on 
+ Hjax: i have no idea why, same browser / settings as other places i log in 
+ eulerscheZahl: any errors in the console?
+ Hjax: ill check when im home later
+ jacek: suddenly im loading #3859980 channel o.O
+ eulerscheZahl: is that a direct message?
+ jacek: dunno, it only says the chat is loading
+ jacek: MSmits have you seen the yet another hexagonal game?
+ MSmits: nope
+ MSmits: but i just randomly generated 1 million D&amp;B endgames out of which 3322 games were simple endgames and tested my heuristics compared to a negamax and they were identical each time. Yay endgame 0,3% solved&#160;:)
+ MSmits: only took 10 seconds or so
+ MSmits: on c++ debug mode
+ jacek: you could be the guy who spent 8 years to solve 5x5
+ MSmits: sure
+ MSmits: for now I seem to be the guy that spends that much time trying to beat your oware bot
+ MSmits: some branches go 70 plies deep now :P
+ jacek: youre just trying to outbook it
+ MSmits: of course
+ MSmits: it's fun though
+ MSmits: worked on everyone else so far, your bot is quite something
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/95b1bcfa-502a-439f-b0bc-cd9b3e3169a6">http://chat.codingame.com/pastebin/95b1bcfa-502a-439f-b0bc-cd9b3e3169a6</a>
+ MSmits: deepest so far, you're p2 
+ MSmits: that one is actually close to the endgame book of 15 seeds
+ MSmits: but not that useful if I am getting wrecked on that branch :P
+ jacek: maybe i should learn about avx after all
+ MSmits: from what I can tell it's mostly useful for those physics games
+ MSmits: and othello
+ jacek: nn is just vector dot product. i think its autovectorized in my case anyway
+ MSmits: oh right, nns should use it too ofc
+ MSmits: it seems annoying to avx it by hand only to find out there is no improvement due to autovectorization
+ MSmits: in othello i did get an improvement, it was not autovectorized
+ MSmits: just a tad too complicated to do that I guess
+ MSmits: getting some stuff from the store bbl
+ jacek: for bt i do incremental updates which sped up quite
+ jacek: though for oware most moves change board drastically
+ jacek: (still not bitboards)
+ jacek: here at 63 frame i solved the win <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/482774691">https://www.codingame.com/replay/482774691</a>
+ jacek: its not rocket science when at the end only 1 move is available
+ jacek: for alphabeta i would need to use search extensions and whatnot, but in best first minimax i have this for 'free'
+ MSmits: ah yes
+ MSmits: mcts solver does this too, though probably not as efficiently
+ MSmits: what helps me a lot in these cases is a 6 seed endgame db
+ MSmits: could have done the lookup at the depth of frame 79, which means I would have solved it much earlier
+ MSmits: probably around 63 also
+ Memo12334: in coders strike back. North is actually South right
+ Memo12334: nvm
+ Memo12334: stupid question
+ MSmits: it depends on whether you mean the geographic north or the magnetic north
+ Memo12334: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/e41803ae-12f2-48be-a1cc-7344407cd165">http://chat.codingame.com/pastebin/e41803ae-12f2-48be-a1cc-7344407cd165</a>
+ Memo12334: MSmits sir do u understand this function, I understand everything fully except when doing the 360 - a thing
+ Memo12334: I know a negative angle can be seen as positive by virtue of rotation
+ Memo12334: and the dy part
+ Memo12334: sry I should have asked this in discord , is any admin online
+ PayItForward: first day here trying to learn c. where should i start
+ PayItForward: i have no experience
+ Jrix: Go on the doc
+ PayItForward: I dont know what that is lol can i search for it
+ mr.mister: doc is short for documentation
+ PayItForward: ah thanks
+ Jaek: Can i share my  contribution here&#160;?
+ MSmits: Memo12334 sorry, that angle stuff always makes my head hurt. I usually try a few things until i find something that works
+ MSmits: sometimes i am able to work it out on paper, but i lose it fast
+ kvitebjonn: i cant find where to change my avatar, help
+ norbi97: hover it on your profile, then you can click change picture
+ itzblinkzy: markyy is it okay if you share your code? I failed miserably :pensive:
+ itzblinkzy: alright then :cry:
+ markyy: @itzblinkzy sure, just tell me which clash
+ markyy: I did
+ markyy: it's not readable though cause it's shortest code mode :sweat_smile:
+ itzblinkzy: Yeah it's fine
+ LinhT.Nguyen: yasuo change cai mode di
+ LinhT.Nguyen: reverse kia
+ markyy: did they fix the clash of code chat bug?
+ markyy: it used to disappear during the contests
+ zile151: i dont think they fixed the bug, but im not sure if thats a bug or a anti-collaboration feature lol
+ LordSahandii: hi
+ thanhphuoc: hello

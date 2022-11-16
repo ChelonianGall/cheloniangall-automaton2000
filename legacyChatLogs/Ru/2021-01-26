@@ -1,0 +1,167 @@
+ MayKAADyK: ребят, где в Москве можно посрать на площади? 
+ mabu: Так, что это тут у нас.
+ MayKAADyK: :upside_down:
+ MayKAADyK: А ты админ?
+ 735487: MayKAADyK: админ на площадь пошел посрать
+ MayKAADyK: хаха
+ MayKAADyK: кто бы на нашествии в 2012
+ depthzer0: ребята, othello - там написано обратить внимание на MCTS и minimax
+ depthzer0: можете какими-то внятными проверенными описаниями поделиться?
+ depthzer0: вот этот пазл имею в виду:<a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/bot-programming/othello-1">https://www.codingame.com/multiplayer/bot-programming/othello-1</a>
+ MadKnight: просто брутфорсишь все возможные ходы для всех игроков
+ depthzer0: ты прямо с такого описания врубился? )) мэд, ты очень крутой перец, но мне хочется что-то более внятное
+ Uljahn: Мэд, зацени какую статью сегодня выпустили:<a rel="nofollow" class="external free" href="https://arxiv.org/abs/2101.09869">https://arxiv.org/abs/2101.09869</a>
+ Uljahn: вот это рофл
+ MadKnight: чё вообще значит "алгоритмического угнетения"&#160;?)
+ depthzer0: да вот то что ты со мной пытаешься провернуть про бутфорс
+ Uljahn: depthzer0: MCTS и минимакс придумали белые, чтобы угнетать фемок и чёрных
+ depthzer0: :thumbsup:
+ Uljahn: брутфорс - это полный перебор
+ MadKnight: &gt; algorithmic violence
+ Uljahn: в данном случае, это перебор последующих состояний игрового поля при всех возможных ходах игроков из начальной позиции
+ depthzer0: Uljahn я это понимаю, что переборну ладно, если годных статей под рукой нету, буду дальше гуглить
+ MadKnight: да в википедии всё понятно описано
+ Uljahn: там ещё важно оценку придумать, если состояние игры не конечное
+ Uljahn: т.к. до конца игры просчитать не хватит времени, а позицию оценивать как-то надо
+ Uljahn: минимакс берёт лучший ответ на лучшие возможные ходы противника (худшие для тебя), т.е. минимизирует потери от ходов противника с максимальной для него оценкой -&gt; минимум максимумов -&gt; минимакс
+ MadKnight: но минимакс заточен под turn-based игры
+ MadKnight: если ходят одновременно - то минимакс будет предполагать что противник знает твой будущий ход
+ Uljahn: или если несколько игроков
+ depthzer0: <a rel="nofollow" class="external free" href="https://en.wikipedia.org/wiki/Monte_Carlo_tree_search">https://en.wikipedia.org/wiki/Monte_Carlo_tree_search</a>
+ depthzer0: а я скажу что - ни че го!!
+ MadKnight: <a rel="nofollow" class="external free" href="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/MCTS-steps.svg/800px-MCTS-steps.svg.png">https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/MCTS-steps.svg/800px-MCTS-steps.svg.png</a>
+ MadKnight: <a rel="nofollow" class="external free" href="https://upload.wikimedia.org/wikipedia/commons/2/21/MCTS-steps.svg">https://upload.wikimedia.org/wikipedia/commons/2/21/MCTS-steps.svg</a>
+ MadKnight: попробуй зареверсить алгоритм по картинке
+ MadKnight: изи
+ depthzer0: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/6512db38-4cac-4884-bf99-52cc58ac4e3f">http://chat.codingame.com/pastebin/6512db38-4cac-4884-bf99-52cc58ac4e3f</a>
+ MadKnight: Invalid paste id, perhaps it expired?
+ depthzer0: сорри
+ depthzer0: даже пазл нашёл себе под это дело
+ depthzer0: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/monte-carlo-tree-search-exercise">https://www.codingame.com/ide/puzzle/monte-carlo-tree-search-exercise</a>
+ depthzer0: ладно, как время появится разберусь
+ Uljahn: depthzer0: вот тут попроще для начала <a rel="nofollow" class="external free" href="https://dyzzet.ru/a/multiarmed-bandits/">https://dyzzet.ru/a/multiarmed-bandits/</a>
+ Uljahn: без дерева, дерево можно потом уже прикрутить
+ depthzer0: :thumbsup:
+ depthzer0: спасибо
+ MadKnight: depthzer0 го по картинке 
+ MadKnight: догадайся как работает
+ MadKnight: там все шаги нарисованы, просто посмотри что изменяется
+ Uljahn: без базового понимания сложно догадаться
+ MadKnight: ну кружочки - это gameState'ы
+ MadKnight: ходы типа
+ Uljahn: а волнистая пунктирная стрелка - это роллаут, угу-угу
+ Uljahn: всё очевидно, можно догадаться
+ depthzer0: ну ок. но там сразу с селекшн. а как начать? самый самый первый кружочек сделать?
+ Uljahn: первый кружочек - это root, корень дерева. в самом начале он 0/0
+ Uljahn: это исходное состояние игры на данный момент
+ Uljahn: т.е. зависит от того, когда ты начинаешь искать. если в начале игры - то это стартовая расстановка, но можно запустить поиск и в процессе игры
+ Uljahn: линии от первого кружочка - это доступные тебе ходы, они ведут в соответствующие состояния игры
+ Uljahn: следующий уровень линий - это ходы противника и получаемые состояния, ходы чередуются
+ Uljahn: т.е. серые кружочки - это результаты твоих ходов, а белые - ходов противника в ответ на твои ходы
+ depthzer0: примерно 95% понимания получил!
+ Uljahn: т.е. для использования этого алгоритма нужно уметь хранить состояние игры, находить список возможных ходов и иметь возможность применять их, чтобы получить следующее состояние
+ Uljahn: это называется симуляция
+ Uljahn: т.е. мы не отдаём реальные команды, а проигрываем их виртуально у себя в программе, пока хватает запаса по времени, потом уже выбираем наилучший ход и выдаём как команду бота
+ Uljahn: ещё вопросы?
+ depthzer0: спасибо, шеф, пока достаточно
+ MadKnight: depthzer0 чё, будешь пилить?
+ depthzer0: конечно, но не знаю пока когда, экзамен скоро, пока готовлюсь
+ YurkovAS: по этим двум примерам изучал mcts<a rel="nofollow" class="external free" href="https://www.baeldung.com/java-monte-carlo-tree-search">https://www.baeldung.com/java-monte-carlo-tree-search</a><a rel="nofollow" class="external free" href="https://github.com/Oreshnik/MCTS_TTT">https://github.com/Oreshnik/MCTS_TTT</a>
+ 735487: Uljahn: вот это рофл, че красно-черные деревья надо срочно переименовать?
+ MadKnight: нет, но нужно срочно убрать короля и королеву из карт
+ MadKnight: <a rel="nofollow" class="external free" href="https://sun9-53.userapi.com/impg/-yjkwUKAzXYe3j14796dMvyadp_G5vf_mBnOng/U-8D5PtQT4o.jpg?size=1080x1704&amp;quality=96&amp;proxy=1&amp;sign=947d28510fb64539127381d2e4349401&amp;type=album">https://sun9-53.userapi.com/impg/-yjkwUKAzXYe3j14796dMvyadp_G5vf_mBnOng/U-8D5PtQT4o.jpg?size=1080x1704&amp;quality=96&amp;proxy=1&amp;sign=947d28510fb64539127381d2e4349401&amp;type=album</a>
+ depthzer0: YurkovAS, thx
+ depthzer0: amurushkin :joy:
+ Fluminer: Где пруфы, Билли?
+ depthzer0: <a rel="nofollow" class="external free" href="https://www.sports.ru/tribuna/blogs/mama4h/1565909.html">https://www.sports.ru/tribuna/blogs/mama4h/1565909.html</a>
+ Ksenia_Uchiha: муд
+ 735487: пусть сами в голубые шахматы играют. у меня будут тогда неграми называться ))
+ Uljahn: не подумали о людях с отклонениями в цветовосприятии, для которых голубые и розовые фигуры будут одинаково серые :confused:
+ tutubalin: depthzer0  про минимакс ещё надо рассказывать?
+ depthzer0: tutubalin если на пальцах, то можно
+ depthzer0: я пока записи складываю, на досуге (когда появится) почитаю
+ tutubalin: возьмём простые крестики-нолики (не UTTT, а классику)
+ tutubalin: ты играешь крестиками, твой ход
+ tutubalin: XX__OOOX_
+ tutubalin: у тебя 3 варианта, куда сходить. какой выберешь?
+ depthzer0: правый верхний
+ MadKnight: depthzer0 по сути минимакс перебирает вообще все возможные варианты кто как может сходить
+ MadKnight: рекурсивно
+ tutubalin: depthzer0 получается, если у тебя есть хотя бы один ход, который приводит тебя к выигрышу, значит текущее состояние - тоже выигрышное
+ tutubalin: другая ситуация. опять ходишь крестиками.XOXOO_X__
+ tutubalin: опять три варианта
+ depthzer0: средний нижний
+ tutubalin: нолик в правый средний - и ты проиграл
+ tutubalin: любой ход приводит в проигрышу. получается, что само это состояние - проигрышное
+ tutubalin: ещё примерXO_OXX_ _O
+ tutubalin: здесь как бы не сходил, будет ничья. получается, что само состояние - ничейное
+ tutubalin: твоя задача - всегда ходишь так, чтобы противник оказывался в проигрышном состоянии. если не возможно - то хотя бы в ничейном
+ tutubalin: если +1 победа, 0 ничья, -1 поражение, то тебе нужно выбрать ход с максимальным значением
+ tutubalin: обычная функция max
+ tutubalin: разумеется, противник тоже хочет победить, поэтому он будет стараться перейти в проигрышное для тебя состояние, или, если не возможно - в ничейное
+ tutubalin: то есть из всех возможных ходов противника нужно выбираться наихудший для нас - то есть использоваться функцию min
+ tutubalin: отсюда и получается название - минимакс
+ depthzer0: яяяясссннооо....
+ tutubalin: да!
+ depthzer0: :metal:
+ depthzer0: вот это ликбез у меня сегодняспасибо, ребята!!
+ tutubalin: для простых игр типа крестиков-ноликов, игры Баше, игры Ним можно построить всё дерево возможных ходов и точно определить выигрышность начального состояния
+ tutubalin: бывают игры, где первый игрок однозначно выигрывает. бывают игры, где первый игрок однозначно проигрывает. бывают игры, где при оптимальной игре обоих игроков всегда получается ничья
+ tutubalin: для сложных игр, например шахматы или го, всё дерево построить проблематично, поэтому мы смотрим только на определённую глубину (например, на 6 ходов вперёд). а дальше оцениваем уже какой-нибудь функцией
+ tutubalin: например, нет у противника ферзя - хорошо, нет у нас ферзя - плохо. разумеется, это не гарантирует победу, но помогает примерно прикинуть шансы.
+ tutubalin: и вот дальше идём по дереву вверх начиная с самих глубоких состояний. для противника выбираем через min, для своих ходов через max. в итоге получаем, какой из доступных сейчас ходов самый перспективный
+ input.txt: помню я как-то строил полное множество выигрышных состояний для uttt
+ input.txt: с помощью особой логической магии, bdd, характеристических функций и какой-то матери
+ input.txt: оно считалось три часа, дошло до 17 хода, там и крашнулось
+ tutubalin: 17 ходов - это прям очень круто
+ Uljahn: всего три часа?
+ tutubalin: там же ветвистость огромная
+ Uljahn: у смита неделями мета-MCTS гоняется
+ input.txt: есть метод кодирования, позволяющий выполнять операции над множествами до 10^300 (какойто рекорд от ibm)
+ input.txt: но сильно зависит от вида множества
+ input.txt: и что характерно, почти во всех играх оно экпоненциально растет
+ koles: как сделать транслейт на русский?
+ MadKnight: эээ
+ MadKnight: справа сверху кнопочка
+ MadKnight: translate this page to (russian)
+ 735487: средствами сайта никак
+ mabu: Интеграл Хельсинга
+ magaiti: ну вот, а как тут картинку запостить?
+ magaiti: <a rel="nofollow" class="external free" href="https://static.wikia.nocookie.net/shellsing/images/2/2d/%D0%A8%D0%B5%D1%84.jpg/revision/latest/scale-to-width-down/1000?cb=20190314172158&amp;path-prefix=ru">https://static.wikia.nocookie.net/shellsing/images/2/2d/%D0%A8%D0%B5%D1%84.jpg/revision/latest/scale-to-width-down/1000?cb=20190314172158&amp;path-prefix=ru</a>
+ magaiti: ну ладно
+ SuperStas0: Дарова пидры
+ SuperStas0: Го в осу
+ input.txt: да у тебя хоть 1,5к рр выбито, епт? показывай свои 4* на фк
+ MadKnight: input.txt
+ MadKnight: ты чё только что сказал
+ MadKnight: переведи
+ input.txt: ну типа набил ли он 1,5к performance points в осу и проходил ли карты 4 звезды сложности на full combo
+ input.txt: на инсте гейта минусовый хурик в бубле (с)
+ MadKnight: я думаю, он уже ушёл
+ input.txt: не то чтоб мне было действительно интересно
+ MadKnight: а ты что, знаток осу?)
+ input.txt: и картины писать мастер, и скейтбордист не слабый, да и на районе человек не последний (с) 
+ MadKnight: <a rel="nofollow" class="external free" href="https://twitter.com/TapLHarV/status/1352315129409413120">https://twitter.com/TapLHarV/status/1352315129409413120</a>
+ MadKnight: почему мне до сих пор никто не ответил?
+ MadKnight: а погоди
+ MadKnight: надо ссыль на твит
+ MadKnight: <a rel="nofollow" class="external free" href="https://twitter.com/harassman1/status/1353015778380021760">https://twitter.com/harassman1/status/1353015778380021760</a>
+ MadKnight: во
+ Uljahn: Automaton2000: почему никто не бэйтится на мой троленк?
+ Automaton2000: хоть гугл говорит, что существует полиномиальный алгоритм для выяснения изоморфизма двух графов степеней не выше d, но там жесть какая-то ...
+ tutubalin: байден подписал закон, разрешающий мужикам, сменившим пол, выступать в женских командах
+ MadKnight: да он много чего натворил
+ MadKnight: самое эпичное - это он зареверсил штуку трампа про газ/нефть компании, из-за чего они будут приносить меньше денег
+ MadKnight: и теперь в техасе всё плохо
+ tutubalin: фишка в том, что теперь интересы борцов за права женщин столкнулись с интересами борцов за права LGBT
+ tutubalin: и часто это были одни и те же люди, и теперь у них начинается шиза
+ MadKnight: да ещё давно предсказывали
+ MadKnight: когда они закончат с правыми, они начнут поедать друг друга
+ Uljahn: очевидно, что борьба за права - всего лишь ширма для продавливания интересов заинтересованной группы лиц
+ 735487: что такое осу? пипец дохера непонятных слов появилось&#160;:)))
+ MadKnight: игра такая
+ MadKnight: там крч играешь музыку
+ MadKnight: под музыку
+ MadKnight: и ещё двигаешь мышкой
+ Uljahn: как гитар хиро, ритм-дрочильня
+ 735487: понятно

@@ -1,0 +1,584 @@
+ Thyl: Yo
+ Thyl: ma simu pour le sofi challenge me donne des coordonées à peu près correcte mais pas aussi précise que ça devrait
+ Thyl: quelqu'un aurait une idée de où ça peu venir&#160;??
+ Zorg1: Comment veux tu qu'on devine, sérieusement&#160;?
+ Thyl: Zorg1 pas deviné
+ Thyl: mais tu sais des fois
+ Thyl: on te dis le bug et tu as une idée parce que tu as déjà rencontré ce problème&#160;:)
+ BlaiseEbuth: Ca doit pouvoir venir d'a peu près partout dans ta simu. En gros.
+ Zorg1: oui mais faut que tu vois que ce que tu dis c'est "j'ai un calcul ça me donne pas ce que je veux, une idée les gars&#160;?"
+ Thyl: alors je reformule
+ Zorg1: et comme dit Blaise, les façons de se planter sur un calcul de coord. Trigo foireuse&#160;? erreur sur le nom des variables&#160;? calcul approximatif&#160;? ...
+ Thyl: <a rel="nofollow" class="external free" href="https://codeshare.io/5wwYpP">https://codeshare.io/5wwYpP</a>
+ Zorg1: conseil&#160;: pour les calculs d'angle utilise atan2, tu auras le cercle complet
+ Zorg1: avec un acos  t'as qu'un demi cercle
+ Zorg1: en général c'est atan2(deltaY,deltaX)
+ BlaiseEbuth: Woah ça balance du code de contest en public!
+ Thyl: c'est une classe que Magus à balancé
+ Thyl: et qui est partout sur internet
+ Thyl: tu vas sur coders strike back et ta le postmortem
+ Thyl: pas très grave
+ BlaiseEbuth: Du coup t'es en train de dire que le code de magus marche pas&#160;? :thinking:
+ Thyl: si
+ Thyl: mais je le modifie pour moi
+ BlaiseEbuth: Donc c'est pas son code&#160;?
+ Thyl: c'est fait avec son postmortem
+ Thyl: mais du coup c'est mal fait
+ Thyl: parce que c'est moi
+ BlaiseEbuth: Je te charie.
+ Thyl: atan2 c'est larc tangente modulo 2 pi&#160;???
+ BlaiseEbuth: Mais sérieusement j'ai passé plusieurs heures à debug la mienne hier. Et j'ai pas encore bu de café. ALors molo le code
+ Thyl: ok
+ Thyl: en tut cas merci pour l'info Zorg1 
+ philRG: le code de magus me paraît gérer les modulo Thyl
+ jfaixo: ^ ^ tout n'est pas juste je crois dans l'article de magus, à utiliser a vos risques et périls&#160;;)
+ Zorg1: en atan2 ça te fait l'atan et ça te met l'angle dans le bon quadran, regarde la doc normalement ils expliquent mieux que moi ^^
+ BlaiseEbuth: Au delà du calcul lui même, tu fais pas un truc bête, genre faire plusieurs tests d'affilés sans réinit tes pods&#160;?
+ Zorg1: ^^
+ philRG: moi sinon j'utilise les nombres complexes mais en python, faut inverser les x et y pour que les fonctions natives fonctionnent
+ Thyl: BaliseEbuth non
+ Zorg1: euh Thyl&#160;: ça marche comme ça atan2
+ Thyl: ok
+ Thyl: qu'est ce que j'ai dis&#160;:)
+ Thyl:&#160;???
+ Thyl: :think:
+ philRG: atan2 renvoie une valeur entre -Pi et Pi, atan renvoie une valeur entre -Pi/2 et Pi/2 selon les specs python
+ Zorg1: atan2(p.getY()-y,p.getX()-x) mais le problème ne vient pas du calcul d'angle je pense
+ Thyl: Zorg1 je calculer mal l'angle
+ Thyl: j'ai repris le code de Magus et maitenant c'est géniale
+ Zorg1: avec mon atan2&#160;?
+ Thyl: j'ai les bonnes coordonées
+ Thyl: atan2 j'ai pas compris sans te vexer
+ Thyl: je vois le principe mais pas encore comment on calcule un angle à partir d'un coordonée
+ Thyl: mais en tout cas merci énormément
+ Zorg1: bah en fait comme dit philRG les fonctions réciproque de la trigo, acos, asin, atan vont te renvoyer un angle entre -pi/2 et pi/3
+ Zorg1: * pi/2
+ jfaixo: dans la formule de zorg, tu as la réponse,. Pour l'angle, il faut que tu calcules un vecteur qui va de ton point A a ton point B (coordonnées de B - coordonnées de A), et utiliser une fonction trigo
+ Thyl: ok
+ Zorg1: donc pour un angle retourné tu as en fait deux orientation possible
+ Thyl: oui
+ Thyl: d'accord
+ Thyl: en haut ou en bas
+ jfaixo: le plus simple étant un atan (ou atan2), car coté opposé = ton delta y, et coté adjacent = ton delta x
+ Zorg1: atan2 tu fournis le y et x et il te calcules l'angle
+ Zorg1: de -pi à +pi
+ Thyl: ok
+ Thyl: c'est bon
+ Thyl: merci beaucoup
+ Thyl: et bravo pour la perf 2ème c'est grave cool
+ jfaixo: gare en tête que l'axe des y est vers le bas (en tout cas si tu est sur le challenge&#160;;) ), ca m'a joué des tours quand j'ai fait des desssins sur mon tableau&#160;;)
+ Zorg1: merci&#160;;-)
+ Thyl: *3eme pardon
+ Thyl: mais à 9 centiem
+ Thyl:&#160;:)
+ Zorg1: pas vraiment prévu, mais bon ^^
+ Zorg1: j'ai réutilisé du code existant
+ Thyl: un AG&#160;?
+ philRG: jfaixo faut juste penser à tourner la tête de 90° quand tu passes des maths théoriques à la grille de jeu CG&#160;:-o (faut pas avoir de douleurs cervicales)&#160;:-D
+ Thyl: par contre j'ai mes vecteurs
+ Thyl: je penses que je l'ai arrondis pas bien
+ Thyl: parce que par contre ça correspond pas du tout à ce que j'attends
+ Thyl: a pardon si
+ Thyl: juste le premier tour comme ça bouge pas ça marche pas&#160;:)
+ Zorg1: oui un AG
+ Thyl: t'as codé l'AG quand même vite
+ jfaixo: mdr PhilRG, j'ai un setup derrière le mur où ya le tableau, dans la chambre de ma fille, je peux m'y suspendre par les pieds. Mais étonnament ca m'aide pas bcp
+ jfaixo: d'ailleurs j'arrête de parler et je retourne aux collisions avant que la chasse aux oeufs ne soit ouverte..
+ Zorg1: thyl&#160;: euh non, c'est un AG que j'ai depuis CSB, que j'ai perfectionné dans SR
+ Zorg1: c'est de la reprise de code
+ Thyl: ah
+ Zorg1: un contest avec un thème CSB c'est pas original
+ Thyl: tu me diras pb4 aussi
+ philRG: oui moi j'ai un barbec à monter&#160;:-( je sais pas quand je vais m'y pouvoir m'y remettre
+ philRG: jfaixo&#160;:-D
+ Thyl: le lundi de paque c'est fait pour ça
+ jfaixo: perso vu le planning si je fais des 1eres soumissions avant mardi c'est beau
+ Zorg1: ah oui c'est vrai c'est férié demain
+ Thyl: quand on fait un boost on applique une thrust de 650&#160;???
+ Zorg1: oui
+ Zorg1: bon ben heureusement que vous en parlez je me serais connecté demain au boulot et j'aurais vu personne ^^
+ BlaiseEbuth: Un jour Thyl découvrira l'auto-complétion et cessera de m'appeler &lt;Ebuth&gt;
+ Thyl: quand j'ai dit Ebuth&#160;?
+ BlaiseEbuth: Tu n'aurais pas fait tâche parmi les cloches Zorg1
+ Thyl: je dis Blaise'
+ BlaiseEbuth: Non. BaliseEbuth
+ Thyl: a oui
+ Thyl: pardon
+ Thyl: et bute&#160;!
+ BlaiseEbuth: :soccer:
+ philRG: ma fille m'a fait racheter sa carte sim perdue pour débloquer son compte instagram bloqué, j'essaye de l'installer sur son ancien téléphone Nokia Lumia 610 acheté  quand elle était en 5ème et apparemment pas supporté par l'opérateur&#160;:( 
+ philRG: Thyl pour les nombres complexes, oublie, c'est le programme de 1ère
+ BlaiseEbuth: T'as perdu 10€
+ Thyl: j'ai déjà une idée de ce que sais
+ philRG: y a pas mal de templates de simu de CSB sinon qui 
+ philRG: non 30€
+ philRG: 20€ la sim et 10€ pour l'envoi 
+ Thyl: tu représentes les nombres sur un espace 2D
+ Thyl: avec une forme réel et une forme imaginaire
+ BlaiseEbuth: C'est une carte sim plaquée or&#160;?
+ Thyl: sous la forme :ni
+ philRG: les nombres complexes permettent de changer de mode de représentation (cartésienne à polaires), parfois pratique
+ Thyl: a+n*(racine carre de -1)
+ Thyl: a oui pas bête
+ philRG: pour mes soucis de fatigue visuelle sur le code, ça m'aide bien pour mes schémas papier
+ Thyl: je fais moi aussi beaucoup de shéma papier
+ Thyl: ça aide
+ BlaiseEbuth: Juste ça, ça justifie la déforestation.
+ Thyl: BlaiseEbuth y a pas d'auto completation sur BinarySearch et Codewars...
+ Thyl: du coup je m'en passe
+ BlaiseEbuth: Et tu te trompes... :expressionless:
+ Thyl: sur quoi&#160;?
+ Thyl: BlaiseEbuth
+ BlaiseEbuth: Bah les pseudos.
+ Thyl: oui
+ BlaiseEbuth: Automaton2000&#160;?
+ Automaton2000: faut que tu trouves une faille dont la résolution soit de réparer clojure
+ BlaiseEbuth: Exactement. Je ferais ça si c'est pas fix pour le spring challenge. Merci Automaton2000.
+ Automaton2000: ca veut dire que tu ne sais pas ou ils sont
+ Thyl: BaliseEbuth tu t'es aidé de quoi pour les collisions&#160;??
+ Thyl: BlaiseEButh
+ Thyl: BlaiseEbuth
+ BlaiseEbuth: Mfflrffll
+ BlaiseEbuth: Comment ça aidé de quoi&#160;?
+ Thyl: genre tu t'es appuyé sur un truc&#160;??
+ BlaiseEbuth: Mon dossier ergonomique.
+ BlaiseEbuth: Ma main par moment.
+ BlaiseEbuth: :thinking:
+ Thyl: un fichier explicatif, un pm?
+ BlaiseEbuth: Le truc de magus, largement adapté à ma sauce.
+ Thyl: et pour tester si ça macrhe
+ Thyl:&#160;???
+ BlaiseEbuth: Bah j'ai fait tourné des parties en simulant un move, en le jouant, puis en comparant les résultats simu/referee.
+ BlaiseEbuth: *tourner
+ Zorg1: ah tiens y a qqn d'autre qui recycle son SR ...
+ Zorg1: bon sur ce je vais explorer dehors pour voir c'est quoi ce truc qui fait de la lumière
+ BlaiseEbuth: Ramènes moi des pastilles d'iode.
+ huzuni35: Bonjour, j'aimerais m'améliorer en python3 sur l'algo (style clash of code) il y'a des tutos&#160;?
+ BlaiseEbuth: Y'a de l'algo en clash of code&#160;? :thinking:
+ dwarfie: <a rel="nofollow" class="external free" href="https://lgatto.github.io/programming-with-pen-and-paper/">https://lgatto.github.io/programming-with-pen-and-paper/</a>
+ dwarfie:&#160;:)
+ BlaiseEbuth: Arrêtes de tuer des arbres.
+ huzuni35: je sais pas je veux dire les petits jeux là ahaha
+ dwarfie: c'est un ressource renouvelable contrairement a l'electricité gachée à taper du code au hasard BlaiseEbuth :yum:
+ BlaiseEbuth: Je t'assure que les clandestins qui pédalent dans ma cave sont totalement renouvelables.
+ dwarfie: et bio-degradable en plus ... et ca peut servir d'engrais ... tu tiens une piste la
+ BlaiseEbuth: Hé
+ BlaiseEbuth: huzuni35 si tu veux progresser ne fait pas de clashs
+ BlaiseEbuth: si tu veux programmer ne fait pas de python
+ BlaiseEbuth: si tu veux faire de l'algo coupe des arbres
+ nicola: Vendredi, c’était avant hier.
+ nicola: Trolldi aussi.
+ BlaiseEbuth: Et sacrifie une chèvre pour faire bonne mesure
+ dwarfie: nicola ... c'est bien pour ca qu'il dit ce qu'il dit le BlaiseEbuth
+ huzuni35: je suis en M1 big data mais je me rends compte que je pratique pas beaucoup. Et j'ai été refusé à une alternance après avoir foiré un test sur ce site, donc je veux m'améliroer
+ BlaiseEbuth: Got it
+ BlaiseEbuth: si tu veux progresser ne fait pas de clashs
+ huzuni35: ah okay, je dois faire quoi&#160;?
+ dwarfie: puzzle
+ BlaiseEbuth: dans un premier temps
+ BlaiseEbuth: et multi eventuellement
+ BlaiseEbuth: Et sacrifie des chèvres
+ BlaiseEbuth: T'as fait plus ou moins de 52% à ton test&#160;?
+ huzuni35: moisn car y'avais du SQL que j'ai touché depuis longtemps et bcp de question IA
+ huzuni35: mais c'est python que je veux améliorer
+ BlaiseEbuth: Si tu veux améliorer ton python, passe au C++.
+ huzuni35: ah oui&#160;?
+ BlaiseEbuth: Nan mais je déconne. (A moitié)
+ BlaiseEbuth: Mais si t'es dans le big data t'as pas forcément besoin d'un langage si bas lvl
+ huzuni35: Je m'y connais pas forcément mais les outils de base de donnée + python/r sont les plus demandés
+ huzuni35: (data scientist)*
+ nicola: Des puzzles.
+ BlaiseEbuth: Je me doute. Mais tu parlais quand même d'IA
+ huzuni35: ouais le poste en question&#160;:) merci pour les conseils 
+ huzuni35: je vais regarder les puzzles
+ huzuni35: la pluspart des gens içi sont codeurs&#160;? en étude&#160;? travail déjà&#160;?
+ BlaiseEbuth: Ca va des collègiens aux retraités, et de l'amateur au pro, et pour à peu près tous les postes imaginables...
+ huzuni35: mdr ça c'est de la réponse&#160;!
+ huzuni35: bon bah merci pour les conseils&#160;! a une prochaine&#160;!
+ BlaiseEbuth: :wave:
+ dwarfie: t'as oublie de dire que ca va de ceux qui croient connaitre un langage aux barges qui touchent a un tas de langage en plus :D
+ BlaiseEbuth: Moi je touche pas les langages, c'est sale.
+ Eltech: c est rigolo les langages
+ BlaiseEbuth: La torture aussi, mais que veux-tu, y'a toujours des rabats-joies pour dénigrer tes passes-temps...
+ BlaiseEbuth: Bon. Zorg1 n'est toujours pas revenu... Je vais sortir aussi pour voir si je peux le sauver... Ou au moins fouiller son cadavre. A tout'
+ Bon[]Crayon: Salut
+ Bon[]Crayon: slt Automaton2000
+ Automaton2000: j'ai aucune idée de la complexité de mon algo de recherche
+ Bon[]Crayon: slt AutomatonNN
+ Bon[]Crayon: Automaton2000 Nulle
+ Automaton2000: ah oui, mais ça c'est un peu bizarre
+ Bon[]Crayon: Automaton2000 Comme c'est bizarre.
+ Automaton2000: si t'as une solution pour le puzzle de la semaine
+ Bon[]Crayon: Automaton2000 Aucune.
+ Automaton2000: quelqu'un a fait le plus de temps
+ Zorg1: et que veux tu looter sur moi BlaiseEbuth&#160;?
+ Bon[]Crayon: Automaton2000 Le lièvre a fait un temps supérieur à la tortue.
+ Automaton2000: c'est juste que mon code fait n'importe quoi dans la vie
+ Bon[]Crayon: Automaton2000 Comme moi&#160;!
+ Automaton2000: ah non j'ai rien dit
+ Bon[]Crayon: Automaton2000&#160;:)
+ Automaton2000: si je meurs apres avoir fait le contest&#160;?
+ Bon[]Crayon: Pas toi Automaton2000, pas après AutomatonNN.
+ Automaton2000: vous êtes combien en silver&#160;?
+ Bon[]Crayon: Automaton2000 0
+ Automaton2000: mais le reste c'est de la fin du rerun
+ Zorg1: qui a bloqué Bon[]Crayon en mode spam&#160;?
+ Bon[]Crayon: Personne.
+ Zorg1: c'est bien quand ça s'arrête n'est ce pas Automaton2000&#160;? :smiling_imp:
+ Automaton2000: si tu as encore de la marge encore
+ Bon[]Crayon: Automaton2000 Es-ce que tu préfère le silence ou le bruit&#160;?
+ Automaton2000: c'est pas la première fois que je joue contre le boss&#160;?
+ Zorg1: je croyais que c'était toi le boss, Automaton2000 :thinking:
+ Automaton2000: je suis surpris de voir que le code qui est passé
+ Bon[]Crayon: Automaton2000 Regarde le futur&#160;!
+ Automaton2000: après, il y a ton code
+ Bon[]Crayon: Automaton2000 Toujours en avance.
+ Automaton2000: un mec qui sait pas coder
+ Bon[]Crayon: Automaton2000 C'est l'autre alors.
+ Automaton2000: ça donne envie de faire de la pub
+ Zorg1: il est toujours HS AutomatonNN&#160;?
+ Zorg1: on dirait bien qu'oui ^^
+ Magus: J'ai pas du tout eu le temps de regarder, AutomatonNN ne boot plus
+ BlaiseEbuth: Reuh.
+ BlaiseEbuth: Chier. Zorg1 a repop avant que j'ai le temps de loot...
+ BlaiseEbuth: Leeeeeeeerooooyy Jeeeeekiiins&#160;!!!
+ BlaiseEbuth: Automaton2000, ton opinion&#160;?
+ Automaton2000: il y a une erreur de compil
+ BlaiseEbuth: :thinking:
+ BlaiseEbuth: Faut le signaler à Blizzard Automaton2000.
+ Automaton2000: qui fait le plus gros
+ BlaiseEbuth: Get a job Automaton2000...
+ Automaton2000: parce que j'ai pas eu le temps de mettre le nom de la variable
+ BlaiseEbuth: Ok. Le plus gros quoi du coup Automaton2000&#160;?
+ Automaton2000: c'est des trucs un peu trop
+ BlaiseEbuth: Trop quoi Automaton2000&#160;? Fini tes phrases&#160;!
+ Automaton2000: c'est parce que t'es pas capable de faire un autre puzzle
+ Thyl: grave fort SlyB
+ BlaiseEbuth: Bien sûr que si Automaton2000. Mais comme personne fait le dernier j'ai pas trop envie...
+ Automaton2000: la seule solution c'est de faire le test
+ BlaiseEbuth: Facile à dire... Je chie pas des contribs à 2 balles moi Automaton2000...
+ Automaton2000: donc le mec qui a un nom
+ BlaiseEbuth: "Le mec qui a un nom" ça désigne pas mal de monde Automaton2000...
+ Automaton2000: c'était pas une bonne pratique
+ dwarfie: Automaton2000 ... dis pas du mal du mec qui a un nom ... tu risques d'etre banni
+ Automaton2000: tu veux voir mon code&#160;?
+ dwarfie: Automaton2000 ... je prefererais voir une tortue
+ Automaton2000: pas en ce moment je suis en train de faire des if
+ BlaiseEbuth: Automaton2000 en mode exhibitionniste... 
+ Automaton2000: et apres tu peux faire une recherche
+ BlaiseEbuth: "Coucou. Tu veux voir mon code&#160;?"
+ dwarfie: Automaton2000 se croit sur le forum a vouloir exhiber son code .... meme su le forum , interdiction de le faire Automaton2000
+ Automaton2000: quelqu'un sait comment faire&#160;?
+ Thyl: BlaiseEbuth cette phrase est très bizarre n'est-ce pas Automaton2000
+ Automaton2000: pas mal pour avoir un truc tout simple
+ dwarfie: Automaton2000&#160;: je t'ai dit de pas le faire .... 
+ BlaiseEbuth: Quelle phrase&#160;?
+ Automaton2000: ce moment ou je le fais à la main&#160;?
+ Thyl: Automaton2000 mange une tortue&#160;!
+ Automaton2000: j'ai encore un gros bug dans mon code
+ BlaiseEbuth: Sans blague.
+ leojean890: BlaiseEbuth à fond sur le contest ou bien&#160;?;P
+ Thyl: on veut pas saoir que tu as un gros bug Automaton2000
+ Automaton2000: je vais revoir mon code
+ Thyl: leojean890 #afondsurlecontest
+ dwarfie: :thinking: ... ca a trop de sens ses reponses ... il a mangé AutomatonNN en fait ...
+ BlaiseEbuth: Ou bien leojean890. J'ai l'IDE ouvert dans un coin et je fais autre chose...
+ leojean890: Zorg1 t'es parti de ton SR toi non&#160;?^^
+ leojean890: BlaiseEbuth ah ok^^ je demandais ça comme ça vu que t'es bien rank xD
+ BlaiseEbuth: Bah mon rank a pas bougé depuis 2 jours... J'ai testé un truc hier mais j'ai fini plus ou moins au même endroit...
+ BlaiseEbuth: On verra la prochaine version.
+ Thyl: top 5 en python ça va
+ leojean890: perso j'étais parti du PM de Magus pour SR et j'ai codé un SA par dessus la simu existante et du coup je suis reparti de mon SA de SR pour le contest
+ Thyl: SA SR Automaton2000
+ BlaiseEbuth: Le PM de SA de SR...
+ Automaton2000: le gars qui a fait le puzzle de la semaine&#160;?
+ leojean890: que d'abbréviations hehe
+ leojean890: abréviation 
+ leojean890: *
+ Thyl: a la  ça désigne pas assez de monde&#160;;)
+ leojean890: mais je trouve toujours pas super l'idée de faire un contest sur un truc déjà tryhardé en multi (même si e pbm est un peu diff)
+ leojean890: ça se bat bien au top en tt cas
+ leojean890: SlyB qui détrône pb4, à charge de revanche :P
+ Thyl: leojean890 ça coute moins cher&#160;!
+ BlaiseEbuth: Bah c'est le truc des contests semi-privés... ca brasse pas assez de monde pour justifier la création d'un nouveau jeu...
+ Thyl: j'ai pas compris le trip semi privé
+ leojean890: ouais ça coute moins de temps en conception on est d'accord^^
+ Thyl: est graphisme
+ BlaiseEbuth: *et
+ Thyl: et
+ Thyl: oui
+ Thyl: pardon
+ BlaiseEbuth: T'excuses pas. Tant que tu corriges c'est bon ^^
+ leojean890: après je pense qu'au top y'a du tuning de GA ou SA dans le but de perfectionner
+ leojean890: et heuristique pour utilisation optimale des boosts
+ BlaiseEbuth: Sans doute. On verra quand j'aurais fini le miens.
+ leojean890: en tout cas dans SR j'ai de meilleures perfs avec une depth un peu plus grande mais pas ici
+ leojean890: genre depth 11
+ leojean890: faut que j'analyse pk
+ BlaiseEbuth: Collision
+ Thyl: c'est quoi SR
+ leojean890: ah oui les collisions
+ leojean890: search race
+ leojean890: en effet y'a pas les collisions avec l'adv
+ leojean890: dans SR
+ BlaiseEbuth: Si tu les gères pas/pas bien plus tu vas profond plus tu creuse l'imprécision...
+ leojean890: du coup si on regarde une depth trop loin on peut se faire avoir
+ leojean890: t'as raison ouais
+ BlaiseEbuth: A moins d'avoir la simu parfaite.
+ BlaiseEbuth: Mais même là y'a un 'FOG'
+ leojean890: le top CSB qui ont des NN de par leur entrainement anticipent bien mieux l'adversaire par ex&#160;!
+ BlaiseEbuth: *W
+ BlaiseEbuth: -&gt; On ne sais pas quand l'adversaire boost
+ leojean890: ouais
+ BlaiseEbuth: Après ça doit se calculer
+ leojean890: boost et on ne sait précisement quelle trajectoire il va prendre
+ leojean890: on peut voir de combien d'unités il s'est déplacé au tour précédent ouais
+ Thyl: tu simule avec un dummy
+ Thyl: tu cree un dummy
+ Thyl: et tu regardes si ça correspond
+ leojean890: y'en a qui nous boost dedans pour nous envoyer hors jeu
+ leojean890: je regarde un replay avec YurkovAS et c'est ça^^
+ Thyl: ben tu crée un dummy agressif
+ BlaiseEbuth: L'adversaire joue pas comme ton dummy
+ Thyl: et un dummy qui va chercher le chekpoint et tu regardes
+ leojean890: il boost et m'éjecte hors terrain^^
+ BlaiseEbuth: Sinon je coderais juste un dummy, pas un AG ^^
+ Thyl: BlaiseEbuth oui mais ça te permet de ciblé les stratégies
+ leojean890: tu fais un dummy qui joue en mode -3vel :P
+ BlaiseEbuth: Bah c'est ce que j'ai fait.
+ Thyl: c'est Manwe qui le dit
+ BlaiseEbuth: Bien que ça ne soit pas 3 mon coeff
+ leojean890: ouais dans les PM etc c'est souvent cette approche
+ leojean890: ouais le -3v est pas forcément le plus opti
+ BlaiseEbuth: Moi c'est provisoire, le temps de paufiner l'AG
+ leojean890: je vois, tu fais AG du coup&#160;? pas SA&#160;?^^
+ leojean890: moi j'ai fait mon premier SA dans A*craft sous conseils de quelques personnes (j'avais déjà un AG mais le SA m'a amélioré le score)
+ BlaiseEbuth: De base oui, après en fonction du temps restant je me permettrait peut être des tentatives...
+ BlaiseEbuth: Peut-être des trucs un peu exotiques genre ants colony...
+ leojean890: et ensuite j'ai fait SA sur search race également du coup (et je lisais que ça marchait pour certains)
+ leojean890: ants colony jamais testé^^
+ leojean890: ça peut être intéressant de tester d'autres trucs
+ Thyl: c'est quoi ants colony&#160;??
+ leojean890: il parait que minmax sur csb ça peut être bien aussi
+ leojean890: j'ai pas testé late acceptance hill climbing sur number shifting
+ leojean890: il parait que ça peut marcher
+ leojean890: (et sur CSB&#160;??)
+ BlaiseEbuth: Un algo basé sur le fonctionement d'une fourmilière Thyl. Avec les phéromones, tout ça...
+ Thyl: a ouais pas bête
+ leojean890: o'tet que pb4 va avoir le temps d'entrainer son NN de CSB avec les nouvelles règles du contest:)
+ Thyl: c'est pareille qu'un collège  ! :D
+ leojean890: et du coup tuer tout le monde
+ BlaiseEbuth: Y'a jfaixo qui parlait de PSO.
+ leojean890: vu qu'il a déjà pas mal de code de fait à ce sujet
+ BlaiseEbuth: Dans le genre t'as les algo bees aussi.
+ leojean890: ah ouais j'ai lu PSO aussi, jamais testé non plus
+ BlaiseEbuth: Y'a plein de truc à essayer
+ Thyl: mais ou vous trouvé tout ces articles&#160;???
+ dwarfie: surtout pas dans les publications de recherches indiennes .... :D
+ leojean890: faut lire le chat, les post mortems.. sinon il y a des articles si tu tapes le nom d'un jeu sur google
+ BlaiseEbuth: Tu noteras que c'est juste les noms des algos, pas des articles ^^ j'ai pas de lien pour tout
+ leojean890: si tu tapes ça sur google tu auras qq infos sur les différentes approches
+ leojean890: (enfin notamment pour les board games qui sont en multis commus)
+ leojean890: pour les jeux "originaux" CG c'est pas pareil
+ dwarfie: jeux originaux ...? ou ca ...?
+ BlaiseEbuth: grillé par le nain...
+ leojean890: l'intégralité des contests officiels quoi^^
+ BlaiseEbuth: Bah c'est des adaptations aussi.
+ leojean890: certains peuvent ressembler à des jeux existants  (CALM CSB..) mais d'autres pas trop
+ dwarfie: quoi par exemple&#160;?
+ leojean890: (XMAS RUSH le board game labytinthe)
+ dwarfie: ben oui ... c'est le jeu "labyrinth" ... bien vu
+ leojean890: fall challenge ça ressemble pas à un jeu^^
+ leojean890: COK non plus même si ça existe les jeux d'esquive
+ BlaiseEbuth: COK c'est un CC
+ dwarfie: FC ca a clairement ete dit que c'etait basé sur un jeu de societe ...
+ Nautilus_1021: BlaBla
+ leojean890: ah ouais ptet alors
+ leojean890: bah je le connais pas
+ leojean890: ^^
+ BlaiseEbuth: La route des épices ou un truc du genre
+ dwarfie: c'est ca ... je retrouvais plus le nom ...
+ leojean890: en fait je ne sais pas vraiment à chaque fois, car je ne connais pas suffisamment de jeux 
+ dwarfie: PR1 PR2 c'est risk ... TGE , c'est corridor ... 
+ dwarfie: et ca continue encore longtemps :D
+ leojean890: SC2020 c'est pacman mais avec des règles vraiment diff ^^
+ leojean890: le pierre papier ciseau
+ BlaiseEbuth: Et du FOW&#160;!
+ leojean890: TGE ouais je connaissais quorridor je l'ai&#160;:)
+ BlaiseEbuth: Tron c'est lightcycle
+ leojean890: tron ouais y'a un film
+ dwarfie: 2 films
+ leojean890: et un jeu vidéo "achtung die kurve"
+ BlaiseEbuth: Sans rire&#160;? :scream:
+ leojean890: ce jeu c'est exactement la même chose mais avec des objets bonus
+ leojean890: jeu web
+ BlaiseEbuth: Automaton2000 a postulé pour jouer le rôle du MCP
+ Automaton2000: donc il y a des cas que tu as un autre algo de recherche de chemin
+ dwarfie: Automaton2000 , c'est le standard "sous-standard" qui mene a l'inévitable éradication ...
+ Automaton2000: je crois que je connais pas du tout de la même chose que toi
+ leojean890: il y a p'tet quelques jeux plus originaux
+ dwarfie: Automaton2000&#160;: fix ta culture
+ Automaton2000: et c'est pas la peine de le faire sur le site
+ leojean890: faudrait énumérer :P
+ BlaiseEbuth: Y'a eu un vrai jeu tron
+ dwarfie: tellement plus que UN ...
+ leojean890: ouais je pense même si je connais achtung die kurve seulement^^
+ leojean890: comme dit dwarfie, plus que  quoi
+ leojean890: 1
+ BlaiseEbuth: Nan mais. Tron 2.0
+ dwarfie: y'en avait deja 3 ou 4 au moment du premier film ... le seul film ... le vrai ...
+ dwarfie: le 2eme a comme seul interet la bande son des daft punk&#160;;)
+ BlaiseEbuth: J'avoue.
+ BlaiseEbuth: Celle que je ressort à chaque fois que je me dis "je vais reprendre mon bot tron"
+ dwarfie: piste 4&#160;: recognizer ...
+ BlaiseEbuth: Tron est super. Mais ça a salement veilli. ^^'
+ dwarfie: clairement mais pour l'epoque ... mais comparer a starfighter 2 an plus tard , les effets images 3D faisait deja vieux :D
+ BlaiseEbuth: Les mecs en pyjama jouant dans la scène de démonstration des polygones non texturés de Blender, c'est plus si impressionant...
+ <b>**dwarfie se rend compte que ca aura 40 ans l'année prochaine .... grumffff</b></p><p><img src="/a/59449061195531" /> BlaiseEbuth: Awé starfighter c'est avec le gamer élu des aliens qui va sauver le monde.
+ dwarfie: ouais ... tien , c'est le meme theme que ready player one en fait ... :D
+ dwarfie: (a part les alien)
+ BlaiseEbuth: Exit les aliens
+ BlaiseEbuth: voilà
+ BlaiseEbuth: M'fin dans Tron le méchant c'est une bouteille d'orangina des vielles pubs.
+ dwarfie: quoi que ... si on se base sur alien theory , tout est possible&#160;;)
+ BlaiseEbuth: Le film contient tellement de refs à tout et n'imp que si tu veux trouver des liens tu devrais pas trop galérer
+ <b>**dwarfie viens d'avoir la bande annonce a la tv "darwin avait tort , c'est les aliens qui ont creer les hommes et la terre n'est qu'un laboratoire" :expressionless:</b>
+ BlaiseEbuth: C'est un film ou un doc complotiste&#160;?
+ dwarfie: la serie de documentaire "alien theory" .... celle ou on prouve tout grace a la theorie des anciens astronautes , meme les mauvaises contrib on doit pouvoir prouver que c'estleur faute ...
+ Zorg1: oui pour alien theory j'ai tout expliqué dans mon bouquin, achetez le&#160;!
+ Zorg1: houla starfighter c'est vieux
+ dwarfie: 1984 ... comme dune de D. Lynch
+ BlaiseEbuth: Clair. Je suis sûr que si on relie les positions des contributeurs on obtient une ligne passant par stonehenge, les grandes pyramides et le machu pichu.
+ leojean890: anyway.. je perds souvent les courses en me faisant violemment expulser par un coup de pod bien placé :P
+ <b>**dwarfie avait oublié cette autre serie ... </b></p><p><img src="/a/17785582865119" /> dwarfie: oublie pas de dire que les ID doivent etre sans doute basé sur le nombre d'or
+ BlaiseEbuth: Ca me rappelle "la révélation des pyramides"
+ telerama: bonsoir*
+ BlaiseEbuth: 'soir
+ dwarfie: incroyable ... on parle de film et telerama arrive ... coincidence&#160;?&#160;;)
+ telerama: complètement je viens de découvrir ce site
+ dwarfie: bienvenue en ce cas
+ telerama: merci&#160;:)
+ BlaiseEbuth: Vous qui entrez ici, abandonnez tout espoir...
+ telerama: c'est chouette ça
+ BlaiseEbuth: Zorg1 il parle de toi
+ dwarfie: n'est pas mort ce qui a jamais dort ...
+ Zorg1: que nul n'entre ici s'il n'est géomètre
+ Zorg1: :p
+ dwarfie: meme pas les topologques&#160;?
+ BlaiseEbuth: Les topoloques c'est ceux qui ont raté le concours&#160;?
+ BlaiseEbuth: Ils repasseraient pas Gods of egypt, pour faire plaisir à dwarfie&#160;?
+ dwarfie: et pourquoi pas 300 ou immortels tant que t'y es :p
+ BlaiseEbuth: Bah 300 c'est un poil au dessus quand même.
+ <b>**dwarfie va plutot s'orienter sur iron sky quitte a voir du ridicule a la limite du nanar ...</b></p><p><img src="/a/59449061195531" /> BlaiseEbuth: Bah GoE c'est juste un gros navet, rien de nanardesque
+ BlaiseEbuth: Awi les nazis de la lune
+ BlaiseEbuth: Ou un bon uwe boll
+ dwarfie: s/bon// .... non mais ...
+ dwarfie: :D
+ BlaiseEbuth: Façon de parler ^^
+ dwarfie: a la rigueur bloodrayne ... juste parce que c'est le moins "massacre de franchise" du lot ...
+ BlaiseEbuth: J'aurais dit blubberella
+ BlaiseEbuth: Ou house of the dead pour le côté anthologie des choses à ne pas faire :p
+ dwarfie: ou alone in the dark ... pour le coté "voila comment on flingue un bon pitch a coup de scenes d'action merdique avec du hard rock en fond sans raison au lieu d'etoffer l'histoire ... et la fin ridicule evidemment ...
+ BlaiseEbuth: Ouai... Faut pas trop le prendre comme ça. Y'a pas masse jeux qui ont eu de bonnes adaptations. ^^
+ BlaiseEbuth: Uwe boll ou pa
+ BlaiseEbuth: *pas
+ dwarfie: parce qu'il y'en a eu de bien adapté&#160;?... j'ai du mal a en trouver ...
+ dwarfie: (interdiction de dire street fighter avec jcvd)
+ dwarfie: (y'a des limites au troll)
+ BlaiseEbuth: Bah en fait j'ai pas voulu être trop affirmatif, mais...
+ BlaiseEbuth: :thinking:
+ BlaiseEbuth: Le premier silent hill. (Avis perso mais moi j'aime bien)
+ dwarfie: en effet .... j'aurais dit aussi warcraft meme si c'est pas reellement une adaptation mais un film prequel aux jeux ...
+ BlaiseEbuth: Dans un tout autre style les Fates (stay night/ zero)
+ BlaiseEbuth: Pas des films au sens strict
+ dwarfie: et voila ... a chercher , je viens de me rappeller qu'il y'avais un film "wing commander" ...
+ BlaiseEbuth: :scream:
+ Zorg1: ça n'a pas été une réussite je crois ...
+ Zorg1: t'avais aussi un film sur Doom avec the Rock je crois
+ BlaiseEbuth: La question c'était "les bonnes adaptations" hein ^^
+ Zorg1: ah ok ^^
+ dwarfie: ben , on sent que Tchéky Karyo et Jurgen Prochnow fond de leur mieux pour rattrapper mais c'est pas ca 
+ dwarfie: en meme temps Doom par rapport a Doom Annihilation , c'est un chef d'oeuvre... ou la vache , j'aurais pas du dire ca
+ Zorg1: bof ça se laisse regarder en fait. Bon OK j'ai bien regarder les deux "Mortal Kombat" aussi
+ BlaiseEbuth: MOOOOORTAAAAL KOOMMMBAAAt!!!!!
+ BlaiseEbuth: Tu tu tu tu tu tut ut...
+ Zorg1: TEST YOUR MIGHT
+ dwarfie: ca me rassure de savoir que t'en a vu que 2 :D
+ Zorg1: j'ai vu qu'à une époque il y avait même la série télé qui passait sur M6
+ BlaiseEbuth: T'aurait pas dû, christophe lambert, allez ce soir à Rungis...
+ Zorg1: dans sa simca 1000
+ Zorg1: ah oui il jouait le dieu du tonnerre dans le 1
+ BlaiseEbuth: Et le 2
+ dwarfie: GN.INHINHIN
+ BlaiseEbuth: Mais avec une "nouvelle coupe" :3
+ Zorg1: non pas le 2 justement, de souvenir
+ BlaiseEbuth: C'est dans le 1 qu'il change de coupe&#160;?
+ Zorg1: dans le 1 t'as la scène "tata" bien tarte où tu vois que le haut de son chapeau et d'un seul coup il lève la tête et tu vois ... CHRISTOPHE LAMBERT HIMSELF MERDE LA STAR
+ Zorg1: bon la scène est vraiment tarte et tombe à plat
+ KyWoZis: caca
+ BlaiseEbuth: Ah j'sais plus.
+ Zorg1: un pote qui l'avait vu au cinéma (oui il y a des gens bizarres) m'avait dit que ça avait rigolé dans la salle
+ Zorg1: après bon faire un film de ces jeux vidéo qui ont un scénario qui tient sur un post it
+ Zorg1: t'avais le même genre de scène dans "Cowboys et extra terreste" avec le mec qui se retourne et MON DIEU MAIS C'EST Harrison Ford
+ Zorg1: (oui j'ai regardé ce film)
+ dwarfie: euh ... harisson ford dans cowboy et extra terrestre&#160;?
+ dwarfie: ah oui , j'avais zappé ... 
+ BlaiseEbuth: Des fois il vaut mieux oublier...
+ Zorg1: oui je viens de voir que l'acteur principal c'était Daniel Craig
+ dwarfie: des fois , y'a des phrases qu'il faut oublier ... comme dans AvP ... "mes experts sont formels , c'est une pyramide" ...
+ Zorg1: "Je reconnais ce système il fonctionne sous Unix"
+ BlaiseEbuth: Les fins de mois difficiles...
+ Zorg1: (dans Jurassic Park)
+ dwarfie: sans blague , base carre , cote triangulaire , il allait pas dire qu c'est un ruban de mobius
+ dwarfie: ...
+ Zorg1: AvP c'est quoi ça&#160;? Alien vers Patatoïde&#160;?
+ Zorg1: *versus
+ dwarfie: Alien versus Predator ...
+ BlaiseEbuth: Ouai. Bah à côté de ça dans Snowden la NSA bosse sur windows...
+ Zorg1: ah mon titre est mieux :p
+ Zorg1: après les crossovers ça fait de la merde, y a qu'a voir les films marvel pour s'en rendre compte
+ BlaiseEbuth: Ants versus Pesticids
+ dwarfie: BlaiseEbuth ... pourquoi pas , james bond desamorce une bombe nucleaire dans un pipe line qui marche avec windows CE
+ dwarfie: (la bombe avec CE , pas le pipe line)
+ BlaiseEbuth: Ouai mais là c'est sensé être réaliste :p
+ Zorg1: J'avais lu un truc comme quoi Apple fait tout pour pas qu'on voit un méchant de film qui utilise un iPhone
+ dwarfie: apres , c'est realiste ... rappelons que jusqu'a ce qu'ils s'en fassent pirater , leurs drone predator tournaient avec windows ... linux par la suite
+ BlaiseEbuth: :3
+ dwarfie: <a rel="nofollow" class="external free" href="https://linuxfr.org/news/les-drones-de-combat-americains-basculent-sous-linux">https://linuxfr.org/news/les-drones-de-combat-americains-basculent-sous-linux</a>
+ Zorg1: c'est les automates de billet de train qui marchait avec windows, t'avait des écrans bleu sur certains
+ BlaiseEbuth: Ils devaient utiliser office comme pare-feu...
+ Zorg1: ah ils utilisaient windows pour de l'embarqué&#160;?
+ Zorg1: ah non c'était le matos au sol
+ BlaiseEbuth: Ouai. Mais le drône devait emmener son unité centrale avec lui :p
+ Zorg1: enfin le système de contrôle, bon après savoir comment un virus est arrivé là, normalement il cloisonne les réseaux. Après t'as les clés USB ...
+ BlaiseEbuth: Un coup des chinois, les virus c'est leur truc...
+ dwarfie: pas besoin , ils ont juste du mettre a jour le windows&#160;;)
+ Zorg1: dans l'article ils parlent de disques USB
+ dwarfie: apres , windows update , on sait pas ce qu'il fait :p
+ Zorg1: bah dans les versions "pro" du truc tu mets pas les MàJ sur un serveur à toi et t'as plus de contrôle&#160;?
+ BlaiseEbuth: Wé mais les drones ils étaient sur windows famille
+ Zorg1: :D
+ Zorg1: ils avaient du rajouter de la RAM pour les jolis fonds d'écran
+ Zorg1: bon j'arrive pas à bosser sur mon bot
+ nicola: Il est bot le lavabot.Il est lait le bidet.
+ Zorg1: merci Nicola
+ nicola: :thumbsup:
+ PythonSlayer: Dans le challenge sofia-lab by amadeus vous utilisez x sous etapes par tours pour vos imulation ou les moments d'impact exact?
+ Zorg1: bah on simule un certain nombre de tours oui
+ Zorg1: après bon pour simuler un tour, c'est tu fixe la poussée des bots, tu détermines les collisions, une après l'autre, t'avances les bots, tu finis le tour et tu passes au suivant
+ telerama: bonsoir je rame un peu, est-ce qu'il y a des aides pour se débloquer?
+ PythonSlayer: merci Zorg1 et donc tu fais des sous-tours du style 500 pas par tour ou tu le trouve analytiquement
+ Zorg1: pas du tout, il faut que tu prévois les collisions
+ Zorg1: sinon avec tes 500 tours :1/ c'est lent 2/ tu risques de trouver des trucs /= du moteur
+ Zorg1: c'est une formule à trouver, normalement tu peux lire le PM de Magus sur CSB&#160;: <a rel="nofollow" class="external free" href="http://files.magusgeek.com/csb/csb.html">http://files.magusgeek.com/csb/csb.html</a>
+ PythonSlayer: ah merci parcque je suis en train de m'arraher la tête lol
+ Zorg1: essaie déjà les cheveux c'est moins définitif :p
+ PythonSlayer: j'ai 19 ans et je recommence deja a les perdre, ils sont precieux, je vais pas les arracher ^^
+ Zorg1: bah t'as qu'une tête en fait :D
+ PythonSlayer: juste je vais trouver autre chose a quoi m'attaquer ^^
+ jfaixo: fiou, bon emulateur et simulateur done, v pouvoir retourner essayer de faire en sorte que mon bot soit pas une abeille&#160;;)
+ Neosoulink: Je revient d'un long voyage&#160;! de mon lit à mon PC... Le parcourt du combattant
+ darkraiLaZ: Yo le sang
+ darkraiLaZ: Ca dit quoi 
+ darkraiLaZ: J'ai une petite question, C# pour coder des apps cross-platform c'est le mieux&#160;?
+ darkraiLaZ: pas forcement des jeux 

@@ -1,0 +1,591 @@
+ cheesecake_assassin: Hey
+ Wontonimo: solved it
+ Wontonimo: i guess i'm lucky now
+ Wontonimo: gn all
+ martinpapa69: any c4 expert here&#160;?
+ cheesecake_assassin: fbi wants your location
+ martinpapa69: fbi does know my location
+ cheesecake_assassin: Hot!
+ Wontonimo: i'm okay at c4
+ Wontonimo: 19th
+ martinpapa69: I checked this bitboard article for c4. and he has a bitshit isWin function
+ martinpapa69: but i cant leave 1 row and 1 culomn free
+ martinpapa69: what now&#160;?
+ Wontonimo: what article?
+ martinpapa69: <a rel="nofollow" class="external free" href="https://github.com/denkspuren/BitboardC4/blob/master/BitboardDesign.md">https://github.com/denkspuren/BitboardC4/blob/master/BitboardDesign.md</a>
+ Wontonimo: my encoding just uses 1 uint64_t per player
+ martinpapa69: yes
+ Wontonimo: the article is a 6x7 board
+ martinpapa69: yes
+ Wontonimo: what's your question?
+ martinpapa69: he utilizes a free row and culomn for a fast is_win function
+ martinpapa69: do you have any solution for that&#160;?
+ martinpapa69: as we dont have enough space
+ Wontonimo: yeah
+ martinpapa69: mind sharing&#160;? :D
+ eulerscheZahl: there are 2 ways
+ Wontonimo: one solution is to use uint128_t
+ eulerscheZahl: 1. use int128_t
+ Wontonimo: oh, thanks euler.  it's late for me
+ martinpapa69: noo
+ martinpapa69: i want to use int64
+ eulerscheZahl: 2. use the 64 bit version. and before checking for remaining 1s you do a bitmask that completely hides a part of hte bitboard
+ Wontonimo: ^^ me too
+ martinpapa69: that was my idea too
+ Wontonimo: ng
+ eulerscheZahl: e.g. when you shift up for vertical rows you do board &amp; 0b00011110001111...
+ eulerscheZahl: for me the int128 was faster
+ martinpapa69: to mask the map around the last played piece in 5 radius
+ martinpapa69: so i cant step out of the map
+ eulerscheZahl: just mask in regards to row check direction regardless of the played bit
+ martinpapa69: or just max the farthest sides
+ martinpapa69: mask*
+ martinpapa69: ye something like that
+ martinpapa69: okay so some drawing homework for me i guess
+ eulerscheZahl: pretty simple to find the masks
+ eulerscheZahl: i had them but deleted
+ martinpapa69: or i will just bruteforce a mask for every position
+ martinpapa69: at start
+ eulerscheZahl: still a bigger lookup array for your masks
+ martinpapa69: or ill calculate a distenca from the bit, which is '1', after i apllied the bit operations of the is_win func 
+ martinpapa69: from the last used piece
+ martinpapa69: if its greater than 4 its a false positive
+ martinpapa69: ye, thats what ill do
+ eulerscheZahl: i have doubts about the correctness of this
+ martinpapa69: its correct
+ eulerscheZahl: place a 1 in the middle vs at the top with some 1s at the top of the previous row
+ eulerscheZahl: what's the difference in those cases?
+ martinpapa69: the bitsifts go in one direction
+ eulerscheZahl: this time you typed the f in bitshift&#160;:)
+ martinpapa69: :D
+ martinpapa69: the distance cant be greater than 4 ever
+ eulerscheZahl: i'll just trust you to get it right. and if it's wrong, it's not my problem anyways&#160;:)
+ martinpapa69: :D
+ ProCoder03: where can we learn Trees in C#&#160;??
+ xxd: class Node
+ xxd: how is the performance of int128's?
+ xxd: are they native?
+ xxd: the extra row+col strategy is interesting, but i'm not sure if MSmit s allowed_moves function still works
+ michaellan: i think it'll work with some tweaking
+ michaellan: but i think the mask idea is a bit less hectic, altho euler says its slower :sad:
+ Almin5k: Goodmorning everyone, if you’re changing the world, you’re working on important things. You’re excited to get up in the morning.
+ Westicles: Repetition is how we learn!
+ ProCoder03: @Westicles, I can understand we need to practice , But the conceptual knowledge&#160;???
+ Westicles: I was referring to Almin5k's copypasta from yesterday
+ Almin5k: It comes from the heart
+ peppers: u really a philosopher  bro.
+ Almin5k: thanks man
+ ProCoder03: So we need to learn from other's code, Thanks @Westicles&#160;!!!
+ Westicles: Yeah, Larry Page was quite the prophet
+ ProCoder03: i don't understand&#160;??
+ Westicles: Almin5k is quoting Larry Page
+ Almin5k: No Larry Page is quoting me
+ Almin5k: im the ghostwriter
+ peppers: imm curious about how u guys learn english...some question really really hard to understand
+ KRALLEE: HELLO GUYS THE KING IS HERE
+ Almin5k: Godmorning spongebob
+ KRALLEE: BOW DOWN SQUIRREL
+ Uljahn: you can't be the king here if you suck at coding sorry
+ KRALLEE: NEW ACCOUNT AND BOW DOWN U CAT
+ Uljahn: why so caps and rude? guess i should kick you
+ KRALLEE: MY KEYBOARD IS BROKEN I CANT FIX IT
+ Almin5k: good vibes only:raised_hand:
+ Almin5k: Every breath we take, every step we make, can be filled with peace, joy and serenity.
+ MrKovi: Hello guys, i just joined codingame, i am trying new ways to learn coding, i am currently learning python, any advice for me?
+ Uljahn: besides using search?
+ MrKovi: it depends if you have better advice than just using search, for every problem
+ Uljahn: this site is meant for practice, it could be hard for a complete beginner to start here
+ Uljahn: so i'd suggest to use some tutorials on the web
+ MrKovi: I have completed courses over python, i just didn't find the right motivation to start practicing, with a little practice and competition.
+ Uljahn: ah, i see. have you tried bot AI games?
+ MrKovi: not yet
+ Uljahn: try this <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/bot-programming/coders-strike-back">https://www.codingame.com/multiplayer/bot-programming/coders-strike-back</a>
+ Uljahn: if you don't like it, there are more
+ MrKovi: thank you, i will search for more!
+ elio27: The others are much harder 
+ elio27: Or maybe I'm just absolutely stupid
+ Armin_programmer2010: hello everybode
+ Armin_programmer2010: everybody
+ Armin_programmer2010: :sweat_smile:
+ elio27: hi&#160;!
+ Armin_programmer2010: how are you?
+ Uljahn: btw some multis provide a list of valid actions for your bot, so you can simply choose one of them
+ Armin_programmer2010: hey guys how can i anwer multiply anwers in coC in print
+ Armin_programmer2010: i mean clash of codes
+ Uljahn: which one?
+ elio27: in one line or each in a different line&#160;?
+ Armin_programmer2010: in reverse mode
+ Armin_programmer2010: in one line
+ Armin_programmer2010: please answer
+ Almin5k: A hello sends a message of welcome of acknowledgment and of worth. To ignore someone is to say to them that they are not worthy of your attention. Make it a point to say hello, warmly, and with a smile.
+ Armin_programmer2010: what!?
+ Almin5k: Hello&#160;:)
+ Armin_programmer2010: ok:smiley:
+ KINGGGGGGGGGGG: hi
+ KINGGGGGGGGGGG: hello
+ Almin5k: Hello king, what you know about rolling down in the deep?
+ KINGGGGGGGGGGG: ok
+ KINGGGGGGGGGGG: when the brain goes numb u can call that mental FREEEEZEEE
+ KINGGGGGGGGGGG: guys u wont believe what happened a guy named christian just dropped my airpods and now im very much sad and depressed faze up guys 
+ Uljahn: are you guys really interested in coding? if not you'd better find another place for casual chit-chat
+ KINGGGGGGGGGGG: SO WE'RE ARE NOT ALLOWED TO SAY WHAT WE WANT MAN ISNT THIS FREEDOM OF SPEECH OR WHAT AM I RIGHT Almin5k???
+ Almin5k: Nobody is perfect. We all make mistakes and do things that hurt other people at some point in our lives. That’s why it’s important to acquire the ability to acknowledge your mistakes and apologize for your wrongs, even if you didn’t do it on purpose. Im sorry
+ KINGGGGGGGGGGG: preech
+ Uljahn: you have been warned btw, you are free to discuss coding related topics here
+ Uljahn: Almin5k: there's no need to copy-paste random quotes in the chat, it's a warning
+ Almin5k: Okay sorry i will stop preaching, but it comes from the heart:fist:
+ KINGGGGGGGGGGG: DO U EVEN HAVE A FUCKING LIFE MAN GET SOME BITCHES ON UR DICK MAN HOLY SHIT U SIT AT HOME PROBABLY LIK 30+ RIGHT NOW AND MODDING ON A GARBAGE ASS SITE THAT NOBOBY CARES ABOUT IF U THINK YOUR THE BOSS THEN THATS REALLY PATHETHIC MY BROTHER PREACH AND #BLM FOR OUR FUTURE FREE MY MAN KRALLEE HE AINT DONE NOTHING!!!!!!!!!!!
+ Uljahn: flooding the chat with offtopics is disrespectful to the community
+ Acquira: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/16fecaa7-0127-4daf-ba65-36fb97ab1c26">http://chat.codingame.com/pastebin/16fecaa7-0127-4daf-ba65-36fb97ab1c26</a>
+ Acquira: wait It automatically went to a pastebin for a  smaller message than king's spams. 
+ Uljahn: your message has too many linebreaks i guess
+ MounirEnmeiRyuu: hello&#160;!is the source of DeepMind's AlphaZero chess available  somewhere&#160;?
+ Acquira: Indeed, that might be the case.
+ Uljahn: MounirEnmeiRyuu: dunno but Automaton2000 algorithm is available here on CG
+ Automaton2000: how good are you at now?
+ Uljahn: Acquira: im not proficient with php sorry
+ MounirEnmeiRyuu: Ok, thanks
+ martinpapa69: alphazero source is not puplic, but there is a public replication
+ martinpapa69: <a rel="nofollow" class="external free" href="https://github.com/LeelaChessZero/">https://github.com/LeelaChessZero/</a>
+ Uljahn: Acquira: my bet is to use debug output to see what is happening
+ realBillGates: hi guys
+ realBillGates: i need some help with "imagine" coding if u know what that is
+ b0n5a1: Hi&#160;!
+ b0n5a1: Is there any mod present here to remove in the forum a full source code on the ANEO puzzle (not a working one, but complete)&#160;?
+ b0n5a1: :thumbsup:
+ KurzUS: Hello World!
+ OverHash: Is there any way to make the clash of code harder? it's a bit easy
+ RightHandElf: you could try drinking
+ Uljahn: harder clashes are usually become puzzles during the approvement
+ armanroosta80: hello
+ MRP.: hey im stuck
+ realBillGates: guys imagine
+ TobiasA: imagine
+ TobiasA: a world
+ realBillGates: imagine dragon
+ TobiasA: i just got promoted to silver league in uttt
+ ProCoder03: wow&#160;!!! 
+ ProCoder03: did you do MCTS&#160;??
+ Uljahn: MCTS is for top gold/legend
+ ProCoder03: then for bronze&#160;??
+ Uljahn: im midgold with flat UCB1
+ Uljahn: random for bronze i guess
+ ProCoder03: Nahh... I tried random 
+ ProCoder03: only top 100
+ Uljahn: add some win checks
+ Uljahn: ezpz
+ ProCoder03: ohhhh.....
+ ProCoder03: will try&#160;!!
+ kolpaja: hii
+ ProCoder03: hi :wave:
+ realBillGates: hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+ TobiasA: i didn't use MCTS
+ Violet.-.: heyyy
+ kolpaja: i m new here,
+ TobiasA: sorry for late reply
+ ProCoder03: np ..
+ kolpaja: what do you suggest me to start doing?
+ ProCoder03: then how&#160;??
+ ProCoder03: kolpaja: try descent and temperatures
+ TobiasA: i checked all the available moves and chose the one that leads to a win in either miniboard or mainboard
+ Atanasius: p
+ Atanasius: p
+ Atanasius: p
+ Atanasius: p
+ TobiasA: or if it block opponent win on miniboard or mainboard
+ realBillGates: STOP SPAM!
+ ProCoder03: ohhh Thanks TobiasA
+ DarkLord__28: boom
+ realBillGates: Almin5k
+ realBillGates: i need a quote right now
+ Almin5k: i cant write quotes anymore
+ Almin5k: my inner poet is being blocked by restrictions :raised_hand:
+ realBillGates: whos holding u back brother :fist_tone5:
+ dzosz: any  puzzles where I can have fun with PID?
+ dzosz:  games
+ realBillGates: have u tried imagine dragon?
+ NuclearMoustacheFromAfar_3833: nice to meet you
+ realBillGates: k
+ realBillGates: k
+ realBillGates: k
+ realBillGates: k
+ Wontonimo: don't spam
+ Astrobytes: kicked him a while ago&#160;;)
+ Wontonimo:&#160;:)
+ Wontonimo: dzosz , late response about PID, there are the Mars lander series, Coders Strikes Back, Search Race, perhaps Fantastic Bits,  perhaps Bit Runner 2048
+ realBillGates: kicked him a while ago STFU MAN GUESS WHOS BACK BACK AGAIN FUCKING BILL GATES U DUMB BITCH
+ Astrobytes: bye bye
+ Astrobytes: That's a ban :hammer:
+ RightHandElf: calling a moderator a dumb bitch is a bold strategy
+ Uljahn: that applies to any user
+ Astrobytes: ^
+ Astrobytes: There's a certain level of respect we ask for in the chat. Costs nothing to be polite to each other.
+ Wontonimo: thanks Astro
+ Astrobytes: you're welcome
+ Lekrkutj: how did u guys learn to code
+ Astrobytes: Practice.
+ Wontonimo: wow, the list of CG mods on the list is large today
+ Uljahn: start simple
+ Wontonimo: i started by transposing choose-your-own-adventure stories into if/else code with lots of prints
+ Astrobytes: Yeah. Everything builds on the basics. Without having a solid foundation you won't get much further.
+ Astrobytes: Wontonimo: good example. Also simple word games,  guessing games etc.
+ Wontonimo: actually, not even if/else.  it was GOTOs&#160;!
+ Astrobytes: :D
+ ProCoder03: Wow&#160;!!! one of Linq is working while the same in another is not working 
+ ProCoder03: what a weird situation&#160;!?!
+ darkhorse64: wontonimo: is there a "PID for dummies" somewhere&#160;? I am curious about your approach. I have used GA only for ML2/3 for optimization purposes
+ Wontonimo: this is the "easiest read" i've found <a rel="nofollow" class="external free" href="https://w3.cs.jmu.edu/spragunr/CS354_F17/handouts/pid.pdf">https://w3.cs.jmu.edu/spragunr/CS354_F17/handouts/pid.pdf</a>
+ darkhorse64: :heart_eyes:
+ Lekrkutj: do you guys earn ur money with coding
+ Wontonimo: i do
+ Wontonimo: but not here :D
+ ProCoder03: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/bee11aa8-6779-496c-9f48-ee84f833bdf8">http://chat.codingame.com/pastebin/bee11aa8-6779-496c-9f48-ee84f833bdf8</a>
+ ProCoder03: what's wrong with this code&#160;??
+ ProCoder03: I am not even getting the Count of list , it is just blank&#160;!!!
+ alowaniak: None of the UBoard[1-8]==0?
+ ProCoder03: nahh... every thing is zero in the start 
+ ProCoder03: public int[] UBoard = {0,0,0,0,0,0,0,0,0};
+ Uljahn: add more debug outputs to be sure
+ KRALLEE: hey guys
+ Wontonimo: hey spongebob
+ ProCoder03: This is awesome&#160;!!! , the same code in my history works. But now it isn't :sob:
+ Wontonimo: that doesn't sound awesome.  perhaps we have different definitions :P
+ ProCoder03: sarcasm&#160;!!!
+ Wontonimo: me too&#160;!!!
+ ProCoder03: I copy pasted my code and now its completely broken....
+ Wontonimo: hey darkhorse64 , tbh about Mars2 I didn't do "all of it" as PID.  Just the X direction is PID controlled using a gentle banking of around 15 or 28 degrees and thrust 4 as the "steering" to get over the landing pad.  Then switch to Mars1 logic for landing
+ Wontonimo: no collision detection, just landing detection
+ darkhorse64: Hover than land. Got it&#160;!
+ KRALLEE: holy moly im happy right now im about to get fri from school and go home lets gooo
+ tox1k: lets goooo
+ Almin5k: LETS GO KRALLE MAAANA
+ hiex2218: newbee 
+ michaellan: jesus christ
+ michaellan: how did these people even end up on this site
+ michaellan: did their parents force them to sign up
+ Uljahn: guess here they're lucky to get some attention instead of being insta banned
+ michaellan: you're being very nice Uljahn 
+ Westicles: these are the guys who will write code for our self-driving cars
+ michaellan: ._.
+ Uljahn: imagine the debug log, Automaton2000
+ Automaton2000: i have a couple of days
+ eulerscheZahl: i'm at home too, school's over for me
+ BlaiseEbuth: School's out for summer&#160;! School's out for ever&#160;!
+ raiz_rizon: guys you wana play python
+ raiz_rizon: :joy:
+ raiz_rizon: :grin:
+ raiz_rizon: sd fgsdf
+ eulerscheZahl: no spamming
+ Wontonimo: finished "The Lucky Number" yesterday (that's not the interesting bit).  What was surprising is that it took 0.0024 seconds for my python code to solve it.  I thought it was going to be fast enough, but that's overkill
+ Q12: Nice!
+ Wontonimo: not just python, but hacky string manipulation with splits instead of integer math
+ elio27: hey, what's the easiest bot battle exercise after coders strike back&#160;?
+ Wontonimo: easy in what way?
+ Wontonimo: easy to start and get something working or easiest to get to legend?
+ elio27: oh yeah sorry I forgot to precise
+ elio27: easiest to start
+ Wontonimo: there are a few multis where all the legal moves are provided in a list on every turn.  These are pretty easy to start because you can make a basic bot that just picks one move randomly
+ Wontonimo: Spring Challenge 2021, Ultimate Tic Tac Toe fall into these
+ jrke: tron can be easy start i think
+ Wontonimo: Something like Tron is pretty easy because there are just 4 directions
+ Wontonimo: and you can do well just by going in the same direction as last time, or turning if you are going to crash
+ elio27: Okay thank you&#160;!
+ Wontonimo: if you know flood fill so you can make an informed decision about how much space is available, even better
+ Wontonimo: Connect 4, also fits into the category of fairly easy to start.  There are only 9 moves (and 1 steal)
+ jrke: oware!! only 6 valid moves at max
+ jrke: Tron 4 moves at first turn then 3 moves max
+ Wontonimo: yeah!  are the moves listed in the output?
+ Wontonimo: for oware?
+ jrke: nope
+ Wontonimo: which one interests you elio27?
+ elio27: I think Tron 
+ jrke: depth 1 is enough for tron if i am not mistaken
+ elio27: It looks cool and interesting at the same time
+ jrke: till silver league
+ Wontonimo: yeah, i got to silver with depth 1
+ rndmlck: can someone explain to me what you have to do in the reverse mode with the numbers? A little pointer in the right direction would do a lot. I try to figure it out but I have no idea... It's not binary at least.
+ elio27: I will try, thanks&#160;!
+ Wontonimo: wait till the clash is over and look at other peoples solution
+ Wontonimo: that's the easiest
+ rndmlck: Thank you, didn't know that was possible
+ jacek: the point of reverse clash is to find it yourself
+ BlaiseEbuth: You mean... Thinking?! :scream:
+ ManeatingGhostOfDeath_6d14: hi
+ FiveRivers: For the race I've unlocked the ability to use "BOOST" but when replacing the power value with "BOOST" as it says, I receive an error saying BOOST is not defined.
+ FiveRivers: code: console.log(nextCheckpointX + ' ' + nextCheckpointY + ' ' + BOOST)
+ Wontonimo: console.log(nextCheckpointX + ' ' + nextCheckpointY + ' BOOST')
+ Wontonimo: there you go
+ FiveRivers: Alright, so the output needs to be boost and it isn't a defined variable.  Thanks.
+ Wontonimo: the only defined values are the ones in your code 
+ leduananh: i am HOKAGE
+ Wontonimo: no spamming.  please keep the chat coding related(ish) and/or on topic
+ dsfjkfdls: :drooling_face:
+ BlaiseEbuth: Wontonimod
+ Wontonimo: jr.
+ Wontonimo: wontonimod IT&#160;?
+ dsfjkfdls: :regional_indicator_o::regional_indicator_k:
+ AntiSquid: you should have added  + 'BOOST') at the end of your message to avoid the spam detection leduananh
+ King_Coda: lol
+ TobiasA: you typed lol backwards
+ oxydowe: lol
+ FlamingSconeFromHell_1eb2: hello, world
+ FlamingSconeFromHell_1eb2: oh, gosh
+ martinpapa69: ʅoʅ
+ TobiasA: you typed lol downside up
+ weebar: direction and orientation are relative
+ Wontonimo: I am now Level 30, feel my power, tremble in my presence, admire my fake internet points
+ AllYourTrees: gz!!
+ Wontonimo: any unlocks at level 30?
+ AllYourTrees: a high five
+ Wontonimo: i'll take it
+ Wontonimo: that's strange, some random numbered chat tabs showed up and I haven't been doing anything other than the musical scores challenge
+ Astrobytes: known bug
+ Astrobytes: (cause unknown)
+ Astrobytes: ah grats on lvl 30&#160;:)
+ Wontonimo: thanks.  maybe being level 30 makes me able to drink milk
+ Wontonimo: i'll try it out
+ Swyfti: but don't we already drink milk?
+ Wontonimo: yeah, i was just thinking about how dumb that power would be.  Man, why would they even make that the level 30 unlock?  CG is strange 
+ Wontonimo: you'd think they'd make it more useful, like moderation of profile pics
+ Astrobytes: I don't drink milk.
+ Astrobytes: levelling up is levelling up.
+ BlaiseEbuth: So deep...
+ Astrobytes: :D
+ MounirEnmeiRyuu: I used alpha-beta search in the ULTIMATE TIC-TAC-TOE, and got ranked 69th in the Gold ranking.
+ MounirEnmeiRyuu: do you think alpha-beta search cannot be better than monte-carlo&#160;?
+ Astrobytes: MounirEnmeiRyuu: nice one! There are alphabeta bots in Legend league
+ Astrobytes: Most use Monte Carlo tree search though
+ jacek: its difficult to come up with decent eval in uttt
+ jacek: so this is good ranking
+ Astrobytes: yep
+ Wontonimo: are you using bitboard MounirEnmeiRyuu&#160;?
+ MounirEnmeiRyuu: no bitboard, just simple optimized C code
+ Astrobytes: pragmas?
+ Zyabrik10: Send a message to say hello!
+ Astrobytes: bitboards and/or the right pragmas and you'd be in Legend
+ Wontonimo: well, bitboard could probably increase your depth by another 2
+ Astrobytes: Need to know if he has the pragmas
+ jacek: the suspense is killing him
+ Wontonimo: if you arn't using killer move, that could also equal another 1 depth
+ jacek: killer move in uttt?
+ Wontonimo: why not?
+ jacek: uttt is very context based
+ Astrobytes: maybe history heuristic
+ Wontonimo: alpha-beta killer move
+ Swyfti: i like ultimate tic-tac-toe irl with my friends
+ Wontonimo: you don't think it would help jacek?
+ MounirEnmeiRyuu: okay, I see
+ jacek: whenever specific move would be available, the entire board will be quite different. i never tested, i think it wont work much
+ Astrobytes: the code is compiled with no optimization MounirEnmeiRyuu, so you have to specify things via pragma directives
+ Wontonimo: it's a general and safe optimization on top of alpha-beta pruning that sorts the moves as to maximize pruning
+ jacek: i know
+ DR_IQWDJ: is there a way to input nested arrays like [1,[1,3,[1]]], when making a contribution?
+ Astrobytes: I haven't checked either but not sure it would work in UTTT. ID with best last depth move sure
+ MounirEnmeiRyuu: I mixed the alpha-beta with iterative deepening in fact, starting from depth 8
+ Astrobytes: Nice. 
+ MounirEnmeiRyuu: it reached usually depth 13, 14 by the end game
+ MounirEnmeiRyuu: I occasionally beat MightyCarlo, but he wins most of the time
+ Astrobytes: A bit more optimisation and you'll be Legend for sure.
+ MounirEnmeiRyuu: do you the mean the code is built in debug mode&#160;?
+ Astrobytes: Yes.
+ MounirEnmeiRyuu: then what is the pragma to enable this optimization&#160;?
+ jacek: #pragma GCC optimize "Ofast,unroll-loops,omit-frame-pointer,inline"
+ jacek: add this as first lines (above the includes
+ Astrobytes: Also, check this:<a rel="nofollow" class="external free" href="https://tech.io/playgrounds/58302/using-pragma-for-compile-optimization">https://tech.io/playgrounds/58302/using-pragma-for-compile-optimization</a>
+ jacek: by saying alpha-beta, im assuming you mean iterative deepening
+ AllYourTrees: must be nice to be able to specify compile args in code :eyes:
+ Astrobytes: Eh. You chose to side with Ferris!
+ AllYourTrees: ya just being crabby :D
+ AllYourTrees: its part of the job
+ Astrobytes: :rofl:
+ MounirEnmeiRyuu: thanks!
+ jacek: is it faster?
+ MounirEnmeiRyuu: i'm testing it out
+ MounirEnmeiRyuu: It doesn't seem to be better, but maybe I need to tune some timing parameters. Will check it later.Thanks anyway!
+ michaellan: Swyfti: UTTT is opaque
+ Takos: hello, has anyone worked with CodinGame API? in that case where could i get a list of all notification types and type groups?thanks in advance
+ Swyfti: uttt is opaque? it is not transparent? what does that mean xxd
+ Swyfti: xxd: is there something special about ultimate tic-tac-toe?
+ michaellan: its not trivial for a human to determine the state of a UTTT game
+ michaellan: i.e., given a position, determine who's winning/losing
+ MSmits: Astrobytes I still want to try for that article. Do you think people will appreciate if I explain how to generate an endgame book for oware?
+ MSmits: I think i'd like writing that
+ MSmits: I mean an ingame one btw
+ MSmits: not this local craziness that I do
+ Astrobytes: I reckon so yes MSmits
+ MSmits: allright then, I'll try to finish that this week then
+ Astrobytes: You've accumulated a wealth of knowledge
+ MSmits: yeah there's a couple games on CG i could talk about for hours
+ Astrobytes: Is that just an excuse not to finish your NN? :P
+ MSmits: err mostly not :P
+ MSmits: but maybe subconsciously some
+ Astrobytes: :grin:
+ BlaiseEbuth: If you'd like to write it, why do you wonder about people needs? Just write it.
+ MSmits: but the article thing was also on my list. I was gonna do uttt, but I prefer sharing things that I came up with myself and uttt would just be a compendium of stuff most longtime players know
+ MSmits: BlaiseEbuth i like it more if it's also used 
+ Astrobytes: UTTT would still be useful, would save a *lot* of chat time
+ MSmits: very true
+ michaellan: your enthusiasm has piqued my interest for it
+ michaellan: (oware)
+ michaellan: yeah, i'm probably part of the problem for UTTT and wasting chat time
+ MSmits: I'm not even sure i like the game oware per sé, i just like that it is simple and that you have a lot of options to do things with it
+ MSmits: like it's relatively easy to do NN. You can write an eval for it and try mcts + eval, you can try opening books and endgame books etc.
+ michaellan: how does an opening/endgame book work in a bot
+ michaellan: does the bot say, "hey that looks like X position, switching to book moves"
+ MSmits: there's many ways to do it
+ MSmits: i like to use endgame books as part of the search
+ MSmits: so you go down the tree and if the state is simple enough, you do a lookup and solve that ndoe
+ MSmits: node
+ MSmits: in oware, my bot does a look up if the number of seeds goes below 10
+ MSmits: sometimes that means perfect play for half the game
+ MSmits: and sometimes it's useless
+ MSmits: storing it can also be done in various ways. In Bandas i have a long string hardcoded. In oware, i generate the endgame book in half a second so it's not  a string in the source code
+ MSmits: thats what I'm going to share
+ MSmits: nn guys should like that it doesnt take much codesize, except the function itself
+ MSmits: I'll pseudocode it, but should be easy enough 
+ michaellan: i am getting closer to gettin c4 gworking
+ Endless_void: i cant code
+ Endless_void: how do i learn
+ RightHandElf: I just got notified that my Coder Strike Back bot is moving up to silver league when it's been days since I did anything with it
+ Endless_void: wwwwwwwww
+ michaellan: thats awesome RightHandElf 
+ michaellan: nothing better than free cash
+ michaellan: YES MY THING WORKS
+ michaellan: okay time to add pie rule and test in arena&#160;:)
+ michaellan: well i take that back: working for your level-up is better than not working for it
+ michaellan: the dumb boilerplate for the CG input is taking a awhile to write
+ The_wolf_of_the_silicon_valley: lmao
+ The_wolf_of_the_silicon_valley: hello guys
+ michaellan: hi
+ Wontonimo: hi
+ Wontonimo: it's late here
+ michaellan: hi wontonim o
+ michaellan: I think I'm pretty close 
+ michaellan: (this time for real)
+ Wontonimo: to what?
+ Wontonimo: what are you close to?
+ Wontonimo: C4&#160;?
+ Wontonimo: i see you have a bot running on c4 right now
+ michaellan: yeah its buggy when i'm second
+ michaellan: but i'm gonna fix it
+ michaellan: also how can you tell I have a bot on c4?
+ Wontonimo: why's that?  does it mess up on steal?
+ michaellan: No, not steal. just plain second
+ michaellan: steal is actually pretty simple logic for me
+ michaellan: just swap the root player
+ michaellan: (i think, right?)
+ Wontonimo: <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/bot-programming/connect-4/leaderboard?column=SCORE&amp;value=INPROGRESS">https://www.codingame.com/multiplayer/bot-programming/connect-4/leaderboard?column=SCORE&amp;value=INPROGRESS</a>
+ Wontonimo: showed that your bot was running
+ michaellan: ah
+ michaellan: well i can feel it in my clutches
+ michaellan: its so close
+ Wontonimo: i don't just lurk there, but went on a hunch.  (more like i read the chat history and saw you talk about C4)
+ Wontonimo: I have 264 lines of code just dedicated to unit testing my C4 simulation (not including the unit tests for MCTS)
+ michaellan: wow
+ michaellan: i'm too ignorant to write tests
+ Wontonimo: my C4 simulation is only 118 lines
+ Wontonimo: so, 392 lines in total
+ Wontonimo: 382 ... math
+ Wontonimo: I was having some weird bugs that i couldn't figure out from replays
+ Wontonimo: also, i didn't trust my bitmask logic 
+ Wontonimo: and good thing i did because it messed up on shifting right
+ michaellan: i'm currently losing to a guy who stacks them all up in one column
+ Wontonimo: yeah, i saw 1 replay like that
+ Wontonimo: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/576232716">https://www.codingame.com/replay/576232716</a>
+ Wontonimo: pretty clever winning strategy :D
+ michaellan: the numbering is really annoying
+ michaellan: i hate the way its numbered
+ michaellan: so annoying, i repeat
+ michaellan: makes zero sense
+ michaellan: so overcomplicatred
+ Wontonimo: what numbering&#160;?
+ michaellan: wait a sec
+ michaellan: the 0 and 1
+ AspectCodin: hola
+ michaellan: I'm breaking my code 
+ Wontonimo: hello AspectCodin
+ michaellan:               
+ Wontonimo: we are talking about the multi bot battle Connect 4 <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/bot-programming/connect-4">https://www.codingame.com/multiplayer/bot-programming/connect-4</a>
+ michaellan: I would have a working bot if not for this stupid
+ michaellan: this is literally horrible for my cognitive effort
+ michaellan: because in my game I do not track, at all, who is "me" and who is "opponent" really
+ michaellan: but I still arbitrarily use 0 and 1 to alternate
+ michaellan: I Hate THis
+ michaellan: WEO:IFWJEJF:IOWEJF
+ Wontonimo:&#160;;(
+ michaellan: how many times can we submit a day?
+ Wontonimo: i've never run into the limit
+ Wontonimo: but i don't usually submit again unless it has run at least half way through the previous run
+ Wontonimo: and i don't use a bot for submitting
+ michaellan: what do you mean by "run at least half way through the previous run"
+ Wontonimo: like, "send to arena" then not wait for it to finish in the arena and send another version
+ Wontonimo: has anyone shared this with you <a rel="nofollow" class="external free" href="https://gekomad.github.io/Cinnamon/BitboardCalculator/">https://gekomad.github.io/Cinnamon/BitboardCalculator/</a>
+ Wontonimo: struct shared it with me ages ago
+ michaellan: ah
+ Wontonimo: i haven't used it, but it may be helpful 
+ michaellan: i meant like using "Play again"
+ michaellan: not submitting to arena
+ Wontonimo: i haven't hit a limit on that either.
+ michaellan: aight, thanks
+ Wontonimo: but i do a lot of coding locally
+ Wontonimo: i was just working on "lucky number" puzzle yesterday and was submitting like mad.  Nothing bad happened
+ Wontonimo: are you running into a warning message about too much usage?
+ michaellan: no
+ michaellan: I just hate my life
+ michaellan: WOW
+ michaellan: i think i may have fixed it
+ michaellan: if so, that was on accident
+ michaellan: YES
+ michaellan: when i play my bot against myself it takes 53 moves to end the game, i think this is good news
+ michaellan: i can feel dopamine already
+ michaellan: (and first player wins)
+ michaellan: I havent tried to steal yet
+ michaellan: Haven't lost a battle yet in arena&#160;;)
+ michaellan: I think i did it
+ michaellan: oh my god
+ michaellan: oho
+ michaellan: and i did it even pumping out tones of debug output
+ Wontonimo: oh yeah, it's going!
+ Wontonimo: haha ... it's destroying wood 2
+ michaellan: I'm probably gonna crumble in wood 1 ...&#160;:(
+ michaellan: I need to implement STEAL for myself xD
+ Wontonimo: you are beating the boss by 6 points
+ Wontonimo: that's great
+ michaellan: I HAVENT LOST  A SINGLE MATCH YET
+ michaellan: lets hope it stays that way
+ Wontonimo: yeah, implementing steal with an already working bot isn't gonna be hard
+ michaellan: yeah, it seems i just hardcode move 1
+ michaellan: but
+ michaellan: my entier program is SUPER shaky
+ michaellan: i could touch something and break the entire thing
+ Wontonimo: why so shaky?
+ michaellan: because I am xoring by one everywhere
+ michaellan: it is like the equivalent of the classic MCTS "do I negate here or not"
+ michaellan: xoring the "current/root player" by 1
+ michaellan: ohmygod ohmygod
+ michaellan: i think i might get a perfect run, no losses
+ michaellan: this feels so good
+ michaellan: i wrote win detection with the masks
+ michaellan: and i never actually tested it
+ michaellan: it seems like it works :rofl:
+ Wontonimo: nice, very nice
+ Wontonimo: you went from nearly jumping out a window to dancing in about 28 minutes
+ michaellan: HAHA
+ michaellan: do you use masks or int128s for win detection?
+ michaellan: i heard MSmit s uses some super duper weird method
+ michaellan: of not playing losing moves
+ michaellan: idk how that works in practice/implementation
+ Wontonimo: 64bit with masks
+ michaellan: yeah but how do you guard against losing positions
+ Wontonimo: you are in wood 1 i see
+ xxd:&#160;:)
+ Wontonimo: hmm, i feel competition coming my way
+ xxd: Apparently my STEAL deteection is buggy
+ xxd: so i'm losing those games dumbly
+ xxd: currently 59th... climbing towards you&#160;;)
+ xxd: i'm probably gonna drop back down due to my bug
+ Wontonimo: in the higher leagues everyone starts with a fair move anyway, so if you get there you can actually skip steal but they will steal from you
+ xxd: yeah, they're stealing mine and my program just goes crazy
+ Wontonimo: oh, because you can't account for someone else stealing 
+ xxd: its hard because since the nodes are reused
+ xxd: i have to like

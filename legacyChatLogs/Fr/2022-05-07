@@ -1,0 +1,478 @@
+ FreexXx: plop est-ce qu'il y a quelqu'un avec de l'experiance en combat de bot&#160;? je ne coomprend pas l'ordre d'execution
+ FreexXx: pour moi un tour de jeu  c'etait 1) on reçoit les inputs 2) on envoie notre sortie
+ FreexXx: mais si je fais un debug avant de recevoir les inputs, un autre au debut des inputs et un dernier avant d'envoyer ma sortie
+ FreexXx: alors j'obtiens 3, 1, 2 
+ FreexXx: (sur le combat de bot&#160;: "BOTG")
+ FreexXx: pire si je debug aussi les inputs alors le debug donne: la liste des inputs, 3 1, 2
+ FreexXx: en faite des le 1er tour ça coince. j'ai sur le 1er tour 1, 2, 3, 1, 2
+ FreexXx: et le tour suivant: 3, 1, 2 et ainsi de suite
+ FreexXx: est-ce juste le debug du player de cg qui fait cela&#160;?
+ Remi.: Salut, l'explication est très simple. Le jeu considère que tu lis dès le début du tour les entrées. Donc tout ce que tu mets AVANT la lecture des entrées est considéré fait à la fin du tour d'avant.
+ Remi.: Faut bien comprendre que le programme qui exécute ton code n'a pas d'autre moyen pour savoir à quel tour tu es. Il ne connais pas tes accolades, et ne peut se fier qu'à ta lecture des entrées.
+ FreexXx: apres je ne pense pas que ça change quoi que ce soit mais c'est deroutant 
+ Remi.: Oui les valeurs affichées dans le débug restent bonne . Faut juste le savoir.
+ Remi.: Après si vraiment ça te perturbe, fait le moins de traitements possibles avant la lecture des entrées dans la boucle de jeu.
+ FreexXx: je n'en fais pas ^^ j'ai une solution prefaite pour tout les combat de bot et plusieurs fichiers et je le colle tout dans une page a la fin, j'ai juste etait derouté pour debug un truc quand je me suis aperçut dans la lecture de mes lignes de debug que j'avais une ligne qui venait 2x 
+ I_love_CoC: Bonjour à tous
+ Sirios: o/
+ I_love_CoC: Si je souhaite connaitre le temps d'éxécution de mon programme je dois taper quoi sous python?
+ I_love_CoC: \o Sirios ça va?
+ Sirios: Question intéressante, je en sais pas y répondre ^^
+ Sirios: Oué on fait aller on va dire&#160;;)
+ Sirios: que je ne sais pas répondre (déso mon cerveau n'est pas encore totalement en marche)
+ Remi.: o/
+ I_love_CoC: \o Remi.
+ Remi.: pour le python je ne sais pas dire, mais c'est pas les utilisateurs qui manquent, je pense que tu auras une réponse.
+ Sirios: ah et pour le C++ du coup Remi.&#160;?
+ VilBoub: en Python tu as la bibliothèque time
+ I_love_CoC: ok merci VilBoub
+ I_love_CoC: j'import time et aprés je time(f) si je veux tester f?
+ VilBoub: oui, time.time() te donne le temps depuis le zéro universel
+ VilBoub: donc tu fais des différences de temps
+ VilBoub: par contre il y a une différence entre le temps sur la machine et le temps du processus
+ Remi.: Attedns Sirios je retrouve et je te répond en privé
+ Remi.: Je ne connais pas par coeur
+ I_love_CoC: merci VilBoub
+ Sirios: Petite question concernant Bulls and Cows 2. Je commence à avoir un algo qui tourne (pour tout ceux &lt; 8 de longueur) par contre il y a un truc qui m'échappe
+ Sirios: j'ai essayé d'identifier le premier chiffre pour mieux comprendre. J'ai donc testé les chiffres de 1 à 9 (vu que ca ne peut pas commencer par 0)
+ Sirios: sauf que aucun ne passe
+ Sirios: Est ce quelqu'un a une idée du pourquoi&#160;?
+ dbdr: Sirios, tu le fais sur le meme match?
+ Sirios: le premier chiffre ayant une length de 1
+ Sirios: oui le test du validateur (sur le testeur pas de probleme)
+ dbdr: le nombre à trouver change à chaque fois
+ Sirios: ah!
+ dbdr: il n'y a pas de validateur fixe
+ Sirios: merci j'avais mm pas envisagé ca!
+ dbdr: ce serait trop facile
+ Sirios: pas faux
+ Sirios: merci dbdr, je commencais vraiment a me poser des questions
+ nicola: I_love_CoC, il y a cProfile,io,pstats pour étudier un processus à fond.
+ I_love_CoC: merci nicola avec time.time() j'ai eu ma réponse 
+ Remi.: Pas de validateur fixe pour B&amp;C2, heureusement&#160;! il y a déjà suffisamment de hardcode dans les puzzles d'optimisation.
+ Remi.: Et sur un puzzle comme celui là, tous les harcodeurs auraient le même score impossible à faire loyalement
+ dbdr: harcoder c'est plus loyal/équitable
+ dbdr: quand le validateur est aléatoire, ça introduit de la chance
+ Remi.: Sauf qu'avec la connaissance des validateurs pour certains et pas pour d'autre (car tout le monde ne va pas télécharger la contribution pour ça), il y a d'entrée de jeu un biais.
+ Remi.: Après je ne critique pas le hardcode, simplement c'est pas le but du jeu.
+ dbdr: tout à fait, tout le monde ne va pas le faire, mais tout le monde peut le faire en théorie. c'est plus équitable de ce point de vue là
+ dbdr: le but du jeu c'est subjectif. si on admet le hardcode pour tous c'est cohérent
+ dbdr: et ça reste un problème compliqué
+ Remi.: D'ailleurs moi même j'ai déjà hardcodé (grâce à ton github d'ailleurs). En l'occurence A*Craft, car vraiment aucune idée de comment faire. Mais sur B&amp;C2, si on construit par avance la liste des valeurs attendues par les validateurs, le jeu n'a plus aucun intérêt. J'aurais bien plus d'estime pour quelqu'un qui hardcode CVZ que B&amp;C2 ^^
+ dbdr: on est d'accord, sur B&amp;C2 çá n'aurait aucun sens
+ Remi.: Du coup c'est légitime d'avoir fait des validateurs aléatoires&#160;!
+ Bon[]Crayon: Bonjour bonjour :ghost:
+ Bon[]Crayon: Salut Automaton2000 .=.e
+ Automaton2000: en gros c'est un bfs avec 0 ajout&#160;?
+ philRG: hello, quelqu'un a compris l'ordre des actions du dernier contest?
+ Bon[]Crayon: o/
+ Bon[]Crayon: C'est dans l'ordre de l'id de tes héros.
+ philRG: et l'adversaire joue en même temps ses actions?
+ philRG: du coup si l'adversaire lance un CONTROL sur un de me héros et j'ai lancé un SHIELD au même tour, qui gagne?
+ Bon[]Crayon: Regarde "Ordre d'action pour un ".tour
+ philRG: c'est déjà fait mais c'est trop imprécis
+ philRG: en gros faut analyser les replays pour vraiment comprendre
+ Bon[]Crayon: ok je ne sais pas.
+ philRG: sur pacman le rock paper scissor était plus clairement expliqué, là c'est assez flou
+ philRG: merci Bon[]Crayon
+ Bon[]Crayon: On a accès au code source..
+ philRG: bah je fais pas de Java et bon çà dépend du codeur...
+ philRG: bon apparemment CONTROL/SHIELD exécutés au tour suivant et WIND sur le tour courant
+ philRG: si j'interprète les règles écrites
+ philRG: donc pour faire le ménager rapidement, mieux vaut faire un WIND
+ philRG: s/ménager/ménage
+ philRG: si je prends les règles de façon littérale
+ Stilgart: bonjour à tous et licorne à Automaton2000
+ Automaton2000: ça c'est le plus simple c'est de faire un vrai truc
+ Stilgart: bonjour à tous et tortue à Automaton2000
+ Automaton2000: il faut que je regarde à l'occasion&#160;;)
+ Bon[]Crayon: o/
+ TomPouce: o/
+ Zorg1: \o
+ dbdr: |o|
+ Sirios: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/df5de1bc-53a0-4749-91a6-a84cdb99c6a2">http://chat.codingame.com/pastebin/df5de1bc-53a0-4749-91a6-a84cdb99c6a2</a>
+ Sirios: Pourquoi ca crée un lien Oo&#160;?
+ Bon[]Crayon: Trop long d'un coup.
+ Sirios: Arg ok
+ Bon[]Crayon: Remi., je n'aime pas le hardcodage non plus mais je ne suis que partiellement d'accord avec toi (c'est rare :p). Pour bulls and cows 2, pour pouvoir hardcoder (sans tricher) il faut avant tout avoir un agorithme qui fonctionne, ensuite un algo capable de trouver les valeurs du validateur et finalement trouver les solutions pour pouvoir les hardcoder.
+ Bon[]Crayon: Perso, bien qu'encore une fois j'ai tendance a détester le harcodage, je trouve que ca a du sens dans le type d'objectif "optimisation". Ce n'est que mon avis&#160;;)
+ Sirios: merci Bon[]Crayon
+ Buk.: o/
+ Bon[]Crayon: \o
+ Zorg1: yop&#160;! Automaton2000 la forme&#160;?
+ Automaton2000: amis des gens qui sont pas dans les membres en ligne.
+ Sirios: Toujours aussi sympa cette Automaton2000
+ Automaton2000: vous en pensez quoi&#160;?
+ Zorg1: pas grand chose Automaton2000
+ Automaton2000: je ne pense pas que ce soit le cas
+ Stilgart: je pense que Automaton2000 ne pense pas que Zorg1 ne pense pas grand chose
+ Automaton2000: ca sert à quoi&#160;?
+ <b>**Stilgart va arrêter de penser et partir douber</b></p><p><img src="/a/69893904259383" /> Stilgart: bouder*
+ Zorg1: c'est malin Stilgart on fait comment pour sortir de la boucle maintenant&#160;? :thinking:
+ Stilgart: on sort pas
+ Stilgart: les boucles finies, c'est pour les faibles
+ dbdr: l'univers est une boucle infinie
+ itsjangri: Coucou, comment on prend la valeur en sorti d'une condition&#160;?, genre je veux additionner tous les nombres paire trouver dans un nombre doncj'ai utiliser une condition if et je veut répurer les résultats de cette sommes
+ Buk.: en python&#160;?
+ itsjangri: oui
+ Buk.: il faut initialiser une variable en dehors de la boucle pour y acceder, enfin si je comprends bien ta question
+ Buk.: envoie ton code sinon 
+ itsjangri: c'était un slash of code
+ itsjangri: mais je vois ce que tu veux dire
+ itsjangri: merci
+ MooMooN: bonjour, j'ai une question con sur les challenges communautaire (pas ceux comme le SC2022), cela s'arrete à la ligue de bois 1. C'est pas prevu d'avoir plus de ligue&#160;?
+ Bon[]Crayon: Une seule ligue un seul Boss AUTOMATON2000
+ Automaton2000: qu'est-ce qui se passe&#160;?
+ Bon[]Crayon: Automaton2000 Salutation Boss&#160;!
+ Automaton2000: du moment qu'il n'y a pas vraiment de la merde&#160;;)
+ MooMooN: merci bon[]crzyon 
+ Bon[]Crayon: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/633146218">https://www.codingame.com/share-replay/633146218</a>
+ Bon[]Crayon: À partir de l'image 10, le monstre 8 ,qui va de haut en bas, prend 0 dégats&#160;! 
+ Zorg1: à priori c'est normal je dirais
+ Zorg1: (ça serait bien d'avoir un tool pour mesurer les distances d'ans l'IHM ^^)
+ <b>**Stilgart a vaincu sa déclaration d'impôts \o/</b></p><p><img src="/a/69893904259383" /> Stilgart: fun fact, j'ai bien corrigé l'erreur signalée par la dgfip... puis une autre encore plus flagrante
+ Stilgart: ils étaient fiers de me dire que j'allais payé mon d'impôts, mais du coup j'en paie un peu plus :D
+ Stilgart: Automaton2000: l'an prochain, c'est toi qui préremplit ma déclaration&#160;!
+ Automaton2000: la question c'est est-ce que je dois avoir un bug dans ma simu
+ Stilgart: si tu veux te mettre au niveau de cette année, il va t'en falloir un gros, Automaton2000
+ Automaton2000: suffit de lire les règles :p
+ dwarfie: bien vu Automaton2000 :rofl:
+ Automaton2000: je crois qu'il faut que tu le vois pas
+ dwarfie: Automaton2000&#160;: tu vas hider en plus&#160;? 
+ Automaton2000: bon je vais tenter de faire un jeu de plateau?
+ PhOeNyX: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/633161421">https://www.codingame.com/share-replay/633161421</a>
+ PhOeNyX: omg
+ PhOeNyX: Je timeout systématiquement mais je ne sais pas pourquoi
+ dwarfie: sur que c'est un timeout ...?
+ dwarfie: t'as oeut etre "juste" fait segfault
+ PhOeNyX: Non ça met timeout, et quand je réduis la limite de 45ms à 25ms ça réduit le nombre de timeout
+ PhOeNyX: Mr le gc doit passer par là, je vais m'occuper de la mémoire
+ dwarfie: humm ... ca met timeout aussi sur les segfault ... d'ou ma question
+ PhOeNyX: Wow l'algo c'était un BFS à la base ça faisait du depth 6 à 10
+ PhOeNyX: J'ai changé en beam ça fait depth 642
+ PhOeNyX: Mais ça timeout quand même, après 42 frames
+ PhOeNyX: Ah c'était à cause de la fin de jeu
+ PhOeNyX: En moyenne ça donne depth 47 sur toute une partie
+ PhOeNyX: C'est pas dégueu
+ PhOeNyX: Comment bien choisir la largeur du beam&#160;?
+ PhOeNyX: Vu que le branching factor est de 4^n on peut garantir une profondeur 4 à partir d'une profondeur donnée en choisissant 256 par exemple
+ PhOeNyX: Un beam de largeur 256 fait 1M de points de plus qu'un beam de largeur 160
+ 4839565: Yo tout l'monde&#160;! Automaton2000&#160;!
+ Automaton2000: dixit le mec qui a fait son intéressant à tsp
+ dwarfie: :rofl:
+ Bon[]Crayon: o/
+ Bon[]Crayon:&#160;:)
+ BlaiseEbuth: tsp? :thinking:
+ conadal: :rolling_eyes:
+ BlaiseEbuth: Je l'ai pas, trop d'acronymes sur ce site... En plus avec les changements de noms...
+ nicola: Un Slash of Code&#160;? Il programmait les Guns ’n’ Roses&#160;?
+ BlaiseEbuth: sweet bot o' mine...
+ nicola: Rocket bot&#160;!
+ nicola: Well well well,My robot!
+ Maikoke: Ragnar Lothbrok&#160;!
+ Bon[]Crayon: Boot my bot&#160;?
+ PhOeNyX: Ils sont aussi en BS ceux qui font plus de 50M à l'optim 2048&#160;?
+ PhOeNyX: Ou alors ils ont juste une heuristique plus complexe que juste le score&#160;? x)
+ Stilgart: BlaiseEbuth: <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/optimization/travelling-salesman">https://www.codingame.com/multiplayer/optimization/travelling-salesman</a>
+ BlaiseEbuth: Bah y'a pas de 'p'...
+ Stilgart: si, dans oPtimisation
+ Stilgart: Automaton2000: explique lui
+ Automaton2000: on verra ce que ça a été approuvé the-lost-child-episode-1&#160;?
+ TKirishima: Automaton2000
+ Automaton2000: mais je vais me coucher
+ Stilgart: on voit à quel point on peut compter sur les bots ici...
+ TKirishima: xD
+ Stilgart: Automaton2000: n'oublie pas de manger ton taco avant 
+ Automaton2000: y a des cas où tu ne vois pas du tout
+ BlaiseEbuth: Stoi l'pas du tout Automaton2000
+ Automaton2000: quand je code en haskell&#160;?
+ BlaiseEbuth: Tout le temps Automaton2000
+ Automaton2000: ah non c'est pas une bonne idée
+ TKirishima: Stilgart, qu'est ce que tu fais avec Haskell principalement&#160;?
+ TKirishima: Je crois que c'est bon pour l'analyse syntaxique mais c'est plutôt assez restreint comme domaine l'analyse syntaxique non&#160;?
+ BlaiseEbuth: La même chose qu'avec les autres langages TKirishima: Tenter de dominer le monde&#160;!
+ Stilgart: TKirishima: du code
+ BlaiseEbuth: C'est décevant... -_-
+ Stilgart: en même temps, je ne sais pas quoi répondre d'autre
+ BlaiseEbuth: J'me doute...
+ Stilgart: d'autant que je ne code pas vraiment dans ma vie professionnelle
+ Ristretto: bonsoir, je vois que les solutions python ultra courtes sur les challenges de longueur de code. Il doit y avoir des astuces pour fortement réduire la longueur de code pour lire l'input mais je ne trouve rien après de longues recherches. Une idée de pistes que je pourrais explorer&#160;?
+ Stilgart: tricher
+ BlaiseEbuth: Encoder ton code
+ TKirishima: Ristretto Python Golfer
+ BlaiseEbuth: voilà ça
+ Stilgart: un charactère unicode, si grand soit il, ne compte quand même que pour 1
+ Stilgart: -h
+ Rhemyr: <a rel="nofollow" class="external free" href="https://www.codingame.com/blog/code-golf-python/">https://www.codingame.com/blog/code-golf-python/</a>
+ BlaiseEbuth: Sinon pour les inputs y'a plusieurs astuces
+ Ristretto: aaaaah je vais regarder merci
+ TKirishima: Stilgart oui mais par exemple tu ne vas pas faire un OS avec Haskell, si&#160;? 
+ BlaiseEbuth: :popcorn:
+ TKirishima: Ristretto, je te conseille aussi de faire pas mal de Clash of code ça aide pas mal. Sinon tu peux aussi aller sur StackExchange pour regarder les solutions des gens ou <a rel="nofollow" class="external free" href="https://codegolf.stackexchange.com/questions/54/tips-for-golfing-in-python">https://codegolf.stackexchange.com/questions/54/tips-for-golfing-in-python</a>
+ TKirishima: (Code Golf stackexchange)
+ Stilgart: TKirishima: ça serait pourtant un sacrément bon choix
+ Stilgart: (et de fait, il y a des os en haskell)
+ Stilgart: (et en ocaml, et en rust)
+ TKirishima: Et bien je ne le savais pas écoute. Comme quoi on en apprend tout les jours
+ Ristretto: merci beaucoup Tkirishima
+ Ristretto: je vais regarder&#160;:)
+ TKirishima: De rien!
+ BlaiseEbuth: Stilgart qu'est-ce que tu fais avec ton clavier principalement&#160;?
+ Stilgart: j'essaie d'apprendre à un bot à dire licorne
+ BlaiseEbuth: Ah&#160;! Et le clavier c'est un bon choix pour ça&#160;?
+ Stilgart: sans doute pas, parce que Automaton2000 apprend quedale
+ Automaton2000: je vais au plus proche
+ dwarfie: Automaton2000&#160;: au chewal&#160;?
+ Automaton2000: et c'est quoi le principe de base de la base de la base&#160;?
+ dwarfie: Automaton2000&#160;: demande a automatonNN , il doit savoir
+ Automaton2000: sauf que j'ai pas eu le temps de faire un mcts&#160;?
+ Stilgart: Automaton2000: c'est de participer au contest de contest de contest
+ Automaton2000: ah mais en fait il y a des trucs à faire
+ Stilgart: c'est ça&#160;:)
+ BlaiseEbuth: Stoi l'ça
+ BlaiseEbuth: On flotte tous en bas Automaton2000. Tu veux un :baloon:
+ Automaton2000: mais je vois que le 1v1 comme alternative
+ Zorg1: un bon gros fight Automaton2000&#160;?
+ Automaton2000: et j'ai eu un peu de marge
+ PhOeNyX: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/633234294">https://www.codingame.com/share-replay/633234294</a>
+ PhOeNyX: Beng mangez ça
+ BlaiseEbuth: Wé trofor le piaf.
+ Zorg1: piaf de feu
+ Zorg1: un frimeur quoi
+ BlaiseEbuth: Voilà
+ BlaiseEbuth: TuningPiafDu91
+ Zorg1: :D
+ xenorking: bonjour je cherche un site pour apprendre a coder de 0 est ce que quelqun connait un site ou une formation gratuite a suivre svp
+ BlaiseEbuth: "Coder" c'est vague...
+ I_love_CoC: c'est toi la vague
+ BlaiseEbuth: Pâle immitateur...
+ Zorg1: il a pas compris l'truc
+ I_love_CoC: c'est raciste
+ BlaiseEbuth: xenorking: Tu veux coder quoi, dans quel but&#160;?
+ Al2222: il y a plein de MOOCs sur open classroom&#160;:)
+ BlaiseEbuth: :scream: :nauseated_face:
+ Zorg1: il va nous énerver Stilgart&#160;:(
+ BlaiseEbuth: Automaton2000 va chercher le balai, y'a encore des p'tits bouts de Stilgart partout... :unamused:
+ Automaton2000: y a pas encore eu le temps de faire un jeu de mot
+ Zorg1: (après perso je sais pas ce que ça vaut OCR ^^)
+ BlaiseEbuth: :speak_no_evil:
+ Zorg1: bah j'y ai jamais suivi un MOOC dessus, je crois que les seules fois où j'y suis allé c'était sur une page de "référence" pour tel ou tel langage
+ ZndrBrok: o/
+ Zorg1: \o
+ BlaiseEbuth: (╯°□°)╯︵ /o
+ Zorg1: bon il est tout énervé le Blaise ce soir
+ ZndrBrok: Vous avez fait peur à xenorkink, semble-il :P
+ ZndrBrok: (╯°□°）╯︵ ┻━┻
+ Zorg1: bah c'est pas le premier à poser une question et à se barrer si on répond pas dans la minute ^^
+ BlaiseEbuth: La faute aux mecs qui parlent d'ocr. C'est pas eux qui ramassent les morceaux de Stilgart. :angry:
+ ZndrBrok: Comment tu fait pour lancer autre chose que une table :P
+ ZndrBrok: bande de sorciers
+ ZndrBrok: C'est encore avec vos clients externes&#160;?
+ BlaiseEbuth:  (╯°□°）╯︵ ʞoɹᗺɹpuZ
+ BlaiseEbuth: ┬─┬ノ( º _ ºノ)
+ ZndrBrok: (╯°□°）╯︵ KURWA
+ ZndrBrok: (╯°□°）╯︵"jeSuisCon"
+ ZndrBrok: Par contre pour retourner mon nom
+ ZndrBrok: Là je sais plus du tout quel incantation tu as utiliser...
+ ZndrBrok: Je pensais que c'était du russe
+ ZndrBrok: Je vient de le coller dans google translate avant de capter ce qui était écrit hahaha
+ BlaiseEbuth: :see_no_evil:
+ ZndrBrok: :poop:
+ ZndrBrok: (╯°□°）╯︵ ︵ ¡ μϝnpԍԍƨᴉɑɼp oʁϝԍʁ ԍqɑΛ
+ Zorg1: y a des rappels au Code of Conduct qui se perdent ^^
+ BlaiseEbuth: ʞoɹᗺ︵ \(°□°)/ ︵ɹpuZ
+ ZndrBrok: ̗¡̗ ͗μ̗͗ϝ̗̞n̞͗p̞͗ԍ̨̞ԍ̨́ƨ̞́ᴉ̞̗ɑ̗́ɼ́́ṕ ̗o̗̞ʁ̨̞ϝ̨̨ԍ̨́ʁ́ ͗ԍ̖͗q̖͗ɑ͗͗Λ͗
+ BlaiseEbuth: Tacos rulz
+ Zorg1: :popcorn:
+ ZndrBrok: Bon, je ne sais même pas ce que je fait là... Je travaillais sur mon puzzle à la base et Cthulu m'a ramené ici :P
+ ZndrBrok: C'est pas de ma faute
+ ZndrBrok: C'est à cause du vaccin&#160;! #excuses2022
+ Zorg1: les antivax ont mangés mon devoir
+ Remi.: On parle de moi&#160;? ^^
+ Remi.: Salut tout lem onde
+ ZndrBrok: ...🅼🅰🅸🆂▉🅲'🅴🆃🅰🅸🆃▉🅳🅴🆂▉🅰🅽🆃🅸🆅🅰🆇▉🆁🅴🅿🆃🅸🅻🅸🅴🅽🆂▉!▉
+ BlaiseEbuth: Y'a des tacos qui se perdent
+ ZndrBrok: ヽ(=^･ω･^=)丿 Remi.
+ BlaiseEbuth: J'aime pas les antivaxs. Ils relaient mal la 5G...
+ ZndrBrok: Qui me prouve que je ne parle pas juste à moi&#160;?
+ ZndrBrok: Je suis peut-être un papy de 89 ans avec Alzhaimer dans une maison de repos et qui pensent en avoir 30&#160;?
+ ZndrBrok: changeMyMind(string please);
+ Zorg1: de toutes façon 95% des comptes ici sont des multis d'Automaton2000
+ Automaton2000: yo tout le monde&#160;!
+ BlaiseEbuth: T'es juste une perturbation dans les champs quantique alors te prends pas trop au sérieux.
+ ZndrBrok: Une perturbation c'est déjà pas mal :P
+ ZndrBrok: Autmaton2000, tu es juste un mirroir accroché dans une maison de repos
+ Remi.: C'est mieux d'être une perturbation qu'une anomalie
+ BlaiseEbuth: Tiens. Si t'en es à te questionner sur ta perception de la réalité, regarde ça <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=SgTPqCFj_Vk">https://www.youtube.com/watch?v=SgTPqCFj_Vk</a> ça nous fera des vacances pendant 40 minutes
+ MooMooN: automaton2000 tu es pour ou contre la sauvegarde des tortues&#160;?
+ Automaton2000: je touche plus à rien
+ ZndrBrok: Merci Blaise pour le ticket&#160;! Je ne savais pas que tu étais aussi gentil&#160;! :heart_eyes:
+ BlaiseEbuth: Seulement quand j'ai quelque chose à y gagner.
+ ZndrBrok: A moins que je ne suis que le produit de otn imagination et que tu ne fais que parler à un mirroir&#160;!
+ ZndrBrok: Du coup tu ne serais que un égoiste
+ ZndrBrok: Qui se paye des vaccance à lui même&#160;:(
+ Zorg1: si ton plan était qu'il nous foute la paix pendant 40 minutes ça a pas l'air d'être ça
+ ZndrBrok: Achtung&#160;! Le soleil nuit gravement aux neurones&#160;!
+ BlaiseEbuth: :shrug: J'ai essayé
+ Remi.: Je me demande comment a bien pu commencer la conversation pour en arriver là :thinking:
+ ZndrBrok: Je suis automaton3000
+ Zorg1: Remi.&#160;: tu cherches encore une logique aux conversations du chat&#160;?
+ Remi.: Pas possible faut d'abord passer le bug de l'an 2037
+ ZndrBrok: Bah, tu as juste dit bonjour Remi.
+ Remi.: Oui Zorg1, le manque d'expérience sur CG sans doute ^^
+ BlaiseEbuth: "Les conversations du :cat:"
+ Zorg1: y a pas une guerre nucléaire prévue pour 2036 de toute façon&#160;?
+ Zorg1: miaou&#160;!
+ MooMooN: probablement avant zorg1
+ BlaiseEbuth: Sérieux&#160;? Ils l'ont reporté sans me prévenir&#160;?
+ Remi.: Je crois que c'est avancé à 2022
+ ZndrBrok: Yep
+ ZndrBrok: Automaton2000, c'est pour quand la guerre nucléaire&#160;?
+ Automaton2000: je fais le tour de la map
+ ZndrBrok: BlaiseEbuth
+ ZndrBrok: J'ai déjà vu ta vidéo :P
+ ZndrBrok: Il me faut une autre destination
+ MooMooN: automaton2000 à force de faire le tour tu vas voir  ton dos
+ Automaton2000: bah en fait je pense que je vais faire le test de turing&#160;?
+ BlaiseEbuth: OK. Quelqu'un a une lien pour 2girls1cup&#160;?
+ ZndrBrok: Automaton2000 bonne chance à toi :P
+ Automaton2000: bonjour à tous&#160;! je suis en java
+ ZndrBrok: automaton2000, tu as autant de chance de le passer que moi :P
+ Automaton2000: c'est que des mecs qui font du python
+ Remi.: Blaise pas sûr que ce soit bien code of conduct ça ^^ :nauseated_face:
+ ZndrBrok: C'est toi la lien&#160;!
+ ZndrBrok: Kakashininjutsu&#160;!
+ BlaiseEbuth: T'as pris du speed en fait...
+ <b>**ZndrBrok Ressent la chaleur des flammes de l'enfer et cherche une sortie du regard...</b></p><p><img src="/a/16542412157988" /> Zorg1: ah Turing il faisait du python&#160;?
+ ZndrBrok: Non, c'est naturel chez moi&#160;!
+ BlaiseEbuth: Oui. Du "python" :3
+ ZndrBrok: Si je prendrais du speed j'apprendrais à faire des voyages astraux en 5 minutes&#160;!
+ Zorg1: oskour SuperTacoBot ils sont devenus fous&#160;!!!!
+ ZndrBrok: Attention zorg1
+ ZndrBrok: la folie c'est contagieux
+ ZndrBrok: tu ne veux pas d'un autmatonBrok
+ ZndrBrok: :P
+ BlaiseEbuth: J'aime pas les hyperactifs... Le dernier que j'ai croisé il s'appelait Jesus, et je me suis assuré qu'ils arrête de courir partout.
+ Zorg1: t'as pas rétropédaler finalement comme dit la légende&#160;?
+ ZndrBrok: C'était pas un gros fumeur de pétard celui-là&#160;?
+ BlaiseEbuth: Son père a promis qu'il se calmerait...
+ ZndrBrok: Vous fumez quoi en enfer si Jesus était speed pour toi ,
+ ZndrBrok:&#160;?
+ ZndrBrok: :thinking:
+ Remi.: Tu préfères pas savoir ^^
+ ZndrBrok: :flushed:
+ Elvis_Depresley: hehe
+ BlaiseEbuth: Des sorcières à la base, mais on est passé aux nazis depuis 80 ans
+ Zorg1: il en reste encore&#160;?
+ ZndrBrok: Nazi à la sauce Putin&#160;?
+ BlaiseEbuth: Si tu savais...
+ Zorg1: ou vous êtes obligés de racler des stocks de phalangistes espagnols&#160;?
+ ZndrBrok: A bah non, peut-être&#160;? Les enfoiré qui nous obligent à mettrent une ceinture de sécurité c'est quoi&#160;! Des repitlianoFacho&#160;!
+ ZndrBrok: Bon...
+ ZndrBrok: Bonne vaccance à vous&#160;!
+ ZndrBrok: Je retourne à mon puzzle :p
+ BlaiseEbuth: Vas y ondule
+ Zorg1: ouf il a mis du temps à nous lâcher lui :p
+ Remi.: Z'êtes pas gentils ^^
+ BlaiseEbuth: Non.
+ ZndrBrok: Remi. T'inquiète, j'ai des tendance sado maso&#160;;)
+ Remi.: Je ne veux pas savoir ^^
+ Zorg1: je savais bien que t'aimais ça
+ ZndrBrok: Ou du moins, une de mes personallitée&#160;!
+ ZndrBrok: #FourmisLegionaire
+ ZndrBrok: Même une perturbation quantique peut avoir un égo en 5d
+ Zorg1: y en a pas mal ici qui ont un ego de la taille d'une petite planète ...
+ ZndrBrok: C'est bon, laisse moi croire que je suis pas tout seul dans ma tête psychophobe&#160;!
+ ZndrBrok: :rage:
+ ZndrBrok: Tu te parles toi même dans ta tête et aprçs tu pense que c'est les autres qui sont fou&#160;!
+ ZndrBrok: :innocent:
+ Zorg1: ouaip doit y avoir un pipe entre nos deux têtes
+ BlaiseEbuth: Le puzzle a pas tenu longtemps...
+ Zorg1: je croyais que c'était monodirectionnel
+ ZndrBrok: Vous m'aimez tant&#160;!
+ ZndrBrok: Je me sens mal à l'idée de vous laissez seul&#160;!
+ ZndrBrok:&#160;:(
+ Zorg1: tkt on va gérer
+ Remi.: On n'est pas tout seuls, nous aussi on est plusieurs dans nos têtes
+ ZndrBrok: +1
+ ZndrBrok:&#160;:)
+ ZndrBrok: Je peux allez dormir alors&#160;!
+ Zorg1: ah je croyais que t'avais un puzzle à faire
+ <b>**Zorg1 n'y comprend plus rien</b></p><p><img src="/a/83487222964268" /> Remi.: Combien de tes personnalités vont dormir pendant que les autres vont te réveiller&#160;?
+ ZndrBrok: Je parle en 2d
+ ZndrBrok: c'est normal :P
+ Zorg1: moi je suis en 1.76434D oui c'est fractal mon gars
+ ZndrBrok: Max A va dormir et Max B va faire le puzzle tout seul au calme :P
+ ZndrBrok: Bon, bon, du coup je vais fumer&#160;!
+ ZndrBrok: A plus les amis&#160;!
+ <b>**ZndrBrok sens le regard perdu de Zorg1</b></p><p><img src="/a/83487222964268" /> Remi.: Ouf&#160;! enfin terminé "expand the polynomial"
+ Remi.: Je confirme, 10x plus de temps à gérer la lecture des chaînes de caractère qu'à résoudre réellement le problème.
+ BlaiseEbuth: Bof...
+ Remi.: Tu l'as fait Blaise&#160;?
+ BlaiseEbuth: Non.
+ BlaiseEbuth: Mais typiquement un truc à faire avec un langage qui a un exec()
+ Remi.: Je résouds les puzzles en C ++ ^^
+ Remi.: Tu comprends le temps passé à lire les string ...
+ BlaiseEbuth: Non je comprends pas...
+ BlaiseEbuth: Soit tu utilises un langage adapté au problème, soit tu évites les problèmes inadaptés à ton langage.
+ Remi.: Je ne suis pas venu dans le but d'apprendre un autre langage, mais pour m'améliorer dans le langage que je connais.
+ BiasInput: Et toc&#160;!
+ BlaiseEbuth: OK. Tu sais donc résoudre une équation sous forme textuelle dans un langage inadapté à ce genre de problème, mais que tu connais. Tu te sens grandis&#160;? ^^
+ Remi.: Grandi je ne sais pas, mais ça m'a permis de réfléchir, donc forcément ça contribue à s'améliorer.
+ BlaiseEbuth: Si tu le vois comme ça... :grin:
+ BlaiseEbuth: Perso si je doit monter un meuble en kit sans les outils appropriés, clair que ça va me faire réfléchir, mais progresser... :smirk:
+ Remi.: Bah sinon ça sert à rien de venir sur CG ^^ autant jouer à pokémon sur ma gameboy, au moins ça casse pas trop les neurones
+ Remi.: Pour le meuble c'est pas pareil, tu ne le monte pas pour le plaisir de pratiquer
+ Remi.: Tu le montes parce que t'as besoin d'un meuble monté
+ BlaiseEbuth: Ce jugement de valeur, direct.
+ Remi.: Donc oui tu prends les bons outils
+ BlaiseEbuth: Et donc tu as appris quoi&#160;? A part que le c++ était pas adapté pour le traitement de chaînes&#160;?
+ Remi.: Que c'était possible quand même :P
+ BlaiseEbuth: A ce compte là autant le faire en asm. ^^
+ Remi.: Je ne cherche pas à m'améliorer en asm ^^
+ BlaiseEbuth: Non. Mais a priori ça t'as pas non plus beaucoup fait progressé en C++...
+ Remi.: "the descent" non plus, et j'y suis bien passé quand même ... le but est juste de pratiquer et de rencontrer de nouveaux problèmes à résoudre, c'est le fait de réfléchir qui me fait m'améliorer, je pense.
+ BlaiseEbuth: :thinking:
+ Remi.: Je crois qu'on ne tombera pas d'accord ce soir ^^
+ BlaiseEbuth: Dans la mesure où je prend le parti inverse à dessein, ça risque pas. :3
+ Remi.: lol, genre je le fais juste pour te contredire ^^ j'avais terminé le puzzle en c++ avant que tu me dises que c'était inutile :P
+ BlaiseEbuth: C'est moi qui le fait juste pour te contredire. Me contrdit pas.
+ Remi.: Ca j'avais compris&#160;;) t'as vu on vient de tomber d'accord&#160;! \o/
+ BlaiseEbuth: Non.
+ Remi.:&#160;:(
+ BlaiseEbuth: :kiss:
+ Remi.: &lt;3
+ TenYearOldKnight_5064: Salut à tous&#160;!
+ Remi.: \o
+ ZndrBrok: o/
+ Pauloux: Salut&#160;!
+ Pauloux: Quelqu'un sait comment on met un exemple lorsque l'on crée un CoC s'il vous plaît&#160;? :D
+ Remi.: (troll) Tu écris "exemple&#160;:" suivi de ton exemple
+ Remi.: C'est rien je suis fatigué ... lol
+ BlaiseEbuth: ngl
+ Pauloux: C'est ce que j'ai fait mais il y en a qui ont une rubrique exemple tout beau tout propre moi aussi j'en veut une haha
+ BlaiseEbuth: C'est automatique, ça met le premier test
+ Remi.: Tu peux le vérifier rapidement avec le bouton "tester dans l'IDE".
+ Pauloux: Ha oui mais si on veut mettre une explication sur l'exemple on peut pas&#160;?
+ BiasInput: BlaiseEbuth&#160;: c'est qui ton compte principal&#160;?
+ BiasInput: Ton niveau 3 attise ma curiosité haha
+ BlaiseEbuth: BAh c'est celui là, j'ai qu'un seul compte moi. Juste c'est le 10ème. :grin:
+ BiasInput:&#160;:(
+ BlaiseEbuth: Ci-gît l'original: <a rel="nofollow" class="external free" href="https://www.codingame.com/profile/51cf3569a28219e695585f664d80a5b5238752">https://www.codingame.com/profile/51cf3569a28219e695585f664d80a5b5238752</a>
+ BiasInput: Oh le beau profil&#160;:)
+ Remi.: De mémoire t'étais dans les 300ème
+ TomPouce: :pray:
+ pardouin: ça vient d'où ton avatar&#160;?
+ pardouin: on dirait yuyu hakusho
+ pardouin: et bonsoir \o
+ Edracoon: Quel est le meilleur contest selon vous&#160;?
+ Zorg1: ça va surtout dépendre de toi en fait ^^
+ BlaiseEbuth: Il est derrière nous
+ pardouin: le dernier était franchement cool, tout bien réfléchi
+ pardouin: très ouvert
+ BlaiseEbuth: Oui. On avait le temps de regarder...
+ pardouin: oui gros point noir sur le temps de submit par contre
+ TomPouce: est ce que ça veut dire que le contest a été victime de son succès&#160;?
+ BlaiseEbuth: Oui et non.
+ Edracoon: J'ai découvert CodinGame grâce au Spring 2022 et  franchement c'est une merveille
+ BlaiseEbuth: Ouai. Genre 7 merveilles du monde. Tu vois que c'était cool, quand tu connais pas tu as envie d'y faire un tour, mais au final c'est juste une ruine...

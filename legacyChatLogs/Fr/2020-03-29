@@ -1,0 +1,966 @@
+ Vry: o/
+ Vry: Faut que j'arrête le sonar et que je pose des mines à la place ... et aussi que je tire dans le tas ...&#160;:)
+ Zorg1: t'as compris la méta&#160;;-)
+ Vry: C'est surtout que mon bot ne tire que s'il connait la case où se trouve l'autre ... alors qu'il pourrait le faire s'il ne reste que deux cases par exemple ...
+ R4N4R4M4: o/
+ Vry: J'ai un sous-marin tireur d'élite&#160;!
+ Bob: o/
+ R4N4R4M4: Tire tout le temps Vry, ça élimine des positions
+ Palmipedus: mais si tu tires a cote c'est que 1 dmg
+ Vry: Qui tire trop peu ...
+ Palmipedus: ca peut pamquer a la fin non?
+ Palmipedus: maquer
+ Vry: Oui
+ Palmipedus: manquer...
+ R4N4R4M4: Pour tirer j'ai une éval de la cible pour marquer le plus de points
+ Palmipedus: pour l'instant je tire seulement quand je suis sur
+ Vry: J'ai la carte des positions possibles, j'ai juste à vérifier que la zone d'impact couvre bien les possibilités
+ Palmipedus: oui je pourrai coder ca aussi mais je me demande si ca va pas etre contre productif
+ Palmipedus: et ca donne des traces a l'opp
+ Vry: Par exemple, là R4N4R4M4 je pouvais te balancer un torpille :D mais je ne l'ai pas fait ...
+ Bob: j'ai tenté un truc de ce genre mais c'était pas spécialement probant
+ Vry: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/1f309243-516b-4b7b-b982-549929d7e9a3">http://chat.codingame.com/pastebin/1f309243-516b-4b7b-b982-549929d7e9a3</a>
+ Bob: viser le point accessible qui couvrait le plus de cases possibles
+ R4N4R4M4: Oui Vry, c'est une de mes dernières modifs, de forcer le tir lorsqu'il est probablement bon
+ Vry: Je peux peut commencer par "qui couvre toutes les cases" ...
+ R4N4R4M4: Pas bête comme règle, j'avais juste mis nombre de positions &lt;= 9
+ Vry: Et me casser en silence ... :D
+ Bob: à l'heure actuelle j'ai une heuristique toute pourrave pour choisir une case parmi celles possibles
+ R4N4R4M4: Fais une Eval Bob, 1 points par case touchée et 2 pour la centrale
+ R4N4R4M4: En même temps, c'est aussi une heuristique pourrave :D
+ Bob: je ne sais faire que des heuristiques pourraves de toute façon
+ Vry: Mais non ... des heuristiques simples et efficaces&#160;!
+ Vry: Et si la torpille ne touche rien j'élimine les positions
+ Vry: [à voir si j'ai des bugs par contre ... :p]
+ Bob: dans certains cas tu peux aussi dire si elle a touché
+ R4N4R4M4: Oui Vry ça élimine pas mal
+ Bob: et restreindre en conséquenvce
+ R4N4R4M4: Et si tu touches pile poil, ça élimine grave
+ Vry: Bob&#160;: si elle a touché je vais le faire plus tard ...
+ R4N4R4M4: Tu peux faire les 3 cas d'un coup, c'est pareil, dégats 0 1 2
+ Vry: y'a plus de choses à considérer ... là au moins si opp_life ne bouge pas c'est "sans risque"
+ Bob: c'est mignon mon nouveau code de move
+ Vry: R4N4R4M4, non car si dégât il faudrait être certain que ça vienne de toi
+ Bob: une fois que j'ai fait surface, il refait surface en boucle
+ R4N4R4M4: Vry ah oui, mais ça je le ferai plus tard :D
+ Vry: Moi j'avais ça lorsque je voulais attaquer l'autre, mon bot faisait surface en boucle ...
+ Bob: grosso modo, si il n'a pas fait de torpedo ou de trigger à proximité de ta cible et que sa vie a baissé, tu as touché
+ Vry: Il faut faire pareil avec les mines, si aucun dégât ...
+ Bob: il faut juste faire gaffe à compenser ses HP si jamais il a fait surface
+ Vry: ou surface ...
+ Bob: bon cela dit ça doit rester assez marginal comme gain d'info
+ R4N4R4M4: Mince, surface ça complique...
+ Vry: Mais en gros c'est essentiellement ce que fait le bot d'Illedan (cf stream)
+ Vry: Vu qu'il traque l'ennemi à coup de torpille
+ Bob: non surface ça complique pas grand-chose, il perd un point c'est tout
+ Bob: si surface, hisHp++
+ Vry: surface en plus c'est sûr
+ Bob: oui
+ Vry: --
+ R4N4R4M4: Sauf que dans l'ordre, tu dois tester surface, puis dégats, puis orders
+ Bob: oui
+ R4N4R4M4: et moi j'ai le test de surface dans orders 
+ Bob: enfin c'est complémentaire
+ Bob: là c'est juste un test pour savoir si tu dois tenir compte du hp supplémentaire perdu dans ton résultat de torpille
+ R4N4R4M4: oui, t'as raison, je vais rajouter un test pourrave juste avant :D
+ Bob: c'est ça
+ Bob: si il a fait surface il a forcément déjà un point de moins
+ Bob: si il a 2 ou 3 de moins c'est que tu as touché
+ Vry: Non il pourrait surface et trigger une mine et se tire dessus&#160;?
+ R4N4R4M4: Et voili voilou 		// Surface life		if(!strstr(e-&gt;orders, "SURFACE")) se-&gt;life--;
+ R4N4R4M4: Je repushe ma ligne
+ Bob: oui il faut garder les checks sur ses propre torpedo et trigger
+ Vry: R4N4R4M4, heureusement que le referee ne t'envoie pas les MSG sinon on pourrait hacker ton bot ... :p
+ R4N4R4M4: Ah&#160;? J'ai mis quoi dans les MSG&#160;?
+ R4N4R4M4: Ah oui LOL
+ Bob: je suis en train de me rendre compte que je ne sais pas pourquoi mon move actuel fonctionne :D
+ Vry: Si l'ennemi fait "MSG SURFACE" et que le referee t'envoie le MSG ennemi (ce qu'il ne fait pas) ton strstr serait faux
+ Bob: ah oui si
+ Vry: si et si et si ...
+ R4N4R4M4: Ah ben oui
+ Bob: tiens mon point de départ c'est de la bouse en barre
+ BlaiseEbuth: Compagnons d'infortune bonjour. Automaton2000, AutomatonNN au rapport&#160;!
+ Automaton2000: je comprends pas non plus ...
+ AutomatonNN: t'es content Automaton2000 et AutomatonNN&#160;?
+ Bob: o/
+ Zorg1: \o
+ Bob: \o\
+ BlaiseEbuth: \o/
+ Azkellas: Ah j'ai été push silver pendant la nuit
+ Azkellas: Va falloir remonter le classement maintenant
+ Vry: gg
+ R4N4R4M4: gg Azkellas
+ leojean890: gg
+ BlaiseEbuth: :clap:
+ Zorg1: gg
+ Azkellas: mici mais bon, vu la gueule de l'ia.. :D
+ Azkellas: J'ai joué une partie contre le top1 pour voir à quel point il me repère vite, il a timeout en me laissant à 1hp, trop sympa
+ R4N4R4M4: Yes, le #1, il timeout
+ R4N4R4M4: Ca y est je me sers de MSG :D, nombre de positions possible et rectangle couvert
+ R4N4R4M4: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/443392749">https://www.codingame.com/replay/443392749</a>
+ Nagatwin: pourquoi default fait surface au t1&#160;?
+ R4N4R4M4: C'est l'IA par défaut
+ Nagatwin: Ouais je sais
+ R4N4R4M4: C'est pour te laisser gagner peut-être :D
+ Nagatwin: mais du coup ça fait que elle se fait sniper en 40 tours dans l'IDE c'est vraiment pas un bon adversaire de test&#160;:'(
+ Azkellas: ils ont nerfés les bosses en les faisant faire surface tous les 50 tours si je me souviens bien
+ R4N4R4M4: ah ok
+ R4N4R4M4: Ah purée, j'avais pas vu la map, et comme je me positionne en random, faut que je fix ça vite :D
+ Nagatwin: R4 ouais pareil&#160;:/
+ R4N4R4M4: J'avais pas capté qu'il pouvait y avoir plusieurs mers
+ R4N4R4M4: Je sais plus qui en avait parlé, et j'avais pas noté
+ Vry: lol lol lol
+ Vry: TidyMaze&#160;?
+ BlaiseEbuth: Premier truc actif que j'ai codé le positionement...
+ R4N4R4M4: C'est chelou de devoir choisir sa mère... heu sa mer :D
+ Stilgart: ho bravo
+ <b>**BlaiseEbuth slaps R4N4R4M4  around a bit with a large fishbot</b></p><p><img src="/a/41897242808419" /> BlaiseEbuth: Et je suis venu sur le web client exprès parce que mon client laisse pas passer les commandes...
+ Stilgart:  /say /slaps&#160;?
+ R4N4R4M4: Ca me donne faim tout ça :D
+ BlaiseEbuth: /slap Automaton2000
+ Automaton2000: ca depends si tu as le lien vers le referee de cg
+ BlaiseEbuth: Marche pas
+ Stilgart: Automaton2000: t'as pas le lien toi&#160;?
+ Automaton2000: c'est a moi que ca fait pas mal de trucs à faire
+ R4N4R4M4: Bon, j'ai codé le choix de la bonne mer
+ R4N4R4M4: et de la bonne case aussi du coup&#160;:)
+ R4N4R4M4: Je pense que ça va me faire monter, mon push est bien parti
+ JBM: comment es ton gromanche
+ R4N4R4M4: Il fait pas beau, donc je crois que je vais rester à la maison
+ BlaiseEbuth: :grin:
+ R4N4R4M4: Il fait même un peu froid, faudrait pas attraper un rhume
+ BlaiseEbuth: :sick:
+ Bob: bah ça fait deux semaines et demie que je tousse
+ Bob: très pratique pour faire de la place autour de soi au supermarché
+ R4N4R4M4: deux semaines et demie, c'est bon, t'es sauvé Bob
+ dwarfie: bob&#160;: tu fait comme dustin hoffmann dans le film alerte&#160;? quand il demande une info au gars en le touchant , le cramponnant et il fini par lui demander s'il va falloir qu'il tousse&#160;;)
+ BlaiseEbuth: Question technique. En C++, si j'ai int a=!0; est-ce que a vaut forcément 1&#160;?
+ Nagrarok: je dirais que oui
+ Samsa: test sur 10.000 cas si ça marche tout le temps alors la réponse est oui
+ egaetan: BlaiseEbuth bah non
+ egaetan: quoique
+ BlaiseEbuth: voilà
+ R4N4R4M4: tu peux tester et si c'est pas 1, tu mets 1 :D
+ Nagrarok: mais pourquoi ce serait pas 1&#160;?
+ Samsa: car n'importe quel entier non nul est true
+ R4N4R4M4: Oui, en général c'est 1
+ Stilgart: BlaiseEbuth: je dirais comme de merde&#160;:)
+ Stilgart: sauf si c'est pour golf
+ Nagrarok: le 0 est converti en bool à false, le not donne true, le true est converti en int à 1
+ Nagrarok: c'est bien défini comme comportement
+ Stilgart: il me semble que c'est bien défini en C++ en effet
+ R4N4R4M4: et en C aussi
+ Stilgart: en C je parierai pas sur toutes les versions
+ Stilgart: ils ont mis 25 ans avant d'avoir une vraie notion de booléens
+ R4N4R4M4: celle de CG, les autres on s'en fout :D
+ Nagrarok: justement, si y'a que des entiers c'est encore plus simple :D
+ Nagrarok: je pense que ça marche avec toute version de C
+ BlaiseEbuth: Effectivement, il semblerait que ce soit strictement 1... Merci&#160;!
+ Nagrarok: j'utilise souvent un bool comme indice de tableau de 2 cases, jamais eu de souci ^^
+ Stilgart: justement, quand tu n'as que des entiers&#160;! ça ne fait aucun sens
+ Stilgart: donc penser que ça a été spécifié à l'époque comme nous on l'imagine, ça me parait peu sain
+ Nagrarok: en C sans bool, l'opérateur&#160;! convertit 0 à 1, et tout autre nombre à 0
+ Nagrarok: c'est également bien défini ^^
+ oPyRuSo: slaut
+ Nagrarok: et y'a pas de double cast comme en C++
+ oPyRuSo: dites voir, les règles on changé un peu&#160;? on fait surface maintenant quand on fire out of range&#160;?
+ oPyRuSo: me semblait que c'etait pas le cas avant
+ Nagrarok: aucune idée, de toute façon tu devrais éviter de fire out of range :D
+ Nagrarok: ça règle le problème
+ oPyRuSo: ^^
+ oPyRuSo: effectivement, pas bête :p
+ Zorg1: le surface c'est quans t'as aucune action valide je crois
+ Zorg1: donc si t'as un move valide avec ta torpedo out of range tu ne dois pas faire surface (si j'ai bien compris)
+ oPyRuSo: ben je pensai aussi, mais j'ai eu un test avec juste un TORPEDO x y qui a aussi fait SURFACE... sans raison....
+ oPyRuSo: j'ai pas gardé le replay, si j'en trouve un autre je le mettrai
+ oPyRuSo: en attendant j'ai suivi les conseil de Nagrarok ^^ j'ai corrigé mon bug :p
+ AnthonyStrackel: vous codez tous sur un seul fichier&#160;? Je suis au début et ça devient déjà génant
+ oPyRuSo: perso oui, un seul (java)
+ Vry: Oui
+ oPyRuSo: pas le temps de mettre un pipeline jenkins en place pour builder tout ça :p
+ Vry: C
+ AnthonyStrackel: ok^^
+ AnthonyStrackel: thx
+ SeebOmega: AnthonyStrackel en quel language es tu&#160;?
+ AnthonyStrackel: js
+ SeebOmega: si tu veux tu peux utiliser des utilitaires js pour coder en plusieurs fichiers mais a la fin tu en submit un 
+ SeebOmega: il existe des addon pour symchro un fichier de ton PC avec le contest aussi 
+ SeebOmega: par contre pas de minimification ni d obfuscation c est interdit 
+ SeebOmega: sinon tu fais des jolies classes et tu collapse tes blocs de code :D 
+ AnthonyStrackel: ouais je vais faire un truc du genre parce que ça devient chiant de scroll^^ merci
+ R4N4R4M4: Le texte en rouge sur noir, ça fait quand même un peu mal aux yeux :D
+ Vry: Nan ça va ...
+ Stilgart: AutomatonNN; ça va ou ça va pas&#160;?
+ AutomatonNN: oui
+ Stilgart: merci
+ Stilgart: franchement, qu'est-ce qu'on ferait sans toi AutomatonNN&#160;?
+ AutomatonNN: salut Automaton2000
+ SeebOmega: Je viens de m apercevoir qu on peut reduire la possibilite des silences jusqu a 9 si on prends en compte le move d avant et d apres ... ca va reduire les calculs ca 
+ Nagatwin: heu
+ Nagatwin: help
+ SeebOmega:&#160;?
+ Nagatwin: quand je met les pragma d'optim mon bfs est cassé
+ Vry: Si tu le dis :sunglasses:
+ Nagatwin: dfs*
+ Vry: Ça veut probablement dire que tu as une boulette dans ton code ...
+ Nagatwin: baaah
+ Nagatwin: Je crois pas
+ Vry: ... un petit débordement qui ne se voit pas en mode non optimisé&#160;?
+ Stilgart: tu as oublié d'initialiser une variable&#160;?
+ Nagatwin: je crois pas
+ Vry: les pragmas s'est un bon test pour valider un code ... :D
+ jyxced: bonjour tout le monde ^^, desolé de deranger, just pour savoir est ce que vous savez comment on active les vim shorcut?
+ Nagatwin: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/98ab32ca-f611-43cf-a87a-cb33a53d342b">http://chat.codingame.com/pastebin/98ab32ca-f611-43cf-a87a-cb33a53d342b</a>
+ Nagatwin: quand je met les pragma, mon direction_index de la boucle for passe à 3000 et quelques après sortie de boucle
+ Nagatwin: et la boucle continue indéfiniment 
+ Nagatwin: ça sent l'optim qui s'est mal passée
+ Stilgart: non
+ Stilgart: ça sent le array out of bound
+ Nagatwin: je check les bound partout -_-
+ Stilgart: (très sérieusement, ça fait 20 ans que les gens bossent sur le compilo, et il est massivement utilisé partout... donc tomber sur un bug est quand même hautement improbable)
+ Nagatwin: Oui je m'en doute
+ Nagatwin: mais je comprend pas pourquoi ça fonctionne nickel sans optim
+ Stilgart: et sur shuffle_dir&#160;?
+ Stilgart: parce que c'est pas stocker pareil en mémoire
+ Nagatwin: oui il est en static 
+ Stilgart: std::cerr &lt;&lt;direction_index_&lt;&lt;" "&lt;&lt; shuffle_dirs[random_state][direction_index_] &lt;&lt; " dir " &lt;&lt; start_y &lt;&lt; " " &lt;&lt; start_x &lt;&lt; " " &lt;&lt; seen[start_y][start_x + 1] &lt;&lt; " " &lt;&lt;obstacle[start_y][start_x + 1] &lt;&lt; std::endl;
+ Stilgart: ça fait sans doute segfault ça déjà
+ Nagatwin: agreed
+ Nagatwin: mais cette ligne me permet de check si ça va bien, j'ai enlevé les out of bound et ça meurt quand même
+ Nagatwin: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/89d96861-8f05-49f3-a367-7396a332048a">http://chat.codingame.com/pastebin/89d96861-8f05-49f3-a367-7396a332048a</a>
+ Stilgart: après, je te dirais bien de virer tous tes inlines aussi
+ Vry: valgrind est ton ami&#160;?
+ Nagatwin: inline is bad&#160;?
+ Stilgart: c'est contre-productif (en fait, g++ va les ignorer)
+ Stilgart: trop d'inline c'est bien pire que pas d'inline du tout
+ Nagatwin: Ouais normalement ça change rien
+ Stilgart: et g++ -Ofast il sait inliner tout seul
+ Nagatwin: yes
+ Vry: Je crois qu'a vouloir mettre des mines, j'en fait trop ... <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/443421180">https://www.codingame.com/share-replay/443421180</a>
+ Nagatwin: anyway, sans inline j'ai quand même le bug
+ Stilgart: je parierai pas là dessus... inline =&gt; rip la fonction =&gt; plus de notion de variable locale =&gt; bronx en mémoire
+ Vry: C'est domme que la commande ARMAGEDDON n'existe pas&#160;!
+ Stilgart: je voulais NUKE moi
+ Stilgart: pour détruire une ile
+ JBM: Stilgart: merci pour le double Arrow
+ Vry: Pour déclancher toutes les mines&#160;?
+ Stilgart: de rien
+ JBM: je l'avais loupé sur le chat twitch hier soir avant que tu ne partes
+ Stilgart: j'avais dit ça au moment où tu as remarqué que tu ne devais pas utiliser Arrow
+ Zorg1: (surtout inliner une fonction récursive ...)
+ Stilgart: alors que clairement, tu utilises &amp;&amp;&amp;
+ JBM: oui
+ JBM: c'est naturel a posteriori ^^
+ JBM: bon je pense que ça va être la fin du streaming total là
+ Stilgart: HUHUHU
+ Stilgart: Zorg1 a raison
+ JBM: je vous aime bien, mais ça me ralentit quand même grave
+ Nagatwin: Oui jsuis d'accord, mais j'ai pris l'habitude de tout inliner et de laisser au compilo le choix de le faire
+ JBM: ben inline pas, il a le choix quand même
+ Stilgart: surtout, inline pas et il a vraiement le choix
+ Stilgart: inline = demande explicite d'inliner
+ Stilgart: donc tu ne donnes pas le choix, tu demandes de le faire
+ Stilgart: (et heureusement pour toi, le compil utilise son droit de veto)
+ Stilgart: +o
+ JBM: pense quand même à restreindre leur visibilité, ça devrait pas l'empêcher d'inliner mais ça limitera ton empreinte mémoire au moins au link
+ Nagatwin: alright
+ Stilgart: sur CG c'est pas vraiment possible ça, si&#160;?
+ JBM: static en C
+ JBM: en C++ ça doit marcher aussi mais il y a mieux je crois
+ JBM: namespace anonyme non?
+ Stilgart: possible
+ Vry: C'est compliqué vos trucs là ...
+ Stilgart: ne pas pouvoir coder sur plusieurs fichiers c'est l'horreur
+ Nagatwin: Stilgart oui mais non, g++ se garde le choix de inliner, c'est juste un indicateur de user à user. Mais peu importe c'est pas le problème ici ^^ Je suis totalemtn d'accord avec ce que vous avez dit
+ Stilgart: c'est pas le même niveau de choix
+ Stilgart: si tu mets inline, il va ESSAYER de le faire (même s'il a de bonnes raisons de penser que c'est con)
+ Stilgart: par ailleurs, ce niveau d'optim c'est inutile en dessous de mid-legend
+ pb4: "inline = demande explicite d'inlinerdonc tu ne donnes pas le choix, tu demandes de le faire"
+ pb4: euh tu es sûr de ça&#160;?
+ pb4: Je suis à peu près sûr du contraire avec GCC
+ pb4: Il y a un attribut spécial si tu veux vraiment le forcer
+ pb4: __attribute__((always_inline))
+ Nagatwin: Yes pb4
+ Nagatwin: Sans attributes gcc est pas forcé 
+ JBM: pb4: c'est pas ce qu'il a dit
+ JBM: demande&#160;!= exigence
+ Nagatwin: bref, si quelqu'un peut m'aider à comprendre pourquoi ce code ne marche pas ça serait vraiment cool
+ Nagatwin: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/54266bc0-4223-4316-a692-4399c3b78faf">http://chat.codingame.com/pastebin/54266bc0-4223-4316-a692-4399c3b78faf</a>
+ Nagatwin: j'ai commenté tout le random et mis quelques assert, je comprend vraiment pas comment ça ne marche plus avec les pragma
+ Nagatwin: visiblement c'est la ligne 1 des pragma qui foire
+ Stilgart: pb4: oui, j'ai dit "demander"
+ Stilgart: j'ai aussi dit que gcc pouvait refuser quand même
+ Stilgart: mon point depuis le début est qu'il va inliner davantage si tu mets inline partout, et qu'à la fin le code sera moins bien optimisé
+ Stilgart: Nagatwin: bitstream + valgrind en local
+ Nagatwin: Jvais regarder
+ Nagatwin: j'ai mal mis à jour mon switch dans le dernier pastebin je crois
+ Stilgart: tu devrais mettre un default dans ton switch aussi
+ Stilgart: (au cas où...)
+ JBM: si je me code mon viewer qui rame moins que CG (ce qui peut pas être dur, mais peut quand même être un peu long), ça va bitstreamer grave ensuite
+ Skril: Nagatwin: dans le dernier pastebin, le switch est réalisé sur path_dir[direction_index_] (i.e. 'W', 'E', 'N', 'S'), et les labels du case sont 0, 1,2, 3. Ne faudrait-il pas plutôt positionner case 'W', etc. (ou alors réaliser le switch sur direction_index_)?
+ Nagatwin: sur direction index oui
+ Nagatwin: j'ai mal changé le code
+ Skril: dans le 1er pastebin, l'utilisation de seen[start_y][start_x + 1] dans le cerr sans vérification de start_x &lt; 14 provoque un undefined bahaviour&#160;; le compilateur peut alors faire ce qu'il veux par la suite dans du code mais non directement corrélé
+ Nagatwin: Yes, mais j'avais pas de soucis parce que il crashait avant
+ Nagatwin: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/9db974ce-9f08-4dc7-909d-073c35f6ed5a">http://chat.codingame.com/pastebin/9db974ce-9f08-4dc7-909d-073c35f6ed5a</a>
+ Nagatwin: visiblement quand je rencontre un obstacle ça fait un comportement pas voulu, jsuis obligé de définir seen même quand y'a un obstacle
+ R4N4R4M4: Je me rapproche Bob, attention :D
+ Nagatwin: le seen du début estpour mettre à true la case initiale, c'est rredondant mais ça fait le taff
+ Nagatwin: j'ai changé pas mal de choses je vais essayer de voir si ça marche mieux
+ Stilgart: faut sans doute initialiser seen, en effet
+ Stilgart: je dirais même re-initialiser (vu que c'est une variable globale)
+ Nagatwin: yes
+ YannT: si je fini top20 au premier contest où y'a pas de tshirt à gagner je vais être déééégouté
+ Stilgart: heu
+ Nagatwin: okay je crois que c'est bon
+ Stilgart: c'est pas le premier si&#160;?
+ Nagatwin: j'ai un peu tout changé, mais après débug ça marche
+ Stilgart: si ça peut te rassurer, JBM a fait la même en stream hier :D
+ TidyMaze: ^^
+ Nagatwin: Stilgart&#160;?
+ Vry: Il fait une sieste&#160;?
+ Zorg1: son jogging quotidien&#160;? :D
+ dwarfie: non , il doit encore etre en train d'essayer de buter 3 mecs avec un extincteur :D
+ Vry: Ah c'est une histoire avec des zombies&#160;?
+ dwarfie: non , avec un mec qui se deguise en chauve souris
+ JBM: j'y étais et pourtant j'ai du mal à suivre
+ Zorg1: ah t'as ramené un T-shirt "I :hearts: Gotham"&#160;?
+ BigUP: Un mec qui n'a pas de super pouvoir et qu'a just ede lthune&#160;!?? Batman&#160;!??
+ Zorg1: oui son super pouvoir c'est d'avoir plein de thune. 
+ Stilgart: dwarfie: c'est bon, j'ai réussi
+ Stilgart: il y avait des bouteilles de gaz devant l'entrée de la prison, ça a fait l'affaire&#160;:)
+ Zorg1: t'as tiré dedans pour tout faire exploser comme dans Duke Nukem&#160;?
+ Stilgart: c'est plus subtile que ça
+ Stilgart: fallait d'abord mettre les évadés à terre, sinon l'explosition ne les tuent pas (sic)
+ Zorg1: ah oui c'est vrai tu joues un gentil&#160;;-)
+ Stilgart: il est moyen gentil dans origin
+ Stilgart: genre même pas il remercie gordon quand ce dernier lui sauve la vie...
+ Stilgart: et puis bon, tu noteras que j'ai dit tuer (parce que vu les combos, les mobs en face ils sont morts à la fin du combat)
+ dwarfie: Stilgart&#160;: pas sur .... remember one piece&#160;;)
+ Stilgart: bref, faudrait que je me remette à ooc plutôt que de me prendre pour une chauve-souris justicier
+ BlaiseEbuth: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/f1ada0b0-8d8f-46a7-8456-e14ad86aa5a6">http://chat.codingame.com/pastebin/f1ada0b0-8d8f-46a7-8456-e14ad86aa5a6</a>
+ Stilgart: hum....
+ Stilgart: comment tu gères ta mémoire dans le contexte de ta question&#160;?
+ BlaiseEbuth: C'est à dire&#160;?
+ Stilgart: quand tu passes une référence, ça veut dire que tu gères la mémoire ailleurs
+ Stilgart: si tu veux une copie par contre, il faut gérer la mémoire liée à cette copie
+ Stilgart: (sinon, ça risque de vite fuiter à mort)
+ BlaiseEbuth: En fait  quand c'est par copie, c'est du type: Map map1=map2.method(), method retournant une Map
+ Stilgart: ok
+ BlaiseEbuth: Je pourrais juste faire: Map map3=map2.method();map1=map3; pour avoir une reference. Mais bon... C'pas drôle
+ Stilgart: en fait, non, pas ok... je comprends pas la question&#160;:(
+ Stilgart: (ça fait pas vraiment de sens "map1 = map3")
+ Stilgart: à la limite, j'allais te dire de faire
+ Stilgart: Map map1; map1 = map2.method();
+ BlaiseEbuth: Ouai faut considérer que map1 existe déjà ailleurs et que la modifie.
+ BlaiseEbuth: +je
+ Ghirtor: salut, BlaiseEbuth sinon tu définis une méthode par copie à partir d'une référence vers un temporaire et quand tu veux faire une copie d'une lvalue tu fais par exemple map3=std::move(map2.method())
+ BlaiseEbuth: Oui aussi. ais je suis pas bloqué, je pourrais contourner le problème. Ma question est vraiment de savoir si il y'a un moyen d'avoir mon opérateur = qui soit capable de prendre soit une Map soit une Map&amp;.
+ Stilgart: vu que c'est pas le même type, il te faut deux surcharges
+ BlaiseEbuth: C'est ce que j'ai fait. Mais comme je le disais, je ne veux pas avoir deux fois le même code avec juste le prototype qui change. Donc j'aimerais avoir une première surcharge avec le code, et pouvoir l'appeler depuis la deuxième surcharge. Mais là le comppilo est perdu parceque l'appel est le même pour les deux versions.
+ Stilgart: factorise le code commun dans une fonction/methode/whatever
+ BlaiseEbuth: Voui...
+ Baba93: Bonjour tt le monde, je suis désolé de vous déranger mais comment s'appel la variable qui donne la position xy des îles.
+ Palmipedus: c'est sur le premier tour, tu recois les infos sous la forme de string x ou . qui represente la map
+ Baba93: Je peux exploiter ces données dans un tableau afin de les comparer à mes coordonnés xy&#160;?
+ BlaiseEbuth: C'est le but oui
+ Djammal: Vous avez des conseils pour prédire ses déplacement sans faire surface&#160;? 
+ Baba93: Tu peux utiliser l'affichage de ses commandes en bas de l'écran
+ Djammal: Enfin je veux dire mes déplacement
+ BigUP: HA le cas merdeux a gérer... Je dégomme l'adversaire et au mem emoment il Silence&#160;!&#160;;(
+ Baba93: Je comprends pas ta question Jammal
+ Baba93: Djammal*
+ Djammal: En gros j'aimerais optimiser mes déplacement pour ne jamais être bloqué en parcourant le plus de cases possible (sans faire surface)
+ BigUP: Djammal, faut floodfill a chaque case
+ Djammal: Ok ca marche je regarde ca&#160;:) merci
+ Baba93: C'est difficile de le prédire car cela dépend en grande partie de la config de ta map. Après tu peux t'organiser un chemin en changeant à chaque tour de direction.
+ WeberJulian: Djammal, moi je fais en simu des path random tout en évitant les timeout. C'est un peu bourin mais je fais jusqu'a 150 pas avant de surface
+ WeberJulian: et encore je suis en python
+ BOBY: lourd
+ Haashi: ami du dimanche bonjour, tortue Automaton2000
+ Automaton2000: au moins dans un premier temps
+ Stilgart: Automaton2000: on l'attend toujours ta premiere tortue du jour&#160;!
+ Automaton2000: et tu en as un pour l'adversaire (il y a un peu du mal à voir comment je peux avoir ...
+ Stilgart: oops, sorry Zorg1
+ Zorg1:&#160;?
+ Zorg1: ha pas grave&#160;;-)
+ Stilgart: random victoire par accident dans un first 10 moyen&#160;:(
+ Vry: Bon je sais plus vraiemet ce que j'ai fait ou pas fait je submit et on verra bien&#160;! :p
+ Zorg1: on est serré sur quelques centièmes d'elo
+ Stilgart: c'est pas très haut en top silver, en effet
+ Vry: 5/10 ... bof bof
+ Stilgart: (en score)
+ Vry: Bon faut affiner le "combat final" ... <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/443473685">https://www.codingame.com/share-replay/443473685</a>
+ Palmipedus: Vry lutte finale :D
+ BigUP: ha merde&#160;! je debug contre un IA qui timeout&#160;!!&#160;:'
+ BigUP: y pourrait faire un effort le gars&#160;!
+ BigUP: tin je tombe sur une autre IA qui rejoue une position déjà jouée&#160;! vais etre obligé de prendre des IA Silver&#160;!
+ Vry: Prends la mienne :p
+ BigUP: Forcément, fond de silver c'est moisi également&#160;!&#160;;)
+ Vry: Je suis au milieu
+ BigUP: ouais mais t'es mieux classé que moi&#160;!&#160;;) ca ne va pas m'aider a debugger
+ BigUP: Vry, Méchant&#160;! torpedo + Mine&#160;!!&#160;;)
+ Vry: Ben je m'adapte ...
+ BigUP: Bon déjà la liste des positions adversaires possibles semble correcte...
+ BigUP: c'est un bon début
+ BigUP: tin le coup du silence au moment ou le gars est ajusté, c'etait quand meme chiant a gérer&#160;:)
+ Zorg1: je crois que c'est le but :p
+ Vry: :p
+ BigUP: Faut que je vois ce que ca donne maintenant si je réactive mes silences 
+ Stilgart: BigUP: ça change quoi par rapport à un silence quand tu ne sais pas où est l'adversaire&#160;?
+ BigUP: Parceque la, je prend quand meme un peu chère contre toi Vry&#160;!&#160;;)
+ Stilgart: idem, la feature que je viens d'introduire est sans doute un bug
+ BigUP: Stilgart, ah j'élimine toutes les positions puisque j'ai trouvé l'adversaire, mais comme il a fait silence avant, en fait je ne sais plus a quel endroit il se trouve... 
+ BigUP: Bref, je suis dans le vent en pensant que l'adversaire est à une position unique alors qu'il est potentiellement sur 12 positions 
+ BlaiseEbuth: C'est un adversaire quantique...
+ BigUP: Tiens, c'est le moment ou je ne peux coder que s'il y a 1 nuage&#160;!&#160;;)  Sinon je ne vois plus mon écran&#160;!&#160;;)
+ Zorg1: la technologie du rideau n'a pas encore atteint bigUp on dirait ... :p
+ BigUP: argh&#160;! out of range ... bon encor eun bug qui traine ...
+ BigUP: Tiens&#160;!?? Il neige&#160;!!
+ JBM: sur les îles ou sur l'océan?
+ BigUP: non, du coté de Rennes... moitier grele / neige ... c'est pas tre sclair
+ Vry: Giboulée ...
+ Vry: :p
+ Vry: J'ai l'impression que pour le dogfight il faut simuler ...
+ Vry: Sinon c'est chaud
+ Vry: en heuristique
+ Palmipedus: yep mais en minmax il y a ps mal de branches
+ Palmipedus: et j'ai la flemme de la coder
+ Palmipedus: pour l'instant je peux encore faire mieux avec ce que j'ai
+ dwarfie: pour la flemme , je suis le champion ... pas touché a mon code depuis le 21/03 ... :p
+ Palmipedus: ma nouvelle version gagne que 80% contre celle dans l'arenne
+ dwarfie: j'arrive vraiment pas a me motiver
+ TidyMaze: belle amelioration Stilgart&#160;!
+ Palmipedus: il y a une meta pour le placement des mines?
+ Palmipedus: pour l'instant je posse dans la premier case pssible... ce qui ne me semble pas trop efficace
+ TidyMaze: tu peux surement limiter aux cas où y'a 8 cases libres autours non deja couvertes
+ ThomasNicoullaud: 8 case de libre&#160;?
+ Stilgart: TidyMaze: hum... 
+ ThomasNicoullaud: c'est que N E S W
+ ThomasNicoullaud: (et sur toi)
+ Stilgart: le problème, c'est que j'ai rien amélioré de significatif
+ ThomasNicoullaud: oups j'ai mal lu
+ ThomasNicoullaud: bon je vais me recoucher
+ Palmipedus: ThomasNicoullaud il parle de  la couverture d'explosion de la mine
+ Vry: Palmipedus&#160;: pour moi, pas de recouvrement et pas sur le bord ...
+ Vry: Ah cool je suis dans le top 100 et colle Bob&#160;: ;p
+ Palmipedus: bon aller je me motive pour faire mon amelioration de placement de mine et je poussse la version l'arene
+ nib: sous l'eau captain Némo&#160;:)
+ BigUP: HA bah voila, lorsque je vire mes bugs, je gagne contre Vry&#160;!&#160;;)
+ Vry: gg
+ Neumann: Tin j'ai pas encore ouvert mon IDE de la journée, je me déteste
+ BigUP: Neumann, tu vas encore plu ste détester lorsque tu vas terminre derriere moi&#160;!&#160;;)
+ Neumann: Faut pas déconner non plus hein
+ Zorg1: il est salement motivé là Bigup ...
+ Vry: Ça dépend Neumann, tu as fait du sport, lé menage, tout ranger chez toi peut-être&#160;!&#160;:)
+ Neumann: J'ai marché 20 minutes, c'est du sport
+ Vry: En confinement c'est énorme
+ Neumann: C'est plus que ce que je marche hors-confinement
+ Zorg1: 30 min de balade par jour qu'ils disent sur les paquet de pâtes ...
+ Vry: Joli ce combat contre le 2° ... <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/443504997">https://www.codingame.com/share-replay/443504997</a>
+ Neumann: Marrant ce SURFACE-&gt;SILENCE
+ Vry: Là c'est mieux&#160;: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/443506256">https://www.codingame.com/share-replay/443506256</a>
+ Vry: Oui c'est un mode fuite donc pour ne pas faire de coup illégale il surface et se barre&#160;?
+ Zorg1: c'est pas idiot, tu peux aller dans les 4 directions vu que t'as plus de cases visitées, mais faut le faire là où il y a de la place
+ Neumann: Oui avec le SILENCE il sait que ça augmente le nombre de spots potentiels à 16, mais c'est ballzy de faire ça en se mettant à 1 PV
+ Nangini: en fait le jeu c'est autant de rester en surfacant le moins posisble que de torpiller l'ennemi
+ Neumann: Oui et non, c'est surtout une bataille de qui sait ou est l'autre le plus précisement
+ Neumann: Et le plus rapidement
+ reCurse: Reste la portion stratégie aussi, ça ne semble pas stable
+ Stilgart: bon, codons ce moteur pour de vrai...
+ Neumann: La stratégie pour l'instant elle est surtout dans l'introduction de bruit dans la détection ennemie j'ai l'impression
+ Neumann: Ca a largement le temps de changer
+ reCurse: Oui on s'entend que c'est la portion principale
+ reCurse: Mais admettons que tu as la bonne info, tu fais quoi avec
+ reCurse: Ça ne semble pas clair dans le meta
+ Neumann: Tu tues.
+ Neumann: T'as commencé à coder un truc ou bien&#160;?
+ reCurse: &gt; Ne se prononce pas.
+ Stilgart: Neumann: c'est pas si simple de tuer en vrai
+ Neumann: Y'a un smurf quelque part dans le leaderboard, en sous-marin
+ reCurse: Merci Stilgart
+ Stilgart: ça implique d'aller vers l'adversaire sans lui donner trop d'infos
+ Stilgart: si tant est que ce soit possible sans faire surface
+ Stilgart: c'est à cause de ce constat que je me suis rabattu sur la strat du tapis de mines
+ reCurse: Ah ouais le truc sans counter
+ reCurse: Beau design
+ BigUP: Cool, nouveau bug corrigé, nouveau match gagné contre Vry&#160;!&#160;;)
+ Stilgart: reCurse: en vrai, faire péter des mines ça donne aussi des infos
+ reCurse: WHAT
+ reCurse: :p
+ Stilgart: mais peu de gens ont l'air d'avoir codé ça
+ Neumann: reCurse, criticizing meta since 2016
+ Stilgart: reCurse: bah oui, si je fais péter une mine en 3-4, c'est qu'à un moment où j'ai posé une mine, j'étais sur une case adjascente
+ BigUP: Stilgart, c adonne des infos que pour celui qui fait peter
+ reCurse: Oui oui je sais
+ reCurse: Mais c'était pas ce que je disais
+ reCurse: C'est plus, t'as aucune interaction possible avec
+ Neumann: Il est où le skill DEFUSE
+ BigUP: Stilgart, hum oui effectivement, mais pas simple a coder quand meme 
+ Neumann: Et mettre un CD sur le TRIGGER
+ reCurse: Voilà, où tirer dessus pour exploser ou je sais pas quoi
+ Stilgart: l'idée ultime serait d'utiliser les torpedos pour forcer à aller vers le champ de mines
+ reCurse: Pas, "ah mon adversaire a posé 150 mines, je fais quoi"
+ Stilgart: mais j'y crois moyen
+ reCurse: Un peu naze comme gameplay
+ Stilgart: c'est pas comme si j'avais de vraies idées :p
+ Stilgart: (depuis le temps, ça se saurait si j'en avais)
+ reCurse: Le petit random en début de partie c'est bien aussi, ça rappelle les meilleurs côtés de PR1
+ reCurse: Quoique j'imagine pas le choix vu le jeu
+ Neumann: Inarrêtable
+ reCurse: :D
+ reCurse: Bon bon j'arrête
+ reCurse: C'est marrant quand même hein
+ reCurse: Très original et différent
+ reCurse: (sans sarcasme)
+ BigUP: argh&#160;!&#160;;( je repasse à un endroit ou je suis déjà passé&#160;!&#160;;(  je ne pensais pas que j'avais encore ce genre de bug&#160;!
+ Malterin: Comment afficher des logs avec C++ svp&#160;?
+ reCurse: std::cerr
+ Malterin: Merci&#160;!!
+ Neumann: cerr &lt;&lt; "COUCOU" &lt;&lt; endl;
+ Neumann: Merde trop lent
+ reCurse: Comme ton code lel
+ Neumann: Le confinement ça te réussit pas :D
+ reCurse: Non pas du tout
+ Vry: Confiné aussi à Montreal&#160;?
+ reCurse: On a encore le droit de sortir mais bon
+ BigUP: OK, petit probleme lorsque je fais mon Undertaker attack ...
+ reCurse: À part marcher pas grand chose à faire
+ Neumann: Vous devez remplir une dérogation vous aussi&#160;? Ou vous êtes moins cons que les français et assez responsables pour s'en passer&#160;?
+ reCurse: Rien de ça, pour le moment du moins
+ Neumann: Nice
+ reCurse: Par contre a les ricains pas loin qui sont en train de pulvériser tous les records
+ reCurse: Les frontières sont fermées mais pour le moment.
+ reCurse: Ça craint
+ Vry: Et bientôt la dérogation va se transformer en formulaire de plusieurs pages ...
+ Neumann: Ouais ça pue pour eux
+ BigUP: Cool&#160;!&#160;;) nouveau bug corrigé, nouvelle victoire contre Vry&#160;!&#160;;)
+ Zorg1: aux US ils font rien&#160;? j'ai pas tout suivi
+ BigUP: Zorg1, Trump ne fait rien, mais chaque Etat dit fuck a Trump et confine ... (enfin peut-etre pas tous)
+ reCurse: Trump a tout fait en son pouvoir pour maximiser la propagation du virus
+ reCurse: Et je dis sans blaguer
+ reCurse: Ou exagérer
+ Zorg1: ah ok
+ BigUP: reCurse, dans une certaine mesure, on pourrait également soupconner le gouvernement francais d'avoir fait de son mieux pour maximiser la diffusion
+ BigUP: mais je crois que c'est juste de l'incompétence crasse vs préservation de l'economie (quoi qu'il en coute&#160;!)
+ reCurse: En terme d'incompétence je crois que c'est les US qui mènent
+ reCurse: Désolé meilleure chance la prochaine fois
+ Vry: Et il semblerait que Trump soit infecté lui aussi ...
+ reCurse: Ça fait longtemps
+ RomanceDawn: y a presque plus de vol en Europe
+ RomanceDawn: aux USA c'est n'imp 
+ RomanceDawn: <a rel="nofollow" class="external free" href="https://www.flightradar24.com/19.8,-23.11/3">https://www.flightradar24.com/19.8,-23.11/3</a>
+ Stilgart: reCurse +1
+ BigUP: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/d5b44538-a0f7-414a-8918-6b78df17a61f">http://chat.codingame.com/pastebin/d5b44538-a0f7-414a-8918-6b78df17a61f</a>
+ reCurse: C'est pas parce qu'ils mènent que vous avez pas d'incompétence hein
+ reCurse: C'est juste leur niveau qui est impossible à rattraper
+ dwarfie: merci pour le lien RomanceDawn ... ca m'a permi de me rappeler qu'on etait survolé par des avions de marque piaggo ... :D
+ dwarfie: piaggio
+ RomanceDawn: faut limité le nombre de mines
+ RomanceDawn: piaggio :thinking:
+ RomanceDawn: c'est pas des scoot ça 
+ dwarfie: ouais ... mais des avions aussi ... ca fait pas peurrrrrr :scream:
+ BigUP: Ok, 192eme ... voyons ce qu eca donne avec quelques bugs de moins ...
+ BigUP: Start correct&#160;: 8 vcitoires contre 3 défaites
+ BigUP: hum... j'ai encore au moins un bug visiblement ... 
+ BigUP: pourvu que le code adverse soit déterministe
+ BigUP: Arf&#160;! c'est pas le cas et cette fois c'est lui qui timeout&#160;!&#160;;)
+ dwarfie: eh eh ... tellement classique
+ BigUP: hum, il a k'air de fair eles meme moves quand meme&#160;! ca doit etre mon code qui timeout pour de vrai avec tout le debug que je balance&#160;!&#160;;)
+ BigUP: Ca y est&#160;!&#160;;) la loi du nombre, je fini par reproduire mon timeout&#160;!&#160;;)
+ BigUP: Pas d'erreur&#160;!&#160;;) je dois balancer trop de debug et je dois faire 1 fois de trop une fonction un peu lourde&#160;;)
+ BigUP: 3 games qui se terminent en timeout ... va fallir que j'optimise
+ BigUP: 120eme c'est pas trop mal&#160;;) et je recolle a Zanbez&#160;!&#160;;)
+ RomanceDawn: je connaissez pas ce site <a rel="nofollow" class="external free" href="https://dashboard.covid19.data.gouv.fr/">https://dashboard.covid19.data.gouv.fr/</a> :thinking:
+ Palmipedus: <a rel="nofollow" class="external free" href="https://coronavirus.jhu.edu/map.html">https://coronavirus.jhu.edu/map.html</a>
+ Palmipedus: RomanceDawn je prefere celui-ci
+ RomanceDawn: ah ouais 
+ Palmipedus: ca donne une bonne vue d'ensemble
+ Swagboy: <a rel="nofollow" class="external free" href="https://trackthevirus.info/">https://trackthevirus.info/</a>
+ WeberJulian: Nice, vous pensez que c'est qui qui va gagner&#160;? Les US&#160;?
+ RomanceDawn: ca c'est sûr que c'est les USA qui  vont perdre
+ WeberJulian: Non mais tkt Trump as dis qu'a pacques ce sera fini et que tout le monde pourra aller se retrouver dans les églises
+ kamiathe: salut
+ BigUP: Les US, ils vont prendre chère ... Systeme de santé moisi et gamin immature a la tete... 
+ kamiathe: j'ai un petit probleme avec plot en python que je n'arrive pas à résoudre
+ kamiathe: j'ai ma première courbe tracé qui qui reste fixé et donc ça me fait 2 courbes qui aparaissent
+ kamiathe: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/89341b0a-6934-4b7d-97dd-e0ab6e21511e">http://chat.codingame.com/pastebin/89341b0a-6934-4b7d-97dd-e0ab6e21511e</a>
+ kamiathe: vous comprendrez directement avec le code&#160;:/
+ kamiathe: ça fait 2h que je suis dessus :sob:
+ BigUP: <a rel="nofollow" class="external free" href="https://www.google.com/search?client=firefox-b-d&amp;q=matplot+reset+plot">https://www.google.com/search?client=firefox-b-d&amp;q=matplot+reset+plot</a>
+ BigUP: si clf() ne marche pas, possible que matplot ne soit pas adapté a ce que tu veux faire
+ kamiathe: clf me vire tout&#160;:/
+ BigUP: ha je croyais que c'etait ce que tu voulais.
+ BlaiseEbuth: Bah tu veux quoi&#160;?
+ BigUP: cette page devrait t'aider&#160;: 
+ BigUP: <a rel="nofollow" class="external free" href="https://github.com/matplotlib/matplotlib/issues/10183">https://github.com/matplotlib/matplotlib/issues/10183</a>
+ kamiathe: moi je met à jour mon graphique mais c juste la toute premiere courbe qui reste. Apres les slider font bien leur taf sinon
+ BigUP: kamiathe, sinon tu fais une premiere courbe qui ne gène pas&#160;;)
+ kamiathe: BlaiseEbuth je veux que la courbe bleu qui reste arete de pourir mon graph
+ kamiathe: BigUp c'est ça mon problème&#160;:/
+ kamiathe: essayez le code et jouez 10 secondes avec les sliders, vous comprendrez direct parce que je crois que je m'exprime mal
+ BigUP: hum... j'ai pas matplot sur Windows... passons sous linux
+ kamiathe: je suis sous windows et j'ai BigUp je comprend pas
+ BlaiseEbuth: Ouai j'vois l'truc
+ kamiathe: anaconda3 =&gt; spider =&gt; copier coller le code =&gt; f5 pour run?
+ BigUP: Sauf que j'ai pas envie de coller anaconda&#160;;)
+ kamiathe: BlaiseEbuth, et tu vois pourquoi j'ai cette courbe bleu? jcp d'ou elle vien
+ BigUP: bon ok, sous linux je vois la courbe bleue
+ kamiathe: et je pense que mon code a une petit cocquille à enlever et ça serais un peu overkill de chercher une fonction pour clear&#160;:/
+ kamiathe: je serait noté donc si possible je préfère éviter le code en plus&#160;:/ (j'ai pas vu le tps passer en fait ça va faire 3 heure je cherche ^^')
+ kamiathe: Bon merci pour votre aide en tt cas, si vous ne savez pas, pas grave, je repart pour 3 heure :joy::sweat_smile:
+ BlaiseEbuth: 'ttend j'regarde, mais ça fait un bail que j'ai pas mis le nez dans du matplot
+ BigUP: ca doit etre une option de matplot 
+ BlaiseEbuth: kamiathe, #l, = plt.plot(at, adp) vire le
+ kamiathe: ok merci je tante
+ kamiathe: BlaiseEbuth
+ kamiathe: je ne peux pas le virer
+ kamiathe: c'est ma fonction principal&#160;:/
+ BlaiseEbuth: Comment ça ta fonction principale&#160;?
+ kamiathe: ha mais
+ kamiathe: okk
+ kamiathe: quand je le vire il me reste ma courbe bleu
+ BlaiseEbuth: Quand je le vire il me reste que la rouge :grin:
+ kamiathe: BlaiseEbuth, en fait quand je le vire, il me reste ma courbe bleu mais je perd ma courbe rouge
+ kamiathe: mais c'est la rouge que je veux mdr
+ kamiathe: bon au moins t'as réussi à en enlever une ^^'
+ BlaiseEbuth: T'es sûr que tu te goures pas de ligne&#160;? la 63
+ BlaiseEbuth: Moi ça marche
+ BigUP: kamiathe, t'as fait comme moi, t'as viré la mauvaise ligne&#160;;) ( le mauvais plot)
+ BlaiseEbuth: l, = plt.plot(at, adp) j'ai dit
+ BigUP: ligne 60 a virer
+ BigUP: pas la 67
+ kamiathe: haaa amdrrrr
+ kamiathe: ptdrrrr dsl my bad
+ BlaiseEbuth: L'écoutes pas c'que j'dit... :rage:
+ kamiathe: j'avais même pas vu
+ kamiathe: OMG ça marche merci jt'aime Blaise :joy: je suis vrm aveugle c dingue...
+ BlaiseEbuth:&#160;:)
+ Palmipedus: grrr timeout et je ne sais pas ou, et on a pas les log quand on timeout...
+ Palmipedus: vous avez vu qq qui evite les mines?
+ Stilgart: tu peux faire surface 6 fois de suite pour ça :p
+ Palmipedus: lol
+ Palmipedus: nan j'ai de pb perf et j'ai une bone optim mais ca signifie que je ne pourrait pas traquer les mines efficacment
+ Palmipedus: mais bon eviter les mines risque aussi de limiter le nombre de cases libre donc je ne suis pas sur que ca soit une bonne chose
+ Vry: Et au bout d'un moment tout est miné de toute façon ... :p
+ Vry: J'ai gagné des places sans rien faire ... 90 -&gt; 72
+ Vry: Ça doit provenir de resubmit qui n'arrivent plus à retrouver leur classement ...
+ Stilgart: pareil
+ BigUP: Hum... Le Catch sans spectateurs, c'est pas la meme ambiance&#160;!&#160;;)
+ TidyMaze: une victoire de justesse  :) <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/443582625">https://www.codingame.com/share-replay/443582625</a>
+ Vry: En effet ... belle remontée
+ TidyMaze: bon, j'ai un sonar qui a l'air de marcher, mais du coup ça change pas mal de choses
+ leojean890: 65 vry cool à peine passé bronze hier tu grimpes :P
+ leojean890: passé argent*
+ Swagboy: Vry comment est-ce que tu récupère ton log au fait&#160;?
+ leojean890: moi j'ai des problèmes de timeout ;O c'est ça de prendre python aussi ;P
+ Gentiltoutou: j'avais beaucoup de timeout aussi. Une fois débuggué la façon dont je traitais les silence adverse ça va bien mieux...
+ leojean890: moi pour gérer les silences je fais un backtracking avec un facteur de branchement de 17 et un "continue" quand ça respecte pas les contraintes (position parmi les iles, ou faisant revenir au même endroit par ex)
+ leojean890: du coup c'est lent :P
+ leojean890: mais ça marche, mais je dois stopper tres vite
+ leojean890: et épurer l'historique d'actions
+ Gentiltoutou: Je pense que ça vaut la peine de vérifier que t'as pas de bug là dedans, parce que c'est ce que je veux, je garde tous les chemins possibles, avec tout l'historique et je timeout pas
+ leojean890: et en plus je mets un filtre en entrée du backtracking
+ leojean890: histoire d'épurer avant d'aller trop loin
+ leojean890: mais tu fais sûrement pas une boucle sur les 15*15 positions entre (0,0) et (15,15) comme moi
+ leojean890: j'ai pas mal de filtres résultant des tours d'avant
+ leojean890: mais en dehors de ça je fais un backtracking par position non filtrée
+ leojean890: j'pense que je peux trouver plus rapide&#160;;)
+ Gentiltoutou: je fais pas de backtracing, au contraire, je construire la liste des possibles au fur et à mesure des tour, ça me permet de pas tout recalculer
+ leojean890: pareil chaque tour je calcule la liste des possibles
+ leojean890: je vais voir comment éviter de la recalculer
+ leojean890: je la recalcule pour prendre en compte l'ensemble des contraintes de l'ensemble du parcours à chaque fois 
+ Vry: Merci leojean890
+ leojean890: you're welcome :P
+ Vry: Swagboy&#160;: j'affiche les inputs sur la sortie d'erreur dans le même format
+ Vry: Comme ça j'ai juste à copier coller
+ Swagboy: Ah tout simple, merci
+ Vry: Ça me permet aussi de vérifier que je lis correctement les inputs ...
+ leojean890: sinon j'avoue je pourrais partir juste des positions du tour précédent et appliquer les contraintes, mais sans les chemins complets je peux moins filtrer sur les cases déjà passées 
+ leojean890: un petit mix des 2 devrait le faire
+ leojean890: je vais garder mon filtre basé sur les chemins complets qui permet d"élaguer les silences avec le fait de ne "pas passer 2 fois au même endroit" + ajouter un filtre de compatibilité "positions tour N =&gt; positions tour N+1"
+ domak: Hey bien remonté, Vry!
+ ThomasNicoullaud: Bon aller c'est le grand jour 
+ leojean890: tu soumets ton code&#160;?;)
+ ThomasNicoullaud: yep
+ leojean890: hehe
+ leojean890: moi j'ai bien chuté j'étais 85 hier matin :P faut rattraper ça&#160;!
+ JBM: soumettre c'est reculer
+ ThomasNicoullaud: je suis plutot content pour ce premier jet
+ ThomasNicoullaud: on va voir
+ leojean890: tu passes les 2 leagues bois d'un coup j'espère^^
+ ThomasNicoullaud: heu ca serait un gros fail si c'était pas le cas :D
+ ThomasNicoullaud: je tente le top 50
+ ThomasNicoullaud: j'ai tout implémenté et j'ai tout check avec mass TU
+ leojean890: hehe^^c'est tjr bien de reussir du premier coup&#160;! mais tu peux pas le tester contre les gens des leagues dans lesquelles tu n'es pas je crois&#160;?
+ ThomasNicoullaud: tiens j'avais pas prévu les timeout
+ ThomasNicoullaud: :x
+ pb4: ThomasNicoullaud&#160;: tu pars d'où&#160;?
+ pb4: wood2 to silver&#160;?
+ JBM: wood2 si j'ai bien suivi
+ ThomasNicoullaud: wood2
+ leojean890: il part de code non soumis pour direct top 50 :P ça peut ^^
+ JBM: ça a l'air mal parti
+ leojean890: ouais les timeout c'est un gros pbm dans ce sujet xd
+ ThomasNicoullaud: j'ai que un timeout
+ domak: bah déjà faut gérer tous les inputs...
+ ThomasNicoullaud: on va dire que c'est un accident
+ JBM: ça va pour cette fois
+ leojean890: un seul timeout sur N parties&#160;?^^
+ ThomasNicoullaud: oui
+ ThomasNicoullaud: au premier tour
+ leojean890: ça va si tu gagnes tout;)
+ ThomasNicoullaud: oui j'ai fait 100% sinon
+ ThomasNicoullaud: je suis en wood1 maintenant
+ leojean890: ah oui t'as pas prévu le cas où t'es dans une étendue d'eau d'une seule case ,
+ leojean890:&#160;?
+ BioLampshadeFromTheSwamps_299c: hola
+ ThomasNicoullaud: non xD
+ leojean890: hola
+ domak: faut tout que tu refasses alors...
+ BioLampshadeFromTheSwamps_299c: Qlq1 aurait deja fait un jeu de pattern recognition
+ BioLampshadeFromTheSwamps_299c:&#160;?
+ leojean890: fais gaffe t'as aussi le cas de l'étendue d'eau de 4 5 cases à prévoir ;P
+ BioLampshadeFromTheSwamps_299c: retrouver une image dans une image
+ leojean890: qui est le même d'ailleurs ;P
+ BioLampshadeFromTheSwamps_299c: Le tout représenté par des array
+ leojean890: je n'ai pas fait ça BioLampshadeFromTheSwamps_299
+ BioLampshadeFromTheSwamps_299c: ok thx
+ leojean890: tu peux faire pixel par pixel un truc pas optimal, genre des que tu tombes sur celui en haut à gauche tu essayer de propager pour voir si c'est ok et sinon tu continues:P
+ BioLampshadeFromTheSwamps_299c: il fallait trouver en 1s max
+ BioLampshadeFromTheSwamps_299c: <a rel="nofollow" class="external free" href="https://www.developpez.net/forums/d2036985/dotnet/langages/csharp/codingame-retrouver-motif-image/">https://www.developpez.net/forums/d2036985/dotnet/langages/csharp/codingame-retrouver-motif-image/</a>
+ BioLampshadeFromTheSwamps_299c: C'est le meme sujet que jai vu, mais je devais le faire en php
+ leojean890: d'accord, 1 sec max vaut mieux pas se contenter de ma solution naive ci-dessus :P
+ leojean890: peut être un truc par dichotomie de chercher des tailles de zones variables jusqu'à trouver le motif
+ BioLampshadeFromTheSwamps_299c: maybe
+ BioLampshadeFromTheSwamps_299c: je vais y reflechir encore
+ leojean890: tailles de zones variables =&gt; tu repères un bout de ton motif dans une zone =&gt; tu sais où poursuivre la recherche
+ bourgeof: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/443612683">https://www.codingame.com/replay/443612683</a>
+ bourgeof: Une victoire facile...
+ domak: c'est laid comme mort pour un sous-marin...
+ bourgeof: Je n'avais pas réalisé qu'on pouvait se retrouver bloqué... Je ne check pas ça.
+ ThomasNicoullaud: ca doit pas arriver souvent&#160;?
+ Swagboy: BioLampshadeFromTheSwamps_299c inspire toi des algorithmes de recherche de mots dans une chaine de caractère, c'est un peu la même idée
+ bourgeof: Je ne pense pas. C'est la première fois que je le vois
+ Vry: Nan ça n'arrive pas souvent mais faut en effet compter les mers avant pour trouver la plus grande ...&#160;:)
+ domak: ça vient juste de m'arriver dans l'IDE... 1 seul case de mer...
+ Vry: Merci domak
+ ThomasNicoullaud: ca sera ma dernière feature lol
+ domak: Vry t'étais en bronze ce matin, c'est ça?
+ ThomasNicoullaud: c'est pas ça qui doit changer grand chose
+ Vry: domak, cette nuit tu veux dire&#160;?
+ domak: je sais pas quand s'arrêtent tes nuits...
+ Vry: Je crois me souvenir que c'estmon submit d'il y'a 23h qui m'a fait passer silver
+ bourgeof: ThomasNicoullaud, je ne pense pas en effet, sauf si tu te bats pour les premières places...
+ Vry: donc 0h33 c'était bien ce matin ... ou 23h30 hier soir avec le changement d'heure&#160;!
+ domak: bon poser des mines comme un goret c'est pas efficace... faut un minimum de gestion...
+ Vry: domak, c'est ce que j'ai fait pour sortir du fond de Silver ... quand j'ai été promu je ne faisais que du sonar et aucune mine
+ domak: je tente là... pour l'instant c'était que torpille et silence -&gt; top 80
+ Vry: Là je pose des mines sans qu'elles se recouvrent
+ leojean890: ouais c'est pas évident de choisir méticuleusement où les mettre
+ Vry: Moi aussi mais je lançais les torpilles que si j'avais la case exacte de l'adversaire
+ Vry: leojean890, osef je ne pose pas sur les bords et elles ne se recouvrent pas ensuite dès que c'est chargé je pose
+ Vry: si je ne peux pas je charge le sonar du coup
+ Vry: J'ai deux choses à travailler&#160;: le déplacement et la phase d'attaque
+ ThomasNicoullaud: j'ai aucune phase pour le moment
+ ThomasNicoullaud: je me déplace au gré des cases dispos
+ Vry: Moi aussi pour le coup ...
+ domak: je pense qu'il y a beaucoup à gagner en gérant les ressources intelligement (ce qui n'est pas mon cas)
+ leojean890: pareil je bosse le deplacement et l'attaque ^^
+ leojean890: pareil domak
+ ThomasNicoullaud: ptin ca se passe plus très bien en sivler
+ ThomasNicoullaud: c'était à prévoir :D
+ leojean890: n'empêche bravo c'est déjà bien de monter silver en 1 submit^^
+ ThomasNicoullaud: j'ai fait quelques correctifs
+ leojean890: mais ouais y'a les premiers du contest ici donc plus chaud quoi :P
+ Vry: Je me rends compte que je fais exploser mes mines trop tôt ... je me fais grillé super vite du coup ...
+ leojean890: ouais :P
+ leojean890: si tu joues contre un mec qui output ton nb de pos et le sien tu le vois :P
+ Vry: En retard ma pose de mine je double la durée de la partie, c'est déjà ça&#160;!
+ leojean890: sinon les poser mais les faire exploser lgtps après quand ça te donne une information clef pour ta liste de positions :P
+ pb4: C'est le trigger qu'il faut limiter, pas la pose&#160;:)
+ Vry: Oui c'est ce dont je parlais en fait :p
+ leojean890: ouais trigger qua d t'hésites genre entre 2 pos 
+ leojean890: quand*
+ leojean890: moi perso je suis plus flexible que ça mais c'est parce que mon process pour détecter l'autre n'est pas le plus rapide
+ Vry: Là dès que j'étais plus sur la mine fraîchement posé je la faisais exploser car il était probable que l'adversaire soit dessus ... mais en début de partie c'est normal ...
+ leojean890: ouais en début de partie t'as genre 100+ pos
+ leojean890: moi j'ai des seuils sur mon nombre de positions adv + les regroupements de positions autour d'une position de tir qui sont aussi intéressants pour tirer ou trigger 
+ Vry: J'avais pas de seuil pour trigger ...
+ Vry: Corrigé
+ Vry: Mais je vais pas resubmit de suite je pense
+ Vry: :D
+ leojean890: ThomasNicoullaud j'avoue t'as submit il y a 1h et t'es déjà 62eme silver gg:P
+ ThomasNicoullaud: je pensais que j'étais plus solide&#160;:/
+ ThomasNicoullaud: peut etre des coef a modifier
+ leojean890: c'est quand même cool d'avoir ça sans même avoir testé le prgrm contre des joueurs de la league;P
+ leojean890: ça va tranquille je vois que tu montes encore :P
+ ThomasNicoullaud: je change des choses :D
+ Skynet_back: Bonsoir tt le monde
+ domak: joli ThomasNicoullaud
+ leojean890: bonsoir
+ Vry: ThomasNicoullaud, fait gaffe il ne te reste que 21 jours pour régler les coef. :wink:
+ Swagboy: Hehe
+ ThomasNicoullaud: il va falloir analyser maintenant
+ leojean890: 15eme , XD T'ES CHAUD
+ leojean890: oops maj
+ YannT: de toutes façons l'important c'est les valeurs
+ Vry: lol, je suis le premier C :money_mouth:
+ R4N4R4M4: gg Vry
+ Vry: Tu n'es pas loin R4N4R4M4, 0.1 points
+ YannT: yeah top5 :tada:
+ Vry: Merci
+ BigUP: Vry, ca ne doit pas se battre pour coder en C sur ce contest&#160;!&#160;;)
+ YannT: bon vu comment ça bouge faut prendre le screenshot maintenant...
+ R4N4R4M4: gg YannT
+ Vry: Mais si BigUP&#160;!
+ leojean890: gg xD
+ BigUP: gg quand meme&#160;!&#160;;)
+ ThomasNicoullaud: mon aller dernier submit et dodo
+ leojean890: top 10 cette fois&#160;?;)
+ ThomasNicoullaud: ou pas
+ ThomasNicoullaud: j'ai l'impression que c'est random 
+ leojean890: au pire si c'est pas today il reste 3 semaines&#160;;)
+ ThomasNicoullaud: ouais mais en terme d'idée j'ai fait le tour c'est ca mon problème :D
+ leojean890: ça peut venir avec le temps;P
+ YannT: m'étonnerai que t'ai déjà fait le tour ThomasNicoullaud&#160;;)
+ ThomasNicoullaud: des grosses features j'ai tout mis
+ ThomasNicoullaud: après faut paufiner quoi
+ leojean890: moi j'ai clairement un bug car quand and je calcule les positions possibles en allant au N, E, W, ou S j'ai tjr le même nombre xD
+ ThomasNicoullaud: changer un 5 en 10 etc ... le plus chiant
+ leojean890: + des timeout
+ leojean890: je suis pas près de submit
+ leojean890: ah ouais changer les nombres comme ça c'st chaud faut faire des stats dessus^^
+ YannT: ThomasNicoullaud: t'as mit l'évitement des mines adverses?
+ ThomasNicoullaud: nop
+ ThomasNicoullaud: et je bouge en random
+ YannT: lol
+ leojean890: bah t'as de quoi faire alors xD
+ ThomasNicoullaud: enfin je veux dire juste sur les cases libres quoi
+ YannT: check ta deduction contre des bots qui mettent la leur en messages aussi&#160;;)
+ YannT: tu vas voir que t'as surement encore des trucs héhé
+ ThomasNicoullaud: la leur&#160;?
+ leojean890: tu vois si certains déduisent plus vite que toi ou pas surtout ainsi
+ YannT: oouais ya des pots qui mettent le nombre de positions estimée
+ ThomasNicoullaud: ca je le vois déjà
+ YannT: c'est bien pour valider que la tienne marche bien
+ ThomasNicoullaud: puisque je calcul les deux
+ leojean890: si certains ont leur nombre qui descend plus viteque le tien c'est qu'il reste de l'improvement sauf si leur affichage est un troll
+ Swagboy: Après il faut faire attention, moi j'affiche mon pire des cas en supposant que l'adversaire connait ma trace
+ leojean890: moi j'ai remarqué que quand je fais un shoot à côté certains enlèvent plus de positions que moi par ex
+ Swagboy: Oui ils prennent sûrement en compte ta position pour pouvoir shooter ici + ta position en fonctions des dégâts que tu (ne) reçois (pas)
+ YannT: sur les silences aussi, il y a des optimisations possibles que tout le monde a pas
+ smeagol: bonsoir
+ leojean890: sur les silences je suis carrément à la rue perso vu que je dois épurer ma liste d'actions au bout d'un moment
+ smeagol: il y a des stratégies avec simulation&#160;?
+ smeagol: exist-il des CGamers qui ont utilisé MC, AG, ... Algos de simulation
+ leojean890: ouais position pour le lieu du tir et pour les dégats
+ YannT: je crois pas encore smeagol
+ leojean890: sachant que certains se tirent dessus pour brouiller les pistes
+ leojean890: je ne crois pas non plus ;o
+ smeagol: YannT: je m'en doute qu'il y a
+ leojean890: après ils expliquent pas forcément pas tous leurs choix ;P
+ leojean890: pas forcément tous*
+ smeagol: on peux simuler mais les performances&#160;!!!! je ne sais pas
+ leojean890: mdr même sans simuler t'inquiète j'ai déjà des pbms de timeout à fond ;P
+ leojean890: après si t'y arrive honneur à toi^^
+ smeagol: il ne faut pas simuler tous
+ leojean890: normal ouais
+ leojean890: élaguer, faire des choix^^
+ smeagol: n'essaie pas simuler les mouvements possibles de l'adeverssaire
+ leojean890: perso je le fais pas:p
+ smeagol: leojean890: tu code en quel langage
+ YannT: j'ai la simu, je prend que les infos non devinables du referee (les vies actuelles en début de tour et les ordres adverses)
+ Vry: Il reste 21 jours, on a le temps pour simuler ...
+ YannT: mais je m'en sert pas :D 
+ smeagol: effetivement Vry
+ leojean890: python xD oui je sais je les cherche les problèmes de perf;)
+ Vry: Gold d'abord, on verra pour la simu après :sunglasses:
+ YannT: j'ai la simu, maintenant faut écrire une recherche :p 
+ YannT: c'est ma prochaine grosse feature
+ smeagol: YannT: t'a codé le simulateur&#160;?
+ leojean890: MCTS&#160;?:P
+ Vry: Avoir un bot heuristique de bon niveau c'est bien aussi
+ YannT: oui j'ai codé le simulateur, mais je l'exploite avec une heuristique
+ leojean890: minmax très élagué&#160;? sinon ça pète direct
+ leojean890: heuristique bon niveau clairement c'est bien yep&#160;:)
+ smeagol: Yann: tu code en Kotlin
+ ThomasNicoullaud: oh la tuile
+ YannT: ça marche bien, mais du coup en vrai je fais juste 4-5 simu par tour pour voir quelques trucs (donc c'est de l'heuristique, pas d'algo de recherche encore)
+ ThomasNicoullaud: quand la torpille et la mine touche en meme temps, ca me fait un gros bug
+ YannT: héhé
+ YannT: les bots qui se tirent dessus aussi c'est dur à gérer&#160;;)
+ leojean890: ouais tu sais pas lequel a touché juste et lequel a touché juste à coté
+ smeagol: la simulation&#160;: il faut coder en C/C++ ou java
+ YannT: Kotlin c'est du Java
+ leojean890: genre la torpille fait 1 degat et la mine 2 ou l'inverse
+ YannT: ou c'est le bot adverse qui s'est torpillé :p
+ smeagol: en Java&#160;: pour avoir bcp de simulation il faut passer que des array de 1 dim
+ leojean890: ou autre cas l'un fait 2 et l'autre 0, ou les 2 font 1 ou le bot asverse d'est tiré dessus yep
+ smeagol: YannT: il est long à coder&#160;?
+ leojean890: array1D bitset :P
+ leojean890: déjà en python j'arrive à faire plein de bugs donc c++ et c c'est pire et je traine pour finir :P
+ smeagol: en java: je code l'instance en array 1 dim et j'utilise arraycopy (technique que egaetan m'avait montré)
+ leojean890: java encore ça pourrait se faire
+ smeagol: oui
+ smeagol: en CSP j'avais 25K
+ smeagol: en CSB j'avais 25K simulations
+ smeagol: leojean890: t'a fini le simulateur&#160;?
+ leojean890: non :P j'essaye de régler mes timeouts pour le DFS que je fais pour localiser l'autre quand j'ajoute des silences ou quand j'ajoute le fait de l'appliquer sur mes différents moves possibles pour choisir le moins tracable:P
+ smeagol:  DFS: l'algorithme de recherche en largeur&#160;?
+ Swagboy: D = deep
+ leojean890: profondeur&#160;;)
+ smeagol: profendeur
+ smeagol: por checher quo&#160;?
+ smeagol: la position adv&#160;?
+ leojean890: ouais
+ smeagol: pour t'utilise pas l'algo de Djistra&#160;?
+ leojean890: mais je l'applique sur moi aussi pour prendre le chemin qui donne le moins de positions possible à l'adv
+ smeagol: t'explore toutes chemin&#160;?
+ leojean890: juste pour laisser le moins de positions possibles à l'adv, comparer mes chemins
+ leojean890: le plus*
+ smeagol: il y a A* tu l a testé&#160;?
+ leojean890: en ajoutant une heuristique de parcours en gros&#160;?
+ smeagol: oui
+ smeagol: on joue sur la distancce
+ leojean890: bah là le truc c'est que je dois parcourir tous les chemins possibles pour voir si au moins un est possible
+ leojean890: c'est pas une recherche de plus court chemin
+ smeagol: ah oui
+ leojean890: les silences ça enc rée 17
+ leojean890: crée*
+ leojean890: j'élague si jamais mon parcours fait recroiser son propre chemin par ex
+ smeagol: oui je voix
+ leojean890: ou des îles ..
+ smeagol: silence elle duplique un chemin à 13 fois max
+ smeagol: non 17
+ leojean890: 17;P
+ leojean890: parfois je me dis que je devrais pas faire tout ça en python :P
+ smeagol: il ne faut pas compter la direction de la position ptécedente
+ leojean890: je fais des élagages vis à vis des incompatibilités avec les pos précédentes
+ smeagol: 1 + 4 * 3 (3 directions)
+ leojean890: ah oui donc 13 vu comme ça
+ leojean890: car on peut pas faire demi tour
+ smeagol: on reviens pas sur la postion prédente
+ leojean890: yes;P
+ smeagol: à ta place je calcule les cases suivantes de la postion courante. 
+ smeagol: parfois on trouve que 2 ou 1
+ leojean890: ouais mais tu peux pas élaguer les chemins incompatibles avec les retours à la même case, sauf si tu stockes tous les chemins depuis le début
+ smeagol: pour direction possible: je cherche 4 chemin possibles
+ leojean890: à chaque tour tu stockes tous les chemins possibles
+ leojean890: plein de listes au lieu de points
+ leojean890: et tu peux vérifier les incompatibilités plus rapidement
+ smeagol: perso je bosse avec les listes
+ smeagol: je garde les trajectoires
+ smeagol: chemains
+ smeagol: j'ai une questionsu sur la commande la porté de torpedo&#160;?
+ smeagol: pour que un bot émis un torpedo x y
+ smeagol: faut-il que la reachability à partir de sa postion atteint ce point(x,y)
+ smeagol:&#160;?
+ leojean890: ouais c'est 4 cases max en distance BFS
+ Swagboy: distance manhattan
+ smeagol: donc on peut déduire que dist (bot.pos, cible(x,y) ) &lt;= 4&#160;?
+ leojean890: en bfs, donc pas de traversées d'îles
+ smeagol: tous les cases des chemins de longeurs = 4
+ leojean890: &lt;= 4
+ smeagol: l'ensemble des cases des chemins de longeur n  inclut dans l'ensemble ..... n+1  :grinning:
+ smeagol: Merci leojean

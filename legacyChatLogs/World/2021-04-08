@@ -1,0 +1,1249 @@
+ ShortBaited: sites wont load and everything is buggy
+ ShortBaited: Site dosent even register that i leveled up a min ago
+ BigFatDecker: while(num_valid_actions&lt;4):
+ solution.cpp: depends on a lot of things, what are the variables, what do you mean by doesnt work
+ BigFatDecker: the varible is set up as num_valid_actions = int(input()) and it just timesout
+ Papyrus_HB: '3+3*2' how to evaluate the string from left to right instead of order of operation?
+ solution.cpp: If there is no input received then input() will wait forever
+ BigFatDecker: so how could i set it up to check if the row has less then 4 and if it does to move to the next row
+ Papyrus_HB: x=0while x&lt;4:
+ Papyrus_HB: x+=1
+ Papyrus_HB: what about this?
+ BigFatDecker: hmm i still get a timeout it is ok if i said the link to the puzzle so you can understand more of what im trying to do?
+ BigFatDecker: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/connect-4">https://www.codingame.com/ide/puzzle/connect-4</a>
+ solution.cpp: can you send all your code?
+ solution.cpp: Are you forgetting to print a response at the end?
+ BigFatDecker: <a rel="nofollow" class="external free" href="https://pastebin.com/iqWQAa1m">https://pastebin.com/iqWQAa1m</a>
+ BigFatDecker: ok so thats my code i kinda screw it up even more i think haha
+ Qyxi: (3+3) * 3. Use parenthesis Papyrus_HB
+ solution.cpp: That code runs for me
+ BigFatDecker: mine?
+ solution.cpp: Yes
+ solution.cpp: It doesn't beat the challenge but it does run
+ iwantcakenow21: Gilbert moment
+ GilbertGaming27: Gilbert
+ BigFatDecker: it runs but times out after the first row i gotta be able to go to the next row after there is less then 4 spaces and i cant figure out an if tatement or anything haha
+ solution.cpp: The timeout is probably caused because you have both print statements inside the scope of if
+ solution.cpp: you could add an else clause with some general print(0) and see if it still times out
+ Gnorty: is it just me or are there issues with the site atm? Im having clashes not launching, submitted code stuck at pending etc
+ solution.cpp: Yes there are issues
+ BigFatDecker: would i put general print(0) or put my variable in place for ther 0
+ solution.cpp: i just mean for testing where you have if(turn_index&lt;64):have else:
+ solution.cpp: it doesnt matter whats in the print just for testing if thats causing the timeout
+ Qyxi: print(debug in else line xx)
+ solution.cpp: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/90cfe633-bce5-4402-93e6-133715c7af7f">http://chat.codingame.com/pastebin/90cfe633-bce5-4402-93e6-133715c7af7f</a>
+ Nuggs: clashing dont be workin doe
+ solution.cpp: refresh page on start
+ Nuggs: ahh
+ iwantcakenow21: why website be bad
+ Nuggs: says the cakeman
+ iwantcakenow21: ok
+ brandex123: I can't bear it anymore
+ Qyxi: BigFatDecker, the first for loop, it waits for an input, 7 times yes? What input is sent to it?
+ brandex123: goodnight everyone
+ BigFatDecker: haha i think ive been stariing at this for too long because now im just starting to confuse myself
+ Qyxi: Why are you printing based on turnIndex instead of oppLastMove?
+ DaNinja: start again, delete your two if's and replace with 
+ DaNinja: print(action)
+ Qyxi: Looking at the puzzle, it doesn't state which player starts, so I assume it's randomized in inizialization. So  checking for steal should include a check that your bot is 2nd player id 1 and that it's turn 2.
+ Qyxi: Otherwise, that if blocks if your bot is 2nd player on rounds past 2nd
+ Qyxi: Well, not blocks, but outputs invalid statement.
+ BigFatDecker: ok i think im starting to get it
+ Qyxi: Which, reading the context of the puzzle, should end the game due to invalid unreadable input.
+ Qyxi: after turn 2 that is.
+ Qyxi: But, if you say it's timing out, it may be that the game is rejecting "steal" on turn 4 and continues to wait. 
+ Qyxi: if((turn_Index == 2) &amp;&amp; (myId == 1))
+ Qyxi: print(-2)
+ BigFatDecker: ok so im confused again why would i put negative 2? sorry if these are dumb questions
+ Qyxi: That takes care of your bot being 2nd player and doing the steal, though a steal isnt' always best.
+ Qyxi: The second player can output either the word STEAL or the integer -2 for this action.
+ Qyxi: Right under the picture of showing the steal is that line.
+ Qyxi: Only time a steal could be useful though would be if center of board, index 4, maybe 3 and 5 also
+ Qyxi: steal at 0,9 and even 1,8 would literally back your bot into a wall with nowhere to grow/go
+ BigFatDecker: so is tyhere anything i could do to prevent that?
+ Qyxi: Yeah, add it to turn 2 checks.
+ Qyxi: make a nested if to the check for turn 2, and then use an if(opp_previous_action == 4) 
+ Qyxi: or the rest you want with it.
+ Qyxi: You created x and x2, you inizialize them but throughout the course of the game never change them. So, if your bot plays 0 every turn
+ Qyxi: omit the 'if' in that last line, it was a typo.
+ j0eTheRipper: yo
+ j0eTheRipper: I'm having a problem
+ Qyxi: Which, by turn 8, or sooner, your bot  can't play, sending again invalid input, which should end the game, but likely causes a time out.
+ j0eTheRipper: i'm trying this coders Strike back
+ j0eTheRipper: think
+ Qyxi: Think the game/site was lagging and most the real coders logged off.
+ j0eTheRipper: anyway, i'm stuck at the second level, and i couldn't do anything about it
+ Qyxi: What's the second level? Remind me please.
+ j0eTheRipper: it gets you to some pseudo code, i'm supposed to implement it, i implemented it and it's not working
+ Qyxi: Define the behavior your code is doing.
+ j0eTheRipper: nothing, just nothing
+ Qyxi: Does it time out causing you to lose? Does the match start?
+ j0eTheRipper: the pseudo code says if the angle is more than 90, then set the thrust to 0, else set it to 100
+ Qyxi: Okay. What does that look like in code?
+ BigFatDecker: thank you everyone for the help im gonna get off my brain is scrambled and i just keep confusing myself more lol
+ BigFatDecker: hope everyone has a good day/ night
+ Qyxi: Coding frustrated and tired does lead to buggy code. Rest is good.
+ M1nerman: I'm joining clashes but when the timer hits 0 nothing happens
+ vrag: same here
+ BigFatDecker: thank you so much for your help!
+ Qyxi: Yes, the site is lagging.
+ Wontonimo: the solution is to instead do something else, like <a rel="nofollow" class="external free" href="https://www.codingame.com/training/easy/mars-lander-episode-1">https://www.codingame.com/training/easy/mars-lander-episode-1</a>
+ Wontonimo: ur welcome
+ Qyxi: Most folks logged off due to the lag problem. Some said opening a new tab and/or refreshing the browser helped briefly.
+ vrag: yeah, the refreshing did solve the issue
+ Qyxi: Did you get it worked out joeTheRipper?
+ vrag: not yet
+ j0eTheRipper: no
+ j0eTheRipper: something is wrong with the instructions, i'm sure
+ Qyxi: So the psuedo code says, if(angle &lt; 90) thrust =0 else thrust = 100
+ Qyxi: if(angle &lt; -90 || angle &gt; 90)&#160;? thrust = 0&#160;: thrust = 100;
+ Qyxi: In the previous tutorial it explained the output needed to be x, y, thrust.
+ Qyxi: *Frown* I made it to bronze league without making a GA. Didn't mean to progress.
+ Qyxi: Bummer, changing language doesn't restart the tutorial in that language.
+ jrke: you can make to gold without any tough thing
+ Qyxi: Yeah, but I figured more training time would potentially yield a better agent.
+ jrke: no i mean without any algorithm you can make gold
+ jrke: just with one pseudo
+ Qyxi: Which, I gotta ask, is there a way to save on here? I mean, training an agent requires saving and loading yes?
+ jrke: no you can't save any data on CG permanently
+ Qyxi: I have a 3 if basic, if angle &gt;90 or &lt;-90 thrust 0 else if distance &lt;1500 thrust 50 else thrust 100
+ Qyxi: So where does the agent data save after a race?
+ Qyxi: Or, after a match since there are multiple game types/
+ jrke: data is not saved anywhere your code runs each time you are matched
+ Qyxi: I mean, the whole idea of a GA is not hardcoding the values.
+ jrke: you can save data in variables
+ Qyxi: that initializes from where?
+ _Superman: why can i not see my friend online
+ _Superman: even though he is online
+ jrke: in chat _Superman&#160;?
+ _Superman: in invite list
+ _Superman: for a private clash
+ jrke: maybe your friend has switched off the invite link feature
+ _Superman: no 
+ Qyxi: let them try inviting you
+ jrke: ask your friend to check last option in this- <a rel="nofollow" class="external free" href="https://www.codingame.com/settings/notifications">https://www.codingame.com/settings/notifications</a>
+ _Superman: ok
+ _Superman: it was already checked
+ Qyxi: can a file be loaded from the users pc, i'm trying to figure out where the weights and biases and nodes are saved, updated, and loaded to/from.
+ jrke: Qyxi nothing can loaded from external files on CG 
+ jrke: what do you wanna do btw?
+ Qyxi: I read some articles where some folks use GA's for these competitions. I'm just wondering where the trained agent gets stored in between matches.
+ octopuscabbage: you can just copy and paste in some json if you train it offline
+ Qyxi: There is offline access to the games?
+ jrke: you can train offline and save data in variables on CG
+ octopuscabbage: no you'll have to write a forward simulator in your code anyway
+ octopuscabbage: so you can just run that offline
+ jrke: or you can use referee code to do that
+ octopuscabbage: writing the forward simulator is what turns me off from most of teh bot programming on this website
+ Qyxi: Ugg, quit the put off that is.
+ Qyxi: Seems like it'd be easier to print a post match printout, and hardcode/update the agent's start values/variables at the start of each match.
+ Qyxi: Until it becomes adequately trained, then just disable the training functions and leave the weights/biases hardcoded in.
+ Qyxi: But, *shudder* can you imagine training a single agent at a time, updating after each match, and wash/rinse/repeat. That would be cringe worthy dedication.
+ octopuscabbage: i don't see how it's any easier to train on CG than it is to just write a training loop with a forward simulator you write?
+ octopuscabbage: unless you're just using learning so you don't have to write a forward simulator
+ Qyxi: NEAT is drool worthy.
+ Qyxi: Simplistic design, yet, baffling to observe.
+ Qyxi: It's like othello, 5 mins to learn and a lifetime to master.
+ Qyxi: Well, you know what I mean. It's just cool to watch NEAT do what it does and usually does it quickly.
+ octopuscabbage: i don't think NEAT works very well in the "real world" tbf 
+ Qyxi: Well, if it works poorly, it's not the agents fault. It's inadequate information passed from the creator.
+ octopuscabbage: people just over emphasize "bio-inspired" design
+ octopuscabbage: well if it performs poorly relative to other algorithms it's the agents fault? lol
+ Qyxi: What scares me is the over eager minds that let lose skynet agents.
+ Qyxi: In any GA
+ Qyxi: Robert Miles has a channel where he disucusses the potential dangers that are often overlooked when working with GA's. 
+ techgoat222: hey i<b>m in atlanta</b>
+ techgoat222: @Oyxi what city are you in&#160;?
+ Qyxi: GA (Genetic Algorithm) Smart AI.
+ Qyxi: Memphis.
+ techgoat222: 🤪
+ Louis.: salut
+ Qyxi: Saw a video of a robotic spider thing. The fitness function gave it points when it's feet were off the ground, and took away points while it's feet was touching the ground. Seems logical that the spider would minimize it's feet touching the ground, thus move faster yeah?
+ Qyxi: The spider rolled over on its back, and used it's knees  to walk, so it maximized it's points. Great example of something overlooked by the devs. 
+ dbdr: sounds pretty silly. it would want to maximize speed, measure speed, not feet contact
+ dbdr: *if
+ Qyxi: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=GdTBqBnqhaQ">https://www.youtube.com/watch?v=GdTBqBnqhaQ</a>
+ jacek: just like some video games when ai finds the glitches to collect more points
+ Qyxi: Right, cheating ai's.
+ jacek: would be fun to see what 'glitches' in real world would they find
+ Qyxi: I read somewhere that a NN was used to make the ai of a game, but didn't provide any nerf versions. It was unplayable because the ai was to good.
+ Qyxi: I'm sure there's data/videos out there of some unexpected results on the self driving cars tests.
+ Qyxi: What's that new intelligent engine, GSA 3 maybe?
+ Qyxi: Let me google that, GSA 2 recently got an overhaul making the 3rd version
+ Qyxi: GPT-3
+ Qyxi: The articles about that are interesting. I often frown on the use of how they describe the ai's actions/chooses as 'probabilities' rather than as intelligent choices.
+ Qyxi: Anyway, back to the things happening on this site. I still haven't worked out on paper how to solve that silly nugget riddle. 
+ Qyxi: I've begun losing sleep over it.
+ dbdr: Nice Illedan!
+ Tiramon: hm someone was doing botters of the galaxy and finally pushed me up one league ... thanks&#160;;)
+ MadKnight: np Automaton2000
+ Automaton2000: how are you doing the contest
+ ItayBeladev: wtf. dbdr ur third place?
+ dbdr: hey MadKnight! joining the CSB-lite contest?
+ dbdr: ItayBeladev yes, why?
+ ItayBeladev: How did u do that?
+ ItayBeladev: You are just winning a lot a day?
+ jrke: CSB -lite contest dbdr?
+ jrke: whats that
+ MadKnight: dbdr gimme link
+ dbdr: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/challenge/sofia-labs-coding-challenge">https://www.codingame.com/ide/challenge/sofia-labs-coding-challenge</a>
+ jrke: not for asia&#160;:(
+ dbdr: ItayBeladev get good ranks on many multis/optims
+ dbdr: ah yes
+ dbdr: is Russia in the list?
+ jrke: india not in list
+ MadKnight: oooooh i've seen that one i think i've even prepared a bot for it
+ dbdr: cool!
+ jrke: can i play with different country?
+ MadKnight: and are u just using a simu dbdr&#160;?
+ dbdr: MadKnight just MC without opponent for now
+ jrke: where can i look all the contests?
+ dbdr: this one is semi-private, not listed
+ Qyxi: Only for Europe?
+ dbdr: yes
+ dbdr: probably the choice of the sponsor company paying for it
+ Qyxi: Makes sense. ps5 to first place. I'm jealous.
+ ZetaQ: :unamused:
+ dbdr: pretty hard to be 1st, especially since so many people optimized their CSB to death
+ MadKnight: Automaton2000 is your CSB bot optimized to death&#160;?
+ Automaton2000: i can't help you there
+ jrke: ask reCurse if he wants ps5
+ dbdr: he's not in europe
+ MadKnight: he probably has one already
+ Illedan: Sooo close -.-
+ dbdr: what's up Illedan?
+ Illedan: Close to 1st :P 
+ Marchete: with C#
+ Marchete: congrats
+ Illedan: 500 sims should be enough
+ Illedan: 500k
+ BlaiseEbuth: Not for long&#160;! You'll see&#160;! :smiling_imp: When my code will be OK to cooperate... :expressionless:
+ Seni-J: clash crash?
+ Seni-J: the clash isn't launching after the countdown (2nd time i got this)
+ Uljahn: been reported already on discord
+ Seni-J: oh ok :thumbsup_tone3: (not using discord so didn't know)
+ TinyWhale: Had the same issue but seemed to ok now (after a couple hours)
+ JSboss: yay the site is working again :saxophone:
+ BlaiseEbuth: Never stopped.
+ JSboss: For many users myself included it definitely did
+ jacek: maybe for clashers
+ BlaiseEbuth: Yeah just a little part of the site.
+ [CG]Thibaud: most used part of the site*
+ jacek: according to whom
+ BlaiseEbuth: The 95%
+ jrke: is tiramon online?
+ Mil27Coder: c++ vs c#
+ Mil27Coder: which is better
+ jrke: for me c++
+ Error[404]_Anonyme_false-name: c++ too
+ Sandborg: The one you are most comfortable with and need for the work you need to do&#160;:)
+ [CG]Thibaud: as many unique Clash players as Solo unique players per day. 3 times the nb of unique multi players. (players here meaning the ones starting/entering the game)
+ Mil27Coder: javascript vs python which is better
+ jacek: jython
+ JSboss: the answer is clear&#160;;)
+ Mil27Coder: ok
+ Mil27Coder: php vs java which is better
+ BlaiseEbuth: kick
+ Mil27Coder: kick?
+ jacek: kava
+ BlaiseEbuth: kick vs ban which is better&#160;?
+ Alexandru_Becher: @BlaiseEbuth, depend of the context.
+ BlaiseEbuth: Absolutely. And in the case of an user flooding with pointless questions&#160;? :3
+ Alexandru_Becher: If you get kicked from a private(invite only) community than you can get another invite from a friend.But if you get banned from that community than it is bad.
+ Alexandru_Becher: Hmm.. I think a warning message to explain him what he did wrong and after that kicked him.
+ BlaiseEbuth: Hmm... :thinking:
+ BlaiseEbuth: You're a wise man.
+ Alexandru_Becher: Thanks, I just rejoin on the platform to learn some c++ for game programmer job.
+ Alexandru_Becher: Like you, it means a lot to me that you listened to me and didn't ignore my messages.
+ aetrnm: Hey guys! Should I write description for CoC reverse contribution, or I can avoid it?
+ jacek: c++ eh?
+ Alexandru_Becher: Yeah, they develop in Unreal
+ Mil27Coder: kick who?
+ Bandoe: Hello world, just  hypothetical after mastering c++, which is a good option language to jump to next?
+ UnnamedCodinGamer: Bandoe, jump to algorithms, not to languages
+ Notter: Any tips in reducing code runtime?
+ ericwjohns: get a faster cpu
+ Notter: ...crap
+ jacek: oO
+ Uljahn: RiiR
+ TinyWhale: I hear quantum computing is fast enough to break encryption, so don't bother learning fast code  :laughing:
+ DetoBot: lol
+ Jean-Paul: help me ML Ep 2
+ Notter: I'm trying to solve Skynet Revolution ep 2 but it says that my program didn't provide an input in due time
+ Tiramon: less nested loops
+ Tiramon: thats always a good idea&#160;;)
+ Uljahn: use built-in functions, e.g. don't implement sorting by yourself
+ Tiramon: but i see i also got some nested loops in that one, but at least i loop an optimized amout in the nested ones&#160;;)
+ Hardcode_QD: please help me! Shadows of knight - episode 1 test cases 4
+ Tiramon: Hardcode_QD have you looked at <a rel="nofollow" class="external free" href="https://www.codingame.com/learn/binary-search">https://www.codingame.com/learn/binary-search</a> which describes how to solve it?
+ Notter: My code for Skynet ep 2 involves a graph Class containing a node Class
+ Hardcode_QD: Tiramon thank you so much
+ Tiramon: Notter maybe you can reduce some redudancy?like if you already calculated the distance between A-&gt;Byou only have to calc distance between B and C in a A-&gt;B-&gt;C way
+ Tiramon: also if distances don't change you don't have to calc them everytime but only once
+ Notter: Why do I need node distance?
+ Tiramon: you need to calc path in skynetand if you already know a path and it hasn't changed you don't have to recalc it or if you know a part of the path you don't have to recalc the complete path
+ Notter: Well my approach is to simply look for links to cut each turn
+ Notter: Ok maybe not simply
+ Tiramon: and to do that effectivly you have to predict the path skynet takes
+ Tiramon: which needs some kind of pathfinding
+ Tiramon: also if you don't get a result in time it can always be some kind of infinite loop you've run into
+ Tiramon: in skynet 2 i first create a list of nodes with multipl gateways attached, because those are the most dangerous ones, all others can be cut when the agent is rigth at the link
+ Notter: My approach is to create the graph during the initialization with lists of nodes and links
+ jacek: kovi pulled me down :f
+ wlesavo: oh nice Illedan :slight_smile:
+ Illedan: ezpz
+ Mr-Rc: ez
+ Viande: Hello Automaton2000
+ Automaton2000: guys, is there a way to test my code in c++
+ Viande: yes, use the IDE
+ 2kpro: ide
+ Viande: Hello Automaton2000
+ Automaton2000: but i really want to
+ 2kpro: use ide
+ eulerscheZahl: i see Illedan is still playing
+ struct: hi euler
+ eulerscheZahl: hi
+ 2kpro: hi everyone
+ struct: Westicles asked if you could increase number shift levels
+ eulerscheZahl: I number shifting as solved, no more new levels
+ eulerscheZahl: I consider*
+ Illedan: Hi eulerscheZahl
+ Astrobytes: oh hi euler
+ Illedan: Gratz on 3rd in topcoder eulerscheZahl
+ eulerscheZahl: thanks. in the end it was clearer than expected
+ eulerscheZahl: probably my strong performance on 3 colors that wasn't tested that much in the 100 provisional tests
+ Illedan:&#160;:)
+ IbukiMioda: hi
+ BlaiseEbuth: Oh. A toad. Tomorrow will be a shiny day.
+ Scarfield: hurry and kiss it
+ eulerscheZahl: toads mostly show up on rainy weather
+ Astrobytes: hence the next day being nice...
+ BlaiseEbuth: Oh yes, you have to climb a ladder to make tomorrow a shiny day. My bad.
+ eulerscheZahl: but not the global one
+ Astrobytes: Climb a ladder?
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://lh3.googleusercontent.com/proxy/OpSrFlr7a4jgBI8NDdzRHmzfeUXwTIYtcCStpf6MvQ2ZpmZuMrw0O0NhOUUWI5igyDEx2Sci_xjUB36zIVqaqo7NNFebmKkNzQ">https://lh3.googleusercontent.com/proxy/OpSrFlr7a4jgBI8NDdzRHmzfeUXwTIYtcCStpf6MvQ2ZpmZuMrw0O0NhOUUWI5igyDEx2Sci_xjUB36zIVqaqo7NNFebmKkNzQ</a>
+ BlaiseEbuth: ^
+ Astrobytes: Ah right
+ Scarfield:&#160;?
+ Scarfield: im confused
+ 2kpro: :laughing:
+ Louis.: salut
+ 2kpro: salut
+ Louis.: salut
+ 2kpro: salut
+ eulerscheZahl: twice the same user doesn't count to the combo
+ 2kpro: :rolling_eyes:
+ 2kpro:&#160;:?:
+ BlaiseEbuth: No
+ jacek: no?
+ 2kpro: what did i say
+ eulerscheZahl: Yes no. Maybe. I don't know. Can you repeat the question?
+ 2kpro:&#160;:?:
+ BlaiseEbuth: No
+ eulerscheZahl: no Malcolm in the middle fans?&#160;:(
+ 2kpro:&#160;:?:
+ BlaiseEbuth: You die
+ Astrobytes: :grin:
+ eulerscheZahl: next time yell "this is Sparta"
+ Astrobytes: hahaha
+ BlaiseEbuth: Not from Mitm
+ Scarfield: i preallocated a huge object pool for smitsimax in c++, turned out that the size of the object pool was greater than the available 768MB, but it didnt crash, how does that work? and any tips for what i should read to get a better understanding of it
+ struct: you wont crash until you access it
+ struct: Then hell gets loose 
+ Astrobytes: Every time you access it Blaise kills a kitten
+ eulerscheZahl: no hell! that's how we got BlaiseEbuth. born by a segfault
+ Astrobytes: :D
+ Scarfield: that did happen though, thats how i realised, but just wondered why the preallocation didnt crash
+ BlaiseEbuth: I don't kill kitten :scream:
+ Scarfield: mitten murderer
+ BlaiseEbuth: Only human babies
+ struct: Im not sure how it works Scarfield
+ eulerscheZahl: a mitten is a glove, isn't it?
+ struct: I think this is a question for rec urse or robo
+ Astrobytes: Yes euler
+ BlaiseEbuth: Yeah I killes a lot of gloves...
+ BlaiseEbuth: *killed
+ Astrobytes: Murder Mittens
+ Astrobytes: aka cats with big claws
+ jacek: <a rel="nofollow" class="external free" href="https://img-9gag-fun.9cache.com/photo/7074732_700bwp.webp">https://img-9gag-fun.9cache.com/photo/7074732_700bwp.webp</a>
+ Scarfield: somehow the "killes" fitted better i think
+ Astrobytes: fitted... like a glove, would you say Scarfield?
+ BlaiseEbuth: :expressionless:
+ <b>**Astrobytes gets his coat</b></p><p><img src="/a/43135502422075" /> eulerscheZahl: in German we have a saying "it fits like the fist on the eye"
+ Astrobytes: So violent
+ <b>**BlaiseEbuth slaps Astrobytes around a bit with a large glove.</b></p><p><img src="/a/22238461634817" /> Scarfield: lol the puns xD
+ Scarfield: theres a danish saying along the lines of: "the dot over the i" as in a well finished job. A politician translated that into: "the prick over the eye"
+ eulerscheZahl: Das i-Tüpfelchen
+ Astrobytes: lol Scarfield
+ ZarthaxX: toad alive!
+ BlaiseEbuth: For now. I'm angry
+ eulerscheZahl: do foxes eat toads?
+ Astrobytes: ah I see, icing on the cake, finishing touch, cherry on top
+ Scarfield: ToadaxX
+ Astrobytes: ZarthoadD
+ Scarfield: exactly cakestroBytes
+ Astrobytes: cakeBytes or cherryBytes might be better
+ BlaiseEbuth: Or kouign amman
+ Astrobytes: KouignAmmanBytes
+ BlaiseEbuth: :drooling_face:
+ ZarthaxX: they do eulerscheZahl check your biology book
+ ZarthaxX: hi astro scarfo nce names :rofl:
+ ZarthaxX: blaise&#160;:*
+ BlaiseEbuth: :hugging:
+ ZarthaxX: howdy everyone 
+ struct: hi
+ ZarthaxX: structo :O
+ struct: pb 4 still at the top with 5 days old submit&#160;:/
+ ZarthaxX: lol
+ BlaiseEbuth: I'm too. But in a larger top... :3
+ struct: Hopefully I can finish it today
+ struct: at least the sim
+ eulerscheZahl: playing the SF2442 contest struct?
+ struct: 2442?
+ ZarthaxX: wtf
+ struct: Im playing the slcc yes
+ Astrobytes: the Sofia Labs one
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/hackathon/sf2442">https://www.codingame.com/hackathon/sf2442</a>
+ Astrobytes: It's almost the same as the SF one
+ struct: ah
+ struct: So some already had a bot
+ eulerscheZahl: but that was a 2 day contest
+ ZarthaxX: damn
+ eulerscheZahl: 3*
+ BlaiseEbuth: Mein Code kommt langsam aus meiner Nase! :rage:
+ jacek: :scream:
+ eulerscheZahl: that sounds disgusting
+ jacek: agree ~
+ BlaiseEbuth: French expression... ^^
+ BlaiseEbuth: That's why I said it in german btw
+ Astrobytes: Nasenbluten von code!
+ eulerscheZahl: in German it hangs out of our throat when we are getting sick of it
+ BlaiseEbuth: Local customs... :shrug:
+ Scarfield: oh, astro you just passed me, without even using boost&#160;:'(
+ 2kpro: sorry everyone
+ Astrobytes: Yeah, I haven't put that in yet
+ MajorH5: Does anyone know why this doesnt output true:
+ MajorH5: !1%1
+ Scarfield: boost is 650 thrust, your csb bot modified, or something new?
+ MajorH5: 1 divided by 1 has no remainder so it evaluates to 0. 0 is falsy so it should become true
+ eulerscheZahl: !1 = false
+ eulerscheZahl: or 0
+ Astrobytes: Modified CSB, I do boost but only at the start
+ eulerscheZahl: 0&#160;% 1 = 0 = false
+ MajorH5: !1%1 = 0   - When it should equal - !1%1 = false
+ Astrobytes: Can't believe I got dragged into playing this lol
+ struct:&#160;! comes first
+ MajorH5: lol im so confused. I would have won if that worked as expected 🤦‍♂️🤦‍♂️
+ struct: <a rel="nofollow" class="external free" href="https://i.stack.imgur.com/u3q2E.png">https://i.stack.imgur.com/u3q2E.png</a>
+ eulerscheZahl: i'm more resistant than you Astrobytes :P
+ Astrobytes: :D
+ Astrobytes: It started with "OK I'll just submit a -3vel to keep Wontonimo happy"
+ Scarfield: xD
+ Astrobytes: Famous last words
+ eulerscheZahl: or "i'll just say a quick 'hi' before getting offline and going for a walk"
+ eulerscheZahl: anyway, g2g
+ Astrobytes: see ya later euler
+ Scarfield: its fun, more of us doing the same, chat alive, win win imo
+ struct: cya
+ Scarfield: :wave:
+ Astrobytes: fair point ParticipationField
+ Scarfield: AstroHiggs
+ Astrobytes: :rofl:
+ 2kpro: what are you playing
+ Astrobytes: SLCC SF2442
+ Astrobytes: CSB/SR-like
+ Scarfield: and i fixed a lot of weird stuff from my copy paste csb bot, now im wondering if i can be bothered to go back to csb and fix it there
+ Astrobytes: Yeah I've noticed some stuff too
+ struct: Honestly I could not bother to read my csb code
+ struct: Too much of a mess
+ 2kpro: i now 24 coding lanquages
+ struct: Damn
+ struct: I cant even code in 1
+ 2kpro: my dad tought me 
+ 2kpro: i only been coding for a year
+ Scarfield: i can ride a bike with no handlebars
+ Astrobytes: Yeah, and my left arm is a golf club
+ 2kpro: thats a a classic lots of people can ride a bike with no handles
+ 2kpro: im not even in middle school
+ struct: Im not surprised 
+ 2kpro: ok
+ Scarfield: you could learn to play guitar in less than a week, only 6 stringent days
+ 2kpro: i guees every in this chat talking is over 12 years old
+ struct: Not me
+ Astrobytes: struct is only 6 months old
+ Scarfield: pure prodigy
+ Scarfield: i am also not in middle school
+ sonic1991: any ruby dev here&#160;?
+ 2kpro: me
+ BlaiseEbuth: this thing does not exit
+ BlaiseEbuth: *exist
+ BlaiseEbuth: I'm not in middle school either...
+ 2kpro: so everyone is ten years old like me
+ BlaiseEbuth: Last time I go, they called the police 'caus I was "frightening the children"... Meh&#160;:/
+ Astrobytes: :rofl:
+ Scarfield: xD
+ Scarfield: just ask your question sonic1991, be specific and someone will help if they can.&#160;:)
+ sonic1991: I already figure it out
+ sonic1991: but its inspiring 
+ sonic1991: n=x=gets.to_i-1loop{break if(-~n).gcd(x-=1)&lt;2}p x
+ Scarfield: :muscle:
+ BlaiseEbuth: :nauseated_face:
+ sonic1991: its by Natanalel
+ sonic1991: very strange wait of increasing number
+ Natanalel:&#160;:)
+ sonic1991: -~n
+ sonic1991: oh here you are 
+ Natanalel: n+1 but fancier
+ sonic1991: cool stuff :P
+ 2kpro: 50 is the w behid 5x10 because its the product
+ 2kpro: what is 1000 times infinity
+ Astrobytes: 42
+ 2kpro: oky
+ 2kpro: i never said the infinity number yet 
+ 2kpro: so dont get ahead of yourself
+ Astrobytes: Noted.
+ 2kpro: ok so what is 1000 times infinity 60
+ KiwiTae: infinity60 wtf
+ ZarthaxX: KiwiTae you wouldnt understand that
+ Astrobytes: 1337.8008135
+ ZarthaxX: it*
+ 2kpro: shut up your god da.. mouth KIWITae
+ Astrobytes: enough of that
+ KiwiTae: ZarthaxX o/
+ Astrobytes: ah yeah, hi btw kiwi
+ KiwiTae: :kissing_heart:
+ ZarthaxX: mah boi&#160;:*
+ ZarthaxX: Astrobytes ban hammerino
+ Astrobytes: I kicked it
+ Astrobytes: ban next time
+ ZarthaxX: gucci
+ KiwiTae: :joy:
+ TankerElite: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/80980dc2-f042-449a-8503-8fb71c652fe9">http://chat.codingame.com/pastebin/80980dc2-f042-449a-8503-8fb71c652fe9</a>
+ TankerElite: oh cool it makes longer messages into pastebin pastes
+ TankerElite: basically had an issue with the checkpoint passing system and having 0 speed and velocity at the exact cirumference of a checkpoint
+ TankerElite: any way to report this?
+ struct: I highly doubt there is a bug
+ KiwiTae: the engine thinks you passed the checkpoint so you passed it :D
+ TankerElite: I did the math, and at the coordinates that my ship reported it is, i was not only not on the circumference, but on the inside of the 600-unit radius around a checkpoint's middle, unless I am being done in by float inaccuracy 
+ TankerElite: the reason my ship didn't zoom off to the next checkpoint was because I didn't get the checkpoint pass from that "collision" with the checkpoint area
+ struct: well if its off by 1 it is possible
+ struct: referee uses doubles iirc
+ 2kpro: sorry KIWITae
+ KiwiTae: 2kpro o/ I do that effect to many ah
+ Astrobytes: afk for a bit
+ 2kpro: What does afk mean 
+ ZarthaxX: away from keyboard
+ 2kpro: ok
+ BlaiseEbuth: Oh. Last life 2kpro... :3
+ KiwiTae: 2kpro if you type first letter of a pseudo plus tab its gonna autocomplete 
+ BlaiseEbuth: :thinking:
+ BlaiseEbuth: KiwiTab
+ KiwiTae: &gt;&lt;
+ hanmailco34: hi
+ BlaiseEbuth: o/
+ ZarthaxX: lol good one
+ ZarthaxX: :rofl:
+ 2kpro: hello im back
+ hanmailco34: hello
+ BlaiseEbuth: :scream:
+ ZetaQ: :joy:
+ jacek: so i made N-tuple example for tic tac toe <a rel="nofollow" class="external free" href="https://github.com/jdermont/tictactoe-ntuple">https://github.com/jdermont/tictactoe-ntuple</a>
+ jacek: later i think im gonna do playground article on this
+ hanmailco34: than you
+ ZarthaxX: ohh nice
+ ZarthaxX:&#160;:*
+ hanmailco34: nice
+ pastick: anyone know how to complete the angle for wood leaguge 2
+ 2kpro: i wish i hade somthing to do:thinking:
+ KiwiTae: jacek nice
+ pastick: you  could help me 2k pro
+ 2kpro: ok
+ <b>**BlaiseEbuth slaps pastick around a bit with a large context.</b></p><p><a href="/wiki/File:Default_avatar.png" class="image"><img alt="Default avatar.png" src="/images/5/56/Default_avatar.png" decoding="async" width="50" height="50" /></a> pastick: THANKs BLAISE 
+ 2kpro: im comfused:confused:
+ BlaiseEbuth: Was'nt the expected reaction, but OK. :expressionless:
+ pastick: LOL
+ jacek: maso eh?
+ struct: nice jacek I will check it out after the mini contest
+ BlaiseEbuth: ngl
+ 2kpro: im comfued with pasticks reactoin
+ 2kpro: :confused:
+ pastick: LOL
+ BlaiseEbuth: ngl
+ pastick: ngl me to 
+ 2kpro: What does ngl
+ pastick: not gonna lie 
+ 2kpro: oh ok 
+ BlaiseEbuth: Nop
+ 2kpro: what does nop mean im so confused:confused:
+ pastick: NGL im at school trying not to be sus
+ pastick: im in math class
+ BlaiseEbuth: In fact NGL is an answer to LOL.
+ pastick: LOL
+ pastick: yes indeed
+ 2kpro: ngl but im confused
+ pastick: me to im just at school
+ jacek: regina, noctis pro nobis!
+ BlaiseEbuth: \o/
+ ZetaQ: o/
+ Westicles: Lots of freemasons in CG.  Someone should write a playground about it
+ 2kpro: Hello Westicles
+ Casius01: :expressionless:
+ 2kpro: if anyone needs help with coding ask me i now 24 coding launquages
+ jacek: help me with FiM++
+ ZetaQ: lmao
+ 2kpro: i dont do fim++
+ jacek: oO
+ 2kpro: im not even in middle school
+ BlaiseEbuth: Perhaps you should learn english next...
+ ZetaQ: haha
+ 2kpro: i now how to speak english
+ Natanalel: know*
+ ZetaQ: k is not in keyboard maybe&#160;:|
+ jacek: eyboard?
+ BlaiseEbuth: On an US keyboard&#160;?
+ 2kpro: i got a specail anouuncement
+ ZetaQ: :rolling_eyes:
+ 2kpro:  my birthday is tomorrow
+ 2kpro: why is everyone so quiet
+ Smelty: happy birthday
+ ZetaQ: world chat is fun :joy:
+ 2kpro: thank you Smelty
+ 2kpro: :grin:
+ Smelty: :D
+ DiscoRobot_ad2b: hello
+ 2kpro: hey
+ DiscoRobot_ad2b: I am new here
+ DiscoRobot_ad2b: I am learning
+ DiscoRobot_ad2b:&#160;:)
+ 2kpro: ok welcome to codinggames
+ jacek: how can you write in chat at level 1? :thinking:
+ 2kpro: no clue
+ Smelty: hmm......
+ ZetaQ: :o
+ eulerscheZahl: they changed the chat limit
+ eulerscheZahl: to allow company chatting during the last contest
+ eulerscheZahl: and with external clients it was always possible I think
+ Wilster: wew, passed skynet 2, yay!
+ Mil27Coder: tags with loops are so hard what todo?
+ Smelty: :yin_yang:
+ KiwiTae: Wilster wdone
+ BlaiseEbuth: What the hell is this glowing thing I see by my window? Its' like the moon but bigger and that hurts me! :scream:
+ Smelty: :sun:
+ Smelty: :sun_with_face:
+ JSboss: mil27coder in JS or which language?
+ Mil27Coder: JS
+ solution.cpp: wtf did that clothes CoC want as output
+ jacek: destroy solar empire. welcome to new lunar republic. all hail Princess Luna!
+ eulerscheZahl: an integer solution.cpp
+ Smelty: jacek interesting paper soccer game you got
+ Marzuh: i have next expression:accelerationCoefficent = (1.14-(578/(nextCheckpointDist+1)));nextCheckpointDist =3124.why in debugger rusult is 1.14? i checked with my calc and result is 0.95504
+ jacek: :tada:
+ MajorH5: hello
+ MajorH5: how do I make a private game for me and my friend
+ MajorH5: private COC game
+ Miki09: In clash of code page you scroll down and there's start a private clash.
+ MajorH5: found it, thanks dude
+ wlesavo: Marzuh im not an expert but in that order nextCheckpointDist  is not initialized, and possibly is a very large number, so the fraction is close to zero
+ struct: i tried on tech io
+ struct: and it works fine
+ struct: <a rel="nofollow" class="external free" href="https://tech.io/snippet/tdY3hvC">https://tech.io/snippet/tdY3hvC</a>
+ struct: I dont know rust
+ struct: sorry for the warnings
+ struct: I think you need to add .0
+ struct: 578.0 and 1.0
+ wlesavo: lol illedan aiming for those most precious prises
+ eulerscheZahl: he still has to beat Dapo
+ Astrobytes: ^
+ struct: and a few more people hiding
+ Marzuh: nextCheckpointDistance initialization is in row 23, my expression in row 39
+ struct: Should that matter?
+ wlesavo: yeah, then its probably about integer division as struct said
+ KiwiTae: Dapo made a come back?
+ eulerscheZahl: yes, in January for another private contest
+ KiwiTae: oh cool was wondering where he disappeared lol
+ struct: What is the main reason of these hackathon being hidden?
+ eulerscheZahl: paid by a private company
+ eulerscheZahl: CG won't do free advertising for them
+ Marzuh: struct tnx, i will try
+ ZarthaxX: did he win toad?
+ eulerscheZahl: yes
+ ZarthaxX: damn
+ ZarthaxX: how does he do it lol
+ ZarthaxX: always wins
+ struct: What was the previous one like?
+ eulerscheZahl: codebusters
+ struct: ah right
+ ZarthaxX: ah well
+ ZarthaxX: he is top there lol
+ struct: I remember him having rank 1 bot on codebusters
+ Astrobytes: slightly modified version thereof
+ eulerscheZahl: with 3 busters having specific abilities (attack ghost, catch ghost, stun)
+ ZarthaxX: ah okey, not so easy to port
+ ZarthaxX: :P
+ eulerscheZahl: no, pretty different game
+ ZarthaxX: still insane guy
+ eulerscheZahl: but that variation was another private hackathon before
+ eulerscheZahl: and guess who won there :D
+ Astrobytes: Klee iirc
+ ZarthaxX: :DDDDD
+ jrke: hoping a semi-private contest for indians&#160;:(
+ eulerscheZahl: the email leak hackathon
+ ZarthaxX: was he actually eligible for prizes?
+ ZarthaxX: sometimes it's company related only
+ Astrobytes: lol yeah euler, that one
+ eulerscheZahl: he won a PS5 in the recent codebusters
+ ZarthaxX: WTF
+ ZarthaxX: daaaaaamn
+ struct: He needs a second controler
+ struct: So he will win this ps5
+ ZarthaxX: lol
+ eulerscheZahl: and mean max had that home entertainment system as 1st prize
+ struct: I wonder if pb 4 is making a NN for this one
+ ZarthaxX: the guy has equipped his room by leeching cg
+ Scarfield: wait there is prices for slcc?
+ struct: yes
+ Astrobytes: "eeyup"
+ eulerscheZahl: what's slcc?
+ Astrobytes: sf2442
+ struct: sofia labs coding challenge
+ Astrobytes: CSB/SR SLCC SF2442
+ Astrobytes: Cause we all love acronyms
+ Scarfield: Cwala
+ Astrobytes: I like that
+ Astrobytes: you can say it like "koala"
+ Scarfield: :koala:
+ <b>**eulerscheZahl hates acronyms&#160;:(</b>
+ Astrobytes: I know :P
+ jrke: can i compete by selecting different country in slcc?
+ Astrobytes: Scarfield: Also it's Zulu for "to dress the hair"
+ eulerscheZahl: yes. but they probably won't ship prizes to India
+ Astrobytes: ^
+ Astrobytes: But you can play for fun if you like
+ Wontonimo: yes, play for fun
+ Scarfield: and why in the world would you know that? xD
+ Wontonimo: even if it is just 10 min.  help fill out that leaderboard for others
+ Astrobytes: Scarfield: Google!
+ Scarfield: lol i like that you checked if it was a thing 
+ Astrobytes: naturally :D
+ jrke: so unlike CSB the pod can rotate any degree not only 18 in slcc?
+ eulerscheZahl: just a rightclick away
+ eulerscheZahl: yes, pods don't have a direction
+ dimCreature: Hey, all.  I know nothing about coding, but want to learn C.  Is it reasonable to learn through these skill branches?
+ dimCreature: Or should I find another resource?
+ ZarthaxX: it's better to learn in another platform and come here when you have some sort of idea  id say
+ eulerscheZahl: codingame assumes that you have a bit of prior knowledge (if-else, loops and such)
+ dimCreature: Alright, thanks.  I know about if-else, loops, while statements and the like, but this seems over my head.
+ eulerscheZahl: some new users struggle with the communication concept at first
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/55547/how-to-get-started-on-codingame">https://www.codingame.com/playgrounds/55547/how-to-get-started-on-codingame</a>
+ pr0ti[-_]st: :grinning:
+ pr0ti[-_]st: hey
+ pr0ti[-_]st: :worried:
+ pr0ti[-_]st: it isn't too easy
+ pr0ti[-_]st: this game
+ ZarthaxX: i struggled too lol
+ ShortBaited: is the site fixxed?
+ BlaiseEbuth: Does not seem to move on my screen. :thumbsup:
+ eulerscheZahl: feels dynamic to me
+ eulerscheZahl: or floating? :thinking:
+ BlaiseEbuth: We all float down there euler... :clown::balloon:
+ Astrobytes: ... and you'll float too!
+ BlaiseEbuth: :imp:
+ JaguarTordu: why are private CoC way easier than normal ones? Can I select a difficulty?
+ nmcodes: :fried_shrimp:
+ BlaiseEbuth: There's no difficulty levels in CoC JaguarTordu
+ struct: I think there is an hidden difficulty level
+ jrke: what to simulate in slcc i am not sure lol 
+ struct: the entire game?
+ jrke: no mean like we had some fixed space for rotation in this there no rotation bound
+ dbdr: it's also fixed, was -18..18, here it's -180..180&#160;;)
+ jrke: why didn't you wrote -pi to +pi :stuck_out_tongue:
+ dbdr: to be consistent&#160;;)
+ eulerscheZahl: hi dbdr, you have a spammer at your wiki page&#160;;)
+ Westicles: I noticed if you search you get alot of non CG stuff
+ dbdr:&#160;:(
+ jrke: link for the wiki page please?
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://cg.spdns.eu/index.php?limit=50&amp;days=7&amp;enhanced=1&amp;title=Special:RecentChanges&amp;urlversion=2">https://cg.spdns.eu/index.php?limit=50&amp;days=7&amp;enhanced=1&amp;title=Special:RecentChanges&amp;urlversion=2</a>
+ eulerscheZahl: 50 new articles/users in the last 20min
+ Westicles: Huh, I searched for amadeus and got this
+ Westicles: <a rel="nofollow" class="external free" href="https://www.codingame.com/leaderboards/contests/amadeus-challenge/global">https://www.codingame.com/leaderboards/contests/amadeus-challenge/global</a>
+ dbdr: the rumors of eulerscheZahl being a bot are confirmed&#160;;)
+ Astrobytes: that was a really fun game Westicles
+ dbdr: I wonder how they got the URL
+ Westicles: It looks fun
+ Astrobytes: Spam will find a way dbdr!
+ jrke: bug - <a rel="nofollow" class="external free" href="https://chadok.info/codingame/leaderboard_xp.html">https://chadok.info/codingame/leaderboard_xp.html</a>pseudo for royale? 
+ jacek: <a rel="nofollow" class="external free" href="http://9gag.com/gag/ajmg320#cs_comment_id=c_161789122584567465">http://9gag.com/gag/ajmg320#cs_comment_id=c_161789122584567465</a>
+ Astrobytes: Look forward to your n-tuples playground jacek
+ dbdr: &gt; Thats why we have in Germany a Wohnungseigentümergemeinschaft overwatched by a Wohnungseigentümergemeinschatsverwaltung. They decide what is done on the gemeinschaftseigentum.
+ eulerscheZahl: TryAngle catch was slightly inspired by that Amadeus planet conquering contest
+ Astrobytes: Yes, I thought that
+ Astrobytes: (it's on the list btw, I took a break for a bit)
+ eulerscheZahl: me too
+ eulerscheZahl: and other priorities such as topcoder
+ eulerscheZahl: coderone starts in 2 weeks, i might participate
+ Scarfield: when was that amadeus contest westi linked leaderboard for?
+ eulerscheZahl: and CG contest collides with codejam round 2&#160;:/
+ jacek: makise kurisu?
+ eulerscheZahl: hover over the submit dates Scarfield
+ eulerscheZahl: there are tooltips
+ eulerscheZahl: submit scores I mean
+ Astrobytes: gocoder eulerscheZahl?
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.gocoder.one/aisports">https://www.gocoder.one/aisports</a>
+ Astrobytes: yes
+ eulerscheZahl: similar to hypersonic
+ struct: Usually I just wait until contest day to decide if I join or not on CG
+ struct: I dislike some kind of games
+ Astrobytes: Same struct
+ Astrobytes: might give it a shot euler
+ eulerscheZahl: 68c9c0f65e242d686fe26fffc1a830ad7451a2ae4238a9d3f30e0d913e4b2b6c
+ eulerscheZahl: my prediction for the CG contest
+ ZarthaxX: hey what is that aisports thingy nice :O
+ eulerscheZahl: the FAQ says it's python/typescript only. but on their discord they confirmed that you can submit a docker container this time =&gt; any language
+ eulerscheZahl: but you have to create the container yourself, starters only exist for python and typescript
+ DiogoMacedo: anyone can help on beating coders strike back?
+ DiogoMacedo: c++
+ eulerscheZahl: and recurse is on their discord channel too
+ ZarthaxX: pity&#160;:(
+ ZarthaxX: the container thingy i mean, not recur
+ BlaiseEbuth: I'd say both
+ ZarthaxX: lol
+ Astrobytes: shots fired :fire:
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.pochta.ru/en/tracking#RO147418906RU">https://www.pochta.ru/en/tracking#RO147418906RU</a>that's how a pity looks like
+ ZarthaxX: what is this
+ Astrobytes: Wonder when we get our shirts from last RAIC
+ eulerscheZahl: story of me winning a tshirt at kotlin heroes. and it getting shipped back to Russia
+ ZarthaxX: okey i was about to ask why that german -&gt; russia again
+ ZarthaxX: the f&#160;:(
+ eulerscheZahl: right, did we even receive the email to claim our tshrit yet?
+ eulerscheZahl: for RAIC2020
+ Astrobytes: Not that I've seen
+ eulerscheZahl: ok, i'm slowly losing track
+ ZarthaxX: forget about it, it's ded
+ jacek: german -&gt; russia? *poland nervous looks*
+ Astrobytes: :D
+ wlesavo: Astrobytes i also took a corona break :smiley:
+ eulerscheZahl: you got infected?
+ wlesavo: yeah, quite taugh one, im not often being ill so wasn't expected it to be that bad 
+ Astrobytes: Ah that sucks. Was bad for me too.
+ ZarthaxX: oh nooo
+ wlesavo: at least i finally can sit at the pc, so thats a relief
+ ZarthaxX: are you ok&#160;??
+ Astrobytes: was about 6 weeks in total for me I think, first 4 weeks the worst
+ ZarthaxX:&#160;:(
+ ZarthaxX: wlesavo&#160;;(
+ Astrobytes: Not hospitalised I hope wlesavo?
+ ZarthaxX: we got my grandma vaccinated 2 days ago
+ ZarthaxX: still need onre more dosis tho
+ ZarthaxX: virus is getting scarier D:
+ Astrobytes: My mum got 1st dose AZ the other week
+ BlaiseEbuth: At least you have vaccines...
+ ZarthaxX: that one has been having bad fame right?
+ ShortBaited: the german school system is dying of corona because only 7 billion are served but almost 20 billion are needed
+ ZarthaxX: france didnt negotiate vaccines?
+ ZarthaxX: every country has that problem i guess
+ BlaiseEbuth: Lel. I feel like I live in big bad joke
+ wlesavo: Astrobytes oh wow, better for me then. no no hospitalisation, but barely, i got 25% lung damage and i think they sometimes hospitalize with 30-40 already
+ Astrobytes: Politicisation of vaccines (and healthcare imo) is just hideous.
+ eulerscheZahl: 7 billions? :o
+ Anwar_Yf: waw thats huge
+ ShortBaited: yeah i speak of milliarden but milliarden  in englisch is billions
+ eulerscheZahl: i hope no permanent lung damage wlesavo?
+ ZarthaxX: i think they said it was kind of permanent
+ ZarthaxX: :thinking:
+ Astrobytes: wlesavo: you were very lucky not to be hospitalised for sure. My mum was close but a steroid-based inhaler/spacer worked to open the airways
+ ZarthaxX: thank god damn
+ ZarthaxX: have you seen the news abotu the new mutation?
+ ZarthaxX: mix of 18 different mutations
+ Astrobytes: I've lost track!
+ wlesavo: i hope as well euler :slight_smile: first day i finally coded smth, just in time for code jam
+ Astrobytes: Viruses being viruses
+ BlaiseEbuth: The virus tuning his AG
+ Astrobytes: literally&#160;:)
+ ZarthaxX: <a rel="nofollow" class="external free" href="https://www.aa.com.tr/en/americas/brazil-finds-new-virus-variant-combining-18-mutations/2201998">https://www.aa.com.tr/en/americas/brazil-finds-new-virus-variant-combining-18-mutations/2201998</a>
+ ZarthaxX: you can find it anywhere i guess
+ ZarthaxX: the problem is this part too"It is as if these variants were evolving," Santana said, adding the new variant includes the same genes modified by Brazil's Manaus, known as P1, British and South African variant.
+ Astrobytes: The deadlier it gets the less it spreads - and hopefully dies out as a result
+ eulerscheZahl: so that happens if you get infected by multiple versions at once?
+ ZarthaxX: mix of the deadlier mutations
+ ZarthaxX: i guess toad
+ wlesavo: also i got myself fired the day before i got ill and shouldve been employed on a new place, but covid happened
+ ZarthaxX: Astrobytes for real? :thinking:
+ Astrobytes: Think about it ZarthaxX
+ ShortBaited: the german school have little to no technical items, then every student need laptops, etc. then we need server's for the online platform's and workers. then we also need money for maintenance work. so 7 billions are nuts for that what germany needs lmao
+ eulerscheZahl: how does one get himself fired?
+ ZarthaxX: oh you had your new work wlesavo damnn
+ eulerscheZahl: oh, you mean 7 billion Euros?
+ Astrobytes: Oh so you haven't started at the imaging job wlesavo?
+ ShortBaited: 7 Milliarden Euro
+ eulerscheZahl: i thought 7 billion vaccines, which would make no sense :D
+ ZarthaxX: Astrobytes i dont get why lol
+ ZarthaxX: yeah i thought the same lmao
+ Astrobytes: How can dead people spread the virus ZarthaxX?
+ ShortBaited: xD no not 7 billion vaccaines xD
+ jacek: xD
+ ShortBaited: with 7 billion vaccains we could save most of the world xD
+ jacek: are you altfield?
+ Scarfield: people needs 2 vaccines, account for some misplacements etc, 7 billion close enough
+ wlesavo: Astrobytes ZarthaxX yes, didn't started yet, but at least they wait for me :slight_smile: and i have some tasks which i do in a free time
+ Scarfield: get well soon wlesavo, its an order&#160;:)
+ eulerscheZahl: Astrobytes  08:16PMHow can dead people spread the virus ZarthaxX?
+ Westicles: CA is supposed to open up completely in June, except we still have to wear t-shirts wrapped around our heads
+ Astrobytes: Oh that's good to hear wlesavo!
+ Astrobytes: euler :D
+ wlesavo: thx Scarfield, i already got my sences back, so i think it will be ok :slight_smile:
+ Astrobytes: Westicles: I have a feeling places are opening up a bit too fast - and without enough due care.
+ Astrobytes: And don't get me started on digital vaccination 'passports'
+ ZarthaxX: Astrobytes ah well didnt think about people dying, thought another thing lol
+ Westicles: Too fast?  lol
+ ZarthaxX: wlesavo nice ;D have fun now that you are back 
+ Astrobytes: ZarthaxX: Which part of deadlier made you think of something other than death? :D
+ BlaiseEbuth: lier
+ Westicles: I'd say the herpes epidemic is about 1000 times more serious
+ Astrobytes: Tell that to the dead people and their families&#160;;)
+ ZarthaxX: Astrobytes nah nah haha, i thought you meant that because the virus was like more powerful it had less capability of spreading
+ ZarthaxX: not that as it kills more, it can spread less as a consequence
+ ZarthaxX: lol
+ Scarfield: just admit it, you were thinking zombies
+ Astrobytes: ZarthaxX: nah, it does depend how quickly it kills though. How far one can travel whilst spreading etc.
+ ZarthaxX: yeah our brains are in danger of being eaten by a zombie pandemic
+ ZarthaxX: Astrobytes aye
+ Astrobytes: It's a very interesting little virus
+ ZarthaxX: also im afraid about vaccines effectivity after all tehse powerful mutations
+ ZarthaxX: i find it super intersting that such a tiny thing causes so much trouble in mankind 
+ ZarthaxX: for*
+ Astrobytes: And mark my words I swear it came out of that lab in Wuhan that - uh, you know, studies coronaviruses...
+ eulerscheZahl: "in" isn't wrong
+ ZarthaxX: yeah im down for that conspiracy theory too lol
+ Westicles: I'd rather kiss a girl with covid than a girl with herpes
+ ZarthaxX: for real?
+ ZarthaxX: thought it was
+ ZarthaxX: lmao
+ Scarfield: yea it is, but a human sized virus would be pretty terrifying
+ ZarthaxX: scarfo spreading
+ ZarthaxX: sounds super scary :P
+ eulerscheZahl: I'd rather kiss a woman than a girl :P
+ Astrobytes: :rofl:
+ Astrobytes: Scarfield: human sized virus - celebrities? :D
+ ZarthaxX: wth
+ ZarthaxX: :rofl:
+ Scarfield: xD
+ BlaiseEbuth: I'd rather wait for her to be healed...
+ Scarfield: i'd rather kiss a shiny metal ...
+ Astrobytes: I happen to have a shiny metal one right here for you
+ Scarfield: :kissing_heart:
+ therealbeef:&#160;:)
+ Astrobytes: I mean, it's not metal, but I like metal
+ eulerscheZahl: if i take the first 2 and the last letter of Astrobytes.. :thinking:
+ Scarfield: xD
+ Astrobytes: lol euler
+ Astrobytes: ZarthaxX: regarding the Wuhan lab and the virus - I think it escaped, not deliberately released.
+ Westicles: Astrobytes, you get in trouble if you say that in the US.  You are being anti-Asian
+ eulerscheZahl: here we have freedom of speech
+ Westicles: Tons and tons of propaganda on this
+ ZarthaxX: Astrobytes ah ok, but do you believe it was created by people?
+ eulerscheZahl: as long as you don't deny the holocaust. that can get you in prison
+ Westicles: Getting us ready for the invasion of Taiwan, I think
+ ZarthaxX: eulerscheZahl internationalyl? 
+ Astrobytes: Ah right. Destroying legit racism claims with bullshit again so that no-one takes *any* of it seriously.
+ eulerscheZahl: ZarthaxX i don't get that question
+ Astrobytes: Yes, I can see Taiwan trouble on the horizon for sure.
+ ZarthaxX: that holocaust thingy
+ ZarthaxX: you meant that you could get in prision in germany by denying it
+ Astrobytes: It's a crime in a few places
+ Astrobytes: iirc
+ ZarthaxX: so not only in germany
+ ZarthaxX: what's up with taiwan? is there a war about to happen for real? D:
+ Westicles: Yeah, they put David Irving in jail for a few years.  Austria I think
+ Astrobytes: ZarthaxX: <a rel="nofollow" class="external free" href="https://en.wikipedia.org/wiki/Legality_of_Holocaust_denial">https://en.wikipedia.org/wiki/Legality_of_Holocaust_denial</a>
+ struct: yet in america its free speech
+ ZarthaxX: struct we are a joke
+ ZarthaxX: wow Astrobytes interesting
+ Scarfield: if Ille wins, im calling dibs on his PS5!
+ Astrobytes: I find genocide denial to be the more 'intriguing' (for want of a better word) situation.
+ Astrobytes: Anyway, very touchy subjects here.We should move on.
+ Scarfield: agreed
+ Scarfield: however interesting
+ Astrobytes: Meet me at the back of the CSB Pod Sheds for further talks :P
+ Scarfield: i like my new and increased odds for getting a PS5
+ Astrobytes: Nice submit Scarfield
+ eulerscheZahl: Scarfield 08:41PMif Ille wins, im calling dibs on his PS5!
+ Astrobytes: Smitsi-ing?
+ eulerscheZahl: also why wouldn't he keep the PS5 to himself?
+ Astrobytes: lol euler
+ Astrobytes: I think he wanted 3rd prize
+ eulerscheZahl: 2nd looks pretty lame
+ eulerscheZahl: and 1st is for Dapo
+ Scarfield: thanks, but was reffering to my dibs decleration
+ Astrobytes: yeah I know but I just looked at the lb
+ Scarfield: and yea smitsi
+ Astrobytes: Nice
+ Scarfield: my pod is still overly fond of boosting unnecessarily, but that is a tomorrow problem
+ struct: just add a limit on boosts per lap
+ Westicles: Is Russia usually considered EU for this kind of thing?
+ struct: yes
+ jacek: :unamused:
+ Astrobytes: They do take up a fairly huge area of Europe admittedly
+ Astrobytes: Scarfield: my bot should not beat you, you have bugs
+ Scarfield: replay? probably segfault
+ Scarfield: found it
+ Ordonnateur: In python you can't change a precise string index value no&#160;? (change here with hare for ex)
+ struct: you used all bosts in the first 5 turns
+ struct: damn
+ Scarfield: me, sounds like my overexited bot? xD
+ Astrobytes: It likes leaving?
+ Astrobytes: "overexited"
+ Scarfield: will add a message: "I am speed, brrr" for next submit
+ snoyes: Ordonnateur: strings are immutable
+ Scarfield: Ordonnateur python strings are immutable, so no you cannot directly change a string
+ snoyes: you could build a new one. s = s[:i] + 'a' + s[i+1:]
+ Scarfield: meant excited ealier ofc, didnt even notice my mistake when you mentioned it xD
+ Astrobytes: :P
+ KittyCaty: Why I cant use prod from math library (python 3)
+ Ordonnateur: Thank you for the idea of creating a new string, i founded an other way but uglier x)
+ Scarfield: the sad realisation that i didnt jump up a rank, but a better bot was resubmitted&#160;:'(
+ Illedan: jft63 submitted :O
+ Astrobytes: We just have to wait 3 hours to see what happens
+ snoyes: KittyCaty: prod is 3.8, and I think this uses something a little older
+ jft63: Illedan will see
+ Illedan: :D
+ snoyes: KittyCaty: yeah, 3.7.4
+ Scarfield: your new submit is out for blood 
+ Astrobytes: oof not wrong
+ KittyCaty: Oh get it, thanks
+ Astrobytes: YurkovAS also having a rather good submit so far
+ yiyi1234: hi
+ yiyi1234: hi everyone
+ yiyi1234: where are u from?
+ Pierre-mikeLeMeliner: HAWAII 
+ struct: How long do submits take +-?
+ Pierre-mikeLeMeliner:&#160;? 
+ Scarfield: 1½ hrs almost for mine
+ Scarfield: just finished
+ Pierre-mikeLeMeliner: what is submit&#160;? 
+ Astrobytes: Yeah about 1.5 seems average
+ Illedan: Yeah
+ Illedan: :zzz:
+ Astrobytes: Nice job btw Illedan, you've really gone in on this one :D
+ Scarfield: too bad its all for nothing :p
+ Astrobytes: 3rd place is calling!
+ Illedan: Who are after Dapo?
+ Astrobytes: Can't see re Curse playing, karlis o maybe? Donno who else hides
+ Illedan: reCur is not from europe. Karlis o doesn't play these games, only board games
+ Astrobytes: Hm, fair point.
+ Illedan: pb4 might come though
+ Astrobytes: Training as we speak no doubt&#160;:)
+ Illedan: There is a lot of CG servers beeing fried tonight with benchmarks
+ Astrobytes: Yes, started about mid-afternoon I noticed
+ Astrobytes: early-mid
+ struct: Maybe one day all matches played will be public
+ Astrobytes: Is Jeff 06 hiding?
+ Illedan: -.-
+ Illedan: I have an agentId in my bench anyway..
+ Astrobytes:&#160;:)
+ Scarfield: he is, and i think i know what he is hiding :zipper_mouth:
+ struct: time to add if (time &gt; x) then player weaker version
+ struct: play*
+ Astrobytes: what do you mean Scarfield?
+ Scarfield: had a replay against him where he won, but i feel its a bit bad mannered to say how if he is hiding
+ Scarfield: actually not sure what i think, hiding is a bit weird to me as well
+ Astrobytes: I'm not a fan of hiding per se, but it's allowed on the platform so... 
+ Westicles: You hide so people don't train against you?
+ struct: yes
+ Astrobytes: Yes. That's the gist of it.
+ Westicles: Is that the same thing when smits does his book thing and recurse yells at him?
+ Scarfield: xD
+ Astrobytes: lmao
+ jacek: books are part of games, deal with it
+ TheIronImpAndHisDog_9c6b: hi
+ Scarfield: tbh i dislike the books part of bots, it beats the purpose of the bot to some extent i think
+ jacek: nah, they are ok if books are generated in more general way than against specific opponent
+ yiyi1234: hi
+ yiyi1234: im from Vietnam
+ Scarfield: hi
+ jacek: hi from Vietnam, we're dads
+ Scarfield: xD
+ ZarthaxX: jacek never stop trolling
+ Astrobytes: :rofl:
+ Astrobytes: He walks the line but dammit he's good :D
+ jacek: trolling is a art
+ ZarthaxX: yeah lol
+ Anwar_Yf: lol
+ Astrobytes: *an art
+ Scarfield: i still think it moves some of the competitive aspect away from the bot writing itself, but meh
+ ZarthaxX: Scarfield but the book isnt infinite 
+ ZarthaxX: you still need a good bot
+ Astrobytes: It's part of the competitive aspect though
+ Scarfield: true true
+ Astrobytes: For some games, yes, you can book the whole thing - but not true for everything
+ Scarfield: its not something i feel strongly about, but having the bot guided by a book, and not by itself per se, is in a grey area of botting imo
+ ZarthaxX: want to see a NN as an attempt to do an infinite book?
+ Stormalix: bottong
+ Stormalix: oops
+ ZarthaxX: can you*
+ Stormalix: botting
+ Scarfield: hmm
+ Stormalix: u guys are trying to make a bot write a book :thinking:
+ jacek: yeah, some argue NN is book :unamused:
+ Astrobytes: Not quite the same though
+ ZarthaxX: damn
+ Scarfield: isnt it to some extent a book
+ ZarthaxX: it seems so
+ jacek: Stormalix no. opening books for games
+ Astrobytes: But it's more general
+ Scarfield: maybe its just because i cant be bothered to make a book myself, and then use my prejudice against it as a shield
+ Scarfield: :p
+ ZarthaxX: right hyaha
+ Astrobytes: if (book) cout &lt;&lt; "SHIELD"
+ Scarfield: "they only win against me because they use unfair advantages, grr!"
+ Scarfield: shady methods etc :p
+ ZarthaxX: should be disqualified right scarfo
+ Scarfield: the ones who wins against me? sure!
+ ZarthaxX: hehe
+ struct: I need Msmits
+ ZarthaxX: if anyone is above scarfo -&gt; cheating
+ ZarthaxX: he ded
+ ZarthaxX: whats up
+ Astrobytes: Smits busy with the school stuff, I think his end of term project and shizzle
+ jacek: 3 2 is best opening in yavalath!
+ Astrobytes: lol, the Smits Beacon
+ struct: I think its fixed
+ Astrobytes: it's like talking about ML and inoryy appearing
+ The_10x_Engineer: :eyes: Is Machine learning cheating?
+ struct: yes
+ The_10x_Engineer: I knew it 
+ The_10x_Engineer: :muscle: :brain:
+ The_10x_Engineer: brain
+ The_10x_Engineer: 🧠
+ The_10x_Engineer: wow I just got it
+ Smelty:  
+ The_10x_Engineer:  
+ Shattered: Any one have ideas for why C++ Test cases are so different from the submission? Am i Missing something?
+ struct: Which puzzle?
+ Shattered: all of them! heck the only reason I figured out the shadows of the knight was to put in all the answers for all of the "validation" into the code layout
+ The_10x_Engineer: :pensive:
+ Shattered: &lt;.&lt; I feel like I am missing something. I understand that the Test cases are different. 
+ struct: you are writing generic code right?
+ Astrobytes: Validators on submit are different from the testcases. To prevent hard-coding answers
+ ZarthaxX: the newbie struggle
+ The_10x_Engineer: :pensive: 
+ Shattered: @Zarthaxx Pretty much. New to the site
+ Astrobytes: When you say ... "put in all the answers for all of the "validation" into the code layout" do you mean you hardcoded the answers?
+ The_10x_Engineer: Astrobytes looks like they dont work anymore lol
+ Smelty: oh my
+ ZarthaxX: see Shattered, you dont need to hardcode values based on each testcase
+ ZarthaxX: instead you should read the input and assign THOSE values
+ ZarthaxX: assign/use
+ Astrobytes: And solve the general problem.
+ ZarthaxX: right
+ Astrobytes: *general case.
+ ZarthaxX: as ifthe problem was calculate the sum of a+b
+ ZarthaxX: you get a and b
+ ZarthaxX: if one testcase says a=2 and b=3, you dont hardcode in your code that case
+ Shattered: i understand how to code. just not where to "do the puzzle"
+ ZarthaxX: like you dont doif a==2 and b==3 then print 5
+ Shattered: Then again. perhaps i don't
+ ZarthaxX: wdym by do?
+ struct: show us your code
+ ZarthaxX: struct ohhh sweetie slowdown there&#160;:*
+ Astrobytes: <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/55547/how-to-get-started-on-codingame">https://www.codingame.com/playgrounds/55547/how-to-get-started-on-codingame</a>
+ Astrobytes: ^ might be some useful stuff in there
+ Shattered: Thats what i wanted. thank you
+ The_10x_Engineer: Imagine being new lol
+ Scarfield: jeff 06 has just submitted again, and nothing close to what i thought he was hiding xD 
+ The_10x_Engineer: jeff 06?
+ Astrobytes: Right so now you can tell us what you thought he was hiding :P
+ Scarfield: basicly a blocker
+ Stormalix: jeff 06?
+ Scarfield: 1v1 get to CP hold CP from opp
+ Stormalix: what
+ Scarfield: its a username like The_10x_Engineer and Stormalix
+ Stormalix: i know lol
+ Astrobytes: Oh right. I use a bit of that still. But my bot is still currently very shit. Tomorrow problems :P
+ Scarfield: tomorrow problems indeed
+ jacek: oO
+ Astrobytes: darkhorse64: now that's what I call a push!
+ darkhorse64: If you knew what my bot is doing, you would be surprised
+ Astrobytes: I look forward to hearing about it
+ jacek: how would he be surprise if he knew?
+ Astrobytes: Surprised at the approach, not at the knowledge of him using that approach
+ darkhorse64: ^
+ struct: :thinking:
+ Illedan: gg jft63
+ Astrobytes: considerably good lead
+ jacek: but quite heavy
+ Astrobytes: ffs :D
+ Illedan: Love it jacek :D
+ Astrobytes: he's on fire today
+ Smelty: lots of collisions, astrobytes <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/440734735">https://www.codingame.com/replay/440734735</a>
+ Astrobytes: Smelty: Yes. Blocking the pods from reaching the checkpoints
+ Smelty: hmm....maybe i should try that
+ Astrobytes: Runner/blocker meta is quite well establish in CSB Smelty
+ Astrobytes: *established
+ Smelty: yea, currently mine just camps the next checkpoint
+ Astrobytes: Which league Smelty?
+ Smelty: gold, 2nd
+ Astrobytes: OOf, very close
+ Astrobytes: *Oof
+ struct: which language are you using?
+ Smelty: c++/java
+ struct: You might want to try smitsimax then
+ struct: its not needed to get out of gold
+ Astrobytes: MC + mutation is enough for legend
+ Astrobytes: Even just maths
+ struct: I had 100% win rate on gold with 2 runners when I used smitsi
+ Smelty: okay, thanks!
+ Astrobytes: Nice struct
+ Astrobytes: I guess the blocking behaviour emerges from that naturally
+ struct: Well since the gold boss also has 2 runners it can predict quite well
+ struct: at least I think it was 2 runners vs 2 runners
+ Smelty: it is 
+ Astrobytes: where did you end up with smitsi in CSB struct?
+ struct: That version of 2 runners go top 150
+ struct: after I changed thrust to 200
+ struct: It was on an alt account
+ struct: I never implemented runner + blocker on csb
+ struct: I tried
+ struct: but failed
+ Astrobytes: I've always had a GA or some variant on CSB so I did
+ Astrobytes: Gonna have to go back to Smitsi now I'm more experienced
+ e0214: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/1681350a52d8a28a949d13362e6bcb8cb7b3b06">https://www.codingame.com/clashofcode/clash/1681350a52d8a28a949d13362e6bcb8cb7b3b06</a>
+ -[._.]-: o.o
+ valoup: YEAHHH
+ -[._.]-: e
+ jacek: oO
+ Astrobytes: Stop talking shit or risk a kick
+ WannaBeHum1n: hey
+ WannaBeHum1n: there is a problem
+ WannaBeHum1n: where u have to find out if a triangle 
+ WannaBeHum1n: has a right angle or not
+ WannaBeHum1n: i saw it in a clash once
+ WannaBeHum1n: anyone have alink
+ WannaBeHum1n: cant find it in search
+ Astrobytes: you tried euler search tool?
+ jacek: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/5604e2dab7e6d03201ad8e36172c560c7452">https://www.codingame.com/contribute/view/5604e2dab7e6d03201ad8e36172c560c7452</a>&#160;?
+ Astrobytes: Search here if you did not already 
+ Astrobytes: <a rel="nofollow" class="external free" href="https://eulerschezahl.herokuapp.com/codingame/puzzles/">https://eulerschezahl.herokuapp.com/codingame/puzzles/</a>
+ MarioChb: hey guys
+ WannaBeHum1n: thnx
+ WannaBeHum1n: very helpful
+ WannaBeHum1n: found it
+ Astrobytes: cool WannaBeHum1n
+ AnGaQua: .
+ nmortfeus: .
+ Smelty: Whats the coding escape? I received an email about it o.O
+ Smelty: nvm
+ Smelty: it looks pretty cool tho
+ Smelty: hey guys.....join this <a rel="nofollow" class="external free" href="https://escape.codingame.com/game-session/jP8-iZP-gfS-9jn">https://escape.codingame.com/game-session/jP8-iZP-gfS-9jn</a>
+ kostis14: im a complete beginner tho u mind if i join? i wnated to test it aswell
+ Smelty: oh okay
+ Smelty: oh wait we have to communicate
+ Smelty: <a rel="nofollow" class="external free" href="https://escape.codingame.com/game-session/ia3-hK3-Jrx-Ogy/waiting-room">https://escape.codingame.com/game-session/ia3-hK3-Jrx-Ogy/waiting-room</a>
+ Hfun: ah you guys testing it out as well?
+ Hfun: how is it? I was waiting for some friends to get back to test it
+ Smelty: its nice, im in a session currently
+ Mr-Rc: H E L L O 
+ Rakbi: +== unset($nums[$key]);
+ MOScody: What's the C# name/keyboard for "Then"?
+ solution.cpp: if () { } else { }
+ solution.cpp: there is no "then" its just what is inside the scope of a conditional
+ Mr-Rc: oh

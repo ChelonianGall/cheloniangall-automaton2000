@@ -1,0 +1,453 @@
+ dbdr: \o
+ Louis.: bonjour
+ BlaiseEbuth: Yo tout l'monde&#160;! Automaton2000, AutomatonNN&#160;!
+ Automaton2000: on a une bonne partie de la nuit
+ Alshock: ah il est détère le p'tit Automaton2000 ça fait plaiz
+ Automaton2000: pourquoi on n'a pas le droit de te plaindre
+ Alshock: mais plains-moi tant que tu veux Automaton2000, tiens tu sais qu'à cause du covid ça fait presque un an que je n'ai pas erré dans les rues l'âme en peine pour faire des câlins au premier passant venu&#160;? :P
+ Automaton2000: j'attends la fin du contest, il y a des points de contest
+ Alshock: Ah ouais ouais ouais il est vraiment à donf
+ BlaiseEbuth: Moi je veux un calin Alshock.
+ Alshock: :hugging: @BlaiseEbuth
+ BlaiseEbuth: :hugging:
+ BlaiseEbuth: Wut! Des fois ma simu inverse un vecteur. Oo
+ dbdr: on se rajoute les défis qu'on peut
+ BlaiseEbuth: Ouai, c'est la version IA du mode "contrôles inversés" dans les jeux de courses...
+ dbdr: :D
+ pardouin: tu utilises des fonctions trigo blaise&#160;?
+ BlaiseEbuth: Ouai. 
+ Switch64: des idées pour faire mars lander 2&#160;? 
+ pardouin: mars lander 2 c'est un des premiers puzzles que j'ai fait, je me rappelle avoir fait un truc très empirique
+ pardouin: en gros teste des idées et regarde comment ça se comporte
+ BlaiseEbuth: ML2 c'est typiquement le truc où tout le monde a une solution diférente
+ pardouin: il y a peu de puzzles comme ça où tu peux y aller un peu à l'arrache mais de temps en temps c'est marrant, ça change
+ dbdr: BlaiseEbuth pas moi&#160;;)
+ dbdr: je suis le seul a pas avoir une solution differente
+ pardouin:&#160;:&lt;D
+ BlaiseEbuth: :thinking:
+ darkhorse64: Je voulais faire l'optim, donc je suis parti directement avec un GA. Comme la physique est vraiment simple, c'est pas trop prise  de tête
+ BlaiseEbuth: Et keskelzon les fonctions trigo pardouin&#160;?
+ dbdr: 🤯
+ pardouin: vecteur qui s'inverse d'un coup ça m'a fait penser à ça
+ pardouin: si tu fais des calculs d'angle par ex
+ BlaiseEbuth: Ouai. Le truc c'est que c'est hyper ponctuel...
+ pardouin: le mieux c'est d'utiliser atan2, tu es sûr de jamais avoir de cas particulier
+ BlaiseEbuth: Je vais y regarder. Déjà là on part dans l'inconnu pour moi avec ce genre de fonctions... :3
+ Zorg1: salut tout le monde ainsi que les bots grincheux Automaton2000 &amp; AutomatonNN
+ Automaton2000: ah oui, j'avais pas vu le stream de recurse
+ Zorg1: ah tu vas aussi faire un BitStream Automaton2000&#160;?
+ Automaton2000: mais la c'est pas vraiment un truc que j'ai vu ça hier
+ pardouin: angle entre PA et PB&#160;:= atan2( det(PA, PB), ps(PA, PB) )
+ pardouin: (déterminant et produit scalaire)
+ Zorg1: cross-product et dot-product comme ils disent les anglo saxons
+ pardouin: oui&#160;:)
+ pardouin: me reste que les rochers à gérer dans last crusade 2
+ BlaiseEbuth: En fait je suis même plus sûr de ce que je calcule... Je vais reprendre ça.
+ pardouin: vous vous rappelez si changer de chemin d'indy suffit à les éviter ou s'il faut changer le chemin des rochers, les faire se rentrer dedans, ce genre de truc&#160;?
+ pardouin: parce que ça change un peu la donne
+ Tiouz: Salut, est-ce que le random de c++ (soit rand(), soit random_device) peuvent faire des timeout&#160;? Je suis en train de debug et j'ai vraiment l'impression que ça vient de là
+ Alshock: Tiouz euh, si tu fais quelques milliards de tirages c'est ptêtre possible oui
+ Alshock: gprof est ton ami
+ BlaiseEbuth: Ca doit pas venir du tirage.
+ BlaiseEbuth: Mais de son utilisation
+ Alshock: PEBCAK
+ Tiouz: Je suis sur SR, je peux pas vraiment profiler mon code avec l'IDE en ligne... Ou alors je lance carrément les simulations en local avec le referee
+ BlaiseEbuth: Genre tu utilise le rand comme index d'un tableau et c'est hors borne. Ou tu divise avec et il peut valoir 0...
+ Tiouz: J'affiche un truc dans stderr avant et après avoir généré mon entier aléatoire, et il n'affiche pas l'output après
+ Alshock: Tiouz j'ai plus simple, tu prends ton cas qui bug là, tu outputs toutes les entrées que ton bot reçoit sur stderr, t'en fais un fichier, et tu lances ton bot en local avec ce fichier en entrée
+ Alshock: referee local à pas cher
+ BlaiseEbuth: Tu utilises quoi comme random Tiouz&#160;?
+ Alshock: en espérant bien sûir que ton random soit seedé
+ Tiouz: BlaiseEbuth j'utilise random_device, puis std::mt19937, et uniform_[real/int]_distribution
+ Tiouz: Le timeout n'est pas déterministe. Je peux passer tous les tests à un moment, et planter plus tard
+ BlaiseEbuth: Hmm... Parce que mon bot merde de partout, et j'ai pas encore trouvé la/les erreurs, mais en cherchant, à un moment, j'avais un cas similaire. Le rand qui semblait bugué.
+ Tiouz: Pareil sur les validateurs
+ BlaiseEbuth: Mais pareil comme ça tombe de manière aléatoire j'ai pas creusé plus
+ Tiouz: Avant j'utilisais rand()%(b-a+1)+a, et j'avais la même erreur
+ Switch64: z
+ Alshock: ah bah tu dois générer un crash ailleurs dans une configuration précise, ton mt19937, tu le seed avec un nombre fixe&#160;?
+ Tiouz: Non pour l'instant c'est avec random_device
+ Zorg1: (enfin vous avez pas besoin de trucs aussi compliqué pour une simu CG, un générateur par congruence marche aussi bien)
+ Tiouz: Zorg1 je pense que je vais passer sur ça, mais ça me saoule de pas comprendre
+ BlaiseEbuth: Bah perso j'utilise default_random_engine qui est par congruence.
+ Tiouz: Je déteste tellement le C++
+ Alshock: enfin, dans nos configurations. Je crois qu'on n'a aucune garantie sur ce qui est derrière le défaut à part qu'il plaisait au compilateur poru servir de défaut
+ Alshock: Bah code en ruby alors :shrug:
+ Alshock: j'aime bien le rub
+ Zorg1: en fait je recode un "fastrandom", c'est pas de la haute qualité en terme d'aléatoire mais ça a l'air de suffire
+ Tiouz: Tu utilises quelle formule&#160;?
+ Zorg1: 	g_seed = (214013*g_seed + 2531011)	return int((g_seed &gt;&gt; 16) &amp; 0x7FFF)
+ Zorg1: g_seed est un entier 32 bits
+ Zorg1: ça renvoi un entier 15 bits
+ Tiouz: Tu ne fais pas des overflows&#160;?
+ Alshock: sur g_seed&#160;? si mais c'est pas un pb
+ Tiouz: en effet, tant que ça mélange
+ Alshock: cela dit, je maintiens que le problème ne vient TRÈS probablement pas du tirage aléatoire en lui-même
+ Tiouz: Au passage, pour la majorité des applications, même un mauvais pseudo-random convient (j'avais vu un article sur ça)
+ Alshock: toutafé, mais à mon sens il n'y a aucune raison de changer d'un bon random à un mauvais random si on n'a pas profilé une grosse conso du tirage random
+ Tiouz: Alshock je pense aussi, mais j'ai vraiment tout exploré. J'ai vraiment restreint mes idées à ça. Mon random ne va pas servir à indexer des tableaux ou autres trucs qui pourraient planter
+ Tiouz: Et l'erreur c'est un timeout, alors que je limite le nombre d'itérations à 500, et qu'il peut en faire 17k
+ Alshock: bah montre donc à quoi il sert, que se passe-t-il dans ce bout de code qui bug&#160;?
+ Tiouz: le bout de code qui bug, c'est int random_randint(int a, int b) {
+ Alshock: ça c'est la distribution elle-même, j'ai peur que tu fasse un peu trop confiance à CG pour la localisation du bug
+ Zorg1: surtout localisé le time out là. comment tu sais que c'est ton random qui bouffe du temps&#160;?
+ Tiouz: J'affiche un truc dans cerr avant, et un truc après, et le truc après il ne s'affiche pas
+ Tiouz: Je ne sais pas si c'est du temps, ou un segfault, ou autre chose, juste que ça me met Timeout
+ Zorg1: et sans tes traces ça time out aussi&#160;?
+ Tiouz: oui
+ Tiouz: Alors oui en plus il y a le problème que si j'affiche trop de traces, il timeout à cause de cerr qui mets trop de temps, mais là ça timeout alors qu'il n'y a presque rien dans cerr
+ jfaixo: typiquement un cas où faire dumper l'entrée de ton bot et le faire tourner en local, ca ira plus vite qu'essayer de déboguer dans cg
+ Tiouz: Aussi, ça arrive à un tour éloigné, pas du tout au tour 1 ou 2
+ Tiouz: Ouais, je pense que je vais finir par faire ça, je ne peux pas débugger dans cg
+ Zorg1: pour moi tu peux pas déduire que ça t/o dans le random. ça se trouve ta deuxième trace est bien exécutée, mais CG s'en fout son timer a claqué
+ Tiouz: C'est forcément ça
+ Zorg1: ça me paraît pas si évident en fait
+ Zorg1: après les buffers de CG ne sont pas infini non plus je crois qu'il coupe à une certaine taille
+ Tiouz: Oui, à peu près à 1000 je crois
+ Alshock: merci jfaixo de me rejoindre sur ce que je dis depuis tout à l'heure.
+ Bon[]Crayon: Salut :ghost:
+ Bon[]Crayon: Automaton2000 o/
+ Automaton2000: c'est pour cela que je ne sais pas si il faut faire une pause
+ Bon[]Crayon: AutomatonNN o/
+ Bon[]Crayon: Est-ce que AutomatonNN a été licencié&#160;?
+ Tiouz: Il faut carrément que je fasse une pause Automaton2000
+ Automaton2000: il peut y avoir des trucs à faire
+ JaguarTordu: quelqu'un sait pourquoi les COC privés sont beaucoup plus imples que les publics&#160;?
+ JaguarTordu: simples*
+ BlaiseEbuth: Tiens, j'avais oublié la friction dans ma simu...
+ Tiouz: Bon, merci à tous pour votre aide, évidemment c'était pas le random, et je suis nul en C++
+ BlaiseEbuth: C'était quoi&#160;?
+ Tiouz: Alors c'est pas encore tout résolu, mais j'avais un segfault car à un endroit j'accédais à une case d'un tableau hors du tableau
+ Tiouz: Et il me disais rien. J'ai changé mes accès par des .at() et ça me mettais une erreur
+ BlaiseEbuth: Classique.
+ Zorg1: ah tiens t'as les même timeout que moi toi ^^
+ BlaiseEbuth: Ouai la stacktrace est désactivée sur cg...
+ BlaiseEbuth: C'est pratique
+ Zorg1: même dans l'IDE&#160;?
+ BlaiseEbuth: Ouai ouai
+ BlaiseEbuth: T'as juste "timeout"
+ Zorg1: super
+ Tiouz: yes
+ BlaiseEbuth: .at() doit lever une exception du coup il l'a&amp;ffiche
+ BlaiseEbuth: *affiche
+ Zorg1: trop facile le debug en C/C++ donc ^^
+ BlaiseEbuth: Sur cg ouai easy
+ Tiouz: combinez ça à un langage qui permet d'accéder hors des tableaux, et mon talent de codeur et ça fait des chocapics
+ Zorg1: après bon tu as besoin de perfs dès le début&#160;?
+ Tiouz: Il y a une différence entre l'environnement d'execution des tests et des validateurs&#160;? 
+ Tiouz: J'ai mon code python qui marche depuis une semaine, et je voulais des perfs
+ Louis.: salut
+ BlaiseEbuth: re
+ Alshock: salut Louis.
+ Alshock: Tiouz normalement pas trop en C++, mais je peux rien jurer
+ Louis.: qu'est-ce qui se passait
+ Tiouz: Je passe tous les tests, mais pas tous les validateurs (dans SR), et même certains validateurs qui sont aussi des tests ne passent pas 
+ Bon[]Crayon: C'est quel puzzle sr&#160;?
+ Tiouz: search race, un puzzle d'optimisation
+ Bon[]Crayon: ok
+ Tiouz: Enfin bref. Merci à tous
+ Alshock: J'ai le xkcd new bug en tête quand je lis un truc comme ça ^^
+ dbdr: Zorg1, comme disait (presque) La Fontaine, rien ne sert de partir a point, il faut courir a la fin&#160;;)<a rel="nofollow" class="external free" href="https://www.codingame.com/replay/538855105">https://www.codingame.com/replay/538855105</a>
+ Zorg1: allons bon qu'est ce qui se passe encore&#160;? en plus au boulot ça met 3 plombes pour ouvrir un truc CG&#160;:(
+ Zorg1: ah la petite poussette à la fin
+ dbdr: :innocent:
+ Zorg1: et il a l'air content de lui ... :rage:
+ Alshock: Ya faute m'sieur l'arbitre
+ Zorg1: l'arbitre est vendu, mon pauvre Alshock
+ dbdr: mais non, les petites poussettes c'est tout le charme du jeu
+ dbdr: et j'ignore complement l'adversaire, donc c'est completement accidentel&#160;:)
+ Zorg1: tout de façon il est nul ce jeu, on peut pas lancer de grenade
+ Zorg1: bah voyons "accidentel"
+ dbdr: pas de façon documentée en tout cas
+ dbdr: X Y NUKE X' Y'
+ Alshock: pourquoi deux coordonnées pour une seule grenade&#160;?
+ Alshock: on n'a qu'un pod
+ Alshock: THROW X Y TIMER
+ dbdr: X Y c'est pour la poussée
+ Zorg1: "BOMB playerId" pour moi
+ Zorg1: j'aime bien les commandes simples
+ Neumann: Y'a des gens en Smitsimax sur le contest Sofia&#160;?
+ Saelyos: Neumann je me posais la question de si ça valait le coup, mais l'espace de recherche est grand par rapport à CSB non&#160;?
+ Saelyos: Enfin ça dépend du nombre d'angles chosit
+ Neumann: Je continue de me poser cette question en observant des soucis de convergence/exploration
+ leojean890: j'ai l'impression que la plupart des gens qui sont devant moi ignorent l'adversaire, j'a peut être tort de ne pas faire de même^^ 
+ Alshock: @dbdr mais si tu donnes la poussée alors pourquoi donner aussi des coordonnées&#160;?
+ Alshock: Ouais je suis ce mec chiant qui débat très sérieusement d'une blague
+ Thyl: Tiouz c'est un AG&#160;?
+ Tiouz: Thyl, pour SR oui. Pk cette question maintenant&#160;?
+ Thyl: parce que si t'as des tests qui passent pas
+ Thyl: c'est ptet une histoire de random
+ Tiouz: Le problème est plus compliqué que ça à mon avis. Ce n'est pas un problème de convergence. C'est un timeout dû à un truc que je fais mal à un endroit et qui plante, mais C++ ne lève pas d'erreur tout de suite
+ Thyl: aaa
+ Thyl: ça c'est super dur à debug
+ Tiouz: J'ai bien remarqué. J'ai déjà enlevé 2&#160;bugs, mais il y en a encore
+ dbdr: ah, la magie du C++&#160;;)
+ Thyl: des fois il te rattrape ta bouse
+ Thyl: mais en fait tu veux pas qu'il le fasse
+ Thyl: exemple:
+ Thyl: le sur bourrage de tableau statique
+ leojean890: Tiouz parfois tu peux avoir de vrais timeouts aussi, par exemple tu limites ta recherche à 49 ms sur les 50, mais en fait il faut mettre moins 
+ skyyker: Hello&#160;!
+ Bon[]Crayon: salut
+ BlaiseEbuth: Reuh
+ Bon[]Crayon: Meuh :cow:
+ dwarfie: ga bu zo meuh
+ MaximeCrp: vilain shadock 
+ BlaiseEbuth: Et alors&#160;? T'es pour les gibis&#160;? On aime pas trop les gibis ici.
+ MaximeCrp: J'étais juste pas d'accord avec son affirmation
+ Zorg1: Blaise, le modo agressif
+ BlaiseEbuth: Quoi&#160;? T'es pour les gibis aussi&#160;?
+ Zorg1: tout le monde est pour les gibis, on a tous été brainwashé
+ dwarfie: la faute au tour de france sans doute ...
+ Alshock: J'arrive déjà plus à faire le tour de mon appart' alors...
+ BenPix: qqu'un pourrait me suggérer quel combats de bots a la ligue légende la plus accessible svp&#160;?
+ Alshock: ça dépend de ce que tu trouves les plus simple à faire&#160;:/
+ BenPix: dur à dire, j'en ai fait que 2... crystal rush et code strike back, et j'arrive pas à dépasser la ligue or dans chacun&#160;:/
+ [CG]Thibaud: mon conseil BenPix c'est d'en trouver un que tu kiffes et pour lequel t'aurais encore des idées d'améliorations en étant en gold qui te pousseraient à faire l'effort de plus pour aller chercher la légende
+ Bon[]Crayon: Dans le challenge en cours quel la valeur du boost&#160;? svp
+ Neumann: 650
+ Bon[]Crayon: merci
+ BigUP: BenPix, ligue or, c'est déjà bien. pour passer Legende faut une IA qui ecrase la gold... simulation minimum
+ BenPix: c'est vrai que c'est frustrant d'arriver en gold, si proche de la ligue légende, et de ne pas y arriver. Je devrais p-e persévérer, mais j'arrive à bout d'idées d'amélioration&#160;:/
+ leojean890: je crois que dans certains jeux certains sont passé légende sans simu (codebusters, ice and fire, code à la mode, code royale je crois&#160;?)
+ BlaiseEbuth: calm ouai
+ leojean890: benPix je connais la sensation, j'ai plusieurs multis environ 10eme gold:)
+ BenPix: tu me rassures :p
+ leojean890: hypersonic ocean of code ou great escape j'ai varié entre 1er et 15 gold mais sans passer^^
+ darkhorse64: BenPix, il faut regarder le forum pour CSB, il y a pas mal de techniques décrites la plus "abordable" étant à base d'algorithme génetique
+ BenPix: oui j'ai vu un super article là dessus, pour coder strikes back, j'ai tenté de l'implémenter, mais le résultat était ... moyen, et pas moyen de trouver ce que j'avais fait de travers
+ leojean890: le post mortem de Magus ouais
+ BenPix: je l'avais implémentée en PHP, qui n'est pas très performant.. je devrais p-e essayer de re coder en Java
+ darkhorse64: C++
+ BenPix: oui celui-là même 
+ BenPix: ça marchait +ou- sauf que mes pods ralentissaient dans les virages, et j'ai pas réussi à comprendre pq, ni comment empêcher ça
+ BenPix: bref, j'vais réessayer en Java (C++ je connais pas malheureusement) et voir ce que ça donne. Sinon j'irai voir du coté de ceux que tu suggères leojean890, merci de vos avis&#160;:)
+ BigUP: BenPix, en tout cas, pour passer legende vu qu'il n'y a pas d'activité dans les multis, obligé d'avoir une IA meilleur que les autres pour passer Legend... tu peux tenter de Spam Submit, mais ca peut etre tres long avant de réussir a passer sur un coup de chance
+ BenPix: je note, ça sera en dernier recours :D
+ leojean890: il parait que passer légende dans tron n'est pas trop dur non plus mais je suis 60eme gold actuellement
+ leojean890: je crois qu'il faut un peu plus de perf et de depth
+ BenPix: d'acc, je rajouteà la liste :thumbsup:
+ leojean890: sinon tu regardes le leaderboard de chaque multi et tu vois la proportion/le nombre de gens qui sont légende, ça te donnera un aperçu de la difficulté associée
+ leojean890: même si évidemment ça reste subjectif
+ leojean890: comme dit [CG]Thibaud prend en un que t'aimes bien et vas y à fond ^^
+ BenPix: oui, faut voir si c'est proportionnel au nombres de participants
+ leojean890: si t'as des idées quoi
+ leojean890: le nb et la proportion de personnes ça peut aider à se faire une petite idée
+ BenPix: ça marche, je vais persévérer dans un premier temps puis on verra, merci&#160;;)
+ jfaixo: ca devient teigneux les bot sur le challenge, vive l'agressivité
+ skyyker: Par contre perso j'arrive pas du tout à avoir qqch de bien sur les boost&#160;:'(
+ jfaixo: les tiens ou ceux des autres&#160;? :P
+ BlaiseEbuth: Bon bon bon... C'est l'heure de tout réécrire.
+ skyyker: les miens ^^
+ jfaixo: haha ^^ ca reste letruc le plus drole a spectate je trouve&#160;: quand un bot tente de cramer tous ses boosts pour expulser un autre, mais qu'il anticipe mal la trajectoire adverse, et passe a coté... Une fusée passe xD
+ skyyker: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/538932563">https://www.codingame.com/share-replay/538932563</a>
+ skyyker: magnifique...
+ jfaixo: sacrée remontada :joy:
+ dbdr: je gagne quand meme&#160;:)
+ dbdr: mais beau doublement, oui&#160;:)
+ dbdr: doublage?
+ dbdr: dépassement
+ Neumann: doublette
+ telerama: attaque
+ BlaiseEbuth: Vaccinage comme dirait l'autre.
+ dbdr: j'ai l'impression que therealbeef est le plus haut sans collisions
+ dbdr: en ignorant l'adversaire, quoi
+ darkhorse64: non, c'est moi
+ darkhorse64: au minimum
+ darkhorse64: mais ça m'agace de ne pas faire mieux
+ BlaiseEbuth: Fix it
+ dbdr: ah oui, tu as de belles trajectoires darkhorse64
+ BlaiseEbuth: On dit courbes.
+ darkhorse64: Avec le confinement, elles se sont bien arrondies
+ jfaixo: et en plus dis donc, t'as le feu au cul :heart_eyes:
+ jfaixo: (quand tu boost)
+ telerama: glad you specified
+ BlaiseEbuth: Le mec qu'assume pas sa blague
+ dbdr: darkhorse64 <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/538867222">https://www.codingame.com/replay/538867222</a>lol frame 80
+ dbdr: donc c'est encore perfectible
+ jfaixo: 360, +10 points dans la fonction d'éval
+ jfaixo: backflip, 20 points
+ dbdr: :D
+ dbdr: faudrait faire ça quand t'es deja sur de gagner, pour la frime
+ darkhorse64: Ouais, je fais des trucs assez bizarres et quand je prends en compte les autres, c'est bien pire
+ BlaiseEbuth: L'enfer c'est les autres...
+ dbdr: tout á fait Jean-Paul!
+ darkhorse64: Là, c'est juste ma fonction de fitness de SR qui joue, c'est à dire aller le plus vite possible. Le backflip, c'est clairement pas optimal
+ darkhorse64: Pour rejoindre BlaiseEbuth, en ignorant les autres, je suis passé de #30 à top 10. Ce mépris
+ dbdr: ignore toi toi-meme -&gt;  top 1
+ dbdr: tiens, je pensais avoir deja essayé ça, mais cette fois ça semble marcher&#160;:)
+ BlaiseEbuth: Quand on a pas de tête faut avoir des doigts...
+ dbdr: BlaiseEbuth, tu te comprends?
+ PythonSlayer: C'est quoi les avantages du rust par rapport a d'autres langages?
+ BlaiseEbuth: Généralement oui, pourquoi&#160;?
+ darkhorse64: faut submit maintenant pour voir le résultat avant demain
+ dbdr: BlaiseEbuth tu as de la chance
+ BlaiseEbuth: Pourquoi&#160;? Tu te comprends pas toi&#160;?
+ dbdr: PythonSlayer, rapide comme C/C++, mais avec plus de bugs détectés a la compilation, donc moins de crashs
+ PythonSlayer: Bête question mais y a des classes&#160;?
+ dbdr: BlaiseEbuth le truc sur les doigts, non :D
+ dbdr: PythonSlayer, quelque chose d'approchant mais un peu différent
+ PythonSlayer: du style des struct en C?
+ BlaiseEbuth: "Quand t'as pas de tête faut avoir des jambes", mais puisque on parle de code, des doigts. A moins que tu ne tapes avec tes pieds, mais ça je peux pas le savoir...
+ dbdr: struct + dynamique si tu veux
+ PythonSlayer: ok ty pour les infos
+ Zorg1: c'est de  plus en plus lent le submit&#160;?
+ dbdr: je sais pas si c'est pire. pe
+ dbdr: c'est pas rapide
+ Zorg1: ouaip "les challenges c'est super tu peux essayer plein de trucs" qu'ils disent
+ dbdr: tiens darkhorse64 #6mais tremble, j'ai amélioré mes trajs
+ Zorg1: tu te mets de la cafeine en intra veineuse et tu peux essayer 24 trucs par jour top
+ dbdr: 24 stroumphs
+ dbdr: enfin disons 10 stroumphs, ça fera 240 trucs
+ darkhorse64: Je monte plus vite quand je ne submit pas
+ darkhorse64: C'est SlyB, il me pousse à chaque fois
+ Zorg1: dbdr&#160;: le cour du stroumphs c'est 10 trucs maintenant&#160;? ça a vachement augmenté c'est une valeur refuge&#160;?
+ dbdr: nb: stroumpf = smrf
+ dbdr: smurf
+ Zorg1: j'essaie de trouver un truc marrant en ajoutant des voyelles à "dbdr"
+ dbdr: saine occupation
+ Zorg1: bah entre ça et corriger mes bugs d'index out of range
+ dbdr: "dbdr"[40]
+ Zorg1: ça donne un "z" ça doit être du C on tape dans le mot de passe root
+ dbdr:&#160;:)
+ nmcodes: :eggplant:
+ nicola: Zorg1, j’ai un truc marrant mais il me faut une consonne de plus.
+ nicola: :worried:
+ dbdr: dis toujours nicola
+ nicola: :blush:
+ dbdr: il faut attendre 22h?
+ nicola: :grin:
+ Zorg1: il te faudrait un 'n' c'est ça&#160;? 
+ Zorg1: Automaton2000 des idées pour le contest Sofia&#160;?
+ Automaton2000: surtout quand tu sais pas si les gens sont méchants
+ Zorg1: bah si Automaton2000, les gens sont méchants et ils t'en veulent en plus #parano
+ Automaton2000: c'est vrai je suis pas d'accord avec moi
+ Zorg1: Automaton2000 t'es vraiment pas un bot cool
+ Automaton2000: je sais pas trop ce que c'est
+ PythonSlayer: Automaton2000 des idees pour coder au moins un truc qui marche une fois?
+ Automaton2000: mais si tout le reste
+ TidyMaze: bien sympa l'escape game :D
+ PythonSlayer: Automaton2000 tu merite meme pas le titre de BOT fin si BOT du aldi quoi ...
+ Automaton2000: mais bon c'est le moment où il faut coder le referee dans le langage que tu utilises
+ Bon[]Crayon: Automaton2000 Tu es une tortue, c'est cool.
+ Automaton2000: on fait quoi quand on a la liste des coups possible
+ Zorg1: tu te la racontes sur le chat, Automaton2000
+ Automaton2000: c'est pour ça que j'ai dis
+ Zorg1: faut apprendre à frimer Automaton2000, là c'est un peu pitoyable
+ Automaton2000: bon par contre, je ne sais pas, je n'ai jamais dit que j'avais le dos tourné
+ Zorg1: :thinking:
+ b0n5a1: o/
+ Zorg1: \o
+ BlaiseEbuth: \o/
+ nicola: Oui, Zorg1.
+ Zorg1: on avait la même idée alors ^^
+ Zorg1: b0n5a1 c'est le retour sur CG finalement&#160;?
+ b0n5a1: comme ci comme ça, c'est un peu à l'insu de mon plein gré...
+ Zorg1: ha&#160;?
+ b0n5a1: (mp)
+ dbdr: joli sub Zorg1
+ leojean890: pendant que ça joue sofia, je joue chess :P pas si simple le boss W2, même avec un alpha béta depth 2, me reste à dépasser field3 et le boss :s:s mon eval est probablement insuffisante&#160;;)
+ leojean890: Zorg1 j'avoue ça remonte&#160;!! tu considères l'adversaire, now&#160;?
+ Zorg1: oui depuis hier en fait
+ Zorg1: mais là j'ai simu adversaire + nouvelle éval
+ Neumann: Tu hides Jeff06&#160;?
+ Zorg1: ah oui OK je reviens pas mal
+ Jeff06: Neumann: non, j'ai cassé mon submit
+ Neumann: Fix it
+ TheIronImpAndHisDog_9c6b: Hi
+ Jeff06: lol
+ Jeff06: et pas de git commit à temps
+ TheIronImpAndHisDog_9c6b: salut
+ Neumann: Pire excuse de hider ça
+ Zorg1: ils utilisent git les hidders&#160;? :thinking:
+ Neumann: et CGBenchmark aussi
+ Bon[]Crayon: Salut
+ Jeff06: de toute façon je me faut poutrer par illedan en local
+ Jeff06: il a un bot anti-moi
+ Neumann: Dur
+ jfaixo: haha, j'ai tenté le "if Jeff06 then j'évite de me faire timeout", mais ya pas le nom du bot adverse dans l'input, c'est mal fait
+ Jeff06: dans mon vieux code de SF2442 ya du hard-code anti-vankoot
+ Jeff06: il faisait que bloquer
+ Neumann: C'était un autre monde SF2442. J'avais un brute-force depth 3 avec 12 angles, sans prise en compte ennemie
+ Neumann: Et ca marchait bien
+ dbdr: lol
+ Zorg1: y avait pas encore les maniaques de l'algo de recherche à l'époque ...
+ Illedan: lol Jeff06 :P
+ Neumann: Y'avait Jeff06 quand même
+ Zorg1: :D
+ dbdr: Y'avait Neumann aussi
+ Neumann: Non. J'appelle pas ça de la recherche
+ Zorg1: meuh non il faisait du Brute Force, il était pur à l'époque
+ dbdr: précisément
+ Jeff06: meuh c'est pb4 qui a gagné sf2442
+ Jeff06: déjà
+ Neumann: C'était l'échauffement pour CSB
+ Neumann: C'est un peu la classe d'avoir gagné le jeu le plus joué du site
+ Jeff06: :D
+ pb4: -_-
+ Neumann: Haha
+ Jeff06: et paf
+ pb4: Jeff a triché
+ Neumann: Il a utilisé un AG, c'est tricher
+ pb4: Il avait les pragmas
+ Jeff06: aha
+ Neumann: Haha, pb4 découvre le C++
+ pb4: ...
+ pb4: Bah oui j'étais encore débutant à l'époque
+ Jeff06: c'est pb4 qui hide
+ pb4: et surtout j'avais pas les pragmas :rage:
+ Jeff06: ton bot est limité à 5ms encore?
+ pb4: pb4 il en est à sa troisième version qui ne fait pas mieux que ce qui est en ligne...
+ Neumann: I smell bs
+ dbdr: beam search?&#160;;)
+ pb4: :D
+ Neumann: Ouais, ça sent fort ces trucs là
+ Jeff06: ça marche BS là dessus?
+ pb4: Probablement bien pour optimiser la trajectoire
+ pb4: et mal pour se coltiner l'adversaire
+ Neumann: Go SR
+ Jeff06: c'est moi ou il freine expres pour perdre au dernier tour?? <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/538975355">https://www.codingame.com/replay/538975355</a>
+ pb4: C'est quoi ce replay vous bougez dans tous les sens -_-
+ Illedan: wtf Jeff06
+ darkhorse64: Tiens, il a le même bug que moi
+ Illedan: That is my current?
+ Jeff06: uh
+ Jeff06: no
+ Jeff06: an old bot
+ Jeff06: don't change anything :D
+ Illedan: hmmm
+ Neumann: Haha
+ pb4: Agreed
+ pb4: don't change anything
+ Illedan: Thx for replay, I take that agentId to my collection
+ Hamidou: hello
+ Bon[]Crayon: slt
+ Jeff06: ok bug fixed&#160;:) I'm back
+ Illedan: Fixed my bug too?
+ Jeff06: no but looks like I added a new one&#160;:/
+ Illedan: :D
+ jft63: Illedan I'm pushing you
+ Illedan: Good
+ Illedan: Keep doing that
+ BlaiseEbuth: Y'a des anglais partout&#160;! Jeanne&#160;! Oskour&#160;!
+ ClemZ31: Protege nous saint jules edouard
+ pb4: jft63 ton bot est *très* solide
+ jft63: pb4 je fais tout pour&#160;:)
+ Zorg1: qu'est ce que c'est pénible le yoyotage dans 0,5 point d'ELO pendant 50&#160;% du push&#160;:(
+ dbdr: Zorg1 qui se plaint d'etre top 7&#160;;)
+ b0n5a1: parcequ'il a les boules d'avance de finir 4e à 0.01 points du sac à dos avec clavier... :grinning:
+ dbdr: normalement c'est Neumann qui fait 4e
+ Neumann: Je serais content d'être 4ème
+ Neumann: Je vise moins haut que ça
+ Zorg1: ^^
+ Zorg1: bpn je pars toujours sur les chapeaux de roue moi, on va corriger ça ...
+ Zorg1: va falloir établir un budget de boost ...
+ BlaiseEbuth: Vroum vroum
+ Zorg1: je vais rajouter un aileron à mon pod il ira plus vite
+ BlaiseEbuth: C'est donc ça "tunner"... :thinking:
+ darkhorse64: Gaffe aux graviers
+ nmcodes: :penguin:
+ nmcodes: :snake:
+ leojean890: premier derrière le boss à chess, arf :s
+ SefioR13: Bonsoir, pour le problème facile detective-pikaptcha 1 je ne comprends pas comment on calcule le "nombre de passages adjacents", est-ce que quelqu'un peut m'expliquer comment faire&#160;?
+ SefioR13: My bad j'avais juste inversé les 0 et les #

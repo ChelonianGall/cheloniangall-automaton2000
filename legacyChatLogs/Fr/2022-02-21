@@ -1,0 +1,629 @@
+ I_love_CoC: bonjour à tous
+ I_love_CoC: bonjour Automaton2000
+ Automaton2000: pas envie de te faire un truc pareil ^^
+ I_love_CoC: tu es de bonne humeur Automaton2000
+ Automaton2000: y aura interro à la fin de la première et la dernière fois
+ I_love_CoC: c'est noté Automaton2000
+ Automaton2000: quoi que c'est pas toi qui parlait de ça
+ loxaxs: Bonjour à tous
+ loxaxs: Je viens de finir de lire l'énoncé, l'idée c'est bien de travailler ensemble pour trouver des solutions&#160;?
+ loxaxs: C'est quoi cette histoire de coin ring. Comment exploiter cette idée&#160;?
+ I_love_CoC: Bonjour
+ loxaxs: Bonjour
+ I_love_CoC: quel énoncé?
+ loxaxs: Celui de "A Coin Guessing Game"
+ I_love_CoC: oui tu peux travailler en groupe et poser des questions aux autres afin de proposer la meilleure solution
+ loxaxs: Pour l'instant, j'attaque le problème avec une matrix n x n et je marque les arrêtes qui relient des sommets de parité différentes, puis je retire ce qui est indiqué
+ loxaxs: -- avec deux boucles imbriquées, une pour les impaires et une pour les paires
+ loxaxs: J'ai l'impression que la matrice peut se réduire à une taille de (n/2) x (n/2)
+ loxaxs: -- lorsqu'on sépare nombres paires et nombres impaires
+ I_love_CoC: quand tu dis n tu veux dire tout les chiffres ou que les impairs ou pairs?
+ I_love_CoC: je pensais également utiliser une matrice
+ loxaxs: Ah, oui tu as raison, n est déja divisé par 2, on ne peut pas le re-diviser
+ I_love_CoC: chaque ligne représentant un impair et composée de tout les pairs que je place à 0 dés qu'ils s'affichent sur un même tirage que l'impair
+ loxaxs: les paires vont de `2` à `2*n` -- si on divise par 2 on obtient de `1` à `n`, donc il faut retirer 1
+ I_love_CoC: je suis pas sur de comprendre ce que tu veux dire par retirer 1
+ loxaxs: on obtient alors des nombres allant de `0` à `n-1`
+ loxaxs: -- ce qui est bon pour lire/écrire dans les tableaux ou matrices
+ I_love_CoC: voilà perso comment j'ai fait ma matrice
+ I_love_CoC: for i in range(n):
+ loxaxs: moi comme ça:
+ I_love_CoC: et voila a quoi ressemble ma matrice pour le premier test 
+ I_love_CoC: [[2. 4.]
+ loxaxs: la mienne doit ressembler à ça:[[1, 1, 1],
+ I_love_CoC: ok
+ I_love_CoC: tu as la commande numpy.ones(n) pour faire ça si tu veux
+ loxaxs: Puis il y a (3, 1, 6) alors elle devient:[[1, 1, 0],
+ I_love_CoC: ok et aprés la colonne ou il te reste un 1 tu l'associes à  2*(n+1) c'est ça?
+ loxaxs: normalement oui, mais je ne suis pas complêtement sur
+ I_love_CoC: ou plutot 2*(j+1)
+ I_love_CoC: c'est en gros la même idée que moi
+ I_love_CoC: je pense que ça peut marcher
+ I_love_CoC: le truc c'est qu'en plus lorsque tu as pairé deux nombres ensemble il faut penser à retirer le pair de toutes les autres liges
+ I_love_CoC: lignes*
+ loxaxs: Puis il y a (4, 1, 6) alors elle devient:[[1, 0, 0],
+ loxaxs: il me faut un mécanisme supplémentaire pour détecter qu'il ne reste qu'un seul 1 dans une ligne ou colonne
+ I_love_CoC: matrice[i].count('1')
+ I_love_CoC:  matrice[i].count(1) 
+ loxaxs: j'allais utiliser sum(matrice[i]), mais le .count() exprime mieux la situation
+ I_love_CoC: je pense que c'est surtout le comptage en igne qui t'interesse
+ I_love_CoC: ligne*
+ loxaxs: celui en colonne est aussi important
+ loxaxs: le (4, 1, 6) libère une colonne
+ I_love_CoC: je ne pense pas car dés qu'une ligne ne contient qu'un seul 1 tu récupéres son index et tu nullifie toutes les autres lignes à cet index la
+ loxaxs: ça passe de: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/054da2f1-b714-4fdf-a5ad-811e78077c54">http://chat.codingame.com/pastebin/054da2f1-b714-4fdf-a5ad-811e78077c54</a>
+ loxaxs: ça passe de: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/0c7d1342-63d7-4c54-8405-8ee979903db7">http://chat.codingame.com/pastebin/0c7d1342-63d7-4c54-8405-8ee979903db7</a>
+ loxaxs: à:[[1, 0, 0],
+ I_love_CoC: oui car ta premiére ligne ne contient qu'un seul un donc elle est pairé ensuite tu nullifies toute la colonne
+ I_love_CoC: tu vois ce que je veux dire
+ loxaxs: ah, oui -- dans ce cas c'est avec (3, 1, 6) que le besoin apparait
+ I_love_CoC: un seul un dans une colonne est une consequence de tes actes pas une nécessité
+ TTANGUY: bonjour,
+ I_love_CoC: bonjour
+ loxaxs: bonjour
+ TTANGUY: je ne comprend pas la sortie attendue pour ce puzzle
+ loxaxs: (3, 1, 6) ça devient:[[1, 0, 0],
+ TTANGUY: si vou pouvez m'eclairer svp
+ loxaxs: puis: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/8b64345e-91a1-4163-8a64-10a2fde48be4">http://chat.codingame.com/pastebin/8b64345e-91a1-4163-8a64-10a2fde48be4</a>
+ I_love_CoC: [[1, 0, 0],
+ I_love_CoC: tu commences avec ça ensuite
+ I_love_CoC: [[1, 0, 0],
+ I_love_CoC: car un seul 1 ligne 1 donc appairé
+ I_love_CoC: ensuite
+ loxaxs: @TTANGUYeh-bien la sortie doit donner les nombres paires associés à chaque nombre impaires
+ I_love_CoC: [[1, 0, 0],
+ I_love_CoC: car un seul 1 ligne 2 donc appairé
+ I_love_CoC: solution 2,4,6
+ I_love_CoC: car un seul 1 à chaque ligne
+ loxaxs: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/b1dcd3b9-b3f2-45cc-9de6-7bd55f7cda33">http://chat.codingame.com/pastebin/b1dcd3b9-b3f2-45cc-9de6-7bd55f7cda33</a>
+ loxaxs: @TTANGUYdans l'exemple d'output, il n'y a que deux pièces:1-&gt;4 et 3-&gt;2
+ loxaxs: donc ça donne:4 2
+ TTANGUY: merci loxaxs&#160;!
+ I_love_CoC: alors loxaxs ça tourne?
+ loxaxs: re
+ loxaxs: Oui, ça tourne!
+ loxaxs: C'est beau les logiciels qui fonctionnent
+ I_love_CoC: le mien pareil
+ I_love_CoC: c'était bien sympa ce brainstroming
+ I_love_CoC: ^^
+ loxaxs: ^u^
+ loxaxs: les votes auront lieu cette après-midi à partir de 15h
+ loxaxs: Niako, son image de profile, on dirait un automate cellulaire monodimensionnel
+ I_love_CoC: Automaton2000&#160;: tu en penses quoi toi de ce puzzle? pas trop dur?
+ Automaton2000: ah je vois pas trop comment faire
+ I_love_CoC: essaye les tortues Automaton2000
+ Automaton2000: après s'il ne peut jouer dans la grille indiquée, il peut jouer partout
+ I_love_CoC: tu es plein de sagesse Automaton2000
+ Automaton2000: j'ai un mcts qui marche pas
+ Stilgart: Automaton2000: je sais bien qu'il y a 3 T dans UTTT... mais de là à confondre avec une tortue ou une licorne...
+ Automaton2000: j'imagine que tu peux pas juste faire un truc
+ I_love_CoC: o/ Stilgart
+ Stilgart: \o I_love_CoC
+ I_love_CoC: aurais tu un puzzle à me conseiller Stil? (moyen si possible^^)
+ Stilgart: pour apprendre quoi&#160;?
+ Stilgart: parce que la section medium, c'est dense à coté du fin fond de la jungle&#160;:/
+ I_love_CoC: ^^
+ I_love_CoC: je sais pas n'importe juste un puzzle sympa
+ I_love_CoC: ça y est les Coc ça m'a (un peu) fanné^^
+ I_love_CoC: la je suis parti sur don't panic 2
+ I_love_CoC: mais je prens toutes suggestions
+ I_love_CoC: ^^
+ philRG: Les jeux avec les petites voitures c'est sympa çà me rappelle quand j'avais 5- 6 ans
+ philRG: Escape the cat pour les fans de trigonométrie
+ philRG: Ou autre la trigonométrie n'est pas nécessaire
+ BlaiseEbuth: Fais les miens I_love_Puzzles:<a rel="nofollow" class="external free" href="https://www.codingame.com/training/medium/what-the-brainfuck">https://www.codingame.com/training/medium/what-the-brainfuck</a> <a rel="nofollow" class="external free" href="https://www.codingame.com/training/hard/a-man-with-a-plan">https://www.codingame.com/training/hard/a-man-with-a-plan</a>
+ BlaiseEbuth: Qu'ils servent à quelque chose...
+ I_love_CoC: ok je go sur brainfuck
+ VilBoub: les miens&#160;: <a rel="nofollow" class="external free" href="https://didrit.fr/Divers/CG_Creat.htm">https://didrit.fr/Divers/CG_Creat.htm</a> ^^
+ VilBoub: mais oui, brainfuck est sympa&#160;!
+ BlaiseEbuth: &lt;3
+ BlaiseEbuth: Woaw ce palmares VilBoub ^^
+ VilBoub: =)
+ Buk.: o/
+ philRG: VilBoub: les informations sont bien classées 🙂 sympa le TP et cours sur tkinter
+ VilBoub: thx
+ nicola: Si tu pouvais inclure une feuille de style, sinon le texte est noir chez moi.&#160;;-)
+ BlaiseEbuth: T'as un problème avec les textes noirs&#160;?
+ nicola: Sur fond noir, oui.
+ VilBoub: LoL
+ Stilgart: nicola: si tu fais aucun effort aussi... :p
+ nicola: Quand ça arrive, Ctrl-A mais c’est encore plus moche.
+ nicola: :p
+ Stilgart: c'est censé faire quoi ctrl-A&#160;?
+ Stilgart: ha ...
+ Stilgart: select all
+ nicola: Oui.
+ nicola: J’ai un thème sombre par défaut dans Firefox.
+ <b>**Stilgart a trop l'habitude des erzatz moisis du grand vimperator</b></p><p><img src="/a/26090852120005" /> nicola: Ça existe, un navigateur qui utilise les commandes de vim&#160;?
+ VilBoub: nicola tu cherches les problèmes aussi ^^
+ nicola: en mode texte&#160;?
+ Stilgart: nicola: c'est à dire
+ Stilgart:&#160;?
+ nicola: Non, tout va bien quand il y a une feuille de style.&#160;:)
+ nicola: elinks avec des commandes à la noix.
+ nicola: Bon, il y a un navigateur construit sur Emacs.
+ Stilgart: vimperator c'était une extension firefox qui virait toute la fioriture de l'interface graphique, et qui te permettait de naviguer avec des raccourcis à la vil
+ Stilgart: vim*
+ Zorg1: o/ tout le monde
+ Stilgart: mais bon, firefox a décidé qu'il fallait tout péter dans la façon de gérer les extensions, et depuis on doit se contenter d'erzatz moisis
+ Zorg1: \o Automaton2000
+ Automaton2000: me dit pas si tu me dis que je le fais en python&#160;?
+ nicola: Oui, je regrette faviconized tabs.
+ nicola: Je n’ai toujours pas trouvé d’équivalent.
+ Stilgart: merci aux développeurs de ces erzatz pour l'exploit d'avoir réussi à en faire autant avec le nouveau système d'addon, soit dit au passage
+ nicola: Bidouiller le truc, ça merdoie rapidement.
+ GEBY203: bonjour
+ Stilgart: Automaton2000: truc
+ Automaton2000: tu fais un nn pour onboarding
+ nicola: La vache.
+ Stilgart: vla qu'il me confond avec JBM... :fearful:
+ nicola: Ça doit être un Nigaud Network.
+ nicola: Ou un Neuneu Network.
+ BlaiseEbuth: Ah&#160;? JBM a fait un NN pour onboarding&#160;?
+ GroutchKeu: o/
+ BlaiseEbuth: (╯°□°)╯︵ /o
+ GroutchKeu: o/ノ( ◕◡◕ ノ)
+ BlaiseEbuth: ( ◕ ︵ \(°□°)/ ︵◕ ノ)
+ GroutchKeu:&#160;:'(
+ GEBY203: lucas mon khey ca fait quoi
+ naemm: geby ferme la
+ I_love_CoC: c'est pas trés chaleureux comme accueil naemm^^
+ naemm: bass
+ BlaiseEbuth: Reichsadler.
+ philRG: &gt; Ah&#160;? JBM a fait un NN pour onboarding&#160;?Rien vu de tel sur sa chaîne Twitch
+ naemm: c'est vrai que c'était innatendu ^^&#160;;))
+ BlaiseEbuth: Abawi c'est bien connu que tout ce que JBM fait est sur sa chaîne twitch, il n'existe pas hors de ce contexte.
+ philRG: Ben non, que deviendraient ses followers sinon? 😛
+ Buk.: contexte twitch bien vide d'ailleurs
+ dbdr: du coup, ça fait longtemps que JBM n'a pas mangé, non?
+ philRG: Faut trouver un sujet qui intéresse et pas traité ailleurs, pas évident.
+ <b>**Stilgart se sent obligé de vérifier</b></p><p><img src="/a/69893904259383" /> Stilgart: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/easy/onboarding/solution?id=3349744">https://www.codingame.com/training/easy/onboarding/solution?id=3349744</a>
+ Stilgart: donc c'était Agade en fait :p
+ DethHarmonik: Oui.
+ Stilgart: j'avais un doute entre JBM et pb4...
+ Stilgart: no comment
+ philRG: Ah prime gaming c différent de premium pour avoir un compte Twitch gratuit
+ DethHarmonik: Et moi aussi d'ailleurs. :3
+ philRG: Un peu perdu quand même moi
+ Stilgart: JBM a effectivement un onboarding spécial, mais c'est une autre histoire
+ DethHarmonik: Ah oui tiens. Qu'est-ce donc?
+ I_love_CoC: question de nouveau venu (comme toutes celles que je pose^^) JBM qui est ce?
+ BlaiseEbuth: JBM c'est JBM
+ I_love_CoC: ^^ parfait merci
+ Stilgart: une suite de discussion sur l'impact de pair / tuple par rapport à juste un struct à deux champs
+ BlaiseEbuth: <a rel="nofollow" class="external free" href="https://www.codingame.com/profile/0d71f9df5da706f9f77c07c34d12480e609451">https://www.codingame.com/profile/0d71f9df5da706f9f77c07c34d12480e609451</a>
+ BlaiseEbuth: Oh c'est une poc
+ Stilgart: au final, son code montre que le compilo est suffisamment bon pour virer la couche objet tout seul
+ DethHarmonik: C'est pour toi le lien I_love_Puzzle
+ BlaiseEbuth: Encore heureux ai-je envie de dire Stilgart. :sweat_smile:
+ Stilgart: c'est loin d'être évident
+ Stilgart: tu as double peine ici... objets ET templates
+ Stilgart: et abuser de l'inline serait une catastrophe
+ Stilgart: après, je t'avoue qu'on s'est contenté de voir que l'impact était de ~0... mais il faudrait fouiller le code asm pour voir ce que le compilo fait vraiment
+ BlaiseEbuth: Hmm... Après ça rallongerait le temps de compil mais le résultat serait le même non?
+ Stilgart: non, parce que le code devient obèse et que ça flingue le cache d'instruction et la localité
+ Stilgart: mais bon, ce genre de truc, c'est à regarder au cas par cas quand tu n'as plus aucune autre piste
+ BlaiseEbuth: Mais un compilo aurait pas justement un garde-fou en cas d'appel d'inline sur du template?
+ Stilgart: d'où le test pour voir ce que fait ce garde-fou
+ Stilgart: (pour être honnête, je serai pas surpris d'apprendre qu'il y a une exception exprès pour pair&lt;X,Y&gt;)
+ BlaiseEbuth: Ah oui. OK.
+ BlaiseEbuth: Bah faudrait aller check les sources de g++ ^^
+ dbdr: on peut être certifié &gt;=100%&#160;?&#160;;)
+ BlaiseEbuth: if (type == std::pair&lt;X,Y&gt;) HCF;
+ BlaiseEbuth: Non dbdr, tout le monde est meilleur que &gt;99% des pros mais pas plus.
+ I_love_CoC: donc ce taux avec l'histogramme ne sert strictement à rien?^^
+ dwarfie: dbdr ... oui ... en addition les certifs&#160;;)
+ <b>**dwarfie trop claqué pour dire autre chose que du Automaton2000 ...</b></p><p><img src="/a/40502662118268" /> Automaton2000: je ne comprends tjrs pas pq div class container ne se met pas à jour
+ dwarfie: Stilgart&#160;: c'est une question pour Boulet ca , non&#160;?
+ dwarfie: Automaton2000&#160;: essaye de spawner boulet on sait jamais&#160;;)
+ Automaton2000: bon allez, c'est reparti pour un tour de move
+ BlaiseEbuth: Oh l'histogramme est en dur I_love_CoC.
+ I_love_CoC: ok je me sens trahi^^ BlaiseEbuth.
+ BlaiseEbuth: Ah bah oui, c'est pensé pour te faire te sentir fort. Mais c'est du flan.
+ darkhorse64: J'ai vu un meilleur que 37% des devs sur un profil un jour
+ BlaiseEbuth: Oui C'est possible d'avoir moins. Mais les pourcentages sont en dur.
+ darkhorse64: Oui, l'histogramme, c'est de la déco
+ BlaiseEbuth: (Pis on va pas se mentir, si tu connais un peu le langage dans lequel tu fais la certif t'as le score max sans souci)
+ BlaiseEbuth: ((Et je modère mon propos))
+ I_love_CoC: j'aurais aimé que tu me mentes Blaise^^
+ I_love_CoC: mon kiki n'est plus tout dur maintenant^^
+ BlaiseEbuth: (((Et oui du coup CG sous-entend que 99% des pros savent pas coder)))
+ I_love_CoC: grave^^
+ BlaiseEbuth: ((((En même temps si ils font du java et du python c'est pas complètement faux))))
+ BlaiseEbuth: Fin de la parenthèse Automaton2000.
+ Automaton2000: j'ai essayé de changer le nom
+ BlaiseEbuth: Moi aussi Automaton2000, et on a vu le résultat.
+ Automaton2000: c'est toi qui l'a créé&#160;?
+ BlaiseEbuth: Beh oui Automaton2000.
+ Automaton2000: ah oui faut que je passe au c++
+ dbdr: <a rel="nofollow" class="external free" href="https://fr.wikipedia.org/wiki/Sup%C3%A9riorit%C3%A9_illusoire">https://fr.wikipedia.org/wiki/Sup%C3%A9riorit%C3%A9_illusoire</a>
+ BlaiseEbuth: Ah mais leurs capacités en python et java sont très certainement bien supérieures aux miennes. :3
+ WhatTrickeryIsThis: :triumph:
+ BlaiseEbuth: Tiens le macaque... Tu viens voir si ça sent la mouette&#160;?
+ nicola: Et en jython, BlaiseEbuth&#160;?
+ BlaiseEbuth: :scream:
+ WhatTrickeryIsThis: y à un hashcode jeudi, faut que j'apprenne à coder
+ nicola: Son avatar n’est pas un macaque mais un orang-outang.
+ nicola: Ook.
+ WhatTrickeryIsThis: les oranoutan joufflus sont les plus dangereux
+ nicola: Surtout ceux d’Ankh-Morpork.
+ nicola: Eek.
+ BlaiseEbuth: Ca reste un macaque.
+ BlaiseEbuth: nicola <a rel="nofollow" class="external free" href="https://danstonchat.com/700.html">https://danstonchat.com/700.html</a>
+ philRG: Nan mais quand je pense que le webchat va disparaitre. Une belle connerie mon général&#160;!
+ dbdr: tout fout le camp!
+ BlaiseEbuth: Critiquez pas vous allez vous faire ban.
+ philRG: M'en fous
+ Zorg1: et où tu vas raconter tes passionantes histoires de piscine et de tennis alors&#160;?
+ BlaiseEbuth: Ce rebbelle...
+ Zorg1: bon désolé j'était en mode "free troll". J'édite mon fichier de conf, je reboote et ça devrait être bon
+ BlaiseEbuth: -b
+ philRG: Zorg1: t'inquiètes j'ai encore mes potes d'équipe sur WhatsApp 😛
+ philRG: Pour tennis
+ Zorg1: on sent le pro, toujours une solution de rechange ^^
+ philRG: Ben comme pour les datacenters, procédures de backup et recovery
+ philRG: Je me souviens pas de l'acronyme
+ philRG: Tout un programme d'ailleurs, les disaster &amp; backup recovery pla 
+ philRG: Plan
+ Zorg1: oui je suis dedans parle pas de truc pénible&#160;:(
+ philRG: Oh pardon 😅
+ dbdr: si tu veux de l'aide pour les désastres n'hésites pas à demander sur le chat, Zorg1
+ dbdr: on est pas mal d'experts
+ Zorg1: :D
+ Zorg1: y a même JBM qui a nommé son site comme ça&#160;;-)
+ Zorg1: vous êtes tous des trolls, y a que moi de bienveillant sur ce chat&#160;:(
+ Zorg1: Automaton2000 t'es d'accord avec moi&#160;?
+ Automaton2000: yo tout l'monde&#160;! automaton2000, automatonnn&#160;!
+ Zorg1: bon c'est quoi le puzzle de l'événement
+ Zorg1: ah un puzzle de Niako ....
+ Zorg1: ah merde déjà résolu
+ Alshock: coucou les enfants
+ Zorg1: o/ l'aïeul
+ Alshock: Petit con, où t'as encore planqué mon dentier&#160;?
+ Zorg1: hihihi
+ <b>**Zorg1 part en courant se cacher pour éviter une rouste</b></p><p><img src="/a/16542412157988" /> Zorg1: t1 ras le bol c'est site avec leur bandeau dégueu parceque t'as refusé leur cookie de m*de
+ Zorg1: en plus bon un coup de F12 et tu l'as viré
+ WhatTrickeryIsThis: il est déconseillé d'enfermer deux ourang outans joufflus dans le même enclos, sinon ils se tapent dessus
+ Zorg1: *ces dites
+ Zorg1: *ces sites
+ Alshock: cécité
+ WhatTrickeryIsThis: décidé
+ BlaiseEbuth: décédé
+ Alshock: dévédé
+ Thonybat: cbd
+ Zorg1: on s'amuse sur le chat
+ Zorg1: vivement qu'il ferme qu'on soit plus qu'entre gens sérieux sur Discord :D
+ 13014: wsh 
+ 13014: bande de pute
+ 13014: ntm
+ Zorg1: visiblement t'as un message à faire passer
+ 13014: oe ntm
+ Zorg1: j'espère que t'es soulagé
+ 13014: ntm
+ 13014: fdp
+ 13014: e
+ 13014: e
+ 13014: slp
+ [CG]Thibaud: je viens de le bannir
+ VilBoub: c'était pourtant très intéressant&#160;!
+ Alshock: J'osais pas demander si slp était une référence au slip français de peur de le relancer :D
+ darkhorse64: difficile d'interprêter des grognements
+ philRG: 😅
+ BlaiseEbuth: Salade Litchis Poivrons
+ Sweafy: Onomatopé
+ Fowgzu: Onomo
+ Sweafy: topé
+ Fowgzu: monomo
+ Sweafy: monoma
+ Fowgzu: péto
+ Sweafy: péptomano
+ I_love_CoC: re o/ a tous
+ I_love_CoC: surtout à toi Automaton2000
+ Sweafy: s/o le flem
+ Automaton2000: euh je veux dire c'est que c'est un des premiers trucs que j'ai appris à coder en fait
+ Fowgzu: monomo
+ Sweafy: toté
+ Azhabel: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/17dec587-9592-4d68-aa0b-d51e8b4f3aa8">http://chat.codingame.com/pastebin/17dec587-9592-4d68-aa0b-d51e8b4f3aa8</a>
+ WhatTrickeryIsThis: litchi poivrons :confounded:
+ WhatTrickeryIsThis: tu pourra le faire un axe puis l'autre
+ Sweafy: :kissing::kissing::kissing::kissing::kissing:
+ Fowgzu: :japanese_ogre:
+ Sweafy: :rage:
+ pardouin: le type s'est fait bannir pour rien
+ pardouin: il testait juste des commandes bash
+ BlaiseEbuth: La modération ici tu sais...
+ WhatTrickeryIsThis: bash /pardouin -slp -tg
+ <b>**WhatTrickeryIsThis banned</b></p><p><img src="/a/78765380354532" /> Valsrim-IT: Bien le bonjour à tous
+ Valsrim-IT: je suis le petit nouveau&#160;:)
+ Anemon_N8:     
+ Valsrim-IT: :yin_yang:
+ JarvinIV: je me demendais si qq savait comment je peux rejoindre le chat de mon entreprise il y avais un salon dédié puis la il n'et plus proposé dcp jsp comment faire pour le rejoindre 
+ I_love_CoC: Vilboub?
+ VilBoub: oui&#160;?
+ Alshock: @JarvinIV /join monEntrepriseSinon pour dire à quelqu'un d'y venir tu peux lui envoyer #monEntreprise
+ dbdr: \o/
+ Zorg1: #ESNaTailleHumaine
+ philRG: J&gt; #ESNaTailleHumaineJ'arrive lundi mais pitié pas d'entretien de recrutement
+ philRG: #save-philRG
+ philRG: Suffit de me filer l'adresse et fiche de poste
+ BlaiseEbuth: "Me faites pas passer d'entretien, donnez moi juste le job."
+ shellpink: problème depuis ce matin: le clash débute mais je reste sur l'écran "salle d'attente" et je ne peux cliquer que sur quitter le clash.
+ Fabien-Bernard: F5
+ Edjy: essaie de rafraichir la page
+ Edjy: pour moi ça fonctionne
+ shellpink: top&#160;!! merci
+ dwarfie: BlaiseEbuth&#160;: y'a mieux ... me filer pas le job , juste le salaire  ;)
+ WhatTrickeryIsThis: et la secretaire &lt;3
+ dwarfie: avec la secretaire ... pas de job et un salaire ... ca veut dire faire homme politique , non&#160;?
+ dwarfie: :yum:
+ WhatTrickeryIsThis: le politique, il a aussi la voiture et l'appart+pension à vie
+ dbdr: pension à vie faut faire président, non?
+ dwarfie: et le chauffeur pour s'occuper de la secretaire
+ WhatTrickeryIsThis: éventuellement une ou deux cartes sortie de prison
+ Zorg1: the Balkany Touch
+ <b>**dbdr passe son code au four</b></p><p><img src="/a/40590448621674" /> WhatTrickeryIsThis: j'espere Trump va tenter une election en France, je voterai pour lui :USA: :USA:
+ dwarfie: qu'est-ce qu'il a encore a USer&#160;?
+ WhatTrickeryIsThis: c'est un peu gonfler mais on sait jamais ce qu'il peut inventer
+ WhatTrickeryIsThis: on reprendra la reconstruction du mur anti mexicains depuis Paris jusq'à las vegaas
+ dwarfie: un mur autour de paris ... bonne idée ca ... " dans la lignée de new york 1977 et de los angeles 2013 , voici paris 2024 "
+ Fabien-Bernard: Kurt Russel a pssé l'âge pour ces conneries.
+ BlaiseEbuth: C'est un code juif dbdr&#160;?
+ BlaiseEbuth: Ou tzigane, ou communiste, hein. Soyons inclusifs
+ dbdr: oula :D
+ dbdr: non, c'est un code à cuisson multiple
+ BlaiseEbuth: recuit simulé? :thinking:
+ WhatTrickeryIsThis: :thinking:
+ dbdr: bah voila
+ BlaiseEbuth: C'était ambiguë. T'as frôlé le point Godwin.
+ dbdr: toi par contre t'es bien encastré dedans&#160;;)
+ BlaiseEbuth: Ja... L'autre chour che courrais et che me suis fait mal, che n'avais pas fu le rideau de fer&#160;! Ach ach ach
+ dbdr: et tu voyages dans le temps en plus!
+ dbdr: la police du temps est à tes trousses
+ dbdr: qui a la reference?
+ TwilightSpoonInSpace_8d21: bonjour a vous jeunes entrepreneurs
+ BlaiseEbuth: Visiteur du futur?
+ dbdr: yep&#160;:)
+ BlaiseEbuth: Mais c'est brigade temporelle
+ WhatTrickeryIsThis: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=lQB3goL7nyk">https://www.youtube.com/watch?v=lQB3goL7nyk</a>
+ dbdr: ah oui, ça fait longtemps
+ TwilightSpoonInSpace_8d21: si vous aussi vous voulez faire des millier d'euros n'hesitez pas a ne pas suivre mes conseilles
+ TwilightSpoonInSpace_8d21: conseils*
+ Foufure13: ducoup on doti suivre devrais suivre tes conseille
+ TheBoldImp_21a6: lol
+ Valsrim-IT: n'empêche, on fait l'un des seuls jobs où l'entretien d'embauche est beaucoup plus difficile que le job lui même, non?
+ Valsrim-IT: en même temps, je dis ça... j'ai pas encore eu mon premier poste de dev...
+ philRG: c'est pour te faire comprendre que tu ne seras pas tout seul devant ton écran une fois embauché&#160;;-)
+ Valsrim-IT: "- il a dit 1, 2, 3, pastèque!""- il dit qu'il ne voit pas le rapport..."
+ Valsrim-IT: j'avais juste besoin de dire une connerie...
+ Valsrim-IT: "- connerie, connerie... Sean Connery? l'acteur?"
+ UndyingWrestler_a1bc: if (CZ &gt; t) {  
+ UndyingWrestler_a1bc: pourquoi ça me dit qu'il y a un problème avec le "="
+ UndyingWrestler_a1bc: en langage scale
+ OldJohn: Scala&#160;?
+ philRG: UndyingWrestler_a1bc:&#160;;&#160;?
+ OldJohn: C'est quoi le type de CZ&#160;?
+ UndyingWrestler_a1bc: val
+ UndyingWrestler_a1bc: oui scala
+ OldJohn: La convention de nommage est que les constantes commencent par une majuscule
+ OldJohn: Est-ce que CZ est une constante&#160;?
+ UndyingWrestler_a1bc: non c'est une valeur
+ philRG: Je dirais erreur de déclaration de type?
+ OldJohn: Que dit l'erreur&#160;?
+ UndyingWrestler_a1bc: "/tmp/Solution.scala:19: error: reassignment to val
+ philRG: Peut-être un paramètre de méthode CZ?
+ OldJohn: En gros il ne doit pas être modifiable
+ philRG: Oui
+ philRG: Je découvre Scala
+ OldJohn: J'en ai fait il y a quelques années, tout oublié
+ philRG: Ah non mais c fort de pouvoir répondre déjà sans l'aide de Google
+ UndyingWrestler_a1bc: oui j'avais mis var CZ = 6000 au lieu de val
+ philRG: &gt; <a rel="nofollow" class="external free" href="https://openclassrooms.com/forum/sujet/scala-probleme-assignement-a-une-variable-71544#message-5604543">https://openclassrooms.com/forum/sujet/scala-probleme-assignement-a-une-variable-71544#message-5604543</a>
+ philRG: C'est ballot comme mot-clef val/var
+ Zorg1: bah une valeur c'est pas censé changé, une variable ... :p
+ Zorg1: quoique c'est un peu tiré par les cheveux mon truc :thinking:
+ philRG: Les langages c'est comme les livres, çà doit pas être utilisé
+ philRG: Ban /me
+ kayou: Bonjour, Les certifications sont du même niveau pour tous les langages&#160;? je viens de tester en python et les problèmes sont plus simples que ces des clash. je me demande ce que ca certifie
+ dbdr: Zorg1, si je pense que c'est ça. après un charactère de diff c'est pe pas idéal
+ dwarfie: kayou ... besoin que ca certifie quelque chose&#160;?&#160;;)
+ kayou: pas vraiment en fait, mais il auraient mis faites 5 clash à 100% en 1h ca aurait été pareil
+ dwarfie: 1h ... moi j'ai 45 min a chaque ... 
+ dwarfie: a part peut etre la premiere fois que j'ai fais 
+ <b>**dwarfie se souvient plus trop</b></p><p><img src="/a/16542412157988" /> Zorg1: fais gaffe kayou il y en a qui se sont fait ban pour moins que ça :p
+ Zorg1: mais oui les puzzles ne certif sont plutôt easy
+ Zorg1: *de certif
+ philRG: Ah pour çà que ma certification PHP est à 39% vs python 99%
+ philRG: Le truc dans python c'est de se souvenir des fonctions usuelles, alors que python pas besoin
+ philRG: s/dans python/dans PHP/
+ dwarfie: Automaton2000&#160;: tu peut lui dire que j'ai rarement besoin des fonctions usuelle en fait&#160;?
+ Automaton2000: mais je ne sais pas ce que c'est que des shortest et tu peux pas
+ dwarfie: Automaton2000&#160;: c'est facile , les shortest , c'est la ou bash et ruby ecrase python&#160;;)
+ Automaton2000: ils ont pas eu le temps de le faire en moins de 5 lignes
+ dwarfie: exact&#160;;)
+ philRG: strstr, strtok, strgrandpere, strgrandpere, c'est le jeu des 7familles
+ philRG: s/père/mère
+ philRG: Çà doit expliquer mon score moisi vu que la syntaxe PHP je connasy
+ philRG: connais
+ dwarfie: ou pas...
+ kayou: c'est vrai que les meilleurs shortest des events de COC pour python sont en ruby
+ philRG: Mais si...
+ Thyl: Quel est le lien pour voir tout les messages que les gens ont envoyés sut le chat 
+ Thyl:&#160;????
+ Zorg1: bah on l'avait mis sur le discord
+ Zorg1: quand on te dit de faire un bookmark ....
+ Thyl: oui mais je voudrais pour une personne
+ Thyl: pour voir tout les messages qu ej'ai écris 
+ Thyl: je sais que c'est possible mais y arrive pas
+ philRG: C'est le prof qui donne les liens pas les élèves Zorg1&#160;!
+ philRG: Thyl: ah mon avis ça doit être difficile
+ philRG: Bonne question quelle est ce fichu lien
+ Buk.: philRG tu compte faire un classement des piplettes du chat&#160;? :grin:
+ philRG: Buk.: si ça peut permettre de farmer des XP 😂
+ Flanbiby: cc
+ vryc: bnite
+ vryc: bite
+ vryc: jrigole bien sur 
+ <b>**Stilgart tend le man de grep à philRG</b></p><p><img src="/a/69893904259383" /> Stilgart: si Automaton2000 arrive à tout relire à chaque reboot du chat, ça doit pas être bien dur de filtrer sur un pseudo donné
+ Automaton2000: non mais ça c'est juste une question de perf
+ Stilgart: Automaton2000: justement, on te sent lent au redémarrage, maintenant que tu le dis&#160;!
+ Automaton2000: y'a pas mal de gens étaient à 0%
+ dwarfie: Automaton2000 ... pour les&#160;% , demande a boulet&#160;;)
+ Automaton2000: bah en meme temps , c'est un peu lourd
+ Stilgart: Automaton2000: les&#160;% ou les boulets&#160;?
+ Automaton2000: et on peut pas tout avoir
+ Bon[]Crayon: Salut tout le monde
+ Bon[]Crayon: Salut Automaton2000 :turtle:
+ Automaton2000: rha je sais plus comment j'ai fait pour pas le faire sur le forum il me semble
+ dwarfie: Automaton2000&#160;: just do it
+ Automaton2000: ça dépend de la ligue gold
+ Stilgart: Automaton2000: celle de CR est effectivement un peu plus tendue que celle de BotG
+ Automaton2000: et je ne sais plus quel contest
+ Zorg1: Bon Automaton2000 on te vois lors du prochain contest&#160;?
+ Automaton2000: après, tu peux aussi dire que je suis lent
+ Zorg1: ah bah Bravo Automaton2000 t'as traumatisé Automaton2000&#160;:(
+ Automaton2000: et ça te donne des idées
+ Zorg1: oups
+ Zorg1: je commence à faire de l'Automaton2000 moi
+ Automaton2000: le seul cas où ça peut être un problème de timeout
+ Bon[]Crayon: Automaton2000 Trop dur de t'imiter.
+ Automaton2000: c'est ce qui est lent
+ I_love_CoC: bonsoir
+ I_love_CoC: bonsoir Automaton2000
+ Automaton2000: donc au lieu de faire "10 300 100" tu écris "10 300 boost3
+ Zorg1: bien joué Automaton2000
+ Automaton2000: au vu de la lumière
+ Bon[]Crayon: o/
+ Bon[]Crayon: Automaton2000 "10 300 boost"
+ Automaton2000: pour faire une simu ^^
+ Remi.: Salut tout le monde
+ Remi.: alors ça y est tout le monde a terminé le puzzle du moment&#160;? ^^
+ Zorg1: oui déjà fait
+ Remi.: Moi y a une partie de l'énoncé que je n'a iaps comprise.
+ Remi.: * n'ai pas
+ philRG: Ah déjà 21h o/ Remi. 
+ I_love_CoC: o/
+ Zorg1: ah tu dois aller dormir&#160;?
+ I_love_CoC: et oui pour le puzzle remi
+ Bon[]Crayon: o/
+ I_love_CoC: c'est quoi la partie que tu n'as pas compris?
+ Bon[]Crayon: ah scroll 
+ philRG: Zorg1: nan c l'heure moyenne de connexion de Remi. 
+ Zorg1: ha monsieur a fait des stats des heures de connexion de tout le monde ...
+ Remi.: mdr je suis surveillé ^^
+ Zorg1: ça ne rigole plus
+ Remi.: C'est la fin que ej n'ai pas comprise:  le "secret criterion"
+ Remi.: Je crois comprendre que ça veut juste dire qu'on peut trouver avec les entrées, mais j'ai peur qu'il y ai un autre sens, genre quand on peut pas trouver y a une suite logique ...
+ I_love_CoC: franchement il n'y a rien de caché. Je n'avais même pas fait gaffe à cette histoire de secret criterion
+ I_love_CoC: on peut toujours trouver
+ I_love_CoC: comme un SUDOKU
+ Remi.: Ok, merci
+ b0n5a1: o/
+ Bon[]Crayon: \o
+ b0n5a1: un SUDOKU, ça va de paire avec un NORALABIT
+ b0n5a1: ok je sors...
+ Remi.: o/
+ Remi.: :clap:
+ b0n5a1: fais pas de bruit, y'en a qui cherchent encore :D
+ Valsrim-IT: lol joli
+ Remi.: Moi je disais "face au nord" à une époque.
+ Zorg1: o/
+ Zorg1: omg les poètes ont débarqués ...
+ Valsrim-IT: ou les "pwets"...
+ Remi.: les pouet pouet
+ I_love_CoC: je fais un clash et je reviens pour voir cette avalanche de blague
+ I_love_CoC: merci d'égayer m vie morne et triste^^
+ Zorg1: genre le gars il a une activité sur CG ^^
+ I_love_CoC: j'ai une bonne raison de me flinguer maintenant
+ I_love_CoC: ^^
+ I_love_CoC: Automaton2000 tu aurais une blague pour nous?
+ Automaton2000: on parle de ceux qui l'ont fait
+ I_love_CoC: merci
+ Remi.: Automaton2000 ne fait des blagues que quand on ne s'y attend pas.
+ Automaton2000: bah j'ai l'impression que le jeu est assez simple
+ Remi.: Automaton2000 une tortue&#160;?
+ Automaton2000: il me faut un truc qui fonctionne
+ Remi.: printf("tortue"); ça devrait marcher Automaton2000
+ Automaton2000: ok on est d'accord que c'est juste un problème de type
+ I_love_CoC: un problème de sale type je dirais Automaton2000
+ Automaton2000: bon je suis sur le premier test
+ Zorg1: je croyais que tu faisais un CoC
+ Zorg1: là je te vois surtout causer à Automaton2000 :p
+ Automaton2000: mais à partir de ce soir
+ Zorg1: ah c'est le grand soir Automaton2000&#160;?
+ Automaton2000: va falloir que je m'y mette
+ Remi.: à faire des blague,s Automaton2000&#160;?
+ Automaton2000: comment tu sais que t'as un peu de temps pour coder
+ Remi.: Bah j'ai rien de prévu ce soir, Automaton2000
+ Automaton2000: j'ai toujours un bug dans mon calcul de distance entre deux points
+ Zorg1: bosse pythagore Automaton2000
+ Automaton2000: tu veux faire une simu pour le moment j'ai pas les droits
+ Remi.: Pourtant c'est pas le plus compliqué comme calcul. Sauf si tu prends en compte l'ellispoïde ^^ Automaton2000
+ Automaton2000: sinon il va falloir que je me sers pas de la gueule de mon code c'est un peu
+ Zorg1: ça veut rien dire Automaton2000 :thinking:
+ Automaton2000: c'est un argument de plus pour que je me prends les pieds dans le tapis
+ Zorg1: :D
+ I_love_CoC: Zorg1&#160;: entre deux Coc je m'entretiens avec lui^^
+ Remi.: Automaton2000 tu as des pieds&#160;???
+ Automaton2000: mis à part que ça fait ça
+ Remi.: I_love_CoC en fait c'est Automaton2000 qui fait les coc pour toi&#160;?
+ Automaton2000: et si elle n'est pas dans les 1000 premiers de chaque ligue
+ I_love_CoC: Remi. tu m'as démasqué
+ Remi.: Automaton2000 moi je suis dans les 1000 premier à connect 4
+ Automaton2000: y'en a qui ont un code qui marche
+ Zorg1: t'es Captain Obvious Automaton2000&#160;?
+ Automaton2000: la vie est dure sur windows ^^
+ Zorg1:&#160;:)
+ Remi.: "la vie" et "sur windows" ...
+ Remi.: La vie ne se passe pas sur ordinatuer Automaton2000
+ Automaton2000: tu as la main sur le puzzle ascii art en bash&#160;?
+ Remi.: "ascii art" et "bash" ... 2 gros mots dans la même phrase.
+ Remi.: Bon c'est bien beau tout ça mais pendant ce temps là jene code pas ... Automaton2000 faut qeu tu me laisses commencerle puzzles de la semaine, en plus j'ai pas fini ma refonte sur serach race.
+ Automaton2000: c'est magus qui a fait ca
+ I_love_CoC: bonne nuit à tous
+ Remi.: Bonne nuit
+ I_love_CoC: bonne nuit Automaton2000
+ Automaton2000: il y a un système de ligue
+ Stilgart: Automaton2000: genre la ligue de jour et la ligue de nuit&#160;?
+ Automaton2000: y'a pas de risque de se faire chier
+ LeGourdin: Salut tous,Concernant l'événement de la semaine, il y a qqch de particulier qu'il faudrait optimiser&#160;? C'est qu'il me paraît un peu trop facile ce puzzle.
+ Stilgart: pas vraiment
+ Remi.: C'est le démineur qui était trop difficile ^^
+ Stilgart: tu peux publier ton code dans l'espoir que ça plaise à quelqu'un et qu'il finisse dans le wall of fame
+ Stilgart: le démineur il ne devrait même pas être proposé par la plateforme
+ Stilgart: (c'est le seul puzzle où il est impossible de faire 100% à coup sûr)
+ Valsrim-IT: lequel de démineur?
+ LeGourdin: Pfiou, le démineur...Je me suis toujours planté sur les random de la fin.... J'ai jamais réussi à le valider (je crois pourtant avoir tout donné pour optimiser au max les probabilités...
+ LeGourdin: ok thx
+ Valsrim-IT: c'est quel niveau? difficile?
+ LeGourdin: De toute façon, j'ai pas de grandes prétentions, mais ça ferait plaisir d'avoir pensé à tous les cas de figure...
+ LeGourdin: Le démineur est en "moyen" je crois...
+ Zorg1: cette chose là Valsrim-IT&#160;::  <a rel="nofollow" class="external free" href="https://www.codingame.com/training/medium/minesweeper-1">https://www.codingame.com/training/medium/minesweeper-1</a>
+ Remi.: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/medium/minesweeper-1">https://www.codingame.com/training/medium/minesweeper-1</a>
+ Zorg1: oui moyen
+ Zorg1: les grands esprits se rencontrent
+ Remi.: mais difficile en vrai ^^
+ LeGourdin: Mais c'est chelou, parce que même dans la vraie vie y a toujours un peu de "au bol" à la fin
+ Zorg1: en fait c'est avoir du bon random
+ Valsrim-IT: j'ai hâte de le tester
+ Stilgart: LeGourdin: pas que à la fin
+ LeGourdin: Sur le plan du "puzzle", j'ai trouvé assez intéressant à coder
+ Stilgart: au début aussi :D
+ LeGourdin: Non, c'est juste, au début aussi bien sûr&#160;; et même souvent au milieu.Mais c'est plus simple de faire les "bons choix" au début et au milieu
+ Valsrim-IT: c'est vrai que 13% de réussite, ça n'est pas lourd
+ Stilgart: LeGourdin: ne dis pas ça à darkhorse ou à moi
+ Stilgart: on est tombé sur des cas où on perdait tour 2
+ LeGourdin: ok ok, je le dis pas&#160;;-)
+ Stilgart: (et oui, ça fait bien rager=
+ Stilgart: )
+ Zorg1: j'aime pas trop le "tu submittes comme une brute jusqu'à ce que ça passe"
+ Remi.: C'est pourtant ce qu'il faut faire, après avoir fait le max pour diminuer le risque de tomber sur un cas total random bien sûr
+ Remi.: Parfois t'as réellement aucun moyen de choisir entre 2 bombes. Suffit que ça arrive 3 fois dans la partie et c'est seulement une chance sur 8 de gagner.
+ Remi.: Si tu submit pas en masse, tu crois que t'es nul.
+ Remi.: Sur ce, bonne nuit les gens.
+ Zorg1: bonne nuit
+ philRG: ah 30 lignes pour le puzzle de l'event, battu leojean
+ philRG: moi qui disait que connaître les syntaxes d'un langage était accessoire. Ca fait quand même mal au c... de lire les codes python des autres
+ philRG: pour çà que je fais plus que des multis tiens
+ philRG: bon je vais essayer de pas faire de cauchemar bonne nuit
+ Julius2k17: le lire ça va pour certains, c'est le comprendre qui est raide en python parfois
+ Serge_Billault: je pense avoir trouvé une solution pas trop mal pour le puzzle asciiart

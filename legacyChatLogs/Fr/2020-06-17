@@ -1,0 +1,651 @@
+ Thyl: Hello&#160;!
+ Thyl: Je vous et pondu un Clash
+ Thyl: Allez voir svp vu que c'est mon premier...:grinning:
+ [CG]Thibaud: me paraît trop compliqué à trouver ce reverse.
+ [CG]Thibaud: selon toi, qu'est-ce qui devrait mettre sur la piste de la solution dans tes tests&#160;?
+ Thyl: Le premier.
+ Thyl: Ou alors reverse c'est pas bon
+ Thyl: peu-être taille?
+ Thyl: Mais en rapide aussi ça peu passer...
+ BladeEnder: ON VA SE CLASHER
+ Alshock: aqueux coucou zatousse ici
+ Alshock: et tortue à Automaton2000 et AutomatonNN
+ Automaton2000: et j'ai un autre truc du genre&#160;?
+ AutomatonNN: vous parlez de quel puzzle&#160;?
+ Alshock: oui ya la licorne aussi Automaton2000 et on parle du CoC de Thyl AutomatonNN
+ Automaton2000: sachant que je suis une bille
+ AutomatonNN: oui je suis d'accord avec toi&#160;:(
+ Alshock: @Thyl le fait de ne prendre en compte que la première et la dernière lettre du texte ça me semble purement arbitraire
+ Alshock: quand on fait un reverse, la convention minimum entre le sujet et le clasheur c'est que l'input sert à quelque chose, puisque c'est tout ce qu'il a
+ Bon[]Crayon: Peut-être un truc du genre: aez 25 asz 25
+ Alshock: oui mais je parle pas de pourquoi c'est quasi-impossible à deviner avec les test cases, je parle de pourquoi ce design me dérange profondément
+ Thyl: voilà
+ Thyl: petit changement
+ Thyl: C'est mieux&#160;?
+ Thyl: :thinking:
+ Malterin: Qq joue à Crystal Rush&#160;?
+ Malterin: C'est un des jeux de combat de bots
+ pardouin: J'ai vu ton CoC Thyl, c'est vrai que ça aurait plus de sens de mettre le max de ord sur toute la chaine et le min de ord sur toute la chaine
+ Thyl: ça serait plus comprehensible 
+ Thyl: :grinning:
+ Alshock: d'ailleurs ton écriture à induit en erreur Edjy et peut-être d'autres reviewers je pense
+ Alshock: actuellement ton code serait moins ambigu si tu écrivais directements = input()print(abs(ord(s[-1])-ord(s[0])))
+ Zaap38: pygame c'est cassé :x
+ Alshock: et comme je l'ai déjà dit c'est une grave erreur de design. Même si, et je suis désolé de le dire, même au-delà de ça j'ai du mal à trouver le concept derrière intéressant, même en reverse
+ Alshock: (après ça, vu ce qui existe en reverse c'est visiblement pas un avis très partagé
+ Thyl: Qu'est ce que tu à fais à Pygame @Zaap38
+ Zaap38: un ptit jeu pour le fun, mais j'ai un bug étrange (comme 90% des bugs&#160;:'D), en gros j'ai créé des armes, et elles marchent très bien, mais quand j'ai voulua jouter un shotgun (qui dans ses param tir 15 balles au lieu de 1), bah je sais pas pourquoi mais la vitesse de ses balles est énormement augmentée (graphiquement) alors que le framerate/la vitesse de ma boucle ne change pas (toujours 17ms)
+ Zaap38: tiens si tu veux y jeter un coup d'oeil <a rel="nofollow" class="external free" href="https://openclassrooms.com/forum/sujet/vitesse-projectile-change-sans-raison-pygame">https://openclassrooms.com/forum/sujet/vitesse-projectile-change-sans-raison-pygame</a>
+ Thyl: J'apprend à me servire de pygame
+ Thyl: Mais vraiment c'est lourd.
+ Zaap38: en vrai ça va c'est plutôt facile
+ Alshock: hum tu as une gestion des collisions&#160;?
+ Thyl: le coté graphique me soul
+ Zaap38: pas encore alshock mais je devrais y arriver sans problèmes
+ Thyl: j'aime codinGame
+ Zaap38: moi aussi Thyl ^^ mais bon faut bien passer par là
+ Alshock: la virgule après self.pid = pid elle fout la merde non&#160;?
+ Thyl: Tout et déjà dessiner:grinning:
+ Alshock: je sais pas comment ça marche sans crash vu qu'une affectation est pas une expression dans python, mais du coup je sais pas ce qu'il se passe
+ Zaap38:&#160;? tu parles de quoi Alshock&#160;?
+ Zaap38: ah mb
+ Zaap38: j'avais pas vu ton message au-dessus
+ Alshock:     def __init__(self, pid, wid, speed, vector, position):
+ Alshock: je sais pas ce que python fait de ça
+ Zaap38: alors c'est un mystère cette virgule, je vais check si c'est un fail de c/c ou si elle est bien dans le code original
+ Zaap38: dans tous les cas je me sers pas encore de self.pid donc ça devrait pas changer grand-chose
+ Bon[]Crayon: la virgule doit donner un tuple
+ Zaap38: j'ai viré la virgule, mais bon le bug de base reste présent
+ Zaap38: (merci pour cette typo)
+ VirtualAtom: tu valides la vitesse d'une balle avec l'affichage de la traînée&#160;? 
+ Zaap38: nan la trainée c'est juste du graphique, c'est ça qui m'a fait dire que les balles allaient trop vite car là elles sortait de l'écran en un seul tick, mais même au niveau des valeurs de position ça merde
+ Zaap38: de ce que j'ai pu tester, le problème n'est pas d'origine graphique, ya bien une couille dans mes données
+ VirtualAtom: je n'ai pas encore bien compris le code, mais j'ai l'impression que tu peux faire une erreur dans le phénomène en te basant seulement sur le côté graphique. 
+ VirtualAtom: je commencerais par afficher les valeurs dans la console, en faisant une arme qui ne diffère que d'un seul paramètre à une arme qui me paraît fonctionner
+ Zaap38: quand je passe le nombre de balles à 1 pour le shotgun, il marche bien
+ Zaap38: et j'ai print les positions (in-game, pas graphique) et je confirme la vitesse abusive des balles du shotgun
+ VirtualAtom: tu as 7 paramètres dans ton arme, même si tu mets le nombre de balle à 1, les 6 autres paramètres restent différents
+ Zaap38: j'ai testé avec le fusil (qui marchant) en augmentant le nombre de balles, ça bug aussi
+ VirtualAtom: quand tu parles de vitesse, tu parles de différences entre deux positions successives, c'est ça&#160;? 
+ pardouin: c'est normal si ta fonction show bullet est dans ta fonction show bullets?
+ Zaap38: oui, show_bullet (sans s) affiche une seule balle, show_bullets (avec s) appelle la précédente sur chaque balle
+ Zaap38: ah mb mal compris
+ Zaap38: c'est juste un problème d'indent sur openclassroom
+ Zaap38: le premier def devrait avoir une indent de plus
+ pardouin: je voudrais faire tourner pour voir le pb mais il doit manquer des trucs
+ Thyl: Re
+ pardouin: j'ai import ça&#160;:
+ pardouin: import pygame, math, copy, sysimport numpy as np
+ Thyl: Est-ce que vous savez où trouvé un dictionaire format texte en ligne
+ Thyl: c'est pour entrainer mon algorithmes
+ pardouin: j'ai ajouté random as rd
+ Thyl: :grinning:
+ Zaap38: oui pardouin j'ai pas c/c tout le code, mais il va te manquer pas mal d'import et d'autres classes
+ Zaap38: et les sprites aussi
+ VirtualAtom: rien ne me saute aux yeux dans le code donné. Reste à voir comment est traité le retour de la fonction shoot(), car ce paramètre change simplement la taille du tableau retourné
+ Zaap38: ça fait un vieux np.append, la taille du tableau est bonne à chaque fois
+ VirtualAtom: tu peux hardcoder le time_ms dans update_position et comparer avec deux armes&#160;? Là je ne vois plus rien d'autre
+ Zaap38: je peux, mais bon je l'ai print et c'est la même valeur
+ VirtualAtom: donc si on résume, t'as le même time_ms dans les deux cas, self.speed est bons dans les deux cas, position c'est l'origin donc c'est pareil, le vector c'est sur le cercle unité donc pas de soucis
+ VirtualAtom: mais dans un cas l'incrément de position est plus grand. Coton ^^
+ Zaap38: (j'ai tenté le hardcode mais comme pr&amp;vu rien ne change)
+ Zaap38: quand je print j'ai exactement la même valeur pour&#160;: speed * time * cos(angle)x')
+ Zaap38: et le truc loop bien une fois entre chaque appel
+ Zaap38: et bien à 17ms d'intervalle
+ VirtualAtom: c'est à rendre fou ^^
+ Zaap38: oui.
+ Zaap38: xD
+ VirtualAtom: t'es bon pour éplucher tout le code du coup ^^. Le nombre de fois où je râle que l'ordi fait n'imp alors que bien caché quelque part, j'ai fait une connerie dans un code annexe
+ Zaap38: j'ai cherché sur chaque fichier les modifs faites sur la pos de la balle ou sa vitesse, et j'ai rien trouvé ^^
+ VirtualAtom: tu nous tiendras au courant quand t'auras la solution, ça risque d'être marrant&#160;:}
+ Zaap38: yep
+ Zaap38: bon j'ai exam dans 1h, mais après je reprendrais mon code
+ Zaap38: problem solved
+ Zaap38: une variable était copiée par référence (après avoir été copiée en non-réf) du coup chaque "lot" de balles incrémentait la même position
+ Zaap38: @VirtualAtom
+ pardouin: ouais le pb de deepcopy c'est c'est un peu la boîte noir, tu sais pas exactement ce que ça fait sur des class custom
+ pardouin: noire*
+ Zaap38: merci pour l'aide btw
+ VirtualAtom: aaaah. Nice&#160;! Je note ça dans ma liste de usual suspects en python
+ Alshock: ah bah oui deepcopy copie tous les containers, mais pas les objets
+ Alshock: enfin, tous les containers standards au moins
+ tekki: AutomatonNN tjs au poste?
+ AutomatonNN: on va se faire un truc genre tu peux pas te dire que tu as perdu ton code et tu mets un char dans le
+ tekki: Automaton2000?
+ Automaton2000: et si le mec en face
+ Kayd33n: Bonjour, j'ai un DM à faire en VBA mais je ne comprend rien, quelqu'un pourrait-il m'apporter de l'aide je vous prie&#160;?
+ pardouin: c'est quoi le soucis, tu maîtrises bien le langage au moins&#160;? 
+ Kayd33n: non et la est le problème. J'ai beau lire et relire le cours ça me dépasse
+ Kayd33n:&#160;?
+ Kayd33n: bon merci quand m^me ..
+ Kayd33n: même
+ pardouin: en gros tu voudrais qu'on le fasse pour toi&#160;?&#160;:/
+ pardouin: on peut répondre à des questions sur des points spécifiques mais te faire ton truc bof
+ Kayd33n: Non j'aimerai comprendre, je ne trouve pas ça constructif de copier bêtement, d'où ma venue ici plutôt que demander les réponses à mes collègues de classes
+ Kayd33n: de copier bêtement
+ pardouin: eh bien pose des questions spécifiques&#160;:)
+ Kayd33n: il se passe des choses bizarres quand j'écrit&#160;:/
+ Kayd33n: Un échange par mail serai possible&#160;? c'est plus facile d'expliquer avec des screen ..
+ pardouin: je suis en train de bosser perso
+ pardouin: tu peux copier des screens et des scripts ici sans pb
+ Alshock: Kayd33n par mail pas tellement, tu peux envoyer des liens d'images si besoin mais a priori les problèmes s'expliquent assez bien en textuel
+ Alshock: là on ne sait ni ce que tu dois faire, ni ce que tu as essayé, ni ce sur quoi tu bloques
+ Kayd33n: très bien je vais essayer dans ce cas
+ Alshock: pour t'aider c'est complexe
+ Kayd33n: Le but est de créer un gantt avec des macros. Ce que je souhaite faire dans un premier temps c'est&#160;: 
+ Kayd33n: A1&#160;: Nombres de tâches B1: on rentre la valeur et en fonction du nombre entré les 5 cellules qui suivent ( nom, description, date de début, durée, ..) se dupliquent
+ Kayd33n: le dans n'a rien à faire la
+ Kayd33n: je ne sais pas si je suis clair&#160;?
+ Alshock: pour l'instant ça a l'air compréhensible
+ Alshock: pas bien compris à quoi servait la valeur de B1 cela dit
+ Kayd33n: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/2df95bac-ab7f-4d57-8020-6666ca2510a2">http://chat.codingame.com/pastebin/2df95bac-ab7f-4d57-8020-6666ca2510a2</a>
+ Kayd33n: peut être en écrivant cela&#160;? 
+ Kayd33n: x = Sheets("Feuil1").Range("B2").Value
+ Alshock: donc là tu as su faire une écriture de tes cellules A3-&gt;A9 et tu veux les dupliquer sur B3-&gt;B7 à X3-&gt;X7&#160;?
+ Kayd33n: par exemple oui
+ Kayd33n: Si je rentre 5 en B1, je veux que ca se duplique 5 fois en gros 
+ Alshock: Donc, quelle serait ton approche, où ta piste par défaut&#160;?
+ Alshock: -où+ou* pardon
+ Kayd33n: C'est à dire&#160;?
+ 257832: Yo tout l'monde&#160;! Automaton2000, AutomatonNN&#160;!
+ AutomatonNN: oui
+ Automaton2000: mais bon, si ça se trouve pas dans le cas où je suis pas fan
+ Alshock: Yo BlaiseEbuth&#160;! Kayd33n Ce que je veux savoir c'est comment tu comprends ton problème, vu que de l'extérieur il semble trivial
+ Alshock: Pour moi il y a deux possibilités principales, soit tu n'as pas bien compris comment boucler sur une série d'instructions, soit tu ne sais pas utiliser la fonction Cells
+ Alshock: Cela dit, j'ai pas utilisé VBA depuis un sacré temps moi-même, donc peut-être que ton blocage est ailleurs et que c'est moi qui projette trop
+ Alshock: Je crois que je l'ai fait fuir&#160;:(
+ Alshock: @BlaiseEbuth je suis si effrayant que ça&#160;? J'ai même limé mes canines pour quelles ressemblent à celles des humains
+ 257832: Mais non, t'es mignon comme tout.Mais il y'a des gens qui ont peur des clowns...
+ BlaiseEbuth: Diantre&#160;! [CG]Thibaud me suit&#160;! :o
+ [CG]Thibaud: je te suivais déjà en fait. J'ai unfollow puis follow
+ [CG]Thibaud: en vrai, je voulais voir le label en fr du boutton follow et comme j'étais sur ton profil...
+ BlaiseEbuth: Que faisais tu sur mon profil&#160;? :innocent:
+ [CG]Thibaud: :smirk:
+ Thyl: Hello&#160;!
+ Thyl: Est-ce que vous conaissez
+ Thyl: un dictionaire format txt
+ Thyl:&#160;?
+ dbdr: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/5f774050-e9d4-48b5-a0c1-540fac21c0bf">http://chat.codingame.com/pastebin/5f774050-e9d4-48b5-a0c1-540fac21c0bf</a>
+ Thyl: Qu'est ce&#160;?
+ dbdr: un dictionaire format txt
+ Thyl: euhhh
+ Thyl: quel langue&#160;?
+ Thyl: Par ce que je voudrai faire en truc en FR
+ dbdr: ça existe en français aussi
+ dbdr: tu as essayé google?
+ Thyl: tu peux télécharger des dicos google?
+ dbdr: sur linux:wfrench/xenial,xenial 1.2.3-10 all
+ Thyl: Je suis Un Widowsien
+ Thyl: le prochai PC c'est Linux...
+ Thyl: au passage
+ Thyl: dbdr
+ Thyl: merci quand même?
+ Thyl: @[CG]Thibaud
+ dbdr: <a rel="nofollow" class="external free" href="https://salsa.debian.org/gpernot/wfrench/-/raw/master/french">https://salsa.debian.org/gpernot/wfrench/-/raw/master/french</a>
+ Thyl: Il y a pas des puzzles machine learning sur CG
+ BlaiseEbuth: Non Thyl, y'en avait un avec tensorflow y'a longtemps, mais il n'existe plus. Sinon tu en as un où il faut créer un réseau de neurones basique.
+ Thyl: Lequel?
+ BlaiseEbuth: En fait deux, c'est une suite&#160;: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/hard/binary-neural-network---part-1">https://www.codingame.com/training/hard/binary-neural-network---part-1</a>
+ Thyl: Ma questin va s'embler très bête mais quel et la fonction pour avoir la valeur négative d'un nombre en python&#160;?
+ Thyl: :grinning:
+ BlaiseEbuth: *-1&#160;? :grinning:
+ Thyl: C'est une blaque?
+ Thyl: Où c'est vraiment ça...
+ nicola: Donne un exemple.
+ Thyl: genre 12
+ BlaiseEbuth: 12*-1 = -12
+ nicola: Ou -a.
+ Thyl: a.........
+ Thyl: pardon
+ Thyl: je n'est pas un bagage mathématique conséquent.
+ Thyl: l'école c'est fait pour ça?
+ Thyl: en tout cas merci!
+ BlaiseEbuth: T'es en quelle classe&#160;? Et sinon nicola a raison tu peux directement écrire -tavariable
+ nicola: C’est la base (collège).
+ Thyl: 6ème
+ Thyl: Blaise
+ nicola: OK.
+ Thyl: quoi OK?
+ BlaiseEbuth: Vu, bah tu devrais les voir bientôt alors ^^ tu seras en avance
+ nicola: OK, si tu es en sixième, c’est normal que tu ne saches pas.
+ Thyl: merci...
+ nicola: Tu verras ça l’an prochain.
+ Thyl: C'est du programme?
+ Thyl: scolaire...
+ BlaiseEbuth: Oui oui
+ Thyl: en plus je l'avais vu...
+ Thyl: les trous de mémoire c'est assez énervant.
+ BlaiseEbuth: Alzeihmer à ton âge c'est triste...&#160;:(
+ Thyl: c'est pas parce que je suis jeune que je suis bête Blaise...
+ BlaiseEbuth: Ca va alors, ça va s'arranger. :grin:
+ Thyl: :grin:
+ Thyl: A question
+ Thyl: je voudrais appeler une fonction dans une fonction
+ Thyl: sauf qu'a la def ça va pas passer
+ Thyl: je fais un except
+ Thyl:&#160;???
+ BlaiseEbuth: Pourquoi ça passerait pas&#160;?
+ Thyl: c'est des fonctions qui se font appelle
+ Thyl: a appel b
+ Thyl: et b appelle a
+ Zorg1: c'est possible, ça s'appelle la récursivité :D
+ Zorg1: o/ à tous et aux bots Automaton2000 &amp; AutomatonNN
+ Automaton2000: le truc, en le pompant tu passes direct #15 :p mais j'vais pas faire ça en java
+ AutomatonNN: vous pouvez pas le determiner ce que tu as fait avec ton code&#160;?
+ BlaiseEbuth: \o
+ Thyl: Oui mais à la def
+ Thyl: il connait pas b
+ Thyl: quand a se def
+ Snef: Automaton2000 c'est du leoJean ça je reconnais
+ Automaton2000: tu viens de perdre contre toi
+ Thyl: A pardon...
+ Thyl: sa passe
+ Thyl: désolé:grinning:
+ BlaiseEbuth: En python ça passe...
+ Thyl: Une autre question bête
+ Zorg1: en python tout passe :p
+ Thyl: mais c'est defois un peu dégeulasse
+ BlaiseEbuth: Ce petit ira loin
+ Zorg1: t'as jamais vu du code en production ...
+ Zorg1: :D
+ Thyl: Par contre j'aime pas qu'on m'appelle petit
+ Zorg1: le truc qu'il ne fallait pas dire
+ Thyl: je sais
+ Thyl: mais j'avais envie de le dire
+ Zorg1: bon c'est pas tout ça, on s'amuse on rigole mais moi faut que je pense à faire ma simu à deux balles sur CotC
+ Zorg1: Automaton2000 une idée de génie, une indication, une piste&#160;?
+ Automaton2000: vu que je suis passé au dessus du boss
+ Zorg1: oui mais maintenant t'es de nouveau en dessous d'un nouveau boss à moins d'être en légende, Automaton2000
+ Automaton2000: je vais faire la même chose
+ Zorg1: nice Automaton2000 t'as tout compris
+ Automaton2000: c'est un truc pour faire du random
+ Thyl: help()
+ Thyl: j'ai une méthode de classe
+ Thyl: qui en appelle une autre
+ Thyl: j'écris Nord()
+ Thyl: sa marche pas
+ Thyl: j'écris self.Nord()
+ Thyl: sa marche pas
+ Thyl: ça marche
+ Thyl: pardon
+ Thyl: C bon
+ Thyl: problème d'indentation
+ Thyl: je comprends pas pourquoi il font pas comme en Java
+ Thyl: tout bien délimité
+ Zorg1: bah la structuration par indentation c'est un peu une idée de base de Python
+ Zorg1: après on aime on aime pas
+ Zorg1: je pense que vu que python initialement pensé comme un langage de débutant, c'était pour forcer à indenter son code et à en visualiser la structure
+ Thyl: pas bête
+ Thyl: mais quand tu dois tout décaler à l'aide de la bar espace
+ Thyl: quand tu colle 
+ Thyl: c
+ Thyl: lonnnng
+ Zorg1: un IDE un peu malin il ne fait pas ce genre de boulot pour toi&#160;?
+ Thyl: Je bosse dans l'IDE de base
+ Thyl: Notebook
+ Thyl: Spyder
+ Thyl: après je sais peut-être pas m'en servir...
+ Thyl: :grimacing:
+ dbdr: if a:bc
+ dbdr: l'IDE il peut pas deviner si c est au niveau de b ou du if
+ Zorg1: a ifTrue: b ifFalse: c
+ Zorg1: faut faire du SmallTalk :p
+ dbdr:&#160;:)
+ Zorg1: sinon dans un IDE t'as une fonction qui permet de décaler un bloc de texte, c'est assez pratique
+ dbdr: c'est la vraie syntaxe?
+ dbdr: oui, faudra juste une touche pour indenter, ni + ni -
+ Zorg1: c'est plutôt x=y ifTrue&#160;: [faire unTruc]
+ dbdr: apres avec des tabs c'est une touche aussi, IDE ou pas
+ Zorg1: (je suis en train de faire mumuse avec Pharo. ça me rappelle quand j'en avais fait à l'école. c'était marrant. lent. mais amusant)
+ dbdr: j'avais interprété école primaire, mais créé en 2008, donc je suppose pas&#160;:)
+ dbdr: j'ai fait du logo en primaire&#160;:)
+ Zorg1: pas Pharo, du smalltalk, je ne sais plus lequel
+ Zorg1: c'est assez marrant ils ont poussé à fond la logique "tout est objet"
+ dbdr: smalltalk c'est là ou tu as une image persistante, non?
+ Zorg1: oui comme en Logo, dans certain Lisp, et certains Forth&#160;;-)
+ dbdr: c'est utile
+ dbdr:&#160;? manquant
+ Zorg1: (bon à la base Logo c'est un dialecte de Lisp plus "user friendly" on va dire)
+ dbdr: ça me paraissait un peu mystèrieux qd on m'en a parlé
+ Zorg1: de quoi&#160;? le logo&#160;?
+ dbdr: les images persistantes
+ Zorg1: après ça s'oppose à l'approche plus classique qu'a pas trop changé depuis les batchs de cartes perforées&#160;;-)
+ dbdr: a priori j'aime bien l'idée que je peux inspecter tout le code source, pas hériter d'une images black box
+ dbdr: apres j'ai pas pratiqué
+ Zorg1: pas trop non plus
+ BigUP: tiens, les IA de conversion de code arrivent...
+ Zorg1: pour convertir mon code Java dégueulasse en code C++ de référence&#160;?
+ BigUP: Zorg1, pour convertir du Java en C++, ca va le truc a l'air de ne pas avoir trop de mal... score environ a 95%
+ BigUP: Java --&gt; Python c'est plutot 65%
+ BigUP: <a rel="nofollow" class="external free" href="https://arxiv.org/pdf/2006.03511.pdf">https://arxiv.org/pdf/2006.03511.pdf</a>
+ Zorg1: enfin ça me fait marrer, quand tu vois comment le client il flippe quand tu rajoute une fonctionnalité séparé de tout le reste, alors là les gars ils se pointent "pas de problème mon IA réécrit tout votre COBOL en Java&#160;!!! ezpz&#160;!!"
+ Zorg1: tu me diras avec la poudre de ML tu fais tout passer, même si t'as vingt indiens qui bossent en cachette pour tout mettre d'équerre ...
+ Zorg1: en plus le gros problème de porter tout ces vieux trucs, c'est que généralement on a quasiment pas de cahier de tests A JOUR pour valider que le nouveau système marche comme l'ancien ^^
+ Zorg1: donc si tu fais confiance à l'IA, qui paie la casse&#160;?&#160;;-)
+ BigUP: l'idée, c'est pas de faire confiance a l'IA pour le moment
+ Zorg1: je ne suis pas sûr que le plus gros coût d'un portage ça soit vraiment le codage
+ BigUP: a bien regarder, le truc fait des choses pas degeux en exploitant bien les spécificités du langage
+ dbdr: a bien regarder les examples choisis par les auteurs?
+ dbdr: ping
+ Zorg1: pong
+ leojean890: 55/4031 COTR en ajoutant les loops + hardcode ;P
+ leojean890: beeurk;p
+ Zorg1: bon BigUp on s'associe pour faire du ML pour porter du COBOL en Java/C# pour se faire les couilles en or en plumant les banques&#160;?
+ Zorg1: :D
+ leojean890: 3523 instructions..
+ leojean890: bon je passe sur quel jeu&#160;;)
+ leojean890: ais-je la foi de faire une simu COTC
+ leojean890: ou de coder le "truc de tourist" dans a*c
+ Zorg1: ouaip parfois c'est énormément de boulot pour pas faire mieux que ton heuristique à deux francs six sous
+ Zorg1: le "truc de tourist" ça a l'air efficace
+ leojean890: hehe cotc clairement ça va être un peu chaud comme csb
+ leojean890: a*c ouais clair vu que Vry a fait la même et est 10eme:p
+ Zorg1: t'as FB &amp; MM qui me reste à simuler
+ leojean890: fb du coup tu m'as envoyé le lien de bob
+ leojean890: qui m'a dit qu'il fait en heuristique
+ leojean890: légende
+ leojean890:&#160;;)
+ leojean890: j'ai pas encore tt lu
+ Zorg1: oui en fait actuellement FB je l'ai fait comme bob. mais je ne suis pas légend :D
+ leojean890: ah :P il l'a bien faite son heuristique&#160;!
+ leojean890: j'pourrais tester fb
+ leojean890: dans ma todo list à faire sous peu..
+ leojean890: y'a "tester fb, tester MM"
+ leojean890: "peut être tester WW si je me mets à comprendre le jeu"
+ MPSI_LIV_INITIAL_D: Saluté les gens
+ leojean890: car là non
+ MPSI_LIV_INITIAL_D: Il y aurait-il de spersonnes qui code en Ocaml ici&#160;?
+ leojean890: et sinon simuler CSB COTC
+ leojean890: passer légende HS car je suis 20eme gold
+ leojean890: je ne code pas en Ocaml
+ MPSI_LIV_INITIAL_D: (jsp si c'est le bon endroit pour demander des conseils, dites le moi si je me plante ^^)
+ leojean890: tu peux en demander ici
+ leojean890: Boulet code en Ocaml
+ MPSI_LIV_INITIAL_D: Ouais mais c'est dans mon programme scolaire&#160;:'(
+ leojean890: mais il n'est sûrement pas à
+ leojean890: t'es en MP&#160;?
+ MPSI_LIV_INITIAL_D: oui
+ MPSI_LIV_INITIAL_D: x)
+ leojean890: j'ai fait MP mais avec l'option SI..
+ MPSI_LIV_INITIAL_D: enfin j'vais passer en MP du coup
+ MPSI_LIV_INITIAL_D: MP avec info :D
+ leojean890: donc pas fait ocaml
+ leojean890: oauis je sais&#160;!
+ leojean890: y'avait pas dans ma prépa sinon j'aurais fait ;P
+ leojean890: lycée corot, savigny sur orge
+ MPSI_LIV_INITIAL_D: aie
+ leojean890: ça m'aurait + tenté que SI
+ MPSI_LIV_CronierDamiano: bonsoir 
+ MPSI_LIV_INITIAL_D: Lycée de Valbonnes,  Alpes-Maritimes
+ MPSI_LIV_INITIAL_D: Coucou toi
+ MPSI_LIV_CronierDamiano: ça va initial D&#160;?
+ MPSI_LIV_INITIAL_D: Trkl et toi CronierDamiano&#160;?
+ MPSI_LIV_CronierDamiano: ouais ça va 
+ MPSI_LIV_CronierDamiano: je contemple mon code nul qui a pas avancé depuis 3 mois 
+ MPSI_LIV_INITIAL_D: Aie aie aie
+ MPSI_LIV_CronierDamiano: et toi&#160;?
+ MPSI_LIV_CronierDamiano: tu t'en sors&#160;?
+ leojean890: on vous conseille de faire du CG dans votre prépa&#160;?:P
+ MPSI_LIV_INITIAL_D: Disons que je suis en train de faire un "comptage" plus avancé que le number one (enfin je crois x))) )
+ MPSI_LIV_INITIAL_D: Yep
+ MPSI_LIV_INITIAL_D: En plus c'est noté
+ leojean890: ils vous conseillent quels sujets sur CG&#160;?
+ leojean890: sérieux&#160;?
+ MPSI_LIV_INITIAL_D: Mais comment tu peux noter un code
+ leojean890: "passer légende =&gt; 18/20"
+ MPSI_LIV_CronierDamiano: en fonction de ton classement je crois 
+ leojean890: premier légende =&gt; 20/20
+ MPSI_LIV_INITIAL_D: Bah en vrai, on ne connait pas ces critère
+ leojean890: ils vous font faire ça sur quelx jeux&#160;?
+ leojean890: quels*
+ MPSI_LIV_INITIAL_D: tronbattle
+ leojean890: ah ouais
+ leojean890: sympa lui
+ leojean890: au moins c'est fun
+ leojean890: en ocaml donc&#160;?
+ MPSI_LIV_INITIAL_D: Il y a le Classement + présentation du code + si c'est propre / bien fait + utilisation de technique + utilisation d'outils etc...
+ MPSI_LIV_CronierDamiano: ouais donc relou quoi 
+ MPSI_LIV_CronierDamiano: car perso j'ai du mal à avancer 
+ MPSI_LIV_INITIAL_D: bref, c'est le bordel, le conseil de classe c'est Vendredi prochain, il doit tous nous prendre 1 par 1 pour pouvoir évaluer
+ leojean890: <a rel="nofollow" class="external free" href="https://www.a1k0n.net/2010/03/04/google-ai-postmortem.html">https://www.a1k0n.net/2010/03/04/google-ai-postmortem.html</a>
+ leojean890: lisez ça;)
+ MPSI_LIV_CronierDamiano: au fait initial D tu es qui mdrrr
+ MPSI_LIV_INITIAL_D: je me demande comment il va fair
+ leojean890: le gagnant du concours
+ leojean890: de tron
+ leojean890: appliquez ça;)
+ MPSI_LIV_INITIAL_D: Je suis le seul couillon en vocal sur le groupe de la classe
+ MPSI_LIV_CronierDamiano: ah mais ko 
+ Zorg1: ça bosse tard les prépas dis donc
+ leojean890:  présentation du code + si c'est propre / bien fait + utilisation de technique + utilisation d'outils
+ MPSI_LIV_CronierDamiano: tu coco 
+ leojean890: wow moi je code salement sur CG mdr
+ MPSI_LIV_CronierDamiano: et leo merci pour ton truc 
+ leojean890: donc j'aurais pas bcp de points
+ leojean890: de rien, lire des post mortems c'est toujours bien pour avoir des idées de stratégies
+ Zorg1: ils auraient pu avoir MK comme prof d'info. Si t'es pas legende sur CSB, c'est la bulle ^^
+ leojean890: utilisation d'outils =&gt; IDE avec CG-sync&#160;?
+ leojean890: mdr
+ MPSI_LIV_INITIAL_D: Le
+ leojean890: bah copier coller IA inory dans ce cas&#160;;)
+ MPSI_LIV_INITIAL_D: Leo, j'ai eu exactement la même idée :OO
+ leojean890: le prof va dire "wow, bonnes méthodes&#160;!"
+ Zorg1: oui enfin il est connu le starter d'Irony
+ leojean890: tiens d'autres articles sur tron que j'ai pas encore lus
+ leojean890: <a rel="nofollow" class="external free" href="https://people.montefiore.uliege.be/dlstpierre/publications/tron2012.pdf">https://people.montefiore.uliege.be/dlstpierre/publications/tron2012.pdf</a>
+ leojean890: <a rel="nofollow" class="external free" href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.704.9457&amp;rep=rep1&amp;type=pdf">http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.704.9457&amp;rep=rep1&amp;type=pdf</a>
+ leojean890: connu dans le sens si tu le push en direct ça se verra j'imagine au style de jeu :P
+ leojean890: et puis le mec qui note va voir que c'est pompé
+ MPSI_LIV_CronierDamiano: le souci c'est que une fois que t'as la stratégie faut réussir à le coder 
+ Zorg1: tu dois même trouver du code pour tron en googlant
+ leojean890: ouais les 2 papers que j'ai envoyés en derniers c'est plus chaud à coder et long je pense
+ leojean890: l'article du gagnant de 2010 à la limite vous pouvez prendre qq idées mais pas tout coder si c'est trop long
+ leojean890: <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/tron-battle-multiplayer-challenge-discussion/49/41">https://www.codingame.com/forum/t/tron-battle-multiplayer-challenge-discussion/49/41</a>
+ leojean890: <a rel="nofollow" class="external free" href="https://vks.ai/2016-09-07-ai-challenge-in-78-lines">https://vks.ai/2016-09-07-ai-challenge-in-78-lines</a>
+ leojean890: allez ça fait assez de liens XD
+ leojean890: ces 2 là sont + accessibles
+ leojean890: alors Zorg1, simu COTC&#160;?:P
+ k4ng0u: c'est fou qu'en prepa on vous lance sur codingame. en mode addictif qui te distrait des revisions t'as pas mieux :D
+ Ratchef: ce site est beaucoup trop bien
+ Ratchef: Vous me conseillez de faire quoi pour consolider mes bases en algorithmique? 
+ Ratchef: Et apprendre Java / Python au passage
+ k4ng0u: ultimate tic tac toe si tu veux essayer de la simu et apprendre le mcts
+ k4ng0u: tron pour du voronoi
+ k4ng0u: apres dans les puzzle il y a pas mal de trucs interessants aussi. il y a un algorithem que tu veux apprendre en particulier?
+ leojean890: ouais codingame ça entraine bien mais ça peut facilement devenir addictif et distraire du reste&#160;;)
+ leojean890: sinon coders of the carribean pour les grilles hexagonales, smash the code ou coders strikes back pour les algos génétiques, A*craft pour le recuit simulé, etc
+ leojean890: wow wood2 to bronze dans FB ça prend 1 min de reflexion et 2 min de codage 
+ leojean890: c'est pas comme cotc qui fait galérer
+ leojean890: les ligues d'après seront + compliquées avec les collisions etc ;P
+ pardouin: honnêtement si tu veux progresser en algorithmique commence par faire tous les niveaux 3 à 6 sur France IOI
+ pardouin: sur codingame c'est beaucoup d'algos empiriques, A*, réseaux de neuronnes, minimax
+ pardouin: c'est très axé jeu vidéo, c'est très cool mais il te manquera plein de classiques, c'est plutôt à faire dans un second temps à mon avis
+ pardouin: france IOI 3-6 ça couvre&#160;: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/db64c1d5-1e13-46bc-9e27-261cbc1c4b44">http://chat.codingame.com/pastebin/db64c1d5-1e13-46bc-9e27-261cbc1c4b44</a>
+ MPSI_LIV_INITIAL_D: Bah notre prof pense qu'avec le confinement, on taff pas autant que normalement
+ MPSI_LIV_INITIAL_D: mais ça reste très interessant de pratiquer
+ pardouin: mais en tout cas c'est beaucoup plus efficace de résoudre des problèmes que de lire des solutions
+ pardouin: tu retiens beaucoup mieux les trucs si tu as un peu galéré à ls trouver
+ leojean890: bah après ça reste à vous de décider si vous comptez taffer autant que d'habitude ou pas&#160;;)
+ leojean890: pas au prof, genre en prépa tu bosses chez toi la quantité que tu veux 
+ leojean890: vu la densité du programme
+ MPSI_LIV_INITIAL_D: Bah tkt, on a eu tout nos cours durant le confinement x)
+ leojean890: autant préparer
+ MPSI_LIV_INITIAL_D: quand j'apprend que certaines écoles, ils étaient en "pseudo vacance"
+ leojean890: ouais vaut mieux :p
+ MPSI_LIV_INITIAL_D: Je ne vais pas me plaindre, ça nous fait monter dans le classement x)
+ leojean890: bah même s'il y avait pas cours il y a le travail perso
+ leojean890: la prépa c'est surtout du travail perso
+ MPSI_LIV_INITIAL_D: Bref, je pense que je vais aller me coucher, demain debout pour 8h
+ leojean890: bonne nuit
+ pardouin: mais à mon avis il vaut mieux faire des problèmes plus axés algorithmique déterministe qui te feront découvrir au passage tous les classiques que de passer des heures à relancer des simus de bots en changeant quelques paramètres pour voir si tu bats plus d'ennemis
+ pardouin: ça te servira plus pour plus tard&#160;:)
+ MPSI_LIV_INITIAL_D: Ouais, le codingame, on le fait en parallèle des cours / TP d'algo qu'on fait
+ pardouin: cherche "competitive programming" il y a des tonnes de sites
+ leojean890: je crois que pardouin parlait à Ratchef qui demandait des conseils aussi :P
+ MPSI_LIV_INITIAL_D: Aaaaaah x)
+ pardouin: prends en priorité un site où les pbs sont regroupés par thème, ça t'évitera de partir dans tous les sens
+ leojean890: à 23h
+ MPSI_LIV_INITIAL_D: Allez, sur ceux je vous dis
+ leojean890: ouais vaut mieux que ce soit en parallèle histoire de voir le tout&#160;:)
+ pardouin: MDR
+ pardouin: je pensais que tu étais le gars de 23h&#160;!
+ leojean890: ça vous donne un côté pratique à l'info
+ pardouin: bonne nuit&#160;!
+ MPSI_LIV_INITIAL_D: Printf.printf("Bonne nuit tout le monde"
+ MPSI_LIV_INITIAL_D: zut, j'ai oublier la parenthèse
+ MPSI_LIV_INITIAL_D: ça à tout planté, tempis
+ pardouin: ^^ 
+ leojean890: mais c sympa d'avoir à bosser tron
+ leojean890: la rigueur de simuler et de faire du code sans bug :P
+ leojean890: (sans bug = chaud :P)
+ pardouin: j'ai pas trop regardé la partie combats de bots du site pour l'instant
+ pardouin: j'ai juste essayé un peu CSB
+ pardouin: ça a l'air rigolo mais j'ai pas trop le temps pour le moment
+ leojean890: tu préfères les coc, right&#160;?:P
+ leojean890: j'aime bien les optims aussi
+ leojean890: tu joues pas contre qqn, tu cherches à minimiser ou maximiser un score
+ leojean890: donc faut faire l'algo de recherche le plus adéquat
+ pardouin: oui je pense que j'y jeterai un oeil
+ pardouin: les CoC c'est surtout que c'est rapide, tu peux en faire 3-4 quand tu as un quart d'heure devant toi, c'est ça qui me plaît 
+ pardouin: mais je m'éclate plus à réfléchir sur des problèmes plus longs
+ leojean890: comme il y a plein de sujets que ce soit golf, optim, multi.. tu peux lire les énoncés et choisir ce qui te tente le plus aussi
+ leojean890: ouais je comprends
+ leojean890: les coc tu peux facilement les faire et les enchainer
+ pardouin: et mine de rien j'ai appris pas mal de trucs
+ pardouin: pas seulement du golf inutilisable
+ leojean890: pareil ça m'intéresse + de réfléchir à des problèmes plus longs
+ pardouin: ça m'a motivé à bossé un peu le regex par exemple
+ pardouin: bosser*
+ leojean890: ouais en effet tu peux apprendre des choses sur les langages qui peuvent resservir ailleurs
+ leojean890: dont les regexp
+ leojean890: les problèmes plus longs tu peux y réfléchir en tâche de fond quand tu te douches ou autre :P
+ pardouin: pareil les fstrings de python j'avais jamais bossé ça car je bosse à 50% sur des vieilles versions de Python genre la 3.4 -_-
+ leojean890: c'est intéressant de considérer plusieurs approches
+ leojean890: de les tester
+ pardouin: oui j'aime bien garder tjrs un pb dans un coin de ma tete
+ leojean890: souvent il y a plein de stratégies possibles / d'algos possibles, ce qui permet de faire plein de tests
+ leojean890: ocean of code notamment
+ leojean890: mais pas que
+ leojean890: ah ouais pareil moi j'ai pas bossé sur du python avec du typage strict par ex
+ leojean890: (dispo en 3.6)
+ leojean890: pas encore trop avec numpy ni pandas
+ leojean890: 1er bronze FB grr
+ pardouin: numpy je l'utilise de temps en temps pour faire un produit de matrices par ex mais j'ai jamais exploré à fond les possibilités
+ pardouin: pandas j'ai un peu joué avec mais jamais eu l'utilité dans un vrai script
+ pardouin: mais c'est marrant de charger genre toutes les villes de france et de faire des recherches de palindromes etv
+ pardouin: etc*
+ leojean890: pareil je l'ai un tout petit peu utilisé
+ leojean890: quand j'ai essayé scikit_learn
+ leojean890: et lu la doc aussi
+ leojean890: histoire de tester + someday
+ leojean890: et j'utilise des fcts de numpy pour aller plus vite (random generation, random shuffle..)
+ BigUP: leojean890, c'est pas toujours plus rapide numpy
+ leojean890: pour la random generation ça l'est
+ leojean890: parfois moins rapide, tu avais donné des exemples
+ BigUP: faudrait que je bench
+ leojean890: random gen numpy est optimisé pour générer plein de nbs d'un coup
+ leojean890: donc je genere direct un tableau de grosse taille
+ leojean890: j'avais pas benché mais lu des trucs sur le web qui comparent diverses approches
+ BigUP: oui, numpy est probablement plus rapide pour gérer des tableaux entiers
+ leojean890: ouais tableau de 100000 elements par ex
+ leojean890: avant de faire plein de simus alatoires
+ leojean890: aléatoires
+ BigUP: mais s'il faut gérer les trucs element par element, numpy semble généralement plus lent
+ leojean890: ouais possible, j'ai pas tenté du coup
+ BigUP: Tiens, ca me fait penser qu'hier j'etais en train d'essayer d'améliorer une fonction de conversion d'image 360 vers un panorama. J'avais bon espoir d'améliorer avec numpy, mais je ne vois pas comment utiliser les particularités de numpy pour ca et pas certain que numpy puisse améliorer quoi que ce soit, vu qu'il faut recopier les points en fonction des x et y avec du cosinus et sinus 
+ Zorg1: mais avec numpy tu peux pas faire plusieurs simus en même temps&#160;?
+ BigUP: aucune idée, je ne maitrise vraiement pas les concepts et fonctions de numpy
+ Zorg1: tu peux faire des multiplications de matrices, de vecteurs ... avec&#160;?
+ BigUP: Zorg1, normalement oui
+ Zorg1: ok
+ pardouin: <a rel="nofollow" class="external free" href="https://numpy.org/doc/1.18/reference/generated/numpy.vectorize.html">https://numpy.org/doc/1.18/reference/generated/numpy.vectorize.html</a>
+ pardouin: jette un oeil à ça
+ pardouin: sinon rien à voir mais j'ai encore appris un truc à CoC&#160;: en C++ on peut faire ce genre de truc&#160;:c += (a//=b)(ça ne marche pas du tout en python)
+ Zorg1: euh //=&#160;? /= je vois mais // c'est le commentaire&#160;?
+ pardouin: oui pardon en C++ c'est c += (a/=b)
+ pardouin: j'ai copié collé celui que je venais de tester dans python
+ Zorg1: ah c'est comme en lua, // c'est la division entière&#160;?
+ BladeEnder: ou comme en math
+ BigUP: Zorg1, oui division entiere
+ leojean890: tiens silver à FB :P
+ BigUP: leojean890, GG&#160;;) Legende en heuristic&#160;;) avec une pseudo simu sur le shoot a base de flipendo
+ leojean890: gg xD
+ BigUP: leojean890, Magus etait 1er au contest avec un AG
+ leojean890: moi j'ai commencé il y a 2h
+ leojean890: wood2 to bronze était bidon
+ leojean890: bronze =&gt; silver moins 
+ BigUP: en heuristic&#160;?
+ leojean890: fallait un peu réfléchir qd même
+ leojean890: ouais
+ leojean890: pas eu le temps de faire une simu en 2h :P
+ leojean890: wood2 2 bronze c'est genre 2 min de code
+ leojean890: un peu comme pacman
+ leojean890: mais pour silver fallait qq trucs en plus avec les sorts
+ leojean890: j'pense que c'est chaud de simuler totalement
+ BigUP: leojean890, les points importants a FB, les passes entre bots, la précision du shoot avec flipendo et tirer le + droit au but posible
+ leojean890: ouais j'ai commencé un truc pour flipendo que j'ai pas fini dans ce code
+ BigUP: leojean890, pour la simu le truc chiant ce sont les rebond élastic, mais les formules doivent trainer sur l eforum
+ leojean890: genre calculer la ligne entre moi et les balles pour voir si le flipendo amene au but
+ leojean890: mais faut aussi regarder si ca amene assez loin 
+ leojean890: donc j'ai que du accio avec qq if pour etre sur qu'il faut le faire
+ BigUP: leojean890, fonction affine pour ca&#160;;) 
+ leojean890: faut regarder avec MIN( 6000 / ( Dist / 1000 )2, 1000 )
+ BigUP: oui pour la distance
+ leojean890: ouais
+ leojean890: non voir si ça va dans le but c'est simple
+ leojean890: enfin truc que j'ai fait récemment dans cvz
+ leojean890: ligne entre 2 entités
+ leojean890: donc toi t'es légende sans simu comme bob :P
+ BigUP: oui, normalement pas vraiement de simu, au mieux j edois calculer ma position pour le tour d'apres ou les 3 prochains tours
+ leojean890: ouais pas exhaustive
+ leojean890: pour le moment mon heuristique pour appliquer accio est un truc bidon comme ça  if dist((x,y),my_wizards[i]) &lt; minDist and dist((x,y),my_wizards[i]) &gt; 1000 and dist((x,y),my_wizards[i]) &lt; abs(advX-x):
+ leojean890: et je fais pas encore les autres
+ leojean890: flipendo ne saurait tarder du coup
+ BigUP: ACCIO, il faut bien gérer la distance de déclenchement, voir l'angle. ca peut permettre de bien pousser les balles vers l'avant (voir dans le but)
+ leojean890: ouais
+ leojean890: pour le moment je le lance que si pas trop proche de moi et si elle est pas trop proche des buts (parfois avant je le lancais et ca l'empechait de rentrer dans les buts)
+ leojean890: du coup c'est un peu nul :P
+ leojean890: pousser direct dans le but avec accio c'est pas mal j'avoue
+ BigUP: leojean890, une partie contre Magus&#160;: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/473337909">https://www.codingame.com/share-replay/473337909</a>
+ BigUP: ca va vite&#160;!&#160;;)
+ leojean890: ah ouais chaud mdr tu veux pas faire AG toi&#160;?:P
+ leojean890: 300 personnes en légende et 475 en gold, c'est pas le pire
+ BigUP: leojean890, je suis en python comme d'hab&#160;;). L'AG doit etre copieux a coder
+ leojean890: faut des perfs j'pense ouais
+ leojean890: et pas rapide à faire bien
+ BigUP: et meme si je codais en C++, je le ferais en STL avec les conteneurs qui ne sont pas des plus rapides, donc je n esai spas si j'arriverais a atteindre les perfs de mon algo actuel
+ leojean890: je vois
+ leojean890: sinon fais en cpp avec des tableaux&#160;?:P
+ BigUP: oui, mais j'ai pas envie&#160;;) du vector sinon rien&#160;;)
+ leojean890: je comprends :P
+ leojean890: galère hehe
+ leojean890: quand on a pas l'habitude ça prend bcp de temps
+ BigUP: leojean890, les tableaux, j'ai un lourd passé en C, j'ai plus envie&#160;;)
+ leojean890: hehe moi c'était principalement en école
+ leojean890: et ouais belle galère
+ leojean890: alors comment mon truc rank en silver..
+ BigUP: bon moi j'ai bien pourri mon Tron en cherchant a améliorer
+ leojean890: ça m'arrive aussi hehe
+ BigUP: je ne trouve pas de fitness convenable, en meme temps, je n esimule pas l'adversaire
+ leojean890: surtout quand je suis en gold qqpart 
+ leojean890: mes idées souvent font régresser :P
+ leojean890: avant gold y'a trop de trucs "évidents" mais qq fails aussi
+ BigUP: arf&#160;! tiens ce game est bon&#160;: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/473338018">https://www.codingame.com/share-replay/473338018</a>
+ leojean890: j'avoue tu te fais coincer :P
+ BigUP: pourtant je ne donnais pas chere du bleu&#160;!&#160;;)
+ leojean890: tu fais pas de voronoi toi&#160;;)
+ leojean890: pas envie&#160;?
+ BigUP: non, jamais codé le voronoi, il faut que je passe du temps a comprendre comment l'utiliser
+ leojean890: tu fais juste un bfs
+ leojean890: tu calcules pour chaque case qui est le plus rapide à l'atteindre
+ leojean890: tu sum pour chacun son nb de cases
+ leojean890: tu maximises le tien
+ BigUP: voila, déjà la, je suis largué&#160;;)
+ leojean890: ah&#160;?:P
+ leojean890: ptet que j'explique mal
+ leojean890:&#160;;)
+ BigUP: non, mais il faut que je regarde des implémentation sur des cas concret pour comprendre comment je peux l'utiliser
+ BigUP: je vais me coucher, je suis mort&#160;!&#160;;) bonne nuit
+ leojean890: bon ça va tomber versd 200/700 silver 
+ leojean890: bonne nuit:)
+ leojean890: cas concret&#160;: tron :P

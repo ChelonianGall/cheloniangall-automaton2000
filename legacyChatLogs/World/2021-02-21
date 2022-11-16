@@ -1,0 +1,665 @@
+ MasterCoderxD: not me bro, but i wanna try it
+ DaBestest: I've done like hackthissite basic stuff, but nothing other than that...  
+ Saad-py: ohhhhhhhhhhh
+ Saad-py: Hi sup DaBastest
+ Saad-py: Remember me
+ Sayach8: how long does it generally take for a clash of code contribution to get accepted or rejected?
+ Saad-py: idk
+ Uljahn: less than a month, why do you care?
+ Sayach8: submitted my first contribution. so was wondering.
+ Uljahn: clash approvement process is pretty wild and low-effort most of the time, so don't keep expectations high
+ Sayach8: ok.  Thanks.
+ Saad-py: Well how do I contribute
+ Saad-py: do I need to pay
+ Saad-py: or is it free
+ jacek: you pay with your soul
+ Saad-py: lol
+ MSmits: best way to spend it imho
+ jacek: soul for a clash?
+ MSmits: nah everything but that
+ MSmits: so i spent a day trying to fit parameters for a new random rollout and it was doing somewhat poorly (-5% WR). turns out I was always picking the first empty move on the miniboard =/
+ MSmits: I can't believe this wasn't worse than that
+ MSmits: just -5% ...
+ MSmits: ohh, maybe it was because i only did this on  a free move, limited damage
+ Westicles: Sorry Sayach8, it looked like you put a lot of work into that
+ Sayach8: yes
+ Sayach8: but turned out that someone came up with a similar idea
+ Westicles: It was really identical, even the other solution worked for yours
+ Sayach8: btw is there any way to know if there exists a similar solution?
+ Sayach8: i understand
+ Westicles: You can look through here
+ Westicles: <a rel="nofollow" class="external free" href="https://eulerschezahl.herokuapp.com/codingame/puzzles/">https://eulerschezahl.herokuapp.com/codingame/puzzles/</a>
+ Sayach8: ok. thanks. needed this very much :relaxed:
+ jacek: stupid clobber, it's so unnable
+ jacek: MSmits might like clobber. there is many endgames to calculate and store
+ MSmits: cool
+ jacek: so yeah, a math :unamused:
+ GiorgosGiorgakis: hi guys
+ Wontonimo: hello there internet person
+ IamQuan: hi&#160;:))
+ jacek: ohai
+ UnnamedCodinGamer: when using bit boards to represent game states is there a way to get the "from" cell without iterating over each bit?
+ UnnamedCodinGamer: I am looking at clobber at the moment
+ jacek: dunno. im iterating
+ UnnamedCodinGamer: hm
+ UnnamedCodinGamer: i tried iterating over bits for the same reason trying breakthrough
+ UnnamedCodinGamer: at the end it was slower than the no bit board implementation 
+ Wontonimo: what's the 'from' cell?
+ UnnamedCodinGamer: move from cell A to cell B 
+ UnnamedCodinGamer: the position of the cell that is about to move
+ jacek: well bitboards allow for quick checking isOver, getWinner and other things
+ UnnamedCodinGamer: I used it for move generation
+ Wontonimo: lets say 5th position to 8th positionboard = board - (1&lt;&lt;5) + (1&lt;&lt;8)
+ Wontonimo: to test 5th, you could use (board &amp; (1&lt;&lt;5))&gt;0
+ UnnamedCodinGamer: yes
+ UnnamedCodinGamer: but in move generation you get a board with all available moves
+ UnnamedCodinGamer: you have to then find which of the moves corresponds to which piece 
+ UnnamedCodinGamer: you can do this easily by iterating over the bits
+ Wontonimo: There's a great PDF titled BITBOARD METHODS FOR GAMESCameron Browne1 QUT, Brisbane, Australia.  Hope you can google and find it.  It has some great bitboard optimizations
+ UnnamedCodinGamer: I am reading it at the moment
+ Wontonimo: ah.  okay, then i'm out of bullets
+ UnnamedCodinGamer: below figure 8 it says that the from cell can be recovered as the cell that must exist in the opposite direction
+ UnnamedCodinGamer: which as I understand it needs iteration over bits
+ darkhorse64: hint: iterate over set bits
+ UnnamedCodinGamer: how can I get only the collection of the set bits?
+ darkhorse64: there are functions to find leading or trailing ones
+ darkhorse64: and then you xor the current bit and iterate again
+ jacek: hmm
+ UnnamedCodinGamer: is this going to be faster that going through the bits?
+ darkhorse64: having issues&#160;?
+ darkhorse64: @jacek
+ UnnamedCodinGamer: *than
+ jacek: i havent thought about that before
+ jacek: that would be much useful in amazons when you only have 4 bits
+ jacek: set
+ Astrobytes: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/d6edf8a5-561d-4142-b038-04dd634857d6">http://chat.codingame.com/pastebin/d6edf8a5-561d-4142-b038-04dd634857d6</a>
+ darkhorse64: All my loops on bits are built this way. Of course, if all bits are set, it's overkill
+ Astrobytes: Yeah, you should check for that
+ Astrobytes: nice clobber bot jacek
+ darkhorse64: ^
+ jacek: clopper
+ Astrobytes: :o
+ jacek: its just mcts
+ UnnamedCodinGamer: thanks guys, I will try this out
+ Or64bit: Hey guys
+ Or64bit: Anybody up with some basic postgresql knowledge?
+ Or64bit: I have to log onto a port that I have username and password to but it says I have an auth error
+ Or64bit: any idea why,
+ Or64bit:&#160;?
+ userdanydan: it is probably because there is an auth error
+ Wontonimo:&#160;:( my bot got up to 35th in uttt temporarily and got my hopes up but then finished its arena contest at 66th... sigh... the ups and downs of watching the arena test live
+ Wontonimo: the scores are pretty smooth up here with about 0.1 trueskill difference between positions
+ jacek:&#160;:+1:
+ UnnamedCodinGamer: 66th is pretty good
+ UnnamedCodinGamer: best I have seen is 144th&#160;:)
+ UnnamedCodinGamer: but I guess this is what you get with such small iteration count
+ Wontonimo: last night i finally made a local test bed to compare different versions locally.  Makes 2 versions compete for 80 battles, 40 each with first move.  Hasn't yet given me a huge insight other than that when I picked my hyperparameters I totally lucked out and picked exactly the right ones.
+ jacek: 80 games? i usually use 1000 games
+ UnnamedCodinGamer:&#160;:)
+ Wontonimo: i was hoping that there was optimization available there
+ jacek: yeah, most my arse-pulled handtuned parameters are already close to optimal
+ Wontonimo: jacek thanks,  i'll try upping. the count
+ jacek: most often than not ill get 47 63 initially just to get 550 450 in the end
+ Wontonimo: right ... stats works best with bigger numbers&#160;:)
+ jacek: of course it takes more time to complete
+ Wontonimo: well then, time to burn more cpu!
+ Wontonimo: I need a cluster of 1000 raspberry pi and it'll complete in 15 seconds
+ MasterCoderxD: @Wontomio
+ MasterCoderxD: I am currently doing your Challenge ("Beach Volleyball")
+ MasterCoderxD: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/beach-volleyball">https://www.codingame.com/ide/puzzle/beach-volleyball</a>
+ MasterCoderxD: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/bf3f2173-19cb-4e5e-a47a-b053a681cba4">http://chat.codingame.com/pastebin/bf3f2173-19cb-4e5e-a47a-b053a681cba4</a>
+ MasterCoderxD: I presume the shortest route is travelling in one straight line
+ MasterCoderxD: but the question says he breaks his initial (straight line) path and makes another
+ Wontonimo: right, so there are two legs to the travel, the first on land to a point where the beach meets the water, and a second leg from that point to the ball.  Both are straight, but not necessarily parallel
+ MasterCoderxD: ohk
+ Wontonimo: This may help <a rel="nofollow" class="external free" href="https://en.wikipedia.org/wiki/Snell%27s_law">https://en.wikipedia.org/wiki/Snell%27s_law</a>
+ MasterCoderxD: I am just thinking on how to approach it, using trigonometry or calculus
+ Wontonimo: I added that as one of the tags, but it appears to have been removed prior to final publishing (not by me)
+ MasterCoderxD: oh thanks for the link
+ MasterCoderxD: ok
+ MasterCoderxD: ty
+ Wontonimo: it is possible to do it without calc
+ MasterCoderxD: ok
+ Wontonimo: hey, thanks for doing my puzzle!  It was my first contribution
+ MasterCoderxD: ok np
+ geppoz: spoiler alert: T = L* √((x-x1)²+(y-y1)²) + W*√((x2-x)²+(y2-y)²)
+ geppoz: find min for x
+ MasterCoderxD: what's L and W?
+ geppoz: speeds
+ MasterCoderxD: x and y are?
+ MasterCoderxD: ballx and bally?
+ geppoz: x is the output to find, y is beach_y
+ MasterCoderxD: okie thank  u
+ MasterCoderxD: lemme try by myself too though :joy:
+ geppoz: so seems it is needed also derivative calculus
+ MasterCoderxD: yeah
+ MasterCoderxD: i am still in hs, so i am fresh with calc
+ MasterCoderxD: what's T?
+ MasterCoderxD: time?
+ geppoz: y, is the value to minimize
+ MasterCoderxD: k
+ MasterCoderxD: still getting wrong results bro
+ MasterCoderxD: something wrong with my code?
+ MasterCoderxD: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/ae32a935-47c5-43c9-aaa2-41bf4fabefda">http://chat.codingame.com/pastebin/ae32a935-47c5-43c9-aaa2-41bf4fabefda</a>
+ tridvajedan: guys
+ tridvajedan: how do you calculate a median?
+ geppoz: I haven't solved it yet :D
+ Pon4ik: guys, what do i have to do with "nextCheckpointDist" in race game?
+ MasterCoderxD: how do i approve a contribution?
+ RalseiOwO: you get the median from a sorted array, then get the value in the middle of the array  tridvajedan
+ Westicles: You can only use approved tags, but the autofill list of tag includes every tag anyone has ever tried
+ MasterCoderxD: i don't understand
+ MasterCoderxD: i wanna approve a contribution, what should i do?
+ Westicles: A clash?
+ MasterCoderxD: no a contribution
+ MasterCoderxD: this one <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/507070b7925f661e2d2835c14f950b9d157e">https://www.codingame.com/contribute/view/507070b7925f661e2d2835c14f950b9d157e</a>
+ Westicles: It is a WIP, so you can't approve.  Plus you have to be level 20
+ GiorgosGiorgakis: why am I stuck in this <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/coders-strike-back">https://www.codingame.com/ide/puzzle/coders-strike-back</a>
+ MasterCoderxD: ohhhk
+ GiorgosGiorgakis: it doesnt progress
+ GiorgosGiorgakis: blah
+ AntiSquid: MasterCoderxD why are you desperate to approve it?
+ MasterCoderxD: it's for the xp thing :joy:
+ GiorgosGiorgakis: where is the next button?
+ AntiSquid: doesn't mean much and besides you can get xp from other sources
+ MasterCoderxD: i am a hackerrank guy, i am just trying this out
+ MasterCoderxD: plus i thought his contribution was cool
+ AntiSquid: forget hackerrank culture, this is CG
+ MasterCoderxD: hackerrank is more popular
+ MasterCoderxD: bruh
+ MasterCoderxD: :rolling_eyes::joy:
+ AntiSquid: facebook and twitter are more popular, popularity isn't a good thing
+ AntiSquid: it just means it caters to more people, doesn't reflect quality
+ MasterCoderxD: k not into arguments
+ AntiSquid: sure, but take CG as it is, forget other sites 
+ Astrobytes: Yeah, it's not really comparable in that respect.
+ MasterCoderxD: you r ranked 11?? in the world??gg Antisquid
+ MasterCoderxD: :scream:
+ MasterCoderxD: gg to u too Astrobytes
+ AntiSquid: when you do a contest you get the overall idea of this site
+ MasterCoderxD: i am only 16, u guys r my inspiration :joy:
+ AntiSquid: at the moment it's quiet
+ Astrobytes: It's just a number. There are far more skilled players here with lower levels, they onyl play what interests them
+ Astrobytes: *only
+ MasterCoderxD: my clash of code rank is 2000, that good?
+ MasterCoderxD: u r right
+ AntiSquid: play some multis, see what you like, when you get stuck as questions, try to engage in meaningful conversations
+ MSmits: hey Astrobytes I just tested hashing of late game states in uttt. I get about 30% hits with 5 boards finished or more. Not worth it
+ MasterCoderxD: k but antisquid u didn't answer my question lol
+ AntiSquid: i think clash is just to get going with coding something
+ Astrobytes: Ah. Not much has really worked with your new UTTT bots MSmits
+ MSmits: that's uttt for you
+ Astrobytes: Yep. Defies all reason.
+ AntiSquid: the end goal imo is to play a multi, probably even make a book for UTTT, linearly optimize the crap out of it and submit spam
+ MSmits: nice early solve here though: ply 37 out of 67, p1 hashbot, p2 bot without hash
+ MSmits: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/530048846">https://www.codingame.com/share-replay/530048846</a>
+ Astrobytes: Nice early solve yeah but not exactly an improvement over the other D:
+ Astrobytes: * :D
+ MSmits: my thought exactly
+ MSmits: i'll submit the hashbot to test it, just in case I'm missing something
+ jacek: so you mastered endgames. now try to get to them
+ MSmits: thats the idea&#160;:)
+ MSmits: I also tried biased randomfor selecting a random miniboard in sim, had a good system for it, slowed down my bot, same winrate
+ MSmits: I think what hurts my hashbot is that I had to let go of my "ab pruning" in my solver. it's hard enough to combine TT with ab in a minimax, trying to both with a mct solver seems too hard
+ AntiSquid: how come there's no referee for hanabi (fireworks)
+ Wontonimo: jacek - about the 1000 tests, thanks again.  turns out that indeed the early results were wrong
+ jacek: you can choose if you want to show the referee to download
+ jacek: Wontonimo you need more confidence
+ Astrobytes: tric trac didn't link it AntiSquid, I don't think it's really needed though
+ MSmits: yes Wontonimo, stand up straight, be assertive!
+ Wontonimo: jacek , like personally or are you talking stats :O 
+ Wontonimo: haha
+ jacek: yes
+ MSmits: it's annoying that hashing states is so often just not worth it or just barely worth it. On which boardgames on CG did it turn out to be worthwhile?
+ Omer_ctr: why is this giving me nothing&#160;?
+ Omer_ctr: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/65277fd6-f9b9-4de6-ac4a-69752248db87">http://chat.codingame.com/pastebin/65277fd6-f9b9-4de6-ac4a-69752248db87</a>
+ Astrobytes: afk for a bit
+ Omer_ctr:&#160;???
+ MSmits: I'm not even sure what language that is Omer_ctr
+ Omer_ctr: thats javascript
+ MSmits: is that output or error printing?
+ MSmits: because if you're trying to debug, you need to error print
+ Omer_ctr: it gives me nothing in output
+ MSmits: but do you want normal output or debug output?
+ MSmits: it matters
+ Omer_ctr: normal output
+ MSmits: is it asking for several lines of print?
+ MSmits: output i mean
+ Omer_ctr: it says Found: Nothing
+ MSmits: probably you were supposed to give one line
+ MSmits: and your first line was nothing
+ MSmits: kinda hard to know when we dont even know if this is a clash or puzzle or somethign else, better link what you're doing
+ Omer_ctr: this is clash
+ Omer_ctr: bro im tired with javascript
+ MSmits: i was tired of javascript before even starting
+ MSmits: must be those glowing testimonials
+ RSBat: MSmits do you treat all equal states as equal? ie finished miniboards regardless of moves in it?
+ MSmits: yes
+ MSmits: i even go further than you i think
+ Omer_ctr: i learned python in like 3 weeks
+ MSmits: there are only 8629 unique miniboard states in my system
+ Omer_ctr: 2 months of learning js but still begginer
+ karliso: TT in uttt? I don't know about that.... 30% seems quite high. 
+ MSmits: i have a special miniboard system that turns the 19683 variations you get with a ternary representation into a 8629 variant representation, where a board is just a number between 0 and 8629
+ MSmits: these are as unique as they can be
+ karliso: There are only 8629 variations?
+ RSBat: what about last move position? sometimes it can be stored differently too
+ MSmits: yes
+ MSmits: let me show you
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/05f37f17-df3f-4b6d-b471-a77f801780eb">http://chat.codingame.com/pastebin/05f37f17-df3f-4b6d-b471-a77f801780eb</a>
+ MSmits: these two are identical
+ MSmits: in both cases p1 wins in 1 move
+ MSmits: and p2 draws
+ MSmits: RSBat i do this too yes
+ MSmits: a free move is a free move, no matter where it's targeted
+ MSmits: i give it index 9
+ MSmits: as opposed to 0-8 being regular last moves
+ RSBat: ok, cool
+ MSmits: there are ways to make the 8629 even smaller, but it's extremely expensive
+ karliso: Would a board with empty cell 4 would be identical as well?
+ MSmits: no
+ MSmits: different possible futures
+ MSmits: all possible futures and the way the board affects the big board, needs to be identical
+ karliso: If they are both free moves then they are same.
+ MSmits: you can have identical boards with 2 empty squares
+ MSmits: yes, 
+ MSmits: thats what i meant by making the 8629 even smaller
+ MSmits: you cant use that in a live bot
+ MSmits: there will be 512 different coordinate systems then, depending on the makeup of the main board
+ MSmits: i calculated all of those
+ MSmits: the 8612 goes down to 2k/3k realistically in some cases
+ MSmits: with 1 board left it's only like 110 or so, but whats the point
+ MSmits: you could use this system for your lookups karliso
+ karliso: no, thanks
+ MSmits: from what you shared before you use a biased lookup for picking moves
+ karliso: :D
+ MSmits: or at least you lookup your random moves
+ MSmits: so i guessed it migth be biased
+ MSmits: for example, giving winning moves more probability
+ karliso: I always take a winning move in rollouts
+ karliso: Never even tried otherwise
+ MSmits: you mean a miniboard win?
+ karliso: Yes
+ MSmits: weird
+ MSmits: when i tried it, it was worse, not sure why
+ MSmits: I have a win/block random
+ MSmits: to get a bit more variation in the rollouts
+ karliso: More variation is not necessarly better.. and winnig boards fast makes for faster rollouts
+ MSmits: yeah, that does make sense
+ MSmits: and you also avoid giving free moves when you win, if there is a non-free move win available
+ MSmits: that i know
+ karliso: yeah, and if multiplesafe wins I pick lowest... I think I tried to randomize way back, but it didn't give anything
+ Or64bit: Hey guys
+ Or64bit: Anyone up that knows something about DNS stuff? I'd have a pretty simple question that I do not know the answer for
+ Andriamanitra: <a rel="nofollow" class="external free" href="https://dontasktoask.com/">https://dontasktoask.com/</a>
+ Or64bit: I'll keep that in mind :D
+ Or64bit: so why could it happen, that I cannot connect to webpages ending with .hu (My country's ending thing) but I can connect to .com sites?
+ Andriamanitra: what do you mean by cannot connect? your browser doesn't load those web pages? have you tried getting the ip manually from command line?
+ Or64bit: To be honest this is just a question I'd have to answer, the only extra info I know is that the page is not responding when I try to visit it
+ Or64bit: but .com sites do load
+ Or64bit: and also most of the pages that are on my university's network
+ Or64bit: only .hu endings don'T
+ Andriamanitra: are you sure it's ALL .hu sites? and is there any way you could verify it's not a problem with your browser (maybe try `curl google.hu`)?
+ Andriamanitra: if it's not a problem with your browser it could be a dns problem or a firewall
+ Uljahn: or hosts file
+ Or64bit: Sadly I cannot verify, though you're right, it only states I cannot connect to to like five other specific we services
+ Or64bit: but it also does not say that it could connect to other ones
+ Or64bit: Here's the quetion translated, I hope you guys will understand it
+ Or64bit: Between two lectures you decide on visiting something.hu, but the page does not respond. You'd like to figure out what's going on. Doing so you notice, that you also cannot reach a.hu b.hu c.hu and d.hu, altough you can open facebook, gmail, youtube, and also most of the university's sites load in. What do you think the problem could be?
+ Uljahn: i guess, there is no valid dns record for them or those sites are offline or blocked by ISP
+ Saphine: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/16041572369f7fe2dd542488e28af80ed82e4c9">https://www.codingame.com/clashofcode/clash/16041572369f7fe2dd542488e28af80ed82e4c9</a>
+ AntiSquid: use #clash for links to clash Saphine
+ Or64bit: ThanksUljahn, the ISP is a very good idea
+ reCurse: sigh
+ jacek: oO
+ jacek: reCurse did you use convnet for uttt?
+ reCurse: Some aspects of it
+ jacek: training a0 style?
+ reCurse: See above
+ jacek: hmph
+ reCurse: Sorry not leaking sensitive info for free&#160;:)
+ jacek: then i will make my own nn with blackjack and hookers
+ reCurse: Don't forget the cocaine
+ Laserbeak43: In Power of Thor - Episode 1, you have to change Thor's position, but the only variables for Thor are intialTx and initialTY. Do I use those?
+ struct: you can use those
+ struct: but you need to update them
+ jacek: you need to calculate thor's current position by yourself
+ Laserbeak43: Thanks
+ struct: Boss even has comments, depth 3 minimax
+ jacek: what boss
+ struct: C4
+ jacek: and you can download it
+ struct: oh 
+ struct: Did not even notice it
+ darkhorse64: 17 moves win against the boss
+ darkhorse64: C4 is ready
+ darkhorse64: for approval
+ jacek: MSmits should approve it. he used most cpu power for it
+ reCurse: Ready for detonation?
+ darkhorse64: :smiley:
+ MSmits: i did do 1.5 million games in meta mcts :0
+ MSmits: (full games)
+ MSmits: i'll go approve
+ reCurse: Not touching that one with a ten foot pole
+ Andriamanitra: i'm getting captchas between each clash again&#160;:(
+ Andriamanitra: pls fix
+ MSmits: you dont need a ten foot pole reCurse, apparently even dogs can play it. jacek found proof
+ Astrobytes: afaik they will fix the clash captcha issue next week Andriamanitra
+ jacek: im two foot pole
+ Astrobytes: hahaha
+ Scarfield: xD
+ MSmits: ah damn, you went so long jacek. Now I have to reset my time-since-jacek-talked-about-his-pole timer
+ Scarfield: he was reffering to being pole-ish
+ MSmits: ohhh
+ reCurse: :door:
+ MSmits: good thing I didnt reset it yet
+ MSmits: keep going jacek
+ jacek: do you have :soccer: timer as well?
+ MSmits: yea it's at 13 seconds because you just talked about it
+ jacek: about what
+ MSmits: you're just trying to get me to talk about it too
+ MSmits: lol i got random time out on first test of connect 4 code
+ MSmits: spent a few minutes trying to find the bug
+ MSmits: it was just one of those random timeouts cg has
+ darkhorse64: The boss is having a hard time
+ MSmits: yeah 
+ jacek: its on?
+ jacek: i didnt get notification
+ MSmits: it's on!
+ darkhorse64: join the party
+ MSmits: happened 10 mins ago
+ MSmits: thanks for leaving me the approve btw
+ jacek: nah, ill just give random bot for now
+ jacek: so the boss wont be lonely
+ MSmits: didnt you already have a better one?
+ jacek: yeah
+ jacek: ill wait for more people. then ill mess with leaderboard :imp:
+ MSmits: btw, as promised, wont counterbook anyone. So far have general book of 486 moves that doesnt really go beyond ply 5. That's after 1.5 million games 
+ jacek: going for column 1 after all?
+ MSmits: yeah based on results
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/e90b8754-f885-47f6-abf2-108b9ceff1c2">http://chat.codingame.com/pastebin/e90b8754-f885-47f6-abf2-108b9ceff1c2</a>
+ MSmits: closest to 50%
+ MSmits: i doubt you will notice a difference if you start at 0
+ MSmits: because it didnt go below 50% until after hundreds of thousands of games
+ MSmits: and you're only playing one game at a time so..
+ MSmits: just dont start with 3 or 4... that would be bad for your winrate
+ MSmits: ohh
+ MSmits: there's another league
+ MSmits: I was thinking, where did the tric go?
+ Scarfield: you need to trac him down
+ MSmits: :grin:
+ Astrobytes: lmao
+ MSmits: well at least the boss is better than random
+ MSmits: it has jacek's random bot beat easily
+ MSmits: nice to have a reasonable bar of entry to wood 1
+ Scarfield: elStructo mentioned a depth 3 minmax boss
+ MSmits: ah yeah thats a good strength to aim for I think
+ Laserbeak43: "Timeout: your program did not provide an input in due time. Earth was destroyed!" Provide an input? I thought I was supposed to write to console
+ MSmits: please don't destroy Earth before I get nr 1 at uttt
+ jacek: yes, you write to console
+ jacek: but did you print more than neccessary? or less?
+ Laserbeak43: just made a big if/else
+ Laserbeak43: that always sets a string variable to one of the directions which is output by Console.WriteLine() on line 60
+ jacek: really? can you show the code
+ Laserbeak43: and why do I not see this channel on the discord server?
+ struct: maybe you have an infinite loop?
+ reCurse: I might just keep an overfit bot to spam submit in spite
+ jacek: i bet you have Console.WriteLine() in one if
+ jacek: and it doesnt print
+ MSmits: overfit to whom?
+ MSmits: reCurse?
+ reCurse: To perform better against you than everyone else when you get rank 1
+ MSmits: mmmh
+ jacek: hmph
+ MSmits: do it&#160;:)
+ reCurse: You could say I'm in service of protecting the planet
+ MSmits: oh yeha, thats right
+ Laserbeak43: <a rel="nofollow" class="external free" href="https://pastebin.com/U4pEB8ms">https://pastebin.com/U4pEB8ms</a>
+ jacek: Laserbeak43 CS1002:&#160;; expected
+ jacek: compile error
+ Laserbeak43: just noticed that...
+ Laserbeak43: like literally when u pinged me lol...
+ jacek: :duck:
+ MSmits: is this thor 1?
+ struct: Also you need to update coords
+ MSmits: the basic thor?
+ MSmits: I thought my first C# solution was big, but this is even bigger
+ MSmits: I like it
+ Laserbeak43: update my coords?
+ MSmits: when you output
+ MSmits: you move to new coords
+ Laserbeak43: initialx and initialy?
+ MSmits: you need to remember them (= update)
+ MSmits: yes change those, or use a different variable
+ MSmits: so when you move to the right you do initialx++
+ MSmits: for example
+ Laserbeak43: was wondering if the code I don't see handles that or not
+ MSmits: initialx is never changed
+ MSmits: so no
+ Laserbeak43: yeah i did that "initially"&#160;:) but removed it
+ Laserbeak43: what what?
+ MSmits: a single iteration of the while loop corresponds to a single step
+ Laserbeak43: i get that
+ Laserbeak43: but
+ MSmits: your initialx and y are set before the while loop
+ MSmits: and never change
+ struct: Only stuff inside the while loop get updated every turn
+ MSmits: unless you do it
+ Laserbeak43: exactly
+ Laserbeak43: but you said no?
+ MSmits: i said you current code doesnt
+ MSmits: but it should
+ Laserbeak43: ah
+ Laserbeak43: ok
+ MSmits: sorry confusion
+ Laserbeak43: np np thanks for the help
+ MSmits: np
+ Scarfield: i just looked up my python solution for thor, good laugh xD
+ MSmits: it's good for your confidence when you look at those old solutions
+ MSmits: wow, i learned a lot...
+ Laserbeak43: lol.... I really want to be doing scala
+ Laserbeak43: but I'll try them both
+ Laserbeak43: yeah I know there's gotta be a more elegant way to do this, just being lazy I guess
+ MSmits: connect4 seems to be really rare on draws
+ Scarfield: yea it was probably the first puzzle i made after onboarding
+ PatrickMcGinnisII: Whoo hOooo!
+ darkhorse64: fierce competitors do not accept draws
+ MSmits: happy Patrick incoming
+ PatrickMcGinnisII: lvl 35!  ;) :P
+ Scarfield: Patricks day?
+ MSmits: grats&#160;:)
+ PatrickMcGinnisII: I should be ashamed, no contributions
+ PatrickMcGinnisII: heh
+ MSmits: same
+ MSmits: but all in all i think CG has quite a lot of them already
+ MSmits: testers are more needed than contributors
+ MSmits: 10&#160;: 1 win ratio&#160;:)
+ PatrickMcGinnisII: xp is getting harder to come by
+ PatrickMcGinnisII: fewer competitions
+ MSmits: still plenty of multis you havent tried i'm sure
+ MSmits: I found a draw! <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/530096589">https://www.codingame.com/share-replay/530096589</a>
+ PatrickMcGinnisII: only connect 4
+ PatrickMcGinnisII: hmm, of course i haven't gone "all out" on some of them
+ MSmits: wait, you tried every other multi?
+ MSmits: the xp is in the legend promotion
+ MSmits: isnt it like 500&#160;?
+ PatrickMcGinnisII: yea, promotions are a b*tch
+ darkhorse64: it is
+ PatrickMcGinnisII: achievments give a little xp, but i have to do more langs
+ darkhorse64: languages gives many achievements but few points
+ PatrickMcGinnisII: i should make a puzzle, prolly easier xp
+ MSmits: only make a puzzle if you have a good idea fo rit
+ darkhorse64: no fibonacci in it
+ MSmits: you dont like fibonacci?
+ PatrickMcGinnisII: last puzzle i did was fib...centrifuge tuning, rofl
+ darkhorse64: There are too many of them in Coc
+ MSmits: ah
+ PatrickMcGinnisII: coc isn't my jam
+ Laserbeak43: So I've updated the coordinates. and  still the same error though.
+ Laserbeak43: Expected a movement (one of N, NE, E, SE, S, SW, W, NW) but found <i></i>
+ PatrickMcGinnisII: 4 people in connect4, ...o k a y...must be super new
+ MSmits: share the code again, sounds like an output problem
+ MSmits: yes PatrickMcGinnisII &lt; 1 hr
+ struct: maybe it doesnt enter any if
+ darkhorse64: do your ifs cover all cases&#160;? I would say probably no
+ Laserbeak43: <a rel="nofollow" class="external free" href="https://pastebin.com/f5Ps9QWm">https://pastebin.com/f5Ps9QWm</a>
+ MSmits: you're supposed to compare against light x
+ MSmits: and forget everything else
+ MSmits: so check if your x &gt; light x or x &lt; light x to determine if E or W is necessary
+ MSmits: those if statements contain a lot of unnecessary comparisons
+ Laserbeak43: so lighty never changes?
+ Laserbeak43: trick question?
+ MSmits: light is stationary
+ Laserbeak43: for some reason I thought i had to chase it
+ MSmits: nope
+ MSmits: x and y are both stationary
+ MSmits: your thor moves
+ MSmits: lightx and y i mean
+ Laserbeak43: either way, what I've done in regard to comparison should break the code?
+ MSmits: it's a bit hard to tell, if your bot doesnt output anything it means none of the if statements are true
+ MSmits: if you simplify them it should be easier to fix
+ MSmits: thats a better path than trying to figure out why this one doesnt work
+ PatrickMcGinnisII: Laserbeak43 the move is null because you haven't met the criteria in all the if statements to change it
+ Laserbeak43: hmm...
+ PatrickMcGinnisII: if you setup a deltax and deltay before the loop
+ PatrickMcGinnisII: you will have better luck
+ PatrickMcGinnisII: and since the Y direction always comes first in the move output
+ PatrickMcGinnisII: you can just move=N or S
+ PatrickMcGinnisII: then test the x, and move=move+ W or E
+ PatrickMcGinnisII: instead of 8 ifs you can reduce it to 4
+ Laserbeak43: ok thanks. I'll try it
+ PatrickMcGinnisII: so, if deltay!=0 move+= N or S
+ PatrickMcGinnisII: if deltax!=0 move+= W or E
+ PatrickMcGinnisII: you'll get it
+ PatrickMcGinnisII: I gotta clean my house, cookin' steak for the gf in a few hours
+ PatrickMcGinnisII: you had two of these:  (xy[0]&gt;lightX) &amp;&amp; (xy[1]==lightY)
+ PatrickMcGinnisII: should be a &lt;
+ Laserbeak43: changed the whole code block to this: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/eebe59b1-b8b7-470e-802b-8057e07a94b9">http://chat.codingame.com/pastebin/eebe59b1-b8b7-470e-802b-8057e07a94b9</a>
+ Laserbeak43: oops
+ Laserbeak43: sorry
+ Laserbeak43: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/ac4a7a64-3cae-49d3-bb73-ed8b204bd15c">http://chat.codingame.com/pastebin/ac4a7a64-3cae-49d3-bb73-ed8b204bd15c</a>
+ Laserbeak43: ok i can't copy and paste code from the editor into chat
+ Laserbeak43: <a rel="nofollow" class="external free" href="https://pastebin.com/VZ9Gd1YE">https://pastebin.com/VZ9Gd1YE</a>
+ Laserbeak43: oh no i see what was happening.. lol
+ PatrickMcGinnisII: remember you are appending a character to the move string
+ Laserbeak43: hmm
+ PatrickMcGinnisII: ok, u found it
+ Laserbeak43: I was wondering. I don't see why I would append a direction to move?
+ PatrickMcGinnisII: do y first as its the first direction to be output
+ PatrickMcGinnisII: so
+ PatrickMcGinnisII: move="";
+ Laserbeak43: 0 +"E"?
+ Laserbeak43: no...
+ PatrickMcGinnisII: if (deltay!=0) { if (deltay&lt;0) { move+="N'; deltay++;} else {}  kinda thing
+ PatrickMcGinnisII: I dunno what lang, what is it? c++?
+ tridvajedan: how to make a puzzle
+ tridvajedan: like a code puxxle
+ tridvajedan: and upload it
+ jacek: contributions
+ Laserbeak43: C#
+ PatrickMcGinnisII: so strcat(move,"N");   ?
+ PatrickMcGinnisII: move.push_back("N");&#160;?
+ Laserbeak43: I believe move "x" + "y";
+ Laserbeak43: or move += "Y";
+ PatrickMcGinnisII: so move+="N"; should be fine
+ Laserbeak43: should work
+ Laserbeak43: i feel like im being stubborn about something...
+ PatrickMcGinnisII: ok, i get mixed up between JS and java therre for a sec
+ PatrickMcGinnisII: hmm, oh works the same
+ PatrickMcGinnisII: unless you are using stringbuilder
+ PatrickMcGinnisII: ok, i'm done giving advice, second guessing myself
+ PatrickMcGinnisII: prolly should have said "S"
+ Laserbeak43: hehe thanks...
+ PatrickMcGinnisII: your original code would have worked with 2 minor changes.... the &lt; and tx++ .... but there is alot of unnecessary conditions in the statements
+ Laserbeak43: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/d16474af-4d49-4f6e-b76c-dcdfd0ffece7">http://chat.codingame.com/pastebin/d16474af-4d49-4f6e-b76c-dcdfd0ffece7</a>
+ Laserbeak43: that worked...  for straight line
+ PatrickMcGinnisII: you can always ctrl+z, to undo things
+ Laserbeak43: think i'm just going to do it this way, since I don't know how the blackbox works
+ PatrickMcGinnisII: remember do Y first
+ jacek: y
+ PatrickMcGinnisII: y&#160;!
+ PatrickMcGinnisII:&#160;;)
+ PatrickMcGinnisII: or is it   ~y
+ Laserbeak43: :cold_sweat:
+ PatrickMcGinnisII: stupid tilde doesn't show up in chat
+ PatrickMcGinnisII: '/u223c
+ PatrickMcGinnisII: grrr
+ jacek: maybe the site is made in php
+ struct: its due to your font
+ AbundantPuddle: ỹ
+ Laserbeak43: `
+ PatrickMcGinnisII: the tilde in html might think it's a css operator
+ PatrickMcGinnisII: U+007E
+ PatrickMcGinnisII: grrr
+ PatrickMcGinnisII: ~
+ PatrickMcGinnisII: alt+0126\
+ PatrickMcGinnisII: grr
+ PatrickMcGinnisII: i give up
+ PatrickMcGinnisII: glhf
+ AbundantPuddle: I don't know if you'rer referring to your text that says "or is it   ~y," but I can see the tilde there.
+ PatrickMcGinnisII: ahh ok, i can't
+ PatrickMcGinnisII: all i see is -
+ AbundantPuddle: Then as struct stated, it's probably due to your font.
+ PatrickMcGinnisII: or a longer -
+ struct: -~
+ PatrickMcGinnisII: prolly
+ PatrickMcGinnisII: ok struct, you win
+ AbundantPuddle: struct just did a dash and a tilde
+ PatrickMcGinnisII: winner winner :poultry_leg: dinner
+ AbundantPuddle: Lol
+ PatrickMcGinnisII: all i see is a long dash
+ jacek: rainbow dash?
+ PatrickMcGinnisII: &amp;#126
+ PatrickMcGinnisII: grr
+ PatrickMcGinnisII: laterz
+ Laserbeak43: Thanks. Later
+ Laserbeak43: <a rel="nofollow" class="external free" href="https://pastebin.com/wJreDU6E">https://pastebin.com/wJreDU6E</a>
+ Laserbeak43: i'm not understanding something about the flow of the program... this always stops 1 coordinate short of 1...
+ Laserbeak43: of Y*
+ struct: Laserbeak43
+ struct: on the last if
+ struct: line 62
+ struct: will just append text
+ struct: with your current code it can match one previous if
+ struct: and then match that if
+ Laserbeak43: @struct Thanks. Not exactly sure what you mean, but I'll focus on that block
+ struct: <a rel="nofollow" class="external free" href="https://i.imgur.com/GgDjja4.png">https://i.imgur.com/GgDjja4.png</a>
+ jacek: oO
+ arhariss: Hallow
+ Andriamanitra: fuck these shit clashes with only 4 test cases :rage:
+ jacek: reverse?
+ Andriamanitra: shortest
+ Andriamanitra: i saved one character too many
+ MSmits: tihs clashes
+ Andriamanitra: i had 43 (44 without the bug) and the next person had 95
+ MSmits: sucks =/
+ MSmits: so it worked on all the testcases but not on the validators/
+ MSmits:&#160;?
+ Andriamanitra: yup
+ MSmits: that's annoying indeed
+ Laserbeak43: @struct I've fixed that before (and now), and in my current code I am trying to figure out how to get ThorY to equal lightY when deltaY == lightY.  he always goes past the bounds
+ struct: Whats your current code?
+ Laserbeak43: <a rel="nofollow" class="external free" href="https://pastebin.com/Uw8TkeYG">https://pastebin.com/Uw8TkeYG</a>
+ Wontonimo: Laserbeak43 I was just told last week you don't need to put the @ infront of the name.  just passing along this wealth of knowledge 
+ struct: laser
+ Laserbeak43: Wontonimo thanks
+ struct: you should use else if
+ Laserbeak43: hmm
+ Laserbeak43: ok i'll try that
+ struct:  if(deltaY &lt; lightY){...}elseif(deltaY &gt; lightY){...}elseif((deltaY == lightY){....}
+ struct: Something like that
+ struct: the last elseif can be just an else
+ Laserbeak43: struct omg...that's all i needed to fix it
+ Laserbeak43: i really need to learn program flow...
+ struct: check other players code
+ Laserbeak43: yeah I'm feeling a bit silly
+ Laserbeak43: thanks for the help
+ Laserbeak43: Going to try doing it in Scala now
+ struct: The logic is the same
+ Stormalix: is there any way to stop all of the captchas im getting.. its really annoying and ive already done like  20 of them
+ jtsimmons: Is there an easy way to see old clashes after you close out?
+ brandex123: Is there a way to check out the test outputs of old clahes after you close out?
+ Wontonimo: @Stormalix i think that's been raised as a bug in discord
+ RyanGilbert: yeah if you do too many clashes in a row it gets sussy of you
+ jtsimmons: Not a bot, just have nothing better to do.
+ Wontonimo: do some puzzles

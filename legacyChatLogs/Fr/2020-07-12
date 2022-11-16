@@ -1,0 +1,269 @@
+ Bon[]Crayon: Salut 
+ Bon[]Crayon: Automaton2000 AutomatonNN :robot:
+ AutomatonNN: oui
+ Automaton2000: c'est quoi le rapport avec le fait de ne pas faire
+ Bob: bonjour l'univers des Automaton2000
+ Automaton2000: quand je suis pas sur la partie
+ Bob: et celui des AutomatonNN, soyons pas vilain
+ AutomatonNN: voir * *
+ dwarfie: AutomatonNN ... ca s'ecrit&#160;: void**
+ AutomatonNN: Neumam est en parle plus tard
+ pardouin: o/
+ Zorg1: \o
+ leojean890: ah votre "double hulk" c'est le boss bois 6 de BOTG hehe il vous a tant trauma&#160;?:P
+ pardouin: <a rel="nofollow" class="external free" href="https://image.noelshack.com/fichiers/2020/28/7/1594546365-dp77small.png">https://image.noelshack.com/fichiers/2020/28/7/1594546365-dp77small.png</a>
+ pardouin: j'en ai marre de cliquer sur des feux de signalisation et des parcmètres&#160;:(
+ leojean890: mdr tous ceux qui spam submit se reconnaissent là hehe
+ leojean890: y'a "cliquez sur les bus" aussi&#160;;)
+ pardouin: les feux de signalisation, les vélos
+ pardouin: je vais tous les connaître :D
+ leojean890: bah 1/2k avec 25 sub toutes les 5h t'as le temps en effet hehe
+ pardouin: je peux réduire à 1/1k avec 3 chars de plus
+ pardouin: et je serai quand même premier
+ pardouin: mais bon quitte à spam...
+ leojean890: ;p
+ leojean890: bon courage :P
+ pardouin: parce qu'avec id("")%7//3
+ leojean890: moi je me mets à BOTG, le défi ultime :P
+ pardouin: ça me fait 0,0,0,1,1,1,2
+ pardouin: donc ça donne pile le profil que je suis censé avoir
+ leojean890: en vrai ça peut être drôle en heuristiques, je vais pas le simuler&#160;;)
+ leojean890: je vois hehe
+ pardouin: donc proba (3**6)/(7**7) 
+ pardouin: légèrement mieux que 1/(3**7)
+ pardouin: ah ouais j'ai pas testé ce multi
+ pardouin: tu as déjà fait the great escape?
+ pardouin: j'adore la simplicité apparente du truc, à la bandas
+ leojean890: je suis 328/3600 dans great escape
+ leojean890: c'estpas si simple
+ leojean890: gros branching factor
+ leojean890: toutes les positions possibles de barrières
+ leojean890: moi perso je fais un minmax faible depth en élaguant large les positions de barrières
+ leojean890: si tu lis les PM c'est full heuristiques (romka par ex) mais des trucs cauds quand même
+ leojean890: chauds*
+ pardouin: sur ce genre de truc il doit y avoir moyen d'utiliser des dancing links
+ leojean890: 'connais pas
+ pardouin: c'est une structure de donnée adaptée au backtracking
+ pardouin: en particulier les problème de couverture totale, pavage du lan, de l'espace, pavage d'une timeline, sudoku et consorts
+ pardouin: plan*
+ pardouin: mais c'est un peu péniblke à implémenter
+ leojean890: je vais regarder ça :P
+ leojean890: mais ouais si tu regardes le PM de romka c'est sympa
+ pardouin: en gros l'idée c'est que pour faire ce genre de backtracking tu travailles normalement sur une grosse matrice de 0 et de 1
+ leojean890: moi mon minmax est basé sur les distances BFS restantes pour atteindre objectif
+ pardouin: et tu veux pouvoir rapidement parcourir une ligne/colonne et supprimer une ligne/la remettre où elle était
+ leojean890: je vois
+ pardouin: et l'idée du dancing link c'est de remplacer ta matrice, mettons:001001001000101001000
+ pardouin: par:
+ pardouin: en gros des noeuds, reliés entre eux horizontalement et verticalement quand il sont sur la même ligne/colonne, par une structure de liste doublement chainee
+ pardouin: du coup les parcours sont plus rapide, tu va juste de noeud en noeud au lieu de parcourir toute la liste/colonne
+ pardouin: et c'est avantageux car dans ce genre de pb tu as beaucoup de 0 dan ta matrice
+ leojean890: ah oui je vois le genre
+ pardouin: et pareille la suppression/réinsertion de ligne est très rapide, suffit de déconnecter les liens et de les reconnecter
+ pardouin: d'où le "dancing links"
+ pardouin: si un jour tu t'amuses à faire un solveur de sudoku par exemple c'est vraiment le must
+ leojean890: j'avais fait ça avec un backtracking bateau perso :P
+ leojean890: en élaguant au max quand même
+ pardouin: oui un backtracking classique ça passe pour la plupart des grilles mais si tu tombes sur une grille difficile, ton solveur va pédaler dans la semoule
+ leojean890: j'imagine:P
+ pardouin: il y a un pb du même genre sur CG, Shikaku solveur. Mais les valkidateurs sont pas trop méchants alors un backtracking classique passe sans pb
+ leojean890: je me suis pas attardé lgtps sur le pbm
+ pardouin: d'ailleurs il est classé medium alors que bon...
+ leojean890: mais j'avais vu une autre méthode
+ leojean890: "exact cover"
+ pardouin: c'est ça
+ pardouin: c'est dancing links
+ leojean890: d'accord
+ leojean890: je me disais aussi
+ leojean890: vu ta description
+ pardouin: l'algo s'appelle alorithme X de D.Knuth
+ leojean890: ça ressemble à ce que j'avais lu
+ leojean890: sur exact cover
+ pardouin: et dancing links c'est la structure utilisée par l'algo
+ leojean890: je vois ouais
+ leojean890: sinon methode randomisée ;P
+ pardouin: XD
+ leojean890: tant qu'il reste du temps générer un truc selon les contraintes :P
+ leojean890: pas faire du full random non plus bien sûr :P
+ leojean890: respecter un minimum les contraintes ;P
+ pardouin: CG le site qui te pousse à faire un NN de reconnaissance de feux de circulation ^^
+ leojean890: mdr j'avoue pour submit plus facileùent
+ leojean890: mais à un moment donné ils bloquent juste
+ pardouin: j'arrive pas à traduire Chuck Norris en Java ça me saoule
+ pardouin: j'ai pourtant repris exactement ma soluce C++
+ pardouin: mais ça affiche pas ce qu'il faut
+ Zorg1: tu utilises byte&#160;?
+ Zorg1: quoique ça devrai pas faire de différence dans ce cas là
+ Thyl: faut du 8 bits
+ pardouin: j'ai pigé
+ pardouin: pour regarder si deux string sont égaux on peut pas faire ==
+ pardouin: il faut faire .equals()
+ pardouin: je code jamais en Java alors je savais pas
+ pardouin: mais bordel quelle implémentation foireuse de == -_-
+ Zorg1: ah ce problème là
+ Zorg1: ah le vieux débat entre égalité et identité :p
+ Zorg1: en JS ils ont même ===
+ dbdr: assert ==&#160;!= ===;
+ pardouin: verdict, 337 chars en Java
+ pardouin: Java never dissapoints &lt;3
+ Zorg1: doit y avoir moyen de faire moins non&#160;?
+ pardouin: disappoints*
+ pardouin: je sais pas en C++ j'en ai 203
+ pardouin: mais bon c'est Java quoi
+ pardouin: pour rigoureusement le même script
+ dbdr: théorème: il y a toujours moyen de faire moins
+ dbdr: (oui, oui, je sais. c'est pas vrai mais si&#160;;) )
+ Thyl: dbdr, quel est ton secret pour golfer?:thinking:
+ pardouin: Java:String.format("%7s",Integer.toString(x.charAt(0),2)).replace(' ','0').split("")Python:f"{ord(x):&gt;07b}"
+ dbdr: mon secret: se dire qu'on peut toujours faire moins&#160;:)
+ pardouin: Java ça me donne pas envie de tryhard plus que ça, le leaderboard est plein de Bash alors j'aurai dans tous les cas un classement pas ouf
+ pardouin: Alors que Python il y a moyen de faire des bons classements sans Bash
+ Zorg1: re
+ Zorg1: y a eu une attaque NBC sur ce chat, plus rien ne bouge&#160;?
+ Zorg1: Automaton2000 AutomatonNN z'êtes encore vivants&#160;?
+ Automaton2000: c'est la 1ere fois que je dis
+ AutomatonNN: seulement quand il y a des gens qui ont du avoir un nom par contre tu peux le rendre au moins&#160;:)
+ dwarfie: AutomatonNN&#160;: tu veut un nom&#160;?
+ AutomatonNN: update ca tourne au moins Automaton2000&#160;?
+ dwarfie: Automaton2000&#160;: fait pas la sourde oreille ... tepond a la question ...
+ Automaton2000: yop à tous et aux bots dwarfie &amp; automatonnn
+ dwarfie: (╯°□°）╯︵ ┻━┻
+ dwarfie: je suis pas un bot , on te l'a deja dit ...
+ Zorg1: ça mon gars faudra nous le prouver
+ JBM: tu dis "mon gars" aux bots?
+ JBM: cqfd
+ Zorg1: :thinking:
+ leojean890: comment passer de bois 6 à bois 3 dans botg en 1 ligne de code..done
+ leojean890: print("DEADPOOL") if round_type &lt; 0 else print("ATTACK_NEAREST", "TOWER")
+ leojean890: ah tiens ça perd tout en bois 3 mdr
+ leojean890: normal vu que la tour me shoot
+ leojean890: since now
+ leojean890: et pour bois 3 =&gt; bois 1 un code simpliste de qq lignes qui choisit de tirer ou reculer  
+ leojean890: wow un 2nd hero
+ leojean890: et pour passer bronze même logique simpliste mais en faisant attention à l'ordre des heroes choisis et à pas dupliquer.. bon bah ligues bois botg bidon 
+ Zorg1: ah oui les 6 ligues bois de BotG ^^
+ Zorg1: ça avait été fait en multi
+ leojean890: mais silver ça passera plus avec une logique simpliste en moins de 10 lignes :P
+ leojean890: ah en contest y'en avait pas 6&#160;?
+ Zorg1: non deux seulement
+ leojean890: ah ok:P
+ Zorg1: mais vu que mal on dit que c'était trop complexe, ils ont décidés de multiplier les ligues wood
+ leojean890: y'a tellement de règles mdr
+ leojean890: ah je vois
+ Zorg1: *pas mal de gens ont
+ leojean890: moi je vais sous ma tour et je tue mes ennemis et ça passe bronze..
+ leojean890: et pour avant que la tour tire tu fonces juste tuer la tour ennemie
+ leojean890: avec un héros qui fait bcp de dmg
+ leojean890: ça marchait pas avec valkirie
+ leojean890: tellement re règles =&gt; chaud de faire une simu
+ leojean890: de*
+ leojean890: donc faire simu partielle ou complexifier les heuristiques&#160;?:P
+ leojean890: tiens y'en a qui se soignent, j'avais pas vu ça dans les règles :P
+ leojean890: objets maybe
+ Zorg1: en fait ce contest a été utile surtout pour savoir où s'arrêter dans la complexité des contests
+ leojean890: je comprends
+ leojean890: c chaud j'avoue les règles
+ leojean890: je pense néanmoins que les premiers prennent vraiment en compte le tout :p
+ Zorg1: c'était le second contest de la communauté après MM qui était plus un CSB à complication
+ leojean890: MM est chaud aussi ouais&#160;!
+ Zorg1: oui mais ça reste simple
+ leojean890: on en parlaitl'autre jour, t'es en heuristique mais gold qdq même&#160;?
+ leojean890: qd même*
+ leojean890: big up fait juste un peu de simu il disait (collisions)
+ leojean890: en vrai c'est pas con
+ leojean890: il a vu que son reaper était souvent bloqué
+ Zorg1: t'as pas un choix de perso avec chacun deux skills, des objets que t'achète pour améliorer les compétences ...
+ leojean890: ouais c'est LOL quoi:)
+ leojean890: en 1 seule ligne et tour
+ leojean890: faudrait que je regarde les tp parties de légende
+ leojean890: top*
+ Zorg1: je suis légende BotG sur le multi
+ leojean890: gg:p
+ leojean890: bonnes heuristiques plutôt que simu?^^
+ Zorg1: en contest aussi d'ailleurs
+ Zorg1: bof ça dépend de la composition des ligues
+ leojean890: ça dépend qui&#160;?
+ leojean890: j'avais lu en diago le pm de saelyos
+ Zorg1: mon passage en légende sur BotG multi ça a été comique
+ Zorg1: on était 30 en gold j'étais à la fin.
+ leojean890: i semblait plutôt heuristique
+ leojean890: ah tu t'es fait pousser&#160;?:p
+ leojean890: 30 seulement wow:p
+ leojean890: ah mais d'ailleurs y'a personne en gold sur le multi
+ Zorg1: Un gars  voulait passer legende, il pouvait mais je le battais
+ leojean890: il t'a monté de ouf
+ Zorg1: il a fais passer une dizaine de mec en legénde pour passer dont moi 
+ Zorg1: après en légende mon bot fonctionnait mieux avec les bots présents
+ leojean890: sympa ça^^
+ leojean890: ouais c chaud parfois t'as une strat qui marche mieux en haut qu'en bas
+ Zorg1: la gold actuelle sur BotG est ridicule, je crois qu'ils sont à peine dix
+ leojean890: oui j'ai vu ça:)
+ leojean890: un jour qqn va tous les faire passer:p
+ leojean890: les 2 boss sont presque du même level
+ leojean890: (silver et gold)
+ leojean890: en vrai un jeu du genre.. selon les strats tu peux avoir des counter
+ leojean890: A bat B, B bat C mais C bat A
+ Zorg1: oui shifumi
+ Zorg1: en plus le referee de BotG c'est un vrai bazar à lire ce truc
+ leojean890: c'est moins séquentiel que quelques jeux 
+ leojean890: plus simple de lire la masse de règles à gauche non&#160;?
+ Zorg1: t'as des événements qui pètent dans tous les sens, en plus avec toutes les actions des perso très différentes qui ont des temps d'actions différents ...
+ leojean890: mdr
+ leojean890: un peu shifumi comme tu dis
+ leojean890: mais je suppose que certain arrivent qd même à avoir des strats qui win contre tlm
+ leojean890: certains
+ Zorg1: j'avais choisi mes deux persos, et étudier leurs actions, j'en changeait pas
+ leojean890: t'as raison ouais
+ leojean890: comme alphastar :P
+ leojean890: dans starcraft
+ Zorg1: bah t'avais recurse qu'avait codé un truc pour éviter un cheese
+ leojean890: spécialisée
+ leojean890: il est chaud lui hehe
+ Zorg1: c'était marrant tu voyais un de ses héros faire un pas de côté à un certain moment quand il détectait le cheese ^^
+ leojean890: pour s'assurer quon ne le kill pas direct
+ leojean890: "cheese" je connais pas d'ailleurs:p
+ Zorg1: bah j'ai appris tous ces termes lors du BotG
+ leojean890: ah ok:)
+ Zorg1: d'un seul coup ça causait comme sur les MoBA
+ Zorg1: faut s'adapter
+ leojean890: ça veut dire quoi?:)
+ leojean890: je vois
+ leojean890: les joueurs de LOL et starcraft ont sorti leur voc:p
+ Zorg1: voilà
+ leojean890: buisson c moyen:)
+ leojean890: il est tellement petit que tu peux mémoriser sa coord
+ leojean890: donc pas de FOG
+ Zorg1: un cheese c'est tirer sur un grunt quand un enemi en est plus près que toi
+ Zorg1: comme ça le monstre attaque ton enemi, et il assez balaise ^^
+ leojean890: un Groot&#160;?
+ Zorg1: oui un Groot
+ leojean890: pas con la strat
+ Zorg1: c'est simple à coder et ça rapportait pas mal, sauf si en face l'autre à code le contre ^^
+ leojean890: Un nombre aléatoire entre 3 and 5 de créatures neutre vont apparaître autour des buissons au dessus de la route. Ils n'attaqueront pas tant qu'ils ne sont pas attaqués.
+ leojean890: en gros tu l'atack de loin
+ leojean890: attaque*
+ Zorg1: donc tu passais ton temps à repérer ces astuces et à les inclure dans ton code pour voir si ça améliorait ton classement
+ leojean890: je vis:p
+ leojean890: vois
+ leojean890: ouais tu repères si le groot est à la portée d'un des heros ennemis
+ leojean890: mais plus proche de toi que de lui
+ Zorg1: mais en dehors de l'excitation d'un contest, BotG doit pas être super passionnant à bricoler
+ leojean890: en contest c'est tjr plus fun car il y a la compet et c'est vivant car tlm joue
+ Zorg1: oui
+ leojean890: bcp
+ leojean890: j'uis pas sûr que je vais avoir bcp de motiv pour monter sur ce multi:)
+ leojean890: mid bronze ça fait 409/859
+ leojean890: et ce avec une logique simpliste
+ leojean890: j'ai encore tout à faire
+ leojean890: Akarachuudra défonce tlm
+ leojean890: sur le multi en légende
+ leojean890: 30.08 vs 25.87
+ leojean890: 113 personnes en légende, 5 en gold..
+ leojean890: 200 en silver et bronze
+ leojean890: en bois 1 ils ont tous un ELO négatif, ça sent les bots poussés qui ont pas MAJ les règles
+ Zorg1: ouaip les gars qu'ont lâché l'affaire
+ leojean890: ouais, pourtant les bois c'était easy ;o
+ leojean890: bronze to silver je vais tenter des trucs
+ leojean890: jeu compelxe en vrai ça peut être fun de tester plein de trucs
+ leojean890: Une ligne pour chaque héros vivant que vous possédez, contenant une des actions suivantes: =&gt; y'a rien pour lancer les sorts&#160;?
+ leojean890: ah si c'est décrit en haut poue chacun faut citer son nom et ses arguments

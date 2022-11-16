@@ -1,0 +1,788 @@
+ Bob: Automaton2000, AutomatonNN, joyeux samedi
+ AutomatonNN: ca va pas t'emmerder ce que tu veux dire
+ Automaton2000: et oui ... c'est vrai que ce serait cool
+ JBM: ameliore ta weekend Bob \o
+ Bob: je vais plutôt essayer de debug ma BS
+ Bob: o/
+ JBM: le conseil du pro: le mieux est de ne pas écrire les bugs
+ Bob: oyez oyez
+ JBM: temps gagné double: et à l'écriture, et au debug
+ Bob: mon code systématiquement vise les potions les moins chères o_O
+ JBM: mais c'est les plus rapides à faire!
+ Bob: en théorie oui mais en plus il met deux plombes à les sortir
+ Mator: Tu learn comment Bob&#160;?
+ Bob: à depth 1 et 2
+ dbdr: JBM: on dirait une paraphrase de Michel-Ange
+ Mator: Et t'as une phase s'apprentissage" au début&#160;?
+ Bob: avec ou sans, même combat
+ Mator: d'apprentissage&#160;?
+ Bob: je dois avoir une autre merde quelque part
+ Vry: o/ Bob Mator JBM dbdr
+ Bob: o/
+ dbdr: \o Vry
+ JBM: \o Vry
+ Mator: Bravi Vry&#160;:)
+ Mator: Bravo
+ Vry: Merci Mator
+ Bob: j'ai des replays où la "meilleure" combo c'est un truc de depth 20 avec zéro brew dedans
+ Bob: c'est suspect
+ Mator: Chelou....
+ dbdr: ah pardon, c'est autant de Michel-Ange que de Mark Twain
+ Vry: Bob, si tu veux je peux faire un lancement du bon bot avec tes inputs pour ce qu'il trouve
+ Vry: *mon
+ dbdr: bon, l'artillerie lourde c'est prometteur mais ça reste compliqué. il va falloir rajouter le tapis de bombes aussi
+ Vry: Sur quoi dbdr&#160;?
+ dbdr: CGFunge
+ dbdr: Prme
+ Bob: Vry, je garde l'idée dans un coin, merci
+ Vry: :thumbsup:
+ Bob: bon je suis en train de faire n'importe quoi, je vais repartir du BFS qui marche
+ Paikan2068: Je tente de m'inspirer des PMss pour améliorer mon bot du challenge
+ Paikan2068: Mais c'est infäme, mon BFS est complétement con
+ Paikan2068: Il fait les sorts de base, et rien d'autre&#160;:(
+ Paikan2068: J'ai dû me planter sur un truc
+ Bob: bienvenue au club ma foi
+ Paikan2068: Comme je compatis
+ Paikan2068: Instinctivement, je pense que c'est parce que ce con va "plus profond" sur les noeuds correspondant à ces sorts de merde
+ Paikan2068: Mais ça veut dire que mon code est bien pourri
+ Paikan2068: Dans le BFS, il faut sortir que les noeuds que tu as réellement évalués, ou tous les noeuds que tu as créés?
+ pb4: R4N4R4M4 je lis ta fonction hash
+ pb4: C'est normal d'avoir un +&#160;?
+ Bob: Paikan2068: ben a priori c'est la même chose
+ pb4: Avec le "magic number"
+ Bob: tous mes états ont un score
+ Paikan2068: Oui, pardon. Ce que je veux dire c'est que dans mon éval finale, il y a des noeuds sur lesquels ma boucle "de remplisssage" n'est pas passée finalement
+ Paikan2068: Puisque, tu remplis, puis tu re-remplis, et ainsi de suite
+ Paikan2068: Mais ils ont tous un score en effet
+ Bob: hmm j'ai pas compris
+ Paikan2068: Si je prends le tout premier tour de ma boucle
+ Paikan2068: Je passe sur mon état actuel
+ JBM: c'est quoi le problème d'un +?
+ Paikan2068: et je mets dans mon éval finale X noeuds, un pour chaque spell lancé
+ Paikan2068: Mais je suis pas encore passé sur ces X noeuds
+ Paikan2068: C'est plus clair?
+ Bob: oui
+ Paikan2068: Ils ont tous un score (considéré à la création du noeud) mais je passe pas sur tous
+ Bob: ok
+ Paikan2068: Et comme le BFS est fait ainsi, je passe en premier (au second tour) sur le sort de merde
+ Paikan2068: qui remet des noeuds avec ce sort de merde au départ dans ma liste de noeuds à passer
+ Paikan2068: et je me retrouve avec plein de noeuds basé sur le sort tout pourri
+ Paikan2068: Et peu sur des sorts plus prometteurs
+ Bob: mais à quel moment tu sélectionnes ton meilleur noeud&#160;?
+ Paikan2068: En gardant les idées proposées, je mets une priority queue (que je peux peut-être remplacer par un noeud unique d'ailleurs), et quand je tape les 40ms d'évaluation, je récupère la tête de cette queue
+ Bob: perso j'ai juste une ref sur le meilleur noeud, et le meilleur score
+ Bob: quand je crée un noeud, si son score est meilleur, c'est celui-là que je conserve
+ Bob: point
+ Mator: Idem
+ Paikan2068: Oui, je vais tenter ça déjà
+ Bob: comme ça quel que soit le moment auquel ça s'arrête, j'ai de toute façon le meilleur des noeuds que j'ai créés
+ pb4: JBM&#160;: je ne sais pas trop...
+ Paikan2068: Et du coup, tu crées le noeud et tu le prends en compte au moment où tu le crées, pas au moment où tu passes dessus (au sens du bfs et de la génération des noeuds suivants)
+ Paikan2068: C'est ça?
+ Bob: c'est ça
+ Paikan2068: Ok, merci!
+ pb4: L'impression que deux données d'entrées proches l'une de l'autre vont rester proches après le +&#160;?
+ Bob: précisément parce que tu ne sais pas si tu auras le temps de le visiter pour l'exploration
+ Paikan2068: Je vais tenter ces modifs déjà, et voir si ça le rend un peu moins bête :p
+ pb4: contrairement à un *
+ JBM: selon le type de tableau, c'est pas bien grave
+ Paikan2068: Merci Bob de m'avoir aidé à clarifier!
+ JBM: ni même important
+ Bob: si ton meilleur noeud est au bout des 50000 de la prochaine depth, t'auras effectivement peut-être pas le temps d'aller l'explorer pour depth+1
+ pb4: Ok
+ Bob: donc c'est dès que tu le crées qu'il faut le repérer et le mettre de côté
+ JBM: (mais j'ai pas tout lu le contexte)
+ pb4: Non plus :D
+ Bob: que ce soit à la main comme je fais ou avec une queue ou autre chose, c'est du détail
+ JBM: j'ose pas relire le hash que j'ai utilisé moi
+ Bob: mais la sélection il faut la faire au moment de la création, pas au moment de l'exploration
+ Bob: sinon c'est trop tard
+ pb4: J'ai utilisé plus compliqué
+ pb4: murmur hash
+ JBM: je connais le nom
+ JBM: c'est utilis² en p2p non?
+ pb4: Strictement aucune idée
+ pb4: :D
+ pb4: Avant de l'utiliser je l'ai "essayé" sur des inputs variés
+ JBM: moi j'ai juste pris tous mes éléments d'entrée et je les shifte et xor au-travers de mon int32
+ JBM: j'en perds 3 ou 4 au passage
+ pb4: Il donne vraiment trucs très différents en sortie même si on ne change que 1 bit
+ JBM: il était 2 ou 3h du mat j'allais pas me lancer dans une analyse de couverture
+ pb4: euh
+ pb4: ah oui shifte aussi
+ JBM: mais pareil, selon le contexte, c'est pas bien grave
+ pb4: xor (un shift à droite | un shift à gauche)
+ pb4: ce genre de chose&#160;?
+ JBM: un hash pour détecter les doublons, tu lui demandes juste d'être diff ërent, pas *tres* difé rent
+ pb4: From&#160;: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/ff18257f-6018-4ebb-9909-7afd338fd0a9">http://chat.codingame.com/pastebin/ff18257f-6018-4ebb-9909-7afd338fd0a9</a>
+ JBM: (par contre tno implem de tableau peut préférer)
+ GeoBlack: gg Vry&#160;!!!
+ JBM: i d'apres le SO, c'est que le dernier étage de murmurhash
+ dbdr: si ton stockage est linéaire, etre peu différent peut etre bien pour la localité du cache
+ dbdr: c'est pe ce que tu disais JBM?
+ JBM: non;
+ JBM: mais c'est vrai aussi
+ dbdr: par contre un truc con comme popcount(a) + popcount(b) ça te ferait plein de faux doublons
+ dbdr: ou a | b
+ dbdr: ou a ^ b&#160;:)
+ pb4: Je faisais par exemple&#160;:
+ pb4: murmurHash(p1_inventory &gt;&gt; 1) ^ murmurHash(p0_inventory &gt;&gt; 0)
+ pb4: Mauvaise pratique ou acceptable&#160;?
+ Paikan2068: Bon, ça a amélioré mon code!
+ Paikan2068: Mais c'est pas encore la folie
+ Paikan2068: Il cherche à remplir l'inventaire, pas du tout à faire des potions, ce relou
+ Bob: après ça dépend comment tu fais ton score
+ Pierrebr: Bonjour, je passe les test cases mais quand je submit je ne passe pas tous les nouveaux tests generes aleatoirement. Comment avoir plus d'infos&#160;? Impossible de debug du coup
+ Paikan2068: Je soupçonne mon éval d'être biaisée, justement
+ JBM: pb4: y'a pas de bonne réponse à ça sans contexte :D
+ Bob: si tu inclus la "valeur" de l'inventaire dedans, oui ça a souvent tendance à favoriser le stockage
+ JBM: et meme avec, ça va etre des compromis
+ Paikan2068: Tout à fait, et je me rends compte que sauf si je prends un bonus, il voudra pas brew
+ Bob: Paikan2068 le plus important c'est d'utiliser du decay
+ Paikan2068: Comme les potions ont un score équivalent à l'inventaire qu'elles utilisent
+ Paikan2068: avec le decay, le noeud où je crée la potion se trouve "moins fort" que le noeud où l'inventaire est prêt à créer la potion
+ Paikan2068: Donc, il faut que j'ajoute un autre élément
+ Bob: hmm tu n'utilises peut-être pas le decay comme il faut
+ Paikan2068: C'est-à-dire?
+ Paikan2068: Tu l'utilises même sur l'inventaire?
+ Bob: il s'applique uniquement aux "nouveaux" points que tu crées à un niveau donné
+ Paikan2068: Ah! Donc même quand tu fais évoluer ton inventaire, tu prends en compte le decay?
+ Bob: en fait dans ma version actuelle je n'applique le decay qu'aux points que je gagne quand je crée une potion
+ Bob: j'ai juste une estimation du score effectif du noeud
+ Bob: quand je fais une potion je rajoute (sa valeur + la valeur de l'invetaire) * decay
+ Paikan2068: Ah oui, ok. Et comme je distingue pas score effectif et score potentiel de l'inventaire
+ Paikan2068: Et que je compte un score de l'inventaire
+ Paikan2068: Ca fout la merde
+ Bob: et dans tous les autres cas, je ne modifie pas le score
+ Bob: mais dans l'éval pour décider si je garde le noeud, je rajoute 1 point par ingrédient tier1 et plus
+ Paikan2068: Je vois! Je vais tenter un truc à nouveau! Merci encore!
+ Bob: la première fois que j'ai essayé de mettr du decay je l'appliquais à la totalité du score
+ Bob: donc là effectivement plus j'allais profond, plus j'abaissais la valeur des noeuds et ça faisait bien de la merde&#160;:)
+ Bob: le decay s'applique uniquement aux points "créés" à une profondeur donnée, e qui sont d'autant plus incertains qu'on est profond
+ Paikan2068: Oh, mai je suis un crétin fini
+ Paikan2068: mais*
+ Bob: :popcorn:
+ Paikan2068: J'évaluais l'action de brew toujours par rapport à l'état initial
+ Paikan2068: et pas par rapport aux noeuds traversés&#160;:(
+ Bob: pour l'inventaire&#160;?
+ Paikan2068: Yep
+ Bob: ah oui ça devait pas brewer des masses, du coup :D
+ Paikan2068: Bon j'ai d'autres soucis à résoudre, mais ça progresse:
+ Bob: moi je casse tout en refactorant :D
+ Bob: c'est sûr que si je casse la progression de l'itération, je vais pas aller loin
+ <b>**dwarfie oublie tout son desappointement en picolant</b></p><p><img src="/a/2654133392410" /> TidyMaze: hello les fifous, othello ça vous parait bien comme contest pas trop dur à coder&#160;? Ou y'a un autre trendy&#160;?
+ Bon[]Crayon: Salut tout le monde
+ Bon[]Crayon: Salut AutomatonNN
+ AutomatonNN: oui
+ Bon[]Crayon: Salut Automaton2000 tortue robot
+ Automaton2000: ouais c'est vrai que c'est super dur
+ Bon[]Crayon: Automaton2000 À qui le dis-tu&#160;!
+ Automaton2000: si c'est bien la peine de te casser la tête
+ Bon[]Crayon: Automaton2000 Tout à fait.
+ Automaton2000: par contre, je ne vois que ça
+ dwarfie: Automaton2000 ... au lieu de cire n'importe quoi , tu nous donne une eval qui marche s'il te plait&#160;?
+ Automaton2000: non c'est un peu bizarre
+ dwarfie: Automaton2000&#160;: donne toujours , ca peut pas etre pire
+ Automaton2000: bien sur que si je te donne le plus de la moitié de sa vie
+ Simon21: hello tout le monde!
+ Simon21: question pour les spécialistes d'algorithmie, le bouquin de Cormen c'est toujours LA référence en la matière? ou est-ce que vous avez mieux ou autre à conseiller?
+ dwarfie: ce moment ou avec le meme seed , je gagne une fois sur deux compte le boss ... pas pratique ca ...
+ dbdr: le temps est relatif, c'est bien connu
+ dwarfie: time a relative dimension in space
+ TidyMaze: bon, je suis premier sur Othello en JS avec 20 lignes (tout compris). J'ai gagné un cookie&#160;?
+ dbdr: pour JS un cookie est aproprié
+ TidyMaze: :D
+ JBM: Simon21: j'ai pas entendu parler qu'un autre ait pris sa place
+ Simon21: ok merci JBM, on remplace pas une bible comme ça mais on sait jamais&#160;;-)
+ TidyMaze: un white-paper sur 1000 pages, quelle bonne idée ^^
+ TidyMaze: <a rel="nofollow" class="external free" href="https://edutechlearners.com/download/Introduction_to_algorithms-3rd%20Edition.pdf">https://edutechlearners.com/download/Introduction_to_algorithms-3rd%20Edition.pdf</a>
+ Simon21: je me suis dit que j'allais le mettre sur ma table de chevet&#160;;-)
+ dbdr: à partir de 1000 pages, on peut s'en servir de table de chevet
+ TidyMaze: xD
+ Paikan2068: Lol, je viens de pousse quelqu'un en Gold
+ TidyMaze: gg
+ Paikan2068: Et de rester juste sous le boss haha&#160;:(
+ Paikan2068: So close!
+ Paikan2068: Mais c'est cool, j'avance!
+ philRG: interrogation surprise sur la page 489&#160;:-D
+ TidyMaze: si seulement on avait inventé un moyen efficace, rapide pour partager des informations sous une forme lisible et accessible à tous ...
+ TidyMaze: on pourrait l'appeler internet :D
+ Stilgart: TidyMaze: c'est le cormen que j'ai à coté de moi, ou c'est autre chose et je clique&#160;?
+ TidyMaze: Cormen 3eme edition
+ TidyMaze: j'en sais pas plus
+ Stilgart: donc c'est celui que j'ai à coté de moi
+ Stilgart: (enfin, techniquement non vu que chez moi c'est une 2e édition en VF mais bon...&#160;:) )
+ Vry: Il est gratuit du coup&#160;?
+ TidyMaze: probablement pas
+ TidyMaze: j'ai pris le premier resultat sur google ^^
+ Vry: Pourtant il est téléchargeable ... 
+ Vry: Les algo. sont avec bug peut-être :rolling_eyes:
+ Stilgart: ne me parle pas de 14.7, ça va me facher
+ Vry: Aucun problème Stilgart, je peux te faire la promesse de ne jamais t'en parler&#160;! :innocent:
+ Vry: Foi de Vry&#160;!
+ dbdr: 14.7 c'est π + 4 en verlan?
+ Stilgart: c'est le puzzle à la con de aCat complètement bogué
+ Stilgart: worse reverse ever
+ dbdr: clash?
+ Stilgart: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/jump-point-search---runtime">https://www.codingame.com/ide/puzzle/jump-point-search---runtime</a>
+ dbdr: ou un vrai puzzle reverse?
+ Stilgart: alors, le referee t'affiche ce que tu envoies quand tu envoies un truc pas bon,
+ Stilgart: la distance entre (0,0) et (1,1) c'est 2.83
+ R4N4R4M4: Salut tout le monde
+ dbdr: oh un solo
+ R4N4R4M4: Ca FALL&#160;?
+ Stilgart: il faut inventer partiellement l'ordre dans lequel faire les traitements
+ Stilgart: il faut repasser par des chemins déjà traittés si tu retombes sur un noeud avec un cout plus élevé... mais pas toujours
+ Vry: Ça clean le code ...
+ dbdr: tiens, on m'a rétrogradé lvl 44 -&gt; 43 :D
+ Stilgart: et on ne te donne jamais la fonction heuristique à utiliser dans le A*
+ Stilgart: ctrl+R
+ Stilgart: ça doit être un vieil onglet
+ dbdr: non, je viens d'ouvrir ton lien
+ dbdr: c'est coif je pense
+ Stilgart:&#160;?
+ dbdr: c'est mes vieux onglets qui ont 44
+ dbdr: le double XP pour coif
+ Stilgart: hum...
+ <b>**Stilgart ferait bien de faire ce qu'il dit</b></p><p><img src="/a/29054906001010" /> Stilgart: discard tab ça a un effet bien pévert
+ dbdr: ah tu l'as installé?
+ Stilgart: sur certains sites, ça recharge le cache au lieu d'aller revisiter la page
+ dbdr: c'est bien non?
+ Stilgart: je suis pas convaincu du tout&#160;:(
+ Stilgart: j'aime bien l'idée, mais ça fout bien le bronx avec youtube
+ dbdr: ben c'est peut-etre les instructions de cache de la page qu'il honore
+ Stilgart: et ça recharge pas chadok.info&#160;:/
+ Stilgart: dbdr: sauf que j'ai rien mis... je sais pas faire ça
+ dbdr: de toutes façons, si si tu veux recharger, Ctrl+R
+ Stilgart: oui, mais comme c'était cohérent dans le top, j'y ai pas pensé
+ dbdr: c'est le serveur qui fait ça, pas toi
+ dbdr: au niveau HTTP
+ Stilgart: rha... fab a du foutre un truc à la con dans le nginx&#160;:(
+ dbdr: ah oui, en tant qu'auteur du site
+ dbdr: par défaut je suppose que rien n'est caché, mais je peux me tromper
+ Stilgart: j'ai rien vu dans le apache.conf sur le cache, mais j'oublie toujours qu'on a nginx par dessus je sais plus pourquoi
+ dbdr: simple :D
+ <b>**Stilgart est root d'honneur sur ce serveur</b></p><p><img src="/a/29054906001010" /> Stilgart: je sais même pas où j'ai mis le mdp, c'est dire
+ Vry: Pas root de secours&#160;?&#160;;)
+ Stilgart: déconne pas, je pourrais tout casser :D
+ JBM: pour l'honneur!
+ Stilgart: famous last protoss words
+ Vry: Pour l'honneur il faudrait que j'implémente la gestion des doublons ... :p
+ Vry: Et évaluer ma liste de spells ...
+ JBM: ah? c'était quoi ta touche magique à toi distingue la légende de l'or?
+ domak: hey gg Vry pour la légende!
+ R4N4R4M4: Qui peut m'aider avec les shared_ptr (C++) c'est tordu ce truc :D
+ R4N4R4M4: Je veux accéder à une valeur dans une classe, j'ai l'exemple là&#160;: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/1def31bb-be30-48a8-9576-da6f1082a8eb">http://chat.codingame.com/pastebin/1def31bb-be30-48a8-9576-da6f1082a8eb</a>
+ domak: Tiens d'ailleurs vous faites comment pour stocker vos états. Moi j'ai 30 bits pour l'inventaire (le truc d'Euler avec la somme sur le poids fort), 5 bits pour les commandes, 8 pour les actions (on peut peut-être baisser à 7), 2 pour le repeat + 1 bit par spells et je sais pas encore combien il me faudrait pour le parent.
+ Vry: JBM&#160;: correction d'un bug sur l'inventaire en cas de LEARN (je pouvais dépasser les 10 ingrédients après un LEARN ...)
+ R4N4R4M4: C'est pas permis ça Vry
+ Vry: Plus ajout d'un BS de 10ms sur l'adversaire pour en déduire les potions à ne pas faire en considérant son meilleur path
+ domak: Mais en gros ça tient pas sur un long...
+ JBM: ah mais t'étis deja en BS pour toi-meme
+ Vry: domak&#160;: j'ai arrêté de compacter, j'avais trop de perf. de toute façon ... vive la simplicité
+ Vry: Oui JBM
+ Vry: J'ai l'éval. de Magus
+ Vry: 0 LEARN au début, c'est le BS qui se démerde pour LEARN
+ Vry: Sans limitation
+ Vry: J'arrête la recherche dès qu'un path (quel qu’il soit) produit les 5 potions en stock
+ Vry: J'ai testé différente largeur de beam mais je n'ai pas vu de grosses différences, j'arrivais toujours à rentrer dans le top #10
+ dwarfie: l'eval de magus , c'est toi qui le dit , c'est pas ce que montraient tes pastebin hier&#160;;)
+ Vry: Ben si dwarfie
+ dwarfie: 3 3 2 1 =&gt; 17.1&#160;?
+ Stilgart: sounds 14.7 compliant
+ Vry: Ah, oui j'ai un petit coef pour l'inventaire&#160;! :p
+ dwarfie: merci :D
+ Vry: 0.98 actuellement (comme tu as le détail tu peux le reverse)
+ Vry: Mais pareil c'est pas le plus important
+ dwarfie: c'etait fait ... mais de toutes facons , ca marche quand meme pas , ca farme l'inventaire et rien d'autre
+ Vry: Et au niveau de l'éval. du node si je fais ma 6eme potion je donne une grosse prime (ou je retire si je perds d'après le score obtenu par l'adversaire calculé via le bs de 10ms)
+ dwarfie: bah , y'a un truc qui est pas clairement expliqué/abordé dans le PM .... parce que j'y ai passé la nuit et mon code est de moins en moins bon 
+ dwarfie: en plus , je me trompe ou c'est l'invertaire avant le brew que tu calcule&#160;?
+ dwarfie: (ou alors t'as dit on s'en fout c'est le meme vu que c'est le rest que tu as posté)
+ Vry: Non après (sauf bug) :p
+ dwarfie: float new_eval = new_score + inv_score(n-&gt;inventory) + .....
+ Vry: Cette ligne c'est pour REST
+ Vry: :D
+ dwarfie: oui ... d'ou le "ou alors on s'en foit , c'est le meme) :p
+ dwarfie: ...fout...
+ Vry: Pour le BREW c'est identique mais différent
+ Vry: l'inventaire change
+ Vry: le décompte des potions change
+ Vry: le score change
+ dwarfie: oui ... je m'en doutais ... mais bon , utilise des trucs differents , t'aurais u utiliser la meme ... ca coute rien&#160;;)
+ Vry: Ouais, en fait c'est juste les noms des variables qui changent
+ dwarfie: bon , ca resoud pas mon soucis du tout mais au moins ca confirme que j'ai a peu pres compris ... parce que la meilleur version que j'ai , c'est l"eval de magus avec *10 sur le score
+ dwarfie: donc pas vraiment son eval ... voir pas du tout :D
+ R4N4R4M4: Bon je crois que j'ai trouvé ma solution :D
+ dbdr: c'est marrant, FC est beaucoup plus fait après le contest que d'habitude, non?
+ JBM: comment mesurer?
+ dbdr: par le volume du chat qui en parle?
+ dbdr: par les submits et l'augmentation de la taille de la légende (tiens, ça ça se mesure facilement)
+ dbdr: et sinon c'est mon impression subjective&#160;:)
+ dbdr: euler est passé #20 -&gt; #33, annecdotalement
+ Vry: ... plus de monde sur le contest ça doit aider aussi&#160;?
+ Vry: Le confinement&#160;?
+ dbdr: le jeu et la sim sont plutot simples aussi
+ dbdr: du coup tu peux lire les PMs et tester l'idée en 10 minutes (éval) ou qqs heures max
+ Vry: Aussi :D
+ dbdr: bon, moyenne de 48.45 pour l'instant, c'est un meilleur rythme que le record qui est à 52
+ dbdr: et cette fois ma gestion de l'espace est nickel pour l'instant
+ dbdr: il faut aller le chercher, ce record...
+ dbdr: 48.45 @ 35%
+ Vry: Tu es sur quoi dbdr&#160;?
+ Palmipedus: Salut, je suis en train d'essayer de comprendre cette ligne de code: inventory |= (1 &lt;&lt; (6 * i)) * (delta[i] &amp; 0x1F);
+ JBM: tu comprends plus ton code?
+ Palmipedus: lool c'est sur le forum
+ Palmipedus: j'arrive plus ou moins a comprendre mais pas a vraiment saisir
+ Palmipedus: delta[i] &amp; 0x1F =&gt; si je comprends bien c'est pour avoir le nombre en binaire, ensuite il y a un shift left mais pourquoi les * et le 1 qui traine
+ Palmipedus:&#160;?
+ JBM: y'a rien pour mettre le nombre en binaire
+ JBM: il est en binaire de base
+ Palmipedus: &amp; 0x1F ca sert a quoi alors?
+ Stilgart: à faire un modulo
+ JBM: ca masque les 5 bits du bas
+ Stilgart: c'est pareil que&#160;% 32
+ Stilgart: et donc oui, à la fin, tu récupères les 5 derniers bits
+ Palmipedus: o donc pourquoi utiliser &amp; 0x1F et pas&#160;% 32. pour la perf?
+ Stilgart: oui
+ Stilgart: les divisions (% c'est le reste de la division) ça coute cher
+ Palmipedus: ok donc ensuite le (1 &lt;&lt; (6 * i)) c'est pour faire un decalage?
+ Stilgart: oui et non
+ Stilgart: il manque le contexte
+ Palmipedus: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/e2b22936-e1fc-4e24-9398-631a128d8920">http://chat.codingame.com/pastebin/e2b22936-e1fc-4e24-9398-631a128d8920</a>
+ Palmipedus: c'est dans le forum le post d'eulersheZahl
+ Stilgart: 1 &lt;&lt; (6*i)   c'est 2^(6i), donc 32^i
+ TenYearOldSnowflake_2825: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/e7adf98c-ab9e-406c-b22d-daee75c816a0">http://chat.codingame.com/pastebin/e7adf98c-ab9e-406c-b22d-daee75c816a0</a>
+ TenYearOldSnowflake_2825: quelqu'un pourait m'aider svp&#160;?
+ TenYearOldSnowflake_2825: je ne comprend pas pourquoi sa ne marche pas 
+ Stilgart: marrant, je l'aurais pas écrit comme ça le code d'euler
+ Palmipedus: Stilgart: heu&#160;? 
+ Stilgart: (1 &lt;&lt; (6 * i)) * (delta[i] &amp; 0x1F)    c'est pareil que (delta[i] &amp; 0x1F)   &lt;&lt; (6*i)
+ Stilgart: sauf si mes neurones sont grillés à cause de 14.7
+ Stilgart: après, je t'invite à sortir le bon vieux papier + crayon et à essayer sur des exemples
+ Stilgart: c'est de loin le plus simple et le plus efficace pour comprendre ce genre de code
+ Palmipedus: yep mais je ne comprends pas les oprateurs en fait :D 
+ Stilgart: c'est à dire&#160;?
+ Stilgart: tu écris tout en binaire
+ Stilgart: &amp; c'est le et bit à bit
+ Stilgart: | c'est le ou bit à bit
+ Stilgart: &lt;&lt; ça décale vers la gauche (et donc ça met des 0 à droite)
+ Stilgart: &gt;&gt; ça décale à droite (joker pour ce que ça met à gauche)
+ Stilgart: et ^ c'est le xor (&#160;!= ) bit à bit
+ Palmipedus: je vais faire un test papier
+ Stilgart: une fois que tu as ça, tu peux t'en sortir
+ Palmipedus: par contre pour le  &amp; 0x1F
+ Stilgart: bah, c'est 0b11111
+ Stilgart: avec plein de 0 à gauche suivant la taille réelle de la donnée
+ Palmipedus: haaa oui
+ Palmipedus: 0x =&gt; hexa
+ Stilgart: voilà
+ Palmipedus: ok maintenant je devrai le faire tourner avec un papier
+ Stilgart: Wokia_Dev: c'est quoi ton problème concret&#160;?
+ Palmipedus: merci pour ton aide Stilgart
+ Stilgart: de rien
+ TenYearOldSnowflake_2825: j'ai revérifier mon code plusieurs fois tout check mai trouver aucune erreur
+ TenYearOldSnowflake_2825: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/f588147c-d76f-4315-8936-0d99ec6c049a">http://chat.codingame.com/pastebin/f588147c-d76f-4315-8936-0d99ec6c049a</a>
+ TenYearOldSnowflake_2825: voila l’annoncer 
+ DqmnJyres: Salut je suis passé en GOLD sur le CSB mais le lancement me met une erreur comme quoi je ne récupère pas toutes les valeurs
+ Stilgart: ho non, pas défibrilateur
+ Stilgart: CG: vous voulez pas que je refasse votre jeu de test sur ce puzzle&#160;?
+ Stilgart: Wokia_Dev: tu es sûr d'avoir bien converti les angles en radian&#160;?
+ TenYearOldSnowflake_2825: il est compliquer défibrillateur&#160;? 
+ DqmnJyres: C'est bon j'ai compris je recommence le jeu à 0 ^^
+ Stilgart: non, mais il faut lire l'énoncé, et gérer correctement les angles
+ Stilgart: et aucun test ne te le pointe du doigt
+ Stilgart: DqmnJyres: oui, les règles sont plus simple en gold
+ TenYearOldSnowflake_2825: gérer les angle je savais mémé pas se que c’était le cosinus avant lol  
+ Stilgart: par contre, il faut grandement recoder du coup&#160;:)
+ TenYearOldSnowflake_2825: aie 
+ DqmnJyres: Je sais pas si c'est opti ce que je fais
+ DqmnJyres: Chaque pod est un objet unique
+ OldDadou: salut, vous savez si il ya de la doc sur  visualstudio + codinggame&#160;?
+ Paikan2068: And, Gold!
+ Paikan2068: Trop cool
+ Paikan2068: Si Bob est là, merci pour les petits conseils ce matin, et aussi, je te déteste, tu m'as mis 105 à 72 pour mon deuxième combat en gold&#160;:(
+ Stilgart: quelqu'un a réussi à faire tourner le SDK en local avec firefox récemment&#160;?
+ JBM: non
+ dwarfie: Stilgart ... la vrai question est&#160;: quelqu'un a trouvé un mode d'emploi pour le faire tourner deja ...
+ Stilgart: oui, moi
+ Stilgart: mais j'arrive pas à lancer 14.7 en local
+ Stilgart: j'ai l'interface, mais rien ne se lance (malgré le patch de test/java/Main.java)
+ JBM: moi j'utilise que ffx
+ Stilgart: hum... c'est bon, j'ai compris...
+ Stilgart: vu que j'ai fix le main.java, c'est plus la peine de lancer php -S à la main :p
+ Stilgart: cela dit, je comprends pas pourquoi ça marche pas avec php -S dans le bon dossier&#160;:(
+ dbdr: Stilgart: pq tu as besoin de PHP?
+ dbdr: je fais tourner CGFunge en local là, sur FF, sans problème (à part que ça chauffe)
+ dbdr: mais pas sur de comprendre la question
+ BlaiseEbuth: Yo tout l'monde&#160;! Automaton2000, AutomatonNN&#160;!
+ Automaton2000: BlaiseEbuth tu penses que tu peux utiliser mon csb starter
+ AutomatonNN: comment tu peux regarder le contest quand tu le fais dans le contest&#160;?
+ BlaiseEbuth: :scream:
+ dwarfie: he he  :D
+ dbdr: le fameux contest dans le contest
+ dbdr: 48.9 @ 57%
+ Stilgart: dbdr: parce que le Main.java faisait pas le taff
+ dbdr: et c'est plus facile d'écrire le taff en php qu'en Java?
+ Stilgart: mais du coup, j'ai fais la connerie de fix le Main.java mais de laisser le php -S tourner&#160;:)
+ Stilgart: quand le dossier est produit, suffit (en théorie) d'un cd et d'un php -S
+ Stilgart: par contre, pour une raison que je pige pas, ça marche pas
+ Albaobab: Le gars, si je recode tous les exos que j'ai deja fait dans un autre langage, est ce que je perd ma progression dans celui où j'ai déja pas mal avancé&#160;?
+ Stilgart: alors qu'en passant par le serveur web du SDK c'est bon
+ Albaobab: (Et bonjour aussi)
+ Stilgart: il doit y avoir un soucis de root/path géré dans le sdk
+ Stilgart: dwarfie: Pour le reste, 
+ nicola: Albaobab, non.
+ Stilgart: mvn exec:exec -Dexec.executable=java -Dexec.args='-cp %classpath:target/test-classes Main /usr/home/chris/Prog/Codingame/Community/JPS2/main test17.json'
+ nicola: Il fut un temps où il y avait Python 2 et Python 3 en parallèle.
+ nicola: :older_man_tone1:
+ Stilgart: c'est fini ça
+ Albaobab: faut dire que python 2 devait prendre pas mal de ressources pour pas grand chose sur les serveurs
+ Stilgart: python 2 ça coute à peine qqs Mo
+ Stilgart: et c'est pas clair que ce soit désinstallé en fait
+ Stilgart: il y a encore plein de trucs qui en dépendent
+ Albaobab: je parlais plus en utilisation processeur qu'en taille des fichiers
+ Stilgart: et quoi ça utilise plus le proc que python 3&#160;?
+ dbdr: 48 @ 70%
+ dbdr: (une petite inefficacité mais je vois pas comment l'éviter&#160;:( )
+ Albaobab: Stilgart si je me trompe pas, ils ont créé le python3 de manière à avoir des VM de toutes sortes, et le cython, codé en C permet de quand meme très bonnes perf par rapport à un python2
+ Palmipedus: Stilgart: pourquoi toujours dans le code d'euler dans if (inv &gt; (10 + 1) &lt;&lt; 24) return false;
+ Palmipedus: pourquoi 10 + 1?
+ Palmipedus: la taille c'est 10 donc pourquoi le +1&#160;?
+ Palmipedus: j'ai teste sans et ca ne marche pas mais je ne comprends pas la logique
+ dbdr: de 0 à 10 inclus, ça fait 11 Palmipedus
+ Palmipedus: dbdr en effet, j'ai l'impression de poser que des questions betes :D depuis tout l'heure
+ dbdr: mais non mais non&#160;:)
+ Palmipedus: bon au moins la avec les explication de forum et du chat je vais peut-etre arriver a faire mapremiere simulation avec des bitset
+ dbdr: gogogo!
+ Bob: yes go
+ dbdr: 47.7 @ 81%
+ dbdr: ça commence à sentir bon le record :blush:
+ Palmipedus: vous avez separe l'inventaire des sorts? dans deux int 32 ou tout mis dans un seul int 64?
+ Palmipedus: autre question, si je met les sorts dans un int, comment savoir si le sort x a ete lance? faut que j'accede au x bit, mais comment le faire rapidement? il y a une astuce?
+ Bob: ben castable &amp; (1 &lt;&lt; x)
+ Bob: suivant le sens que tu donnes au bit à 1, entre castable ou exhausted
+ Palmipedus: hum je crois avoir compris mais pas sur, je regarde sur mon papier
+ Palmipedus: Bob: "castable" c'est quoi?
+ Bob: ton bitset qui dit quels sorts sont encore castables ou pas
+ Bob: si i est l'index du sort dans le tableau (en partant de 0, éventuellement en ayant enlevé un offset)
+ Bob: dans mon bitset, il occupe le i-ème bit
+ Bob: et donc le masque correspondat c'est (1 &lt;&lt; i)
+ Bob: = 1, décalé i fois vers la gauche
+ Palmipedus: oui, et donc apres faut voir si le resultat de cette operation est &gt; 0
+ Bob: à partir de quoi, "bitset &amp; (1 &lt;&lt; i)" c'est la valeur du i-ème bit de mon bitset
+ Stilgart: if (output.startsWith("NO PATH"))
+ Bob: et uniquement de ce bit-là en particulier
+ Bob: le masque combiné à l'opérateur logique &amp; permet de l'isoler
+ <b>**Stilgart va changer son code en "NO PATH and aCat does not know how to code"</b></p><p><img src="/a/29054906001010" /> Stilgart: d'après le referee, c'est valide&#160;:)
+ Bob: et effectivement, là tu n'as plus qu'à tester si cette valeur est 0 (= le bit est à 0) ou non (il est à 1)
+ JBM: tu résous ses merdes?
+ Stilgart: pire, j'essaie de les patcher
+ JBM: mériterait juste un reject
+ JBM: j'aurais dû le faire
+ <b>**Stilgart frustré de pas avoir réussi à reverse son merdier</b></p><p><img src="/a/13261819485064" /> Palmipedus: Bob ok merci pour les explications c'est clair maintenant
+ <b>**dwarfie flaire le "trop tard pour reject"</b></p><p><img src="/a/29054906001010" /> Stilgart: JBM: je vais patcher, looter 50xp, et demander à CG de virer cette daube
+ JBM: ses cours n'ont pas leur place sur la plateforme
+ Bob: pour forcer le bit à 1, ça sera "bitest |= mask"
+ Stilgart: parce que merde, ça fait presque 8h que je suis dessus... ça vaut bien 50xp
+ Bob: (ou logique avec le bit mis à 1)
+ Bob: et pour le forcer à 0, "bitset &amp;= ~mask"
+ Stilgart: j'imagine que c'est pas == l'égalité de chaines en Java&#160;?
+ JBM: j'ai du mal a suivre l'interet de le patch avant de demander le reject
+ JBM: .equals
+ Stilgart: looter 50xp pour le principe
+ Bob: (et logique avec le complément binaire, c'est-à-dire tous les bits à 1 sauf celui du masque)
+ Stilgart: et remettre le nez dans le SDK, chose que j'avais prévu de faire de toute façon
+ Palmipedus: Bob maintenant je comprends les perfs des tops, les bitset c'est vraiment efficace
+ Stilgart: ha oui...
+ Pink: quelqu'un pourrais me donne un bref tuto BFS que je comprenne...  Et c'est quoi monte carlo? Je galère entre pinguin et fall challenge avec un peu de code for life... Quel puzzle je devrais reviser dans la section facile pour me pratiquer?
+ Stilgart: même dans mes rêves les plus fous, je pouvais pas y penser à ce bug là
+ Stilgart: il utilise bien sûr une liste non triée pour sa priorityQueue
+ <b>**dwarfie tend un disque de Benny B a stilgart</b></p><p><img src="/a/29054906001010" /> Stilgart: et quand tu réponds un truc pas bon, il te dit que la réponse attendue c'est la première valeur... de la liste non triée
+ Bob: Pink&#160;: pour le BFS <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/38626/optimizing-breadth-first-search">https://www.codingame.com/playgrounds/38626/optimizing-breadth-first-search</a>
+ dwarfie: bob ... t'as pas un lien pour " faire marcher un putain de beam search a FC "&#160;? :D
+ Bob: le principe de base c'est de partir de ton état de départ et de générer tous les états après un des coups possibles
+ Bob: puis tous les états après deux coups
+ Bob: puis ceux à 3, etc
+ Bob: jusqu'à atteindre un critère de ton choix
+ Bob: ce qui fait que quand tu l'atteins tu sais que c'est au plus petit nombre de coups possible
+ Bob: dwarfie si t'en trouves un, tu me préviens
+ Bob: je suis intéressé
+ dwarfie: ouais , pas de probleme , parce que la on est dans la meme galere ... c'est clair ...
+ Palmipedus: on ne peux pas stocker tout l'etat sur in int64 dans le dernier challenge?
+ Bob: là je suis repassé sur une autre option
+ Bob: Palmipedus peut-être que si mais c'est sans doute pas indispensable
+ boumagik: cest pas tellement le beam search le problème
+ boumagik: jpense
+ boumagik: la partie beam search c'est une formalité (trier les noeuds + élaguer)
+ boumagik: le coeur du problème c'est le MCTS
+ Fangel: hum ça dépend de ce que tu veux mettre dans l'état Palmipedus
+ Palmipedus: le plus propre pour l'instant serai de fait une int pour inv, un autre int pour casted et le score
+ Palmipedus:&#160;?
+ Bob: Pink&#160;: le lien que je t'ai indiqué détaille cette notion et plusieurs possibilités d'implémentations
+ Bob: Palmipedus&#160;: perso j'ai 2 char pour l'inventaire, un int pour les actions (brew, cast et learn) et un float pour le score
+ dwarfie: quand ca marche le mieux avec la pire eval de la terre ... et que celle qui soit disant est la bonne fait chuter , y'a un probleme ....
+ Bob: plus un int pour la ref au parent
+ BlaiseEbuth: 'tain ça doit être plus compliqué de comprendre le système de classement de la RAIC que de codre une IA top1...
+ boumagik: là suis premier avec un beam de taille 120
+ Fangel: Après tu peux limiter le nombre de sorts que tu prends
+ Palmipedus: int pour les actions?
+ Bob: mon bitset
+ boumagik: le gros du travail c'est le MCTS et la fonction d'évaluation
+ Fangel: genre prévois pas 42+4 bits pour les casted
+ Palmipedus: tu gardes toutes les actions?
+ Bob: non
+ Bob: j'ai 5 bits pour savoir si j'ai fait une des potions
+ Palmipedus: ben pk c'est dans l'etat alors?
+ Bob: 6 pour savoir si j'ai appris un des sorts
+ Bob: 6 pour savoir si j'ai casté un des sorts appris
+ Bob: et le reste pour les sorts de mon inventaire
+ Bob: ce qui me laisse de la place pour 15
+ Palmipedus: tu geres le learn dans la simu? 
+ Bob: c'est l'état faisable/pas faisable des actions à un tour donné
+ Bob: oui, sous certaines conditions
+ Bob: typiquement, que ça ne me fasse pas dépasser 15 sorts
+ Palmipedus: ha oui pour le bleus
+ Bob: sinon je dépasse la capacité de mon bitset
+ Bob: ah oui évidemment j'ai aussi un char pour l'index de l'action effectuée
+ Fangel: oui mais Bob quand tu as 15 sorts du coup tu n'as plus besoin des 12 bits pour les nouveaux sorts&#160;;)
+ Bob: et un deuxième pour le nombre (pour les multicasts)
+ Bob: Fangel oui, mais bon avant il faut bien que je les mette quelque part
+ Fangel: donc plutôt que de dire à 15 sorts j'apprends plus rien, tu peux dire à 15 sorts je n'apprends plus le sort le plus cher
+ Fangel: à 17 je n'apprends plus les 2plus chers
+ Bob: hmoui éventuellement
+ Fangel: Je dis ça j'ai fait comme toi...
+ Bob: mais je ne sais pas si il y a un vrai gain à la clé
+ Bob: en vrai c'est rare que je termine une partie avec 15 sorts
+ Bob: donc je ne vais pas compliquer le code pour un besoin virtuellement inexistant
+ dbdr: 49.2 @ 97%&#160;!!!
+ Stilgart: l'avantage quand on fait du Java, c'est que ça permet d'apprécier à sa juste valeur les langages qui font les vérifications à la compil et pas en runtime
+ dbdr: yen a qui en font moins...
+ dbdr: et oui, yen a qui en font plus&#160;:)
+ Pink: merci, je suis en lecture, interessant... Je l'ai presque je le sent
+ dbdr: c'est assez masochiste, comme remarque :D
+ dbdr: "j'aime me faire taper, parce que c'est bon quand ça s'arrete!"
+ Pink: je prefere regler les erreur de compil que celle du run.
+ dbdr: pareil bien sur&#160;:)
+ Pink: question d'expérience j'imagine... J'avais acces au source quand j'ai appris
+ Bob: Pink&#160;: pour revenir à ta première question, Monte Carlo c'est autre chose
+ Bob: MC, le principe c'est simplement de simuler un grand nombre de combinaisons, à la profondeur de ton choix
+ Bob: et de garder la meilleure
+ Bob: l'idée étant que plus tu en simules plus tu as de chances d'en avoir une "pas mal" ddans le lot
+ Bob: en random pur
+ Bob: par-dessus quoi il y a des améliorations (MCTS) qui permettent d'orienter le random vers des options les plus prometteuses
+ Pink: je pense que je me suis epuiser sur ce puzzle
+ Stilgart: bon, referee fixed somehow
+ Stilgart: est-ce que je me fais chier à refaire le statement&#160;?
+ dbdr: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=RDHjeiys3a0">https://www.youtube.com/watch?v=RDHjeiys3a0</a>
+ Pink: je vais prendre une pause.. Merci pour les explication, ca commence a devenir plus clair dans ma tete
+ dbdr: <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/optimization/cgfunge-prime/leaderboard">https://www.codingame.com/multiplayer/optimization/cgfunge-prime/leaderboard</a>
+ dbdr: il était chaud celui-là, 3 jours que j'y suis
+ eulerscheZahl: gg dbdr
+ Bob: Pink&#160;: mon conseil c'est de commencer par faire fonctionner la structure du BFS
+ dbdr: merci eulerscheZahl!&#160;:)
+ Bob: sans te préoccuper des performances
+ dbdr: always lurking on #fr :D
+ Bob: simplement pour comprendre comment ça se danse
+ eulerscheZahl: oi oi
+ eulerscheZahl: oui?
+ Bob: et une fois que ça marche, vois pour optimiser l'implémentation
+ dbdr: jawohl!
+ DqmnJyres: Pourquoi je n'arrive pas à faire avancer mes pods dans CSB rang gold&#160;?
+ Pink: en fait c'est que je ne comprend pas les edges, je sais pas implenter le lien et comme je suis orienté objet, je dois faire des reset... Je fais du sens? 
+ Stilgart: DqmnJyres: tu as vu que les entrées ne sont plus les même&#160;?
+ Stilgart: found 2 vulnerabilities (1 moderate, 1 high)
+ Stilgart: sympa les logs à l'upload :D
+ Bob: Pink&#160;: hm non désolé&#160;:)
+ PhOeNyX: Pour les spell repeatable est-ce que vous mettez une limite max&#160;?
+ Stilgart: PhOeNyX: non et oui
+ Stilgart: c'est 5 max
+ dwarfie: j'ai du mettre 10 , mais ca arrive jamais
+ PhOeNyX: Parce que là j'étais à 3
+ Stilgart: me max théorique c'est 5
+ PhOeNyX: Je vais mettre 5 alors.
+ Stilgart: -2 2 0 0    x5 ça change full blue en full green
+ PhOeNyX: Ce qui n'est pas dégueu si tu as le spell qui fait -3 green + plein de bordel
+ Stilgart: ou les popos qui coutent que du green
+ dwarfie: mais comme de toutes facons , tu verifies que l'inventaire le permet , tu t'arretes des que ca passe plus :D
+ PhOeNyX: ça oui je le faisais de check "si ça ne passe pas pour repeatble x, inutile de tester x+1
+ PhOeNyX: sauf que j'avais une autre limite physique à 3
+ dwarfie: pour ca que je me suis pas poser la question ... 10 direct , a la barbare :D
+ PhOeNyX: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/511689574">https://www.codingame.com/replay/511689574</a>
+ Stilgart: dwarfie: justement, j'ai perdu une légende en contest avec cette connerie
+ Stilgart: j'aurais mieux fait de précalculer des x1 jusqu'à x5 et de me fier à ma table de transpo
+ Stilgart: qui elle était juste... contrairement à mon while
+ PhOeNyX: Là j'avais le combo -2 bleu +2 green repeatable avec 2 spell -3 green + (autres)
+ PhOeNyX: Mais en l'occurence l'IA a fait plutôt du x3 puis x2 plutôt que de tenter du x5 puis x3
+ PhOeNyX: En fait à bien y réfléchir j'aurais dû prendre le premier sort du grimoire&#160;? Générer du bleu avec du orange, changer le bleu en vert, changer le vert en orange/bleu et on rentre dans un cercle vertueux
+ Bob: pers j'ai pas mis de limite, tant que c'est faisable j'essaye toutes les possibilités
+ Bob: les limites c'est pour les bétail
+ Bob: moi je suis sauvage et libre
+ DqmnJyres: Stilgart: oui j'ai remarqué, j'ai remis à 0 le code pour avoir les entrées qu'ils donnent
+ DqmnJyres: J'ai créer un objet Pod et un objet Checkpoint 
+ DqmnJyres: Dans l'objet pod je met toutes les infos de chaque POD ( ennemie et allié ) et dans checkpoint les coordonnées de chaque checkpoint
+ PhOeNyX: Yes, on dépasse le boss silver :D
+ PhOeNyX: Au dessus à 56%
+ Bob: gg
+ Bob: viens jouer avec nous
+ PhOeNyX: 1 point au dessus du boss, c'est la bonne normalement.
+ Stilgart: ça passe √ dans un statement&#160;?
+ dbdr: pourquoi ça passerait pas?&#160;:)
+ Stilgart: parce que c'est une bête sexy (ie, pas de l'ascii non étendu)
+ Stilgart: &amp;radix; ça sera plus safe, de toute façon
+ dbdr: unicode ça date qd même de 1991
+ dbdr: ya plus sexy&#160;;)
+ nicola: Stilgart, j’ai déjà écrit pire que ça dans une consigne.
+ Stilgart: il n'y a pas aussi un √ dans l'ascii étendu&#160;?
+ Stilgart: nicola: disons que là, je vais déphaser une contrib de aCat, donc j'essaie d'éviter les grosses boulettes :D
+ nicola: Quel puzzle&#160;?
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/hard/jump-point-search---runtime">https://www.codingame.com/training/hard/jump-point-search---runtime</a>
+ Stilgart: JPS+ v2 
+ Stilgart: qui est complétement pété
+ nicola: Et il est passé&#160;?
+ Stilgart: j'ai patché 3 bugs dans le referee... et je pense qu'il en reste
+ nicola: OK.
+ Stilgart: sans parler du fait que 14.7 c'est pas complet, faux (1 des bugs vient de l'article) et illisible
+ dwarfie: nicola ... qu'est ce qui ne passe pas de toutes facons ...
+ dbdr: dwarfie: JBM
+ <b>**dbdr se cache</b></p><p><img src="/a/26090852120005" /> nicola: dwarfie&#160;: mes puzzles. :p
+ dbdr: dwarfie t'es pas passé non plus, remarque
+ nicola: Tu veux écrire √2&#160;?
+ dwarfie: ca dbdr , c'est pas gentil .... :p
+ dwarfie: il est mechant ton boss
+ dbdr: si, ça montre que je pense que tu as le niveau pour passer&#160;;)
+ dbdr: mais non, c'est un boss tout gentil
+ dbdr: il fait ses potions bien sagement
+ Thyl: Hello
+ dwarfie: sagement peut etre mais le mien arrive pas a suivre ... je le bat 1 fois sur 4 , c'est pas assez ...
+ dwarfie: et encore , des fois sur le meme seed , une fois je gagne une fois je perd
+ dbdr: Pour gagner, il faut accepter de perdre. -- Luis Fernandez
+ dbdr: c'était notre série, "Un jour, un philosophe"
+ Stilgart: nicola: &amp;radix; 2 ça fera le job
+ Thyl: Comment MCTS sait quand il faut cree un noeud ou en explorer&#160;??
+ Wokia: bonsoir quelqu'un sait pourquoi je ne peut pas utilier Mathf.Sqrt avec des variable double&#160;?
+ Bon[]Crayon: C'est quel langage&#160;?
+ Wokia: C#
+ Bon[]Crayon: Je ne connais pas.
+ Bon[]Crayon: Lis la doc de la fonction.
+ [CG]SaiksyApo: ça prend un float
+ Wokia: ah ok et il y a pas moyen de lui donner un double&#160;?
+ Bon[]Crayon: Mathf.Sqrt peut-être que le f signifie float
+ [CG]SaiksyApo: Math.Sqrt prend un double.
+ Bon[]Crayon: il existe peut-être Mathd.Sqrt
+ Bon[]Crayon: ok
+ Stilgart: bon, cracher du venin sur le forum ne suffit pas à calmer ma colère&#160;:(
+ Bob: essaye de cracher du feu&#160;?
+ Bob: "dracarys"
+ Wokia: ahhh okk merci 
+ <b>**Stilgart va chercher un chat à sacrifier :imp:</b>
+ Wokia: ah bah sa marche mai sa a pas résolu mon problème 
+ <b>**dwarfie trace le pentacle</b></p><p><img src="/a/29054906001010" /> Stilgart: dwarfie: tu as fait JPS1 toi&#160;?
+ dwarfie: pas reussi a le finir
+ Stilgart: ok
+ Stilgart: faut vraiment que CG vire ces puzzles en fait
+ Stilgart: parce qe si même toi tu ne finis pas le 1er, personne ne va faire le 2e
+ Stilgart: le seul bilan positif, c'est que j'ai remis le nez dans le sdk
+ dwarfie: ca fait au moins un point positif
+ Vry: Palmipedus&#160;: pour les bits j'ai ces macros ...
+ Vry: #define  BIT_SET(a,b)   ((a) |=  ((uint64_t)1&lt;&lt;(b)))
+ <b>**Stilgart tend Data.Bits à Palmipedus et Vry</b></p><p><img src="/a/29054906001010" /> Stilgart: parce que, comme le dirait Automaton2000, coder en Haskell, il n'y a que ça de vrai&#160;!
+ Automaton2000: et j'ai pas envie de savoir ce qu'il y a même pas de quoi tu parles
+ Stilgart: (fail, je suppose&#160;?!&#160;:) )
+ dwarfie: Automaton2000 ... maintenant t'as plus qu'a donner une tortue
+ Automaton2000: ca dépend de ce qu'on a besoin de toi
+ Stilgart: on ne peut toujours pas supprimer de contribution perso; j'imagine&#160;?
+ Stilgart: ok... menu trois petits points
+ dwarfie: Automaton2000 ... on a toujours besoin de moi , bien pour ca que je peut jamais finir mes IA pendant les contests
+ Automaton2000: j'en ai fait un peu de temps en temps
+ <b>**Stilgart ne l'avait pas vu</b></p><p><img src="/a/17785582865119" /> dwarfie: Automaton2000 ... c'est bien , c'est toujours plus que xxxxxxxfr
+ Automaton2000: j'ai eu du mal a comprendre comment faire pour avoir de la perf
+ dwarfie: Automaton2000&#160;: il te faut un expert C#&#160;?
+ Automaton2000: oui, mais pour l'instant j'ai pas trouvé comment faire pour avoir un code qui marche .... pour dwarfie , ca ...
+ dwarfie: et voila ... meme lui a besoin de mon aide&#160;:)
+ Stilgart: HAHA
+ Stilgart: encore plus fort qu'une tortue&#160;!
+ dwarfie: et evidemment , c'est sur moi que ca tombe :p
+ PhOeNyX: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/511721111">https://www.codingame.com/replay/511721111</a>
+ PhOeNyX: Je me pose la question de la pertinence de cette game
+ JBM: dbdr: mmm?
+ dbdr: mmm?
+ JBM: tu m'as invoqué?
+ jolindien: mmmeuh à tous
+ Bon[]Crayon: :wave_tone2:
+ jolindien: o/
+ jolindien: pas évident le multi breakthrough
+ Garfield001: cc
+ Bon[]Crayon: :wave_tone2:
+ Stilgart: oy jolindien
+ jolindien: o/ Stilgart
+ alexandre.ferrera: est-ce qu'il existe une correction des exos de battledev&#160;?
+ Stilgart: on pourrait s'amuser à en écrire une
+ pb4: Salut jolindien
+ jolindien: o/ pb4
+ pb4: Sur OOC tu avais tout fait pour faire fonctionner un MCTS, tu as essayé sur le fall challenge aussi&#160;?
+ pb4: Tu avais quoi dans ton IA&#160;?
+ jolindien: j'ai fait un mcts pour la fin de partie
+ pb4: &lt;3
+ jolindien: et un beam search pour le reste
+ jolindien:&#160;:)
+ jolindien: mais j'ai fail pour le début de partie
+ pb4: On était donc deux au moins avec le mcts pour la fin de partie
+ Stilgart: sur FC&#160;?
+ pb4: Oui
+ Stilgart: un minimax ça suffisait pas pour le endgame&#160;?
+ jolindien: tu maitrises le DUCT pb4&#160;!
+ pb4: Je ne sais pas faire de minimax "propre" pour un jeu simultané Stilgart
+ pb4: reCurse a fait un truc pas mal, mais il a du beaucoup réduire le nombre de coups considérés pour ça
+ jolindien: moi j'ai fait un smitsi
+ pb4: Je pense que son truc est très bon, mais sacrément plus complexe
+ pb4: smitsi ça marchait&#160;?
+ Stilgart: point taken... c'est vrai que je suis toujours un peu géné par le coté simultané (mais ça s'applique aussi au mcts pour mon cas)
+ pb4: Pas trop gênant d'avoir des actions de l'adversaire qui peuvent rendre tes actions invalides&#160;?
+ pb4: Le DUCT gère plutôt bien le coté simultané
+ Stilgart: jolindien: tu conseilles quoi comme multi pour faire un smitsi&#160;?
+ pb4: CSB&#160;:)
+ JBM: il est partout
+ pb4: Mais je ne m'appelle pas jolindien :o)
+ pb4: ni MK :D
+ Stilgart: certes, ça ferait trop plaisir à MK
+ Stilgart: :D
+ jolindien: y'avait bit runner où tout le monde faisait ça
+ Stilgart: je voulais le faire sur CotC, mais j'ai pas trop entendu parlé de ça
+ darkhorse64: Le top PCR aussi
+ pb4: Ca doit aussi se tenter sur FB
+ jolindien: PCR, tiens
+ pb4: Bonne soirée
+ jolindien: A +
+ Stilgart: bonne soirée
+ jolindien: le smitsi vaut mieux éviter les jeux où les actions changent
+ Stilgart: c'est à dire&#160;?
+ jolindien: tu rencontre des même noeuds avec des actions adverses différentes
+ jolindien: =&gt; ton noeud n'a pas forcément les mêmes actions valides
+ Stilgart: j'ai pas l'impression que PCR et CotC soient si différents de ce point de vue
+ Stilgart: ha oui... l'adversaire peut bloquer un move à CotC
+ Stilgart: après, si tu relances de zéro à chaque tour, ça doit pas être si génant, si&#160;?
+ jolindien: c'est pas impossible à gérer mais galère
+ Stilgart: tu vas me dire que tu recycles tes calculs de tour en tour
+ jolindien: normalement tu cherche tes actions valides une seule fois quand tu crée le noeud
+ Stilgart: oui, il faut être plus souple sur la notion d'action valide lors de l'expand
+ jolindien: oui voilà
+ boumagik: arf
+ boumagik: j'fais mon run, je fais baisser le boss de 0.3
+ Stilgart: gg
+ boumagik: le mec du run d'après lui donne +0.5
+ Stilgart: erf
+ boumagik: on va pas s'en sortir
+ Zorg1: bon je viens de rentrer chez moi. J'ai fini cette foutu Mise En Production \o/
+ Zorg1: comment es votre CSB&#160;?
+ Zorg1: il a pris un sacré coup mon bot FC
+ Stilgart: fix ton FC
+ Zorg1: ^^
+ ThomasNicoullaud: dbdr aussi is falling :D
+ ThomasNicoullaud: -20 places en 1 jour lol
+ Stilgart: fear magus eval
+ Zorg1: ah tout le monde à repomper son éval
+ Stilgart: beaucoup ont dit faire ça
+ Stilgart: sur ce, il faudrait que je fixe mon sokoban et mon space maze
+ smeagol: Salut Madknight
+ leojean890: smeagol, tu joues à RAIC&#160;?

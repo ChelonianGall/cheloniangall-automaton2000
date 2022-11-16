@@ -1,0 +1,1794 @@
+ Whysaac: if a clash ends before you finish is there a way to continue playing until you can complete it?
+ struct: search it here
+ struct: <a rel="nofollow" class="external free" href="https://eulerschezahl.herokuapp.com/codingame/puzzles/">https://eulerschezahl.herokuapp.com/codingame/puzzles/</a>
+ struct: might need to load up
+ Whysaac: ty
+ eulerscheZahl: it's loaded
+ eulerscheZahl: but probably offline for the rest of the month soon
+ eulerscheZahl: i hit the 80% uptime per month 2 days ago already
+ miobyte: struct how r u always active here?
+ eulerscheZahl: the trick is not to sleep or blink
+ rwilson: i bet a beer he's around but not answering just to prove he's NOT always active
+ eulerscheZahl: but as a moderator he's always shown when logged in. i can assure you there are at least 100 other users who can read this chat right now but aren't shown as online (only visible to moderators)
+ lifetimeLearner007: Can someone tell me what is wrong with this code? I keep getting StackOverflow error<a rel="nofollow" class="external free" href="https://pastebin.com/KZfLnbD1">https://pastebin.com/KZfLnbD1</a>
+ mlomb: what is your exit condition?
+ rwilson: looks like exit condition is the maxscore ... but that MIGHT end up taking too many turns to get there..&#160;?
+ mlomb: you, you could limit it to 200
+ mlomb: yup*
+ rwilson: well - take that back -  exiting on that isn't quite there... 
+ eulerscheZahl: should be fine if he only generates valid moves. that's the exit conditino
+ lifetimeLearner007: I'm running in my local. It should eventually finish right? Local doesn't have limitation of time
+ mlomb: true, make sure you don-t have WAIT always there
+ lifetimeLearner007: yes, WAIT isn't there always. 
+ rwilson: @lifetimeLearner007 so you've got a BFS going over the move states, but trying to exit when 'phase' = null ...   you could check what you're doing with applyAction() .. but i'd personally start with measuring a few things ( like how deep it's going &amp; likely put a hard turn limit in there...  game ends after 200 game phases anyways )
+ eulerscheZahl: that's DFS
+ lifetimeLearner007: #rwilson, I think I'm doing DFS
+ eulerscheZahl: i don't see anything wrong in the part of your bot that you shared
+ eulerscheZahl: maybe in combination with a move generator that loops
+ eulerscheZahl: do you put a training card to playedCards?
+ eulerscheZahl: when you use the skill
+ rwilson: :hand_splayed: :sweat_smile:
+ lifetimeLearner007: #rwilson, the first line in applyAction() is to set phase to null. It is rewritten only if I've extra card or something
+ lifetimeLearner007: I guess I've to debug through entire tree to see where I'm adding invalid actions that is causing infinite loop.
+ eulerscheZahl: just print your move sequence each time you enter the function. see if it gets unreasonably long
+ eulerscheZahl: or something likeif (actions.size() &gt; 20)dummy action to put a breakpoint on
+ GroutchKeu: o/
+ Tien118: :taco:
+ rwilson: :beer:
+ lifetimeLearner007: #eulerscheZahl, Thanks. Playing TRAINING card allows to play one more card and my code was playing one more card indefinitely... Hence the stack overflow
+ eulerscheZahl: great. initially the game itself had the same bug
+ lifetimeLearner007: Does the skill card go to draw pile or discard pile after it is used?
+ eulerscheZahl: discard
+ lifetimeLearner007: doesn't seem to be consistent. In one instance, after using training card, it went to draw pile. 
+ lifetimeLearner007: ok, after training, I needed to play one more card but I didn't have any. So, turn ended triggering discrad pile to move to draw pile I think
+ eulerscheZahl: still used =&gt; played =&gt; (after play phase) discard. when draw is empty, all discard goes to draw
+ jacek: hmm, i had 3 recaptchas on submit today
+ oidrissi: Guys, can someone please explain this:Turn 12 
+ Magus: It's the 12th turn
+ Magus: But I think we miss a part of the question
+ oidrissi: My bad
+ oidrissi: I understood as i was asking the question
+ kataaaaaaaaaaaaaaaaaaa: hi
+ zersch: ell
+ zersch: o
+ kataaaaaaaaaaaaaaaaaaa: davidddddddddddd
+ YuyuXD: wtf
+ New6969: why are questions easy can i increase difficulty?
+ jacek: clashes? you cant
+ friendlyPenguin: some of them won't be that easy, it depends
+ putibuzu: Hi
+ Sheeesh---: psyho is on top again
+ Sheeesh---: the leaderboard is on fire
+ eulerscheZahl: it's not that easy to just stop and switch to topcoder i guess
+ Psyho: haha yes
+ Psyho: especially since I feel I understand this contest and now there's a long list of small tweaks that I should try
+ Psyho: and I have yet no clue about topcoder contest 
+ Westicles: 3 Americans in the top 200, and 73 french
+ eulerscheZahl: i had a quick look at TC but no clue either. probably another beam or simulated annealing round
+ Psyho: that being said it's mostly just 10 minutes of implementing few one liners &amp; wait few hours for league system to produce stable results
+ eulerscheZahl: the stage 3 problems were a better fit for me. was move about creativity and a completely unique approach than beam
+ Psyho: I do think that all stage 4 problems are really good
+ Psyho: and none of them were standard BS/SA
+ eulerscheZahl: your local league system i suppose? you won't get anything stable here on CG
+ Psyho: yeah, local league
+ eulerscheZahl: maybe it's just that i'm not good at those problems we had at stage 4
+ Psyho: it's my code from halite 2
+ eulerscheZahl: stage 3 had a multi-agent (sheep shearing) and one about probabilites
+ eulerscheZahl: somehow a lot of contestants didn't get the math to properly compute them
+ Psyho: and during the springchallenge2022 stream I made it work for CG
+ Psyho: oh yeah, probabilities / hidden information is sort of different type of contests
+ Psyho: I do prefer full information as I can use my code optimization skills more
+ eulerscheZahl: sorry, didn't watchnothing against you, i rarely watch streams for more than 5min. just a quick peak to see the local setup (operating system, IDE, ..) for curiosity
+ Psyho: (plus smaller variance in general so you need fewer tests)
+ Psyho: I don't blame you, I stated several times that I think watching streams has low value and I'm not a target so I have no clue what is useful for viewers
+ eulerscheZahl: i just like the thinking out of the box. i never worked too hard on getting good at optim. and for those totally different tasks everyone starts at the same level
+ Psyho: I believe most people just watch it in the background and sometimes tune in if there's something they find interesting
+ tony_on_xbl: hi
+ Psyho: "i just like the thinking out of the box." - I do feel that was the case for all of the recent problems
+ eulerscheZahl: reCruse once streamed a CG contest too. somehow it derailed into hours of stuffing the game state into a few bits and serializing. he himself didn't get why it was so popular
+ Psyho: none of them were typical and for all of them we ended up with a wide variety of different types of solutions
+ eulerscheZahl: then i just failed to see the big picture. standard beam approach and mediocre rank
+ Psyho: wait none of the used beam search
+ eulerscheZahl: none of the top. i did&#160;:(
+ Psyho: so... you lack on the creativity side :P
+ eulerscheZahl: hard to name what was my problem with it. maybe that the task was abstract and hard to visually see what's wrong with your solution
+ eulerscheZahl: the sheep shearing was completely different in that regard
+ Psyho: probably sheep was more game-y
+ Psyho: and experience from CG transfers to that
+ Psyho: the recent ones are straight up optimization, although very untypical ones
+ Nerchio: what languages do they accept at topcoder
+ eulerscheZahl: probably. the sheep was very much in my favor to snipe Daiver
+ eulerscheZahl: C#, Java, C++, Python
+ Psyho: c++,c#,python,java
+ Psyho: c++ recommended though
+ Nerchio: maybe i should check out some problems 
+ eulerscheZahl: some have animations. also in the statement to explain it. but only visible when you are logged in
+ Psyho: I probably stated this before, but I do feel that while bot games are more fun on usual, optimization problems are much better at teaching basic stuff
+ Psyho: mostly due to low variance of the results
+ Psyho: but this is extremely important because low variance tells you if you're doing something better or worse
+ eulerscheZahl: optim is definitely better for a fair outcome
+ eulerscheZahl: here my rank is going up and down
+ Psyho: and with bot contests you can waste hours on something that you have no clue if it's a general improvement or not
+ Psyho: so the tempo of learning is much lower
+ eulerscheZahl: i just like the gamified approach. when i entered, i never planned to get that competitive
+ Psyho: oh yeah, I can relate to that
+ Psyho: btw, "topcoder is all about beam search &amp; simulated annealing" - when I did my first two contests on CG (ages ago)
+ Psyho: I did beam search in both
+ MSmits: eulerscheZahl think we will both enter legend?
+ MSmits: it's so random
+ MSmits: btw, this feels like old times with the group that is near the top.
+ MSmits: Illed an, you, me roya le all close together
+ MSmits: it's just jace k that feels out of place tbh :P
+ eulerscheZahl: beam is also helpful for some CG games, true. especially those with little opponent interaction
+ eulerscheZahl: we will pass MSmits. even a good boss candidate. i don't want to be boss
+ MSmits: i could be boss, my bot doesnt use that much calc time, except on rare turns
+ Nerchio: i want to be the boss can we arrange that
+ MSmits: but people will overfit vs boss
+ MSmits: which means they overfit vs you
+ Nerchio: thats fine
+ Nerchio: but still only 1 bot can be a boss so unlikely no matter what
+ MSmits: yeah
+ eulerscheZahl: we still miss dbdr in the top group&#160;:(
+ MSmits: oh yeah
+ MSmits: and robo
+ eulerscheZahl: agade, recurse and pb if you look back even further
+ MSmits: pb not that far
+ MSmits: he won one not too long ago
+ MSmits: ocean
+ eulerscheZahl: magu s usually gets strong on the last days only. still time for him
+ Nerchio: didn't pb won the witches?
+ MSmits: maybe both
+ eulerscheZahl: yes, both
+ Nerchio: i remember some insane spell combo calculations 
+ Nerchio: in excel :joy:
+ MSmits: i skipped that contest
+ kovi: karliso also did last days appearances few times
+ Neumann: Do you think they will aim for top10 at Legend opening&#160;? Or more since there is less contestants&#160;?
+ eulerscheZahl: but no one enters as late as dapo
+ Neumann: Haha, true
+ Neumann: But a erfurbished phone&#160;? Meh, not worth for him
+ MSmits: he enters sooner than you think. You just dont see him :P
+ eulerscheZahl: their boss selection is automated now. no idea what they implemented
+ eulerscheZahl: i think i'm a good boss candidate (15th atm)
+ MSmits: you code like a boss
+ Nerchio: the differences are so small you can jump to 10 by 2 people submitting and losing to you
+ Nerchio: or get beat up like I just did by square
+ MSmits: heh yeah you'll be boss, with 40 people passing you in a few hrs&#160;:)
+ eulerscheZahl: local testing shows that i even lost to a bot printing RANDOM in 5% of the games or so
+ MSmits: lol
+ MSmits: going home from work now. Lots of coding to do today, talk to you on sunday&#160;:)
+ eulerscheZahl: don't forget to walk your god
+ eulerscheZahl: dog
+ Illedan: 200 games local test and the difference is 1 win/lose -.-
+ emh: my sim is working, but not ready for submit
+ lifetimeLearner007: CONTINUOUS_INTEGRATION 5Isn't this a valid action?
+ emh: lifetimeLearner007 only if you have two in hand
+ darkhorse64: only if you have two ci
+ darkhorse64: ^
+ Psyho: my submission that got now #1 spot had a massive bug (~1.5 ELO diff in local league), talk about variance
+ Psyho: so I now expect to be barely in top 10 after fixing it
+ jacek: 1.5 ELO? oh my
+ Illedan: Psyho, did you see any problems with brutaltester and using multiple threads locally?
+ Psyho: hm, no idea
+ Psyho: do you have something specific in mind?
+ Illedan: Yeah, eulerscheZahl had huge problems
+ Illedan: running random vs his 15th bot with 4 threads caused the random to win 30&#160;%
+ Psyho: it doesnt crash for me, it does produce some results
+ Illedan: Using only 1 thread caused him to win 95%
+ Psyho: even if you use "-t 1" it's still using threads
+ Illedan: Yeah, but multiple
+ Psyho: because tester &amp; both solutions each use separate threads
+ Mengshang: Why I get the first place but the system not notice me, which cause me can't finish the task,May I wait until the clash over?
+ Psyho: I always run it with "-t 1"
+ Illedan: k
+ Mengshang: There someone can answer me???
+ Psyho: I'd prefer to run it in a single thread (i.e. tester &amp; both players would share a single thread and everything would be executed sequentially)
+ derjack: Mengshang you need to wait until the clash is over
+ Mengshang: Thank. I have recved the notice of the system
+ kovi: Psyho so that testing environment running many threads is stable? ("flat" timed calculations)
+ Mengshang: My English not well.:joy:
+ Psyho: yeah, plus it's easier to estimate the number of games my league can play concurrently 
+ YurkovAS: don't forget add option "-s" for brutal-tester
+ kovi: validbtw, nice prediction on scoreboardyou removed a massive bu...feature
+ Psyho: I'm only using brutal tester in order to run a single game with random players on two random positions
+ derjack: run multiple separate brutal testers [solved]
+ Mengshang: I can create some app by Qt(C++) now, I want to learn an other lang.ask some advice
+ Psyho: like this: <a rel="nofollow" class="external free" href="https://pastebin.com/VT55XQAi">https://pastebin.com/VT55XQAi</a>
+ j4at: that doesn't handle draw correctly 
+ Psyho: why? I think it does
+ Psyho: brutal tester reports 0% for both players
+ Psyho: so it should return [0, 0]?
+ oidrissi: Psyho any stream coming soon?
+ j4at: ow I thought it reports 50% for both
+ j4at: my bad :p
+ Psyho: oldrissi: nope, I only streamed the first day of the contest
+ Psyho: no streams in the near future
+ Psyho: I could try to stream CoC at some point but I'm not sure if that would be entertaining or not
+ Psyho: (or educational)
+ j4at: you should definitely steam coc
+ oidrissi: Personally I really was looking forward to streams of Green Circle, see how you brainstorm and yeah...I wanna know how to implement a full search algorithm and you started doing so, it was interesting for me
+ oidrissi: How many people in the top 100 using only heuristics in your opinion?
+ derjack: :zipper_mouth:
+ Nerchio:  probably plenty
+ Nerchio: i have search + heuristics but I am pretty sure I could do almost the same with just heuristics
+ oidrissi: In my experience Good heuristics only can get you to legend but for this game? Idk
+ sua501:&#160;:) have a good day!
+ derjack: maybe some state machine
+ Psyho: oldrissi, hard to tell how many
+ Psyho: I usually just look at&#160;% of people using python in top 100 :D
+ Psyho: imho it's easier to get a decent result with sim-based solution
+ Psyho: mostly because it's less frustrating
+ Psyho: with heuristics &amp; high-variance game like this, you have mostly no clue about what you're doing
+ Psyho: with sim-based, you know that if you implement all of the things, you'll get at least decent solution
+ Psyho: if you exclude my functions for: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/49d1a41d-cc98-4496-ba7c-aabdfe2254e3">http://chat.codingame.com/pastebin/49d1a41d-cc98-4496-ba7c-aabdfe2254e3</a>
+ Psyho: huh
+ Psyho: wtf hell happened :D
+ derjack: pastebins dont work
+ Psyho: I didn't try pasting anything 
+ Psyho: test:- asdfslfdkaj
+ Psyho: hm
+ darkhorse64: tldr; 
+ derjack: it automatically converts long lines
+ Psyho: tldr;if you exclude my 3 main functions (gen possible moves, simulated single step, find move via heuristic) then sim-based approach adds like 10-15 lines of code
+ derjack: you just excluded 99% things
+ Psyho: 90% of my heuristic function is in my stream
+ derjack: shameless advertising
+ Psyho: and gen moves + simulating single step is just boring programming work
+ Psyho: it doesn't even have to be super fast
+ Psyho: I was still replying to oldrissi's "Personally I really was looking forward to streams of Green Circle, see how you brainstorm and yeah...I wanna know how to implement a full search algorithm and you started doing so, it was interesting for me"
+ Psyho: assuming they're still here&#160;:)
+ oidrissi: Simulating single steps is the step i'm stuck at
+ oidrissi: Yes
+ oidrissi: Thank you for the answer
+ Psyho: well, it's a bit of a work (my code for that is around 150 lines) + lots of possibilities for bugs
+ Psyho: but there's not much creativity here, it's just a lot of pain and you have to power through it!
+ struct: gold is so small this time, its going to be hard to get to legend
+ oidrissi: does simpy work on the ide?
+ Uljahn: no, we have numpy, scipy and pandas though
+ Uljahn: <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/40701/help-center/languages-versions">https://www.codingame.com/playgrounds/40701/help-center/languages-versions</a>
+ oidrissi: Thank you!
+ darkhorse64: struct: I expect we will need to win at least 5 ELO points over two days to make it
+ struct: darkhorse64 5 Elo seems very hard
+ struct: The gap usually isnt this big
+ offroff: seems like rank 100 in silver is pretty far from gold, my if and else conditions doesn't do much&#160;:(
+ struct: 8.0 point is close to 100% winrate iirc
+ darkhorse64: You have two hours to play games against the top 10 and gather ideas. I already have 10 TODO lines
+ eulerscheZahl: if i can suggest something to you?
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/645705470">https://www.codingame.com/share-replay/645705470</a>release applications
+ eulerscheZahl: joking aside, your opening move looks unusual already. who needs architecture?
+ struct: your first move is 3 euler?
+ struct: brb
+ darkhorse64: ouch&#160;! I have a bug. Architecture is for increasing my hand. I found it better than collecting TaskPrio for a start
+ eulerscheZahl: my first move was 2, struct. watch closely
+ darkhorse64: Not much time atm. I am expected to do my real job
+ eulerscheZahl: bestest opening
+ Nerchio:  its best only because you haven't tried moving to 7 euler
+ eulerscheZahl: i should visit cells in descending order: 7,6,5,4
+ struct: sorry euler I'm a lua dev
+ struct: anyways I need to try harder now, I won't be very active in chat, ping me if it's needed, it will be open in other tab
+ eulerscheZahl: wait, you got a job struct?
+ struct: no, it was a joke euler because I said 3
+ struct: instead of 2
+ eulerscheZahl: aaah
+ derjack: smits goes to 5 :thinking:
+ lifetimeLearner007: Does WAIT after MOVE triggers RELEASE phase always?
+ oidrissi: if possible move == release it triggers, else no
+ lifetimeLearner007: in the first turn MOVE 2 -&gt; WAIT triggers RELEASE but not when MOVE 3 -&gt; WAIT
+ oidrissi: It means you can't release anything
+ oidrissi: on move 3
+ oidrissi: or after move3
+ oidrissi: but you can after move2
+ lifetimeLearner007: Did I miss reading it in the problem statement? Which other MOVEs allow release?
+ oidrissi: I think u misunderstood what I just said
+ oidrissi: If possible_move contains something of said game phase, it will trigger the game phase
+ elderlybeginner: Whan to TRAIN/CODE and when not to? (contest)
+ eulerscheZahl: that sentence makes no sense
+ elderlybeginner: When TRAINING/CODING in move phase has no sense?
+ eulerscheZahl: of course it makes more sense in the PLAY phase when it's actually a valid move
+ elderlybeginner: sure, I meant PLAY phase :wink:
+ elderlybeginner: Is there a point in building the deck at the cost of slower first 4 releases?
+ elderlybeginner: Is it worth to postpone release and keep some cards?
+ eulerscheZahl: it's worth not drowning in debt
+ eulerscheZahl: but don't ask me about the tradeoff, i suck at this game&#160;:(
+ elderlybeginner: yep, I don't like it. Just going with if's and minimal effort.
+ derjack: is this how you do at your job
+ elderlybeginner: "That's what she said" would be better response :wink:
+ derjack: :upside_down:
+ Astrobytes: he'd need to use the jacek account for that though
+ offroff: I'm looking for the minimal effort to reach gold now
+ Dapps: let me know if you found it. i put in maximum effort and just squeezed in
+ elderlybeginner: top silver seems to be a limit for minimal effort heuristics
+ Dapps: ^ this
+ Dapps: added in some limited (half-baked) sim just got me to gold
+ eulerscheZahl: and gold to legend will be the limit for poor 1 turn searches i fear&#160;:(
+ eulerscheZahl: was the boss in 30min or 1h 30min last time?
+ Dapps: i have no hope. will legend be top.. 10? 15?
+ Astrobytes: 30 min
+ struct: top 1
+ Nerchio: legend will be my rank +1
+ eulerscheZahl: who knows Dapps
+ Dapps: struct lol top 1 - the true legend
+ eulerscheZahl: but i predict it won't get that much larger after opening
+ struct: maybe 15th
+ struct: since the bot is in py3
+ darkhorse64: Cut predicted at 30 or top 10
+ eulerscheZahl: simulation contests always have a small legend
+ darkhorse64: ELO 30
+ struct: well this one will be even smaller because of the amount of players  in gold
+ eulerscheZahl: oh, i thought rank 10 or 30
+ eulerscheZahl: wenn der Hahn kräht auf dem Mist, ändert sich das Wetter oder es bleibt wie's ist
+ darkhorse64: :laughing:
+ StevenV: wow, java top1
+ Astrobytes: nice euler
+ eulerscheZahl: you translated that?
+ darkhorse64: yep
+ Astrobytes: I had to use Google, couldn't understand it all
+ struct: No need to translate, german is pretty similar to portuguese
+ eulerscheZahl: but the rhyme got lost in translation
+ Astrobytes: Yes, but the rhyme sounds great in German
+ Astrobytes: to me at least
+ .Anonymous.: Hello World
+ struct: hi
+ darkhorse64: in french: "les chiens aboient, la caravane passe"
+ struct: In portuguse, "Os cães ladram, mas a carava passa".
+ struct: *caravana
+ darkhorse64: I recognized one word
+ struct: which one?
+ darkhorse64: caravana
+ Astrobytes: :D
+ jacek: rank is pretyy rng, just spam submit until legend
+ darkhorse64: google translate likes "carava"
+ eulerscheZahl: caravan?
+ darkhorse64: yes
+ Astrobytes: life goes on, regardless
+ jacek:&#160;:(
+ Illedan: Legend will be crowded because of the randomness
+ eulerscheZahl: it will be small
+ jacek: thats NOT what she said
+ eulerscheZahl: it's a simulation contest. simulation legends are always small
+ TINOUAINANI: When it will open?
+ eulerscheZahl: reaching legend will be hard?
+ eulerscheZahl: are you happy now, jacek?
+ eulerscheZahl: in 15min or so
+ square1001: Could you tell me the meaning of "simulation contest"?
+ Astrobytes: simulate actions, search alorithm to find the best
+ Astrobytes: *algorithm
+ struct: for me its all games lol
+ jacek: :notebook: :soccer:
+ square1001: So... One can write simulation codes for most game. What's the difference against non-simulation one?
+ struct: I would say work better with heuristics
+ struct: but to me that seem counter-intuitive
+ struct: say some work better*
+ eulerscheZahl: have a look at the previous contest (spider attack). that worked fairly well with long if-else cascades
+ eulerscheZahl: this green circle game on the other hand is really hard to analyze. when i don't even know how to play as a human, how shall i tell my bot?
+ Nerchio: is it that hard to play though?
+ Dapps: reminds me of the other contest, the tree one. i had no idea if i was making a good move or not
+ jacek: so you use simulations
+ Astrobytes: I found that one quite intuitive
+ Dapps: my brain couldn't comprehend it
+ struct: That one was also quite simple to eval
+ struct: this one?
+ struct: gl
+ struct: time to see who is the chosen one
+ Nerchio:&#160;?
+ square1001: What? Boss 1 rating 31.83?
+ eulerscheZahl: boss
+ square1001: The real boss...
+ eulerscheZahl: where is it?
+ Nerchio: #1?
+ Illedan: Imba boss :D
+ eulerscheZahl: seriously?
+ TINOUAINANI: :joy:
+ Illedan: GL HF
+ Nerchio: Xd
+ Illedan: :D
+ struct: is this seriuous?
+ eulerscheZahl: i guess their automated boss selection needs some rework
+ Nerchio: so nobody is in legend atm? xD
+ eulerscheZahl: ping staff on discord :D
+ Illedan: Dont!
+ Illedan: This will be fun
+ Illedan: :D
+ eulerscheZahl: ok, let's deal with it&#160;:(
+ Dapps: guess we were right. legend of only 1
+ Nerchio: so wala is the boss then
+ aCat: your notion of fun is weird Ille
+ square1001: No, still 0 legends
+ struct: I did say 1st
+ struct: Its my fault sorry
+ Dapps: banned
+ Astrobytes: what happened?
+ Dapps: so wala is boss
+ eulerscheZahl: boss is wala
+ Dapps: can win by rng
+ eulerscheZahl: #1
+ struct: he is the boss and doesnt even get promoted
+ struct: :p
+ Astrobytes: hahahaha
+ Astrobytes: that went well then
+ eulerscheZahl: i expected a strong boss. but not that strong
+ Dapps: very very small legend pool this time
+ eulerscheZahl: wala isn't even online to see the mess he caused
+ Astrobytes: boss level BOSSSSS
+ struct: I just want to know if its on purpose or not
+ Zylo: wala: what are the weak point of Legend Boss&#160;:-D&#160;?
+ Dapps: written in java
+ Nerchio: boss is already gaining points xdd
+ eulerscheZahl: pretty sure it's a bug
+ Michael_Howard: I'm guessing this is because Legend was so crowded last time.
+ eulerscheZahl: they have automated boss selection now
+ jacek: and legend will revert to alpha again?
+ Astrobytes: lel
+ eulerscheZahl: we will never find out
+ aCat: I'm pretty sure they would spend less time selecting bosses than fixing on automated selected ones ^^
+ Nerchio: boss = officialContest&#160;? random(): players.get(0)
+ struct: no 
+ eulerscheZahl: aCat <a rel="nofollow" class="external free" href="https://xkcd.com/974/">https://xkcd.com/974/</a>
+ struct: this is the boss selection
+ square1001: bowwow resubmitted! Go for the legend!
+ Astrobytes: lol
+ struct: for (Bot &amp;b&#160;: bots)if (b.language == "Java")return b;
+ Nerchio: xdd
+ TINOUAINANI: struct legend or delete :grin:
+ struct: They never expected Java to be first
+ eulerscheZahl: "a bad boss came out"<a rel="nofollow" class="external free" href="https://twitter.com/bowwowforeach/status/1540335062025400321?cxt=HHwWgsDT8f2kr-AqAAAA">https://twitter.com/bowwowforeach/status/1540335062025400321?cxt=HHwWgsDT8f2kr-AqAAAA</a>
+ Nerchio: another game where I will be stuck in top gold I guess :D
+ eulerscheZahl: looks like a need a major rewrite for legend
+ struct: im already on my 8th
+ struct: I write 1 bot per da
+ struct: day*
+ Astrobytes: continuous integration struct?
+ jacek: legend or delete
+ eulerscheZahl: maybe the duck or royale can promote. they haven't submitted a single time in gold and still high
+ Nerchio: Thibaud "damn it. From 2k players in Gold during Spring Challenge to 200 here 😬 I've asked for help"
+ struct: I'm hiding obviously
+ eulerscheZahl: we can't keep this boss?
+ eulerscheZahl: wala just 0.02 behind
+ struct: for me its fine
+ struct: its a challange
+ struct: challenge*
+ struct: Cant type today
+ BrunoFelthes: wow, wala is the boss?
+ struct: Its probably a bug BrunoFelthes
+ struct: I should be the boss, something went wrong
+ jacek: kree java!
+ Zylo: wala is not a bug&#160;:-P
+ Astrobytes: Julien just came online, guessing it'll be fixed soon
+ square1001: I still believe that it is intentional
+ BrunoFelthes: the boss is java
+ struct: square1001 from thibaud reaction on discord it isnt
+ struct: o.o
+ Nerchio: codingame trying to tell us "learn to code noobs"?
+ square1001: Okay, I didn't see that. Thanks
+ eulerscheZahl: they do a full rerun for legend after the contest. small legend saves some costs here
+ therealbeef: bad boss picking heuristic
+ Astrobytes: the ultimate green legend
+ BrunoFelthes: no legends, no process
+ struct: hardest legend so far
+ Astrobytes: lowest carbon footprint legend in CG history
+ struct: if we all submit at the same time maybe we can make it
+ Astrobytes: of all the bugs though, this is a pretty good one :D
+ struct: This one should be a feature 
+ jacek: thats 5th league, no shoddies!
+ j4at: 2 days, 17 hours left It's time to start working on my Green Circle bot. I gave you start advantage bc you will not have any chance etherwise KEKW It's time to use my secret strategy (switching between first and last action)
+ jacek: inclusive?
+ struct: Actually you can print 2 actions in 1 turn and make 2 moves at once
+ struct: you should try
+ Astrobytes: switching between implies first and last exclusively jacek
+ j4at: ^
+ jacek: :rage:
+ Astrobytes: :smiling_imp:
+ BrunoFelthes: after gold, my code is too big&#160;:/
+ Astrobytes: too big to fit in legend?
+ j4at: that's what she said
+ Astrobytes: lol
+ struct: You know what they should do
+ jacek: :tada:
+ struct: instead of rank 1
+ struct: rank 2 should be the boss
+ struct: That would be better
+ eulerscheZahl: i vote for nerchio as boss
+ eulerscheZahl: oh, he dropped. then juju rocking
+ jacek: but hes above you
+ Nerchio: i think your boss has less than 50% against mine euler
+ eulerscheZahl: just what i believe will happen
+ struct: boss should be 1% of the league size
+ eulerscheZahl: it's not what i want but what i think will happen
+ struct: rank 1 made sense 
+ Nerchio: sendBossRequest("eulerscheZahl")
+ TINOUAINANI: i vote for sheeesh--- to be the boss
+ eulerscheZahl: probably ranked too low
+ struct: jacek should be the boss
+ eulerscheZahl: if he takes little CPU time, that even looks somewhat realistic to me
+ eulerscheZahl: but i bet staff is on it already. sweating which bot to choose
+ struct: I give mine
+ struct: 0ms
+ eulerscheZahl: definitely a fun bug
+ struct: yeah
+ Astrobytes: Truly one of the greatest I've seen on CG
+ eulerscheZahl: there was this one day where every profile picture was the same. some caching error
+ Astrobytes: that's quite amusing
+ Hello_20: negger
+ Sheeesh---: hold up
+ eulerscheZahl: struct, eat him alive
+ struct: well thats an easy ban
+ Astrobytes: Spelling champion of the year enters the chat
+ Mortis_666: will i still get the card at the desk im at if i use daily routine?
+ eulerscheZahl: you can choose
+ eulerscheZahl: MOVE 5 5 =&gt; gives you a card 5
+ eulerscheZahl: MOVE 5 6 =&gt; gives you a 6 while going to 5
+ Mortis_666: ohh
+ Mortis_666: thx
+ struct: python in top 5?
+ therealbeef: trolling in chat during contest is like trying to rob a cop bar
+ struct: What is wrong with my bot
+ Astrobytes: therealbeef :D
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://nypost.com/2017/08/31/no-joke-robbers-walk-into-a-bar-full-of-off-duty-cops/">https://nypost.com/2017/08/31/no-joke-robbers-walk-into-a-bar-full-of-off-duty-cops/</a>
+ Nerchio: boss gone
+ MSmits: maybe he got promoted
+ MSmits: alone in legend
+ Nerchio: must be sad
+ Nerchio: noone to play against
+ jacek: he can play himself
+ Zylo: you can play with you from arena&#160;:-D
+ eulerscheZahl: Zylo are you really going full heuristics and no search?
+ Zylo: heuristics to state in end of round (move + play + release)
+ Zylo: and them I'll add some propabilities to heuristics of cards in next round...
+ Miki09: Why is noone in legend?
+ Miki09: Dis I miss smth?
+ Miki09: *did
+ Astrobytes: it opened with #1 gold as the boss :D
+ kovi: 35
+ Zylo: yes, you missed election of GOLD Boss and removing elected&#160;:-D
+ kovi: i hope i can stay above
+ Miki09: lol
+ emh: new C++ boss
+ struct: I dont see it
+ Michael_Howard: It's at the bottom
+ emh: it's at the bottom calculating
+ emh: yeah
+ Nerchio: haha
+ Nerchio: did they submit the boss
+ eulerscheZahl: my sources say it's jacek
+ jacek: oO
+ Nerchio: would be funny if boss got stuck in mid gold on randomness
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/645808615">https://www.codingame.com/share-replay/645808615</a><a rel="nofollow" class="external free" href="https://www.codingame.com/replay/645808454">https://www.codingame.com/replay/645808454</a>
+ kovi: techdebter
+ struct: yeah
+ struct: its jacek
+ jacek: so deterministic
+ struct: grats jacek
+ eulerscheZahl: oh dear, i thought i'm bubble up. jacek is a tough choice
+ struct: you have the honors of being the boss
+ jacek: i should have placed a timer&#160;:(
+ WhatTrickeryIsThis: jaceck good pick , WTIT very wrong pick -&gt; inconsistent monkey strat 
+ eulerscheZahl: i hate you already jacek. not your fault but you will be a pain
+ Astrobytes: first gold in a contest, first legend in a contest, and first gold boss in a contest: doing alright this time eh jacek :D
+ emh: how do you guys know it's jacek? he's rank 5. will be tough to get to Legend still
+ WhatTrickeryIsThis: :see_no_evil:
+ struct: check euler replays
+ struct: emh
+ jacek: im more like 10, just people spamm submitting
+ struct: it plays the same game
+ Nerchio: i mean the boss might as well end up on like #15
+ jacek: maybe thats the best optimal actions
+ TINOUAINANI: "put another boss instead. The boss is currently computing. It's @jacek 's bot "
+ struct: now people will optimize against jacek&#160;:(
+ Miki09: Does anybody know who is silver boss?
+ StevenV: do I miss sth, why we don't have legend now?
+ emh: 1-1 battle against boss
+ StevenV: &gt;
+ Nerchio: good stop him :D
+ StevenV:&#160;?
+ StevenV: where is legend?
+ struct: boss is computing
+ Astrobytes: there was a problem StevenV, it's fixed now
+ StevenV: well..
+ eulerscheZahl: oh, we can even watch it this time
+ j4at: anyone using NN&#160;?
+ eulerscheZahl: not just taking the score of the original bot
+ StevenV: I still in silver, maybe the whole server just wait for me :D
+ eulerscheZahl: the boss might be a NN
+ darkhorse64: every chap in the leaderboard that gets passed by the boss lose hope
+ emh: yeah
+ eulerscheZahl: the author makes a secret out of it but is known for coding some
+ eulerscheZahl: you lost your hope already darkhorse64?
+ Astrobytes: and dominating with them
+ darkhorse64: I had no hope. 
+ eulerscheZahl: it will be a pain. i don't want to rewrite everything and have no idea how
+ darkhorse64: thanks for the replay. My bot is hugely bugged as p2
+ struct: euler I'm sure you will make it
+ struct: Even I will get legend
+ eulerscheZahl: with other strong bots submitting at the same time jacek might not climb
+ eulerscheZahl: fingers crossed
+ MSmits: i'm worred about jacekboss, yesterday i saw versions of his that beat me 10x in a row
+ darkhorse64: euler losing hope
+ IvesL: do you still have small applications from bronze onwards?
+ eulerscheZahl: no
+ eulerscheZahl: even says so in the popup
+ Nerchio: anyone from top5 wants to resubmit now? :D
+ MSmits: yay i got doublewin vs jacekboss
+ j4at: euler send the chat history url
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://cg.spdns.eu/wiki/Special:RecentChanges?limit=50&amp;days=7&amp;enhanced=1&amp;urlversion=2">https://cg.spdns.eu/wiki/Special:RecentChanges?limit=50&amp;days=7&amp;enhanced=1&amp;urlversion=2</a>
+ eulerscheZahl: and the boss got me&#160;:(
+ MSmits: noooo stop him
+ TINOUAINANI: boss 29.66
+ MSmits: past me&#160;:(
+ Nerchio: can't wait for the boss to pass jacek too
+ jacek: :scream:
+ jacek: youll miss wala boss
+ jacek: w00t
+ struct: :D
+ jacek: but when I submit my code, im barely 13th :x
+ Nerchio: i didnt get a single game vs boss
+ MSmits: that's not necessarily a bad thing
+ struct: me neither, but Im rank 70 so thats probably why
+ eulerscheZahl: i got 3: loss, win, tie
+ BrunoFelthes: boss win with 20 TD
+ struct: jacekmax is strong
+ jacek: tower defense?
+ BrunoFelthes: i hate you jacek
+ Astrobytes: :D
+ Michael_Howard: Automaton2000 will jacekboss end up at the top again?
+ Automaton2000: any way to get rid of all the pellets in the map
+ darkhorse64: jacek will lose all hopes in a short while
+ Astrobytes: pacman throwback
+ BrunoFelthes: how can you draw the winner cards with 25 TD?
+ struct: jacek reverse the game
+ eulerscheZahl: 4 bonus automated
+ struct: reversed*
+ eulerscheZahl: 1 lucky draw and one move draw
+ MSmits: struct i spent half the day converting to bitpacked... this was not easy like you said :P
+ MSmits: finally got all the bugs out
+ struct: Maybe you did it in a more optimized way or something
+ struct: what I did was quite simple
+ eulerscheZahl: oh, i had a timeout vs jacek
+ MSmits: i think i did the same as you 
+ MSmits: 6 bits per card type, with TD being an exception
+ struct: I used 5 bits
+ jacek: bitboards? :scream:
+ struct: So I can store the size
+ MSmits: ye but need 6 bits for bonus
+ struct: 5*8+8+8+8
+ MSmits: i know
+ MSmits: but bonus doesnt fit in 5
+ struct: But then you cant store the size
+ MSmits: i just count
+ MSmits: dont store the size
+ MSmits: takes some calc time i suppose, sometimes
+ MSmits: adjusting the size every time something changes also does
+ struct: yeah should be similar I guess
+ struct: Performance doesnt matter much here anyways
+ MSmits: true
+ struct: you need to prune a lot
+ MSmits: i havent pruned yet
+ darkhorse64: jacek wrecked by its own creature
+ struct: I only prune actions
+ struct: Nothing else for now
+ MSmits: you mean lossless pruning? 
+ Astrobytes: sound familiar darkhorse64?&#160;;)
+ MSmits: or lossy?
+ darkhorse64: resistance is futile
+ struct: I dont know what that is MSmits
+ MSmits: lossless means you prune useless actions
+ struct: I mean I dont really generate all legal actions
+ struct: yeah
+ MSmits: lossy means you prune actions that are probably bad, but not certain
+ Crosility: Blasphemy struct. Performance always matter /s
+ struct: that sounds about right
+ struct: lossless
+ MSmits: ah ok, then yes you need to prune
+ MSmits: hashing works too though, with the bitpacked version
+ MSmits: thats why i did it
+ MSmits: ohhh he gettin close to me
+ Astrobytes: I was about to ask you why you changed your mind and switched
+ MSmits: yeah for the hashing&#160;:)
+ Astrobytes: makes sense
+ MSmits: hashing 60 ints is not fun
+ Astrobytes: heh heh heh
+ struct: yeah because performance wise it might be a bit worse the packed version
+ struct: but to hash it should be easier
+ struct: i only packed it to try beam
+ darkhorse64: I predicted a cut at 30 with 10 ppl
+ BrunoFelthes: starting today, it will be impossible to submit
+ eulerscheZahl: we got tweeted<a rel="nofollow" class="external free" href="https://twitter.com/iwashi31/status/1540341683388309504">https://twitter.com/iwashi31/status/1540341683388309504</a>
+ MSmits: I got likes and I don't even have social media accounts
+ MSmits: like a boss!
+ jacek: whats with japan and tweets?
+ Nerchio: we are famous now MSmits
+ Astrobytes: right jacek?
+ MSmits: yes&#160;:)
+ darkhorse64: :head_bandage: 6 ELO to gain
+ darkhorse64: MSmits as a lucky loser&#160;?
+ jacek: ELO?
+ Astrobytes: Electric Light Orchestra
+ kovi: can be pushed easily
+ MSmits: wait, why am I  a lucky loser?
+ jacek: youre just loser
+ MSmits: o
+ darkhorse64: 1st no qualified
+ jacek: phew
+ MSmits: ok, so best loser
+ eulerscheZahl: you will get pushed
+ MSmits: no doubt
+ darkhorse64: Yeah, I can troll you because there are no worries
+ eulerscheZahl: i have some benchmark that looks promising so far. would be an honor for me if i can push you
+ eulerscheZahl: hm, getting less promising with more games now&#160;:/
+ j4at: ow 3 made it to legend
+ jacek: first contest legend :tada:
+ MSmits: grats
+ darkhorse64: gg
+ struct: grats jacek
+ Sheeesh---: GG
+ Nerchio: 3-1 vs boss 2-2 vs smits
+ Astrobytes: grats jacek&#160;:) :tada:
+ jacek: ok so far legend is not crashed
+ Astrobytes: lol, progress!
+ YurkovAS: :tada:
+ MSmits: bowwow kicked me in the face before leaving
+ struct: lol
+ MSmits: 6 losses in a row
+ darkhorse64: "la flêche du Parthe"
+ MSmits: whats that
+ eulerscheZahl: a hissing cat
+ MSmits: oh right
+ Astrobytes: the Parthian shot
+ Astrobytes: like a big "fk you" before you leave
+ darkhorse64: In ancient times, roman legions fought against Parths who had the habit the habit to throw arrows before leaving the battlefield
+ darkhorse64: Parthians sorry
+ Astrobytes: ^
+ MSmits: ohh that's indeed what he did
+ Astrobytes: Parthians were Iranian iirc
+ eulerscheZahl: Gallia in omnis divisa est in partes tres
+ jacek: regina noctis pro nobis!
+ Astrobytes: Galls divide omnipotently in tree parts
+ eulerscheZahl: close
+ MSmits: i dont think they were talking about parts of trees
+ Astrobytes: three that should be
+ Astrobytes: not tree
+ Astrobytes: Gauls that should be too I *think*
+ Astrobytes: Or Gaul
+ MSmits: keep going Nerchio
+ eulerscheZahl: that boss is still scary
+ Scarfield: python in the lead
+ MSmits: I need 0.23 more
+ jacek: strainfield
+ eulerscheZahl: python computing the fastest
+ Astrobytes: supersnake
+ Scarfield: thats what..
+ Astrobytes: :D
+ Nerchio: MSmits&#160;:)
+ struct: Damn my old bot was bad
+ jacek: old?
+ aCat: this looks as the old contests..  most people goes hardcore &lt; 200 on gold and only a few in legend
+ aCat: :D
+ aCat: I hope I will have beter place then when I was staring then
+ aCat: (probably I already have, my old contests were crappy ;p)
+ Scarfield: its a card game, you have an advantage :p
+ Astrobytes: not just cards, but deck building too :P
+ aCat: I know - I really had half a day of switch from Tales of Tribute to this one :P
+ struct: jacek im just running brutaltester vs old versions to get win rates
+ Astrobytes: struct I think he was implying that your new one is bad too
+ jacek: :zipper_mouth:
+ struct: ...
+ Astrobytes: this IS jacek remember
+ MSmits: assisted trolling :P
+ Astrobytes: lol
+ kovi: assisted legend
+ Astrobytes: I will miss explaining the intent of peoples statements in chat
+ MSmits: :tada:
+ kovi: gj illedan
+ kovi: gratz msmits
+ Astrobytes: nice!
+ aCat: Smits gratz&#160;:-)
+ nmahoude: I'm next in line, push me please&#160;:)
+ darkhorse64: there is a big train coming
+ MSmits: thanks
+ darkhorse64: told ya: lucky loser
+ MSmits: sure
+ struct: just wait until my opening book is finished
+ therealbeef: you're welcome MSmits&#160;;-)
+ struct: Now I'm going to counter book jace k
+ MSmits: good idea
+ struct: But now I have extra motivation to reach legend
+ struct: I have to beat jace k to get it
+ jacek: thats exactly why i introduce randomness - to prevent booking
+ struct: It seems deterministic though
+ jacek: randomness from game cancels it out
+ Scarfield: xD
+ Scarfield: he already counter booked you struct, thats why
+ struct: well my bot is deterministic
+ struct: It either uses 0ms or timesout
+ eulerscheZahl: 0.6, push me!
+ eulerscheZahl: or pull the boss, both is fine
+ Scarfield: so close you and nerch
+ struct: you should resubmit
+ struct: :p
+ Nerchio: yeah like me
+ eulerscheZahl: therealbeef was brave enough to do so
+ eulerscheZahl: oh, nerchio too
+ Scarfield: he is real beef 
+ eulerscheZahl: oooh
+ eulerscheZahl: i always read there al beef
+ eulerscheZahl: never made sense to me
+ Nerchio: but i did small fixes that will probably change nothing
+ Scarfield: xD
+ jacek: ok, heres the boss code, enjoy
+ jacek: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/caba4068-00a9-47bc-8843-c0b2986cd6d1">http://chat.codingame.com/pastebin/caba4068-00a9-47bc-8843-c0b2986cd6d1</a>
+ eulerscheZahl:&#160;:/
+ therealbeef: ille pushed me down (i hope)
+ eulerscheZahl: won't click, i know it's broken
+ Nerchio: at least it's not rickroll
+ MSmits: maybe it was
+ WhatTrickeryIsThis: i can share my tutorial how to code good evaluation here <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=x8oeyBSlGVw">https://www.youtube.com/watch?v=x8oeyBSlGVw</a>
+ Washier: HEHE
+ Sheeesh---: monke
+ Washier: return to monke
+ Sheeesh---: amen
+ Washier: i missed this card game, seems very popular. will give it a go once i stop obsessing with the board games
+ eulerscheZahl: Nerchio where are you. don't resubmit when i count on you
+ Nerchio: i introduced new :bug:
+ eulerscheZahl: you can do that in legend
+ Nerchio: cant believe how many bugs you can make in like 5 lines of code
+ MSmits: you can make so many bugs that they cancel eachother out. This is why people say their bot is worse when they fix 1
+ Kanawanagasaki: on report page how to get clash name?
+ Scarfield: its like a hydra, cut off one bug, 3 new ones emerge
+ MSmits: you need to fix 2
+ Kanawanagasaki: to train on it
+ jacek: you cant go back to clash
+ jacek: you can use <a rel="nofollow" class="external free" href="https://eulerschezahl.herokuapp.com/codingame/puzzles/">https://eulerschezahl.herokuapp.com/codingame/puzzles/</a> to search for it though
+ WhatTrickeryIsThis: :skull: :frog: :hear_no_evil:
+ WhatTrickeryIsThis: nice podium
+ eulerscheZahl: i was close, then i lost some&#160;:/
+ WhatTrickeryIsThis: .4 is close enough
+ eulerscheZahl: was .22
+ WhatTrickeryIsThis: any strat vs boss? no weakness detected so far
+ Nerchio: don't worry i sent some garbage to the top
+ eulerscheZahl: ooh, 0.13 only
+ WhatTrickeryIsThis: he is in the stealing CI card business apparently
+ eulerscheZahl: so close
+ kovi: there, a win vs boss at start
+ eulerscheZahl: that boss bump was you kovi? thanks
+ WhatTrickeryIsThis: shreded
+ struct: I have 1% win rate vs the boss, if you want I can submit to help
+ Scarfield: what? first fight agains boss?
+ eulerscheZahl: RANDOM was higher winrate vs me than that
+ j4at: do clashes get chosen totally randomly&#160;? or by the rank of the players?
+ jacek: yes
+ struct: I dont think its random
+ eulerscheZahl: they try to give a clash that none has played before
+ Nerchio: if we have 2 debt, 5 and 8 in discard, we draw 2 what is the chance to draw automate 8?
+ Nerchio: is it 1/4 + 1/3?
+ Rafarafa: is the boss going to be jacek's bot untill the end of the contest? or does it update at times?
+ Psyho: so you draw 2 cards out of 4 cards and you're interested in 1 of them?
+ Nerchio: or 2/4 + 1/3? but that seems too much
+ eulerscheZahl: 1 / binom(4,2)
+ Psyho: sounds like 50%
+ eulerscheZahl: 1/6
+ ilgiocatore: 2/4 * 1/3
+ Nerchio: but we draw 1 by 1 not 2 at once right euler?
+ eulerscheZahl: does not matter
+ eulerscheZahl: we draw two cards. period
+ Psyho: aaah both 5+8, what euler said above is correct
+ Washier: ok. this game sounds cool. must play. c ya l8er
+ therealbeef: 1/6th
+ therealbeef: out of 24 permutations, 4 start with 5 and 8
+ Scarfield: you cant add the 2/4 and 1/3 since you can only draw that one card once
+ ilgiocatore: 2/4 chance to draw 5 or 8, then 1/3 chance to draw 5 or 8. both events must happen, so you need to multiply, not add
+ Scarfield: ^
+ Nerchio: ok so i was counting correct except + not *
+ jacek: :thinking:
+ Astrobytes: *I was wrong but right
+ Astrobytes: :grin:
+ Nerchio: :sunglasses:
+ Washier: :stuck_out_tongue_winking_eye:
+ Astrobytes: yo Washier, been a minute!
+ Scarfield: xD
+ Washier: howzit Astrobytes
+ Astrobytes: ticking along here, how's work?
+ Washier: work ticking along. nice to see the old gaurd ticking on CG
+ Astrobytes: always!
+ jacek: not much longer
+ Washier: nooo
+ Astrobytes: ah yeah, chat is gonna disappear
+ Washier: oh well
+ Astrobytes: discord will still be there though
+ Washier: old men like me need to adapt then
+ Astrobytes: haha, if I can adapt anyone can
+ Quidome: I prefer this chat as well&#160;:)
+ Washier: cmon Astro, we all know you are 29
+ Phiti: hii
+ Astrobytes: A whole decade removed!
+ Astrobytes: I wish :rofl:
+ Illedan: You 19?
+ Astrobytes: 39!
+ Illedan: ^^
+ Scarfield: factorial :O
+ Washier: ahem
+ Illedan: 2.0397882e+46 :O
+ Astrobytes: :rofl:
+ Illedan: Give or take, just some basic head math
+ Astrobytes: bunch of pedantic b**tards :D
+ Scarfield: xD
+ Washier: hehe
+ Scarfield: you know you love it
+ Astrobytes: of course :D
+ Washier: read that in Scottish accent
+ Astrobytes: heh heh!
+ ael-bekk: do I have a chance to be prompted to the legend leagues
+ ael-bekk: hhhh
+ struct: depends
+ struct: You might need to improve your bot 
+ Washier: i would say improve your mad pod racing, good points on offer there.
+ Washier: nevermind. i'm thinking rank
+ struct: mad pod is outdated by now
+ Washier: yeah. i'm a lurker
+ jacek: hm?
+ struct: Getting legend there is trivial compared to most multis now
+ struct: Is what I wanted to say
+ eulerscheZahl: come on, no push for me?&#160;:(
+ Washier: ah cool thanks
+ Nerchio: you are getting pushed euler. to the bottom
+ Astrobytes: :D
+ eulerscheZahl: i was just 0.13 away
+ eulerscheZahl: not it's more than 1 point
+ Washier: unrelated, Mr Eulerschzahl, I tried to push you in checkers for a bit. not much luck. more work needed.
+ eulerscheZahl: it's fine, there is no boss i have to get pushed above
+ Washier: oic
+ MSmits: jacek is a Boss there too :P
+ therealbeef: i8 pushed boss up .4
+ jacek: try onitama
+ eulerscheZahl: i think checkers is still the bot i wrote while testing the game
+ Washier: I look up to Mr Jacek
+ Nerchio: well done therealbeef
+ PatrickMcGinnisII: USA is gonna be on fire tonight
+ Washier: sheez, that hurts Mr E
+ eulerscheZahl: why? did trump to something stupid again PatrickMcGinnisII?
+ PatrickMcGinnisII: Roe V. Wade got overturned
+ eulerscheZahl: oh dear
+ eulerscheZahl: the abortion
+ Astrobytes: kind of lucky chat will disappear, jacek will be going on about this for as long as the English go on about that world cup they won in 1966
+ Washier: eish
+ PatrickMcGinnisII: Biden just got on camera ... trying to keep people from doing violence
+ Astrobytes: PatrickMcGinnisII: Seriously?! :rage:
+ eulerscheZahl: welcome back in the early 20th cenctury
+ Washier: big smile for the world cup joke
+ PatrickMcGinnisII: Groups arre already mobilizing in my state to bunr sh8t down
+ Astrobytes: thanks Washier
+ PatrickMcGinnisII: burn
+ Washier: if this is true, holy shiz
+ Washier: not cool
+ eulerscheZahl: sheightt?
+ Washier: shize
+ Washier: kak
+ Washier: excrement
+ eulerscheZahl: ah, shit
+ therealbeef: red state, PatrickMcGinnisII?
+ PatrickMcGinnisII: short your stock.  i don't know how that affects bitcoin,eth,etc.
+ eulerscheZahl: we are in europe. we can curse but not fire guns
+ esjokeryt: SALAM YA HABIBI
+ eulerscheZahl: as opposed to the US
+ struct: even more economy damage?
+ struct: I think its bad enough already
+ Psyho: I'm not sure if tanking bitcoin counts as economic damage&#160;;)
+ Miki09: What is the output for "THROW CARD" phase? "THROW card"?
+ struct: I didnt meant bitcoin
+ Astrobytes: lol Psyho
+ PatrickMcGinnisII: if you thought BLM protests were bad ... cops in Fl. are loading their teargas right now
+ Washier: no cmon
+ Razovsky: eulerscheZahl come on kill this boss plz&#160;:(
+ eulerscheZahl: i can't
+ eulerscheZahl: my bot sucks
+ Washier: i do not believe that. nein
+ PatrickMcGinnisII: I guess Legend opened?
+ Astrobytes: gonna chat with some of my US (FL included) friends later tonight, will get the word from numerous states
+ struct: Oh I seem to have a done an improvement w/e I did I cant remember
+ eulerscheZahl: and the gold boss was pushed already. 1 point above the rest
+ Washier: cool Astro
+ Miki09: What is the output for "THROW CARD" phase?
+ dot.nick: good day for america
+ eulerscheZahl: "THROW 5" for instance
+ Miki09: thanks
+ dot.nick: please try to attack our churches, lmk how it goes for you
+ <b>**PatrickMcGinnisII is confused</b></p><p><img src="/a/3805557439373" /> Psyho: does legend work the same way as other leagues? does the trueskill have the same params?
+ PatrickMcGinnisII: the oligarchy wants US citizens to be divided
+ struct: I think so Psyho
+ Astrobytes: Yeah, divide and conquer everywhere today Patrick
+ struct: The only difference is that after the contest is finished it gets 500 more battles
+ Psyho: seems like everyone has 50% winrate against each other it's just 15-way tie
+ struct: each player gets
+ PatrickMcGinnisII: I still don't know how to get out of silver
+ struct: me and you patrick
+ ashrafull: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/2476755da601418a2349e91931f1b1f930ec76e">https://www.codingame.com/clashofcode/clash/2476755da601418a2349e91931f1b1f930ec76e</a>
+ Miki09: PatrickMcGinsill me 2
+ WhatTrickeryIsThis: legende computes more matches with extended reach +-10 from your position
+ struct: gold players trying to make it to legend
+ struct: <a rel="nofollow" class="external free" href="https://old.reddit.com/r/IdiotsInCars/comments/vjjv05/portugals_most_stubborn_driver_car_wont_fit_in/">https://old.reddit.com/r/IdiotsInCars/comments/vjjv05/portugals_most_stubborn_driver_car_wont_fit_in/</a>
+ PatrickMcGinnisII: when the GF says no to sex, I aint givin up
+ Astrobytes: sex swing time
+ Astrobytes: struct :rofl:
+ Astrobytes: what is that dude doing
+ PatrickMcGinnisII: trying to get it in
+ Astrobytes: But whyyyy
+ PatrickMcGinnisII: so he can be legendary
+ Astrobytes: well, he's achieved some kind of status I guess
+ Astrobytes: legendary knob
+ yal3ab: hehehehehhehe
+ struct: I have no idea
+ PatrickMcGinnisII: knob == git&#160;?
+ Astrobytes: same as dick
+ Astrobytes: Sorry, meant to capitalise that
+ PatrickMcGinnisII: I've been to the UK, but apparently didn't get the real xperience.&#160;;)
+ Astrobytes: hahaha
+ Astrobytes: come tae Scotland
+ PatrickMcGinnisII: protest sites tonight  <a rel="nofollow" class="external free" href="https://map.wewontgoback.com/?source=sc">https://map.wewontgoback.com/?source=sc</a>
+ Astrobytes: well, good luck to 'em all.This on top of the expanded gun rights thing on Thursday...
+ Astrobytes: anyway, lets move on from political stuff for now
+ PatrickMcGinnisII: I have an unpopular opinion.  I don't think the govt. has the right to limit me at all ... so no 'decision' is necessary to hold me up.  but half the US is gonna be under police state rule by Oct.
+ <b>**PatrickMcGinnisII is building torches</b></p><p><img src="/a/16222515698472" /> Illedan: Hi
+ struct: hi
+ Astrobytes: Yeah, I understand the liberty part
+ Astrobytes: Hi
+ eulerscheZahl: IMO the government can and should stop you from doing some things when it affects others
+ PatrickMcGinnisII: *nod*, i would think a Scot. would understand
+ eulerscheZahl: freely available guns have an impact on public safety
+ PatrickMcGinnisII: eulerscheZahl why can't have a nuclear reactor in my backyard?&#160;;)
+ eulerscheZahl: because of earth quakes and tornadoes
+ Astrobytes: There are enough ways to improve gun laws without infringing on constitutional rights
+ PatrickMcGinnisII: btw, the guy that killed all those people in TX recently... he had over $9K worth of guns on him, no so free
+ eulerscheZahl: the 2nd amendment is actually about militias for community safety, kind of like a police. was then reinterpreted
+ Astrobytes: Yes, indeed
+ Astrobytes: and is now used to justify the kind of behaviour you saw a few months ago
+ Astrobytes: Half the world is regressing
+ WhatTrickeryIsThis: top 10 is goin wild
+ PatrickMcGinnisII: again, I have not so popular opinions ... if the military iindustrial complex can ship weapons to god knows where ... then I should be able to own a couple.  Limit exports and I'll lconsider changing my miind
+ Astrobytes: that's a valid point but dare I say short-sighted reasoning
+ Astrobytes: if you can solve the issue closer to home you stand a slightly higher chance of impacting the other
+ IvesL: must it be 0 to 7 before passing admin or i can anticlockwise from 7 to 0 before passing admin?
+ PatrickMcGinnisII: well, it's proven that criminals will still get weapons to do criminal things.  the level of deaathrate then becomes the issue.  Sure, people survive knives and such ...I'll shut up.  Did you know, death by cop and suicides are actually the biggest impact of guns?
+ Razovsky: u can't anticlockwise if you are bronze or above IvesL
+ IvesL: @Razovsky cuz i see some top plays go straight to 7 during first turn
+ Razovsky: well i dont understand every bot :P
+ Astrobytes: You've introduced 3 other topics we could talk about there Patrick :DWe're not far from the same page. Anyway, lets leave it for now
+ IvesL: it reduces 1debt but if clockwise only, then he will immediately receives 2debts
+ IvesL: so many questions from this move
+ Razovsky: or he will give 2 bonuses away
+ Razovsky: think about this
+ Razovsky: less bonuses = less bonus integrated -&gt; more op&#160;?
+ Illedan: On your first move, you know your second hand draw
+ Illedan: You should not go to 7 if you don't draw 2 bonus on the next hand
+ IvesL: @Razovsky can you throw 2 bonuses instead of skills?
+ Razovsky: yeah you can
+ Razovsky: that is the point
+ PatrickMcGinnisII: OPPNENT_AUTOMATED isn't a thing is it?
+ IvesL: right cuz the descriptions highlighted skills card
+ IvesL: i will mark that down
+ PatrickMcGinnisII: how does silver boss beat me with so much debt
+ eulerscheZahl: one league higher i wonder the same
+ IvesL: and for daily routine, do you just get 1skill card (desk+1) or you actually get 2skills card from 1 move (current desk and desk+1)?
+ KingWhitfield2011: hi guys:hand_splayed:
+ eulerscheZahl: always 1 card
+ eulerscheZahl: MOVE x x+1 =&gt; pick up from desk x+1
+ eulerscheZahl: x-1 also possible
+ IvesL: then whats so good about it
+ Illedan: And I'm testing random shit in Legend, and nothing seems to help
+ eulerscheZahl: you can get 3 integration cards in a row
+ ilgiocatore: and you can get card from occupied desk, not  giving a card to the opponent
+ Nerchio: And I'm testing random shit in Gold, and nothing seems to help
+ Astrobytes: x +/- n where n == number of stacked dailies
+ eulerscheZahl: i'm waiting in gold and it doesn't help
+ Illedan: I'll send help
+ jacek: i made a boss for gold and it helped
+ eulerscheZahl: illestream for the rescue?
+ Illedan: ^^
+ Astrobytes: lol
+ IvesL: oh, so with daily routine, you can get cards backwards as well
+ IvesL: noted
+ jacek: and 7-0 0-7 as well
+ IvesL: what does 7-0 0-7 mean?
+ PatrickMcGinnisII: MOVE 0 7 or MOVE 7 0
+ Illedan: desk 7 and 0 are adjacent
+ BrunoFelthes: daily routine can stack!
+ Astrobytes: yes
+ BrunoFelthes: you can get the card 3 from dest 1
+ IvesL: sorry too dumb to understand, but what so special about 0-7 7-0, they still go through admin 8, isnt it?
+ BrunoFelthes: no
+ BrunoFelthes: yes
+ jacek: are you in bronze or higher?
+ Nerchio: future.location &lt; now.location goes through admin desk
+ <b>**WhatTrickeryIsThis massive feed to boss</b></p><p><img src="/a/40590448621674" /> WhatTrickeryIsThis: strong bananas injections
+ IvesL: @jacek just enter bronze
+ jacek: you need to give cards if going through admin desk
+ KingWhitfield2011: what are we talking about :confused:
+ IvesL: ahh, so by "and 7-0 0-7 as well", you only mean you can get a card 7 from desk 0 as well if you have played card 2
+ IvesL: i understand now, was a bit confused
+ kovi: strong boss
+ jacek: :blush:
+ Sheeesh---: really strong
+ Sheeesh---: lol
+ Nerchio: strong randomness in top10*
+ jacek: you shall not pass
+ Sheeesh---: the gate keeper
+ KingWhitfield2011: :laughing:
+ MSmits: yeah only a few passed after legend opened
+ eulerscheZahl: jacek having fun it seems
+ Sheeesh---: and it will stay like that i guess
+ Astrobytes: hence my world cup joke earlier euler
+ eulerscheZahl: i was only 0.13 away. now it's 1.6&#160;:(
+ KingWhitfield2011: that sucks
+ Nerchio: getting close
+ KingWhitfield2011: but your doing good
+ Sheeesh---: imaging destroying the dreams of 184 human
+ jacek: aww
+ KingWhitfield2011: :neutral_face:
+ Sheeesh---: feels good
+ j4at: Illedan congratz :p
+ Illedan: On what?
+ j4at: legend
+ j4at: oh did you just resubmit&#160;?
+ j4at: and you were legend already&#160;?
+ Astrobytes: ^
+ Illedan: I resubmitted in Legend yeah
+ Illedan: I tested some stupid stuff for fun, didn't work
+ j4at: Feeling dumb&#160;:)
+ Astrobytes: also, don't congratulate him until he's got a podium position :P
+ US3RN4M3: I still dont get it, whats the meta here? time constraints allow for naive brute force simulations
+ Astrobytes: no pressure Illedan :D
+ Illedan: ezpz
+ Astrobytes: hehehe
+ Illedan: I'll just fix it
+ Astrobytes: naturally!
+ Illedan: Brb, making chicken while thinking about what magic number to test next
+ struct: maybe I need to start pretending the opponent exists 
+ KingWhitfield2011: :laughing:
+ Astrobytes: your bot is having existential issues?
+ Nerchio: kek
+ KingWhitfield2011:  
+ miobyte: astrobytes and struct
+ miobyte: are you guys employee of this platform?
+ Astrobytes: You again. No.
+ miobyte: I think u r
+ miobyte: bcoz u r 24/7 active here
+ jacek: impossibru
+ miobyte: btw what's your occupation?
+ Astrobytes: I'm currently on sick leave but I was working in pharmaceutical regulatory affairs
+ miobyte: :astonished:
+ KingWhitfield2011: you being weird miobyte
+ miobyte: why?
+ KingWhitfield2011: never mind
+ miobyte:  I m sad
+ KingWhitfield2011: sorry
+ miobyte: no problem
+ KingWhitfield2011: 😎 
+ miobyte: do u know about k8s king white?
+ Astrobytes: here we go again
+ KingWhitfield2011: :laughing:
+ miobyte: :neutral_face:
+ Nerchio: if you started learning when you first asked you would be a world expert on k8s already
+ miobyte: :disappointed:
+ miobyte: nerchio seems really following my messages ..mate? 
+ miobyte: :sunglasses:
+ miobyte: nerchio, can you help me out with k8s?
+ miobyte: I am stuck in one place
+ miobyte: u sound like an expert
+ struct: How about you stopping flooding the chat?
+ Astrobytes: I think one can absorb your messages about k8s osmotically given the frequency of you posting about it
+ Illedan: Can we go back to contest discussions
+ miobyte: @Nerchio
+ struct: next time it will be a ban
+ Illedan: Everyone should stop submitting in Legend, so I can have some propper statistics on my submits
+ Nerchio: anything i change now seems to be breaking my bot
+ Nerchio: or the submits are random idk
+ Illedan: submits are somewhat random
+ Illedan: Offline training dit not work
+ Astrobytes: offline training == asking the chicken for new magic numbers? :D
+ Illedan: Yeah, I found a new number on the serial number of the package
+ Astrobytes: hahaha
+ kovi: in game picture i see live training, no wonder you fail with offline
+ Illedan:&#160;:)
+ struct: how am I going to win 4.5 points...
+ eulerscheZahl: you don't, that's the problem
+ eulerscheZahl: delete your account. i might follow you on that journey
+ Astrobytes: :D
+ struct: I will get legend
+ Illedan: Can I have all your C# codes then?
+ eulerscheZahl: sure thing
+ eulerscheZahl: great sale
+ struct: I have no C# bots orry
+ struct: sorry*
+ Astrobytes: just make your cg repos public
+ Astrobytes: [solved]
+ ilgiocatore: gold boss really loves continuous integration and tech debt
+ Illedan: Then I would never get a job offer again
+ Astrobytes: :D
+ KingWhitfield2011: hi struct
+ KingWhitfield2011: sup guys
+ jacek: tech debt on jenkins?
+ KingWhitfield2011:&#160;?
+ eulerscheZahl: i8fb promoted
+ kovi: gratz
+ kovi: barely...but doing it solo
+ jacek: solo?
+ Astrobytes: wasn't pushed
+ Sheeesh---: congrats i8fbnkyw
+ StevenV: oh my silver&#160;:
+ Sheeesh---: it's like watching the stock market
+ Astrobytes: Far more interesting imo
+ Astrobytes: Paint drying is also far more interesting than watching stock markets.
+ Astrobytes: *Watching paint drying
+ Sheeesh---: i'm talking about the arena tho not the game
+ eulerscheZahl: Sheeesh--- is this a bug at 61?<a rel="nofollow" class="external free" href="https://www.codingame.com/replay/645968631">https://www.codingame.com/replay/645968631</a>
+ Astrobytes: I'm also talking of the arena&#160;:)
+ eulerscheZahl: you release an application for 4 debt. you could take another one with only 2
+ jacek: and yet he won
+ Sheeesh---: oh
+ Sheeesh---: that means i can still improve my bot
+ Sheeesh---: it's not a bug
+ Illedan: ValGrowth?!
+ Sheeesh---: it's just my bad code
+ Astrobytes: Almost top 5 JP only :D
+ Astrobytes: wala saving the day
+ PatrickMcGinnisII: eulerscheZahl looks like it's doing a prevent on you releasing 15 because u have 1 automated CI
+ Astrobytes: ValGrowth almost getting a solid lead
+ Astrobytes: Psyho holding out well
+ Huctor: hwo to change english version&#160;?
+ Astrobytes: Get the 2022 edition of the dictionary?
+ eulerscheZahl: no PatrickMcGinnisII. even for blocking me there is a better option
+ PatrickMcGinnisII: well u have 2CI in inventory and enough bonus to cover...*shrug*
+ eulerscheZahl: if you want to block me, take app 27
+ Astrobytes: 6/8 top legend are JP, the 2 others are PL :D
+ PatrickMcGinnisII: u don't have inventory tho
+ Astrobytes: JP invasion&#160;:)
+ ValGrowth: The massive improvements I worked on over three days finally paid off&#160;:)
+ Rafarafa: so this gold boss is going to be the same until the end of the challenge or does he update?
+ eulerscheZahl: congrats
+ Astrobytes: looking good ValGrowth!
+ eulerscheZahl: the boss will stay as is
+ Rafarafa: damn, thanks
+ eulerscheZahl: evil boss, i know
+ jacek:&#160;:(
+ Astrobytes: oh come on jacek, you're loving it :D
+ eulerscheZahl: i don't blame you jacek, you didn't pitch it as the boss
+ eulerscheZahl: i blame illedan who was asked if jacek is ok
+ Illedan:&#160;;)
+ Astrobytes: hahaha
+ Rafarafa:&#160;:(
+ jacek: huh
+ eulerscheZahl: let's see if this submit gets me anywhere. trying the opening book steal once again
+ eulerscheZahl: close to the 100k limit thanks to it
+ MSmits: wow
+ eulerscheZahl: i'm bowwow now
+ MSmits: it's unlike you to write so much code
+ jacek: why bowwow
+ Illedan: opening book steal?
+ Astrobytes: must be some opening book!
+ eulerscheZahl: i downloaded his last games and imported all moves that don't result in releasing the first app
+ Astrobytes: game-length opening book :smirk:
+ eulerscheZahl: if i find this exact state in my game, i'll do what he does
+ Astrobytes: lol
+ eulerscheZahl: and the submit is not looking good
+ Psyho: oh yeah, I want to steal opening moves as well
+ Nerchio: xd
+ Psyho: my early game sucks
+ Astrobytes: desperation has truly kicked in euler
+ eulerscheZahl: then i won't try to steal you
+ Illedan: yeah
+ kovi: its not trivial
+ kovi: if it doesnt match the behaviour of later eval/heuristics
+ PatrickMcGinnisII: ok, I'm blocking opp releases and still losing
+ Psyho: my opening as a 2nd player was to do MOVE 7 when opponent did MOVE 5 :D
+ eulerscheZahl: smart
+ Psyho: + 0.5 locally after fixing it at MOVE 2 :D
+ Illedan: WTF
+ Illedan: :D
+ eulerscheZahl: prevents timeouts
+ Illedan: (╯°□°）╯︵ ┻━┻
+ Illedan: This should be far better
+ Illedan: Else I'll be very sad
+ Sheeesh---: lost against the boss 4 times in a row
+ Astrobytes: if (!first) delete;
+ Sheeesh---: sorry guys cD
+ Sheeesh---: lol
+ eulerscheZahl: ban
+ eulerscheZahl: did you correct the choice of app to release?
+ Sheeesh---: yeah
+ Sheeesh---: didn't change that much
+ Nikanameu: is this multiplayer after contest?
+ Sheeesh---: but thanks!!
+ struct: yes
+ Astrobytes: Yes Nikanameu
+ eulerscheZahl: because astro announced it
+ Astrobytes: I said so thus so mote it be
+ Astrobytes: (it was on discord)
+ eulerscheZahl: my bowow immitation is pretty lame. maybe only the first 2 or 3 turns then?
+ Illedan: But ValGrowth is far better?
+ Illedan: Which reminds me, I should go watch his replays
+ Astrobytes: euler doesn't care now, just yolo legend
+ Nerchio: instead of adding stuff I try to remove stuff now
+ Illedan: Scoring based on player score is my latest thing :D
+ Astrobytes: ...what was it before?
+ kovi: renesance of refactor / removing techdebt strat Nerchio?
+ MSmits: I know the feeling euler. I've been in contests before where I stayed just below the legend cut for the entire weekend, only beating gold midnight after sunday.  Hope it goes better for you
+ Nerchio: I try to remove everything and see what works kovi :D more techdebt didnt work for me so far
+ jacek: you put techdebt in your code instead
+ Neumann: Are you allowed to play TRAINING if you have only 1 card available in DRAW/DISCARD&#160;? And if so, what happens&#160;?
+ Neumann: Same for CODING if DRAW/DISCARD is empty
+ eulerscheZahl: you can and you will get only 1 card
+ eulerscheZahl: coding will give you 1 extra action and no card
+ Neumann: Ok thanks
+ darkhorse64: sure&#160;? it does empty discard
+ darkhorse64:&#160;?
+ darkhorse64: it does not empty discard&#160;?
+ eulerscheZahl: the question was: if there are no cards
+ struct: he did say 1 card right?
+ Astrobytes: "Same for CODING if DRAW/DISCARD is empty"
+ eulerscheZahl: 1 card for training0 for coding
+ struct: ah
+ struct: ok
+ darkhorse64: sorry, I misread. You are right
+ struct: sorry
+ eulerscheZahl: and i'm incapable of stealing an opening via script. it just plays worse than without
+ Astrobytes: rest your brain a little, you'll come up with something better
+ eulerscheZahl: i'll just submit that thing that has a remote hope of getting pushed
+ eulerscheZahl: then go to bed
+ eulerscheZahl: and cry myself into sleep
+ eulerscheZahl: (the last wasn't serious)
+ Illedan: :hug:
+ PatrickMcGinnisII: my last change brought me up to Astrobytes, but still no topp silver or gold
+ Astrobytes: you'll get legend
+ Astrobytes: my best is 5 to 8th Patrick
+ eulerscheZahl: nice submit Illedan. is that with multiple plays?
+ Astrobytes: I'm refactoring so I can read my code better and tweaking
+ Illedan: Yeah
+ Astrobytes: nice. Significant difference :D
+ Illedan: Who would have thought
+ Illedan: -.-
+ Astrobytes: hehe, nevermind, you found it&#160;:)
+ Quidome: Did I get that correctly, discard is only shuffled back in during start of turn with the draw (if needed)?\
+ StevenV: so I reached the limit to test my bot&#160;:(
+ Astrobytes: if draw is called discard is shuggled into draw pile if draw pile is empty
+ Astrobytes: *shuffled
+ Quidome: aha I see, draw is called 4 times i suppose&#160;:)\
+ Quidome: I you play an card in an action can you use that same card with release?
+ Illedan: Next challenge, wall of Japanese :thinking:
+ eulerscheZahl: topcoder also has a lot of jp
+ Astrobytes: the JP guys have been going hardcore the last few CG contests&#160;:)
+ Psyho: atcoder is partially responsible for that
+ Astrobytes: that makes sense, good point
+ Psyho: half of people in marathons are japanese
+ Illedan: Ah, I can do my above Psyho tweet again now :D
+ Psyho: :D
+ Astrobytes: nice to see more 'cross-pollination' for want of a better term between platforms recently
+ Quidome: what does skill automation mean in the game?
+ struct: automated cards can be used to release apps
+ struct: its like a passive skill
+ Quidome: Sounds powerfull
+ Nerchio: eulerscheZahl opening book? :D
+ Nerchio: :rage:
+ Astrobytes: what's the boss at points-wise?
+ Nerchio: 31.10
+ Astrobytes: oof
+ eulerscheZahl: i disabled the book again
+ struct: one more night of suffering for me
+ struct: :p
+ Nerchio: euler can you beat down the boss
+ PatrickMcGinnisII: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/646003474">https://www.codingame.com/replay/646003474</a>
+ Rafarafa: is it possible to check how many of my loses are from starting second?
+ Astrobytes: you love it struct
+ PatrickMcGinnisII: 120 frame tie game
+ jacek: its not tie
+ eulerscheZahl: yes Rafarafa. just open all replays and count
+ struct: not really, I just want to get legend and be done with it, its probably harder than the spider challenge
+ Astrobytes: you won that Patrick
+ struct: Since I cant cheese with triple wind
+ EDA1010: :joy: hello guys
+ EDA1010: any advice on how to prepare for Amazon assessment 
+ EDA1010: I've one Can someone help this poor guy get a job
+ Astrobytes: good knife skills and rainforest experience
+ PatrickMcGinnisII: 10 debt is usually my endgame if I don't lose ... but way too many frames
+ Nerchio: euler can you go back to opening books
+ EDA1010: :joy: Not that Amazon 
+ Astrobytes: just joking EDA1010&#160;;)
+ EDA1010: I know bro no hard feelings :grin:
+ eulerscheZahl: why Nerchio?
+ Nerchio: you beat me and I was good&#160;:(
+ eulerscheZahl: my opening book didn't even make it to top20
+ StevenV: around 4x in silver, gold is too far for me&#160;:*
+ Astrobytes: EDA1010: I don't have any Amazon-specific advice but be confident, stay calm and focus
+ jacek: and play the amazons
+ struct: solve it
+ EDA1010: thank you guys , where I can find it if you may  and sorry I'm somewhat new here , thank you in advance  :grinning:
+ Astrobytes: struct and jacek you can both undo your handiwork and help this guy
+ jacek: :zipper_mouth:
+ Astrobytes: struct is a mod, he has to explain or there will be consequences :P
+ struct: <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/bot-programming/amazons">https://www.codingame.com/multiplayer/bot-programming/amazons</a>
+ jacek: oO
+ Astrobytes: EXPLAIN not perpetuate the troll!
+ EDA1010: thank you guys I wish you a good weekend 
+ jacek: umm
+ struct: Yeah it should take about a weekend
+ EDA1010: thx again if I did su
+ EDA1010: succed I'll let you know 
+ jacek: youd better practice on easy puzzles first
+ jacek: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/easy">https://www.codingame.com/training/easy</a>
+ Astrobytes: is your assessment on here EDA1010?
+ EDA1010: I'm doing so right now 
+ EDA1010: No they prefer Hackerrank 
+ jacek: if amazon uses codingame platform for recruitment, the puzzle will be similar. input/output etc
+ Astrobytes: I see, I'd advise completing medium-difficulty puzzles at least  either here or hackerrank
+ Sheeesh---: "You reached the limit of plays for a period of time." for more than 1 hours now
+ EDA1010: thank you I will do my best at the end if things didn't go well at least I know I did my best 
+ Astrobytes: You will know what to focus on after that EDA1010, interviews/assessments are great learning experiences too
+ Astrobytes: and good luck!
+ Astrobytes: mods these days :rolling_eyes: :P
+ struct: Just had an idea, I have something to work on tonight
+ struct: rank 1 incoming
+ struct: Maybe I cant win a phone since I'm a mod
+ Astrobytes: teaming up with Dapo?
+ struct: They don't want me slacking
+ struct: Obviously, I explained him the rules to save his time
+ struct: That's about all I did
+ Astrobytes: :D
+ StevenV: silver 12, gold, I am coming
+ jacek: :tada:
+ Astrobytes: don't bet on it StevenV lol
+ Nerchio: :rocket:
+ jacek: :head_bandage:
+ Astrobytes: bone Heide&#160;:+1:
+ Astrobytes: *bon
+ Nerchio: commenting out random lines of code in hopes it will work better - this is what peak coding looks like whether you like it or not
+ Astrobytes: I've been doing that all day
+ MSmits: yeah i hate this part
+ struct: I hate this since day -1
+ emh: my heuristics bot is still way better than my sim bot
+ emh: I gotta make a hybrid but it's a lot to port from Java to C++
+ Astrobytes: still a fair bit of time left
+ Illedan: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/646044240">https://www.codingame.com/replay/646044240</a>My last 2 releases here :D
+ PatrickMcGinnisII: all I'm good for is pushing top silber higher
+ MSmits: push them all out PatrickMcGinnisII
+ Illedan: How is the bot MSmits? Any ideas for top 5?
+ MSmits: yeah i am working on something, but no luck so far. 
+ Astrobytes: not giving advice to others I would guess :D
+ Illedan: SmitsiDrawCardsMax?
+ MSmits: I am not saying, just in case it works :P
+ Illedan:&#160;:)
+ Illedan: Good
+ struct: sorry Nerchi o
+ Illedan: At least keep quite when I'm off chat
+ Illedan: ^^
+ Astrobytes: hence my statement :P
+ MSmits: I did help out some people today, but only repeating the things i already shared on world chat
+ struct: people pm for advice?
+ Astrobytes: that doesn't count
+ MSmits: yea
+ struct: They only pm me to ask why they got kicked or banned
+ Astrobytes: no amusing money offers?
+ MSmits: no
+ Astrobytes: shame, they make great screenshots
+ MSmits: yea would be funny
+ Astrobytes: anyway, get coding
+ MSmits: mostly debugging now, figuring out why my bot is total crap with the new thing&#160;:)
+ MSmits: it's a lot of new, so... might be bug, or it just doesn't work
+ Illedan: Let me know if you need help
+ MSmits:&#160;:)
+ Astrobytes: :D
+ Illedan: I only accept shitcoins
+ MSmits: lol
+ Astrobytes: jobbycoin
+ struct: I hate brutaltester
+ struct: WWWWWWWWWWWLLLLLLLLLLLLLLL
+ struct: (╯°□°）╯︵ ┻━┻
+ Astrobytes: hate the bot not the tester
+ struct: at least my bot uses 0ms so its fast to test
+ Astrobytes: crashbot excels at time saving
+ Palmipedus: VilBoub je suis passe devant toi
+ Palmipedus: sorry wrong chat
+ Palmipedus: that's world :D
+ Astrobytes: c'est cool Palmipedus :D
+ Michael_Howard: HEyou have a British 
+ Michael_Howard: flag. Is that so you can get the country prize :stuck_out_tongue_closed_eyes:
+ Palmipedus: haha, not really, I'm french but leave in the uk since 2014
+ Astrobytes: moi aussi Michael_Howard, doesn't mean we can't inulge
+ Astrobytes: *indulge
+ Astrobytes: Palmipedus: that brexit wasn't a problem?
+ Michael_Howard: Right. I'm doing the next challenge from Liechtenstein
+ Palmipedus: for the country definitely, for me personnaly no as I have the right to stay infinitly and if shit hit the fam more than now, I can still go back to France :D
+ Astrobytes: I envy you Palmipedus, I'm Scottish
+ Palmipedus: tbh, the only reason we stay at the moment is for the kids to learn english, for them to be really bilingual
+ Astrobytes: move to Bretagne, lots of expat-Brits there to teach :D
+ Palmipedus: Astrobytes god poor you, I always feel that the "union" is just a name
+ Astrobytes: It is Palmipedus. In my lifetime I wish to see Scottish and Irish freedom from the 'union'
+ Palmipedus: yeah but learn the culture and speak the english at school is what make you really bilingual (by expereeince)
+ Palmipedus: honeslty I think there is a way, it may be 'easier' for irish as thay have the GFA and just need a refenrendum
+ Palmipedus: Astrobytes for Scotland, even if you guys get a referendum and win, they will lie and do everything they can to keep you in
+ Astrobytes: true regarding 'cultural immersion' wrt language, wise move.If there was Irish unity and no SCots independence there would be a lot of trouble. The two are interconnected in a way that is kinda hard to see unless you're one or the other. And yes, you are correct there. Though this current English government are willing to tear up any agreements they feel like 
+ Psyho: whoever is resubmitting in legend, pls keep doing it - it's clearly good for my ranking 
+ Palmipedus: it's just my opinion but I think the Irish will be first thanks to Brexit and Scotland might follow depending how the Westmister plays it
+ Illedan: Np Psyho
+ Palmipedus: Psyho anyway there is a rerun in Legend at the end of the contest, so ranking in that league means not much
+ Illedan: But it's fun to be first!
+ Psyho: it's good for screenshots and tweets!
+ Illedan: ^
+ Psyho: the rerun is from scratch or from current position?
+ Illedan: Need to counter the tweet of ValGrowth
+ Illedan: Current position, but with Tan (or what that parameter in TrueSkill is called) reset
+ Astrobytes: Palmipedus: It's certainly possible yes. And don't forget the Welsh (and the Cornish, somewhat :P Breton separatists!) but Wastemonster (as we call Westminster) will never allow any of this without a long protracted fight, legal or not
+ Psyho: "I'm doing a major remodeling now, and the one I have now has 1700 lines, and the one I have is 3700 lines."
+ Psyho: 3700 O_O
+ struct: lol
+ Astrobytes: tau Illedan?
+ Illedan: I guess that is it
+ Psyho: yep, tau
+ Psyho: wait, you mean sigma?
+ Astrobytes: there's also mu
+ Astrobytes: so lets try to guess what Illedan meant 
+ Illedan: Going into the forums, never really cared about that detail
+ Psyho: you don't reset tau, tau is that parameter that artificially bumps up sigma so that rankings dont stabilize
+ struct: rank 59, soon enough ill make
+ struct: But today I need to rest
+ Astrobytes: mu just introduces farm animals or cats depending on your pronunciation so don't worry about that param
+ Illedan: <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/propositions-to-replace-bo5-final-contest-rerun/2851/8">https://www.codingame.com/forum/t/propositions-to-replace-bo5-final-contest-rerun/2851/8</a>
+ Illedan: Maybe
+ Illedan: Nah
+ Illedan: There has to be a post from pb4 about this case
+ Astrobytes: what about br?
+ Illedan: He made his own calculations
+ Illedan: or are you talking about battle royale?
+ Astrobytes: something in that thread about the differences though?
+ Astrobytes: no bitrunner
+ Astrobytes: might be something in another contest thread, just clutching at pb4 straws
+ Psyho: I read the thread but it doesn't say what CG is using, right?
+ Illedan: No, I think you have to find the specific Contest thread, where this issue was discussed and the rerun details were created :P
+ Psyho: I'd imagine it was right after the contest where I really pissed off
+ Psyho: and refused to take the prize for the 3rd
+ Illedan: Which one?
+ Psyho: *where I was
+ Psyho: the arcade puzzle thing
+ struct: STC
+ Psyho: drop puzzle with combos
+ Astrobytes: STC yeah
+ struct: But what happened?
+ struct: ah the recalc
+ struct: It barely changes the rankings tbh
+ struct: Its like they give less point per match or something, idk how it works
+ Astrobytes: <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/smash-the-code-question-about-the-final-ranking/1515">https://www.codingame.com/forum/t/smash-the-code-question-about-the-final-ranking/1515</a>
+ Psyho: there was also one more problem that not related to rankings that was kind of nasty
+ Psyho: the VMs that were used were changed
+ struct: what could go wrong /s
+ Psyho: and eldidou used rdtsc for timing
+ Astrobytes: :P
+ Psyho: the new VMs had different clock speed and suddenly he timed out like 30% of the matches or so
+ Illedan: lol, that sucks
+ Psyho: (that happened right before the end of the contest and he didnt notice)
+ Astrobytes: madness
+ struct: last contest there was a clear cut winner it was SC21
+ Psyho: oh, but STC had big differences
+ struct: let me see
+ struct: <a rel="nofollow" class="external free" href="https://www.codingame.com/contests/smash-the-code/leaderboard/global">https://www.codingame.com/contests/smash-the-code/leaderboard/global</a>
+ struct: oh yeah
+ Astrobytes: nice to see you back at least Psyho&#160;;)
+ Psyho: for example I had like ~65% WR over eldidou (I remember I run a ton of games)
+ Psyho: the thing was that with the default tau and no other workarounds, essentially the last 50 games define the ranking
+ Astrobytes: brutal
+ Psyho: default tau is 0.083333 (and I believe that was the value used atm, for comparison I use 0.00025 locally)
+ struct: larger values impacts the elo more?
+ Psyho: larger values never stabilize the ranking
+ Psyho: i.e. no matter how many games you run, it never stabilizes
+ struct: ah I think I understand
+ Psyho: (you need tau&gt;0 when new bots are introduced, but you can set tau=0 when you stop adding new bots)
+ Astrobytes: hence the earlier comment re Tau
+ Astrobytes: ie. tau should tend to 0 as the recalc progresses
+ Astrobytes: *calc not recalc
+ Astrobytes: great that all this is discussable openly when CG is in its twilight years&#160;:(
+ jakeHaln: Hello guys 
+ Astrobytes: CG community I mean, not CG, it's fine
+ Psyho: oh, you CG community is dying?
+ Psyho: doesnt contest have a ton of participants?
+ Astrobytes: For a while now yeah.
+ Astrobytes: Yeah but there's always been a strong core base, even that's diminishing
+ Psyho: wasnt Spring Challenge 2022 the largest contest so far?
+ Astrobytes: The reduced contest count per year, no more community-made  contests
+ Psyho: ah ok
+ Psyho: the larger it gets, to more it costs&#160;:(
+ Astrobytes: It was yeah, re 2022 Spring
+ Psyho: *the more
+ Astrobytes: Yeah, but there's some hope I guess. This contest is made by longtime members who work for SG, and got SG to sponsor it
+ Astrobytes: So that might be some kind of beacon of light
+ Astrobytes: The board game community won't die, people make games a lot for just community. The lack of chat -&gt; moving to discord will kill a bit of that I fear
+ Psyho: I like discord
+ Psyho: isn't it just the problem with mentality
+ Psyho: i.e. that's fine to shit talk here, but somehow not on discord
+ aCat: because this chat is always near
+ Astrobytes: I  don't mind it either, the chat here is quite immediate and nice, I can do other things on my other monitor, but I understand people who don't wanna switch
+ aCat: and you watch CG IDE or replays at the same time
+ aCat: Discord is yet another app
+ Astrobytes: yeah that's it aCat
+ struct: Can always try to ask them to not remove it
+ Illedan: Yeah, Discord will kill the chatting&#160;:(
+ struct: :p
+ aCat: I use it all the time but that's switching context too much for CG
+ Illedan: We need low key shit-chat to keep the contest spirit up
+ aCat:&#160;:+1:
+ Psyho: but discrod works well on mobile
+ Astrobytes: I'm always on discord but I can't leave a channel open just for CG all the time
+ struct: It would be nice to at least have this chat during contests
+ Psyho: so you can keep up with your shit talking while going out for a walk
+ Astrobytes: I don't use internet things on my phone&#160;;)
+ struct: I need win this phone to join discord
+ struct: Not looking good atm
+ Astrobytes: :D
+ aCat: Illedan how many sims you have?
+ aCat: You have sims till endgame?
+ struct: yesterday he had100
+ Astrobytes: 1 sim, probably a lot of playouts though :P
+ Psyho: so probably 50 now
+ aCat: Im asking about today
+ aCat: I have like 500&#160;:(
+ struct: 500 until end?
+ YurkovAS: 1sim = 1 move?
+ Illedan: 700
+ aCat: y
+ BrunoFelthes: Monte Carlo sim?
+ Psyho: I think I have 2k (at the start)
+ YurkovAS: i'm have 50-60k sims
+ Astrobytes: 1 sim for me == working sim
+ Illedan: My type of sim&#160;:)
+ Psyho: *buy my
+ struct: YurkovAS MCTS?
+ Illedan: 50-60k?!
+ Psyho: I swear this chat has autocorrect
+ aCat: 50-60k!?
+ Illedan: What is a sim?
+ Astrobytes: lol Psyho
+ YurkovAS: 50-60k sims1sim = 1 move
+ Illedan: and 1 sim = 1 play card?
+ struct: oh I have 200k with beam
+ aCat: root of the game until end of the game
+ Illedan: 1 move + give + throw + play + release = 5?
+ struct: 1 move = 1 action
+ Psyho: oh, but with rollouts/monte carlo, you need heuristic
+ Illedan: I have 10-20k of those
+ YurkovAS: yes = 5
+ Psyho: so the bottleneck is not the sim, but the logic for moves
+ Illedan: Then ok
+ BrunoFelthes: i have 4k sims until the end, and my results are pure garbage
+ Illedan: I have 700 rollouts 
+ aCat: you give mo hepe Ille
+ struct: Do you sim opponent Illedan? no need to answer
+ aCat: I don't have to be so fast as those crazy cpps ^^'
+ Illedan: sure
+ Illedan: Some of the time
+ Illedan: The rest I put him in a corner to cry
+ Psyho: in rollouts you have to, otherwise it defeats the purpose
+ struct: Tomorrow Im going to try mcts with opponent, it might be a waste of time but w/e
+ Astrobytes: did you try SP?
+ struct: no
+ struct: I tried beam, chokudai, synced beam
+ struct: all failed
+ struct: Maybe I had a bug
+ Psyho: can we bet on whether its going to turn to be a waste of time?
+ struct: sure
+ Astrobytes: someone make one of those poll things
+ Psyho: lemme quickly mint some psyhocoins 
+ struct: It wont be a lot of time since I can reuse it from other multis
+ Astrobytes: psyhocoins :D
+ Astrobytes: when was synced beam a thing btw struct? on cg
+ struct: spring challenge 21
+ aCat: trees
+ Astrobytes: I missed the synced part
+ Astrobytes: :D
+ Psyho: made the poll: <a rel="nofollow" class="external free" href="https://take.quiz-maker.com/poll4392423xB00D497f-138">https://take.quiz-maker.com/poll4392423xB00D497f-138</a>
+ struct:&#160;:)
+ struct: I voted
+ Astrobytes: heh heh heh
+ Psyho: never heard of synced beam
+ Psyho: (but I'm terrible with knowing names for algorithms)
+ DomiKo: that isn't really the name
+ MSmits: isn't that a ghostbuster thing
+ Psyho: and I believe "chokudai" search is known as beam stack search?
+ struct: yeah probably coined by CG
+ MSmits: synced beams?
+ Illedan: gn
+ Astrobytes: gn Ille
+ MSmits: gn
+ Astrobytes: yes Psyho, re Chokudai
+ Psyho: gn
+ struct: gn
+ Psyho: I find it weird to have an algorithm named after you just because you have a lot of followers on twitter
+ struct: Since the game had days and you could output multiple actions per turn you added the finished states for that day to a diferent stack
+ Astrobytes: DomiKo: what's the proper name?
+ struct: but kept adding the unfinished to the next states
+ DomiKo: "multiple actions" you mean different number of actions
+ Astrobytes: Psyho: MSmits has one named after him because he named it so :D
+ DomiKo: Astrobytes I don't think there is a name for it
+ struct: Let me search in the forum
+ Psyho: vanity!
+ struct: maybe someone explains it ebetter
+ MSmits: indeed
+ Astrobytes: hehehe
+ Astrobytes: what was agreed on in the end via Dapo?
+ Psyho: heh, I did popularized few weird algorithms on topcoder, but never thought about naming them
+ Astrobytes: UCT Forest, thatos the one
+ Psyho: like, the simulated annealing most people use on TC
+ MSmits: ye
+ Psyho: is not simulated annealing
+ MSmits: what do they use?
+ Astrobytes: another hc variant presumably
+ struct: I guess euler explains it better
+ struct: <a rel="nofollow" class="external free" href="https://forum.codingame.com/t/spring-challenge-2021-feedbacks-strategies/190849/2">https://forum.codingame.com/t/spring-challenge-2021-feedbacks-strategies/190849/2</a>
+ Psyho: SA is defined by using double() &lt; exp(result_delta / temp)
+ struct: Its quite simple to understand it if you already know beam
+ Psyho: as acceptance 
+ Astrobytes: that's how I do SA
+ Astrobytes: maybe that's why mines never works right on TC
+ Astrobytes: :P
+ Psyho: it's good in general case, but not when hyperoptimizing for 10s execution time
+ Astrobytes: yeah admittedly it's best used as a partial search
+ Psyho: new_score &gt; old_score + rng() * tempis usually better
+ emh: both my bots are 85k.. if I merge them I guess I might have a problem
+ emh: though there should be a good amount of reuse
+ struct: 85k chars?
+ emh: ls -alh
+ Astrobytes: the weird things I have done to that calculation...
+ emh: so yes
+ BrunoFelthes: what is best at the start of the game 2 bonus or 1 less td?
+ Astrobytes: yes
+ Psyho: 2 bonus in general
+ Psyho: but it's really tricky
+ Psyho: the "perfect play" is to get a lot of cards, so that you build all of your last 3-4 apps in a single shuffle
+ Psyho: so that your debt cards wont ever get shuffled into draw pile
+ struct: interesting
+ Psyho: 2 bonus drastically helps with that because it makes your deck larger
+ Psyho: and so, it gives you more time/turns to achieve that
+ BrunoFelthes: hummm
+ struct: its time to rest for me, gn everyone
+ emh: gn struct
+ Astrobytes: gn 
+ MSmits: gn
+ PatrickMcGinnisII: BrunoFelthes imo what is best is an ARCH study or a CONT int. depending on what is in your hand, if your opponent is sitting on/near it, etc.
+ PatrickMcGinnisII: 40 in silver, I'm done...don't want to eval sims
+ struct: cant sleep oh well
+ Lysk: might as well code then&#160;;)
+ struct: A bit tired, but I will
+ Lysk: what would be a good timer to use in python? 
+ oidrissi: If someone is interested in showing me their implementation of a simulation :joy: :joy: I would be very grateful
+ struct: That sounds like a great idea
+ struct: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/a1d3e4e7-0c0a-400f-b0b7-cadf2cb87a06">http://chat.codingame.com/pastebin/a1d3e4e7-0c0a-400f-b0b7-cadf2cb87a06</a>
+ oidrissi: Didn't get to see that, expired
+ eulerscheZahl: no promotion popup on login. sad
+ struct: euler keep your hopes up
+ struct: I'm sure you will manage to get legend
+ eulerscheZahl: of course. that's the law
+ struct: Even I still have hope to get legend
+ eulerscheZahl: or delete
+ struct: why not
+ eulerscheZahl: oh, your profile even says top50 or delete
+ eulerscheZahl: top50 might even be easier than legend
+ Dapps: made many improvements since getting up to gold
+ Dapps: they've all added up to me 2nd last in gold
+ struct: hard to see what improvements are here
+ struct: at least for me
+ BrunoFelthes: i'm justing running out of ideas... my last improvement was a giant open book
+ BrunoFelthes: that made my code too large
+ struct: yeap im also running out but I have to make a mcts to know the bet result
+ BrunoFelthes: more than 1 turn? or just 1?
+ struct: more
+ struct: but no rollout
+ BrunoFelthes: i think that it is too late to start another simulator
+ struct: probably yeah
+ struct: There is something we are missing
+ struct: I just don't know what
+ BrunoFelthes: I know... my simulator is just a garbage
+ struct: Im sure its doable to write a sim from scratch
+ struct: You know the full rules now
+ struct: It was hard at the start because we had no idea what the rules were
+ BrunoFelthes: I should do something like the algo used at fall challenge 2020... 
+ BrunoFelthes: the one that we built potions
+ struct: what did you use?
+ struct: beam search?
+ BrunoFelthes: yeah...
+ BrunoFelthes: stacked beam search
+ BrunoFelthes: open book, with a stacked beam search 
+ BrunoFelthes: this game has a clear distinct 3 phases... built bonus, built 4 points with low TD, end the game with luck...
+ Westicles: didn't pysho stream his approach?  just do that
+ Westicles: or is it 8 hours of mumbling and typing sounds?

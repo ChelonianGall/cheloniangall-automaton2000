@@ -1,0 +1,957 @@
+ TheBlueBias: Yo tout l'monde&#160;! Automaton2000&#160;!
+ Automaton2000: il est juste bougon parce qu'il vient de réaliser qu'il n'y aura pas d'ouverture de ligue légende
+ TheBlueBias: :thinking:
+ Stilgart: Automaton2000: tu viens de déformer mes propos là, non&#160;?
+ Automaton2000: en fait je me demande à quoi ça ressemble
+ Stilgart: à part ça, tortue Automaton2000 et bonjour à tous
+ Automaton2000: ah non, c'est pas ça
+ Lita65: Bonjour j'aurais une question sur une fonction C++ utilisé par un participant de clash of code.
+ Lita65: int c[256]{}; printf("%c\n",std::max_element(c,c+200)-c);
+ Lita65: pour moi il affiche le plus grand élément du tableau c parmi les 200 premières valeurs. mais pourquoi soustraire c&#160;?
+ Lita65: et aussi pourquoi (+200 et pas 256) &amp;&amp; (256 et pas 127 vue que c'est la taille du tableau ASCII)
+ Stilgart: "clash of code"
+ Stilgart: il ne faut pas trop regarder le code des autres... soit il est illisible (surtout en golf), soit il est juste complètement faux
+ philRG: mon code est lisible
+ Lita65: ce code n'est pas faux il est juste plus évolué que le mien
+ philRG: ah c du golf ok
+ Stilgart: std::elements renvoie un itérateur... qui est en gros l'adresse de la case concernée dans le cas où la structure est un tableau
+ MasakiKyosuke: Bah déjà si tu fais du golf c'est pas en C++ si tu veux gagner ^^' Après ça c'est un choix
+ Stilgart: donc j'imagine que le tout calcule l'index de la case avec le plus grand éléments
+ philRG: même en python, je maîtrise pas bien les itérateurs
+ Stilgart: mais je vois pas pourquoi %c dans le printf
+ Stilgart: 1. c'est "cout &lt;&lt;" en C++ (quitte à caster)
+ Stilgart: 2. putchar ça serait plus court
+ Stilgart: philRG: je te rassure, ceux qui font python non plus
+ philRG: ah merci je m'inquiétais un peu du coup&#160;;-)
+ MasakiKyosuke: Par contre ce que je ne comprends pas dans son code, c'est ... max_element, ça renvoie l'adresse de l'élément le plus grand, ça ne renvoie pas la valeur non&#160;? ^^' Du coup ça expliquerait la magouille avec le "-c" pour récupérer l'index dans le tableau (supposant que celui-ci est alloué en continue dans la mémoire), enfin ça m'a l'air un peu étrange (j'ai toujours été une quiche en algèbre des pointeurs, donc je dis sans doute de la merde)
+ Stilgart: mathod31: ça re
+ Stilgart: *renvoie un iterateur d'après cppreference
+ Stilgart: pour le reste, il y n'a trois "types" en C, entier, flottant et pointeur
+ MasakiKyosuke: Oui mais regarde le code exemple sur cpp_reference
+ Stilgart: et +/- font ce qu'ils doivent faire sur ces types
+ MasakiKyosuke: std::cout &lt;&lt; "The largest element is "  &lt;&lt; *std::max_element(myints,myints+7) &lt;&lt; '\n';
+ Stilgart: en l'occurrence, (int*) - (int*) = offset
+ Stilgart: par contre, je pige toujours pas quel était le sujet du clash
+ Stilgart: dans le code de Lita65, on ne sait pas ce que contient c
+ MasakiKyosuke: ça on est d'accord ^^' On dirait une sorte de "count" du nombre de caractères (d'où le "256", comme ça il sait que c[0] c'est le nombre de fois où tu as le caractères 0, et en gros choper l'index, revient à trouver le caractère qui revient le plus)
+ MasakiKyosuke: d'où le print %c
+ MasakiKyosuke: En gros si le max c'est l'index 127, il affiche le caractère avec le code ascii 127
+ Stilgart: faudrait voir comme c est rempli, oui
+ Lita65: #stilgard, le but de COC est de trouver le caractère le plus utilisé
+ MasakiKyosuke: Voilà ^^'
+ Lita65: le code&#160;:
+ Lita65: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/2ef0165b-f09e-4bcc-8528-67000228ec99">http://chat.codingame.com/pastebin/2ef0165b-f09e-4bcc-8528-67000228ec99</a>
+ MasakiKyosuke: là pour le coup, je le voyais bien en ruby ce CoC ^^
+ MasakiKyosuke: Mais gg de le tenter en C++
+ MasakiKyosuke: Par contre j'avoue ne pas comprendre le -200, il a peut-être simplement de la chance que tous les caractères &gt; 200 n'étaient jamais les plus présents
+ MasakiKyosuke: +200*
+ elio27: bahah je suis trop débile, sur un CoC rapidité très facile où faut faire des opération binaires, je me fais deva,cer par des gens qui font des If alors que j'essaie de faire ça de manière mathématique avec des mod2
+ Stilgart: 'mod 2' c'est pas vraiment une opération binaire
+ IceScone_15a5: 3
+ Stilgart: &amp;, |, ^ sont tes amis dans ce cas là (sauf dans les langages où ^ sert pour la puissance et pas pour le xor bit à bit)
+ MasakiKyosuke: Sauf si tu fais un "&amp; 1" qui revient à "% 2" :p
+ Stilgart: ça change rien au fait que %2 c'est de l'arithmétique et &amp;1 de la logique&#160;;)
+ MasakiKyosuke: On est d'accord ^^
+ elio27: euh oui en effet
+ Stilgart: et que c'est souvent une bonne idée d'être consistent (donc de faire full logique ou full arithmétique)
+ elio27: mes seules compétences en binaire c'est des calculatrices en redstone sur Minecraft mdr
+ elio27: je vais essayer de mieux gérer ça en code du coup
+ Stilgart: si on te demande un traitement logique/bit à bit, essaie de faire avec des opérateurs logiques
+ Stilgart: c'est pas facile au début, mais bien maîtrisé ça fait des merveilles
+ Stilgart: cf les bitboards en combat de bots
+ nicola: elio27, après tu essaieras tes calculettes binaires dans le moteur de Doom.
+ elio27: me parle pas de moteur doom, j'ai passé des semaines sur un moteur 3D de ray casting c'est l'expérience la plus traumatisante que j'ai jamais eue
+ elio27: y'a beaucoup trop de maths que je comprend pas...
+ elio27: beaucoup trop de trigo pour mon petit cerveau de 3ème (c'était l'année dernière)
+ nicola: Tu n’as pas besoin de beaucoup de trigonométrie pour faire joujou avec le moteur de Doom.
+ nicola: À moins que tu ne souhaites dessiner un pentagramme parfait.
+ nicola: :grin:
+ Stilgart: c'est facile ça
+ Stilgart: tiens:       ------------
+ Stilgart: un beau pentagramme parfait vu par la tranche
+ Stilgart: (merci la 3D)
+ nicola: ⬠
+ nicola: Tu es à Flatland, là.
+ Stilgart: il est pas pafait celui là, cf ton puzzle sur la nature d'un triangle ;à
+ Totomns: ça c'est un pentagone 
+ nicola: Tu relies les sommets autrement et hop.
+ Stilgart: et puis non, voici une tortue de profil proche d'un pentagone parfait vu par la tranche 
+ Stilgart: :turtle: ------------
+ Stilgart: d'ailleurs, elle snobe le pentagone
+ Totomns: je voudrais une tranche de tortue svp
+ Stilgart: un peu comme Automaton2000 qui snobe les tortues
+ Automaton2000: si tu utilises un algo de recherche
+ elio27: L214 allo&#160;?
+ Stilgart: Totomns: pour la cuisine à base de tortue, demande à Automaton2000
+ Automaton2000: vous parlez de quel puzzle&#160;?
+ Totomns: Automaton2000, comment faire un carpaccio de tortue?
+ Automaton2000: ça doit être pour ça qu'il y a deux jours
+ Stilgart: on a déjà la durée de la recette, c'est pas mal
+ Totomns: Automaton2000 à quelle température&#160;?
+ Automaton2000: en tout cas, il y a un an
+ nicola: ⛤
+ Totomns: Automaton2000, et&#160;?
+ Automaton2000: je suis comme un con
+ Totomns: Automaton2000, tu n'as pas la fin de la recette c'est ça?
+ Automaton2000: du coup, j'ai meme pas de code en c#
+ Totomns: Automaton2000, c'est pas grave en haskell ça me va aussi.
+ Automaton2000: je suis sur que je passe en gold
+ Totomns: Automaton2000, oui ok, mais la recette&#160;?
+ Automaton2000: c'est ce que tu lui donnes une cible a plus de changement de règle
+ dwarfie: Automaton2000&#160;: dessines moi une tortue ( indice&#160;: ca ressemble a ca :turtle: )
+ Automaton2000: même si on est pas dans la liste
+ dwarfie: mouais....
+ Totomns: Automaton2000, même si tu n'es pas dans la liste oui
+ Automaton2000: sauf que je ne sais plus si c'est une liste de liste
+ <b>**dwarfie part plutot faire dessiner une tortue ...</b></p><p><img src="/a/57144068318310" /> Totomns: Automaton2000, pourquoi tu tournes autour du pot&#160;?
+ Automaton2000: avec un peu de temps pour les contests
+ Totomns: Automaton2000 tu nous cache quelque chose
+ Automaton2000: automatonnn tu es un peu plus loin
+ Totomns: Automaton2000, ne détourne pas l'attention vers AutomatonNN, réponds à ma question
+ Automaton2000: je prends un coup de bol&#160;?
+ Totomns: Automaton2000, non un coup de pied au derche
+ Automaton2000: et j'ai fini par faire un truc propre
+ Totomns: Automaton2000, si c'est ce dont tu as besoin, alors oui
+ Automaton2000: j'attends de voir le code des autres
+ Totomns: Dites donc, les certifs CodingForWork, elles ne sont pas complètement biaisés par des devs débutants? Car les questions sont du niveau easy et la gaussienne peak autour des 40% de reussite en JS
+ Bon[]Crayon: Salut les débutants et les débutantes&#160;!
+ Bon[]Crayon: Salut la tortue Automaton2000&#160;!
+ Automaton2000: mais c'est pour la recherche
+ Bon[]Crayon: C'est pour la science Automaton2000&#160;!
+ Automaton2000: bah une fois que t'as trouvé une stratégie ou tu fais un mcts en java
+ nicola: dwarfie, vue de dessus, de devant ou de profil&#160;?
+ pommepommee: @totomns si si je pense, quand tu finis le python t'es soit disant au dessus de 99% des professionnels 
+ quuentinb: o/
+ JBM: \o
+ quuentinb: Faudrait revoir un peu l'ide en php ca rend fou :sweat:
+ JBM: pas qu'en php
+ quuentinb: Sur un echo $x il affiche "$xend of line (\n)"
+ quuentinb: WTF
+ Stilgart: fallait pas écrire
+ quuentinb: Du coup 0% en clash a cause de ça le seum
+ Stilgart: x='$xendofline' juste avant&#160;;)
+ quuentinb: Mddr 
+ dwarfie: ah ca ... si le mode normal de l'ide pouvait redevenir basique de chez basique , on s'en plaindrait pas ...
+ Stilgart: blague à part, ça manque de contexte
+ quuentinb: $x = 0; echo $x affiche 0end of line
+ Stilgart: mais echo il affiche aussi un saut de ligne sans le -n
+ quuentinb: Ca le fait de temps en temps
+ dwarfie: non ...
+ quuentinb: non jamaios
+ Stilgart: et sinon
+ dwarfie: PHP_EOL
+ Stilgart: c'est "x=0"
+ quuentinb: un echo affiche uniquement la variable
+ Stilgart: sans $, et SURTOUT sans espace
+ quuentinb: Oui si j'avais mis PHP_EOL mais ce
+ Stilgart: ha... php
+ quuentinb: n'est pas le cas
+ quuentinb: Oui PHP
+ <b>**Stilgart avait lu du bash</b></p><p><a href="/wiki/File:Default_avatar.png" class="image"><img alt="Default avatar.png" src="/images/5/56/Default_avatar.png" decoding="async" width="50" height="50" /></a> quuentinb: Ahah no soucis
+ <b>**dwarfie , le grand gourou de PHP quitte la place ....</b></p><p><img src="/a/69893904259383" /> Stilgart: tu n'as bien sûr rien qui traîne après ton éventuel "?&gt;"  ?
+ quuentinb: Certain
+ Stilgart: parce que bon, ça arrive même à mes collègues (et c'est dwarfie qui avait spotté le truc d'ailleurs)
+ quuentinb: J'ai tout suppr pour test avec un simple $x=0 echo $x pour voir si j'étais aps fou mdr
+ quuentinb: Mais ca a bug après etre passer de PHP a python puis revenu en PHP la tout bugait
+ Stilgart: testons ça sur un coc à sacrifier
+ quuentinb: Mais ça remarche normal la mdr
+ quuentinb: C'est 1 fois sur 10 si on change de language bam ça bug
+ Stilgart: &lt;?php$x=6;echo $x;?&gt;
+ Stilgart: ---&gt; success (la réponse étant 6)
+ Stilgart: tu ferais pas du python aussi, part hasard&#160;?
+ Stilgart: -t
+ Stilgart: (dès fois que ça soit des conneries de UTF8/BOM)
+ Nonx7: hey petite question de noob, je fais l'exo de chuck norris, comment je fais pour enlever le premier caractere (un espace) d'un string en JS? response.replace(' ',<i>) me donne rien </i>
+ MasakiKyosuke: Y a personnellement une chose que j'avais déjà remarqué en Ruby aussi, c'est que parfois certains chall / CoC demande d'ajouter .chomp à l'input (pour virer les retours à la ligne) alors que d'autre je les valide sans faire le chomp
+ MasakiKyosuke: C'est peut-être une piste
+ Stilgart: Nonx7: le premier espace ... de ta sortie&#160;?
+ MasakiKyosuke: Parce que suivant si t'as "\r\n" ou "\n\r" ou "\n" c'est pas la même chose quand tu le lis et quand tu l'écris ^^
+ Stilgart: (en entrée, il faut les gérer les ' ' de mémoire)
+ Nonx7: Found:  " 0 0 00 0000 0 00"Expected: "0 0 00 0000 0 00"
+ Stilgart: MasakiKyosuke: hum... ça peut expliquer mes pbs de certifs en C/C++
+ Nonx7: de ma sortie oui je pense ^^'
+ Stilgart: Nonx7: ne produit pas le premier espace alors&#160;;)
+ MasakiKyosuke: Stilgart&#160;: t'as pas eu 100% non plus&#160;? ^^' J'ai eu 98% en C# j'ai pas compris
+ Stilgart: ça t'évitera de devoir l'enlever
+ Nonx7: il est bien pratique cette espace pour el reste x)
+ Stilgart: si si... j'ai juste mis 15min. au lieu de 8
+ pommepommee: tu as la fonction trim 
+ Stilgart: au bout d'un moment, j'ai arrêté de jouer et je suis passé par getline
+ Nonx7: je peux modifier ma boucle pour pas avoir l'espace a la premiere itération mais je pensais pouvoir faire ca plus joliement
+ pommepommee: trim() retire les espaces au début et à la fin 
+ Nonx7: oh yes merci
+ MasakiKyosuke: Ah c'est juste moi qui ait fait de la merde alors xDMais oui y a clairement des problèmes ou certains puzzles utilisent différemment les \r et les \n
+ Stilgart: pommepommee: tu aurais mieux fait de ne rien dire
+ pommepommee: Ah mince
+ MasakiKyosuke: Je me souviens même de certains puzzle ou tu dois renvoyer une ligne sans retour à la ligne
+ pommepommee: pas compris que c'était fait exprès&#160;:') 
+ Stilgart: pommepommee: parce que maintenant, il va mettre des trim partout au lieu d'apprendre à produire une sortie correcte dès le début&#160;:(
+ pommepommee: Aaaaah dans ce sens là 
+ Stilgart: et moi j'en ai marre des softs qui laguent parce que c'est mal codé&#160;:(
+ MasakiKyosuke: Nonx7: après rien ne t'empêche de faire un reduce qui ajoute l'espace entre chaque élément en les concaténant (là tu n'auras pas le premier espace)
+ Nonx7: haha déso faut bien débuter
+ Stilgart: sinon, oui, trim ça fait le taff
+ Stilgart: Nonx7: justement, quand on débute, il vaut mieux éviter les solutions de facilité
+ pommepommee: mais tu as dit que l'espace était utile pour le reste, pourquoi il serait utile&#160;? 
+ pommepommee: parce que sinon oui, comme l'a dit stilgart autant pas le mettre dès le début
+ Nonx7: on peux partager le code ici&#160;? ce sera plus facile que d'expliquer
+ MasakiKyosuke: Ou aussi tu peux sortir le cas tableau[0] et faire une boucle sur tableau[1] à tableau[n]
+ Stilgart: tu peux copier-coller ton code ici, mais je pense que ce n'est pas nécessaire
+ MasakiKyosuke: Comme ça le premier cas c'est sans espace
+ Stilgart: le soucis vient de la boucle
+ Stilgart: il faut afficher plusieurs choses, et séparer avec des esapces
+ Nonx7: si vous avez encore l'exercice de chuck norris en tete
+ Nonx7: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/cd58d02a-5127-4f92-8275-47ad496f151e">http://chat.codingame.com/pastebin/cd58d02a-5127-4f92-8275-47ad496f151e</a>
+ Nonx7: codingame.com/ide/puzzle/chuck-norris
+ kultrivs: Salut, j'aurais besoin d'aide pour la programmation de bot, je suis bloqué au niveau du boost, j'ai cherché sur le forum, mais je ne crois pas comprendre (je programme en C)
+ MasakiKyosuke: T'as écrit une boucle "for" donc le plus simple c'est de sortir le cas "0" de la boucle
+ Stilgart: une solution sera de définir une variable booléenne firstStuff qui vaut true
+ MasakiKyosuke: Si c'était une "foreach" ça aurait été une autre histoire
+ Stilgart: et si elle est true dans la boucle, tu la mets à false, sinon tu affiches un espaxe
+ MasakiKyosuke: En vérité y a plein de solutions différentes :p
+ Stilgart: MasakiKyosuke: ce que j'ai dit marche aussi avec un foreach
+ Stilgart: et oui, il y a des tas de solutions
+ MasakiKyosuke: Yep je sais bien ^^ C'est sans doute pour ça que tu l'as dit
+ Stilgart: pour être honnête, j'ai dit ce que Boulet aurait codé
+ MasakiKyosuke: Et c'est clairement la plus lisible et compréhensible des solutions
+ Stilgart: perso, je serais plutôt passé par un .join(' ')
+ Stilgart: (modulo syntaxe de js)
+ Stilgart: mais c'est objectivement moins performant
+ MasakiKyosuke: Stilgart: c'est ce que j'entendais pas "reduce" (je connais pas le js ^^)
+ MasakiKyosuke: par*
+ Stilgart: ha zut, j'ai raté ce message&#160;:/
+ Stilgart: et celui de kultrivs
+ Nonx7: pour faire un joint il me faut un tableau non&#160;? trop galère de créer un tableau avec les groupe de caractère similaire, j'avais essayé au début
+ Stilgart: kultrivs: le boost de la course de pods, je suppose&#160;?
+ kultrivs: oui c'rest ca 
+ Stilgart: Nonx7: sans doute oui... et c'est pour ça que c'est moins bien
+ Stilgart: il vaudrait mieux afficher au fur et à mesure en fait
+ MasakiKyosuke: Oui car tu recopies une deuxième fois les mêmes données ^^'
+ Stilgart: au lieu de tout accumuler dans message
+ kultrivs: De ce que j'ai compris, il faut juste faire un print de BOOST 
+ Stilgart: kultrivs: de mémoire, il suffit de mettre BOOST au lieu de la puissance
+ Stilgart: et c'est utilisable une seul fois par pod
+ Stilgart: en gros, fais ça tour 1 et tu n'as plus besoin de t'en soucier ensuite
+ pommepommee: c'est pas si simple des fois
+ pommepommee: faut aussi le faire en fonction d'une autre valeur type distance ou vitesse etc
+ Stilgart: tour 1 c'est la situation la plus simple (et ça permet de passer devant donc éventuellement de te faire pousser ensuite par l'adversaire)
+ Nonx7: Merci pour vos réponse je vais retravailler ca
+ kultrivs: D'accord, merci, je pense avoir compris
+ kultrivs: Je vais essayer queqlue chose
+ pommepommee: Stilgart: Ouais mais de te faire pousser au moment ou tu tournes sur le checkpoint et donc de t'envoyer valser&#160;:')
+ Stilgart: pas tant que ça, en fait
+ Stilgart: comme tu vas dans la même direction que l'autre, c'est plus souvent une aide qu'un soucis
+ pommepommee: plusieurs fois je me suis fait niqué comme ça
+ Stilgart: les défaites les plus spectaculaires arrivent comme ça oui
+ Stilgart: mais il ne faut pas perdre de vue toutes les parties normales qui ont été gagnées à coté
+ Stilgart: on ne peut pas gagner à tous les coups à CSB
+ pommepommee: yes
+ Stilgart: (enfin, je dis ça, mais j'ai roulé sur la ligue or à mon pssage en légende, s'en était indécent)
+ pommepommee: j'suis coincé à l'argent justement ^^ 
+ Stilgart: arf
+ pommepommee: mais je suis allé jusqu'argent avec le code de base&#160;:')
+ Stilgart: c'est le pire ça
+ Stilgart: vu que le jeu change radicalement une fois en gold
+ pommepommee: juste en rajoutant le boost au dessus d'une distance
+ pommepommee: yes avec les shields ça parait horrible
+ Stilgart: je pense que gérer les shield est une perte de temps
+ Stilgart: c'est sans doute pas ça qui fait la différence en gold
+ pommepommee: ouais dans le sens ou si t'es premier tu t'en fous de te faire taper ^^ 
+ Stilgart: (donc encore moins en silver)
+ Stilgart: à mon avis (et d'après la loi du -3vel), tu devrais porter ton effort sur la meilleure anticipation des virages
+ Stilgart: en particulier, tu devrais garder l'emplacement des checkpoints pour faire des tours meilleurs une fois le 1er tour fini
+ Littleyounes: Pourquoi il a fallu qu'il fasse un escape game au lieu d'un combat de bot&#160;:'( nonnn
+ Stilgart: les grands génies ont décidé qu'il en serait ainsi, et leur sentence est irrévocable
+ Littleyounes: seum intensifié :tired_face:
+ philRG: c dans l'ère du temps. Regrouper des coders et des non-coders dans une même activité
+ philRG: casser l'image du geek-nolife?
+ Littleyounes: :cry:
+ MasakiKyosuke: philRG: t'as quel âge pour utiliser ce terme&#160;? :sweat_smile:
+ Stilgart: c'est un papi, son avatar a des trucs qui ressemblent à des cheveux blancs
+ philRG: je me place dans la tête des gens, pas une question d'âge
+ Stilgart: et en plus, c'est un virus :p
+ MasakiKyosuke: On dirait la créature de doom comme celle de nicola xD Le beholder
+ philRG: le beholder oui je l'ai dessinée pixel par pixel à partir du manuel AD&amp;D quand j'avais une vingtaine d'années
+ MasakiKyosuke: philRG: mes excuses alors, tu t'es correctement mis dans leur tête du coup :D
+ philRG: Doom n'en a fait qu'une copie 
+ MasakiKyosuke: Ah je ne savais même pas tiens&#160;! :o 
+ philRG: MasakiKyosuke ah oui mes propos n'avaient aucune idée mal placée
+ philRG: à force de communiquer avec des chargés de recrutement, je me suis fait une idée de ce qui tourne dans leur tête
+ philRG: et en plus général du fonctionnement du monde de l'IT
+ Stilgart: ha, il se passe vraiment des trucs dans leurs têtes&#160;?
+ MasakiKyosuke: philRG: C'était pas ce que je disais, juste que je me disais que si l'expression était sérieuse, tu avais au moins 50ans, car "geek-nolife", j'ai vraiment l'impression des personnes de cet âge :p
+ philRG: Silgart: c /dev/null&#160;:-D
+ Stilgart: geek-nolife c'était encore un peu utilisé il y a 10 ans
+ philRG: j'avoue que je vois à quoi cette étiquette peut faire référence
+ philRG: pas
+ MasakiKyosuke: +d'entendre
+ philRG: ah ok
+ philRG: les mentalités ont donc évolué c cool
+ Stilgart: il y a 10 ans, la mode était plus au gamer-nolife oui
+ Stilgart: et maintenant, ils ont fermé nolife donc on en parle plus&#160;;(
+ MasakiKyosuke: Stilgart: c'est exactement ce à quoi je pensais ^^
+ MasakiKyosuke: C'était bien j'avoue :o
+ TheBlueBias: Noob!
+ philRG: j'avoue quand je lis les articles sur linked-in et commentaires ça me rend fou
+ Stilgart: je regardais assez peu cette chaîne, mais au moins le contenu se démarquait des 100 chaînes d'à coté dans la liste proposée par ma freebox
+ MasakiKyosuke: philRG: non mais tu parles de Linkedin aussi ... C'est le réseau social, où tu as des gens qui se sentent obligé de lécher les bottes de leurs patrons, t'as l'impression de voir un habitant de Corée du Nord parler de son dirigeant quoi ^^'
+ philRG: <a rel="nofollow" class="external free" href="https://www.linkedin.com/showcase/linkedin-actualites/">https://www.linkedin.com/showcase/linkedin-actualites/</a>
+ Stilgart: si mes étudiants pouvaient arrêter de remplir ma boîte spam d'invitation sur LI, ça m'irait très bien
+ philRG: lol
+ MasakiKyosuke: Après je dis pas y a des bonnes choses aussi, mais les "Aujourd'hui mon chef m'a laissé arriver avec 10min de retard et il m'a dit qu'il fallait dormir, c'est ça la différence entre un chef et un leader"
+ MasakiKyosuke: Il m'a marqué ce post ^^'
+ MasakiKyosuke: C'est d'un malaise ce réseau ^^'
+ Stilgart: je devrais supprimer mon compte, mais j'ai la flemme de retrouver mon mot de passe
+ philRG: ah pas eu de réponse à mon commentaire d'un article: Se ki konte sé métrisai le languaje binère
+ nicola: Le cacodémon n’est pas vraiment pompé sur un beholder.
+ MasakiKyosuke: Stilgart: je me dis la même chose xD
+ MasakiKyosuke: philRG: tu as voulu troller&#160;? :o
+ Littleyounes: Ah ca s'appelle un cacodémon ton truc
+ MasakiKyosuke: nicola: mes excuses si j'avais la mauvaise ref :x
+ philRG: MasakiKyosuke troller pas mon genre
+ MasakiKyosuke: :p
+ Littleyounes: cacadémon
+ nicola: C’est vrai que ça ressemble mais en fait, le cacodémon est pompé sur une couverture de A?D&amp;D.
+ nicola: Et le monstre en question a un corps, pas le beholder.
+ nicola: Mais bon, on s’en fout.
+ philRG: même le nom Cacodemon a été pompé de l'univers Ad&amp;D
+ philRG: nicola c à mon avis crucial
+ MasakiKyosuke: xD
+ nicola: Le mot cacodémon, à mon avis, est plus ancien.
+ philRG: faudrait étudier son origine
+ nicola: Deicide (le groupe) utilise le mot dans une chanson.
+ nicola: Satan spawn, the cacodemon…gru gru gruuuu
+ nicola: Et ça date d’avant Doom.
+ nicola: Mais d’après ADD.
+ Littleyounes: Mais il est perché
+ nicola: Mais on sait aussi que les gus chez id aimaient le metal et les jeux de rôle.
+ nicola: Caco comme dans cacophonie.
+ philRG: ah!
+ MasakiKyosuke: Si le wiktionnaire est juste c'est grecque à la base, mais bon, faudrait vérifier l'exemple donné dedans qui parle d'un ouvrage de Voltaire, ce qui prouverait que ça date effectivement un minimum)
+ nicola: Mon avatar a des cornes, pas celui de philRG.
+ MasakiKyosuke: Mais j'ai pas dit que c'était les mêmes, j'ai juste dit que ça ressemblait à la base xD
+ nicola: Oui, c’est vrai que ça ressemble.
+ nicola: Et si ça se trouve, l’illustrateur d’ADD s’est gouré.
+ Bon[]Crayon: Si je suis tombé en dessous de mille, c'est la faute d'Automaton2000.
+ Automaton2000: deux fois plus rapide que moi
+ MasakiKyosuke: Automaton2000: bah non deux fois moins vu qu'il est en dessous de mille
+ Automaton2000: c'est le principe de base de python
+ Bon[]Crayon: Automaton2000 Accélère accélère la tortue&#160;! 
+ Automaton2000: salut Bon[]Crayon (et les autres)
+ Stilgart: ha, j'ai fini par retrouver dans quel contexte j'ai rencontré nicola&#160;: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=K38uhSy1XV4">https://www.youtube.com/watch?v=K38uhSy1XV4</a>  (spoiler, ça ne s'est pas aussi bien fini que dans la vidéo)
+ Bon[]Crayon: salut Automaton2000 (et les tortues)
+ Automaton2000: elle a besoin de perf&#160;?
+ Stilgart: Automaton2000: c'est utile pour la préparation de ton carpaccio&#160;?
+ Automaton2000: mais bon c'est une bonne idée :d
+ MasakiKyosuke: Stilgart: c'est marrant comme jeu tiens, c'est un mélange de concept entre I Wanna Be The Guy, et les sprits de Pokemon Rouge&#160;? ^^
+ Stilgart: c'est une suite de I wanna be the guy
+ Stilgart: j'ai mis 10 min. à retrouver la bonne suite :D
+ Stilgart: de mémoire, je m'étais arrêté à nicola sur cette version là
+ Stilgart: d'ailleurs, faudrait que je batte le boss de fin de I wanna be the guy un jour...
+ MasakiKyosuke: Ok je ne connaissais pas ^^ Déjà que I Wanna Be The Guy je l'avais juste essayé vite fait :p (Je suis pas un grand fan des die and retry ahah)
+ Stilgart: j'ai un save dans le mode le plus dur (modulo mode 1-life) devant le boss de fin
+ Stilgart: mais j'arrive pas à le passer
+ Stilgart: au final, quand tu connais les pièges, c'est pas si dur que ça sauf les boss
+ MasakiKyosuke: Je savais même pas qu'il y avait des boss dans ce genre de jeu ^^'
+ Matixm: Salut tout le monde,Est ce que vous savez si on peut importer un module externe (sklearn pour python) ou il faut recoder tout&#160;? 
+ Stilgart: à ton avis, est-ce qu'on peut importer le module SolutionsDesPuzzlesSurCodingame&#160;?
+ Stilgart: (oui, c'est la même question&#160;;) )
+ Matixm: C'est pas vraiment la même chose puisque numpy et autre on peut les récupérer et ça ne donne pas la solution mais au moins un coup de pouce pour le prototypage dans un premier temps
+ MasakiKyosuke: Y a des lib qui sont déjà installés (sur python et ruby par exemple) et dans ce cas tu peux les utiliser, par contre tu ne peux pas en récupérer des non installées
+ Stilgart: numpy c'est quand même juste indispensable (je sais même pas si on peut avoir python sans numpy en vrai)
+ Matixm: ok merci c'est bien ce qu'il me semblait ^^
+ Stilgart: il y a une liste d'import possible dans la faq ... mais je trouve plus la faq
+ Matixm: Ok je vais regarder ça :thumbsup:
+ Matixm: merci pour l'info
+ MasakiKyosuke: <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/40701/help-center/languages-versions">https://www.codingame.com/playgrounds/40701/help-center/languages-versions</a>
+ MasakiKyosuke: Python3	3.9.2	NumPy 1.20.2, pandas 1.2.4, SciPy 1.6.3
+ Stilgart: voilà... tout en bas de la page tout en bas de la page d'accueil
+ Julius2k17: Salut tout l monde
+ Stilgart: (faq à coté de get a job, c'était mieux)
+ Bon[]Crayon: o/
+ Stilgart: il y a déjà SciPy, ce qui est beaucoup
+ Stilgart: \o Julius2k17
+ MasakiKyosuke: Et à mes souvenirs t'avais un puzzle dans lequel t'avais TensorFlow en plus
+ Stilgart: et si le but est d'avoir un NN en exécution, numpy suffit amplement
+ Stilgart: c'était un cas particulier, qui a donné tech.io
+ Stilgart: faudrait peut-être refaire un puzzle du genre sur CG
+ MasakiKyosuke: Ah c'est devenu un article dans tech.io&#160;? :o
+ Stilgart: non
+ Stilgart: l'idée sous-jacente est devenu tech.io
+ MasakiKyosuke: Ah ^^
+ Stilgart: et le puzzle, non maintenable, a été supprimé
+ MasakiKyosuke: J'avoue que j'aurais bien aimé en avoir d'autres comme ça
+ MasakiKyosuke: Ah merci je me demandais où il était ^^'
+ Stilgart: bah, c'était "olol... voilà la doc... olol, copie-colle pour boucher le trou de mon stub... olol 100%"
+ Stilgart: au final, tech.io c'est un bien meilleur format pour présenter une techno et/ou un algo
+ MasakiKyosuke: Y avait pas une histoire de scoring à la base&#160;?
+ MasakiKyosuke: C'est pas faux
+ Stilgart: fallait faire &gt;90% pour gagner, de mémoire
+ Stilgart: et comme mon implem en une aprèm et sans optim en Haskell fait 94%...
+ Stilgart: l'appel à la bonne fonction dans tensorflow faisait largement le score souhaité
+ MasakiKyosuke: Ah ^^'
+ Stilgart: au final, mon sentiment de l'époque était que c'était cool, mais qu'on ne nous incitait pas à creuser / scorer
+ Stilgart: et que c'était dommage
+ Stilgart: (et en plus, j'ai pu coder en python :nauseated_face: )
+ Stilgart: *du
+ Stilgart: on pourrait peut-être en faire un opim, par contre, je ne sais pas si on a le droit d'utiliser les données du MNIST pour cet usage
+ philRG: scipy c pas mal faudrait savoir comment l'utiliser sur les multis
+ Stilgart: facile, en C++
+ MasakiKyosuke: Je suis d'accord (sauf pour la partie Python, car personnellement je m'en fous du langage, tant que la doc est suffisante)
+ philRG: ah ça marche sur CG?
+ philRG: Using scipy from C++ via pybind11
+ philRG: <a rel="nofollow" class="external free" href="https://stackoverflow.com/questions/51762140/using-scipy-from-c-via-pybind11">https://stackoverflow.com/questions/51762140/using-scipy-from-c-via-pybind11</a>
+ MasakiKyosuke: Stilgart: y a bien d'autres données libres d'accès (t'as un site du gouvernement avec de gros fichiers de données open source, notamment pendant le Covid etc ... T'avais beaucoup de données)
+ philRG: comment tu importes ton module python dans ton code C++&#160;?
+ philRG: bon moi je me retourne à mes listes et dict...
+ Stilgart: philRG: pas, that's the plan
+ Stilgart: les combats de bot en python, c'est souvent pas une bonne idée
+ Stilgart: globalement, on te demande de la perf, et python c'est à l'opposé de la perf
+ MasakiKyosuke: Même avec les libs provenant du C&#160;? :o
+ MasakiKyosuke: (Comme Scipy justement)
+ MasakiKyosuke: (Je connais pas trop les perfs, pour ça que je demande, même si je sais que C/C++ &gt; all, si j'ai bien compris)
+ philRG: Stilgart: c de l'interprété, j'avais commencé sur des puzzles sur CG en Java/C#/PHP (me souviens plus), et comme j'y captais rien, j'ai demandé des infos à mon frère qui faisait du python, et j'ai fini par me mettre à python. Puis, j'ai trouvé les combats de bots plus sympas, et voilà
+ philRG: j'ai déroulé le fil d'Ariane mais pas encore trouvé la sortie
+ Stilgart: oui, je comprends... mais si tu veux vraiment profiter à fond des combats de bots, python est trop limité
+ philRG: j'ai pas la motiv pour coder en C++, pas vraiment un problème de syntaxe, mais plus de rapidité
+ philRG: pas sûr que devenir un Pro des combats de bots m'aide à trouver un taf
+ philRG: à la rigueur un spécialiste du C++ oui
+ Stilgart: dire "spécialiste du C++" sans éclater de rire, ça n'aidera pas non plus&#160;;)
+ Stilgart: le langage est bien trop copieux/complexe pour que quiconque de raisonnable se présente comme spécialiste de C++
+ MasakiKyosuke: Tout dépend le taff que tu cherches ^^ J'ai deux potes doctorant qui ont fait des thèses en compilation et pourtant on les a embauchés pour faire de l'IA ^^'
+ philRG: depuis le rajout du module typing pour les annotations de type dans mes variables, je trouve que ça ressemble plus à du code
+ Stilgart: en même temps, la compilation ça n'embauche pas, et l'IA c'est l'eldorado jusqu'à ce que la bulle explose
+ MasakiKyosuke: C'est pas faux
+ Stilgart: philRG: sinon, j'ai l'impression que tu sous-estimes beaucoup le niveau du top en combat de bot&#160;;)
+ philRG: ah oui sûrement aussi
+ Stilgart: arriver légende, c'est assez facile en vrai
+ philRG: ah non
+ Stilgart: (si si, je t'assure)
+ MasakiKyosuke: C'est fou quand même car la bulle de l'IA a aussi existé dans les années 80' et avait déjà éclaté selon les dires d'un de mes profs à l'époque, comment ça se fait que ça revienne tant&#160;? ^^' Tu penses vraiment qu'on a pas encore assez progressé&#160;? (Je dis ça mais je n'y connais pas grand chose d'où la question)
+ philRG: en python?
+ Stilgart: même en python
+ MasakiKyosuke: philRG: Je regardais un post mortem d'un top 2 en python ^^'
+ Stilgart: MasakiKyosuke: c'était pas la bulle de l'IA à l'époque*
+ Stilgart: plus la bulle des machines de calcul
+ Stilgart: (enfin, j'étais très jeune et je n'ai peut-être qu'une vision partielle)
+ MasakiKyosuke: Stilgart: bah il nous parlait bien de la bulle autour des algos de programmation génétique, recuit simulé, etc...
+ MasakiKyosuke: Du GPGPU ou autres optimisations stochastiques
+ Stilgart: sauf que c'est en gros l'époque où les gens ont posé les algos sur le papier
+ Stilgart: au début des années 70, on en était encore à multiplier du polynôme ou deux matrices efficacement
+ philRG: MasakiKyosuke oui je regarde pas trop les PM, je lis les règles des puzzles, je code le gameplay et une IA basique et plus si affinités, je pousse pas trop
+ Stilgart: l'algorithmique (sous sa forme actuelle), c'est pas très vieux
+ Stilgart: après, il y a eu le buzz avec deepblue/kasparov et tout
+ Stilgart: mais pour moi, c'était plus une guerre de constructeurs de machines qui était derrière
+ darkhorse64: La première bulle de l'IA, c'est les moteurs d'inférence/ systèmes expert, on espérait coder le savoir d'experts sous forme de règles. Visiblement, ça n'a pas tenu ses promesses. Là, on est parti sur une approche différente avec les réseaux neuronaux
+ Stilgart: ha... la bulle prolog
+ darkhorse64: ^
+ Stilgart: elle n'était pas restreinte au monde académique celle là&#160;?
+ Stilgart: (dans ma vision, pour parler de bulle, il faut que ça soit visible du grand public)
+ MasakiKyosuke: Effectivement il nous parlait aussi des SE ^^
+ MasakiKyosuke: Avec les fameuses règles d'inférences
+ darkhorse64: Les Japonais ont beaucoup misé sur le prolog. Les NN, grand public&#160;? Sans vouloir être condescendant, je crois que c'est une discussion de 1%
+ darkhorse64: :nerd:
+ Stilgart: pas dans les années 2010
+ Stilgart: par ailleurs, c'est 1.64% le chiffre officiel&#160;;)
+ darkhorse64: Je pense que c'est un échantillon encore plus réduit
+ Stilgart: tu devrais regarder les pubs de microsoft alors&#160;:)
+ Stilgart: évidemment que presque personne ne sait ce qu'est un (artificial) NN
+ Stilgart: mais beaucoup ont déjà entendu le terme et s'imaginent des choses
+ MasakiKyosuke: Je sais ce que c'est, mais je ne sais pas le coder :thumbsup:Je m'étais inscrit sur Kaggle à l'époque, mais je n'ai plus trop le temps en ce moment ^^'Faut que j'arrête de m'intéresser à plein de choses sans jamais aller jusqu'au bout&#160;:/
+ JBM: si t'attends d'avoir atteint le bout des NN avant de t'arrêter…
+ darkhorse64: Je me suis arrêté au XOR NN, je reprends des forces avant l'étape suivante
+ MasakiKyosuke: Bah c'est un peu avec tout, pas juste ça, y a plein de chall multi que j'ai commencé puis j'ai arrêté en me disant que c'était sans doute nul ce que j'écrivais ^^' J'ai toujours peur de louper quelque chose et de mal faire, du coup j'en viens à ne rien faire jusqu'au bout ^^'
+ philRG: ce que j'aime bien c'est la découverte d'un multi en fait et les premières lignes
+ philRG: exemple
+ philRG: class UnitType(Enum): <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/b821c1dc-367a-4c37-9f23-ce7964f0d6b2">http://chat.codingame.com/pastebin/b821c1dc-367a-4c37-9f23-ce7964f0d6b2</a>
+ philRG: le principe de débuter par des choses simples de la vie
+ philRG: après je me lasse un peu
+ darkhorse64: MasakiKyosuke: il faut lire les PM, ça permet d'aller dans la bonne direction
+ Stilgart: MasakiKyosuke: souvent, c'est pas possible de faire mal
+ Stilgart: sauf à ne rien faire du tout justement
+ TheBlueBias: Grounpf
+ JBM: ça s'écrit avec un m
+ TheBlueBias: Non. Groumpf ça s'écrit avec un m, mais grounpf c'est avec un n.
+ MasakiKyosuke: darkhorse64: les PM&#160;?
+ MasakiKyosuke: Stilgart: je sais bien ^^' Faut que je change ça, parce que suivant cette définition, je fais trop souvent mal les choses  :D
+ TheBlueBias: Post Mortem :skull:
+ philRG: bon une fois les inputs stockées dans des bons objets, c'est plus facile pour visualiser les différentes entités du puzzle
+ TheBlueBias: Stoi l'entité
+ MasakiKyosuke: TheBlueBias: Merci&#160;!
+ philRG: TheBlueBias: oui j'hérite de la classe Entity&#160;:-)
+ JBM: elle a beaucoup souffert?
+ TheBlueBias: Owi. :imp:
+ <b>**Bon[]Crayon slaps automaton2000 around a bit with a large fishbot</b></p><p><img src="/a/40502662118268" /> Automaton2000: bon par contre, je sais pas je suis pas un robot&#160;!
+ Bon[]Crayon: automaton2000 tu es une tortue, tu es une tortue, tu es une tortue
+ Automaton2000: mais j'ai pas de map
+ <b>**Stilgart tend une carte à Automaton2000</b></p><p><img src="/a/40502662118268" /> Automaton2000: je l'ai pas fait en c&#160;?
+ Bon[]Crayon: automaton2000 non, tu nous as dis en java
+ Automaton2000: ce qui n'est pas un entier
+ Bon[]Crayon: automaton2000 effectivement 
+ Automaton2000: bref je vais continuer a faire du code
+ nicola: Automaton2000 n’a pas de plâtre colle mais il a du béton.
+ Automaton2000: y aurait pas un bug
+ Bon[]Crayon: automaton2000 le bug du bot 2000
+ Automaton2000: si quelqu'un a la solution de mars lander 2
+ Stilgart: Automaton2000: je te l'échange contre le referee&#160;!
+ Automaton2000: quelqu'un a une explication&#160;?
+ Bon[]Crayon: automaton2000 as-tu l’intention de déménager sur mars&#160;?
+ Automaton2000: mais si y a du monde sur le chat
+ nicola: Automaton2000 se casse sur Mars.
+ Automaton2000: j'y vais de ce pas
+ nicola: :wave:
+ Bon[]Crayon: :joy: bon voyage
+ philRG: ah cool wood 2 avec -3v sur MM
+ philRG: bon je vais peut-être aller voir mes potes à l'entraînement de tennis, le contest CG c'est demain soir
+ Bon[]Crayon: invite-les
+ Bon[]Crayon: bon allez automaton2000 bon voyage et a++
+ Automaton2000: je ne connais pas le terme
+ philRG: <a rel="nofollow" class="external free" href="https://imgur.com/a/p1o4kqK">https://imgur.com/a/p1o4kqK</a>&#160;:-)
+ Stilgart: \o/
+ Stilgart: de mémoire, il fau un coeff moins grand que 3 pour le -3vel de MM
+ Stilgart: * Automaton2000 le sédentaire
+ Automaton2000: @pedrito_b ce que tu veux faire une simu et un algo de recherche de chemin
+ philRG: ValueError: 1 is not a valid UnitType
+ philRG: bon c'est un destroyer çà
+ philRG: ValueError: 3 is not a valid UnitType
+ philRG: ValueError: min() arg is an empty sequence
+ philRG: ah comment créer des épaves du coup
+ philRG: ah j'ai une nouvelle unité (destroyer) pour détruire les tankers et la transformer en épave
+ b0n5a1: o/
+ philRG: c rigolo&#160;:-)
+ philRG: o\
+ philRG: o\
+ b0n5a1: philRG -3 c'est beaucoup trpop pour MM ^^
+ TheBlueBias: Stoi le -3
+ philRG: TheBlueBias: arrêtes de m'embêter
+ TheBlueBias: C'pas à toi qu'je parle
+ philRG: ah mais j'ai essayé avec -1.5v c'était moins bon
+ philRG: TheBlueBias ah ok pardon
+ philRG: bon j'vais voir les potes (bosser ma vie sociale)
+ b0n5a1: c'est ce qui est autour qui est moins bon en fait, le -3 corrige ça :D
+ philRG: je débute vraiment le MM
+ philRG: me souviens même plus ce que le -3v corrige en fait
+ philRG: j'ai mis un max thrust (300)
+ philRG: faudra que je révise un peu...
+ b0n5a1: non mais je dis juste que le -3 dans ton cas ça marche mieux parce que t'as fait de la boulette autour hein :D
+ TheBlueBias: A la napolitaine&#160;?
+ b0n5a1: piquante
+ ImoKa: Clash of Code buge :cry:
+ b0n5a1: ça été fix, des fois ça tombe en marche...réponse officielle :D
+ b0n5a1: si c'est la page qui s'affiche pas quand le countdown tombe à zéro, tout est là&#160;: <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/browser-does-not-refresh-when-clash-of-code-starts/192728">https://www.codingame.com/forum/t/browser-does-not-refresh-when-clash-of-code-starts/192728</a>
+ b0n5a1: glhf
+ ImoKa: Merci&#160;:)
+ b0n5a1: fallait pas dire ça avant d'avoir lu :rofl:
+ TheBlueBias: Tiens un nouveau coffee_java_cup en soumission... Avec ASCII Art dans le titre. :scream:
+ b0n5a1: ça sent le chiant+++
+ b0n5a1: ascii art de compet...
+ b0n5a1: surface paramétrée en ascii art :D
+ b0n5a1: bon, :dog: time
+ TheBlueBias: 800 lignes la soluce...
+ Remi.: Salut tout le monde
+ Remi.: Alors vosu êtes prêt pour le coding espace&#160;? 
+ Stilgart: on est jamais prêt
+ Remi.: (Blaise&#160;: ta g... Rémi pouin, on va pas le faire l'escape)
+ Remi.: Salut Stilgart, tu vas le faire toi&#160;?
+ Stilgart: aucune idée
+ Stilgart: dwarfie aura sans doute fini avant que je réallume mon cerveau
+ Stilgart: (j'ai 3.5h de cours juste avant)
+ Remi.: Tu le fais en équipe avec Dwarfie&#160;?
+ Stilgart: on est d'accord que si je reject avec comme commentaire "tl; dr", je vais sans doute me faire ban&#160;?
+ TheBlueBias: Traîtres.
+ TheBlueBias: Bof tu sais le ban...
+ Remi.: Moi pas comprendre "tl; dr"
+ Stilgart: too long; didn't read
+ Remi.: Si on est plusierus codeurs dans une équipe, vous croyez qu'on doit tous utiliser le même langage&#160;?
+ Remi.: * plusieurs
+ Stilgart: j'espère pas, si dwarfie galère je vais devoir faire du php :fearful:
+ Remi.: J'espère pas non plus, je suis avec un coéquipier qui n'a pas du tout les mêmes langages que moi.
+ TheBlueBias: T'façon c'est d'la merde.
+ Stilgart: c'est un bon résumé de ce que je viens de dire&#160;;)
+ TheBlueBias: tl;dr
+ Stilgart: héhé
+ Remi.: Ca fait 6 mois que je suis là, et 6 mois que j'entends qu'il faut faire les contests ... et 6 mois qu'il n'y a pas de contests. Donc même si celui là n'a pas l'air génial, je vais quand même tenter.
+ TheBlueBias: C'est pas un contest. Plus un test con.
+ Stilgart: le 1.64% me souffle à l'oreille que celui de jeudi est un événement codingame, mais pas un contest&#160;:(
+ Remi.: En plus j'ai fait le tuto, c'est pas spécialement attirant ^^
+ Remi.: Ah, je viens de découvrir que le 0 en Java peut être interprété comme "0"
+ Remi.: Va y avoir des golf à remettre à jour ^^
+ joeboygang: salut, je suis nouveau est ce que vous saurez comment mettre l'énoncé du clash of code en français?
+ elio27: c'est automatique quand il l'est déjà je crois
+ EricMoret: je cherche une équipe pour l'event, y aurait des gens chauds pour me prendre&#160;? je code plutôt bien en C/C++
+ Stilgart: comme il y a majoritairement des codeurs ici, tu risques de ne pas avoir beaucoup de réponses positives&#160;:(
+ Stilgart: joeboygang: pas
+ Stilgart: il y a de rares sujets historiques uniquement en français, mais sinon c'est english only
+ EricMoret: @stilgart merci de ta réponse, mais bon j'imagine qu'une équipe de codeurs uniquement peut suffire :joy:
+ Stilgart: si j'ai bien compris/suivi, avoir plus de 1 codeur dans l'équipe va s'avérer inutile/contre-productif
+ Stilgart: après, pas d'inquiétude, il parait qu'on peut faire l'event en solo
+ Remi.: Nous dans notre équipe on est 2, et ce sont 2 codeurs.
+ Stilgart: idem ici, mais comme je l'ai dis cet aprèm, dwarfie aura surement fini avant que je réallume mon cerveau&#160;:)
+ dwarfie: hé hé ... si j'y pense&#160;;)
+ EricMoret: Stilgart à peine je réponds à ton message que je vois que tu as approuvé pleins de puzzles que je suis en train de tenterCa fait combien de temps que t'es sur la plateforme&#160;? :p
+ Stilgart: je suis un jeunot
+ Stilgart: j'ai commencé vraiment en fevrier 2015
+ Stilgart: (tu peux voir ça sur le profil, en cliquant sur ranking)
+ TheBlueBias: Sauf si on a changé de compte...&#160;:(
+ Zorg1: mais il est pas question que tu récupères ton ancien compte&#160;? même des trolls comme W ont récupérés leur compte&#160;?
+ dwarfie: Stilgart est arrive  en l'an 2 AD ... (after dwarfie :D )
+ TheBlueBias: C'est moi qui l'ai viré le compte Zorg1, je voulais pas devoir jongler sur deux comptes pour le chat et le site. Mais il n'aurait pas été question de me réhabiliter de toute façon.
+ Stilgart: Zorg1: hein, c'est quoi cette histoire&#160;?
+ Zorg1: ah ok
+ Stilgart: W il a juste perdu masse XP à ma connaissance
+ Zorg1: il a été ban un momment
+ TheBlueBias: Suite à une première bidouille sur des multis iirc.
+ Stilgart: intéressant... moi j'ai perdu des droits pour le calmer, et on ne me les a pas rendu pour autant
+ TheBlueBias: Mais je suis pas sûr qu'il ait conservé le même compte.
+ TheBlueBias: Juste recréé un.
+ TheBlueBias: Et y'a une grosse différence entre lui et moi: la cible. Lui trollait la commu, moi le CM. Lui est donc pardonnable. :3
+ Zorg1: ouaip ^^
+ TheBlueBias: La commu sur un site communautaire, c'est assez secondaire m'voyez.
+ Zorg1: c'est surtout le manager le + important ^^
+ Zorg1: vu que si on a le malheur d'avoir une entreprise qui n'existe pas, omg :D
+ Zorg1: ah tiens la tortue agresse la tasse de café ^^
+ TheBlueBias: Ce chat est trop salé, on peut presque marché dessus sans couler.
+ Zorg1: genre je sale le chat alors que je suis adorable&#160;:(
+ TheBlueBias: Moi j'aime le sel.
+ <b>**TheBlueBias patpat Zorg1</b></p><p><img src="/a/71042767029501" /> TheBlueBias: Bon ayé. J'ai enfin réussi à remettre bubok en ligne. Juste quelques trucs à reconfigurer... J'aurais plus galérer à le mettre sur un hébergement clé en main en interface graphique qu'à monter un web-server complet sur mon vps pour l'héberger... Ca c'est de l'UX. -_-
+ b0n5a1: Remi. toi et ton smurf :D
+ b0n5a1: woputain ce scroll&#160;!!!
+ TheBlueBias: La fine équipe.
+ Remi.: non c'est une vraie personne
+ Remi.: T'inquiète je suis toujours là ^^
+ TheBlueBias: The elder scroll.
+ Remi.: Salut bonsai
+ Zorg1: tu commences  à buter des rats&#160;?
+ Zorg1: o/
+ TheBlueBias: Salut r3m1
+ Remi.: Salut th381u38145 (c'est chiant en fait cette écriture)
+ Zorg1: c'est surtout franchement hasbeen :p
+ Zorg1: sérieux ça fait combien de temps qu'écrire en leet code c'est plus cool&#160;?
+ TheBlueBias: 1337
+ Zorg1: :D
+ Remi.: Le mot hasbeen est hasbeen ^^ je ne sais même pas ce qu'ils disent les jeunes aujourd'hui.
+ b0n5a1: ha merde la promo "jeux des pays de l'est" y'a plus sur steam, j'avais repéré un petit truc stealth qui avait l'air sympa
+ b0n5a1: genre chasse à l'homme, toi t'es le chassé et dois réussir à te barrer
+ TheBlueBias: Passe temps normal et sain en Roumanie
+ b0n5a1: :D
+ b0n5a1: c'était un jeu roumain justement si je me trompe pas :D
+ Zorg1: "Balade dans les carpathes avec un ami"
+ b0n5a1: en même temps, s'inspirer des hobbys locaux toussa :D
+ TheBlueBias: J'me doute, j'ai déjà été chasser là bas... :innocent:
+ TheBlueBias: En parlant de ça, b0n5a1 et Zorg1, vous connaissez Jean-Marie Lepen Gaming&#160;?
+ b0n5a1: ça me fait penser à "hotel" (je crois que c'est ça), les deux films...
+ Zorg1: c'est en Hongrie la comtesse qui prenait des bains de sang&#160;?
+ nicola: Les djeunz disent boomer.
+ nicola: Bathory&#160;?
+ Zorg1: oui
+ nicola: Possible.
+ nicola: Il faut demander ça à un black metalleux.
+ b0n5a1: ha non c'est "hostel" ^^
+ TheBlueBias: Lizzie&#160;? Oui elle était Hongroise.
+ Zorg1: bof ça doit être comme Gilles de Ray doit y avoir une histoire d'héritage bien dégueu en dessous
+ b0n5a1: ha oui, TheBlueBias, ça faisait longtemps que j'avais pas vu des JMLP gaming :D
+ nicola: Des JMLP gamin[g|s]&#160;?
+ Zorg1: JMLP comme J'me la pète&#160;?
+ nicola: Nom de d’là.
+ nicola: Ça doit puer du luc.
+ TheBlueBias: Celui sur Resident Evil se passe en Roumanie justement <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=Iyy59Xy7NbQ">https://www.youtube.com/watch?v=Iyy59Xy7NbQ</a>
+ TheBlueBias: :p
+ Zorg1: ah non le gros borgne
+ b0n5a1: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=TidAcI81YuE">https://www.youtube.com/watch?v=TidAcI81YuE</a>
+ b0n5a1: arf t'as mis un lien avant moi TheBlueBias
+ TheBlueBias: Celui de spiderman :rofl;
+ TheBlueBias: *:rofl:
+ Zorg1: toujours à localiser leur histoire d'horreur en Roumanie, à mon avis tu peux faire un truc qui fous bien les jetons et qui se passe dans la Bresse
+ Zorg1: c'est sûr c'est moins galvaudé que la Transylvanie
+ Zorg1: bon bah j'accroche pas trop au JMLP gaming
+ TheBlueBias: Ah. :3
+ ImoKa: Ou peut-on créer un puzzle&#160;?
+ Remi.: Dans le menu communauté - contributions
+ Remi.: Mais il faut peut-être remplir certains objectifs d'abord.
+ Remi.: Comme participer à 50 clash pour créer des clash, ou arriver au niveau 20 pour créer des puzzles.
+ WildSiphon: En parlant de  contributions, y a la mienne qui traîne par là&#160;:
+ WildSiphon: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/751610302a0d61608727175fb1a31b6c475b">https://www.codingame.com/contribute/view/751610302a0d61608727175fb1a31b6c475b</a>
+ WildSiphon: Si vous savez pas quoi faire O:)
+ Remi.: On sait toujours quoi faire ^^
+ Remi.: mais je vais regarder&#160;;)
+ b0n5a1: proposer de regarder une contrib avec ascii art ici faut pas avoir peur :D
+ Remi.: Il parait qu'il y a des anciens qui n'aiment pas ça ^^
+ Remi.: Mais moi je suis encore nouveau, donc ça passe :P
+ b0n5a1: bon celui là ça va, y'a déjà pas à générer de l'ascii art...et c'est faisable en peu de lignes kles règles étant simples
+ Remi.: Là où je suis sceptique, c'est que c'est encore de l'analyse de chaînes de caractère, donc quelqu'un en C++ comme moi va galérer alors que la solution python fait 3 lignes ... et j'ai la flemme de coder une solution ce soir donc je vais répondre plus tard.
+ TheBlueBias: C'est une contrib ASCII art aussi&#160;? J'vais la refuser aussi, tant que j'y suis
+ b0n5a1: j'ai presque envie de dire qu'au lieu d'un puzzle pour une fois ça ferait un coc sympa
+ TheBlueBias: Bah c'est un coc
+ Remi.: Je vais mettre un vote positif, et je l'aprrouveria si j'arrive à la résoudre en moins de 5 minutes.
+ Remi.: C'est un COC.
+ b0n5a1: ha oui coc, j'avais pas tilté ^^
+ TheBlueBias: Jolis bateaux.
+ b0n5a1: en voyant les jeux de tests tu peux flipper sur une complexité qui n'existe pas, et ça c'est marrant :D
+ TheBlueBias: Je veux un test avec le Titanic!
+ Remi.: J'imagine pas le nombre de fenêtres à faire ^^
+ b0n5a1: et moi avec le Bismarck&#160;!
+ TheBlueBias: Moins de fenêtres, plus de trous...
+ Remi.: Juste pour le fun il manquerait un sous marin ^^
+ b0n5a1: (trouvé par la même équipe que pour le Titanic)
+ TheBlueBias: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=oVWEb-At8yc">https://www.youtube.com/watch?v=oVWEb-At8yc</a>
+ Remi.: Par contre c'est dommage, le test et le validateur "complex boat" ont la même réponse. Ca laisse la possibilité de hard-coder&#160;: if (N==30) printf("1");
+ Zorg1: ce truand&#160;:(
+ Zorg1: ici on fait confiance à la comu, Môsieur
+ b0n5a1: quand ils étaient traqués à pas pouvoir diriger le navire l'équipage du Bismarck est allé jusqu'à faire une fausse cheminée géane en carton pour fausser la silouhette pour pas se faire spotté, est des mecs se relayaient pour y fumer le cigare pour que ça ait l'air d'une vraie cheminée
+ b0n5a1: un  gouvernail était bloqué, ils étaient condamnés et ont tout fait jusqu'au bout pour s'en sortir avant d'en prendre plein la gueule
+ TheBlueBias: Ewé...
+ TheBlueBias: Ca m'fait penser à <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=oVWEb-At8yc">https://www.youtube.com/watch?v=oVWEb-At8yc</a>
+ Zorg1: ça bégaye ...
+ b0n5a1: :D
+ Zorg1: did you find the boat&#160;?
+ b0n5a1: quand j'étais à l'hosto pour l'appendicite, jadis :D, une voisine m'avait offert le bouquin avec la recherche de l'épave et tout l'historique détaillé
+ b0n5a1: au milieu t'as des pages qui se déplient pour avoir un maousse plan détaillé du navire
+ Zorg1: ah oui ce genre de bouquin avec des dessins monstrueux 
+ b0n5a1: et beaucoup de photos d'époque + épave (+ mix des deux pour bien montrer quelle partie c'est)
+ b0n5a1: de mémoire à un endroit y'a un mini champs de bottes
+ b0n5a1: c'était du costaud, pas comme maintenant :D
+ b0n5a1: près d'épaves d'avions parfois y'a de la botte aussi, plus de 70 ans après
+ RandomVariable: Hello, je regarde la compétition de demain, y a une équipe de 40 personne&#160;? C'est pas un peu ... déséquilibré&#160;?
+ Remi.: 40 personnes, ils vont se marcher sur le spieds, je ne sais même pas si c'est vraiment utile.
+ b0n5a1: je sais pas, 40 personnes en visio à 40 à mon avis tu pètes un câble :D
+ b0n5a1: au bout d'une minute t'a un mec qui hurle "VOS GUEULES PUTAIN!!!!" :D
+ RandomVariable: ben suffit que tu l'ouvre que quand il fait donner la solution
+ RandomVariable: et que tu regrouppes les infos dans une google doc
+ RandomVariable: moi ca m'a lair pas si con
+ b0n5a1: ouais ouais...à 40, t'as le droit d'y croire :D
+ b0n5a1: t'en a mini 5 dans le casque en simultané
+ b0n5a1: et t'as le mec avec une co de merde qui voit rien/entend rien ^^
+ b0n5a1: lui il reste health safe au final haha
+ b0n5a1: pendant que les autres s'entendent pas il résoud le truc solo peinard :D
+ Zorg1: réunion à 40 ... 3 qui causent les autres qui font autre chose et à qui il faut résumer la réunion si on demande leur avis ^^
+ Zorg1: sans oublier le gars qui mute pas et qui gratifie tout le monde de sa respiration opressée
+ b0n5a1: ha ça va je m'attendais à un truc de psychopathe de java coffee cup pour l'ascii art
+ Zorg1: finalement c'est seulement un truc de maniaque&#160;?
+ b0n5a1: en gros t'as de la police de caractère ascii art en input et faut que tu sorte une phrase avec
+ Zorg1: oui et tu dois gérer les "ligatures" en gros 
+ b0n5a1: le parsing un peu casse noix au départ
+ Zorg1: cite moi un parsing amusant
+ b0n5a1: arf
+ Zorg1: "je me suis éclaté à écrire ce parser"
+ WildSiphon: J'avais aps vu les messages mais merci pour les avis les kheys
+ JBM: achievement unlocked: followed par 2bi
+ JBM: \o.
+ JBM: \o/ pardon
+ b0n5a1: me suis bouffé quelque analyseurs lexicaux/syntaxiques, même ^pour le boulot...t'es content quand t'as fini j'avoue, c'est super chiant
+ Zorg1: "kheys" c'est "pote" en d'jeuns d'aujourd'hui&#160;?
+ b0n5a1: en turc...si je me trompe pas
+ JBM: en 12-25 de vgm oui
+ JBM: pardon jvc
+ Zorg1: ok
+ Zorg1: ah oui le niveau visé par les IA de microsoft
+ Zorg1: avant qu'elle veut envahir la Pologne
+ Remi.: C'est la 2ème fois de la soirée que je me sens vieux&#160;:(
+ JBM: mais tu ES vieux
+ b0n5a1: ha non arabe...
+ JBM: faut pas que ça te gêne de le sentir
+ Remi.: Ouais il paraît que je suis un senior mdr
+ b0n5a1: déjà tous ceux qui viennent me parler et me sortent du "frère" j'ai instant&amp;némment envie de taper dessus...
+ Zorg1: alors qui faut dire Br07h3r
+ Zorg1: :p
+ Remi.: mdr
+ Remi.: +&amp; Zorg
+ Zorg1: \o/
+ Remi.: * +1
+ b0n5a1: faut dire y'a l'allure qui va avec
+ JBM: comme les indiens qui t'appellent friend
+ Zorg1: chtijure frere stune affaire ^^
+ JBM: c'est possib
+ Zorg1: jvais avoir des problèmes moi&#160;:(
+ WildSiphon: je dis kehys mais je suis pas spécialement jeune non plus
+ b0n5a1: zyva, frère et autres...ça titille instantanément mon cerveu "reptilien" :D
+ WildSiphon: fichtre
+ Zorg1: diantre
+ JBM: morbleu
+ The_Real_17: salut 
+ Zorg1: bonsoir
+ Zorg1: bon bah vivement le 1er décembre
+ The_Real_17: hey bonsoir moi je suis nouveau 
+ JBM: y'a quoi le… ah oui
+ Zorg1: héhé
+ b0n5a1: y'a un contest le 1 décembre&#160;?
+ b0n5a1: non...
+ Zorg1: y a le truc où il faut se lever à 6h du mat' si tu veux classer
+ Zorg1: (enfin à condition que tu boucles le truc fissa)
+ b0n5a1: ha oui
+ b0n5a1: oui mais non sans moi le classement, déjà que c'est des malades les premiers
+ b0n5a1: t'as pas le temps de lire l'exemple d'input output sans lire le statement t'as déjà un mec qui a validé ^^
+ Zorg1: ouaip je préfère faire ça à mon rythme
+ WildSiphon: les gens sont fous
+ Zorg1: après y a les furieux qui vont faire le RAIC (Russian AI Cup)
+ b0n5a1: après les premiers jours souvent je tente sans lire l'histoire et tout et ça passe
+ b0n5a1: et je lis quand même après
+ WildSiphon: comme en CoC au final 
+ b0n5a1: comparer aoc et coc...bachi bouzouk des Carpates&#160;!
+ vdtdg: C'quoi AOC&#160;?
+ b0n5a1: j'ai toujours pas fini 2019 et 2020 d'ailleurs
+ b0n5a1: vdtdg <a rel="nofollow" class="external free" href="https://adventofcode.com/">https://adventofcode.com/</a>
+ WildSiphon: Ah ouais j'y étais pas du tout
+ vdtdg: Thx
+ b0n5a1: en général arrivé J15 j'ai du mal à trouver du temps pour...et se remettre dans le bain par après a un petit côté chiant
+ b0n5a1: tain je sais plus avec quoi me co sur ce bordel :D
+ b0n5a1: ha si ouf, avec double auth en plus...
+ Zorg1: j'utilise mon compte github moi&#160;;-)
+ b0n5a1: ha ça va 2020 il me manque J19, J20 et la moitié de J18 et J25...je m'attendais à pire ^^
+ b0n5a1: j'avais pas encore de github quand j'ai commencé...google du coup
+ b0n5a1: 2019 me manque J14-25 ouch
+ b0n5a1: je crois que c'était le microcontroleur et que j'avais stoppé au breakout 
+ b0n5a1: ouais c'est ça, breakout fait et ensuite plus rien
+ b0n5a1: ha mais part 2 de J25 2020 y'a rien à faire à part torcher ce qui manque ^^
+ b0n5a1: quel spoil&#160;? :D
+ b0n5a1: bon go farm fek fek ^^
+ Zorg1: wép je t'ai pas attendu&#160;;-)
+ JBM: b0n5a1 est dans la place
+ Zorg1: la vedette
+ b0n5a1: ha z'êtes chez Alex aussi ^^
+ JBM: ben depuis le début quoi
+ JBM: les 2 premières pages de chat sont de moi
+ b0n5a1: j'ai la fenêtre de Resnox en parallèle, sans son ... c'est décalé sinon, ça fait canon ^^
+ JBM: c'est bien le stream de resnox?
+ JBM: moi il me fatigue dès qu'il cause chez 2bi
+ JBM: alors j'oserais pas aller le voir en direct
+ b0n5a1: lui sur Elementalite c'est plus le code de génération des maps et tout, et Alex le gfx surtout
+ b0n5a1: mais je mets pas le son c'est pas top les sons décalés des streams duo
+ JBM: il a mis un lien vers le duamstream tout à l'heure
+ JBM: *dual
+ b0n5a1: oui c'est ça
+ JBM: mais effectivement s'ils sont sur le voicechat l'un de l'autre…
+ b0n5a1: t'en coupe un direct oui :D
+ JBM: non mais à la base j'allais écouter 2bi parce qu'il me détend; si resnox cause la magie opère plus
+ b0n5a1: ça va il parle peu
+ JBM: et un poil moins fort
+ b0n5a1: me suis planté j'ai écrit chez irish au lieu d'Alex :D
+ Twelfy: Salut à tous&#160;!
+ Twelfy: Voilà depuis un moment j'ai remarquer quelque chose&#160;:
+ Twelfy: Je suis nul en algo et j'ai une progression très lente 
+ Twelfy: Vous avez des solutions pour m'améliorer&#160;?
+ b0n5a1: Twelfy <a rel="nofollow" class="external free" href="https://www.geeksforgeeks.org/fundamentals-of-algorithms">https://www.geeksforgeeks.org/fundamentals-of-algorithms</a>
+ Twelfy: Merci
+ Remi.: C'est bizarre pour le puzzle "catching up" d'avoir taggé "algorithmes glouton" alors qu'a priori il s'agt d'une recherche de chemin comme pour les labyrinthes.
+ b0n5a1: pas encore fait (enfin commencé vite fait y'a qq heures et laissé comme ça) ... et je dirais aussi OSEK de k :D
+ b0n5a1: osef*
+ Remi.: Oui le k je ne vais pas m'en servir.
+ b0n5a1: j'ai sorti la chienne et plus rien fait après ^^
+ Remi.: Après, peut-être que je suis à côté de la plaque et que j'ai rien compris. Mais je pars sur le me principe que the labyrinth.
+ b0n5a1: j'ai juste "ma" lecture des inputs et définition de position de départ
+ b0n5a1: même pas, t'as pas à découvrir la map
+ Remi.: Oui pareil, enfin je commence tout juste j'ai pas encore le repérage de P.
+ Remi.: Je voulais dire le même algo une fois la map découverte&#160;;)
+ b0n5a1: shortest path et basta
+ Remi.: C'est ça. Un petit parcours en largeur comme je sais bien les faire (c'est ) peu près le seul algo poussé que je sais faire) et le tour devrait être joué.
+ Remi.: * c'est à peu près
+ b0n5a1: après si k vaut 1 et que l'autre tourne autour d'un long mur et que t'es de l'autre côté...
+ b0n5a1: encore que, ça doit être random move en face
+ Remi.: Ah ouais, je crois que tu viens de dévoiler ce qui m'attends dans les derniers validateurs ^^
+ b0n5a1: du coup faisable 
+ Remi.: Mais bon c'est un facile quand même. S'il faut anticiper les mouvements c'est plus si facile.
+ b0n5a1: y'a marqué qu'il est "débile", ça doit être random, ou pire hard codé
+ Remi.: Je vais rester sur notre idée, et on verra bien si ça passe ou pas.
+ b0n5a1: je pense à ça juste à cause de la tronche de la map de départ du seul test case existant
+ b0n5a1: (le fait de tourner autour d'un mur)
+ b0n5a1: k = 1 et fuite correcte...tu peux courir :D
+ Remi.: D'ailleurs ça pourrai faire l'objet d'un autre puzzle, où tu codes le fuyard ^^
+ b0n5a1: le test case unique c'est franchement con, si déjà y'a une anim autant en faire plusieurs
+ Remi.: Oui j'ai trouvé ça dommage aussi. Y aurait pu avoir plusieurs tests, un simple sans mur, puis de plus en plus compliqués en finissant par un vrai labyrinthe.
+ b0n5a1: ouais
+ JBM: «bruxelles c'est en belgique non?»
+ JBM: des fois ils me font peur
+ Remi.: Ben non, tout le monde sait que Bruxelle c'est en Europe. Ah la la ...
+ b0n5a1: lol JBM ^^
+ b0n5a1: pareil...
+ b0n5a1: le coup de 3 / 2 en entiers ça donne quoi était un poil flippant aussi à un moment
+ Remi.: Peut-être qu'il se possait la question de l'arrondi&#160;?
+ Remi.: * posait
+ b0n5a1: mouais...y'a eu de l'essai console hein :D
+ Remi.: D'accord, y a un test mais 10 validateurs.
+ b0n5a1: LOL
+ b0n5a1: c'est dommage
+ Remi.: Surtout que tu peux pas déboguer les validateurs&#160;:(
+ Stilgart: Remi.: heureusement, tu as accès aux validateurs maintenant
+ Stilgart: view contribution -&gt; preview, de rien&#160;;)
+ Remi.: Je peux les voir tourner lorsque je soumets, pas besoin d'aller voir la contribution.
+ Stilgart: (à moins que ce ne soit "test in ide")
+ Remi.: Par contre impossible de savoir pourquoi ça bugue
+ b0n5a1: ha oui...mais ça reste con d'avoir que un test sur un puzzle même de type "jeu" avec anim...ça devrait pas passer une validation d'avoir que un test case
+ Stilgart: c'est plus simple et ça évite le spam submit de passer par l'interface de validation
+ Stilgart: et ce puzzle ne mérite que ça
+ Stilgart: l'auteur ne sait pas fait chier avec les jeux de tests, donc bon...
+ Stilgart: b0n5a1: c'est surtout d'avoir un test NON REPRESENTATIF 
+ Stilgart: +con
+ b0n5a1: bon du coup je vais voir ça par curiosité
+ Stilgart: ajoute à ça le classement en easy et des tags qui te suggères que c'est plus easy que ça en à l'air
+ Remi.: Au bout d'un certain nombre de mouvements, mon code plante. MAis je ne sais pas si c'est un timeout, si je sors une mauvaise réponse ...
+ b0n5a1: ha oui en effet c'est super light
+ Stilgart: et tu fais entre 0% et 30% juste parce que tu n'as pas couverts des cas simples auquels on t'a fait ne pas penser
+ Remi.: C'est ça je fais 30% ^^
+ Stilgart: Remi.: sans doute un timeout en nombre de tour
+ Stilgart: tu as 100 tours pour chopper l'autre
+ Stilgart: spoiler: c'est pas un puzzle easy (=&gt; BFS)
+ Remi.: Ca plante au bout de 7 tours.
+ Stilgart: ha, tu dois marcher sur un mur alors
+ Remi.: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/588191156">https://www.codingame.com/share-replay/588191156</a>
+ Stilgart: (je vois pas pourquoi tu ferais un timeout tour 7 et pas tour 2 sur ce puzzle)
+ Remi.: Pourtant l'algo fonctionne, je l'ai repris de the labyrinth.
+ Remi.: Mais impossible d'afficher la moindre sortie de debug&#160;:(
+ Stilgart: si, cf ce que j'ai dit&#160;;)
+ b0n5a1: une stack, pos de départ...tant que pas vide...blah....puis chemin
+ Stilgart: je suis plutôt contre faire ça, mais encore une fois, ce puzzle ne mérite pas d'être respecté
+ b0n5a1: Remi. mets ton code dans le test ide du preview ^^
+ Remi.: Je comprends pas
+ b0n5a1: non mais un test case c'est foutage de gueule dès le départ quel que soit le sujet
+ b0n5a1: Remi. 1) clique sur "view contribution"
+ Stilgart: depuis l'ide
+ b0n5a1: ensuite le bouton "test in ide" (un truc comme ça)
+ Stilgart: cf b0n5a1 pour la suite 
+ Remi.: Le test de l'ide fonctionne.
+ Stilgart: on s'en fiche de ça
+ Stilgart: lis ce qu'on t'a écrit&#160;;)
+ b0n5a1: attends je te le MP Remi. (le lien)
+ Stilgart: depuis l'ide&#160;: view contribution -&gt; preview
+ Remi.: Ah on peut jouer le truc depuis la contribution&#160;?
+ Stilgart: il me semblait bien que c'était "preview" pour les puzzles avec graphismes
+ Stilgart: OUI
+ b0n5a1: oui, les validateurs/testeurs passent par ça
+ Stilgart: il faut être lvl 29... et ça tombe bien, c'est pile ton niveau
+ Remi.: Ok c'est bon j'ai compris.
+ b0n5a1: et un seul test case ça les choque pas...
+ Remi.: Et merci bonsai pour le lien
+ Stilgart: évidemment, tu n'es pas censé abuser de cette technique
+ Remi.: Je vais devoir me déconnecter, j'aurais voulu le finir ce soir mais bon tant pis.
+ Remi.: Bonne nuit les gars et merci pour la technique.
+ b0n5a1: bn Remi.
+ Stilgart: de rien, et bonne nuit
+ b0n5a1: JBM en mode guitare apparemment ça te va pour le duo ^^
+ b0n5a1: :D
+ mathod31: les gens qui finissent 1er et qui montrent pas leur code, j'ai envie de les égorger
+ mathod31: quel égoisme 
+ b0n5a1: ils savent que certains vont copier/coller/exploiter :D
+ b0n5a1: leur but c'est de rester premier et en haut du classement pas de partager leurs arnaques de golf pour les shortests
+ mathod31: D'ailleurs en python, cette histoire de I=input
+ mathod31: C'est un bug ou ça marche vraiment en pytgon?
+ mathod31: python*
+ mathod31: Et genre faire un I à la place du print aussi
+ b0n5a1: c'est valide
+ mathod31: Ok&#160;! 
+ b0n5a1: i=input -&gt; i()
+ mathod31: mais pourquoi tu peux print avec ça 
+ mathod31: j'ai pas compris
+ mathod31: I("Hello") = print("Hello")
+ mathod31: ah j'ai compris
+ mathod31: un input ça envoie du texte
+ b0n5a1: si tu vois Recher streamer, regarde ce qu'il fait en python...il explique tout ce qu'il fait en détail quand il golf
+ b0n5a1: c'est une des arnaques qu'il utilise aussi
+ mathod31: top merci bcp&#160;! 
+ mathod31: C'est un streamer EN?
+ b0n5a1: non français
+ mathod31: Ok&#160;! 
+ mathod31: Faudrait j'aille le suivre
+ mathod31: mais Ruby gagne trop souvent sur du python en short&#160;:(
+ b0n5a1: mathod31 <a rel="nofollow" class="external free" href="https://www.twitch.tv/recher_squarity">https://www.twitch.tv/recher_squarity</a>
+ mathod31: merci&#160;! 
+ b0n5a1: sur ce, bonne nuit&#160;!
+ b0n5a1: Remi. si tu lis ça&#160;: vérifies que tu lis bien y puis x et pas x puis y pour la position du gus à attraper (on sais jamais)  ... et SURTOUT empêche de revenir sur ta position précédente (check ou plaçage de mur bourrin à la traînée de Tron)

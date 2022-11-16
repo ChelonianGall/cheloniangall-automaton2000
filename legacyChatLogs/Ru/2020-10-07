@@ -1,0 +1,90 @@
+ gsomix: wlesavo, нет, кажется, это локальная проблема с некоторыми ботами. Я наоборот резко спустился в рейтинге. Даже в CSB, где у меня -3*vel и не может быть таймаутов.&#160;:)
+ magaiti: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=94KtQMnxrpw">https://www.youtube.com/watch?v=94KtQMnxrpw</a>
+ 735487: vrabosh: тебе нужен форматированный вывод по идее
+ Uljahn: гуглится за минуту, поэтому я всё время забываю, как это делать :upside_down:
+ MadKnight: gsomix
+ gsomix: MadKnight, внимательно слушаю.&#160;:)
+ MadKnight: gsomix это у тебя бот крашится в первый ход, поэтому ты в топе упал в ranks, где у всех вокруг тебя боты падают в первый ход
+ gsomix: Да.
+ MadKnight: это народ у кого примерно 1.5 score
+ MadKnight: так с какой ошибкой падает твой бот?
+ gsomix: Таймаут.
+ gsomix: В IDE всегда нормально отрабатывает.
+ gsomix: Такая ерунда на любых играх. В дискорд написал.
+ MadKnight: gsomix они вроде стали компилить сабмит версию в Release сборке
+ MadKnight: gsomix твой код нормально работает в Release&#160;?
+ gsomix: MadKnight, стой, а раньше компилили в дебаге?&#160;%)
+ gsomix: Срамота какая.
+ MadKnight: так а как ты будешь дебажить проблему, которая только возникает при сабмите?
+ gsomix: MadKnight, выводом в stderr? Какие тут могут быть иные варианты?
+ MadKnight: gsomix так если только при сабмите баг появляется
+ gsomix: Можно же реплей выкачать? Или там только инпуты?
+ MadKnight: хммм вроде они недавно пытались stderr из реплеев отображать
+ gsomix: В реплеях ничего полезного.
+ gsomix: MadKnight, я сбросил бота до дефолта.
+ gsomix: Просто чтение из консоли и вывод одной и той же команды.
+ gsomix: Таймаут.&#160;:)
+ MadKnight: напиши им в bug-report
+ gsomix: MadKnight, я уже написал. Спасибо.
+ gsomix: C# отрабатывает нормально.
+ gsomix: Это довольно странно, и C#, и F# на одном и том же неткоре.
+ 735487: в реплеях есть дебаг но не весь
+ MadKnight: gsomix а другие игры работают?
+ gsomix: Нет.
+ gsomix: У меня смутное подозрение, что у них сборка F# сломалась при обновлении неткора.
+ gsomix: Хотя паззлы работают.
+ gsomix: И IDE тоже.
+ gsomix: Подожду.&#160;:)
+ magaiti: кто шарит в симуляцции гоночек? есть смысл переделывать с float на целочисленную арифметику?
+ MadKnight: неа
+ MadKnight: оптимизатор использует спец регистры для нецелых чисел
+ MadKnight: они достаточно быстрые и как AVX - могут сразу несколько считать
+ MadKnight: ты кстати запилил симуляцию 8 игр за раз?
+ magaiti: нет, как это
+ MadKnight: есть спец 256-битный регистр
+ MadKnight: в него можно засунуть сразу 8 флоатов
+ MadKnight: а потом перемножить сразу 8 флоатов на 8 флоатов
+ MadKnight: плюс они же дают 1 ядро а не 1 logical thread
+ MadKnight: а 1 ядро может параллельно выполнять 2 потока
+ magaiti: хм, и как с ними работать на плюсах?
+ MadKnight: <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/283/sse-avx-vectorization/what-is-sse-and-avx">https://www.codingame.com/playgrounds/283/sse-avx-vectorization/what-is-sse-and-avx</a>
+ MadKnight: ты q_rsqrt заюзал кстати?
+ magaiti: да нафиг он
+ magaiti: в полтора раза быстрее обчного
+ magaiti: а точность никакая
+ MadKnight: а обычный - это какой?
+ magaiti: std::sqrt
+ MadKnight: так я не про него
+ MadKnight: я про 1/sqrt()
+ magaiti: да мне вроде особо не нужен в симе. в оценочную можно, наверное
+ MadKnight: нормализуешь вектора где-нить?
+ MadKnight: делишь на длину вектора?
+ magaiti: ща посмотрю
+ MadKnight: это как раз 1/sqrt
+ MadKnight: ты же знаешь, что деление в 14 раз медленнее умножения?
+ magaiti: что-то такое есть
+ MadKnight: деление совсем чуть-чуть быстрее чем sqrt
+ magaiti: ну да, деление + корень в 2.5 раза медленнее быстрого корня
+ magaiti: хз, у него точнсть меньше 1%
+ MadKnight: хмм покажи тестовый код
+ magaiti: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/86341b77-ec50-4b39-b344-d113efd66a6d">http://chat.codingame.com/pastebin/86341b77-ec50-4b39-b344-d113efd66a6d</a>
+ MadKnight: Invalid paste id, perhaps it expired?
+ magaiti: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/c7eadce4-967e-433c-bb63-da42008e0a13">http://chat.codingame.com/pastebin/c7eadce4-967e-433c-bb63-da42008e0a13</a>
+ MadKnight: в лс
+ MadKnight: обнаружили, что оптимизатор сам заменяет деление на умножение а 1/sqrt на Q_rsqrt
+ magaiti: на rsqrtss
+ MadKnight: ss - это для флоатов, magaiti
+ magaiti: я для флоатов и мерил
+ MadKnight: типа для даблов было бы без ss
+ magaiti: и Q_rsqrt тоже для флоатов
+ YurkovAS: сам не проверял, можно кешировать коллизии или проверять их при пересечении по сетке<a rel="nofollow" class="external free" href="https://github.com/Illedan/Post-Mortem/blob/master/Mean-Max.md#cache-collisions">https://github.com/Illedan/Post-Mortem/blob/master/Mean-Max.md#cache-collisions</a>
+ YurkovAS: про кеш коллизий слышал, что заметно ускоряет, сам не смог реализовать
+ YurkovAS: корни можно же предрасчитать в большой массив на 1-м ходу
+ magaiti: хватит массива на квадраты расстояний?
+ YurkovAS: а, я думал ты про корни для UCB формулы
+ YurkovAS: там еще и логарифмы в ней есть
+ magaiti: хм, не хочет корень векторизовать
+ magaiti: хз туфта какая-то 
+ magaiti: без векторизации в 2 раза быстрее
+ magaiti: если так, по фасту коллижен векторизовать
+ MadKnight: покажи код

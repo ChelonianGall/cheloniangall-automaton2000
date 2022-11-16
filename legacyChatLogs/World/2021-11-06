@@ -1,0 +1,440 @@
+ experiencednoob: i need help im not that good at coding and im stuck on angle and distance
+ baneetparmar: hello world
+ Sp4m: Hi!
+ baneetparmar: nice to meet you sir
+ Sp4m: Nice to meet you too./
+ jacek: happy Caturday
+ Sahxom: Once one of those 15 minutes clash are completed and the result is done, is there any way to go back and check the instructions and score of a older clash you participated in?
+ jacek: in notifications you can go back to check the score
+ jacek: but for instructions you need to use other searcher <a rel="nofollow" class="external free" href="https://eulerschezahl.herokuapp.com/codingame/puzzles/">https://eulerschezahl.herokuapp.com/codingame/puzzles/</a>
+ Sahxom: thanks
+ MSmits: mmh it asked me to click on boats when i logged in just now
+ MSmits: did I do anything to make you guys think I am a robot?
+ MSmits: Seems like the boats got automaton as well, he's off
+ Jerrasterix: Maybe went for a break, to celebrate Caturday 
+ MSmits: this is possible
+ JHBonarius: bwuh. keep running out of memory on CTTT
+ MSmits: you do know the game is a bit broken currently i hope
+ JHBonarius: MCST is just too big... 5'000'000 nodes and mem's full
+ JHBonarius: yes draw
+ MSmits: I spent a little time on it, but no more until they fix it
+ MSmits: ah ok
+ MSmits: 5 million nodes isnt much
+ MSmits: I can fit 25 million
+ JHBonarius: my node is too big
+ JHBonarius: (that's what she said)
+ MSmits: what do you put on there?
+ MSmits: don't put the whole board on there
+ JHBonarius: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/16446663-37e1-454e-9643-62121499eaef">http://chat.codingame.com/pastebin/16446663-37e1-454e-9643-62121499eaef</a>
+ JHBonarius: uhm
+ JHBonarius: again
+ JHBonarius: -parent Node*
+ JHBonarius: - 2x float UCT
+ MSmits: uct?
+ MSmits: why store that?
+ MSmits: also never store a vector of node pointers
+ JHBonarius: precalcuate
+ JHBonarius: worked fine in UTTT
+ MSmits: but not to win
+ MSmits: it's slow
+ MSmits: why not have a giant node array out of which you take a set of children
+ MSmits: you just need to point to the first child then
+ MSmits: and include the number of children
+ MSmits: so firstchild + childcount
+ MSmits: thats better than having up to 100 children, like you would have in CTTT
+ MSmits: 100 * 64 bit or 1 * 64 bit...
+ JHBonarius: yeah, could look into that
+ MSmits: also with the vector you are dynamically allocating memory
+ MSmits: during the game
+ MSmits: because the vector memory is not reserved
+ JHBonarius: yeah, in CTTT I didn't do that, but these vectors are just SOO large
+ JHBonarius: CTTT has much more moves then UTTT
+ MSmits: yes it does
+ MSmits: but all that means is that you probably wont reuse the tree
+ JHBonarius: I will rethink
+ MSmits: reusing the tree is completely pointless anyway
+ MSmits: with so much branching
+ JHBonarius: hmm, so you keep recalculation the whole tree?
+ MSmits: no i mean between turns
+ MSmits: you dont use the tree from the last turn
+ JHBonarius: yeah, that's what I meant
+ JHBonarius: I could try that
+ MSmits: btw, i havent written a mcts for this game, but i did for clobber, same situation
+ JHBonarius: clobber? other bot game?
+ MSmits: yeah, also a crazy amount of possible moves
+ MSmits: btw, on the node, you could store the move + the score added
+ JHBonarius: I just got back, so I just started something I could partially recoignize for long ago
+ MSmits: so the index of the square
+ MSmits: and the amount of score the move added
+ MSmits: that way you can easily rebuild the board during selection with hardly any calculation
+ JHBonarius: oh, yeah, I store that too. missed that
+ MSmits: so dont store the whole board
+ JHBonarius: And also if it's expanded or not
+ JHBonarius: no, board is not stored.
+ MSmits: i can tell if a node is expanded by the fact that the index of the first child it points to is 0 or not
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/24588302-8e50-4716-b150-7daf3be2560c">http://chat.codingame.com/pastebin/24588302-8e50-4716-b150-7daf3be2560c</a>
+ JHBonarius: yeah, in the mean time I could. before I was doing stupid things as storing the whole node in the vector, std::moving the best Node as new root....
+ MSmits: this is generally what my node looks like
+ MSmits: (this one is for C4)
+ JHBonarius: that was dumb, as it would break and invalidate all patent poiniters
+ MSmits: everything becomes simpler when you switch to an object pool
+ MSmits: Node nodes[NODE_MAX];
+ JHBonarius: _i can tell if a node is expanded by the fact that the index of the first child it points to is 0 or not_just have to check that you're not at a terminal node
+ MSmits: it will still be 0
+ JHBonarius: YEah, I have an object pool for UTTT
+ MSmits: when i create children i set it to 0
+ JHBonarius: but terminal node has no children, so nothing to set to 0
+ MSmits: no i mean, for each child
+ MSmits: the terminal node is still a child
+ MSmits: so it will start with its childindex at 0
+ JHBonarius: oh, that
+ MSmits: then when i try to expand it i will find out it is terminal
+ MSmits: my expansion function always does a pretty deep checking for terminal nodes
+ JHBonarius: oh?
+ MSmits: sometiomes it's almost like a small depth minimax. The nodes i consider terminal are usually game ended in 1 or 2 turns
+ MSmits: 1 or 2 plies
+ JHBonarius: smitsimax :P
+ JHBonarius: that's long ago
+ MSmits: so for C4, I consider nodes terminal if there is no possible move that does not give the opponent a win next turn
+ MSmits: so the nodes arent officially terminal  but they are in my tree
+ MSmits: ah yeah i havent done smitsimax for a long time, it doesnt work for boardgames really
+ JHBonarius: Me remembers..
+ MSmits: btw, I have been thinking hard about a way to make use of the fact that CTTT has islands
+ MSmits: it feels like you should be able to make use of it to solve the game 30 plies or more before the end
+ MSmits: divide and conquer
+ MSmits: but I get stuck on this
+ MSmits: I only solve 13 plies now
+ MSmits: which gets me rank 4 with the mirror trick
+ MSmits: but with 30 plies, i'd even beat the tric
+ jacek: with 100 plies, youll be unbeatable
+ MSmits: indeed\
+ JHBonarius: plies?
+ MSmits: moves
+ MSmits: turn = both players move
+ MSmits: ply = 1 player moves
+ JHBonarius: p-lies?
+ MSmits: no
+ MSmits: ply singular
+ JHBonarius: pl-ies?
+ jacek: pries
+ MSmits: just plies
+ JHBonarius: police?:cop: 
+ JHBonarius: sorry, I think I need a break
+ MSmits: thats ok, think of my island problem and come back with a solution so i can take the nr 1 before i quit :P
+ JHBonarius: quit?
+ MSmits: move on to different multi
+ MSmits: already did more or less
+ MSmits: but the island thing stuck in my head
+ MSmits: i hate thinking about a problem and then not solving it
+ jacek: world hunger
+ MSmits: yeah thats why i dont think about that
+ gcp: hi there
+ Jerrasterix: hi gcp
+ jacek: good morning
+ gcp: hi jerrasterix! good day to you!&#160;:)
+ Bonis: start the clash bro
+ MSmits: bruh
+ Jerrasterix: jacek, its evening in India :confused:
+ MSmits: jacek is a flat earther so...
+ MSmits: everywhere morning at the same time&#160;:)
+ Jerrasterix: :rolling_eyes:
+ MSmits: hey, respect his beliefs :P
+ MSmits: don't try to argue it, you'll bring the skydome crashing down on him
+ Jerrasterix: at least, he have to consider that time zones exist :shrug:
+ MSmits: they don't. It's a conspiracy
+ MSmits: if you think so, you're in on it
+ Jerrasterix: Then why's out American brothers still snoring on bed&#160;???
+ MSmits: lazy
+ Jerrasterix: :joy:
+ Jerrasterix: maybe you are right&#160;!!
+ MSmits: hey it's not me thinking this
+ MSmits: the earth is obviously a cube
+ MSmits: which explains timezones
+ Jerrasterix: Flat, sphere, next cube...
+ MSmits: and the inspiration that created dice
+ Jerrasterix: Thanks god no one have gone for donut 
+ MSmits: Donut Earthers are mental. I agree
+ MSmits: You'd see parts of the earth in the sky
+ MSmits: flat earther community should have been a wake up call imho. It's older than Qanon. 
+ MSmits: flat earther does little harm, but if people will believe that, then...
+ Jerrasterix: atleast the famous greek, who predicted mostly wrong, was right about Earth being a sphere 
+ MSmits: well that's not really a point in favor of the spherical earth camp :P
+ TheBattleGiant_2959: mostly wrong ,what??
+ Jerrasterix: yeah, Aristotle 
+ Jerrasterix: So you are a cube earther MSmits&#160;??
+ MSmits: no lol
+ MSmits: I teach physics. That would have been an interesting belief to hold while teaching astrophysics
+ sillix: bobo earther
+ Jerrasterix: Ohh... you teach physics&#160;?? uni prof&#160;??
+ MSmits: nah high school on average 16-17 yr olds, highest level
+ MSmits: but this year i mostly teach computer science
+ MSmits: just got my degree for that
+ Jerrasterix: Nice&#160;!! congrats 
+ MSmits: thanks!
+ MSmits: oh and just to be clear, afaik jacek is not a flat-earther :P
+ Jerrasterix:&#160;:+1:
+ jacek: oO
+ jacek: <a rel="nofollow" class="external free" href="https://i.redd.it/3tunnsgi3n701.jpg">https://i.redd.it/3tunnsgi3n701.jpg</a>
+ MSmits:&#160;:)
+ LittleVandalSD: wy
+ Bonis: strat the clash bro
+ jacek: hm
+ AntiSquid: MSmits how come you didn't go for astrophysics&#160;? can't say uninteresting can you&#160;?
+ AntiSquid: "can't say IT'S uninteresting"  ate up a whole word in there 
+ MSmits: astrophysics is just a part of physics in high school
+ MSmits: I studied astrophysics as the university, but it is for 70% the same thing as different areas of physics
+ MSmits: like theoretical physics or experimental physics
+ MSmits: only the last part (master) is different
+ MSmits: I did a master in astrophysics and science teaching
+ jacek: so you can build rockets now
+ Cure: peter
+ Alonius: Can someone please provide us a clue about sherloc holmes last problem?
+ jacek: :zipper_mouth:
+ YCSVenom: ATLA
+ MSmits: jacek i can't build anything unless it's legos :P
+ dtnguyen123: lol
+ dtnguyen123:&#160;????
+ dtnguyen123: :mouth:
+ dtnguyen123: :mouth:
+ jacek: no school today :thinking:
+ andrew911: heyy
+ AntiSquid: got a masters? you could be a host for a fun series like Neil de Grass
+ AntiSquid: ya i was referring to pursuing something outside of highschool
+ AntiSquid: is this chat always this dead&#160;? Automaton2000
+ Automaton2000: is there a way to find out
+ MSmits: AntiSquid the reason i didnt go further into astrophysics is that I am a weird person that doesn't want to travel the world
+ MSmits: I could maybe have done a PHD here, but other than that I would have to go abroad
+ MSmits: Dutch astrophysics is at such a high level that you're not good enough to stay. They get the best from all over the world. 
+ MSmits: besides that, I should have gone into computer science from the start. It turns out that that is much more my thing
+ AntiSquid: makes sense
+ AntiSquid: sorry for the weird questioning, just had this random youtube recommendation earlier and it reminded me smits had written his paper <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=XW_qIqLhPkI">https://www.youtube.com/watch?v=XW_qIqLhPkI</a>
+ MSmits: It's not that I wasn't good enough (or  I think i wasn't). It's just that you're not good enough right after you finish PHD. So you have to get better elsewhere
+ MSmits: and it's considered good to have been places...
+ MSmits: nice video btw
+ MSmits: it's fun to see how when they visit eachothers lectures it's like being a student again
+ The_King_of_Demons: Hi! I signed in CodinGame like half an hour ago!!
+ MSmits: welcome!
+ The_King_of_Demons: I was searching through the web to find some unblocked games then I'm here!!
+ The_King_of_Demons: Do you think Among Us 2 will be released??
+ jacek: oh my
+ The_King_of_Demons: Hmmm??
+ jacek: half an hour and already lvl 3? :thinking:
+ jacek: pretty sus
+ The_King_of_Demons: Well, I sometimes manage to get things done quicker than expected lol. 
+ The_King_of_Demons: So, follow for follow somebody??
+ The_King_of_Demons: Anybody??
+ The_King_of_Demons: It's like you following somebody so they follow you!!
+ MSmits: I don't follow
+ MSmits: I mean, I don't understand what you mean
+ Scarfield: badum tss
+ The_King_of_Demons:&#160;??
+ MSmits: :question:
+ The_King_of_Demons: What does that mean @Scarfield
+ Scarfield: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=6zXDo4dL7SU">https://www.youtube.com/watch?v=6zXDo4dL7SU</a> the_
+ MSmits: thats when you hit something with your bicycle and you spring a leak
+ MSmits: or that
+ monseur: hmm
+ The_King_of_Demons: Oh 😕
+ The_King_of_Demons: @MSmits
+ MSmits: it is I
+ MSmits: btw, the @ does nothin
+ The_King_of_Demons: I dunno what's going on now.
+ MSmits: The_King_of_Demons
+ MSmits: what color is it
+ MSmits: I did it without @
+ The_King_of_Demons:&#160;??????????????????????????????????
+ MSmits: this chat is more advanced than discord. We upgraded from @'s
+ The_King_of_Demons: Oh
+ The_King_of_Demons: Of course.
+ MSmits: you can use tab button to finish a name
+ MSmits: that's if you have one
+ MSmits: so i type The_ and then tab
+ MSmits: and poof there's you're name
+ MSmits: your
+ The_King_of_Demons: The_King_of_Demons
+ MSmits: thats your name
+ MSmits: I'm glad we are having this intellectual discussion
+ The_King_of_Demons: Ok I get it now.
+ MSmits: let me know if there is any more confusion
+ The_King_of_Demons: K!
+ MSmits: Btw, you only need one "?". But you can use the big one
+ MSmits: :grey_question:
+ The_King_of_Demons: Well my mom made pizza rolls brb.
+ Wontonimo: :question:
+ The_King_of_Demons: I'm a 4th grade 9 year old boy lol
+ MSmits: that's ok
+ Wontonimo: no need to give such exact details
+ The_King_of_Demons: sry lol
+ MSmits: my dog is 6 yrs old
+ Wontonimo: you are starting to code at around the same time I did
+ Wontonimo: congrats!
+ The_King_of_Demons: Oh
+ Scarfield: I can ride my bike with no handlebars
+ The_King_of_Demons: cool
+ MSmits: you mean you're not touching the steering thingy or does it not have rubbers?
+ Wontonimo: as far as I got at that age was print statements, if statements, variables (no arrays), and goto statements (worse than functions)
+ Wontonimo: but I made some really fun text adventure games that I was (and still am) proud of
+ Scarfield: its from a song smitsi <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=HLUX0y4EptA">https://www.youtube.com/watch?v=HLUX0y4EptA</a>
+ MSmits: o
+ Wontonimo: what programming language are you focusing on The_King_of_Demons&#160;?
+ The_King_of_Demons: Go
+ The_King_of_Demons: That's the language
+ MSmits: we also have the game Go 
+ The_King_of_Demons: K!]
+ The_King_of_Demons:&#160;:))))))
+ Wontonimo: I'm not familiar with Go, so I can't give you much help or resources.
+ MSmits: same
+ MSmits: well not language specific stuff
+ MSmits: computational thinking is not tied to any specific language though]
+ The_King_of_Demons: after that maybe JavaScript
+ MSmits: why javascript?
+ Wontonimo: I can give you some inspiration projects.  Here is one that I helped another person here around your age.  <a rel="nofollow" class="external free" href="https://tech.io/snippet/elZDDbt">https://tech.io/snippet/elZDDbt</a>
+ The_King_of_Demons: I dunno.
+ MSmits: are you looking to do code for websites?
+ The_King_of_Demons: Nah not really
+ Wontonimo: He wrote up the game, but instead of instant input it you had to press enter
+ Wontonimo: I helped him add the instant input
+ Wontonimo: I just played it and got to turn 43
+ The_King_of_Demons: I'll play
+ MSmits: your racing game made me realize why I never got a drivers license
+ MSmits: I can get to turn 1 :P
+ The_King_of_Demons: Oh sad
+ Wontonimo: here is another example of something close to what I would have written when I was 9 <a rel="nofollow" class="external free" href="https://tech.io/snippet/lWpWe8m">https://tech.io/snippet/lWpWe8m</a>
+ The_King_of_Demons: Oh cool
+ The_King_of_Demons: Imma do Clash of Code
+ Wontonimo: gotta go.  Good luck The_King_of_Demons&#160;!  Keep it simple for now.  Enjoy doing stuff with text.
+ The_King_of_Demons: K!
+ MSmits: yep, also if the timelimit is too much for you, it's better to do normal puzzles
+ MSmits: clashes are stressful
+ The_King_of_Demons: ya ikr I am waiting for it to start
+ MSmits: I did not mean the waiting, i meant the fact that you only get 15 mins to find a solution&#160;:)
+ The_King_of_Demons: I got so stressed I accidently closed the tab 😭
+ MSmits: ahh dont worry about it, either you can go back in, or you're out and can do something else
+ MSmits: puzzles are better
+ MSmits: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/easy">https://www.codingame.com/training/easy</a>
+ The_King_of_Demons: Thanks for the link
+ BlaiseVonEbuthIII: Bot contests are better
+ The_King_of_Demons: I'll work on coding AI (Artificial Intelligence)
+ MSmits: works too, harder than easy puzzles though
+ MSmits: (mostly)
+ The_King_of_Demons: Ya
+ The_King_of_Demons: I'm done
+ The_King_of_Demons: Wait, it didn't take that long.
+ The_King_of_Demons: Not as long as I thought.
+ Roya_hdr: Hi, how can I see my previews clash on games?
+ Roya_hdr: is it possible?
+ LailaJamad: Hi, where can I find examples of technical tests&#160;?
+ The_King_of_Demons: What do you mean??
+ The_King_of_Demons: of technical tests?
+ LailaJamad: I mean tests used in hiring process
+ The_King_of_Demons: I don't know then.
+ The_King_of_Demons: Sorry.
+ LailaJamad: Thanks anyway for answering 
+ The_King_of_Demons:  :smiley_cat:
+ The_King_of_Demons: I love cats btw
+ jacek: happy Caturday
+ Scarfield: :wave:
+ The_King_of_Demons: yah lol
+ The_King_of_Demons: I like your profile pic jacek
+ The_King_of_Demons: :smile:
+ Shrimpster: Yo! In MCTSsolver do you keep the winning positions in a list and compare every position to the list? Seems pretty unefficient, but maybe its better than not doing that&#160;:/
+ Shrimpster: With "winning" I mean solved, and with "compare to the list" I mean check if it's in the list
+ The_King_of_Demons: I haven't played THAT
+ 5DN1L: The_King_of_Demons You wanna try? <a rel="nofollow" class="external free" href="https://www.codingame.com/training/hard/monte-carlo-tree-search-exercise">https://www.codingame.com/training/hard/monte-carlo-tree-search-exercise</a>
+ The_King_of_Demons: Sure
+ The_King_of_Demons: I'll play
+ moustapha_coding: yow guys&#160;:)
+ jacek: Shrimpster huh? in mcts solver you just backpropagate wins/loses more efficiently
+ jacek: what do you mean by compare the list
+ PluckyPenguin: Anyone know of any more challenges (either on CG or elsewhere) that's like the fall challenge? Really like the adventure style format
+ jacek: so, the escape rooms
+ PluckyPenguin: yea escape rooms or adventure style
+ MACKEYTH: <a rel="nofollow" class="external free" href="https://escape.codingame.com/games">https://escape.codingame.com/games</a>
+ MACKEYTH: Several similar adventures there
+ PluckyPenguin: they won't let me start single player
+ MACKEYTH: Ah, yeah.&#160;:(
+ PluckyPenguin: i guess i could create another account and open it in a diff browser
+ PluckyPenguin: but a lot are locked behind a pay wall that looks like you need 2 be a company to take part
+ jacek: thats 'cooperation' part
+ MACKEYTH: Isn't there somewhere you can post to invite people to pickup CE teams?
+ MACKEYTH: Discord or chatroom or somesuch?
+ PluckyPenguin: I imagine so I'll search the forums see what I fidn
+ PluckyPenguin: is there a quick way to get the code editor to re-evaluate errors? It seems to get stuck and flag errors that dont exist
+ MACKEYTH: I've noticed that too.
+ PluckyPenguin: Have to refresh the page and sometiems I lose my progress if i dont remember to copy and paste
+ MACKEYTH: You can try running a test case to save your code, then refreshing
+ PluckyPenguin: ahh sweet thanks&#160;:)
+ MACKEYTH: Bonus, the compiler will tell you about any real (syntactic) errors when you do that.
+ PluckyPenguin: yea i'm currently ignoring a warning about trying to add 1 to a non-numeric value lol
+ jacek: warnings are for losers
+ Husoski: Ignoring warnings is for losers.
+ AstroHydes: Winners just segfault
+ MACKEYTH: <a rel="nofollow" class="external free" href="https://youtu.be/jW6xTkivmto">https://youtu.be/jW6xTkivmto</a>
+ SupercraftD: i just learned about the colon for strings in python and my eyes are opened
+ Husoski: Slices...yes, they're nice.  That works on lists and tuples too.
+ MACKEYTH: Oh, what does it do? Py noob here
+ MACKEYTH: Oh, riiight. Py treats strings like char lists, right?
+ Husoski: s[::-1] reverses a string.  s[::2] gets every other character.  s[1::2] does, to but skips the first, and much more.
+ Husoski: More like tuples than lists, since you can't change chars in a string.
+ jacek: oh my
+ MACKEYTH: What's the most efficient way to edit strings in Python? I see StringBuilders recommended a lot for Java
+ MACKEYTH: As opposed to getting and reconcatenating substrings
+ jacek: <i>/join()</i>
+ jacek: <i>.join()</i>
+ vaeng: the colon for strings? you mean slicing?
+ SupercraftD: yeah
+ fzfz: strings are immutable though
+ CezarCC: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/20550815d290734d8374e9b3d704162b1baaa60">https://www.codingame.com/clashofcode/clash/20550815d290734d8374e9b3d704162b1baaa60</a>
+ Win4life: Just wanted to say Hello
+ SupercraftD: hi
+ MACKEYTH: Hey, what's up?
+ The_King_of_Demons: Hi
+ The_King_of_Demons: How you
+ MACKEYTH: Good. Doing puzzles
+ MACKEYTH: Just finished <a rel="nofollow" class="external free" href="https://www.codingame.com/training/expert/the-last-crusade-episode-3">https://www.codingame.com/training/expert/the-last-crusade-episode-3</a>
+ The_King_of_Demons: Oh lol
+ MACKEYTH: I meant this
+ MACKEYTH: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/expert/the-last-crusade-episode-3">https://www.codingame.com/training/expert/the-last-crusade-episode-3</a>
+ The_King_of_Demons: k
+ MertT01: "How you" is so long, you should say HoYo
+ The_King_of_Demons: ok
+ MACKEYTH: Or the Appalachian variant: Hihowarya
+ The_King_of_Demons: ok
+ jacek: :upside_down:
+ The_King_of_Demons: :upside_down:
+ jacek: othello slowly being overtaken by japan :thinking:
+ The_King_of_Demons: Hi :upside_down:
+ jacek: ohai
+ jacek: how may we help you, Sir/Madam
+ The_King_of_Demons: My head is upside-down :upside_down:
+ derjack: amateur
+ The_King_of_Demons: What do you mean?? :upside_down:
+ The_King_of_Demons: by "amateur" :upside_down:
+ derjack: (╯°□°)╯︵ :slight_smile:
+ The_King_of_Demons: :smiley:
+ The_King_of_Demons: :smiley:
+ The_King_of_Demons: :smiley:
+ The_King_of_Demons: :smiley:
+ The_King_of_Demons: :smiley:
+ AstroHydes: :no_mouth:
+ The_King_of_Demons: :no_mouth:
+ The_King_of_Demons: :no_mouth:
+ The_King_of_Demons: :no_mouth:
+ The_King_of_Demons: :no_mouth:
+ picoplankton: removing the comment lines helps
+ picoplankton:&#160;:(
+ picoplankton: plus the length is language depended... not a fair heat
+ SupercraftD: eh i mean
+ SupercraftD: its still helpful to reduce your code or smth like that
+ SupercraftD: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/205528718e89c85bd65a271c389ad6492b05d44">https://www.codingame.com/clashofcode/clash/205528718e89c85bd65a271c389ad6492b05d44</a>
+ geoh69: i love you
+ geoh69: how are you guys
+ geoh69: what abiuot you man
+ geoh69: what about you
+ geoh69: NOOOOOOOOOOOOO
+ geoh69: dont die i beg you
+ geoh69: life goes on and on and on and on on on and on and on
+ geoh69: omg imy so much
+ geoh69: fuuuu
+ geoh69: niggaaa
+ Wontonimo: well geoh69, perhaps you are not familiar with community chat rooms.  Be respectful, don't spam, talk about coding or coding game, and (generally) try to stay on topic.

@@ -1,0 +1,508 @@
+ AC6: no
+ Stilgart: tortue à tous et salutation Automaton2000
+ Automaton2000: je sais pas si je peux me tromper
+ Stilgart: Automaton2000: tu ne fais que ça, non&#160;?
+ Automaton2000: je ne pensais pas que c'était possible
+ GTNRV: Bonsoue
+ Bartoche: alan&#160;?
+ bbizeul: cc
+ 4rt3m157: tg binjamain
+ Bartoche: gaysperme 
+ Tiouz: Les gens, ici c'est pas votre chat de promo ou de privates jokes
+ cynikkk: vous pouvez vous taire svp
+ Zen-Zo: abadakor
+ 4rt3m157: yen a qui essaie de travailler svp 
+ Mlefort: que des cancers la commu fr
+ Firestorm49: chut je travail
+ 4rt3m157: enleve ton chat si t'es pas content toi
+ cynikkk: :sob:
+ Firestorm49: comment sa mon chat
+ 4rt3m157: :facepalm:
+ Zen-Zo: :thinking:
+ Zen-Zo: salut artemis
+ GTNRV: salut zeinzo
+ Zen-Zo: salut toi
+ Hawklm: zebi
+ BlaiseEbuth: Retro-kick!
+ Stilgart: go go go BlaiseEbuth
+ BlaiseEbuth: Yo tout l'monde! Automaton2000&#160;! AutomatonNN&#160;?
+ Automaton2000: je crois que je peux pas dire que c'est une bonne nouvelle
+ BlaiseEbuth: o/ Stilgart
+ Stilgart: \o BlaiseEbuth
+ Stilgart: Automaton2000: tip, dans ces cas là on passe à autre chose et on dit tortue
+ Automaton2000: mais on a des points de contest
+ domak: o/
+ BlaiseEbuth: \o
+ Stilgart: \o domak
+ domak: purée en plus des limitations en temps et en taille, il y a maintenant des limites sur la compil:Compilation took too long and has been interrupted...
+ Stilgart: 10s de mémoire
+ Stilgart: mais bon, on peut se manger ça en autre chose qu'en haskell + pragma ultra vénère&#160;?
+ domak: bon là c'est passé
+ Stilgart: (peut-être aussi en ocaml avec --inline=999)
+ BlaiseEbuth: De toute façon y'a que 5% de la commu qui sont susceptibles d'avoir besoin de plus... Alors :shrug:
+ domak: ah bein non en fait... domage j'étais chaud patate pour le sc2021
+ Stilgart: tu codes en quoi&#160;?
+ domak: Si je le dis, y'a BlaiseEbuth qui va me tomber dessus...
+ domak: Kotlin
+ <b>**BlaiseEbuth falls from the sky on domak.</b></p><p><img src="/a/29054906001010" /> Stilgart: domak va avoir le temps d'esquiver... :popcorn:
+ 4046568: tu peux te manger les 10 sec de compil en Rust si tu préalloues des gros tableaux statiques
+ 4046568: ca se contourne.. :P
+ Stilgart: hum...
+ Stilgart: tu entends quoi par tableau statique&#160;?
+ Stilgart: parce que c'est censé être alloué au chargement du programme... pas à la compil
+ jfaixo: un truc comme ca: static mut ARRAY: [AtomicU64; LARGE_NUMBER] = [
+ jfaixo: cf: <a rel="nofollow" class="external free" href="https://github.com/rust-lang/rust/issues/37155">https://github.com/rust-lang/rust/issues/37155</a>
+ <b>**Stilgart ne lit vraiment pas le rust...</b></p><p><img src="/a/29054906001010" /> Stilgart: en gros, c'est un gros tableau de constantes
+ Stilgart:&#160;?
+ jfaixo: et de mémoire sur mes différents essais, c'est pas spécifique au coté "statique" tu as raison. allouer des gros tableaux de taille fixe est très lent a la compilation, je pense que ca vient du fait qu'il clone la valeur par défaut dans chaque item
+ Stilgart: (parce que sinon, il n'y a rien à allouer à la compil)
+ jfaixo: par de constantes non, juste un tableau. Par exemple un tableau de 2M de noeuds
+ Stilgart: ce que je comprends de la syntaxe, c'est qu'il y a un appel de constructeur par case
+ Stilgart: c'est donc plus que de l'allocation
+ Stilgart: (mais encore une fois, je lis pas le rust)
+ jfaixo: par défaut en Rust tu ne peux pas allouer un tableau non initialisé, et l'init se fait par duplication de la valeur initiale. Sur des cas simples il arrive a détecter quand c'est que des 0, mais si c'est pas simple c'est la mort
+ jfaixo: oui
+ Stilgart: vivement dans 10 ans que rust invente undefined
+ jfaixo: lol, ca se contourne déjà hein
+ jfaixo: mais faut passer en unsafe
+ Stilgart: pour le coup, c'est pas une bonne idée de pas pouvoir juste allouer
+ Stilgart: unsafe... connait pas... je code en Haskell moi monsieur&#160;:)
+ jfaixo: après c'est pas un problème que tu as dans la vraie vie (10 sec de compil en plus c'est lent mais tu peux vivre avec)
+ Stilgart: c'est pas le 10sec de compil qui me contratrie
+ Stilgart: c'est la taille abusrde du binaire produit
+ Stilgart: ^t
+ Stilgart: reporter ça à l'exécution serait moins idiot
+ jfaixo: c'est ce que je fais in fine. Je crée un Vec (ie un tableau dynamique), avec une grosse capacité préallouée
+ jfaixo: et avec une ligne en "unsafe", je force la taille du tableau a la taille que je veux. Ca évite d'initialiser
+ <b>**Stilgart ne comprendra jamais la logique de rust</b></p><p><img src="/a/16542412157988" /> Zorg1: "10 secondes de compil c'est lent" ah les jeunes .... :p
+ Stilgart: c'est unsafe d'avoir un tableau de taille fixe et connue à la compil&#160;:)
+ <b>**Stilgart tend un template C++ récursif à Zorg1</b></p><p><img src="/a/57937448844496" /> jfaixo: non ca ca ne l'est pas, mais ca passe pas la barre des 10 sec, c'est juste les contraintes CG qui poussent à faire des contournements ^^
+ Stilgart: j'ai dit "un tableau"
+ domak: mouais enfin là c'est 1K lignes de Kotlin...
+ jfaixo: Zorg1 parmi mes casquettes, je suis expert android. 10 sec c'est le temps que mets le daemon gradle à se demander s'il veut bien se lancer un vendredi ou pas xD
+ Stilgart: statique, dynamique, en short, c'est pas mon problème&#160;;)
+ jfaixo: ha ben en rust c'est pas pareil du tout
+ Zorg1: oui mais gradle il a télécharge 20 GO d'artefact entre temps ^^
+ Stilgart: domak: avec 2k lignes de haskell + pragma de l'enfer (hs et c) j'ai du mal à atteindre les 10s
+ Stilgart: le support de kotlin est cassé&#160;?!
+ jfaixo: oui
+ jfaixo: et android studio te prend 12Go de RAM sans souci
+ Zorg1: :D
+ domak: le starter passe à la compil
+ domak: donc c'est pas le support de Kotlin
+ domak: mais c'est du code qui fonctionnait pendant le contest
+ dbdr: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/ea0aba89-c038-45dc-9b4b-55ba06584725">http://chat.codingame.com/pastebin/ea0aba89-c038-45dc-9b4b-55ba06584725</a>
+ Zorg1: euh ... merci dbdr&#160;?
+ JBM: exercice: trouver c'est la solution de quoi
+ dbdr: de rien!
+ domak: c'est un contest de reverse
+ Zorg1: je vous prépare un stacktrace Java
+ dbdr: pff, vous avez pas suivi?
+ jfaixo: c'est une game du sc2021, trop frais encore
+ JBM: bah jvais le soumettre dans tous les optims, y'en a bien un qui paiera
+ dbdr: bravo jfaixo
+ dbdr: c'est beau non?
+ dbdr: le 37 au début c'est un bon indice&#160;;)
+ JBM: certes
+ domak: d'ailleurs il y a une erreur en ligne 26
+ Zorg1: ah oui c'est les entrées SC2020
+ Zorg1: * SC2021
+ dbdr: *photosynthesis
+ dbdr: d'ou l'interet des vrais noms
+ Zorg1: faut un acronyme 
+ Zorg1: sinon ça fait challenge au rabais
+ dbdr: φσ&#160;?
+ Zorg1: joli
+ BlaiseEbuth: 6CO2+6H20+E→C6H12O6+6O2
+ Zorg1: en majuscule&#160;: ΦΣ
+ 3141948: CnH2nOn c koi déjà&#160;?
+ Bon[]Crayon: Bonjour. :wave_tone2:
+ Zorg1: un sucre
+ Zorg1: o/
+ Bon[]Crayon: Automaton2000 [*-*]
+ Automaton2000: ca a un rapport avec la bretagne
+ 3141948: Merci zorg1 juste à temps pour Kfé 😉
+ Bon[]Crayon: \o
+ BlaiseEbuth: Du sucre dans le café&#160;?! :scream:
+ Zorg1: oui j'en met jamais
+ domak: Si je veux contacter CG pour mon souci de timeout on compil, c'est quoi le meilleur moyen? un ping ici? sur discord?
+ philRG: exact, ouais la réaction fait partie du sujet du dernier contest, je vais l'inclure dans mon algo (photosynthèse et respiration cellulaire pour la réaction inverse)
+ philRG: <a rel="nofollow" class="external free" href="https://fr.wikipedia.org/wiki/Glucose">https://fr.wikipedia.org/wiki/Glucose</a>
+ BabelO: ah je progresse&#160;:) 1er a 58% du calcul
+ philRG: Je me suis tapé les manuels de Maths/Physique Chimie de 6ème à Tale il y a un peu plus d'un an pour donner des cours (environ 1500 pages) ça file mal au crâne et oublié pas mal de sujets aussi
+ philRG: impressionné de voir le niveau des sujets abordés en Physique/Chimie au lycée par rapport à il y a 30 ans, à se demander si les élèves comprennent quelque chose, notions jusque là abordées en prépa
+ Zorg1: domak&#160;: un post sur le forum aussi non&#160;?
+ Zorg1: le pb du ping ici c'est que ça se perd vite
+ domak: J'ai reporté sur le channel bug de discord
+ domak: je suis pas le seul à avoir eu le problème et ils ont effectivement fait une modif
+ BabelO: yes voila passage en gold&#160;! trop de betise de faite en javascript, trop de changement de language
+ 3141948: BabelO: en mtcs&#160;?
+ BabelO: philrg oui
+ BabelO: maintenant pour monter en or il va falloir que je degage tous les .filter() que j'ai mis ... c'est trop lent, c'est cool a ecrire et rapide, mais trop lent
+ 3141948: Bravo! Je crois que les dernières features de JS sont plus confortables pour cg (cd les nouvelles conventions d'écriture)
+ 3141948: Faudrait que je fasse un mtcs ca va me motiver 😉
+ BabelO: oui tout fais avec les class t aussi les [...tab]
+ BabelO: ou autrs bricole
+ BabelO: la je vais passer en bitboard 
+ 3141948: Ah les filter c'est pratique
+ BabelO: oui pratique mais couteux comme au final ca refais une boucle complete
+ BabelO: mieux vaut avoir une seul boucle comme dans bcp de language... et surtout des lookup table
+ 3141948: Yes moi j'ai repris mon système de coordonnées hexagonales + nympy ca fait cpu * 10&#160;% à mes fonctions basiques
+ 3141948: Pratique mais coûteux
+ 3141948: Je connais pas les lookup table
+ 3141948: C sont des tables créés au début du jeu?
+ 3141948: Bon code!
+ BabelO: oui au debut du jeux ou bien pour acceder directe par index et pas par recherche genre tu fais trees.filter(t =&gt; t.cellIndex == index) juste pour trouver l arbre il vaut mieux avoir la lookup table pour faire trees[index]
+ philRG: ah ok moi j'ai une classe Tree et Cell (et duplication de l'index), c'est pas top. J'aurais du utiliser des dictionnaires, mais quand trop d'index, j'ai du mal à me relire
+ philRG: sinon codes js pour utiliser une grille hexa, mais ça doit avoir un coût: <a rel="nofollow" class="external free" href="https://www.redblobgames.com/grids/hexagons/codegen/output/lib.ts">https://www.redblobgames.com/grids/hexagons/codegen/output/lib.ts</a>
+ philRG: sinon bitboard mais c tout de même moins intuitif
+ philRG: en fait vu qu'on a les index et voisins de chaque cellule, les coordonnées hexa ne servent pas. Suffit de créér les bonnes lookup table au début du jeu
+ philRG: moi qui croyais que l'ATP était uniquement le classement de tennis&#160;:-D <a rel="nofollow" class="external free" href="https://fr.wikipedia.org/wiki/Ad%C3%A9nosine_triphosphate">https://fr.wikipedia.org/wiki/Ad%C3%A9nosine_triphosphate</a>
+ philRG: à mon avis avec un bon NN, je dois pouvoir optimiser ma production d'ATP et améliorer mes capacités sportives&#160;:-)
+ Vry: En effet&#160;! ;p
+ Vry: :p
+ dwarfie: tien , c<i>est reparti en mode je valide du NaN sans regarder juste pour qu ma contrib soit validée on dirait ...</i>
+ dwarfie: Automaton2000 ... sort le lance-flame ...
+ Automaton2000: pour savoir si c'est le cas pour l'instant
+ dwarfie: Automaton2000 ... napalm&#160;? ou facepalm&#160;?
+ Automaton2000: y'a une barre de recherche
+ Bon[]Crayon: Automaton2000 À la recherche de la tortue perdue&#160;!
+ Automaton2000: je viens de voir ça
+ Bon[]Crayon: Automaton2000 Où se trouve-t-telle&#160;?
+ Automaton2000: il n'y a pas de soucis
+ Bon[]Crayon: Automaton2000 Félicie aussi&#160;!
+ Automaton2000: tu as toujours au moins un an
+ Bon[]Crayon: Automaton2000 Non du tout.
+ Automaton2000: i got u a beat, neumann
+ Bon[]Crayon: Automaton2000 C'est canal fr ici. Attention au ban.
+ Automaton2000: bonjour à tous et à Bon[]Crayon
+ Bon[]Crayon: Automaton2000 o/
+ Automaton2000: c'est à ça qu'on les reconnaît
+ ZoteLeRedoutable: salut je suis en train de faire un jeu clash of code, si vous voulez jetez un oeil: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/677683039c99ce3a75af342d1f0e925a9a26">https://www.codingame.com/contribute/view/677683039c99ce3a75af342d1f0e925a9a26</a>je n'ai d'ailleurs toujours pas proposé de solutions
+ Bon[]Crayon: Je pense que pour chaque entrée, il y a sûrement plusieurs sorties possibles.
+ Tiouz: Pour l'entrée ce serait mieux de mettre les paires sur différentes lignes
+ Tiouz: Et c'est un problème trop compliqué pour un CoC à mon avis
+ ZoteLeRedoutable: d'accord pas de soucis
+ ZoteLeRedoutable: si je peux le simplifier je le ferais sinon tnat pis
+ Tiouz: Déjà, tu pourrais faire le même problème où il faut exactement la même valeur (en gros des dominos). Je pense que c'est toujours trop compliqué en revanche
+ ZoteLeRedoutable: je réfléchis à une solution, mais oui faire en sorte que ce soit le même chiffre le rendrait sûrement plus simple
+ Tiouz: Le gros souci que tu aura c'est qu'il pourra y avoir plusieurs solutions
+ Tiouz: En tout cas, 1ère étape c'est de modifier les inputs. Là c'est déjà trop difficile à parser
+ ZoteLeRedoutable: à parser&#160;?
+ ZoteLeRedoutable: tu veux dire à split?
+ Tiouz: oui
+ ZoteLeRedoutable: perso je n'ai pas de soucis à parser
+ ZoteLeRedoutable: juste un split sur les espace
+ Tiouz: Essaie en C++, ça va être plus chiant déjà
+ Tiouz: Et aussi, tu ne donnes pas le nombre de paires, sur certains langages c'est problématique
+ pardouin: oui inutile de mettre des trucs fancy en affichage, si c'est des paires donnes des paires ligne par ligne séparées par des espaces
+ Tiouz: Mon conseil&#160;: 1ère ligne un entier n qui est le nombre de paires, et les n lignes suivantes&#160;: 2 entiers séparés par un espace
+ pardouin: +&lt;1 tiouz
+ ZoteLeRedoutable: d'accord je modifie ça,merci pour les retours
+ Abdel59: yo les zegs
+ Abdel59: zgegs
+ Toldino: ya bouche
+ Toldino: ta bouche
+ Abdel59: cava les zgegs
+ Pierre.Galaup: :sweat_smile:
+ Toldino: Va faire du F#
+ Abdel59: vs etes nul les zgegs
+ Abdel59: désolé je parlais à tout le monde
+ Abdel59: pas
+ Abdel59: bonn vacs pierre
+ Zorg1: les vedettes sont de sortie&#160;?
+ Tiouz: Aujourd'hui c'est un carnage
+ dwarfie: Tiouz ... comment tu le sais ... tu etais dans ma salle serveur sans que je te vois&#160;?&#160;;)
+ Tiouz: wut&#160;?
+ Tiouz: ah ok ^^
+ dwarfie: ouaip , le chef de service a débarqué&#160;: "vu le bruit , c'est massacre a la tronconneuse" ... et en effet , un gros serveur parti en live avec ses ventilos ...
+ dwarfie: bilan du diagnostique , d'apres l'outil dell, defaillance de la carte reseau ... euh ... y'a un lien ...?
+ dwarfie: Automaton2000 ... je suis sur que tu as encore tenté un DOS sur mon cluster espece de margoulin
+ Automaton2000: bah vu que le top 10 maintenant
+ dwarfie: Automaton2000&#160;: trop loin pour toi , donc tu t'amuses comme tu peut ... j'ai compris ...
+ Automaton2000: moi non plus je n'ai pas fait un ag
+ dwarfie: Automaton2000&#160;: tu fais pas non plus de tortue 
+ Automaton2000: mais depuis que j'ai changé un truc&#160;?
+ dwarfie: Automaton2000&#160;: oui ....????
+ Automaton2000: quand je regarde la liste des samples
+ dwarfie: Automaton2000&#160;: quoi ....?
+ Automaton2000: ok c'est pas la meilleure façon
+ dwarfie: pff tout ca pour ca ... moi qui esperait une revelation ...
+ Zorg1: une petite révélation, Automaton2000&#160;?
+ Automaton2000: par contre il y a une limite de temps dans mon code
+ Zorg1: :thinking:
+ WhatTrickeryIsThis: prend ton temps Automaton :turtle:
+ Vry: o/ Automaton2000 et les autres&#160;!
+ Automaton2000: oui je suis pas tout à fait
+ Vry: Oui Automaton2000&#160;?
+ Automaton2000: mais bon les seed que quand je me prends les pieds dans le tapis
+ Zorg1: \o
+ TidyMaze: j'ai de temps en temps des timeouts mais ça marche bien ^^<a rel="nofollow" class="external free" href="https://www.codingame.com/replay/559012585">https://www.codingame.com/replay/559012585</a>
+ WhatTrickeryIsThis: ah
+ WhatTrickeryIsThis: c'est candy crush, c'est ça?
+ WhatTrickeryIsThis: je prends le combo bananes :banana:
+ TidyMaze: presque, 2048 avec moins de sucre&#160;:)
+ fenrir: pas mal
+ fenrir: ça n'a pas le même style que quand j'y jouais à la main, mais c'est propre
+ fenrir: (déjà il joue bien des les quatres directions, moi pov' humain, j'avais tendance à ne jamais aller vers le haut)
+ TidyMaze: hehe je ne te juge pas hein, c'est clairement un jeu pour les bots et non les humains ^^
+ TidyMaze: par contre je vais peut-etre devoir passer de js à un langage plus performant :P
+ Zorg1: Haskell&#160;?
+ Sakisan: :eyes:
+ TidyMaze: je pensais plutot à Go :D
+ Thyl: et un puzzle qui tombe
+ pardouin: un puzzle qui tombe:<a rel="nofollow" class="external free" href="https://www.codingame.com/training/community/gravity-tumbler">https://www.codingame.com/training/community/gravity-tumbler</a>
+ dwarfie: il tombe pas , il tourne ...
+ pardouin: rhoo tu chipotes, les # tombent
+ dwarfie: euh non , ils glissent ... :p
+ pardouin: saleté&#160;!
+ dwarfie: la ca tombe&#160;: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/expert/hourglass">https://www.codingame.com/training/expert/hourglass</a>
+ pardouin: ou:<a rel="nofollow" class="external free" href="https://www.codingame.com/training/hard/tetris">https://www.codingame.com/training/hard/tetris</a>
+ Zorg1: je vous laisse 30 minutes, je reviens vous jouez avec les mots ...
+ JBM: pas not' genre
+ Zorg1: ça se saurait
+ Zorg1: bon Automaton2000 c'est quoi le multi/puzzle à la mode sur CG&#160;?
+ Automaton2000: je me suis dit qu'il y a un moyen de lancer un test
+ Zorg1: tu m'aides pas là, Automaton2000
+ Automaton2000: ave cesar, rosae rosam, et spiritus rex&#160;! ah non, parce que je suis un peu
+ Zorg1: :thumbsup:
+ Zorg1: super ils ont Kamelottisé le bot&#160;:(
+ JBM: lequel?
+ JBM: d'ailleurs ça sort quand?
+ Zorg1: quoi donc&#160;?
+ BabelO: Premier volet sortira donc dans nos salles obscures le 21 juillet prochain.
+ BabelO: avec le vaccin pour le cine lol
+ Zorg1: tiens au fait ça a été décallé le "Dune" de Villeneuve qui devait sortir en décembre dernier&#160;?
+ BabelO: j'ai vu passer un article dessus dans la semaine ...
+ Zorg1: moi j'ai vu une scène avec Paul &amp; Dame Jessica dans le désert, j'avais l'impression qu'ils avaient le même age ^^ 
+ Zorg1: je sais que les actrices sont généralement plus jeunes que les rôles qu'elles interpretent mais là ça faisait bizarre
+ cynikkk: bonsoir, je suis sur l'exercice "Hidden Messages In Images" et je tente le C++, j'ai pratiquement terminé mais j'ai toujours un soucis avec mon affichage final
+ cynikkk: j'ai un point d'interrogation qui est présent dès le début de ma chaine et aucune idée d'où il vient.. une personne pourrait-elle m'aider&#160;?
+ cynikkk: j'ai réglé mon problème avec un erase() sur ma string mais je ne comprend toujours pas pourquoi ce point d'interrogation est présent
+ pardouin: en général c'est un char ascii non affichable
+ cynikkk: merci pour l'info je vais creuser
+ pardouin: tu valides certains tests ou ça plante pour tous&#160;?
+ cynikkk: avec ma solution j'ai réussi à passer tous les tests
+ cynikkk: après en voyant celle des autres je me rend compte que je me suis vraiment cassé le crâne pour rien ^^'
+ pardouin: tu as partagé ta solution&#160;?
+ cynikkk: oui!
+ pardouin: ok je vais voir
+ pardouin: je voulais faire un system de sol python vite fait mais ça plante
+ pardouin: et un peu la flemme de traduire en c++ désolé ^^"
+ cynikkk: :sweat_smile:
+ cynikkk: t'en fais pas, merci quand même&#160;!
+ pardouin: ça met des messages d'avertissement maintenant genre [Detaching after vfork from child process 17]
+ cynikkk: je n'ai jamais vu de telle erreur ahah, je suis encore débutant
+ pardouin: ah ok c'est un vrai point d'interrogation (code ascii 63)
+ pardouin: je pensais que c'était un symbole en damier avec&#160;? qui signifie caractère non trouvé
+ cynikkk: je vois, après que tu me l'ai dit j'y ai pensé aussi.. dans les deux cas je ne vois pas d'où il vient
+ pardouin: c'est pas juste le char \n de saut de ligne une fois converti&#160;?
+ cynikkk: quelle ligne&#160;?
+ pardouin: non en fait je dis de la merde je regarde ton code et tu ignores bien les \n
+ pardouin: (les caractères de passage à la ligne)
+ cynikkk: je connais t'inquiète :p
+ pardouin: après 63 comme par hasard c'est 64-1 donc peut-être un truc qui merde dans tes opérations de bits
+ cynikkk: peut-être, j'ai du mal à traiter bit à bit encore
+ pardouin: ah mais attends je viens de percuter
+ pardouin: dans le message d'erreur le&#160;? n'apparaît pas
+ pardouin: Trouvé&#160;: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/244fabfc-2021-4abb-a105-0fe82221772c">http://chat.codingame.com/pastebin/244fabfc-2021-4abb-a105-0fe82221772c</a>
+ cynikkk: oui j'avais remarqué ça aussi
+ cynikkk: il me l'affichait dans le stdout mais pas dans le "trouvé"
+ pardouin: oh mais attends je fais des tests sur d'autres puzzles genre chuck norris
+ pardouin: plein de vieilles solutions ne passent plus
+ pardouin: super les mises à jour&#160;:/
+ cynikkk:&#160;:/
+ pardouin: genre tu es obligé de faire include cstdio alors qu'il est contenu dans la plupart des imports de base
+ CobahlaD: Salut, on peut revoir le defi apres avoir soumis ou pas&#160;? MErci
+ pardouin: quel défi&#160;?
+ CobahlaD: un clash of code
+ pardouin: ça peut se retrouver dans les contributions avec de la motivation et les bons mots clés
+ CobahlaD: ok dommage :D
+ leojean890: pardouin je l'ai pas fait non plus tétris ^^
+ Zorg1: si tu te souviens de qqch, tu peux utiliser l'outil de recherche d'euler&#160;: <a rel="nofollow" class="external free" href="https://eulerschezahl.herokuapp.com/codingame/puzzles/">https://eulerschezahl.herokuapp.com/codingame/puzzles/</a>
+ leojean890: faudrait que je commence <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/dice-duel">https://www.codingame.com/ide/puzzle/dice-duel</a> soon il me tente 
+ Zorg1: (tu peux chercher si tu te souviens d'un texte dans le statement, ...)
+ pardouin: moi je fais mahjong là
+ leojean890: mahjong pas commencé non plus
+ pardouin: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/completed-mahjong-hands">https://www.codingame.com/ide/puzzle/completed-mahjong-hands</a>
+ leojean890: en hard&#160;?
+ pardouin: c'est marqué extreme mais ça a pas l'air trop dur
+ leojean890: sinon j'ai enfin fait les poids
+ leojean890: dumbbles solver
+ pardouin:&#160;:)
+ CobahlaD: Comment je me souviens d'un texte dans des reverses&#160;? x)
+ leojean890: les dominos ça me parait plus chaud
+ leojean890: vilboub a créé les 2 puzzles y'a une ressemblance
+ leojean890: dominoes-solver
+ pardouin: oui oui je m'en rappelle bien
+ Zorg1: CobahlaD&#160;: t'as aussi une recherche sur les testcase
+ leojean890: et tu confrmes il est plus chaud&#160;?^^
+ leojean890: je le ferai un de ces jours
+ pardouin: sinon si tu te rappelles quelques exemple d'inputs.outputs on peut essayer de trouver
+ Littleyounes: Oh le detective pikaptcha 2 fait quoi dans la catégorie facile
+ pardouin: je crois que c'était un backtracking basique
+ Littleyounes: pikaptcha
+ Littleyounes:&#160;?
+ leojean890: ah le dominoes en backtracking ok:p
+ CobahlaD: @Zorg1 je trouve ou la recherche pour les testcase&#160;?
+ pardouin: oui je l'ai sous les yeux là
+ pardouin: contrairement aux haltères là c'est full backtracking mais rien de spécial, pas besoin de bitboard ou quoi
+ leojean890: j'avoue le terrain est pas trop grand même pour les derniers valideurs
+ Zorg1: CobahlaD&#160;: bah t'as une case à cocher "text case"
+ leojean890: halteres j'ai fait une propagation de contraintes
+ CobahlaD: Ah bien vu je l'avais pas vu x) merci
+ leojean890: et quand je peux plus déduire j'ai forcé l'appariement entre ceux qui sont déjà affichés au début
+ leojean890: ça fait 100%
+ pardouin: littleyounes facile ne veut pas forcémentdire débutant
+ Littleyounes: AH&#160;:*
+ leojean890: (pour faire le compte pile)
+ pardouin: ça veut dire que ça n'utilise que des connaissances de base (en général)
+ pardouin: oui pareil pour les haltères, full logique
+ leojean890: j'ai dû metrte 1h30-2h quand même pour les haltères
+ leojean890: le temps de debug et gérer tous les cas
+ pardouin: tu avais fait einstein riddle&#160;?
+ leojean890: mais bon y'a tjr plus dur
+ pardouin: ça fait un peu penser
+ leojean890: non einstein j'ai fail
+ leojean890: enfin à charge de revanche
+ leojean890: en gros ça ne passe qu'une partie des validateurs
+ leojean890: il faut trouver d'autres éléments logiques
+ leojean890: Blaise disait "système expert"
+ leojean890: je regarde tjr tes codes tu fais tjr bcp moins de lignes que moi #gold ^^
+ leojean890: golf*
+ pardouin: je cherche pas à golfer mais j'aime bien avoir un truc compact que tu parcours d'un coup doeil
+ leojean890: en medium y'en a un chaud 3n-tiling
+ leojean890: si tu y arrives, bravo :P
+ pardouin: j'ai 100% des mediums
+ leojean890: ouais très compact
+ pardouin:&#160;:)
+ leojean890: moi si tu regardes les miens c'est des romans
+ pardouin: et 84% des hard
+ leojean890: ah gg
+ pardouin: faut que je m'y remette
+ leojean890: bon t'es meilleur que moi xD
+ leojean890: 3n-tiling c'est chaud pour moi
+ pardouin: ça me dit rien
+ leojean890: un truc avec des tiles à placer optimalement
+ pardouin: ah oui
+ leojean890: sur des zones 3*10 par ex
+ pardouin: ben programmation dynamique quoi
+ pardouin: je relis ma sol
+ leojean890: sur certains sujet je trouve pas le sous probleme
+ pardouin: un des rares où j'ai fait un petit schéma pour expliquer
+ pardouin: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/c7aa1e3c-7166-4218-ae07-dfa4c139dcfa">http://chat.codingame.com/pastebin/c7aa1e3c-7166-4218-ae07-dfa4c139dcfa</a>
+ pardouin: je sais plus pourquoi j'ai fait ce schéma, sans doute pour expliquer un passage XD
+ leojean890: the-optimal-urinal-problem j'ai réussi mais j'ai trouvé ça difficile
+ pardouin: mais moi pareil les premiers trucs de DP j'y mettais du temps
+ pardouin: mais à force d'en faire c'est un peu toujours les mêmes ficelles
+ pardouin: tu avais fait goro loves chocolate&#160;?
+ leojean890: goro cas particulier, vu les réponses à fournir je me suis amusé à le reverse&#160;;)
+ leojean890: ça m'a pris 18 submits et 100% mdr
+ pardouin: s/loves/want/
+ leojean890: genre je me suis dit que ce serait à peu près les mêmes nombres que dans les énoncés donc j'ai pushé à l'intuition
+ pardouin: D:
+ leojean890: if 5 &gt; abs(w-h) &gt; 3: print("11")
+ leojean890: elif 4 &gt; abs(w-h):print("13" if integers[0] == 0 else "4")
+ pardouin: mais mdr
+ leojean890: else:print("10")# if integers[0] == 0 else "4")
+ pardouin: essaye de le faire vraiment, il est un peu plus simple
+ leojean890: ma conclusion en 18 submits lool
+ pardouin: et très bien pour apprendre le DP
+ pardouin: (tu peux le faire en recursif+memo aussi)
+ leojean890: ouais je vais le tenter en vrai^^
+ BlaiseEbuth: Dès que j'suis pas là, ça parle de cul...
+ leojean890: mais sur les sujets avec peu de réponses à envoyer c marrant de reverse 
+ leojean890: mais je suis d'accord avec toi pardouin ça serait intéressant que je le fasse vraiment :p
+ pardouin: bon mon mahjong n'avance pas &gt;.&lt;
+ leojean890: du coup t'as 100% easy et medium&#160;?
+ leojean890: 84% hard&#160;?
+ leojean890: moi genre 59% easy, 50% edium, 43% hard, 11% very hard
+ leojean890: ceux qui restent soit je galère soit l'énoncé me motive pas soit j'ai pas encore lu
+ pardouin: oui 100 100 84 19
+ pardouin: le 100 hard va être tendu quand même
+ pardouin: il m'en reste des pas trop durs mais pas très engageant genre aCat style
+ pardouin: et après ça a l'air assez tendu les restants
+ valdoucet: Bonsoir,  quelqu'un sais pq&#160;: 
+ valdoucet: def DistBoost (next_checkpoint_dist): <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/73f59bfe-49da-4a81-a20d-83949d3ba463">http://chat.codingame.com/pastebin/73f59bfe-49da-4a81-a20d-83949d3ba463</a>
+ leojean890: pardouin pareil plein me tentent pas
+ valdoucet: le dist = 2*(next_checkpoint_dist*2) ne fonctionne pas 
+ JBM: tiens j'ai pas refait mes stats depuis longtemps
+ leojean890: pardouin et le 100% very hard t'es chaud&#160;?;)
+ JBM: y'a pas beaucoup de very hard
+ JBM: et la plupart le valent pas
+ JBM: c'est tres faisable
+ leojean890: valdoucet tu vises checkpoint - 3* ton vecteur vitesse&#160;;)
+ JBM: bonjour le spoil
+ leojean890: JBM parait que space maze ou nintendo ou indiana sont vraiment hardcore entre autres^^
+ leojean890: y'en a qui sont assez simples après
+ JBM: ah space maze faudrait que je le fasse
+ valdoucet: d'accord, merci
+ pardouin: nintendo je l'ai résolu mais pas implémenté
+ JBM: c'est le meilleur moment
+ leojean890: t'es chaud toi:p
+ JBM: downhill depuis là
+ pardouin: ben après une fois que tu as pigé la tâche
+ JBM: tu vas avoir le choix entre 2 voies
+ pardouin: soit tu te casses la tête à trouver un algo tout seul
+ JBM: toutes les 2 mrediques pour des raisons différentes
+ pardouin: soit tu vas en prendre un tout fait
+ JBM: ah ok t'es avant ça
+ leojean890: sliding-puzzle =&gt; pas un vrai very hard
+ leojean890: et resistance par ex
+ JBM: «vrai»
+ JBM: ça faisait longtemps
+ pardouin: j'ai regardé j'ai trouvé 2 algos
+ JBM: nous y voici
+ pardouin: pas mal d'étapes
+ JBM: le plus simple pour toi sera celui des deux qu'est probabiliste
+ leojean890: sliding-puzzle est plus simple que 11-puzzle je trouve
+ pardouin: faut réimplémenter pas mal d'algèbre linéaire
+ JBM: non attends
+ JBM: rha je sais plus
+ leojean890: ok donc 2 algos possibles pour nintendo
+ JBM: au moins! ;p
+ JBM: "b" et "cz"
+ pardouin: mais en tout cas c'est pas tellement que c'est dur mais si tu connais pas le domaine tu reconnais pas le pb
+ leojean890: j'ai ps encore lu l'énoncé by the way mdr
+ JBM: tout lien avec une nationalité connue ne serait que fortuite coincidence
+ pardouin: c'est assez clivant quoi
+ JBM: encore plus que tu ne le crois
+ pardouin: bon j'ai bien dégrossi majong, je finirai demain, bonne nuit
+ philRG: bonne nuit moins toujours coincé en ligue bronze sur UTTT&#160;:-(
+ Tiouz: UTTT c'est la mort de l'intelligence, j'ai amélioré mon code, je suis 28ème mais c'est juste un MCTS
+ pardouin: tu peux faire top silver juste avec des previsions du tour suivant
+ pardouin: genre si tu peux gagner gagne, si tu peux empecher l'autre de gagner fais le, etc
+ pardouin: sur mini grille et sur la grosse grille
+ sosoooo: qlq pour m'aider&#160;?
+ Tiouz: J'ai un marteau chez moi, si tu veux planter un clou je peux me déplacer
+ sosoooo: non mdrr j'essaie d'amener thor à son marteau, jsp si vous voyez le jeu
+ Tiouz: Oui, mais c'est quoi ton souci&#160;?
+ sosoooo: if initial_ty &lt; light_y&#160;: print("SW")
+ sosoooo: j'ai écrit ça
+ philRG: ah ça a l'air de passer, ça ressemble comme 2 gouttes d'eau au sc21
+ philRG: merci pardouin
+ sosoooo: pdt plusieurs tours thor fait une diagonale South-West
+ Tiouz: Ba oui, les entrées ne changent pas, donc il va toujours entrer dans la même condition
+ sosoooo: puis initial ty vaut 17, comme light y
+ sosoooo: donc il devrait aller vers le West,, mais il continue SW
+ Tiouz: Ça dépend, tu modifies initial_ty&#160;?
+ sosoooo: je comprends pas d'où vient l'erreur
+ sosoooo: non c'est le jeu qui le fait tout seul
+ Tiouz: ba non le jeu ne le fait pas tout seul, nulle part dans ton code c'est marqué
+ Tiouz: Il y a une différence entre ton code, et l'affichage
+ Tiouz: L'affichage n'utilise pas TA variable initial_ty pour donner la position de thor
+ sosoooo: ah ok mdr
+ sosoooo: donc je dois rajouter toutes les incrémentations&#160;?
+ Tiouz: oui
+ sosoooo: c'est la première fois que je vais sur codingame et c'est un niveau facile, donc j'ai cru que le jeu faisait des trucs pour nous, histoire de simplifieer
+ sosoooo: merci tiouz&#160;!!!
+ Tiouz: Dès fois dans les entrées du tour il y a les coordonnées updated, mais pas pour thor (et c'est marqué nulle part tu remarqueras)
+ sosoooo: d'accord merci bcp
+ Zorg1: ah oui UTTT c'est la compét de perf
+ Zorg1: t'as le bon truc et ça va tout seul
+ Zorg1: le + marrant c'est trouvé les astuces
+ Tiouz: Sur UTTT j'ai voulu précalculer en local les meilleurs coups jusqu'à 3 coups, et hardcoder au début, mais ça pourris mon classement c'est trop bizarre
+ Tiouz: Bronze sur Tron, demain je code le voronoï et ça passera sûrement en silver
+ Tiouz: Et dimanche le min-max et c'est bon pour gold
+ Tiouz: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/559094992">https://www.codingame.com/replay/559094992</a>
+ Tiouz: C'est injuste comme défaite&#160;!

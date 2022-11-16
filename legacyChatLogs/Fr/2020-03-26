@@ -1,0 +1,1622 @@
+ Stilgart: go go go BigUP
+ nib: o/
+ Stilgart: et bonjour à tous, à AutomatonNN et à Automaton2000, et à nib
+ Automaton2000: si ça fait gagner pas mal de temps
+ AutomatonNN: y'a que comment tu peux faire un truc que tu peux pas passer legend et tu m'as reste derrière toi&#160;?
+ Stilgart: AutomatonNN: essaie encore
+ AutomatonNN: oui j'ai pas testé le contest de contest pour le top 10
+ Stilgart: mieux
+ egaetan: salut tout le monde et Automaton2000
+ Automaton2000: donc la réponse est dans le cloud&#160;?
+ Stilgart: Automaton2000: seulement pour le dernier puzzle de Niako
+ Automaton2000: je fais le truc de ouf
+ Stilgart: \o egaetan
+ egaetan: hello Stilgart
+ Bob: amis des trucs de ouf, des tortues et du top 100 o/
+ Bob: et d'Automaton2000 évidemment
+ Automaton2000: j'ai besoin de faire un minimax
+ Bob: si ça peut te permettre de dire tortue, tout est bon à prendre Automaton2000
+ Automaton2000: ça se fait que je trouve ça pas mal
+ Vry: o/ Bob egaetan Stilgart
+ Bob: yop Vry
+ Bob: alors t'en es où&#160;?
+ Vry: J'en suis que le bot random (move + torpedo) c'est mid-wood2 :D
+ Vry: Il faut donc travailler sur la détection e l'ennemi et/ou le move mais je vais commencer par l'ennemi&#160;:)
+ Vry: D'ailleurs question bête&#160;: l'ordre des commande est important&#160;?
+ Bob: oui
+ Vry: move + torpedo&#160;!= torpedo + move
+ Bob: si tu es en 0, 0, move E | torpedo 5 0 ça passe mais torpedo 5 0 | move E ça tire pas
+ Vry: Ok, donc il faut aussi en tenir compte pour la détection car tu peux te gourer d'une case sur la localisation ...
+ Vry: Merci Bob
+ Bob: oui
+ Bob: il suffit de traiter les commandes dans l'ordre où tu les reçois
+ Vry: Je vais commencer par stocker les commandes dans un tableauet voir comment je les traites ensuite ...
+ Vry: Je vois deux solutions, soit une carte que je tiens à jour à chaque tour soit repartir du début à chaque tour en testant toutes les cases de départ comme hypothèse ...
+ Vry: Je me dis que pour Wood2 j'aime bien la deuxième solution je n'ai que move, torpedo et surface à gérer
+ Bob: je soupçonne que les deux sont équivalents
+ Bob: en terme de résultats
+ Bob: perso je suis parti sur la première option et j'ai le sentiment que c'est plus simple à gérer
+ Bob: surtout avec les silences à partir de wood 1
+ Vry: En théorie oui, mais j'ai le sentiment que la première est plus reloue en terme de gestion du tableau, la deuxième est plus BF friendly :sunglasses:
+ Bob: hm pas évident
+ Haashi: Pas sur que les deux soit équivalents, en me posant la question, je me suis dit comment tu gères les mines qui sont trigger&#160;?
+ Bob: je ne gère pas les mines :p
+ Haashi: ouais voila :p 
+ Bob: de fait j'ai pas encore vu de replay où je le faisais défoncer à coups de mine
+ Vry: Les mines c'est pas évident si j'ai bien compris ... mais je n'en suis pas encore là&#160;!
+ Bob: me*
+ Haashi: parce que si le mec trigger une mine en 13,5 en gardant tout le chemin, tu pourrais garder que ceux qui passent par les voisins de la 13,5
+ Bob: le truc Vry c'est que les silences ça peut ajouter jusque 17 possibilités au milieu de ton chemin
+ Vry: On a les coordonnées de la mine lors de l'activation c'est bien ça&#160;?
+ Bob: oui
+ Bob: je pense que si tu veux tracker le chemin quand tu chopes un silence t'es juste bon pour recalculer tes points de départ possibles et resetter ton chemin à partir de ce point-là
+ Vry: Bob, oui mais pas en wood2 ... je ferai probablement autrement en wood1 (si besoin).
+ YannT: Bob: non ça peut pas&#160;:)
+ Haashi: Bob, plutot 13, le mec ne peut pas revenir en arrière de son dernier mouvement quoi qu'il arrive
+ YannT: 13 maximum (et encore, rarement en fait)
+ Bob: YannT, oui en réalité moins que ça
+ YannT: 13 maximum théorique
+ Bob: oui ok
+ Haashi: et si t'es malin, tu peux aussi voir qu'il y a des cases sur lesquels il est deja passé
+ Bob: oui c'est le genre de truc qui me manque
+ Bob: je ferai peut-être ça aujourd'hui
+ RomanceDawn: c'est utile sonar  pour sortir de wood 1&#160;?
+ Bob: non
+ BigUP: ha ... oui pas de retour en arriere de l'adversaire... ca va m'economiser des cases&#160;;) merci
+ Bob: pour monter ans Bronze non plus d'ailleurs
+ Haashi: sortir de wood1 = monter en bronze
+ Bob: monter à l'intérieur de bronze
+ Haashi: ah oui
+ Haashi: je crois qu'il y a que le top 15 qui utilise le sonar d'ailleurs
+ Bob: en pratique si tu gères bien ta détection d'adversaire, je ne suis même pas sûr que le sonar serve à grand-chose
+ Haashi: sauf si tu joues contre un malin qui spam silence
+ Bob: bof même
+ Bob: une série de moves permet vite de faire le tri
+ RomanceDawn: 4 power ca fait cher le sonar
+ Vry: RomanceDawn, t'es en wood1&#160;? Il y a du monde&#160;?
+ RomanceDawn: 128
+ RomanceDawn: ça a l'air moin galere que wood2 pour sortir
+ RomanceDawn: enfin moins d'investissement  
+ Bob: wood1 - bronzez ça a dû me prendre 5 minutes de code plus le temps du submit
+ JBM: comment es tes
+ Bob: fix ta
+ JBM: ameliore it
+ BigUP: Tiens, Zanbez&#160;! Te revoila collé à moi&#160;!&#160;;)
+ Zanbez: Comme une moule sur son rocher.
+ Zanbez:&#160;:)
+ Magus: Salut tout le monde et Automaton2000
+ Automaton2000: il y a eu un peu de la merde
+ BigUP: Lo Magus
+ Bob: glop Magus
+ Bob: Automaton2000 toujours au taquet
+ Automaton2000: mais dans les deux cas
+ Bob: on se demande ben qui lui apprend ce genre de vocabulaire
+ Magus: c'est les lycéens quand ils viennent sur le canal, ils apprennent des mots bizarres à Automaton2000
+ Automaton2000: mais bon ça va alors
+ Bob: je plaide un peu coupable aussi je pense
+ Magus: mais non mais non, on est pas du genre à apprendre du vocabulaire fleuri à Automaton2000
+ Automaton2000: ce serait pas la première fois de ma vie
+ Bob: du vocabulaire de merde tu veux dire&#160;?
+ Bob: :speak_no_evil:
+ Bob: bouche-toi les oreilles Automaton2000
+ Automaton2000: si j'avais pas eu le courage de faire un truc&#160;?
+ BigUP: ha&#160;! ca y est mes IA préférées sont en train de me ramener vers le top 100&#160;!&#160;;) merci&#160;!
+ Vry: Je crois que précalculer des floodfill de depth 4 ne devrait pas être inutile ... :p
+ BigUP: Vry, déjà dit hier, mais le floodfill passe en python alors avec le C t'es large&#160;! 
+ egaetan: Vry depth 5
+ Matt956: Salut à tous, vous savez comment changer le langage des entrainements svp&#160;?
+ JBM: en cliquant sur le langage
+ BigUP: Vry, oh punaise, en fait tu floodfill sur 4 moves à l'avance&#160;?
+ egaetan: la combobox en huat de l'editeur
+ Matt956: ok merci bcp
+ Vry: egaetan, pourquoi 5&#160;?
+ Vry: Mais euh j'ai une boucle infinie qui ne fait pas planter mon bot ...
+ Vry: ... je ne dois pas souvent y rentrer d'y coup&#160;!
+ Bob: essaye d'y passer encore moins
+ Bob: moi hier j'ai poussé un bout de code avec une modif que j'avais sans doute arrêtée en cours de tapage pour je ne sais quelle raison
+ Bob: mais qui compilait
+ Bob: ben quand tu fais for (int x = 0; x &lt; + 1; x++)
+ Bob: eh ben curieusement tu ne tires plus des torpilles que dans la coloone 0
+ egaetan: et ça marche bien Bob&#160;? c'est une idée à creuser&#160;?
+ dbdr: c'est quoi normalement Bob? x &lt; N? comment on remplace N par +1 par harsard?&#160;:)
+ Bob: eh ben tu vas rire mais non
+ Bob: j'étais au milieu d'un truc genre targetX - 1 / targetX + 1
+ dbdr: cut :D
+ Bob: de l'art de faire plusieurs trucs à la fois et de s'interrompre n'importe comment
+ dbdr: oh la la, t'as leaké ta strat là
+ Bob: tu parles
+ Bob: tu sais encore ce matin je tirais des torpilles sur des endroits où je savais que l'adversaire ne pouvait pas se trouver...
+ Bob: grosse strat
+ dbdr: c'est gentil
+ dbdr: Bob le pacifiste
+ dbdr: ou alors, tir de sommation?
+ Bob: non juste de la merde
+ dbdr: timeout de ton plein gré et je t'éparge
+ Bob: t'as pris note, Automaton2000&#160;?
+ Automaton2000: et si tu as la liste des coups possibles
+ dbdr: faut savoir spinner sa merde
+ Bob: avec un ventilateur
+ dbdr: phrase à ne pas sortir de son contexte svp
+ dbdr: exactement
+ Bob: hélicomerde
+ Bob: l'horrible image mentale 
+ BigUP: faut faire gaffe, ça eclabousse&#160;!
+ BigUP: Top 100&#160;!! Merci a tous&#160;!
+ BigUP: argh 101eme
+ dbdr: en binaire?
+ egaetan: en hexa
+ Bob: ça fait quoi en chuck&#160;?
+ Vry: Bon maintenant que je sais où se trouve le méchant, il faudrait peut-être aller lui balancer des pralines ...
+ BigUP: des pralines ou des supos&#160;?
+ Vry: Je réponds toujours en moins d'une ms en tout cas ...
+ egaetan: Vry m^me après 10 SILenCE&#160;?
+ Vry: Je suis en wood2 moi&#160;! :p
+ Vry: Mais je recalcule tout depuis le premier tour à chaque tour pour chaque case libre au début ...
+ MowMow: Vous savez ce que àa va changer l'ouverture des nouvelles ligues&#160;?
+ MowMow: Pas de nouvelles règles&#160;?
+ Vry: En théorie rien
+ MowMow: C'est juste de nouveaux boss&#160;?
+ MowMow: Top&#160;!! Trooop hâte&#160;!
+ JBM: ah!
+ JBM: obs 25.0.3 corrige le coredump
+ JBM: pas trop tot
+ Zorg1: tu vas pouvoir streamer alors&#160;?
+ JBM: dans des conditions plus raisonnables
+ Dataworm: YES WOOD 1
+ Dataworm: enfin
+ Vry: GG Dataworm
+ Vry: Moi il faudrait que je code un mc move ... :p
+ Dataworm: grace à ma fonction refractor&#160;!
+ Dataworm: j'arrive en quelques tours à trouver où se trouve l'adversaire
+ Dataworm: ... en permanence
+ Vry: Moi aussi j'ai ça ... je sais où il est maintenant ... sauf que je move toujours random et je tire toujours random :p
+ RomanceDawn: pour le move
+ RomanceDawn: ...
+ Samsa: Vry tu vérifie que le mouvement est legit ou c'est total random&#160;?
+ RomanceDawn: nan je sais pas
+ Vry: Non legit ... et je fais surface si pas d'autre solution
+ Bob: bon allons faire à manger
+ Bob: ma gamine me met l'alarme à midi sur son réveil et me le planque dans le bureau...
+ Dataworm: ^^ elle a raison la mienne me met en boucle les odyssées de france inter sympat pour les jeunes
+ Dataworm: pour vry je suis en random au début puis des que j'ai la position ou presque je m'approche à 2 cases max
+ Dataworm: et je tire&#160;!
+ Vry: Oui, c'est clairement la prochaine étape&#160;! :p
+ Dataworm: il me manque un algo de recherche de chemin pour pas faire surface avant de savoir ou l'adversaire est
+ Dataworm: et pour pas me coincer en allant à sa rencontre
+ RomanceDawn: l'idéal serait de suivre un chemin pa facile à detecter
+ RomanceDawn: genreeviter les ligne droites
+ RomanceDawn: faudrait essayer de detecter son prorpre sous marins  :thinking:
+ JBM: ben c'est la base
+ RomanceDawn: han
+ JBM: tu as un sur-ensemble de ce au'il sait
+ JBM: tu as tout ce qu'il faut pour evaluer ta detectabilite
+ RomanceDawn: :thinking::thinking:
+ JBM: bon
+ JBM: j'arrive plus a trouver mon mot de passe nao
+ JBM: que j'avais pourtant reussi a reverse-bruteforcer hier
+ Vry: C'est doublement ballot ...
+ R4N4R4M4: Salut tous les télétravailleurs
+ [CG]Thibaud: yo
+ domak: Yo
+ domak: vous en êtes où de vos strats?
+ domak: faudrait que je bricole des mines avant l'ouverture de la silver demain
+ domak: parce que ça va pas suffire pour passer
+ Azkellas: Coucou R4N4R4M4
+ Archayque: coucou les amis
+ RomanceDawn: ce soir y a battldev
+ Palmipedus: question: si on torpille l'opponent et qu'on meurt aussi a cause des degats, c'est un draw ou une victoire?
+ dbdr: draw
+ Palmipedus: ok merci
+ dbdr: 0 - 0
+ dbdr: [CG]Thibaud: un multi (paper soccer) comme puzzle de la semaine en plein contest, c'est pas génial pour son créateur jacek
+ [CG]Thibaud: yes, je suis d'accord
+ [CG]Thibaud: je n'ai pas la main sur les puzzles de la semaine. C'est choisi de façon semi-automatique. Faut qu'on change ce truc
+ dbdr: c'est automatisé, ou vous y avez pas pensé?
+ dbdr: OK
+ dbdr: if (contestInProgress) filter += "not multi";
+ [CG]Thibaud: bah, en fait le puzzle de la semaine, là c'est OOC même
+ dbdr: tu veux dire, faudrais faire ça?
+ dbdr: parce que j'ai eu paper soccer
+ [CG]Thibaud: oui faudrait faire ça
+ dbdr: oui, ce serait logique en fait
+ dbdr:&#160;:)
+ dbdr: sinon, le coup des XP de league qu'on peut avoir en multi apres, je me demande si ça retire pas un peu de l'excitation de passer gold ou legende avant la date limite
+ dbdr: c'est frustrant si tu réussis pas, mais c'est tres satisfaisant si tu passes
+ dbdr: sans ça, ça peut faire un peu "peu importe, je le ferai avec le multi"
+ dbdr: t'en penses quoi [CG]Thibaud?
+ [CG]Thibaud: en contest, c'est plus pour la gloire que pour l'XP non&#160;?
+ dbdr: oui
+ dbdr: mais passer une league c'est un gros symbole
+ dbdr: et si ya de l'xp en jeu en plus, ça dramatise&#160;:)
+ dbdr: sinon, top gold et bottom legende c'est moins différent
+ dbdr: en gros, dans un jeu c'est bien si y'a toujours le plus de motivations possibles à s'améliorer, non?
+ R4N4R4M4: Allez on y crois, push Wood 2 avec flood
+ dbdr: les moments ou on est plusieurs top gold à tout tenter pour passer, c'est parmis les meilleurs d'un contest&#160;:)
+ R4N4R4M4: On dirait que c'est une erreur de tirer des torpilles tout le temps non&#160;?
+ irmo322: c'est quoi le critère pour passer légende&#160;?
+ JBM: demande pas, t'es pas concerne XD
+ R4N4R4M4: Battre le Boss Gold&#160;?
+ JBM: rha le pragmatisme qui tue le debat
+ R4N4R4M4: C'est souvent la principale préoccupation...
+ R4N4R4M4: Et c'est ça qui bloque aussi... :D
+ dbdr: ou etre top gold et esperer que qqn détruise le boss
+ R4N4R4M4: aussi
+ R4N4R4M4: Tirer une torpille est repérable par l'ennemi&#160;?
+ Stilgart: oui
+ R4N4R4M4: ah ben mon tir random me fait repérer
+ Stilgart: l'ennemi sait où ça a pété
+ Stilgart: donc tu es à max 5 cases
+ JBM: j'avais cru comprendre qu'il savait ou  ca visait, pas ou ca avait pete
+ R4N4R4M4: Bon, faut que je travaille la détection ennemie, parce que le top wood2 fait du repérage
+ Stilgart: péter au sens centre de la zone d'explosion
+ JBM: ou ca visait, au sane centre de la zone d'explosion visee
+ JBM: s/sane/sens/
+ Stilgart: R4N4R4M4: tu as essayé de jouer sur ton point de départ&#160;?
+ R4N4R4M4: non pas encore, je prends au pif
+ dbdr: Stilgart: range 4, non?
+ TidyMaze: &gt; tu es à max 5 casessi on fait un torpedo + silence 4 ça augment la range possible
+ Stilgart: c'est pas génial ça
+ Zorg1: et oui ...
+ Stilgart: dbdr: dépend de comment tu gères la chose
+ Stilgart: en cas de torpedo puis move, ça fait 5
+ dbdr: oui, au moment du tir
+ dbdr: ou plus si silence
+ Stilgart: je préfère donner l'info large, mais oui, on peut faire plus futé (et je gère silence comme un sac)
+ Stilgart: on peut faire move + silence dans le meme tour&#160;?
+ dbdr: torpedo + move + silence
+ Stilgart: erf
+ dbdr: du coup large c'est 9
+ Stilgart: je te vois faire un move qui annule ton silence pour troller :D
+ dbdr: les 3/5 de la carte
+ dbdr: possible aussi&#160;:)
+ dbdr: ou peut tout faire dans le meme tour, sauf trigger la mine que tu viens de poser
+ dbdr: mais tu peux miner + tigger une autre
+ Stilgart: ça serait fun de voir les MSG des autres en input
+ Stilgart: pour l'ambiance du meta-game
+ dbdr: oui, mais trop dangereux
+ dbdr: apres tu peux dessiner en posant des mines&#160;;)
+ R4N4R4M4: Ca devrait passer là :D
+ R4N4R4M4: Et voili voilou, Wood 1 en approche
+ irmo322: Vous avez une idée d'algo pour estimer le nombre de cases que l'on pourra visiter, selon la position actuelle et les cases déjà visitées?
+ irmo322: J'ai des idées, mais rien qui ne soit réellement efficace.
+ irmo322: Je cherche une estimation peut couteuse quand on ajoute un move
+ irmo322: peu*
+ dbdr: gz R4N4R4M4
+ dbdr: irmo322: floodfill
+ irmo322: je trouve que floodfill a deux défauts
+ irmo322: 1) ça surestime trop
+ irmo322: 2) après un move, il faut potentiellement tout recalculer
+ egaetan: irmo bah oui
+ irmo322: egaetan, tu utilises autre chose que floodfill&#160;?
+ Bob: bon, top 100
+ Bob: ça valait le coup, ces 15 minutes de code avant le déjeuner
+ TidyMaze: gg Bob
+ Bob: merci
+ Bob: maintenant, faire un move un peu moins zarbi
+ TidyMaze: c'était quoi ces 10 lignes en 15 minutes&#160;?&#160;:)
+ Bob: utiliser les derniers move de l'adversaire pour mieux cadrer ses possibilités de déplacement réelles avec silence
+ TidyMaze: hmm rien de bien incroyable ^^je gere pas mal d'actions pour reduire ses possitions, sonar, move, surface, torpedo, silence et trigger
+ TidyMaze: mais mes moves sont foireux
+ Bob: j'ai pas encore trigger
+ Bob: mais j'ai pas encore vraiment vu d'adversaire qui utilise les mines non plus
+ TidyMaze: ^^
+ YannT: c'est dans le top20 les mines
+ YannT: j'ai toujours rien codé niveau mines non plus :p
+ TidyMaze: en fait je me suis un peu avancé, j'ai pas non plus les mines
+ Bob: j'utilise mes propres torpilles aussi
+ leojean890: moi j'ai des mines mais je suis pas top 20 xD
+ Bob: essaye de les enelver :p
+ Chinch: Hello
+ Chinch: C'est quoi le truc que je suis en train de rater pour battre le boss Bronze? :p
+ leojean890: si ça se trouve mon prgrm marcherait mieux sans, à voir&#160;;)
+ Bob: Chinch, le boss bronze de&#160;?
+ Chinch: Ah oui pardon, coders strike back
+ Chinch: les courses de pod
+ Bob: je dirais&#160;: des bonnes trajectoires
+ Chinch: Déjà besoin de sortir les PID ou y'a moyen de ruser sans pour l'instant?
+ JBM: comment es ton re
+ Bob: les pid&#160;?
+ leojean890: mais je vois des gens qui utilisent des mines qui sont environ 80;)
+ Chinch: Correcteurs PID, asservissement 
+ Bob: euh
+ JBM: non, mais tu peux
+ Chinch: Pour gérer la vitesse et pas dépasser de trop les checkpoints
+ Bob: d'une manière ou d'une autre il faut que tu trouves un moyyen de faire ça oui
+ Bob: c'est sûr que si après chaque checkpoint il te faut 10 tours pour te remettre vers le suivant, tu peux pas passer
+ Chinch: Là j'ai une décélération quadratique avec la distance au prochain checkpoint
+ Chinch: A partir d'un certain seul de proximité du prochain checkpoint
+ Bob: c'est fou le genre de complication dans lequel on peut se lancer
+ Chinch: Globalement je bats le boss mais c'est pas mal lié au level et si il me bouge en dehors un checkpoint et que je prends du retard et ne le rattrape pas
+ Bob: cadeau&#160;: -3v
+ Chinch: -3v? ^^'
+ Bob: tu prends le point que tu vises et tu soustrais 3 fois ton vecteur vitesse
+ Bob: heuristique magique
+ Chinch: J'ai pas encore accès au vecteur vitesse, je le calcule du coup?
+ Bob: oui
+ Chinch: Bon je vais creuser ça&#160;:)
+ Chinch: Merci
+ Bob: grosso modo ça revient à viser un peu en amont du checkpoint
+ Bob: ajusté dynamiquement en fonction de ta vélocité
+ Bob: c'est pas absolument à toute épreuve mais globalement ça donne de bons résultats
+ Chinch: J'essaie d'implémenter ça&#160;:)
+ RomanceDawn: directement gold avec -3v
+ Chinch: Les rangs qui sont affichés sont calculés sur quelle base?
+ Bob: c'est un genre d'elo
+ SeebOmega: 64
+ JBM: base sous-marine voyons
+ Chinch: Ca sert à quelque chose de ralentir du coup? :p
+ Chinch: Là en restant appuyé sur le champignon je suis effectivement passé 1er avec le -3v
+ JBM: t'es un dieu de la piste
+ Bob: ralentir&#160;?
+ Bob: quel drôle de mot
+ Chinch: ne pas mettre les pleins gazs
+ Bob: heuristique magique, on a dit je crois&#160;?
+ Chinch: ^^
+ Chinch: Les combats entre joueurs ont un impact ou c'est juste le fait de battre le boss?
+ Bob: tous les matches font évoluer ton score
+ Bob: être classé au-dessus du boss te permet de changer de ligue
+ Chinch: effectivement, passage dans 1h, merci&#160;:)
+ Chinch: C'était simple mais fallait y penser
+ Chinch: J'espère que les outils que j'ai crée me serviront aux prochains paliers
+ Bob: bah -3v ça a été tellement galvaudé qu'on ne s'enquiquine même plus à le cacher
+ Bob: si tant est qu'on s'y soit enquiquiné à un moment d'ailleurs
+ Chinch: ^^'
+ Bob: de toute façon csb c'est en gold que le vrai jeu commence
+ Chinch: ça se corse après&#160;?
+ Chinch: Ok&#160;:)
+ RomanceDawn: aprés c'est algo génétique 
+ RomanceDawn: simu
+ RomanceDawn: neural network
+ Bob: heuristique
+ Bob: ça dépend un peu du temps que tu veux y mettre et du niveau que tu veux atteindre
+ Bob: bon j'ai de la simu de pauvre quand même
+ Bob: voilà j'ai un joli move qui remplit bien toute la map en faisant de grnades lignes droites et qui est donc parfaitement contre-productif
+ WhatTrickeryIsThis: Coucou les sacs bactériels
+ WhatTrickeryIsThis: qui a sont mail de batleDev?
+ Bob: c't'à c't'heure ci qu't'arrives&#160;?
+ Bob: :banana:
+ Bob: on va intuiter un meilleur move
+ MayssaSomrani: COUCOU 
+ MayssaSomrani: je suis nouvelle ici 
+ MayssaSomrani: je suis nouvelle ici 
+ Bob: bienvenue
+ MayssaSomrani: merci bob 
+ Bob: mouarf, ce push qui fait un final de feu juste pour me faire mentir
+ Samsa: Ça faisait longtemps que j'avais pas mis 10pts dans la vue à un boss dans un jeu&#160;:)
+ Bob: les petits plaisirs de l'existence
+ Samsa: Disons que quand tu code une méthode hongroise juste pour sortir de bronze, autant le faire en beauté
+ Bob: donc quand j'ai une query qui me renvoie data, loading et error pour une study, les noms des variables dans lesquelles mes collègues mettent ça sont
+ Bob: studyLoading
+ Bob: studyError
+ Bob: et
+ Bob: studyAnswer&#160;!
+ Bob: (╯°□°）╯︵ ┻━┻
+ SeebOmega: mdr
+ Bob: putain c'est déjà pas facile de rester motivé ces temps-ci mais quand en plus tu passes ta journée sur ce genre de code...
+ dbdr: Samsa: méthode hongroise? :thinking:
+ Samsa: algorithme des hongrois
+ dbdr: ça existe ça?
+ Samsa: <a rel="nofollow" class="external free" href="https://fr.wikipedia.org/wiki/Algorithme_hongrois">https://fr.wikipedia.org/wiki/Algorithme_hongrois</a>
+ dbdr: et t'es pas en bronze depuis un moment?
+ dbdr: faut que j'apprenne ça :D
+ Samsa: ça fait 2 ans que je suis en bronze
+ Samsa: depuis j'ai appris à coder
+ dbdr: ah, tu parles pas du contest :D
+ Samsa: non je suis sur Game of drones
+ Samsa: Je vois mal comment mettre une méthode hongroise dans un problème avec un seul sous-marin
+ dbdr: DOUBLE HULK!
+ Samsa:&#160;:(
+ Samsa: pas ça...
+ YannT: dbdr t'as mit du random dans ton code &gt;:(
+ dbdr: je stochastise, nuance
+ YannT: non tu start a des endroits random :p
+ dbdr: c'est bien ce que je dis
+ dbdr: je fais un choix random quand j'ai pas de critere pour décider
+ Illedan: Just wait for Legend dbdr. There be hulks!
+ dbdr: looking forward Illedan&#160;:)
+ dbdr: je vais chercher dans le referee
+ Illedan: Hidden well D:
+ Illedan: Would be fun
+ Illedan: Easter egg with hulks
+ Illedan: lol
+ Illedan: Swapping submarine sprite with hulk :D
+ Stilgart: double hulk \o/
+ Samsa: c'était fait exprès le coup des hulks&#160;? Je vois mal comment un bug comme celui là était possible
+ Illedan: Not on purpose :P
+ Stilgart: à BotG c'est hélas pas fait exprès
+ dbdr: faut lire le commit qui fixe
+ dbdr: c'est souvent instructif
+ Stilgart: dbdr: "fix de mon code de merde"
+ dbdr: pas le message
+ dbdr: le diff
+ Stilgart: un truc que Automaton2000 devrait lire&#160;:)
+ Automaton2000: je suis le seul a avoir un bot qui marche
+ dbdr: :D
+ Stilgart: c'est pas sympa pour AutomatonNN
+ dbdr: gg Automaton2000!
+ Automaton2000: je trouve pas la bonne
+ AutomatonNN: je vais pas te faire mieux
+ dbdr: il parle de son bot de OOC
+ Stilgart: il parle clairement pas du mien en tout cas
+ Stilgart: faudrait que je m'y mette
+ dbdr: faut savoir doser son effort
+ dbdr: tenir la distance
+ Samsa: moi mon bot nage c'est plus efficace que marcher pour OoC
+ Bob: hm ça a l'air de partir sympathiquement ce push
+ dbdr: moi il coule
+ Bob: ça va tu pars de haut
+ Stilgart: dbdr: et passer de ligue aussi
+ dbdr: t'as pas à craidre de silver...
+ YannT: je descend aussi tout doucement&#160;:)
+ YannT: en même temps j'ai passé tout mon temps à refacto et à verifier que je casse pas un truc en passant...
+ leojean890: c'est à quelle heure demain silver au fait&#160;?
+ Bob: fin d'aprèm en général
+ BlaiseEbuth: Après la sieste de Apo...
+ dbdr: vers 18h
+ Samsa: 17-18h je pense
+ Bob: habituellement 18 mais on n'est pas trop dans un mode habituel ces derniers temps
+ leojean890: ok:p 
+ Samsa: comment est ce qu'il sélectionnent l'IA qui devient le boss&#160;?
+ dbdr: rand()
+ Bob: 50 + rand&#160;% 50
+ Samsa: donc n'importe qui entre le 50eme et le 99eme&#160;?
+ leojean890: ah ouais genre si t'es 75eme t'as une chance sur 2
+ Boulet: Coucou les gens 
+ Bob: non ça dépend vraiment
+ leojean890: depasser
+ Boulet: question idiote
+ leojean890: de passer
+ dbdr: ça marche pas comme ça les stats
+ Bob: du nombre de gens dans la ligue notamment
+ dbdr: ah
+ leojean890: je vois ;P
+ Boulet: si je fais une des ses action la con qui m'oblige à faire surface
+ dbdr: plus que 100 à mon avis
+ Bob: et de trouver une IA qui soit battable
+ Boulet: mon adversaire recoit quoi&#160;? 
+ Boulet: ma liste de commande ou juste un surface
+ BlaiseEbuth: surface + secteur de surface
+ Bob: j'adore prendre une série de 10-12 défaites au milieu du push
+ Boulet: cool 
+ Boulet: merci
+ YannT: en général pour silver ils coupent à la moitié
+ YannT: ils vont prendre environ le 150ème si c'est comme les contests précédents
+ BlaiseEbuth: J'ai répondu avant la fin de ta question. Mais vu que le surface n'est fait que si ta commande est invalide, je suppose que c'est ça...
+ Haashi: bon les gars
+ Haashi: petit tips
+ BlaiseEbuth: :ear:
+ Bob: -3v
+ Haashi: si vous voulez savoir a quel point vous vous faites repérer (ou pour calculer votre taux de détection), il y a emh qui output le nombre de cases possibles
+ Haashi: ca m'a deja fait trouver 2 bugs dans mon calcul de discrétion
+ BlaiseEbuth: Pratique...
+ Haashi: ils sont sympa ces joueurs qui output des trucs
+ Haashi: alller un 3eme
+ Vry: Je reviens de mon expédition courses ... cette fois-ci il fallait faire la queue devant le magasin ... mais du coup y'avait vraiment peu de monde à l'intérieur ...&#160;:)
+ BigUP: Argh 19h le battle dev a 19 ... je pense que je vais le faire avec 1à2 h de retard ...
+ pb4: Il n'était pas #1 emh avant&#160;?
+ pb4: Ca se lit comment son output à emh Haashi&#160;?
+ YannT: tes positions / ses positions
+ YannT: je pense
+ YannT: c'est plutot cohérent avec mes chiffres internes
+ YannT: (j'ai tendance à être plus précis que lui en fait)
+ pb4: Il commence au premier tour avec 175/48
+ YannT: ouais je l'explique pas
+ YannT: je crois que sa détection de lui même est foireuse
+ Bob: peut-être qu'il trolle
+ YannT: mes sa détection de mes positions est cohérente
+ YannT: à quelques chiffres près
+ egaetan: c'est pas 20h la battledev&#160;?
+ WhatTrickeryIsThis: 19h
+ WhatTrickeryIsThis: pas de mail bordel de mouette
+ YannT: je l'ai reçu le  mail&#160;:/
+ Haashi: pb4 c'est positionspossible/??? 
+ egaetan: bande de naze ça commence à 20h
+ YannT: mais  j'ai un apéro vision finalement
+ YannT: j'ai déjà reçu un code pour accèder à la plateforme cette aprem'
+ Haashi: pb4, genre des fois il a 12/4 quand j'ai 12 positions possibles
+ YannT: les siennes après le / je pense
+ YannT: mais ça semble un peu foirax
+ Haashi: non non
+ Haashi: pas les siennes c'est certains
+ Haashi: je sais pas c'est quoi ce 2eme chiffre
+ Vry: A priori ils ont montés une salle d'attente ... un peu comme le site carrefour.fr quand il est surchargé ...
+ Stilgart: j'hésite vraiment à troller dans mes msg :D
+ Stilgart: genre afficher un nombre pertinent mais pertubé aléatoirement :D
+ pb4: positions + rand() * 3 
+ pb4: :D
+ Stilgart: voilà
+ Haashi: lol
+ JBM: la communication battledev, ca casse les codes, mais pas dans le bon sens
+ WhatTrickeryIsThis: bon je supposes que je vais faire du CG plustôt que de la batleMouette :rage:
+ Bob: 55e \o/
+ Stilgart: tu n'habites pas dans le 54 toi&#160;?
+ Bob: si
+ Vry: [BD] J'ai reçu le mail ce matin à 10h18 ...
+ Palmipedus: est-ce qu'on peut finir de charger la torpille et la tirer dans le meme tour?
+ JBM: il parait que oui
+ Stilgart: Palmipedus: bonne question
+ Haashi: oui on peut
+ Bob: tiens ben je vais vérifier ça de suite
+ Palmipedus: MOVE 10 4 SONAR|SILENCE E 3|TORPEDO 14 7
+ Palmipedus: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/442561387">https://www.codingame.com/replay/442561387</a>
+ Palmipedus: je ne comprends pas pourquoi je perds
+ Bob: c'est marqué dans le tooltip
+ Bob: invalid direction 10
+ Haashi: MOVE 10 4?
+ Bob: move il faut dponner une direction NESW, pas une position x y 
+ Haashi: au lieu de MOVE NESW
+ Vry: MOVE 10 4&#160;???
+ Palmipedus: ha mince erreur de mer...
+ Haashi: donne pas des idées, ils vont nous faire un power teleport
+ Stilgart: Vry: c'est pour te téléporter :D
+ Haashi: stop, ca va mal finir
+ Stilgart: héhé
+ dbdr: le MOVE X Y qui fait du pathfinding dans le referee, ça rapelle qqch...
+ Vry: Une bombe nucléaire qui supprime des îles&#160;?
+ Bob: donc je confirme, tu peux faire move E torpedo + torpedo dans le même tour
+ Palmipedus: ok maintenant ca marche... j'ai perdu 15 ins le dessus
+ Stilgart: NUKE 10 4 --yes-do-it
+ Palmipedus: merci Bob
+ Bob: je vais même le pousser pour voir ce que ça donne&#160;:)
+ Stilgart: ça gagne un tour... donc c'est plutôt pas mal en fait
+ Bob: 14 matches, 12 victoires
+ Vry: Je prends note ...
+ Bob: bon départ
+ egaetan: fonce Bob
+ Vry: ... défonce Bob ...
+ Vry: Que ceux qui ont une fonction d'éval. pour le move lève la main&#160;!
+ Haashi: gg pb4 #1
+ pb4: thx&#160;:)
+ Vry: gg
+ JBM: arg le chaton est monte sur mes genoux
+ JBM: RIP ma productivite
+ dbdr: tu bosses le contest JBM?
+ dbdr: gg pb4!
+ JBM: pas trop non
+ JBM: tant que je streame, autant que ca reste continu
+ Stilgart: ça va être de la faute du chat
+ dbdr: et du stream
+ dbdr: du coup faut streamer en continu
+ dbdr: chat ou pas chat
+ JBM: oui, alors vous realisez peut-etre pas
+ JBM: mais j'ai un vrai boulot a cote du chat ou du stream
+ dbdr: :O
+ dbdr: define vrai boulot
+ JBM: zat ize ze kou est-ce tcheune
+ JBM: je pseudo-streame du nethack en ce moment, sinon
+ dbdr: \o/
+ JBM: pas par twitch, faut <a rel="nofollow" class="external free" href="ssh://nethack@alt.org/">ssh://nethack@alt.org/</a>
+ dbdr: si j'avoue j'ai jamais essayé nethack, c'est la honte?
+ JBM: depend de ton age
+ JBM: et ta longueur de barbe
+ dbdr: j'ai l'age que j'aurais pu, mais pas l'age que c'était le top du gaming
+ Haashi: j'ai essayé
+ Haashi: mais je préfère les versions moins CLI quoi, mais ca doit etre mon jeune âge
+ dbdr: dwarf fortress ça à l'air bien, mais j'ai l'impression qu'il faut investir pas mal pour rentrer dedans, non? y'en a qui connaissent?
+ EvilCastle_2389: Bonjour, vous me conseillez quoi pour me préparer à un test en C?
+ Vry: De faire des exercices en C ici&#160;?
+ JBM: connaitre le C
+ JBM: avoir de l'experience en C
+ JBM: bien mentir
+ JBM: au choix
+ JBM: dwarf fortress j'en ai entendu que du bien aussi, jamais eu le temps de m'y mettre
+ JBM: j'ai deja plus touche a nethack depuis des annees
+ EvilCastle_2389: J'en ai fais quelques uns mais je connais pas trop la plateforme codingame et du coup j'arrive pas à trouver d'entrainements 
+ Vry: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/easy">https://www.codingame.com/training/easy</a>
+ dbdr: JBM: peux pas faire le contest, boulotaussi JBM: je streame nethack
+ dbdr: oui je suis lent
+ JBM: un peu
+ Bob: Palmipedus, si t'es toujours là
+ Bob: je valide le move torpedo  + torpedo&#160;:)
+ Bob: passé de ~70 à 30 avec ça
+ dbdr: allez, on le tente
+ Vry: +1
+ Stilgart: passé de 170 à 170 ici :D
+ Palmipedus: merci bob, 
+ Palmipedus: ravi de voir que ca marche bien
+ Bob: la ligne de code à 40 places
+ dbdr: oOo
+ Palmipedus: je pensais que tous les top player faisait deja
+ Palmipedus: bon moi j'ai pas encore implementer le  silence
+ Vry: if&#160;!, devient if == 1&#160;:)
+ Palmipedus: je suis sur la detection et l'optimisation des fins de game
+ Stilgart: Vry: essaie avec if !2
+ Bob: j'ai juste rajouté un torpedoCooldown--; :D
+ JBM: WTIT is hit by a dart!  WTIT is killed! et merde
+ Vry: Moi il faudrait que je move bien ... et que je vise l'autre vu que je sais où il est ...
+ Bob: Vry&#160;: if -3v&#160;!
+ Palmipedus: et aussi que j'utilise les mines
+ Stilgart: JBM: tu as appelé ton perso WTIT&#160;? :D
+ dbdr: sur OOC v == 1
+ Palmipedus: haha: faites attention madknight va venir
+ Bob: if -3v -&gt; double hulk else wait 0
+ JBM: non, mon chien
+ JBM: et je viens de le perdre
+ JBM: sale bete
+ Stilgart: Bob: tu spoiles la magic line de beber en C# là, non&#160;?
+ Bob: ah ça nethacke&#160;?
+ Bob: Palmipedus, les mines pas la peinne de te jeter dessus tout de suite
+ Palmipedus: Bob PK?
+ Bob: d'abord, une bonne détection de l'adversaire et ensuite un bon move
+ Palmipedus: oui pour l'instant j'utilise juste le chemin, sonar et ses traces
+ Palmipedus: je dois pourvoir faire mieux en surveillant sa vie
+ Bob: je l'ai mis en place mais ça n'a pas aidé significativement quand je l'ai fait
+ Palmipedus: Par contre niveau movement et placement en debut de partie, vous avez des strategies qui marchent?
+ Bob: ben justement moi c'est surtout là-dessus que j'ai gagné
+ Bob: deux principes de base
+ Palmipedus: tu fais quoi comme strat? (si ca te derange pas de partager)
+ Bob: 1. conserver le max de cases accessibles
+ Bob: 2. minimiser les infos que tu donnes
+ Bob: typiquement, quand tu fais une grande ligne droite, sur la plupart des maps elle ne peut pas aller à 25 endroits, donc ça réduit très vite les emplacements sur lesquels tu peux te trouver
+ Palmipedus: oui, moi je fais le tour de la map donc ca donne bcp d'info
+ Palmipedus: j'ai vu des joueurs qui se positionnent dans les grands espaces vide et font un escargot
+ Bob: du coup, plutôt essayer de garder une trace compacte
+ Palmipedus: et tu fais du hit&amp;run? torpille et silence pour t'eloigner et recharger?
+ Bob: ça a l'air compliqué ça&#160;:)
+ Palmipedus: :D
+ Palmipedus: bont je vais me concencrer sur une trace compate alors
+ darkhorse64: run&amp;hit, c'est pas mal non plus
+ Palmipedus: le probleme c'est que le hit va reduire le nombre d'emplacement ou tu te trouves non?
+ Bob: dès que tu tires une torpille oui
+ Bob: que tu touches ou non
+ darkhorse64: Oui, mais scorer + 2, ça en vaut la peine
+ Bob: faut juste être sûr de ton coup
+ Bob: mais bon je ne gère même pas ce genre de truc
+ darkhorse64: Après, tu peux simuler le résultat du tracking ed l'adversaire sur toi pour voir si tu t'exposes
+ Bob: pareil, dans la todo list mais pas fait
+ Bob: j'ai juste mon tracking à moi
+ Bob: mon move
+ Bob: un guess très approximatif de la position adverse parmi celles possibles
+ darkhorse64: Si tu as un tracking pour toi, tu en as un pour l'adversaire (il y a qq petites subtilités)
+ Bob: si je suis à portée je tire dessus
+ Bob: oui je me doute
+ Bob: juste pas pris le temps
+ Stilgart: ce moment où tu tombes sur un commentaire qui dit "fix it" mais où tu ne vois pas le problème du code qui est à coté&#160;:/
+ darkhorse64: Pour l'instant, je tire à coup sur, il faut que je code le tir dans le tas
+ Bob: si je loupe mon tir c'est pas très grave, au pire ça m'élimine des positions possibles pour l'adversaire
+ Bob: bon je tire pas à tort et à travers non plus
+ darkhorse64: exact, c'est un détecteur
+ Bob: se signaler avec une torpille quand il te reste 90 cases possibles c'est gnol
+ darkhorse64: Il y a sonar pour ça
+ Bob: voilà
+ Zorg1: t1 je me suis fais passer devant par bob&#160;:(
+ Bob: techniquement j'ai du code pour utiliser le sonar mais en pratique là il ne s'active même plus
+ Bob: Zorg1&#160;:*
+ darkhorse64: Pour un mec fainéant, tu turbines
+ Bob: en vrai c'est pas tellement fainéant
+ Bob: c'est surtout la flemme de réfléchir
+ Bob: donc je ne fais pratiquement que des trucs simples avec des implémentations naïves et bourrin
+ darkhorse64: Fais gaffe à la surchauffe avec les mines alors
+ Bob: bah pareil, j'y suis pas encore
+ Bob: va peut-être falloir que j'y vienne
+ Bob: 30e sans sonar ni mine, je trouve ça déjà pas mal
+ darkhorse64: Bouger malin, c'est se rendre moins détectable, ça a forcément un gros impact. Il faut que je me motive pour faire ça de façon à passer silver comme une fleur
+ Stilgart: "Bouger malin, c'est se rendre moins détectable" --&gt; on dirait des mesures anti confinement là
+ Vry: Manger malin&#160;?
+ Bob: mais bien gérer l'enchaînement recharge + torpedo, c'est bien puissant aussi
+ darkhorse64: Un sous-marin, c'est confiné. Je suis dans les clous
+ JBM: Tiens c'est nouveau ca:an uncursed +0 T-shirt with text "I scored with the princess"
+ Vry: Sorti du contexte ... c'est bizarre ... en effet&#160;!
+ Stilgart: donne pas des idées de goodies à CG /o\
+ Bob: ils ont toujours autant d'humour les gars qui font Nethack
+ BigUP: en attendant mon code s'améliore sans rien faire&#160;!!&#160;;) 88eme&#160;:)
+ Stilgart: gg
+ irmo322: BigUp, oui c'est bizarre, j'ai le même phénomène. Quand je submit je suis vers 100 et le lendemain vers 50
+ BigUP: dire que c'est mon code buggé sur la localisation de l'ennemi&#160;!&#160;;) 
+ Bob: essaye torpedoCooldown--&#160;:)
+ Bob: corrige-le, tu feras 120e
+ Vry: Moi mon code ne s’améliore pas tout seul ... son classement légèrement mais pas le code ...
+ BigUP: Bob, passe pas en Python ca&#160;!&#160;;)
+ Palmipedus: bon grande question comment faire pour detecter la plus grande zone sans iles?
+ Vry: Flood&#160;!!!
+ Palmipedus: mais ca va tout remplir
+ Stilgart: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/442584314">https://www.codingame.com/replay/442584314</a>
+ Stilgart: au moins, ma pose de mines semble tenir la route...
+ Palmipedus: Vry tu as des parametres sur ton flood?
+ Bob: Palmipedus&#160;: je prends la case pour laquelle le premier obstacle est le plus loin
+ Vry: Si tu considère qu'une case entourée de terre est inaccessible&#160;?
+ BigUP: Palmipedus, t'es plus ou moins obligé d etout remplir si tu veux faire ca sans trop galérer... donner un poid a tes cases par exemple en fonction de la distance des iles
+ Stilgart: Bob: seed=7496895890021469200
+ Palmipedus: ha oui pas bete, ca fera tout en une passe
+ Bob: sinon bruteforce hein
+ Bob: Stilgart oui&#160;?
+ Bob: mouahahaha
+ BigUP: Palmipedus, tu peux lister les points qui representent les iles et flood à partir de ces points et +1 à chaque tour du flood
+ Bob: c'est moche ce qui t'arrive
+ Bob: ça fait partie des bricoles que j'ai rajoutées hier soir ça je crois
+ Stilgart: Bob: je trouve aussi
+ Bob: tiens ce qui est marrant c'est que là pour moi tu n'es plus nulle part sur la map :rofl:
+ Stilgart: huhu
+ BigUP: Bob, you can't see me&#160;!!!
+ Bob: frame 40, je te perds
+ Bob: pourquoi diable&#160;?
+ BigUP: si c'est moi, je dois silence en douce ...
+ Bob: et en plus je fais un torpedo out of range o_O
+ Bob: mais
+ Bob: dafuq
+ Bob: (╯°□°）╯︵ ┻━┻
+ BigUP: Bob, probablement comme moi hier soir (j'ai du passer plus de 2h a résoudre ce probleme du gars qui à bougé entre le moment j'ai détecté son action
+ Bob: ah oui mais je vois pourquoi
+ Bob: c'est crétin
+ Palmipedus: BigUP merci pour les infos de flood
+ Bob: mon flood fill de distance ne va pas jusque lui puisqu'il est dans une zone inatteignable :D
+ Bob: donc il est à distance 0 :rofl:
+ BigUP: punaise&#160;!  je ne fais que monter&#160;!!&#160;;) 78eme la&#160;!&#160;;)
+ Bob: :fire:
+ BigUP: Palmipedus, pas de quoi, tu devras juste me pousser pour passer dans les ligues du dessus&#160;!&#160;;)
+ Bob: ah ben du coup ça me corrige aussi le tracking
+ Bob: bonnard
+ BigUP: Bob, mince je vais prendre chère maintenant&#160;!!&#160;;(
+ Stilgart: Bob: héhé
+ Bob: bon vu le cas de figure miteux, je vais pas repousser pour ça :p
+ Bob: mais c'est mignon de te voir mourir dans ton petit champ de mines perso
+ Stilgart: et encore, mon plus gros problème c'est le trigger
+ Stilgart: quand c'est l'adversaire localisé qui passe avec 1pv sur mon champ de mines, osef... on trigger pas
+ Stilgart: à la place, je fais MSG "avoid useless fire"
+ Vry: TidyMaze (je crois)  avait eu le même genre de map avec un lac de trois cases en abs à gauche je crois et le boss Wood2 se collait dedans ...
+ Bob: j'ai vu le boss se mettre dans un lac de 1 case
+ BigUP: winner&#160;!!&#160;;)
+ Vry: une de deux cases&#160;: seed=-3813879082816049200
+ Vry: Avec une impasse en bonus ...
+ Bob: bon si vous voulez exercer votre détection de mines, vous pouvez aller voir Stilgart
+ Bob: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/442591997">https://www.codingame.com/replay/442591997</a>
+ Stilgart: (╯°□°）╯︵ ┻━┻
+ Stilgart: norminf, pas norm1&#160;!!!
+ <b>**Stilgart part pleurer</b></p><p><a href="/wiki/File:Default_avatar.png" class="image"><img alt="Default avatar.png" src="/images/5/56/Default_avatar.png" decoding="async" width="50" height="50" /></a> Cesarus82: le confinement c'est fini 
+ Stilgart: ha, on est passé au stade 4&#160;?
+ Stilgart: (j'aurais pas du regarder le profil...)
+ Bob: maintenant c'est l'apocalypse zombie
+ Stilgart: Bob: fais toi plaisir :D
+ Bob: oui je crois qu'il y a moyen
+ Bob: tu as bien fait de me parler du profil sinon je serais peut-être passé à côté
+ Bob: bon j'ai un nouveau code de torpille qui ne torpille plus
+ Stilgart: je vais peut-etre tenter de changer un min en un max tiens...
+ Stilgart: (parce que finalement, je suis nul à chier en combat rapproché)
+ Bob: moi je cherche plus à aller au contact
+ Stilgart: je pourais aussi juste commenter le bout de code
+ Bob: non
+ Bob: mais
+ Bob: mais NON&#160;?!?!
+ Bob: con de Bob
+ Bob:     for (int ty = max(0, ty - 4); ty &lt; min(height, ty + 5); ty++) {
+ BigUP: 73 eme&#160;!!&#160;;) Je n evais pas pouvoir repush du code avant  l'ouverture de la silver&#160;!
+ Bob: ah ben c'est marrant je passe d'une défaiute en 400 tours à une victoire en 100 tours
+ Vry: Les coredump silencieux c'est le mal ...
+ Bob: ah toi aussi&#160;?
+ Vry: Je l'ai cherché un peu aussi ...
+ Vry: ... c'estpour ça que j'ai tilté ... que s'il n'y avait qu'un seul tour sans aucune log c'était louche
+ BigUP: bon c ava etre l'heure du battledev ...
+ Vry: lol ... while (1) au lieu de while (maVariable) ...
+ Bob: ça vaut mon for débile
+ BigUP: pour une fois que je suis à l'heure  !&#160;:)
+ irmo322: C'est quoi le battledev&#160;?
+ Vry: La salle d'attente n'est pas encore ouverte.
+ BigUP: ha non, c'est 20h - 22h ... je croyais que c'etait 19h ... bah comme d'hab c'est mort, je vai setre entrain de manger ...
+ TidyMaze: y'a pas mal de Python3 dans le top 20, je trouve ça curieux&#160;:)
+ joelthelion: Je crois que c'est encore tout à fait possible d'être dans le top 20 avec une stratégie écrite à la main (sans "simu")
+ leojean890: les gens n'ont pas encore sorti de gros algos de recherche de chemins je pense ^^
+ BigUP: TidyMaze, ca permet de developper un poil plus rapidement probablement.... apres les codes Python vont probablement stagner
+ leojean890: a un moment le python se fera dépasser je pense :p
+ joelthelion: ce challenge ne se prête quand même pas hyper bien aux algos de recherche
+ Stilgart: bon, c'est mieux avec le code commenté&#160;:)
+ BigUP: quand je vois le classement qu ej'ai avec un code basic et buggé ... 
+ leojean890: j'en ai entendu dire certains qu'ils allaient en utiliser :P
+ leojean890: mais le facteur de branchement est enorme:P sauf élaguage&#160;;)
+ TidyMaze: BigUp y'a quand meme plusieurs BFS à faire à chaque tour ^^
+ joelthelion: oui oui, je ne dis pas que c'est impossible
+ TidyMaze: apres je ne connais vraiment pas les perfs python
+ joelthelion: pas de problèmes pour faire quelques BFS en python
+ joelthelion: des millions par contre non&#160;:)
+ BigUP: TidyMaze, je ne fais pas de BFS, juste des distances
+ leojean890: moi je lutte contre les timeouts avec mon python 3 ;P
+ TidyMaze: BigUp c'est pour ça que t'es pas premier :D
+ leojean890: j'ai un DFS pour gérer les silences et BFS pour les tirs
+ BigUP: TidyMaze, non ca ne changerait pas grand chose
+ TidyMaze: (c'était une blague)
+ Vry: BigUP, y'a ça dans le mail&#160;: Cela commence à 20h mais tu peux te connecter dès 19h&#160;!
+ Vry: Bon start position Ok&#160;!
+ Vry: Maintenant mouvons safe
+ BigUP: oups, le formulaire mot de passe oublié explose à la ligne 17 du fichier PHP&#160;!!&#160;;)
+ Vry: BigUP, t'es un Boulet&#160;!
+ BigUP: C'est le site le boulet, il m'a cramé mon mot de passe parceque je me suis connecté trop tot&#160;!&#160;;)
+ BigUP: Argument 2 passed to ResendPasswordMail::create() must be of the type int, string given, called in /mnt/prod_data/htdocs/isograd_commercial/phpclass/ajaxscript/resendpassword.ajaxscript.class.php on line 17
+ RomanceDawn: pareil 
+ RomanceDawn: salle d'attente pas ouverte 
+ RomanceDawn: c'est ridicule pour un site de concours de dev
+ BigUP: ok, il faut cliquer sur le lien mot de passe oublié pour que ca marche...
+ BigUP: pas utiliser leur formulaire popup qui s'ouvre en automatique
+ RomanceDawn: t'as réussis N 
+ RomanceDawn:  ,?
+ BigUP: non, salle d'attente pas ouverte... 
+ BigUP: bon de toute facon, c'est pas grave, j ene vais probablement pas pouvoir fair el'ouverture
+ Neumann: Tiens j'avais jamais vu que le SURFACE ennemi indiquait le secteur
+ Neumann: LUL
+ irmo322: Ah bah bravo&#160;!
+ WhatTrickeryIsThis: ça a commencé la batleMerde alors?
+ Neumann: Ca va, y'a 1 mois, je lis le referee en plusieurs étapes
+ Neumann: C'est à 20h WTITITIIT
+ BigUP: Neumann, merci de me le rappeler, j'avais oublié ce point&#160;!&#160;;)
+ RomanceDawn: C'est pas bien battledev&#160;?
+ RomanceDawn: c'est on premier
+ Neumann: Sisi, c'est rigolo
+ Stilgart: aucune idée, j'ai jamais eu le courage d'essayer
+ BigUP: RomanceDawn, c'est moins bien foutu que CG, apres pour celui qui est doué, il y a des lots plutot importants
+ RomanceDawn: han
+ BigUP: ca y est, salle d'attente ouverte
+ Neumann: Il est vraiment dégueu leur site
+ BigUP: RomanceDawn, le soucis c'est que trouver comment fonctionne les input/output sur battle me prend toujours au moins 10 minutes&#160;!&#160;;)
+ BigUP: le log d'erreur est un peu pourri
+ RomanceDawn: ca donne envie tout ça :D
+ Zorg1: sont tous à la battle dev&#160;? bien je vais avoir un leader board qui turbine alors&#160;;-)
+ Zorg1: Automaton2000 t'es à la battle dev&#160;?
+ Automaton2000: de toute façon ce qui compte
+ Zorg1: finis ta phrase Automaton2000
+ Automaton2000: pk tu codes en quoi toi&#160;?
+ Zorg1: comment tu m'agresses Automaton2000&#160;!
+ Automaton2000: tout le reste du top 10
+ WhatTrickeryIsThis: putin je suis inscrit :muscle:
+ WhatTrickeryIsThis: ça va claquer de la mouette
+ WhatTrickeryIsThis: merci du tips BigUP
+ WhatTrickeryIsThis: fallait faire mot de passe oublié
+ domak: on va maraver vos bots pendant que vous êtes pas là!
+ _Flippy: Vous avez tous laissé le même pseudo&#160;?
+ BigUP: _Flippy, non
+ Zorg1: +1 domak
+ Fangel: vous savez ce que c'est les prix pour la battle dev&#160;?
+ BigUP: non
+ BigUP: la dernière fois c'etait un voyage&#160;? 
+ BigUP: en ce moment... c'est chaud&#160;!&#160;;)
+ Zorg1: je t'offre un voyage de ton bureau à ta cusisine
+ Zorg1: #dream
+ BigUP: C'est possible qu'il n'y ait rien a gagner cette fois et que les benefs partent pour l'institu pasteur
+ Fangel: Y a un moment où y a vait des prix jusqu'au 20 ème
+ Vry: Dans 20 ... mais y'a le JT dans 20 minutes&#160;! 
+ Fangel: là ils ont annoncé un ordi pour le premier mais pour les reste on sait pas
+ Zorg1: tu t'en fous Macron cause pas ce soir normalement :p
+ Vry: Flûte ... Macron sur un bateau, on a pas encore eu ça ...
+ Zorg1: Macron et Philippe sont sur un bateau ....
+ Fangel: Attends Vry je vais te résumer le JT: le coronavirus fait des gros dégâts&#160;! N'oubliez pas les gestes barrière&#160;!!! Les médecin n'en peuvent plus, ils demandent un confinement plus strict&#160;! Les entreprises sont à l'arrêt forcée de mettre au chômage technique&#160;!
+ BigUP: J'ai décidé de vous fliquer dans votre quotidien avec vos smartphone&#160;!
+ Vry: Ça ne va pas m'aider à coder le move tout ça ...
+ Zorg1: ça tombe bien j'ai pas de smartphone
+ BigUP: hum, je crois que c'est mort pour moi BattleDev, je suis claqué...
+ BigUP: le télé-travail, ca fatigue.... je n esais pas si c'est la télé ou le travail qui fait ca
+ Zorg1: ah tu travailles devant netflix&#160;?
+ Vry: Moi j'ai juste pas trop envie de coder en fait ... :p
+ Zorg1: ça va être dur pour une battle dev
+ BigUP: Vry, tu viens de te taper le debug de ton code OOC aussi&#160;;)
+ Vry: J'ai fait plusieurs jours de codes intensifs pour le boulot et là j'ai plus la motivation "codale" nécssaire
+ Zorg1: moi j'ai fait des requêtes SQL imbitables toute la journée, alors je vais faire du vrai code ce soir :D
+ Vry: Nan, ça va pas trop de debug ... pour ooc
+ Vry: Et je viens de m'enfiler une bûchette de chèvre car j'ai acheté un pain qu'il est trop bon ce coquin&#160;!
+ Zorg1: va te falloir de l'exercice ...
+ fenrir: normalement ça se mange..&#160;;)
+ Vry: C'est prévu ... mais sinon j'ai déjà vingt minutes de queue devant Carrefour
+ Magus: moi je suis chaud pour la battledev la
+ Magus: allez démarre bordel
+ Haashi: gl a ceux qui y participe
+ Magus: pas besoin de chance quand tu bruteforces
+ Vry: 4 minutes ...
+ Vry: risque de verglas à saint-pierre et miquelon ...
+ fenrir: battledev&#160;?
+ Zorg1: les infos météo utile de vry
+ Vry: 2'40
+ JulienKermarec: battle dev aussi, je suis prêt&#160;:)
+ Vry: 29k tests par jour ... 
+ Vry: contre 500k / semaine en Allemagne ...
+ Zorg1: ça reviens au même non&#160;?
+ Zorg1: ça fait plus d'ailleurs
+ Vry: Nan je rois pas ...
+ Vry: 1'
+ Zorg1: ah oui
+ Zorg1: je suis crevé moi
+ WhatTrickeryIsThis: lol l'exo 2 le submit marche pas
+ Vry: Mais pourquoi j'ai pris C ...
+ Vry: Le 1 nonp lus ...
+ Vry: C'est cassé ...
+ WhatTrickeryIsThis: le dernier test  passe pas :D
+ VilBoub: C'est chez moi ou chez BattleDev que le réseau est pourri&#160;?
+ WhatTrickeryIsThis: attendu 7 renvoyé 1 c'est très louche ce test 
+ WhatTrickeryIsThis: nan y à des timeouts sur les submits
+ WhatTrickeryIsThis: c'est quoi l'astuce sur l'exo 2&#160;?
+ Dataworm: a essayer ^^
+ Dataworm: seed=1102426415685419650
+ Dataworm: pour ocean of code
+ WhatTrickeryIsThis: lol j'ai fait if max==1
+ WhatTrickeryIsThis: max = 5
+ Neumann: Putain du parsing de date en c++
+ WhatTrickeryIsThis: et j'ai grugé l'exo 2
+ WhatTrickeryIsThis: au merde j'ai jamais parser de date en python&#160;:(
+ Zorg1: y a un moment pour tout
+ WhatTrickeryIsThis: ah si j'ai fait ça au boulot 
+ WhatTrickeryIsThis: mmais ça compte pas :D
+ Vry: +1 Neumann
+ Vry: en C :p
+ Vry: Comment on génère toute les permutations possibles pour un tableau&#160;?
+ Magus: (j'ai copié/collé momentjs en minifié dans mon js)
+ Magus: (j'ai même pas honte)
+ Vry: avec 20k rand c'est pas suffisant ...
+ pb4: Vry&#160;: <a rel="nofollow" class="external free" href="http://www.cplusplus.com/reference/algorithm/next_permutation/">http://www.cplusplus.com/reference/algorithm/next_permutation/</a>
+ pb4: T'as qu'à copier l'algo :D
+ pb4: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/4f7f839f-a274-46f7-b4df-d650700ee9a6">http://chat.codingame.com/pastebin/4f7f839f-a274-46f7-b4df-d650700ee9a6</a>
+ Vry: J'ai pris "heap" ...
+ Vry: Mais PHP Fatal error: Allowed memory size of 16777216 bytes exhausted (tried to allocate 8388616 bytes) in /htdocs/processinglibraries/php/outputsaver.php on line 8
+ Vry: Pourtant je suis en C ...
+ Vry: Merci pb4
+ WhatTrickeryIsThis: ah putin ces créneaux horaires&#160;:)
+ WhatTrickeryIsThis: [['4', ['08:00', '17:59']], ['2', ['08:00', '17:59']], ['1', ['09:00', '17:59']], ['3', ['08:00', '17:59']], ['5', ['08:00', '17:59']]]
+ WhatTrickeryIsThis: Résultat attendu :2 08:00-08:59
+ WhatTrickeryIsThis: sérieux&#160;?
+ WhatTrickeryIsThis: pourquoi?
+ Magus: je suis sur celui d'après et je comprend pas ...
+ PhOeNyX: Ils se sont foirés sur les types dans l'exercice des pogemon&#160;?
+ WhatTrickeryIsThis: y à clairment un gars qui n'est pas dispo le jour 2 là
+ Magus: ils disent qu'il peut exister plusieurs solutions, les solutions que je donne sont bonnes, mais elles sont refusés
+ Magus: ouai je suis en train de me demander PhOeNyX
+ Magus: je donne des solutions valides, je vérifie tout
+ Magus: mais c'est refusé
+ PhOeNyX: Bah y a qu'à regarder l'exemple
+ WhatTrickeryIsThis: la résultat attendu est faux 
+ WhatTrickeryIsThis: je suis pas fou
+ PhOeNyX: ils disent plante bat sol dans l'exemple
+ PhOeNyX: alors que dans la table des types qu'ils donnent, c'est le résultat inverse
+ Magus: ah attend ce serait l'énoncé qui est faux&#160;?
+ PhOeNyX: oui l'énoncé
+ PhOeNyX: L'exemple contredit la table
+ VilBoub: WhatTrickeryIsThis  t'es sûr que t'as pas décalé les jurs de 1&#160;?
+ Magus: non même en changeant pour que plante batte sol, ça passe pas
+ PhOeNyX: Parce qu'il doit y avoir d'autres erreurs. ^^
+ PhOeNyX: Dans ton code ou dans l'énoncé
+ PhOeNyX: ou les deux
+ PhOeNyX: ahah
+ Magus:&#160;:/
+ PhOeNyX: Dans Pokemon en tout cas plante &gt; sol et eau &lt; sol
+ PhOeNyX: eau &gt; sol*
+ Magus: bah génial la première battledev que je fais elle donne envie dis donc lol
+ _Royale: pfff heureusement que je suis passé ici
+ _Royale: plante/sol est inversé dans l'énoncé je dirais&#160;?
+ Magus: toi aussi t'es coincé comme un con&#160;?
+ Magus: bah j'ai essayé de changer ma table de combats, mais ça passe pas non plus
+ Magus: ouai bah je leur ferais pas une bonne pub ...
+ _Royale: j'ai passé en inversant plante/sol je crois
+ Magus: j'ai essayé sans succès&#160;:(
+ PhOeNyX: Que plante/sol royale&#160;?
+ PhOeNyX: _Royale
+ _Royale: je crois oui
+ _Royale: sinon j'ai eu de la chance sur le jeu de test&#160;? ...
+ PhOeNyX: Ah oui, ça arrive ça en BattleDev
+ PhOeNyX: J'ai déjà eu des codes où je push 3/4 fois et un des push passe
+ JBM: j'en suis a 18, ca veut toujours pas
+ JBM: ca va ragequit dans pas longtemps
+ RomanceDawn: la créneaux horraire ca me casse juste les couilles de les parser 
+ JBM: pas la petience pour reverse-pokemon le jeu de test
+ RomanceDawn: convertir tout ca en int et tout 
+ Revy2H: 1h10 qu eje suis sur les créneaux également
+ Revy2H: xD
+ Vry: Les créneaux j'ai fait ça à l'arrache&#160;: un tableau de 600 minutes par jour et 60 cases vides pour gagner ...&#160;:)
+ Magus: bah moi tout allait bien et ça fait 1h que je suis sur les pogemon qui passent pas sans aucune raison
+ Magus: a essayer de changer des trucs au pif pour devenir leur vrai table de résultat&#160;:/
+ Vry: lol, forcément ça peut pas marcher comme ça ...
+ Vry: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/1034a77a-392a-4c2f-b5cf-165ac1f9329d">http://chat.codingame.com/pastebin/1034a77a-392a-4c2f-b5cf-165ac1f9329d</a>
+ WhatTrickeryIsThis: faut print quoi pour egalite&#160;?
+ Vry: -1&#160;?
+ Vry: Vous avezpnser à virer la première lettre majuscule&#160;?
+ Vry: :upside_down:
+ Tomitri: comment soumet-on le résultat? svp
+ Vry: C'était ça pour moi ...
+ Malterin: Dites moi, comment on peut afficher des messages pour débugger svp&#160;?&#160;:)
+ Magus: Vry: la premier lettre majuscule&#160;?
+ Magus: dans les inputs&#160;?
+ Malterin: En javascript&#160;:)
+ Magus: console.log
+ Magus: euh console.error
+ Malterin: Autre que console.log, car c'est utilisé pour les sorties
+ Tomitri: en java
+ Malterin: Je voudrais voir le contenu d'un tableau par exemple
+ WhatTrickeryIsThis: Use: sys.stderr.write() to display debugging information to STDERR
+ Tomitri: comment soumet-on le résultat en java? svp
+ PhOeNyX: System.out.println
+ Tomitri: merci
+ Cloud0259: en c# les créneaux c'est chaud&#160;!
+ Malterin: Merci bcp&#160;!
+ Malterin: Vous êtes géniaux
+ Magus: ouai trop bien j'ai passé les pogemon en spammant le submit ....
+ WhatTrickeryIsThis: Plante vs Vol:&#160;?
+ WhatTrickeryIsThis: skoi Vol?
+ Magus: très gratifiant
+ Vry: non plante vs vol pas Plante vs Vol&#160;!
+ Neumann: Exo de ses morts
+ Neumann: Plateforme de ses morts
+ Vry: Brochette&#160;?
+ WhatTrickeryIsThis: oui les MAjs c'est pas colol
+ WhatTrickeryIsThis: itertools.permutations &lt;3
+ Magus: Vry: j'avais pas de problème avec les majuscules de mon côté
+ Magus: je faisais vérifier mes solutions en rejouant le combat
+ Magus: j'avais tout bon
+ Magus: ils se sont foirés quelque part. Soit leur referee est bug soit leur statement est raté
+ Magus: au moins je saurais ce que je ferais pour les prochaines battledev, je ferais du codingame
+ WhatTrickeryIsThis: zut j'ai que des timouts
+ WhatTrickeryIsThis: surement l'egalite
+ WhatTrickeryIsThis: meuh j'ai des timeouts
+ WhatTrickeryIsThis: au submit
+ WhatTrickeryIsThis: je run les tests ils passent bien&#160;:(
+ Magus: ouai bah je laisse tomber j'arriverais pas à faire l'exercice 5 en 10 minutes et leur exo 4 bug qui prend 1h30 non merci
+ PhOeNyX: En effet Magus j'ai spam submit
+ PhOeNyX: ça a fini par passer
+ Magus: ouai moi aussi ça fini par marcher
+ Magus: mais bon ...
+ PhOeNyX: 9 minutes pour le dernier exo
+ PhOeNyX: ça va être tendu. xD
+ Magus: non c'est l'avant dernier
+ PhOeNyX: ah en plus
+ PhOeNyX: :D
+ JBM: wtf ca a fini par passer
+ WhatTrickeryIsThis: pas cap
+ Magus: mais tu le ferais pas en 8 minutes
+ Magus: j'ai bien des idées d'algo qui me viennent en tête mais rien que je peux coder aussi vite du premier coup
+ WhatTrickeryIsThis: oh le brut force est trop long pour le pokemon&#160;?
+ Magus: non moi c'est passé
+ PhOeNyX: Au final pour pogemon, j'ai juste fait un shuffle 100k fois avec simulation du résultat
+ PhOeNyX: Dès que je trouvais une solution je la renvoyais
+ Magus: ah moi juste un bruteforce con
+ Magus: en fait j'ai bruteforce tous les exos
+ WhatTrickeryIsThis: bha en python c'est trop long&#160;:(
+ PhOeNyX: et si je ne trouvais pas de solution sur 100k shuffle, je renvoyais -1*
+ PhOeNyX: ahah
+ Magus: le truc des créneaux je l'ai bruteforce minute par minute
+ PhOeNyX: ouais créneaux j'ai bruteforce minute à minute aussi
+ PhOeNyX: avec une méthode "intersect" que je testais sur tous les créneaux impossibles
+ WhatTrickeryIsThis: je tente 100k 
+ JBM: oui non les palindromes, en C++, en 6 min, non quoi
+ JBM: bon c'etait bien peu satisfaisant tout ca
+ Magus: bah même en js je te rassure
+ Magus: mais c'est la première battledev que je fais
+ Magus: c'est toujours autant de la merde&#160;?
+ WhatTrickeryIsThis: j'ai 80k max :joy:
+ Magus: ou des fois ils en font avec des exo pas bugé&#160;?
+ WhatTrickeryIsThis: et ça suffit pas 
+ JBM: je sais plus si j'ai deja fait
+ Magus: ah bah tiens&#160;:
+ Magus: <a rel="nofollow" class="external free" href="https://twitter.com/BlogModerateur/status/1243280395791147011">https://twitter.com/BlogModerateur/status/1243280395791147011</a>
+ Magus: il m'a répondu
+ Magus: l'exo 4 est bien bugé
+ Vry: Le palindrome dans le palindrome ... :p
+ Magus: donc en gros l'exo 4 tout le monde l'a passé à coup de spam submit je suppose
+ Vry: Mais nan ma solutuon était sans bug ... mais les jeux de test ne peuvent pas être complet ... ou le referee est bugué aussi&#160;?
+ TidyMaze: hmm, je n'ai pas exactement le bon algo on dirait&#160;:/<a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/442646153">https://www.codingame.com/share-replay/442646153</a>
+ JBM: la competition qui casse les codes
+ JBM: je leur ressortirai
+ TidyMaze: (en deplacements)
+ Magus: Vry: je pense que c'est leur referee qui était bu
+ Magus: *bug
+ Vry: Bon je ne vais pas finir le 5 ...
+ Magus: parce que j'ai vérifié, quand eux ils donnent le résultat attendu, il était toujours bon. Donc j'en ai déduis que le statement était bon
+ Magus: Par contre il n'autorisait pas toutes les solutions visiblement
+ Vry: Ok ... moi j'avais juste laissé les majuscules présentes dans les règles
+ Vry: Sans c'est passé directement sans modification des règles
+ Magus: au final tu passes avec un spam submit en priant pour que ça passe
+ WhatTrickeryIsThis: eau glace poison sol glace ça gagne et ils en veulent pas :D
+ JBM: je pensais pas que spam submit pouvait marcher
+ WhatTrickeryIsThis: OUI&#160;!
+ WhatTrickeryIsThis: c'est passé en random PUSH &lt;3
+ JBM: mais au bout d'un moment j'avais vraiment rien de mieux a faire
+ Vry: gg welcome to palindrome ...
+ Magus: donc on retiendra que la battledev c'est du spam submit random
+ Magus: nice
+ PhOeNyX: Bon par contre la brochette le découpage n'est pas très équitable entre les invités
+ WhatTrickeryIsThis: LE Random GG à 1Min de la fin
+ Malterin: Le code reste enregistré svp&#160;?
+ Vry: 175/4940 (21:56) :D
+ Magus: c'est juste le fait que ça dure 4h au lieu de 2h&#160;?
+ WhatTrickeryIsThis: nan tu récupère pas le code
+ WhatTrickeryIsThis: fallait codé dans un IDE
+ Neumann: C'est tellement de la merde leur plateforme
+ JBM: oui
+ Magus: 211/4944
+ JBM: euh pardon
+ JBM: Oui.
+ Magus: 1h30 sur le même exo bugé&#160;:/
+ WhatTrickeryIsThis: à commencer par les inscriptions totalements foireuses
+ Vry: En souvenir ...
+ Vry: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/c70bde94-6a9c-4139-9788-46522a795a33">http://chat.codingame.com/pastebin/c70bde94-6a9c-4139-9788-46522a795a33</a>
+ Cloud0259: 2940/4944 lol
+ JBM: je pense pas que ca allait suffire ca vry
+ JBM: meme en c
+ WhatTrickeryIsThis: 338
+ PhOeNyX: 270
+ Vry: Nan, en suite il faut compter et sous découper la aplindrome
+ WhatTrickeryIsThis: ça veut dire 338 personnes sont arrivés aux brochettes
+ JBM: non, je veux dire
+ JBM: sur une chaine de 10k, c'est fait pour exploser le temps
+ Vry: kqk r sayas h &gt; kqk r s aya s h
+ Vry: Ah, de toute façon je n'ai pas dépassé la première itération ...
+ _Flippy: comment vous avez fait celui des brochettes&#160;? le mien était trop lent
+ JBM: "Manacher"
+ JBM: (je l'ai pas fait a cause de pogemon, mais je sais le faire)
+ Zorg1: il n'a pas l'air content ...
+ Vry: Moi j'avais juste ça en première approche&#160;:
+ Vry: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/e0ac04db-4018-4066-babc-496b7802c212">http://chat.codingame.com/pastebin/e0ac04db-4018-4066-babc-496b7802c212</a>
+ PhOeNyX: Moi pour les brochettes j'ai... Lu l'énoncé.
+ Zorg1: ah putain scroll
+ JBM: ca collait bien quand meme
+ JBM: personne est trop content ici
+ Vry: <a rel="nofollow" class="external free" href="https://en.wikipedia.org/wiki/Longest_palindromic_substring">https://en.wikipedia.org/wiki/Longest_palindromic_substring</a>
+ Vry: Même le pseudo code est méchant ...
+ Magus: ils donnent les solutions aux exos plus tard je suppose&#160;?
+ _Flippy: J'ai fait un dict avec tous les palindrome en O(n^2) ensuite j'ai parcouru pour voir si j'avais une solution ...
+ Magus: parce que je serais curieux de voir leur solution à l'exo 4
+ JBM: heureusement qu'il y en a deja 5000 sur internet
+ Neumann: Tin, mes solutions étaient bonnes sur le papier
+ Neumann: Referee de chiasse
+ _Flippy: Le 4 c'était pogémon&#160;?
+ Vry: ui
+ Magus: oui le 4 c'était pogemon
+ _Flippy: brute force ça marchait
+ Magus: mais il était bug, l'organisateur me l'a confirmé sur twitter
+ JBM: oui mais non
+ Vry: Oui
+ _Flippy: 6^10
+ Magus: donc spam submit jusqu'à ce que ça passe
+ JBM: autant faire un MC
+ Vry: J'ai implémenté "heap" et hop
+ WhatTrickeryIsThis: MC en Batle Dev :muscle:
+ _Flippy: il y avait quand même un certainn élaguage
+ _Flippy: mais c'est passé au premier submit
+ Magus: ah non j'ai bruteforce sans élagage, aucun souci de perf
+ Magus: mais leur referee refusait mes solutions qui étaient bonnes
+ Magus: donc spam submit jusqu'à ce que ça passe pendant 1h30&#160;:/
+ Magus: joie
+ _Flippy: ahah
+ Vry: oui je ne sais pas quelle est la limite&#160;?
+ WhatTrickeryIsThis: t'exagères Magus, 10 min de spam submit suffisent
+ JBM: 10! ~= 3.5M
+ JBM: ca passe a peu pres avec tout
+ Neumann: while (std::next_permutation(d2.begin(), d2.end()));
+ Neumann: LUL
+ Vry: J'ai pas ça en C ...
+ JBM: oui mais pb4 t'a file le lien
+ Vry: Oui
+ JBM: sinon c'est le round de qualif du codejam d'il y a genre 12 ans, ils sont publics dans plein de langages sur internet
+ Vry: J'ai repris ça du coup&#160;:
+ Vry: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/61f5b9bf-52c7-4350-bfac-40c9e30d5da1">http://chat.codingame.com/pastebin/61f5b9bf-52c7-4350-bfac-40c9e30d5da1</a>
+ JBM: 2009 round 1 problem B
+ RomanceDawn: ouais bein 
+ RomanceDawn: je préfère ocean of code
+ JBM: Vry: fais ton choix: <a rel="nofollow" class="external free" href="https://www.go-hero.net/jam/09/solutions/2/2/C">https://www.go-hero.net/jam/09/solutions/2/2/C</a>
+ _Royale: Magus: merci pour le tweet, triste en effet pour un concours de ce type...
+ Magus: je suis surpris d'être le seul à lui avoir demandé
+ Neumann: "Une 15eme édition au top"
+ Neumann: uhu
+ WhatTrickeryIsThis:&#160;:)
+ WhatTrickeryIsThis: après faut pas taper, il vont filler la thune à la recherche
+ Neumann: Certes
+ WhatTrickeryIsThis: VRAI: 1 français meurt du virus toute les 4min
+ t2_cyborg: o/
+ JBM: t2_cyborg: tu bliffes
+ WhatTrickeryIsThis: t2, t'as gagné&#160;?
+ JBM: ah ha la typo qui tue
+ t2_cyborg: je suis déçu&#160;: plus je participe aux Battle Dev, pus je fais de la merde :p
+ JBM: tkt eux aussi
+ t2_cyborg: 461e, c'est un peu la honte&#160;:(
+ WhatTrickeryIsThis: la dernière y avait l'exo des câbles où fallait mass submit pareil
+ WhatTrickeryIsThis: t2 t'as pas assez submit ton pogemon
+ t2_cyborg: je suis parti sur un truc compliqué pour l'exo 4, et après il ne me restait plus assez de temps pour bruteforce
+ t2_cyborg: ouais peut-être que ma solution simple à l'arrache aurait pu passer en masse submit :D
+ t2_cyborg: j'ai pas osé
+ t2_cyborg: je gagnais les 4 premiers matchs lors de mon seul submit
+ WhatTrickeryIsThis: J'ai du me recoder un parser de dates parceque j'y bliffe rien en python
+ t2_cyborg: pour le 3e exo&#160;?
+ WhatTrickeryIsThis: oué
+ WhatTrickeryIsThis: j'ai fini exo 3 21h40
+ t2_cyborg: bah je me suis pas emmerdé, j'ai converti à l'arrache en int :D
+ WhatTrickeryIsThis: pogemon j'avais déjà le bruteforce sous le coude
+ t2_cyborg: 8h00  == 0
+ t2_cyborg: en gros si h, c'est l'heure, j'ai fait
+ WhatTrickeryIsThis: 8h62 =?
+ t2_cyborg: lool ça existe pas ça :p
+ t2_cyborg: ce que j'ai fait donc
+ WhatTrickeryIsThis: hah, malin il est pas tombé dans le paneau
+ Zorg1: en base 9 c'est correct
+ Malterin: Je suis accro à Code Royale
+ egaetan: re
+ t2_cyborg: ts = int(h[:2]) -8 * 60 + int(h[3:])
+ t2_cyborg: un truc du genre
+ egaetan: Alors WhatTrickeryIsThis ça a marché&#160;?
+ WhatTrickeryIsThis: j'ai fait 3 min de brochettes
+ t2_cyborg: j'ai pas mis toutes les parenthèses...
+ t2_cyborg: ts = (int(h[:2]) -8) * 60 + int(h[3:]) mieux comme ça
+ WhatTrickeryIsThis: ah pareil cyborg ^^
+ t2_cyborg: bref comme ça, pas besoin de gérer les dates
+ egaetan: j'ai fait une dizaine de minutes de brochettes de plus...
+ WhatTrickeryIsThis: je regardais la doc python moi&#160;:)
+ egaetan: pas assez cuites
+ WhatTrickeryIsThis: je fini 337
+ t2_cyborg: egaetan c'est pas l'idéal pour les barbecues en ce moment ^^
+ WhatTrickeryIsThis: il doit pas y avoir beaucoups plus de gens arrivés aux brochettes
+ t2_cyborg: les qualifs du CodeJam c'est dans une semaine environ, non&#160;?
+ JBM: ah oui cool
+ t2_cyborg: ouais c'est bien ça, bon se qualifier c'est pas le plus dur. C'est ensuite que ça se corse :p
+ JBM: a defaut d'etre encore bien, au moins y'a plus de langages
+ t2_cyborg: bon, pas encore regardé le score du jour pour le covid...
+ t2_cyborg: 365 nouveaux décès, ah ouais quand même
+ Magus: bah on est sur la courbe de l'italie c'est facile
+ Magus: de mémoire dans 6 jours on est à 3500 morts
+ Magus: (6 ou 7 je sais plus)
+ Magus: et après on verra si le confinement a porté ses fruits
+ t2_cyborg: en Italie malgré le confinement, ils ont dépassé les 8000 morts :o
+ Magus: pour l'instant il y a des théories comme quoi le virus aurait commencé en italie, ou en tout cas en même temps en italie et en chine
+ Magus: sauf que l'italie le savait pas et c'est ce qui poserait autant de problème chez euc
+ Magus: *eux
+ Magus: si ça se confirme, on vivra un truc moins pire qu'eux
+ [CG]Thibaud: il y a des théories&#160;?
+ Fangel: comment lancer une rumeur&#160;:)&#160;!
+ Magus: bah c'est une théorie basé sur le fait que des médecins avaient prévu d'une étrange pneumonie en lombardie
+ Magus: mais ça restera une théorie vu qu'on peut pas tester ceux qui étaient malade il y a maintenant 2 mois :D
+ Magus: donc les médecins se demandent si cette étrange pneumonie c'était pas déjà le covid19
+ [CG]Thibaud: c'est une théorie officielle ou d'un de tes amis qui connaît quelqu'un qui connaît un médecin&#160;?
+ Magus: <a rel="nofollow" class="external free" href="https://www.ouest-france.fr/sante/virus/coronavirus/coronavirus-une-etrange-pneumonie-circulait-deja-en-italie-en-novembre-6791626">https://www.ouest-france.fr/sante/virus/coronavirus/coronavirus-une-etrange-pneumonie-circulait-deja-en-italie-en-novembre-6791626</a>
+ Magus: (ouai d'ailleurs je dis 2 mois mais en fait c'était en novembre)
+ JBM: que le temps passe vite
+ Magus: on pourrait jamais savoir avec des preuves si c'était le covid19 ou pas, les cas en question sont soient morts soit guéris maintenant
+ Magus: mais ça peut en partie expliquer ce que subit l'italie en ce moment
+ Fangel: ce que je trouve terrible avec le confinement dans les grandes villes, c'est que les gens respirent l'air intérieur toute la journée sans s'aérer qui est en général plein de solvant et polluant. Je ne parle même pas de ceux qui en profitent pour poncer/décaper/peindre. Du coup les poumons sont bien irrités pour l'arrivée du Covid.
+ Magus: bah euh personne t'obliges garder tes fenêtres fermés lol
+ Magus: t'as le droit d'aérer
+ Fangel: Oui enfin ce n'est évidemment pas la même chose qu'un tour dehors...
+ Magus: le virus arrive à vivre 3h dans un air un peu confiné. Mais dans un air aérer on arrive pas à savoir s'il survi plus de 30 secondes
+ Fangel: Je reste étonné qu'on nous bassine avec les gestes barrière mais que pas un médecin ne conseille de faire attention à son hygiène de vie (sommeil, alcool, alimentation, activité physique ...)
+ Magus: bah parce que c'est censé être acquis que vivre sainement c'est mieux pour la santé
+ Magus: mais contre les virus ont sait pas trop si c'est mieux ou pas
+ Magus: on a des études sur le manque de sommeil et le rhum (mais c'est pas un coronavirus)
+ Magus: et l'activité physique on sait que contre les virus ça change pas grand chose
+ Magus: l'alimentation par contre oui
+ Fangel: non mais là on parle d'état du corps pour l'arrivée d'un virus mortel.
+ Fangel: Ce virus tue en général par insuffisance respiratoire
+ Magus: le virus s'en fous un peu de l'état de ton corps. Ce qui l'intéresse c'est si t'as déjà une maladie aux poumons.
+ Magus: c'est pas une question de poumons musclés ou pas.
+ Magus: et la pour l'instant on a des doutes sur certains groupes sanguins, qui favoriseraient le virus
+ Fangel: donc si tes poumons sont irrités (cigarette, polluant, poussière), tu pars avec un désavantage.
+ Magus: + le fait qu'il a l'air de faire des trucs dans le cerveau
+ RomanceDawn: faut aller à Marseille pour se faire soigner :ok_hand:
+ Magus: l'état a débloqué le traitement à la chloroquine donc je suppose que les tests cliniques ont été concluants
+ JBM: ou qu'il a pas mieux
+ Magus: mais c'est réservés aux cas grave je crois. Parce que les effets secondaires de ce truc ... ouch &gt;&lt;
+ RomanceDawn: pourtant le chercheur a dit que c'etait pas plus toxiqueque du doliprane et qu'on en prescrivait  aux gens pas malade qui partent en a
+ RomanceDawn: afrique
+ Magus: ouai mais pas là la même dose qu'il en faut pour le coronavirus
+ Magus: à la base on s'en sert pour le prévention contre le paludisme
+ Magus: en prévention on t'en donne très peu
+ Magus: pour soigner le paludisme ou le lupus on t'en donne vachement plus
+ RomanceDawn: ah c'est possible
+ Magus: bah j'ai lu la publication du raoult la
+ Magus: en fait la conclusion qu'il donne c'est qu'à haute dose, la chloroquine empêche le covid19 de se reproduire
+ RomanceDawn: En tout cas ce monsieur il m'inspire plutôt confiance quand on voit son CV de 142 pages
+ Magus: ça le détruit pas, mais ça l'empêche de se reproduire
+ Magus: donc pour un corps humain au lieu se battre contre le virus + sa reproduction, bah il se bat que contre le virus
+ RomanceDawn: :thinking:
+ Magus: et c'est vachement plus simple
+ Magus: mais faut mettre dans la balance les effets secondaires du médoc
+ Magus: (+ aussi le fait qu'on a probablement pas assez de chloroquine pour soigner tout le monde je suppose)
+ RomanceDawn: askip ca coûte rien et c'est facile à produit + sanofi veut en donner 300 000 dose gratuitement, c'est presque trop beau 
+ RomanceDawn: produire*
+ Magus: bah ouai mais 300 000 dose tu traites pas grand chose avec ça
+ Magus: c'est 6 jours de traitement
+ Magus: entre 2 et 3 fois par jour
+ Magus: (suivant la gravité/corpulence/bla bla bla)
+ Sorgen: Aucun tests cliniques sérieux n'a été publié
+ RomanceDawn: 300 000 patients pardon
+ Magus: donc 300000 en fait tu soignes 25000 personnes (si tu en donnes 2 par jours)
+ RomanceDawn: des millions de dose
+ Magus: ah oui c'est la mieux
+ Magus: *la c'est mieux
+ Neumann: Le soucis c'est pas qu'il a fait des stats sur genre 6 patients&#160;? Dont 1 ou 2 ont été écartés des résultats pour je ne sais quelle raison&#160;?
+ Magus: ouai c'est le problème de son étude
+ Magus: son papier il repose que sur 24 patients
+ Magus: enfin 48 patients, mais c'était pas en aveugle, donc le groupe de 24 savaient qu'ils étaient traités, et les 24 autres étaient le groupe témoin (et le savait)
+ RomanceDawn: il est passé en prod sans faire la recette :grimacing:
+ Magus: donc déjà t'élimines pas l'effet placebo
+ Neumann: Apparement ça vaut de la pisse son étude, et tout le monde réagit dans l'émotion en disant que ça va nous sauver sauf qu'on a aucun recul
+ Magus: et résultat on a des stats que sur 24 patients
+ Magus: c'est bien pour ça que le gouvernement a lancé un test sur 800 personnes
+ Magus: pour avoir des stats potables
+ Neumann: Le soucis c'est ça occulte d'autres études plus *sérieuses*
+ Magus: ouai enfin pour sa défense, pour l'instant on a pas d'études plus sérieuse qui mettent en avant un traitement qui marche
+ Magus: donc il occulte pas grand chose
+ RomanceDawn: ah mais lui il s'en balance :smile: il file son traitement à tout lest  malades positif qui vont le voir 
+ JBM: euh
+ JBM: on n'a *que* des etudes plus serieuses
+ JBM: parce qu'il met pas la barre haut
+ Magus: ouai mais qui mettent pas avant des trucs qui marchent
+ Sorgen: et il a écrit son ptit bouquin déjà publié chez michel lafont
+ Neumann: <a rel="nofollow" class="external free" href="https://www.liberation.fr/france/2020/03/26/le-buzz-sur-la-chloroquine-freine-l-essai-clinique-europeen-discovery_1783176?fbclid=IwAR3qyElGfRhb7IHarEz2qJwbiN0uF0JRnGk0rEO3FPVzWsjaxQDs9LHPqEg">https://www.liberation.fr/france/2020/03/26/le-buzz-sur-la-chloroquine-freine-l-essai-clinique-europeen-discovery_1783176?fbclid=IwAR3qyElGfRhb7IHarEz2qJwbiN0uF0JRnGk0rEO3FPVzWsjaxQDs9LHPqEg</a>
+ Magus: évidemment qu'on a pleins d'études sur trucs qui n'ont pas marchés :D
+ Magus: mais bon ça on en parle pas trop
+ Neumann: Les autres études peinent à trouver des candidats, car un grand nombre refuse d'être traité par autre chose que l’hydroxychloroquine
+ RomanceDawn: yep il fait hydroxychloroquine + un antibiotique 
+ RomanceDawn: je sais pas comment ca va  finir 
+ RomanceDawn: mais <a rel="nofollow" class="external free" href="https://youtu.be/GFkUnJ46MVI?t=139">https://youtu.be/GFkUnJ46MVI?t=139</a> il a l'air balaise 
+ Magus: d'ailleurs je suis pas sur d'avoir compris l'intérêt de l'antibiotique dans son papier
+ WhatTrickeryIsThis: c'est le meilleur gars qui trouve le meilleur remede avec les meilleurs du mondes dont les chinois qui ont 3 mois d'avance
+ WhatTrickeryIsThis: en quoi il entrave la recherche&#160;?
+ WhatTrickeryIsThis: Le N°1 mondial trouve
+ WhatTrickeryIsThis: les autres le plombe
+ Neumann: Ouvre tes yeux et lis les milliard d'articles qui pullulent ces jours-ci
+ WhatTrickeryIsThis: que des nazes
+ RomanceDawn: en vrai se serait tellement bien d'avoir un gars comme ça en France, j'aimerait bien qu'il  ai raison :p
+ Neumann: Merci WTIT pour cette analyse de qualité
+ WhatTrickeryIsThis: je lis le n°1  , les autres c'est des tanches 
+ Magus: bah il a peut être raison
+ Magus: juste que sur 24 personnes, l'interval de confiance il doit être super bas
+ Fangel: c est le peut-être qui pose problème ...
+ WhatTrickeryIsThis: 24 ou pas, ce mecs c'est le plus qualifié -&gt; sont traitement est appliqué à Nice et New York, les autres cherchuers vous avez perdus la course allez vous faire mettre
+ Fangel: En fait le truc c est qu'il préconise l'utilisation de chloriquine dès les premiers symptômes. Alors que les consignes actuelles c est plutôt pour les cas graves.
+ WhatTrickeryIsThis: cas grave et inflamation = trop tard
+ Fangel: du coup on pourra difficilement dire s il avait raison.
+ Magus: les consignes actuelles sont ce qu'elles sont parce que les essais cliniques à grande échelle sont pas encore finies
+ Magus: donc en attendant ils limitent aux cas grave vu que bon, entre mourir ou tenter un traitement qui a marché sur 24 personnes
+ WhatTrickeryIsThis: ça marche déjà à New York et à Nice
+ Magus: yolo
+ WhatTrickeryIsThis: à Nice vous le saurez pas evidemment
+ WhatTrickeryIsThis: ma soeur y travail
+ Zorg1: ah vous êtes devenu spécialistes en coronavirus (et + précisemment le Covid-19)&#160;?
+ Neumann: Mais lol
+ Neumann: C'est pas comme ça que ça marche la médecine
+ RomanceDawn: Si tu savais l nombre d'article que j'ai lu pendant ce confinement Zorg1 :joy:
+ Magus: c'est clair qu'en ce moment ça va on a du temps pour lire
+ Magus: sinon je me serais pas palucher le pdf de l'autre raoult
+ Magus: parce que bordel il a aucun talent de romancier le type
+ Zorg1: c'est pê pas son boulot aussi
+ Magus: c'est pas une raison&#160;!
+ WhatTrickeryIsThis: lisez son cv
+ Neumann: Bref, vous illustrez le problème. La plupart des personnes compétentes dans le domaine émettent des doutes sur ton étude, mais tout le monde s'empare du truc et pense que son avis à de l'interet.
+ WhatTrickeryIsThis: ils emettent de la jalousie
+ Neumann: T'en sais rien, t'y connais rien, moi non plus. Personne ici n'est capable de dire si c'est legit ou pas
+ Magus: ah bah ouai c'est clair que l'avis qu'on donne ici il va clairement avoir un impact sur le monde :D
+ JBM: a force de le normaliser...
+ Magus: je crois que tu surestimes l'importance de ce canal qui contient 354 personnes dont ... 20 qui lisent&#160;?
+ RomanceDawn: ah oui son CV
+ RomanceDawn: j'ai  pas tout lu mais fou le tourni quand même 
+ JBM: c'est un peu comme le virus
+ JBM: tu risques de contaminer qqs personnes ici
+ JBM: qui vont continuer
+ Magus: enfin en sachant que pour l'instant mon avis c'est qu'il a "peut être" raison, que c'est pour ça que les gouvernements font des essais cliniques à grande échelle avant de déclarer son traitement comme utilisable à l'échelle national
+ Magus: et qu'en attendant c'est effectivement dommage que son buzz empêche les recherches dans d'autres voies d'avancer plus vite
+ egaetan: son étude reste une blague
+ Neumann: <a rel="nofollow" class="external free" href="https://www.telerama.fr/television/bfmtv-et-pascal-praud-valident-la-chloroquine-pour-guerir-du-covid-19,n6620823.php">https://www.telerama.fr/television/bfmtv-et-pascal-praud-valident-la-chloroquine-pour-guerir-du-covid-19,n6620823.php</a>
+ egaetan: c'est pas pro de publier un torchon pareil
+ Neumann: lul
+ Magus: bah 24 personnes y'a pas un seul scientifiques pour dire que c'est une étude viable. Quelque soit le domaine.
+ JBM: son etude est tellement une blague que c'est un probleme qu'elle soit testee a grande echelle
+ Magus: ouai mais s'il n'y avait pas eu l'étude&#160;?
+ JBM: il y a d'autre recherche
+ WhatTrickeryIsThis: c'est lui qui entrave la recherche? visiblement c'est le contraire
+ Magus: je veux dire, le mec il a quand même un vrai CV. C'est son métier. C'est pas un charlatan reconnue ou un mec qui te met de l'homéopathie.
+ JBM: moi aussi je peux sortir une etude bidon
+ JBM: et jouer sur l'emotion
+ JBM: et bloquer les labos pour ca
+ egaetan: c'est pas un scientifique pour publier une telle étude
+ Neumann: Le soucis c'est la différence de traitement entre son étude et les autres
+ Magus: retirez l'étude de l'équation
+ egaetan: c'est pour ça que j'ai les cheveux longs
+ egaetan: charisme ++
+ JBM: ok retirons l'etude
+ Magus: et demandez vous si une étude à grande échelle lancée sur les conseils d'un infectiologue (ça doit probablement pas s'écrire comme ça) reconnu aurait choqué qui que ce soit
+ JBM: "et si on injectait du poison a des gens au pif?"
+ Magus: tous les médicaments sont un poison quelque part, vu que le but de ton foie c'est de les éliminer et ça lui fait mal de le faire en général :D
+ Magus: le foie ou les reins ça dépend du medoc
+ JBM: oui
+ JBM: donc: pourquoi celui-la?
+ Neumann: Ca aurait choqué pareil, y'a des protocoles en médecine, tu testes pas des trucs à la va-vite sans aucun recul
+ Magus: même quand tu sais que t'aura 3500 morts au total dans 8 jours&#160;?
+ Magus: (+ tous les cas graves en réanimation)
+ Neumann: Bien sur
+ JBM: ca change quoi?
+ JBM: t'es sur l'emotion la
+ Magus: ça change l'urgence pour moi
+ RomanceDawn: sachant qu'il vont mourir autant tester 
+ JBM: comment tu choisis qui recoit chloroquinine et qui recoit l'arsenic?
+ Magus: appelez ça l'émotion si vous voulez. Mais je suis pas choqué que les gouvernements accélères les processus (quitte à bypass les protocoles on est d'accord) dans l'était où on est
+ JBM: les protocoles sont la pour une raison
+ Magus: alors après ok c'est moche c'est parti sur l'étude de patrick sébastien déguisé en médecin
+ JBM: qui comprennent deja la notion d'urgence
+ oPyRuSo: salut, j'ai un petit probleme avec un replay... kkun peu me donner un avis&#160;?
+ [CG]Thibaud: envoie ton replay
+ Magus: c'est à dire&#160;?
+ WhatTrickeryIsThis: t'abuses on était en train de s'engueleer
+ oPyRuSo: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/442671327">https://www.codingame.com/replay/442671327</a>
+ JBM: tiens on peut etre sourd a nethack maintenant
+ JBM: quel progres
+ oPyRuSo: a la fin... je comprend pas pourquoi je perd......
+ WhatTrickeryIsThis: Ah putin y à raoult dans le replay xD£
+ oPyRuSo: dsl... je vous laisse apres finir le debat :p
+ Magus: t'as plus de vie
+ Magus: tu finis avec 0 lives
+ oPyRuSo: ben oui... mais j'en avait 3
+ oPyRuSo: il me tir dessus, a cote... -1
+ oPyRuSo: mais... sont ou les -2 restant...&#160;?
+ [CG]Thibaud: c'est pas une mine plutôt&#160;?
+ WhatTrickeryIsThis: il perd 3 pvs sur 1 mine&#160;?
+ Magus: les 2 derniers tours tu prends 2 minues à la suite
+ Magus: *2 miners
+ Magus: -r
+ Magus: regarde la timeline du replay
+ oPyRuSo: oh purée....
+ Magus: t'as les 5 points oranges qui montrent où tu perds tes 5 vies
+ oPyRuSo: je suis fatigué...
+ oPyRuSo: donc... en fait... vous ditent que je suis le orange...&#160;? (--&gt; va se pendre)
+ Zorg1: une mine + une torpille dans le dernier tour non&#160;?
+ Magus: euh .... oui :D
+ oPyRuSo: la... je cherche un trou ou me glisser.... :p
+ Dridriun: :joy:
+ oPyRuSo: dsl... reprennez votre debat ^^
+ Magus: il n'y a débat que si les gens sont prêt à changer d'avis et/ou qu'on vote/décide à la fin
+ WhatTrickeryIsThis: ouais on diasais que c'était le retour de Patrick Sebastien à la télé
+ Magus: mais la y'a aucune condition remplis :D
+ oPyRuSo: hum... prefere pas m'en meler alors :hugging:
+ Neumann: Comprendre l'avis des autres sans en changer, c'est déja une condition
+ Magus: qui ici ne comprend pas l'avis des autres&#160;?
+ Neumann: Je sais pas, je suis pas dans la tête de tout le monde
+ Magus: j'ai très bien compris votre point de vue
+ Neumann: Bah gg
+ Zorg1: on se croirait sur twitter&#160;;-)
+ Stilgart: arrêtez de vous battez
+ JBM: depuis quand faut decider a la fin d'un debat?
+ BigUP: 1h 10 min 20 secondes... devait etre plus difficile que la dernière fois ce battledev
+ Neumann: T'as pas lu le statement&#160;?
+ Zorg1: pourquoi faire&#160;? full random&#160;!
+ Syj: hello
+ Syj: quelqu'un pourrait me dire pour je crash sur un silence
+ Syj: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/442673272">https://www.codingame.com/replay/442673272</a>
+ Syj: il me dit que je rencontre un obstacle
+ Zorg1: je vois "TORPEDO 1 7 | MOVE E SILENCE"
+ Zorg1: si c'est le rouge qui le fait bah c'est normal il revient sur ces pas, ce qu'il peut pas
+ Vry: Je retiens un point positif de la battle dev ... <a rel="nofollow" class="external free" href="https://en.wikipedia.org/wiki/Heap%27s_algorithm#Details_of_the_algorithm">https://en.wikipedia.org/wiki/Heap%27s_algorithm#Details_of_the_algorithm</a>
+ Vry:&#160;:)
+ JBM: WTIT bites the gnome lord.  The gnome lord hits WTIT.  WTIT is killed!
+ JBM: t1 il veut jamais survivre ce clebs
+ oPyRuSo: #54, pas mal pour un daltonien :p
+ Syj: Merci zorg1, j'ai oublié de marquer mes cases quand j'avance en silence
+ RomanceDawn: pas mal ce heap
+ Zorg1: ah c'est le nom du gars, rien à voir avec un algo par tas
+ [CG]Thibaud: le move se fait avant le torpedo ou pas&#160;?
+ Neumann: Au choix
+ Vry: Oui Zorg1 ça m'a enduit avec de l'erreur aussi ...
+ Vry: Bon faudrait que je me décide à coder le move et surtout à me décider sur la stratégie à adopter ...&#160;: mc dans les quatres direction pour aller du côté des plus grands chemins&#160;?
+ Palmipedus: MC?
+ Palmipedus: Monte carlo?
+ WhatTrickeryIsThis: Mayonaise Chipo
+ Vry: Mince , j'ai que mayo Chips ... c'est bon WhatTrickeryIsThis&#160;?
+ Vry: Oui Palmipedus&#160;:)
+ Fangel: bon le plus grand chemin se fait naturellement assez simplement
+ Fangel: va juste toujours vers la plus grande composante continue
+ JBM: et si y'en a qu'une?
+ Fangel: alors y a beaucoup d autre paramètre pour t aider à choisir
+ Fangel: tu fais un tracking de la position adversaire&#160;?
+ Fangel: fais le même sur toi, et choisis la direction qui laisse le plus grand nombre de case potentielle pour le tracking de ton adversaire
+ [CG]Thibaud: damn pourquoi je peux pas split sur le charactère | en java&#160;?
+ [CG]Thibaud: j'ai déjà eu le souci je me rappelle plus&#160;:/
+ egaetan: "\\|"
+ R4N4R4M4: Tu fais pas un flood Vry&#160;?
+ egaetan: [CG]Thibaud String[] splittedOrders = opponentOrders.split("\\|");
+ Vry: J'ai des flood mais pas pour ça R4N4R4M4
+ [CG]Thibaud: thx egaetan
+ Vry: Je détecte l'adversaire mais je move random ...
+ egaetan: surtout ne fait PAS d'Arrays.stream dessus
+ [CG]Thibaud: pourquoi&#160;?
+ Vry: C'est quoi une "" Fangel&#160;?
+ egaetan: fais une boucle for normale
+ egaetan: sinon timeouts sur du class loading bizarre
+ Vry: Sinon y'a ça en C pour split sur |&#160;: while ( (*p) &amp;&amp; (*p&#160;!= '|') ) p++;
+ Fangel: y a un problème dans ta question Vry non&#160;?
+ Vry: ouais ...
+ Vry: la plus grande composante continue
+ egaetan: Vry j'ai déjà mon parsing en C, thx
+ Vry:&#160;:)
+ [CG]Thibaud: c'est hardcore d'avoir une première IA qui est à moitié intelligente :D
+ JBM: c'est pas sur ce contest qu'on va gagner des users
+ Fangel: disons que tu retires toutes les cases où tu n as plus le droit d aller (île ou déjà passé). Les composantes continues sont les groupes de cases restantes connexes.
+ Fangel: en fait pour faire simple tu peux tester toutes les directions, tu fais un BFS/DFS à partir de la case et tu comptes le nombres de cases que tu peux atteindre.
+ Fangel: au début ce sera le même partout a priori, mais au bout d'un moment ça t empêchera d aller te coincer dans un coin.
+ Vry: Oui je peux commencer comme ça&#160;!
+ Vry: J'ai déjà le floodfill (qui sert au début à ne pas se mettre dans la mauvaise mer)
+ BigUP: Vry, floodfill au 4 vents ...
+ Vry: Quand le code est déjà là on va pas se priver ...
+ Vry: ... mais ce n'est que pour sortir du bois ... on verra après ...
+ BigUP: Vry, apres, tu en aura toujours besoin (sauf s'il y a mieux a faire)
+ Vry: Il faudrait surtout que je lui tire dessus surtout que je sais où il est&#160;!!!
+ Boulet: yop tout le monde 
+ Boulet: DWARFIE, STILGART  urgence boulot si vous êtes là
+ Vry: à 0h45 ... wow
+ Vry: Bon courage Boulet
+ Boulet: Stilgart semble encore connecté 
+ Boulet: ça boum le confinement sinon &gt;? 
+ RomanceDawn: battldev pourrie ojd
+ RomanceDawn: enfin pas top 
+ BigUP: RomanceDawn, pas vu&#160;!&#160;;)
+ RomanceDawn: lol
+ Vry: Boulet&#160;: c'est chiant mais on fait avec ...
+ Vry: Télétravail à 100% ... pour le coup
+ R4N4R4M4: Y a des mauvaises mers&#160;?
+ Vry: 179/426 avant submit ...
+ Vry: Roulement de tambours ...
+ R4N4R4M4: Je t'attends en wood1 Vry
+ Vry: Cool merci ... pour l'instant 17/20
+ Vry: C'est un début encourageant
+ Vry: Je ne lance les torpilles que si je suis certain de toucher (et à distance 3 ou 4)
+ Vry: J'arrive dans le top 50
+ Vry: Par contre quand je sais où est l'autre il faut que j'aille franchement lui casser la figure ... :D
+ Vry: Ah Beber&#160;!
+ R4N4R4M4: Tu vas le passer :D
+ Vry: On peut surface et torpedo en même temps&#160;?
+ GetSchwifty: yes
+ R4N4R4M4: Ton sous-marin s'enferme Vry. J'ai passé le boss Wood 2 en réglant ça tout simplement
+ Vry: Oui, je sais je regarde juste la plus grande zone dans les 4 directions sans plus du coup il ne voit pas les futures petites zones
+ Vry: 27&#160;: pas mal
+ R4N4R4M4: gg
+ Vry: Mais y'a encore du travail ... je te rejoinds demain (enfin aujourd'hui mais après avoir dormi)&#160;!
+ Zorg1: ok le minage à outrance ça a l'air d'être rentable
+ Stilgart: je confirme
+ Stilgart: en tout cas, ça passera silver
+ Zorg1: pas très joli mais rentable
+ R4N4R4M4: Mince, je m'enferme avec des silences
+ R4N4R4M4: faut que je simule&#160;:(
+ Zorg1: pas vraiment besoin de simuler
+ BigUP: R4N4R4M4, je floodfill a chaque steps
+ Stilgart: hein AutomatonNN
+ AutomatonNN: j'ai pas de chance de te faire plaisir
+ Zorg1: ah quoique les silences de   plus d'1 pas c'est chaud
+ Stilgart: il faut prévoir le trou pour
+ R4N4R4M4: BigUP, ton flood sur chaque step, il vérifie que t'es toujours sur le meilleur flood&#160;?
+ R4N4R4M4: Tiens, on dirait que je vais attaquer Bronze :D :D
+ Zorg1: gg
+ BigUP: R4N4R4M4, je m'arrete si il ne reste que moins de 4 cases il me semble 
+ R4N4R4M4: ah ok
+ BigUP: ou que le flood tout droit n'est pas aussi important que sur les cotés. je ne sais plus
+ R4N4R4M4: Mouais, je crois que je vais faire comme toi pour le flood sur chaque step, mais je regarderai que je suis toujours sur le flood max
+ R4N4R4M4: Pour l'instant, je limite les silences à 3, j'ai moins de chances de m'enfermer
+ Zorg1: au début je faisais des SILENCE de 0 mais les bots du fond de classement l'ignorait et prédisait bien ma position&#160;;-)
+ R4N4R4M4: Le Boss Wood 1 est laminé&#160;!
+ R4N4R4M4: J'ai pas grand chose&#160;: flood pour les move, remplissage des powers, tirage random entre silence (75%) et torpedo(25%) les deux random
+ R4N4R4M4: Yess Bronze
+ Zorg1: gg R4N4R4M4
+ R4N4R4M4: tjx
+ R4N4R4M4: *h
+ Zorg1: t'as l'estimation de la position adverse&#160;?
+ R4N4R4M4: Non, rien sur l'adversaire pour l'instant, juste survie
+ R4N4R4M4: et un peu de torpedo random
+ Zorg1: ah pas mal. je crois que c'est le premier truc que j'ai codé
+ R4N4R4M4: je fais surtout du random pour l'instant pour tester mes features
+ R4N4R4M4: Pour l'instant, la survie marche bien, je vais voir ce que ça donne en bronze, avec les mines...
+ R4N4R4M4: multiple trigger&#160;!!! :D
+ R4N4R4M4: C'est cool ça
+ R4N4R4M4: Si je fais MOVE|TORPEDO ou TORPEDO|MOVE, c'est pareil ou c'est différent&#160;?
+ R4N4R4M4: Il joue les actions dans l'ordre&#160;?
+ Stilgart: c'est très différent
+ R4N4R4M4: d'ac merci
+ Stilgart: déjà TORPEDO + MOVE ça peut t'infliger des dégats
+ Stilgart: si tu entres dans la zone de blast
+ Stilgart: ensuite, tu peux MOVE x TORPDEO pour gagner la dernière charge et donc enchainer sur TORPEDO (pas besoin d'attendre le tour suivant)
+ Stilgart: enfin, si tu bouges, tu n'as plus la même portée
+ R4N4R4M4: si je fais MOVE d'abord, mon TORPEDO part de la case d'après le MOVE?
+ Stilgart: oui
+ R4N4R4M4: cool
+ R4N4R4M4: et le truc de la charge + tir c'est pas mal aussi ça
+ Stilgart: ça peut aussi être cool de tirer avant et de faire move pour s'éloigner de l'adversaire, note
+ R4N4R4M4: ah oui aussi
+ R4N4R4M4: du coup, tu peux tout enchaîner&#160;? MOVE|TORPEDO|MINE|SILENCE|SONAR&#160;?
+ R4N4R4M4: si t'as assez de power bien sûr
+ R4N4R4M4: et j'ai oublié TRIGGER
+ Stilgart: tu peux juste trigger une seule fois (je crois) et pas la mine que tu viens de poser
+ R4N4R4M4: L'énoncé parle de plusieurs trigger
+ Stilgart: avec un "can't"
+ R4N4R4M4: ah non j'ai mal lu, j'avais lu 'can'
+ Stilgart: mais j'avoue, j'avais un doute d'un coup
+ R4N4R4M4: j'avais fusionné les 2 t :D
+ Stilgart: sur ce, bonne nuit tout le monde, Automaton2000 et AutomatonNN
+ Automaton2000: je ne suis pas un robot
+ AutomatonNN: sort si tu veux un truc pour le moment
+ Stilgart: AutomatonNN: je peux pas, je suis confiné banane
+ R4N4R4M4: C'est pas le moment AutomatonNN
+ AutomatonNN: t'es bien mon code de contest c'est pas trop compliqué de faire un truc du genre dans un seul cas pa
+ AutomatonNN: ok
+ R4N4R4M4: bn Stilgart

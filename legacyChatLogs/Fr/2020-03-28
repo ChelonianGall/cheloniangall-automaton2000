@@ -1,0 +1,1226 @@
+ nib: o/
+ Galrauch: salut le chat et Automaton2000
+ Automaton2000: tu parles de quel puzzle&#160;?
+ Galrauch: je ne parle pas du puzzle Automaton2000
+ Automaton2000: ah&#160;! je suis sur que si je n'ai pas encore fait celui là
+ Galrauch: mais si Automaton2000 tlm là fait c'est la puzzle tortue
+ Automaton2000: salut tout le monde hein
+ vale075: Yo
+ Vry: o/
+ domak: Hello, t'en es où Vry?
+ Vry: Je commence à prendre en compte le silence ...&#160;:)
+ Vry: Et toi ...
+ Vry: ,
+ Vry:&#160;?
+ Vry: Je l'utilise uniquement lorsque je suis en phase d'approche mais si l'aure fait silence je pers sa trace donc mon bot reste en mode "promenade"
+ domak: oui c'est le plus compliqué la gestion du silence
+ domak: ça fait tout exploser en terme de positions possibles
+ Vry: Oui, du coup je vais déjà essayer de charger les différents power histoire de pouvoir faire un peu de sonr ...
+ domak: d'ailleurs un petit truc: j'ai refacto toute ma strat et je perdais 100 places par rapport à celle d'avant...
+ Vry: Mais je suis quand même 95 Bronze donc c'est pas mal au vu de ce que fait mon bot.
+ Vry: T'en es où&#160;?
+ domak: le truc c'est que j'avais inversé le move et un silence 0
+ domak: Dans le top 120 silver
+ Vry: lol, moi j'avais oublié de mettre à jour la carte quand je faisais silence ...
+ Vry: Pas mal&#160;!
+ domak: ça veut dire que beaucoup de strat considèrent que l'ennemi ne fait pas de move après le silence
+ domak: oui mais j'en ai bien chié
+ domak: j'ai un stream&#160;: from wood2 to wood2 qui dure une bonne vingtaine d'heure je pense
+ Vry: lol
+ Vry: Moi j'ai commencé tardivement le contest et il me faut du temps pour rentrer dedans en général ... et je suis une machine à bug&#160;! :p
+ Vry: Il faut aussi que je log mes actions pour la détectabilité ...
+ domak: oui j'ai passé beaucoup de temps à préparer les bases qui vont bien (enregistrement de l'état, affichage graphique du board) pour debug
+ Vry: Oui, sur un contest long ça vaut le coup je pense
+ domak: oui sans l'état pas possible de debugger correctement
+ domak: et plus que les autres contests t'es obligé d'avoir l'histo pour t'en sortir
+ domak: enfin pour ceux que j'ai fait
+ Zorg1: o/ à tous et aux bots Automaton2000 &amp; AutomatonNN
+ AutomatonNN: ok
+ Automaton2000: et c'est pas le moment de la lecture
+ Vry: o/ Zorg1
+ Vry: gg Zorg1 :p
+ Neumann: Oy
+ Vry: Yo
+ Vry: Il est relou le silence ...&#160;:)
+ Zorg1: yep
+ YannT: heyyy top10&#160;:)
+ Vry: gg
+ YannT: ça monte dans la nuit ce jeu
+ R4N4R4M4: Salut les sous-mariniers confinés&#160;!
+ Vry: J'ai constaté ça aussi ...
+ R4N4R4M4: Pour l'instant je réinitialise tout le radar quand l'adversaire fait SILENCE, faudrait que j'affine
+ R4N4R4M4: Je me demande si je vais pas tout revoir pour exploiter l'historique
+ Zorg1: c'est un peu brutal en effet
+ R4N4R4M4: parce que les move après silence semblent bien discriminer qd même
+ YannT: oui j'avais commencé comme ça aussi
+ YannT: ça suffit à sortir de wood et monter dans bronze facile
+ R4N4R4M4: par contre ça sort pas de bronze, je plafonne top 20
+ YannT: pour sortir de bronze facilement, fait les mines
+ Vry: Oui c'est ce que je fais actuellement&#160;: à chaque tour je repars de la map de départ et j'applique toutes les actions à chaque point ...
+ YannT: brutasse Vry Oo
+ Vry: Super rapide en fait ...
+ R4N4R4M4: J'avais pensé à faire ça aussi Vry, et j'aurais dû...
+ Vry: Avec le silence l faut que je travaille de la dernière action après silence au prochain silence en fait ..
+ Vry: Et que je merge le tout dans une map intermédiaire
+ Vry: Sans le silence c'est assez simple&#160;:
+ R4N4R4M4: Je pense que je vais faire un mix entre heuristique du tour et projection de l'historique
+ Vry: for (int i=0; i&lt;512; i++)
+ Vry:   memcpy(map, g-&gt;map, sizeof(int)*512);
+ Vry: for (int j=g-&gt;start_action; j&lt;ACTION_SIZE; j++)
+ Vry:    if (p_action-&gt;action == ACTION_MOVE)
+ Vry:   if (p_action-&gt;action == ACTION_SURFACE)
+ YannT: là j'ai un truc qui répond en moyenne en 1 oiu 2ms, j'utilise pas du tout le temps...
+ Vry:   if (p_action-&gt;action == ACTION_TORPEDO)
+ YannT: (sauf premier tour en 30ms parce que JVM faut croire)
+ Vry: Et si j'arrive au bout des actions pour la case de départ je note le point d'arrivé
+ Vry: Mon temps de reponse max (hors silence) et &lt; 1ms
+ R4N4R4M4: T'as une map de 512 vry&#160;?
+ Vry: Oui mais j'ai une bordure de terre ...
+ Zorg1: j'ai pas mesuré mais je dois pas avoir un temps de réponse monstrueux non plus
+ Vry: En fait une map 17x17 ... mais osef
+ R4N4R4M4: ah, j'avais ça au début aussi, mais je l'ai enlevée
+ R4N4R4M4: j'ai mis des pointeurs
+ Zorg1: ah 17x17 :D personne n'aime tester si t'es dans la map on dirait ...
+ YannT: private fun Pair&lt;Int, Int&gt;.valid() =
+ Zorg1: c'est moche quand même ...
+ YannT: avec des espaces avant les in :p 
+ Zorg1: bon pê moins que mon if (nx&gt;=0 &amp;&amp; nx &lt; t.w.W &amp;&amp; ny&gt;=0 &amp;&amp; ny&lt;t.w.H &amp;&amp; !t.w.maze[ny][nx].island ) 
+ YannT: bof compilé en byte code ça revient à des &gt;=, &lt;= 
+ Vry: C'est méga "lourd" ...
+ YannT: non
+ YannT: le contains un peu juste
+ Vry: if (map[offset]) ... je suis dehors&#160;:)
+ YannT: et encore c'est N egalités (avec N  = nombre d'iles)
+ Zorg1: si t'utilises un tableau 1 dim, effectivement c'est plus simple
+ R4N4R4M4: if(cell-&gt;next[dir] == NULL) continue; :D
+ YannT: à la limite il me faudrait une map en fait au lieu d'un tableau, ça passerait le "contains" en temps constant
+ Vry: Après les directions c'est facile c'est -17, +1, +17 et -1
+ YannT: mais bon je répond en 1ms de toutes façons donc les petites optim on en est pas là du tout&#160;:)
+ YannT: j'ai plein de trucs un peu bourrins, pas de bitmap...
+ YannT: YAGNI, on optimise que quand nécessaire&#160;:)
+ Zorg1: bon la multiplication pas 17 c'est pas terrible à moins que tu fasses (x&lt;&lt;4+x) :p
+ Vry: moi pour l'instant c'est un tableau de int pas le courage de bitsetter ça ...
+ Vry: Zorg1&#160;: addition
+ Vry: pourquoi *&#160;?
+ YannT: c'est balot d'ailleurs avec ton histoire de map de 17 cases, tu prend un bit en place pour encoder les positions&#160;:)
+ Zorg1: bah quand t'as x &amp; y en entrée
+ YannT: plus*
+ Vry: J'ai une seule fois la conversion lors des input ensuite je n'ai que des tableaux 1d
+ Vry: Merci Zorg1 je viens de voir que je reconvertissais à chaque fois les coordonnées de la torpille ennemie ... (p_action-&gt;x+1) + ((p_action-&gt;y+1)*17)
+ Vry: :upside_down:
+ Zorg1: np&#160;;-)
+ Zaap38: bon, la théorie des jeux, c pa facil
+ YannT: french les bitset et les positions en int et tout ça, je ferai la conversion quand la situation l'exigera, pour l'instant les objets et les opérations de liste ça performe suffisement pour que ce soit un non sujet&#160;;)
+ Vry: Mais c'est négligeable ... 225 cases * 200 actions ça ne fait que 45k opérations
+ Zorg1: oui c'est un peu de l'optim pour la frime là ...
+ Vry: Oui YannT, c'ets clair&#160;!
+ Vry: Pour moi en C le tableau 1d enlève beaucoup de code ...
+ Vry: if ((x&lt;0) || ........)
+ YannT: je comprend même pas comment les gens ont desdizaines de  milliers d'opération et tout en l'état des choses
+ Vry: C'est essentiellement pour ça que je l'ai fait
+ YannT: j'utilise des paires et des listes :p
+ YannT: ça revient au même, sauf que c'est des objets avec des couts quoi
+ YannT: mais ça se convertira bien si le besoin s'en fait sentir
+ Vry: Tu as aussi des dizaines de milliers d'opération mais c'est caché ...
+ YannT: alors non j'ai que des complexités algorithmique en O(N), et N est pas énorme sur ce jeu
+ YannT: quand faudra simulier des paquets de trucs on verra, c'est le cout des clone() qui fait peur un peu avec mes objets
+ Zaap38: de toute façon dur d'opti mieux qu'un O(N)
+ YannT: mais les parcours de liste c'est rien en vrai
+ Zorg1: oui le tableau 1d et le mur de confinement ça simplifie énormément le code&#160;;-)
+ YannT: oui les complexités algo sont négligeable, c'est les couts de clone() de listes qui risquent de devenir bloquant et de nécessiter un jour passage à un bitset
+ Vry: Habituellement je commence toujours avec x et y et après je le regrette ...
+ YannT: même le BFS, avec un range de 4 c'est pas du O(N) mais comme N est ridicule...
+ YannT: idem le floodill, même à ile vide ça fait que environ 200  de toutes façons
+ Zorg1: ah oui mon BFS je ne l'arrête jamais à 4, il fait toute la map
+ YannT: Oo
+ Vry: Oui c'est clair ... moi si je l'arrête&#160;!&#160;:)
+ YannT: lol je viens même de me rendre compte que mon DFS est en fait un DFS tiens
+ YannT: BFS*
+ YannT: mais pour ça parcourt typiquement quoi 10 cases, on s'en fiche quoi
+ R4N4R4M4: Bon, j'ai l'impression que je vais devoir coder un split('|')&#160;:(
+ Zorg1: demande à Vry il va te sortir son while de parsing&#160;;-)
+ YannT: ahah le C
+ YannT: pour les gens civilisés il y a un .split() déjà :p
+ Vry: Attends ça arrive ... :p
+ Zorg1: c'est tellement plus amusant un while avec un body vide
+ R4N4R4M4: mouais, quand t'as la tête pleine de stratégies de détection, etc... et que tu dois coder un split()&#160;!!! :D
+ YannT: c'est ça qui est ennuyeu avec les languages de bas niveau, tu te retrouves à coder des trucs utilitaires de base...
+ YannT: mon bot fait 350 lignes là :p
+ R4N4R4M4: oui, et surtout, tu penses jamais à les stocker dans une lib
+ Vry: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/f4dd35f4-15a5-4263-97cb-69d63d77957c">http://chat.codingame.com/pastebin/f4dd35f4-15a5-4263-97cb-69d63d77957c</a>
+ YannT: et j'ai mis plein d'espaces
+ Zorg1: ah 850 lignes mais j'aère en général et je découpe pas mal
+ YannT: oui pareil
+ YannT: mais j'ai pas codé de split quoi
+ R4N4R4M4: Ah merci Vry  :D
+ Vry: Moi non plus :sunglasses:
+ YannT: hmmm
+ R4N4R4M4: 575 lignes sans split
+ YannT: tu gardes pas l'ordre des actions adverse?
+ YannT: ça va te jouer un tour
+ Vry: YannT&#160;: si si si c'est dans les ...
+ YannT: ah good
+ Vry: J'ai un pointeur p_action que j'incrémente à chaque fois
+ R4N4R4M4: ça marcherait avec strstr() aussi non&#160;?
+ Vry: Encore un tableau 1d de 8k cases ...
+ Vry: R4N4R4M4 ... oui
+ Vry: Mais il faut bien vérifier que le retour == ton pointeur
+ Vry: Le retour du referee est propre pas besoin de faire de trim
+ R4N4R4M4: ah oui pas besoin de strstr, puisque tu avances le pointeur au fur et à mesure, ok
+ R4N4R4M4: Toi aussi, tu déclares tes pointeurs comme ça Vry  : char* p  :D
+ YannT: input.nextLine().split('|').map { ... }
+ R4N4R4M4: à chaque fois je me fais avoir avec des déclarations du genre&#160;: char* p, q; :D
+ YannT: bon parsing&#160;:)
+ cup_of_tea: du scala?
+ Vry: R4N4R4M4&#160;: une seule variable par ligne, faut pas déconner :p
+ YannT: kotlin
+ cup_of_tea: ah mb
+ Vry: R4N4R4M4, oui j'avance le pointeur à la fin seulement
+ Vry: Exemple pour move&#160;: sscanf(p+5, "%c", &amp;(direction));
+ YannT: val inputs = (0..7).map { input.nextInt() }.toIntArray() :tada:
+ MaTMaT: Bonjour, <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/fb2a848c-61d6-4717-afdd-ed4719ea147e">http://chat.codingame.com/pastebin/fb2a848c-61d6-4717-afdd-ed4719ea147e</a>
+ MaTMaT: pk il fait un lien&#160;?&#160;:)
+ Vry: Flûte ... je pensais avoir trouver une solution pour gérer les silences mais quid de la trace pré-silence ... pfff
+ [CG]Thibaud: c'est automatique quand le message est trop long MaTMaT
+ [CG]Thibaud: commence à compter après la lecture du premier input
+ MaTMaT: ha ok merci
+ MaTMaT: hmm ça change tout&#160;:)
+ R4N4R4M4: Si tu historises tout Vry, la trace pré-silence devrait pas te poser trop de problème
+ R4N4R4M4: Bon allez, c'est bien parti pour SILVER&#160;! :D
+ R4N4R4M4: J'ai juste ajouté les torpedo dans ma détection
+ JBM: avec un plan d'action spécifique?
+ R4N4R4M4: Détection des MOVE, réinitialisation du radar si SILENCE, et détection des TORPEDO, et je torpille sur les cases possibles
+ R4N4R4M4: en privilégiant mes propres silences aussi
+ JBM: ah mais t'es en wood en fait?
+ R4N4R4M4: LOL, non Bronze
+ JBM: bronze sans détection des move?
+ JBM: wow
+ JBM:&#160;:+1:
+ R4N4R4M4: Ah oui, top 20 Bronze avec uniquement la furtivité
+ JBM: ze classe
+ [CG]Thibaud: chaud
+ [CG]Thibaud: gg
+ R4N4R4M4: LOL, c'est du TRON avec le silence en plus :D
+ JBM: ouais enfin faut un peu compter sur l'adversaire pour se pourrir tout seul aussi
+ R4N4R4M4: oui
+ JBM: ce qui est censé marcher de moins en moins quand on monte en ligue
+ R4N4R4M4: eh oui, plus tu montes, moins tu montes :D
+ JBM: un peu comme un sous-marin
+ R4N4R4M4: 61% avec 1.4 points sur le boss, ça devrait passer...
+ R4N4R4M4: très mauvais ratio contre le boss, donc c'est pas certain...
+ JBM: tron a quand même une très grosse map par rapport à ici
+ R4N4R4M4: oui mais dans TRON tu peux pas faire SURFACE pour reprendre ton souffle :D
+ R4N4R4M4: Mince, je perds tous mes matches contres le Boss, ça passe là, ou sinon c'est foutu
+ R4N4R4M4: Bah c'est mort, j'ai plus que .35 d'avance
+ R4N4R4M4: Tant pis, je vais devoir coder mon split()&#160;:(
+ R4N4R4M4: Le Boss me démonte
+ R4N4R4M4: Bon ben tant pis
+ Nagatwin: tires au pif
+ Nagatwin: furtivite + tir au pif ça passe silver
+ R4N4R4M4: Oui, j'essaie de régler l'équilibre entre TORPEDO et SILENCE
+ R4N4R4M4: Mais mes tirs utilisent quand même la détection
+ R4N4R4M4: j'ai pas de poursuite par contre
+ Vry: R4N4R4M4&#160;: le problème c'est que ça risque d'exploser en terme de données à stocker ... parce que pour une trace pre-silence tu peux en avoir treize à considérer après le silence ...
+ R4N4R4M4: Oui, c'est tordu ce jeu :D
+ R4N4R4M4: Et si tu stockait juste les ordres et rejouait tout depuis le début&#160;?
+ R4N4R4M4: *s
+ Vry: À voir ce que ça donne concretement et vu que Nemo fait silence tout le temps ça va être "simple" de voir ce qui se passe
+ R4N4R4M4: Et il fait toujours un silence de 1
+ R4N4R4M4: Ha ha, je crois que j'ai le bon code pour faire monter le Boss&#160;!!! :D
+ Vry: R4N4R4M4&#160;: c'est ce que je fais mais pour savoir si un coup est valide tu dois savoir au est passé le gars avant (trace pre-silence) et si tu veux être exhaustif ça multiplie par 13 les possibilités ...
+ R4N4R4M4: Je pensais utiliser un tableau de trace en plus de mon tableau des positions possibles, et avec les deux infos, et rejouer l'historique en mettant les deux tables à jour
+ R4N4R4M4: Ca fait environ 200 historiques à rejouer, et tu élimines dès que c'est plus possible
+ R4N4R4M4: mais je vois que j'ai pas pensé à tout parce que même jouer l'historique, comme tu dis, c'est pas si évident en fait
+ R4N4R4M4: Ca fait bien en effet 13 traces à prendre en compte
+ R4N4R4M4: On pourrait marquer les traces avec une probabilité...
+ Nagrarok: il vient d'où le 13&#160;?
+ R4N4R4M4:  3 x 12 + 1
+ Nagrarok: euh
+ R4N4R4M4: 3 directions x 4 distances + 1 sur place
+ Nagrarok: ah, 4 pas 12 x)
+ R4N4R4M4: heu oui c'est pas 12
+ Nagrarok: mais si l'adversaire fait SURFACE puis SILENCE, ça fait 4 directions possibles
+ R4N4R4M4: ah oui en effet
+ Bob: c'est pour ça que dans la gestion de son surface j'ai un hisPrevMoves.clear()
+ Zeus_Machine: hello à tous. J'ai un souci tout est en naglais alors qu mon langage est français. Est ce normal&#160;? sinon je me le tape en english
+ Bob: dans la barre de menu à gauche en bas tu as les paramètres
+ Bob: tu peux passer en français
+ Zeus_Machine: oui j'y suis allé
+ Zeus_Machine: il est en français
+ Zeus_Machine: grrrr
+ Bob: sachant que tous les puzzles ne sont pas forcément traduits
+ Zorg1: oui OoC est uniquement en anglais
+ Zeus_Machine: ok ok
+ SeebOmega: Zeus_Machine comme le contest etais pas "prevu" il a pas ete traduit en amglais 
+ YannT: y'a pas de règles en français pour le contest
+ SeebOmega: francais*
+ Bob: personne ne s'est porté volontaire&#160;?
+ Zeus_Machine: ok merci bcp tout le monde
+ Bob: je dois pouvoir m'en charger à l'occasion
+ JBM: Zeus_Machine: je suis sûr que si tu proposes une traduction ils la publieraient
+ SeebOmega: ben j ai pas vu de PR 
+ Bob: comment es ton traduction JBM
+ Zorg1: (et la plupart des puzzles de la communauté aussi sont en anglais)
+ JBM: améliore mon continence Bob
+ R4N4R4M4: Bob, faut juste que tu penses à pas traduire les variables :D
+ Bob: oui ça va ça
+ Bob: je me suis déjà fadé la traduction de coders of the realm&#160;:)
+ R4N4R4M4: Oui, je déconne
+ Bob: bah pas tant que ça j'ai traduit des trucs par erreur :D
+ R4N4R4M4: Ca serait cool sinon&#160;: BOUGER x y TORPILLE :D
+ Bob: bon c'est pas tout ça mais on m'appelle pour (préparer le) déjeuner
+ SeebOmega: tu peux 
+ R4N4R4M4: Ah c'est déjà midi&#160;? on est quel jour au fait&#160;? :D
+ Zorg1: Samedi
+ Bob: mercredi
+ Bob: et il est 8h32
+ YannT:  
+ Bob: on est le 17 septembre 2023
+ Bob: jusqu'ici tout va bien
+ Zorg1: si t'es en Bobéranie du Sud, oui
+ Bob: comme ça je vais pouvoir réfléchir à comment j'utilise la map de mon propre tracking
+ Bob: a priori, choisir la séquence d'actions qui me signale le moins peut être une option intéressante
+ Bob: sur ce, un bon appétit à tous
+ R4N4R4M4: ba
+ Zorg1: bonap'
+ Vry: ba
+ Vry: Fonction récursives comme un bourrin ou cache&#160;?
+ Zorg1: la récursivité c'est mal
+ dbdr: pourquoi, c'est joli souvent?
+ oPyRuSo: y a rien de bourrin dans une fonction récursive...
+ dbdr: ça dépend, fibonacci sans mémo si
+ Haashi: la bonne complexité 2^n
+ Haashi: o/ 
+ dbdr: :yum:
+ Zorg1: ah oui il y a la bonne récursivité et la mauvaise récursivité&#160;;-)
+ dbdr: c'est comme les chasseurs
+ Vry: Et la récursivité sans prendre en compte silence ... :p
+ Vry: C'est en général pas mal, au moins au niveau lisibilité du code&#160;!
+ dbdr: vous connaissez la différence entre un bon et un mauvais torpilleur?
+ Vry: C'est un peu comme le on et le mauvais chasseur&#160;?
+ R4N4R4M4: Le bon torpilleur, il tire, mais c'est un bon torpilleur... :D
+ dbdr: presque. le mauvais torpilleur, il croit savoir où est un sous-marin...
+ dbdr: il tire, il manque, et il révèle sa position
+ dbdr: le bon torpilleur, il croit savoir où est un sous-marin...il tire, et il le coule
+ dbdr: désolé
+ Vry: Mais non, le mauvais torpilleur, il croit savoir où est un sous-marin ... il tire ... et se prend une torpille en pleine poire ... 
+ dbdr: ben si il est dans un sous-marin, il avait raison
+ Vry: Il a tiré sur le sous-marin le plus proche ...
+ dbdr: bonne heurstique si on mesure le hit rate
+ Vry: Bon, la fonction récursive sans silence fonctionne bien ... passons au niveau supérieur&#160;!
+ TidyMaze: Allons-y, Alonso&#160;!
+ Vry: Sinon pendant ce temps mon bot gagner des places ... (ou tout le monde resubmit et y'a des remous) ...
+ Vry: Ah ... le fameux coredump silencieux ...
+ oPyRuSo: voila, fini&#160;! premiere revue du code pour faire plus propre... et comme attendu&#160;:
+ oPyRuSo: ca marche plus :p
+ Vry: Ouf ... les boucles infinie c'est mal&#160;!
+ Vry: Euh comment je peux passer de 3 cases possibles à 125 après un seul silence&#160;??? :fearful:
+ SeebOmega: bug&#160;? 
+ SeebOmega: normalement je devrais passer silver mais l ami vpoulailleau a submit en meme temps et a un bon winrate contre moi&#160;: / 
+ Vry: Je t'ai aidé pourtant je l'ai battu ...
+ Vry: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/443107969">https://www.codingame.com/share-replay/443107969</a>
+ Vry: C'est un peu long mais c'est net
+ SeebOmega: ca passera pas ... 
+ nib: pousse plus fort SeebOmega&#160;!
+ Vry: Dommage&#160;! Ce sera pour la prochaine ...
+ SeebOmega: je vais tenter le sombrero malgache 
+ Vry: Pour passer l'action suivante je faisais (p_action++) en paramètre de la fonction récursive ... gg me! :p
+ Vry: Du coup dans l'appel courant ça foutait un peu le bordel ...
+ Vry: De 3 possibilités à 29 c'est mieux
+ SeebOmega: ah ben jsuis passe mdr
+ SeebOmega: merci a celui qui a pousse xD 
+ Vry: gg
+ Vry: Ça bouge pas mal actuellement, j'ai encore gagné 10 place
+ Vry: s
+ Vry: Me poussez pas à l'insu de mon plein gré svp je ne suis pas prêt&#160;!
+ Vry: J'ai pas de timeout mais c'est limite&#160;: 54.993 ms ...
+ Zorg1: en C&#160;? mais tu fais quoi&#160;? tu calcules un milliard de décimales de pi&#160;?
+ Vry: sans pragma :p
+ Vry: et sans optimisation particulières
+ irmo322: ça prend combien de temps un floodfill en C/C++&#160;?En python c'est un peu moins de 1 ms.
+ irmo322: (sur une map complète)
+ Vry: irmo322&#160;: un seul je pense que ce n'est pas significatif
+ irmo322: J'en ai fait 1000
+ irmo322: et divisé
+ Vry: Sur mon PC&#160;: 1k Flooffill &gt; 2.314 ms
+ R4N4R4M4: Ca le donne mal à la tête, je fais une pause 
+ Vry: Sur CG&#160;: 1k Flooffill &gt; 3.740 ms
+ Vry: Avec cette carte&#160;:
+ Vry: 1k Flooffill &gt; 3.740 ms
+ Vry: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/54cdf290-29ff-4a3a-8227-b15a299ddb2d">http://chat.codingame.com/pastebin/54cdf290-29ff-4a3a-8227-b15a299ddb2d</a>
+ RomanceDawn: c'est 
+ RomanceDawn: étrange
+ Vry: En partant du haut à gauche
+ BlaiseEbuth: Salutations, survivants. Ahoy Automaton2000, AutomatonNN&#160;!
+ Automaton2000: y a un gros bug dans ma fonction
+ RomanceDawn: 15*15 c'est rien 
+ AutomatonNN: de si c'est pas trop compliqué de faire un truc de mon code de contest de contest au final&#160;:)
+ Vry: Avec pragma&#160;: 1k Flooffill &gt; 0.640 ms
+ Vry: C'est cool du coup avec pragma mon bot ne dépasse pas 5ms  :sunglasses:
+ Haashi: Trop fort pragma
+ Vry: Et donc sur une partie complète avec 11 silences mafonction récursive est appelée 29k fois (sachant qu'initialement elle est appelée une fois par case vide à partir de la map initiale)
+ Vry: Ça ne vaut presque pas le coup de faire des sonars car le nombre de possibilités n'explose pas ...
+ Vry: Bon si j'apprends à mon bot à tirer lorsque la zone d'impact d'une torpille couvre une majorité des positions possibles ça devrait le faire.
+ Kernox: Bonjour, est ce que quelqu'un a remarqué un bug sur le puzzle ascii art, sur le test 4&#160;?
+ JBM: il n'y a pas de bug sut le puzzle ascii art, test 4
+ BigUP: hum, non pas de bug sur Ascii art
+ BlaiseEbuth: Non y'a pas de bug, c'est ton code qui a un problème
+ JBM: belle réponse collégiale
+ Kernox: Ok merci
+ Vry: +1
+ fenrir: en même temps, un puzzle ascii art, c'est pas un bug&#160;?
+ BlaiseEbuth: +1
+ JBM: allez ça streame <a rel="nofollow" class="external free" href="https://forum.codingame.com/t/stream-twenty-thousand-loc-under-the-c/168072/7?u=jbm">https://forum.codingame.com/t/stream-twenty-thousand-loc-under-the-c/168072/7?u=jbm</a>
+ TheoreticalCheesecakeOfDoom_5e8b: Hi
+ Vry: Encore ... JBM&#160;:)
+ JBM: encore quoi?
+ Vry: Iledan doit treamer aujourd'hui je crois
+ Vry: Stream&#160;?
+ Zorg1: serial streamer
+ JBM: ah pas vu passer
+ BlaiseEbuth: fix ton discord
+ Vry: Et tien y'a ça aussi sur discord&#160;: Hi everyone&#160;! We are starting a streaming marathon (in french) today at 1pm until tomorrow night, and some CodinGame challenges will be included at some point :slight_smile: Feel free to check it out&#160;!-&gt; <a rel="nofollow" class="external free" href="https://live.h25.io/">https://live.h25.io/</a>
+ Vry: I'll stream Ocean of Code wood-silver from 18:00 GMT+1 tomorrow (Saturday).
+ Vry: Ça c'est Iledan
+ JBM: ah cool
+ JBM: j'y serai
+ Vry: C'est du stream de CoC pour le premier lien ...
+ Zorg1: "16-17h clash of code concours d'algo" :p
+ Zorg1: *contest d'algo
+ JBM: «ælgo»
+ JBM: oops
+ Vry: C'est quand 18:00 GMT+1&#160;?
+ JBM: c'est nous
+ Vry: Ah oui ...
+ Vry: Il est de quel pays Iledan&#160;?
+ Vry: ... avec deux l ...
+ Zorg1: tiens on va pas changé ce soir d'ailleurs&#160;?
+ Vry: Si si si
+ Zorg1: ah c'est ça
+ BlaiseEbuth: de méridien&#160;?
+ Zorg1: ouaip j'ai décidé de déplacé Paris 15 ° à l'est
+ Vry: On perds une heure ...
+ Zorg1: encore un coup du coronavirus ...
+ BlaiseEbuth: Sale bête...
+ Zorg1: Iledan avec deux l il est pas de Norvège&#160;?
+ Vry: bon c'est l'heure du jogging quotidien ... va falloir imprimer le bouzin et sortir ...
+ Zorg1: t'as une imprimante toi
+ Zorg1: moi j'ai l'impression d'être collé à recopier des conjugaisons de verbe
+ Vry: Oui en effet un laser N&amp;B mais à ça suffit ...
+ Vry: Y'a pas une version CoC pour ceux qui doivent le faire à la main&#160;?
+ domak: Vry il est annoncé où le stream Illedan? Rien vu sur le discord...
+ domak: mais j'ai sûrement pas regardé sur le bon channel
+ Vry: Dans #streaming ...
+ Vry: ...&#160;:)
+ Vry: Juste avant le message de dbdr pour JBM
+ fenrir: une petite astuce (mais il faut faire attention que ça ne se voye pas trop): il suffit de ne pas trop coller la date+heure+s ignature de la fin du texte, puis de le couper pour le réutiliser (au moins une fois)
+ domak: yeap je vois
+ YannT: link to stream plz
+ RomanceDawn: ouas j'ai pris 120 place  en wood 2 a force de me faire pushé, je vais peut etre finir en bronze
+ RomanceDawn: vry c'est quoi le truc a jouter pour passer bronze&#160;?
+ Zorg1: l'ordre "GO TO BRONZE"
+ RomanceDawn: :thinking: hum
+ Vry: Rien faut juste move, torpedo et surface 
+ Vry: J'inclue aussi la détection de la postion de l'autre mais juste pour ces trois action
+ RomanceDawn: ok
+ Vry: Et une fois que tu sais où il est tu le marrave
+ domak: Bah quand tu prends des places sans repusher, c'est soit que ta strat est vraiment bonne, soit soit qu'une league a été ouverte...
+ RomanceDawn: :smiley:
+ fenrir: mince, je croyais que c'était "Hulk\nHulk\n"
+ Zorg1: CG évolue ...
+ fenrir: loin est le temps ou WAIT suffisait
+ Zorg1: passer bronze PCR avec un WAIT ... on savait rigoler à l'époque
+ fenrir: dans OCC, sortir de Wood 2, fallait déjà en faire pas mal
+ Zorg1: ouaip j'ai codé énormément de truc dans mes bots bronze
+ YannT: il se maintient bien mon bot
+ YannT: 400 battles depuis hier soir et il tombe pas  :)
+ Nangini: Zorg1 y'avait pas encore les ligues à l'époque de PCR
+ Nangini: c'est arrivé après CSB il me semble non?
+ dbdr: contest sans ligues?
+ dbdr: dur à imaginer
+ Zorg1: oui je parlais du multi
+ Zorg1: qu'ils ont passé en ligue
+ Zorg1: je n'étais pas là lors des contests PCR &amp; CSB
+ Vry: Les ligues c'est vraiment super méga cool, ça permet d'avancer doucement avec à chaque fois un objectif atteignable&#160;! :p
+ Stilgart: dbdr: imagine que tu es en ligue gold dès le début et qu'il n'y a pas de legend
+ dbdr: :scream:
+ <b>**Stilgart essaie de ce souvenir</b></p><p><img src="/a/29054906001010" /> Stilgart: ça colle avec mon ressenti de BTTC
+ Stilgart: PCR je l'ai rage-quit donc ça compte pas
+ Stilgart: et CSB je ne l'ai pas fait&#160;:/
+ Stilgart: (et je suis arrivé juste après TGE... que je n'ai donc pas fait non plus)
+ Stilgart: d'ailleurs, je voulais dire STC et pas PCR
+ dbdr: tiens, j'ai vraiment l'impression quel j'ai bcp plus de mal avec les gens vers #50 qu'avec les gens mieux classés
+ dbdr: ça fait peur
+ dbdr: je me demande si c'est pas qu'ils sont moins conservateurs dans leurs prédictions
+ Stilgart: très possible
+ leojean890: c'est dur de conserver des prédictions longtemps avec les silences ;P
+ Vry: Nan ça va ... :sunglasses:
+ leojean890: hehe;P
+ Vry: [ça se trouve j'ai un super mega bug dans mon code que j'ai pas encore trouvé ...]
+ leojean890: bah certains arrivent à gérer tranquille 7 silences ;P (j'en suis très loin xD)
+ Vry: Et je n'ai pas encore beaucoup de recule, c'est un feature toute neuve ...
+ Vry: Avec Nemo ça se passe bien en tout cas
+ JBM: [CG]Thibaud: take THAT <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/443163095">https://www.codingame.com/share-replay/443163095</a>
+ dbdr: c'est quoi ce début de sub indécent?
+ Neumann: dbdroadToFirstPlace
+ Zorg1: joli
+ dbdr: :O
+ dbdr: je venais de dire que j'avais du mal à passer le milieu :D
+ dbdr: enfin je redescends
+ pb4: dbdr&#160;: idem
+ dbdr: t'as du mal au milieu?
+ dbdr: et hop, 7 defaites de suite
+ pb4: du mal tout est relatif, mes des défaites régulièrement oui
+ pb4: Dans les 10 matchs du début j'ai souvent une défaite vers le 6-8ème
+ dbdr: mon hypothèse c'est qu'ils ignorent allegrement les feintes
+ dbdr: donc si tu bluffes...
+ pb4: uh&#160;?
+ YannT: si t'as confiance en ton submit en fait tu peux juste le laisser grimper tout  seul après
+ pb4: bluff&#160;?
+ YannT: typiquement après un submit je gagne genre 15 places de plus
+ dbdr: silence 0 par ex
+ pb4: On joue au même jeu&#160;? :D
+ YannT: juste en laissant faire
+ pb4: ah oui
+ dbdr: et ils supposent que t'as ps bougé
+ pb4: J'ai viré ça
+ pb4: Maintenant je fais un silence où je bouge maintenant
+ YannT: ceux qui se tirent dessus aussi héhé
+ YannT: ça me met dedans perso
+ Zanbez: On peux changer la couleur de la sortie d'erreur&#160;? Parce que rouge sur noir, ça pique un peu les yeux.
+ pb4: répare to tracking alors :D
+ YannT: non
+ YannT: it's a feature :p
+ dbdr: il faut écrire une extension pour le navigateur
+ Zanbez: Je me pencherai dessus à l'occasion.
+ Zanbez: C'est bon. Pb Résolu en changeant la css.
+ Sorgen: Bonjour! Savez vous si on peut faire move x y | SURFACE?
+ JBM: c'est pas clair
+ JBM: je vois rien qui l'empêche mais le statement le dit pas excplicitement non plus
+ JBM: et si t'essayais juste?
+ bananaMixer: Bonjour les gens&#160;:)Sur Ocean of Code, il y a moyen d'afficher du texte d'une manière ou d'une autre&#160;?
+ YannT: oui on peut
+ YannT: chaque commande, une fois maximum
+ Nagatwin: avec l'output MSG ou avec le canal d'erreur oui
+ YannT: tu combines comme tu veux
+ bananaMixer: Merci Nagatwin&#160;!
+ Nagatwin: y'a beaucoup de va et viens dans le leaderboard YannT, mon code varie facilement entre 20 et 50 sans que je touche
+ Sorgen: Merci JBL et YannT, effectivement je viens de tester
+ Ille-Stream: <a rel="nofollow" class="external free" href="https://www.twitch.tv/codingame">https://www.twitch.tv/codingame</a>
+ YannT: but you already have a bot Ille-Stream :p
+ BlaiseEbuth: Ca smurf grave ici...
+ BlaiseEbuth: Tiens c'est icebox qui joue à utg...
+ JBM: c'est quoi l'invocation CLI/maven magique pour builder un game CG déjà?
+ JBM: mmm mvn test télécharge la moitié d'internet, ça doit être bien parti
+ JBM: ping Stilgart
+ <b>**Vry slaps Stilgart around a bit with a large fishbot</b></p><p><img src="/a/13586498256488" /> Vry: :upside_down:
+ BlaiseEbuth: mvn package
+ JBM: ça c'est pour le publier non
+ JBM: moi je veux juste lancer le referee+pserudoserv http
+ BlaiseEbuth: Bah la plupart des referee dispos sur github te donne cette commande là
+ JBM: oui oui elle existe
+ JBM: mais c'est pas elle que je cherche
+ BlaiseEbuth: mvn exec:java -Dexec.mainClass="com.example.Main"
+ JBM: c'est plus l'idée
+ JBM: mais c'est les classes dans test je crois
+ BlaiseEbuth: Ouai c'est le main dans test
+ JBM: dans mes logs j'ai celle-là qui ressort:mvn exec:exec -Dexec.executable=java -Dexec.args='-cp %classpath;target\test-classes -Dleague.level=2 Main'
+ JBM: mais ça marche pas as is là
+ JBM: il trouve pas le MultiplayerGameRunner
+ domak: Je sais pas si ça va t'aider mais j'ai vu un forum là dessus
+ domak: <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/how-to-run-ocean-of-code-github-project-locally/168041/2">https://www.codingame.com/forum/t/how-to-run-ocean-of-code-github-project-locally/168041/2</a>
+ JBM: ah ça sonne bien merci
+ domak: pas sûr finallement, je vois qu'il run depuis son ide
+ JBM: ah oui mais non il y va par l'IDE T_T
+ JBM: mais c'est complètement l'idée de ce que je cherche
+ JBM: (et ai déjà fait y'a longtemps mon bash s'en souvient plus&#160;:( )
+ domak: t'es sous windows?
+ BlaiseEbuth: J'ai même pas java sur mon pc... :grin:
+ JBM: non
+ domak: le separateur sous linux c'est&#160;:
+ JBM: oui
+ domak: ':'
+ JBM: et /
+ JBM: et $CLASSPATH
+ JBM: mais ça suffit pas
+ domak: ok au temps pour moi 
+ domak: y'a pas de package pour la main class Main?
+ JBM: tu me parles java là
+ domak: t'as main class s'appelle Main
+ JBM: j'imagine
+ domak: donc tu dois avoir un fichier Main.java
+ JBM: oui
+ domak: à la racine des sources
+ JBM: non
+ domak: voilà ça m'étonnais aussi
+ JBM: dans src/tests/java
+ domak: ah bein si alors
+ domak: ah bein non
+ domak: ah ok tu l'as ajouté au cp
+ domak: et il te dit quoi comme erreur
+ JBM: un genre de classloader: not found
+ JBM: tentons avec le bidule copy-dependencies
+ JBM: Exception in thread "main" java.lang.NoClassDefFoundError: com/codingame/gameengine/runner/MultiplayerGameRunner
+ domak: oui il faut que tu prennes toutes les deps, que tu les colles dans un dossier et que l'ajoutes au classpath
+ JBM:&#160;:'(
+ JBM: pourquoi ça peut pas être simple!
+ domak: en fait c'est rare qu'on run une app depuis maven
+ JBM: gnagnagna
+ JBM: si t'as plus simple ça me va
+ JBM: (une UI c'est pas plus simple)
+ domak: non pas comme ça. La plupart du temps on fait une archive qu'on déploie
+ JBM: c'est plus ou moins le contenu de target/ non?
+ domak: oui mais on utilise un plugin assembly qui te créé l'archive
+ domak: mais on doit pouvoir faire le run avec les deps
+ domak: <a rel="nofollow" class="external free" href="http://www.vineetmanohar.com/2009/11/3-ways-to-run-java-main-from-maven/">http://www.vineetmanohar.com/2009/11/3-ways-to-run-java-main-from-maven/</a>
+ domak: le problème c'est que ta class Main est dans src/test
+ domak: donc maven il va pas la voir
+ domak: puisque c'est juste pour les tests
+ domak: donc déplace là dans src/main/java
+ domak: et ça devrait mieux marcher
+ JBM: ce serait très moche
+ domak: bein oui et non
+ domak: tout ce qu'il y a dans src/test/ n'est vu que pour les tests
+ JBM: ben je suis en train de vouloir lancer un test
+ JBM: ça parait quand même légitime
+ domak: bein non les tests c'est du TU avec du junit ou autre
+ domak: donc pas de main
+ JBM: rhaaa
+ JBM: ah!
+ JBM: une invocation qui a marché
+ JBM: mvn exec:exec -Dexec.executable=java -Dexec.args='-cp $CLASSPATH:target/test-classes -Dleague.level=2 Main' donc
+ JBM: ah non pas celle-là
+ JBM: en fait: mvn exec:exec -Dexec.executable=java -Dexec.args='-cp %classpath:./target/test-classes -Dleague.level=2 Main'
+ JBM: donc bien %classpath quand même
+ domak: cool
+ Zorg1: toujours aussi intuitif maven à ce que je vois, quasiment 20 ans que ça dure&#160;;-)
+ BigUP: le pire il y a encore des gens qui utilisent ca&#160;!&#160;;)
+ Zorg1: c'est un "standard de l'industrie" comme on dit et comme un tas de vieilleries incontournables
+ DeVan: Hello
+ domak: bah le truc pas mal quand même c'est la gestion des dépendances.
+ Zorg1: o/
+ DeVan: @JBM, essaye ça&#160;:mvn exec:java -Dexec.mainClass="Main" -Dexec.classpathScope="test"
+ domak: ah bein ils l'on bien nerfé alors
+ domak: parce que j'ai du implémenter la détection dès wood 1
+ JBM: ah bon?
+ JBM: DeVan: je tente ça
+ JBM: DeVan: EXCELLENT, merci! :D
+ DeVan: JBM&#160;: je t'en prie&#160;:) 
+ JBM: faut vraiment que je me note ça qq part
+ BlaiseEbuth: DeVan, t'as pas la même pour windows&#160;?&#160;:)
+ DeVan: BlaiseEbuth: Dans mon git bash sous win ça passe
+ BlaiseEbuth: Ah j'vais essayer.
+ BlaiseEbuth: En te mettant à la racine du projet&#160;?
+ DeVan: tout à fait
+ BlaiseEbuth: Bah j'ai un classnotfound...
+ DeVan: Peut-être la casse&#160;? Quelle classe il t'indique&#160;?
+ BlaiseEbuth: Main
+ DeVan: juste un mvn testça passe&#160;?
+ BlaiseEbuth: Hmm..  No compiler is provided in this environment. Perhaps you are running on a JRE rather than a JDK?
+ domak: faut que tu settes un JAVA_HOME
+ domak: purée j'ai l'impression d'être au boulot...
+ Zorg1: oui ...
+ DeVan: Depuis le confinement/télétravail, je sais plus trop où je suis :sweat_smile:
+ Neumann: Y'a encore des IAs dans le top OOC qui n'utilisent pas de mines&#160;?
+ Neumann: Visiblement pas, j'en trouve aucune dans le top 3
+ Neumann: 30
+ Vry: Attends j'arrive ... nan je déconne ... (pour les mines ...)
+ Vry: Les mines c'est un peu comme le sonar mais en plus méchant ...
+ domak: je sais pas moi je suis dans le top 80 et j'en vois pas...
+ JBM: DeVan: ah, alors étrangement avec ton invocation ça compile et lance le match, mais le serveur web répond pas ou mal
+ domak: ah purée, juste derrière Bob... j'y arriverai un jour,j'y arriverai
+ BlaiseEbuth: Effectivement, j'ai aussi une game qui se lance, mais j'accède pas au serveur
+ Vry: Finalement Illedan arrive à passer silver en utilisant les torpilles comme un sonar ...
+ domak: oui ça marche bien
+ domak: mais c'est un petit sonar
+ Vry: Joli combat&#160;: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/443218416">https://www.codingame.com/share-replay/443218416</a>
+ Zorg1: pourquoi tu fais surface&#160;?
+ Vry: C'est un truc que je dois corriger ... comme il est sur ma trace mon bot considère qu'il ne peut plus approcher de lui ... du coup il reset sa trace ...
+ Stilgart: tiens, ça défile en voiture aujourd'hui...
+ Vry: Un mariage&#160;?
+ Stilgart: non, la fête de 20h
+ Stilgart: mais c'était à mi-chemin entre un mariage et une victoire de l'équipe de France
+ R4N4R4M4: Je reviens de ma pause... Et que vois-je&#160;? Je suis passé&#160;! :D
+ Vry: Ah Ok
+ R4N4R4M4: Merci à ceux qui m'ont poussé
+ Swagboy: Wowowow
+ Swagboy: Mon code remarche après une après-midi d'encapsulation, héritage et polymorphismes
+ leojean890: y'en a qui codent propre ici&#160;?!:P
+ leojean890: =&gt; Swagboy^^
+ Vry: Oui moi ... en C :p
+ R4N4R4M4: Oui, on porte des gants jetables et on désinfecte le clavier régulièrement :D
+ leojean890: par contre est-ce le plus performant de faire de l'objet comme ça&#160;?:P
+ leojean890: hehe ouais avec le corona ^^
+ Swagboy: leojean890 pour un mois de contest il vaut mieux&#160;!
+ leojean890: moi si je codais en pro comme dans ce contest je me ferais allumer :P
+ R4N4R4M4: Ca dépend, un mois de code sale, ça peut être marrant aussi
+ Swagboy: Avec les flags d'optimisations, un code propre ne ralentit pas trop
+ leojean890: mais c'est bien de mieux s'y retrouver avec un code propre^^
+ leojean890: btw R4N4R4M4 je me souviens de ton pseudo, t'avais fait une IA stylée sur codebusters dans les premiers je crois&#160;?:P
+ Swagboy: R4N4R4M4 oui, il devrait y avoir une mention du jury pour ça
+ leojean890: j'aime bien les premiers dans CB qui poussent les fantomes dans leur base ;P
+ MrTimber: Salut les devs PHP, si ça vous intéresse, j'ai fait un projet qui permet de coder en utilisant différents fichiers sources, avec un petit outil qui combine le tout en un seul fichier pour la synchro avec Coding Game&#160;: <a rel="nofollow" class="external free" href="https://github.com/MrTimber/OceanOfCodePHP">https://github.com/MrTimber/OceanOfCodePHP</a>
+ Vry: Neumann, tu es streamé en grand ...
+ fenrir: est-ce que quelqu'un sait s'il y a une IA qui spam les silences en argent&#160;?
+ R4N4R4M4: leojean890, je sais pas si mon code était stylé sur CB, mais je me souviens que j'avais dépassé la limite de taille...
+ oPyRuSo: @Fenrir&#160;: j'en ai vu au moins 2
+ Neumann: Vry&#160;?
+ leojean890: en argent plein de gens spamment les silences;P
+ Swagboy: c-à-d fenrir? Qui charge tout le temps les silences ou qui ne le garde jamais en réserve?
+ Vry: Neumann dans le stream d'Illedan
+ fenrir: Swagboy: qui en font beaucoup (qui déclenche)
+ Vry: Il a pris ton bot dans l'IDE
+ leojean890: @R4N4R4M4 ah ouais t'as écrit combien de lignes&#160;?:P Bah moi j'ai pas fait le contest CB je l'ai fait en "combat de bots" en décembre&#160;;) je suis en league or mais j'ai regardé les premières IAs de légende anyway
+ R4N4R4M4: 2491 lignes, 99976 octets :D
+ leojean890: ah ouais btw mon code de ocean of code fait deja 1800 lignes et 83 octets sur mon ordi va falloir que je nettoie ça très rapidement :O
+ leojean890: 83 ko*
+ Zorg1: c'est énorme
+ Swagboy: C'est 100ko la limite en contest?
+ BlaiseEbuth: JBM, tu arrives à accéder au serveur finalement&#160;? Moi j'me tape un accès refusé...
+ R4N4R4M4: Oui Swagboy
+ Swagboy: C'est peu tout de même, ça peut arriver vite en 1 mois
+ R4N4R4M4: Je crois que je vais devoir tout réécrire, ma structure est naze
+ leojean890: ouais en 1 mois ça limite je pense
+ Malterin: J'ai ce message qui revient dans Code à la Mode, un indice&#160;?&#160;:(
+ Malterin: timeout (deactivating!)
+ Malterin: Merci d'avance&#160;:)
+ fenrir: Malterin: ton code prend trop de temps sur le tour où tu timeout
+ Malterin: Ca marche, merci&#160;!
+ leojean890: time des parties de ton code pour trouver ce qui est lent?
+ Malterin: Je crois qu'en fait il y a des tours ou je ne fais aucune action
+ Malterin: Je vais tenter ça plutôt, je n'ai pas fait de pâtés performancogènes :D
+ fenrir: effectivement si tu n'écrit aucune action ça va faire pareil
+ Malterin: C'était ça&#160;! Merci à tous, je retourne pleurer du sang :P
+ Vry: Je suis d'accord fenrir ...&#160;!
+ Vry: Contre Nemo (avec pragma) j'ai max 5ms de temps de réponse ...
+ Vry: Par contre en local, mon bot part en sucette  ... lorsqu'il veut faire un silence ...
+ Swagboy: Tu as une arène locale Vry&#160;?
+ Vry: Non, j'affiche les input sur stderr et je les file à mon bot
+ Swagboy: ah oui sympa pour le profiling
+ Vry: Mon bot n'a pas de random ...&#160;:)
+ ThomasNicoullaud: Neumann tu as mal vu
+ ThomasNicoullaud: Skril top 20 ne fait pas de mine encore
+ ThomasNicoullaud: gros potentiel pour lui
+ Neumann: Ah
+ Swagboy: Je voulais dire profiling valgrind etc. Vry!
+ ThomasNicoullaud: mais il abuse du sonar
+ Skril: Pas de mines pour l'instant, non&#160;:-)
+ Neumann: Une simu&#160;?
+ Skril: nope
+ ThomasNicoullaud: bcp de sonar dans les bon secteurs
+ ThomasNicoullaud: il converge très vite
+ fenrir: egaetan aussi non&#160;?
+ fenrir: ah j'ai rien dit
+ Skril: (enfin tout dépend de ce que l'on appelle simu&#160;:-))
+ Vry: Swagboy&#160;: pas encore besoin de profiler pour l'instant&#160;:)
+ Swagboy: Oh oui, à l'avenir j'entendais&#160;;)
+ Stilgart: on est d'accord que FDP c'est fils de p...&#160;?
+ Vry: Plutôt oui&#160;?
+ Stilgart: pour tuer un clash
+ Stilgart: tiens, grâce à l'urban dict, je sais que l'abréviation marche aussi en portugais&#160;:)
+ Vry: Code Jam  Friday, April 3 @ 23:00 UTC
+ oPyRuSo: FDP, c'est pas un partie politique d'allemagne&#160;?
+ Zorg1: ah le fameux "GaussFdP"
+ Vry: Mon bot SILENCE à travers les îles et son propre chemin ...
+ YannT:  c'est balot
+ Zorg1: il croyait que le referee ne le voyait pas non plus ...
+ Zorg1: Automaton2000, une idée&#160;?
+ Automaton2000: je l'ai toujours pas fait
+ Vry: forcément au lieu d'arrêter la boucle je fais continue ... et de l'autre côté il arrive quand à trouver une case plus proche il la prend ...
+ Vry: Ouf mes calculs du silence adverse ne sont pas foireux ...
+ Vry: Ah enfin une victoire contre Illedan
+ Vry: Et sans faire surface bêtement, c'est bon ça&#160;!
+ Vry: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/443254010">https://www.codingame.com/share-replay/443254010</a>
+ Zorg1: nice
+ TidyMaze: hier meme heure&#160;: facile le BFS, du premier coupaujourd'hui&#160;: en fait il marche pas du tout
+ Zorg1: :D
+ Vry: Bon j'ai trouvé un autre bug maintenant ... le gars tire une torpille n'imp et ça fout en l'air ma détection ...
+ TidyMaze: c'est possible de tirer une torpille invalide&#160;?&#160;:/
+ TidyMaze: et le suivant tu te manges pas un Surface en input&#160;?
+ Nagrarok: par définition, non
+ Nagrarok: ah x)
+ Nagrarok: je crois que Surface c'est juste quand tu n'as aucune action valide  ?
+ TidyMaze: &gt; par définition, non
+ Nagrarok: les actions invalides de l'adversaire n'arrivent pas dans ton input de ses coups
+ Nagrarok: si c'était la question ^^
+ Zorg1: pas mal y ont pensé de tromper l'adversaire avec une torpille invalide ...
+ Vry: Le gars tire sans savoir ou je suis ...
+ Vry: ... mais mon code n'aime pas trop&#160;!
+ Nagrarok: ton code se révolte contre ce manque de fair play
+ leojean890: bon, j'arrive bien à détecter où sont les adversaires quand ils posent leurs mines (les loc approximatives des mines) jusqu'à N silences MAIS quand j'ajoute des checks sur les 4 locs possibles de mines (E, N, W, S) je perds qd même du winrate, c'est balo:O
+ leojean890: (checks pour éviter ces cases)
+ leojean890: je crois qu'il faut que je revoie les argus pour choisir où aller et mieux les pondérer ;P
+ Vry: C'est juste un MOVE S qui foire ...
+ Stilgart: Automaton2000: fix ta idée
+ Automaton2000: et c'est pas trop mal
+ Stilgart: hum... merci leojean890
+ Stilgart: c'est sans doute pas volontaire, mais tu viens de me donner une idée d'amélioration
+ leojean890: hehe
+ leojean890: mais le fait qu'on sache pas précisément où l'adv pose la mine (E S N W) ça complique vraiment la tâche ;P
+ Zorg1: c'est un peu le but ...
+ leojean890: yeah:P
+ leojean890: comme les silences ^^
+ leojean890: faut bien qu'il y ait challenge ..
+ ThomasNicoullaud: il y a que 1000 personnes ou on voit pas les autres&#160;?
+ Vry: Je crois savoir qu'il y a une limite à 1000&#160;?
+ ThomasNicoullaud: abon&#160;?
+ ThomasNicoullaud: oO
+ ThomasNicoullaud: sur l'affichage rassure moi
+ leojean890: tu parles de quoi&#160;? 1000 qui ont soumis leur code&#160;?
+ ThomasNicoullaud: oui
+ Vry: À la louche ça dépasse 1000&#160;: 266+244+347+245
+ leojean890: non il y a plus de 1000 j'ai vu tout à l'heure 
+ JBM: BlaiseEbuth: oui, mais avec ma ligne de commande seulement
+ Aveuh: Bonsoir
+ JBM: soiiiiiiiiiiir
+ Stilgart: ThomasNicoullaud: il y a un cap à 1000 dans l'API (si tu fais joujou avec l'API)
+ BlaiseEbuth: JBM: Pareil, mais le navigateur veux pas...
+ Vry: Une chasse au bug rien que pour vous ... :D
+ Vry: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/2668e2f8-1902-4575-89b2-fb647093ecd0">http://chat.codingame.com/pastebin/2668e2f8-1902-4575-89b2-fb647093ecd0</a>
+ Vry: wrong paste ...
+ Vry: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/ea761a69-c02d-4ebc-8b19-9cac171b35ee">http://chat.codingame.com/pastebin/ea761a69-c02d-4ebc-8b19-9cac171b35ee</a>
+ BlaiseEbuth: On a le droit de dire que c'est crade&#160;? :grin:
+ Zorg1: c'est du C tu nous apprend rien
+ Vry: Oui ... mais y'a un bug quand même
+ BlaiseEbuth: c'est quoi d&#160;?
+ Vry: direction&#160;: 0=N, 1=E, ...
+ Zorg1: c'est lent les submit&#160;:(
+ Zorg1: (oui je sais c'est super original comme râlerie)
+ Vry: En gros je mets à jour jusqu'à quatre cases dans une direction (tan que je suis dans l'eau) ... et ensuite je restaure dans le while ... sauf que si je sors avec break j'ai un décalage de un et je mets un peu d'eau là où il y avait de la terre ...
+ JBM: BlaiseEbuth: ah, moi il veut bien avec l'ancienne ligne
+ BlaiseEbuth: Qui est&#160;?
+ JBM: mvn exec:exec -Dexec.executable=java -Dexec.args='-cp %classpath:./target/test-classes -Dleague.level=2 Main'
+ BlaiseEbuth: J'vais tester
+ dbdr: Zorg1, non mais!
+ BlaiseEbuth: Vry: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/048adf73-b2cb-465a-900f-5af5fe8903bd">http://chat.codingame.com/pastebin/048adf73-b2cb-465a-900f-5af5fe8903bd</a>
+ BlaiseEbuth: y manque un crochet...
+ Vry: Non, en fait il faut déjà reprendre l'offset précédent si la boucle n'est pas allée au terme (4).
+ Zorg1: dbdr&#160;: je m'attendais pas à monter si haut :thinking:
+ dbdr: tu vas dire ça tout le contest?
+ Vry: si la boucle sort avec i = 2 en fait seule une case du tableau est modifiée ...
+ Zorg1: dbdr&#160;: :D
+ dbdr: je te le souhaite remarque&#160;;)
+ Vry: Fait pas l'innocent Zorg1
+ YannT: mince je vais devoir bosser pour repasser devant Zorg1
+ YannT:&#160;;)
+ Zorg1: :innocent:
+ dbdr: tout à l'heure j'ai ey un début de submit en état de grace, monté #1 à 30%&#160;:)
+ JBM: c'était quoi la recette d'Illedan pour passer silver, finalement?
+ dbdr: backdoor
+ dbdr: GOGO SILVER
+ JBM: moi ce sera pas ce soir
+ JBM: j'ai encore un peu de nettoyage à faire
+ BlaiseEbuth: J'pige pas ton histoire Vry...
+ Vry: Illedan il torpille tout ce qui bouge et utilise les dommages causés pour localiser l'adversaire
+ Vry: BlaiseEbuth, c'est pas grave&#160;!
+ JBM: mmm c'est pas si loin de ce que je fais
+ Vry: Mais en gros si le for sort après trois tour j'ai décalé trois fois mon pointeur mais mis à jour deux fois la carte ... le while va faire trois "annulation" ...
+ JBM: mais je lui ai vu passer un floodfill pour son déplacement
+ Vry: JBM il analyse des dommages subit 
+ Vry: Mais j'ai pas regardé sérieusement sont stream
+ JBM: oui j'ai lu
+ JBM: je fais pas encore, mais c'est peanuts
+ Vry: 9/10 en démarrage c'et cool pour Bronze ...
+ Vry: *c'est
+ Vry: Je veux faire dodo moi&#160;!
+ dbdr: me dit pas qu'un floodfill te fait peur JBM
+ JBM: tu feras dodo dans un mois
+ JBM: oh non ça ça va dbdr
+ Vry: 15/16 ...
+ JBM: je serais plus bloqué par le fait que ça fait rustique en comparaison de la pureté de ce que je vois derrière
+ Vry: Vry on fire! :fire:
+ JBM: mais je pense que j'arriverais à en coder un de passage oui
+ TidyMaze: timeouts ... je sais pas si c'est une recursion infinie ou un probleme d'optim&#160;:/
+ dbdr: tu vois quoi derriere?
+ Vry: Je kiffe mon submit&#160;!
+ Vry: :p
+ Vry: #1 à 11%
+ JBM: un mix quantique entre les points d'articulation de tron et la gestion de cession d'information
+ JBM: bon twitch, merde, tu vas me le lacher mon mp4
+ JBM: pas que ça à attendre moi
+ Zorg1: gg vry
+ JBM: dbdr: toi qui flottes là-haut, c'est quoi la meta et les strats du top?
+ dbdr: pas mal de mines
+ Zorg1: ah ça oui
+ JBM: avec usage pour? plutôt tuer ou plutôt aider à localiser?
+ dbdr: mais franchement je suis pas ça de tres pres
+ dbdr: j'essaye surtout de poser les bases
+ JBM: ouais, comme moi en ce moment
+ JBM: et cet aprèm
+ TidyMaze: "les bases" ... 8eme, de bonnes bases
+ dbdr: ben c'est un peux deux en un
+ JBM: absolument
+ dbdr: si t'apprends qqch c'est que les deux étaient possibles
+ dbdr: sinon pour tuer c'est bien aussi
+ Vry: JBM moi je pense que je vais passer Silver assez facilement avec un détection de l'adversaire au poile, le sonar sur la zone la plus chargée en prédiction, et torpille mais uniquement si je connais la case du sous-marin sinon je ne tire pas
+ JBM: ah pardon j'étais sur poser les bases
+ JBM: mmmm ok merci Vry
+ Vry: zéro mine
+ JBM: après mon nettoyage je pense que je vais juste peaufiner la partie torpille de la détection
+ Vry: +3 sur le boss :sunglasses:
+ JBM: puis floodfill, puisque c'est le rite de passage
+ JBM: une affaire qui roule
+ TidyMaze: gg Vry
+ JBM: tu vas enfin pouvoir souffler
+ JBM: TidyMaze: alors toi aussi tu t'es mis au haskell finalement?
+ TidyMaze: ouaip, ça fait un moment que j'hésitais à sauter le pas, étant plus expérimenté en scala. Le passage s'est bien fait&#160;!
+ Vry: Par exemple&#160;: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/443278187">https://www.codingame.com/share-replay/443278187</a>
+ Zorg1: en fait dans un combat à la torpille, avoir préalablement blessé l'adversaire avec une mine ça peut servir&#160;: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/443273090">https://www.codingame.com/replay/443273090</a>
+ TidyMaze: Et pi ton stream m'a motivé
+ Vry: Quand je fais un grand silence c'est que j'ai repéré le gars
+ JBM: ah, vla mon mp
+ JBM: 4
+ Azkellas: yay wood 1
+ JBM: gg TidyMaze, continue sur la bonne voie!
+ JBM: gg Azkellas
+ Vry: gg Azkellas
+ TidyMaze: on est d'accord que Haskell ne fait pas de la memoization par défaut&#160;? Je sais pas pourquoi pendant longtemps je croyais que si
+ JBM: pas vraiment
+ JBM: par contre les CAF (les constantes globales) peuvent
+ JBM: si bien formées pour
+ TidyMaze: hmm et si tu faisres = fib(1) + fib(1)&#160;?
+ dbdr: tu confondais avez lazy TidyMaze?
+ JBM: et t'as de multiples formes de partage de données qui peuvent s'apparenter à de la mémo
+ leojean890: c'est chaud de tester si de petits improvements sont bien ou non en moyenne, le système de ranking est pas précis. Faut analyser les parties et se faire un avis, mais c'est pas précis non plus ;p je comprends ceux qui codent une arène locale et jouent suffisamment de parties pour avoir de vraies stats ;o
+ TidyMaze: dbdr nope, ça c'est cool ^^
+ JBM: dans ce cas la spec garantit rien, mais sauf erreur le compilo a le droit de l'optimiser
+ dbdr:&#160;:+1:
+ TidyMaze: ok JBM&#160;:)
+ dbdr: leojean890: une arene locale c'est pas idéal non plus, c'est biaisé
+ leojean890: ah oui biaisé car tu joues contre toi même ^^' ça fait un algo spécialisé j'imagine
+ dbdr: bienvenue dans le monde réél, à un niveau rien n'est simple
+ dbdr: voila
+ leojean890: en fait faut faire que des improvements majeurs comme ça tu vois que ça gagne^^
+ leojean890: c'est les petits choix qui sont pas évidents à faire
+ Vry: Mais c'est dur Silver ... mon bot souffre ...
+ Vry: Oh un Merome ...
+ JBM: reviens parmis nous en bronze
+ Zorg1: je croyais que t'étais passé #1 bronze devant le boss&#160;?
+ Vry: J'étais pourtant à presque +4 au dessus du Boss Bronze
+ TidyMaze: au nom d'Haskell, suis moi JBM, on est bien
+ Vry: Oui Zorg1, du coup je suis promu ...
+ Zorg1: gg vry welcome to silver&#160;;-)
+ JBM: j'arrive, j'arrive
+ leojean890: welcome&#160;:)
+ JBM: mais je nettoie avant
+ leojean890: et ouais c'est pas simple silver quand c'est la top league du moment :o
+ Vry: Et je pense que le fait que mon bot ne tire qu'il a la postion exacte n'aide pas ...
+ leojean890: sachant que les premiers ont de super détecteurs de positions
+ Vry: Il est bien le mien je pense, mais c'est tout le reste que je dois améliorer du coup ... pose de mines, tir de torpilles dans un groupe de possibilités, ... 
+ Vry: Oh, c'est cool ça, le premier actuel affiche le nombre de cases pour lui et pour moi comme ça je peux vérifier mon détecteur ... et il est plutôt bon ... par contre le reste est à revoir (mais ce n'est pas une surprise).
+ TidyMaze: vous avez un algo solide pour les deplacements sans attaque&#160;?Du type chemin hamiltonien ou voronoi + maxmax
+ Vry: Non&#160;: ff sur les cases adjacentes dispo. et choix de la case avec le plus grand nombres de cases libre
+ Vry: Au début rien n'est fermé donc c'est en fonction de l'ordre de traitement des directions
+ Vry: Comparaison détecteurs&#160;: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/443281739">https://www.codingame.com/share-replay/443281739</a>
+ Vry: Ça me fait penser que je me déplace sans tenir compte de ma détectabilité ...
+ Stilgart: TidyMaze: c'est pas du voronoi, c'est du floodfill
+ Zorg1: hihi
+ <b>**Stilgart adore se lancer dans des combats perdus</b></p><p><img src="/a/2654133392410" /> TidyMaze: yes Stilgart 
+ TidyMaze: (coucou, grand haskelliste)
+ Stilgart: sinon j'avais un algo, mais ça marche mieux en le commentant donc je suis mal placé pour parler&#160;:)
+ Stilgart: c'est dabino le grand haskelliste
+ TidyMaze: j'ai pas dit "le plus grand"
+ Stilgart: c'est vrai
+ Stilgart: mais tu étais devant moi aussi, non&#160;?
+ TidyMaze: nope, je suis vers ~190
+ Stilgart: ha, c'était devant moi avant mon push de jeudi
+ RomanceDawn: le chemin hamiltonien c'est du np complet quand même
+ RomanceDawn: ah mince
+ Stilgart: (celui du... "bon, et si on assurait la silver")
+ Azkellas: yay bronze
+ RomanceDawn: gg
+ Stilgart: go go go silver Azkellas
+ Azkellas: ahah je pense pas quand même :D
+ Azkellas: j'ai une ia bien dégueue
+ Stilgart: RomanceDawn: surtout, ça fait pas trop de sens
+ Azkellas: mais du coup les boss ont bien dur être nerfs, j'ai pas rencontré trop de résistance, c'est cool
+ TidyMaze: je repasserai devant une fois ma super feature™ implémentée. Les mines. Ou le sonar. Ou le silence malin
+ Stilgart: RomanceDawn: entre faire surface et éviter une mine, je préfère ne perdre qu'un pv
+ Stilgart: du coup, ça diminue un peu l'intérêt d'un chemin hamiltonien parfait
+ JBM: bon allez, c'est reparti pour un tour d'édition Haskell idempotente: <a rel="nofollow" class="external free" href="https://www.twitch.tv/cg_jbm/">https://www.twitch.tv/cg_jbm/</a>
+ RomanceDawn: ah oui 
+ TidyMaze: super JBM&#160;! Tu prends un vrai IDE cette fois&#160;? Ton nano est un peu bizarre
+ JBM: mon nano?
+ JBM: ahem
+ JBM: t'as mieux à suggérer?
+ TidyMaze: Intellij
+ TidyMaze: il le gere a la perfection
+ Zorg1: nano&#160;? t'as abandonné emacs&#160;?
+ Stilgart: j'arrive, et direct il demande de pas troller
+ <b>**Stilgart ne sait pas quoi en penser</b></p><p><a href="/wiki/File:Default_avatar.png" class="image"><img alt="Default avatar.png" src="/images/5/56/Default_avatar.png" decoding="async" width="50" height="50" /></a> JBM: on va faire une NPE pour toi
+ Stilgart: TidyMaze: intellij c'est en java, on est d'accord&#160;?
+ YannT: j'adore intellij
+ Zorg1: ils l'ont adapté à d'autres langages (comme eclipse d'ailleurs)
+ YannT: et ça  peut gérer quasi tous les languages
+ Stilgart: nan mais code en java =&gt; dans 1 an ça n'existe plus
+ Azkellas: Bon je dis ça mais je suis #10 à 22%
+ Zorg1: ça fait 10 ans qu'on le dit, Stilgart&#160;;-)
+ RomanceDawn: oui carréméent nerf les boss
+ Stilgart: (accessoirement, chez moi c'est plutôt "depuis 2008 ça existe plus")
+ RomanceDawn: je passe de 120eme à 2éme sans rien toucher depuis 2 jours 
+ Zorg1: nice
+ Stilgart: Zorg1: c'est ce que dit la licence quand je mets (plus en fait) à jour le java de mon windows
+ Stilgart: bon, sinon je vous rassure, même moi je sais pas comment ça marche les patterns en haskell
+ TidyMaze: ça marche très bien java ^^le gros probleme c'est la chauffe de la JVM
+ TidyMaze: pour un IDE c'est un bon choix imho
+ Stilgart: mouais...
+ Stilgart: sinon, JBM a expliqué pourquoi "MkPos (Int,Int)"
+ Stilgart: alors que clairement, j'aurais envie de faire ça pour MkPos !Int !Int
+ Stilgart:&#160;?
+ JBM: pour limiter son usage
+ JBM: il est Dangereux
+ Azkellas: dommage que le boss me batte, je vais stabiliser #2 sur le même submit
+ Stilgart: faut que je regarde la vidéo de 4h qui vient avant, je crois&#160;:/
+ Stilgart: ok, maintenant je vois ce que tu essaies de faire
+ RomanceDawn: yé bronze :ok_hand:
+ Vry: T'es loin Azkellas&#160;?
+ Stilgart: gg
+ dbdr: gg RomanceDawn
+ Azkellas: 0.95 et il m'a mis 9-0 :D
+ Azkellas: gg
+ Shaftw: gg
+ Azkellas: je pensais pas que mon ia irait si haut de toute façon, elle fait rien encore
+ R4N4R4M4: T'en es où Azkellas&#160;?
+ TidyMaze: "spent 2.0e-4 ms"ah oui, rapide
+ Azkellas: je viens de commencer, je suis #2 bronze avec un bfs+silence
+ Azkellas: et toi&#160;?
+ R4N4R4M4: J'étais comme toi en début d'après-midi et j'ai été poussé en Silver, du coup, j'essaie de sortir du fond..
+ R4N4R4M4: Mais j'ai commencé jeudi
+ Azkellas: D'acc :D
+ Azkellas: Je pense pas me faire push par contre, j'ai un point de moins que le boss
+ Vry: R4N4R4M4, fait gaffe je ne suis pas très loin derrière toi ... :nerd:
+ Fangel: moi ce qui m a fait faire un gros bond en avant c est de corriger tout les bugs de tracking
+ Fangel: entre les mouvements, les silence, les auto-degâts.... C'est dur d'avoir un code qui couvre tout proprement.
+ Vry: +1 Fangel moi le dernier c'était la imulation du silence qui foirait la map
+ R4N4R4M4: Vry, du coup ça signifie que je viens de te doubler, parce que j'étais au fond de silver avant mon push
+ Fangel: le silence il faut comment par faire une carte de tous les dégâts arrivé avant le silence de l'autre
+ Fangel: tu peux ensuite éliminer déjà toutes les cases où le nombre de dégâts est supérieur à la perte de vie de l'autre.
+ Vry: Pour l'instant j'ignore totalement les dégats ... c'est dans la @todo
+ Fangel: Puis seulement tu appliques le silence.
+ R4N4R4M4: C'est pas plus simple de mémoriser juste les coordonnées du dernier tir&#160;?
+ leojean890: coordonnées du dernier tir ouais c'est mieux
+ Fangel: Après si l'autre ne génère pas de dégâts après le silence, tu transforme l'inégalité en égalité.
+ leojean890: car si tu veux analyser les dégats faits à l'autre ..
+ leojean890: attention il se tire ptet dessus
+ Fangel: Disons qu'un joueur malin peut se blesser pour t'induire en erreur... En plus tu peux faire péter une miner et une torpille au même tour.
+ leojean890: exact!
+ Fangel: moi je fais une carte des dégâts qui suit le mouvement de l'autre.
+ R4N4R4M4: Si il se blesse à chaque fois que tu tires, ben t'as juste à tirer 6 fois :D
+ leojean890: et comment tu gères un mec qui fait un silence tous les 7 tours&#160;?:P
+ Vry: J'ai pas encore pris le temps de me pencher sur les dégâts ... je vais déjà commencer par les mines&#160;!
+ Stilgart: en faisant moins surface que lui&#160;?
+ Stilgart: +leojean890:
+ Vry: leojean890&#160;: super bien :p Je balance du sonar à la pelle
+ R4N4R4M4: Non pas les mines Vry&#160;! Tu vas repasser devant moi 
+ Fangel: le problème c est que si tu élimines la case où il est de tes cases potentielles, c'est foutu après tu fais n'improte quoi.
+ leojean890: car tu peux les simuler mais au bout d'un moment ça explose niveau complexité :P
+ leojean890: ouais sonar par ex:P
+ leojean890: mais il peut faire des silence 0 ou 1 donc pas trop faire surface^^
+ Vry: leojean890, chez moi ça passe, je n'ai pas encore vu de timeout ...
+ R4N4R4M4: Y a trop d'actions possibles, je suis perdu :D
+ leojean890: Vry tu simules 7 silences précisément&#160;?:P
+ R4N4R4M4: Faut que je fasse une eval globale
+ Fangel: Pour le silence: je fais une carte relative de sa position par rapport à sa postion initiale. Ca permet de voir quelles direction/distance sont possible.
+ leojean890: genre tas des listes de positions carrées&#160;?;P
+ leojean890: t'as*
+ Vry: leojean890&#160;: je simule tous les silence, à chaque tour je repars du début avec une fonction recursive mais ça n'explose pas autant au final ...
+ Fangel: typiquement s'il vient de faire N, il est pas allé au sud avec son silence
+ leojean890: ouais mais t'as besoin des chemins pour élaguer le fait qu'il puisse pas passer 2 fos au même endroit ;P
+ leojean890: oui clairement&#160;:)
+ Fangel: tu fais sur une grille 2*widthx 2*height
+ Vry: Oui mais pour chaque case libre au début de la partie j'applique les actions, si c'est un silence ça peut faire N appels récursifs en bonus mais ça passe
+ leojean890: mais ton calcul il tient 7 silences et t'as un élagage optima des positions&#160;?^^
+ Fangel: tu le replaces au centre à chaque fois qu'il fait surface ou silence
+ Vry: leojean890&#160;: oui 
+ Vry: Je ne tiens pas compte des dégâts mais pour tout le reste c'est bon, j'ai les mêmes résultats que mchl12
+ leojean890: mais ouais vu que tu balances du sonar à la pelle je comprends ;P
+ leojean890: ah nice alors&#160;:)
+ Vry: Le sonar aide mais même sans ça passait
+ Vry: j'étais à +-5ms par tour sans 
+ leojean890: je simule tous les silence, à chaque tour je repars du début avec une fonction recursive mais ça n'explose pas autant au final =&gt; moi pareil mais ça explose vite^^
+ Vry: Le boss Bronze fait un silence tout les 6 tours par exemple ...
+ Fangel: mais vous ne faîtes pas juste une map des cases potentielles&#160;?
+ Vry: Si, si j'arrive à la fin des action je note la case d'arrivée
+ Stilgart: JBM me fait peur avec son refactoring là
+ Stilgart: j'ai pas aimé le "\p -&gt; ... pos" remplacé par juste movable
+ leojean890: oui a la fin j'ai un ensemble de cases potentielles
+ Stilgart: ça sent l'introduction de bug&#160;;(
+ leojean890: mais pour n'en avoir plus qu'une ça peut être long
+ leojean890: parfois
+ JBM: arg j'ai fait ça?
+ Stilgart: j'ai pas eu le temps de voir&#160;:(
+ Stilgart: après, tu as peut-etre viré un bug aussi
+ Stilgart: reachable&#160;?
+ Stilgart: hahaha, oui, maintenant je vois le bug
+ Stilgart: JBM: cela dit, ton run est moins bon là
+ JBM: les aléas
+ Stilgart: direct tu checkes la défaite contre tibo&#160;:)
+ Stilgart: si c'est pas fait, balance un SURFACE quand tu n'as plus de move valide
+ Stilgart: ton crash là il va finir par faire très mal
+ JBM: c'est rapport à l'épisode 1
+ Stilgart: j'ai vu dbdr te dire ça oui
+ Stilgart: mais j'ai pas vu assez loin pour voir ta réponse
+ Nagrarok: mon bot commence à être pas dégueu :D
+ Stilgart: hum... mais tu fais des sufaces... donc pourquoi tu perds avec 3pv dans un des replays&#160;?
+ JBM: lequel?
+ Stilgart: un où tu finis en bas à droite avec 3pv ...
+ Stilgart: par contre, tu as effectivement au moins deux endroits avec un "pos" qui fini par devenir "p" quand tu passes à movable
+ Stilgart: ha... c'est ça que tu appelles timeout
+ TidyMaze: tu saurais me dire Stilgart si c'est rentable de passer de [(k,a)] à Data.Map k apour des collections de taille ~ 100 elements&#160;?
+ Stilgart: non
+ Stilgart: j'ai BEAUCOUP de problèmes avec les perfs réelles en Haskell
+ Stilgart: en plus, ça dépend méchamment de k
+ Stilgart: éventuellement, essaie avec Data.IntMap.Strict 
+ Stilgart: (en supposant que c'est bien des HashMap et pas des AVL)
+ TidyMaze: merci&#160;:)
+ Stilgart: perdu, c'est du patricia
+ TidyMaze: qu'est ce que c'est que ce nom x)
+ TidyMaze: je regarde la doc&#160;:)
+ Stilgart: ça veut dire arbre prefixe (trie) avec compression
+ Stilgart: je sais pas trop quoi en penser
+ Stilgart: la doc dit que c'est beaucoup mieux que Data.Map Int
+ Stilgart: mais j'arrive pas à m'en convaincre
+ Stilgart: un Trie c'est beaucoup mieux que Data.Map String, mais parce que comparer des String c'est long
+ Stilgart: sur un Int32, l'argument ne tient plus
+ Stilgart: et la couche de Patricia vient forcément avec son leger surcout
+ Stilgart: TidyMaze: pas grand chose à se mettre sous la dent, mais <a rel="nofollow" class="external free" href="https://www.reddit.com/r/haskell/comments/67riq6/how_to_improve_performance_on_codingamecom_with/">https://www.reddit.com/r/haskell/comments/67riq6/how_to_improve_performance_on_codingamecom_with/</a>
+ Stilgart: ça dit essentiellement de tenter (IO)Vector, ce que j'avais fait avec un succès mitigé à MM 
+ Stilgart: (j'étais dans les 49 en légende cela dit)
+ Stilgart: c'est fou le temps que JBM passe en refactoring
+ JBM: gna gna gna
+ TidyMaze: merci pour les infos&#160;:)
+ Stilgart: vu l'état de mon code, tu as raison
+ Stilgart: IOArray
+ Stilgart: si c'est à l'init, j'utilise du code impératif dans un runSTUArray
+ TidyMaze: :O j'ai pas signé pour faire du code de porc moi&#160;!
+ TidyMaze: :D
+ Stilgart: avec derriere un freeze si je veux un UArray 
+ Stilgart: c'est assez propre
+ Stilgart: typiquement, pour un FW un peu gros, tu n'as pas le choix
+ Stilgart: c'est un triple for dans un runSTUArray (6-8 lignes, et à la fin tu as ton UArray)
+ TidyMaze: FW&#160;?
+ Stilgart: Floyd-Warshall
+ TidyMaze: ok
+ Stilgart: s'il y a bien un truc que les fonctionnelleux ont du mal à comprendre (moi le premier), c'est que le problème n'est pas d'avoir des effets de bords
+ Stilgart: c'est de les contrôler proprement avec le système de types
+ Stilgart: runSTUArray rentre typiquement dans ce cadre là
+ Stilgart: (et petite correction, runSTUArray renvoie dejà le UArray, donc même pas besoin d'appeker freeze en fait)
+ TidyMaze: je vais essayer de creuser, meme si j'ai pas le recul pour justifier l'utilisation de ce genre d'outils ^^
+ Stilgart: tu codes en Haskell depuis quand&#160;?
+ TidyMaze: des trucs niveau projet euler j'en ai fait pas mal, mais pas de vrais projets. Là j'ai repris depuis ... 3 jours
+ Stilgart: PE en Haskell c'est carrément pas évident je trouve
+ Stilgart: (cela dit, j'ai commencé Haskell par ça...)
+ TidyMaze: sinon pas mal de code gold sur codingame et peut-etre 1 concours ici aussi mais j'etais pas allé aussi loin
+ TidyMaze: golf*
+ TidyMaze: bref
+ Stilgart: l"affichage chez JBM est complétement pété
+ Stilgart: 11 matches, 53% de run
+ TidyMaze: ouaip, c'était mieux avant les leaderboard, à l'époque ou la plateforme crashait et les runs prenaient 2h&#160;:)
+ TidyMaze: tres cool le post de Dabino sur reddit
+ Stilgart: 3h45&#160;!!!!
+ Stilgart: (avec promo garantie au bout de 15min. , rappelons-le)
+ Stilgart: oui, faudrait qu'on discute sérieusement entre nous pour progresser
+ Stilgart: en tout cas, dabino semble avoir les mêmes soucis que moi
+ TidyMaze: on dirait une bonne nouvelle. C'est pas très sympa
+ Stilgart: c'est pas une bonne nouvelle... je suis persuadé qu'on peut faire top10 en Haskell
+ Stilgart: mais avec la situation actuelle, c'est mal barré pour dabino comme pour moi
+ Stilgart: la bonne nouvelle, c'est que JBM est aussi bon que moi à ne pas utiliser les super fonctions fraichement codées :D
+ TidyMaze: je ne sais pas si un code haskell lourdement optimisé pour rentrer dans le top 10 soit une meilleure chose qu'un code C(++) classique ^^
+ Stilgart: je pense que ça peut s'optimiser tout en gardant de bonnes propriétés
+ Stilgart: le problème, c'est que faire du code Haskell optimisé, ça demande une expertise de dingue
+ Stilgart: go go go silver JBM
+ Stilgart: tu bas dieu, c'est un début :D
+ Stilgart: après, soyons honnête, torpedo c'est naze par rapport à mine
+ pb4: Y'a un stream&#160;?
+ pb4: Et les torpedo c'est fort quand même...
+ TidyMaze: <a rel="nofollow" class="external free" href="https://www.twitch.tv/cg_jbm/">https://www.twitch.tv/cg_jbm/</a>
+ TidyMaze: depuis le debut il est tres occupé à refactorer ses bugs plutot qu'à les corriger. Maintenant ils sont propres&#160;!
+ JBM: les bugs les plus propres du site
+ JBM: ils brillent
+ Stilgart: pb4: pour finir oui... pour sortir de la ligue bronze, moins
+ pb4: Ok je n'avais pas le contexte&#160;:)
+ Stilgart: en tout cas, si je suis silver, c'est grace à mes mines
+ pb4: bon... regarder mes loss... regarder jbm...
+ pb4: --&gt; go jbm&#160;:)
+ Stilgart: (même si j'avoue que je garde un torpedo chargé)
+ TidyMaze: j'ai pas encore de mines ni sonar&#160;:/
+ Stilgart: j'ai pas encore d'approche valide pour passer gold
+ Stilgart: j'ai sommeil par contre
+ Stilgart: donc bn
+ Stilgart: et go go go JBM
+ Stilgart: Automaton2000 est avec toi
+ Automaton2000: d'un autre côté je ne suis pas un robot&#160;!
+ TidyMaze: bn&#160;!
+ TidyMaze: je ne suis pas un robot&#160;!Un robooot,Un robooooooooot&#160;!
+ JBM: Aveuh: take THAT <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/443315637">https://www.codingame.com/share-replay/443315637</a>
+ R4N4R4M4: gg JBM
+ JBM: si ça voulait seulement monter maintenant
+ JBM: je vais être trpo fatigué pour changer quoi que ce soit de plus compliqué que ma constante de trigger-happyness
+ JBM: Boulet: take THAT <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/443319138">https://www.codingame.com/share-replay/443319138</a>
+ pb4: JBM: take THAT :innocent:<a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/443321088">https://www.codingame.com/share-replay/443321088</a>
+ JBM: ta ta ta
+ JBM: c'est mon ancienne AI ça compte pas
+ smeagol: Bonsoir
+ JBM: salut
+ Boulet: mouais bon c'est pas commes i j'avais un code qui merite ne serait-ce que la bronze 
+ smeagol: Salut
+ Boulet: pour info, je sais exactement ou tu es penadnat les 3/4 de la partie JBM
+ smeagol: qlq quia utilisé un algo de simulation&#160;?
+ JBM: j'ai pas regardé le match O:-)
+ TidyMaze: j'ai trouvé mon probleme de timeout&#160;!!!
+ JBM: et quel était-il?
+ JBM: moi j'ai enfin un run prometteur
+ JBM: infernal pour mes nerfs ce lag au ranking
+ TidyMaze: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/79e988b0-4031-4576-80d2-3b13596734dc">http://chat.codingame.com/pastebin/79e988b0-4031-4576-80d2-3b13596734dc</a>
+ JBM: ah oui ça surprend ça
+ JBM: tu connais DeepSeq?
+ TidyMaze: nope, je decouvre seq tout juste
+ TidyMaze: avant ce probleme je ne voyais pas trop à quoi servait seq ^^
+ JBM: c'est tout le modèle sémantique de l'exécution haskell qui se cache derrière
+ TidyMaze: je regarde ça demain 4h17 ^^
+ JBM: #1
+ JBM: ça va passer
+ JBM: ça y est, je commence à y croire
+ TidyMaze: go JBM go&#160;!
+ JBM: c'est fou le nombre de bugs qui peuvent se cacher en si peu de code
+ TidyMaze: c'était quoi le plus gros fix/feature du jour&#160;?
+ JBM: euh
+ JBM: je lirai les logs demain pour t'extraire ça
+ TidyMaze: x) c'est pasimportant :P
+ JBM: arg #2
+ TidyMaze: demain au reveil au pire
+ JBM: j'ai le dernier: «peut tenter d'utiliser des devices avec N-1 unités de charge»
+ JBM: ça surface en boucle et ça meurt en quelques tours
+ TidyMaze: ah voui, dommage en effet ^^'
+ JBM: j'ai le «peut tirer à un endroit où l'adversaire pourrait être, mais qui est absolument certainement à 0 ou 1 de distance de moi»
+ JBM: voilà silver
+ JBM: gg me
+ JBM: bn monde
+ TidyMaze: j'attends de voir ou tu te places&#160;?
+ TidyMaze: GG
+ JBM: yep
+ JBM: le temps de commit
+ JBM: et de tag
+ TidyMaze: JBM: Take THAT :D<a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/443328278">https://www.codingame.com/share-replay/443328278</a>
+ JBM: ^^
+ JBM: allez dodo
+ JBM: ah non, ranking?
+ JBM: 214/273
+ JBM: oh de l'activité chat twitch
+ JBM: je l'avais pas vue
+ JBM: *soupir*
+ TidyMaze: je suis devant Stilgart&#160;:-)top 100&#160;!
+ R4N4R4M4: gg TidyMaze
+ R4N4R4M4: J'arrive, si le top 100 me repousse pas
+ TidyMaze: yup
+ R4N4R4M4: #92, tu m'as laissé ta place :D
+ TidyMaze: quand c'est demandé gentiment :D
+ R4N4R4M4: yes
+ TidyMaze: j'ai décidé que passer de 1.5 à 1.4 était une bonne idée
+ R4N4R4M4: 1.4 quoi&#160;?
+ TidyMaze: je vais pas tout dire, c'est ma botte secrete, l'ecart type
+ TidyMaze: oups
+ R4N4R4M4: L'écart type de quoi&#160;? :D
+ TidyMaze: des positions possibles de l'ennemi
+ R4N4R4M4: ah ok
+ TidyMaze: c'est ce qui définit ma "confiance"

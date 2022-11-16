@@ -1,0 +1,759 @@
+ akagami101: yo
+ qhug8: hi
+ qhug8: im in canada
+ colbh: hi
+ kira_kira: normrm2191 guys I need some help w/ the puzzle of the weekIm so lost
+ micoze-stella: i think its puzzle is difficult, too
+ WOLFRAHH: yeah same here i want some hint with puzzle of the week
+ davilla: PotW literally has published papers on algorithms to solve it
+ davilla: ridiculously hard problem, unless n=2
+ zukarinkuari2: hi
+ DanniBoy: i dont get why these people dont share their codes
+ kilicmustafa: hi
+ bobby2: @DanniBoy yeah me neither. Aren't we all here to learn? 
+ JSboss: Fermat's Little Theorem helps with the POTW
+ KiwiTae: i dont like nuggets
+ Uljahn: AutomatonNN: damn euler's toadient
+ AutomatonNN: eulerscheZahl is there a way to see the code in the contest&#160;?
+ Doju: Well
+ Doju: I managed to make my new c++ code run
+ Doju: good news: got 55k nodes vs 2k on python
+ Doju: bad news: all the nodes are the same pointer&#160;:-D
+ WOLFRAHH: can anybody tell where is my mistake
+ WOLFRAHH: in power of thor
+ WOLFRAHH: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/573fe8fe-951e-4abf-96cd-c1da4e42a619">http://chat.codingame.com/pastebin/573fe8fe-951e-4abf-96cd-c1da4e42a619</a>
+ Doju: What's the problem?
+ Doju: WOLFRAHH what's the problem?
+ WOLFRAHH: falier of 3 and 4th test cases
+ WOLFRAHH: Doju
+ jacek: in first you have d+= in second you have d=
+ Doju: oh right yeah, they should be the other way around
+ Doju: check north and south first
+ Doju: because now if you need to go north or south you'll overwrite the variable d
+ WOLFRAHH: again failier
+ WOLFRAHH: :sob:
+ Doju: Are you now checking north and south first?
+ Doju: so that they have =
+ Doju: but east and west have +=
+ WOLFRAHH: yeah i checked
+ WOLFRAHH: not worked
+ Doju: hm...
+ WOLFRAHH: so what for me
+ Doju: can i see your code again?
+ WOLFRAHH: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/3ba4a3b6-565b-4838-9903-2f44a3e02ec1">http://chat.codingame.com/pastebin/3ba4a3b6-565b-4838-9903-2f44a3e02ec1</a>
+ Doju: ok i see
+ Doju: so
+ Doju: lets think about it
+ Doju: so you have d=<i></i>
+ WOLFRAHH: yeah
+ KiwiTae: WOLFRAHH indeed if u had to go NW u fail cause your code return N
+ Doju: you want it to be one of these: N, NE, E, SE, S, SW, W, NW
+ Doju: you had the right idea with the first version of your code
+ Doju: but it was just in the wrong order
+ Doju: you need check N and S first
+ Doju: so they come at the beginning of the string
+ Doju: now you're checking them after E and W
+ Doju: Then whatever d is after checking north and south you just add E or W to the end if needed
+ KiwiTae: im stuck at 83char in power of thor
+ WOLFRAHH: hey i do it
+ KiwiTae: gg
+ WOLFRAHH: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/5c88ecae-8825-4aa4-abae-53599e47a13e">http://chat.codingame.com/pastebin/5c88ecae-8825-4aa4-abae-53599e47a13e</a>
+ WOLFRAHH: Doju
+ Doju: Nice!
+ KiwiTae: WOLFRAHH u can try the episode 2 now
+ WOLFRAHH: thanks for help
+ WOLFRAHH: after some time
+ WOLFRAHH: KiwiTae
+ WOLFRAHH: thanks for help Doju
+ jacek: :3
+ Doju: Now i need some help :d
+ Doju: How is it possible that ptr is always the same?
+ Doju:                 Node child{current_node, value};
+ Doju: that is in a loop and ptr is always the same address
+ magaiti: is this c++?
+ Doju: yes, magaiti
+ magaiti: you are constructing a temporary object on the stack, then taking address of it
+ magaiti: you should create the object on the heap, or something
+ magaiti: use operator new
+ jacek: i think he knows that. but he wonders why it has the same address
+ Doju: i did not know that
+ magaiti: like Node* ptr = new Node{current_node, value};
+ magaiti: because it's the address of the object on the stack
+ magaiti: which happens to be the same 
+ magaiti: because it's recreated over and over 
+ Doju: ohh
+ Doju: this is a really unfriendly language for beginners :p
+ Doju: thanks
+ magaiti: it is
+ Doju: now it works
+ magaiti: remember to delete your tree when you dont need it 
+ Doju: Right
+ magaiti: using operator delete. or you could use smart pointers, which is another huge chunk of knowledge
+ Doju: Erm
+ magaiti: or you could manage your nodes in an array, and store array index instead of a pointer
+ jacek: or dont delete at all on CG, no wasted time
+ Doju: so i need to somehow loop though each node and delete it
+ magaiti: yeah, kinda, you can do it recursively
+ Doju: oh yeah i can take the last nodes and do it recursively there, true
+ jacek: virtual ~MctsMove() { for (auto &amp; m&#160;: children) { delete m; } }
+ Doju: I'm storing the parent instead of the children
+ Doju: but yeah i think i got it
+ jacek: oO
+ magaiti: how do you walk your tree then?
+ Mil27Coder: hi
+ Doju: i don't really need to go from the root outwards ever
+ Doju: i'm storing the last "layer" of nodes
+ Doju: and when i run out of time
+ magaiti: then i humbly assume it's something different from mcts
+ Doju: just breadth first pretty much
+ Doju: hahah
+ Doju: when i run out of time i just evaluate the last nodes, grab the best one and then go towards the root to get the first child node
+ magaiti: hmm, but 
+ magaiti: your opponent will not make bad moves
+ magaiti: hopefully for him
+ magaiti: how do you account for that
+ magaiti: <a rel="nofollow" class="external free" href="https://en.wikipedia.org/wiki/Negamax">https://en.wikipedia.org/wiki/Negamax</a>
+ Doju: The opponent doesn't even exist in my program :D
+ Doju: This is for the fall challenge
+ magaiti: ahh well then
+ Doju: I think considering the opponent's moves is not important enough for me 
+ Doju: given that i'm a beginner in c++
+ Doju: and i just want to make something that works
+ magaiti: depends on your definition of "works"
+ Doju: it has taken me 3 or 4 days just to translate my 500 lines of python to  c++
+ magaiti: compile and doesn't crash&#160;!= works
+ Doju: Makes somewhat sensible moves = works
+ magaiti: "somewhat sensible"
+ Doju: and can go beyond 3 moves in depth (unlike the python version) :p
+ jacek: do you have pragmas?
+ Doju: err
+ Doju: i'm not really sure what they are but i have #pragma once in all of my headers
+ Doju: which doesnt really matter since this is all one file now
+ jacek: as first lines
+ jacek: #pragma GCC optimize "Ofast,unroll-loops,omit-frame-pointer,inline"
+ jacek: to tell compiler to compile with optimizations
+ Doju: thanks
+ magaiti: do you need popcnt? i think it's included in bmi2
+ Doju: i'll plug that in and see
+ Doju: WOAH
+ jacek: i copy pasted mindlessly
+ Doju: it's 5 times faster
+ Doju: hahah
+ jacek: as everything
+ magaiti: also i doubt a beginner would use  avx and bmi2
+ jacek: well the compiler could translate some loops to avx itself
+ magaiti: maybe, doesn't really happens thet much
+ magaiti: welp i stand corrected,
+ magaiti: "avx" just increased my rollouts count in clobber from 60k to 100k
+ Doju: Hmm
+ Doju: why should I need to manually delete my tree?
+ Doju: if it gets out of scope on every turn in the game
+ magaiti: nodes created by operator new dont get out of scope, only their pointers do
+ JSboss: for those who were asking for more solutions to be published for the weekly challenge, i just posted a JS one
+ Doju: oh, alright
+ Doju: Ouch, deleting the nodes is gonna be rather difficult without storing the children
+ magaiti: i recommend using array instead
+ magaiti: use push_back() to add node, and store index istead of pointer. then just clear the array
+ magaiti: as a rule of thumb, you should not use poerator new in modern c++, unless you know what you are doing
+ Doju: okay
+ magaiti: so just grow your array of nodes, and store index of parent
+ Doju: I guess i'll do that
+ magaiti: then clear the array (resize to 0) when you dont need them any more
+ magaiti: std::vector&lt;MYNODE&gt;
+ Doju: got it
+ Doju: oh dear
+ Doju: my string, which is supposed to be one of these: "BREW", "CAST", "LEARN", "REST"
+ Doju: is "-1100793648"
+ jacek: how do you assign it
+ Rens2005: fuck &lt;- is this filtered
+ Rens2005: no
+ Rens2005: oof
+ WOLFRAHH: hey what do you say Rens2003
+ WOLFRAHH: Rens2005
+ Rens2005:&#160;?
+ Rens2005: i said what i said
+ WOLFRAHH: you say fuck
+ Rens2005: yeah
+ Rens2005: who cares
+ WOLFRAHH: why
+ WOLFRAHH: plz don't abuse in chat
+ jacek: it also filters passwords
+ jacek: ***********
+ Rens2005: to see if it was gonna get filtered do you know english?
+ jacek: see?
+ Rens2005: my password: yourmum
+ linjoehan: pogglepops
+ Rens2005: noooooo
+ Rens2005: it doesnt
+ Rens2005: wow
+ jacek: only you can see your password
+ Rens2005: nooooo
+ WOLFRAHH: what about jacek he abused the chat
+ Rens2005: please dont hack me 
+ linjoehan: hey it dosent filter passwords
+ jacek: i will hack your checkers bot
+ Rens2005: my what?
+ linjoehan: my checkers bot is weak
+ linjoehan: wanna see my tetris bot?
+ Rens2005: no i want to see ur mom
+ jacek: :no_mouth:
+ linjoehan: to late my mom passed 4 years ago
+ WOLFRAHH: ohh so sad linjoehan
+ linjoehan: anyway tetrisAI <a rel="nofollow" class="external free" href="https://github.com/linjoehan/TetrisAI">https://github.com/linjoehan/TetrisAI</a>
+ linjoehan: still gots work to do on it though
+ jacek: for NES? noice
+ linjoehan: yeah one day I want to get scores like the pros
+ jacek: trying RL?
+ zukarinkuari2: hello 
+ linjoehan: No time for RL
+ zukarinkuari2: my onee san isnt replying to me anymore:sob:
+ jacek: your senpai didnt notice you?
+ WOLFRAHH: can anybody help me  to solving fall challange 2020
+ wlesavo: beam search ezpz
+ zukarinkuari2:  no shes my onee san 
+ zukarinkuari2: not senpai 
+ Insta-x: help, want to solve mars lander using GA but couldn't meet time limit of 100ms, is it even possible?
+ zukarinkuari2: hmmmm 
+ zukarinkuari2: idek 
+ darkhorse64: If your GA works properly, it will converge towards a good first move. Use that and keep on searching
+ darkhorse64: If I recall correctly, I find an answer within the first second with ML2
+ _Jeffry_: You can run the GA for as long as you can (like 98ms) each turn to get the best possible "first move" every time. Just restart your GA every turn with new starting settings from inputs  
+ Insta-x: so reset GA and use the best first move every turn?
+ Insta-x: in the blog that i read about solving mars lander with GA, i think that the code solve everything in the first turn and use that solution. though its funny that the blog said the time limit is several seconds
+ Insta-x: thx for the help
+ warsameabdalla: i am really stuck on the chuck norris problem
+ warsameabdalla: can somebody check my code i keep getting a bus error
+ Alshock: Insta-x the blog made everything in the first turn, but you can delay. You can also reause your poppulation from the previous turn in your search, try stuff and keep what works
+ Alshock: @warsameabdalla you're probably writing something that's out of bound
+ Alshock: You can dump your code in this chat and it should give you a nice pastebin for it
+ Insta-x: ok, thx for the tips
+ warsameabdalla: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/99395a86-6d10-4354-8939-06435f6216b3">http://chat.codingame.com/pastebin/99395a86-6d10-4354-8939-06435f6216b3</a>
+ Uljahn: the first turn time limit is 1 second btw
+ Alshock: the best tip I can give you is: look at what your AI is doing. And if it fails to converge or converges too fast, try to find out why. Try to stay calm and tolerant in your fitness though, you don't want to accentuate local minima
+ warsameabdalla: thanks Alshock i just posted it
+ Alshock: xD just a note from first glance warsameabdalla: *(p+t) = 1 + '0' &lt;=&gt; p[t] = '1'
+ Alshock: not your actual issue though
+ warsameabdalla: I literally just got the function from the internet lol
+ warsameabdalla: the bus error seems to be coming from this line 
+ warsameabdalla: char asciiNumber = MESSAGE[j];
+ Alshock: there's too much I don't understand in your code, for instance, why do you use strtok to split words? I thought CN was about characters
+ Alshock: Oh mb I was reading commented bits, should get the highlighting in an editor rather than pastebins xD
+ warsameabdalla: i am new to this ill try post it without the commented bits 
+ warsameabdalla: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/0c3f257e-1932-4cb0-b6ca-76681cc9118e">http://chat.codingame.com/pastebin/0c3f257e-1932-4cb0-b6ca-76681cc9118e</a>
+ warsameabdalla: i hope this is easier to read
+ RoboStac: your scanf doesn't do anything (it doesn't support regex and even if it did that still wouldn't match)
+ Alshock: for some reason, it does. That's what I don't understand.
+ warsameabdalla: thanks for that guys the bus error has gone,
+ warsameabdalla: however the game came with that scanf("%[^\n]", MESSAGE);
+ warsameabdalla: i changed it to this now scanf("%s", MESSAGE);
+ RoboStac: oh wow, apparently that is actually a thing
+ Alshock: AH AH AH LMFAO you manage to put stuff in MESSAGE somehow
+ RoboStac: looks like your str[] array isn't big enough so you overwrite other variables
+ Alshock: There's a lot of stuff that gets overwritten, j included
+ Alshock: btw all your decimal_to_binary are leaking memory, but that's a secondary issue at this point)
+ warsameabdalla: im really confused lool
+ Alshock: When I write j and MESSAGE[j] at every step I get this:
+ Alshock: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/c3ac45a0-e59e-4911-8217-0ccd112c2b73">http://chat.codingame.com/pastebin/c3ac45a0-e59e-4911-8217-0ccd112c2b73</a>
+ Alshock: That's kinda wrong
+ Alshock: ooooh I get it
+ Alshock: the strcat
+ Alshock: you're not giving a pointer as second param
+ Alshock: you're actually also writing a pointer in a char to begin with
+ BlaiseEbuth: Alshock&#160;! Stop annoying people on world&#160;! Go back on FR&#160;!
+ warsameabdalla: i know ive been asking alot of questions but what shall i change alshock
+ AntiSquid: why? it's ok, less users on FR more for World 
+ Tuo: warsameabdalla you are trying to add to str (length 9) multiple return values of decimal_to_binary(length 8?)
+ Tuo: also string variable is a char ** for some reason. thats why you need to dereference it, *string in code
+ 2kpro: hey
+ 2kpro: good morning everyone\
+ tax0801: Hi!
+ MasterCoderxD: hey guys
+ MasterCoderxD: help
+ Qyxi: Morning. I'm new here. I read the weekly puzzle and I'm not sure I understand the question as the author intended. I look at the possible solutions to the example, and 3 isn't the highest number of nuggets that can not be served. Buying a 5 and a 1 isn't possible, so 6. But even more so, 20 x 5 + 1, infinity * 5 +1 is the highest that can not be served. Since there is not a 1 pack. 
+ MasterCoderxD: Can somebody edit and fix the errors in this Java code? 
+ MasterCoderxD: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/35008b02-2922-4c6e-9d8f-f75016874fb3">http://chat.codingame.com/pastebin/35008b02-2922-4c6e-9d8f-f75016874fb3</a>
+ MasterCoderxD: I am trying to create a range() function, like the one in python3
+ jacek: Qyxi you can buy 5 and 2. you can buy 6 by buying 3 x 2 nuggets
+ MasterCoderxD: Just experimenting as i am a noob in Java
+ jacek: MasterCoderxD there is no default values in java methods
+ MasterCoderxD: The problem is the part where i set default values for my functional parameters (like in C++)
+ jacek: use range(int a,int b,int c)
+ MasterCoderxD: But how do i set default values
+ Qyxi: Indeed, overlooked that.  So, infinity * 5 + 1 if it's odd becomes the answer.
+ jacek: the only way to achieve this in java is to overload method
+ MasterCoderxD: i know i googles it, but i don't quite get it
+ MasterCoderxD: can u plz just rewrite the code? if u have time?
+ MasterCoderxD: it's open to everyone btw
+ linjoehan: I'm need to learn how to write tests in java quick. any helps?
+ MasterCoderxD: *googled not googles
+ jacek: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/4080e302-cd78-41f1-b838-3223be96e783">http://chat.codingame.com/pastebin/4080e302-cd78-41f1-b838-3223be96e783</a>
+ jacek: junit tests?
+ Tuo: int[] l = new int[b]; is too big. real size is b - a
+ MasterCoderxD: that works?
+ jacek: dunno
+ MasterCoderxD: yeah thanks for that TUO
+ MasterCoderxD: oh ok
+ jacek: but should give you idea how this would work
+ MasterCoderxD: but the problem is with that, it makes it compulsory to enter all the 3 parameters, for example; range(0,10,1) works but not range(10) (this is what i want)
+ jacek: oh right for one
+ jacek: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/920983f3-32e6-4be6-8a37-fc6e8a893210">http://chat.codingame.com/pastebin/920983f3-32e6-4be6-8a37-fc6e8a893210</a>
+ MasterCoderxD: my output is:
+ MasterCoderxD: 9
+ MasterCoderxD: followed by 9 zeroes
+ MasterCoderxD: wait i got it
+ darkhorse64: gg jacek
+ jacek: hm?
+ darkhorse64: clobber
+ jacek: quite lucky submit
+ jacek: leaderboard small so much oscillations
+ darkhorse64: You did such a big jump that you surely improve something 
+ jacek: why yes, new net
+ jacek: and i still think p1 has advantage
+ jacek: its about 60% win in my tests
+ ill-be-waiting-outside: hey
+ darkhorse64: Definitely time to wok on new weapons. 
+ darkhorse64: I have been reading a lot of things lately on NNUE, design and implementation
+ jacek:&#160;:+1:
+ jacek: well someone got increased speed when he added avx to pragma
+ darkhorse64: I wrote avx code for clobber with no effect (actually it was slower). I also did that for C4 and gained nothing. But I already got the pragma
+ darkhorse64: Fun fact, my eval = 57%, your eval = 75% at one point in a game. You won ...
+ jacek: look for games when i lose
+ jacek: i get 0.8 then suddenly loss
+ darkhorse64: I see you won a game where your eval was 0.04 at one point. You have got some bias
+ jacek: or opponent made mistake
+ jacek: i know theres something wrong when i evaluate high and lose anyway
+ darkhorse64: At the same point, I see 50%. Tbh, I sometimes get the impression that my bot is clueless until the solver takes over
+ jacek: thats vanilla mcts for ya
+ Ordonnateur: Hi, can someone explain me more clearly the puzzle of the week&#160;? <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/nuggets-numbers">https://www.codingame.com/ide/puzzle/nuggets-numbers</a>
+ darkhorse64: yep. No eval in sight and no winning moves for heavy rollouts
+ jacek: Ordonnateur whats the problem?
+ Ordonnateur: I don't understand why the 68 portion part have no maximum ç_ç
+ Ordonnateur: 6/8*
+ Qyxi: I keep failing first test case. 20 * 5 + 3 = 103 nuggets. That's the max I cannot buy.
+ darkhorse64: I'd look for diophantian equation of the first degree
+ jacek: Ordonnateur because you cant buy any odd nuggets. you cant buy 10001, 255545, 5762347856348765348799 and more
+ jacek: so its infinity
+ Qyxi: I agree jacek, however, when I run it it expects 3.
+ Ordonnateur: yes but you can't buy 1 or 3 in the first case what's the diff&#160;? the fact there is no stop&#160;?
+ jacek: 3 is max you cant buy. from 2 and 5 you can buy 4,5,6,7,8,9... and so on
+ Qyxi: Ordonnateur 6 and 8 are both even, there can never be an odd number generated from those values.
+ darkhorse64: Only Chuck Norris can buy any number of nuggets
+ jacek: Qyxi 17 * 5 + 4 * 2
+ jacek: wait, 19 * 5
+ Ordonnateur: Ok, I have to found how to manage the infinity part (to avoid endless loop) and I think I understand what I should do&#160;:)
+ Ordonnateur: thank you Jacek&#160;:)
+ 2kpro: hello
+ kresteodymium: hello
+ 2kpro: how are you
+ ill-be-waiting-outside: hey
+ 2kpro: yo
+ ill-be-waiting-outside: whats up my brother
+ 2kpro: nothing much you
+ ill-be-waiting-outside: working 
+ 2kpro: working on what
+ ill-be-waiting-outside: school and my job
+ 2kpro: im doing in school to
+ 2kpro: virtual
+ ill-be-waiting-outside: see at my age i have too work in the morning i go to school and at night i work
+ 2kpro: ok
+ 2kpro: well my class started so talk to you later
+ ill-be-waiting-outside: ight bye
+ 2kpro: bye
+ evirginie: Hi&#160;! About the weekly puzzle, i really don't see how i can solve it. Could someone give me a hint&#160;? I think maybe a lack a math knowledge.
+ KelvinAndHubbles: hint: You have to pass all the test cases
+ evirginie: no wayyyy&#160;! 
+ Snovrain: lmao, although i also dont know how to solve that 
+ evirginie: i thought it must have something to do with GCD but it does not seem to add up
+ zukarinkuari2: hey guys
+ 2kpro: let ans=[]
+ zukarinkuari2: i wann acreate a simple game on blender
+ Snovrain: actually i am new to codingame, where to access the weekly puzzle? 
+ evirginie: if i just put "print("-1"), i i should past a few tests
+ zukarinkuari2: bro i cant relate too much 
+ evirginie: here&#160;: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/nuggets-numbers">https://www.codingame.com/ide/puzzle/nuggets-numbers</a>
+ Snovrain: tq btw, but what i mean is where can i get this link by myself, from discord?
+ evirginie: i dont remember how i got here :disappointed_relieved:
+ evirginie: don't you find it from the home page&#160;? 
+ Snovrain: yes, my home page dint have something like weekly puzzle section wwww
+ 2kpro: try your best evirginie
+ 2kpro: i made a 36
+ 2kpro: -1
+ Uljahn: Snovrain: should be in your notifications, click the bell and then "show read"
+ 2kpro: :hamburger: :fries:
+ y_ksq: hello
+ y_ksq: :wave:
+ 2kpro: hey 
+ 2kpro: :wave:
+ 2kpro: im eat so can you keep it down a bit
+ ntabucejo: HI
+ jacek:  
+ 2kpro: how do you play code4life
+ <b>**AntiSquid assumes that's an invisible ball and kicks it</b></p><p><img src="/a/58491929211531" /> AntiSquid: you don't, life plays you
+ 2kpro: antisquid how do i play code4life
+ jacek: with joystick
+ AntiSquid: no joystick, here's a version of the game it's inspired from it should help understand it <a rel="nofollow" class="external free" href="https://spendee.mattle.online/welcome">https://spendee.mattle.online/welcome</a>
+ AntiSquid: or search on youtube the codingame tutorial for code4life, it explains it well
+ warsameabdalla: hello people i have been on chuck norris for 10 hours now 
+ warsameabdalla: i still can not figure out the issue can someone help me
+ warsameabdalla: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/91fd84a3-f4f4-45f1-80c0-7e9de74e9d6b">http://chat.codingame.com/pastebin/91fd84a3-f4f4-45f1-80c0-7e9de74e9d6b</a>
+ warsameabdalla: you can ignore the deblank part
+ warsameabdalla: anybody there to save the day
+ jacek: youre doing chuck norris in C? :scream:
+ AntiSquid: that's so hardcore
+ AntiSquid: jrke online&#160;?!
+ jacek: hm?
+ Therabidpanther: bruh i think this question is broken
+ 2kpro: hahaha:joy:
+ jacek: question?
+ jlb1108: <a rel="nofollow" class="external free" href="https://ethiery.github.io/codingame/chuck-norris.html">https://ethiery.github.io/codingame/chuck-norris.html</a>
+ jacek: are those... solutions!?
+ jlb1108: yes
+ jlb1108: not mine
+ jlb1108: still working on mine in C#
+ Nihal_me: sup
+ Nihal_me: everyone
+ 2kpro: sup
+ Westicles: hii
+ 2kpro: yo
+ <b>**AntiSquid kicks Westicles</b></p><p><img src="/a/55595180001313" /> Westicles: heh heh.  I thought you guys made up?
+ AntiSquid: wdym? it's the special chat command to request a kick
+ Westicles: Just a kick?  That seems like a de-escalation
+ AntiSquid: what do you want me to do? gather some random people and protest in front of his house at night&#160;?
+ jacek: oO
+ BlaiseEbuth: AntiSquid is kicking innocent people again&#160;?
+ 2kpro: what the...
+ ill-be-waiting-outside: don't say it
+ jacek: bloody hell
+ 2kpro: ohh sh
+ jacek: oh bash?
+ BlaiseEbuth: ./2kpro
+ 2kpro: what 
+ BlaiseEbuth: Unexpected exception...
+ BlaiseEbuth: Hmmm...
+ 2kpro: can someone hold my mouth before i say something bad
+ BlaiseEbuth: chmod a+x 2kpro
+ BlaiseEbuth: ./2kpro
+ 2kpro: shut the fu..
+ AntiSquid: 2kpro &gt;/dev/null
+ ill-be-waiting-outside: stop
+ ill-be-waiting-outside: chill
+ BlaiseEbuth: Oh thx AntiSquid.
+ 2kpro: im chil 
+ 2kpro: :relieved:
+ liunique: hey
+ 2kpro: hey
+ _Coding_Princess_: hi:stuck_out_tongue_closed_eyes:
+ 2kpro: yo
+ 2kpro: antisquid can you give me some pointers i wish i was experianced like you
+ jacek: he can give you only nullptr
+ 2kpro: ok thanks for teling me jacek
+ 2kpro: im so stupid i wished i started coding  a year or2 ago but im just a child
+ ZarthaxX: you got a lifetime still
+ 2kpro: but you and other people are experianced  and i just started 
+ 2kpro: :disappointed:
+ 2kpro: i wish i was  older
+ jacek: just wait and you will be
+ jacek: [solved]
+ _Coding_Princess_: yeah im new too
+ _Coding_Princess_: i just finished intro
+ jacek: onboarding?
+ 2kpro: im just stupid
+ JLukeSkywalker: no, im stupid
+ _Coding_Princess_: im super stupid
+ _Coding_Princess_: i am so stupid i cant figure out Coders Strike Back... lol
+ _Coding_Princess_: :grimacing:
+ 2kpro: i wished someone like antisquid could give me pointers but his probaly busy
+ 2kpro: :disappointed:
+ _Coding_Princess_: yeah 
+ JLukeSkywalker: most people that talk on here can give you pointers like that
+ 2kpro: but antisquid is busy and jonny 7 is busy
+ JLukeSkywalker: just ask the questions you would ask them in here
+ 2kpro: so who can give me pointers
+ Stormalix: everyone
+ JLukeSkywalker: ^^
+ jacek: int *x; here you go
+ JLukeSkywalker: how dare you not use python
+ YunoSama: Guys.. I really need help with something'
+ Stormalix: how dare you not use JavaScript
+ Stormalix: what do u need help with
+ YunoSama: I am in the-descent and I don't see the GUI of the mountains nor anything
+ YunoSama: In addition to
+ 2kpro: i wished i hade my dad
+ YunoSama: I can't print in console
+ jacek: restart browser
+ YunoSama: I mean.. It only shows the goal and notes etc. 
+ YunoSama: I guess there might be an option somewhere where I view the animation instead&#160;?
+ 2kpro: :sob:
+ JLukeSkywalker: what puzzle
+ JLukeSkywalker: can u link the url?
+ rip0806: lol
+ YunoSama: the-descent
+ YunoSama: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/the-descent">https://www.codingame.com/ide/puzzle/the-descent</a>
+ jacek: you should see the viewer normally
+ YunoSama: Hm..
+ JLukeSkywalker: have you hit run?
+ YunoSama: Play all testcases? or submit?
+ JLukeSkywalker: just play the first test case
+ JLukeSkywalker: does the console pop up?
+ YunoSama: It turns green
+ 2kpro: :worried::disappointed::sob: im a piece of trash im nothing but a loser
+ jacek: can you screenshot?
+ YunoSama: Yes.. The console is there but it's totally empty
+ YunoSama: Alright one second
+ YunoSama: I don't think I can send any pictures here ..
+ _Coding_Princess_: 2kpro you are not a loser, nor a piece of trash
+ jacek: try imgur.com
+ YunoSama: omw
+ _Coding_Princess_: you are just learning 2kpro
+ _Coding_Princess_: nothing to feel bad about
+ Stormalix: ^
+ JLukeSkywalker: thought we had a thing on here that captured images like code?
+ 2kpro: :disappointed: ok 
+ 2kpro: :worried:
+ _Coding_Princess_: :grin:
+ _Coding_Princess_: BE HAPPY
+ 2kpro: ok
+ ErrorRazor: Lol I just discovered the button that shows the input and expected output of test cases. I've been printing the inputs to error output until now....
+ YunoSama: Can I send it in discord instead? It requires registration and I am pretty lazy tbh xD
+ jacek: so send it to discord
+ jacek: but imgur doesnt require registration oO
+ YunoSama: general&#160;?
+ YunoSama: It asked me to register when I tried to add new post&#160;:/
+ 2kpro: :relieved:
+ _Coding_Princess_: yes
+ _Coding_Princess_: good
+ YunoSama: It's in general
+ _Coding_Princess_: :grin: happy is fun
+ 2kpro: thanks _coding_princess_
+ 2kpro: :relaxed:
+ Messi100: Hi 
+ _Coding_Princess_: :clap_tone1:
+ _Coding_Princess_: Hi
+ Messi100: how are you doing today
+ _Coding_Princess_: Fine, you?
+ Messi100: do you know how to code
+ Messi100: I am a begginer
+ _Coding_Princess_: SAME
+ Stormalix: try Khan Acadenmy
+ Stormalix: Academy
+ Stormalix: its very helpful
+ Stormalix: i learn JavaScript from KA
+ Stormalix: learned
+ Messi100: thank you man 
+ Stormalix: it was very easy for me to understand 
+ _Coding_Princess_: i use..... idk
+ Messi100: your the best 
+ _Coding_Princess_: i will brb
+ 2kpro: try code academy not khan academy
+ Stormalix: if you have any questions u can hmu on KA I'm xXMoonLightXx
+ Stormalix: nahh KA is better imo
+ 2kpro: are you a youtuber
+ Messi100: no
+ Stormalix: you can take a look at my projects here: <a rel="nofollow" class="external free" href="https://www.khanacademy.org/profile/xXMoonLightXx/projects">https://www.khanacademy.org/profile/xXMoonLightXx/projects</a>
+ rip0806: fuck u all
+ rip0806: i'm the supreme god
+ Stormalix: The community is also very helpful so if you have any questions ask anyone 
+ Stormalix: nobody asked rip0906 stfu
+ 2kpro: :joy:
+ Messi100: that was grat man 
+ Messi100: I like at 
+ 2kpro: ye
+ 2kpro:  me to
+ _Coding_Princess_: nobody supreme god rip0906
+ JLukeSkywalker: the way to learn is totally pick a project you want to do, pick a language, and google the shit out of it
+ _Coding_Princess_: and if there was one it would DEFINITELY not be you
+ JLukeSkywalker: thats how i learn new languages
+ Messi100: I will try that idea thank you 
+ Stormalix: JLukeSkywalkerFor beginners i think its better to have a teacher rather than googling information that may or may not be relevant and may not be the best practive
+ Stormalix: practice
+ _Coding_Princess_: yea
+ _Coding_Princess_: practice makes perfect
+ 2kpro: you got that right
+ Stormalix: practice also makes permanent so dont learn the wrong way xD
+ _Coding_Princess_: yes
+ _Coding_Princess_: i gtg
+ Messi100: do you the YouTuber Mark Rober
+ Stormalix: yes
+ _Coding_Princess_: YES I LOVE HIM
+ _Coding_Princess_: he awesome
+ orangesnowfox: I'd argue practice doesn't really make *perfect* as much as *progress*
+ _Coding_Princess_: but i gtg
+ _Coding_Princess_: so bye
+ Stormalix: cya
+ 2kpro: cyu
+ 2kpro: cya
+ Messi100: do you know dude perfect fromm youtube 
+ Stormalix: yepp
+ Stormalix: do u know Mr. Beast
+ Messi100: Mrbeast 
+ Stormalix: mrbeast
+ Stormalix: am i the only one who read that as mr breast
+ jacek: oO
+ Yassine_EL_HOSNI: helllo everyone
+ Yassine_EL_HOSNI: can anyone help with this&#160;: 
+ Yassine_EL_HOSNI: the first digit of a really big number using javascript
+ Yassine_EL_HOSNI: 123**15
+ Yassine_EL_HOSNI: should be 7
+ Yassine_EL_HOSNI: any takers&#160;??
+ AntiSquid: nah i am good
+ Yassine_EL_HOSNI: naaaa
+ ErrorRazor: Can't remember any javascript sorry
+ PatrickMcGinnisII: 22313961097670283270314823109107
+ ErrorRazor: Also it's not 7
+ Yassine_EL_HOSNI: PatrickMcGinnisII how did you do it
+ Yassine_EL_HOSNI: it should be rounded up
+ ErrorRazor: You mean least significant digit right?
+ jacek: in python its just 123**15
+ jacek: i bet there is some mathematical trick to that
+ jacek: could it be you only need to power the last digit, so its 3**15&#160;?
+ Yassine_EL_HOSNI: that would be greate
+ Yassine_EL_HOSNI: is it
+ ErrorRazor: Oh yea
+ ErrorRazor: Actually no
+ N-ONE: @Yessine_EL_HOSNI can you send the problem link&#160;?
+ Yassine_EL_HOSNI: i dont have it anymore
+ Yassine_EL_HOSNI: it was a clash of code
+ N-ONE: oh 
+ ErrorRazor: Does the calculation time out if you just do 123**15 etc?
+ Yassine_EL_HOSNI: nop
+ ErrorRazor: So what's the problem
+ Yassine_EL_HOSNI: for me in javascript it shows ...e+31
+ jacek: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/451883b077fe733859abfc66885dff5debc2">https://www.codingame.com/contribute/view/451883b077fe733859abfc66885dff5debc2</a>
+ ErrorRazor: Convert to a string, output the last character
+ N-ONE: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/d3f5e317-e25a-45c7-a2b6-4526624da7eb">http://chat.codingame.com/pastebin/d3f5e317-e25a-45c7-a2b6-4526624da7eb</a>
+ Yassine_EL_HOSNI: ErrorRazor it did not work in javascript 
+ Yassine_EL_HOSNI: at least for me
+ N-ONE: any help
+ Yassine_EL_HOSNI: thank you jacek
+ jacek: is this puzzle?
+ Yassine_EL_HOSNI: yap
+ ErrorRazor: @Yassine_EL_HOSNI what if you check if the string contains "e", and if it does, take the last digit before e?
+ Yassine_EL_HOSNI: true
+ Yassine_EL_HOSNI: but it was a "shortest" mode
+ Yassine_EL_HOSNI: and my solution was as followed&#160;:
+ Yassine_EL_HOSNI: r=readline,[n,p]=[+r(),+r()]print((n**p)%10)
+ N-ONE: use mod
+ Yassine_EL_HOSNI: i did
+ Yassine_EL_HOSNI:&#160;% is mod in javascript
+ ErrorRazor: Is there a language in which&#160;% is not mod
+ Yassine_EL_HOSNI: i guess there is
+ Yassine_EL_HOSNI: 90% sure
+ jacek: pascal?
+ ErrorRazor: Assembly?
+ Yassine_EL_HOSNI: hhhh guys 
+ Yassine_EL_HOSNI: stop
+ Yassine_EL_HOSNI: task at hand
+ jacek: N-ONE well there is O(n) solution for that
+ N-ONE: hmm really&#160;?
+ N-ONE: any tips 
+ N-ONE: yassine ,, try computing the power 
+ jacek: i use for loop from n+1 to 2*n
+ N-ONE: i mean manually 
+ ErrorRazor: I don't understand the problem
+ N-ONE: which one&#160;? mine&#160;?
+ N-ONE: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/unit-fractions">https://www.codingame.com/ide/puzzle/unit-fractions</a>
+ ErrorRazor: Ok so it's 1/n
+ Yassine_EL_HOSNI: NO-ONE i did
+ Yassine_EL_HOSNI: anyways i give up
+ Yassine_EL_HOSNI: next clash
+ Yassine_EL_HOSNI: have fun everyone
+ N-ONE: i still don't know how did u do it in o(n)
+ jacek: for i in [...]: if n*i&#160;% (i-n) == 0: magic happens
+ AntiSquid: <a rel="nofollow" class="external free" href="https://kekpe.pe/i/60637b12cc32a.png">https://kekpe.pe/i/60637b12cc32a.png</a>
+ jacek: Oo
+ N-ONE: yoo @Yassine_EL_HOSNI
+ N-ONE: check this out 
+ orangesnowfox: jacek, why does everyone use *that* solution?
+ jacek: is there other no brute-force one?
+ N-ONE: yes 
+ orangesnowfox: Yeah... `i` is a factor `n^2`
+ orangesnowfox: *of
+ jacek: too mathy, do not want
+ N-ONE: but i don't understand the math lol
+ orangesnowfox: jacek "i&#160;% (n**2 == 0"
+ orangesnowfox: err, with the closing paren
+ orangesnowfox: and you go from 1 to n
+ jacek: syntax error :c
+ orangesnowfox: well just fix it :p
+ ErrorRazor: me no understand
+ Yassine_EL_HOSNI: hhhhhhhhh
+ N-ONE: i wonder how to copy code when using vim here&#160;?
+ Messi100: hi
+ Messi100: can someone tell me how they learn Jave coding please
+ Yassine_EL_HOSNI: look for a tutorial online, google is your best friend
+ Messi100: ok
+ N-ONE: there is a book called&#160;: Object-Oriented Programming and Java
+ N-ONE: check it out 
+ Messi100: ok
+ Yassine_EL_HOSNI: or dont
+ Messi100: why
+ Yassine_EL_HOSNI: books get old
+ ErrorRazor: You don't need to buy books, you'll learn best by doing tutorials and projects on your pc
+ Messi100: oh ok
+ N-ONE: it's free i guess ,,, i know it from college lol
+ Yassine_EL_HOSNI: new thing come up..
+ Yassine_EL_HOSNI: *things
+ Yassine_EL_HOSNI: look for "learn java 2020" or "learn java 2021" .. you might get lucky
+ Messi100: ok
+ Yassine_EL_HOSNI: dont forget to have fun
+ Messi100: ok
+ Yassine_EL_HOSNI: and if you have chosen Java as your first language every, you might what to rethink that 
+ Yassine_EL_HOSNI: *ever
+ Yassine_EL_HOSNI: *want
+ Yassine_EL_HOSNI: god damn
+ Messi100: ok
+ jacek: kree java!
+ jacek: AutomatonNN what do you think of java
+ AutomatonNN: eulerscheZahl is there a way to read the example of a starting point in the middle of a different pl
+ Messi100: is khan Academy good
+ Yassine_EL_HOSNI: no clue
+ jacek: someone was recommending khan today :thinking:
+ Yassine_EL_HOSNI: who was it i am guessing
+ Yassine_EL_HOSNI: was it you?? 
+ jacek: no, i dont use any courses
+ Yassine_EL_HOSNI: naaaa 
+ Yassine_EL_HOSNI: you sure
+ Yassine_EL_HOSNI:&#160;???
+ Messi100: do you know how to use this website In a iPad because my ground want to chat what us so we can answer question for hem
+ Yassine_EL_HOSNI: i dont understand the question
+ Yassine_EL_HOSNI: logically i would say "use a mobile browser"
+ Messi100: so he can't chat like we do
+ Yassine_EL_HOSNI: ow i see 
+ Yassine_EL_HOSNI: you mean use the codingame chat&#160;??
+ Messi100: so do you know how 
+ Yassine_EL_HOSNI: in mobile
+ Messi100: ipad
+ Yassine_EL_HOSNI: can you download discord on ipad?
+ Yassine_EL_HOSNI: if so.. and just join the codingame discord
+ Yassine_EL_HOSNI: this is link
+ Yassine_EL_HOSNI: i think
+ Yassine_EL_HOSNI: can someone elaborate? 
+ Yassine_EL_HOSNI: ~and~
+ Messi100: do you need a account
+ Yassine_EL_HOSNI: discord probably not.. but the CodinGame server.. i am guessing it is a must
+ Stormalix: In my opinion Khan Academy is really good, you can learn HTML and JavaScript from there and the tutorials are very clear (the object oriented tutorial was a bit confusing for me but i understood it on the second run) 
+ Stormalix: There's also a large community willing to help. Its also free sooo why not? lol
+ 0MNIP0TENT: i liked java as my first language. i learned it on a free app called solo learn. i went from that to cloning the classic 2d games within 2months
+ therealbeef: is it a known bug of CSB that in the first turn you always get -1 as the angle of all pods?
+ ErrorRazor: Yeah
+ ErrorRazor: It's actually not a bug, you can go any direction on the first turn, after that you'll be limited to an angle that is within 18 degrees of your previous angle
+ AntiSquid: there was something you could hardcode in that regard, for player 1 and player 2
+ AntiSquid: for first turn
+ therealbeef: i think it's a bug because it's a protocol violation
+ therealbeef: (and search race doesnt have this)
+ AntiSquid: alright good night
+ ErrorRazor: gn
+ therealbeef: who will ban the kiddies now?
+ davilla: haha I was a bronze level coding speed yesterday
+ davilla: today I'm "legend"
+ Messi100: Hi do someone know a way to learn Jave programming  
+ davilla: you've come to the right place
+ hex.master8: <a rel="nofollow" class="external free" href="https://dontasktoask.com/">https://dontasktoask.com/</a>
+ _Coding_Princess_:   nice website, hex.master8
+ CoderScience: Hi I'm new.
+ Nagna_Script: wuut up 
+ Nagna_Script: any ideas on how to double 10$ in 15min&#160;?
+ Nagna_Script: on street&#160;!! 
+ Nagna_Script: shoot me with some creativity please&#160;?
+ kresteodymium: hi!
+ kresteodymium: hello world

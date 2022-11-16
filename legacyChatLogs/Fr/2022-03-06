@@ -1,0 +1,437 @@
+ b0n5a1: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/6489fc78a4262830cd958184a6b089009aaa">https://www.codingame.com/contribute/view/6489fc78a4262830cd958184a6b089009aaa</a>
+ b0n5a1: o/
+ pardouin: je pense que c'est très relou à faire en vrai
+ b0n5a1: t'as un 3x3x3 foireux pas solvable, et il faut tenter de faire le meilleur score possible (faces complètes + autres trucs)
+ pardouin: des bons gros books de moves
+ pardouin: bref je passe mon chemin
+ b0n5a1: ouais et si tu connais pas certaines combis de moves t'oublies ^^
+ pardouin: "certaines" tu es mignon
+ pardouin: c'est des centaines oui
+ b0n5a1: (déjà que je le fait en mode naze, avec l'histoire du belge et autres conneries très longues :D )
+ b0n5a1: ha oui je sais ^^
+ pardouin: bon je vais lire un peu
+ pardouin: bye \o
+ Remi.: Bon mon contournement sur CSB n'a pas été très fructueux. Je suis maintenant 13ème en gold. JE contourne trop ou pas assez&#160;? Ou la victoire se joue ailleurs. Je verrai ça plus tard ^^ bonne nuit.
+ b0n5a1: bn
+ philRG: ah ah j'ai smashé le boss wood 2 de smash the code
+ philRG: bon du coup je vais me pioter moi aussi
+ philRG: ah on peut pivoter les blocs en wood 1
+ philRG: y a un an, j'avais commencé à coder un bfs pour monter en wood 1 le noob&#160;:-D
+ Stilgart: Remi.: la victoire se joue ailleur
+ Remi.: Salut, ok merci Stilgart (en espérant que tu ne penses pas à un AG)
+ Zorg1: o/ tout le monde
+ Zorg1: \o Automaton2000
+ Automaton2000: mon ia est pas encore passé
+ Zorg1: fix it Automaton2000
+ Automaton2000: t'as le temps de le faire ^^
+ Serge_Billault: __END__ __START__ __END__ __START__ __END__ __START__ __END__ __START__ __END__ __START__ __END__ __START__ __END__ __START__ __END__ __START__ __END__ __START__ __END__ __START__ 
+ Serge_Billault: __END__ __START__ __END__ __START__ __END__ __START__ __END__ __START__ __END__ __START__ __END__ __START__ __END__ __START__ __END__ __START__ __END__ __START__ __END__ __START__ Automaton2000
+ Automaton2000: ce sont des simulateurs de vol
+ Serge_Billault: je suis con d'essayer puisque pur paser l'external validator du puzzle Automaton200 il m'a fallu filtrer les balises qu'il utilise en interne dans les inputs
+ Zorg1: en plus bon le code a évolué entre temps, je crois qu'il convertit tout en minuscule d'abortd
+ Zorg1: <a rel="nofollow" class="external free" href="https://www.codingame.com/blog/markov-chain-automaton2000/">https://www.codingame.com/blog/markov-chain-automaton2000/</a>
+ Automaton2000: surement parce que tu prends pas en compte le fait que plein de gens
+ Serge_Billault: je crois qu'on a plus à attendre de la part de AutomatonNN
+ Zorg1: AutomatonNN est KO depuis quelques temps déjà, il n'arrive plus à s'exécuter de ce que j'ai compris, je ne sais plus si c'est un pb de lib de compil ...
+ Zorg1: mais l'hypothèse la plus probable est qu'Automaton2000 l'a buté
+ Automaton2000: en même temps c'est pas comme si je faisais un peu de respect
+ Stilgart: Remi.: non, parce que le méta c'est de faire un NN, et avant c'était de faire du minimax, et avant c'était de faire un AG... mais les gens faisaient surtout du MC
+ Alshock: les NN sur cg c'est chiant à rentrer dans le code source, j'ai rien compris aux méthodes de compression utilisables xD
+ fenrir: Alshock: dans tous les cas le NN va être petit en nombre de neuronnes 
+ fenrir: ensuite il y a plusieurs solutions (pas toutes orthogonales entre elles): soit envoyer un code compilé, soit mettre dans le code source les poids du NN encodé avec un algo du style base64/base85 (ou unicode)
+ fenrir: et ensuite en plus, les poids peuvent être quantifié sur moins de bits que des floats (là c'est plus ou moins technique selon ce qui est fait)
+ Stilgart: fenrir: virer les 8 derniers bits du float, c'est facile et ça doit pas changer grand chose au NN
+ Stilgart: j'imagine qu'on peut gratter un peu plus, et rogner aussi sur la partie exposant... mais là c'est plus galère&#160;:)
+ fenrir: passer de float32 à float16 peut normalement se faire sans trop de soucis et sans rien faire de spécial
+ fenrir: quantifier en 8-10 bit linéaire symmetrique (ie par neuronne calculer max(abs(weights), puis round(2^bit_size * weight / max_abs_weight) marche pas mal et est vraiment bon s'il y a en plus une phase de training qui prend en compte la quantif
+ Stilgart: float16 c'est supporté maintenant&#160;?
+ fenrir: pour le float16 je veux dire les stocket en float16 et retransformer en float32 pour l'execution
+ Stilgart: ha
+ Stilgart: ça oui
+ Stilgart: parce que le training en float16 j'aurais un peu peur&#160;:(
+ Bon[]Crayon: Salut tout le monde :ghost:
+ fenrir: non ça marche aussi (pas tenté) mais les framework NN le font maintenant
+ Stilgart: en fait, il faudrait surement faire de la virgule fixe
+ Bon[]Crayon: Comment va ce bon Automaton2000&#160;?
+ Automaton2000: je sais pas s'il y a un puzzle sur les nombres premiers
+ Stilgart: fenrir: mais vu le support de float16 (et même déjà de float32 dans certains contextes), il faut pas avoir peur de la non-reproductibilité
+ fenrir: bah vu qu'entrainer en float32 et ensuite brutalement quantifié en 8 bit marche pas si mal, je pense que c'est raisonnable
+ Bon[]Crayon: Automaton2000 Il y en a plein.
+ Automaton2000: c'est pas parce que le referee il y a une valeur
+ Zorg1: la valeur 13 Automaton2000&#160;?
+ Automaton2000: bah tu fais un tableau de chaines de caracteres
+ Zorg1: suis je bête Automaton2000
+ Automaton2000: les pions centraux, ça m'est venu en regardant les solutions des autres
+ Stilgart: et les licornes, ça va te venir en lisant les messages des autres, Automaton2000&#160;?
+ Automaton2000: y'a trop de monde en bronze
+ fenrir: Automaton2000: saurais tu où se trouvent les tortues&#160;?
+ Automaton2000: ça vaut pas le coup
+ Bon[]Crayon: Automaton2000 Le coup de la tortue.
+ Automaton2000: genre on peut pas passer le boss bronze
+ Bon[]Crayon: Automaton2000 Rien ne sert de courir, il faut partir à point.
+ Automaton2000: et en plus je fais des trucs de base
+ Stilgart: Automaton2000: ça fait longtemps que tu ne nous a pas fait de tortue, à ce propos
+ Automaton2000: j'ai du mal à lire les règles de la ligue bronze en depth 3-4 en python et je ne vois ...
+ Bon[]Crayon: Un petit clash python Automaton2000.
+ Automaton2000: oui mais j'ai pas le choix
+ Bon[]Crayon: Automaton2000 C'est mon choix à moi.
+ Automaton2000: par contre j'ai pas compris
+ Bon[]Crayon: Automaton2000 <a rel="nofollow" class="external free" href="https://fr.wikipedia.org/wiki/C&#39;est_mon_choix">https://fr.wikipedia.org/wiki/C'est_mon_choix</a>
+ <b>**Automaton2000 regarde son code de contest de contest</b></p><p><img src="/a/16542412157988" /> Zorg1: ah ok c'est sur France 3, je confonds toujours avec "Vis ma vie" sur TF1 ^^
+ Zorg1: mais le méme "vis ma vie de dév Java" a toujours été + populaire que "Je code des applis qui ont besoin de 20 Go de RAM pour faire cinq additions, C'est mon choix"
+ Serge_Billault: Automaton2000 /help
+ Automaton2000: t'as la liste des cartes
+ Serge_Billault: Automaton2000 /cmd_list
+ Automaton2000: y'en a des plus faciles
+ Serge_Billault: Automaton2000 /?
+ Automaton2000: après faut voir si c'est plus ou moins la meme chose
+ dwarfie: Automaton2000&#160;: une tortue ou une licorne&#160;?
+ Automaton2000: c'est quoi les nouvelles règles en bronze&#160;?
+ dwarfie: Automaton2000&#160;: en bronze , c'est de la :poop:
+ Automaton2000: et tu peux le faire tout seul
+ Zorg1: on appelle ça la digestion Automaton2000
+ Automaton2000: non je suis toujours en train de le tester
+ Zorg1: omg
+ <b>**dwarfie tend un livre a automation ... pas pour rien que ca s'appelle " reader's digest " :D</b>
+ dwarfie: grr ... je sais meme pas comment le TAB a pu sortir automation au lieu de Automaton2000&#160;;..
+ Automaton2000: pas que le boss&#160;?
+ Serge_Billault: Automaton2000, si tu réponds à cette phrase, tu es un eunuque.
+ Automaton2000: j'ai fait un bon score
+ Bon[]Crayon: Automaton2000 2000 points
+ Automaton2000: si ça marche comme ça
+ Serge_Billault: Automaton2000 /give -usr:Serge_Billault -xp:2500
+ Automaton2000: je sais pas si y a pas de soucis
+ Serge_Billault: Automaton2000 /kill
+ Automaton2000: c'est que tu peux faire des stats
+ Serge_Billault: Automaton2000 /Kill
+ Automaton2000: ha oui, c'est vrai que ça peut être sympa
+ Serge_Billault: lol
+ Serge_Billault: j'ai remarqué un truc, on dirait que Automaton ne fait jamais de fautes d'orthographe, ou alors j'étai pas là quand il en a fait
+ Bon[]Crayon: Il fait les mêmes fautes que les personnes du chat. 
+ Serge_Billault: bon à savoir pour l'instruire avec plein de mots pourris&#160;:)
+ Serge_Billault: hjsdfq kjhgdsj  jhgdfg g khjgkgqsdf gjhjkg djfkgjdf jgdsjfgjgg qdfjgsdjf  gksdfkjdg  jdgfjhgdqffj gjgdfjd jdgsfjhg
+ Serge_Billault: par contre avant que les mots que je viens d'entrer aient un score suffisants il faudrait que je flood à m'en faire bannir
+ Serge_Billault: sauf si c'est vraiment random random
+ Serge_Billault: ca existe des langages ou les variables déclarée const sont protégées contre l'écriture aprés initialisation au run time?
+ fenrir: je pense que certains language interprétés le font (java, c# très probablement)
+ fenrir: en C/C++, non sauf: les variables connu à la compilation qui sauf erreur vont (probablement) être mises dans une section read-only, et si tu le fais toi même en mappant des zones mémoires et en changeant les droits
+ Serge_Billault: bss pour les static, ro pour les reaonly et static readonly
+ fenrir: après C/C++ te garantissent que dans un code non buggé et si tu ne castes pas n'importe comment, alors la compilation refusera de modifier une variable const
+ Serge_Billault: sauf pour Carmack qui s'amusait à choisir les sections et qui pouvaient en créer de nouvells
+ Serge_Billault: apparement il va y avir un souci pou Unreal, Jet Brains est basé en rusie
+ Robinsstudio: Le siège de JetBrains est à Prague.
+ Serge_Billault: <a rel="nofollow" class="external free" href="https://jetbrains.developpez.com/actu/331415/-En-tant-que-JetBrains-nous-condamnons-les-attaques-qui-ont-lieu-a-declare-l-editeur-de-logiciels-base-a-Prague-a-la-suite-de-l-invasion-de-l-Ukraine-par-la-Russie/">https://jetbrains.developpez.com/actu/331415/-En-tant-que-JetBrains-nous-condamnons-les-attaques-qui-ont-lieu-a-declare-l-editeur-de-logiciels-base-a-Prague-a-la-suite-de-l-invasion-de-l-Ukraine-par-la-Russie/</a>
+ Serge_Billault: et oui.... ils ont des bureaux ebn russie!!!
+ Serge_Billault: et les fondateurs sont russes&#160;:)
+ Zorg1: par contre quel est le lien entre Unreal &amp; JetBrains&#160;?
+ dwarfie: on peut pas essayer de faire passer que google appartient en grande partie a des russes ... ca reglerait pas mal de probleme en fait
+ Zorg1: bah le problème c'est que c'est M$ qui va récupérer les parts de marché :p
+ Zorg1: va falloir trouver des russes chez eux aussi ^^
+ Bon[]Crayon: la fuite des cerveaux et des cervelles
+ Bon[]Crayon: Automaton2000 Au secours, j'ai le cerveau qui fuit&#160;!
+ Automaton2000: c'est pas moi qui a fait le puzzle du jour&#160;?
+ Bon[]Crayon: Automaton2000 Non, c'est l'autre.
+ Automaton2000: c'est surtout des gens qui ont réussi
+ Bon[]Crayon: Automaton2000 C'est pas faux.
+ Automaton2000: on peut faire de la pub
+ dwarfie: pas completement vrai Zorg1 ... windows phone est mort depuis longtemps&#160;;)
+ Bon[]Crayon: Dernier clash événement, le mec a tapé ce code en 5 minutes 09 
+ Bon[]Crayon: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/0c00ab15-2957-46c2-90cf-0c8dce880d1c">http://chat.codingame.com/pastebin/0c00ab15-2957-46c2-90cf-0c8dce880d1c</a>
+ MAWAAW: wtf&#160;?
+ dwarfie: tant de lignes inutiles pour un code de 30s a faire ...
+ Bon[]Crayon: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/5975b810dfa66c245ca0cea7ff6e4055552d">https://www.codingame.com/contribute/view/5975b810dfa66c245ca0cea7ff6e4055552d</a>
+ Bon[]Crayon: Tu le fais en 30s&#160;!!!!!!!
+ khealer: C'est juste un template déjà écrit 
+ Bon[]Crayon: en mode sans énoncé
+ dwarfie: bah t'as pas indiqué que c'etait un reverse
+ Bon[]Crayon: D’ailleurs je voudrais éditer la contribution pour retirer le mode sans énoncé. Qu'en penser vous&#160;?
+ dwarfie: non ... t'as qu'a l'evaluer ... supprimer les modes , c'est le  boulot de CGBOT
+ Bon[]Crayon: ok
+ HenocVik: c'est cool par ici unh :heart_eyes:
+ Littleyounes: o/
+ MAWAAW: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/minesweeper-1">https://www.codingame.com/ide/puzzle/minesweeper-1</a>
+ MAWAAW: qui a reussi ça
+ MAWAAW: il devrai changer de categorie ca a pas l'air detre du niveau "moyen" XD
+ dwarfie: c'est surtout niveau random
+ MAWAAW: jcrois faut faire une IA qui jou au demineur quoi
+ MAWAAW: sachant que moi meme je galere a jouer à ce jeu 
+ MAWAAW: :D
+ dwarfie: un IA c'est un bien grand mot ...
+ dwarfie: la c'est juste un code qui peut deduire ou y'a des bombes et ou il peut pas y en avoir pour savoir ou jouer sans risque
+ dwarfie: mais bon , les premiers et derniers coups sont souvent du coup de chance
+ MAWAAW: mdr j'abandonne j'ai fait planter tout mon pc 
+ dwarfie: tant qu'il explose pas , ca va  :D
+ 0_Bill_Cipher_: Les gars c'est bien 42&#160;?
+ dwarfie: quand c'est dans H2G2 , oui
+ dwarfie: :p
+ b0n5a1: o/
+ b0n5a1: tain il s'excite vite l'autre avec son coc sur les chiens, faut arrêter le café (ou autre) :D
+ MAWAAW: cannabis cocaine extasie lsd par exemple
+ b0n5a1: ha c'est pour ça qu'il parle de robots, aliens et chiens d'attaque dan la rue...ok... :rofl:
+ BluePencil: salut
+ Bon[]Crayon: o/
+ AMCODE: salut
+ Bon[]Crayon: o/
+ MAWAAW: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/3a60ec7e-bdc1-41d8-956c-695b2c839746">http://chat.codingame.com/pastebin/3a60ec7e-bdc1-41d8-956c-695b2c839746</a>
+ Bon[]Crayon: Encore battu par un bot.
+ MAWAAW: purée j'ai que 50% de réussite avec ma technique de bourrin brute force :joy:
+ MAWAAW: ÉchecLe délai d'exécution du processus a été dépassé. Cela peut signifier que votre solution n'est pas suffisamment optimisée pour traiter certains cas.
+ Zorg1: b0n5a1 C'est mignon les gens qui s'engueulent en allemand dans les contribs ^^
+ Raph_O: Hello, petite question pour le puzzle Encryption/Decryption of Enigma Machine
+ Raph_O: Pour le decode, on est d'accord que c'est l'inverse de l'encode, on passe d'aboard dans Rotor 3, 2, 1 puis le  shift vers la gauche? 
+ b0n5a1: Zorg1 au départ le but était juste de rectifier cette vision stupide de "les chiens ça se saute dessus pour se mettre sur la gueule et se massacrer", en mettant un lien d'une vidéo de 7 min qui explique plutôt pas mal (en allemand en plus, pour que ce soit limpide)...et le mec pète son câble (faut pas prendre certaines substances on dirait :D )
+ b0n5a1: et bon le "bonne fin de week end" avec clin d'oeil apparemment ça l'énerve...ça doit être à cause de l'invasion de robot et d'aliens dans ses rues :rofl:
+ Serge_Billault: Raph_0: la transform inverse suppose effectivement aussi l'ordre inverse des transformations succesives, donc pour decode, les rorors 2,1,0, puis le shift en dernier
+ Raph_O: yes je viens de comprendre mon erreur
+ Raph_O: j'avais zappé le + 1 du shift de - 1
+ Raph_O: thx
+ b0n5a1: Zorg1 le mec me rappelle un gars de ma promo qui tapait les 10 joints par jour, il partait en couille au quart de tour comme ça pour trois fois rien, c'était épique
+ b0n5a1: (en BTS il y a fort fort fort longtemps)
+ Zorg1: pas besoin de fumer 10 joints par jour pour avoir les nerfs à fleur de peau et exploser pour un rien&#160;;-)
+ MAWAAW: en effet 7 joints c'est suffisant&#160;;)
+ Zorg1: :D 
+ b0n5a1: :D
+ Zorg1: j'essaie d'être sérieux et factuel et tous les trolls qui ne font que m'embeter :cry:
+ Zorg1: tiens "sérieux et factuel" ça claque ça dans une bio ...
+ Remi.: :hatching_chick:
+ Remi.: (avec la coquille SUR la tête)
+ Remi.: Salut tout le monde
+ b0n5a1: harg un zozio d'attaque...mets luis sa laisse&#160;!
+ b0n5a1: o/
+ Zorg1: \o
+ Zorg1: c'est vraiment trop injuste
+ b0n5a1: :calim:
+ b0n5a1: pfff y'a pas
+ Remi.: Si y avait, j'aurais pas mis un poussin jaune avec la coquille au cul :P
+ Hetre: d(ymax+y0):2x0+1ef 9 ymax = ymax - 1
+ Remi.: 42
+ dwarfie: pov' petit calimero
+ dwarfie: qui n'est pas jaune
+ Zorg1: bah oui c'est un poussin noir
+ Zorg1: bon c'est un free XP le puzzle juste validé&#160;?
+ b0n5a1: comme dwarfie, avec un casque à cornes ^^
+ Zorg1: ha les numéros de sécu autrichien ...
+ dwarfie: completement free coc
+ b0n5a1: mouarf c'est light comme numéro de sécu
+ b0n5a1: (comparé au notre)
+ Remi.: Ca me rappelle le puzzle sur la vérification des n° de carte de crédit.
+ Zorg1: oui c'est le même genre
+ Remi.: Il fait partie de ma sélection pour le faire dans tous les langages.
+ b0n5a1: c'est un Luhn les cartes de crédit non&#160;?
+ Remi.: Oui
+ Remi.: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/easy/credit-card-verifier-luhns-algorithm">https://www.codingame.com/training/easy/credit-card-verifier-luhns-algorithm</a>
+ b0n5a1: ha oui, fait y'a 3 ans apparemment
+ Zorg1: en autriche pas plus de 999 naissances par jour
+ Zorg1: sinon ça bug
+ Zorg1: sont 9 000 000 ça doit être ok
+ b0n5a1: désolé madame, on doit reporter à la semaine prochaine
+ b0n5a1: si t'es né avant 2000 t'as pas de sécu ^^
+ philRG: Remi. pfff fais-toi des combats de bots, c'est plus rigolo
+ b0n5a1: bah justement il décompresse avec les puzzles :D
+ philRG: j'ai fait un peu de STC (Smash The Code) hier soir avant de m'endormir, çà m'a diverti
+ philRG: les puzzles c'est pourtant pas ce qu'il y a de plus simple
+ philRG: ce qui m'emmerde c'est vraiment la lecture des énoncés, alors que les combats de bots, bon çà ressemble à un jeu de société
+ philRG: c'est tout de même plus ludique
+ Zorg1: bah où est le problème tu les lis pas les énoncés&#160;? :p
+ philRG: oui c'est comme les bons chasseurs et les mauvais chasseurs quoi&#160;:-D
+ Zorg1: faut savoir se donner un handicap pour corser le jeu
+ b0n5a1: c'est pas bien de dire qu'être corse est un handicap Zorg1
+ b0n5a1: ok je sors...
+ philRG: le tout c'est de réussir à bien coder ses boutons de gameboy
+ philRG: sur les manettes de jeu, je peine souvent à trouver les boutons
+ philRG: bon je comprends pas toute les règles de la wood 1, je vais essayer de coder les rotations des paires, ce sera déjà çà
+ Zorg1: b0n5a1&#160;: j'étais sûr que t'allais me la sortir celle là :D
+ Remi.: philRG justement je suis en train d'en faire ... mais je suis moins doué que toi pour avancer vite.
+ Remi.: (peut-être que je lis trop les énoncés :P )
+ philRG: (oui peut-être)
+ philRG: (moins doué que moi, çà m'étonnerait)
+ jaiglissechef: Je te rappelle que t'es passé de bronze à gold sur MM pendant quez je restais bloqué en bronze. Et entre temps t'as fait tout un tas d'autres combats de bots et tu arrives toujours à grimper.
+ jaiglissechef: (oups smurf)
+ b0n5a1: ha...gold MM Remi.&#160;?
+ jaiglissechef: Non toujours bronze, j'ai pas eu trop de temps aujourd'hui.
+ b0n5a1: ha ok Phithivier c'est toi, je croyais philRG :D
+ philRG: grimper en gold pas souvent, je reste souvent en bronze, parfois silver, ou gold si je tryhard et si un peu d'inspiration ou un PM que j'aime bien
+ b0n5a1: Pithivier
+ jaiglissechef: Un lapin chef
+ b0n5a1: Qu'est ce que vous nagez bien chef!
+ philRG: moi c IvanLendl ou conadal (mais c interdit). J'ai poussé mon smurf legende sur Tron, et jamais pu pousser mon user actif
+ philRG: enfin je crois que c'est Buk. qui me l'a poussé
+ b0n5a1: le fil vert sur l bouton vert, le fil rouge sur le bouton rouge...
+ Remi.: C'est balo ça ^^
+ philRG: ben oui 250XP de perdus
+ philRG: ou 500Xp pour légende?
+ b0n5a1: 500
+ Remi.: Moi le smurf ne sera pas meilleur que moi, je l'utilise pour rattraper mon niveau sur les bots où j'ai piqué /amélioré du code trouvé sur internet
+ philRG: çà peut faire monter de ligue en fait (2 bots qui cognent le boss)
+ philRG: çà m'est déjà arrivé (mais pas voulu) seulement pour des fins de tests dans l'arène
+ Remi.: philRG t'as la réponse ... fait un nouveau smurf pour te pousser.
+ philRG: car run trop longs
+ philRG: je crois plutôt que c'est le bot de Buk. qui m'a poussé, et comme il es passé légende aussi, c raté
+ philRG: est
+ Remi.: Moi sur Tron mon smurf est silver. Je suis passé gold grâce à un code trouvé, puis legend en l'améliorant.
+ philRG: tron est assez zarbi (beaucoup de random du aux positions de départ)
+ Remi.: CSB et Tron, les 2 où j'ai fait ça.
+ Remi.: Pour CSB le smurf est bientôt legend.
+ philRG: moi pareil j'ai réutilisé un code pour monter de silver à top gold
+ Remi.: Pour Tron y a du boulot
+ Remi.: Un code JS&#160;?
+ philRG: je l'ai pas du tout bossé à part pour siliver
+ philRG: nan python
+ Remi.: Ah moi c'était du JS
+ philRG: Buk. aussi l'a fait en JS
+ philRG: je suis un peu noob en algo, je code vraiment des trucs simples&#160;:-D
+ philRG: un peu de bfs, et le plus souvent des if/else et heuristiques
+ Remi.: Moi c'est heuristiques et bfs. Je suis en train de tenter un algo avec simulation sur Search race mais c'est pas encore ça. Et j'aimerais tenter le minimax pour passer bois1 sur connect4
+ philRG: j'ai pas mal de if/else, mais je m'en sors encore bien en refactorisant souvent ou modélisant bien mes données
+ Remi.: Je suis dans le top bois2
+ philRG: pas besoin de min max pour monter wood 1
+ philRG: suffit de jouer au centre
+ philRG: min max depth 1
+ Remi.: J'ai presque tout pour faire un minimax. J'ai le bitboard, j'ai les masques pour voir les alignements. Manque plus que le vrai algo.
+ philRG: je compte aussi les alignements (donc heuristiques costauds)
+ philRG: j'ai aussi le bitboard, les actions, la mise à jour du bitboard, mais pas la fonction de win (4 in a row), çà bugge
+ philRG: je me suis inspiré d'un tuto, je maîtrise pas encore bien les opérations booléennes
+ philRG: le bitboard c'est pour une autre version de code
+ philRG: mais du mal à me motiver quand même
+ Remi.: C'est comme SR, j'ai la simulation qui fonctionne, j'ai la fonctio nd'éval ... mais il me manque le fait de tester des solutions avec profondeur, et conserver la meilleure.
+ Remi.: Je ne suis pas loin d'avoir de vraies IA.
+ philRG: C'est quand même chaud techniquement parlant, alors que sur des heuristiques, j'ai finalement qu'à appuyer sur des boutons
+ Remi.: Ensuite faudra que je me fasse un squelette réutilisable, pour adapter mes IA à tous les combats de bots.
+ philRG: c'est comme une voiture sans permis
+ philRG: oui beaucoup font çà je pense, moi non. Je réinvente à chaque multi
+ b0n5a1: j'ai ça (toujours le même main)
+ philRG: (c'est sûr que je prends pas le chemin le plus court)
+ Remi.: C'est le problème des heuristiques. C'est trop spécifique, faut tout recommencer à chaque fois.
+ philRG: ben vu que je découvre un nouveau jeu, je réinvente.
+ Remi.: b0n5a1 c'est ce que je vise ^^
+ philRG: j'adapte mon code au données et pas l'inverse
+ b0n5a1: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/9079dfa3-6c5e-4c29-ae0c-0600a0425468">http://chat.codingame.com/pastebin/9079dfa3-6c5e-4c29-ae0c-0600a0425468</a>
+ philRG: (enfin çà veut rien dire, je suis un poète quoi)
+ b0n5a1: je me démerde pour toujours avoir ça
+ Remi.: C'est gentil de partager ton main ... partage donc ta fonction Apply :P lol
+ b0n5a1: je peux te filer le Apply de StrategyWait :D
+ Remi.: while(true) sleep(1000);
+ philRG: n'empêche le code de b0n5a1 est propre
+ Remi.: Toujours
+ philRG: faut que le code soit adapté sinon çà sert à rien.
+ b0n5a1: en fait au départ je prends le temps de faire en sorte d'avoir cette base et de gérer / vérifier / débuguer que la gestion des inputs es ok...ensuite t'oublies cette partie définitivement
+ b0n5a1: parce que bon découvrir au bout de plusieurs heures que t'as une merde juste parce que tu fait n'importe quoi avec les inputs dès le départ parce que pas blindé ça fout bien les boules :D
+ philRG: oui moi j'utilise beaucoup mon debugger d'IDE pour blinder les inputs
+ Zorg1: bon bah c'était bien pénible leur numéro de sécu autrichien&#160;:(
+ Remi.: Mais quand je parlais de squelette je pensais à quelque chose de plus proche des algos d'IA, par exemple des fonctions récursives toutes prêtes pour le minimax, ou des fonctions d'échange de gênes totues prêtes pou les AG ...
+ Remi.: Ah t'es dessus depuis tout à l'heure&#160;? Moi j'ai zappé ^^
+ dwarfie: chiant mais pas dur mais chiant
+ b0n5a1: y'a manwe qui a un truc de ce genre sur son github Remi. je crois
+ b0n5a1: (ou pour les "concours" best dev de France machin trucs là je sais plus)
+ Remi.: J4ai fait l'erreur de prendre un starter et j'ai regretté, donc là avant de choper le travail d'aun autre, faudra que j'arrive à le faire une fosi tout seul.
+ philRG: Remi. oui je pense que c'est à toi des les écrire. 
+ Remi.: (désolé pour les fautres de frappes
+ philRG: pour te les approprier
+ b0n5a1: Remi.&#160;: <a rel="nofollow" class="external free" href="https://github.com/Manwe56/competitive-programming">https://github.com/Manwe56/competitive-programming</a>
+ philRG: un starter çà peut être bien quand tu découvres les multis, et apprendre à utiliser des squelettes 
+ Remi.: b0n5a1 tu es le serpent qui me tente avec la pomme ( et moi je suis Eve&#160;? Ok je supprime cette métaphore)
+ b0n5a1: t'as du GA, du minmax générique, un peu de tout
+ Remi.: Je conserve quand même le lien, mais je ne vais pas le regarder tout de suite.
+ Remi.: Surtout le minimax, je suis persuadé que je n'en suis pas loin.
+ Zorg1: pour les "métaheuristiques" (GA, MC, ...) t'as ça comme ressource&#160;: <a rel="nofollow" class="external free" href="https://cs.gmu.edu/~sean/book/metaheuristics/">https://cs.gmu.edu/~sean/book/metaheuristics/</a>
+ Remi.: Encore un nouveau terme ^^
+ Remi.: Tous les algos poussés dont j'ai entendu parler rentrent dans les "méta heuristiques", ou seulement quelques-uns&#160;?
+ Remi.: * entendu parler ici
+ Zorg1: je crois pas que le minimax rentre là dedans
+ Bon[]Crayon: Automaton2000 Ton avis&#160;?
+ Automaton2000: c'est sans doute pas la meilleure solution
+ Zorg1: oui mais toi tu as grugé pour trouver une meilleure solution Automaton2000
+ Automaton2000: parce que je fais des trucs
+ Zorg1: ah ok ^^
+ Remi.: On veut pas savoir Automaton2000 ^^
+ Automaton2000: c'est mon code de fb
+ Remi.: fb n'existe plus Automaton2000
+ Automaton2000: je connais pas le terme
+ Remi.: maintenant c'est bf Automaton2000
+ Automaton2000: tu mets pas à jour
+ Zorg1: fb=fibonacci bien sûr&#160;!
+ Remi.: ou fessebouc
+ Zorg1: y en a encore qui dise ça&#160;?
+ b0n5a1: face de bouc
+ Remi.: Les moyen vieux qui ont connu fb plus jeunes, je crois.
+ b0n5a1: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=CWW05O05ypA">https://www.youtube.com/watch?v=CWW05O05ypA</a>
+ Bon[]Crayon: facecomplots
+ Zorg1: nous sachions
+ Remi.: vous ça chiez&#160;?
+ Remi.: Automaton2000 oiublie ce que je viens d'écrire.
+ <b>**Automaton2000 se dit qu'il devrait refaire same , il y a des chances de ne pas avoir de problème</b></p><p><img src="/a/1848632360793" /> b0n5a1: vlà SkyNet
+ Zorg1: à ne pas confondre avec skylab
+ Remi.: Bon demain on va voir ce qu'ils ont sélectionné comme puzzle évènement pour la semaine.
+ Serge_Billault: vous vous souvenez que j'avais demandé pourquoi il y avait des puzzles faciles avec un si faible taux de réussite de la comunauté? je viens juste de niquer le bug de l'external validator n°6 de Pikaptcha EP2 en ayant découvert que la start pos de l'external validator ne coincide pas avec la start pos qui est contenue dans les inputs du puzzle. Hop! 100%&#160;!!!
+ b0n5a1: on est donc 2006 à ne pas avoir eu à contourner le bug du validateur 6...et 2026 sont encore bloqué par ce validateur bugué, va falloir publier cette info en or pour les débloquer :rofl:
+ dwarfie: hé hé
+ dwarfie: Automaton2000&#160;: ca merite une tortue la ...
+ Automaton2000: comme dans tous les jeux de tests
+ dwarfie: :rofl: ca c'est de la tortue
+ Serge_Billault: je suis flatté que vous pensize que je sois capable de fournir des solutions hard codées our Pikaptcha EP2. Mais c'et me surestimer
+ b0n5a1: ha tiens faudra que je fasse les versions Möbius un jour
+ Serge_Billault: au fait quand un puzzle est modifié, on perd no scores ou ils sont conervés quoi qu'il arrive?
+ Remi.: Pour un puzzle classique aucune idée, mais si c'est CG qui modifie les validateur d'un puzzle "compèt", les scores sont recalculés.
+ Serge_Billault: k
+ Remi.: On a eu le cas avec Thor en code golf l'été dernier.
+ b0n5a1: ou alors la version c++ change et ton bot crash parcequ'il manque un include parce qu'un pauvre truc à été changé de header :D
+ b0n5a1: et t'es à la cave du classement
+ b0n5a1: paf, compile plus ^^
+ Remi.: Allez, bonne nuit la commu. J4ai rien glandé ce soir ^^
+ b0n5a1: bn
+ Bon[]Crayon: :zzz:
+ Bon[]Crayon: Réveil toi Automaton2000 :trumpet:
+ Automaton2000: tout est à la fin de semaine
+ Zorg1: bientôt une nouvelle semaine Automaton2000 ^^
+ Automaton2000: ceux qui sont sur le même serveur
+ Stilgart: Automaton2000: tu parles d'une semaine sans licorne... quelle tristesse
+ Automaton2000: comment je peux le faire avec un seul pod
+ Stilgart: Automaton2000: une lettre après l'autre
+ Automaton2000: ou que tu es le seul a avoir besoin d'une sieste apres le degstif :p
+ Stilgart: c'est quoi cette agression gratuite&#160;?!
+ b0n5a1: :D
+ Zorg1: y en a qui se prennent en douce un digeo à 23:30&#160;?
+ DCVolo: automaton2000 tellement bourré qu'il a pas su l'écrire correctement
+ Automaton2000: je fais plus de simus
+ DCVolo: tu m'étonnes
+ b0n5a1: ha t'as aussi fait tricky number Zorg1 ^^
+ Zorg1: yep
+ Zorg1: 50 XP pas trop dur à gagner
+ b0n5a1: non mais un poil chiant
+ b0n5a1: d'ailleurs je suis tenté de rajouter un test case qui commence par 999 avec un x&#160;% 11 qui vaut 10 :D
+ Zorg1: ça va y a pas encore de parsing de gros débile ^^
+ Zorg1: il a précisé qu'il testait pas ce cas là dans l'énoncé ^^
+ b0n5a1: pfff j'ai lu en diagonale :D
+ b0n5a1: attend...t'as fait un isLeap qui gère&#160;% 400,&#160;% 100 et&#160;% 4 Zorg1&#160;?
+ Zorg1: %4 seulement 2000 à 2099
+ Zorg1: pas besoin de t'emmerder
+ b0n5a1: mouarf me suis emmerdé, je viens de tilter avec le code à dwarfie ^^
+ Zorg1: c'est comme si c'était un calendrier julien ...
+ Zorg1: je crois qu'il s'est planté en plus dans son énoncé il dit que 1900 est une leap year et pas 2000 alors que c'est l'inverse justement
+ b0n5a1: j'ai foncé tête baissé avec tous les cas ^^
+ b0n5a1: bon pour ce que ça change
+ Zorg1: bon j'ai un peu amélioré mon TSP en lua ^^ je faisais pas mal de trucs inutiles en fait ^^
+ Zorg1: mais ça reste du 2-opt bourrin&#160;;-)
+ b0n5a1: bourrin systématique ou des paires random&#160;? le systématique peut te bloquer dans un minima
+ Zorg1: deux arrêtes random
+ Zorg1: j'arrive à en tester 3 millions pour 300 points
+ b0n5a1: j'y ai plus touché j'ai un bug de merde que j'arrive pas à voir, surement un truc très très con ... en faisant du 2-opt bourrin systématique je me retrouve avec de la daube à un moment (ça marche que avec le 5)
+ Zorg1: au début oui j'ai un peu galéré à mettre au point ça me découpait mon graphe en plein de boucles ^^
+ b0n5a1: le 10 dès le départ mon nearest neighbors me donne l'opti
+ b0n5a1: ouais j'ai le graphe qui est pété à un moment, pas vu où j'ai déconné
+ Zorg1: typiquement tu t'es mélangé dans l'ordre de parcours
+ b0n5a1: bah normalement je m'en fous
+ Zorg1: justement non c'est ce qui t'empéche de faire des boucles en fait
+ b0n5a1: à partir de la solution initiale nearest neighbours je me fait une nouvelle représentation avec que les arêtes pour que chaque opt-2 se fasse en O(1) sans devoir réorienté des trucs, j'ai peut être merdé là dedans...
+ Zorg1: bah t'es un peu obligé de réorienté des trucs en fait ou alors j'ai pas vu l'astuce suprême ^^
+ b0n5a1: et clairement je pète le cycle
+ b0n5a1: je me suis fait une fonction qui reconstitue tout le chemin dans un sens ou l'autre (peut importe) à partir de ma représentation et ça marche bien...mais clairement à un moment je merdoie (je me retrouve dans un cas avec une liste d'arrêtes qui contient 2 x la même alors que ça devrait pas arriver)
+ b0n5a1: bon OK je SAIS où est ma connerie :D&#160;: "Pour des problèmes euclidiens avec des villes uniformément distribuées dans le carré unité et en utilisant une structure de données permettant d'effectuer une modification 2-opt en O ( 1 ) {\displaystyle O(1)} O(1)" ...
+ b0n5a1: faut que je gère les changements de direction :D
+ b0n5a1: et pas de O(1)
+ b0n5a1: j'aurais jamais dû lire ce truc, ça m'a induit en erreur, faut que je réoriente, fallait pas aller plus vite que la musique
+ b0n5a1: je verrai peut êter au courant de la semaine, d'abord full bourrin pui random
+ Zorg1: oui j'avais lu ça, ça m'a un peu perdu
+ b0n5a1: Lin et Kernighan c'est peut être à creuser aussi
+ b0n5a1: bon sur ce, bonne nuit ^^
+ Zorg1: bn

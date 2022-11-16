@@ -1,0 +1,204 @@
+ dwarfie: ben oui ... passons a quelque chose de bien plus polluant ... le lithium pour les batteries ...
+ JBM: \o gg Bob :D
+ Thyl: Automaton2000
+ Automaton2000: il faut que j'aille chercher mes gamines a l'ecole
+ Thyl: :D
+ Thyl: je crois que Bob influence Automaton2000
+ Automaton2000: t'as pas eu de mail
+ Thyl: #Clash
+ heloche: hello
+ Alshock: Coucou les enfants, coucou les tortues @Automaton2000 @AutomatonNN
+ Automaton2000: si tu veux faire un peu de ça
+ AutomatonNN: Coder tortue pour le moment je pense que c'est pas trop de temps pour reprendre le contest quand mêm
+ Alshock: :v:
+ Alshock: Dites, comment on fait du calcul matriciel correctement en C++ sur CG&#160;?
+ Alshock: Je compte pas trop sur moi-même pour être capable d'optimiser des briques élémentaires correctement
+ Alshock: surtout en parallèle
+ pardouin: tu veux juste faire des produits de matrice&#160;?
+ pardouin: ou bien aussi des inverses par exemple&#160;?
+ pardouin: si c'est juste pour somme, différence, produit, puissance, tu les redéfinies à la main, ça prend deux lignes sauf produit un poil plus, et la puissance tu peux le faire en exponentiation rapide (M * M^(n-1) si n impair sinon M^(n/2))
+ pardouin: au carré
+ JBM: produit a la main c'est deja pas top
+ JBM: fais au moins strassen
+ philRG: le produit de la matrice A (n × m) par la matrice B (m × p) est la matrice C (n × p) telle que l'élément Cij est égal au produit scalaire de la ligne i de la matrice A par la colonne j de la matrice B
+ philRG: rien de compliqué&#160;:-D
+ JBM: non, mais y'a mieux
+ philRG: ah en python y a numpy et pandas dispos en modules sur CG
+ philRG: doit y avoir de lib c++
+ pardouin: oui il y en a comme eigen mais pas sûr que ce soit dispo sur CG
+ philRG: ah sinon coder une fonction, c'est ce que je fais quand je convertis mes codes python en C++, je recode tout plus rapide
+ philRG: <a rel="nofollow" class="external free" href="http://www.codeurjava.com/2015/01/produit-matriciel-multiplication-de.html">http://www.codeurjava.com/2015/01/produit-matriciel-multiplication-de.html</a>
+ philRG: c plus rapide que de comprendre comment fonctionne les libs c++ 
+ philRG: nt
+ nopnop: je suis tomber sur un code bizarre en clash en python,
+ nopnop: qqun peut me donner des indics&#160;?
+ nopnop: g,s,b=map(int,open(0))
+ nicola: open(0) doit contenir trois trucs.
+ nicola: Chacun est convertible en un entier.
+ nicola: Et pouf.
+ nopnop: ok mais ducoup que fait open(0)&#160;?
+ nicola: Aucune idée.
+ nicola: C’est une fonction.
+ pardouin: il avait du définir une fonction open qui renvoyait trois trucs
+ nopnop: nop c'était la première ligne
+ nopnop: si je me trompe pas elle renvoie la totalité des input mais je sais pas pourquoi
+ nicola: Oui, je pense aussi.
+ nicola: Tape help(open) dans un shell Python.
+ nicola: À tous les coups, 0 désigne l’entrée standard.
+ pardouin: peut être l'équivalent de sys.stdin qui contient les inputs
+ nopnop: d'après ce que je vois python interprete les input comme faisant parti du fichier 0
+ Zorg1: ah ça lit trois entier de l'entrée standard en fait
+ nopnop: après experimentation open 0 à l'air de contenir tout ce qui est envoyé en input
+ Zorg1: oui ils disent que si c'est un nombre c'est le fd (file descriptor) et 0 c'est l'entrée standard, 1 la sortie standard et 2 la sortie d'erreur 
+ Zorg1: (enfin par défaut, on peut s'amuser à les redéfinir)
+ nopnop: ok merci
+ BlaiseEbuth: Yo tout l'monde&#160;! Automaton2000, AutomatonNN&#160;!
+ Automaton2000: c'est sûr que ça soit très compliqué mais ça crève
+ AutomatonNN: damneds tu as pas trop de mal à comprendre comment tu peux pas te donner une question de particulier
+ Zorg1: o/
+ BlaiseEbuth: \o
+ Marlon-copin: <a rel="nofollow" class="external free" href="https://dogehouse.tv/room/e0561096-66fe-40e8-90e5-430533c82d20">https://dogehouse.tv/room/e0561096-66fe-40e8-90e5-430533c82d20</a>
+ BlaiseEbuth: Wé&#160;! Un lienrandom&#160;!
+ BlaiseEbuth: Evidement j'ai pas mon badge. Sinon, paf. Kick&#160;!
+ kayou: Bonjour
+ kayou: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/78d3f58e-f889-43fa-b1f3-d6054f465b04">http://chat.codingame.com/pastebin/78d3f58e-f889-43fa-b1f3-d6054f465b04</a>
+ BlaiseEbuth: 'soir
+ BlaiseEbuth: Oui&#160;?
+ kayou: Je faits un puzzle, facile et par curiosité j'ai mesuré le temps avec 2 facons da fair, et j'ai un ecart de x5 entre les 2
+ kayou: je suppose que ce qui est lent c'est l = [v for a,v in zip(f"{i:0{n}b}",bar) if a=='1']
+ BlaiseEbuth: C'est python qu'est lent.
+ kayou: vous auriez une idée pour arriver a une vitesse equivalente à itertools.combinations
+ kayou:&#160;?
+ BlaiseEbuth: Coder en c...
+ BlaiseEbuth: Sérieusement hein. Itertool est codé en c  donc il va de base plus vite que du code python.
+ kayou: ok
+ BlaiseEbuth: Aprés y'a peut-être une différence d'algo, mais déjà tu compare deux langages n'ayant pas les mêmes perfs.
+ kayou: ca fait une grosse diff quand même, donc pour des perf en python faut utiliser des modules et pas faire le truc soist même
+ BlaiseEbuth: Effectivement oui.
+ slims78200: peut-être parce que python est un langage interprété
+ BlaiseEbuth: peut-être
+ Zorg1: heu kayou dans le premier cas tu passes par des chaînes de char j'ai l'impression ça doit pas aider
+ JBM: pourquoi les twitcheurs "tech" mettent de la musique?&#160;:(
+ BlaiseEbuth: Parce que c'est cool.
+ Zorg1: pour l'édification de tes oreilles
+ BlaiseEbuth: Enfin ça dépends de la musique.
+ JBM: du rap foireux
+ BlaiseEbuth: Pas cool.
+ JBM: deja qu'il a pas l'air de savoir ce qu'il fait cote tech...
+ Zorg1: musique random pour manip random
+ Zorg1: ça colle
+ JBM: bon je sais pas pourquoi je regarde ca
+ Zorg1: on ne jugera pas. c'est pas notre style
+ BlaiseEbuth: Ni juges ni soumis.
+ JBM: ça jure, ça peste, ça demande à sa suite de debug pour lui alors qu'on a aucune idée de ce qu'il fait
+ BlaiseEbuth: JBM 07:11PMbon je sais pas pourquoi je regarde ca
+ JBM: c'est pathetiquement fascinant
+ BlaiseEbuth: C'est un cg stream&#160;?
+ JBM: dur a dire
+ Zorg1: tu parles il a du s'abonner à des gars chelous et maintenant il se plaint
+ JBM: y'a bien le keyword dans le titre
+ JBM: mais il fait autre chose
+ Zorg1: ah on avait déjà le cas avec un gars qui s'entrainait au PHP
+ JBM: bon la au moins c'est du c
+ BlaiseEbuth: Ah le moteur de jeu.
+ Zorg1: mais vous être que 2 à regarder ce truc
+ Zorg1: enfin 3 je regarde
+ JBM: je l'ai vu monter a 7
+ JBM: mais ça les vaut pas
+ BlaiseEbuth: dingue
+ JBM: maintenant il prend ses coups de fils perso en live
+ Zorg1: ah il cause avec un autre gars
+ JBM: ouais
+ Zorg1: bon il va nous faire sa cuisine en direct lui aussi&#160;?
+ JBM: c'est qui qui fait ca?
+ BlaiseEbuth: C'est ce qu'on fait généralement au téléphone ouai...
+ Zorg1: bah le gars avec ses gants
+ JBM: ah ouiiiiiiiiiiiiiiii
+ JBM: ça fait longtemps lui
+ JBM: comment il s'appelait deja
+ Zorg1: genesis je crois
+ JBM: oui voila
+ JBM: bonne ram
+ JBM: c'est bien le mec qui delegue ses exos d'embauche
+ JBM: ca biaise pas du tout
+ BlaiseEbuth: Ah non, c'est pas de la ram, je l'ai reboot y'a pas longtemps Zorg1.
+ Zorg1: j'avais sauvé des trucs dans ma partition de swap
+ BlaiseEbuth: C'est chez CG qu'on stocke des trucs en RAM. :smirk:
+ Zorg1: tkt on va reboot le serveur tu vas le récupérer ton badge
+ Zorg1: bon bah c'est super pénible son twitch
+ BlaiseEbuth: Personne vous obligé à regarder...
+ JBM: personne
+ JBM: on est juste scotches
+ JBM: on arrive pas a decrocher
+ Zorg1: moi ça va j'ai déco
+ BlaiseEbuth: Comme Valérie.
+ Zorg1: omg je l'avais oublié celle la
+ Zorg1: pas merci Blaise
+ BlaiseEbuth: :3
+ JBM: je-sais-pas-ce-que-je-fais.lvl++
+ JBM: ah ben avec tout ca sa musique s'est rretee et il s'en est pas encore rendu compte
+ JBM: c'est deja ca
+ Zorg1: c'est quoi sa technique&#160;? il change le plus vite de fenêtre juqsu'à son code marche&#160;? (wé j'air eco)
+ JBM: plus je le regarde
+ JBM: plus j'ai l'imression qu'il essaie de corriger des problemes qu'il n'a pas
+ JBM: et je me demande ou est passe l'enseignement de la demarche scientifique
+ kayou: Il y a plusieurs profs ici , faut leur demander :D
+ JBM: ou pas
+ Zorg1: héhé
+ Zorg1: ah ils parlent de bouffe
+ JBM: I KNEW IT
+ JBM: twitch dit 2 viewers
+ JBM: c'set juste toi et moi?
+ Zorg1: bah j'ai l'impression ^^
+ JBM: houla
+ JBM: il commence a comprendre qu'il avait pas de pb
+ JBM: les moulins a vent de la «precision»
+ JBM: s'il avait codé juste un bout de render plutôt que debug des illusions, il se serait ptet rendu compte que ct bon depuis le début
+ Zorg1: ah il est sur son raytracing depuis des plombes&#160;?
+ JBM: je sais pas
+ JBM: il est à debug sa fameuse précision depuis que j'y suis
+ JBM: omg il se fait raid
+ Zorg1: waouh 16
+ JBM: bon mangeons plutot que regarder ca
+ JBM: apres une bonne action
+ MightyFrenchmanOfPower_d5dc: salut
+ BlaiseEbuth: o/
+ JBM: le nick qui tue
+ Zorg1: \o
+ JBM: /o\
+ Suez17: ça me tue les mecs en python, comment vous faites pour résoudre des exos en 1-2 lignes :upside_down:
+ Suez17: en Java, j'écris 15 lignes
+ Zorg1: si t'essaies de faire du shortest en Java, aussi ...
+ Zorg1: pas forcément le langage le + adapté :p
+ JBM: c'est vrai que c'est pas un langage qui score haut en termes d'adaptation
+ Suez17: effectivement, mais quand je vois un gros tas d'instructions condensées, j'arrive à peine à lire, ça pique les yeux :D, mais c'est vrai c'est sûrement avec de l'entraînement
+ JBM: lis pas si ça te fait map
+ JBM: *mal
+ Suez17: c'est vrai, mais je trouve ça beau d'un côté
+ JBM: c'est beau et ça pique les yeux?
+ Suez17: Je me comprend, c'est une forme d'art abstrait
+ Suez17: bon je m'égare :D
+ Suez17: je pense que je vais me mettre à l'apprentissage du Python
+ Zorg1: :thinking:
+ Suez17: après voilà, c'est une façon de coder optimisée pour un coding game, pas sûr que ça passe sur un projet
+ Zorg1: ^^
+ BlaiseEbuth: 'tain. J'ai un installeur qui crée des fichiers invisibles...
+ BlaiseEbuth: Je sais pas comment c'est possible... L'installeur se termine et rien ne semble avoir été installé, le dossier d'installation est strictement vide. Je relance l'installeur et quand je clique sur 'browse' pour choisir le dossier d'install, il est pas vide, y'a une arborescence, des fichiers...
+ BlaiseEbuth: Mais dans l'explorateur de fichier il est toujours strictement vide.
+ BlaiseEbuth: Et le dossier est pas caché ni rien. 
+ BlaiseEbuth: (╯°□°）╯︵ ┻━┻
+ BlaiseEbuth:  Y'a bien que sur windôbe qu'il peut y'avoir des conneries pareilles...
+ slims78200: bientôt Windows sera open source
+ BlaiseEbuth: Ah&#160;? Ils ont pas peur du ridicule...
+ slims78200: lol
+ BlaiseEbuth: Un problème de droit apparement, si j'essayes d'installer dans 'downloads' ça marche. Mais je comprends quand même pas comment le dossier peut être visible si il existe pas...
+ BlaiseEbuth: Ou exister sans être visible.
+ BlaiseEbuth: Et vice versa.
+ Zorg1: c'est un brevet Microsoft
+ kayou: sur win10, je dois de temps en temps faire rafraîchir le vue, pour voir les nouveaux fichiers
+ kayou: ou demarer ne nouvelle insatnce de l'explorateur
+ BlaiseEbuth: J'ai tué/relancé l'explorer mais ça ne change rien...
+ BlaiseEbuth: Mais bon, avec les droits d'admin ça marche...
+ kayou: c'est peut que win10 estime que tu n'as pas vraiment besoin du truc que tu cherches à installer, et tu devrais lui faire confiance, il connait mieux que toi ce qui est utile
+ nopnop: on peut utiliser des modules custom&#160;?
+ BlaiseEbuth: nop nopnop

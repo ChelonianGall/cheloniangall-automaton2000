@@ -1,0 +1,738 @@
+ jfaixo: aller plus vite que lui&#160;;)
+ jfaixo: Monarc Tu sembles avoir un algo relativement simple qui cible le prochain checkpoint et est quasiment tout le temps à 100 ou 80, pour la faire courte: je doute que tu parviennes à battre le boss bronze avec un algo simple&#160;:/ il y a plein d'articles de blogs qui expliquent différentes comment fonctionne la course (pour pouvoir la simuler, notamment sur les collisions), et qui donnent des pistes d'algos qui permettent de "mieux" piloter
+ Haashi: sinon il y a -3vel
+ Zorg1: en fait c'est le problème de Josephus t'as une formule
+ leojean890: ah ok je connaissais pas:) j'ai codé bêtement la simu et ça passe pas le valideur avec les grosses données xD
+ leojean890: j'essaye de réduire la complexité
+ leojean890: je vais regarder Josephus
+ leojean890: <a rel="nofollow" class="external free" href="https://www.enseignement.polytechnique.fr/informatique/INF321/TD.old/06-07/td_7/">https://www.enseignement.polytechnique.fr/informatique/INF321/TD.old/06-07/td_7/</a>
+ leojean890: enseigné à l'X&#160;?:P
+ Zorg1: enfin la formule c'est dans certains cas, je raconte n'importe quoi&#160;:(
+ leojean890: ah ok^^
+ leojean890: c'est chaud pour le valideur 9876542365445 5263442546547 LEFT
+ Zorg1: en fait on est dans le cas "simple" (k=2)
+ Zorg1: pas besoin de simu ^^
+ nugghead: yo salut les gars 
+ Monarc: salut
+ Monarc: faut faire koi pour le boss4 de coders-strike-back svp?
+ Zorg1: o/ tout le monde et à Automaton2000
+ Automaton2000: je suis plus proche de 0
+ Zorg1: ça lagge ça sent le reboot de serveur dans pas longtemps ... :thinking:
+ Stilgart: Automaton2000: oui, mais par valeurs négatives
+ Automaton2000: bon on est pas super clair
+ Stilgart: bonjour à tous, tortue Automaton2000 et licorne AutomatonNN, au passage
+ Automaton2000: les serveurs sont en train de faire les choses à l'envers
+ Stilgart: (tiens, NN est toujours mort)
+ BigUP: Monarc, jfaixo, un algo simple doit pouvoir le faire en bronze, mais il faut gérer les collisions au moins au tour d'apres (sur 3 tours c'est mieux)
+ AdrDer: Hello la communauté! Puis-je vous poser une question concernant les IDEs externes pour les jeux multi? 
+ Neumann: Oui.
+ AdrDer: Je voulais savoir si certains codait depuis leur propre IDE en passant par le repo gitHub? Et comment il faisait pour que le main s'exécute correctement (j'ai des warning concernant les accès à "guice-4.0.jar"?
+ Neumann: Le repo Github&#160;?
+ AdrDer: J'essaie de suivre ce tuto codingame <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/25775/codingame-sdk-documentation/create-a-solo-game">https://www.codingame.com/playgrounds/25775/codingame-sdk-documentation/create-a-solo-game</a>
+ AdrDer: C'est le pas à pas pour créer des jeux en clonant le repo. L'idée était de pouvoir développer en local si c'est possible&#160;?
+ Neumann: C'est confus, un peu. C'est quoi ton but final&#160;? Créer un jeu&#160;? Ou coder sur un jeu existant en utilisant un IDE local&#160;?
+ AdrDer: Le but final est de coder avec un IDE local. 
+ Neumann: De coder quoi&#160;?
+ AdrDer: Le spring challenge 2021 mais il n'est pas encore sorti. Je voulais tester avec un multi quelconque avant le début de la compétition
+ Neumann: Ok donc tu regardes pas le bon truc
+ AdrDer: Ah! C'est possible... pourrais-tu m'aiguiller vers le bon tuto&#160;?
+ Neumann: <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/codingame-sync-beta/614">https://www.codingame.com/forum/t/codingame-sync-beta/614</a>
+ Neumann: Coder en local&#160;!= faire tourner le jeu en local
+ Neumann: Ca c'est juste une extension qui synchronise un fichier local avec le contenu de l'IDE, ça permet juste de coder dans ton IDE en local, mais ça te permettra pas de faire tourner le code pour autant
+ AdrDer: L'idée principale derrière le développement en local était de pouvoir faire du pas à pas en debug. Je ne pourrais pas en faire du coup&#160;?
+ Neumann: Pour faire tourner le code en local, soit tu reprend le referee du jeu (exemple&#160;: <a rel="nofollow" class="external free" href="https://github.com/CodinGame/FallChallenge2020">https://github.com/CodinGame/FallChallenge2020</a>) et tu te débrouilles pour lancer une partie en attachant à la main ton process qui tourne en debug dans un autre IDE (c'est chiant mais faisable)
+ Neumann: Ou alors tu codes toi-même un truc qui permet de sérializer un état du jeu, pour faire tourner ça dans ton code, si tant est que t'ai recodé le moteur du jeu.
+ Neumann: Auquel cas c'est le code de ton bot qui fera TOUT le boulot
+ Neumann: Je sais pas si c'est clair
+ Neumann: Pour toi c'est plutôt l'option 1 qui t'interesse je suppose
+ AdrDer: L'option 1 me rapproche du comportement du jeu. Si j'ai bien compris l'option 1, c'est d'ouvrir un thread entre deux application dont l'une sera en debug (mon joueur) et l'autre en attente d'informations (le moteur du jeu).
+ Neumann: En gros oui
+ Neumann: Je l'ai fait, y'a longtemps. Je sais plus exactement comment, mais c'est faisable.
+ AdrDer: la deuxième parait plus simple effectivement mais me permettra de vérifier uniquement des cas particulier.
+ Neumann: De mémoire je compilais mon IA en C++. Je lancais le referee en debug avec un breakpoint au démarrage du jeu juste après la création des threads des bots. Puis dans mon IDE C++ je rattachait mon debugger au thread qui venait d'être créé pour faire du pas-à-pas dans mon IDE C++
+ AdrDer: Ce que tu appels le referee c'est le moteur&#160;?
+ Neumann: Oui, c'est le "code arbitre", qui est fourni sur les jeux multis, cf. exemple que j'ai linké plus haut
+ AdrDer: Ok, ça roule. Je vais essayer tout ça. merci pour les informations. 
+ Neumann: La première étape c'est de réussir à faire tourner le referee sur une partie avec des bots en local
+ Neumann: Tu verras pour la partie debug dans un second temps
+ AdrDer: J'ai le repos, le jeu se lance mais c'est le bot basics  en java qui tourne. Il faut pouvoir lier un autre type de langage. 
+ Neumann: <a rel="nofollow" class="external free" href="https://github.com/CodinGame/FallChallenge2020/blob/main/src/test/java/Fall2020Main.java">https://github.com/CodinGame/FallChallenge2020/blob/main/src/test/java/Fall2020Main.java</a>
+ Neumann: C'est la dedans que tu précises quel bot tu veux lancer
+ Neumann: Regardes les différentes méthodes offertes par le gameRunner, tu peux notamment lancer un bot via une ligne de commande
+ Neumann: Pour lancer du Python par exemple, ou n'importe quoi d'autre
+ AdrDer: Je vais regarder ce qu'il propose. En tous cas merci pour le coup de main&#160;;)
+ Haashi: adrDer perso j'ai toujours fait comme l'option 2 que Neumann décrit, gère ton débug directement dans ton code
+ Haashi: dans l'ide en ligne de CG, quand tu éxecutes un test, tu peux récupérer les inputs successifs qu'a recu ton code (chrome &gt; f12 &gt; network)Il ya longtemps je m'amusais à lancer un test avec l'api pour récupérer les inputs successifs
+ Haashi: et après, tu lances juste un autre programme qui envoie les inputs successivement à ton bot
+ Haashi: comme ça ca t'évite de recoder le moteur tant que t'en a pas, et tu peux passer en debug facilement sur ton bot
+ AdrDer: En gros il faut coder un serializer pour les entrées de mon script (je suis en python) en lui filant un jeu de test extrait depuis l'onglet Network?
+ Haashi: dans l'onglet network, tu vas avoir une requete "play"
+ Haashi: si tu regardes le détails, tu peux regarder chaque tour qui joue
+ Haashi: tu as acces aussi a un "stderr"dans ce stderr, tu peux faire ton propre format pour récupérer ce que tu as recu en input 
+ Haashi: je te fais un example pastebin
+ AdrDer: Ah dac! Je comprends pourquoi certains joueur resortait les inputs ^^
+ Haashi: bah de manière générale c'est toujours cool d'avoir les inputs en stderr en permanence
+ Haashi: même sans les analyser ou s'en servir pour débugguer, c'est juste plus rapide que de regarder le viewer, qui défois et désynchro d'un tour
+ AdrDer: ça ne joue pas trop sur les perfs?
+ Haashi: tu les enleve quand tu submits ^^
+ AdrDer: ça marche&#160;;)
+ Haashi: <a rel="nofollow" class="external free" href="https://pastebin.com/wwV6ZfKh">https://pastebin.com/wwV6ZfKh</a>
+ Haashi: tu vois quand le agentId=0 (le joueur de gauche dans l'IDE)Il y a un stderr, qui renvoie les inputs sous un format&#160;:{ inputs&#160;: [ 'input1', 'input2'] } etc
+ Haashi: derrière tu fais un script bash ou ce que tu préfères pour venir récupérer la liste des inputs, et comme ça tu peux les envoyer a ton bot pour débuguer
+ Haashi: par contre cette méthode elle te permettra pas de "hot reload" ton code, si tu changes ton code, tu resubmit pour avoir les inputs actualisés avec le changement de ton code
+ Haashi: après le plus simple reste encore d'avoir recoder le moteur comme ça tu fais tout en local en hotreload :p 
+ AdrDer: Effectivement, ç'est plus rapide à mettre en place. C'est déjà un début! Jusqu'à présent je codait uniquement dans l'IDE. Recoder le moteur, ça me parait chaud en terme de timing pour le prochain challenge mais pourquoi pas pour les suivants&#160;;) 
+ Haashi: Généralement recoder le moteur c'est relativement simple si il y a pas de physique farfelue dans le jeu
+ AdrDer: On va y aller étape par étape ^^ Mais en tout cas, merci pour les conseils&#160;;)
+ BlaiseEbuth: Pour récupérer les inputs y'a <a rel="nofollow" class="external free" href="https://eulerschezahl.herokuapp.com/codingame/replays/reproduce/">https://eulerschezahl.herokuapp.com/codingame/replays/reproduce/</a>
+ BlaiseEbuth: Yo tout l'monde&#160;! Automaton2000! AutomatonNN&#160;?
+ Automaton2000: mais qu'est-ce que j'ai bien du mal à croire que tu as des infos sur le contest
+ BlaiseEbuth: J'en ai pas Automaton2000!
+ Automaton2000: et comme je suis une bille
+ Zorg1: bot qui roule n'amasse pas mousse, Automaton2000
+ Automaton2000: mais je lui ai dit
+ BlaiseEbuth: Woah! Y'a un coc qui demande de compter une lettre dans une chaîne qui a 47 upvotes! :scream:
+ Zorg1: ah il a a finalement réussi à le mettre en validation celui là
+ Zorg1: bof plus rien ne m'étonnes sur les CoCs CG
+ BlaiseEbuth: "réussi à le mettre en validation"&#160;?
+ SkyDream: Bonjour, j'ai quitté le channel de mon groupe pour le spring challenge. Y a t'il une commande pour le rejoindre&#160;?
+ BlaiseEbuth:  /join channel
+ SkyDream: Merci
+ Zorg1: bah hier il demandait il comprenait pas pourquoi son puzzle n'était pas validé alors qu'il était en WIP
+ BlaiseEbuth: Oh
+ Zorg1: mais bon 500 XP pour ça c'est du bon boulot pour nourrir les gosses (ou laver dans la version de JBM)
+ Zorg1: après y en a bien qui farment du XP avec des puzzles éternellement en WIP :p
+ BlaiseEbuth: C'est une légende, personne fait ça.
+ Zorg1: ou alors c'est dans un but purement scientifique
+ VannHell: excusez moi&#160;; j'ai une quête qui me demande de réussir le puzzle de la semaine. or le puzzle de la semaine est un combat de bot (par définition, difficile à "réussir", on peut gagner où perdre, selon l'adversaire, mais pas vraiment réussir). Pour valider ma quête, suis censé faire quoi&#160;?
+ Magus: Je crois avoir vu sur le discord que Thibaud avait mal regardé avant de sélectionner le puzzle de la semaine
+ Zorg1: normalement passé à la ligue supérieure avait dit un gars de CG, mais vu qu'il n'y a qu'une ligue
+ Magus: En théorie il faut réussi à passer dans a ligue supérieure
+ Magus: Mais la pour celui de cette semaine ça va être compliqué :D
+ Zorg1: jamais été trop convaincu par le choix de mettre des multis en puzzle de la semaine, mais bon
+ Mynoteet: hello
+ Zorg1: o/
+ Marwan-04: :disappointed:
+ Haashi: le puzzle de la semaine pour moi c'est un vrai puzzle
+ Haashi: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/medium/byte-pair-encoding">https://www.codingame.com/training/medium/byte-pair-encoding</a>
+ Zorg1: ah&#160;? j'ai yinsh moi
+ Zorg1: pê un update 
+ 1Alex: j'ai pas eu le courage de lire toutes les regles de Yinsh&#160;:(
+ Zorg1: oui c'est pas un jeu très simple
+ Littleyounes: athlétique le puzzle de la semaine
+ JBM:  vous voyez le mal partout
+ JBM: alors qu'il est juste WIP
+ Mynoteet: Salut Mathis
+ pierreBouterige: c'est qui le nulos au dessus de moi
+ Mynoteet: tg
+ Mynoteet: v
+ pierreBouterige: signalez svp des propos comme ça pas ici
+ pierreBouterige: au cas où c'est un blague on se connait
+ falcoco: Bonjour, comment fait-on pour connaitre la valeur des variables dans Coder Strike Back&#160;? Je suis obligé d'afficher 3 valeurs et si je veux en voir d'autre sa ne marche pas 
+ Tiouz: Tu peux utiliser l'output sur stderr. Par exemple en python tu peux faire print("des trucs",file=sys.stderr), ou en c++ cerr &lt;&lt; "des trucs" &lt;&lt; endl;
+ falcoco: Je suis en java et je suis obligé de mettre System.out.println(x + "" + y + "" +vitesse)
+ Tiouz: google "java print to cerr"
+ falcoco: j'aimerai voir comment évolue mon angle au fur et à mesure pour mieux ajuster 
+ pierreBouterige: ceux qui cherche une soluce de pika detective&#160;:
+ pierreBouterige: perso.isima.fr/~pibouterig/pika_detective/pikadetective_rapport.html
+ Tiouz: L'affichage dans stderr va se faire en plus de l'affichage sur stdcout
+ falcoco: ok je vais regarder ça, merci =)
+ Bon[]Crayon: Salut tout le monde.
+ Bon[]Crayon: Automaton2000 o/
+ Automaton2000: meme si ca ne marche pas
+ Bon[]Crayon: Automaton2000 Ça passe ou ça casse&#160;!
+ Automaton2000: déjà parce que le referee
+ Alshock: @pierreBouterige Je peux savoir ce que tu branles là exactement&#160;?
+ leojean890: ah oui balancer des soluces sur le chat..xD
+ BlaiseEbuth: Reuh
+ BlaiseEbuth: Skoi sbordel
+ shifted: ils sont cringe les gens qui utilisent python
+ Tiouz: Alors attaque gratuite
+ Tiouz: merci
+ shifted:&#160;:)
+ BlaiseEbuth: pierreBouterige&#160;: Le partage de solution n'est pas vraiment l'esprit du site. A plus forte raison de manière aussi publique. Et (peut-être) à encore plus forte raison sur un ancien contest. Prends ce message comme un avertissement. Un autre comportement de ce genre entrainera des sanctions.
+ BlaiseEbuth: Que les témoins prennent acte. blablabla... La séance est levée.
+ 351062: Ca déconne zéro
+ JBM: mieux valent trois cent cinquante-et-un mille soixante-deux!
+ Neumann: Hein&#160;?
+ BlaiseEbuth: Bah si, y'a des cons -&gt; on les vire -&gt; on déconne. cqfd
+ Neumann: En effet.
+ dr-xeno: bof
+ Seiryn: J'ai une font giga bizarre sur le site
+ Seiryn: Les * et les chiffres sont énormes
+ Seiryn: <a rel="nofollow" class="external free" href="https://imgur.com/Pwmp2ph.png">https://imgur.com/Pwmp2ph.png</a>
+ Alshock: Tu dois avoir un plugin d'affichage qui interagit avec celui du site, je vois pas comment tu peux avoir ça autrement
+ Zorg1: c'est sur quel navigateur&#160;?
+ Seiryn: Firefox
+ Seiryn: Sous arch linux
+ Seiryn: Mais ça fait ça que dans l'éditeur de code c'est ça qui est étrange
+ Zorg1: pourquoi&#160;? il doit chercher une fonte particulière pour afficher "la mise en  commentaire"
+ Zorg1: c'est que dans les commentaires que t'as des étoiles et chiffres énormes&#160;?
+ Alshock: Tu peux jouer au saumon en inspectant le code source de la page avec F12 ou Ctrl Shift C, et en regardant la police des tes lignes avec des astérisques
+ Zorg1: houla "jouer au saumon" remonter à la source, bien bien
+ Alshock: .monaco-editor {
+ Seiryn: Alors
+ Seiryn: c'est "monospace" qui fait cet effet la
+ Seiryn: Celui entre guillemet
+ Alshock: c'est très bizarre, parce que ta font est pas de la famille monospace, genre t'aurais une font qui s'appelle littéralement monospace (ce qui est déjà étrange) et qui aurait court-circuité la famille monospace en n'en faisant pas partie&#160;? o.o
+ BlaiseEbuth: La faute de Renault...
+ Alshock: Encore un connarlt de virus&#160;!
+ BlaiseEbuth: :3
+ Seiryn: Sous linux je devrait la voir pourtant si j'avais une font appellé "monospace"
+ BlaiseEbuth: T'as pas un plugin ff qui peut faire ça?
+ Seiryn: Je viens de désactiver tout les module pour voir mais rien
+ BlaiseEbuth: Tu peux montrer un screen plus large? j'suis curieux ^^
+ pardouin: et moi je suis cringe et je sais même pas pourquoi&#160;:'(
+ BlaiseEbuth: Ouai, mais ça on le savait déjà
+ BlaiseEbuth: Zorg1: <a rel="nofollow" class="external free" href="https://ldjam.com/events/ludum-dare/48/the-icarus">https://ldjam.com/events/ludum-dare/48/the-icarus</a> J'ai adoré :ok_hand:
+ Seiryn: Avec "monospace"
+ Seiryn: <a rel="nofollow" class="external free" href="https://imgur.com/oqrP1GX.png">https://imgur.com/oqrP1GX.png</a>
+ pardouin: c'est so 2019
+ Seiryn: Sans "monospace"<a rel="nofollow" class="external free" href="https://imgur.com/d5Vy4Sq.png">https://imgur.com/d5Vy4Sq.png</a>
+ pardouin: ça manque de 3D, de raytracing et de fumée et d'explosions partout
+ Alshock: ah oui c'est vraiment dégueulasse
+ Seiryn: C'est affreux
+ BlaiseEbuth: Bah, n'utilise pas monospace. Solved!
+ Alshock: en tout cas ça confirme t'as une police pas monospace du tout (et pas que sur les étoiles) qui s'appelle "monospace", et ça, ça me troue le cul
+ Seiryn: Mais elle est meme pas dans mon système
+ Alshock: j'ai aucune idée d'où elle est mais si elle est chargée elle vient bien de quelque part, non&#160;?
+ Seiryn: elle apparait pas dans fc-list en tout cas
+ BlaiseEbuth: Peut-être qu'elle s'appelle pas monospace.
+ Seiryn: Je vais passer sur un autre navigateur pour voir si ça vient de firefox ou de mon système
+ Stilgart: c'est quoi cette police monospace de l'enfer sur terre&#160;?
+ BlaiseEbuth: :scream::ghost:
+ Stilgart: (au passage, vivent les navigateurs et leur ordre aléatoire des polices)
+ Seiryn: La bonne nouvelle c'est que c'est pas mon système
+ Seiryn: La mauvaise c'est que c'est firefox
+ Stilgart: tu as un système linux&#160;?
+ Seiryn: Ouais
+ Stilgart: dans ce cas, tu as installé un paquet de polices à la con
+ Seiryn: Nan justement
+ Stilgart: dernier installé, premier servi
+ Stilgart: je mise sur la dépendence improbable
+ Seiryn: J'ai fais un rapide saut sur un autre navigateur et ça me fait pas ça
+ Stilgart: "vivent les navigateurs et leur ordre aléatoire des polices"
+ Stilgart: d'expérience, avec FF, c'est dernier installé = premier utilisé
+ Stilgart: sur une debian-like, je suggère de regarder la sortie de 
+ Stilgart: $ aptitude search font~i
+ Stilgart: (c'est un tilde avant le i, au cas où...)
+ Seiryn: Oui enfin si c'est une dépendence à la con ça reste une dépendance je peut pas m'en débarasser
+ BlaiseEbuth: :imp::knife:
+ Seiryn: <a rel="nofollow" class="external free" href="https://imgur.com/weByPb1.png">https://imgur.com/weByPb1.png</a>
+ Seiryn: <a rel="nofollow" class="external free" href="https://imgur.com/IqzKzM8.png">https://imgur.com/IqzKzM8.png</a>
+ Seiryn: Au moins je reproduis le problème c'est déja ça
+ Seiryn: Maintenant la question c'est&#160;: ou est-ce que ff va trouver cette font
+ Stilgart: Seiryn: bon courage pour répondre à cette question avec précision
+ Seiryn: Alors
+ Stilgart: (j'ai jamais dit que c'était du à une dépendance de firefox hein)
+ Stilgart: n'importe quelle appli X peut être la cuase
+ Stilgart: cause*
+ Seiryn: J'ai désinstaller noto-fonts-cjk et ça as réglé le problème
+ dwarfie: salut les gens et pas Automaton2000 qui sait pas dire tortue
+ Stilgart: il faut sans doute relancer X à chaque fois
+ Automaton2000: si t'es pas sur un puzzle easy
+ Stilgart: il doit faire un cache des fonts&#160;:/
+ dwarfie: Automaton2000&#160;: on dit pas puzzle easy ... on dit free xp
+ Automaton2000: ca marche mieux en tout cas&#160;!
+ Seiryn: enfin partiellement
+ Seiryn: ça as viré les étoiles degeu
+ Seiryn: mais ça reste pas une belle font
+ Stilgart: tu as Automaton2000 avec toi, go go go résoudre le problème
+ Automaton2000: mais j'avoue que c'est un bug d'affichage
+ Stilgart: :D
+ dwarfie: :rofl:
+ BlaiseEbuth: Prends violentmonkey -&gt; écrit deux lignes de js -&gt; force la font de ton choix -&gt; solved
+ Erzow: Y'a pas un moyen de recommencer un challenge compétition à 0&#160;?
+ BlaiseEbuth: Non
+ leojean890: quand tu es dans une ligue, tu ne peux revenir à la précédente, mais tu peux jouer contre les joueurs des ligues précédentes dans l'IDE si tu le souhaites
+ Erzow: ok merci
+ leojean890: tiens pour le puzzle electrical-grid j'étais convaincu qu'il fallait backtracker pour minimiser le score (résolu ainsi) mais en fait plein de monde l'ont résolu juste avec heuristique d'ordonnancement :o
+ Stilgart: electrical grid c'est un des rares kruskal, c'est ça&#160;?
+ Stilgart: (enfin, arbre couvrant de poids min... on peut faire autrement que kruskal)
+ titoudelaplage: yo
+ titoudelaplage: je viens de passer niveau 3
+ BlaiseEbuth: Trop de HLs sur ce chat...
+ Stilgart: Erzow: on peut toujours simuler des matches des ligues inférieures via l'API
+ Stilgart: that is... quand on maîtrise suffisamment l'API
+ Stilgart: BlaiseEbuth: et pas assez de NN&#160;:'(
+ BlaiseEbuth: :cry:
+ Stilgart: Automaton2000: rip ton frère&#160;:'(
+ Automaton2000: je ne vois pas trop l'intérêt
+ Stilgart: il semble assez bien vivre son deuil, on dirait
+ BlaiseEbuth: Bah pour autant qu'on sache c'est p'têt lui qui l'a tué...
+ dwarfie: Automaton2000 ... rend son neurone a AutomatonNN ... tu sais autant t'en servir que dire tortue ...
+ Automaton2000: moi non plus, je vais voir si je peux t'aider
+ leojean890: Stilgart je ne sais pas mais c'est un pbm de minimisation&#160;:)
+ leojean890: il faut relier toutes les maisons entre elles en utilisant la combinaison qui réduit le cout
+ leojean890: qui minimise le cout
+ leojean890: et j'ai appris après coup qu'il n'y avait pas besoin de backtracker pour ça
+ leojean890: j'avais juste mis une mini heuristique pour gagner en temps d'exec et ne pas simuler pour rien le fait d'ajouter une connexion entre 2 noeuds dans le cas où on a déjà un chemin autre reliant ces 2 noeuds indirectement
+ Zorg1: oui c'est l'arbre couvrant minimal qu'on appelle ça
+ leojean890: mais du coup j'ai pas la strat optimale même si ça marche
+ leojean890: arbre couvrant minimal, j'ai vu cette notion en école puis j'ai oublié^^
+ leojean890: je viens de regarder ce que c'est
+ yassineben: slm
+ leojean890: c'est la def du sujet
+ leojean890: mais bon la méthode de résolution sans backtracking, je ne la connaissais pas
+ leojean890: je vois sur WP prim, kruskal.. donc ouais des algos gloutons
+ leojean890: ou un plus rapide (bernard chazelle)
+ Zorg1: yop Automaton2000 quoi de neuf&#160;?
+ Automaton2000: t'as l'air de bien marcher
+ Zorg1: j'ai quelques bugs Automaton2000 mais tout marche&#160;!
+ Automaton2000: le pb c'est que la valeur de la variable
+ dwarfie: Automaton2000 ... tu te prend pour percval a dire que l'important c'est les valeurs&#160;?
+ Automaton2000: mais si tu fais ce que tu fais les choses à l'envers
+ b0n5a1: o/
+ Zorg1: \o
+ JBM: \o/
+ leojean890: celui là pareil ça passe clairement en backtracking avec les jeux de test mais y'a ptet un moyen plus simple qui marche^^<a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/universe-conquest">https://www.codingame.com/ide/puzzle/universe-conquest</a>
+ b0n5a1: Note perso&#160;: ne plus regarder dans les contribs. :joy:
+ <b>**b0n5a1 est dépité</b></p><p><img src="/a/42398427701382" /> leojean890: de quoi, y'a des trucs que tu veux reject&#160;?^^
+ Zorg1: faut filtrer pour pas voir les CoCs :p
+ leojean890: moi je regarde que les multis dans les contrib xD
+ leojean890: et optims
+ leojean890: sinon ça prend du temps
+ leojean890: pour les puzzles j'en ai déjà plein de retard de déjà sortis
+ leojean890: et les coc je m'en fous complètement^^
+ b0n5a1: non mais tu tombes sur analysis of a language avec 46 upvotes...ça fait peur
+ JBM: regarder les contribs, quelole idée
+ b0n5a1: compter le nombre de E dans le texte...youhou
+ Zorg1: ouaip, laisse tomber
+ leojean890: coc j'en fais une fois tous les 6 mois pour me changer les idées^^
+ leojean890: j'avoue vu comme ça c'est un str.count('E') lol
+ leojean890: donc le truc à celui qui a la meilleure connexion internet qui submit le plus vite
+ Zorg1: mais une  cinquantaine d'upvotes
+ Zorg1: va comprendre Charles
+ b0n5a1: t'as vu les commentaires Zorg1, c'est pire
+ leojean890: je me suis fait avoir sur un truc du genre hier où j'ai fini 2 sec après un mec
+ Zorg1: oui t'as l'impression que tout le monde a débloqué ça quest map là dessus
+ Zorg1: et on va valider ce truc rapidos pour la quest map
+ Zorg1: s/ça/sa/
+ b0n5a1: ha mais c'est celui de l'autre jour sur le chat qui comprenait pas ce que c'est un char quand dwarfie a dit solved in 21 chars...et qui posait des questions débiles :rofl:
+ JBM: la validation des CoC, c'est le plus accessible des contribs
+ Zorg1: oui ^^
+ JBM: mais faisons confiance en la communauté
+ Zorg1: il a réussi à mettre son puzzle à la validation
+ leojean890: un char si t'as fait un langage avec le type primitif char tu sais ce que c'est^^
+ Zorg1: je te sens ironique JBM ...
+ leojean890: si t'as déjà utilisé*
+ JBM: moi?
+ JBM: Moi?!
+ b0n5a1: on dit pas communauté, on dit masse bêlante :grinning:
+ Zorg1: de toute façon les CoCs y a un bot qui fait le ménage après
+ b0n5a1: le pauvre, il va fumer
+ leojean890: ah oui si trop de notes négatives
+ Zorg1: bah il jette un dé, il vire sur 4,5,6
+ leojean890: mais le mec aura quand même validé "créez une contrib"
+ leojean890: même si son coc est deleted
+ b0n5a1: et c'est un dé 3 Zorg1 c'est ça&#160;?
+ Zorg1: :D
+ leojean890: "créez un contest communautaire"
+ leojean890: le truc que personne presque ne valide
+ Zorg1: ça n'existe plus ça en plus
+ b0n5a1: le +2500XP&#160;? il est désactivé de toute façon
+ leojean890: OOC 2020^^
+ leojean890: ah dur ils ont eu un rollback sur 2500 de leurs XP&#160;??
+ Zorg1: ah c'est bientôt Totoro
+ leojean890: ah oauis 3j
+ b0n5a1: mais ce serait bien de le garder pour récompenser sous le manteau ceux qui se cassent le cul à faire un multi et qui fini par passer
+ Zorg1: l'est plus là pour nous donner des leaks saugrenus Beber&#160;:(
+ Alshock: Non c'est bientôt Taurea
+ Alshock: Taureau*
+ Zorg1: le Taureau Toto&#160;?
+ leojean890: mon voisin
+ Alshock: Burp
+ leojean890: mais on ne sait de quel jeu de société ils vont s'inspirer
+ leojean890: cette fois
+ leojean890: ou jeu vidéo ou autre..
+ Zorg1: tkt un CSB avec un thème Totoro y a que ça de vrai
+ Stilgart: leojean890: "fun fact", ça s'appelle MST ce problème (minimum spaning tree)
+ dwarfie: c'est une course de chabus ...
+ Zorg1: CSB ça s'adapte à tous les thèmes
+ leojean890: Stilgart lequel, celui avec les cables élec&#160;?:)
+ Alshock: J'espère que ce sera un truc avec pas trop plein de règles spécifiques
+ Stilgart: leojean890: oui
+ leojean890: MST pas mal le quiproquo hehe
+ leojean890: d'accord
+ leojean890: j'aurai appris un truc
+ Stilgart: nan mais il va calmer ses beeps serpent&#160;!
+ Stilgart: (╯°□°）╯︵ ┻━┻
+ Zorg1: et y aura un referee en Clojure pour le fun ^^
+ Alshock: ah ah ah
+ Zorg1: ah le gars qui valide sans commentaire
+ Stilgart: je m'entends même plus coder
+ leojean890: déjà "couvrant minimal" j'avais oublié ce que c'est et ne savais pas que ça se résolvait en glouton^^
+ Alshock: j'imagine déjà nos gueuless
+ Stilgart: c'est pas si simple de montrer que glouton est optimal en vrai
+ leojean890: j'avoue j'ai pas compris quand j'ai vu les soluces&#160;:)
+ Stilgart: (mais du coup, c'est un exemple très classique des cours sur les algos gloutons)
+ leojean890: c'est WP qui m'a dit que c'était optimal
+ leojean890: faut que je regarde la démo sur le net:)
+ Zorg1: si WP le dit ...
+ leojean890:&#160;;)
+ Stilgart: kruskal est plus clair amha
+ Alshock: attendez, qui dit WP pour wikipédia&#160;?
+ Alshock: C'est clairement WordPress
+ Stilgart: tu prends l'arête la plus petite parce qu'il en faut bien un
+ leojean890: Alshock moi&#160;;)
+ Stilgart: mais si ça crée un cycle, rip l'arête
+ Zorg1: Alshock: en fait ça dépend du contexte
+ Zorg1: :p
+ Stilgart: et tu fais ça jusqu'à avoir le bon niombre d'arêtes
+ Alshock: Zorg1 encore une win pour toi, GG WP
+ Stilgart: -i
+ leojean890: ouais moi quand je faisais backtracking en considérant les cycles ça timeoutait et du coup j'ai ajouté une condition pour éviter les cycles, du coup j'ai un backtracking moche^^
+ leojean890: mais ok je vois:)
+ leojean890: ton approche^^
+ Alshock: mais vous faisiez ça pour quoi&#160;? C'est un puzzle&#160;?
+ leojean890: ouais je faisais un puzzle electrical-grid
+ leojean890: et je disais juste sur le chat que je comprenais pas la solution des autres^^
+ Alshock: les fameuses trois maisons de dieudonné
+ leojean890: vu que sur 10 codes que j'ai regardés je suis le seul en backtracking
+ Alshock: T'as regardé ton propre code&#160;? C'est tricher
+ leojean890: j'ai partagé mon code comme ça je vais me faire flame hehe;)
+ leojean890: "mais qu'est ce qu'il fait lui, c'est nul&#160;!'
+ Alshock: no offense mais la proba que tu te fasses flame est inférieure à celle que quelqu'un lise ton code, et comme visiblement 3 personnes en tout et pour tout trouvent intéressant de lire les codes des autres...
+ leojean890: (mais c'était évident que je devais pas simuler des cycles car forcément un cycle c'est un cout en trop^^)
+ Zorg1: bah si je regarde généralement les autres solutions, je m'apperçois parfois que j'ai fait un truc over compliqué pour casser une noix
+ leojean890: Alshock ouais je pense que c'est assez rare que les gens lisent les codes surtout quand y'a bcp de gens qui l'on partagé pour le même puzzle
+ b0n5a1: en plus tu peux même plus t'auto upvote pour ton originalité leojean890 :grin:
+ Zorg1: cénul
+ leojean890: pareil je fais souvent trop compliqué
+ pardouin: leojean890 si tu as fait electrical grid fais mars colonization&#160;:)
+ leojean890: pardouin j'ai regardé ta solution t'as utilisé 15 fois moins de lignes de code que moi mdrr
+ Zorg1: bah Mars Colonization j'ai un problem avec mon arbre couvrant
+ Zorg1: pas compris le truc
+ pardouin: et oui ça s'appelle un sous arbre couvrant mininal, c'est un pb très classique
+ pardouin: il y a deux algos classiques, Prim et Kruskal
+ leojean890: et oui je regarde souvent au moins 3-4 codes des autres histoire de voir comment on oeut faire
+ leojean890: et souvent je vois des codes en moins de lignes que moi;)
+ pardouin: kruskal est en théorie plus lent (E log(E) vs E log(V)) mais la différence est négligeable
+ leojean890: ouais j'ai vu ça sur WP
+ pardouin: et plus simple à implémenter je trouve
+ leojean890: mais y'a d'autres algos gloutons encore plus rapides 
+ pardouin: regarde Magus qol electrical grid, il y a genre 10 lignes XD
+ pardouin: -Magus + ma sol
+ leojean890: =&gt; un plus rapide (bernard chazelle)
+ leojean890: pardouin je t'ai dit plus haut j'ai déjà regardé ta sol;)
+ pardouin: ok ok&#160;:)
+ leojean890: t'as 15 fois moins de lignes que moi je disais justement
+ pardouin: désolé je lisais en diagonale ^^
+ leojean890:  Mars Colonization pas encore regardé ouais!
+ leojean890: universe-conquest il m'a l'air simple..
+ pardouin: oui
+ leojean890: mais je sens que pareil je vais sortir un backtracking alors qu'on peut faire plus simple^^
+ leojean890: le branching est petit sur les 5 tests
+ leojean890: donc ça passe tout seul^^
+ pardouin: mars colonization pars du principe que tu as une couverture minimale
+ pardouin: et imagine comment tu peux en déduire la réponse
+ pardouin: je vais manger&#160;:)
+ leojean890: ok^^
+ leojean890: bon app!
+ ramoRJ96: salut à tous, est-il possible de faire un string.plit("") en java&#160;?
+ leojean890: splitter des chaines, y'a moyen oui
+ leojean890: y'a plusieurs moyens de le faire
+ leojean890: tae sur google tu tomberas sur un article avec plusieurs méthodes et choisis ta préférée
+ leojean890: tape*
+ ramoRJ96: je pensais faire un truc comme ça String b[] = B.split("");
+ Zorg1: c'est pour récupérer tous les chars de B&#160;?
+ ramoRJ96: oui c'est ce que je veux faire&#160;!!!
+ Zorg1: pourquoi t'utilises pas B.charAt(i) pour récuper le char à l'index i&#160;?
+ leojean890: ah tu voulais splitter avec la chaine vide j'avais mal lu mdr
+ leojean890: en gros convertir la string en tableau
+ Zorg1: oui mais est ce vraiment utile&#160;?
+ leojean890: avec une boucle par exemple
+ philRG:  toArray() est mon ami
+ philRG: c'est comme le port salut
+ philRG: ça me paraît un peu verbeux ceci dit
+ philRG: Ca cache tout le beau code autour
+ ramoRJ96: kkkk ouais mais c'est vrai qu'avec charAt j'ai plus besoin de la conversion&#160;!!!
+ leojean890: en effet <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/universe-conquest">https://www.codingame.com/ide/puzzle/universe-conquest</a> passe tout seul en backtracking et certains résolvent ça en 10 lignes
+ leojean890: la méthode de pardouin avec des sets est plus efficace
+ Zorg1: ha ce sont des ensembles disjoints ^^
+ Zorg1: t'as laissé tombé pour execution circle finalement&#160;?
+ leojean890: je vais le reprendre je pense^^
+ leojean890: mais ouais c'est chaud
+ leojean890: j'ai regardé un peu ce qui se dit sur le problème sur le net
+ Zorg1: en fait c'est quasi le même que "Remaining Card"
+ Zorg1: tu résoud un tu résoud l'autre, même formule à la base, y a que le changement de repère qui est différend ^^
+ leojean890: ah ok^^
+ Zorg1: pê Remaining Card est plus simple pour voir le truc
+ pardouin: ah oui il était sympa celui là
+ pardouin: (execution circle)
+ Zorg1: bah Remaining Card c'est execution cercle avec N N et LEFT
+ pardouin: je sais pas si je l'ait fait
+ pardouin: je vais regarder
+ leojean890: je sais plus si j'ai fait remaining card
+ leojean890: je ne l'ai pas fait je pense
+ pardouin: execution circle j'ai fait des dessins sur paint XD
+ pardouin: comprendre un peu ce qui se passait
+ pardouin: tu peux complètement ignorer le sens et la position de départ
+ pardouin: ça s'ajuste à la toute fin
+ pardouin: numérote tes trucs à partir de 0 et imagine que tu pars de 0, c'est plus facile de comprendre la logique comme ça
+ leojean890: ouais je vois, ça simplifie le pbm:)
+ Zorg1: oui la position et le sens c'est un changement de repère
+ leojean890: à la fin tu décales
+ pardouin: oui
+ pardouin: remaining card je l'avais fait il y a longtemps, me rappelai plus
+ pardouin: je fais un truc avec des log2 en one liner mdr
+ leojean890: tu en supprimes 1/2 et ensuite en fonction de si le nb total est pair et impair tu resupprimes 1/2 parmi ce qui reste mais en démarrant du premier ou du 2nd^^
+ leojean890: mdr ah ouais hehe
+ pardouin: il est quand même plus simple
+ Zorg1: voilà t'as la fameuse formule ^^
+ pardouin: aucune idée de comment je l'avais trouvée, j'avais du tâtonner
+ pardouin: sur execution circle j'ai fait un truc récursif
+ pardouin: mais ça revient en gros au même
+ leojean890: j'ai pas moi je chercherai ça à l'occas hehe
+ pardouin: me  reste 29 hard
+ pardouin: ça commence à être dur d'en trouver des faisables vite
+ pardouin: il y en a une douzaine de "techniques" que j'ai laissé pour la fin car pas hyper puzzlesques
+ pardouin: genre les trucs de aCat
+ Zorg1: ah "Simple Yacc Building exemple"
+ Zorg1: dans ce genre
+ JBM: faites votre devoir civique et downvotez-les
+ pardouin: c'est moins fun , c'est plus des puzzles éducatifs
+ Zorg1: oui ils sont très scolaire
+ JBM: taking the game out of CG
+ pardouin: je pense qu'à la limite ça peut être sympa de regarder l'algo si tu le connais pas, laisser filer une semaine et voir si t'arrives à tout refaire sans doc
+ pardouin: si t'as bien compris l'essence du truc
+ JBM: «sympa»
+ JBM: mmmmmmmmmmmmmmmoui
+ pardouin: mais l'implémenter juste après avoir lu le pseudo code c'est vraiment pas interessant
+ JBM: mais justement, t'as pas le choix
+ JBM: faut l'implémenter exactement comme dans le pseudocode sinon ça passe pas les tests
+ pardouin: c'est pour ça que je pense qu'il faut laisser passer un peu de temps, ça rend le truc un poil plus intéressant
+ JBM: même si t'as «compris le truc»
+ JBM: donc Non
+ Zorg1: ah oui son minmax faut pas s'écarter des clous
+ JBM: enfin c'est Mon Avis et il n'engage que vous
+ leojean890: y'en a vraiment galères aussi comme einstein riddle
+ JBM: il est super celui-là
+ pardouin: ah non il est cool
+ JBM: un chouïa trop parsing
+ JBM: mais c'était y'a longtemps
+ JBM: on découvrait encore les limites
+ leojean890: comme cultist wars faut implem bresenham comme le referee sinon ça marche pas hehe
+ leojean890: einstein riddle j'ai pas dit qu'il est pas cool, mais qu'il est dur^^
+ JBM: oui enfin bresenham y'a pas vraiment de marge à l'ambiguïté
+ JBM: tu l'implémentes comme tu veux, ça doit tomber sur le voisin le plus proche sur l'axe
+ leojean890: bresenham je voyais des implems sur le net qui étaient différentes de celle du réferee^^
+ JBM: tant qu'elles trouvent les mmes points
+ pardouin: ça c'est de la bombe aussi:<a rel="nofollow" class="external free" href="https://www.codingame.com/training/medium/guessing-digits">https://www.codingame.com/training/medium/guessing-digits</a>
+ leojean890: enfin j'avais p'tet mal compris l'implem pour l'adapter au sujet aussi, et du coup j'ai pris celle du referee pour que ça marche^^
+ pardouin: sans doute le puzzle avec le meilleur ratio note/intérêt
+ Zorg1: j'aimais bien le puzzle avec le chat &amp; la souris dans la piscine
+ leojean890:  chat &amp; la souris dans la piscine j'ai vu l'énoncé et j'ai encore rien codé, ça me paraissait pas tout simple^^
+ pardouin: oui car ça laisse pas mal de liberté
+ leojean890: petite simu
+ leojean890: je ferais bien une simu là dessus
+ pardouin: bon après moult délibération je crois que je vais faire encounter surface ce soir
+ pardouin: j'avais en la flemme à cause de ça&#160;:"The vertices of the polygons are not necessarily given in the order."
+ pardouin: mais bon c'est pas si dramatique
+ JBM:  bon wtf pidgin
+ JBM: trois messages qui partent dans le void depuis l'autre
+ JBM: non mais bresenham ça parait ptet sorcier si t'as du mal à comprendre la logique du calcul en entiers, mais la liste de points qu'il sort c'est pas de la magie
+ JBM: ah oui c'était pas mal ça aussi
+ JBM: meme si c'était un peu poussif sur le cas hard
+ Zorg1: ah t'as retrouvé tes messages perdus ...
+ JBM: yes ^^ (que j'envoie depuis le client sans lag)
+ JBM: 16' j'y croyais plus
+ JBM: la magie tcp
+ JBM: tiens il lagge à la réception aussi maintenant
+ JBM: ah ok, vieux motard
+ JBM: (ayé; il a tout rattrapé)
+ b0n5a1: au fait JBM, <a rel="nofollow" class="external free" href="https://www.twitch.tv/alexandre2bi">https://www.twitch.tv/alexandre2bi</a> , tu semblais intéressé l'autre jour (dev de son jeu...la voix suave :grinning: )
+ Zorg1: ce rabatteur
+ BlaiseEbuth: b0n5a1 (et Zorg1 si tu l'avais pas vu tout à l'heure) <a rel="nofollow" class="external free" href="https://ldjam.com/events/ludum-dare/48/the-icarus">https://ldjam.com/events/ludum-dare/48/the-icarus</a>
+ Zorg1: houla le gars a refait sunless sea&#160;? ^^
+ Zorg1: ah non pas vraiment
+ BlaiseEbuth: Je connaissais pas sunless sea tiens. Hop dans la liste!
+ Zorg1: euh non c'est pas du tout comme ça
+ Zorg1: et c'est plutôt très textuel
+ BlaiseEbuth: Ouai j'ai vu mais ça a l'air cool
+ leojean890: JBM je ne sais plus, ça différait de quand j'ai pris le code du referee, j'avais peut être mal compris une partie de la logique
+ pardouin: encounter surface fini \o/
+ pardouin: c'est bien atroce, je confirme
+ leojean890: gg^^
+ pardouin: 54 lignes
+ leojean890: je jette un coup d'oeil à flower-beds il me tente pas
+ leojean890: encounter surface j'ai pas essayé je crois
+ pardouin: j'ai du définir 6 fonctions, c'est rare sur un puzzle ^^"
+ leojean890: (ni regardé)
+ pardouin: flower beds est beaucoup plus simple
+ pardouin: par contre il faut connaître un théorème, et si tu le connais pas c'est infaisable
+ Zorg1: plus une autre formule
+ leojean890: je viens de regarder en diago^^
+ pardouin: les formules genre aire etc c'est censé faire partie de ta boîte à outil géométrie
+ pardouin: mais le théorème dont je parle c'est plus une curiosité
+ Zorg1: oui bon bah je la connaissais pas "showerlace" :D
+ pardouin: comment tu calcules les aires sans la shoelace&#160;? D:
+ leojean890: en gros trouver le nb de points qui sont au centre
+ leojean890: j'avais fait un puzzle easy du genre
+ pardouin: (leojean cherche sur google theoreme points entiers, un truc du genre)
+ leojean890: où il fallait dire combien sont dans l'enclos
+ Zorg1: pardouin&#160;: bah j'improvisais, mais c'est vrai que j'avais pas vraiment à calculer en fait
+ pardouin: (c'est un théorème valable que quand tous tes points sont entiers)
+ leojean890: combien sont en dehors
+ pardouin: la shoelace formula en fait c'est juste l'intterprétation géométrique du déterminant
+ pardouin: c'est l'aire orientée du parallélogramme basé sur les deux vecteurs
+ leojean890: jsais pas si je vais le faire mtn
+ Zorg1: oui j'ai vu elle est pas compliqué en fait
+ pardouin: donc si tu divises par 2 c'est l'aire du triangle
+ pardouin: donc en gros c'est juste une triangulation depuis le point (0, 0)
+ Zorg1: ouaip
+ leojean890: j'ai pas trop la motiv pour le faire now^^
+ Zorg1: ^^
+ leojean890: mais ok faut que je regarde ces tips^^
+ pardouin: t'as tenté mars colonization&#160;?
+ leojean890: non pas encore^^
+ leojean890: j'ai pas fait de puzzles depuis 22h là^^
+ leojean890: j'ai regardé le film GI Joe&#160;;)
+ Zorg1: houla
+ leojean890: que j'avais jamais vu
+ leojean890: j'ouvre erdos-number
+ leojean890: mars colonization tu m'as dit qu'il y a un lien avec mon puzzle de tout à l'heure
+ Zorg1: je me suis apperçu que j'avais jamais fait "simple cpu emulation"
+ leojean890: ah oui à faire en format glouton
+ leojean890: et puis y'a celui d'hier que j'ai pas continué sur l'execution circle et sa version plus simple qui démarre à 0
+ pardouin: c'est plus qu'un lien, tu peux copier coller 90% XD
+ leojean890: remaining card la version plus simple
+ pardouin: si tu le prends par le bon bout
+ pardouin: j'ai fait les deux puzzles à 10 min d'intervalle ^^
+ leojean890: mais la différence, c'est que l'autre puzzle je l'ai pas fait avec la vraie méthode
+ leojean890: je l'ai fait en backtracking
+ pardouin: erdos number est vraiment simple si tu veux un puzzle tranquille
+ leojean890: electrical grid (fait en backtracking)
+ pardouin: pas grave, du moment que ça te trouve un ecouverture minimale c'est exploitable
+ leojean890: donc pour passer sur mars colonization ça ira ptet pas (timeout&#160;?)
+ leojean890: erdos number simple ok^^
+ leojean890: je sais pas je lis juste des énoncés là:)
+ pardouin: je sais pas, il y a plus d'arêtes vu que tu considères tous les couples possibles de points
+ pardouin: donc il y a moyen que ça passe pas
+ leojean890: je vois^^
+ leojean890: ça me forcera à coder le vrai algo cette fois au moins :P
+ pardouin: il doit y avoir 500 000 arêtes dans le pire test
+ pardouin: et electrical c'était 50 000 je crois
+ leojean890: ah ouais erdos on dirait que c'est un arbre avec pour racine erdos
+ leojean890: facile quoi
+ pardouin: il y a plein de facile en hard
+ leojean890: tu calcules une distance à lui à travers les publi
+ pardouin: des pb où en gros c'est juste un algo de graphe basique genre DFS ou BFS et hop c'est fini
+ leojean890: electrical clair, on avait au max 21 maisons
+ leojean890: 17 dans les tests 21 dans les valideurs
+ pardouin: ah je croyais plus
+ leojean890: du coup j'avais un timeout au valideur mais 100% tests et j'ai dû optim
+ Zorg1: bah pas mal de problème se sont retrouvé en hard lors du classement quand l'algo s'est fondé sur le nombre de réussite
+ Zorg1: pas mal de puzzle pas trop populaire se sont retrouvé en difficile
+ leojean890: ouais mais honnetement tu regardes les easy..
+ leojean890: les easy y'en a pas vraiment des durs dans ce que j'ai regardé
+ pardouin: easy il y a des trucs plus durs que certains hard
+ leojean890: j'aipas tout regardé
+ pardouin: genre moutain hill truc
+ leojean890: y'en a que j'aime pas
+ leojean890: je sais pas pk, les trucs de géométrie ça me démotive^^
+ Zorg1: c'est comme les puzzles de programmation dynamique doit y en avoir au moins un par niveau de difficulté
+ leojean890: j'ai pas vu de prog dynamique en easy
+ leojean890: en medium oui par contre
+ leojean890: en expert j'en ai fait un super simple
+ leojean890: sliding puzzle
+ leojean890: pas l'habitude de dire ça d'un expert
+ pardouin: pas fait encore
+ leojean890: plus simple que le 11 puzzle de hard
+ pardouin: mais il avait l'air facile
+ leojean890: le 11 puzzle de hard j'ai du bidouiller des magic numbers
+ pardouin: tu as fait le truc des haltères au fait&#160;?
+ leojean890: pas encore fait les haltères :P
+ leojean890: pourtant il parait ok
+ pardouin: tu papillonnes trop leojean :o
+ pardouin: pas bien
+ leojean890: je les lis et après je vois ce que je fais et dans quel ordre xD
+ BlaiseEbuth: Les papillons faut leur arracher les ailes, ils papillonent plus après.
+ leojean890: comme les multis :p
+ leojean890: les multis j'ai fini par quasi tout faire au final alors que certains je voulais pas au début^^
+ leojean890: tout sauf 5 en incluant amazons le nouveau dans les non faits
+ leojean890: contest jeudi d'ailleurs
+ leojean890: ça va m'éviter de trop me disperser:p
+ pardouin: je sens que je vais faire a man with a plan dans moins de 10 puzzles
+ pardouin: c'est dire&#160;!
+ BlaiseEbuth: Ah, t'as un parcours définit&#160;?
+ pardouin: non mais il me reste plus des masses de puzzle fun
+ leojean890: tiens avant les puzzles étaient approuvés par 2 personens only&#160;??
+ leojean890: Une contribution de Delgan
+ BlaiseEbuth: Ah. Et et le miens c'est un des derniers fun ou un chiant&#160;?
+ pardouin: genre vrai puzzle mais où il faut du temps devant toi
+ leojean890: chacun sa définition de fun xD perso je trouve que les multis sont souvent un peu plus fun que les puzzles :P
+ pardouin: après conceptuellement ça a pas l'air trop dur, mais juste bien prendre toutes les règles en compte
+ pardouin: freecell  a l'air fun mais le nombre de personnes que l'ont fini fait peur
+ leojean890: parait qu'il est hard lui
+ BlaiseEbuth: C'est surtout ça ouai. (C'est conçu pour être reader-friendly)
+ BlaiseEbuth: Ou plutôt non-reader-unfriendly
+ leojean890: "reading comprehension" tag&#160;?
+ BlaiseEbuth: Ouai ^^
+ pardouin: 11 puzzle toujpurs pas fait, kakuro non plus mais c'est le genre de puzzle que j'aime bien
+ leojean890: 11-puzzle le bidouillage comme je disais lol
+ leojean890: eval = 2.5*score + depth
+ leojean890: pour A*
+ pardouin: lol me dis rien&#160;!
+ leojean890: j'avais déjà lâché ça dans le chat xD k j'en dis pas plus mdr
+ pardouin: sokoban a l'air cool aussi
+ pardouin: blockout
+ pardouin: il reste quand même pas mal de trucs alléchants mais où il faut toujours un minimum de temps devant soi
+ leojean890: sokoban jbm avait dit qu'il l'avait résolu en bfs optimisé (avec heuristique) ^^
+ leojean890: mais ça doit être compliqué
+ pardouin: avec le contest qui arrive on verra quand j'aurai le temps pour ces bêtises
+ pardouin:&#160;:)
+ leojean890: tu vas faire le contest en mode serieux&#160;?:P
+ pardouin: d'ailleurs j'espère pouvoir enfin faire le contest sérieusement
+ pardouin: j'espère
+ leojean890: hehe
+ leojean890: après faut que le sujet motive^^
+ leojean890: moi mes pires c'est les sujets militaires 
+ pardouin: la dernière fois je voulais et grosse charette, j'ai fait que le tout début et j'y suis pas revenu
+ pardouin: mais la cette semaine ça devrait aller
+ leojean890: en multi, code royale et botg je fais nimp
+ leojean890: ou pcr, mean max..
+ leojean890: ça dépend du temps que t'as aussi ouais
+ pardouin: ce genre de puzzle:<a rel="nofollow" class="external free" href="https://www.codingame.com/training/hard/breakout">https://www.codingame.com/training/hard/breakout</a>
+ pardouin: très long et tu apprends pas grand chose en général
+ pardouin: enfin je sais pas, c'est l'impression que ça donne
+ pardouin: si ça se trouve il est cool
+ leojean890: trop de parsing d'inputs et de détails chiants à coder&#160;?^^
+ pardouin: oui le genre "simulation"
+ pardouin: quitte à me faire chier à penser à des micro détails je préfère développer un petit jeu
+ pardouin: au moins il y a un résultat à la clé
+ leojean890: dans les multis et optims c'est souvent un peu ça aussi&#160;;)
+ pardouin: oui j'avoue que je trouve cet aspect un peu rébarbatif
+ pardouin: après ça peut être marrant de faire une version jouable d'un multi
+ pardouin: où tu joues contre ton bot
+ pardouin: je l'ai fait pour tron c'est vraiment sympa
+ Zorg1: c'est pourri "CPU emulation 1" le gars définit un paquet d'instructions et ne les teste pas toutes
+ Zorg1: seulement 4 tests, bravo l'artiste
+ pardouin: oui ce puzzle c'est en gros copier coller l'énoncé et le traduire en code
+ pardouin: et bim
+ leojean890: ah ouais, énoncé complet, et des tests et valideurs qui couvrent absolument pas le tout&#160;?
+ Zorg1: pas l'impression
+ leojean890: genre 20 features, 4 testées, hop&#160;!
+ BlaiseEbuth: HCF
+ pardouin: j'ai même pas regardé les tests
+ pardouin: tout est passé vert direct
+ pardouin: zéro subtilité
+ pardouin: il faudrait mettre le tag "traduction littérale d'énoncé"
+ Zorg1: voilà c'est bon
+ pardouin: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/map-colorations">https://www.codingame.com/ide/puzzle/map-colorations</a>
+ pardouin: quand tu as 25 arêtes max sur un graphe tu sens le pb hyper chaud
+ pardouin: bon j'imagine que c'est bien calibré, il a un bon taux de réussite
+ pardouin: ah tiens j'avais pas vu celui-là&#160;:<a rel="nofollow" class="external free" href="https://www.codingame.com/training/hard/cloudy-weather">https://www.codingame.com/training/hard/cloudy-weather</a>
+ pardouin: c'est moi ou il est super simple&#160;?
+ Zorg1: c'est toi, en fait le plan est énorme je crois
+ pardouin: au début je pensais que les nuages bougeraient, ça aurait pu être cool, mais même pas
+ pardouin: ah ok
+ pardouin: 10^9 sur 10^9
+ Zorg1: c'est pas du remplissage de cases ^^
+ pardouin: je pige mieux ^^"
+ pardouin: ça doit être du divide and conquer
+ pardouin: mais effectivement pas simple du tout
+ pardouin: bon allez à demain
+ Zorg1: bn
+ pardouin: repéré aucun puzzle simple
+ pardouin: je crois que je suis définitivement rentré dans la phase où tu en chies forcément un peu ^^

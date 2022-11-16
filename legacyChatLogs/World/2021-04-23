@@ -1,0 +1,1624 @@
+ BigFatDecker: ok another problem im having is that when i try to open a steam with os.system or any of the commands to open an exe file it just ignores the command
+ BigFatDecker: i put a speak statement so that i would know if it ran the command but it doesnt even get to that. it just prints what i said and moves on
+ PatrickMcGinnisII: depends on OS, I pipe to a log file.  System can return info usually stuff like "file not found, etc."  check your paths and permissions
+ PatrickMcGinnisII: even 1 stupid little ENV variable can screw things up
+ _CtrlAltDel_: Hello nitekat
+ PatrickMcGinnisII: os.system("runme &gt; log.txt"); exit(); ... maybe?
+ nitekat: hi
+ Alex-1: hi
+ Chakib37: is anyone taking cs50 or top course
+ ngman: dumbass
+ BigFatDecker: im trying to make a virtual assistant in python how could i make my program say different things when the keyword is said such as where is says applying boost i want there also to be a chance that it just say boosting or some other variation what is a good way to do this <a rel="nofollow" class="external free" href="https://pastebin.com/e2QztaH6">https://pastebin.com/e2QztaH6</a>
+ Uljahn: random.choice(["Boosting", "Using Boost", "Applying Boost"])
+ BigFatDecker: that would work with the speak command also?
+ derjack: good morning
+ struct: hi
+ KiwiTae: sup o/
+ Dreamer95: good afternoon
+ ANJACE_Z: TychKorg
+ Uljahn: This account is a CodinGame bot for Clash of Code.Discover why we added it and how it works here: <a rel="nofollow" class="external free" href="https://www.codingame.com/blog/clash-of-code-time-has-come-for-clash/">https://www.codingame.com/blog/clash-of-code-time-has-come-for-clash/</a>
+ Uljahn: 532 followers :smiley:
+ Passifi: They are replacing us with machines . :scream:
+ KiwiTae: Passifi yes and they start by german players  :3
+ Alex-1: what
+ Alex-1: but ehy
+ Alex-1: why
+ Alex-1: good
+ Passifi: replacing german players with machines is like replacing a donkey with an ass. the same difference
+ Passifi: just to cover my ass. Dear mods ass is an animal and not at all vulgar&#160;:)
+ Alex-1: Passifi you are thinking to much
+ jacek: oO
+ Alex-1: hii jacek
+ xiaoran: hello
+ Azhy: hey
+ BackoffJack999: hello
+ MSmits: hey jacek, i think i got the multi-threading thing to work
+ MSmits: still testing, but seems ok
+ struct: That was fast
+ MSmits: i didnt use a mutex on the node. I just have 6 processes that each have a locked node associated with them
+ MSmits: then i dont pollute the database
+ MSmits: yeah it wasnt that hard, because I already ran a separate process for a game (a sim in the meta)
+ MSmits: so i just run more of them now and have to make sure they dont conflict is all
+ MSmits: whenever I UCT, I count how many times each node is selected by ongoing games and I add that many visits. Functions similarly to virtual losses
+ derjack: :tada:
+ Marchete: are you parallelizing MCTS?
+ MSmits: no, meta mcts
+ MSmits: it's easier
+ MSmits: because speed is no issue
+ MSmits: with meta mcts, a simulation is a separate process running a game 
+ MSmits: so i just run 6 of them now
+ derjack: what do you mean each have locked node
+ MSmits: I have an array of 6 locked gamestates
+ MSmits: so when i select a node i just go through the list
+ MSmits: see if its in there
+ MSmits: 1 for each process
+ MSmits: and each process also has their own selection array for the entire tree
+ MSmits: so i can count for virtual losses
+ MSmits: static readonly Guid[] locked = new Guid[PROCESS_COUNT];
+ MSmits: crap no  pastebin
+ derjack: spam
+ MSmits: was expecting pastebin :P
+ MSmits: does it not work at all currently?
+ MSmits: or did i just paste too little code?
+ struct: needed 1 more \n
+ MSmits: ah ok
+ Marchete: for what game?
+ MSmits: for uttt now, but i can easily adapt to any of them I guess
+ MSmits: all my meta mcts are sort of similar
+ Marchete: uttt again?
+ Marchete: I mean
+ MSmits: i was running an opening book experiment
+ MSmits: 1M games, then CG bench, 2M games etc.
+ MSmits: i was curious to see how much it actually helps
+ MSmits: normally i would counterbook, but what if i dont, will it actually help me any
+ MSmits: i just wanted to speed up the experiment a bit, was up to 3M, but it's a bit slow
+ MSmits: <a rel="nofollow" class="external free" href="https://imgur.com/a/4DUDIYq">https://imgur.com/a/4DUDIYq</a>
+ MSmits: (each test is 400 games)
+ Astrobytes: While you sleep, MetaSmits studies you...
+ MSmits: :grin:
+ MSmits: its interesting how vs some players winrate drops a bunch with more games. I think it's because they are very deterministic and i just go into a region of play where they always win
+ MSmits: (like recurse's NN)
+ MSmits: should pick up again later, with more games
+ derjack: and how long does 1m games take
+ MSmits: depends on how early it is. the first million is the slowest because game sims start from the root. Later on they can be much faster. But generally, a week on 1 core
+ MSmits: in connect4, it can be a day because games are ultra short now
+ MSmits: they start, then solve after a few turns only (50 ms each)
+ Marchete: :fire::fire::fire::fire::fire:
+ Butanium: hey is there someone who already use both tooltip and viewport module at the same time for a cg project?
+ MSmits: are you worried I set my house on fire with multithreading Marchete?
+ MSmits: Butanium no idea what you're talking about 
+ Butanium: I'm doing a multiplayer codin game
+ Butanium: And I use the viewport module
+ Butanium: which allow the player to move around anad zoom in/out
+ MSmits: wow
+ MSmits: sounds advanced
+ MSmits: you need struct
+ MSmits: if he doesn't know, you're too advanced for us
+ struct: I never used both modules together
+ Butanium: MSmits: lol
+ 2kiran: where do i get the codes that are needed... new here
+ struct: What do you mean?
+ 2kiran: well you have to write something for game to keep goin
+ struct: you need to code it yeah
+ 2kiran: don't know how
+ Astrobytes: Why are you here then?
+ 2kiran: to learn init
+ Astrobytes: init blud, get me
+ Astrobytes: You don't know any coding at all?
+ 2kiran: yh
+ Astrobytes: yeah you do or yeah you don't
+ 2kiran: yh i don't
+ Astrobytes: Right. Best to go do some tutorials and learn the basics first, this site assumes a basic working knowledge
+ struct: The wsl2 thing works nice btw
+ Astrobytes: So loops, conditional statements, logic etc
+ 2kiran: ok...
+ Astrobytes: Ah cool struct
+ Butanium: <a rel="nofollow" class="external free" href="https://www.sololearn.com/">https://www.sololearn.com/</a>
+ Astrobytes: 2kiran: New people tend to go for python, lots of tutorials out there
+ Astrobytes: But use whatever you feel OK with
+ Butanium: check this 2kiran, there are basic tutorial here
+ 2kiran: cool
+ MadKnight: are u ready for the contest Automaton2000&#160;?
+ Automaton2000: do you have a replay with u
+ Butanium: ok it's not possible with the actual modules struct
+ Butanium: *current
+ MSmits: mmh interesting bug. I have a situation where it checks whether a node is in the DB and if not, it inserts it. But another thread will do this at the same time and then you get a key already exists exception
+ MSmits: because the DB is slow, this is possible somehow
+ Kitkat260: gm
+ Scarfield: Device is leaving Astralis&#160;:'(
+ Kitkat260: why
+ struct: MSmits how will you fix this?
+ MSmits: I think I will do a check earlier and make sure the function that does this only gets called once at a time. That seems to work ok
+ MSmits: not sure if it may not cause a crash over a longer period of time. We'll see, parallelization is messy&#160;:)
+ MSmits: even the word is messy
+ struct: cant you have a list or something of pending inserts?
+ MSmits: something like that could work. 
+ MSmits: it would have to be a part of the meta mcts that is not parallelized
+ MSmits: thats the main thing
+ MSmits: but it also has to be inserted *before* it's being used by a parallelized part
+ struct: Should I rotate the notation or amazons?
+ struct: Or I should not bother?
+ Astrobytes: I doesn't bother me tbh
+ Astrobytes: But that's just me
+ MSmits: if you want a second pair of eyes, let me look at it too
+ MSmits: maybe it will bother me
+ struct: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/6127e5b918b4155e0536e89f7157029f30bc">https://www.codingame.com/contribute/view/6127e5b918b4155e0536e89f7157029f30bc</a>
+ MSmits: what exactly should be rotated/
+ MSmits:&#160;?
+ struct: 1-8
+ Astrobytes: the ranks are backwards
+ MSmits: oh
+ MSmits: hmm
+ MSmits: well it helps a little bit if it is consistent with other games
+ MSmits: though the other games are not consistent amongst themselves
+ MSmits: but no need to add a completely new variations to the mix
+ Astrobytes: doesn't affect anything, it's more aesthetic imo
+ MSmits: it affects how you read input doesnt it?
+ Astrobytes: Minimal disruption
+ MSmits: true
+ MSmits: but if it's easy to fix...
+ MSmits: not sure if that's the case
+ Astrobytes: teapot:  "I know it is quite a tricky change "
+ Astrobytes: darkhorse64: opinion?
+ struct: its tricky if I dont make my code a mess
+ Scarfield: agree with astro, i like it better as is, anyway its very clear how its set up
+ struct: I can just make my code a mess and it gets fixed
+ MSmits: ahh ok. Don't bother changing it then, you guys playtested it
+ struct: readinput.replace(/\d//g,
+ Scarfield: i havent tested, only looked at it, and my eyes were pleased
+ MSmits: topleft being 1 kinda makes sense
+ Scarfield: ^
+ struct: yeah
+ MSmits: wish all games had that
+ struct: tell that to chess players
+ Astrobytes:&#160;:)
+ MSmits: checkers is funny with the red pieces being called black
+ MSmits: on input
+ derjack: racists eh
+ MSmits: not where i was going, but yeah sure&#160;:)
+ Alex-1: Automaton2000 nice to meet you
+ darkhorse64: afaik, amazons boards follow chess conventions
+ Automaton2000: at least he has a good idea how to do the same thing i did to get to
+ struct: you are right darkhorse
+ darkhorse64: which is origin bottom left
+ struct: I can change it, I dont mind at all
+ struct: replace every digit by  9 - digit
+ darkhorse64: I did the change for clobber
+ darkhorse64: you can look at the referee if you wish <a rel="nofollow" class="external free" href="https://github.com/darkhorse64/CG_Clobber">https://github.com/darkhorse64/CG_Clobber</a>
+ struct: thanks
+ ZarthaxX: hey
+ Scarfield: oi
+ struct: hi
+ MSmits: hi
+ ZarthaxX: howdy everyone&#160;:)
+ Astrobytes: howdydoodayyy
+ MSmits: doing good&#160;:)
+ Astrobytes: ZarthathustraxX
+ ZarthaxX: :rofl: the f
+ MSmits: he's been brooding on that all day
+ Astrobytes: Like Zarathustra
+ ZarthaxX: Atrobazy
+ ZarthaxX: Astrobazy*
+ ZarthaxX: mmmm
+ Astrobytes: tf
+ MSmits: tensorflow?
+ ZarthaxX: it was like mixzing crazy with your name
+ ZarthaxX: lmao the addiction MSmits :rofl:
+ MSmits:&#160;:)
+ Astrobytes: I *knew* you were gonna say tensorflow Smits
+ MSmits: yeah i am predictable
+ ZarthaxX: btw we defended our final project on wed
+ ZarthaxX: the one with avx512 
+ MSmits: why do you need to defend it?
+ ZarthaxX: finally over :D
+ Astrobytes: ah nice, well done
+ ZarthaxX: "defend" -&gt; talk a bit about curiosoties
+ MSmits: oh ok
+ ZarthaxX: but well
+ MSmits: wait is this like defending a thesis?
+ MSmits: or something?
+ ZarthaxX: he kind of wanted each of us to talk a bit, thats why
+ Astrobytes: Yes
+ ZarthaxX: it could count as one haha
+ MSmits: ohh ok, this is for your studies ofc
+ ZarthaxX: the teacher said there is potential for doing a thesis, haha
+ MSmits: avx512 sounds like a nice project
+ ZarthaxX: well it was sse, avx and avx512
+ ANJACE_Z: what is avx512&#160;?
+ ZarthaxX: coding with c with intrsiniscs and with asm
+ ZarthaxX: it was a long one
+ MSmits: ANJACE_Z do you know regular AVX?
+ Astrobytes: I can imagine
+ ZarthaxX: yeah, but well teacher loved it
+ ANJACE_Z: no
+ ZarthaxX: he liked that we went through many things
+ MSmits: it's basically running things parallel at the level of individual operations. You can add numbers 8x at the same time, without having to use multiple threads or cores
+ MSmits: 512 refers to the size of the register
+ ZarthaxX: we mixed biology with another 2 subjects of the career, algorithms and low lvl coding
+ struct: 512 bits o.o
+ Astrobytes: biology eh
+ MSmits: ANJACE_Z not just adding, a bunch of different operations, 100s
+ ZarthaxX: anyway we got 10s&#160;:)
+ MSmits: that's max grade right?
+ ZarthaxX: yes 
+ MSmits: cool, you kinda have to add that bit&#160;:)
+ ZarthaxX: thought i had :rofl:
+ MSmits: some places use 100 as max
+ Astrobytes: yeah, our standard grades in highschool used to go from 1 - 7. 1 being distinction and 7 being fail.
+ ZarthaxX: i would be crying and wont have put that smiley face
+ MSmits: 10 would be beyond fail
+ ZarthaxX: oh god
+ ZarthaxX: 1 best the f
+ Astrobytes: You had to basically not turn up to get a 7
+ MSmits: ours goes from 1 to 10, 10 being best, 1 being worst
+ MSmits: it's weird because 0-1 doesnt exist
+ Astrobytes: Not sure how it works now
+ struct: 0-20
+ MSmits: and in the US they use A's and B's and C's, because it makes so much  sense not to use numbers...
+ Scarfield: you can get -3 as worst grade in dk, might have been changed though
+ ZarthaxX: some teachers have tried to put 0 lol
+ Astrobytes: It's not that weird ZarthaxX, I mean A B, C, D, E etc is accepted for grading
+ ZarthaxX: i know that one
+ Astrobytes: -3vel?
+ Scarfield: xD
+ MSmits: -3 is a really weird minimum
+ ZarthaxX: smito you would like the project, paralellizing dynamic programming algorithm
+ ZarthaxX: :rofl:
+ MSmits: sounds fun
+ ZarthaxX: different approach than the usual
+ MSmits: just parallelized my meta mcts. Not with avx though, just cores
+ ZarthaxX: it is
+ ZarthaxX: ah but that one is less fun :rofl:
+ MSmits: true
+ MSmits: but useful
+ Scarfield: yea, there was a lot of talk about changing it, but i dont know if it ever was changed. pretty bad for average grade to get a minus
+ Westicles: When I was a kid the grades were E,S,M,I,F
+ ZarthaxX: i mean scores are in contiguous memory in a 1d array, seems easy..
+ MSmits: i meta mcts ZarthaxX? They aren't for me
+ MSmits: i use a persistent dictionary saved on SSD
+ ZarthaxX: what?
+ MSmits: to store nodes
+ Astrobytes: Exemplary, Shitty, Mega-Shitty, Idiot and Fk Off What Is this, Westicles?
+ ZarthaxX: oh god
+ ZarthaxX: thought you were calculating the scores for selection phase
+ Westicles: Hmmm.  Excellent and Fail, not sure about the rest
+ ZarthaxX: with simd
+ MSmits: well i do that too
+ MSmits: nooo
+ MSmits: i dont use simd anywhere
+ ZarthaxX: oh, ok
+ ZarthaxX: you meant like threading
+ MSmits: i just meant i parallelized by using more than 1 core
+ ZarthaxX: ah ok
+ MSmits: each core runs a game instance
+ Astrobytes: Well, I was close I guess :P
+ ZarthaxX: so you are messing with threads?
+ MSmits: yeah
+ MSmits: well
+ MSmits: it's messing with processes
+ MSmits: C# also has multithreading, its actually different
+ ZarthaxX: and managing collisions between them...
+ MSmits: yeah
+ ZarthaxX: ah
+ Westicles: "ESMIF - An old grading scale used in schools in the late 1940s and 50s" :older_man:
+ MSmits: but it's a C# program running C++ binaries
+ ZarthaxX: so different processes running on same time
+ ZarthaxX: ah okey
+ MSmits: yeah
+ ZarthaxX: you run multiple c++
+ MSmits: exactly
+ ZarthaxX: c# program is responsible for writing results tho
+ MSmits: to SSD dictionary yeah
+ ZarthaxX: ah so no collisions
+ ZarthaxX: seems easier then haha
+ MSmits: well i had some issues when two processes were done at the same time, but i think i fixed them
+ Astrobytes: Westicles: ...and on through the 60s and early 70s (possibly later). Stood for E - excellent, S - superior , M - medium or average, I - inferior, F - failure
+ ZarthaxX: dirty hack? :P
+ MSmits: I think it might be dirty yeah
+ MSmits: edge case
+ Astrobytes: The best kind of hacky
+ ZarthaxX: there are some concepts for multiuthreading that idk if they apply to your case
+ ZarthaxX: as i dont really know how you are managing the writing results part
+ MSmits: the process being done calls an event then that activates backpropagation and such. The main thing is starting a new selection phase. That can cause issues
+ ZarthaxX: okey
+ ZarthaxX: well
+ MSmits: I just have a boolean at the start of that function now, if one already started, i just return immediately
+ MSmits: and if not, it checks all processes one after a time and refreshes them
+ ZarthaxX: okey :P
+ ZarthaxX: well for multithreading you have concepts like mutexes
+ ZarthaxX: <a rel="nofollow" class="external free" href="https://docs.microsoft.com/en-us/dotnet/api/system.threading.mutex?view=net-5.0">https://docs.microsoft.com/en-us/dotnet/api/system.threading.mutex?view=net-5.0</a>
+ KiwiTae: ZarthaxX o**
+ MSmits: i kind of use a mutex
+ ZarthaxX: hi kiwoo&#160;:*
+ ZarthaxX: okey
+ ZarthaxX: i got a 10 kiwooo ~~
+ ZarthaxX: lol
+ KiwiTae: last time i did multithreading with matlab still gettin nightmares
+ MSmits: sounds hard&#160;:)
+ KiwiTae: ZarthaxX awesome&#160;! gj genuis
+ MSmits: is matlab like mathematica&#160;?
+ ZarthaxX: ty :D
+ KiwiTae: a bit i guess , mostly scripting its not oo friendly
+ Westicles: matlab indexes start with 1, if that tells you anything
+ jacek: :scream:
+ KiwiTae: Westicles &gt;&lt;
+ MSmits: ack 1
+ MSmits: like visual basic
+ jacek: huh
+ Westicles: indices I should say
+ MSmits: visual basic for windows applications i mean
+ MSmits: not sure if thats different, but it started at 1 afaik
+ MSmits: it's not even the worst part of VBA
+ Astrobytes: everything about VB and VBA is the worst
+ MSmits: yeah
+ struct: also lua
+ Astrobytes: indeed
+ Kitkat260: hi
+ Kitkat260: its quiet uptown
+ MSmits: soon.. the storm
+ struct: (╯°□°）╯︵ ┻━┻
+ KiwiTae: ┬─┬ノ( º _ ºノ)
+ WannaBeHum1n: guys in coders strike back does both of the pods need to get in the checkmark to get the next&#160;?
+ MSmits: no
+ MSmits: well
+ MSmits: each pod does its own race
+ MSmits: best pod wins
+ MSmits: if its one of yours, you win
+ KiwiTae: there are tons of people using one pod to mess with the other player
+ MSmits: it's the only way to win really. 
+ Therabidpanther: you are eventually responsible for multiple pods?
+ MSmits: one pod races, the other messes
+ MSmits: 2
+ WannaBeHum1n: i made one block a certain checkpoint and the other do the race like in previous leagues, the one supposed to be racing doesnt recieve the new coords
+ KiwiTae: Therabidpanther 2 in gold i think
+ KiwiTae: not sure ~
+ MSmits: WannaBeHum1n if you do the checkpoints in the correct order, it should
+ MSmits: so you're doing something wrong
+ KiwiTae: Westicles u must be messing up with the input parsin 
+ MSmits: KiwiTae who are you talking to?
+ Astrobytes: lol
+ KiwiTae: no idea xd im distracted
+ MSmits: lol
+ WannaBeHum1n: so for testing I am printing the nextCheckPointId and it seems it doesnt  update even when pod number one is leterally standing on it
+ struct: Are you reading all the inputs?
+ MSmits: if your program is pretty simple, it would be ok to paste it here so we can take a look at it
+ MSmits: not if its advanced and people may steal it ofc
+ WannaBeHum1n: it is the default code
+ MSmits: did you reset it after promotion?
+ MSmits: the input changes
+ WannaBeHum1n: <a rel="nofollow" class="external free" href="https://pastebin.com/upm02rZV">https://pastebin.com/upm02rZV</a>
+ WannaBeHum1n: here
+ H7: Yeah, I stole it.
+ struct: I think sometimes its hard to keep track on which frame you are
+ MSmits: does the next checkpoint id never change?
+ MSmits: or just in that one frame you're expecting it to
+ WannaBeHum1n: the nextxheckpointid doesnt change
+ MSmits: also, is this JS? 
+ MSmits: I am wondering about this:
+ MSmits: const nextCheckPointId = parseInt(inputs[5]);
+ WannaBeHum1n: yes senior
+ MSmits: const
+ MSmits: does that mean it never changes?
+ WannaBeHum1n: no it can change
+ MSmits: not sure about JS
+ WannaBeHum1n: i ll change it
+ WannaBeHum1n: to tr
+ Therabidpanther: wait, const can change?
+ Therabidpanther: whats the point of not using let then lol
+ Astrobytes: JS for ya
+ struct: the code works
+ MSmits: you tested it?
+ MSmits: are you in gold?
+ struct: its same for legend
+ WannaBeHum1n: still
+ WannaBeHum1n: even when changed to let
+ WannaBeHum1n: the nextCheckpointid updates when the two ppods are on it
+ UnnamedCodinGamer: In search race: If the message is debug once, the game summary will contain additional information throughout the game.
+ struct: <a rel="nofollow" class="external free" href="https://i.imgur.com/UUQ166Q.gif">https://i.imgur.com/UUQ166Q.gif</a>
+ struct: look at the bottom
+ struct: it works fine
+ UnnamedCodinGamer: when I do that I get a warning for not reading input
+ WannaBeHum1n: how
+ WannaBeHum1n: do i do the recording thingy
+ WannaBeHum1n: u did
+ struct: I use shareX
+ UnnamedCodinGamer: any ideas how to get the info?
+ WannaBeHum1n: struct
+ struct: when the pod is at middle of checkpoint
+ struct: it was still 0
+ struct: 1*
+ WannaBeHum1n: after that
+ struct: on previous turn
+ struct: thats why it says 1
+ WannaBeHum1n: does it keep updating&#160;?
+ WannaBeHum1n: do u get 3
+ WannaBeHum1n: 4
+ WannaBeHum1n: and so on&#160;?*
+ struct: no
+ struct: your pod only goes to checkpoint 1
+ struct: the reason is simple
+ struct: your other pod checkpoint id is 1
+ struct: you are assuming both pods checkpoint id are the same 
+ WannaBeHum1n: isn't&#160;?
+ struct: no
+ WannaBeHum1n: how do i get each
+ WannaBeHum1n: seperetaly&#160;?
+ struct: its given for each pod
+ Astrobytes: No, like Smits said earlier, they are essentially each running their own race
+ Astrobytes: that's why the info is separate
+ WannaBeHum1n: next check point id of your pod
+ WannaBeHum1n: next check point id of the opponent's pod
+ WannaBeHum1n: ahhh
+ WannaBeHum1n: confusion 1000
+ UnnamedCodinGamer: ping
+ Astrobytes: pong
+ Marchete: super pong
+ WannaBeHum1n: pogggers
+ Therabidpanther: i got 90% on a puzzle&#160;:(
+ Therabidpanther: and idk whats wrong lol
+ Therabidpanther: other than ugly code LOL
+ struct: community puzzle or official?
+ Therabidpanther: err... how do i know? lol
+ struct: paste the link here
+ BlaiseEbuth: Smash!
+ Therabidpanther: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/mime-type">https://www.codingame.com/ide/puzzle/mime-type</a>
+ struct: which validator do you fail?
+ Therabidpanther: i fail the case validator on the official test
+ Therabidpanther: i pass all the test run test cases tho
+ struct: which validator?
+ Therabidpanther: Consideration of the case (upper or lower)
+ Therabidpanther: so 4
+ struct: have you tried to lowercase everything?
+ Therabidpanther: i dont think that would work tho? because the output wants to match the original case
+ struct: Dont think so
+ struct: I ignore case and got 100%
+ Tiffion: so
+ Tiffion: i need help in the "Target Firing" classic puzzle
+ BlaiseEbuth: I need a coffee.
+ BlaiseEbuth: And some cake.
+ BlaiseEbuth: Hurry
+ VizGhar: mmm cake
+ VizGhar: Tiffion - just ask&#160;:)
+ VizGhar: there are many people allergic to others not asking directly what they want
+ BlaiseEbuth: It's not an allergy question... Just a logic and efficiency one.
+ BlaiseEbuth: And in the present case, a politeness one also...
+ BlaiseEbuth: So where's my coffee&#160;!
+ Youssefk: :stuck_out_tongue:
+ Youssefk: FU
+ Youssefk: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/93471248-daf1-45e3-b6eb-ca3da0a04eba">http://chat.codingame.com/pastebin/93471248-daf1-45e3-b6eb-ca3da0a04eba</a>
+ Youssefk: what's wrong with the code?
+ Tiffion: In order to prioritize my enemies so I can get the best shield value in the end, I was calculating the overall damage I would take until eliminating that enemy, and sorting from the smallest so I pick always the "best" choice to avoid damage.
+ Tiffion: i tryied over and over again and still can't see what i'm missing
+ Tiffion: i'm sure if i just take a bath, a good rest I probably will see something wrong tomorrow, but this isn't getting out of my head XD
+ Uljahn: Automaton2000: I need clothes, boots and motorcycle
+ Automaton2000: do you only have to do that, but it doesn't matter
+ BlaiseEbuth: Youssefk: The code is in python.
+ Astrobytes: :rofl:
+ BlaiseEbuth: oi Astro o/
+ Youssefk: i know ya bro jebt jdid nay?
+ Astrobytes: hey hey Blaise&#160;:)
+ Astrobytes: Youssefk: pardon?
+ BlaiseEbuth: +
+ Youssefk: mafhemtech?
+ BlaiseEbuth: :thinking:
+ Youssefk: aaba
+ Uljahn: "if 'c' in my_list" will always be true or false, so you'll get the same list or empty list i guess
+ Youssefk: thank u aasba
+ BlaiseEbuth: English on this chan plz.
+ Astrobytes: We don't speak Arabic very well Youssefk
+ Youssefk: it's not arabic
+ Youssefk: it's frankantashion
+ BlaiseEbuth: No matter what is it, it's not english
+ TeeAir: It's Nothenglish
+ TeeAir: frankantashion is an hindi word&#160;?
+ TeeAir: Cannot find out
+ Astrobytes: I think it's only spoken by the Bulshitian sect hailing from Madeupland
+ Astrobytes: anyway, afk for a wee bit, back soon
+ BlaiseEbuth: Anti Fran Kantashion&#160;?
+ TeeAir: think it's a a joke From Astro
+ MSmits: I have associate status with the Bulshitian sect on account of being part of the Malarkey Federation
+ TeeAir: too cringe for me
+ TeeAir: Cya
+ MSmits: lol
+ TeeAir: xD
+ MSmits: i cringe when people say cringe
+ MSmits: :P
+ TeeAir: Vicious circle then
+ MSmits: indeed
+ MSmits: it's an odd expression btw
+ MSmits: people say circle, when there's only ever a few angles to it
+ MSmits: a vicious square would be more accurate
+ struct: I dont think there even is a word in portuguese that describes cringe
+ BlaiseEbuth: And at the origin of the vicious square, there's the square root.
+ TeeAir: deve ter
+ TeeAir: O
+ TeeAir: Only english
+ struct: maybe, there is I just don't know it
+ TeeAir: Must have one
+ MSmits: there's no Dutch word I think?
+ TeeAir: i think it's "Cerveza"
+ MSmits: ineenkrimpen
+ TeeAir: XD
+ MSmits: noone says that
+ TeeAir: Is this dutch&#160;?
+ MSmits: the reverse translation of the dutch word ineenkrimpen
+ MSmits: ineenkrimpenshrink, shrivel, cower, cringe, flinch
+ MSmits: so it's not exactly cringe either
+ struct: cerveza is spanish, in portuguese its cerveja, it means bear beer
+ TeeAir: yeah never wrote it x
+ TeeAir: xD
+ MSmits: bear beer?
+ TeeAir: Beer
+ struct: beer*
+ struct: sorry
+ MSmits: is that made from the urine of a bear?
+ MSmits: oh ok
+ struct: I misstype and forgot to delete
+ jacek: oO
+ TeeAir: No from the fat 
+ TeeAir: from the bear fat*
+ TeeAir: TGIF baby
+ TeeAir: Thanks God It's Friday
+ TeeAir: Cya folks
+ ShortBaited: i like turtles
+ GIPOKE: im stuck
+ GIPOKE: im new here
+ ShortBaited: whats your problem?
+ GIPOKE: im on the coders strike back tutorial and dont know what to do please help
+ GIPOKE: im using java
+ ShortBaited: uhm
+ GIPOKE:&#160;?
+ ShortBaited: gemme some time
+ GIPOKE: im not a really experienced coder
+ ShortBaited: i did Coders Strike Back in C++
+ ShortBaited: Where do you stuck at?
+ GIPOKE: the first thing
+ GIPOKE: it says edit this line to output the target something
+ GIPOKE: i literally have no idea what to do
+ KiwiTae: you read game input on stdin and print output on stdout
+ GIPOKE: oh wait i did the first step!
+ GIPOKE: now i have to deal with something about thrust
+ GIPOKE: im starting to get it all i had to do was look at the console
+ GIPOKE: yay im in wood 3
+ WannaBeHum1n: gj
+ Kitkat260: hi
+ Kitkat260: ¨its quiet uptown¨
+ NEW123Programmer: hi
+ psidolphin: hellooo
+ Kitkat260: how r u
+ HackNinja: I dont understand the mars launcher epsiode 1
+ Kitkat260: me nither
+ HackNinja: hi are yu a python user
+ Kitkat260: yes
+ HackNinja: Wow 
+ HackNinja: so i guess we can work this out right
+ HackNinja: hello 
+ HackNinja: hellllooooo
+ jacek: huh
+ HackNinja: :hushed:
+ GIPOKE: im stuck on defibrillators
+ Roxxx: so i was just in a clash of code
+ Roxxx: and the task was
+ HackNinja: was what
+ Roxxx: to generate english words out of scrambled words
+ Roxxx: how would you even do that without uploading a whole dictionary?
+ Smelty: augh i died on 2048 with 230000 score
+ HackNinja: :laughing: sad
+ Smelty: had a 16192
+ HackNinja: dont care
+ <b>**Smelty prepares to commit a hate crime</b></p><p><img src="/a/62442168947622" /> Smelty: edit: 240000
+ GIPOKE: im using javascript
+ GIPOKE: so if readline() reads from stdin
+ GIPOKE: what reads from stdout?
+ GIPOKE: how do i create a thrust variable if it isnt in the game input?
+ struct: you can create it
+ Dreyfuzz: fuck
+ GIPOKE: alright wood 1
+ jacek: :tada:
+ Kitkat260: hey sorry
+ WannaBeHum1n: congrats
+ WannaBeHum1n: guys is he x speed and y speed the same as velocity&#160;?
+ ilovebiscuits: What is the calculation they use for a collision?
+ jacek: if you dont know, use muzero. ezpz
+ ilovebiscuits: Is that really what you do? That just seems like such a unnecessarily complicated workaround?
+ jacek: that was a little trolling from my part. pardon me
+ Astrobytes: oO
+ Marchete: ...
+ GIPOKE: how do you wait a few seconds in coders strike back? (javascript)
+ Astrobytes: ilovebiscuits: Take a read of this<a rel="nofollow" class="external free" href="http://files.magusgeek.com/csb/csb_en.html">http://files.magusgeek.com/csb/csb_en.html</a>
+ GIPOKE: oh im getting so close to bronze
+ ilovebiscuits: thx @Astrobytes
+ Astrobytes: np ilovebiscuits
+ GIPOKE: i put an and and then and or so which takes precedence?
+ GIPOKE: ok so c1 &amp;&amp; c2 || c3
+ Marchete: just don't
+ GIPOKE: y
+ Marchete: use parenthesis
+ GIPOKE: ok
+ jacek: if its javascript, i wouldnt be surprised if it were random
+ ArtifaxXx: =)
+ Marchete: on JS you get an string
+ Marchete: a*
+ GIPOKE: im on JS yeah
+ Marchete: lol
+ Marchete: just kidding
+ jacek: im on crack, still better than js
+ Marchete: but it's not recommended mix &amp;&amp; and || at the same level
+ Marchete: (a &amp;&amp; (b || c))
+ Astrobytes: cracek
+ Marchete: ((a &amp;&amp; b) || c)
+ GIPOKE: what i did yeag
+ GIPOKE: *yeah
+ GIPOKE: im in the wood 1 arena and sometimes im winning sometimes im losing
+ Marchete: CSB?
+ GIPOKE: yes
+ Astrobytes: Yeah, as Marchete is pointing out *always* make your intention clear with parantheses (for your own sanity as well as precedence)
+ BackoffJack999: hello
+ Marchete: even some compilers warn you
+ Astrobytes: CG IDE does for C++
+ GIPOKE: ok ill remember that
+ Astrobytes: When it works
+ Gabbek: Good evening everyone
+ Marchete: new  CG IDE works pretty well
+ GIPOKE: hmm maybe i need to tweak the distances
+ Marchete: good intellisense
+ Astrobytes: :wave: Gabbek
+ Gabbek: Astrobytes - how's the boss?&#160;:)
+ Marchete: GIPOKE do you know our savior -3vel?
+ Astrobytes: Marchete: yeah, it's a helluva improvement over the last one
+ GIPOKE: ok so instead of 8000 i put 9000 lets see how that goes
+ GIPOKE: Marchete&#160;?
+ Astrobytes: Gabbek: yeah, done, gave it to struct
+ Gabbek: sweet, that amazon game looks pretty fun, I'll add it to my endless queue of CG content :D
+ Astrobytes: Thanks for the testing last night
+ GIPOKE: hmm what went wrong
+ GIPOKE: for some reason it looks like parentheses arent working
+ Astrobytes: GIPOKE: -3 * velocity
+ GIPOKE: my pod boosted while it was super close to the boss and that set me off course but that wasnt supposed to happen
+ GIPOKE: velocity? im in wood 1
+ GIPOKE: i dont have access to velocity yet
+ Astrobytes: Yeah, you can calculate it
+ GIPOKE: i have thrust but i dont have speed
+ struct: hi, I should add it soon
+ struct: today/tomorrow
+ Astrobytes: No rush struct, just whenever you're ready
+ Scarfield: No, rush 
+ Astrobytes: Don't change the 50ms timeLimit btw, it's deliberate
+ GIPOKE: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/a03e6d10-2580-4241-a048-c5134056e417">http://chat.codingame.com/pastebin/a03e6d10-2580-4241-a048-c5134056e417</a>
+ jacek: why didnt ask me to make a boss :v
+ GIPOKE: what am i doing wrong here
+ Secret_sister2: anybody got a joke or something for me well im in class 
+ struct: jacek I asked in chat not directly though
+ Astrobytes: GIPOKE: well you're talking about CSB but posting The Descent
+ struct: I just asked if someone wanted to make the boss
+ Smelty: gaspe
+ struct: Maybe you will be the boss in the contest
+ struct: who knows
+ Smelty: woaw
+ Smelty: cool
+ Roxxx: hey i'm doing the same thing you are
+ Secret_sister2: dang i got to go for a mask break
+ Secret_sister2: bye guys 
+ jacek: oO
+ Gabbek: yikes, that was a short break
+ GIPOKE: im stumped
+ Marchete: -3vel ezpz gold in 5 minutes
+ King_Coda: :tophat: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/deb55834-4875-4eef-a7ff-62930931b239">http://chat.codingame.com/pastebin/deb55834-4875-4eef-a7ff-62930931b239</a>
+ King_Coda: And now I officially give up
+ Clash_of_Cock: pls help my name is not displayed correctly i am not actually ClashOfPlop
+ King_Coda: Anyways, how are you guys doing
+ Clash_of_Cock: not good my name is displayed wrong
+ struct: refresh
+ Astrobytes: King_Coda: Same as yesterday. And you're still on an emoji spamming warning.
+ Clash_of_Cock: test
+ King_Coda: right, sorry
+ Clash_of_Cock: refresh didn't help 
+ Gabbek: I've never heard of name being displayed wrong issue, hmm
+ King_Coda: I see ClashofPlop
+ King_Coda: its fine for me
+ Astrobytes: ClashofPlop so is that supposed to be amusing or what
+ Finnya: anybody has advice for a total beginner? what "game" is best to start?
+ jacek: do you have any programming knowledge?
+ Astrobytes: Username violates community guidelines
+ Gabbek: Finnya what's your goal? Learn to program, or you want to start with some easy practice exercises?
+ Finnya: want to learn python 3 
+ jacek: try easy puzzles first
+ Finnya: i started with basic already, but its very basic
+ Gabbek: then I would suggest jet brains academy - you can get month for free
+ Gabbek: and come back to CG for some exercise practice once you feel a bit more comfortable&#160;:)
+ Clash_of_Cock: t
+ Finnya: ^^ so this is not quite the right start for a beginner=
+ Finnya:&#160;?
+ Andriamanitra: i'm sure you could figure it out but it's probably better to go through some tutorial first
+ Finnya: :D okay, thanks 
+ Andriamanitra: i think codingame is better for getting better once you know the basics than actually teaching the basics
+ jacek: CG is not for total beginner. its for improving what you know now
+ Finnya: well, just wait for me&#160;;) one day i will be back :D
+ Gabbek: sure thing, we'll be around&#160;:)
+ Finnya: allright, then see you then!
+ lateralOT: here for the first time
+ lateralOT: this is the coolest UI for a coding challenge I've ever had
+ VizGhar: enjoy lateralOT
+ jacek: IDE?
+ VizGhar: IDE is pretty common right?
+ jacek: i think SATA is more common now
+ VizGhar: hmm
+ Astrobytes: :smirk:
+ <b>**Smelty loads a lmg with religious intent</b></p><p><a href="/wiki/File:Default_avatar.png" class="image"><img alt="Default avatar.png" src="/images/5/56/Default_avatar.png" decoding="async" width="50" height="50" /></a> voidnull: im here for the first time too 
+ <b>**BlaiseEbuth will ban Smelty for violence apolgia.</b></p><p><img src="/a/3084076624888" /> Gabbek: welcome voidnull
+ <b>**Smelty is sowwy</b></p><p><a href="/wiki/File:Default_avatar.png" class="image"><img alt="Default avatar.png" src="/images/5/56/Default_avatar.png" decoding="async" width="50" height="50" /></a> Gregu92: I just enrolled. Probably take my time here to improve my skills :D 
+ jacek: oO
+ <b>**BlaiseEbuth will ban Smelty for racism and non tolerance.</b></p><p><a href="/wiki/File:Default_avatar.png" class="image"><img alt="Default avatar.png" src="/images/5/56/Default_avatar.png" decoding="async" width="50" height="50" /></a> voidnull: thanks
+ Astrobytes: Seems to be a lot of new people the past week or 2
+ Astrobytes: Which is good
+ jacek: content maybe?
+ jacek: good? yesterday you complained
+ Astrobytes: Those weren't 'new people'
+ BlaiseEbuth: Yé! Tibo will be happy!
+ Astrobytes: Only if they want fun and don't like competing
+ BlaiseEbuth: A lot of new active account, and a proportional diminution of the 5%.
+ Astrobytes:&#160;:(
+ Astrobytes: tbf though it wasn't so much Tibo
+ jacek: tibo?
+ BlaiseEbuth: Don't worry, you will be able to pay to play escape games instead of doing contests.
+ AntiSquid: what's the percentage of clashers&#160;? was that made public&#160;?
+ AntiSquid: hardcore religious zealot type of clashers i mean
+ BlaiseEbuth: No. But they are the heavy majority.
+ BlaiseEbuth: According the organizers.
+ AntiSquid: so we need more clash contests
+ AntiSquid: with ads, easy money
+ BlaiseEbuth: At least 200% of the community is composed of clashers.
+ Astrobytes: 195%
+ BlaiseEbuth: No there's also the non-competitive non-clasher.
+ Astrobytes: Oh right, true
+ BlaiseEbuth: 200/95/5
+ Astrobytes: Anyway, the salty taste in my mouth is too strong
+ jacek: get covid [solved]
+ AntiSquid: salty taste of whast
+ AntiSquid: from what
+ Astrobytes: Salt.
+ BlaiseEbuth: I have not seasoned yet.
+ Astrobytes: I had covid jacek, my taste and smell were no worse than a usual cold. My mother totally lost her sense of taste and smell, as did some friends. It's not guaranteed.
+ BlaiseEbuth: You had a bad covid, ask for a refund.
+ Astrobytes: :rofl:
+ jacek: totally permanently?
+ Astrobytes: No, it's recently started to come back properly (for my mother at least), in the past few months, so about a year of that
+ jacek: she could join CG and not be bothered then
+ AntiSquid: does covid impact taste of humour btw&#160;?
+ jacek: :scream:
+ Astrobytes: Definitely not
+ AntiSquid: oh wait i had to self isolate :thinking:
+ AntiSquid: Automaton2000 am i funny to you&#160;?
+ Automaton2000: there is a new contest
+ Astrobytes: My sense of humour got even darker
+ Smelty: what new contest?
+ Astrobytes: The new one.
+ jacek: there is another one
+ <b>**Smelty slaps itself around with a large fishbot a lot</b></p><p><img src="/a/61829028497145" /> jacek: oh ive been pushed in checkes
+ jacek: checkers even
+ struct: download the 50gb 8man tablebase
+ Astrobytes: Smelty: you have some kind of virtual self-harm going on. It is not healthy.
+ jacek: i should ask smits to compress them into 100kb
+ struct: Wait there will be a contest soon?
+ BlaiseEbuth: Don't worry, even if there's one you will not submit anything. So relax...
+ struct: :zipper_mouth:
+ adrian-cucu: bombardieri pe aici&#160;?
+ GIPOKE: im having trouble beating wood 1 league in csb
+ BlaiseEbuth: Shits happen...
+ Astrobytes: *Shit happens
+ BlaiseEbuth: No. There's a lot of shits
+ Astrobytes: I mean, both statements are true, but... context :P
+ Jojo_Lab_Ana: :rage:
+ Jojo_Lab_Ana: :scream:
+ Jojo_Lab_Ana: :flushed:
+ Jojo_Lab_Ana: \
+ Astrobytes: NooB_ni_mga_master: one more and you get kicked
+ jacek: get your embly together
+ Jojo_Lab_Ana: :rage:
+ Jojo_Lab_Ana: KICK UR ASS
+ Astrobytes: cheers struct
+ GIPOKE: seriously stop swearing
+ jacek: bloody hell
+ Astrobytes: that's not swearing jacek
+ BlaiseEbuth: And that's not true, I just cleaned up.
+ Astrobytes: :smirk:
+ GIPOKE: agh i cant geta good formula for when to boost
+ BlaiseEbuth: What league?
+ GIPOKE: wood 1
+ Astrobytes: first turn if checkpoint &gt; some distance? Then if not, if you're behind, boost?
+ BlaiseEbuth: Boost is not important. You can go gold without using it.
+ GIPOKE: im trying to find that distance
+ GIPOKE: BlaiseEbuth already tried that
+ Astrobytes: Yeah, Blaise is correct. I mean we must've mentioned -3vel 100 times already
+ BlaiseEbuth: Not a secret anymore
+ GIPOKE: what angle
+ GIPOKE: alright
+ GIPOKE: instead of having it be thrust 0 on the turns i made it thrust 40 and it worked
+ Astrobytes: you know how to calculate velocity if you've been reading the chat right
+ GIPOKE: thrust isnt speed
+ Astrobytes: BlaiseEbuth: Do you have a brick wall spare that I can bang my head against?
+ VizGhar: :D try floor... it's always somewhere nearby
+ Astrobytes: heh heh :D
+ BlaiseEbuth: I've some yes. I can give you one if you need it.
+ GIPOKE: wait what
+ GIPOKE: i went down 8970 places in the arena in under a millisecond
+ BlaiseEbuth: I went down to Georgia. But that's another story...
+ Astrobytes: Look, calculate your velocity ffs
+ Astrobytes: BlaiseEbuth: hahaha
+ GIPOKE: im on coders strike back
+ GIPOKE: the area is 16000 x 9000 and the pods can go outside the area too
+ GIPOKE: im confused
+ GIPOKE: stop using too many abbreviations
+ VizGhar: try reading forum GIPOKE there are a lot of ideas
+ BlaiseEbuth: Oh! Everything take sense now!
+ Astrobytes: CALCULATE YOUR VELOCITY.SPEED IS NOT VELOCITY. THRUST IS A FORCE.Velocity! Calculate it!
+ BlaiseEbuth: Astrobytes you don't understand, he is on Coders strike back...
+ GIPOKE: oh thats why i couldnt understand
+ voidnull: how do you calculate speed?
+ voidnull: making differential of previous position?
+ GIPOKE: so a 16000 x 9000 unit board the pods can go outside the area
+ Astrobytes: Velocity damnit
+ GIPOKE: thrust goes from 0 to 100 and there is a boost option
+ Astrobytes: yes
+ GIPOKE: i dont see how youre helping
+ BlaiseEbuth: Yeah yeah, don't need to copy paste the whole statement in the chat.
+ Astrobytes: Calculate your displacement from your previous position or so help me BlaiseEbuth I will be realllllllyyyyy peeved.
+ BlaiseEbuth: :popcorn:
+ GIPOKE: now tell me smart how do i calculate that
+ Astrobytes: (I used your name rather than god Blaise, hope you don't mind :P )
+ GIPOKE: reminder im in wood 1 league
+ BlaiseEbuth: That's ok, I forgive you. :3
+ Astrobytes: You know your current position, store your last position
+ VizGhar: uf... Astrobytes... you are flooding chat
+ Astrobytes: The displacement will be...
+ Astrobytes: VizGhar: Yes! With answers!
+ VizGhar: i know i know... funny how basic math/physics/common sense is missing here
+ Astrobytes: It's literally been suggested for hours
+ GIPOKE: you know what i dont need help ill just keep experimenting
+ Astrobytes: THE DIFFERENCE BETWEEN YOUR CURRENT POD POSITION AND YOUR LAST POD POSITION FROM THE PREVIOUS TURN.
+ Astrobytes: I refuse to give you code
+ BlaiseEbuth: He is not asking for "math/physics/common sense", he's asking for help! Seriously Astrobytes, that's a shame that, as a moderator, you're not even trying to help beginners...
+ Astrobytes: &lt;3
+ BlaiseEbuth: :hugging:
+ Astrobytes: Well said :D
+ GIPOKE: ahha
+ GIPOKE: i got to bronze take that
+ GIPOKE: and level 5
+ Astrobytes: Pff. Don't mind me. I know nothing.
+ therealbeef: achieving things by yourself is always more rewarding&#160;:)
+ BlaiseEbuth: JohnSnowBytes
+ Astrobytes: I too got to CSB gold without -3vel. I even had an offline visualisation.I wish I'd used -3vel
+ Astrobytes: If the information given in gold was available in lower leagues, we wouldn't need -3vel
+ Astrobytes: BlaiseEbuth: John Snow?
+ BlaiseEbuth: You know nothing...
+ Astrobytes: I still don't get it
+ BlaiseEbuth: So you really know nothing...&#160;:(
+ <b>**Japhy2112 sends positive vibes to all!</b></p><p><img src="/a/60413902297900" /> Astrobytes: To what do you refer?
+ BlaiseEbuth: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=fKgCgnLl8k8">https://www.youtube.com/watch?v=fKgCgnLl8k8</a>
+ KiwiTae: oh I miss her
+ Astrobytes: What is that tho
+ Astrobytes: I'm not trolling
+ KiwiTae: game of thrones
+ KiwiTae: <a rel="nofollow" class="external free" href="https://www.codingame.com/contests/a-code-of-ice-and-fire/">https://www.codingame.com/contests/a-code-of-ice-and-fire/</a>
+ Astrobytes: Ohhhh that. I attempted to read one of those books and it was complete shit. I watched an episode or two and was about the same.Overrated fantasy-lite pish imo
+ Astrobytes: Yeah, I remember Code of ICe and Fire was related to it. I only know stuff about it from friends.
+ Astrobytes: "red wedding", "the north remembers" etc
+ KiwiTae: and u know nothing didnt make it :3
+ Astrobytes: Nope.
+ jacek: i only know game of thrones of memes and shitty ending
+ CoR_TEX94: omg, i`m noob
+ Astrobytes: Yeah. I don't even get the memes
+ KiwiTae: CoR_TEX94 its ok gets better
+ VizGhar: Is there any cost difference in C++ when making array of 10items vs array of 10.000?
+ ZarthaxX: you mean using new
+ VizGhar: yes
+ ZarthaxX: it depends on the SO i guess, how fast does it find you that chunk of memory
+ ZarthaxX: obv 10k might be harder 
+ ZarthaxX: you should benchmark it anyway&#160;:)
+ ZarthaxX: SO = OS, operating system
+ struct: and the difference will probably not only be in making it
+ VizGhar: hmm true... (by cost i mean computation cost, but you guessed right)
+ ZarthaxX: struct mhm?
+ struct: ZarthaxX if I have 1mill nodes vs 10k there is a difference
+ struct: 10k will probably fit all in cache
+ ZarthaxX: that's why i said benchmark
+ VizGhar: If I use them struct
+ ZarthaxX: what?
+ struct: yeah
+ ZarthaxX: but he didnt say using it
+ ZarthaxX: he said "making"
+ ZarthaxX: creating, allocating
+ struct: I know, thats why I said
+ VizGhar: :D i have to be more specific next time
+ ZarthaxX: should ban this ambigous teacher :D
+ ZarthaxX: anyway, benchmark it 
+ ZarthaxX: i guess it may make no difference at all, because the numbers as small
+ VizGhar: aintnobodygottimeforthis
+ ZarthaxX: maybe doing 100k, or 1m starts to hit
+ ZarthaxX: :rofl:
+ VizGhar: yeah
+ EngrJeprii: Hi DNA_HR
+ DNA_HR: guys
+ VizGhar: I just don't want to use vectors on CG and C++ isn't my language of choice
+ EngrJeprii: Vectors is easy to use
+ DNA_HR: vektor magtatanggol
+ ZarthaxX: why not VizGhar?
+ EngrJeprii: Vector Wood
+ mayoljonathan: konichiyawa mina san
+ Astrobytes: If you want to be really efficient, you're OK with vectors if you don't resize them VizGhar
+ EngrJeprii: Yes, I agree with you.
+ struct: vector&lt;int&gt; vec(10000);
+ EngrJeprii: std::vectpr&lt;int&gt; vec = {1, 2,  3}
+ VizGhar: Isn't resizing basically only reason why to use vectors over arrays?
+ VizGhar: But I guess that this is more of a question for google
+ Astrobytes: Yeah, but, we're on CG
+ Astrobytes: also, vectors are a little more versatile.
+ struct: Wait I think Viz is having the same dilema as me
+ Astrobytes: C arrays vs vectors?
+ struct: no
+ jacek: there is std:array
+ VizGhar: what is your dilema?
+ struct: "premature optimization is the root of all evil" - Donald Knuth
+ Astrobytes: Yeah, I don't use that a lot tbh jacek, not on CG at least
+ VizGhar: :D :D :D yeah that's it
+ Astrobytes: lol struct
+ Astrobytes: and you are talking about a CG thing here VizGhar?
+ VizGhar: yes
+ Astrobytes: Defo struct-syndrome
+ Astrobytes: :P
+ Astrobytes: Benchmark/profile everything
+ VizGhar: wth is this :D
+ VizGhar: I should read that Knuth thingy
+ Astrobytes: "premature optimization is the root of all evil" - Donald Knuth == struct-syndrome
+ Astrobytes: AVX everything before you even think about doing anything else :D
+ JBM: wouldn't want to be blocked by PERF
+ AntiSquid: what if you want to start with bitboards? bad&#160;?
+ struct: no
+ Astrobytes: No, bitboard approach should be started as such
+ Astrobytes: oh hey JBM :wave:
+ ZarthaxX: Astrobytes copying my recommendation of benchmarking you Astropasta
+ JBM: heya astoes
+ VizGhar: I've started most of problems here on CG by implementing them in kotlin and then rewriting them in C++ (if it was slow) I gave up most of the time while rewriting, since it was too boring.
+ Astrobytes: hush now XeroxarthaxX
+ ZarthaxX: :rofl:
+ Astrobytes: Too boring!
+ VizGhar: don't know proper word in english
+ Astrobytes: If you mean it was boring then it was boring! Tedious perhaps?
+ VizGhar: translator says yes :P
+ Astrobytes: hehehe
+ Astrobytes:  Don't use C++ then!
+ Astrobytes: It's not like you *have* to. 
+ Astrobytes: Kotlin should be fast enough for most problems (perhaps a few multis might be exceptions if you want to reach legend)
+ VizGhar: Don't know why, but I'd like to. What do you think Automaton2000?
+ Automaton2000: do you get the first 2 or 3 turns
+ Astrobytes: Well, if you wanna learn C++ then crack on with it and stop moaning :P :D
+ struct: just do csb in c++
+ struct: then you will be ready
+ UnnamedCodinGamer: can anyone check next move values on search race in their own simulation?
+ VizGhar: Thank you guys
+ UnnamedCodinGamer: I get an error after around 50 moves which seems strange
+ struct: off by 1 error?
+ UnnamedCodinGamer: angle 268 to 250 instead to 257 which the engine expects
+ UnnamedCodinGamer: out of the blue it seems
+ Astrobytes: VizGhar: Plenty C++ people around most of the time if you have questions 
+ Astrobytes: rounding/truncation thing UnnamedCodinGamer?
+ struct: so you rotated 18 and referee gives 257?
+ UnnamedCodinGamer: I go to the same point coordinates for 600 moves locally
+ UnnamedCodinGamer: it handles one collision as it should
+ UnnamedCodinGamer: then there are no more collisions
+ UnnamedCodinGamer: and around move 50 I get this error
+ struct: very strange that it takes 50 moves&#160;:/
+ UnnamedCodinGamer: yes
+ Astrobytes: Did you adapt your CSB code or write something new?
+ UnnamedCodinGamer: I start the simulation on the last good move parameters for one move and get exactly the same result
+ UnnamedCodinGamer: so there should be no error adding up
+ UnnamedCodinGamer: I have not tried CSB
+ Astrobytes: Ah OK
+ UnnamedCodinGamer: this pod stuff is new land to me
+ UnnamedCodinGamer: but it seems strange to have this after 50 moves
+ VizGhar: isnt 18 maximum allowed rotation? Maybe you really rotated just by those 9 degrees
+ UnnamedCodinGamer: I do not  use rotation angles as input
+ UnnamedCodinGamer: I will test it with angles and see what happens
+ struct: I doubt is the referee that has the problem, many people played this game and had no problems
+ UnnamedCodinGamer: no
+ UnnamedCodinGamer: I am not saying that
+ struct: More people had this problem?
+ struct: ah ok
+ struct: My interpretation sometimes is off :p
+ UnnamedCodinGamer: it should be on my side
+ Astrobytes: Don't worry struct, UnnamedCodinGamer knows better than that&#160;;)
+ UnnamedCodinGamer: position 2852 5065speed vertical: -208 horizontal: 62angle: 268
+ UnnamedCodinGamer: input: 2757 4659 50
+ UnnamedCodinGamer: last good position and input
+ struct: Can you show us the part where you change angle?
+ UnnamedCodinGamer: what do you mean?
+ VizGhar: the code
+ UnnamedCodinGamer: a moment
+ UnnamedCodinGamer: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/1cebb8db-b22c-44ca-9e6b-8a3b02038370">http://chat.codingame.com/pastebin/1cebb8db-b22c-44ca-9e6b-8a3b02038370</a>
+ UnnamedCodinGamer: I am not sure if it is informative
+ UnnamedCodinGamer: the methods are pretty much copy/paste from the referee 
+ King_Coda: username
+ therealbeef: i need a trainticket to follow that indent&#160;:)
+ Smelty: o.o
+ King_Coda: why would you put that many indents and spaces in your code
+ UnnamedCodinGamer: it is a tab indent
+ struct: what is the signum thing?
+ UnnamedCodinGamer: it is a formatting thing of the chat
+ King_Coda: it just takes up space
+ King_Coda: Question
+ King_Coda: How many shrimps do you have to eat before you make your skin turn pink?
+ therealbeef: i usually use combination of min/max to do that kind of bounding. new = old + min( 18, max( -18, delta ) )
+ UnnamedCodinGamer: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/b0d14b67-6080-41a4-8834-699cf238c732">http://chat.codingame.com/pastebin/b0d14b67-6080-41a4-8834-699cf238c732</a>
+ Astrobytes: struct I think it's a java thing for returning the sign of a float
+ King_Coda: struct, I now fully appreciate the cleverness of your username
+ Astrobytes: returns like 1.0 or 0.0 or -1.0
+ struct: I see
+ struct: I dont really see anything wrong with that code
+ struct: I usually do it different though
+ struct: I dont aim to points, I use angles
+ UnnamedCodinGamer: I have the method that handles angle input 
+ UnnamedCodinGamer: It worked fine on first sight
+ UnnamedCodinGamer: I will test it for more moves
+ UnnamedCodinGamer: and it will probably be the one that I will be using
+ UnnamedCodinGamer: but still strange
+ DNA_HR: Yeah
+ kresteodymium: hi
+ King_Coda: hello
+ DNA_HR: :rage:
+ kresteodymium: hi
+ King_Coda: hi
+ DNA_HR: :rage:
+ _OooooOYeaah_: Hi
+ DNA_HR: Hi(5)
+ _OooooOYeaah_: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/c4eb48d3-399b-417f-8445-f93213533ea8">http://chat.codingame.com/pastebin/c4eb48d3-399b-417f-8445-f93213533ea8</a>
+ King_Coda: hi
+ kresteodymium: hi
+ _OooooOYeaah_: Hi^5
+ King_Coda: Have we all greeted each other?
+ _OooooOYeaah_: Hi guys
+ itik: Hi
+ ilovebiscuits: Hi
+ itik: GoodMorningAfternoon
+ i_kevs: Please teach me how to code
+ King_Coda: hi
+ i_kevs: Anyone?
+ i_kevs: Teach me to code
+ King_Coda: I know two HTML5 things and two C++ things
+ King_Coda: that's it
+ Astrobytes: i_kevs: Use another website
+ kresteodymium: i_kevs: use thenewboston on yt
+ therealbeef: such code much compile
+ King_Coda: g++ code.cpp
+ Astrobytes: did you learn -S, -c or -o options yet King_Coda?
+ King_Coda: i learned -o
+ King_Coda: im working on variables right now
+ King_Coda: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/c418dc15-c53d-4ab2-9eb3-f1b7e50881e7">http://chat.codingame.com/pastebin/c418dc15-c53d-4ab2-9eb3-f1b7e50881e7</a>
+ ZarthaxX: whats a variable?
+ Astrobytes: Keep learning how the compiler works too
+ Astrobytes: well surely you'd return score from that
+ ZarthaxX: why? that adds complexity, totally unnecesary
+ Astrobytes: ZarthaxX: Variables are variable
+ ZarthaxX: gonna report you for that
+ Astrobytes: Also ZarthaxX: I don't mean 'under the hood' so much, just basic understanding of  wtf they do
+ King_Coda: I believe ZarthaxX is trolling
+ Astrobytes: Ya think
+ King_Coda: I believe so, yes.
+ Astrobytes:  /ban ZarthaxX for all time
+ King_Coda: RIP ZarthaxX
+ King_Coda: Oh well, moving on
+ Astrobytes: How many times can we ping ZarthaxX
+ King_Coda: I wonder. Seems like an interesting thing to do to ZarthaxX
+ Astrobytes: ZarthaxX: thoughts?
+ King_Coda: I wonder if ZarthaxX would appreciate that
+ Astrobytes: I think ZarthaxX would
+ King_Coda: Yeah ZarthaxX, what do you think?
+ King_Coda: I think ZarthaxX would too
+ King_Coda: ZarthaxX loves getting pinged and not being able to respond
+ King_Coda: That's just the type of person ZarthaxX is
+ Marchete: please stop pinging ZarthaxX, that's annoying
+ King_Coda: You're right, we should apologise to ZarthaxX
+ Astrobytes: Poor ZarthaxX
+ King_Coda: I'm sorry ZarthaxX
+ ilovebiscuits: Wish you well ZarthaxX
+ King_Coda: ZarthaxX must be seeing a sea of red right now
+ Astrobytes: Is this the Great ZarthaxX Ping of 2021?
+ King_Coda: ZarthaxX may go down in history as the most pinged user of 2021
+ King_Coda: Maybe ZarthaxX would like that
+ Astrobytes: I donno, I feel ZarthaxX will take his revenge on me :D
+ King_Coda: I don't think ZarthaxX can do much
+ King_Coda: ZarthaxX might be able to make an alt account
+ King_Coda: But if ZarthaxX did that, we would know
+ Astrobytes: ZarthaxX will get me back
+ King_Coda: ZarthaxX is very predictable
+ Astrobytes:  ZarthaxX is a cool dude
+ UnnamedCodinGamer: King_Coda, he might be able to get to your ip address and delete your harddisk
+ King_Coda: Oh no, I hope ZarthaxX doesnt "delete my hard disk"
+ Astrobytes: And download ALL your memory
+ King_Coda: You know, the one ZarthaxX knows I don't have
+ Marchete: :regional_indicator_z::regional_indicator_a::regional_indicator_r::regional_indicator_t::regional_indicator_h::regional_indicator_a::regional_indicator_x::regional_indicator_x:
+ King_Coda: LOL
+ UnnamedCodinGamer: do not underestimate it guys
+ Marchete: :regional_indicator_p::regional_indicator_u::regional_indicator_t::regional_indicator_o:
+ Marchete: he won't reply
+ Astrobytes: yes Marchete! :rofl:
+ King_Coda: ZarthaxX should know that I have a laptop with an ssd
+ King_Coda: ZarhaxX should also know that I only have 4 gb of memory
+ <b>**Marchete asks everyone to avoid pinging ZarthaxX</b></p><p><img src="/a/52585602975098" /> <b>**King_Coda agrees with Marchete's statement</b></p><p><img src="/a/60413902297900" /> <b>**Astrobytes doesn't give a damn :P</b>
+ ilovebiscuits: If we keep going on about ZarthaxX, then ZarthaxX will DDOS, then ZarthaxX will create a ZarthaxXware just for us, then, worst of all, ZarthaxX will have us wiped off ZarthaxX's codingame platform
+ King_Coda: all 4 gb of my memory is filled willed random images i either A: found on the internet or B: edited to make them funny
+ King_Coda: willed?
+ King_Coda: *with
+ King_Coda: Oh no, ZarthaxX. Please dont do this ZarthaxX!!!
+ Astrobytes: You filled your memory with willpower
+ King_Coda: Yes. Pure willpower.
+ Astrobytes: Alright alright, give our boi ZarthaxX a break now
+ BlaiseEbuth: Stop assaulting ZarthaxX or I will crack down.
+ King_Coda: I feel like ZarthaxX has just closed out the website entirely
+ Astrobytes: On what Blaise?
+ King_Coda: he just got tired of all the pings and left to get a sandwich
+ ilovebiscuits: ZarthaxX is still on the participants list
+ Astrobytes: NO MOAR PINGS
+ King_Coda: The participants list updates slowly
+ BlaiseEbuth: Roar Astrobytes!
+ King_Coda: oh dear, its 2012 all over again
+ Astrobytes: RAAAR HERE ME ROAR, FOR I AM LEO
+ King_Coda: RAR XD
+ King_Coda: RAWRRRRRRR
+ Astrobytes: rarbg?
+ King_Coda: LOL
+ King_Coda: rbg powered by the fierce souls of the 2012 roleplayers
+ Astrobytes: I don't get your 2012 reference
+ King_Coda: Lot's of roleplaying websites were made in that year
+ King_Coda: it was a whole thing, i never really got into it
+ Astrobytes: Please remember I am 38
+ King_Coda: it took me a few seconds to get your rgb joke Astrobytes. i'm slowly getting accustomed to your humor
+ BlaiseEbuth: :scream:
+ BlaiseEbuth: Astrobytes, I thought you were young...&#160;:(
+ Ryanqazwsx: how to do Code vs Zombie lvl 1?
+ Astrobytes: I am
+ King_Coda: What do you mean, 38 is young!
+ Astrobytes: Aren't you like 20-something Blaise?
+ BlaiseEbuth: Old man... :older_man:
+ ZarthaxX: 38???¡??¡
+ ZarthaxX: WTF
+ BlaiseEbuth: Yeah...
+ Marchete: :rofl:
+ King_Coda: OH NO HE HATH RETURNED
+ ZarthaxX: my dude is dying D:
+ ilovebiscuits: Hi ZarthaxX
+ Astrobytes: Yes ZarthaxX - I am your father
+ ZarthaxX: hellou
+ ZarthaxX: Astrobytes i knew it!
+ ZarthaxX: now gimme money
+ King_Coda: ZarthaxX, how did you fell about us pinging you constantly
+ Astrobytes: I don't fking have any!
+ King_Coda: *feel
+ ZarthaxX: it's ok lol
+ ZarthaxX: Astrobytes fake dad :P
+ Astrobytes: You still love me right
+ ZarthaxX: yes&#160;:)
+ Astrobytes: aww :hugging:
+ King_Coda: What? Astrobytes can you be my dad too?
+ Astrobytes: Thanks son
+ King_Coda: I'll help pay rent
+ BlaiseEbuth: You're a good grandpa Astrobytes
+ Astrobytes: BlaiseEbuth will help you with that kind of thing King_Coda
+ King_Coda: awwwww
+ King_Coda: Blaise, will you be my dad?
+ BlaiseEbuth: Hmm... :thinking:
+ Astrobytes: BlaiseEbuth: I still feel 21 mentally (in some respects), my body feels 58 but hey
+ Astrobytes: Anyway, most of 5% CG is older than you anyway
+ BlaiseEbuth: anyway
+ King_Coda: nevermind, i have no need for a dad
+ King_Coda: I will be my own dad
+ BlaiseEbuth: I'm ze boi
+ King_Coda: toodaloo
+ Astrobytes: Yeah, I failed to remove the extra 'anyway'. Senility obviously.
+ Astrobytes: Is that a Mississippi Uptown Toodeloo though King_Coda
+ BlaiseEbuth: I've to wake up early tomorrow. So I'll go to sleep now... Greasy Noodles all!
+ Astrobytes: Giant Normans to you BlaiseEbuth
+ Uljahn: MP ref?
+ Ryanqazwsx: can anybody give me the code for lvl 1 code vs zombie?
+ Ryanqazwsx: it will help greatly since im so confused
+ airzocker: but then you won't learn much? xD i mean if it's too hard maybe do smth else first or is it more the game/how the inputs outputs work? (i've never done that one before)
+ AntiSquid: "Anyway, most of 5% CG is older than you anyway"
+ Ryanqazwsx: @airzocker can you at least tell me how to move and shoot the zombies?
+ Ryanqazwsx: since I can even move or shott
+ Astrobytes: Uljahn: Nope, but it sure does sound like one
+ Ryanqazwsx: shoot
+ airzocker: i can take a quick look ;D
+ Ryanqazwsx: k thanks
+ Uljahn: ah, it was Spiny Norman
+ Ryanqazwsx: here is my code I have no idea what is going on
+ Ryanqazwsx: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/f85523b5-2242-4cd5-8249-a2ba604abe86">http://chat.codingame.com/pastebin/f85523b5-2242-4cd5-8249-a2ba604abe86</a>
+ Astrobytes: :grin:
+ Astrobytes: AntiSquid: Procent?
+ voidnull: you all using python?
+ AntiSquid: 11 PM, mixing up languages
+ airzocker: @Ryanqazwsx haven't looked into your code yet, what language are you using?
+ Ryanqazwsx: Py
+ Astrobytes: lol AntiSquid
+ airzocker: ok, i know that at least a bit ;D
+ therealbeef: the shooting is automatic
+ therealbeef: automatic rifle
+ Ryanqazwsx: I can't move
+ Ryanqazwsx: how do you make him move
+ AntiSquid: pour cent, prozent ... so many variants
+ Astrobytes: Output a target destination
+ therealbeef: output where you want him to move
+ airzocker: yes, and he shoots automatically
+ Ryanqazwsx: oh ok I will try that 
+ Astrobytes: x y coordinate
+ therealbeef: 0 0 is top left, 16000 9000 bottom right
+ Astrobytes: ^
+ airzocker: for example if you output "8000 4500" he will walk to the center at 1000 units per move and shoot zombies that are in a radius of 2000 units
+ airzocker: of him
+ Ryanqazwsx: oh I did it! thank you so much
+ therealbeef: it literally says all these things in the description of the game, by the way&#160;:-)
+ therealbeef: (before Astrobytes starts all-capping)
+ airzocker: basically every game has a descritption on the left part of the screen that explains how the inputs outputs, the game and everything works, even with some examples ;D
+ Ryanqazwsx: lol ok
+ airzocker: and it says # Your destination coordinates
+ Astrobytes: therealbeef: Honestly I hardly ever do that, but 4+ hours of the same thing over and over...
+ Ryanqazwsx: lol
+ Astrobytes: How's it going anyway therealbeef? Ready for the contest?
+ Ryanqazwsx: I hate doing coordinate stuff
+ Astrobytes: Hm, you might wanna get used to that
+ struct: was checking vs cvz code
+ Astrobytes: A lot (not all) of CG games kinda rely on some basic geometry
+ airzocker: yeah, you somehow have to give positions to the game... but there are some ways to simplify things by making helper functions and stuff later if it gets more complicated xD
+ struct: is just avx junk code lol
+ Astrobytes: your cvz code?
+ struct: I sometimes open puzzles and run random code
+ struct: to see if it works on cg
+ Astrobytes: Random code?
+ airzocker: like from random people or code that's not actually for this? xD
+ struct: no, code I wrote on VS
+ struct: When I was doing avx stuff
+ MSmits: just watched the directors cut of justice league
+ therealbeef: yes, excited for the contest, Astrobytes. dutch ppl even have a 2-day national holiday in the middle of it&#160;:-D
+ MSmits: holy crap 4 hrs...
+ MSmits: completely different movie too
+ struct: Msmits you were testing the next contest I bet
+ MSmits: huh
+ Astrobytes: unless you were careful with the includes/definitions then VS code turns out pretty damn awful on gcc  struct :D
+ struct: cg asked for beta testers
+ MSmits: oh
+ MSmits: nah, i just now got some time to spare, not before, so i would have saidno
+ Astrobytes: therealbeef: excellent! MSmits, you have a 2 day holiday in the middle of the contest
+ MSmits: meta mcts been running for 6 hrs with 7 cores and no crashes&#160;:)
+ therealbeef: the last weekend is 4 days long
+ MSmits: 2 day holiday?
+ therealbeef: hemelvaart
+ MSmits: actually I am thursday and friday every week till after summer
+ Astrobytes: I presume the Friday and Monday, extra long weekend
+ MSmits: off i mean
+ MSmits: my study stuff was on thursday and friday
+ MSmits: and that is mostly done
+ MSmits: so that hemelvaart stuff doesnt matter
+ therealbeef: ah, so you only have to work 3 days during the 11 day contest
+ MSmits: yep
+ airzocker: therealbeef i'm german and i actually understood that, because it's himmelfahrt in german xD
+ therealbeef: god
+ MSmits: in addition to being the next 2 weeks off
+ Astrobytes: Have I ever told you that you are a lucky b**tard? If not, you're a lucky b**tard
+ MSmits: well now i am, the last 2 months were hell
+ Astrobytes: himmelfahrt? Out of heaven?
+ MSmits: I got a scholarship for 1 day a week off to study, but my study stuff was concentrated to way more than 1 day a week
+ Astrobytes: In to heaven, pardon me
+ MSmits: yeah thats when jesus came back i think
+ Astrobytes: ausfahrt would be out of
+ airzocker: yeah just wanted to say it's to not from xD
+ MSmits: if you're into that kind of thing
+ MSmits: or when he left
+ MSmits: i am not sure
+ struct: maybe ill try the avx tomorrow on csb and take a break from the other multi
+ MSmits: forgot the logistics of the back and forth 
+ therealbeef: himmelfahrt is farting while lying on your belly
+ MSmits: from the horses mouth
+ MSmits: or the other end
+ therealbeef: (sorry, running joke my wife and me have since visiting germany last year)
+ airzocker: i would most likely translate himmelfahrt with ascending to heaven xD
+ MSmits: yeah thats it airzocker
+ airzocker: therealbeef i actually laughed xD
+ MSmits: same
+ Astrobytes: I did have fun in Sweden seeing Utfart
+ MSmits: what kind of fart is that?
+ therealbeef: nowadays we crack up when seeing ausfahrt, durchfahrt etc
+ therealbeef: rundfahrt
+ MSmits: eh ausfahrt sounds like when someone dies
+ MSmits: or is buried or something
+ Astrobytes: all the fart/fahrt ones get me every time
+ MSmits: bad timing to crack up :P
+ Astrobytes: Utfart in Swedish is the exit
+ MSmits: ah I see
+ Astrobytes: You also have (in shops), and this one made me crack up, "Slut Spurt!"
+ Youssefk: hey world
+ MSmits: what does that mean Astrobytes
+ Youssefk: is there a clash here?
+ Astrobytes: MSmits: Stop sale
+ MSmits: ahh ok
+ therealbeef: clash of fahrts
+ MSmits: btw I have 7 cores running games, probably with a slight delay in between, but my task manager says 46% processor use
+ MSmits: 7 out of 10 cores
+ Smelty: wow.
+ MSmits: does that make sense?
+ Astrobytes: It's like the end sale in a shop
+ Smelty: interesting
+ therealbeef: hyperthreading?
+ Astrobytes: therealbeef: :rofl:
+ MSmits: not sure, do you think thats it?
+ airzocker: nah
+ Astrobytes: Youssefk: Just join a clash
+ airzocker: is it always just 46% or fluctuating?
+ MSmits: each process uses 6,6&#160;%
+ MSmits: pretty constant
+ MSmits: but it's a 10 core processor
+ MSmits: so should be 10%
+ airzocker: and you don't have 16 cores or something like that for sure? xD
+ MSmits: mmh, let me check that to be sure
+ MSmits: it says 10 cores, 20 logic processors or whatever that translates to
+ Astrobytes: <a rel="nofollow" class="external free" href="https://letmegooglethat.com/?q=threads+vs+processes">https://letmegooglethat.com/?q=threads+vs+processes</a>
+ airzocker: in linux you can use top if they are separate processes and see the percent in percent of one core...
+ airzocker: *from
+ MSmits: would a process not completely use a core when left to its own devices and using full computation?
+ Astrobytes: Not hard to check in windoze either
+ airzocker: left to it's own devices?
+ MSmits: yeah without being interrupted
+ MSmits: and without input output situation
+ MSmits: just pure calculation
+ therealbeef: other processes could take 'part' of a core
+ airzocker: if the process actually always has to compute something (and not sleep etc at all) it uses one virtual thread, which can be the power of up to one core
+ MSmits: mmh ok
+ MSmits: it sleeps sometimes, a very short time
+ airzocker: (if it's not programmed multithreaded)
+ MSmits: no multithreads here
+ MSmits: just a C# program creating processes
+ MSmits: (basically running c++ binaries)
+ airzocker: is it your own program or what kind of things does it do?
+ airzocker: if it uses internet it maybe sleeps when waiting for packages etc...
+ MSmits: oh, it is a meta mcts program. Maintains a tree with nodes that are gamestates and from the leafs it runs simulations
+ MSmits: each simulation is a process
+ MSmits: and i do max 7 at a time currently
+ Astrobytes: A process can have multiple threads
+ therealbeef: maybe the process load/startup overhead?
+ airzocker: yeah, but he said it's not multithreaded
+ Astrobytes: Yeah, but what he needs is multithreading
+ MSmits: well i meant it's not using the built in multithreading system C# has
+ therealbeef: how often do those processes spawn?
+ MSmits: just one time at the start
+ MSmits: they stay up
+ Astrobytes: Once
+ MSmits: when a new sim starts a process is given input
+ MSmits: runs for around 2 seconds
+ MSmits: then gives output which raises an event
+ airzocker: and the gamestates it will simulate with are stored locally?
+ MSmits: for the main program
+ MSmits: the tree is maintained on HD
+ therealbeef: given input via pipes?
+ MSmits: not sure if it is a pipe
+ Astrobytes: I'll let Smits fill you in on the 'DB'
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/769d0ff8-4f17-4c6e-ac88-0e05ff13b7d2">http://chat.codingame.com/pastebin/769d0ff8-4f17-4c6e-ac88-0e05ff13b7d2</a>
+ MSmits: ignore the string stuff
+ airzocker: if all the simulations are created once and stored in ram it should use all computing power, but if not that could have to do something with it...
+ MSmits: it might be it averages out the input/output delay somehow?
+ MSmits: which slows it down from 10% to 6,6%&#160;?
+ Smelty: maybr
+ MSmits: well  I am just glad i got it to work at all
+ MSmits: parallelization is hard
+ airzocker: yeah, depends on the situation but often is ;D
+ MSmits: I used to run meta mcts for 5 different games at once, to avoid having to do it
+ MSmits: each running 1 process
+ MSmits: now i can just focus on uttt for a while
+ Astrobytes: I think this setup can be improved
+ MSmits: probably
+ MSmits: i;ve been told i can also use DLLs
+ MSmits: instead of processes started from c++ binaries
+ Astrobytes: I wonder who told you that
+ MSmits: recurse
+ Astrobytes: You have a short memory
+ MSmits: you also told me?
+ Astrobytes: Yes
+ MSmits: thats funny
+ MSmits: recurse also did, a very long time ago
+ Astrobytes: Ages ago
+ MSmits: so i have in fact a long memory
+ Astrobytes: FFS
+ MSmits: oh you told me a long time ago also?
+ Astrobytes: Yes
+ MSmits: mmh ok
+ Astrobytes: When we were talking about you running these multiple binaries
+ MSmits: well I will just assume that everything i learned on chat has been told to me by you and possibly someone else
+ MSmits: to be safe
+ Astrobytes: No, because that would be false
+ MSmits: to a degree
+ MSmits: might be a lesser degree 
+ Astrobytes: Quite false.
+ MSmits: ok ok
+ MSmits: well I am shitty at keeping records, just keep reminding me then
+ Astrobytes: It was the same time we discussed your storage for the meta-MCTS
+ MSmits: i discussed that with multiple people too though
+ MSmits: includign recurse
+ Astrobytes: When you were trying to decide what to use
+ MSmits: you're just too nice i think, maybe if you include a snarky comment to tell me i am doing something dumb, i will remember it was you
+ Astrobytes: And I said using DLLs rather than starting a whole bunch of exes would be more efficient
+ MSmits: ah yeah
+ Astrobytes: Right you c**t, this is what you should f**king do - that kinda thing?
+ MSmits: mmh, nah more subtle
+ Astrobytes: :P
+ airzocker: xD
+ MSmits: :grin:
+ Astrobytes: Why would you do that. That's ridiculous. Seriously.
+ struct: Im going to try and CoC MCTS
+ Astrobytes: Better?
+ MSmits: thats it 
+ MSmits: I feel the recurse
+ Astrobytes: I miss him.
+ MSmits: yeah
+ Astrobytes: CoC MCTS struct?
+ struct: Will he join the contest?
+ struct: Im doing mcts for csb with 8 moves each child
+ struct: just to test the avx thing
+ Astrobytes: It'll be a smurf at first if he does I guess, not sure if anyone's spoken with him recently
+ MSmits: struct make sure you test it with a search that you know works
+ MSmits: otherwise you're testign two things at once
+ struct: What do you mean MSmits?
+ MSmits: say you have a non-avx search bot
+ MSmits: for csb
+ MSmits: put avx into that
+ struct: ah yeah
+ struct: Its simple Ill just add scalar version
+ MSmits: ok
+ struct: im just going to do mcts selection with avx
+ struct: nothing esle
+ struct: else*
+ MSmits: ahh ok
+ Astrobytes: Remember you can limit the pod count in CSB in the settings
+ Astrobytes: Or increase
+ Astrobytes: For testing
+ MSmits: cool
+ MSmits: never knew
+ Astrobytes: You can have 20 pods if you like
+ struct: and it will probably crash&#160;:)
+ MSmits: and some can turn them into male mebers
+ Astrobytes: Just make sure you can handle it
+ MSmits: members
+ Astrobytes: Hah
+ MSmits: as i recall
+ Astrobytes: Amongst other things
+ Astrobytes: That was an offline sim though
+ MSmits: emh was it?
+ Astrobytes: "eeyup"
+ Astrobytes: The dirty bugger
+ MSmits: he will forever be remembered as the person who did that
+ MSmits: before anything else
+ Scarfield:&#160;?
+ Astrobytes: Totally
+ Scarfield: he made pods circle in a certain pattern?
+ MSmits: I'll pm you Scarfield
+ Astrobytes: It's offline now?
+ Ikaro: Alguien de Paraguay?
+ Scarfield: im sad that i missed that, would at least have chuckled
+ MSmits: yeah it wasn't exactly SFW though :P
+ Scarfield: those norwegians
+ Astrobytes: Next time we see emh we will force him to show it
+ Scarfield: wow
+ Astrobytes: If he's not burning churches or something
+ Scarfield: he might be to private for that
+ Astrobytes: No, he's awesome about it
+ Scarfield: "to show it" ahem
+ Astrobytes: Show his CSB members, not his!
+ Astrobytes: He even referenced some pornstar in chat I'd never heard of
+ Scarfield: i know, but as usual i intentionally misunderstood
+ Astrobytes: I do the same
+ Scarfield: xD
+ Scarfield: anyway gn&#160;:) im off
+ MSmits: same me too, gn!
+ Astrobytes: yeah, gn all
+ Tired_Shawty: im nigger
+ airzocker: cool
+ airzocker: gn xD
+ Tired_Shawty: XD
+ struct: Automaton2000 clean this mess
+ Automaton2000: but it's possible to do something that is more than one
+ struct: AutomatonNN is up?
+ struct: Automaton2000 you will have to do.
+ Automaton2000: it's not like you have to check that
+ Roxxx: is anyone playing wondev woman
+ Roxxx: once you get 2 units 
+ Roxxx: how to differentiate what are legal moves for one and for the other
+ struct: let me check
+ struct: one sec
+ struct: index
+ Roxxx: yes i figured that
+ Roxxx: but i am making arrays of legal moves
+ Roxxx: and i figured if i have 2 units then i would get a max of 16 legal actions
+ Marchete: can someone warn dbdr about spam at <a rel="nofollow" class="external free" href="https://cg.spdns.eu/index.php?title=Main_Page&amp;action=history">https://cg.spdns.eu/index.php?title=Main_Page&amp;action=history</a>
+ Roxxx: but it turns out that's not the case
+ struct: max 16 doesnt sound right
+ struct: I think someone told him Marchet
+ Roxxx: i mean 16 for moves and 16 for builds
+ struct: its more
+ Roxxx: how can there be more, one unit can only move to 8 spaces
+ struct: You can only move in that league?
+ struct: or is it move and build?
+ Roxxx: move and build, or move and push
+ Smelty: o.o
+ Roxxx: sry push and build
+ struct: unit can move in 8 spaces
+ struct: but it can build in 8 directions after it
+ struct: 8*8
+ Roxxx: ```java
+ Roxxx: oh it doesen't work here
+ Roxxx: well it's all obtained in the same loop
+ Roxxx: one after the other
+ Roxxx: all coming from legalActions variable
+ Roxxx: so there must be equal amount, otherwise it would overflow
+ Smelty: ah
+ Roxxx: im not really sure how it is calculating legal builds anywa
+ Roxxx: anyway*
+ Roxxx: because now that i think of it you are right, there should be 8 possible moves and 56 possible builds
+ airzocker: hey, someone know if the warning that i didn't read all input would show up for every move if the problem is in the main loop? can i find out where it's not reading everything? because i didn't really change anything in the input parsing part of the default program...
+ struct: airzocker are you sure you dont print multiple times per turn?
+ airzocker: i'm doing ghost in the cell, so i mean if the problem is in the initialization input or main loop
+ airzocker: i didn't change anything in the output, still just "WAIT" (also using c++)
+ airzocker: do you want to see the code?
+ struct: Sure
+ Smelty: just wondering, is there a pascal's triangle clash yet? I'm ready to submit one...
+ airzocker: sorry i'm pretty new here, where can i share again? xD
+ struct: paste it here
+ airzocker: ehmm what part? xD
+ struct: eveything
+ airzocker: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/4b5a7433-b996-435b-9632-b8576c13c5e6">http://chat.codingame.com/pastebin/4b5a7433-b996-435b-9632-b8576c13c5e6</a>
+ airzocker: ah ok cool xD
+ Roxxx: do i maybe need to multiply legal actions by 2 to get input for the second player as well?
+ King_Coda: is that a C language airzocker?
+ struct: Roxxx I didnt have to change anything, I got all the actions
+ airzocker: it says warning with not reading all input once at the beginning of that game info window
+ struct: Have you tried reseting the code?
+ airzocker: yes c++
+ Roxxx: will i lose all of my code then?
+ King_Coda: I thought so
+ Roxxx: bcs i wrote plenty 
+ struct: Save it somewhere
+ airzocker: struct what do you mean?
+ struct: was talking to roxx atm
+ struct: im checking your code 
+ airzocker: ok
+ King_Coda: I'm currently learning c++, which is why i asked
+ airzocker: yeah, i'm also not very expierienced with c++, which is why i'm doing it here, i started with java ;D
+ Roxxx: @struct it's still the same after reset
+ Roxxx: this is the loop that gives me input
+ Roxxx: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/9b4d2bff-7b66-4ebd-9fa2-871ef6ca9db2">http://chat.codingame.com/pastebin/9b4d2bff-7b66-4ebd-9fa2-871ef6ca9db2</a>
+ struct: if you print to stderr the ammount of legal actions
+ struct: how many does it say?
+ airzocker: at least i got some advice from my dad for this xD
+ Roxxx: 55
+ struct: So I think it  should be giving all the actions
+ Roxxx: now i'm completely confused
+ Roxxx: yeah but that's just for one unit
+ Roxxx: i have 2 units
+ struct: just print to stderr, the atype index
+ struct: no, its for both
+ struct: Check the index, it changes between 0 and 1
+ struct: airzocker Im not sure what causes it
+ Roxxx: yeah and i tried storing the output into String arrays based on  index and the second array didn't get filled
+ struct: Sometimes this warning is wrong though
+ struct: So it might be the case
+ struct: Well the 1st unit might have more actions than the 2nd
+ struct: its 55 splited by both
+ struct: unit 1 might have 30 and 2nd 25
+ airzocker: ok thanks, i'll hopefully see if it works anyways when i implement the first output tomorrow ;D
+ struct: gl
+ Roxxx: are you on discord struct?
+ airzocker: gn y'all
+ struct: yes
+ Roxxx: hit me up my msg is last in general
+ UnnamedCodinGamer: found the bug it was mod with doubles
+ Smelty: o.o
+ struct: gn everyone
+ King_Coda: gn
+ King_Coda: mmm, i love it when chat dies for 30 minutes
+ King_Coda: 32 to be precise
+ KarimGehad: Can you please approve my contribution <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/65727f6e84eb41dc66c2cb9977036ccfbbcb">https://www.codingame.com/contribute/view/65727f6e84eb41dc66c2cb9977036ccfbbcb</a>
+ Smelty: hmm, let me see..

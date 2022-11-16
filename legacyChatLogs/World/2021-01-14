@@ -1,0 +1,1203 @@
+ IOI2020: how to get more xp
+ Uljahn: solve puzzles, promote in multiplayers, unlock achievements
+ struct: morning
+ thanhhv317: here is afternoon
+ cnmdcbg: hey
+ TheBigBadGhost_936a: hello 
+ cnmdcbg: 你好
+ jacek: good morning
+ AI_says_hi: o/
+ zhoubou: :hand_splayed:
+ ivnbcr: hi all
+ Passifi: top of the morning to you fellas and felicitases
+ Angecide: morning all, I have been trying to understand mcts solver lately, so my ultra high level understanding is that it is just a regular mcts until the a node in the tree reaches a terminal stage, in which case the algo tries to prove/disprove the move path? does this sound correct?
+ Angecide: since at the start, it is impossible to prove anything since the search space i huge, but once u reach mid/lategame, the search space is small and the algo can start to get more confident 
+ Angecide: and I am still gold in uttt, turns out my huge performance boost didn't add anything since my mcts algo is not converging that well, I think it is too random in design + perhaps I shouldn't have used a xorshit8bit prng since it isn't really that random + potential bugs
+ struct: how many rollouts do you get?
+ Angecide: 40k or something, so something is definitely wrong 
+ jacek: try xorshift64
+ jacek: and those rollouts should be enough for legend
+ jacek: as for mcts solver. what do you do if you encounter final state in selection?
+ Angecide: I just return the value back up, as if it was the result of a simulation
+ Angecide: like for my normal mcts
+ jacek: ok
+ Angecide: I am still in the process of understand what mcts solver is and how it differs from the normal algo
+ jacek: my solver gave 55-60% winrate, but still it should be enough for legend
+ Angecide: ye going through all the replays my ai played, I found one instance where I did an "invalid action", so I need to go on a bug hunt, since I presume my algo is converging badly because of false premise of the state of the game
+ jacek: happy bug hunting then
+ jacek: mcts solver is quite simple. it is just the mcts solver is complicated
+ jacek: mcts olver paper*
+ k4ng0u: Angecide, my bot only have around 8k per turn and passed to Legend. Do you do full random rollouts or do you have some early exits? typically in my rollouts when I have a winning move, I ignore the othres and just play it. This prunes a lot of unrelevant states
+ Angecide: I do a very bad (but fast) pseudo random rollout, but I believe adding heuristics such as always playing winning moves and avoiding losing moves could help too
+ Uljahn: also exploration coefficient can cause bad convergence, have you tried to vary it?
+ Angecide: ye, so my current definition of evaluating whether or not my mcts is converging is by checking if it forces the enemy player onto the same board (if possible) during the very early stages of the game
+ k4ng0u: avoiding losing moves is a depth 1 simulation for each move, it would be too time consuming. Also note that it would be covered on your opponent turn by always playing winning moves 
+ Angecide: like even after 40 secs of searching, it doesn't recommend forcing enemly player onto the same board, so i suspect something is wrong
+ codybumba: If anybody is interested in CoC please join this private clash - <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/1544652d4ca36a11f6da00d0a8255e74cdeb9db">https://www.codingame.com/clashofcode/clash/1544652d4ca36a11f6da00d0a8255e74cdeb9db</a>
+ darkhorse64: This is an heuristic which took years to find so it is not surpising your bot does not  find it. Re solver, remember you can backpropagate solved nodes: if you have a win, it means the parent is a loss, if all children are losses, it means the parent is a win and so on. This way you can predict a game result 10 to 20 plies in advance
+ jacek: darkhorse64 my bot can find it most of the time with less than 5 seconds
+ Angecide: ahh I think it is making sense now, it was a bit unclear from the paper, but I am starting to grasp what mcts solver is and that it is really not that complicated
+ jacek: another mcts solver paper victim
+ darkhorse64: Only the first 100 ms matter to me:grinning:
+ darkhorse64: Basically, that's what the paper says but it does not really need several pages
+ darkhorse64: low cost optim, high reward
+ Angecide: ye now with the intuition in place, it makes sense when reading the paper again
+ darkhorse64: jacek: you seem to have improved your C4 bot lately. Did my code help&#160;? Did you see any difference between AVX and scalar&#160;?
+ jacek: i trained n-tuple. i switched from pure mcts to jacekmax
+ Angecide: jacekmax :thinking:
+ darkhorse64: Great but that does not help me. I have some planned improvements but there is no point to do it now before approval. How many weights&#160;? Straight or random&#160;?
+ Angecide: nvm I found the playground article
+ jacek: every row-of-4, theres 126 of them. i didnt reduce for symmetry
+ jacek: and i didnt try your code
+ darkhorse64: To make things clear, I would have had no problem with it. I shared it after all
+ jacek: well if you would have problem, i wouldnt confess&#160;:)
+ darkhorse64: :relaxed:
+ jacek: meh i registered to the computer draughts forum, but it is admin activated :c
+ Kokoz: anyone want to help with a noob question?
+ jacek: you mean 2 questions
+ AI_says_hi: lol
+ Kokoz: no, only one
+ AI_says_hi: kokoz u already asked one&#160;;-)
+ darkhorse64: ^
+ darkhorse64: kokoz: go ahead
+ jacek: meaybe he really meant 1 question
+ AI_says_hi: hehe jokes on us 
+ Kokoz: so, I have a list [2, 3, 6, 7]How to get the diffference between every number and all numbers before it?? like this:3-2, 6-3, 6-2, 7-6, 7-3, 7-2
+ AI_says_hi: Think about using the modulo operator
+ AI_says_hi: Actually no I'm dumb&#160;:) think about using nested loops
+ darkhorse64: is it for the horses race&#160;?
+ Kokoz: I am actually trying to make a nested loop but I dont know how to write it&#160;:\
+ Kokoz: No.. I finished the horse race puzzle
+ darkhorse64: a for loop inside the for loop
+ darkhorse64: for() { for () {} }
+ struct: you make a inner loop that goes from current pos to position 0
+ struct: i=0;i&lt;end;++ij=i-1;j&gt;=0;--j
+ Kokoz: I tried something like that but I guess I wrote it wrong.. I will play around more, thank you
+ AI_says_hi: Kokoz what language are you using?
+ Kokoz: Python
+ SPDene: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/651ccb83-2ab5-4298-b013-d410619e9bd2">http://chat.codingame.com/pastebin/651ccb83-2ab5-4298-b013-d410619e9bd2</a>
+ SPDene: kokoz ^ that was message for you
+ AI_says_hi: How do you make such pastebins? 
+ SPDene: just paste enough text, and it will auto-convert it
+ AI_says_hi: oh okay thanks!
+ Kokoz: Ohhh, thank you SPDene, I was so close with my code :DMy mistake was that I put the a = x[i] in the second loop.. Which was dumb
+ Kokoz: Soo, everything is fine untill the input has a huge amount of information.. Then my code cant handle it
+ struct: yeah, you can do this with 1 loop only
+ struct: oh wait
+ AI_says_hi: What puzzle are you on?
+ struct: maybe not
+ Kokoz: Stock exchange losses
+ SPDene: not seem that one before - but I don't think you need the differences for ALL the previous values - just the *highest* value efore now
+ AI_says_hi: ^ thats right
+ Kokoz: so in that case [1, 2, 4, 4, 5]what will be the result?
+ AI_says_hi: 0
+ AI_says_hi: Are you sorting the values?
+ Kokoz: no
+ AI_says_hi: In [1, 2, 4, 4, 5] there is no drop, all numbers are &gt;= to the one before
+ AI_says_hi: so highest loss is 0
+ Kokoz: Exactly
+ AI_says_hi: So then what is the problem?
+ Kokoz: I still have to use loop to check all other numbers
+ Kokoz: I have an idea
+ Kokoz: so if the input is sorted then in all cases there is no lost.. 
+ Kokoz: Nice, thank youu C:
+ AI_says_hi: did you manage?&#160;:)
+ Kokoz: not yet, but on the right track :D
+ AI_says_hi: good good
+ Salman2301: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/15448669b288f34396c1947508d83db43ea4c6b">https://www.codingame.com/clashofcode/clash/15448669b288f34396c1947508d83db43ea4c6b</a>
+ Salman2301: join
+ Murleys: Why can't we choose which mode to play in clash of code ... I've had shortest code 5 games in a row and its old ...
+ jacek: only in private clash
+ Salman2301: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/1544885a66ac2c22cd8554757e1287b6a7a326d">https://www.codingame.com/clashofcode/clash/1544885a66ac2c22cd8554757e1287b6a7a326d</a>
+ Salman2301: I had the fastest mode I am just not ready for that
+ lopidav: &gt;Why can't we choose which mode.I guess the whole system will have to be redesigned. People would learn Ruby/Perl and play shortest exclusively 
+ RoboStac: plus there are  already bots to get enough players for it to work without splitting it further
+ READY: I am READY for that, Salman2301
+ TheMightyTopHat_dc86: Me i am all out
+ Pad0000001: In the AI pod racing stuff, can i check out others' code?
+ jacek: CSB? no
+ JM54: Soon may the wellerman come to bring us sugar and tea and rum
+ Astrobytes: WTF. Since when do people sing sea shanties on the reg.
+ JM54: Since today
+ jacek: mhm <a rel="nofollow" class="external free" href="https://i1.kwejk.pl/k/obrazki/2021/01/PDh9PlsKF97hY8ZZ.jpg">https://i1.kwejk.pl/k/obrazki/2021/01/PDh9PlsKF97hY8ZZ.jpg</a>
+ Astrobytes: lol, that's an old one
+ jacek: youre cheating on me with another meme source?
+ Astrobytes: No I remember the story, from years ago. Something about bood types iirc
+ Astrobytes: *blood
+ eulerscheZahl: moin
+ Almost404: hello guys im new here and i am having tones of fun
+ Almost404: this is great
+ Astrobytes: afternoon euler
+ Almost404: sad i didnt see this sooner
+ Astrobytes: Well it's not gonna disappear so you still have time Almost404
+ eulerscheZahl: you mean: "sad I didn't see this soccer"here it is: <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/bot-programming/paper-soccer">https://www.codingame.com/multiplayer/bot-programming/paper-soccer</a>
+ Almost404: im happy i also made today my first problem contribution anyone wants to see it?
+ Astrobytes: oO
+ JM54: As a beginner in code and barely starting to learn python, the puzzles in this game are way beyond my understanding
+ Astrobytes: JM54: the site does assume familiarity and a certain level of competence in your language
+ Astrobytes: It's not an absolute beginner-friendly site.
+ JM54: dang
+ JM54: sucks i got assigned this then
+ eulerscheZahl: who assigned it to you?
+ eulerscheZahl: a teacher?
+ JM54: My CSP teacher
+ bobth: some puzzles are super easy but most will need some experience imo
+ Astrobytes: Just practice with the language a bit more and you should be able to do some of the easy puzzles
+ JM54: Noted, thanks
+ SPDene: also be aware that some "easy" puzzles are a lot more difficult than others
+ Astrobytes: ^
+ JM54: Ok
+ darkhorse64: However, a good advice is to separate coding from algorithm. Do some paper reasoning first and then, only then, translate it into code
+ bobth: pseudocode is very helpful
+ JM54: :thumbsup_tone3:
+ BlaiseEbuth: Paper&#160;? What is this&#160;?
+ eulerscheZahl: or less fun. even thibaud mentioning Defibrilators here
+ Astrobytes: Yep, very sound advice.
+ Astrobytes: lol euler, right
+ JM54: onm
+ eulerscheZahl: i'd add aneo to that list
+ jacek: hm?
+ eulerscheZahl: BlaiseEbuth I found that paper: <a rel="nofollow" class="external free" href="https://sketch.io/sketchpad/">https://sketch.io/sketchpad/</a>
+ darkhorse64: There is no data parsing which is really the worst
+ jacek: a sketch? like that one before?
+ AnalPainGiver: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/15450015d77040b815e7a2b1ddd9437ec95922e">https://www.codingame.com/clashofcode/clash/15450015d77040b815e7a2b1ddd9437ec95922e</a>
+ Astrobytes: you still have that jacek?
+ BlaiseEbuth: Thanks eulerscheZahl, I was wrong, I thought that paper was slices of innocent tree corpses...
+ jacek: on my personal comp, not here
+ eulerscheZahl: i will neither complain about the clash link nor the username
+ jacek: Oo
+ eulerscheZahl: we want to engage more newcomers&#160;:)
+ Astrobytes: Same.
+ BlaiseEbuth: Frfllf... :shrug:
+ jacek: i see smits still posting c4 moves
+ jacek: and 0 seems to be losing after all
+ Astrobytes: Is that the move that was oscillating?
+ jacek: yes
+ AnalPainGiver: I am looking for enaging clash of clans where all the opponents are live on twitch
+ AnalPainGiver: code*
+ jacek: oh my
+ BlaiseEbuth: your what&#160;?
+ Almost404: is this too hard for a clash? <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/609613f0fb1078f73696777d6b128c5ae046">https://www.codingame.com/contribute/view/609613f0fb1078f73696777d6b128c5ae046</a>
+ ChampionCoder: I felt it was hard
+ Almost404: check it again I redid the solution, literally the solution is 1 line after data ready
+ ChampionCoder: Oh ok
+ ChampionCoder:&#160;:+1:
+ ChampionCoder: looks better now
+ eulerscheZahl: "Every quarter of what's left he stops for air because he is fat."isn't that an infinite sequence?
+ Almost404: tks maybe i shouldn't have made a detailed solution it made it look it was harder than it actually was
+ Almost404: that's true let me fix that
+ Uljahn: kinda hard yes, 'cause you need several minutes just to read and understand the statement
+ SinOfWrath: Also by doing integer division in your solution, I'm fairly certain it's incorrect when speed is not a divisor of 100.
+ SPDene: Almost404 "Velocity = Time = Distance/Velocity" confuses me. did you redefine the laws of physics? :P
+ ChampionCoder: :sweat_smile:
+ Almost404: sleep deprivation is getting me :joy:
+ ChampionCoder: By the way, why is "fat" in bold?Just make it normal, not bold
+ Almost404: discard this shiet i tryed need to review this
+ eulerscheZahl: "fat" in fat text? makes sense to me :P
+ ChampionCoder: Lol
+ kovi: old john...an impressive start on cg (and nice background, started programming/boardgames earlier than me)
+ ChampionCoder: Sorry?
+ Astrobytes: He worked alongside Buro and Le Renard
+ eulerscheZahl: Buro?
+ Astrobytes: Michael Buro
+ darkhorse64: We are getting more and more smart people
+ eulerscheZahl: i guess i'm not up to date with the users anymore
+ Astrobytes: (of Logistello fame amongs many other things)
+ Astrobytes: Did Le Renard create Thor?
+ Astrobytes: (othello program)
+ jacek: this old john was having books wars with smits in othello
+ Astrobytes: Still is afaik
+ kovi: i have just noticed him, as he jumped to #3 in d&amp;b
+ jacek: still losing, yes
+ MSmits: he stopped for now. I think we agreed to a draw
+ MSmits: (not sure though)
+ eulerscheZahl: a draw with you above him on the leaderboard
+ MSmits: i do better against other players
+ MSmits: interesting about D&amp;B
+ MSmits: I'll try a resubmit with random on. My current submit is deterministic
+ MSmits: (this version did better vs remi)
+ MSmits: i should say, i use fixed seed currently, i'll change to a time based seed
+ eulerscheZahl: so the survey results are out
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/work/codingame-developer-survey-2021/?utm_source=community&amp;utm_medium=cg_chat&amp;utm_campaign=2021-developer-survey-report&amp;utm_content=main-batch">https://www.codingame.com/work/codingame-developer-survey-2021/?utm_source=community&amp;utm_medium=cg_chat&amp;utm_campaign=2021-developer-survey-report&amp;utm_content=main-batch</a>
+ eulerscheZahl: i modified the URL a bit to confuse their tracking of how we got there :P
+ MSmits: is codingame the nr 1 tech hiring platform?
+ MSmits: or is this just advertising?
+ eulerscheZahl: yes. source: CodinGame
+ MSmits: lol
+ eulerscheZahl: there are some other big players like Hackerrank and Hackerearth
+ MSmits: I see
+ MSmits: isnt linkedin a tech hiring platform also, technically?
+ eulerscheZahl: not sure if CG really is the #1. by what metric even?
+ eulerscheZahl: hm, good point
+ eulerscheZahl: maybe tech hiring = coding assessments in the understanding of CG marketing
+ MSmits: could be
+ eulerscheZahl: let's just say: be careful what you read and don't believe anything
+ MSmits: oh I am that, I was just wondering
+ eulerscheZahl: so: don't believe me when I say that
+ MSmits: surely you are an exception
+ eulerscheZahl: the truthful toad
+ MSmits: yeah
+ eulerscheZahl: now i'm still at page 1 of that survey
+ MSmits: sorry
+ eulerscheZahl: "48% of companies offer developers the possibility to work 100% remotely"how to measure that?
+ MSmits: maybe this just was a question?
+ eulerscheZahl: they only ask for the company size in that survey, not the company itself. how to find duplicate companies?
+ MSmits: oh
+ jacek: :thinking:
+ eulerscheZahl: because it's about companies that allow remote and not devs working remotely
+ MSmits: that might be problematic yeah
+ jacek: more remote last year i presume
+ eulerscheZahl: let's take notes for when Thibaud posts it on the forum or discord
+ MSmits: do you want to open a thread: "questions from the 5%"&#160;?
+ eulerscheZahl: 5% that cause 50% of Thibauds work :P
+ MSmits: no doubt about that
+ darkhorse64: 50% headache also
+ jrke: can anyone just tell me that what happened yesterday brainstorming on discord in breif?
+ eulerscheZahl: too bad inoryy wasn't there yesterday :popcorn:
+ eulerscheZahl: Thibaud summarized it on the forum
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/community-regular-events-lets-discuss-it-on-discord/188710/11">https://www.codingame.com/forum/t/community-regular-events-lets-discuss-it-on-discord/188710/11</a>
+ MSmits: allright, so basically D&amp;B is like: Miklla 1st, then the next 3 as a group. Therés no clear 2-3-4 order
+ darkhorse64: There have been some clarifications from Thibaud and G-Rom. One thing is sure; community contests are gone. There might more regular, fast events
+ eulerscheZahl: and you allow miklla to do that?
+ MSmits: eulerscheZahl not in the long term ofc&#160;:)
+ MSmits: D&amp;B is a very complicated multi, i cant improve my bot ina day 
+ eulerscheZahl: but these "fast events" don't sound like original content at all
+ jrke: MSmits thinks deep in life as well as in bot
+ eulerscheZahl: just some old meal in the microwave
+ eulerscheZahl: so at least I am not interested
+ jacek: fast event? clash wars?
+ eulerscheZahl: also
+ darkhorse64: No news from AshKetchum. No C4 yet
+ eulerscheZahl: some extended version of the puzzle of the week with more featuring
+ MSmits: jrke thanks, i take that as a compliment :P
+ jacek: no news for the chess either
+ jrke: MSmits that was the compliment ,nothing else
+ eulerscheZahl: fireworks at 2 approval votes
+ eulerscheZahl: i just opened it to dive into it
+ MSmits: it's original enough
+ eulerscheZahl: then survey, then chat
+ eulerscheZahl: i'm easy to distract
+ MSmits: me too, I actually should go grade some christmas postcards
+ eulerscheZahl: you teach arts now?
+ eulerscheZahl: in elementary school
+ MSmits: mmh i guess kinda
+ MSmits: this is a python turtle assignment
+ eulerscheZahl: aah
+ MSmits: they had to draw a sun, trees, road, snow, text all with python code
+ eulerscheZahl: my first thought: there must be a 2nd meaning for "grade" but let's nag smits with it
+ MSmits: hehe it's just 3 possible grades
+ MSmits: fail, sufficient, good
+ MSmits: so it's not hard to grade
+ eulerscheZahl: do you also grade the code style or just the outcome?
+ MSmits: this is the very first time they code anything in their life basically
+ MSmits: so style is not really an issue
+ eulerscheZahl: except for indents
+ MSmits: well it has to work :P
+ eulerscheZahl: i'm on page 3 of the survey already
+ jrke: survey? which survey?
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/work/codingame-developer-survey-2021/?utm_source=community&amp;utm_medium=cg_chat&amp;utm_campaign=2021-developer-survey-report&amp;utm_content=main-batch">https://www.codingame.com/work/codingame-developer-survey-2021/?utm_source=community&amp;utm_medium=cg_chat&amp;utm_campaign=2021-developer-survey-report&amp;utm_content=main-batch</a>
+ eulerscheZahl: i invented a new utm_medium key just to confuse Thibaud or whoever reviews that
+ MSmits: this is my D&amp;B submit, pretty clear: 
+ jacek: anyone expert with keras (python)? how could i efficiently train network with sparse inputs, like 64 ones and 1500 zeros
+ MSmits: <a rel="nofollow" class="external free" href="http://cgstats.magusgeek.com/app/multi-dots-and-boxes/msmits">http://cgstats.magusgeek.com/app/multi-dots-and-boxes/msmits</a>
+ MSmits: wrecked by miklla
+ eulerscheZahl: when you have to clarify that keras = python, that user clearly isn't an expert in it
+ jacek: MSmits you get pwnd by miklla
+ MSmits: yes
+ jacek: dunno, maybe there is keras c#, i may never know
+ jrke: why my endgame solver is looking like this - <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/521887983">https://www.codingame.com/share-replay/521887983</a>
+ jrke:&#160;:(
+ jacek: interesting <a rel="nofollow" class="external free" href="http://cgstats.magusgeek.com/app/multi-dots-and-boxes/miklla">http://cgstats.magusgeek.com/app/multi-dots-and-boxes/miklla</a>
+ MSmits: well you won that one though jrke
+ MSmits: jacek i actually know why he wins
+ eulerscheZahl: i'm a kera expert: kera finished 4th in the Ghost in the Cell contest
+ jrke: just random seed but my endgame solver is bugged
+ MSmits: it's very well documented how to play this game and it's hard to code a bot for it
+ MSmits: he counts chains
+ MSmits: you see he has a typical strategy of forming the right number of chains
+ MSmits: he doesnt just randomly place lines
+ MSmits: my bot is random for 50 plies
+ MSmits: of course that's gonna fail against anyone who knows what they're doing in ply 1-50
+ karliso: wow, clean 100% submits... 
+ jacek: fix your uttt bot
+ karliso: :D
+ MSmits: oh, right karliso, i wonder if re curse 's bot is really stronger than yours or he just picked one that is strong against your current choice of bot
+ MSmits: try to make a small alteration
+ MSmits: then test it
+ eulerscheZahl: oh, he submitted his NN now
+ jacek: oh and im not the only one with misleading eval <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/521616666">https://www.codingame.com/share-replay/521616666</a>
+ MSmits: after all i was able to get 100% as p1 vs your current bot, so a trained nn may get lucky on one iteration also
+ karliso: yea, I looked at it. I think I had like 33% as white and 34% as balck...
+ MSmits: thats very interesting
+ jacek: see how robo in 54 says 0.92 while clealy losing
+ jacek: white black in uttt? o.O
+ MSmits: i am just guesing white is p1
+ MSmits: guessing
+ karliso: yeah, I tend to forget who is ) and who is X
+ MSmits: X is first :P
+ MSmits: it's weird though karliso, something is off here
+ MSmits: no way should your p1 bot have 33% 
+ MSmits: not even vs a perfect playing bot
+ MSmits: the disadvantage of p2 is too large
+ MSmits: I am guessing almost every game is the same
+ MSmits: with 2 deterministic bots
+ MSmits: and you just make the same mistake every time
+ MSmits: or at least, maybe there are only 8 variations of game or something like that. Seen it a lot
+ karliso: anyway, I will have a reason to improve my bot
+ MSmits: yeah, me too, but still got other things to do first
+ MSmits: I want to fix my cotr and make a real solver
+ jacek: cotr?
+ MSmits: that bilbo optim
+ jacek: bilbo optim?
+ MSmits: make words
+ eulerscheZahl: coders of the realm?
+ MSmits: code of the ring?
+ Astrobytes: Code of the rings
+ eulerscheZahl: i blame Bob for reassigning that acronym
+ MSmits: my current submit is done by hand
+ MSmits: rank 52 with typed up solution :P
+ eulerscheZahl: mine is partially by hand
+ MSmits: i am guesing the loopy ones
+ MSmits: guessing
+ eulerscheZahl: sure
+ eulerscheZahl: didn't do the last testcase by hand :D
+ MSmits: I did :P
+ eulerscheZahl: what score on that alone?
+ MSmits: only took 3 hours or so
+ MSmits: not sure, but it's pretty good
+ MSmits: i thought a lot about reusing boxes and such
+ MSmits: pretty sure a simple beamsearch would beat it though
+ eulerscheZahl: you just have to run your code once to check :rolling_eyes:
+ MSmits: code?
+ eulerscheZahl: hardcode
+ eulerscheZahl: just execute whatever mess you caused
+ Astrobytes: lol
+ MSmits: lemme check
+ eulerscheZahl: and give me a number so i know if it's worth to improve that alone
+ eulerscheZahl: i'm at 1393
+ MSmits: ok sec
+ MSmits: 1402 frames, is that the score?
+ eulerscheZahl: no
+ eulerscheZahl: hover over that green testcase play thing
+ darkhorse64: I can see how a BS could minimize the steps needed to build the strings but you will need a post process for loops
+ MSmits: dont think the big testcase uses a loop anywhere
+ eulerscheZahl: yeah, those loops make it hard
+ MSmits: says the magic phrase is incomplete
+ eulerscheZahl: testcase vs validator
+ darkhorse64: Right. 
+ eulerscheZahl: you didn't hardcode the test it seems
+ MSmits: no just the validators
+ MSmits: but the last one is identical almost
+ MSmits: rigt?
+ MSmits: right?
+ eulerscheZahl: no
+ kovi: luring of the dark side...
+ eulerscheZahl: last letter is removed in the validator
+ MSmits: yeah so almost
+ MSmits: how do you calculate score from character count?
+ MSmits: is it just the same?
+ eulerscheZahl: oh wait, that 1393 was an online solution
+ eulerscheZahl: because i didn't find it in my book
+ MSmits: the number of frames = character count
+ MSmits: so 1402
+ MSmits: i pasted in a text file
+ darkhorse64: right on the fact that there are no loops on the last sentence. Maybe for the ring word&#160;?
+ eulerscheZahl: 1332 on the validator
+ MSmits: so my score is 1402 by hand
+ MSmits: pretty nice right
+ eulerscheZahl: my code is slightly better
+ MSmits: yeah
+ eulerscheZahl: also without loops
+ MSmits: i just did this because I wanted to get past the quest
+ eulerscheZahl: so i'm missing points somewhere else
+ MSmits: but then dbdr said, why not just do a beamsearch
+ MSmits: and i was like... damn 
+ eulerscheZahl: but where is dbdr?
+ MSmits: dunno
+ Astrobytes: Still no word from him?
+ eulerscheZahl: i miss you, my little prince
+ MSmits: thats not creepy at all
+ Astrobytes: :o
+ eulerscheZahl: still running through dungeons
+ Astrobytes: lol
+ MSmits: is he playing Dnd?
+ Astrobytes: No...
+ Astrobytes: His avatar
+ eulerscheZahl: :facepalm:
+ MSmits: o right
+ MSmits: went woosh
+ eulerscheZahl: he's gone for so long, you forgot about him
+ MSmits: no no, just the pic
+ Astrobytes: Hope he's OK
+ MSmits: hes not been gone *that* long
+ MSmits: less than a week isnt it?
+ Astrobytes: No
+ eulerscheZahl: much longer
+ MSmits: hmm
+ MSmits: maybe it seems shorter because i havent been that active
+ MSmits: has he never been away before?
+ eulerscheZahl: not for long at least
+ MSmits: hm ok
+ MSmits: well i too hope he is ok, he's part of the CG furniture
+ MSmits: he's the chair, you're the couch euler
+ eulerscheZahl: and Automaton2000 is the old couch that no one wants to pick up even you placed it online as "free for pickup"
+ Automaton2000: do you guys know how to turn it into a pastebin
+ MSmits: he's the bin
+ eulerscheZahl: i understood the CG survey now. they also asked companies/HR guys. not only coders
+ MSmits: ah
+ jacek: did they hire AutomatonNN
+ AutomatonNN: cool
+ MSmits: I think they only hire non-binary
+ Astrobytes: He's here all week folks...
+ MSmits:&#160;:)
+ jacek: hm?
+ Sentinel25B: yo
+ Sentinel25B: whats up
+ MSmits: enum { up = 0, .. }
+ MSmits: hi&#160;:)
+ eulerscheZahl: int[] dx = {0,1,0,-1};int[] dy = {1,0,-1,0};
+ MSmits: works
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://yadi.sk/i/KjYmchxEreacg">https://yadi.sk/i/KjYmchxEreacg</a>
+ MSmits: I imagine if my wife didnt order all my clothes I would only be wearing stuff like that
+ Astrobytes: lol, I forgot about your 'arrangement'
+ MSmits: hehe yeah
+ eulerscheZahl: you aren't allowed to look like a nerd? :D
+ MSmits: if I pressed the issue I suppose i probably could have one nerdy day a month, if i didnt have to leave the house that day
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.getdigital.de/shop/kleidung">https://www.getdigital.de/shop/kleidung</a>for your monthly needs
+ eulerscheZahl: but beware of the dryer
+ MSmits: good stuff
+ Astrobytes: You need the purple tentacle one MSmits
+ therealbeef: tentacle looks good for winter
+ MSmits: lol
+ Astrobytes: The Gandalf asymptote...
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.getdigital.de/Debugging.html">https://www.getdigital.de/Debugging.html</a>i like those nonsense sentences
+ Astrobytes: Facehugger scarf, now we're talking.
+ Astrobytes: My favourite t-shirt currently is my "You read my t-shirt. That's enough social interaction for one day"
+ jacek: so nerdy
+ Astrobytes: And I didn't know it would be so apt for COVID-times when I got it.
+ miklla: someone summoned me by red signals&#160;:)
+ jacek: or maybe you knew it ?thinking:
+ miklla: found out D&amp;B at end of december, love from first sight&#160;:)
+ miklla: as TRON&#160;:)
+ jacek: tron and d&amp;b? huh?
+ miklla: multis
+ jacek: what do they have in common
+ eulerscheZahl: suum cuique
+ miklla: grids and simplicity of mechanics
+ jacek: 'simplicity'
+ Astrobytes: you and your latin euler
+ eulerscheZahl: sorry, was tortured for too long
+ jacek: quidquid Latine dictum sit, altum videtur
+ eulerscheZahl: also: Ich und mein deutsch :P
+ jacek: schmeterrling!
+ Astrobytes: charliebus sittibus on the deskinorum
+ miklla: spend around 4 days for huge improvement, commited, got 100% winrate as before, nothing changed&#160;:(
+ eulerscheZahl: "whatever is said in Latin will be seen as deep"
+ jacek: miklla did you read papers on d&amp;b?
+ miklla: yes
+ Astrobytes: Is MSmits actually missing question time with miklla?
+ jacek: lets call him. "2 3 is good opening move"
+ Astrobytes: "meta mcts"
+ Astrobytes: "bitboarrrrdsssss"
+ reCurse: booking as p1 in uttt is viable
+ jacek: eris pads her chest
+ Astrobytes: He must truly be afk.
+ jacek: reCurse but it is. as p2 it isnt
+ reCurse: I see, you're trolling to wake him up as well
+ jacek: are you gonna release chess soonish?
+ reCurse: Need to write a boss for it
+ reCurse: And I'm distracted with bt
+ eulerscheZahl: you have random() already
+ jacek: another player for bt :scream:
+ reCurse: I've started training, quite a bit more resource intensive than uttt
+ reCurse: Need that new cpu and gpu
+ jacek: me too&#160;:(
+ reCurse: Either that or I make it cloud compatible
+ jacek: i wanted to replace my PC before the new ryzen, but no, "there will be new ryzen, price will drop and ill buy it then"
+ reCurse: It's a good thing you waited, zen3 finally fixed bmi
+ reCurse: 1000x speed increase or something
+ jacek: but now i still have no bmi
+ reCurse: On par with intel now
+ reCurse: Ah
+ jacek: but right now im gonna try those python tools for learning
+ jacek: i have data and i train using my half-assed made code
+ reCurse: Puck Fython
+ jacek: but i need a way to efficiently compute sparse input for those :c
+ reCurse: There seems to be a distinct advantage for p1 in bt so far
+ reCurse: It's a shame, there's no pairing
+ jacek: 5x5 and 6x5 is win for p2
+ reCurse: I don't care much for fun sizes though
+ reCurse: 10x increase in disk size to store training games compared to uttt lol
+ jacek: is your bot alphazero style?
+ reCurse: Kind of
+ jacek: im too dumb for training policy
+ Astrobytes: You always underestimate yourself jacek
+ jacek: dunning kruger eh?
+ eulerscheZahl: isn't that the opposite?
+ reCurse: It's both
+ eulerscheZahl: oh
+ MSmits: I'm here!
+ MSmits: miklla are you counting chains?
+ reCurse: Ping to Netherlands is crazy
+ Astrobytes: lol
+ MSmits: or doing some form of nimstring analysis
+ miklla: MSmits no
+ miklla: actually my around 39 first moves have no meaning
+ MSmits: i notice you have a particular way of placing lines early game
+ MSmits: ah yes
+ MSmits: i noticed from your output that you're a few turns ahead o fme
+ MSmits: sometimes it says loss
+ MSmits: and then turns to win
+ miklla: just not implemented euristics, make non dumb move with lowest index
+ MSmits: so something happened for your bot to think i won
+ MSmits: ah ok
+ MSmits: yeah i see the lines build up from the bottom up
+ MSmits: lowest index checks out
+ eulerscheZahl: so you were over-interpreting bot messages?
+ MSmits: no, the loss thing i sreal
+ MSmits: this happened around ply 45 or so
+ reCurse: I still need to get around with trolling my bot messages
+ miklla: these message come after ~39th move
+ MSmits: and then my bot only started solving after 50
+ miklla: only after*
+ miklla: so they have meaning
+ MSmits: yeah
+ MSmits: when your bot says "loss" 
+ MSmits: is this a certainty?
+ MSmits: on perfect play?
+ miklla: yes
+ MSmits: interesting
+ MSmits: quite early
+ miklla: initially in loss position my bot was making random or lowest index move
+ miklla: but now it makes kinda best losing move
+ MSmits: always better to do that
+ MSmits: so is this like a negamax?
+ miklla: usually it can be countered by 1-3 of 30 available moves
+ miklla: and it gave me nice winrate boost&#160;:)
+ MSmits: or more like a statistical search with a solver
+ MSmits: (like mcts solver)
+ MSmits: i've been thinking of doing something with that, and improving my solving capabilities. 
+ MSmits: currently i just do nimstring analysis until solved game, which basically means I start doing wel from 50-55, 38 is obviously much better
+ miklla: right now I have just endgame solver, nothing random or impartial
+ MSmits: does the endgame solver do score, or just win/loss?
+ miklla: just endgame starts around 39-43rd move for me&#160;:)
+ miklla: win/loss
+ miklla: in different game
+ MSmits: ah, that could make things faster for me, if i didnt bother to do score
+ jacek: i dont bother either :v
+ MSmits: it just looks cool to output the predicted score&#160;:)
+ miklla: remi sometimes win ,e because I win in other game, but lose in real game
+ MSmits: which other game?
+ miklla: well known game in D&amp;B literature
+ MSmits: strings and coins?  Thats basically the same game, but represented differently
+ MSmits: or do you mean something else?
+ miklla: nimstring if you want precise name
+ MSmits: ohh i got it
+ MSmits: yes sometimes you can win the nimstring and still lose on score
+ MSmits: so your bot only searches nimstring?
+ MSmits: so your endgame solver is a nimstring solver
+ MSmits: meaning you do nimstring analysis
+ miklla: y
+ MSmits: good yes, this is how i beat remi, i started doing nimstring analysis
+ MSmits: but not good enough apparently&#160;:)
+ MSmits: it's on my list to improve this. But I will work on other things first. Thanks for sharing miklla, much appreciated
+ miklla: ye, kinda boring with 100% winrate, have 7 ideas to improve my bot, waiting for losses&#160;:)
+ MSmits: do what i did, make a score solver. Once your bot solves the nim-game, you got calculation time left over
+ MSmits: then you can output score&#160;:)
+ MSmits: will matter almost never, except sometimes vs remi
+ miklla: remi is cool when he produces 2 cycles
+ MSmits: yes thats how you beat someone who won the nimgame, as many loops as possible
+ MSmits: but remi also gives away a lot of boxes, so he's usually already behind in score
+ MSmits: i wonder if anyone else understands this :P
+ eulerscheZahl: i gave up long ago when you are chatting
+ MSmits: :grin:
+ eulerscheZahl: so i just share this post that i found while searching for the dx dy tshirt: <a rel="nofollow" class="external free" href="https://codeforces.com/blog/entry/62094">https://codeforces.com/blog/entry/62094</a>
+ MSmits: this is when the police finally got to you euler?
+ eulerscheZahl: that's not how i looked
+ dkim19375: :grinning:]
+ MSmits: oh ok :P
+ eulerscheZahl: i think i shared a pi of myself a while ago, didn't i?
+ MSmits: you may have
+ eulerscheZahl: but you didn't see or already forgot again
+ MSmits: i know this was not you, but I dont remember what someone looks like from seeing 1 pic 1 time
+ eulerscheZahl: me neither
+ eulerscheZahl: i'm terrible with faces&#160;:(
+ MSmits: i have 100+ new student faces to remember also, I think the information gets drowned out
+ eulerscheZahl: one reason why i prefer a series over movies
+ MSmits: I'm reasonably good with faces, but not with the names attached to them
+ MSmits: so i will recognize a student years later and then not know their name
+ andrecab: Hi there! in the codingame C++ ide I have two classes that need to know about each other. My problem is that the class declared at the top will not know about the one in the bottom
+ eulerscheZahl: once I was like "why is this guy coming towards me" (just thinking, not saying). friend: hey, there's your dad. oops :D
+ MSmits: oh, thats a different thing though, that's attention
+ andrecab: normally I would use .h files but how can I solve this in CG?
+ jacek: andrecab isnt that true for any c++ ide?
+ MSmits: I've nearly walked by my wife and daughter several times on the street, just thinking and not registering their faces
+ miklla: you can forward declare classes and use pointers
+ reCurse: andrecab There is nothing special about #include files, they are literally pasted in the source file by the preprocessor.
+ reCurse: So whatever they did you can do the same manually.
+ MSmits: do conflicts happen often with includes?
+ JBM: a bit of magic for __FILE__ and __LINE__ hough&#160;;)
+ MSmits: i had it happen a few times with string
+ reCurse: Define conflict
+ MSmits: same name for things in different include files
+ jacek: #ifndef
+ MSmits: then gets pasted in
+ reCurse: Only happens if you did it wrong
+ MSmits: no doubt
+ JBM: it's not really #include-specific either too
+ JBM: you'll get naming conflicts across translation units too
+ MSmits: right yeah, it's more general I guess
+ andrecab: Ok, thanks for the help!
+ MSmits: I had it happen with C# as well. I was using unity and tried using some basic C# libraries, apparently unity also had definitions for the same things and it caused conflict
+ reCurse: And that's how namespaces were born
+ reCurse: Or packages for java heretics
+ MSmits: right
+ JBM: or mangling
+ AnalPainGiver: Why my xp's are not increasing&#160;? despite solving problem?
+ eulerscheZahl: is the problem a clash?
+ jacek: i feel butthurt just reading your name
+ eulerscheZahl: let's engage the community&#160;:)
+ reCurse: The name gave it away
+ eulerscheZahl: that's the 95% we want
+ JBM: i'm in bed and eZ's still active
+ JBM: something's messed up
+ struct: The icing on the cake will be the new feature
+ MSmits: AnalPainGiver, I think you had trouble translating from Indian to English
+ MSmits: it's called a hemorrhoid
+ JBM: like you typed that correct on the first try
+ AnalPainGiver:&#160;?
+ eulerscheZahl: you mean the twitter post feature struct?
+ struct: yes euler
+ MSmits: i google it JBM
+ reCurse: He has experience
+ AnalPainGiver: Dude, MSmits
+ JBM: wait is that a real thing
+ AnalPainGiver: what are you talking about&#160;?
+ MSmits: it's your name
+ JBM: what ELSE did I miss from that infamous chat
+ AnalPainGiver: I just asked a generic question.
+ MSmits: no no
+ eulerscheZahl: and some new tile at the top announced in a few days or up to 2 weeks. wonder if those are about the same thing
+ MSmits: i was responding to your name
+ AnalPainGiver: Oh ok, I love doing anal to girl, that's normal!
+ AnalPainGiver: If you don't, that' s on you.
+ JBM: as long as she loves it too
+ AnalPainGiver: True, JBM
+ MSmits: uh oh, I'm out
+ jacek: oO
+ eulerscheZahl: the 95% of the community that we want&#160;:)
+ MSmits: lol
+ AnalPainGiver: Lol, you better, or something else will come out hahahha
+ eulerscheZahl: i better go to bed before the urge to kick gets too strong. bye
+ MSmits: gn eulerscheZahl
+ AnalPainGiver: Ok,back to my ques, why my xp's are not increasing from solving clash problems
+ reCurse: Ah to be 12 again and find those things funny
+ Astrobytes: Oh, I go afk for a minute and get this to come back to
+ JBM: as eZ intended to say
+ JBM: there'x no xp for clash
+ AnalPainGiver: ok, then how to increase level?
+ JBM: with stuff that yields xp
+ AnalPainGiver: and increase ranking?
+ JBM: mostly puzzles
+ AnalPainGiver: ok
+ AnalPainGiver: And that I can find under which sectino?
+ AnalPainGiver: section*
+ JBM: but also arbitrary stuff (see xpachievement page in your profile)
+ MSmits: Astrobytes this is not a typical troll, he just doesnt know the boundaries of civil communication
+ Astrobytes: I know him already MSmits
+ MSmits: ah ok
+ AnalPainGiver: Astro, oh, so you wanted to kick me out because of my explicit explanation of my username, huh
+ Astrobytes: No?
+ JBM: ranking, on the other hand, is yet something completely6Wmostly orthogonal
+ Astrobytes: I'll kick you out if you want but I don't care about your username right now.
+ MSmits: no, it could be a hemorroid, your name was fine until it turned out it was that other thing
+ AnalPainGiver: Astro, if Codingame's policy allow me to make my favorite user_id, that I mostly use every I play game. Then, It should be under filteration while making civil communication.
+ Astrobytes: MSmits: haemorrhoid! Dammit
+ MSmits: this time i didnt paste it off google
+ MSmits: google now thinks i have issues btw
+ AnalPainGiver: oh, you were referring to MSmits comment. Yeah, it's gross.. lol
+ Astrobytes: Hema/Haema is US/British
+ MSmits: ah
+ MSmits: yeah Brits always want their words longer
+ JBM: i thought americans wanted their words more pedantic
+ AnalPainGiver: It makes them sound like a gentleman...lol
+ Astrobytes: Hematoma/Haematoma, hematemesis/haematemesis etc
+ AnalPainGiver: I was having conversation with my teammate, she calls "Addi" for "Address".
+ zhoubou: Astrobytes I want to thank you and everyone else for pushing me through. I scored more than 40k on Code vs Zombies :D
+ zhoubou: My solution is simple and linear. I rewrote my entire code and found a lot of bugs in my sim.
+ Astrobytes: Ahhh well done zhoubou!
+ zhoubou: Thank you&#160;:)
+ Astrobytes: What's next on your list?
+ zhoubou: Ughh. Haven't thought this through yet. Am thinking as we speak.
+ jacek: :soccer:
+ zhoubou: I thought CvZ will take me much more time
+ darkhorse64: reach 100&lt;%
+ darkhorse64: 100%
+ zhoubou: Hmm. It might be too difficult for me
+ zhoubou: At this point at least
+ zhoubou: Unless someone has some easy hints&#160;:)
+ Astrobytes: Oh you didn't get 100%? Your work is not finished :D
+ zhoubou: I don't even know how to start attaining that
+ zhoubou: Unless I implement some rules, other than random movements. Or there might be an optimization I'm not seeing.
+ Astrobytes: darkhorse64: a bit off the current topic but do you know if leRenard wrote the Thor/GThor Othello program?
+ darkhorse64: You would not believe it. My search is random (OK it's a genetic algo). Astrobytes: I don't know. Do you know his name IRL&#160;?
+ Astrobytes: Sylvain
+ jacek: Q.?
+ Astrobytes: Author of Thor is Sylvain Quin
+ Astrobytes: It was after old john mentioned it and that he worked with him back in the day, I came across the references to the old othello programs and 
+ Astrobytes: *and wondered
+ jacek: and yet they are beaten by the booker
+ Astrobytes: leRenards first submit went to top and was almost a straight copy of his old othello program from 30 years ago so...
+ struct: Also "he" wrote the book format from what I understand
+ struct: and not a book
+ struct: <a rel="nofollow" class="external free" href="http://cassio.free.fr/cassio/custom_install/database/FORMAT_WTHOR.TXT">http://cassio.free.fr/cassio/custom_install/database/FORMAT_WTHOR.TXT</a>
+ Astrobytes: oui c'est correct
+ Astrobytes: I mean yes, correct
+ pb4: "leRenards first submit went to top and was almost a straight copy of his old othello program from 30 years ago so..."
+ pb4: How do you know that&#160;?
+ struct: He said so pb4
+ Astrobytes: He told us at the time.
+ Astrobytes: As soon as it went live he submitted.
+ Astrobytes: And told us when we were amazed.
+ pb4: code 30 years old&#160;?!
+ pb4: Damn
+ MSmits: it was cool
+ reCurse: Had to write things pretty well back then
+ reCurse: Shouldn't be a surprise
+ Astrobytes: old john and le renard both worked together, with Michael Buro and others no less
+ MSmits: It wasnt even that easy to beat renards bot. took a while
+ reCurse: Who is
+ Astrobytes:&#160;?
+ pb4: Who is Michael Buro&#160;?
+ jacek: logistello programmer
+ MSmits: are we doing jeopardy?
+ Astrobytes: <a rel="nofollow" class="external free" href="https://www.chessprogramming.org/Michael_Buro">https://www.chessprogramming.org/Michael_Buro</a>
+ darkhorse64: and many seminal papers on Othello
+ Astrobytes: Yep.
+ MSmits: heh that pic looks exactly the same as our othello... of course it should, but it's still strange to see
+ jacek: btw. not long ago they discovered those 'patterns' in draught community
+ pb4: I see the "GLEM" paragraph on that wiki page
+ Astrobytes: tric trac also has worked on... is it checkers/draughts? for decades
+ reCurse: All these famous people in hiding
+ jacek: which is exactly what othello did then
+ Astrobytes: Hence his minimax mastery
+ MSmits: ahhh, well that explains why tric trac
+ MSmits: ... right
+ jacek: and yet no backgammon game
+ pb4: has anybody here applied something similar to that "GLEM" thing&#160;?
+ Astrobytes: the tric trac game isn't straight-up backgammon afaik
+ pb4: More specifically this part&#160;: "but further provides a procedure for exploring the feature space able to discover new evaluation features in a computational feasible way."
+ reCurse: Ok Google, what is GLEM
+ jacek: pb4 thats n-tuple
+ jacek: more or less
+ pb4: I'll have to spend a bit more time reading about those n-tuples
+ Astrobytes: read up on MPC too
+ pb4: Ok Google, what is MPC :D
+ MSmits: to me it seems a lot like a NN, except you're giving it less freedom about the features it analyses
+ struct: multi probcut
+ Astrobytes: Sorry pb4, multi-probcut
+ MSmits: multiprob cut is like cutting of branches based on probability
+ MSmits: to search deeper in ab search
+ MSmits: if i understand it correctly
+ Astrobytes: You do the probablities offline
+ MSmits: yeah the constants
+ MSmits: and there are many
+ Astrobytes: *probabilities
+ Astrobytes: Yep
+ MSmits: old john pushing me in D&amp;B
+ reCurse: multi-pb4cut
+ Astrobytes:&#160;:)
+ Astrobytes: he's online MSmits?
+ MSmits: not currently, but i see him a lot in my last battles, since 2 hrs ago
+ Astrobytes: ah ok
+ MSmits: after i submitted
+ MSmits: i think he won a lot vs me, because my bot was 100% deterministic before
+ MSmits: it's got time based random seed now
+ Astrobytes: Aha. Throwing him off the scent.
+ reCurse: Gross
+ MSmits: yeah i had a fixed seed before which won 80% vs remi, the time based seed wins only 65%
+ MSmits: remi is very deterministic also... so we were mostly playing the same games with both using fixed seeds
+ reCurse: This is why friends don't let friends make deterministic games
+ MSmits: right&#160;:)
+ Astrobytes: heh
+ MSmits: this is a very underestimated problem I think and one of the causes of RPS effects on leaderboards
+ reCurse: Underestimated? I keep whining about it for years
+ MSmits: yes, but you are an outlier
+ MSmits: :P
+ reCurse: Story of my life&#160;:'(
+ MSmits: i noticed it mostly because of my book experimentation
+ MSmits: you keep checking games to see what your bot does wrong and suddenly you recognize the same game over and over
+ MSmits: games having inherent randomness (in the referee) solves this too
+ reCurse: Random initial state is best
+ Astrobytes: I think reCurse is more getting at starting positions etc rather than straight up random-ass games
+ struct: I was gonna finish Amazons, but its also bookable to some extent
+ MSmits: i agree reCurse, it is better for bot games. But people like those fixed opening state boardgames, because they are familiar and well studied
+ Astrobytes: Not completely iirc. And it's worth it I think.
+ reCurse: That doesn't prevent it from being randomized with openings
+ Astrobytes: @Struct
+ reCurse: Look at TCEC, random forced openings
+ reCurse: Otherwise you'd get the same game every time
+ MSmits: TCEC?
+ reCurse: Computer chess championship
+ MSmits: ah ok
+ reCurse: And it's applicable to any game with a fixed initial state
+ MSmits: well players can do the randomness themselves
+ MSmits: if the openings have equal value
+ reCurse: Do pairings, force random moves, there you go
+ reCurse: Extra points if you force good random moves
+ reCurse: It's trivial
+ reCurse: Besides if you want to compare the human elemen
+ MSmits: yeah i understand the organization can force this, but the players can force it too
+ reCurse: If you lose doing an opening you won't do it over and over again
+ MSmits: by putting a random component into their bot
+ reCurse: Unless your name is Puppey or something
+ MSmits: dont understand the puppey reference :0
+ reCurse: Throwaway joke
+ reCurse: Don't bother explain it
+ MSmits: kk
+ Astrobytes: dota?
+ reCurse: Yes
+ MSmits: I played dota2
+ Astrobytes: Had to google but don't get the joke, haven't followed it much.
+ MSmits: I think 200 games total or so
+ reCurse: You know what they say about explaining jokes
+ Astrobytes: Yep.
+ MSmits: it's the best way to learn humor!
+ Astrobytes: Not always.
+ MSmits: that was a joke
+ MSmits: want me to explain?
+ Astrobytes: 'in-jokes' make much less sense.
+ MSmits: in jokes?
+ MSmits: inside joke?
+ Astrobytes: fml
+ Astrobytes: yes
+ MSmits: ah ok
+ MSmits: yeah those are not explainable
+ MSmits: until you explain the entire context
+ MSmits: by that point the person is inside
+ Astrobytes: getting back to not learning from losing opening moves
+ Astrobytes: ...
+ MSmits: what i've noticed about the deterministic games we have is not just that they are bookable
+ MSmits: even if the best bots use a random component
+ MSmits: the tree of "good moves' is just very small
+ Astrobytes: narrow lines of play, yeah you've mentioned that a lot
+ MSmits: yeah it's what i've noticed
+ MSmits: so random openings helps if a game has many options
+ MSmits: like chess
+ MSmits: othello doesnt have that many
+ MSmits: unless you force like.. the first 5 plies or so
+ MSmits: maybe more
+ Astrobytes: Not sure if anyone has experimented with that
+ MSmits: nah i think the game is just too simple to be interesting for those contests
+ MSmits: it used to be more interesting when the field was young i suppose
+ MSmits: and computers were slower
+ MSmits: about amazons, doesnt this game have huge branching?
+ struct: yes
+ MSmits: that makes it unbookable by definition, like dots and boxes
+ MSmits: it would only be bookable if someone had a perfectly deterministic bot and someone else bothered to make use of that
+ struct: "Also, the huge branching factor, over 1000 available legal moves during most of the opening, makes selecting good moves difficult. Still, one or two bad moves in the opening can doom a player to passive play and an almost certain loss"
+ MSmits: thats a waste of time i think
+ MSmits: might be worth making a multi of
+ Astrobytes: It was my suggestion a long time ago
+ MSmits: good one
+ MSmits: yeah i remember you saying it multiple times even
+ MSmits: thats when i learned about it
+ Astrobytes: You remembered something someone said? You been on the nootropics? :D
+ MSmits: hey i try :P
+ Astrobytes: hehehe
+ reCurse: Cute old couple aww
+ MSmits: hey, dont you need to go for a walk by now
+ Astrobytes: arrr shut it grandad
+ reCurse: Already did
+ Astrobytes: lol
+ MSmits: aw ok
+ ISAAColl: hay papi
+ MSmits: allright i need to go grade these christmas cards now. Want to get at least that much done before sleep
+ Astrobytes: Ah the python turtle ones. Enjoy&#160;:)
+ MSmits: yes, thanks and gn
+ Astrobytes: gn MSmits
+ zhoubou: I'm reading up on genetic algorithms. I'm wondering what the genes might hold. I'm just doing random movements, so I can only select between random movements. How can I represent that in a gene?
+ jacek: MSmits there are othello 'xots'
+ jacek: starting balanced openings with 8 plies
+ jacek: <a rel="nofollow" class="external free" href="http://berg.earthlingz.de/xot/aboutxot.php?lang=en">http://berg.earthlingz.de/xot/aboutxot.php?lang=en</a>
+ k4ng0u: zhoubou you can take an angle and a distance for instance but it highly depends on what you try to solve
+ Astrobytes: CvZ k4ng0u
+ Astrobytes: So just x and y in this case
+ Astrobytes: @zhoubou
+ darkhorse64: or radius and angle
+ Astrobytes: jacek: interesting, I hadn't seen that
+ Astrobytes: darkhorse64: oh indeed
+ zhoubou: Hmm. So a gene would be (x, y)? Astrobytes
+ Astrobytes: zhoubou: see darkhorse's reply
+ zhoubou: Or (r, theta), yeah
+ zhoubou: But that gene is only good for a single turn.
+ Astrobytes: Well you evolve your population over several turns
+ Astrobytes: You keep good genes in a pool, mutate them, and cross over the best ones. Rinse and repeat.
+ zhoubou: I know the gist of it, yeah.
+ jacek: you do it online?
+ zhoubou: What I'm not understanding is the representation of the gene/chromosome for this specific problem
+ zhoubou: jacek How can I do it offline? Unless I cheat.
+ Astrobytes: Just because the validators are known doesn't technically make it cheating
+ Astrobytes: kovi may disagree
+ jacek: mhm
+ darkhorse64: It can be done online. My score is online
+ AI_says_hi: darkhorse64 wait how do you train online?
+ darkhorse64: ofc my code is C++ for maximum speed
+ darkhorse64: I search online
+ Astrobytes: Simulate multiple turns ahead and score your solutions, choose the best one
+ darkhorse64: I simulate till the end
+ AI_says_hi: Oh so you find suffiently good "genes" in that short time? impressive
+ Astrobytes: zhoubou: your chromosome/solution is just an n sized array of moves and a score
+ darkhorse64: Yes but the key is to keep on refining after the first turn, 1s is  lot of time but 50 ms matter also
+ struct: My non hardcoded version was just MC
+ struct: managed around 650k
+ darkhorse64: The sim is not complicated so you can run a lot of them
+ zhoubou: Well then I need to optimize it o.o darkhorse64
+ zhoubou: I see Astrobytes
+ Astrobytes: So you can mutate solutions/chromosomes and crossover 
+ struct: My performance was not great there
+ struct: I have like 50k games simulated on the worst test case
+ struct: Hoard
+ zhoubou: Online?
+ struct: yes
+ zhoubou: Wow..
+ struct: I mean
+ struct: 1 turn = 50k games 
+ zhoubou: For me, it times out after 50 or so games on some test cases
+ zhoubou: Lol
+ struct: language?
+ zhoubou: Python
+ zhoubou: Around 500 for Cross (10th) test case
+ zhoubou: Actually around 100 for Hoard
+ struct: ok my number 40k was wrong
+ struct: is less
+ zhoubou: But it's much more than 100 I presume
+ struct: its around 25k on turn 2
+ zhoubou: Yeah..
+ zhoubou: So I have a big problem
+ struct: Well im using c+p+
+ zhoubou: Yeah, I don't want to switch. Not yet...
+ darkhorse64: Searching with Python is ... ambitious. I go 1.2 M simulations steps for test case 10 first turns
+ reCurse: "A game may last theoretically up to 209 moves but, in practice, a game is generally decided before 100 moves are played."
+ darkhorse64: turn
+ reCurse: What is a move, 1 or 2 players
+ darkhorse64: A ply, a move by one player
+ jacek: as it should be
+ jacek: why chess folks cant understand this
+ reCurse: My current average is 150, don't know if it's a good or a bad sign
+ darkhorse64: Slowly building up your advantage&#160;?
+ reCurse: Or having no clue how to play
+ RoboStac: this for bt?
+ reCurse: Yes
+ jacek: msot games are less than 100 plies
+ reCurse: Yes that's what is written
+ jacek: from experience
+ RoboStac: when I start training the games get longer, then start to come down and are mostly below 100
+ darkhorse64: You should lose very fast then. This is the issue with bt. Search happens on all the board but only far advanced pawns really matters. The winning combination get lost in the fog
+ jacek: huh? when i start training my games are very short. one wrong moves and bah!
+ reCurse: Problem is I have zero clue what is good play
+ jacek: good play is when you winning :V
+ reCurse: I did get that longer then shorter part
+ reCurse: But 150 still seems like a lot
+ darkhorse64: Search for Dan Troyka papers on the strategic aspects of bt. There are good tips for humans
+ reCurse: Oh cool, thanks for the tip
+ reCurse: Then again it's early on the training
+ jacek: yeah, searching by 'breakthrough' sucks
+ reCurse: ETA is currently around 12 hours to get decent number of iterations
+ reCurse: sigh
+ struct: How many games do you play on that time?
+ reCurse: I'm at around 25k games for 30 minutes right now
+ darkhorse64: You guys are making me feel like a caveman with my mcts
+ jacek: mcts is so last decade
+ reCurse: Would be 5 times faster if hardware was accessible
+ darkhorse64: I am so last decade
+ struct: Only way to get parts is to buy prebuilts it seems
+ reCurse: I don't want to overspend over msrp either
+ reCurse: Against my religion
+ struct: Yeah, they ask for 50% more
+ struct: its way too much
+ reCurse: Anyone has experience setuping up cloud instances? :P
+ Illedan: What are you talking about?
+ Illedan: *game
+ reCurse: bt
+ Illedan: bt?
+ reCurse: bt
+ RoboStac: 25k per 30 mins should let you train something fairly quickly (it's quite a bit higher than I get and my current BT bot was less than a days training)
+ Astrobytes: Breakthrough
+ darkhorse64: Breakthrough
+ darkhorse64: damn ankles
+ Astrobytes: hahahaha
+ reCurse: Yeah that's hoping my hyperparameters are right
+ reCurse: If not then I have to start over
+ RoboStac: though obviously theres a lot more too it than just games
+ RoboStac: yeah
+ reCurse: I dunno maybe uttt spoiled me
+ jacek: mods everywhere, i feel so insignificant
+ Wontonimo: you can test or search hyperparameters
+ reCurse: Sure, still need the compute to go at it fast
+ Wontonimo: +1
+ reCurse: I'm quite impatient when it comes to training
+ reCurse: Need to write a dashboard with cute widgets to pace myself
+ reCurse: Live game would be nice
+ Astrobytes: You've not done that yet?
+ Astrobytes: I thought you would've baked that into your framework tbh
+ reCurse: No, framework requires gpu to run
+ reCurse: Wasting precious resources for training
+ reCurse: Even having CG open is a compromise
+ Astrobytes: gotcha
+ reCurse: Though I'm not sure how much is shared between cuda and 3d rendering
+ ChuFta: guys please join <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/1545531de3dbd549841a877ac29e9a4804c05a2">https://www.codingame.com/clashofcode/clash/1545531de3dbd549841a877ac29e9a4804c05a2</a>
+ reCurse: But having a viewer open I notice an immediate dip in perf metrics
+ reCurse: Yay pixi
+ ChuFta: is there a way to start "shortest mode" clash of code which is publice??
+ jacek: no
+ Astrobytes: Sure. It's called Code Golf in the Compete section. No time limit but it is public.
+ Astrobytes: But don't compete, just try to have fun instead.
+ Astrobytes: :salt:
+ Astrobytes: reCurse: your normal 'battlestation' is built on openGL or dx or?
+ reCurse: opengl
+ reCurse: Problem is it's realtime instead of smart updates like an oldschool gui
+ reCurse: So it's running like a game, 120fps
+ Astrobytes: Yeah it's gonna hit the gpu
+ reCurse: Doesn't matter at all until I need 100% of my gpu
+ struct: Cant you limit fps? or it doesnt matter
+ Astrobytes: which is gonna be quite frequent now by the sounds of things
+ reCurse: Sure but it's still going to hit the gpu
+ Astrobytes: c# gui and text display for you then
+ reCurse: I think I'd rather do web at this point *shudder*
+ Astrobytes: :D
+ reCurse: I am so burned out with c# gui
+ reCurse: A real shit show
+ Astrobytes: Time for VB
+ Astrobytes: But seriously, it's not nice.
+ reCurse: Still not sure why UI is such a mess
+ reCurse: Ok just kidding, I know why. Just wondering with all the strides made in other areas.
+ Astrobytes: Guess they just gave in to web-based/pthon/java 
+ reCurse: 3d rendering in 20 years is a herculean effort
+ Astrobytes: *python
+ reCurse: UI in 20 years?
+ Astrobytes: mmm
+ reCurse: Maybe effort is not the right word
+ reCurse: Progress
+ reCurse: There
+ reCurse: 20 years later and many times I'd rather have a html page
+ Astrobytes: Of course there's not just the whole experience of actually having to develop UI, but the fact the the UX/HCI field can't really keep up
+ Astrobytes: Some of the traditional 'rules' still apply but with ever changing mobile device incarnations it becomes a real mess.
+ Astrobytes: imo
+ Illedan: Agreed on C# UI mess.. MVVM -.-
+ Astrobytes: I'm not really sure a lot of people coding any kind of UI really understood anything from HCI 
+ reCurse: The pre-web era windows folks were godlike tbh
+ reCurse: Underappreciated how much they understood HCI
+ Astrobytes: Yes, you're not wrong. There's a reason for the market dominance there.
+ Astrobytes: "I'm not really sure a lot of people coding any kind of UI" + nowadays btw
+ reCurse: I wouldn't mind MVVM so much if it wasn't for that goddamn abomination called WPF
+ reCurse: You can put a spinning cube in a dropdown but good luck if you want to have a tab that works as expected.
+ reCurse: Or something, forgot my examples, I exiled that land years ago
+ Illedan: Haha, I just left that land
+ Illedan: Now I'm in React
+ Illedan: seems far better
+ Astrobytes: But... but... WPF is so.. easy to use and quick to develop with :P
+ Illedan: Bloated
+ Astrobytes: No shit.
+ reCurse: Obscure, overengineered
+ reCurse: Unmaintained
+ Illedan: Might work in Xamarin if the Functional approach gets good
+ reCurse: Just stay clear from Microsoft UI frameworks
+ reCurse: inb4 just stay away from microsoft lul
+ Illedan: I started using Avalonia for my personal projects
+ Astrobytes: What! MFC + ATL FTW!!!!
+ reCurse: Avalonia looked like abandonware
+ Illedan: Indeed, but it works on my windows and my mac :shrug: 
+ Astrobytes: Hm, hadn't seen avalonia
+ reCurse: I'd just like a minimalist ui toolkit for web
+ reCurse: But form trumps function these days
+ Illedan: C# webapp?
+ reCurse: I have my doubts this is going to go well
+ Astrobytes: the webasm thing?
+ reCurse: Different things
+ Illedan: Blazor
+ Astrobytes: yeah I know Illedan, was just wondering which part of it reCurse was doubtful about
+ reCurse: Very limited widgets it looks like
+ reCurse: Sorry didn't know blazor
+ Astrobytes: It's been a hot topic for some time, you really didn't hear of it?
+ reCurse: I don't follow the web scene that much
+ Astrobytes: Neither do I but some things you pick up through osmosis.
+ reCurse: shrug
+ samples32: What is the easiest practice game?
+ struct: Tron might be one of the easier ones
+ samples32: Thanks
+ samples32: How am i expos to tell if im about to run into my light beam. P.S. Sorry for the misspelling
+ Astrobytes: You have to keep a record of the cells you have visited
+ samples32: Thank you Astrobytes.
+ Jasperr: Is there a way to go from a clash results page to the clash contribution?
+ samples32: I think you have to go to the contribute page.
+ Jasperr: that shows all contributions
+ Jasperr: seems like what I need is not available
+ struct: Search it here
+ struct: <a rel="nofollow" class="external free" href="http://eulerschezahl.herokuapp.com/codingame/puzzles/">http://eulerschezahl.herokuapp.com/codingame/puzzles/</a>
+ Jasperr: if only I would remember the name of the clash
+ Astrobytes: if you remember keywords you can use them
+ Astrobytes: anything from the description
+ Jasperr: oooh thats very useful
+ Jasperr: thanks struct
+ samples32: in the top left corner their is a dropdown just for that.
+ struct: Today I got this clash
+ struct: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/491041a64dbe793c2fb39954589eb66138b3">https://www.codingame.com/contribute/view/491041a64dbe793c2fb39954589eb66138b3</a>
+ struct: Dont know how it was approved, the statement makes no sense
+ Jasperr: I just had this one
+ Jasperr: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/5812f84ec1ca91bb0c6ed404a3e78d4734b4">https://www.codingame.com/contribute/view/5812f84ec1ca91bb0c6ed404a3e78d4734b4</a>
+ Jasperr: so much broken english I had to find it to fix it
+ Astrobytes: wtf struct
+ struct: I understood that one
+ struct: astro yeah, either someone edited statement
+ struct: or I dont know
+ struct: "With only numbers 1, get the highest score using only the operations +, *"
+ struct: 1+1 = 2
+ struct: answer for 1 should be 1
+ Astrobytes: Yeah it's not clear at all
+ struct: (╯°□°）╯︵ ┻━┻
+ Jasperr: lol
+ Astrobytes: since you have only 1 1
+ reCurse: Quality
+ AI_says_hi: struct it's kinda wtf but I think what they mean is you have N ones and you can + and * until only one number is left
+ struct: ah I understand now
+ struct: Makes sense now
+ Astrobytes: Yes but how does "With only numbers 1, get the highest score using only the operations +, *"
+ Astrobytes: actually tell you that?
+ AI_says_hi: Thats what I havemy crystal abll for :p
+ AI_says_hi: ball*
+ Astrobytes: heh
+ struct: 90% of the clash is to understand the statement
+ struct: 95%
+ AI_says_hi: ^ TRUE
+ Astrobytes: Hey, no one cares about the 5%...
+ Chorizo: hi i wan't to what do i have to put in the box solution when i create a new contribution
+ Chorizo: the code&#160;?
+ struct: yeah
+ Astrobytes: The code to solve it yes
+ Chorizo: ok thx
+ Chorizo: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/6101e1551ee561c3928320d8537d81b4a182">https://www.codingame.com/contribute/view/6101e1551ee561c3928320d8537d81b4a182</a>
+ JudgeAL: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/61029c19e127354559b93908d1dcfedac3ff">https://www.codingame.com/contribute/view/61029c19e127354559b93908d1dcfedac3ff</a>
+ Westicles: JudgeAL, that is just terrible
+ JudgeAL: whhaaa
+ Jasperr: calm down satan lol
+ struct: Impossible to solve
+ bobth: my coc room getting this
+ bobth: An error occurred (#73): "Only 1 executor running at the same time for a test session".
+ bobth: slow for other people too
+ struct: Servers get slow around this time
+ struct: to update db or something
+ bobth: oof
+ MartinEduardo: Hi
+ MartinEduardo: anyone has solved the ascii art puzzle? maybe that person could tell me if it is hard or not that hard at all
+ struct: Might be one of the hardest out of the easy ones
+ MR3M3AT: Hellooooooooooooooooooooooooooo
+ MR3M3AT: Whats the best coding language?
+ RyanGilbert: uh
+ RyanGilbert: bad question
+ badAtCoding: what r u trying to do?
+ NguyenDuyPhu: I have completed all test cases of puzzle "Find happy number" but when I complete it it is only 80%. Where should I find the remaining test cases?&#160;: ((
+ ZarthaxX: you can't see them, unless you are level 20+
+ NguyenDuyPhu: thank you 
+ ZarthaxX: yw&#160;:)
+ Olusola: Clash Of Code again

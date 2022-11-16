@@ -1,0 +1,229 @@
+ recreationx: pl
+ recreationx: ok
+ WINWINWIN: python is almost the best for clash of code, second only to ruby.
+ cegprakash: hey someone sent me an awesome video on alpha beta pruning in the past
+ cegprakash: and I missed it
+ cegprakash: does someone has that link
+ cegprakash: I think struct shared me that link
+ PatrickMcGinnisII: I haven't seen one, sry
+ cegprakash: found it
+ cegprakash: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=l-hh51ncgDI">https://www.youtube.com/watch?v=l-hh51ncgDI</a>
+ cegprakash: looks like I had it in my youtube playlist :D
+ Andriamanitra: does ruby have something equivalent to python's [::2]
+ DeWill: Still it have many other advantage....
+ Andriamanitra: i know, i love ruby but i'm doing some insanely convoluted stuff just to get every nth character of a string
+ Andriamanitra: i guess s.each_char.select.with_index{|c,i| i%2==0}.join is about good as it gets, not as nice as simple s[::2]
+ Klient: <a rel="nofollow" class="external free" href="https://stackoverflow.com/questions/51697394/capitalize-every-nth-character-of-each-word-in-a-string-in-ruby">https://stackoverflow.com/questions/51697394/capitalize-every-nth-character-of-each-word-in-a-string-in-ruby</a>
+ Andriamanitra: yeah that's what i was looking at
+ Andriamanitra: i found a little bit shorter way though, not sure if as readable: s.chars.values_at(*0.step(s.length-1,2)).join
+ OhayouWIbu: hello guys
+ WINWINWIN: Hi
+ Thyl: Yo&#160;!
+ tie: hi
+ DomiKo: hi
+ TIE: iam new
+ DomiKo: heloo
+ DomiKo: how u doing?
+ TIE: good 
+ TIE: what about you?
+ DomiKo: just reading
+ DomiKo: need to read sth to improve mcts
+ jacek: good afternoon
+ DomiKo: hii
+ muchClue: (╯°□°）╯︵ ┻━┻
+ rubber_duckie: is discord down everywhere? or is it just my country
+ rubber_duckie: almost every website i try to access is down today...
+ tomatoes: works 
+ Andriamanitra: some of these clash problems are insane
+ Andriamanitra: 7 players and everyone got 0% :laughing:
+ DomiKo: 7 players but are they good players?
+ MSmits: hey guys
+ DomiKo: hi&#160;;)
+ MSmits: I have a question
+ DomiKo: uuu
+ MSmits: how do I store data as characters in the IDE
+ MSmits: using their byte encoding
+ MSmits: everyone who's ever done a NN here knows thi
+ MSmits: but i cant find any examples
+ MSmits: 2 bytes per character
+ DomiKo: hmmm
+ MSmits: in c++ specifically. I have been able to make something work in C#
+ MSmits: long time ago though
+ MSmits: say i have a 16 bit integer
+ tomatoes: 2 bytes as unicode codepoint =&gt; utf8 character
+ MSmits: yes how do i do that
+ DomiKo: wchar?
+ MSmits: o idea
+ MSmits: n
+ tomatoes: manual shifts and ors 👀
+ MSmits: I dont mean the bits part
+ MSmits: i mean how to write an actual 16 bit integer as a single character
+ DomiKo: so if i understand what you mean
+ DomiKo: you can use
+ DomiKo: u32string
+ DomiKo: read normal string
+ DomiKo: and then using this magic stuff
+ MSmits: doesnt that use 4 bytes per character?
+ DomiKo: wstring_convert&lt;codecvt_utf8&lt;char32_t&gt;, char32_t&gt; conv;
+ DomiKo: hmm you need 16
+ DomiKo: hmmm
+ MSmits: the IDE understands 16 max
+ MSmits: i think
+ MSmits: basically what i want is to be able to offline put data into characters, paste the code into the IDE and when it runs, convert it back to data
+ MSmits: so that i can make maximum use of codesize
+ MSmits: IDE allows 100k characters, 2 bytes per character
+ tomatoes: ide count 3byte utf8 as 1 character
+ MSmits: 3??
+ MSmits: interesting, so i can store even more data then?
+ tomatoes: no
+ tomatoes: too many control bits
+ MSmits: man... I wish someone wrote a guide about how to do this
+ tomatoes: encoding in python chr(int16).encode(‘utf-8’) should work. but dont know about c++
+ MSmits: hmm and how to get it back from utf-8 back to int16?
+ tomatoes: check utf8 wiki page
+ tomatoes: 1110xxxx	10xxxxxx	10xxxxxx	
+ MSmits: ok will do thanks
+ tomatoes: x’s are writable, 10 fixed
+ tomatoes: and 4 bytes utf8 count as 2 symbols in ide, kinda useless
+ RoboStac: I use <a rel="nofollow" class="external free" href="https://github.com/Parkayun/base65536">https://github.com/Parkayun/base65536</a> for encoding and then have c++ code to decode it
+ MSmits: thanks Robo, will check that out
+ RoboStac: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/82733bd9-0058-4500-8828-3bdc0fce1535">http://chat.codingame.com/pastebin/82733bd9-0058-4500-8828-3bdc0fce1535</a>
+ MSmits: ohh nice c++ code even
+ derjack: msmits doing NN? :scream:
+ eulerscheZahl: or a larger opening book
+ MSmits: non NN no
+ MSmits: openingbook is one of the things yes
+ MSmits: not sure what else. It's just something I've wanted to know how to do
+ tomatoes: it seems base65536 use 4 bytes utf8 too. which are not good for CG
+ derjack: endtables?
+ MSmits: those too derjack, can use those for bandas
+ MSmits:  for oware too, but i've found that the tables you generate in the first second are bigger than the ones that fit into codesoze
+ MSmits: codesize
+ MSmits: not sure how it is for bandas
+ MSmits: codesize = max 5 seeds i think, i do 6 seeds generating them in 1st second
+ derjack: or make endtables into c++ std and #include those *_*
+ Astrobytes: #include &lt;win&gt;
+ MSmits: if that were possible&#160;:)
+ tomatoes: too suspicious 
+ wlesavo: #include &lt;top3bot&gt;
+ eulerscheZahl: tomatoes 03:12PMit seems base65536 use 4 bytes utf8 too. which are not good for CG
+ tomatoes: i checked in golf mode and some symbols count as 2
+ tomatoes: 𒄠
+ MSmits: probably because they are more than 2 bytes
+ tomatoes: for example
+ MSmits: so are you saying that this base65536 thingy sometimes converts 2 bytes to something that counts as more than 1 character?
+ tomatoes: i think it works but possible to compress better
+ RoboStac: it may well be possible to be better, but it was a massive improvement over base85 and didn't require much thought&#160;:)
+ MSmits: hmm but if you need the full range of 16 bit integers you will always need characters that require more than 2 bytes right?
+ MSmits: because of control characters and whatnot?
+ eulerscheZahl: but as how many chars does this count? ̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤̤
+ MSmits: oh noes
+ eulerscheZahl: :rofl:
+ MSmits: *euler trollmode off
+ eulerscheZahl: deep inside i'm still a little child
+ tomatoes: i'm not sure but it seems cg counts 1-2-3 bytes utf8 as 1 character and 4 bytes utf8 as 2 characters
+ MSmits: true euler
+ MSmits: thats weird tomatoes
+ Astrobytes: chat vandal!
+ eulerscheZahl: gotta enjoy the last days of trolling before the new mods get added
+ tomatoes: 3 bytes utf8 has 16 "free" bit. and 4 bytes utf8 has 21 free bits (or 10.5 per character)
+ Astrobytes: :D
+ MSmits:  makes sense then tomatoes
+ tomatoes: i dont know how cg counts it inside, but random 4 bytes gives "code size: 2"
+ tomatoes: and random 3 or less always code size: 1
+ RoboStac: it would explain why I've struggled to work out exactly how big to make networks that'll fit
+ tomatoes: <a rel="nofollow" class="external free" href="https://www.compart.com/en/unicode/U+12120">https://www.compart.com/en/unicode/U+12120</a> that weird glyph
+ RoboStac: and instead just keep shrinking them until cg stops complaining
+ RoboStac: never thought of checking on code golf though
+ tomatoes: hmm. what if golf and submit count all this things differently :thinking:
+ tomatoes: i checked only golf
+ RoboStac: it does seem to match - code golf says my othello is 95000 
+ RoboStac: and I knew it was close
+ RoboStac: whereas wc says its 78k chars / 193000 bytes
+ derjack: do you use some compression?
+ MSmits: RoboStac do i understand correctly that I have to print my integers as 8 bit ascii characters that it then encodes into unicode characters?
+ MSmits: "ab" seemed to be turned into one character wheras "abc" became 2
+ RoboStac: on the python encoding side I'm passing a bytearray in, not ascii
+ MSmits: ah ok, but i am not using python so it will be reading a file 
+ RoboStac: yeah, but is it a binary file? encoding text makes no sense
+ jacek: well i encode opening book which is text into unicode
+ jacek: saves exactly 2x space
+ MSmits: i am not sure what a binary file is compared to a text file tbh
+ MSmits: i have always worked with text files
+ jacek: print("ab".decode("utf-16")) becomes some chinese char
+ MSmits: 靡
+ MSmits:&#160;?
+ jacek: yes. and c++: wstring text = L"..."
+ MSmits: what does that dp&#160;?
+ MSmits: do
+ jacek: for (auto &amp; c&#160;: text) {
+ MSmits: yeah thats what i was thinking
+ MSmits: c is 16 bit&#160;?
+ jacek: so you have wstring text = L"䔱㝆噄㙳䔾乏嵑獠䌱噆䐶慗" and decode into string normal_text and do whatever you waznt
+ jacek: actually i dont know o.O. i think
+ jacek: or is it wchar
+ MSmits: well it looks like 16 bit the way you are shifting it
+ jacek: as long as it works, i dont care
+ jacek: *ML expert*
+ MSmits: lol
+ jacek: bbl
+ Zachary_0722: is python the most frequent language?
+ eulerscheZahl: what's your scope for the question?on the whole world? for clash of code shortest mode? for ...?
+ AmarjitSingh: Can someoone suggest a good Machine learning project
+ swordwielder: use the AWS sagemaker and build a machine learning car
+ AmarjitSingh: ohk thanks
+ FlatJelly_17bc: hi I have a coding challenge test on codingame for a junior java developer position. any suggestions on how to proceed to be well prepared?
+ swordwielder: use leetcode
+ swordwielder: majority of any tests are on there.
+ Astrobytes: FlatJelly_17bc: <a rel="nofollow" class="external free" href="https://help.codingame.com/collection/261-candidates">https://help.codingame.com/collection/261-candidates</a>
+ Astrobytes: And try some easy + medium puzzles
+ FlatJelly_17bc: thankss
+ Astrobytes: np
+ FlatJelly_17bc: what topics do you think the test includes
+ FlatJelly_17bc: for a junior
+ swordwielder: I wish I knew
+ Astrobytes: I couldn't say, it might be similar problems that you'll find in the puzzle sections, or it could be custom-designed by your prospective employers
+ swordwielder: I have a coderpad interview tomorrow too.
+ swordwielder: any good suggestion on how to prepare
+ Astrobytes: I don't know anything about coderpad tbh, sorry
+ Apocrypha_blank_01: Whats the easier way to count how many nodes were visited with minimax&#160;?
+ tomatoes: increment some counter on visit
+ Uljahn: ye, kinda global variable if it's possible to use in your language
+ Ripkite: yerrrrrrrrr
+ jacek: i increment visits whenever i do game-&gt;makeMove()
+ thanhhv317: Hi
+ thanhhv317: in here, at 12PM
+ thanhhv317: and i am looking for a jobs JS
+ thanhhv317: i can using nodeJS in server side, reactJS in front-end side
+ Apocrypha_blank_01: Thanks for the suggestion of using global counter&#160;! helped a lot. Have been trying to use some counter in recursion while searching nodes and havent achieved much that way
+ SantriptaSharma: ooh
+ jacek: ah
+ queiros84: hi
+ Schwase: the new easy puzzle is a fun one
+ jacek: new puzzle?
+ Uljahn: the newest accepted is <a rel="nofollow" class="external free" href="https://www.codingame.com/training/easy/benfords-law">https://www.codingame.com/training/easy/benfords-law</a>
+ checkmunza: hi
+ cup_of_tea: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/129703555451ca332ab2eac70a308cfe8b56e34">https://www.codingame.com/clashofcode/clash/129703555451ca332ab2eac70a308cfe8b56e34</a>
+ jacek: :skull:
+ Andriamanitra: i hate reverse mode, this clash makes no sense
+ polytuky: I like reverse mode.&#160;:))
+ Andriamanitra: it's been 10 minutes and none of us have gotten it yet
+ Andriamanitra: it's just a bunch of random sequences with no pattern i'm pretty sure
+ Gojol: Console.WriteLine(Math.Rand)
+ polytuky: Sometimes, It too easy.
+ Andriamanitra: actually not a bad idea :smile:
+ Andriamanitra: what's easy about 170859375 268435456 410338673 612220032 893871739 1280000000 1801088541 2494357888 3404825447 4586471424 6103515625 8031810176 10460353203 13492928512 17249876309 equaling 7
+ polytuky: It easy to said that a hard problem&#160;:))))
+ Andriamanitra: lmao 28% by outputting random number between 0 and 14
+ Laminator: longest repeating number?
+ thanhhv317: no no no
+ thanhhv317: do u know "Toi di code dao"&#160;?
+ thanhhv317: find it in ytb
+ icecream17: FailureFound: tr...
+ icecream17: Expected: trueNothing
+ thanhhv317: loob
+ Anh_Quan: help me..
+ Ripkite: yeerrrrrrrrrrrrrr
+ bartekkowalski: YERRRRRRRRRR
+ TejasTheGReat: what does it mean when it says "Found Nothing?"
+ TejasTheGReat: It says that I have something im my standard output stream

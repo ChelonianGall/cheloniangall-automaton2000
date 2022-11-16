@@ -1,0 +1,744 @@
+ [CG]Simon: hello guys!en c++ vous utilisez quoi calculer votre temps d'exécution?
+ Neumann: high_resolution_clock::time_point now;
+ [CG]Simon: merci neumann!
+ [CG]Simon: je timeout plus vite en c++ qu'en java... cherchez l'erreur&#160;;-)
+ Thyl: Hi&#160;!
+ Thyl: Salut&#160;!
+ Thyl: y a quelqu'un qui serait d'ou ça peut venir en théorie ça :free(): double free detected in tcache 2
+ JBM: t'aurais pas fait 2× un free sur la même adresse?
+ Thyl: je pense sauf que c'est un C++
+ Thyl: donc un delete
+ Thyl: mais je n'utilise pas de delate
+ Thyl: donc un mécanisme caché
+ Thyl: ....
+ Thyl: mais je vais réécrire les destructeur
+ Thyl: +sur
+ Thyl: merci JB'
+ Thyl: ou
+ Thyl: jutilise une classe abstraite pour initialiser un objet...
+ Thyl: le compile me dit rien...
+ TetraktysPhi: possible aussi que tu aies un débordement mémoire
+ Thyl: j'alloue vraimment pas beaucoup
+ Thyl: c'est bon
+ Thyl: j'ai une classGame qui fait des new
+ Thyl: sauf que quand je copie un objet dans un autre le pointeur cree par le new est le même
+ k4ng0u: potentiellement une lecture d'une reference qui n'existe plus ou d un debordement d'index
+ Thyl: ok
+ Thyl: merci beaucoup tout le monde 
+ Magus: En C++ tu peux avoir des doubles free si t'as fait des destructeurs bizarres, ou si tu fais un delete sur quelque chose qui s'est déjà fait delete ailleurs
+ Thyl: merci Magus
+ Magus: mais c'est comme les segfaults, parfois pour avoir le stack c'est un peu galère. Le mieux ça reste de faire tourner ton code en local avec fsanitize
+ Magus: et t'auras la stack exacte
+ Thyl: excuse moi mais c'est quoi le stack&#160;??
+ k4ng0u: la stacktrace de l'erreur
+ Thyl: a ok
+ Thyl: et le fsanitize
+ Thyl:&#160;???
+ Thyl: un flux&#160;??
+ jolindien: o/
+ Thyl: Elle a un nom mon erreur pour que je puisse faire un try ou pas&#160;??
+ Thyl: je viens de voir encor un destructeur chelou!&#160;! :D
+ Thyl: merci Magus&#160;!
+ Thyl: corrupted size vs. prev_size
+ Thyl: c'est quoi ce machin
+ Magus: fsanitize c'est un flag de GCC quand tu compiles ton code
+ Magus: -fsanitize=address
+ Magus: ce qui fait que ton code va vérifier toutes les adresses auxquels tu vas accéder
+ Magus: et planter dés que tu tapes à un endroit dans lequel t'es pas censé taper
+ Magus: (évidemment ça rend ton code beaucoup plus lent, mais pour debug c'est très pratique)
+ Stilgart: Magus: c'est plus rapide que gdb&#160;?
+ OldJohn: Hum Saelyos en 18 minutes fait un boss qui tient plus de 24 heures&#160;? Nous devons tous louper un truc&#160;!
+ leojean890: il nous a dit qu'il a fait un challenge private avec le même sujet avant
+ leojean890: donc a pris une semaine d'avance
+ OldJohn: OK cela confirme ce que je pensais, pas possible sans avoir eu les informations avant&#160;!
+ k4ng0u: il avait pas dit que c'etait un contest d'un jour?
+ leojean890: un jour pardon dsl
+ leojean890: je confonds
+ leojean890: seebomega a dit qu'il a fait le challenge klee avec quasiment les mêmes inputs et strictement le même sujet
+ leojean890: lui je sais pas si c'était 1 semaine ou 1 jour
+ OldJohn: C'est dommage cela fausse un peu le jeu mais n'empêche qu'il nous reste 8 jours pour faire mieux 
+ leojean890: ouais vu que c'est un jour ça va
+ leojean890: pour le challenge klee j'avoue j'en ai aucune idée
+ leojean890: de la durée
+ OldJohn: Peu importe c'est juste que le jeu était disponible avant... Comme les sujets des examens, cela ne se fait pas&#160;!
+ Stilgart: leojean890: en même temps, tu tiens bien aussi
+ leojean890: ouais ils auraient dû faire une stricte égalité sans reprendre un sujet klee par ex^^ mais bon&#160;;) souvent y'a un contest private avant le vrai, ça se fait pas mal, c'était pareil pour UTG avec amadeus
+ leojean890: Stilgart j'avoue pour le moment ça va j'ai su améliorer plusieurs fois jusqu'à 3h30 hier^^ on verra combien de temps ça tient avant que les tryharders balèzes qui veulent les prix ne rappliquent^^
+ leojean890: j'ai qq idées encore mais pas tant que ça et moins de trucs obvious 
+ SpcGuy: Quelqu'un sait on a droit a combien de temps d'execution sur un probleme qui ne l'indique pas&#160;?
+ SpcGuy: Y a t-il un default&#160;?
+ Stilgart: pour un puzzle, il faut aller voir dans la FAQ
+ Stilgart: ça dépend du langage
+ leojean890: je savais pas que ça dépendait du langage, c plus "fair" pour les amateurs de langages lents xD
+ SpcGuy: C++, un puzzle de la communaute, je frole le 3 milisecondes et me fait kick
+ SpcGuy: Alors pas de faq qui indique le temps...
+ Zorg1: tiens elle est passée où la FAQ&#160;?
+ Zorg1: ah ok tout en bas
+ Stilgart: surtout... pourquoi j'ai pas le même menu qu'hier&#160;?
+ <b>**Stilgart a de nouveau le vieux menu&#160;:/</b>
+ philRG: et merde...     del ghosts[ghost]TypeError: list indices must be integers or slices, not Ghost
+ Zorg1: ils ont refait les menus de la barre du haut
+ Zorg1: mais un coup j'ai les nouveaux un coup les anciens
+ philRG: à chaque fois je me fais b... :joy:
+ [CG]Simon: yep ça a été mis en prod hier justement
+ Stilgart: ha, oui 2e hard refresh j'ai enfin le bon menuh
+ [CG]Simon: il faut peut etre un peu de temps pour que tous les serveurs soient mis à jour
+ Zorg1: ah ok merci [CG]Simon&#160;;-)
+ Stilgart: et en effet, je vois plus le lien vers le FAQ
+ Zorg1: faut descendre en bas
+ Zorg1: dans la pied de page
+ philRG: aaaaah del ghosts[ghosts.index(ghost)]
+ Stilgart: [CG]Simon: c'est volontaire qu'il y ait une indirection de plus avant d'arriver aux multis&#160;?
+ philRG: marteau
+ philRG: automaton2000 marteau
+ Automaton2000: il y a trois heures
+ Zorg1: (à mon avis c'est pour réduire la largeur nécessaire de la page)
+ Stilgart: je ne comprends pas pourquoi il n'y a pas directement "Combat de bots", "Golf" et cie dans le nouveau menu
+ Stilgart: Zorg1: un menu déroulant ça le ferait
+ Stilgart: quitte à devoir cliquer pour dérouler
+ [CG]Simon: n'hésitez pas à faire des retours si vous le souhaitez. Je viens tout juste d'arriver chez CG, donc je ne connais pas les raisons qui ont amené ce nouveau design&#160;;-)
+ Stilgart: le retour sérieux c'est "on n'a plus accès à la FAQ&#160;:( "
+ Stilgart: ça c'est un vrai soucis
+ Stilgart: SpcGuy: <a rel="nofollow" class="external free" href="https://www.codingame.com/faq">https://www.codingame.com/faq</a>
+ Stilgart: mais à mon avis, ça sent l'accès mémoire foireux, ou une variable non initialisée
+ <b>**Stilgart avait oublié qu'il n'y avait pas les temps de calcul autorisés dans la FAQ</b></p><p><img src="/a/42398427701382" /> leojean890: gg Arnaud.Net ça remonte;)
+ Stilgart: C/C++ c'est autrour de 1s
+ Arnaud.Net: oui mais ça doit etre du bol
+ leojean890: faudra voir à 100% du submit ce qu'il en est
+ <b>**Stilgart tend un tonneau de chance à Arnaud.Net pour voir si c'est mieux</b></p><p><img src="/a/43971600119231" /> Arnaud.Net: thx ^^
+ leojean890: Stilgart python c'est genre 5s^^
+ Stilgart: m'en parle pas...
+ leojean890: parfois je mets if time &gt; 5 return
+ leojean890: ^^
+ Arnaud.Net: un bust sur un fantome a 0 ça sert a rien on est d'accord&#160;?
+ Stilgart: bonne question
+ Stilgart: ça peut bouger un fantome à 0&#160;?
+ Stilgart: si oui, le bust sert à le figer
+ Arnaud.Net: je vosi daakshare faire ça je pensais que ça empéchait le trap mais non
+ leojean890: Arnaud.Net en tout cas je pense que c'est mieux que la version précédente vu que t'étais descendu vers 44 t'es à 46 now
+ Arnaud.Net:&#160;:)
+ leojean890: bust le fantome à 0 ça sert pas ouais
+ Arnaud.Net: sauf pour l'immobilisé yes c'est vrai thx
+ Stilgart: leojean890: un fantome à 0 ça bouge vraiment pas&#160;?
+ leojean890: saelyos l'imprenable 
+ leojean890: un fantôme à 0 pv je crois qu'il arrête de bouger mais j'avoue je devrais vérifier ça
+ Stilgart: bon, je vais coder un truc pour ce contest :D
+ leojean890: ah ouais je me trompe peut être
+ leojean890: après il avance pas vite
+ Stilgart: trouvons une map avec un fantome à portée tour 1
+ Zorg1: le fantome à zéro il bouge
+ leojean890: mais ça peut être une optim de continuer à l'immobiliser si sa pos initiale est plus loin que sa pos courante de ton catcher
+ Stilgart: Zorg1: arrête de m'empêcher de coder :D
+ Stilgart: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/523760553">https://www.codingame.com/share-replay/523760553</a>
+ <b>**Stilgart fier d'avoir fait 3 lignes de code sur ce contest</b></p><p><img src="/a/16542412157988" /> Zorg1: cet incroyable talent
+ Zorg1: oui je me moque, je sais c'est mal
+ Stilgart: clair, je vais envoyer mon CV à TF1 là
+ Stilgart: nan mais vu mon niveau de flemme, tu peux y aller&#160;;)
+ Zorg1: là je bricole un peu, mais trop la flemme de réflechir à une heuristique
+ Arnaud.Net: thx stilgatt ^^
+ Stilgart: n'empêche qu'il doit bien y avoir un moyen de faire autre chose qu'un nid de if
+ leojean890: maintiens toi et la switch tu auras hehe
+ Stilgart: le pire, c'est que la switch ça fait envie
+ leojean890: tu peux faire une simu pour le poussé de fantomes sinon
+ leojean890: je dirais pas non à une switch j'avoue xD
+ leojean890: tu simules si tu vas à tel endroit où se déplaceront les fantomes
+ Stilgart: en vrai, je suis pas du tout fan de la console elle même, mais il y a une poignée de jeu qui me font rêver
+ leojean890: j'ai pas fait ça perso
+ leojean890: ouais j'aime bien les jeux nintendo..
+ Stilgart: mario maker (2 du coup) ça a l'air juste trop bien, 
+ Stilgart: on doit être à 2 zelda
+ leojean890: sinon tu prends le pbm à l'envers tu choisis où tu veux que le fantome aille à distance 400 et tu compute où tu dois aller pour obtenir ce que tu veux pour le depl du fantome 
+ leojean890: zelda mario kart SSB
+ Stilgart: tiens, Xenoblade Chronicles X serait dispo que sur wii U par contre&#160;:(
+ leojean890: tout ça j'aime bien^^
+ userdanydan: oui et la wiiU est introuvable
+ Stilgart: SSB c'est pas vraiment mon truc par contre...
+ leojean890: wii U c'est ptet juste d'occaz mtn
+ leojean890: SSB c'est marrant mais je vais pas tryhard autant que MK
+ leojean890: juste pour jouer entre potes quoi
+ leojean890: MK j'en ai tryhard qq uns
+ leojean890: zelda j'aime bien les finir
+ Stilgart: faudrait que je finisse okami à ce propos
+ leojean890: mais ça fait lgtps que j'en ai pas pris de nouveaux car je n'ai pas pris les anciennes consoles
+ leojean890: les nouvelles*
+ leojean890: j'ai joué à ces jeux sur GBA, DS, ..
+ leojean890: ça fait lgtps
+ Stilgart: ceux sur wii sont très bien
+ leojean890: wii j'ai joué chez des potes à MK et SSB par ex
+ leojean890: et effectivement c cool
+ Stilgart: MK Wii j'ai pas le courage de le tryhard
+ Stilgart: (on m'a donné Xenoblade Chronicles à ce moment là :p )
+ leojean890: je vois
+ Zorg1: ah MK=Mario Kart
+ Zorg1: on se perd avec vos acronymes ^^
+ Zorg1: (je vous vois mal jouer à Mortal Kombat c'est un peu vieillot et c'est vraiment pas dans le Kawaï de Nitendo &amp; Autres)
+ OldJohn: Question que se passe t'il si deux catchers font un trap du même fantome au même tour&#160;?
+ Zorg1: ils sont bloqués en attente du premier qui abandonne
+ OldJohn: OK thanks&#160;! that helps&#160;!
+ leojean890: mortal kombat j'ai jamais été trop fan ouais^^
+ leojean890: j'avoue je crois pas avoir vu des replays avec des traps simultanés, mon code va persévérer indéfiniment (enfin c'est les supports qui vont stun et régler ce conflit;))
+ leojean890: infiniment*
+ OldJohn: Y' pas de distances pour STUN&#160;?
+ BlaiseEbuth: Yo tout l'monde&#160;! Automaton2000&#160;! AutomatonNN&#160;!
+ Automaton2000: tu devrais essayer de faire une ia qui marche
+ AutomatonNN: salut
+ OldJohn: A si... pas vu du premier coup, désolé&#160;!
+ leojean890: OldJohn 1760 ouais c'est écrit dans un second point donc possible de le louper
+ leojean890: yo BlaiseEbuth
+ BlaiseEbuth: o/
+ leojean890: tiens Saelyos descend un peu de ses 52 =&gt; 50 ^^ certains arriveraient ils à le battre&#160;?^^
+ leojean890: Arnaud.Net par ex^^
+ Arnaud.Net: j'avoue je lui ai pris qques win&#160;:)
+ leojean890: ce n'est que le début vers une victoire certaine hehe ^^
+ Arnaud.Net: 6W 5L sur mon dernier run
+ leojean890: ah nice
+ leojean890: donc bientôt un rival de poids
+ Arnaud.Net: attends j'en relance un autre ^^
+ BlaiseEbuth: Cette grossophobie...
+ leojean890: mais t'as qq loses à côté ce qui fait que tu n'es pas monté aussi haut ^^
+ leojean890: t'es entrain de tuner tes params&#160;?
+ Arnaud.Net: yes
+ leojean890: tu relances pas le même strict&#160;?
+ leojean890: ok
+ leojean890: donc ptet la combi gagnante soon ..
+ Arnaud.Net: avec le radar il me manquait une saloperie de shost dans le coin, et comme je fais pas d'exploration je restais comme un con au milien a la fin ^^
+ BlaiseEbuth: Arnaud.Net_du_75 fait du tunning...
+ leojean890: ah ouais..
+ Arnaud.Net: mdr j'ai mis un aileron a mes busters&#160;:)
+ leojean890: faudrait que je regarde plus de replays pour repérer ces petits soucis ^^
+ leojean890: j'ai de l'explo par défaut quand j'ai rien d'autre à faire moi donc mes mecs se baladent
+ leojean890: pas sûr que j'aie une couverture parfaite, je crois pas d'ailleurs :s
+ leojean890: à vérifier
+ Arnaud.Net: moi j'ai mis random du coup je tourne en rond sur place, ^^
+ leojean890: ah explo par le déplacement random&#160;?
+ leojean890: moi j'ai mis une liste de pts à visiter
+ Arnaud.Net: oui c'est malo j'ai pas géré ça
+ leojean890: que je pourrais agreandir du coup
+ leojean890: bah tu peux encore amélio alors
+ Arnaud.Net: yes 
+ leojean890: bah là Saelyos remonte ^^
+ leojean890: par toi ou andré je ne sais pas
+ Arnaud.Net: ouais il me met 4/0 la
+ leojean890: arf moins bon tuning :s
+ userdanydan: je suis déjà 12051ème en trois jours
+ userdanydan: je suis une terreur en fait
+ userdanydan: haha
+ BlaiseEbuth: T'as battu tout les comptes innactifs&#160;! T'es trop fort&#160;! \o/
+ userdanydan: je pensais pas être aussi bon, ou alors 96% des gens viennent ici pour chatter
+ userdanydan: c'est marrant les battle, ça me motive à coder des algos, mais j'ai l'impression que certains connass
+ userdanydan: connaissent les réponses par coeur
+ b0n5a1: o/
+ BlaiseEbuth: \o
+ domak: o/
+ Zorg1: \o
+ domak: userdanydan beaucoup de devs viennent ici pour les puzzles. Ca rapporte des XP mais pas des CP, et c'est les CP qui comptent pour le classement
+ domak: bon sinon ça va les chasseurs de ghosts?
+ userdanydan: cp?
+ domak: Coding Point
+ b0n5a1: juste après la maternelle
+ userdanydan: coding point?
+ userdanydan: je suis un newbie ici
+ domak: va sur ton profil y'a un '?' à côté du classement
+ b0n5a1: profil?
+ userdanydan: profil??
+ dwarfie: pro phil&#160;?&#160;:)
+ b0n5a1: aktik
+ domak: actif
+ userdanydan: ok, je vois
+ userdanydan: le calcul prend la variable nombre de joueur
+ userdanydan: donc ça a favorisé les premiers inscrits
+ BlaiseEbuth: -&gt; Non
+ b0n5a1: non
+ BlaiseEbuth: C'est recalculé tout les jourz
+ domak: et les dernies contests ont plus de valeurs que les plus anciens
+ userdanydan: pour tout le monde
+ BlaiseEbuth: Bah oui
+ b0n5a1: ha tiens je suis gold sur CB...
+ BlaiseEbuth: trofor
+ userdanydan: ah ok, mais cette nouvelle valeur n'a aucune garantie d'ajuster le retard sur les anciens challenges
+ b0n5a1: non mais j'avais pas trop souvenir de ça ^^
+ userdanydan: oui mais réévaluer le cp va créer une sorte d'inflation
+ BlaiseEbuth: Y'a pas de retard, t'as que les trois meilleurs qui comptent
+ b0n5a1: tain les ifs...
+ userdanydan: on ne peut plus comparer la valeur des cp du passé avec ceux du présent
+ userdanydan: donc, c'est biaisé
+ userdanydan: cqfd
+ domak: si tu le dis
+ BlaiseEbuth: Bien sûr
+ BlaiseEbuth: Pôv petit
+ userdanydan: les gars, je fais des placements ne bourse, je flaire l'arnaque sans calcul
+ BlaiseEbuth: Wé&#160;!
+ userdanydan: ces formules statistiques de réajustement,c'est fait pour faire croire que c'est mathématique et donc irréfutable
+ userdanydan: mais en vérité c'est de l'arnaque sur les centièmes après la virgule
+ BlaiseEbuth: Le truc c'est que t'as décidé que le site était contre toi à partir du moment où t'as eu un mauvais score à ton test...
+ b0n5a1: :grinning:
+ domak: quand ils ont mis en place cette règle j'étais au delà des 1000, avec la règle j'ai du passer dans le top 600
+ userdanydan: j'ai un biais mais au moins je ne fais pas croire qu'il st mathématiquement démontré
+ domak: donc c'est des gros gros centième
+ domak: personne n'a parlé de maths
+ BlaiseEbuth: Personne n'a dit que c'était démontré par quoi que ce soit
+ BlaiseEbuth: C'est un site commu, où y'a un classement pour S'AMUSER, personne n'a parlé de précision absolue...
+ userdanydan: refaite un compte et voyez si vous arrivez au même classement
+ userdanydan: ça sera la démonstration que vous êtes surévalués
+ userdanydan: sauf si vous voulez rester sur vos privilèges
+ BlaiseEbuth: C'est tout vu, y'a des mecs bien mieux classés que moi dans le top 100 que j'ai jamais atteint
+ BlaiseEbuth: qui sont là depuis 1 an
+ BlaiseEbuth: Alors que moi ça fait 7 ans
+ userdanydan: ouais mais c'est peut-être des bots ou des gars qui font des copiers coller des réponses
+ b0n5a1: j'ai un trou de 1 an sans co ici ^^
+ userdanydan: tu ne peux pas le savoir à coup sur
+ BlaiseEbuth: Si ça t'aides à te sentir mieux, crois ce que tu veux
+ userdanydan: non, je m'en fous, je ne fais qu'analyser ce que je vois
+ userdanydan: je suis comme les enfants, je dis ce que je pense
+ domak: grandis...
+ b0n5a1: ce bordel mon code CB
+ userdanydan: on me parle de cp, je vois un calcul, je fais ma conclusion logique
+ dwarfie: pause ... j'ai plus de :popcorn: pour regarder la fiction de l'année ...
+ userdanydan: et ça s'avère vrai
+ b0n5a1: bien fait de pas regarder hier
+ userdanydan: bon, je me casse, je vais profiter de la vie avant le couvre feu
+ b0n5a1: on va repartir de zéro ^^
+ userdanydan: salut, et ne dormez pas avec vos masques&#160;!
+ BlaiseEbuth: A bas la classe privilégiée de CG&#160;! A bas euler le bot&#160;!
+ egaetan: b0n5a1 ... pas mieux
+ BlaiseEbuth: A bas les thèmes clairs&#160;!
+ dwarfie: BlaiseEbuth&#160;: tu crois pas que c'etait une blague belge en fait :D
+ egaetan: oups
+ egaetan: BlaiseEbuth grr
+ b0n5a1: apparemment j'ai fait un peu CB y'a plus de 2 ans héhé
+ BlaiseEbuth: Pas de nationalime ici dwarfie
+ BlaiseEbuth: +s
+ BlaiseEbuth: Coucou egaetan&#160;! o/ :D
+ egaetan: coucou
+ b0n5a1: j'ai raté le début du film...ragage fail test CG&#160;?
+ egaetan: CodeBusters c'est vraiment le truc qui ne fait pas envie&#160;!
+ b0n5a1: bon vu la tête dans le c.. on va fermer CB...je vais encore éditer la mauvaise fenêtre sinon :grinning:
+ Stilgart: egaetan: tu n'auras pas une idée de génie pour éviter le nid de if&#160;? :innocent:
+ egaetan: fait du haskell&#160;?
+ BlaiseEbuth: Ouai b0n5a1. Il a découvert la plateforme lors d'un test de recrutement où il a eu 52%, et depuis il traine ici en alterant entre "je suis trop fort" et "la plateforme me hait"...
+ dwarfie: Stilgart&#160;: je l'ai deja donné l'idée de génie ... ne pas coder de bot ... :D
+ BlaiseEbuth: ^
+ Stilgart: egaetan: je peux remplacer mes ifs par des guards, mais ça reste du if fondamentalement
+ Stilgart: dwarfie: bah non, ça c'est une forêt de 0 if
+ Stilgart: marche pas ton truc :D
+ egaetan: fait une simu Stilgart, ça m'a l'air particulierement adapté
+ dwarfie: euh ... tu vas me forcer a demander une tortue a Automaton2000 la ...
+ Automaton2000: t'es dans quelle ligue&#160;?
+ egaetan: il restera juste "if smog"
+ dwarfie: Automaton2000&#160;: aucune , y'en a pas ... et eme si y'en avait , je le fait pas&#160;;..
+ Automaton2000: je suis pas encore là
+ b0n5a1: j'en suis à 3x move 8000 4500
+ Stilgart: egaetan: dans ma vision, l'état est trop incomplet pour arriver à quelque chose
+ egaetan: oui completment d'acord
+ Stilgart: franchement, j'aurais apprécier qu'il n'y ait pas de fog sur ce contest
+ dwarfie: question ... ne pas le faire ... ca risque pas de me faire sortir des "5%" ... si&#160;?
+ dwarfie: :p
+ b0n5a1: tu peux mettre OFF FOG en debug Stilgart
+ egaetan: en plus le top est déjà squatté
+ b0n5a1: ok je sors...
+ dwarfie: AutomatonNN ... on a besoin d'un avis éclairé ...
+ AutomatonNN: je sais pas ce que tu veux dire :D
+ dwarfie: AutomatonNN pas merci pour ton pas-aide ...
+ AutomatonNN: Si je fais un truc de ma vie de contest de contest je prend les commandes de tout le monde
+ domak: il bloque de plus en plus sur le meta-contest...
+ BlaiseEbuth: Une bière pour moi AutomatonNN
+ AutomatonNN: il faut que tu parles de la lecture de la vie
+ BlaiseEbuth: :o
+ BlaiseEbuth: Life is beer
+ dwarfie: c'est surtout qu'il vient d'avouer faire comme tant dautre ... il se contente de repomper le PostMortem
+ dwarfie: pas vrai AutomatonNN&#160;?
+ AutomatonNN: oui il est pas trop content en termes
+ egaetan: il s'applique encore le PM dwarfie&#160;? celui de qui&#160;?
+ Stilgart: le herd devrait marcher davantage encore dans la version courante
+ dwarfie: aucune idée ... c'est rare que je les regarde ... et CB est vraiment dans le top 3 de ceux que j'aime pas donc encore moins de raison d'aller voir&#160;:)
+ b0n5a1: ++, je sors la chienne, ça me réveillera ^^
+ domak: céquoiquépabien dans CB? (je l'ai pas fait)
+ Stilgart: le nid de ifs
+ BlaiseEbuth: Personellement c'est un sentiment général de "meh"
+ domak: comme dans code à la mode ou pire?
+ BlaiseEbuth: Calm j'avais aimé
+ Stilgart: pendant le contest, il y avait le soucis des gens qui campait sur ta base pour te voler tes fantomes
+ egaetan: ça c'était funky
+ Stilgart: domak: dans CalM j'ai pas juste un nid de ifs
+ Stilgart: egaetan: ou saoulant
+ Stilgart: parce que rajouter du if pour contrer un cheese, saféchié
+ egaetan: il bougeait autant les fantomes dans la vo, j'ai pas ce souvenir
+ BlaiseEbuth: Nan mais là ils essayent de retourner à leur point de départ
+ egaetan: c'est super casse pied
+ BlaiseEbuth: Oui
+ BlaiseEbuth: Je le fais pas du coup
+ BlaiseEbuth: J'ai juste fait chanté mes busters
+ Stilgart: egaetan: ça dépend, ça rend la collecte d'infos plus utile
+ egaetan: oui mais j'en fait pas
+ Stilgart: et ça demande de herd différemment
+ egaetan: alors ça me plombe
+ Stilgart: tu crois que mes 150 lignes de bash elles font quelque chose&#160;?&#160;:)
+ egaetan: oh bazar Tashiqi il campe dans mon camp
+ Stilgart: go go go Tashiqi
+ Stilgart: ta team compte sur toi&#160;!
+ Zorg1: tiens le retour d'egaetan :wave:
+ egaetan: tiens la partie s'arrête trop tôt
+ egaetan: avant que l'on marque le dernier
+ Stilgart: 250 tours c'est trop tôt&#160;?
+ egaetan: Ah ce sont les 250 oui bien sûr
+ egaetan: c'est trompeur quand même le tester dans l'arène
+ egaetan: c'est pas vraiment tester
+ RyanSoldier: Y a t-il un outil pour merger les fichiers du projet un 1 seul&#160;? (C#)
+ [CG]Simon: il est cool le jeu d'optim bulls and cows 2&#160;:-) il parait simple mais pas tant que ça finalement ^^
+ egaetan: les campeurs ça saoule en fait&#160;:(
+ RyanSoldier: Fait pareil, et stun-le avant qu'il rentre à sa base
+ egaetan: mon support il glande pour le moment
+ egaetan: quelle feignasse
+ Zorg1:  demande lui de faire les cafés alors
+ jpgdelain: bonjour a tous, desolé, je suis nouveau sur la plateforme, puis je savoir d'ou viens mon proble en php sur la Descente
+ b0n5a1: il vient de quelquepart entre la chaise et le clavier en général ^^
+ jpgdelain: merci, j'ai trouve la solution
+ egaetan: j'ai pas aidé, mais j'ai pas trollé non plus
+ b0n5a1: je viens de revenir...
+ Zorg1: j'ai même pas essayé, trop fatigué
+ b0n5a1: j'ai du mal aussi ^^
+ Zorg1: bon c'est officiel CB ça me les brise
+ egaetan: c'est SSCC maintenant, non&#160;?
+ Zorg1: si tu veux
+ egaetan: ça me les brise aussi
+ dwarfie: normal ... CB = Casse-Bonbons
+ egaetan: qqn a essayé de bullshit le referee et de stun avec un autre que le support&#160;?
+ BlaiseEbuth: Wé ça fait pop un double hulk.
+ b0n5a1: pff...y'a même pas un WAIT caché pour mettre une commade par défaut initiale
+ leojean890: j'ai pas essayé ça
+ b0n5a1: invalid input
+ b0n5a1: c'est con...
+ leojean890: tiens Andrde.Huynh arrive à faire baisser Saeylos
+ leojean890: qui est pas passé en dessous des 50
+ b0n5a1: :rotating_light:
+ philRG: c rude le métier de tailleur d'ifs
+ Alshock: alors uqe moi j'en plante et c'est vachement plus chaleureux
+ BlaiseEbuth: Les plantes c'est cool, j'aime ça. Faut en profiter, dans 2à ans y'en aura plus.
+ BlaiseEbuth: *20
+ Bob: les plantes ça dépend quoi
+ Bob: le houblon, très bien
+ Bob: tout ce qui permet de faire du malt, parfait
+ Bob: le riz, ça joue
+ Bob: le raisin, yes
+ Bob: les trucs qui vont dans le Jaegermeister, on peut les passer à l'agent orange
+ egaetan: la canne à sucre
+ Bob: &lt;3
+ b0n5a1: o/ Bob
+ Bob: o/
+ b0n5a1: nan, c'est un médicament ^^
+ Zorg1: ah c'est un truc "exilir du père Machin" avec toutes les plantes qui trainent dans le potager
+ Zorg1: *elixir
+ b0n5a1: ouais y'a des dizaines de plantes/épices dans ce truc
+ Bob: je laisse ça aux gens qui se sentent malades
+ b0n5a1: bah vu ce qu'il y a dedans (enfin secret...) ça tient plus du médoc multi usage qu'autre chose
+ Zorg1: oui c'est de la gnôle dans laquelle tu fais macérer des orties, des pissenlits, de la menthe, de la sauge, du thym, du romarin ...
+ Bob: je suis pour la simplicité
+ Zorg1: t'ajoutes un peu de pisse de chat et c'est #1
+ Bob: single malt, besoin de rien d'autre
+ Zorg1: oui mais grâce à la tisane du père Zorg tu peux vivre 200 ans
+ Bob: ouais enfin si c'est pour vivre 200 ans en buvant de la pisse de chat, merrci
+ Bob: -r
+ Zorg1: faut savoir faire des sacrifices ^^
+ Bob: Oui Mais Non (tm)
+ Bob: si j'étais du genre à faire des sacrifices je serais resté dans ma boîte
+ Bob: note, j'ai encore rien signé
+ domak: Fini le pétrole?
+ Zorg1: il s'est remis au charbon
+ Zorg1: le SteamPunk c'est mieux que le DieselPunk
+ Bob: sans être fini, le pétrole a clairement pas le vent en poupe
+ Bob: et surtout nous on est le coyote dans un épisode de bip-bip
+ domak: Du coup t'as trouvé dans quel secteur?
+ Bob: le piaf a pris son virage à fond la caisse et nous on a fait un tout droit au-dessus du canyon
+ Bob: là on est encore à pédaler dans le vide en se disant que tout va bien
+ Bob: j'ai pas encore spécialement cherché, en fait :D
+ Bob: CV posé ici ou là au gré des opportunités immédiates chez des copains
+ domak: ah  ok j'avais cru que tu passais des entretiens
+ Bob: pour le moment j'attends encore du retour de la RH sur mes demandes pour la RC
+ domak: RC?
+ Bob: rupture conventionnelle
+ domak: elle va te proposer un abandon de poste...
+ Bob: non, ça va
+ Bob: là à vue de nez ils essayent de trouver des gens qui seraient partis de toute façon pour essayer de passer sous la barre du PSE
+ Bob: habituellement le groupe ne propose pas de RC
+ Zorg1: une RH qui propose un abandon de poste ... je voudrais bien voir ça ^^
+ Bob: mon prof de basse d'il y a 20 ans avait fait ça
+ Bob: en accord avec sa boîte
+ Bob: la RC n'existait pas à l'époque
+ domak: <a rel="nofollow" class="external free" href="https://twitter.com/Laullie/status/1352490383322836999">https://twitter.com/Laullie/status/1352490383322836999</a>
+ Bob: l'abandon de poste faut aussi être en bons termes avec sa boîte, sinon elle peut te faire chier
+ Bob: genre elle peut décider de ne pas te rémunérer puisque tu ne viens pas, mais de ne pas te licencier quand même, donc tu ne peux pas vraiment chercher autre chose
+ egaetan: oui et ça ne lui coute pas grand chose de faire ça
+ Bob: sur ce je vais éteindre la machine
+ Bob: bon week-end les choupis
+ b0n5a1: bon week end
+ Zorg1: bon weekend
+ thesyd: salut les nerds
+ Zorg1: tiens voilà top hacker et sa capuche ^^
+ b0n5a1: en petit dans le chat ça fait étron
+ Zorg1: ^^ j'avoue que j'ai zoomé
+ b0n5a1: tain la motiv elle vient pas sur le CB like
+ BlaiseEbuth: Mais le faites pas...
+ BlaiseEbuth: Ca rapporte quedalle en plus...
+ b0n5a1: dixit le mec qui hide et incite les autres à rien faire pour gratter des places...diablotin&#160;!
+ b0n5a1: ^^
+ BlaiseEbuth: Ouai. Vous allez rien comprendre quand je ferais mon submit... Croisage d'effluves et tout.
+ BlaiseEbuth: En attendant les busters chantent...
+ Zorg1: je savais bien qui avec des IA hiders pour récupérer le 1er prix
+ BlaiseEbuth: Une clim sony ça attire du monde...
+ BlaiseEbuth: Le deuxième c'est un magazine nintendo, et le troisième&#160;?
+ b0n5a1: casque de chantier -30 dB
+ Zorg1: y avait plus le colori minium de dispo&#160;?
+ b0n5a1: gné, c'est quoi ça, le nom latin d'un piaf&#160;?
+ b0n5a1: ^^
+ Zorg1: de l'oxyde de plomb, couleur orange rouge pétante
+ Zorg1: "orange minium"
+ b0n5a1: erf, ok
+ Stilgart: Automaton2000: pète les plombs&#160;!
+ Automaton2000: il faut que j'aille chercher mes gamines a l'ecole
+ Stilgart: pas mal&#160;:)
+ BlaiseEbuth: :scream:
+ b0n5a1: panique dans les rues...
+ Zorg1: il nous cache des trucs, Automaton2000
+ Automaton2000: je ne sais pas ce qui cloche&#160;?
+ BlaiseEbuth: pâques
+ b0n5a1: aller chercher ses gosses en Goliath...
+ BlaiseEbuth: Ouah&#160;! Sur CG for work on peux pas supprimer son compte sans les contacters&#160;! :scream:
+ Zorg1: ça ne m'étonnes pas en fait
+ b0n5a1: ça garanti le feedback minimum de la demande
+ dwarfie: quel feedback ...? tu sort "RGPD" et c'est marre ...
+ BlaiseEbuth: Bah ils garderont un compte bidon à mon nom... :grin:
+ b0n5a1: ça reste un feedback ^^
+ dwarfie: non , c'est une menace ...
+ b0n5a1: l'un n'empêche pas l'autre
+ Zorg1: bah si tu leur demande il le font
+ Zorg1: et normalement ils suppriment au bout de 5 ou 2 ans d'inactivité (je ne sais plus la durée)
+ Zorg1: tiens il a remit sa fille chat l'autre streamer
+ Zorg1: (en plus je vois pas trop l'intérêt d'avoir un truc qui cache l'écran, mais bon)
+ b0n5a1: ha freeman, je l'ai toujours vu avec
+ b0n5a1: elle a un peu des spasmes là...
+ <b>**b0n5a1 veut pas savoir...</b></p><p><img src="/a/16542412157988" /> Zorg1: bah il avait changé ces derniers temps
+ b0n5a1: ok
+ Zorg1: "I program using the Haskell programming language because I care about writing high quality software."
+ b0n5a1: c'est un smurf de qqun ^^
+ b0n5a1: qui fait des trucs en vrai et tout
+ Zorg1: :D
+ Zorg1: ah mais il fait des CoCs en Rust
+ b0n5a1: tain j'ai encore rien vraiment écrit et c'est déjà plein de ifs
+ Zorg1: oui j'avais repris mon code merdique de CB
+ Zorg1: en adaptant
+ b0n5a1: j'ai vite regardé tout à l'heure et me suis dit que valait mieux repartir de 0
+ Zorg1: mais là bof pas vraiment envie d'aller plus avant
+ Zorg1: bon Automaton2000 ton analyse sur le CB de SopraSteria&#160;?
+ Automaton2000: et il le fait déjà
+ egaetan: Automaton2000 déjà fait tu veux dire&#160;?
+ Automaton2000: c'est moi ou le chat lag
+ b0n5a1: c'est toi
+ userdanydan: c'est pas top Java pour le mode shortest
+ userdanydan: il y a un mode longest?
+ RyanSoldier: Re, existe-t-il encore un tools pour merger un projet C# en un fichier .cs&#160;?
+ Zorg1: les gens s'en bricolent un en général
+ Zorg1: après je sais pas si quelqu'un en a publié un
+ RyanSoldier: Me souviens qu'il y avait ça il y a qqs années, pratique pour travailler en dehors de l'ide CG.Mais je reviens après une longue absence et je n'ai plus mes liens.
+ RyanSoldier: Ok, ok. mes rapides ne m'ont donnés que des résultats sur d'autres langues.
+ RyanSoldier: rapides recherches*
+ b0n5a1: ou pour CG ty te mets direct en single file en local et tu t'emmerdes pas...
+ RyanSoldier: C'est le cas mais pour les plus gros contests ça fait vite un long fichier
+ RyanSoldier: Je voulais justement rester sur un projet bien structurer et merger en post-build dans un program.cs qui est lié à l'IDE CG via le CGSync.
+ tekki: AutomatonNN fais pas ton rebelle
+ AutomatonNN: d'accord merci Automaton2000
+ Zorg1: AutomatonNN le bot qui se drogue
+ AutomatonNN: oui
+ Zorg1: :D
+ LantarSidonis: Il y a-t-il une raison particulière qui expliquerai qu'il n'y ai que 4 code-golf&#160;? 
+ b0n5a1: ceux présents se prêtent particulièrement à du code très court, pas d'autres
+ LantarSidonis: mais il y en a d'autres
+ b0n5a1: par d'autres j'entends les officiels CG
+ LantarSidonis: (oui j'entends bine)
+ LantarSidonis: *bien
+ LantarSidonis: il n'y a pas de moyen de proposer un puzzle officiel pour qu'il soit ajouté au code-golf
+ b0n5a1: après tout est golfable, mais bon avoir un truc final de 1000 chars golfé ça doit être vomitif/chiant
+ LantarSidonis: oui sans aller jusque la
+ b0n5a1: déjà comme ça je suis pas fan de ce genre de truc
+ egaetan: moi non plus, java powa
+ LantarSidonis: il y a des gens pas fan de contest, d'autres pas fan de puzzles, d'autres encore pas fan de CoC
+ LantarSidonis: Finalement il y en a pour tous les goux
+ LantarSidonis: gouts*
+ b0n5a1: en java j'en ai golfé un ou deux
+ BlaiseEbuth: même pour les goûts de merde ^^
+ LantarSidonis: et comme il y a un classement par language le java n'est pas desavantagé
+ BlaiseEbuth: Tu veux dire pas plus que d'habitude&#160;?
+ b0n5a1: 14e Thor, 40e temp, java
+ b0n5a1: sans system...
+ b0n5a1: tain c'est moche
+ LantarSidonis: enfin bon tout ca pour dire que ca pourrait etre un vote populaire qui deciderai quel puzzle vaut le coup en golf, plutot que d'avoir arbitrairement choisis 4
+ BlaiseEbuth: Genre on est en démocratie...
+ BlaiseEbuth: Iléfou lui
+ LantarSidonis: les contributions c'est quoi sinon un vote&#160;?
+ b0n5a1: dwarfie t'as un client&#160;!
+ BlaiseEbuth: Oui. On laisse les gens faire leur merde dans les coc, et les puzzles, mais c'est tout. Le reste c'est pour l'élite
+ egaetan: voilà c'est ça
+ BlaiseEbuth: b0n5a1&#160;?
+ LantarSidonis: quand tu dis "les puzzles" en fait tu inclus optimisation et bot-programming, du coup "le reste" je vois pas trop ce que c'est
+ b0n5a1: quoi le client pour dwarfie BlaiseEbuth&#160;?
+ b0n5a1: contribs/ votes....
+ BlaiseEbuth: Nan puzzles c'est puzzles
+ b0n5a1: ça énerve les nains
+ BlaiseEbuth: Ah
+ BlaiseEbuth: Puzzle&#160;: <a rel="nofollow" class="external free" href="https://www.codingame.com/training">https://www.codingame.com/training</a>
+ dwarfie: mince ... moi qui pensait que c'etait pour le golf ... de toutes facons , j'ai deja fait mon choix ... pour le 5eme ca sera ascii art&#160;:^
+ dwarfie: :p
+ b0n5a1: unicode art...
+ dwarfie: b0n5a1 ... desole mais .... PAN t'es mort
+ b0n5a1: tain y'a pas encore eu ça ^^
+ b0n5a1: bin quoi on est en 2021...
+ b0n5a1: je sors...
+ LantarSidonis: mais du coup les optimisations et bot-programming non-officiels ils sortent d'ou&#160;?
+ BlaiseEbuth: de l'élite
+ b0n5a1: de contribs
+ BlaiseEbuth: ^^
+ dwarfie: des 5% qui sont méprisés ...
+ BlaiseEbuth: Oui mais c'est des contribs SDK, y'a un filtre implicite contre les noobs et les flemasses ^^
+ <b>**dwarfie va se servir un grand verre de biere de miluej pour oublier ...</b></p><p><img src="/a/23940037830772" /> LantarSidonis: Donc le vote populaire s'applique dans toutes les categories sauf code-golf...
+ BlaiseEbuth: Hmm... Oui en gros
+ b0n5a1: l'impression d'être masochiste à faire ce contest...
+ BlaiseEbuth: c'est pas le cas&#160;?
+ b0n5a1: c'est du stoicisme
+ b0n5a1: ou pas
+ b0n5a1: j'ai rien push encore ^^
+ BlaiseEbuth: Je le remet pour le plaisir: <a rel="nofollow" class="external free" href="https://imgur.com/hR4ZMFn">https://imgur.com/hR4ZMFn</a>
+ <b>**dwarfie ne cliqueras meme pas ... vu qu'il croit savoir ce que c'est </b></p><p><img src="/a/56474303350574" /> BlaiseEbuth: ^^
+ b0n5a1: LOL "Congratulations
+ Zorg1: y a un vote populaire sur CG maintenant&#160;?
+ BlaiseEbuth: Nan c'est LantarSidonis qui est en plein rêve utopiste :p
+ LantarSidonis: c'est Automaton2000 qui parlait de soupe
+ Zorg1: parce que vu ce qu'a donné le dernier sondage sur les nouveaux langages ^^
+ Automaton2000: il est passé dans la nuit
+ dwarfie: parce qu'il sait pas que les votes populaires , quand y'en a ici , c'est facon trump ... y'a qu'a voir comment D est arrivé ici :rofl:
+ Zorg1: d'ailleurs on le voit plus celui qui trollait à ce sujet sur le forum
+ <b>**dwarfie et zorg1 avec la meme idée en meme temps :D*</b>
+ dwarfie: Zorg1&#160;: non , il doit etre mort en meme temps que son langage fétiche en fait ...
+ Zorg1: ah c'était un mort vivant sur le forum alors :p
+ Zorg1: paske bon D ...
+ BlaiseEbuth: Il est comme la sauce: mort né
+ b0n5a1: y'a un mec qui fait du D parfois en contest...
+ b0n5a1: je crois
+ b0n5a1: y'a pas d'anim de fin de partie parfois on dirait
+ b0n5a1: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/523892552">https://www.codingame.com/replay/523892552</a>
+ LantarSidonis: "WAIT&#160;!" "WHAT&#160;?"T'as inclus des dialogues digne d'Audiard
+ b0n5a1: bah je vois ceux qui ont pas eu une "commade" d'affectée comme ça
+ b0n5a1: commande
+ b0n5a1: WAIT par défaut au départ
+ LantarSidonis: Oui oui je procède de meme
+ BlaiseEbuth: Je préfère le miens...
+ LantarSidonis: voyons voir...
+ LantarSidonis: Hahaha on vois le mec qui a passé plus de temps sur les dialogues que l'IA
+ BlaiseEbuth: Quelle IA&#160;?
+ LantarSidonis: mais j'aime bien leur formation en chorale
+ BlaiseEbuth: Je le fais pas le contest.
+ BlaiseEbuth: Je mets juste l'ambiance
+ b0n5a1: default
+ Zorg1: ça paie bien Ambianceur de chat&#160;?
+ LantarSidonis: +1
+ BlaiseEbuth: Faut croire. Sinon je prendrais pas sur moi pour vous supporter toute la journée...
+ Azkellas: Standard Output Stream: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/da326b50-0a6f-44a6-b99c-132f9754616e">http://chat.codingame.com/pastebin/da326b50-0a6f-44a6-b99c-132f9754616e</a>
+ Azkellas: nice
+ Azkellas: ah nice le pastebin ausi
+ BlaiseEbuth: :clap:
+ Azkellas: Standard Output Stream:BUST 11
+ Azkellas: Et je me retrouve à bust un ghost hors range sans lui enlever de stamina
+ BlaiseEbuth: Bah en bianire c'est valide
+ BlaiseEbuth: *binaire
+ Azkellas: bon c'est du à une erreur de mon côté mais le referee fait quand même n'mporte quoi
+ egaetan: Azkellas, quoi toi aussi&#160;!
+ Azkellas: Bon, quand je fais share replay j'ai pas le même standard output stream (mais le même bug visuel)
+ Azkellas: moi aussi&#160;?
+ b0n5a1: 2 catcher qui chope le même ghost ça part en infini try
+ b0n5a1: va falloir assomer
+ egaetan: pas le choix
+ b0n5a1: bon aller premier push avec ma daube
+ b0n5a1: on est que 99&#160;?
+ b0n5a1: lol
+ Azkellas: Excellent le go home egaetan :D
+ egaetan: :D
+ Azkellas: yay je bats l'ia default
+ leojean890: t'es 21eme, c'est équivalent du #3 d'hier soir, ça avance bien quoi^^
+ Azkellas: donc c'est relativement actif quand même ok
+ Arnaud.Net: PS5 powa ^^
+ leojean890: je sens que le lvl du top va monter assez vite now vu le nombre de participants qui s'investissent pas mal
+ leojean890: ouais c'est actif mais hier c'était une dizaine et mtn genre 2à-30 très actifs
+ leojean890: 20-30*
+ Arnaud.Net: on devrait interdire les nouvelles inscriptions après dimanche&#160;:)
+ Alshock: pourquoi donc&#160;?
+ leojean890: allez arnaud tu vas détrôner Saeylos&#160;;)
+ leojean890: courage
+ leojean890: mais là il remonte^^
+ Arnaud.Net: pas encore pour ce soir
+ leojean890: 48.XX =&gt;=&gt; 49.XX
+ Arnaud.Net: mais je me rapproche&#160;:)
+ leojean890: moi je baisse en rank là mais j'ai qq idées d'amélio à tester
+ leojean890: ouais bientôt s'il modifie pas ^^
+ Arnaud.Net: le mec ça fait 3 jours qu'il bosse sans push, il va nous lacher un truc à 60 d'un coup ^^
+ leojean890: ptet ouais ^^
+ leojean890: il en a le niveau en plus;)
+ leojean890: çadépend s'il bosse dessus à fond ou pas^^
+ Arnaud.Net: je suis plus qu'à 2 pts :p
+ I_like_JS: Bonne chance&#160;!
+ leojean890: ptet ce soir le dépassement donc^^
+ leojean890: on est 102 now
+ Arnaud.Net: je sens pas l'idée de ouf ce soir je vais me coucher avec le smile ça sera mieux&#160;:) bn&#160;!
+ leojean890: y'a pb4 =&gt; ça va être chaud d'avoir la ps5^^
+ Arnaud.Net: ha le ba...
+ leojean890: bn^^
+ Arnaud.Net: il est trop fort lui
+ leojean890: oui c'est top1 quasi assuré^^
+ Azkellas: Ils te mettent la pression pb4 :D
+ Arnaud.Net: c'est le genre de mec quand tu lis son postmortem tu te rends comtpe que t'es loin, tres loin
+ Alshock: ok donc maintenant j'ai mes chances contre le boss UTTT old
+ leojean890: ouais mdr
+ leojean890: comme Agade avec ses évals^^
+ Arnaud.Net: trop ca&#160;!
+ leojean890: y'a des gens talentueux, que veux tu :P:P
+ Alshock: mais pas nous :shrug:
+ leojean890: Alshock UTTT je l'ai pas encore fait bien j'ai un truc qui tourne 5eme silver mdr
+ leojean890: Azkellas tu viens de commencer et t'es déjà 16eme&#160;?^^
+ b0n5a1: j'ai un truc qui fait que min/max sur chaque sous-grille en m'en foutant de la big grille je crois
+ leojean890: t'as l'air d'être super rapide:p
+ Alshock: b0n5a1et ça se défend ça&#160;?
+ b0n5a1: c'est gold je crois, je vais vérifier
+ leojean890: b0n5a1 y'a un peu de ça dans mon heuristique aussi mais pas que xD
+ Alshock: moi j'ai découvert hier que mettre des heuristiues spécifiques sur la simu peut aider un MCTS, avant je croivait que la meilleure arme c'est l'augmentation du nombre de rollouts (avant le NN)
+ leojean890: je joue un peu les grosses grilles et un peu les petites avec des if et éval et ça fait 5eme silver c'est pas au point mdr j'ai fait ça il y a un an^^
+ b0n5a1: 481 gold
+ leojean890: les heuristiques ça aide tjr
+ leojean890: si elles sont bonnes
+ b0n5a1: ça date de plus de 2 ans apparemment
+ leojean890: même en parallèle d'une bonne simu et algo de recherche
+ Azkellas: jsp, mon ia fait rien de grandiose
+ Azkellas: Mais là j'ai le chat qui me fait comprendre qu'il faut aller se coucher, on continuera demain je sens
+ Alshock: bon allez, bats-je mon moi en arène&#160;?
+ leojean890: sans être grandiose t'es monté vite quand même^^
+ leojean890: après on peut tjr améliorer of course
+ b0n5a1: tain le viewer quand tu "wait" après suck ça continue à suck à l'affichage
+ leojean890: c'est skyyker qui va doubler Saeylos en premier on dirait^^
+ leojean890: à vérifier of course xD
+ b0n5a1: .
+ Alshock:&#160;!
+ b0n5a1: 504
+ b0n5a1: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/523913172">https://www.codingame.com/share-replay/523913172</a>
+ b0n5a1: à partir de 194...jedi land
+ b0n5a1: c'est pété les replay
+ Alshock: bah là sur UTTT j'ai submit et j'ai 0 feedback
+ Alshock: Encore de la faute des ptits jeunes qui jouent à CB ça
+ b0n5a1: ha ça remarche
+ b0n5a1: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/523913172">https://www.codingame.com/replay/523913172</a>
+ b0n5a1: ou pas
+ leojean890: Azkellas 8eme déjà tu traces&#160;;)
+ Azkellas: Le problème quand tu montres trop, c'est que tu finis par affronter saelyos
+ leojean890: il est violent ouais^^
+ leojean890: les autres l'ont fait baisser il était à 52
+ leojean890: ça se resserre
+ leojean890: pdt lgtps y'avait 6 de ELO d'écart
+ Azkellas: Bon cette fois ci c'est pour de vrai, bonne nuit
+ leojean890: bn:)
+ Alshock: C'est très con, mais j'aime graphiquement cette game&#160;: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/523924681">https://www.codingame.com/share-replay/523924681</a>
+ leojean890: tryhard nocturne =&gt; remonter #9

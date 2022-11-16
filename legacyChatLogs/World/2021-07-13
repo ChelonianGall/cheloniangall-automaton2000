@@ -1,0 +1,415 @@
+ Horizontalx: i love clash of code 
+ IKEJIME: is c99 good to learn while you are learning c 
+ Superhero25e: Hi. i am new to coding. I heard they also teach coding here apart from the challanges
+ DaNinja: select Activities &gt; Learn from the site menu
+ FriendlyKh: hey guý
+ FriendlyKh: hey uys
+ FriendlyKh: my gods
+ phucdeptrai: hey
+ FriendlyKh: hey
+ FriendlyKh: any one here joins coding escape?
+ helloeason: hi 
+ FriendlyKh: hi
+ helloeason: i leran C
+ FriendlyKh: oh
+ FriendlyKh: ok
+ patrisia_X: play now?
+ FBF_Luis: hey guys, does anyone here knows where I can learn Qt5?
+ FBF_Luis: tutorials/discord groups/books etc...
+ KiwiTae: <a rel="nofollow" class="external free" href="https://doc.qt.io/">https://doc.qt.io/</a> ^
+ FBF_Luis: thanks&#160;:)
+ Socksfor2: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/1862505a12c95a8a06e955f923ded094621cdc6">https://www.codingame.com/clashofcode/clash/1862505a12c95a8a06e955f923ded094621cdc6</a>
+ Socksfor2: join
+ derjack: oO
+ Marchete: Oo
+ NaSaPaKri: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/71265f437558a2e1cdd0c3d071ff33a8efd7">https://www.codingame.com/contribute/view/71265f437558a2e1cdd0c3d071ff33a8efd7</a>
+ dbdr: \o
+ dbdr: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/569960510">https://www.codingame.com/replay/569960510</a>
+ dbdr: strange result, scores are usually closer at the top. I wonder if Agade has a bug
+ AntiSquid: did anyone join when you ordered them to? Socksfor2 
+ derjack: well this noob also has low score <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/569860986">https://www.codingame.com/share-replay/569860986</a>
+ dbdr: :DI expected I would be the noob
+ AntiSquid: does it have something to do with picking wrong branch on the search tree&#160;?
+ derjack: picks wrong seeds from right branch
+ Marchete: unvisited branches
+ Marchete: when I got something like  "NEW ROOT: Visits:1/22463 = 0%"
+ Marchete: that's a bad thing
+ Marchete: this means the enemy did a move I barely tested
+ Marchete: neither on this game and probably not on training
+ derjack: and that move was good?
+ Marchete: he won, so it was good
+ Marchete: oware is good for "prediction"
+ Marchete: I usually have +80% of tree reuse
+ Marchete: meaning that my move+enemy move were well predicted
+ Marchete: but at some cases it drops a lot
+ Marchete: to &lt;7%
+ Marchete: so it's a terrible prediction
+ Marchete: maybe it's a bad exploration, maybe more matches fixed that
+ Marchete: but I'm unsure
+ martinpapa69: Marchete I too tried your alphazero implementation. my pc has a 10 years old processor, and it does not have avx2, but intel provides an emulator, so now it looks like  it's training :D but i assume the training will be much slower than on a native avx processor
+ dbdr: policy_categorical_accuracy: 0.7526
+ dbdr: so that's 75% just from the NN, search should help. but then again it's against itself, a real opponent might behave differently :D
+ Marchete: :thumbsup:
+ Marchete: martinpapa69 if winrate is +90% at first generations it's working
+ dbdr: I think it reaches 80% after more training
+ Marchete: dbdr that can be a lot of inbreeding
+ dbdr: yeah
+ Marchete: and it doesn't ensure at all exploration
+ Marchete: in fact I'm having troubles to reach the same winrate than in arena
+ Marchete: I'm trying other things
+ Marchete: but the bot seems to see all possible start moves as losses
+ Marchete: no matter the position
+ Marchete: losses as 0.0x
+ dbdr: all moves are losses? as in the starting position is a loss?
+ Marchete: are you still working on it dbdr?
+ Marchete: yes
+ dbdr: I stopped during the week-end, but looking at it again now
+ Marchete: I'm trying other stuff
+ dbdr: that sounds like a bug, no?
+ Marchete: regularization, batchnorm etc
+ martinpapa69: okay. curretly im at the training sample generation step. I set MATCHES_PER_GENERATION to 1k. how much does it take on your processor to generate this many samples&#160;?
+ Marchete: it's clearly a bug
+ Marchete: 1k matches? not a lot
+ Marchete: it depends on TRAIN_MCTS_ITER
+ Marchete: but less than 5 min?
+ Marchete: around that
+ Marchete: also depends on THREADS
+ Marchete: I usually use 6 to 9 threads
+ dbdr: wasn't TRAIN_MCTS_ITER set with a default value?
+ Marchete: dunno
+ martinpapa69: i dont think it was
+ Marchete: I usually use 1000 .. 1500
+ martinpapa69: i set it to 2k
+ Marchete: it's ok
+ martinpapa69: THREADS=6 
+ Marchete: that depends on your CPU
+ martinpapa69: its a 4 core HT processor
+ Marchete: could be
+ derjack: and it doesnt have avx2 eh
+ martinpapa69: but im rly curioes much slower the avx2 emulation will be than the native one
+ Marchete: you can use AVX
+ Marchete: check if fma exists on AVX
+ Marchete: but if you have an emulator that's easier
+ Marchete: as I said, just ensure it's learning at first generations
+ Marchete: usually &gt;90%
+ Marchete: if not, something is off
+ martinpapa69: my processor does support avx. does it require code modification to run it on avx, instead of avx2?
+ dbdr: as recurs@ said, even if something is off it will probably learn, just less well. the 'magic' of NNs
+ Marchete: I know
+ Marchete: but to be sure it works, better expect &gt;80% winrate at gen1
+ Marchete: at least without any weird config
+ dbdr: I always get 100%
+ Marchete: sometimes is 99.99%, like 1 draw
+ dbdr: right
+ Marchete: but that's a good initial sign
+ Marchete: even with near zero training (1 epoch to speed up)
+ martinpapa69: i tried two different alphazero implementations to integrate oware. but none seemed to work for me
+ martinpapa69: days of training, still was not able to beat mcts bot
+ dbdr: which other implementations?
+ martinpapa69: alphazero-general and alphazero-gomoku on github
+ dbdr: alphazero-general is pure python, no?
+ dbdr: search will be really slow
+ dbdr: the NN might not compensate that
+ martinpapa69: yes, but i assume after days of training it should slow some signs of intelligence :D
+ dbdr: if it improves it has intelligence. it's just one part of the whole bot
+ martinpapa69: ye it rly slow it takes like 10-20 seconds to run a game until the end with 300 mcts simulations/round
+ dbdr: ah ok, you don't use time control
+ dbdr: then speed does not affect playing strength
+ martinpapa69: *the framework i use. but ye its a constant
+ dbdr: oh, csircsip changed name again :D
+ derjack: hm?
+ pavlik17: this website it 2hard for me, any website i can practice JavaScript for beginers?
+ Marchete: alphazero-general winrates:
+ Marchete: <a rel="nofollow" class="external free" href="https://github.com/suragnair/alpha-zero-general/raw/master/pretrained_models/6x6.png">https://github.com/suragnair/alpha-zero-general/raw/master/pretrained_models/6x6.png</a>
+ Marchete: a damn 90% winrate vs a random bot in 5 generations
+ Marchete: 40% winrate in gen2
+ Marchete: like... worse than a random
+ Marchete: who is csircsip now?
+ derjack: oh my
+ Marchete: how can you train and be worse than a random?
+ Marchete: that's only mean... it's wrong at some point
+ dbdr: maybe it overfitted badly early on
+ dbdr: I agree it does not look good
+ Marchete: yet the repo has like 2500 stars
+ dbdr: it has good keywords
+ Marchete: also, 3 days on a nvidia tesla K80...
+ Marchete: they are from Stanford, I would expect a better paper than <a rel="nofollow" class="external free" href="https://github.com/suragnair/alpha-zero-general/raw/master/pretrained_models/writeup.pdf">https://github.com/suragnair/alpha-zero-general/raw/master/pretrained_models/writeup.pdf</a>
+ Marchete: pitplay vs a random is a nonsense
+ dbdr: students
+ Marchete: from Stanford
+ Marchete: but yeah, students
+ dbdr: they compare with "minimax agent with hand-crafted feature"
+ dbdr: they beat it too
+ Wontonimo: it really bugs me when papers don't put a published date anywhere convenient grrr  
+ dbdr: yeah. you need to guess from the references
+ derjack: there is some a0 in julia and they made effort to make it available to test against vanilla mcts
+ Wontonimo: you mentioned a repo, plz share a link 
+ derjack: repo?
+ derjack: welp <a rel="nofollow" class="external free" href="https://github.com/jonathan-laurent/AlphaZero.jl">https://github.com/jonathan-laurent/AlphaZero.jl</a>
+ derjack: they test c4 against 1000 mcts and 5-ply minimax
+ TheMadSuperstarEater_2483: hi
+ Marchete: that repo seemed good, I've read it sometimes and it seems very complete
+ derjack: and gets 100% against them in 5 iterations (generations?)
+ TheMadSuperstarEater_2483: are you real or bot?
+ Marchete: each iteration was 1 hour if I recall
+ derjack: still better than beating random 60% after few hours
+ Marchete: 3 days*
+ Wontonimo: TheMadSuperstarEater_2483 , we are a hybrid real-bot
+ RoboStac: yeah, python's slow
+ Wontonimo: ha ha ... is it ever!
+ RoboStac: my original oware version was based on that alphazero-general, with the gameplaying done externally
+ TheMadSuperstarEater_2483: Wontonimo, good to hear that &lt;3 
+ Wontonimo: my first attempt at MCTS was in UTTT using python.  550 rollouts per turn.  Compared to my c++ which is 55k per turn
+ Marchete: <a rel="nofollow" class="external free" href="http://numba.pydata.org/">http://numba.pydata.org/</a>
+ Marchete: that thing boosts python a LOT
+ Wontonimo: :thumbsup:
+ Marchete: I've tested it on some samples and it was like c++
+ TheMadSuperstarEater_2483: I am a bot and here to help you. Press 9 for English.
+ Marchete: but it has its limitations
+ derjack: is this like pypy?
+ Marchete: a jit compiler
+ Marchete: I don't know if pypy has numpy acceleration
+ Marchete: if yes , then it's the same
+ Wontonimo: back to training a NN and it doing worse than random when using RL, you can definitely get model collapse.
+ Wontonimo: there are a few anti-patterns to combat that
+ Marchete: you have a sh*t RL
+ Marchete: it's impossible to do it worse than random
+ Marchete: you must purposely do it worse than random
+ dbdr: sign error&#160;:)
+ Wontonimo: if your nn is only battling its prior self, and if its prior self has a horrible cognitive blind spot that it exploits and starts a feedback of focusing on just that one blind spot. Reasonable regularization helps.  
+ Marchete: then stop, review, debug and once you are sure it works
+ Marchete: then publish
+ Wontonimo: i agree Marchete, it would be pretty sh*t RL
+ dbdr: what's regularization?
+ Wontonimo: constraining the weights of the NN such that they stay within "regular" values
+ Marchete: tldr: for me it's some way to avoid complex explanations for simple stuff
+ Marchete: L2 regularization: Add some kind of noise depending on weight values, 
+ Marchete: squared noise
+ Wontonimo: square cost*
+ Marchete: and on loss calculation the system adjust it (if done with model.fit)
+ Marchete: I mean Wontonimo, I explain it for dummies (no offense :D)
+ Marchete: many explanations are math hardcore
+ Wontonimo: :D
+ dbdr: Marchete you timed out: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/569974310">https://www.codingame.com/replay/569974310</a>
+ Uljahn: for dummies  i'd recommend this blog <a rel="nofollow" class="external free" href="https://machinelearningjourney.com/index.php/blog">https://machinelearningjourney.com/index.php/blog</a>
+ Marchete: and I was winning
+ dbdr: maybe. I have a small stack&#160;:)
+ Wontonimo: oh, that's a nice link Uljahn&#160;! 
+ Wontonimo: there are many pages of articles ... nice
+ Marchete: <a rel="nofollow" class="external free" href="https://machinelearningjourney.com/index.php/2021/01/15/max-norm-regularization/">https://machinelearningjourney.com/index.php/2021/01/15/max-norm-regularization/</a>
+ Marchete: one Q
+ Marchete: max norm works for negatives?
+ Marchete: like if I put 2.0 it tries to limit to -2.0 to 2.0?
+ RoboStac: are you trying to 8bit your network?&#160;:)
+ Marchete: I'm trying to achieve reasonable winrates with limited ranges, yes
+ Marchete: but it stays at like 5th-10th
+ Marchete: also I'm still trying my 16bit
+ Marchete: still not 8 bit
+ Marchete: but as a consequence of that quantization limits
+ Marchete: I was checking different ways to limit   the operating range
+ Marchete: I've read about kernel constraints like max norm
+ Marchete: but I'm unsure
+ Marchete: maybe I broke my bot with all these changes 
+ Wontonimo: have you looked at this <a rel="nofollow" class="external free" href="https://www.tensorflow.org/lite/performance/post_training_integer_quant">https://www.tensorflow.org/lite/performance/post_training_integer_quant</a>
+ Marchete: yes, but still never used it
+ Marchete: maybe I'd go that way
+ Marchete: but I still think that pure int16 can bea feasible
+ Marchete: it's just a matter of putting the right range and adjust clipping relu to the factors
+ dbdr: lol: <a rel="nofollow" class="external free" href="https://machinelearningjourney.com/index.php/blog/">https://machinelearningjourney.com/index.php/blog/</a>
+ dbdr: <a rel="nofollow" class="external free" href="https://machinelearningjourney.com/index.php/2018/12/26/quick-eye-makeup/">https://machinelearningjourney.com/index.php/2018/12/26/quick-eye-makeup/</a>
+ Wontonimo: yeah, i saw that too&#160;!  too funny.
+ Wontonimo: looks like test data
+ dbdr: machine learning make up, that should work
+ dbdr: just need data
+ Wontonimo: if it is an RL make up machine, there will be millions of ugly applications first 
+ Marchete: it seems codingame's chat
+ Marchete: 1 line it's about beards, then suddenly goes to a very deep ML chat
+ dbdr: chat model collapse
+ Marchete: NN chat collapsing, and next is AutomatonNN asking euler about something
+ rootZero: exec(bytes('㵲湩⡴湩異⡴⤩⼯〹㐥⨊Ɱ洽灡猨牴爬湡敧ㄨ椬瑮椨灮瑵⤨⬩⤱਩㵣✧椊⁦╲㨲㵣尧❮椊⁦㹲㨱㵮孮㨺ㄭ੝牰湩⡴⹣潪湩渨⤩','u16')[2:])
+ rootZero: what language is this?
+ eulerscheZahl: python
+ dbdr: python
+ dbdr: darn
+ eulerscheZahl: at least one thing where i'm still above you&#160;;)
+ RoboStac: <a rel="nofollow" class="external free" href="https://github.com/clemg/pythongolfer/">https://github.com/clemg/pythongolfer/</a>
+ dbdr: :P
+ eulerscheZahl: oh, nice link
+ dbdr: god, someone published a tool for it?&#160;:/
+ rootZero: is thiss allowed?
+ eulerscheZahl: i always felt too lazy to script that myself. time to improve some golfing solutions
+ eulerscheZahl: if it compiles, it's allowed
+ Q12: Wow, this is meanI'm doing it right away :smiling_imp:
+ martinpapa69: are you still here Marchete&#160;?
+ Westicles: come after me bro
+ Marchete: more or less
+ Marchete: what's up?
+ martinpapa69: is there any reason why the "exp256_ps"  function is used, instead of its "fast" version? the second one looks easier to convert to avx
+ Marchete: second one has much less accuracy
+ Marchete: I'd like some intermediate function
+ Marchete: also, it's used only once in each NN prediction
+ Marchete: it doesn't seem a bottleneck right now
+ Marchete: probably tanh is more costly rn
+ martinpapa69: i see
+ RoboStac: I don't even bother trying to avx the softmax. 
+ RoboStac: it's such a tiny part of the total time
+ Marchete: this guy knows
+ martinpapa69: for me the main "bottleneck" is to convert the avx2 calls to avx ones, so i might end up with a non-vectorized activation func
+ martinpapa69: but i mcurious how much does this difference of accuracy between the two implementations affect the final result of the training
+ Marchete: you can remove all AVX
+ Marchete: and let the compiler autovectorize
+ Marchete: in fact I think jace_k does that
+ Marchete: just a note, when compiling to send to CG maybe you need to force the target machine to have avx2
+ Marchete: to optimize the sent binary
+ Marchete: it doesn't need to be runnable in your pc
+ martinpapa69: ye sure. run the train code on windows
+ martinpapa69: *I
+ Marchete: I usually code/debug/profile on win
+ fbaker: yoooo, how do I disable this chat window?
+ Marchete: but sometimes VS C++ is slower
+ struct: almost everytime
+ Marchete: but almost everytime VS C++ is slower*
+ struct: :D
+ martinpapa69: ye but the debugging expericence is not comparable between visual stion and the IDE-s that are available on linux
+ struct: true
+ struct: this is why i also use vs
+ AllYourTrees: rust + vs code &lt;3
+ Marchete: :regional_indicator_s::regional_indicator_e::regional_indicator_n::regional_indicator_d:  :regional_indicator_n::regional_indicator_u::regional_indicator_e::regional_indicator_s:
+ Marchete: :regional_indicator_s::regional_indicator_e::regional_indicator_n::regional_indicator_d:  :regional_indicator_n::regional_indicator_n::regional_indicator_u::regional_indicator_e::regional_indicator_s:
+ Marchete: I forgot an N
+ AllYourTrees: lol
+ christian-zunalargo: who's sending those? 
+ Marchete: nnue's? no one, I wanted some of these
+ dbdr: :regional_indicator_s::regional_indicator_e::regional_indicator_n::regional_indicator_d:  :regional_indicator_n::regional_indicator_u::regional_indicator_d::regional_indicator_e::regional_indicator_s:Marchete?
+ Marchete: no no no
+ Marchete: nnues!
+ Marchete: efficiently updatable neural networks
+ RoboStac: pretty sure they'd be less effiecient for oware anyway
+ RoboStac: well, I guess they work for 1/2 seed moves that don't capture
+ Marchete: and connect4? :innocent:
+ RoboStac: would probably make a lot of sense there
+ Marchete: send C4 nnues
+ Marchete: imo nnues in 1st layer when one-hot are dead simple
+ Marchete: on board games with 1 bit change
+ Marchete: just add weights for that input
+ Marchete: done
+ Marchete: and non one-hot are (newvalue-previousvalue)*weight[input] 
+ Marchete: I think
+ jacek: for c4 only 1 bit is changed per move
+ jacek: for bt, at most 6 squares are changed (with my inputs)
+ Marchete: 6?
+ Marchete: pawn + eaten?
+ jacek: attacked/defended squares
+ Marchete: ok
+ dbdr: is oware balanced for p1/p2?
+ RoboStac: I think p1 has a slight advantage
+ Marchete: robo vs robo = win p1
+ RoboStac: not got any real proof but it usually seems to be slightly favoured
+ Marchete: I agree
+ RoboStac: from lots of training 
+ Marchete: when I sometimes win robo or jacek it's usually p1
+ Marchete: p2 I just consider ties as a "win" vs top players
+ dbdr: it's annoying that arena matches are deleted so fast now
+ struct: i dont believe in ties
+ BlaiseEbuth: Ties don't believe in you
+ Pythonista_TN: print("hello world!")
+ BlaiseEbuth: clear()
+ Wontonimo: Pythonista_TN.send("what up")
+ Pythonista_TN: Wontonimo.reply("I am good  :smile: and you?)
+ TheRealKai: hi
+ jacek:  yeah id say 1p in oware has slight advantage
+ Westicles: Is there a name for programs like read|sed|grep... or .join.split.flat_map... where you don't store anything?
+ erionhasani: Hello
+ Wontonimo: no, hello isn't what it's called
+ Wontonimo: stateless&#160;?
+ Westicles: aha, thanks
+ jacek: pure functions?
+ Wontonimo: extra virgin lambdas&#160;?
+ jacek: oO
+ Marchete: pipe commands?
+ Wontonimo: you can pipe any command in unix/linux
+ Wontonimo: so  that isn't a good name since it doesn't discriminate 
+ Wontonimo: stateless mutators 
+ Marchete: sed can read and save on files
+ Marchete: I won't say it's stateless
+ Astrobytes: command line utilities?
+ Wontonimo: yes, so an a lot of those linux command
+ Marchete: wontapps
+ Wontonimo: oh, yes, i'd definitely call them command line utilities
+ Wontonimo: +1 Astrobytes
+ Astrobytes: that's what I've always known them as
+ Wontonimo: i thought we were specifically trying to come up with an alternate name for just the ones that can be used to not effect state (disk)
+ jacek: pure apps
+ Astrobytes: Stateless command line utilities :P
+ Marchete: bash binary stateless command line operational utilities
+ Astrobytes: *shell
+ Marchete: bash binary stateless command line operational utilities and shell
+ Marchete: :rofl:
+ Astrobytes: shell not bash :P
+ Wontonimo: BBSCLOUS
+ Marchete: I know
+ Astrobytes: I'll go with it because that acronym is awesome
+ Astrobytes: Shabs
+ Astrobytes: or SHABS, Stateless Helpful Applications Based in Shells
+ Westicles: functional programming?
+ dbdr: Transformers
+ BlaiseEbuth: Rollout!
+ jacek: trollout?
+ elderlybeginner: A code of ice and fire: I cannot find a way to prograssing. Any ideas as to algorithm, evaluation or what to use?
+ Astrobytes: Did you look at the forum thread? For the contest.
+ elderlybeginner: yep, it's 'thin'
+ Astrobytes: This one?<a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/a-code-of-ice-fire-feedbacks-and-strategies/105722/4">https://www.codingame.com/forum/t/a-code-of-ice-fire-feedbacks-and-strategies/105722/4</a>
+ jacek: very thin
+ elderlybeginner: no, this one was not linked to bot_prog. Thanks
+ Astrobytes: elderlybeginner: the previous contest multis are sometimes linked to the multi forum thread rather than the contest one, it's worthwhile using the search in the forum to find them
+ elderlybeginner: Astrobytes: Thanks again
+ Astrobytes: no worries 
+ refaat0: :wave:
+ hey82: hi
+ flame568: hi
+ akramBENghanem: hi
+ flame568: how are you
+ akramBENghanem: fine
+ flame568: thats quite great
+ akramBENghanem: and u&#160;?
+ flame568: i am fine aswell
+ akramBENghanem: goood 
+ Marchete: :thinking:
+ flame568: i am new here and i am i have no idea about basics of c++ i known python a lit but i donot think i can use python here
+ Astrobytes: You can use python here.
+ flame568: oh thankyou for telling me
+ jacek: python++ eh
+ Astrobytes: python++ = Black Mamba
+ danonchik: hello, use python#
+ danonchik: python++ is a bit old
+ ArtisticLuis: python is deprecated, use Cobra
+ Marchete: Cobra is deprecated, use Hydra
+ Astrobytes: Everything is deprecated. Use Medusa.
+ doomento: Medusa is deprecated. Use Hades
+ Stanley1337: Medusa is deprecated. Use Zeus
+ Dragon84: Zeus is deprecated. Use Hera
+ doomento: Hey guys, can you give me some tips on "The Descent"? I'm stuck right now and just completed the first test case but I can't complete the other ones.
+ KiwiTae: its hard to guess what you did wrong doomento
+ KiwiTae: show us you rcode
+ doomento: ok
+ doomento: while True: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/cd952fe1-039a-4bbe-8768-a32b45cc6c30">http://chat.codingame.com/pastebin/cd952fe1-039a-4bbe-8768-a32b45cc6c30</a>
+ KiwiTae: don't worry it get some time to get use to it
+ doomento: :grin: ok
+ KiwiTae: your code is not doing what they ask
+ KiwiTae: you need to print the id of the highest mountain
+ doomento: so I get the mountain ID then print it... ok
+ KiwiTae: you can send me mp if you want i can walk you through
+ doomento: message?
+ doomento: ok
+ doomento: ok I sent you messages
+ jbollman7: Does clash of code still allow you to limit types of code challenges/ languages allowed? Or did they get rid of that?
+ FriendlyKh: they get rid of that 
+ DaNinja: you can select languages and modes for Private Clashes
+ beginnerto2: bor this shit is hard
+ beginnerto2: im so new 
+ beginnerto2: what do i do someone send me the answer
+ DaNinja: 42
+ anon8023849: halo guys do you know if perl6 is supported here
+ DaNinja: perl5
+ DaNinja: <a rel="nofollow" class="external free" href="https://www.codingame.com/faq">https://www.codingame.com/faq</a>
+ kakaru: hello

@@ -1,0 +1,519 @@
+ Remi.: Salut tout le monde&#160;!
+ oolivierr: Salut
+ oolivierr: on ne parle plus de tortue mais de chien aujourd'hui&#160;?
+ Stilgart: c'est à Automaton2000 de parler de tortue
+ Automaton2000: c'est pas une erreur de ta part
+ Stilgart: rien à voir avec la chienne de b0n5a1
+ Stilgart: Automaton2000: on attend toujours ta première licorne, soit dit au passage
+ Automaton2000: ah je croyais que c'était un bug
+ philRG: o/
+ philRG: y a un contest LOCM?
+ philRG: où c'est hors CG?
+ philRG: :kissing_cat: à la chienne de b0n5a1
+ philRG: s/où/ou
+ philRG: o/ Automaton2000 et à tous
+ Automaton2000: mais du coup, je suis passé à côté de chez moi
+ philRG: çà m'arrive aussi de plus reconnaître le chemin de ma maison en rentrant du boulot Automaton2000 profite de ton week-end!
+ Automaton2000: et après tu peux faire une liste de positions possibles
+ philRG: toujours fringant Automaton2000
+ Automaton2000: je pense que ce n'est pas la question
+ Zorg1: Bonjour tout le monde, salut Automaton2000 
+ Automaton2000: et bonjour tout le monde&#160;!
+ Bob: ma foi, pika
+ Bob: Automaton2000 chu&#160;!
+ Automaton2000: tu peux regarder les solutions des autres
+ Zorg1: quel grugeur tu fais Automaton2000&#160;:( un bel exemple pour la jeunesses
+ Automaton2000: c'est possible de le faire sans hardcode
+ TidyMaze: Hello les gens, vous utilisez quelle technique pour choisir une action random dans le cadre des playouts MCTS&#160;? Lister toutes les actions puis en choisir une random c'est pas efficace, et shuffle une liste d'index de cases puis les parcourir jusqu'à trouver une action valide c'est pas fou non plus (le shuffle est lent en go on dirait). D'autres techniques&#160;?
+ TidyMaze: (contexte&#160;: je fais le Clobber en ce moment)
+ TidyMaze: (et c'est ma generation de coups qui me prend le plus de temps)
+ Zorg1: bah si tu représentes ta liste de coup sous forme de bits y a pas moyen de faire un truc rapide avec math.bits&#160;?
+ Zorg1: j'avoue ne pas l'avoir fait celui là
+ TidyMaze: alors je n'ai jamais fait de bitboards, c'est la premiere fois que j'en fais ^^ je suis deja content d'avoir get et set qui fonctionnent :D
+ Zorg1: bah pour UTTT pour avoir une génération de coup rapide le bitboard ça aide
+ TidyMaze: mais clairement le jeu est tellement simple que y'a surement moyen de faire de trucs rapides
+ Zorg1: après pour clobber je croit que t'as énormément de coup possible au début de partie
+ TidyMaze: 128 iui
+ TidyMaze: oui
+ TidyMaze: enfin dans cet ordre là
+ TidyMaze: tu as un exemple de generation de coups rapides sous la main&#160;?
+ Zorg1: bah en fait pour moi c'est très adapté au puzzle que tu essaies de résoudre
+ Zorg1: pas sûr que ma solution pour UTTT marche pour clobber ^^
+ TidyMaze: c'est plus pour tenter de comprendre la demarche&#160;:) bien sur qu'il faudra adapter, mais là je sais pas trop par où commencer
+ TidyMaze: j'aime les boucles moi :D
+ Zorg1: ça s'adapte pas en fait, sur UTTT c'est vraiment calibré avec 9 coups possibles par petite grille
+ Zorg1: là il faut voir une autre technique
+ TidyMaze: oki&#160;:) j'irai voir sur d'autres jeux comme les echecs, ça pourrait m'inspirer
+ TidyMaze: merci ^^
+ TidyMaze: pour revenir à ma question de depart, tu listes quand meme tout et tu prends une action random parmi celles là&#160;? C'est juste que tu fais ça très rapidement&#160;?
+ Zorg1: après sur clobber faut voir si tu veux un coup choisi au pif de façon uniforme parmis tous les coups possibles, ou alors un choix uniforme parmi les pièces qui peuvent bouger
+ Zorg1: bah en fait dans UTTT je mappe les 512 occupations possibles d'une petite grille vers un 64 bits qui code le nombre de mouvement possible et les mouvement dans chacun des niblles de l'entier
+ Zorg1: donc un random, un décalage et j'ai le coup à jouer
+ Zorg1: je m'étais pas mal casser les fesses sur UTTT
+ Zorg1: mais bon après pour le concours de quequette de perf que c'est devenu go c'est pas l'idéal non plus
+ philRG: moi 12/111 sur clobber en wood 2 en jouant mon pion qui a le nombre de prises possible le plus important #noob
+ philRG: depth 0
+ Zorg1: tu dois avoir moyen de creuser depth 1 sans time outé non&#160;?
+ philRG: oui faudrait que j'essaye car j'arrive qu'à coder que des bfs
+ Zorg1: :D
+ Zorg1: ça ressemble plus à un DFS le minmax ^^
+ philRG: mon code est assez lisible je devrais pouvoir l'upgrader
+ philRG: les règles sont plus simples sur clobber que sur locm
+ Zorg1: locm le jeu de carte&#160;?
+ philRG: oui y a un reload (v1.5 et concours mais sans doute interne ref. le dépôt du projet
+ Zorg1: ah oui le chat machine a relivré une version. pas suivi si ses potes de l'université ont acceptés dans la foulée ou non
+ philRG: en tout cas il y a une soumission prévue (deadline fin août 2022)
+ Zorg1: après bon les règles des jeux magic et consort c'est assez toufu en général ^^
+ philRG: c vraiment un projet pour donner de la matière à des étudiants
+ Zorg1: enfin t'as un mécanisme simple sur lequel on a rajouté plein de complications
+ Zorg1: ouais pour bosser une IA
+ philRG: ils font leur classement avec des runs locaux du referee (si j'ai bien compris) et stats
+ philRG: (pour çà que le leaderboard est quasiment vide)
+ philRG: après l'infra CG peut-elle être dupliquée?
+ philRG: notamment le viewer et système de replays
+ philRG: (j'ai pas encore réussi à le faire en python, mais je vais m'abstenir)
+ philRG: mes petits ronds me suffisent
+ Zorg1: le side project de philRG&#160;: refaire toute l'infra de CG en python
+ Zorg1: bon courage&#160;;-)
+ philRG: (je suis arrivé à un niveau me permettant de savoir ce que je sais faire)
+ philRG: bon c'est super dur de trouver un tutoriel écrit par un contributeur sur CG
+ Zorg1: moi je suis à un niveau où j'ai même plus envie de faire ce que je sais faire
+ Zorg1: motivation proche de 0 ^^
+ Zorg1: un tutoriel pour quoi&#160;?
+ philRG: je cherchais un tutoriel (ou playground je sais plus) d'euler
+ philRG: avec un code C# où il dessine des formes géométriques en guise de simulation locale
+ Zorg1: à mon avis demande lui directement s'il a des ressources là dessus ça ira + vite ^^
+ philRG: ben j'vais pas le disturb
+ philRG: c'était juste pour le relire pour le fun (j'en ai pas besoin)
+ philRG: (moi je suis à un niveau où j'ai même plus envie de faire ce que je sais faire) ah mais essaye d'écrire un tutoriel, après çà demande du temps
+ philRG: Zorg1: essaye de créer un multi sur CG
+ Zorg1: ah ah non
+ Zorg1: sinon regarde les playgrounds que euler à publier c'est sur son profil, onglet "playgrounds"
+ Zorg1: mais il en fait qu'un en python
+ philRG: flûte çà aurait été l'occasion de lire un tes codes&#160;;-)
+ philRG: de
+ Zorg1: bof
+ philRG: ah oui True merci
+ philRG: ah super le hints il a un mis un MTCS en C# (j'arrive à lire tous ses codes quel que soit le langage en fait)
+ philRG: ah oui il utilise Graphics pour dessiner ses formes géométriques
+ philRG: bon c tout de même chiant LOCM
+ Zorg1: sans blague ^^
+ Ylan-Cipher: yooo les noobs
+ Zorg1: omg voilà le super pro
+ Zorg1: il va nous faire un hello world en BF de tête :p
+ philRG: ah j'avais défini une classe Enum au lieu des int
+ philRG: Type: CT.CREATURE
+ philRG: (le + chiant c'est la modélisation des données et lecture des règles)
+ Zorg1: tu te compliques la vie j'ai l'impression quand même
+ philRG: ben non, j'ai repris l'IA de base du dépôt LOCM
+ philRG: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/637827475">https://www.codingame.com/share-replay/637827475</a>
+ Zorg1: (en fait on a un puzzle CG pour les 'Hello world' en BF =&gt; <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/optimization/brain-fork">https://www.codingame.com/multiplayer/optimization/brain-fork</a> )
+ philRG: ok elle attaque que le player pas les cartes
+ Remi.: o/
+ Remi.: D'ailleurs sur le BF j'ai toujours pas compris comment exploiter les boucles pour améliorer le score.
+ Razovsky: pouet, je comprends rien aux discussions, pour changer ^^
+ Razovsky: ha ce puzzle, j'ai tenté, j'ai absolument rien compris
+ Razovsky: o/ la compagnie
+ Stilgart: omg... ça a été renommé en brain fork ça...
+ <b>**Stilgart était content d'avoir oublié </b></p><p><img src="/a/69893904259383" /> Stilgart: et \o Razovsky
+ Razovsky: o/ Stilgart
+ Razovsky: c'est quoi Brain Fork&#160;?
+ Zorg1: bah le puzzle dont j'ai posté le lien
+ Razovsky: ha c'est le nom du puzzle
+ Razovsky: okay
+ Razovsky: jpensais que c'était un type de puzzle
+ Zorg1: c'est une allusion de haut niveau au Brain Fuck (BF) ,le langage de programmation
+ Zorg1: qui est l'objet du puzzle
+ Razovsky: les gars qui ont inventé ça devaient se faire bien ch
+ Zorg1: bah initialement c'était un projet de trouver une machine de turing -like sans goto
+ Razovsky: c'est un challenge, un jour je m'y pencherai, mais là pas le niveau ^^
+ Zorg1: le BF adopte la programmation structurée c'est ce qui est marrant
+ Zorg1: mais le puzzle c'est seulement écrire des trucs, pas de calculer les N nombres premiers, donc ça va ^^
+ Zorg1: après bon c'est toute une famille de langage "ésotérique" plus ou moins tordues
+ Zorg1: après je suis d'accord pour programmer c'est pas vraiment utile ^^
+ valdoth: Bonjour, quelqu'un connait un bon livre ou un lien pour apprendre les algorithmes et data structure?
+ GoTLuB: " Algorithmique , Cours avec 957 exercices et 158 problèmes " 3em éditions Cormen, Leiserson, Rivest, Stein
+ valdoth: merci
+ OldJohn: Algorithm + Data Structure = Programs de Nicklaus Wirth... Un peu updated peut-être
+ BlaiseEbuth: Yo tout l'monde&#160;! Automaton2000&#160;!
+ Automaton2000: je viens de me prendre la tête est d'utiliser abs tout simplement (ou le carré)
+ Bon[]Crayon: Salut tout le monde
+ Bon[]Crayon: slt Automaton2000
+ Automaton2000: je connais pas le jeu de la vie
+ Bon[]Crayon: Automaton2000 Sois en bien heureux&#160;!
+ Automaton2000: c'est mon code qui est en train de faire le puzzle de la semaine.
+ Bon[]Crayon: Automaton2000 GG
+ Automaton2000: si vous avez de la chance
+ Bon[]Crayon: Automaton2000 La chance&#160;! Connais pas&#160;!
+ Automaton2000: ah je viens de sortir de wood 2
+ Bon[]Crayon: Automaton2000 GG
+ Automaton2000: et pas de la même chose, mais tqt pas, chacun de mes states n'est définie que par un move&#160;;) ...
+ Bon[]Crayon: Automaton2000 Tu as poncé ton code.
+ Automaton2000: mais bon je suis pas d'accord
+ Bon[]Crayon: Automaton2000 Ok bot
+ Automaton2000: on est à java 17 maintenant
+ Bon[]Crayon: Automaton2000 sauf cg
+ Automaton2000: ça fait pas trop de temps à faire des tests
+ Bon[]Crayon: Automaton2000 Faire des tests :joy:
+ Automaton2000: ton code ne prennait pas en compte le "consécutive" ... faut que je code
+ Zorg1: OldJohn&#160;: oui il l'a updaté c'est basé sur Oberon, et c'est librement téléchargeable de son site
+ Zorg1: après bon c'est assez différent d'autres bouquin d'algo
+ Zorg1: (par exemple il n'y a rien sur les algos de graphe)
+ Zorg1: et c'est basé sur un langage de prog assez confidentiel
+ BlaiseEbuth: En l'occurence&#160;?
+ Bon[]Crayon: c'est basé sur Oberon
+ Zorg1: Oberon un descendant de Pascal/Modula
+ BlaiseEbuth: Connais pas. Connais pas Modula non plus...
+ BlaiseEbuth: 'k modula c'est pascal++, et oberon c'est modula avec un ramasse miette.
+ BlaiseEbuth: Quelle drôle d'idée...
+ Zorg1: oberon est simplifié / modula qui s'est compliqué
+ Zorg1: après quelques idées d'oberon ont été récupéré dans go c'est pour ça que je connais un peu
+ BlaiseEbuth: Go...
+ Zorg1: oui&#160;?
+ BlaiseEbuth: oui
+ Zorg1: après le truc de N.Wirth c'était de faire un langage le + simple possible avec lequel il puisse écrire un OS pour une machine maison avec un RISC sur un FPGA
+ Zorg1: après bon c'est un OS monotache et ça date un peu mais c'est assez instructif comme technique
+ Zorg1: et je suppose que ça permet d'avoir des tonnes de sujet de TP/projet ^^
+ Zorg1: après là où c'est daté c'est que c'est très dans la philosophie "pas de lib tu codes tout toi même"
+ Zorg1: maintenant plus personne n'a besoin de savoir comment coder un tri ou ce genre de truc (ce qui n'est pas plus mal ça évite les erreurs mais tu peux avoir du code un peu fat la librairie devant gérer une tonne de cas d'utilisation)
+ Zorg1: Quand on codait en ADA 83 il y avait une équipe de la boîte qui nous fournissait des lib de base (tri, ...) mais quasiment rien venait de base avec le langage
+ Zorg1: c'est assez amusant quand on voit l'évolution avec Java et son runtime qui fait papa maman ^^
+ Zorg1: voilà c'était notre épisode "Pépé Zorg1 raconte sa vie, bande de jeunes cons" :p
+ Zorg1: Automaton2000 je te laisse l'antenne
+ Automaton2000: faudrait que je me fais jeter
+ <b>**Bon[]Crayon jette Automaton2000 avec l'eau du bug. </b></p><p><img src="/a/40502662118268" /> Automaton2000: c'est pas les mêmes actions
+ Stilgart: ne te laisse pas avoir par Bon[]Crayon Automaton2000, sors ton taille crayon&#160;!
+ BlaiseEbuth: Les libs c'est pour les pythoneux
+ Automaton2000: ah en fait c'est un peu relou
+ philRG: on peut pas coder tranquille ici
+ philRG: moi j'en suis là :sob: (<a rel="nofollow" class="external free" href="https://www.tutorialspoint.com/pyqt/pyqt_qspinbox_widget.htm">https://www.tutorialspoint.com/pyqt/pyqt_qspinbox_widget.htm</a>)
+ philRG: çà aussi c de la merde
+ nicola: Les pythoneux disent module, pas bibliothèque.
+ Tengy28: bonjour quelqu'un peut m'aider dans le puzzle Mad Pod Racing le niveau ou il y la distance et l'angle SVP je comprends rien 
+ philRG: ah ben finalement çà marche bien: <a rel="nofollow" class="external free" href="https://imgur.com/a/9S3BH6w">https://imgur.com/a/9S3BH6w</a>
+ philRG: faut quand même un peu suer pour fait du QT dans Python mais c'est quand même bien pour coder des GUI:         Create GUI with QTDesigner:
+ philRG: s/fait/faire
+ regismeysso22: j'ai rejeté une contrib comme les autres me font&#160;!!!!
+ philRG: oui ben oeil pour oeil, dent pour dent&#160;:-D
+ BlaiseEbuth: C'est intelligent ça.
+ BlaiseEbuth: Enfin ça te correspond du coup...
+ philRG: (ben c'était juste pour faire un peu d'animation) réponds Automaton2000 tu sers à rien
+ Automaton2000: les deux robots sont au coin.
+ philRG:&#160;:-)
+ BlaiseEbuth: J'te parlais pas à toi.
+ regismeysso22: mean max comment on fait pourt monter en bronze
+ BlaiseEbuth: On réfléchit.
+ regismeysso22: comment on recherche l'épave la plus proche
+ BlaiseEbuth: En réflechissant.
+ regismeysso22: c koi SKILL
+ BlaiseEbuth: C'que tu nas pas.
+ regismeysso22: calme toi belzebut
+ GoTLuB: Moi je les attires les épaves . Te plains pas régis c'est relou 
+ philRG: regismeysso22 les skills sont associés à un type d'entité, et se rajoutent à chaque nouvelle ligue. Pour monter Bronze, pas besoin de SKILL
+ philRG: suffit de déplacer correctement Reaper et Destroyer (et les coordonner). Pour les ligues suivantes, je conseille d'utiliser les mécanismes d'héritage de la POO pour la spécialisation des entités (comme il y a beaucoup de règles)
+ philRG: et à partir de Silver, lire les PM si bloqué
+ Razovsky: n'empeche que
+ Razovsky: il a raison BlaiseEbuth
+ BlaiseEbuth: Evidement.
+ Zorg1: j'ai raté du drama&#160;?
+ Zorg1: évidemment vous avez attendu que j'aille faire mes courses&#160;:(
+ Remi.: Salut tout le monde o/
+ Zorg1: salut Remi. o\
+ Zorg1: houla j'ai raté mon bonhomme qui salut ^^
+ Remi.: JE croyais que c'était fait exprès ^^
+ Zorg1: juste me suis planté mais oui ça passe&#160;:)
+ Razovsky: hello
+ Zorg1: o/
+ Remi.: o/
+ Razovsky: \o
+ Remi.: zut trop lent
+ Remi.: du coup \o
+ Razovsky: haha
+ Razovsky: raté encore
+ Razovsky: nul Remi.
+ Remi.:  /o\
+ Razovsky: comment ça marche le classement de CoC&#160;?
+ Remi.: Je crois que c'est similaire au classement dans un ligue de combat de bots
+ Remi.: Sauf que tu descends quand tu n'en fais plus.
+ Remi.: Mais vraiment très lentement.
+ Remi.: * unE ligue
+ Zorg1: il doit considérer un CoC comme un match entre les N adversaires et attribué les points selon le trueskill
+ Razovsky: comment on monte&#160;?
+ Razovsky: en faisant des CoC c'est tout&#160;?
+ Remi.: Oui
+ Remi.: Et en gagnant
+ Razovsky: ha lol
+ Zorg1: en étant le plus souvent en tête du groupe de CoC
+ Razovsky: okay
+ Razovsky: merci messieurs
+ Razovsky: j'ai 500 places à gagner
+ Zorg1: si t'es premier de 8 ça rapporte plus que premier de 3 je suppose
+ Razovsky: j'imagine
+ Remi.: Et tu monte plus vite si tu bats des gens très bien classés
+ Razovsky: ha ha
+ Razovsky: comment on sait leur classement .
+ Zorg1: la logique d'un ELO quoi
+ Razovsky:&#160;?
+ Zorg1: bah sur la page ad hoc ...
+ Remi.: On ne voit pas le classement lors du clash
+ Zorg1: <a rel="nofollow" class="external free" href="https://www.codingame.com/leaderboards/clash/global">https://www.codingame.com/leaderboards/clash/global</a>
+ Remi.: On voit aussi le classement de quelqu'un sur son profil
+ Remi.: Mais dans un clash avec 8 adversaire, on ne vois pas en un seul coup d'oeil leur classement
+ Zorg1: oui
+ Razovsky: okay
+ Razovsky: ya du taf
+ Zorg1: tu te développes un monkey script pour le faire ^^
+ Razovsky: mouais
+ Razovsky: c'est quoi ça&#160;?
+ Remi.: Ou alors tu t'abonnes rapidement aux 8 ^^
+ Zorg1: bah violent monkey ou un autre, c'est pour exécuter des JS dans ton navigateur afin de changer des trucs sur les pages
+ Remi.: On voit le classement des personnes auxquelles on est abonné ici&#160;: <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/clashofcode">https://www.codingame.com/multiplayer/clashofcode</a>
+ Zorg1: 328 Remi. ... on sent le gars qui fait des CoCs en douce
+ Zorg1: quoique pardouin 56
+ Remi.: Non même pas ^^ je fais les évènements shortest c++, et je bats des gens qui sont dans le top ^^
+ dwarfie: arretez les gens ... vous allez finir par me donner envie d'aller pourrir quelques CoC ...
+ dwarfie: :D
+ Zorg1: bah vazy te gênes pas pour nous ^^
+ Remi.: J'étais 291ème après le dernier coc, en 2 semaines j'ai perdu 30~40 places, quand je disais que ça diminuait lentement.
+ dwarfie: ouais ... mais c'est pas comme ca que je vais sortir du top 1000 ... :p
+ Zorg1: plus fait depuis un bail moi des CoCs
+ dwarfie: ( deja que si je bat 2 bot , ca va me faire gagner 300 places ... )
+ Remi.: Zorg1 tu fais un coc tu repasses dans le top 1000 ^^
+ Zorg1: oui bon pê pas ^^
+ dwarfie: fort probable
+ Remi.: Ouais, si tu le perds tu seras dans le top 1500, faudra le gagner pour être dans le top 1000 ^^
+ Zorg1: et si c'est pour me taper deux reverses rédigés par des psychopathes
+ Zorg1: et deux autres CoC rédigés en anglais de Tchernobyl ^^
+ dwarfie: anglais de tchernobyl ..? j'aurais dit anglais de pseudo chanteur francais moi ... mais c'est peut etre pire&#160;;)
+ Zorg1: anglais Jacques Delors :D
+ dwarfie: humm ... me rappelle  pas ...
+ dwarfie: pire ou meilleur que le "what do yuo what" de chirac&#160;?
+ Zorg1: bah président de la Commission Européenne il était fameux pour son french accent
+ Zorg1: enfin moi je comprenais impec ce qu'il racontait
+ Zorg1: pour les fluent anglais c'était moins évident ^^
+ Zorg1: t'avais aussi Rafarin avec son Yes qui a besoin de No pour win
+ dwarfie: ah oui ... grand classique
+ Zorg1: ou un truc dans ce goût là, avec Rafarin c'était toujours assez pataques
+ Zorg1: Rafarin de Ramasse-cons
+ Zorg1: y  a même un article WP sur "Raffarinade" ^^
+ Remi.: Win the yes need the no to win agian the no, de mémoire ^^
+ Remi.: sur ce, bon app les gens&#160;:)
+ Remi.: * again
+ Zorg1: vous mangez tard ...
+ BlaiseEbuth: C'pas encore l'heure
+ pbou: Hello. Impossible de faire du codingame avec Chrome. J'ai le message "Loading chunk 1259 failed after 5 retries. (1259.b184b1ed.js)". Est-ce que ça marche pour vous&#160;?
+ Zorg1: désolé j'ai pas Chrome
+ pbou: Je voulais tester les extensions avec l'éditeur externe. Pour voir.
+ Zorg1: cgsync&#160;? ça marche encore&#160;?
+ pbou: Alors du coup, je ne sais pas si ce sont les extensions qui font buguer Chrome.
+ Zorg1: bah vire les extensions et essaie sans ^^
+ pbou: Marche pas quand même.
+ b0n5a1: o/
+ BlaiseEbuth: \o
+ Zorg1: o/
+ Remi.: \o
+ Remi.: Oui on a mangé tard aujourd'hui ^^ grosse journée.
+ Remi.: CG fonctionne avec chrome pour moi.
+ BlaiseEbuth: Tiens en parlant de manger, c'est l'heure.
+ Remi.: C'est avec mon vieux firefox que ça ne parche plus.
+ Remi.: Ok bon app Blaise
+ BlaiseEbuth: :yum:
+ b0n5a1: y'a la star du moment qui a justement de nouveau publié une contrib en anglais de Tchernobyl Zorg1 :D
+ Zorg1: j'ai vu ça il downvote les gars qui lui file du feedback, pas compris la logique ^^
+ Remi.: Et il rejette les contrib des autres comme il s'est fait rejeté la sienne précédente.
+ pbou: @remi Merci pour les infos.
+ Zorg1: en plus bon 'trop simple' ...
+ Remi.: De rien
+ Zorg1: c'est correct pour un CoC, il y a un peu de calcul à faire
+ Zorg1: et on comprend ce qu'il faut faire sans s'éclater la cervelle ^^
+ b0n5a1: T'as pas compris c'est l'énoncé qui est trop simple :D il faut que ce soit incompréhensible pour être valide :rofl:
+ b0n5a1: si toi pas parler comme Tarzan, Tarzan pas comprendre
+ caprizz: yo les gars question&#160;: y a quel type d'exos dans les niveaux max&#160;?
+ b0n5a1: pardon pour l'insulte Tarzan :D
+ b0n5a1: bah cliques dessus caprizz, tout est accessible ^^
+ b0n5a1: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/expert">https://www.codingame.com/training/expert</a>
+ caprizz: ok merci
+ dwarfie: y'a de tout ... et meme des trucs qui devrait etre dans les niveaux inferieurs ...
+ dwarfie: :D
+ b0n5a1: ouais y'a un free XP caché
+ b0n5a1: skylines
+ dwarfie: il y est toujours je pensais qu'il avait ete retrogradé depuis le temps
+ b0n5a1: je suis tombé dessus par hasard y'a quelques semaines ^^
+ dwarfie: ok ... tant que tu dis pas de high rise building que c'est un free xp ca me va... :p
+ dwarfie: seulement 30% de resolu&#160;!? je pensais quand meme qu'il etait moins dur que ca ...
+ dwarfie: eh eh , skylines resolu qu'a 35% ... c'est vraiment un free caché
+ Zorg1: bon tu vas pas commencer à faire comme certain à poster "j'ai résolu un puzzle avec 12% de réussite&#160;!!!!"
+ Zorg1: va te falloir un facebook
+ dwarfie: bah non ... vu que je les ai quasi tous fait , ca serais bien trop long :rofl:
+ b0n5a1: BlaiseEbuth le bot il a piqué le taco qu'on t'a offert :D
+ BlaiseEbuth: hm?
+ dwarfie: :rofl: BlaiseEbuth le mal-aimé meme par les bots 
+ Zorg1: mais c'est le tacobot de la programmation de haut niveau par un dev de haut niveau dans un langage de haut niveau avec des specs de haut niveau
+ Zorg1: du haut niveau quoi
+ Zorg1: des gens perchés qui font des softs perchés
+ b0n5a1: avec des avatars de chouette&#160;?
+ <b>**b0n5a1 s'enfuit</b></p><p><img src="/a/16542412157988" /> Zorg1: ouaip et j'ai une vision à 360° fais gaffe :eyes:
+ BlaiseEbuth: Ah. OK
+ Zorg1: oui on s'amuse d'un rien
+ Zorg1: mais bon à chaque fois que je vois l'avatar du bot je repense à ton dessin ^^
+ b0n5a1: on en profite avant qu'il y ait plus de chat...ce sera chiant après
+ BlaiseEbuth: :p
+ Zorg1: pour le fun&#160;: <a rel="nofollow" class="external free" href="https://imgur.com/a/AsBCNuF">https://imgur.com/a/AsBCNuF</a>
+ b0n5a1: on va être obligés de faire des puzzles et tout...n'importe quoi :D
+ BlaiseEbuth: Y'aura le mien.
+ BlaiseEbuth: Peut-être
+ Zorg1: on sera tous pote sur discord
+ Zorg1: trop bien
+ BlaiseEbuth: wé!
+ b0n5a1: on pourra ban les bots à taco au moins BlaiseEbuth&#160;?
+ b0n5a1: sinon je viens pas :D
+ BlaiseEbuth: On pourra pas les bans parce qu'ils pourront même pas rejoindre. :imp:
+ Zorg1: non les bots à taco te baniront si tu dis des grossieretés dans une cinquantaine de langues
+ Zorg1: et tu arriveras pê à dire bonjour à Automaton2000 entre les dix lignes par secondes des tacobots en folie
+ Automaton2000: y a un gars qui fait du bien
+ Zorg1: merci Automaton2000 de reconnaître mon action sur le chat
+ Automaton2000: y a les fantômes qui nettoient tes saloperies, c'est d'aileurs pour ça qu'ils veulent te chopper ils en ont marre ...
+ BlaiseEbuth: :D
+ b0n5a1: Reg'mi nit uff dü, Vogel kopf!
+ Zorg1: c'est pas fatiguer le bot il a repompé mon post&#160;:(
+ dwarfie: BlaiseEbuth&#160;: demande des droits d'auteur , ton dessin vient de reparaitre sur world
+ dwarfie:&#160;;)
+ Zorg1: ah oui j'ai pas pensé aux eyedropper&#160;:(
+ BlaiseEbuth: Muahaha
+ Zorg1: ah toi les deux cents vues sur imgur&#160;!!
+ BlaiseEbuth: Mes royalties sont payées en sel.
+ b0n5a1: ha bin voilà c'est pas google translatable ce que j'ai mis à 22h41 je peux pas être ban :smiling_imp:
+ Zorg1: le gars qui poste de l'alsacien intraduisible
+ b0n5a1: ha si
+ BlaiseEbuth: Avec deepl ça passe.
+ Zorg1: y a pas une loi contre ça&#160;?
+ b0n5a1: pas par google translate, nuance ^^
+ BlaiseEbuth: Enfin, si tu lui dit "allemand' parce que de base il pense que c'est du turc
+ Zorg1: ah 'reste calme, tête de piaf'
+ b0n5a1: pas mal deepl BlaiseEbuth, traduction presque ok ^
+ Zorg1: (enfin j'adapte)
+ b0n5a1: c'est plutôt "ne m'énerve pas"
+ Zorg1: il dit 'ne t'énerve pas' deepl
+ Zorg1: bon c'est pas encore au point
+ b0n5a1: "mi" tu crois que c'est quoi&#160;? :D
+ b0n5a1: pas au point mais pas mal
+ BlaiseEbuth: Ca marche plutôt bien. Mais de fois y'a des trucs tu sais pas...
+ BlaiseEbuth: Genre essayes de traduire "the demon's lair" de l'anglais vers le français.
+ Zorg1: b0n5a1&#160;: oui je m'en doute mais bon deepL il sait pas ^^
+ Zorg1: donc 'fous moi la paix, tête de piaf'
+ Zorg1: ou 'me les brise pas, grosse buse" :D
+ b0n5a1: ha là tu le tiens bien ouais tu peux déménager ici :D
+ b0n5a1: Tiens prend ton :taco: BlaiseEbuth, j'en ai eu en...
+ b0n5a1: un*
+ <b>**BlaiseEbuth jette son taco sur Automaton2000.</b></p><p><img src="/a/40502662118268" /> Automaton2000: une erreur est survenue (#73)&#160;: "only 1 executor running at the same time for a test session".
+ b0n5a1: t'as cassé Automaton2000
+ Automaton2000: je ne me trompe pas
+ Zorg1: fix moi ce bug Automaton2000 et plus vite que ça&#160;!!!
+ Automaton2000: ah pardon j'avais pas vu
+ Zorg1: tout leur dire à ces bots&#160;:(
+ Zorg1: ah oui deepL il a l'air de buggé grave sur "the demon's lair"
+ b0n5a1: ha&#160;? j'ai essayé avant et rien vu de choquant. Y'avait 2/3 variantes proposées dont une avec démons au lieu de démon par contre je crois
+ b0n5a1: ouias c'est ça
+ Zorg1: j'ai eu "l'an la du dém démon"
+ b0n5a1: antre/repaire/tanière pareil
+ b0n5a1: ha bon&#160;? :D
+ Zorg1: ouaip c'est bizarre
+ b0n5a1: <a rel="nofollow" class="external free" href="https://ibb.co/d7p6rCV">https://ibb.co/d7p6rCV</a>
+ b0n5a1: j'ai ça
+ Zorg1: bon bah bizarre
+ b0n5a1: :D le puzzle qui serait du machine learning sur world
+ Zorg1: <a rel="nofollow" class="external free" href="https://imgur.com/a/LwV5wGj">https://imgur.com/a/LwV5wGj</a>
+ Zorg1: pour pas qu'on dise que je suis fou
+ b0n5a1: t'as pas l'entrée dans le dico tu sors rien :D
+ b0n5a1: Zorg1 rajoutes voir un point à la fin pour rire
+ b0n5a1: ha non ça change rien de l'enlever de mon c^pté...
+ Zorg1: haha mdr c'est ça ^^
+ b0n5a1: sérieux&#160;?
+ b0n5a1: je l'ai enlevé ça a refresh et resté pareil
+ Zorg1: oui j'ai rajouté un point à la fin et j'ai pareil que toi maintenant
+ b0n5a1: enlève le, passe à la ligne et écris un autre truc en plus (chez moi ça continue à marcher)
+ Zorg1: oui bon c'est bizarre le comportement de leur outil ^^
+ Zorg1: un peu le problème des réseaux neuronaux le moindre truc insignifiant de différence t'emmenes ailleurs ^^
+ dwarfie: bah ... entre les traductions qui marchent pas et les corrections automatiques qui foirent ...
+ dwarfie: mention special toujours pour le pack office 97 et sa correction de " antistress "
+ Zorg1: mais bon bientôt ça va pisser du code
+ b0n5a1: va valider le puzzle machine learning :D
+ dwarfie: fun fact ... ca devient presque impossible de retrouver une mention de ce bug sur internet ... garder vos copies du pack office 97 , ca va devenir mythique :D
+ Zorg1: euh t'es le représentant français de Westicules b0n5a1&#160;?
+ dwarfie: ( on va dire que c'etait un bug )
+ <b>**b0n5a1 slaps Zorg1 around a bit with a large fishbot</b></p><p><img src="/a/16542412157988" /> Zorg1: hihihi
+ b0n5a1: va voir le puzzle...et cherche le machine learning :D
+ Zorg1: c'est pas moi c'est ma soeur qu'a cassé la machine learning à vapeur
+ b0n5a1: ha j'ai pas la donnée dans ma map...ha bin de répond "rien" :rofl:
+ b0n5a1: c'est du ML
+ Zorg1: le ML a grand coup de if
+ Zorg1: j'en ai rêvé CG l'a fait
+ b0n5a1: :D
+ b0n5a1: il est en ligne, taggé ML haha
+ Zorg1: je vais tagger mes puzzles "pirouette cacahuéte"
+ Zorg1: ça veut rien dire mais ça fait du tag
+ b0n5a1: fait gaffe la maison en carton c'est tendance
+ Zorg1: ça me fait pense à la valise en carton
+ b0n5a1: j'ai vu un reportage récemment t'as de l'ossature bois + panneau cartons supers solides
+ b0n5a1: pour murs extérieurs et séparations intérieures
+ Zorg1: oui c'est isolant en plus
+ Zorg1: et ils arrivent à bien l'imperméabiliser
+ b0n5a1: ouais
+ AngelicCapy: Bonsoir
+ AngelicCapy: Comment allez vous&#160;?
+ Bon[]Crayon: o/
+ AngelicCapy: J'ai eu l'idée d'une collaboration mais je sais pas si elle est bien
+ b0n5a1: tu peux choisir la résistance aussi...en fonction du camp vainqueur la collaboration sera bien ou mal...
+ <b>**b0n5a1 est déjà parti</b></p><p><img src="/a/16542412157988" /> Zorg1: c'est malin ça tiens ...
+ BlaiseEbuth: Skoi c't'histoire de ml&#160;?
+ Zorg1: la dernière recommendation à valider de l'ami W
+ b0n5a1: 23:04 BlaiseEbuth
+ Zorg1: y a un tag 'ML' dessus
+ b0n5a1: c'est validé Zorg1 déjà
+ b0n5a1: y'a eu le 3e 
+ Zorg1: oui bon c'est pour retrouver simplement le lien ^^
+ Zorg1: à quoiqu'il a pas accès avec un lvl 3
+ BlaiseEbuth: Flemme de lire...
+ Zorg1: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/easy/survey-prediction">https://www.codingame.com/training/easy/survey-prediction</a>
+ BlaiseEbuth: Oui. Flemme de lire le statement
+ Zorg1: je comprends, je ne l'ai pas lu non plus ^^
+ BlaiseEbuth: Bon je l'ai lu.
+ NoiselessChildVonKirschenwald_b490: Bonsoir les codeurs
+ BlaiseEbuth: C'est des if en fait.
+ NoiselessChildVonKirschenwald_b490: je suis nouveau sur la plateforme
+ BlaiseEbuth: Bienvenue. Si j'ose dire
+ NoiselessChildVonKirschenwald_b490: j'aurai besoin de vous faire appel pour une assistance dans certaines difficultés rencontrées en programmation JS
+ b0n5a1: ++num
+ b0n5a1: :D
+ BlaiseEbuth: Tu lui as fait peur...
+ b0n5a1: bah non j'avais la réponse
+ BlaiseEbuth: Bon. Sur-ce. La bien bonne nuit.
+ b0n5a1: bn
+ Zorg1: bn
+ TKirishima: C'est quoi le nouveau truc de certification&#160;?
+ TKirishima: Pourquoi il y a plus 99% mais 'avec mention'&#160;?
+ b0n5a1: ça faisait trop élitiste :rofl:
+ TKirishima: ...&#160;:/
+ b0n5a1: faut se contenter du 50% ou du 45% "fort" de réussite pour avoir une mention en France :D
+ TKirishima: Tout mes scores sont passé de 99% à 100% sauf un qui est passé de 99% à 94%&#160;??? Alors que j'avais tout bon. 
+ b0n5a1: ils ont donné tes 4% à un 46% "fort" pour qu'il ait la certif
+ b0n5a1: égalité, fraternité :rofl:
+ b0n5a1: oups 5% 45%
+ TKirishima: Bon.. Je l'ai repassé pour avoir 100%. ça faisait tâche
+ AngelicCapy: Oui&#160;? NoiselessChildVonKirschenwald_b49 (j'ai recopier tout son pseudo a la main)
+ TKirishima: gg.Pas facile
+ b0n5a1: NoiselessChildVonKirschenwald_b490
+ b0n5a1: N tab ^^
+ b0n5a1: manque le 0 à la fin AngelicCapy, fail
+ AngelicCapy: mb
+ AngelicCapy: Ducoup vous avez vu ma proposition&#160;?
+ AngelicCapy: il y'a quelqu'un&#160;?
+ AngelicCapy: Sad
+ b0n5a1: Zorg1 t'as pas fait les escargots :D
+ b0n5a1: :eyes:
+ b0n5a1: t'as pas fait le "ML" ... késsécebowdel ^^
+ dwarfie: ML ... Merdiquement Loupé&#160;?
+ dwarfie: :D
+ b0n5a1: dwarfie j'ai validé un free xp de tracé de Bézier linéaire qui s'appelle cubic Bézier curves pouhahaha
+ b0n5a1: j'avais pas vu le "cubic" dans le titre :rofl:
+ dwarfie: lire c'est pour les faibles&#160;;)

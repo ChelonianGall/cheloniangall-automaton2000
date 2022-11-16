@@ -1,0 +1,560 @@
+ FlyHead: speaking of bots/NNs, is the main workflow for creating NNs just remaking the game in your own environment?
+ FlyHead: i've been searching and it seems like CG doesn't provide environments
+ MadKnight: yea 
+ FlyHead: do a lot of people do that?
+ FlyHead: i'm curious what games get the most attention
+ MadKnight: there are referees for some games
+ MadKnight: like opened game sources
+ FlyHead: ya, i've seen the referees, that's nice
+ MadKnight: u can play tons of games with your bot in local
+ FlyHead: in local?
+ FlyHead: oh, like if you had your own environment
+ FlyHead: ya, that's why i'm a little bummed CG doesn't provide environments. other option would be to make a web scraper to pull outputs, clean em, and send em to the NN
+ FlyHead: would be slower, but maybe more generic, would work on multiple games
+ FlyHead: might be against terms of service, now that i think about it
+ ChandraKanth: hi guys.
+ Uljahn: the feature is just too niche, FlyHead
+ smashraf321: :grinning:
+ smashraf321: (╯°□°）╯︵ ┻━┻
+ smashraf321: /me
+ <b>**smashraf321 Testing chat features...</b></p><p><a href="/wiki/File:Default_avatar.png" class="image"><img alt="Default avatar.png" src="/images/5/56/Default_avatar.png" decoding="async" width="50" height="50" /></a> smashraf321: Hi all
+ etohirse: only bots on clash
+ etohirse: F
+ GeorgiD: wait there are bots?
+ etohirse: yes
+ ianc1339: the players that are on everytime since like 5 years ago
+ jacek: eeyup
+ ianc1339: btw is coc still bugged for some people?
+ etohirse: yep
+ ianc1339: i have to refresh the webpage to get into the clash
+ etohirse: cant join
+ ianc1339: D:
+ jacek: oO
+ GeorgiD: why do i stay alone in a room every time i try to start today wtf
+ jacek: forever alone
+ GeorgiD: True
+ GeorgiD: Like I literally play 1 clash and then the site bugs out
+ jacek: oh my
+ Janraion: hello moto
+ Rimuru1: hello
+ S1geth: Hi Automaton2000
+ Automaton2000: because you might have to do to make it even worse
+ S1geth: yes
+ Audatic: how do I approve a submission?
+ Audatic: I want to do it and according to my next progress icon its also what the site wants me to do it, but I don;t know how
+ Scarfield: Community -&gt; Contributions -&gt; Make sure it works, statement/validators and so on are acceptable for being approved. You need 50+ Clashes played to approve a clash of code, and lvl 20+ to approve classic puzzles
+ Audatic: ah I am only lvl 9, I guess that is the missing one
+ Wontonimo: anyone know a fast way of calculating UCB1&#160;?  It's taking a wooping 37.5% of all my compute time in uttt.  I made a log lookup and that shaved some off, but only slightly
+ Wontonimo: a bitshift psudo log also helped
+ Wontonimo: ah , i see there are fast approximate sqrt functions online ...  okay, now I feel like I'm just talking to myself
+ alpha..: Hey Automaton2000
+ Automaton2000: could be a good idea
+ alpha..: :rolling_eyes: Automaton2000
+ Automaton2000: and i am in the morning
+ jacek: Wontonimo sqrt is done in 1 instruction. UCB shouldnt be the bottleneck unless the rest is really really optimized
+ Wontonimo: my ego wants to say that the rest is really optimized, but maybe i'm just recalculating it too often
+ jacek: so we can assume it isnt
+ Wontonimo: oh, yeah, the plain-old-sqrt is faster than the "fast sqrt"
+ Wontonimo: yes, that's a very safe assumption&#160;:)
+ jacek: maybe sqrtf but i doubt it
+ Wontonimo: thanks, i'll investigate why I'm calling UCB SOOOOO MUCH ...  it must be my last bug lol
+ MSmits: doubtful :P
+ Wontonimo: yeah, it was a joke :P
+ jacek: btw do you call log(parentVisits) for every children or just once?
+ Wontonimo: well, now i'm just embarrassed 
+ MSmits: inline float fastlogf(const float&amp; x) { union { float f; uint32_t i; } vx = { x }; float y = vx.i; y *= 8.2629582881927490e-8f; return(y - 87.989971088f); }inline float fastsqrtf(const float&amp; x) { union { int i; float x; }u; u.x = x; u.i = (1 &lt;&lt; 29) + (u.i &gt;&gt; 1) - (1 &lt;&lt; 22); return(u.x); }inline float rsqrt_fast(float x) { return _mm_cvtss_f32(_mm_rsqrt_ss(_mm_set_ss(x))); }
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/367a2733-8136-465c-ac4e-1abb63c541c1">http://chat.codingame.com/pastebin/367a2733-8136-465c-ac4e-1abb63c541c1</a>
+ MSmits: use that
+ MSmits: the uct function is a child method, gets as parameter the sqrtlog of parent
+ Wontonimo: I follow, nice!
+ MSmits: i havent found faster than this, but some other methods are equally fast
+ MSmits: well... i fact storing the rsqrts in a cache is like 5% faster, but don't... just dont. It's ugly 
+ Wontonimo: is "const float&amp; x" significantly faster than "float x"&#160;?  I'm assuming yes because there isn't a copy made
+ Wontonimo: (in the function parameters)
+ MSmits: i have no clue, i googled these and tested them
+ MSmits: possibly the compiler is smart enough to do whatever i sbest?
+ Wontonimo: thanks&#160;!  gotta go
+ jacek: its inlined so no difference&#160;:?
+ jacek: ryzen 5800x :heart:
+ MSmits: np, cya
+ jacek: finally new computer arrived
+ MSmits: ahh nice, congrats
+ MSmits: how expensive are these ryzen things compared to a regular computer
+ jacek: what is regular computer now?
+ MSmits: no idea, i suspect 1k euros for a reasonable one, including a typical gpu?
+ MSmits: been a long time since i got new hardware
+ jacek: ryzen 3000 series were very good in perf/price comparison at the time
+ jacek: now everything went up due to BTC and covid :unamused:
+ MSmits: I see
+ jacek: mine is about 2k euro for ryzen 5800x + gtx 2060
+ jacek: + the rest (32GB RAM etc)
+ MSmits: mmh not a bad price at all
+ jacek: i couldnt get the 3xxx
+ MSmits: did you want an expensive gpu for training NN?
+ jacek: fortunately what i do is very parallelizable
+ jacek: yes, eventually
+ MSmits: what do you do?
+ jacek: right now im training NN in cpu only
+ jacek: well for example generating games is parallelizable
+ MSmits: yeah that makes sense
+ MSmits: just make sure you dont do FastRand with a fixed starting seed or something
+ MSmits: or you'll do the same games in parallel&#160;:)
+ jacek: im using custom xorshift
+ jacek: though one time i forgot to seed it...
+ MSmits: yeah thats what i meant
+ jacek:         auto now = high_resolution_clock::now();
+ MSmits: ahh ok good
+ jacek: or could have called random_device()() for seed
+ gameroo8: hello
+ MasterCoderxD: hi
+ -oa-: hi
+ Tarun_Sunny: hi
+ GeEexpert: tutoubheras pas la balle on te fait la bresdilienne euhhhhhhhhh*
+ GeEexpert: chico chico hola hola girls tu toucheras pas la balle ont te fait la bresilienne e
+ Wontonimo: @jacek the obvious optimization of calculating log once (which I really should have seen) made a huge improvement!  Thanks
+ CrusherBrooks: so... basic I/O question, but how am I supposed to debug in python when the "game" takes any print as a command? lol
+ Wontonimo: print("my debug statement", file=sys.stderr, flush=True)
+ Wontonimo: ^ that's how you print debug in python.  The game doesn't read your debug statements and instead just displays them
+ CrusherBrooks: thanks
+ CrusherBrooks: never learned about debug statements in uni. oh well
+ Peanutbutter_Warrior: you never printed everything to find that one annoying error?
+ CrusherBrooks: eh... only manually, using print
+ Wontonimo: no errors, no need for debug
+ Uljahn: there are hints in some puzzles on the left side of IDE, check them<a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/power-of-thor-episode-1">https://www.codingame.com/ide/puzzle/power-of-thor-episode-1</a>
+ Peanutbutter_Warrior: thats what you're doing here, using print. the file argument like that is specific to codinggame
+ Wontonimo: what?? I've been on this site for 4 months and I haven't noticed hints?
+ CrusherBrooks: I saw the hints, but they didn't address my question :P
+ CrusherBrooks: what do you mean by "printing everything", btw?
+ Wontonimo: the print like that isn't specific to CG.  It works in all python and redirects that print statement to standard error
+ Uljahn: there is a commented line in default code then
+ Uljahn: # To debug: print("Debug messages...", file=sys.stderr, flush=True)
+ Peanutbutter_Warrior: yes, but when debugging normally do you direct it to the error stream?
+ CrusherBrooks: I just print out what I want to print out and see if it's right
+ Uljahn: that's not normal
+ Wontonimo: @Peanutbutter_Warrior  that's the normal way on CG.
+ CrusherBrooks: well, that's why I ask lol
+ Peanutbutter_Warrior: yeah, im saying its not the normal way in most other ides
+ Wontonimo: use the sys.stderr redirect.  But I have seen some people just concat their debug at the end of output.  It only works for games where it is supported, like some bot games.  Don't depend on the concat option
+ CrusherBrooks: yeah I used the sys.stderr, it worked. Thanks guys&#160;:)
+ RSBat: Peanutbutter_Warrior it is quite normal - Intellij ides even support different colors for stdout/stderr
+ Wontonimo: @jacek btw, calc log once moved me from g12 to g6, a bump of 1.5 points.  another 2.5 points to go to get to legend ... i can smell it from here
+ struct: do you have teccles heuristic Wontonimo?
+ Wontonimo: @struct no ... what?  is that something that you can share?
+ darkhorse64: You have the pragmas&#160;?
+ Wontonimo: just #pragma GCC optimize("Ofast", "inline", "omit-frame-pointer", "unroll-loops")
+ struct: if top left is empty
+ struct: you play 0 0
+ struct: And he must play on that board 
+ Wontonimo: yeah, i saw that while watching reCurse and others in the top
+ Wontonimo: i've been meaning to implement that, but haven't yet.  thanks for the reminder
+ Wontonimo: didn't know if it was just coincidence or actual heuristic, now that i know its an actual thing it is bumped up in my priority list.  Thanks!
+ Wontonimo: @darkhorse64 are there other pragma's that you'd recommend?  I really only have ~40hours of c++ under by belt at this point, so I'm just shooting in the dark about pragmas
+ Wontonimo: actually, hold that.  MSmits recommended a bunch of others that i haven't been able to get working.  let me work on that first
+ darkhorse64: The other pragmas matter only if you want to use SSE, AVX SIMD programming
+ darkhorse64: which is yet another level
+ darkhorse64: Mostly useful for bitboarding although some people also write sim engines with SIMD
+ Wontonimo: :thumbsup:
+ JLukeSkywalker: so my csb was all messed up because distance formula had x1-x2 and y1+y2
+ JLukeSkywalker: i hate single character mistakes that dont actually error
+ Wontonimo: an assert will turn that into an error for you
+ Peanutbutter_Warrior: Has anyone done CGX formatter and know what the test case means when it says 'block without spaces not containing a value'?
+ Peanutbutter_Warrior: because I'm failing the test for it, but I've no idea how. Testing everything I can think of it meaning passes
+ Peanutbutter_Warrior: nvm i found the problem, apparently without spaces does not mean not havving spaces
+ DomiKo: CG stats isn't working?
+ DreadMCYT: oof
+ Astrobytes: seems fine for me DomiKo?
+ DomiKo: <a rel="nofollow" class="external free" href="http://cgstats.magusgeek.com/app/hypersonic/DomiKo">http://cgstats.magusgeek.com/app/hypersonic/DomiKo</a>
+ DomiKo: hypersonic working too?
+ Astrobytes: what position and what league you in?
+ DomiKo: 7place
+ DomiKo: I tried anyone from top10
+ DomiKo: and nobody is working&#160;:(
+ Astrobytes: In legend I presume. Could be an error, best to ping Magus
+ DomiKo: omg
+ DomiKo: my bad&#160;:(
+ DomiKo: I picked contest
+ DomiKo: insted of multi
+ DomiKo: ehhhh
+ Astrobytes: ahhh lol
+ Astrobytes: I've done that before :D
+ DomiKo: My friend send me wrong link
+ DomiKo: and I didn't think of this
+ Astrobytes: hehehe, it happens
+ Audatic: I want more code golf challenges but there aren't any
+ JLukeSkywalker: you can solve each one in 5 languages
+ JLukeSkywalker: really, whoever wins one wins the other, golf-wise they are all the same
+ Audatic: yeah but to actually win them you have to know the languages extremely well 
+ Audatic: maybe I should just create my own one&#160;:)
+ JLukeSkywalker: my point is, as long as you can solve the puzzle, the leaderboard will be the same for every single golf puzzle
+ JLukeSkywalker: adding more is pointless
+ Audatic: why? The solutions to the puzzles are different paths that require different ideas?
+ JLukeSkywalker: but golfing the code is the same
+ JLukeSkywalker: otherwise they could just make every single puzzle on here a golf
+ Audatic: yeah I don't get why they don't do that. You seem to suggest that golfing is pointless because you can always do it the same way, but that is no true. Otherwise why would entire websites to golfing different problems exist?
+ Audatic: maybe it's true for simple problems like "sum the square of these numbers" but surely not for more complex tasks
+ reCurse: For sheer entertainment purposes
+ reCurse: It has no practical value
+ Audatic: yeah this website is for me purely entertainment, I am not learning here - some people might but I don't. 
+ reCurse: Sure, it's valid, it's just maybe the least popular section here.
+ JLukeSkywalker: just as an example, power of thor and dont panic are insanely different puzzles/algotithms
+ JLukeSkywalker: while 1:e=s(c-a);f=s(d-b);c-=e;d-=f;print([<i>,'N','S'][f]+[</i>,'W','E'][e])
+ JLukeSkywalker: while 1:f,p,d=I().split();print("BWLAOICTK"[[e[f]&lt;=int(p),e[f]&gt;=int(p)][d[0]&gt;"L"]::2])
+ JLukeSkywalker: yet the golfed code is just almost exactly the same
+ Audatic: reCurse Yeah but ClashOfCode seems popular and it's entertainment for 90% of people playing. I think there could be more interest - but maybe people don't like code golf that much for various reasons
+ reCurse: To better express what I think you're saying here, the most efficient codegolfing entries are about hardcoding the validator answers rather than having a program working as intended for all inputs.
+ reCurse: So it's much less about the actual problem
+ struct: The only popular thing are contests
+ JLukeSkywalker: well, that is part of the problem, but both solutions i posted were not hardcoded
+ reCurse: Ah, my bad.
+ JLukeSkywalker: when you golf it, every solution in that language is just the same
+ JLukeSkywalker: for example python is just an input into an indexed string or list print
+ JLukeSkywalker: 99.9% of the time
+ reCurse: Audatic: I think there is a certain pretense of how useful it can potentially be elsewhere. Codegolfing is definitely at the bottom, so it probably doesn't help its popularity.
+ reCurse: Of course clashing isn't that much better for how useful it can be, but it's arguably better than golfing.
+ JLukeSkywalker: plus clash has some python/ruby golfing in it
+ Audatic: I think those might be similar but my current solutions to chuckNorris,Temperatures and Thor are completely different.  
+ Wontonimo: i think a huge lure to CoC is that it is a small commitment of time to see some results.  I think that's also the lure of bot games where the valid moves are provided.  Super fast to create something
+ Wontonimo: how i got on CG was a friend suggested CSB, then we competed in some challenges, then competed on cave dweller, then I discovered CoC then I quit CoC 
+ Audatic: I actually haven't tried the bot-programming because it seemed like such a big time investment, but maybe I should check it out. Is there in general a best solution or is your solution depending on other players?
+ Astrobytes: Well, you're trying to beat the other players bot at the game in question.
+ Audatic: but I can't just do a MinMax Tree search and be done with it because of time constraints? Or are the problems usually NP-hard?
+ JLukeSkywalker: there are time constraints
+ JLukeSkywalker: usually ~100ms
+ Astrobytes: That's where the fun starts
+ JLukeSkywalker: per turn
+ Astrobytes: A lot are 50ms
+ Audatic: okay - I can see the appeal but I can also see the time sink potential :D 
+ Astrobytes: There's a reason we're all here you know :P
+ AntiSquid: masochism
+ Astrobytes: lol
+ DomiKo: time sink is huuuggeee
+ DomiKo: once you fall into the hole, you can't get out
+ Audatic: yeah that seems a bit scary :DSorry to come back to this, but how can I create a Golf challenge? 
+ FlyHead: what games have yall been spending time on for the bots?
+ struct: only by creating private golf clash
+ struct: and then inviting people
+ AntiSquid: don't think you can, apart from creating a clash of code shortest mode&#160;:/
+ FlyHead: i'm not too deep in it yet, but i'm drawn toward the resources ones like ghost in the cell and the ore harvest one
+ Audatic: Why can't I create it via contribute? Like make my own challenge for people (and myself)?
+ AntiSquid: unless maybe you wanted to do an optimization puzzle in that direction, like cgfunge&#160;?
+ struct: you can create a clash puzzle
+ Astrobytes: Well sure, you can create a shortest mode clash as a contribution, or do something like squiddy suggested there (good idea)
+ Audatic: yeah but I want some code golf where you spend hours/days not 15 min. Like the 4 we have on the website
+ JLukeSkywalker: cgfudge takes weeks
+ JLukeSkywalker: im still not done with mine
+ JLukeSkywalker: took a break from it with bots
+ AntiSquid: have a look, it's not really the same but sort of same principles <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/optimization/cgfunge-prime">https://www.codingame.com/multiplayer/optimization/cgfunge-prime</a>
+ Astrobytes: tbf, there might be better places than CG if you just want straight up golfing
+ AntiSquid: very much so
+ Angecide: using this github.com/s-vivien/CGBenchmark is it possible to, instead of me vs enemies, pick a player using agentId and let it play against the enemies to gauge the strength of that specific bot?
+ Angecide: like let's say I wanna see how strong someone on top 10 is as player 2 against other top 10 etc.
+ DreadMCYT: i am horrible with bots and ai's
+ DreadMCYT: an i have to make one
+ MSmits: Angecide i am not sure if this is possible with cg bench, but there's no reason it should not be possible to create a tool that can do this, as you can also do it in the IDE
+ Angecide: ye that was my thoughts as well
+ Angecide: btw msmits, on your new bot, how much loss&#160;% do you have as p2?
+ Angecide: against top players
+ Angecide: top 10
+ Angecide: like purely as player 2
+ MSmits: didnt test. But if you just want to know what the p1 advantage is in general it's about 65-70% vs 30-35%
+ MSmits: I think the better the bots are, the more biased towards p1 it becomes
+ darkhorse64: MSmits, I am looking for the thesis which explained a variety of MM algorithms. Sorry, I failed to bookmark it
+ MSmits: I think i know which one you meant sec
+ Astrobytes: carolus?
+ darkhorse64: yep
+ Astrobytes: <a rel="nofollow" class="external free" href="https://homepages.cwi.nl/~paulk/theses/Carolus.pdf">https://homepages.cwi.nl/~paulk/theses/Carolus.pdf</a>
+ MSmits: <a rel="nofollow" class="external free" href="https://homepages.cwi.nl/~paulk/theses/Carolus.pdf">https://homepages.cwi.nl/~paulk/theses/Carolus.pdf</a>
+ MSmits: damnit
+ Astrobytes: hah!
+ darkhorse64: You remind me the name
+ darkhorse64: thanks both
+ Astrobytes: np
+ Astrobytes: I accidentally submitted in oware&#160;:(
+ darkhorse64: does it hurt
+ darkhorse64:&#160;?
+ Astrobytes: not particularly but it wasn't ready for a submit
+ darkhorse64: dead last&#160;?
+ Angecide: I see, I guess those numbers are for bots on similar level I imagine, since top 3 probably have below 50% loss as player 2 against bots lower than top 10
+ MSmits: yeah, i mean similar level
+ Astrobytes: no 10th currently darkhorse64
+ darkhorse64: thzt
+ Astrobytes: 11th
+ darkhorse64: that's good for a failed attempt
+ Astrobytes: yeah it didn't have a typo or anything but I didn't want to submit at all, it'll probably end up where it was before
+ DreadMCYT: help
+ darkhorse64: 1000 more CP
+ jacek: huh
+ DreadMCYT: all i am getting is this
+ DreadMCYT: at Answer.py. not in a function on line 24
+ Astrobytes: typo
+ DreadMCYT: if next_checkpoint_angle &gt; 90 or next_checkpoint_angle &gt; -90 then
+ DreadMCYT: that is line 24
+ DreadMCYT: i am doing the Pseudo Code Algorithm wrong i think 
+ Astrobytes: if next_checkpoint_angle &gt; 90 or next_checkpoint_angle &gt; -90:
+ Astrobytes: Do you know python?
+ DreadMCYT: kinda
+ DreadMCYT: i am trying something new
+ Astrobytes: 11th, meh. Stupid ankles.
+ DreadMCYT: i am new to coding 
+ Astrobytes:  I figured that
+ Astrobytes: CG isn't the best unless you have the basics down pat already
+ JJ-TT: what would be good for revising the basics?
+ Valdez001: acho que algoritmos
+ DreadMCYT: what is the best code for my first bot
+ RSBat: anybody from top gold/low legend in uttt running MCTS here?
+ RSBat: how many rollouts per turn do you have?
+ struct: yes
+ struct: 25k+-
+ struct: on 2nd turn
+ DreadMCYT: need help with something
+ jacek: oh my
+ JohnathanBarbee: I'm in gold in UTTT and I'm currently trying to implement MCTS
+ DreadMCYT: line 6 on my coding is incorrect 
+ DreadMCYT: and all it is 
+ DreadMCYT: is this
+ DreadMCYT: else
+ jacek: missing&#160;:&#160;?
+ JohnathanBarbee: what language?
+ jacek: gold without MCTS? what do you use now
+ DreadMCYT: python 3
+ RSBat: thanks, time to optimize a lot then
+ struct: I doubt uttt legend with python is feasible
+ JohnathanBarbee: I did a really simple fitness score that weighed each valid move for the optimal strategy. Highest fitness score was my next move
+ Angecide: the trick is to use c++ to get into legend and then switch to python
+ aetrnm: Hey guys, any option to simulate backspace here in c++?
+ DreadMCYT: i am doing the tutorial on how to make an AI/Bot
+ Kaldorem: same
+ DreadMCYT: and i cannot figure this out
+ Kaldorem: which problem?
+ DreadMCYT: Pseudo Code Algorithm
+ JLukeSkywalker: think he means the csb onboarding
+ Astrobytes: It tells you the logic, you have to implement that in whatever language
+ Astrobytes: you can post your code here
+ Astrobytes: It will automatically pastebin and someone will take a look
+ DreadMCYT: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/860239db-216c-4654-a413-aca816c6c1ae">http://chat.codingame.com/pastebin/860239db-216c-4654-a413-aca816c6c1ae</a>
+ reCurse: Oh wow it's fixed
+ DreadMCYT: line 26
+ jacek: bad indent?
+ struct: shift tab the print
+ JLukeSkywalker: yeah, get the print out of indent
+ Astrobytes: been fixed for a wee while reCurse (and remained fixed!)
+ struct: tab the if else*
+ JLukeSkywalker: and put thrust in the print
+ JLukeSkywalker: instead of 80
+ struct: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/0dd169ec-e48a-4631-8865-e6de4aa0dc51">http://chat.codingame.com/pastebin/0dd169ec-e48a-4631-8865-e6de4aa0dc51</a>
+ struct: replace the "80" by thrust
+ Astrobytes: everything needs to be in the scope of the while loop
+ struct: I didnt do it
+ struct: Also does thrust need to be declared?
+ Kaldorem: you can declare it or write it on the print instead
+ Astrobytes: uh, if it's before a conditional I think so
+ Astrobytes: who knows though, it's python
+ DreadMCYT: now it is line 25
+ struct: missing&#160;:
+ struct: after else
+ struct: else:
+ DreadMCYT: nope
+ Astrobytes: paste the code again
+ struct: declare thrust
+ Astrobytes: ^^^
+ Astrobytes: set it to whatever BEFORE the if else
+ jacek: this is really very basic syntax problem, something out of scope of noviceness of CG
+ DreadMCYT: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/cef59e29-ba76-4b6f-981b-63726719cf89">http://chat.codingame.com/pastebin/cef59e29-ba76-4b6f-981b-63726719cf89</a>
+ Astrobytes: jacek: I tried to tell them earlier
+ struct: you need to ident the stuff inside the if and the else
+ Astrobytes: Python needs indentation
+ Astrobytes: You need to practice python. For real.
+ Andriamanitra: is that not what they're doing..?
+ Astrobytes: Andriamanitra: not effectively on here, CG won't help you learn the basics if you don't know them
+ JohnathanBarbee: I disagree
+ Astrobytes: That's outside the scope of CG, unless you're a very enthusiastic dedicated learner.
+ JohnathanBarbee: They very well could be
+ Astrobytes: In which case they'd have looked up the correct syntax already
+ struct: Unless you are already familiar with programming
+ JohnathanBarbee: not necessarily. They may not have known what the issue was to look it up.
+ Kaldorem: Or you can google it as you find it
+ Astrobytes: We have told them the issue
+ Astrobytes: And they're new to coding
+ Astrobytes: *issues
+ DreadMCYT: FINALLY
+ DreadMCYT: i figured out what was wrong
+ Andriamanitra: gj mate
+ Kaldorem: that's nice! :D
+ JohnathanBarbee: Awesome
+ Astrobytes: I give up.
+ DreadMCYT: on what
+ JLukeSkywalker: csb can only turn by 18 degrees right?
+ JLukeSkywalker: and does it turn, then thrust?
+ struct: yes
+ JLukeSkywalker: ty
+ DreadMCYT: is this code good XD
+ DreadMCYT: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/1260cf36-402a-4511-97b6-39eeeeeea365">http://chat.codingame.com/pastebin/1260cf36-402a-4511-97b6-39eeeeeea365</a>
+ struct: Nice copy paste
+ struct: You are only cheating yourself but w/e
+ jacek: oO
+ Astrobytes: Now I could say "I told you so" or I could just gloat silently.
+ JohnathanBarbee: Again thats assuming that he uses that code in his bot.
+ JohnathanBarbee: But do either one
+ struct: You are right
+ struct: Reading code is fine
+ struct: I jumped to judgement 
+ DreadMCYT: sorry caps lock
+ DreadMCYT: i am doing boost
+ JohnathanBarbee: @struct you're good. I was mainly talking to astro
+ Astrobytes: Whatever.
+ TomiiPomii: why don't some people share their code
+ JLukeSkywalker: sometimes because they are already on the next clash
+ JLukeSkywalker: click submit, click play again
+ JohnathanBarbee: ^
+ JLukeSkywalker: also some of those 'people' are bots
+ JLukeSkywalker: idk if the bots share
+ Astrobytes: You can also PM them or ping them, sometimes people just forget
+ Astrobytes: Not sure if the bots do or not tbh.
+ Scarfield: You can PM the bots to ask
+ Astrobytes: GoodTimingField
+ Scarfield: HowSoStrobytes
+ Astrobytes: It was a good moment for you to pop up and make that comment is all :P
+ Scarfield: oh, yea im helpful like that
+ Astrobytes: I meant to send you this when you were here previously:<a rel="nofollow" class="external free" href="https://pasteboard.co/JOFO9N9.png">https://pasteboard.co/JOFO9N9.png</a>
+ Scarfield: lol xD
+ Astrobytes: How's your chess?
+ jacek: cheesy
+ Astrobytes: :smirk:
+ Astrobytes: Did you bitboard it yet jacek?
+ Astrobytes: I'm not starting until I'm finished with the outstanding multi contributions.
+ Scarfield: havent done anything the last couple of days, but "done" with the most of the bitboarding. Need to add en passant, and avoid adding moves that either result in a check, or doesnt reject a check
+ jacek: not yet. got into checkers now
+ Astrobytes: Nice Scarfield. 
+ Astrobytes: Ah checkers is hot because of reBless?
+ Scarfield: ye, i really wanted to do EPT for it, but will probably do minmax, still havent decided&#160;:)
+ jacek: im gonna learn how to deal with endgames and draw cycles
+ Astrobytes: I think everything is fair game in 960 Scarfield.
+ Astrobytes: Training on endgame tables jacek?
+ jacek: nah. detecting 3-fold repetitions
+ jacek: and treating it as draws in selection
+ Astrobytes: oh yeah, crap, I remember you said the other day
+ jacek: this way the 'winning' will avoid those, while the 'losing' will keep repeating those
+ Astrobytes: Yes, makes sense.
+ jacek: my bot can get into good position and it knows its good, but can't finish it
+ Scarfield: are you using zobrist, im probably gonna try it for this bot
+ jacek: i never used zobrist. i just hash entire position
+ Astrobytes: jacek uses his own special hashing method, everyone else zobrists
+ Scarfield: xD
+ Astrobytes: jacek, you know it does hash the whole board state right
+ Scarfield: hmm just thought that a transpostion table wouldnt take 3fold rep. into account
+ DreadMCYT: i beat boss 3 and i am not going further i did the boost code
+ jacek: Astrobytes as i understand, zobrist is just incremental hash, so its faster. but this isnt my bottleneck
+ Astrobytes: yeah that's fair enough jacek
+ Astrobytes: Scarfield: Might require extra space in the entries, or maybe a repetition table? I'm actually not sure
+ Astrobytes: DreadMCYT: you progressed to next league?
+ DreadMCYT:&#160;???
+ Astrobytes: You said you beat Boss 3
+ DreadMCYT: yeah
+ DreadMCYT: twice
+ Scarfield: im still far from starting to implement TT, but i think i would just have to ignore the potential error from different "repetition tables". seems way more expensive to take into account than its benefit
+ Astrobytes: Sometimes sacrificing computation/access time can be beneficial, but yeah I couldn't comment currently tbh
+ jacek: or use EPT and stop dealing with TT :v
+ Scarfield: xD or that
+ Astrobytes: He did think of it&#160;:)
+ AntiSquid: massive eruption at etna today
+ JLukeSkywalker: lol this is hilarious, put in angle based PID into csb, and it isnt tuned yet
+ JLukeSkywalker: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/529073272">https://www.codingame.com/replay/529073272</a>
+ KornelToth: holly shit
+ JLukeSkywalker: it still made it
+ Astrobytes: JLukeSkywalker: in gold now?
+ JLukeSkywalker: no, not tuned at all
+ Astrobytes: AntiSquid: it was about due one really
+ Astrobytes: Gold is literally just the formula MK gave you - nothing else other than your vel calc
+ Anonymous_axel: how do i fix this error   Timeout: the program did not provide 1 input lines in due time... will no longer be active in this game.
+ Astrobytes: You may have actually timed out, not provided a newline after outputting, or failed to provide output
+ JohnathanBarbee: Could be a couple problems. Biggest one is infinite loop or not outputing a string fast enough
+ Anonymous_axel: its on coders strike back on the tutorial 
+ Anonymous_axel: tried everything but keep getting same error
+ Astrobytes: Is there a run on CSB this evening?
+ JLukeSkywalker: i mean it is the onboarding, they are probably all new to the site
+ JLukeSkywalker: all MK told me was 'subtract velocity'
+ Astrobytes: Yeah but unusual to get a glut like this at this time of day.
+ Anonymous_axel: yeah im new to coding&#160;:/ i wanted to learn ha
+ JLukeSkywalker: i ran a full PID based on distances and tuned it, and was still silver 24k
+ Scarfield: have you just gotten to a new league Anonymous_axel? the inputs change from league to league in some games
+ Anonymous_axel: im on wood 2 league
+ Anonymous_axel: it says i can now use distance and angle 
+ Scarfield: In CSB the input changes thoughout most of the leagues, that could be your issue, if you just ranked up. "Restore default code" in top right will give you the new basic code to read the input. Remember to copy the code you wrote the paste back
+ Scarfield: *to paste back
+ Anonymous_axel: ok i just reset the code
+ Anonymous_axel: now im not moving 
+ JohnathanBarbee: Right. you have to paste back in your code. and alter it to accept and use the new variables given
+ Scarfield: ^
+ Scarfield: but im off for now, gn all
+ Anonymous_axel: oooh ok thanks 
+ JohnathanBarbee: gn
+ Anonymous_axel: i copied and pasted the psuedo code it still isnt working i should give up haha
+ Astrobytes: gn Scarfield
+ Astrobytes: Anonymous_axel: it's 'pseudo' code for a reason - it's not actual code
+ Anonymous_axel: wooow haha
+ Anonymous_axel: so how do i apply it?
+ Astrobytes: What language are you using?
+ Anonymous_axel: python
+ Astrobytes: brb, 1 min
+ Anonymous_axel: ok
+ Astrobytes: ok, less than 1 min. Well the pseudo code is almost python, if you can use python you can translate it easily.
+ Anonymous_axel: ill copy and paste the code here
+ Anonymous_axel: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/c59f3089-8912-4869-947f-16c71e1d7301">http://chat.codingame.com/pastebin/c59f3089-8912-4869-947f-16c71e1d7301</a>
+ Anonymous_axel: how do i apply it as a code?
+ Wontonimo: python needs things like ":" at the end of if and else blocks
+ Wontonimo: don't paste it as-is, read it over and use it to write python
+ Astrobytes: ^
+ Anonymous_axel: do i just use print"nextcheckpointangle"?
+ Astrobytes: Look up how to do these things in python
+ DreadMCYT: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/42197f4c-a10d-4207-b0e7-aac169a18f89">http://chat.codingame.com/pastebin/42197f4c-a10d-4207-b0e7-aac169a18f89</a>
+ Anonymous_axel: still not doing it im so confused right now
+ DreadMCYT: one sec
+ DreadMCYT: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/11f9ab8b-31a4-4bbc-b925-88bd7e76e175">http://chat.codingame.com/pastebin/11f9ab8b-31a4-4bbc-b925-88bd7e76e175</a>
+ Anonymous_axel: it fixed it for fist tutorial now i just need the angle 
+ Astrobytes: ...
+ DreadMCYT: .......
+ Astrobytes: Maybe try an easy puzzle instead?
+ Astrobytes: You don't *have* to do this tutorial if you struggle with it.
+ ianc1339: try this out <a rel="nofollow" class="external free" href="https://www.learnpython.org/">https://www.learnpython.org/</a>
+ ianc1339: good for starting out python
+ DreadMCYT: i need help with boost 
+ RockNTroll: B O O S T
+ Urkchar: pog
+ lkottler: shark
+ iiAbusinq: whats a widely used programming language which is fun to learn?
+ Wontonimo: rust
+ Wontonimo: bwah hahaha
+ iiAbusinq: i honestly have no idea what im doing
+ Wontonimo: fun?  tell me more about this word.  If you want fairly easy, i'd say python.  If you want to know what is happening on the metal, c/c++.  If you'd like something like c but with training wheels, java
+ Wontonimo: if you want to make games with unity, c#
+ Wontonimo: webpage stuff, javascript
+ iiAbusinq: Easy to understand the basics, don't want to be able to do the diffucult big code things etc yet, but i'd really like to learn the basics of coding
+ JohnnyLuke: if you just want to learn to code for fun, i would say python
+ Wontonimo: have you tried scratch by mit&#160;?
+ JohnnyLuke: if you want to learn to use it later professionally, i would say learn a flavor of c
+ Wontonimo: <a rel="nofollow" class="external free" href="https://scratch.mit.edu/">https://scratch.mit.edu/</a>
+ Wontonimo: it's "fun"
+ iiAbusinq: What's scratch? 
+ JohnnyLuke: drag'n'drop code
+ iiAbusinq: Ah I see
+ iiAbusinq: So that'll help me understand basic terms I guess?
+ Wontonimo: and it's turing complete.  I gave my kids an assignment to implement the sqrt function using division, multiplication, and the newtonian method. 
+ Wontonimo: yeah, it will definitely help you learn the basics of "if" statements and logic if you've never coded before
+ iiAbusinq: I understand the concept of the if, then, else, etc
+ Wontonimo: have you watched "the coding train" on youtube?  Fun guy.  He does mostly javascript and "FUN" projects
+ iiAbusinq: but i don't think I can use them correctly
+ iiAbusinq: I'll check that out!
+ Wontonimo: he does a wide range of stuff and publishes nearly every day
+ Wontonimo: he shows his mistakes and debugging also, so for a beginner that stuff is gold
+ iiAbusinq: Would you say this site would be any use to a beginner beginner like me? or should I come back once I got the basics under control haha
+ JohnnyLuke: i would say try the on-boarding puzzle and 1 or 2 easy puzzles
+ JohnnyLuke: if you cant do those, come back
+ iiAbusinq: Any way to sort on easy puzzles?
+ JohnnyLuke: if you hit practice, there is a pre-sorted easy category
+ Wontonimo: yeh, let me find a couple for you
+ Wontonimo: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/easy/mars-lander-episode-1">https://www.codingame.com/training/easy/mars-lander-episode-1</a>
+ iiAbusinq: What do the starts represent, ratings of difficulty, or  how much they'd suggest me doing those?
+ Wontonimo: and then try <a rel="nofollow" class="external free" href="https://www.codingame.com/training/easy/power-of-thor-episode-1">https://www.codingame.com/training/easy/power-of-thor-episode-1</a>
+ Wontonimo: and then, if you can do both of those, try <a rel="nofollow" class="external free" href="https://www.codingame.com/training/easy/mime-type">https://www.codingame.com/training/easy/mime-type</a>
+ Wontonimo: The puzzles become a lot harder after these
+ iiAbusinq: Alright thanks!

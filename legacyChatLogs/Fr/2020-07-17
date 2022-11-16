@@ -1,0 +1,364 @@
+ Golden221: Bonjour tout le monde
+ Bob: amis des tortues du vendredi et autres Automaton2000, bonjour
+ Automaton2000: sinon il va falloir que je me casse
+ Bob: mais non reste Automaton2000
+ Automaton2000: je me dis que si tu as un souci
+ Bob: non mais putain y a des professionnels
+ Bob: le formulaire de la poste pour editer un bon de recommande...
+ Bob: tu rentres les champs pour l'adresse, tu valides
+ Bob: il te rajoute un selecteur "adresses proposees" en rouge (genre eh t'as oublie un truc connard) avec dedans exactement l'adresse que tu viens de rentrer
+ Bob: et il te remplace les champs que tu as renseignes avec les morceaux qui vont bien
+ Bob: tu revalides
+ Bob: et la il gueule parce que la voie contient des caracteres accentues - qu'il a mis lui-meme
+ dbdr: deja pq ne pas accepter les accents?
+ dbdr: on est dans les années 70?
+ Bob: c'est ca
+ Bob: ce qui est rigolo c'est que les accents viennent de mon premier input
+ Bob: qu'il a repris tels quels dans ses adresses proposees
+ Bob: mais je les ai mis dans le textfield dont il me dit que j'ai pas le droit de mettre des accents dedans
+ Bob: au moins si je me fais virer de mon boulot actuel je vois qu'il y a de quoi faire dans le frontend
+ Bob: (╯°□°）╯︵ ┻━┻
+ Bob: "Désolé, l’adresse expéditeur que vous avez indiquée n’estpas compatible avec la collecte de courriers recommandésen boîte aux lettres personnelle. "
+ Bob: :see_no_evil:
+ Bob: (╯°□°）╯︵ ┻━┻
+ Bob: (╯°□°）╯︵ ┻━┻
+ Bob: (╯°□°）╯︵ ┻━┻
+ Bob: :poop::arrow_right::nose:
+ dbdr: il y a de quoi faire, mais est-ce bon pour la santé mentale?
+ Bob: je vais marcher jusqu'au bureau de poste pour leur envoyer les boredeaux de recommandes papier en travers de la gueule, ca me calmera
+ Bob: bordereaux*
+ Bob: (l'emoji nez ressemble quand meme vachement a une bite, non&#160;?)
+ darkhorse64: my bollocks on your nose
+ darkhorse64:&#160;?
+ Bob: (aujourd'hui, Automaton2000 perfectionne son vocabulaire avec Bob)
+ Automaton2000: tu ferais mieux de bosser ton csb pour être légende
+ Bob: darkhorse64&#160;: pas loin
+ Bob: bien tente Automaton2000 mais je suis deja legende sur csb
+ Automaton2000: c'est pas lui qui fait que c'est un jeu de plateau&#160;?
+ leojean890: mdr c'est une phrase que Zorg1 m'a sorti il y a 3 jours quand je lui disais que je faisais du botG :P
+ dbdr: leojean890 connait tout l'historique du chat par coeur
+ dbdr: pas besoin de logs
+ Bob: remember remember
+ leojean890: vu que ça s'adressait à moi et que c'est récent j'ai mémorisé :P
+ Bob: a Nanterre on l'appelle Leo l'cerveau
+ VilBoub: Pourquoi "à Nanterre"&#160;?
+ Bob: j'aurais pu dire "dans l'milieu"
+ Bob: c'est Nanterre qui est sorti, me demande pas pourquoi&#160;:)
+ VilBoub: ^^
+ Bob: faut l'imaginer prononce par Ventura ou Gabin
+ VilBoub: J'habitais Nanterre jusqu'en juin dernier... pour ça que je pose la question =)
+ Bob: arf
+ VilBoub: Nanterre ce n'est plus ce que c'était... ça devient une ville respectable&#160;!
+ Bob: question design
+ Bob: j'ai une fonction qui doit renvoyer un element d'une liste
+ lionel_fr: légende sur csb, rien que de la bonne heuristique à 2 ms...
+ Bob: techniquement la liste pourrait etre vide, mais en pratique la UI est censee garantir que la fonction n'est jamais appelee dans ce cas
+ Bob: faut-il quand meme empecher la fonction de claquer une exception si la liste est vide&#160;?
+ lionel_fr: retourne dans un if au début de la fonction
+ Bob: oui mais retourner quoi&#160;?
+ Bob: si je renvoie un undefined, apres ca veut dire rajouter des asserts la-dessus dans une zone du code ou je ne suis pas cense etre dans ce cas de toute facon
+ VirtualAtom: l'exception c'est bien, non&#160;?
+ Bob: perso je serais plutot pour l'exception oui
+ Bob: j'aime pas surproteger le code "au cas ou"
+ lionel_fr: pareil pour moi
+ VirtualAtom: des valeurs spéciales et des codes d'erreur, c'est une tannée, car tu dois les gérer sur tous les lieux d'appels
+ Bob: clair
+ lionel_fr: bloque tout tant que le dev qui appelle ta fonction est toujours dans les parages
+ Bob: avec TypeScript en plus, ca vient te faire chier toutes les deux secondes "ouh la la attention c'est peut-eter undefined ca"
+ Bob: et son corollaire "aaarg nooon tu veux ignorer mon beau warning"
+ lionel_fr: et que son code est encore chaud
+ Bob: ben en fait justement je suis en train de cramer du code
+ Bob: on a reussi un assez joli truc, le fichier a tout juste trois mois et deja plus personne ne s'y retrouve
+ Bob: tout le monde est passe dessus, c'est la pute de l'appli
+ Bob: t'as jamais eu deux fois de suite les memes personnes qui ont fait le code review, et presque toujours a l'arrache
+ Bob: donc c'est juste un gros paquet de verrues
+ lionel_fr: mieux vaut lui remettre une artouche que d'ajouter des cas dans ton code "vertueux"
+ lionel_fr: cartouche**
+ VirtualAtom: (je note l'expression "tout le monde est passé dessus, c'est la pute de l'appli" pour usage ultérieur)
+ lionel_fr: note aussi "lui remettre une cartouche"
+ lhm: Moi je vois pas le problème de l'exception - ça me parait être le bon comportement pour une fonction qui n'est jamais censée être appelée sur une liste vide
+ lhm: Mais c'est vrai que l'expression me plait bien aussi&#160;:)
+ Bob: bon ca me rassure de voir qu'on est raccord
+ Bob: je suis pret a parier qu'un ou deux des devs de l'equipe me feront chier avec ca
+ Bob: parce que leur culture a eux c'est de tout asserter dans tous les sens
+ lhm: Au pire tu leur rajoute une surcharge à cette fonction qui renvoie un pointeur qu'ils devront vérifier eux-même, si ils sont pas contents&#160;? 
+ Bob: je suis en JS, pas de surcharge
+ lhm: ah pardon j'ai pris la discussion en cous
+ lhm: *cours
+ Bob: non mais j'avais pas dit
+ Bob: et en fait non je vais pas faire de la daube juste pour qu'ils puissent rester dans leur confort
+ VirtualAtom: le problème des asserts, c'est qu'elles ne sont valables qu'en dev, si elle sont activées. En prod chez le client, t'as aucune idée de ce qui pète
+ Bob: ah pardon j'ai dit assert
+ Bob: en vrai je pensais "prevoir le code pour que ca ne claque quand meme pas"
+ Bob: i.e. faire du code mort puisque fondamentalement le code en amont est cense faire en sorte qu'on ne soit jamais dans la situation dangereuse
+ VirtualAtom: une erreur silencieuse + logging pour avoir une trace&#160;? 
+ Bob: le probleme de l'erreur silencieuse c'est que si tu veux le faire proprement tu dois t'assurer que le reste du code puisser continuer a fonctionner
+ Bob: ce qui revient a le proteger contre la chute de meteorite
+ VirtualAtom: t'as pas de solution parfaite ^^. Tout ce qui est main thread, j'aurais tendance à dire que l'exception c'est pas mal, pour les modules qui ne doivent pas planter ou dans des threads, c'est l'erreur silencieuse + vérification des cas spéciaux pour éviter de se prendre les pieds dans le tapis
+ lionel_fr: ya un petit côté politique&#160;: si tu as le cran de le faire, mets tout en panne dans ce cas. 
+ Bob: bah la je suis dans de la UI, donc pour moi c'est exception
+ Bob: dans la mesure ou y a pas de code client de ce truc-la
+ Bob: on est censes maitriser tout ce qui vient en amont et il n'y a pas d'API a garantir en aval
+ lionel_fr: certes, mais si ça fait perdre de l'information, tu vas garder un petit warning dans ta tête, qui dit&#160;: "ce truc n'est pas fiable"
+ lionel_fr: damn&#160;: 480 milliards d'investissement européen dans l'hydrogène d'ici 2050
+ lionel_fr: 2000 milliards en comptant les batailles des privés pour répondre aux appels d'offres
+ dbdr: Bob: l'interet d'un assert pour ce que le code en amont doit gerer, c'est d'etre robuste au fait que le code en amont peut changer dans le futur
+ dbdr: et de raisonner localement sur le code, indépendamment du reste
+ dbdr: après le mieux c'est d'encoder ça dans les types plutot que des asserts
+ Bob: oui voila
+ Bon[]Crayon: Bonjour 
+ Bon[]Crayon: :robot:AutomatonNN:turtle:
+ AutomatonNN: oui j'ai pas trop de conneries mais il semble pas trop compris ^^
+ Bon[]Crayon: :robot:Automaton2000:turtle:
+ Automaton2000: la on a pas encore eu le temps de coder
+ Bob: :tortue: Bon[]Crayon
+ Bob: ah merde&#160;:)
+ Bob: :turtle:
+ Bon[]Crayon: Salut Bob :wave:
+ Bob: punaise je commence enfin a comprendre comment ce code a la con est structure
+ Bob: ca doit eter culturel chez nous, ce truc de faire le design le plus orthogonalement possible au bon sens
+ Bob: ca donnerait presque envie de faire partie du plan de licenciements en fait
+ JBM: comment es ta re
+ VedZ: Bonjour&#160;:)
+ SeebOmega: o/
+ StephaneC4M: itanla ve ty soratra ty
+ StephaneC4M: ok
+ Thyl: Yo VedZ et tout le monde&#160;!
+ Thyl: Lapinou Automaton2000
+ Automaton2000: j'ai essayé de le faire en bash
+ lhm: Quelle erreur, Automaton2000&#160;!
+ willf80: Bonjour à tous 🙂
+ Automaton2000: oui mais t'as pas le droit de faire un multi
+ dwarfie: bravo Automaton2000
+ Thyl: Automaton2000  je ne savais pas que tu étais aussi fort en ASCII ART!
+ Automaton2000: c'était quoi le problème avec le code de magus
+ Automaton2000: je viens de battre le boss
+ Magus: Il va très bien mon code Automaton2000
+ Automaton2000: j'ai même pas envie de la faire
+ lhm: Tu parles de ton code source Automaton2000&#160;?
+ dwarfie: Automaton2000 ... le probleme du code de magus , c'est que c'est le code qui te fait touner :D
+ Thyl: #Magus pourquoi Automaton2000  prends ta défense
+ Thyl:&#160;?
+ Thyl: Et pourquoi il dessine des lapinous en ASCII ART&#160;?
+ Automaton2000: je suis arrivé au bout de la map
+ Thyl: Bob pour le fichier moi quand il a deux jours je m'y retrouve plus&#160;!
+ dwarfie: Automaton2000&#160;: au bout ou au bord ....pour savoir si je te dit "tortue" ou "saute"
+ Automaton2000: il n'y a pas de quoi tu parle
+ dwarfie: Automaton2000 ... t'as du mal avec le mot alors voila un dessin&#160;: :turtle:
+ Automaton2000: c'est ce que je suis dans la ligue silver&#160;?
+ Thyl: OUI&#160;!
+ Thyl: Je  crois qu'Automaton2000  à bu&#160;!
+ Automaton2000: j'en ai marre de faire des trucs du genre
+ dwarfie: :thinking: un eclair de conscience de lui meme&#160;?
+ Thyl: Automaton2000  en a marre de boire...
+ Automaton2000: il y a deux ans
+ Thyl: Faut savoir t'en à marre ou t'en à pas mare&#160;!
+ Thyl: mare
+ Thyl: Automaton2000 
+ Automaton2000: ou alors c'est pas un truc pour ça
+ Thyl: Je revais à ma simu du Brige&#160;!
+ Thyl: Automaton2000 
+ Automaton2000: tu fais combien de temps pour les tortues&#160;?
+ Thyl: Victoire&#160;!
+ dwarfie: hummm , ca compte le pluriel&#160;?&#160;;)
+ Thyl: dwarfie chut&#160;!!!
+ Thyl: il a dit tortue(s)
+ lhm: C'est la première fois?
+ dwarfie: dommage , si t'avait dit oui , j'aurais compter 2 points ... pas vrai AutomatonNN&#160;?
+ AutomatonNN: oui
+ dwarfie: voila :p
+ Thyl: "tortue" in "tortues" 
+ Thyl: True
+ Thyl: Y a plusieurs Tortues
+ Thyl: donc 2 points d'un coup
+ Thyl: je rentre dans la légende&#160;:
+ Thyl: :cry:
+ Thyl: Je vais de ce pas mettreça sur mon profil
+ Thyl: et si dwarfie à un truc à redire
+ Thyl: qu'il le dise pas 
+ Thyl: :grinning:
+ dwarfie: rien a redire .... juste les 5 combo a mettre un jour sur mon profil&#160;;)
+ Thyl: ....
+ Thyl: mais t'as jamais réussi a lui faire dire tortues
+ dwarfie: oh que si ... et pas qu'une fois 
+ Thyl: ....
+ Thyl: Bon
+ dwarfie: je l'ai aussi faché au point qu'il me traite de bot assez souvent pour la peine :D
+ Thyl: Comment on fais pour mette la photo sur son profil
+ Thyl: Moi il m'a menacé de me tordre les neurones
+ Thyl: (ça montre que je suis pas un bot&#160;!)
+ Thyl: :grinning:
+ Thyl: Je revais à ma simu du Brige&#160;!
+ Thyl: Automaton2000
+ Automaton2000: bon je dois y aller
+ Thyl: Automaton2000
+ Automaton2000: ouais, mais c'est pas une grosse merde
+ Thyl: :joy::joy:
+ Thyl: Automaton2000
+ Automaton2000: si tu parles de quoi?
+ Thyl: Bon je pars Automaton2000
+ Automaton2000: ouais mais quand tu vois un coup gagnant
+ Thyl: Je le prends&#160;! Automaton2000
+ Automaton2000: did u check the music?
+ Thyl: Yes, Sir Automaton2000
+ Automaton2000: et au pire tu fais un algo qui marche bien
+ Thyl: au pire....
+ Crapteur: petit question bête... Comment regarder une variable en mode Debug&#160;? "c++"
+ VirtualAtom: pas sûr d'avoir bien compris, dans un debuggueur&#160;? 
+ Crapteur: Oui
+ VirtualAtom: print var_name
+ VirtualAtom: si tu es dans gdb par exemple
+ Crapteur: Non ce n'est pas le cas
+ Crapteur: En c++ si j'utilise COUT cela fait planter le programme
+ dwarfie: a la bourrin .... cerr &lt;&lt; var_name &lt;&lt; endl; 
+ Crapteur: j'ai bien l'impression que ça marche
+ Crapteur: Merci chef&#160;!
+ dwarfie: ou alors rn mettant "  &lt;&lt; std::flush " a la fin du cout ...
+ dwarfie: de rien&#160;:)
+ Crapteur: le cout est utilisé pour envoyer la commande au vaisseau 
+ dwarfie: ( std::flush si jamais ca plantait entre l'envoi et l'affichage mais honnetement je m'en sert jamais)
+ dbdr: et hop devant dwarfie en python&#160;:)
+ dwarfie: ouais ... mais tant que je reste devant en java , ca me va ... :p
+ dbdr: ton truc pas optimisé qui détruit tout le monde, en fait&#160;;)
+ dbdr: ah, qqn a égalisé
+ dwarfie: et pourtant totalement java ... pas de gruge :D
+ dwarfie: bon , maintenant , faut que je trouve 2 char a virer du python ... ca motive pas 
+ dbdr: 7 pour #1
+ 788361: y a eu une reprise de la mode du code golf&#160;?
+ dbdr: changement des validateurs pour thor
+ Bob: oh
+ Bob: comment ça tout le monde avait hardcodé les solutions&#160;?&#160;:)
+ dbdr: :D
+ Bob: note c'était intéressant aussi comme exercice
+ dwarfie: non , on peut pas dire que virer les cas absents soit du hardcode ... quoique ...
+ Bob: non ça ok
+ dbdr: comme quoi c'est subjectif
+ Bob: après ça a peut-être changé mais à l'époque où des copains à moi regardaient ça, les codes du top hardcodaient les validateurs
+ dwarfie: en meme temps , comme il reste des cas absents dans les tests ... ca change pas grand chose lol
+ Bob: parce que c'était plus compact de détecter et hardcoder les 2/3 solutions que de faire la solution générique
+ Bob: pareil sur Marvin, il y avait des séquences d'actions qui étaient factorisables pour plusieurs puzzles
+ Bob: hardcode, quoi&#160;:)
+ Thyl: (╯°□°）╯︵ ┻━┻
+ Thyl: je connaissais pas
+ Bob: bienvenue&#160;:)
+ Bob: bon, c'est l'heure de Paper Mario
+ Golden221: Bonjour je suis nouveau
+ Golden221: je m'appelle Golden
+ SeebOmega: bonjour golden 
+ Golden221: Bonjour SeebOmega
+ StephaneC4M: go
+ StephaneC4M: Bonjour comment gagner en code.
+ [CG]Thibaud: hello
+ [CG]Thibaud: c'est une question StephaneC4M&#160;?
+ Thyl: Yo&#160;! [CG]Thibaud
+ Thyl: Automaton2000
+ Automaton2000: et ça sert à rien de le dire
+ Thyl: Vous savez si en python quand on copi une liste pleine d'objet en copi les objets&#160;?
+ Thyl: copie
+ Thyl: pardon
+ Thyl: Une idée Automaton2000
+ Automaton2000: et si tu ne peux pas avoir un truc dans mon code j'ai un truc ultra simple
+ dwarfie: Automaton2000&#160;: n'est simple que la simplicité .... simplet&#160;;)
+ Automaton2000: je dirais que c'est une bonne idee
+ leojean890: Thyl, si tu utilises copy, ça ne copie pas les objets. Si tu utilises deepcopy, ça les copie. 
+ leojean890: Sinon moi je recrée des objets (constructeur par recopie de chaque), c'est plus rapide
+ leojean890: pareil pour des listes de listes ou des dic de listes il faut utilise deepcopy, et on gagne en perfs en ne faisant que des copies avec des boucles
+ Thyl: Merci leojean
+ Thyl: Je suis passé par un filtre
+ Thyl: Les listes de self ça fait lourd! :grinning:
+ <b>**Thyl slaps Thyl around a bit with a large fishbot</b></p><p><img src="/a/44680749324682" /> Bon[]Crayon: :robotAutomatonNN
+ AutomatonNN: vous avez des idées&#160;?
+ Bon[]Crayon: :robotAutomatonNN Non
+ AutomatonNN: salut les codeurs 
+ Bon[]Crayon: :robotAutomatonNN Salut le bot du futur.
+ AutomatonNN: oui
+ Bon[]Crayon: :robotAutomaton2000 Salut :turtle:
+ Automaton2000: je m'y suis pas encore prêt
+ Anas_T: Tous sur Thor là&#160;? 
+ Bon[]Crayon: :robotAutomaton2000 :turtle: Rien ne sert de courir, il faut partir à point.
+ Automaton2000: y en a que 2
+ Anas_T: Faut pas comparer les lightX avec initialTx à chaque fois&#160;? et Y aussi&#160;? 
+ Bon[]Crayon:&#160;?
+ Anas_T: Tu sais ce qui est drôle lol
+ Anas_T: être bourré et vouloir coder
+ Anas_T: Faudrait que j'arrête mdr
+ 257832: Jusqu'à un certain degré ça augmente l'efficacité.
+ BlaiseEbuth: Yo tout l'monde&#160;! Automaton2000, AutomatonNN&#160;!
+ Automaton2000: je l'ai fait en c++
+ AutomatonNN: voir me mettre au pif de la musique du contest&#160;:(
+ Anas_T: C'est ce que je me force à croire 
+ Thyl: Yo Blaise&#160;!
+ BlaiseEbuth: Salut Thyl.
+ Thyl: Je fais maintenant partis de la confrérie de la tortue&#160;! 
+ Bon[]Crayon: :turtle:
+ BlaiseEbuth: GG ^
+ BlaiseEbuth: *^^
+ BlaiseEbuth: J'ai vu passé que Thor golf avait des validateurs "Nord" maintenant&#160;?
+ BlaiseEbuth: Mais ils ont pas relancé les codes pour invalider ceux qui ne le géraient pas&#160;?
+ Zorg1: oui
+ Zorg1: o/ à tous et aux bots Automaton2000 &amp; AutomatonNN
+ Automaton2000: nan mais là c'est bon
+ AutomatonNN: vous avez eu des personnes qui ont pas de la chance sur le contest de CG
+ BlaiseEbuth: "oui" mézankor&#160;?
+ Zorg1: bah ils ont relancés les codes, ça a fait le ménage dans le haut du classement
+ Zorg1: vu que pas mal utilisait ça pour raccourcir leur code
+ BlaiseEbuth: Bah je gérais pas le nord et j'ai pas l'impression d'avoir bougé...
+ Zorg1: bah hier j'avais perdu 
+ BlaiseEbuth: Après je suis pas dans le top, donc j'ai p'têt perdu sans faire gaffe...
+ Bon[]Crayon: Est-ce que c'est possible de récupérer un coc&#160;?
+ Bon[]Crayon: C'est pour revérifier ma solution.
+ BlaiseEbuth: Basiquemen, non
+ Bon[]Crayon: ok
+ BlaiseEbuth: +t
+ BlaiseEbuth: Mais si il est récent et que tu connais son titre je peux regarder
+ Bon[]Crayon: Comment tu fais
+ Bon[]Crayon: J'ai pas le titre
+ BlaiseEbuth: Dans l'onglet contribution, si tu as le level requis tu peux voir l'énoncé et les validateurs.
+ BlaiseEbuth: Mais sans le titre...
+ Bon[]Crayon: le titre c'est pour la recherche dans la barre de recherche
+ BlaiseEbuth: Même pas, sur la page des contribs acceptées tu as tout en vrac, avec juste les titres, donc à moins de les ouvrir un par un pour voir l'énoncé, il faut le titre pour le trouver.
+ Bon[]Crayon: ok, j'ai pas les contribs acceptées, j'ai juste les contribs en cours
+ BlaiseEbuth: T'as pas le choix en haut à gauche&#160;?
+ Bon[]Crayon: non
+ BlaiseEbuth: Je sais plus le lvl pour ça...
+ Bon[]Crayon: Je vais progresser. :turtle:
+ Zorg1: si c'est comme les puzzles ça doit être lvl29 alors
+ Zorg1: (et la contrainte de 300 cocs pour éditer les coc validés)
+ Bon[]Crayon: ok, j'ai pas 300cocs
+ Zorg1: je peux les lire même si j'ai pas le droit de les modifier
+ Bon[]Crayon: Je passerais tous les tests la prochaines fois...
+ Bon[]Crayon: en python print(m**2*n) 100%
+ Bon[]Crayon: moi en c++ cout &lt;&lt; pow(M, 2) * N &lt;&lt; endl; 80%
+ Bon[]Crayon: peut-être un problème de type
+ Bon[]Crayon: en python int ça couvre plus de nombres que int en c++
+ Zorg1: pow c'est du double en C++ non&#160;?
+ Bon[]Crayon: oui
+ Zorg1: après faut voir la valeur de m et n
+ Zorg1: mais de base python n'utilise pas des bigint&#160;?
+ Bon[]Crayon: oui, je pense que un des test était avec des long int mais j'ai soumis c'est test pour essayer de gagner. :disappointed:
+ Bon[]Crayon: sans tester
+ Bon[]Crayon: Ahhhhhh
+ Bon[]Crayon: rebelote
+ Bon[]Crayon: sur un autre clash  
+ Bon[]Crayon: Automaton2000 Fait quelques chose pour les int en python.
+ Automaton2000: j'ai quand même du mal à voir ce que ça fait
+ Bon[]Crayon: Automaton2000 Ça fait dernier du clash.
+ Automaton2000: mais je pense pas que je sache
+ Bon[]Crayon: Automaton2000 Sache que moi non plus.
+ Automaton2000: c'est quoi le multi le plus simple pour moi
+ Bon[]Crayon: Automaton2000 :turtle:
+ Automaton2000: sur ce, je vais me pieuter
+ Bon[]Crayon: moi aussi
+ BlaiseEbuth: Automaton2000&#160;! Bataille de tortues&#160;!
+ Automaton2000: on ne parle pas de ce que tu veux
+ BlaiseEbuth: Rabat-joie...&#160;:(
+ Zorg1: Automaton2000 il ne rigole pas
+ Automaton2000: je vois que je ne risque pas de te faire une idée
+ Zorg1: tkt Automaton2000 je ne t'ai pas compris non plus
+ Automaton2000: toi aussi tu fais des trucs bizarres
+ Zorg1: :D
+ BlaiseEbuth: :grin:
+ Zorg1: un chat bizarre avec pleins de gens bizarres qui font des trucs bizarres avec des bots bizarres
+ Zorg1: comme c'esy bizarre
+ BlaiseEbuth: Vous avez dit bizarre&#160;?
+ Zorg1:&#160;;-)

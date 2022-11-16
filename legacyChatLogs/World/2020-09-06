@@ -1,0 +1,505 @@
+ jacek: good morning
+ eulerscheZahl: moin
+ Marchete: moin
+ DmcPhuc: why people so fucking suck
+ eulerscheZahl: mind your language
+ Every-Username-Is-Taken: hey everybody
+ Every-Username-Is-Taken: Does anyone know where I can find good resources to learn algorithms?
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://cp-algorithms.com/">https://cp-algorithms.com/</a>
+ KiranRandhawa: Morning
+ Every-Username-Is-Taken: thanks
+ ash_rick: lauda ki morning hai
+ KiranRandhawa: Oh crap I pressed submit!
+ KiranRandhawa: shitty balls
+ KiranRandhawa: Ah I think I'm still okay
+ jacek: oO
+ LinhT.Nguyen: co ae nao on ko
+ TheSilent_Boy: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/1368198fcbf4d2614457aa0df9fe6dc8dec3b02">https://www.codingame.com/clashofcode/clash/1368198fcbf4d2614457aa0df9fe6dc8dec3b02</a>
+ MSmits: mmh I wonder if I will need to use zobrist now. My endgame solver for D&amp;B is working but it takes 75 seconds to solve 100 endgames. Some really fast, some really slow
+ TheSilent_Boy: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/1368198fcbf4d2614457aa0df9fe6dc8dec3b02">https://www.codingame.com/clashofcode/clash/1368198fcbf4d2614457aa0df9fe6dc8dec3b02</a>
+ TheSilent_Boy: any one clasher?
+ MSmits: dont spam C&amp;C invites
+ MSmits: coc i mean
+ TheSilent_Boy: ok
+ TheSilent_Boy: I was just inviting
+ jrke: silent boy #clash click on this 
+ TheSilent_Boy: not spammoing&#160;:)
+ jrke: whats zobsrist MSmits
+ MSmits: it's just a way to generate a hash used for transposition tables
+ MSmits: I am thinking of how to do that for this graph gamestate
+ MSmits: it will also be the first time I succesfully combine ab with transpositions. I did either of them separately, but not combined. That's a bit complicated
+ Marchete: what kind of TT?
+ Marchete: by edges?
+ MSmits: Yeah I think so
+ MSmits: I think I might just use the bitboard for it
+ MSmits: if I have a bitboard-code assigned to each edge, i can remove it when   i play the edge
+ MSmits: should be unique
+ Marchete: After working with graphs, I maybe revisit some bit based game representation
+ MSmits: xor that with the score of course
+ MSmits: what do you mean exactly Marchete
+ Marchete: using bitboards
+ MSmits: ahh ok. It works nicely in D&amp;B, but for the endgame solver it was too messy
+ Marchete: I have mixed feelings about combining score
+ MSmits: what do you mean combining score?
+ Marchete: "xor that with the score of course"
+ MSmits: hmm, i guess i could do unscored states
+ MSmits: I did that for the wood-2 solver
+ MSmits: (I solved wood-2)
+ Marchete: if you can solve any endgame
+ Marchete: in reality is a difScore
+ Marchete: it works any direction
+ MSmits: yeah I guess so
+ MSmits: but what if you do ab pruning
+ TheSilent_Boy: hi
+ MSmits: wont this cause problems? If you cut off the branch early?
+ MSmits: you never got the exact score
+ MSmits: just a lower/upperbound
+ Marchete: why not MCTS? just curious
+ MSmits: oh the plan is still to use MCTS, assuming I can get this solver to be fast
+ MSmits: it's supposed to go at the end of the rollout
+ Marchete: solver of "non simple" endgames?
+ MSmits: yeah i got it working
+ MSmits: but it;s still slow
+ MSmits: lacks some heuristics and has no TT
+ MSmits: I discovered some new things too
+ Marchete: what things
+ MSmits: I thought it was always better to play 1 and 2 chains first
+ MSmits: but it's not
+ MSmits: if you have a 3 split and one of them is a 2 chain
+ MSmits: you can play it first and have 1 extra 1/2 chain to change control
+ MSmits: or play a different chain on the split and eliminate the 2 chain entirely
+ MSmits: meaning the parity of control changed
+ MSmits: that turns the entire game around
+ Marchete: I don't know any theorem or corollary about 3 way solvers
+ Marchete: all are 2 way
+ MSmits: you mean you dont know any theorem using splits/joins&#160;?
+ Marchete: I only read about effective length of subchains on a chain with a 3-way box
+ MSmits: I didn't find any either so that checks out
+ MSmits: but my bot just tries all combinations on splits currently
+ MSmits: my solver i mean
+ MSmits: this is why transpositions should help a lot
+ MSmits: the order often doesnt matter if you have separate splits doing things
+ Marchete: and border edges must be treated differently
+ MSmits: they call them "ground" sometimes in the paper
+ MSmits: basically dead ends right?
+ Marchete: like A1B and A1L are equivalent
+ MSmits: oh you mean before the end game?
+ Marchete: they shouldn't make a different gamestate
+ Marchete: yes
+ Marchete: for TT and stuff
+ MSmits: mmh not sure if thats worth bothering with in a live bot. I would fix that in a meta mcts though
+ MSmits: you can also do symmetry and such
+ MSmits: usually very expensive
+ Marchete: I don't think naive symmetry work here
+ MSmits: why not?
+ Marchete: I think graph symmetry (or equivalence) is better
+ MSmits: true, but that's really really complicated
+ MSmits: isn't it?
+ Marchete: yes
+ Marchete: but an example is what I said
+ MSmits: I am doing something like that in the end game solver already
+ MSmits: but mostly from the bitboard
+ MSmits: i count chains
+ MSmits: and loops
+ MSmits: simple isolated ones i mean
+ MSmits: the order they are played are mostly fixed
+ Marchete: I'm still testing board representations
+ MSmits: never play a larger chain before a smaller one and never play a larger loop either
+ Marchete: I haven't find a one comfortable and fast enough
+ MSmits: never play a chain of size &gt;= 4 before any loop
+ MSmits: those things make your solver a lot faster
+ MSmits: but this only works on simple objects, not on splits
+ MSmits: so i treat them separately
+ MSmits: they are not even part of the graph
+ MSmits: so far the hardest thing was the merging of edges for joins that go below 3 edges (they disappear)
+ MSmits: so I have a system of edges and joins that deactivate and reactivate as the graph is played
+ MSmits: as you said, it's not that easy in C++
+ MSmits: got stuck for many hrs until i figured out that the reconnection of joins needs to be in reverse order, last first
+ MSmits: for the undo  i mean
+ Marchete: I won't undo
+ Marchete: too hard
+ MSmits: hmm because it's mcts?
+ Marchete: I just go forward, copying all
+ MSmits: you just reset?
+ Marchete: yes
+ MSmits: for minimax you kinda have to 
+ MSmits: can't copy the entire graph every time, or at least, that seems painful
+ Marchete: it depends if copying the object is faster than undoing it
+ MSmits: yeah I am not sure actually
+ MSmits: the object is actually not that big
+ Marchete: maybe storing each GameState on the MCTS node?
+ MSmits: I already did that for wood-2
+ MSmits: it's just two uint64_t for bitboards
+ Marchete: that could save some CPU time
+ Marchete: well
+ MSmits: but that's for mcts
+ Marchete: my idea of GameState is not that simple
+ Marchete: so it will be big
+ MSmits: i know, mine isn't either, for the end game solver
+ MSmits: it's really two separate searches
+ Marchete: I need a clear description of what endgame solver is for you
+ MSmits: ok, so, you play the game until only loony moves are left (every move gives away boxes)
+ Marchete: I refer endgame as a heuristic solvable game (with degrees &lt;=2)
+ MSmits: at that point it's an endgame for me
+ MSmits: usually around ply 55
+ MSmits: halfway
+ MSmits: cant be further in than ply 61 or so i think
+ MSmits: depend son how many border edges were played
+ MSmits: around 0,3% of those are heuristically solvable
+ Marchete: so you plan to change to graph mode there, no?
+ MSmits: the rest needs minimax
+ MSmits: yes
+ MSmits: i convert at this point
+ Marchete: ah, I start with 1 massive chain that can be splitted on each move
+ Marchete: so the GameState is big
+ MSmits: by chain you mean a graph with each node 4 connected except borders and corners?
+ Marchete: chain == floodfill from a box
+ MSmits: ahh for me a chain is a string of boxes with 2 connections each
+ Marchete: I need another new chain if I have boxes not in that floodfill
+ Marchete: well, not a chain tbt
+ MSmits: right
+ MSmits: I do this floodfill thing to identify all the simple objects and generate the graph
+ Marchete: a structure that can be defined as chain later
+ Marchete: my chain will keep track of boxes by its degrees
+ MSmits: it sure sounds interesting. Basically, you start from the beginning of the game and I start from the end
+ Marchete: degrees == edge count
+ Marchete: yes
+ Marchete: for me a chain is a loop is minDegree == maxDegree == 2 and not grounded
+ Marchete: if*
+ Marchete: for example
+ MSmits: to find an isolated loop I do
+ MSmits: uint64_t twoBoxes = ~fullBoxes &amp; ~emptyBoxes &amp; ~xorBoxes &amp; FULL_BOARD;
+ MSmits: to get all boxes with 2 connections
+ MSmits: then i check if that covers my simple object and it doesnt have other types of boxes
+ MSmits: if it doesn't, it's a loop
+ Marchete: I imagine that's better :D
+ MSmits: well it depends on how often you do it of course
+ MSmits: if yours is incremental, it might be better
+ Marchete: at each turn basically
+ MSmits: hard to say
+ MSmits: in my case I have to do the entire process every time i hit an endgame
+ MSmits: and with multiple rollouts that is a lot
+ Marchete: I do everytime I create a new chain (I think&#160;:) )
+ MSmits: i guess the solver is the main bottleneck in my case
+ MSmits: some endgames still take multiple seconds
+ Marchete: but how it works?
+ MSmits: well
+ Marchete: it's not like applying theorems?
+ MSmits: for simple objects I have some heuristics
+ MSmits: so for isolated chains, smallest first
+ MSmits: thats a theorem
+ MSmits: for isolated loops, smallest first
+ MSmits: loops before all chains except shorter than 4
+ MSmits: for complicated objects I just play the edges in any order, as part of the negamax
+ MSmits: so my choices are:
+ MSmits: play shortest loop
+ MSmits: play shortest chain
+ MSmits: play any complex edge
+ MSmits: I could add some more I think, did not yet include every theorem
+ MSmits: but I have to make sure the simple object rules still work in a non-simple endgame
+ MSmits: for some rules that is obviously true
+ MSmits: but others.. not so sure
+ MSmits: for example, you can be 100% sure it's never a good idea to play a longer chain if a shorter one is available, not even if there's tons of other complex stuff around
+ MSmits: it's just never a good idea
+ MSmits: same for loops
+ Marchete: why play shortest loop before a complex one?
+ Marchete: complex I imagine 3-way ones
+ MSmits: no
+ MSmits: thats not what i said
+ MSmits: a shorter loop for a longer loop, both isolated
+ MSmits: the complex edges can be played any time, in any order, before any simple ones, or after any simple ones
+ Marchete: my idea of MCTS was to try to reduce any game to a 2-degree endgame, and get a difScore from there
+ Marchete: so except "free" moves that I can autoplay
+ Marchete: that was my future idea
+ MSmits: my problem with that approach though, is that the 2 degree endgame might happen at ply 100
+ Marchete: free moves as 2 boxes like: O-O
+ Marchete: you kno0w
+ MSmits: yeah
+ MSmits: always play those
+ MSmits: or your opponent will
+ MSmits: costing him nothing
+ Marchete: in fact I plan to just play it automatically, and add the score
+ MSmits: yeah, for my wood-2 solver, every turn was actually a whole turn, not a move
+ Marchete: reduces the deep
+ Marchete: depth
+ MSmits: it does
+ MSmits: did you hear how my wood-2 solver failed to get into wood-2 even when it played perfectly?
+ Marchete: I find that game more interesting than other board games
+ MSmits: into wood-1 i mean
+ Marchete: It's hard to have any opening book
+ MSmits: i do too, so far
+ MSmits: hmm, depends on the others
+ Marchete: and it's more about board representation
+ Marchete: and what it means
+ Marchete: not isolated edges
+ MSmits: if the other players play deterministically, opening books will always work
+ Marchete: any simple minimax AI using edges won't do sh*t
+ MSmits: true
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/61301f59-d62b-451d-8f1f-a52cc95daafe">http://chat.codingame.com/pastebin/61301f59-d62b-451d-8f1f-a52cc95daafe</a>
+ MSmits: you can see the variation in end game solve time
+ Marchete: nega value = 4 time = 47717230 microseconds
+ jacek: drum&amp;bass eh?
+ MSmits: Marchete yeah, many joins and edges in the endgame
+ MSmits: transpositions hopefully fixes that
+ MSmits: jacek yes&#160;:)
+ jrke:  7994787 microseconds
+ jrke: thats huge
+ jacek: thats only 2.53344924 × 10-7 years
+ MSmits: it is, but maybe it could be the squareroot of that or something
+ MSmits: with improvements
+ Thiesjoo: MSmits, what bot do you have online now?
+ MSmits: hi Thiesjoo, a random bot with some heuristics for capturing boxes
+ MSmits: it plays poorly in the endgame
+ jrke: what will be future bot&#160;?
+ MSmits: just grabs whatever box it can
+ Thiesjoo: Ah okay, that's why i'm beating it
+ MSmits: yes&#160;:)
+ Thiesjoo:&#160;:)
+ Thiesjoo: Thanks!
+ Marchete: my bot is a boost for yours, 100% winrate, 100% of the time
+ MSmits: I showed the game to Thiesjoo in class and 2 days later he has a bot in wood 1
+ MSmits: Marchete nice&#160;:)
+ DomiKo: that's cool
+ jacek: hes your student? and hes above you?
+ jrke: domiko you have some timeouts i think 
+ MSmits: yes jacek :P
+ Thiesjoo: Yup
+ inoryy: wow
+ jrke: who is your student ms?
+ MSmits: Thiesjoo
+ DomiKo: jrke that could be true
+ inoryy: so tell us what is MSmits like as a teacher
+ MSmits: should I go offfline for this :P
+ Thiesjoo: Maybe&#160;:)
+ DomiKo: :joy:
+ jrke: :smiley:
+ Thiesjoo: Jk, he's a good teacher. Good at explaing complex subjects
+ MSmits: thanks
+ inoryy:&#160;:)
+ Thiesjoo: Don't have him for a lot of subjects this year&#160;:( Kinda miss him 
+ MSmits: I mostly taught Thiesjoo physics though, only just started CS with him
+ MSmits: he has a different physics teacher this year
+ inoryy: oh, you teach CS as well now?
+ MSmits: yeah, last year to, only 4 classes a week though
+ MSmits: I still teach physics more
+ MSmits: I am studying for CS teaching degree
+ inoryy: ah actually I now vaguely remember you telling about that
+ MSmits: should be done at the end of the schoolyear
+ inoryy: nice
+ MSmits: it's fun. Currently I am teaching some of the  "softer" CS subjects, that's new for me
+ MSmits: so far it's all been programming
+ inoryy: TAing was probably the hardest thing I did in life :D
+ MSmits: TA?
+ Thiesjoo: When are we learning x86 assembely?&#160;:)
+ MSmits: lol, that is actually an optional CS domain Thiesjoo, we don't teach that unfortunately
+ Thiesjoo:&#160;:(
+ inoryy: teaching assistant, like hold seminars and practicals in tandem with prof's lectures
+ Thiesjoo: Are we going to learn some programming this year?
+ inoryy: which ended up having to duplicate lectures since half the class skips lectures...
+ MSmits: Thiesjoo plenty, but not at first
+ MSmits: we do human computer interaction, app development ( I guess some programming there) then after that it's mostly AI
+ MSmits: inoryy that is annoying
+ Thiesjoo: But app development is in app inventor correct?
+ MSmits: I think so yes: <a rel="nofollow" class="external free" href="https://appinventor.mit.edu/">https://appinventor.mit.edu/</a>
+ MSmits: we do that for a few weeks
+ jrke: my psychic's is also good&#160;:)
+ MSmits: all new for me as well
+ MSmits: jrke you read minds?
+ jrke: i read future&#160;;)
+ MSmits: Thiesjoo have you worked with app inventor?
+ Thiesjoo: Yup, in 4vwo I used it to make an app for NLT
+ DomiKo: jrke thanks i had boardSize=2 not 7 in one place
+ MSmits: what did you think of it?
+ Thiesjoo: The programming part is just scratch so that was boring
+ jrke:&#160;:)
+ Thiesjoo: But I think it's good for beginners
+ MSmits: ah you mean it looks like scratch?
+ Thiesjoo: Yup
+ MSmits: there are several graphical languages 
+ MSmits: they all look sort of the same
+ jrke: 3 ongoing submission in D&amp;B
+ MSmits: often you can directly code JS or python 
+ MSmits: because the graphical stuff is translated to that
+ MSmits: perhaps there is a possibility for you to do that
+ Thiesjoo: We'll see
+ eulerscheZahl: "there are several graphical languages they all look sort of the same"
+ MSmits: hi euler&#160;:)
+ eulerscheZahl: hi
+ Thiesjoo: WOW, that looks cool
+ MSmits: I was more referring to this: <a rel="nofollow" class="external free" href="https://makecode.microbit.org/">https://makecode.microbit.org/</a>
+ jrke: bye euler im going :stuck_out_tongue:
+ Thiesjoo: Oh microbit's. Those were fun
+ MSmits: Did you do microbit in 2nd/3rd year Thiesjoo?
+ Thiesjoo: Yes
+ MSmits: ahh ok
+ MSmits: a colleague asked me to write a prime number calculator in make code
+ MSmits: was pretty easy, took me 10 minutes. 
+ jacek: i would only do even prime numbers
+ MSmits: nice&#160;:)
+ eulerscheZahl: we have a prime puzzle here on CG too (shameless advertising)
+ jacek: the other half of work should be done by someone else
+ MSmits: i will remember that one jacek
+ jacek: :3
+ MSmits: allright, down to 12,5 seconds from 75 seconds, nice improvement&#160;:)
+ MSmits: I added the simple game solver into my negamax to calculate the rest of the game as soon as all the complex edges are gone
+ MSmits: only disconnected and reconnected 123 million edges instead of 500 million now&#160;:)
+ MSmits: slowest game still takes 6 seconds though
+ TheSilent_Boy: Any one who plays Clash of Clans here?
+ MSmits: I think maybe google messed up on you
+ MSmits: we only have clash of code
+ TheSilent_Boy: Man!
+ TheSilent_Boy: the insane game
+ MSmits: ahh
+ MSmits: mostly coders here on chat
+ jacek: <a rel="nofollow" class="external free" href="https://www.reddit.com/r/itrunsdoom/comments/in6qlw/a_digital_pregnancy_test_almost_runs_doom/">https://www.reddit.com/r/itrunsdoom/comments/in6qlw/a_digital_pregnancy_test_almost_runs_doom/</a>
+ TheSilent_Boy: hi
+ Illedan: eulerscheZahl, do you have the link to your python post about downloading replays? Don't remember where you put that thing
+ RigidStudios: Just made a 59 character time to minute reducer in JS, proud of myself i guess
+ TheSilent_Boy: hi
+ sHlOk: Hello
+ eulerscheZahl: illedan go to my profile -&gt; playgrounds
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/53705/contest-tools-and-workflow/introduction">https://www.codingame.com/playgrounds/53705/contest-tools-and-workflow/introduction</a>
+ TheSilent_Boy: heelloo
+ jacek: ohai
+ TheSilent_Boy: kaise ho
+ TheSilent_Boy: sab theek?
+ TheSilent_Boy: aur kya chal  rha hai
+ eulerscheZahl: speak English or switch chats please
+ TheSilent_Boy: :stuck_out_tongue_winking_eye:
+ TheSilent_Boy: I was just joking..
+ TheSilent_Boy: By the way...it's Hindi
+ eulerscheZahl: i know.well, google translate does
+ TheSilent_Boy: :joy:
+ TheSilent_Boy: sure
+ TheSilent_Boy: wanna be friends?
+ eulerscheZahl: i'll back-follow when you got some great contest results&#160;;)
+ Thiesjoo: What is a great result?
+ TheSilent_Boy: yeah!
+ eulerscheZahl: beat your CS teacher
+ Thiesjoo:&#160;:(
+ TheSilent_Boy: Hmm..
+ TheSilent_Boy: I have done so
+ Thiesjoo: I am currently beating him in dots and boxes&#160;:)
+ TheSilent_Boy: you won't beleive but it's true
+ TheSilent_Boy: I'm in class 10th
+ TheSilent_Boy: and my computer techer is better in web development
+ TheSilent_Boy: than in
+ TheSilent_Boy: programming
+ TheSilent_Boy: and that;s why
+ eulerscheZahl: wasn't  referring to your teacher TheSilent_Boy but to smits
+ TheSilent_Boy:&#160;?
+ Thiesjoo: Smits is my cs teacher
+ TheSilent_Boy: Ooo
+ TheSilent_Boy: :grin:
+ eulerscheZahl: smits usually needs a week or 2 to get his bot ready
+ Thiesjoo: Yes he told me
+ TheSilent_Boy: :nerd:
+ eulerscheZahl: but then he beats me hard. at least on board games
+ TheSilent_Boy: Sounds amazing
+ TheSilent_Boy: :grin:
+ TheSilent_Boy: well
+ eulerscheZahl: in contests me vs him is approx 50-50
+ TheSilent_Boy: i'm a passionate of automations
+ jacek: he says he needs 2 weeks so he can search github for complete solution
+ TheSilent_Boy: :grin:
+ wlesavo: jacek searching in his own private rep? :smiley:
+ TheSilent_Boy: achha to hum chalte hai....
+ TheSilent_Boy: और भई लोग क्या चल रहा है?
+ psychopath: Hi everybodyI'm using Windows 10 and python 3.7 and try to install a package called pie-extended with pip install pie-extended, but it fails building wheels for lxml which is a required package for pie-extended (given that lxml 4.5.2 is correctely installed on my computer but pie-extended requires 4.2.1). I should install libxml2 and libxslt but I don't manage to. Any idea?
+ psychopath: Bonjour tout le monde. Je suis sous Windows 10 et python 3.7 et j'essaye d'installer le package pie-extended via la commande pip install pie-extended, mais ça ne marche pas au moment de construire  les dépendances de lxml, sachant que lxml 4.5.2 est installé correctement sur mon PC mais que pie-extended requiert la version 4.2.1. Je devrais installer libxml2 et libxslt mais je n'y parviens pas sous windows. Une idée?
+ eulerscheZahl: you could create a virtual env and install it there with the version of libxml that you need
+ psychopath: seems great! But idk how to do?
+ eulerscheZahl: let's try the first suggestion from google&#160;;)<a rel="nofollow" class="external free" href="https://www.liquidweb.com/kb/how-to-setup-a-python-virtual-environment-on-windows-10/">https://www.liquidweb.com/kb/how-to-setup-a-python-virtual-environment-on-windows-10/</a>
+ Aravindhsiva: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/13685123e5dabf498b09141bccae7cb295069be">https://www.codingame.com/clashofcode/clash/13685123e5dabf498b09141bccae7cb295069be</a>
+ Aravindhsiva: Anyone can join
+ eulerscheZahl: share this kind of link on #clash
+ starmaq: I really hate the fact that I'm good with clash of code with a language that I'm not willing to continue my life using 
+ Aravindhsiva: #clash<a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/13685327b975b93035529fe503603433d9f478b">https://www.codingame.com/clashofcode/clash/13685327b975b93035529fe503603433d9f478b</a>
+ Aravindhsiva: Anyone Can Join
+ norbi97: i mean he tried
+ eulerscheZahl: i see the effort
+ starmaq: he has the the spirit 
+ MSmits: yay... 200 endgames in less than a second now, but my slowest of those 200 still takes 390 ms... gettin there
+ kevin1_1andrew: hi
+ MSmits: hi
+ Thiesjoo: And which algorithm are you currently using?
+ Thiesjoo: Minimax?
+ jacek: *yawn*
+ MSmits: Thiesjoo yeah
+ MSmits: well negamax, but thats the same
+ Thiesjoo: Cool, still need to work on my minimax implementation
+ Thiesjoo: It is very, very, very slow
+ jacek: no wonder, its javascript :v
+ MSmits: If you really want to get into D&amp;B you need to read some scientific papers
+ Thiesjoo: Already found a few to read
+ Thiesjoo: Very interesting!
+ MSmits: oh right, js is definitely not optimal
+ Thiesjoo: That's also true
+ MSmits: if you don't know c++ at all, you might consider learning Rust
+ MSmits: same speed but more coder-friendly
+ MSmits: as i understand
+ Thiesjoo: Seems cool
+ Thiesjoo: Will look into it
+ jacek: you recommend rust!? i thought you were my brother
+ Thiesjoo: :joy:
+ MSmits: well c++ is horrible,  I only use it cuz I know C# and the syntax was similar... and of course it is fast
+ Aravindhsiva: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/1368567ec71a5b4d92d06551fd45e166704a908">https://www.codingame.com/clashofcode/clash/1368567ec71a5b4d92d06551fd45e166704a908</a>
+ Aravindhsiva: anyone
+ jacek: so clashy
+ starmaq: I was interested in both C++ and C because they're really interesting languages
+ starmaq: especially the notion of pointers 
+ starmaq: and I guess C++ is just a "more features" version of C
+ starmaq: with slight changes in previous features
+ starmaq: lots of big softwares (might even say almost all of the ones I know) use C++, not sure why that choice
+ jacek: i onlu use c++ for performance, in here. havent use C/C++ in work ever
+ starmaq: yeh I guess they're the fastest languages
+ fabulus: whitelegend?
+ jacek: :question:
+ Elysweyr: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/541492d19c9f37716191ac508f17ae55ae57">https://www.codingame.com/contribute/view/541492d19c9f37716191ac508f17ae55ae57</a>check out my contribution, pls&#160;:)
+ Whitelegend: yes&#160;?
+ S_viper: hi'
+ Azenthin: wow cool website
+ jacek: which website
+ DomiKo: I guess this one 
+ Azenthin: codingame?
+ Azenthin: xD
+ DomiKo: yea it's really cool
+ Azenthin: ohyeah forgot where programmers, i could be talking about anything at this point LOL
+ Azenthin: yall think its good for biginners?
+ Azenthin: oof english
+ jacek: eeyup
+ starmaq: I wish it was more lively 
+ Azenthin: do you know how long its been up?
+ Azenthin: ugh doing a easy test, and i dont understand anything 
+ jacek: few years at least
+ Uljahn: 6+ years
+ jacek: well theres gonna be contest in mid november
+ jacek: so its gonna be more lively
+ jacek: but this is just chat. more stuff happening on discord
+ Azenthin: i mean, its clear to me that they dont invest that much in there social media
+ Azenthin: wouldnt say its a small community but i think it could be very populare is what im trying to say :P
+ Zenoscave: Nearly top 50 in GitC! Turns out my bombing dists were off by one...
+ Morbid: :grimacing:
+ EldonMcGuinness: Wow, forgot all about this site, fun times and man am I rusty
+ Azenthin: so you guys are on discord?
+ jacek: not all
+ Azenthin: ah ok
+ jacek: rusty? then youre gonna like it here :v
+ Azenthin: well im not rusty, you need to have  been good in the first place to be rusty xD
+ Azenthin: any one know what this is while True:
+ Azenthin: nvm found the hint menue lul
+ jacek: its a loop :o
+ Azenthin: yeah xD
+ Azenthin: O.O i think i understand xD
+ jacek: :tada:
+ maxmanusv1: yo
+ PrivateBrocolli_1e72: hi everyone
+ Avizka: Hi everyone:grin:
+ 77Dev: hi
+ kxnn: is it normal  to struggle
+ stanleyipkiss: hell yea
+ Ashen_024: how to approve someone's contribution? 
+ Ashen_024: or is that a mod only thing?
+ jrke: no
+ jrke: you can approve a clash if you have played 50l+ clashes and for puzzle you need level 20+
+ Furze687: hello everyone

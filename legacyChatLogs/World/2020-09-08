@@ -1,0 +1,642 @@
+ MadKnight: is anyone still there, Automaton2000&#160;?
+ Automaton2000: i have no idea what's that
+ MadKnight: wow, chat is lagging super badly
+ MadKnight: [CG]SaiksyApo can u fix it&#160;?
+ Marchete: hi hi Maddy
+ Bbaaii: what can i sayyyy except your welcomeeeeeee
+ Bbaaii: for the sun and the moon and the sky
+ Bbaaii: hey its ok its ok your welcome
+ MadKnight: hihi Marchete let's go PM
+ markyy: I just solved puzzle of the week and reached level 12 weeeeee
+ markyy: and I enjoyed the puzzle of the week
+ wlesavo: its a nice one
+ Xedux: PhantomzBack&#160;?
+ Xedux: can you give your recent clash code&#160;?
+ Xedux: PhantomzBack&#160;?
+ Xedux: hello
+ PhantomzBack: Hey
+ PhantomzBack: i think don't have it I discarded it
+ PhantomzBack: But i just used two recursive for loops and printed a space between characters, but after exiting the inner loop, you just print a new line
+ Xedux: ok
+ LinhT.Nguyen: john brzenk
+ MSmits: hi
+ jacek: good afternoon
+ MSmits: are you working on anything for CG jacek?
+ jrke: MS how is your endgame solver
+ MSmits: currently if I try 1000 games, my slowest solve is 140 ms and average is 2 ms
+ MSmits: (per game)
+ MSmits: but if i try 10k games, one of them takes 800 ms. It's the really rare games that are super slow
+ jrke: thats great achievement for now
+ MSmits: yeah, I got transposition tables to work
+ MSmits: now it's mostly trying to find the right heuristics. Some heuristics make my solver 10x faster, but are exactl 99% of the time, it's frustrating
+ MSmits: there's often some rare exception
+ jrke: okay 
+ jrke: yeah exceptions are always there even exceptions have also exceptions
+ MSmits: yeah, that's what I am talking about mostly. The exceptions to the exceptions... quite rare
+ MSmits: I could probably ignore them and accept losing those games
+ MSmits: but I would like it to give an exact score
+ MSmits: also I am pretty sure there's more theorems and corollaries to explore in those papers that I can use
+ MSmits: somehow
+ jrke: you can play those games manually and fix them right?
+ MSmits: oh, right, that's another option. Possibly the exceptions are so rare, I can hardcode them
+ MSmits: but not manually, it's too hard to play them manually
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/e7c5e4ec-cd35-48e5-be95-2128f0cc627f">http://chat.codingame.com/pastebin/e7c5e4ec-cd35-48e5-be95-2128f0cc627f</a>
+ MSmits: this is the hardest one of my 10k seeds test
+ jrke: ok
+ MSmits: looks messy right?
+ jrke: yeah but its having 3 chains or more?
+ jrke: can your current heuristic defeats dbdr?
+ MSmits: the problem is all the splits (joins). It only has 1 isolated chain
+ MSmits: the length 3 one
+ MSmits: the rest are strings (as they call them) connected to splits
+ MSmits: if you play one string on a 3-join, the other 2 strings combine into 1 chain
+ MSmits: or a string, if it is connected to yet more joins
+ jrke: really a tough one to get accurate Ai for this particular one
+ MSmits: yeah, well... I got one that calculates it perfectly I think, though it is hard to test
+ MSmits: problem is it takes 800 ms now
+ MSmits: which still helps I guess. I am guessing it can solve within 100 ms, after the first string is opened, so it's not a waste of effort in any case
+ dbdr: avx it&#160;;)
+ jrke: yeah optimise code
+ MSmits: I will do that, but that's a matter of a factor of 2 or 3 at most. It's not enough to get it below 100 ms
+ MSmits: avx will be almost impossible I think
+ MSmits: i dont even know what to parallize in a graph
+ jrke: pragamas are nice way to optimize 
+ MSmits: also I was thinking about using this for a mcts bot, do the solve at the end of the rollout, but that's not feasible
+ MSmits: currently my average is 2ms per game, so at most 50 rollouts or so
+ MSmits: not enough to get any good stats
+ dbdr: quality vs quantity
+ MSmits: yeah..  so maybe I should just stick with minimax
+ dbdr: those 50 are worth many more random endgames
+ MSmits: thats definitely true
+ MSmits: random seems completely pointless into an endgame
+ MSmits: it's quite good in the early game though
+ jrke: but you can not detect random endgame against random or weak bot
+ MSmits: hmm not sure what you mean
+ MSmits: do you mean that if the bot plays badly, the endgame will look so different that my solver doesnt apply?
+ MSmits: I don't think that's true. The only effect a badly playing bot will have is that it is giving away boxes earlier, so the endgames will be smaller (less objects), which in general means it solves faster
+ jrke: yeah thats true
+ MSmits: it calculates a score difference
+ MSmits: so it takes the current score and finds the maximum score on top of that
+ MSmits: so if you're +10 ahead and it calculates -5, you still win, that's mostly what will happen vs bad bots
+ jrke: hmm
+ MSmits: it also assumes the opponent will play perfectly
+ MSmits: so the score calculated is always a lower bound
+ MSmits: it can only get better
+ jrke: then it will work
+ MSmits: but that's always true for minimax
+ MSmits: I want to get it reliably below 100 ms, before I convert it into  a  live bot though
+ MSmits: more work to do&#160;:)
+ jrke:&#160;:)
+ MSmits: super happy i finally made a minimax with both ab pruning and TT. I just copied the technique from a chess article
+ dbdr: D&amp;B is a rabbit hole
+ MSmits: it definitely is
+ dbdr: which article?
+ dbdr: well done!
+ MSmits: Alpha-Beta with Sibling Prediction Pruningin Chess
+ MSmits: it has a lot of info
+ MSmits: I guess it is more a book
+ MSmits: 52 pages
+ dbdr: dutch&#160;:)
+ MSmits: lol I didn't even see that
+ MSmits: it's often Dutch isn't it?
+ MSmits: that's even my university
+ dbdr: :D
+ jrke: going for submit MS?
+ dbdr: jrke is impatient to see MSmits' bot&#160;:)
+ MSmits: not for a while I think. As I said it still needs improvement. Also on friday i get the key to my new house
+ MSmits: that will be a lot of work
+ dbdr: why? a key is not that heavy
+ MSmits: :P
+ MSmits: painting and :poop:
+ jrke: i will be there for help 
+ MSmits: nahh, you go make more bots. 
+ MSmits: it's awesome you do so well
+ jrke: im really impatient&#160;:)
+ dbdr: I don't recommend painting with :poop:
+ MSmits: lol
+ dbdr: cheap though
+ dbdr: it's a tradeoff
+ MSmits: I think it's actually not that cheap
+ MSmits: to get enough :poop: for that
+ jrke: :key: your key is here 
+ dbdr: I don't know, in the right places they might pay you to take away their :poop:
+ MSmits: I was hoping to leave enough money to pay people to paint and stuff
+ MSmits: but wife spent most of it already&#160;:)
+ dbdr: reminds me of <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=KaZuBziWLgk">https://www.youtube.com/watch?v=KaZuBziWLgk</a>
+ MSmits: funny&#160;:)
+ dbdr: what did she spend it on?
+ dbdr: actually this one is better: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=J-v1zV8n0cA">https://www.youtube.com/watch?v=J-v1zV8n0cA</a>
+ MSmits: furniture mostly. I guess we didn't replace it for 13 years so she wanted to get all new stuff
+ MSmits: floors seem very expensive also
+ MSmits: and window stuff
+ dbdr: will have new furniture but no floor? :D
+ MSmits: no no, got new floors, it just cost several thousand Euros... 
+ jrke: just flying in air 
+ jrke: :stuck_out_tongue:
+ dbdr: attach furniture to the ceiling
+ dbdr: sounds like a fun house&#160;:)
+ MSmits: heh yeah
+ wzg: 为什么我不能玩
+ MSmits: my openingbook is better than that
+ dbdr: :D
+ dbdr: given the right decoding, that's actually a perfect openingbook
+ dbdr: MSmits did you investigate the novel parts of that thesis?
+ dbdr: Sibling Prediction Pruning
+ DomiKo: can i get link to Euler site with chat history?
+ dbdr: :rolling_eyes:
+ DomiKo: I should bookmark it...
+ dbdr: <a rel="nofollow" class="external free" href="https://cg.spdns.eu/wiki/Main_Page">https://cg.spdns.eu/wiki/Main_Page</a>
+ dbdr: I made that side, for info&#160;:)
+ jrke: domiko - link
+ dbdr: *site
+ jrke: <a rel="nofollow" class="external free" href="http://eulerschezahl.herokuapp.com/codingame/puzzles/">http://eulerschezahl.herokuapp.com/codingame/puzzles/</a>
+ DomiKo: wait
+ dbdr: that's not chat history
+ DomiKo: this is not euler's site?
+ jrke: it is euler site of codingame puzzles
+ dbdr:&#160;: <a rel="nofollow" class="external free" href="http://eulerschezahl.herokuapp.com/">http://eulerschezahl.herokuapp.com/</a> &lt;<a rel="nofollow" class="external free" href="http://eulerschezahl.herokuapp.com/codingame/puzzles/">http://eulerschezahl.herokuapp.com/codingame/puzzles/</a>&gt; is euler's site of cours, it does not have chat history
+ DomiKo: yes i know
+ dbdr: cg.spdns.eu is the community wiki, which I made
+ DomiKo: I mean cg.spdns
+ DomiKo: oh ... my bad... I don't know why I thought that was Euler's
+ dbdr: probably he gave the link&#160;:)
+ DomiKo: maybe
+ DomiKo: now I will remember
+ MSmits: dbdr, nah i didnt read everything yet. Was just looking to see how to handle updating alpha and beta with TT. It's hard to wrap your head arouns
+ MSmits: around
+ dbdr: DomiKo, no worries&#160;:)
+ jacek: no need to worry with alpha and beta in jacekmax
+ MSmits: gamma though, how about gamma?
+ dbdr: αβγ
+ dbdr: upgrade your keyboard layouts&#160;:)
+ MSmits: :alpha:
+ MSmits: that's all I'm gonna try, if it isn't an emote, it isn't worth it
+ dbdr: it's a letter, why would you need an emote?
+ dbdr: -- δβδρ
+ DomiKo: ß²
+ dbdr: and γ⁵
+ dbdr: thanks to euler for that one
+ DomiKo: and the best one X Æ A-12
+ dbdr: what's that?
+ DomiKo: Musk's kid
+ dbdr: ah
+ dbdr: <a rel="nofollow" class="external free" href="https://xkcd.com/327/">https://xkcd.com/327/</a>
+ DomiKo:  :sweat_smile:
+ Danotris: Lol developers aren't funny
+ Danotris: I beat Maxime at clash of code
+ DomiKo: good for you
+ dbdr: this one's for MSmits: <a rel="nofollow" class="external free" href="https://xkcd.com/2355/">https://xkcd.com/2355/</a>
+ Astrobytes: lol
+ jacek: long time no see absentbytes
+ Astrobytes: haha, yeah. Catching up on work, missed a week and ended up with a huge backlog
+ MSmits: hey... I went to all parties I was invited to in college
+ MSmits: :P
+ MSmits: i mean uni
+ Astrobytes: But how many were you invited to? :P
+ MSmits: ooohh so long ago, can't remember :PP
+ Astrobytes: lol
+ Astrobytes: What's the meta on Dots n Boxes then?
+ MSmits: I think the bots that are currently on the leaderboard do minimax
+ MSmits: i was going to do a mcts with a random rollout and a solver at the end of the rollout, but solving is too slow currently
+ MSmits: average endgame takes 2 ms to solve and some take up to a second almost
+ MSmits: still looking for better heuristics for the solver, I have some hope left&#160;:)
+ Astrobytes: Cool. It seems quite an interesting problem
+ Astrobytes: (the game that is)
+ MSmits: yeah addictive
+ Astrobytes: haha, they always are&#160;:)
+ Thiesjoo: Hey Msmits do we have any homework for Thursday?
+ DomiKo: :joy:
+ Astrobytes: hahaha
+ Thiesjoo: Easiest way to contact him&#160;:)
+ DomiKo: that was unexpected
+ Astrobytes: well played Thiesjoo
+ Illedan: lol
+ jacek: if you want to contact him, just write 3 3 is best opening for yavalath
+ dbdr: write your message to MSmits at the end of your action after a ';'
+ Marchete: say that an endgame in D&amp;B doesn't have 3-way boxes
+ Marchete: triggered :D
+ MSmits: lol Thiesjoo
+ MSmits: no homework
+ PhantomzBack: Guys i am facing an issue
+ PhantomzBack: i print the correct thing it shows even in the standard output stream
+ PhantomzBack: but it shows found nothing
+ Uljahn: could be extra \n
+ DinuBrat: Тут на русском можно общаться&#160;? )
+ DinuBrat: :upside_down:
+ Uljahn: а то
+ Uljahn: join #ru
+ DinuBrat: пасиб ) 
+ EveryOS: Guys I am facing an issueIt says "only puzzle owners can access this puzzle" instead of showing puzzlesAnd when I reload, it signs me out
+ Uljahn: which one?
+ EveryOS: Literally just going on any tabThe exact error is: An error occurred (#511): "Only the owner can access puzzles progress".
+ EveryOS: I also get errors #498 and #522 a few times
+ DomiKo: wow
+ DomiKo: there is 1 point gat in Langon between 20 and 21
+ EveryOS: Well the site isn't working, keep getting error 511, so just gonna close
+ ProCoder3: #fr
+ dbdr: DomiKo, there are even bigger gaps near the top&#160;:)
+ DomiKo: I'm trying to fill them 
+ dbdr:&#160;:)
+ DomiKo: right now I'm stealing some pruning
+ dbdr: stealing?
+ jacek: prune array?
+ DomiKo: Stealing from top10 ;P
+ dbdr: not sure what you mean
+ Astrobytes: Prune thief.
+ dbdr: from the neighbour's tree
+ DomiKo: I have 0% winrate with some guys, because my heuristic is much worse... and I can't preddict their move
+ dbdr: hm, with minimax trees make sense :D
+ DomiKo: so I'm trying to understand which moves they could make
+ Astrobytes: lol
+ dbdr: if you understand what RedStike does differently...
+ DomiKo: I wish...
+ Astrobytes: He still way ahead in Langton?
+ dbdr: 4 pts above #2
+ Astrobytes: wow
+ dbdr: in java
+ Astrobytes: yeah I remember 
+ Astrobytes: What does he use? Does anyone know?
+ Astrobytes: Algo that is
+ dbdr: someone said minimax
+ Astrobytes: Oh really? Interesting
+ dbdr: I noticed sometimes he ends the game early
+ Astrobytes: Going off-grid?
+ Astrobytes: Well, hitting the wall
+ dbdr: yeah
+ Astrobytes: Yeah I remember that being a viable strategy. I must fix my Langton bot
+ Astrobytes: So many games, not enough hours
+ dbdr: Domiiko: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/485851765">https://www.codingame.com/replay/485851765</a>
+ dbdr: you timeout
+ DomiKo: yeah
+ dbdr: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/485727767">https://www.codingame.com/replay/485727767</a>going out
+ DomiKo: but
+ DomiKo: that's no my current bot
+ dbdr: but this one does not look that good
+ DomiKo: I guess
+ DomiKo: if I cant find battle in last battles 
+ DomiKo: then it have to be my prev version?
+ dbdr: yes
+ eulerscheZahl: "you timeout"that text sounds familiar
+ dbdr: :D
+ lamnd: :grinning:
+ starmaq: :grinning:
+ DomiKo: ohh yes
+ DomiKo: half steal from Euler
+ DomiKo: and top10 for me :D
+ eulerscheZahl: dude&#160;:/
+ DomiKo: your moves and sometimes so random for me
+ eulerscheZahl: how did you even do that? i don't even remember myself what i'm doing :D
+ DomiKo: are*
+ eulerscheZahl: something like test X cells on the current path and neighboring cells
+ DomiKo: I'm not sure too
+ DomiKo: yea i know
+ DomiKo: everybody do that I guess
+ DomiKo: but everybody use sometime else
+ DomiKo: with Redstrike i have a lot of misses
+ eulerscheZahl: and that causes blind spots for the minimax
+ eulerscheZahl: redstrike always surprises me. i see that by observing my expected score
+ DomiKo: I'm using MCTS and that's blind spot too..
+ DomiKo: its like one random move
+ DomiKo: and my whole tree is :poop:
+ dbdr: DomiKo, so you're trying to reverse engineer various players?
+ jrke: 12 Nov fall challenge yeah just 2 days after my birthday&#160;:)
+ eulerscheZahl: oh, we have a date now?
+ eulerscheZahl: indeed :o
+ jrke: yes timer is here check it out
+ jrke: i just saw it
+ eulerscheZahl: and it lasts 11 days again
+ eulerscheZahl: The event starts on Thursday, November 12 at 3 pm UTC and ends on Monday, November 23 at 9 am UTC.
+ eulerscheZahl: not the usual 6pm CEST
+ eulerscheZahl: or CET at that point
+ dbdr: I guess that's better for east asia
+ eulerscheZahl: for such a long contest duration i don't really care
+ jrke: it will be 8:30 pm my country
+ dbdr: there's just a special feeling on the first day
+ dbdr: might be strange to wake up to a new contest everyone else has already started
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://imgur.com/a/vwiz0FQ">https://imgur.com/a/vwiz0FQ</a>can't join&#160;:/
+ jrke: last time it began at 9:30 pm i.e. 4pm UTC right
+ dbdr: eulers misses the contest :scream:
+ dbdr: blacklisted
+ eulerscheZahl: and there's a ping on the CG discord announcement channel (@here?) that i can't see for whatever reason
+ eulerscheZahl: that channel isn't loading
+ dbdr: yeah, for me too
+ jrke: i got 1 rank promotion due to euler non participating&#160;;)
+ eulerscheZahl: nah, you might be able to beat me in a fight&#160;;)
+ eulerscheZahl: oh, now i could load the message on discord
+ jrke: i will try my best but i just spended 6 months on coding so i have less experience
+ eulerscheZahl: and another unofficial "contest" like the one from thibpat
+ jrke: by whoom is that contest sendme a link if you have any for that
+ eulerscheZahl: are you on the CG discord?
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://hs-emina.github.io/autumnai.github.io/">https://hs-emina.github.io/autumnai.github.io/</a>
+ jrke: yes but not very much active
+ [CG]Thibaud: oh really, you can't see the channel announcements?
+ eulerscheZahl: working again now
+ eulerscheZahl: was lagging for a minute or 2
+ DomiKo: dbdr yes
+ [CG]Thibaud: :thinking_face:
+ eulerscheZahl: but i still can't register to the real contest
+ [CG]Thibaud: the Fall challenge&#160;?
+ [CG]Thibaud: or AUtumn AI 2020&#160;?
+ dbdr: using heuristics DomiKo? because I think most top players use search...
+ eulerscheZahl: CODINGAME FALL CHALLENGE 2020
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://imgur.com/a/vwiz0FQ">https://imgur.com/a/vwiz0FQ</a>
+ [CG]Thibaud: yeah, just saw your imgur
+ [CG]Thibaud: arf
+ jrke: is Autumn AI organised by Crypticsy with CG?
+ eulerscheZahl: that autumn AI is just promoting an existing multiplayer game
+ aCat: ah, ok, thx for the info
+ Astrobytes: like the one thibpat did
+ DomiKo: dbbr I'm using MCTS with heuristic for me and my opponent
+ Hjax: yay another unofficial contest
+ Hjax: should be fun :D 
+ dbdr: ah ok, makes sense
+ eulerscheZahl: can it be PR2 again? :D
+ Astrobytes: lol
+ Hjax: my pr2 bot has no flaws, its perfect :P 
+ jrke: is multi decided yet?
+ eulerscheZahl: probably
+ eulerscheZahl: but not revealed
+ dbdr: should be one with few participants
+ Hjax: the announcement said they were going to pick one that most of the people who sign up havent played
+ Hjax: so i doubt theyve picked one already 
+ eulerscheZahl: ok, TL;DR :P
+ jrke: can be BotG then
+ Astrobytes: eww
+ eulerscheZahl: blasphemia
+ dbdr: whether they have decided or not is like asking if schrodinger's cat is alive before you open the box
+ Hjax: im not sure which game i want them to pick 
+ dbdr: plot twist: they choose CSB
+ dbdr: would be an occasion for me to do it :D
+ Hjax: are you going to play this contest? 
+ jrke: yeah dbdr is not in CSB arena
+ dbdr: not esp motivated, but I might if I haven't done the multi
+ jrke: but i can't update my CSB bot now
+ Hjax: you are pretty high up on the "people who will smoke me in a multi" list :P
+ jrke: bored by doing CSB continously by last 5 months
+ Hjax: my csb is just the silly oneliner thing 
+ dbdr: same
+ eulerscheZahl: my CSB doesn't know how collisions work
+ dbdr: lol
+ jrke: my CSB bot doesn't know whats collab&#160;;)
+ jrke: its having single pod simulation not combined
+ eulerscheZahl: much easier for PCR: you don't collide, you merge
+ reCurse: Except when you do collide
+ dbdr: ^
+ Hjax: theres a few games ive wanted to play but never really worked much on 
+ jrke: i will like OOC 
+ eulerscheZahl: same mass is rare enough to be ignored :P
+ reCurse: Rare enough except when it's not (the first 10-15 frames)
+ dbdr: that's why you have a bad rank eulerscheZahl&#160;;)
+ <b>**dbdr needs to check euler's rank</b></p><p><img src="/a/43135502422075" /> eulerscheZahl: just kidding, I handle this case
+ Hjax: locm would be fun
+ <b>**eulerscheZahl is below dbdr</b></p><p><img src="/a/43135502422075" /> eulerscheZahl: :scream:
+ eulerscheZahl: wait, i won't join that "contest" anyways, so go ahead
+ dbdr: but you still have a decent rank
+ reCurse: I can tell you didn't try locm since you have this opinion
+ dbdr: ah no, below Illedan, not decent
+ Illedan: huh?
+ eulerscheZahl: now you summoned him, see what you've done!
+ dbdr: just trolling euler, don't worry Illedan&#160;:)
+ Illedan: I'm looking at the glorious counter for the next contest
+ dbdr: oh, another rust in top 10 on PCR, gg tomatoes
+ Illedan: Time to apply for some vacation days
+ dbdr: and top 3 looks like a toss up
+ eulerscheZahl: i usually take off really shortly. like: have a nice weekend, btw i'll be away next week
+ eulerscheZahl: so far no one complained :D
+ Illedan: :D
+ reCurse: Also gives you the leeway to ragequit if it's with fog of war again
+ Hjax: ^ pacman made me ragequit&#160;:(
+ Illedan: No problem if I just show up to work anyway
+ eulerscheZahl: yes, good thing it starts on a thursday again
+ Illedan: Oh
+ Illedan: nice
+ dbdr: eulerscheZahl: wow, that sounds unusual for employees, no?
+ reCurse: With WFH no one knows you're working on the contest anyway
+ Illedan: :angel:
+ eulerscheZahl: be boss is really chill as long as i get my stuff done
+ Hjax: my usual pattern is to go to work anyway, and be very unproductive as i think about the game all day
+ Illedan: ^
+ Hjax: and then go home and implement my ideas 
+ eulerscheZahl: i wonder when RAIC will take place
+ reCurse: Next contest needs to be fog of war, incomplete inputs, 4 players and fixed start state.
+ reCurse: Then I might ragequit enough to delete my account :p
+ Hjax: needs a random element too 
+ reCurse: I like you
+ eulerscheZahl: have you been struct all along?
+ Astrobytes: speaking of whom, is he back yet?
+ eulerscheZahl: no
+ Illedan: And cooperation
+ dbdr: I think the SDK supports 8 players
+ eulerscheZahl: yes, it does&#160;:)
+ Hjax: 4v4 moba, fog of war, random item drops 
+ Astrobytes: I don't think I'd even open the IDE if it were 8 players
+ Hjax: perfect 
+ eulerscheZahl: but RAIC had a contest with 10, coop with 5 players per team
+ Illedan: What about that BACK command from BTTC?
+ eulerscheZahl: dota-like contest
+ reCurse: I'm starting to think contest designers are not optimizing for fun but for torture
+ [CG]Thibaud: registration should be fixed eulerscheZahl
+ eulerscheZahl: thanks, i'm registered now
+ dbdr: damn, one place in the 4-10 range is taken
+ Hjax: i wonder if teccles will return for the fall contest 
+ eulerscheZahl: to claim #2?
+ Hjax: as is tradition 
+ reCurse: Savage
+ Astrobytes: didn't he say he was done with contests?
+ Hjax: maybe he will change his mind 
+ MadKnight: why did he say that&#160;?
+ MadKnight: what happened to him, Automaton2000&#160;?
+ Automaton2000: like it was in the middle of the game
+ eulerscheZahl: MK are you done with contests?
+ Astrobytes: Something about the time investment not being worth it
+ Astrobytes: Oh hey MK
+ reCurse: He's definitely right
+ Hjax: what? working 80 hours for a tshirt isnt worth it? 
+ Hjax: :P
+ eulerscheZahl: 10 full days for a tshirt and a canvas for him. i don't see the problem
+ Astrobytes: :smirk:
+ Hjax: idk i was pretty pleased with my utg tshirt 
+ eulerscheZahl: for UTG he even got a 500€ amazon voucher, didn't he?
+ reCurse: Trophies are nicer though
+ eulerscheZahl: agreed. i don't need something that i can easily buy myself in a shop
+ eulerscheZahl: the tshirt or canvas is more unique, even if it's relatively cheap regarding money
+ reCurse: Canvas is more unique but doesn't really fit to hang
+ reCurse: Trophy looks nice in a showcase
+ eulerscheZahl: i placed the canvas on a free spot on the bookshelf
+ dbdr: how did you win a canvas? creator?
+ reCurse: I guess, it's kinda big though
+ eulerscheZahl: and not in direct sunlight so the colors will stay intact longer
+ reCurse: Can't make it really fit anyway
+ eulerscheZahl: yes, creatorkutulu and ocean of code
+ reCurse: Creator and top 3
+ Astrobytes: You're supposed to hang/put  certificates and awards in the toilet, so everyone is forced to look at them at some point&#160;;)
+ reCurse: That's next level thinking
+ eulerscheZahl: and at cotc i had really bad luck in the recalc. a really nice schubc asked me for my address and sent my a hypnotoad canvas :D
+ eulerscheZahl: the pirate hypnotoad i used for the contest
+ dbdr: wow, nice!
+ Astrobytes: lol, awesome
+ eulerscheZahl: wanted to thank him with a double tshirt later on but he never saw my message&#160;:(
+ dbdr: wait, you finished #82
+ dbdr: I thought you were close to top 3 :D
+ eulerscheZahl: was around 25 before the recalc
+ eulerscheZahl: dropped to 91
+ eulerscheZahl: up to 82 because they removed cheaters
+ dbdr: just because of luck? :thinking:
+ eulerscheZahl: submitted the same bot again in the multiplayer, back to ~25
+ reCurse: :thinking:
+ reCurse: With 60 missing bots from contest?&#160;:)
+ eulerscheZahl: i still have no idea what was going on in that recalc
+ eulerscheZahl: i mean i had a rank similar to those who placed around rank 25 in the contest
+ dbdr: maybe you fare poorly against the leaked code?
+ dbdr: that would bias things
+ eulerscheZahl: i had about 50% winrate most of the time during recalc yet kept dropping
+ eulerscheZahl: even had a lucky streak with winning 2 out of 3 games for about 100 matches, barely climbing. then back to 50% winrate and free fall
+ dbdr: winrate means very little
+ eulerscheZahl: too bad we don't get the full recalc history anymore
+ eulerscheZahl: otherwise we could ask pb 4 about his alternative ranking
+ reCurse: It's still biased though
+ reCurse: Especially if the relevant range is missing due to matchmaking
+ eulerscheZahl: i don't think there's the perfect leaderboard
+ reCurse: Perfect no, much better yes I think so
+ eulerscheZahl: true, matchmaking is a relevant point
+ reCurse: But kind of hard when implementation is blackboxed
+ eulerscheZahl: i have the code but not sure if he's fine with me sharing it
+ reCurse: I meant CG's
+ eulerscheZahl: ah
+ reCurse: We found bugs in the Halite system thanks to its open source
+ dbdr: I thought for a second euler has CG's matchmaking code :D
+ reCurse: For matchmaking
+ eulerscheZahl: i remember riddles having a flawed matchmaking (surprise, surprise)
+ eulerscheZahl: i complained, got ignored
+ dbdr: honestly, I think it might work to create an open source platform
+ reCurse: Don't make it just take Halite's and work from there
+ Astrobytes: I guess with CG it's tied in with their business
+ eulerscheZahl: sounds like a lot of work :sweat:
+ reCurse: Good luck getting funds though
+ reCurse: Halite is really up there in quality
+ eulerscheZahl: hm, forking halite sounds reasonable
+ dbdr: funds for what? hosting/cpu?
+ reCurse: Yeah
+ reCurse: Halite costed in the tens of thousands IIRC
+ eulerscheZahl: they ran a lot of matches
+ dbdr: per?
+ eulerscheZahl: every few minutes and thousands of players
+ eulerscheZahl: per contest i guess
+ reCurse: They did have GPU instances though
+ reCurse: Forgot how much it took from the budget
+ reCurse: But yeah it's not cheap running those things
+ reCurse: One thing to be thankful for here
+ dbdr: sure, it's great CG exists and seem to be stable
+ eulerscheZahl: other sites come and go. CG hosts less contests now but they keep happening
+ eulerscheZahl: and all old games still available
+ reCurse: I miss when contests happened all the time
+ reCurse: Wish I joined 2 years prior
+ eulerscheZahl: i also feel like i missed some fun there
+ dbdr: you would have burned out two years earlier too, ore more&#160;;)
+ reCurse: Can't say the last 2 years were the best so I'm fine with that
+ eulerscheZahl: back then there were less strong competitors i think
+ eulerscheZahl: and earlier burnout would have allowed reCurse to detect poorly designed games earlier and skip them
+ Illedan: I think the information and sharing has made the general player far better these days..
+ dbdr: not sure about the general player, but the top ones, probably
+ Illedan: Because the top ones did read it? :P
+ Astrobytes: The real turning point was when reCurse taught everyone how to write bit streams :P
+ eulerscheZahl: that changed my life
+ reCurse: The infamous stream
+ reCurse: Never doing that again but I'm glad I did
+ MSmits: I need to watch that
+ eulerscheZahl: it's better than GAimax
+ MSmits: do bits get even better when they're streaming?
+ Astrobytes: fwiw you were a good streamer
+ Illedan: The "failed" stream was good too reCurse
+ Astrobytes: :smirk:
+ Astrobytes: shhh
+ dbdr: what was the failed one?
+ Astrobytes: It doesn't exist.
+ eulerscheZahl: we don't talk about it
+ dbdr: reCurse: if only you used assert, you could have gone pro twitcher
+ reCurse: I gained a lot of respect for streamers
+ reCurse: Definitely a job
+ MSmits: lol, you went from no respect to, it's a job
+ MadKnight: such a funny story
+ reCurse: I didn't say no respect
+ MSmits: ok ok
+ reCurse: But it's one of those things you don't realize how much work it is until you try
+ reCurse: For me anyway
+ Illedan: Agreed
+ dbdr: yeah, and there's a selection biasyou mostly see the successful ones, so each to underestimate the difficulty
+ MSmits: mmh I can see that, I made a few videos and it was a lot of work, streaming is probably more difficult
+ Illedan: And failing live feels really bad
+ MSmits: dbdr isn't that true for most creative jobs?
+ Illedan: What doesn't kill you makes you stronger?
+ dbdr: I think the effect is magnified online
+ dbdr: similar to movies and other broadcast art
+ dbdr: not the case for live art
+ MSmits: I see
+ dbdr: but yes, there selection bias in a lot of places
+ dbdr: startups too, for instance
+ dbdr: probably 90%+ fail, a lot of talk a lot about the 0.0001% that becomes multibillion companies
+ MSmits: are you saying that not all startups turn into facebook?
+ dbdr: :scream:
+ reCurse: The worst is when people think there's lessons to be learned from it, as if it's something reproducible...
+ dbdr: to be fair there are probably *some* lessons, if you abstract from the specifics
+ reCurse: You can't have startups in the billions left and right
+ dbdr: oh yeah, that's part of my point
+ dbdr: does not mean there is nothing to learn to increase your chances if you want to try
+ reCurse: So how much there is to learn is very debatable and probably vastlyoverestimated
+ reCurse: Because I doubt the founders themselves know everything that came into play and be honest about it
+ reCurse: A lot of it is luck + timing on top of the huge amount of work needed to have a startup not fail miserably
+ reCurse: I meant how much you learn with them vs a successful but very low profile startup
+ reCurse: Did anyone even get in the millions just following in the footsteps of another huge one? shrug
+ dbdr: just saw this: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=3LopI4YeC4I">https://www.youtube.com/watch?v=3LopI4YeC4I</a>Is Success Luck or Hard Work?
+ Hjax: is success luck or hard work? i think the answer is "yes"
+ jacek: thats my line
+ dbdr: nothing earth shattering but some good points
+ reCurse: imo success is hard work, but breaking it big is luck or timing or both
+ dbdr: came up with a nice simple model to give a quantitative answer
+ reCurse: But I'll watch thanks
+ jacek: and again, new tab with random number opened
+ jacek: and its loading
+ reCurse: Malicious extension maybe
+ Astrobytes: It's all that pony stuff you like jacek, it's coming back to bite you
+ FlamingPostItNote_2371: hello
+ jacek: good evening
+ lil.ashsz: hi
+ maxmanusv1: yo
+ kovi: interesting video
+ kovi: unfortunately in many areas luck plays much higher role
+ kovi: <a rel="nofollow" class="external free" href="https://barabasi.com/book/the-formula">https://barabasi.com/book/the-formula</a>
+ jacek: just like the leaderboard
+ Marchete: luck... and godparents/money
+ Marchete: at least in many areas or circles
+ kovi: yeah, research reveals the importance of early supporters/promoters
+ jacek: meow
+ jacek: Automaton2000 meow?
+ Automaton2000: it's too late for me to be able to look at the top
+ Whitelegend: Hi everyone, in a test case clash creation, how to set an output to the single char [SPACE]&#160;? any idea&#160;?
+ jacek: print(" ")&#160;?
+ Whitelegend: You mean i have to write [print(" ")] in the output field of the test case&#160;?
+ jacek: youre contributing the clash?
+ Whitelegend: yeah i'm trying to create one
+ Illedan: Great video dbdr. thx
+ dbdr: glad you liked it
+ DomiKo: 30% win rate against Redstrike that's an improvement
+ Uljahn: liked it too, thx
+ Stilgart: Automaton2000: what does the turtle say?
+ Automaton2000: so if you were asking
+ jacek: so youre gonna like this video <a rel="nofollow" class="external free" href="https://ujeb.se/YFyM">https://ujeb.se/YFyM</a>
+ The_Auditor: anybody done the weekly chalange?
+ Jaek: thanks for reminding me tho xd
+ Schwase: why is the clash bot so good???
+ Schwase: that french one is just insane
+ T1Anias: i have done the weekly
+ Ryanless: is there a way to use a real debugger? my code has a nearly impossible to find bug. And just the Console.Log messages don't cut it
+ The_Auditor: copy the source in your favourite IDE&#160;?
+ Ryanless: well i play this bot challenges. So i would still need then to create a game mook that provides input, changes game state, acts on the ouput of code
+ The_Auditor: ah, i see. the you are stuck with the Console.Log, i think... but i'm new here ... so, what do i know
+ Xedux: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/1371522ee3bd7f0c801114087864530c806866c">https://www.codingame.com/clashofcode/clash/1371522ee3bd7f0c801114087864530c806866c</a>    join 1min left
+ Xedux: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/137152631459e2a1941dbac0d0e4d417bec86bb">https://www.codingame.com/clashofcode/clash/137152631459e2a1941dbac0d0e4d417bec86bb</a>
+ Flyingkid: @Ryanless u don't have to do any of that. Aren't u just debugging? Can just copy inputs given to bot as well (just Console.log them too) and use that as input file in your fave IDE like @The_Auditor suggested.
+ Xedux: @SuperMuppet 
+ Xedux: can  you give your recent clash code&#160;?
+ Flyingkid: So we're waiting until Novemer 12th show-down time...
+ XilinWan: m={'

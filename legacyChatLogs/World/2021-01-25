@@ -1,0 +1,654 @@
+ jrke: damn my depth minimax bot in python can defeat depth 8 minimax bot of c++ mine :nerd:
+ jrke: i think cause bugs in my c++ bot
+ jrke: depth 2 minimax bot in python*
+ Andriamanitra: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/595249e2fdd7523cab7a57b3652120e4d51c">https://www.codingame.com/contribute/view/595249e2fdd7523cab7a57b3652120e4d51c</a>
+ Andriamanitra: this clash has no business being approved and at +3 votes
+ Lisker_the_slow: wassup programerssss
+ Uwafuwa: :smile:
+ The_Else: hello everybody
+ jacek: good morning
+ marcal279: morninggg
+ marcal279: or rather afternoon now
+ Passifi: mornin'
+ Passifi: marcal i don't know what you're talking about it is morning in the correct part of the world :P
+ Stilgart: it's always morning, we are in a chat here&#160;;)
+ TSC: Test
+ DarkDiamonD: Test passed.
+ Allstreamer_: noice
+ MSmits: morning
+ jrke: morning ms recurse took your othello 
+ jacek: *our* othello
+ MSmits: for a day
+ jacek: 99902 chatacters, phew
+ MSmits: lol what?
+ MSmits: did you nearly fill your bot?
+ jacek: yeah, though i didnt minify the c. probably could get 2-3k chars
+ MSmits: ahh yeah
+ MSmits: small program then, I would be able to get 10
+ MSmits: 10k
+ MSmits: easily
+ jacek: hmm without weights its 26k
+ MSmits: ah yes, so you can get much more
+ MSmits: should be able to get down to 6k or less
+ MSmits: i have never had to do that thankfully
+ jrke: btw how do you compress them?bz2?
+ MSmits: minifier
+ jrke: whats that?
+ MSmits: there's free browser thingies
+ jacek: i dont use any compression
+ MSmits: or stuff you can down load
+ MSmits: google it jrke
+ MSmits: btw, i need to teach a class, ttyl&#160;:)
+ jacek: teach a struct
+ MSmits: :P
+ Gabriel_IUT: how to solve the othello problem 
+ jrke: thats not problem its multiplayer game write your bot submit it and see where it stands in front of other players and then again improve you bot and submit
+ jacek: there is othello puzzle, jrke
+ jacek: that why the multiplayer game has othello-1
+ jrke: oh sorry i forgot
+ Velcoro: @Andriamanitra if you have a bunch of approvers, you can have anything aproved (check other top quality contributions of this author and his approvers)
+ jacek: :tada: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/524235642">https://www.codingame.com/share-replay/524235642</a>
+ MSmits: gj
+ MSmits: your rewrite?
+ jacek: eeyup
+ jacek: it has 68% winrate against old version. but to beat reBless i need something fundamentally different
+ Lisker_the_slow: what language do you use &gt;
+ Lisker_the_slow:&#160;?
+ struct: othello puzzle of the week :tada:
+ jacek: oh my
+ jacek: C++ mostly
+ jacek: and it is othello game, not othello puzzle
+ struct: c++ on multis, javascript on puzzles
+ MSmits: c++ on multis, C#/C++ on contests. C#/python on puzzles
+ MSmits: oh and python on clashes, if i ever care to
+ MSmits: basically i go from python -&gt; C# -&gt; c++ the more time i have available
+ jacek: and -&gt; assembly
+ MSmits: lol one time i tried that, never again
+ Angecide: Hi, I was wondering how people in uttt calculate their win&#160;% during the game, are they dividing how many nodes their solver has proved win with loss or something else?
+ jacek: i use score / visits
+ jacek: of the chosen node
+ Angecide: I see
+ jacek: if you use [0, 0.5, 1] score then its score/visits
+ jacek: if [-1,0,1] scale accordingly
+ Angecide: ye that makes sense, on anoter note, I was gonna work on a NN for evaluating uttt board, but it turns out to be more pain than gain, and I also figured out from reading old CG logs that I should probably work on clever heuristic, since it is possible to reach top 10 with just good heuristic and fast mcts solver
+ jacek: only reBless uses NN successfully
+ Angecide: translating old discussions in #ru gave me some ideas
+ jacek: top legend is just performance-fest and some heuristics
+ Angecide: does recurse use NN for his uttt bot?
+ Angecide: the one that is top 1 in leaderboard
+ jacek: yes. he only recently submitted
+ Angecide: yea I see
+ struct: He also tried it long ago
+ struct: with no success
+ struct: he managed legend IIRC
+ forgatsby: Hi Guys
+ struct: hi
+ Angecide: btw, I always wondered, why is it that you can still keep computing for a short period during enemy turn? 
+ Angecide: it's like a high risk high reward strategy, since it can sometimes give timeouts
+ struct: you cant
+ struct: when you output your process gets paused
+ struct: after opponent outputs it resumes
+ struct: This is why you might get timeouts
+ Angecide: I presume the 100ms is my turn, and anything that exceeds that is part of the enemy turn right?
+ struct: no
+ struct: 100msprintif you use time here
+ struct: it will overlap on next turn
+ struct: like
+ struct: 100msprint()20ms
+ struct: on next turn you will have 80
+ struct: because you already used 20 on that turn
+ struct: maybe im not explaining well&#160;:/
+ Angecide: ye I am trying to wrap my head around it, I think it makes sense, but I am using 109ms every time it is my turn, and I can play a lot of games with no timeouts
+ struct: When do you start your timer?
+ Angecide: right before my mcts loop, I don't start it when I receive enemy imputs
+ struct: The timer should start after reading first input
+ Angecide: ye that's what I mean, I am using way more than 100ms on my turn
+ struct: Yeah but you might get timeouts sometimes
+ Angecide: using 109 ms is a safe duration, 110ms is high risk but still doable with no timeouts
+ struct: in ide or arena?
+ Angecide: arena
+ struct: i tried and dont get timeouts aswell
+ Angecide: submit and reach high ranking in legend
+ struct: 10ms wont give me that much of an advantage
+ struct: I would need to rewrite my bot
+ Angecide: but, to my original question, do u have a theory on why this is possible?
+ struct: <a rel="nofollow" class="external free" href="https://forum.codingame.com/t/timeouts-how-do-they-work/24504/4">https://forum.codingame.com/t/timeouts-how-do-they-work/24504/4</a>
+ Angecide: oh I see, so it is indeed an intended high risk strategy
+ TwilightImp_1204: 1
+ jacek: i used 95ms in bt and ocassionaly timeouted
+ wjan: python is 3.7?
+ Uljahn: ye
+ wjan: ty
+ Uljahn: <a rel="nofollow" class="external free" href="https://www.codingame.com/faq">https://www.codingame.com/faq</a> for more details
+ YCS-Venom: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/15608491cda69aecb3328f3d109f3aadf890ab0">https://www.codingame.com/clashofcode/clash/15608491cda69aecb3328f3d109f3aadf890ab0</a>
+ Kitkat260: can u guys help me with clash of code
+ Wontonimo: do you have the title of the clash?
+ Kitkat260: hold on
+ Kitkat260: its called it's a starry night
+ Wontonimo: I can't find a CoC with that exact name, sorry.  Copy and paste the exact title please
+ Wontonimo: do you mean this community contribution that hasn't been accepted yet <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/5984cf98ff9bc833f50bd37d11b149e25a07">https://www.codingame.com/contribute/view/5984cf98ff9bc833f50bd37d11b149e25a07</a>
+ Kitkat260: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/demo/8661152a0ee13a53e14a83eeb90aadeca6631b">https://www.codingame.com/ide/demo/8661152a0ee13a53e14a83eeb90aadeca6631b</a>
+ Kitkat260: this it
+ eulerscheZahl: Wontonimo found it first, points go to him
+ Kitkat260: ok
+ PatrickMcGinnisII: still driving me crazy  <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/524296878">https://www.codingame.com/replay/524296878</a>
+ eulerscheZahl: "driving"I was expecting Space Maze, now I'm disappointed
+ PatrickMcGinnisII: space maze is a shorter route to crazy
+ 1400179: Faithfully reproduced the frustration
+ 1400179: A+
+ Kitkat260: wow
+ PatrickMcGinnisII: i'm gonna submit it anyways
+ eulerscheZahl: that map was unlucky, PatrickMcGinnisII&#160;:(
+ eulerscheZahl: for another one you shared there would have been a way to find another safe cell
+ RoboStac: can't you tell that square must be a mine&#160;? 
+ eulerscheZahl: not always
+ eulerscheZahl: there's only 1 validator. but random generated after your first click
+ RoboStac: there are 3 empty squares, a 2 with no mines and some ones that share the corner
+ RoboStac: no, I mean on that specific replay
+ PatrickMcGinnisII: I don't check non-adjacent subgroups
+ struct: that one was solvable yes
+ struct: or maybe not&#160;:/
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://imgur.com/a/107BcQJ">https://imgur.com/a/107BcQJ</a>what do I miss?
+ 1400179: No it's not solvable
+ RoboStac: your middle and left ones have 2 mines on a '1' 
+ eulerscheZahl: right
+ RoboStac: only the right hand one is valid
+ PatrickMcGinnisII: maddenning  <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/524296878">https://www.codingame.com/replay/524296878</a>
+ 1400179: Oh nvm I'm dumb
+ eulerscheZahl: so you have the real minesweeper experience. authentic port to CG
+ 1400179: I give it 5% out of 100
+ eulerscheZahl: :D
+ PatrickMcGinnisII: my win&#160;% is around 16%
+ eulerscheZahl: good enough to submit but can still be improved
+ PatrickMcGinnisII: which is better than it was it was at 7%
+ eulerscheZahl: how did you get those numbers? click "play" that often?
+ varName: Is this app enough to prepare for interviews?
+ PatrickMcGinnisII: took me 4 submits
+ eulerscheZahl: most of us are here for fun, we don't really know how interviews work
+ PatrickMcGinnisII: and 1 "I'm not a robot"
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/work/offers/screening/product-tour/">https://www.codingame.com/work/offers/screening/product-tour/</a>
+ eulerscheZahl: to give you an idea about the interview process
+ PatrickMcGinnisII: glhf
+ eulerscheZahl: congrats on solving it
+ JM54: ngl, the constant void of being assigned assignment after assignment after assignment, is really hindering my self confidence in completing a coding course
+ struct: reCurse <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/524308197">https://www.codingame.com/replay/524308197</a>
+ struct: not sure if it happens often
+ eulerscheZahl: fix it
+ eulerscheZahl: i couldn't resist, I'll show the door to myself&#160;:(
+ struct: Well I cant reproduce it, so I think its not important
+ reCurse: Server hiccup probably
+ reCurse: Thanks though
+ DomiKo: struct doing some Chess?
+ reCurse: I'm starting to regret a bit the 50ms because the hiccups won't get fixed and it's going to cause issues
+ reCurse: But it's either that or give up pairings, so unacceptable
+ eulerscheZahl: or having some more fun with the SDK and find a way around
+ eulerscheZahl: the build process just includes a framework that handles some things for you and defines the constraints
+ eulerscheZahl: but i guess you could just copy-paste the whole SDK and include it in your contribution rather then referencing it via Maven
+ eulerscheZahl: and then adjust whatever you don't like
+ reCurse: I'm sure they would approve of me busting the time limit...
+ reCurse: Unless you mean there's a way to do explicit pairing by fiddling the SDK?
+ struct: DomiKo no, I might try it when I have more time
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://github.com/CodinGame/game-skeleton/blob/master/pom.xml">https://github.com/CodinGame/game-skeleton/blob/master/pom.xml</a>don't include the SDK as shown here
+ eulerscheZahl: just copy-paste the whole SDK code into your contribution
+ hpa: is c++20 available?
+ eulerscheZahl: and then tweak some constants :P
+ reCurse: Ok but to my actual question
+ eulerscheZahl: i saw some mirror thing iirc
+ reCurse:&#160;!
+ eulerscheZahl: didn't investigate any further
+ reCurse: hpa: not yet
+ hpa: thank you for your reply
+ eulerscheZahl: can't find the mirror anymore, maybe I was wrong&#160;:(but saw something else that I want to test now
+ struct: yeah, I couldnt find mirror aswell
+ struct: I wonder if you can increase the time though
+ eulerscheZahl: i think that's possible (any might make some staff mad?)
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://github.com/CodinGame/codingame-game-engine/blob/master/engine/core/src/main/java/com/codingame/gameengine/core/GameManager.java#L38">https://github.com/CodinGame/codingame-game-engine/blob/master/engine/core/src/main/java/com/codingame/gameengine/core/GameManager.java#L38</a>
+ reCurse: No I knew that, that's what I didn't want to do
+ reCurse: But enabling pairing though...
+ reCurse: Besides it's totally possible to get killed by a higher level process
+ reCurse: nvm didn't see struct's question for some reason
+ reCurse: My multitasking is failing today need to close this chat for a bit
+ JLukeSkywalker: if designing a road based game/puzzle, should the cars be on the left or the right?
+ JLukeSkywalker: wont actually affect input/output, just the visual
+ JLukeSkywalker: Output Line 1: True if in US, False otherwise
+ eulerscheZahl: US isn't the only country where they drive on the right, yk
+ JLukeSkywalker: the output line was a joke
+ JLukeSkywalker: just want to know in general on here, should it be right or left
+ eulerscheZahl: i vote for right but doesn't really matter
+ eulerscheZahl: make it a toggle in the viewer :P
+ eulerscheZahl: draw cards on both sides and use the DebugModule to hide one at a time
+ jacek: also the speed should be in km/h, not that heresy mph
+ eulerscheZahl: cars, not cards
+ eulerscheZahl: m/s
+ eulerscheZahl: SI-units
+ jacek: so when there sign with 100, that means 100 m/s?
+ BtB1: tfw the silly american uses bald eagles / hamburger instead of tea / crumpet
+ n4gb07: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/6134e166e1820c3f53a2e3765700235e0a8e">https://www.codingame.com/contribute/view/6134e166e1820c3f53a2e3765700235e0a8e</a>
+ n4gb07: its not phishing.. its a codingame link only
+ JLukeSkywalker: i think blaise was kidding, all the contribuion links are that long
+ n4gb07: asking people to review my contribution/creating question
+ Astrobytes: They will. It's in the contribution section.
+ n4gb07:&#160;:)
+ BlaiseEbuth: Oh&#160;! I hav'nt seen your question... :smirk:
+ struct: Ascii art :rolling_eyes:
+ Astrobytes: I just see Yet Another Clash Contribution and close.
+ struct: I guess its fine, just not to my liking
+ BlaiseEbuth: You're very brave guys, for clicking on strange links like that. :o
+ JLukeSkywalker: hey, reviewing all the clash contributions sucks, but the more we have the better
+ JLukeSkywalker: also i didnt click on it, went in through the contributioon menu
+ Astrobytes: (I don't like clash)
+ BlaiseEbuth: Yeah, but you're an evil 5% member
+ eulerscheZahl: n4gb07 i will have a look if you review mine first <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/5774f141c59462b06e77d826d14d052d7966">https://www.codingame.com/contribute/view/5774f141c59462b06e77d826d14d052d7966</a>
+ struct: review for review
+ n4gb07: @Blaise&#160;: iam a security engg.. i can understand about how ppl get phished&#160;:)
+ n4gb07:&#160;:)
+ BlaiseEbuth: Yeah ... But You don't understand what I meant...
+ eulerscheZahl: clashes are malicious?
+ BlaiseEbuth: Yes. But no, the other thing ^^
+ JLukeSkywalker: Blaise is malicious
+ n4gb07:&#160;:)
+ BlaiseEbuth: Yes. But no, the other thing ^^
+ n4gb07: conspiracy guy
+ BlaiseEbuth: -&gt; "Hey guys&#160;! I just created a clash contribution. Any feedback would be appreciated. Here's the link: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/6134e166e1820c3f53a2e3765700235e0a8e">https://www.codingame.com/contribute/view/6134e166e1820c3f53a2e3765700235e0a8e</a> Thx&#160;!"
+ BlaiseEbuth: Clearer&#160;?
+ JLukeSkywalker: you dont have any clash contributions listed
+ Astrobytes: Good manners cost nothing n4gb07
+ Astrobytes: Hm, someone made Battleship multi
+ BlaiseEbuth: I prefer kancol
+ Astrobytes:&#160;?
+ n4gb07: got waht you are saying Blaise..i thought this is just chat.. not some official mail..so sent the link directly.. but what you say make sense
+ n4gb07: iam new here
+ Astrobytes: Just be polite, that's all
+ n4gb07: about 10days old&#160;: )
+ BlaiseEbuth: Of you course you don't need full salutations formulas, but at least some words...
+ n4gb07: :thumbsup:
+ Astrobytes: BlaiseEbuth: WHAT! I demand full formal introductions at ALL TIMES.
+ Astrobytes: So uncouth... :P
+ JLukeSkywalker: @Astro: Take a cookie, open your floppy drive, insert cookie
+ Westicles: Dear Sirs, I am an eleven yo gold, please look at my contribution.  BR, Sheila
+ Westicles: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/594260c73701c441f17acd586a15d3e159e3">https://www.codingame.com/contribute/view/594260c73701c441f17acd586a15d3e159e3</a>
+ Westicles: *girl
+ BlaiseEbuth: I prefer gold
+ Astrobytes: ^
+ BlaiseEbuth: Astrobytes&#160;: kancol <a rel="nofollow" class="external free" href="https://en.wikipedia.org/wiki/Kantai_Collection">https://en.wikipedia.org/wiki/Kantai_Collection</a>
+ Astrobytes: "The central theme of the game is the representation of World War II warships personified as teenage girls and young adult women with personality characteristics reflecting the history of each ship"
+ BlaiseEbuth: :no_mouth:
+ Westicles: with tentacles no doubt
+ BlaiseEbuth: :octopus:
+ eulerscheZahl: politeness?sudo review my contribution!
+ Astrobytes: Ohh Tentacles, the Greek god of seafood...
+ BlaiseEbuth: Give this man some hagiss, he's hungry
+ NazzLotrzyk: :cowboy:
+ MSmits: this chat is all over the place
+ MSmits: should I homogenize it with a smits-ramble
+ Astrobytes: Also see Spectacles: Greek god of eyesight.
+ Astrobytes: Finished rioting MSmits :D
+ MSmits: oh, the riots were on the news?
+ Astrobytes: Yes.
+ MSmits: did you see me dodge that horse charge?
+ Astrobytes: :rofl:
+ Astrobytes: Feel free to continue with your daily sermon.
+ MSmits: i am more worried about what i just found out a few minutes ago
+ BlaiseEbuth: League of legend championship&#160;?
+ MSmits: apparently our health service for testing has been selling personal information to criminals
+ MSmits: massive amounts
+ Astrobytes: Which criminals? The UK govt? :P
+ struct: What multi next?
+ struct: any suggestion?
+ MSmits: nah not those, just your average fraud criminal
+ MSmits: identity theft, phishing etc.
+ Westicles: scrabble?
+ Astrobytes: Nice. Really cool of them.
+ MSmits: yeah...
+ MSmits: if you do scrabble, I will *book* it
+ MSmits: the book is a dictionary
+ Astrobytes: Scrabble was on Al Zimmerman once right?
+ Westicles: yeah
+ BlaiseEbuth: Why not organ traffickers&#160;? "This guy lungs are OK"
+ Astrobytes: Ah you came 4th Westicles&#160;:)
+ Westicles: I did them manually, almost broke my brain
+ Astrobytes: lol, not surprised!
+ struct: how does it work?
+ struct: I know what scrabble is but for an AI?
+ Astrobytes: Check the AZ one for inspiration:<a rel="nofollow" class="external free" href="http://azspcs.com/Contest/AlphabetCityLight">http://azspcs.com/Contest/AlphabetCityLight</a>
+ Westicles: There are any big dictionary puzzles here, not sure if that is doable
+ Westicles: *aren't
+ Astrobytes: Perhaps eulerscheZahl knows
+ BlaiseEbuth: After freecell and minesweeper, I want space cadet&#160;!
+ Astrobytes: Ah the pinball
+ struct: not enough frames
+ BlaiseEbuth:&#160;:(
+ Westicles: You could do monopoly, but figuring out trading would be tricky
+ ErrorRazor: If you want an RNG-heavy game, yahtzee would be much easier to make than monopoly :p
+ eulerscheZahl: snakes and ladders
+ JBM: yahtzee… that'd be horrible
+ eulerscheZahl: regarding the big dictionary @Westiclesgive it to the bot in the first turn?
+ eulerscheZahl: and include the list in the referee
+ ErrorRazor: Exactly, don't waste extra time making the horror more complex
+ BlaiseEbuth: Why not 421&#160;? :D
+ eulerscheZahl: i don't see why jahtzee should be more random than troll vs castle
+ <b>**eulerscheZahl knows the game as Kniffel</b></p><p><img src="/a/55595180001313" /> Westicles: the official scrabble dictionary is 100k words...
+ ErrorRazor: yuge
+ eulerscheZahl: not sure how much input we can read in 1 turn but 100k probably exceeds that
+ jacek: MSmits you havent your C4 results in 2 days. the suspense is killing me
+ eulerscheZahl: how about taking the full list of words in the referee but only sending a subset to the players each time?
+ Astrobytes: ^
+ eulerscheZahl: that would also ensure that each game is different
+ eulerscheZahl: no hardcoding, books or anything
+ Westicles: that's a great idea
+ Westicles: make it so
+ Astrobytes: I was thinking this, dependent on the validators you can send the appropriate subset
+ eulerscheZahl: wait, is that for a puzzle or multiplayer?
+ eulerscheZahl: or optim
+ Astrobytes: Optim I presume
+ Astrobytes: AZ style
+ eulerscheZahl: i see
+ Westicles: I was thinking multi
+ Astrobytes: Interesting...
+ Westicles: I was going to try to make an optim just like Alz, but the winner published his code...
+ Astrobytes: Ah.
+ eulerscheZahl: sorry for German&#160;:(<a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=PVP_wcV3yH8&amp;ab_channel=SpinMasterDeutschland">https://www.youtube.com/watch?v=PVP_wcV3yH8&amp;ab_channel=SpinMasterDeutschland</a>
+ eulerscheZahl: Topwords, another game about making words
+ eulerscheZahl: where you can write above existing words
+ Astrobytes: Hmm, that looks interesting too.
+ ErrorRazor: Looks exactly like Upwords
+ Astrobytes: (It is)
+ eulerscheZahl: i don't know upwords :D
+ eulerscheZahl: I blame German marketing
+ jacek: german :scream:
+ eulerscheZahl: of course the Polish user is scared
+ Astrobytes: :D
+ jacek: everything in german sounds like doomsday weapon
+ Westicles: here it comes...Schmetterling!
+ Astrobytes: And everything in Polish sounds like "schneepschneepschepschneep"
+ DomiKo: that's accurate
+ Astrobytes: I know!
+ Astrobytes: Confirmed with multiple Polish people.
+ struct: no notification for puzzle of the week?
+ Astrobytes: Not for me, what is it?
+ struct: I guess its a bug that came with the new deploy&#160;:(
+ struct: Othello
+ Astrobytes: The multi?
+ struct: yes
+ Astrobytes: Oh cool
+ struct: No email too?
+ Astrobytes: Didn't check
+ eulerscheZahl: i unsubscribed from the emails
+ Astrobytes: I usually ignore them
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://prnt.sc/xmbta5">https://prnt.sc/xmbta5</a>
+ Astrobytes: Yeah, that page seriously needs updating.
+ Astrobytes: (very minor issue)
+ eulerscheZahl: move that screenshot directly to #bugs
+ struct: the 95% dont go to that page
+ struct: oh tehre is no email for potw
+ struct: I guess its fine
+ struct: But ill report the no notification
+ eulerscheZahl: it's sometimes late
+ eulerscheZahl: i think it's a manual trigger
+ Astrobytes: Like the selection process eh...
+ jacek: last week was in late evening
+ duckymirror: Is Rust code compiled in release mode when I test it in the IDE?
+ Astrobytes: Yes, they fixed that issue.
+ duckymirror: That explains why my integers overflow without crashing... :sweat_smile:
+ duckymirror: Thanks!
+ Astrobytes: haha, no worries
+ jacek: rust...
+ jacek: oh wait, that why rebless could test against dbdr
+ Astrobytes: Yeah, they fixed it before a contest iirc
+ Astrobytes: It's on the forum/discord somewhere
+ Astrobytes: "rebless" :D
+ struct: they fixed it during fc 2020
+ struct: they were "forced" too
+ Astrobytes: That was because of "rebless" right
+ struct: yes
+ Astrobytes: I remember now.
+ struct: If they fixed rust and didnt fix C#
+ struct: he could have done the same
+ struct: :D
+ Astrobytes: Indeed.
+ jacek: done what?
+ duckymirror: I miss my overflow panics... And those inlined functions in stack traces are pretty confusing too:grinning:
+ Astrobytes: Can you not activate a debug mode prior to submitting? e.g. like with a C++ pragma directive?
+ Astrobytes: So you can deactivate it when you submit I mean.
+ duckymirror: I don't know a way to do that, but I'm far from being a Rust expert
+ jacek: just pump some oxygen into iron
+ Astrobytes: Just seems like since Rust already thought of everything else they would have thought of that too :D
+ Astrobytes: I do like the fact that the Rust mascot is called Ferris.
+ duckymirror: They didn't make Rust for environments without access to the configuration
+ XIlayPVPX: Yo, if anyone did "Rock Paper Scissors Lizard Spock" how do I look at others' solutions?
+ XIlayPVPX: my solution was super long and stupid
+ XIlayPVPX: and I'm hoping that the guy who wrote the question didn't intend for the programmer to test every single possible scenario individually
+ JLukeSkywalker: if you have solved it, clicking results should show other's solutions
+ XIlayPVPX: got it, I guess I gotta finish up the code
+ struct: jacek with rust you could check if it was on arena or ide
+ struct: if it was on ide you could just crash the bot
+ struct: Same with C#
+ JLukeSkywalker: nvm, its on the main problem page after you solve it
+ struct: you only needed to check debug flag
+ JLukeSkywalker: any good resources for optimizing java run times? My referee is pretty slow
+ darkhorse64: Your game should use degrees instead of radians. It's much more intuitive
+ Astrobytes: Looks fun though.
+ Astrobytes: Also, game turns and such are modifiable from the SDK no?
+ struct: what do you mean astro?
+ MSmits: jacek
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/1fe88964-718f-4f5d-88c7-58e0832be299">http://chat.codingame.com/pastebin/1fe88964-718f-4f5d-88c7-58e0832be299</a>
+ jacek:&#160;?
+ struct: wow
+ MSmits: you asked
+ Astrobytes: To change number of turns/times etc struct
+ MSmits: oh damn
+ jacek: ivalid id
+ MSmits: that still doesnt work
+ MSmits: let me just put it in the connect4 thread
+ struct: yeah its possible
+ struct: gameManager.setMaxTurns()
+ struct: gameManager.setTurnTimeout
+ Astrobytes: JLukeSkywalker was looking to increase his turns
+ Astrobytes: for Tanks
+ MSmits: jacek updated. Nearly to 1M games
+ struct: ah I didnt read
+ struct: if he wants to make it 4 players
+ struct: he can go up to 150 turns per player using 50ms earch
+ struct: so 600 turns total
+ Astrobytes: Maybe reply to his forum thread (just noticed he made one)
+ Astrobytes: Nice work MSmits
+ MSmits: thanks, hope there's no bug in it lol
+ MSmits: wouldnt be the first time i notice one after weeks
+ Astrobytes: Heh. There's a reason for those proofs in the papers you know :P
+ struct: MSmits I want the meta for Amazons /s
+ MSmits: it wouldn't get past ply 1 :P
+ struct: About the optimizations I cant help him much
+ struct: I just write bad java code
+ struct: and my contributions are very simple
+ MSmits: it will be interesting to see how re curse solves amazons
+ struct: I wonder how well NN do there
+ jacek: especially MLP with friendship extension
+ MSmits: pretty sure it's doable, but output will be different
+ Astrobytes: Might work better as a component of a multi-faceted solution
+ Astrobytes: Haven't checked papers recently
+ JLukeSkywalker: sry, was afk. was thinking about degrees instead of radians, simple swap on my end, can do it. I know how to set the turn number and time limit per turn, its just that my referee takes so long that I am hitting the maximum game time. 
+ JLukeSkywalker: also very sorry, its a simple program so i didnt comment it, didnt need to. will upload a commented version in a bit
+ struct: <a rel="nofollow" class="external free" href="https://era.library.ualberta.ca/items/44583c0f-7cc9-490b-94ea-0e0df067a46d/view/de1eaffe-9b12-4471-84b9-87bfce50bd59/Song_Jiaxing_Spring2013.pdf">https://era.library.ualberta.ca/items/44583c0f-7cc9-490b-94ea-0e0df067a46d/view/de1eaffe-9b12-4471-84b9-87bfce50bd59/Song_Jiaxing_Spring2013.pdf</a>
+ struct: Someone tried to solve it :scream:
+ JLukeSkywalker: I think most of the issue is that I'm using an arraylist of bullets and doing a double for loop for collisions
+ struct: Can bullets collide with bullets?
+ JLukeSkywalker: no, just active players
+ JLukeSkywalker: so its currently for bullet:for player:check
+ JLukeSkywalker: which works, but is slow
+ darkhorse64: add shield and collision for tanks :innocent:
+ Astrobytes: lol
+ Astrobytes: potw notification struct
+ struct: nice
+ darkhorse64: only a half joke actually
+ Astrobytes: I actually agree
+ Astrobytes: What was that game... Robot Wars? It was in Java, you had a robot with a turret and a radar
+ JLukeSkywalker: robocode
+ darkhorse64: maybe a cooldown for the gun. Too many bullets
+ Astrobytes: Yeah that's it JLukeSkywalker
+ JLukeSkywalker: * the inspiration&#160;:)
+ Astrobytes: Aha!&#160;:)
+ jacek: and puzzle of the week notification
+ JLukeSkywalker: wanted to keep it as simple as possible as it is already decently complex. might add a league with tank collision, healing if your bullet hits, and other goodies
+ Astrobytes: Already said it jacek
+ jacek: :s
+ struct: I was hoping for the type of map that I once tried to make
+ struct: were you can wrap around
+ JLukeSkywalker: for the tank game?
+ struct: yeah, I attempted to do something similar
+ struct: but never finished
+ JLukeSkywalker: its like 1 line of code to swap mine to that, just felt odd
+ struct: not 1 line
+ struct: at least it wasnt for what I was trying to do
+ JLukeSkywalker: the way i did my edge detection, i just swap where i have 0, height, and width
+ JLukeSkywalker: and it wraps instead of absolute border
+ struct: Removing debug messages might increase your referee speed
+ Astrobytes: Wraparound for Tanks doesn't seem right imo
+ JLukeSkywalker: ^^
+ JLukeSkywalker: yeah, i thought about corner abusing
+ darkhorse64: No disrespect for what you have done already but I think you need to make the game more complex while avoiding a Coders of the Carribean clone
+ Astrobytes: Turret rotation, radar, etc
+ Astrobytes: (imo)
+ struct: ah you dont have debug messages my bad, I missread
+ JLukeSkywalker: the controls and firing are very different, you have a turret control, and the actual bullet paths are different. I do want to add things like collision, but want to just get this workign first
+ jacek: MSmits rebooking?
+ darkhorse64: No worries, we are brainstorming
+ JLukeSkywalker: yeah, no insults taken at all
+ struct: im surprised to see that 
+ struct: gameManager.addToGameSummary(player.getAvatarToken() + " was hit by " + firer.getAvatarToken());
+ struct: works
+ struct: But doesnt show avatars
+ Astrobytes: (the fact we're giving ideas it means we're interested :P )
+ struct: I guess it gets replaced by player.getNicknameToken()
+ JLukeSkywalker: oh lol, was the other one depreciated?
+ struct: The other one
+ struct: is to get the avatar
+ struct: But it still shows the name for some reason
+ JLukeSkywalker: maybe because i smashed it into a text field
+ MSmits: jacek ofcourse
+ MSmits: would not be fair to you if i skipped on re curse
+ reCurse: Is this really how you're going to play this?
+ MSmits: of course not, I was kidding
+ Astrobytes: (not)
+ MSmits: I was, poor joke maybe
+ Astrobytes: You went from MSBits to MBook
+ MSmits: dont be sensitive about it though reCurse, i did give fair warning about Othello
+ reCurse: Despicable
+ jacek: maybe if more players with strong bots appear, the situation will be better
+ MSmits: Onitama is a better game, no issues there
+ MSmits: jacek i think you may be right
+ Astrobytes: Ah lol, I didn't see your submit until now.
+ reCurse: What a joke
+ MSmits: i was not sure before
+ MSmits: but othello does take a lot of codesize, so i guess so, i think i would get tired of it before i ran out though
+ MSmits: reCurse if it really bothers you so much, i can just turn off the book and resubmit, i'll be top 10 somewhere
+ MSmits: but the thing is
+ MSmits: the method is out there
+ MSmits: if not me...
+ MSmits: well actually old john is already doing it (check out all the draws in my last submit, those are perfect games)
+ MSmits: this is a serious question by the way reCurse, I am not here to annoy people to this degree, if you want me to turn it off, i'll turn it off
+ MSmits: and no hard feelings
+ struct: just blame the creator for not adding forced openings
+ struct: :D
+ struct: illl take the blame
+ MSmits: nah struct, at that point you could not have known
+ MSmits: I didn't either 
+ MSmits: well i didnt know it would be that easy
+ struct: Yeah, I dont do research on the games I port tbh
+ struct: I just ask for suggestions and do it
+ Astrobytes: Yeah, you non-forced-opening-multi-creator. Burn!!!
+ Astrobytes: :P
+ jacek: yinsh hasnt opening issues, has it
+ MSmits: thats an interesting game
+ MSmits: needs more players, but i'd do paper soccer first i think
+ jacek: try to book that
+ struct: So many games and I was thinking on starting to code Havannah
+ Astrobytes: struct, you can make a contrib with the forced openings for othello 
+ Astrobytes: Private or public, whatever
+ MSmits: perhaps it's possible to have an agreement between me and old john to remove the books? 
+ MSmits: or just me, old johns book isnt nearly as good, though he does victimize dbdr i think
+ Astrobytes: Others book to some extent too
+ jacek: nah, if its classic game then books are part of it
+ Astrobytes: ^
+ MSmits: mmh ok
+ MSmits: I dont feel bad for using them in oware, but in othello i do kinda
+ MSmits: cuz therés no way to stop it 
+ MSmits: in connect4 I'm just trying to see if i can solve the game, never solved a game that big before
+ MSmits: maybe it will take a year :P
+ jacek: what other game you solved then
+ Astrobytes: jacek bringing the shade
+ MSmits: TTT and some optim stuff
+ MSmits: i solved some cotr phrases :P
+ Astrobytes: How is the search going?
+ MSmits: oh, got to rank 21. I have a good search now for non-loopy stuff
+ MSmits: it's very easy to search if you assume there are no loops possible
+ Astrobytes: Nice. Yeah, that makes sense.
+ struct: Are you fully solving?
+ struct: or is weakly solved?
+ MSmits: one phrase was funny. I did a manual solution for 292 chars
+ MSmits: then i did a BS with 2.5 million beamwidth
+ MSmits: and the optimal solution was.... 292 chars
+ MSmits: checker with someone else and he also had 292 for this one
+ Astrobytes: 1st LOL @ "2.5 million beamwidth"2nd... well&#160;:)
+ MSmits: struct i solved only tiny ones for now, but with a meta mcst and hashing  and more pruning i feel like i should be able to solve those &lt;100 sized ones
+ struct: yeah, but you are only solving from starting position right?
+ MSmits: or do you mean in general? If you mean for board games, i always do weakly
+ struct: or do all states get solved?
+ struct: ah ok
+ Astrobytes: Until he convinces a university to lend him all their computing power.
+ MSmits: strongly solving is really rare because you need to know the best move from every state
+ MSmits: i would be afraid to find a bug after a million cpu hours :P
+ Astrobytes: What you never tell them, they will never know . . .
+ MSmits: it's one of the reason i run on 1 cpu core at a time, so i dont waste too much when i make a mistake
+ MSmits: in a sense i did solve a lot of "games" from a certain position. Like a uttt game 22 plies in or something
+ MSmits: i'm always solving stuff, just not whole games
+ Astrobytes: Also (back to original topic) I have a feeling that reCurse is gonna train against you hard and beat you again.
+ MSmits: well if he submits another version i may just let him that time
+ reCurse: No I'm done playing these stupid games. Hope you feel you deserve it.
+ MSmits: as I said, i can turn it off... it obviously bothers you
+ reCurse: What were you expecting? Congratulations?
+ jacek: no. he said it doesnt bother him.
+ jacek: so it doesnt bother him
+ MSmits: reCurse nah, not really
+ Astrobytes: Oi, where's that competitiveness
+ DJNinjaSpoon_37b8: fortnite
+ aidanv77: damn that shit look like it belong in fortnite
+ AntiSquid: what shit
+ aidanv77: that shit
+ AntiSquid: fortnite is the shit&#160;:/
+ aidanv77: ok
+ MSmits: that's actually a positive thing to say about it i think AntiSquid
+ aidanv77: lmao
+ MSmits: that's how the youngsters talk
+ AntiSquid: meant it literally 
+ aidanv77: the youngsters hahah
+ MSmits: yeah i dont tihnk he got that
+ aidanv77: i got it 
+ AntiSquid: sorry for negativity, enjoy your game
+ MSmits: who is this who stole AntiSquid's account
+ MSmits: the real AntiSquid would not back down from a burn
+ MSmits: pile on the fortnite bashing :P
+ AntiSquid: i don't see the problem, let the man enjoy his shit
+ MSmits: yeah I guess that's ok. If he didnt play fortnite he would just do something else silly, like the other youngsters
+ MSmits: how is it going AntiSquid?
+ MSmits: did you hear we got the riots too here
+ AntiSquid: yes 
+ AntiSquid: been doing some work in a vaccination center, highlight of the month ... all month?! :thinking:
+ MSmits: oh.. is this voluntary helping out? Or a job?
+ MSmits: or something in between maybe?
+ AntiSquid: more like since i work from home and have nothing else to do atm, might as well do this
+ aidanv77: damn bro my balls be stickin to my dick
+ MSmits: that's really cool of you AntiSquid
+ AntiSquid: idk it's really dull
+ MSmits: doesn't matter really
+ struct: aidan stop trolling
+ aidanv77: im not trolling
+ MSmits: you're helping
+ JLukeSkywalker: clash wont let me test or submit
+ JLukeSkywalker: but site isnt lagging?
+ TFisicaro: it's painfully slow
+ IlkerSaxion: Yeah
+ thanhhv317: have a good day everyone
+ Wings_of_Safety: hey any idea why my solved puzzles all say 0% even though I have 100% on them and achievements for them?
+ struct: Somtiems it takes a bit to update Wings_of_Safety
+ Rodrigo_the_coder: lol
+ Rodrigo_the_coder: what is W_o_S

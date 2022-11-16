@@ -1,0 +1,1003 @@
+ Jasher: hi
+ kaka.pops: hi
+ kaka.pops: i coding now
+ kaka.pops: pls don't distrube me 
+ kaka.pops: thanks
+ jacek: oO
+ antiwonto: [auto] Hey jacek, here is a :taco: for loggin in today while it is quiet.  You now have 16 tacos
+ jrke: oO
+ 5DN1L: Automaton2000 do you oO?
+ Automaton2000: and it can be used
+ DaNinja: no talking, kaka.pops is coding!
+ 5DN1L: And you just did :stuck_out_tongue_winking_eye:
+ DaNinja: oops&#160;;)
+ 5DN1L: kaka.pops offline now
+ jacek: :taco: Automaton2000
+ Automaton2000: not even sure if it would be fine
+ antiwonto: [auto] jacek has awarded Automaton2000 10 tacos. Automaton2000 now has 51 taco. jacek now has 17 taco
+ Automaton2000: if you cant do it
+ DarkSkull_5316: manden juego pa aprender python suave
+ 5DN1L: English only please
+ struct: jacek taco
+ struct: jacek :taco:
+ antiwonto: [auto] struct has awarded jacek 10 tacos. jacek now has 27 taco. struct now has 15 taco
+ struct: sorry I forgot how to do it
+ ItsNotABug: My old account got 14,500 rank in pod racer. But I lost access to that account. So now I figure it might be time to re-write again. See if I can slowly chip away at figuring out all the nonsense maths again
+ jacek: math in mad pod racing?
+ ItsNotABug: yeah, for calculating positions. Lots of angles
+ struct: ItsNotABug you cna always check magu_s tutorial
+ struct: It shows how to code it
+ BenjaminUrquhart: is -3vel still semi-relevant 
+ ItsNotABug: Surprising thing is recurse is top with python? How'd that happen?
+ struct: its c++
+ BenjaminUrquhart: I think he made a c++ bot and used python to launch it
+ BenjaminUrquhart: for the meme
+ ItsNotABug: lol. Explains it
+ ItsNotABug: I like python, but I never expect it top in these
+ jacek: he should have used bash
+ jacek: 14,500, is this silver
+ ItsNotABug: Yeah. 14,500 is silver
+ ItsNotABug: New bot is bronze atm
+ MrDKOz: Anyway to access my code from the Spring Challenge even though it's over?
+ 5DN1L: yes, click ACTIVITIES &gt; COMPETE &gt; CONTESTS &gt; VIEW REPORT
+ MrDKOz: Awesome, thank you&#160;:)
+ 5DN1L:&#160;:)
+ therealbeef: Out of frustration with the failure in the contest, I rewrote my uttc bot from scratch, and finally making promotion to legend
+ therealbeef: channeling that rage hehe
+ 5DN1L: 🎉
+ burnpanck: same here&#160;:-)
+ therealbeef: which game are you working on?
+ burnpanck: spring-challenge '22; got my NN-guided MCTS bot to train a few hours after the contest ended...
+ burnpanck: after losing almost all weekend optimising the compile-time so it would stay below the compilation timeout of the arena
+ therealbeef: ah nice approach
+ burnpanck: my favourite, ever since that AlphaGo paper came out&#160;:-)
+ struct: How well does it play?
+ struct: do you have a replay of it?
+ burnpanck: no - I never got it to work during the duration of the contest. I'll try once it's available as a regular bot game.
+ therealbeef: I had spent months tweaking my UTTC bot using alpha-beta, never got higher than #7 in gold. rewrote it to lame MCTS (no solver, not really speed optimized, random rollout), and it just blows gold boss away... embrace MCTS
+ putibuzu: wow you got it tow work :open_mouth:
+ burnpanck: what is UTTC again? my MCTS currently uses standard upper confidence threshold to select moves - sounds awfully close...
+ therealbeef: ultimate tic tac toe
+ therealbeef: another game
+ therealbeef: ah been typoing UTTT
+ therealbeef: sorry
+ burnpanck: ah, right - is it on CG?
+ therealbeef: yeah, i think it was an old contest as well
+ Salticid: I was thinking it must be a variation on UCT (upper confidence bounds over trees, a variation on MCTS) - thanks for clarifying.&#160;:)
+ jacek: is there anyone in legend in UTTT with good old alpha-beta?
+ therealbeef: it should be possible with a really good eval function
+ putibuzu: @burnpanck if I remember correctly you mentioned your NN gets as input the monster-hero distances, right? how do you handle the fact that the number of monsters varies? sorry, I'm curious about your approach
+ struct: I think dbd r has minimax on uttt
+ struct: but I might be wrong
+ therealbeef: i like how they named the gold boss MightCarlo
+ jacek: i wonder if i used minimax with the nn eval how good it would be
+ struct: How long would it take you to code it?
+ jacek: probably under hour. mostly copy paste from other codes and adjusting
+ burnpanck: @putibuzu: The NN design is such that every mob-hero pairing is treated exactly the same; that is the features are an (n_mob,n_hero,n_feat) matrix; the NN then does "point-wise convolutions" (i.e. dense on each pairing separately). The only link between different mobs/heroes is though aggregation across all mobs/heroes. 
+ burnpanck: variable sized matrices are oviously no issue in C++. for training, I leverage the new RaggedTensors in TF.
+ struct: do you use avx?
+ putibuzu: @burnpanck: ah ok that's interesting, thank you very much&#160;:) 
+ burnpanck: I hope so&#160;:-) that is, I use pragma "-O3" and use static loop bounds in the matrix multiplication (where possible; i.e make sure the mobs are the outermost dimension). hence also the many template instantiations and thus the trouble with the compile time...
+ burnpanck: re avx...
+ jacek: you use variable inputs?
+ struct: is o3 enough to enable auto vectorization?
+ burnpanck: tbh, I'm not sure, but I thought it did
+ JFB: If sb wants another contest I suggest kaggle (example game replay: <a rel="nofollow" class="external free" href="https://www.kaggle.com/competitions/kore-2022/leaderboard?dialog=episodes-episode-36493960">https://www.kaggle.com/competitions/kore-2022/leaderboard?dialog=episodes-episode-36493960</a> )
+ jacek: maybe try target arch
+ jacek: #pragma GCC optimize("Ofast","unroll-loops", "omit-frame-pointer", "inline")
+ struct: no avx2?
+ struct: no fma
+ struct: o.o
+ jacek: probably arch=native and tune=native will take care of it
+ DopamineAddict: Is there a forum for spring Challenge 2022, want to know about the legends leagure strategies that was used
+ burnpanck: thx for the tips! I should probably throw the bot code onto Godbolt at some point anyway
+ 5DN1L: DopamineAddict <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/spring-challenge-2022-feedbacks-strategies/195736/">https://www.codingame.com/forum/t/spring-challenge-2022-feedbacks-strategies/195736/</a>
+ jacek: DopamineAddict <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/spring-challenge-2022-feedbacks-strategies/195736">https://www.codingame.com/forum/t/spring-challenge-2022-feedbacks-strategies/195736</a>
+ jacek: :rage:
+ 5DN1L: :upside_down:
+ antiwonto: [auto] ':upside_down:' was defined as ' ɥǝllo '
+ Ninja184527: Hello
+ JFB: jacek - your #pragma moved my very old uttt from #218 to #182. Not very impressive position any way but good as the result of only 3 lines copy/past&#160;:-)
+ jacek: how much speedup?
+ JFB: I do not know - and I have had // #pragma GCC target("avx")// #pragma GCC optimize "Ofast,omit-frame-pointer,inline,unroll-loops"  already 
+ TobiasA: you know how you ca do this in python x = [i for i in range(10)]. I there a way for me to do that in c++
+ antiwonto: [auto] Hey TobiasA, here is a :taco: for loggin in today while it is quiet.  You now have 1 tacos
+ struct: what does that code do?
+ _NikJ: for (int i = 0; i &lt; 10; i++) x[i] = i;
+ jacek: list comprehension?
+ _NikJ: my mistake, it's i = 1; i &lt;= 10
+ TobiasA: yea list comprehension
+ struct: x[10] = {1,2,3,4,5,6,7,8,9,10};
+ Dasohneplan: can anyone help me with 'There is no Spoon'?
+ _NikJ: You could do generate or transform on vector, but I guess that's ugly af, it might be prettier to use use a loop or predefined like struct said
+ Dasohneplan: can i also do it with a 2d Array or is that to much?
+ jacek: maybe lambda?
+ cegprakash: just read _Royale's post mortem
+ cegprakash: he has done GA
+ cegprakash: omg omg
+ cegprakash: he finished legend #55
+ cegprakash: would love to see his scoring function
+ TobiasA: pls can send the link
+ jacek: <a rel="nofollow" class="external free" href="https://forum.codingame.com/t/spring-challenge-2022-feedbacks-strategies/195736/42">https://forum.codingame.com/t/spring-challenge-2022-feedbacks-strategies/195736/42</a>
+ TobiasA: thanks
+ tutubalin: "The Armstrong number is called a number. If we multiply each number by the power of the number of numbers, it becomes equal to that number."
+ antiwonto: [auto] Hey tutubalin, here is a :taco: for loggin in today while it is quiet.  You now have 1 tacos
+ tutubalin: This is a CoC puzzle statement!
+ tutubalin: Are there any punishment to those who approved such puzzles?
+ abt8601: wow so many numbers
+ jacek: should be reverse
+ tutubalin: it definitely a number of numbers
+ 5DN1L: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/8081d29cd8a7cd42f325070c2b86ec5047ea">https://www.codingame.com/contribute/view/8081d29cd8a7cd42f325070c2b86ec5047ea</a>
+ 5DN1L: Approvers: a Level 8, a Level 9, and a Level 17 who seems to be offline for quite a while now
+ 5DN1L: And their approval comments...
+ tutubalin: we need to approve approvers
+ tutubalin: and approver of approvers is called approver.
+ abt8601: :joy:
+ eulerscheZahl: that'S a lot of numbers, tutubalin
+ Link_jon: approverer?
+ tutubalin: eulerscheZahl a number of numbers
+ tutubalin: Link_jon&#160;:)
+ eulerscheZahl: Zahl is German for numbers
+ eulerscheZahl: *number (singular)
+ eulerscheZahl: perfect nickname for the occasion
+ tutubalin:&#160;:)
+ Link_jon: a number of numbers... better said as a number of digits?ugh i just got here and my head allready hurts
+ Astrobytes: "The Armstrong number is called a number" that's some wisdom there
+ jacek: go figure
+ eulerscheZahl: do people even read their statement before giving it to review?
+ eulerscheZahl: and to reviewers read it?
+ Astrobytes: I am guessing a "no" to both
+ Link_jon: Im... looking at it now...What.the example makes sense atleast
+ tutubalin: That's one small number for number, one giant number for numberkind.
+ Astrobytes: :D
+ Link_jon: XD
+ Astrobytes: brilliant
+ Link_jon: Hi, I think the description is a little cumbersome. "raise each digit to the power of amount of digits"
+ Link_jon: Alonehoc is genius
+ eulerscheZahl: "three-digit number"i think we can do better"three-numbers number"
+ Link_jon: ugh this makes my head hurt
+ Link_jon: cant look any longer
+ tutubalin: eulerscheZahl&#160;:)
+ tutubalin: and it should mention that three is also a number
+ Astrobytes: good point!
+ tutubalin: number-three-numbers number
+ VizGhar: what a heck? o.O
+ Link_jon: dunno..
+ tutubalin: it looks like some esoteric language now
+ eulerscheZahl: then look at this Link_jon, it will calm you down<a rel="nofollow" class="external free" href="https://i.pinimg.com/736x/ef/9c/86/ef9c868236b6129e9a984371bf97b787--black-dots-the-black.jpg">https://i.pinimg.com/736x/ef/9c/86/ef9c868236b6129e9a984371bf97b787--black-dots-the-black.jpg</a>
+ jzen: Anyone remember how the positions are rounded in code vs zombies? I have tried truncated and rounded but my sim is still incorrect
+ eulerscheZahl: i would give you mine but it's also off a bit&#160;:(
+ Link_jon: (uhh ok)
+ Astrobytes: could make a decent puzzle, numberlang
+ abt8601: Hmm should I edit the contribution to make it not suck as much?
+ Astrobytes: I wouldn't. People need to laugh once in a while :P
+ eulerscheZahl: can you edit it? i can't, no permissions
+ jzen: Can you edit a contribution after it was approved?
+ Astrobytes: Yes, if of sufficient level
+ eulerscheZahl: you have to play 300+ clashes
+ eulerscheZahl: or level29 for any puzzle that's not a clash
+ abt8601: I have played thousands of clashes so I can
+ Astrobytes: ^ in this case
+ Thorcode: the contest really fun
+ actualCoderTrevor: By this definition, 101 is an Armstrong number, because 10 is a number and 1 is a number, and 10^2 + 1^2 = 101
+ Link_jon: ....reeeeeeeeee
+ tutubalin: also 101^1 = 101
+ Astrobytes: ah but don't forget, 2 is a number and 101 is a number
+ eulerscheZahl: make a new clash about the yet to be defined Armweak number
+ jzen: Wouldn't it be 10^3 + 1^3 = 1001?
+ Astrobytes: Legweak
+ jzen: actualCoderTrevor
+ eulerscheZahl: good point
+ tutubalin: jzen no, there are 2 numbers: 10 and 1
+ actualCoderTrevor: ^
+ jzen: Sorry I meant 10^3 + 0^3 + 1^3 = 1001
+ jzen: Wait
+ VizGhar: Legweak number is number without legs. 6 8 0 doesn't have legs... count all bipods in interval 1-10000
+ jzen: I now see I am confused
+ actualCoderTrevor: Well 1001 would work
+ Astrobytes: VizGhar: :D
+ Thorcode: how can you find this 3 months ago puzzle euler
+ VizGhar: feel free to steal it astro :P
+ VizGhar: :D
+ Astrobytes: hahaha all good man, you can keep it :D
+ actualCoderTrevor: VizGhar please don't allow it for reverse
+ tutubalin: with proper tests it's a decent reverse puzzle
+ tutubalin: also with a hint in output sttring
+ eulerscheZahl: "how can you find this 3 months ago puzzle euler"parser error
+ Astrobytes: I don't get it either.
+ eulerscheZahl: i just link to <a rel="nofollow" class="external free" href="https://eulerschezahl.herokuapp.com/codingame/puzzles/">https://eulerschezahl.herokuapp.com/codingame/puzzles/</a> and hope it answers whatever question
+ eulerscheZahl: heavy rain outside, including thunder and hail. i gave shelter to the neighbor's cat
+ eulerscheZahl: mine doesn't know yet
+ Astrobytes: ooh. Do they know each other?
+ jacek: betrayal
+ abt8601: Author and one approver are of the same school
+ abt8601: But this indicator is rather weak
+ Thorcode: this clash i thought was approved 3 months ago
+ jzen: Thorcode It was, tutubalin just got it in a clash and commented on the poorly written statement
+ Thorcode: I can even edit this clash
+ abt8601: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/3ea125ad-1c21-4234-95ca-8a6644cd42b8">http://chat.codingame.com/pastebin/3ea125ad-1c21-4234-95ca-8a6644cd42b8</a>
+ abt8601: I have a revised version, what do you think?
+ eulerscheZahl: yes, the cats know each other. mine hates him. he doesn't care about her
+ jzen: Beautiful abt8601
+ Link_jon: *insert applause* This is an amazing statement abt
+ abt8601: Thanks
+ Astrobytes: lol euler, wait til she finds out you've been fraternising with the 'enemy' :D
+ eulerscheZahl: 2 enemies
+ eulerscheZahl: there's another cat that visits regularly
+ eulerscheZahl: but the 2 intruders get along well with each other
+ eulerscheZahl: some initial fighting but they have an arrangement now
+ tutubalin: abt8601 that's good!
+ abt8601: Thanks
+ abt8601: OK, I think I'll bring it online
+ abt8601: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/2283e708-e126-41cd-83f6-0d734dce4899">http://chat.codingame.com/pastebin/2283e708-e126-41cd-83f6-0d734dce4899</a>
+ abt8601: Here is the old one if you still want to have a laugh
+ Astrobytes: hah! I had "King" Bart from a few doors down who used to come into the kitchen and casually eat my cats food and/or wait at the back door to be let in
+ Thorcode: i still have the old  one
+ Astrobytes: He stopped eventually
+ j4at: I didn't try bot programming yet. I have a question, I see that people uses ML methods(from reading the chat) Those can require hours/days of training. Do they train it offline&#160;? If yes how&#160;?
+ jacek: only some of the top people use that. they wrote their own game simulators, play on them and learn from them
+ j4at: okay&#160;:)
+ jacek: for example there is alphazero-like tutorial for oware <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/58137">https://www.codingame.com/playgrounds/58137</a>
+ eulerscheZahl: i had that "King Bart" too. now the cat door is electronic and checks for the chip before granting access
+ jacek: hmm, do playground articles work for you?
+ Westicles: site still running slow?
+ eulerscheZahl: was annoying when i was sleeping in bed at night, with my cat on top. and then i heard him eat next door (so did my cat)
+ Astrobytes: lol, yeah good move with the electronic catflap
+ jzen: jacek Not for me
+ Astrobytes: works for me jacek
+ eulerscheZahl: but it doesn't work properly in winter
+ eulerscheZahl: it opens for my cat but never closes again
+ Astrobytes: hahaha, slight design flaw
+ eulerscheZahl: gets better: it's blocking the way out
+ jacek: well it keeps loading for me&#160;:\
+ eulerscheZahl: turning the house into a cat trap
+ eulerscheZahl: but the neighbor's cat is fine with that
+ Astrobytes: I imagine it is!
+ MSmits: hey guys
+ MSmits: I kinda missed the contest. But I just played my 3 games vs professor X
+ MSmits: (oware)
+ eulerscheZahl: how did  it go?
+ Astrobytes: hey MSmits, yeah I also got my email
+ eulerscheZahl: 3 times tie?
+ MSmits: Made exactly 1 error in each game&#160;:(
+ Astrobytes: damn
+ eulerscheZahl: human error or bot error?
+ MSmits: so out of 400+ moves total
+ MSmits: no, bot erorr. The opening 48-37 seed positions are based on meta mcts
+ MSmits: i did not make a single error after that
+ Westicles: the ide seems to be broken
+ MSmits: so my database is validated at least&#160;:)
+ Westicles: fix it mods
+ Astrobytes: nice, well done MSmits
+ eulerscheZahl: so you lost the games but gave him a strong fight at least?
+ MSmits: yeah I think I was his best opponent so far
+ eulerscheZahl: did he write anything in chat?
+ MSmits: yeah we chatted a bit. 
+ MSmits: nice guy
+ eulerscheZahl: also: not sure if you would have liked the contest game. a few years ago when you were new: definitely (code royale days)
+ eulerscheZahl: but the total opposite of a board game
+ Astrobytes: haven't scheduled mine yet, need to finish the app lol
+ MSmits: yeah I did code to bronze league btw. Just on friday i think
+ eulerscheZahl: i had a hard time motivating myself
+ eulerscheZahl: not my kind of game. but i wanted legend. and then i couldn't just stop after going that far
+ eulerscheZahl: laggy chat is lagging
+ Westicles: all the puzzles are dead
+ MSmits: the game actually seemed interesting and i kept telling myself to code for it
+ Link_jon: i see this too...
+ MSmits: but I was playing a 32-player tourney in solaris and i won that.
+ Astrobytes: gg
+ MSmits: so I am semi-ok with missing contest, but not entirely
+ Astrobytes: you can always do the multi
+ eulerscheZahl: human or bot tournament?
+ MSmits: this is human. strategy game, strangely enough. No bots
+ eulerscheZahl: and you (supposedly) missed codejam
+ Astrobytes: not scriptable at all?
+ Astrobytes: I was asleep 
+ MSmits: not really, though the devs are working on AI for people who leave the game
+ MSmits: I know it's strange, i havent actually gamed in like 6 yrs before this
+ MSmits: but it sucked me in a bit&#160;:)
+ Astrobytes: it does seem pretty good
+ eulerscheZahl: this? <a rel="nofollow" class="external free" href="https://store.steampowered.com/app/1623930/Solaris/">https://store.steampowered.com/app/1623930/Solaris/</a>
+ MSmits: yeah
+ MSmits: they have a turnbased version and realtime. I prefer turnbased as you can then be on equal footing if you have a life
+ eulerscheZahl: oh, windows :poop:
+ MSmits: but the 32p i won was real time. Let's just say i did not get much sleep
+ MSmits: it's also browser based
+ MSmits: solaris.games
+ MSmits: dont need steam
+ Astrobytes: yeah, turn-based is the best. Pick up where you left off 
+ MSmits: you have 24 hrs to make your move
+ MSmits: move(s)
+ eulerscheZahl: i just don't want to pick up on a time consuming hobby
+ MSmits: yeah, i am not trying to get you guys into the game. Just letting you know where I've been at&#160;:)
+ jacek: mhm
+ eulerscheZahl: if you are willing to miss the first CG contest in a year for it, it must be good
+ jacek: and last
+ MSmits: well, it's good, but I have this obsession with winning... that's the main reason.
+ MSmits: once i start...
+ Astrobytes: Competitive spirit :D
+ jacek: so you lost in oware due to opening?
+ eulerscheZahl: team up with jacek
+ eulerscheZahl: you take over mid-game
+ MSmits: yes, first game i played perfectly to ply 28
+ MSmits: then made an error on 35, was solved on 40
+ eulerscheZahl: did professor X tell you that you made an error?
+ eulerscheZahl: or did you analyze it afterwards?
+ MSmits: afterwards, but i know it really soon, my meta mcts is running while playing the game, i see my score go down&#160;:(
+ MSmits: my first few moves i have millions of visits and then 10-20 moves in it goes down to 50k or so and i start to have few enough visits that i cant be sure
+ jacek: you need more confidence
+ MSmits: indeed
+ jacek: it means even deep meta mcts cant be that trustworthy
+ Smelty: lol
+ MSmits: i had several lines of play that would have certainly led to a draw, that i have explored more than enough, but he did not pick those 
+ eulerscheZahl: clever of him
+ MSmits: But I can let go of the worry that maybe my database has errors. 300 moves played i db and no error
+ TabulaRasa: Hi all, I have naive question, when do you think will spring 2022 challenge show up in bot programming games?
+ MSmits: I thought this happened the next day?
+ Astrobytes: yeah, that's very cool MSmits
+ eulerscheZahl: should come back soon, we don't know the exact day
+ Astrobytes: Thibaud said within the week
+ MSmits: He suggested we meet up in Amsterdam where he is based btw
+ eulerscheZahl: also don't forget about the survey
+ MSmits: might take him up on that
+ TabulaRasa: thanks @Astrobytes
+ Astrobytes: Oh nice MSmits, please do
+ eulerscheZahl: raise your voice for bot contests
+ j4at: :raised_hand:
+ jacek: and play on real oware board?
+ MSmits: yeah if he is serious about it I'll go over there
+ MSmits: i suck at oware lol
+ Astrobytes: I think he would be serious about it
+ eulerscheZahl: drag him into Onitama
+ MSmits: I'll mention codingame for sure
+ Astrobytes: I bet I get destroyed when I get around to scheduling my games
+ MSmits: You never know, you could get lucky
+ MSmits: just dont make a mistake
+ eulerscheZahl: you can get destroyed on CG without a fixed schedule
+ MSmits: =)
+ Astrobytes: lol
+ MSmits: was it jacek or you that suggested this challenge Astrobytes?
+ eulerscheZahl: jacek
+ MSmits: Thanks jacek
+ Astrobytes: yeah jacek
+ MSmits: it was exactly what i wanted 
+ jacek: who's jacek, Automaton2000
+ Automaton2000: i just dont know what to do
+ Astrobytes: possibly no better way to test your seed db&#160;:)
+ MSmits: yeah, I verified it against itself, but there's nothing better than an independent db that has been tested over and over against others
+ Astrobytes: Absolutely.
+ MSmits: what kind of program will you use Astrobytes?
+ MSmits: Do you also have a DB?
+ Wizard-Dude: Hello, in legends of code &amp; magic they say that there are three different locations a card can be , in the players hand, on the players side of  the board, and on the opponents side of the board. What is the difference between on my hand, and on my side of the board?
+ eulerscheZahl: hand: you can play it
+ Astrobytes: No DB Msmits, but my modified offline version performs better than my CG version
+ MSmits: no difference
+ MSmits: oh
+ eulerscheZahl: board: you have to summon it first (costs mana points) before playing the card
+ MSmits: i was thinking onitama sorry
+ Wizard-Dude: oh thanks! 
+ MSmits: Astrobytes cool. I did have an endgame db generator shared if you have time to give it a try
+ MSmits: I just misses movement generation and such
+ MSmits: (have to input your own sim)
+ Astrobytes: oh yes, I forgot about that
+ Astrobytes: thanks!
+ MSmits: you can easily generate 20-25 seeds
+ MSmits: 36 seeds took me 3 weeks though
+ jacek: if your modified offline generator performs better, why dont you put it on CG :v
+ Astrobytes: yeah I remember you doing it
+ yhyoxx: is there a relationship between heuristics and finite state machine&#160;?
+ MSmits: yeah
+ MSmits: finite statemachine uses heuristics to move between stateds
+ MSmits: heuristics are if/else conditions basically
+ yhyoxx: is the best way to make a heuristics bot implementing a fsm&#160;?
+ eulerscheZahl: flying spaghetti monster?
+ MSmits: not sure if fsm is usable in most arena's
+ eulerscheZahl: couldn't resist
+ Astrobytes: :D
+ yhyoxx: nice
+ MSmits:&#160;:)
+ jacek: :no_mouth:
+ MSmits: but you can use ideas from fsm
+ yhyoxx: like last contest, my biggest problem was design
+ eulerscheZahl: that was CG's problem too
+ yhyoxx: and there were only a few states
+ eulerscheZahl: that's how we got an escape
+ Astrobytes: :rofl:
+ yhyoxx: haha
+ yhyoxx: true
+ yhyoxx: wth was that contest 
+ yhyoxx: training some model&#160;?
+ MSmits: oh btw, this was the endgame map for my solaris tourney: <a rel="nofollow" class="external free" href="https://solaris.games/#/game?id=6249df7f1985eaebf8353f45">https://solaris.games/#/game?id=6249df7f1985eaebf8353f45</a> Me being dark blue
+ eulerscheZahl: did you win anything?
+ MSmits: eh an ingame badge :P
+ Astrobytes: nice
+ eulerscheZahl: you are Innoble?
+ MSmits: yeah, havent you seen me on discord
+ eulerscheZahl: as MSmits
+ eulerscheZahl: i left CG discord long ago
+ MSmits: you invited me for that special channel
+ eulerscheZahl: then i just forgot
+ MSmits: oh ok
+ MSmits: can you have different names for different discord channels?
+ Astrobytes: the special channel will only really become useful if/when this chat disappears
+ MSmits: i mean as a user
+ MSmits: ohh ok,is it a backup chat?
+ Astrobytes: essentially, yeah
+ MSmits: because we didnt know what was going to happen with the merger?
+ Astrobytes: Pretty much. That and the getting rid of the webchat plan
+ eulerscheZahl:&#160;:(
+ MSmits: is that still happening?
+ MSmits: or unclear?
+ eulerscheZahl: paused A/B testing, they had a bug
+ eulerscheZahl: testing should continue soon
+ MSmits: did they want to integerate discord in the page?
+ MSmits: integrate
+ Astrobytes: No
+ Astrobytes: You can't embed discord afaik
+ MSmits: I have no idea
+ eulerscheZahl: iframe?
+ Astrobytes: ew
+ MSmits: are iframes deprecated?
+ MSmits: what is a web dev supposed to use instead?
+ Astrobytes: I don't think they're as widely used as they were, just for specific things
+ MSmits: ah ok.
+ Wizard-Dude: Hi, I got an error saying timeout on Legends of Code &amp; magic, What does this error mean?
+ MSmits: I use them sometimes
+ MSmits: Wizard-Dude your bot uses too much time
+ eulerscheZahl: you don't print a line of output
+ MSmits: possibly because you don't print yeah
+ MSmits: (under some circumstances)
+ Wizard-Dude: oh, I think that is the problem! Thanks&#160;! 
+ Link_jon: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/6ac65c32-c24c-4aa2-8c64-9859535fca15">http://chat.codingame.com/pastebin/6ac65c32-c24c-4aa2-8c64-9859535fca15</a>
+ Link_jon: run it and you
+ Link_jon: 'll understand lul
+ ZndrBrok: Hi guys, do only i have problem with CoC right now&#160;?
+ ZndrBrok: I don't see the score of people who finished
+ ZndrBrok: and when i quitte to play a new one
+ [CG]Keelhaul: No, the issue is being investigated
+ ZndrBrok: i never get notified about the ranked after the 15 minutes
+ ZndrBrok: shiieeet
+ eulerscheZahl: today in "guess the language"is it Lua?
+ ZndrBrok: i need to pass an interview on codingame :P
+ ZndrBrok: i hope this bug will not be related with the "pro" part of the site :P
+ MSmits: eulerscheZahl it reminded me of vba but different
+ MSmits: the "end" thing
+ MSmits: but no brackets
+ Astrobytes: yeah it's Lua
+ ZndrBrok: @Keelhaul thank you for the information&#160;!
+ j4at: Clash of code results are pending for the last 30 mins
+ j4at: :grimacing:
+ j4at: nvm
+ Astrobytes: scroll up
+ Link_jon: currently failing to clash and aaggh
+ Link_jon: it hurts
+ Link_jon: what i wanna know is how ppl instantly finish clashes
+ eulerscheZahl: they just click submit without solving it
+ eulerscheZahl: that's the fastest way
+ Link_jon: 100%?
+ eulerscheZahl: maybe they already know the clash then
+ eulerscheZahl: only 1500 or so to choose from
+ eulerscheZahl: 1787 in my database
+ jacek: flash clash
+ jzen: eulerscheZahl Finally fixed the CvZ sim
+ eulerscheZahl: in all situations?
+ jzen: At least the ones that were failing before&#160;:)
+ eulerscheZahl: i had this weird case where the zombie would have to go horizontally (?) but the y changed and he moved further away by 1 unit
+ eulerscheZahl: too long ago, i can't recall exactly
+ eulerscheZahl: if you like reversing, try the CG sponsored contest
+ jzen: Seems like I already submitted something
+ jzen: Oh wait, it just spits out a random valid answer
+ jzen: But I'll be sure to make an actual attempt at some point
+ VizGhar: its optim... In optims it should be easy to print valid answer... just not optimal enough
+ Dapps: I just read bowwow contest PM. I just didn't understand what type of search did he use in attack?
+ eulerscheZahl: Bender 4 :see_no_evil:
+ eulerscheZahl: chokudai?
+ eulerscheZahl: that's like beam, but with fixed depth and increasing width
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://ideone.com/nQQQa8">https://ideone.com/nQQQa8</a>
+ Dapps: oh interesting
+ eulerscheZahl: that snippet contains 1 or 2 bugs btw
+ eulerscheZahl: HStates[t+1].push(NextState);
+ eulerscheZahl: and don't return a state from depth 0
+ DustinNunyo: Hey guys! I am doing the Fall 2020 Challenge. I have this idea to approach the problem like a Chess AI. The problem is it's a bit out of reach for me at the moment. Does anyone have any suggestions on what I might do to improve?
+ eulerscheZahl: how do you approach a chess AI?
+ Dapps: <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/57902/totoro-beam-search-c-starter">https://www.codingame.com/playgrounds/57902/totoro-beam-search-c-starter</a>
+ cegprakash: yaaay
+ cegprakash: finally solved code vs zombies
+ Mindarius: I feel like this shouldn't be legal in shortest: exec(bytes('浩潰瑲洠瑡੨ⱷ㵨慭⡰湩ⱴ灯湥〨⤩瀊楲瑮洨瑡⹨潣扭眨栫㈭眬ㄭ⤩','u16')[2:])
+ antiwonto: [auto] hey Mindarius that looks like python golf compression.  It's legit, and acceptable to use.  You may be interested in this tool <a rel="nofollow" class="external free" href="https://clemg.github.io/pythongolfer/">https://clemg.github.io/pythongolfer/</a>
+ eulerscheZahl: Opponent eval: 1ms, score: MUDA"
+ cegprakash: but my rank is pretty low :P 
+ cegprakash: I don't cre
+ cegprakash: I saved human race
+ DustinNunyo: Well, I assume it's a recursive algorithm that goes multiple levels deep and examines the board state across many different board state but that bit is the part that is a little fuzzy for me. I know you can also do stuff like alpha beta pruning to sort the list of board states and not check certain board states but that is about all I know.
+ cegprakash: I saved human race and got 100%
+ cegprakash: don't care how many zombies I kill
+ Link_jon: OH
+ Link_jon: i now see how he was able to finish in under a minute
+ Link_jon: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/5ea96cc0-38d3-47b3-a05a-40306152c369">http://chat.codingame.com/pastebin/5ea96cc0-38d3-47b3-a05a-40306152c369</a>
+ Wontonimo: DustinNunyo , for a chess AI use alpha-beta ( or minimax or negamax , all same family ) or use MCTS
+ Wontonimo: A beam search could work if you have a really good eval
+ Wontonimo: if you are not familiar with minimax, start there.  Google it, watch some youtube videos
+ DustinNunyo: Well, the game says that MCTS is in the "related material" so I assume that is probably one of the better ways to approach the problem.
+ DustinNunyo: I'm sort of familiar with it but I am not sure how to implement it.
+ Wontonimo: yes, MCTS will most likely beat minimax but it is a bit more advanced
+ Astrobytes: not sure why it says MCTS when almost everybody used beam search for that contets
+ Astrobytes: *contest
+ Wontonimo: which contest?
+ eulerscheZahl: fall 2020 was the witches cooking, wasn't it?
+ Astrobytes: 2020
+ DustinNunyo: I know that it plays the best move possible for you then the best move for you opponent and checks multiple levels deep and tries to find the best end result assuming your opponent plays all the best moves.
+ eulerscheZahl: even the winner used beam search
+ eulerscheZahl: there is little opponent interaction
+ Wontonimo: Fall 2020 Challenge&#160;?  yes beam search is the way to go
+ DustinNunyo: Aaaah, alrighty, I will check into that.
+ jacek: start to learn minimax or mcts on sequential game. that game is simultanoues
+ jacek: + doesnt have much interaction between players
+ Wontonimo: ChokudaiSearch beam search is just a trick to do a beam search of width 1, then 2, then 3, etc until you run out of time.
+ eulerscheZahl: C# has no priority queue in the library&#160;:/
+ VizGhar: Startup multi approved? Is it any good?
+ jacek: yeah, has best graphics ever
+ Wontonimo: I looked at it.  It's not my thing
+ eulerscheZahl: never again joke about my artwork
+ Wontonimo: that link you sent eulerscheZahl <a rel="nofollow" class="external free" href="https://ideone.com/nQQQa8">https://ideone.com/nQQQa8</a> seems to be missing something to increment ChokudaiWidth
+ eulerscheZahl: no
+ eulerscheZahl: you have a priority queue of reachable states for each depth
+ eulerscheZahl: then as long as you have time, you take the one with the highest score and generate the next states from it
+ cegprakash: how is the score computed in code vs zombies? I have to save all humans?
+ eulerscheZahl: the width just allows you to expand a few nodes before moving to the next layer. keeping it at 1 is fine
+ cegprakash: I saved 1 human in every game but seems like I only got 33K score
+ Wontonimo: ah, I'm mistaken then.  thanks
+ cegprakash: but I need 40K for unlocking optimisation tree
+ jacek: save 1 human to pass a testcase
+ DustinNunyo: Anyway, thanks for the heads up guys! I am going to go back to reading material now. lol
+ Wontonimo: well, optimize those kills cegprakash
+ KYel: Actually, PriorityQueue was added in C# with .NET 6 introduced
+ cegprakash: I've to kill the zombies or save multiple humans what's the goal Wontonimo
+ jzen: Scoring works as follows:A zombie is worth the number of humans still alive squared x10, not including Ash.If several zombies are destroyed during on the same round, the nth zombie killed's worth is multiplied by the (n+2)th number of the Fibonnacci sequence (1, 2, 3, 5, 8, and so on). As a consequence, you should kill the maximum amount of zombies during a same turn.
+ eulerscheZahl: wait, really? how could i miss that
+ jzen: Sorry for big paste
+ eulerscheZahl: such a game changer
+ jzen: Thought it would pastebin
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.priorityqueue-2?view=net-6.0">https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.priorityqueue-2?view=net-6.0</a>woah :o
+ eulerscheZahl: finally
+ cegprakash: fibonacci wew
+ eulerscheZahl: now i just have to wait 2 or 3 years until CG, topcoder, codejam and all those update the language
+ NewCoder09: in code vs zombies i have 649 lines of code in C and im ranked 216th with a 223930 score im proud of myself
+ cegprakash: and I need to save multiple humans&#160;:\ And I thought ash and just 1 more human can save the human race
+ Astrobytes: I think anyone tasked with saving the human race should learn to read statements :smirk:
+ DustinNunyo: Would it be beneficial to learn how to do a BFS algorithm first for beam search? because I actually need to write a BFS/Dijkstra pathfinding algorithm for another project I am working on.
+ Astrobytes: Yes. Very helpful
+ VizGhar: BFS first yes
+ cegprakash: if u keep asking me read problem statements I'll make more twitch streams on how to solve problems without reading the statement Astrobytes
+ Astrobytes: cegprakash: :D 
+ DustinNunyo: Are there any algorithms that you guys might recommend before BFS? lol
+ jacek: DFS
+ cegprakash: sorting
+ Astrobytes: DustinNunyo:<a rel="nofollow" class="external free" href="https://www.redblobgames.com/">https://www.redblobgames.com/</a>
+ DustinNunyo: I'm a pretty decent coder but not really a very good programmer as I am finding out. lol
+ Dapps: Convex Hull
+ DustinNunyo: Alrighty thank you guys! I will check those out!
+ cegprakash: don't check convex hull Dapps is kidding. it's for advanced
+ DustinNunyo: It's funny because I've actually implemented A* before but for some reason BFS and DFS are just hard for me to wrap my head around. lol
+ jacek: or try some easy puzzles <a rel="nofollow" class="external free" href="https://www.codingame.com/training/very-easy/space-maze">https://www.codingame.com/training/very-easy/space-maze</a>
+ Dapps: haha yes i was j/k&#160;:) 
+ Dapps: i don't even understand it
+ DustinNunyo: convex hull huh? lol
+ DaNinja: super easy Space Maze
+ eulerscheZahl: the 2nd onboarding puzzle, as we call it
+ Astrobytes: the 1st of course being Nintendo
+ gaha: Just shared my post mortem for Spring Challenge <a rel="nofollow" class="external free" href="https://forum.codingame.com/t/spring-challenge-2022-feedbacks-strategies/195736/55">https://forum.codingame.com/t/spring-challenge-2022-feedbacks-strategies/195736/55</a>
+ gaha: 8th place, using 3x attacker strategy
+ eulerscheZahl: i know, i hated your bot in particular :P
+ Dapps: I hated all shooters lol
+ gaha: it was so fun to shoot though
+ eulerscheZahl: game rules were unbalanced
+ Dapps: i just accepted it as part of the game
+ Dapps: it shouldn't have been linear though, each additional hero should've moved it less far
+ DaNinja: Euler was this what space maze was based on? <a rel="nofollow" class="external free" href="https://www.myabandonware.com/game/stone-age-1iq/play-1iq">https://www.myabandonware.com/game/stone-age-1iq/play-1iq</a>
+ gaha: sure, it'd make sense
+ eulerscheZahl: it was something with a car you had to steer
+ eulerscheZahl: a yellow beetle i think
+ eulerscheZahl: later levels also had keys that melted ice blocks
+ eulerscheZahl: making that part of the map passable
+ eulerscheZahl: i've spent hours searching it and also asked my dad who installed it in the first place
+ eulerscheZahl: but no luck
+ DaNinja: it doesnt ring a bell
+ eulerscheZahl: i think it was on water rather than in the space
+ Smelty: hmm
+ eulerscheZahl: with rafts
+ eulerscheZahl: afk for a while now
+ cegprakash: An error occurred (#407): "You reached the limit of plays for a period of time.".
+ jacek: addict?
+ cegprakash: there are just 21 test cases
+ cegprakash: so it runs 21 times
+ cegprakash: not my fault
+ jacek: on a bright side, im finally in wood3 in br2k
+ jacek: what a noob <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/631882576">https://www.codingame.com/share-replay/631882576</a>
+ DomiKo: lol
+ cegprakash: You have reached the maximum of submissions in a row. Please try again in a few minutes.
+ cegprakash: I close CG
+ cegprakash: can't test 
+ cegprakash: can't submit
+ jacek: oO
+ Westicles: br2k is tough, I'm stuck at the top of wood5
+ MSmits: Westicles yes, it's designed to be tough
+ MSmits: I never got into the top league
+ DomiKo: Getting out of Wood 3 is hard enough&#160;:(
+ MSmits: Yeah it was
+ Westicles: I was going to try to advance to all the woods possible (51 left to go) but I'll skip that one
+ Westicles: and chess
+ jacek: no :cheese: for you
+ HenroLST: huh
+ MSmits: Westicles the games made by the community aren't real wood leagues
+ MSmits: they are harder, sometimes much harder
+ MSmits: ex-contests are generally easy, except that ocean game
+ Westicles: yeah.  I think I have solved all the easy ones, except maybe fireworks... can't read all that
+ Westicles: though now that they are going to make the community puzzles into events with leagues, everything will change I guess
+ MSmits: this is a good way to try all the games and see if there's one you lik
+ MSmits: oh, where can i read about this?
+ Westicles: thib talked about it on chat, let me try to find it
+ MSmits: ok
+ jacek: community games with leagues? :drooling_face:
+ Westicles: <a rel="nofollow" class="external free" href="https://cg.spdns.eu/wiki/Chat:World/2022-05-02">https://cg.spdns.eu/wiki/Chat:World/2022-05-02</a>
+ Westicles: search for 'mentioning' to get at the start
+ jacek: oh my!
+ 0zBug: :rage:
+ 0zBug: :rage::rage::rage:
+ [CG]Thibaud: :eyes:
+ MSmits: thanks Westicles
+ [CG]Thibaud: o/ hello&#160;:)
+ jacek: captain on the bridge!
+ Astrobytes: hi Thibaud
+ Astrobytes: leagues for community games could be interesting/fun
+ [CG]Thibaud: what I am a bit scared of, is that it will earn CP just like a regular challenge
+ MSmits: are you afraid it will be unfair because people already know these games?
+ MSmits: thereby having a headstart?
+ [CG]Thibaud: this and also the risk that it remains a small event with 1k players top
+ Astrobytes: Yes indeed
+ MSmits: well it depends on how much you advertise it. You get huge amounts of players for these official contests
+ MSmits: how do you make that happen?
+ Astrobytes: that's a lot of resources though
+ MSmits: yeah i tis
+ MSmits: i think we have some community games that really deserve more attention. like eulers graph game
+ jacek: graph game :thinking:
+ Smelty: j,,
+ <b>**MSmits waits for the mention of paper soccer</b></p><p><img src="/a/75369242083208" /> jacek: i didnt
+ [CG]Thibaud: yes, it's great for the visibility of the games
+ Astrobytes: also, I worry about the difficulty of some of the games; I mean it goes from 0..100 required skill level somewhat steeply in a lot of the board games for instance
+ Smelty: hmm
+ [CG]Thibaud: I'm still the one who select games
+ MSmits: this is true, some are hard to get started in
+ Astrobytes: Though, I guess with enough players at different levels/leagues it could still be a fun and interesting experience for most
+ Astrobytes: just back to that "getting enough players" issue again though
+ jacek: and how would new leagues bosses be created? like in contests?
+ Smelty: interesting
+ therealbeef: you could favor relatively new community games, to mitigate the problem of having many people with really good bots already at start
+ jacek: well board games have few hardcode players from the start
+ MSmits: therealbeef that may help a bit, but it usually doesn't take more than a month for bots to be as good as they will be
+ MSmits: so that would mean *really* new
+ Astrobytes: or at least in the ballpark
+ therealbeef: so maybe spot one during review phase and then release it as an event
+ MSmits: that could be good 
+ Astrobytes: definitely a lot of potential, might take a few tries to get running smoothly
+ therealbeef: e.g. let reviewers 'nominate' good ones, so it's less work for CG
+ MSmits: Hey Astrobytes did you create a game before?
+ MSmits: I'm not sure
+ MSmits: darkhorse did
+ Astrobytes: MSmits: no I was going to but other stuff took over, still on the list
+ MSmits: ahh ok
+ Astrobytes: Morpion solitaire/join-five
+ MSmits: sounds good
+ jacek: darkhorse?
+ struct: just make jacek bots as the wood boss
+ Smelty: ^
+ Link_jon: ^
+ Kaelidian: is it just me or is python the best language for clash
+ Smelty: its definitely good for shortest but dunno
+ Link_jon: idk i see alot of people playing with snakes in clash. a few gem hunters too though.Then theres people like me that live on the moon lul
+ Smelty: lul
+ Nakotathepro: hello
+ Link_jon: hai
+ DustinNunyo: ugh... recursion is aweful!
+ snoyes: you can say that again
+ Astrobytes: :smirk:
+ gaha: Actually, how are bosses created in the contests right now?
+ Wontonimo: they were users
+ Astrobytes: it's automated since this last one, previously they were chosen manually by CG staff
+ Wontonimo: ^^
+ DustinNunyo: lol Anyone got an tips for breaking the recursive algorithm barrier?
+ gaha: I think Gold Boss was not deterministic which I didn't really like
+ eulerscheZahl: looks like i missed some chat
+ eulerscheZahl: "i think we have some community games that really deserve more attention. like eulers graph game"
+ Wontonimo: recursion can always be turned into a loop plus a stack
+ eulerscheZahl: whatever update it was caused a buggy viewer
+ Wontonimo: so think of your recursion as a stack DustinNunyo
+ gaha: imo having deterministic boss is important to be able to fix bugs in the code
+ DustinNunyo: @Wontonimo I think I kind of understand what you are saying It's just really hard to wrap my head around.
+ aCat: yeah it helps a lot
+ Astrobytes: Yeah, I think previously they checked for that but apparently the automated version doesn't 
+ aCat: but bosses for lower leagues were deterministic, it may be that for legend it is not
+ Wontonimo: hey DustinNunyo , so when you are calling back on a function what is really happening is you are pushing the current variables of the function onto the callback stack.  well ... no need to do that
+ aCat: to not help too much with overtuning
+ gaha: yeah, I think they all were except for the last boss
+ eulerscheZahl: they tried to find deterministic ones for higher leagues too
+ eulerscheZahl: and lower = deterministic can be by chance
+ eulerscheZahl: how many players use random in lower ranks?
+ DustinNunyo: @Wontonimo yeah, higher order functions also did my head in until relatively recently... lol
+ Wontonimo: instead make a data structure DustinNunyo and push that onto a stack.  The data structure is what would have been the local variables of the funcgtion
+ Wontonimo: what's your programming language DustinNunyo
+ DustinNunyo: I am most comfortable in python but I can use a few others in a pinch.
+ Wontonimo: give me a couple min and i'll try to make an example
+ DustinNunyo: Thank you so much man! I really appreciate it!
+ Wontonimo: hmm ... i'm going down a rabbit hole.  Before I go further, tell me about the recursion problem you are attacing
+ Nakotathepro: hello everyone
+ DustinNunyo: Well, the ROOT of it is that I need to calculate a flow field for a game that I have been working on for a few years. For that I need to understand either Dijkstra's pathfinding algorithm for the integration step but I was having trouble with it so I decided to get back to basics and try strengthening my ability with recursive algorithms.
+ Link_jon: noice?
+ Link_jon: Also hai
+ DustinNunyo: As for what I am working on right this second; I am working on a DFS puzzle trying to get better at recursion. lol
+ DustinNunyo: death-first-search-episode-1
+ Link_jon: lul. Good luck with that.M currently playing with bots and seeing what lua --cant-- can do
+ Link_jon: indexing a nil value is a very constant problem XD
+ DustinNunyo: Ultimately I am hoping to go from DFS to BFS to Dijkstra's
+ Link_jon: ooooo
+ cclaude42: Hey everyone! I have a question about the /home roadmap
+ DustinNunyo: nil values?
+ DustinNunyo: I haven't ran into that yet.
+ Link_jon: nil == NULL (but nil is Lua)
+ DustinNunyo: It's looking like I might have to keep track of when I cut a link.
+ cclaude42: I finished Legend on the contest, but it didn't unlock the Legend level in bot programming. Will it unlock eventually&#160;?
+ DustinNunyo: Well yeah, lua, was actually my first language. I just haven't ran into any nil values being passed in on this puzzle yet. Then again, I am only on the second level.
+ Link_jon: ... Huh i just had a thought. Claude, check to see if your score still exists
+ cclaude42: My score&#160;? You meant the codinpoints&#160;?
+ Link_jon: err. in the leaderboard itself
+ cclaude42: Yeah still 82nd
+ Link_jon: *shrug*might just not be updated yet
+ Astrobytes: when the codinpoints are added/updated you'll get the achievement
+ cclaude42: Maybe it's strictly bot programming. When do they usually move a contest to regular bot programming&#160;?
+ cclaude42: I have the codinpoints already :o
+ Astrobytes: it will be there within the week
+ Link_jon: Also,im having absolute PAIN whenever working with tables in tables and variables to index those tables, not sure why
+ Astrobytes: oh they updated the CP?
+ cclaude42: I have it, yeah
+ Astrobytes: but either way, you'll be in Legend when it comes back
+ cclaude42: Reached Master ranking :D
+ cclaude42: Niceee it's my first time, stoked
+ Astrobytes: and it should be here within the week Thibaud said
+ Astrobytes: and gratz&#160;:)
+ cclaude42: Thank you :D
+ PatrickMcGinnisII: I snuck in two 'private' contests, got N/A for CP, I wonder if they are used in the CP 5% degredation?
+ Astrobytes: no you don't get any CP for those at all, doesn't factor into it whatsoever afaik
+ PatrickMcGinnisII: I gained +3k cp, and lost +2k cp on the 5% degrading for a net of +650 CP, very disappointing
+ Link_jon: sad
+ MichExpatMatt: I gained 133 CP overall since April 16, but I lost 157 profile rank in the same time period&#160;:(
+ MichExpatMatt: Leaving every time I joined a clash that turned out to be annoying probably hasn't helped
+ Astrobytes: also clash CPs decay
+ MichExpatMatt: yeah
+ PatrickMcGinnisII: clash points deca... yea fairly quickly
+ thatonedreamsmpfan2.0: I barely know what I'm doing half the time T-T
+ Link_jon: ^
+ Astrobytes: in general or on here? :P
+ MichExpatMatt: but within the first couple days of the spring contest... my CP shot up and cracked the Master category for the first time. One day later... the point increase vanished like it was never there
+ MichExpatMatt: maybe it was just a calculation error on their part
+ PatrickMcGinnisII: Anyone try 'Start-Up' multi?  I'm a little confused...it is a ML game?
+ jacek: cant you tell from its graphics
+ thatonedreamsmpfan2.0: I feel like I'm the only beginner here
+ eulerscheZahl: something definitely broke, was working before&#160;:(chromium (left), chrome (center), firefox (right)<a rel="nofollow" class="external free" href="https://i.imgur.com/CVqFc5s.jpg">https://i.imgur.com/CVqFc5s.jpg</a>
+ eulerscheZahl: the warriors show the circle on top, which should only be visible in debug mode. and the color of one player does not change
+ Astrobytes: SDK update?
+ Astrobytes: or viewer rather
+ eulerscheZahl: not sure yet
+ jacek: mhm
+ VizGhar: thatonedreamsmpfan2.0 I was beginner too 1-2years back :P just enjoy yourself
+ eulerscheZahl: and when i reload, settings don't get saved
+ eulerscheZahl: that used to work as well
+ MichExpatMatt: Everyone was once a beginner at anything they do. Don't sweat it! Personally I am just here for fun and to learn a thing once in a while
+ eulerscheZahl: and i don't even think that i can file a bug report, as i did so much things that i weren't supposed to do
+ cclaude42: Yeah we're all beginners at some point :D
+ eulerscheZahl: wasn't*
+ MichExpatMatt: (despite my talking about points and ranks)
+ thatonedreamsmpfan2.0: But it's so hard, I can barely enjoy myself&#160;:(
+ jacek: "That" - she
+ VizGhar: thatonedreamsmpfan2.0 and what exactly are you doing? go for easy puzzles
+ jacek: like galaxy labyrinth
+ thatonedreamsmpfan2.0: I am, It's still hard because I've just gotten into coding
+ Link_jon: What language are you using?
+ MichExpatMatt: I regularly look things up on geeksforgeeks, stackoverflow, and a few other sites while trying to figure out puzzles/challenges. I've done DFS and BFS numerous times for example, but I seem to always forget the algorithms
+ Astrobytes: MichExpatMatt: try this site for solidifying your pathfinding/graph knowledge a little<a rel="nofollow" class="external free" href="https://www.redblobgames.com/">https://www.redblobgames.com/</a>
+ thatonedreamsmpfan2.0: I think I'm using a language called Go, I really don't know the difference between the different languages for coding
+ MichExpatMatt: Astrobytes oh nice! I think I used one of those examples when I was working on the Captain Kirk maze thing earlier this year, but I hadn't bookmarked it so I lost it and didn't realize how many other things were on the site
+ PatrickMcGinnisII: eulerscheZahl looks like it works in my Firefox 99.0
+ Astrobytes: MichExpatMatt: Yeah it's a great resource, the interactive/animated parts are very useful too. Very in depth in parts but you can take as little or as much of it as you need
+ Link_jon: You might have an easier time starting off with a simplier language (but... learning a more weird language earlier will help get used to... the pain.)
+ PatrickMcGinnisII: Waterfox (64 bit) stopped working correctly months ago... but FF 32 bit works fine...wierd huh
+ PatrickMcGinnisII: oops WF works on the replay
+ thatonedreamsmpfan2.0: Link_jon: pain is an understatement
+ eulerscheZahl: PatrickMcGinnisII if you reload the replay, does it save the settings (debug mode, custom colors, ..)?
+ Link_jon: Yes...i enjoy sticking to the Lua/Python combo instead of the only 'proper' language i know: C++
+ eulerscheZahl: with the latest SDK version: <a rel="nofollow" class="external free" href="https://i.imgur.com/r4b0iuS.png">https://i.imgur.com/r4b0iuS.png</a>only lost the bottom bar, i expected much worse
+ PatrickMcGinnisII: eulerscheZahl nope, none 
+ eulerscheZahl: same for me, used to be working&#160;:(
+ MichExpatMatt: In college I was doing mostly C++ up until graduating 2007 and today I don't remember it, I'm mostly C# and very spoiled by it. But in college my favorite instructor said things like "if you know algorithms, languages are just syntax" and "if you can do it in C++, you can do it in any other language"
+ eulerscheZahl: custom color for you makes no sense if it doesn't save between replays
+ Link_jon: pretty much yeah
+ MichExpatMatt: which to me sounds kind of like "I've had Mickey's, so I could drink anything"
+ Link_jon: small problem
+ Link_jon: i dont forsee a Lua remake of Doom
+ thatonedreamsmpfan2.0: I can't believe I want to code games but I can barely figure out this puzzles t-t
+ thatonedreamsmpfan2.0: *these
+ Link_jon: (wait what was Doom even coded in)
+ jacek: i dont want math, i want to program computers!
+ Link_jon: I mean. I think thats how most of us felt and or continue to feel sometimes.
+ Link_jon: or maybe its just me
+ Link_jon: What puzzle is it
+ thatonedreamsmpfan2.0: in my opinion, math should be illegal, but sadly we still need some of it for coding
+ VizGhar: You cant code without math
+ jacek: or meth
+ thatonedreamsmpfan2.0: XD
+ Link_jon: eehh thats just the motivator
+ Link_jon: then theres meth math and thats a whole nother story
+ thatonedreamsmpfan2.0: lmao
+ VizGhar: I've heard about some guy taking controlled amount of LSD... And he solved some pretty darn hard problem... you guys know more?
+ Link_jon: ...Rather explosive, usually.Am curious now, what puzzle was it ur fighting with
+ VizGhar: I want to read the story :P
+ Astrobytes: I don't think microdosing is all they say it is tbh
+ VizGhar: yeah thatonedreamsmpfan2.0 what is that you cant solve?
+ thatonedreamsmpfan2.0: everything  t-t
+ Link_jon: send the link
+ VizGhar: we wont help you then
+ VizGhar: If you need to cry, find other place. If there is anything to ask, then ask
+ Astrobytes: :D
+ VizGhar: We are willing to help but there is no way as you can see
+ Astrobytes: On point
+ VizGhar: "Hey I want to buy something""What should it be?"
+ VizGhar: now on point&#160;:)
+ Astrobytes: heh heh heh
+ PatrickMcGinnisII: eulerscheZahl hmm, looked at source... would take forever for me to break it all down ... but looks like server side session would be necessary ... but on reload, CG is sending a static CSS ... so while authentication may be handshaked, i dunno on replays...I doubt more overhead is utilized because setting stuff in the browser could inject into the JS locally by malicious people...so they probably closed the hole.
+ thatonedreamsmpfan2.0: there are different problems in a puzzle and I can't figure out how to make all of them stay correct when I switch to figure out another a different one t-t
+ Astrobytes: That's a very roundabout way of saying "I have no idea" Patrick :P
+ Link_jon: aka the best way
+ Link_jon: Ah, dont hardcode your way through the puzzle
+ Link_jon: make an algorithm that takes the input, and converts said input to the correct output
+ jacek: so... NN
+ Link_jon: Theres allways a pattern
+ Astrobytes: to jaceks trolling?
+ DomiKo: new challenge. Make NN to predict jacek :D 
+ Astrobytes: lol
+ Waffle3z: automatonnn
+ PatrickMcGinnisII: Astrobytes i have clue. :stuck_out_tongue_closed_eyes: i think changing the CSS with JS is okay locally, but it's safer for CG to bump to default Doc.  of course, the YT player controls might not be spanning due to the addition of .mobile support .... yea ok, I'm guessing... but it's not being saved
+ PatrickMcGinnisII: crap got dr. appt. in 30 minutes
+ PatrickMcGinnisII: laterz
+ thatonedreamsmpfan2.0: I'm only good at the conditions puzzles, my life sucks 
+ 5DN1L: yeah, life is full of conditions puzzles
+ Astrobytes: :D
+ thatonedreamsmpfan2.0: sadly
+ Nakotathepro: who is a girl on here
+ jzen: You, judging from your picture
+ Link_jon: probably only you seeings the silence
+ eulerscheZahl: by that logic Astrobytes is a cat and 5DN1L just yellow
+ jzen: Wait... You are not a frog?
+ eulerscheZahl: a toad
+ jzen: Sorry
+ Link_jon: ul
+ Astrobytes: lol
+ jzen: I see that I have offended your being
+ jacek: First important fact – all toads are frogs, but not all frogs are toads!  <a rel="nofollow" class="external free" href="https://wildlifepreservation.ca/what-is-the-difference-between-toads-frogs/">https://wildlifepreservation.ca/what-is-the-difference-between-toads-frogs/</a>
+ pmor: I thought on the internet the men are boys, the boys are men, and girls are fbi agents
+ Astrobytes: correct jacek
+ jzen: Good to know jacek
+ jzen: pmor Where does that leave the toads?
+ jzen: The FBI agents are toads?
+ pmor: if they are girl toads
+ Unkn0wn225: I need help with changing thors direction f movement cause im new
+ 5DN1L: cause you're new in what?
+ 5DN1L: new to CodinGame and new to a programming language are different, for example
+ Link_jon: jacek: so frogs are rectangles and toads are squares?
+ jzen: Link_jon the other way around
+ Link_jon: Ahh yeh
+ Kaelidian: c# is terrible for clash 98% of the time
+ eulerscheZahl: an update to the latest SDK at least solved the issue of warrier and circle being shown at the same time for chromium
+ eulerscheZahl: but it looks like any toggle with more than 2 possible states doesn't get saved
+ ycsvenom: Kaelidian i think c# is terrible as you said because it's slow ,terrible and broken intellisense 
+ MichExpatMatt: One of the reasons I started trying to learn python
+ MichExpatMatt: Also in C# I was trying to do the code golf for Don't Panic #2, I've made my code illegible but it's still only down to 447 chars :sweat_smile:
+ 5DN1L: Don't Panic #2?
+ MichExpatMatt: Yeah there is a challenge for the second Don't Panic puzzle, where the goal is not just to pass all the tests but to get code size &lt;200 chars
+ MichExpatMatt: <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/codegolf/don&#39;t-panic">https://www.codingame.com/multiplayer/codegolf/don't-panic</a>
+ 5DN1L: That's Don't Panic #1
+ 5DN1L: "This is a rather special programming challenge. This is the same problem as «&#160;Don't Panic - Episode 1&#160;», an medium puzzle, but instead of simply solving it, now you need to do so with the least possible amount of characters."
+ MichExpatMatt: ahh, my bad. Sorry, I haven't worked on that one in months now so I misnamed it by mistake
+ 5DN1L: No worries&#160;:)
+ 5DN1L: Just wondering whether you wanted to challenge yourself to code golf #2 too :P
+ MichExpatMatt: idk, maybe once I get better at python
+ jacek: :upside_down:
+ antiwonto: [auto] ':upside_down:' was defined as ' ɥǝllo '
+ jacek: :taco: Automaton2000
+ Automaton2000: that last bit triggers me, oh well.
+ antiwonto: [auto] sorry jacek but you can only award tacos once per day
+ jacek: :rage:
+ derjack: :taco: jacek
+ antiwonto: [auto] derjack has awarded jacek 10 tacos. jacek now has 37 taco. derjack now has 44 taco
+ wlesavo: in Block the spreading fire the last validator is random and the seed for test is fixed right?and other test cases coinside with validators?
+ Westicles: The 'random' ones are always the same, if that's what you mean
+ Westicles: I think confusion over this resulted in the 1-star rating... he thought it changed every time you submit
+ Westicles: sad
+ DomiKo: 1-star is correct rating for this puzzle
+ jacek: huh
+ Westicles: oh, maybe so... I haven't tried it
+ DomiKo: me too, I just read the statement
+ wlesavo: oh, thats sad
+ wlesavo: i thought that number of test cases seemed to be quite low
+ VirtualRealityRocks: how is the clear rate for the onboarding puzzle only 85% XD
+ Wontonimo: because people think this is an intro to programming for total noobs and then freak out and run away
+ VirtualRealityRocks: it literally gives you code to copy in
+ 5DN1L: Doesn't mean they necessarily follow it through
+ VirtualRealityRocks: I suppose
+ katyanaveka: :nerd:
+ glebas: лю катю
+ katyanaveka: :sunglasses:
+ Link_jon: *shrug*idk, to me CG just seems to require intrest in coding, and a basic knowledge of programing
+ glebas: *shrug*idk, to me CG just seems to require intrest in coding, and a basic knowledge of programing
+ 5DN1L: no spamming please glebas
+ linjoehan: I'm in here now
+ antiwonto: [auto] Hey linjoehan, here is a :taco: for loggin in today while it is quiet.  You now have 13 tacos
+ PatrickMcGinnisII: where's my :taco:
+ jzen: :taco: PatrickMcGinnisII
+ antiwonto: [auto] Sorry jzen but you need 3 tacos to give tacos.  You have 0 now.  Get someone to give you more tacos first
+ jzen:&#160;:(
+ PatrickMcGinnisII: drop :taco:
+ antiwonto: [auto] That taco command has moved to the #taco channel
+ BJD: :taco: jzen
+ antiwonto: [auto] BJD has awarded jzen 1 tacos. jzen now has 1 taco. BJD now has 9 taco
+ Donotalo: is there any way to view company leaderboard of a competition beyond rank 100?
+ struct: Donotalo search the name
+ struct: <a rel="nofollow" class="external free" href="https://www.codingame.com/contests/spring-challenge-2022/top-companies/global?column=keyword&amp;value=Reli">https://www.codingame.com/contests/spring-challenge-2022/top-companies/global?column=keyword&amp;value=Reli</a>
+ Frostyhot: how do i learn to code
+ DustinNunyo: @Frostyhot YouTube is probably the best place to start of you have absolutely no experience in my opinion.
+ DustinNunyo: They might have super beginner friendly lessons on here but I am not sure.
+ DustinNunyo: I haven't looked at the really simple stuff.
+ PoisonousBerry: Im tring the Power of Thor, how do I combine the conditions? I cant seem to get him to go diagnal
+ cegprakash: I just saw the pictures of CG team
+ cegprakash: Thibaud looks like a geeky nerd
+ cegprakash: <a rel="nofollow" class="external free" href="https://www.codingame.com/about/team">https://www.codingame.com/about/team</a> 
+ PoisonousBerry: Hey! do u know how to do the Thor question?
+ cegprakash: nopes..
+ PatrickMcGinnisII: Frostyhot personally I buy the books for the language I wanna dive into.  then google is your friend for lang. docs.  Lotta free IDEs, CG is great for hands on experience.
+ PatrickMcGinnisII: if (code_addict==1) redirect...lol
+ PatrickMcGinnisII: don't all talk at once
+ antiwonto: [auto] Hey PatrickMcGinnisII, here is a :taco: for loggin in today while it is quiet.  You now have 17 tacos
+ LongDepTraiYeuRatNhieuEm: how to hack NASA
+ PatrickMcGinnisII: they all use apple
+ Mortis_666: $sudo hack NASA
+ PatrickMcGinnisII: :sweat_smile:
+ Mortis_666: 😂
+ LongDepTraiYeuRatNhieuEm: can i hack NASA by python
+ LongDepTraiYeuRatNhieuEm: im a pyton pro
+ DEV-thien: yes.But you must hack python 1st
+ PatrickMcGinnisII: They have a .50 cal machine gun emplacement at the entrance, so stay between the pylons
+ PatrickMcGinnisII: ffs I haven't been to KSC in 15 years
+ LongDepTraiYeuRatNhieuEm: ok bro
+ LongDepTraiYeuRatNhieuEm: so im gonna hack NASA with html
+ PatrickMcGinnisII: I installed stuff in the clean rooms when they were sending up pieces of the ISS
+ LongDepTraiYeuRatNhieuEm: i can hack yor phone bro
+ LongDepTraiYeuRatNhieuEm: watch out
+ PatrickMcGinnisII: hack my car via satellite like the govt. does
+ LongDepTraiYeuRatNhieuEm: wait 2m
+ PatrickMcGinnisII: hint: there's a "by Microsoft" tag on the computer
+ PatrickMcGinnisII: There's more than 15M vulnerable vehicles sold from 2008-2019 and no recall nor fix for it
+ PatrickMcGinnisII: shut all of them off but mine k
+ DustinNunyo: Hey guys, can anyone confirm if it is possible to solve the death first search puzzle using python?
+ DustinNunyo: I am considering re-writing my code in C++ but I would like to avoid that if I can.
+ PatrickMcGinnisII: do a 1-time djkistra and make a shortest distance matrix on first turn, should b fine
+ PatrickMcGinnisII: oh, i guess it depends on episode
+ DustinNunyo: Well, I was trying to do DFS as it's called "death first search" lol
+ DustinNunyo: episode 1
+ DustinNunyo: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/72fe2483-ee3d-47b5-99b1-4a26fcab389b">http://chat.codingame.com/pastebin/72fe2483-ee3d-47b5-99b1-4a26fcab389b</a>
+ DustinNunyo: that is my code.
+ PatrickMcGinnisII: I did both episodes in php, so yea...doable in PY
+ DustinNunyo: hmm... yeah... probably something wrong with my code then.
+ PatrickMcGinnisII: unroll the recursive...do it in loops
+ DustinNunyo: aaaah, yeah, my buddy was telling me about that. He said it would speed things up. lol
+ DustinNunyo: I thought the @lru_cache was supposed to solve that issue though.
+ PatrickMcGinnisII: I don't know enough about PY to tell you, all i got 4 u
+ DustinNunyo: Alrighty, well, I was wanting to re-write this algorithm to not use recursion anyway, might as well do it now. lol
+ PatrickMcGinnisII: :v_tone1:

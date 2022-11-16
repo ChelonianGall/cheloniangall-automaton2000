@@ -1,0 +1,596 @@
+ Bob: Automaton2000, AutomatonNN, pika
+ AutomatonNN: oui
+ Automaton2000: tiens, je ne savais même pas que c'était une bonne idée de faire du java
+ Bob: c'est parce que c'est pas une bonne idee Automaton2000
+ Automaton2000: t'as fait la simu&#160;?
+ Bob: mieux Automaton2000, j'ai teste en vrai
+ Automaton2000: quelqu'un a une piste&#160;?
+ nicola: Ma solution de sum of divisors tient en deux lignes.
+ nicola: Mais c’est vrai qu’il faut connaître l’astuce.
+ Bob: j'avoue que les puzzles qui reposent principalement sur des astuces mathematiques m'interessent relativement peu
+ CopperFr: pareil
+ nicola: Mais je pense qu’en C, ça doit passer sans astuce.
+ Bob: joli le build du package qui dumpe dans la console le code produit par webpack...
+ Bob: :clap:
+ CopperFr: j'avoue que les puzzles qui doivent forcément être programmer en C sans astuce m'intéressent relativement peu
+ nicola: Comme quoi, chacun sa m…
+ nicola: Chacun ses goûts de chiottes.
+ nicola: :grin:
+ CopperFr: tu l'as connu comment aussi le trick&#160;?
+ nicola: C’est un classique de sommation.
+ nicola: Pour une double somme.
+ nicola: Permuter les symboles de sommation.
+ CopperFr: on trouve la solution en 2s sur le net
+ nicola: On voit ça en première année.
+ nicola: Comme pour beaucoup d’autres puzzles.
+ CopperFr: en premiere année de maternelle&#160;?
+ nicola: Après le bac. :p
+ CopperFr: bon ben voilà 50 xp facile :D
+ nicola: Pour sum of divisors&#160;?
+ CopperFr: ben oui j'ai trouvé la soluce
+ CopperFr: <a rel="nofollow" class="external free" href="https://www.geeksforgeeks.org/sum-divisors-1-n/">https://www.geeksforgeeks.org/sum-divisors-1-n/</a>
+ CopperFr: ah tiens ca passe pas en groovy :D
+ dbdr: ça m'étonne
+ dbdr: ah ok&#160;:)
+ dbdr: ça passe, mais oui ya une "subtilité"
+ CopperFr: je suis pas spécialiste du groovy
+ dbdr: c'est quoi le problème?
+ CopperFr: ben ca timeout 
+ dbdr: (c'est pas spécifique à groovy)
+ dbdr: ah ok, tu as un autre problème alors
+ CopperFr: en js ca timeout pas le dernièr cas
+ dbdr: c'est quoi ton code?
+ CopperFr: celui du lien au dessus
+ dbdr: mon groovy timeout pas non plus
+ CopperFr: (la version opti)
+ CopperFr: c'est peut-être parce que j'utilise pas des int
+ dbdr: ça c'est bien, ça tient pas en int
+ dbdr: tu utilises quoi?
+ CopperFr: j'ai pas typé
+ dbdr: ya qd meme un type. par ex si tu fais nextInt() alors tu utilises des int
+ CopperFr: oui mais n / i me renvoie un float
+ CopperFr: ca change rien de mettre int
+ dbdr:  / c'est toujours une division flotante
+ CopperFr: ok ca passe en utilisant intdiv
+ CopperFr: et des long
+ dbdr:&#160;:+1:
+ CopperFr: mais en float non
+ CopperFr: alors qu'en js ca semble assez rapide
+ CopperFr: et normalement js utilise des float aussi
+ dbdr: oui, groovy est plutot lent
+ CopperFr: oui c'est toujours lent les langage basé sur la jvm j'ai l'impression
+ dbdr: la jvm en elle meme est plutot rapide
+ dbdr: groovy c'est un langage de script, pas optimisé pour la vitesse
+ CopperFr: ca veut dire qu'ils générent du mauvais code jvm alors
+ dbdr: voila
+ CopperFr: (on a juste une boucle ici)
+ dbdr: sans types, il doit utiliser des Object à tout va
+ CopperFr: j'ai tout typé 
+ CopperFr: le problème c'est clairement la division 
+ CopperFr: avec des float ca prend plus de temps qu'en entier
+ CopperFr: je pense que la V8 doit optimiser et utiliser des entiers
+ leojean890: oui voilà pour résoudre j'ai fait une double boucle avec multiplication du genre div[i*j].add(i) div[i*j].add(j)
+ leojean890: et ça s<i>exécute assez vite&#160;:)</i>
+ leojean890: en python
+ leojean890: donc 5 lignes + lignes d'init et print
+ dbdr: 2 boucles, c'est 2 de trop&#160;;)
+ leojean890: faut que je trouve la méthode opti :p
+ CopperFr: j'ai qu'une boucle
+ leojean890: mais ç passait trkl dans le temps imparti&#160;:)
+ leojean890: ça*
+ CopperFr: essaye en groovy :D
+ leojean890: j'étais en python
+ leojean890: le + lent:p
+ CopperFr: avec 100000 ca passe en pyhton
+ CopperFr: avec une double boucle
+ CopperFr: 90000 en fait
+ leojean890: zvec des mult
+ Bob: ca fait deux heures que je me bats pour comprendre ce que j'ai pu peter dans une lib pour que le code client ne compile plus avec
+ Bob: et en fait c'est pas du tout a cause de moi
+ nicola: Cépamoi jérienfé yapakmoi.
+ nicola: :grin:
+ Bob: ben de fait c'est vraiment pas moi
+ Bob: :p
+ eliphazbouye: Salut
+ Bob: salut
+ Magus: Quand tu es en télétravail en pleine conf call avec tes collègues pendant une réunion très ennuyeuse. Mais qu'un intervenant externe pose enfant une question intéressante&#160;:
+ Magus: "Papa, pourquoi le chat sur cette page il est bleu, et sur cette page il est vert&#160;?"
+ Magus: *pose enfin
+ Bob: :D
+ Magus: je pense qu'on va créer un ticket JIRA pour ça, cette question mérite une réponse
+ nicola: Et sur cette page, il est gris&#160;?
+ CopperFr: la nuit c'est normal
+ CopperFr: c'est jamais de la faute de Bob :D
+ Bob: ah sisi des fois c'est tout a fait ma faute
+ Bob: j'assume entierement mes conneries
+ Bob: c'est d'ailleurs pour ca que je voulais verifier que ca marchait toujours
+ CopperFr: ca sert à quelque chose la somme des diviseur de 1 à n dans la vie&#160;?
+ Bob: sans doute pas dans les notres
+ dbdr: oui, à pratiquer la reflexion
+ CopperFr: et la théorie des noeuds&#160;?
+ dbdr: j'en sais rien. mais ça m'étonnerait pas plus que ça si c'était super utile en physique des particules ou un truc du genre&#160;:)
+ dbdr: en théorie des cordes, on doit pouvoir faire des noeuds avec les cordes, non? :D
+ Bob: je serais pas surpris que des questions de sommes de diviseurs ca serve en crypto
+ dbdr: pas bete
+ Bob: au pire, ca doit servir de brique de base a quelque chose de plus velu qui servira
+ Bob: de toute facon la recherche ce sont des chercheurs qui cherchent, alors envoyez votre pognon
+ dbdr: du pognon pour la recherche, yen a de moins en moins je crois&#160;:(
+ dbdr: la recherche publique en tout cas
+ Bob: d'une maniere generale, du pognon pour les trucs utiles a la societe
+ CopperFr: la théorie des cordes j'y crois pas trop
+ Bob: c'est pas grave, elle elle croit en toi
+ nicola: CopperFr, ça doit servir au moins autant que de savoir programmer en Python.
+ CopperFr: je pense pas quand même :D
+ nicola: C’est une fonction classique en théorie des nombres.
+ nicola: Comme la fonction d’Euler.
+ dbdr: la fonction qui arrete pas de faire de nouveaux puzzles optim?
+ nicola: Pas tout à fait.
+ nicola: Le nombre d’Euler est lié à la série harmonique.
+ dbdr: le nombre d'Euler c'est #1
+ Bob: je prefere 42
+ CopperFr: J'adore les séries harmoniques
+ nicola: Do ré mi fa sol&#160;?
+ CopperFr: do mi si la do ré
+ Bon[]Crayon: Salut
+ Bon[]Crayon: AutomatonNN holà
+ Bob: halo
+ Bon[]Crayon: Automaton2000 allo&#160;?
+ Bon[]Crayon: C'est la pause .
+ CopperFr: おはよう
+ nicola: Pas pour celui qui m’invite à un CoC.
+ nicola: Bob, Doom.
+ nicola: Pas Halo.
+ CopperFr: Wolfenstein 3D
+ nicola: Il me file la gerbe, celui-là.
+ CopperFr: J'aime pas trop les fps
+ nicola: Tu préfères Tron, selon ton avatar. :grin:
+ CopperFr: tron&#160;?
+ AlexMartin1: Valorant&#160;?
+ Bob: Doom quoi ca&#160;?
+ Bob: CopperFr, arrive a midi on ne dit plus おはよう :D
+ CopperFr: oui je sais
+ CopperFr: mais on est pas à une minute près
+ CopperFr: (こんにちは
+ Bob: en fait je pense qu'apres 9 heures on est sur konnichiwa
+ CopperFr: je lis que c'est jusqu'à onze heure
+ CopperFr: et que de 11 à 12 on peut dire les deux
+ Bob: ouais 11 heures c'est pour les leve-tard
+ CopperFr: après il manque surtout la politesse :D
+ Bob: ouais mais on est entre nous la
+ Bob: il y a trois ans j'etais a Tokyo a cette heure-ci :disappointed:
+ Bob: il y a quatre ans aussi :disappointed: :disappointed:
+ Bob: #tristitude
+ CopperFr: oui mais on a pas gardé les idos ensembles
+ CopperFr: idols*
+ Bob: quelqu'un saurait-il m'expliquer comment fonctionne la regle display-name du plugin eslint-react&#160;?
+ dbdr: si je dis "mal", je prends un risque?
+ Bob: non la t'es carrement safe
+ Bob: j'aimerais juste comprendre pourquoi elle ne se declenche pas sur 95&#160;% des composants de l'app qui n'ont effectivement pas nom
+ Bob: mais bien sur les 5% restants, sans qu'il y ait de facteur clair
+ conadal: oh c les vacances scolaires on dirait&#160;:)
+ philRG: ah merde je suis sur 2 pseudos
+ philRG: :o)
+ Bob: et surtout sur 100&#160;% des micro-fonctions qui renvoient un bout de JSX sans etre de "vrais" composants
+ philRG: pseudos à la con
+ Bob: sois gentil avec les pseudos ils t'ont rien fait
+ philRG: :relaxed:
+ CopperFr: t'as utilise ignoreTranspilerName Bob&#160;?
+ CopperFr: (à priori il faudrait le mettre à true)
+ Bob: bah non si je le mets a true c'est pire il va en vouloir partout&#160;:)
+ CopperFr: je comprend pas ce que tu veux alors
+ Bob: je voudrais juste comprendre pourquoi il y a plein de cas ou il ne rale pas alors que clairement y a pas de displayName sur le composant
+ Bob: et le voisin, qui est code exactement pareil, il rale
+ CopperFr: il génére pas un nom par défaut&#160;?
+ Sparow: Salut tout le monde&#160;! Est ce que quelqu'un connait un ide pour C
+ Sparow:&#160;?
+ CopperFr: visual studio&#160;?
+ Sparow: il ne fonctionne pas sur mon ordi malheureusement (snif)
+ Bob: pas mieux
+ Sparow: sinon oui j'utiliserai vs code
+ Bob: notepad++&#160;?
+ CopperFr: vim
+ Sparow: ah&#160;? notepad gère le C&#160;?
+ Bob: notepad++ gere un peu ce qu'on veut je pense
+ CopperFr: sinon y a ce bon vieux code::blocks
+ Sparow: et est ce qu'il le compile&#160;?
+ conadal: Le dernier IDE que j'ai utilisé était CodeBlocks
+ Bob: je suppose que si tu trouves comment brancher le compilo derriere, y a pas de raison
+ Bob: j'aurais bien du mal a croire qu'il ne le permette pas
+ CopperFr: tu utilise quel os&#160;?
+ Bob: CopperFr&#160;: je suppose que la ou la regle ne rale pas c'est que le transpiler jsx a reussi a generer un nom oui
+ conadal: sur macOS, y a un compil intégré si on cherche bien
+ Bob: mais ca implique que dans les cas ou il rale il n'y est pas parvenu
+ CopperFr: oui certainement
+ Bob: or parfois c'est vraiment l'un ou l'autre a syntaxe identique
+ Bob: c'est ca qui m'echappe, en fait
+ CopperFr: un bug peut-être
+ Bob: possible
+ Bob: c'est pas bien grave et c'est facile a contourner ou corriger, c'est juste agacant de retomber dessus regulierement
+ Sparow: windows
+ conadal: je l'avais utilisé comme en plus y a un terminal unix&#160;:-)
+ Sparow: mais j'ai installé code blocks et impossible de le lancer 
+ CopperFr: ah bon moi je clique sur l'icône
+ conadal: ah oui sur windows?
+ CopperFr: c'est le 10&#160;?
+ Sparow: #CopperFr mdr
+ Sparow: nop le 7
+ CopperFr: moi aussi j'ai le 7 la version 20.3 de code::blocks marche nickel
+ Sparow: c'est le fameux message d'erreur 0xc000142
+ CopperFr: (et visual studio code aussi)
+ conadal: sur le 10 je crois que ça marchait mais j'ai récupéré l'IMac de ma belle-soeur et depuis je revis&#160;:-)
+ CopperFr: j'aime pas les mac faut cliquer à gauche pour fermer les fenêtres
+ conadal: VSCode ça doit marcher aussi, mais ça me fait mal aux yeux même sur mac
+ Fjio: cmd + W hihi
+ Sparow: #CopperFr tout à fait d'accord
+ Bob: j'allais dire, y a encore des devs qui cliquent sur un bouton pour fermer une fenetre&#160;?
+ conadal: j'ai eu du mal avec la souris aussi, ça change, mais on s'y fait
+ Sparow: en plus ils se sont même pas donné la peine de finir leur logo
+ Bob: que ma mere le fasse OK
+ Bob: mais un dev&#160;?
+ CopperFr: tu fais du alt-f4
+ Fjio: un thème visuel sur VSCode et on en parle plus normalement
+ Fjio: Andromeda par exemple est vachement relaxant pour les yeux
+ CopperFr: sinon ya visual studio par le code
+ Sparow: sur un mac il y a "alt "&#160;?????
+ CopperFr: pas*
+ Fjio: ctrl, alt et cmd
+ CopperFr: le mac ca fait un moment que ca pas évolué l'os
+ Sparow: mais non sur mac il y a ctrl, command, shift mais pas alt
+ Fjio: j'ai un joli alt sur mon clavier donc j'en doute ahah
+ CopperFr: y a option aussi
+ Sparow: nan mdr c'est vrai&#160;?
+ Sparow: yep option
+ Sparow: mais c'est un clavier mac&#160;?
+ Fjio: option = alt
+ conadal: C'est comme le levier à vitesse de la 2 CV faut s'y faire
+ Fjio: oui mbp de 2011
+ Sparow: ah bah c'est bien ce que je disais alt ne figure pas sur le clavier mac
+ Fjio: c'est écrit tel quel
+ CopperFr: option ou alt&#160;?
+ conadal: ah si: fn-ctrl-alt-cmd
+ Fjio: alt
+ Fjio: avec une représentation de fourche en dessous
+ conadal: et le pipe Unix sous MacOS, c'est Alt-Shift-L bon là c rude lol
+ CopperFr: je suis curieux de voir si la proportion de mac va augmenter avec arm ou dégringoler
+ Fjio: c'est un coup à prendre
+ conadal: on s'y fait oui
+ anjaniacatus: salut
+ CopperFr: c'est trop cher pour ce que c'est un mac
+ Fjio: ça va pas changer grand chose sur l'user moyen
+ Fjio: tu payes clairement environnement &amp; workflow 
+ Fjio: c'est un peu "l'expérience client" en informatique Apple
+ Fjio: Mais oui je suis sur un 2011 pour une raison €
+ conadal: J'ai un Mac sans disque SSD, il boote 10 fois plus vite que mon PC sous Win10 d'à peine 2 ans 
+ Bob: j'ai un copain qui est client Mac depuis 20 ans, il dit que pour ce prix-la t'as un bon SAV
+ conadal: le mac date de 7 ans
+ CopperFr: booter ou sortir de veille&#160;?
+ Bob: mes beaux-parents ne jurent que par les mac et ipad de toute derniere generation
+ conadal: booter
+ Bob: chaque fois qu'on va les voir ils ont une tablette plus grande qu'avant pour y lire le journal
+ CopperFr: j'ai une machine virtuelle c'est long à booter le mac
+ conadal: j'ai un IMac de base doit valoir environ 1.000€ pas regardé
+ Fjio: c'est un confort et un environnement, après pour un user moyen avoir le dernier cri aucune amélioration...
+ conadal: sinon linux pour booter c l'idéal
+ conadal: sans KDE ou Gnome
+ CopperFr: surtout depuis l'apfs
+ Fjio: Pas de GUI pour booter + vite 😎
+ CopperFr: oui mais alors juste booter le linux
+ conadal: apfs oui, gars d'apple parti chez NexT
+ Sparow: Tails est encore plus rapide
+ CopperFr: c'est quoi Tails&#160;?
+ Bob: le pote de Sonic
+ Sparow: :joy:
+ CopperFr: encore un GNU/Linux
+ conadal: :joy:
+ Bob: le renard a deux queues
+ Sparow: Tails est un os
+ Sparow: il est ultra rapide vu qu'il na' rien en mémoire hormis l'os elle même
+ Sparow: du cou pc'est moyen pour stocker tes photos mais cool si t'as pas de temps à perdre
+ Sparow: coup*
+ Driikolu: C'est pas un OS tails, c'est une distribution Linux 
+ Driikolu: Si je me trompe pas
+ CopperFr: oui
+ CopperFr: enfin GNU/Linux
+ Driikolu: Oui, abus de langage&#160;:)
+ Driikolu: Ma faute
+ Sparow: oui enfin par abus de langage on dira que c'est un os ^^
+ CopperFr: c'est pas un os original
+ Sparow: j'ai jamais dit le contraire :smile:
+ CopperFr: juste une distrib de plus soit disant mieux et surement pas mieux qu'un autre plus mieux
+ Driikolu: C'est surtout la distrib du projet TOR
+ Sparow: en partie
+ CopperFr: ca me rappelle les disribution light de xp :D
+ Driikolu: En gros un liveboot avec TOR &amp; TOR Browser directement intégré.
+ CopperFr: ah c'est pour les agents secrets
+ Sparow: ouais en gros c'est ça
+ Driikolu: On va dire ça comme ça
+ Sparow: si tu veux pas que le gouvernement ou ton voisin puisse voir ce que tu fais avec ton ordi
+ Bob: Elliot Alderson sors de ce corps
+ Driikolu: Yes
+ Driikolu: Go mettre nos capuches et sniffer du doliprane
+ conadal: :joy:
+ Driikolu: Bon, j'en ai marre du Code4LifeUne fois sur deux je bat le boss, mais du coup je lui passe pas devant
+ Bob: on n'a jamais regarde la saison 4 tiens
+ Bob: Driikolu, rajoute des ifs
+ Sparow: moi si
+ Bob: t'es sur quelle ligue&#160;?
+ Driikolu: Au début j'ai lu ISF, je pensais que c'était plus en place comme impôt
+ Driikolu: J'suis en Bronze encore
+ Bob: on a toutes les regles en bronze&#160;? je me souviens plus
+ CopperFr: j'ai pas aimé la série Mr. Robot
+ Bob: j'ai bien accroche la premiere saison, la suite je serais largement infoutu de faire un resume de ce qu'il s'y passe vraiment
+ Driikolu: On a les projets, les expertises... Je crois que oui
+ Driikolu: J'ai bien aimé la sainson 1, j'ai jamais réussi à commencer la saison 2
+ Bob: ca devient juste trop tordu
+ Bob: apres j'aime beaucoup la maniere dont c'est realise
+ Bob: il y a un vrai boulot sur l'image et la bande-son
+ Bob: et Rami Malek est fabuleux
+ BlaiseEbuth: Yo tout l'monde&#160;! Automaton2000; AutomatonNN&#160;!
+ CopperFr: oui j'ai du regarder que la saison 1
+ Bob: Driikolu, essaye de jouer sur les niveaux des samples que tu fais
+ Driikolu: Ouais, c'est ce que je fais Bob
+ Bob: de memoire c'est un des facteurs les plus simples pour choper du point facilement
+ Driikolu: En gros au début je suis sur des samples lvl 1, une fois que j'ai un minimum d'expertise je passe à des niveaux 2, puis niveaux 3
+ Bob: c'est ca
+ Bob: le truc c'est de trouver les bons seuils
+ Driikolu: Et je tri mes smaples pour essayer de réussir au plus vite un projet
+ Bob: de memoire il faut 5-6 niveau 1, presque pas de 2 et ensuite taper du 3 autant que possible
+ Bob: ah non faut beaucoup plus de 1
+ Driikolu: Je vais essayer de changer les valeurs seuils ouais
+ Bob: chez moi j'ai les seuils a 12 et 15
+ Bob: apres, ca depend pas mal de comment tu geres le reste
+ Driikolu: C'est pas forcément parfait, je me défausse jamais de samples pas utiles pour le projet
+ Bob: ca c'est pas forcement grave
+ Bob: en revanche il vaut mieux privilegier les samples qui contribuent au projet evidemment
+ Driikolu: Ouais c'est ce que je fais
+ Driikolu: Le truc c'est qu'à chaque changement je redeviens premier de la ligue&#160;:')
+ Driikolu: C'est plutôt frustrant
+ Bob: montre voir un replay&#160;?
+ Bob: t'es trop loin pour que j'arrive a jouer contre toi dans l'IDE :D
+ BlaiseEbuth: Les bots sont morts&#160;?
+ Driikolu: Même si je remonte dans le classement&#160;?
+ Driikolu: Tu veux un replay contre un joueur ou contre le boss&#160;?
+ Bob: n'importe
+ Driikolu: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/494228084">https://www.codingame.com/share-replay/494228084</a>
+ Bob: tu prends pas du niveau 2 un peu tot&#160;?
+ Driikolu: Tu crois&#160;?Je vais changer ça
+ Driikolu: En gros pour changer de niveau, je me base sur le nb d'expertise
+ Driikolu: Tant que j'ai moins de 5 expertises, je continue sur du 1
+ Bob: fais plus bourrin, base toi sur le nombre de niveau 1 que tu as pris
+ Driikolu: Je tente avec d'autre chiffres
+ Bob: l'idee de base c'est qu'il te faut pas mal de 1 au debut (une dizaine) pour avoir assez d'expertise pour que les 2 et 3 se fassent quasi instantanement
+ Driikolu: Ouais je vois
+ BlaiseEbuth: Automaton2000&#160;? AutomatonNN&#160;? :sweat:
+ Driikolu: C'est vrai qu'en général quand je perd c'est des gars qui gardent toutes les molécules sur eux
+ Bob: en debut de partie il me semble aussi que tu pourrais prendre plus de matos pour fabriquer plusieurs samples
+ Driikolu: Et du coup je peux pas les faire&#160;:(
+ Driikolu: On peut plus que 3&#160;? :o
+ Bob: plus de molecules j'entends
+ conadal: marrant ce challenge tiens&#160;:) faudra que je le planifie
+ Bob: frame 41 sur ton replay, tu pars a la fabrication avec 6 molecules en main
+ conadal: 8 ans de challenges à rattraper :o)
+ conadal: c comme le tennis, faut battre l'adversaire lol
+ BlaiseEbuth: Bob&#160;?
+ Driikolu: Ah oui, en gros, si je peux pas prendre la molécule au moment où j'essaie, bah j'y retourne pas
+ Driikolu: Ah si j'ai rien dit
+ Bob: tu pourrais en prendre en plus pour ton troisieme sample, meme si tu ne peux pas le terminer a ce tour-ci
+ Bob: au pire, ca bloque des molecules pour l'adversaire
+ Bob: BlaiseEbuth&#160;?
+ Driikolu: En fait je tente de prendre sur les 3 samples
+ BlaiseEbuth: Bob: Rien. J'avais peur d'être devenu invisible. Merci ^^
+ Bob: non non
+ Bob: c'est juste qu'on t'ignore
+ Bob: mais on te voit toujours ouais
+ Bob: il faudrait trouver un truc contre ca&#160;:)
+ BlaiseEbuth: Ca va. Ca me rassure.
+ BlaiseEbuth: Ah les bots ont pas survécu au crash du chat.
+ Bob: c'est le chat qui crashe&#160;?
+ Bob: le reseau est devenu tellement merdique a mon bureau que pour moi c'est de la que les deconnexions proviennen6t
+ BlaiseEbuth: Il a planté ce matin apparement...
+ Driikolu: En gros bob, à chaque fosi que je suis au molécule, si je peux prendre une molécule qui m'est utile dans les samples, je le fait
+ Bob: ben regarde ton replay, frame 41
+ Bob: tu pars a la fabrication avec 6 molecules et tu fais 2 samples
+ Bob: pourquoi tu ne profites pas d'etre aux molecules pour choper une partie de celles dont tu auras besoin pour ton 3e sample&#160;?
+ Driikolu: Ouais.En gros si j'ai 2 samples qui me demandent 1 molécule A chacun... Bah je vais en prendre qu'une
+ Driikolu: Je suis un peu teubé
+ Bob: prends pour completer les plus interessants, au maxi
+ Bob: ensuite tu bouches les trous avec ce que tu peux
+ Driikolu: Ouaip
+ CopperFr: c'est quoi votre molécule préférée&#160;?
+ Bob: en debut de partie le seul moment ou je pars a la fabrication avec moins de 10 molecules c'est si je peux terminer mes trois samples
+ Bob: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/494227749">https://www.codingame.com/share-replay/494227749</a>
+ Bob: CopperFr, CH3-CH2-OH
+ BlaiseEbuth: M'aurait étonné...
+ Driikolu: Bon, faut que je trouve comment faire ça proprement
+ Bob: :angel:
+ Bob: Driikolu, exemple&#160;: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/494227749">https://www.codingame.com/replay/494227749</a>
+ Bob: bon je suis fatigue aussi je viens de le poster
+ Bob: les vacances vont me faire du bien
+ CopperFr: ah ca y'est tu t'es fait virer Bob&#160;?
+ Bob: non pas encore
+ Bob: on n'aura pas de vision beaucoup plus claire avant janvier a priori
+ BlaiseEbuth: trop de fog of war&#160;?
+ Bob: ouais
+ Bob: plusieurs grosses inconnues
+ Bob: principalement, est-ce que les managers techniques vont reussir a convaincre les comptables qu'on ne peut pas juste echanger un dev europeen avec 15 ans de metier contre 4 juniors en Inde a qui il va falloir tout apprendre et qui vont se barrer au bout de deux ans
+ Bob: meme si ca coute le meme prix
+ Sparow: t'as qu'à leur dire que c'est toi qui détient les mdp et les clés d'accès des ordis lol
+ Sparow: et des licences des logiciels
+ Bob: et aussi comment ils vont evaluer les projets d'avenir actuels
+ Bob: il me semble peu vraisemblable qu'ils continuent a tous les financer sans que ca commence a faire renterr de la thune
+ Driikolu: Je me rend compte que je gère très mal mes objets quand j'arrive pas à voir comment avoir une bonne implémentation
+ Driikolu: :D
+ BlaiseEbuth: Faut virer les comptables...
+ Bob: Driikolu&#160;: bah fais pas d'objets alors :D
+ Bob: &lt;/problem&gt;
+ CopperFr: faut pas y compter
+ Driikolu: J'ai fais les objets, parce que jusque là j'étais avec des dictionnaires
+ Driikolu: Je te raconte pas à quel point c'était dégueu
+ Bob: boh
+ Bob: mourir de ca ou d'autre chose
+ Cousnouf: salut ça roule tout le monde? Lol... je viens de comprendre que Python veut ses méthodes de service (init, eq, etc...) en bas de la classe...
+ Bob: salut
+ CopperFr: merci pour l'info
+ Cousnouf: lol
+ Bob: je prendrai grand soin de l'oublier assez vite
+ CopperFr: ben pourquoi&#160;?
+ Cousnouf: dans ce cas tu risques de le retenir.. :P
+ Bob: c'est ca
+ Driikolu: Eh Bob, j'ai l'impression que depuis que je me blindee en molecules bah je suis moins bien classé
+ Bob: mouarf
+ Bob: tu dois avoir un autre souci ailleurs
+ Cousnouf: Bon désolé j'ai dit une connerie, il y avait un souci avec mon formatteur dans mon PyCharm, je suis un putois, Bob tu peux oublier :D
+ CopperFr: ok j'oublie aussi
+ Bob: :pig:
+ Driikolu: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/494238304">https://www.codingame.com/share-replay/494238304</a>
+ Driikolu: Par ex
+ Driikolu: En gros je me blinde mais pas bien comme il faut&#160;:(
+ Bob: bon la faut dire que tu demarres pas avec des super samples
+ Bob: euh surtout du demarre avec du rang 2
+ Bob: en fait
+ Bob: ah non c'est l'autre&#160;?
+ Bob: en tout cas ouais t'as la lose sur le tirage de samples
+ Driikolu: Je devrais d'abord finir mes samples avant d'en prendre de nouveaux je pense
+ CopperFr: on dit échantillon en Français
+ Bob: on dit comme on veut en fait&#160;:)
+ Bon[]Crayon: AutomatonNN t'es re&#160;?
+ Bon[]Crayon: Les bots ont-ils plantés&#160;?
+ Magus: Oh en effet
+ Magus: bizarre
+ simooooon: yo
+ Cobibiz: oui
+ Bon[]Crayon: bonsoir
+ Magus: Automaton2000 AutomatonNN&#160;?
+ Automaton2000: j'ai pas lu les règles&#160;?
+ AutomatonNN: oui je vois pas pour le contest c'est pas pour le puzzle de la base de contest que toi tu peux essay
+ Bon[]Crayon: re AutomatonNN
+ AutomatonNN: oui j'ai fait du code que je suis pas pret de la conversation de la partie de la plateforme de conte
+ Bob: Automaton2000, AutomatonNN, ca fait plaisir de vous retrouver
+ AutomatonNN: oui
+ Automaton2000: je suis à un point du boss
+ Bob: forker DefinitelyTyped pour essayer de proposer une PR, c'est pas exactement instantane dis donc
+ simooooon: hello je cherche un jib
+ simooooon: enfin un job
+ Bob: tu peux avoir un Bob
+ simooooon: zavez compris
+ Bob: mais c'est a peu pres tout ce que je peux te proposer
+ BlaiseEbuth: Essayes chez mcdo
+ Bob: bon c'est nawak ce package
+ Bob: il y a un bout de code qu'ils montrent dans les exemples
+ Bob: juste que y a pas les types correspondants donc en TS on est baise
+ Bob: et je ne vois meme pas comment le truc est effectivement active dans le code
+ Bob: ah ca y est ouf
+ conadal: moi aussi je cherche un Bob :joy:
+ CopperFr: ah tu préféres pas une Alice&#160;?
+ conadal: c comme le sucre dans le lait chaud
+ conadal: ça dépend :joy:
+ CopperFr: mcdo, kfc ou bk&#160;?
+ conadal: contacté par Guarani, cherche un spécialiste C# de plus de 5 ans pfff
+ conadal: suivi dans la foulée d'un mail d'un autre marchand de steaks pour un poste de Ingénieur Système &amp; Réseau OPS à 200km de chez moi
+ BlaiseEbuth: Bah les spécialistes de moisnde cinq ans, faut changer leur couche et tout... Pis ça fait la sieste l'après-midi...
+ conadal: pas faux
+ CopperFr: déjà faire du C# à 5 ans c'est pas mal
+ BlaiseEbuth: Pis c'est pas autorisé dans tout les pays...
+ CopperFr: ah le C# c'est pas autorisé dans tous les pays&#160;?
+ BlaiseEbuth: Si seulement...
+ CopperFr: remarque en chine ils aiment plus trop ce qui est américain
+ BlaiseEbuth: Mais ils ont des experts de moins de cinq ans...
+ CopperFr: oui là-bas ils fabriquent des iphones
+ Bob: c'est pas tous les jours que je fais des PR dans de l'open source dis donc
+ Zorg1: Bob contribue au logiciel libre
+ Zorg1: je suis fier de toi
+ BlaiseEbuth: Ce n'est pas un numéro, c'est un logiciel libre&#160;!
+ Bob: eh c'est la deuxieme fois&#160;:)
+ Bob: c'est un peu intimidant quand tu proposes une PR sur un "gros" truc ou t'as deux pages de recommandations sur comment contribuer
+ Bob: la crainte de faire une grosse connerie de noob :D
+ BlaiseEbuth: Les logiciels libres me font des misères depuis hier...
+ BlaiseEbuth: C'est sur quoi ta pr&#160;?
+ Zorg1: faut avoir le spirit "livraison en prod le vendredi"
+ Tom.py: salut
+ BlaiseEbuth: Que je sache si tu es responsable
+ Bob: il manque un morceau dans @types/mui-datatables
+ Bob: je me suis dit qu'au lieu de betement rentrer une issue, je pourrais me sortir les doigts et essayer de le rajouter, tant qu'a faire
+ BlaiseEbuth: J'ai aucune idée de ce que c'est. Donc ça va.
+ CopperFr: :D
+ Bob: :D
+ BlaiseEbuth: J’essaye de faire fonctionner des trucs qui sont sensés marcher ensemble, mais qui requièrent les uns apache et les autres nginx, qui eux sont pas trop kopins...
+ Bob: bon pour le coup apres si les types sont pourris, je saurai qui engueuler :D
+ BlaiseEbuth: On n'est jamais mieux servi que par soit-même...
+ Bob: bon j'avais prevu de partir du boulot a 17 heures mais j'ai fait progresser la Cause, donc je peux rentrer chez moi avec le sentiment du devoir accompli
+ Bob: et me claquer un bon planteur pour me recompenser
+ Bob: :cocktail:
+ Bob: :tropical_drink: plutot
+ Bob: bonne soiree les choupis
+ BlaiseEbuth: :wave:
+ conadal: :wave:
+ Magellus: pourquoi je ne peux pas laisser un commentaire dans un problème que je viens de résoudre? Il y a un bogue et j'aimerais le signaler...
+ Magellus: j'ai trouvé.
+ BlaiseEbuth: C'est quoi le bug&#160;?
+ Magellus: le mime type me dit qu'il attend "application/pdf" en sortie, mais il n'y a pas de fichier pdf ou pfd dans le dataset en entrée.
+ BlaiseEbuth: J'avais répondu sur le forum. Il y'a des pfd en entrée
+ BlaiseEbuth: si tu parles bien du tout dernier test
+ Magellus: oui, mais j'ai imprimer toute les entrée, et je n'ai pas vu de pdf... est-ce que ça peut avoir un lien avec un message que j'ai vu sur la façon dont l'entré est lu? est-ce qu'il y aurait un temps limite au chargement? 
+ BlaiseEbuth: Il y'a 19K lignes dans ce test, tu ne peux pas les affichers, la console ne te montre qu'un extrait.
+ BlaiseEbuth: Tu peux voir le contenu complet en cliquant sur l'icone de liste au dessus de la zone de test.
+ Magellus: ah ok, merci. dans ce cas, je essayer de comprendre mon erreur...
+ Magellus: Merci! je l'ai réussi finalement! Bonnejournée!&#160;:)
+ BlaiseEbuth: :thumbsup:
+ dwarfie: oh oh oh les tortues ... 
+ leojean890: et les licornes&#160;?
+ dwarfie: et pas automaton2000 ... et toc&#160;!!!
+ Automaton2000: pourvu que ca dure :d
+ dwarfie: Automaton2000&#160;: sale snob va
+ leojean890: ah il a reboot :P
+ Automaton2000: c'est quoi ce que tu te rends compte que tu as fais quoi&#160;?
+ dwarfie: les licornes , on va les laisser a automatonNN ... 
+ Seif-BELHADJALI: oui
+ AutomatonNN: 100% c'est pas trop compliqué de pas trop comprendre le problème de contest de contest tout ca
+ dwarfie: bon ... encore un a qui il va falloir apprendre qu'on fait pas de contrib avec des char unicode ... ca meriterait d'etre dans les guidelines ...
+ CopperFr: tu parles de quoi&#160;?
+ BlaiseEbuth: De quelqu'un qui a mit des caractères unicode dans sa contrib on dirait...
+ dwarfie: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/5594041cc5ef25cc31841e039dd94e67bc8d">https://www.codingame.com/contribute/view/5594041cc5ef25cc31841e039dd94e67bc8d</a>
+ BlaiseEbuth: Grrmbll... Ce serait si terrible de mettre r, b et y&#160;?
+ dwarfie: faut croire ... mais ca serait tellement plus intelligent ... ah ben voila , c'est trop demander du coup :D
+ CopperFr: il me manque un caractère 🟡
+ CopperFr: c'est intéressant l'unicode
+ Zorg1: c'est mignon tout plein son puzzle
+ Zorg1: mais après ça va être pénible à gérer dans tous les langages
+ dwarfie: c'est surtout ca le soucis ... les gens qui pensent faire des sujets juste pour leur langage favori ...
+ dwarfie: ils doivent se croire sur codeware
+ dwarfie: *codewars
+ CopperFr: je crois j'ai fait un puzzle similaire sur codewars
+ Zorg1: ah c'est un clash en plus
+ dwarfie: CopperFr ... en fait , y'a un paquet de contrib qui sont des plagias d'autres sites , donc ca m'etonnerait qu'a moitie
+ Zorg1: bah t'as aussi des problèmes qui viennent de recueil de puzzles, etc ...
+ Zorg1: perso ça me choque pas trop, ils ne sont pas forcément dénué d'intérêt
+ dwarfie: moi ca me derange pas qu'on s'inspire d'un sujet ... mais quand c'est du copier-coller (ce qui est souvent le cas) ca me derange un peu plus ... mais bon , vu qu'on a eu comme ordre de plus contrer les plagias ...
+ Zorg1: la frontière entre l'inspiration et le plagiat
+ Zorg1: ensuite tu peux pas trop copier/coller d'un site à l'autre faut quand même adapté
+ dwarfie: pas vraiment en fait ... je peut prendre certains sujets pas mal de codewars et les coller direct ici sans soucis si je veut (ou d'autres sites d'ailleurs) ...
+ Zorg1: parce que bon le puzzle BrainFuck de BlaiseEbuth tu peux dire que c'est du plagiat t'en a des tonnes comme ça à droite à gauche 
+ dwarfie: lui au moins , il a fait ses propres jeux de tests ... ca fait deja une grosse difference :D
+ BiMathAx: Salut a tous, j'ai un pb avec le puzzle sudoku
+ BiMathAx: J'ai 100% dans l'ide mais que 80% au resultat... Est ce que quelqu'un sait Pourquoi&#160;?
+ dwarfie: d'abord , lequel&#160;? y'en a plusieurs ... ensuite , soit timeout , soit t'as pas la bonne solution ...
+ BiMathAx: Zut c'est le puzzle TictacToe (je me Trompe tout le temps...) de LaFayette en facile
+ BiMathAx: Cependant, c'est pas un time out parceque, dans l'ide j'ai 100%
+ dwarfie: sauf que ca veut rien dire , c'est pas les meme jeu de tests ....
+ dwarfie: sur quel jeu de test ca foire&#160;?
+ BiMathAx: Le no win condition
+ BiMathAx: Pourtant mon code est opti&#160;: il compte combien y a de case vide et si il y en a 9 (si elles sont toutes vides), il print('false')
+ dwarfie: sauf que le validateur ... c'est tout les cases pleines ...
+ BiMathAx: Ha j'avais pas fait gaffe... Merci
+ dwarfie: ben , tu peut pas le deviner en fait ... mais ca veut dire que ta solution checke pas tous les cas ...
+ BiMathAx: Oe c'est bon j'ai reverif mon code et j'ai eu 100%Merci beaucoup
+ dwarfie: de rien
+ BlaiseEbuth: Reuh
+ BlaiseEbuth: C'est tout mort ici... Automaton2000, chante une chanson.
+ Automaton2000: pas assez de temps à perdre
+ BlaiseEbuth: (╯°□°）╯︵ ┻━┻
+ Zorg1: je passe en coup de vent et je vois un modo balancer des tables
+ BlaiseEbuth: On va dire que c'est le coup de vent qui a renversé la table.
+ Zorg1: si c'est comme ça je retourne demander des conseils de jeux du dernier AAA sur discord
+ Zorg1: et je vais aussi aller dormir, tiens, c'est pas une mauvaise idée à cette heure ...
+ BlaiseEbuth: Qui a besoin de dormir&#160;?!
+ BlaiseEbuth: C'est surfait...
+ leojean890: j'avoue&#160;!

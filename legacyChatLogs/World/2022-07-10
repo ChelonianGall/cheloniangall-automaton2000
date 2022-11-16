@@ -1,0 +1,671 @@
+ gokubill: hi 
+ jacek: oO
+ gokubill: spam spam =]]
+ Zorg1: nice gn spam&#160;;-)
+ aCat: morning
+ aCat: (late morning I mean ;p)
+ j4at: morning
+ jacek: j4at overnight training brought me to 6th :tada:
+ j4at: :tada:
+ eulerscheZahl: for me the night brought me to 10th already
+ putibuzu: gz
+ jacek: bz2
+ MSmits: lol, this submti
+ MSmits: submit
+ MSmits: <a rel="nofollow" class="external free" href="http://cgstats.magusgeek.com/app/multi-tic-tac-toe/msmits">http://cgstats.magusgeek.com/app/multi-tic-tac-toe/msmits</a>
+ MSmits: if i spam this bot, jacek is 2nd and robo goes out of the top 10
+ jacek: spam plx
+ MSmits: hehe sorry, just experimenting. I think this is a good one, but it's hard to say when most of its rating comes from bashing robo
+ jacek: good enough
+ MSmits: I've had one before that did the same to you. I wonder if that one was better 
+ jacek: im at the about its 100% win against my test bots <a rel="nofollow" class="external free" href="https://i.imgur.com/xXsANfw.png">https://i.imgur.com/xXsANfw.png</a>
+ jacek: its improving but i cant see it anymore
+ MSmits: looks good
+ jacek: at the point*
+ MSmits: make more testbots
+ jacek: i think i can get to top3 with those inputs. i thought using inputs for the whole board would be required
+ MSmits: i can't comment on that, i havent tried to understand the game yet
+ jacek: i dont understand that game either ~
+ MSmits: right, but if i did, i could help you maybe. Too busy with crosses and circles though
+ IonutH: hi. what happens if I submit my code  with 0% result in Clash of Code? How does affect my rank? What if others do the same in a game? Do I have an advantage if I do it fist, meaning to give up?
+ jacek: its based on rank. if youre 1st with 0% then you win
+ jacek: or if shortest, 0% with 0 bytes wins i think
+ Thorcode: 0 bytes in shortest lose
+ jacek: oh
+ IonutH: thank you for answers
+ Thorcode: you must type a letter
+ Thorcode: if you give up
+ MSmits: an apology letter?
+ Thorcode: in shortest if you give you just delete all and type an letter
+ jacek: thats short for sure
+ IonutH: oh nice hint
+ MSmits: err, it's better just to not lose&#160;:)
+ Thorcode: it give you a chance to win
+ MSmits: I guess
+ j4at: jacek what hardware are you using for training?
+ MSmits: he's using a chromebook :P
+ j4at: yeah, probably :p
+ jacek: cpu ryzen 7 5800X. i have 2060 gpu but i didnt managed to make it work to my needs yet
+ j4at: my dude have a gpu and using the cpu instead :p
+ jacek: :shrug:
+ DomiKo: j4cat gpu is useless 
+ DomiKo: trust me
+ j4at: no its not
+ DomiKo: yes it is
+ j4at: it speeds training a lot
+ DomiKo: not really 
+ j4at: huh&#160;????
+ DomiKo: its speeds when you network is big
+ jacek: maybe for big deep nets
+ j4at: use  a big batch size
+ j4at: problem fixed&#160;:)
+ DomiKo: but for small networks cost of transfering memory from CPU to GPU is much higher then rest
+ DomiKo: no
+ DomiKo: it's not about batch size
+ j4at: you do'nt need to transfer it tho
+ jacek: + big batch size leads to poorer training
+ DomiKo: true
+ RafIntalian: Hello everyone
+ j4at: well it really depends
+ MSmits: hello RafIntalian
+ j4at: for exemple openai is using 2million batchsize for gpt3 :p
+ j4at: There is some tricks to make larger batchsize better
+ jacek: jax or evojax looks promising for many small nets
+ MSmits: jax? shortened from jacek?
+ j4at: I'm using 512 batchsize for my search race
+ MSmits: jaxmax
+ DomiKo: 512 is not much, but when you have many millions of samples, you can't fit them into GPU, so you have to transfer
+ j4at: heh&#160;? you said small neural networks
+ DomiKo: network is small, but you have many samples
+ j4at: That is not costly really
+ j4at: I keep all samples in the CPU
+ DomiKo: transferring the memory?
+ j4at: transferring samples yes
+ j4at: because we are not dealing with images here
+ DomiKo: images?
+ DomiKo: for me memory transfer is around 80% of the whole GPU time
+ j4at: maybe you are doing it wrong
+ jacek: plug your gpu closer to ram
+ DomiKo: PyTorch lighting is doing everything for me
+ DomiKo: so I can't really do something wrong
+ MSmits: lighting? I thought it was for training NN
+ j4at: maybe your gpu is connected to psu x1 or something
+ j4at: lmao
+ DomiKo: MSmits yeah lighting
+ MSmits: I guess usually training NN gives heat, but I guess pytorch is different
+ MSmits: is it natural light? Or more like LED?
+ jacek: its optical computer
+ DomiKo: xD
+ DomiKo: it's lighting fast! 
+ MSmits: I am starting to get the sense you mean lightning?
+ DomiKo: ohh yeah
+ j4at: did a test. in gpu it takes .05s for every "iteration" (training 4 nns) and in cpu it takes 1s even if i made it train 1/2 nns it will still be faster
+ j4at: Maybe you have gtx 1030
+ j4at: or using an igpu
+ j4at: with 2 nn it takes .025s proving that data transfer almost takes no time in this case
+ putibuzu: how large are the NNs?
+ j4at: Well its hard to explain. I will make them even smaller
+ putibuzu: what data is being transferred here? training samples? and the weights are already stored in GPU memory?
+ j4at: yes
+ putibuzu: ok thanks&#160;:) I was always wondering how people make use of GPU for training
+ putibuzu: to clarify do you use the GPU for forward pass as well?
+ j4at: i use gpu foreverything yes&#160;:)
+ jacek: to make coffee as well?
+ j4at: yeah i use the extra heat :p
+ putibuzu: ok then you basically only have to transfer the weights at the beginning of training and when writing to disk right? and the weights are modified during training in the GPU memory
+ MSmits: and can it do lighting like DomiKo's&#160;?
+ j4at: putibuzu The weights gets initialized directly in the GPU
+ putibuzu: j4at alright thanks!
+ j4at: They are critic nns so they don't need to fit in cg because i'm using the actors. But even when i made them small enough to fit in cg.  gpu takes .01s and cpu .06s
+ MSmits: will it use the same amount of energy in total, to train the NN? 
+ j4at: less energy
+ MSmits: hmm 
+ j4at: because gpu is more energy efficient
+ jacek: if you managed to work with your gpu, fine. i didnt
+ j4at: and when I train it on small nns like this it uses like 10% of its power
+ j4at: With  pytorch/keras its pretty easy
+ jacek: <a rel="nofollow" class="external free" href="https://i.kym-cdn.com/photos/images/newsfeed/001/450/824/6a8.jpg">https://i.kym-cdn.com/photos/images/newsfeed/001/450/824/6a8.jpg</a>
+ MSmits: is that shaggy?
+ j4at: I didn't use mixed-precision either with mixed-precision you can get 2x the speed
+ jacek: MSmits yes
+ MSmits: 495 submits in uttt
+ jacek: ban :hammer:
+ MSmits: (over 4 yrs)
+ DomiKo: j4cat
+ DomiKo: <a rel="nofollow" class="external free" href="https://colab.research.google.com/drive/1y7a0_ovqgtNDikXKr4rapEqJFlQ1Ksde?usp=sharing">https://colab.research.google.com/drive/1y7a0_ovqgtNDikXKr4rapEqJFlQ1Ksde?usp=sharing</a>
+ DomiKo: simple example where cpu = gpu
+ j4at: colab gpus are trash
+ j4at: they are randomly choosen
+ DomiKo: cpu are too
+ j4at: you can get a good gpu or a very slow one
+ j4at: do the same test in kaggle
+ j4at: and send me the results :p
+ DomiKo: even in simple test when I move whole data set to cuda and then train, it takes 1s less (from 8s) 
+ DomiKo: so yeah that proves my point that transferring that is very costly
+ DomiKo: and I never used kaggle, so I can't do it
+ j4at: That model is less than 40k weights half my nns size. I will test it on my computer and send results
+ DomiKo: it was just a simple test
+ j4at: well, I timed only the training not moving the model too. And the results are 4.96s in gpu and 5.87s in cpu. 512 inputs is more than my 112 input and my model is 2 times bigger.
+ j4at: also you are using 1 core to load the data
+ j4at: I will try using all cores
+ j4at: 3.9s in gpu and 4.45s in cpu
+ DomiKo: still pretty close and have have new GPU
+ DomiKo: " 512 inputs is more than my 112 input and my model is 2 times bigger." as I sad it's just a simple example
+ DomiKo: I just typed some random numbers
+ DomiKo: but especially with one hot inputs, you can have huge input layer compared to the model size
+ j4at: Did some optimizations and now its 3.78s, yeah maybe you are kinda correct DomiKo gpu is only 2 times faster than cpu in this case even after I increasesd the size to 80k weights
+ j4at: without changing input size
+ DomiKo: and with CPU you can train in parallel 
+ j4at: IN gpu too
+ j4at: atleast using pytorch
+ j4at: but for actor critic gpu is a lot faster. Because you have 2 nns + you can make the critic as big as you want
+ jacek: youre so critical
+ j4at: + if you use attention or cnns other other fancy operations cpu takes a lot a lot longer
+ DomiKo: yes it would
+ j4at: "have new GPU" Domiko I have gtx 1080 so I don't have tensor core&#160;:'( I rent gpu's online&#160;:'(
+ DomiKo: :cry:
+ MSmits: <a rel="nofollow" class="external free" href="http://cgstats.magusgeek.com/app/multi-tic-tac-toe/msmits">http://cgstats.magusgeek.com/app/multi-tic-tac-toe/msmits</a>   This version is a NN-buster. only robo unscathed
+ MSmits: it's funny that when you have enough different versions, you can just decide who is nr 1-2-3
+ jacek: one man shall not have that much power
+ MSmits: :grin:
+ MSmits: could have kicked recurse out of top 10 with that too
+ DomiKo: LOL
+ MSmits: 17 W / 6 L
+ MSmits: 1 D
+ MSmits: if I had more random in my bot this would not have been an option. The fixed eval and no random rollouts really makes this happen
+ MSmits: i should keep a library of such bots for each arena and then when someone annoys me, I'll submit my destroyer bot for that specific person :P
+ MSmits: it's evil
+ j4at: jokes on you my bots are not good enough to reach the top.
+ putibuzu: :D 
+ MSmits: lol
+ DomiKo: MSmits so you will be like an ultimate mod?
+ Aldoggen: the Great Mod
+ Aldoggen: aka God
+ MSmits: sure why not&#160;:)
+ MSmits: it's weird, because my bot is not strong enough to get nr 1. 4 at most, if i am lucky. 
+ j4at: Can i join your cult&#160;?
+ MSmits: sure
+ j4at:&#160;:)
+ DomiKo: MSmits 4th is still impresive 
+ DomiKo: and it really shows how strong karliso is 
+ MSmits: Yeah
+ MSmits: personally I think he is the best bot on the board. I can make versions that beat any NN, but i cant do the same for karliso. His bot is more random
+ jacek: should i put more random
+ jacek: :imp:
+ MSmits: you could, but it might make your bot weaker
+ jacek: as long as its anti-MSmits
+ MSmits: mmh it wont help that much, when i wreck robo or recurse, it is by a lot. Yours already does reasonably well
+ MSmits: because you already have the random
+ MSmits: my bot is also just around your bots rating, similar strength. without any RPS
+ MSmits: I think yours is a little bit stronger
+ MSmits: oh and wait till you start experimenting with anti-msmits stuff. I should be done fitting params after today. I'll be generating a book after that, but that takes weeks
+ struct: NNs are over rated I knew it
+ jacek: referee should tell you opponent's name. that would make things easier
+ MSmits: so true
+ MSmits: it would be funny if your bot could read opponent msg output
+ MSmits: identify opponent that way
+ MSmits: well, there sometimes is a way, if you want to go that far. In many games, the top bots have a specific but different first few moves. You could detect them that way
+ MSmits: I never did that personally
+ MSmits: doesnt work on onitama and such of course
+ j4at: download top 20 players games and train a NN to identify the player
+ MSmits: lol
+ MSmits: thats some meta machine learning
+ jacek: <a rel="nofollow" class="external free" href="https://maiachess.com/">https://maiachess.com/</a>
+ StevenV: hello guys
+ MSmits: jacek now make a chess engine that plays like a monkey
+ struct: Maybe they can play chess
+ MSmits: they can play some games
+ MSmits: I don't think banana-motivation is enough to get it to learn the rules of the game
+ StevenV: I am gonna learn kotlin, is it good for COC?
+ eulerscheZahl: no. but that's a strange priority to learn or not to learn a langauge anyways
+ struct: I dont think so
+ struct: MSmits have you ever seen them doing chimp test?
+ jacek: kotlin compiler is slow here and might even timeout
+ jacek: <a rel="nofollow" class="external free" href="https://en.wikipedia.org/wiki/Infinite_monkey_theorem#Actual_monkeys">https://en.wikipedia.org/wiki/Infinite_monkey_theorem#Actual_monkeys</a>
+ j4at: StevenV try vb.net jacek recommended it to me.
+ StevenV: I am an experienced Java dev, that's why I want to learn Kotlin...
+ MSmits: i saw some stuff, not sure if i saw that struct
+ j4at: hehe&#160;:)
+ jacek: try fortran or cobol. much future
+ StevenV:&#160;:(
+ jacek: kotlin is fine. its just weird for clashes
+ DomiKo: for clashes everything should be fine, except shortest... 
+ StevenV: thanks guys, I guess I just use kotlin to solve puzzles then
+ j4at: yeah only shortest... fastest and reversed&#160;:)
+ Thorcode: using clash to learn new language
+ Thorcode: clash is good to learn new language
+ MSmits: made it to 3&#160;:)
+ MSmits: <a rel="nofollow" class="external free" href="http://cgstats.magusgeek.com/app/multi-tic-tac-toe/msmits">http://cgstats.magusgeek.com/app/multi-tic-tac-toe/msmits</a>
+ MSmits: all NN's matched or busted&#160;:)
+ Thorcode: cool
+ MSmits: damn that karliso though =)
+ Thorcode: just made it to bronze
+ Thorcode: that tic tac toe game is hard
+ Thorcode: due to changing board
+ MSmits: yes, its a huge change
+ MSmits: i would have preferred some leagues where the normal TTT boss just becomes better
+ Thorcode: through wood ez
+ Thorcode: but bronze like a lot of pain
+ MSmits: the simulation is still quite simple though
+ MSmits: it's just hard to know what is a good move
+ Thorcode: sometime
+ MSmits: i have been toying with the idea of making a new UTTT contribution with better TTT leagues and final league has steal as an option
+ Thorcode: I could get to bronze by brute force
+ MSmits: then you dont need mirror matches either
+ Thorcode: oh that's seem fun
+ MSmits: I never made a game before though, on CG
+ MSmits: and have to find the time
+ miszu: Hey all, are there any competition where it's all based on heuristics and none on wiriting bulletproof simulation and engine?
+ MSmits: you mean bot arena's?
+ MSmits: yes plenty
+ miszu: yeah
+ MSmits: code a la mode is closest to an all-heuristics competition
+ miszu: I find it teadious writing an engine.
+ miszu: I just want to read the inputs and do the best heuristic
+ MSmits: as for tedious, my code a la mode bot had 3k lines :P
+ miszu: bruuh
+ Thorcode: how
+ MSmits: i did have search but, so many ifs
+ MSmits: over 300+
+ MSmits: you did ask for heuristic arena's
+ miszu: I know
+ MSmits: means many ifs
+ MSmits: = much code
+ miszu: as long as I don't need to sims
+ MSmits: the winner didnt have sim
+ MSmits: of the contest that is
+ MSmits: python winner
+ MSmits: I ended 8th with beamsearch
+ miszu: so I can get to play with just heuristic?
+ MSmits: i was an exception, most did not use search
+ miszu: plat*
+ miszu: I mean legendary lol
+ MSmits: easily
+ MSmits: well
+ MSmits: write good heuristics :0
+ miszu: I will :0
+ MSmits: and pick up my damn plate
+ MSmits: :rage:
+ Thorcode: brute force
+ miszu: Don't tell me what to do
+ miszu: I am an unionized coder
+ miszu: we have rights
+ MSmits: miszu in the contest i would put down finished plates, that had to be carried to the dropoff and when the other bot was closer, i would attempt to pass it to them
+ MSmits: but i got ignored a lot
+ MSmits: (it's a cooperative arena)
+ miszu: Interesting
+ miszu: I will have a try then
+ MSmits: it's really fun imho
+ Thorcode: gotta learn something new
+ Thorcode: bye
+ MSmits: bye Thorcode
+ miszu: I was doing coding royale but when I saw to go to legendary you need to write a buggy sim and engine...
+ miszu: I was like life is too short for that
+ MSmits: heh i can get that
+ MSmits: sims for simple boardgames are not a lot of work though
+ miszu: yeah that's fine
+ miszu: but like the pod racing?
+ MSmits: yeah thats work
+ MSmits: and there are worse ones
+ miszu: the fun part is the heuristics
+ MSmits: sometimes it's fun
+ MSmits: sometimes i just dont know what to use
+ MSmits: last contest i didnt know
+ MSmits: i just bruteforced my own turn and got to legend that way
+ miszu: I wish we could do a manual mode where you just play the game yourself
+ MSmits: yeah that would be fun
+ MSmits: jacek, good news, you rank above recurse and are still 4th
+ HenroLST: morning
+ MSmits: I'm done fitting params, so if you want, mess around to create anti-smits, but you'll push recurse back up, that's the price
+ MSmits: morning HenroLST
+ HenroLST: geez how are you guys always awake and coding
+ HenroLST: are you like lucid dreaming just to code in your sleep too???
+ MSmits: only during contests
+ MSmits: this is me relax-coding
+ HenroLST: dang
+ HenroLST: ok i need to up my game then :sweat_smile:
+ MSmits: just enjoy and you'll code more
+ HenroLST: yup
+ HenroLST: wait just out of curiosity can you make a NN in c++?
+ MSmits: you can make a NN in anything
+ HenroLST: ooo something to look forward to in the future then
+ MSmits: generally it is easier to use one of those python frameworks you can find 
+ MSmits: you can also export the weights you get with those and then use them in a c++ bot
+ MSmits: thats what many do on CG
+ HenroLST: ah
+ HenroLST: or just grab from stack overflow :stuck_out_tongue_closed_eyes:
+ MSmits: but in the end a NN is just a program, so it's not language specific
+ Illedan: During offline training. Is it better to test against a constant population or create a new population to do round robin against each round?
+ MSmits: for testing probably better to have constant set of bots
+ MSmits: otherwise how will you know you improved
+ Illedan: Yeah, I'm getting stuck on that thought now :thinking:
+ Illedan: So I need to figure out how to make a good variety of bots :D
+ jacek: that was my problem in green circle
+ jacek: later i used bots trained with different hyperparams for testing
+ jacek: at the beginning i was testing against random and the 1st action bot only
+ jacek: maybe if i knew the game i'd make some simple heuristic bot as well
+ Illedan: Now I'm creating a new population of 4 new mutated bots + the best from the prev round. Then doing 20 games between all pairs (80 games for each)
+ D4WEED: (╯°□°）╯︵ ┻━┻
+ Illedan: This is for FB
+ jacek: NN? :scream:
+ Illedan: Nah, GA hyper param training
+ Illedan: Could put them through some NN though
+ jacek: im doing pure round robin, coevolution for clash of bots. i just ran out of testing bots, its 100% wins against all of them now
+ jacek: <a rel="nofollow" class="external free" href="https://i.imgur.com/VBecERg.png">https://i.imgur.com/VBecERg.png</a>
+ HenroLST: bot
+ Illedan: I'll change to a population of 2 and just save all the new best mutations. To get a validation population
+ jacek: sounds incest
+ Illedan: My newly trained IAs have dropped re Curse 2 points since yesterday. So soon I can have hopes of being first :eyes:
+ jacek: so incest is wincest?
+ Illedan: Only the good kind of incest
+ HenroLST: ...
+ MSmits: jeez, I am away from the computer for 1  second...
+ Illedan: Hm, I'm talking about my GA genomes
+ MSmits: o
+ jacek: and youre inbreeding them
+ HenroLST: imagine reCurse comes back just to win that particular event
+ struct: he is retired
+ Illedan: Did he say?
+ Illedan: Or just asumptions?
+ struct: it says on his CG profile
+ struct: retired from CG
+ Astrobytes: and he did say he was done
+ Illedan: I guess his last contest win was enough to prove everything
+ struct: I guess I'll never retire
+ jacek: he said not-first in contest or retire
+ karliso: MSmits wow, look at you, what have you done to uttt leaderboard?
+ Astrobytes: probably concentrating on chess, and little recurs e too of course
+ struct: karliso his bot is now eval instead of rollout
+ karliso: yeah, I wonder how hard it is to come up with good eval.. or just that noone gave it serious try.
+ Illedan: 1 random move and then eval all the way?
+ struct: eval on expansion Illedan
+ Illedan: Which is?
+ struct: MCTS select expandon expansion when you create a node you eval it
+ struct: instead of doing a rollout
+ Illedan: And then do rollouts afterwards?
+ struct: yeah no rollout
+ struct: just eval straight away
+ MSmits: karliso yeah i messed it up&#160;:)
+ struct: Am I right MSmits?
+ Illedan: I don't quite understand
+ MSmits: yes struct
+ MSmits: just dont do the random rollout in mcts
+ MSmits: replace it with eval score
+ MSmits: and backpropagate that also
+ Illedan: Ok, so you the rollout to some depth?
+ Illedan: And then eval instead?
+ Illedan: *you do the
+ MSmits: my depth for this is 0
+ MSmits: i expand, then eval immediately
+ Illedan: So it is instant?
+ MSmits: yes
+ MSmits: selection -&gt; expansion -&gt; eval
+ Illedan: Done in 1 ms?
+ MSmits: eh no i do this 100k times per turn :P
+ struct: he does normal mcts just no rollout
+ Illedan: hmm
+ MSmits: to be clear, 142k on 2nd turn
+ jacek: jacekmax or mcts?
+ MSmits: eval is pretty expensive
+ MSmits: not jackemax no
+ MSmits: I dont know how that would do
+ Illedan: Got any documentation that I can read?
+ MSmits: nope, but it really isnt complicated. Imagine a normal mcts
+ DomiKo: MSmits with eval you have more itererations?
+ MSmits: at some point you have a line that says score = Simulation ()
+ MSmits: replace that with
+ MSmits: score = Evaluation(0
+ jacek: mcts early playout termination, though they play for N random moves, then eval instead of checking win/loss
+ MSmits: DomiKo a little more yes
+ jacek: more in the beginning but probably less in ending
+ MSmits: but the eval contains a lot of ifs and lookups so its not a lot
+ karliso: So you normalize eval to -1 1 or equivalent? 
+ MSmits: i dont normalize
+ MSmits: what i did was, i keep the exploration param at 1.0
+ MSmits: and fit the other parameters to something that works
+ jacek: would switching to rollouts from late midgame be better?
+ MSmits: it could totally be the case that there are regions in the game where rollout is better or eval is better
+ MSmits: karliso the working params are such that the scores more or less fall into the same range. Sometimes they go at most to -2 or +3 or something
+ MSmits: btw, it was not hard to make an eval that gets into top 100 for uttt. a simple eval that makes sense will get you there. A good eval is harder
+ karliso: How long did it take for you?
+ MSmits: i had this bot from a year ago, i worked on it then a week or so, but i gave up to soon. I picked it up now and improved it in a few days
+ MSmits: the other bot was ranked around 15th
+ MSmits: (the earlier eval bot i mean, mcts was ranked 8)
+ MSmits: 8 lol... damn emotes
+ MSmits: but just the fact that a neural network can be trained to eval uttt should tell you it's possible. 
+ karliso: But beating NN is a different thing.
+ MSmits: i am not sure it is an entirely fair comparison. I suspect if you look at the games, they are often the same game
+ MSmits: if i change 1 param by 0.1, suddenly recurse wrecks me, or robo does
+ MSmits: if both bots do not use random, it can get kind of boring
+ MSmits: but the bot does well vs other bots too, so i wont complain
+ jacek: :rage:
+ jacek: im so happy for you
+ MSmits: I can tell :P
+ MSmits: dont worry, i am sure i'll get pulled back down when the other top 10 bots resubmit.
+ MSmits: the nn's tend to do better vs random bots
+ MSmits: vingte, tomatoes or yurko can ruin my day
+ MSmits: <a rel="nofollow" class="external free" href="http://cgstats.magusgeek.com/app/multi-tic-tac-toe/msmits">http://cgstats.magusgeek.com/app/multi-tic-tac-toe/msmits</a>
+ MSmits: i will not get much better than 50% and the NN's will much more
+ _NikJ: Now, what I'M wondering is, what kind of magic did reCurse cast in order to get such an insanely high score in mad pod racing?His win ratio is like 96% lol
+ jacek: we may never know
+ MSmits: _NikJ mad pod racing is kind of strange in that sense though. If 1 bot is better than another, even if only a little, they quickly get 100% wr
+ MSmits: only a small margin in bot strength is necessary to get very high WR
+ MSmits: the same margin in uttt would get you maybe 55%
+ putibuzu: MSmits what techniques do you use for parameter fitting? 
+ MSmits: crap techniques
+ MSmits: i tried first locally playing vs my normal mcts bot
+ MSmits: i figured it wouldn't overfit but it eventually did. It would even wreck my mcts both with 500 ms calc time
+ MSmits: so then i just tried stuff on the leaderboard
+ MSmits: (submit)
+ MSmits: thankfully I only have a few params now
+ MSmits: I think 3 main ones, the other ones are pretty basic and can be independently fitted (similar to exploration param)
+ MSmits: for example, I have a mobility param, that subtracts from the score. childCount * param
+ MSmits: that doesnt really depend on anything else I think, so i just fitted it once
+ MSmits: (it's bad to give your opponent more choices)
+ putibuzu: ah ok thanks&#160;:)
+ MSmits: if i had to do it better, i would probably do a GA. I should make a frame work for it
+ MSmits: it would be nice to have one for next contest
+ MSmits: where you just plug in your bot with the ability to pass param value and then the framework starts them fighting
+ putibuzu: hat sounds interesting :thinking:
+ putibuzu: *that
+ MSmits: yeah i think there are some ways like that, but GA is fairly simple and works well. I just haven't done it yet
+ putibuzu: Alright thanks&#160;:) I'm looking forward to you taking #1&#160;:)
+ MSmits: not by fiddling more params, but i am generating an opening book. That should help
+ MSmits: I am not counterbooking though
+ jacek: books :unamused:
+ MSmits: I am not feeling guilty for using them when others spend days locally training their NN and filling their codesize with weights&#160;:)
+ MSmits: counterbook is cheesy though
+ TimeEngineer: :joy:
+ Illedan: I wonder if I can get into UTTT legend by only using books?
+ MSmits: books are really weak in uttt, there are better games to use them
+ MSmits: problem is that there are many ways to play well, so there's many plays to counter
+ MSmits: game winning/losing mistakes happen somewhere between ply 18 and 30 for good bots
+ MSmits: and books dont usually go that deep
+ MSmits: I am just hoping for a few&#160;% WR from them
+ Illedan: How many moves can you fit in a book?
+ MSmits: depends on the game
+ Illedan: UTTT ofc
+ Illedan: I know it depends :P
+ jacek: not many transpositions there
+ MSmits: i am thinking
+ jacek: :scream:
+ MSmits: probably around 200k
+ MSmits: but you'd need to minify your code to a negligible amount or it'll be less
+ MSmits: i have never hit the limit though
+ Illedan: Maybe I'll try for UTTT
+ Illedan: See if pure lookup can go to Legend :D
+ Illedan: Can't do anything while FB is training locally
+ MSmits: well, you wont be able to do pure lookup. Still need some heuristics to finish off
+ Illedan: Nah ^^
+ MSmits: you wont be able to finish a single game just with lookups :P
+ TimeEngineer: What's difference between Qtable and books&#160;?
+ MSmits: it's the same thing i guess
+ TimeEngineer: I see
+ MSmits: Qtable stores states with actions right?
+ TimeEngineer: Yes
+ MSmits: yeah same thing
+ MSmits: I dont store the states though
+ MSmits: just the moves, in a tree starting from the root
+ MSmits: moves are much smaller than the whole game state
+ jacek: how do you deal with transpositions
+ TimeEngineer: That's the question
+ MSmits: I deal with it locally. 
+ MSmits: I don't generate moves in the tree that are duplicate
+ TimeEngineer: Many actions can lead to the same state
+ MSmits: if it hits a gamestate i find in another branch, then it ends there, as a leaf
+ MSmits: locally when generating book, i take into account rotations, but also other kinds of transpositions
+ MSmits: when in my bot, i need to lookup a move, I try all rotations of the current state, to see if it matches with a state from the book
+ TimeEngineer: Do you use NN for UTTT jacek&#160;? if so you used a CNN&#160;? I'm wondering because of rotation invariance
+ jacek: i use NN, but good old one-hots
+ jacek: i just add rotations to training positions
+ MSmits: did you do the inside-out transposition for nmm?
+ jacek: the what
+ MSmits: switch the inner ring with the outer ring
+ MSmits: it has 16 ways to transform the board
+ TimeEngineer: What XD&#160;?
+ MSmits: nine mens morris
+ jacek: no, just rotations and symmetries
+ TimeEngineer: Ah it's another game :p
+ MSmits: ahh thats sad jacek, could have doubled your training states =)
+ jacek: i have no motivation, im still 1st&#160;:(
+ MSmits: true
+ MSmits: TimeEngineer uttt has 8 symmetries,  yavalath has 12 and nmm has 16, it is kind of special that way
+ MSmits: besides it being bitboardable with only 24 bits per player
+ TimeEngineer: I have never played others game
+ MSmits: which game have you played?
+ TimeEngineer: UTTT only
+ MSmits: ohh ok
+ jacek: not even green circle?
+ TimeEngineer: And I learned the rules yesterday
+ MSmits: tons of interesting board games here
+ TimeEngineer: Among what he says
+ TimeEngineer: Yes I played GC ofc
+ TimeEngineer: I used UTTT to learn NN from scratch but I don't really like them :p
+ MSmits: uttt is not a good starting place for nn afaik
+ TimeEngineer: What's the best place then&#160;?
+ jacek: oware
+ MSmits: oware probably
+ MSmits: gotta go for a bit, garden work
+ jacek: its just quite recently NN took over UTTT
+ TimeEngineer: See you
+ MSmits: ttyl
+ jacek: even recurse had problems with them most of the time
+ TimeEngineer: Why is he so popular&#160;?
+ MSmits: thats not the right word to use
+ TimeEngineer: Why even him&#160;?
+ MSmits: he's just very very good
+ Illedan: 1 more very needed
+ MSmits: allright going to pull some weeds now
+ Illedan: gl
+ Astrobytes: "weeds" eh
+ jacek: in holand :thinking:
+ Astrobytes: :D
+ Passifi: wooo wooo  wooo I did it I finally solved Labyrinth woooo the dopamin rush, the joy .... and its gone :upside_down: next puzzle&#160;;)
+ jacek: space maze?
+ eulerscheZahl: bender 4
+ jacek: galaxy labyrinth?
+ Passifi: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/hard/the-labyrinth">https://www.codingame.com/training/hard/the-labyrinth</a>
+ eulerscheZahl: we know the puzzle
+ Passifi: okay I thought there was ambiguity&#160;;)
+ eulerscheZahl: suggestions for your next one
+ Passifi: always appreciated yes
+ eulerscheZahl: there are more mazes to solve
+ Passifi: oh I see I know see the space maze puzzle in the very hard section I was confused here for a minute and bender 4 is another maze one&#160;?
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/optimization/bender---episode-4">https://www.codingame.com/multiplayer/optimization/bender---episode-4</a>
+ eulerscheZahl: there's also sokoban for mazes
+ Passifi: ah cool thanks
+ jacek: :tada: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/650637883">https://www.codingame.com/share-replay/650637883</a>
+ PatrickMcGinnisII: Promotion to Wood 1 League in&#160;:00H 00MN 24SC
+ PatrickMcGinnisII: CTTT
+ jacek: ezpz
+ DomiKo: gz gz
+ jacek: bz2 even
+ BlaiseEbuth: Hey hey! use my starter go legend. ezpz
+ geppoz: Passifi try this <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/the-fall-episode-3">https://www.codingame.com/ide/puzzle/the-fall-episode-3</a>
+ geppoz: well, passing by <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/the-fall-episode-1">https://www.codingame.com/ide/puzzle/the-fall-episode-1</a> and <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/the-fall-episode-2">https://www.codingame.com/ide/puzzle/the-fall-episode-2</a>
+ PatrickMcGinnisII: 63rd, ok
+ Illedan: Nice jacek. Do you NN consider all inputs together? Or only 1 robot?
+ jacek: only 1 robot. + number of robots and rounds
+ Illedan: Nice
+ jacek: i thought for top5 i would need all of them, but its not needed apparently
+ j4at: Jacek are you going to try all robots&#160;? 
+ jacek: nah, at least not now
+ Illedan: Try 2 and 2?
+ jacek: hm?
+ Illedan: Give output for all robots seen by 1 robot
+ Illedan: Then do this for all robots
+ Illedan: and use the sum of actions as a vote for each of them
+ Illedan: Then do the best
+ jacek: oO
+ Illedan: :P
+ Illedan: Only 4 moves + defend + 4 attack right?
+ Illedan: + selfdestruct
+ jacek: 10 moves
+ Illedan: 250 outputs then
+ jacek: quite lately it realized selfdestruct can be useful sometimes
+ DomiKo: selfplay?
+ jacek: you could say that, yes
+ j4at: I'm going to do all robots + rnn :neutral_face:
+ jacek: thats the spirit
+ a-Rye:  Whoo! I am the tallest midget! Err, dwarf, vertically challenged, whatever the PC version is. I'm top for "Popular" on the Playgrounds lol. Not top coder, not even top explainer, just top popularity of tutorial, most likely accounting for uptime, but I'll take it!
+ jacek: oO
+ k4ng0u: a-Rye (not tying to pick up a fight) but whatre are you leading again? I tried to look at a few ranking but never saw you.  what is popular tutorial?
+ jacek: i think he means playgrounds and Popular tab
+ a-Rye: k4ng0u that's why I joked about being "the tallest midget." I'm ranked fairly average / beginner in most stuff. But my tutorial playground, Beginner Python Concepts, is the most popular. For now, which is why it isn't anything too fancy
+ a-Rye: <a rel="nofollow" class="external free" href="https://www.codingame.com/learn?tab=popular">https://www.codingame.com/learn?tab=popular</a>
+ a-Rye: First and Fourth actually, but I'm still working on the Java one. I'm also doing an Intermediate soon, but getting some colleagues to possibly collab on it
+ jacek: next is Beginner Cobol Concepts
+ a-Rye: I wouldn't mind learning that. I have a book on Perl I've been meaning to go through as well...
+ jacek: for you own sanity, dont ;o
+ a-Rye: Especially just beginner. Anything more, and I'm just posing lol
+ a-Rye: (╯°□°）╯︵ ┻━┻
+ a-Rye: A lot of that eh? ^^
+ HenroLST: magic!
+ Westicles: my Stirling numbers clash has a mixed response
+ HenroLST: link?
+ Westicles: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/24369cb4a526bd6b707ef8743841a63bd6e67">https://www.codingame.com/contribute/view/24369cb4a526bd6b707ef8743841a63bd6e67</a>
+ Westicles: funny that a russian born woman and a soviet born man won wimbledon
+ HenroLST: hehe i was hoping krygios would win just to see the upheaval
+ HenroLST: also interesting to see if his attitude would change
+ TomAlard: what happened to recurse's uttt bot
+ TomAlard: 1-&gt;6 lol
+ DomiKo: MSmits happend
+ HenroLST: sheesh
+ jacek: everything changed when the fire nation attacke
+ jacek: d
+ Evran: hello world
+ smhb: 👋
+ Westicles: something changed
+ jacek: the multiverse is shattering again
+ HenroLST: oh no
+ miszu: question for the code a la mode, what datastructure you used for the string of the dish description?
+ miszu: Do you guys tokenize it?
+ MACKEYTH: I would. Minimize string processing that way.
+ Astrobytes: yeah, tokenized then stored bitwise in an int
+ MACKEYTH: The discord is still pretty quiet despite the "chat going away" warning.
+ Sweshies: are the servers offline?
+ hacker535646: hiiiiiiiiiiiiiiiiiiiiiii coders
+ BabaYagaCELL: Hello man&#160;!
+ TimeEngineer: Even with a DQN with 90% WR against random, I can't reach silver (UTTT) lmao
+ dianissimo_z: Hi all!!!!!!!!!!!!!!!!!!!
+ sheeeeeeh: hi sisters&#160;!!!!
+ Fierceblood: Are all clashes fastest mode?
+ Fierceblood: Or am I on a very unlikely streak?
+ TimeEngineer: There are 3 mode, fastest, shortest and reverse
+ Fierceblood: Yeah I know, but I always get fastest for some reason
+ Fierceblood: :P
+ Fierceblood: Again! XD
+ hel-makh: same
+ User_xin: Today is another day full of hope
+ angryPenguin: I got like 6 shortest in a row this afternoon
+ TheDoomedClown_155f: Hiiiii
+ <b>**MACKEYTH hates shortest the mostest</b></p><p><a href="/wiki/File:Default_avatar.png" class="image"><img alt="Default avatar.png" src="/images/5/56/Default_avatar.png" decoding="async" width="50" height="50" /></a> User_xin: 2022年7月11日10:01:55
+ emergenitro: hello
+ emergenitro: whats up
+ MACKEYTH: Playing Code a la Mode
+ MACKEYTH: Just discovered the source of a whole bunch of forfeits.
+ MACKEYTH: If your partner times out or otherwise inactivates, their position gets reported as -1,-1.
+ MACKEYTH: I was getting inactivated due to array out of bounds errors when I tried to plot them on the map.
+ Oporekungthai: yo yo yo uits humopdayt
+ Oporekungthai: what i need you to do
+ Oporekungthai: is tag three big d nig

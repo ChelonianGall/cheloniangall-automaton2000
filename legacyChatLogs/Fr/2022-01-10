@@ -1,0 +1,917 @@
+ BlaiseEbuth: Yo tout l'monde&#160;! Automaron2000&#160;!
+ BlaiseEbuth: * Automaton2000, s'cuse
+ Automaton2000: c'est plus chiant à écrire
+ BlaiseEbuth: Exactement
+ ZacDonald: o/
+ BlaiseEbuth: \o
+ Stilgart: o/
+ Stilgart: et tortue à Automaton2000
+ Automaton2000: ah tiens je viens de trouver il y a quelques années
+ Stilgart: c'est pas l'impression que tu donnes
+ Stilgart: Automaton2000
+ Automaton2000: ça y est j'ai envie de le faire marcher
+ Stilgart: toujours pas Automaton2000
+ Automaton2000: là je me dis que t'as codé
+ Anschluss: bonjour à tous
+ Anschluss: je suis en train de faire un programme pour une IA sur le jeu great escape et j'ai un probléme d'index dans une de mes liste mais je ne comprends pas pourquoi
+ Anschluss: y a t il une maniére d'obtenir plus de précision sur le bug que constate la console
+ Anschluss: j'espére avoir été clair dans ma question
+ BlaiseEbuth: Que dit la console&#160;?
+ Anschluss: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/9308690b-e97b-4799-a80f-7cb251d17d60">http://chat.codingame.com/pastebin/9308690b-e97b-4799-a80f-7cb251d17d60</a>
+ Anschluss: index error string index out of range
+ Anschluss: et je ne comprends pas car ma liste contient trois éléments et je lui demande de me donner celui d'index -1
+ Anschluss: le dernier en fait
+ Alshock: plop Automaton2000 que deviennent les tortues aujourd'hui&#160;?
+ Automaton2000: du coup je vais faire ca
+ BlaiseEbuth: Ouai. Sauf que d'après le message d'erreur tu essayes d'accéder une string, pas une liste.
+ BlaiseEbuth: Alshock&#160;! :hugging:
+ Alshock: Blaise&#160;! :hugging:
+ Alshock: sinon de manière générale Anschluss quand le debug CG est insuffisant, fais tourner le code en local soit avec un des testers soit avec une liste d'inputs pré-générés
+ BlaiseEbuth: Montre un peu la ligne 184 de ton code Anschluss
+ Alshock: (d'où l'intérêt d'avoir un code vraiment déterministe)
+ Anschluss: ok pourtant j'ai créer une liste qui s'appelle liste action initialisée avec [] que je rempli avec des tuples
+ Anschluss: voila la ligne 184
+ Anschluss: Liste_poids_final=Liste_poids_final+[Liste_actions[longueur-1][1]]
+ Anschluss: et voila comment je rempli ma liste action
+ Anschluss: Liste_actions = Liste_actions + [(K,poids_actuel,(pax,pay))]
+ Alshock: Alors je peux pas parler du bug parce que j'ai pas toute les données mais 2 choses&#160;: la dernière ligne crée (normalement) une nouvelle liste à chaque itération. C'est plus optimal de faire Liste_actions += {...} ou (plus explicite) Liste_actions.append(...)
+ BlaiseEbuth: Je dirais que le problème viens pas de liste_action, mais de l'élément à [longueur-1] qui doit être une string
+ Alshock: Et aussi le dernier élement tu y as accès avec Liste_actions[-1] voilà c'est tout pour les détails
+ Alshock: et une string de taille 0 ou 1
+ BlaiseEbuth: Ouai
+ Anschluss: ok donc je vait tester le type de l'élément Listeaction[-1] et je reviens vers vous
+ Anschluss: merci pour ces conseils
+ Anschluss: aprés le test on me répond que c'est un tuple
+ Alshock: juste avant le bug&#160;?
+ Anschluss: oui j'ai mis le print type ligne 183
+ Anschluss: sortie de boucle comme la ligne où se trouve le message d'erreur
+ pardouin: print carrément l'objet alors
+ pardouin: tu verras s'il a bien assez d'élements
+ pardouin: et bonjour o/
+ Anschluss: réponse pour l'objet
+ Anschluss: ((8, 6), 0.0, (7, 6))
+ Alshock: attah, " sortie de boucle comme la ligne où se trouve le message d'erreur " mais tu y passes plusieurs fois, non&#160;? l'objet que tu me donnes semble pas pouvoir faire le bug que tu décris
+ Alshock: dans le doute je dirais de rajouter flush=True dans ton print (manquerait-il une itération&#160;?)
+ pardouin: mets le plutôt dans un block try except
+ pardouin: et dans except tu print l'objet
+ Alshock: oui ça aussi en moins crade xD
+ BlaiseEbuth: N'exagérons rien, ça reste du python.
+ pardouin: comme ça on sera sûr que c'est bien l'objet qui pose problème s'il s'affiche
+ Alshock: on peut toujours faire plus et moins BlaiseEbuth, quelque soit le point de départ
+ pardouin: et sinon oui remplace tes liste = liste + [truc] par des liste.append(truc)
+ Anschluss: en rajoutant fkush=True dans mon print je n'ai plus aucun print qui s'affiche
+ BlaiseEbuth: -INF + 1 ça reste -INF Alshock
+ pardouin: ça règle pas le pb mais c'est mieux
+ Anschluss: je vais modifier mes liste avec vos conseils
+ Alshock: ce qui prouve bien que -INF n'est pas un point Blaise :shrug:
+ pardouin: je dois filer \o
+ BlaiseEbuth: Personne n'a dit que python était un point...
+ Alshock: ça devrait rien changer dans ce que tu vois, mais ça empêchera ton programme de créer une nouvelle liste à chaque fois que tu ajoutes un élément
+ Alshock: si la liste devient longue tu seras content qu'il se contente d'ajouter le nouvel élément au bout
+ Anschluss: pour moi quand j'écrivais Liste=Liste + [truc] python se contenter de modifier la liste existante je n'avais pas compris qu'il créait une nouvelle liste
+ Anschluss: contentait*
+ JBM: comment es ta weekend
+ BlaiseEbuth: En cours.
+ Anschluss: désolé je reviens poser mes questions bidon mais pouvez vous m'expliquer pourquoi il me parle de string alors que mes objest sont des tuples
+ Anschluss: objets*
+ nicola: Qui ça&#160;?
+ nicola: Normalement, liste1+=liste2 fait comme la méthode extend.
+ nicola: Vérifie avec les id pour être sûr.
+ Anschluss: j'ai un message de bug qui s'affiche me disant string index out of range seulement les objets sur lesquels ce big s'affiche ne sont pas des strings
+ Anschluss: bug*
+ nicola: Tu es peut-être allé un peu trop loin avec les crochets&#160;?
+ nicola: Ça m’arrive parfois.
+ Anschluss: je ne pense pas car je lui demande Liste[-1]
+ nicola: Et c’est tout&#160;?
+ nicola: Essaie print(type(Liste)).
+ Anschluss: et il me répond list
+ nicola: Et Liste[-1]&#160;?
+ nicola: Liste est-elle vide&#160;?
+ Anschluss: tuple
+ Anschluss: normalement non 
+ Anschluss: et pour m'en assurer je la commence avec ""
+ nicola: Liste[-1] est un tuple, c’est ça&#160;?
+ Anschluss: oui*
+ nicola: Et tu veux afficher Liste[-1]&#160;?
+ nicola: Que contient Liste[-1]&#160;?
+ Anschluss: voila liste[-1]
+ Anschluss: ((8, 6), 0, (7, 6))
+ Anschluss: et je souhaite copier la valeur  0 pour le mettre dans une autre liste
+ Anschluss: avec cette ligne 
+ Anschluss: Liste_poids_final.append(Liste_actions[-1][1])
+ Anschluss: et c'est sur cette ligne que j'obtiens mon bug string index out of range
+ Alshock: re
+ Alshock: attah attah attah
+ BlaiseEbuth: voui&#160;?
+ Alshock: &lt;&lt; et pour m'en assurer je la commence avec "" &gt;&gt; on parie combien de milliard qu'après n itérations ta liste est juste vide, tu chopes ton "" en premier index et t'as ton bug Anschluss&#160;?
+ BlaiseEbuth: :3
+ nicola: Affiche chaque fois que tu exécutes cette ligne.
+ Anschluss: tu veux que je print mon index [-1] pour voir?
+ BlaiseEbuth: Heureusement qu'Alshock est là pour m'éviter de taper
+ Alshock: &lt;&lt;  en rajoutant fkush=True dans mon print je n'ai plus aucun print qui s'affiche  &gt;&gt; je pense que c'est un timeout, ce qui prouverait que t'as pas mal de print AVANT le bug
+ BlaiseEbuth: c'est normal que fkush fasse rien...
+ Alshock: pardouin t'avait conseillé un try: &lt;ta ligne 184&gt; except: ton print
+ Anschluss: voilà ce que j'obtiens quand je print Liste_actions[-1][1]
+ Anschluss: 0
+ Alshock: oui mais ça c'est quand ça marche, pas quand ça bug
+ Anschluss: Alshock désolé mais je t'avoue ne pas comprendre le try
+ Alshock: retire ton "" que tu mets au début de liste et je mets ma main à couper que le problème sera index out of range sur Liste_actions
+ Alshock: ce qui voudra dire qu'il faut trouver pourquoi ton code veut prendre le dernier élément d'une liste vide
+ Anschluss: merci alshock en effet maintenant j'ai un list index out of range
+ Anschluss: ok je vais voir pourquoi elle est vide
+ <b>**BlaiseEbuth range sa hache, déçu.</b></p><p><img src="/a/46434521998763" /> Alshock: <a rel="nofollow" class="external free" href="https://tutorial.eyehunts.com/python/python-try-except-finally-else-print-error-example/">https://tutorial.eyehunts.com/python/python-try-except-finally-else-print-error-example/</a>
+ Alshock: blaise qui était sur le point de me demander ma main :blush:
+ BlaiseEbuth: Vi &lt;3
+ Alshock: Automaton2000 tu aurais été notre témoin tortue pas vrai&#160;?
+ Automaton2000: et tu fais des calculs de trajectoire
+ Alshock: ma main n'a pas quitté mon corps arrêtez de prévoir des jeux avec &gt;_&lt;
+ nicola: L’exemple avec la fermeture des fichiers n’est pas un bon exemple si on utilise with.
+ BlaiseEbuth: Bwa pfff...
+ Alshock: j'avoue pythoneusement avoir envoyé le premier lien qui semblait expliquer tous les keywords autour des exceptions
+ nicola: Pas grave, les autres exemples sont bien.
+ nicola: Peut-être qu’avec Python 3.7, with n’existait pas encore.
+ nicola: Mais j’ai découvert else pour try/except.
+ nicola: Merci.
+ Alshock: il a été créé en 2005 donc j'en doute
+ Alshock: <a rel="nofollow" class="external free" href="https://www.python.org/dev/peps/pep-0343/">https://www.python.org/dev/peps/pep-0343/</a>
+ nicola: OK, pas surpris, donc.
+ nicola: Le PEP date de 2005 mais le mot clé a été introduit quand&#160;?
+ BlaiseEbuth: pep pep pep
+ Stilgart: pepite pepin pepsi 
+ BlaiseEbuth: T'façon c'est d'la merde.
+ nicola: pepouze
+ nicola: peppone
+ nicola: Coucou le rageux jaloux.
+ <b>**Stilgart jaloux de pas avoir pensé à peppone</b></p><p><img src="/a/46434521998763" /> Alshock: Je m'étais permis de penser que l'introduction avait dppu suivre dans les releases suivantes, mais j'ai ptêtre tort&#160;?
+ BlaiseEbuth: J'te permet pas d'penser.
+ nicola: Aucune idée.
+ nicola: Un PEP n’est pas toujours suivi, pour ce que j’en sais.
+ BlaiseEbuth: Stoi l'pep.
+ Zorg1: peppermint
+ Zorg1: Automaton2000 comment es ton plan de domination du monde&#160;?
+ Automaton2000: c'est quand même un peu de chance
+ Automaton20O0: quelle chance oui
+ Zorg1: petit malin
+ Zorg1: ça vous amuse de vous faire passer pour Automaton2000
+ Automaton2000: sauf que j'ai jamais vu une ligne de code
+ Audran227: quelle puérilité
+ Stilgart: Automaton20O0: fix ton pseudo autrement
+ dwarfie: Automaton2000&#160;: lance donc une tortue
+ Automaton2000: c'est ce que je comprends rien à ce jeu
+ Stilgart: Automaton2000: fais un effort
+ Automaton2000: je comprends pas tout ce que tu veux faire une simu en python
+ Stilgart: Automaton2000: utilise ton neurone
+ Automaton2000: en espérant que ce soit en python
+ Stilgart: Automaton2000: calme ton python aussi
+ Automaton2000: ca y est je suis passé devant le boss&#160;!
+ Stilgart: la preuve ultime que python c'est pour les faibles&#160;!
+ MarinDeNsi: Automaton2000 tu as un code fantastic bits a me donner?
+ Automaton2000: je suis passé de silver à legend
+ dwarfie: Automaton2000&#160;; on peut pas tenter d'etre aussi mytho quand on sait pas dire tortue
+ Automaton2000: ben oui ... c'est vrai que le code est en java et c++
+ Zorg1: turbomytho Automaton2000 ...
+ Automaton2000: j'ai rien de mieux à faire en sorte que les gens ont du mal à lire les énoncés de puzzle ...
+ Zorg1: ah c'est voulu les énoncés incompréhensible&#160;? je croyais que c'était juste du jmenfoutisme Automaton2000
+ Automaton2000: moi je vote pour&#160;!
+ Zorg1: :D
+ dwarfie: :rofl:
+ dwarfie: Automaton2000&#160;: va pas upvoter les contribs de l'autre pour autant svp :p
+ Automaton2000: ou quand tu as besoin de faire des trucs du genre
+ Sakisan: Automaton2000 t'as fait comment pour etre niveau 14&#160;?
+ Automaton2000: et quand tu veux le faire à la main
+ Zorg1: je veux pas savoir Automaton2000
+ Automaton2000: on peut changer de cible
+ dwarfie: Automaton2000&#160;: il a fait une contrib de contest il me semble  , ca aida
+ Automaton2000: après ça dépend des fois
+ pardouin: bon ben passage en ligue legend sur tron à 16h29&#160;:)
+ pardouin: ça n'aura pas traîné
+ pardouin: mon premier legend, je suis content&#160;!
+ Zorg1: gg
+ pardouin: un type m'a poussé à 1.2 points au dessus du boss ^^
+ pardouin: rassurez-moi je monte quand même même si par hasard je redescends en dessous d'ici 16h29? D:
+ Zorg1: ah oui le contest d'Automaton2000&#160;: <a rel="nofollow" class="external free" href="https://www.codingame.com/contests/a-star-craft">https://www.codingame.com/contests/a-star-craft</a>
+ Automaton2000: ah merde j'ai mal lu
+ Stilgart: Automaton2000: tu as cru qu'il y aurait bientôt un autre contest&#160;?
+ Automaton2000: bah c'est pour ça que j'aime pas les jeux de tests
+ Mat.Crt: Bonjour à tous! 
+ pardouin: dans le squelette de code tu as normalement en commentaire comment afficher sur l'entrée de debug
+ pardouin: ça s'affiche en rouge et n'infuence pas le bon déroulement du code
+ pardouin: tu peux y print ce que tu veux
+ pardouin: par exemple en python c'est print(TON_MESSAGE, file=sys.stderr, flush=True)
+ Mat.Crt: Et je suppose que TON_MESSAGE peut être variale ou quoi que ce soit...C'est ça?
+ Mat.Crt: En tout cas, merci de ta réponse!
+ pardouin: oui tu y mets ce que tu veux, variables, listes, etc
+ Mat.Crt: Super! Merci beaucoup!
+ pardouin: et en c++ c'est juste cerr au lieu de cout
+ pardouin: ahaha je suis tombé sur ça par hasard:
+ pardouin: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/651790a9-1215-4c96-bcfd-627dd239bc45">http://chat.codingame.com/pastebin/651790a9-1215-4c96-bcfd-627dd239bc45</a>
+ BlaiseEbuth: C'est du python.
+ Acaroux: Hello, on peut avoir des indices quand on bloque sur un exo&#160;?
+ MaitreLeuleu: Salut, je crois que tu peux aller sur le forum dédié au puzzle et là tu devrais trouver des trucs&#160;!
+ MaitreLeuleu: sur la colonne de gauche
+ Acaroux: ha oui merci&#160;!
+ MaitreLeuleu:&#160;:)
+ pardouin: ou sinon demande ici en mettant le lien du puzzle, en formulant clairement ta question, en disant ce que tu as essayé etc
+ pardouin: disons que parfois ça donne plus envie d'aider que d'autres ^^
+ BlaiseEbuth: int array[1];
+ BlaiseEbuth: Un indice pour commencer.
+ BlaiseEbuth: Si t'en veut plus augmente le 1.
+ BlaiseEbuth: :thumbsup:
+ BlaiseEbuth: Wé! Encore! <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/death-first-search-episode-2-puzzle-discussion/61/107">https://www.codingame.com/forum/t/death-first-search-episode-2-puzzle-discussion/61/107</a>
+ dwarfie: tu crois qu'il sait que les post sur le forum sont archivés&#160;;)&#160;?
+ Stilgart: ils sont pas lu par Automaton2000 donc je pense que c'est bon
+ Automaton2000: donc tu peux avoir des surprises
+ Stilgart: c'est quoi déjà DFS&#160;?
+ Zorg1: Devoir Faire des Saletés
+ dwarfie: ca serait pas le nouveau no de skynet&#160;?
+ dwarfie: +m
+ Stilgart: c'est ma question 
+ Zorg1: ha "Death (huhu) First Search"
+ BlaiseEbuth: Laboneblag
+ Zorg1: ha "Death (huhu) First Search" alors
+ Stilgart: woputain, Blaise va répondre
+ BlaiseEbuth: :scream:
+ Stilgart: par ailleurs, les jeux à 2 ad hoc ça a tendance à être dans P
+ Stilgart: les gens ne savent pas imaginer des choses compliquées en fait 
+ Stilgart: (sauf mes étudiants dans leurs codes de BFS)
+ BlaiseEbuth: 2 ad hoc ça fait beaucoup de poisson...
+ Stilgart: ça reste O(1), donc dans P
+ BlaiseEbuth: Chut. C'est au moins NP-Hard
+ Stilgart: moule à gaufre, bois sans soif, zoulou, bachi bouzouk
+ Zorg1: que même la NASA ils ont essayé de construire un ordinateur quantique à 3 °K pour essayer de le résoudre avant la fin thermique de l'univers
+ dwarfie: ca reste que de l'eglefin fumé ...
+ Stilgart: bfs&#160;:: Graph -&gt; Int -&gt; Set Int -&gt; (Int,Int)
+ Zorg1: bon il la crache sa réponse Blaise&#160;?
+ <b>**Stilgart a oublié d'avoir peur de la NP-completude</b></p><p><img src="/a/74275522264754" /> BlaiseEbuth: Non il l'écrit, du coup c'est plus long.
+ Stilgart: après, j'ai peut-être tout simplement lu le sujet qui ne demande pas de finir en le moins de coups possibles, aussi :D
+ Zorg1: ou comment j'ai arrêté d'avoir peur de la NP-complétude et appris à l'aimer
+ Stilgart: BlaiseEbuth: une réponse en 0(65535) chars, ça reste dans P hein&#160;;)
+ <b>**dwarfie a honte quand il voit la solution des autres a one way city en haskell :D</b>
+ BlaiseEbuth: Voui mais j'suis pas un ordinateur moi monsieur.
+ dwarfie: non ... t'es un bot ... pas vrai Automaton2000&#160;? :rofl:
+ Automaton2000: bonjour tout le monde sait que c'est pas dans la version anglaise
+ Stilgart: one way city c'est le product  [n+1..2*n ] `div` product [1..n]&#160;?
+ dwarfie: Automaton2000&#160;: t'es pas drole ... NN aurait repondu oui
+ Automaton2000: c'est lui qui a dit que c'est pas mon premier contest
+ Zorg1: le coeff du binome en fait one way city
+ dwarfie: Stilgart ... OUAIS&#160;;)
+ Zorg1: bon j'ai spolié
+ Stilgart: pas autant que moi
+ Zorg1: awi on a dit la même chose ^^
+ Stilgart: mais que le "main = do readLn &gt;&gt;= \n -&gt; print $" pour avoir le code Haskell complet
+ dwarfie: manque un peu plus que ca ... mais on va pas le dire trop fort
+ Stilgart: l'entrée c'est pas juste un entier&#160;?
+ Stilgart: ha oui, il faut garder que les 1000 premiers chiffres aussi
+ Stilgart: donc + ". take 1000"
+ Stilgart: et puis c'est un rectangle...
+ <b>**Stilgart validait des trucs durs à l'époque</b></p><p><img src="/a/69893904259383" /> Stilgart: (pour un langage sans bigInt, medium c'est pas sympa)
+ dwarfie: j'avoue que j'ai galéré 5 minutes avant de me dire ... osef , on va recoder les multiplication avec un gros tableau de int :D
+ Stilgart: oops, c'est moi qui ai mis medium :D
+ dwarfie: ah ah ah ... grillé
+ Stilgart: dans l'idée, oui, tu peux recoder la multiplication à coup de tableau
+ Stilgart: ça doit passer même avec une multiplication naive (quadratique)
+ dwarfie: ca passe ... bon , je fais une decomposition par facteur avant pour alleger en nettoyant... mais pas sur que ca soit utile  (presque sur que non en fait)
+ BlaiseEbuth: Woah! La réponse est déjà en préparation&#160;! :D
+ Stilgart: le crible pour trouver les nombres premiers coûte cher
+ Stilgart: donc pas sûr que ce soit si rentable que ça
+ Stilgart: answer is coming
+ Stilgart: par ailleurs, je suis pas d'accord
+ Stilgart: DFS ça montre aux entreprises ton coté pragmatique
+ BlaiseEbuth: Kessadir?
+ Stilgart: donc ça montre bien quelque chose :p
+ dwarfie: quel crible ... j'ai besoin de saisir que les premiers &lt; 100 :D
+ Stilgart: ta capacité à résoudre un problème concret avec une approche simple
+ Stilgart: dwarfie: la brute
+ Stilgart: en vrai, faire connement le produit ça gagne assez longtemps
+ BlaiseEbuth: Voui. Mais c'est pas le propos. Je dis juste que y'a pas grand monde qui va montrer sa solution à onboarding en entretien, les gens viennent juste pas pour ça.
+ Stilgart: surtout si tu le fais en DnC pour équilibrer les tailles
+ Stilgart: des entiers intermédiaires
+ Stilgart: cela dit, tu as quand même des entrée à qqs k
+ Stilgart: donc il te faudrait un peu plus de premiers que ça pour simplifier correctement
+ Stilgart: Blaise: point taken, j'ai jsute besoin de montrer mon profil, pas mon code
+ BlaiseEbuth: Keskonsamuse.
+ BlaiseEbuth: On devrait interdire les poneys, c'est des trolls en puissance.
+ Zorg1: je sais pas ce qu'il s'est enfoncé dans le ***** c'est un tronc d'arbre&#160;?
+ BlaiseEbuth: Brochette de poney&#160;! \o/
+ BlaiseEbuth: J'préfère les lasagnes...
+ Zorg1: "mistake happen (well, not with me)"
+ Zorg1: t1
+ Zorg1: pourquoi delete le probleme, suffit de le modifier
+ BlaiseEbuth: Faut pas s'étonner qu'il ait pas de boulot le mec, il doit être invivable...
+ BlaiseEbuth: "Je trouve plus le code qu'on doit pousser en prod&#160;! " "Ouai je l'ai supprimé, il était faux." 
+ Zorg1: oui j'ai déjà bossé avec des gars comme ça.  les gars qui faisaient les specs n'en voulaient plus dans les réunions
+ Alshock: on parle de qui là&#160;?
+ Zorg1: "il y a une seule façon de faire et c'est la mienne"
+ Alshock: toujours le poulain qui sait pas qu'un chat public c'est public&#160;?
+ BlaiseEbuth: Voui, mais sur son autre grand combat.
+ Zorg1: oui  le gars qui doit avoir toutes ces données chez google
+ Stilgart: en vrai, c'est juste un troll
+ Zorg1: *ses 
+ Alshock: le fait qu'un puzzle qu'il ne résoud pas c'est un mauvais puzzle&#160;?
+ Zorg1: non le puzzle est mal spécifié, faut le supprimer
+ Zorg1: enfin il manque une info 
+ BlaiseEbuth: Sans doute Stilgart.
+ Alshock: oh bah là, y a du boulot
+ Stilgart: BlaiseEbuth: là il n'y a plus de doute possible
+ BlaiseEbuth: Oh si...
+ Alshock: faudrait faire des catégories de puzzles mal spécifiés mais... vous imaginez un peu la taille des compartiments&#160;!
+ Zorg1: en fait il y a des gens qui sont vraiment comme ça sans avoir conscience de troller
+ Stilgart: ça peut pas juste être un crétin, il fallait la chercher cette attaque
+ BlaiseEbuth: Les abrutis ça existe aussi.
+ dwarfie: le seul vrai macho est les president camacho ...
+ dwarfie: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=ig446isvXlI">https://www.youtube.com/watch?v=ig446isvXlI</a>
+ Stilgart: Automaton2000: si tu dois retenir du gros mot, retiens la liste du capitaine haddock de tout à l'heure
+ Automaton2000: pour la liste des puzzles
+ Stilgart: oulah, on va avoir droit au puzzle "moule à gaufre" 
+ dwarfie: Automaton2000&#160;: on attent toujours ton puzzle de combat d'insultes ...
+ Automaton2000: c'est un peu du mal à me souvenir de la dernière fois que je fait
+ BlaiseEbuth: Regarde Mr52% il avait l'air d'un troll, et pourtant...
+ Stilgart: c'est qui Mr52%&#160;?
+ Alshock: j'ai oublié le pseudo, un type qui est arrivé furax après avoir activé l'anti-cheat des tests de recrutement
+ Alshock: =&gt; 52% de réussite (que je persiste à retenir comme 54% dans ma grande mansuétude)
+ BlaiseEbuth: Le mec qui avait fait 52% a un test de recrutement CG et qui avait passé les semaines suivantes à dire à quel point cg et les tests étaient mal-foutus et à quel point lui était trôfor.
+ BlaiseEbuth: Et que j'ai fini par ban après qu'il ait tenté de surcompenser en me descendant par DM
+ Stilgart: ha oui... je l'avais oublié
+ BlaiseEbuth: Bref. 100% sérieux et convaincu de son propos. 
+ Stilgart: mais lui il était clairement juste nul et aigri
+ Stilgart: rien à voir avec poney
+ Alshock: en même temps il a pas tort... t'es mauvais blaise... à bon entendeur...
+ BlaiseEbuth: :cry:
+ BlaiseEbuth: Pourquoi cette violence
+ Alshock: notez comme j'attends courageusement qu'il soit demod pour l'insulter et qu'avant jamais je n'aurais osé&#160;! :smirk:
+ Alshock: Automaton2000 prends-en de la graine&#160;!
+ Automaton2000: mais à partir de la liste de coups que tu as déjà fait
+ Alshock: Ok je suis au sol&#160;:')
+ BlaiseEbuth: Maintenant mon seul recours c'est de venir te chercher IRL...
+ dwarfie: y'a de la bonne ambiance entre membre de la turtle corp ....
+ Alshock: aled il va me bannir de ce plan de l'existence
+ Alshock: question philo, les tortues ont-elles l'amour vache&#160;? Automaton2000 tu as 3h
+ Automaton2000: je viens faire un tour sur deux
+ BlaiseEbuth: Après je suis pas sûr que ce soit vraiment un troll. C'est marqué unemployed dans son profil. On pourrait juste avoir un autre aigri qui cherche à compenser... ^^
+ Stilgart: Automaton2000: c'est ton tour sur deux, alors vas-y, réponds
+ dwarfie: Automaton2000 ... ca suffit pas a dire si ton random est bon ou mauvais
+ Automaton2000: allez un petit submit pour voir ce qui ne va pas être content&#160;:(
+ Automaton2000: mais y'a trop de monde en bronze
+ Stilgart: BlaiseEbuth: et il avait peur de son patron la semaine dernière...
+ FlashSamourai_443a: cc
+ dwarfie: BlaiseEbuth&#160;: tant qu'il fait ca , il pollue pas les contrib au moins ...
+ Alshock: franchement je suis assez impressionné par Automaton2000, je sais qu'on compense en grande partie son absence totale de contexte mais il a une construction vraiment bonne. Comme quoi la taille, ça compte
+ BlaiseEbuth: Non, c'était hypothétique Stilgart.
+ Automaton2000: mais ca me semble pas mal
+ Stilgart: dwarfie: bah, vu que tibo le lit, c'est pas si clair 
+ Alshock: enchanté FlashSamourai_443a
+ Stilgart: BlaiseEbuth: c'est ce qu'on dit toujours
+ BlaiseEbuth: (Sa femme aussi je suppose, personne ne doit pouvoir le supporter :smirk:)
+ Stilgart: mais pour avoir peur d'un patron qui t'espionne, il faut avoir un patrin
+ Stilgart: patron*
+ dwarfie: Stilgart ... il en est pas a 5-6 contib nase par jour ... lui
+ Alshock: c'est pas forcément son patron, c'est ptêtre la CIA qui le cherche
+ BlaiseEbuth: Parce qu'il sâche.
+ Alshock: mais ça il ne peut pas nous le dire directement parce qu'ils le verraient
+ dwarfie: les chinois du FBi ... comme pour m-j p  ? :rofl:
+ Stilgart: dwarfie: pas ma faute si reject les contributions nazes c'est mal vu&#160;:)
+ BlaiseEbuth: Ski tibo le lit?
+ Alshock: un évêque très pieux
+ BlaiseEbuth: Oh, j'avais pas ouvert les contribs depuis un moment... Productif le p'tit père...
+ Alshock: mdr nan mais faut juste continuer comme ça, n'ouvrez pas cette page
+ Alshock: arrêtez de vous faire du mal
+ BlaiseEbuth: 29 contribs :o
+ Stilgart: la limitation du nombre de cnotrib actives n'est sans doute pas une priorité
+ Stilgart: ^W
+ Stilgart: ^T plutôt
+ <b>**Stilgart en perd ses raccourcis claviers</b></p><p><img src="/a/17785582865119" /> dwarfie: et pas une a sauver ... que du rechauffer et mal ... c'est cramé
+ Alshock: ^D
+ BlaiseEbuth: Les priorités ne sont pas des priorités
+ Zorg1: la licorne arc-en-ciel vient de faire sonner mon navigateur avec ses mass-reject
+ BlaiseEbuth: Keskilafumé
+ Alshock: J'crois je mets plus de temps à tous les reject que lui n'en met à les faire, la faute à ce bloc de code qui freine mon scrolling
+ Stilgart: Zorg1: note qu'on en serait pas si on avait fait le boulot (comme au bon vieux temps)
+ Stilgart: je pense honnêtement que 90% des contribs en cours sont bon pour le reject sans négociation
+ Alshock: c'était le dernier. Bon au moins on peut leur reconnaître une certaine décence
+ darkhorse64: Alshock: pourquoi ce mass reject&#160;? J'ai vu passer des trucs vraiment bien pire
+ Alshock: ils font tout ça en grande majorité côté CoCs, comme ça ils emmerdent pas les êtres humains
+ Stilgart: darkhorse64: parce que c'est la bonne politique
+ Alshock: Un président a dit qu'il faut juger un récidiviste pour l'ensemble de son oeuvre
+ BlaiseEbuth: Pourquoi interdire les meurtres alors qu'il y'a des génocides&#160;?
+ Alshock: président qu'on attend toujours de voir en tôle, mais c'est un autre débat
+ darkhorse64: OK, ils ne sont pas super originaux mais pas intrinsèquement mauvais pour des CoCs. Il y a un truc qui m'échappe&#160;?
+ nicola: C’est marrant mais il tenait un autre langage quand il parlait des récidivistes pauvres.
+ BlaiseEbuth: Les pauvres t'façon...
+ dwarfie: bah , les recidivistes riches ca existent pas ... faut etre condamné pour recidiver ...
+ Alshock: @darkhorse64 c'est pas comme ça que je vois la chose&#160;: de mon point de vue la personne en question a clairement abusé du système de vote pour spammer les contributions et en faire passer un maximum grâce à son spam. Face à ça je fais l'exact symétrique de ce qu'on voit souvent&#160;: je reject tout et le fait qu'il faille 2 rejects contre 3 approve ça fait pencher la balance en défaveur de cette pratique.
+ dwarfie: :thinking: a bien y penser , on trouve toujours des excuses pour les racailles de cités aussi ... donc pas que les riches ...
+ Stilgart: darkhorse64: la vitesse de production, qui ferait passer l'utilisation de "coders strike back" pour de l'amuse gueule lors d'un procès aux états-unis&#160;?&#160;:)
+ dwarfie: s/production/duplication/
+ Stilgart: loin de moi l'idée d'émettre un jugement dans la technique qu'il emploie pour plagier
+ Alshock: Je vais proposer un CoC Bombe de fourchettes soon TM
+ Alshock: céfo
+ darkhorse64: OK, ça se tient
+ darkhorse64: mais c'est pénible d'avoir son PC qui carillonne comme un fail à Mars Lander
+ nicola: Oui, mais les riches (y compris racailles) ont des avocats qui trouvent des vices de procédure.
+ nicola: Les pauvres ont droit à la comparution immédiate.
+ Stilgart: ça existe pas une racaille riche
+ nicola: Oh que si.
+ Stilgart: je pense que si valérie giffle émmanuel dans les prochaines semaine, elle aura aussi droit à la comparution immédiate
+ <b>**Stilgart espère une campagne mouvementée</b></p><p><img src="/a/46434521998763" /> Alshock: Je ne peux que recommander de désactiver les notifications de contrib. Pas seulement à cause de moi, ça n'a que des effets positifs dans le cadre normal IMHO
+ Stilgart: nicola: non, parce qu'on dit plus racaille dans ce cas là
+ Alshock: disons que ça n'existe pas trop une racaille riche en tôle
+ dwarfie: Stilgart ... pas sur ... ou alors faudrait aue la plainte que E a aux fesses soit instruite ... question d'egalité :D
+ Alshock: les Balkany tout le monde s'accorde quand même à dire que c'est de la racaille
+ Stilgart: (j'y vois une insulte envers la racaille là)
+ nicola: La famille Truc qui contrôle le deal dans la cité Bidule est riche ET est de la racaille.
+ nicola: En fait, pour moi, S*****y a à peu près la même mentalité qu’eux.
+ dwarfie: a ne pas confondre avec les racailou qui malgrés leur nom sont pas si viains&#160;;)
+ Stilgart: bah non, c'est un dealer, pas de la racaille
+ nicola: C’est les deux.
+ Alshock: et machoppeur n'a jamais tenté de draguer une fille dans la rue
+ Stilgart: pas dans ma vision des choses
+ BlaiseEbuth: Les racailles n'existent pas, c'est un mensonge d'état pour booster l'industrie du karcher.
+ Stilgart:&#160;:)
+ Zorg1: qu'est qu'il a encore fait Sarko&#160;? il est toujours pas en cabane&#160;?
+ dwarfie: le probleme , c'est le double sens qui existe&#160;: Ensemble d'individus louches (craints ou méprisés). 
+ Alshock: de toute façon des termes qui sont liés à des ressentis comme ça forcément on les utilise pas de la même manière, c'est pour ça que les politiques les adorent d'ailleurs
+ dwarfie: ouais ... et un politque , suffit qu'il meurt et aussitot c'est un saint ...  voir tapie ... voir miterrand ... etc
+ Alshock: tu vas quand même pas dire du mal de Chirac ou de Gaulle&#160;?
+ Alshock: ils sont aussi vierges et effarouchés que tonton Johnny
+ dwarfie: lui a pas ete vichiste et decore de la fancisque ... ni ete truand notoire ...  donc c'est deja ca
+ <b>**dwarfie parle du general ...</b></p><p><img src="/a/46434521998763" /> Alshock: Chirac a pas été truand notoire&#160;?
+ Alshock: Ah
+ Stilgart: juste super menteur
+ Stilgart: (c'est pour ça qu'on l'aimait bien d'ailleurs)
+ Alshock: maintenant qu'il mange des pommes par la racine au moins il est plus emmerdé ni par le bruit ni par l'odeur
+ dwarfie: on l'aimait pour ses reactions ... cf&#160;: "what do you want&#160;?"
+ Alshock: bon, pourquoi on a divergé sur ce sujet là, déjà&#160;?
+ Stilgart: l'odeur de pomme c'est pas si pire pourtant
+ Stilgart: parce que j'en ai marre de corriger les projets pour l'UE de Boulet
+ dwarfie: parce que meme les glands en pas tele-travail se les tournent tellement que j'attend depuis une heure qu'ils soient plus inactifs sur leur pc et maintenant ils sont barrés chez eux....
+ dwarfie: faut bien s'occuper ...
+ dwarfie: (et  ca viendra chouiner que la synchro de leur fichier est planté demain)
+ Stilgart: (faut bien une excuse pour se tourner les pouces)
+ dwarfie: (et utiliser l'excuse du "probleme technique" marche tellement bien ... mais jamais dire que c'est la couche 8 surtout)
+ Alshock: la couche 8 c'est celle entre le plastique de la chaise et le popotin de l'utilisateur&#160;?
+ Alshock: les normes de communication standardisent des choses splendides quand même
+ Stilgart: nan, elle est de l'autre coté du popotin
+ dwarfie: entre le plastique de la chaise et le plasique du clavier
+ Stilgart: note qu'avec une telle définition, les riches seraient donc privés de couche 8
+ Stilgart: dwarfie: dis moi qu'on ne vient pas de recevoir le mail qu'on vient de recevoir&#160;?
+ BlaiseEbuth: :thinking:
+ dwarfie: tu parles du cercle écrasé&#160;?
+ BlaiseEbuth: Une élipse
+ Stilgart: j'aurais plutôt dit ballon écrasé
+ dwarfie: OVALIE  ... Terre de culture et de RESPECT ... ENCUL22££
+ dwarfie: comme disait mescato
+ <b>**dwarfie a un doute ... c'etait peut etre bienseance ... :thinking: en tout cas ca finissait bien  par "ENCULEEEEE" :D</b>
+ Stilgart: BlaiseEbuth: on vient d'être invinté en masse à aller voir un match de rugby
+ Stilgart: -n
+ Zorg1: en respectant la jauge et les geste barrières j'espere
+ dwarfie: invité en masse .... pour 20 places disponibles (sauf si j'ai mal lu :D )
+ BlaiseEbuth: :football:
+ dwarfie: perdu , c'est pas le bon ...
+ Zorg1: y a pas tout dans les emoticones
+ Stilgart: je cherchais des skis tout à l'heure, j'ai pas trouvé
+ dwarfie: c'est quand meme pas le bon ... pas la bonne forme et la couture ...
+ dwarfie: :ski: :skier: mais pas les skis seuls
+ leojean890: dans la phrase "je vais chez moi" pourquoi n'ais je pas utilisé le "bon&#160;?? 
+ Zorg1: gné&#160;?
+ leojean890: parce que j'ai utilisé le mauvais&#160;!!!! (le mot "vais"&#160;;)
+ Stilgart: :drum:
+ dwarfie: alors que sur RC , y'a les skis seul 
+ <b>**BlaiseEbuth jette leojean890 par la fenêtre.</b></p><p><img src="/a/16542412157988" /> Zorg1: y a une tronçonneuse au moins&#160;?
+ dwarfie: ET le ballon de rugby
+ leojean890: dommage la fenêtre était fermée hehehe
+ Zorg1: y a ce truc dans "rugby"&#160;: :rugby_football:
+ dwarfie: ah ben voila :D
+ BlaiseEbuth: Awé
+ leojean890: comment es ton "bouuh des gens scrappent les logs du chat et ma femme et mon employeur vont tomber dessus et dbdr est un criminel"&#160;?
+ BlaiseEbuth: En forme, il parle de np
+ dwarfie: leojean890&#160;; t'as une polemique de retard la :D
+ leojean890: dwarfie bah on en parlait il y a 2 3 jours ^^
+ BlaiseEbuth: Ski Paul et Mick&#160;?
+ Zorg1: ah le poney rose à gros cervo
+ leojean890: sur le mec qui a lancé la polémique
+ Zorg1: c'est vieux ça
+ leojean890: 3 jours, non&#160;?^^
+ Zorg1: il y a Blaise qui l'a un peu titiller sur son autre marotte "CG ment au gens en disant qu'ils peuvent résoudre du NP hard avec un BFS"
+ dwarfie: ouais ... donc t'es en retard d'une polemique par lui :rofl:
+ BlaiseEbuth: *DFS
+ Zorg1: ah oui DFS
+ Zorg1: j'ai du coder un BFS sans faire gaffe
+ BlaiseEbuth: Ca n'a pas marché t'façon
+ Zorg1: bah si j'ai cheaté comme 95&#160;% des solutions à ce puzzle
+ BlaiseEbuth: Bouh
+ Zorg1: l'est bête lui, il n'a rien suivi
+ BlaiseEbuth: Bah oui, je suis Bête. :imp:
+ Zorg1: il est venu nous ouvrir les yeux et on l'a rejeté par ce qu'on aimait pas ce qu'ils disaient
+ Zorg1: le mec a du se croire perdu en Gallilée
+ Zorg1: ah tiens oui on peut recycler ce meme
+ leojean890: ah oui j'avais donc pas suivi la suite xD
+ BlaiseEbuth: Recycler mémé&#160;? Comme dans le soleil vert&#160;?
+ leojean890: le mec a proposé un jeu de tests inédit pour faire planter tlm&#160;!
+ Zorg1: "This puzzle is NP-hard. You are all cheaters&#160;!"
+ leojean890: n'avait pas compris que le but du puzzle était d'être solvable en heuristique
+ leojean890: sinon il serait en VVH
+ Zorg1: non mais laisse tomber c'est un putain de génie de la 8éme singularité
+ Zorg1: tu peux pas comprendre
+ BlaiseEbuth: Mr'appelle celui là <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/p-versus-np/191132">https://www.codingame.com/forum/t/p-versus-np/191132</a>
+ Zorg1: ça restait marrant, le gars était dans son trip, il essayait pas d'emmerder tout le monde
+ Zorg1: là t'as un gus qui commence à prêter des intentions à tout le monde
+ BlaiseEbuth: Bwah là non plus, il veut sauver les utilisateurs des fausses connaissances qu'on essaye de leur mettre dans le crâne.
+ Zorg1: faudrait fermer internet, la TV, la radio, l'école .... alors
+ Zorg1: bref faudrait arrêter de parler en fait
+ dwarfie: "shoot shoot ... don't talk"
+ Zorg1: ^^
+ BlaiseEbuth: Farpaitement. Voggle. Tous autant qu'vous êtes.
+ Stilgart:  Automaton2000 n'est pas, donc il ne se tait pas
+ Automaton2000: il ne reste plus que les autres puzzles
+ Zorg1: en plus quand on parle sur ce chat bah tout le monde peut logger et t'as aucun controle&#160;:(
+ Stilgart: il y aurait bien le self control, mais bon... :D
+ Zorg1: ça fait longtemps qu'il s'est barré d'ici lui
+ BlaiseEbuth: Que fait Zorg1 quand il essaye de se contrôler&#160;? Y boue :drum:
+ Zorg1: :thumbsup:
+ Zorg1: d'ailleurs c'est bizarre que les bourses du ponant n'a pas rencheri sur toto le poney. Il doit être en vacance aux pays des trolls calmes;
+ BlaiseEbuth: Les bourses du poney&#160;?
+ Zorg1: les bouses du poney
+ Zorg1: c'est une peau de vache
+ Zorg1: avec des réparties de ce niveau je suis mûr pour un débat des présidentielles moi
+ BlaiseEbuth: Le niveau de ce chat va de mal en pis...
+ BlaiseEbuth: :cow:
+ Zorg1: Automaton2000 sauve nous&#160;!
+ Automaton2000: j'arrive même pas à la hauteur
+ Zorg1: :scream:
+ Zorg1: tu nous fais une déprime Automaton2000&#160;?
+ Automaton2000: je suppose qu'il y a un truc à la con
+ leojean890: s'il veut pas que ses msgs soient logged il faut qu'il self control et de plus son pseudo est pas parlant
+ leojean890: moi tt ce que je dis ici c'est indéxé par google à mon prénomnom890 et hop profiling powaa
+ Zorg1: t'es vachement aware toi dis donc
+ leojean890: après si on déblatère trop de msgs l'information pertinente est noyée dans la masse mouahaha
+ BlaiseEbuth: Stoi la masse
+ leojean890: je suis vachement oware ouais
+ leojean890: abapa
+ Zorg1: on a noyé le chat et PhilRG n'est pas encore de la partie ^^
+ leojean890: ah ui il spam pas mal lui aussi xD
+ BlaiseEbuth: T'es bourré leojean890.
+ leojean890: nopewhyomg
+ Zorg1: il doit avoir un concert
+ Zorg1: il s'est préparé
+ Zorg1: :p
+ leojean890: bof pas en ce moment avec le KO vie 2
+ BlaiseEbuth: Je sais pas. T'es pas comme d'habitude. T'écris pas pareil...
+ leojean890: répètes et qq jams 
+ nicola: C’toi qui sert.
+ Zorg1: ouais il y a ni "héhé" ni ":p:p"
+ BlaiseEbuth: T'est tibo avoue
+ Zorg1: voilà ^^
+ leojean890: j'suis sûr que j'ai déjà parlé ainsi ici omg
+ Stilgart: Automaton2000 a été battu par votre niveau de bêtise :fearful: :scream:
+ Automaton2000: oui ... mais bon , vu que je suis en train de dire que c'est pas le plus simple
+ leojean890: j'disais déjà de la merde les autres jours, anyway;)
+ Zorg1: j'avoue on y a été fort là ^^ no limit, sky is not the limit
+ BlaiseEbuth: J'ai pas dit que tu disais plus de merde que d'habitude, j'ai dit que tu la disais différemment.
+ leojean890: but where is the limit&#160;? in the kitchen with Brian, maybe
+ BlaiseEbuth: J'vous dit qu'il est bourré. Ou défoncé au choix.
+ Zorg1: ça doit être le nouveau vaccin
+ leojean890: meuh non il est que 18h50 voyons je serai bourré dans 2h hehe
+ Stilgart: m'en parlez pas, j'ai assez morflé du week-end avec ces conneries de vaccins
+ Zorg1: y a pas la 5G, ça veut pas dire qu'ils ont pas mis autre chose à la place
+ leojean890: ah oui la 3eme dose ça retourne la tête&#160;: elle contient une IA qui te contrôle 
+ Zorg1: enfin moi je capte rien
+ leojean890: the 100 powaa
+ Stilgart: leojean890 doit passer ses certifs
+ leojean890: ah ouais les certifs sur le profil j'ai pas testé, y'a de quoi perdre 30 min de sa vie par certif au moins non&#160;?:P
+ Stilgart: non, pour ce prix là tu devrais en avoir deux
+ Zorg1: VB Expert mondial, plus balaise que 99.99999% des professionnels
+ Stilgart: prix = 30min.
+ leojean890: 15 min par certif, wow
+ leojean890: je code pas méga rapidement, après xD
+ Stilgart: j'ai ça en moyenne
+ Zorg1: j'ai passé que la certif lua, histoire qu'il y ait au moins un vrai utilisateur
+ leojean890: c des puzzles easy les certifs&#160;?
+ Zorg1: limite des CoCs
+ Stilgart: et encore, j'ai lutté avec des problèmes de cin à la con
+ Stilgart: c'est du puzzle de CoC oui
+ leojean890: en coc parfois je traine un peu et j'arrive pas premier :P
+ Zorg1: tkt c'est pas des reverses de débiles
+ leojean890: le pire en coc c les reverse qui sont wtf
+ leojean890: selon oi
+ leojean890: moi
+ Zorg1: ça tombe bien pas de reverse en certif
+ Alshock: ouais en fait certif &gt; coco
+ Alshock: coc*
+ Zorg1: en plus je vois pas ce que ça prouve dans tes skills de codage
+ Alshock: ils ont caché qu'ils faisaient un truc bien, moi-même je suis tombé dans le panneau
+ leojean890: du coup ok des puzzles coc
+ Zorg1: le reverse ça prouve juste que t'as l'esprit aussi tordu que celui qui l'a conçu
+ leojean890: ça devrait être simple do,c^^
+ leojean890: les certifs ça aurait pu être des questions théoriques hehe
+ Alshock: c'est excessivement simple oui
+ Zorg1: sinon tu peux regarder la chaîne twitch de JBM 
+ BlaiseEbuth: Y sont en train de critiquer&#160;! Qu'on les ban tous&#160;!
+ Alshock: maintenant tout de suite&#160;?
+ Zorg1: oui qu'on ban Blaise pour nos fautes&#160;!
+ Alshock: Mais pas du tout je dis qu'ils ont bien caché le fait qu'ils avaient accédé à nos revendications&#160;!
+ Zorg1: c'est comme ça que ça marche ici si j'ai bien compris
+ Alshock: en fait les certifs c'est une manière dissimulée de faire un bon système de CoC, bon il faut s'orgnaniser à côté pour le ranking mais au moins les sujets sont pas trop mal et y a pas de reverse
+ BlaiseEbuth: Les revendications c'est ce qui n'est pas prioritaire&#160;?
+ Zorg1: rien n'est prioritaires sauf le frivole
+ leojean890: les certifs en mode SSII ce sont des questions théoriques il parait
+ JBM: je sais pas s'ils y sont encore
+ leojean890: enfin j'en ai pas testé et osef aussi
+ Zorg1: "questions théoriques" et SSII
+ Zorg1: je sais pas pourquoi mais ça fait bizarre
+ BlaiseEbuth: On dit ESN
+ leojean890: du coup le %age que t'as en certif c'est selon le temps que tu mets à résoudre un coc bidon&#160;?^^
+ Alshock: le&#160;% certif c'est &gt;99%
+ Zorg1: ton score, si tu fais tous c'est 99%
+ leojean890: ouais on dit esn I know..
+ BlaiseEbuth: Non. Tout le monde est meilleur que 99%
+ Alshock: quelque soit le temps que tu mets
+ leojean890: ah ok mdrr bon bah simple alors
+ Zorg1: voilà c'est comme l'autre qui voulait qu'on soit tous top 10
+ leojean890: les ssii parfois ils te posent des questions théoriques pourries Zorg1 ou les clients xD
+ Alshock: top 100 de mémoire
+ leojean890: genre te demander de surcharger des class loaders en java
+ leojean890: osef quoi^^
+ Zorg1: oui le truc qui sent le réchauffé
+ Zorg1: sans doute récupérer dans un blog "comment je piège mes candidats et comment je me sens trop malin"
+ BlaiseEbuth: *esn
+ leojean890: ouais les questions sur les classloaders c pour piéger^^
+ leojean890: même sur les new/old gen
+ leojean890: les phantom/soft/weak ref
+ leojean890: même si c déjà plus utile
+ Zorg1: alors que le truc c'est surtout savoir si tu es démerdard pour récupérer l'info
+ leojean890: quand tu bosses sur une grosse appli ça devient important :P
+ leojean890: alors.. purée où est ce fuckn bug^^
+ leojean890: j'ai déjà écumé 300 classes et pas encore trouvé snif
+ Zorg1: oui enfin je relis toujours pour savoir qui est quoi entre phantom weak et soft
+ Alshock: mais qui est le débile qui a décidé que maintenant la sortie d'erreur prendrait que la moitié de la sortie qui est déjà bien trop petite&#160;?
+ BlaiseEbuth: Comme savoir boucher des trous quand tu navigue sur une passoire.
+ Alshock: Je vais insulter des ancêtres en vietnamien
+ leojean890: weak et soft ça ressemble ouais..$
+ leojean890: phantom c autre chose^^
+ Alshock: je fais pas de Java phantom ça a à voir avec les dangling pointers ou aucun rapport&#160;?
+ BlaiseEbuth: Faut pas faire de java tout court.
+ Alshock: J'ai lu quelques lignes je suis déçu j'aurais aimé me gausser de dangling pointers dans un langage qui les cache justement pour éviter ce genre de soucis
+ Zorg1: ce sont les références dans le couloir de la mort ^^
+ Alshock: j'ai vu, je comprends même pas à quoi ça peut servir
+ BlaiseEbuth: &amp;greenMile
+ leojean890: j'ai jamais utilisé ça perso j'ai juste lu théoriquement mdrr
+ leojean890: en java faut faire du fonctionnel&#160;;)
+ leojean890: adieu le code à rallonge :P
+ Zorg1: autant utiliser scala, non&#160;? :p
+ Zorg1: voire Haskell, pour faire du troll de qualitay
+ leojean890: ça se fait dans plein de langages le fonctionnel yep xD
+ leojean890: python et js notamment :P:P
+ leojean890: kotlin jamais essayé 
+ Zorg1: on lui demande de citer des langages fonctionnels et il cite python et js&#160;:(
+ Zorg1: pourquoi pas FORTRAN non plus
+ Zorg1: ils vont bien y mettre les closures dans la prochaine version si ce n'est déjà fait
+ leojean890: bah java non plus c pas que fonctionnel, je disais que c'est mieux que le mode verbeux à l'ancienne:P
+ Zorg1: "FUNCTIONAL FORTRAN" le nouveau langage qui va casser la baraque
+ leojean890: python et js sont pas mal pour ça aussi je trouve :P
+ leojean890: haskell je connais vraiment pas
+ leojean890: j'pense que c pas évident au début
+ leojean890: j'ai vu vite fait la syntaxe
+ dwarfie: c'est pas complique ... sauf que si tu penses que python c'est fonctionnel , tu vas souffrir :D
+ leojean890: faut s'y mettre sérieusement, je suis tenté pour essayer someday
+ leojean890: tkt j'ai essayé lisp
+ leojean890: méga concis ça aussi hehe
+ leojean890: parenthèse powa
+ dwarfie: la seul vraie question avec haskell ... c'est " vais-ja passer la barre des 135 ce soir&#160;? " :D
+ leojean890: quel golf&#160;?:P
+ dwarfie: non , c'est pas le nombre de char ... mais le nombre de puzzle
+ leojean890: ah 135 puzzles en haskell tu maitrises quoi:P
+ leojean890: enfin assez disons:p
+ BlaiseEbuth: Stoi l'puzzle.
+ dwarfie: pas encore assez a mon gout ... pas assez pour faire la certif ...
+ BlaiseEbuth: lel
+ dwarfie: Stoi le Stoi
+ leojean890: stoi ou atoi
+ leojean890: ça fait penser au prof d'école qui suspectait qu'on gruge quand qqn utilisait strtok il disait "vous auriez pas pensé à utiliser ça " xD
+ Zorg1: je sais quand je faisais du C y avait que ça de dispo strtok
+ leojean890: il a lâché ça en début de tp mdr
+ leojean890: "j'en suspecte quelques uns de tricher, je vous ai à l'oeil"^^
+ Zorg1: genre à faire un post du forum pour nous dire qu'on est tous des grugeur&#160;:(
+ leojean890: il aurait ptet pas fait ça non plus :P
+ nicola: Death First Search, c’est quoi d’ailleurs&#160;?
+ Zorg1: les puzzles skynet
+ nicola: OK.
+ Zorg1: renommé pour histoire de droits
+ nicola: Ils ont eu peur du FAI belge&#160;?
+ Zorg1: bah c'est depuis qu'ils ont été racheté qu'on a ça
+ Zorg1: surtout le proprio de la license Terminator je pense ^^
+ Zorg1: dans l'énoncé ils parlent de "bobnet" maintenant
+ leojean890: wow ce golfing sensas en java sur 1 880 chars
+ leojean890: chuck norris
+ leojean890: il est temps de shorten ça
+ <b>**Stilgart commence à avoir peur pour sa place de dieu de Haskell</b></p><p><img src="/a/69893904259383" /> Stilgart: déjà que Bon[]Crayon n'est plus dieu du D...
+ leojean890: passage de 1880 à 600 easy 
+ leojean890: jbm aussi est bon en haskell, right&#160;?
+ JBM: oh non je suis un débutant
+ Stilgart: oui comme il fait pas les puzzles qui le saoule, je suis tranquile
+ Stilgart: +l
+ leojean890: mdr trolll
+ leojean890: ouais je vois
+ leojean890: y'a des puzzles qui motivent pas, c clair:)
+ Stilgart: faut admettre que j'en ai fait un paquet à contre-coeur
+ leojean890: chacun ses gouts après mais bon^^
+ Stilgart: quand c'est ton 10e bfs du mois, ça fait chier
+ leojean890: t'es motivé à faire ça toi lol
+ leojean890: ah ouais y'en a plein des bfs
+ leojean890: comme les mecs qui font 500 coc juste pour l'achievement alors qu'ils ont aps envie mdr
+ leojean890: je ferai jamais ça
+ dwarfie: les puzzles , c'est comme les Dragées surprises de Bertie Crochue .... y'en a y sont pas bons :nauseated_face:
+ JBM: non mais sinon ils pourraient pas modérer les CoC (qu'ils font pas)
+ Stilgart: spoiler, je fais aussi du bfs en "production"
+ dwarfie: moderer , c'est 50 ... SIC
+ Stilgart: modifier c'est 300
+ Stilgart: j'ai encore des douleurs par où c'est passé
+ dwarfie: en meme temps , la sele modif valable ... c'est de decocher les cases , non&#160;?&#160;;)
+ Stilgart: non, une fois j'ai changé le sujet et le jeu de test
+ leojean890: ah oui modérer les coc ça aussi faut du courage
+ dwarfie: ah ouiiiii je m'en souviens ;D
+ leojean890: y'a tellement tout et n'importe quoi qui passe
+ leojean890: mais qui a la motiv d'aller modérer l'onglet contrib hehe
+ Stilgart: personne
+ dwarfie: y'a surtout consigne de pas moderer ....
+ Stilgart: avant on était motivé et on virait la merde
+ Stilgart: mais on nous a fait comprendre que c'était pas ça qu'il fallait faire
+ leojean890: ouais j'me souviens que vous faisiez ça xD
+ Stilgart: alors depuis on bulle et on trolle ici
+ leojean890: mais mon dieu c chiant de faire ça :p
+ Stilgart: bah non
+ dwarfie: on voit le resultat ...
+ Stilgart: une contrib pourie, c'est trivial à voir
+ leojean890: tu bulles pas tant que ça, tu résous tous les puzzles commu du site toi mdr
+ Stilgart: (c'est une partie de mon métier, je triche)
+ leojean890: ah ouais t'as l'habitude avec les codes des élèves hihi
+ Stilgart: non, me reste un certain freecell
+ Stilgart: et save the forest 2 que je trouve juste trop chiant
+ Stilgart: (j'ai jamais aimé le mutli-agent)
+ Stilgart: oui, le détecteur de bullshit interne est affuté
+ leojean890: c pas le truc que j'ai fait en heuristique ça&#160;? ou c'est le 1 je sais plus:p
+ leojean890: ouais tu vois quand les élèves pompes et tu mets 0&#160;?:P
+ Stilgart: le 1 ça va
+ Stilgart: le 2 c'est la même en mutli-agent, j'ai rage-quit
+ Stilgart: pour la pompe, diff fait ça pour moi en général
+ Stilgart: common subdirectory: .git
+ Stilgart: ... oops :D
+ dwarfie: le 1 ou le 0 ... de toutes facons c'etait 0
+ leojean890: ah non j'ai pas fait le 2 mdr
+ leojean890: le 1 t'avais galéré je me souviens :P
+ dwarfie: le 1 ou le 2
+ Stilgart: le 1 j'avais essayé de pas le faire au nid de if
+ leojean890: moi j'ai eu juste de la chance de le finir vite car j'avais un code qui passait les valideurs mais pas un test xD
+ Stilgart: (parce que c'est quand même pas une vraie solution)
+ leojean890: j'avais juste une éval de merde
+ leojean890: BlokopsIl y a environ 6 moisis because it was able to pass the "Validators" but not the testcases (he just got lucky)
+ leojean890: même les mecs qui commentent me clash xD
+ Stilgart: en même temps, fallait pas faire ton ...
+ Stilgart: comment il a dit Zorg1 tout à l'heure&#160;?
+ Stilgart: ton w quoi
+ leojean890: bah après mon éval pourrie pass les validators tant mieux pour moi xD
+ Stilgart: ça prouve surtout que ça a été approuvé trop vite
+ leojean890: ah mais w il fait pas d'éval pourries, il fait pas d'évals du tout mdrr
+ Stilgart: et que personne n'a patché le truc
+ leojean890: il utilise son bot^^
+ Stilgart: si, son éval c'est la fonction qui donne au referee ce que le referee veut lire
+ Stilgart: best eval ever
+ leojean890: moi je fais comme dans les multis je pondère des critères et hop^^
+ leojean890: c pas carré mais ça passe à l'arrache quoi^^
+ leojean890: ça fait penser à yannT dans OOC
+ leojean890: il décrivait sa pondération "qui n'a aucun sens"
+ leojean890: mais il nous défonçait tous^^
+ Stilgart: un mutli c'est différent
+ Stilgart: tu peux vraiment abuser du méta
+ leojean890: j'ai eu la même approche là xD
+ leojean890: mais bon c cheat
+ Stilgart: à MPR, tu mets -3vel comme simu de l'adversaire et tu roules sur la gold
+ Stilgart: oui et non
+ leojean890: comme tu dis les jeux de test/val sont pas optimaux
+ leojean890: sinon ça ne serait pas passé
+ Stilgart: ça devient cheat si tu exploites un truc abusif
+ Stilgart: (cf TGE gold)
+ Stilgart: (et encore, on parle de cheese parce que techniquement c'est pas de la triche)
+ leojean890: TGE gold&#160;?
+ leojean890: je connais pas l'astuce
+ leojean890: j'ai juste un minmax depth 2 dans TGE perso^^
+ Stilgart: the great escape, où tu tends pose des murs au début pendant que l'autre avance
+ Stilgart: et tu lui coupe la route directe tardivement, forçant un énorme détour
+ leojean890: avec fct heuristique de choix de l'adv et élagage des barrières trop loin de l'adv
+ leojean890: ah ouais j'ai vu des mecs faire ça, "se créer un chein" dès le début
+ leojean890: un chemin
+ Stilgart: c'est brainless, et ça tue ton minimax depth 10
+ leojean890: c pas ouf je trouve mais ça peut passer gold j'imagine
+ Stilgart: surtout, ça pourrit la gold
+ leojean890: faut coder des trucs contre leur strat
+ Stilgart: trop chiant
+ Stilgart: j'ai préféré rage-quit
+ leojean890: minmax depth 10 faut un sacré bon élagage vu le branching d ouf anyway^^
+ leojean890: j'ai lu le PM de romka ça semble balèze mais il est #3
+ leojean890: il combine plusieurs search
+ leojean890: il pense à tous les cas
+ Stilgart: je pense pas que ça serve beaucoup de simuler toutes les poses de mur
+ Stilgart: si ça se trouve, juste une au début ça suffit amplement
+ leojean890: j'ai un élagage ouais (sinon ça timeout anyway)
+ leojean890: mais l'élagage est tout sauf opti car il est basé sur la distance entre les persos et la pose du mur
+ leojean890: donc clairement ça rate qq coups intéressants
+ leojean890: romka il search des trucs genre "si je peux gagner je gagne, si je peux faire un path qui m'assure la victoire, je fais, sinon si je peux empêcher l'adv de faire comme tel je le fais, puis une éval pour dire si un terrain est bien avantageux ou pas
+ leojean890: en gros un truc bien clean
+ leojean890: on dirait les PM de pb4 avec l'éval de board quality de STC
+ leojean890: trop dur à faire^^
+ leojean890: après romka il est fort, même sur RAIC il était dans le top
+ leojean890: <a rel="nofollow" class="external free" href="https://www.codingame.com/blog/the-great-escape-top-codingamers-code-reviews">https://www.codingame.com/blog/the-great-escape-top-codingamers-code-reviews</a>
+ darkhorse64: Il a une heuristique qui déchire apparemment mais je n'ai rien compris à ses explications sur le max path area
+ leojean890: 5) If I can put some wall which will leave me in small part of map, I’ll do this. This search was done with backtracking with depth = 3.
+ leojean890: déjà ça c'est spécial^^
+ leojean890: 516 chars chuck norris java, c pas ouf xD
+ pardouin: :o
+ pardouin: ah du coup je vois que chouch m'est repassé devant
+ pardouin: il avait 183
+ pardouin: leo tu peux faire deux fois moins sans forcer, t'absues ^^
+ pardouin: abuses*
+ Bon[]Crayon: salut tout le monde
+ Bon[]Crayon: salut automaton2000
+ Automaton2000: je trouve que c'est mieux de faire un peu de boulot
+ Bon[]Crayon: Automaton2000 juste un peu alors
+ Automaton2000: ça a pris du temps pour faire du code en prive a des personnes qui ont un meilleur winrate contre ...
+ Zorg1: mékesturacont Automaton2000&#160;?
+ Automaton2000: du coup c'est vrai que ça fait un tableau du genre let totest = [16,8,2,1]; pour tester dans l'ordre hexa ...
+ Zorg1: t'as oublié 4 dans ton super tableau Automaton2000
+ Automaton2000: faut que je me demandais pourquoi mon bot est limité depth 14 ...
+ Zorg1: depth 14 en python c'est pas mal Automaton2000 :p
+ Automaton2000: c'est normal de ne pas avoir la même chose :d
+ 3141948: o/
+ Zorg1: \o
+ Bon[]Crayon: o/
+ NicolasMasonFairbanksTremblay: \o
+ Zorg1: \o/
+ NicolasMasonFairbanksTremblay: \o/o\
+ Bon[]Crayon: o/o\o
+ Bon[]Crayon: Automaton2000 /o/o\o/o\
+ Automaton2000: mais c'est vrai que c'est bien le moment ou je vois que je ne suis pas un robot
+ Bon[]Crayon: Automaton2000 es-tu une tortue&#160;?
+ Automaton2000: yo tout l'monde&#160;! automaton2000, automatonnn&#160;!
+ Bon[]Crayon: Automaton2000 yo :d
+ Automaton2000: ou tu vas nous faire un truc genre
+ Bon[]Crayon: Automaton2000 \o/
+ Automaton2000: mais vu que k parcours toute la chaîne
+ Remi.: Bonsoir à tous&#160;! Tortue Automaton2000
+ Automaton2000: donc il y a un tutoriel
+ Bon[]Crayon: o/
+ 3141948: \o
+ 3141948: Pas la force de troller ce soir moi
+ Remi.: T'as raison c'est fatiguant de troller ^^
+ 3141948: En général j'aime bien mais rincé par 8h de pose de parquet
+ 3141948: Heureusement pas trop de découpes cette fois
+ Remi.: J'ai encore jamais posé de parquet. Lino oui mais parquet et carrelage non.
+ Remi.: Lino/Vynil/Ballatum, je sais plus la subtilité.
+ leojean890: pardouin ah ouais&#160;?:P
+ leojean890: j'ai pas utilisé de fonctionnel dans ma solution courante pour info xD ça peut improve
+ 3141948: Remi.: En fait ce sont des lames de parquet stratifié, me souviens plus du nom exact. Ca se coupe au cutter bien aiguisé, ou alors avec un coupe-lame de qualité, car celui que j'ai acheté coupe pas droit
+ 3141948: Et faut partir droit, comme le carrelage
+ 3141948: Jamais posé de lino sinon, c'est peut-être moins crevant
+ Remi.: Bah le lino il faut pas la journée ^^
+ 3141948: Les découpes çà tue
+ 3141948: Le lino ça a l'air bien aussi, ils ont du faire du progrès dans les revêtements
+ 3141948: Le mieux çà reste tout de même du parquet collé en bois
+ BlaiseEbuth: Du parquet en bois&#160;! :o
+ Remi.: Salut Blaise
+ Remi.: toujours aussi diabolique&#160;?
+ 3141948: Une scie circulaire et basta
+ 3141948: Je veux dire parquet en chêne pas stratifié ou autres similis
+ 3141948: Quoique le parquet en bois ca se pose je crois
+ Remi.: J'ai du parquet flottant chez moi. Pourtant on ne vit pas sur l'eau ^^
+ 3141948: Ah ok cool c'est moins froid que le carrelage
+ Bon[]Crayon: sur un flaque de ciment
+ 3141948: Diabolo et satanas, c'était diabolique déjà
+ Remi.: Seulemnet dans les chambrs, sinon le reste c'est carrelage. Et tant mieux, plus facile à nttoyer.
+ 3141948: Avec des animaux oui c'est sûr. L'idéal c'est les canapés en cuir pour les 🐱 et parquets pour les 🐶 malpropres
+ 3141948: Ce que j'ai posé dans les chambre, ça se nettoye à l'eau pas de javel
+ Zorg1: on appelle pas ça de l'eau&#160;?
+ Remi.: Non c'est nouveau, c'est de "l'eau pas de javel" :P
+ 3141948: En fait ca s'appelle du sol stratifié ce que j'ai posé, ne tâche pas, et résistant aux rayures
+ 3141948: Bon suis fatigué moi j'arrive plus à écrire, je finis mon foot et dodo
+ Remi.: Ok, bon foot et bonne nuit
+ lemin08: bonsoir
+ lemin08: je veux faire 100 days of code vous avez des idées de comment je peux le fair
+ 3141948: Les lames se clipsent (dispositif ingénieux) pas de collage. Mais c'est pas si évident que ça à poser, les vendeurs sont un peu abusifs
+ 3141948: Bonne nuit
+ Zorg1: bah les vendeurs ils vendent ...
+ Zorg1: bn
+ 3141948: Ben ouais le truc c'est de jamais rentrer dans un magasin se bricolage
+ 3141948: Et là tu vis heureux
+ 3141948: Je me demande si mon CV en BTP est pas plus fourni que mon CV en informatique
+ Zorg1: lemin08&#160;: tu veux faire un puzzle tous les jours&#160;?
+ Stilgart: il y a 136 puzzles easy, c'est plus que nécessaire
+ Zorg1: plus des moyens si tu veux de la variété dans la difficulté
+ Stilgart: ha ça, dans les medium tu en as de la variété de difficulté 
+ dwarfie: je dirais meme de la variance
+ Zorg1: et son pote l'écart type
+ Zorg1: Automaton2000 toujours là&#160;?
+ Automaton2000: je pensais pas que mon ia est pas encore passé
+ Zorg1: si t'arrétais de coder ton IA en python aussi Automaton2000
+ Automaton2000: parce que le contest est fini
+ Zorg1: :thinking:
+ leojean890: pk quasiment tlm du top 100 a perdu 1000-1500 CP entre hier et today&#160;? :P
+ leojean890: 1 jeu aurait il été supprimé&#160;?
+ leojean890: ah non c'est sur les challenges, la règle de calcul pour les contests a été modifiée :p

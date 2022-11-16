@@ -1,0 +1,1104 @@
+ JBM: comment es ta weekend
+ dbdr: ma weekend est ping
+ pardouin: énorme la sol de VilBoub sur ce puzzle:<a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/hit-the-road">https://www.codingame.com/ide/puzzle/hit-the-road</a>
+ pardouin: sa sol:from random import choicereponse = ("true", "false")print(choice(reponse))
+ pardouin: une chance sur 128 de passer ^^
+ VilBoub: héhé ^^
+ pardouin: j'hésite à te upvote
+ RenardFute: wsh don't panic en &lt; 200 c chaud
+ pardouin: allez on va dire que c'est noel
+ RenardFute: vous l'avez fait en quel language&#160;?
+ pardouin: regarde le classement&#160;:)
+ conadal: mdr
+ RenardFute: 57 en py O_O
+ pardouin: tu as combien de chars en py&#160;?
+ RenardFute: 340
+ pardouin: ma toute première solution faisait 157, je l'ai sous les yeux là
+ pardouin: donc c'est largement faisable sans aller chercher de tricks douteux
+ pardouin: (mon 57 utilise des tricks douteux&#160;:))
+ pardouin: (genre en compressant tes chars en unicode tu peux transformer ton 340 en 195 facilement mais normalement tu peux passer sous 200 sans avoir à en passer par là)
+ Tiouz: Ça veut dire quoi compresser les chars en unicode&#160;?
+ RenardFute: je suis descendu a 334 avec numpy mais wsh c complexe
+ pardouin: si tu veux pm moi ton script, je te donne des petits tips
+ pardouin: (stocker 2 chars en 1 seul char unicode)
+ pardouin: oulah mais retire tous les espaces déjà
+ Alshock: coucou les enfants, ça va bien&#160;?
+ pardouin: yep alshock
+ pardouin: si vraiment tu es obligé d'indenter, ne mets qu'un seul espace
+ RenardFute: trop smart
+ RenardFute: mais j'ai tjr 297 char a faire disparaitre
+ Alshock: non, le "trop smart" c'est pour les techniques qui viennent APRÈS (et c'est littéralement TROP smart)
+ pardouin: dans un bloc tu peux enchaîner les instructions en séparant par un&#160;;
+ pardouin: while True tu peux faire while 1
+ Tiouz: J'ai pas compris comment tu peux compresser 2 chars en un seul&#160;? En passant par l'IDE en ligne&#160;?
+ Zorg1: salut tout le monde et Automaton2000
+ Automaton2000: on doit avoir le même résultat
+ Alshock: mon réultat c'est tortue et toi Automaton2000&#160;?
+ Automaton2000: j'espère que je me disais bien&#160;:)
+ Alshock: Mais enfin, ça ne veut rien dire petite frère Automaton2000
+ Automaton2000: je suis déjà dans le top 100
+ pardouin: en encodant le string qui contient ton script en utf8 et ensuite en le décodant en utf16 tu obtient un string 2 fois moins long
+ pardouin: qui ressemble à du chinois
+ pardouin: en faisant le procédé inverse tu récupère le string initial et tu peux l'éxécuter
+ jfaixo: :o
+ Alshock: enfin y a que les caractères ascii qui sont deux fois moins longs, faut pas écrire des trucs ridicules en unicode
+ Tiouz: Et il faut ajouter un header, ou un truc spécial&#160;?
+ pardouin: pas spécialement, il faut juste avoir un nombre pair de chars
+ pardouin: en version basique tu peux le faire juste avec les méthodes encode en decode basiques
+ pardouin: après évidemment l'encodage/décodage se golfe aussi&#160;:)
+ jfaixo: l'IDE cg accepte le utf16 du coup&#160;?
+ pardouin: ça dépend des languages mais souvent oui
+ pardouin: si tu précise juste "UTF16" il risque de galérer car il ne saura pas si c'est LE ou BE donc il va te rajouter un DOM qu'il faudra supprimer au décodage
+ pardouin: mais si tu précise LE ou BE ça se fait de manière fluide
+ pardouin: ça marche pas du tout en utf-32 par contre car il y a plein de points de code vides
+ jfaixo: ok, c'était ce que j'étais en train de me demander xD
+ Tiouz: Je ne vois pas du tout en pratique comment faire. Je prend mon code, j'appelle encode dessus en utf-16, et après je ne peux pas le copier-coller dans l'ide...
+ pardouin: essaye:print("Hello World!".encode().decode("utf-16le"))
+ Tiouz: oh comme ça
+ pardouin: et le contraire:print("效汬⁯潗汲Ⅴ".encode("utf-16le").decode())
+ Zorg1: ah en fait l'IDE compte le nombre de char unicode par d'octets
+ Tiouz: Ok. Et tout ça dans un exec pour executer la string
+ pardouin: exemple plus concret:
+ pardouin: print("print('Hello World')".encode().decode("utf-16le"))
+ pardouin: te donne:牰湩⡴䠧汥潬圠牯摬⤧
+ Tiouz: Ça me fait passer de 188 à 141
+ pardouin: après tu peux juste faire:exec("牰湩⡴䠧汥潬圠牯摬⤧".encode("utf-16le"))
+ pardouin: tu peux retirer le decode(), il est implicite
+ pardouin: si tu as un script qui mélange les " et les ' c'est relou alors mets tout le script entre """ """
+ Tiouz: Et si il y a des charactères \u2072, ça va quand même me compter 6 chars dans l'ide&#160;?
+ pardouin: il n'y en aura pas
+ Tiouz: J'en ai eu
+ Tiouz: Ou alors c'est parce que j'ai lancé dans un terminal qui ne gère pas l'utf-16 peut-être
+ pardouin: tu verras il n'y a jamais de lézard
+ pardouin: ascii se map pile sur des utf16 de "deux chars"
+ Tiouz: J'ai eu ça&#160;: ⤨潦\u2072\u2069湩
+ Tiouz: (sur mon code, ton exemple fonctionne)
+ pardouin: la version que j'ai donné avec exec("&lt;le script&gt;".encode("utf-16le")) te divise le script par deux pour un coût de 27 chars
+ pardouin: ça se golfe encore un peu, il y a moyen de passer le cou+ût ) 25 chars
+ pardouin: coût à*
+ pardouin: pour ça que j'ai dit tout à l'heure que 340 chars se tranforme en 195
+ pardouin: 340/2 + 25
+ Tiouz: Sur ton code à 57 c'est presque pas rentable^^
+ pardouin: oui plus le code est petit moins c'est utile
+ pardouin: par exemple mon temperature passe de 53 à 52
+ Tiouz: Après, 1 char de différence à 53 c'est pas négligeable
+ pardouin: et sur thor ça sert à rien
+ Tiouz: Ça ça me rend fou, avec ce nombre de caractères je ne peux même pas lire l'entrée^^
+ pardouin: ^^
+ Tiouz: Tu utilises open&#160;?
+ pardouin: non
+ pardouin: le seul où ça me semblait exploitable c'était temperature
+ Zorg1: c'est normal 2072 et 2069 ne sont pas graphique en fait dans l'unicode (c'est "Copy and Paste")
+ Tiouz: Donc juste un map(int,input().split())&#160;?
+ pardouin: mais rien trouvé de très probant
+ pardouin: pas vraiment non&#160;:)
+ pardouin: je map pas direct
+ Tiouz: J'ai encore des tricks à apprendre^^
+ pardouin: déjà j'ai:I=input
+ pardouin: et le print aussi avec I
+ pardouin: du coup open devient moins rentable d'emblée
+ Tiouz: en effet
+ pardouin: ah tiens je viens de percuter qu'il y a pile 500 puzzles en tout
+ pardouin: et stilgart en a fait 492 XD
+ Alshock: pile poil
+ Alshock: Mais du coup, percuter 500 puzzles ça doit faire mal non&#160;?
+ dwarfie: sauf qu'il y'en a plus que ca ...
+ dwarfie: 522 ... faut apprendre a compter ...
+ dwarfie: et stilgart en a fait bien plus que 492 ...
+ dwarfie: (vu que j'en ai fait plus que ca et que je suis bien en retard sur lui)
+ darkhorse64: J'en ai fait 145 sans compter les bots et j'ai déjà plus de motivation
+ darkhorse64: même pour ceux avec achievement
+ dwarfie: je te rassure ... meme si je suis la depuis treeesss longtemps ... y'en a encore avec achievement que j'ai pas fini pour la meme raison ... :D
+ dwarfie: ah ouais ... j'oublie a chaque fois ques les multis ca apparait en puzzle dans les contribs ... mais ca fait toujours plus que 500 si on compte ceux qui ont été cadavérisés :p
+ philRG: écrivez un livre sur: j'ai fait 500 puzzles sur Codingame
+ philRG:&#160;:-D
+ darkhorse64: même les bots, je ne les ai pas tous faits et quelques uns sont assez moisis
+ dwarfie: chapitre ... comment on commence par en faire 50 en 2 heures ....
+ dwarfie: chapitre 1 ...
+ darkhorse64: tu ne comptes pas les solutions par langage&#160;?
+ darkhorse64: il y a 50 free XP
+ darkhorse64:&#160;?
+ dwarfie: non ... y'en a plus que ca des free xp ... :D
+ philRG: Faudrait inventer un langage informatique qui puisse se lire comme un bon roman
+ darkhorse64: 2mn par puzzle, c'est du rythme de Coc
+ dwarfie: mais des CoC deguisés en puzzle , doit bien y'en avoir 50 ... au moins ...
+ pardouin: ma méthodo de comptage a été juste qu'il me manque 40 hard et 35 expert et que mon profil indique 425
+ dbdr: philRG: <a rel="nofollow" class="external free" href="https://en.wikipedia.org/wiki/Shakespeare_Programming_Language">https://en.wikipedia.org/wiki/Shakespeare_Programming_Language</a>
+ pardouin: mais je suis pas allé chercher s'il y avait des cadavérisés ou autres&#160;:)
+ darkhorse64: c'est dans le profil, le nombre de puzzle&#160;? j'ai regardé mon nombre de sol C++
+ pardouin: j'ai regardé mon nombre de sol python
+ darkhorse64: J'ai tout fait en C++ sauf un qui se fait une ligne en python parce qu'il y a une lib pour convertir ipv4 en ipv6
+ Zorg1: ah ok vous avez fait tous vos puzzles dans au moins le même langage&#160;:(
+ pardouin: à part nintendo challenge je ferai tout en python
+ pardouin: pas encore implémenté nintendo challenge, un peu la flemme
+ philRG: dbdr: marrant&#160;:-) finalement je préfère le c++...
+ Zorg1: oui pareil pas trop envie de faire deu C là dessus
+ darkhorse64: Les autres langages, c'était pour avoir les XP, le C++ c'est comme des chaussons pour moi
+ pardouin: (du coup stil en est au moins à 493 si on ajoute nintendo)
+ Zorg1: tu vois ça où son nombre de puzzles&#160;?
+ pardouin: son nombre de sol haskell
+ Zorg1: ah d'accord
+ darkhorse64: Ses chaussons à lui me feraient mal aux pieds. Pas la bonne pointure
+ dwarfie: sauf que je le redis ... il a pas tout fait en haskell ... tout come j'ai pas tout fait en php ...
+ pardouin: oui je comprends bien mais c'est pour avoir une idée
+ philRG: bon faut que j'améliore mon UTTT, classé 7ème en bronze (pas d'algo de recherche)
+ philRG: j'ai essayé un min-max mais ça timeout
+ Zorg1: bah certains sont légendes avec un minmax
+ Zorg1: par exemple dbdr en Java
+ philRG: j'ai pas vu un seul python en légende
+ Zorg1: euh minmax ne veut pas dire python
+ Zorg1: ou alors j'ai pas tout compris
+ philRG: ben moi je suis en python
+ dwarfie: normal ... y'a pas de "import uttt-solver" ... :rolf:
+ dwarfie: :rofl:
+ Zorg1: apres même en minmax il faut pouvoir tester un gros paquet de situation, alors bon en python c'est vite limiré
+ philRG: ouais ça m'arrengerait
+ philRG: a
+ philRG: ben le branchement explose en bronze
+ Zorg1: et pour moi minmax c'est aussi de la recherche non&#160;? 
+ Zorg1: (après bon là on est dans les définitions)
+ philRG: euh oui pour moi aussi si j'ai bien compris les définitions d'un algo de recherche
+ philRG: quand l'adversaire gagne une grille, mon arbre explose
+ dwarfie: probleme classique de se focaliser sur la definition alors que ce qui compte c'est la resolution .... :D
+ philRG: enfin un des 2 joueurs min ou max
+ Zorg1: tu élagues en alpha beta&#160;?
+ JBM: pardouin: a s'est déjà vu&#160;;) <a rel="nofollow" class="external free" href="https://forum.codingame.com/t/community-puzzle-hit-the-road/2551?u=jbm">https://forum.codingame.com/t/community-puzzle-hit-the-road/2551?u=jbm</a>
+ philRG: Zorg1 oui en plus
+ philRG: après faudra que je ré-essaye pour voir quand même
+ philRG: en wood 1, en alpha-beta, j'arrive seulement à simuler les actions de l'adversaire au tour suivant, et il y a peu de branchements
+ Zorg1: mais tu ne bitboarde pas
+ philRG: en bronze, pas encore trouvé la bonne formule
+ philRG: non pas de bitboard, que des listes
+ philRG: l'optimisation me saoûle un peu en fait
+ philRG: c'est pas ça qui va préserver la couche d'ozone
+ philRG: faut que je recode mes listes en tableaux numpy
+ philRG: le bitboard en python jamais fait
+ pardouin: c'est plutôt cool en python
+ pardouin: vu que tu n'es pas limité en taille
+ Zorg1: oui t'as les opérations bitwise en python je suppose
+ pardouin: oui
+ pardouin: et tu n'as pas à découper si ça rentre pas dans un seul int
+ pardouin: donc c'est assez agréable
+ philRG: faudrait que je commence par un codage simple
+ philRG: déjà comment représenter par grilles et mes changements de bit
+ philRG: ma grille
+ philRG: <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/48392/bitboard-for-the-3x3-tic-tac-toe-game">https://www.codingame.com/playgrounds/48392/bitboard-for-the-3x3-tic-tac-toe-game</a>
+ philRG: ah j'ai trouvé un truc
+ philRG: je vois pas trop comment coder les grilles en binaire
+ philRG: une grille par joueur et je fais un &amp; bit par bit pour avoir les coups jouables
+ philRG: et pour ma fonction heuristique, alors là
+ pardouin: en fait tu linéarises ta grille
+ pardouin: par exemple une 9*9 devient un entier à 81 bits
+ nicola: Il y a trois positions, ça devrait être du ternaire.
+ nicola: Équilibré tant qu’à faire.
+ Zorg1: tu peux faire du ternaire (ce que j'ai fait) mais le plus simple reste le binaire
+ Zorg1: après il vaut mieux coder les 9 petites grilles de façon distincte (chacune avec un entier par joueur)
+ Zorg1: De cette façon tu as une table à 512 entrée pour te dire par exemple si une position est gagnante ou non
+ Zorg1: (après oui tu peux extraire de ton entier de 81 bits mais j'ai pas trop ça dans les langages que j'utilise ^^)
+ nicola: Je ne vois pas comment tu codes trois cas dans du binaire. Tu as un dernier cas qui ne sert à rien&#160;?
+ Zorg1: deux entiers par petite grille
+ nicola: OK.
+ Zorg1: un entier code les 'x', l'autre les 'o'
+ Zorg1: (ou deux entiers de 81 bits pour la grille complete ^^)
+ philRG: et les cases vides?
+ philRG: ah 2 entiers ok ce que j'ai dit
+ Thyl: juste il est ou le post-mortem de daporan
+ Thyl:&#160;???
+ philRG: je vais étudier ça, merci beaucoup&#160;:-)
+ philRG: merci Zorg1
+ Zorg1: bah l'intérêt c'est que t'as un truc rapide pour connaître si une position est gagnant ou pas
+ Zorg1: au lieu de faire plein de tests
+ philRG: oui c sûr, le tout c'est de réussir à les atteindre dans le temps aparti, sans fonction heuristique
+ Zorg1: gné&#160;?
+ philRG: après sur uttt c'est peut-être pas utile
+ nicola: Zorg1, il n’y a pas d’opération bitwise en C&#160;?
+ Haashi: si
+ nicola: Il me semblait bien.
+ nicola: Les mêmes qu’en Python.
+ Zorg1: euh si mais pas d'entier de 81 bits
+ nicola: En effet.
+ Zorg1: ou alors j'ai pas accès au mode "prestige" du compilo
+ nicola: Eh oui, pour une fois CG Prime n’est pas coché par défaut.
+ nicola: Il faut aller le chercher avec un code Konami sur la bonne page, ensuite tu envoies une fraction de bitcoin.
+ pardouin: on a perdu nicola je crois
+ pardouin:&#160;:)
+ nicola: Coin.
+ nicola: :duck:
+ Zorg1: c'est une nouvelle cryptomonnaie&#160;?
+ nicola: C’est mieux que le bitquack.
+ Zorg1: du moment que personne me gonfle en me disant que le bitcoin c'est l'avenir de la monnaie
+ nicola: Ha, toi aussi ça te fait marrer&#160;?
+ nicola: Il paraît que des gus veulent pondre de vrais biffetons en bitcoin.
+ Zorg1: ils ont pas compris le concept je crois
+ nicola: J’ai lu ça dans le Virus 47.
+ Zorg1: mais c'est même pas une monnaie ce truc, juste un actif spéculatif
+ Zorg1: enfin bref actuellement le bitcoin est à plus de 40 000 euros donc ils deviennent insupportables
+ dbdr: ça pourrait remplacer l'or, plutot
+ Zorg1: comme si l'utilité d'une monnaie dépendait de son cours
+ Zorg1: dbdr&#160;: ah oui&#160;? plus de structure informatique, t'as plus rien
+ Zorg1: (bon ok c'est un peu exagéré)
+ dbdr: clairement, c'est un désavantage. le parallele avec l'or, c'est la quantité finie, donc insensible a l'inflation et la planche a billet
+ Zorg1: après bon l'or il a mis combien de siècles pour avoir sa valeur dans l'esprit des gens&#160;?
+ nicola: C’est surtout que les gens utilisaient très peu la monnaie ou l’or dans leur vie quotidienne.
+ nicola: Les deux étaient rares.
+ Zorg1: oui ^^ contrairement au rpg de base
+ nicola: :grin:
+ Zorg1: 10 po pour une potion +50 HP
+ Zorg1: :p
+ nicola: As-tu essayé de trimballer des tas de pièces&#160;?
+ nicola: C’est vachetement lourd.
+ nicola: J’ai essayé un jour dans un GN.
+ Zorg1: l'or avait énormément de valeur
+ nicola: (grandeur nature)
+ Zorg1: pour ça t'avais aussi l'argent (en gros 1/12 de la valeur de l'or même si ça a bcp varié)
+ Zorg1: plutôt 1/20 au XIXe d'ailleurs
+ Zorg1: bref le bitcoin j'y crois pas des masses
+ Zorg1: oui c'était surtout pour le grand commerce, les états ...
+ Zorg1: t1 je scrolle 
+ Zorg1: la joie d'avoir plusieurs onglets d'ouvert
+ Zorg1: [CG]Thibaud&#160;: comment on fait pour rajouter une page de discussion dans le forum à un puzzle qui n'en a pas&#160;?
+ b0n5a1: o/
+ Zorg1: \o
+ dbdr: \/
+ Zorg1: dbdr le gars qui a oublié sa tête :p
+ dbdr: :head_bandage:
+ Zorg1: ou alors il la porte sous le bras mais dans ce cas là il vient de la faire tombé
+ b0n5a1: Zorg1 le jeu de Recher, c'est chaud d'aller sauver le garde ^^
+ b0n5a1: celui d'Alexandre est sympa
+ Zorg1: t'as un lien&#160;?
+ b0n5a1: (je viens de tester quelques jeux de la LD)
+ b0n5a1: mouarf attend, j'ai fermé des fenêtres, je cherche
+ Zorg1: non c'est bon je suis sur le site LD
+ dbdr: LD?
+ Zorg1: Ludum Dare
+ dbdr: ah ok&#160;:)
+ Zorg1: la session 48 ferme dans 9h
+ b0n5a1: purée un tool de recherche sur LD ce serait pas du luxe
+ Zorg1: le theme c'était "Deeper and deeper"
+ Zorg1: b0n5a1 oui c'est franchement le bazar
+ b0n5a1: ha voilà pour Recher&#160;: <a rel="nofollow" class="external free" href="https://ldjam.com/events/ludum-dare/48/snake-match">https://ldjam.com/events/ludum-dare/48/snake-match</a>
+ Zorg1: ah t'as aussi un compte LD toi ^^
+ b0n5a1: je viens de le faire ^^
+ b0n5a1: celui d'Alexandre&#160;: <a rel="nofollow" class="external free" href="https://ldjam.com/events/ludum-dare/48/gamedev-lifes">https://ldjam.com/events/ludum-dare/48/gamedev-lifes</a>
+ b0n5a1: je les ai suivi sur le stream jusqu'à la dernière minute ^^
+ Zorg1: ah ok je viens de comprendre le jeu de Recher
+ Zorg1: c'est pas mal trouvé
+ BlaiseEbuth: Yo tout l'monde&#160;! Automaton2000! AutomatonNN?
+ Automaton2000: en tout cas , c'est ce que j'ai compris
+ b0n5a1: ouais Zorg1, je verrai ça bien en version mobile celui de Recher
+ b0n5a1: y'a 8 murs à franchir/casser pour atteindre le garde à sauver là
+ nicola: Zorg1, tu crées une page similaire aux autres.
+ Zorg1: mais il ne la crée pas automatiquement pour la lier à l'onglet "discussion" du puzzle&#160;?
+ b0n5a1: bah c'est automatique au bout des trois validations pour chaque puzzle je crois
+ b0n5a1: :grinning: le titre du stream coc&#160;: learn ha 
+ b0n5a1: oups
+ b0n5a1: learn how to NOT code
+ dbdr: mieux: learn how to NOT to code :D
+ dwarfie: en meme temps , vu la 2eme partie du titre , c'est vrai&#160;;)
+ nicola: Tu peux ajouter le lien dans le message.
+ dbdr: to code or to NOT to code, la est la question
+ b0n5a1: ha oui j'ai zappé le second "to" en tapant
+ nicola: How not to be seen.
+ Zorg1: il y a qqch de pourri au royaume de CG ..
+ b0n5a1: <a rel="nofollow" class="external free" href="https://zachisagardner.itch.io/wonderful-game-ludum-dare-48">https://zachisagardner.itch.io/wonderful-game-ludum-dare-48</a>
+ b0n5a1: ça se fini en 2 min
+ BlaiseEbuth: Ouai personne dit bonjour à part les bots. Bande de $*@"#
+ b0n5a1: yellow submarine...
+ b0n5a1: pas taper...
+ b0n5a1: BlaiseEbuth y'en a quelques-uns qui ont opté pour un jeu sous-marin au fait
+ BlaiseEbuth: Ouai
+ b0n5a1: (pas essayé encore)
+ Zorg1: la femme d'Ordralphabetix&#160;?
+ BlaiseEbuth: Celui d'alex est en train d'aspirer le peu de bonne humeur que j'avais conservé.
+ b0n5a1: ouais tu crèves souvent ^^
+ b0n5a1: le Simon j'ai eu du bol j'ai mal mémorisé la séquence et ai fini au pif c'est passé ^^
+ BlaiseEbuth: J'aime pas le pixel perfect
+ b0n5a1: le kill d'insectes est buggé, évites de rester près des murs, passe à droite et reste en haut avec le bazooka pour les attendre
+ BlaiseEbuth: Lel. Nan mais je passe pas la première sale.
+ b0n5a1: ha, lol
+ BlaiseEbuth: *salle
+ BlaiseEbuth: lapsus
+ b0n5a1: longe les murs à certains endroits ça passe
+ b0n5a1: easy
+ BlaiseEbuth: Verrais plus tard.
+ b0n5a1: sans te prendre la tête avec les scies, genre tout en haut tu longes le bas du mur du morceau carré ça passe
+ b0n5a1: le boss par contre j'ai laissé tombé hier soir trop claquer...faut le toucher 20 fois (je le sais du stream)
+ Zorg1: m'ouais je comprend pas comment passer le premier niveau
+ Zorg1: ah ok
+ Zorg1: m'ouais bof j'accroche pas
+ b0n5a1: faut choper les 3 engrenages et venir les poser au début du niveau pour activer l'ouverture de la porte du niveau inférieur suivant Zorg1
+ Zorg1: oui je viens de comprendre
+ b0n5a1: die and retry
+ b0n5a1: chaque niveau est comme ça (4)
+ b0n5a1: bon avoir regarder le stream ça aide un peu quand même...parce que les 3 premiers niveaux faut chercher/deviner quoi faire
+ b0n5a1: il streame le dev de son jeu régulièrement le soir/nuit
+ Zorg1: bon au moins il gère le clavier azerty ^^
+ Zorg1: pas comme certain jeux de steam ...
+ b0n5a1: c'est automagique aven le nouveau système d'input de unity à ce que j'ai compris...wasd/zqsd auto et flèches
+ Zorg1: t'as les clavier allemand en QWERTZ aussi ...
+ Zorg1: ça existe toujours&#160;?
+ b0n5a1: oui
+ b0n5a1: après t'as les bepo et autres...
+ b0n5a1: pour une gmae jam wsad c'est très courant
+ dwarfie: je confirme ... j'ai meme recu un materiel avec le system en clavier allemand par defaut ... et avec des @ dans le mot de passe ... galere garantie :D
+ Zorg1: Deutche Qualität
+ Zorg1: oui je sais je suis rouillé en allemand
+ b0n5a1: pub Renault ^^
+ b0n5a1: ha non merde :joy:
+ dwarfie: pub pour lave linge .... like a bosch ...
+ b0n5a1: je sais pas avec quoi je confond du coup
+ Zorg1: la Voiture du Peuple et du Gouvernement&#160;?
+ dwarfie: traban ....
+ b0n5a1: ha mais si c'est REnault
+ dwarfie: ah non , je confond les dictatures :D
+ b0n5a1: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=65sF9mSpgdk">https://www.youtube.com/watch?v=65sF9mSpgdk</a>
+ Zorg1: Attention&#160;! Un dictateur peut en cacher un autre&#160;!
+ dwarfie: surtout quand les 2 etaient potes pour applatir la pologne ...
+ Zorg1: et les états baltes
+ dwarfie: aussi
+ Zorg1: la finlande aussi initialement mais ça a merdouillé
+ b0n5a1: ha y'en a que j'avais jamais vu <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=wA6p3mobKUQ">https://www.youtube.com/watch?v=wA6p3mobKUQ</a>
+ Zorg1: ah je confond la pub Opel avec la pub VW
+ b0n5a1: pfiou y'en a qui ont pas capté qu'il y a une section "pas fini" à la LD, en compo tu tombes sur 2/3 trucs c'est à peine si ça marchouille
+ BlaiseEbuth: Le mec il participe pas, il fait son WE pépère. Et le lundi il débarque pour critiquer ceux qui se sont cassé le cul...
+ dwarfie: ben ... pour eux c'est fini ... unity eur dit pas que c'est pas le cas  ;)
+ dwarfie: ( ca doit dire "done" ou "finished" apres le build sans doute ...&#160;:) )
+ BlaiseEbuth: Je savais même pas qu'on pouvait publier un truc en "unfinished"
+ b0n5a1: c'était "junk" à une époque je crois
+ b0n5a1: unfinished c'est plus correct
+ Zorg1: y a toujours le logo de poubelle 
+ b0n5a1: d'ailleurs là je viens de tomber sur un truc en "unfinished" avec un sous-marin jaune, bin au moins les contrôles sont ok par rapport au truc sur lequel je suis tombé avant ^^
+ BlaiseEbuth: Je vais publier mon truc du coup... 
+ b0n5a1: tu captes que c'est pas fini, tu peux juste te ballader et torpiller sur rien, mais ça fonctionne
+ b0n5a1: <a rel="nofollow" class="external free" href="https://ldjam.com/events/ludum-dare/48/go-deeper-submarine-rescue">https://ldjam.com/events/ludum-dare/48/go-deeper-submarine-rescue</a>
+ Zorg1: ah il a prévu les torpilles, un homme de gout
+ b0n5a1: et y'a eu pas mal de dessin surtout
+ Zorg1: c'est marrant 
+ b0n5a1: ha si on peut choper les sous-marins à remonter en fait aussi
+ Zorg1: marrant on peut sortir de la peinture ^^
+ Zorg1: comme ces dessins animés où les perso sortent de la pelloche
+ b0n5a1: ha oui, manque des collider de délimitation de niveau, ça vient de m'arriver aussi
+ b0n5a1: je fais le tour du niveau ^^
+ Zorg1: pour prendre des raccourcis c'est pratique
+ Alshock: je viens de voir ça aussi
+ Alshock: par contre j'ai pas eu la patience d'attendre de faire descendre un sous marin à 0, ils explosent&#160;?
+ b0n5a1: tain là je suis paumé de chez paumé, en mode oukélélaminimap ^^
+ b0n5a1: je sais pas Alshock j'en ai remonté 2
+ Zorg1: y a Cthulhu qui se pointe et qui boulote ton sous marin&#160;?
+ b0n5a1: ha trouvé un 3e quelquepart...je sais pas où remonter :joy:
+ pardouin: pas suivi, blaise à participé à la LD&#160;?
+ b0n5a1: oups l'est lâché
+ b0n5a1: il a posté un gif hier, trop claqué pour continuer je crois
+ b0n5a1: <a rel="nofollow" class="external free" href="https://imgur.com/a/ooM7GPe">https://imgur.com/a/ooM7GPe</a>
+ pardouin: oui je pense que c'est super chaud en solo
+ pardouin: si je devais participer je passerai tout mon temps sur le gameplay et graphisme minimaliste à fond
+ b0n5a1: clair, j'en ai suivi 4 en simultané cette nuit, les signes de grosse fatigue étaient flagrant pardouin
+ pardouin: parce que tout faire propre c'est très tendu
+ b0n5a1: ha mais t'étais là ^^
+ pardouin: oui j'ai vu un bout du serpent
+ pardouin: d'ailleurs en général quand je fais un jeu je me dis "j'améliorerai les graphismes après"
+ pardouin: et en fait je le fais jamais XD
+ b0n5a1: arf plus de fuel, secours à secourir ^^
+ pardouin: j'ai essayé de jouer à son serpent d'ailleurs, c'est pas évident, ça manque un peu d'infos en direct pour savoir quelle marge il te reste
+ b0n5a1: ça fini à 03h00 mais en vrai il reste 1 heure après pour laisser aux gens short time de publier proprement quand même
+ b0n5a1: oui c'est un peu hard, 8 murs à péter pour accéder au garde
+ BlaiseEbuth: Ouai j'ai passé beaucoup trop de temps sur les graphismes. Mais j'avais pas trop d'idée donc j'ai fait des trucs au cas où... ^^
+ b0n5a1: y'en a ils vont super vite (codage + gfx + musique), c'est assez bluffant
+ Zorg1: mon avantage d'être nul en graphique, si j'ai pas d'idée je vais pas faire des dessins moches
+ pardouin: le plus chiant c'est le menuing
+ BlaiseEbuth: Le résultat est limite pas un jeu. Tu peux monter et descendre et y'a un peu d’interactions (profondimètre, levier et sonar) et c'est tout :p
+ BlaiseEbuth: Pas d'objectif rien
+ pardouin: la musique avec un peu d'habitude tu peux sortir un truc cool en 10min
+ pardouin: sur beepbox par ex
+ Zorg1: oui enfin toi tu fais de la zique
+ Zorg1: moi ça va être assortiment pour casserolles op 34
+ pardouin: tu fous 4 accords en boucle sur une piste, une petite mélodie dessus, une piste de basse, une piste rythmique et hop
+ BlaiseEbuth: Après je maitrise pas du tout l'outil, et c'est la première fois que je fait ce genre de truc. Donc bon je partais avec de gros handicaps. :D
+ pardouin:&#160;:)
+ BlaiseEbuth: Si y'en a qui sont chauds pour team up pour LD49 d'ailleurs.
+ Zorg1: je pense qu'il faut s'entrainer un peu, j'avais un peu repris love2d mais bon
+ leojean890: +1 pardouin xD
+ leojean890: la musique industrialisée est basée sur la copie de l'existant que ce soit à la radio, dans les films, dans les jeux videos..:P
+ b0n5a1: quand on sait le faire oui pardouin ^^
+ Zorg1: ah c'est marrant je connaissais pas beepbox
+ leojean890: 1 6 4 5 en mineur 
+ leojean890: 1 6 3 7 en mineur
+ leojean890: etc
+ leojean890: 1 6 4 5 en majeur je veux dire lol 
+ Zorg1: oui bien sûr
+ b0n5a1: tu vois lui entre le proto de départ et la fin&#160;: <a rel="nofollow" class="external free" href="https://www.twitch.tv/videos/999650080">https://www.twitch.tv/videos/999650080</a> ...
+ <b>**Zorg1 se déplace doucement vers la porte de sortie l'air de rien</b></p><p><img src="/a/42398427701382" /> leojean890: c'est la recette d'une musique qui marche :P
+ leojean890: un peu exagéré j'avoue&#160;;)
+ dwarfie: pitie pour le pair blaise ... que de quinte juste ....
+ b0n5a1: à la fin il a vite fait le screen de titre et une musique, l'air de rien
+ Zorg1: en train de faire le Jean Michel Jarre de sous préfecture ...
+ b0n5a1: à 27:33:00 environ la musique
+ b0n5a1: il restait 15 min max
+ b0n5a1: 18 min
+ b0n5a1: deepnight (motion twin) sortait de sacré trucs aussi, il a fait les gfx de dead cells 
+ Zorg1: motion twin les bordelais qu'ont fait horde&#160;? (entre autre)
+ b0n5a1: oui
+ BlaiseEbuth: Voilà, publié.
+ b0n5a1: d'ailleurs si je dis pas de conneries à la base deepnight c'était hordes à lui tout seul
+ b0n5a1: t'as le lien BlaiseEbuth&#160;?
+ Zorg1: ah ok ils ont fait "dead cells"
+ b0n5a1: oui
+ b0n5a1: ça a fait un carton de ventes ce jeu
+ Zorg1: c'est la d'où sort Cardasse le gars derrière Haxe
+ BlaiseEbuth: Pourquoi, tu veux faire monter et descendre le sous-marin. :3
+ b0n5a1: oui Haxe c'est eux aussi
+ BlaiseEbuth: <a rel="nofollow" class="external free" href="https://ldjam.com/events/ludum-dare/48/$237843">https://ldjam.com/events/ludum-dare/48/$237843</a>
+ Zorg1: enfin l'auteur est sortie de motion twin
+ b0n5a1: erf je viens de le trouver
+ b0n5a1: c'est fait avec quoi BlaiseEbuth (je suis tombé déjà sur 2/3 mêmes structures options.ini + exe + .win)&#160;?
+ Zorg1: GameMake2 d'après le README du github
+ b0n5a1: erf je tente l'implosion en descendant même si y'a pas ^^
+ b0n5a1: ayé cassé le sous-marin
+ b0n5a1: j'avais chopé le 1 gratuit juste avant qu'il dégage de steam
+ Zorg1: ça s'appelait comment déjà cette émision de télé british où il pétait une bagnole&#160;?
+ b0n5a1: y'a le même nom en France en plus, je l'ai sur le bout de la langue mais ça vient pas
+ Zorg1: bah pareil&#160;:(
+ BlaiseEbuth: Ouai le 1 c'est vieux t'avais juste les trucs de base en drag&amp;drop
+ b0n5a1: top gear Zorg1&#160;?
+ Zorg1: b0n5a1&#160;: Top Hear
+ Zorg1: oui top gear
+ b0n5a1: ^^
+ leojean890: ah yes 100% sur <a rel="nofollow" class="external free" href="https://www.codingame.com/training/hard/winamax-sponsored-contest">https://www.codingame.com/training/hard/winamax-sponsored-contest</a> il m'a fait galérer celui-là
+ Zorg1: gg
+ leojean890: thx
+ leojean890: la première fois que je l'ai vu je me suis dit qu'il a l'air trop chaud, en fait c'est juste un pbm de backtracking
+ leojean890: mais pas super simple à formaliser direct
+ BlaiseEbuth: Bon. Je pense que je vais le faire le contest. Mais clojure j'ai trop peur que le problème ait pas été réglé... Donc ça me laisse trois choix... :thinking:
+ pardouin: gg leo
+ leojean890: thx pardouin, je vois que tu l'as également fait:p
+ Zorg1: BlaiseEbuth&#160;: le problème de clojure c'est quoi exactement&#160;? j'avais pas trop suivi
+ leojean890: du coup vous faites tous un contest de dev de jeux vidéo&#160;?;)
+ leojean890: j'ai lu vite fait
+ pardouin: le seul hard que j'ai pas fini c'est le truc indiana jones là
+ leojean890: (faire ou tester les jeux)
+ Zorg1: euh non avec b0n5a1on faisait plutôt les spectateurs
+ leojean890: ah tester les jeux donc^^
+ pardouin: me reste les pierres à gérer, pas encore eu la motive
+ Zorg1: c'est Blaise qui a participé
+ leojean890: ah ouais indiana m'a l'air chaud
+ leojean890: Stilgart conseille de faire le indiana des VH avant et de recracher le même code ici^^
+ pardouin: c'est surtout que la version 3 est comme la 2 apparemment
+ pardouin: donc je me dis que je ferai les 2 d'un coup -&gt; avoir du temps devant soi
+ leojean890: ah ok Blaise aime dev des jeux donc, tu veux pas créer des contribs multi ici du coup&#160;?:P:P
+ leojean890: perso je sais pas faire de front ^^
+ BlaiseEbuth: Zorg1: Bah l’environnement de l'arène était niqué, t'avais plus de 50% de chances de timeout, même avec un "wait'-like.
+ leojean890: ah ouais pardouin, c ce que Stilgart a dit^^
+ Zorg1: ah ok, moche Blaise
+ leojean890: le seul jeu que j'ai créé c'est un bomberman sur android en 2013
+ BlaiseEbuth: Et ils l'ont pas fix de tout le contest...
+ pardouin: leo au pire tu es pazs obligé d'intégrer ton jeu sur une page web
+ pardouin: blaise a juste upload le .exe
+ Zorg1: oui mais c'est un peu chiant de forcer à charger un binaire
+ pardouin: c'est sûr
+ leojean890: je vois^^ça peut être un client lourd quoi:)
+ BlaiseEbuth: leojean890 j'ai des idées de multis, mais quand tu vois l'investissement nécessaire pour en pondre un. Ou même juste pour "apprivoiser" le sdk, par rapport aux gens qui vont y jouer au final... meh
+ b0n5a1: sinon avec godot ou unity tu peux générer une version webgl ou exe sans problème...pour une game jam la version webgl a l'avantage que t'as rien à installer et du coup plus de monde y a accès
+ pardouin: oui la plupart font ça sous unity comme ça
+ Zorg1: en attendant Godot #desolé
+ b0n5a1: ça évite les "je peux pas testé j'ai un mac"
+ Butanium: En vrai ça va blaise la plupart des parties du sdk sont bein expliquée je trouve
+ b0n5a1: et même de base t'as pas forcément des masses envie d'installer des trucs sur le pc même si c'est qu'un zip 
+ leojean890: Blaise, je comprends^^ ça doit être long&#160;:) et il s'agit d'une communauté exigeante en plus^^ et ouais peu de gens s'investissent sur les multis commu.. à quelques exceptions près (dots and boxes, vindinium, penguins, othello, oware etc)
+ Butanium: J'avais jamais fait de java avant de me lancer dans clash of bots et en vrai ça va
+ Butanium: après ça dépend du temps libre que t'as
+ Zorg1: Oware c'est pas vraiment un multi commu
+ Butanium: j'ai pu profiter d'une semaine de vacance pour bien m'y mettre
+ leojean890: Zorg1 oware pas trop connu mais je cite ceux avec plus de 200 personnes XD
+ Zorg1: comu leojean890 pas connu :p
+ leojean890: ah par contre les optims commu.. y'en a des assez populaires comme 2048
+ leojean890: ah pas commu car créé par CG Maxime, je vois XD
+ Zorg1: ah tiens je fais partie des approbateurs d'Oware ...
+ Zorg1: j'avais oublié que ça avait été soumis au process normal
+ Butanium: 177 vues sur ma contrib mais y a qu'une personne que je connais pas qui a submit une vrai IA x)
+ leojean890: faudrait que je regarde ta contrib un d ces 4^^
+ leojean890: D'ailleurs que fait Dartisan
+ leojean890: il a publié une contrib (nine men's morris)
+ BlaiseEbuth: Bah gm2 permet aussi d'export vers plein de plateforme, mais faut la licence correspondante, et j'ai que celle pc (enfin techniquement ça inclut mac et linux mais j'ai la flemme de chercher comment faire pour un truc pas fini).
+ leojean890: on est 2 approbateurs
+ Butanium: je sais pas si le statement est trop dur / les gens ont juste pas le temps
+ leojean890: et puis lui il a pas rendu ça visible au bout des 30j et ça fait 2 mois XD
+ leojean890: aalors qu'il lanque qu'un approbateur
+ leojean890: manque
+ leojean890: Butanium c'est une question de temps je pense, ça prend un peu de temps de bien tester une contrib^^
+ Butanium: leajean890: Je vois pas de contrib à son nom 👀
+ Butanium: Ouais c'est ce qu'on m'a dit
+ b0n5a1: gm2 y'a une licence par plateforme j'avais vu sur steam
+ leojean890: bah normal en 30j elle est cachée
+ Butanium: mais c'est un peu frustrant de pas avoir de feedback
+ leojean890: et on est 2 à l'avoir validée
+ Butanium: ah au bout de 30 jours la contribution est suprrimée?
+ leojean890: mais depuis 2 mois il est pas revenu la rendre visible
+ leojean890: pas supprimée mais invisible
+ Butanium: mais elle perd ni les approbations ni les comments toussa&#160;?
+ leojean890: du coup il lui suffit de la rendre visible pour qu'un 3eme l'approuve et voilà xD
+ leojean890: elle perd rien ouais:)
+ Butanium: ah ok ouf
+ leojean890: bon exemple, trolls vs castles de JBM^^
+ leojean890: prolongée en WIP ad vitam^^
+ Zorg1: non mais ça c'est pour farmer de l'XP ...
+ leojean890: ouais pou farmer de l'xp 
+ Zorg1: tout le monde le sait :p
+ leojean890: mais un jour il va la sortir de WIP mdr
+ leojean890: je crois qu'il voulait créer un autre mode 
+ leojean890: pour pb4
+ Butanium: comment ça farer de l'xp x)
+ Zorg1: oui le jour de sortie de Gnu Hurd
+ leojean890: avec plusieurs rounds
+ leojean890: car pb4 a fait une IA qui analyse le jeu de l'autre pour mieux le battre^^
+ leojean890: du coup il souhaite avoir plusieurs rounds pour gagner le dernier^^
+ leojean890: si j'ai bien compris;)
+ leojean890: Butanium farmer de l'xp car il a plein de upvotes
+ Butanium: mais si y a que le dernier qui compte il suffit de faire n'importe quoi sur les premiers mdr
+ Butanium: les upvotes ça te donne de l'xp?
+ leojean890: Butanium je regarderai ta contrib un de ces 4^^
+ Butanium: merci ahah
+ leojean890: ça en donne sauf tes propres upvotes;)
+ Butanium: tu peux pas te upvote de toute façon
+ dwarfie: juste parce qu'on peut plus s'auto-upvoter ...
+ leojean890: non y'a pas que le dernier round qui compte, tous je crois, c'est jbm qui décidera de la règle:p
+ leojean890: voilà avant c'était possible et qqn avait abusé de ça
+ Butanium: ah ok
+ leojean890: du coup ils ont enlevé;)
+ leojean890: il a automatisé ça:p
+ BlaiseEbuth: obassaalor
+ Butanium: si t'as accès à quel round t'es et que y a que le dernier round qui compte
+ Butanium: t'as juste à jouer random sur les deux premiers dmr
+ BlaiseEbuth: En attendant, upvoter un approbateur de ta contrib ça compte comme de l'auto upvote
+ leojean890: non sur les 2 premiers tu joues pour analyser l'autre :P
+ leojean890: mais je sais pas ce que sera la règle stricte
+ leojean890: (donc tu testes sciemment la logique du code de l'autre)
+ leojean890: pas facile à faire bien je pense&#160;;)
+ leojean890: upvoter un approbateur de ta contrib ça compte comme de l'auto upvote =&gt; ah&#160;?:P
+ dwarfie: ca s'appelle de la corruption ... mais ca peut marcher&#160;;)
+ dwarfie: "vote pour ma contrib, je vote pour la tienne" :D
+ leojean890: bah souvent quand tu mets un comment justifiant les raisons de ton approval le createur te upvote
+ leojean890: ce comment
+ BlaiseEbuth: Bah il peut plus
+ Zorg1: t'as pas eu des gens qui refusait une contrib parce que l'auteur avait refusé la sienne&#160;?
+ Zorg1: ça a même fait du drama et JBM en a fait un CoC ^^
+ BlaiseEbuth: Si, et bizarement c'est toujours les mêmes personnes qui sont impliquées...
+ Zorg1: tu vois le mal partout
+ BlaiseEbuth: Tu veux dire que W est le mal&#160;?
+ dwarfie: les meme qui ralent sur le forum "c'est mal , ton truc aide trop a finir ... mais je m'en sers quand meme ..."
+ dwarfie: (suite a un post de feedback/strat de marchete si je me souviens bien)
+ BlaiseEbuth: Quelle surprise. Le puzzle de la semaine est toujours pas le mien...
+ BlaiseEbuth: (╯°□°）╯︵ ┻━┻
+ Zorg1: BlaiseEbuth&#160;: je dis seulement que W est un jeune gars concerné par les possibilités d'abus de la plateforme
+ Zorg1: j'aurais du faire de la politique moi tiens
+ leojean890: ah oui le fameux post "revenge in rejecting contributions"&#160;;)
+ dwarfie: ni un des miens ... je suis meme pas sur qu'un d'entre eux l'ai deja ete
+ Zorg1: leojean890: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/58730924d882b3d37ac252b52b5f24ded62b">https://www.codingame.com/contribute/view/58730924d882b3d37ac252b52b5f24ded62b</a>
+ leojean890: bah si son truc aide trop à finir il a qu'à pas l'utiliser alors hehe
+ BlaiseEbuth: Bah "What the Brainfuck!" je l'avais publié, et la semaine d'après il était POW. Et "A man with a plan" au bout de presque trois mois, nada...
+ leojean890: déjà réussir à comprendre un PM et à l'implem pour atteindre le top c'est pas mal
+ Zorg1: mon CGForth n'a pas encore été PoW je crois, alors bon
+ dwarfie: leojean890 ... c'etait pas un pm ... c'etait du code presque complet ...
+ leojean890: ah ouais CONTRIBUTION REVENGE SOCKPUPPET pas mal hehe
+ BlaiseEbuth: La barre de recherche dit qu'il existe pas ton truc Zorg1
+ leojean890: ah du code presque complet c abusay j'avoue xD
+ dwarfie: l'autre a pas besoin de comprendre un pm ... il se contente de copier/coller les solutions des contrib ...
+ Zorg1: "Obsolete Programming" son vrai nom BlaiseEbuth
+ leojean890: genre qqn qui comprend le PM de pb4/Agade sur les NN de CSB et atteint le même rank, ce serait pas mal^^
+ BlaiseEbuth: Ah ouai... Mais approuvé par JBM et dbdr, tu pars mal...
+ Zorg1: ^^
+ BlaiseEbuth: Ah attends, le mien a été approuvé par Stilgart... C'est pour ça
+ leojean890: l'algo de POTW est random&#160;?:P
+ Zorg1: ah y a un if dans le PotW&#160;?
+ leojean890: genre ils tirent au hsard un puzzle qui a jamais été POTW
+ leojean890: et il le devient
+ BlaiseEbuth: Y'a pas d"algo c'est Tibo qui choise
+ leojean890: un commu
+ dwarfie: leojean890 ... on en sait rien ...
+ leojean890: ah ok
+ Zorg1: je crois que Tibo n'avait pas aimait ma "MK Joke" au début de mon puzzle
+ BlaiseEbuth: J'aurais été approuvé par W il aurait déjà été POW. Deux fois
+ Bob: comment es ta joke Zorg1
+ Zorg1: et t'aurais eu 300 upvote automatique
+ Zorg1: salut bob o/
+ Bob: amis des upvotes o/
+ leojean890: \o Bob
+ BlaiseEbuth: o/ Bob
+ <b>**dwarfie fait partie de la confrerie des downvotes ....</b></p><p><img src="/a/17785582865119" /> dwarfie: \o/
+ BlaiseEbuth: *Bob
+ BlaiseEbuth: Je vais p'têt essayer rust du coup...
+ dwarfie: fait en D ... comme ca tu seras 1er dans le langage vu la concurrence :rofl:
+ BlaiseEbuth: Nan.
+ Zorg1: fais gaffe le D c'est surpeuplé de trolls
+ BlaiseEbuth: On s'demande pourquoi
+ Zorg1: aucune idée
+ dwarfie: parce qu'ils font plus de swift&#160;?&#160;;)
+ leojean890: et si je bricolais un truc pour power of thor episode 2 ..
+ leojean890: ça sent l'algo glouton ce puzzle
+ BlaiseEbuth: Le langage le moins représenté en contest c'est objective-c. Mais c'est hors de question que je touche à ce truc
+ Bob: je me suis rendu compte aujourd'hui que mon prédecesseur au boulot a transposé ses habitudes de nommage Go dans son code JS
+ Bob: tous les symboles exportés commencent par une majuscule
+ Zorg1: euh Objective-C c'est la chose de R4, il fait du C en fait
+ dwarfie: normal ... c'est la meme chose ...
+ Zorg1: oui c'est du C avec des extensions objets
+ BlaiseEbuth: Nan. Objective c c'est crade
+ leojean890: Objective-C c'est pour la prog iphone non&#160;?
+ dwarfie: (a se demander pourquoi y'a les 2 d'ailleurs)
+ BlaiseEbuth: Ensuite groovy, mais c'est tout autant hors de question.
+ leojean890: j'crois qu'un mec m'avait dit qu'il utilisait ça pour iphone
+ Zorg1: groovy&#160;? m'ouais bof
+ BlaiseEbuth: Ensuite perl, clojure et bash. Et là ça deviens envisageable
+ Bob: fais du Pascal, tu seras seul
+ leojean890: "premier du contest avec le langage X"
+ didyme: salut la compagnie
+ leojean890: hello
+ BlaiseEbuth: Ah non. Pascal a autant de monde que perl et consors
+ Zorg1: salut
+ BlaiseEbuth: o/
+ leojean890: allez, faire un contest en langage R
+ Zorg1: y a pas :p
+ BlaiseEbuth: Bon du coup j'sais pas.
+ Bob: BlaiseEbuth y a du monde, mais pas du bon :D
+ leojean890: franchement Stilgart, gold CB en bash, chapteau xD
+ leojean890: chapeau*
+ BlaiseEbuth: J'ai la flemme d'apprendre rust d'ici là...
+ dwarfie: leojean890 ... et en vrai bash en plus ....
+ leojean890: coder en bash c'est chaud ^^
+ Zorg1: tu codes en awk et voilà
+ BlaiseEbuth: Du coup soit je reste en C++ soit je vise first perl :thinking:
+ Bob: en bash tu codes pas, tu scriptes
+ leojean890: mais faire gold en contest en bash..^^
+ leojean890: CG maxime avait fait pareil sur GOD
+ leojean890: il a écrit un PM à ce propos
+ Bob: bah il suffit d'un peu de motivation
+ BlaiseEbuth: Alors qu'il avait pas le droit...
+ leojean890: bcp de motivation yep;)
+ Bob: à partir du moment où tu peux faire des ifs et des boucles, y a trop rien d'inaccessible
+ leojean890: oui vu comme ça
+ leojean890: mais bon je mettrais 3h juste pour écrire 30 lignes ;P
+ Bob: la plupart des contests, tu peux passer gold avec des heuristiques plus ou moins simples
+ Bob: ah oui ça c'est autre chose
+ Bob: mais c'est pour dire qu'il n'y a pas d'obstacle technique en tant que tel, c'est purement une question de motivation
+ BlaiseEbuth: Just do it
+ didyme: make your dream comes true
+ Bob: parce que vous le valez bien
+ BlaiseEbuth: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=UhRXn2NRiWI">https://www.youtube.com/watch?v=UhRXn2NRiWI</a>
+ dwarfie: air papin de sholl , juste fait le .... et on peut marcher sur du gravier ca faite meme pas de bruit ...
+ Zorg1: marrant j'ai pensé à la même chose ^^
+ dwarfie: :D
+ leojean890: ouais Bob je sais que tu passes souvent gold ou legend avec des heuristiques plus ou moins simples^^
+ leojean890: sur certains sujets ça se fait pour gold
+ Butanium: passe du coté sombre de la programmation fonctionnelle blaise 
+ leojean890: même UTTT
+ leojean890: UTTT poussé bottom gold avec une heuristique un peu douteuse
+ leojean890: mais ouais le bash, juste pour résoudre qq puzzles simples j'ai un peu galéré^^
+ JBM: hébé c'est la foire à la notif ce soir
+ Bob: leojean890: gold, pratiquement toujours
+ Bob: legend c'est très rare
+ leojean890: ouais legend en heuristique ça semble souvent compliqué&#160;:)
+ leojean890: sur god j'y arrive pas par ex alors que je sens que ça peut être fait :P
+ Butanium: legend sur coders strike back ça se fait
+ Butanium: après tu restes dans le bas du chapeau
+ JBM: avec le célèbre inoryy starter kit
+ Butanium: JBM il faut que tu modifies le stub de troll vs castles
+ JBM: quoi encore
+ Butanium: tes int sont trop gros pour ocaml mdr
+ JBM: saleté
+ Butanium: il vaut mieux tu les passes en string
+ Butanium: et les gens se débrouille au pire
+ Zorg1: et les fameux int de 31bits ...
+ JBM: non mais là c'est les stubes CG merde quoi
+ nicola: Ben, vous êtes restés à Python 2&#160;?
+ Butanium: 3509484094073279367
+ Zorg1: on parlait des int de oCaml
+ Butanium: c'est un peu gros ça
+ JBM: 2^61,61
+ JBM: c'est largement sous 2⁶3
+ JBM: *2^63
+ Butanium: y a pas de long en ocaml
+ JBM: dommage
+ Butanium: le max c'esst 32 bits il me semble
+ JBM: c'est dur à croire
+ nicola: Je n’ai pas compris comment stocker des trucs en langage fonctionnel.
+ Zorg1: tu stockes pas
+ Butanium: tout dépend
+ Butanium: si tu peux stocker si t'en a vraiment besoin
+ Butanium: en ocaml en tout cas
+ pardouin: tehcnique de blaise: tu défineis des fonctions constantes
+ Butanium: t'as des refs
+ pardouin: définies*
+ Butanium: qui sont juste des pointeurs
+ JBM: à quoi bon stocker
+ JBM: c'est tout équivalent à ne pas stocker
+ JBM: autant s'épargner la peine
+ nicola: Par exemple The descent en Clojure.
+ nicola: Ou n’importe quel autre langage du même tonneau.
+ Zorg1: bah fonction récursive 
+ nicola: O_o
+ JBM: bon tout ça pour dire
+ JBM: si t'es assez malin pour coder en ocaml, t'es assez malin pour corriger le stub
+ Butanium: mdrr
+ JBM: dis-toi qu'en haskell on doit le tej a 100% a chaque fois, toi 'as juste a dapter un long par ci par là
+ nicola: Je ne suis pas assez malin pour coder en OCaml alors.
+ pardouin: nicola: tu es censé tout faire récursivement, c'est vraiment une logique à prendre
+ nicola: Et pour les canassons&#160;?
+ JBM: alors les commentaires du genre «oh lala le stub marche pas dnas mon langage»
+ Butanium: si t'es interessé par la progra fonctionnelle
+ JBM: ça me laisse un peu froid
+ Butanium: il existe un site très bien pour débuter
+ nicola: Ben, histoire d’avoir les 15 PX pour tous les langages.
+ Butanium: qui t'initie au haskell
+ JBM: pour moi ils marchen JAMAIS
+ Butanium: aya
+ JBM: alors je m'étais jamais vraiment mis à la place de qqun pour qui ils «marcheraient»
+ Butanium: la stub haskell marche
+ JBM: il compile
+ JBM: c'est déjà ça
+ pardouin: je te conseille de faire le puzzle rubik 1x1x1 en clojure
+ pardouin: déjà pour piger comment faire les opérations de base
+ pardouin: en gros au lieu de 2+3 tu fais (+ 2 3)
+ nicola: Oui, ça j’ai pigé.
+ pardouin: (le puzzle c'est juste une formule)
+ JBM: &lt;/SPOIL
+ Butanium: nicola: check ça <a rel="nofollow" class="external free" href="http://lyah.haskell.fr/">http://lyah.haskell.fr/</a>
+ Butanium: c'est pépite
+ nicola: Ce qui me chagrine, c’est que les variables… sont constantes.
+ leojean890: ah des operations en mode stack..
+ leojean890: déjà vu ce genre de trucs
+ pardouin: si tu veux "modifier" une variable tu appelles une fonction avec un nouveau paramètre
+ pardouin: en gros
+ nicola: Par exemple, stocker des valeurs données à la queue-leu-leu.
+ nicola: En Python, je vois comment faire en fonctionnel.
+ pardouin: tu appelle ta fonction avec ta collection augmentée de la nouvelle valeur
+ nicola: [int(input()) for _ in reng(n)]
+ nicola: range
+ pardouin: par ex
+ nicola: Mais en Ocaml ou les trois autres…
+ pardouin: regarde le lien de butanium
+ nicola: OK, je regarderai ça, merci.
+ dwarfie: [1..n]
+ Butanium: si tu veux le truc précis sur les listes en compréhension <a rel="nofollow" class="external free" href="http://lyah.haskell.fr/demarrons#je-suis-une-liste-en-comprehension">http://lyah.haskell.fr/demarrons#je-suis-une-liste-en-comprehension</a>
+ nicola: On peut en faire dans ces langages&#160;?
+ Zorg1: ça vient de là je crois
+ nicola: Oui, je me doute, ça vient aussi des maths.
+ Butanium: oui
+ pardouin: beaucoup de trucs que tu utilises souvent en python viennent de là
+ nicola: La notation pythonique est presque la notation mathématique.
+ pardouin: map, reduce etc
+ Butanium: alors en haskell
+ Butanium: c'est encore plus le cas
+ nicola: OK.
+ Butanium: [ x | x &lt;- [50..100], x `mod` 7 == 3]
+ nicola: Butanium, tu es un taupin&#160;?
+ Butanium: oui
+ nicola:&#160;:)
+ Butanium: :stuck_out_tongue:
+ nicola: Ta liste vient de quel langage&#160;?
+ Butanium: haskell
+ nicola: On voit en taupe&#160;?
+ Butanium: non
+ pardouin: plutot ocaml
+ Butanium: on voit ocaml
+ nicola: Ha, je me disais.
+ nicola: OK.
+ pardouin: et python
+ pardouin: (je crois)
+ Butanium: yup
+ nicola: Oui, sauf en HEC où c’est Scilab.
+ Butanium: D'ailleurs fun fact
+ Butanium: dans un controle de python y avait une question méga chiante
+ Butanium: j'ai sortis le one liner de 10 lignes
+ Butanium: le prof a pas trop apprécié :laughing:
+ Butanium: c'était méga dégueu en plus
+ BlaiseEbuth: Butanium c'est quoi le côté sombre de la prog fonctionnelle&#160;?
+ Butanium: je me suis rendu compte après coup que j'aurais pu le rendre clean avec zip
+ Butanium: je voulais faire une ref à starwars BlaiseEbuth
+ Butanium: mais je me suis trompé
+ Butanium: vu que c'est obscure
+ Butanium: y a pas grand monde en ocaml / haskell / F# en contest il me semble
+ Butanium: 11 ocaml au fall challenge par exemple
+ pardouin: "le one liner de 10 lignes"
+ pardouin: je vois ce que tu veux dire hein&#160;:)
+ Butanium: bah c'est une ligne
+ pardouin: mais c'était rigolo
+ Butanium: qui en prends 10
+ Butanium: genre mon code c'est def:liste = ...
+ Butanium: return de 8 lignes
+ Butanium: x)
+ Butanium: je cite
+ pardouin: avec une fonction lambda si tu return direct
+ Butanium: "l'excès de téchnicité ne fais pas partie des attendues aux concours, on doit privilégié un code clair et concis"
+ pardouin: encore plus golri
+ Butanium: oh pas mal en effet
+ jdeveil: Bonjour à tous,
+ jdeveil: Vous connaissez la boîte Amadeus&#160;?
+ jdeveil: Vous pouvez m'en parler un peu&#160;?
+ pardouin: le voyage, unsecteur porteur en ce moment
+ pardouin: un secteur*
+ b0n5a1: lol
+ pardouin: (désolé blague facile, je connais pas du tout)
+ pardouin: le film de milos forman par contre &lt;3
+ jdeveil: oui merci pardouin, j'avais remarqué qu'effectivement ils sont pas mal porté par le voyage (aérien, train)...
+ jdeveil: PS j'aime bien la blague&#160;:)
+ jdeveil: mais à part ça, c'est une société de service, un fabricant/développeur de techno particulières, il y a plus a en dire ou pas du tout&#160;?
+ jdeveil: ça a pas l'air d'être une petite boîte en tout cas
+ nehok: ah non amadeus c'est (très) gros
+ nehok: il faut être bilingue pour y bosser. ensuite comme c'est vaste, l'ambiance et les projets varient assez
+ nehok: mais tu reprends toujours du code qui a été touché par beaucoup de personnes avant toi
+ nehok: (je parle du site sur sophia-antipolis)
+ jdeveil: j'ai un recruteur qui m'a contacté pour Nice (donc sophia je présume)
+ nehok: ça y ressemble
+ jdeveil: par contre il a pas dû bien lire mon CV, je me débrouille en anglais, mais pas au point d'être bilingue :p
+ Bob: y a pas beaucoup de boîtes qui ont besoin de bilingues en fait
+ Bob: si tu arrives à communiquer en anglais avec d'autres personnes dont l'anglais n'est pas non plus la langue maternelle, a priori c'est amplement suffisant
+ jdeveil: hmm ça peut le faire ça... pourvu que l'accent ne soit pas trop fort&#160;:)
+ jdeveil: le dernier coup de fil en anglais, j'ai demandé au gars d'envoyer un mail :D
+ Bob: :D
+ nehok: ça reste utopique bob. si ton interlocuteur est complètement "fluent" et toi non, l'impact de ce que tu dis est fortement diminué
+ Bob: bien sûr, après tout dépend du contexte
+ Bob: j'ai bossé pendant 20 ans dans une boîte où on était répartis sur plein de pays
+ Bob: donc anglais fonctionnel indispensable
+ Bob: mais comme on était aussi essentiellement des non-natifs, au final tout le monde se démerde avec les accents et la grammaire éventuellement approximative
+ Bob: note aussi que si j'ai bien compris, dans les niveaux de certification actuels, "bilingue" c'est un niveau que pratiquement personne n'a et qui correspond à "je n'ai pas la nationalité mais j'ai grandi dans le pays"
+ nehok: j'ai dit bilingue mais sans penser à s'il y avait une définition rigoureuse du terme
+ nehok: reformulé: tu vas devoir t'exprimer et écouter des gens parler en anglais
+ jdeveil: ouais j'avais bien compris cette partie là&#160;;)
+ Bob: oui donc ça, stricto sensu, c'est pas "bilingue"
+ Bob: j'ai un anglais tout à fait fluent à l'écrit et à l'oral, ça doit correspondre à un niveau C1/C2, quand j'ai refait mon CV il y a 4 mois on m'a dit "si t'as pas grandi dans un pays anglophone, tu mets pas bilingue"
+ nehok: je vois
+ jdeveil: Dans les guides pour faire un CV 'correct' c'est effectivement ce qui est recommandé aussi.
+ jdeveil: correcte pardon :p
+ jdeveil: c'est mon côté bilingue qui ressort :D
+ jdeveil: Bon je vais peut être lui répondre que je veux bien lui accorder 10 minutes à la recruteuse&#160;:)
+ Bob: mais oui
+ Bob: ça n'engage à rien
+ Bob: la dernière fois que je me suis dit ça, j'ai trouvé un nouveau boulot
+ jdeveil: exactement. j'espère juste que la personne parlera français pour un premier contact&#160;:)
+ jdeveil: LOL ouais pourquoi pas.
+ jdeveil: je me vois pas faire déménager toute la famille sur Nice, mais bon...
+ Bob: ah ça c'est autre chose ouais
+ jdeveil: Mais comme tu dis, cela n'engage en rien. Et sait-on jamais... L'offre peut être alléchante&#160;;)
+ Bob: au pire ça fait un entraînement pour les prochains entretiens
+ jdeveil: que je ne cherche pas... soit dit en passant...
+ nehok: c'est en tant qu'interne ou par un prestataire&#160;?
+ jdeveil: non non c'est une RH d'amadeus qui m'a mailé
+ jdeveil: pour une fois c'est pas un presta ou une société de services...
+ jdeveil: d'où ma surprise.
+ nehok: d'ac
+ jdeveil: Surtout qu'elle m'a trouvé via linkedin et qu'il n'y a pas grand chose sur moi la dessus :p
+ Bob: amadeus c'est pas un prestataire justement&#160;?
+ jdeveil: ba c'était la question initiale en fait&#160;:)
+ Bob: et puis sur linkedin les recruteurs d'ESN ratissent large
+ nehok: habituellement, les ss2i placent des gens chez amadeus
+ jdeveil: nehok tu confirme donc que amadeus est pas une SS2I&#160;?
+ Bob: le dernier qu'il m'a conntacté, sur les quatre technos listées sur son mail template, y en avait exactement zéro dans mon profil qu'il avait néanmoins trouvé "très intéressant"
+ Bob: qui*
+ jdeveil: lol
+ jdeveil: en fait il a vu ton profil CG&#160;;)
+ jdeveil: c'était ça qui était intéressant
+ Bob: peu probable, même si je l'ai mis&#160;:)
+ nehok: en posant la question tu me mets le doute...
+ Bob: ah non effectivement ça a pas l'air d'être un ESN
+ nehok: d'autant que certains client "finaux" sur sophia ont également leur propres ss2i
+ nehok: mais amadeus ça me dit rien... pour c'est un "client final"
+ Bob: mais bon tous ces machins-là c'est des trucs consanguins qui se sous-contractent les uns les autres :D
+ jdeveil: je vais répondre, j'en aurai le coeur net&#160;;)
+ jdeveil: sympa l'image
+ nehok: néanmoins ça résume bien
+ jdeveil: clair, ça fini toujours par faire de la @$%°*£  :p
+ Bob: je te rassure on peut très bien faire tout autant de la merde avec une seule et même boîte
+ jdeveil: malheureusement, mon job actuel me confronte à différents livrables de ss2i... et j'ai souvent, pour pas dire tout le temps, à y retoucher...&#160;:'(
+ jdeveil: du coup j'ai pas encore l'expérience d'une boîte seule qui produit des bouzes...
+ jdeveil: même cro$oft j'évite autant que possible
+ Bob: je peux pas dire que j'aie l'expérience de nombreuses boîtes mais entre ce que je vois des miennes et ce que les copains me racontent des leurs, celle où le code est joli et maintenable, personne ne l'a encore trouvée
+ jdeveil: ba oui, il faut produire rentable... et pour faire joli et maintenable, il faut des sousous qu'ils veulent pas dépenser...
+ jdeveil: c'est forcément pas compatible&#160;:(
+ Bob: le seul contexte où un copain me dit que leur code est clean et bien géré, c'est un side-project open source gratos pour lequel ils n'ont pas de deadlines et sur lequel ils peuvent donc gérer leur code comme ils veulent et prendre le temps de faire les refacto qui s'impoosent
+ jdeveil: ah ben voilà, pas de sousous derrière
+ Bob: cqfd
+ jdeveil: exactement
+ Bob: dès que t'as une deadline, à un moment tu vas fatalement faire de la merde pour corriger un truc à l'arrache
+ Bob: et après y aura pas le temps de la reprendre parce qu'il y a une autre deadline derrière
+ jdeveil: clair... et va essayer d'expliquer ça au porte-monnaie sur pâtes
+ jdeveil: pattes pardon :p
+ Bob: mon ancienne boîte c'était très fort&#160;: on n'avait pas de projet clair mais on arrivait quand même à se trouver des deadlines pour ne pas nettoyer du code qui était déjà dégueu alors qu'il avait à peine un an et qu'on n'était que trois dessus
+ jdeveil: je suis dyslexique ce soir moi
+ dbdr: porte-monnaie sur pâtes c'est un financier italien?
+ Bob: rien qu'une petite mousse ne saurait gérer :beer:
+ jdeveil: ou un bon dodo.
+ jdeveil: d'ailleurs je vais me prendre au mot et vous souhaiter une bonne nuit. Demain, une rude journée m'attends
+ jdeveil: ++ les gens
+ jdeveil: amusez-vous bien&#160;;)
+ nehok: tchôu
+ jdeveil: et merci pour les infos&#160;;)
+ nehok: de rien
+ leojean890: simu depth 1 sur power-of-thor-episode-2 ça fait 90% hmm
+ pardouin: lol
+ pardouin: ce puzzle c'est nawak, il faut tester plein de trucs
+ leojean890: je simule depth 1 ma position et celle des géants et mon eval c'est d'en mettre le plus possible plus proches de moi
+ leojean890: en gros je regarde qui est le plus loin
+ leojean890: et je minimise ça
+ pardouin: le truc c'est que c'est chaud de trouver une eval qui passera tous les validateurs
+ leojean890: t'as fait du bricolage toi&#160;?:P
+ b0n5a1: moi oui ^^
+ dwarfie: bof , j'ai que 3 malheureux if ...
+ leojean890: bah ça passe pas le dernier test avec la file indienne mon truc mais ça passe le reste:)
+ leojean890: j'pense avoir une idée de truc à tester
+ pardouin: j'utilise deux eval differentes selon la situation
+ leojean890: pour tout valider
+ pardouin: oui le plus chiant c'est ces files
+ leojean890: ouais c'est les derniers valideurs quoi^^
+ pardouin: déjà trouver un stratégie pour péter la file
+ leojean890: ouais en fait je vais tester mon idée et voir si ça marche, ajouter un critère à l'éval
+ pardouin: et trouver un truc qui caractérise ces situations de file pour savoir quand appliquer la stratégie
+ leojean890: car mon mec disperse bien la file mais va en haut
+ leojean890: alors qu'il devrait aller en bas pour le faire car plus d'espace
+ b0n5a1: submit...le validateur équivalent c'est le contraire, tu feras 100% :joy:
+ pardouin: XD
+ leojean890: j'allais pas hardcoder haut et bas mais comparer 
+ leojean890: ;p
+ leojean890: bricoler un critère sur la position relative par rapport au centre de la map
+ leojean890: bon bah ça stagne XD
+ b0n5a1: submit je te dis :grinning:
+ b0n5a1: ça va passer
+ b0n5a1: serre les fesses
+ leojean890: déjà fait ça stagne à 90%^^
+ leojean890: sinon.. viser loin des géants pour les disperser
+ leojean890: ah non ça fait 100% mdr
+ dwarfie: mon code fait tout le contraire ... il cherche pas a les disperser ...
+ leojean890: j'avais inversé - et +
+ leojean890: 100*max([abs(max(abs(x-i),abs(y-j))) for (i,j) in giants]) + abs(20-tx) + abs(9-ty)
+ leojean890: voilà ma super éval
+ leojean890: #spoil
+ leojean890: y'a 1 abs en trop mdr
+ leojean890: useless
+ b0n5a1: pareil je fais des "concentrations" de mémoire
+ b0n5a1: avec un ppil de bricolage
+ b0n5a1: poil*
+ leojean890: en gros traduction de l'éval qui marche, essayer de minimiser ma distance avec le plus lointain
+ leojean890: et avec critère moins important aller vers le centre
+ leojean890: ça passe tout seul
+ b0n5a1: vimlark est super méthodique sur ces tests des autres jeux de la LD, il se les fait tous un à un en stream
+ b0n5a1: <a rel="nofollow" class="external free" href="https://docs.google.com/spreadsheets/d/1IgQFckCpu6MwIih7ANZrxZZWTC8LycQXiFAFP8RtoYw/edit#gid=1942312433">https://docs.google.com/spreadsheets/d/1IgQFckCpu6MwIih7ANZrxZZWTC8LycQXiFAFP8RtoYw/edit#gid=1942312433</a>
+ leojean890: code partagé même si sale.. pardouin tu as 3 fois moins de lignes que moi;)
+ leojean890: ça sent également le code bricolé hehe
+ leojean890: last crusade 2, no spoon 2 et DP 2 restants..
+ leojean890: je ne déborde pas de motiv pour ces 3 là^^
+ pardouin: dp est assez simple en fait
+ pardouin: no spoon je me rappelle plus
+ pardouin: mon code fait plus de 100 lignes XD
+ leojean890: no spoon et last crusade ont l'air plus chauds ouais
+ pardouin: je me rappelle plus trop la strat
+ pardouin: un backtracking mais j'ai oublié les subtilités
+ leojean890: DP c'est juste que j'ai pas trop de motiv pour bosser dessus pour le moment indépendemment de la difficulté^^
+ leojean890: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/11-puzzle">https://www.codingame.com/ide/puzzle/11-puzzle</a> parait pas évident, genre un BFS depth 38&#160;? :P
+ pardouin: pas fait encore
+ leojean890: depth 38 en 50 ms:p
+ leojean890: ah non 1 sec
+ pardouin: je relis no spoon, ça va en fait
+ leojean890: no spoon je le vois en backtracking mais ça va timeout
+ leojean890: du coup faut jouer au jeu manuellement pour chopper des heuristiques
+ pardouin: c'est juste un peu long de prendre tous les params en compte et de se faire un tool pour tester la connexité
+ pardouin: mais quand je regarde individuellement chaque partie c'est assez bateau
+ leojean890: tu fais pas un BFS complet pour la connexité&#160;?^^
+ pardouin: un dfs
+ pardouin: rien de spécial
+ leojean890: (et puis parfois il y a N arêtes entre 2 noeuds:))
+ pardouin: c'est juste que ça rajoute du code
+ leojean890: t'as des heuristiques ou c'est full backtracking&#160;?
+ pardouin: mais essaye d'en faire quelques uns à la main, ça aide bien
+ leojean890: full backtracking je sens venir le timeout mdr
+ pardouin: il y a clairement des raisonnements logiques à faire qui font que ça n'explose pas trop
+ leojean890: j'en avais fait 2-3 à la main someday
+ leojean890: du coup si je code exactement le même process que quand je jouais en backtrackant de temps en temps ça pourrait ptet le faire
+ pardouin: oui
+ pardouin: c'est un peu l'esprit
+ pardouin: nonogram j'aimerais bien le faire aussi dans le même style
+ leojean890: nonogram c'est un puzzle hard&#160;?
+ leojean890: j'ai pas encore tout regardé
+ leojean890: y'en a trop
+ leojean890:&#160;!
+ pardouin: j'avais commencé en faisant juste un backtracking mais apparemment l'idée de l'auteur c'était surtout de bosser à fond la partie logique
+ pardouin: nonogram inversor
+ leojean890: ok
+ leojean890: (et parfois je les ai fait mais j'ai oublié les titres)
+ pardouin: ^^
+ leojean890: souvent ça revient avec l'énoncé
+ pardouin: dans le genre de jeu logique j'ai bien aimé:<a rel="nofollow" class="external free" href="https://www.codingame.com/training/expert/high-rise-buildings">https://www.codingame.com/training/expert/high-rise-buildings</a>
+ leojean890: ça me dit qqc ça
+ leojean890: en plus j'ai un taux de complétion en VH vraiment très faible XD
+ leojean890: j'ai déjà fait bcp de easy et medium donc je fais des hard là
+ leojean890: 68% easy, 50 medium, 25% hard un truc comme ça
+ leojean890: 8% VH
+ leojean890: va falloir changer ça^^
+ pardouin: je suis à 71% hard 19% expert
+ pardouin: il y a plus des masses de puzzles simples dispos
+ pardouin: mais j'en trouve encore des surévalués ^^
+ pardouin: 72%*
+ leojean890: y'en a que tu verrais plus bas qu'expert qui sont en expert&#160;?
+ pardouin: (franchement une bonne moitié des hard sont pas spécialement plus durs que le medium moyen)
+ leojean890: les hard j'ai cette impression ouais, 
+ pardouin: ben high rise building je l'aurais mis plutôt hard
+ pardouin: par ex
+ leojean890: les VH.. j'avais noté 2-3 exemples censés être mins durs
+ leojean890: mais bon.. certains me font galérer quand même
+ pardouin: the lucky number
+ pardouin: the two piles difference
+ darkhorse64: bulls and cows
+ pardouin: unfloding paper
+ pardouin: recurring decimals
+ leojean890: genre banyard dans l'idée ça se fait c'est un pivot de gauss mais c'est chiant (et long&#160;?) à coder^^
+ pardouin: np.linalg
+ pardouin:&#160;:)
+ leojean890: bulls and cows il a été baissé
+ leojean890: je l'ai validé quand il etait encore en expert puis Stilgart l'a mis en medium :P
+ leojean890: np.linalg ah je vais regarder mdr
+ pardouin: c'est juste un mastermind c'est ça&#160;?
+ pardouin: je sais plus trop
+ leojean890: car à bricoler en python.. mon dieu
+ leojean890: ouais un mastermind mais qui se bruteforce d'après qq exemples facilement^^
+ pardouin: au pire tu fais l'inverse avec 1/det * transposée de la comatrice
+ leojean890: alors que bulls and cows 2 est plus dur (optim)
+ pardouin: pas sûr que ce soit plus rapide, pas essayé de l'implémenter à la main
+ leojean890: je vois^^j'ai oublié mes bases de maths de prépa :s
+ leojean890: enfin pas tout mais trop xD
+ pardouin: squares order et hitori solver pas fait mais ça a pas l'air trop méchant
+ darkhorse64: BC2, j'ai pas trouvé mieux que brute force mais avec 9 chiffres, ça fait mal
+ leojean890: the lucky number il me semble faisable mais un peu chaud de réduire la complexité&#160;?
+ leojean890: darkhorse64 pareil BC2 bruteforce ^^
+ leojean890: mais ça prend au moins 10 tours
+ leojean890: fait en C++
+ leojean890: avec quelques conseils pour les perfs
+ leojean890: (reçu quelques conseils)
+ darkhorse64: Avec 9 chiffres, j'ai été obligé de faire un filtre approximatif qui doit me coûter un tour
+ leojean890: moi pas de filtre, juste ça prend plusieurs tours.. essayer de regarder la cohésion de toutes les combinaisons possibles avec chaque chiffre reçu c'est long
+ darkhorse64: c'est ça que j'appelle filtre
+ leojean890: je vois
+ leojean890: bruteforce, tu annules direct tout nombre incohérent
+ darkhorse64: Oui
+ pardouin: c'est un peu le pb inhérent de chaque backtracking, trouver un angle d'attaque qui te permet de tuer les trucs improductifs dès que possible
+ leojean890: ouais
+ leojean890: justement je réfléchis au 11-puzzle
+ leojean890: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/11-puzzle">https://www.codingame.com/ide/puzzle/11-puzzle</a>
+ pardouin: si tu peux precalc des filtres c'est cool aussi
+ leojean890: les derniers validateurs c'est 38 moves je crois
+ leojean890: je pense qu'un bfs sans heuristique ça timeout, même avec hash
+ darkhorse64: Ca se fait bien en backtracking; il faut éviter de revenir en arrière
+ leojean890: ah ça timeout pas pour toi&#160;?:)
+ pardouin: il doit y avoir plein de coups qui mènent à des états déjà vus
+ leojean890: ouais le hash c'était certain ^^
+ leojean890: mais bon 
+ leojean890: je pensais pas que ça suffisait
+ pardouin: donc au final la vraie explo doit pas exploser tant que ça
+ leojean890: à tester alors:p
+ pardouin: oui mais il est loin sur ma to do list
+ pardouin: trop de trucs à faire XD
+ darkhorse64: Il y a aussi sliding puzzle dans le même genre, si tu codes bien, tu fais 100XP
+ leojean890: moi j'ai pas de todo list je fais au pif selon la volonté du moment^^
+ leojean890: ah d'accord^^
+ leojean890: juste le titre on voit une similitude:)
+ leojean890: enfin j'ai parfois des todo mais exclusivement multi ou optim quand j'ai des idées
+ SkyfightTV: Bonsoir
+ SkyfightTV: Vous savez à quoi ça équivaut les CodinPoint&#160;? dans le classement
+ Zorg1: c'est expliqué quand tu clique sur le (i) de l'affichage de ton classement au dessus de la carte des missions
+ Zorg1: en gros tes classements de contests, de multi, d'opti et de golf vont te donner des CP selon une formule, calculé vers 2heures du mat
+ SkyfightTV: ok merci&#160;!

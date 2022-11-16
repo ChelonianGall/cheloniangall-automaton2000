@@ -1,0 +1,2205 @@
+ struct: DomiKo I dont  really see any bug on that replay
+ mzbear: i'm so fed up with MCTS after Blocking that i'm writing UTTT bot super casually lol ... just heuristics to see which moves lead to immediate guaranteed loss/win
+ mzbear: turn timer says 0.025ms per turn on average ... so refreshing :D
+ mzbear: it would be funny to have alternative bot boards with ridiculously low time limit ... like 5ms per turn
+ struct: mzbear the minimum time sdk allows is 50ms
+ struct: per turn
+ struct: Also some languages would struggle quite a bit with 5ms
+ mzbear: i suppose the platform can't reliably handle managing games that fast, either. any lag would ruin it
+ mzbear: oh no, there's no way i can defeat silver UTTT boss with simple heuristics ... do i really have to make a search function :cry:
+ struct: Hard to do well on it without a search
+ mzbear: i kinda wanna reach gold without a search. just slapping MCTS on this doesn't really feel like a worthy challenge
+ struct: Well you can try minimax
+ struct: but it performs worse
+ mzbear: that's also a type of search
+ struct: a didnt read 1st part properly
+ struct: Well you can try teccles heuristic
+ mzbear: or maybe i should say ... i dont want to build a forward going move tree
+ struct: Teccles heuristic is to force opponent
+ struct: to play on the same board you just played
+ struct: Some people use it on the start of the game
+ Westicles: Isn't UTTT the ultimate "fastest mcts wins" contest?
+ mzbear: hmmm... well, that's an interesting way to get some moves on the board, but it isn't exactly intuitive whether it's a good idea in the long run.  could be exploitable
+ mzbear: westicles, i refuse to believe that!
+ struct: Quite a few people on legend use it
+ mzbear: i'm sure it would perform quite well, yes
+ Westicles: Bitboards required
+ mzbear: i'm already doing that
+ mzbear: i even got some useless BMI2 usage going on :D
+ struct: There is quite a few stuff you can do with MCTS
+ struct: Im sure its just not fastest wins
+ mzbear: mcts would require quite a bit of tuning, there's no way i'm doing that by hand in the web editor ever again
+ mzbear: my heuristic bot still loses to silver boss every time, but at least it manages to fight back a little.  average move time 0.03ms
+ mzbear: but that made it play weaker against everyone else in silver.  heh.  i'll need to think a bit before writing code
+ mzbear: oh wow, i had typoed a hex constant in one of my BMI2 optimizations, fixed it and suddenly my bot plays much better
+ mzbear: it wasn't capable of reading the board correctly ... which boggles the mind, because it still got into silver league
+ jacek: bmi2 in uttt? w00t?
+ mzbear: it's due to the board representation i'm using
+ jacek: also, teccless heuristic is good opening. i added it and managed from top 20 to top 10. at least its good for player 1.
+ mzbear: for the global board, instead of separate occupation maps, i use 0 for open, 1 for full/blocked, and then 2/3 for player states. so i can test against 0 to see the subboard is still open
+ mzbear: which necessiates _pext_u32(mask,0x15555)&amp;_pext_u32(mask,0x2AAAA) if i want one player's pieces extracted from that
+ jacek: :be
+ jacek: :thumbsup:
+ jacek: do you have other heuristics?
+ LightFury01: hey  guys
+ mzbear: this thing is ONLY heuristics :D
+ RaunakCodes2625: HI
+ RaunakCodes2625: WHICH LANGUAGE 
+ jacek: oh
+ RaunakCodes2625: I AM IN PYTHON
+ RaunakCodes2625: U?
+ LightFury01: how you guys doing
+ LightFury01:&#160;:)
+ RaunakCodes2625:&#160;:)
+ LightFury01: me c#
+ RaunakCodes2625: OO
+ Vaibhav0705: ik
+ Vaibhav0705: r
+ mzbear: i maintain a table of decisive board information, such as which subboards contain immediate local win for each player, and which subboard wins lead to immediate global win for each player
+ LightFury01: nada
+ mzbear: and with help of those, i can calculate if a move guarantees loss within 2 moves
+ mzbear: or if entering a subboard guarantees a loss
+ LightFury01:&#160;:)
+ mzbear: ohwell, since i just fixed a major bug, time to throw this into arena and see if i can get out of silver league without search algorithm ;D
+ Astrobytes: A heuristics-based UTTT bot eh? I don't know whether that's insanity, bravery, or a healthy dose of both! :D
+ mzbear: if i get into gold league, i gotta start doing better heuristics
+ mzbear: right now i'm only doing fairly absolute calculations.  but they only take 0.024ms per turn
+ Astrobytes: I'm guessing you'll definitely need some kind of search if you get out of silver
+ mzbear: yea, this plays kinda passively really
+ Astrobytes: Your board representation seems nice and fast, shouldn't be any trouble to chuck a MCTS in there
+ Westicles: Should be easy to tune in the web editor!
+ Astrobytes: :D
+ jacek: neat, MSmits finally submitted oware bot
+ mzbear: the core of the bot is iterating through all valid moves, picking one with reservoir sampling, and skipping moves which are guaranteed to lose.  after that it runs another two loops to try to disrupt enemy and to grab subboard wins for itself if it wants them
+ Astrobytes: Oh so that's what he's been quietly doing jacek
+ mzbear: i'm a bit upset that an earlier buggy version of my bot actually got fairly high in silver league
+ jacek: and without the bug its worse?
+ mzbear: yep.  except that i seem to win against the boss 100% of the time ... if only i could get to fight it
+ Astrobytes: Standard CG bot writing issue right there.
+ Astrobytes: Boss is just the gatekeeper, it's the rabid hordes below it you gotta worry about
+ mzbear: oh, right, i dont set a random seed so my bot is fully deterministic ... and so is the boss
+ mzbear: earlier randomness was happening because i was reading uninitialized memory :D
+ Astrobytes: hahaha. Well that's one way to do rng I guess
+ niStee: :D
+ mzbear: oh great, here we go, now it's losing against the boss every time again ... it was just winning with that one seed ;_;
+ mzbear: yeah, this bot sucks.  i just really REALLY dont want to write another MCTS right after Blocking
+ Astrobytes: Hey, you picked UTTT :D
+ mzbear: i didn't read the full rules of the game first, i thought it was going to be more chill ... but that thing about being sent to a specific subgrid .... argh
+ Westicles: I tried to warn him&#160;:)
+ Westicles: You could try the optims intstead, they are more fun than the bots
+ Astrobytes: Or make a game&#160;;)
+ jacek: :notebook: :soccer:
+ mzbear: making a game might actually be fun, yes
+ Gilad-Gur-Andelman: I think there should be an extra prize for someone who wins shortest mode in JavaScript where the others write in Python
+ MSmits: hey jacek
+ MSmits: did you see this: 
+ MSmits: <a rel="nofollow" class="external free" href="http://cgstats.magusgeek.com/app/multi-oware-abapa/msmits">http://cgstats.magusgeek.com/app/multi-oware-abapa/msmits</a>
+ MSmits: making progress, but not there yet, your bot is so hard to beat&#160;:)
+ Astrobytes: morning MSmits :wave:
+ 5PID3RH7CK3R: hey
+ 5PID3RH7CK3R: Ho
+ 5PID3RH7CK3R: Anybody?
+ 5PID3RH7CK3R: Dead Chat
+ 5PID3RH7CK3R: F
+ 5PID3RH7CK3R: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/c7d4ca4c-ba96-4432-94b0-114e645b000b">http://chat.codingame.com/pastebin/c7d4ca4c-ba96-4432-94b0-114e645b000b</a>
+ 5PID3RH7CK3R: OOO noice
+ Astrobytes: You want kicked?
+ 5PID3RH7CK3R: nah
+ 5PID3RH7CK3R: im just testing
+ 5PID3RH7CK3R: lol
+ Astrobytes: Well stop it then.
+ 5PID3RH7CK3R: kk
+ jacek: 50%? :scream:
+ mzbear: oh yeah, sending enemy to play in subboards that cannot contribute to victory anymore seems quite effective in UTTT silver league, wins against the boss half of the time too.  but only got rank 7, mmh mmh mmh 
+ MSmits: morning Astrobytes
+ MSmits: jacek it is like 70 with you as p2, and 30 with you as p1
+ MSmits: your p1 game is really hard to beat
+ MSmits: 70 took a long time, but is more doable
+ MSmits: (p2 i mean)
+ MSmits: think there's an early mistake somewhere in your p2, but hard to be sure
+ MSmits: from doing a lot of meta mcts, it does seem like the bot almost does perfect play
+ jacek: so if i rewrite the bot to rust, you are dead
+ MSmits: nah, i dont need massive cg bench, it would just mean i submit twice a day to get some games
+ MSmits: i run cg bench to first loss, analyze the game, adjust meta mcts to search
+ MSmits: my bot doesnt make many mistakes either
+ MSmits: so i just need to find them
+ jacek: nice of you being nonNN at the top
+ Astrobytes: that was the objective iirc&#160;;)
+ MSmits: without book it's a clear 5th
+ MSmits: big gap on both sideesw
+ MSmits: sides
+ jacek: big gap between top 5 and rest
+ MSmits: yes and big gap between 4 and 5 i think, well depending on submit
+ MSmits: sometimes i would get near 4, but i think it's lucky
+ MSmits: btw agade has a weird bot
+ jacek: and scary avatar
+ MSmits: one move in some cases is difference between 0% and 100% winrate
+ pu55ython: titties
+ jacek: oO
+ MSmits: sometimes i am adjusting my meta mcts vs you, and my agade drops hard
+ MSmits: because it's super deterministiv
+ MSmits: +c
+ MSmits: basically means finding a new playline vs agade
+ MSmits: pretty easy because it always plays the same moves
+ MSmits: he should do the +random thing
+ MSmits: so should robo, also pretty easy, but his playline does not compete with yours so it doesnt change
+ MSmits: btw if you were wondering:
+ MSmits: Moves Added: 1473
+ MSmits: that's all 
+ MSmits: room for 100k more :P
+ MSmits: i think i run out of HD space before i run out of book space
+ jacek: how deep it is
+ VizGhar: What are you 2 talking about? You should probably open closed chat&#160;:)
+ Astrobytes: Nah, this is the daily sermon from MSmits
+ Astrobytes: (well, used to be daily&#160;;) )
+ VizGhar: :D good to know
+ MSmits: it depends jacek. Some cases 90 plies, on your p2 line. The thing is, even though you often have 4 moves to choose from, 3 moves are so bad that no bot will pick them anyway. So branching is effectively 1
+ MSmits: VizGhar dont interrupt the sermon&#160;! :P
+ jacek: do you have more gray hair now?
+ MSmits: mmh not really, less hair maybe
+ VizGhar: ok, ok... jeez... :D
+ jacek: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/8063c879-ea5f-4e7b-a2aa-592d5169909d">http://chat.codingame.com/pastebin/8063c879-ea5f-4e7b-a2aa-592d5169909d</a>
+ MSmits: the interesting thing is that many consistently won games go 200 plies deep, but i just need a  little help preventing mistakes in the first 20 to 40 plies
+ Astrobytes: VizGhar: Smits is master of opening books and Destroyer of NNs
+ MSmits: I try :P
+ MSmits: yes this guy is like me jacek
+ Astrobytes: lol
+ MSmits: so my school is closed till 19 jan =/
+ MSmits: lockdown
+ MSmits: will be doing a lot of online teaching again
+ Astrobytes: Ah. Well, better for your health prospects I guess.
+ MSmits: yeah, i have some colleagues who caught it
+ Astrobytes: Also, more CG time :smiling_imp:
+ MSmits: that for sure, i just got out of a very busy work/study period
+ Astrobytes: Ah crap, I hope they've recovered well
+ MSmits: i think so, 1 still sick but i expect he will be ok
+ MSmits: I have to create a game and game design document for a class (as a student)
+ Astrobytes: Was just gonna ask about your studies
+ MSmits: I was thinking of recreating yavalath in unity and add some features for improving play
+ MSmits: like hints and such like they have for chess games
+ Astrobytes: Nice idea!
+ MSmits: its better than the alternative, they wanted me to try and create a variation of the roll a ball tutorial
+ MSmits: but that seems boring
+ Astrobytes: Why stop there though. Ultimate Yavalath. Many boards. Many dimensions :P
+ Astrobytes: That seems excruciatingly boring tbh
+ MSmits: sure i might do some other variation
+ jacek: roll a ball?
+ MSmits: its a basic unity tutorial
+ MSmits: move a ball, gather coins 
+ jacek: variation would be roll a cube
+ MSmits: pretty good as a tutorial, but not very motivating to work on
+ MSmits: lol
+ Astrobytes: haha
+ Astrobytes: roll a ball, every time you grab a coin a Yavalath board pops up
+ MSmits: good one
+ MSmits: but i am allowed to just create a different game
+ MSmits: they wanted to make it easier for since it is only a  3 credit course
+ Astrobytes: Yeah, I'd go with your idea. Won't take you long, you can spend more time polishing it
+ MSmits: yeah, btw, i think you can even sell a yavalath game as long as you dont call it that
+ MSmits: the name is trademarked
+ Astrobytes: Lavayath. Just add a volcano somewhere.
+ MSmits: you cant copyright simple game mechanics apparently
+ MSmits: brilliant
+ Astrobytes: :grin:
+ MSmits: maybe in the middle, it's a solved move anyway
+ Astrobytes: Good idea!
+ MSmits: might have to increase the size of the board, because it might cause a lot of draws, maybe not though
+ MSmits: btw
+ MSmits: i did the playground tensorflow thing
+ Astrobytes: Have to test it first. Either that or you could just make the whole board lava, pieces jump around on rocks
+ MSmits: for my course at work
+ Astrobytes: ah right, how did that go
+ MSmits: cut it into little pieces and slowly grew the app to teach them about NN
+ MSmits: it worked great
+ MSmits: much better than i thought it would, it's really a nice thing they made
+ jacek: playground? you mean that graphic thing?
+ Astrobytes: Awesome. Your students responded well to it?
+ MSmits: its especially cool how you can solve some problems with more input and also with more hidden layers
+ MSmits: jacek yeah
+ Astrobytes: brb, need coffee
+ Uljahn: did you use specific dataset?
+ Uljahn: like MNIST
+ MSmits: <a rel="nofollow" class="external free" href="https://playground.tensorflow.org/">https://playground.tensorflow.org/</a>
+ MSmits: all 4 data classification sets
+ MSmits: the spiral can only be done with hidden layers
+ Uljahn: ah, that thing
+ MSmits: you dont even need to be able to code to learn about NN
+ MSmits: in depth even, because it really shows what hidden layers do
+ jacek: the pinnacle of machine learning - throw new more hidden layers and see what happends
+ MSmits: yeah, it also shows that if you throw in too many, your nn wont converge in any reasonable time
+ MSmits: kinda gives you a feel for the kind of thing researches deal with
+ MSmits: the trial and error
+ MSmits: still feel a bit lacking in knowledge because I havent made my own NN yet, but it's good enough to teach these basic things
+ jacek: it really kicked when i saw xor example in python, then rewritten to withtout numpy, then rewritten to c++
+ jacek: with 1 hidden layer and arbitrary hidden nodes
+ jacek: thats why im strill struggling with convolutional NNs. i could simply do complicated architecture in python using lib, but to understand it fully i'd have to write it myself from scratch
+ Astrobytes: well, experience is a great teacher
+ MSmits: yeah
+ ian173: miss me with that poorly written coding question
+ jacek: hm?
+ Lks10: which game you all talking about?
+ jacek: oware
+ SupSon: oware uses nn?
+ Astrobytes: several of the top AIs yeah
+ jacek: except for the 3rd
+ jacek: ;f
+ Astrobytes: indeed
+ SupSon: tensorflow?
+ darkhorse64: I am looking for N-tuple reference (either toy implementation or paper for noob). Any pointers
+ darkhorse64:&#160;?
+ jacek: this? <a rel="nofollow" class="external free" href="https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.108.5111&amp;rep=rep1&amp;type=pdf">https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.108.5111&amp;rep=rep1&amp;type=pdf</a>
+ jacek: SupSon there are no NN libs for python in CG. 
+ MSmits: is it fair to say there are no NN libs in CG?
+ MSmits: at all?
+ jacek: maybe
+ darkhorse64: I read this one but it does not really describe what is a N-tuple or I did not understand
+ darkhorse64: Thanks anyway
+ MSmits: a ntuple is a pattern with a parameter
+ MSmits: when you eval you check for patterns on your board
+ MSmits: N stands for the number of squares
+ MSmits: or hexes or whatever
+ MSmits: in othello you can go up to 9 or so
+ MSmits: because there are so many possible patterns, you get a huge load of params, which you train 
+ MSmits: using TD learning for example
+ jacek: well i know several papers of using N-tuples, dunno if they are more explanable
+ MSmits: darkhorse64, basically, you create a giant lookup array
+ MSmits: you pext your board to extract sets of patterns for features
+ MSmits: then do the lookups and calculate your eval by adding them up linearly
+ MSmits: correct me if i am wrong jacek
+ jacek: <a rel="nofollow" class="external free" href="http://www.cs.put.poznan.pl/wjaskowski/pub/papers/Szubert2014_2048.pdf">http://www.cs.put.poznan.pl/wjaskowski/pub/papers/Szubert2014_2048.pdf</a>  for 2048, <a rel="nofollow" class="external free" href="https://ieeexplore.ieee.org/document/6932907">https://ieeexplore.ieee.org/document/6932907</a> for connect4
+ jacek: basically its correct, MSmits
+ MSmits: thought so, all this seems easy to me, it's mostly the learning I am vague about
+ SupSon: do you use frugally deep?
+ MSmits: whats that?
+ jacek: so, no&#160;:)
+ jacek: i googled its some c++ nn lib
+ DomiKo: :joy:
+ SupSon: how do you encode the state of the board?
+ MSmits: for othello it's easy, 64 squares
+ darkhorse64: I have read all of that by googling this afternoon but I do not seem to be able to connect all the dots together. How to extract the pattern across the board, how to train, what are the relevant data structures&#160;? Actually most papers require some prior knowledge that I haven't yet
+ MSmits: 1 bit each
+ MSmits: two boards
+ MSmits: darkhorse, use pext to extract
+ SupSon: no for oware
+ MSmits: did you use pext for yavalath darkhorse64?
+ MSmits: it's the same thing
+ jacek: i use 12 ints for houses and 2 ints for score
+ SupSon: oh so not one hot?
+ MSmits: SupSon i use a single uint64_t for the entire board
+ Astrobytes: ('cause he's nuts)
+ SupSon: for input to the nn?
+ jacek: SupSon oh you meant the input for the NN?
+ MSmits: Astrobytes yes :P
+ SupSon: yea input to the nn 
+ MSmits: darkhorse64, this might help:
+ MSmits: <a rel="nofollow" class="external free" href="https://stackoverflow.com/questions/48394866/how-to-replicate-pext-parallel-bit-extract-with-basic-bitwise-ops">https://stackoverflow.com/questions/48394866/how-to-replicate-pext-parallel-bit-extract-with-basic-bitwise-ops</a>
+ jacek: then yes, i use one-hots. each house has 1 possible state of 0-31 and each score also is 1 possible state of 0-25
+ MSmits: or <a rel="nofollow" class="external free" href="https://www.felixcloutier.com/x86/pext">https://www.felixcloutier.com/x86/pext</a>
+ darkhorse64: I know pext, the real issue is the mask (I mean which data to extract)
+ jacek: so i have always active 14 inputs out of possible 436 inputs at any given time
+ MSmits: ohh that depends on the game
+ MSmits: Othello uses mostly patterns connected to the corners
+ MSmits: like 3x2
+ MSmits: or 3x3
+ RoboStac: I just directly pass 16 floats in for my nn - 12 for the houses, 2 for the scores and 2 0's so my input layer is a multiple of 8
+ MSmits: so you extract those bits and look them up
+ MSmits: hi robo&#160;:)
+ RoboStac: hi
+ SupSon: alright thanks
+ MSmits: RoboStac, if you want to beat my bot again in oware, add some random to your move selection
+ MSmits: +0.01 or something
+ MSmits: might also help beat other NN's if your bot is strong enough
+ RoboStac: I'm not sure how much difference that'd make, it's usually very certain on the value of a move
+ MSmits: I'm just solving your entire playline now =/
+ MSmits: hmm ok
+ MSmits: but the game is long
+ MSmits: you say usually, but that's 100 choices or so
+ MSmits: it only takes some variation to frustrate a booker
+ MSmits: just an idea, make it a little harder for me
+ Astrobytes: wait for the chess game, you'll love that MSmits :P
+ MSmits: your bot is otherwise very very strong
+ jacek: but its 960
+ Astrobytes: exactly
+ MSmits: whats that?
+ Astrobytes: "love" it
+ MSmits: 960?
+ Astrobytes: Fischer Random
+ MSmits: ohh ok
+ RoboStac: a chess variation designed to beat opening books
+ MSmits: nice
+ RoboStac: 960 starting layouts
+ MSmits: i would not mind more games i cant book, there's too many games to book as it is. I only have so many cpus :P
+ Astrobytes: hahaha
+ MSmits: still have to do checkers and breakthrough
+ MSmits: havent started on those
+ MSmits: i kinda want to improve bot before i do
+ Astrobytes: too busy with raic for cg atm
+ MSmits: meta mcts sucks with bad bot
+ MSmits: ah hows that going
+ jacek: not if you allocated enough time for mcts...
+ Astrobytes: Pretty good, qualified for round 2 at least
+ MSmits: nice
+ Astrobytes: game is pretty cool
+ MSmits: jacek thats true, but it would go off on a bad branch for days. Better to avoid that. Also helps to have a strong solver to detect early loss/win
+ Westicles: there is this libtensorflowlite_c-linux64.so
+ Westicles: Looks like it is for dart...
+ jacek: oO
+ Westicles: and also rust
+ RoboStac: MSmits - looks like you were right, a little randomness does beat your opening book
+ jacek: :scream:
+ YodaMaster123: Neural network for Oware Abapa?
+ Astrobytes: Yep.
+ YodaMaster123: About that, has anyone attempted to modify aged`s neural network chatbot for another server?
+ YodaMaster123: *Agade.
+ Astrobytes: not that I'm aware of, but perhaps?
+ NguyenVinhHien: what is avantage of Java and Nodejs for back-end programming bros? 
+ MadKnight: YodaMaster123 u wanna turn him into discord chatbot&#160;?
+ Uljahn: shouldn't it be retrained on relevant chat logs first?
+ Uljahn: imagine it pinging euler on another server xD
+ Astrobytes: lol
+ LastRick: Anyone out there beat Escaping the Cat? How far off is this last test? <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/516134139?f=290">https://www.codingame.com/replay/516134139?f=290</a>
+ surperMM: Single possibility 
+ jacek: AutomatonNN how many hidden nodes do you have
+ AutomatonNN: why is this contest enough to get a secret to make the game and simply have the best path to test ra
+ MSmits: RoboStac I knew tha&#160;:)
+ MSmits: by making your bots more random, I make my book more general and better
+ MSmits: just takes longer to "train" is all 
+ jacek: so it was the plan all along
+ MSmits: yeah.. my evil plan
+ MSmits: :smiling_imp:
+ Uljahn: LastRick: as a reference, here is the last testcase with some dark trigs magic&#160;:)<a rel="nofollow" class="external free" href="https://www.codingame.com/replay/516135841">https://www.codingame.com/replay/516135841</a>
+ MSmits: need to share i think?
+ MSmits: I cant view your replay
+ MSmits: Uljahn
+ Uljahn: :confused:
+ MSmits: if you run a replay in the IDE it's private
+ MSmits: unless you share it with the share button
+ MSmits: thats why you're also not able to share CG bench replays
+ Uljahn: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/516138224">https://www.codingame.com/replay/516138224</a>
+ Uljahn: i used the share both times&#160;:(
+ MSmits: :scream_cat:
+ MSmits: what weird stuff is that lol
+ jacek: the pool should be hex
+ MSmits: well anything is better with hex of course... but currently i am just wondering what I am looking at :P
+ Uljahn: that was quite overengineered solution though
+ MSmits: o right, i can click play
+ MSmits: is this a puzzle&#160;?
+ MSmits: says best score up top, wondering if it's an optim, but then there's no leaderboard, so..
+ MSmits: :confused:
+ Uljahn: just a puzzle with a nice visual
+ MSmits: ah ok, yeah it does
+ LastRick: Oh wow. Zigzag? Very impressive.
+ LastRick: BTW I just solved it, found the problem was I was using the cat's current location to solve where on the pool edge I should go, rather than the cat's location on the NEXT step. That literally was the difference.
+ MSmits: ahh that's a common mistake in many problems like that
+ WillRises: Anyone in the chat rn that can help me with JavaScript puzzle on codinggame.com&#160;?I don't understand what it's asking me and feeling dumb
+ LastRick: Feel free anytime to ask a question about a puzzle in the chat. Just be as specific as possible. 
+ MSmits: include the link to the puzzle
+ MSmits: that way people can click on it, quickly see their own solution if they solved it and maybe give you a hint
+ eulerscheZahl: what's codinggame.com?
+ eulerscheZahl: oh right, it redirects here
+ LastRick: Thats your one question today, Euler, youre done
+ eulerscheZahl: as codeingame.com does
+ MSmits: it's actually the real address eulerscheZahl, you just suck at spelling :P
+ eulerscheZahl: oh :D
+ eulerscheZahl: then they sent me the wrong merch
+ MSmits: merchandise?
+ eulerscheZahl: yes
+ MSmits: or they just know you can't spell
+ MSmits: is this T-shirt for Euler? Remove the G please
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://img.printfection.com/18/21271/bT7r1IaOxZpPl8N/Next+Level+3600+-+CodinGame+Rubiks+Cube+-+Black+%28Front%29.png">https://img.printfection.com/18/21271/bT7r1IaOxZpPl8N/Next+Level+3600+-+CodinGame+Rubiks+Cube+-+Black+%28Front%29.png</a>
+ eulerscheZahl: they didn't even add a separation between 2 blocks
+ LastRick: Wow, i didnt see that at first
+ MSmits: mmh ok
+ MSmits: why a rubiks cube anyway
+ MSmits: it's another nerdy hobby, but not really related
+ MSmits: might as well have used a chess board
+ eulerscheZahl: why robot arm?
+ WillRises: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/medium/shadows-of-the-knight-episode-1">https://www.codingame.com/training/medium/shadows-of-the-knight-episode-1</a>Where do I start with this puzzle? I'm new to code and looking for projects to practice on.
+ eulerscheZahl: because it looks cool
+ MSmits: I guess so&#160;:)
+ VizGhar: This one is fun... but it simply looks like picking buch of correct if elses hmm
+ struct: WillRises binary search 
+ MSmits: WillRises you use binary search
+ MSmits: damnit struct
+ VizGhar: WillRises check forum and apply binary search&#160;:)
+ WillRises: Got it. thanks guys
+ LastRick: MSmits: you used two extra words, its your own fault
+ WillRises: <a rel="nofollow" class="external free" href="https://www.codingame.com/learn/binary-search">https://www.codingame.com/learn/binary-search</a>
+ MSmits: WillRises basically, you need to know the minimum and maximum coordinate of the possible locations of the bomb and jump between them
+ MSmits: that minimizes the number of jumps needed
+ MSmits: LastRick correct
+ WillRises: Right I got that. I just don't know how to apply that in the (terminal?).
+ MSmits: allright, I assume you know the current location of batman
+ MSmits: if the input says the bomb is to the right
+ Astrobytes: in the Bat Cave
+ MSmits: you take the currentX 
+ MSmits: and the maximum X
+ Astrobytes: just off the phone with him
+ LastRick: Hah
+ MSmits: and go between them. Just average them
+ jacek: or maybe hes asking how does input/output work on CG
+ YusufEmad04: print("Hello World")
+ MSmits: input works as reading input for your language, depends
+ WillRises: Hmm I might be learning how to run a marathon here before learning to crawl
+ MSmits: output is basically just your languages print statement
+ DomiKo: hi struct
+ MSmits: you might be a talented baby, who knows
+ struct: hi DomiKo
+ DomiKo: You know you got bug too?
+ struct: WillRises you might want to start with easy puzzles
+ struct: DomiKo which bug?
+ DomiKo: in STC
+ eulerscheZahl: oh, you are in top20 already :o
+ WillRises: struct. got any suggestions on "easy puzzles"?
+ eulerscheZahl: i think you should stop now
+ struct: I saw the replay, but no bug
+ MSmits: some easy puzzles are harder than batman though, they're not all categorized properly
+ DomiKo: euler yea 
+ DomiKo: top20 is hard no
+ DomiKo: the gap is so biggg
+ struct: do the decent, power of thor, horse racing, temperatures
+ MSmits: the descent
+ WillRises: Word. Thanks.
+ MSmits: those are quite good yeah
+ eulerscheZahl: do the descent decently
+ struct: DomiKo what was the bug?&#160;:|
+ MSmits: also dont give up when you fail the first one
+ jacek: :notebook: :soccer:
+ eulerscheZahl: :door:
+ MSmits: some might suit you better
+ WillRises: Never give up. Never surrender
+ DomiKo: the bug is losing :wink:
+ MSmits: right
+ struct: oh
+ MSmits: jacek it's still on my list. Maybe if you didnt make your bots so strong in other games, i'd already be doing the soccer game&#160;:)
+ struct: Maybe when I finish STC that bug is fixed
+ LastRick: All of the easy puzzles are definitely not created equally. "Easy", "Medium", even "Very Hard", these are subjective terms not defined by, say, a dictionary.
+ eulerscheZahl: is STC on your list too smits?
+ MSmits: smash the code?
+ eulerscheZahl: yes
+ MSmits: i did start it once, but never finished the bot
+ MSmits: something happened, probably a contest or a fun multi
+ Westicles: RIP another rockstar
+ MSmits: i also still need to finish my D&amp;B
+ eulerscheZahl: they are dying like flies
+ LastRick: rockstar is (was?) a user, correct?
+ Westicles: ya
+ eulerscheZahl: i have 5 now unnamed followers in the last 3 weeks
+ eulerscheZahl: i think that was all rockstar
+ MSmits: what are you doing to them?
+ eulerscheZahl: ban
+ LastRick: what is going on? 
+ eulerscheZahl: long story
+ LastRick: ahh
+ LastRick: how can there be so much drama on a site full of nerds coding pods
+ Westicles: I made a nice clash for him... oh well
+ MSmits: there's not that much drama i think, considering this chat is almost completely open
+ mzztin: poggers
+ MSmits: problem is mostly that teachers have their class login here and do stuff
+ MSmits: which is cool, but problematic sometimes
+ eulerscheZahl: there's a much bigger drama event in the coding world: hacktoberfest
+ eulerscheZahl: imagine it like a school class released on the CG chat. but instead of 1h it lasts an entire month
+ MSmits: fun
+ YusufEmad04: hi
+ eulerscheZahl: nonsense pull requests just so you complete 5 PRs and get a free tshirt
+ MSmits: maybe I am immature but sometimes their jokes make me laugh. 
+ eulerscheZahl: :D
+ LastRick: had no idea about the classroom assignment stuff. But it makes sense
+ eulerscheZahl: some teachers park their class here. which is fine as long as they are supervised
+ LastRick: hahah
+ MSmits: I've only rarely  had specific students come online here, not just whole classes
+ MSmits: it just doesnt work, most students cant code well enough, so they'll just mess around
+ eulerscheZahl: ramdeath has better students than you
+ LastRick: i'll say this. I enjoy the chat and site more during this time of day rather than, say, eight hours from now. Totally different.
+ MSmits: no doubt, different kind of class I bet
+ eulerscheZahl: in 8h Europe is asleep
+ MSmits: LastRick it's not the same every day though
+ MSmits: but i get your point
+ MSmits: eulerscheZahl is asleep
+ MSmits: not all of us
+ eulerscheZahl: :P
+ MSmits: well... we *should* be
+ Astrobytes: Smits is up all night cooing softly to his meta MCTSs
+ MSmits: but I doubt i'll sleep early these next few weeks
+ MSmits: huh
+ MSmits: i thought all my cameras were off
+ Astrobytes: :D
+ MSmits: did MadKnight tell you this, he's always hacking me
+ Astrobytes: hahaha
+ MSmits: ohh i got kicked off nr 1 othello
+ MSmits: some guy named oldjohn evaded my book
+ MSmits: mmhh
+ Westicles: easy come, easy iago
+ MSmits: he beats dbdr sometimes too
+ struct: 40 moves book lol
+ Astrobytes: jeez westicles that was awful
+ struct: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/516146459">https://www.codingame.com/replay/516146459</a>
+ Astrobytes: :D
+ Westicles: heh heh
+ MSmits: struct that is going to make it really easy to fix for me
+ struct: yeah
+ LastRick: Westicles: :neutral_face:
+ MSmits: well I'll get on that then
+ mzbear: rewrote my heuristic engine, misplaced one&#160;! and it took forever to find the issue, argh
+ MSmits: happened to all of us
+ MSmits: sucks
+ MSmits: sometimes i just place a&#160;! because I am really excited about my code without meaning to negate it
+ mzbear: :D
+ Astrobytes: :rofl:
+ Maxim251: what a nice game
+ LastRick: :laughing::skull:
+ RaunakCodes2625: hello
+ MEtal221: hello
+ jacek: oh im 1st in o
+ jacek: and his book is really deep
+ OldJohn: Only 10 lines
+ jacek: oO
+ OldJohn: I took a 30 years old program
+ MSmits: well mine is only 1 line
+ MSmits: it's a very long line
+ jacek: logistello?
+ OldJohn: No but I was working with Michael
+ MSmits: is that one of the designers&#160;?
+ jacek: :tada:
+ jacek: michael buro?
+ Astrobytes: Obviously Michael Buro
+ OldJohn: Yes This was my program I took
+ jacek: nice place, considering ai advecements in the last 30 years
+ MSmits: nice to meet you OldJohn
+ MSmits: Maybe you know Renard then, he also used a 30 yr old othello program afaik
+ OldJohn: Yes here is a human evaluation no bitboard hastable and endgame
+ OldJohn: I know Sylvain yes
+ MSmits: oh thats his real name then?
+ OldJohn: In fact we did not see each other for a long time
+ MSmits: it's cool to meet up here then
+ jacek: not even n-tuples?
+ Astrobytes: It's like CG has an underground computer board game expert network
+ Astrobytes:&#160;:)
+ mzbear: grr.  i cant make a heuristic that beats the boss AND all others to reach the boss.  i give up, i'll start writing a search algorithm after all, i can't do this with pure heuristics&#160;:(
+ MSmits: seems like that yeah
+ MSmits: mzbear you dont have to
+ Astrobytes: tric too, checkers was his thing iirc
+ MSmits: if you have a heuristic that beats boss
+ MSmits: you will keep submitting
+ MSmits: and push the other guys above the boss and promote them
+ MSmits: when they're all gone, you got it
+ OldJohn: I think dbdr program is probably the best at Othello from a Othello player point of view
+ mzbear: MSmits :DDD
+ mzbear: that's certainly ... an interesting strategy ...
+ MSmits: OldJohn possibly, but dbdr did not add random
+ MSmits: it's quite easy to counter
+ MSmits: jacek much less so
+ Astrobytes: He used multi probcut if I remember rightly
+ MSmits: yeah he went all out on this one
+ jacek: but mine loses to dbdr considerably
+ jacek: im 1st due to submit luck
+ MSmits: right and also because my bot wins 96% vs dbdr and maybe 80% vs you
+ MSmits: because of the damn random
+ MSmits: i did a lot of submitting after which the game went still, so thats also why you ranked above dbdr
+ MSmits: not much luck to it
+ OldJohn: The long opening line versus your program is only because my program did not find the winning move but I saw it and check with more thinking time with my computer
+ jacek: ohh so personally you are good othello player?
+ MSmits: that's cool OldJohn, I sense a kindred soul
+ OldJohn: Are you all using bitboard&#160;?
+ Astrobytes: Great to have guys like you playing on here, really
+ Astrobytes: I believe mostly everyone is using bitboards yes
+ OldJohn: In fact  I have a bad program in '89 that was using bitboards that competed in Computer Olympiads
+ jacek: most here use bitboards
+ MSmits: yeah I use a 2x 64 bit bitboard
+ darkhorse64: OK, I think I understand how n-tuples works (at least how to implement it, why it works is another story). Still have to work on TDL namely how to update the weights
+ MSmits: thats where i am also
+ MSmits: the patterns work because in othello (if this is the game where you do it)  local patterns can tell you the value of the board. 
+ MSmits: you wouldnt be able to do this in uttt, because moves will make you jump all over the board
+ MSmits: in othello you will have some isolated fronts
+ MSmits: not entirely.... but close enough
+ darkhorse64: It reminds me of UTTT tritboards for the encoding. It might also be applicable on Y with 4-tuples
+ MSmits: thats exactly what i do in uttt, i use tritboards for lookup. I guess it's kind of like using miniboards as ntuples
+ MSmits: but as eval its not that great
+ MSmits: because of the interdependence of the miniboards
+ MSmits: it's really a domain specific thing
+ darkhorse64: I have not touched that thing for months. Even if I know implementing bonus for teccles, mini board wins or free moves would help
+ struct: any other game anyone would like to see?
+ Astrobytes: Don't forget Amazons
+ MSmits: is gomoku worth doing?
+ MSmits: I'm going to regret suggesting this :P
+ MSmits: not sure if maybe it's solved or unbalanced or anything, i came across it reading papers
+ MSmits: apparently go players play it to relax after a go game
+ MSmits: I dont like go, but i do like to relax
+ Astrobytes: stops them go-ing moku
+ MSmits: lol
+ MSmits: isnt amazons solved?
+ MSmits: probably you can grow it to a larger size
+ MSmits: or something
+ eulerscheZahl: i'm pretty sure Nine men's morris would be a boring game here on CG
+ Astrobytes: need 12+
+ struct: I dont think Amazons is solved
+ MSmits: nine mens morris is easily solved
+ MSmits: could also be grown
+ Astrobytes: that's why I said 12
+ Astrobytes: can't remember much about it though, I read some papers 
+ Astrobytes: a while ago
+ Astrobytes: afk for a bit
+ struct: seems like gomoku is forced win/draw for black
+ struct: They use swap rule
+ MSmits: is the game interesting when swapping?
+ MSmits: because the same is true for yavalath, its a forced win for p1 on 7 starting hexes
+ MSmits: but with swap its a very interesting and balanced game
+ struct: Its a different kind of swap
+ MSmits: oh?
+ struct: "In Swap2 rule, the first player starts by placing three stones (2 black and 1 white, if black goes first) on the board. The second player then selects one of three options: play black, play white and place one more stone, or place two more stones and let the first player choose the color.[5][6] This is essentially a slightly more elaborate pie rule."
+ MSmits: ahh ok
+ reCurse: Ohh I remember nine men's morris. It was to study minimax in some AI course I had at university decades ago.
+ reCurse: They organized an AI tournament for it, little did I know at the time it would be useful so long after&#160;;)
+ eulerscheZahl: sounds like you are older than i always thought
+ reCurse: I know -_-
+ reCurse: 18 years ago so maybe decade was not quite plural yet
+ struct: for some reason I Thought he was in 20-30 range
+ struct: 25-30*
+ reCurse: Need to bump that up a little
+ MSmits: well struct you were right he was
+ MSmits: and then he wasnt anymore
+ MSmits: I always thought he was my age
+ MSmits: almost 40
+ eulerscheZahl: that matches my imaginations
+ reCurse: Yeah getting closer
+ reCurse: sigh
+ LightFury01: hello guys
+ LightFury01: how you doin
+ LightFury01:&#160;:)
+ monami7000: great
+ monami7000: am 56 years old, learning to code
+ MSmits: you're never too old to code
+ MSmits: I mean look at reCurse, he still does it
+ MSmits: :P
+ reCurse: Hey you're older than me though not by much
+ reCurse: shush
+ MSmits:&#160;:)
+ Astrobytes: getting older ain't that bad tbh
+ Astrobytes: For now
+ struct: MSmits I think i asked you this before, do you think bitboards are worth on STC?
+ LastRick: Even those of us that are *cough* even older can learn a lot here. This site has been a pleasant surprise
+ Astrobytes: Nice to hear. Good to have another convert on here. And there're plenty 'mature' people on here&#160;;)
+ mzbear: ffs my bot got high enough to challenge boss ... 12 losses against the boss, no wins ... outside the arena i keep winning half of the time
+ LastRick: Boss: Know your place, son.
+ wisp1st: Know your place Boss
+ kovi: oh, recurse is older than me :o
+ eulerscheZahl: Artrosebytes
+ Astrobytes: lol wot
+ Astrobytes: how old are you kovi?
+ kovi: 50
+ mzbear: you know what, i'm gonna cheat ... i'll just predetermine some random seeds that win against the bot every time, since it's deterministic
+ Astrobytes: I'm 38, I don't think recurse is 50+ btw&#160;;)
+ eulerscheZahl: that's now what I understood eitherbut a good way to trigger him
+ mzbear: actually, i could test out every top bot in silver league to see if they are deterministic, and figure out some seeds that win against most of them ;D
+ Astrobytes: lol euler
+ Astrobytes: write a search already mzbear, your masochistic approach is making my teeth itch :D
+ mzbear: there we go, 3 hardcoded seeds that each always win against the boss, chosen at random (so i wont get stuck against other deterministic ones).  i feel so bad doing this
+ mzbear: but i want to get to gold league without search
+ LastRick: Good gracious, more contributions? I think we're over 110 now.
+ LastRick: I was going to make a joke earlier this morning about breaking through 100. Hah, we've blown by now.
+ Astrobytes: Yes, it's getting a little crowded in there. Mostly clashes too I think.
+ jacek: clashes :f
+ LastRick: Over 80 of the 110
+ reCurse: Is that the game now, triggering me? :P
+ Astrobytes:&#160;:/
+ Astrobytes: lol
+ jacek: nn uttt clashes?
+ reCurse: wtf people think I'm 50 now
+ Astrobytes: Yeah, GRAMPS :P
+ reCurse: I'm 36 geez
+ jacek: ok boomer
+ LastRick: Hey, thats Euler's nickname
+ LastRick: gramps
+ Astrobytes: I was pointing it out to kovi that you were not in fact, older than him
+ reCurse: Game is over, I'm triggered :p
+ Astrobytes: hahaha
+ kovi: im reliefed then (loosing vs. younger is acceptable) sorry i misunderstood the relations in chat, you refered to msmits probably not manami
+ reCurse: Haha yeah
+ reCurse: Strange curve, usually it's acceptable to lose vs older
+ reCurse: When does it shift?
+ AI_says_hi: Hey folks I have a general question: Som eof the bot programming challenges recommend using machine learning, e.g. genetic algorithm. Is the ML-mechanism supposed to learn within a single game? Or is there a way to carry over parameters? Thanks&#160;:)
+ elcolumbio: at 45
+ elcolumbio: 42
+ Astrobytes: 37 reCurse :P
+ jacek: you cant 'save' anything from the game
+ reCurse: F
+ Astrobytes: you can run an online search, or you can download replay data and train offline
+ LastRick: I've had a related GA question sitting on the forum for a few days with no answer, I'll throw it out here. I've been reading a lot recently about GA, mostly word guess examples and I would love to code Search Race. I know ppl aren't going to share code. But any suggestions about the choice of gene/crossover/mutations would be appreciated.
+ reCurse: Whatever gets you out of it :P
+ Astrobytes: thrust + angle?
+ RoboStac: LastRick - <a rel="nofollow" class="external free" href="http://files.magusgeek.com/csb/csb_en.html">http://files.magusgeek.com/csb/csb_en.html</a> and just ignore anything about blockers
+ kovi: loose vs. younger:<a rel="nofollow" class="external free" href="http://www.rhsmpsychology.com/Handouts/verbal_and_nonverbal_iq__age.htm">http://www.rhsmpsychology.com/Handouts/verbal_and_nonverbal_iq__age.htm</a>
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://en.wikipedia.org/wiki/Flynn_effect">https://en.wikipedia.org/wiki/Flynn_effect</a>
+ eulerscheZahl: IQ is defined via average intelligenceif your intelligence remains constant but newer generations get smarter, your IQ value drops
+ struct: so the older people IQ might increase
+ reCurse: Hmm...
+ MSmits: struct, my bitboard floodfill was not very fast on STC, but i never finished the bot
+ reCurse: Not sure what to make of both&#160;:)
+ LastRick: Robo: I've read that article and one point I'm confused about is he's evaluating  chromosomes with pod1 and pod2 directions and he picks the "best" one to output. But he also says he looks six steps into the future. Is the "best" option the one that puts in the best position for the next turn? Or the one that puts in the best position six turns in the future?
+ struct: I guess I won't try it then
+ struct: Also I'm not familiar with bitboards so I guess it would take me a while
+ MSmits: dont try it on STC, but do try it on any boardgame
+ MSmits: its really not that hard, only a few things to learn
+ MSmits: i should say, its not hard to get the bitboard state working. But to make a quick sim is sometimes a challenge
+ MSmits: for example bandas pushing and oware seeding
+ MSmits: othello has free code you can google
+ MSmits: so the sim problem will be solved there
+ RoboStac: LastRick - play out the 6 turns and then calculate a score (if you look at the score function in 5.2.1 you can see the loop to play turns before evaluating) 
+ jacek: yeah, but what about boards over 8x8, or over 11x11 (so you cant cheat with int128_t)
+ MSmits: i did bitboards on ooc
+ MSmits: just make an array of ints
+ jacek: oO
+ MSmits: recurse won with bitboards on ice and fire
+ jacek: and i see youre resubmitting O bot now :o
+ MSmits: yeah, i fixed it
+ jacek: fixed?
+ eulerscheZahl: added entry to opening book
+ MSmits: yeah so it doesnt lose vs our new friend&#160;:)
+ struct: I saw puyo puyo code of a person doing it with 2 int64
+ eulerscheZahl: so last to edit the book wins?
+ MSmits: in theory yeah
+ MSmits: but so far that always seems to be me :P
+ reCurse: Saying you win with bitboards is a bit like saying you win with C++...
+ MSmits: sure, but jacek was suggesting bitboards are hard to use in some games
+ jacek: HTML is programming language
+ eulerscheZahl: temporarily i got first with code
+ reCurse: So a bit boring
+ jacek: pun intended?
+ reCurse: Maybe
+ jacek: MSmits you could print the book moves like him
+ MSmits: or i could do it like you and always print book
+ MSmits: didnt you do that in one game?
+ jacek: the other O game
+ MSmits: ahh ok
+ MSmits: I wouldnt print my book moves, because that would make it really easy to counter
+ jacek: i used to in bt to print book randomly up to 38..46 plies
+ MSmits: thats funny
+ jacek: to troll the boomers
+ jacek: bookers*
+ MSmits: nice mistype
+ Astrobytes: excellent
+ MSmits: typo
+ jacek: or was it?
+ MSmits: no idea
+ MSmits: you are a mystery
+ MSmits: aww damnit, i lost my 46th othello game
+ MSmits: damn your random
+ MSmits: :rage:
+ eulerscheZahl: :D
+ Skril: thanks eulerscheZahl for Space Maze&#160;; it was a fun and interesting puzzle&#160;:-)
+ eulerscheZahl: wouldn't it be boring with everyone deterministic?
+ MSmits: yeah i am just kidding. It would be very boring
+ eulerscheZahl: i saw you solved it, congrats Skril
+ eulerscheZahl: you are the 7th to solve it without me
+ MSmits: good job skril, apparently that one is very hard
+ Astrobytes: 7 now, nice
+ Skril: thanks&#160;:-)
+ jacek: oh you lost again
+ MSmits: yeah, i never completely finished royale and your's playlines, too many options. 
+ MSmits: also royale kept resubmitting different versions, i got a bit fed up :P
+ MSmits: doing this makes me think about what othello AI tournaments must have been like
+ MSmits: opening books must have been huge. Checking official games, trying to counter those moves etc.
+ MSmits: either that or they found some way to prevent it... but i doubt it, the game is very simple
+ MSmits: as in few states
+ jacek: thats why at some point they banned opening books for chess or forced some balanced openings
+ MSmits: they would have to look at the source code to know someone is using one
+ MSmits: a book that counters a specific bot is very small, so it's not even going to show in the size of the executable
+ MSmits: i guess they can *suspect* and players can be sporting enough to try not to cheat
+ reCurse: It's solved by forcing random openings
+ reCurse: Or in chess, use chess960
+ MSmits: yeah I guess so
+ MSmits: Onitama does a good job of this
+ mzbear: WTF .... i used hardcoded seeds that guarantee 100% winrate outside of arena ... and still lost against the bot twice in the arena
+ MSmits: calculation time might be somewhat different in the arena for some languages
+ eulerscheZahl: which game?
+ mzbear: UTTT
+ MSmits: i should say performance
+ eulerscheZahl: gold boss? is not deterministic
+ mzbear: silver boss
+ mzbear: i'm trying to beat silver without a search algorithm :D
+ eulerscheZahl: hm, i don't know that boss
+ MSmits: what algorithm do you use?
+ eulerscheZahl: but your plan doesn't sound fun to me 
+ MSmits: if else?
+ MSmits: or eval?
+ darkhorse64: trueAI
+ eulerscheZahl: GAimax
+ Astrobytes: You need a Prune Array
+ eulerscheZahl: was waiting for that
+ mzbear: a lot of if else, practically
+ MSmits: well you can solve regular TTT with a reasonable amount of if else
+ mzbear: the only "search" thing is two step lookup towards certain loss or certain win
+ MSmits: ah ok
+ mzbear: other than that, it generates moves and does rules like always taking a local win if it blocks enemy global win, etc
+ mzbear: and once no rules match, it goes through the possible moves and picks disruptive moves first, i.e. ones that sends enemy to subboard that can no longer contribute to global win
+ mzbear: etc
+ MSmits: ah I see
+ MSmits: I can totally see getting into gold with a good heuristic bot like that
+ MSmits: did you add teccles?
+ jacek: and tentacles
+ Astrobytes: that might be the missing part
+ Astrobytes: (teccles)
+ tarikyildiz: hello here the puzzles are very confusing to me, what should I do?
+ MSmits: in case you dont know teccles:  It means, when you come to an empty board, you pick the move that has the same position on the miniboard as the miniboard has on the big board
+ mzbear: people keep mentioning the teccles but i didn't find what it is.  someone described it briefly and i got the idea of the disruptive moves from that, but my disruptive move play only triggers late game
+ MSmits: or in other words, that sends the opponent to the same board
+ MSmits: this is a very strong heuristic when employed by search bots. I see no reason why it wouldnt help for a heuristic bot
+ mzbear: so i understood it correctly.  i didn't try it, though, because it feels a bit odd, but maybe i'll try it
+ mzbear: my current bot got rank 3 in silver league ... so close
+ Astrobytes: and teccles works better early-mid game too right? So the late-game disruptive move should kick in at the right moment
+ MSmits: I played millions of games locally, it is almost always the best move
+ mzbear: huh
+ MSmits: exceptions maybe in the late game (20 ply + ) but even then its almost always the best move
+ Astrobytes: If you add that and get legend I'll give you 0.001€
+ Astrobytes: Next year.
+ jacek: silly, there wont be next year
+ MSmits: err, you mean after the UK is out of the EU?
+ Astrobytes: Yes&#160;:(
+ eulerscheZahl: that doesn't stop him from the ability to own Euros
+ MSmits: true
+ eulerscheZahl: i still have some Kunas
+ Astrobytes: This is true.
+ MSmits: i dont know what kunas are
+ eulerscheZahl: the currency in Croatia
+ MSmits: is this some fantasy game currency
+ MSmits: oh ok
+ Astrobytes: I've got some drachmas hanging around somewhere
+ eulerscheZahl: fantasy Croatia :D
+ MSmits: didn't you guys have marks?
+ eulerscheZahl: yes
+ eulerscheZahl: Deutsche Mark or DMark for short
+ Astrobytes: now they have Merks
+ MSmits: right
+ MSmits: is a Merk a follower of Merkel?
+ Astrobytes: Merkel Mark = euro 
+ MSmits: owww
+ MSmits: you're operating on another level today astro
+ Astrobytes: well, I mean I just made it up but, it works
+ MSmits: cant reach it
+ Astrobytes: you've only just come back, give it a few days
+ MSmits: hey i was never really gone. I just didnt say anything :P
+ tarikyildiz: Hello. Do you have any Turks on this site?
+ Astrobytes: yeah we noticed :P
+ MSmits: let me check tarikyildiz
+ Astrobytes: tarikyildiz: quite a few I believe yes
+ MSmits: well not on othello anyway
+ Astrobytes: Isn't the guy currently streaming Turkish?
+ <b>**MSmits should have gone to the full leaderboard</b></p><p><img src="/a/23052489191875" /> Astrobytes: why tarikyildiz? Can we help you with something?
+ MSmits: There are 23171 accounts from Turkey
+ struct: Not many
+ MSmits: Highest ranked is Jazzcript at 1447
+ struct: only 20 on fall challenge 2020
+ MSmits: about the same number as Dutch players
+ MSmits: (23688)
+ eulerscheZahl: but i can tell you 3 dutch players right away
+ struct: but 126 dutch on FC2020
+ tarikyildiz: thank you astrobytes i write when i need help&#160;:)
+ Astrobytes: OK cool tarikyildiz&#160;:)
+ MSmits: which 3?
+ struct: you, counter and someone else
+ eulerscheZahl: you, jh bonarius, counter balance
+ MSmits: counterbalance me and&#160;?
+ MSmits: oh bonarius sure
+ Astrobytes: what happened to Mr Bonarius
+ Astrobytes:&#160;?
+ SBtree-bit: I can't wait!!!
+ eulerscheZahl: he became the wood clown
+ MSmits: great avatar 
+ Astrobytes: He was kinda down on his luck I remember
+ Maxim251: How pasible is to make code 29 letters size? In perl and Bash on Temperatures
+ MSmits: I think he had problems with the short timeframe of contests
+ MSmits: as in 10 days is too short for him
+ MSmits: he liked locam
+ Astrobytes: Yeah that too, but like he got divorced and stuff
+ mzbear: hmm.  teccles made the early game of my bot quite a bit more aggressive, but late game weaker against the boss :O
+ MSmits: Maxim251 people do some extreme stuff to code golf
+ eulerscheZahl: oh, i totally missed that personal drama
+ MSmits: some languages are more suited to it
+ Astrobytes: wasn't a drama as such, just remember him mentioning it when he reappeared a while back
+ MSmits: mzbear i would still keep it, it lowerst the branching a lot
+ MSmits: you can fix it with different if elses
+ MSmits: it's objectively an improvement, but it might not mix well with the rest of your bot as it currently is
+ Astrobytes: try just your disruptive move heuristic in the endgame and use teccles earlier
+ Astrobytes: (and variations on that)
+ MSmits: if the boss is completely deterministic, you can also just make a little opening book
+ mzbear: well, my bot kinda relies on luck :D
+ MSmits: just put in some states your bot encounters every game and force it to do some move you know is good
+ Maxim251: my code have 222 letters long, but if I replace if statment with&#160;?&#160;:  I could have few extra. All variables are 1 letter long, and I cant do nothing more, because i need keep {} ()&#160;; what are extra letters
+ MSmits: i dont know Maxim251, but you can google code golf tips or do a lot of clashes in shortest mode
+ MSmits: i picked up some tips there... though i am not that great at it
+ mzbear: i'll try cheesy approach first ... 3 hardcoded seeds that always win against boss outside arena, let's see how well teccles works against other players
+ MSmits: well you're not searching so cheesy is a must
+ MSmits: this is game is about as search friendly as you will find
+ MSmits: and heuristic unfriendly
+ Maxim251: This is the code
+ MSmits: oh i have another heuristic
+ Maxim251: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/061ae823-3895-42dd-95f5-567b04f5aa6a">http://chat.codingame.com/pastebin/061ae823-3895-42dd-95f5-567b04f5aa6a</a>
+ MSmits: mzbear
+ Astrobytes: I told him, but he took the masochistic route :D
+ MSmits: never play middle square
+ MSmits: if there are less than 2 squares filled
+ mzbear: oh? that's interesting
+ MSmits: unless it's the starting move
+ Lks10: you can remove the indenting to save characters I think
+ MSmits: middle square is bad
+ MSmits: because you send the opponent to the middle board
+ MSmits: sometimes its still good, but not when you only have 0 or 1 squares filled on a board. There's better ways to get 3 in a row then
+ Maxim251: This one is hardcore... and have 212 letters long
+ Maxim251: #include &lt;iostream&gt;using namespace std;int t;int a=5527;int main(){int n;cin&gt;&gt;n;cin.ignore();for(int i=0;i&lt;n;i++){cin&gt;&gt;t;cin.ignore();if(abs(t)&lt;abs(a)||(abs(t)==abs(a))&amp;(t&gt;a)){a=t;}}if(t==0){a=0;}cout&lt;&lt;a&lt;&lt;endl;}
+ MSmits: mzbear you can also watch some top 10 matches and mimic the playstyle
+ MSmits: you will see a lot of teccles then too
+ struct: for(int i = 0;i++&lt;n;)
+ struct: is shorter
+ Astrobytes: Maxim251:<a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/tips-and-tricks-for-code-golfing-in-c/694">https://www.codingame.com/forum/t/tips-and-tricks-for-code-golfing-in-c/694</a>
+ Maxim251: Oh thanks&#160;:)
+ mzbear: huh wtf
+ mzbear: so, teccles worked REALLY well against players in silver
+ MSmits: good&#160;:)
+ struct: I told you mzbear...
+ mzbear: but it seems so unintuitive!
+ MSmits: it's a pretty deep tactic
+ MSmits: not obvious
+ MSmits: the main thing is (I think)
+ Maxim251: #Astrobytes, thanks a lot&#160;:)
+ MSmits: when you win a board
+ reCurse: Complaining about unintuitiveness in uttt
+ mzbear: 50% of battles done and i'm already at first place
+ reCurse: Sweet summer child
+ Astrobytes: you're welcome Maxim251
+ MSmits: you want there to be as many of your opponent marks in there
+ MSmits: because those are wasted
+ mzbear: oh lol, i pulled some other guy above boss with me
+ MSmits: so when you send your opponent to the same board, you guarantee that he has marks on there as well
+ MSmits: meaning that if you win it, he wastes them
+ Maxim251: for(int i = 0;i++&lt;n;) I didn't know that this is posible&#160;:)
+ MSmits: I think that's part of it anyway
+ eulerscheZahl: for(;;)is the same as while(true)
+ MSmits: its hard to see. But meta mcts doesnt lie
+ Westicles: Maxim251, you don't need an endl
+ Maxim251: Yes, I already removed it when I realised that
+ Maxim251: Thanks
+ Maxim251: Code size is now 202
+ Astrobytes: finally getting an endl on things
+ Astrobytes: (I'll just get my coat)
+ mzbear: promotion to gold league in 25 minutes
+ Astrobytes: congrats mzbear! 
+ Maxim251: Starting at using namespace, everything is on that line. Only IOstream is on seperate line
+ mzbear: i should've just tried teccles earlier ... i didn't do it because it didn't make sense to me.  lol
+ eulerscheZahl: got me from bottom legend to mid legend
+ Astrobytes: There's usually good reason when people give you tips
+ Maxim251: Oh, Yes, I can remove ints, and all variables assighned to one int
+ mzbear: even if there's a good reason, it doesn't feel good if i dont understand it :P
+ struct: cout &lt;&lt; t?a:0 &lt;&lt; endl;
+ struct: and you can remove the if(t==0){a=0}
+ Astrobytes: as reCurse will tell you, good luck understanding UTTT
+ MSmits: the main problem with uttt is that in the beginning, many moves are about equally good
+ Maxim251: #include &lt;iostream&gt;using namespace std;int t,a=552,n,i;int main(){n;cin&gt;&gt;n;cin.ignore();for(i=0;i++&lt;n;){cin&gt;&gt;t;cin.ignore();if(abs(t)&lt;abs(a)||(abs(t)==abs(a))&amp;(t&gt;a)){a=t;}}if(!t){a=0;}cout&lt;&lt;a;}
+ MSmits: there is no clear difference
+ MSmits: aside from trying to connect two x's or O's
+ Maxim251: #include &lt;iostream&gt;using namespace std;int t,a=552,n,i;int main(){n;cin&gt;&gt;n;cin.ignore();for(i=0;i++&lt;n;){cin&gt;&gt;t;cin.ignore();if(abs(t)&lt;abs(a)||(abs(t)==abs(a))&amp;(t&gt;a)){a=t;}}if(!t){a=0;}cout&lt;&lt;a;}
+ eulerscheZahl: do you need that cin.ignore()
+ eulerscheZahl:&#160;?
+ struct: I dont think he needs it
+ Astrobytes: chat golf eh
+ Maxim251: Hm, what I can do with that?
+ eulerscheZahl: abs(t) == abs(a)t*t == a*a
+ Astrobytes: remove it
+ mzbear: so, now i gotta wait 20 minutes before i get to see how badly this heuristics bot performs in gold league ... i suppose i'll take a look at that space maze that was mentioned earlier
+ Maxim251: Yes, It works.
+ Astrobytes: mzbear, you'll need a raycasting NN and spend a week writing down all the testcases
+ MSmits: or just learn a search, it's really not that hard for a simple game like uttt. Unless you already know search and just dislike it
+ Maxim251: #eulerscheZahl Thank You. I was thinking that I need it
+ MSmits: huh what Astrobytes?
+ eulerscheZahl: then we are getting in a range where std::cin might be shorter thanusing namespace std
+ MSmits: he thanks you by giving you your own channel eulerscheZahl
+ Astrobytes: It was some guy we had on here for like 2 weeks going on about space maze, euler remembers
+ mzbear: i did fairly fine with MCTS in Blocking, i just didn't want to do another MCTS right away
+ eulerscheZahl: his ray casting didn't go anywhere
+ Astrobytes: his rays were blocked
+ Maxim251: #eulerscheZahlabs(t) == abs(a)t*t == a*a
+ MSmits: ahh ok mzbear, makes sense
+ Maxim251: I dont know how aplay that to my code
+ Maxim251: My code now have 166. WOW
+ eulerscheZahl: "abs(t)==abs(a)"you have that verbatim in your code
+ MSmits: nice
+ mzbear: i figured it would be more fun to get into gold league without search, and it was indeed fun... kinda :D
+ Lks10: Go for minimax on UTTT for a change
+ MSmits: my theory is that if you go minimax and work out the best heuristics for pruning, you can later use this in a mcts
+ Maxim251: yes
+ Astrobytes: Surprised you haven't attempted that yet MSmits
+ eulerscheZahl: replace it by a*a==t*t
+ MSmits: i did attempty a minimax
+ MSmits: my problem with minimax is that i always do it after i heavily optimize a mcts
+ MSmits: so its always worse and that demotivates me 
+ Maxim251: Wow, It works...
+ Astrobytes: heh heh, not like you at all
+ Maxim251:&#160;!! Yes, now I know why I use abs...
+ MSmits: Maxim251  -3*-3 = 9
+ Astrobytes: you know why Maxim251?
+ MSmits: self multiplication removes minus signs
+ Lks10: I have the reverse problem where I have an optimized minimax, but dont want to work on mcts lol
+ MSmits: like abs does
+ Maxim251: This mathematics removes -.. Ohhh 
+ MSmits: unless you use i
+ eulerscheZahl: and you have more abs in your code
+ MSmits: be careful of i
+ eulerscheZahl: stop flexing with your muscular belly
+ MSmits: :P
+ Maxim251: 154 now, 
+ Astrobytes: :rofl:
+ Astrobytes: nice Maxim251
+ Maxim251: #eulerscheZahl Thank You so much, You show me greate stuff for lenght of code optymisation&#160;:)
+ Astrobytes: also you can use import rather than include
+ MSmits: it's not even his specialty
+ eulerscheZahl: that's creating weird puzzles
+ MSmits: you're not really into code golf are you euler?
+ Maxim251: #include &lt;iostream&gt;using namespace std;int t,a=552,n,i;int main(){cin&gt;&gt;n;for(i=0;i++&lt;n;){cin&gt;&gt;t;if(t*t&lt;a*a||(a*a==t*t)&amp;(t&gt;a)){a=t;}}if(!t){a=0;}cout&lt;&lt;a;}
+ eulerscheZahl: nope smits
+ MSmits: yeah you make good stuff
+ eulerscheZahl: using namespace std;
+ Maxim251: Yes?
+ eulerscheZahl: remove and use std::cin
+ MSmits: and std:cout?
+ eulerscheZahl: of course
+ MSmits: can you do some alias thingy for std?
+ Westicles: don't need int with main
+ MSmits: or is it not worth it?
+ Astrobytes: #import&lt;iostream&gt;
+ Maxim251: 144 :D 
+ Maxim251: Is blowing my head now :D
+ Maxim251: :alien:
+ eulerscheZahl: if(!t){a=0;}cout&lt;&lt;a;
+ eulerscheZahl: struct shortened that already
+ Astrobytes: depends how many times it's used MSmits
+ struct: or you can even do
+ eulerscheZahl: for(i=0move the initialization to declaration
+ Maxim251: But cout now need std::cout
+ MSmits: right
+ struct: cout&lt;&lt;t||a;
+ struct: if im not mistaken
+ Maxim251: #include &lt;iostream&gt;int t,a=552,n,i;int main(){std::cin&gt;&gt;n;for(i=0;i++&lt;n;){cin&gt;&gt;t;if(t*t&lt;a*a||(a*a==t*t)&amp;(t&gt;a)){a=t;}}if(!t){a=0;}std::cout&lt;&lt;a;}
+ eulerscheZahl: or make it a global var, that's preinitialized
+ Astrobytes: replace #include &lt;iostream&gt; with #import&lt;iostream&gt;
+ Maxim251: I made already global, 
+ eulerscheZahl: for(;i++&lt;n;)
+ Maxim251: Also for "for" statment is using global i
+ Maxim251: But i - I should have at 0&#160;?
+ struct: for(;--n;)
+ Maxim251: YES WORKS.
+ eulerscheZahl: while(--n)for readability
+ eulerscheZahl: which is a killer argument when golfing
+ Maxim251: :thermometer_face:
+ Maxim251: Thats insane
+ Maxim251: 144
+ eulerscheZahl: you were at 144 before
+ Maxim251: Maybe because of std::cin?
+ Maxim251: #include &lt;iostream&gt;int t,a=552,n,i;int main(){std::cin&gt;&gt;n;for(;--n;){std::cin&gt;&gt;t;if(t*t&lt;a*a||(a*a==t*t)&amp;(t&gt;a)){a=t;}}if(!t){a=0;}std::cout&lt;&lt;a;}
+ struct: if(!t){a=0;}std::cout&lt;&lt;a;}
+ Westicles: you still have the int on main
+ Astrobytes: ah yes, you missed it from previous version
+ Astrobytes: 1. Remove int from main.
+ Astrobytes: 2. replace #include &lt;iostream&gt; with #import&lt;iostream&gt;
+ eulerscheZahl: remove i
+ struct: std::cout&lt;&lt;t||a;
+ Maxim251: No, after removing int and adding main to ... Error
+ Maxim251: #include &lt;iostream&gt;int t,a=552,n,i, main(){std::cin&gt;&gt;n;for(;--n;){std::cin&gt;&gt;t;if(t*t&lt;a*a||(a*a==t*t)&amp;(t&gt;a)){a=t;}}if(!t){a=0;}std::cout&lt;&lt;a;}
+ Maxim251: I must have int for main
+ struct: wait my thing might not work
+ Astrobytes: no, you missed a semicolon
+ Astrobytes: @Maxim251
+ Maxim251: Hmmm still error.
+ Astrobytes: works for me
+ Astrobytes: i, main() -&gt; i;main()
+ Maxim251: #include &lt;iostream&gt;int t,a=552,n,i, main(){std::cin&gt;&gt;n;for(;--n;){std::cin&gt;&gt;t;if(t*t&lt;a*a||(a*a==t*t)&amp;(t&gt;a)){a=t;}}if(!t){a=0;}std::cout&lt;&lt;a;}
+ Maxim251: :fearful::scream: Yes, works.. How that posble
+ Astrobytes: because you don't need to specify the return type of main
+ Astrobytes: now change your #include
+ Maxim251: Shows me requires a type specyfier, but without int works
+ struct: std::cout&lt;&lt;(t?a:0);
+ Maxim251: then it will behave like void
+ struct: if(!t){a=0;}std::cout&lt;&lt;a;}
+ Astrobytes: #import&lt;iostream&gt;
+ Westicles: Let's do space maze together next
+ Astrobytes: lel
+ struct: for(std::cin&gt;&gt;n;--n;)
+ struct: for(;std::cin&gt;&gt;t;)
+ struct: and you dont even need to read the number of temperatures
+ struct: you can remove n
+ struct: oh you need to read n
+ struct: im sorry
+ struct: you just dont need to use it
+ struct: for(std::cin&gt;&gt;t;std::cin&gt;&gt;t;)
+ Maxim251: How to write? I am lost
+ Maxim251: #include &lt;iostream&gt;int t,a=552,n,i;main(){std::cin&gt;&gt;n;for(;std::cin&gt;&gt;t;){a=t;}if(!t){a=0;}std::cout&lt;&lt;a;}
+ Maxim251: sorry
+ struct: int t,a=552;int main(){for(std::cin&gt;&gt;t;std::cin&gt;&gt;t;)
+ Maxim251: #include &lt;iostream&gt;int t,a=552,n,i;main(){for(;std::cin&gt;&gt;t;){a=t;}if(!t){a=0;}std::cout&lt;&lt;a;}
+ Astrobytes: And once more (last time):replace #include &lt;iostream&gt; with #import&lt;iostream&gt;
+ eulerscheZahl: you need a macro for that astro
+ Maxim251: int t,a=552;int main(){for(std::cin&gt;&gt;t;std::cin&gt;&gt;t;)
+ Maxim251: not working
+ struct: that is not the entire code obviously
+ struct: Its just the start before the { of the for loop
+ MSmits: you guys are really on a mission to help this guy&#160;:)
+ MSmits: it's nice
+ mzbear: but if he's just copypasting everything blindly, you're not helping him :D
+ Astrobytes: Indeed eulerscheZahl :D
+ eulerscheZahl: it's not about helping anymore
+ eulerscheZahl: we are golfing
+ Astrobytes: it's about golfing
+ Astrobytes: lol
+ MSmits: aha
+ mzbear: my c++ solution to that is 106 chars, and there might still be room to trim a few easily
+ eulerscheZahl: for(...){instr1;instr2}for(...)instr1,instr2
+ eulerscheZahl: removes the {}
+ mzbear: for example, that 552 ... i thought the specification said 5526 so i initialize my variable with 9999
+ eulerscheZahl: int n,r,t;main(){std::cin&gt;&gt;n;r=n*1e3
+ eulerscheZahl: my code
+ eulerscheZahl: and print r at the end
+ Maxim251: #import&lt;iostream&gt;int t,a=552,n,i;main(){std::cin&gt;&gt;n;for(std::cin&gt;&gt;t;std::cin&gt;&gt;t;){if(t*t&lt;a*a||(a*a==t*t)&amp;(t&gt;a)){a=t;}}if(!t){a=0;}std::cout&lt;&lt;a;}//for(std::cin&gt;&gt;t;std::cin&gt;&gt;t;)
+ Maxim251: found -2 expected 1
+ eulerscheZahl: now you added the variable i again
+ jacek: oh my
+ struct: (╯°□°）╯︵ ┻━┻
+ Astrobytes: at least I don't need my macro now
+ struct: #import&lt;iostream&gt;int t,a=552,n,i;main(){std::cin&gt;&gt;n;for(std::cin&gt;&gt;t;std::cin&gt;&gt;t;)
+ struct: #import&lt;iostream&gt;int t=0,a=552;int main(){for(std::cin&gt;&gt;t;std::cin&gt;&gt;t;)
+ eulerscheZahl: why did you add the *int* main again?
+ struct: I initialized t to 0 by mistake
+ <b>**eulerscheZahl slaps struct around a bit with a large fishbot</b></p><p><img src="/a/45097182899192" /> struct: oh lol
+ Astrobytes: :D
+ Maxim251: sorry, somebody else paste it previously, then I update code, but I make mistake and I go back to working state..
+ mzbear: hmm, i'm actually not losing every battle in gold UTTTT ... rank 423 out of 631
+ jacek: gold uttt? nice
+ Astrobytes: good stuff
+ mzbear: gold uttt ... without a search algorithm
+ Maxim251: Yes I see it t=0; 
+ struct: you can to t;
+ struct: or t, 
+ MSmits: gj mzbear
+ MSmits: btw these heuristics you used, actually went unnoticed on uttt for a year or more after the multi went live
+ MSmits: i mean teccles and such
+ MSmits: so you're pretty advanced already :P
+ Maxim251: Yes, works, is 5 letters shorter with 
+ Maxim251: for(std::cin&gt;&gt;t;std::cin&gt;&gt;t;)
+ Astrobytes: yeah, when you do a search you should be destined for greatness mzbear
+ MSmits: mz:bear:
+ Maxim251: 133 now
+ struct: exec("...");
+ MSmits: gonna take out the trash, i expect you to be below 130 when i get back
+ Maxim251: My head is now hurting me.. Thats insane how I could reduce code...
+ eulerscheZahl: you alone&#160;:)
+ mzbear: well yea, the entire AI of mine takes 0.01ms - 0.05ms per turn to do its job
+ Astrobytes: :smirk:
+ Maxim251: No, never, Thanks To You ALL
+ Astrobytes: hey, we had fun
+ Westicles: please add a comment attributing us all
+ Astrobytes: Just don't ask us to do that again :P
+ Maxim251: My self I will take 2 years after I will find that insane tricks
+ eulerscheZahl: we didn't even start yet
+ Maxim251: I will try, But thats ... Oh I need print that on paper an memorise it :f
+ Maxim251: :D
+ Maxim251: :nerd::hugging::ghost:
+ eulerscheZahl: the whole check if you should update the temperature can be done with a polynomial instead of if(t*t&lt;a*a||(a*a==t*t)&amp;(t&gt;a))
+ eulerscheZahl: btw you can remove some () here
+ Astrobytes: polynomial: when you don't feed your parrot.
+ Maxim251: Ill check that
+ Astrobytes: (sorry, my maths teacher used that in school)
+ eulerscheZahl: i don't get it
+ eulerscheZahl: not sure if a language barrier or just stupid
+ Astrobytes: Stereotypical name for a parrot = Polly. Don't feed it? Polly no meal.
+ Maxim251: I think I can remove {} from if statment
+ eulerscheZahl: ah :D
+ jacek: if you teach parrot to say "parrot, parrot", youll have a pokemon
+ Maxim251: 129
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://en.wikipedia.org/wiki/The_Adventure_Series">https://en.wikipedia.org/wiki/The_Adventure_Series</a>but the parrot is Kiki and Polly is the aunt
+ Astrobytes: Oh jeez, Enid Blyton
+ Maxim251: :thermometer_face:
+ LastRick: Jokes and idioms are always the toughest to translate
+ eulerscheZahl: read 10 books and you pretty much know them all
+ Astrobytes: read 1 Enid Blyton book and you know them all
+ eulerscheZahl: but child me liked them
+ Maxim251: 125
+ Astrobytes: I only read a few since my grandmother had a few of them
+ Astrobytes: *only read them
+ Maxim251: #eulerscheZahl I fount that, I know what you mean to remove () from (t*t&lt;a*a||a*a==t*t&amp;t&gt;a)a=t;
+ Maxim251: 123
+ Maxim251: 119
+ eulerscheZahl: if(condition)doStuff!condition?:doStuff
+ eulerscheZahl: #fr just pinged me
+ eulerscheZahl: sokoban :imp:
+ Astrobytes: I forgot you made that
+ DomiKo: omg
+ DomiKo: I didn't know
+ DomiKo: it is finished
+ DomiKo: I have to do it!
+ Astrobytes: lol
+ Westicles: hah, they should kick him for english
+ Maxim251: !t?:a=0; hm I think I did something wrong
+ eulerscheZahl: not t, that whole part(t*t&lt;a*a||a*a==t*t&amp;t&gt;a)
+ Maxim251: I know what I did rong
+ Maxim251: t?:a=0
+ Maxim251: this is proper
+ Maxim251: 116
+ Astrobytes: you get an allowance of 2 English conversations a year in #fr Westicles
+ Maxim251: But there is or statment
+ eulerscheZahl: i then butchered the french grammar while writing there and pinged automaton
+ eulerscheZahl: who responded that he doesn't understand
+ Westicles: when I visited #fr: Stilgart: merci aux modérateurs de faire le travail et de me dégager le provocateur ci-dessus 
+ eulerscheZahl: that was against you, not against writing English
+ Astrobytes: I saw that euler :D
+ Maxim251: Thats so wired,
+ eulerscheZahl: but when you stay there too long writing english, they want to get rid of you
+ eulerscheZahl: had a great deepl translation there
+ Astrobytes: Unless it's of the utmost importance and imperative that it must be dealt with quickly
+ Maxim251: #eulerscheZahl Yes I found it out how aplay&#160;?&#160;: without if statment
+ Astrobytes: Or when #fr is almost empty
+ eulerscheZahl: original: CopperFr writes "please write French" (in English)deepl: fr-&gt;enCopperEng: please write English
+ Maxim251: &gt;Whole line now is shining at yelow, and still works.. i
+ Astrobytes: :D
+ Maxim251: #import&lt;iostream&gt;int t,a=552;main(){for(std::cin&gt;&gt;t;std::cin&gt;&gt;t;)!(t*t&lt;a*a||a*a==t*t&amp;t&gt;a)?:a=t;t?:a=0;std::cout&lt;&lt;a;}
+ Maxim251: 117
+ Maxim251: Hey, earlier was 116
+ Astrobytes: Good work. Don't keep posting it in case someone copies&#160;;)
+ jacek: ban
+ Astrobytes:  /ban everything
+ Maxim251: sorry, 
+ Astrobytes: Hey I don't mind, it's your code 
+ Maxim251: but there must be if statment in one place, now again I get 116
+ Maxim251: 114
+ eulerscheZahl: i found it again!<a rel="nofollow" class="external free" href="https://imgur.com/a/KSthGGJ">https://imgur.com/a/KSthGGJ</a>
+ Astrobytes: hahaha
+ Maxim251: sorry 116 because I try lower value for a, but is not passing validator 2 with big numbers
+ Maxim251: Then Oficially 116 and my brain want now jump out from my head
+ Stilgart: Westicles: you are not welcome on #fr, indeed
+ Westicles: you speak for #fr?
+ Westicles: self-appointed authority as usual
+ Maxim251: Thats insane, that ruby can make 49 characters and pas all tests.. There are 1000 peoples with similar resultat, then second place is yavascript 60 characters
+ Stilgart: self-appointed bastard as usual&#160;:)
+ Westicles:&#160;:)
+ struct: Maxim251 there are shorter than 49 chars
+ Astrobytes: guys, guys, come on. Not in public eh
+ MSmits: #catfight
+ MSmits: I made channel for you
+ Westicles: We are just joking around, we made up
+ pb4: <a rel="nofollow" class="external free" href="https://github.com/marchete/Codingame/blob/master/Optimization/Number%20Shift/NumberShift_LAHC.cpp#L138">https://github.com/marchete/Codingame/blob/master/Optimization/Number%20Shift/NumberShift_LAHC.cpp#L138</a>
+ MSmits: o
+ pb4: Anybody understands that nextFloat() function&#160;?
+ Stilgart: Astrobytes: did the moderators do anything yet&#160;?
+ Maxim251: #struct Ples dont tell me that stuff... I try kep my brain in place...
+ pb4: What's the range of the float number that is generated&#160;?
+ LastRick: Holy moley, while you guys were fighting, I solved Thor 2. What a day, first the stupid cat and now this.
+ MSmits: do you mean the cat puzzle?
+ MSmits: or did your cat do something
+ LastRick: HAH, yes the stupid pixel perfect cat puzzle
+ MSmits: I'm just asking because euler's cat does stuff
+ darkhorse64: I have a perl at 48
+ darkhorse64: oops scroll
+ MSmits: that sounds like you're an old oyster
+ LastRick: yes, eulers cat will soon be motioning it is time "fur" sleep (SWIDT)
+ Astrobytes: MSmits: :rofl:
+ eulerscheZahl: this morning my cat puked in my room again&#160;:/
+ eulerscheZahl: but not as bad as when she did it inside the open cat door
+ MSmits: thats what I mean!
+ eulerscheZahl: so it was inside of my room, outside and in the door itself
+ MSmits: it's a pro
+ eulerscheZahl: and i had to open the door and smear it further to get cleaning utensils
+ MSmits: so evil
+ MSmits: at least you dont use a roomba
+ Westicles: pb4, you making a run at NS?
+ MSmits: maybe he just needs floats
+ MSmits: we've all been there
+ pb4: Nope, just randomly saw this code on the forum
+ MSmits: you randomly saw code that generates random numbers?
+ DomiKo: is it [0, 1]?
+ LastRick: and those kind of pet stories are why I have no animals
+ MSmits: that you know of
+ LastRick: It doesn't work that way!
+ MSmits: some rodents come out when you sleep
+ MSmits: :mouse:
+ MSmits: euler doesnt have that problem
+ LastRick: or theres a chipmunk in the parking lot thats really fond of me
+ MSmits: he only finds pieces of them in a puddle
+ LastRick: whats worse than finding a dead mouse in your apartment floor?
+ MSmits: two of them?
+ LastRick: half of one
+ eulerscheZahl: a had a night with 2 living mice in my room
+ eulerscheZahl: cat released them while i was sleeping
+ LastRick: "released"
+ Astrobytes: my Gizmo got a sparrow a year or so ago
+ LastRick: ROFL
+ MSmits: he caught mice and dropped them in your room euler?
+ MSmits: is this a reverse cat?
+ LastRick: hahah
+ ArianPunk: Guys, can someone tell me how test case number 04 of Dungeons and Maps is not a TRAP?
+ LastRick: i dont think that cat knows how cats work
+ MSmits: Gizmo was your cat?
+ MSmits: Just wondering because thats the name of a gremlin
+ Astrobytes: Cats aren't overly murderous, they're more sadistic. Once the 'toy' has served it's purpose, they toss it aside
+ MSmits: dont feed after midnight
+ LastRick: Arian: You asking about "Many maps" test?
+ ArianPunk: yes
+ Astrobytes: That's who she's named after MSmits. The one in my avatar
+ MSmits: ohh ok
+ Astrobytes: You can't see her chin here, but it's big like Gizmo
+ MSmits: so then you know why not to feed after midnight
+ MSmits: acid reflux right?
+ Astrobytes: Yes. Also applies to this one.
+ Astrobytes: hahaha
+ Astrobytes: pic when she was a kitten:<a rel="nofollow" class="external free" href="https://russianaicup.ru/profile/Astrobytes">https://russianaicup.ru/profile/Astrobytes</a>
+ MSmits: cool
+ MSmits: she has a nice rating
+ LastRick: Arian: Haven't done this one in a while but it appears my code finds two solutions and index 2 is the shorter one, so it outputs "2"
+ Astrobytes: not overly no lol MSmits
+ ArianPunk: ah
+ Astrobytes: I actually meant to post the pic link not the whole page&#160;:/
+ ArianPunk: Ok, thnx. I'd think about t
+ ArianPunk: it
+ DomiKo: pb4 that union trick is fast division by (1 &lt;&lt; 32) - 1
+ LastRick: If it helps, map 0 also has a solution for that test but its the longer one by two steps. No problem
+ MSmits: Astrobytes be proud, thats around where Magnus Carlsen is
+ ArianPunk: i think it's got a problem
+ ArianPunk: i dont understand why it's not a trap
+ Astrobytes: MSmits hahaha
+ ArianPunk: I'm not coding on it. Literally solving it by hand
+ ArianPunk: There are 5 maps, with 11 by 11 in x and y directions
+ Astrobytes: arenabot localhost 31002
+ Astrobytes: woooops
+ Astrobytes: sorry
+ MSmits: ArianPunk
+ MSmits: <a rel="nofollow" class="external free" href="https://imgflip.com/i/4qho7j">https://imgflip.com/i/4qho7j</a>
+ ayoubhs: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/150541193338fe5a097d3541accbeb90f1c5773">https://www.codingame.com/clashofcode/clash/150541193338fe5a097d3541accbeb90f1c5773</a>
+ struct: (╯°□°）╯︵ ┻━┻
+ jacek: .
+ Astrobytes: ,
+ Astrobytes: this is why we need the webchat. Posting punctuation.
+ jacek: so quiet
+ Astrobytes: Tends to happen when the chat dies.
+ MSmits: I can give you a new subject if you want
+ MSmits: help me improve my breakthrough evaluation function
+ MSmits:  i rank 9, its embarassing :P
+ MSmits: got a whole bunch of features
+ MSmits: but doesnt seem to help much
+ Astrobytes: haven't done it yet
+ MSmits: ahh ok
+ MSmits: darkhorse64 had problems with it too
+ Astrobytes: you're doing an alphabeta
+ Astrobytes:&#160;?
+ MSmits: nah same as always, EPT
+ Astrobytes: ah OK
+ jacek: you have endtables for breakthrough?
+ MSmits: i do
+ jacek: probably bigger and better than mine
+ MSmits: it's basically a triangular pattern to see if a pawn can race to the end
+ MSmits: it's checked as soon as a pawn goes on the opposite side of the board
+ MSmits: so 5th row
+ Astrobytes: seems reasonable
+ MSmits: then again when it gets on 6, 7, 8 etc.
+ MSmits: well 8 is a win
+ MSmits: but you get the idea
+ jacek: bunch of features, piece square tables?
+ MSmits: yeah i have penalty for a piece being on the edge, penalty for empty columns
+ MSmits: squares that are attacked
+ MSmits: home guard bonus
+ MSmits: vertical and horizontal connection bonuses
+ MSmits: but not bigger patterns
+ MSmits: it is all local
+ MSmits: I'd say Ntuple or similar would work here
+ MSmits: maybe i also just need to prune moves more
+ Astrobytes: you use ntuples on BT jacek?
+ jacek: when i had handcrafted eval, i had: piece, square table, if piece is H-connected on row 6+, penalty if piece attacked and not protected (and not my turn)
+ jacek: no, NN
+ Astrobytes: ah right
+ jacek: empty column? did you see that C# breathrough bot?
+ MSmits: yeah i think so jacek
+ MSmits: only eval example i could find
+ MSmits: probably it doesnt work
+ jacek: it did nothing for me, as well vertical connection. horizontal connection only further in enemy territory
+ MSmits: I see
+ Astrobytes: how's your littlegolem bt bot?
+ MSmits: is this to make sure your pawn doesnt go charging into enemy territory without backup?
+ Astrobytes: seems like it
+ jacek: yeah
+ jacek: though usually against weaker bot single pawn can rush by diagonal unprotected squares
+ jacek: well, rating 1807, 27 games so far, 27 won
+ MSmits: yeah but not early, when there's double rows
+ jacek: though 1 would be lost if opponent didnt make mistake
+ MSmits: whats littlegolem?
+ jacek: site with games you can play against players
+ jacek: correspondence, you get usually 24h for move
+ jacek: <a rel="nofollow" class="external free" href="https://www.littlegolem.net/jsp/info/player.jsp?plid=140575">https://www.littlegolem.net/jsp/info/player.jsp?plid=140575</a>
+ pb4: What is n-tuples&#160;?
+ MSmits: is it cheating to use an engine?
+ MSmits: wow pb4 you missed a lot of chat then&#160;:)
+ Astrobytes: Nice. Is that against just bots or mixed? Not sure how they do matchups on there
+ MSmits: n-tuples is basically looking up a pattern on a board
+ Astrobytes: No, bots are indicated as such I think MSmits
+ jacek: they permit it. i bet you read paper about bt bot and they used little golem to see how strong is their bot
+ MSmits: actually pb4, you sort of did this with yavalath
+ MSmits: looking up parts of the board for 3 or 4 in a row
+ MSmits: except instead of looking up the win, you use the result as a key into an array with eval scores
+ MSmits: and use a bunch of patterns like that to form an evaluation score
+ pb4: Thanks
+ pb4: Why that name&#160;?
+ MSmits: well N because there can be N squares you're looking at
+ MSmits: and tuple because it consists of multiple parts
+ Astrobytes: because they are tuples of n-size :D
+ pb4: Can they be non-neighbours&#160;?
+ jacek: its just common name. if you look for n-tuples youll find mostly for othello, connect4 and 2048
+ Astrobytes: Sure, if it fits the game
+ MSmits: jacek i see, yeah i do remember that paper and the name little golem seemed familiar
+ jacek: yes
+ saikoaizen: LO
+ MSmits: pb4 they can be anywhere on the board
+ MSmits: but it makes sense to have patterns with squares that affect eachother
+ pb4: Is there an automatic way to choose which tuples to use, or is it intuition&#160;?
+ MSmits: well intuition if you dont use a NN
+ MSmits: NN's kind of naturally makes tuples, except you dont see it
+ Astrobytes: game-dependent, there might be well-defined patterns
+ jacek: actually both. you can use GA etc. to create N-tuple architecture and see which is best
+ Astrobytes: interesting idea
+ pb4: Gotcha
+ MSmits: jacek uses them in Othello
+ MSmits: there's a lot of stuff to google about ntuples in othello
+ jacek: <a rel="nofollow" class="external free" href="https://www.researchgate.net/publication/311555004_Systematic_Selection_of_N-Tuple_Networks_for_2048">https://www.researchgate.net/publication/311555004_Systematic_Selection_of_N-Tuple_Networks_for_2048</a>
+ pb4: Maybe I should try and play one of those board games you've all grinded
+ MSmits: well you did join on yavalath, but then you stopped
+ MSmits: you did quite well there
+ pb4: Yeah, couldn't find a way to improve
+ MSmits: neither did i, my bot is about as strong as yours still
+ pb4: wut&#160;? You were first, I was ~5th no&#160;?
+ MSmits: except of course for the millions of locally simulated games to avoid early game traps...
+ pb4: ah
+ MSmits: i mean if i ignore the book :P
+ pb4: :D
+ Astrobytes: I was about to comment on that
+ pb4: I'll soon have a new PC
+ pb4: muuuuuuch faster
+ MSmits: good
+ saikoaizen: Heyo 
+ Astrobytes: so you'll be around here more then?
+ saikoaizen: New PC dude, that's awesome
+ MSmits: I only use 1 core each though, for my opening books. It's more about manually adjusting things, letting it run for a while,  inspecting etc.
+ pb4: Don't know Astrobytes, still have to spend a bit of time with the family :o)
+ Astrobytes: hehe, yeah pb4, always a trade-off&#160;:)
+ MSmits: he needs to build up credit with family, so he can then crush us in a contest
+ pb4: :innocent:
+ Astrobytes: hah
+ pb4: I also have a bandas AI that was 1st when it was still a contribution puzzle
+ MSmits: ohh nice
+ MSmits: the top meta uses endgame books now
+ MSmits: other than that its mostly plain mcts
+ pb4: Was kinda bummed that the author didn't take any of my comments into account and let an unfinished game be published
+ MSmits: was one of your comments the fact that the random is unbalanced?
+ pb4: Don't remember, it was a long time ago :o)
+ MSmits: ah, well that is the main problem
+ Astrobytes: I vaguely remember something but yeah
+ MSmits: I can solve some games at ply 7
+ MSmits: sometimes its a loss, its a bit frustrating
+ pb4: <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/community-puzzle-bandas/101048">https://www.codingame.com/forum/t/community-puzzle-bandas/101048</a>
+ pb4: Wasn't willing to spend time on a game that was going to change
+ MSmits: "The game was accepted despite negative pending comments on the random game generation."
+ pb4: Either it's a contrib and I'm perfectly happy to test it, rewrite my code when breaking changes happen, etc...
+ pb4: -contrib +WIP
+ Astrobytes: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/21242d55ddfe36f93a624d9d405cc234295e">https://www.codingame.com/contribute/view/21242d55ddfe36f93a624d9d405cc234295e</a>
+ pb4: or it's been accepted, and they it shouldn't change anymore
+ MSmits: well if it's an improvement to the random generation, its an ok fix after it goes live, because that shouldnt affect your bot too much
+ MSmits: but mostly i agree yeah
+ Astrobytes: (link is original contrib btw)
+ MSmits: he did improve his random 
+ pb4: iirc map size was changed after the fact
+ MSmits: increased I guess?
+ pb4: Yup
+ MSmits: because if it was smaller I could solve it on ply 1 probably
+ MSmits: very small branching factor
+ MSmits: and with the endgame books the game ends at 3x4 size
+ jacek: map was originally 6x6 but i think he changed it before accepting
+ jacek: also i think it was before the WIP option
+ Astrobytes: he did, yes
+ pb4: You have a bool[500 000] table for the endgame status&#160;?
+ MSmits: hmm its not that big I think
+ MSmits: 3^12 
+ pb4: 3^12&#160;?
+ pb4: That's 500k&#160;:)
+ jacek: 15
+ MSmits: oh right
+ MSmits: i do then
+ MSmits: it's a string, calculated locally
+ MSmits: heavily compressed
+ Astrobytes: physics you say Smits, physics eh
+ MSmits: :P
+ Astrobytes: :D
+ pb4: Compressed how&#160;?
+ MSmits: symmetry helps a bunch
+ MSmits: factor of 8
+ MSmits: 10 results in 1 unicode character
+ MSmits: so thats a factor of 80 right there
+ pb4: Nice&#160;!
+ MSmits: i couldnt go beyond the 3x4
+ MSmits: because there is no 13 sized pattern
+ MSmits: and the next one would be 14
+ MSmits: which is 9x bigger in possible combinations
+ MSmits: also pretty rare to have a 2x7 situation
+ reCurse: Oh a wild pb4, rare sight
+ pb4: Hi old guy :innocent:
+ reCurse: :sweat:
+ MSmits: lol
+ Astrobytes: hahaha
+ MSmits: have you been lurking while we messed with reCurse?
+ pb4: I might have :sweat_smile:
+ pb4: I might be lurking far too often
+ Astrobytes: yes, you should join in more
+ MSmits: yet ntuples were new to you
+ MSmits: i bet you dont know jacekmax either
+ pb4: far too often is not 100% of the time -_-
+ pb4: Nope, what is it&#160;?
+ MSmits: jacekmax made a thingy
+ MSmits: jacek i meand
+ pb4: @reCurse&#160;: new computer incoming, many more cores
+ reCurse: I feel bullied
+ pb4: I'll probably give SR another go
+ MSmits: jacek where's your playground thingy that explains the jacekmax?
+ Astrobytes: best-first minimax thing guided by UCT
+ Astrobytes: looking now
+ Astrobytes: <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/55004/best-first-minimax-search-with-uct">https://www.codingame.com/playgrounds/55004/best-first-minimax-search-with-uct</a>
+ reCurse: Maybe we should act like civilized people and divide game territory
+ karliso: I am also puzzled why it is 100ms and not 50ms on bandas.
+ jacek: theres jacekmax in tags
+ MSmits: karliso you mean it would save server time&#160;?
+ MSmits: and have quicker submits?
+ karliso: No, it would make it less unbalanced.
+ MSmits: you're right though, the game does not get more interesting for having 100 ms
+ jacek: bandas is nearly solved
+ MSmits: ah yes
+ Astrobytes: karliso, did you give up on raic?
+ karliso: Astrobytes not at all
+ karliso: MSmits With 50ms there is a greater chance that a weaker bot will make a mistake.
+ Astrobytes: oh I saw you were a lot lower earlier, improvement incoming I guess&#160;:)
+ MSmits: yeah i got it karliso, good point
+ MSmits: I already sometimes see them make a mistake
+ MSmits: my bot will solve the game as a loss on ply 12 or so, then its a win at ply 18
+ pb4: Never thought about that "best-first minimax search" before
+ pb4: I like the idea&#160;:)
+ MSmits: it works fine pb4, i tried it on oware, my bot got to the same rank. I didn't optimize it as well as my other version so it seemed quite a bit weaker still, but maybe with more optim, or different eval it woul dbe just as good as my EPT
+ pb4: EPT&#160;?
+ MSmits: mcts with early playout termination
+ Astrobytes: there may be situations where it's better than ept
+ MSmits: except my playout terminates at 0
+ Astrobytes: ^
+ MSmits: so its basically mcts with an eval instead of a sim
+ MSmits: its similar to jacekmax, except jacekmax replaces minimax style and my ept version adds up score instead of replacing
+ pb4: If you could suggest *one* of the board games on which to focus, which one would it be&#160;?
+ Astrobytes: tough call
+ MSmits: what do  you enjoy about a boardgame
+ MSmits: do you want one that can be opening booked
+ MSmits: this could be annoying
+ jacek: do you want to work on optimizing eval
+ reCurse: Is there anyone who could possibly enjoy that?
+ Astrobytes: I can think of *one* person at least
+ MSmits: :P
+ MSmits: personally i would recommend Onitama
+ MSmits: it's pretty to look at and the game has interesting mechanics
+ MSmits: no opening books
+ MSmits: also shouldnt take a huge amount of time
+ MSmits: oh and, minimax and mcts both viable
+ pb4: Don't really know what to enjoy with board games, I need some kind of intuition of what makes a move good, and I generally don't have that intuition for board games
+ MSmits: mcts with eval i mean
+ jacek: or breakthrough. bitboard friendly, many possible features for eval
+ reCurse: I recommend uttt then
+ jacek: ill take a screenshot then
+ MSmits: :grin:
+ Astrobytes: :D
+ pb4: I peaked at 80k unguided rollouts on UTTT, with instawin and instaloss-avoidance
+ MSmits: thats not bad
+ pb4: Wasn't good enough, and to be fair to reCurse I had absolutely no motivation to write an opening book :D
+ MSmits: in general i mean
+ MSmits: also
+ MSmits: uttt is definitely about more than just sims
+ jacek: teccles is good opening book
+ MSmits: theres people in top 10 with 70k
+ pb4: I seem to remember 100k or 105k to be the reference for the metric I gave
+ MSmits: yes, but a long time ago either people didnt say anything or everyone just used plain mcts
+ MSmits: now theres a lot of useful heuristics out that all help a bit. Together they help a lot
+ MSmits: and opening books are really not that useful unless your opponent is one of the best bots and they play deterministically
+ pb4: or maybe I should get back to Fantastic Bits :rage:
+ reCurse: Quality trolling
+ reCurse: Something I should aspire to
+ jacek: :no_mouth:
+ MSmits: what i meant was, in all the games that have a predetermined start, uttt is the game where books are the least useful
+ MSmits: as far as i can tell
+ pb4: So many games in the menu, I have trouble finding the ones you suggested -_-
+ MSmits: really pb4, do onitama
+ pb4: First time I need ctrl+F on CG...
+ MSmits: I had the most fun there
+ reCurse: It's right there in the search bar
+ MSmits: until i ran out of ideas
+ struct: :broken_heart:
+ jacek: try yinsh
+ pb4: oh wow
+ MSmits: struct, there is short term fun and long term fun, yavalath was long term fun :P
+ pb4: Never occurred to me the search bar existed -_-
+ MSmits: onitama was like a month, i think i spent half a year on yavalath
+ jacek: and how much on oware?
+ MSmits: mmh 2-3 months if you dont count the meta mcts stuff
+ pb4: I still have no idea how you handle transpositions in MCTS on Yavalath
+ pb4: All the ways I think about seem crazy expensive
+ MSmits: i dont know if it even works very well, it just helps me solve earlier
+ MSmits: it is pretty expensive
+ jacek: he uses it offline in meta mcts
+ MSmits: halves my rolloutcount
+ MSmits: or so
+ jacek: not in actual game
+ MSmits: no actually i do
+ jacek: :scream:
+ MSmits: but it just doesnt help very much
+ MSmits: its the only game where i do this
+ MSmits: in meta mcts it helps a ton indeed
+ MSmits: i like the early solves though
+ MSmits: thats why i kept it in
+ jacek: i thought of buying new computer, but there is no available cpu and gpu i want until january/february :rage:
+ reCurse: Yeah I'm in the same boat
+ pb4: I'll look up onitama
+ MSmits: euler made it
+ MSmits: which is one reason why its good
+ jacek: he *ported* it
+ MSmits: good eye for detail
+ MSmits: sure, the mechanics, but he put it together well with the free art he found
+ MSmits: it has a good style
+ MSmits: also they made sure a lot of unbalanced starts where removed. trictrac tried to solve all the possible gamestarts
+ pb4: gotta go
+ MSmits: kk nice talking to you
+ MSmits: gn
+ pb4: bye
+ reCurse: bye
+ pb4: Thanks for the suggestions&#160;:)
+ MSmits: np
+ struct: bye
+ Astrobytes: bye!
+ jacek: c-c-c-combo breaker
+ Astrobytes: Every. Single. Time.
+ MSmits: I know you reference killer instinct but i still miss something here
+ Astrobytes: breaking the chain of similar/same messages/posts
+ MSmits: ahhhh ok
+ Astrobytes: it was a forum thing initially iirc. Remember when we all used forums?
+ jacek: phpbb2?
+ MSmits: i never used forums that much
+ MSmits: wait no, memories come back
+ jacek: ptsd?
+ MSmits: i used them disguised 
+ MSmits: like, inside a browser game
+ Astrobytes: lose the 2
+ jacek: hm?
+ MSmits: I played astro empires and utopia
+ MSmits: they had forums
+ Astrobytes: phpbb
+ jacek: well it was version
+ struct: states reduce quite a bit if I take into account that stones are the same color
+ Astrobytes: I always love your on-topicness struct
+ Astrobytes: It's a stream of consciousness thing&#160;:)
+ struct: yes, I just say what comes to mind
+ MSmits: you don't need weed struct
+ MSmits: you're a natural
+ Astrobytes: lol
+ MSmits: lol jacek... I think I just found a line of perfect play for your oware bot, leading to a draw
+ MSmits: no wonder it took so long
+ MSmits: well there's no way to counter that
+ jacek: my bot plays it perfectly?
+ MSmits: its not a solve, but the entire line of play does not have any alternatives to keep searching. They all lead to the same seed count or worse 
+ MSmits: well i cant be sure
+ MSmits: but it seems so
+ MSmits: I found one with re curses bot also
+ MSmits: he doesnt play it often, but when he does i cant beat him
+ jacek: in ancient africa you would be oware god
+ MSmits: thanks, I like that
+ MSmits: I am assuming here that oware abapa is solved as a draw under CG conditions
+ MSmits: awari is, but the rules are slightly different and the 200 turn limit might also cause problems
+ MSmits: I found that if you have 9 seeds left on the board, you can get a different end result depending on how many turns are left, as far back as 145 tirns left
+ MSmits: so its worse for more seeds
+ Astrobytes: déjà vu...
+ Cybersick: Salut le monde
+ MSmits: exactly, oware has deja vu
+ MSmits: loops
+ MSmits: you got it Astrobytes
+ Cybersick: Je vous invite au nom de l'ENIT Junior Entreprise a notre forum
+ Cybersick: <a rel="nofollow" class="external free" href="https://app.fabevent.io/ticket/40?fbclid=IwAR0gK4wVoKsepEiC_OtGmh4QYh1Xqjam7QVmfMIAhMJmCaXGqO7nnpSH7RU">https://app.fabevent.io/ticket/40?fbclid=IwAR0gK4wVoKsepEiC_OtGmh4QYh1Xqjam7QVmfMIAhMJmCaXGqO7nnpSH7RU</a>
+ MSmits: hes talking about star trek i think
+ MSmits: shoo shoo trekkie
+ struct: #fr
+ Cybersick: There is an interesting talk about the nasa engineer in a round table
+ Astrobytes: That's what I get for speaking a french phrase
+ jacek: oui
+ karliso: I am curious about oware: if you do openings + NN + endgame tabels code size is supposedly a problem and you have to make a tradeoff between thse 3?
+ Astrobytes: Cybersick: #fr for French links, also on discord&#160;:)
+ MSmits: I calculate my endgame tables in the first second karliso
+ MSmits: its not in code side
+ MSmits: size
+ MSmits: it is for bandas, but not for oware
+ MSmits: and I dont use NN
+ MSmits: thats the rest of the top 5
+ jacek: all top 4*
+ Astrobytes: pushed back down?
+ MSmits: wait what, did they put me at 5 again
+ jacek: robo added random
+ Astrobytes: oh, robo submitted earlier I forgot
+ MSmits: yeah i knew that
+ MSmits: i thought i went down to 4
+ jacek: SupSon submitted most recently
+ MSmits: ah yea i see it
+ Astrobytes: I've not gone down to 50th or something have I
+ MSmits: 13
+ Astrobytes: ah cool, not so bad
+ MSmits: supson is 0.09 above you
+ Astrobytes: meh. After raic
+ struct: Wasnt SupSon top at UTTT?
+ MSmits: at one time he might have been
+ MSmits: uttt improved a lot
+ struct: Yeah but is bot is broken now
+ struct: I think
+ struct: his*
+ SupSon: \ o /
+ MSmits: how strong was it?
+ Astrobytes: I may not get a hoodie but I get a t-shirt and I ain't giving up just yet
+ struct: rank 1
+ MSmits: yes but compared to which bot?
+ MSmits: did it beat nagrarok?
+ struct: yes
+ MSmits: that bot is unchanged
+ Astrobytes: good work SupSon
+ struct: it was around same rank as nagra
+ MSmits: ahh ok, then supson would now be between 5 and 10
+ MSmits: People really go wild on uttt, so any top 10 rank is like being nr 1 in a different board game
+ Astrobytes: We should ping SupSon again 
+ SupSon: what up
+ MSmits: we're out of subjects to talk about so we picked you
+ struct: About UTTT
+ Astrobytes: just thought I'd ping you again since you had so many mentions in the past few minutes :D
+ struct: your bot is broken for a while
+ SupSon: yea some compiler change
+ SupSon: broke me
+ struct: maybe when the sqrt thing changed?
+ struct: or something else
+ MSmits: hard to fix?
+ Astrobytes: sqrt thing changed?
+ struct: it was when c++ updated I think
+ struct: Before you didnt need to include cmath
+ jacek: he uses complex numbers
+ MSmits: ohh, yes, be careful about the i
+ Astrobytes: lol
+ MSmits: loop using j
+ MSmits: or k to be safe
+ Astrobytes: that was ages ago struct
+ SupSon: does karliso on uttt just have the best opening book
+ MSmits: no
+ MSmits: i dont think so
+ jacek: i bet he uses teccles
+ Astrobytes: ask him yourself, you pinged him&#160;:)
+ MSmits: when he did have an opening book, i wrecked him 100%, then he turned it off and i had no chance
+ MSmits: he was strong even without teccles
+ Astrobytes: I remember that
+ MSmits: my bot in uttt is 3rd even without book
+ SupSon: what's teccles
+ struct: force opponent to play on the board you just played
+ MSmits: its a heuristic
+ MSmits: only when the board is empty
+ MSmits: so always play on the mid edge of mid board and corner of corner board
+ SupSon: Yes that seems like optimal play for the early game
+ MSmits: lots of meta mcts confirms this
+ jacek: my bot does it automatically given few seconds of thinking
+ MSmits: mine doesnt, what magic is this jacek?
+ MSmits: you also dont use a lot of sims
+ Astrobytes: Pony Magic
+ jacek: yeah, seeing people mentioning 100k on second turn makes me think if i count them properly
+ SupSon: Is teccles an acronym or something?
+ MSmits: its a player
+ Astrobytes: Nah, was (is?) a player 
+ MSmits: i think it was used before him, but he advertised it
+ jacek: when I have 10k on second turn
+ MSmits: so how do you count this exactly
+ MSmits: is this plain mcts you are using?
+ jacek: 10k, so 10k rollouts
+ MSmits: and do you playout till end of game?
+ MSmits: or early termination?
+ MSmits: with some eval?
+ jacek: nodes in tree could be greater since i expand all the children, but choose one to do te rollout
+ jacek: to the end
+ MSmits: do you use any enhancements?&gt;
+ MSmits: selection bias?
+ MSmits: or some kind of preference for moves in the random rollout?
+ jacek: 1-plu win/lose, selection bias for winning small board or not using move that leads to already ended board
+ jacek: in rollout moves that win small board have more chance than others
+ MSmits: what do you mean by 1-ply win/lose?
+ Astrobytes: check if you win or lose in 1 ply
+ jacek: yes
+ MSmits: in the random rollout?
+ SupSon: he means favor early wins
+ jacek: rollout and the selection
+ SupSon: and late losses
+ jacek: no
+ MSmits: i do it in the selection, basically that is mcts solver
+ jacek: a little more intelligent random
+ MSmits: but not in the rollout
+ MSmits: does it help a lot to check for wins in the rollout
+ jacek: well and mcts solver
+ MSmits: i know others said it works
+ MSmits: but they say a lot works and then i try it and it does nothing
+ jacek: i dont remember how much, but id say something like 55%-60%
+ Astrobytes: ohhh in conjunction with solver
+ MSmits: i dont understand
+ MSmits: 55-60% means the winrate for checking win in rollout vs a bot that doesnt, this i got
+ MSmits: but whats the conjunction with solver
+ jacek: thats Astrobytes
+ Astrobytes: this is on top of the fact he has solver implemented
+ MSmits: what is
+ jacek: i always have mcts solver
+ MSmits: me too
+ MSmits: i just wondered what you meant about 1 ply win/loss in selection
+ Astrobytes: there
+ MSmits: i mean doesnt the solver do that?
+ jacek: depends if you expand only by 1 child instead of all children
+ MSmits: ohh I see
+ jacek: and even if by all children, sometimes checking for win/lose is expensive
+ MSmits: yes when i expand and one of them is a win, the parent is a loss
+ MSmits: so i stop that iteration
+ MSmits: is that what you mean?
+ jacek: exactly
+ MSmits: ahh ok, to me thats part of normal mcts solver
+ MSmits: i am confused though
+ MSmits: two things
+ MSmits: 1) you're not the best at performance, but usually a lot better than 10x as slow than others
+ Astrobytes: now that you describe it thus I agree I also thought that was integral to the solver
+ MSmits: 2) how can you rank this high with 10k
+ Astrobytes: ^ that's the one
+ jacek: dunno
+ Astrobytes: PONIES
+ MSmits: you literally do the same thing i do except i have a lot more heuristics for pruning and move selection
+ MSmits: so i shoul dbe slower
+ jacek: maybe those heuristics suck
+ MSmits: lol
+ MSmits: no i tested them of course :P
+ Astrobytes: haha
+ MSmits: I have a feeling you hold the key to the rest of us beating kar liso
+ MSmits: and you dont know what it is
+ Astrobytes: *karlis o
+ MSmits: yeah i am being secretive
+ jacek: karliso?
+ MSmits: lol
+ Astrobytes: no, the other one
+ Cybersick: Thanks for the info Astrobytes :heart_eyes:
+ karliso: I would like someone to challenge me, but there is no easy way I guess.
+ MSmits: are you talking about uttt
+ karliso: yes
+ MSmits: as you said before, I could just solve your p2 game again
+ MSmits: and win 100%
+ karliso: It is not deterministic
+ MSmits: it is not random either
+ MSmits: there are only so many lines of play
+ Astrobytes: de rien Cybersick
+ MSmits: especially with teccles on
+ MSmits: you make maybe 10 choices with some choices being fixed, some choices being 2 possibilities
+ MSmits: so i am guessing at most 200-300 lines of play I need to solve
+ MSmits: sounds doable
+ Astrobytes: I sense A Challenge
+ karliso: I guess you could make unbeatable opening book for p1
+ MSmits: I can
+ MSmits: I am messing with you, i already have one that beats you 100% as p2
+ MSmits: i just havent submitted
+ MSmits: its not that interesting to me
+ Astrobytes: Does it beat the others though
+ MSmits: no
+ MSmits: I targeted him specifically
+ MSmits: i can push tomatoes to 1
+ karliso: Well..
+ MSmits: with me as 2
+ karliso: I can change opening move and resubmit
+ MSmits: yes
+ MSmits: that is why i did not submit
+ MSmits: i was just wondering how big i can make it
+ MSmits: the book
+ Astrobytes: Do something other than booking?
+ MSmits: maybe counter most good lines of play
+ karliso: I don't really care... as I got rid of my opening book.
+ MSmits: it was the best decision 
+ MSmits: your bot is great and a book would only hurt you
+ MSmits: i am still wondering what magic must be in those 3k lines of code
+ MSmits: i am still testing some other ideas Astrobytes, jacek gave me the idea to add random to my own bot so i can selftest
+ MSmits: i will try out that wincheck
+ jacek: add random?
+ MSmits: yeah, so i dont get overtraining issues
+ MSmits: like, a change only works vs myself
+ jacek: in uttt?
+ MSmits: yes, it happens, my bot gets pretty deterministic as well, just like karliso's
+ MSmits: so random helps
+ karliso: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/646a267c-cbb7-43f4-9d67-6559a5b516ae">http://chat.codingame.com/pastebin/646a267c-cbb7-43f4-9d67-6559a5b516ae</a>
+ karliso: Here is my uttt rollout 
+ MSmits: ohhh 
+ jacek: endgames eh
+ Astrobytes: &lt;everyone furiously saves to file&gt;
+ MSmits: my precious...
+ Astrobytes: (except me, I don't care :D )
+ MSmits: i dont see endgames?
+ MSmits: uttt does not seem likely as a game to use endgames with
+ MSmits: karliso you still get like 400k rollouts with this?
+ MSmits: it doesnt seem like it would do that
+ MSmits: ohh i see it
+ MSmits: A == UTTT::ENDGAME7
+ MSmits: I'm going to have to stare at this a long time before I figure it out
+ struct: 400k rollouts?
+ karliso: I had a bug where I counted early rollouts twice
+ karliso: So I guess 200-250K turn 2
+ MSmits: ohh that is much closer to re curse
+ MSmits: he had 180k afaik
+ MSmits: do i read it correctly that you terminate rollouts early?
+ Astrobytes: that's your kinda bug struct :D
+ karliso: Not really... unless game is won by 3 in line
+ MSmits: oh ok
+ MSmits: did you improve selection somehow, performance wise?
+ MSmits: I remember you saying once
+ Astrobytes: just win detection not ept
+ MSmits: that you felt selection isnt always necessary?
+ Astrobytes: oh, answered, sorry, don't mind me
+ karliso: wdym
+ MSmits: and you left it at that, I kept wondering 
+ MSmits: i dont know, i figured you maybe did random for the first few visits of a parent
+ MSmits: so you didnt have to do the uct calc
+ MSmits: or maybe picked with eval
+ struct: Astrobytes I guess its a normal thing :p
+ MSmits: the first few times
+ MSmits: I do think you said you used avx for selection
+ MSmits: but that did not help me much
+ karliso: I'm always doing UCT, but that could be improved I guess
+ MSmits: yeah maybe thats what you meant when you said that, that you thought it could be improved
+ struct: the problem with avx is that values wont be alligned right?
+ MSmits: yeah
+ MSmits: unless you completely mess up your node array
+ MSmits: never had the courage to try that
+ struct: But does loading the values take that much  time
+ struct: for it not to be worth?
+ MSmits: it was about equally fast for me
+ Astrobytes:  for calculating UCT?
+ MSmits: for doing the sqrts
+ Astrobytes: ah
+ MSmits: 8 of them at once
+ Astrobytes: yeah I know the vectorization bit
+ MSmits: the problem is that nodes are spaced out 40 bytes each or so
+ MSmits: so the visitcounts are also
+ MSmits: at least I think thats the problem
+ MSmits: you cant just copy a 8 float block
+ Astrobytes: time to consult reCache
+ Astrobytes:&#160;:)
+ struct: why 40 bytes?
+ MSmits: Its just a guess, i dont remember my exact node size
+ MSmits: it varies per game
+ MSmits: maybe smaller for uttt
+ reCurse: What year is this
+ MSmits: i knew you would say that
+ Astrobytes: '89
+ reCurse: It's not conclusive, you could know I would say that yet still be in the past
+ MSmits: reCurse you'll be relieved to hear that karliso actually had somewhat over 200k rollouts, not 400k
+ Astrobytes: Or thereabouts. Since Old John submitted his 30 year old Othello code I'm going with that.
+ MSmits: you can now sleep again
+ reCurse: Relived? What
+ MSmits: it was bothering you before
+ reCurse: Was it
+ MSmits: oh yeah
+ MSmits: we both didnt get how it could be so high
+ reCurse: No such recollection
+ MSmits: traumatic events tend to do this
+ reCurse: Maybe a past me travelled to the future then went back
+ MSmits: sounds right
+ reCurse: Can't discount possibilities so easily
+ struct: Its the easiest way to increase sims, I did the same for STC
+ MSmits: timetravel is the easiest way?
+ reCurse: With 2020 the way it's been probably
+ MSmits: how is it for you now?
+ MSmits: with work and such
+ reCurse: Work is fine
+ Astrobytes: Vibrating Thing Theory
+ MSmits: my job has been somewhat harder with covid
+ reCurse: Easiest part of the pandemic for me actually
+ MSmits: I mean i am happy to be at home, but when i was teaching with the mask on it was not fun
+ Astrobytes: Goobersymmetry, non-Branes and wiggly things that cause trouble
+ reCurse: Yeah I'd go nuts wearing a mask 8h a day
+ MSmits: one day, i accidentally brought only one mask, it broke just as i wanted to get into the train
+ Astrobytes: you use disposable?
+ MSmits: then i rushed back to get 4 more, just barely got into the next train
+ MSmits: and 3 more broke during the day
+ MSmits: usually yes
+ Astrobytes: jeez, who made those? Us?
+ MSmits: but thats mostly because my wife accidentally bought a years worth 
+ reCurse: Why disposable? There's plenty of good ones that are reusable
+ MSmits: yeah
+ MSmits: I know
+ reCurse: How do you accidentally...
+ MSmits: but we have them now =/
+ MSmits: she didnt do the math
+ Astrobytes: lol
+ MSmits: they pack pretty tight
+ struct: she did ++sims;++sims;
+ Astrobytes: is this like winning a 10 year supply of toilet paper
+ MSmits: something like that, except toiletpaper is way bigger
+ Astrobytes: Well, yeah. That's something at least.
+ MSmits: anyway the strings are glued and sometimes the glue lets go
+ Astrobytes: string theory for ya
+ MSmits: yep&#160;:)
+ MSmits: i probably have to go to work one more time on thursday
+ MSmits: management decided exam classes still have to be done physically
+ Astrobytes: gluons turned to gluinos
+ reCurse: There's a pun that's just too easy there
+ Astrobytes: Really?
+ MSmits: ahh yes supersymmetry
+ Astrobytes:&#160;:)
+ Astrobytes: great subject
+ MSmits: because of the funny names you mean?
+ Astrobytes: Why in person?
+ Astrobytes: No, I find it curious
+ MSmits: oh, well in person learning is inherently better in most cases
+ MSmits: and these guys have tests after christmas break
+ Astrobytes: yes, but pandemic...
+ MSmits: i know, it will only be one day though, the week after thebreak it will be online
+ Astrobytes: Fair enough I suppose
+ MSmits: it's just annoying for me, because on thursday i will have 2 online classes as well
+ MSmits: also my CS class doesnt have a test
+ MSmits: so in my case it is not particularly useful
+ MSmits: also i have an online course
+ MSmits: so why bother with the in person part
+ MSmits: but the students are at school all day for other classes....
+ Astrobytes: Seems wasteful, but we're human right
+ MSmits: right
+ SupSon: you guys are humans?
+ MSmits: to a degree
+ MSmits: Astrobytes seems the most human
+ Astrobytes: Why? Cause I have a sore back? :P
+ MSmits: though when he said he is into supersymmetry for fun, doubts grew
+ MSmits: because you dont do most of the weird things some of us do
+ MSmits: it's a compliment :P
+ Astrobytes: I do RAIC for fks sake
+ MSmits: thats true
+ Astrobytes: Isn't that weird enough?
+ MSmits: yeah its pretty weird
+ reCurse: That justifies talking about uttt then. Possibly.
+ Astrobytes: I needed a break
+ struct: Did they add fog yet?
+ Astrobytes: Yes, that's round 2
+ Astrobytes: They just updated with this:In today’s update, we have fixed a vulnerability in server’s pathfinding: since server is aware of the game state, it could pathfind around obstacles that you do not see in fog of war. Now, server-side pathfinding considers cells out of sight range to be empty.
+ reCurse: Round 3 has game result decided by observation
+ Astrobytes: I'm not moaning, I've qualified for a t-shirt
+ MSmits: thats pretty good right?
+ MSmits: not sure how strong the opposition is
+ reCurse: I'm reminded of brood war tricks if my memory serves me right
+ MSmits: never tried raic
+ struct: I was thinking on doing
+ struct: then I looked at the game
+ reCurse: You could figure out where the guy is located if he decided to wall his entrance
+ reCurse: By looking at where your unit would go by moving there
+ MSmits: ohh
+ MSmits: smart
+ Astrobytes: heh heh, yes
+ MSmits: so you leave a little hole in the wall to counter this?
+ reCurse: There's a good reason you're walling
+ reCurse: To prevent run-ins
+ reCurse: So no, you don't
+ MSmits: well yes but its poor formation if they have to go through a small crack
+ Astrobytes: but it's really not SC this game
+ MSmits: maybe a small  hole with some turrets
+ MSmits: tower defense&#160;:)
+ Astrobytes: And I'm not the best person to ask about the real meta rn, since I'm around 179th
+ reCurse: What is the real meta Astrobytes
+ MSmits: we dont need the best person
+ Astrobytes: Turret rush!
+ reCurse: So how is that not SC again?
+ Astrobytes: It's not the meta I only said that to bait you
+ reCurse: Real bunch of meanies today in the chat
+ reCurse: Must be MSmits presence
+ Astrobytes: :D
+ Astrobytes: speaking of which, nice to have you back MSmits
+ Astrobytes: in chat
+ MSmits: thanks Astrobytes, feels good to be back
+ MSmits: might still not be as active as i want to be. Getting this degree takes more time than i expected
+ MSmits: I got about 6hrs a week work relief to do it, but it takes more than 6 hrs a week
+ karliso: <a rel="nofollow" class="external free" href="https://github.com/karlisolte/ultimate-tic-tac-toe">https://github.com/karlisolte/ultimate-tic-tac-toe</a>
+ karliso: Sharpen your uttt tactis here
+ Astrobytes: seriously though, meta seems to be ranged units only, just one barracks (which I was surprised about and am exploring), careful supply depot placement and targeting enemies well
+ Astrobytes: haha. The man.
+ Astrobytes: Anything to add to that RAIC meta karliso?
+ karliso: I thought walls are useless
+ MSmits: lol karliso, i like it, but what is your point with this github?
+ DomiKo: How that happened that we have learned that much about UTTT today
+ Astrobytes: Thought? You have started to use them?
+ Astrobytes: Walls and turrets seemed useless tbh
+ karliso: I collected pictures of "tactics" and made probably first uttt tactics quiz.
+ Astrobytes: The former more than the latter
+ MSmits: ohh, it reads a lot like a chess puzzle indeed
+ MSmits: I might do something like this for yavalath
+ MSmits: for my study project
+ Astrobytes: 5D Super Lavayath
+ MSmits: with the volcano!
+ Astrobytes: Supersymmetry! Now that would add something
+ Astrobytes: Scratch that. My brain started overheating at the possibilities
+ MSmits: karliso i was worried you shared your bot when you posted that gith
+ Astrobytes: Have more faith
+ MSmits: earlier he shared his rollout
+ MSmits: thats why :P
+ Astrobytes: Worthless without context and understanding
+ MSmits: if you reverse more words, you'll go all yoda
+ Astrobytes: When did I reverse
+ MSmits: you didnt, i am saying thats all that's missing
+ Astrobytes: Worthless without context and understanding this is, hmm
+ MSmits: worthless without context, this is
+ MSmits: exactly :P
+ Astrobytes: sorry, it's late :D
+ MSmits: yeah, i still dont get why that guy thought our late chat is less fun
+ struct: Usually its not this active
+ Astrobytes: Nah, he's cool, he meant the non-european hours
+ struct: At around this time
+ MSmits: isnt this non european?
+ struct: Give it 20 more minutes and you will see lag ocmplaints
+ MSmits: ahh ok
+ struct: complaints*
+ MSmits: I guess i always miss this
+ MSmits: because of sleep
+ Astrobytes: after this point, unless a bunch of us are active it's full of idiots, complaints and trolls
+ MSmits: I see
+ struct: Did not do much progress on STC today
+ Astrobytes: yeah, the lag from the updates etc
+ DomiKo: struct you doing STC now?
+ struct: Im storing states until depth N like euler suggested
+ MSmits: you're really into STC struct
+ struct: DomiKo I have been doing it for a bit
+ struct: then paused
+ DomiKo: I see
+ struct: I wasted 1 week on trying to make a fast sim
+ struct: not worth
+ Astrobytes: don't do the bitboard thing then
+ struct: I wont
+ DomiKo: I wasted 5H trying to beat boss gold with wrong formula for score...
+ struct: My first sim had like 30k sims on c++
+ DomiKo: sim is 8steps?
+ Astrobytes: I could have sworn you had a legend bot before
+ struct: no 1 depth
+ struct: I had
+ struct: my bot is like 2years old
+ struct: Then I worked on optimization and never submited
+ struct: Now I decided to rewrite
+ Astrobytes: that was it
+ Astrobytes: well, anyway, I'm all done for tonight
+ struct: gn
+ Astrobytes: see you all later
+ DomiKo: See you
+ MSmits: gn!
+ MSmits: going also
+ struct: gn
+ FrankGotzTank: Why does my program say that 1000 / 60 = 16.666666666666668???
+ struct: precision
+ struct: its normal 
+ FrankGotzTank: But it should be 16.66666666667
+ struct: Which language are you using?
+ FrankGotzTank: C#
+ struct: hmm
+ struct: it gives me right value
+ struct: <a rel="nofollow" class="external free" href="https://tech.io/snippet/oAOhQ3t">https://tech.io/snippet/oAOhQ3t</a>
+ struct: ah on CG its different
+ FrankGotzTank: yeah right
+ FrankGotzTank: That's pretty annoying
+ Kamikaze: does anyone can help me with ultimate tic tac toe? i was trying to learn the minimax algorithm but i dont know what to do, im trying to make it with python3
+ VizGhar: uf... you can't solve UTTT solely with minimax
+ VizGhar: if you just want to try minimax, try it on less complex problem (clasic tic tac toe)

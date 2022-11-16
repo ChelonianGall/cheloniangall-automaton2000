@@ -1,0 +1,1505 @@
+ MaliciouslyCrypticUsername: MSmits could you help me with something?&#160;:)
+ MaliciouslyCrypticUsername: I have a function to calculate the values of the next turn:
+ MaliciouslyCrypticUsername: def calcNext(list): <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/900f0b11-da86-4d70-aa1a-b464d02e66ec">http://chat.codingame.com/pastebin/900f0b11-da86-4d70-aa1a-b464d02e66ec</a>
+ MaliciouslyCrypticUsername: I made the input and output both lists so I can plug it into the function multiple times to predict multiple turns ahead
+ MaliciouslyCrypticUsername: Are there any errors you can spot?
+ dbdr: Illedan?
+ DaNinja: MaliciouslyCrypticUsername atan2 returns the angle in radians between  PI and -PI
+ DaNinja: need to convert it to degrees
+ DaNinja: and subtract your pod current angle to get the angle to target
+ halloweens: guys, how to see the code that ppl submitted to the leaderborad, I can't find one in the mars lander optimization
+ DaNinja: you cant see other solutions for optimizations
+ halloweens: okay then, thank you btw
+ Diptastic: fyi Chuck Norris' keyboard has 2 keys: 0 and white space.
+ Illedan: yes dbdr?
+ Illedan: Solved 1 food map now?
+ Marchete: "will code for food"
+ struct: "will give food for eval"
+ martinpapa69: ok, so feeding binary encoded integers to nn does not work
+ Marchete: hmm, as one-hots :D
+ Marchete: but (float)(intval)
+ martinpapa69: ye sounded like a smart idea. but it just..baD
+ Marchete: I don't thin so
+ Marchete: afaik NN search gradients
+ Marchete: so it assumes -1 bad 1 good
+ Marchete: and all between are gradients
+ Marchete: for turn?
+ Marchete: I thought about some turn%12 (a full rotation)
+ Marchete: then some encoding
+ dbdr: Illedan you appeared online, I guess you just left your machine running&#160;:)
+ martinpapa69: hm. i used it for cell values
+ dbdr: not solved 1 and 2, but made a few optims. and thought about odd levels, but not implemented anything
+ Illedan: Yeah&#160;:) Tend to happen. Every day
+ Illedan: I started the JS thingy atleast, hopefully done tonight&#160;:)
+ OldJohn: @matrinpapa69 yes binaries values of integer does not work easily with oware since it is harder to encode necessary if conditions such that if cell_value[5] = 13 and cell_value[6]=0 and ...&#160;: Here onehot encoding is perfect. That ma explain why onehot is better here. However, it is natural when you have just to use add,minus,multiply and so one on input values which is often the case with NN in real life.
+ OldJohn: OneHot is perfect for categorical values&#160;:-) A, cat, dog. And here in fact it is nearly categorical inputs&#160;:-)
+ jacek: and it will grab the concept that empty house, or 1-2 seeds houses are much different than the others
+ jacek: implicit little domain knowledge
+ jacek: + it's faster
+ martinpapa69: the information is still there in binary encoding, but ye the network needs to use more weights to learn, when a house has x seeds. i thought after long training it could be maybe possible to teach it, so i can save space
+ dbdr: if you need more weights, it might not save space
+ martinpapa69: I mean. if you use one-hot, the network needs 1 weight, to know if you have lets say 5 seeds in slot 1
+ martinpapa69: but if you use binary encoding, needs more
+ Marchete: how do you encode a binary on a float?
+ martinpapa69: input[0] = val^0
+ martinpapa69: input[1] = val^1
+ Marchete: so each bit on 1 input float?
+ martinpapa69: yep
+ Marchete: ahhh
+ Marchete: ok, then maybe it's ok
+ martinpapa69: it worked...but performed much worse
+ struct: story of my life
+ jacek: oO
+ jacek: <a rel="nofollow" class="external free" href="https://cdn.discordapp.com/attachments/718853716266188890/868796772338778132/NNUE_Mnps.png">https://cdn.discordapp.com/attachments/718853716266188890/868796772338778132/NNUE_Mnps.png</a>
+ jacek: quite speed vs accuracy tradeoff in sf14
+ struct: so i must make my bt bot slower
+ struct: got it
+ OldJohn: Did you find on which games NNUE is trained&#160;?
+ jacek: just reading random snippsets from sf discord
+ jacek: but lately theyve been training on leela zero games as well
+ OldJohn: OK so singular extensions on MCTS does not improve the edngame play too much
+ MSmits: it should not, because the endgame is usually solved
+ MSmits: if neumann pops in, tell him his cg bench overrides my request cooldown
+ MSmits: requestCooldown: 80
+ MSmits: it does 30
+ MSmits: and then hits the limit
+ MSmits: it will then double the 30 and keep doubling it until it no longer hits the limit. I prefer to just set a value that never hits it
+ jrke: MSmits thanks for pushing me 3rd in D&amp;B lol
+ MSmits: yeah, you know how i do that?
+ MSmits: I have a mcts for early game
+ MSmits: and I can make it create a ton of loops and short chains if i want to
+ MSmits: in that case, it doesnt help to be in control in the late game
+ MSmits: your bot is better than other bots at playing out the late game
+ MSmits: you get wins vs me
+ MSmits: I did some testing and i get around 50% wr vs mikla with this
+ MSmits: unfortunately a bunch of losses vs lower ranked, like you
+ MSmits: you'll see the games you won are all narrow score wins
+ MSmits: score solver paying off in the end eh?
+ jrke: my current submitted bot is having end game solver which is bugged intensionally to make it work under 100ms
+ jrke: and the non-bugged solver is ready but it takes 100ms+ in many games
+ jrke: so can't submit it
+ MSmits: I know your pain. Spent a lot of time speeding up mine
+ MSmits: it's hard
+ MSmits: btw i recommend you also do the mcts thing
+ jrke: i in my solver i only evaluate heuristically in which only closed chains are there
+ MSmits: it's really easy, just do a basic mcts and your eval just has to make an educated guess about how "loopy shortchainy" it is
+ jrke: i think adding looped chains in that can optimize it a bit
+ MSmits: oh right
+ MSmits: do you need the function i shared with Marchete
+ jrke: which one?
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/3536899d-1ad3-4f09-9e70-e9ab1aa0699f">http://chat.codingame.com/pastebin/3536899d-1ad3-4f09-9e70-e9ab1aa0699f</a>
+ MSmits: ControlledValue(int b, int l4, int ll, int c3, int cl)
+ MSmits: b is boxes left, l4 is loop4count, c3 is chain3count, cl is number of long chains
+ MSmits: assuming all are isolated
+ MSmits: so no fancy 3 joins and 4 joins
+ MSmits: this is an exact solution coming from scientific research
+ MSmits: and extremely fast
+ MSmits: oh and ll is long loops
+ MSmits: (6+
+ MSmits: the end result is the board value
+ struct: o.o
+ jrke: thenks
+ MSmits: dont try to understand it really, just test it
+ MSmits: make sure you handle short chains (1 and 2 long)
+ MSmits: and also chains that have been opened already
+ MSmits: once those are gone, you can use the formula
+ MSmits: I kinda understood it when i coded it, but have no clue now
+ jrke: int GetValueRecursive(int b, int l4, int ll, int c3, int cl)
+ jrke: what does this do?
+ MSmits: thats the function you call
+ MSmits: it calculates the value of the board
+ MSmits: pass it the boxcount left on the board
+ MSmits: and the loop4count
+ MSmits: looplongcount (6+)
+ MSmits: chain3count
+ MSmits: and chainlongcount(4+)
+ MSmits: it's recursive in the sense that it calls itself multiple times in case of 4 loops
+ MSmits: removing loops each time
+ jrke: does l4 consist all loops count or just  loops of 4 boxes?
+ MSmits: loops of 4 boxes
+ MSmits: they are special
+ MSmits: chains of 3 also
+ MSmits: btw tb = terminal bonus, it's the bonus you get from capturing the last object
+ MSmits: because you dont need to give up boxes in that one
+ MSmits: 4 loops have a tb of 8
+ MSmits: normall you give away 4 boxes, but on the last one you gain 4
+ MSmits: 4 -- 4 = 8
+ jrke: hmm
+ MSmits: I dont mind giving you the paper this all comes from but it's one of the worst you'll have ever read
+ MSmits: not because it's wrong, but because it's textwalls with math sprinkled
+ jrke: my current heuristic eval is here
+ jrke: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/c165b37e-ef23-4ebd-af91-bbb528491e13">http://chat.codingame.com/pastebin/c165b37e-ef23-4ebd-af91-bbb528491e13</a>
+ MSmits: yeah that will have similar speed, but will be wrong some of the time
+ jrke: but i looped handler is incomplete
+ jrke: else {}
+ MSmits: oh right
+ MSmits: well thats where the complexity is
+ MSmits: if you have only chains you can just always play the shortest one
+ MSmits: if you also have loops,then sometimes it's better to play a 4 loop first, sometimes a 3 chain
+ jrke: yeah
+ MSmits: btw
+ jrke: btw i calculated how many unique states can be in dots and boxes
+ MSmits: if you just have loops you can also just always play 1 and 2 chains before loops
+ jrke: ohk
+ MSmits: around 6000 if you have simple loony endgames right?
+ MSmits: i created lookup tables for this
+ MSmits: and i needed 6000 sized array
+ MSmits: but my lookup table was slower
+ jrke: no i am talking every state of game from turn 0 to turn 112
+ MSmits: oh I see
+ jrke: 2^112 if i am not wrong
+ jrke: cause we can define each state under 112 bits
+ MSmits: hmm well yes thats the first order calculation
+ jrke: and all combinations will be 2^112
+ MSmits: but you dont include symmetry in that
+ MSmits: 2^3 ways to rotate and mirror
+ MSmits: so that'll make it 2^109
+ jrke: yes no symmetry in that
+ jrke: ohk
+ MSmits: also the corners have a little bit of symmetry
+ MSmits: but that's mostly negligible
+ MSmits: the game is mostly simplified by it's graph-nature
+ MSmits: once you have isolated chains it doesnt matter where they are
+ jrke: yeah
+ jrke: just play smaller ones
+ MSmits: also even with complex objects, you can do all sorts of rotations and twisting and it will stay the same object
+ MSmits: so many D&amp;B maps are equivalents
+ MSmits: but in your case, if you dont like using that function i just gave you, you can also generate all possible states and use a lookup table
+ MSmits: generate them all locally
+ MSmits: you'll have 6k values
+ MSmits: compress them and put them in your bot
+ MSmits: then in the first second, generate the states, but dont solve them
+ MSmits: instead add the hardcoded value to those states in a lookup table
+ jrke: i will only hardcode when i failed to make solver working under 100ms after trying too many things
+ MSmits: well you cant hardcode complex stuff so this is just to replace that function
+ jrke: how you handle loops bigger than 4?
+ MSmits: 6 loops are "somewhat" special, but only in the presence of complex objects
+ jrke: btw loops have only even numbered boxes right?
+ MSmits: anything bigger can just be ignored until the final solve of a simple state
+ MSmits: jrke yes in D&amp;B they do
+ MSmits: I also ignore all chains 4 and up
+ MSmits: during solve
+ MSmits: except in the final use of that function
+ jrke: maybe one reason of slow speed of my solver could be this
+ jrke: int map[7][7][4]
+ MSmits: sure
+ jrke: i am using 7*7*4 array for game state
+ MSmits: I generate a graph from my map
+ MSmits: so i am no longer placing edges during solve
+ MSmits: i am playing whole loops and chains and such
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/81370377-47e5-435f-8c24-6994b84db3a4">http://chat.codingame.com/pastebin/81370377-47e5-435f-8c24-6994b84db3a4</a>
+ struct: (╯°□°）╯︵ ┻━┻
+ struct: how can a 1 line eval have like 40% win rate vs my current bot
+ struct: ....
+ MSmits: yes that's very disturbing
+ MSmits: I also dont know how to eval breakthrough
+ struct: I dont know how to eval.
+ struct: Doesnt matter which game
+ MSmits: eval in general is just, identify features, give them a parameter, fit the parameters
+ MSmits: identifying features is the only hard part
+ MSmits: the rest is boring and time consuming
+ jrke: i went at wrong path for evaluating func in spring 2021 during contest
+ MSmits: i succeeded at it in some games, most notably oware
+ MSmits: until everyone and their mom beat me using NN
+ dbdr: you handcrafted an oware eval?
+ MSmits: yes
+ MSmits: far better than the rest
+ snacker_X: print("hello world")
+ struct: dbdr you eval breakthrough?
+ jrke: what depth you go in oware MS?
+ dbdr: honestly I don't remember how I eval bt
+ MSmits: no idea, it depends on the state of the game, probably 20 or so
+ MSmits: it's mcts with ept
+ struct: But you do eval right?
+ dbdr: I guess
+ dbdr: sorry, it's in swap right now
+ struct: swap?
+ dbdr: <a rel="nofollow" class="external free" href="https://i.snipboard.io/tdAIlP.jpg">https://i.snipboard.io/tdAIlP.jpg</a>what is my snake doing, avoiding the good?
+ dbdr: swap out of my brain-RAM
+ dbdr: the *food
+ dbdr: the good food
+ struct: maybe Illedan should change the head of the snake
+ dbdr: yeah, I requested that too&#160;:)
+ dbdr: :snake:
+ dbdr: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/7158e51466a40b049897dd44c641191a2119">https://www.codingame.com/contribute/view/7158e51466a40b049897dd44c641191a2119</a>
+ dbdr: oh, I think I know!
+ dbdr: yeah, finishing levels again now&#160;:)
+ MSmits: is this one of those GA/SA games?
+ dbdr: we don't know yet&#160;:)
+ jrke:  Hamiltonian cycle is easiest way to solve snake game until and unless you don't have turn boundation
+ MSmits: I dont think it's supposed to be solvable
+ MSmits: so you need some optimization algorithm
+ billalxcode: verse mode
+ MSmits: it's like the travelling salesman problem
+ MSmits: quickly grows in complexity with the number of food thingies
+ MSmits: I suppose you can solve a few simpler cases exactly using that hamiltonian thingy and then use them as a benchmark for your optimization
+ dbdr: solved as in: found a way to visit all cities
+ MSmits: no i mean maximum score
+ dbdr: not found the probable optimal one
+ dbdr: I know
+ MSmits: with TSP anything &lt; 20 is possible to solve exactly I think
+ MSmits: not sure where the exact limit is
+ dbdr: when jrke says solved, he does not mean optimally
+ MSmits: It's (N-1)! / 2  I think
+ MSmits: ohh
+ MSmits: did not get that
+ jrke: yeah i didn't meant optimal
+ MSmits: soo I know how i can get to nr 1 in D&amp;B now
+ struct: o.o
+ MSmits: I just spam a 51% wr bot forever and pull down mila
+ MSmits: mikla 
+ dbdr: lol
+ MSmits: and then lose the nr 1 as soon as 1 person resubmits
+ MSmits: because my bot loses vs lower ranked, the way i made it now
+ dbdr: sounds like a plan
+ jrke: and push me up till you push down mikla lol
+ MSmits: hehe yea
+ dbdr: good use of resources
+ MSmits: i am doing that jrke
+ MSmits: probably i should just improve my solver so i dont get so many lower ranked losses and get a bit more wins vs mikla as well
+ MSmits: my scoresolver currently starts at endgame, but the simple endgames take like 5 microseconds to solve
+ jrke: wht thats great 5ms
+ MSmits: so plenty of time left to bring the frame of solving earlier
+ MSmits: yeah
+ MSmits: on average it's 80 microseconds
+ MSmits: oh wait no
+ MSmits: thats nim solving
+ MSmits: hmm score solving was 1 millisecond average
+ MSmits: no, 300 micro
+ jrke: :scream:
+ MSmits: but the simpler ones are faster than average
+ MSmits: and the whole idea is to make the board simple and losing for mikla
+ jrke: my solver breaks 100ms when there are more than 15 chains lol
+ MSmits: the number of chains is irrelevant for me, just the number of 4 and 3 degree joins matters
+ jrke: i have minimax thingy for solver
+ MSmits: some of them are crazy complicated. I found one with 12 joins that took the full 100 ms
+ MSmits: yeah mine uses negamax, which is basically minimax
+ MSmits: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/572083224">https://www.codingame.com/replay/572083224</a> frame 61, this took 111 microseconds to solve
+ jrke: my internet is working like snail
+ jrke: very slow
+ MSmits: ye, looking at the games on the leaderboard 100 micro is average for solving time when no safe moves are left
+ MSmits: but this is with my loopy mcts that creates simple endgames
+ jrke: nice
+ MSmits: yeah so what i was thinking about doing is extending this to before the endgame
+ MSmits: with another negamax that runs the solver at endgame
+ jrke: i am very much interesed to know what does crazy remi prints in message
+ MSmits: problem is you need sacrifice moves and pre-emptive sacrifices as well
+ MSmits: me too, i have no idea
+ MSmits: his bot is very weird
+ MSmits: i suspect he uses some sort of mcts with nim-components
+ MSmits: without a nimsolver, his bot crushes you, so he does have some nim in there
+ jrke: it looks like time taken in seconds
+ MSmits: hard to say
+ MSmits: ahh gotta go, visitors today
+ MSmits: ttyl
+ jrke: ohk
+ jacek: whats with that utf16
+ reCurse: I'm starting to wonder if I should have used randomized openings for chess instead of 960
+ struct: unbalanced starts?
+ struct: I mean unbalanced on 960
+ reCurse: No
+ struct: What is the problem?
+ reCurse: No problem per se
+ reCurse: Doing most of my testing with random chess engines and most of them just do classic chess
+ reCurse: So I use random openings and it's working pretty well
+ reCurse: And it's easier to watch
+ reCurse: shrug
+ reCurse: Pretty satisfying to defeat minimax engines with positional play
+ jacek: random openings, but castling as in classic chess?
+ reCurse: It's exactly the same as classic chess except forced openings from a book like they do in most competitions
+ struct: im probably done with bt, its impossible to bench atm
+ struct: I was not aware it was this bad since I never used cg bench
+ MSmits: I get to 48 games and then  it stops, I think authentication fails 
+ Marchete: on CGBenchmark?
+ MSmits: yeah
+ Marchete: hard limits
+ Marchete: they are very limited now
+ MSmits: not just that
+ Marchete: like unusable even with IDE tests
+ MSmits: it also logs me out or something
+ MSmits: so even with 1 min time
+ MSmits: at some point it says i am not the right codingamer
+ MSmits: usually after half an hour or so
+ struct: I can run brutaltester, but I just end up creating a version that can only beat my bot
+ struct: unless I test vs multiple versions of my bots
+ MSmits: struct what helps a little bit is adding randomness to your moves
+ MSmits: so when making the move, add&#160;% randomness to the value of each move
+ Marchete: brutaltester is the "my mom says I'm the best basketball player"
+ Marchete: version
+ Marchete: just like NN sometimes
+ MSmits: yes, fitting params is like that
+ MSmits: you can use tricks to reduce overfitting outside of NN's also
+ MSmits: well I guess CG bench is not completely useless. I can run it maybe 4 separate times and add up the result for 200 games or so. Then I can at least tell if a bot is obviously better or not. If they're close, it's not enough
+ struct: but you are only testing vs 1 player
+ struct: on bt that is not enough
+ MSmits: in my case that is fine
+ struct: yeah
+ MSmits: I also have a lot of testing tools for D&amp;B outside of cg bench though, so it's easy for me to see if i improved
+ MSmits: i just dont know if its better than mikla
+ MSmits: unless i cg bench
+ MSmits: my current leaderboard version is 50% WR btw, as far as you can tell with a near even 100-100 score
+ MSmits: but it sacrifices a lot vs lower ranked. So my next goal is fixing that
+ MSmits: this is typical: <a rel="nofollow" class="external free" href="http://cgstats.magusgeek.com/app/multi-dots-and-boxes/MSmits">http://cgstats.magusgeek.com/app/multi-dots-and-boxes/MSmits</a>
+ MSmits: all green, but well... I am not supposed to lose any games below mikla
+ struct: I would try chess, but if I struggle with bt eval I cant imagine how I would do in chess :D
+ MSmits: well
+ MSmits: plenty of features to choose from
+ MSmits: also more literature
+ MSmits: but fitting params is a huge problem
+ MSmits: you need to learn how to do that
+ MSmits: automatically, not by hand
+ struct: I probably need to upgrade my cpu
+ struct: if i want to do that
+ MSmits: nah
+ MSmits: sure, it helps
+ MSmits: but you can also just wait twice as long
+ Marchete: if WR &gt;50 just spam submit :D
+ MSmits: or do it less often
+ MSmits: Marchete i could get &gt;50 but i want to make it so that i get 100% below me
+ struct: <a rel="nofollow" class="external free" href="https://i.imgur.com/XPxrlIN.png">https://i.imgur.com/XPxrlIN.png</a>
+ MSmits: like it was before
+ struct: I cant test on ide though anymore
+ struct: due to cd
+ MSmits: it's literally 1 minus sign between this and being 100%
+ struct: cooldown*
+ MSmits: but then my mikla wr becomes 40%
+ Marchete: yeah sometimes I can beat you on my broken bot :D
+ MSmits: thats the sort of loss that should not happen
+ MSmits: but there's a difference with your bot
+ MSmits: you get loopy maps even if i am not trying for them
+ MSmits: so your bot does something
+ Marchete: I think it's that
+ Marchete: my bot tries something
+ Marchete: and by chance it gets the right point to win
+ Marchete: like it's still too much randomness
+ MSmits: could be
+ Marchete: to say you domain the game
+ Marchete: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/572123960">https://www.codingame.com/share-replay/572123960</a>
+ MSmits: but i did discover that it's possible to force loopyness. If everyone did that, it would kill miklas bot
+ Marchete: at first match I tried
+ Marchete: so you have room to improve
+ Marchete: or maybe it's just 1st player having advantage
+ MSmits: nah not really
+ MSmits: i gave away 2 boxes btw
+ MSmits: because my bot wants to have control
+ MSmits: thats why i lose
+ MSmits: control is pointless with loopy maps
+ MSmits: I should just detect this and stop sacrificing
+ MSmits: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/572086105">https://www.codingame.com/replay/572086105</a>
+ MSmits: here i beat mikla like you beat me
+ MSmits: let him have control by sacrificing boxes, then win by score
+ MSmits: dunno why my happy and sad face emote got broken btw
+ Marchete: hmm I thought it was due to the position, but I can win you also as blue player
+ MSmits: yeah that doesnt matter
+ MSmits: the game has too much branching to make use of any p1 or p2 advantage
+ MSmits: and it's impartial
+ MSmits: you both use the same board
+ MSmits: the only difference is who's turn it is
+ Marchete: 5x5 is proven win for p1
+ MSmits: sure but this is meaningless if it's not solved
+ Marchete: at some point in time it had "too much branching"
+ MSmits: 7x7 is also a win for either player
+ MSmits: one of them i mean
+ MSmits: there is an enormous difference between 5x5 and 7x7
+ MSmits: like checkers and chess
+ MSmits: 5x5 was not at all easy to solve
+ MSmits: mostly because nim stuff is useless for this kind of solving
+ MSmits: score solving uses plain old negamax
+ MSmits: there's a table somewhere that showed the difference in time required for 4x5 compared to 5x5
+ MSmits: it was like 1000 times or something ridiculous like that
+ struct: ok maybe this version is better
+ struct: now I need to wait for cooldown
+ jacek: you cant submit on cooldown?
+ MSmits: and then you use your ultimate?
+ struct: I wont submit I dont want to lose my top 10&#160;:(
+ struct: only if im 100% sure that its better
+ struct: It does play different
+ struct: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/572123264">https://www.codingame.com/replay/572123264</a>
+ struct: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/571612845">https://www.codingame.com/replay/571612845</a>
+ struct: 2nd is old bot
+ MSmits: i just love we brought you over to the dark side of board-game botting&#160;:)
+ struct: I only learned bitboards due to spring contest
+ MSmits: you picked it up fast
+ struct: I knew the basic like set and clear bits
+ struct: but that was about it
+ MSmits: thats how it starts
+ MSmits: you will also go through a phase where you are bitboarding everything, even when it doesnt help at all
+ MSmits: or maybe thats just me
+ struct: if its easier sure
+ MSmits: earlier I was trying to calculate mex, by setting bits on a bitboard and then using builtin ctzl to get the lowest bit
+ struct: mex?
+ MSmits: but turns out just filling an array and looping to the lowest unset array item was faster
+ MSmits: minimum excluded value
+ MSmits: so i started with a full set bitboard
+ MSmits: and unset bit
+ MSmits: when i found values
+ MSmits: then took the minimum set bit with ctzl
+ MSmits: but just having an array with 16 values and setting the items was faster
+ MSmits: because to modify the bitboard i needed |= 1uLL &lt;&lt; s
+ MSmits: and thats slower
+ MSmits: slower than just setting an item in a 16 sized array
+ MSmits: this is what i meant with unnecessarily bitboarding everything
+ reCurse: That seems incredibly specific advice on micro-optimizations heavily dependent on the context they're used in
+ MSmits: yes, the point was really, not to jump to bitboards at every occasion
+ MSmits: not this specific example
+ MSmits: I also did a bitboarded floodfill for tron
+ MSmits: which was slower I think
+ MSmits: maybe a did it wrong, not sure
+ MSmits: I
+ reCurse: Probably did it wrong I'd say
+ reCurse: Bitboards are very good at that
+ MSmits: well maybe, the idea was to floodfill in parallel, but it works poorly on long corridors
+ NVT_Nguyen: gg
+ MSmits: i did use it on D&amp;B succesfully, but the bitboard is just a single uint64_t
+ MSmits: for tron i needed like 29 ints
+ MSmits: that complicates things
+ MSmits: if you're just floodfilling along 1 corridor on 2 ints and you have to check if your map changed to see if you're done floodfilling, you need to check the whole board
+ MSmits: because you dont actually know it's just a corridor
+ reCurse: I maintain my guess :P
+ MSmits: fair enough&#160;:)
+ reCurse: Speaking of benching I was afraid this would happen since the public release of CGBench, still took 2 years eh
+ MSmits: yeah
+ MSmits: it always surprised me they just let us do it
+ MSmits: just a bit worried they might limit submits next
+ MSmits: as you mentioned 
+ MSmits: well you mentioned that people submit more
+ reCurse: During contest yeah
+ MSmits: probably also outside contest
+ reCurse: That's the thing the site is dead outside contests
+ reCurse: That's why it upset me quite when they made the limit permanent
+ MSmits: relatively speaking sure
+ MSmits: well contests arent happening all the time
+ MSmits: there might be more activity outside contest
+ MSmits: but it's spread out
+ MSmits: over a long period of time
+ MSmits: if you limit it there too, you migth save a bunch of $$ in the long term as well
+ MSmits: just have to be honest about it
+ reCurse: I still think we talk about thousands of times
+ MSmits: I remember a time where I personally CG benched 10k games in a week and that was just me alone
+ MSmits: outside of contest
+ MSmits: in contest i benched less
+ reCurse: That's nothing in the grand scheme
+ MSmits: nothing if it's just me
+ MSmits: we dont really have the numbers, so we can only guess
+ MSmits: i just accept the new reality. The new normal is testing locally
+ reCurse: The new normal is to leave CG lol
+ MSmits: not me&#160;:)
+ MSmits: anyways gotta go get some food, ttyl
+ reCurse: bye
+ <b>**jacek never used cgbench</b></p><p><img src="/a/63052365393434" /> jacek: im so ecological
+ Youssef_kessentini: f word
+ jacek: fail
+ antiwonto: fortran
+ Marchete: F#
+ antiwonto: Furby
+ antiwonto: Furry
+ Youssef_kessentini: female? 
+ Youssef_kessentini: ferrari? 
+ antiwonto: ban
+ Marchete: Press F to pay respects
+ Youssef_kessentini: k
+ TobiasA: F
+ Wontonimo: i'm with ya MSmits, i've taken up residence here
+ jacek: <a rel="nofollow" class="external free" href="https://cdn.discordapp.com/attachments/718853716266188890/868893418737246228/Elo.png">https://cdn.discordapp.com/attachments/718853716266188890/868893418737246228/Elo.png</a>
+ jacek: oh my, +350 elo in a year
+ struct: it did not look like 350 in this site
+ struct: <a rel="nofollow" class="external free" href="https://m.nextchessmove.com/dev-builds/">https://m.nextchessmove.com/dev-builds/</a>
+ jacek: different time control maybe
+ struct: ah probably
+ jacek: plus this is test against last classical sf, which was sf11
+ struct: that one is against sf7
+ NinjaDoggy: 10 seconds + 0.1 time control ._.
+ NinjaDoggy: wtf is that
+ struct: ultra bullet
+ NinjaDoggy: not sure how meaningful 350 elo at ultra bullet is&#160;:/
+ jacek: also, could be different openings
+ reCurse: Why wouldn't it be meaningful
+ reCurse: Are you saying CG bots aren't meaningful? lol
+ sprkrd: 10 sec + 0.1 is plenty for a computer
+ sprkrd: most CG games have 100 ms per turn
+ reCurse: Anyway I'd rather use CCRL as a reference since they play against various different engines
+ darkhorse64: CG is 1s + 0.05 right ,
+ darkhorse64:&#160;?
+ reCurse: Not really
+ reCurse: There's no timebank on CG
+ NinjaDoggy: but no  official/ranked games are played at 10 + 0.1 so saying "350 elo increase over sf11"is pretty misleading
+ NinjaDoggy: at longer time control the elo gain is much smaller
+ reCurse: I don't get it
+ sprkrd: I don't understand your point
+ reCurse: Elo is always in a frame of reference
+ reCurse: By itself it never means anything
+ reCurse: Just like I could say self-play elo is meaningless
+ reCurse: Doesn't mean it is
+ NinjaDoggy: my point is if someone says "SF14 is 350 elo stronger than SF11"most people would think that's it's 350 elo higher in normal time controls for competitive games
+ NinjaDoggy: not 350 elo stronger at ultra bullet 10 + 0.1
+ reCurse: I disagree since what is the normal time control? TCEC? CCRL? CCRL Blitz?
+ reCurse: On what hardware?
+ sprkrd: why would be elo be something particular for "competitive human time controls"? It's not even specific to chess
+ sprkrd: point is, computer has a budget of 10s to make its move (let's forget about the increment for now), it can manage its budget anyway it wants. Under those circumstances, there's a 350 elo difference between approach A and approach B
+ reCurse: It's exactly like saying your new version has 90% winrate vs the old one
+ reCurse: What it actually means depends on the context
+ struct: If I check the win rate with "random" openings will it be more accurate to check bot strength?
+ NinjaDoggy: yes but, if you just say"SF14 is 350 elo stronger than SF11"most people agree SF11 is around 3400-3500 in most time controls used in competitionsbut SF14 is not 3750+
+ reCurse: It actually is
+ reCurse: <a rel="nofollow" class="external free" href="http://ccrl.chessdom.com/ccrl/404/">http://ccrl.chessdom.com/ccrl/404/</a>
+ jacek: busted
+ jacek: what is fat fritz doing there :s
+ reCurse: They decide not to dive in politics
+ reCurse: Something like that
+ reCurse: shrug
+ reCurse: Also the fact the statement says "vs SF11" implies to me self-play which means the measure is in no way usable in regular tables
+ reCurse: Because otherwise they'd have to say what is the reference pool used
+ NinjaDoggy: I mean... that's my pointthat you shouldn't expect to find in any of these tables stockfish 14 being 350 elo higher than stockfish 11
+ reCurse: I don't think anyone is
+ reCurse: That's why I don't get the misleading claim, the statement is actually accurate
+ NinjaDoggy: yes so saying "350 elo higher" is kind of misleading and imo "not meaningful"
+ NinjaDoggy: ok i guess misleading is too far, but not meaningful
+ reCurse: If someone says "the new version has 90% winrate vs the previous one" is that misleading?
+ reCurse: Because elo == winrat
+ reCurse: e
+ NinjaDoggy: yea nvm, not misleading just not meaningful&#160;:)
+ reCurse: Sure, though if you look in the tables the jump between 11 and 14 is still very meaningful
+ reCurse: Whether it's 100 or 300 elo isn't that big of a deal
+ reCurse: It's an exponential metric
+ NinjaDoggy: not disagreeing the jump is crazy
+ NinjaDoggy: but the claim of "350 elo over sf11" is not meaningful imo that's all
+ reCurse: Also FWIW my chess bot self-play elo sort of matches CCRL elo as well
+ reCurse: So it has value
+ struct: chessbase might need a bot
+ reCurse: And personally I find there's a lot more value on a chess bot that plays well with less resources than more
+ reCurse: But to each his/her/its own
+ NinjaDoggy: I agree with like all of your points, <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/59f0e64a-ee89-4a72-8289-b92dfbb14632">http://chat.codingame.com/pastebin/59f0e64a-ee89-4a72-8289-b92dfbb14632</a>
+ NinjaDoggy: oops codingame doesn't like essays ._.
+ reCurse: I wouldn't fault them for making that statement since it's actually correct and doesn't lead more credence to a format or a competition more than another /srhug
+ reCurse: If we have to worry about how everyone can interpret a statement we're actually doing PR work for free
+ reCurse: And then you have corpospeak
+ reCurse: No one likes that
+ reCurse: Haven't they historically always said the elo improvement in self-play for like all their releases?
+ sprkrd: actually I somewhat agree with NinjaDoggy. I don't like corpospeak either, but saying "SF14 has a 90% win rate against SF11" is not corpospeak and is both clearer and scientifically accurate
+ reCurse:&#160;??
+ reCurse: Elo is the exact same thing as winrate
+ reCurse: It's just exponential instead of linear
+ reCurse: I think you attribute way more to "elo" than it actually means
+ reCurse: It's just a unit
+ sprkrd: But for elo you need a pool of players
+ reCurse: No you don't
+ reCurse: You can have elo with just A vs B
+ sprkrd: elo when there are two players is just... complicating things unnecessarily
+ reCurse: No again
+ reCurse: The exponential measure has more value than the linear one
+ sprkrd: when you have two players you can report wr be much more straight to the point
+ reCurse: Tons of people measure improvement in elo over winrate
+ reCurse: I actually found it to be a much better unit after giving it a try
+ reCurse: In fact I'd say most release notes I've seen express elo improvement by self-play, otherwise they specifically mention +50 elo in CCRL or whatever
+ reCurse: If you need it to be more palatable
+ reCurse: 80 vs 90 winrate doesn't seem like much but it's actually huge
+ reCurse: The elo unit correctly shows that
+ sprkrd: i don't know... I think if I had to report a figure in a paper and there are only two contestants, WR is much more straightforward. Elo is good when you have several players, you assign an elo to each one and then you can estimate the win rate between any two players taking the difference and then the exponential (using the appropriate normalizing factors and all that) 
+ sprkrd: if there are only two players, I don't see why elo would be a more intuitive figure
+ reCurse: It's less approchable but more useful
+ sprkrd: so at first I was with you, now I changed my mind, sorry :cry:
+ reCurse: A winrate delta is useless without the winrate basis
+ reCurse: A elo delta is always useful
+ reCurse: Because 50 vs 55 doesn't tell nearly the same story as 90 vs 95
+ sprkrd: I'm talking merely from an outreach point of view. I understand that, as you say, elo would be more useful in your technical work depending on what you're doing. But for communicating scientific findings, maybe WR is clearer? 
+ sprkrd: Like, if I say SF14 wins against SF11 90% of the time, wouldn't that be somewhat clearer than saying it has +350 elo points?
+ reCurse: You took the original debate and completely changed it to another one
+ reCurse: But I think the chess community at large is much more used with elo as measurement so I disagree
+ MSmits: Marchete I submitted my non-loopy version again
+ sprkrd: I'm sorry if I shifted the debate, I was under the impression that I was making a valid remark, but I don't want to press further, it's not something I care all that much anyway.
+ reCurse: No worries I was just saying
+ reCurse: Also don't mind me I'm just a cranky jerk :P
+ MSmits: I'm a :poodle:
+ MaliciouslyCrypticUsername: o.O
+ sprkrd: I'm a bit of a cranky jerk too. I'm pretending here, but I actually went to my boxing bag and hit it with all my might imagining it was you :eyes:
+ struct: got a lucky submit I guess
+ reCurse: Wow ok
+ sprkrd: (just kidding :joy:)
+ sprkrd: (or not :eyes:)
+ struct: I cant beat pamplemus though
+ struct: and any NN&#160;:/
+ MSmits: wreck those NN
+ KiwiTae: sprkrd its not possible we are all nerds nobody doing sports here hehe
+ struct: MSmits only possible with a NN im afraid
+ reCurse: I guess I'm what they call a people person
+ MSmits: hey, i sit on my hometrainer cycle watching netflix a lot
+ MSmits: like a pro
+ KiwiTae: MSmits you are on ZWIFT?
+ MaliciouslyCrypticUsername: MSmits is what we call an "athlete"
+ MSmits: is that a machine?
+ Astrobytes: Do you also actually cycle or just sit there?
+ MSmits: lol Astrobytes
+ MSmits: no i actually cycle
+ MaliciouslyCrypticUsername: XD
+ KiwiTae: its for virtual rides you can use it with a hometrainer
+ MSmits: oh, nah
+ MSmits: i just watch some shows i would normally not spend time watching but want to know what happens anyway
+ MSmits: to clear my netflix queue
+ reCurse: Funny I just stop watching instead
+ reCurse: :P
+ sprkrd: KiwiTae I wish I could contradict you (regarding the sports bit), but it's been a while I have not done any sport due to a knee injury&#160;:(
+ MSmits: you are a more logical person
+ sprkrd: since I've done any sport*
+ KiwiTae: sprkrd I am recovering from double surgery i got your feelin~
+ MSmits: not sure what knee injury you have sprkrd, but mine got better from the cycling
+ MSmits: something to do with strengthening muscles i guess
+ sprkrd: I actually can do several sports, including cycling, but I had to stop doing judo. Judo was my jam
+ reCurse: Intimidation attempt spotted
+ MSmits: ahh yeah judo is hard on your body
+ MaliciouslyCrypticUsername: Wait I just realized I made a stupid mistake in my CSB code-
+ Astrobytes: lol
+ MaliciouslyCrypticUsername: math.atan2 returns radians
+ MaliciouslyCrypticUsername: not degrees
+ MaliciouslyCrypticUsername:&#160;:?
+ MSmits: i started judo at 2 in diapers, stopped when I was 11
+ MaliciouslyCrypticUsername:&#160;:/
+ sprkrd: reCurse :eyes:
+ MSmits: my first real match,i broke my collarbone
+ MSmits: was also my last
+ sprkrd: D:
+ KiwiTae: :joy:
+ KiwiTae: ush
+ Astrobytes: MSmits: I see the scores are evening out on D&amp;B, near identical winrates?
+ MSmits: Astrobytes, i got 2 versions now
+ Astrobytes: :rofl: Judo defo not your bag lol
+ MSmits: 1 is 50% mikla, 75% vs top 5
+ MSmits: 1 is 40% mikla, 100% vs rest
+ MSmits: the one up now is the second
+ Astrobytes: that's the current one
+ Astrobytes: yeah
+ reCurse: The way my bot uses its king in the front lines gives me a heart attack sometimes
+ MSmits: well kings are harder to mate when they have a lot of room to move :P
+ Astrobytes: lol, likes to play edgy moves eh
+ sprkrd: how can you expect your subjects to follow if your king doesn't lead?
+ reCurse: Surrounded by 2 bishops and a knight but no problem I'll just walk over there
+ reCurse: *enemy
+ Astrobytes: hehehe
+ sprkrd: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=EYLeoN7ovnk">https://www.youtube.com/watch?v=EYLeoN7ovnk</a>
+ MSmits: Astrobytes my hope is to improve version 1 with a better score solver, so i will get top 5 back to near 100% and get mikla slightly above 50%
+ Marchete: MSmits :D
+ Astrobytes: Your score solver is still the negamax?
+ Marchete: I'm "just" 8pts below
+ MSmits: yes Astrobytes
+ MSmits: but it only starts at endgame
+ MSmits: and uses about 0,1 ms
+ MSmits: no reason to not start solving sooner
+ Astrobytes: I was about to recommend that
+ MSmits: but it's a bit complicated to code due to sacrifices and such, what to prove and what not
+ MSmits: prune i mean
+ MSmits: not prove
+ Astrobytes: Seems worth the extra effort
+ MSmits: oh, btw, there is another thing i can do to get nr 1
+ Astrobytes: spam
+ MSmits: first push up top 5 and pull down mikla with version 1
+ NinjaDoggy: LOL
+ MSmits: then do version 2, wreck everyone but  mikla and become nr 1
+ Marchete: ezpz
+ NinjaDoggy: play the leaderboard&#160;;)
+ Marchete: I can spam submit too
+ MSmits: yeah, i am relatively safe from that right now, you will hurt mikla more than me
+ Astrobytes: that's a wanky move though, and temporary
+ MSmits: yeah i would not
+ Marchete: 50% winrate him, 0% you
+ MSmits: it's because my current bot does the opposite of loopy mcts
+ MSmits: so it counteracts your loopyness
+ Marchete: :rage:
+ MSmits: so i win on nim
+ Marchete: that's my unhappy face
+ Marchete: I had some 35-40% winrate vs you
+ MSmits: yeah thats with loopy
+ MSmits: nim becomes useless then
+ Astrobytes: loopy?
+ MSmits: lots of little 4 loops
+ Marchete: lol no
+ MSmits: and other simple objects
+ Marchete: I'm timeouting
+ Marchete: :D
+ Astrobytes: Ah right
+ struct: msmits just make a donation to marchet paypal
+ struct: then you get pushed
+ MSmits: hehe
+ Marchete: yeah
+ Marchete: at the cost of 1 paper
+ MSmits: ohh
+ Astrobytes: :rofl:
+ MSmits: i notice i still get loops vs toy
+ MSmits: you
+ MSmits: so the counteracting is not working very well
+ MSmits: why are you timeouting
+ MSmits: i mean, you got to rank 3 with this bot
+ Marchete: I'm timeouting a lot
+ MSmits: yeah but why specifically against me
+ Marchete: I think it's from graphs
+ MSmits: if you time out this much in general
+ Marchete: timeout?
+ Marchete: no no
+ MSmits: you would not be rank 3
+ Marchete: it's with everybody
+ MSmits: but more with me
+ Marchete: it must be the structures
+ Marchete: that overlaps and pointers got wrong
+ Marchete: i have structs with unions
+ MSmits: so you do nothing with nim right?
+ MSmits: you basically bet everything on score solving
+ MSmits:&#160;?
+ MSmits: which is a good bet btw, if you can force maps like this
+ Marchete: I try to force
+ MSmits: I migth need to let go of nim, or at least get rid of the sacrifice moves
+ Astrobytes: add nimsolver = #1
+ MSmits: not vs a bot like marchetes
+ Astrobytes: I meant Marchete
+ MSmits: if he improves it, he may wreck mikla
+ Marchete: I think nim is useful
+ MSmits: yeah but sacrificing costs you the game if you only rely on nim and your opponent forces loopy boards
+ Marchete: it depends when
+ MSmits: and nim requires sacrifice often
+ Astrobytes: Not rely on nim, a two-pronged approach
+ Astrobytes: *only on nim
+ MSmits: what you can do is detect whether nim is a good approach
+ MSmits: for example, if there are already a few long chains
+ Astrobytes: Yes, otherwise fall back 
+ MSmits: did i mention my bot is already 3.6k lines
+ Astrobytes: Yes
+ Marchete: but it seems to me that we are always ending with 23-26, you winning
+ Marchete: you always do base?
+ MSmits: thats because when you are in control you still do have an advantage when solving
+ Marchete: down line?
+ Marchete: at start
+ MSmits: what do you mean base
+ Marchete: bottom 1
+ MSmits: oh that
+ MSmits: mikla is the reason for that
+ MSmits: it's like this
+ Marchete:&#160;??
+ MSmits: when i cant nimsolve
+ MSmits: i dont want to simplify the board for him
+ MSmits: so i take the least splitting move
+ MSmits: so as not to divide and conquer for him
+ MSmits: and that happens to end up being on an edge, usually the bottom
+ Marchete: ahh
+ MSmits: then he probably wont solve either
+ MSmits: and if he plays a splitting move, i might be able to solve instead
+ MSmits: thats the idea anyway, doesnt often work
+ MSmits: but who cares, random line, or bottom
+ MSmits: i guess i can be counterbooked now&#160;:)
+ Marchete: I don't think so
+ MSmits: though, the mcts still has random
+ Marchete: I just do randoms
+ MSmits: so it's doubtful
+ MSmits: ohh
+ MSmits: i was wrong, no this is my mcts doing this
+ MSmits: i think it thinks chains will be longer with a long line at the bottom
+ MSmits: or something
+ MSmits: what a weird bot
+ MSmits: your bot isnt having it though, it just builds loops out of it&#160;:)
+ Marchete: I try to do loops :D
+ MSmits: mine isnt exactly doing loops. It just tries to minimize the controlled value. I actually eval using floodfills and a graph
+ MSmits: well when i do the loopy version
+ MSmits: it's part of my score solver
+ MSmits: i just copied it into my mcts eval
+ Marchete: but you too are too high in scores...
+ MSmits: what do you mean
+ Marchete: +8pts
+ MSmits: the rating?
+ MSmits: or in a game?
+ Marchete: leaderboards
+ MSmits: ahh, well i win on nim vs almost everyone 
+ MSmits: and when nim doesnt work, the score solver is pretty good
+ MSmits: just a little sad mikla out-nims me somehow
+ MSmits: so we all need to make this a score solver meta&#160;:)
+ Marchete: this game is like playing mind games vs the enemy :D
+ MSmits: yeah, I like it because you can kinda recognize the strategy if you watch a lot of games
+ MSmits: thats not true for every board game here
+ reCurse: Less a game and more a math problem IMO
+ MSmits: reCurse true, when the meta is nim solving
+ MSmits: but with score solving, it becomes partially, good old negamax
+ MSmits: (still need some math)
+ jacek: nice jump in rank struct
+ struct: thanks, but I think I was a bit lucky
+ struct: still NNs feel unbeatable with a normal bot
+ MSmits: mostly they are yeah
+ MSmits: you can still have some pride when being the best non-NN bot
+ MSmits: who is this in BT?
+ struct: who?
+ struct: pamplemus?
+ MSmits: possibly
+ MSmits: it could also just be you
+ struct: ah yes its him
+ JudgeAL: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/7159dfaa5250f2e4cac253d0aeee2407519d">https://www.codingame.com/contribute/view/7159dfaa5250f2e4cac253d0aeee2407519d</a>
+ jacek: only you can stop the fire
+ struct: I didnt get your question at first :p
+ MSmits: ahh ok
+ JudgeAL: one more approval plz
+ JudgeAL: only if u think its good ofc
+ Astrobytes: Patience is a virtue;
+ NinjaDoggy: wait why does pamplemus's strat look so simple ._.
+ struct: because it is
+ NinjaDoggy: just push everyone together until you solve for a win
+ MSmits: lol
+ struct: I feel like it is that 
+ MSmits: yeah that looks really simple
+ MSmits: I could copy that
+ NinjaDoggy: and it's beating every non-NN bot ._.
+ MSmits: kinda shows you how hard it is to write a good eval for this game
+ MSmits: if a simple heuristic start can beat everyone elses
+ JudgeAL: which game are we talkin about here?
+ NinjaDoggy: breakthrough
+ MSmits: <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/bot-programming/breakthrough/leaderboard">https://www.codingame.com/multiplayer/bot-programming/breakthrough/leaderboard</a>
+ JudgeAL: :thumbsup:
+ MSmits: though, it is of course completely possible this weird march in formation comes from a search and his eval just makes that happen
+ MSmits: might not be hardcoded
+ JudgeAL: hmmm, is this game solved?
+ struct: I think he prunes the moves to do thi
+ MSmits: not this size
+ struct: this*
+ NinjaDoggy: not solved but if you watch recurse replays it might look like it is&#160;;)
+ MSmits: 6x6 might be solved though
+ MSmits: not sure where the limit is
+ JudgeAL: ahh I see
+ MSmits: we also have a connect-4 that isnt solved
+ MSmits: up to 8x8 is solved, but we have 9x7
+ struct: we also have yavalath which is solved
+ MSmits: i solved it for non-pie rule :P
+ JudgeAL: dang
+ NinjaDoggy: oh connect four is larger&#160;:/
+ JudgeAL: alright imma try to solve breakthrough
+ sprkrd: MSmits connect-4 is also solved for (2n)x7, I believe
+ NinjaDoggy: i was wondering why people weren't trying to play center LOL
+ struct: NinjaDoggy still fits in 64 bits
+ MSmits: sprkrd you mean by mathematical proof?
+ reCurse: Ugly multiplications though
+ sprkrd: yes, mathematical proof
+ MSmits: oh thats cool, I did not know that
+ sprkrd: maybe I got the dimensions wrong, but there was some general case (2n)x7, 7x(2n) or something like that that was solved in general
+ JudgeAL: I feel like breakthrough should be solvable
+ MSmits: NinjaDoggy the reason they dont play center is mostly because of pie rule
+ NinjaDoggy: sorry pie rule?
+ jacek: or streal rule
+ NinjaDoggy: oh :O
+ MSmits: player 2 gets to steal player 1's move
+ jacek: s/r//
+ MSmits: so they play a balanced move, hopefully solved as draw
+ MSmits: which is second from the left or right
+ NinjaDoggy: ahhh makes sense, thanks
+ MSmits: best move without pie rule is not center btw
+ MSmits: it's left or right of center
+ JudgeAL: oh what...
+ NinjaDoggy: that's a really nice way to balance the game&#160;:)
+ JudgeAL: lol never thought Id be listening to connect4 opening theory
+ MSmits: it's the easiest way, assuming a balanced start exists
+ reCurse: It's lazy game design :P
+ jacek: we have also memes for connect 4
+ MSmits: well the demands put on a game to make it balanced without rules like this are quite hard
+ MSmits: for bot play anyways
+ MSmits: humans dont really care unless they play professionally high level
+ NinjaDoggy: it also preserves the original connect 4 gameplay 
+ MSmits: pie rule is actually used in c4 afaik
+ reCurse: Or swap sides~
+ reCurse: This tilde sucks
+ MSmits: what do you mean swap sides
+ NinjaDoggy: good ole play as first, then play as second i assume
+ MSmits: but isnt that the same as pie rule?
+ reCurse: Nope
+ MSmits: mmh i am trying to grasp the difference
+ NinjaDoggy: no because you would play for win without account for steal
+ reCurse: 2 games instead of 1
+ NinjaDoggy: when going first
+ MSmits: ohh that kind of swap
+ MSmits: yeah but that is a worse solution for unbalanced games
+ jacek: but that would lead to draws
+ MSmits: exactly
+ NinjaDoggy: technically they both lead to draws right?
+ MSmits: with a small imbalance it's ok
+ NinjaDoggy: difference is the draw states might be more complex with pie rule
+ MSmits: not really NinjaDoggy, pie rule balances a single game
+ sprkrd: i prefer the kung fu chess way of balancing games
+ sprkrd: <a rel="nofollow" class="external free" href="https://www.kfchess.com/">https://www.kfchess.com/</a>
+ MSmits: swapping gives you two foregone conclusions that add up to a draw
+ MSmits: if the imbalance is big enough
+ NinjaDoggy: yea but fundamentally there's no difference
+ NinjaDoggy: it just depends on the amount of imbalance
+ MSmits: I think there's a fundamental difference
+ reCurse: There is a fundamental difference if there is no starting move with 50% winrate
+ reCurse: You just hope there's one
+ NinjaDoggy: ok true
+ MSmits: ok say you have a bot that is a little better and would win 55% on a balanced game
+ MSmits: now let it play an imbalanced game
+ MSmits: he always loses when he is not p1
+ JudgeAL: alright preliminary hypothesis on my journey to solve breakthrough
+ NinjaDoggy: technically same arguement can be made:in the imbalanced game, the better bot might get a draw when not p1
+ MSmits: so on swap he'd have 50%
+ MSmits: instead of 55%
+ JudgeAL: black has a forced win
+ NinjaDoggy: but if we assume the balanced version has a forced draw it's technically the same thing
+ MSmits: my point is, the game being balanced does not mean that two equally strong players always draw
+ NinjaDoggy: just more complexity
+ JudgeAL: does black usually win in breakthrough currently with the bots?
+ MSmits: but with an imbalanced game two equally strong players *will* always draw
+ NinjaDoggy: doesn't it still just depend on the complexity of the game?
+ MSmits: if your bot is stronger, you need to be strong enough to overcome the disadvantage 
+ MSmits: if you're only a little stronger, with swap, the advantage completely disappears
+ MSmits: with pie rule it does not
+ MSmits: yeah complexity enters into it somewhat
+ reCurse: Pie rule assumes there's a 50% winrate starting move
+ reCurse: Which I would argue is more often wrong
+ MSmits: a balanced one yes
+ MSmits: but even if not
+ MSmits: it's better than not having it at all
+ NinjaDoggy: ok so just pie rule + swap&#160;:)
+ reCurse: It's better to swap
+ MSmits: the rule can only make things better, not worse
+ NinjaDoggy: pie rule to make the game more balanced, swap anyways to compensate for the small imbalance
+ MSmits: in uttt, pie rule would have been better than swap
+ reCurse: Pie rule is insanely annoying to deal with
+ reCurse: No I disagree
+ MSmits: allright, best example of all: Yavalath
+ MSmits: I solved it for center move
+ MSmits: if you dont have pie rule, with swap it would be 100% draw
+ reCurse: Forced start with swap is better than pie with swap
+ MSmits: agreed
+ MSmits: a forced start is basically a forced pie rule
+ reCurse: My point is you should have solutions at least equally easy to implement better than pie rule
+ MSmits: instead of letting players choose a balanced move, you let the rules pick the balanced move
+ MSmits: so forced start is similar
+ reCurse: The difference is you don't have to write a different heuristic to decide if the start is balanced or not
+ reCurse: Which I find insanely obnoxious
+ MSmits: ahh but pie rule has 1 major advantage, it's a very safe thing to put into your game.
+ MSmits: if you're going to force a balanced start, you need to know what it is
+ MSmits: with pie rule, the meta will figure it out
+ MSmits: for you
+ reCurse: With swap the force doesn't need to be balanced just close enough
+ MSmits: lazy game design sure
+ reCurse: You introduced a second game
+ reCurse: With pie rule
+ reCurse: Therefore it sucks :P
+ MSmits: 2 games are not better than 1&#160;?
+ reCurse: Everyone loves wood league so I guess so
+ MSmits: you're right that our C4 would have been better with forces move 1 start
+ reCurse: Imagine chess960 with pie rule at start
+ reCurse: Not only I have to write a chess bot
+ reCurse: I also need to write a great first move eval
+ reCurse: ugh
+ MSmits: but yavalath is actually interesting for having various starts that work as balanced moves
+ MSmits: 5 out of 9
+ MSmits: i guess randoming them would have been cool too
+ MSmits: but then again you'd have to know at design time which ones they are
+ reCurse: You can progressively make forced random starts better when they're proven to be imbalanced
+ reCurse: It's seamless
+ reCurse: Bot makers don't have to worry about your crappy game design :P
+ MSmits: you mean just change the forced starts?
+ reCurse: Sure
+ reCurse: You can start with pure randoms
+ reCurse: You monitor games
+ MSmits: I guess if you warn botmakers that the start can be changed
+ reCurse: Weed out the imbalanced ones
+ reCurse: But it's always random start
+ reCurse: They have to assume it changes
+ MSmits: ohh ok
+ reCurse: So no break
+ MSmits: yes
+ NinjaDoggy: just use UCB1 or something&#160;;)
+ MSmits: thats a nice solution reCurse
+ reCurse: Now we're talking NinjaDoggy
+ MSmits: I like it
+ MSmits: uttt would be so much better with this
+ reCurse: Yes
+ reCurse: Assuming you mean so much as a multiplicative ratio
+ reCurse: Then times zero works
+ MSmits: haha
+ MSmits: that uttt-hate :grin:
+ MSmits: seems like we end up agreeing at the end this time
+ MSmits: feels weird
+ MSmits: say something I dont agree with
+ NinjaDoggy: wait this idea is actually really cool because it extends beyond just the first move :O
+ MSmits: ye
+ MSmits: well its used in games
+ MSmits: i think gomoku uses it, and go I think&#160;?
+ NinjaDoggy: no way Go uses it...
+ reCurse: Well there are some times I'm not completely wrong
+ MSmits: indeed
+ NinjaDoggy: isn't Go just balanced by komi?
+ MSmits: not sure, there's a ton of ways to play go
+ MSmits: apparently
+ MSmits: yeah i dont find it for go
+ MSmits: "ournament Gomoku has adopted the swap2 opening protocol starting in 2009. In Swap2, the first player starts by placing three stones, 2 black and 1 white, on the board. The second player then selects one of three options: play as black, play as white and place another white stone, or place two more stones, one white and one black, and let the first player choose the color" 
+ MSmits: sounds a bit like pie rule too
+ MSmits: very complicated
+ MSmits: seems like all these x-in-a-row games have balance issues that need solutions like this
+ reCurse: I wish I was smart enough to understand go
+ JudgeAL: I think everyone can understand it, but hard to get good at
+ NinjaDoggy: it's not about being smart it's about building intuition from a young age&#160;;)
+ reCurse: Well I mean I understand the rules
+ reCurse: I just don't "get" it
+ NinjaDoggy: tune your brain NN early :P
+ JudgeAL: lol get dem pattern recognition
+ JudgeAL: okay, breakthrough is harder to solve than I initially thought but still doable
+ Drichie: Quick question. I am doing the Chuck Norris Unary puzzle. My code works fine until I'm given a&#160;% symbol. My Code reads it in as 100101, but the puzzle wants it read in  as 0100101. What am I doing wrong when it comes to symbols?
+ struct: padding 0
+ NinjaDoggy: @judgeAI you really think it's solvable for 8x8?
+ JudgeAL: yeah
+ struct: <a rel="nofollow" class="external free" href="https://tromp.github.io/c4/c4.html">https://tromp.github.io/c4/c4.html</a>
+ struct: solved for p2
+ Drichie: geez didn't even notice that, thank you!
+ jacek: breakthrough isnt solved for 6x6. 8x8 is orders of magnitudes bigger
+ struct: i think its only solved up to 5x5
+ JudgeAL: do you know if 6x4 is solved?
+ reCurse: No one made the breakthrough yet
+ JudgeAL: lol
+ NinjaDoggy: :joy:
+ JudgeAL: or like anyone have a link to solved versions?
+ NinjaDoggy: ok 6 by 6 seems relatively reasonable I suppose? since 36 choose 12 is like 1.25 billion
+ sprkrd: seems so
+ sprkrd: but the bound is more complicated than that
+ sprkrd: you have to consider also that some pawns may be missing
+ sprkrd: so it's not just arranging 12 pawns over 36 cells
+ NinjaDoggy: yea and that's only your pawns
+ NinjaDoggy: not counting opp pawns yet :P
+ JudgeAL: so for 6X2 black has forced win
+ JudgeAL: Im trying to build up from there
+ NinjaDoggy: but if you factor in invalid states, and pruning that can be done because it's 2 player game it seems possible to solve 6 by 6 with a regular machine
+ NinjaDoggy: oh are you trying to solve it mathematically as opposed to brute forcing?
+ JudgeAL: yeah
+ sprkrd: he's doing it right
+ struct: This article shows 6x6
+ struct: <a rel="nofollow" class="external free" href="https://scholarworks.csun.edu/bitstream/handle/10211.3/174085/Isaac-Andrew-thesis-2016.pdf">https://scholarworks.csun.edu/bitstream/handle/10211.3/174085/Isaac-Andrew-thesis-2016.pdf</a>
+ struct: with tablebase
+ struct: But is not solved
+ jacek: <a rel="nofollow" class="external free" href="https://en.wikipedia.org/wiki/Breakthrough_(board_game)#Game_Solving">https://en.wikipedia.org/wiki/Breakthrough_(board_game)#Game_Solving</a> 6x5 5x5 3x7 solved
+ sprkrd: maths for the win
+ struct: They used 5th row tablebase for 6x6
+ JudgeAL: oh
+ NinjaDoggy: anyone use endgame table in breakthrough?
+ struct: i dont
+ struct: but I check for wins from 3rd row
+ jacek: just some ifology 
+ struct: with a few shifts
+ JudgeAL: oh dang looks like second player winning for 8x8 is likely
+ NinjaDoggy: in general terms what does a mathematically solution even mean?
+ NinjaDoggy: like if a game is proven to be a draw
+ NinjaDoggy: but they can't extract the sequence of moves, how does that work?
+ sprkrd: depends on the proof
+ sprkrd: the proof for tic tac toe is constructive, you can extract the sequence of moves, for instance
+ MSmits: some proofs of this kind are super straightforward
+ sprkrd: but some proofs are not constructive
+ JudgeAL: yeah could be "fully/strongly solved" or like just solved in the sense you know the outcome of a perfect game
+ MSmits: I can tell you that our D&amp;B game is not solved as a draw
+ MSmits: i can mathematically prove this
+ NinjaDoggy: :O
+ JudgeAL: wats D&amp;B\
+ MSmits: 49 boxes to capture, can't tie :P
+ JudgeAL: oh
+ NinjaDoggy: :joy:
+ JudgeAL: dots and boxes?
+ MSmits: yeah
+ NinjaDoggy: good proof MSmits, thanks&#160;:)
+ MSmits: i think they solved checkers by a combination of opening databases, endgame databases, mathematical proof and brute search
+ NinjaDoggy: I like how you separate endgame databases from brute search :P
+ MSmits: well I guess... another brute search&#160;:)
+ struct: weakly solved
+ MSmits: weakly solved is what we mean by solved
+ JudgeAL: so what Im hearing is brute search *3 + some math
+ struct: I think this is the reason why checkers tournaments start from certain positions
+ MSmits: might be yes
+ MSmits: positions that would not be reached by a solver
+ NinjaDoggy: i think not reached is not quite right
+ NinjaDoggy: but not fully solved by the solver
+ MSmits: not reached in the sense that an ab pruned minimax doesnt need to visit all branches
+ NinjaDoggy: that's more like reached, but not solved right?
+ NinjaDoggy: i guess it's a small semantics thing
+ MSmits: yes semantics i think
+ MSmits: btw, brute search kinda sounds like it's simple
+ MSmits: but what they did for checkers wasnt simple at all, it's some genius stuff in there from the little i read of it
+ MSmits: endgame databases are a whole corner of study alone
+ MSmits: especially the indexing to make them as compact as possible to fit in RAM and such
+ MSmits: computer limitations makes people inventive. Today's computer power makes people lazy
+ NinjaDoggy: true&#160;:)
+ MSmits: i did a little indexing stuff for oware. Gave me some headaches to do this
+ jacek: and then you can owned by 10 copycats
+ MSmits: assigning a number of a certain distribution of seeds over 12 pits
+ MSmits: haha yes that too
+ MSmits: I remember trying to overfit to robo and re curse, back when they were the only nns
+ MSmits: could not imagine then that the top 10 would be all NN
+ MaliciouslyCrypticUsername: Anyone here who's familiar with python willing to help me debug some code?&#160;:)
+ TobiasA: me pick me
+ TobiasA: :raised_hand:
+ ANONYMOUS42: wow someone is really eager to help
+ ANONYMOUS42: good for you
+ TobiasA: people with maliciously cryptic usernames are not to be trusted though
+ MaliciouslyCrypticUsername: Oki ty
+ MaliciouslyCrypticUsername: &gt;,&gt;
+ AstroHydes: don't worry about MCU, relatively trustworthy I believe
+ Astrobytes: Hm, wrong window
+ MaliciouslyCrypticUsername: xD
+ struct: need to find next game where I can reuse my mcts with little to no effort :p
+ jacek: amazons?
+ struct: to many moves for me
+ Astrobytes: lazy git :D
+ MSmits: it's *your* game!
+ MSmits: and when are you making a yavalath both while we're at it
+ MSmits: bot
+ TobiasA: ppl who name themselves anonymous make their unidentifiability their identity which make them a living paradox
+ TobiasA: :imp:
+ MaliciouslyCrypticUsername: o.o
+ jacek: o, i can follow him
+ MSmits: well I just think he is a fan of MCU movies and is afraid to come out and say it
+ MSmits: afraid of nerd judgement
+ NinjaDoggy: but... isn't MCU movies pretty mainstream now?
+ MaliciouslyCrypticUsername: O.O
+ jacek: i think he meant author of yavalath
+ MSmits: we're not mainstream here&#160;:)
+ Astrobytes: There's another MCU
+ MSmits: oh no, don't start on the x-men movies again Astrobytes
+ Astrobytes: No, in chat
+ MSmits: o
+ MaliciouslyCrypticUsername: lol
+ MSmits: thanks Marchete
+ MSmits: gj
+ Marchete: :thumbsup:
+ jacek: hm?
+ Marchete: even a broken bot is useful
+ MSmits: he pushed me to nr 1:P
+ MaliciouslyCrypticUsername: Wow I completely reset my old code, wrote a rudimentary bot, and it's in the exact same rank as my old one after submitting
+ MaliciouslyCrypticUsername: Not sure what that says about my old one
+ MaliciouslyCrypticUsername: =,=
+ MSmits: depends on your rank
+ MSmits: could be they're both awesome
+ MaliciouslyCrypticUsername: 643 out of 6677... gold csb
+ NinjaDoggy: rudimentary bot with awesome rank :thinking:
+ MSmits: like that plamop... something guy
+ MaliciouslyCrypticUsername: It's just... simulation 5 turns ahead... that's all...
+ MSmits: in BT
+ MaliciouslyCrypticUsername: rip gtg
+ NinjaDoggy: hahaha true :P
+ MSmits: MaliciouslyCrypticUsername that rank is probably better than -3vel though
+ NinjaDoggy: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/2f99d0b1-ff66-411b-a4c4-9f8ee4bae9f2">http://chat.codingame.com/pastebin/2f99d0b1-ff66-411b-a4c4-9f8ee4bae9f2</a>
+ MSmits: yeah thats what he does
+ MSmits: you cracked it&#160;:)
+ Astrobytes: *broke through
+ struct: sim is quite simple too
+ MSmits: how do you know
+ struct: Because I did it pretty fast
+ MSmits: ohh i thought you meant the other guys sim
+ MSmits: sure yes, its quite simple
+ Astrobytes: I think it's the general case. It's not hard to sim
+ NinjaDoggy: can anyone help me with some pruning ideas in sokoban?
+ NinjaDoggy: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/sokoban">https://www.codingame.com/ide/puzzle/sokoban</a>
+ NinjaDoggy: I already solved the puzzle with basic bitboarding + BFS, but now i'm trying to think of clever pruning ideas :D
+ Astrobytes: don't push boxes in corners, hash states
+ Astrobytes: all I know :P
+ MSmits: hmm isnt there some way to also prune boxes on edges when there's no way to get them off the edge/
+ NinjaDoggy: yea I already got the hashing part
+ NinjaDoggy: and I have some ideas about precomputing:
+ NinjaDoggy: so given the position of the pusher and the position of a box
+ TobiasA: the only technique i know that has the word pruning in it is "alpha beta pruning"
+ NinjaDoggy: assume there's only that box, compute if you can push the box to a target location
+ NinjaDoggy: and this is precomputable in N^2(N = number of empty tiles)
+ MSmits: I never opened that puzzle before. another awesome piece of work by eulerscheZahl&#160;:)
+ TobiasA: prooning
+ NinjaDoggy: but can't think of anything else&#160;:(
+ MSmits: seems like a good thing to do 
+ NinjaDoggy: yea it's pretty neat since computing it only takes N^2 and using it to prune is just 1 operation in the bitboard
+ NinjaDoggy: but it's still pretty basic since it doesn't deal with multiple boxes at all&#160;:/
+ MSmits: well i dont think more than 1 box is doable
+ MSmits: if there is a second box you're not just dealing with it as an obstacle
+ MSmits: it also still needs to go to its own destination
+ NinjaDoggy: oh I guess if i wanted, I could just extend it to add more boxes
+ NinjaDoggy: like precompute all arrangements of 2 boxes
+ NinjaDoggy: and see if both boxes can be pushed to a target
+ MSmits: yeah, that would give you a huge table though
+ NinjaDoggy: N = number of empty tiles
+ NinjaDoggy: storage needed would be N^(boxes+1) / 64 :P
+ sprkrd: you just wanted to do a shameless plug of your awesome pruning idea, didn't you :smirk:
+ MSmits: thats ok
+ NinjaDoggy: he found me out :P
+ sprkrd: I think yours is the best pruning idea I've heard until now
+ Astrobytes: :grin:
+ MSmits: me too
+ sprkrd: (the thing with just 1 box)
+ Astrobytes: did you test it yet?
+ NinjaDoggy: implementing it now
+ MSmits: euler needs to make a sokoban2 puzzle that needs the pruning
+ NinjaDoggy: was also hoping to find some golden egg someone else came up with&#160;;)
+ sprkrd: I would go with that, with just 1 bot
+ sprkrd: that deals with corners, edges, and even other trickier positions
+ NinjaDoggy: yea I'll start with the 1 box and see how much it prunes
+ sprkrd: box*
+ NinjaDoggy: too used to typing bot :joy: relatable
+ sprkrd: yeah :joy:
+ Astrobytes: I end sentences with&#160;;
+ NinjaDoggy: LOL :joy:
+ MSmits: Astrobytes switch to python and people won't notice your complete detachment from the non-coding world
+ Astrobytes: :rofl:
+ sprkrd: i'd rather see how he'd speak if he switched to Lisp
+ Astrobytes: ()
+ MSmits: with a lisp, obviously
+ sprkrd: (with a lisp (obviously))
+ MSmits:&#160;:)
+ MSmits: I got a request for help last night
+ MSmits: from someone in China
+ sprkrd: you have to take a plane?
+ Astrobytes: on CG or real life?
+ MSmits: but was about to sleep so couldnt help. But I think he/she was communicating through google translate
+ MSmits: CG
+ MSmits: was a nice person, but it's hard to understand through translation
+ MSmits: getting a general simple idea across works, kinda, but complex coding problems...
+ AstroHydes: How do you know they were nice then?
+ Astrobytes: argh 
+ MSmits: argh what animal is that
+ MSmits: he/she was just super polite
+ Astrobytes: I was just expressing frustration at typing from my alt again, I have disabled chat on it now
+ MSmits: ahh ok
+ MSmits: i do it too
+ MSmits: we suck at smurfing
+ Astrobytes: I know eh
+ KiwiTae: I am worse I forgot my alt logs
+ Astrobytes: :rofl:
+ MSmits: lol
+ MSmits: this is fun if it happens right after you submitted your best bot on it
+ MSmits: it'd be up there and you cant beat it
+ Astrobytes: hehehe
+ MSmits: eh, mr CG dev, I want to report an alt account
+ Marchete: hmm soryy smits
+ Marchete: sorry*
+ MSmits: oww
+ MSmits:&#160;:(
+ MSmits: ah well
+ Marchete: your 100% vs everyone else is no more
+ MSmits: always the same way too, i sacrifice a box and then you win on score
+ Marchete: the thing is that I removed the RNG
+ Marchete: in that submit
+ Marchete: to see if I can track the bug
+ MSmits: oh 
+ Marchete: so I play "heuristic"
+ MSmits: this is a timeout bug we're talking about right?
+ Marchete: anyways 57% vs mikla 30% vs you
+ Marchete: no problem, you are 1st again
+ MSmits: ah coolio
+ Marchete: "timeout" as overflow
+ Marchete: I think I go out of bounds
+ MSmits: of an array?
+ Marchete: yeah
+ Marchete: but as I said
+ MSmits: ah, should be easy to check
+ MSmits: cerr everywhere
+ Marchete: an array with multiples uses
+ Astrobytes: assert() 
+ Marchete: like it can hold a graph with 5 subgraphs
+ MSmits: fine, do it the "professional" way, with assert :P
+ Marchete: or a graph with N+ subgraphs
+ Marchete: cerr &lt;&lt; "A"&lt;&lt;endl;
+ Marchete: cerr &lt;&lt; "B"&lt;&lt;endl;
+ Marchete: etc :D
+ MSmits: yeah!
+ MSmits: i tend to do cerr &lt;&lt; "woops" &lt;&lt; endl;  
+ MSmits: cerr &lt;&lt; "wtf how?" &lt;&lt; endl;
+ Astrobytes: I have lots of those as well as asserts
+ Marchete: well, I'll see that another day
+ Marchete: 3rd with bugs is fine
+ Marchete: cya!
+ MSmits: very true
+ MSmits: gj and gn
+ Astrobytes: cerr &lt;&lt; "f***"/"why"/"test"/"this is wrong" etc
+ MSmits: thats what  i do yea
+ Astrobytes: later Marchete
+ MSmits: I've been listening to music while coding for days since we last talked about it
+ MSmits: same YT track
+ Astrobytes: and of course "wetrertewrtwert"
+ MSmits: i shared it here to say what sort of music i listen to and now i cant stop listening to it
+ Astrobytes: remind me again
+ MSmits: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=jiwuQ6UHMQg&amp;t=3660s">https://www.youtube.com/watch?v=jiwuQ6UHMQg&amp;t=3660s</a>
+ Astrobytes: Oh yeah I remember
+ MSmits: he's really really good
+ Astrobytes: If I want some chill stuff I often listen to Yann Tiersen
+ MSmits: oh i see
+ MSmits: this is not just chill stuff though, it's all celtic but there's different levels of energy
+ MSmits: I'll check this guy out too
+ Astrobytes: Speaking as a Celt, it's not so much Celtic but Celtic-inspired
+ MSmits: ahh ok, speaking as a non-celt nor expert, I just think it's very beautiful music :0
+ Astrobytes: Some of it isn't too bad
+ MSmits: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=wK-j2XVl_mc">https://www.youtube.com/watch?v=wK-j2XVl_mc</a> this is the one i like best, if you just want 1 track
+ Astrobytes: (from a Scots person that means it's alright)
+ MSmits: yeah, I'm just weird that i never bother to listen to music, so this is kinda new to me
+ MSmits: i dont like much at all
+ Astrobytes: Not bad. Euphoric moments.
+ MSmits: yeah
+ MSmits: it's just 1 guy behind a computer and I think he plays 1 instrument
+ Astrobytes: It's almost getting towards My Heart Will Go On material though
+ MSmits: keyboard +guitar
+ MSmits: ahh yes
+ MSmits: titanic 
+ Astrobytes: Yes I imagine many a sample pack was used in the creation of this music
+ MSmits: not sure what his workflow is, but he makes his money doing this
+ Astrobytes: Good on him The world needs music.
+ MSmits: yeah. I also like all the comments under his videos. I am used to watching YT about US politics and such
+ MSmits: so positive, these
+ Astrobytes: I try not to read most of the comments on YT unless I am familiar with the channel
+ MSmits: sometimes i cant resist a quick look, but pretty toxic
+ MSmits: "My hair starts to braid itself while listening to this."
+ Astrobytes: The Jerry Garcia channel I'm regular on is just full of stoned hippies. It's friendlier than a friendly thing at a friendliness convention.
+ MSmits: haha i can imagine
+ Astrobytes: Great music though, and genuinely nice people.
+ Illedan: Hi
+ Astrobytes: :wave:
+ MSmits: hi Illedan
+ Illedan: Renovation takes so much time :expressionless:
+ MSmits: depends on what you're renovating but sure
+ Astrobytes: What you doing?
+ Illedan: Kids room
+ Astrobytes: Ah
+ MSmits: ahh ok
+ Astrobytes: Preparing for the next stage
+ MSmits: we're back to reproduction again
+ Illedan: :D
+ Illedan: So, now I got 30 min to try and fix some snake shit
+ Illedan: Lets go!
+ Illedan: Did anyone manage to get some intellisense env with this CG JS?
+ struct: only for pixi
+ struct: But it wasnt great
+ Illedan: -.-
+ struct: I used intellij I think
+ struct: ultimate
+ Illedan: Same, but JS is crap
+ Illedan: ah
+ Illedan: I use CE
+ Illedan: Ok, stealing everything from Euler and hope it will work in the end&#160;:)
+ Illedan: yoloCoder3000
+ Astrobytes: lol
+ MSmits: no need to hurry Illedan snakes shit only once every 3 days at most
+ Astrobytes: *at least
+ Astrobytes: oh wait, yeah
+ MSmits: apparently they can take months between shits
+ MSmits: poor diet imho
+ Astrobytes: yeah, depends what they eat
+ Astrobytes: Once they finish digesting their meal they shit
+ Illedan: hmm
+ MSmits: thats how shit works
+ Illedan: I guess I can add that to the logic
+ Astrobytes: But it takes a long time for sneks
+ MSmits: yeah
+ Illedan: 3 days are outside CG timelimit though
+ MSmits: true
+ Astrobytes: And they only do 1 big jobby
+ MSmits: better give them diarrhea
+ Astrobytes: We might go for a few
+ Astrobytes: snek will make a not smol jobby after every meal
+ Astrobytes: Imagine an anaconda shite after eating something big...
+ Astrobytes: Could take a month but you don't wanna be there
+ MSmits: I'm sure it would be worse if you were the one getting eaten
+ Astrobytes: Very possibly
+ MSmits: but yeah i would not want to watch you get pooped out either
+ MSmits: btw Illedan dont mind us, but do save this chat for the backstory
+ Astrobytes: :rofl:
+ Illedan: xd
+ 3141948: &gt; Imagine an anaconda shite after eating something big...😂
+ Astrobytes: lol, sorry :D
+ Illedan: If I wasn't lazy I would make Nokia 3310 theme on this snake :P
+ MSmits: like euler did for minesweeper?
+ Astrobytes: haha you know :D
+ Illedan: ye
+ Illedan: But I'm not euler
+ Illedan: and I don't have time for this :P
+ Illedan: Wanted a quick and dirty new Optim
+ Illedan: yeyeye
+ Illedan: Astro will get a box of used diapers for putting me up for this
+ MSmits: priorities, right, a theme for kids room or a theme for snake
+ MSmits: easy choice imho
+ Illedan: Snake theme kids room!
+ MSmits: works
+ MSmits: also something to talk about with his/her therapist in 20 years
+ Astrobytes: Aw thanks man!&#160;:/
+ Astrobytes: :rofl:
+ Astrobytes: Snek theme for kids room would be awesome
+ MSmits: I like it when things go against the norm
+ Astrobytes: I always wanted to paint my room black so I could paint stars and nebulae on it
+ Astrobytes: Wasn't allowed&#160;:(
+ Illedan: If my kid want a pink unicorn room in a few years, I'll do it. But if I teach her right, it will be a giant NN on the wall :D 
+ Astrobytes: hahaha, ML kindergarten is real
+ KiwiTae: when u find a big booboo in your code that must have been in there for 3 4 months.. shame on me lol
+ Astrobytes: sounds normal&#160;:)
+ KiwiTae: It was making my bot refusing to converge towards a static target~ 
+ Astrobytes: what game?
+ KiwiTae: so annoying~ 2letters for a naughty behavior heh
+ KiwiTae: Astrobytes real life robot hehe
+ Astrobytes: Aha! Much more fun :D
+ Astrobytes: Casual or for work?
+ KiwiTae: both :sunglasses: :joy:
+ Astrobytes: Excellent answer&#160;:)
+ KiwiTae: casual work u do on a sunday evenin lmao
+ Astrobytes: Serious though, there are loads of kits out there to play around with
+ Astrobytes: I mean you could actually create a nail polish drying robot! :P
+ KiwiTae: Astrobytes would be sooo useful :joy:
+ Illedan: Alright off to bed. 200 lines of untested JS code done. Hope it works when I have time to finish it&#160;:)
+ Illedan: bye
+ IlyasDirham: follow for a follow
+ KiwiTae: see yaaa
+ TobiasA: buhbye
+ Astrobytes: later Illedan
+ Astrobytes: lol KiwiTae
+ GumChew: test
+ Astrobytes: segmentation fault
+ HeroicRobot_cf06: WHY MY CODE NOT WORK:if(1+1===3)
+ tunisian: hello 
+ Astrobytes: Because you are trolling HeroicRobot_cf06
+ SaifAli153: if((1+1)===3)check
+ MaliciouslyCrypticUsername: LOL
+ MaliciouslyCrypticUsername: Automaton2000
+ Automaton2000: any idea what that means lol
+ MaliciouslyCrypticUsername: nope i don't either :shrug:
+ FalINTOblivion0112: seems sus
+ phKvothe: Anyone else have it where after a couple runs, the pods quit doing the animation on screen?  I still get the printouts below, but would like to see the pods in action to determine the changes i need to make
+ TobiasA: :raised_hand:
+ Wontonimo: hiya TobiasA
+ TobiasA: ooooiiiiiii
+ TobiasA: long time
+ Wontonimo: yeah.  how's things?
+ Wontonimo: what browser are you using phKvothe&#160;?
+ phKvothe: I'm running in Chrome.  Just have to refresh the screen from time to time.  It seems to keep the code, so thats all good
+ Wontonimo: sometimes i use the share button to make the playback open in another tab.  it always plays perfectly in the other tab.  kinda kludgy way around it, but it works
+ TobiasA: it's been good
+ phKvothe: thank you, will try that!
+ Wontonimo: a benefit to keeping a few old playbacks in other tabs is that you can now reference back to them to see behaviour change difference with your new code
+ Wontonimo: have you been working on an challenge or multi TobiasA&#160;?
+ TobiasA: i've done some puzzles 
+ TobiasA: i'm trying to fix something in csb too
+ phKvothe: How do I tell if I'm faster?  Is it the number of steps to win?  I thought it might be time, but don't see that changing, however, my steps did go from 199 to 188, so that seems like it might be it.  But first time doing this, so just wanted to verify.
+ Wontonimo: what are you playing phKvothe&#160;?
+ phKvothe: Coders Strike Back
+ phKvothe: it was the listed top one for training, so just went with it
+ phKvothe: Once I click "Test in Arena", do I do anything else?  It looks like it just kicks off and plays against others automatically.  Is that correct?
+ Wontonimo: yeah, just sit back and watch battle tv
+ Wontonimo: or work on you next improvement, of go make a sandwich 
+ iBug: Security Check 
+ Wontonimo: 4520 4743 5543 8821 pin 445
+ Wontonimo: does it check out iBug&#160;?
+ Wontonimo: (I guess iBug is now going on a shopping spree)
+ iBug: My English is bad
+ Wontonimo: me too iBug.  me too
+ iBug: are you from?
+ Wontonimo: Canada
+ FalINTOblivion0112: guys im working on a contribution
+ FalINTOblivion0112: should i make the coc ez or hard
+ iBug: oh I am Chinese
+ FalINTOblivion0112: wut
+ Wontonimo: iBug was talking to me
+ FalINTOblivion0112: oh actually I am chinese too
+ FalINTOblivion0112: no cap
+ iBug: How to learn Engish
+ Wontonimo: i'm assuming it's like anything else.  practice.  A friend of mine learns new languages by trying to take all his notes in the new language
+ FalINTOblivion0112: I struggled when I was first trying to learn english
+ Wontonimo: me too
+ FalINTOblivion0112: But I studied and improved quickly by reading literature
+ Wontonimo: i had 4 good tutors and still wasn't able to make full complete sentence until 5 years tutoring
+ iBug: ok thk，iam going to work
+ LibgdxKotlinChampion: question b0ss
+ Wontonimo: have a good work day iBug.  hope to see you online another day
+ iBug: I Follow you 。see you next time
+ FalINTOblivion0112: i follow you iBug
+ Wontonimo: everyone follow everyone :tada: :tada:
+ iBug: following too
+ FalINTOblivion0112: yes
+ iBug: have nice day:sunglasses:
+ FalINTOblivion0112: you too bro
+ DeathWarrior990: hi
+ FalINTOblivion0112: Guys i have new contribution please view it thanks
+ FalINTOblivion0112: i need that for a skill tree level up lol
+ fiefia123: xixi

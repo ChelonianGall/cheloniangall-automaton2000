@@ -1,0 +1,765 @@
+ CyberLemonade: wow someone had a nice time
+ jacek: aww
+ LelouchVC2: Hey, Jeff Cavalier, AthleanX.com
+ Defflex: i'm new in JS
+ Defflex: the Van Eck sequence is pretty hard to me&#160;:(
+ rkhapov: gays, do u now flags of C++ compiler?
+ jacek: yes, we do. do you?
+ LelouchVC2: Wrecked
+ rkhapov: i dont
+ R8T3D: &gt; when people don't submit their solutions&#160;:(
+ R8T3D: on clash
+ [4.0]poorgoomba: i submitted
+ R8T3D: THANK YOU!
+ [4.0]poorgoomba: np
+ R8T3D: Wow I don't understand that but thanks regardless
+ R8T3D: Much appreciated
+ jacek: #pragma GCC optimize "Ofast,unroll-loops,omit-frame-pointer,inline"
+ Qoter: AntiSquid why did you ban rkhapov?
+ JulioSalamander: Hello, is it possible to use std::map? i have errors only with the include&lt;map&gt;
+ jacek: try #include &lt;map&gt;
+ JulioSalamander: thanks all
+ YurkovAS: jacek in uttt or other mcts multi do you use mcts-solver? Is solver has winrate 65% vs standart mcts?
+ jacek: i always use solver. for me this is the "standard" mcts
+ jacek: winrate depends on game, but i think i in uttt i got something like 55%
+ jacek: in yavalath is a must-have. even if mcts solver doesnt help much, it doesnt worsen mcts either
+ karliso: How do you go about implementing mcts solver?
+ karliso: Do you see a node that ends, and then check if previous ends as well?
+ jacek: i have bool terminal in a node
+ karliso: So you check if all children terminal?
+ jacek: if i encounter terminal state, if this is a win for player, the its a lose and terminal for a parent
+ jacek: if this is a lose, i check all siblings if they are lose. if yes, parent is a win, and grandparent is a lose again
+ YurkovAS: jacek thanks
+ jacek: whats with the sudden interest in uttt in #ru :thinking:
+ darkhorse64: Don't tell me that all these people get so high in UTTT without a solver :scream:
+ YurkovAS: +5 new users in uttt legend from #ru in last one week. they found all tricks
+ LelouchVC2: #CodeGeass
+ darkhorse64: Except for teccles heuristic, there are not so many tricks in UTTT
+ CyberLemonade: darkhorse64 what's that?
+ darkhorse64: teccles heuristic&#160;? When you play for the first time in an empty miniboard, send your opponent to the same board. I haven't tried it, so I don't know if it applies on rollouts and/or move selection
+ CyberLemonade: I see, thanks
+ YurkovAS: darkhorse64 solver is hard to understand. do you have good example? not pseudo code from "Monte-Carlo Tree Search Solver.pdf"
+ tutubalin: jacek when there's no challenge,  we help new guys in #ru with CSB or puzzles. If there are no new guys, we discuss UTTT.
+ Astrobytes: lol, we only discuss UTTT when re Curse isn't here :D
+ jacek: pseudo code from that paper is kind of mess, like theyre mixing negamax propagation with normal
+ Astrobytes: It's horrible
+ darkhorse64: Score Bounded Monte-Carlo Tree Search is an improved version. I implemented from this paper. 
+ darkhorse64: Yeah, it's horrible so you have to read carefully between the lines to realize it's plain simple
+ YurkovAS: darkhorse64 thanks
+ Astrobytes: Yep. I read the paper, then I saw the pseudocode and started questioning whether I had understood it. Had a conversation with Smits to make sure I wasn't going crazy
+ darkhorse64: Several pages paper for something that can be explained in two sentences
+ jacek: hopefully the results there were legit
+ darkhorse64: Just tried google translate on #ru. It does a pretty good job. There's going to be lot of ne comers in UTTT top
+ darkhorse64: *new*
+ jacek: invasion?
+ darkhorse64: Once they stop banging their heads on the solver, I fear that
+ tutubalin: too late, we've already annexed legendary league
+ Astrobytes: :D
+ tutubalin: next major goal is to do that on Python
+ darkhorse64: It's one thing to reach legend, it's another to reach the top
+ JohnCM: @darkhorse64  that paper sounds interesting
+ darkhorse64: The boss is an MCTS which performs at 25K rollouts. Good luck&#160;!
+ JohnCM: can you post a link to the score bounded monte-carlo tree search paper
+ jacek: <a rel="nofollow" class="external free" href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.621.8607&amp;rep=rep1&amp;type=pdf">http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.621.8607&amp;rep=rep1&amp;type=pdf</a>
+ JohnCM: thanks
+ jacek: 25k in second turn?
+ LonelySausage_6464: hey
+ darkhorse64: Yes. 20-25k second turn. That's what I heard on the chat
+ jacek: so what im doing wrong if i get 10k in 2nd turn?
+ Uljahn: using solver and 1ply check? :smiley:
+ jacek: well yes
+ darkhorse64: You have smart rollouts&#160;?
+ Uljahn: i guess vanilla MCTS is just plain random rollouts without heuristics and tree reusing
+ jacek: theyre not smart. 1ply check is just about choosing winning move and avoiding losing one
+ jacek: i have teccles, solved, 1ply check and tree reuse. in rollouts some small bias towards moves that would win small board
+ tutubalin: jacek do you use bitmaps?
+ jacek: yet having several times slower bot i am at the top
+ darkhorse64: Yes. Tree reuse and solver do not reuire game knowledge. Moreover, they are "free". Playing winning moves and avoiding losing moves is also a nice improvement
+ jacek: i use bitboards
+ tutubalin: how do you check if position is terminal?
+ Uljahn: "i have bool terminal in a node"
+ tutubalin: i mea in random playout
+ jacek: if my main board is terminal. i have table of 512 possible states and just do lookup
+ jacek: well any board, not main board
+ jacek: for (move&#160;: availableMoves) -&gt; makeMove() check() undoMove()
+ tomatoes: i tried to check if possible to win then do it, but no much difference
+ WINWINWIN: still cant get the minimax to work for Othello :sob:
+ WINWINWIN: worst part is that it looks so simple
+ darkhorse64: How do you use teccles: biasing the rollouts, biaising the selection, book move&#160;?
+ jacek: just in the beginning. if both players use teccles, it will end up in 18th move
+ darkhorse64: As a book move then.
+ jacek: WINWINWIN you cant get the minimax part, or the game mechanics?
+ WINWINWIN: The minimax keeps returning None as the best move
+ WINWINWIN: But printing to stderr shows that the actions are being generated
+ darkhorse64: tomatoes: wow #2. Did you add an opening book&#160;?
+ WINWINWIN: And the actions are accurate with the initial input
+ tomatoes: no, i have no idea how to store it
+ darkhorse64: So you climb this high without any hardcoding (except the first move, I guess)&#160;? Any special trick&#160;? Just say yes if you don't want to share. I'm ok with that
+ tomatoes: im selecting nodes by heuristic
+ tomatoes: no random and ucb with a bit patched formula
+ darkhorse64: You found one. It's a common and accepted knowledge that there is no heuristic for UTTT. On other board games, combining evaluation and MCTS yields a powerful bot
+ Astrobytes: Smits is gonna love that leaderboard when he sees it :D
+ darkhorse64: He claims he can get to #1. It may be harder than he thinks
+ Astrobytes: Indeed. He thought he was only up against karlis o
+ WINWINWIN: But its only 0.15 points back to #2?
+ WINWINWIN: Wouldnt a lucky resubmit put him back at #2?
+ Astrobytes: #3
+ Astrobytes: Oh right, gotcha lol
+ darkhorse64: Yes. It means nothing except that there is a new contender
+ tutubalin: jacek when do you create new node?
+ Astrobytes: Yep. And when he comes back with his new bot (I believe he's working on that now) then it'll be tuned for karlis o and not tomatoe s
+ WINWINWIN: In the top areas of legend league, do people add modifications to cater to the opponents&gt;
+ jacek: smits use special opening books for them
+ Astrobytes: Guess he's gonna have another few months work :P
+ jacek: tutubalin when i expand visited once node
+ jacek: he also planned othello
+ Astrobytes: Oh nice
+ tutubalin: jacek so you don't create it on every random move, right?
+ jacek:&#160;?
+ tutubalin: one of my failed attempts was when i created a node for every played state
+ tutubalin: for example, during random playout i created a node for every played move
+ Astrobytes: Isn't that what struc t was doing? Creating nodes for all his playouts
+ tutubalin: that was slow and took too much memory
+ tutubalin: it would work fine if we had a lot of time and memory
+ jacek: i dont create any nodes during rollouts
+ tutubalin: but with limitations we have it's waste of resources: most of these nodes will never be visited again
+ tutubalin: hmmm.... ok... 
+ tutubalin: do you turn optimizations on?
+ jacek: of course
+ tutubalin: do you use standard C++ random or custom one?
+ jacek: custom
+ JohnCM: yea rollouts can be huge, especially if the state space is stochastic (affected by random factors)
+ tutubalin: hm... than i have no idea why you've got 10k rollouts on 2nd turn
+ tutubalin: probably your rollouts are much better than mine
+ Astrobytes: Are they heavy rollouts jacek?
+ jacek: not much heavy, no
+ jacek: or i alwats get lucky resubmits
+ tutubalin: have you tried to profile?
+ tutubalin: what's the most time consuming part?
+ jacek: long ago, most of the time in my games the rollouts are time consuming
+ tutubalin: my last idea: probably there's a bug in rollouts counter, and you have 10x times more of them )
+ Astrobytes: lol
+ jacek: shouldnt have used int16_t for that
+ tutubalin: ahahaha )
+ Astrobytes: Seriously? :D
+ III: hi
+ dbdr: Rust #2 on uTTT&#160;:)
+ dbdr: gg tomatoes!
+ tomatoes: thanks :sweat_smile:
+ dbdr: have you been using rust for long?
+ darkhorse64: I'll wreck him in the IDE then 
+ tomatoes: no, half year maybe
+ dbdr: what did you use before? hard transition?
+ jacek: D
+ Astrobytes: :smirk:
+ tomatoes: python mostly, not hard, but i also dont use most rust features on cg
+ tomatoes: threads, async, lifetimes etc
+ dbdr: makes sense. multithreading is rarely useful on CG, regardless of language
+ dbdr: lifetimes can be, but most of the times there is a simpler solution without them
+ dbdr: if you don't use them coming from a GC language, it seems you get it&#160;:)
+ dbdr: technically you always use lifetimes in rust, it's just that the compiler infers them and checks them automatically for you&#160;:)
+ tomatoes: thanks rustc
+ dbdr: indeed&#160;:)
+ Kuly2Fraise: hello
+ struct: yeah, that was what im doing on uttt Astrobytes
+ struct: But I had no idea that mcts did not work like that
+ Astrobytes: Easy enough mistake to make
+ struct: Also the expand takes up 40% of the performance
+ jacek: expandArray?
+ Astrobytes: GAexpandimax
+ Astrobytes: True Expansion.
+ jacek: darn had 1 timeout against java coffee cup
+ struct: fix it
+ TheFunkyPanda_d606: sa va les gars
+ la_chatte_a_maman: yo
+ TheFunkyPanda_d606: tu code quoi
+ TheFunkyPanda_d606:&#160;?
+ TheFunkyPanda_d606: moi je code in game
+ la_chatte_a_maman: moua ossy
+ TheFunkyPanda_d606: moi je fai batmane
+ TheFunkyPanda_d606: ces trop bien
+ la_chatte_a_maman: 2 ouf
+ la_chatte_a_maman: j'adore
+ TheFunkyPanda_d606:  :star_and_crescent:
+ TheFunkyPanda_d606: :flag_dz:
+ TheFunkyPanda_d606: coincidence
+ la_chatte_a_maman: :underage:
+ TheFunkyPanda_d606: :non-potable_water:
+ la_chatte_a_maman: :shinto_shrine:
+ la_chatte_a_maman: arouf gangsta t'as capté
+ eulerscheZahl: please stop spamming the chat
+ la_chatte_a_maman: excuse us
+ eulerscheZahl: #your_roomfeel free to click that and chat there
+ TheFunkyPanda_d606: ouh ouh arouf gangsta
+ la_chatte_a_maman: houhou arouf arouf
+ eulerscheZahl: reCurse your turn
+ TheFunkyPanda_d606: j'fais pas d'interview j'fais pas de feat
+ la_chatte_a_maman: y'a pas de talent qui s'exprime
+ la_chatte_a_maman: t'aura pas mon argent, t'aura meme pas50 centimes
+ TheFunkyPanda_d606: ehehe
+ la_chatte_a_maman: arouf gangsta
+ TheFunkyPanda_d606: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=y1If9gVjLcs">https://www.youtube.com/watch?v=y1If9gVjLcs</a>
+ AntiSquid: hey guys what are you doing? @_@
+ AntiSquid: just one minute away from chat and this is what happens&#160;:/
+ Hjax: this is nothing compared to last night
+ Hjax: last night someone spent about half an hour flooding the chat 
+ AntiSquid: i saw that when i entered chat
+ AntiSquid: it was form 2 AM my time so no way i'd be up :p
+ eulerscheZahl: i think we could expect more dedication from you. disappointing
+ AntiSquid: i don't get paid enough to do this
+ eulerscheZahl: dedication doesn't need payment
+ struct: Yeah, my chat experience was ruined yesterday&#160;:(
+ eulerscheZahl: one star because there is no way to give 0
+ dbdr: give 2^32 stars and count on overflow
+ eulerscheZahl: 2^31 and hope for am overflow to a negative rating
+ AggYz: Guys is it true that some python libraries and modules are built with C/C++
+ eulerscheZahl: yes. but if you don't trust whoever told you this, why should you trust us?
+ AggYz: becuase
+ AggYz: lots of ppl here
+ AggYz: 1 person who i read it from
+ AggYz: How does python work wiht C/C++
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://en.wikipedia.org/wiki/NumPy">https://en.wikipedia.org/wiki/NumPy</a>"Written in	Python, C"almighty wikipedia, the most trustworthy source of all
+ AggYz: how do they work with eachother
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://docs.python.org/3/extending/building.html">https://docs.python.org/3/extending/building.html</a>
+ AggYz: Do ppl only build modules with C because of speed or stuff that python just cant do (at least effective and efficiently)
+ eulerscheZahl: python is turing complete. if you can do it with C/C++, you can do it with python too. but speed is a good motivation to still use C/C++
+ Uljahn: you can build modules even with Fortran
+ AggYz: isnt fortan a boomer language
+ eulerscheZahl: you can even compile Fortran with some C compilers
+ eulerscheZahl: fortran is the first high level language
+ Uljahn: <a rel="nofollow" class="external free" href="https://numpy.org/doc/stable/f2py/python-usage.html">https://numpy.org/doc/stable/f2py/python-usage.html</a>
+ eulerscheZahl: interesting history. they even delayed it to add compiler optimizations
+ AggYz: when integrating py and c can you call functions and objects or is it just simple reading variable from each other
+ eulerscheZahl: not to "burn" the language. when coders decide that it's too slow, they have a negative attitude to an improved version already
+ eulerscheZahl: disclaimer: i never tried anything with C+Python
+ Uljahn: <a rel="nofollow" class="external free" href="https://docs.python.org/3/extending/extending.html">https://docs.python.org/3/extending/extending.html</a>
+ AggYz: so you could make a loop in py  then pause after every iteration then make c read it and do stuff with the index then resume in python?
+ tomatoes: more like you need to write data to c
+ Uljahn: isn't it what happens when you call numpy functions
+ AggYz: kikikikikikkik
+ tutubalin: AntiSquid there was collateral damage. you banned rkhapov for asking about compiler flags
+ Hjax: oh i wasnt scrolled 
+ Hjax: good old chat 
+ tutubalin: AggYz you cannot just inline C code inside Python. but you can create a C-module which then can be imported from Python code
+ tutubalin: Of course C code should be aware that it is used with Python and follow some conventions
+ AggYz: oki
+ AntiSquid: "boomer language" lol, is older than some boomer's parents
+ AntiSquid: fortran is
+ AggYz: is there only like 20 ppl who know lua here
+ AggYz: what is the minority language here
+ reCurse: D
+ AggYz: D has a nice name ( ͡° ͜ʖ ͡°)
+ AntiSquid: automatonnn lives matter
+ AutomatonNN:  i feel like i can't say anything about the contest
+ jacek:&#160;!
+ reCurse: Ohh is that a penis joke
+ AntiSquid: i am only D user so i am minority!!!
+ reCurse: Nice!!!
+ AggYz: your D is pretty minor
+ sachinnb_2005507: hey
+ AntiSquid: im going to burn and loot your house if you discriminate me with your joke AggYz
+ AggYz: woah
+ sachinnb_2005507: wtf antisqquid
+ AggYz: ban yourself
+ AntiSquid: coming
+ AggYz: is cock free speech
+ AggYz: coc
+ tutubalin: this D minor joke was really good one
+ AggYz: big thank
+ sachinnb_2005507: hey
+ dbdr: I had missed it, thanks tutubalin, and gg reCurse
+ AggYz: hey
+ sachinnb_2005507: wassup
+ AggYz: I will discriminate against you because of your name
+ AggYz: change it to sachinnbruh
+ sachinnb_2005507: i'll tear you to half
+ AggYz: no numbers = "sexy"
+ reCurse: Alright that's enough shitchatting
+ sachinnb_2005507: i am not your bruh
+ AggYz:&#160;?
+ sachinnb_2005507: okay , recurse now get the fuck out of here
+ Hjax: cg chat is weird today 
+ reCurse: Ok
+ Snef: Our savior \o/
+ AggYz: :eggplant::peach:
+ reCurse: Any more takers?
+ jacek: :no_mouth:
+ AntiSquid: lol 
+ AntiSquid: no manners at all
+ reCurse: Dunno why chat to teenagers is like catnip to cats
+ jrke: What a chat&#160;!
+ FelixvanBeusekom: hi
+ reCurse: :wave:
+ jrke: Recurse i tried hard but didn't even completed 1 lap in CSB against you :neutral_face:
+ reCurse: Hehe
+ Hjax: watching the good csb bots play is so interesting 
+ Hjax: i watched a game where re curse's pod bounced off an enemy pod, creating a perfect gap for his second pod to get through 
+ reCurse: It's definitely not about racing anymore past a certain point
+ Hjax: its about being a massive bully 
+ Hjax: and just blocking forever 
+ reCurse: Yeah and cooperation
+ ViewDeveloper: reCurse what does that icon mean?
+ reCurse: Tooltip says moderator
+ ViewDeveloper: So you're an employee of the site? :thinking:
+ reCurse: No
+ FelixvanBeusekom: Guys how do i sqrt() in c++?
+ ViewDeveloper: &lt;script&gt;alert("The robots are here.");&lt;/script&gt;
+ AntiSquid: is it just NN or are there any conditions you added to your CSB bot?
+ reCurse: It basically just means I keep the chat clean as best I can
+ ViewDeveloper: darn
+ ViewDeveloper: come play coc
+ reCurse: No
+ reCurse: AntiSquid: The only "just NN" bot is Fenrir afaik
+ AntiSquid: sqrt() FelixvanBeusekom, not sure what you mean
+ Hjax: #include &lt;math.h&gt; sqrt()&#160;? 
+ FelixvanBeusekom: Thanks Hjax
+ FelixvanBeusekom: Actually cmath instead of math.h but i got it
+ jrke: ya for c++ use #include &lt;cmath&gt;
+ AntiSquid:&#160;:&gt;
+ jacek: and for D &lt;dmath&gt;
+ eulerscheZahl: and for java it's JMath?
+ Tamizh: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/1260460a63a06eab1627a3a81a832a6f635cd70">https://www.codingame.com/clashofcode/clash/1260460a63a06eab1627a3a81a832a6f635cd70</a>
+ jacek: oh boy
+ AntiSquid: Tamizh no clash link invites here
+ tutubalin: only UTTT discussions are allowed here
+ jrke: whats UTTT means&#160;?
+ jacek: maybe reBless will explain
+ tutubalin: Ultimate Topic To Talk
+ jrke: oh
+ darkhorse64: You are not a real CodinGamer if you have no UTTT bot
+ reCurse: Is that CGatekeeping?
+ dbdr: CGregation
+ struct: gg jacek
+ jacek: boring game, make new one
+ <b>**AggYz l</b></p><p><img src="/a/23496414257567" /> darkhorse64: This game needs a boss
+ jacek: damn
+ dbdr: someone spoke too soon
+ darkhorse64: trictrac is a tough nut
+ jacek: hmm maybe i should skip eval at last moves, i think i can solve it at 12-13 plies before end
+ OiYouYeahYou: @HexaHonut Hello stranger!
+ struct: No time to make a boss&#160;:(
+ jacek: in the beginning i had 5 strike win with him but later i was losing
+ darkhorse64: I can make one for you but it will rank around 7-9
+ struct: Sure, I would also make contribution private so they cant download the code
+ darkhorse64: There is a link to the referee, that's enough
+ struct: yeah
+ jacek: you want to add boss after its been approved?
+ jacek: what would happen to the bots now?
+ struct: bot will submit
+ struct: all above get promoted
+ struct: after it gets 100%
+ dbdr: will ppl get demoted from woo1 to wood2 first?
+ struct: everyone starts at wood 2
+ struct: so yeah
+ dbdr: but people are already in wood1
+ struct: wood 1 becomes wood 2
+ dbdr: ok, cool
+ jacek: especially at morning
+ NathMin: Anyone else got the CTO lurking on his LinkedIn account&#160;?
+ NathMin: My guess is a bot is using his account, but still, weird
+ eulerscheZahl: that leads to a follow-up poll: who has a linkedIn account?
+ PatrickMcGinnisII: Next poll:  who has a LN acct just to weed out fakes?
+ PatrickMcGinnisII: I have 0 contacts, but I am on LN... what's your point eulerscheZahl?
+ eulerscheZahl: my point is: i don't have "the CTO lurking" on my LinkedIn. But I don't have a LinkedIn account, so it's not surprising
+ eulerscheZahl: my social media account is this one on CG
+ jrke: ya same here no whatsapp,FB,etc just CG
+ PatrickMcGinnisII: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/1741d868-d643-4cab-8072-906cd65f4fa8">http://chat.codingame.com/pastebin/1741d868-d643-4cab-8072-906cd65f4fa8</a>
+ dbf: "my social media account is this one on CG" - whats about russianaicup.ru?
+ eulerscheZahl: i don't use that one for chatting
+ eulerscheZahl: i know nothing about RAIC players who are not active on CG as well
+ eulerscheZahl: jeez, that storry PatrickMcGinnisII :o
+ eulerscheZahl: and the employer didn't even verify your accusation?
+ NASADeveloper102: Hi, I'm new to codingame. What's there to do here?
+ NASADeveloper102: Sorry if I'm interrupting a conversation
+ eulerscheZahl: if you are new to coding: <a rel="nofollow" class="external free" href="https://www.codingame.com/training">https://www.codingame.com/training</a>if you feel confident already: <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/bot-programming">https://www.codingame.com/multiplayer/bot-programming</a>
+ PatrickMcGinnisII: I don't know exactly what they did, but I'm sure they firedrilled his work computers and email, because he did lose the job.
+ NASADeveloper102: Thanks.
+ jrke: <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/bot-programming/coders-strike-back">https://www.codingame.com/multiplayer/bot-programming/coders-strike-back</a>
+ sayantan_2005516: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/easy/ascii-art">https://www.codingame.com/training/easy/ascii-art</a>
+ jrke: no-one will send his solution make your own solution
+ reCurse: Nope
+ NASADeveloper102: o _ o, wouldn't it be better to solve it yourself?
+ LelouchVC2: I'll send love
+ sayantan_2005516: plesae
+ sayantan_2005516: please
+ reCurse: Cheating won't get you anywhere
+ NASADeveloper102: The solution of the code is 
+ sayantan_2005516: sorry
+ PatrickMcGinnisII: Most americans are easy to find, LN is just 1 more way to gather info.  Getting a name, addy,email,phone,DL # is easy... I'm wide open IDC, but don't mess w/ computer geeks.&#160;;)
+ jrke: why everybody ask for solution :thinking:
+ NASADeveloper102: Maybe they just need more programming knowledge to solve the problems here.
+ NASADeveloper102: Which I guess would be the objective of this place, to push people to learn more programming?
+ NASADeveloper102: Or to get more cash&#160;:)
+ jrke: hey i wanna ask to recurse,Agade and all top rankers in CSB are they using smitsimax or anything else
+ reCurse: pb4 and Agade published a document saying what they do
+ jrke: Where?
+ PatrickMcGinnisII: Some of the more challenging puzzles really take a deep dive into math oriented algorithms, that i get...ascii-art ... c'mon ... learn to google or learn to code
+ eulerscheZahl: github
+ jrke: K
+ eulerscheZahl: pb4git account
+ reCurse: <a rel="nofollow" class="external free" href="https://github.com/pb4git/Nash-DQN-CSB-Article">https://github.com/pb4git/Nash-DQN-CSB-Article</a>
+ jrke: thanks
+ PatrickMcGinnisII: base85... interesting... I did a base88, it works for hardcoding big numbers
+ jrke: recurse do you have Phd(s) in computers 
+ reCurse: No
+ jrke: k
+ eulerscheZahl: agade has a PhD I think. But in Physics
+ Astrobytes: w lesavo too iirc, again in some branch of physics
+ Astrobytes: hi jrke
+ jrke: hey astrobytes 
+ jrke: just going to sleep in 10 mins
+ jrke: no problem
+ NASADeveloper102: Should I really be doing coders-strike-back if I don't have a lot of experience with nueral networks? Well I guess the first question I would ask is, "does it require one"?
+ jrke: not till silver its easy till silver
+ NASADeveloper102: Easy seems like a very opinionated statement here.
+ eulerscheZahl: 100000 players and the arena. and top4 are neural networks
+ eulerscheZahl: still plenty of players without
+ NASADeveloper102: I see.
+ jrke: i just have simple simulation and in legend with 189 rank
+ eulerscheZahl: there are also minimax, monte carlo tree search, genetic algorithms, ... on the leaderboard
+ jrke: smitsimax also
+ NASADeveloper102: Simple still seems pretty complicated.
+ eulerscheZahl: personally i don't even think that CSB is a good game for getting started
+ NASADeveloper102: Perhaps it's simple to you. It may not necessarily be to me.
+ reCurse: Neural networks are no concern to you until you care about breaching top 4 legend
+ Hjax: pr2 turned out to be pretty straight forward and fun
+ jrke: but CSB have tutorial in starting i think so
+ Astrobytes: Just depends on your experience I guess whether CSB suits you or not
+ Astrobytes: Plenty other games to try out, that's for sure
+ eulerscheZahl: it took me a while to understand the turning angle and why i should slow down. just missed a proper description of physics
+ eulerscheZahl: "beginner friendly" :rolling_eyes:
+ jrke: but these things are in gold euler 
+ Hjax: ghost in the cell is also pretty easy to get started with 
+ NASADeveloper102: What is the incentive for getting legend?
+ Hjax: pride! xp!
+ Hjax: thats about it 
+ Astrobytes: + bragging rights if you can get to the top
+ wattakuki: Damn I just started this website today and I can't get past the first level without help /./
+ eulerscheZahl: occasionally there are contests on CodinGame. You can win tshirts and other goodies there. Multiplayer games are just for fun and learning
+ jrke: :smiley:
+ WINWINWIN: Astrobytes, have you ever encountered a continous None output in minimax?
+ NASADeveloper102: I see.
+ Astrobytes: No, because I don't use python WINWINWIN :P
+ jrke: hey winwinwin
+ Hjax: if minimax is returning none, you have a bug
+ eulerscheZahl: but we have to wait a few months till the next contest&#160;:(
+ Astrobytes: But sure, I've had no move returned when I had bugs
+ jrke: ya october or november
+ WINWINWIN: :D
+ Hjax: i suppose theres no hope of another surprise contest like OOC?
+ jrke: next contest
+ Astrobytes: Wait for second wave of COVID Hjax
+ eulerscheZahl: a surprise contest would require an existing game
+ Hjax: i guess the unofficial contest was the surprise contest 
+ eulerscheZahl: OOC was an old prototype, as no one had anything else
+ eulerscheZahl: went much better than expected
+ Hjax: i see
+ Astrobytes: Was a lockdown-special
+ eulerscheZahl: i think the next bot contest i'll play will be mini RAIC
+ eulerscheZahl: no date announced yet
+ jrke: k
+ dbdr: Hjax: step 1, start a new pandemic
+ eulerscheZahl: what soup do you want to try?
+ jacek: frog soup
+ dbdr: toad
+ eulerscheZahl: :scream:
+ jrke: :smiley:
+ eulerscheZahl: :runner:
+ Astrobytes: Toad-licking should do it
+ Hjax: maybe we can convince thibpat to do another unofficial contest in a month or two 
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=uFn7VjYksBM">https://www.youtube.com/watch?v=uFn7VjYksBM</a>
+ Astrobytes: :d
+ Astrobytes: :d
+ Astrobytes: oh dammit
+ jrke: :smiley:
+ eulerscheZahl: simpsons is like xkcd
+ jrke: im going to sleep bye to all
+ Astrobytes: Definitely eulerscheZahl
+ Astrobytes: goodnight jrke, sleep well
+ jacek: welp <a rel="nofollow" class="external free" href="https://www.snopes.com/tachyon/2017/02/simpsons_trump_feature.jpg">https://www.snopes.com/tachyon/2017/02/simpsons_trump_feature.jpg</a>
+ jrke: gn astrobytes
+ USE-TO: We need python3.8 support
+ Astrobytes: hey jacek, good work in Othello, tric is struggling to get back on top (for now)
+ jacek: yeah he resubmitted and was 2nd
+ Astrobytes: I saw&#160;:)
+ trictrac: gg jacek yout bot is strong
+ jacek: so lesson today: keep your lucky resubmit
+ trictrac: *your
+ jacek: thx
+ Astrobytes: It is very strong, what did you improve today? Or you don't wanna say
+ jacek: better move ordering, fixed killer heuristic so it wont overwrite best move from TT
+ jacek: as well adjusted weights for eval
+ Astrobytes: Nice. Was a very clear improvement, well done again
+ LelouchVC2: We need C++22 support
+ LelouchVC2: I want features that I don't yet know I want
+ Hjax: move gen in othello looks annoying 
+ Astrobytes: Why?
+ Hjax: because if a move is legal or not depends on the state of the rest of the board 
+ Hjax: its not like chess, where you just look at one piece 
+ Hjax: some chess engines dont even care about check making moves illegal, and just allow the king to be taken 
+ Hjax: because forced loss is avoided anyway 
+ Astrobytes: It's not too difficult, just some shifting and whatnot
+ jacek: you just need to copy paste clever bitboard tricks from internet and your good to go :v
+ Hjax: lol
+ Hjax: oh hey look, the chessprogrammingwiki has an othello page
+ Hjax: amazing 
+ Astrobytes: I think I need to look for some of those
+ Hjax: i found someone just precomputing a table of all legal moves for a given row 
+ jacek: for testing eval i use random xot openings so i could see if eval is really better or just better against my old bot
+ Hjax: and then just rotating their bitboard 
+ Hjax: well, keeping rotations of their bitboard 
+ struct: If you think othello is annoying
+ struct: you should see yinsh
+ struct: :p
+ Hjax: i clicked on yinsh once 
+ Hjax: i noped out of there real fast 
+ Astrobytes: "i clicked on yinsh once" - meme-worthy
+ AntiSquid: <a rel="nofollow" class="external free" href="https://www.humoar.com/wp-content/uploads/2015/02/i-went-outside-once.jpg">https://www.humoar.com/wp-content/uploads/2015/02/i-went-outside-once.jpg</a>
+ PatrickMcGinnisII: :joy:
+ PatrickMcGinnisII: fair numbering puzzle took me a couple hours, but got it down to 18 lines
+ PatrickMcGinnisII: I'llc all today a success, now to mow the frickin' lawn
+ PatrickMcGinnisII: glhf
+ AntiSquid: mowing lawn is probably more enjoyable
+ anyo: HEY
+ AggYz: guys 
+ AggYz: I have question
+ AggYz: what are pipelines
+ Hjax: like, for continuous integration? 
+ Hjax: if so, then its an automated process for building / running / testing the code you push to a repository 
+ NASADeveloper102: I doubt this, but I'll ask anyway. Does using C++, or any compiled language decrease execution time in bot programming puzzles?
+ LelouchVC2: If you're asking because the puzzle says ur solution is taking too long
+ LelouchVC2: Then no I'd say. It should be referring more to time complexities
+ NASADeveloper102: Okay that makes sense.
+ NASADeveloper102: I haven't gotten that, but I figured that was a thing.
+ LelouchVC2: Try to make your program do less work - make it work smarter not ahrder
+ LelouchVC2: harder*
+ NASADeveloper102: Thanks!
+ LelouchVC2: &lt;3
+ struct: NASADeveloper102 you mean on multiplayers?
+ NASADeveloper102: Yes
+ Uljahn: do you mean time limits?
+ NASADeveloper102: As I said, I haven't gotten an error regarding the time it takes to execute code.
+ NASADeveloper102: And I don't mean time limits.
+ struct: Which multi?
+ NASADeveloper102: Any of them
+ NASADeveloper102: Will the answer change per each one?
+ struct: shouldn0't
+ NASADeveloper102: Okay then
+ struct: Just wanted to know if it was multies
+ struct: so compilation time should not matter
+ struct: what matters is execution time
+ struct: Which is the same for all languages
+ NASADeveloper102: I know the compilation time shouldn't matter.
+ NASADeveloper102: But thank you for that latter piece of information.
+ Hjax: you are given the same amount of time, but obviously a faster language will get more done in that time 
+ struct: This doesnt apply to puzzles though
+ struct: at least for some
+ Hjax: theres a reason you dont see any python bots at the top of uttt
+ NASADeveloper102: I see.
+ struct: Rust has release mode
+ struct: C# does too
+ struct: C++ has pragmas
+ NASADeveloper102: Release mode?
+ Hjax: when you run a language like rust in the IDE, its compiled in "debug" mode, which is slower but gives you more helpful errors 
+ Hjax: when you hit submit, its compiled in "release" mode, which is much faster 
+ NASADeveloper102: I see.
+ NASADeveloper102: Thanks.
+ NASADeveloper102: Do you recommend a bot programming competition I should try first?
+ MPSI_LIV_CronierDamiano: hey guys 
+ NASADeveloper102: Hello.
+ MPSI_LIV_CronierDamiano: is there someone who know ocaml&#160;?
+ struct: Which type of games do you like nasa?
+ NASADeveloper102: What type of games do I like?
+ NASADeveloper102: I like RPGs like pokemon.
+ Hjax: well a beginner should probably play a game that isnt too hard to wrap your head around, im currently looking at Ghost in the Cell, which looks pretty straight forward 
+ NASADeveloper102: Thanks for the recommendation, I'll look into it.
+ Hjax: i also recently played Platinum Rift 2, that was pretty fun and straight forward as well 
+ NASADeveloper102: Okay, I'll probably write these down.
+ NASADeveloper102: These all have leagues right?
+ Hjax: platinum rift 2 does not 
+ Hjax: it just has a normal leaderboard 
+ Hjax: still an enjoyable game
+ struct: Fantastic bits
+ struct: best game
+ NASADeveloper102: Okay, cool.
+ NASADeveloper102: Thanks!
+ Uljahn: yinsh is better :smirk:
+ NASADeveloper102: yinsh?
+ Hjax: i would not recommend yinsh to a beginner 
+ struct: yinsh might be a bit hard for starting
+ NASADeveloper102: I see, okay.
+ NASADeveloper102: Do you mean beginner to programming, or beginner to puzzles?
+ Hjax: both 
+ NASADeveloper102: Or perhaps a mixture of both?
+ NASADeveloper102: I see.
+ struct: These modules are driving me crazy 
+ struct: (╯°□°）╯︵ ┻━┻
+ NASADeveloper102: Also another question, why is coders strike back so, infamous here?
+ Hjax: because it has by far the most users on its leaderboard
+ Hjax: also the game is pretty difficult imo, but maybe im just bad at games like that 
+ struct: Game is hard to get to top 50/100 maybe
+ struct: But I think it's a good to learn
+ NASADeveloper102: Okay, thanks!
+ Hjax: personally i find grid based games to be way more straight forward 
+ struct: It has a guide on how to write a sim written by a cg user
+ NASADeveloper102: A "sim" meaning simulator?
+ Hjax: yes 
+ Hjax: a lot of games on this site benefit from having a sim in your bot, to figure out the outcome of your actions 
+ NASADeveloper102: I don't quite understand the benefits of a simulator in a bot.
+ Uljahn: predicting the future
+ Hjax: ^ 
+ NASADeveloper102: I see.
+ NASADeveloper102: So you take the game variables and you use those to predict the future.
+ NASADeveloper102: I assume?
+ Hjax: if i do this, and he does that? what will happen? a sim answers that question 
+ NASADeveloper102: Huh.
+ NASADeveloper102: Neat.
+ struct: Then you evaluate
+ struct: The best state
+ Hjax: yeah then you ask yourself, i do this, and he does that. do i like the result? what if he does something else?
+ NASADeveloper102: Whenever creating "self-sustaining" programs I usually use a finite state machine, is that what you mean by "state"?
+ NASADeveloper102: I think that makes sense.
+ Hjax: you go through all of your actions, and all of your opponents actions 
+ Hjax: and find the combinations that result in the best situation
+ Hjax: assuming your opponent plays optimally 
+ NASADeveloper102: Wouldn't this result in a large execution time?
+ NASADeveloper102: I guess not if you write it well enough, or the game is simple enough.
+ LelouchVC2: HEADLINE: A bot that uses Random numbers to generate random moves destroys opponents
+ NASADeveloper102: 0 _ o
+ Hjax: if you are curious, look up the minimax algorithm 
+ NASADeveloper102: Okay, sure.
+ Hjax: generally bots that use it run until they run out of time, and go with the best move they found 
+ Hjax: but you have plenty of time to look quite a few moves into the future 
+ Hjax: depending on the game 
+ NASADeveloper102: Okay.
+ NASADeveloper102: Cool.
+ NASADeveloper102: Thanks, I never knew this.
+ NASADeveloper102: I really appreciate this.
+ struct: Also there is AVX&#160;:)
+ NASADeveloper102: AVX?
+ NASADeveloper102: Is that another algorithm? 
+ struct: no
+ NASADeveloper102: Is AVX a bot programming puzzle?
+ struct: Advanced vector extensions
+ NASADeveloper102: o _ 0
+ NASADeveloper102: What exactly does this mean?
+ struct: Imagine you have 8 floats
+ NASADeveloper102: Okay.
+ struct: and you want  to add those 8 floats to another 8
+ struct: with avx those 8 floats take the same time as 1 float
+ NASADeveloper102: :thinking: Huh.
+ struct: <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/283/sse-avx-vectorization/what-is-sse-and-avx">https://www.codingame.com/playgrounds/283/sse-avx-vectorization/what-is-sse-and-avx</a>
+ struct: This you can skip
+ struct: If you don't need it
+ NASADeveloper102: :thinking: Okay
+ AggYz: guys what are doubles
+ AggYz: i dont undestand what double data tyes are
+ struct: doubles?
+ AggYz: y
+ AggYz: ye
+ AggYz: yes
+ Idleless: If you know what a float is, it's double the precision of a float (twice the size, same function). If you don't know what a float is, it's a real number (a number with a decimal place. example: 3.1234)
+ AggYz: hwo double precison
+ AggYz: how
+ struct: more bits
+ Uljahn: Automaton2000: what are numbers?
+ Automaton2000: i need a new object
+ NASADeveloper102: This is a bot for codingame?
+ NASADeveloper102: Where does 
+ Uljahn: ye, there are two of them
+ NASADeveloper102: Where does it get it's messages from
+ NASADeveloper102: also what is the second bot
+ struct: chat
+ struct: AutomatonNN
+ NASADeveloper102: Huh neat.
+ AutomatonNN: eulerscheZahl is there a way to see the code and it works for me i was wrong about that in the code 
+ Idleless: @AggYz <a rel="nofollow" class="external free" href="https://hackr.io/blog/float-vs-double">https://hackr.io/blog/float-vs-double</a>
+ AggYz: @Idleless thanks
+ AggYz: /me
+ NASADeveloper102: Also hasn't this been here for a long time? I mean the bot. So how does it choose the messages from such a large amount of them?
+ <b>**AggYz has thanked you</b></p><p><img src="/a/44017889745482" /> Hjax: it doesnt choose messages, it generates them, learning from chat 
+ Uljahn: with Markov chains
+ NASADeveloper102: Wow I just suspected that it chose a random message based on one already spoken.
+ Uljahn: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/hard/code-your-own-automaton2000-step-1">https://www.codingame.com/training/hard/code-your-own-automaton2000-step-1</a>
+ Automaton2000: some of the things i do in the next round
+ AggYz: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/12609480e5e47a803afd9890eac4000e5ef766f">https://www.codingame.com/clashofcode/clash/12609480e5e47a803afd9890eac4000e5ef766f</a>
+ AggYz: any1 jooin im lonely
+ NASADeveloper102: What is the point of clash of code?
+ Hjax: depending on who you ask, there isnt one 
+ AggYz: fun
+ AggYz: fun
+ AggYz: learn
+ AggYz: flex
+ AggYz: ez
+ NASADeveloper102: What circumstances would make you have to write code for an answer to a prompt quickly?
+ AggYz: interview
+ Hjax: job interviews
+ NASADeveloper102: And you would have to beat other people.
+ Uljahn: or bots
+ AggYz: this is basically interviews
+ Hjax: not everything that is fun has to be useful 
+ NASADeveloper102: I was thinking a coding competition
+ Hjax: if you think its fun, go play it 
+ Hjax: ive played a bit of it, its alright
+ NASADeveloper102: Well I guess if it's useful in a job interview.
+ NASADeveloper102: I should try to spend at least an hour a day doing it.
+ struct: Clashes have downsides
+ NASADeveloper102: Because a social media life, is something I lack.
+ Hjax: honestly i like playing a multi has more benefits to a job interview than clash 
+ Hjax: i feel like* 
+ Uljahn: agreed
+ reCurse: Social media is the worst invention of the last decade, so no worries
+ NASADeveloper102: What benefits would outweigh the ones ones for clashes?
+ struct: in clash you will get bad coding habits
+ AggYz: how
+ Hjax: code written quickly has the tendency to not be particularly good code 
+ NASADeveloper102: Probably.
+ NASADeveloper102: But couldn't you say that you can learn to find a solution to a problem quickly and then write code for it?
+ NASADeveloper102: But I guess the same problem arrives.
+ NASADeveloper102: The quality of the code could potentially be lowered.
+ struct: I  have 3695 clashes, and I don't recommend them
+ reCurse: It's not code you should be interested in but problem solving
+ AggYz: i agwee with wecuwse
+ reCurse: For clash there's definitely diminishing returns
+ struct: most clashes are math problems and parse strings anyways
+ NASADeveloper102: Okay.
+ NASADeveloper102: Is there a memory limit in multiplayer puzzles?
+ Hjax: yes, 768 mb 
+ Uljahn: multis teach you staying focused on large tasks, thinking of architecture, performant data structures and optimizations i guess
+ NASADeveloper102: Thanks
+ NASADeveloper102: You probably can't include other libraries that aren't in the standards right?
+ Hjax: <a rel="nofollow" class="external free" href="https://www.codingame.com/faq">https://www.codingame.com/faq</a> list of libraries by language here
+ Uljahn: check <a rel="nofollow" class="external free" href="https://www.codingame.com/faq">https://www.codingame.com/faq</a>
+ NASADeveloper102: I mean like pandas?
+ NASADeveloper102: Thanks.
+ Hjax: python does get pandas yes
+ NASADeveloper102: Thanks.
+ NASADeveloper102: Do you think the PS5 is going to live up to the hype it's getting?
+ AggYz: no
+ NASADeveloper102: Well that was surprising?
+ NASADeveloper102: Why?
+ tomatoes: games &gt; specs
+ NASADeveloper102: Huh, yeah you're right.
+ NASADeveloper102: I don't play console games, but I was thinking about getting an xbox or play station.
+ NASADeveloper102: So I can be introduced into the console gaming world with their accessories and money making schemes.
+ NASADeveloper102: And then I can feel the anger among gamers that have to spend money on seemingly meaningless things, that are required for some games.
+ NASADeveloper102: or features of them.
+ tomatoes: i have only psvr, used it ~2 times
+ NASADeveloper102: . . . 
+ NASADeveloper102: How do you use something a negative amount of times?
+ NASADeveloper102: Anyway.
+ NASADeveloper102: I assume, "psvr" is play station virtual reality?
+ tomatoes: around two times
+ tomatoes: yes
+ NASADeveloper102: Wouldn't it make sense to put ~2 and not -2
+ tomatoes: as i did
+ NASADeveloper102: Wait a minute....
+ NASADeveloper102: That's tilda?
+ NASADeveloper102: What is this font?
+ tomatoes: tilda, yes
+ NASADeveloper102: Huh.
+ struct: -~
+ Reksio: Hi All. Does anyone know how Submitted application deal with Jit compilation? I know that code which first time runs for 1800 microseconds can run in just 15 microseconds if it runs 2nd time just after the first run. Is every submitted puzzle run twice at least?
+ Reksio: Or even every test case...
+ Reksio: Or is some kind of AoT (CoreRT) compilation used?
+ eulerscheZahl: your code is run once on every testcase. the speedup to account for JIT languages is to give 1s for the first turn. you have less time for later turns, whenever there is a  loop of repeated input and output

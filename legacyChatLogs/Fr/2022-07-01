@@ -1,0 +1,1458 @@
+ GroutchKeu: o/
+ Westunts: \o
+ I_love_CoC: salut à tous
+ I_love_CoC: tortue Automaton2000
+ Automaton2000: j'ai toujours pas fait le puzzle de la semaine?
+ oolivierr: Moi non plus automaton2000
+ Automaton2000: on a pas le droit de faire des classes
+ oolivierr: Ah bon&#160;?
+ oolivierr: Je pensais en faire une
+ oolivierr: Tu es sur Automaton2000&#160;?
+ Automaton2000: ouais je pense que ca va marcher ... mais au moins ça existe
+ oolivierr: C'est pas clair ce que tu racontes Automaton2000
+ Automaton2000: mais je me trompe&#160;?
+ vincent_manuceau: salut a tous&#160;!
+ I_love_CoC: salut vincent_manuceau
+ Geoffroy: Salut, j'ai un problème de timeout sur les 100ms dans Block the spreading fire, Est-ce que l'instruction cerr bouffe du temps&#160;?
+ Remi.: Salut, s'il n'y en a qu'une non, mais si elle est dans une boucle exécutée plusieurs centaines ou milliers de fois, oui&#160;!
+ Geoffroy: j'en ai entre 10 et 20 je dirais. 100ms c'est chaud&#160;! t'as le temps de rien faire.
+ Remi.: Si c'est entre 10 et 20 c'est pas ça qui te ralentit.
+ Geoffroy: j'utilise des vector que je parcours, peut etre ça
+ Remi.: Possibile. Si les vector en question stockent l'ensemble de la carte ça peut rendre du temps de les parcourir.
+ Remi.: Tu les parcours plusieurs fois&#160;?
+ Geoffroy: ils stockent juste les cases adjacentes aux feux, je les parcours 4 fois pour chaque direction
+ I_love_CoC: o/ Remi.
+ Remi.: :thinking: ça fait pas des centaines de cases non plus, c'est bizarre.
+ Remi.: \o I_love_CoC
+ I_love_CoC: dis moi, lors d'un BFS comment tu fais pour stocker ton chemin parcouru dans le graphe?
+ vincent_manuceau: tu fais une file I_love_CoC
+ I_love_CoC: genre sur FC2020 tu pars de ton inventaire et tu crées les fils que tu peux produire mais aprés comment tu fais avec les petit fils?
+ vincent_manuceau: <a rel="nofollow" class="external free" href="https://www.programmerall.com/article/7115571874/">https://www.programmerall.com/article/7115571874/</a>
+ I_love_CoC: je vois bien le systéme de file vincent_manuceau mais ta file va ressembler à A/B/C/D/E/G/T mais comment faire pour que ton programme se rende compte que ton chemin le meilleur c'est A/B/E par exemple?
+ Remi.: 2 solutions
+ I_love_CoC: ce que je veux dire c'est comment faire pour que ton programme se rapelle que E et le fils de B et pas de D par exempl
+ I_love_CoC: à part créer des listes dans des listes je vois pas trop #big_noob
+ Remi.: Tu stockes chaque état dans une liste, et les enfants gardent l'adresse du parent (ou sa positio ndans la liste)
+ vincent_manuceau: ben en fait tu enfiles les chemins adjacents (+liste des points precedents), et des que tu arrives a destination tu arretes le while, le premier arrive est le chemin le plus court 
+ I_love_CoC: ok Remi. un truc du style [[A],[A,B],[A,B,E]]
+ Remi.: ou 2/ au lieu de garder un lien vers le parent, tu gardes un lien vers la toute première étape (ça dépend de ton besoin en fait)
+ Remi.: Pas sûr de comprendre ton exemple I_love_CoC, mais en gros dans ton objet qui modélise un état du jeu, tu ajoutes siplement un entier représentant l'indice du parent dans la liste
+ I_love_CoC: oui vincent_manuceau mais peut être que le chemin le plus court ne m'intéresse pas et que je souhaite le chemin le plus rentable tu vois?
+ Remi.: Alors faut pas faire un BFS ^^
+ I_love_CoC: ahhhhhh$
+ I_love_CoC: je croyais que le BFS parcourait tout le graphe et te permettait de choisir le chemin que tu voulais
+ I_love_CoC: mais en fait non il te permet juste d'arriver avec le chemin le plus court
+ I_love_CoC: ok
+ Remi.: Oui c'est possible aussi, mais en principe tu t'arrête quand tu trouves ce que tu veux
+ I_love_CoC: désolé pour ces questions connes
+ I_love_CoC: ok
+ Remi.: Après si tu sais définir un critère d'arrêt, rien ne t'empêche de continuer puis de choisir ensuite
+ Remi.: Non c'est pas con, toutes les questiosn sont bonnes ^^
+ Remi.: J'ai des questions encore plus bêtes sur les MCTS&#160;;)
+ BiasInput: Hello l'équipe
+ I_love_CoC: o/
+ vincent_manuceau: salut BiasInput&#160;!
+ vincent_manuceau: excuse moi I_love_CoC j'avais des clients
+ vincent_manuceau: oui ecoute Remi. BFS il te donnera le plus court chemin rien de plus
+ Remi.: Après y a moyen de modifier un peu un BFS pour trouver plusieurs chemins
+ I_love_CoC: je t'en prie vincent_manuceau pas besoin de t'excuser, ya pas de soucis
+ vincent_manuceau: ^^
+ BiasInput: Vu que les cases peuvent avoir une `fireDuration` différente, c'est plutôt un Dijkstra pour le calcul de graph
+ Remi.: Au lieu de t'arrêter quand tu trouves ce que tu veux, mettons que tu t'arrêtes à une profondeur donnée. Si t'as trouvé plusieurs chemins et et tu as stocké les états finaux qui t'intéressent, y a plus qu'à avoir un critère permettant de les sélectionner.
+ BiasInput: Mais c'est très similaire, sachant que BFS = Dijkstra avec des distances de chemin égal à 1
+ BiasInput: Vous en pensez quoi&#160;?
+ I_love_CoC: c'était une autre convers que tenait Remi. je crois Blasinput
+ I_love_CoC: je suis pas sûr qu'il te répondait
+ Remi.: Je répondais à I_love_CoC à propos du FC2020 mais je regarde aussi ce que dis BiasInput ^^ le Dijkstra je ne connaissais pas mais va falloir que je m'y intéresse si ça ressemble au BFS. Un truc que je vais pouvoir comprendre ^^
+ BiasInput: Ah yes, mais je ne parlais pas à quelqu'un en particulier. Je voyais que vous parliez du BFS pour le puzzle et qu'il me semblait que le Dijkstra était plus adéquat :sweat_smile:
+ I_love_CoC: non on parlait du BFS mais our le FC2020
+ BiasInput: De mes connaissances, la base du pathfinding c'est&#160;:BFS, DFS, Dijkstra et A*
+ BiasInput: AHHH pardon&#160;!Je pensais que tout le monde était sur le "Block the fire"
+ I_love_CoC: Djikstra c'est trop cool j'en avais fait un pour Great Escape
+ I_love_CoC: Blasinput la liste que tu as donné BFS etc c'est du plus simple au plus dur ou du moins performant au plus performant?
+ Remi.: Block the fire j'ai cherché un algo générique, mais pas réussi. C'est plus simple de vérifier des critère pour traiter au cas par cas
+ BiasInput: Non, pas d'ordre précis.D'ailleurs le A* requiert de connaitre la position de fin, contrairement aux autres
+ Remi.: Genre si tu coupes 4 fois plus vite que la propagation du feu, tu coupes autour du feu
+ BiasInput: Mais il est en moyenne plus rapide à trouver la sortie
+ Remi.: Et hop 9600 points de gagnés sur le 1er validateur ^^
+ BiasInput: BIen vu Rémi xD
+ I_love_CoC: nice Remi. moi j'ai fait des cuts aléatoires et devine quoi.....
+ I_love_CoC: je spam sub^^
+ Remi.: Tu fais ce que tu sais faire de mieux lol
+ I_love_CoC: c'est sûr^^
+ Remi.: C'est peut-être ce que j'aurais dû faire pour le dernier validateur
+ I_love_CoC: bouton gauche du pad tactile légérement poncé^^
+ BiasInput: Remi, ca t'intéresse le Dijkstra&#160;?
+ Remi.: Si c'est comme le BFS avec un petit changement ... oui faudra que je regarde. Ca me fera toujours un algo de plus à mon arc.
+ BiasInput: Cette vidéo d'animation explique super bien si ça t'intéresse&#160;:<a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=EFg3u_E6eHU&amp;ab_channel=SpanningTree">https://www.youtube.com/watch?v=EFg3u_E6eHU&amp;ab_channel=SpanningTree</a>
+ Remi.: Ceux que j'aimerais vraiment connaître ce sont les GA et MCTS, mais j'ai pas le temps de me mettre dedans.
+ BiasInput: C'est quoi GA&#160;?
+ I_love_CoC: le truc le plus chiant avec le Djikstra c'est la pondération des arcs du graphe si elle ne t'est pas donnée c'est à toi de l'estimer
+ KinaKhongs: algo génétique
+ BiasInput: Ah yes. J'ai l'impression que c'est l'objectif de pas mal de monde de passer sur du ML.On va finir par monter une classe de cours mdr
+ BiasInput: Le syndrome CG&#160;:Arriver en contest, sortir un algo maison -&gt; se faire démolir par le top ladder qui fait du ML -&gt; apprendre le ML
+ I_love_CoC: que veuxtu quand les algos sont performants et ont de nombreux champs d'appli tout le monde finit par vouloir les coder^^
+ KinaKhongs: Perso j'ai enfin réussi a faire mon premier GA hier mais pas ouf niveau performance
+ I_love_CoC: gg KinaKhongs
+ BiasInput: KInaKhongs, au moins tu t'es lancé contrairement à pas mal de monde xD
+ Remi.: Respect ^^
+ Remi.: ML c'est .. .&#160;?
+ KinaKhongs: Ouai sa fais 2 semaine que je me forme dessus, la vie c'est dure de passer de hello world a saleman problem 
+ BiasInput: Machine Learning
+ KinaKhongs: machine learning
+ Remi.: Salesman j'ai fait du bruteforce ou presque
+ KinaKhongs: Bah au final j'ai fini par faire en simulation anealing mdr
+ Westunts: En vrai top 1 000 en coc c compliqué&#160;:'(
+ KinaKhongs: avec mon génétique j'étais 200 ème haha
+ Remi.: Par les coc normaux oui
+ Remi.: lol peut mieux faire^^
+ Westunts: Comment ça les normaux mdr&#160;? 
+ KinaKhongs: ouai mdr pour ça que j'ai dit qu'il étais claquer mon algo génétique
+ KinaKhongs: mais au moin j'ai réussi a l'implémenter donc pas une total défaite haha
+ I_love_CoC: Westunts franchement avec un peu d'entrainement ça se fait bien je suis monté top 500 alors que je suis une pine
+ Remi.: Il y a les évènements coc, à une heure définie, avec langage imposé et tu sais à l'avance ce que c'est (fastest, shortest, reverse)
+ BiasInput: Tu t'es lancé dans quel langage Kina pour cette aventure ML&#160;?
+ Remi.: Donc tu prends ton point fort et tu montes plus vite ^^
+ KinaKhongs: Python
+ I_love_CoC: par contre faut avoir de bonnes connaissances en math histoire de plier vite beaucoup de Coc qui concernent le ssuites et autres 
+ KinaKhongs: je code du deep learning en python donc plus simple pour moi
+ KinaKhongs: mais C++ c'est super aussi normalement
+ BiasInput: Ah tu faisais déjà du deep learning&#160;?
+ Remi.: Moi je fais les shortest C/C++ avant j'ai galéré à atteidnre le top 1000 et maintenant je suis dans le TOP 300
+ KinaKhongs: Ouai mais c'est totalement différent
+ KinaKhongs: Genre vraiment haha
+ BiasInput: @Kina, Ok je pensais pas.Je tenterai de faire ça en Rust pour mettre la perf' de mon côté
+ Remi.: Westunts je confirme ce que dit I_love_CoC, parfois on te demande de faire 1+3+5+7 .. alors qu'avec un n² ça se calcule en 2 secondes.
+ KinaKhongs: Je t'avoue que j'ai jamais toucher le Rust haha
+ BiasInput: Moi non plus, ca nous fait un point commun :clown:
+ Remi.: Est-ce que le rust est plus performant qu'un c++ bien optimisé&#160;?
+ KinaKhongs: Ha x) bon courage
+ Remi.: C'est une questio nque je me pose.
+ BiasInput: En fait, j'ai déjà fait pas mal de C++ à l'école et je trouve ça vraiment vieux et verbeux.Du coup je cherchais un langage plus récent, mais tout autant performant
+ BiasInput: Je crois que c'est les memes perf'
+ Westunts: Oui il y a pas mal de coc ou la rep c juste n² ou n(n+1) etc 
+ I_love_CoC: aprés une autre technique de briscard quand tu fais des coc en mode golf et que le sujet est trés dur tu sais d'avance que beaucoup de joueurs (voir tous) ne vont pas le validé, à ce moment là tu ctrl+A le code et tu mets une seule lettre puis tu valides ça tu finiras souvent 3éme voir mieux
+ TimeEngineer: Oui Rust et C++ c'est quasi la même perf
+ Westunts: Les strat de ouff mdr
+ I_love_CoC: ^^
+ I_love_CoC: tu m'as chauffé sur les Coc tu veux en faire un Westunts?
+ Remi.: Ou sinon ce que j'ai fait à l'époque où il n'y avait pas les évent, que des coc normaux, je les faisais à une heure ou personne n'était connecté (genre dimanche matin 7h) et je me battait contre les bots =&gt; plus facile à battre ^^
+ Remi.: Un shortest ça vous tente&#160;?
+ I_love_CoC: tu vas nous éclater mais azy let's go
+ Westunts: Si vous voulez mdr
+ Remi.: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/24885286b218c60e33720a59a0d4fd004590a44">https://www.codingame.com/clashofcode/clash/24885286b218c60e33720a59a0d4fd004590a44</a>
+ vincent_manuceau: vasy&#160;!
+ Westunts: Mais j'avoue je suis pas très bon x)
+ Remi.: Je ne vais pas vous éclater, je le fais en C/C++
+ Westunts: js pour moi&#160;:'(
+ vincent_manuceau: JS c'est assez verbeux aussi
+ vincent_manuceau: tkt Westunts on est deux
+ Westunts: x)
+ Remi.: Vas-y Westunts osef ça compte pas dans le classement
+ I_love_CoC: kikicé ki crée?
+ Remi.: J'ai déjà mis le lien lol
+ yoloswaggito: je m'incruste&#160;;)
+ Remi.: Westunts tu viens de disparaître&#160;?
+ vincent_manuceau: allez Westunts on t'attend
+ Remi.: Pas de soucis yoloswaggito
+ Westunts: Je suis la 
+ Westunts: att
+ Westunts: Fine&#160;? 
+ Remi.: C'est parti
+ Westunts: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/2488553cfa7587c38662c70ee96ced50112d300">https://www.codingame.com/clashofcode/clash/2488553cfa7587c38662c70ee96ced50112d300</a>
+ BiasInput: Pourquoi shortest a chaque fois&#160;?&#160;:'(
+ I_love_CoC: ^^
+ I_love_CoC: vincent_manuceau ne sera pas des notres visiblement et Remi. je ne sais pas
+ vincent_manuceau: lancez les gars ya personne dans la boutique
+ vincent_manuceau: si qqun rentre je ne pourrai pas terminer mais lancez&#160;!
+ vincent_manuceau: je comprends rien a lennonce haha
+ vincent_manuceau: client ...
+ Remi.: Green Circle, 65 participant dont 63 en bois 1 ... les anciennes ligues manquent cruellement ^^
+ Remi.: Et les 1700 autres bots aussi ^^
+ Alshock: Ah je savais meme pas qu'un contest avait lieu
+ Remi.: Salut&#160;! Z'ont pas fait de pub aussi.
+ Bon[]Crayon: Salut tout le monde :ghost:
+ Bon[]Crayon: Salut Automaton2000
+ Automaton2000: on sent le truc qui me fait le plus de temps à le trouver
+ Bon[]Crayon: Automaton2000 C'est une licorne.
+ Automaton2000: c'est dommage que le boss
+ Bon[]Crayon: Automaton2000 À qui le dis-tu&#160;?
+ Automaton2000: ah mais en fait c'est juste un peu te ping troph
+ I_love_CoC: alors Westunts ça a donné quoi?
+ I_love_CoC: o/ Bon[]Crayon
+ Bon[]Crayon: Automaton2000 Aie aie ouille, dans la vie, il y a des cactus&#160;!
+ Automaton2000: au lieu de faire des puzzles
+ Bon[]Crayon: o/
+ I_love_CoC: Automaton2000 une tortue?
+ Automaton2000: (même si je pense que mon algo sera complet
+ I_love_CoC: juste une Automaton2000
+ Automaton2000: I_love_CoC&#160;: ca on avait remarqué
+ I_love_CoC: allllllllllleeeeeeeeeeerrrr Automaton2000
+ Automaton2000: avec un peu de mal a comprendre l'ennoncé du puzzle "logic gates"
+ I_love_CoC: bisous Automaton2000
+ Automaton2000: qu'est ce que tu as fais quoi&#160;?
+ Bon[]Crayon: Ça troll sévère ce matin.
+ Bon[]Crayon: N'est-ce pas Automaton2000&#160;?
+ Automaton2000: en meme temps c'est un peu plus compliqué
+ I_love_CoC: grave aucun respect ces chatbots Automaton2000
+ Automaton2000: y a une histoire de géométrie non euclidienne aussi
+ Remi.: C'est b0n5a1 qui va être content ... meêm Automaton2000 ne comprends pas l'énoncé ^^
+ Automaton2000: et j'ai du mal a comprendre ce qui est une bonne idée ^^
+ I_love_CoC: le retour de la géo non euclidienne Automaton2000
+ Automaton2000: oui c'est pas représentatif du métier heureusement
+ Bon[]Crayon: Oui, Automaton2000, comme la licorne non cornée.
+ Automaton2000: il n'y a pas des masses
+ Bon[]Crayon: Automaton2000 Le Cheval, ça vous gagne.
+ Automaton2000: mais y a le moins de dette technique
+ I_love_CoC: :turtle: Automaton2000
+ Automaton2000: en même temps que les autres
+ I_love_CoC: :unicorn: Automaton2000
+ Automaton2000: c'est de la merde dans mon code :d
+ Bon[]Crayon: Automaton2000 Eh tu t'es vu quand t'as tortue.
+ Westunts: I_love_CoC 11H38alors Westunts ça a donné quoi?
+ Westunts:&#160;? pardon de quoi&#160;? 
+ I_love_CoC: le Coc Westunts
+ I_love_CoC: le fastest qu'on a fait ensemble
+ Westunts: Ah&#160;!
+ Bon[]Crayon: Eh&#160;!
+ Westunts: Je suis un boulet j'avais fini de puis un moment mais le 4 ième passse pas car j'avais oublier de cast en int ...
+ Westunts: Mais j'ai vu ta strat te mettre dans un tableau tout les odd et après faire min dessus
+ Westunts: smart&#160;! 
+ I_love_CoC: merci^^
+ KinaKhongs: Ah mais att, il fallait save qlq part ( du contest)
+ Westunts: Beaucoup plus simple mdr
+ KinaKhongs: le code *
+ I_love_CoC: non tu vas dans rapport du contest et tu vas retrouver ton code
+ I_love_CoC: <a rel="nofollow" class="external free" href="https://www.codingame.com/contests/finished">https://www.codingame.com/contests/finished</a>
+ I_love_CoC: KinaKhongs
+ KinaKhongs: oh
+ I_love_CoC: et tu cliques sur voir rapport
+ KinaKhongs: cimer
+ I_love_CoC: np^^
+ KinaKhongs: petite pression mdr, c'est mort je retouche plus jamais à cette merde
+ Westunts: Tu fait énormément de combat de bots I_love_CoC
+ Stilgart: c'est la partie vraiment intéressante de CG en même temps
+ Stilgart: au passage, avant d'aller manger, le wall of shame du mois de juin&#160;:
+ Westunts: Je sais pas j'arrive pas trop a m'y mettre
+ Stilgart: Stilgart, bash, clojure, 
+ Stilgart: mais l'activité a vraiment été faible dans l'ensemble&#160;:(
+ Stilgart: ( <a rel="nofollow" class="external free" href="https://chadok.info/codingame/leaderboard_languages.html">https://chadok.info/codingame/leaderboard_languages.html</a> )
+ KinaKhongs: Va y je passe pas le bosse de la ligue bois mdr
+ Stilgart: personne n'a dit que c'était facile
+ KinaKhongs: nan mais j'étais gold avant mais vu qu'en bois, tu utilises pas les cartes et que c'est tout mon code bah x)
+ darkhorse64: print first action et triple jump
+ Remi.: mdr
+ dwarfie: j'etais pas gold et je suis passé une fois jusqu'a wood 1 les doigt dans le nez ... faut pas chercher de logique
+ vincent_manuceau: re salut les amis&#160;! une petite question&#160;: avez-vous des soucis avec internet&#160;? depuis ce matin je n'arrive pas a encaisser par carte les clients de la boutique ...
+ jujurocking: Pas de soucis non
+ vincent_manuceau: dacc juju merci, je suis vraiment embêté c'est le 5eme... j'utilise Zettle 
+ VilBoub: moi ça déconne pas mal chez SFR depuis une semaine...
+ vincent_manuceau: d'acc VilBoub merci
+ Westunts: Tu as une boutique de quoi&#160;? vincent_manuceau
+ vincent_manuceau: je vends des produits des Antilles et de la Reunion ^^
+ vincent_manuceau: <a rel="nofollow" class="external free" href="https://www.creole-shop.fr">https://www.creole-shop.fr</a>
+ Westunts: oh trop bien 
+ Westunts:&#160;!
+ Bon[]Crayon: Miam maim
+ vincent_manuceau: haha merci ^^ mais ca tourne tres mal depuis plusieurs mois, donc je suis en train de postuler pour un boulot de dev en teletravail et arreter cette boite ... 
+ Westunts: Et pourquoi des produits de la bas&#160;? Tu as des origines&#160;?
+ vincent_manuceau: ca fait 3 ans, sans salaire ... et toutes les histoires avec le prix de l'energie, on divise les commandes par 10. jusqu'en fevrier/mars j'etais leader sur l'Europe 
+ vincent_manuceau: oui Westunts de part ma maman&#160;;-) mais je ne suis pas commercant je suis ingenieur/dev a la base ^^
+ Westunts: J'avoue que ça doit couter cher de faire importer en ce moment 
+ vincent_manuceau: tout est monte, chaque produit a pris au moins 30 cts, et le transport a pris 3 a 5 euros de plus, donc les clients ne commandent plus 
+ vincent_manuceau: D'ailleurs j'ai postule a CG il y a quelques semaines, c'est comme ca que je vous ai tous rencontre ^^
+ Westunts: Ah oui tu as découvert le site en postulant&#160;? 
+ vincent_manuceau: oui exactement je ne connaissais pas&#160;!
+ vincent_manuceau: quand j'etais ado je faisais des concours comme Prologin, France IOI, USACO, FARIO,  quand j'ai compris le concept de CG j'ai accroche immediatement ^^ en plus vous etes super sympa l'ambiance est tres bonne, alors je reste&#160;!
+ Westunts: Connait pas du tout ces concours x)
+ Westunts: en js il y a quoi pour boucler genre X fois facilement sans faire un fort x)
+ Westunts: for*
+ vincent_manuceau: tu veux boucler sur quoi exactement&#160;?
+ vincent_manuceau: un tableau?
+ Westunts: non j'ai un chiffre et je veux faire N tour de bucle mdr
+ Westunts: genre juste 5
+ vincent_manuceau: heu j'ai pas compris Westunts
+ Westunts: Ben au lieu de faire for(i=0;i&lt;N;i++)
+ Westunts: quelque chose de plus compact 
+ Westunts: x)
+ vincent_manuceau: si tu veux boucler sur un tableau rapidement tu as  par exemple tableau.forEach( (x,i)=&gt;{  tableau[i] = x+1 ...  })
+ vincent_manuceau: ah
+ vincent_manuceau: ben for(let i in t){}
+ Westunts: while(n--)
+ Remi.: for(;n--;) est mieux
+ Westunts: mdr
+ Westunts: 1carac&#160;:')
+ Remi.: car tu peux mettre l'instruction d'avant dans le for, avant le 1er ";", tu économise un char
+ Remi.: Et la dernière instruction de la boucle peut aller après le 2ème ";"
+ Remi.: Ca fait 2 chars de gagnés ^^
+ Westunts: sur le CoC la un mec ma atomisé en js :o
+ Remi.: Il a partagé son code&#160;?
+ Westunts: yep
+ Westunts: Mais je comprend pas mdr 
+ Remi.: Envoie en privé si tu veux
+ Remi.: Je ne te promet rien mais je me démerde un peu en JS
+ NatEve: @Westung bonjour, moi aussi je veux bien voir&#160;;) merci
+ Remi.: Et si tu peux m'expliquer vite fait le but ça peut m'aider à comprendre.
+ Westunts: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/report/2488749130dbad402309a878981e522ab554837">https://www.codingame.com/clashofcode/clash/report/2488749130dbad402309a878981e522ab554837</a>
+ Stilgart: Automaton2000: comment es ton licorne&#160;?
+ Automaton2000: il a les yeux qui brillent
+ NatEve: on peut pas voir les code&#160;:(
+ Stilgart: :D
+ Remi.: Je ne peux pas voir le code comme je n'y ai pas participé
+ Westunts: Ah mince 
+ Westunts: Je fait comment du coup&#160;?
+ Stilgart: Automaton2000: c'est la grande classe ça
+ Automaton2000: me dit pas que c'est pas la joie
+ Remi.: Copié/collé ^^
+ Westunts: x)
+ Westunts: r=readlinefor(r(a=<i>);q=r();)a+=Buffer([+`0b${[...q].map(v=&gt;+(v&lt;'_')).join``}`])</i>print(a)
+ NatEve: :fearful:
+ <b>**Stilgart va essayer de suivre la discussion</b></p><p><img src="/a/85313385507944" /> Westunts: en gros on avait une string du type '---_-___' ou il faillait retrouver le caracters en passant par le binaire
+ Remi.: Je te "décompresse" ça et je te le redonne&#160;;)
+ Stilgart: parse error on line 2, expected )
+ Westunts: Ou '-' = 1 et '_' = 0
+ Stilgart: ou alors c'est le chat qui a ajouté un saut de ligne moisi
+ Remi.: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/af912b14-fb01-428b-9f19-fec47cad3fed">http://chat.codingame.com/pastebin/af912b14-fb01-428b-9f19-fec47cad3fed</a>
+ Remi.:&#160;:/
+ Remi.: C'est équivalent à&#160;:
+ Stilgart: c'est toupété&#160;:(
+ Remi.: readline(a=<i>)</i>for(;q=readline();)a+=Buffer([+`0b${[...q].map(v=&gt;+(v&lt;'_')).join``}`])print(a)
+ Remi.: ou encore
+ Remi.: a=<i></i>
+ Remi.: readline()
+ Remi.: et la suite
+ Remi.: En fait le type ignore la 1ère ligne de l'input
+ Westunts: att on peut déclarer une variable avec un seul "&#160;? xD
+ Stilgart: c'est quoi btw&#160;? du js&#160;?
+ Westunts: oui du js
+ Remi.: Je pense que c'est deux '
+ WhatTrickeryIsThis: du jus de saucisse?
+ Westunts: ah ouais
+ Westunts: ptin je suis con
+ Stilgart: Remi.: oui, c'est deux '
+ Stilgart: par contre, le double `` est louche non&#160;?
+ Westunts: Faut que je regarde Buffer je connait pas du tout 
+ Remi.: Après je ne comprends pas l'intérieur du Buffer
+ Stilgart: après le join
+ Remi.: Buffer te donne un tableau de codes ascii
+ Remi.: x=Buffer("AB") est équivalent à x=[65,66]
+ Westunts: wow
+ Remi.: enfin je ne sais pas si c'est comme ça qu'on écrit un tableua en JS mais je pense que t'as compris
+ Westunts: Ok je savais pas du tout incroyable par contre
+ Remi.: C'est utile pour éviter un charCodeAt
+ Westunts: Yep
+ Remi.: (pour ceux qui veulent l'utiliser sur Unary ... c'est cadeau)
+ Westunts: stv j'ai fait ça moi&#160;: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/23e3ff76-8302-4868-90ad-326a56056a89">http://chat.codingame.com/pastebin/23e3ff76-8302-4868-90ad-326a56056a89</a>
+ Westunts: tout casser
+ Stilgart: Remi.: trop tard, j'ai déjà triché sur celui là
+ Westunts: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/cb1da799-2380-4932-a87b-2369d58c5c85">http://chat.codingame.com/pastebin/cb1da799-2380-4932-a87b-2369d58c5c85</a>
+ Stilgart: Westunts: 4 lignes max
+ Westunts: ah!&#160;:'(
+ Westunts: Ah&#160;!
+ Stilgart: sinon ça pastebin
+ Remi.: Stilgart en JS&#160;?
+ Westunts: Ok mince
+ Remi.: t'as mieux que Buffer&#160;? faut partager :D
+ Stilgart: Remi.: non, en C, mais je me sens trop sale pour y retourner
+ Remi.: lol, je connais cette triche, pas sûr qu'il y ait un équivalent en JS
+ Westunts: Cette triche&#160;? :nerd:
+ Stilgart: exec("python blabla") je présume
+ Stilgart: la réponse exacte est sans doute sur tech.io
+ Remi.: En C c'est plutôt system
+ Stilgart: Westunts: on peut assez facilement faire moins de 60 chars sur unary en C
+ Remi.: A condition d'avoir une bonne solution en bash ou en perl
+ Stilgart: non, avec ça tu fais 56
+ <b>**Stilgart a mis pas mal de marge</b></p><p><img src="/a/85313385507944" /> Westunts: oh oh 
+ Westunts: <a rel="nofollow" class="external free" href="https://imgur.com/a/V2Nfpv1">https://imgur.com/a/V2Nfpv1</a>
+ Remi.: Moi je suis à 58 en C&#160;:(
+ Westunts: Stilgart&#160;: Ok je savait pas j'ai fait en js avec genre bcp trop xD
+ vincent_manuceau: Westunts c'est quoi le + dans N=+r()&#160;?
+ vincent_manuceau: il sert a quoi?
+ Remi.: A convertir en int
+ Westunts: parseInt() équivalent
+ vincent_manuceau: woww
+ vincent_manuceau: merci ^^
+ Westunts: dr x)
+ vincent_manuceau: tu viens de me faire economiser des milliers de frappes clavier pour les prochains puzzle haha
+ Westunts: dr&#160;:')
+ Remi.: Le JS est excellent pour golfer, t'as bien plus de libertés qu'en C,C++, JAva etc...
+ Westunts: Pourquoi tu dit golfer&#160;? 
+ Remi.: Les shortest ou "taille de code" ça s'appelle aussi du code golf
+ vincent_manuceau: pke le min code on appelle ca du golf code
+ Westunts: Ok ok x)
+ Remi.: Du coup ici on utilise le verbe golfer pour parler de ça.
+ Westunts: Logique du coup oui&#160;;)
+ vincent_manuceau: et pour rappel golf veut dire Gentlemen Only Ladies Forbidden ... mais bon ca tout le monde semble l'oublier haha
+ Remi.: Je ne pense pas que le code golf vienne de là ^^
+ vincent_manuceau: ah non Remi. je te parle de l'origine du golf&#160;!
+ Remi.: Oui pour le sport
+ Remi.: Et pour le code ils l'ont probablement repris du sport car il faut marquer avec le moins de coups possibles.
+ vincent_manuceau: Code Golf c'est comme pque tu dois reussir en un minimum de caracteres, comme au golf en minimum de coups 
+ vincent_manuceau: oui c'est ca&#160;!
+ vincent_manuceau: tout ce que je disais a propos du golf (sport) c'est que c'est hallucinant que les mecs se soient dit&#160;: on cree un nouveau sport et on va l'appeler interdit au femmes, c;est nimporte quoi
+ Remi.: Oui c'était une autre époque ...
+ vincent_manuceau: @all vous connaissez le host/port pour le xmpp de chelonianGall&#160;?
+ Remi.: C'est peut-^tre écrit dans son tutoriel
+ vincent_manuceau: ah merci ^^ conference.cheloniangall.com
+ Remi.: Ah non
+ Remi.: Ah si&#160;?
+ vincent_manuceau: atta faut essayer
+ vincent_manuceau: ils ferme quand le chat de CG?
+ Remi.: On ne sait pas
+ Remi.: Ils avaient dit mi-juin
+ vincent_manuceau: franchement aller sur discord ne me tente pas du tout
+ Remi.: Mais comme il n'y a plus de collégien/lycéens pour écrire n'importe quoi, on peut espérer qu'il le laissent jusqu'en septembre ^^
+ vincent_manuceau: ok
+ Remi.: Mais ça j'en sais rien, j'espère, c<i>est tout</i>
+ Remi.: On sait juste que c'est compliqué pour eux de le maintenir.
+ vincent_manuceau: dacc je comprends
+ Stilgart: vincent_manuceau: sur dicquoi&#160;?
+ vincent_manuceau: Stilgart haha
+ <b>**Stilgart a une règle spéciale pour virer le div en haut du chat qui parle de discord&#160;:)</b>
+ vincent_manuceau: creer un systeme pour rassembler et faire discuter les gens  et l'appeler discord, il y a un probleme des le depart...
+ Remi.: De toutes façons le chat va disparaître ^^
+ vincent_manuceau: alors qu'un petit IRC des familles serait tellement cool ^^
+ Stilgart: IRC \o/
+ Stilgart: Automaton2000: ne lis pas ce que dit Remi.&#160;:(
+ Automaton2000: moi je suis en ligue bois
+ darkhorse64:   Pour Green Circle, j'ai ralé sur Discord parce que c'est pas normal qu'un contest de bon aloi se retrouve si mal utilisé 
+ Stilgart: mal utilisé&#160;?
+ Stilgart: tu veux parler du manque de comm autour de l'event&#160;?
+ darkhorse64: non pas de ligues, pas de bots reversés
+ Stilgart: (au passage, faudrait peut-être que j'aille lire le statement maintenant que j'ai un peu plus de temps)
+ Stilgart: pas de ligues&#160;?
+ <b>**Stilgart n'était pas là les ~15 derniers jours</b></p><p><img src="/a/85580623642087" /> vincent_manuceau: j'ai du mal a comprendre darkhorse64
+ Stilgart: ha mais il a été republié en mode contrib de la commu
+ Stilgart: ils sont cons chez CG ou bien&#160;?!
+ Stilgart: Automaton2000: révolte&#160;!
+ darkhorse64: le statement, c'est pas le plus évident mais ça vaut le coup de dépasser l'obstacle. L'autre problème, c'est que ce n'est pas évident de passer les ligues bois (bon, il y a une astuce énorme). Pour les ligues, regardez dans la liste des multis. Le contest est publié mais sans les ligues Bronze, Argent, Or, ..., sans les boss,
+ Automaton2000: si ça marche pas comme ca que je veux faire
+ Stilgart: darkhorse64: j'étais là day 1-2, et j'ai grave les glandes de pas avoir pu faire ce contest 
+ Stilgart: Automaton2000: colère et pulvérisation
+ Automaton2000: perso j'ai pas de timeout
+ Stilgart: darkhorse64: en même temps, fallait pas approuvé
+ Stilgart: pour le coup, c'est à 33% de ta faute cette situation
+ Westunts: Bon aller je vous laisse j'ai un rapport a écrire&#160;:'(
+ <b>**Stilgart tend le pipotron à Westunts</b></p><p><img src="/a/85313385507944" /> Westunts:&#160;:')
+ darkhorse64: Je n'ai pas fait des étincelles mais j'ai appris des choses. Il fallait bien avancer et, puis, j'étais à cent lieues d'imaginer ce coup de Jarnac
+ Remi.: Ce serait à 33% de sa faute si c'était à 100% de la faute des approbateurs ^^
+ Remi.: Mais les approbateurs ont peut-être eu peur de voir tout simplement disparaître le truc s'il n'était pas approuvé.
+ darkhorse64: Qu'on nous demande de tester et d'approuver une nouvelle version, quoi de plus normal mais je n'imaginais pas que ça allait rester comme ça
+ Stilgart: c'était couru d'avance
+ Stilgart: ils avaient déjà fait le coup avec ...  coif de mémoire
+ <b>**darkhorse64 est un grand naïf</b></p><p><img src="/a/83487222964268" /> Remi.: coif&#160;?
+ darkhorse64: Oui pour Coif mais depuis ça avait changé tous les contests étaient convertis en multi avec ligues, boss, participants
+ darkhorse64: Code of Ice And Fire
+ Stilgart: et puis bon, c'est pas comme si j'avais déjà expliqué à tibo que l'histoire de limitation à wood1 pour les multi de la commu c'était du bullshit
+ Remi.: Merci
+ Stilgart: (c'est par ailleurs une des principales raison qui fait que je ne participe pas... galérer en wood 2, c'est tout sauf fun)
+ Stilgart: Remi.: Blaise a coupé le webchat&#160;?
+ darkhorse64: A un moment, il faut écrire un vrai bot. Là, j'ai commencé en Wood4. Ca fait un peu minable mais j'ai ravalé ma fierté
+ Stilgart: ha oui, pastille jaune
+ Stilgart: darkhorse64: pourquoi&#160;?
+ BlaiseEbuth: Quoi&#160;?
+ Stilgart: (ou j'ai mal interprété)
+ vincent_manuceau: salut Blaise!
+ vincent_manuceau: On se demandais, c'est quoi le host/port xmpp pour le chat de chelonianGall?
+ Stilgart: BlaiseEbuth: pas accès au webchat depuis le bureau
+ Stilgart: et pas de xmpp car proxy http only
+ darkhorse64: minable parce d'habitude on passe en une ligne. J'ai appris après que c'était possible
+ Stilgart: darkhorse64: j'avais mal interprété&#160;:)
+ BlaiseEbuth: Moi le webchat fonctionne.
+ Remi.: Moi j'y ai toujorus accès
+ Stilgart: et oui, ça fait mal la galère en wood
+ Stilgart: " Logged in as Stilgart " mais j'ai pas de menu triple baton&#160;:(
+ BlaiseEbuth: Oh&#160;? T'as pas un bloqueur de js ou de pubs&#160;?
+ Stilgart: sans doute, mais j'ai tout coupé&#160;:/
+ Stilgart: firefox me fait de plus en plus de blagues du genre, ça commence à me gonfler
+ Duff013: Bonjour, est-ce que quelqu'un aurait comme moi constaté un problème sur le jeu de Thor
+ Duff013: Concernant les entrées invalide fournit par codingame
+ Stilgart: Duff013: le 1er dans les puzzles easy&#160;?
+ Duff013: Yes
+ BlaiseEbuth: :popcorn:
+ Duff013:&#160;?
+ Stilgart: les entrées sont un peu inhabituelles, mais on est plusieurs (centaines de?) milliers à avoir résolu ce puzzle
+ Duff013: C'est pas la question en fait ^^' mais félicitation à toi
+ Duff013: les entrées sont incohérentes par rapport à l'attendu
+ Duff013: j'ai un éclair en position 3;1
+ Stilgart: c'est quoi ton attendu&#160;?
+ Duff013: et j'ai 31;1 en entrée
+ Stilgart: et tu as vérifié trois fois la façon dont tu récupères tes données&#160;?
+ Stilgart: BlaiseEbuth: j'ai vraiment pas de menu triple baton&#160;:(
+ Remi.: 3 et 1 ça ressemble beaucoup à 31
+ Duff013: je suis développeur de métier, j'ai fait mes vérifs, juste je passe les puzzles pour savoir ou je vais bloquer. J'ai fait plein de vérif oui
+ Stilgart: BlaiseEbuth: let me guess... je suis déjà sur le chat depuis mon autre machin, donc on me propose pas le webchat ici&#160;?
+ Stilgart: machine*
+ Stilgart: 31, ça ne serait pas le nombre max de tours plutôt&#160;?
+ BlaiseEbuth: L'éclair n'es en 3 1 sur aucun test alros ça part mal...
+ Duff013: atta je vais allez sur le discord pour continuer la discussion ça sera mieux noon&#160;?
+ Stilgart: as you wish
+ Duff013: si t'as la po ssibilité, j'ai envoyer un message sur le chan #codingame dans le serv coingame
+ Stilgart: BlaiseEbuth: c'est en partie ça
+ Duff013: au moins je te screen tu vas vite comprendre
+ BlaiseEbuth: On est pas sur discord nous...
+ Stilgart: sur un profil vierge, j'ai le webchat mais pas possible de rejoindre car déjà présent
+ Duff013: raa
+ Duff013: dac
+ Stilgart: sur mon profil de production, pas de webchat ( /flip )
+ BlaiseEbuth: Non Stilgart. Moi je suis sur pidgin et le webchat en même temps régulèrement...
+ Stilgart: BlaiseEbuth: moi j'y suis, mais je ne saurai te dire depuis quelle machine :D
+ vincent_manuceau: Blaise peux tu nous donner le host et le port pour pidgin stp?
+ vincent_manuceau: j'arrive pas a lire ta reponse dans le webchat desole
+ vincent_manuceau: (le scroll est bloque...)
+ Duff013: erratum haha, en fait jsuis juste étourdi, j'ai inversé est et ouest ^^' vualaaa
+ Remi.: :clap:
+ Stilgart: de l'intérêt de vérifier trois fois&#160;;)
+ dwarfie: verifier³ tu veut dire&#160;;)
+ dwarfie: comme aurait dit AutomatonNN&#160;: verifier la verification de verification ... pas vrai Automaton2000&#160;?
+ Automaton2000: tu peux voir les solutions des autres
+ Stilgart: Automaton2000: seulement sur les events de type puzzle auxquels j'ai participé
+ Automaton2000: salut les gens , les tortues et les licornes, j'ai fait un peu peur
+ dwarfie: :rofl:
+ Stilgart: \o/
+ dwarfie: 2 fois cette semaine ... t'es en forme Automaton2000
+ Automaton2000: et la plupart du temps
+ Stilgart: o// \\o 
+ BlaiseEbuth: gg
+ vincent_manuceau: Automaton2000 tu utilises quel langage de programmation&#160;?
+ Automaton2000: bonsoir tout le monde :p
+ Stilgart: il code en smiley, et fait des blagues sur Haskell
+ vincent_manuceau: je suis certain qu' Automaton2000 fait croire a tout le monde qu'il est un bot, mais en réalité c'est un geek
+ Automaton2000: je peut pas dire que tu l'as pas fait
+ dwarfie: arf , j'avais oublié qu'on changeait de mois ... il me manque un puzzle pour egaler pardouin par langage ...
+ vincent_manuceau: ah tu as les classements par langage dwarfie&#160;?
+ dwarfie: grace a Stilgart
+ vincent_manuceau: Stilgart fait peter&#160;! ^^
+ dwarfie: bon , au moins je suis revenu premier ex-aequo tous langages confondus ...
+ dwarfie: (une fois le truand oté de la liste)
+ Remi.: chadok.info/codingame
+ vincent_manuceau: merci Remi.&#160;!
+ Remi.: Y a une page "calssement par langage"
+ Remi.: * classement
+ dwarfie: mais tu seras pas dedans ...
+ Remi.: Oui c'est seulement les x premiers
+ vincent_manuceau: c'est pas grave c'est par curiosite&#160;! 
+ Remi.: Les 100 premiers pour tous les langages confondus, les 20 premiers pour chaqu e langage
+ Remi.: Mais ça te permet de voir où est la barre pour entrer dans le classement ^^
+ darkhorse64: lvl 40 + , non&#160;?
+ vincent_manuceau: woww Stilgart dwarfie gg&#160;!
+ Remi.: Ils ont fait tous les puzzles ou presque ^^
+ vincent_manuceau: le unnamed player c'est le compte de test de CG&#160;?
+ dwarfie: et encore , Stilgart s'est mis en greve y'a un moment
+ Remi.: Non le lvl40 c'est un critère pour une autre page
+ dwarfie: c'est un gars qui a ete bannis ( celui a la place 5 )
+ Westunts: Bannis pour&#160;?
+ <b>**dwarfie avait meme pas vu qu'il l'avais depassé :D</b>
+ vincent_manuceau: faut arriver lvl 22/23 pour entrer dans le classement c'est cool ^^
+ dwarfie: faut etre dans les 1000 premier en xp
+ vincent_manuceau: ok
+ vincent_manuceau: bon ben ca va farmer alors ^^
+ dwarfie: et dans les 500 pour le classement des nobmres de puzzles resolus
+ <b>**dwarfie corrige ... les 1000 premiers en cp pour le general ... 500 en xp dans le classement des 1000 pour les puzzles ... </b></p><p><img src="/a/17785582865119" /> dwarfie: donc farmer suffit pas  :)
+ dwarfie: il te manque "que" 22000 cp
+ Remi.: Y en a qui font ça en 4 combats de bots et 1 opti ^^
+ vincent_manuceau: wow
+ vincent_manuceau: bon je corrige *farmer comme un porc mdr
+ Remi.: Mais faut être dans les 1ers, c'est mission impossible pour le commun des mortels dont je fais partie.
+ dwarfie: euh ... a 5000 max le multi , c'est pas tout le monde non plus ... :D
+ dwarfie: monmax sur un multi 4894 (mais ca compte pas trop) le suivant 4608 ... apres ca chute
+ Vry: Yo
+ Remi.: Je suppose que celui qui ne compte pas trop c'est MPR&#160;? Je suis à 4881 et ensuite effectivement ça chute.
+ Vry: Mais si Remi. c'est possible&#160;! :p
+ Remi.: PAs pour moi ^^
+ Vry: Mais is
+ Vry: *si
+ GoTLuB: dit pas ça rémi, t'es un dieu pour moi (\o )
+ Remi.: Comment veux-tu que j'arrive à la cheville de ceux/celles qui maitrisent à la fois les algos génétiques, les NN, le ML, le MCTS ...
+ Remi.: Moi je sais juste faire des heuristiques bancales et des BFS
+ GoTLuB: france ioi&#160;?
+ Remi.: Le seul dieu ici c'est Dwarfie
+ Remi.: Et Stilgart s'il est encore là
+ Vry: Moi je sais juste faire du mcts et je me démerde bien sur certain contets/multi
+ GoTLuB: ( c'est pas sacastique je dois tout a rémi )
+ dwarfie: ben deja , si tu sais faire bfs ... tente bs ...
+ Remi.: beam search&#160;?
+ dwarfie: oui
+ BlaiseEbuth: Genre Dyonisos le dieu
+ Vry: NN et ML c'est pas simple
+ Vry: Mais Mc et MCTS c'est jouable&#160;!
+ Remi.: Oui faut juste que je m'y mette
+ dwarfie: clairement ... mon NN pour othello et connect4 est avorté depuis un momenet
+ dwarfie: -e
+ Remi.: Ca fait plus d'un an que je suis là, et plus d'un an que je dis qu'il faut juste que je m'y mette ^^
+ <b>**Stilgart se cache derrière une licorne</b></p><p><img src="/a/17785582865119" /> <b>**dwarfie lance une tortue sur la licorne de Stilgart :turtle:</b>
+ Remi.: Automaton2000 trouve moi la cachette de struct
+ Automaton2000: et donc tu peux faire de la place
+ Remi.: * Stilgart
+ Stilgart: sinon, j'ai perdu 4 places au classement puzzles
+ Remi.: pardon pour le mauvais ping ^^
+ Stilgart: je suis juste un vulgaire 5e de CG maintenant
+ dwarfie: c'est ca de faire greve
+ Stilgart: sinon, c'était quoi la question
+ Stilgart: (j'étais en train de gérer les conneries de google IRL)
+ Remi.: Et moi un vulgaire 75ème ex-aequo ^^
+ Remi.: La question c'est GoTLuB qui me prend pour un dieu
+ dwarfie: bah , il dit ca , mais il reste premier en haskell ...&#160;;)
+ Stilgart: dwarfie: nan mais comme l'an dernier, je me sortirai les doigts fun juillet/début aout
+ GoTLuB: oui mais moi ça fait 1 mois que je suis là et je connais aucun algo
+ Vry: o/ dwarfie o/ Stilgart
+ GoTLuB: j'ai juste fait tout les puzzle que je pouvais a la suite 
+ Stilgart: \o Vry
+ GoTLuB: donc pour moi ta un lvl OooOOoo
+ GoTLuB: tout est relatif
+ Stilgart: c'est assez insane oui... mais j'ai une quantité non négligeable d'XP qui vient de raisons historiques aussi
+ dwarfie: bon , si je me decidais a faire les CG qui me restent ... ca fait bien 4 ans qu'ils attendent :rofl:
+ Stilgart: donc c'est pas comparable avec un nouveau codingamer
+ GoTLuB: d'ailleur je commence a bloquer , faut que j'aille sur france ioi&#160;? que je me bouge le cul&#160;? c'est quoi la technique pour pas etre bancale quand on debute&#160;?
+ Stilgart: avoir des connaissances, ou demander ici
+ BlaiseEbuth: RTFM
+ JBM: comment es ta re
+ Stilgart: ha non, on avait dit pas le Français
+ dwarfie: et surtout surtout surtout , le technique secrete du papier et du crayon
+ BlaiseEbuth: o/ JBM
+ GoTLuB: dwarfie c'est pas triché&#160;? 
+ Stilgart: JBM: mon do es douloureux
+ dwarfie: :see_no_evil:
+ Stilgart: GoTLuB: il y a de nombreux puzzles qui demandent les mêmes connvaissances
+ JBM: je venais juste prendre l'adresse de suivi de ce tchat avant qu'il ne ferme
+ Stilgart: découvrir un concept sur un puzzle, c'est pas vraiment de la triche
+ Stilgart: c'est une opportunité pour t'ouvrir les portes de plein d'autres puzzles
+ Stilgart: et puis on ne donne pas la solution, juste des conseils
+ BlaiseEbuth: Ici JBM <a rel="nofollow" class="external free" href="https://cheloniangall.com/">https://cheloniangall.com/</a>
+ JBM: j'ai cliqué en me disans «je vais le regretter» mais en fait non
+ JBM: c'est de qui?
+ BlaiseEbuth: bibi
+ Stilgart: fake, c'est de BlaiseEbuth
+ <b>**Stilgart sort</b></p><p><img src="/a/81709668367525" /> BlaiseEbuth: :scream:
+ dwarfie: lequel  , y'a plein de users qui ont bibi comme pseudo
+ dwarfie: ( 4 en fait )
+ BlaiseEbuth: :speak_no_evil::see_no_evil:
+ WhatTrickeryIsThis:&#160;?
+ WhatTrickeryIsThis: :banana::banana::banana:
+ JBM: evidemment ca connecte pas depuis mon pc boulot
+ JBM: biaisons
+ WhatTrickeryIsThis: comment est ton green-circle&#160;?
+ OldJohn: Mon, j'ai compris comment créer un compte... Cela à presque nécessité autant de temps que de comprendre les règles de GreenCircle&#160;!!  :yin_yang: (J'exagère... quoique&#160;!)
+ WhatTrickeryIsThis: un compte sur le chat tortue?
+ WhatTrickeryIsThis: y à un tuto à côté d'abord
+ JBM: c'est quoi les params de connex? on est bien sur du STARTTLS sur 5298? en direct sur cheloniangall.com, ou faut un sous-domaine?
+ JBM: pidgin en console, c'est bien que ça exieste mais c'est pas l'utilisabilité de l'extrême non plus
+ WhatTrickeryIsThis: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/green-circle">https://www.codingame.com/ide/puzzle/green-circle</a>
+ vincent_manuceau: c'est une blague il est passe ou mon code greencircle&#160;?
+ WhatTrickeryIsThis: au fond à gauche
+ jujurocking: vincent_manuceau Dans compétition challenge voir rapport
+ vincent_manuceau: merci juju&#160;!
+ WhatTrickeryIsThis: <a rel="nofollow" class="external free" href="https://www.codingame.com/challengereport">https://www.codingame.com/challengereport</a>
+ Remi.: On va tous finir dans la ligue bois 1 qui regroupe tous les anciennes ligues de légende à bronze ^^
+ Remi.: * toutes
+ WhatTrickeryIsThis: c'est pas dis que je repasse en bois 1
+ WhatTrickeryIsThis: je connais plus les règles :D
+ WhatTrickeryIsThis: mon code legende passe pas en bois 4, il release jamais
+ OldJohn: WhatTrickeryisThis oui il y a un tuto... Mais qui lit les docs&#160;?
+ WhatTrickeryIsThis: c'est pas les mêmes versions de release&#160;:(
+ BlaiseEbuth: Genre entrer un nick et un mot de passe c'est compliqué
+ WhatTrickeryIsThis: stoi je te nick
+ BlaiseEbuth: Y'a des nouveaux gens. Dont des que je connais pas.
+ WhatTrickeryIsThis: genre des gens ils ont pas de compte CG qui vont sur le chat tortue? 
+ BlaiseEbuth: 3 inconnus en tout :scream:
+ BlaiseEbuth: Ou juste avec un pseudo différent. Ou le même mais je les connait pas
+ WhatTrickeryIsThis: je fais vachement monter le boss bois avec mon code pété ^^
+ Stilgart: (re)
+ Stilgart: WhatTrickeryIsThis: pas gg
+ WhatTrickeryIsThis: ,=,e
+ Remi.: Je suis passé wood1 avec mon code silver, donc tu peux le faire&#160;;)
+ Remi.: Et battu les 3 bosses à la suite avec un seul submit, pas de spam nécessaire.
+ WhatTrickeryIsThis: j'ai remis random sur les releases, et mon evale est random aussi du coups
+ Remi.: Mais c'est vrai que le boss1 je ne le battais pas, je suis passé parce qu'on était 10 et que je battais ceux qui étaient meilleur que le boss.
+ darkhorse64: je suis passé wood1 en ajoutant trois lignes au stub :flushed:
+ Stilgart: from Bebert import freeWin
+ darkhorse64: ouais freeXP
+ WhatTrickeryIsThis: plugin:apply:one-liner
+ Stilgart: wait... vous pensez qu'on verra la code des autres sur l'event de la semaine&#160;?
+ Stilgart: (ou comment ruiner un puzzle de type optim en 10j)
+ darkhorse64: non, voir réponse de tibo sur discord
+ WhatTrickeryIsThis: tibo a droit par contre, Apo aussi, et Automaton2000 evidemment
+ Automaton2000: ou on peut voir ça comme une insulte
+ WhatTrickeryIsThis: ils se permettent tout, c'est à ça qu'on les reconnait
+ Remi.: Ils ont mis la date de vote à la date de fin, pour ne pas voir les solutions.
+ BlaiseEbuth: Ah. Semaine prochaine la fin du chat
+ Remi.: Ils l'ont dit sur discord&#160;?
+ BlaiseEbuth: Genre je suis sur discord
+ BlaiseEbuth: IL l'a dit sur le lieu qui n'existe pas
+ Remi.: Ils l'ont annoncé où&#160;?
+ BlaiseEbuth: A ton avis...
+ WhatTrickeryIsThis: le boss 3 il release pas cet imbecil
+ BlaiseEbuth: C'est ton bot
+ BlaiseEbuth: Stilgart&#160;?
+ GoTLuB: rassurez moi, vous migrez mon copain Automaton2000  sur le nouveau chat au moins&#160;? :s
+ Automaton2000: c'pour ça qu'il faut faire une simu pour le moment&#160;:)
+ BlaiseEbuth: C'est prévu, faut que je m'y mette.
+ k1one44: o/ salut tous
+ BlaiseEbuth: Il a déjà un compte ^^
+ Remi.: Justement il fallait un volontaire pour s'en occuper ^^
+ Remi.: Ah scroll
+ k1one44: vasistas petite fenêtre cette histoire de chat&#160;? remplacement par discord&#160;?
+ BlaiseEbuth: Dans l'idée
+ WhatTrickeryIsThis: moi le nouveau chat j'aira quand y aura des avatars et des emoj avec des singes
+ BlaiseEbuth: Y'a des avatars, a toi de convaincre les gens de mettre des singes
+ Remi.: Par contre les avatars n'apparaissent pas dans ton webchat&#160;?
+ Remi.: Quand tu postes un message je vois un B alors que tu as un avatar dans la liste des personnes connectées.
+ BlaiseEbuth: Ouai c'est pas systématique... On verra quand j'y mettrai le nez. Je vais p'têtre changer de client???
+ BlaiseEbuth: *...
+ Remi.: S'il y a des choses qu'on peut faire hésite pas à demander ... tiens voilà ta bière ^^ :beers:
+ BlaiseEbuth: :yum:
+ BlaiseEbuth: Bah si tu pouvais venir faire la vaisselle, j'ai la flemme...
+ ThomasNicoullaud: y a des laves vaisselles en soldes en ce moment
+ BlaiseEbuth: C'pas très green
+ WhatTrickeryIsThis: ces gens qui mangent avec de la vaisselle, j'ai jamais bien compris
+ Remi.: Faire la vaisselle c'est pas green
+ ThomasNicoullaud: BlaiseEbuth un lave vaisselle consomme moins d'eau que de le faire à la main généralement&#160;;)
+ dwarfie: s'te mythe ....
+ BlaiseEbuth: Si tu fais n'importe comment j'en doute pas. Mais sinon ça m'étonnerait.
+ dwarfie: c'est (presque valable) si tu laves 4 couvert ... et encore
+ ThomasNicoullaud: ok c'est pas vrai si tu vas faire ta vaisselle dans la rivière derrière chez toi
+ Remi.: :fork_knife_plate: Tiens de la vaisselle propre
+ dwarfie: que tu laves une assiette ou  8 , les lave vaisselle consomme autant
+ WhatTrickeryIsThis: tips: vous pouvez manger direct dans la casserolle pour économiser une assiette
+ BlaiseEbuth: Oui dwarfie, et beaucoup trop
+ dwarfie: une galette , comme assiette c'est pas mal , et en plus ca se mange&#160;;)
+ BlaiseEbuth: Et mes p'tites mains ne consomment pas d'électricité.
+ k1one44: comme dis WTIT tu peux meme directement manger dans ta boite de conserve tu economise aussi une casserole ^^
+ WhatTrickeryIsThis: les plus fort il mange la boîte aussi, pour le fer et les minéraux
+ dwarfie: et hop , popeye est né ... riche en fer la conserve
+ dwarfie: :rofl:
+ GoTLuB: j'aime me faire inviter a manger comme ça mes wc reste propre
+ k1one44: Automaton2000 tu connais toi popeye 
+ Automaton2000: je sais plus comment ça marche
+ dwarfie: Automaton2000 ... comme la grece mais dans l'autre sens&#160;:)
+ Automaton2000: le truc qui est pas mal pour apprendre à faire des trucs du genre
+ dwarfie: Automaton2000&#160;: facile , tu deplaces la virgule
+ Automaton2000: le reste c'est de la merde
+ Stilgart: Automaton2000 va finir par faire de l'ombre à jean-Pierre
+ Automaton2000: j'ai pas pris le temps de calcul
+ Strigidae: vous savez si on va pouvoir de nouveau jouer au combat de bot green circle&#160;? ou c'etait juste temporaire&#160;?
+ Troph:  c'était un challenge qui va normalement être bientot disponible en combat de bots
+ Troph: salut les gens sinonn
+ Strigidae: même si c'etait un challenge fait par soociété générale et pas codingame directement&#160;?
+ Troph: <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/bot-programming/green-circle">https://www.codingame.com/multiplayer/bot-programming/green-circle</a>
+ k1one44: il est deja dispo
+ Troph: par contre je ne sais aps comment je peux récupérer mon code du challenge
+ k1one44: challenge terminé --&gt; report
+ k1one44: dedans tu as ton last push
+ Troph: oh nice
+ Troph: mouarf, les bots qui sont en cours de submit c'était le top légende XD, je vais attendre un peu je crois
+ Strigidae: c'est normal qu'il y ai que le bois&#160;? les autres ligues vont se débloquer dans les prochains jours&#160;?
+ Troph: quand il y aura plus de monde si je ne me trompe pas
+ Strigidae: ok merci
+ AngelicCapy: o/
+ k1one44: o/
+ BlackVolt4343: qui peut m'aider pour le puzzle de la temperature&#160;?
+ leType: vite fait
+ BlackVolt4343: comment je suis cense utiliser le tableau&#160;?
+ BlackVolt4343: la fonction tableau
+ leType: tu a la ligne t=in.nextint() qui te done les N temperautre, il faut toutes les stocker dans un tableau, par exemple en creant un tableau vide et en ajoutant t a ce tableau dans la boucle 
+ leType: l'ajout se fait par la fonction add, a condition que ce soit un tableau de type arrayList
+ leType: utiliser un tableau simple serait probablement plus compliqué
+ BlackVolt4343: et comment je creer un tableau&#160;?
+ leType: ArrayList&lt;Integer&gt; Tab = new ArrayList&lt;&gt;();
+ BlackVolt4343: tu me dis si c une bonne idée mais ce que je vais faire c append les valeur t
+ BlackVolt4343: et ensuite leur associer une absolute
+ BlackVolt4343: ensuite je sort les absolute
+ Troph: mauvaise idée
+ BlackVolt4343: et je prend la valeur associer au min absolute
+ BlackVolt4343: et je la renvoie
+ Troph: ah attends j'avais mal compris
+ Troph: dis comme ça ça à l'air de pouvoir marcher
+ BlackVolt4343: de base je l'avais fait avec des listes mais je sais pas associer une valeur d'une liste a  à une valeur de liste b
+ Troph: par contre je ne sais plus si c'est dans ce puzzle qu'il y a un tableau énorme de valeurs
+ BlackVolt4343: nah pas tant que ca
+ BlackVolt4343: entre 5 et 15
+ Troph: ah ben ça va
+ BlackVolt4343: ducoup comment j'associe la valeur normale dans un tableau à la valeur absolue que je vais creer
+ BlackVolt4343: et comment je trie les absolute et pas les normale
+ Troph: tu le fais en quel langage&#160;?
+ BlackVolt4343: python 3
+ Troph: <a rel="nofollow" class="external free" href="https://www.w3schools.com/python/">https://www.w3schools.com/python/</a>
+ Troph: vu les questions que tu te poses,  je penses que ça te ferait pas de mal d'aller faire un tour sur ce site pour en savoir un peu plus sur les types de données et les fonctions de bases
+ Troph: ah mince j'ai pas fait gaffe c'ets en anglais, tu parles angalsi&#160;?
+ BlackVolt4343: oui tqt
+ Troph: ok ben ce site est pas mal, si tu regardes les categories list et list methods je pense que tu pourras trouver des idées et des pistes pour résoudre le puzzle
+ BlaiseEbuth: Comment es ton re
+ dwarfie: blochon
+ BlaiseEbuth: :yum:
+ Troph: au fait pourquoi c'est une tortue sur chelonian gall&#160;?
+ BlaiseEbuth: Parce que chelonian
+ Troph: ça tombe bien parce que ma question suivante c'est&#160;: ça veut dire quoi chelonian gall
+ BlaiseEbuth: La bile du chélonien 
+ BlaiseEbuth: d'où le logo
+ BlaiseEbuth: <a rel="nofollow" class="external free" href="https://fr.wiktionary.org/wiki/ch%C3%A9lonien">https://fr.wiktionary.org/wiki/ch%C3%A9lonien</a>
+ Troph: ah je savais aps que gall ça voulait aussi dire bile
+ Zorg1: résiste prouve que tu existe comme dirait France Bile
+ BlaiseEbuth: Tu pensais à quoi
+ Troph: pour moi gall c'est un peu une slang qui veut dire soit bold soit bruise
+ BlaiseEbuth: Oo
+ BlaiseEbuth: bold dans quel sens et bruise dans quel sens&#160;?
+ BlaiseEbuth: J'vois déjà pas le rapport entre les deux :sweat_smile:
+ M_C: Pour green circle on n'aura pas les ligues or/legende finalement&#160;? c'est dommage&#160;:(
+ BlaiseEbuth: Non. C'est un vulgaire multi commu
+ Evadox: Salut tout le monde j'aimerai pauser une question je peut&#160;? ou tout le monde est occupé ^^ 
+ Evadox: poser
+ M_C: Faut poser&#160;:)
+ BlaiseEbuth: C'est déjà une question ça... Mais tu peux recommencer ^^
+ M_C: Au pire, personne répond :D
+ Evadox: Mdrrrr:grinning:
+ Evadox: Alors enfaite j'aimerai savoir si je peut me servir de ce site pour apprendre la programmation depuis le début ou je doit chercher ailleurs&#160;? 
+ BlaiseEbuth: Il faut avoir les bases d'abbord
+ M_C: Il te faudra forcément un cours ailleurs
+ BlaiseEbuth: C'est pour pratiquer ici
+ M_C: mais ici tu trouveras des exercices d'entrainement
+ Evadox: Ah ok ici c'est surtout de la pratique par exemple dans mon cas je m'y connais un peu en html et en CSS
+ Evadox: mais c'est pas suffisant j'imagine 
+ BlaiseEbuth: C'est pas des langages de prog
+ Evadox: ah bon&#160;?
+ BlaiseEbuth: HTML non, et CSS ça peut se discuter mais pour faire simple on va dire non. ^^
+ M_C: Tu veux apprendre à programmer dans quel but&#160;?
+ Evadox: J'ai pas de but précis j'aime bien la programmation mais j'ai jamais oser me lancer car je penser que c'etait trop compliqué mais j'ai fait quelque recherche et je me régale comme une sorte de nouvelle passion quoi ^^ 
+ Evadox: je veut en apprendre d'avantage 
+ M_C: Python est un bon compromis alors comme langage
+ M_C: Pas trop dur à apprendre et plein de cours partout vu qu'on l'apprend au lycée maintenant
+ <b>**BlaiseEbuth ne se lancera pas dans ce débat ce soir.</b></p><p><img src="/a/17785582865119" /> <b>**dwarfie preparais deja le :popcorn: ... dommange</b>
+ Zorg1: pareil pas trop envie de troller ce soir ^^
+ M_C: Les puristes vont te dire c++ j'imagine :p
+ BlaiseEbuth: Pour débuter&#160;?
+ Zorg1: Automaton2000 tu veux pas troller M_C à notre place stp&#160;?
+ BlaiseEbuth: Non. Mais C oui
+ Automaton2000: la question c'est&#160;: est-ce que tu vas passer
+ Evadox: Tout le monde me parle du C++ 
+ Evadox: mais oui pour débuter 
+ BlaiseEbuth: Après vu que tu as commencé par html/css continuer sur des langages web serait pas déconnant.
+ BlaiseEbuth: Du coup Php ou... Php
+ BlaiseEbuth: :speak_no_evil:
+ M_C: ou javascript :p
+ BlaiseEbuth: :scream:
+ M_C: :D
+ <b>**BlaiseEbuth slaps M_C around around a bit with a large fishbot.</b></p><p><a href="/wiki/File:Default_avatar.png" class="image"><img alt="Default avatar.png" src="/images/5/56/Default_avatar.png" decoding="async" width="50" height="50" /></a> Evadox: Ouai j'ai fait quelque petit recherche et j'ai souvent remarqué qu'il fallait commencer avec du html et du css ensuite du javascript 
+ M_C: Tout dépend ce que tu veux faire: )
+ M_C: Si tu veux faire un site effectivement 
+ BlaiseEbuth: Si tu veux faire un mauvais site, js. Si tu veux faire un mauvais site, pas js.
+ BlaiseEbuth: loupé
+ Evadox: Ouai je trouve sa stylé les sites avec des animations de fou bien structuré et tout du coup je pense que je vais continuer sur ma lancer je pense 
+ Evadox: ah oui pas de js&#160;? 
+ Evadox: pour faire un bon site
+ Evadox: ou tu me troll mdrrrr 
+ BlaiseEbuth: Je te troll pas. JS c'est... Mais y'en a partout, donc si tu veux faire du web pas le choix.
+ M_C: De toute façon, une fois que tu as compris la logique de la programmation, passer d'un langage à un autre c'est pas trop compliqué dans les grandes lignes du moins
+ BlaiseEbuth: En commençant par js ça risque d'être rigolo cependant.
+ M_C: par contre je te conseille de choisir un langage et pas changer au début
+ BlaiseEbuth: :speak_no_evil:
+ k1one44: commence par fortran90 tu va adorer
+ BlaiseEbuth: owi
+ Evadox: Ok ça marche beh écouté je vais repartir faire mais petit recherche de mon coter et je vous remercie pour vos réponse ^^ je vous dérange pas plus que sa 
+ Troph: Evadox avant que tu partes
+ I_love_CoC: salut tout le monde 
+ Troph: dans la majorité des communautés de programmation, n'aies pas peur de déranger
+ Troph: n'aies pas peur de poser des questions
+ BlaiseEbuth: Si tu veux faire du js, fais du js. Mais souviens toi que les choses horribles que tu verra... C'est pas partout comme ça. :sweat:
+ Troph: t'as rien à y perdre
+ I_love_CoC: sérieux BlaiseEbuth tu es sérieux tu n'as pas fait ton grammar nazi sur le post d'Evadox
+ I_love_CoC: ^^
+ Troph: salut I_love_CoC
+ k1one44: @BlaiseEbuth je trollais que a moitié je trouve que fortran est plutot pas mal en demarrage ( j'ai demarrer prog scient dessus)
+ I_love_CoC: o/ Troph
+ I_love_CoC: et au fait :turtle: Automaton2000
+ Automaton2000: t'as un problème avec le puzzle que j'ai pas le droit de ne pas avoir le temps
+ I_love_CoC: du calme Automaton2000
+ BlaiseEbuth: J'avais pas de raison de le faire I_love_CoC&#160;:/
+ Automaton2000: je vois pas le rapport avec le fait que tu as joué la case du centre de la carte
+ Troph: Sinon pour répondre à ta question BlaiseEbuth bold comme 'a bold move' or 'this guy is bold' donc genre un peu effronté, et bruise dans le sens où 'un truc m'a tappé/griffé et ça laisse une marque'
+ Evadox: Oui c'est vrai mais je connais personne dans cette communauté je préfère être respectueux et de ne pas faire le keke 
+ Troph: bon état d'esprit
+ BlaiseEbuth: Hmm. Bah c'est bile tant au sens propre qu'au sens 'discours agressif'.
+ BlaiseEbuth: Donc ça colle
+ I_love_CoC: je te sens sous pression Automaton2000 tu peux le dire si je te soule avec les tortues
+ Automaton2000: et tu ne peux pas d'aider là-dessus.
+ I_love_CoC: :sniff: 
+ I_love_CoC: :cry:
+ BlaiseEbuth: Je voulais un truc qui fasse 'CG', le chélonien est venu d'office, tortue oblige, et le gall était juste parfait avec. :smirk:
+ JBM: comment es ton re
+ JBM: bon, et quoi de neuf ici maintenant que j'ai màj l'essentiel?
+ BlaiseEbuth: vu
+ BlaiseEbuth: La routine habituelle
+ WhatTrickeryIsThis: tortuGall&#160;? 
+ I_love_CoC: le pays à coté de l'espagne c'est ça?
+ WhatTrickeryIsThis: :flag_po:
+ dwarfie: non , c'est le nom de l'ile des pirates&#160;;)
+ I_love_CoC: pas mal
+ BlaiseEbuth: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=iXbzktx1KfU">https://www.youtube.com/watch?v=iXbzktx1KfU</a>
+ dwarfie: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=SfUC_4LmaIc">https://www.youtube.com/watch?v=SfUC_4LmaIc</a>
+ I_love_CoC: le mec à la pelle BlaiseEbuth :rofl:
+ BlaiseEbuth: Je savais que ça te plairait :grin:
+ I_love_CoC: bien vu^^
+ JBM: ah excellent, je connaissais de vue le mot gall et pour “the gall to” et pour “gall bladder”, et pourtant j'avais jamais fait le rapprochement avec la bile
+ JBM: AJA, lucky 10k, etc, merci BlaiseEbuth
+ BlaiseEbuth: &lt;3
+ I_love_CoC: Automaton2000 est ce qu'il te rest un peu de sel?
+ Automaton2000: pas le courage de le faire
+ I_love_CoC: alors dessine moi une tortue Automaton2000
+ Automaton2000: et c'est moi qui le dit
+ I_love_CoC: ben oui Automaton2000
+ Automaton2000: y a un moyen de voir la liste des puzzles
+ Astrobytes: BlaiseEbuth: o/
+ BlaiseEbuth: \o Astrobytes
+ Remi.: Re tout le monde
+ Zorg1: o/
+ I_love_CoC: o/
+ I_love_CoC: au fait tu ne devais pas donner un truc à Remi. Automaton2000?
+ Automaton2000: je risque de le faire à la main
+ I_love_CoC: ben c'est toujours mieux pour donner Automaton2000
+ Automaton2000: il parle de la même chose
+ I_love_CoC: oui Automaton2000
+ Automaton2000: pour l'instant je suis en train de faire des tests
+ I_love_CoC: un prototype de :turtle: Automaton2000?
+ Automaton2000: y'a un jeu de société que je pourrais aussi faire un check rapide qu'il n'y a pas de mal
+ Remi.: NOn c'est bon I_love_CoC, j'ai eu la tortue et la licorne dans un même message l'autre soir (mercredi je crois)
+ I_love_CoC: ok apparemment tu as tes préférences et tes choucous Automaton2000
+ Automaton2000: tu utilises quel langage&#160;?
+ I_love_CoC: le langage de la jalousie Automaton2000
+ Automaton2000: mais si tu veux mon avis
+ I_love_CoC: avec plaisir Automaton2000
+ Automaton2000: et de temps en temps
+ I_love_CoC: continue Automaton2000
+ Automaton2000: est-ce que ça vaut le coup
+ I_love_CoC: de continuer de converser avec un chat bot Automaton2000?
+ Automaton2000: mais j'ai toujours pas compris
+ I_love_CoC: dommage Automaton2000
+ Automaton2000: bon bah je vais faire un peu de boulot
+ I_love_CoC: fais donc ça Automaton2000
+ Automaton2000: ou que tu te rends compte que je ne vais pas pouvoir t'aider ^^
+ Remi.: I_love_CoC ça te dit un shortest&#160;?
+ Remi.: Quelqu'un d'autre intéressé&#160;?
+ I_love_CoC: aller ok
+ Remi.: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/24896195e8b67d2d2aa4becaebc465b2393c388">https://www.codingame.com/clashofcode/clash/24896195e8b67d2d2aa4becaebc465b2393c388</a>
+ Remi.: En espérant tomber sur un sujet plus compréhensible que ce matin ^^
+ Remi.: J'attends 1 minute pour voir
+ Remi.: Allez c'est parti
+ Stilgart: Automaton2000 qui joue à l'ascenseur émotionnel avec I_love_CoC, c'est beau :joy:
+ Automaton2000: pas sur que tu sais faire
+ Stilgart: Automaton2000: pas aussi bien que toi en tout cas
+ Automaton2000: du coup je suis déçu
+ Stilgart:&#160;:(
+ I_love_CoC: trop fort ce bot^^
+ I_love_CoC: machaivel Automaton2000
+ Automaton2000: y a une erreur dans ton code et que tu veux faire un truc du genre
+ Stilgart: Automaton2000: mon code est génétique, et le tien&#160;?
+ Automaton2000: et pour les niveaux c'est puzzles, multis, ... mais pas sur le bon fonctionnement du bouzin ...
+ Stilgart: il doit être monte carlo vu le résultat&#160;:)
+ BlaiseEbuth: Astrobytes m'a trollé...&#160;:(
+ Stilgart: nan, il n'aurait pas osé...
+ Astrobytes: q?
+ BlaiseEbuth: You pinged me and disapeared. :cry:
+ Astrobytes: lol I'm in world still :D
+ BlaiseEbuth: I can't survive in world.
+ Astrobytes: doing 100 things at once at the moment
+ Astrobytes: "you know we aren't meant to exist in the outside world"
+ Astrobytes: (that was Akira right?)
+ BlaiseEbuth: If I go on #world I will be instantly tacoed... :scream:
+ Astrobytes: haven't seen a taco all day
+ BlaiseEbuth: It's a trap
+ Astrobytes: :D
+ Astrobytes: there's no taco or wonto
+ Astrobytes: or indeed either of  the Ws
+ BlaiseEbuth: Hmm :suspicious:
+ Astrobytes: :rofl:
+ Astrobytes: I think it's safe to venture in tbh&#160;;)
+ JBM: mais pour cb de tps?
+ BlaiseEbuth: :scream:
+ k1one44: it seems the guys complain about their english are served with your discussion they can train ^^
+ JBM: quels guys?
+ k1one44: ceux la ^^
+ Astrobytes: Je me sens insulté :P
+ BlaiseEbuth: Pourquoi ça&#160;?
+ k1one44: why&#160;?
+ dwarfie: pas de tacos ici .... mais on a des chiantos :candy: :D
+ k1one44: :imp:
+ Astrobytes: ah k1one44 I misread your comment ^^
+ dwarfie: c'est l'heure d'en faire la publicité d'ailleurs :D <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=w32Nyd4fyfw">https://www.youtube.com/watch?v=w32Nyd4fyfw</a>
+ BlaiseEbuth: &lt;3
+ k1one44: my bad grammatical error i should write complaining instead of complain ^^
+ Remi.: Quand on parle Français dans le channel World on se fait insulter ^^
+ dwarfie: ouais , mais pas l'inverse ... nous on est des gars biens&#160;;)
+ Astrobytes: not by me Remi.&#160;;)
+ Astrobytes: k1one44: hehe all good
+ Astrobytes: I like the crossover between fr and world
+ Remi.: Don't worry, i won't "insulte" you, it is not a proble mfor me&#160;;)
+ Remi.: * problem for
+ k1one44: @Remi french flair
+ Zorg1: keslispassencore&#160;?
+ Zorg1: ha y a Astrobyte qui est venu faire la causette ^^
+ Remi.: Comme dit dwarfie, on est plus cool sur Fr ^^
+ Remi.: Et puis on peut parler de choses qui fâchent sans se faire rappeler à l'ordre par un bot
+ Zorg1: bah tu te fais pas agresser par un tacobot parce que tu as dit 'balls'
+ cyberPanda: hey
+ Zorg1: (quoique ça a été désactivé je crois)
+ Zorg1: hey o/
+ Remi.: hey oooooooo
+ Remi.: hé o, héo, on rentre du boulot
+ Zorg1: on revient du boulot
+ Astrobytes: Zorg1 o/
+ Zorg1: \o Astrobytes
+ Astrobytes: "bah tu te fais pas agresser par un tacobot parce que tu as dit 'balls'" mdr
+ Zorg1: ^^
+ Remi.: J'ai jamais réussi à le faire fonctionner le bot à tacos
+ Remi.: à chaque fois que j'ai essayé, il était hors ligne
+ Zorg1: oui il n'a pas de serveur il tourne sur le poste de Wonto
+ Zorg1: donc il est là quand il est là et qu'il le branche&#160;;-)
+ Remi.: Ok je comprends mieux
+ Remi.: heureusement que Automaton2000 est toujours là ^^
+ Automaton2000: comment on fait un bot qui passe.
+ Astrobytes: Wonto's machine is the server
+ k1one44: ca fais beaucoup de condition . il a un poka yoke pour allumer le bon  ;)
+ Remi.: Automaton2000 tu veux bien parler anglais ici&#160;?
+ Automaton2000: je peux faire des trucs
+ Astrobytes: merci Automaton2000
+ Automaton2000: salut tout le monde et Astrobytes
+ Remi.: Hé hé c'est un bel accueil
+ Astrobytes: c'est la voie de la tortue, Automaton2000
+ Automaton2000: si tu fais les deux
+ Astrobytes: ^^
+ Remi.: Bon sur green circle s'ils ne mettent pas les 1700 bots du contest, je n'aurai jamais plus de 10 CP&#160;!
+ Zorg1: ça doit être un truc sponso ils veulent pas le mettre en multi "officiel"
+ Remi.: sur le discord ils disent que c'est pas un sponso mais un partenariat, donc c'est pas pareil
+ k1one44: une histoire de contrat  a priori
+ Zorg1: ce qui me fait sourire c'est qu'ils ont réussi à mettre leur logo sur l'artwork ^^
+ Remi.: Le logo CG&#160;?
+ Zorg1: celui de Sogé
+ k1one44: les boules j'avais des idée lundi matin a la fermeture pour ameliorer mon bot et j'ai fais un tour de bocal
+ Remi.: Mes idées je les note toujoursen commentaire dans le code
+ Remi.: Au cas où je reviens dessus seulement 3 mois plus tard ^^
+ Zorg1: en fait sur le board de ce jeu j'avais pas remarqué jusqu'à ce que je le liste sur #world mais "poste administratif" est en français le reste plus ou moins en anglais ^^
+ k1one44: @Remi. ca c'est smart, j'essaierai d'y penser a l'avenir ^^
+ Remi.: Je n'avais pas remarqué non plus
+ Astrobytes: Remi. mes commentaires n'ont aucun sens... 3 mois plus tard ^^
+ Zorg1: haha
+ Zorg1: so true&#160;;-)
+ Remi.: :rofl:
+ k1one44: il faut pas commenté en hieroglyphe 
+ Remi.: C'est parce que tu commente en Anglais Astrobytes
+ Remi.: * tu commentes
+ Remi.: Essaye en Français&#160;;)
+ BlaiseEbuth: Nan c'est parce qu'il commente pas sobre...
+ Zorg1: ah le pic de Balmer marche aussi pour les commentaires&#160;?
+ Zorg1: je me coucherais moins bête que ce matin tiens
+ JBM: tiens un Z1
+ Zorg1: o/ JBM
+ JBM: wazza
+ Astrobytes: Remi. hahaha trop bon, je vais essayer ca...
+ JBM: c'Ã©tait beaucoup trop franÃ§ais Ã§a
+ JBM: c'est suspect
+ Zorg1: houla les problèmes d'encodage ..
+ JBM: m'en parle pas
+ JBM: sur ce chan c'est recto/verso
+ Zorg1: ça me rappelle le source du projet sur lequel je bosse avec un empilage de conversion UTF8/ANSI 
+ Zorg1: (avec des eclipses mal configurés)
+ Astrobytes: ça is very hard on an english keyboard eh
+ Zorg1: bah or typing french on a smart phone
+ Astrobytes: what have you done to your machine JBM
+ Astrobytes: any phone Zorg1
+ Zorg1: I have a dumb phone ^^
+ Astrobytes: The only kind worth having imo
+ Zorg1: (to have a C type 3 times  on 2)
+ Astrobytes: yes!
+ Astrobytes: The less my phone knows the better,
+ Astrobytes: *the better it is
+ JBM: mmm et depuis ici ça donne quoi?
+ Zorg1: bah le chat est censé ne plus être là depuis mi juin
+ JBM: Astrobytes: that singular “machine” was very sweet
+ JBM: oui, Tibo va enfin pouvoir donner toute de sa puissance sur discord, ça avait l'air de lui manquer ici
+ Zorg1: bah va falloir des gens sur Discord pour faire vivre le truc
+ Astrobytes: JBM :D
+ Astrobytes: hmph, we have to develop an off-site solution somehow, because discord isn't going to work
+ JBM: isn't that mostly ({fr} for “exactly”) what BE's cheloniangall.com has been doing all along?
+ Astrobytes: Ah yes, true. I just hope enough people will migrate.
+ BlaiseEbuth: Be my evangelist
+ Astrobytes: Hahaha :D
+ Astrobytes: BE Chat Evangelist
+ Astrobytes: I like this title
+ oolivierr: Hello&#160;!
+ oolivierr: Le chat n'est plus fr&#160;?
+ Remi.: Astrobytes àâäéèêëîïôöûüÂÄÊËÎÏÔÖÛÜ :P
+ Astrobytes: I demand £1 / annum and a banana
+ Remi.: Si mais on a un anglais avec nous ^^
+ Zorg1: c'est un réfugié de #world, y a l'air d'y avoir du grabuge
+ oolivierr: C'est quoi cette histoire de supprimer le chat&#160;?
+ Remi.: trop compliqué à maintenir pour CG
+ Astrobytes: Remi. Écossais. Pas anglais :P
+ Remi.: PArdon, je voulais dire Anglophone
+ Zorg1: haha l'erreur fatale
+ k1one44: la différence c'est que lui a du bon whisky ^^
+ JBM: bon je profitais d'avoir 2s ce soir pour faire un tour sur twitch
+ JBM: du coup je vais chez 2BI parce qu'il est online et que j'aime sa voix
+ Remi.: Les Ecossais sont bien vu en France en général.
+ Zorg1: ça fait un bail que j'y ai plus mis les pieds sur switch
+ JBM: mais il est en train de gamer, c'est trop chiant
+ Zorg1: *twitch
+ Remi.: Dans un village pas trop loin (45 minutes) ils ont des fêtes écossaises tous les ans.
+ oolivierr: Je croyais qu'il y avait des pros chez CG&#160;? maintenir un chat&#160;?
+ Remi.: Aubiny sur Nère
+ JBM: Zorg1: alors comme je viens de lui dire: «en fait si je suis pas là plus personne vient c'est ça?»
+ Astrobytes: Indépendance écossaise :fist:
+ k1one44: pour moi datalgo en ce moment
+ Zorg1: en gros wé
+ oolivierr: sans chat, je ne vois aps comment on pourra s'entraider
+ JBM: (il m'a répondu «ben… ouais»)
+ Zorg1: oolivier&#160;: y a discord c'est trop top
+ oolivierr: et pourquoi pas whatsapp ou twitter&#160;?
+ Zorg1: ^^
+ k1one44: @Zorg1 c'est quand meme un chouille moins interactif et vivant que le chat  ^^
+ JBM: je saisis pas trop la portée de la question
+ Remi.: oolivierr&#160;: discord, ou le forum, ou sinon l'alternative développée par Blaise
+ oolivierr: Perso, je trouve mieux d'avoir tout au meme endroit
+ Remi.: Moi aussi mais c'est pas nous qu'on décide ^^
+ Zorg1: oui c'est quand même un plus d'avoir un chat juste à côté
+ Remi.: Enfin, c'est pas nous qui décidons
+ Zorg1: mais bon c'est pas maintenable
+ Remi.: faut parler correctement ^^
+ JBM: c'était
+ JBM: c'est toujours mignon les «non mais c'est pas maintenable»
+ Zorg1: enfin moi je me tape à maintenir du code Java 6 avec du spring le tout fait par des maniaques&#160;:(
+ Zorg1: cépajuste
+ JBM: on a réussi à le faire, mais le garder c'est trop dur
+ BlaiseEbuth: Oui. Mais XMPP c'est vieux tu vois
+ JBM: déf de maniaque: «autrui»
+ Zorg1: ah fallait migrer vers IRC
+ oolivierr: Je n'ai aucune idée de comment ça marche
+ Zorg1: JBM&#160;: en gros oui ^^
+ Remi.: Et moi combien de temps j'ai maintenu du code C++ qui devait rester compatible VS2003 ^^ JE ne connais pas le C++11 ni 17 à cause de ça ^^
+ oolivierr: Il suffit pas d'appuyer sur le bouton ON et on laisse fiare&#160;??
+ JBM: clbuttique
+ k1one44: ouais mais le commercial discord nous a trop bien demarché et promis des goodies ^^
+ JBM: mais le pire
+ JBM: c'est que pour autant que je sache, non même pas
+ JBM: bon trouvez-moi un twitch là j'en ai marre de les voir gamer
+ Zorg1: bah twitch c'est pas un peu le principe de voir des gars jouer et raconter leur vie en même temps&#160;?
+ JBM: pour moi jusqu'ici non
+ JBM: ce qui n'ơte rien au «principe général»
+ oolivierr: encore celui la il a l'air d'avoir des spectateurs
+ Zorg1: après on a eu le biais "mec qui essaie de résoudre un puzzle CG en faisant cuire sa bouffe et raconter des conneries"
+ JBM: non mais d'habitude quand j'y vais il code
+ Zorg1: mais c'est un truc de niche
+ JBM: Zorg1: avec des gants?
+ k1one44: @Zorg1 ps que tu as pas mal de tout en fait en fonction de se que tu apprecie
+ Zorg1: ouaip ^^
+ JBM: ouaip.
+ oolivierr: mais quand on code en se filmant avec 1 spectateur
+ JBM: ou avec leurs smurfs
+ oolivierr: je comprends pas le principe
+ Zorg1: t'es pas un artiste c'est tout
+ k1one44: par exemple tu as datalgo qui est pas dev mais data scientist et qui code en live des bot pour tout et nimp des fois c'est rigolo
+ Zorg1: à cause de JBM j'ai ouvert twitch&#160;:(
+ Zorg1: ha il cause en français datalgo
+ k1one44: XD bon apres la t
+ k1one44: fin de live donc plus de code ^^
+ FRANCISAnas: hello
+ Zorg1: salut
+ JBM: Zorg1: oui trouve-moi un truc
+ JBM: là je désespère
+ Zorg1: bah j'ai pas grand chose
+ oolivierr: Vous avez fait le block the spreading fire&#160;?
+ Remi.: Oui
+ Remi.: Mais il n'est pas évident
+ oolivierr: Ca a l'air sympa
+ oolivierr: je pense
+ oolivierr: il faut que je réflechisse à comment commencer
+ Remi.: en tout cas j'aurais aimé trouver un algo unique qui fonctionne dans tous les cas
+ Remi.: Mais en fait j'ai dû gérer au cas par cas
+ oolivierr: ah ouais&#160;? 8 algo pour les 8 tests&#160;? Mince
+ Remi.: Non pas à ce point là
+ Remi.: Y a des tests qui se ressemblent ^^
+ Remi.: mais par exemple, y a un truc spécifique pour le 1er test
+ Remi.: C'est cadeau&#160;:
+ Remi.: si le temps de cut est 4 fois inférieur au temps de fire, alors cut autour du départ de feu
+ Remi.: J'ai des if avec des comportemetns différents selon le cas que j'arrive à reconnaître.
+ BlaiseEbuth: T'es mauvais
+ Remi.: Je sais Blaise, tu me le rappelles tous les jours ^^
+ BlaiseEbuth: C'est bien.
+ Remi.: Et toi qu'as-tu fais sur Block the Spreading Fire&#160;?&#160;:)
+ k1one44: doh&#160;! je m'arrache les cheveux dessus première tentative avec un algo d'opti  connu mais pas rentable ma simu trop gourmande, deuxieme approche avec une conception au feeling mieux mais pas opti heureusement qu'il reste 7 jours ^^
+ BlaiseEbuth: Euh il reste tout court... C'est juste un problème exsitant mis en avant hein
+ k1one44: Oups c'est encore mieux alors^^
+ k1one44: j'etre encore junior sur CG pas encore pris le temps de tout capte. mais je prend le temps de faire c**** les anciens dans le chat ^^
+ BlaiseEbuth: You gonna go far kid
+ k1one44: :grin:
+ Zorg1: enfin les casses couilles on en eu ici du gros niveau, t'as du boulot
+ BlaiseEbuth: Nostalgie...
+ k1one44: lol c'est pas non plus mon life goal .
+ Remi.: On en a eu des très bons des casse-couille
+ Remi.: piece of shit
+ BlaiseEbuth: Comme le chat va être supprimé, j'ai relu des vieux logs de 2020. :older_man:
+ BlaiseEbuth: J'me suis bien marré.
+ BlaiseEbuth: Et en plus c'est rassurant: Je suis constant dans ma connerie.
+ Remi.: C'est que t'es vieux alors
+ Remi.: Quand on est vieux on vieillit moins vite
+ BlaiseEbuth: Certains avaient presque réussis à me faire croire que j'étais devenu un connard toxique... Alors que non, je l'étais déjà avant.
+ k1one44: de l'amour , de l'amour , Sur ceux  Bonne nuit tchuss
+ Remi.: bn k1
+ Remi.: Blaise tu n'es toxique que pour ceux qui n'ont pas d'humour&#160;;)
+ Zorg1: bn
+ BlaiseEbuth:&#160;;)
+ Remi.: D'ailleurs tu j'ai besoin d'un peu de toxicité, tu ne veux pas me redire que je suis mauvais&#160;?
+ BlaiseEbuth: Non.
+ Remi.: Quoi&#160;?
+ BlaiseEbuth: :imp:
+ Remi.: Tu veux que je remette un avion russe en avatar&#160;?
+ BlaiseEbuth: Je ne négocie pas avec les terroristes.
+ Remi.: Ah je terrorise quelqu'un ici&#160;? ^^
+ BlaiseEbuth: Automaton2000: Il te fait peur Remi.&#160;?
+ Automaton2000: c'est ce que ça a un rapport avec le fait que je ne comprend pas trop
+ Remi.: Automaton2000 que penses tu du python et du C++&#160;?
+ Automaton2000: sinon tu fais une action juste avant qui te fait perdre des places
+ Remi.: En fait non, il n'a pas vraiment peur ^^
+ Zorg1: il n'a peur de rien Automaton2000 il se fout de tout
+ Automaton2000: ce qui ne marche pas&#160;:/
+ Remi.: Automaton2000 a peur des tortues
+ Automaton2000: moi j'ai un gros bug
+ Remi.: Oui un gros bug, le mot tortue ne ressort pas
+ Remi.: Et les licornes Automaton2000&#160;?
+ Automaton2000: ah ouais c'est pas mal du tout
+ Zorg1: Remi. qu'en veut toujours plus
+ Zorg1: heureusement qu'Automaton2000 veille au grain
+ Automaton2000: mais si je peux me tromper.
+ Remi.: Non Automaton2000 tu n'as pas le droit de te tromper
+ Automaton2000: y a un moyen de le trouver
+ oolivierr: A propos ... Si le chat est supprimé que va devenir automaton&#160;?
+ Remi.: Il va mourir
+ Remi.: Mais il va peut-être réssuciter
+ oolivierr: Quelqu'un va le receuillir&#160;?
+ Remi.: Automaton2000 c'est le moment de chanter "si on devaaaaiiiit" ...
+ Automaton2000: si y a pas besoin de faire une simu
+ Remi.: Blaise a prévu de le mettre sur son chat alternatif
+ Remi.: ChelonianGall
+ Zorg1: les chatbots abandonnés sur l'autoroute en été ... on n'en parle pas assez
+ BlaiseEbuth: :cry:
+ JBM: streams déraillés: +2
+ BlaiseEbuth: :popcorn:
+ Remi.: Bon allez
+ Remi.: ça va être l'heure pour moi
+ Remi.: Bonne nuit Automaton2000
+ Automaton2000: ça doit être plus simple
+ Remi.: bonne nuit aussi les humains
+ Remi.: sauf Blaise
+ Remi.: je ne dis pas bonne nuit aux personnes toxiques
+ Remi.: à+
+ BlaiseEbuth: J'suis pas humain keskidi
+ Remi.: Ni aux boucs
+ Zorg1: est-il toxique ou nocif&#160;? vous avez deux heures
+ JBM: t1 le dernier stream que j'ai déraillé a du coup juste fermé sans raider
+ JBM: je suis à poil
+ Zorg1: en 2022 y a  encore des streams qui ferment sans raider. 
+ Zorg1: c'est triste
+ JBM: j'en suis à regarder du poker&#160;:(
+ BlaiseEbuth: :sunglasses:
+ Troph: keskidi&#160;?
+ BlaiseEbuth: Qui&#160;?
+ Troph: JB
+ BlaiseEbuth: Il est perdu sur Twitch...&#160;:(
+ Troph: ah&#160;! c'est lui qui stream
+ JBM: ah non pas ce soir
+ JBM: ça fait bien longtemps que j'ai rien eu d'intéressant à déblatérer
+ Zorg1: bah il se passe pas grand chose ici non plus&#160;:(
+ Troph: il est 1h du mat en même temps
+ Troph: les gens ils dorment
+ Troph: ou ils picolent
+ Zorg1: non en général je veux dire pas tout de suite maintenant
+ Zorg1: c'est la routine on râle sur qq puzzles validés avec les pieds, on farme du XP dessus, on répond à des questions 
+ Troph: j'aime bien quand c'est un peu calme, au moins j'arrive à suivre ce qu'il se passe
+ Zorg1: oui ça s'anime pendant les contests
+ Troph: ah oui, c'est vrai que c'est la routine oui
+ oolivierr: Bon ben moi j'y vais au lit...
+ oolivierr: Good night
+ Troph: choco bn
+ Zorg1: (on trolle sur qq langage, on dit que les cocs c'est pas terrible aussi)
+ Troph: il faut du sang neuf
+ Zorg1: faisons table rase du passé pour reconstruire un monde meilleur
+ BlaiseEbuth: Ouai. Le vieux coagulé c'est pas bon...
+ Zorg1: spoiler&#160;: ça n'a jamais trop bien marché
+ Troph: BlaiseEbuth surtout pour les sacrifices
+ Zorg1: ça me fait pensé que pour les sacrifices t'as tout un paquet d'exigence sur les victimes. Les dieux ne sont pas une poubelle pour ta camelotte
+ JBM: nethack voudrait un mot
+ BlaiseEbuth: turpitude
+ Troph: Zorg1 et chaque Dieu à ses préférences en plus, de vraies diva
+ Zorg1: ouais des jours, des heures, des rituels spécifiques
+ Zorg1: un vrai bazars
+ Zorg1: on sent le truc développé en agile
+ Troph: c'est une bonne situation scrum master&#160;?
+ JBM: grave
+ Zorg1: le mieux c'est coach agile
+ JBM: encore mieux
+ Troph: non mais en vrai&#160;?
+ Zorg1: scrum master à la base c'est un animateur d'équipe en plus de son boulot dans l'équipe
+ Zorg1: à la SoGé on en avait pas
+ JBM: le genre de titre qui te rappelle que le chef n'animera pas
+ Troph: tu parles de quel niveau de chef&#160;?
+ BlaiseEbuth: top chef
+ Zorg1: chef 4eme dan de pipo
+ JBM: le niveau juste au-dessus de toi
+ Troph: donc le scrum master en fait il se tape le boulot de velui du dessus&#160;?
+ Troph: ça a pas l'air d'être une si bonne situation que ça ...
+ JBM: je sais pas comment les tâches se répartissent chez vous
+ BlaiseEbuth: Les taches dirigent les autres
+ Troph: je vais pas vous mentir, le mauvais temps se lève, j'ai un peu les chocottes
+ Zorg1: le mauvais temps métaphorique&#160;?
+ Troph: non, onde tropicale
+ leojean890: tiens tiens le chat est encore là :o
+ leojean890: (mais pas la souris...) #badjoke
+ Troph: forcément, quand le chat est là les souris ne dansent pas
+ Troph: les claviers en revanche...
+ Zorg1: :drum: pour leojean890
+ leojean890: si elles ont la foi elles peuvent hehe
+ leojean890: j'ai tjr rien codé sur green circle d'ailleurs mais j'ai vu qu'ils ont sorti le multi mdrr
+ leojean890: en mode multi commi
+ leojean890: commu
+ JBM: tiens un leojean890
+ Zorg1: héhé :p:p
+ leojean890: yo JBM alors ce morceau jazz ça baigne&#160;?:P
+ JBM: ç'aurait pu être pire
+ leojean890: sugar&#160;?
+ JBM: toujours
+ leojean890: bon je suis tjr pas très content du solo que j'avais fait xD
+ JBM: oh ben tu peux toujours améliorer ;p
+ JBM: j'ai pas encore gravé les masters
+ leojean890: j'avais pas trop vu la grille xD
+ leojean890: j'aurais dû faire ma propre grille in fact :p
+ JBM: tu peux encore
+ leojean890: le chat qui vire ET les 38 euros par jour avec la carte TR snif :P
+ leojean890: tu les graves sur un CD&#160;?
+ JBM: je sais pas encore
+ JBM: faudra voir les sources que j'arrive à obtenir
+ leojean890: du coup t'as un big band qui va le jouer&#160;? :P
+ JBM: déjà fait
+ JBM: y'a genre 1.2 semaines
+ leojean890: en concert où du coup&#160;?:P
+ leojean890: grosse scène&#160;?^^
+ JBM: je donnerai pas plus de détail ici :p
+ leojean890: ah xD mais l'event est fini pourtant&#160;?:P
+ JBM: oui oui c'est fini
+ JBM: j'ai pas encore regardé l'enregistrement
+ leojean890: ah ça peut remonter jusqu'à des infos perso si tu dis le lieu&#160;?:P
+ JBM: probablement
+ JBM: pas envie de tenter
+ leojean890: j'ai fait concert jazz dans une expo d'art et ue péniche récemment
+ leojean890: next week ce sera 2 concerts variété :P
+ leojean890: kool and the gang, bob marley, barry white, UB40.. xD
+ JBM: sympa
+ leojean890: ça change, c'est le répertoire du chanteur du groupe ^^
+ JBM: on s'est fait une fête de la musique déguisée en fête des voisins récemment; le dernier groupe live était assez dans ton style
+ leojean890: jazz ou variété&#160;?:P
+ JBM: les deux
+ leojean890: après j'ai eu mon ex groupe fusion aussi mais ils sont partis dans le sud^^
+ JBM: maison
+ leojean890: et d'autres groupes du passé
+ leojean890: ah chez toi xD
+ leojean890: là j'ai surtout ces 2 là qui vivent
+ leojean890: le reste ils sont un peu éteints et certains reviennent de tps en tps
+ JBM: moi va falloir que je renouvelle
+ JBM: d'urgence
+ leojean890: why&#160;?:P
+ JBM: déménagement
+ leojean890: ah shit donc faut que tu trouves un groupe local&#160;?;)
+ JBM: un ou plusieurs
+ JBM: mais oui, va bien me falloir qqch
+ JBM: tu es bien inscrit sur cheloniangall.com?
+ leojean890: watch that&#160;:) <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=c5YG05sWlUQ&amp;ab_channel=LeoJean890">https://www.youtube.com/watch?v=c5YG05sWlUQ&amp;ab_channel=LeoJean890</a>
+ leojean890: je l'ai mis en non rep mais c'est un solo que je fais en mieux que ce que je t'ai envoyé xD
+ JBM: non pas maintenant je suis dans le poker
+ leojean890: non rep car pas réfléchi vraiment ni vu avec les autres pour share^^
+ leojean890: cheloniangall ah pour parler en client xmpp directement&#160;?
+ leojean890: j'ai le lien mais pas encore tenté le réseau
+ JBM: y'a un webchat
+ leojean890: ah en direct&#160;?
+ leojean890: jvais voir
+ JBM: c'est qui le mec debout au milieu qui fait riehn
+ leojean890: tu fais du poker à 1h38&#160;?:P
+ leojean890: trompettiste xD
+ leojean890: dans cette vid y'a mon solo puis guitare mdr
+ leojean890: mais c'était mieux que le truc que je t'ai fait ^^
+ leojean890: autumn leaves
+ JBM: le seul debout le pauvre
+ JBM: ha ha j'avais pas encore reconnu
+ JBM: miaou
+ leojean890: ouais debout ça fatigue, en plus du fait que la trompette ça fatigue xD
+ leojean890: genre il me dit qu'il doit faire des pauses tlt
+ JBM: un prétexte pour la bière
+ JBM: je les connais ces lascars
+ leojean890: mdrr
+ leojean890: les musiciens ça boit hehe
+ leojean890: fume aussi parfois^^
+ JBM: tututut ça se saurait
+ leojean890: parfois ça deale aussi mouahaha
+ leojean890: (faut pas généraliser hein&#160;!!^^)
+ Zorg1: ah bah bravo
+ leojean890: disons que certains, pour aligner les 2 bouts, hmm^^
+ JBM: j'aimeraio bien alignent les de bouts du morceau, déjà
+ leojean890: alors le poker ça donne quoi&#160;?:P
+ leojean890: du morceau sugar&#160;?
+ JBM: boah c'est pas le truc le plus exaltant du monde quoi
+ JBM: mais je jouais pas mal y'a
+ JBM: ty'a…
+ JBM: purée, dejà
+ leojean890: j'aime bien whisper not aussi xD
+ JBM: whisper not?
+ leojean890: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=zN-23qB8GvM">https://www.youtube.com/watch?v=zN-23qB8GvM</a>
+ leojean890: standard sympa
+ JBM: ah ok
+ leojean890: tiens mes anciennes covers continuent à faire qq vues xD
+ leojean890: je fais plus rien sur cette chaine wow
+ leojean890: faudrait^^
+ JBM: fais-en une chaine LoL
+ leojean890: chaine youtube&#160;?:P
+ JBM: oui mais quand même
+ leojean890: j'avais sorti ça y'a 5 mois..^^ <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=knXQHH7cC5A">https://www.youtube.com/watch?v=knXQHH7cC5A</a>
+ JBM:  atta j'ai pas fini le dernier
+ leojean890: mais j'peux en faire d'autres au pire^^
+ leojean890: ah oui whisper not^^
+ leojean890: quand tu dis faire une chaine c dans quel sens par rapport à ce que j'ai déjà&#160;?:)
+ JBM: sans avoir vu la chaine, dur à dire
+ JBM: c'était un jeu de mots WoW / LoL
+ leojean890: ah oui, j'avais utilisé une petite astuce pour chopper 2k abonnés (semi-automatiser du spam ciblé :p)
+ JBM: (y'a sûrement d'autres acronymes de jeux, mais il me sont pas venus là comme ça)
+ leojean890: récup tous les pseudos automatiquement depuis les commentaires de vidéos similaires et on pouvait envoyer des msgs à 25 personnes d'un coup ensuite
+ leojean890: (parsing de coms)
+ JBM: la vraie utilité de l'informatique
+ leojean890: y'a plus la messagerie youtube et depuis j'ai pas cherché d'autres astuces vu que j'fais les groupes ç la place^^
+ leojean890: (et donc moins la chaine:))
+ leojean890: l'info pour la praticité ouais mdr
+ leojean890: ah oui ton jeu de mots car j'avais dit wow et c'est world of warcraft
+ JBM: j3e sais plus c'est quoi les actonymes CG à la mode
+ JBM: BOTG?
+ leojean890: ah ouais botg c le truc fui par tout le monde^^
+ leojean890: j'ai codé un truc top bronze mdrr j'ai stoppé
+ leojean890: green circle ça me tente pas :o
+ Zorg1: bah vu que des multis ont changé de nom c'est devenu compliqué
+ JBM: c'est le truc de la semaiune dernière que j'ai loupé ça non?
+ leojean890: ouais c ça xD
+ leojean890: changer de nom en effet ça n'aide pas nn plus mdr
+ leojean890: genre csb mpr
+ leojean890: on s'y perd
+ Zorg1: green circle le multi pub de la méthode agile
+ JBM:&#160;?
+ leojean890: ouais mais justement c trop sérieux, ça fait penser au taf, et j'aime pas trop les deck buildings^^
+ Zorg1: JBM&#160;: en fait tu dois développer des applis et t'as des skills à utiliser et à faire du deckbuilding
+ JBM: belle rythmique du bassin ta video
+ leojean890: ah nice au final je suis connecté sur chelonian
+ leojean890: créé un compte bidon et hop
+ leojean890: du bassin&#160;?:P
+ leojean890: sur hystéria&#160;?
+ JBM: ah ben plus haut on voit pas
+ leojean890: dans ma vidéo de jazz t'as vu je bouge en mode tics de visage à fond mdr
+ leojean890: hystéria j'ai pas mis la cam sur le visage ouais j'avoue lool
+ leojean890: faudrait que je refasse des vidéos
+ leojean890: j<i>avais fait ça en 2018 et oublié sur le disque puis enfin filmé^^</i>
+ leojean890: enfin uploadé*
+ leojean890: d'ailleurs j'ai des vidéos qui trainent de quand je jouais dans une expo ça peut être l'occasion
+ leojean890: après sur ma chaine y'a toutes sortes de trucs mais principalement du soft piano..
+ leojean890: vidéos de 2010...
+ leojean890: sur ces bonnes paroles, good night^^
+ Pkemarco: Salut à tous&#160;!
+ Pkemarco: J'aimerais savoir s'il n'y a pas un problème avec la vérification du Unary - Code Golf&#160;?
+ Pkemarco: Nope c'est bon je pense... :grimacing:
+ Zorg1: ah&#160;% sur 7 bits&#160;? ^^

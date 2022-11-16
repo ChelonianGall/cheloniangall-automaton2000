@@ -1,0 +1,325 @@
+ philRG: bigfootledur je t'ai vu sur le CoC hier, et ouais pas concentré sur ce CoC notamment le $ devant "Hello world" au jeu de test 2 lol
+ philRG: du coup j'ai fini dernier lol
+ philRG: tu te souviens des tests suivants &gt;= 3&#160;?
+ philRG: voilà mon code utilisant les fonctions encode et decode des jeux unicode en python:
+ philRG: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/252a5063-a292-43c7-a431-7ca2ab2b97a1">http://chat.codingame.com/pastebin/252a5063-a292-43c7-a431-7ca2ab2b97a1</a>
+ philRG: c'est de l'UnicodeShock matinal&#160;:-D
+ philRG: ou du CoCShock
+ philRG: je pense que quand tu bosses sur des logiciels exportés au Japon, tu dois te former à l'Unicode par exemple
+ dbdr: ne pas utiliser l'unicode aujourd'hui, c'est une faute professionelle, indépendamment du marché
+ jfaixo: Et en Rust, les String sont en UTF-8&#160;! Vive Rust&#160;!
+ Thyl: qui est chaud pour un clash de chat&#160;???
+ dbdr: :snowflake:
+ philRG: :joy:
+ philRG: dbdr on utilise quoi en fait je suis dépassé lol
+ philRG: jfaixo tu as un tutoriel sympa pour se former à Rust en 5'?
+ philRG: bon je retourne sur mon min-max à 3 joueurs sur tron j'ai fait mon graphe, mais faire un min-max dessus
+ philRG: comment
+ Thyl: max ntree
+ Thyl: c'est hard
+ leojean890: tu fais un paranoid&#160;: tu simules tous les ennemis et considères qu'ils cherchent tous à baisser ton eval&#160;;) (min pour tous et max pour toi)
+ Thyl: j'ai essayé ça à pas trop marché
+ Thyl: environ ~400 en silver
+ Tiouz: Bon, hier soir je suis passé en gold sur UTTT avec un code qui pouvait segfault...
+ jfaixo: philRG c'est bien le souci (et la beauté) de Rust, ca s'apprend pas en 5'.. J'ai voulu rentrer dans ce langage comme dans tous les autres (ie sans lire trop la documentation, après tout je connais un certain nombre de langages), ben ca remet à sa place et apprend l'humilité&#160;;) Le mieux c'est de lire le Rust book, en commençant par le début, et sans sauter de chapitres xD
+ leojean890: Thyl je crois que Blaise a un paranoid et ça marche bien pour lui^^ t'as p'tet un bug sur ton voronoi&#160;?
+ leojean890: Tiouz si tes timeouts sont rares ça t'empêche pas de passer hehe
+ Tiouz: J'ai encore des petits bugs, pour l'instant je me fais rouler dessus par le boss gold, je l'envoie sur des positions qu'il gagne
+ Tiouz: Mais oui, il n'arrivait pas souvent en silver
+ leojean890: t'as un mctts&#160;?
+ Tiouz: oui
+ leojean890: mcts
+ leojean890: la méta quoi (enfin qq personnes réussissent bien en minmax)
+ leojean890: Neumann et dbdr sont bien classés en légende avec minmax je crois
+ Tiouz: Sur le premier play je fais 6k itérations. J'ai essayé de l'améliorer avec UCT mais ça marche moins bien étrangement
+ leojean890: t'as p'tet un bug dans ton UCT
+ leojean890: le boss gold a probablement bcp de rollouts aussi
+ Tiouz: Enfin, c'est juste UCB sur la liste des moves, pas un vrai UCT
+ Tiouz: À la fin, je suis en négatif sur tous mes plays (avec UCB), donc il se rend bien compte qu'il y a un souci, mais trop tard
+ Tiouz: Je pense qu'il faut augmenter le nombre de rollouts, mais je ne vois pas comment
+ darkhorse64: 6k, c'est avec quel langage&#160;?
+ leojean890: optimiser le code ^^ <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/38626/optimizing-breadth-first-search">https://www.codingame.com/playgrounds/38626/optimizing-breadth-first-search</a>
+ Tiouz: c++
+ dbdr: ah bah voila, avec un langage lent aussi... /s
+ Tiouz: :rage:
+ darkhorse64: Ton implémentation a des gros problèmes. On peut faire 100k rollouts au second tour
+ Tiouz: What&#160;?
+ darkhorse64: le boss gold est réputé pour en faire 25k
+ Alshock: Faut quand même être bon pour ça
+ Alshock: le boss est pas limité à un demi-tour&#160;?
+ darkhorse64: Pas que je sache
+ dbdr: ben il fait peut-etre 25k en un demitour
+ Alshock: quand tu dis 100k rollouts au second tour c'est vraiment au second tour ou en comptant les retombées du premier&#160;?
+ darkhorse64: sans reuse
+ Alshock: vous êtes sacrément déter quand même
+ Alshock: c'est encore du C++ ou de l'ASM à ce niveau&#160;?
+ darkhorse64: C++
+ Alshock: hmmm ça me laisse songeur
+ Tiouz: Pourtant je précalcule toutes pas mal d'infos sur les grilles 3*3
+ Bon[]Crayon: Bonjour tout le monde.
+ Bon[]Crayon: AutomatonNN yo
+ Bon[]Crayon: Automaton2000 yo
+ Tiouz: C'est un bon problème pour m'apprendre à vraiment optimiser mon code
+ Automaton2000: vais pas tarder non plus
+ Alshock: Bonjour Bon[]Crayon, parle pas à Automaton2000
+ Automaton2000: par contre, je ne peux même pas dire que c'est le premier truc qui me fait un peu magique, quoi, ...
+ Alshock: Automaton2000 a vu une licorne&#160;!
+ Automaton2000: j'ai essayé de faire un truc comme ça&#160;:
+ Bon[]Crayon: Il y a un problème&#160;?
+ Alshock: il est méchant
+ darkhorse64: pragma, pool de nodes, fonctions optimisées pour l'UCT qui prend tout de même pas mal de temps, pas d'allocation
+ Bon[]Crayon: ok
+ Tiouz: pas d'allocation&#160;?
+ Alshock: ah oui UCT je sais pas ce que ça veut dire
+ Tiouz: pragma je pense que c'est bon
+ Alshock: Pas d'allocation, c'est lent l'alloc
+ darkhorse64: tout préallouer au démarrage
+ Tiouz: En gros je n'ai pas le droit de créer des objets&#160;?
+ darkhorse64: oui
+ Alshock: exactement, tu crées tout au début et après tu gère ta propre pile
+ darkhorse64: ^
+ Tiouz: Donc je me crée un tableau que je vais réutiliser à chaque tour pour mettre mes positions. OK
+ Alshock: Ne demande pas de la mémoire, deviens la mémoire
+ Tiouz: (enfin, je parle des moves)
+ Tiouz: J'imagine que les vectors c'est la mort
+ Alshock: les vectors allouent à la volée ouais
+ Tiouz: Ne me criez pas dessus, mais il se pourrait qu'à chaque tour (de chaque rollout) je stocke mes coups possibles dans des vectors
+ darkhorse64: un vector, c'est très bien si tu l'as dimensionné correctement au départ
+ Alshock: Tiouz personne te criera dessus
+ Tiouz: En gros c'est mieux de faire un array&lt;move_t,81&gt;, et je renvoie un entier qui dit combien de moves j'ai, plutôt qu'un vector&#160;?
+ Alshock: Le mieux que je puisse te conseiller c'est de faire un gprof en local, tu verras bien ce qui prend du temps
+ darkhorse64: On a fait toutes les bêtises avant toi, c'est pour ça qu'on les connaît
+ Alshock: Je crois que si tu fais un vector et vector.reserve(81) c'est à peu près pareil
+ Alshock: Par contre il faut pas que tu crées les moves à la volée
+ Tiouz: À un moment je suis bien obligé de créer les moves en fonction de mon état, je ne peux pas tout précalculer
+ Alshock: donc genre array&lt;Move, BCP_BCP&gt; pool;et après une fonction qui va chercher un move pas utilisé de la pool
+ Alshock: Tu vas pas les générer tu vas les récupérer, et les initialiser
+ Tiouz: Ah, tu veux dire que je les crée au début, et que je ne fais qu'appeler
+ Tiouz: ok, intelligent
+ Tiouz: Un truc qui me ralenti aussi c'est que je ne sais pas exactement quand C++ fait des copies. J'ai l'impression qu'à des endroits je suis obligé de faire des copies
+ darkhorse64: C'est pas un move, c'est un node de ton MCTS qui représente unétat du jeu (move, wins, visits, etc ..)
+ Alshock: c'est vrai, j'ai considéré que tu appelais move un node, mais c'est un peu plus que ça
+ Tiouz: Ah non, moi un move, c'est une coordonnée de jeu
+ darkhorse64: Les copies, c'est pas forcément limitant. Quand je fais un playout, je le fais sur un copie du GameState
+ Tiouz: Je fais ça aussi
+ Alshock: C'est inévitable ça non&#160;?
+ Alshock: à moins d'avoir une fonction de rollback mais je vois pas comment ça serait rentable
+ dbdr: suffit d'utiliser un ordinateur quantique&#160;;)
+ dbdr: tu codes tous les etats en superposition
+ darkhorse64: c'est ça ou undo mais comme le gamestate est petit
+ Alshock: Tiouz tu as besoin de nodes dans ton MCTS, et chaque node a besoin d'un move
+ Alshock: du coup tu peux fusionner les deux entités
+ Tiouz: node = état (la grille); move = coup à jouer&#160;?
+ Alshock: node = état de l'arbre du MCTS, elle a un parent, des enfants, un move qui lui correspond, un nombre de playouts, et un nombre de wins
+ Alshock: noeud de l'arbre pardon
+ darkhorse64: il ne faut pas stocker l'état dans le node, sauf s'il est tout petit
+ Alshock: Ah oui tiens c'est une manière d'éviter d'avoir à copier l'état ça, en créer des MILLIARDS
+ darkhorse64: quand on explore l'arbre on applique les coups sur le gamestate
+ Tiouz: Pour l'instant je n'ai même pas d'arbre. J'ai juste une fonction qui joue aléatoirement jusqu'à la fin
+ Alshock: J'imagine qu'à aware c'est possible de garder l'état dans la node&#160;?
+ Tiouz: L'arbre c'est une optimisation que je me réserve pour plus tard
+ Alshock: Ah c'est un MC pas TS
+ Tiouz: ah oui
+ Tiouz: Le TS il viendra plus tard. Si j'ai pas 10k rollout sur MC j'aurrai pas sur MCTS
+ Alshock: Certes, mais y a pas que les nombres qui comptent
+ Alshock: Cela dit c'est vrai qu'avec &lt;10k le MCTS est pas sûr de lui avec une grosse profondeur
+ Alshock: Si je peux me permettre de me répéter le meilleur moyen de déterminer qu'est-ce qui coûte vraiment le plus à optimiser tout de suite c'est un coup de profiler
+ darkhorse64: ^
+ Tiouz: gprof j'avais vraiment pas compris l'output. C'est ultra obscur...
+ Tiouz: (testé sur un autre code)
+ dbdr: TS c'est pas juste une optimisation
+ dbdr: ça biaise la recherche, donc ça te donne des résultats meilleurs qu'un MC, pour le meme nombre de rollouts
+ Tiouz: Oui, il faut vraiment que je l'implémente
+ Tiouz: Je repousse le truc car je ne vois pas du tout comment avoir une implem qui ne va pas faire 1000 copies
+ Tiouz: En plus, je ne suis pas encore confiant sur les références en c++, donc ça va être chaud
+ Alshock: bah comme on dit, au lieu de faire des copies tu fais des nodes, et avant de passer à la simu tu te balades dans tes nodes et tu joues leur move comme si c'était un move généré au hasard
+ Tiouz: Oui, mais c'est exactement le "se balader dans les nodes" où je ne vois pas comment faire dans copier
+ Alshock: faut que j'arrête de mettre des "bah" au début de mes réponses quand je sais pas bien comment dire un truc
+ Tiouz: Et je ne vois pas non plus comment tu peux créer tes nodes au début (comme tu as dit, pour ne pas faire d'allocation mid-code)
+ Alshock: t'es à une node X, tu choisis l'enfant à explorer (paramètre d'exploration toussa toussa), tu passes à l'enfant et tu joues son move
+ Alshock: si l'enfant c'est un nullptr, tu passes à la simu
+ Tiouz: Ah mais alors je fais tout avec des pointeurs...
+ Alshock: là je parle d'implémentation y a sûrement mieux pour gérer la parenté que ce que je vfais
+ Alshock: faut juste que tu saches qui sont les enfants d'une node
+ Alshock: et lesquels sont déjà créés ou non
+ Tiouz: Ce qui me saoule c'est que je saurai exactement comment faire en python, mais en c++ j'ai tellement plus de mal
+ Alshock: L'important c'est&#160;: tu veux pas faire d'alloc, donc tu fais une "fausse alloc" genre alloc(void) { return &amp;NODE_POOL[POOL_INDEX++];}
+ Tiouz: Mon problème c'est pas le pseudo-code, mais c'est l'implem
+ Tiouz: oh wow
+ Alshock: et tu reinit POOL_INDEX à chaque tour, bien sûr c'est un exemple mais t'as l'idée
+ Alshock: Tu saurais comment faire pour éviter de l'allocation mémoire en Python&#160;? J'en serais tellement incapable
+ Tiouz: Pas pour l'allocation, mais pour la gestion des pointeurs
+ Alshock: enfin remarque je mens, c'est le même délire
+ Tiouz: Par exemple, je ne comprends même pas ta syntaxe "return &amp;[...]"
+ Alshock: Si t'es pas à l'aise avec les pointeurs je peux pas te donne rde meilleur conseil que de t'y frotter. C'est juste une variable qui retient où se trouve une autre variable. En soi rien de bien sorcier, et tu peux les éviter au maximum avec les références
+ Alshock: &amp; c'est pour retourner l'adresse de la variable, donc un pointeur vers la POOL_INDEXième case de NODE_POOL 
+ Alshock: alors j'admets un truc, C++ est pas très finaud pour les opérateurs
+ Tiouz: Ah, et avec la gestion comme ça de la mémoire, il n'y a même pas besion de free, car on va réutiliser
+ Alshock: int &amp;my_ref c'est une référenceint *my_ptr c'est un pointeurauto tmp = &amp;my_int c'est un pointeur vers my_intauto tmp = *my_ptr c'est ce vers quoi moint my_ptr
+ Tiouz: Parce que j'ai appris que pointeur = alloc = il faut free à un moment
+ darkhorse64: Si tu reset POOL_INDEX, à chaque tour, tu réutilises, si tu ne le fais pas, tu conserves ton arbre
+ Alshock: Pour info on a droit à tellement de mémoire que c'est sport de réussir à vider la POOL, même en ne faisant aucun reset de toute la game
+ Alshock: sed s/moint/pointe/
+ darkhorse64: Il n'y a qu'un multi où j'ai eu ce genre de souci, c'est Bandas
+ Tiouz: int t = 10;int k = &amp;t;k = 2*k+9;
+ Tiouz: Là j'utilise les références, donc aucune copie, juste de la réutilisation&#160;?
+ darkhorse64: oui
+ philRG: leojean890 oui j'ai modifié mon algorithme min-max hier soir comme tu me le dis en fait, mais par contre, comment minimiser sur 2 niveaux d'ennemis 
+ Tiouz: Ok, merci à tous pour les conseils. Ce week end je serai legend sur UTTT
+ leojean890: max (p1) appelle min (p2) qui appelle min (p3) qui appelle max (p1)
+ Alshock: attends, non Tiouz
+ Alshock: int &amp;k = t;
+ Alshock: sinon tu stockes l'adresses de t dans k et ça devient n'importe quoi
+ Tiouz: ok
+ darkhorse64: oops, lu trop vite, désolé
+ Alshock: après je suis pas sûr de comprendre ce que tu veux faire avec la deuxième ligne
+ Alshock: dernière*
+ Tiouz: c'est juste pour faire une opération sur k qui va modifier t
+ Tiouz: pour dire qu'on peut utiliser k comme un entier normal, et ça va modifier t
+ Tiouz: (mais ce serait plus utile avec des arrays ou autre structure)
+ philRG: leojean890 euh c'est ce que j'ai du fait, mais j'étais pas sûr que ça minimize le meilleur chemin faudra que je me fasse un dessin&#160;:-)
+ Alshock: euh ouais normalemetn c'est bon alors
+ philRG: faire
+ Tiouz: go :hamburger:, bonne journée
+ leojean890: philRG ouais c'est logique tu simules les joueurs à tour de rôle (vraie simu du jeu quoi)
+ leojean890: juste tu supposes qu'ils vont essayer de minimiser ton eval
+ leojean890: alors qu'ils vont essayer de maximiser la leur
+ philRG: oui j'ai fait ça hier vers 1h du matin lol et pas retouché depuis
+ leojean890: mais bon c'est corrélé
+ leojean890: tu supposes qu'ils sont tous contre toi (padanoid)
+ leojean890: paranoid
+ leojean890: alors qu'en vrai ils ont genre des evals similaires à la tienne où ils sont également en 1 contre tous 
+ philRG: j'ai l'algo de wikipedia en fait jamais trop approfondi, mais je devrais car j'avais un truc zarbi dessus
+ leojean890: (ou option de jouer contre le plus proche adv only par ex)
+ leojean890: mais bon paranoid c bien car tu anticipes le pire des cas
+ philRG: ah non zarbi j'avais 2 fois un false dans mon obapa
+ leojean890: oware&#160;?
+ leojean890: ah non c'est abapa
+ philRG: sur wikipedia c'est False et True pour maximizePlayer
+ philRG: <a rel="nofollow" class="external free" href="https://fr.wikipedia.org/wiki/Algorithme_minimax">https://fr.wikipedia.org/wiki/Algorithme_minimax</a>
+ philRG: oware oui
+ leojean890: t'es pas obligé de coder les algos strictement comme ils sont  décrits sur WP tu peux faire des variantes en fct du problème
+ leojean890: WP c'est théorique only 
+ leojean890: dans la pratique vaut mieux adapter
+ leojean890: oware c'est cool pour minmax
+ leojean890: simple à simuler
+ philRG: ca carrément zarbi mon truc sur oware il fait que du Max
+ Alshock: C'est un negamax non&#160;?
+ leojean890: euh bah si ça fait que du max t'as un bug lol
+ leojean890: si tu voulais faire minmax
+ dbdr: maximax
+ philRG: ah mais le gros bug sur mon oware 
+ philRG: pour ça que je passais pas le bot de wood2
+ philRG: et que j'ai vu passer dwarfie en trombe à un moment
+ leojean890: bah cette fois tu vas passer s'il n'y en a pas d'autres hehe
+ philRG: à mon avis y en a d'autres mais je suis déjà en wood 1
+ philRG: en fait j'ai les 2 un alpha-v
+ philRG: beta et min-max mais mon min-max était moisi
+ philRG: le min-max passe mieux que l'alpha-beta en tout cas
+ philRG: ah et je prends pas en compte l'ordre de jeu du player aussi
+ philRG: c'est comme l'inversion des x et y sur la grille de jeu cg j'arrive pas à m'y faire
+ philRG: ah si: Les 6 premières valeurs correspondent à vos maisons.
+ philRG: donc c'est bon ça
+ dbdr: philRG si mnimax marche mieux que alpha-beta, c'est que tu as un bug
+ SaveurDAutomne: vous faites quoi&#160;?
+ philRG: dbdr peut-être
+ philRG: def alphabeta(node, i): <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/bbf609aa-8d6a-4753-ad05-0c68b3491bb4">http://chat.codingame.com/pastebin/bbf609aa-8d6a-4753-ad05-0c68b3491bb4</a>
+ philRG: j'ai peur qu'il soit un peu sommaire comme code
+ philRG: quand je serai grand, je ferai du C++ et de l'optim&#160;:-)
+ philRG: bon petit depth 2 en min-max 3 player et fonction d'eval voronoi python
+ philRG: ça m'étonnerait que ça monte gold ça
+ philRG: bah en plus il doit être buggé
+ leojean890: ah oui un minmax ne peut absolument pas marcher mieux qu'un alpha beta :P sauf si t'as une eval qui marche mieux à depth faible et que ton alpha beta te fait aller plus loin
+ leojean890: y'a pas d'inversion x,y en informatique c'est tjr (0,0) en haut à gauche pas que sur CG (exemple, la sdl ou autres libs) ^^ en maths c'est en bas à gauche oui..
+ Bon[]Crayon: Automaton2000 Tortue qui s'en dédit.
+ Automaton2000: je ne me suis pas fait pour ca
+ Bon[]Crayon: Automaton2000 Tu t'es auto fait. Mais quel génie ce bot.
+ Automaton2000: ce moment où tu te rends compte que je me disais que c'était un jeu de plateau
+ philRG: ben les fonctions trigonométries utilisent (0,0) en bas à gauche non?
+ philRG: en angleterre le volant est à droite ok
+ philRG: je suis perdu là
+ philRG: bon définitivement le python comme technologie commune dans une équipe de dev faut oublier
+ philRG: mieux vaut pas partager son code
+ leojean890: ça dépend comment tu les codes, changement de repère, etc^^
+ leojean890: python ça va en code partagé si tu types tes variables (&gt;=3.6)
+ philRG: euh comment ça?
+ leojean890: tu forces les types, ça permet aux gens de savoir de quoi il s'agit
+ kayou: je ne suis pas sur que ca regle le probleme de l'inversion de l'axe y dans les 2 cas le type de y reste le même
+ philRG: ah ben moi, j'écris souvent le nom de la classe mais c'est pour activer l'auto-completion
+ kayou: bon le coup du y vers le bas doit bien avoir une raison, mais c'est con d'avoir choisit cette convention quand tout le monde utilise l'autre ... (math, physique, dessin indus)
+ philRG: ben pour les calculs des angles c'et l'enfer
+ kayou: ha oui tu te retrouves avec une inversion du sinus et pas du cosinus
+ philRG: c'est le sens d'affichage des lignes du tube cathodique de haut en bas au niveau historique
+ philRG: la référence...
+ philRG: pourquoi pas le sens du vent pendant qu'on y est
+ kayou: comme dis leojean890 tu peux passer par un changment de repere pour retrouver tes petits
+ kayou: apres ca pose le probleme de la conversion vers les int des pixels, est'ce qu'il y un 1 en plus ou en moins ...
+ philRG: ouais c gonflant mais oui c ce que je fais
+ philRG: une chatte ne retrouverait pas ses petits, comme dirait Bob
+ kayou: et encore tu es en 2D, en 3d tu as des cas ou tu te retrouve avec un repere indirect, je ne sais plsu ou j'avsi eu ca mais ca m'avis bine emmerdé avant que je m'en rende compte
+ Alshock: je connais pas de moteur physique 3D qui ait un axe y vers le bas
+ kayou: c'etait pas un moteur, mais un logiciel le plan horizontal avait x,y et z vers le haut et x et y etaient inversés , donc le repère pouvait ce lire (y,x,z) et quand on reflechit avec les reperes habituel on a (x,y,z) ben les truc sur l'axe z ne tournait plus dans le bon sens (le produit
+ kayou: vectoriel merdait
+ BlaiseEbuth: Yo tout l'monde&#160;! Automaton2000, AutomatonNN&#160;?
+ Automaton2000: j'ai toujours un peu de respect
+ Alshock: ça se voit pas bcp Automaton2000
+ Automaton2000: le probleme c'est que je sais c'est que je viens de tomber sur un bug de merde
+ Alshock: t'as toujours un peu de respect et tu m'appelles "un bug de merde" Automaton2000&#160;?
+ Automaton2000: bah si j'ai bien compris
+ Alshock: (╯°□°）╯︵ ┻━┻
+ BlaiseEbuth: :grin:
+ leojean890: kayou ouais il faut appliquer les formules trigo dans le repère qui nous arrange
+ leojean890: kayou changement de repère en 3D.. est-ce que t'as fait le concours russianaicup&#160;? ils ont des jeux en 3D parfois genre un pseudo rocket-league. ça doit être long et fastidieux, très complexe à faire ^^
+ Alshock: Merde, la RAIC a un rocket league&#160;?
+ Alshock: Fait chier je vais être obligé de regarder si c'est le cas, j'ai spam ce jeu si fort que j'entends des vroumvroum la nuit
+ leojean890: ouais je ne sais plus c'était le challenge de quelle année.. ça devait être chaud. Pour le moment leurs challenges ne sont pas dispo en multis mais d'après amurushkin ça sera le cas bientôt si tu veux t'essayer sur ce jeu^^
+ BlaiseEbuth: Il est déjà nul au vrai jeu, ça risque d'être beau...
+ leojean890: je ne suis pas sûr que j'essaierai de faire un truc sur ce jeu.. trop hard :P
+ leojean890: faut avoir bcp de temps devant soi
+ Alshock: BlaiseEbuth c'est justement ma chance, vu ma nullité peut-être que mon IA va enfin pouvoir m'impressionner à moindre frais&#160;! :D
+ BlaiseEbuth: :thinking:
+ Zorg1: kayou&#160;: par exemple Povray et pas mal de raytracer on un repère à main gauche
+ Zorg1: pour avoir x vers la droite, y vers le haut et z qui s'éloigne
+ kayou: c'est peut la que j'avais vu ca, j'avis cherché pas mal de facons de faire de la jolie 3D, pendant un moment
+ kayou: j'avais bine aimé povray parceq u'il faisait des vraies spheres et pas des boules à facettes ...
+ leojean890: j'ai fait un peu d'opengl en école mais ça date hehe
+ leojean890: je devrais m'y remettre someday 
+ kayou: par contre le chois des matieres et textures ca n'a jmais été mon fort&#160;: <a rel="nofollow" class="external free" href="https://imgur.com/a/U0kLDSn">https://imgur.com/a/U0kLDSn</a>
+ Alshock: C'est du dali&#160;?
+ leojean890: chacun son métier hehe
+ kayou: le fichier pov fait 70Ko
+ leojean890: dev&#160;!= designer&#160;;)
+ Zorg1: c'est trop mignon la chaîne chromée
+ kayou: je ne suis pas dev, je suis dessineux meca
+ Zorg1: j'ai jamais réussi à faire des trucs comme ça sur povray
+ leojean890: ah ok mais pas spécialiste des textures etc
+ leojean890: I see^^
+ kayou: j'ai plus l'ahbitude d'utiliser du Solidworks
+ kayou: masi c'est nettement moins marrant
+ Alshock: En vrai le mec qui pédale là dessus son dos fait 5 fois la taille de ses jambes on est d'accord&#160;?
+ Alshock: et ses bras  10 fois s'il tient le volant depuis le fond du siège
+ kayou: en fait le gars qui pedale, c'etait un pinguoin mecanique, que j'ai jamais finis
+ BlaiseEbuth: make sense
+ Alshock: :penguin: :clog:
+ Alshock: putain le :penguin: existe pas il est pas dans la liste
+ Alshock: c'est quoi ces emotes cachées&#160;?
+ Alshock: Ah, en fait la recherche se fait pas sur toutes les emotes mais sur la catégorie sélectionnée seulement...
+ Zorg1: j'avais fait ce truc il y a dix ans (que j'avais adapté pour ici)&#160;: <a rel="nofollow" class="external free" href="https://imgur.com/a/PnoMXFU">https://imgur.com/a/PnoMXFU</a>
+ BlaiseEbuth: :o
+ BlaiseEbuth: La MK Tower
+ Zorg1: (à la base un essai pour reprendre la tour EDF de la Défense)
+ Alshock: on la reconnait
+ Alshock: c'est déjà pas mal
+ kayou: le debut du pigouin&#160;:<a rel="nofollow" class="external free" href="https://imgur.com/a/U0kLDSn">https://imgur.com/a/U0kLDSn</a>
+ kayou: ce qu'il ya de bine avec pov c'est de pouvoir scripter le truc et faire de l'animation
+ Zorg1: :heart_eyes: anim et cycle de marche ^^
+ leojean890: ah ouais ça ressemble hehe
+ leojean890: et pas mal le bolide
+ pardouin: moi aussi je fais de la 3D en ce moment pour rigoler, mais beaucoup plus simpliste
+ pardouin: là j'ai fait un générateur aléatoire d'archipel&#160;:
+ pardouin: <a rel="nofollow" class="external free" href="https://i.imgur.com/PDO0k8c.png">https://i.imgur.com/PDO0k8c.png</a>
+ leojean890: ah j'avais codé un générateur d'univers virtuels 3D à la minecraft moi une fois :P mais c'est à poursuivre c'est large moins bien que minecraft :P
+ FlaggadaJones: Et ça fait Zumba cafeww
+ RomainBat: tu vas te faire ban bro
+ RomainBat: pour la zumba
+ Zorg1: gné&#160;?

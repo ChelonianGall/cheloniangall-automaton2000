@@ -1,0 +1,668 @@
+ ASM_MOV_INT: i had to start over, so i took a break, when i realized on the fourth test, that the number are hex...! and I was up to the 50** commands too
+ One-Six: ohno......
+ ASM_MOV_INT: rofl
+ One-Six: I'm trying it out too but with Lua
+ One-Six: which doesn't play that nicely with binary and hex, xd
+ One-Six: I probably need to write a bunch of conversion functions, I'll see
+ ASM_MOV_INT: that puzzle started me on the function writing path in javascript... 
+ ASM_MOV_INT: i will revisit it on another night, i'm at work, and only have an hour left
+ ASM_MOV_INT:&#160;:)
+ One-Six: For me, I'm trying out table of functions for Lua (table being a glorified array that can store pretty much anything)
+ One-Six: Ah, I see
+ ASM_MOV_INT: table of functions? sounds interesting
+ One-Six: yeah, so to read and perform a opcode I can do something like op[*first char of input*](input)
+ ASM_MOV_INT: I just have a getReg() and setReg() function, then just started churning through the commands one at a time... parsing commands is a very good programming exercise
+ One-Six: ah... I did it the bad way (in a way) and used a global table as the register and a global var as instruction counter
+ ASM_MOV_INT: well, now you got me looking at it again! rofl... oops i only passed test 1, test 2 contains the hex
+ One-Six: ohno
+ ASM_MOV_INT: :wink:
+ One-Six: and I decided to use a lookup table for hex2bin 'cause why not, XD
+ One-Six: now I just need to implement bitwise operations
+ ASM_MOV_INT: lookup table? nice
+ One-Six: wait, surely Lua have those...?
+ One-Six: Oh I think Lua 5.2 has a binary library, but I don't know about other versions
+ One-Six: I think 5.0 through 5.4 coexists and different version is used by different implementations... Lua is a pretty botchy language, but it's easy to get into for sure
+ One-Six: found it, 5.3 onwards natively support several bitwise operations w/o need for libraries.
+ ASM_MOV_INT: what version of lua is on here?
+ One-Six: I have to assume it's the newest (5.4)
+ One-Six: yep
+ One-Six: at least you can get the version by print(_VERSION), xd
+ ASM_MOV_INT: :grinning:
+ One-Six: So no more lookup tables, hex2dec2hex it is then
+ ASM_MOV_INT: oh wow, I found a bug in my bitwise OR function for opcode 40xy, fixed it... passed test 2
+ One-Six: yay
+ ASM_MOV_INT: this has motivated me to move forward
+ ASM_MOV_INT: rofl
+ One-Six: xd
+ One-Six: I ended up with another lookup table inside of the dec2hex function
+ One-Six: because of ABCDEF
+ One-Six: XDD
+ ASM_MOV_INT: I made a getNN function
+ One-Six: In my case, Lua had string.sub(str,i,j)
+ One-Six: so I condensed it to s(str,d1,d2=d1)
+ One-Six: so I would do s(opcode,3,4)
+ One-Six: (oh yeah I decided to just store all hex as strings and just convert them to intergers when I need to mess with them)
+ ASM_MOV_INT: omg i got it!
+ Dorak: Simple CPU Emulation?
+ ASM_MOV_INT: I thought it would take longer than that....
+ One-Six: whoa
+ One-Six: nice
+ ASM_MOV_INT: ty &lt;bow&gt;
+ ASM_MOV_INT: ooh it's a hard puzzle
+ ASM_MOV_INT: hmmmm
+ ASM_MOV_INT: so that one guy earlier that said he only got 50%
+ Dorak: Was me. xD
+ ASM_MOV_INT: if the program doesn't include the 0000 at the end, don't print
+ One-Six: That would be... yeah, Dorak
+ One-Six: Ohhh...
+ struct: yes its lua 5.4.3
+ One-Six: Thanks for verifying, struct!
+ ASM_MOV_INT: at least that was my first thought after seeing his comments on chat, then reading the problem... first thing I implemented was to put that in a condition only if it was a command
+ Dorak: I managed to do it a while ago. I understood my mistake, it was a base error.
+ ASM_MOV_INT: ah, yes the hex
+ ASM_MOV_INT: i blame the hex
+ ASM_MOV_INT: rofl
+ One-Six: I'm back
+ One-Six: now let's see if I know how bitwise operations work...
+ <b>**Tien2k9 slaps One-Six around a bit with a large fishbot</b></p><p><img src="/a/61418101984360" /> struct: what are you workign on?
+ One-Six: Simple CPU Emulation 1, what ASM and Dorak had been working on
+ One-Six: huh, it didn't mention how to deal with subtraction overflow – or addition overflow clearly for that matter
+ One-Six: let me pretend subtraction never overflows for now xd
+ Tien2k9: (╯°□°）╯︵ ┻━┻
+ One-Six: oh, I should pretend it uses two's compliment...?
+ Tien2k9: yay i win clash 3 times a row :D
+ One-Six: nice
+ One-Six: I've been doing clash just for the heck of it, but I do get first and seconds so that's real nice
+ One-Six: always beat by python and ruby in shortest mode though XD
+ One-Six: shoot, my intricate code returns nothing XD
+ One-Six: nice I did it
+ One-Six: I think
+ FoXbOw: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/22055844a44cd27c0c856361cb2548721723cc6">https://www.codingame.com/clashofcode/clash/22055844a44cd27c0c856361cb2548721723cc6</a>
+ One-Six: is there a way to reopen a CoC channel I exited?
+ ASM_MOV_INT: yes, but it will take you back to the puzzle, not the actual clash
+ ASM_MOV_INT: ok, i had to get it...
+ ASM_MOV_INT: <a rel="nofollow" class="external free" href="https://eulerschezahl.herokuapp.com/codingame/puzzles/">https://eulerschezahl.herokuapp.com/codingame/puzzles/</a>
+ One-Six: Oh, I mean the chat-channel – I think it's called chat room?
+ One-Six: whoa, that's a cool website
+ One-Six: Nice! I aced that CPU puzzle!
+ ASM_MOV_INT: not sure about the chat rooms
+ ASM_MOV_INT: nice
+ ASM_MOV_INT: very cool puzzle
+ One-Six: It says I am should've learned about stacks with it
+ One-Six: I don't think I used stacks at all? XD
+ One-Six: Just chucked the entire raw opcode into a table and used a separate instruction index
+ One-Six: Let's see if there's CPU Emulation 2
+ One-Six: Uh, probably not tonight though (
+ One-Six: noooo there isn't
+ One-Six: Oh I know, I can write one! ((
+ One-Six: oh, there's already some brainf**k themed puzzles
+ ASM_MOV_INT: I didn't use stacks either....
+ One-Six: y'all should try brainf**k, it's super fun to mess with XD
+ ASM_MOV_INT: where at? link
+ One-Six: en.wikipedia.org/wiki/Brainf**k
+ One-Six: Mitxela also made this super nice interpreter with visible memories:
+ One-Six: <a rel="nofollow" class="external free" href="https://mitxela.com/other/brainfuck">https://mitxela.com/other/brainfuck</a>
+ One-Six: lemme find something I wrote a long time ago
+ ASM_MOV_INT: rofl, and it passed the censor test lol
+ One-Six: guess it's given a special case XDD
+ derjack: :upside_down:
+ One-Six: Here's something I cooked up:
+ One-Six: <a rel="nofollow" class="external free" href="https://pastebin.com/4c34Zir8">https://pastebin.com/4c34Zir8</a>
+ One-Six: You will also need this extended ASCII character for it to work: ÿ
+ One-Six: (because I used FF for EOF)
+ One-Six: (I don't remember how each bit works exactly now though, but looking at the memory, you should still be able to tell what each bit does – kind of?
+ One-Six: oh, mixtela also have a YT video explaining how BF works and how he made a TicTacToe "A.I." with it
+ One-Six: that man is rad
+ Dorak: What version of net core (or net framework) does the page use? It gives me a thousand errors a valid F# solution.
+ struct: .NET Core Runtime 3.1.3	
+ struct: for F#
+ Dorak: Uhh... Thanks.
+ Dorak: For C# is net core 3.1 too?
+ struct: yes
+ struct: C# 8.0 (.NET Core Runtime 3.1.3)Compiled with ‑unsafe
+ Dorak: Does it take a long time for the page to update the language versions? We are currently on NET Core 6 (lts version). The new C# and F# features since .net 5+ would be really useful here. :cry:
+ struct: They usually update them before contests start
+ Dorak: Just out of curiosity, what contests are you talking about? Events like spring challenge 2022?
+ struct: yeah
+ struct: I dont know when the next one is
+ Dorak: Okok. Thank you very much for your time. 
+ struct: np
+ Dorak: Just one more question. Is the information on the languages ​​and their versions public? I would like to see info about other languages ​​too.
+ struct: <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/40701/help-center/languages-versions">https://www.codingame.com/playgrounds/40701/help-center/languages-versions</a>
+ Dorak: Thanks a lot. :kissing_closed_eyes:
+ struct: It doesnt get update often due to backwards compatibility I think
+ struct: Some languages updates can break some bots
+ ashiknur: can anyone suggest to me a book on algorithms needs in codingame? l
+ ashiknur: like minimax, monte charlo, etc
+ struct: I dont know any sorry, but there are plenty of resources online for those 2 algos
+ struct: are you mostly interested in AI?
+ derjack: no books, just random articles here and there
+ derjack: and/or chess programming wiki
+ struct: no books for NN aswell?
+ ashiknur: @struct I want to learn those algorithms actually needs for game bot. I have participated on many codingame bot competition without knowing any AI algorithms. btw I managed to get to silver in some of those. so I want to get it to a new level.
+ derjack: im not a books guy. but apparently the one by sutton is good
+ struct: yeap Im also not a book fan
+ struct: ashiknur I would pick a simple game to play and try to implement those algos there
+ struct: for example connect 4 is easy to tell whats happening, the sim is trivial
+ derjack: minimax video <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=KU9Ch59-4vw">https://www.youtube.com/watch?v=KU9Ch59-4vw</a>
+ derjack: well UTTT wood league is simple tic tac toe
+ ashiknur: okay, then suggest me some resources. it would be great If I find a list of algorithms needs in game bot programming
+ struct: monte carlo (random search), genetic algorithm, beam search, minimax, mcts
+ struct: Those are probably the most used ones
+ ashiknur: I learned minimax, genetic algorithm, neural network ( still stuck on backpropagation) know the algorithm mcts didn't find a good resource for implementing part. I am c++ programmer. I know only c++ language. 
+ derjack: general: implement game simulation: list all moves, make move, undo move, check for end conditions, who won etc.understand minimax, then alpha-beta which is faster than minimax, then iterative deepening to control for timeunderstand monte carlo, random simulations, then UCB1 formula for monte carlo tree searchothers: genetic algorithm, beam search, bfs/dfs
+ derjack: NN simple example <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/59631/neural-network-xor-example-from-scratch-no-libs">https://www.codingame.com/playgrounds/59631/neural-network-xor-example-from-scratch-no-libs</a>
+ derjack: in python, but should be easily translatable to c++
+ ashiknur: okay, I will surely work on this implementation.
+ struct: bitboards are also important if you are into board games
+ struct: but one thing at a time
+ ashiknur: I didn't hear about that bitboards. thanks for suggesting this. I am really interested in board games.
+ derjack: yeah they are generaly at least order of magnitude faster than 'normal' approaches
+ struct: and easier to code in once you finally understand them
+ Big.Tom: JL727
+ Big.Tom: SUIIIIIIIII
+ Big.Tom: LAKAKA
+ Big.Tom: EMILE SMITH ROWE
+ Big.Tom: SUIIIIIIIIIIIIIIII
+ 5DN1L: No spam please, English only please
+ JohntheHacker: Know amost nothing about coding
+ JohntheHacker: *almost
+ yuutz: suiiiiiii
+ JohntheHacker:&#160;???
+ Minimaliist: suiiiiii
+ Big.Tom: HEHEJE SUIIIII
+ 5DN1L: This site is for practising, not for you to learn from nothing, JohntheHacker
+ JohntheHacker: Where can I learn javascript?
+ 5DN1L: Google
+ JohntheHacker: ok
+ JohntheHacker: thanks
+ 5DN1L: You're welcome
+ orchidperson: gg
+ JCMolhant: Hello people, I'm stuck on the Thor game but I'm pretty sure my code is sound
+ JCMolhant: Anybody willing to check it for me&#160;?
+ JCMolhant: :disappointed:
+ bonsaifree: language?
+ JCMolhant: javascript
+ bonsaifree: im not into js nowadays, but it should be an easy, so you can send pm if you want
+ JCMolhant: Thanks&#160;! Doing just that now
+ BadBurger: wait, theres not marslander 2? if i remember there was one couple years ago?
+ BadBurger: yes there is, just didnt find it in search
+ Rebollo: Guys I lost the code u sent these days
+ Rebollo: How can I convert
+ Rebollo: int
+ Rebollo: to Enum Int
+ struct: static_cast&lt;a&gt;()?
+ 5DN1L: Rebeollo: And you may try searching in the chat log: <a rel="nofollow" class="external free" href="https://cg.spdns.eu/wiki/Special:PrefixIndex?prefix=World%2F&amp;namespace=3000">https://cg.spdns.eu/wiki/Special:PrefixIndex?prefix=World%2F&amp;namespace=3000</a>
+ 5DN1L: Rebollo*
+ Rebollo: thanks
+ One-Six: oh my god, there's a chat log hosted on mediawiki?
+ One-Six: ...There must be a better way XD
+ One-Six: Can I help with the chat log formatting? I'm reasonably familiar in Wikitext
+ 5DN1L: It's not official
+ 5DN1L: I don't know who created the page in the first place :thinking:
+ derjack: dbdr?
+ One-Six: :thinking:
+ 5DN1L: Should One-Six ask dbdr?
+ derjack: or ask Automaton2000
+ Automaton2000: for me is that i was supposed to be a moderator
+ struct: i guess you could try messaging dbdr on the forum, im not sure if he is online often
+ derjack: dbdr seems online now
+ Banble: why can you not clash with html?
+ solution.cpp: because html is not a programming language
+ Rebollo: Guys when I get segmentation fault, is there a way to interpret the messa errorr?
+ Rebollo: Segmentation fault.at Answer.cpp. function golfGame::addNode (this=0x7fffffffd630, obj=..., i=0, newLevel=true, d=0) on line 237at Answer.cpp. function golfGame::loadTree (this=0x7fffffffd630) on line 447at Answer.cpp. function main () on line 487
+ struct: best way is to run the code on an ide
+ DaNinja: node might be null when you call node.addNode() 
+ CryanRyan: why would they add a world chat and not allow spamming, I'm not even on the discord
+ darkhorse64: rebollo: line 237 is where the error occurs. You are trying to access an invalid memory address either because you have a null pointer or you are accessing a array out of its bounds
+ struct: these errors can be tricky to figure out
+ darkhorse64: definitely. If possible, use an IDE to debug because using cerr  to find problems can be difficult
+ Rebollo: which one you guys suggest?
+ struct: are you on windows?
+ Rebollo: yes
+ struct: I suggest visual studio
+ struct: but it uses a different compiler that cg uses
+ struct: but should be fine for most of the stuff
+ struct: its a bit heavy though
+ darkhorse64: ^
+ Rebollo: do you guys see aanything wrong with this function/
+ Rebollo: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/e30a38fc-3ca4-4b2c-afec-e3de69e9861d">http://chat.codingame.com/pastebin/e30a38fc-3ca4-4b2c-afec-e3de69e9861d</a>
+ Rebollo: Does the pointer work only inside of it? And get lost after it is returned?
+ Rebollo: Also I am intilizaling the childs pointer as nullpointer
+ Rebollo: is it possible to aassign after I instatiate the object?
+ struct: that code seems fine
+ struct: could be reduced to 
+ struct: objectsNode *createNode(objects obj) {
+ struct: Yes you can assign a pointer after
+ Rebollo: But once I am creating it inside the function, is is going to exist after it as well/
+ darkhorse64: With the new VS 2022, you can even compile for the Linux subsystem. This way, you are making sure you are generating code similar to what runs on CG servers. I have noticed that floating point computations behave differently between msvc and gcc
+ struct: yes Rebollo
+ darkhorse64: Memory allocation is persistent
+ Rebollo: I am loosing the hope
+ struct: Rebollo how long have you been coding for?
+ struct: I think I asked you this before
+ struct: but cant remember
+ darkhorse64: Your code is correct but you are allocating node by node while computing which is very bad for performance. Allocate a pool of nodes at startup
+ Rebollo: c++ just for months
+ Rebollo: but I work with SQL, data base
+ Rebollo: and other laguages for 15 yearsa
+ struct: These are normal errors for c++ programers
+ struct: dont stress about it
+ struct: its probably out of bounds error like was said before
+ therealbeef: I remember you are learning, but I would advice avoiding the use of new and raw pointers
+ Rebollo: I am trying to create a pointer, like and empty NODE, just to behave as a structure for the tree
+ Rebollo: the problem is in the following commented row
+ Rebollo: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/d48afaba-a60c-4862-a2bc-dcabd54d5501">http://chat.codingame.com/pastebin/d48afaba-a60c-4862-a2bc-dcabd54d5501</a>
+ Rebollo: It is a vector of pointers
+ Rebollo: that I am trying to use as many roots for the tree
+ struct: are you sure i is within the current size of the vector?
+ Rebollo: But once I am using a vector isnt it just a matter of assign any value to the index and it going to create the position?
+ struct: no
+ Rebollo: vector[1]
+ Rebollo: vector[1]
+ Rebollo: vector[1]
+ struct: vector&lt;int&gt; vec;vec[0] = 5;
+ struct: that code wont work
+ struct: vector&lt;int&gt; vec(1);vec[0] = 5;
+ struct: works
+ struct: if you want to add a new element
+ struct: you can just do push_back or emplace_back
+ Rebollo: hum
+ Rebollo: its size is 0
+ DaNinja: headNode.push_back(tempLevel)
+ Rebollo: can I copy from ohter vector?
+ Rebollo: headNode = ballNode
+ struct: if you can copy a vector into another?
+ Rebollo: like just assigning
+ Rebollo: vector1OfPointers = Vector2OfPoisnters
+ struct: yes
+ Rebollo: yes it worked now
+ Rebollo: :lips:
+ Rebollo: sorry guys
+ Rebollo: filling a idiot 
+ Rebollo: but thats ok
+ Rebollo: laways learning
+ Rebollo: I did that:
+ Rebollo: objectsNode *tempNode = ballNodes[i];
+ Rebollo: Now every change in the first pointer will reflect in the other?
+ Rebollo: Like assigning childs and so on?
+ Rebollo: HUm it will
+ Rebollo: worked
+ TheModified: i just won my first full lobby clash!
+ Squar3: it will happen a lot of times just wait for it ^^
+ Squar3: can I understand why my code isn't optimized for all of the medium puzzles&#160;:(&#160;?
+ Squar3: I have 3 70% because of optimization
+ 5DN1L: which puzzle
+ Squar3: Stock Exchange LossesandRemaining Card
+ 5DN1L: both 70%?
+ Squar3: one 70% and one 60% both only optimzation left
+ Squar3: and there is one more task but m working on it
+ 5DN1L: oh, for Remaining Card, I just look up the relevant number sequence...
+ Squar3: I have no idea what that means but I'll search for it
+ 5DN1L: and for Stock Exchange Losses, you're supposed to read through the numbers once and adjust your answer while you're reading it
+ 5DN1L: much like the Temperatures puzzle if you do it that way
+ Squar3: yep I did the temperatures ones
+ WhatInTheChap: giz hos do progrem??
+ 5DN1L: English please
+ WhatInTheChap: poo
+ WhatInTheChap: hi*
+ 5DN1L: Reminder, in case you forget, <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/40701/help-center/code-of-conduct">https://www.codingame.com/playgrounds/40701/help-center/code-of-conduct</a>
+ WhatInTheChap: 69
+ WhatInTheChap: lol!!!!!!!!!!!!!!
+ 5DN1L: you want to spam, then i want to kick you out
+ WhatInTheChap: python question
+ Fasader: good day fellow coders!
+ WhatInTheChap: Good day!
+ Fasader: state thine query
+ Squar3: bro I finished the stock exchange finally xD
+ 5DN1L: good job
+ Squar3: I found another way of doing it
+ Squar3: my first way was too dumb
+ 5DN1L: :D
+ Squar3: damn I thought the problem is that m bad at C lang xD
+ WhatInTheChap: How do you output in programming?!
+ 5DN1L: read the default code
+ 5DN1L: it tells you how
+ Squar3: yup I used the same way as solution 2
+ WhatInTheChap: beanz
+ Squar3: 5DN1L is the puzzle of the week always "hard" diffuclity&#160;?
+ 5DN1L: no
+ 5DN1L: it can be in any difficulty
+ Squar3: voted based one what then?
+ Squar3: how much ppl think it's interesting?
+ 5DN1L: based on CG staff's choice
+ Squar3: oh man I just saw your profile.. u r fking amazing
+ 5DN1L: :blush:
+ Squar3: how r u good with all of these programming langauges&#160;????????? xD
+ 5DN1L: i'm not good... i just finish enough number of them lol
+ Squar3: haha still idk how u remember the syntax lmao
+ 5DN1L: i don't
+ 5DN1L: i just google
+ Squar3: ah I get it
+ Fasader: WhatInTheChap just look at the hello world code and see how it's done. in python its "print()" but in other languages it's usually something different
+ Dorak: Could any mod tell me how to unlock the "optimization" path. :thinking:
+ 5DN1L: the graph tells you how?
+ Wontonimo: you need to progress in AI or Algorithms
+ AntiSquid: <a rel="nofollow" class="external free" href="https://gab.com/WesternChauvinist1/posts/107726274007953968">https://gab.com/WesternChauvinist1/posts/107726274007953968</a>
+ Dorak: Thanks wontonimo.
+ Wontonimo: that guy has a point.  those protesters are stupid and just harassing the public
+ Wontonimo: hey Dorak, you need 2 achievements in either of those to unlock the path.  Do yo have either and if so what achievement?
+ Dorak: I still haven't reached the bronze league in two bots, I only have one in silver. And I still have to do the puzzle of the week, I imagine that I must complete at least one of those two achievements.
+ Ftyghi: hi
+ Ftyghi: does anyone remeber me
+ infox: no
+ BadBurger: need some help, in kotlin, using swing to draw a image for marslander sim, can i modify the return object to alter the g2.color for example without re assigning the class again?
+ BadBurger: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/6907ee1c-8aa2-4eda-837c-641a4b9d9bd9">http://chat.codingame.com/pastebin/6907ee1c-8aa2-4eda-837c-641a4b9d9bd9</a>
+ Ftyghi: infox not youWontonimo
+ Wontonimo: hey Ftyghi, yeah I remember you
+ Ftyghi: hi
+ Ftyghi: dude what your time
+ Ftyghi: i have to go
+ Wontonimo: 9:18am
+ Wontonimo: bye
+ Ftyghi: bye
+ Ftyghi: mine is 5 20 pm
+ Ftyghi: bye
+ darkhorse64: There is a new optim in the contributions based on the travelling salesman problem. It looks good to me but it would be nice if more people review it
+ theeguyhoocarntspel: Hog Ridaaaaa
+ Lambert_W_Function: hooooooooog ridaaaaaaaaa
+ Lambert_W_Function: please dont mute me
+ 5DN1L: :smirk:
+ 5DN1L: next time I will, even if you say it
+ CommanderAzure: why say that
+ USSR_Chicken: hello
+ Quidome: hi
+ Depki7: hiho
+ USSR_Chicken: so, im stuck on the puzzle "The decsent"
+ 5DN1L: You've achieved 100% already?
+ USSR_Chicken: it said good job and told me to submit it even though i didnt hit anything
+ USSR_Chicken: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/12349d7b-bd3b-4ae5-9824-723afa067236">http://chat.codingame.com/pastebin/12349d7b-bd3b-4ae5-9824-723afa067236</a>
+ USSR_Chicken: heh
+ USSR_Chicken: oops
+ USSR_Chicken: i guess we can try a different one then
+ USSR_Chicken: imma try power of thor
+ USSR_Chicken: oh no my teacher is coming
+ Astrobytes: pay attention in school, it's important
+ Wontonimo: you must be kidding Astrobytes.  A whole country collecting taxes, building schools, hiring teachers, paying for supplies, taking attendance, coming up with lesson plans, standardize testing to try and improve learning.  Nah, it's probably not important, just a big conspiracy to waste everyones time and money
+ 5DN1L: all the generalisations... anyway, let's get back to coding
+ Miki09: What means "All inputs and outputs are mandatory" in exitor?
+ Atomcast: hey guys
+ Emmus: hello
+ jacek: :upside_down:
+ ninjadip: loved the docu "waiting for Superman" it's on America's school system
+ ninjadip: or failing school system
+ ninjadip: how more bigger buddgets don't make smarter kids
+ ninjadip: how bigger...*
+ 5DN1L: aren't you a smart kid? :D
+ jacek: oO
+ 5DN1L: ok, jacek is a smart kid too :D
+ situu: Hello!
+ EzS-NoVa: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/2206733beeed73fef60a1b5f4e8fe78b0f2e5be">https://www.codingame.com/clashofcode/clash/2206733beeed73fef60a1b5f4e8fe78b0f2e5be</a>
+ EzS-NoVa: somebody wanna play in reverse?
+ 5DN1L: please use #clash channel for clash invites, thanks.
+ jacek: if only we would have bot for that...
+ 5DN1L: yup
+ Wontonimo: just about to deploy it
+ Blokops: is it Automaton2000&#160;?
+ Automaton2000: so there is a real problem
+ Miki09: Why codingame has maximum lenght of output in contributions?
+ Miki09: I'm currently making new testcases to my contrib and I have reached the max number of characters in my big testcase&#160;:(
+ jacek: oO
+ Wontonimo: okay, a trial run of the clash of code automated message is now running.  if someone posts a clash link , I'll auto respond in 4 sec
+ Miki09: lets try
+ Blokops: come join my clash ~ ~ ~
+ Blokops: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/2206733beeed73fef60a1b5f4e8fe78b0f2e5be">https://www.codingame.com/clashofcode/clash/2206733beeed73fef60a1b5f4e8fe78b0f2e5be</a>
+ wontonimo: [automated] hey Blokops, dont paste those links here.  Use the channel #clash
+ Blokops: yup is working
+ Wontonimo: cool!  it worked
+ Husoski: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/report/2206774f26dbc3e5f642b8b90721d2449359840">https://www.codingame.com/clashofcode/clash/report/2206774f26dbc3e5f642b8b90721d2449359840</a>
+ wontonimo: [automated] hey Husoski, dont paste those links here.  Use the channel #clash
+ Blokops: Automaton2000 they taking over your job
+ Automaton2000: madknight why are you guys in?
+ Husoski: That caught a "results" page...isn't showing that okay?
+ Adam.e: big body benz
+ Blokops: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash">https://www.codingame.com/clashofcode/clash</a>
+ wontonimo: [automated] hey Blokops, dont paste those links here.  Use the channel #clash
+ Adam.e: whos got the biggest bunda
+ Adam.e:&#160;!
+ Blokops: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode">https://www.codingame.com/clashofcode</a>
+ Wontonimo: that's enough Blokops
+ Adam.e:&#160;??
+ Adam.e: shush
+ Adam.e: dumb yute
+ Blokops: just edge testing
+ Adam.e: edge testing?
+ Adam.e: have you been to eez foods
+ Adam.e: they sell deez nuts
+ Adam.e:&#160;!!!!!!
+ 5DN1L: don't spam
+ Wontonimo: no more spamming Adam.e
+ Adam.e: who gon stop me
+ Wontonimo: i'm giving you a 5 min time out to cool off.  
+ POEJordanJ: rip lmao
+ 5DN1L: Do you have to be online for the bot to work, Wontonimo?
+ Wontonimo: ope
+ Wontonimo: nope
+ 5DN1L: cool
+ Wontonimo: just my server has to be on
+ struct: :sleepy:
+ Husoski: Wontonimo, consider filtering on "/clashofcode/clash/", *not* followed by "report".  It should be okay to post a result link if someone's asking a question about a clash, right?
+ 5DN1L: do they need to post a link to the report?
+ Blokops: ^ they ca just post the code
+ Husoski: Wah! Why did I come in 2nd on <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/report/2206774f26dbc3e5f642b8b90721d2449359840">https://www.codingame.com/clashofcode/clash/report/2206774f26dbc3e5f642b8b90721d2449359840</a>
+ wontonimo: [automated] hey Husoski, dont paste those links here.  Use the channel #clash
+ 5DN1L: i don't know
+ 5DN1L: pass rate then time?
+ 5DN1L: i think you have a point there
+ struct: Wontonimo from 1 to 10 how important are derivatives for NNs?
+ 5DN1L: but again
+ 5DN1L: we can answer it without the report
+ Husoski: yes, of course, but it still got the direction to #clash, where it probably won't get any help
+ jay3332: te
+ Wontonimo: hey Husoski (and everryone) you can test the bot responses in #wontotest
+ 5DN1L: it's ok either way i guess
+ Wontonimo: i added your suggestion 
+ Wontonimo: struct, what do you mean about derivatives&#160;?
+ Wontonimo: like, how important is it to understand them
+ Husoski: #wontotest
+ Wontonimo: or do you need them to make NNs work
+ struct: how important is it to understand them
+ 5DN1L: Husoski true
+ Wontonimo: you have to click the link Husoski or type /join wontotest
+ Husoski: thx
+ Wontonimo: you don't really need to understand them 
+ struct: i only slept 3 hours today and reached that part of the book and didnt understand it very well
+ struct: i probably will reread it tomorrow
+ jacek: you only need to know that for backprop for some reason you need to multiply by derivative of activation function
+ Wontonimo: but knowing that derivative is just "the slope" is good
+ Wontonimo: knowing it is the slop is important
+ Wontonimo: let's say you have some function f(x) = a*x + b
+ Wontonimo: and you have tried a particular value of A and B and you get some error 11.2
+ Wontonimo: and you pick a value really close to A, say A+0.001
+ Wontonimo: and the error is 11.204
+ Wontonimo: the would could say that the slope is .004 error / .001 A
+ Wontonimo: or 4 error / 1 A
+ Wontonimo: now that we know the direction that the error will change and by how much in relationship to A, we cold say that we want to try and get rid of all the error
+ Wontonimo: we have 11.2 error ... so if we change A by - 11.2/4 = -2.8
+ Wontonimo: then that is equal to a "learning rate of 1".  We use the FULL error correction
+ Wontonimo: a learning rate of 0.1 would mean that we would only use -2.8*0.1 = -0.28
+ Wontonimo: we would only correct A a bit, moving closer to the estimated full error correction
+ Wontonimo: does that make sense or did I just confuse the issue?
+ struct: Makes sense yes
+ struct: I will reread it though, I feel like its important for backprop
+ Wontonimo: yeah, but it's just "slope"
+ struct: yeah
+ Pollard_Rho_Algorithm: hello everyone
+ Pollard_Rho_Algorithm: it is me, pollard_rho_algorithm
+ struct: slope of the tangent right?
+ Astrobytes: yes
+ struct: thanks
+ Astrobytes: or 'rate of change'
+ struct: soon my bt will be finished and I can finally rest
+ Astrobytes: as wontonimo said you can find the rate of change in whatever direction minimises the error, then you move in that direction. I think that's part of gradient descent
+ Astrobytes: been a minute since I did any proper calculus
+ Wontonimo: yes, that is a great description Astrobytes
+ struct: yeah, im not great at calculus
+ struct: Im probably just tired
+ Astrobytes: yeah, get some sleep, it's not overly complex in terms of concept, just lots of symbols
+ struct: brb
+ Blokops: is there a way to see the game code for the contest
+ Blokops: not the answer but the game itself
+ Wontonimo: yeah
+ Wontonimo: i'll dm you
+ Wontonimo: oh no dbdr took down his github site!
+ Wontonimo: anyone have a fork of brutal tester?
+ Wontonimo: oh, nevermind.  looks like it wasn't dbdr.  it's all of github
+ Blokops: it would be apocalyptic if github lost all its data
+ Blokops: 2k panic levels of disaster
+ mrswagger21: I lost the game :sob:
+ jacek: oO
+ jacek: happy groundhog day, again
+ supertebibyte: is there a way to replay/finish your clashes?
+ supertebibyte: i can't find the puzzle or my code once i have submitted it
+ jacek: you can use <a rel="nofollow" class="external free" href="https://eulerschezahl.herokuapp.com/codingame/puzzles/">https://eulerschezahl.herokuapp.com/codingame/puzzles/</a> to search for it
+ supertebibyte: thank you, i was able to find one of them. the reverse ones are harder to find
+ jacek: thats the point of the reverse
+ Blokops: couldn't someone just have the answer before hand using that page?
+ supertebibyte: yes, it defeats the point if used maliciously. but i just want to finish my "thought" as it were, when the 10min timer is over.
+ jacek: actually you have 15 minutes
+ supertebibyte: either way&#160;:)
+ supertebibyte: i guess i'll just hope it comes up again some time
+ Jayarrowz: :grin:
+ jacek: 1 2 7 3...
+ Idk.-_-: hi
+ Idk.-_-: guys guys
+ jacek: good evening
+ Jayarrowz: Reverse is a bit funny
+ Jayarrowz: sometimes
+ jacek: yhw
+ Fasader: ynnuf tib a si esreveR
+ Idk.-_-: do you think wich is the best and best look im say best proggraming language is who
+ One-Six: There isn't really a "best programming language" if that's what you are asking...?
+ Fasader: what are you even saying?
+ One-Six: Oh, easiest to learn might be Python?
+ One-Six: Lua is pretty easy to get into but can get messy if you want to do advanced stuff
+ One-Six: Python seems to be well received and extremely useful almost everywhere
+ jacek: easiest would to just tell the computer what you want and it will do it
+ Idk.-_-: :D
+ One-Six: Ah, yes, the Alexa programming language
+ One-Six: "It can wake you up!"
+ Idk.-_-: no it's jarvis
+ jacek: it would be quite distant(?) future, but its doaeble
+ One-Six: natural languages are inherently ambiguous though
+ One-Six: translating that into non ambiguous code can be hard for both the translator and the dictator
+ Idk.-_-: and 1 q. which language is best after python&#160;?
+ One-Six: idk XD
+ One-Six: want to plug Lua, but Lua starts counting at 1 so...
+ Idk.-_-: mate you can't just say the simple answer&#160;?
+ jacek: the question is more opinion-based i think
+ jacek: and python or ruby is quite than any other language
+ jacek: its a peanut butter jelly time!
+ 5DN1L: pascal basic julia time?
+ jacek: Automaton2000 do you like peanut butter?
+ Automaton2000: i guess you can add it to the right of (0, 0). expected (2, 0).
+ jacek: :x
+ erinc--emre: Shortest Mode is ON
+ erinc--emre: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/2207154cef8923aa72979f5780b15af8406d1a8">https://www.codingame.com/clashofcode/clash/2207154cef8923aa72979f5780b15af8406d1a8</a>
+ wontonimo: [automated] hey erinc--emre, dont paste those links here.  Use the channel #clash
+ jacek: oh my
+ BadBurger: is atan2 same is radians(thetan)?
+ Fasader: atan is just one letter away from satan
+ Zbouig: baguette
+ Zbouig: froggies
+ Uljahn: Automaton2000 do you like peanut butter on pizza?
+ Automaton2000: and that is the one that you can only make one move per turn?
+ Wontonimo: woot!  my autobot responded to a clash post!
+ Papi.Chulo: :eggplant:
+ MessitheGoAt1910: :sweat_drops:
+ Papi.Chulo: :peach:
+ Husoski: BadBurger No.  atan2(y,x) gives the angle (yes, in radians) between the ray from (0,0) to (x,y) and the +x axis.
+ Husoski: radians(th) converts degrees to radians.
+ Papi.Chulo: chupa mi pene porfa
+ I.T.: nudes?
+ Papi.Chulo: si
+ Wontonimo: Husoski, you want any help with mad pod racing?
+ Wontonimo: you are level 33!  come join the under 2000 ranking 
+ HUNTERxHUNTER: :flushed:
+ Husoski: Wontonimo Can I take you up on that offer later?  (But I may want some more optimization hints first, re Marslander 2)
+ Wontonimo: yeah
+ Wontonimo: you want some hints for mars 2?
+ Wontonimo: have you looked at PID controllers? <a rel="nofollow" class="external free" href="https://w3.cs.jmu.edu/spragunr/CS354_F17/handouts/pid.pdf">https://w3.cs.jmu.edu/spragunr/CS354_F17/handouts/pid.pdf</a>
+ HUNTERxHUNTER: penis?
+ Wontonimo: HUNTERxHUNTER you have been given a 10 min time out.  please feel free to come back but be respectful
+ Husoski: Yeah, we talked about that.  What I see is a method for computing an input change based on estimate of an error term, but I don't get how to estimate an error for a trajectory when I don't know what that trajectory should be.
+ Husoski: ...and I have that PDF on my desktop (but it took some fiddling to get it into a form that my ancient Acrobat would understand.)
+ Wontonimo: so, imagine we are in a car going towards red light.  We don't hit the breaks when we are at the red light.  There is some distance given our speed where we should slow down
+ Wontonimo: if our distance is 100m
+ Wontonimo: and our speed is 10m/s
+ Wontonimo: then we will blow through that red light in 10sec
+ Husoski: That's fine unitl mountans get in the way.
+ Wontonimo: haha
+ Wontonimo: let's say we can change our speed by 2m/s*s , in other words we can reduce our speed by 2m/s every second
+ Husoski: yes...
+ Wontonimo: so if we say, hey if we are going to blow through that light in the next 6 sec, then slow down.  else everything is fine
+ Husoski: (but it's really about 0.3 m/s^2 for Marslander)
+ Wontonimo: so, let's see how that plays out
+ Wontonimo: 0 sec , dist = 100 , vel = 10 , eta =10
+ Wontonimo: therefore no breaking (eta &gt; 6)
+ Wontonimo: 1 sec , dist = 90, vel = 10 , eta = 9
+ Wontonimo: 2 sec , dist = 80 , vel = 10 , eta = 8
+ Wontonimo: 6 sec , dist = 60 , vel = 10 , eta = 6slow down&#160;!
+ Wontonimo: 7 sec , dist = 52 , vel = 8 , eta = 6.5no breaking
+ Wontonimo: 8 sec , dist = 44 , vel = 8 , eta = 5.5slow down&#160;!
+ Wontonimo: and so on
+ Wontonimo: you can instead target the old location minus your speed correction
+ Husoski: So, how does this apply to the 2d trajectory problem?  I need to reverse speed (later test/validators) and stay above the mountains and on the map while doing that...THEN figure out how to get back to flat ground and stay above the mountains.
+ Wontonimo: so, new_target = target - 6 * velocity;
+ Wontonimo: if 6 is the correction factor
+ Husoski: where does that come from?
+ Wontonimo: that can translate directly into 2d
+ Wontonimo: from above
+ Husoski: 6?
+ Wontonimo: the factor (6) is found by experimentation usually, but if you happen to know the physics involved precisely you can derive a good guess
+ Husoski: I'm not getting a warm fuzzy feeling yet, but I'll head-scratch some more.  Thanks!
+ Wontonimo: where the bot is aiming at the target location <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/575327101">https://www.codingame.com/replay/575327101</a>and here it aims for target location - velocity<a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/575327237">https://www.codingame.com/share-replay/575327237</a>
+ Wontonimo: well, aims for location - 30*velocity
+ Wontonimo: and otherwise it is EXACTLY the same code
+ Husoski: And 30 was determined from the terrain, or is is hardcoded?
+ Husoski: Does that work on, say, test case 04 (deep canyon)?
+ Wontonimo: yeah, 30 was determined experimentally to work in a wide variety of situations
+ Wontonimo: given that I also constrain the banking (angle) to be fairly small
+ Wontonimo: the other bit of logic is what I call the "Big V"
+ Husoski: Big V?
+ Wontonimo: I project a large "V" from the landing pad, 45 degrees on both sides
+ Wontonimo: if the mars lander is outside the "Big V" then i use a different set of logic then inside
+ Wontonimo: when outside, the lander is not allowed to lose altitude
+ Wontonimo: when inside it will try and land
+ Husoski: That's a really useful idea.  
+ Wontonimo: that's it.
+ Wontonimo: i don't keep track of mountains
+ Wontonimo: 45 degrees was just laziness , because that is y=x and y=-x
+ Husoski: I recall trying to not lose altitude while reversing velocity and ran off the side of the map, though...
+ ASM_MOV_INT: boy the syntax of programming languages that allow for such cryptic solutions....! phew
+ Husoski: asm_mov_int you can do all of this in C
+ Husoski: Oh, well, that gives me some stuff to try.  Thanks again!
+ Wontonimo: right, if you limit angle then you also need to limit max sideways velocity
+ Wontonimo: or increase the coefficient to be larger than 30
+ Wontonimo: just because 30 worked for me, doesn't mean it will worrk for you.
+ Wontonimo: you have to experiment with a good factor for your particular code
+ ASM_MOV_INT: even assembly language is a bit more readable than most of these cryptic one liner solutions I see people churning out for clashes
+ Husoski: Oh, on your Markov puzzle I named my random generator class WontoRandom in your honor...
+ ASM_MOV_INT: :grinning:
+ Husoski: Yep.  I was polluted by starting with a language called APL that *really* encouraged this sort of thing.
+ ASM_MOV_INT: interesting
+ Husoski: Here's a "complete" solution for an n-dimensional polynomial best fit in APL:
+ ASM_MOV_INT: i'm sure it is...!
+ ASM_MOV_INT: surprised i've never run across that APL language before, sounds right up my alley...
+ Husoski: You can still find it.  Dyalog sells a commercial interpreter.  If you answer a lot of questions right, you can get a free version for personal use.
+ Wontonimo: lol, thanks Husoski for the honor&#160;!
+ Husoski: Docs are slim and not so easy to find.  The only data structure is an array.  A bit like programming with numpy in Python.
+ Husoski: If you look at the docs for Python's itertools module in the standard library, you'll see that a lot of the standard iterator patterns are inspired by APL operators.
+ Husoski: Wontonimo My pleasure.  The source is published.  I only implemented the .choice() method, though, plus a .next() method in case I needed to debug something.  I don't think it will pass the poker tests, though...
+ Husoski:&#160;:)
+ Husoski: It's dinner time on the US west coast.  Type at you later...
+ ASM_MOV_INT: hey that's where I am!
+ Husoski: Correction: No rho in that APL polyfit code.  Bad memory on my part, but it's 1 character shorter:
+ Wontonimo: haha
+ Wontonimo: that's some crazy code
+ ASM_MOV_INT: sounds like a very efficient programming language

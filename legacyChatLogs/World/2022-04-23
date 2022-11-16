@@ -1,0 +1,1734 @@
+ BenjaminUrquhart: Lysk ok thanks, so no cheesing lol
+ BenjaminUrquhart: made some improvements and it looks like it might be enough to leave wood
+ BenjaminUrquhart: finally
+ BenjaminUrquhart: still not using spells, just needed to make movement less dumb
+ BenjaminUrquhart: yep, bronze time
+ aCat: nice, congratz&#160;;]
+ Kokoz: gg
+ BenjaminUrquhart: added basic wind usage 
+ BenjaminUrquhart: although it's getting late so I might stop soon
+ BenjaminUrquhart: adding wind is pushing me up so far lol
+ BenjaminUrquhart: well I just learned a new dumb strat
+ BenjaminUrquhart: and that's abusing wind stacking to yeet monsters into the opponent base
+ VizGhar: yes, its dumb&#160;:)
+ BenjaminUrquhart: well that's a problem for later cause I need sleep and I need to refactor the spell code for that
+ BenjaminUrquhart: at least I have something lol
+ EvModder: are any c++ libraries (outside of std) available?
+ EvModder: I'd really love to use some absl or boost features if possible
+ therealbeef: nope
+ EvModder: oof, guess i'm switching to java then lol
+ EvModder: c++ is too bare-bones (if codingame doesn't give us boost/absl)
+ EvModder: next year with c++23 I think we will finally get the new hash containers in the std
+ Bernard_Lowe: Does anyone know what distance is defined as "near_base" in the game? 5000 distance from base? 6000?
+ _NikJ: If a monster comes within 5000 units of a base at the end of a turn, it will target that base. nearBase: 1: if monster is targeting a base, 0 otherwise.
+ _NikJ: I'd say it's 5000 then
+ _NikJ: I think fog visibility from base is 6000, maybe you got confused there
+ _NikJ: Or I'm confused?
+ DaNinja: yep 5000
+ Bernard_Lowe: I think you're right. 5000 is the mark because targeting happens at 5000.
+ Bernard_Lowe: I have a set of code to loop, and instead of using this, I'd rather set distances from base 5000, 6000, etc.
+ Bernard_Lowe: Thanks.
+ Enknable: near base is also set if the trajectory would lead to the base..
+ Enknable:&#160;?
+ Enknable: ah nm
+ Bernard_Lowe: I don't think so. I think that's "threat_for"?
+ Bernard_Lowe: I think they became same thing within 5000 units.
+ Enknable: right. so threat for == 1 means it will eventually
+ Bernard_Lowe: Yep.
+ _NikJ: means it's currently HEADED your way Enknable
+ Bernard_Lowe: I'm adding a loop to check these threats 1000 units outside my base to catch them quicker.
+ _NikJ: When nearBase is also set, means it's within 5000
+ Enknable: A Promise. To target your base &lt;3
+ Kokoz: I dont know what I am doing *.*
+ _NikJ: I tried that, Bernard_Lowe, but I got more consistent results using just the nearBase flag instead
+ _NikJ: Maybe I didn't manage to find the sweetspot
+ Bernard_Lowe: Hrmm. Good to know. I'll test it out as I'm already almost done.
+ _NikJ: I have yet to try implement Shield and Control
+ _NikJ: So far I'm only using Wind to push off enemies which are dangerously close
+ BenjaminUrquhart: I basically do raytracing on every enemy to see if they'll be a problem at some point
+ BenjaminUrquhart: and only target those
+ Bernard_Lowe: You'll have to walk them out with mind control multiple times if they are near hitting your base.
+ MeWhenI: i think the game gives you flags for free to tell you those things and keep you from having to run the calcs yourself
+ BenjaminUrquhart: I don't believe it accounts for enemies that aren't currently headed for your base but will get within 5000 units and redirect
+ _NikJ: I don't let them get that close yet, Bernard_Lowe, I'm playing it more defensively
+ MeWhenI: it does, Benjamin
+ BenjaminUrquhart: oh ok
+ MeWhenI: if an enemy is headed towards your base, threat_for will be 1
+ BenjaminUrquhart: I'll still keep it so I can update monsters that are out of vision
+ MeWhenI: that makes sense yeah
+ LarsVR: how do I know which rank I need to get to pass on to the next league?
+ LarsVR: the ai doesnt seem to be in the leaderboards anymore
+ MeWhenI: are you in bronze?
+ LarsVR: yes
+ MeWhenI: next league doesnt open up until tomorrow
+ LarsVR: oooowh ok
+ LarsVR: good to know, ty!
+ MeWhenI: np
+ MsonC: Anyone here playing CoC?
+ JonByte: maybe
+ dbf: can anyone send a link to chat wiki archive?
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://cg.spdns.eu/wiki/Special:RecentChanges?limit=50&amp;days=7&amp;enhanced=1&amp;urlversion=2">https://cg.spdns.eu/wiki/Special:RecentChanges?limit=50&amp;days=7&amp;enhanced=1&amp;urlversion=2</a>
+ tealfrog: will the rules for getting into silver announced when it opens?
+ BenjaminUrquhart: there are no more rules
+ BenjaminUrquhart: bronze is the last one with new rules
+ jrke: pacman had one extra rule in silver but till now i am unable to figure out what does that rule meant
+ jrke: :grinning:dead pacs
+ eulerscheZahl: for pacman that wasn't planned initially. only added because players complained
+ dbf: thanks, euler
+ tealfrog: It's my first challenge, how it was organised in the past?
+ eulerscheZahl: uhm, centralized? not sure what you ask for
+ tealfrog: I need to plan my time. If my bot is good enough I would switch to other project
+ eulerscheZahl: depends on what you want to achieve
+ eulerscheZahl: you will certainly drop a lot of ranks if you get inactive now
+ tealfrog: I have plenty of ideas how to improve it but I cannot work on it full 9 days
+ eulerscheZahl: that applies to most particiaptns
+ tealfrog: i guess
+ tealfrog: that's why clear rulles would be helpful
+ eulerscheZahl: there are clear rules: new league opens every 2 days: silver, gold, legend
+ eulerscheZahl: with a boss that's chosen from existing player submissions
+ eulerscheZahl: at the end there will be a final rerun to stabilize ranking for min(100, legend) players
+ eulerscheZahl: then results are final
+ tealfrog: so we have 2 days to advance to the next league?
+ BenjaminUrquhart: no
+ eulerscheZahl: new league opens at some time. then you are either in it already or you can promote, just like with wood
+ eulerscheZahl: repeat 3 times
+ BenjaminUrquhart: a new league opens every 2 days, but you have the entire rest of the contest to get into it
+ MeWhenI: does silver open in 20 min?
+ BenjaminUrquhart: no
+ eulerscheZahl: by unix timestamp it opens tomorrow
+ eulerscheZahl: by experience from the past in 2 days
+ MeWhenI: ah k
+ eulerscheZahl: unlikely that CG does anything on the weekend
+ eulerscheZahl: you should be around top50% of bronze to reach silver
+ jrke: i think there are better bots than butcher in arena but due less battles none got succes to breach his lead maybe
+ tealfrog: ok, so at the point when the next silver league opens the boss for the bronse will be selected and I will see the level of my bot / have chance to improve? 
+ tealfrog: ok, thanks
+ eulerscheZahl: yes. you can always submit until the timer reaches 0
+ eulerscheZahl: 9 days to go
+ MeWhenI: where would i look to see the arena scoring formula
+ therealbeef: hmm, still three people from same company in top 10, interesting
+ EvModder: dang, i get back from work and my bot has fallen to &gt;1000th place
+ EvModder: time to start actually using spells lmao
+ dbf: time to stop work&#160;:)
+ eulerscheZahl: scores are computed via TrueSkill algorithm
+ EvModder: dbf yeah, im considering taking some days off next week to focus on the challenge
+ EvModder: last contest (spring2020) was a ton of fun for me, despite dropping rank in the last hour lol
+ EvModder: definitely worth dedicating time to
+ _NikJ: hm, seems that someone almost overtook butcher, same company, same language, same score :D
+ _NikJ: maybe playing against himself?
+ Illedan: Too few games now to beat him properly
+ therealbeef: same strategy?
+ EvModder: i've been playing against butcher in ide with my new (bronze league rules) bot
+ EvModder: i feel like he has so much more strategy implemented than i do
+ therealbeef: interesting how he managed to do that in less than 1 day
+ EvModder: but i have a trick up my sleeve that i know he isn't using (not yet anyway)&#160;;)
+ _NikJ: What kind of magic are you using in this one, Illedan?
+ Illedan: wind, control and shield
+ jacek: happy Caturday
+ jrke: i lost one match cause i finished my all mana and even after that i keep casting them leading to WAIT :grinning:
+ eulerscheZahl: exciting story
+ EvModder: i noticed butcher is very efficient with mana, he will run all the way down to 0 to carry out an attack if he thinks he can win
+ EvModder: the only times i beat him currently are 1) his scouting is bad and he gets surprised by monster randomness, and 2) he runs out of mana while attacking me and i am able to defend then counter attack
+ Jerrasterix: He wrote a sim that quickly, ohhh my gosh.....
+ EvModder: idk if i am going to bother with a sim personally... the IDE is kinda slow, but i'm not going for any machine learning approach or anything like that
+ Jerrasterix: :innocent:
+ Jerrasterix: all I know to do is to write if else statements :laugh:
+ EvModder: ultimately that's all you need :grin:
+ EvModder: now that i'm abandoning c++ for java, it's time to start using my dirty minecraft modding tricks
+ Jerrasterix: :thinking:
+ Nerchio: good choice
+ EvModder: if they change any of the base configuration setting my new bot will break quite a lot
+ Jerrasterix: how is minecraft related to this&#160;??
+ EvModder: i meant programming-style wise, minecraft is in java and it's a mess
+ EvModder: my code is not obfuscated but ultimately it probably would be any less readable if it was
+ Jerrasterix: ic
+ Suenodk: Hi! In the spring challenge is the output in the same order when reading the entities (heroes)?
+ DaNinja: yes
+ jrke: yes
+ Suenodk: Thanks!&#160;:)
+ MeWhenI: lol the score checking seems a bit whacky, submitted identical code twice in a row and got 26th once, 11th the second time
+ _NikJ: that's normal, I went from 80th to 150th :D
+ MeWhenI: yeah, just seems like the "you get 45 battles to base your score off of" approach isnt the best, pretty random
+ jacek: well, buy more servers *_*
+ BenjaminUrquhart: remember that when people submit and gets matches against you, that will also influence your ranking
+ karliso: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/622529695">https://www.codingame.com/replay/622529695</a>
+ karliso: turn 67: mob has left visible area, then control makes it move back, but it moves through wall right in base attraction radius.
+ Manchi_o6o7: Hey guys. Can I ask here general questions about programming?
+ Jerrasterix: yup 
+ jacek: only spam is allowed here :f
+ Manchi_o6o7: Basically, I want to write a library in C++ for finite automata and then connect it with some C# and .NET.
+ Manchi_o6o7: I am not sure about the "connection" part
+ Manchi_o6o7: If someone has done something similiar before
+ Jerrasterix: are planning to do it in C++ for perf reasons 
+ Jerrasterix: bcoz, if its managed C++ then it is pretty straightforward, native C++ is pretty difficult task
+ Manchi_o6o7: yes, and I am more capable of doing such things in C++. C# is more for the interface with WinForms
+ Jerrasterix: then try using C++/CLI
+ Jerrasterix: there many tutorials to connect C++/CLI to winforms
+ Manchi_o6o7: Is C++ CLI much different from native C++
+ syahiran: guys im new here
+ syahiran: how to play
+ _NikJ: slightly different syntax in clr version, nothing spectacular
+ Jerrasterix: well, not syntax wise, but instead of compiling it to machine code, it is interpreted in CLR
+ _NikJ: I mean, from his point of view, it won't change much, you'll still type the same exact code
+ _NikJ: Performance wise? Not quite sure
+ Manchi_o6o7: There is no way to combine native C++ code 
+ Jerrasterix: there is!! but It is a bit difficult for me atlease
+ DaNinja: syahiran <a rel="nofollow" class="external free" href="https://www.codingame.com/faq">https://www.codingame.com/faq</a>
+ Jerrasterix: you have make it into an assembly DLL and then link it to the project 
+ Jerrasterix: and idk anything about making an asm. DLLs
+ syahiran: thanks
+ eulerscheZahl: hm, my random bot lacks some incentive to defend the base. at least it collects some mana<a rel="nofollow" class="external free" href="https://www.codingame.com/replay/622551623">https://www.codingame.com/replay/622551623</a>
+ TobiasA: hmmm what do you mean by random? because that seems better than random
+ eulerscheZahl: select random spider target, score outcome after certain depth
+ MeWhenI: looks like a decent bot setup, if the one in your base used some wind spells i think ud be in the clear there
+ Jerrasterix: minimax&#160;??
+ TobiasA: hm which means you have a sim already?
+ eulerscheZahl: my sim does not account for spells
+ eulerscheZahl: and no minimax, just myself in solo mode without opponent
+ Fox787: Better mine which currently if i'm "enemy" always pushes enemies into my base with wind
+ Kokoz: I still don't know what I'm doing q.q
+ Kokoz: too much inputs to process 
+ dbf: eulerscheZahl, wow you mentioned that you are not sure about the game, but have a sim already&#160;:)
+ eulerscheZahl: very basic sim
+ Jerrasterix: you are talking to previous No.1 player
+ TobiasA: After an entity moves towards a point, its coordinates are truncated (when below halfway across the map) or rounded up (when above halfway across the map), only then are distance-based calculations performed (such as monster damage).
+ dbf: eulerscheZahl, I had an idea about sim also, but looks like it is required to simulate opponent including spells because they are importannt and it is not easy..
+ TobiasA: is this important or nah
+ eulerscheZahl: emphasis on "previous", Jerrasterix
+ eulerscheZahl: and i still don't know how to best approach the game. probably a hybrid of sim + heuristics. but where to draw the line and how to puzzle it together?
+ dbdr: the top 3 question&#160;;)
+ dbf: it is easy: use heuristics when they are better than sim in this case, otherwise use sim
+ Jerrasterix: just imagine some top coders are struggling, just look at those who are not that good :cry:
+ dbdr: while !top1 { rewrite_everything() }
+ TobiasA: if feel you
+ TobiasA: *I
+ Nerchio: eulerscheZahl I respect the C#
+ Kokoz: what is "sim"?
+ eulerscheZahl: simulation
+ Jerrasterix: simulation 
+ eulerscheZahl: compute the outcome of your actions and look a few turns into the future
+ Kokoz: ohhh.. It becomes even harder, nice
+ Kokoz: I think I will satisfy with bronze :D
+ TobiasA: lol
+ shauli: I have a probelm running the game locally because of Guice injectors, does someone solved why it throws exceptions?
+ ashiknur: if I play with randome bot and lose the game, will my rank decrease?I was in top 500 after playing with butcher2013 2 times my rank is 600.
+ Kokoz: I have few other ideas I will try but I am still beginner (or low intermediate)
+ MeWhenI: no, playing bots in IDE doesnt affect your rank
+ Nerchio: threatFor is weird, it gave me a 1 even though the mob literally walks outside the map?
+ Nerchio: and never reaches my base untouched
+ Gabbek: Nerchio show the replay, please
+ MACKEYTH: I've been ignoring threatFor and just simming monsters to see if they pose a threat
+ Nerchio: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/622566891">https://www.codingame.com/replay/622566891</a> turn 200, id 157 on the left
+ Fox787: It's a known bug, effectivly it will walk into base range, after that mob has left the play area
+ Poligraph: jabka
+ Nerchio: Fox787 what do you mean
+ Fox787: Basically the mob will be a threat for X base, because it will walk into the minimum distance for the base, if the circle for the base extended beyond the game map
+ Fox787: but becasue the game map is limited, it's a false poitive, the mob is killed when it walks off screen
+ Nerchio: yeah so its a bug
+ Nerchio: sad for people who will never read this lol
+ eulerscheZahl: meh, you don't need that input
+ Nerchio: I mean if you are not simming its quite good
+ eulerscheZahl: except - i remove spiders that leave the map area
+ Nerchio: but its a bad input if it doesnt work
+ therealbeef: the referee code is quite bad yeah, and some things are not described in the rules, such as the sudden death feature (which admittedly probably doesnt affect play much)
+ Nerchio: I only sim spiders with threatFor=1 and my bot timed out because it never reached the base
+ MeWhenI: butcher is out of #1 spot
+ therealbeef: another bug is that you can cancel a control spell by doing a wind spell on the same target in the next turn
+ MACKEYTH: That may be intentional
+ InstantWin: mewhenl maybe same bot
+ dbdr: therealbeef, what is sudden death?
+ Jerrasterix: they both are from the same company
+ Nerchio: eulerscheZahl so you can't wind monsters from outside the map area? like x &lt; 0
+ eulerscheZahl: i have no idea what's possible and what isn't
+ therealbeef: suden death is that spiders spawned from turn 200 onwards don't get completely random direction but target the bases
+ eulerscheZahl: my sim does not account for spells at all yet
+ MeWhenI: yeah, maybe sp
+ InstantWin: SAMSUNG SDS
+ therealbeef: but 20 turns is usually too little to actually reach a base
+ Kokoz: Can someone help me?Basically I am searching for monsters that are "threat_for" my base and place them in a list. after that I am moving my heroes to the first monster in the list, but sometimes my heroes stop chasing that monster and head to another.. I can't figure out why.. It should still be the first monster in that list.
+ Fox787: if you're determining the monster in ist by the same index you're using for heros you're probably send ing hero 1 to 1, hero 2 to 2 hero 3 to 3 by mistake
+ Kokoz: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/622572516">https://www.codingame.com/replay/622572516</a>
+ MACKEYTH: I need to figure out how to create these shielded monster rushes that keep killing me.
+ Kokoz: @Fox787 I am not using indexes for heroes yet
+ Fox787: it's because they arent sorted by "closest" to your base
+ StrideNYC: Depends Kokoz, if you are just adding them by threat. Then when the iteration loop is going through the monsters, it is just adding it in that order. Maybe calculating which monster is closer and then adding to list&#160;:)
+ Fox787: you're only going to the first one on the list
+ dbdr: eulerscheZahl: how fun is it dealing with FOG in the sim?&#160;;)
+ Kokoz: I will check that out. Thanks
+ eulerscheZahl: what fog? it's a perfect information game. if i don't see a spider, it doesn't exist
+ eulerscheZahl: oh wow, i at least survived 220 turns <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/622578250">https://www.codingame.com/share-replay/622578250</a>
+ eulerscheZahl: red=heuristic, blue=search
+ Nerchio: lucky
+ TobiasA: my favourite quote of the  - day "if i don't see a spider, it doesn't exist"
+ LaurensD: Is it possible to switch sides in the PLAY my Code debug screen?
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://xkcd.com/1530/">https://xkcd.com/1530/</a>
+ eulerscheZahl: yes LaurensD. delete yourself + opponent. then add again in reverse order
+ _NikJ: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/622583970">https://www.codingame.com/replay/622583970</a>
+ _NikJ: Damn, he kicked my A
+ eulerscheZahl: [auto] watch your language
+ InstantWin: ass
+ LaurensD: Thanks @eulerscheZahl
+ _NikJ: I tricked antiwonto but saying A
+ eulerscheZahl: looks like the bot is offline
+ jacek: balls, isnt it
+ DjTrilogic: i'm struggling with the formula to know whether a spider can reach my base or not, based on its direction (speed? ) .. anyone can help me&#160;?
+ Uljahn: you mean it's not given in the inputs?
+ burnpanck: eulerscherZahl wait how do you play two different versions of your bot against yourself?
+ jacek: he plays himself :v
+ DjTrilogic: i want to know whether a spider is going toward my base or not
+ burnpanck: never mind - apparently I never really clicked those player icons in the IDE before...
+ Kokoz: So at the end of the turn, monsters with position less then 300,300 deal damage to my base?
+ VizGhar: no Kokoz you just described square :P
+ Kokoz: so, if the distance is &lt;300??
+ Kokoz: &lt;=300 *
+ Poligraph: does it really matter?
+ Kokoz: for my calculations, yes :c
+ StrideNYC: _Nikj... that replay was awesome lol.
+ _NikJ: Uljahn, apparently, the threatFor that's given in the input applies to the whole radius of the base and in some cases, spider's trajectory may be going towards the "radius", but ultimately ends up walking off the map and dying
+ _NikJ: Now, I haven't confirmed this personally, but I've seen people talk about it
+ wlesavo: _NikJ this is a known bug, there is an issue in repository about this not sure if or when it will be fixed
+ _NikJ: Hm, not sure if I should calculate on my own or just keep using the threat param then
+ Uljahn: just calculate ray-circle intersection by yourself if you don't trust the inputs
+ TobiasA: what is the best way to test your sim?
+ geppoz: _Nikj yes, look step 58 <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/622612980">https://www.codingame.com/replay/622612980</a>
+ dbdr: TobiasA: submit of course&#160;;)_
+ TobiasA: like i mean test if it is accurate not whether the bot works
+ TobiasA: just the simulation part
+ wlesavo: compare the states from simulation and next turn input
+ Illedan: Easy with fog :D
+ dbdr: :point_up:
+ wlesavo: like euler said 
+ _NikJ: Tbh, I too am pretending that fog doesn't even exist. If I can't see the entities, they might as well not even be on the map, f it
+ Illedan: I track them forever
+ Illedan: Spider  with -20000 x? Got it, clamp it inside my base and scream
+ wlesavo: the main problem is to track inside enemy base, but it should be solvable with reasonable assumptions
+ Illedan: You get enemy mana and hp as input
+ Illedan: Easy to track some things
+ wlesavo: even easier to just ignore tracking :smiley:
+ Illedan: Depends on your goal
+ kovi: but no wild mana tracked - i guess that is for reason
+ wlesavo: if my goal is not to track anything... :slight_smile:
+ Illedan: Top gold it is then&#160;;)
+ dbf: oh, you are discussing so advanced tracking&#160;:)
+ Illedan: kovi, you can know wild mana to some extent too
+ SashaNukem: Wood league 1. Much susses 
+ dbdr: knowing wildmana would be useful even for simple heuristics, e.g. get more aggressive if you are losing
+ leoni_das: why on earth when my heroes are placed in the red base they don't stay in it when a bug is approaching to it and instead they go to the blue one.. am taking base_x and base_y as inputs&#160;!!!!!
+ dbdr: also would help to display it in the viewer for analysis
+ Illedan: Do you use the inputs leoni_das?
+ leoni_das: yes 
+ Illedan: Print to error and validate&#160;:)
+ leoni_das: oh it gives me 0 always :slight_smile:
+ jacek: oO
+ Nerchio: somebody offering free geometry lessons?
+ jacek: just dont sin and youll be alright
+ _NikJ: do you mean to say that sin is a sin?
+ jacek: cos its the same
+ AbuAjamiah: how to submit your code after being tested in the arena
+ AbuAjamiah:&#160;?
+ jacek: you submit in test in arena
+ _NikJ: once it's in arena, it's already submitted
+ AbuAjamiah: thanks, but i go back to first challlenge
+ AbuAjamiah: how to move to the next one
+ _NikJ: I'm not quite sure what you mean, AbuAjamiah
+ AbuAjamiah: i finished first level, the starting one. now i want to pass to the next one. How Can i do this&#160;? thanks
+ _NikJ: You're talking about the Spring Challenge? Once you defeated the boss in Wood 2 (after submitting your code to arena), you will be promoted to the next league - Wood1. 
+ _NikJ: It happens automatically
+ AbuAjamiah: ahhh thanks 
+ Noyotens: how to control one hero per tim?
+ Noyotens: *time
+ dbf: Noyotens, just send "WAIT" for others if you don't want to move them
+ Noyotens: but all of them stops
+ _NikJ: You're printing 3 messages each turn, 1 for each hero
+ dbf: what do you want to achive?
+ Noyotens: i want to keep one at the base
+ Noyotens: attack with otheres
+ dbf: store id of first in some variable, send move to base for it each time and attack command for others
+ Noyotens: @_NikJ thanks, that's ,make sense
+ dbf: (in each turn)
+ BenjaminUrquhart: just pulled an all-nighter only to get ~100 more places
+ BenjaminUrquhart: man
+ msumera: you should be happy you didn't pull an all-nighter to drop 500 places
+ BenjaminUrquhart: ok but that was like literally my entire night
+ BenjaminUrquhart: and only now did I get something working
+ msumera: well, in my case the more "smart" and complex solution i do, the worse the result is :D
+ BenjaminUrquhart: same lol
+ msumera: i got the best results with strategy: attack the closest monster to the base xd
+ _NikJ: Only using wind and only using it to defend I was 80th. Atm I'm using complex "strategies" with all the spells, so as a result I'm 160th
+ BenjaminUrquhart: well my problem is I lose like half my matches to wild mana so I need to improve on that 
+ BenjaminUrquhart: but later, when I'm actually awake
+ BenjaminUrquhart: like here <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/622658764">https://www.codingame.com/replay/622658764</a>
+ _NikJ: I think I do okay on the wildmana, but I can't defend myself when people are very aggressive with spells
+ _NikJ: + I haven't started "attacking" at all, yet
+ BenjaminUrquhart: I don't attack either, clearly
+ BenjaminUrquhart: and yeah aggression is one of my weak points
+ BenjaminUrquhart: I definitely do better but it's still a problem
+ BenjaminUrquhart: usually it's when there's a control + monster shield 
+ BenjaminUrquhart: since then I can't use wind
+ _NikJ: I can't remember who it was, but I watched a replay of someone kicking my a like this:
+ _NikJ: Got close to base, used control on my heroes to move them to center, used control and wind on spiders and then just shielded them
+ _NikJ: it was instant win lmao
+ BenjaminUrquhart: yeah that's a thing
+ BenjaminUrquhart: part of me wants to make a troll bot that just abandons base and yeets spiders into the opponent
+ _NikJ: Somehow, he managed to group them up before that and just instantly placed 3 spiders into the base
+ wlesavo: this is why you need to shield yourself :slight_smile:
+ _NikJ: IT'S YOU, YOU DID IT wlesavo
+ BenjaminUrquhart: I shield myself, just badly&#160;:)
+ _NikJ: I recognixed the avatar
+ wlesavo: _NikJ yrah, thats sounded like smth i do :smiley:
+ _NikJ: Yeah I'm not shielding myself at all, for some reason I convinced myself that it doesn't work and I never even tried it :D
+ _NikJ: Your strat is awesome, it's kicking a
+ wlesavo: its quite simple though, i abonedoned that bot and now working on cpp version
+ Aramang: do the spiders always move straight (assuming no spells)?
+ BenjaminUrquhart: yeah that went as well as I thought it would <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/622665849">https://www.codingame.com/replay/622665849</a>
+ BenjaminUrquhart: until they get close to a base, yes Aramang
+ Aramang: ok well i assumed they could change direction, kiond of makes my bot look a bit silly chasing random sideways one to the edge
+ EvModder: if 1 person casts "shield" on an entity the **same turn** the other player casts "wind" what happens?
+ EvModder: which spells "wins"
+ BenjaminUrquhart: the winds takes effect, then the shield
+ msumera: shield takes effect from next turn
+ BenjaminUrquhart: there's order of actions near the bottom
+ BenjaminUrquhart: (bronze)
+ msumera: wow, 300th -&gt; 30th with a simple change
+ _NikJ: can you change it in my code too?
+ msumera: ofc, if only the rules allow it&#160;;)
+ _NikJ: I'm only kidding of course :D However the rules? Eh
+ _NikJ: I find it kinda weird that top 2 are the same company, same language, practically the same score (both very high above others)
+ _NikJ: Sounds illegal, but oh well
+ msumera: i got another set of 'simple changes' which should work, but now i'm too scared to submit them
+ wlesavo: even more worrying is that butcher submitted just after 3 hours from contest start
+ Samer: what's up with that mean yellow button that asks me to quit this and go get a job??
+ dbf: msumera why you are scared, you can allways rollback to previous version
+ wlesavo: msumera current rank does not really matter, most people havent even submitted an actual version yet
+ wlesavo: so feel free to experiment while submits are working :slight_smile:
+ Iugi: which ids do the enemy heroes have?
+ Iugi: do they have 4,5,6?
+ eulerscheZahl: (0,1,2) or (3,4,5)
+ Astrobytes: i.e., P1 or P2
+ Iugi: so if i am player to my heroes are 4,5,6?
+ Iugi: *two
+ Astrobytes: 3,4,5
+ Astrobytes: count from 0...
+ CortexDeveloper: how to get promotion to next league?im beating boss in wood 2 in arena but nothing happens after battles ends
+ eulerscheZahl: are you above the boss on the leaderboard?
+ CortexDeveloper: yeah
+ eulerscheZahl: is your submit 100% finished?
+ Astrobytes: 90% wait for it to finish
+ Astrobytes: there
+ CortexDeveloper: yep, battles completed 100%
+ msumera: ok, let's submit new version, i guess i will go down from 30 to 1000
+ jacek: 30 to 1000 is going up :o
+ msumera: right!
+ Kukiss: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/0e06982e-a2f8-45f6-901d-a3d2da9ae4a3">http://chat.codingame.com/pastebin/0e06982e-a2f8-45f6-901d-a3d2da9ae4a3</a>
+ Kukiss: ahh, I forget that too long message is a bad idea here
+ CortexDeveloper: got it, thank you
+ CortexDeveloper: same for guys above me, the also beat boss
+ Aramang: it promotes everyone higher than the boss on a timer
+ Edwap: Can anyone tell me where to find rules for this spring challenge? Im using TS so i set up webpack to bundle all of my files but im not sure if i can do that
+ therealbeef: who knows, maybe they also used this game in a private Samsung hackathon and butcher had a bot still lying around
+ jacek: there's the statement
+ Astrobytes: if it obfuscates it's not allowed
+ jacek: and also referee code
+ Astrobytes: otherwise it's fine to minify
+ Astrobytes: as long as it can be read by a human
+ Edwap: not reallyy i turned off minimization
+ jacek: :no_mouth:
+ Astrobytes: should be fine then
+ Edwap: great i'd rather place last because of bad code than some rule i broke&#160;:)
+ Astrobytes: :D
+ SashaNukem: Is my base always on the top left?
+ dbf: no
+ SashaNukem: @dbf thank you
+ Jerrasterix: well for the test rounds yes
+ vvandenb: no
+ Jerrasterix: but not for the actual matches
+ Astrobytes: you can swap sides while testing in the IDE too...
+ Aya_Noaman: wait how
+ Astrobytes: The DELETE button under the two player avatars
+ Astrobytes: Just put yourself in place of the other, and whoever else in your place
+ Aya_Noaman: oh okay thank you
+ _NikJ: I improved my bot so much that in 10 runs against my arena code I lost 13 times :D
+ TobiasA: pls could someone explain this I don't quite understand
+ TobiasA: After an entity moves towards a point, its coordinates are truncated (when below halfway across the map) or rounded up (when above halfway across the map), only then are distance-based calculations performed (such as monster damage).
+ ZarthaxX: what is your problem TobiasA?
+ PiMastah: Going through the calculations for each turn ay lead to float coordinates, which are converted to ints according to the above rules before further calculations are carried out. The conversion truncates or rounds up depending on which base you are closer to
+ ZarthaxX: ^
+ TobiasA: so if i'm closer to my base i'll truncate otherwise I round up?
+ ZarthaxX: sounds like it, yup
+ PiMastah: depends which one your base is
+ ZarthaxX: i guess this is a way to make it symmetric
+ PiMastah: if closer to (0,0) than (17630,9000) truncate, else round up
+ PiMastah: disclaimer I haven't checked the referee code :D
+ ZarthaxX: same .P
+ TobiasA: that also applies if i'm the red team? 
+ TobiasA: or is it reversed as red team?
+ PiMastah: <a rel="nofollow" class="external free" href="https://github.com/CodinGame/SpringChallenge2022/blob/3297c5714be55f900028750e8ecb8b51d6aa4551/src/main/java/com/codingame/game/Vector.java#L165">https://github.com/CodinGame/SpringChallenge2022/blob/3297c5714be55f900028750e8ecb8b51d6aa4551/src/main/java/com/codingame/game/Vector.java#L165</a>
+ PiMastah: this is the code that does the part from the rules
+ PiMastah: origin is the midway point of the map
+ Tuo: is there a way to know if a monster has all of its health left?
+ PiMastah: You only get current health as input each round. Curious though why you would need it?
+ Tuo: to only send high health monster to the enemy
+ PiMastah: then maybe you can check which monsters have high current health?
+ TobiasA: thanks PiMastah
+ Abdi-29: when it the best moment to use spell wind
+ Tuo: but that depends on the max health. Maybe ill keep track on highest health ever seen and assume that is the maximum
+ Vintarel: there is a formula for max health, as it is raised of 1 every 6 monsters&#160;!
+ Vintarel: every 8* spiders*
+ ycsvenom: why there is no format in python
+ Hamp: why would max health matter? a 10/16 spider is the exact same as a 10/10 spider
+ Kukiss: I think it is about spending mana on 10/16 when next turn you could find 16/16
+ Kukiss: but I don't use spells yet, so for me it is very hypothetical problem :D
+ Tuo: yes Kukiss, never settle for inferior monsters! :smile:
+ Sh4kE: Hmm I'm ranked first in my league but still don't promote to the next. I waited in the arena untill it reached 100%...
+ CortexDeveloper: wait little bit moresystem will promote you in 10-30 min
+ Sh4kE: ahh thx&#160;:)
+ MindController: Guys what  is the radius of base?
+ MindController: (How far monster has to be, to get wild mana?)
+ JohnyDaison: about 5050
+ struct: from what I understand monster can be inside
+ struct: but the hero that hits hit must be outside
+ Djellowman: ok im done. 2 hours of code is wiped? why doesnt the IDE save the changed you make??
+ Djellowman: changes
+ struct: did you press play my code?
+ Djellowman: no
+ struct: It warns you when you close the window
+ struct: it only saves when you press play my code or submit
+ Djellowman: sad
+ Djellowman: submit being test in arena?
+ struct: yes
+ Astrobytes: yes
+ struct: but my play my code is enough
+ Djellowman: i wrote out the entire structure of my bot.... not doing it again
+ Astrobytes: pro-tip: do that offline and copy-paste it over
+ Astrobytes: you have plenty time to rewrite only 2 hours worth of work
+ struct: it will probably take less time now
+ Astrobytes: true
+ Djellowman: yeah but i don't want to
+ Raphael67: it doesn't work the first try anyway
+ Djellowman: thanks for the tips though
+ TobiasA: when a control spell is used on a target, in the next turn does it move in the new direction or set it's velocity to the new direction then moves the turn after that
+ TobiasA:&#160;?
+ struct: I think the spell only affects next turn
+ struct: so you use control on a spider
+ struct: it moves normally
+ struct: on the start of next turn the spider vx and vy is updated
+ TobiasA: ok thanks
+ RAMAKRISHNAPPA_BERIA: KGF
+ HenroLST: hello
+ ycsvenom: i just got promoted to Wood 1 League :sweat_smile:
+ ycsvenom: and i just started 
+ SashaNukem: congrats 
+ ycsvenom: thanks
+ archfan7411: anyone else have issues with the mana input not reflecting the mana value shown on the game's UI?
+ Astrobytes: perhaps you are looking at your opponents mana
+ archfan7411: good heavens, it would seem I am
+ Astrobytes:&#160;;)
+ jacek: oh my
+ archfan7411: I've been debugging this for an eternity lol, thank you so much
+ Astrobytes: np, it happens&#160;:)
+ mester_x: hi world
+ ycsvenom: why the vs battles starts at 10 battles then eventually decreases to 2 or 1? 
+ ycsvenom: evaluating process takes so much time
+ jacek: first 10 is against all spectrum to determine your starting rank
+ ycsvenom: hmmm
+ ycsvenom: in which league you are jacek?
+ jacek: 1459th bronze. just some simple if bot
+ Thheo: when will silver open?
+ LBPK: Is it possible to demote&#160;?
+ Aramang: no, feel free to submit something broken to hang out at the bottom of the league
+ LBPK: Great&#160;! Thanks&#160;:)
+ CosmicStudios: I never win clash of code&#160;:(
+ ycsvenom: you will it's hard in the beggining
+ CosmicStudios: I've been doing it for a while but everybody is too fast
+ JaredH: I hard coded my base as [0,0] and my first match my guys went and helped the other team
+ Mortis_666: 😂
+ Alurian: when does silver league open?
+ dbdr: League opening: 1650812400000
+ ycsvenom: just got promoted to Bronze League
+ Alurian: and what does that number mean?
+ Alurian: also congratz!
+ Alurian: aah unix. tomorrow at 5 silver opens
+ jacek: at GMT
+ Alurian: 5 gmt +2
+ Alurian: 5 pm btw
+ CosmicStudios: SO CLOSE :rage: :rage: :rage:
+ CosmicStudios: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/report/2360622d3a1c2399a694640de103f7866d78397">https://www.codingame.com/clashofcode/clash/report/2360622d3a1c2399a694640de103f7866d78397</a>
+ jacek: :eye:
+ CosmicStudios: 2 seconds
+ jacek: thats what she said&#160;:(
+ Astrobytes: :tada:
+ Th1nhNg0: Wow im in top 6 now
+ Th1nhNg0: xD
+ Nerchio: im top 500
+ Hackerkrish: jai KGF
+ Waffle3z: paralyzed by indecision trying to figure out the meta instead of actually writing any code
+ kovi: meta will change when search appear
+ kovi: and than again with nn
+ jacek: this game is quite unnable
+ Waffle3z: time to figure out how to do a search with any meaningful depth
+ SirLoxley: I would actually like to see a 'war' story how to train and squeeze in a NN into those 100k
+ Astrobytes: read some postmortems and ask the nn guys about encoding
+ Th1nhNg0: what is NN&#160;?
+ Astrobytes: neural network
+ Th1nhNg0: oh, I nerver use it on codingame
+ jacek: oO
+ TobiasA: jacek have you used NN on CG before
+ Illedan: jacek, depends on what you want to NN. But I think you can go about this with simple statistics :P
+ jacek: well if there are parameters to tune in the search...
+ WannaBeHum1n: general question
+ WannaBeHum1n: if someone bot is not using if statements and conditions in general
+ WannaBeHum1n: what kind of code is he using&#160;?
+ pHALUS: ifless code
+ thepianist59: XD
+ thepianist59: i am paralyzed and don't know and don't know what to code, which stratégy
+ thepianist59: I'm lost XD ...
+ Kukiss: WannaBeHum1n you can for example simulate many games using different moves. Score each simulation and choose the one which appears to be the most optimal.
+ WannaBeHum1n: wow
+ WannaBeHum1n: does this have a specific term i can google
+ thepianist59: yes, but for that you have to write the simulation and this game is not easy XD ... I have to write the part about the spells
+ WannaBeHum1n: to maybe learn more
+ jacek: generally its about simulation future moves
+ Kukiss: At list that's how I understand it. But it is too hard for me on an open map like this.
+ thepianist59: There are a lot of algorithms you can google ... genetic algorithms, BFS, DFS ...
+ Kukiss: at least* :D
+ Aramang: i think that would count as monte-carlo simulation...which is a complicated way of saying try random stuff and see what works
+ WannaBeHum1n: thepianist59 thnx
+ jacek: for board games you have minimax, mcts. then you have genetic algorithms, beam search, monte carlo
+ WannaBeHum1n: jacek ty
+ WannaBeHum1n: is the game code public on github&#160;?
+ WannaBeHum1n: so people can do simulations&#160;?
+ thepianist59: yes, on java
+ thepianist59: in*
+ WannaBeHum1n: ahh ok
+ thepianist59: but the way of working of the spells seems really complicated and I'm a little lost about them, so  don't really know how to simulate them
+ thepianist59: maybe try a simulation without and trying putting them after
+ jacek: you dont need to simulate everything at first yeah
+ thepianist59: yeah , I always forget that and lost myself in my code
+ thepianist59: ^^
+ archfan7411: Where in the leaderboard do I see the boss?
+ HYPN05: uwu
+ Th1nhNg0: I'm gonna try to simulation the game in python
+ thepianist59: me too... we can exchange about that if you want, I'm trying first to simulate the moves
+ Iugi: how do you read your own mana
+ thepianist59: but even if we manage to simulate, we have to find a way to evaluate the situation obtained at the end , but ther a re not a lot
+ Iugi: because the mana is declared in a for loop so...
+ thepianist59: at the beginning of your code you have a input for your mana
+ Iugi: i dont know how to get it out of there ):
+ thepianist59: normally the default template code does it for you
+ archfan7411: lugi: in the Python template?
+ Iugi: java
+ archfan7411: ah
+ Iugi: i cant set it to public
+ archfan7411: well, you could refactor the template
+ Iugi: but it also doesnt let me use it
+ archfan7411: to make it read the enemy and your mana normally
+ thepianist59: for example, in the default python template there is this code&#160;: my_health, my_mana = [int(j) for j in input().split()]
+ Th1nhNg0: I hope I will find a way to simulation it. 
+ Th1nhNg0: I'm try to use reinforcement learning
+ archfan7411: Nice
+ archfan7411: I respect anyone who's trying to use machine learning or anything like it here
+ archfan7411: above my skill level
+ jacek: machine learning aka if else if else if else...
+ archfan7411: hehehe
+ Th1nhNg0: Has anyone used machine learning yet?
+ _NikJ: mana reading is be default done within a for loop for each player. You can replace it with 2 calls to readline, first one is always your own mana
+ archfan7411: that's what I did
+ _NikJ: Same, I'm ignoring opponent's mana, keeping my own
+ archfan7411: agreed, I have no use for opponent mana *yet*
+ archfan7411: I'm sure people have come up with bigbrain strategies for that though
+ Th1nhNg0: there is a lot of thing I didn't use, but still got to top 6 xD
+ Waffle3z: barely modified my wood 1 code, just made it wind spiders away from the base if they're within 2200
+ cclaude42: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/7dae54fd-cb47-47b6-ac60-b750ba22d645">http://chat.codingame.com/pastebin/7dae54fd-cb47-47b6-ac60-b750ba22d645</a>
+ cclaude42:&#160;? I guess my message was too long for the discord lol
+ Waffle3z: can shield your opponent's hero and then wind spiders to their base without blowing the hero along with them so they can't catch up
+ archfan7411: you could do that yeah
+ Th1nhNg0: nice idea Waffle3z 
+ cclaude42: TLDR: would like to go next level but can't find any good resources. Anyone has articles / videos on how to build a bot for things like this&#160;?
+ Waffle3z: or wind their heroes away while spiders go towards their base, and then switch once they shield themselves
+ cclaude42: Struggling to connect the abstract concepts (MCTS, beam, genetic..) with the practical aspect of coding the bot.
+ archfan7411: I've found myself focusing moe on mana collection and sheer bug-killing rather than offense
+ archfan7411: *more
+ Bernard_Lowe: Can any code be executed after your hero action commands? 
+ Waffle3z: for a game like this it's hard, something turn-based like chess is easier to simulate and apply tree searches
+ archfan7411: Bernard: yeah as far as I know
+ Aramang: cclaude42 I find it a lot easier to start by formulating the problem you want to solve with the bot, then find the algorithm that best matches it
+ struct: Yes but it will take time out of next turn
+ struct: I would probably not do it
+ SuspiciousWombat: Is it possible to start a new round in private clashs instead of always opening new ones?
+ Bernard_Lowe: k. I can probably dry run my commands to execute at the end instead then.
+ struct: What commands do you need to execute at the end?
+ Bernard_Lowe: I want to remember how many times I did X action on the current turn.
+ cclaude42: @Aramang I see. I do find it difficult to formulate as Waffle says, on an open game like this. I find it hard to know what even is a step in the right direction (past win / lose)
+ TobiasA: is it possible to shield your own hero
+ _NikJ: yes, TobiasA
+ _NikJ: I've seen players use it, but I haven't done it personally
+ TobiasA: ok thanks
+ TobiasA: is it possible to control your own hero
+ archfan7411: where would that ever be useful?
+ TobiasA: i dunno
+ _NikJ: is it possible to shield YOURSELF? Hero 0 casting a shield onto himself?
+ jacek: eeyup
+ archfan7411: Yeah you can shield your heroes
+ archfan7411: I see nothing in the manual thing which says you *can't* cast control on your own heroes
+ _NikJ: would be fun if you had to shield your hero by casting a spell from other heroes :D
+ archfan7411: hehe
+ Tuo: could be usefull if someone is wind spamming your hero away from defending base
+ Waffle3z: went from like 1700 to 1200 by adding a wind spell to the wood 1 code
+ Waffle3z: don't need 3 heroes defending anymore, time to send one over to annoy the opponent
+ MACKEYTH: When you control a monster, does it stay on the new course after the control is over?
+ archfan7411: Yes, as long as it isn't within 5000(?) units of your base
+ msumera: yes, unless it's in the base
+ Wontonimo: wow, I got pushed down to 1080th from 200th.  There is quite the power escalation over the last 2 days
+ _NikJ: damn, and I thought my drop from 80th to 200th was a big deal
+ ZarthaxX: leaderboard always fluctuates a lot :P
+ Illedan: Can't have a solid leaderboard on 50 games
+ Illedan: and 3.8k players
+ _NikJ: ++++++++++
+ struct: they reduced it to 50 games?
+ Illedan: Yeah
+ Illedan: It's good
+ Wontonimo: some more leagues will clean that up
+ Illedan: I just wish I could get 50 games vs the top  :P
+ dbf: silver is for tomorrow?
+ Illedan: Instead of 30 wins before anything fun in a submit
+ ZarthaxX: you are almost there illo
+ ZarthaxX: good stuff
+ Illedan: Just a bunch of IFs to counter all the cheeses
+ Wontonimo: glad to hear that works.  i was thinking of doing that.
+ ZarthaxX: i thought you were going to say ga
+ ZarthaxX: it's walways GA for u
+ ZarthaxX: :P
+ dbf: ga + ifs &gt; ga
+ ZarthaxX: Wontonimo spaghetti time?
+ ZarthaxX: dbf hehe tru
+ Illedan: Oh, yeah I have a GA too. Just not finished yet. Currently outfarming my main in the first 50 frames
+ Illedan: Just taking a break with more IF magic
+ struct: rank 1 or 2 are the same person?
+ ZarthaxX: ah good
+ ZarthaxX: thought the same struct
+ Wontonimo: my code is spaghetti with 3 noodles.  it's really simple
+ ZarthaxX: do they do the same things on a game?
+ struct: no
+ struct: but same elo, same language, same company, same country
+ Nerchio: great minds think alike
+ Wontonimo: oh, i forgot about my smirf account for trying things.  :thinking:
+ Illedan: Might be a person with schizofrenia
+ jacek: struct thats racist :v
+ _NikJ: suspiciously close elo :d
+ struct: jacek is gonna cancel me&#160;:(
+ therealbeef: 4 samsungs in top 20, must be coincidence
+ struct: I'm not making any accusations to be clear
+ struct: Was just wondering
+ ZarthaxX: struct rank 19 is also the same
+ struct: I didnt even noticed there were more people from the same company on top 20
+ ZarthaxX: weird haha
+ therealbeef: a simple explanation is that they used this game also for a samsung internal competition
+ therealbeef: *is = would be
+ ZarthaxX: true
+ therealbeef: we know it was used in amadeus internal hackathon, so why not more often
+ struct: it was used on 2
+ struct: EA and amadeus
+ Illedan: -.-
+ ZarthaxX: oh&#160;:(
+ TobiasA: damn I didn't know companies had internal competitions
+ Wontonimo: oh course they changed the rules and had different objectives :rolling_eyes: , they wouldn't just be lazy and use exactly the same each time
+ therealbeef: it's part of the business model of CG
+ ZarthaxX: Wontonimo :D
+ Astrobytes: *was
+ therealbeef: for EA apparently they used the exact same rules
+ jacek: they should have added swap rule at least
+ Astrobytes: they switched to escapes instead of internal hackathons
+ eulerscheZahl: hey, at least the changed the logo at the top center
+ Illedan: I think another logo is below that one :eyes:
+ therealbeef: i wondered if the old logo is underneath&#160;:-D
+ eulerscheZahl: joking aside, they did something: the SDK version is 4.1.6 which is the latest<a rel="nofollow" class="external free" href="https://github.com/CodinGame/SpringChallenge2022/blob/main/pom.xml#L10">https://github.com/CodinGame/SpringChallenge2022/blob/main/pom.xml#L10</a>
+ eulerscheZahl: it's so new even the docs don't go that far<a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/25775/codingame-sdk-documentation/release-notes">https://www.codingame.com/playgrounds/25775/codingame-sdk-documentation/release-notes</a>
+ eulerscheZahl: and my search bot can finally beat my 10 line if-else in some cases<a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/622918275">https://www.codingame.com/share-replay/622918275</a>
+ eulerscheZahl: other times i just die with 3 spiders at my base&#160;:(
+ Illedan: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/622934240">https://www.codingame.com/replay/622934240</a>
+ Illedan: hmm
+ _NikJ: Any attempt to use spells apart from wind to shoot enemies from the base resulted in dropping at least 5 elo points, wtf am I even doing
+ struct: Why did you lose?
+ Illedan: Me?
+ struct: yeah
+ struct: the end game screen doesnt tell me why
+ eulerscheZahl: less lives
+ struct: ah ok
+ Illedan: Because I didn't see any danger monster nearby and chased all monsters to the other side :P
+ eulerscheZahl: or: because he's 2ndthat's what the endscreen tells you why :P
+ Illedan: xD
+ jacek: no Illedan, you should say "because I let him win"
+ Iugi: can a hero shield itself?
+ struct: yes
+ struct: euler use your PI skills to find if it was used on samsung too
+ Astrobytes: Euler P.I.
+ eulerscheZahl: hard to dig out anything about these private events
+ struct: I guess I can just ask
+ Tom1: yes, hero can shield itself
+ Astrobytes: Agent eπ
+ eulerscheZahl: P.I.-I.exp(π*i)
+ eulerscheZahl: or -1 for short
+ jacek: e^pi - pi
+ Astrobytes: :P
+ eulerscheZahl: that's almost 20 jacek, isn't it
+ jacek: :zipper_mouth:
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://xkcd.com/217/">https://xkcd.com/217/</a>
+ jacek: :upside_down:
+ Astrobytes: lol, still funny
+ Pieman: 8 lines of code and 21.5 score good&#160;?
+ dbf: d'oh
+ dbf: "Only 1 executor running at the same time for a test session".
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://xkcd.com/356/">https://xkcd.com/356/</a>another one of my favorites
+ eulerscheZahl: wait a minute or 2, will fix itself dbf
+ Astrobytes: mwahaha
+ jacek: about physicists i like this one <a rel="nofollow" class="external free" href="https://xkcd.com/669/">https://xkcd.com/669/</a>
+ ycsvenom: this is kinda fun<a rel="nofollow" class="external free" href="https://xkcd.com/1411/">https://xkcd.com/1411/</a>
+ ZarthaxX: hahaha nice one eulerscheZahl
+ Tritex: what i have to do in this game
+ aCat: yep, like it
+ Tritex: wtf
+ aCat: but why mathematicians are worth more... :thinking:
+ Astrobytes: more focused?
+ archfan7411: when's the bronze league boss gonna be released?
+ Astrobytes: tomorrow when silver opens
+ archfan7411: nice, thanks
+ eulerscheZahl: mathematicians have a smaller field of interest
+ Astrobytes: see: more focused
+ eulerscheZahl: ok, i'll let that count: you beat me this time
+ Astrobytes: :D
+ jacek: id say optic physicists are more focused
+ Astrobytes: :smirk:
+ PatrickMcGinnisII: there are 3 types of people in the world, those that can count and those that can't
+ Wontonimo: there are 10 types of people in the world, those who know binary and those that dont
+ ZarthaxX: lol really good one
+ Ajaiy: I have heard that joke in numberphile
+ Wontonimo: there are 2 types of people in the world:1 - Those who can work with incomplete information2 -
+ Ajaiy: lol
+ JackMc: There's 2 types of people in the world, those who can extrapolate from an incomplete data set
+ Waffle3z: there are 0 types of people in this world:
+ Waffle3z: I had so much mana when I wasn't doing spells and now that I'm actually doing spells I never have any mana
+ Pieman: I had so mutch money but when I bought a house I never have any money
+ PatrickMcGinnisII: why did the blonde crash her car?  she had to count to six
+ Wontonimo: i don't get it
+ Waffle3z: what
+ Ajaiy: Why did the AI basketball stop when it came near the edge of the court? Because it realized that it would run out of bounds/bounce anyway
+ PatrickMcGinnisII: :hand_splayed_tone2::point_up:
+ Wontonimo: I use my knee to hold the steering wheel
+ Wontonimo: I guess I'm a smart blond
+ struct: bad idea
+ PatrickMcGinnisII: r u a she?
+ PatrickMcGinnisII: cause i'm blonde too, so is my GF
+ jacek: super saiyans eh
+ Wontonimo: it's better than letting go of the wheel struct
+ jacek: use GA to drive
+ LaurensD: there is a source for the spring 2022, is it possible to run this offline? 
+ Astrobytes: [solved]
+ PatrickMcGinnisII: she's an english teacher, i don't ask her to do math ... ever.
+ KingRavan: can anyone tell me how to print stock charts in java
+ Wontonimo: yes LaurensD
+ LaurensD: Wouid be nice to speed up the testings :P
+ Wontonimo: but you can only use the bots you've made or have code for
+ Astrobytes: yes, I would advise rewriting it though
+ Waffle3z: if a monster is controlled and sent outside the radius of a targeted base, will it stop targeting the base?
+ struct: I think so
+ aCat: yes
+ LaurensD: Yeah bots is not a problem, that would be great actually, but can I still use c# or wouldn't that be compatible; can't really find instructions to run it
+ Wontonimo: the attacking in this is fantastic <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/622959446">https://www.codingame.com/replay/622959446</a>
+ aCat: gest random dir
+ struct: Why random dir though?
+ struct: isnt the controlled minion supposed to go in that direction?
+ Wontonimo: hey LaurensD, there is this community tool called brutaltester  <a rel="nofollow" class="external free" href="https://github.com/dreignier/cg-brutaltester">https://github.com/dreignier/cg-brutaltester</a>
+ Wontonimo: you can pit 2 bots against eachother using the command line.  there is no UI, just game results
+ wlesavo: it keeps direction after control
+ struct: aCat I think after you controll a spider it will go in that direction forever
+ struct: unless someone controls it again
+ struct: or if its in base range
+ Wontonimo: it can be used to pit 2 different langs or 2 same langs against eachother LaurensD
+ Wontonimo: that's correct struct
+ LaurensD: Thanks, will take a look at that&#160;:)
+ Rddevelop: php or cobol
+ struct: c++
+ Rddevelop: funny, i also found c++ in some webs about worst programming languages
+ Rddevelop: i use php and it tops all lists xd
+ Wontonimo: there was a joke about php programmers and brains, but someone complained so I took it down&#160;;(
+ Rddevelop: i think i justt saw that one, it was so funny
+ Rddevelop: <a rel="nofollow" class="external free" href="https://www.searchabledesign.com/information/">https://www.searchabledesign.com/information/</a>
+ Rddevelop: wait my bad <a rel="nofollow" class="external free" href="https://searchabledesign.com/blog/post/10-worst-programming-languages">https://searchabledesign.com/blog/post/10-worst-programming-languages</a>
+ ProS: Guys, maybe you know. How can I find out if point is inside circle's sector? Writing about spring challenge. I want to divide base for 3 sectors and give each sector a knight, but I can't understand how to determine if bug inside specific sector
+ dbf: ProS, have a look at <a rel="nofollow" class="external free" href="https://stackoverflow.com/questions/13652518/efficiently-find-points-inside-a-circle-sector">https://stackoverflow.com/questions/13652518/efficiently-find-points-inside-a-circle-sector</a>
+ DaNinja: distance(bug, base) &lt; radius
+ Waffle3z: specifying that it is a sector is unnecessary, they can't be in a different part of the circle
+ MichExpatMatt: This is pretty straightforward too - but just remember to mind your degrees vs radians, and as far as sin and cos and angle goes, clockwise is considered the negative direction<a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=aHaFwnqH5CU&amp;t=58s">https://www.youtube.com/watch?v=aHaFwnqH5CU&amp;t=58s</a>
+ MichExpatMatt: Personally I'm trying to figure out the sweet spot for using control to send a spider to the other base, vs not just handing them easy kills for wild mana farming
+ Pieman: printf("MOVE 400 400\n"); lifehack
+ Pieman: in c
+ KCrown: Now that I am better than the boss how long before I am promoted to bronze?
+ HoangH7: ASAP
+ Wontonimo: once all your battles are complete
+ KCrown: OK ... thanks ... just want to see the new rules inbronze 
+ Pieman: can you get higher then bronze right now&#160;?
+ MichExpatMatt: not yet
+ struct: no
+ Pieman: when will It be unlocked
+ struct: I think monday?
+ Pieman: aye ty
+ Astrobytes: struct sunday
+ struct: They are going to open it on a day off?
+ Astrobytes: or it was at least, 3pm GMT
+ Wontonimo: there are 2 new spells, shields and control.  Nothing else.  All your old code will work as-is KCrown
+ struct: They removed the date
+ HoangH7: Too lazy to join this time&#160;:(
+ Astrobytes: we'll see I guess
+ KCrown: thanks wontonimo 
+ Wontonimo: :grin: 
+ Wontonimo: submit the starter AI HoangH7
+ ycsvenom: is it right to make WIND in direction of center of screen?
+ Wontonimo: and then change it so that the bugs are sorted by distance to your base, then you'll be in either top wood 1 or bronze
+ Wontonimo: yeah, that works ycsvenom , but it's kinda an angle
+ Wontonimo: why not 45 degrees away from current hero&#160;?
+ eulerscheZahl: why not towards the enemy base?
+ Wontonimo: even better
+ MichExpatMatt: I like to either point WIND at the center or at the opp's base. If using wind on an opp hero though, I want them away from my base as well as away from their base
+ ycsvenom: do i have enemy's base location?
+ eulerscheZahl: you can compute it
+ Wontonimo: it's the opposite corner, so just calculate it
+ MichExpatMatt: you can figure out from being the other base that's not yours
+ eulerscheZahl: one is at (0,0), the other at (17630,9000)
+ Wontonimo: enemyBase = maxX-myX , maxY-myY
+ ycsvenom: but does the game ensure that the base is either here or there?
+ ycsvenom: i mean top left and bottom right?
+ struct: yes
+ Astrobytes: nah, just randomly flips between them for s**ts and giggles
+ Astrobytes: :P
+ struct: Should have took some ideas from trolls vs castles
+ MichExpatMatt: you can figure out which side is yours vs theirs easily with an if/else though
+ Astrobytes: struct :D
+ Badoobicus: i want to do some debugging, i think i screwed something up with my vector math. how do I print something to the console without the game getting mad at me for invalid output?
+ ycsvenom: i know but i am just worried that it will change in the next leagues or something MichExpatMatt
+ Astrobytes: Badoobicus: print to stderr
+ struct: I heard it will change on last day
+ ycsvenom: which language are you using Badoobicus
+ ycsvenom: that's what i am talking about struct
+ Astrobytes: :smirk:
+ struct: I'm joking sorry
+ struct: The rules are final
+ ycsvenom: nooooooooooooooooo :joy:
+ MichExpatMatt: I don't expect the base coords to change - becvause I don't expect they will draw a new background, ergo I think the 2 bases will always be upper left and lower right
+ ashiknur: when the silver league will open?
+ struct: background.setScale(rand(2.0))
+ struct: done
+ Beresta: do the heroes attack if they use WIND this turn?
+ ycsvenom: they will do one thing each turn i think
+ Wontonimo: they attack anything they are near enough at the end of the turn
+ Wontonimo: attacking is automatic and always
+ Mergesort_Botnet: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/23609655635bd14475be5e72755243a593b1326">https://www.codingame.com/clashofcode/clash/23609655635bd14475be5e72755243a593b1326</a>
+ antiwonto: [auto] hey Mergesort_Botnet dont paste those links here.  Use the channel #clash
+ Wontonimo: under "Action order for one turn" , step 5 Heroes attack monsters in range and produce mana for each hit.
+ TobiasA: when an entity is being controlled, by how much does it move in the given direction
+ TobiasA:&#160;?
+ MichExpatMatt: I think it's one turns worth? so 400 for monsters, 800 for heroes
+ MichExpatMatt: it's in there somewhere I just don't remember for certain
+ Wontonimo: RTFM - it's all listed in the docs on the left
+ JulienKerlero: Hello there
+ JulienKerlero: I have a question for the CG experts
+ Astrobytes: just ask&#160;:)
+ JulienKerlero: Is functionnal programming a good way to go for the srping challenge&#160;?
+ JulienKerlero: Cuz I feel like it might be
+ Astrobytes: if you are comfortable in functional programming then sure, why not?
+ Ajaiy: It depends on your algorithm
+ JulienKerlero: I sketeched a few lines in Python
+ Ajaiy: If it uses a lot of math, then functional programming might be good, and so on
+ ProS: Can I check locally to be on the other side of the base?
+ JulienKerlero: And I'm using a lot of filters and pure functions
+ Astrobytes: ProS: you mean swap position?
+ ProS: yes
+ Astrobytes: Use delete under your avatar/opp avatar and swap
+ Astrobytes: *swap sides
+ Astrobytes: bottom of the screen, center of IDE
+ struct: I had no idea that the bosses were public lol
+ Astrobytes: what?
+ struct: <a rel="nofollow" class="external free" href="https://github.com/CodinGame/SpringChallenge2022/blob/3297c5714be55f900028750e8ecb8b51d6aa4551/config/level1/Boss.java">https://github.com/CodinGame/SpringChallenge2022/blob/3297c5714be55f900028750e8ecb8b51d6aa4551/config/level1/Boss.java</a>
+ ProS: Thank you man!
+ ProS: It worked, God bless you)
+ Kyraleese: hey guys, how do you follow someone from their user profile page ...?  I see no follow button or anything like that
+ struct: you can check all of them on config folder
+ Astrobytes: lol, quality
+ Astrobytes: I didn't bother looking this time around
+ eulerscheZahl: i saw the bosses when i was looking for a certain function. github shows you references and definitions when you click on it. Boss.java was one of the definitions
+ eulerscheZahl: symmetricTruncate
+ aCat: yeah, Vector class is copied in Boss etc&#160;;]
+ dbdr: which means github is not semantic enough
+ Astrobytes: "stupidityCountdown"
+ Astrobytes: ah, I only looked at the source offline
+ jrke: damn they have given default AI code in referee lol
+ struct: I think I found a "bug", have to test it further I guess
+ eulerscheZahl: bug in your bot or referee?
+ struct: ref
+ Ajaiy: #5 in Wood 1, hope it passes
+ eulerscheZahl: was never meant to be used for community, so less testing? :imp:
+ Ajaiy: Les gooooo
+ eulerscheZahl: stupid cat uses the litter box. she was outside 5min ago&#160;:/
+ eulerscheZahl: always makes a mess next to it as she loves to scrape
+ Astrobytes: my cat Princess does the same
+ Astrobytes: (the one not in the pic)
+ Astrobytes: (named by my sister I may add)
+ struct: actually no bug
+ MichExpatMatt: LOL this battle I'm watching, my opp names his guys Bob, Mark, and Steve
+ struct: Im surprised
+ eulerscheZahl: your younger cat
+ Astrobytes: older
+ eulerscheZahl: the discord profile pic
+ Astrobytes: no, both my pics are the same cat, Gizmo
+ Ajaiy: Hmm not bad
+ Ajaiy: my bot works in bronze too
+ Ajaiy: not that much though
+ SirLoxley: yeah, the wood#2 boss is kind of weak
+ SirLoxley: sorry wood#1
+ Astrobytes: Princess is black, with 2 white patches, and she had her turn being an avatar many years ago
+ eulerscheZahl: Gizmo - you know what comes next?
+ Astrobytes: don't I know it
+ eulerscheZahl: like the wechall admin
+ eulerscheZahl: except it's "Gizmore"
+ Astrobytes: haha indeed
+ eulerscheZahl: we had that convo a few times
+ Astrobytes: we did
+ Astrobytes: we're old, it's allowed
+ cegprakash: how to round the floating values in this game? ceil/floor/round&#160;?
+ Astrobytes: ...
+ struct: worse than that
+ dbdr: shall we tell ceg?
+ struct: After an entity moves towards a point, its coordinates are truncated (when below halfway across the map) or rounded up (when above halfway across the map), only then are distance-based calculations performed (such as monster damage).
+ Astrobytes: too late
+ eulerscheZahl: Referee.java holds the answers for you
+ eulerscheZahl: you're welcome
+ cegprakash: eulerscheZahl didn't ask u if the answer is in referee. It's confusing that's why asking here in the first place
+ Astrobytes: it's in the statement AND the ref, surely that counts for something
+ Hamp: I'm getting an error that I have reached the limit of plays for a period of time. What is that period of time? I have waited an hour now
+ cegprakash: below halfway, above half way.. do I cut the map in half in y axis struct?
+ eulerscheZahl: there are multiple limits in place
+ eulerscheZahl: for 15min, 1h, 6h and such. i don't know the exact limits
+ Astrobytes: Hamp, very strict limits nowadays, take a rest for a bit and come back/work outside of the IDE - it's annoying AF I know
+ struct: thats a good question cegprakash
+ struct: I have no clue
+ eulerscheZahl: create a new account to get more plays
+ eulerscheZahl: or clone the git repo and run it offline
+ Astrobytes: or that, just don't submit it
+ eulerscheZahl: that can lead to disqualification
+ Hamp: thanks, I will just wait&#160;:)
+ Astrobytes: it's nice not having to use the alt to chat
+ Astrobytes: since we de-modded I mean
+ UndercoverToad: what do you mean?
+ Astrobytes: :D
+ Astrobytes: I had a feeling that was coming
+ eulerscheZahl: surprisingly many didn't see the link between these accounts
+ Hamp: hm
+ Astrobytes: not surprising tbh
+ Hamp: is something happening with codingame? Havent been active lately but yesterday I heard it might be the last competition and now that the limits are a lot stricter
+ ashiknur: Is anyone using AI algorithms?
+ Kyraleese: Hamp, heard from where, exactly?
+ Hamp: I don't remember, someone said it in chat. I took it as frustrated chatting rather than something confirmed, but just wondering where it comes from if that is the feeling in the community(which it might not even be, just some chatter like I said).
+ Astrobytes: Hamp: well, they were acquired by another company, the focus is kinda elsewhere (the business side obviously)
+ Astrobytes: Kinda inevitable as they got bigger tbh
+ Astrobytes: The other company was CoderPad, an American firm
+ eulerscheZahl: CodePad was the pacman and CG the pellet in the merger
+ Astrobytes: Hence 'acquired'&#160;;)
+ eulerscheZahl: oh right, 5th word
+ Hamp: Astrobytes: Good to know, thanks&#160;:) Shame to see it happen but makes sense
+ eulerscheZahl: to be fair: the stricter time limits are there for a while
+ Astrobytes: AFAIK the community stuff will still remain, unsure about competitions as they are now etc but we'll just wait and see what happens
+ eulerscheZahl: more than a year
+ Astrobytes: Yeah, I think the past 2 contests?
+ Astrobytes: coding ones I mean, before this one
+ eulerscheZahl: let's check CG Bench commits to find out
+ Psyho: I thought CG had 50ms already when first competed (which was few years ago)
+ Psyho: or are you talking about different time limits?
+ Astrobytes: nah not the bot time limits, IDE plays
+ eulerscheZahl: how often you can play your code
+ eulerscheZahl: until you have to wait a while until the play button is enabled again
+ Psyho: ah, fine, I don't remember those - all I remember is considering writing a tool for automated testing 
+ Psyho: are those limits published somewhere?
+ Hamp: The last competition I took part in before this one was the MOBA one with the lane and minion farming, no idea when that was but it was definitely a long time ago so the limits are "recent" for me :D
+ eulerscheZahl: some were running batches with automated tools - there is a public one. now it's less plays for everyone.limits are not public
+ VizGhar: I should create my own CG... with blackjack and hookers
+ Astrobytes: Interestingly it seems to have made little to no difference
+ eulerscheZahl: halite is open source. the full system, not just the game itself
+ eulerscheZahl: all you need is a server
+ Astrobytes: Hamp, that was a while ago
+ VizGhar: halite?
+ Waffle3z: some logic to send one hero over to bother the opponent was enough for top 400
+ eulerscheZahl: halite was another bot contest. happened 3 times. now we have Lux AI as its successor
+ Astrobytes: Are kaggle still running a halite?
+ eulerscheZahl: i don't even know
+ Astrobytes: yeah, I'm somewhat out of the loop too
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.kaggle.com/competitions/lux-ai-2021/leaderboard">https://www.kaggle.com/competitions/lux-ai-2021/leaderboard</a>submits are 5 months old
+ eulerscheZahl: and the toad won
+ ycsvenom: i was multiplying threat_level by threat_for%2when the opponent suddenly throw a spider at my base and my heroes are just standing there :cry:
+ Waffle3z: wind stacks so that means it should be possible to send a spider from 6600 away directly into the opponent's base
+ Astrobytes: correct
+ kovi: luxai - kaggle playerbase seems totally different from cg/tc/atcoder/etc
+ Astrobytes: agreed kovi
+ eulerscheZahl: atcoder is another one of those sites i've never really tried
+ eulerscheZahl: last optim looked interesting, but only 4h duration
+ Psyho: they have a contest tomorrow
+ kovi: me neither but atcoders play cg and tc
+ eulerscheZahl: tomorrow is codejam day
+ Waffle3z: what are the goals of the new owners? do they plan on pushing all of us to alternate platforms?
+ dbf: kovi your defence-based bot looks very impressive in terms of wild mana, do you use sim already?
+ Psyho: optimization, 8am-12pm CET
+ Astrobytes: oh yeah, great timing codejam
+ eulerscheZahl: at that time i have a soccer match
+ Astrobytes: and I don't plan being awake before 10am
+ eulerscheZahl: sports =&gt; recover =&gt; codejam and the day is pretty much over
+ kovi: thx dbf...no sim yet
+ dbf: eulerscheZahl if you are not a goal-keeper you can code a bit during the match
+ Astrobytes: :rofl:
+ eulerscheZahl: how to make your teammates hate you 101
+ Astrobytes: how to get a head injury very quickly
+ DjTrilogic: how can i compile the refree and run it in command line&#160;?
+ DjTrilogic: javac&#160;?
+ kovi: thx psyho. cg and hashcode finals is enough for me these weeks
+ Psyho: oh yeah, hashcode finals
+ Astrobytes: good luck with hashcode finals you guys
+ eulerscheZahl: oh, that's next week already. good luck
+ Psyho: the contest where they put fit crappy problem that should be good for 7-day contest into 4 hour timespan
+ Astrobytes: indeed :D
+ eulerscheZahl: that's pretty accurate
+ dbf: codejam timing is not perfect - first was in the middle of the night&#160;:(
+ Psyho: somehow I liked reply contest better (but I'm biased on the results)
+ Astrobytes: I have yet to try it but euler and Ille say the same thing :D
+ eulerscheZahl: and no leaderboard to see your post-contest scores
+ Astrobytes: dbf: right?!
+ Psyho: similar to hashcode, same rules &amp; style, but the problem was managable
+ eulerscheZahl: "thanks for the feedback, we will consider"
+ dbf: Astrobytes, round 1A
+ eulerscheZahl: hashcode =&gt; mostly heuristicsreply =&gt; allows for some search usually
+ Astrobytes: dbf: yeah it was like 1 or 2 am for me!
+ eulerscheZahl: 3am - 5:30am for me
+ dbf: round 1B will be tomorrow in normal time, but I'll be in active cooking stage that time&#160;:(
+ eulerscheZahl: looking at the tasks i probably would have passed in 1A. but tomorrow is another chance
+ Astrobytes: it's not great timing for me either but I guess I will have to try
+ Psyho: you mean greedy right? since local search is heuristics as well
+ eulerscheZahl: yes, greedy
+ dbf: eulerscheZahl, oh if you are not sure about passing I'll not be sad that I'm missing it&#160;:)
+ eulerscheZahl: always the same. at least to qualify for finals a greedy is enough if you find the criterion by what to sort
+ dbf: based on qualification round I need x4 time&#160;:)
+ Psyho: to some extent it's true with, but there were plenty of times where you could squeeze iterative approach
+ Psyho: still the main problem is the 10+ page long problem statement
+ Psyho: and ton of complexity randomly put into different test cases
+ eulerscheZahl: yes, almost like completely different problems
+ Astrobytes: that's a bit silly isn't it?
+ eulerscheZahl: on the other hand topcoder marathons got more interesting recently IMO. asking for a clever idea and not just a highly optimized SA
+ FinnKrause: 
+ Psyho: this is fine design but... it's just adds to the complexity
+ Astrobytes: I wish I had bothered with the last one in restrospect euler
+ Psyho: TC improved their problems by a lot throughout the last few years
+ kovi: but its a team competition
+ Psyho: too bad the platform is beyond crap
+ cegprakash: lol hashcode was comedy this year :D no time lol
+ Astrobytes: lol not wrong Psyho
+ eulerscheZahl: MM135 finished about a month ago, still waiting for TCO leaderboard update&#160;:(
+ msumera: spent whole day on this, enough for today, i'm more than satisfied with 17th&#160;:)
+ Psyho: btw, regarding quality of the hashcode: <a rel="nofollow" class="external free" href="https://twitter.com/FakePsyho/status/1496973852093685760">https://twitter.com/FakePsyho/status/1496973852093685760</a>
+ cegprakash: and the fun thing about google hashcode was the team who won was a russian team with name "Make love not war"
+ eulerscheZahl: saw that tweet, Illedan linked it
+ Psyho: tl;dr&#160;: there was a single test case that could solve optimall/near-optimally and it would completely dominate the rest of scoring
+ Psyho: we were few minutes late&#160;:/
+ kovi: yeah, saw that psyhoand this year, the scoring system shows the individual test scores for others
+ ycsvenom: is there a way to order a specific hero to go to location not arbitrary oneor the game is ordering heroes in respect to inputs order?
+ kovi: no more guesswork
+ Psyho: I don't like that aspect tbh
+ eulerscheZahl: i really like the idea of relative scoring as on TC. but maybe not a good fit for huge contests like hashcode, i see confused players already
+ criag: each hero has its own id
+ Psyho: we're probably going to hide all of our scores becaus of that
+ Astrobytes: ycsvenom: just choose your hero by id
+ ycsvenom: there is no id in move command
+ kovi: hiding: interesting, but makes sense for a rare special
+ eulerscheZahl: order of outputs ycsvenom
+ ycsvenom: thanks
+ Psyho: if you're leading, you're giving away a lot of information
+ Astrobytes: I was assuming you stored your heroes
+ ycsvenom: absolutely i stored them
+ kovi: yeah, but if another team reveals...
+ Psyho: but every 15 mins matter in such contests
+ Psyho: the sooner you have info about which tests are important, the better
+ Astrobytes: I output their moves like heroes[i]-&gt;best_move-&gt;print()
+ Astrobytes: so I keep track of their id and know which one is which
+ Psyho: with reply we performed well mostly, because we guessed correctly which tests are going to matter and we managed to have dedicated ppl for special cases
+ Psyho: (otherwise we don't really cooperate in any way)
+ ycsvenom: i processed with respect to monster not to heroAstrobytes
+ eulerscheZahl: and you have a strong team of topcoder legends
+ ycsvenom: i wanna be on your team eulerscheZahl :smiley:
+ eulerscheZahl: we tried to work on the same code for hashcode once. was a nightmare, never again
+ Psyho: that helps, but everyone is in a different timezone
+ Psyho: having shared codebase would help a lot, but then we would have to train on that
+ Psyho: too much preparation&#160;:)
+ Astrobytes: just make sure you know which one is which before you're printing ycsvenom either by ID or position in storage container and you'll be fine
+ eulerscheZahl: i spent more time on refactoring as i disagreed on how to store the input than actually solving the problem
+ ycsvenom: thanks Astrobytes
+ Astrobytes: was that when you did the live coding IDE-sharing thing euler?
+ Psyho: if you train together for long enough, you develop similar practices
+ eulerscheZahl: VS Code live-share
+ ycsvenom: i learned Clean coding before coding eulerscheZahl :smiley:
+ Astrobytes: yeah that
+ eulerscheZahl: also had a bug: i just scrolled down. it seemingly scrolled up again so i kept scrolling
+ Isaax: hello
+ eulerscheZahl: until illedan said "why do i have the same block of code 15 times?"
+ Astrobytes: yes I remember that
+ eulerscheZahl: then VS Code crashed
+ Astrobytes: :tada:
+ Psyho: oh, one thing that also helps is one person dedicated to test analysis
+ Psyho: finding special structure in tests etc
+ Illedan: When did I say that?
+ kovi: as the slowest coder, im the analysis and idea guy
+ eulerscheZahl: 2 years ago or so
+ Astrobytes: ages ago
+ Illedan: Oh
+ eulerscheZahl: fun times
+ Illedan: I have the same block of code 5 times now
+ Illedan: lol
+ Illedan: Checking the Max Id of monster on map
+ eulerscheZahl: but that's bad software design
+ Psyho: "idea guy" sounds like the most hated person on the team :D
+ struct: This symmetricTruncate must be the most annoying thing ive faced
+ Isaax: hello someone can tell me <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/skylines">https://www.codingame.com/ide/puzzle/skylines</a> what is the validator 5?
+ Astrobytes: nope
+ Isaax: no problem then
+ eulerscheZahl: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/58362af7-de55-4626-9130-06eb05d0f381">http://chat.codingame.com/pastebin/58362af7-de55-4626-9130-06eb05d0f381</a>
+ Astrobytes: try posting in the forum help thread
+ Isaax: eulerscheZahl thanks
+ eulerscheZahl: oh, i shared the validator already
+ Astrobytes: so I see :smirk:
+ eulerscheZahl: good night
+ struct: gn
+ Astrobytes: see you tomorrow, sleep well
+ dbf: good night!
+ Illedan: gn
+ kovi: psyho, i rejected for a long time based on being slow...than accepted invitation few years ago
+ Astrobytes: I would reckon that a kovi on the team would be beneficial regardless
+ einaj: wow, I optimized a few parameters and suddenly jumped up 100 ranks. Sometimes just a small change in stuff like the heros "resting" positions can really mean a lot
+ Psyho: I feel that everyone believes that they are slow
+ Psyho: usually everyone is slow when coding something non-trivial
+ Astrobytes: Unsurprising given the level of the competition
+ KiwiTae: Astrobytes o/
+ KiwiTae: the polar bear is nowhere to be seen&#160;:(
+ Astrobytes: KiwiTae :hugging: ah he was here earlier
+ KiwiTae: reallyyyyy
+ ZarthaxX: KIWOOO
+ ZarthaxX: im here :P
+ Astrobytes: see!
+ ZarthaxX: got summoned
+ ZarthaxX: just lurking
+ dbf: tried to add attacker and now loose to my previous version in ~100 moves&#160;:(
+ Astrobytes: dbf: come on, if it worked first time it just wouldn't be the same
+ tantheman: WAZZA
+ KiwiTae: so far I got a bot crashing when he sees a spider :grin:
+ darkhorse64: pure arachnaphobia
+ ycsvenom: maybe he's just afraid
+ Astrobytes: darkhorse64 :wave:
+ tantheman: onions
+ Astrobytes: are you in need of medical assistance or something?
+ tantheman: yep
+ AngXinhGai: hello
+ struct: hi
+ tantheman: ghana provides bananas
+ Astrobytes: I think someone needs to go to youtube or something
+ RobinV: rens
+ cegprakash: threat_for is not at all useful lol..
+ cegprakash: threat is off for a long time
+ struct: why not?
+ struct: its not
+ cegprakash: do we get threat on as soon as monsters spawn?
+ cegprakash: and comes into fog?
+ struct: if you can see him yes
+ l10r: does turn time includes the time I get the imput?
+ Astrobytes: it begins after you read the first input
+ Astrobytes: so start your timer then
+ l10r: ok thanks
+ struct: I dont even know if this behaviour is intended
+ struct: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/623090424">https://www.codingame.com/replay/623090424</a>
+ struct: Check turn 23
+ struct: When I use control
+ struct: Its snaps back to the game zone
+ struct: :p
+ struct: my control spell was supposed to be full up
+ LaurensD: Looks like a ultimate troll to me
+ jacek: isnt out of game evaluated as last?
+ Astrobytes: interesting
+ struct: yes jacek
+ struct: but is more about how it snaps to the game zone
+ struct: despite being already outside of it
+ struct: as you can see wind has a different behaviour <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/623093841">https://www.codingame.com/replay/623093841</a>
+ struct: So if I check which spiders are in my base radius i must check if they are inside the game zone
+ cegprakash: omg hero order is random in input
+ cegprakash: I've to sort by ID before storing
+ cegprakash: this is so bad
+ criag: ooof
+ TobiasA: it seems this game has a lot of bug:wink:
+ struct: it is?
+ TobiasA: you see what i did there
+ ZarthaxX: bug = spiders
+ ZarthaxX: :P
+ ZarthaxX: struct is confuised
+ Kukiss: struct, was this wind with vector 'up'?. The animation looks like it is going a bit to the left.
+ struct: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/623094880">https://www.codingame.com/replay/623094880</a>
+ struct: this one is correct
+ cegprakash: I always command hero1 to pos1 and and hero2 to pos2 but somehow they swap their position in some random turns
+ cegprakash: coz heroes are swapped in input
+ struct: The wind one works fine
+ struct: Its described to be like this
+ struct: I was just confused about control
+ Kukiss: thanks for 2nd replay.
+ tantheman: ayo sub to my twitch
+ TheCockmaster: no
+ Astrobytes: tantheman &lt;--- struct
+ struct: change your names
+ Astrobytes: c**kmaster yeah but the other is just spamming
+ Kyraleese: ugh, my motivation keeps dropping for this
+ cegprakash: okay it's not the heroID issue.. the distance issue.. 
+ cegprakash: my bad
+ cegprakash: bad coding I think
+ Astrobytes: Ballmer peak achieved, time to do something interesting
+ Astrobytes: see ya later
+ Waffle3z: I submitted a while ago and my rank keeps climbing, looks like everyone else is getting worse over time
+ Waffle3z: at this rate I'll be 1st in a couple days
+ WannaBeHum1n: need this kinda confidence in my life
+ Kukiss: you countered the future meta? :D
+ Waffle3z: currently in 322, not using shields at all yet
+ Waffle3z: once I do then I'm out of ideas and can resume imagining how to get useful depth from a simulation
+ SabertheLost: When is silver released?
+ msumera: tomorrow\
+ jacek: by heating silver oxide
+ SabertheLost: ok, nice. increased from 600 to 155 by only using wind spells
+ Ketroc: just defending and WINDing will win a lot through wild mana victories
+ SabertheLost: yeah, but you need to get the wild mana for the scoring. 
+ andrefpoliveira: defending and winding and I'm 264&#160;:)
+ struct: Nice
+ struct: I didnt believe it at first when someone said that they sim 8000 turns to see if a mob is a threat or not
+ Scarfield: o0
+ struct: <a rel="nofollow" class="external free" href="https://github.com/CodinGame/SpringChallenge2022/blob/3297c5714be55f900028750e8ecb8b51d6aa4551/src/main/java/com/codingame/game/Referee.java#L913">https://github.com/CodinGame/SpringChallenge2022/blob/3297c5714be55f900028750e8ecb8b51d6aa4551/src/main/java/com/codingame/game/Referee.java#L913</a>
+ Wontonimo: that's just silly
+ Scarfield: then this for (int idx = 0; idx &lt; basePositions.size(); ++idx)
+ VizGhar: what? o.O
+ VizGhar: silly indeed
+ struct: I'm sure there is some geometry stuff
+ struct: to check if a line intercepts a circle
+ struct: or something
+ Illedan: LOL
+ Illedan: that code
+ Scarfield: sounds impossible struct, nobel prize winning difficulty
+ VizGhar: for 8000 angles? :P there is for loop inside :D
+ LostDragon: anyone else having troubles with playing ide code leading to unreproductible timeouts?
+ struct: are you starting the timer on the right spot?
+ Q12: Scarfield I'm just working on it, think I found a way
+ Scarfield: :o
+ yhyoxx: i thought it was isThreat()=&gt;direction.intersects(base) 
+ VizGhar: If it's working...
+ LostDragon: I have had timeouts at 5 different turns depending on the replays i did, all with the same seed, and 2 of which with an ai strait from the arena that seemed to work for the whole afternoon
+ struct: LostDragon how much time are you using per turn?
+ VizGhar: or you didn't end your output with newline
+ cegprakash: I just added something crazy :D
+ cegprakash: I get crazy farm now
+ jacek: :scream:
+ cegprakash: what jacek
+ VizGhar: he lost his mind from your crazyness
+ cegprakash: so beautiful to watch my bot xD
+ cegprakash: at elast the defenders
+ msumera: show the replay then&#160;:)
+ cegprakash: anyone has a seed with too many monsters
+ cegprakash: I'll share replay
+ cegprakash: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/623154011">https://www.codingame.com/share-replay/623154011</a>
+ cegprakash: check last 70 turns
+ cegprakash: crazy defense with 2 heroes
+ cegprakash: while my attacking hero does nothing ;P need to improve
+ VizGhar: one shield and your defense is dead :P
+ cegprakash: lol
+ cegprakash: true
+ iTsluku: move 214 top right is funny
+ iTsluku: hahaha
+ msumera: you could also let them come a bit closer in the beginning and save some mana&#160;:)
+ VizGhar: cegprakash just random play against you :P <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/623157378">https://www.codingame.com/share-replay/623157378</a>
+ cegprakash: lolx
+ cegprakash: both my defenders sux
+ cegprakash: lol
+ cegprakash: nice strat
+ cegprakash: how are u only 315 with this strat
+ cegprakash: looks legit
+ Nerchio: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/623158827">https://www.codingame.com/replay/623158827</a> just random play against you VizGhar
+ VizGhar: Nerchio I wasn't flexing :D
+ PatrickMcGinnisII: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/623158858">https://www.codingame.com/replay/623158858</a>
+ PatrickMcGinnisII: interesting
+ cegprakash: guys wait for my shield
+ cegprakash: -_-
+ cegprakash: wait for my attacker to improve
+ VizGhar: :D gogo
+ msumera: ok, me too <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/623159953">https://www.codingame.com/share-replay/623159953</a>
+ Nerchio: VizGhar bugs walk into your base like its their home
+ WannaBeHum1n: wait 4 me to get top 1 with a peaceful run
+ iTsluku: Nerchio u are top100 with only defense? lul
+ VizGhar: Nerchio its bot from first day of contest
+ Nerchio: iTsluku yeah offense is overrated
+ PatrickMcGinnisII: i dropped 500 rank overnight
+ PatrickMcGinnisII: gonna see if i can get them back
+ iTsluku: Nerchio i found a bug on your end
+ iTsluku: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/623163395">https://www.codingame.com/replay/623163395</a>
+ Nerchio: yeah I just introduced this
+ Nerchio: already fixed submitting again
+ Nerchio: now you can lose without me crashing
+ cegprakash: I fixed my attack
+ cegprakash: now give replays if u guys dare :P
+ msumera: ok, just wait a minute
+ Nerchio: you need to be in top 1000 cegprakash i think
+ cegprakash: 1 sec
+ cegprakash: check now I'm in top 1000 now
+ cegprakash: refresh leaderboard
+ msumera: ok, it's running
+ cegprakash: my attacker is kinda bad against 3 defenders
+ cegprakash: it'll be nice to compare against ppl with 1 attacker, 2 defenders
+ cegprakash: coz mine is 1 attacker, 2 defender
+ msumera: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/623167342">https://www.codingame.com/share-replay/623167342</a>
+ Nerchio: how about you stop bugs from walking into your base first
+ msumera: i also have 1 attacker, 2 defenders
+ JaredH: all attackers
+ Tuo: is it possible to check if your hero is/was under control with the isControlled parameter?
+ cegprakash: msumera ty I think I need to add more wind :P
+ Tuo: im trying but it never triggers
+ msumera: your attacker could also control them to come into my base range
+ msumera: i also noticed i have a lot of bugs with incorrect spells
+ msumera: need to fix that tomorrow
+ DjTrilogic: has anyone tried to generate the json result and put it in the server's file to speed up the simulation&#160;? 
+ DjTrilogic: i'm getting a weird error: The cacheId "$0" does not exist in TextureCache.
+ PatrickMcGinnisII: got my rank back, but yall need to stop working so hard, i'm barely keeping up
+ Greg237: @cegprakash I believe your attacker would be a bit more efficient by using WIND on groups of monsters instead of shielding them individually.
+ cegprakash: @Greg237 I'm just trying butcher2013's meta
+ cegprakash: he lead bronze for over a day
+ Greg237: Well, if I remember well, Butcher's not only using the shield.
+ Greg237: But anyway, it's indeed a good strategy trying to reproduce what the top 1 is doing.&#160;;-)
+ cegprakash: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/623172335">https://www.codingame.com/share-replay/623172335</a> did this guy just use 3 attackers and won against me lulul
+ cegprakash: some ppl are crazy
+ msumera: lol, the wind cannon
+ cegprakash: turn 77 he went savage
+ cegprakash: he done with the boring defense
+ Einbroch: that kind of cheese is easily counterable lol
+ msumera: if you know what he might do
+ msumera: no one expects that 3 defenders will just go and shoot monsters to base from 7000 distance
+ Einbroch: if you have a good defense you clearly can see it coming
+ Einbroch: 10 mana to avoid it is cheap compared to the price the opponent pays (loss)
+ cegprakash: he saw I was defending his base by stealing his monsters and he came for 3 member attack lul
+ cegprakash: crazy
+ msumera: i don't think anyone has defence good enough to counter that now
+ msumera: but its easy to counter that just by counter attacking, the base has no defenders
+ cegprakash: he came in fog
+ cegprakash: :P
+ cegprakash: and suddenly bang
+ Tuo: to my previus question if "isControlled" works for own heroes: it does but because you are under control you cant do shit on that turn, need to wait for next to shield&#160;:)
+ antiwonto: [auto] Tuo be respectful and watch your language<a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/40701/help-center/code-of-conduct">https://www.codingame.com/playgrounds/40701/help-center/code-of-conduct</a>
+ Einbroch: @Tuo or next turn's next turn if your opponent keeps controlling you lol
+ Tuo: oh didnt think of that. what is the counter? or they can just escort any hero across the map?
+ VizGhar: prevention Tuo&#160;:)
+ msumera: escorting you across the map means that basically both you and the enemy doesn't have a hero, and additionally he loses mana
+ msumera: so it's not that good
+ LaurensD: what! you can use control on enemy heroes?
+ LaurensD: interesting
+ msumera: yep, it's working pretty good against defenders
+ Rag: when does silver open?
+ Audatic: tomorrow in about 20 hours
+ Audatic: probably more like 16
+ BrunoFelthes: is there any way to calculate the max allowed distance without use square root or sin/cos to improve the performance?
+ Rag: ty
+ LostDragon: don't do square root, just compare square distances
+ BrunoFelthes: but i want to find the point where is the max distance, not if is inside the max distance
+ LostDragon: the greatest distance from  a certain point?
+ Psyho: just add 1 while you're inside the max distance, problem solved
+ BrunoFelthes: for example, my hero is at the 0,0, and i move it to 1000, 1000, but he will not move to it, it will move a max of 800, where is this point
+ jacek: do you use search to need optimization?
+ jacek: doubt sqrt is bottleneck there
+ BrunoFelthes: how can i calculate the final point?
+ ArnoCo: Why is no one in Silver?
+ BrunoFelthes: yes jacek
+ VizGhar: BrunoFelthes x = 800*cos(); y=800*sin()
+ BrunoFelthes: but cos() and sin() is very expense... no optimization here?
+ jacek: precaculate them&#160;:?
+ VizGhar: ... well precompute all 360 values
+ LostDragon: you seem to be looking for this google search: normalize vector without square rooti should've remembered that one earlier
+ BrunoFelthes: and limit to move only 1' 
+ BrunoFelthes: fair enough
+ VizGhar: for (angle&#160;: 0..359) sin[angle] = sin(angle)...
+ LostDragon: quake had an algorithm for lightning fast square root computations
+ Waffle3z: fast inverse square root
+ Psyho: the improvement was huge but for very old architecture
+ Psyho: (and imprecise)
+ VizGhar: precompute all square roots!!!
+ MAKMED1337: how long to wait to be promoted to next league&#160;?
+ iTsluku: my top left start win% are so much better wtf
+ VizGhar: you forgot mirror something :P
+ iTsluku: @MAKMED1337 idk its kinda random
+ iTsluku: dont see it tho
+ xMizar: Hi all, do we have anyone from Codingame team here? I think i found a bug with Wind spell
+ xMizar: Would like to discuss it
+ RECEBA: Can someone please tell me how do I start moving the players, Im using JS
+ ganbat24: Examples: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/44521be0-6f4f-4576-a916-d1301cdc5de0">http://chat.codingame.com/pastebin/44521be0-6f4f-4576-a916-d1301cdc5de0</a>
+ cegprakash: BrunoFelthes: MOVE followed by two integers (x,y): the hero moves 800 towards the given point.
+ ganbat24: at mos
+ cegprakash: BrunoFelthes use the symmetrical truncate function in referee it's pretty simple to copy paste
+ BrunoFelthes: it uses sqrt, no?
+ cegprakash: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/2288b1ba-dfa4-410e-9843-66b5e8bd862a">http://chat.codingame.com/pastebin/2288b1ba-dfa4-410e-9843-66b5e8bd862a</a>
+ cegprakash: I use this
+ BrunoFelthes: i used it, and he normalize, and to normalize, the referee use the length, that use the sqrt...
+ LaurensD: Haha this guy <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/623202853">https://www.codingame.com/replay/623202853</a>
+ ganbat24: bruh how did u loose to that guy?
+ LaurensD: don't have shields plus all are on my base at the moment lol 
+ cegprakash: lol sc2_viag is like "U shall not pass"
+ JohnyDaison: Is Silver finally open or still not?
+ archfan7411: Not yet AFAIK
+ sc2_viag: Am I? lol Testing a few things :D
+ ganbat24: nope they were not all there 1 was at base
+ LaurensD: silver opens in 20 hours from now; as far I have recently heard
+ ganbat24: i didnt have time to use wind&#160;;(
+ ganbat24: Guess ill try it for a couple hours after kickstart
+ ganbat24: How to create text messages mid game?
+ ganbat24: on top of my hereos
+ archfan7411: append them to the end of commands
+ archfan7411: e.g. SPELL WIND 100 100 Yay
+ ganbat24: oooh okay
+ avdg: hmm not sure how well other ai's are here, but mine does almost everything in less than 1 ms or even half a ms each turn
+ avdg: and after fixing a bug, it's reaching around rank 500 (ai is still not using some spells)
+ Thibauld: Does anyone know the speed of the heroes?
+ Davidceto: 800
+ Davidceto: per turn
+ Thibauld: Thanks
+ avdg: <a rel="nofollow" class="external free" href="https://github.com/CodinGame/SpringChallenge2022/blob/c481d8fcaafbba9e4dbf767ee4d0b4040d088938/src/main/java/com/codingame/game/Configuration.java#L15">https://github.com/CodinGame/SpringChallenge2022/blob/c481d8fcaafbba9e4dbf767ee4d0b4040d088938/src/main/java/com/codingame/game/Configuration.java#L15</a>
+ ycsvenom: anyone has a blank screen when they make a test?
+ ycsvenom: i tried to refresh the page with ctrl+f5 but it didn't work
+ avdg: did you open the developer tools and look for js errors?
+ ycsvenom: this is the major error
+ ycsvenom: TypeError: Cannot read properties of undefined (reading 'resize')
+ avdg: I see no other major errors here otherwise though
+ ycsvenom: i have that one too
+ ycsvenom: in the last line it said 'Possibly unhandled rejection' 
+ avdg: Do you use chrome or firefox?
+ ycsvenom: chrome
+ avdg: recent? (I'm on firefox, so dunno if there are specific bugs)
+ ycsvenom: it worked before just half hour
+ avdg: and it's just the canvas that broke?
+ ycsvenom: yes
+ avdg: may be video driver related, otherwise I don't know
+ avdg: worst case, computer restart (yeah sounds drastic, but had done it a few times in the past)
+ VizGhar: You have these problems often right ycsvenom?
+ avdg: maybe browser restart may be enough, dunno
+ ycsvenom: no this is the first time VizGhar
+ avdg: and maybe there was a server update (though, if you didn't refresh the page...)
+ ycsvenom: i can't do that avdg
+ VizGhar: really? there were somebody with similar error... without solution
+ VizGhar: *was
+ ycsvenom: i refreshed it already with ctrl+f5
+ avdg: mostly, when I have video driver related issues, youtube also stops working
+ Nerchio: it's kinda stupid you can't push on y = 0 or x =0 vector when monster is also y = 0 or x = 0
+ ycsvenom: btw frames still loading even the output still runningthe only thing that isn't working rn is the canvas
+ Ch3oul: Hello guys, when will the silver league open?
+ avdg: Soon I guess, it's mostly only max a few days after the opening
+ avdg: I've seen some bugs with displaying the opening date, they probably removed the date in the user interface for now
+ Nerchio: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/623238782">https://www.codingame.com/replay/623238782</a> 120turn+ wtf?
+ struct: you are using wind a bit to the top
+ struct: which makes the spider hits the top
+ struct: and since its 0
+ Nerchio: what do you mean, I cast for y=5
+ struct: ah
+ Nerchio: trying to push it away
+ struct: but your hero
+ struct: is not at 0
+ struct: your hero y
+ Nerchio: I thought it didnt matter where my hero is 
+ struct: it does
+ struct: its in relation to your hero position
+ Nerchio: ok time to go back to the drawing board
+ ycsvenom: VizGhar it worked nowchrome suddenly has a new update i don't why it has that weird behavior before updating
+ Husoski: My first competition and my first clean compile/test bot just made it to bronze.  This is all simple if/else logic.  When does serious AI become necessary?
+ BrunoFelthes: huahauhua
+ BrunoFelthes: are you top 10?
+ Kukiss: For the moment a Bronze is the highest league.
+ VizGhar: Husoski good job. You made heuristic bot. You can use it to simulate opponent movements and write serious AI that beats your heuristic...
+ VizGhar: that's sometimes how it works&#160;:) you can write GA/SA algos to find best step in order to hit most mobs at once. You can write BFS/Beam to select one step from your "collection of allowed steps" and so on
+ VizGhar: But if this is your first competition, I doubt, you will move far from if/else statement&#160;:)
+ Kellthazar: That's was a bait I think... XD
+ Kukiss: I see that 34 lvl now..
+ Husoski: VizGhar Thanks for the suggestion.  It feels more like "basic strategy" than "heuristic", though.  I wen't and looked at the intro video later and found I was doing some of the same stuff as  he was.
+ Husoski: Kukiss --- lots of puzzles solved to get that 34, not competitions.
+ VizGhar: bait? why? I just answered... I'm if/elsing too right now...
+ VizGhar: But will for sure use some optim algo later on (if there will be some time)
+ VizGhar: seeing how I'm missing good hits
+ Kellthazar: No from you VizGhar, just kidding also :D
+ Westicles: the dumb guys who try hard usually get stuck in silver
+ Husoski: Dang!  Fog of war *helped* my strategy!
+ VizGhar: yup... I'm mid gold guy by default&#160;:) I know algos, but can't use them properly :D
+ Kukiss: Husoski, competitions are the best. Even if don't get high ranks, it is nice to take part in a challange every1 talks about here. Good you tried&#160;:)
+ Kukiss: Husoski, competitions are the best. Even I if don't get high ranks, it is nice to take part in a challange every1 talks about here. Good you tried&#160;:)
+ Westicles: this one is good for the little guy... not just a mcts rollout competition
+ struct: The vx and vy are only updated 2 turns after the control spell is casted?
+ struct: but the isThreat is updated 1 turn after?
+ struct: seems a bit of a mess
+ m7sn: how do i do this
+ VizGhar: finally got 2 hrs to code something... I wonder how much I'll drop in ladder :P
+ Kellthazar: i think that I got some improvement on my algorithm... but I'm afraid to push it to the arena :D
+ VizGhar: meh... you got 11 days dont be scared
+ VizGhar: You will see how the situation will saddle after gold boss introduction
+ struct: VizGhar do you know if what I described is intended
+ struct: Its a bit strange
+ VizGhar: ah... sry I've not deep dived into sources
+ struct: its fine
+ struct: I'll make a forum post asking
+ struct: Because it doesnt make much sense that one updates and other doesnt
+ VizGhar: CONTROL spells are applied to the targets and will only be effective on the next turn, after the next batch of commands.SHIELD spells are applied to the targets and will only be effective on the next turn, after the next batch of commands. Does not protect from a spell from this same turn.
+ struct: yeah
+ struct: but threat_for is updated
+ struct: despite vx and vy still remaining the same
+ VizGhar: very strange hmm
+ struct: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/60f560ee-1a02-4157-8d13-bd9d5336fdbd">http://chat.codingame.com/pastebin/60f560ee-1a02-4157-8d13-bd9d5336fdbd</a>
+ struct: these are the inputs but I'll make a post
+ VizGhar: :thumbsup:
+ VizGhar: I didnt take days off for this contest. I was painting half a day :P No way I can help with technical details... I'll go nearly pure heuristic
+ cegprakash: WIND animation is 2 seconds?
+ cegprakash: 2 turns?
+ struct: no?
+ struct: its 1 turn cegprakash
+ struct: its instant
+ cegprakash: I mean the animation duration
+ struct: its 1 frame
+ cegprakash: it look like after we use WIND first turn only pushes half distance then half distance in next turn
+ struct: nah
+ JulienKerlero: I feel stuck
+ cegprakash: may be we get wrong velocity when we use wind
+ cegprakash: instead of 1200 we get smaller velocity then
+ cegprakash: like 400
+ struct: you dont get velocity at all
+ struct: because its casted between 2 turns
+ cegprakash: when we blow wind it's velocity becomes 0 for a turn?
+ struct: it wont impact next vx or vy
+ struct: during the wind only
+ struct: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/623287478">https://www.codingame.com/replay/623287478</a>
+ cegprakash: say I print WIND next turn the position I get in input would be position + velocity + 1200 and the new velocity will be 0?
+ struct: look at frame 21 and 22
+ struct: I casted wind 1000 6570
+ struct: the spider 13 x will go from -330 to 1870
+ ycsvenom: how do people change nametag
+ struct: On your profile
+ ycsvenom: it will be perfect for testing
+ cegprakash: debugger only show position not velocity
+ struct: the velocity doenst change at all
+ struct: unless you pushed it into a basew
+ struct: or outside the base
+ ycsvenom: which profile?
+ struct: your profile
+ ycsvenom:  i mean hero nametag
+ struct: ah
+ struct: just cout &lt;&lt; "WAIT message" &lt;&lt; endl;
+ struct: space after command and then the message you want
+ ycsvenom: the last parameter would be the message?
+ struct: yes
+ ycsvenom: thanks
+ ycsvenom: what is the maximum league rn?
+ JulienKerlero: bronze
+ ycsvenom: so i am in the maximum oneis it good that i am 1492nd?
+ JulienKerlero: depends on you lol
+ ycsvenom: that hurts 
+ Enknable: its good to stay in the front of the pack. I think
+ Enknable: lots of heuristics so you can be closer to the emerging "meta"?
+ JulienKerlero: I would be happy in the top 200
+ Enknable: but eventually the Legends just gonna start dropping Terminator level shit
+ antiwonto: [auto] Enknable be respectful and watch your language<a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/40701/help-center/code-of-conduct">https://www.codingame.com/playgrounds/40701/help-center/code-of-conduct</a>
+ JulienKerlero: but i'm far
+ Enknable: stuff*
+ ycsvenom: what are you using rn?
+ Einbroch: shit shit shit shit @antiwonto deal with it
+ antiwonto: [auto] Einbroch be respectful and watch your language<a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/40701/help-center/code-of-conduct">https://www.codingame.com/playgrounds/40701/help-center/code-of-conduct</a>
+ Einbroch: :cop:
+ Phibonacci: Can we fight our friends or do we both need to be top 1000 for that?
+ Enknable: same league I think
+ Phibonacci: The three of us are in Bronze but we can't see each other.
+ Phibonacci: 2 of my friends could fight each other yesterday when they were both top 1000, so we assumed it might be a strange restriction
+ struct: yeah need to be 1000th
+ struct: of same league
+ Enknable: dang
+ ycsvenom: i am 1400 in bronze
+ ycsvenom: i can't get better
+ ycsvenom: what's your rank struct?
+ MACKEYTH: You can do it!
+ Kukiss: You still have a plenty of time
+ struct: 1860
+ struct: I havent coded anything yet
+ struct: No motivation
+ ycsvenom: you are waiting for silver or gold&#160;?
+ struct: I dont know yet
+ ycsvenom: no i can't MACKEYTH
+ JohnyDaison: I used to be around rank 600. I kept working on my code and now I'm like 1100. :D
+ MACKEYTH: High five. I'm in the same boat.
+ ycsvenom: wonderful JohnyDaison :joy:work hard more and you will be at 1600 
+ Kukiss: Finally! gave my units a Wind spell and it kinda works in defense.
+ ycsvenom: 1498 before wind1360 after windso i say push itif you are sure about your wind implementation
+ cr1: this i a cool website tbh
+ ycsvenom: you made it cool after you got in cr1
+ struct: Kukiss on 600th you should be safe
+ struct: for promotion
+ Kukiss: ok, cool
+ ycsvenom: can i challenge specific one&#160;?so i can send it's parameters to IDE and debug on it
+ ycsvenom: like challenging the first from beginning 
+ JohnyDaison: yes
+ ycsvenom: how?
+ JohnyDaison: just delete the the one that DOESN'T say IDE CODE from Players
+ JohnyDaison: then add who you want
+ mybk: you can also, check your last battles and debug a specific battle by clicking on show «the battle» and click the «Send Game PArametesrs To IDE» 
+ cegprakash: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/623319703">https://www.codingame.com/share-replay/623319703</a> omg
+ cegprakash: butcher2013 always butch me
+ struct: xD
+ cegprakash: I was in shock lol
+ cegprakash: last 20 turns
+ JohnyDaison: Why si your attacker not moving?
+ struct: no mana
+ struct: it only seems to use wind
+ ycsvenom: i don't to check my last battlesi want to challenge the first one and debug on that game
+ cegprakash: JohnyDaison he likes to chill
+ cegprakash: lol
+ Ajaiy: cegprakash are you in Bronze league?
+ cegprakash: aye aye Ajaiy
+ JohnyDaison: ycsvenom did you manage to do it or were my instructions unclear?
+ cegprakash: after 100 turns expectations = 300+ mana like Butcher.. Reality =&gt; 10 mana
+ MACKEYTH: Oh. That worked pretty well.&#160;:)
+ MACKEYTH: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/623328305">https://www.codingame.com/replay/623328305</a>
+ Glyptod0n: so you can't control which hero to commit the action by using their id huh
+ JohnyDaison: you control that by the order of actions
+ Ketroc: na, but if you keep them in an ordered list it shouldn't be an issue
+ MACKEYTH: The first order you give goes to the first of your heroes in the entity list, the second to the second, and the third to the third
+ Glyptod0n: thanks
+ struct: the entity order given of the lists is ordered right?
+ struct: entity order of the heroes*
+ MACKEYTH: Yes
+ struct: ty
+ Ajaiy: wait what
+ Ajaiy: How do i share replays?
+ Ajaiy: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/623333340">https://www.codingame.com/replay/623333340</a>
+ cr1: <a rel="nofollow" class="external free" href="https://prnt.sc/MGerNLnCXa9y">https://prnt.sc/MGerNLnCXa9y</a>  like how i can do that XD
+ Ajaiy: I'm super confused
+ Ajaiy: Is this a bug or am I not realizing something?
+ struct: What is a bug Ajaiy?
+ Ajaiy: I scored more mana than Astrobytes in the replay (it shows like that) but it says that AStrobytes won
+ Ajaiy: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/623333340">https://www.codingame.com/replay/623333340</a>
+ Glyptod0n: their wild mana is greater than yours
+ Ajaiy: ohhhh i get it
+ Glyptod0n: In case of a tie, you have gained the highest amount of wild mana: mana gained outside the radius of your base. 
+ Ajaiy: so wild mana is mana remaining + mana used?
+ struct: no
+ Glyptod0n: no, please see Victory Conditions section
+ struct: its mana you collected from the enemies you attack with your heroes that are outside your base
+ Ayza: how do you print without interfering with the program execution?
+ Ajaiy: okay
+ Ajaiy: thanks
+ struct: print to stderr
+ struct: default code should tell you how
+ Ayza: alright thanks
+ JohnyDaison: I feel like they made the documentation too inconspicuous under that game window, people don't seem to be reading it much.
+ struct: Some documentation is confusing though
+ JohnyDaison: I finally added an attacker, let's see me drop another few hundred ranks...
+ JohnyDaison: Nope, I'm back to top 1000. Yay!
+ ClockSort: congrats
+ Ajaiy: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/623337474">https://www.codingame.com/share-replay/623337474</a>
+ Ajaiy: JohnnyDaison Thanks for the extra help
+ JohnyDaison: Yeah, the attacker needs a bit more work...

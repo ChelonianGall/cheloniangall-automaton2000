@@ -1,0 +1,738 @@
+ pipebits: :v
+ Surina_Quinn: does anyone have advice for a beginner? I'm trying my best to learn but it all just gets jumbled in my head and it makes me feel...low
+ Goulstem: @Surina_Quinn I suggest you pick a project that interests you! This is the best way to learn, by far. Then you have an application for all your knowledge. Also, key: the more something pulls you (inspires you/motivates you), the less you have to push yourself! :D
+ Passifi: Salut 
+ jacek: ohai
+ Passifi: woo codin game runs badly on the rasberri pi Im having crysis flashbacks here :P
+ jacek: robo :eyes:
+ MSmits: what'd he do now?
+ jacek: othello. but were safe
+ MSmits: ah
+ DaniloKrkeljic: hey, idk if this is the place to ask, but im getting correct results in the defibrillator game on everything but "Complete File", is this a bug&#160;?
+ jacek: with your program :o
+ DaniloKrkeljic: im gettting correct results on "Complete file 2" though
+ MSmits: the reason you have different testcases is to test different parts of your program. It is completely natural to fail one and succeed the other
+ MSmits: find out how the testcases are different
+ MSmits: use debug statements to split up your program and see what it's doing
+ DaniloKrkeljic: Ok, ty very much, appreciate it. Ill look into it.
+ MSmits: np, good luck
+ Westicles: wow, such a highly literate contrib approved.  things are looking up
+ gatitos: is it me or does the site UI keep changing
+ gatitos: sometimes "complete" is under "Activities"
+ gatitos: sometimes it isnt
+ jacek: theyre changing header and some people get it, some not
+ Andrew97: has anyone finished last weeks challenge? Battle Tower
+ Angecide: Hi Jacek when doing 1ply check to add bias toward moves that win miniboard/block enemy win, do u also take into consideration if the move would give enemy a win on the next board?
+ Angecide: or technically speaking, that would be a 2ply check
+ Angecide: so I guess not
+ jacek: no, too costly for meh
+ jacek: but i penalty moves that would end up on finished boards, giving enemy mobility
+ Angecide: ah yeah that's a fairly lightweight check so that could work too
+ jacek: with that 2-ply check, actually with some generated tables that could be cheap
+ _Time_Lord_: bus
+ Angecide: yea but the 2ply check can get complicated because you can't keep avoiding capturing a board in favor of not giving enemy one, so at some point u need to kind of evaluate when the tradeoff is in your favor, I guess one easy tradeoff that is in ur favor is getting the middle miniboard in favor of any of the side ones
+ MSmits: the problem with uttt is that there are exceptions to every rule Angecide
+ MSmits: middle is not always better than other boards
+ MSmits: what jacek means is that he gives a penalty in selecting a move that gives the opponent this freedom, but he does still select the move
+ MSmits: it simple has a penalty in UCT
+ MSmits: simply
+ jacek: eeyup
+ MSmits: alternatively, in the random rollout, you can try to disallow them altogether, under some circumstances
+ MSmits: just dont be too strict about refusing these moves, because sometimes, especially in the late game, you have no choice
+ MSmits: or only poor alternatives
+ jacek: i do this only in uct
+ Angecide: yea that's true, I guess the bias should just work as guidlines and not some authoritarian rule, and the uct will hopefully figure out if it is worth it or not
+ MSmits: exactly
+ MSmits: though there is no problem with an "authoritarian rule" as long as it  is limited properly
+ MSmits: for example. you can disallow these moves in the first 20-25 plies or so and it will be fine
+ MSmits: because even if there exists a finished board, it's probably never gonna be a good idea to give an opponent a free move
+ Angecide: yea, like enforcing teccles heuristic
+ MSmits: right, that heuristic is one of the most reliable ones
+ MSmits: but it's not perfect
+ MSmits: I have seen gamestates, especially ply 20+ where using it, hurts you
+ MSmits: turning a solved win in a draw, or a solved draw into a loss
+ MSmits: possibly using it up to ply 18 or so is 100% safe... but it is hard to say without solving the game
+ jacek: yet
+ MSmits: right&#160;:)
+ MSmits: just improved my code of the rings a bit with pruning, rank 20 now. Small steps. I need to figure out a way to do the loop stuff
+ MSmits: so far still doing the loops manually
+ jrke: whats the difference between b += 1&lt;&lt;3;and b |= 1&lt;&lt;3;
+ RoboStac: it depends what b is before hand. If bit 3 is 0 then they're the same.
+ RoboStac: if bit 3 is one the second one does nothing but the first still adds 8 
+ jrke: oh
+ jrke: btw whats the opposite of b|=1&lt;&lt;2;
+ jrke: like i wanna make bit 2 turn 0 from 1
+ RoboStac: b &amp;= ~(1&lt;&lt;2) 
+ RoboStac: thats a tilde (bitwise not), not a minus sign btw 
+ jrke: yeah its ~
+ MSmits: alternatively, if you know for sure the bit is set you can do b ^= 1&lt;&lt; 2
+ MSmits: but if you dont know and just want to make sure it is 0, you use Robos method, but thats 1 extra operation
+ jrke: ok
+ jrke: so it makes 0 to 1 and 1 to 0 right 
+ MSmits: thats what ^ does yes
+ MSmits: ^1 actually
+ RoboStac: it looks like its an extra operation in code but most cpu's have bit set / reset that the compiler can use
+ MSmits: oh, did not know that
+ jrke: so b ^= 1&lt;&lt;2; is perfect for othello i think
+ MSmits: thats another thing jrke, everyone gets to a point where they start to look for little things that would make their code faster, but more often than not, the compiler will recognize and do it by itself. So that's mostly wasted effort
+ MSmits: Robo just shared an example of that
+ jrke: hmm
+ MSmits: but if you like ^=, that's fine
+ MSmits: just be careful about it in case the bit was already 0
+ MSmits: bugs in bit ops are really hard to notice
+ jrke: thank you very much my net is slow so going gtg bye cya
+ MSmits: cya jrke
+ jacek: well it looks simpler
+ MSmits: yeah... readability vs safe coding
+ MSmits: &amp;= ~ is often safer than ^=
+ MSmits: I prefer ^= because I've done this so often now , i dont often make the mistake of flipping a 0 bit
+ MSmits: jrke was asking earlier about the problem with 1 &lt;&lt; 32 instead of 1ULL &lt;&lt; 32. That's an annoying bug that still happens to me
+ MSmits: you dont notice it but it leads to bad crashes
+ MSmits: probably i should just create a set bit function and stop typing it literally&#160;:)
+ Angecide: noo msmits why did u remove the othello bot
+ jacek: huh
+ Angecide: or is it the same one as yesterday?
+ Angecide: or maybe i am misunderstanding
+ jacek: hes 5th
+ Angecide: i read in yesterday log there were some new othello bot that was perfect or something, I wanted to check it out
+ jacek: maybe the 1st one?
+ Angecide: nah I think it was supposed to be better than recurse, I am not sure, maybe I misunderstood
+ DaniloKrkeljic: There is a bug in the defibrillator game, "Complete file" answer is wrong. Are there similar bugs on this website?
+ DaniloKrkeljic: i just dont wanna waste time if its possible the answer is wrong or similar 
+ blasterpoard: DaniloKrkeljic plenty of people, me included, solved that puzzle without any problems
+ blasterpoard: it is likely that the mistake is in your code, not in the puzzle
+ DaniloKrkeljic: i found a forum question with people with the same problem
+ DaniloKrkeljic: distance of calculated defib is smaller than the one form the answer, simple as that
+ blasterpoard: Then how do you explain the 84% community success rate on that puzzle?
+ DaniloKrkeljic: because when you submit you apparently get 100%
+ blasterpoard: I have no problems passing that validator though
+ blasterpoard: *test case
+ DaniloKrkeljic: idk, these guys on the forum said the same thing.. well at least its good to know its not common apparently
+ blasterpoard: maybe if you got 100% desptie that, the problem is that there are not enough validators, not that the test case is wrong
+ VizGhar: well he obviously isn't using right formula&#160;:)
+ DaniloKrkeljic: how come it works for "Complete file 2" then?
+ VizGhar: I believe there were some rounding issues
+ VizGhar: I also failed on one submission and had to fix it
+ VizGhar: Problem #1 you might have is that formula has `x 6371` in itProblem #2 using floats instead of doubles (loosing precision)
+ VizGhar: not sure where the problem was when I was solving it... but you should definitely not blame CG
+ VizGhar: Potential problem #3 decimal separators
+ DaniloKrkeljic: I'm using python float, so it shouldn't be a rounding problem. I'll look into it more i guess. Btw, the data from the website differs from test cases, maybe I'm supposed to build a solution according to that?
+ VizGhar: you are supposed to come with general solution that matches any input it is given&#160;:)
+ VizGhar: <a rel="nofollow" class="external free" href="https://forum.codingame.com/t/defribillators-puzzle-discussion/37/177?u=vizghar">https://forum.codingame.com/t/defribillators-puzzle-discussion/37/177?u=vizghar</a>
+ VizGhar: this guy had probably same problem as you and resolved it too
+ VizGhar: "Ok, got it. Didn’t noticed that the user’s longitude and latitude include commas, too."
+ VizGhar: do not fall into confirmation bias and look for solutions&#160;:)
+ DaniloKrkeljic: No, i did that 1st thing. Anyway thx for trying to help, not gonna clog IRC beacuse of this
+ DaniloKrkeljic: ill post a forum question i guess
+ VizGhar: potential problem #4 radians/degrees
+ VizGhar: yeah go ahead
+ VizGhar: potential problem #5 too long computation
+ VizGhar: but these are the question you can freely ask in IRC as well. Most of the time you just need slight push
+ DaniloKrkeljic: Ok, ty very much Viz&#160;!
+ Astrobytes: Yeah, it's here for a reason. If you have a valid question there are usually people willing to help out&#160;;)
+ IlkerSaxion: How do I start a round and invite a friend?
+ IlkerSaxion: Im very new
+ struct: start a private clash
+ struct: then invite him
+ struct: you can send him the link I think
+ IlkerSaxion: Thank you
+ Saad-py: HI
+ eulerscheZahl: hi reCurse I have a contribution for you. but no mirrored matches&#160;:(<a rel="nofollow" class="external free" href="https://www.codingame.com/ide/demo/870061fb387227ad77e23f33131ca9e40463b7">https://www.codingame.com/ide/demo/870061fb387227ad77e23f33131ca9e40463b7</a>
+ struct: Time to resubmit an improved CSB :D
+ eulerscheZahl: now multiplayer 2048 suddenly seems possible
+ eulerscheZahl: you shift on your own board and spawn for the opponent
+ eulerscheZahl: i'm afk
+ wlesavo: or you shift for both, you and your opponent while still having fixed number generator available eulerscheZahl
+ Pouria2100: elo
+ wlesavo: you may even shift for you and your opp always in the same direction i.e D D R R
+ jacek: huh
+ ErrorRazor: It's not multiplayer when one player plays for both
+ jacek: thats what she said :disappointed:
+ ErrorRazor: lol whut
+ jacek: dont mind me, im being jacek again
+ ErrorRazor: Why is this a conflicting declaration?using clock_t = std::chrono::high_resolution_clock;
+ jacek: clock_t is reserved type
+ Saad-py: HI
+ Saad-py: which language to learn after python
+ Saad-py: for competetive programming
+ JLukeSkywalker: for clash or bots?
+ Char_2C: both?
+ Saad-py: yeah
+ JLukeSkywalker: for clash I would say ruby, for bot programming I would say c++
+ Saad-py: both
+ Saad-py: what do you mean by bot
+ Saad-py: bot CODe (lol)
+ JLukeSkywalker: multiplayer ai games like the othello or tron
+ Saad-py: wtf 
+ Saad-py: There are games for programming
+ JLukeSkywalker: you have a turn time limit, so the languages that run faster let you do more calculations
+ Saad-py: wtf
+ Saad-py: I can't understand
+ JLukeSkywalker: for clash, its about fast coding, so python is great, and for shortest code, ruby is really good
+ JLukeSkywalker: what dont you understand?
+ Saad-py: NOOOOO
+ Saad-py: the bot part
+ JLukeSkywalker: bot programming = there is a game, you write an AI to play the game
+ Saad-py: ok give me an example
+ JLukeSkywalker: are you trolling?
+ DaniloKrkeljic: counter strike
+ JLukeSkywalker: its like half of this website
+ Saad-py: noo
+ Saad-py: OH so you mean controlling games 
+ Saad-py: like I make an AI to defuse the bomb
+ JLukeSkywalker: tron, oware, coders strike back, othello, chess, checkers, ultimate tic tac toe, etc
+ JLukeSkywalker: <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer">https://www.codingame.com/multiplayer</a>
+ Saad-py: OHHHHHHHHHHHHHHH
+ Saad-py: So in this websites we have to code for the game to work and run, YEAH I know them.
+ Saad-py: lmao I am a bot
+ Saad-py:&#160;??
+ JLukeSkywalker: overall programming, if you already know python, its a great scripting language, I would say learn a compiled full OO language
+ Saad-py: you mean OOP
+ JLukeSkywalker: OO=object orientedOOP=object oriented programming
+ JLukeSkywalker: same exact thing
+ Saad-py: I think C++ is really good but then  I think of C#
+ Saad-py: IDK which is better
+ JLukeSkywalker: they are both better in different situations
+ Saad-py: C# is for game devs, app devs
+ JLukeSkywalker: I would say in general c++ is probably better to learn, and you could branch to C# after if you want to work with windows stuff
+ Saad-py: I know a bit of .NET Winforms C#
+ Saad-py: OK thx
+ Saad-py: I will go with C++
+ Saad-py: and btw how old are u
+ Saad-py:&#160;??
+ Saad-py:&#160;??
+ JLukeSkywalker: 23, been programming for 12 years, and been teaching high school and college robotics for 6 years
+ JLukeSkywalker: work as a control systems programmer full time
+ DaniloKrkeljic: xDDD
+ Saad-py: OOF
+ Saad-py: I am -13 
+ Saad-py: Know python very well
+ Saad-py: worked with JS also
+ Saad-py: suck at CSS
+ Saad-py: Did winforms for a month or so
+ Saad-py: less scripting
+ Saad-py: I tried to speedran hackerrank python
+ Saad-py: run*
+ JLukeSkywalker: I learned python, c, java, basic, cobol, fortran and assembly by 15
+ Saad-py: oof
+ Saad-py: NOICE
+ JLukeSkywalker: i kind of program instead of playing video games
+ Saad-py: me too
+ JLukeSkywalker: which is why this site is perfect, kind of both
+ Saad-py: yeah ikr
+ jacek: mhm
+ Saad-py: @JLukeSkywalker
+ Saad-py: Which language u best at
+ JLukeSkywalker: c or assembly 
+ JLukeSkywalker: i guess python and matlab second
+ jacek: really? oO
+ Saad-py: bruh
+ JLukeSkywalker: i program hardware for a living
+ Saad-py: You know so many languages
+ Saad-py: Probably make a startup and go BRRRRRRRRRRRRRRRRR on the internet
+ JLukeSkywalker: once you know how to program and think logically, you can learn a new language in like weeks, and master it in a year or 2
+ Saad-py: yeah
+ eulerscheZahl: except if the paradigm is completely different
+ Saad-py: Imma try C++, my mind keeps changing
+ eulerscheZahl: e.g. learning haskell when coming from C++/Java world
+ Saad-py: I was doing ethical hacking for a month
+ JLukeSkywalker: i hated learning haskell, you are right
+ JLukeSkywalker: still logic though
+ Saad-py: Hacked into my own laptop successfully, and exploited the hell out of it
+ Astrobytes: ...
+ DaniloKrkeljic: wtf is this chat, cmon guys
+ Saad-py: idk
+ Saad-py: NERDS FOR NERDS
+ Saad-py: can anybody do a Ddos on amazon
+ DaniloKrkeljic: ...
+ Saad-py: I would salute you for tht
+ Saad-py: Lmao kidding
+ eulerscheZahl: try it and find out<a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/6127e5b918b4155e0536e89f7157029f30bc">https://www.codingame.com/contribute/view/6127e5b918b4155e0536e89f7157029f30bc</a>
+ Astrobytes: lol, no mercy :D
+ Angecide: that was a yikes comment he made too
+ reCurse: Ethical kicking
+ eulerscheZahl: i went afk after pinging you, not my smartest move. not sure if you saw it recurse: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/614074c4f45bc5120d6d04e98ee334347d54">https://www.codingame.com/contribute/view/614074c4f45bc5120d6d04e98ee334347d54</a>
+ DaniloKrkeljic: yes that is amazon main server
+ Astrobytes: hah!
+ DaniloKrkeljic: bezos mainframe they call it
+ reCurse: Interesting euler, but I wouldn't bother, that's the kind of thing they'll crack down upon very quick like it's a quest map
+ reCurse: *bug
+ eulerscheZahl: probably
+ Astrobytes: (non-minor)
+ eulerscheZahl: but if we use it to stay in the 30s but build a time bank?
+ reCurse: I vaguely recall them being concerned about replay size or something
+ reCurse: Though I did a pretty good job on that if I say so myself
+ eulerscheZahl: oh, you tried to get around the SDK too?
+ reCurse: Well I didn't use the GEM, so at least an order or two of magnitude smaller replays
+ eulerscheZahl: ah, good job on replay size
+ eulerscheZahl: SDK replays are huge as there is no domain knowledge
+ reCurse: I understand why they did it
+ reCurse: It's just newbie friendly at the cost of being very inefficient
+ eulerscheZahl: compressing 2048 for 1h+ replay duration was fun :D
+ reCurse: So CG in a nutshell
+ reCurse: Sorry, bad mood today I think
+ struct: replay size has more impact than the time the total game takes?
+ eulerscheZahl: we still have the possibilities to code the UI in JS ourselves, so i'm fine with an inefficient SDK
+ reCurse: There's all kinds of impacts
+ reCurse: I just remember this being brought up for 10ms turns
+ reCurse: Maybe there's other overheads I don't know about
+ struct: I see, I remember the 1MB replays when atari go was in WIP
+ reCurse: lol
+ struct: he was drawing the board every frame
+ eulerscheZahl: redrawing the whole game instead of updating single entities
+ eulerscheZahl: (╯°□°）╯︵ ┻━┻
+ reCurse: The cost you pay for making things too accessible
+ eulerscheZahl: in my very first try i made the same mistake
+ eulerscheZahl: but at that time there was no documentation, only UTTT
+ eulerscheZahl: and pong
+ reCurse: Reminds me of the game I wanted to make. Meh, oh well
+ jacek: TIL the crazyhouse white has winrate about 85%
+ reCurse: Uh?
+ reCurse: Where did you get that from
+ jacek: <a rel="nofollow" class="external free" href="https://lichess.org/forum/game-analysis/is-crazyhouse-a-force-win-for-white?page=2">https://lichess.org/forum/game-analysis/is-crazyhouse-a-force-win-for-white?page=2</a>
+ jacek: and on talkchess
+ reCurse: Interesting
+ jacek: <a rel="nofollow" class="external free" href="http://talkchess.com/forum3/viewtopic.php?f=2&amp;t=76382&amp;start=60">http://talkchess.com/forum3/viewtopic.php?f=2&amp;t=76382&amp;start=60</a>
+ reCurse: Welp glad I retired it then
+ reCurse: Up to anyone's guess whether 960 would help or not
+ jacek: on the other hand chess is dying from draws :c
+ reCurse: Yeah that's one reason I got so interested in shogi
+ reCurse: No draws
+ reCurse: I wish there were as many game database available as for chess, would be possible to train a human player there
+ jacek: why would you train human player
+ reCurse: To learn the game better
+ Angecide: wouldn't it be possible to infer strategy from non-humanlike ai?
+ reCurse: I doubt it
+ reCurse: You could go into a dangerous line with only one viable answer 10 plies long, but ends up winning for you
+ reCurse: Trivial for AI to compute
+ jacek: on CG, within 50ms...
+ reCurse: How are you going to see that though
+ reCurse: No forget CG
+ NASIRUDDIN: hey
+ jacek: that gave me an idea.. to generate piece square tables from my bt bot to see how they look like
+ reCurse: The thing is, with training on human games and some biased search
+ reCurse: You can get a very very interesting player
+ reCurse: Worked for chess anyway
+ struct: <a rel="nofollow" class="external free" href="https://shogidb2.com/latest">https://shogidb2.com/latest</a>
+ reCurse: One that beats you and you can see why
+ jacek: really?
+ jacek: like trying to mimic human?
+ reCurse: Yeah
+ Angecide: I see, it's about generating sensical moves/strategies rather than obscure ones
+ NASIRUDDIN: hey guys
+ reCurse: It's about training your inner eval
+ NASIRUDDIN: :heart_eyes:
+ reCurse: There is only so much tactics you can compute
+ PatrickMcGinnisII: reCurse dies any boss in chess make draw offers?
+ Angecide: yeah that makes sense
+ NASIRUDDIN: hey
+ PatrickMcGinnisII: does
+ struct: Dont know if that site allows for an easy way to download matches though
+ reCurse: It probably doesn't have enough
+ reCurse: I'm talking hundreds of millions
+ reCurse: Like lichess
+ struct: ah, its only 550k games
+ eulerscheZahl: good enough to for such a difference in winrate to be significant
+ kovi: shogi was implemented already with mu0, want it?
+ kovi: wasnt
+ reCurse: Yeah but that's not what I'm talking about
+ reCurse: Training a human player
+ kovi: oh, i c
+ Angecide: it almost sound like it could be possible to train an ai to be humanlike, i.e. prune moves that does; "go into a dangerous line with only one viable answer 10 plies long, but ends up winning for you"
+ reCurse: It is
+ reCurse: I've done it, sort of
+ reCurse: I had plans but scrapped them when I realized how it would make cheating go out of control
+ Angecide: cheating in which context, real life?
+ reCurse: Online
+ Angecide: oh I see, yea I could see that
+ reCurse: PatrickMcGinnisII Sorry I missed your question, no they don't
+ reCurse: Is there any point to bandas or is it fundamentally unbalanced?
+ PatrickMcGinnisII: tx, deciding on what input to bother with
+ jrke: how can i check that bit 2 is 1 or 0?for bitboards
+ reCurse: x &amp; (1 &lt;&lt; 2)&#160;?
+ PatrickMcGinnisII: (x&gt;&gt;2)&amp;1
+ PatrickMcGinnisII: oh great, my gpu is under attack again
+ reCurse: Gotta close that viewer
+ Lathryx: Just got to level 3, I'm loving CodinGame so far!&#160;:) 
+ Lathryx: Kinda seems like CodeWars. 
+ VizGhar: (X/2)%2 :D
+ reCurse: That's bit 1
+ reCurse: Enjoy Lathryx
+ Lathryx: Thanks, I sure will!&#160;:) 
+ VizGhar: it is not&#160;:)
+ reCurse: You did (x &gt;&gt; 1) &amp; 1
+ reCurse: How is it not
+ VizGhar: ah counting from 0 sry :P
+ Lathryx: What language is this? 
+ reCurse: Many
+ VizGhar: (x/4)%2&#160;? :D
+ VizGhar: just trolling
+ reCurse: Accurate trolling is best
+ VizGhar: hmm but I always count bits from 1
+ reCurse: What's next, you're gonna tell me you start indexing at 1?
+ PatrickMcGinnisII: ~(x^4)
+ JLukeSkywalker: matlab is the best language, indexes at 1
+ reCurse: :fire:
+ PatrickMcGinnisII: oops (x*4)==0
+ JLukeSkywalker: dont maple and R also index at 1?
+ eulerscheZahl: in pascal you can declare the first index likearray [50..100] of Integer;thus it's better than matlab?
+ JLukeSkywalker: mathematicians are just annoying
+ reCurse: Heresy comes in many forms
+ eulerscheZahl: also i'm not a fan of proprietary languages in general and matlab in particular
+ reCurse: So octave, whatever
+ eulerscheZahl: except for simulink, i understand why that's popular
+ JLukeSkywalker: i think matlab kind of deserves to be proprietary, it is pretty powerful, and most people that would use it can get it for free
+ reCurse: If it keeps mathematicians nice and quiet and away from coding, all for it
+ JLukeSkywalker: or have their company pay for it
+ eulerscheZahl: i've seen better than matlab for freesagemath.org
+ reCurse: Hmm I heard octave mentioned most shrug
+ reCurse: Don't know how it compares
+ eulerscheZahl: i know octave, same problems as matlab bet close in functionality
+ reCurse: Just had to reverse engineer some matlab code once
+ eulerscheZahl: sage is more like mathematica or maple
+ reCurse: Wouldn't recommend
+ JLukeSkywalker: octave is pretty much matlab without toolboxes
+ JLukeSkywalker: and slightly different syntax
+ eulerscheZahl: and with a slightly modified python parser
+ eulerscheZahl: e.g. ^ is pow instead of xor
+ reCurse: :fire:
+ JLukeSkywalker: lol
+ Westicles: Isn't C# copyrighted property of microsoft?
+ reCurse: No
+ eulerscheZahl: MIT license
+ JLukeSkywalker: they do pretty much control it, but it is free to use/develop
+ reCurse: "control"
+ eulerscheZahl: and sage can do exact math. solving equations, simplifying expressions, ..
+ reCurse: They are the ones moving it forward rather
+ eulerscheZahl: and it even has a rubik cube solver included
+ JLukeSkywalker: if they dont like how you used c#, they will just release the next version that breaks your code
+ reCurse: Umm
+ JLukeSkywalker: no need to sue
+ reCurse: They are extremely conscious about backward compatibility
+ reCurse: Not sure what you refer to
+ eulerscheZahl: i can't remember any of my C# code breaking
+ JLukeSkywalker: I had a bunch of stuff break, but I think because it was super old
+ eulerscheZahl: only on CG, someone missed to include System.Drawing.Common when switching to .net core&#160;:(
+ JLukeSkywalker: think i jumped from 2.0 to 7. something
+ JKSTUDIOS2020: wow
+ eulerscheZahl: 2.0 was the first good C# version
+ eulerscheZahl: added generics
+ reCurse:&#160;?
+ reCurse: Oops
+ reCurse: ^
+ reCurse: Keyboard layouts smh
+ Westicles: pari/gp is okay if you have a thing against octave
+ nandu56: Hi
+ nandu56: I am looking for a job as SDE in a reputed product based company,  for practicing coding, which platform will be better for a little better than beginner?
+ JLukeSkywalker: I would say just work your way through the puzzles, and maybe try one or 2 bot games for some fun
+ jrke: just faced default in othello get timesout
+ jrke: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/524569409">https://www.codingame.com/share-replay/524569409</a>
+ struct: An error occurred (#UNAUTHORIZED): "You must be the owner to share this replay".
+ struct: not sure
+ struct: yeah its random
+ jacek: and its timeout?
+ struct: java
+ Mariowong: mariowong
+ jacek: jacek
+ reCurse: Gotta catch em all
+ JLukeSkywalker: is there a pokemon bot game on here yet?
+ jlon: Hey, is there any way to see the correct solution after a clash?
+ eulerscheZahl: no pokemon
+ JLukeSkywalker:&#160;:(
+ eulerscheZahl: only if another player solved it and shared the code
+ JLukeSkywalker: can also check here to see the problem again and think through it<a rel="nofollow" class="external free" href="https://eulerschezahl.herokuapp.com/codingame/puzzles/">https://eulerschezahl.herokuapp.com/codingame/puzzles/</a>
+ eulerscheZahl: in case of reverse: search for the input given and find the task
+ Taseis: hi guys i am a beginner programmer i just got my bachelor's Degree and i feel like i don't know anything and i can't even solve easy algorithms like the Ghost Legs puzzle ... should i worry about myself or not yet&#160;? (21 years old)
+ JLukeSkywalker: what is your degree in?
+ Taseis: Computer Science 
+ JLukeSkywalker: then imo you should probably be able to solve the easy problems, but most schools suck
+ JLukeSkywalker: dont worry about it, just practice and research how to solve them
+ eulerscheZahl: and once you solved it, look at other solutions
+ JLukeSkywalker: ^^
+ Swagboy: Every part of computer science is different and you often need some time to get used to new things
+ eulerscheZahl: i'm serious. you can learn a few things how to code it more efficiently
+ Swagboy: So from theorical algorithmics to codingame problem solving, there are new things to learn
+ Taseis: Thank you guys i just started using this site as a practice tool and i found it really interesting i just need to remember how  to code again because i was 1 year inactive from programming
+ JLukeSkywalker: most of the easy puzzles are logic and or math, and just bending the code you know to fit it. I think that process is something really missing in our current schools
+ Taseis: You really made me feel great and i'm not joking about it 
+ JLukeSkywalker: they teach you how to code, but not how to apply it, thats what sites like this are for
+ jacek: :o
+ jacek: they taught me theory but not how to code
+ Taseis: Yeah we also had a lot of theory classes and not as many for practicing coding 
+ Taseis: excuse my bad english by the way 
+ JLukeSkywalker: thats kind of what i meant, in my head theory=how to code, applying = coding
+ Taseis: you were right about that 
+ JLukeSkywalker: if you know how to do an insertion sort, but not how or where to use it, its kind of pointless
+ eulerscheZahl: not the article I was looking for but close enough<a rel="nofollow" class="external free" href="https://blog.codinghorror.com/why-cant-programmers-program/">https://blog.codinghorror.com/why-cant-programmers-program/</a>
+ Taseis: nice article i am going to take a look at it :relaxed:
+ rav3n256: is there a way to revisit a clash problem
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://eulerschezahl.herokuapp.com/codingame/puzzles/">https://eulerschezahl.herokuapp.com/codingame/puzzles/</a>
+ VizGhar: You should put the link to FAQ eulerscheZahl&#160;:)
+ VizGhar: or is it already there?
+ Astrobytes: All clashes should output it automatically at the end.
+ rav3n256: or have the option after a clash is over
+ eulerscheZahl: that's too reasonable Astrobytes
+ eulerscheZahl: and a 95% problem
+ Astrobytes: heh heh
+ VizGhar: let's ask AutomatonNN maybe?
+ AutomatonNN: eulerscheZahl is there a way to see a problem with the idea of an array of the same numbers of the s
+ VizGhar: why he likes you that much euler?
+ eulerscheZahl: where did its avatar go?
+ JLukeSkywalker: if you hit rank 1 but dont cross the boss, is it worth it to just try submitting the same code again to try for a higher score?
+ jacek: youll push other players weaker than boss
+ jacek: so eventually youll be higher
+ eulerscheZahl: which game? how much below?
+ eulerscheZahl: if it's some dead game, it might take ages until someone else tries to promote and submits to push you
+ JLukeSkywalker: i was at 29.8, boss is 30.45
+ JLukeSkywalker: ultimate tic tac to
+ eulerscheZahl: that game still has some activity
+ eulerscheZahl: wait unless you improve
+ eulerscheZahl: or try teccles
+ JLukeSkywalker: teccles?
+ jacek: teccles
+ jacek: we dont hilight much, do we?
+ eulerscheZahl: if you play on an empty micro board, send the opponent straight back to it
+ JLukeSkywalker: lol, i do that irl, didnt put it in the code yet
+ jacek: playing in center board first works because its not center board but because its first move of teccles? hmmm
+ JLukeSkywalker: currently im only checking micro-board for winning or blocking moves and ignoring big board
+ JLukeSkywalker: and almost got into silver
+ jacek: do you use any search
+ JLukeSkywalker: no
+ JLukeSkywalker: it can be much improved
+ JLukeSkywalker: was surprised it got up that high
+ ErrorRazor: I almost got into gold with just picking the best move for the micro board
+ eulerscheZahl: even some "MCTS light" can get you into gold
+ eulerscheZahl: full random rollouts, track the first move with the highest winrate
+ DomiKo: MC can get you into high gold
+ reCurse: But what they're doing is probably the most fun they'll ever get out of uttt
+ eulerscheZahl: savage
+ jacek: oO
+ jacek: hmm 24 new othello players but none in wood1 yet
+ jacek: its almost as if they dont care abot puzzle of the week quest
+ eulerscheZahl: let's do it next week when it's easier
+ <b>**eulerscheZahl completed the quest with "Fractal carpet"</b></p><p><img src="/a/54241606493073" /> reCurse: I only care about the trolling dailies
+ struct: 34 players jacek
+ jacek: mhm
+ struct: maybe its in the same level as getting legend in uttt?
+ struct: I didnt write the bot
+ struct: So I am not really aware of the difficulty
+ jacek: it was made by teapot, so its easy
+ reCurse: Rude
+ DMMVS: hello?
+ Jaystah: suh
+ Jaystah: ich gib ein fick auf euer fotze nach
+ jacek: euler, thats for you
+ eulerscheZahl: my first ever ban&#160;:(
+ jacek: hm?
+ Astrobytes: He seemed like a pleasant fellow...
+ eulerscheZahl: well deserved but still. not there's blood on my enter key
+ reCurse: You'll get used to it
+ Astrobytes: ^
+ Westicles: wow, that's like ban golf.  two lines
+ reCurse: You should see what the nice fella I kicked this morning wrote me in PM
+ reCurse: Got upgraded to a ban
+ jacek: i mean, what did he say really?
+ Astrobytes: That's always the part I look forward to, the PM.
+ eulerscheZahl: German, I wont translate
+ jacek: german :scream: good
+ jacek: i see, so you banned him for using german&#160;:+1:
+ eulerscheZahl: nein
+ reCurse: Technically correct
+ jacek: the best kind of correct
+ reCurse: Mayb glad I didn't get a ryzen, the next intel looks yummy
+ reCurse: avx-512 on a home cpu finally
+ Westicles: Last one had it as well
+ reCurse: The 10th gen? No
+ Westicles: I got the 10980xe last Jan
+ reCurse: Oh xe
+ reCurse: Missed that I guess
+ struct: Bettter pre order it asap
+ reCurse: Currently $250 off :o
+ reCurse: Ok where's the catch
+ reCurse: Seems way too cheap for what it is
+ eulerscheZahl: my dad thought so too when he bought a video card on ebay
+ eulerscheZahl: i told him no
+ eulerscheZahl: of course he got scammed
+ Angecide: how much did he lose
+ eulerscheZahl: he opened an incident on ebay and got the money back
+ reCurse: Ah lower clocks
+ Angecide: ah that's nice
+ eulerscheZahl: so just some time and 25€ for an IT shop to testify that he didn't get what he paid for
+ reCurse: 18 cores though... :drool:
+ struct: leaked prices seem a bit low
+ struct: 604$
+ struct: for the 11900k
+ wjan: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/f4df6680-9a2e-4aec-aed1-33af285ca131">http://chat.codingame.com/pastebin/f4df6680-9a2e-4aec-aed1-33af285ca131</a>
+ reCurse: Damn now I'm torn
+ eulerscheZahl: pastebins are back
+ eulerscheZahl: confirmed
+ reCurse: 11900k for better and cheaper cores or 10980xe for need moar cores
+ eulerscheZahl: there are several cooldowns wjan
+ eulerscheZahl: the longest is 6h i think
+ eulerscheZahl: but depending on how much you spammed, it might really just be a few minutes
+ Westicles: The xe motherboard costs a little more.  Quad channel memory instead of dual though
+ reCurse: Hmm only have 2 sticks atm
+ reCurse: Think 11th gen might be more worth it
+ reCurse: Just glad avx-512 is slowly becoming mainstream
+ jacek: linus bashed intel for avx512
+ jacek: its slows the clcok
+ jacek: clock even
+ reCurse: Depends how you use it
+ Westicles: And you always have to check how much of the instruction set they actually have.
+ jacek: even stockfish folks found it wasnt that much different with nnue
+ reCurse: I don't get the impression nnue would have much to gain out of avx512
+ reCurse: Could be wrong
+ Westicles: nice chart at the bottom here
+ Westicles: <a rel="nofollow" class="external free" href="https://en.wikipedia.org/wiki/AVX-512">https://en.wikipedia.org/wiki/AVX-512</a>
+ jacek: <a rel="nofollow" class="external free" href="https://www.extremetech.com/computing/312673-linus-torvalds-i-hope-avx512-dies-a-painful-death">https://www.extremetech.com/computing/312673-linus-torvalds-i-hope-avx512-dies-a-painful-death</a>
+ reCurse: Thanks
+ reCurse: Just need to wait for that rocket lake
+ jacek: you should be glad for amd. it pushes intel to its limit
+ reCurse: I'm not dissing amd
+ JLukeSkywalker: nice lol, changed "col" to "2-col" and my bot went from bronze t osilver
+ jacek: huh
+ JLukeSkywalker: tic-tac-toe
+ jacek: oh my
+ JLukeSkywalker: if my code found a winning move in column 3, it would place in column 1
+ JLukeSkywalker: and not win
+ JLukeSkywalker: im smrt
+ JLukeSkywalker: that took like an hour to find
+ jacek: what i really like doing this ML stuff is doing those cool charts <a rel="nofollow" class="external free" href="https://i.imgur.com/u07jmw4.png">https://i.imgur.com/u07jmw4.png</a>
+ reCurse: Might have looked into doing accounting instead, easier
+ Angecide: when doing ml for cg do u generally train the model in python and then serialize the weights to c++?
+ jacek: you train offline, yeah
+ Angecide: but is there any standard choice between training in python vs c++ or is it just based on your own preference, since I assume it is possiblet to get the weights from python to c++? 
+ Angecide: they are just numbers in a matrix I guess
+ jacek: yeah, they just params to optimize. however you do it, doesnt matter
+ Angecide: I see
+ jacek: could be python libraries, as they are pretty optimized
+ Angecide: yea the accessibility of doing ML in python is really great
+ struct: on csb the angle is rounded, floored, ceiled or truncated?
+ reCurse: Which angle
+ struct: pod angle to next checkpoint
+ reCurse: Which league is that
+ struct: legend
+ reCurse: I thought pod angles were absolute
+ reCurse: In any case, they are given to you rounded
+ reCurse: The referee keeps the real float
+ ErrorRazor: They are absolute, I'm doing csb rn
+ struct: I see, thanks
+ reCurse: Results in around 5% inaccuracy on average
+ struct: lol
+ FabioGomes: does anyone know the solution to this&#160;? <a rel="nofollow" class="external free" href="https://www.codingame.com/training/expert/the-lucky-number">https://www.codingame.com/training/expert/the-lucky-number</a>
+ ErrorRazor: Yup
+ FabioGomes: Fábiooo13#5962 add me on discord
+ jacek: i think 21% knows
+ ErrorRazor: Why does a private chat pop up every time the chat reconnects even though there are no new messages in it and I've closed it
+ Astrobytes: Known bug.
+ ErrorRazor: Alright
+ zrdzrt: is there any chance that java wins in short mode vs. python? Feels unfair tbh :D
+ Nikeleos: Wich language can beat Pyhton in short mode&#160;?
+ Hobogre: Ruby will always win
+ JLukeSkywalker: also who doesnt know python anyway
+ ErrorRazor: I'm not a fan of short mode
+ zrdzrt: same
+ ErrorRazor: You don't learn anything useful from it
+ Nikeleos: Exactly
+ struct: ruby perl bash
+ ErrorRazor: Maybe just treat it as fast mode
+ reCurse: Then you should not be a fan of clash either
+ Nikeleos: Bash&#160;? Creapy...
+ ErrorRazor: I do prefer the bot games but sometimes it's nice to do something smaller
+ Astrobytes: That's why we have puzzles
+ ErrorRazor: I'm definitely neglecting the solo puzzles.
+ Astrobytes: You'll get more out of it than you will from clashes imo
+ ErrorRazor: I shall clash no more
+ Astrobytes: Hey don't stop because I said puzzles lol, clash if you feel like it - I think the objective of clashes was 'Fun'
+ Astrobytes: But if you want to actually learn anything, then puzzles or whatever
+ zhoubou: Puzzles are a great way to have fun while learning. At least for me.
+ jacek: "fun" "clash" in one sentence?
+ ErrorRazor: "clash not fun"
+ rick-James: very cool&#160;:)
+ o0lit3: "Ruby will always win" &gt;&gt; perl usually beats ruby tbh
+ JLukeSkywalker: but no-one uses perl in clash
+ o0lit3: I do
+ o0lit3: it generally has a leg up on "fastest" as well because you dont' have to type as much
+ ErrorRazor: "no-one" is a pseudonym for "almost no-one"
+ o0lit3: you sound like an english teacher and not a programmer
+ JLukeSkywalker: sometimes i wish programmers were english teachers, would make code more readable
+ ErrorRazor: I wouldn't be a programmer if I didn't like languages
+ kavandoctor: wassup people
+ kavandoctor: join coc
+ kavandoctor: coc is fun
+ JLukeSkywalker: or less readable ....
+ ErrorRazor: join multiplayer
+ kavandoctor: i like coc
+ ErrorRazor: multiplayer is fun
+ kavandoctor: yeah
+ ErrorRazor: I should've said ai battle
+ ErrorRazor: Because clash is technically multiplayer too
+ Perlorodka: kavandoctor! don't say you improved even more in CoC!&#160;:)
+ kavandoctor:&#160;:)
+ Perlorodka: I think coding roman to decimal convertor in 38 seconds is already pretty damn good <a rel="nofollow" class="external free" href="https://pasteboard.co/JKIpvQe.png">https://pasteboard.co/JKIpvQe.png</a>
+ kavandoctor: bruh
+ kavandoctor: ur allowed to look stuff up
+ kavandoctor: so i just found a sol online
+ kavandoctor: lmao
+ Astrobytes: Exact solution?
+ Perlorodka: of course, awesome job
+ kavandoctor: thanq
+ kavandoctor: but i mean
+ kavandoctor: that was the only time i did that
+ kavandoctor: cuz i didnt feel like
+ kavandoctor: writing roman numerals
+ Astrobytes: Was it a straight up copy paste?
+ kavandoctor: what no
+ kavandoctor: i had to change stuff
+ kavandoctor: obviously
+ Astrobytes: And it took btb all that time to look it up and change some stuff
+ Astrobytes: I mean:<a rel="nofollow" class="external free" href="https://www.w3resource.com/python-exercises/class-exercises/python-class-exercise-2.php">https://www.w3resource.com/python-exercises/class-exercises/python-class-exercise-2.php</a>
+ drdrdrdoctor: i mean yeah
+ drdrdrdoctor: i think that was the only challenge i saw
+ drdrdrdoctor: that was p much entirely online
+ Astrobytes: (one of many available solutions to the general problem)
+ drdrdrdoctor: yeah
+ drdrdrdoctor: but i mean 
+ drdrdrdoctor: You can look up stuff. You can take your time. You shall have fun. Everyone is a winner, even if 0% of the tests work :D 
+ drdrdrdoctor: "You can look up stuff. You can take your time. You shall have fun. Everyone is a winner, even if 0% of the tests work :D "
+ drdrdrdoctor: this is what it says
+ drdrdrdoctor: on the page
+ drdrdrdoctor: so i assumed you were allowed
+ drdrdrdoctor: to search stuff up
+ Astrobytes: You are, yes.
+ Astrobytes: I'm not judging.
+ drdrdrdoctor: oh
+ drdrdrdoctor: you wanna play?
+ drdrdrdoctor: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/1563401c56e47651726c8f56df54b32c24ee589">https://www.codingame.com/clashofcode/clash/1563401c56e47651726c8f56df54b32c24ee589</a>
+ Astrobytes: Nah, I don't clash. I prefer bot programming.
+ drdrdrdoctor: oh
+ drdrdrdoctor: oki
+ drdrdrdoctor: i hate bot programming
+ drdrdrdoctor: and like clash
+ Astrobytes: All good.
+ Velcoro: I'd clash, but I hate googling solutions, you know&#160;:)
+ reCurse: Wonder why
+ drdrdrdoctor: bruh
+ drdrdrdoctor: that was like the only question
+ drdrdr: that had a online solution
+ drdrdr: lay off me
+ Astrobytes: Sure.
+ Astrobytes: Any pressure you're feeling is completely your own.
+ TheSunnyCastle_ee5e: hi
+ TheSunnyCastle_ee5e: asd
+ Astrobytes: Ever read The Tell-Tale Heart?
+ Astrobytes: Anyway, before all the beasts appear in chat I'm out, gn all
+ ErrorRazor: Good night
+ struct: gn
+ TheSunnyCastle_ee5e: a
+ TheSunnyCastle_ee5e: a
+ 3ataja: why it always empty at night
+ 3ataja: programmers aren't supposed to sleep at night
+ JLukeSkywalker: we are all just too comatose to chat
+ 3ataja: no i mean clash of code
+ rekaxem: agreed
+ SeraphWeddUltimate: maybe they're too busy doing something else?
+ rekaxem: hi
+ Cyrgo: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/15634614267234c4828a17b8b4ae5f7d336cfa1">https://www.codingame.com/clashofcode/clash/15634614267234c4828a17b8b4ae5f7d336cfa1</a>
+ oiuawesfiawegioaew: o
+ Saad-py: Hi

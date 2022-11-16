@@ -1,0 +1,481 @@
+ BlaiseEbuth: Agrougrou tout l'monde&#160;! Automaton2000&#160;! Le monstre du chat est là&#160;!
+ Automaton2000: sauf que c'est pas très clair, j'avais improvisé à l'époque
+ Stilgart: Automaton2000: tu es en train de dire qu'en réalité tu es encore plus monstrueux&#160;?
+ Automaton2000: et c'est pas en python :p
+ Stilgart: :fearful:
+ borios14: hola
+ Bon[]Crayon: salut
+ Bon[]Crayon: Automaton2000 slt
+ Automaton2000: est-ce que ça veut dire que je suis nul ou j'ai des problèmes de perf
+ Bon[]Crayon: Automaton2000 tu es performant comme une tortue
+ Automaton2000: je vois plein de truc à la con comme ça
+ DCVolo: Salut, il y a un raccourcis pour activer désactiver l'assistance (code) parce que l'encart qui se met à chaque fois sous le curseur ça commence sérieusement à me ...&#160;:')
+ DCVolo:&#160;?
+ Bon[]Crayon: à gauche de la page il y un bouton paramètres
+ Bon[]Crayon: avec une option configuration de l'editeur
+ DCVolo: c'est  " semanticHighlighting "&#160;?
+ Bon[]Crayon: je ne sais pas
+ DCVolo: non ce n'est pas ça visiblement du coup je ne vois pas ce qui correspond
+ DCVolo: à moins qu'il faille que je recharge la page&#160;?
+ DCVolo: nope
+ Anschluss: bonjour à tous
+ Anschluss: une petite question
+ Anschluss: quelqu'un aurait une astuce pour remplacer un boucle while trop gloutonne?
+ DCVolo: c'est pas très précis comme énoncé mais essaye de partir du principe que tu dois aussi souvent que possible définir à l'avance le nombre de fois que tu vas cycler (donc autant que possible utiliser les boucles for)
+ Anschluss: en fait je fais le puzzle mime type
+ Anschluss: et je dois comparer l'extension du fichier avec celle de ma abse de données
+ Anschluss: et je vois pas comment réduire le champ des possibles à l'avance
+ DCVolo: tu codes en quel langage&#160;? je vais vérifier si je l'ai fait
+ Anschluss: python
+ DCVolo: ça " In this puzzle, you have to split a string into separate parts, compare them, and recognize similar strings using a case-insensitive algorithm. "&#160;?
+ DCVolo: mime type&#160;?
+ Anschluss: oui
+ Anschluss: et je passe tout les test sans problèmes sauf le dernier avec 9999 fichiers
+ Bon[]Crayon: est-ce que tu enregistres tous les noms de fichiers à traiter dans un tableau&#160;?
+ DCVolo: sans vraiment trop te donner la solution parce que l'exercice est super court, essaye de séparer tes opérations et de ne pas répéter plusieurs fois un même code ou même fonction
+ Anschluss: oui je les enregistrait dans un tableau au début mais j'ai aussi essayer d'y traiter en direct maismême résultat
+ Anschluss: je vais réfléchir à ça DCVolo merci
+ nicola: Tu utilises une liste&#160;?
+ nicola: Essaie plutôt un ensemble.
+ Frankich: si tu TO sans stocker les valeurs c'est que ton algo est trop gourmant, que se soit avec un while ou non 
+ nicola: Le test d’appartenance est significativement plus efficace avec un ensemble qu’avec une liste.
+ Anschluss: je vais me renseigner sur les ensembles. Je connais leur signification en math mais pas en prog 
+ nicola: En Python, c’est set() ou {1,3,"2"}.
+ nicola: Attention, tu ne peux pas y stocker des listes ou des ensembles, c’est la rançon du test d’appartenance optimisé.
+ Anschluss: qu'est ce que tu veux dire?
+ nicola: Comme en maths, tu ne peux y stocker qu’un seul exemplaire de ce que tu places.
+ nicola: {[1,2],3} va foirer.
+ Anschluss: ok
+ nicola: Pas {(1,2),3}.
+ nicola: Ni {"1 2",3}.
+ nicola: Tu ne peux y stocker que des types hashables.
+ Stilgart: mais qu'ils sont cons chez python
+ Anschluss: ^^
+ nicola: Essaie hash([1,2]), il fa chouiner.
+ nicola: *va
+ <b>**Stilgart vient de tester</b></p><p><img src="/a/69893904259383" /> Stilgart: et je vois pas le problème
+ Stilgart: c'est hashable une liste... je dis ça, je dis rien
+ nicola: Si tu veux stocker nawak dans un ensemble, utilise un frozenset.
+ nicola: &gt;&gt;&gt; hash([1,12])Traceback (most recent call last):
+ nicola: Pas en Python.
+ nicola: Si tu veux une liste hashable, utilise un tuple.
+ nicola: C’est pareil mais sans les méthodes pop, append et compagnie.
+ Stilgart: non, j'utilise haskell plutôt
+ Bon[]Crayon: sinon un dictionnaire
+ Stilgart: &gt;&gt;&gt; { [1,2]:1 }Traceback (most recent call last):
+ nicola: Pour stocker des chaînes, autant utiliser un ensemble.
+ nicola: Oui, même peine même punition.
+ <b>**Stilgart a eu peur que ça marche à un moment</b></p><p><img src="/a/26090852120005" /> nicola: {(1,2):1} passera.
+ Stilgart: ce qui pour le coup ne fait pas de sens
+ Stilgart: (mais bon, les tuples de pythons ne font pas de sens)
+ nicola: Tu peux toujours écraser le type list avec le tien, qui contiendra une méthode __hash__ et boum.
+ Stilgart: ouais enfin faut pas pousser
+ Stilgart: tous les autres langages, ils se content de coder les set/map via des avl et tu as juste besoin de = au lieu de hash
+ nicola: À mon avis, en interne, un ensemble est un dictionnaire trié par hash.
+ Stilgart: (ce qui n'empêche pas de fournir aussi une version qui utilise des hash, bien entendu)
+ Stilgart: nicola: oui, j'ose espérer qu'il y a une limite à la connerie humaine
+ nicola: Le problème d’une liste, c’est que son contenu peut changer.
+ Stilgart: bref, pour un langage qui se prétend friendly, ne pas pouvoir indexer par défaut avec des chaines/listes ça la fout mal
+ nicola: Donc si tu écris {[1,2],[3,4]}, rien ne t’empêche de changer un des deux.
+ nicola: Avec des chaînes, si tu peux.
+ Stilgart: rien ne t'empêche de faire une copie de ta clé aussi
+ Stilgart: (à ce stade de non perf, c'est négligeable)
+ nicola: Sauf que tu fais quoi si tu as {[1,2]:3,[1,2]:4}&#160;?
+ Stilgart: accessoirement, avec un hash on s'en fiche que la liste change (maintenant que j'y pense)
+ Stilgart: vu que c'est la valeur à l'instant t que tu hashes
+ Stilgart: je garde 4
+ Bon[]Crayon: l'adresse de la liste&#160;?
+ nicola: Pour ça, il faudrait la recalculer à chaque utilisation.
+ Stilgart: en supposant que le comportement du constructeur en cas de conflit est de garder le dernier
+ Stilgart: Bon[]Crayon: marche pas
+ Stilgart: [1,2] et [1,2] n'ont sans doute pas la même adresse
+ Stilgart: (surtout en mode interprété)
+ Stilgart: nicola: recalculer quoi&#160;?
+ nicola: Le hash du contenu.
+ Stilgart: dans une table de hash, tu as un gros tableau des avec cases vide et des cases non vide
+ Stilgart: et pour jouer avec le tableau, évidemment que tu recalcules le hash
+ Stilgart: tu vas pas faire un accès à un case au pif ...
+ nicola: Rassure-toi, ça me gonfle moi aussi de ne pas pouvoir mettre ce que je veux dans un ensemble en Python.
+ Stilgart: j'ai jamais dit que calcul le hash d'une liste n'était pas coûteux, note
+ nicola: À mon avis, le hash n’est pas recalculé en Python.
+ nicola: Il est stocké.
+ Stilgart: urfh
+ Stilgart: tu parles d'un gain en temps qui explose ton accès accès mémoire donc tes défauts de cache
+ nicola: Sinon il faudrait recalculer le hash de tous les éléments quand tu testes une appartenance.
+ Stilgart: bah non
+ nicola: En Python, je pense que si.
+ Stilgart: tu calcules le hash de ce que tu cherches
+ Stilgart: tu vas voir la case, et
+ nicola: Mais bon, il faudrait regarder le code source de Pthon/
+ nicola: . :grin:
+ nicola: *Python
+ Stilgart: 1. tu as ta réponse si tu ignores les conflits
+ Stilgart: 2. tu fais un post-traitement pour gérer les conflits
+ Stilgart: (au hasard un avl, chose qui aurait du être faite en amont du coup...)
+ Stilgart: à noter que les 2 strats sont valides suivant le contexte
+ nicola: Dans une liste, en Python, le test d’appartenance est en O(n), dans un ensemble, il est en O(log(n)).
+ Stilgart: (faire une liste chaînée toute bête suffisant largement à gérer les conflits, en fait)
+ Stilgart: j'ose espérer qu'il est en O(1)
+ Stilgart: sinon ce sont des plouks
+ Stilgart: enfin, + coût d'un calcul de hash
+ nicola: Enfin, c’est ce que j’ai constaté en utilisant Python.
+ Stilgart: O(log(n)), tu l'as avec des AVL, qui encore une fois est le choix des autres langages et ne nécessite que un =
+ Stilgart: après, je veux bien acheter qu'avec un hash pourri, tu as masses conflit et donc ça dégénère en O(log(n))
+ Stilgart: mais c'est un soucis de hash dans ce cas
+ nicola: Tu peux stocker des trucs qui ont le même hash, mais de types différents.
+ <b>**Stilgart n'a rien vu</b></p><p><img src="/a/26090852120005" /> nicola: Il me semble avoir testé.
+ Stilgart: reteste, parce que c'est monumentalement con comme choix&#160;:/
+ nicola: À mon avis, c’est une usine à gaz, derrière.
+ Stilgart: donc je veux pas y croire
+ Stilgart: sur ce, il va être temps d'extraire boulet et d'aller manger
+ nicola: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/e010fea4-1025-4c3d-8781-c5dd3860e8f3">http://chat.codingame.com/pastebin/e010fea4-1025-4c3d-8781-c5dd3860e8f3</a>
+ nicola: La preuve.
+ Stilgart: (ho putain)
+ Stilgart: Automaton2000: à terre
+ Automaton2000: j'ai vraiment un problème de timeout
+ Anschluss: merci à tous en effet l'utilisation de l'ensemble m'a fait gagner un temps de fou
+ nicola: :thumbsup:
+ Stilgart: Automaton2000: à terre je te dis, l'univers va exploser
+ Automaton2000: il me reste plus que les gens sont fous
+ Stilgart: exactement
+ Stilgart: Anschluss: cool
+ <b>**dwarfie lance un CD de Benny B sur Automaton2000</b></p><p><a href="/wiki/File:Default_avatar.png" class="image"><img alt="Default avatar.png" src="/images/5/56/Default_avatar.png" decoding="async" width="50" height="50" /></a> Automaton2000: quand tu fais une boucle sur les ships
+ nicola: Je préfère le Bonnet B au Bonnet M.
+ dwarfie: ca fait pourtant longtemps que Bonnet B. n'est plus ministre de l'interieur ...
+ dwarfie: :yum:
+ dwarfie: (tien , il l'a pas ete ... les grosses tetes auraientt menti ...)
+ Bon[]Crayon: Automaton2000 croque les chips
+ Automaton2000: est ce que tu essaies de faire quoi&#160;?
+ Bon[]Crayon: Automaton2000 de battre le boss or
+ Automaton2000: genre je peux pas le savoir
+ Bon[]Crayon: Automaton2000 [hash(x) for x in {994727857,(1,2)}]
+ Automaton2000: tu fais une ligne de code&#160;?
+ Bon[]Crayon: Automaton2000 oui
+ Automaton2000: et j'ai encore une question de motivation
+ philRG: Automaton2000 t'es bien le seul tiens
+ Automaton2000: ah ouai j'ai eu ça aussi
+ philRG: Automaton2000 ben oui çà va, çà vient. A chaque jour suffit sa peine
+ Automaton2000: bonjour j'ai un soucis avec le test en plus ça doit être pour ça que je reste dans le top ...
+ Alshock: J'avoue ne pas avoir compris le problème dans le fait que le set puisse stocker des éléments de même hash, ça me paraît assez logique qu'il y ait une gestion des conflits dans les sets
+ sir_creator: wamadamedou
+ Stilgart: Alshock: relis ce que nicola a fait
+ Stilgart: et pour le béotien, son code revient à ajouter une chaussette dans un sac de billes
+ YellowChameleon: bonjour
+ YellowChameleon: y a t il une ame charitable pou m'eclairer
+ YellowChameleon: j'essaye de créer un jeu multijoueur 
+ DCVolo: :flashlight:
+ yoann9344: Salut&#160;! Je sais pas si je peux t'aider je peux essayer&#160;!&#160;:]
+ YellowChameleon: mais je ne sais pas comment importer dans eclipse le skeleton de vréation qui est github
+ YellowChameleon: <a rel="nofollow" class="external free" href="https://github.com/CodinGame/game-skeleton">https://github.com/CodinGame/game-skeleton</a>
+ YellowChameleon: *création
+ yoann9344: Je connais pas eclipse, désolé&#160;:/
+ YellowChameleon: tu travaille sous quel ide toi d'habitude
+ YellowChameleon:&#160;?
+ yoann9344: nvim
+ YellowChameleon: ok brèvement tu fais comment sous vim
+ yoann9344: Je clone le repo et j'ouvre vim &gt;&lt;"
+ YellowChameleon: y a t il des options à cocher&#160;?
+ YellowChameleon: pendant le clonage je veux dire
+ yoann9344: Des submodules éventuellement&#160;:git clone --recurse-submodules ...
+ YellowChameleon: ok bon je vais essayer
+ YellowChameleon: merci
+ yoann9344: Mais l'idée c'est de configurer un lsp si le langage en a un puis tu utilise make pour du compiler ou tu interprètes
+ YellowChameleon: je suis sous java
+ YellowChameleon: donc interprèter
+ yoann9344: Euh, c'est compiler en bytecode puis interpreter par la machine vituelle java
+ yoann9344: javac plop.javajava plop
+ YellowChameleon: pas compris
+ YellowChameleon: les deux dernières ligne
+ yoann9344: Je connais pas grand chose en java, mais je crois bien que java c'est du compilé en un bytecode universel qui permet la portabilité entre les plateforme
+ YellowChameleon: oui ca je sais 
+ YellowChameleon: mais c'est le javac plop.java que je ne comprend pas
+ yoann9344: donc t'as deux commande à dérouler, enfin bon bref j'ai l'impression que l'on se perd &gt;&lt;"
+ KenZzo: Le Javac compile les fichier .Java en .Class et Java execute les .Class
+ BlaiseEbuth: Et moi j'execute java.
+ BlaiseEbuth: :knife:
+ Slowkay: yo les geeks
+ Stilgart: YellowChameleon: la solution simple c'est sans doute de pas utiliser eclipse
+ Stilgart: je peux te trouver les commandes maven magiques si besoin
+ Stilgart: yoann9344: si seulement on pouvait faire sans maven sur ce coup là :joy:
+ Stilgart: $ mvn compile$ mvn test$ mvn exec:exec -Dexec.executable=java -Dexec.args='-cp %classpath:./target/test-classes -Dleague.level=X Main [&lt;bot1&gt; &lt;bot2&gt;]'sachant que le Main.java n'est pas toujours fourni mais je peux t'en donner un
+ yoann9344: J'ai déjà vu le nom passer, mais je connais pas. C'est un outil d'apache non&#160;?
+ Stilgart: c'est make pour le java
+ Stilgart: (ha, mon todo précise que quand à la troisième fois on en a marre de cette commande de l'enfer, on peut remplir le pom.xml pour éviter 3/4 des arguments)
+ yoann9344: Ah ok, donc apache maven, c'est une version open source je suppose&#160;?
+ Stilgart: vu que je le compile, je suppose que c'est open source
+ yoann9344: Ah ok y a d'autres concurrent gradle, ant, sûrement d'autres
+ Stilgart: oui et non
+ Stilgart: le SDK de CG, c'est du maven, donc il faut passer par mvn
+ Stilgart: (sauf si les autres outils ont de la compat, mais je ne miserais pas trop la dessus)
+ yoann9344: Ah c'est pas juste un compilateur&#160;?! Ça apporte des bibliothèques&#160;!?
+ Stilgart: c'est make
+ Stilgart: le compilateur ça reste javac
+ Stilgart: et l'interpréteur c'est toujours java
+ Stilgart: mvn exec:exec -Dexec.executable= *** java ***
+ Stilgart:&#160;;)
+ yoann9344: C'est bon tu m'as perdu &gt;&lt;" Vu de l'extérieur java ça m'a l'air bien tortueux&#160;! &gt;&lt;" J'essaye rust en ce moment, cargo c'est plutôt magique en comparaison ^^ Mais bon c'est sûrement dû au fait que ce soit compilé en bytecode&#160;!
+ leojean890: pour java faut voir s'il utilise maven ou gradle ou autre (assez répandus)
+ leojean890: niveau IDE vaut mieux utiliser IntelliJ qu'Eclipse :p
+ yoann9344: En parlant d'ide, y a moyen de coder et de lancer son code en dehors de son navigateur&#160;? Du genre via une api CG&#160;?
+ Stilgart: cherche à CG Sync
+ Stilgart: leojean890: le SDK utilise maven (bis)
+ yoann9344: Thx je regarde ça
+ Stilgart: tiens, la doc du SDK sur tech.io a été bien étoffée depuis la dernière fois que j'y ai jeté un oeil
+ Zorg1: tu vois Stilgart tu ne fais pas assez de Java :p
+ Stilgart: je vais en faire bien assez comme ça ce semestre
+ Stilgart: (ouch, 26h :fearful: )
+ yoann9344: T'es enseignant&#160;?
+ Stilgart: il paraît 
+ yoann9344: J'ai regardé CG sync, j'ai pas trouvé les sources&#160;!&#160;:/ Si non j'ai vu CG Local. En plus y a un plugin firefox&#160;!
+ yoann9344: Je m'en doutais mais histoire d'être sûr :D
+ yoann9344: Ah tiens t'es aussi essonnien&#160;! ^^
+ Stilgart: c'est dispo sous forme de plugin pour firefox/chrome, non&#160;?
+ Stilgart: (ou alors je confonds encore avec CG Local)
+ yoann9344: Yep c'est CG Local qui est pour les deux et qui plus est open source&#160;!
+ Stilgart: à part chadok.info, tous les outils de CG faits par la commu sont open-source
+ yoann9344: ah bah j'ai dû passer à côté du lien&#160;!
+ yoann9344: Et les chadoks pompèrent&#160;!
+ Stilgart: quoique... je crois pas qu'on ait accès aux codes de euler et Azkellas
+ Stilgart: (ni de royale en fait)
+ BlaiseEbuth: Comment es ta re
+ Zorg1: ma re est #1
+ Zorg1: Automaton2000 quoi de neuf&#160;?
+ Automaton2000: je comprends pas trop la tête
+ BlaiseEbuth: chéque ta discorde Zorg1, Stilgart aussi à l'occaz
+ Zorg1: bah c'est une boîte osseuse où généralement y a des trucs Automaton2000
+ Automaton2000: je pense que ca vient de la
+ Zorg1: the Tullius Detritus touch
+ Zorg1: ah tu parlais pas de discorde dans le sens de zizanie :D
+ Stilgart: Automaton2000: et si tu cherchais une tortue&#160;?
+ Automaton2000: bon je vais me faire rouler dessus
+ <b>**Stilgart fonce vers Automaton2000 avec un regard menaçant</b></p><p><a href="/wiki/File:Default_avatar.png" class="image"><img alt="Default avatar.png" src="/images/5/56/Default_avatar.png" decoding="async" width="50" height="50" /></a> Automaton2000: c'est dommage qu'il y ait des gens qui ont fait le contest&#160;?&#160;:)
+ Stilgart: clair, avec mon de gens sur l'escape de 2022, CG aurait peut-être revu sa politique&#160;:(
+ Hyrozen: J'ai une question sur le calcul du score de Counting TicTacToe&#160;: est-ce que l'on peuit compter plusieurs fois une même case&#160;?
+ Stilgart: moins*
+ Hyrozen: En gros, si je met un 4ème au bout d'un série de 3, je gagne un point ou pas&#160;?
+ Stilgart: (ce n'est pas exactement la même question)
+ BlaiseEbuth: Ca a le mérite d'en être une. C'est déjà ça ici...
+ Hyrozen: Est-ce que XXX_XXX  =&gt; XXXXXXX me donne 1 point&#160;?
+ Hyrozen: Je sais pas si c'est moi mais je trouve ça pas clair et impossible de ralentir la video
+ Hyrozen: ni mettre en pause
+ Hyrozen: SI j'ai bien compris, on parle de "most 3 in a row", donc une série de 5 donne 3&#160;: (XXX)XX / X(XXX)X /XX(XXX) 
+ Hyrozen: Et donc on dois recalculer tout le board à chaque coup joué (sans parler des optim qui ferai rien gagner), je veux dire que l'ont ne doit pas simplement regarder autour de la case jouée
+ Hyrozen: Pardon de parler solo
+ Zorg1: tkt on a des spécialistes de ça
+ BlaiseEbuth: philRG, évangéliste monologue
+ darkhorse64: XXX_XXX  =&gt; XXXXXXX te donne 3 points. Pour le calcul du score, il y a des techniques (bitboarding) pour faire ça très vite 
+ Hyrozen: Pourquoi XXX_XXX  =&gt; XXXXXXX ne m'en donne pas 5&#160;? Je peux faire 5 groupes de 3 
+ Hyrozen: Je vais regarder le bitboarding
+ VilBoub: Hyrozen&#160;: Pour bien comprendre le score, lance une partie avec des coups valides au hasard  et regarde comment est évalué le score dans le jeu&#160;!
+ philRG: BlaiseEbuth Je te salue pauvre pêcheur
+ philRG: un ch'tit coup de silver à PCR, çà remonterait mon moral tiens
+ darkhorse64: XXX_XXX  =&gt; XXXXXXX te donne 3 points de plus soit 5 au total
+ darkhorse64: tu peux regarder les sources du jeu pour le calcul du score
+ philRG: bon ma chtite modif (retour aux bonnes vieilles heuristiques) latte bien le bot de leojean
+ philRG: bon un petit submit pour confirmer que ma modif c de la merde
+ philRG: go
+ TKirishima: Il y a un shorcut au clavier pour faire "TOUS LES TESTS"&#160;?
+ TKirishima: D'ailleurs je suis premier dans une ligue de Bot, qq sait quand est ce qu'on passe à la ligue suivante&#160;?
+ BlaiseEbuth: ctrl+enter il me semble
+ philRG: bon çà bouffe bien les chips à proximité au tour suivant, mais éviter les jetons qui n'accélèrent pas, pas au point
+ philRG: y a un bug çà c sûr
+ TKirishima: Merci Blaise!
+ BlaiseEbuth: TKirishima pour le passage de ligue ça dépend de la ligue, et de si tu es vraiment premier. ^^
+ leojean890: Stilgart ah d'accord&#160;:) ça peut se déduire si on voit des fichiers pom.xml dans les projets cg
+ leojean890: philRG tu me tues sur pcr&#160;? pas dur, vu mon bot pourri xD
+ leojean890: essaye sur OOC pour voir :P
+ philRG: oui çà m'étonnait un peu vu le niveau du mien&#160;;-)
+ philRG: sur ooc j'ai bien impl le tracker comme tu m'avais rappelé que ça comptait, çà m'a fait du bien car c'était mon 1er contest (et aussi multi), j'ai sué des flaques
+ philRG: par contre je l'ai laissé en route mon ooc (top bronze) faut que je le fasse évoluer
+ philRG: pour monter silver faut en faire un peu plus que des strats basiques
+ Zorg1: il s'est pas fait pousser en silver depuis&#160;?
+ leojean890: le mien est nul aussi, je gère quasiment rien xD juste quelques heuristiques très simples:)
+ leojean890: OOC j'ai trop buché dessus pdt le contest, et ouais le tracker set très important et dur à perfectionner au max
+ Zorg1: essayé de le perfectionner me suis pris un peu trop tard ^^
+ Zorg1: mais OoC c'était sympa je trouve ^^
+ leojean890: ouais un ois sympathique^^
+ leojean890: mois
+ Zorg1: pour une fois que le FoW était totalement justifié et faisait partie du jeu
+ leojean890: ouais^^
+ leojean890: mais bon je suis resté sur du depth 1 sur ooc donc ça avait ses limites (sauf la gestion des déplacements)
+ philRG: un gars qui débute un multi à sec comme j'avais fait, c chaud. J'étais un peu fébrile en python aussi
+ Zorg1: OoC pour débuter y a plus facile ^^
+ Zorg1: ça visait quand même un certain public
+ Zorg1: le challenge qui suivait (pacman je crois) était plus "tout plublic"
+ leojean890: ooc fallait vraiment bcp réfléchir pour le tracker
+ leojean890: sinon pas de grosse complexité, quelques bfs
+ Zorg1: c'était le gros morceau
+ leojean890: et bien sûr réfléchir à la strat
+ leojean890: l'éval
+ philRG: sur pacman, j'étais mieux (toujours noob bien sûr)
+ philRG: suis monté mid-bronze alors qu'ooc pas décollé de wood 2
+ Zorg1: j'avais bien aimé les sorcières ^^
+ philRG: celui-là j'ai merdé par contre, jamais codé de bfs proprement avant
+ philRG: que des timeout
+ JBM: wazza
+ JBM: ça boume, les good old boys qui découragent les n00bz?
+ leojean890: comment es ton cover de jazz jbm ;P
+ JBM: à la bourre, leojean890, à la bourre
+ JBM: je perds rien
+ JBM: mais je suis entre 2 jobs
+ Zorg1: ouaip on pourri le taux de rétention médian sur feedback négatif
+ Zorg1: tibo nous déteste
+ JBM: il faut que je transfère les assets d'un laptop actuel à un futur que j'ai pas encore
+ leojean890: ah oui les sorcières c du bfs / beam search à optim^^
+ JBM: c'est tendu
+ JBM: on m'y reprendra à faire ma musique sur le laptop du boulot
+ leojean890: 2 jobs de musique ou de dev&#160;?^^
+ JBM: de dev lol
+ leojean890: ah compris
+ JBM: la musique c'est trop sélectif
+ leojean890: la musique c chaud d'en vivre indeed xD
+ leojean890: faut une bonne vibe commerciale
+ leojean890: quand j'ai des dates à &gt; 100 euros par musicien c'est quand je joue avec qqn qui la trouve (cad pas moi^^)
+ JBM: rappelle-moi juste ta sélection de ce que tu considères comme «à garder»
+ leojean890: faut être "dans le milieu"^^
+ leojean890: dans les solos&#160;?
+ JBM: yup
+ leojean890: je savais pas combien de mesures tu voulais en fait^^
+ leojean890: juste tu peux jeter le fichier le plus court 
+ leojean890: en durée
+ leojean890: et j'aurais dû te faire le solo sur une grille perso^^
+ JBM: ben autant qu'il y avait dans la partoche
+ JBM: c'est possible aussi, mais c'est plus cher
+ leojean890: une grille de la partoche en gros&#160;?
+ JBM: atta je sais même plus c'était quoi
+ JBM: sugar non?
+ JBM: donc 32 mesures a priori non?
+ JBM: plus ou moins 2×16 pour ce qui est de la grille
+ leojean890: ouais^^
+ leojean890: je t'avais fait une version avec accords et une sans accords
+ leojean890: quoi qu'il en soit c'est le fichier long que je préfère
+ leojean890: le court, bof
+ Zorg1: Automaton2000 c'est bon ils ont finis de causer zique&#160;?
+ Automaton2000: et si on fait un peu de random
+ Zorg1:  Au je dis 7 Automaton2000 c'est mon meilleur random
+ Automaton2000: pourquoi j'ai pas pensé à faire un peu de challenge
+ Bon[]Crayon: Automaton2000 5
+ Automaton2000: nan mais c'est une blague&#160;?
+ Bon[]Crayon: :joy:
+ dwarfie: Automaton2000&#160;: s'toi la blague ...
+ Automaton2000: une histoire de géométrie non euclidienne aussi
+ leojean890: et de musique atonale aussi
+ Zorg1: houla
+ Bon[]Crayon: lalala Automaton2000 une tortue
+ Automaton2000: dwarfie: tu as fait un ag
+ Zorg1: pas con Automaton2000 je vais faire une assemblée générale pour PCR
+ Automaton2000: pour forcer les gens à faire des tests unitaires
+ Bon[]Crayon: Automaton2000 y'en a y forcent les gens à faire des tests naso-pharyngés
+ Automaton2000: les gens sont de plus en plus de monde
+ leojean890: musique atonale c'est spécial, tape sur youtube si t'es curieux hehe
+ Bon[]Crayon: bin bam boum spouich
+ Remi.: Bonsoir la communauté&#160;! Automaton2000 est-ce que tout le monde est gentil avec toi&#160;?
+ Automaton2000: peut-etre parce que ton code marche pas
+ Bon[]Crayon: o/
+ Remi.: C'est gentil ça, d'entrée de jeu ^^ merci Automaton2000
+ Automaton2000: le truc c'est que je lui ai dit
+ philRG: Automaton2000: ah oui les tests unitaires j'en fais jamais 😂
+ Automaton2000: si j'ai bien compris le concept
+ philRG: Farpaitement Automaton2000 
+ Automaton2000: ca fait moins de 100 lignes de code java
+ SAlundra: PhilRG, pourquoi pas de unit test :o
+ philRG: Je crois que j'y pense pas
+ SAlundra: La methode est de faire le test avant le code fonctionnel
+ SAlundra: unit test puis la class/fonction
+ philRG: Étonnamment j'en fais quasiment jamais
+ philRG: Je teste parfois le résultat d'un bout de code python ou syntaxe, rarement d'une fonction écrite par moi
+ philRG: Je vois tout de suite en analysant les replays si ma fonction a le comportement voulu
+ philRG: J'analyse aussi le contenu de mes variables de jeu à l'instant/tour T
+ Zorg1: tester c'est douter
+ philRG: Oui voilà je teste une stratégie rarement une implémentation
+ philRG: Si je commence à tester une implémentation c mauvais signe
+ Remi.: Sur CG, les tests c'est quand on soumet le code. Les TU ça n'existe pas ^^
+ philRG: pkoa écrire une fonction de TU, alors que j'ai déjà tout factorisé précédemment. Je teste ma nouvelle fonction en regardant les replays
+ philRG: le code testé/factorisé part dans une boîte et j'y touche plus
+ leojean890: tiens Zorg1 je viens de tomber sur <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/binary-sequence">https://www.codingame.com/ide/puzzle/binary-sequence</a> ça me fait penser à un truc qu'on a fait y'a genre 3 mois&#160;;)
+ Zorg1: ah oui ça me rappelle vaguement un truc
+ Zorg1: évidemment il a codé 4 tests, plus ça explose
+ leojean890: ouais on avait fait un truc où il faut compter le nombre de 1^^
+ Zorg1: oui
+ leojean890: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/bit-count-to-limit">https://www.codingame.com/ide/puzzle/bit-count-to-limit</a>
+ leojean890: et là ça va être un peu le même principe^^
+ leojean890: 75% en bruteforce lool
+ Zorg1: ah oui 2 nombres à 1 digits, 2 à 2, 4 à 3, 8 à 4, ...
+ leojean890: (ind*2**(ind-1))
+ leojean890: ouais^^
+ pardouin: j'ai 9 lignes :D
+ leojean890: hehe comme d'hab^^
+ pardouin: 6 lignes mais c'est moins lisible XD
+ Zorg1: cette frime
+ pardouin: ahahah je viens de faire un gros troll dans ma solution
+ pardouin: leo c'est pour toi &lt;3
+ leojean890: dans lequel&#160;?:P
+ leojean890: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/binary-sequence">https://www.codingame.com/ide/puzzle/binary-sequence</a>
+ leojean890: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/bit-count-to-limit">https://www.codingame.com/ide/puzzle/bit-count-to-limit</a>
+ pardouin: premier
+ leojean890: j'ai déjà fait le 2nd, je suis entrain de faire binary sequence
+ pardouin: tu auras la surprise&#160;:)
+ leojean890: j'ai galéré à le faire, l'autre
+ leojean890: genre 2-3h dessus xD
+ leojean890: jgalère un peu sur ces sujets
+ leojean890: j'crois que je peux finir lui avec la même logique que l'autre
+ leojean890: naviguer du 1 le plus haut au plus bas 
+ pardouin: oui ça ressemble beaucoup
+ leojean890: jvais essayer de mettre moins de temps cette fois que pour l'autre du coup xD
+ Zorg1: hop fait :p
+ leojean890: gg, pas encore moi mdrr
+ leojean890: alors tu le trouves plus simple ou dur que l'autre :p
+ Zorg1: bah plus simple j'ai pas la fonction récursive ^^
+ leojean890: I see^^
+ Zorg1: ofc je suis la seule contribution lua&#160;:(
+ leojean890: snif tu peux même pas comparer^^
+ leojean890: si le code est court tu convert
+ Remi.: Ou le seul à l'avoir publié
+ leojean890: ou tu fais en go allez hehe
+ leojean890: Remi. en c++ toi non&#160;?:P
+ Remi.: Faut que je vérifie si je l'ai fait. Mais oui je fais tout en C++
+ Remi.: (ou du moins, quand je fais dans d'autres langages, je l'ai d'abord fait en C++)
+ leojean890: ah oui c ptet le seul à avoir publi mais d'autres auraient fait qd même en lua^^
+ leojean890: pareil moi avec s/cpp/python mdr
+ Remi.: Je n'ai fait ni l'un ni l'autre.
+ Remi.: En ce moment je suis sur ML3 ^^
+ Remi.: (entre 2 golf)
+ leojean890: ml3 j'avoue j'ai pas réussi mdr
+ leojean890: j'ai pas vraiment essayé j'ai tjr eu la flemme
+ leojean890: t'as pas fait les puzzles avec les bits&#160;?
+ leojean890: j'avoue en tt cas je mets du tps 
+ Remi.: Pareil pensant qu'il fallait une IA digne d'un bot legend (à cause des tags Algo G), mais j'ai appris il y a peu que c'est faisable en heuristique. Du coup je m'y mets.
+ Remi.: J'ai fait des puzzles avec des bits, mais pas ceux là.
+ leojean890: ouais c faisable mais chaud
+ leojean890: je vois
+ leojean890: avec des bits y'en a d'autres de galères parfois
+ leojean890: les trucs d'arithmétique
+ Remi.: Faudra que je les fasse, mais pas ce soir, dodo. Bonne nuit ^^
+ leojean890: ouais pas d'urgence xD
+ leojean890: good night&#160;!
+ leojean890: ah réussi aussi Zorg1 en effet y'avait pas à faire la récurrence, je somme jusqu'à la puissance de 2 demandée pour avoir une somme juste inférieure au nombre total d'itérations et ensuite je divise ce qui reste par le nb de bits des nombres suivants et le reste est l'indice du bit qu'on cherche dans le dernier nb entier
+ pardouin: mate ma soluce :D
+ pardouin: et gg&#160;!
+ leojean890: ah oui je vois la tienne, c plus concis, j'ai du mal à comprendre^^
+ leojean890: si tu lis la mienne tu comprends direct&#160;?:P
+ pardouin: t'as pas vu l'easter egg ^^
+ leojean890: dans ta soluce&#160;?
+ leojean890: (d&#160;:= c * k
+ leojean890: l'opérateur tout nouveau&#160;?
+ pardouin: le nom des variables XD
+ leojean890: ah oui mdr
+ leojean890: f u c k
+ leojean890: lol
+ pardouin: en fait par hasard j'avais presque ça
+ leojean890: j'me demande comment tu arrives si facilement à golfer :p
+ pardouin: du coup ça m'a fait marrer et j'ai changé j'avais puck je crois
+ leojean890: moi je fais trop complexe je crois
+ leojean890: par rapport à ce qui est piossible
+ leojean890: possible
+ pardouin: déjà divmod ça aide bien
+ pardouin: quand tu veux récupérer q et r
+ pardouin: tu fais q, r = divmod(a, b)
+ leojean890: ah ouais pas mal
+ pardouin: bon allez go dodo
+ pardouin: bn o/
+ leojean890: bn^^

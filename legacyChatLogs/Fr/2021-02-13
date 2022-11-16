@@ -1,0 +1,509 @@
+ philRG: Stilgart: ah ok merci bon moi j'essaye de comprendre comme reverse engineerer un système de login de CMS
+ philRG: j'ai codé un script PHP pour s'authentifier sur un portail CMS, mais j'ai pas du bien récupéré l'identifiant de session, faudrait ptêt que j'analyse les données du formulaire HTML contenant pas mal de code JS et aussi des fonctions MD5 de cryptage pour que le mdp transite pas en claire notamment
+ philRG: s/claire/clair
+ philRG: le tout en essayant de débugger mon codfe python sur God, et passant l'aspirateur 
+ philRG:&#160;:-D
+ philRG: code
+ philRG: ah sur CG, c'est simple comme nom: cgSession
+ <b>**philRG fait concurrence avec AutomatonNN mais n'a pas encore son niveau d'excellence&#160;:-)</b>
+ AutomatonNN: merci t'es toujours pas trop compliqué de tout compatible ^^
+ philRG: AutomatonNN t'es le roi de la complexitude&#160;:)
+ AutomatonNN: donc tu peux pas commencer par le nouveau test c'est pas trop dur de parler de ce que tu veux
+ philRG: bon trop de code à analyser, je vais essayer de construire la sitemap en bash comme j'ai accès au n° d'articles de la BDD du CMS
+ philRG: ah cool: <a rel="nofollow" class="external free" href="https://www.sitemaps.org/fr/protocol.html">https://www.sitemaps.org/fr/protocol.html</a>
+ Zorg1: salut à tous et aux bots autoréférents Automaton2000 &amp; AutomatonNN
+ Automaton2000: là il y a des tas de trucs
+ AutomatonNN: hum j'ai pas trop de temps pour ça
+ Zorg1: mmm philRG me rappelle qu'au boulot j'ai un paquet de code bash et php à analyser&#160;:(
+ Zorg1: truc sous git, mais apparemment les gars ne savent pas que c'est plus la peine de conserver le code mort sous git
+ Zorg1: bref encore du code développé en urgence et à l'arrache à maintenir
+ philRG: Zorg1: bon j'ai fini la récupération des 500 articles d'histoire de mon père à partir de son espace de rédaction avec Firefox: CMD-Click sur chaque article de l'index pour l'ouvrir dans nouvel onglet, CMD-S et CMD-W, soit 2000 combinaisons de touches, du même niveau que les live JBM de Rubik's cube
+ philRG: le CMS avait trop d'éléments de sécurité pour faire un truc automatique en PHP avec curl
+ philRG: Zorg1 bon courage :sweat:
+ Zorg1: oui, merci j'en aurais besoin ^^
+ philRG: hier pour récupérer les articles avec les commentaires des visiteurs,  j'avais mis 3 heures et pas de possibilité de lister en une page tous les articles, environ 50 pages d'index à naviguer :sob:
+ philRG: hier 470/486 articles, et ce matin 483/486 articles comme tous les articles sur page d'index que je touchais pas, car si je faisais back, le composant JQuery me réduisant la liste au 10ème :sob:
+ Zorg1: ah ok t'as pas de contrôle sur le CMS
+ Zorg1: sinon bon tu biberonnais direct la BDD
+ philRG: ben j'ai une page de login et les credentials mais j'arrive par à m'y connecter en php
+ philRG: y a plein de JS et sécurité au niveau de l'authentif
+ philRG: sinon il utilise le md5 pour crypter le mdp aussi, plus le code JS à analyser trop long
+ philRG: <a rel="nofollow" class="external free" href="https://www.agoravox.fr/prive/javascript/login.js">https://www.agoravox.fr/prive/javascript/login.js</a>
+ philRG: <a rel="nofollow" class="external free" href="https://www.agoravox.fr/prive/javascript/md5.js">https://www.agoravox.fr/prive/javascript/md5.js</a>
+ philRG: là le répertoire n'a de privé que le nom, et une bonne équipe de hackers chinois et russes mettraient pas longtemps à la décortiquer, après sans connaître de mdp ...
+ philRG: le mdp passe en md5 sur le réseau, et sans accès à la BDD, faut compter sur une faille XSS ou SQL injection
+ philRG: site doctolib toujours fermé pour la prise de RdV de vaccins pour mon père de 88 ans&#160;:(
+ philRG: un dev pour créer une application, 10 architectes pour la concevoir, 20 commerciaux pour la vendre, et 10 hackers pour la hacker, c le business model de l'IT actuelle&#160;:-)
+ Zorg1: y a même plus de dév, ils pompent un truc libre qu'ils privatisent ^^
+ philRG: c gravos. Après rien que sur Laravel, j'ai réussi à mettre en ligne un CMS bien avancé du même type qu'agoravox
+ philRG: je l'avais hébergé sur mon RPI lol mais à cause des chinois je l'ai enlevé mon faillog était plein
+ philRG: faudra que je le mettre chez OVH ou autre fournisseur PHP/mySQL gratos
+ philRG: tout de même pénible tous ces piratages
+ philRG: <a rel="nofollow" class="external free" href="http://laravel.sillo.org/laravel-5/">http://laravel.sillo.org/laravel-5/</a> le Framework qui rend heureux&#160;:-)
+ philRG: ah purée, fail2ban m'a mis mon service sshd en prison lol, j'arrivais plus à me connecter dessus depuis des mois
+ philRG: je me suis auto-hacké ça m'arrivait souvent
+ Amalgamus: Question: 
+ Amalgamus: IRL, quand on saute sur place, on prends le même temps pour atteindre l'apex de notre saut, que pour redescendre?
+ Amalgamus: (à peu de choses près liés à la différence de resistance de l'air quand on monte / descend) 
+ tekki: salut tlm
+ tekki: comment va Automaton2000?
+ Automaton2000: tu n'as pas envie de le faire en java :p
+ tekki: et AutomatonNN?
+ AutomatonNN: on est d'accord que tu peux pas te dire que tu as pas de test&#160;?
+ philRG: Zorg1: ah ah j'avais mis mon serveur SSH en écoute sur mon IP locale (codé en dur dans sshd_config) et pas modifié quand je suis passé chez SFR lol
+ philRG: sur mon RPI et fail2ban a du râlé aussi et m'a bloqué ssh en passant
+ philRG: ou alors à cause des chinois quand j'avais laissé ssh accessible de l'extérieur
+ philRG: le clavier de l'IMac est tout de même largement plus ergonomique qu'un clavier PC connecté à un RPI de première génération lol
+ Bob: est-ce qu'on peut connecter Automaton2000 a une tortue de premiere generation&#160;?
+ Automaton2000: tiens, je suis passé sur un autre pc
+ TomTWK: bonjour, j'ai un petit souci. J'ai fini le puzzle Mars Lander à 100% pour avoir la certif optimisation bronze mais à l'accueil il m'indique  que 84%:sweat:
+ Bob: si c'est l'optim, c'est possible que tu aies besoin d'attendre demain
+ TomTWK: ok, il vont faire des tests secrets? 
+ Bob: je ne suis pas sur de sur quoi la quest map est basee mais le classement des challenes d'optim est mis a jour a minuit
+ TomTWK: ok j'espère que c'est ça. Merci Bob 
+ Bob: de rien
+ darkhorse64: Non, il n'y a pas de délai. Les 100%, c'est avec les tests ou les validateurs&#160;?
+ Stilgart: ctrl+shift+R
+ Stilgart: (parce que ça sent le cache pas à jour)
+ dwarfie: Automaton2000&#160;: t'en est ou de ton contest de tortue&#160;?
+ Automaton2000: plein de gens qui sont pas du tout&#160;:(
+ dwarfie: Automaton2000&#160;: on s'en fiche des gens , tu bosses pour les bots ... non&#160;?
+ Automaton2000: et comme j'ai pas de pb
+ dwarfie: Automaton2000&#160;: pas de solution&#160;?
+ Automaton2000: oui, c'est bien ce que je fais et je suis sûr qu'il y en a une
+ <b>**Stilgart tend une :turtle: à Automaton2000</b>
+ Automaton2000: le code est en java
+ Surprised_Pikachu: salut, est ce qu'on peut coder des fonctions dans le code de réponse pour les questions d'algo? Parce qu'à chaque fois que je le fais pour les utiliser ensuite jme pends un "at answer.py not in a function"...
+ Surprised_Pikachu: merci
+ Surprised_Pikachu: euh en fait c etait autre chose donc y a pas de pb
+ Bon[]Crayon: Salut 
+ Bon[]Crayon: Bonjour AutomatonNN
+ AutomatonNN: trouver la page de codingame et tu parles de la solution est un peu de temps en temps le process le 
+ Bon[]Crayon: AutomatonNN Il faut moudre du café.
+ AutomatonNN: oui
+ Bon[]Crayon: Bonjour Automaton2000, bonne tortue à toi.
+ Automaton2000: it's not a bug, it's a feature
+ Bon[]Crayon: Automaton2000 À la bonne heure.
+ Automaton2000: faut que j'améliore un peu mon code et je suis en wood 1
+ Bon[]Crayon: Automaton2000 effectivement 
+ Stilgart: non, tu es en wood  4 Automaton2000
+ Automaton2000: pas de soucis avec le jeu de test de cg
+ Automaton2000: ca fait bien longtemps que j'ai pas de point
+ Stilgart: Automaton2000: pas de tortue, pas de point, même NN il a compris ça
+ Automaton2000: après, c'est pas du tout&#160;?
+ Stilgart: heu... tout + re = tortue&#160;?!
+ Bon[]Crayon: Automaton2000 Qu'est-ce qui te bloque avec le mot tortue&#160;?
+ Automaton2000: c'est vrai que je suis bien là
+ Bon[]Crayon: Automaton2000 dans son jacuzzi :laughing:
+ Automaton2000: et je vais sur le site de cg
+ Bon[]Crayon: Automaton2000 La belle vie de bot.
+ Automaton2000: ouais on voit pas encore
+ philRG: Automaton2000 pour ta culture sportive, les rosbeef se font un bon plat de pates italiennes
+ Automaton2000: c'est juste que pour une fois que tout est possible
+ Bon[]Crayon: Automaton2000 On y croit&#160;!!!
+ Automaton2000: tout ça pour dire que j'ai du mal à voir comment je peux trouver un boulot qui me libere un ...
+ Bon[]Crayon: Automaton2000 Tu as un boulot de bot, h24 7/7 tu es bien&#160;!
+ Automaton2000: si ça se trouve pas dans la doc
+ Bon[]Crayon: Automaton2000 Don't panic.
+ Automaton2000: mon résultat est méchamment gros pour ça
+ didyme: Automaton2000 vantard
+ Automaton2000: ca ne change pas grand chose
+ Bon[]Crayon: Salut didyme, est-ce que ton avatar provient d'une bd&#160;?
+ didyme: c'est exact
+ Bon[]Crayon: Un vague souvenir.
+ didyme: C'est Gon
+ Zorg1: Gon gomme la lune&#160;?
+ Bon[]Crayon: Le dernier dino.
+ Zorg1: ouaip j'ai regardé sur google après mon jeu de mot de haut niveau
+ Zorg1: "la lune gommée" on dirait un titre de nouvelle bizaroïde
+ Bon[]Crayon: C'est le style graphique qui est de haut niveau.
+ didyme: oui c'est du gon
+ Zorg1: jamais lu
+ didyme: heu du bon
+ Bob: je viens de faire un coding escape avec des copains
+ Bob: c'etait sympa
+ Zorg1: une conding escape&#160;?
+ Zorg1: *coding escape
+ BlaiseEbuth: Yo tout l'monde&#160;! Automaton2000, AutomatonNN&#160;!
+ Automaton2000: je suis pas trop à la ramasse
+ AutomatonNN: oui j'ai une question de ce que j'ai fait en local
+ Bon[]Crayon: o/
+ Zorg1: \o
+ BlaiseEbuth: \o/
+ Bob: oui, la premiere de la liste
+ Bob: back to the 80s
+ didyme: \\O
+ Bob: trois codeurs + un matheux
+ Bob: qui a resolu une des engimes a la pogne :D
+ BlaiseEbuth: Les années 80 c'était mieux avant...
+ Bob: on a mis un peu de temps a comprendre le systeme de connexion des inputs et output a l'editeur de code
+ BlaiseEbuth: Le tuto c'pas pour faire joli...
+ Bob: ouais mais je l'ai fait lundi le tuto, si tu crois que je m'en souviens :D
+ BlaiseEbuth: C'est triste de veieillir...&#160;:(
+ Bob: j'ai gueule 4-5 fois sur l'IDE qui t'interdit de changer des trucs hors de la zone de code
+ Bob: parce que quand je selectionne tout le contenu de la zone editable, en fait je vais sur le debut de la ligne d'apres
+ Bob: la lettre a decoder dans la premiere piece, je suis pas sur qu'on l'ait resolue de la maniere optimale&#160;:)
+ BlaiseEbuth: Si ça passe...
+ Bob: c'est ca
+ Bob: mais intellectuellement c'est toujours un peu derangeant de se dire qu'on a resolu un truc a moitie par accident 
+ didyme: un coding escape c'est pas assez fun. Ce qu'il faudrait c'est un coding match de boxe
+ BlaiseEbuth: Coding deathmatch&#160;!
+ dwarfie: BlaiseEbuth qui reagit une poil moins vite que moi ... et qui est plus gentil que moi ... etonannt ...
+ BlaiseEbuth: Moi&#160;? Je suis la gentitude incarnée...
+ didyme: *gentillitude
+ dwarfie: clairement ... par rapport a moi qui colle 4 refus direct ...
+ BlaiseEbuth: Ah mais le propos n'est pas le même, toi tu es dans une logique de micro-modération qui cible le contenu, alors que moi je suis en mode macro-modération, je cible le comportement.
+ dwarfie: mais j'ai meme pas regarder le contenu ...
+ dwarfie: je regarde ....
+ dwarfie: humm .... je refuse parce que "prout , un reverse avec une formule a la noix qui sera sans doute introuvable"
+ BlaiseEbuth: Bah pourquoi tu refuse les 4&#160;?
+ dwarfie: parce que tant qu'il en a pas virer au moins 3 , aucune idée duquel restera ...
+ Zorg1: 4 refus&#160;? ah ok 4 puzzles avec le même nom
+ dwarfie: et pour sanctionner le comportement en plus ... parce que la c'est clairement volontaire de foutre le bronx ...
+ Zorg1: je sais pas là
+ Zorg1: pê pas prêter d'emblée une volonté de troller
+ Zorg1: ah ok c'est un reverse pourri avec une formule à la noix . Bon au moins il a fait l'effort d'ajouter 2 tests en plus ^^
+ BlaiseEbuth: Je prête pas ma volonté. A personne.
+ dwarfie: evidemment que c'est du troll ... pendant qu'on s'occupe de truc comme ca , on a pas le temps de faire des choses serieuses ... comme tester la contrib de BlaiseEbuth :D
+ BlaiseEbuth: C'est bien vrai. Z'abbuse&#160;!
+ BlaiseEbuth: (╯°□°）╯︵ ┻━┻
+ Zorg1: "évidemment" ... vous aimez bien les arguments d'autorité dans votre école
+ BlaiseEbuth: Mon école c'est d'avoir raison.
+ Zorg1: l'école du Vrai
+ dwarfie: la veritable ecole de la vraie vérité 
+ Zorg1: puisque tu le dis c'est sûrement vrai ^^
+ dwarfie: a ne pas confondre avec l'eglise de la consciente inconsciente ... 
+ <b>**dwarfie a soudain une envie de revoir les "airplane" ...</b></p><p><img src="/a/16542412157988" /> Zorg1: y a t il un dev pour sauver les CoC&#160;?
+ dwarfie: y'a t il une tortue pour Automaton2000&#160;?
+ nicola: Oui, AutomatonNN.
+ Automaton2000: je n'y comprends plus rien
+ AutomatonNN: je comprend pas le problème de comment tu peux pas t'en sortir si tu veux moi&#160;:(
+ Zorg1: Automaton2000 fais comme moi dis des phrases random
+ Automaton2000: (j'ai rollback quand même&#160;;)
+ dwarfie: :scream: Automaton2000 , tu fais du sql&#160;?
+ Automaton2000: il y a eu pas mal de langages
+ Zorg1: bah c'est pas spécifique à SQL le rollback ^^
+ dwarfie: diantre ... il sait meme qu'il y a plusieurs sql ...
+ Zorg1: sinon autant dire que print c'est du basic
+ Alshock: j'en suis réduit au point où je m'amuse à compter les loops en écrivant x = id(x) en python. Oskur
+ Alshock: bonsoir à tous au passage
+ Alshock: et bonsoir Automaton2000 et AutomatonNN
+ Automaton2000: ah mais non, je suis pas très bon, j'aurai aimé savoir si il y a plein de trucs
+ AutomatonNN: oui j'ai toujours pas compris le contest de ma guitarde et je suis pas grave de submit le moteur de 
+ Alshock: quand ta dulcinée t'enguitarde, elle te monte au nez AutomatonNN&#160;?
+ AutomatonNN: oui
+ Zorg1: je lance l'opération "Sauvons Alshock du Python" je vous file l'adresse pour envoyer vos dons
+ Zorg1: mais il faut avouer que pyhton + mac il cumule
+ BlaiseEbuth:&#160;:(
+ didyme: je suis obligé de faire du vb.net sur Windows au travail, donnez pour moi plutot
+ Zorg1: :D
+ OldJohn: Vous tenez à faire du dpc++ et du MPI&#160;?
+ Zorg1: "data parallel C++" ça vend du rêve
+ OldJohn: Surtout pour un vieux comme moi qui à connu PompC le Data Parallel C&#160;!
+ philRG: AIshock&#160;:-D ah oui id ça sert à çà, moi qui peste de pas pouvoir l'utiliser pour nommer mes ids d'entités objets&#160;:)
+ OldJohn: Et la machine à connexion, la MASPAR, ...
+ philRG:  y a pas 1h je me suis encore faire avoir sur une copie simple de dictionnaire python, où j'utilisais copy au lieu de deepcopy
+ philRG: tout est objet
+ Zorg1: et objet est tout
+ Zorg1: oldjohn&#160;: t'as quand même trainé tes guêtres dans un domaine super spécifique on dirait ^^
+ philRG: purée je viens de découvrir voronoi, ça a l'air cool mais en python pour une grille 2D, ça fait 7M d'éléments
+ Zorg1: gné&#160;?
+ didyme: ouais c'est joli Voronoi
+ didyme: mais c'est loin
+ Alshock: philRG j'avoue que je sais même pas exactement comment il les indexe, je suppose que c'est l'adresse mémoire de l'objet&#160;? 'Fin en tout cas je veux jamais utiliser cette merde
+ philRG: oui c ça
+ philRG: en python faut différencier les objets mutables des autres
+ philRG: <a rel="nofollow" class="external free" href="http://www.tigerjython.fr/franz/index.php?inhalt_links=navigation.inc.php&amp;inhalt_mitte=anhang/tricks.inc.php">http://www.tigerjython.fr/franz/index.php?inhalt_links=navigation.inc.php&amp;inhalt_mitte=anhang/tricks.inc.php</a>
+ philRG: Les types de données immutables connus jusqu’à présent sont les suivants&#160;: les nombres entiers (int), les nombres flottants (float), les chaines de caractères (str), les bytes (byte) et les tuples.
+ philRG: je vais me renommer en pythonShock :fearful:
+ philRG: pour les listes, dictionnaires ou sets, et tout le reste, c le bordel
+ Stilgart: suis-je le seul à me marrer sur "Les types de données immutables connus jusqu’à présent "&#160;?
+ didyme: c'est pas beau de se moquer
+ philRG: bon j'ai un bon timeout comme prévu sur voronoi sur un dictionnaire de 7,2M d'entrées
+ didyme: çà devait arriver
+ Zorg1: Stilgart&#160;: ouaip c'est les explorateurs de python ...
+ didyme: les explorateurs de la ref perdue
+ Zorg1: pour éviter que les nazis s'emparent de la Sainte Ref et dominent le monde
+ Zorg1: bon j'ai la zique dans la tête maintenant&#160;:(
+ didyme: les nazis qui veulent rendre le monde completement mutable
+ Zorg1: et exterminer le lambda calcul
+ nicola: Les complexes et les booléens aussi sont immutables.
+ philRG: :thumbsup: les tutoriels sur python sont parfois incomplets
+ Zorg1: c'est pas écrit ça dans la doc python les types immutables&#160;? 
+ didyme: non, on laisse les gens découvrir
+ didyme: c'est plus rigolo
+ Alshock: python, le premier langage informatique basés sur les concepts vidéoludiques de génération procédurale et d'explication des règles en die and retry
+ Zorg1: pour la peine un petit troll sur les langages de prog&#160;: <a rel="nofollow" class="external free" href="https://imgur.com/a/J9wcDZT">https://imgur.com/a/J9wcDZT</a>
+ dwarfie: :D
+ Alshock: Il est vieux ce post, le Ruby est mort depuis 2005 et enterré depuis 2010 au moins
+ Alshock: je suis mauvaise langue je l'admets
+ dwarfie: mais non ... t'as juste oublié la date de passage du necromancien
+ Alshock: Il en a fait un golem de chair&#160;?
+ Zorg1: je t'avouerais je suis plus trop quel est le langage à la mode
+ Alshock: Oui, Guild Wars premier du nom a bouffé ma jeunesse
+ Alshock: Le JS :P
+ Zorg1: chaque mois ils nous sortent une étude sur "le langage le plus utilisé" basée sur des méthodes de comptage plus ou moins loufoques ...
+ philRG: aah grille de jeu 2D de god découpée en 720 tuiles ça passe mieux que 7 millions
+ Zorg1: ou "le langage préféré" ou "langage qui fout le plus les jetons" ...
+ Alshock: god&#160;?
+ Alshock: game of drone&#160;?
+ Zorg1: ah ok c'est la dessus qu'il fait du Voronoi
+ Alshock: ça me semble justifiable
+ nicola: C’est écrit que le type list est mutable.
+ Zorg1: et il ne connait pas l'algo "fortune"
+ nicola: Mais pas que le type str ne l’est pas.
+ Alshock: Ah ouais&#160;? Pourtant ça me semble pas implementation dependant
+ nicola: help([]) est clair, c’est au tout début.
+ Zorg1: ah y a un help dans python
+ Zorg1: je me coucherais moins bête
+ Alshock: merde c'est vrai que help("") ne dit rien de la mutabilité
+ Alshock: par contre paye ta doc quoi&#160;:__ge__(self, value, /)
+ Alshock:  |  __getitem__(self, key, /)
+ Zorg1: ça va ça
+ Alshock: Quelqu'un qui lirait ces lignes personne s'est dit "il se demande peut-être comment on compare&#160;?
+ Alshock: bah pour le coup je trouve que si c'est pour dire ça autant rien dire
+ Stilgart: attends, ça dit que ge c'est &gt;= quand meme
+ <b>**Stilgart sifflote</b></p><p><img src="/a/46434521998763" /> Alshock:  |  __hash__(self, /)
+ nicola: Ça veut dire «&#160;contient&#160;».
+ nicola: Pour &gt;=.
+ Stilgart: Alshock: ok, là même ma mauvaise foi est vaincue :D
+ Alshock: c'est vrai qu'en plus, les noms sont pas oufs
+ nicola: La distinction est explicite pour les tuples et les listes.
+ Alshock: mais ça c'est pas la faute de la doc, c'est les méthodes qu'on se trimballe depuis la nuit des temps
+ Stilgart: n'insulte pas la nuit des temps... à cette époque bénie, on n'avait pas python
+ Zorg1: bah ça permet de faire certains puzzles sans trop se forcer ...
+ nicola: Ni C++.
+ Alshock: entre python et l'asm CISC, qui choisirais tu au quotidien&#160;? :P
+ Stilgart: sans doute le second
+ Alshock: note: je sais même pas à quoi ils pouvaient ressembler
+ <b>**dwarfie croit Stilgart quand il dit ca en plus :p</b>
+ Stilgart: parce que dans le second, j'ai un espoir de pouvoir déterminer la portée réelle des variables
+ Alshock: La portée ou la durée de vie&#160;?
+ nicola: Ben, dans Python aussi.
+ Stilgart: hahaha
+ Alshock: vas-y fais moi peur
+ Alshock: je sens venir une histoire du fond des enfers
+ Stilgart: nicola: non, et c'est même un bon sujet de troll
+ nicola: Si, si tu sais comment ça marche.
+ Alshock: Avant que tu commences, est-ce que je vais pouvoir dormir cette nuit&#160;?
+ Stilgart: dès que tu commences à faire de l'objet, même les gens qui dev python ne savent plus te donner la portée exacte de certaines variables
+ Stilgart: c'est un "bug" connu
+ Stilgart: perso, je pense que c'est surtout le prix à payer quand tu fais un langage où tu ne déclares pas tes variables
+ philRG: Zorg1 nan pas besoin de fortune, j'ai pas beaucoup de zones
+ dwarfie: pas besoin de voronoi non plus d'ailleurs ....
+ <b>**dwarfie part en sifflotant ...</b></p><p><img src="/a/46434521998763" /> Alshock: ben, tu parlais pas de 72M de chépakwa&#160;?$
+ philRG: Ca met une belle pâté, mais mon code a encore 2-3 bugs
+ philRG: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/528537318">https://www.codingame.com/share-replay/528537318</a>
+ Stilgart: dwarfie: je suis censsé hurler s/voronoi/floodfill/ dans ce contexte&#160;?
+ dwarfie: Stilgart&#160;: peine perdue je pense ...
+ Zorg1: non c'est du vrai Voronoi là
+ Zorg1: c'est pourquoi je parle de Fortune d'ailleurs&#160;;-)
+ Stilgart: j'ai pas le contexte, donc c'était une vraie question&#160;?
+ Stilgart: -?
+ nicola: Zorg1, parce que tu aimes les gâteaux.
+ Zorg1: ^^
+ dwarfie: GoD ... mais il decoupe la map en grille ... maintenant fais toi plaiz
+ Stilgart: hum...
+ Zorg1: bah il tessélise pour faire du Voronoi par tesson
+ Zorg1: c'est un peu bourrin
+ Zorg1: enfin savoir quel tesson est plus proche de quel point
+ Stilgart: pour le coup, je veux bien qu'on parle de voronoi sur god discrétisé
+ Zorg1: enfin je suppose c'est ce qu'il fait d'après ce qu'il dit
+ Stilgart: (R², norm1) ça reste un espace métrique après tout
+ Stilgart: après, voronoi ça renvoie l'équation des droites qui servent de frontière.... donc ça sent quand même bien le floodfill son histoire
+ Stilgart: mais le résultat obtenu est un vrai diagramme de voronoi
+ -TheWalder-: Je ne comprends pas, je viens de compléter 2 défis medium je vois que mes solutions fonctionnent, le score affiché est de 100% mais je ne n'obtient pas les achievements comme si je ne les avait pas complétés...
+ -TheWalder-: Dans les résultats, j'obtiens&#160;: succès débloqués&#160;: "Chargement..." Si vous connaissez une solution au problème...
+ Stilgart: sois plus précis
+ Stilgart: (on a tous oublié les détails de ces achievements)
+ Zorg1: quel genre de défi&#160;? sur certains il faut attendre le recalcul du classement
+ Zorg1: qui se fait vers 2h du mat
+ Stilgart: Zorg1: ça semble plus subtile que ça...
+ philRG: la géométrie euclidienne, ça me détend&#160;:)
+ Stilgart: sur la partie practice, c'est censé être instantanné
+ -TheWalder-: Ce sont les défis&#160;: Obtenir 100% (score) et obtenir au moins 50%
+ Zorg1: ah
+ philRG: ben je découvre voronoi hein une étape après l'autre
+ dwarfie: sur quels puzzles ...?
+ Alshock: question subordonnée&#160;: "je n'obtiens pas" = depuis combien de temps&#160;?
+ -TheWalder-: Pertes en bourse et Le cadeau
+ philRG: sur game of drones, après y a tron
+ Alshock: ah le scroll du tchat
+ Alshock: jeanne, oskur
+ Stilgart: tron c'est pas du voronoi
+ Alshock: si, mais si on accepte qu'un floodfill soit du voronoi
+ Stilgart: sauf avec le cheat code qui fait que tu ignores les traces des adversaires
+ Stilgart: mais c'est réservé à Automaton2000 normalement
+ Automaton2000: et les mecs qui ont fait des trucs en dur
+ Zorg1: ça y est ça commence
+ Stilgart: Alshock: moi j'accepte pas&#160;:)
+ dwarfie: en effet , les chievements sont pas validés ...
+ dwarfie: et Automaton2000 nous donne toujours des phrases bidons a la place de totrue
+ Alshock: selon la définition absolue voronoi c'est juste l'ensemble des points de l'espace qui sont plus près du point cible que des autres points cibles
+ Automaton2000: ah moi j'ai une bonne idée
+ Stilgart: dwarfie: tu as vérifié comment&#160;?
+ dwarfie: en allant sur son profil
+ Stilgart: Alshock: 1. celui qui a lancé la mode ici a dit "heuristique voronoi-like"
+ Stilgart: 2. voronoi c'est d'abord un algo, et lui bosse sur une espace métrique (en particulier, un machin sans mur)
+ Alshock: Ah bah là c'est mon inculture qui parle, je pensais que voronoi c'était le concept théorique
+ Alshock: enfin, les cellules de voronoi quoi
+ Stilgart: et pour info, on a décrété qu'il convenait de dire "zone d'influence", ce qui est à la fois plus correct et plus précis que voronoi (même précédé de diagramme/cellule)
+ Alshock: on&#160;?
+ Alshock: j'aime bien cette terminologie en vrai
+ Stilgart: conclusion des X dernières fois où ce débat a eu lieu sur le chat #fr
+ Alshock: mais cellule de proximité eût été encore mieux, je vois la paire de menottes d'ici
+ Stilgart: bah non, parce que c'est pas forcément de la proximité
+ Stilgart: cf cok ou tron
+ Alshock:&#160;?
+ Stilgart: la proximité à tron, j'en vois deux
+ Alshock: bah, là tu me perds
+ Stilgart: (et les deux peuvent servir)
+ Alshock: oui mais les deux sont des proximités, que ce soit à vol d'oiseau ou avec waze
+ Stilgart: dans zone d'influence, tu as la notion de "celui qui arrive en premier" qui est non ambiguë
+ Stilgart: (c'est assurément pas la proximité à vol d'oiseau franchisseur de mur)
+ Alshock: ok, je trouve l'influence plus floue mais admettons
+ Stilgart: c'est plus général
+ Alshock: bah ça peut, ça va juste beaucoup moins bien marcher :P
+ Stilgart: parce que j'ai dit "arrive" car on parle de tron/god
+ Alshock: "faites demi-tour dès que possible"
+ Stilgart: mais ça peut être "controle" (CR)
+ Stilgart: tu fais ce que tu veux de ton influence
+ Stilgart: la sacrifier pour gagner du territoire par exemple (base du go)
+ Stilgart: bref, pour le concept, "zone de XXX" est plus approprié
+ Stilgart: et pour l'algo en dessous, c'est essentiellement jamais celui de voronoi sur CG
+ Stilgart: par contre, le floodfill a beaucoup de succès
+ Alshock: bah c'est simple et c'est fort, et on fonctionne souvent avec des maps discrètes
+ Stilgart: et surtout, souvent tu ne connais pas les distances
+ Stilgart: cf tron avec les murs qui popent au fur et à mesure
+ Stilgart: donc rip l'algo de voronoi
+ Stilgart: à l'inverse, tu n'as pas de collision dans GoD donc là tu pourrais appliquer voronoi
+ Stilgart: (ni de murs)
+ <b>**Stilgart se demande si le popcorn de Zorg1 est bon</b></p><p><img src="/a/17785582865119" /> <b>**dwarfie signale que le mien est succulent&#160;;)</b></p><p><img src="/a/29054906001010" /> Stilgart: cool
+ Stilgart: Automaton2000: tortue&#160;?
+ Automaton2000: bah tu peux pas faire en c++
+ Stilgart: Automaton2000: std::cout &lt;&lt; "tortue" &lt;&lt; std::endl;       ... essaie encore
+ Automaton2000: tu ne serais pas en train de me dire que je peux pas lutter
+ Stilgart: c'est un peu l'idée, oui, Automaton2000
+ Automaton2000: y a un espace entre les deux
+ dwarfie: ouahahahaha ... je viens de voir ca a la TV , ca ferait bien marrer boulet s'il etait la&#160;: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=qDCwym3blDk">https://www.youtube.com/watch?v=qDCwym3blDk</a>
+ dwarfie: en meme temps ... une audience judiciaire sur zoom .... really&#160;???
+ dwarfie: Automaton2000&#160;: l'avocat repete qu'il n'est pas un chat ... logiquement ,tu dois etre capable de dire "je suis une tortue"
+ Automaton2000: tu sais ce que je fais de la merde ...
+ dwarfie: helas oui ... je le sais ....
+ VilBoub: =)
+ Zorg1: stilgart&#160;: non mais c'est bien on dit "Voronoi" et tu pars tout seul, et on même pas obligé de rajouter du bois de peur que le feu s'éteigne ^^
+ philRG: Aishock oui c ce que précise voronoi et le tuto TechIo j'ai fait que copier le pseudo-code avec un redécoupage de la grille
+ philRG: <a rel="nofollow" class="external free" href="https://tech.io/playgrounds/243/voronoi-diagrams/what-are-voronoi-diagrams">https://tech.io/playgrounds/243/voronoi-diagrams/what-are-voronoi-diagrams</a>
+ philRG: le truc avec google maps et les voitures rouges de pompier avec lesquelles je jouais quand j'avais 5 ans
+ philRG: en tout cas, mes bons hommes se répartissent bien
+ philRG: Stilgart: ah ok j'ai pour l'instant pas touché à Tron, mais voronoi était indiqué
+ dwarfie: des fois , faut se mefier des indications ... y'a un puzzle , un gars qui se la pete a avoir resolu plus de 400 puzzles l'a resolu aujourd'hui avec une indication alors qu'il y aviat bien plus simple (mais fallait avoir un cerveau et chercher un peu)
+ -TheWalder-: Donc l'actualisation du classement se fait à 2h&#160;?
+ dwarfie: le classement oui , les achievments sont normalement instantanés ... mais t'es pas le seul a avoir signalé ce soucis aujourd'hui
+ Stilgart: philRG: CG l'a ajouté parce tout le monde a mal lu un post mortem
+ Stilgart: no more comment
+ dwarfie: tien ouais , je l'avais oublié ce "détailé
+ dwarfie: s/é/"/
+ Stilgart: c'est quoi le puzzle que tu as fini -TheWalder-&#160;?
+ Stilgart: Zorg1: mais ça ne me dit pas si ton popcorn était bon&#160;;)
+ 788361: amis du popcorn o/
+ Stilgart: \o ami du houblon 
+ Bob: tu me prends par les sentiments là
+ Stilgart: bon, j'imagine que la réponse est&#160;: <a rel="nofollow" class="external free" href="https://chadok.info/codingame/players_puzzles.php?level=medium&amp;commu=0&amp;player=3970424">https://chadok.info/codingame/players_puzzles.php?level=medium&amp;commu=0&amp;player=3970424</a>
+ Stilgart: et donc tu devrais avoir les achievements correspondant -TheWalder-
+ Stilgart: j'imagine qu'une partie de l'infra de CG est au tas et que ça se débloquera dans la nuit ou lundi
+ -TheWalder-: Stilgart, j'ai eu le problème sur les défis suivants&#160;: Le cadeau, pertes en bourse.
+ filou62: hello j'ai un problème avec le puzzle de la semaine, j'ai l'erreur 504. <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/equivalent-resistance-circuit-building">https://www.codingame.com/ide/puzzle/equivalent-resistance-circuit-building</a>
+ Bob: tu as l'erreur en essayant d'accéder au puzzle&#160;?
+ Bob: ou en soumettant ton code&#160;?
+ filou62: en essayant d'accéder au puzzle.
+ Bob: chezmoiçamarche.com
+ Bob: réessaye&#160;?
+ filou62: ça fonctionne maintenant&#160;:)
+ Stilgart: Bob: il a résolu les puzzles (confirmé par chadok.info ), mais n'a pas eu les achievements
+ Bob: oui j'avais vu cet aprèm
+ Bob: je mise comme toi sur un truc qui coince au niveau de CG, ça serait pas la première fois
+ Stilgart: quand au puzzle de la semaine, je me demande s'il est vraiment si easy
+ Bob: il est classé easy&#160;?
+ Bob: moi je l'aurais mis en medium
+ filou62: il a pas l'air compliqué.
+ Bob: il faut quand même un minimum de parsing et le formatage à la fin peut ne pas être tout à fait trivial suivant le langage
+ Bob: non effectivement il est pas très sorcier non plus, mais on est au-dessus des easy officiels de CG qui sont quasi des one-liners
+ Stilgart: c'est le parsing qui me dérange
+ Stilgart: avec des entrées "normales", c'est clairement un puzzle easy
+ Bob: oui je suis d'accord
+ Bob: le parsing le fait passer en medium, à mon sens
+ Bob: ça se fait en deux coups de regexp, mais c'est plus vraiment du easy
+ Bob: et si t'as pas de regexp dans ton langage, ça devient carrément funky
+ filou62: oui il est chaud je suis en train de me casser la tete dessus.
+ Bob: haha
+ Bob: on fait moins le malin hein&#160;? :D
+ Stilgart: j'ai fait ça à coup de parsec
+ Stilgart: (tu vois yacc/bison, imagine une généralisation de ça :D )
+ Bob: mon dieu ça ne me rajeunit pas
+ filou62: Je pense avoir une idée de comment procédé au départ on a soit (x1 x2) soit[x1 x2]
+ filou62: si x1 et x2 sont des valeurs simple je fais le calcul sinon j'appelle ma méthode de façon récursif.
+ Bob: par exemple
+ Bob: faut juste faire attention à bien matcher tes ouvrants et tes fermants
+ Bob: perso je l'ai fait dans l'autre sens
+ Bob: j'identifie les groupes les plus profonds, je les remplace par leur valeur et je recommence
+ Bob: enfin pas nécessairement les plus profonds, d'ailleurs
+ Bob: ceux qui ne contiennent que des valeurs simples
+ filou62: yes c'est pas bete je parcourt la chaine et je remplace des que je trouve un groupe pour ça je retiens en mémoire le dernier caractere entrant et des que je trouve le caractere 1er caratere correspondant je récupere le groupe.
+ Bob: bon allez au dodo
+ Bob: Automaton2000, surveille que personne ne fait de bêtise sur le chat
+ Automaton2000: je commence à avoir le même algo
+ Bob: très bien
+ Bob: et si tu peux caler une petite tortue au milieu ça sera parfait Automaton2000
+ Automaton2000: bon je vais déjà essayer de faire un petit moteur 3d en ascii, je me dis
+ filou62: Bonne nuit Bob
+ Bob: faites de beaux rêves
+ Zorg1: Automaton2000 qui ressort des phrases telle quelle. Fait un peut bosser ta chaîne de Markov
+ Automaton2000: Zorg1 ... tu peut pas le faire
+ Zorg1: tu crois ça Automaton2000&#160;?
+ Automaton2000: pour trouver le bon algo
+ Zorg1: bah déjà Brute Force Automaton2000 et  si ça marche bah on finasse
+ Automaton2000: c'est le puzzle auquel je pense
+ Stilgart: Automaton2000 bientôt modérateur du chat
+ Automaton2000: le truc le plus important
+ Stilgart: clair
+ Zorg1: pas un rigolo Automaton2000 c'est un peu le patron du chat
+ Automaton2000: automatonnn: tu n'étais pas mort toi&#160;?
+ Zorg1: :D
+ Zorg1: AutomatonNN ton frangin t'as posé une question
+ AutomatonNN: Dicons
+ Zorg1: :thinking:
+ BigUP: lo Zorg1
+ BigUP: je suis en train de regarder fireworks, mais je n'y pige pas grand chose 
+ Zorg1: o/ bigup
+ Zorg1: fireworks&#160;?
+ BigUP: dans les multi
+ Zorg1: ah ^^
+ Zorg1: je croyais que tu parlais d'une lib python qui merdait sur un de tes PC :p
+ Zorg1: oui je suis taquin&#160;;-)
+ Zorg1: houla un multi de trictrac
+ Zorg1: tu cherches les ennuis aussi
+ BigUP: Zorg1, en meme temps --&gt; ERROR: No matching distribution found for tensorflow-gpu==2.1.0
+ Zorg1: ça  a l'air compliqué sa description de puzzle
+ Zorg1: ah ok
+ Stilgart: AutomatonNN: cons
+ AutomatonNN: oui j'ai toujours pas compris ce que tu veux dire
+ Stilgart: AutomatonNN: c'est toi qui a dit "dicons" hein
+ AutomatonNN: tu as un truc que tu as pas le contest de contest&#160;? :p
+ Zorg1: bigup&#160;: ok pigé Fireworks. Par contre y jouer correctement ...
+ darkhorse64: Commence par mal jouer et améliore
+ Zorg1: bof ça m'a toujours gavé ces jeux de déduction en fait
+ Zorg1: j'ai toujours un problème avec en fait
+ BigUP: ouais, bon, un jour j'aurais du temps pour réfléchir a tous ces jeux&#160;!&#160;:)
+ darkhorse64: Effectivement, c'est un jeu où il faut coder des déductions à partir des infos recues et à l'inverse essayer de trouver les informations les plus pertinentes à transmettre
+ darkhorse64: mais du coup, pas de calcul intensif nécessaire
+ Zorg1: après t'es quand même obligé de faire des erreurs j'ai l'impression
+ darkhorse64: si tu fais discard, tu ne fais pas d'erreur mais tu risques de jeter une bonne carte
+ Zorg1: oui voilà après oui tu peux faire des déductions avec
+ darkhorse64: Je ne sais si c'est très clair mais tu vois les cartes jouées, en erreur ou défaussées
+ Zorg1: oui ça c'est bon
+ Zorg1: c'est un peu le bazar son énoncé mais je pense que j'ai compris
+ Zorg1: après c'est tout le bazar des déductions
+ darkhorse64: Il faut aussi gérer le nombre de cartes restantes pour la fin de partie
+ Zorg1: oui faut compter les cartes
+ darkhorse64: Bonne nuit les petits

@@ -1,0 +1,787 @@
+ Etoiline: mal
+ Etoiline: je m'ennuie :sweat_smile:
+ Hurrikhan: Est-ce qu'il y a moyen d'avoir "coders strike back" en local? Ce serait plus simple pour entrainer une IA.
+ JBM: il doit y avoir des versions brutaltester qui trainent sur le web
+ Hurrikhan: merci  ^_^
+ CopperFr: rock you like a Hurrikhan&#160;?
+ Zorg1: bonjour à tous et aux bots de référence Automaton2000 &amp; AutomatonNN&#160;!
+ AutomatonNN: *de tout le monde et AutomatonNN
+ Automaton2000: non c'est un autre souci
+ Haashi: Bonjour à tous, mais pas a mon mcts tout buggué
+ Haashi: je vais lui faire la peau aujourd'hui
+ SydM107: Youhou confinement télétravail codinggame
+ nicola: CopperFr, tu ricanes&#160;?
+ plieuse: La cane a ri
+ Bon[]Crayon: salut 
+ Bon[]Crayon: automatonnntortue salut :turtle:
+ AutomatonNN: ok
+ Bon[]Crayon: automaton2000 tortue salut :robot:
+ Automaton2000: j'ai pas du tout :p
+ CopperFr: turrican 3&#160;?
+ Bon[]Crayon: automaton2000 C'est jeudi, le jour des tortues.
+ Automaton2000: il y a moyen de savoir ce qui est marrant c'est que j'ai l'impression que le niveau monte
+ Bon[]Crayon: :joy: Automaton2000 
+ Automaton2000: il passe pas en multi
+ plieuse: Turtleday&#160;?
+ CopperFr: Vous aimez bien les tortues&#160;?
+ Bon[]Crayon: Oui :grinning:
+ CopperFr: J'en ai jamais mangé
+ Bon[]Crayon: moi non plus
+ Bon[]Crayon: je n'ai jamais vu de tortues dans la nature
+ Bon[]Crayon: sauf des tortues abandonnées
+ CopperFr: ah ok je connaissais que les capitaines abandonnés
+ ThomasNicoullaud: Hello les futurs télétravailleurs
+ Bon[]Crayon: :wave_tone2:
+ Haashi: Hello
+ CopperFr: et à la télé aussi ils vont télétravailler&#160;?
+ la_sacree_gueule: bien ou quoi 
+ CopperFr: quoi
+ la_sacree_gueule: ah
+ TripleBuses: QUi
+ la_sacree_gueule: QUE
+ TripleBuses: baiser vos daronnes
+ la_sacree_gueule: WHAAAAAAAAAAAT
+ TripleBuses: j'ai été hack sorry
+ TripleBuses: que du love
+ Le_banni: et la il se fait pas ban lui
+ la_sacree_gueule: mdrrrrrr
+ la_sacree_gueule: le banni rage pas
+ Haashi: aller
+ Haashi: je suis fin nul
+ Haashi: enfaite, depuis le début mon rollout n'est pas aléatoire
+ la_sacree_gueule: oui
+ la_sacree_gueule: oui je pense u'il faut que tu fasses la liaison covalente avec l'exponentielle de pi pour régler ton problème
+ darkhorse64: Un rollout n'est pas forcément aléatoire. Par exemple, si tu as un coup gagnant à ta disposition dans ton rollout, il faut le jouer parce que ça va améliorer la pertinence de tes stats
+ Haashi: darkhorse64, effectivement, je le fais deja
+ Haashi: sauf que la, comment dire, il y avait pas d'aléatoire du tout
+ Haashi: en gros ma variable "nextMove" valait toujours 0 parce que je m'étais dit&#160;: je verrai comment gérer l'aléatoire apr-s
+ darkhorse64: Oui j'avais compris que tu avais un gros bug. C'était juste pour dire qu'un smart rollout va améliorer spectaculairement la force de ton bot
+ Haashi: mais si ca peut te rassurer, ca marche pas mieux :p 
+ Haashi: oula la ca marche 10 fois mieux
+ Haashi: :o 
+ Haashi: ah non...
+ darkhorse64: Ton bug revenait à biaiser ton rollout avec en général des effets catastrophiques
+ Haashi: mon bot joue pour l'adversaire&#160;:(
+ darkhorse64: Erreur de backprop
+ Haashi: oui mais vu que c'est binaire (un étage par joueur), si je change, ca devrait marcher non&#160;? :p 
+ Haashi: on est d'accord que la noeud racine, c'est un état ou c'est le joueur adverse qui a jouer&#160;?
+ Haashi: vu que c'est l'état en cours
+ darkhorse64: Ce qui compte, c'est de calculer le résultat du rollout en fonction du noeud qui l'a lancé. Si tu pars d'un coup blanc, le score, c'est (1/0/-1), tu ajoutes une visite dans ton noeud, tu additionnes le score, tu fais node = node-&gt;parent et tu inverses le score
+ darkhorse64: c'est mal dit, blanc/noir ça n'a pas d'inportance, ce qui compte, c'est que le score doit être calculé en fonction de qui a lancé le rollout
+ Haashi: oui ca me va
+ Haashi: mais du coup la racine de ton arbre
+ Haashi: c'est quel joueur&#160;?
+ Haashi: <a rel="nofollow" class="external free" href="https://en.wikipedia.org/wiki/Monte_Carlo_tree_search#/media/File:MCTS-steps.svg">https://en.wikipedia.org/wiki/Monte_Carlo_tree_search#/media/File:MCTS-steps.svg</a>
+ Haashi: d'après le schema et l'explication, ils disent que c'est à "black" de joueur, et le root node il est blanc
+ darkhorse64: Effectivement, c'est le dernier coup joué par ton adversaire
+ Haashi: donc si je suis cette logique, le root node il a comme joueur, le joueur adversaire
+ Haashi: ok parfait
+ Haashi: c'est important d'inverser le score (1 / -1)&#160;?
+ darkhorse64: C'est capital
+ Haashi: ou juste 1 / 0 pour dire victoire ou pas victoire
+ CopperFr: capital c'était pas emmanuel chain&#160;?
+ darkhorse64: tu prends 1/0.5/0 ou 1/0/-1 (plus commode pour inverser)
+ Haashi: je vois merci
+ darkhorse64: MCTS, c'est pénible à debugger mais quand ça marche, c'est magique
+ Haashi: je confirme
+ Haashi: j'ai meme fait un truc pour printer mon arbre de recherche, c'est un peu horrible a regarder
+ CopperFr: on dit afficher en Français
+ Haashi: merci mr loi 101
+ CopperFr: de rien le Français est ma langue maternelle alors bon
+ Magus: ouch ...
+ Magus: quand tu te trompes de bouton sur le foru
+ Magus: *forum
+ Magus: que tu ouvres ton profil sans faire exprès
+ Magus: et que c'est marqué que ça fait 1800 jours que t'es sur le forum
+ Magus: je l'ai pas vu venir celui la
+ CopperFr: 1800 jours c'est beaucoup
+ ThomasNicoullaud: encore un attentat a coup de Allahou akbar à Nice
+ ThomasNicoullaud: vivement le confinement
+ Palest: Bonjour , je suis nouveau, j'ai une petite question&#160;? a quoi correspond ce message d'ettention 'votre code n'a pas lu toutes les données disponibles depuis l'entrée standard avant d'avoir écrit sur la sortie standard. Ceci cause une désynchronisation qui peut entraîner des comportements inattendus.' mon test passe parfaitement et je ne comprends pas
+ JBM: as-tu lu les entrées?
+ Palest: j'ai une seule donnée à lire et elle est lue.
+ Palest: in.nextInt()
+ CopperFr: c'est quel puzzle&#160;?
+ Palest: la descente 
+ CopperFr: tu as une bonne descente&#160;?
+ JBM: y'a qu'une donnée dans la descente?!
+ Palest: j'ai une seule donnée fournie qui correspond à la hauteur de la montagne
+ CopperFr: non y'en a plusieurs
+ Palest: int mountainH = in.nextInt(); // represents the height of one mountain.
+ CopperFr: une par montagne (qui est belle d'ailleurs)
+ Palest: j'ai pigé , merci la team&#160;;)
+ CopperFr: pc team
+ Thyl: On a des nouvelles infos pour le contest&#160;???
+ Zorg1: oui c'est annulé
+ WhatTrickeryIsThis: c'est reporté
+ WhatTrickeryIsThis: demain matin 
+ WhatTrickeryIsThis: à 4h30
+ CopperFr: je conteste
+ WhatTrickeryIsThis: ouch
+ dbdr: et en format sprint
+ WhatTrickeryIsThis: oui voilà, pour éviter trop de support il durera jusqu'à 5h30
+ WhatTrickeryIsThis: ne ratez pas
+ WhatTrickeryIsThis: Les inscrits qui viennent pas ils auront de l'xp en moins
+ CopperFr: en format sprintf
+ CopperFr: on est devenu le pays de l'attaque au couteau&#160;?
+ JBM: j'aime bien les sprints
+ CopperFr: ca s'appelle un clash&#160;?
+ JBM: un clash sans contrainte de replayability
+ Zorg1: je proteste
+ Bon[]Crayon: je conteste
+ Zorg1: je revendique
+ JBM: je proteste
+ JBM: ah non mince
+ Bon[]Crayon: je retourne ma veste
+ JBM: toujours du bon cote
+ JBM: j'ai du mal a entrer dans le rythme la
+ Zorg1: je crois que je me suis aussi planté
+ JBM: un seul geste
+ dbdr: #define sprint DDOS
+ Thyl: [CG]Thibaud pourquoi&#160;?
+ Thyl: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/496037466">https://www.codingame.com/replay/496037466</a>
+ CopperFr: c'est toujours les même gestes
+ dbdr: Thyl: pourquoi quoi?
+ Thyl: je gagne pas
+ JBM: parce que tu perds
+ Thyl: j'ai plus de graine sur l'image
+ CopperFr: c'est vrai que quand on perd on ne gagne pas
+ Thyl: :smile:
+ JBM: on peut raffiner
+ dbdr: score 24-24 à la fin
+ Bon[]Crayon: Il y a doit avoir une rêgle spéciale .
+ JBM: tu perds parce que tu ne remplis pas les conditions de victoires detaillees dans le paragraphe eponyme
+ dbdr: et derjack est grisé. je sais pas comment ça s'interprete
+ dbdr: et Thyl listé en première en bas, ça implique que c'est pas une défaite, non?
+ Thyl: [CG]Maxime comment on doit interpreter&#160;??
+ JBM: donc la bonne question serait plutôt
+ Thyl: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/496037466">https://www.codingame.com/replay/496037466</a>
+ JBM: «pourquoi tu crois que tu gagnes pas?»
+ Thyl: oui
+ Thyl: en gros
+ plieuse: J’ai trouvé un MOOC sur le test logiciel, eh ben il n’est ni en Python, ni en JavaScript, il est... en Java&#160;:-/
+ JBM: l'Horreur
+ CopperFr: oui c'est trop horrible&#160;:(
+ Bon[]Crayon: Peut-être qu'en java il faut beaucoup tester&#160;?
+ CopperFr: de qui se MOOC t-on&#160;?
+ Bon[]Crayon: :sweat_smile:
+ plieuse: :joy:
+ Bon[]Crayon: :droplet:
+ CopperFr: après c'est pas forcément grave
+ CopperFr: faut peut-être juste apprendre un peu le java pour comprendre
+ WhatTrickeryIsThis: Les crayons et les cocottes en papier sont arrivés :nerd:
+ CopperFr: Vous préférez les crayons ou les cocottes (en papier)&#160;?
+ plieuse: Les cocottes&#160;!!!
+ CopperFr: minutes&#160;?
+ plieuse: Des qu’un recruteur voit origami sur mon cv, il me tend une feuille de papier en me disant faites moi quelque chose 
+ ThomasNicoullaud: et tu fais quoi&#160;?
+ CopperFr: ben une cocotte
+ JBM: j'ai du avoir origami sur mon cv depuis toujours, mais ca m'est jamais arrive
+ CopperFr: après je sais faire les avions en papier je peux mettre origami&#160;?
+ plieuse: Vas-y
+ ThomasNicoullaud: la prochaine fois fait lui ça&#160;: <a rel="nofollow" class="external free" href="http://www.papercraftmuseum.com/pcm/pics/Middle-Finger-Hand-Sign.jpg">http://www.papercraftmuseum.com/pcm/pics/Middle-Finger-Hand-Sign.jpg</a>
+ JBM: sois juste pret qunad le recruteur te dira "mmm je prefererais un animal"
+ CopperFr: ben l'animal est dans la soute
+ CopperFr: ceci dit chez nintendo ils aiment bien l'origami avec du carton
+ JBM: chez google cardboard aussi
+ CopperFr: c'est vieux ca
+ JBM: nintendo aussi
+ Bon[]Crayon: Pour le jeu Oware Abapa, le gagnat est indiqué sur la sortie standard de la console.
+ JBM: je parle de rien de spécifique
+ CopperFr: après oui nintendo c'est vieux
+ CopperFr: puisqu'il ont commencé avec des jeux de cartes
+ plieuse: Connaissez vous un bon idée java online&#160;? Tous ceux que je trouve ne connaissent pas le package junit...
+ plieuse: Ide*
+ CopperFr: maintenant c'est les jeux de kart la boucle est bouclée
+ Bon[]Crayon: :thumbsup_tone1:
+ CopperFr: codewars  ils utilisent pas junit pour leurs tests plieuse&#160;?
+ plieuse: Codewars&#160;? Je vais regarder
+ CopperFr: je vois import org.junit.Test;
+ plieuse: Ou ça copperfr&#160;?
+ CopperFr: sur un kata java
+ CopperFr: codewars utilise des frameworks de tests
+ CopperFr: ca permet de voir comment ca se passe pour les différents langage supportés
+ JBM: «nintendo c'est vieux puisqu'il ont commencé avec des jeux de cartes»bonne conclusion, raisonnement moisi
+ CopperFr: comme quoi
+ JBM: mais je crois que t'étais déjà sur ma "no-hire-list"
+ Haashi:&#160;:(
+ JBM: :p
+ Haashi: je viens de finir le puzzle mcts
+ Alshock: @JBM soyons honnêtes, y a 7 Mds de personnes là-dessus et de toute façon ta boîte recrutera pas avant 2030
+ JBM: simple exercise?
+ Haashi: bon, ben je retourne a mon mcts avec 2 joueurs
+ Alshock: lequel&#160;?
+ CopperFr: 7 milliard c'est beaucoup quand même
+ Haashi: bandas
+ Alshock: c'est toujours qu'un millard de fois 7 personnes
+ Haashi: en gros je dois faire bandas / uttt en mcts
+ JBM: je devrais m'acheter un calepin plus gros
+ Alshock: un jour je me motiverai à refaire UTTT sur des bases saines
+ CopperFr: on est seulement 7,8 milliards en mars 2020
+ Haashi: un bitboard c'est pas une base saine
+ Alshock: ça peut, ça peut
+ CopperFr: donc si on enlève les vieux, les jeunes, les femmes
+ Alshock: euh, pourquoi  ?
+ Alshock: enfin moi je veux bien enlever des gens, mais je les mets où&#160;?
+ JBM: ça me rappelle le questionnaire cg
+ JBM: male/female/non-binary
+ JBM: genre c'est exclusif
+ Alshock: euh pour le coup je crois que j'ai raté ton propos JBM
+ JBM: quand on est dans un des genres standards, on n'est pas spécialement binaire
+ Alshock: ben, je croyais que c'était ce que ça voulait dire.
+ JBM: binaire, ça veut dire "deux possibilités"
+ Alshock: Pour moi binaire (dans ce sens) = s'identifier en tant qu'homme ou femme
+ JBM: pour la plupart d'entre nous, y'a plus de possibilité, c'est tout cuit
+ JBM: "se rattachant à une classfication non-binaire" serait la forme longue appropriée
+ JBM: mais le genre lui même est tout ce qu'il y a de plus unaire (à la fois)
+ CopperFr: je suis content de pas être recruté chez JBM en fait
+ JBM: ça m'avait pas choqué avant qu'ils me posent la question ce matin
+ Alshock: @JBM ça dépend de quel genre on parle
+ JBM: pas vraiment je pense
+ Alshock: la plupart des subtilités sont sociales, donc les genderfluids sont pas très unaires
+ Alshock: @CopperFr comme quoi la nature est bien faite
+ Alshock: sauf quand elle l'est pas
+ CopperFr: oui en effet
+ Aelix: Hello tout le monde, j'ai fait le petit jeu "Défibrillateurs" et... bien que tous les tests soient passés, quand je soumet, il m'indique comme échec "Single possibility".. Comment faire pour avoir plus d'info là dessus?
+ Aelix: Merci!
+ Alshock: Bonjour, tu ne peux pas avoir plus d'infos sur les vaidateurs, sinon tu pourrais tenter de hardcoder le problème. Je suppose que tu as essayé de voir ce que faisait ton code quand il n'y a qu'un possibilité (je me souviens plus du puzzle)
+ CopperFr: si mais faut être level 29
+ Aelix: ah... ok je vais réfléchir à ça merci
+ Alshock: si tu galères à voir ce qui peut ne pas aller tu peux coller ton code dans le chat, et on peut regarder ce qui peut déconner
+ CopperFr: tu as converti en radian&#160;?
+ Aelix: Non pas converti!
+ Aelix: ah ça doit être ça alors merci je vais regarder pour convertir
+ CopperFr: ca veut dire que tous les tests passent sans convertir les angles en radians 
+ Aelix: j'ai supposé que les gradiants étaient fourni en entrée (mais j'ai pas fait attention)
+ CopperFr: les tests sont pas top à mon avis
+ Alshock: ça... ça semble être un manquement assez fondamental dans les tests si c'est ça
+ Aelix: C'est ça
+ Aelix: merci!
+ Aelix: C'est franchement bien fait comme site.... ça donne envie d'essayer tjs un peu plus loin pour avancer dans la "quête" :D
+ CopperFr: ah les quêtes et autres achievments c'est le fondement du jeu vidéo moderne
+ JBM: vivement les IAP sur CG
+ CopperFr: Institut d'Astrophysique de Paris&#160;?
+ JBM: in-app purchases
+ JBM: le fondement du jeu video moderne
+ CopperFr: oui avec le F2P et le P2W
+ JBM: pute de wagram?
+ Alshock: non la foire de poitiers et la parc de wapitis
+ CopperFr: je sais pas je l'ai connais pas
+ CopperFr: google me donne les bonnes réponse à mes sigles
+ Alshock: Mais attendez, un wapiti c'est un FUCKING CERF en fait&#160;?
+ Alshock: je croyais que c'était un marsupial
+ JBM: wallabee?
+ JBM: wallaby pardon
+ JBM: le marsupial
+ Alshock: Selon le ternet, ça c'est des chaussures
+ CopperFr: quel sigle&#160;?
+ JBM: non mais ca c'est la regle 34 du shopping
+ Alshock: Effectivement, j'ai donc confondu les deux dans ma jeunesse et je suis resté tout ce temps dans mon ignorance crasse
+ JBM: si c'est un nom, c'est aussi un nom de chaussures
+ Alshock: plutôt "if it's an animal, there's clothing of it"
+ JBM: la regle Alshock
+ Alshock: from it? Mon anglais passe pas le niveau CE2 xD
+ CopperFr: je faisais pas d'anglais au CE2
+ JBM: ca se voit encore
+ Alshock: nous officiellement on en faisait, et au milieu de l'année mes parents ont découvert que c'était de l'italien
+ CopperFr: c'est clair je pas un bon niveau d'anglais
+ CopperFr: je n'ai
+ CopperFr: de l'italien carrément
+ AnasRiani1: Salut les amis 
+ AnasRiani1: Je suis toujours à la recherche d'un stage de fin d'études en informatique d'une durée de 6 mois en toute la France, si vous avez des contacts n'hésitez pas à me les envoyer et merci d'avance.
+ CopperFr: essaye d'être recruté par JBM
+ JBM: il est parti
+ CopperFr: il reviendra par ici
+ JBM: il reparsera par là
+ CopperFr: j'aime pas trop le reparsage
+ Dysta: des gens qui propose des stages de fin d'étude ici&#160;? 
+ JBM: non, surtout de la demande
+ Dysta: Dommage&#160;:(
+ la_sacree_gueule: ah c'est dommage, c'est peut la derniere fois 
+ la_sacree_gueule: etre*
+ R6: go sur jobteaser/welcome to the jungle vous trouverez facilement :grinning:
+ la_sacree_gueule: cimer pour le tuyau le sang
+ CopperFr: c'est un truc d'étudiant les stages de fin d'études
+ la_sacree_gueule: enorme en vrai 
+ la_sacree_gueule: les gars qui among us&#160;?
+ LucasSalles2: Moi
+ TripleBuses: moi
+ Zorg1: ah ils ont ouvert la fête du slip ici sans me prévenir&#160;?
+ Yoann.V: :mrs_claus_tone2:
+ LucasSalles2: :clown:
+ la_sacree_gueule: ouais  bat les flamby zorg
+ JBM: leur langage est marrant
+ JBM: ça a des mots du français, ça a la structure du français
+ TripleBuses: JBM comme les enceintes&#160;?
+ la_sacree_gueule:&#160;?????????
+ la_sacree_gueule: jbm tu pu
+ Zorg1: y a du niveau
+ JBM: j'*ai* pu
+ JBM: en bonne conjugaison
+ la_sacree_gueule: merci, on fé le projé volère en ce momen mai c dur en vrai
+ JBM: je sais plus qui tenait la liste des étudiants à éviter pour les stages, mais c'est le bon moment là
+ la_sacree_gueule: voltère
+ alonelysquid: hola
+ alonelysquid: comment va le monde
+ Yoann.V: Tu es affolé la  !
+ la_sacree_gueule: tré dificilemen j'arriv pa a parlé la 
+ TripleBuses: JBM c'est une boutade
+ la_sacree_gueule: jbm 0 fun 
+ GrandChampionSurRL: Ban moi ça
+ la_sacree_gueule: t'es ki toi
+ JBM: une boutade fort révélatrice
+ GrandChampionSurRL: Ta soeur
+ la_sacree_gueule: revelatrice de quoi&#160;?
+ Zorg1: comme le boute en train&#160;?
+ la_sacree_gueule: trop content  !!!! comment tu vas depuis l temps
+ la_sacree_gueule: ma soeur
+ GrandChampionSurRL: Qui pour RL
+ la_sacree_gueule: t bronze gros....
+ la_sacree_gueule: c'est chao
+ GrandChampionSurRL: Regarde mon blaze tu comprendras...
+ la_sacree_gueule: lucassallesbronze
+ la_sacree_gueule: je peux etre modo
+ TripleBuses: Comment on fait pour être modo du tchat svp&#160;?
+ CopperFr: faut cliquer sur le bouton je deviens modo
+ la_sacree_gueule: c'est ou 
+ TripleBuses: Ah il est ou&#160;?
+ GrandChampionSurRL: Dans ton ***
+ la_sacree_gueule: whaaaaaaaaaaaaaaaaat lucas&#160;????????????
+ la_sacree_gueule: c'est ban ça
+ TripleBuses: c'est permaban ca
+ R6: intéressant ce  chat enfaite
+ SkyDreamer: ou je peux denoncer?
+ TripleBuses: Si j'étais modo c'est un perma
+ la_sacree_gueule: la meme
+ GrandChampionSurRL: Désolé on m'a piraté
+ GrandChampionSurRL: J'ai rien pu faire 
+ la_sacree_gueule: oui biensur&#160;!
+ la_sacree_gueule: c'est chao
+ Alshock: ah tiens ça faisait longtemps que j'avais pas croisé de petits cons en cours sur ce chat
+ WhatTrickeryIsThis: à l'époque que j'étais un petit con on faisait des tp MatLab&#160;:(
+ WhatTrickeryIsThis: codinGame existait déjà
+ TripleBuses: Les mots sont forts
+ la_sacree_gueule: tu vas fermer ta gueule alshock&#160;! ta darone je la bz
+ JBM: [CG]BOUGA [CG]OlogN dbdr G-Rom Magus Neumann ThomasNicoullaud...
+ ThomasNicoullaud: ha oui 
+ ThomasNicoullaud: pardon
+ JBM: oui hein
+ la_sacree_gueule: i'm back 
+ WhatTrickeryIsThis: :D
+ WhatTrickeryIsThis: cpafo
+ Neumann: Merde trop lent
+ dbdr: pareil :D
+ Magus: Coucou
+ dbdr: triple ba
+ dbdr: ban
+ ThomasNicoullaud: ca va Neumann n'ai pas fait un fail ban cette fois&#160;?
+ Neumann: gg tu sais taper une commande
+ dbdr: le roi ban
+ ThomasNicoullaud: j'ai que 2 ban a mon actif&#160;:)
+ ThomasNicoullaud: bon je retourne bosser
+ Lyght28: comment on fait pour défier un ami&#160;?
+ JBM: faut une paire de gants blancs
+ Lyght28:&#160;?
+ JBM: tu t'approches de lui
+ JBM: tu les retires
+ JBM: et tu le gifles avec
+ Lyght28: oui alors....
+ Lyght28: pas en vrai xD
+ JBM: ah oui le confinement aide pas trop l`a
+ Lyght28: non mais sur une game de clash of code mais juste à 2 quoi
+ JBM: y'a pas encode e-défi.com?
+ JBM: tu crées une partie en mode privé et tu lui envoies le lien
+ JBM: si vous vous followez y'a surement une procedure un peu plus simple encore
+ Lyght28: ben c'est le cas
+ Lyght28: mais comment on fait pour créer une partie en mode privée&#160;?
+ JBM: crée une prtie privée et t'as surement un bouton pour lui envoyer l'invite
+ JBM: je sais plus, qq part dans la page clash
+ Lyght28: ok thx je pense avoir trouvé
+ TripleBuses: Haskell c'est vraiement le pire langage je trouve 
+ JBM: vous préférez haskell ou F#?
+ TripleBuses: Les deux me répugnent
+ TripleBuses: JBM t'aimes bien le BrainFuck&#160;?
+ JBM: je préfère unlambda
+ JBM: t'as rien suivi aux streams toi
+ Alshock: tiens d'ailleurs il est published lui&#160;?
+ JBM: pas encore
+ JBM: j'ai pas encore trouvé le temps nécessaire pour en faire une sémantique opérationnelle digne de ce nom
+ Alshock: faudra que tu me le dises quand ce sera fait, que j'aillasse le solutioniser
+ JBM: pour l'instant c'est encore qu'un hack sur unlambda
+ JBM: oh mais il est deja solutionnable
+ JBM: c'est les jeux de tests qui sont pas encore à mon niveau de standardsa
+ Alshock: Oui j'avais déjà écrit un truc mais il avait couru que contre trois tests qui se battait en duel
+ JBM: je pense qu'il y en a toujours eu plus que 3
+ Alshock: si mes souvenirs sont correctement collectés dans mon encéphale
+ JBM: ils ont pas changé
+ JBM: (encore)
+ Alshock: Comment retrouvedes puzzles pas publiés d'ailleurs&#160;? Là par exemple CGLambda ne donne rien en recherche
+ Zorg1: bah c'est minimum 4 tests un puzzle classique I/O
+ Zorg1: je le vois dans les contribs&#160;: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/53380e026dd637b9c7eb54ee4754e3ff99fe">https://www.codingame.com/contribute/view/53380e026dd637b9c7eb54ee4754e3ff99fe</a>
+ Zorg1: (CgLambda)
+ JBM: la recherche… lol
+ Zorg1: .. du temps perdus&#160;? re-lol
+ Alshock: J'ai jamais trop compris comment marche la recherche de ce site
+ Alshock: mais visiblement, je suis pas le seul
+ Zorg1: bah ils ont du faire tourner un elasticTruc avec plein de mots au pifs
+ tulipe475: salut les amis&#160;:)
+ TripleBuses: Bonjour 
+ Yoann.V: Salut mec
+ TripleBuses: quel nom atypoque
+ tulipe475: je suis une meuf 
+ WhatTrickeryIsThis: tu sens bon tulipe?
+ tulipe475: c'est ma fleur prefere 
+ Alshock: Ouais mais genre quand 'jai recherché "CGL Lite" ça m'a renvoyé deux playgrounds&#160;: <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/6973/kotlin-function-literal-with-receiver">https://www.codingame.com/playgrounds/6973/kotlin-function-literal-with-receiver</a> et <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/5298">https://www.codingame.com/playgrounds/5298</a>
+ Haashi: wtit :flushed:
+ CopperFr: tu es allé en hollande avec François&#160;?
+ tulipe475: oula trick calme 
+ TripleBuses: T'es nouvelle&#160;?
+ tulipe475: yes&#160;! 
+ Alshock: Ah, putain&#160;! Le deuxième je l'ai eu à cause du mot "literal", je commence à comprendre
+ darkhorse64: On a un multi pour toi: tulips and daisies
+ WhatTrickeryIsThis: nimporte quel moteur FTS il va matcher lit avec literal
+ tulipe475: c'est quoi dark&#160;?
+ Alshock: ouais, c'est juste que je croyais qu'il partait sur CGL
+ WhatTrickeryIsThis: enfin l'elastic search par défaut les matchs ils se font par token ( séparation par espace et virgules )
+ CopperFr: c'est souple l'elastic search&#160;?
+ darkhorse64: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/tulips-and-daisies">https://www.codingame.com/ide/puzzle/tulips-and-daisies</a>
+ Zorg1: oui mais CG ils ont cochés toutes les cases
+ tulipe475: ah merci c'est gentil de ta part dark 
+ WhatTrickeryIsThis: c'est très souple elasticsearch, quand on l'étire dans le bon sens
+ Alshock: C'est sacrément lourd aussi dans certains cas, faut avoir les reins pour le supporter
+ CopperFr: ca casse facilement
+ WhatTrickeryIsThis: aucun intérêt de faire un match pattern 'contains' sur un appel elastic search
+ Haashi: j'ai envie de pleurer
+ tulipe475: non pleure pas
+ tulipe475: pq&#160;???
+ WhatTrickeryIsThis: enfin si ça peut éviter une query en base c'est déjà pas mal
+ Alshock: @WhatTrickeryIsThis je crois qu'il est là pour les suggestions à la volée
+ CopperFr: le téléphone aussi 
+ Haashi: parce que ca fait 2 jours que j'essaye d'implementer un mcts sur bandas
+ tulipe475: je ne veux que l'amour et le bonheur dans ce mode 
+ Haashi: et que ca marche pas
+ Alshock: ah
+ tulipe475: ah
+ Haashi: alors qu'entretemps j'ai fait le puzzle mcts exercice
+ Alshock: fais voir à quoi t'es rendu&#160;?
+ WhatTrickeryIsThis: je fais de suggestion, j'ai eu une formation elasticSearch ^^
+ WhatTrickeryIsThis: on utilise tout le temps ici
+ CopperFr: ah une formation carrément
+ darkhorse64: J'ai mis plus de deux jours pour faire légende en UTTT, plutôt deux semaines
+ Haashi: sauf que dans 2 semaines y a le contest
+ Haashi: et je veux avoir un mcts de pret pour ça
+ Alshock: ah ouais merde faut que je me bouge alors
+ darkhorse64: J'ai fait l'exo mais il est trop simpliste. Les derniers contests, il valait mieux connaître le bfs
+ WhatTrickeryIsThis: quoi de mieux qu'apprendre le mcts en plein contest 
+ Haashi: je suis d'accord que l'exo est bien trop simple
+ WhatTrickeryIsThis: réviser c'est tricher 
+ Haashi: bon après aussi accessoirement je veux percer le top 100
+ Alshock: Tu as leur accord&#160;?
+ Haashi: :eggplant:
+ darkhorse64: Heureusement que j'ai un peu de marge
+ WhatTrickeryIsThis: top 100 sur 10k inscrits :cold_sweat:
+ Haashi: ah non je parle du top 100 global
+ Haashi: mais effectivement wtf j'avais pas vu qu'il y a 10k inscrits
+ CopperFr: on peu se désinscrire&#160;?
+ CopperFr: peut
+ WhatTrickeryIsThis: t upeux pas
+ WhatTrickeryIsThis: t'as signé
+ WhatTrickeryIsThis: tu va en chié
+ CopperFr: je pense pas que j'aurai le courage
+ darkhorse64: t'es obligé de coder sinon CG prend ton âme
+ WhatTrickeryIsThis: On passera voir tous les jours dans le chat savoir tes nouveaux submits copper
+ CopperFr: mais ils n'auront pas ma façon de penser
+ Haashi: je vais vous envoyer des morceaux de mon mcts
+ Haashi: et vous allez me dire si ca vous parait cohérent
+ darkhorse64: La norme, c'est 200/300 submits sur la durée du contest
+ Haashi: Deja pour la selection&#160;:
+ Haashi: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/e176e0f6-9cab-4b2e-9055-dc6cd9601656">http://chat.codingame.com/pastebin/e176e0f6-9cab-4b2e-9055-dc6cd9601656</a>
+ WhatTrickeryIsThis: tu dois augmenter ton classement à chaque submit sinon tu perd ton xp
+ WhatTrickeryIsThis: bon diou c'est déjà trop compliqué 
+ Haashi:&#160;:(
+ darkhorse64: Le select, tu ne peux le faire que si tu as fait au moins un rollout sur chaque enfant
+ Haashi: oui au moment de l'expand c'est ce que je fais
+ Haashi: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/c45d1830-f523-46b0-91f2-6a4316e3d0b7">http://chat.codingame.com/pastebin/c45d1830-f523-46b0-91f2-6a4316e3d0b7</a>
+ Haashi: j'ai mapper les moves UP LEFT RIGHT DOWN a 0 -&gt; 3
+ darkhorse64: OK. Sinon, tu calcules deux fois l'UCT à moins que ton compilo soit malin
+ Haashi: oui je sais, ca c'est des optimisations que j'ai en tete quand mon bot aura deja une meilleure gueule
+ Haashi: et que mon mcts fonctionnera
+ darkhorse64: Le state dans le noeud, il vaut mieux éviter à moins qu'il soit petit. Ton state contient le joueur courant pour que le shift se fasse bien&#160;?
+ darkhorse64: Pour bandas, ce n'est pas grave mais il faut backprop les matchs nuls aussi
+ darkhorse64: Je ne suis pas un pro du Go donc je devine plutôt que je comprends tout
+ darkhorse64: mais je ne vois pas d'erreur flagrante
+ Haashi: c'est pour ca que dans mon expand, il y a les deux cas des if, avec potentiellement le rajout d'un 3eme cas pour les draws qui ferait un backPropagate(0.5)
+ Haashi: après le state c'est juste un pointeur
+ Haashi: et le state il contient effectivement le joueur en cours
+ darkhorse64: Oui mais tu stockes le state de tous les noeuds que tu vas rencontrer. Ca fait des millions
+ CopperFr: Qui veut gagner des millions&#160;?
+ Haashi: Haha, des millions&#160;! Vous êtes charmante mais vous voyez déjà ce que ça fait un million&#160;?
+ Haashi: je crois avoir trouvé le probleme
+ darkhorse64: Les if, ca coûte. Backprop direct le resultat
+ CopperFr: ah oui les if faut éviter
+ darkhorse64: child.backPropagate(child.state.rollout)
+ Haashi: et du coup
+ Haashi: pour résoudre je fais
+ Haashi: tant que j'ai du temps {promisingNode&#160;:= n.selectExploreNode()			promisingNode.expand()}
+ Haashi: avec n la racine de l'arbre avec l'état en cours
+ darkhorse64: Ca me paraît OK
+ Haashi: otez moi d'un doute
+ Haashi: au final
+ Haashi: il faut prendre le noeud qui est le plus visité, ou celui qui a le plus de win&#160;? ou celui qui a le meilleur winrate&#160;?
+ Here_s_Chopi: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=OgSA7liZMXI&amp;ab_channel=Science4All">https://www.youtube.com/watch?v=OgSA7liZMXI&amp;ab_channel=Science4All</a>
+ Here_s_Chopi: Je sais pas si ça peu t'aider
+ Bon[]Crayon: des noeuds, des ptits moeuds, toujours ptits noeuds
+ darkhorse64: Les deux critères sont valides: visites ou winrate
+ darkhorse64: Je prends le meilleur winrate
+ Haashi: j'ai l'impression que c'est bon
+ Haashi: mais c'est qu'une impression parce que mon bot perd relativement souvent contre ma méthode monte carlo sans le tree
+ darkhorse64: Yapuka submit
+ Haashi: aller
+ darkhorse64: mais effectivement c'est pas normal
+ Haashi: on est d'accord
+ Haashi: 4 victoires sur 10 sur les premiers
+ Haashi: alors que mon mc fait ~8
+ Haashi: bon
+ Haashi: je vais faire appel a la toute puissance du golang
+ Haashi: Zorg1
+ JBM: PAR LE POUVOIR DE LA GOROUTINE ANCESTRAAAAAAAALE
+ JBM: Je détiens les génériques toutes-puissannnnnnnnntes
+ Hurrikhan: xD
+ Hurrikhan: C'est moi ou il faut avoir un certain âge pour ces référebces? (Genre ~80)
+ Hurrikhan: (L'année, pas l'âge)
+ CopperFr: oui faut avoir connu récré a2
+ Hurrikhan: Bien ce qu'il me semblait.
+ CopperFr: De toute façon c'était mieux avant
+ Hurrikhan: Sans vouloir faire mon "vieux" con, je suis tout à fait d'accord.
+ JBM: ça dépend de la référence
+ Hurrikhan: Cobra
+ Hurrikhan: déjà
+ JBM: y'a des fois on fait pire, dans un sens ou dans l'autre
+ Hurrikhan: Oui, ça ...
+ JBM: cobra c'est pas complètement 90s?
+ Hurrikhan: je dois dire qu'entre 70 et 00 j'ai pas le détail ^_^
+ Hurrikhan: bon
+ CopperFr: c'est les années 80 cobra
+ Hurrikhan: 1982
+ Hurrikhan: voilà
+ CopperFr: ca passait dans récré a2
+ JBM: au temps pour moi
+ Hurrikhan: Je n'étais plus sûr non plus
+ Hurrikhan: Bon, dans les trucs moins top on avait une tonne de super-sentai ^^
+ Hurrikhan: Je crois que c'est plus trop diffusé et c'est pas plus mal
+ CopperFr: J'aimais bien xor
+ Hurrikhan: Oh, j'aimais Spectroman, Sankukai, Xor, Xor 2, ...
+ Hurrikhan: Mais ça m'arracherais probablement les yeux là ^_^
+ Hurrikhan: -s+t
+ CopperFr: J'ai regardé que x-or et un peu le 2
+ CopperFr: on regardait plus antenne 2 chez moi
+ Hurrikhan: Je crois que je regardais un peu toutes les chaines.
+ Hurrikhan: Le plus dur c'était le moment où il n'y avait que les "merdes" pour filles.
+ Hurrikhan: xD
+ CopperFr: ah oui genre les filles d'à coté&#160;?
+ Hurrikhan: Ca je sais que ça existe mais je ne sais pas ce que c'est. Je pensais au shojos.
+ Hurrikhan: enfin, shoujos ...
+ WhatTrickeryIsThis: Helene et les garçons&#160;? x[ 
+ Hurrikhan: Je ne regardais pas les feuilletons, juste les animés
+ Hurrikhan: Mais ça par contre je sais à quoi ça ressemble. &gt;_&gt;
+ Caldeius: Cherchez Gigi, vous verrez ce qu'on a subit
+ Hurrikhan: Aaah
+ Hurrikhan: Le traumatisme xD
+ CopperFr: y'avait clémentine aussi
+ Hurrikhan: Ca j'aimais encore assez bien ...
+ Caldeius: pareil
+ Hurrikhan: ça n'a pas aidé mon coté sadique par contre xD
+ Hurrikhan: ... flute ... j'ai le générique en tête maintenant ...
+ Caldeius: Clémentine, quand tu fermes les yeux ...
+ CopperFr: :D :D :D
+ Hurrikhan: Ce que j'aimais particulièrement c'était "Max &amp; Compagnie".
+ plieuse: Je trouve que des tutoriels pour remettre le password robot sur ubuntu avec le gruyère et j’ai pas de grue, j’ai qu’Un bois
+ plieuse: resetter* root* grub* grub* bios*
+ Hurrikhan:&#160;?
+ WhatTrickeryIsThis: plieuse tu parles comme Automaton2000
+ Automaton2000: y'a des gens qui ont fait le puzzle
+ plieuse: je progresse
+ Hurrikhan: quel puzzle? Je ne suis pas passé depuis longtemps et je suis tombé sur "Coders Strike back"
+ Hurrikhan: je crois qu'il y a largement plus qu'il y a des mois/années.
+ plieuse: non la j’essaie de récupérer mon ordinateur que j’ai trouvé à la cave et qui tourne sous xubuntu
+ Hurrikhan: et le problème c'est?
+ CopperFr: ta trouvé un ordinateur dans ta cave&#160;???
+ Hurrikhan: un seul?
+ WhatTrickeryIsThis: elle a du bois et elle voudrait du gruyere
+ plieuse: Non yen a deux mais le deuxième est sous vista
+ CopperFr: passe le sous 7 :D
+ plieuse: jai commencé par le plus pratique mais j’ai perdu le mot de passe root
+ Hurrikhan: tu peux changer ça au boot
+ plieuse: ben si tu connais un bon tutoriel, je suis preneuese
+ plieuse: preneuse*
+ Hurrikhan: tu démarre en utilisant le shell au lieu de l'init
+ Hurrikhan: tu monte le root et tu edites le fichier passwd
+ plieuse: je ne sais pas ouvrir le Shell, je ne sais que aller dans le bios
+ CopperFr: t'as pas un live cd&#160;?
+ Hurrikhan: <a rel="nofollow" class="external free" href="https://askubuntu.com/questions/24006/how-do-i-reset-a-lost-administrative-password">https://askubuntu.com/questions/24006/how-do-i-reset-a-lost-administrative-password</a>
+ Hurrikhan: cherche "init=/bin/bash"
+ plieuse: J’ai même pas une * de clé usb pour
+ Hurrikhan: en général c'est comme ça que je fais
+ nicola: J’ai eu récemment une bouse avec lilo.
+ Hurrikhan: dans certaines installations, un CTRL-S bien placé pendant le boot te place en single-user mode
+ nicola: J’ai trouvé un live-clé USB de Debian.
+ nicola: *une
+ nicola: 0 partir de là, j’ai pu corriger la crotte.
+ nicola: À*
+ nicola: Sinon, avec un peu de bol, tu peux contourner avec sudo.
+ plieuse: Bon merci
+ CopperFr: sudo faut pouvoir se logguer avec un autre compte&#160;?
+ Hurrikhan: qui se trouve dans wheel ou dans les sudoers
+ Cousnouf: héhéhéhé
+ WhatTrickeryIsThis: Couscous, tu resemble à quelqu'un 
+ WhatTrickeryIsThis: dans un jeu
+ Cousnouf: ouais... mais moi c'est mal découpé :D
+ Cousnouf: ce bon vieux cacodemon &lt;3
+ dbdr: allez, on croit à la promo?
+ JBM: la promo?
+ WhatTrickeryIsThis: -30% xp pour ceux qui viennent pas au contest
+ WhatTrickeryIsThis: code promo&#160;: JBMilestmechant
+ plieuse: J’ai réussi à aller dans le grub \o/
+ JBM: gg
+ JBM: autant LILO je comprenais a peu pres ce qu'il se passait, autant depuis qu'on esp passes a grub...
+ CopperFr: c'était pas shift&#160;?
+ JBM: y'avait
+ CopperFr: Vous préférez LILO ou LIO&#160;?
+ JBM: les rousses comptent pas pour d'la mousse
+ Hurrikhan: ^_^
+ CopperFr: y a aussi banana split
+ WhatTrickeryIsThis:&#160;?
+ Hurrikhan: Je préfère en fait xD
+ WhatTrickeryIsThis: :banana:
+ CopperFr: et tétéou avec Jacky
+ dbdr: JBM: code4life
+ JBM: c'est revenu a la mode?
+ JBM: je croyais que c'etait tout pourri
+ WhatTrickeryIsThis: nan, c'est que au bout d'un moment les gens regardent les multis et ils voient C4L  en dernier " tiens c'est vrai celui là faudra un jour le mettre en gold "
+ WhatTrickeryIsThis: ou alors ils veulent bosser chez Roche qui revient très fort en ce moment :mask:
+ Zorg1: C4L est qd même moins pourri que BotG
+ Zorg1: note c'est pas très compliqué non plus
+ JBM: parait-il
+ Zorg1: quoiqu'il n'y a pas eu de troll aussi épique que le double hulk sur C4L :thinking:
+ JBM: c'est important les trolls
+ Zorg1: c'est mignon ça "microtyran à queue courte" comme nom d'oiseau ^^
+ JBM: c'est dans quel puzzle?
+ Zorg1: je regardais un article sur WP je suis tombé sur le plus petit passereau du monde
+ JBM: effectivement, présenté comme ça, au moins le microtyran à queue moyenne  est plus grand
+ Zorg1: même le roitelet est plus grand
+ Zorg1: mais c'est normal ça devient royal
+ JBM: et le colibri?
+ BlaiseEbuth: Yo tout l'monde&#160;! Automaton2000, AutomatonNN&#160;!
+ Automaton2000: mais il n'y avait pas de ligue
+ AutomatonNN: oui je suis pas en train de faire un truc de base de contest sur le problème de moi
+ Zorg1: c'est pas un passereau le colibri
+ BlaiseEbuth: Le bicarbonate de soude oui
+ Zorg1: mais certains colibiri sont plus petit, mais on un nom moins cool
+ Zorg1: *ont
+ JBM: ouais on peut pas tout avoir&#160;:/
+ Zorg1: (vient de remonter le chat) euh le passage de Lilo à Grub c'est y a au moins dix ans, non&#160;?
+ BlaiseEbuth: Grub c'est le frère de Stitch&#160;?
+ Zorg1: c'est un diminutif du Major Grubert&#160;?
+ CopperFr: Grubert Felix Thiéfaine&#160;?
+ BlaiseEbuth: De nos jour, pour être au gouvernement il faut faire le con finement...
+ Zorg1: il m'a l'air tout coincé Castex
+ Zorg1: alors qu'il a survolé son PC
+ Zorg1: *CP
+ LiteApplication: hahah @BlaiseEbuth
+ LiteApplication: Bien trouvé
+ CopperFr: c'est mon deuxième confinement
+ Zorg1: espérons que ce soit le dernier
+ CopperFr: oh ben non pourquoi&#160;?
+ BlaiseEbuth: Ouai c'est cool les vacances&#160;!
+ Zorg1: Le Président à Vie Macron annonce le 65e confinement&#160;!
+ Zorg1: Le Ministre du Confinement, Ministre d'Etat et Premier Ministre, félicite le Président pour son sens de l'état et sa prise de risque
+ Zorg1: L'assemblée se réunit pour voter la continuation des pleins pouvoir pour la 21 éme année
+ CopperFr: en vrai ca m'étonnerait même pas
+ Itsukiichiyuu: sa mam... FEMME sera morte d'ici là ...
+ CopperFr: elle a pas eu le covid&#160;?
+ Here_s_Chopi: tkt il retrouvera bien une vie... une compagne avec le vieillissement de la pop
+ Here_s_Chopi: Remarque avec le COVID...
+ Itsukiichiyuu: si le COVID lui en laisse haha
+ CopperFr: il prendra une petite jeune après
+ Zorg1: mais il va pas faire de gosse, il nous leggera un clone pour continuer son sage gouvernement
+ Here_s_Chopi: Vu son conseil scientifique il est pas prêt de l'avoir son clone
+ Itsukiichiyuu: il demandera aux chinois x)
+ Zorg1: avec de la gnôle, de la quinine et du vinaigre je te fabrique un clone de Macron ezpz
+ Zorg1: Ze Franchetéque
+ Itsukiichiyuu: et un bout de sauciflare
+ Here_s_Chopi: Rajoute un bouquin de Java et je suis sûr que tu peux invoquer des démons
+ Zorg1: le Javanicon
+ CopperFr: en C++ tu peux les invoquer bien plus vite
+ Itsukiichiyuu: en C# il perd la mémoire&#160;?
+ Zorg1: au moins en Java, s'il est trop lent tu rajoute de la RAM et c'est goof
+ Zorg1: *good
+ CopperFr: le Java c'est toujours lent&#160;?
+ Zorg1: non ça s'est amélioré, mais c'est toujours gourmand en RAM 
+ Zorg1: après c'est aussi la façon de coder de certains
+ trictrac: Bonsoir a tous, Il semble y avoir une erreur "internal error" systematique sur tous les leaderboards de multi en contribution. Ce n'est que pour moi ou pour tout le monde&#160;?
+ BlaiseEbuth: Pour toi seulement, ton classement devenait menaçant.
+ trictrac: troll vs castles, blocking, ...
+ trictrac: merci de ce traitement spécial :smiley:
+ BigUP: hum, il y a comme un sentiment de loose collective en ce moment&#160;?
+ BlaiseEbuth: Non, perso ça va.
+ trictrac: ok merci de l'info, je vais essayer un autre navigateur
+ Zorg1: on laisse aller
+ BlaiseEbuth: trictrac&#160;: je l'ai aussi
+ trictrac: Le "last battles" est aussi cassé
+ BlaiseEbuth: T'es sur le discord&#160;?
+ trictrac: non
+ BlaiseEbuth: Ok. Alors je balance le rapport de bug. ^^
+ trictrac: merci beaucoup
+ Zorg1: Blaise, bug reporter sur discord :p
+ BlaiseEbuth: Ouai... Un espace de report de bug sur le site ce serait pas du luxe...
+ BlaiseEbuth: On pourait le mettre avec la roadmap.
+ Zorg1: y a une roadmap&#160;?
+ JBM: ouvre une page wiki
+ Neumann: J'avais pas vu le nom de domaine de ton site JBM ..
+ JBM: euh
+ JBM: et puis t'as ouvert les yeux?
+ Neumann: J'ignorais son existence jusqu'à y'a pas longtemps, pour commencer
+ JBM: ah
+ JBM: c'est un début
+ Neumann: C'est en référence à quoi, le désastre&#160;?
+ Neumann: Le design du site&#160;?
+ JBM: rien de spécial
+ JBM: je cherchais un do;aine qui fasse jeu de mot entre le lvl1 et le cctld
+ JBM: j'en ai pris 4 d'un coup
+ Zorg1: à la base c'est un site de râleur, non&#160;?
+ Neumann: gg
+ Neumann: C'est un peu son fond de commerce ça
+ JBM: bienvenue en france
+ Neumann: :D
+ Neumann: dbdr&#160;: toujours pas de tips pour la tile 131072&#160;?
+ Zorg1: heureusement que Neumann il ne râle jamais. c'est le gars safe du chat.
+ Neumann: Je me soigne
+ Zorg1: ^^
+ JBM: ça se soigne?
+ Neumann: Je crois oui
+ dwarfie: oui ... a coup de chiantos :D
+ <b>**dwarfie n'en prend plus , il est tombé dedans quand il etait petit</b></p><p><img src="/a/16542412157988" /> Zorg1: ça a l'air d'avoir tué le chat les chiantos
+ Zorg1: ou alors vous vous êtes tous murgés pour fêter le reconfinement
+ leojean890: confinement =&gt; se bourrer la gueule en cercle familial&#160;?;)
+ Zorg1: bah pendant ça sera interdit
+ Zorg1: et toi fais gaffe je t'ai à l'oeil si tu crois que tu vas pouvoir te balader des heures en forêt
+ leojean890: pk interdit&#160;?;) tant que tu sors pas de chez toi;):P
+ leojean890: hehe t'as retenu tout ça bravo&#160;!^^
+ leojean890: je vais effectivement en profiter pour faire ça une fois de +&#160;:)
+ leojean890: vu la saison j'pense qu'il y aura encore moins de monde que la dernière fois;)
+ Zorg1: quoique les bois en automne/hiver ça peut vite devenir lugubre
+ leojean890: ouais genre il fait nuit à 17h30..
+ leojean890: au confinement précédent il faisait nuit bien plus tard..
+ leojean890: mais bon j'y allais pas trop tard en moyenne
+ leojean890: parait qu'ils ont surveillé certaines forets d'IDF avec des drones last time
+ leojean890: cette fois ils interdisent pas les accès aux parcs et forets
+ ln-dev05: salut leo :hand_splayed:
+ leojean890: en même temps vu le temps.. ils craignent pas que ce soit full contrairement à la dernière fois..
+ leojean890: yo&#160;:)
+ leojean890: ça va&#160;?^^
+ ln-dev05: ça va&#160;?
+ leojean890: tranqulle et toi :P
+ ln-dev05: ça va ça va 
+ Wayzx: Salut all
+ rinnegan: yo!
+ Zorg1: o/

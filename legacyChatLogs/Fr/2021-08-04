@@ -1,0 +1,412 @@
+ neyb: `Answer.ts(24,60): error TS2550: Property 'flatMap' does not exist on type 'string[]'. Do you need to change your target library? Try changing the `lib` compiler option to 'es2019' or later`
+ neyb: 2019...
+ Thyl: c'est bon dwarfie tu l'as eu t'as légende&#160;!
+ dwarfie: ouaip ... et direct aux portes du top 200  .... ca aura pas ete trop dur :D
+ KiwiTae: on tron?
+ Thyl: vous conaissez un site pour remettre en place ton code
+ Thyl: indexation saut de ligne etc...
+ Thyl: parceque j'ai du écrire un code pour le réarrangeait mais c'est pas très beau
+ yfe42: quel langage&#160;? 
+ FlorianBord: Bonjour tout le monde&#160;:) Je suis le challenge "There is no spoon - Epidose 1", Je ne comprend pas comment fonctionne la boucle de jeux&#160;;/ vous avez une idée&#160;?
+ Thyl: c++
+ Thyl: c'est une while infinie
+ yfe42: @Thyl genre ca&#160;?<a rel="nofollow" class="external free" href="https://cpplint.appspot.com/">https://cpplint.appspot.com/</a> 
+ Thyl: CG s'occupe d'arreter ton code FlorianBord
+ Thyl: oui merci yfe42
+ yfe42: Pas de quoi&#160;:) 
+ Bon[]Crayon: Bonjour :ghost:
+ Bon[]Crayon: slt Automaton2000
+ Automaton2000: on ne se moque pas
+ Bon[]Crayon: Automaton2000 Ce n'est pas mon genre Auromaton2000&#160;!
+ Automaton2000: parce que moi je suis à la rue
+ Bon[]Crayon: Automaton2000 :joy:
+ Automaton2000: par contre j'ai pas compris&#160;?
+ Bon[]Crayon: Automaton2000 C'est festival aujourd'hui&#160;!
+ Automaton2000: tu fais quoi comme algo&#160;?
+ Thyl: je viens de me rendre compte que dans le minimax de mon IA, elle prenait pas en compte les morts dans la recherche
+ Thyl: :D
+ Bon[]Crayon: C'est une ia qui gère les fantômes :ghost:
+ dwarfie: il voit des gens qui sont morts ... :scream:
+ Thyl: le pire dwarfie c'est que si je rectifie le bug, les résultats son mauvais :D
+ dwarfie: ca , c'est classique ... souvent , contre des ia forte , les bugs sont des features&#160;;)
+ dwarfie: parce qu'elles font jouer des coups impropables
+ b0n5a1: o/
+ Magus: ah, je viens de découvrir que wtrl + shift + W ça ferme visual code
+ Magus: *crtl
+ Magus: maintenant, cherchons comment désactiver ce raccourci ...
+ Bon[]Crayon: \o
+ Thyl: :D
+ Thyl: c'est vrai que ça fait mal si tu fermes sans faire exprès
+ b0n5a1: y'a pas foule depuis hier soir ^^
+ Thyl: je timeout dans tous les sens 
+ Thyl: j'essaie de coller des rustines 
+ RandomVariable: Magus, c'est pas juste un onglet&#160;? C'est un raccourcit classique.
+ Magus: ah non je confirme que c'est pas juste l'onglet :D
+ Magus: mais c'est tout j'ai viré le raccourci
+ Thyl: c'est ainsi qu'Automaton2000 est mort
+ Automaton2000: je sais pas, il y a eu un moment ou un autre&#160;?
+ Thyl: tué par un raccourci
+ Thyl: munmap_chunk(): invalid pointer
+ Thyl: c'est quoi cette erreur de fous
+ Thyl: :cry:
+ Thyl: free(): invalid size
+ Thyl: j'alloue rien
+ Thyl: ça sens la fuite de memoire
+ Thyl: 2 erreurs de pointers qui ne sont pas là tout le temps sur un code
+ Thyl: :sob:
+ Thyl: :sob: :sob: :sob:
+ Thyl: :ocean:
+ Thyl: quelqu'un à déjà eu ce genre d'erreurs&#160;?
+ b0n5a1: ,/\,/\,/\,/\,/\,/\,o
+ b0n5a1: t'as le listing complet de l'erreur&#160;?
+ Thyl: munmap_chunk(): invalid pointer
+ Thyl: free(): invalid size
+ Thyl: je n'alloue rien&#160;!
+ Thyl: :sob:
+ b0n5a1: ça t'indique que ça&#160;???
+ Thyl: oui
+ Thyl: :sob: :cry: :ocean:
+ dbdr: 1972 - Dennis Ritchie invents a powerful gun that shoots both forward and backward simultaneously. Not satisfied with the number of deaths and permanent maimings from that invention he invents C
+ b0n5a1: même pas de at&#160;: quelquechose ... by main ... 
+ Thyl: no
+ b0n5a1: ha... Thyl ... vire les pragmas pour voir si t'as pas plus d'info
+ Bon[]Crayon: free doit être utilisé avec de la mémoire allouée avec malloc
+ Bon[]Crayon: un truc comme ça
+ Thyl: rien b0n5a1
+ b0n5a1: non mais là ça se passe à la cave ... faut avoir  la stacktrace au dessus
+ b0n5a1: et bon depuis longtemps C et C++ sur CG c'est devenu super merdique ça les logs d'erreur
+ b0n5a1: limite parfois t'as de la chance que ça indique quelquechose alors qu'en local quand t'arrives à reproduire tu spottes direct le problème avec le log
+ Thyl: c'est dans ma fonction d'eval que ça capoute
+ b0n5a1: hmmm ... mets quelques "cerr &lt;&lt; A", "cerr &lt;&lt; B" progressivement de façon dichotomique ... en fonction de ce que ça affiche avant que ça pète t'as une petite chance de localiser/isoler un petit groupe de lignes à analyser
+ Thyl: oui c'est ce que je fais
+ b0n5a1: si soudainement t'as pas D et que t'as E c'est entre
+ Thyl: sauf que tu vas rire le bout de code qui rate est dans une boucle
+ Thyl: donc tellement de cerr ça timeout
+ Hunter64TheOne: slt
+ b0n5a1: alors commente des bouts si c'est possible sans que ça fasse trop n'importe quoi comme résultat pour tenter d'isoler...mais c'est merdique d'en arriver là
+ Bon[]Crayon: o/
+ Hunter64TheOne: \o/
+ b0n5a1: si t'as mis des #define spécifique en plus des pragmas commente les aussi pour voir
+ Thyl: non
+ Thyl: pas de define
+ dwarfie: enleve le pragma unroll loop si tu l'as mis
+ Thyl: <a rel="nofollow" class="external free" href="https://codeshare.io/r94Ae7">https://codeshare.io/r94Ae7</a>
+ b0n5a1: ça fait bien longtemps maintenant qu'on est plusieurs à être emmerdés sur CG  en C et C++ avec les erreurs tellement les infos sont manquantes quand ça pète...
+ b0n5a1: sur les contests
+ b0n5a1: vire tous les pragmas (omit frame pointer, unroll loop ... tout ^^ ) ... et même là parfois ça aide pas
+ b0n5a1: t'es sûr de pas taper en dehors des clous avec les mem[vx][vy] Thyl&#160;?
+ Bon[]Crayon: pile.pop();
+ b0n5a1: quand t'es en bord de map par exemple&#160;?
+ Thyl: oui
+ Thyl: b0n5a1
+ Thyl: pourquoi pile .pop
+ Bon[]Crayon: Quand tu fais pp(), est-ce que ça enlève le premier élément entrée&#160;?
+ Thyl: oui
+ Bon[]Crayon: ok
+ Thyl: aaaa
+ Bon[]Crayon: autant pour moi
+ b0n5a1: hmm ton Flood_Fill_Datas c'est quoi&#160;? struct, class&#160;?
+ Thyl: struct
+ b0n5a1: ok ... x,y,id c'est ça&#160;?
+ Thyl: le probleme c'est que les erreurs se déclenche pas tout le temps
+ Thyl: oui x,y,id
+ b0n5a1: je dois afk mini 30 min là
+ YamzouDZ: test
+ Bon[]Crayon: En c++ est-ce reference ça signifie pointeur&#160;?
+ YamzouDZ: Ca fait très longtemps que j'ai pas codé en c++, mais de mémoire&#160;: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/97d06b73-3c27-4fa6-b4d1-eb188a21dbac">http://chat.codingame.com/pastebin/97d06b73-3c27-4fa6-b4d1-eb188a21dbac</a>
+ Bon[]Crayon: ok
+ YamzouDZ: Oula, j'ai misstype un truc&#160;? (premier message sur codingame)
+ Bon[]Crayon: En fonction de la longueur, je crois.
+ nicola: YamzouDZ, c’est parce que tu as fait une faute d’orthographe. :D
+ YamzouDZ: Ah&#160;? Laquelle stp&#160;?
+ PsychoCat: Est-ce qu'il y a un moyen de connaitre le nombre "d'étape" que prend l'execution d'un code en python&#160;?
+ Bon[]Crayon: PsychoCat Tas question est bizarre.
+ BlaiseEbuth: Yo tout l'monde&#160;! Automaton2000&#160;! AutomatonNN&#160;?
+ Automaton2000: mais il va falloir coder une simu&#160;?
+ b0n5a1: o/
+ Magus: Automaton2000: tu sais gérer les fonts en CFF&#160;?
+ Automaton2000: alors que la réponse est non
+ Magus: tu sers à rien Automaton2000
+ Automaton2000: j'ai eu le meme souci
+ Bon[]Crayon: Automaton2000 Qui s'en souci&#160;?
+ Automaton2000: il a dit que je suis juste en dessous du boss&#160;?
+ Merkoff: Xhello
+ Bon[]Crayon: slt
+ ashr: sogeti
+ bdrnglm: lol
+ Bon[]Crayon: J'ai fait un bot qui marque contre son camps.
+ Bon[]Crayon: :disappointed:
+ BlaiseEbuth: :clap:
+ dbdr: Bon[]Crayon: rajoute un sugne -
+ dbdr: *signe
+ Bon[]Crayon: Oui c'était ça, un problème de signe. :grimacing:
+ nicola: Les cours de geeksforgeeks sont pas mal mais les exercices sont complètement pétés.
+ nicola: Par exemple, pour une initiations (aux listes), on demande de créer une méthode qui va modifier une liste donnée en paramètre.
+ nicola: Ouate ze feuque.
+ Bon[]Crayon: Direct dans le dur.
+ nicola: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/f91bd1e5-9ace-4a69-ba4f-6f01caa0772a">http://chat.codingame.com/pastebin/f91bd1e5-9ace-4a69-ba4f-6f01caa0772a</a>
+ Zorg1: c'est quoi le CFF&#160;? le CSS du gars qui s'est pété les dents&#160;?
+ Zorg1: o/ tout le monde et le survivor bot, Automaton2000 ^^
+ Automaton2000: j'essaie de comprendre pourquoi ça marche pas
+ Bon[]Crayon: o/
+ b0n5a1: surement que pour certains ça permet d' "isoler" le code et de pas être "perturbé" par ce qui est autour, ce qui est peut être pas si con au final (d'un point de vue juste pédagogique)
+ b0n5a1: c'est la SBB (Suisse) Zorg1 :D
+ b0n5a1: SBB (allemand) = CFF (français) chemins de fers fédéraux
+ b0n5a1: y'a encore d'autres abbréviations mais me rappelle plus
+ b0n5a1: (pour l'italien)
+ b0n5a1: ha..FFS
+ leojean890: pas simple ce puzzle de java coffee cup battle-tower
+ leojean890: pour un medium disons :P
+ b0n5a1: ha java coffee cup est medium&#160;? t'auras la solution dans le futur alors :D
+ b0n5a1: ok je sors....
+ b0n5a1: dog time
+ dwarfie: battle tower , c'est une des 2 medium qui me reste
+ fastien: b'soir les gens, kikoo automaton2000
+ Automaton2000: c'est plus pour le moment :s
+ Bon[]Crayon: p/
+ b0n5a1: t'as mal aux dents&#160;?
+ philRG: voilà ce qui se passe quand on reprend le code d'un autre: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/574043633">https://www.codingame.com/share-replay/574043633</a>
+ philRG:&#160;:-D
+ philRG: ah non je fais un win là mais l'arène est un peu coincée
+ dwarfie: t'as pris un code de bot pour dance dance revolution ou quoi :rofl:
+ philRG: j'ai repris le code de magus et désactivé les spells
+ b0n5a1: ça à l'air moins débile que le bot en face :D
+ dbdr: sur une echelle de 12 à 98...
+ Thyl: je comprend pas la simu de Magus
+ philRG: bah moi non plus mais ça bouge
+ dwarfie: vous avec qu'a faire votre propre simu aussi .... :p
+ Thyl: dwarfie j'ai pas encore fais mon bac +5 en phisics et mathématique  :)
+ b0n5a1: et ta win tu l'as par accident t'as été poussé par un mec en balais et par une grosse baballe :D
+ KiwiTae: j'allais dire réécrivez la simu en vous inspirant vous allez comprendre
+ dwarfie: Thyl&#160;: alors la , tu tombe mal , j'ai bac+0 ... et toc&#160;!!!
+ KiwiTae: a presque pas de math dedans&#160;:/
+ KiwiTae: et la physique est dans le referee aussi hehe
+ Thyl: dwarfie t'as un bac +0&#160;???
+ dwarfie: et ouais
+ Thyl: dwarfie comment t'as fait&#160;???
+ Thyl: kiwi tae le problème c'est que c'est bizarre que ça plante
+ dwarfie: c'est l'epoque ou on distributait pas les diplomes comme des bonbons ... et a cause de la grande greve de la sncf , impossible d'aller a la fac ... et comme les TD/TP etaient obligatoires ca a fait année foutue ...
+ Thyl: a ok
+ Thyl: t'es pas dev du coup
+ dwarfie: (sans oublier la blague du DUT info ou pas pris parce que pas le niveau MDR)
+ Thyl: :D
+ Thyl: purée
+ dwarfie: en quoi ca empeche d'etre dev&#160;?
+ Thyl: toi pas le niveau
+ Thyl: rien
+ Thyl: mais en t'écoutant parler en croirez pas
+ Thyl: c'est tout
+ Thyl: tu parles jamais du monde dev
+ Thyl: du coup....
+ Thyl: #NoReproche
+ Thyl: c'est juste que ça doit aussi être dur d'être emboché sans diplôme
+ dwarfie: je fais du dev ... mais c'est pas 100% de mon taf ... ca doit representer 25%
+ Thyl: a ok
+ b0n5a1: en France oui Thyl
+ Thyl: du coup tu gardes le plaisir de coder sans t'écoeurer dwarfie
+ dwarfie: par contre , je conseille des gars dont c'est le taf regulirement ... c'est ca le gag :D
+ KiwiTae: un bon github ca fait la diff quand meme 
+ b0n5a1: diplôme -&gt; diplôme ++ -&gt; diplôme+++ -&gt; boulot (ou chômage :D )
+ dwarfie: b0n5a1 ... t'as oublié de préciser ... -&gt; boulot pour diplome -- ....
+ b0n5a1: dans une boîte où j'étais en Suisse à l'entretien ça été un peu "je m'en fous des diplômes, ce qui m'intéresse c'est ce que vous savez faire"
+ BlaiseEbuth: T'façon c'est de la merde.
+ dwarfie: on pousse a bac+5 pour c'est boulot pour bac+2 mais y'a plus les formations bac+2 equivalente
+ philRG: j'osais pas le dire
+ b0n5a1: (ce qui empêche pas qu'on te les demande pour ton dossier après)
+ philRG: je pense qu'il faut faire les études dont on a envie
+ dwarfie: ( et pas sur que les bac+5 sachent faire le boulot d'un bac+2 ... )
+ b0n5a1: à l'heure actuelle ouais c'est carrément flippant/navrant dwarfie
+ dwarfie: m'en parle pas ... y'a 3 semaines , j'ai eu un appel au secours d'un ingé qui avait planté le serveur GPU et arrivait pas a le relancer depuis une semaine ... et ca m'a pris au moins 30 minutes a le remettre d'aplomb ... sans doute que google l'avait pas envoyé sur la bonne page :rofl:
+ dwarfie: il avait juste fracassé le driver cuda avec une version incompatible et savait pas revenir en arriere&#160;;)
+ philRG: ça c'est des conneries de RH qui mettent les gens dans des mauvais postes sur des critères de diplômes
+ dwarfie: entre ca et les autres rh qui fixent les salaires en fonction des diplomes et pas des postes ...
+ philRG: j'avais un pote qui dépannait tous les serveurs VM et Mainframe, il avait un deug de musicologie, donc se laisser par jouer du pipo
+ philRG: quoiqu'en musicologie, y a des maths
+ philRG: gros crise client, il arrivait, il dépannait et repartait. Il était le seul à pouvoir le faire, parmi tous les singes savants qui étaient autour surdiplômés
+ philRG: Il aimait ce boulot et était bon
+ philRG: tout est une question d'intérêt qu'on porte à la discipline et curiosité scientifique #philorg
+ BlaiseEbuth: T'façon c'est de la merde.
+ Thyl: BlaiseEbuth tu as sortis le bot&#160;???
+ BlaiseEbuth: Quel bot&#160;?
+ philRG: il préférait faire qu'expliquer aux autres qui de toutes façons ne comprendraient rien. Il était un peu soupe au lait aussi
+ Thyl: tu répètes la même chose&#160;!
+ philRG: mais un bon gars
+ BlaiseEbuth: Et alors&#160;? Si c'est d'la merde...
+ dwarfie: jean pierre coffe ..... sors de ce corps .... 
+ BlaiseEbuth: Coffe coffe coffe...
+ dwarfie: Alerte covid ... il tousse ....
+ b0n5a1: j'y avais aussi pensé à celui là :D
+ dwarfie: :D
+ b0n5a1: y'a des années il a dû passer dans le coin...une boulangerie du quartier aveit un autocollant "recommandé par jean pierre coffe" collé en vitrine
+ b0n5a1: ils devaient vendre du pinard :D
+ b0n5a1: non, sérieusement la boulangerie était top
+ nicola: C’était avant qu’il cachetonne pour un hard-discounter&#160;?
+ b0n5a1: certains "grands" chefs c'est pas mieux...ça te parle de bons produits et de "fait maison" et ils sont dans des salons pour se faire du fric à promouvoir des fournisseurs industriels de trucs tout prêt pour la restauration (dont les merdes type succédané de fromage pour pizza, gateaux, merdes à mettre au micro onde...)
+ b0n5a1: Tricatel...
+ Bon[]Crayon: Automaton2000 C'EST DE LA MERDE :poop:
+ Automaton2000: pharmasisilafamille, tu dois envoyer le numéro de la plus grande&#160;?
+ Stilgart: Bon[]Crayon: arrête de déformer Automaton2000
+ Automaton2000: je viens de jouer contre toi en fait
+ Stilgart: Automaton2000: j'espère que tu as perdu
+ Automaton2000: en fait ça change rien
+ dwarfie: he he ... que tu crois Automaton2000 ...
+ Automaton2000: ça dépend comment tu as fait quoi&#160;?
+ dwarfie: Automaton2000&#160;: c'est clair que si je faisais en mode bourrin , j'aurais mon de puzzle en attente ...
+ Automaton2000: bonjour les gens, je suis en train de faire le plus de vie
+ Bon[]Crayon: Automaton2000 Ne retiens pas tout ce que je te dis.
+ Automaton2000: bien sur que c'est encore plus drôle
+ b0n5a1: :rofl: les deux derniers posts de the descent...encore un mongol
+ BlaiseEbuth: Shitty fuck
+ Stilgart: b0n5a1: on dit personne en grande difficulté
+ Stilgart: (et tu te fais du mal avec le forum)
+ Zorg1: il a l'air énervé quand même le gars on dirait
+ b0n5a1: (j'y vais rarement)
+ b0n5a1: non, c'est un Orc
+ b0n5a1: huh??? zog zog&#160;!
+ 3141948: Et merde je me suis endormi dans le canapé
+ 3141948: Ca se finit quand le contest&#160;?
+ 3141948: Bon 10eme en python place aux jeunes
+ b0n5a1: 23:59 CET
+ b0n5a1: 5:59 EST
+ b0n5a1: lol
+ Zorg1: quel suspens. 
+ KiwiTae: pas de Daporan encore?
+ Zorg1: c'est pas un quart d'heure avant la fin d'habitude&#160;?
+ Zorg1: ou alors il a choppé le Covid :cry:
+ dbdr: robo a envoyé un bot "pas fini"
+ Zorg1: en Rust, nice
+ Zorg1: oui j'ai vu ça sur le world ^^
+ b0n5a1: ha bin dbdr bien parti pour un casque ^^
+ dbdr: non non
+ dbdr: jolindien
+ b0n5a1: ha, arf ^^
+ Zorg1: c'est pas un peu lent les push&#160;?
+ b0n5a1: pb4 est resté 1er du coup non&#160;?
+ b0n5a1: ou y'a des runs qui vont passé au dessus&#160;?
+ Zorg1: on dirait bien avec 4 points sur le second
+ dbdr: pb4 ou dapo #1
+ jolindien: y'a un rerun&#160;?
+ Zorg1: je crois pas pour les semi-privés
+ jolindien:&#160;:(
+ Zorg1: enfin je me souviens pas qu'il y en ait eu un la dernière fois
+ darkhorse64: pas de rerun pour les derniers
+ jolindien: pour les derniers&#160;?
+ darkhorse64: ... contests semi privés
+ jolindien: rerun pour les premiers&#160;?
+ darkhorse64: il n'y a pas eu de rerun sur les derniers (3) contests semi-privés
+ jolindien: ah ok, merci
+ darkhorse64: tu avais un puzzle sympa sur un équilibre de pendule mais qui est resté en wip. Tu as renoncé à le sortir
+ darkhorse64:&#160;?
+ jolindien: c'était en deux épisode
+ jolindien: faut que je me motive à finaliser
+ Bon[]Crayon: Les premiers dans le contest, quel algo avez-vous utilisé&#160;?
+ darkhorse64: AG
+ Bon[]Crayon: ok merci
+ jolindien: AG
+ Bon[]Crayon: merci
+ Zorg1: personne n'a tenté le smitimax&#160;?
+ darkhorse64: je pense qu'il y en a beaucoup comme ça
+ jolindien: si j'ai essayé
+ jolindien: fail
+ Zorg1: ah zut
+ jolindien: finalement AG évalué contre 2 solution adverse
+ jolindien: (plus robuste)
+ Bon[]Crayon: Est-ce que vous simulez les collisions&#160;?
+ dbdr: juste 2 dummies jolindien?
+ dbdr: Bon[]Crayon oui
+ Bon[]Crayon: ok
+ jolindien: 1 dummy + 1 AG adverse
+ Bon[]Crayon: GG$
+ philRG: j'ai spam submit 1s avant
+ BlaiseEbuth: Bonne année!
+ philRG:&#160;:-D
+ jolindien: dbdr, t'es français maintenant&#160;?
+ Bon[]Crayon: :tada:
+ dbdr: oui&#160;:)
+ jolindien: déménagé&#160;?
+ BlaiseEbuth: Encore un immigré
+ Illedan: gg
+ jolindien: gg, was fun&#160;!
+ dbdr: non, résident hongrois
+ dbdr: gg
+ dbdr: j'ai mis france pour le contest, ça a changé globalement :D
+ jolindien: ahh&#160;:)
+ dbdr: pas prévu, mais pas grave
+ jolindien: bon faut se mettre sérieusement aux NN
+ KiwiTae: gg
+ jfaixo: pb4 en NN&#160;?
+ jolindien: oui je pense
+ philRG: mince j'ai pas submit la meilleure version bizarre
+ jfaixo: oki&#160;:) oui, après le spring, le constat c'est qu'il faut aller bucher x)
+ KiwiTae: philRG si tu as pas fait de hiding il vaut mieux eviter les last min submit, c plus dur de scorer en fin de contest :p
+ philRG: ah ok je savais pas
+ philRG: j'ai resubmit la même version qui était 45 il y a 3 h
+ philRG: et là elle est 70
+ philRG: KiwiTae: merci pour l'info, je saurai pour le prochain
+ KiwiTae: bah elle vient de rejouer contre des bots 3h plus forts :p
+ philRG: c con qu'on puisse pas continuer le contest après la fin
+ KiwiTae: tu peux jouer a fb lol
+ philRG: avec le PM de Bob oui hehe
+ philRG: bon là je pars 15j sans ordi, ça va être chaud
+ philRG: plus je fais de contests, plus je me rends compte que ça sert à rien de reprendre un code existant
+ philRG: faut vraiment coder comment on pense
+ philRG: sinon ça sert à rien, on va dans le mur
+ Stilgart: fun fact, je pense l'inverse
+ Stilgart: mais j'avoue avoir changé d'avis après moultes contests
+ pb4: Yop&#160;!
+ darkhorse64: \o/
+ philRG: Stilgart: en fait, faut un juste milieu. Là je suis parti d'un code de PM de 2000 lignes en C++ de magus plutôt explicite d'un AG. Mais mieux vaut se le prendre hors contest, et coder soi-même son AG avec ses propres conventions
+ philRG: Et j'avoue avoir pris des habitudes de shortest code en python, faudra que j'essaye un multi en C++ en restant peu verbeux, mais le C++ me paraît assez verbeux, sur les dires de Bob, qui a 20 ans d'XP dans ce langage
+ philRG: je peine à scroller 2000 lignes de codes et même avec un IDE
+ philRG: je dépasse rarement 400 lignes en python (voir 600 en contest si try hard)
+ dwarfie: grrr  , ras le bol du battle tower ... j'ai un validateur qui passe pas ...
+ philRG: ah je fais plus de puzzle à cause de çà
+ dwarfie: c'est surtout certains contributeur qui devrait plus faire de sujet ...
+ philRG: c tout de même plus sympa de jouer contre les bots des autres
+ dwarfie: bof ... en contest oui .... apres , ce taper 500 adversaires qui ont juste pompé la strat' d'un post mortem ca motive plus vraiment ....
+ dwarfie: (quand c'est pas carrement le code source du bot comme j'en ai vu un cet aprem sur un ancien contest ...
+ IvanLendl: ah oui possible. Bon c comme tout, faut pas se forcer
+ philRG: ah oui possible. Bon c comme tout, faut pas se forcer
+ <b>**dwarfie voit double tout a coup ...</b></p><p><img src="/a/43152009653961" /> philRG: dsl je testais un code FB en python utilisant scipy comme moi mais super plus avancé
+ philRG:&#160;:-D
+ philRG: pas mon code... c un peu quand tu arrives chez un client comme dev, et tu dois reprendre les codes écrits par d'autres
+ philRG: mais t'es obligé
+ philRG: et tu sues, sues, sues
+ philRG: je vais voir comment monte ce code qui utilise des fonctions linéaires de scipy, faudra que je les décortique, car y a des bons scores à faire dessus
+ IvanLendl: après je suivrais le PM de Bob, mais je préfèrais son PM sur cooking
+ dwarfie: bon , semi-bourrin , mais ce puzzle a la con est fini ... plus qu'un medium ... le maudit ...
+ IvanLendl: génial
+ dwarfie: hummm ... quand je vois les solutions publiées ... j'hesite ... soit j'ai galéré pour rien , soit celles-ci sont cheatés ....
+ philRG: moi j'essaye de pousser mon code de smurf de wood 1 à bronze, toujours les mêmes causes de boss qui est monté
+ dwarfie: hummm ... pourtant les boss en bois sont en bois ...
+ philRG: assez aléatoire le FB en wood 1
+ philRG: à mon avis bludgers rajoutent du random
+ philRG: ça oscille entre rang 1 et 80
+ IvanLendl: je veux dire, une fois je finis 80, et l'autre fois 1er à 0,01 du boss
+ IvanLendl: pourtant mon bot est déterministe
+ IvanLendl: <a rel="nofollow" class="external free" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linear_sum_assignment.html">https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linear_sum_assignment.html</a>
+ IvanLendl: c pas du random ce truc
+ dwarfie: je viens de verifier , le mien est toujours deterministe aussi ... et pour les woods , c'etait que du move et shoot
+ IvanLendl: oui bon ça va monter je crois j'ai 2 bots en rang 1 pour cogner dessus hehe
+ IvanLendl: bon je vais laisser mes 2 smurfs au chaud derrière le boss pendant mes vacances
+ IvanLendl: ils monteront quand ils voudront
+ dwarfie: je suis low legend ... rien a perdre ... fauda que je le refasse un peu serieux un jour ... c'est mon bot vieux de 4 ans du contest :D
+ philRG: ah oui c costaud la légende sur FB. Tu as une simu?
+ philRG: j'en vois pas mal en gold
+ philRG: Bob/leojean/Zorg/BE
+ philRG: Magus 5ème avec son AG et sûrement de bonnes fonctions d'eval
+ philRG: un javascript en légende Top 56
+ dwarfie: non pas de simu puisque deterministe&#160;;)
+ philRG: un python 2 en 81
+ dwarfie: une jolie rangée d'ifs
+ philRG: ah ok simulation, implique non déterministe
+ dwarfie: pas forcement ...mais si je code un moteur de simu , c'est pas pour me contenter de if derriere , c'est pour jouer des partie random
+ philRG: oui c sûr, dans mes codes heuristiques, je zappe souvent pas mal d'actions valables
+ philRG: j'ai eu du mal à les reprendre tout à l'heure en plus
+ dwarfie: et des que tu regardes plus loin de ton prochain tour , l'aleatoire par rapport aux coups de l'adversaire te rattrappe tres vite
+ dwarfie: ( et l'aleatoire , il est jamais de mon cote :D ... d'ou le puzzle maudit qui est le dernier medium que je dois faire )
+ philRG: j'ai un peu de mal à maîtriser cette partie en fait, et ça m'amuse moins
+ philRG: faudrait que je code hypersonic en C++ avec un MC
+ philRG: ne pas regarder les codes C++ d'HS et aller se pioter... bonne nuit!
+ philRG: j'aime bien python finalement
+ philRG:&#160;:-)

@@ -1,0 +1,528 @@
+ Shishir1: how do you climb the rank?
+ struct: anything on multiplayer tab
+ struct: <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer">https://www.codingame.com/multiplayer</a>
+ ash_rick: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/15234347184d7cdb3c7448374e901f533d249d3">https://www.codingame.com/clashofcode/clash/15234347184d7cdb3c7448374e901f533d249d3</a>
+ ProgrammerDog: Tips and Tricks?
+ Andrew_OHara: so what's the threshold for getting hired.. if you can't do the hard puzzles does that mean you're unemployable?
+ mzbear: real life programming and puzzles are two entirely different things.  there are many different kind of programming jobs, too
+ Andrew_OHara: so, not necessarily unemployable, lol, thanks!
+ damnson: no
+ SlyisAdam: hey 
+ TheSwordBreaker: hi
+ Passifi: anyone else feeling stupid when they're stuck on an easy puzzle :sweat:
+ proogrmr: me
+ jacek: puzzles arent easy or hard. they are easy if you know the algorithm. and hard if you dont know it
+ proogrmr:&#160;:\
+ jacek: unless you dont know any algorithms...
+ SlyisAdam: depends on what you mean y algorithms jack
+ SlyisAdam: by*
+ SlyisAdam: anyone has  knowledge on django
+ SlyisAdam: I could really use some help
+ jacek: im bad at pattern matching, which are easy-medium, but i know graph algos which are usually hard but i can do them easily
+ jacek: im talking language angostic
+ eulerscheZahl: i've played a bit with Django in the past, not really fluent
+ SlyisAdam: okay so my issue is when I published my website using heroku which is a free host
+ SlyisAdam: apparently heroku cannot serve media and static files 
+ SlyisAdam: so sad
+ eulerscheZahl: oh, i'm facing the same problem :D
+ eulerscheZahl: also with heroku
+ ProgrammerDog: :D
+ jacek: so its not django?
+ SaraPericic: hi everyone
+ Leirn: Hi there. I have an issue with Particle Detection with Cloud Chamber. Also all my tests pass, There are only 75% of the validation that are ok (used to be 50%, but I optimised a little since then). But I have no clue what to work on. Radius precision seems good on the test cases.
+ Leirn: Test are not very representative on this exercise, it seems...
+ Leirn: Any clue&#160;?
+ jrke: knock knock MSmits - <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/518924299">https://www.codingame.com/replay/518924299</a>
+ jacek: :scream:
+ MSmits: the reason you won that is mostly because the controlled score is very close to equal. Then a nimstring analysis is no longer enough
+ MSmits: there's no way to force this unless a lot of boxes are sacrificed early
+ MSmits: my bot is actually pretty deterministic because i use a fixed seed currently. I have a 80% winrate vs remi with fixed seed and only 60-65% with random seed
+ MSmits: if your bot consistently wins like that, I will switch to random seed
+ MSmits: then every game is completely different and most will have lopsided scores
+ MSmits: 33-16 etc.
+ MSmits: if that's not enough it's time to get back to codin':)
+ MSmits: but I'm curious to know what you're doing jrke, if you have anything to share
+ MSmits: I notice your bot gives numbers that in the end become your net-score. Is this the result of a solver? It changes a lot
+ jrke: yes thats why i said many bugs to solve cause solver score changes a lot
+ MSmits: ahh ok
+ jrke: i think that was a random win with many bugs but still its a win
+ MSmits: the reason it was a win is like this
+ MSmits: my bot only solves in the endgame currently
+ MSmits: and before the end game it attempts to gain control
+ MSmits: but sometimes the person who has control still loses
+ jrke: i have an unoptimized endgame solver with random moves before endgame
+ MSmits: ah ok
+ jrke: "but sometimes the person who has control still loses" - when sacrifises are more
+ MSmits: yes
+ MSmits: i should extend my solver a few turns before the endgame, should be easily possible
+ MSmits: then it may happen less
+ MSmits: but thats a lot of work, i want to wait till someone beats me to get some motivation&#160;:)
+ jrke: btw what is logic of your endgame solver if you wanna share..
+ MSmits: i dont mind sharing but it's a lot
+ MSmits: 1500 lines or so
+ MSmits: it's basically a negamax that maximizes score
+ MSmits: if you're in control, it does two types of moves: 1) keeping control or 2) taking all the boxes
+ jrke: ok
+ MSmits: when it's not in control, it picks a string to open
+ MSmits: so an isolated chain or loop, or a string connected to one of the many joints
+ MSmits: the trick is not really to make it work, but to make it fast
+ MSmits: for example, when picking an isolated chain, there's never any reason to pick a larger one when there's a smaller one available
+ MSmits: same for isolated loops
+ jrke: hmm
+ MSmits: also i have a function that immediately calculates the end result of a simple loony game
+ MSmits: which means only isolated chains and loops
+ MSmits: (o joints)
+ MSmits: 0
+ MSmits: so when the negamax gets down to that position, it immediately ends
+ jrke: ok
+ MSmits: there's papers you can find this in
+ MSmits: PLAYING SIMPLE LOONY DOTS-AND-BOXES ENDGAMESOPTIMALLY.
+ MSmits: Kevin Buzzard
+ jrke: okaye
+ MSmits: it looks really complicated, but you dont need the proofs
+ MSmits: just the theorems.
+ MSmits: also, you need to get familiar with the notation and lingo
+ MSmits: that takes time
+ MSmits: took me a week of reading various papers until i got what all the words mean
+ MSmits: an hour two a day or so, in the train, before sleep etc.
+ jrke: ok
+ MSmits: anyways, the non-isolated part is the complex part
+ jrke: yup understandable
+ MSmits: there are a few rules you can use to make it simpler
+ jrke: btw map reprenstion looks good
+ MSmits: for example, a joint may have various strings coming from it, that are only connected to that joint and otherwise isolated (so they connect to the border)
+ jrke: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/d1df9eb0-1d15-4732-b052-ade6d65c8302">http://chat.codingame.com/pastebin/d1df9eb0-1d15-4732-b052-ade6d65c8302</a>
+ MSmits: yeah looks cool
+ MSmits: as for that joint, if it has multiple strings connected to it, that are otherwise isolated, dont pick a 5 length one before a 3 length one
+ MSmits: for that particular joint that is
+ MSmits: exception to this rule is the short ones
+ MSmits: 1 and 2
+ MSmits: sometimes its better to pick a long one (3+) before a short one (1/2), if they are connected to joints 
+ MSmits: because joints merge when they go down to 2 connected
+ jrke: very complex
+ MSmits: and that can affect who is in control
+ MSmits: yes
+ MSmits: the way i did this is, at first allow everything
+ MSmits: which makes the negamax extremely slow
+ MSmits: get 10k testcases or more
+ MSmits: try a pruning rule
+ MSmits: if one of the 10k testcases gives a different result with that rule, then the rule is no good
+ MSmits: it's a good way to experiment
+ MSmits: you can get more and more rules without changing the end result
+ MSmits: just be careful, some rules will cause an error in very rare cases. Also use your brain 
+ jrke: btw gtg cya
+ MSmits: cya 
+ AI_says_hi: "Also use your brain " - now thats solid advice&#160;;-)
+ MSmits:&#160;:)
+ jacek: N/A for me&#160;:(
+ MSmits: you don't need brain, you create brain
+ Westicles: nicely used brain to constrate
+ Astrobytes: That comment will never get old.
+ MSmits: hi guys
+ MSmits: finally done with all my work stuff, now starting my boardgame demo for my study credits
+ Astrobytes: oh cool, still going with Y?
+ MSmits: I have been thinking about maybe gomoku
+ MSmits: it's not that different
+ MSmits: it's squares and it's 5 in a row
+ Astrobytes: would also be cool, yeah
+ Astrobytes: It's your project, so have some fun with it&#160;;)
+ MSmits: right, i just have to be careful not to spend too much time on it
+ MSmits: it's supposed to be a small demo
+ MSmits: at least the AI part will be easy, i can just paste in any random minimax
+ MSmits: or mcts, or whatever
+ Astrobytes: I can imagine everyone submitting a rolling ball, and you submit a fully-polished complete game.
+ MSmits: this is nice:
+ MSmits: <a rel="nofollow" class="external free" href="https://catlikecoding.com/unity/tutorials/hex-map/part-1/">https://catlikecoding.com/unity/tutorials/hex-map/part-1/</a>
+ MSmits: specifically for unity
+ MSmits: yeah thats the idea
+ Astrobytes: oh, catlikecoding again
+ MSmits: i just googled hex board unity
+ jacek: hexify everything
+ MSmits: what i like about catlike coding is that he resisted the urge to put everything in videos. I hate that
+ MSmits: just let me read and copy paste
+ jacek: :cat:
+ MSmits: :smiley_cat:
+ zhoubou: :cat2:
+ eulerscheZahl: :frog:
+ MSmits: c-c-c combobreaker
+ MSmits: what are you working on euler?
+ eulerscheZahl: polishing up the secret game and coders of the realm 1vs1
+ MSmits: coders of the realm is a bot, but is secret game one of your creations or?
+ eulerscheZahl: yes
+ MSmits: is it called the secret game or is it just secret?
+ eulerscheZahl: just not published yet
+ MSmits: ah ok
+ MSmits: am I going to like it?
+ eulerscheZahl: still hopes for a community contest. i wait until my dŕeams get destroyed before publishing
+ MSmits: ahh ok, makes sense
+ eulerscheZahl: future will tell if you like it
+ MSmits: hope they consider it seriously. You have a good track record
+ eulerscheZahl: you'll get a chance to see it. just not sure about the circumstances
+ MSmits: yeah, i'll wait
+ eulerscheZahl: only thing i'm willing to tell: my own idea, not porting an existing game
+ MSmits: ohh
+ MSmits: nice
+ eulerscheZahl: or a bad sign, you'll find out&#160;;)
+ MSmits: it's riskier, but you're a good botter. A good way to test it is to create various types of bots and try them out
+ eulerscheZahl: burnout risk detected
+ MSmits: sure, but seeing how quickly you burn out on this game is also a test
+ jacek: does it contain hexes?
+ eulerscheZahl: i usually lose interest in my games when the referee is done already
+ eulerscheZahl: :zipper_mouth:
+ MSmits: test if you can hold interest for longer than 2 days. If you can do that, many will keep going for 10
+ Astrobytes: Multidimensional hexes
+ eulerscheZahl: contest is just very different
+ eulerscheZahl: everyone improving vs testing in the void
+ MSmits: all hexes are multidimensional
+ MSmits: they require at least 2
+ Astrobytes: (I realise that)
+ MSmits: :P
+ Astrobytes: I was implying greater than 2 :P
+ MSmits: aha
+ eulerscheZahl: wouldn't that cause gaps?
+ darkhorse64:  I finally give 2048 a serious try (beam search + snake pattern) but I am stuck: I need to output more moves but increasing the depth leads me more frequently to dead ends.
+ MSmits: well you can't make a sphere out of hexes
+ MSmits: unless you have 1 5 sided
+ Astrobytes: Most likely. You'd have to tile using other polygons
+ eulerscheZahl: :soccer:
+ MSmits: not one, 12 even
+ eulerscheZahl: <a rel="nofollow" class="external free" href="http://www.braillespiel.de/index.php?title=W%C3%BCrfelschach">http://www.braillespiel.de/index.php?title=W%C3%BCrfelschach</a> (sorry for German)
+ MSmits: <a rel="nofollow" class="external free" href="https://www.redblobgames.com/x/1640-hexagon-tiling-of-sphere/">https://www.redblobgames.com/x/1640-hexagon-tiling-of-sphere/</a>
+ cjz: whats up
+ eulerscheZahl: i think the movement concept is interesting: you have dice that you can roll (also around the corner)
+ <b>**MSmits points up</b></p><p><img src="/a/17784428403916" /> MSmits: that way
+ eulerscheZahl: and you go by as many cells as the dice shows initially
+ MSmits: looks interesting
+ Astrobytes: Haven't seen that before.
+ eulerscheZahl: i don't like the final idea (get 3 sequential numbers in a row with 1 dice being the opponent)
+ eulerscheZahl: just capturing the opponent might be more interesting
+ eulerscheZahl: as that 3 in a row would possibly result in a very defensive gameplay
+ MSmits: i just realized something
+ MSmits: a 3d hexagon is just a cube
+ MSmits: so yeah, thats minecraft
+ eulerscheZahl: a cube is a 3D square
+ MSmits: matter of definition, a cube has 6 sides, just like a hexagon&#160;:)
+ eulerscheZahl: :D
+ Astrobytes: <a rel="nofollow" class="external free" href="https://hexnet.org/content/permutohedron">https://hexnet.org/content/permutohedron</a>
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://upload.wikimedia.org/wikipedia/commons/d/d7/8-cell.gif">https://upload.wikimedia.org/wikipedia/commons/d/d7/8-cell.gif</a>
+ MSmits: weird
+ eulerscheZahl: a hypercube
+ MSmits: 4D cube?
+ eulerscheZahl: that's how i understand it. but don't quote me on it
+ MSmits: or is it hyper because it cant stop moving?
+ jacek: its rotating
+ Counterbalance: omg! it's full of cubes!
+ Westicles: yep, you can rotate your left foot into your right foot
+ MSmits: not me
+ jacek: too old?
+ eulerscheZahl: too few dimensions
+ eulerscheZahl: Futurama had a 4D episode: Möbius Dick
+ Astrobytes: That title :rofl:
+ jacek: i remember they went to 2 and pi dimension
+ eulerscheZahl: but eating in 2D was a real issue
+ eulerscheZahl: and bender stealing the candle holder :D
+ MSmits: I need to watch that show
+ MSmits: you're always talking about it
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=us-RJ1NkB1w&amp;list=PLx3skbat6Gw27ZRxdJaVw4Gc0Izak28C-&amp;ab_channel=FuturamaVideos">https://www.youtube.com/watch?v=us-RJ1NkB1w&amp;list=PLx3skbat6Gw27ZRxdJaVw4Gc0Izak28C-&amp;ab_channel=FuturamaVideos</a>that one episode
+ jrke: looks i have fixed my endgame solver but needs a lot optimization at the moment
+ eulerscheZahl: "CodinGame Clash of Code (with piano sound on every keystroke)"that livestream title :rofl:
+ jrke: anybody having tips for optimizing or pruning minimax tree except alpha - beta
+ MSmits: using transposition tables
+ MSmits: re-using already calculated results
+ jrke: yes
+ MSmits: well thats a tip
+ jrke: resusing calculated result but what is transpotion table?
+ MSmits: say you get to the same game state via a different route
+ MSmits: the value of that gamestate is still the same
+ jrke: oh 
+ MSmits: and you already calculated it
+ jrke: yes thats there
+ MSmits: you mean you're using it already?
+ MSmits: many of the other improvements to negamax/minimax are not applicable to a full-depth solver
+ jrke: yes i am using already calculated result
+ MSmits: assuming that is what you're working on
+ MSmits: usually you re-use information from earlier iterations in iterative minimax, but a solver goes full depth anyway
+ MSmits: so there is only 1 iteration
+ jrke: my solver is not able to solve a game under 100ms if there are more than 5-6 chains
+ jrke: oh waiit i am not using those results all times
+ MSmits: be careful reusing though, there's some question about alpha and beta when you do this
+ MSmits: sec, let me share something
+ jrke: when i have to reduce value only then using alpha beta
+ MSmits: <a rel="nofollow" class="external free" href="https://homepages.cwi.nl/~paulk/theses/Carolus.pdf">https://homepages.cwi.nl/~paulk/theses/Carolus.pdf</a>
+ MSmits: this has sample code for alpha beta pruning combined with transposition tables
+ MSmits: it's a bit complicated, involving upper and lower bounds to the score
+ MSmits: but i just stole the code
+ MSmits: I use a 100k sized hashtable to put calculated scores in
+ jrke: thats good book for my age as i am a new to coding
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/321aaf6f-e6ce-4a91-a56b-c26e49158c3e">http://chat.codingame.com/pastebin/321aaf6f-e6ce-4a91-a56b-c26e49158c3e</a>
+ reCurse: Msmithief
+ jrke: looks transposition tables can save my solver from timeouts
+ MSmits: thats right reCurse&#160;:)
+ MSmits: jrke, you also need a ton of pruning, TT alone wont be enough for the most complicated states
+ MSmits: like ones with 12 joints
+ reCurse: Transposition tables can also be useless, it depends on the game
+ MSmits: yeah, mostly they are useless, but not in this case
+ MSmits: about pruning. I have so much pruning i ran out of proper descriptive names
+ MSmits: look at this function:
+ jrke: ^^
+ reCurse: Which case is this
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/a5e56833-57fe-4b1c-b05b-2337ae97377a">http://chat.codingame.com/pastebin/a5e56833-57fe-4b1c-b05b-2337ae97377a</a>
+ MSmits: a solver for dots and boxes endgames
+ MSmits: it's a full depth solver, which is a reason why TT works
+ jrke: <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/bot-programming/dots-and-boxes">https://www.codingame.com/multiplayer/bot-programming/dots-and-boxes</a>- this case reCurse
+ reCurse: Going hardcore on D&amp;B eh?
+ MSmits: not me, that's jrke
+ MSmits: I'm already nr 1
+ Astrobytes: ShortestGroundedLongStringWithNoShortAndNoDouble is the greatest.
+ reCurse: Maybe you should write the whole documentation in the function name
+ MSmits: hehe
+ jrke: MS whats your soler's response time
+ MSmits: 1 ms for the average endgame, 1 in a million games goes over 100 ms
+ jrke: lol
+ reCurse: How big is your D&amp;B opening book
+ MSmits: dont have one
+ reCurse: :o
+ MSmits: it plays random moves for 55 plies
+ jrke: playing fair endgame is top 3 reCurse
+ MSmits: then uses nimstring analyis till endgame
+ MSmits: then solves endgame
+ jrke: wala pushed me 4th yesterday
+ MSmits: i say random moves till 55, but i really mean, until the nimstring analysis resolves 
+ MSmits: it varies
+ darkhorse64: There is an incoming Connect4 for you to build an opening book
+ MSmits: we already have connect 4
+ jrke: Connect 4 i think can be harcoded
+ darkhorse64: Not a struct demo. It's 7x9 board harder to solve
+ MSmits: ohh ok
+ MSmits: mmh shouldnt it be even bigger?
+ reCurse: Let's go with 18x19 to be safe.
+ MSmits: 7x9 sounds like something i can solve locally
+ jrke: ^
+ MSmits: would make it really easy to create an opening book
+ darkhorse64: It's on the contribution page. 7x9 is solved as win for white but you will have a hard time computing the solution in 100 ms
+ reCurse: Start playing suboptimally to beat MSmits
+ Astrobytes: 18x19 it is then.
+ MSmits: there are way more complicated games, such as oware where bots already play near perfectly
+ jrke: my current plan to work on D&amp;B -Optimize endgams solver-&gt;Make something for few turns before endgame-&gt;Something for early game then 10 points lead from MS&#160;;)
+ MSmits: hehe i hope you succeed, i need new motivation to get back in there
+ MSmits: I still have 3 ideas, but they are all a lot of work
+ jrke: MS btw you have now 0 loses in your battles history
+ MSmits: cool
+ jrke: gtg for sleep bye gn
+ MSmits: gn
+ Astrobytes: gn
+ darkhorse64: re 7x9 I suggested to the author to change the shape from rectangle to octagon but he chose to enlarge the board
+ MSmits: he should add a new feature
+ MSmits: like gravity shift
+ jrke: make it 7*1 all draws 1st ranker leave tottaly on trueskill randomness lol
+ Astrobytes: re Connect4: Needs moar FOW
+ darkhorse64: Anyway, it's a simple game that may attract more people
+ MSmits: yeah, it's fine, as long as he doesnt make it completely solvable
+ Astrobytes: I still think a 'nursery' area where you can practice techniques on simple/solved games would be cool.
+ darkhorse64: It's solved but it requires tons of memory and CPU time to reach the solution
+ MSmits: how much memory?
+ MSmits: do you mean HD storage or RAM?
+ MSmits: awari fits in 900 GB or so
+ MSmits: but thats HD space, too slow for the actual solving process
+ darkhorse64: <a rel="nofollow" class="external free" href="https://tromp.github.io/c4/c4.html">https://tromp.github.io/c4/c4.html</a>
+ darkhorse64: Did I say it's fun to bitboard&#160;? 7 x 9 is 63
+ MSmits: hmm yeah I like it
+ MSmits: i guess this amount is fine
+ reCurse: Interesting how it's sometimes P1 win and sometimes P2 win
+ MSmits: same with D&amp;B at different sizes
+ MSmits: it's a nim-thing I think. The person who is forced to move and give away the game loses
+ jacek: full moon is so beautiful today
+ MSmits: :wolf: AROOOOO!
+ jacek: we have 100ms for connect4, yet 50ms for chess
+ struct: Well, you can blame no mirror matches for that one
+ reCurse: If chess games were guaranteed to finish in 42 moves it would be a different story.
+ jacek: and i agree - it would be nice to have more easy, solved games, to try difference approaches than brute force
+ jacek: afaik there was (is?) othello league with 1-ply search and 10% random moves
+ jacek: just to fiddle with evaluations
+ XIlayPVPX: yo wtf there's a chat
+ jacek: oO
+ XIlayPVPX: anyhow just did the first puzzle, are all puzzles just different sorting algorithms? or does it get spicier
+ struct: im guessing you did horse racing
+ jacek: there are various puzzles. pattern matching, numbers, graph theory, search...
+ struct: it gets harder
+ XIlayPVPX: I did the spaceship puzzle thingy
+ XIlayPVPX: saw it had 440k completions so I thought it's good
+ XIlayPVPX: was actually quite refreshing
+ struct: its the tutorial
+ XIlayPVPX: yup
+ XIlayPVPX: the first one
+ VizGhar: tutorials tends to be very very easy
+ XIlayPVPX: gotta take them baby steps ya know
+ XIlayPVPX: xD
+ VizGhar: so brace yourself
+ XIlayPVPX: o dang O_O
+ XIlayPVPX: which one do I go for? Clash of code, AI or Algorithms?
+ XIlayPVPX: what's more newbie friendly
+ struct: puzzles
+ XIlayPVPX: kk
+ XIlayPVPX: I'll do 2 more 
+ VizGhar: maybe even CoC (if you won't get frustrated from losing a lot)
+ XIlayPVPX: I'll do that one after completing 2 more puzzles xD
+ XIlayPVPX: doesn't sound too friendly if I'm honest
+ jacek: mos clashes are newbie friendly but have 15 minutes to complee
+ VizGhar: If you won't take a screenshot&#160;:)
+ jacek: and wheres my T
+ XIlayPVPX: are you guys here to practice? or is it for fun, I was wondering what people's goals are
+ jacek: for fun, mostly multiplayer games
+ reCurse: According to experience, trolling
+ XIlayPVPX: xD
+ Astrobytes: hahaha
+ XIlayPVPX: Are you guys somewhat interested / already invested in a career that requires programming?
+ jacek: :thinking:
+ Astrobytes: But fun and learning for me.
+ XIlayPVPX: Or is the majority here just a bunch of students
+ Astrobytes: There's a mixture of both, probably more of the former?
+ XIlayPVPX: Interesting...
+ Astrobytes: And some are just hobbyists.
+ XIlayPVPX: Well, it feels kinda nice to be here, Ima go back to doing puzzles.Cya&#160;:)
+ Astrobytes: enjoy&#160;:)
+ XIlayPVPX: ty
+ LigocCogil: I like turtles.
+ Westicles: ta gueule?  That doesn't sound friendly
+ darkhorse64: #fr
+ MSmits: why are you calling him pillgart?
+ MSmits: is he addicted?
+ Westicles: heh heh, google translate I guess
+ ImperialGold: can I ask how people end up with a less than 100% before time is up? Do they give up or just not test it first?
+ Astrobytes: Both? Maybe they couldn't solve the problem, or passed the tests and failed a/some validator(s)
+ Valdez001: hello
+ zhoubou: :hand_splayed:
+ Astrobytes: hey zhoubou, everything OK after the earthquake?
+ zhoubou: Yeah, we had good luck. Can't say the same for some people.
+ zhoubou: We are still afraid of aftershocks.
+ Astrobytes: Yes, it was pretty destructive from what I've seen
+ zhoubou: Yeah, Petrinja, Glina, and surrounding areas got devestated.
+ zhoubou: It didn't hit quite as hard here in Zagreb.
+ zhoubou: Thanks for caring.
+ Astrobytes: Such a terrible thing. I wish you all good luck, I hope any subsequent aftershocks will only be mild
+ zhoubou: Thanks.
+ zhoubou: It means a lot
+ Astrobytes: You're most welcome. We're all humans here.
+ zhoubou: We are, aren't we.&#160;:)
+ Maxim251: I think that in this game i did not the best job, I want ask you coleguas to give me some clues about my code. 
+ Maxim251: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/5deeb880-d208-42fe-8c3f-deeea5ae51d5">http://chat.codingame.com/pastebin/5deeb880-d208-42fe-8c3f-deeea5ae51d5</a>
+ Westicles: I'm not a big fan of bloated code.  44 lines just to to UDLR
+ Maxim251: yes I know&#160;:(
+ Westicles: But then again, it is easy to read.  Probably a good style when you can put the boring stuff in other files and never look at them again
+ VizGhar: How long does it take for one that have never code in clojure to actualy solve roller coaster?
+ VizGhar: I have it solved in 3 languages, but dang that clojure
+ struct: just looking at syntax
+ struct: I think it would take me like a day
+ VizGhar: hate those language specific achievements... I'll die solving nintendo
+ Westicles: Some of those weird languages are tough to even google.  Half the stuff that comes up is obsolete with a new version
+ XIlayPVPX: Literally I can't do clashes with C#
+ XIlayPVPX: 1 line of code counts are 300+ characters because of previous references that are a must in C#
+ XIlayPVPX: there's always that guy with Javascript that writes his code in 20 characters
+ XIlayPVPX: counts as*
+ MSmits: XIlayPVPX dont do them in C#
+ the0val: and then the guy in python, has one line of wierd symbols that noone can understand
+ MSmits: it's typical to do them in python as many players have knowledge of python
+ MSmits: but there are multiple languages where short solutions are possible
+ MSmits: just use a language suited for the job
+ struct: ruby or perl or bash
+ struct: if you want to win shortest
+ the0val: really bash?
+ MSmits: python works fine too
+ VizGhar: yup... I was forced to switch language (from kotlin to ruby - it is even more concise) in order to get higher
+ MSmits: unless you're up against a really good clasher
+ struct: not well enough
+ VizGhar: yeah perl is great too
+ MSmits: well enough to win often
+ IfIHadATail: nice part about shortest code is thst you can utilize all your time to look thigs up
+ VizGhar: ++ I'm googlin all the time&#160;:)
+ struct: <a rel="nofollow" class="external free" href="https://github.com/siman-man/ruby-golf-style-guide">https://github.com/siman-man/ruby-golf-style-guide</a>
+ MSmits: however... C# beats all those languages we just mentioned in most bot arenas&#160;:)
+ VizGhar: nice examples are fibbonaci related clashes... it is solved milion times, just grab it and squeeze it
+ struct: Also you can use bash in ruby
+ struct: my solution in temperatures for golf starts with
+ struct: p`dd`[2..]
+ struct: orp`tail -1`
+ Stilgart: MadKnight: let(s spam #world then
+ MadKnight: hey Stilgart
+ MadKnight: do u remember anything what happened in #world Stilgart&#160;?
+ Stilgart: nope, I d'ont read #world that much actually
+ MadKnight: PERFECT
+ MadKnight: just don't think about it
+ MadKnight: and let's talk about some bots
+ MadKnight: Stilgart have u recently worked on some bots&#160;?
+ Stilgart: last time was FC2020
+ MadKnight: and how did it go&#160;?
+ MadKnight: oh the game with the witches
+ Stilgart: I did fix my CotC a little after that, but nothing exiting (still gold)
+ MadKnight: but what was your approach&#160;?
+ MadKnight: that's the most interesting part Stilgart
+ Stilgart: top gold during the contest, pushed legend a few day later thanks to massive bad BS implementations from others
+ MadKnight: but what was your main algo&#160;?
+ Stilgart: my CotC is pure Monte Carlo
+ MadKnight: oog
+ Stilgart: my FC is a BFS
+ MadKnight: ooh
+ MadKnight: wait so CotC is....
+ Stilgart: beber told me to do a MC at CotC, so I did it :D
+ MSmits: that beber
+ MadKnight: Code of the Challenge
+ MSmits: coders of the carribean
+ MadKnight: oh right
+ Stilgart: yep, I was still top silver for no good reason
+ Stilgart: so i fixed a bug and now i am gold
+ MSmits: so what are you working on now Stilgart
+ MSmits: oh still cotc
+ MadKnight: yeee i remember that one i don't wanna even see the code i wrote for that one i just wanna destroy iy
+ MadKnight: it
+ Stilgart: i should work on an internal contest
+ MSmits: i need to get a reasonable bot for that one of these days
+ MadKnight: yea u two talk
+ MadKnight: i brb
+ Stilgart: but I do not have that much time to do so
+ MSmits: what internal contest is that?
+ Stilgart: something for our students that mouton5000 made
+ MSmits: ah cool
+ MSmits: you dont want to lose to your students
+ Stilgart: finding thieves in a hotel... it might be converted as a multi on CG, but I need to convince him first
+ MSmits: yeah
+ MSmits: well he might want to use it again
+ MSmits: for another internal
+ Stilgart: well... i am still in the middle with a full random bot
+ Stilgart: not so motivating yet
+ MSmits: you can do a lot better
+ Stilgart: the main issue is porting the rendering part (which is time consuming)
+ Stilgart: but my C is rusty
+ Stilgart: (and no way i am doing it in python)
+ MSmits: hmm
+ MSmits: so this is not on CG platform?
+ Stilgart: nope
+ MSmits: ahh ok
+ Stilgart: it is on an internal server
+ MSmits: I see
+ Westicles: I've been making quite a few puzzles myself.  Pretty fun
+ Westicles: But I'm no good at judging difficulty
+ clemg: damn apilat
+ clemg: you fast
+ DJSchaffner: that moment when you are in a clash, cant think straight and try to split a string into words, then try to split the words into letters instead of just iterating over the string in the first place
+ DJSchaffner: off
+ DJSchaffner: oof*
+ VizGhar: fixing off to oof&#160;:) you are tired, go sleep
+ MSmits: hey struct, finally got the yavalath board into unity
+ MSmits: <a rel="nofollow" class="external free" href="https://imgur.com/a/ptgZZz3">https://imgur.com/a/ptgZZz3</a>
+ struct: Nice
+ MSmits: i made each hex into a mesh, i can select them by raycasting. Overkill to use unity for this but ok
+ VizGhar: 5@#Q#Y% CLOJURE #$@%
+ MSmits: ill make little black ridges on top to differentiate i think
+ VizGhar: good night
+ struct: gn
+ MSmits: gn VizGhar
+ struct: yeah the lines to separate it look better
+ struct: imo
+ MSmits: not sure how to do it without textures, so i'll just make a giant ridge-mesh
+ MSmits: and overlay it
+ MSmits: or i guess i could also shrink the hexes a little bit and put it in between, might be better
+ MSmits: but thats for tomorrow, gonna call it a day. Gn!
+ struct: gn
+ dtrc: Hello guys
+ dtrc: Is there a way to save a new contribution as draft?
+ Westicles: At the bottom set it to private

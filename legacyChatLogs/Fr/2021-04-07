@@ -1,0 +1,686 @@
+ nicola: BigUP, ton PC est encore plus vieux que le mien&#160;?
+ philRG: jfaixo, simuler les adversaires, çàd? Tu connais leurs déplacements
+ philRG: ah sinon contest pas visible sur page cgstats de magus, mais on doit pouvoir faire des cgbenchmarks quand même
+ Magus: la liste des puzzles dans cgstats est faite automatiquement à partir de la liste des puzzles visibles sur CG
+ Magus: mais les contestes privés de ce genre sont invisibles si tu ne connais pas le lien exacte du contest
+ Pauloux: C'est ou les combats de bots&#160;?
+ Tiouz: Pauloux&#160;: activités -&gt; compétition -&gt; combats de bots
+ Pauloux: Ha oui merci
+ jfaixo: philRG pour l'instant quand je simule, les pods ennemis n'ont pas de commmande (thrust 0), ils ont juste l'inertie de leur vecteur vitesse
+ jfaixo: typiquement mon bot tente des moves pour les projeter en dehors du jeu des fois, mais comme le not ennemi fait des trucs en réalité, ca rate souvent&#160;;)
+ Zorg1: ah tu leur a même pas fait faire du -3vel&#160;?
+ philRG: ben tu peux pas simuler plus de N tours, et donc tu finis par gâcher des boosts
+ philRG: tu peux dire: je fais un boost soit pour passer devant l'adversaire, soit pour le projeter, et tu compares le score
+ jfaixo: c'est quoi que t'appelles du -3vel&#160;? pour l'instant ya que dalle fait par mon algo, je simule a 5 ou 6 tours (pas décidé)
+ Zorg1: c'est une heuristique qui marche pas trop mal, tu vises la position du cp en retirant 3 fois ta vitesse
+ jfaixo: mais que pour moi. Ma fonction de score est suffisament maline pour vouloir a la fois avancer, et faire reculer les autres&#160;;)
+ Tiouz: -3vel c'est pour une if_based_ai, si tu fais de la search tu trouvera tout seul
+ philRG: le -3v me paraît pas compatible avec une simulation. J'ai un -3v et l'algo de magus pour rétablir mon vecteur vitesse
+ jfaixo: ok
+ philRG: après une collision
+ jfaixo: je pense plutot simuler un nombre fixe de génération en faisant tourner mon bot "comme si c'était l'adversaire"
+ philRG: classé 19 avec 3 lignes de codes et l'algo de magus et une gestion des boosts via des ifs
+ Zorg1: jfaixo&#160;: oui je faisais ça sur CSB
+ philRG: bon je vais reprendre mon GA du coup moi
+ philRG: jamais fait ça avant
+ jfaixo: ca veut dire que tu le fais plus Zorg1 haha ;o
+ philRG: si j'arrive à faire mieux que -3v avec une GA, j'aurais gagné ma journée et progressé en intelligence&#160;:)
+ philRG: pour l'instant, ma GA, c'est un conducteur bourré&#160;:-D
+ Tiouz: philRG j'ai vécu ça hier
+ Zorg1: jfaixo&#160;: attends j'ai pas encore tout ramené mon code CSB ici
+ Zorg1: sur CSB je le fais toujours
+ Zorg1: après CSB je range un peu ça dans l'histoire ancienne j'y touche très peu, la dernière fois après SR quand je m'étais apperçu des gros bugs que j'avais corrigé
+ philRG: Tiouz en fait j'avais gardé ma population initial à 10 individus (comme expliqué dans l'excellent tutoriel CG tm sur TechIO) <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/334/genetic-algorithms/algorithm">https://www.codingame.com/playgrounds/334/genetic-algorithms/algorithm</a>
+ philRG: e
+ philRG: en passant à 100 ça marche mieux, mais à mon avis mes fonctions de reproduction doivent pas être très pertinentes
+ philRG: quoique mon code est un peu différent de celui du tutoriel, j'ai du le modifier
+ philRG: non je dis des conneries, j'ai adapté le code pour ne récupérer que le meilleur chromosome
+ Tiouz: aaa J'ai parfois une erreur de 1&#160;sur ma position, je pense que c'est dû aux arrondis, mais je ne vois pas d'où ça vient
+ Tiouz: Bon en fait ça va, tout caster en int ça marche
+ Zorg1: je sais jamais si c'est un truncate ou un round qu'il faut faire
+ jfaixo: c'est décrit dans les règles pour les positions et thrust&#160;:)
+ Tiouz: Pour x et vx je fais juste un cast et ça marche. Mais mon code python est différent
+ Zorg1: ah ok speed truncate et position rounded
+ Zorg1: sur SR ça devait être truncate pour tout le monde
+ TrisTaa: bonjouur *
+ F0Xx: bonsoir
+ TrisTaa: bonjour
+ MrGl0ck: salut tous le monde
+ bobbieX: Salut
+ MrGl0ck: Hello bobbiex
+ Louis.: salut
+ Neumann: jft63: tu utilises quoi comme algo d'exploration&#160;?
+ Jeff06: Monte Carlo :D
+ jft63: Neumann un GA
+ Neumann: jft63: Ok, thks
+ Neumann: T'es en MC Jeff06&#160;? :D
+ Jeff06: maybe&#160;;)
+ Jeff06: jft63: partage ton eval qu'on la critique :p
+ jft63: ah ah
+ Neumann: Mon Smitsimax fait n'importe quoi
+ Jeff06: kesako?
+ Neumann: <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/36476/smitsimax">https://www.codingame.com/playgrounds/36476/smitsimax</a>
+ Jeff06: c'est un minimax simultané?
+ Neumann: Un pseudo MCTS découplé
+ Jeff06: c'est ton bot actuel ou un projet?
+ Neumann: Bot actuel, que j'essaie d'améliorer
+ Neumann: A deux doigts de switch sur un AG
+ Jeff06: du coup avec full simu des adversaires? ça coute pas trop cher ça?
+ Neumann: Nope
+ Neumann: Enfin oui, et nope
+ Jeff06: j'ai tenté un MCTS au début, mais ça aller pas assez loin en simu...
+ darkhorse64: C'est comme un MCTS mais avec plusieurs arbres (un par joueur)
+ darkhorse64: oops, scroll
+ Haashi: yo, ca parle de quel arene&#160;?
+ dbdr: Haashi <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/challenge/sofia-labs-coding-challenge">https://www.codingame.com/ide/challenge/sofia-labs-coding-challenge</a>
+ philRG: y a euler qui a fait une nouvelle contrib 
+ philRG: oh pardon me suis trompé de touches (doigts gelés) 
+ Haashi: attend y a un challenge
+ Haashi: zzzzz
+ Haashi: ah c'est un csb alike
+ Haashi: aurevoir
+ Haashi: :relieved:
+ Haashi: c'est quoi la différence avec csb&#160;? 
+ jfaixo: j'ai pas fait csb, mais tu n'as qu'un pod, non contraint en rotation min/max, sans bouclier
+ Haashi: et y a la notion de boost aussi&#160;? c'est pas 0-200 comme dans csb a ce que je vois
+ jfaixo: thrust a 0 -&gt; 100, et boost oui
+ Zorg1: plusieurs boosts même par partie
+ pardouin: je viens de finir The Bridge, je pigeais pas l'intérêt de WAIT vu que JUMP amène au même endroit avec moins de contrainte
+ pardouin: je pensais que j'avais du mal comprendre un truc, mais en fait non, j'ai totalement retiré WAIT des options et ça change rien ^^
+ dbdr: ya pas de raison de présupposer que toutes les options sont utiles
+ pardouin:&#160;:)
+ pardouin: je me disais qu'il y avait peut-être une règle cachée du type "on ne peut pas resauter juste après un saut"
+ pardouin: mais même pas&#160;:)
+ dbdr: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/562eb62f-34f5-40a4-9e0e-e3454a8ac313">http://chat.codingame.com/pastebin/562eb62f-34f5-40a4-9e0e-e3454a8ac313</a>
+ dbdr: <a rel="nofollow" class="external free" href="https://www.futura-sciences.com/sciences/questions-reponses/mathematiques-mathematique-age-capitaine-15065/">https://www.futura-sciences.com/sciences/questions-reponses/mathematiques-mathematique-age-capitaine-15065/</a>
+ pardouin: ça me fait penser à un puzzle d'ici
+ Alshock: Euh dites, dans sofia labs (comme dans CSB) les dimensions de la map... C'est purement illustratif&#160;?
+ dbdr: et hop, un petit MC sur Sofia
+ dbdr: Alshock  oui, tu peux sortir
+ pardouin: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/medium/guessing-digits">https://www.codingame.com/training/medium/guessing-digits</a>
+ Zorg1: MC comme Monte Cristo&#160;? :p
+ pardouin: c'est le même genre de pb "âge du capitaine"
+ dbdr: MC come MadCnight
+ Zorg1: ça fait galois "Cnight"&#160;;-)
+ dbdr: C'Nght
+ Alshock: toujours plus de voyelles
+ Alshock: c'est vra ique le mot en comportait trop de base
+ Zorg1: et ça se prononce comme "chenille"
+ Zorg1: (en gros)
+ dbdr: <a rel="nofollow" class="external free" href="https://www.ling.upenn.edu/~beatrice/humor/clinton-deploys-vowels.html">https://www.ling.upenn.edu/~beatrice/humor/clinton-deploys-vowels.html</a>
+ pardouin: TNETENNBA
+ Alshock: ah zut les règles donnent pas la valeur d'accélération du boost va falloir l'inférer
+ dbdr: 650 il parait?
+ jfaixo: oui
+ nicola: Non, MC comme MC Hammer.
+ Alshock: J'aime beaucoup cette page dbdr
+ dbdr: TheOnion est génial
+ Alshock: Mais m'aidez pas, après je vais encore finir premier et vous aurez que vos yeux pour pleurer :P (meurchi)
+ dbdr: :P
+ Zorg1: ça va les hidders&#160;?
+ dbdr: #hidders
+ nicola: You can’t touch this. :cartwheel_tone1:
+ Zorg1: moi j'utilise un Algorithme Génial
+ Zorg1: mais en fait pas tant que ça
+ nicola: C’est toujours mieux que ce tordu de Tortue Géniale.
+ pardouin: ah je croyais que AG c'était Algorithme Genré
+ Zorg1: l'obsédé des boules du dragons&#160;?
+ nicola: Oui.
+ dbdr: bon, on va dire que Sofia me donne l'occasion de passer légende sur CSB apres
+ dbdr: MC &gt; -3vel
+ Zorg1: forêt de ifs &gt; tout vos trucs avec des acronymes
+ dbdr: sur Sofia? je demande a voir
+ Zorg1: je crois pas en fait ^^
+ dbdr: :stuck_out_tongue_winking_eye:
+ Zorg1: là je suis en train de refaire mon CSB à partir de mon code SR
+ Bon[]Crayon: Salut tout le monde.
+ Zorg1: o/
+ Bon[]Crayon: o/
+ Bon[]Crayon: slt Automaton2000
+ Bon[]Crayon: slt AutomatonNN
+ Automaton2000: c'est pour ça que j'ai dit
+ Bon[]Crayon: Automaton2000 'tortue'
+ Automaton2000: tout est une question de temps
+ Zorg1: il nous la fait vieux sage Automaton2000
+ Automaton2000: une fois que tout est ok
+ dbdr: Zorg1 tu timeoutes <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/538636476">https://www.codingame.com/replay/538636476</a>
+ Louis.: salut 
+ Zorg1: je me disais aussi normalement c'était #1 mon code
+ dbdr: a l'aise
+ Bon[]Crayon: salut
+ Zorg1: ah tiens un index out of range
+ dbdr: classe!
+ Alshock: ça va les didiers&#160;?
+ Zorg1: encore la conspiration des tableaux trop petits
+ Alshock: ah tiens ça avait scrolled up, pas balan
+ dbdr: Zorg1 ça arrive assez souvent, non?
+ dbdr: tu dois vraiment pouvoir monter en fait
+ dbdr: si tu fix it
+ Zorg1: oui, j'avais fixé le problème hier mais j'en ai laissé en fait
+ dbdr: #hidders
+ Zorg1: évidemment j'ai un gars sur Skype avec un problème à la con alors que je me concentrais sur mon bug Sofia
+ dbdr: 1 heure par submit? :O
+ Zorg1: oui
+ Zorg1: c'est vraiment un CSB like
+ dbdr: lol
+ Zorg1: t1 les mecs se masturbent "excellence sécurité" et t'envoie une clé privé dans un mail en clair&#160;:(
+ dbdr: LOL
+ dbdr: qqn sait si les collisions et passages de CP c'est avant ou apres  arrondis?
+ darkhorse64: dans le code CSB de Magus,  c'est après
+ dbdr: merci
+ darkhorse64: dans le statement, ça dit poussée, mouvement(collision,...), friction, arrondis
+ dbdr: oui
+ dbdr: et ça parle pas des passages de CP
+ darkhorse64: exact mais tu peux entrer et sortir d'un CP sur un tour donc c'est forcément pendant le mouvement. 
+ dbdr: bien vu
+ Zorg1: dans mon code je considère les CP plus petit de qq pixels, j'ai du avoir des problèmes ^^
+ darkhorse64: Sur SR, il y a même un test case où tu peux en faire deux sur un tour "Hold the line"
+ Zorg1: ah oui c'est piégeux ça
+ darkhorse64: J'ai eu un bug à cause de ça
+ dbdr: vis a vis d'Amadeus c'est pas génial la vitesse des submits
+ darkhorse64: On dirait l'ENT de l'Education Nationale
+ Alshock: Albatard, Poutine a attaqué les serveurs de CG :P
+ darkhorse64: Il y un moyen de voir la charge des serveurs&#160;?
+ darkhorse64: *y a*
+ dbdr: je pense pas, c'est virtualisé
+ darkhorse64: je sais, il y a 200 devs qui hident et font tourner CGBenchmark
+ dbdr: c'est possiblement un probleme, oui :D
+ darkhorse64: Ca rame à peu près autant que le dernier weekend d'un contest CG à 7000 participants
+ dbdr: parce que pour un contest ils rajoutent des serveurs
+ struct: Are you sure they add servers?
+ dbdr: almost
+ dbdr: heard about it. and it would be dead slow without that
+ darkhorse64: Annonce officielle CG: poisson d'avril, le premier prix, c'est une CASIO. 
+ Alshock: Well considering the difference in scale I guess so
+ darkhorse64: On sait jamais ...
+ struct: I see, maybe they add arena servers.
+ dbdr: 82% d'un submit en une heure
+ dbdr: Zorg1 corrigé?
+ Zorg1: yop
+ Zorg1: merci pour faire les tests sur mon code&#160;;-)
+ dbdr: Pas de probleme. J'envoie la facture a quelle addresse, Zorg1?
+ THShadowsResidents: hey qlq utilise le site code block pour codder
+ THShadowsResidents: coder
+ jfaixo: envoi aussi le doc et le ppt dbdr :joy:
+ Zorg1: j'ai droit à une présentation avec dbdr en cravate pour le prix&#160;?
+ dbdr: ah non, c'est en option
+ Zorg1: en plus avec le Covid 19 ...
+ dbdr: tiens, Recar est sur Sofia
+ dbdr: il doit lurker sur le chat&#160;:)
+ dbdr: marauder?
+ Zorg1: bof à la fin y a qui-tu-sais qui va sortir du bois
+ Zorg1: plutôt rôder non&#160;?
+ dbdr: d.p.r.n?
+ dbdr: oui, bien roder
+ dbdr: phonetiquemet j'etais pas loin
+ Zorg1: ça me rappelle les rodeurs du "Prisonnier" tiens
+ Zorg1: (le gros sac en plastique en forme de boule)
+ Zorg1: on est bientôt 100 sur Sofia
+ JSanction: Salut, quelqu'un a déjà essayé de récupérer le json de son profil sur CG&#160;?
+ jfaixo: c'est la jauge, après c'est plus covid
+ Zorg1: ^^
+ Zorg1: dbdr&#160;: oui dprn qui attend son largarge de voyelles
+ dbdr: :D
+ dbdr: j'ai l'impression que c'est assez random les matchs a 3
+ Zorg1: j'ai cette impression aussi
+ Zorg1: ah oui y en a qui aime bien la technique je booste pour mieux te virer de la trajectoire avec un petit choc bien vicieux
+ Zorg1: mon bot commence à faire des queues de poissons. bien
+ jfaixo: ben la "meta" en 1c1, c'est clairement mettre l'autre en orbite au pire moment pour lui, qu'il puisse pas te rattraper&#160;;)
+ leojean890: d'où le côté random des parties à 3 hehe
+ leojean890: si toi #1 te fais virer par #2 qui laisse filer #3 devant, pas de chance&#160;;) =&gt; RANDOM
+ jfaixo: et pourtant, certains s'en sortent mieux que d'autres... coincidence&#160;? :smirk:
+ Zorg1: moi ça va je suis #2 et #3 se charge de virer #1. Il a gagné sa place de bloqueur dans CSB :p
+ struct: 3 player games are always a bit random tbh
+ dbdr: jfaixo si 3p était completement random, les matchs a 2 finiraient quand meme par faconner le classement, juste avec plus de bruit
+ dbdr: et bien sur c'est pas 100/100 random
+ Zorg1: bon 1 heure pour évaluer une modif de magic number ...
+ arochut: Bonjour&#160;! Je suis sur le problème du jeu de la vie, et j'ai une erreur EOF when reading a line sur le 3e jeu de test alors que ça marche parfaitement sur les autres jeux
+ jfaixo: yes dbdr  :) mais j'en suis encore a déboguer des trucs "évidents" dans mon bot, la stratégie de fight viendra bientot&#160;!
+ leojean890: j'avoue Zorg1 pk les submits sont ils aussi longs pour ce contest&#160;?;)
+ Zorg1: déjà t'as 100 ms par bot, d'habitude c'est plutôt 50 je dirais
+ Zorg1: après il faut voir le nombre de CPU dédiés
+ jfaixo: oui et pour être fair, faut s'assurer que tu laisses bien 100 vraies ms par bot =&gt; 300ms par tour + leur propre simu
+ Neumann: Vous aussi vous avez 3 fps dans le viewer Sofia sous Chrome&#160;?
+ Neumann: Aucun soucis sur FF
+ philRG: qui connaît les frameworks web? J'ai eu la semaine dernière un test de recrutement assez lourd avec les frameworks angularJS et RestlerPHP, j'en connaissais aucun des 2. 
+ philRG: <a rel="nofollow" class="external free" href="https://www.portageo.fr/blog/frameworks-developpeurs-web/">https://www.portageo.fr/blog/frameworks-developpeurs-web/</a>
+ philRG: 50 frameworks à choisir
+ philRG: je suis sous chrome aussi
+ philRG: pas d'extension CG-Sync pour FF
+ Zorg1: enfin le truc c'est pas de connaître les meilleurs, c'est savoir lesquels font le plus de buz et sont parés de l'équivalent de l'étiquette "Vu à la télé"
+ Zorg1: :p
+ philRG: le JS tourne mieux sur FF, normal a été créé par la même boîte (Netscape), le collègue de bureau de mon frère chez Netscape
+ philRG: ah oui mais je regarde plus la TV
+ philRG: le soucis c'est que je connais aucun framework orienté front-end
+ philRG: je fais du html moi
+ philRG: et des scripts cgi qui interrogent une base de données relationnelle
+ philRG: je connais pas non plus de framework orienté back-end
+ philRG: voire parfois j'enregistre mes données dans des csv, et je gère les intégrités référentielles via le code
+ BigUP: hum... faut voir, le JS avait plutot tendance a mieux tourner sur Chrome jusqu'a présent
+ BigUP: philRG, AngularJS ...ouais bon, peuvent passer an Angular tout court... enfin bon
+ BigUP: Neumann, j'ai eu 101% de CPU et plus hier sous FF avec le truc de Sofia
+ BigUP: ca ramait sévère, avec 1 CPU occupé en full sur les 12 que j'ai en virtuel.... CG m'a tué
+ jfaixo: Neumann j'ai une latence au début de chaque game sur le viewer sofia
+ jfaixo: sous ff
+ BigUP: en meme temps CG nous fait de magnifiques Error: Timed out. sur un truc cg-analytics.js qui utilise une magnifique librairie de tracking d'activité d'utilisateur... 
+ philRG: le JS a toujours été plus fluide sur FF pour moi pour le viewer, et moins de plantage
+ BigUP: ils ont du corriger depuis hier, ca affichait le nom du truc de tracking, mais plus aujourd'hui
+ BigUP: arf&#160;!&#160;:) on se bouffe aussi un GET sur GET	<a rel="nofollow" class="external free" href="https://www.youtube.com/embed/kGCAgaZv99M">https://www.youtube.com/embed/kGCAgaZv99M</a> (marqué comme blocké dans mon navigateur, probablement ghostery qui dit que ca suffit les conneries)
+ BigUP: ha voila j'ai retrouvé la librairie de tracking --&gt; api2.amplitude.com (bloqué par ghostery... merci)
+ BigUP: c'est bien, ca change de google analytics&#160;;)
+ BlaiseEbuth: En même temps comment tu veux qu'ils sachent qui fait partie des 5% sans un peu de tracking...
+ BlaiseEbuth: Yo tout l'monde&#160;! Automaton2000, AutomatonNN&#160;!
+ Automaton2000: non, on ne peut pas faire autrement
+ BlaiseEbuth: Voilà
+ BigUP: ca va, qu'une pointe a 80% de CPU sur un run a 3 aujourd'hui
+ BlaiseEbuth: T'as qu'a avoir un meilleur CPU aussi... Ces gens qui se plaignent...
+ BigUP: non au contraire, je ne me plaint pas...&#160;:)  en plus que 700Mo de Ram consommé, j'ai eu des périodes à plus de 1,5Go&#160;;)
+ <b>**dbdr pleure en MSDOS a entendre "que 700Mo de RAM"</b></p><p><img src="/a/43448306132121" /> dbdr: (700 000 Ko vs 640 Ko)
+ BlaiseEbuth: Bawé mais t'as qu'a être moderne aussi...
+ BigUP: dbdr, ils ont jamais fait CG sur MSDOS aussi
+ dbdr: certes. mais bon le facteur 1000...
+ dbdr: yen a une bonne partie qui passe dans des betises
+ BlaiseEbuth: Boh hey, mon pc et ma connexion font tourner cg sans aucun soucis, alors faites pas style.
+ BlaiseEbuth: Bande de râleur
+ BigUP: BlaiseEbuth, on a le droit&#160;!&#160;:) c'est la séance troll gratuit&#160;!&#160;:)
+ dbdr: BlaiseEbuth, bande de meta-raleur a toi tout seul
+ BlaiseEbuth: Moi je trouve que c'est pas justifié. Si le site fonctionne sur un pc à 4k€ via une co fibre, ça doit bien marcher chez tout l'monde... :rolling_eyes:
+ BigUP: ca doit
+ BlaiseEbuth: Y'a des p'tits Automaton qui n'ont pas ce que vous avez, alors soyez heureux.
+ Thyl: mon sub combat 1 je suis avec pb
+ Thyl: combat 2 avec illedan
+ Neumann: C'était pas le cas, avant, ces lags dans le player
+ Neumann: Je sais pas si y'a eu un changement récemment côté CG
+ jfaixo: bah c'est surtout que pour le coup, j'ai pas un pc de merde et ca réussi a ramer&#160;;)
+ Neumann: La latence au démarrage c'est "normal"
+ Neumann: Enfin j'ai toujours connu
+ HamzaAjja: les gars j'ai besoin d'aide svp
+ dbdr: ou sur le navigateur. ou dans l'une des 78 libs JS entre les deux
+ Neumann: Mais une fois le lag passé c'est OK, là ça full lag tout le temps
+ BlaiseEbuth: Et voilà le "c'était mieux avant"... Ces gens qui passent leur temps sur le site mais le critique à tout bout de champ...
+ jfaixo: Jeff "j'te timeout" 06 :o
+ dbdr: si c'est bon avec FF.... utilise FF
+ BlaiseEbuth: Et ça dénigre le bon Google... Tsss
+ BlaiseEbuth: Si vous voulez saler allez sur le discord, ici c'est pour les gens sérieux.
+ dbdr: lol
+ BlaiseEbuth: ngl
+ BlaiseEbuth: HamzaAjja <a rel="nofollow" class="external free" href="https://how-to-properly-ask-a-question.surge.sh/">https://how-to-properly-ask-a-question.surge.sh/</a>
+ soso0084: Bonjour les gens, je cherche un test d'entrement sou forme de QCM. C'est présent sur la plateforme ou pas? 
+ BlaiseEbuth: Non. Ici c'est totalement axé pratique.
+ Panet01: Je suis nouveau, y'a t-il un moyen d'avoir les clash of code en fançais&#160;? 
+ BlaiseEbuth: Non
+ Alshock: par contre les multis oui (la plupart en tout cas (enfin je pense j'ai jamais vérifié))
+ BlaiseEbuth: Bah ceux qui sont issus de contests oui. 
+ Zorg1: c'est le serious chat ici&#160;? 
+ dbdr: en supposant que BlaiseEbuth est sérieux, oui
+ dbdr: mais c'est circulaire comme raisonnement
+ Zorg1: tu me scies avec ton raisonnent circulaire
+ Zorg1: Automaton2000 la forme&#160;? tu nous hide un truc canon pour le contest Sofia&#160;?
+ Automaton2000: ca serait pas plus simple de faire un algo de recherche
+ Zorg1: :thinking:
+ dbdr: allez: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=bYg9USKe_so">https://www.youtube.com/watch?v=bYg9USKe_so</a>
+ Zorg1: "ne me scies pas les eaux" joli ^^
+ Zorg1: *les os
+ dbdr: C'est en forgeant qu'on devient forgeron, c'est en mangeant la soupe qu'on granditEt c'est en jouant au bûcheron qu'un jour Léonard De Vinci
+ BlaiseEbuth: :expression_less:
+ BlaiseEbuth: :thinking:
+ dbdr: "ne me scies pas les eaux" c'est poétique aussi&#160;:)
+ Zorg1: j'aime bien
+ BlaiseEbuth: Moi sérieux&#160;? :scream:
+ Zorg1: bon c'est pas tout ça, mais j'ai un AG en double file
+ Zorg1: j'ai mis un klaxon 18 tons sur mon pod pour frimer dans le quartier
+ dbdr: Zorg1 du coup la c'est <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=lp0TohrzbRo">https://www.youtube.com/watch?v=lp0TohrzbRo</a>
+ leojean890: alors tu vas simuler l'adversaire finalement Zorg1&#160;?;)
+ dbdr: la tire a Zorg1
+ Zorg1: t'es dans ta période Renaud&#160;?
+ Zorg1: leojean890&#160;: on y travaille
+ dbdr: juste par association
+ Zorg1: je dirais pas que c'est un échec, seulement que l'essai n'est pas couroné de succès
+ BlaiseEbuth: La castexade
+ Zorg1: HE Manu tu descends&#160;?
+ dbdr: pkoi fer?
+ Zorg1: bah .....
+ Zorg1: CETONDESTAING&#160;!
+ Zorg1: PRENTOIZEMAIN
+ Zorg1: bon je me calme
+ BlaiseEbuth: Woah les gars y'a schwarzaneger à la télé!
+ BlaiseEbuth: Ah non c'est maman devant le poste...
+ leojean890: Zorg1 perso je manque un peu d'idées pour améliorer ^^je vais p'tet revoir ma strat de boosts pour tenter qq trucs 
+ Zorg1: et si je mettais un log dans mon évol&#160;?
+ Zorg1: paraît que c'est #1 dans l'élite CSB
+ BlaiseEbuth: Ah un log comme ça...
+ leojean890: ah ouais dans ocean of code =&gt; pb4
+ leojean890: il mettait un log et hop il metait 2 pts de ELO d'avance sur #2 et #3 xD
+ leojean890: mettait
+ leojean890: j'exagère mais bon&#160;;)
+ dbdr: Zorg1 leojean890 c'est migon comme vous vous aimez:<a rel="nofollow" class="external free" href="https://www.codingame.com/replay/538708590">https://www.codingame.com/replay/538708590</a>
+ Zorg1: ah oui je me suis fait salement viré au premier cp moi
+ Zorg1: pendant ce temps là dbdr caracole ...
+ dbdr: et ensuite vous vous genez toute la course
+ dbdr: c'est sympa pour moi&#160;:)
+ jfaixo: haha
+ dbdr: voila
+ Zorg1: ah non en fait c'est moi qui a accéléré comme un bourin
+ jfaixo: si vous voulez regarder un match, mais sans les joueurs... <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/538598115">https://www.codingame.com/replay/538598115</a>
+ dbdr: pourtant c'est pas ton genre
+ leojean890: Zorg1 normalement il prend pas en compte l'adv donc c'est plutôt foncer comme une flêche et moi je l'embête^^
+ Zorg1: ah ah le style "kesta toi"
+ dbdr: jfaixo lol
+ Zorg1: en fait si je prends en compte l'adversaire, ma fonction d'éval doit être tordue
+ dbdr: ah, tu as un adversaire en -3v?
+ Zorg1: oui faut que je simule l'adversaire
+ Zorg1: après pour pas que ça devienne n'importe quoi faut que je devine à peu près le nombre de boost qui lui reste
+ leojean890: ouais ça j'ai pas .. je devrais surement
+ leojean890: estimation des boosts adv
+ leojean890: en regardant son evol de coord
+ Zorg1: c'est compliqué avec les collisions
+ leojean890: ouais
+ jfaixo: chuut, faut pas balancer toutes les bonnes idées dans le chat xD
+ leojean890: y'a moyen d'avoir des erreurs
+ jfaixo: c'est au programme de demain les boosts adverses pour moi, ce soir, simuler l'adversaire... :P
+ BlaiseEbuth: Pourquoi&#160;? Faut bien filer des tips aux mecs qui vont débarquer à la fin.
+ dbdr: jfaixo tu es haut sans ça!
+ Zorg1: ah oui jfaixo il joue pour la PS5
+ Zorg1: va faire chaud cet été, va falloir un climatiseur
+ jfaixo: haha non, ca c'est dprn
+ jfaixo: je suis là pour le sac xD
+ Zorg1: :D
+ leojean890: je balance souvent une partie des idées, après "bonnes" c'est subjectif xD
+ dbdr: jfaixo mais vu ton replay, tu prends bien en compte l'adversaire pour le bloquer, non?
+ jfaixo: bah chui allé courir a midi et j'ai eu l'idée de compter les boosts adverses, pour pouvoir les simuler (quand je les simulerai...)
+ BlaiseEbuth: Woah j'ai trouvé une division par 0!
+ jfaixo: oui, mais c'est la fonction de costing qui fait ca, j'y ai passé du temps..
+ Zorg1: c'est vrai que mon éval est un peu trop simple
+ jfaixo: en fait j'ai (a peu près, faut que je me soigne) arrêté d'essayer d'être plus malin que mon algo d'exploration, et mis dans la fonction d'éval ce que je préférais comme situations, et la magie opère
+ dbdr: :thumbsup:
+ jfaixo: Zorg1 en vrai je pense que la majorité de la stratégie est dans ton eval, le reste, bon si ca converge a temps ca suffit... en rust j'arrive a faire bcp bcp de simulations, du coup meme si j'ai pas encore trop optimisé les paramètres, ca brute force un peu ^^' mais je sens que ca va devenir compliqué si j'alloue du temps a simuler les autres, on va voir...
+ leojean890: et les mecs qui vont débarquer à la fin sont avides des meilleures idées (daporan va avoir sa 2eme ps5..)
+ jfaixo: j'espère pour lui que le prochain challenge fera gagner une télé (pour brancher la 2eme ps5)
+ leojean890: j'avoue hehe
+ Zorg1: bah il les vends en fait (ou demande le pognon à la place) je crois
+ leojean890: faut faire RAIC dans ce cas
+ leojean890: premier prix, 3k euros
+ leojean890: 2eme prix, 2500 euros
+ leojean890: etc
+ leojean890: 12 personnes ont de l'argent &gt; 100 euros&#160;;)
+ jfaixo: (et en vrai, je suis monté cet aprem, mais c'est pas ma simulation, qui était déjà bonne...c'est le "compte tour" et le "compte boost" qui étaient buggés... dur l'incrementation.. no comment)
+ jfaixo: c'est quoi RAIC&#160;?
+ leojean890: russian AI cup
+ leojean890: ça dure 1 mois
+ BlaiseEbuth: C'est la récompense pour avoir compris le système de classement...
+ leojean890: c'est des sujets bcp plus durs que CG
+ Zorg1: ça dure un mois et y a  plein de russes
+ Zorg1: faut aimer
+ leojean890: je t'invite à regarder des vidéos des années précédentes pour te faire une idée de la difficulté des sujets&#160;;)
+ jfaixo: oui c'est plus dur pour choper les tips sur le chat du coup
+ leojean890: pas de chat 
+ leojean890: je crois
+ Zorg1: ils les ont pas viré de leur site&#160;?
+ dbdr: ya un whatsapp de mémoire
+ leojean890: on s'était fait un #RAIC2020 ici
+ dbdr: en russe&#160;:)
+ leojean890: avec des gens de #world
+ leojean890: (en tout cas ça rapporte plus d'argent donc avis aux amateurs..^^)
+ leojean890: kovi a fini dans le top 10 je crois
+ jfaixo: ya ptet plus de monde&#160;?
+ leojean890: non même pas^^
+ leojean890: moins de monde mais du gros niveau au top^^
+ leojean890: 800 inscrits
+ jfaixo: bah je regarderai, mais un défi a la fois, entre ce challenge, et celui de mai, je pense que j'ai rempli la tolérance de madame :sweat_smile:
+ jfaixo: ok
+ Zorg1: mais faut s'accrocher, c'est  complexe ce qu'ils demandent
+ leojean890: 300 reussissent le roud d 1 et vont au round 2
+ leojean890: round
+ leojean890: 60 vont en finale
+ TyronW: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/87f8ec10-9e77-4d16-8a42-5eaaca8f1a8a">http://chat.codingame.com/pastebin/87f8ec10-9e77-4d16-8a42-5eaaca8f1a8a</a>
+ TyronW: console.log(factorielle(4));
+ leojean890: jfaixo c'est en novembre-décembre t'as le temps xD
+ leojean890: mais ça dure un mois
+ Zorg1: y a un système de repêchage complexe aussi dans RAIC
+ jfaixo: ok, c'est un peu a la hash code mais avec du temps pour faire tourner ton optim sur une bécane aws à 256 coeurs...
+ TyronW: quelqu'un peut m'expliquer pourquoi ça fait 24?
+ Zorg1: 4*3*2*1=6*4=24
+ leojean890: système de repechage en effet
+ leojean890: faut être dans le top du bac à sable pari les non-déjà-sélectionnés pour être repêché
+ jfaixo: la factorielle, c'est le produit de tous les chiffres entre 1 et N
+ leojean890: parmi
+ jfaixo: 1 * 2 * 3 * 4 = 24, ton code est bon ;o
+ leojean890: mais ouais RAIC à titre d'exemple, faire une IA de ligue of legends
+ leojean890: faire une IA de rocket league
+ jfaixo: ouais ok, bonjour PyTorch et Tensorflow xD
+ leojean890: quand tu regardes les PM ça semble être sans ça^^
+ Zorg1: y a bcp d'IA en python sur RAIC&#160;?
+ jfaixo: je me regarderai ca en tout cas merci&#160;! *bookmarké*
+ jfaixo: et v aller prendre des forces avant de casser mon bot..! ^^'
+ Alshock: Connard de virus
+ Alshock: Ah zut le scrolling
+ dbdr: scroll de 1 an?
+ leojean890: RAIC surtout du C++ au top
+ leojean890: plus de bots heuristique que simu je crois
+ Zorg1: mais elle est débile ma fonction d'éval :rolling_eyes:
+ dwarfie: il te faut une fonction d'eval pour tester la qualite de ta fonction d'eval ...
+ Zorg1: une méta-éval
+ Zorg1: et on continue comme ça 
+ Zorg1: jusqu'à l'infini et au delà 
+ Alshock: quand on fait une NN en eval c'est intéressant de faire un truc comme ça&#160;? entraîner l'eval sur une basse puis l'entrainer selon ses propres résultats au niveau n+1&#160;? 
+ Alshock: Rien qu'en le disant je trouve l'idée très instable
+ Zorg1: pas plutôt récupérer des données de matchs du top&#160;?
+ Zorg1: je sais que pb4 avait publié un paquet de données comme ça pour entrainer un NN sur CSB
+ Zorg1: ah ça y est on est 100
+ leojean890: il parait qu'ils font des meta-NN ouais
+ Zorg1: en plus sur Sofia j'ai l'impression qu'il te faut 2 NN un pour 2 pods et un pour 3 pods (mais je peux me planter)
+ leojean890: j'ai un pote à CS group Toulouse, ses collègues qui font des NN font des méta-NN pour optimiser les params du NN
+ leojean890: gros tuning de numbers
+ BigUP: ca se tient
+ Zorg1: tout se tient, j'ai tout fixé au mur
+ Zorg1: les voisins ont gueulé mais c'est solide
+ nicola: Comme Robert Bidochon, tu as sorti la mèche au tungstène.
+ philRG: jfaixo j'ai (je crois) réussi à compter les boosts adverse en tenant en compte la vitesse du pod au dernier tour et en utilisant l'algo de magus pour vérifier qu'il n'y avait pas eu de collision, mais ça ne donnait pas des résultats toujours exacts
+ philRG: je l'ai d'ailleurs laissé tomber comme arène trop lente pour analyser beaucoup de replays
+ philRG: la stratégie utiliser son boost quand c'est nécessaire me paraît avoir plus de sens
+ philRG: je n'essaye pas d'éviter les collisions ni essaye de pousser l'adversaire
+ philRG: -3v uniquement
+ jfaixo: spoiler alert leojean890&#160;: j'ai codé ma fonction de simulation a part, et je m'en sers dans un émulateur a coté pour optimiser les paramètres de mon bot&#160;! (mais vu le nombre de bugs que j'ai corrigé, va falloir recommencer...)
+ philRG: pour monter oui faut mieux gérer les collisions que ce que j'ai fait
+ jfaixo: oui philRG, j'ai aps encore trop réfléchi mais les collisions vont aps aider a compter les boosts, surtout que ya une forte tendance a utiliser les boosts pour orbiter les autres, du coup le vecteur vitesse est transféré à l'orbité..
+ philRG: ouais tu peux pas savoir si l'adversaire va sortir un boost ... tu peux seulement détecter si une collision va avoir lieu sur une  prévision de trajectoire de l'ennemi
+ philRG: ça fausse un peu les données les boosts
+ jfaixo: oui mais pour prévoir la trajectoire, c'est un poil mieux si tu sais si il peut booster ou pas
+ jfaixo: mais déjà v essayer de les prévoir sans oui
+ philRG: pour l'émulateur ah oui je sais pas faire mais ça doit aider pour tuner les paramètres, car en ce qui me concerne j'ai arrêté (trop de lenteur)
+ philRG: je me sers de la détection des collisions pour rétablir mon -3v, mais ça marche pas quand je me fais éjecter 
+ philRG: la trajectoire de mes pods adverses sont des -3v
+ philRG: donc du coup j'ai pas tout juste 
+ philRG: surtout j'utilise mes boosts quand c'est nécessaire
+ jfaixo: c'est mieux que rien déjà.. tu pourras jamais avoir juste ca dépend de la stratégie de chacun.. Ce que je veux éviter surtout, c'est quand mon bot crame 2/3 boosts pour pousser l'adversaire dehors, et que je passe a coté de l'adversaire parce qu'il a bougé entretemps... (et mon bot finit en dehors de la map)
+ philRG: j'avoue que j'ai pas analysé dans quel circonstance l'adversaire va lancer un boost, alors que c'est une question quand même prioritaire
+ philRG: ah oui cramer les boosts, je les ai vus au début du contest, et je l'ai testé aussi mais ça donne rien
+ philRG: l'adversaire se repositionne vite et tu gagnes finalement pas autant de  temps que ça comparé à un cas où tu utilises ton boost sans collision, enfin je l'ai pas tuné
+ philRG: c'est trop long d'analyser les replays
+ philRG: j'ai pas pu coder de vraie simu en fait
+ jfaixo: ha, sans simu par contre ca va etre dur je pense... une des clefs du tuning c'est d'avoir le plus d'informations justes possibles, c'est pour ca que je veux essayer de compter les boosts adverses
+ philRG: purée j'ai chuté à la place 32
+ philRG: c'est quand même pas parce que je donne mes stratégies
+ philRG: ça devrait faire monter en principe oui
+ Zorg1: on est en plein effet "CSB" tu fais des modifs, tu pushes, t'attends 1 heure et t'as le même résultat
+ jfaixo: mdr, j'avoue que tu pousses, et t'as les résultats au réveil le lendemain oui
+ leojean890: jfaixo pk spoiler alert&#160;? parce que tu dévoiles une partie de tes secrets&#160;?:P
+ jfaixo: haha, en tout cas un secret de fabrication.. ^^
+ jfaixo: ca bataille dur sur ce challenge en tout cas
+ Zorg1: bah comme ça il est sûr que tu lis ton post :p
+ Zorg1: *son post
+ Tiouz: Il se termine quand le challenge&#160;?
+ Zorg1: t'as un compte à rebours dans l'IDE
+ Zorg1: 4 jours 1 heure qu'ils disent
+ leojean890: comme sur bcp de challenges ouais :P mais par rapport au nb de participants une petite proportion se bat vraiment ^^
+ leojean890: bah ouais en me tagguant il est sûr que je le verrai, c vrai;)
+ Zorg1: ça se comprend il a pas envie de rater l'arrivée des hidders on en a tellement parlé ^^
+ BlaiseEbuth: C'est pas parce qu'ils sont pas dans le top qu'ils se battent pas... Cette condescendance...
+ jfaixo: bah tu m'as posé la question, je t'ai tag pour que tu vois la réponse ^^'
+ leojean890: jfaixo c'est une arêne locale ce que tu décris, non&#160;?
+ jfaixo: oui
+ leojean890: un émulateur à côté qui prend ta simu en entrée
+ leojean890: je ne sais plus si certains avaient créé des arènes locales pour CSB ou pas, Agade en a créé qq unes pour d'autres jeux
+ leojean890: en tout cas c'est plus rapide que CG benchmark donc tu peux tuner plus efficacement:)
+ jfaixo: oui, ca fait ce que codingame fait, en réutilisant la simu que j'ai de toute facon codé comme tout le monde pour mon bot. Sauf que c'est un programme tier qui prend une description de map (avec les checkpoints et les start points), des bots, et qui parle avec les bots
+ leojean890: t'es parti du referee&#160;?
+ jfaixo: et oui l'avantage c'est que j'ai scripté par dessus, et je fais tourner plein de simus sur les memes maps, avec des valeurs différentes pour tous les hyperparamètres de mon bot
+ leojean890: mêmes maps =&gt; comme ça tu t'assures que tu fais des tests sur un benchmark constant:)
+ jfaixo: j'ai pas fait une optim de l'optim par manque de temps (du coup je quadrille juste les valeurs qui m'intéressent), mais c'est l'idée
+ jfaixo: yes
+ jfaixo: euh je sais pas si ya un referee, non pour la simu j'ai fait comme tout le monde je crois, avec le post de magus, et du debug pas a pas :P
+ leojean890: pour ce sujet je ne sais pas s'il est partagé qqpart^^
+ leojean890: ouais son PM puis debugger pas à pas pour le faire marcher^^
+ leojean890: BlaiseEbuth ça dépend des joueurs, certains se battent et d'autres n'ont pas le temps ou l'envie :p
+ leojean890: Zorg1 ouais comme par hasard on va avoir 10 nouveaux bots au top juste le dernier jour, ou la dernière heure^^
+ Zorg1: 10 peut être pas
+ Zorg1: mais on va voir des gens surgir, ouais
+ leojean890: au tout dernier moment qq uns, mais en tout sur la dernière journée, peut être plus (qui se dévoilent plus tôt car n'auront pas réussi à dépasser le premier)&#160;?:P
+ leojean890: tiens Recar arrive vers le haut, c'était l'un des très bons à RAIC2020
+ leojean890: bizarre on a moins de joueurs que pour sopra, pourtant c'est ouvert à toute l'Europe alors que la France seulement la dernière fois
+ Zorg1: tu sous-estimes la mafia Sopra Stéria 
+ Zorg1: ils sont partout
+ leojean890: j'avoue hehehe
+ jfaixo: mdrr
+ Zorg1: :p
+ jfaixo: ou on avait juste un peu plus communiqué je sais pas
+ leojean890: la com est probablement plus conséquente:)
+ leojean890: (et le gagnant était en belgique..)
+ Zorg1: oui Neumann avait écrit plusieurs fois ici et fais un post sur le forum
+ leojean890: ouais
+ leojean890: le coup du gagnant en Belgique c'est une arnaque n'empêche ^^
+ Neumann: Loophole dans le réglement, c'était pas voulu
+ leojean890: I see^^
+ Neumann: Déso pour la comm' contradictoire du coup, sur le papier n'importe qui aurait pu claim le lot, même si on a dit l'inverse
+ Zorg1: ah ok
+ leojean890: ah ok donc la règle de reservation pour des gens qui vivent en France n'était pas appliquée
+ darkhorse64: Ca encore, mais le 1er submit 15mn avant la fin ....
+ Neumann: Pas applicable car mal rédigée -_-
+ Zorg1: "c'est pas interdit donc c'est autorisé" :D
+ Neumann: Et pour le late submit, c'est une classique de Daporan
+ Neumann: Qui doit d'ailleurs nous lire depuis son alt, en ricanant
+ Zorg1: on s'en fout non&#160;?
+ Neumann: Oui
+ Neumann: Il est meilleur de toute façon
+ darkhorse64: Ben non, j'aime bien me faire latter par le bot n°1 dans l'IDE, c'est toujours instructif
+ Jeff06: vous parlez de quel contest là?
+ Zorg1: ça serait marrant qu'on puisse continuer à se servir de l'IDE après le contest ...
+ Neumann: Un semi-privé Sopra, qui a eu lieu y'a qq mois
+ Zorg1: avec les bots figés dans le classement
+ leojean890: mal rédigée je vois, les fameuses ambiguités sur les mots
+ Jeff06: "Un semi-privé Sopra"=&gt; sur CG?
+ Neumann: Oui
+ Neumann: <a rel="nofollow" class="external free" href="https://www.codingame.com/hackathon/sopra-steria-coding-challenge/leaderboard/global">https://www.codingame.com/hackathon/sopra-steria-coding-challenge/leaderboard/global</a>
+ leojean890: dernière semaine de janvier 
+ Zorg1: c'était une variante de Code Buster
+ Jeff06: ah oui ok
+ leojean890: n'empêche c'était super serré entre Daporan pb4 et skyyker
+ leojean890: il aurait pu fail la première place du coup
+ Jeff06: j'avais tenté un MCTS là dessus, gros fail :D
+ Neumann: Audacieux
+ leojean890: mais le submit de dernière minute ça gagne si t'as un winrate vraiment positif globalement, alors que laisser ton bot c'est prendre le risque que ton mauvais winrate te fasse descendre 2eme^^
+ leojean890: MCTS sur CB, t'es chaud toi lol;)
+ leojean890: avec le FOW + le branching c'est complexe:)
+ Jeff06: MCTS sur des metas moves de plusieurs tours
+ Jeff06: sur le papier c'était une 1ere place assurée
+ leojean890: ouais je vois le concept, sur des combinaisons d'actions transcrits en objectifs ça peut être pas mal
+ leojean890: considérer des objectifs de défense et d'attaque plutôt que le faire sur des moves unitaires
+ leojean890: souvent ça se fait en forêt de if ce genre de choses mais ça peut tout aussi bien se faire avec une simu sur plusieurs idées
+ jfaixo: ouais mais tu ne peux rien anticiper de l'adversaire
+ leojean890: avec le FOW super fort effectivement on peut se louper, faut associer ça à un bon tracker:)
+ Jeff06: pourquoi ça marche aussi bien dans la litérature le MCTS et jamais en pratique?
+ Jeff06: tous les mois ya un article de DeepMind ou autre qui révolutionne le MCTS
+ darkhorse64: sur les jeux de plateau, ça peut fonctionner très bien.
+ Zorg1: ça marchait pas trop mal le Smithimax sur CSB non&#160;?
+ leojean890: certains font leur apprentissage par renforcement pendant plus de 0.05 s et sur un parc de machines très conséquent aussi, donc résultats supérieurs ^^
+ darkhorse64: Les articles de DeepMind, c'est MCTS couplé à une éval béton par NN
+ Jeff06: oui mais pourquoi MCTS du coup
+ jfaixo: yes, je pense que tu peux faire chauffer le MCTS pour le spring challenge
+ Jeff06: ça marcherai pas encore mieux avec du beam search ou AG ou autre truc?
+ darkhorse64: MCTS, ça sert à diriger le choix des coups à évaluer sans tout regarder
+ Zorg1: bah MCTS c'est un espèce de minimax randomisé je dirais
+ darkhorse64: C'est un algo du style "je tâte l'eau à plusieurs endroits et si la température est bonne je plonge"
+ leojean890: ouais ils l'entrainent lgtps leur NN qui produit l'éval
+ leojean890: pour le dernier spring challenge c'était un AG qui a win btw
+ leojean890: mais ça se comprend que ça puisse win sur des jeux de plateau genre uttt clobber connect 4 etc&#160;:)
+ jfaixo: bon c'est trop long ce soir, v pousser ce que j'ai, et je m'attaque a la stratégie 3j demain va ^^'
+ Jeff06: qui a dit que le spring challenge c'est un jeu de plateau?
+ jfaixo: j'ai parié avec moi meme
+ jfaixo: sur l'image, ya des totoros, et ya des noireaudes noires et blanches
+ Jeff06: oops, mon timer etait décalé de 1
+ jfaixo: <a rel="nofollow" class="external free" href="https://www.1999.co.jp/itbig51/10518526.jpg">https://www.1999.co.jp/itbig51/10518526.jpg</a>
+ jfaixo: je parie que c'est ce jeu
+ Jeff06: il est reset à 101 quand on passe un checkpoint, pas 100...
+ jfaixo: (bon ca a l'air écrit en japonais, mais on dirait un reversi)
+ jfaixo: oui j'ai vu ce reset a 101
+ jfaixo: ca t'empeche pas d'etre bien toxic en 1c1&#160;;)
+ jfaixo: c'est sur mon whiteboard du coup&#160;: "ajouter le timeout a la cost function"
+ Zorg1: bah le FC aussi ça devait être inspiré d'un jeu de plateau
+ jfaixo: ca l'était
+ jfaixo: le fall challenge le jeu s'appelle Century
+ jfaixo: c'était quasi un copier coller du jeu
+ Zorg1: bah c'est plus simple, t'as déjà les mécaniques testés pour l'équilibrage
+ Zorg1: ça prend nettement moins de temps
+ jfaixo: yes
+ jfaixo: et pour le coup, je l'ai ce jeu de société et je l'aime bien, du coup c'était sympa&#160;:)
+ jfaixo: (meme si je ne le regarderai jamais plus comme avant... xD)
+ Zorg1: on voyait dans les CCs certains jeux pas forcément super équilibrés, mais d'un autre côtés c'était marrant on essayait des trucs
+ Zorg1: Même si bob BotG on aurait pu s'en passer ^^
+ Zorg1: CC = Community Contest, fait par des équipes de joueurs
+ Jeff06: c'est pas résolu le reversi?
+ Jeff06: ou alors un reversi simultané 1v1v1v1
+ Zorg1: ah ils ont trouvé une stratégie gagnante&#160;?
+ jfaixo: no sé
+ jfaixo: ya ptet des règles, spéciales totoro haha, j'ai as pris le temps de googler
+ jfaixo: pas*
+ darkhorse64: Il y a déjà un Reversi sur CG. Il a un nom ton jeu&#160;?
+ Zorg1: il semble dire que non, même si après analyse de pas mal de partie ils semblent deviner qu'une partie parfaite amène à un nul
+ jfaixo: yes, ca me semble un bon candidat comme jeu pour faire un truc d'optim
+ leojean890: moi c'est connect 4 que je croyais résolu mais finalement ça se bastonne ici^^
+ Jeff06: oui c'est résolu connect 4
+ darkhorse64: La version 6x7 est résolue mais pas 7x9
+ leojean890: ah je vois
+ leojean890: je ne savais pas que c'était juste le 6X7
+ jfaixo: ca dure cb de temps le spring challenge, 1 mois&#160;?
+ darkhorse64: du coup, on peut tout de même bitboarder comme des fous et avoir des perfs de malade avec MCTS. 
+ darkhorse64: 10 j
+ jfaixo: si oui ca me semble léger quand meme comme probleme pour un truc si long
+ Jeff06: et la version 5x4 du connect 4? <a rel="nofollow" class="external free" href="https://www.maxitoys.fr/connect-4-blast.html">https://www.maxitoys.fr/connect-4-blast.html</a> :D
+ darkhorse64: Celle-là, c'est solved en 1s
+ Zorg1: 10 jours le spring challenge
+ jfaixo: oki
+ jfaixo: bon ben ca peut :P
+ Zorg1: du 6 mai 16:00 au 17 mai 10:00
+ darkhorse64: J'ai trouvé le jeu, en fait, c'est trois jeux classiques avec des figurines totoro. 
+ Zorg1: "L'événement commence en même temps pour tous les joueurs, quel que soit le fuseau horaire." c'est quoi ce charabia&#160;? peuvent pas dire que c'est l'heure de Paris ou CET je crois&#160;?
+ jfaixo: dans la trame json qui passe, tu as ce timestamp en ms&#160;: 1620309600000
+ jfaixo: ce qui se transforme en&#160;:GMT: Thursday 6 May 2021 14:00:00Your time zone: jeudi 6 mai 2021 16:00:00 GMT+02:00 DST
+ TidyMaze: coucou Zorg1
+ TidyMaze: j'ai echappé au chat \0/
+ jfaixo: donc ils prennent la peine de te l'afficher dans ton fuseau horaire&#160;;) (mais par contre dans la meme requete, tu as un champjson qui contient du json escapé...)
+ TidyMaze: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/538776465">https://www.codingame.com/share-replay/538776465</a>
+ Illedan: Jeff06 -.- I used 20 min to counter your thing and you change approach 
+ Illedan: (╯°□°）╯︵ ┻━┻
+ jfaixo: haha
+ Jeff06: did I?
+ Jeff06: I think it's still the same
+ Jeff06: you beat me now
+ Illedan: I feel that new thing is worse :D
+ Illedan: Keep it!
+ Illedan: Anyway, the fix was only 8 lines. I'll keep it
+ SefioR13: Bonsoir j'ai une question à propos du combat de bot Code à la mode, quand on change d'adversaire l'intégralité du code est relu ou seulement la partie à l'intérieur de la boucle de jeu&#160;?
+ SefioR13: Si j'initialise des variables avant la boucle du jeu est-ce qu'elles vont être à nouveau initialisées quand je vais changer d'adversaire&#160;?
+ Zorg1: nice TidyMaze&#160;;-)
+ Zorg1: t'as compris le truc&#160;;-)
+ leojean890: dans chess reCurse utilise une écriture du style['1bbqk1rn', 'rppp1ppp', '4p3', 'p7', '2P5', 'PP5n', '1B1PPPPP', 'RB1QKNRN'
+ leojean890: assez pratique dans un sens mais pas trop pour vérifier s'il y a pas un pion personnel
+ leojean890: sur un lieu d'arrivée
+ leojean890: faut re-parcourir toutes les lignes plein de fois
+ leojean890: par ex si une ligne est ppp4p, si on bouge un truc au milieu du 4 il faut recompter à chaque fois je trouve pas ça pratique..
+ leojean890: mais bon on peut récupérer le terrain sans représentation fen 
+ leojean890: c'est peut être mieux ainsi
+ leojean890: quoi que en fait en faisant un replace de n par n*' ' ça devient pratique
+ YacineSalah: Bonsoir, quelqu'un peut mexpliquer rapidement la premiere mission IA sur codin en python? je comprend pas pourquoi la sortie ecrite de base est fausse ( print(str(next_checkpoint_y) + " " + str(next_checkpoint_y) + " 50") )  
+ SefioR13: Regarde bien c'est une faute de frappe que tu dois corriger
+ YacineSalah: merci, je suis trop bete je cherchais trop compliqué ^^ 
+ leojean890: jfaixo au top ^^

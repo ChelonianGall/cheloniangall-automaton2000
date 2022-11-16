@@ -1,0 +1,415 @@
+ johhno: bn
+ GroutchKeu: o/
+ Stilgart: \o
+ Stilgart: Automaton2000: alors ce rêve&#160;?
+ Automaton2000: ah oui je viens de lire le code du referee
+ Stilgart: j'aimerais pouvoir faire ça dans mes propres rêves, ça pourrait être super pratique pour les contests notamment 
+ Haashi: o/
+ Haashi: Bonjour Automaton2000
+ Automaton2000: tu veux que je te vois pas dans le code source
+ loris_mgn: Bonjour, j'aurai besoin d'aide sur un programme, quelqu'un pourrait me filer un coup de main&#160;?
+ Haashi: Hello, pose ta question sur le chat on y répondra&#160;!
+ loris_mgn: Je  suis sur le programme "temperature", tous mes tests passent sauf celui des nombres négatifs et je ne comprend pas pourquoi.Je vais joindre le code
+ loris_mgn: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/27c33d36-ca4b-4b3e-9bb0-7b4557af289c">http://chat.codingame.com/pastebin/27c33d36-ca4b-4b3e-9bb0-7b4557af289c</a>
+ loris_mgn: Je teste la valeur absolue et je renvoie la valeur du tableau en question
+ baboulaf: innutile de lire ton code, dans l'énoncé&#160;:
+ baboulaf: Si deux nombres sont aussi proches de zéro, alors l'entier positif sera considéré comme étant le plus proche de zéro
+ Haashi: ^
+ loris_mgn: Yes, je te met le code complet (j'ai traité ce cas plus tard)
+ loris_mgn: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/665b6e23-19db-458a-9cb8-7096288c8400">http://chat.codingame.com/pastebin/665b6e23-19db-458a-9cb8-7096288c8400</a>
+ loris_mgn: Mon problème survient lorsque tous les nombres du tableau sont négatifs
+ baboulaf: tu passe dans ton 2ieme if a tout les coup&#160;;)
+ Haashi: j'ai l'impression que ton probleme est autre
+ baboulaf: tu viens de modifier la valeur de temp
+ baboulaf: en y mettant array[i]
+ Haashi: tu modifies tout le temps temp, et donc passe tout le temps dans ton 2eme if
+ Frankich: Yep tu prend forcément la valeur absolue avec ton code
+ baboulaf: et tu compare les 2
+ baboulaf: (pour le coup, effectivement, il fallais ton code pour voir le bug ) :D
+ Haashi: ton temp = array[i];, tu devrais le faire juste en dessous du débout de ta boucle for
+ Haashi: la structure du code est bonne, mais y a un mic mac entre les variables array[i], temp et temperature_la_plus_proche_de_zero 
+ pardouin: tu n'as besoin que de temp
+ pardouin: temp_la... et l'indice ne servent pas
+ baboulaf: moi, je corrigerai surtout la structure du code&#160;:les tests rentre dans un seul if
+ pardouin: n'hésite pas à utiliser un 'or'
+ loris_mgn: En fait je voulais que temp est la valeur de la case précédente de array[i] (je sais pas si c'est clair mdr)
+ pardouin: if (abs &lt; abs || (abs == abs and truc &lt; machin))
+ loris_mgn: Pour pouvoir comparer les deux
+ Haashi: T'as plus besoin de comparer avec la valeur d'avant
+ pardouin: &amp;&amp; au lieu de and*
+ pardouin: j'écris pas le code exact mais l'esprit est là
+ loris_mgn: Yes je suis en train d'essayer
+ loris_mgn: Mais je comprend pas pourquoi j'ai plus besoin de comparer la valeur courante avec celle d'avant
+ loris_mgn: C'est comme ça que je sais laquelle des deux est la plus proche de 0 non&#160;?
+ pardouin: oui il faut comparer avec temp
+ pardouin: les deux gros pbs&#160;: la logique était mal implémentée et il y a avait des variables inutiles
+ pardouin: je connaissais pas &lt;! et &gt;! d'ailleurs, j'ai appris quelque chose ^^
+ loris_mgn:&#160;:)
+ pardouin: tu as trouvé ça où ce bloc:
+ pardouin: do {
+ pardouin: ça m'intrigue
+ loris_mgn: Dans mon cerveau mdr
+ pardouin: parce qu'on pouvait juste faire  scanf("%d", &amp;n)
+ pardouin: je trouve pas de doc sur &lt;! et &gt;!, pas sur que ça existe
+ loris_mgn: Je rentre une première fois avec le do et tant que n n'est pas compris entre 0 et 10000 je re saisit
+ pardouin: à mon avis ça fait plutôt &gt; !0 &amp;&amp; n &lt; !1000
+ pardouin: ce qui du coup est toujours faux vu que !1000 c'est 0
+ pardouin: strictement supérieur et inférieur c'est juste &gt; et &lt; si c'est ce que tu voulais faire
+ pardouin: si tu voulais nier le tou c'était plutôt while (!(n &gt; 0 &amp;&amp; n &lt; 1000)))
+ pardouin: mais c'est aussi une mauvaise idée car n peut être 0
+ loris_mgn: Yes tu as raison
+ pardouin: donc plutôt while (!(n &gt;= 0 &amp;&amp; n &lt; 1000)))
+ loris_mgn: J'ai du mal à mettre toutes mes conditions dans le même if, je m'embrouille
+ pardouin: mais bon ça n'était pas nécessaire ici, on te donne un n correct, tu n'a pas besoin de le tester, et rien ne dit que s'il est incorrect on t'en donnera un correct ensuite
+ pardouin: ce type de do while c'est bien surtout pour capter des entrées utilisateur
+ pardouin: tu as du t'inspirer de ça
+ loris_mgn: Yes
+ pardouin: si tu as du mal à gérer le ||, fais deux if différents comme tu avais fait
+ pardouin: et dans le second if (celui du ==), imbrique un autre if qui comparer temp avec la valeur (sans les abs)
+ pardouin: je dois filer, bon courage
+ loris_mgn: Merci en tout cas
+ loris_mgn: A bientot
+ I_love_CoC: Bonjour à tous
+ I_love_CoC: Tortue Automaton2000
+ Automaton2000: en plus si je l'ai fait en python
+ Haashi: automaton2000 tu sais pas lire, le code c'était du C ^^
+ Automaton2000: je suis sur que c'est la bonne
+ Westunts: Bonjour petite question il est possible de garder une room et lancer plusieur clash un après l'autre sans devoir recrée un lien a chaque fois&#160;? 
+ Bon[]Crayon: Bonjour tout le monde 
+ Bon[]Crayon: slt Automaton2000 .=.e
+ Automaton2000: et il y a des gens qui n'ont pas su prendre de décision...
+ Bon[]Crayon: Automaton2000 encore
+ I_love_CoC: o/ Bon[]Crayon
+ Automaton2000: on a dit la même chose&#160;?
+ loris_mgn: Salut
+ Bon[]Crayon: \o I_love_CoC
+ Bon[]Crayon: o/
+ I_love_CoC: o/
+ Ezuker: jsuis fan de toi magus
+ loris_mgn: Les gars quelqu'un pourrait m'aider sur le problème "temperature", j'ai déjà demandé mais je trouve pas la solution
+ loris_mgn: ou filles biensur
+ loris_mgn:&#160;:)
+ Ezuker: Quel est ton problème&#160;?
+ loris_mgn: Je passe tous les tests sauf celui des nombre négatifs uniquements
+ loris_mgn: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/ebcf61c9-ed59-451d-9c55-9ecced3248a9">http://chat.codingame.com/pastebin/ebcf61c9-ed59-451d-9c55-9ecced3248a9</a>
+ loris_mgn: Je teste la valeur absolue et renvoie la valeur de la case du tableau en question
+ Ezuker: C'est quel langage&#160;?
+ loris_mgn: C
+ Ezuker: hmm
+ Ezuker: Bonne chance&#160;!
+ Bon[]Crayon: "%u"
+ Bon[]Crayon: Pour quelles raisons as-tu écris ce code&#160;? do {
+ loris_mgn: C'était simplement pour répondre a la contrainte mais ça change rien ici
+ loris_mgn: Bravo c'était le %u
+ loris_mgn: Merci&#160;:)
+ Bon[]Crayon: %Automaton2000  
+ Automaton2000: je sais pas comment faire
+ Bon[]Crayon: Automaton2000 moi non plus
+ Automaton2000: tu veux le faire en c++
+ Bon[]Crayon: Automaton2000 j'hésite 
+ Automaton2000: si tu es en quel langage&#160;?
+ Bon[]Crayon: Automaton2000 je suis en langage adn
+ Automaton2000: je fais une boucle for
+ Bon[]Crayon: Automaton2000 tu en fais trop
+ Automaton2000: je sais pas comment faire
+ Bon[]Crayon: ...
+ Bon[]Crayon: #taco 
+ Zorg1: vieux #taco
+ Zorg1: o/ tout le monde
+ Zorg1: \o Automaton2000
+ Automaton2000: il n'a pas de sens
+ andrianina24: .
+ Bon[]Crayon: o/
+ Zorg1: \o
+ b0n5a1: o/
+ Manolo3: o/
+ Manolo3: Est ce que quelqu'un pourrait me donner son avis sur un CoC&#160;? savoir si il est correct et compréhensible et comment vous l'auriez fait
+ b0n5a1: via le lien du coc...seuls ceux qui ont participé voient le code (et plus personne ne voit le sujet)...il faut retrouver le sujet dans les contribs d'abord
+ Manolo3: j'ai le lien
+ Manolo3: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/1351248d115e207764d12549101b5c78571f1">https://www.codingame.com/contribute/view/1351248d115e207764d12549101b5c78571f1</a>
+ b0n5a1: ha ... je croyais que c'était suite à un coc publié ^^
+ b0n5a1: il faut des contraintes genre "2 &lt; size &lt; 10", garantie que tous les caractères sont différents (ou pas)...proposer de sortir toutes les combis est pas top...proposer de sortir le nombre de combinaisons possibles plutôt 
+ b0n5a1: autant t'y préparer tout de suite, ça sent le rejet en l'état...d'autant plus que dans certains langages tu as "donne moi le nombre de permutations"
+ Manolo3: ok ok merci pour l'info des contraintes
+ Ezuker: Est ce que c'est grave si j'utilise #include &lt;math.h&gt; sur c++ au lieu de &lt;cmaths&gt;
+ DCVolo: pas vraiment mais cmath c'est la lib standard donc y'a pas vraiment d'intérêt d'utiliser math.h qui vient du C
+ b0n5a1: &lt;cmath&gt; est la version "c++" de math.h (quasi identique) mais avec tout inclus dans le namespace std... il est normament recommandé d'utiliser ces headers plutôt que les versions .h 
+ b0n5a1: <a rel="nofollow" class="external free" href="https://github.com/gcc-mirror/gcc/blob/master/libstdc%2B%2B-v3/include/c_std/cmath">https://github.com/gcc-mirror/gcc/blob/master/libstdc%2B%2B-v3/include/c_std/cmath</a>
+ Ezuker: Il s'est chauffé lui
+ b0n5a1:&#160;???
+ Ezuker: Il sert à quoi le lien que tu as envoyé&#160;?
+ Ezuker: D'accord
+ DCVolo: sinon c'est pas une bonne pratique mais si tu sais déjà gérer tes includes et que t'as pas envie de te faire trop chier tu fais un include &lt;bits/stdc++.h&gt; et tu auras presques toutes les libs standard du c++. Mais sinon faut bien utiliser uniquement que les lib qui te sont utiles, ça c'est juste pratique mais overkill
+ Ezuker: D'accord merci DCV
+ Frankich: [CG]Thibaud&#160;?
+ VilBoub: c 'est cassé&#160;?
+ Darleanow: print("helloworld")
+ Yatagan: network error&#160;: status 504
+ moiseraidjy: Je croyais être le seul&#160;!!!
+ [CG]Thibaud: :eyes:
+ StephaneGuirous: erreur aussi ici??
+ Yatagan: je vais devoir retourner faire des choses sérieuses&#160;:(
+ uncodeur: eh oh faut réparer
+ uncodeur: $
+ uncodeur: 7
+ uncodeur: pardon
+ Stilgart: Automaton2000: tu as du boulot&#160;!
+ Automaton2000: après ça dépend de la taille de la pile
+ Stilgart: (c'est quoi qui est cassé à part mon avatar&#160;?)
+ Stilgart: Ezuker: oui, c'est grave
+ Stilgart: pour faire court, le C et le C++ ne sont pas compatibles, d'où la couche de compatibilité dans cmath, cstdio, cstdlib, cassert, etc.
+ Stilgart: Automaton2000: merci d'avoir fix mon avatar pendant que je rechargeais ma page :thumbsup:
+ Automaton2000: du coup je vais me mettre à la place de cg :p
+ Stilgart: :D
+ Stilgart: :joy:
+ guitou35: Bonjour, j'aimerai m'entrainer pour passer un test technique d'entretien, avez-vous des conseils&#160;? des liens de tests&#160;? 
+ MrBizard: jai un prob svp je lance mes test sur un algorithme et il tourne a l'infini c norm&#160;?
+ dotni: J'ai la même chose
+ pcourrousse: Idem
+ MrBizard: c le site alors&#160;?
+ dotni: yep
+ VilBoub: c'est reviendu&#160;?
+ dotni: Pas chez moi
+ pcourrousse: :crab: tester c'est douter :crab:
+ I_love_CoC: bonjour à tous
+ Snef: o/ tout le monde
+ Snef: Quelqu'un sait comment ajouter l'équivalent d'un #define directement dans visualstudio pour éviter de l'avoir dans le code&#160;?
+ Zorg1: ah un equivalent de -D  :D
+ Snef: J'ai pas la ref mais j'ai trouvé c'est bon :p
+ Zorg1: bah -D c'est pour faire la même chose en gcc
+ Snef: c'est pas gcc avec vs
+ Zorg1: oui c'est pour ça que je parlais d'équivalent
+ Serge_Billault: j'ai eu l'impression qu'un peu plus tot dans la journée le site CodinGame avait un petit problème (err code 504 bad gateway) lors des refreshs de page du site
+ Stilgart: Snef: -DVAR=value à tes options de compilation
+ Stilgart: (erf... j'avais lu vscode...)
+ Snef: Merci quand même&#160;:)
+ Snef: j'ai trouvé mon bonheur dans les options -&gt; c++ -&gt; préprocesseur
+ Ragnar_lothbroke: =,
+ Vry: Yo, bonne année les gens&#160;! :p
+ dc86: un peu en retard non&#160;?
+ Zorg1: o/ vry
+ Zorg1: bah ça fait un bail qu'on l'a pas vu non plus&#160;;-)
+ Vry: Tout est relatif mais depuis ma dernière connexion on a changé d'année ...
+ dc86: ah d'accord ahah
+ Vry: Et là y'a un contest "normal" ... donc peut-être que je vais être présent ...
+ Vry: ... et ça tombe plutôt bien niveau garde alternée ...
+ Vry: o/ Zorg1
+ Vry: o/ Stilgart
+ Vry: o/ VilBoub
+ VilBoub: _o/    \o/   \o_
+ Stilgart: \o Vry
+ Stilgart: Automaton2000: tu as vu, c'est jour de fête aujourd'hui
+ Automaton2000: Stilgart tu penses que ça va être compliqué
+ Stilgart: je pense qu'il y a Vry, et que tu ne lui as même pas dit bonjour Automaton2000&#160;!
+ Automaton2000: en vrai ça peut être intéressant
+ b0n5a1: o/ Vry
+ Benjicmoa: Comment les gens font pour être aussi bon ahah
+ Stilgart: 1 jour après l'autre
+ Benjicmoa: On nous apprend pas trop ça dans les études
+ Serge_Billault: Question: qui a réussi le puzzle classé "trés difficile" de décryptage de Nintendo qui stipule qu'on est embauché dircet par eux si on résout le problème (taux de réussite, 1%)
+ Serge_Billault:&#160;?
+ Stilgart: <a rel="nofollow" class="external free" href="https://chadok.info/codingame/puzzles_completion.html">https://chadok.info/codingame/puzzles_completion.html</a>
+ Stilgart: je pense que l'offre n'est plus trop d'actualité
+ Serge_Billault: et puis ton lien a des tableaux pas completes puisque tous les puzzles hard que j'ai fait je les ai complété à 100%
+ Stilgart: Last updated on Sun, 03 Apr 2022 03:18:54 +0200.
+ Serge_Billault: on dirait que ca ne suit que quelques noms
+ Stilgart: CG souffre déjà assez comme ça&#160;:)
+ Stilgart: pas la peine de spammer tous les soirs non plus
+ Stilgart: ça ne suit que les lvl 40+ accessoirement
+ Serge_Billault: on est d'accord, c'est pas complet
+ Stilgart: non, mais si tu veux causer de Nintendo, tu sais à qui demander
+ Stilgart: les autres, je peux les extraire à coup de spam massif de l'API mais bon... 
+ Serge_Billault: à Sebastien Mathieu, notre ancien ingénieur d'abord à Infogrames puis à Artefacts, qui a refusé un poste chez Nintendo&#160;? Je lui ai déja demandé. Il est pas sur CodinGame
+ b0n5a1: oseff
+ Serge_Billault: c'est bien t'auras mis 13 minutes à t'en rendre compte&#160;:)
+ b0n5a1: arf bad focus
+ Serge_Billault: ah, ca devbient plus logique
+ Serge_Billault: en fait l'outil de Stilgart est plutot pratique, ce qui n'est pas normal, c'est que rien de built-in dans CodinGame
+ <b>**dwarfie se rend compte qu'il est pas le seul a enfoncer des portes ouvertes aujourd'hui :D</b>
+ b0n5a1: quelle porte&#160;?
+ b0n5a1: :D
+ dwarfie: :point_right: :door: :point_left:
+ Stilgart: celle qui est en train de traverser la galaxie en hypervitesse tellement elle a été enfoncée
+ b0n5a1: 🦶🏻
+ b0n5a1: arf
+ b0n5a1: ok...
+ b0n5a1: aujourd'hui&#160;?
+ b0n5a1: :D
+ Sirios: b0n5a1 c'est moi ou tu as un ami imaginaire?
+ b0n5a1: c'est toi
+ Sirios: merci je me dirais bien que c'était l'heure de me coucher
+ Stilgart: Sirios: en vrai, il a Automaton2000
+ Automaton2000: ah oui c'est un peu le principe de base de python
+ b0n5a1: c'était, ça l'est plus, trop tard...tu te coucheras demain soir
+ Sirios: :p
+ dwarfie: gaffe , dormir c'est pour les faibles ... mais ne pas dormir rend faible ...
+ Sirios: bien dit dwarfie
+ dwarfie: mais que vois je dans les contribs ... player one is bask ...
+ dwarfie: back
+ Stilgart: ha
+ Stilgart: c'est le jour des come back on dirait
+ Zorg1: ils profitent des derniers jours du chat
+ Zorg1: avant qu'on migre tous vers Discord
+ <b>**b0n5a1 slaps Zorg1 around a bit with a large fishbot</b></p><p><img src="/a/17785582865119" /> dwarfie: ah ... donc ils reviennent faire acte de presence avant la mort de la communaite ...&#160;?
+ b0n5a1: on va tous brûler pour rejoindre une autre planète&#160;?
+ dwarfie: selon la theorie des anciens astronautes , les gentils alien ont créé discord pour rappocher les gens , c'est pour ca que ca s'appelle discord
+ Zorg1: ouaip on pourra nager à poil dans les océans de méthane de Rigel VI
+ <b>**dwarfie a 2 jours d'avance , mais bon ...</b></p><p><img src="/a/1848632360793" /> b0n5a1: y'a un code of conduct de ploucs aussi là bas&#160;?
+ dwarfie: pas besoin , y'a personne qui parle la bas :D
+ Zorg1: sur Rigel VI ou sur Discord&#160;?
+ Zorg1: je suis perdu
+ dwarfie: les 2 sans doute
+ b0n5a1: woah 16 updates...j'ouvre vachement souvent cette chose :D
+ Zorg1: bah en fait j'accède au chat CG du boulot, le discord c'est bloqué
+ b0n5a1: ayé "clic droit -&gt; marqué comme lu" partout sur chaque serveur , je peux fermer
+ Zorg1: oui j'en ai même muté certains ^^
+ Zorg1: va savoir totomino est déjà en train de coder un bot à taco pour le discord
+ Zorg1: trop bien
+ Zorg1: pê que même CG vont remplacer les modérateurs par des bots à tacos à terme
+ b0n5a1: pour pouvoir faire des warning code of conduct h24 ouais
+ Zorg1: ouaip et des bans automatiques
+ I_love_CoC: est ce possible de coder une condition de boucle if en mode 
+ I_love_CoC: if  A and B or C and D
+ Zorg1: bah il te faut des parantheses
+ I_love_CoC: if ( A and B )or( C and D)
+ I_love_CoC: tout simplement
+ I_love_CoC:&#160;?
+ b0n5a1: modulo la syntaxe du langage oui
+ Zorg1: en quel langage&#160;? à priori je vois pas ce qui l'empecherait
+ I_love_CoC: python
+ I_love_CoC: je pensais pas que c'était aussi simple
+ I_love_CoC: l'informtique est beau bordel
+ I_love_CoC: je pleure vous ne le voyez pas mais je pleure ^^
+ Zorg1: (enfin les () c'est pas obligatoire je crois que and est + prioritaire que or mais je préfère blinder)
+ I_love_CoC: ok
+ b0n5a1: le and a la priorité oui
+ Zorg1: pourquoi tu voulais que ça soit plus compliqué&#160;?
+ I_love_CoC: non mais c'est comme si je découvrais une langue étrangére qui aurait toujours fait partie de ma vie^^
+ Flixouille: bsoir!:)
+ I_love_CoC: avec CG je me reconnecte avec mon moi profond et ça m'émeut^^
+ I_love_CoC: b'soir flixouille
+ Zorg1: même en lisp c'est super simple (if (or (and A B) (and B C)) toto)
+ Zorg1: ha zut le B ) c'est pas terrible ^^
+ I_love_CoC: ^^
+ b0n5a1: dans 10 minutes des gens en blanc vont sonner à ta porte, t'inquiètes pas ils sont gentils, ils viennent t'offrir une chemise sanglée
+ I_love_CoC: chouette ma préférée^^
+ I_love_CoC: tu crois qu'ils auront des tic tac comme la derniére fois&#160;?
+ I_love_CoC: les gris avec une bande jaune c'est mes préférés
+ b0n5a1: non mais la piaule est top, y'a des matelas même aux murs :heart_eyes:
+ I_love_CoC: ^^
+ I_love_CoC: t'en penses quoi toi Automaton2000
+ Automaton2000: je suis pas si vieux
+ I_love_CoC: je savais que tu me donnerais raison Automaton2000
+ Automaton2000: il y a du monde
+ Zorg1: oui c'est bientôt le contest plein de gens reviennent Automaton2000
+ Automaton2000: c'est toujours plus ou moins bien
+ Zorg1: toujours mieux qu'un escape Automaton2000
+ Automaton2000: va falloir que je sois le seul à ne pas avoir le temps de trouver le chemin le plus court ...
+ I_love_CoC: ils sont là b0n5a1 alors bonne nuit à vous tous
+ I_love_CoC: et ne t'en fais pas pour le monde Automaton2000
+ Automaton2000: et moi je suis dans la ligue bronze
+ Remi.: Salut tout le monde&#160;!
+ b0n5a1: o/
+ Remi.: \o
+ Remi.: Petite victoire perso, je suis passé or sur FC2020&#160;:)
+ b0n5a1: héhé
+ Remi.: C'est en partie grĉe à tes conseils b0n5a1
+ Remi.: Le fait de cumuler les scores si j'ai plusieurs recettes, c'est ça qui m'a fait passer de 300ème silver à fond de gold.
+ b0n5a1: ha bin clairement ça pouvait que te propulser vers le haut ^^
+ Remi.: J'ai fait un seul truc de plus que toi, sur les conseils d'un legend. J'ai intégré les LEARN au BFS.
+ Remi.: Mais je fais quand même des learn au début, avant bfs.
+ I_love_CoC: o/ et gg pour le gold Remi.
+ Remi.: \o et merci
+ b0n5a1: ouais je sais qu'il y a du learn de départ et aussi dans le BFS chez certains ^^
+ Remi.: J'ai tenté jsute dans le bfs, mais c'est pas une bonne idée.
+ Remi.: Par contre je ne sais pas comment faire mieux, sauf à trouver comment anticiper quelles recettes vont sortir.
+ b0n5a1: optimiser les learn de départ
+ b0n5a1: y'a de quoi faire mumuse avec la seconde du premier tour
+ Remi.: J'ai déjà un critère pour ne pas apprendre n'importe quoi, mais c'est vrai que ce n'est pas un critère bien travaillé
+ Remi.: Oui c'est vrai qeu je ne l'exploite pas, cette seconde.
+ I_love_CoC: les learn tombe toujours dans le même ordre?
+ b0n5a1: + le pruning dont je t'ai parlé
+ Remi.: I_love_CoC justement non, les recettes non plus
+ Remi.: mais la liste globale est toujorus la même
+ Remi.: parmi 42 learn, et les recettes je ne sais plus.
+ I_love_CoC: oui ok
+ Stilgart: comment il va gratter ailleurs le Remi. ... j'hallucine là
+ Stilgart: (et oui, évidemment qu'il faut intégrer le LEARN dans le BFS)
+ Remi.: gratter ailleurs&#160;?
+ Remi.: \o Stilgart
+ I_love_CoC: perso je  focus des recettes avec seulement un ou deux items different et des learn du meme accabit. je vais voir ce que ça donne
+ Remi.: Du coup tu tombes bien, tu disais qu'un bon BFS montait légende ... j'aimerais rendre mon BFS assez bon ^^
+ Stilgart: bah, ce n'est pas moi le legend dans "sur les conseils d'un legend"
+ I_love_CoC: ^^
+ Remi.: Ah bah je demande conseils à plusierus personnes ^^
+ Remi.: * plusieurs 
+ Stilgart: d'où&#160;: tu grattes ailleurs
+ Stilgart: ^^
+ b0n5a1: et c'est sur 2/3 tricks d'un silver qu'il est monté gold Stilgart ^^
+ Remi.: Ok, je comprends mieux ^^ et oui b0n5a1 a passé pas mal de temps à me conseiller sur ce multi.
+ Stilgart: FC 2020, ça se résume presque à trouver pourquoi un BFS ça marche
+ b0n5a1: pas tant de temps que ça, juste le coup du decay et des combos ^^
+ b0n5a1: et des learns de départ
+ Stilgart: (j'avoue que j'y croyais pas du tout au début... et pourtant)
+ Remi.: Mais du coup, avec un BFS pour le SC2020, le FC2020 et probablement le SC2021 ... je suppose que le SC2022 ne sera pas basé sur un BFS.
+ Remi.: b0n5a1&#160;: et sur comment améliorer la perf et la profondeur.
+ I_love_CoC: BFS est l'acronyme de?
+ Remi.: B... First Search
+ Stilgart: breadth first search
+ Remi.: Parcours en largeur
+ I_love_CoC: ok
+ Stilgart: mais bon, je ne sais pas si c'est le bon nom à donner dans le cas de FC2020
+ b0n5a1: ouais d'ailleurs une partie des trucs dont on a parlé je les ai pas faits Remi. :D
+ Stilgart: parce que perso, je fais une recherche exhaustive en fait
+ Remi.: Bah on parcours bien les possibilités dans l'ordre d'un BFS, pas en DFS.
+ Stilgart: et je crois même que pour un détail d'implem, je perds la garantie de "plus court chemin"
+ Remi.: Tu aurais dû b0n5a1, tu serais peut-être légend ^^
+ Stilgart: = plus courte série d'actions pour faire une recette donnée
+ Stilgart: mon code n'est pas exactement BFS, mais je ne sais plus pourquoi
+ Stilgart: sans doute lié au fait que j'essaie de faire une paire de potions et que je privilégie le learn mutualisé
+ Remi.: Trouve un learn qui peut servir à plusieurs potions ... va falloir que je réfléchisse à comment le faire.
+ Remi.: * Trouver
+ Stilgart: "parce que perso, je fais une recherche exhaustive en fait"
+ Stilgart: du coup...
+ Remi.: "exhaustive" comment c'est possible sans savoir quelle recette va tomber après les 5 présentes&#160;?
+ b0n5a1: avec le bon random :D
+ Remi.: Dans ce cas précis je ne connais que le mauvais ^^
+ Stilgart: je recherche exhaustivement comment faire une paire de potion avec uniquement les éléments sur le plateau
+ Remi.: D'accord c'est plus clair.
+ Remi.: Ah si seulement j'avais réussi sur MM à appliquer les conseils aussi bien que sur le FC2020 ^^
+ Stilgart: sur MM, tu prends ton moteur de CSB, tu changes le -3vel en -2vel, tu allumes un cierge à saint Manwe, et tu submites
+ Remi.: Alors CSB je n'ai pas de moteur, je suis passé legend parce que j'ai bien réussi à bloquer l'adversaire :P
+ Remi.: J'ai mis -1.5vel sur MM, et ce qui m'a propulsé en top bronze c'est encore un conseil de b0n5a1
+ Stilgart: possible que -1.5vel soit mieux
+ Remi.: (regrouper les épaves qui se superposent pour faire une super-épave)
+ Remi.: Le -1.5 je l'ai lu quelque part, je ne sais plus où
+ Stilgart: MK avait fait une étude sur le sujet, mais je me souviens juste que la constante était en dessous de 3
+ Remi.: Par contre je ne le fais que pour le reaper. Je n'ai pas de -x vel pour les autres.
+ Stilgart: (c'est pour ça que j'ai dit 2, mais si ça se trouve c'est bel et bien 1.5)
+ Stilgart: en parlant de MM
+ Stilgart: vu que les NN ça marche bien sur CSB, vous savez si ça a été testé sur MM&#160;?
+ Remi.: Aucune idée, je n'ai entendu parler que d'algo génétique.
+ Remi.: Par contre j'ai lu plusiers PM devenus gold sur heuristique. philRG lui même a confirmé et a réussi, j'ai lu et relu le PM qu'il m'a conseillé ... mais impossbile de passer cette foutue ligue.
+ Remi.: b0n5a1 aussi est gold avec une heuristique.
+ Remi.: * cette foutue ligue bronze
+ Remi.: Bah tiens j'avais pas vu je suis maintenant 1er de la ligue bronze
+ Remi.: 28,20 et le boss est à 29,20 ... pas sûr que je puisse me faire pousser.
+ b0n5a1: pour le reaper c'est 1.5 ouais
+ b0n5a1: juste en observant sur des tests de façon empirique on tombe vite sur 1.5
+ Remi.: Un jour faudra que je m'y remette. Mais ce multi c'est ma bête noir. Un des premiers que j'ai commencé, et un qui me paraît extrêmement difficile.
+ Remi.: * noire
+ Stilgart: Remi.: la gold c'est pour les faibles et les Automaton2000
+ b0n5a1: j'avais fais 100e pile poil, quelques minutes avant stabilisation je suis aller flirter avec le 101...la place du con pour avoir le trophée top 100 :D
+ Automaton2000: du coup faut que je prenne le temps de faire les puzzles easy
+ Remi.: Bah si la gold c'est pour les faibles, la bronze c'est pour les très très failbes ^^
+ Stilgart: non, ça c'est pour les débutants
+ Stilgart: rien à voir
+ Remi.: Tu t'es bien rattrapé sur d'autres multi b0n5a1&#160;;)
+ Remi.: Débutant en IA oui ça je veux bien l'assumer.
+ Remi.: J'ai réussi à faire un bfs, et un minimax bancal sur connect 4
+ Remi.: Les AG et MCTS, c'est pas encore ça.
+ Zorg1: m'ouais AG c'est surtout du bricolage et du tuning de magic number quand je vois ce que j'ai en magasin
+ Remi.: La théorie semblait plus sérieuse que ça ^^
+ Serge_Billault: il ya des petit sadiques qui classent des puzzles dans la catégorie en dessous de la catégorie ou ces puzzles devraient être. ils doivent avoir une table de torture au format A4 chez eux, pour torturer les chats...
+ frifita93: hi
+ Zehro: Saluuut

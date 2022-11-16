@@ -1,0 +1,151 @@
+ ramoRJ96: sjlskfhlsjhflsqkjhflkqsjdhflq
+ Thyl: pff
+ Thyl: avec ça comme heuristique
+ Thyl: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/ed3c1cdc-73cf-4f90-a0c1-95a7875d30e2">http://chat.codingame.com/pastebin/ed3c1cdc-73cf-4f90-a0c1-95a7875d30e2</a>
+ Thyl: j'arrive pas à sortir de Tron argent
+ Thyl: :emotionless:
+ philRG: ah c'est du voronoi , et du min-max c++, faudra que je l'essaye, combien de lignes de code déjà?
+ Thyl: 330
+ Thyl: pour 450~environ de place en silver
+ philRG: ah ok pas mal, moi du 700 sur cultist wars, mais que du if/else et le boss doit être codé en min-max
+ philRG: python et Top 2 en wood 2 (environ 20 bots en ligue wood 1 dernière ligue)
+ Thyl: ouais pas mal
+ Thyl: je cherche des heuristique là
+ philRG: ça fait mal au crâne de rajouter des cas à la mano, bon à mon avis j'suis pas trop mal déjà
+ philRG: j'ai pas fait Tron par contre mais faudra que je le fasse mais en C++ j'suis un peu light
+ philRG: j'aime bien définir des stratégies et refactorisations
+ philRG: exemple:
+ philRG: def get_snipper_positions()...
+ philRG: def get_closest_hero(sniper, safe_mode: bool)
+ philRG: mais bon ça reste fastidieux
+ philRG: avec une bonne fonction heuristique et algo de recherche, ça serait moins prise tête
+ philRG: j'ai du mal à coder des fonctions heuristiques en fait, j'ai pas encore la méthodologie
+ Zorg1: bah j'ai bien peur qu'il n'y en ai pas
+ Zorg1: pê quelques astuces comme les scores décroissant exponentiellement en fonction du tour
+ philRG: ah ok bon tant pis j'aurais essayé&#160;:)
+ philRG: je m'amuse à renommer mes fonctions avant de penser à la stratégie suivante car sinon j'oublie ce que fait la précédente, je vire tout code de mon algo principal
+ philRG: exemple: get_closest_hero(closest_sniper_from_cl, safe_mode=True)
+ philRG: j'avais fait initialement 2 fonctions get_closest_hero et get_closest_kamikaze mais bon j'avais pas bien défini la feature kamikaze
+ philRG: j'ai un pote qui avait été snipper en Irak je crois
+ kayou: Bonjour
+ Zorg1: o/
+ AY09: bonjour a tous
+ kayou: si ton kamikaze agit comme un snipper  ca ne doit pas bine marcher
+ Zorg1: bah le kamikaze qu'est pas pressé de mourir&#160;;-)
+ kayou: d'ailleurs ils ne sont pas assez reconnus
+ AY09: est petite question dans coder strike back on doit mettre combiens dans la vitesse pare ce que de puis tout a l'heure j'essai m'ai je ne trouve pas
+ philRG: kayou en fait un kamikaze c'est un tireur de mon équipe qui va essayer  de dégommer un tireur ennemi sur un terrain découvert pour sauver son chef
+ philRG: j'ai viré cette appellation
+ philRG: c'est que des moyens mnémotechniques pour indiquer ce que font mes fonctions (et pour éviter de relire le code)
+ philRG: ce sont
+ kayou: apres la fonction tireur_de_mon_équipe_qui_va_essayer -de_degommer_un_tireur_ennemi je trouve caun peu long comme nom --&gt;[] 
+ Zorg1: nomme la f763 c'est court
+ kayou: ca c'est bien
+ Zorg1: mais c'est pas forcément très mnémotechnique :p
+ philRG: :joy:
+ kayou: F763 -&gt; Func_7irrer_6ros_3ennemi , un leet significatif, c'est bine
+ Zorg1: :thumbsup:
+ philRG: je connais pas trop cette technique, mon ide me propose souvent des noms ou corrige mes noms mais c un peu limité
+ philRG: par exemple, il m'a corrigé snipper par sniper
+ philRG: bon next feature, sortir mes cultists des zones de passage de mon leader
+ philRG: pas trivial
+ AY09: vous avez ma question oui ou non
+ Sico: Faut suivre les principes de oncle Bob pour le nommage
+ dwarfie: grrr , on devrait jamais oublié que system en C appelle pas le bash ... ca m'eviterait de me demander pourquoi j'ai des problème lors d'appel system dans une appl ....
+ Zorg1: ça appelle pas /bin/sh&#160;?
+ Sico: Vaut mieux mettre un shebang sur /usr/bin/env bash
+ Zorg1: bah avec system tu le met où ton shebang&#160;?
+ Sico: En première ligne de ton script
+ Sico: system("/usr/bin/env bash -c '...'")
+ Zorg1: mais c'est pas un  shebang alors
+ Zorg1: après je sais pas avec quoi system() initialise l'env
+ Sico: Je me suis mal exprimé. Je voulais dire la chose suivante&#160;: Fais un script avec un shebang puis ensuite faire un appel système en y spécifiant le PATH
+ AY09: comment vous faite pour avoire 100%
+ dwarfie: Zorg1 ...  d'apres mon man c'est un /bin/sh qui est lancé ... donc forcément si j'applique pas la regle RTFM , j'oublie ce mettre un bash -c :D
+ Zorg1: ^^ oui c'est pas forcément un lien vers bash le /bin/sh :p
+ Sico: En effet, man 3 system 
+ dwarfie: c'est ca de respecter la demande et faire en C pour les réfractaire à la ligne de commande alors qu'un peu de zenity aurait fait illusion :D
+ AY09: vous me parler plus ou  quoi
+ Tiouz: 'La puissance des réacteurs du pod est une valeur entière comprise entre 0 et 100.'
+ AY09: oui mais quand il va a la 3 poi ca me  
+ AY09: fait plein de de toure
+ AY09: est j'ai tout essayer
+ AY09: mai sa marche pas
+ Tiouz: Alors si ton pod dépasse le checkpoint c'est qu'il va trop vite. Tu peux commencer par réduire la vitesse, et ensuite il faudra améliorer ta direction
+ AY09: ok merci :thumbsup:
+ AY09: attend comment je modifier la trajectoire parce que je suis tou joure nouveau sur le site
+ kayou: le pod pointe toujours vers le point donné dans le print de chaque tour, if faut donc donner un point adapté à la trajectoire désirée et pas formecement le centre du prochain checkpoint
+ AY09: dacord
+ futensal: Salut je suis aussi tout nouveau sur le site mais d'après le peut d'exercice que j'ai fait. J'ai eu 100% quand j'ai fait un code optimisé et qui n'utilise le moins de condition possible et aussi qui n'a pas de variable inutilisé
+ futensal: En gros il faut optimisé ton code
+ BenPix: pas forcément, tant que ton code envoie le bon résultat dans le temps imparti tu auras 100%
+ AY09: merci:smile:
+ BenPix: pour passer les premières ligues dans code strikes back, essaye simplement du viser le prochain checkpoint, et diminue la vitesse (genre à 20) quand tu approches du checkpoint (genre &lt; 5000)
+ BenPix: le reste du temps, tu laisse 100 en puissance
+ AY09: daccord
+ futensal: Ah ok d'accord merci je pensais qu'ils vérifiaient le code en quelque sorte
+ BenPix: non, c'est juste que si ton code n'est pas optimisé, il peut dépasser le temps d'exécution maximal autorisé
+ circular17: oui au début tu peux simplement viser le checkpoint, après il faut un peu adapter la coordonnée en fonction de ta vitesse actuelle et du tournant
+ futensal: Ok d'accord et il y a moyen de voir en combien de temps en ms le code est éxécuté&#160;?
+ futensal: En gros voir le benchmark
+ AY09: tes combienteme  au classement de coder struke back
+ BenPix: oui tu peux connaitre ton temps d'exécution, tu set une variable au debut qui prend le timestamp courant, puis en fin de code tu fais la différence avec le timestamp courant et hop
+ futensal: Ok pas de soucis c'est parce que j'en pensais qu'on pouvait le voir sans avoir besoin de le codé sois même
+ futensal: Ok pas de soucis merci*
+ Zorg1: y a de la vie sur le chat&#160;?
+ Zorg1: Automaton2000, AutomatonNN meublez un peu les bots
+ Automaton2000: et que tu ne vois plus trop comment je peux avoir des surprises
+ AutomatonNN: si on a des propositions de contest de code dans le code de base de faire un truc de plus pour le co
+ AY09: vous avez passez bosse 2
+ BlaiseEbuth: La bosse 2 est un peu technique, il faut braquer le guidon d'un coup sec au dernier moment.
+ AY09: ouais j'arrive toujoure pas a le battre
+ dwarfie: le chat , c'est comme le forum ... y'a plus d'etre humain ... meme si BlaiseEbuth dit le contraire dans un post :D
+ BlaiseEbuth: Juste une excuse pour pouvoir me plaindre
+ dwarfie: en meme temps , ca devrait pas lui prendre plus de 2 secondes au gars de trouver son erreur ... si t'avais pas tirer , j'aurais sans doute fait de meme ...&#160;;)
+ Zorg1: y a eu du drama dans le forum&#160;?
+ Zorg1: va falloir que j'y jette un oeil
+ dwarfie: donc ... juste des post encore plus bidon et sans contexte que d'habitude ...
+ dwarfie: donc ... pourquoi je tape donc , alors que c'est "pas vraiment" que je voulais dire ...
+ <b>**dwarfie est trop crevé en fait ...</b></p><p><img src="/a/17785582865119" /> dwarfie: en meme temps , les gens ont du mal avec le principe d'un forum ... dans la semaine , j'en ai vu un qui répondait a un post de 2017 et disant au gars comment resoudre :D
+ Zorg1: ah les gars qui déversent leur log et leur message d'erreur sur le post sans rien d'autre ^^
+ Zorg1: oui ça fait un peu "corrige chien&#160;!"
+ dwarfie: entre ca et les "ouais , je suis trop fort , je l'ai resolu le puzzle" ... :upside_down:
+ Zorg1: ou "jai 10 ans d'XP en &lt;langage X&gt; je comprends pas le code de base il est faux&#160;!"
+ dwarfie: ou ... j'ai un super classement mais j'arrive pas a faire ce puzzle ... un indice sur l'algo a utiliser ... parce que je sais pas trouver un truc par moi meme ...
+ Zorg1: enfin thor 1 c'est pas non plus de la méca quantique comme exo
+ dwarfie: clairement ... mais d'une , il a pas pris en compte que thor bouge . et de deux , y'a pas de coherences dans ses directions ... la meme comparaison donne N ou S suivant les cas ... 
+ dwarfie: en fait , faut un post permanent sur le forum pour dire "vous savez pas coder , commencer par utiliser un papier et un crayon" ...
+ Zorg1: en plus il y a des indices sur ce puzzle
+ Zorg1: et y a même la solution ^^
+ dwarfie: ah oui , c'est vrai ... les "indices" ... j'attend toujours qu'on me dise en quoi une solution est un indice&#160;;..
+ Zorg1: disons c'est plus des puzzles "tutos" pour tenter d'expliquer la démarche compléte
+ Zorg1: perso ça ne me gène pas
+ <b>**dwarfie aimerais bien un indice pour jouer au loto .... vu que ca rapporte XP et achievement quand meme ... y'aurait des chances de gagner quelques millions ...</b></p><p><img src="/a/17785582865119" /> dwarfie: le mythe de "on donne la solution et les gens comprennent un truc" ... perso, j'ai jamais rien compris grace au puzzle avec tensor flow a l'epoque ... j'ai copier coller comme une mule ...
+ Zorg1: c'est un chemin d'indices avec la solution à la fin, tu peux comprendre si tu suis le chemin, après bon si tu repompes la solution ça sert à rien
+ Zorg1: on ne peut pas faire le bien des gens contre leur gré, ça finit mal en général
+ Zorg1: dans un bouquin d'algo t'as généralement l'algo tout fait, mais le + interessant c'est le texte qui explique le truc
+ dwarfie: ouais ... ben meme dans layton , y'a 3 indices et ils sont pas allé jusqu'a donner les  solutions ... et pourtant , y'a du gratiné dans certaines enigmes ...
+ AY09: comment je fait pour gagné le boss en python 3:thinking:
+ AY09: le bosse 2 de coder srike back
+ Zorg1: après tensor flow pas fait et quand j'ai commencé à regarder bah il n'était plus là :D
+ dwarfie: bah , a part voir que chez tf ils sav(ai)ent pas rédiger une doc, y'avait pas trop d'interet en fait :rofl:
+ AY09: vous pouvez repondre a ma question
+ BlaiseEbuth: T'as pas posé de question...
+ Zorg1: the question is a lie
+ lythari: les codes golfs j'ai vraiment du mal ... si quelqu'un a des conseils...
+ lythari: exemples temperatures, je suis à 82, le premier à 51...
+ lythari: exemple temperatures, je suis à 82, le premier à 51...
+ Sico: Il y a un article de blog sur le codegolf&#160;: <a rel="nofollow" class="external free" href="https://www.codingame.com/blog/code-golf-python/">https://www.codingame.com/blog/code-golf-python/</a>
+ dwarfie: en vrai ... 82 est deja un bon resultat ... en dessous de 70 , c'est tres bon et en dessous de 60 , c'est cheaté ... :D
+ kayou: lythari faits des clash,  tu verras ds trucs pour golf
+ kayou: je dirais en dessous de 64 en python c'est du cheat
+ kayou: bon le cheat il faut le sortir aussi
+ dwarfie: tu dis ca parce que t'as 64&#160;;) (en meme temps , j'avais aussi 64)
+ kayou: no c'est juste une coincidence ^^
+ lythari: j'ai regardé, mais doit me manquer un truc je suis passé de 88 à 82 mais là je sèche, merci quand même&#160;:)
+ kayou: laisse reposer et reprends le dans quelques temps
+ pardouin: le premier a 52, pas 51
+ pardouin: et pas spécialement cheaté
+ pardouin: par contre Thor est méga cheaté je confirme&#160;:)
+ pardouin: (et don't panic aussi)
+ pardouin: (sur temperature la compression me fait juste passer de 53 à 52)

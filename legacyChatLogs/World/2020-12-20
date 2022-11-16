@@ -1,0 +1,817 @@
+ ThayHaiDepZaiVaDeThuongQuaDiAk: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/151087895c8a408761aec0661acc2adcc7a8b6d">https://www.codingame.com/clashofcode/clash/151087895c8a408761aec0661acc2adcc7a8b6d</a>
+ YusufEmad04: fuck
+ jacek: oO
+ YCS-Venom: how i can store 109**987717 in string then output the first three characters in python?
+ jacek: str(109**987717)[:3]
+ eulerscheZahl: but memory will explode
+ eulerscheZahl: you could do something with logarithms
+ eulerscheZahl: 987717 * log10(109) to get a power of 10
+ eulerscheZahl: so this gives 2012400.7882664192
+ eulerscheZahl: you can make it smaller by dropping the integer part
+ jacek: is this... math? :scream:
+ eulerscheZahl: 10**0.78826641926.141386347439581
+ eulerscheZahl: so the first 3 digits: 614
+ Westicles: wolfram agrees.  nicely done
+ jacek: you could just answer print(614)
+ YCS-Venom: i know and the time has exceeded the required amount
+ YCS-Venom: i tried that but it didn't give me something useful
+ jrke: i just calculated all possible sets of moves in dots and boxes
+ MSmits: wait what?
+ jrke: = 197450685722107402353682037275992488341277868034975337796656295094902858969771811440894224355027779366597957338237853638272334919686385621811850780464277094400000000000000000000000000
+ MSmits: you calculated the *number* of moves :P
+ jrke: all possible sets of moves yes
+ MSmits: and there's a lot of zeroes at the end so thats probably not exact
+ jrke: gamestates are less than that
+ MSmits: far far less
+ MSmits: this game has tons of transpositions, more than others, because lines are not player specific
+ jrke: i think factorial(112) are all possible sets of moves
+ MSmits: mmh isn't it 108&#160;?
+ MSmits: corners have 2 identical moves
+ jrke: i think 112 cause every match are 112 frames means 112 moves a game
+ MSmits: what i mean is, you're correct about the number of plies, but if two moves produce the exact same result, they're not really unique moves
+ MSmits: take the top left corner, it doesnt matter if you play the left line or the top line
+ MSmits: both give you 1 out of 4 lines for that box and nothing else
+ jrke: hmm
+ MSmits: this is only true for corners
+ MSmits: because there, they lack neighbors on 2 sides
+ MSmits: and there's also symmetry
+ MSmits: on the first turn you actually have only 14 moves
+ jrke: is there any way i can count total no. of unique gamestates?
+ jrke: 14 moves i didn't get that?
+ MSmits: you can rotate the board in 4 different ways
+ MSmits: and also mirror it
+ jrke: oh ye
+ MSmits: comes down to 8 rotation states
+ MSmits: 112/8 = 14
+ MSmits: works the same in uttt since thats also a square
+ MSmits: yavalath has 12 even, because it's hexagonal
+ jrke: hmm
+ jacek: hexagonal d&amp;b :drooling_face:
+ MSmits: would be weird
+ MSmits: not sure if it would be interesting
+ jacek: everything is better with hexes
+ MSmits: takes a while to finish a box because it has 6 sides
+ MSmits: good rule of thumb yeah
+ jacek: thats universal law
+ MSmits: allright allright
+ jrke: in my d&amp;b bot seed manipulation for generating randoms gives different ranks
+ MSmits: well that might be a statistical illusion
+ MSmits: dont trust the leaderboard
+ jrke: it means majority of bots are having randomness in it
+ MSmits: even deterministic minimax bots have some randomness
+ MSmits: even if they dont random on equal score
+ MSmits: the time limit is somewhat variable
+ MSmits: so sometimes you get 1 ply deeper in some turns
+ MSmits: which gives a different answer
+ jrke: hmm
+ MSmits: this not that common though
+ MSmits: so you would still mostly see the same games
+ MSmits: but if they random on equal score it can be a lot of random
+ MSmits: if the time limit wasn't variable then even mcts bots could be deterministic if their random seed is always the same
+ jrke: what you like random bots or stable bots
+ MSmits: but mcts bots are more affected by the time limit being variable than minimax bots are, because they dont add an entire depth level at once, but more gradually deepen a tree, so 1 added game can make the difference
+ MSmits: jrke it depends, if you're not the best bot and there are a lot of opponents, a non-random bot is fine
+ MSmits: but if the field is small or your at the top, you better add some random
+ MSmits: you're
+ MSmits: it's the whole reason jacek is still number 1 oware
+ jrke: hmm
+ jrke: i think crazyremi is having Ml based bot in D&amp;B 
+ MSmits: are you saying that just because he's nr 1?
+ MSmits: ML is not an i-win button. In some games it underperforms, many in fact
+ jrke: no look at points difference
+ MSmits: yes, look at my point difference on othello and yavalath. I dont use ML
+ MSmits: it's just a nice opening book is all
+ jrke: hmm
+ MSmits: of course thats not what remi uses
+ MSmits: but he may just have better heuristics
+ MSmits: 1 heuristic can be a 10 point rating difference
+ MSmits: technically
+ MSmits: usually if its that strong, others will have found it
+ MSmits: but if you have one, noone else knows...
+ jrke: yup
+ MSmits: you could do some research on D&amp;B, see if there's something there
+ MSmits: i know a ton of heuristics, which is how i wrote my solver. But my heuristics are only late game
+ MSmits: not sure how to do the early game
+ MSmits: might be that the fact that i can solve at ply 50, doesnt help me
+ MSmits: because something smart is happening before that
+ jrke: for winning endgame you need to have better position in game opening turns
+ MSmits: yeah but what is a better position?
+ MSmits: both players uses the same board
+ jacek: i think remi said he uses just some heuristic, even not search
+ MSmits: so it's just who's turn it is that decides who has the better position
+ MSmits: yeah i think he uses nimbers
+ MSmits: nim theory
+ MSmits: counting chains
+ MSmits: do you do something with this"?
+ jacek: <a rel="nofollow" class="external free" href="https://twitter.com/Remi_Coulom/status/1311426326868430849">https://twitter.com/Remi_Coulom/status/1311426326868430849</a>
+ jrke: mine is just depth 3 minimax i think a bit optim. can give me depth 4 minimax
+ MSmits: yes but how do you score?
+ MSmits: an early game
+ MSmits: eval score
+ MSmits: it's nice that you know what the board looks like in 3-4 plies, but if you dont know whats good and whats bad...
+ MSmits: jacek yeah  i saw that, makes total sense to me that azero doesnt work
+ jrke: my minimax is bit different after each move i see if there is any chain is there i play it and revert last 2 moves of chain playing 
+ MSmits: it seems really hard to figure out what the board value is
+ MSmits: and both players use the same board
+ jrke: thats the problem i want early game eval
+ jacek: opening book *.*
+ MSmits: ah ok jrke, so you're basically where i am, but without a solver
+ MSmits: i was hoping you had some secrets i could steal :P
+ MSmits: maybe you do and you dont realize it
+ MSmits: your rank is pretty good after all
+ MSmits: jacek i doubt opening book works here. I can see it working against deterministic bots only
+ MSmits: too much branching otherwise
+ jrke: its my favourite game i will rewrite it
+ MSmits: i like it too, but i am really dreading putting my solver in and finishing the bot. The solver alone is 1500 lines&#160;:(
+ MSmits: i was going to do random moves basically until endgame hits, but an endgame state has many possible situations
+ MSmits: you can be busy finishing a chain, having to choose between giving up control or not etc.
+ MSmits: i need a lot of conditionals and link them up with the solver
+ MSmits: and that's with a really complex bitboard
+ jrke: i will say all the best
+ jrke: some work gtg bye
+ MSmits: allright have a good day!
+ AntiSquid: but not dreading 1500 paragraphs of chat&#160;? :thinking:
+ MSmits: no, that comes natural
+ AntiSquid: so how much did you check different solver outcomes?
+ MSmits: what do you mean exactly by check?
+ MSmits: check if they are correct, by hand?
+ AntiSquid: test / brutal test / submit spam test any, all of the above
+ AntiSquid: efficiency
+ MSmits: ahh I did not do much verification, but if you mean just generating random endgame states, i did that millions of times
+ MSmits: the average endgame state solves in 1 ms, about 1 in a millon states cant be solved in 100 ms
+ MSmits: an endgame state is defined as a state where you cant place a line without giving away a box
+ MSmits: so thats halfway through the game
+ MSmits: some states are ridiculously complex, i dont know if they actually occur since my states are generated randomly, not intelligently
+ MSmits: think states with 12  three and four way splits
+ AntiSquid: no heuristic shortcuts to get quicker to the best move for the 1 in mil states?
+ MSmits: there are a huge amount of heuristis in my solver
+ MSmits: so i already do this
+ MSmits: i really scoured those D&amp;B papers for them
+ MSmits: used a lot 
+ AntiSquid: :D
+ MSmits: mind you, halfway through the game there are like 56 lines left to play
+ MSmits: what other game can be solved at that point
+ MSmits: it's 56! possible games left to play
+ MSmits: (factorial)
+ AntiSquid: idk, how similar is paper soccer to dots and boxes? i didn't try paper soccer at all
+ MSmits: it seems similar at first glance, but i think it might be very different
+ MSmits: i havent tried either
+ MSmits: i know you place lines and you get to bounce multiple moves on your turn
+ MSmits: but you dont get points for finishing boxes, you just win, or not
+ MSmits: by scoring
+ MSmits: now i want to try and finish D&amp;B and i was just gonna rewrite my uttt
+ MSmits: damnit
+ eulerscheZahl: there are more games than uttt and yavalath&#160;;)
+ MSmits: yeah, too many&#160;:(
+ AntiSquid: just seen these news:<a rel="nofollow" class="external free" href="https://www.politico.eu/article/austrian-village-of-f-king-to-be-renamed-fugging/">https://www.politico.eu/article/austrian-village-of-f-king-to-be-renamed-fugging/</a>
+ MSmits: lol
+ eulerscheZahl: i saw a youtube video about that village
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=bawmxQE_Fj0&amp;ab_channel=NRKSport">https://www.youtube.com/watch?v=bawmxQE_Fj0&amp;ab_channel=NRKSport</a>
+ MSmits: i am surprised its still on YT
+ eulerscheZahl: me too
+ AntiSquid: why? people swear a lot on youtube, nothing uncommon
+ MSmits: did you watch the whole video?
+ MSmits: i mean i dont say it should be off YT, i just think they might have
+ eulerscheZahl: yeah, because YT
+ eulerscheZahl: they like to delete when in doubt
+ MSmits: right
+ eulerscheZahl: i also don't always understand US logic. weapons? fine. nudity? no way, that's dangerous for the children
+ MSmits: it's their religious beliefs mostly I think
+ eulerscheZahl: do you know Kenny vs Spenny?
+ MSmits: nope
+ MSmits: sounds funny
+ AntiSquid: reminds me of borat making a documentary about a village in "azerbaijan" which was actually in romania and talking shit about the villagers without them knowing, later they tried sueing, wonder if this guy got sued
+ eulerscheZahl: 2 guys having competitions, sometimes funny, sometimes less
+ MSmits: did they kill kenny?/
+ eulerscheZahl: on episode: who can piss off more people
+ eulerscheZahl: kenny rented and airplane and added a banner to it "Jusus sucks"
+ eulerscheZahl: Jesus*
+ MSmits: depends if they have a sense of humor AntiSquid, he's only making fun of the name itself
+ eulerscheZahl: franatic people calling the radio channel, he won that round
+ MSmits: lol
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=tUcZuFRXHVs&amp;ab_channel=KennyHotz">https://www.youtube.com/watch?v=tUcZuFRXHVs&amp;ab_channel=KennyHotz</a>
+ jacek: paper soccer is not similar to d&amp;b. its more awesome
+ AntiSquid: i think youtube is more set on deleting anything that doesn't fit a specific point of view atm, covid, politicallly related stuff that doesn't support specific views and popular channels regarding occult conspiracy theories
+ AntiSquid: MSmits actually he lied to them, paid each 3$ or something and then was talking some serious shit about them, but didn't tell them what he was saying, lied instead, later they found out when it wa son TV
+ AntiSquid: he told them it was a documentary lol 
+ AntiSquid: somewhat like the guy in the austrian village
+ MSmits: ahh ok
+ jacek: stupid Y, n-tuples prone to overfitting
+ AntiSquid: what are you working on jacek?
+ AntiSquid: which game i mean
+ jacek: yavalath
+ AntiSquid: ok now i am curious what your model looks like :P
+ jacek: just all possible 4-rows
+ <b>**AntiSquid confused</b></p><p><img src="/a/35448723594340" /> jacek: hm?
+ AntiSquid: i just don't know what you mean by that, is every row in the 4 directions an input? 
+ MSmits: every way you can win with 4 in a row
+ jacek: n-tuple is pattern system
+ MSmits: so 4 hexes lined up
+ jacek: i extracts those patterns
+ AntiSquid: so you only give it the 4 in a row it can complete?
+ MSmits: no, on eval, he checks every possible 4 pattern and sees whats on there (empty, p1, p2) each of these possibilities gets a score
+ MSmits: everything is added up
+ jacek: there are 102 row-of-4patterns. each pattern has its weight like x..x is something else than xx.x. and i sum them all
+ AntiSquid: ah you do scoring for each possible move then 
+ MSmits: i am guessing it is an incremental eval
+ MSmits: so when he plays a move, he updates the eval
+ MSmits: only refreshes the patterns affected by the move
+ jacek: mhm
+ MSmits: thats what I would do anyway...
+ MSmits: dont tell me you redo the entire eval?
+ AntiSquid: was thinking of making it give you the output for the best move
+ MSmits: that would be slow
+ jacek: i use nn or n-tuple for eval only
+ MSmits: which makes sense but I also understand why azero includes the action
+ MSmits: I think it is because you can reach the same state by different routes, it might converge better if you include the action
+ jacek: they can use gpu/tpu to output entire move set. justifies the latency between cpu-gpu
+ MSmits: well there is that
+ MSmits: btw, i did a minimax with exactly the same patterns and I was slightly weaker than your pony is now
+ MSmits: i just picked the params by hand
+ MSmits: I think i had 6
+ MSmits: like if  x00x being better than 0xx0
+ MSmits: or something
+ AntiSquid: alt spotted :x
+ MSmits: i never realized i could instead have thousands of params here
+ MSmits: you didnt know derjack was jaceks alt?
+ AntiSquid: i didn't even know it existed :P
+ jacek: well there is also position
+ MSmits: yeah there is jacek, but i didnt have the tools to take that into account
+ MSmits: i figured with enough depth it would be ok
+ MSmits: maybe if i did jacekmax it would be way stronger
+ MSmits: but then the incremental eval wouldnt work right =/
+ jacek: :thinking:
+ MSmits: jacekmax is nice here because there's so much branching and so many crap moves
+ derjack: eeyup
+ derjack: in forced move branching is effectively only 1
+ MSmits: this is a funny game <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/517155700">https://www.codingame.com/replay/517155700</a>
+ MSmits: look near the end, it seems like i am letting him win by not blocking
+ MSmits: but he had a trap ready to go for quite a few turns and he didnt tak eit
+ MSmits: (at 6 5)
+ MSmits: so my solver just says fk it
+ derjack: hes taunting you
+ MSmits: seems so
+ derjack: or because there is 4-in-row and 3-in-row simulatouensnsnsly?
+ MSmits: oh hmm, yeah i missed that
+ derjack: maybe he has bug
+ MSmits: both bot bots say it's solved, so must be some other way
+ MSmits: nah i doubt that
+ MSmits: no i  didnt miss it
+ MSmits: 6 5 works
+ MSmits: he doesnt have 3 in a row there, i do
+ MSmits: i guess both moves led to a win for him and his bot doesnt care about early or late wins
+ MSmits: another loss by me. Detected 20 plies before the end lol
+ MSmits: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/517155028">https://www.codingame.com/replay/517155028</a>
+ geppoz: this reminds me a game i did long time ago
+ geppoz: <a rel="nofollow" class="external free" href="https://www.geppoz.eu/software/miele.jar">https://www.geppoz.eu/software/miele.jar</a>
+ geppoz: only similar for hex btw, that is a solitaire puzzle&#160;;)
+ geppoz: at increasing difficulty
+ AntiSquid: wtf is that link&#160;?
+ geppoz: an applet
+ geppoz: i did time ago
+ derjack: is it legit
+ geppoz: a game
+ AntiSquid: i mean why does it ask to download stuff
+ geppoz: it is an applet
+ geppoz: no more supported by browsers
+ geppoz: so now you need to use locally, but nvm
+ geppoz: ignore it
+ derjack: like flash
+ AntiSquid: ok that explains it, typical java
+ geppoz: legit to not trust me&#160;;)
+ geppoz: someday I will convert it in JS
+ derjack: :scream:
+ geppoz: that was a very bad moment when browsers removed applet support&#160;:(
+ AntiSquid: how long will JS fail to get the recognition it deserves&#160;?&#160;:(
+ MSmits: how long will JS fail?
+ AntiSquid: you're using it right now MSmits&#160;! think that's a success 
+ MSmits: :grin:
+ MSmits: I'm just messing with you
+ AntiSquid: even Automaton2000 noticed that
+ Automaton2000: the last one is the current state
+ MSmits: this is how Automaton2000 says he won
+ Automaton2000: to ensure that you don't need to put in a lot of experience
+ AntiSquid: this is how he says:  Big Brother Automaton2000 is watching you
+ Automaton2000: so you have to do the same for all languages
+ jacek: AutomatonNN eh
+ AutomatonNN: what do you mean by "if you can read it in the list of the context"&#160;?
+ MSmits: AutomatonNN say something about euler
+ AutomatonNN: else i can get the points for coding
+ jacek: AutomatonNN who is noob
+ AutomatonNN: gg
+ AntiSquid: you get social points for saying euler, he'll like you more AutomatonNN
+ AutomatonNN: where is the problem?
+ SI_PROVA: yo guys how can i optimize the fking "horse-racing duals" puzzle
+ derjack: pony racing?
+ SI_PROVA: the easy puzzle
+ eulerscheZahl: click the hints on the left
+ derjack: timeout?
+ SI_PROVA: yeah time out
+ SI_PROVA: i've got it in the hints
+ SI_PROVA: thx 
+ ParticleBeam: I hate working with Laptop keyboards
+ eulerscheZahl: same
+ eulerscheZahl: and keyboards that have a touchpad below
+ eulerscheZahl: you type something and accidentally click
+ eulerscheZahl: and continue writing at another location
+ jacek: hmm
+ jacek: fish is broken <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/517181228">https://www.codingame.com/share-replay/517181228</a>
+ eulerscheZahl: epic win :P
+ eulerscheZahl: give him some chips
+ MSmits: from what i understand he uses null window
+ MSmits: sometimes it causes problems 
+ MSmits: wait maybe it was something else
+ MSmits: anyways its some pruning mechanic that sometimes misses something
+ MSmits: oh its null move
+ MSmits: not null window, thats something else
+ derjack: this eval sometimes sucks <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/517179975">https://www.codingame.com/replay/517179975</a>
+ MSmits: seems to detect win/loss very late
+ MSmits: assuming darkhorse did this correctly
+ derjack: or some bug with solver hmm
+ MSmits: could be
+ darkhorse64: I think my solver is correct but the depth is the closest to victory I have found at the moment not necessarily the best
+ MSmits: yeah i didnt find any errors in your solver
+ darkhorse64: In this game, I am proud of 65 prepared the devilish trap 42
+ MSmits: yeah its fine
+ darkhorse64: *preparing*
+ MSmits: well played. I think if i spam submit, your bot ranks quite high because its very random
+ MSmits: i cant book very well against it
+ MSmits: and it does well in late game
+ MSmits: i win most games, but not all
+ darkhorse64: My book excludes the seven center starting moves. I should try to add an eval or something that biaises towards 4  length triangles
+ darkhorse64: Astrobytes: you ask me (and others) a question yesterday but, due to lack of contest or not enough history in chat, I failed to understand
+ MSmits: nice typo, lack of contest&#160;:)
+ darkhorse64: :slight_smile:
+ Astrobytes: oh, I believe it was just for some advice for Zenoscave, he was looking into MCTS solver and whatnot, MSmits was there
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://cg.spdns.eu/wiki/Chat:World/2020-12-19">https://cg.spdns.eu/wiki/Chat:World/2020-12-19</a>
+ eulerscheZahl: there's your contest
+ Astrobytes: lol
+ jacek: another victim of the mcts solver paper?
+ Astrobytes: I warned him against reading it&#160;:)
+ MSmits: well the idea is good, it's just the pseudocode that's crap
+ Astrobytes: yeah
+ eulerscheZahl: theoretic scientists writing code...
+ eulerscheZahl: once a prof told a story about someone from research implementing an algo
+ eulerscheZahl: was way faster than expected
+ eulerscheZahl: turned out he added a bug that made it faster (but still correct)
+ eulerscheZahl: something about minimum set cover iirc
+ eulerscheZahl: vertex cover
+ MSmits: so the moral of the story is that researchers only produce fast code when they're bugging it?
+ Astrobytes: researchers introduce helpful bugs
+ eulerscheZahl: they can't even follow the simplest of instructions :D
+ Astrobytes: "After 12 minutes we reached depth 5..."
+ MSmits: ok so == has priority over |  ?
+ Astrobytes: lots of papers like that
+ MSmits: damn bit ops, i should know this by now
+ jacek: here you go: ( )
+ MSmits: thanks jacek, lifesaver
+ eulerscheZahl: jacek coding clojure on the chat?
+ jacek:&#160;:(){&#160;:|:&amp; };:
+ eulerscheZahl: won't paste that in my terminal
+ eulerscheZahl: not again
+ jacek: how about CG ide
+ jacek: hmm
+ MSmits: what happens
+ eulerscheZahl: fork bomb
+ eulerscheZahl: spawns new processes
+ MSmits: is that bash or something?
+ eulerscheZahl: mouse will get laggy at first
+ eulerscheZahl: then nothing responds anymore
+ eulerscheZahl: yes, bash
+ MSmits: evil
+ eulerscheZahl: you'll have to hard-reset your computer
+ MSmits: but it's so short
+ MSmits: i remember trying to create a process from a windows form, was a lot more work
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.getdigital.de/fork-bomb.html">https://www.getdigital.de/fork-bomb.html</a>i bought that one :D
+ MSmits: i bet virus creators love this
+ MSmits: lol
+ struct: time to reuse connect 4 ais
+ jacek: :nerd:
+ darkhorse64: 4 hours coding to improve my score at A*C by 30 points :disappointed:
+ MSmits:&#160;:(
+ reCurse: Life in a nutshell
+ darkhorse64: Worse, I hardly beat a previous version which computed wrong scores. Once the bug was fixed, it performed  worse ... :angry:
+ MSmits: the worst bugs are also features
+ reCurse: "Once the bug was fixed it performed worse" is like the chuck norris equivalent for multiplayer
+ darkhorse64: :nerd:
+ eulerscheZahl: confession: i didn't like the chuck norris puzzle
+ reCurse: Since there's so much momentum for correct representation in emojis, we should have different glasses shape
+ eulerscheZahl: we have :beer: and :beers:
+ eulerscheZahl: :wine_glass:
+ reCurse: What about liquors uh? Second class beverages is that it?
+ eulerscheZahl: all the same for me, i don't drink alcohol
+ Astrobytes: yeah yeah, we all know you drink a pint of schnapps at 7pm and that's why you go to bed at 8 :P
+ reCurse: First logical explanation I hear
+ eulerscheZahl: first of all it's around 8:30 - 9:00pm
+ Astrobytes: Early to bed, early to rise, makes a man healthy, wealthy and eulerscheZahl
+ reCurse: Old?
+ Astrobytes: :older_man:
+ darkhorse64: Reading the PMs, I have tried to classify cells according various characteristics to exclude some from search and to start searching first with edges cells, then cells with arrows in the neighborhood, trying to refine my solutions while enlarging the search space. It's an improvement but I am still far from the 11k mark
+ reCurse: Have you tried hardcoding the solutions?
+ eulerscheZahl: the answer is offline solving
+ eulerscheZahl: and reCurse wins by type speed
+ reCurse: Flexing that wpm
+ darkhorse64: Some did it without. Why not me&#160;?
+ MSmits: reCurse dont answer, that's rhetorical!
+ reCurse: By the same logic, some did it with, why not you?
+ MSmits: sigh, i knew it :P
+ Astrobytes: MSmits :grin:
+ reCurse: The day I stop engaging in those is the day euler goes to bed at midnight.
+ MSmits: so just after hell freezes over
+ Astrobytes: Approximately.
+ darkhorse64: I prefer to devise a better algorithm
+ reCurse: Have fun with the spam submit then :P
+ MSmits: did you do SA?
+ darkhorse64: LAHC and GA, LAHC fares better maybe I should start tweaking params
+ MSmits: tourist did SA
+ Astrobytes: with some tricks
+ MSmits: maybe SA works better in the short calc time available
+ darkhorse64: LAHC is a kind of SA. 
+ MSmits: ah ok
+ darkhorse64: I "borrowed" it from Marchete
+ MSmits: sometimes it helps to prune the searchspace
+ MSmits: so keep the search the same, but disallow some changes
+ Astrobytes: here was Smits thinking it was Large-Ass Hadron Collider
+ MSmits: makes sense to me
+ Astrobytes: Marchet e used it for... NS right?
+ eulerscheZahl: yes
+ Astrobytes: I'd never heard of it until then
+ darkhorse64: I use some eZ tricks, if matation = previous state, remove the arrow. Nice improvement
+ MSmits: hakuna matation
+ Astrobytes: matations are mutations that only happen in the morning
+ MSmits: oh ok
+ darkhorse64: Other people are a treasure trove for knowledge, that's what I like here. This is my :heart_eyes: minute
+ eulerscheZahl: matation is mutation applied to mutation
+ reCurse: Genetic mistake
+ Astrobytes: matin + mutation = matation
+ reCurse: Hmm... GA should stand for genetic anomaly now that I think of it
+ darkhorse64: morning coding = crash dump
+ Astrobytes: hahaha
+ eulerscheZahl: in the morning i write the best code
+ reCurse: Your morning is what most people consider their afternoon
+ darkhorse64: in the morning, I sleep
+ Astrobytes: :D
+ darkhorse64: early in the morning, mourning
+ darkhorse64: OK, time to write that NS solver
+ Skynse: I write the best code with red eyes
+ Skynse: That is, when I desire the bed more than anything
+ Skynse: dang, good thing there are always moderators online
+ jacek: oO
+ Skynse: Cause some weird scenario popped up in my head where I needed moderators to ban some dude lol
+ Skynse: but eh, I was just daydreaming again
+ jacek: mk's avatar miniature looks like karen's hair
+ MadKnight: lol why
+ AntiSquid: strange fetish
+ famouswithoutname: Hi everyone
+ jacek: MSmits do you how much stronger is your bot in bandas with endtables vs without endtables?
+ MSmits: in terms of game rank it's 2-3 instead of 8
+ MSmits: leaderboard rank i mean
+ Knee-Gears: i droped from 1 to 24k&#160;:(
+ jacek: hmm, i have only slight increase winrate if i use more time on board size &lt;= 16 (simulating endtabled)
+ MSmits: wait, how do you give it extra time specifically for that board size?
+ jacek: i mean locally
+ MSmits: yes i know
+ MSmits: but how do you give it extra time for that board size
+ MSmits: how does this work exactly
+ jacek: i dont use cg arena and whatnot
+ MSmits: i know, but i mean, the mechanics of the mcts
+ MSmits: the tree etc.
+ MSmits: how does the small board size get extra time
+ jacek: auto move = cpu2.getBestMove(game-&gt;board.getSize() &lt;= 16&#160;? 2000 * 1000L&#160;: 10 * 1000L);
+ MSmits: allright, so you wait till the game is to a stage where the board is small and then it gets extra time?
+ jacek: yes
+ MSmits: that doesnt work
+ MSmits: we dont use the endgame table when the game gets to that stage
+ MSmits: we use it from turn 1
+ MSmits: when the board is 8x8
+ MSmits: remember, there are rollouts
+ jacek: ah, in mcts simulation?
+ MSmits: yes
+ MSmits: thats why my games are often solved at around ply 7-15 way before it gets small even
+ jacek: meh
+ MSmits: when i expand into a node with a board of that size, there isnt even any rollout
+ MSmits: thats when the solver kicks in
+ jacek: i wonder how would i simulate that. i would need fixed rollouts instead of time
+ jacek: to see how much benefits
+ MSmits: it's pretty safe to assume it helps a lot
+ MSmits: karliso nagrarok and I all use it
+ MSmits: remember that many games are decided on turn 1 because they are unbalanced
+ MSmits: so to get this much rating difference, means we do really well on the more balanced games
+ MSmits: helps more than in oware anyway
+ MSmits: in oware it's debatable
+ MSmits: I like them which is why i dont mind that it doesnt help me much
+ Toby75: yeah
+ Knee-Gears: i have ebola
+ MSmits: quite an achievement
+ MSmits: where did you order your electronic bolas?
+ Knee-Gears: from 'niger' in africa
+ Knee-Gears: lol smithy how are you 29th world wide xDD
+ jacek: oO
+ MSmits: lack of a social life
+ Knee-Gears: lamooo
+ Knee-Gears: lmaooo*
+ Toby75: how old are you, if I may ask?
+ Toby75: Because your profile says that you are a teacher
+ MSmits: me or the troll?
+ Toby75: you Smits
+ MSmits: ah, I'm almost 40
+ Knee-Gears: im in a discord call with toby
+ Toby75: nice
+ Toby75: I'm very young, and I'm looking forward to become a good coder
+ Knee-Gears: same
+ Toby75: But I don't know how to practise stuff like algorithm
+ MSmits: first learn the basics of coding
+ MSmits: loops, functions, variables etc.
+ Toby75: I am aware of them
+ MSmits: then do some easy puzzles, maybe use python
+ MSmits: work your way up from there
+ Toby75: So you recommend python for beginners?
+ MSmits: definitely
+ Knee-Gears: damm why not js
+ Toby75: But I heared that python is so diffrent to other languages...
+ MSmits: js can work too
+ Knee-Gears: ok
+ MSmits: all languages are different, some share similarities 
+ Knee-Gears: *like java and js*
+ MSmits: python is very popular so the face that there isnt another language that is similar to it, is not a problem
+ MSmits: fact
+ Toby75: And how do you recommend practising algorithm?
+ Toby75: Just with CodinGame?
+ jacek: on CG, puzzles
+ MSmits: that's a really vague question though, an algorithm is just a series of instructions for a computer
+ MSmits: so any program will be using an algorithm
+ Toby75: Yeah, but I mean how to create good ones
+ jacek: though for very basic stuff you would need some tutorial outside
+ Knee-Gears: aight imma heat out by smith, hope to see you on some other day
+ Toby75: or how to create own, efficient ones to solve certain problems
+ Knee-Gears: bye*
+ MSmits: algorithms aren't necessary good or bad, they need to fit with the situation
+ MSmits: if you see a puzzle and you come up with a solution, you just wrote an algorithm
+ MSmits: so just practice
+ MSmits: Knee-Gears bye
+ Toby75: okay thank you
+ Toby75: you are amazing
+ MSmits: thanks
+ struct: MSmits I have a question sinse you are used to using windows forms
+ MSmits: well.... dont call me an expert. I got it to work and i do the same thing every time now
+ struct: I want to run c++ program, I know how to connect it with C#
+ MSmits: ah yes, sec
+ MSmits: that i know
+ jacek: C#++?
+ struct: No, not my question
+ struct: One sec
+ MSmits: well, i dont know the DLL stuff, you can create a dynamic link library. I just know how to start and kill a process. Is that good enough?
+ struct: Well I would like to pass all precomputed states to the C# program
+ struct: So I can see them
+ Toby75: How long does it take you to solve very hard coding challenges?
+ struct: The number can be quite big,
+ struct: How should I pass them
+ MSmits: mmh you might want to just serialize it
+ MSmits: write to file and read
+ struct: Ok, I guess I can do that
+ MSmits: Toby75 too long, just do what is fun
+ struct: This STC is giving me too much work
+ Toby75: My problem is that in the most cases I just don't understand the given examples
+ jacek: ok, having &lt;= 12 'endtables' increased winterate to around 55-60%
+ jacek: for example?
+ MSmits: i'll share my arena class for windows form
+ Toby75: Maybe because my english language skill is lacking
+ MSmits: might be Toby75
+ MSmits: struct:
+ MSmits: <a rel="nofollow" class="external free" href="https://pastebin.com/1qqRdxLM">https://pastebin.com/1qqRdxLM</a>
+ Toby75: is it ok to google some stuff when solving a problem?
+ MSmits: thats my UTTT arena class for C#
+ struct: Thanks
+ MSmits: I call this from a window form to create two processes and handle input and output
+ MSmits: i dont need a referee since i use the bots solver output to tell me the game i sover
+ jacek: who uses { on new line :unamused:
+ MSmits: me :P
+ struct: Yeah, I probably write the referee
+ MSmits: I dont know, i like the symmetry
+ Toby75: It's easier to recognize the brackets
+ MSmits: yeah
+ MSmits: thanks Toby75 thats indeed why
+ MSmits: but i know almost everyone doesnt do it
+ MSmits: I also write C++ in camelcase
+ Toby75: But I would never ever be able to use this in my code, just because of the effort it would cost me to format it like this :sweat_smile:
+ MSmits: because of my C# roots
+ struct: I blame C# for that
+ MSmits: Toby75 it's important to have a style and be consistent
+ MSmits: helps read your own code
+ Toby75: definitely
+ MSmits: of course its best to code in industry standard, because that helps you read others
+ MSmits: but that ship has sailed for me :P
+ Toby75: but what IS industry standard?
+ MSmits: for c++ it is
+ MSmits: this_variable
+ MSmits: instead of thisVariable
+ MSmits: and functions with lower case
+ MSmits: and I use uppercase etc.
+ Toby75: aaahh
+ jacek: for python you have pep8 guidelines, for others other things
+ MSmits: yeah i try to use the guidelines for python since i learned it late and i have to set an example for my students
+ jacek: C# is just java with Capital Method Names
+ jacek: pycharm will nicely warn you about style
+ struct: I need to write this "arena" because I cant find the bug
+ struct: Im reusing states,  but sometimes it bugs&#160;:/
+ MSmits: earlier today I found a solved state in my meta mcts i had to unsolve because it was solved wrong =/
+ MSmits: robo won a game through this state 
+ RoboStac: dammit, he's found my backdoor
+ MSmits: lol
+ MSmits: what did you fix about your bot btw Robo?
+ MSmits: or is it just having random success again?
+ RoboStac: just retrained with the improvements I made for othello 
+ MSmits: ah ok
+ RoboStac: I realised I'd never got round to redoing yava
+ jacek: what game you need to resolve?
+ MSmits: dont have the link
+ jacek: oware, Y, other?
+ MSmits: Y
+ MSmits: I think I copied the library from an old version of my meta mcts that still had a bug
+ MSmits: either that or it's just a really rare bug
+ RoboStac: the main imrpovement was allowing a much bigger network via base65536
+ jacek: :scream:
+ MSmits: it's not exactly that is it? I still havent gotten past the unicode invalid characters
+ RoboStac: I'm usin gbase65536 exactly and just accepting that I can't quite get to 200kb 
+ MSmits: does it skip some characters or?
+ MSmits: you shared it with us before 
+ MSmits: i have it saved somewhere
+ jacek: im using int16 from 0 to 50000, so each unicode is 1 character
+ RoboStac: yeah, it only uses valid characters, but some count as 2 
+ jacek: with a little tiny loss of precision
+ RoboStac: my bots only 175kb but 99k chars 
+ MSmits: ah, i have two ranges, there's an invalid range of characters about 2k wide somewhere above 50k
+ jacek: i sent pm to agad how i do this
+ jacek: might as well share it
+ MSmits: agad needed it for oware NN i guess
+ famouswithoutname: can somebody help with "Dungeon and Maps" task? Python
+ jacek: well, its pathfinding, no?
+ MSmits: I'm still waiting for my bots to need compression. Biggest books are 22kb, but they all use integer numbers for moves and are space separated, so can be compressed by a factor of 20 or so
+ famouswithoutname: Yes
+ struct: This biggest book is for which multi?
+ RoboStac: I guess I should retrain bandas too at some point
+ MSmits: RoboStac, add endgametables if you've got around 20-30 kb to spare
+ MSmits: thats how big mine are
+ MSmits: the next step is &gt; 200 kb
+ MSmits: so thats about as big as they can get
+ RoboStac: in theory I should do if I convert it from base85
+ MSmits: I expect that if you do all that you'll be nr 1
+ MSmits: endgame tables are quite a challenge, take a day for that one
+ MSmits: I;m saying a day cuz it took me a week
+ struct: so a month for me
+ MSmits: when creating games you're quite fast though
+ struct: for simple stuff I can do it fast yeah
+ struct: If it doesnt require stuff I dont already know
+ MSmits: ah ok
+ MSmits: I suppose it's often the thinking that takes the most time
+ struct: for me its learning
+ struct: I struggle a lot reading papers
+ jacek: like the one about mcts solver?
+ MSmits: there havent been many games where i actually had to go for the papers
+ MSmits: mostly the mcts stuff and D&amp;B
+ MSmits: I struggle too, i think you're supposed to struggle
+ MSmits: it's meant for experts in the field
+ struct: Even sometimes for algorithms
+ struct: reading is not enough for me
+ MSmits: well i have to read some of that stuff 10 times before i get it
+ MSmits: and sometimes it lacks context and i never get it
+ RoboStac: so my bots learnt to beat smits but now has a fish problem&#160;:(
+ jacek: sounds fishy
+ jacek: exploit the fact fish has some bug with null move heuristic
+ jacek: your bot is alphazero style with conv net?
+ RoboStac: yeah
+ MSmits: your bot learned to beat the current version of my book :P
+ MSmits: busy fixing a lost game vs darkhorse, will get to it tomorrow 
+ MSmits: ohh these are really short games
+ MSmits: 13-14 plies, very cool
+ MSmits: let me switch to that
+ jacek: so may games, so little cores
+ jacek: good winter is coming
+ MSmits: yeah, i played a move my meta mcts already solved as a loss. 
+ MSmits: i just hadnt put it in my book yet I suppose
+ jacek: such a disgrace
+ karliso: MSmits Is it not better to overtake (2, 3)?
+ MSmits: you mean steal? Nah, not for me anyway
+ MSmits: it's pretty balanced
+ MSmits: so i can win games when i take and when i dont take
+ MSmits: but i have somewhat better results not stealing
+ RoboStac: I probably should fix my starts at some point
+ RoboStac: still hardcoded first move as p1 + always steal as p2
+ MSmits: i have had starts with 1 0 and 2 1 as well, they are fine, tric trac does this
+ karliso: Are there draws in Y?
+ RoboStac: yes, but rare
+ MSmits: yes, but rare
+ MSmits: nice
+ RoboStac: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/517257222">https://www.codingame.com/share-replay/517257222</a> 
+ karliso: You are on the same wavelength
+ MSmits: apparently&#160;:)
+ MSmits: the game might be solved as a draw
+ MSmits: to not be solved as a draw, every starting move needs to have a winner
+ RoboStac: though saying rare I did draw vs tic 3 times out of 9
+ RoboStac: on my last submit
+ MSmits: its funny, every game i lose vs you is identical
+ MSmits: oh no i found a different one
+ MSmits: loss in the same place though
+ MSmits: just different losing move :P
+ RoboStac: theres 3 - lengths 11/12/14
+ RoboStac: though I guess 11/12 are the same but reversed players
+ MSmits: could be, also once my bot solved as a loss, it doesnt really care anymore, might take longer sometimes
+ MSmits: never more than 1-2 plies, depends if it is a trap or a double 4 in a row
+ RoboStac: and the 14 is basically the same except my bot makes you play one extra forced move
+ MSmits: ah yeah
+ karliso: Wouldn't Y get boring with large opening books?
+ MSmits: they aren't exactly large though, mine isnt
+ karliso: exactly
+ MSmits: 1308 moves
+ MSmits: of course rotated for symmetry, so around 15k in that case
+ MSmits: i dont think it's boring because I like finding the moves
+ karliso: What if someone else approached openings like you and you both pushed each other.
+ karliso: Would there still be middlegame left?
+ MSmits: hasnt happened, would be interesting
+ MSmits:  we almost had something like that in othello with oldjohn
+ MSmits: but he stopped
+ MSmits: the main thing is that my bot is really strong late game
+ MSmits: so i dont have to worry past a certain point
+ RoboStac: I imagine mines quite weak due to low sims + not much training data
+ MSmits: it's strong early game though
+ MSmits: and thats where most wins happen
+ Moogs: umu
+ MSmits: my meta mcts just said i need to break your triangle robo
+ jacek: the shell has spoken!
+ MSmits: on my 3rd hex, i somehow decide to place it outside of the triangle area
+ MSmits: the mcts has a serious depth problem early game
+ MSmits: most of my moves are triangle fixes, often vs dafish
+ MSmits: but karliso as for whether it is boring. I like the game itself because of the tactics, traps etc. So I like watching the meta mcts solve nodes and come up with counters. Thats why its not boring
+ MSmits: seeing robo wreck me 10x in a row is exciting :P
+ jacek: it just sucks seeing bot missing obvious traps and game ending in 11-12 plies
+ MSmits: jacek do you think maybe a ntuple bot isnt enough here? I think NN might fare better
+ MSmits: traps have odd shapes
+ MSmits: you have to have a relation between two 4-patterns to spot it
+ MSmits: NN layers do this
+ jacek: maybe. or maybe i need other approach to create my training data. the winrate can jump 45%-75% against baseline
+ MSmits: you should check how many different games it plays though
+ MSmits: it might be deterministic and then the winrate doesnt mean much
+ jacek: yeah it was pretty deterministic so i added more random
+ jacek: but still its jumping
+ MSmits: hm ok
+ MSmits: I'm not sure if the starting move might not have a huge effect on the flow of the game
+ MSmits: a center start is very different from a corner start it seems
+ struct: Is there any move that is always a loss?
+ MSmits: you mean, not considering the steal?
+ struct: yeah
+ MSmits: 0 0 and 2 0 are very weak
+ MSmits: I havent solved them though
+ MSmits: the +1 hex advantage of player 1 is quite substantial so it compensates the bad start a bit
+ MSmits: for example, the 4 4 start is a solved game
+ MSmits: but player 1 does 0 0
+ MSmits: and then player 2 does 4 4
+ MSmits: not solved
+ MSmits: even though the 0 0 is entirely out of range
+ MSmits: so it seems as if p2 an use the same tactics to win
+ MSmits: but at some point that corner hex will generate some threat that prevents the 4 4 win
+ MSmits: best counter to 0 0 is 3 3
+ MSmits: blocks 4 in a row coming from the corner
+ RyanGilbert: I am streaming, anybody want to watch or do a private clash?
+ RyanGilbert: twitch.tv/yeetpug21
+ RyanGilbert: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/15117835226356cc08941b30d6197547910d7b0">https://www.codingame.com/clashofcode/clash/15117835226356cc08941b30d6197547910d7b0</a>
+ Astrobytes: RyanGilbert: it's already in #clash, up the top on stream notifications, and discord. Please desist.
+ RyanGilbert: OK, my apologies
+ MSmits: it's ok to say here you're streaming, if you keep it to one message right? Just no posting clash links?
+ Astrobytes: yeah totally
+ Astrobytes: no worries RyanGilbert
+ RyanGilbert: OK cool
+ jacek: happy Princess Luna Day
+ RyanGilbert: Streaming again to those who were waiting
+ Astrobytes: RyanGilbert your stream notification has disappeared
+ RyanGilbert: On discord?
+ RyanGilbert: hm ok
+ RyanGilbert: give it a few minutes probably
+ Astrobytes: last one is from about 15 minutes ago
+ Astrobytes: yeah, probably just twitch being twitch
+ RyanGilbert: any reason for the lag?
+ FirstInLastOut: so i'm not alone lagging ..
+ TM_Tsukiru: Here too
+ RyanGilbert: yeah 
+ IamFish: Usually lags around this time. Should get better in like 30 min in my experience
+ RyanGilbert: ok
+ NeoXX: hi
+ NeoXX: henlLOOO
+ FirstInLastOut: hello
+ NeoXX: WHAT IS THIS?!?!?
+ NeoXX: WHOAAA
+ NeoXX: SOMEONE SAID SOMETHING
+ NeoXX: IS THIS AI
+ NeoXX: OR REAL
+ FirstInLastOut: it's a discord 
+ FirstInLastOut: a real chat at least
+ NeoXX: huh
+ NeoXX: are my messages being sent to the discord?
+ struct: no
+ NeoXX: oh
+ svnnnnnny: hello
+ NotSoClassy: hey babe
+ Tomi101: hey
+ jbyepez: hi
+ AlexPearson: heck yeah I actually finished one
+ jbyepez: :smile:
+ soutenu: HEY

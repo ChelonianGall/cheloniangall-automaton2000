@@ -1,0 +1,561 @@
+ Babyface-Developer: HeLlO rIVaL819&#160;:))
+ GilbertGaming27: Gilbert
+ WOLFRAHH: hii eulerscheZahl 
+ ParallaxWave: a
+ ParallaxWave: a
+ ParallaxWave: a
+ ParallaxWave: a
+ jacek: happy Caturday
+ WOLFRAHH: hii jacek
+ Huday.object: hi jacek
+ AnandMan: hello
+ AnandMan: hello
+ rufusek: Hello
+ TanHoa_24: hello guys
+ HellcatDinh: hello
+ HellcatDinh: mtfk
+ TanHoa_24: i'm the vietnamese people
+ LoneCuriosity: hello
+ jrke: happy astroday-&gt;caturday
+ KiwiTae: o/
+ KiwiTae: MadKnight hows your android
+ jacek: is AutomatonNN android?
+ AutomatonNN: what do you mean?
+ Uljahn: do AutomatonNNs dream of electric eulers?
+ AutomatonNN: yeah i get it
+ MarTiaNe: Is there any way I can check old coc games&#160;? Some kind of history or whatever
+ Uljahn: like "show read" at the bottom of notifications?
+ jacek: but it wont show the clashes problems themselves
+ MarTiaNe: Oh I did not know about that, also it show only games in this week, but still at least something. thx 
+ MSmits: hey jacek, I was wondering if i could ask you some questions about ML in oware/
+ MSmits: or boardgames in general maybe
+ UnnamedCodinGamer: hi MSmits, do you use mcts in breakthrough?
+ MSmits: yeah, a form of it, but i kinda failed with eval in breakthrough
+ MSmits: i eval all children on expansion and backpropagate scores. No random rollout
+ MSmits: but then the eval needs to be good and it isn't
+ UnnamedCodinGamer: I try random rollouts but they do not  seem to work either
+ UnnamedCodinGamer: yes
+ MSmits: they don't
+ MSmits: there are many games where they don't
+ UnnamedCodinGamer: so good evaluation seems to be key
+ MSmits: you can use random rollouts very well in bandas, uttt, connect 4 and some others
+ MSmits: yeah
+ MSmits: btw sometimes random rollouts also require some heuristics in the rollout
+ MSmits: a good rollout policy
+ MSmits: like in yavalath: Don't play instant loss moves
+ MSmits: take wins when they appear 
+ UnnamedCodinGamer: yes, I try to do that - detect and use instant win or loss
+ UnnamedCodinGamer: yes
+ MSmits: might not be enough for some games
+ MSmits: the problem is that random moves just dont sample the space of reasonable moves very well
+ MSmits: and if you dont play reasonable moves, the result is useless
+ UnnamedCodinGamer: exactly
+ UnnamedCodinGamer: no matter how many times you sample
+ MSmits: well eventually you build the tree deep enough ofc
+ MSmits: you will just solve the game :0
+ UnnamedCodinGamer: yes, near the end when you would most probably detect a loss&#160;:)
+ MSmits: I've been trying to get a handle on machine learning
+ MSmits: in what little free time i have these weeks
+ UnnamedCodinGamer: makes sense
+ MSmits: I can do little things, but board games are definitely a step up
+ UnnamedCodinGamer: this seems to be the way
+ MSmits: not in every game I think and ML alone might not be enough in games where it does work
+ MSmits: like you might still need endgame db and opening books and such
+ MSmits: at least on CG
+ UnnamedCodinGamer: I looked briefly into alpha zero, it seemed complicated to me
+ MSmits: yeah i dont want to do azero
+ MSmits: I'll just try a MLP
+ UnnamedCodinGamer: what is mlp?
+ MSmits: but I need to figure out how to do the actual training part
+ MSmits: thats a basic NN, just a bunch of hidden layers, input, output.
+ MSmits: no resnet, convolution etc.
+ MSmits: i think oware is good to do this with
+ UnnamedCodinGamer: mh
+ UnnamedCodinGamer: did you solve the two nn puzzles?
+ MSmits: nope
+ UnnamedCodinGamer: they give you a good intuition
+ MSmits: what does it teach you
+ UnnamedCodinGamer: and you implement nn from scratch
+ MSmits: because i do know the basics
+ UnnamedCodinGamer: implementing your own nn
+ MSmits: i just need to know how to train it in the domain of boardgames with self play
+ MSmits: do the puzzles teach you that?
+ UnnamedCodinGamer: well
+ UnnamedCodinGamer: there is the training part
+ MSmits: i know training and backpropagation on a data set
+ MSmits: thats not what i need to learn
+ UnnamedCodinGamer: and you must output the expected output after the training
+ UnnamedCodinGamer: ok
+ UnnamedCodinGamer: I see
+ MSmits: i need to know how to generate the data and use it, in a boardgame
+ MSmits: thats what i wanted to ask jacek about
+ MSmits: I mean i can let it play games against itself
+ MSmits: that would give me board positions
+ MSmits: and there is an endgame result
+ MSmits: but not sure how to combine them and how search ties into this. With search you get deeper and find more positions for moves you dont even play
+ UnnamedCodinGamer: I would like to also figure this out
+ MSmits: my guess is that search with more depth just makes the endgame result more realistic/accurate, but otherwise does not add value
+ MSmits: and that you actually train on the real positions that occurred in the game
+ MSmits: you put those through the network and backpropagate with the end game resukt
+ MSmits: result
+ MSmits: but I am just guessing, so would help if someone confirmed&#160;:)
+ UnnamedCodinGamer: the nn from the puzzles takes and outputs binary data, which can be board game states
+ UnnamedCodinGamer: so on a basic level I see how the training should work
+ MSmits: yeah i know, i did some tutorials with simple truth table
+ MSmits: like the XOR operations
+ MSmits: or you can train it to all states of TTT
+ MSmits: that's a solved game so no need to do any self play
+ MSmits: if you just have the data, there's a lot of good information to google and learn from 
+ MSmits: but generating through selfplay and train on it, that's a bit harder. There's a bunch of stuff about azero you can download and try, but thats so far beyond what I want that it's not helpful
+ MSmits: also, i want to avoid using tensorflow/keras/pytorch for now otherwise i end up with models i dont know how to put through CG
+ UnnamedCodinGamer: so basically the input is a game state  and the output in the training data is the best move given the input
+ MSmits: you can do it two basic ways i think
+ MSmits: the output can be moves
+ MSmits: or it can be board value
+ MSmits: (or both actually)
+ Doju: gosh, learning c++ is horrible after getting so used to python and javascript
+ MSmits: so in oware you can say there's 6 outputs, one for each of the moves
+ MSmits: or you can do between -1 and 1 for loss/draw/win
+ MSmits: and then just pick the move  with the best value
+ MSmits: Doju yes it is
+ UnnamedCodinGamer: and you generate the training data offline using for instance mcts?
+ MSmits: yeah, some search
+ MSmits: otherwise the endgame results are going to be crap, if it's just depth 0
+ UnnamedCodinGamer: yes
+ UnnamedCodinGamer: If I try it it I would probably stay away from python and ready to use packages
+ MSmits: that's probably best yeah
+ MSmits: btw, i tried a bunch of those
+ MSmits: the amount of crap you have to install and the version problems are horrible
+ MSmits: nothing works with the newest versions of packages
+ MSmits: say you want to use the newest tensorflow... you cant use the newest python
+ MSmits: if you use the newest tensorflow, you cant run many of the things people shared, with an older version
+ UnnamedCodinGamer: yes, I have had similar problems with python packages for more trivial stuff
+ UnnamedCodinGamer: have you managed to make something work and perform better than normal search?
+ MSmits: nah, i have not done anything i need to search for
+ MSmits: i was going to do this with oware, it is such a simple game
+ MSmits: and i know it very well
+ MSmits: it's like starting with TTT almost, except it's not solved
+ Doju: Btw MSmits you've been online here every time that I've logged in in the past 10 months
+ MSmits: lol
+ Doju: I'm not entirely convinced that you're not a bot :D
+ KiwiTae: Doju why u only lvl8?
+ MSmits: well i've been a lot less active lately. This time it's really a coincidence&#160;:)
+ Doju: KiwiTae i'm only really interested in the competitions
+ KiwiTae: nice&#160;:)
+ Doju: Now i'm here to check out my python code for the fall challenge
+ Doju: trying to translate it to c++
+ MSmits: ouch
+ Doju: this is a rather slow process :d
+ MSmits: yes
+ Doju: given that my only experience with c++ is an introductory course on another website
+ Doju: which took like 3 hours to complete
+ MSmits: also, c++ has a lot of tricks that can make you use less code, but beginners wont know those
+ KiwiTae: hehe
+ MSmits: (i dont know those)
+ jacek: ohai
+ MSmits: hey jacek
+ KiwiTae: i realised there are many tricks to stl when i tried to use c instead of cpp
+ MSmits: so jacek, i was meaning to ask you some questions about ML in oware specifically, but not sure how much you are sharing about this
+ jacek: its alright
+ MSmits: ok, so do you use selfplay or supervised in oware?
+ Doju: I just wish there was an option to select the interpreter for python here
+ jacek: selfplay
+ MSmits: when you train, do you play real games, or games with more depth or less depth?
+ jacek: or maybe 'self-supervised' would be more accurate
+ MSmits: when you generate data i mean
+ jacek: yes, real games with fast mcts
+ MSmits: what do you mean fast? Lower calculation time?
+ jacek: then i have position -&gt; value of the mcts' root
+ MSmits: dont you use the endgame result as value to train on?
+ jacek: lower time, or even just fixed iterations count
+ jacek: i used that in the past, but using value from shallow search is faster and gave better results
+ jacek: even if at first generations it comes from random network
+ jacek: at the very least, near endgames have accurate values
+ MSmits: well it makes sense that the endgame reslt is a poor value to use for early game states
+ MSmits: because it is too far away
+ MSmits: and in later states, the mcts root value should coincide with the endgame result anyway
+ MSmits: ok, so you don't have 6 outputs, one for each of the moves, like some other implementations
+ jacek: my training pipeline is similar to a0's now, just i train only value, and my target value is mcts result, not game final outcom
+ jacek: yeah, only value
+ MSmits: ok, so do you use convolution layers?
+ jacek: still simple MLP
+ MSmits: seems less useful in oware because it is not a 2D game
+ MSmits: in what way is it close to azero then?
+ MSmits: azero uses convolution and resnet
+ jacek: i mean the training pipeline
+ MSmits: oh ok
+ MSmits: generating data in batches, training, validation etc.
+ jacek: yes
+ MSmits: well you do exactly what i would prefer to try, it seems like a good baseline to experiment with
+ jacek: it is evaltype-agnostic
+ jacek: could be nn, n-tuple or handcrafter features
+ MSmits: yeah it's a nn, it could be whatever&#160;:)
+ MSmits: oh 
+ MSmits: you mean the pipeline
+ MSmits: yeah
+ jacek: well anything that has adjustable parameters
+ MSmits: you could use it to train handcrafted features
+ MSmits: parameters
+ MSmits: yea
+ MSmits: thats something i need also
+ MSmits: so could learn 2 things at once here
+ MSmits: if i stick with  it
+ kovi: bookmark
+ MSmits: do you use anything  like tensorflow?
+ MSmits: or is it fully homemade
+ jacek: no, i made things in c++ from scratch
+ MSmits: thats great, also what i want to try
+ MSmits: that way you can more easily get it into CG
+ kovi: not sure if c++ tensor fits into cg
+ kovi: yeah
+ MSmits: he can just make a long string and then convert it into tensors
+ MSmits: thats not the hard part
+ kovi: yeah but runtime lib
+ MSmits: the hard part is writing efficient matrix calculations
+ jacek: it all started when i finally rewrote the xor example from python's to c++
+ kovi: it was not written with 100k limit consideration
+ MSmits: right, thats good
+ jacek: i think i have somewhere the python example without using np
+ MSmits: when you say "the python example" which one do you mean?
+ Doju: Hmm, I must be doing something wrong because I want to make pretty much everything protected instead of private
+ kovi: there are a0 examples
+ MSmits: yeah, but we are doing this far below a0 level&#160;:)
+ MSmits: i dont want to touch that anymore
+ jacek: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/429ca1e6-890a-4b94-9773-49404526b36a">http://chat.codingame.com/pastebin/429ca1e6-890a-4b94-9773-49404526b36a</a>
+ MSmits: a0 is so complicated
+ kovi: true, jacek value based thing is pretty wise
+ jacek: XOR mlp, 1 hidden layer
+ jacek: no fancy numpy
+ Doju: Oh jeez
+ Doju: are you doing neural nets without numpy?
+ MSmits: thats great jacek, finally something without numpy
+ jacek: just for learning for myself
+ Doju: thats nuts :o
+ jacek: no numpy in c++ standard libs
+ MSmits: numpy makes things faster, but it doesnt make it more clear to learn
+ Doju: great if you want to learn
+ Doju: yeah thats true
+ Doju: if the objective is to learn instead of making a fast thing then that makes sense
+ kovi: but without numpy usually 1/10 speed
+ MSmits: jacek for the matrix calcs, did you use any c++ library, or did you just figure out what intrinsics and other tricks to use, yourself?
+ kovi: and without tf/gpu 1/100
+ kovi: or worse
+ MSmits: kovi if i take weeks to code something and the training takes 24 hrs instead of 1 hr, it's fine&#160;:)
+ jacek: i use good old for loops, not even intrinsics 
+ kovi: oh, you do c++ calc, sorry
+ kovi: than its ok
+ MSmits: I see, doesn't it bother you that it might be much faster jacek, with some tricks?
+ MSmits: i mean obviously you dont need more speed atm
+ jacek: yeah, NN eval is most consuming part of my code
+ jacek: and i tried several times. im just too dumb
+ MSmits: well if I ever get to the point where I can write this stuff and it's better than what you have, I will share it with you
+ MSmits: might be a couple months. I want to get something before the end of my summer vacation. Trying to be generous with my time estimate here, apparently it's hard to learn
+ jacek: and i finally got this work for Y. its 5th without opening book
+ MSmits: nice one, Robo did as well
+ MSmits: but yavalath has huge problems with determinism because of the early game endings
+ jacek: its N-tuple with small hidden layer, MLP-tuple :v
+ MSmits: ohh ok
+ MSmits: I am going to be solving connect4 i think
+ Doju: welp now i've got circular dependencies
+ jacek: determinism... in training i choose final moves according softmax
+ jacek: it was another thing that i lacked before
+ jacek: allows for exploration but not too dumb exploration
+ MSmits: I see
+ MSmits: hey, you train on cpu right?
+ jacek: yeah
+ MSmits: i read about gpu being 20-100 times faster
+ MSmits: but i feel that's probably also because when people do that they have 4 really expensive ones running at once
+ MSmits: doubt i'd achieve that factor with mine
+ DomiKo: not really
+ jacek: i have rather small nn
+ WOLFRAHH: hii guys what was going
+ jacek: not quite parallelizable
+ MSmits: ahh ok
+ jacek: well maybe for training batch itself, the gpu would come in handy
+ MSmits: seems so difficult to write that yourself
+ MSmits: i would prefer to do it with tensorflow then and just convert their models somehow
+ jacek: thats why i havent written convnets yet. i could write gazillion layers etc. in python but at first i want to make something small myself
+ MSmits: and resnets?
+ jacek: too
+ WOLFRAHH: can any body tell what was going
+ MSmits: convnets supposedly help for games like othello/yavalath, where the surroundings of a hex/square are important
+ MSmits: doubt it would help much for oware
+ jacek: my NNs so far have at most 2 hidden layers, so resnets are pointless.
+ MSmits: yeah
+ MSmits: 2 is not much at all
+ jacek: also i mostly exploit the fact that there is little change between game states, i.e. only few squares are affected
+ MSmits: did you experiment with trading layer size for depth?
+ MSmits: how do you exploit this?
+ jacek: yeah, and this is what i came up for my framework and cg constraints
+ jacek: for input/first hidden layer you need to only update the values instead of summing everything all over again
+ jacek: partial updates, the main idea behind nnue
+ MSmits: oh you mean it's a performance improvement
+ MSmits: do you mean during training or running a game?
+ jacek: yes
+ jacek: well both
+ MSmits: well that seems useful and alleviates the problem with you just using for loops
+ jacek: though i do not use that in oware
+ MSmits: it's easier to implement improvements like this when your code is not stuck in weird intrinsic and avx stuff
+ proace21: hi
+ MSmits: once you've gotten into that, you generally dont touch the code anymore. At least I dont
+ jacek: have you read the updated <a rel="nofollow" class="external free" href="http://www.fierz.ch/cake186.php">http://www.fierz.ch/cake186.php</a>
+ jacek: the guy finally used patterns
+ MSmits: wow really
+ MSmits: i thought that was dead
+ MSmits: it's cool he did that
+ MSmits: anyways, thanks a lot jacek. I saved the chat and your xor example. When I have more free time I know what to do with it
+ jacek:&#160;:+1:
+ WOLFRAHH: hey jack what's about python
+ WOLFRAHH: jacek
+ WOLFRAHH: MSmits are you pro in coding
+ AntiSquid: WOLFRAHH <a rel="nofollow" class="external free" href="https://duckduckgo.com/?t=canonical&amp;q=how+to+engage+in+conversation&amp;ia=web">https://duckduckgo.com/?t=canonical&amp;q=how+to+engage+in+conversation&amp;ia=web</a>
+ jacek: oO
+ AntiSquid: making bubbles again?
+ LaMeccaGuy: Hi guys
+ LaMeccaGuy: How ranking is done?
+ therealbeef: which ranking?
+ jacek: yes
+ AntiSquid: LaMeccaGuy is it yes&#160;?
+ jacek: i wonder how to debug print this dice duel board...
+ AntiSquid: LaMeccaGuy <a rel="nofollow" class="external free" href="https://imgur.com/a/DtlO1iF">https://imgur.com/a/DtlO1iF</a>
+ PULSAR2105: best joke ever&#160;!
+ jacek: MSmits trained chess values <a rel="nofollow" class="external free" href="https://i.imgur.com/l71AZQn.png">https://i.imgur.com/l71AZQn.png</a> it took just few seconds and it converged to typical 'sane' values though knights seem to be undervalued here
+ MSmits: is this chess960 or normal chess?
+ MSmits: also I am guessing you kept the pawn fixed because you didn't need the extra free parameter&#160;:)
+ MSmits: the other pieces are defined in terms of pawn value
+ MSmits: you might get a different value for the pieces if you split the game into early, mid and lategame
+ Ghostyy: bruh, i'm a begginerin c++ and i know how to make small programs, but when i join this website i knew that i'm a fool
+ AntiSquid: wrong
+ AntiSquid: you'd be a fool not to join
+ Ghostyy:&#160;?
+ Ghostyy: maybe you're right
+ KiwiTae: Ghostyy your not a fool your at the bottom of the sigmoid curve 
+ ANONYMOUS42: anyone else have the problem where the CoC chat just crashes whenever i try to load it
+ BlaiseEbuth: No 'cause nobody here does clashes...
+ UltraCookie: I do they are fun
+ BlaiseEbuth: Perhaps. But are you here&#160;?
+ MSmits: are you getting all existential on us BlaiseEbuth?
+ BlaiseEbuth: I think so I am.
+ BlaiseEbuth: Are you&#160;?
+ MSmits: no idea
+ MSmits: I will ask the NN jacek shared with me earlier
+ MSmits: it says 0 1 1 0
+ MSmits: so that's that
+ BlaiseEbuth: So perhaps you exist, perhaps not... Schrodingsmith
+ MSmits: indeed
+ AntiSquid: what kind of NN&#160;?
+ MSmits: heh, this is the xor example
+ AntiSquid: ah the basic xor stuff @_@
+ MSmits: i am pleased that I understand it even though all the variables are 1 character
+ AntiSquid: internet is flooded with those
+ MSmits: W, H, b etc.
+ MSmits: yes, but this one has no numpy
+ MSmits: so i can translate it to c++ without hurting my brain
+ MSmits: then I can try to add more layers
+ MSmits: oh and another reason why the example is good: It contains bias
+ MSmits: many xor examples do not
+ AntiSquid: you have a link or something&#160;?
+ MSmits: he pasted it here, sec
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/c6c8d8cb-a90e-4f2f-9557-7128dc2181b8">http://chat.codingame.com/pastebin/c6c8d8cb-a90e-4f2f-9557-7128dc2181b8</a>
+ MSmits: it makes no sense if you've not seen any other examples though
+ AntiSquid: cool thanks just wanted to see this one 
+ inoryy: I'm starting to seriously think I have a sixth sense for when NNs are discussed here
+ MSmits: hey inoryy&#160;:)
+ inoryy: hello!
+ AntiSquid: you missed an awful lot of discussions related to that then
+ MSmits: I am just getting started trying things
+ AntiSquid: sharpen your senses
+ MSmits: after reading way too much about it
+ inoryy: AntiSquid damn&#160;:( 
+ MSmits: I'm doing what jacek is doing, a MLP for oware
+ AntiSquid: hey inoryy where do you look for news updates on anything ML related in general&#160;?
+ MSmits: well... after a long time messing :P
+ inoryy: MSmits nice!
+ MSmits: so my first job is translating this xor example to c++
+ inoryy: AntiSquid colleagues, twitter, sometimes r/ML
+ inoryy: holy moly I dropped from ~50th to 208, are there lots of newcomers at the top?
+ MSmits: probably
+ jacek: ohai
+ MSmits: they also recalculated like  a year ago, not sure when you last looked
+ jacek: other example dont have biases? really?
+ DaNinja: Agad e has a nice and simple c++ NN  here <a rel="nofollow" class="external free" href="https://www.codingame.com/training/easy/onboarding/solution?id=3349744">https://www.codingame.com/training/easy/onboarding/solution?id=3349744</a>
+ DaNinja: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/easy/onboarding/solution?id=3349744">https://www.codingame.com/training/easy/onboarding/solution?id=3349744</a>
+ AntiSquid: probably the bigger contests brought in a lot stronger folks? no idea
+ MSmits: thanks DaNinja
+ AntiSquid: last one had 7k participants
+ inoryy: wow
+ MSmits: DaNinja lol... do i need to solve onboarding in C++ to see it?
+ wlesavo: also a lot of points for recent contest make it easier to climb
+ DaNinja: yes, trya mcts for it :D
+ MSmits: lol
+ inoryy: I remember that one, I think that's the first NN on CG&#160;:) 
+ darkhorse64: small multis give more cp
+ MSmits: it came after the csb tests?
+ MSmits: or before?
+ inoryy: noo, way before
+ MSmits: hmm ok
+ AntiSquid: no backprop
+ AntiSquid: here's the big NN thread of stuff shared on CG <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/neural-network-ressources/1667">https://www.codingame.com/forum/t/neural-network-ressources/1667</a>
+ inoryy: I remember it because whenever I would argue NNs on CG are near impossible people would point me to that solution and I would laugh and be even more convinced because it's so absurd :D
+ jacek: NN are possible on CG
+ MSmits: well.. from what i know now, i dont see why anyone would ever think it was impossible
+ MSmits: any small nn should be better than most evaluation functions
+ inoryy: eh, hindsight 20/20
+ MSmits: yeah&#160;:)
+ inoryy: not ashamed to admit I was way off, was a good lesson for me
+ MSmits: i dont get why the onboarding has no backpropagation though
+ jacek: trained offline
+ KiwiTae: its already trained
+ MSmits: ohhh
+ MSmits: lol
+ AntiSquid: missing a lot more than that :P
+ darkhorse64: you can look at the binary neural network exercises too
+ MSmits: would be even cooler if he trained it in the time available
+ MSmits: and then used it
+ jacek: zenoscave has backprop <a rel="nofollow" class="external free" href="https://www.codingame.com/training/easy/onboarding/solution?id=9348107">https://www.codingame.com/training/easy/onboarding/solution?id=9348107</a>
+ darkhorse64: it includes training data
+ MSmits: nice
+ MSmits: weird that he uses numpy and still has 200+ lines
+ MSmits: mmh i think he doesnt even really use it, he seems to use normal python lists
+ MSmits: oh nvm, he uses np.dot
+ jacek: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/07c640b5-eb32-4206-8fd4-d87158308c0d">http://chat.codingame.com/pastebin/07c640b5-eb32-4206-8fd4-d87158308c0d</a>
+ jacek: that doesnt look like relu
+ inoryy: haha
+ MSmits: no i think he forgot to fix that
+ AntiSquid: (╯°□°）╯︵ ┻━┻
+ AntiSquid: submission too fast again
+ jacek: hm?
+ DomiKo: wait
+ AntiSquid: the red rekt angle
+ DomiKo: we can use numpy here :scream:
+ AntiSquid: yes
+ Smelty: hmm
+ jacek: so silent today here
+ BlaiseEbuth: AutomatonNN is there a way to make som noise since euler is not here&#160;?
+ AutomatonNN: with many changes
+ KiwiTae: im struggling with roller coaster here
+ BlaiseEbuth: Do it in clojure
+ KiwiTae: took me 2days to make hello world in clojure :p
+ BlaiseEbuth: There's an achievement&#160;!
+ KiwiTae: Noooo way? whyyy 
+ KiwiTae: :joy: ill have to do it one day ah
+ KiwiTae: havent seen that one yet
+ KiwiTae: damn just saw it
+ BlaiseEbuth: Go on&#160;! <a rel="nofollow" class="external free" href="https://bubok.tech/category/clojure/">https://bubok.tech/category/clojure/</a>
+ KiwiTae: damn clojure bible thanks 
+ AntiSquid: one of those things you need to cleanse with holy water eh&#160;?
+ jacek: spam
+ AntiSquid: <a rel="nofollow" class="external free" href="https://images-na.ssl-images-amazon.com/images/I/61zGklMhUpL._AC_SL1000_.jpg">https://images-na.ssl-images-amazon.com/images/I/61zGklMhUpL._AC_SL1000_.jpg</a> unicorn spam
+ aaronshenhao: Magic in every bite! Lol
+ jacek: <a rel="nofollow" class="external free" href="https://i.pinimg.com/originals/53/2e/2a/532e2a7ebe80682bfa193395ed5be7f1.jpg">https://i.pinimg.com/originals/53/2e/2a/532e2a7ebe80682bfa193395ed5be7f1.jpg</a>
+ AntiSquid: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=KlEovr29KBU">https://www.youtube.com/watch?v=KlEovr29KBU</a> 
+ KiwiTae: aah well got 2/3 ach on that one ... just gonna have to learn clojure for next one &gt;&lt;
+ BlaiseEbuth: ^^
+ jacek: vv
+ Smelty: &gt;&gt;
+ AntiSquid: anyone who did 2048 had a&#160;% 0 bug when trying to use the formula for next seed&#160;? not sure how i get it, but it's only offline @_@
+ orangesnowfox: AntiSquid: If there aren't any tiles to place...
+ AntiSquid: yes i realize that, but how come it doesn't bug out on CG&#160;?&#160;:/
+ jacek: hm?
+ AntiSquid: idk ... i get gibberish occasionally
+ jacek: thats your code
+ AntiSquid: in the memory
+ AntiSquid: Automaton2000 show him the door @_@
+ Automaton2000: or do you still get promoted
+ jacek: AutomatonNN his code is executed in memory?
+ AutomatonNN: eulerscheZahl is there a way to see the code in the contest to a solution in my code
+ AntiSquid: euler isn't here, he doesn't love you anymore AutomatonNN
+ AutomatonNN: change all the contributions
+ AntiSquid: wow AutomatonNN is taking revenge
+ AutomatonNN: good luck
+ AntiSquid: 1430539332 4 16 4 1279544405 32 8 2 -1733645660 64 512 8 1280660818 1381324114 16 1146442325  my board contains gibberish i mean jacek
+ jacek: stop puting gibberish to your board then [solved]
+ orangesnowfox: That isn't giberish, it's very important and belongs there [closed as not a bug]
+ AntiSquid: i set them to 0s for sure, but then somehow get those magical numbers
+ jacek: indexing issues?
+ AntiSquid: think it was memset()
+ AntiSquid: now i got a different wonderful bug! it's like metamorphosis 
+ AntiSquid: Exception has occurred.Segmentation fault
+ orangesnowfox: Nice UB you got there
+ AntiSquid: UB&#160;?
+ jacek: undefined behavior
+ orangesnowfox: Segfaults almost *certainly* mean some kind of undefined behavior happened
+ KiwiTae: using vectors?
+ AntiSquid: you think i messed up something with index&#160;? i checked that bit over and over, might still be wrong though lol
+ KiwiTae: might be u didnt reserve the memory
+ orangesnowfox: might be a signed integer overflow, those are UB
+ jacek: show all your code
+ AntiSquid: could be i didn't translate the java function properly for spawning tile
+ orangesnowfox: In the Java code it never has to worry about the&#160;% 0 error, because moves have to make *something* happen, which means there has to be an empty tile after the move
+ jacek: blame euler
+ orangesnowfox: Yeah, blame euler lol :p
+ AntiSquid: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/c5db301c-8d00-4ffc-8902-d0ec9c19d21d">http://chat.codingame.com/pastebin/c5db301c-8d00-4ffc-8902-d0ec9c19d21d</a>
+ KiwiTae: u missing a return 0;
+ AntiSquid: is there a limit of commands / turn&#160;?
+ orangesnowfox: There might be a line length limit, but I haven't found it yet
+ jacek: i think i tried over 1000 moves and it failed
+ AntiSquid: ok will inspect seed later, got to shop something @_@
+ jacek: at 22? :thinking:
+ KiwiTae: online shopping maybe
+ orangesnowfox: Would someone be willing to help me figure out why my tron doesn't like filling spaces very much? eg <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/536705366">https://www.codingame.com/share-replay/536705366</a>
+ KiwiTae: look like u have border issues
+ orangesnowfox: yea, but y tho lol
+ BlaiseEbuth: Are you always considering the opponent in your evaluation when "caged"&#160;?
+ orangesnowfox: Yeah, never got around to checking if my bot was isolated
+ BlaiseEbuth: That's the point.
+ BlaiseEbuth: Had the same problem long time ago.
+ KiwiTae: im still stuck in gold there 
+ KiwiTae: i think
+ orangesnowfox: near the top of silver :v
+ KiwiTae: u gonna crush me soon
+ orangesnowfox: BlaiseEbuth: Is the point that you *do* check, or that you *shouldn't*?
+ orangesnowfox: KiwiTae: I wouldn't be so sure about that, my first submit was 4 years ago, and I only have 28, I might just vanish again
+ BlaiseEbuth: You should check. ^^
+ BlaiseEbuth: 28 what&#160;?
+ orangesnowfox: submits 
+ BlaiseEbuth: Oh
+ BlaiseEbuth: Same. But with a 0 between the 2 and the 8.
+ jacek: <a rel="nofollow" class="external free" href="https://istheshipstillstuck.com">https://istheshipstillstuck.com</a>
+ orangesnowfox: Okay, I just realized that didn't make it any less ambiguous for me sorry
+ orangesnowfox: &gt;  You should check. ^^ Like, check if I'm isolated, or check what the opponent is doing
+ BlaiseEbuth: Check if you are isolated to avoid your cycle to taking the opponent position into account when that does not matter.
+ BlaiseEbuth: "It has cost us $43 billion, so far..." who is "us"&#160;?
+ orangesnowfox: The world economy
+ BlaiseEbuth: Yes. So why "us"&#160;?
+ orangesnowfox: Dunno
+ AntiSquid: 21:29 here jacek, shop open until late
+ jacek: oh tomorrow that time change
+ AntiSquid: jacek there's a truck from same company blocking a road too&#160;: <a rel="nofollow" class="external free" href="https://mothership.sg/2021/03/evergreen-container-suez-canal-ever-given/">https://mothership.sg/2021/03/evergreen-container-suez-canal-ever-given/</a>
+ AntiSquid: they're good at blocking stuff
+ Rival819: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/b1d98292-d856-4872-b047-18671d386f6b">http://chat.codingame.com/pastebin/b1d98292-d856-4872-b047-18671d386f6b</a>
+ Rival819: slim shady
+ AntiSquid: blyat
+ Rival819: =D
+ Rival819: Meanwhile the evergreen truck....SKIIIIIRRRRRTTTT&#160;!!!
+ AntiSquid: well if you want more of it, this is from january: <a rel="nofollow" class="external free" href="https://taiwanenglishnews.com/evergreen-marine-container-ship-loses-36-containers-at-sea/#comments">https://taiwanenglishnews.com/evergreen-marine-container-ship-loses-36-containers-at-sea/#comments</a>
+ AntiSquid: evergreen drop 36 containers in the see :D
+ AntiSquid: sea *
+ AntiSquid: too much news for today, 3D printed chicken nuggets <a rel="nofollow" class="external free" href="https://www.popularmechanics.com/home/food-drink/a33380821/kfc-3d-bio-printed-chicken-nuggets/">https://www.popularmechanics.com/home/food-drink/a33380821/kfc-3d-bio-printed-chicken-nuggets/</a>
+ Rival819: Antiqsquid: Breaking new, Evergreen will never be called Seavergreen
+ davilla: man, I really want to progress down the algorithms track, but I need more achievements and I don't know where to get them
+ davilla: I'm at 27/30
+ Rival819: They drowned so now they will be uncalled. :D
+ davilla: oh, I guess I could do an easy puzzle in a different language to get 2 achievements&#160;:-P
+ therealbeef: Yeah puzzles is the way to quick achievements
+ davilla: good, then I can continue down this path
+ davilla: haha I just copied my code from other Mars Lander puzzles into episode 1, achievement unlocked!
+ Hiachi: Im a new programmer
+ davilla: hi
+ Hiachi: These exercises are really good
+ Hiachi: hi
+ davilla: yeah it's fun
+ Rival819: YES&#160;!! FUN T.T
+ Rival819: Hard, but fun :D
+ sherry7392: hi
+ Rival819: Yes high, that what you need to be better you are right sherry. It helps me
+ Rival819: high to you too :D
+ Snovrain: good morning everyone
+ Rival819: hi&#160;:)
+ Babyface-Developer: 48 65 6c 6c 6f
+ Babyface-Developer: 48 65 6c 6c 6f 20 41 6e 79 6f 6e 65 20 74 68 65 72 65 20 3f
+ MiinhTrann: e

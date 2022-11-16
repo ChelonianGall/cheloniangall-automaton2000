@@ -1,0 +1,1165 @@
+ asdfg47: :thumbsup:
+ derjack: good morning
+ dbdr: \o
+ FFly: hello world
+ derjack: :upside_down:
+ FFly: :grin:
+ JormaW: can someone help me publish a puzzle here? Having trouble running the tests
+ derjack: what puzzle
+ JormaW: an easy puzzle ive got
+ derjack: what trouble
+ JormaW: You get an input between 2 and 26 and according to that you should output a square of letters so the box always has one A in the middle of it, the next layer will be B:s all around the A, the next layer will be C:s all around the B:s, and so forth all the way up to 26.
+ BlaiseEbuth: And what do you want to do with that&#160;?
+ JormaW: Output the letter square on the screen.. print it?
+ BlaiseEbuth: Yeah
+ JormaW: Thought it was a pretty hard puzzle for me to do and I've gotten 4 easy puzzles done here so I thought it could fit in the easy category
+ BlaiseEbuth: I don't get if this is a puzzle you're solving or creating... Need more coffee
+ JormaW: Im trying to create it but couldnt get the tests to go through
+ JormaW: Coffee sounds good though
+ KiwiTae: there is a clash of code like this
+ JormaW: How can i find those?
+ BlaiseEbuth: Yeah I think this is more fitted for a clash than a puzzle
+ JormaW: I mean i dont want to make a duplicate of the puzzle if there already is one but I'm not really sure how to find them either.. Is there an easy clash category that I could browse as well?
+ BlaiseEbuth: Not directly sadly. But you can try with <a rel="nofollow" class="external free" href="https://eulerschezahl.herokuapp.com/codingame/puzzles/">https://eulerschezahl.herokuapp.com/codingame/puzzles/</a>
+ JormaW: oh wow
+ BlaiseEbuth: And hi eZ&#160;! Sorry for the ping :p
+ NavLol: sup
+ dbdr: \o Marchete
+ Marchete: o/
+ dbdr: you have some useless inputs in oware
+ Marchete: it seems a better bot, isn't it?
+ dbdr: seems so
+ Marchete: what useless?
+ dbdr: scores &gt;= 25 are never used
+ dbdr: since it's a win
+ Marchete: yeah
+ Marchete: I saw it
+ dbdr: why did you pick &lt;27?
+ Marchete: it should be 26
+ Marchete: 0..25
+ dbdr: 25 excluded
+ Marchete: I changed to SIZE_CELL_NN=28SIZE_SCORE_NN=26
+ Marchete: but I haven't seen any improvement
+ Marchete: I think 28 is too much
+ Marchete: 25 excluded?
+ Marchete: well
+ Marchete: it's true
+ Marchete: once you hit 25 it's a win
+ Marchete: so 0..24
+ dbdr: also score 1 is impossible
+ dbdr: so it can be packed on 3 avx regs&#160;:)
+ derjack: :o
+ Marchete: how 3?
+ dbdr: 3*8 = 24
+ BlaiseEbuth: lier
+ dbdr: 0 and 2..24
+ derjack: do you have limit on max seeds per house? i assume 31 the max
+ derjack: maybe 23 seeds max would be sufficient
+ dbdr: yes, limit is 23 in stock cgzero
+ derjack: oh?
+ Marchete: stock :D
+ derjack: vanilla
+ dbdr: vanilla if you prefer
+ Marchete: I just put some value there, as a guess
+ dbdr: arf
+ Marchete: it's not like anything well thought
+ derjack: so maybe you could benefit more from more seeds :v
+ Marchete: "640KB should be enough"
+ dbdr: again 0..23 is good as a multiple of 8
+ dbdr: I haven't seen huge stacks (kroos?)
+ Marchete: but I no longer need an "input" for one hot
+ Marchete: I directly do the first layer output
+ dbdr: ah, you optimized that?
+ Marchete: I mean
+ Marchete: reset() -&gt; set first layer to bias
+ dbdr: yes, you can just index
+ Marchete: then setbit(N)
+ Marchete: add to that layer weights[N]
+ Marchete: then once you have that layer
+ JormaW: Is there someone here who could help me with a small flask/html/sql project problem?
+ Marchete: ReLU(intermediate,output)
+ Marchete: I don't know how much that improves
+ Marchete: not enough considering you have +1.6pts over me
+ dbdr: you mean you don't measure? :scream:&#160;;)
+ Marchete: measure what
+ dbdr: speed
+ dbdr: ah you mean TS points?
+ Marchete: leaderboard points
+ dbdr: right
+ dbdr: I hope you know how much speed it gives
+ Marchete: you need some better winrates against smits, recurs_e and you can be 2nd
+ dbdr: yes, pretty good against top 3
+ Marchete: nope, I think "a bit"
+ Marchete: 0/1/11 vs Robo is a huge win right now
+ dbdr: bad against 6-8
+ dbdr: I implemented the weighted random
+ dbdr: without temperature
+ Marchete: agad_e as p2 is weird, he doesn't play the normal move
+ dbdr: gave this bot in one gen. not sure if this is a direct consequence or just lucky
+ Marchete: I implemented it, but I fear it polluted the samples
+ coolbandit99: hi
+ coolbandit99: :grinning:
+ derjack: top is pretty much rps
+ derjack: ohai
+ dbdr: why polluted, aren't they excluded?
+ Marchete: it depends on how you implemented it
+ Marchete: why they should be?
+ dbdr: I was thinking better (weighted) random moves should improve a bit the samples for the value predictions, since the bot is stronger. might be negligible
+ Marchete: did*
+ Marchete: how did you implemented it?
+ dbdr: it's what you mentioned in the final words
+ Marchete: I know
+ dbdr: those samples are excluded by your implementation
+ Marchete: all of them?
+ dbdr: you even have a comment about it:
+ dbdr: yes
+ Marchete: let me rephrase
+ Marchete: I added some random selection, with rnd.NextInt(1000) &lt; 15
+ Marchete: so it only happens in 1.5% of samples
+ dbdr: actually, the samples have the visit distribution, not the selection, right? so why excluded it at all?
+ Marchete: and I marked them as dontGenerateReplay 
+ dbdr: yes
+ Marchete: but the point is that in original papers
+ Marchete: they don't say anything about that
+ Marchete: they just say "weighted random selection"
+ Marchete: so are you doing a weighted with 1.5% chance
+ Marchete: or always?
+ dbdr: you mean you fear it would pollute if you didn't have dontGenerateReplay, right?
+ dbdr: 1.5%
+ Marchete: exactly
+ dbdr: ok, I misunderstood
+ Marchete: I initially added without the 1.5%
+ Marchete: and without dontGenerateReplay 
+ dbdr: so you improved alphazero. or discovered an aspect they failed to document
+ Marchete: so it was adding a lot of noise
+ Marchete: I mean
+ Marchete: if you generate 5000k games
+ Marchete: it's good
+ dbdr: but the samples contain the selection?
+ Marchete: because white noise will be cancelled
+ dbdr: I thought it had the visit counts
+ Marchete: in the original paper they don't talk about how that random selection affects sample quality
+ Marchete: I think it affects
+ Marchete: if you random move and lose, you shouldn't learn that part
+ Marchete: what I was trying are two things
+ Marchete: 30% chance of random selection
+ Marchete: then set:
+ Marchete: 				if (tmpValue &lt; 0.87*bestValue)				{					dontGenerateReplay = true;				}
+ Marchete: mark as bad if the selection differs a lot from best value
+ Marchete: maybe it's better 0.95 or something higher
+ Marchete: I was also trying that in the replay buffer
+ Marchete: if I "win" with a random move, try to use it as a good sample
+ dbdr: you don't store the sample, but the parent is still affected, right?
+ Marchete: but I think I have sign problems
+ Marchete: no
+ Marchete: I backpropagate the boolean
+ dbdr: ah ok, so only children are saved, to add variety
+ Marchete: <a rel="nofollow" class="external free" href="https://github.com/marchete/CGZero/blob/master/src/CGZero.cpp#L2537-L2551">https://github.com/marchete/CGZero/blob/master/src/CGZero.cpp#L2537-L2551</a>
+ Marchete: yeah
+ Marchete: you can't sample a loss if later moves were random
+ Marchete: but you get more variety on depth
+ Marchete: I think that's "better" than original
+ Marchete: because original is more brute force
+ Marchete: do zillion of games so all that noise will cancel out
+ dbdr: assuming original (paper?) saves all replays?
+ Marchete: 500k games
+ Marchete: If I recall
+ Marchete: in oware that would mean around 80M positions
+ Marchete: my changes (with sample deduplication and that) saves a lot of time and space
+ Marchete: and it doesn't need days to train to a good position
+ Marchete: I don't know your design
+ Marchete: but I reach top10 like in 2hrs
+ Marchete: "reach" as winning top8-top10 guys
+ Marchete: in just some IDE tests
+ dbdr: I'm still running your code, just tweaking and playing with it to get some understanding
+ dbdr: so my design is your design&#160;;)
+ Marchete: you understand better than me&#160;:) +1.6 points
+ martinpapa69: hi
+ Marchete: I'm retraining with different ideas, but I can't beat my current submitted bot
+ derjack: yeah, deciding about how to and what to explore is quite important
+ dbdr: or it's a fluke, against most players there are a few matches that repeat over and over
+ Marchete: in fact yes
+ dbdr: szia martinpapa69
+ derjack: it sky rocketed when i used softmax with variable temp thingy to decide what moves to use
+ Marchete: most players are like deterministic
+ Marchete: variable temp? where?
+ Marchete: and what game?
+ derjack: in my own framework, during training
+ dbdr: Winrate 31.9444 23.4848I wish I understood what causes such dramatic regressions. does not look right to me
+ martinpapa69: I too finally sucessfully run your train script with a small NN. compressed with the scripts you added to the playground. but when i run the code in ide, i get a simple:timeout. :D any idea why&#160;?
+ derjack: keep in mind i only use value
+ derjack: martinpapa69 any error?
+ martinpapa69: Game Summary:martinpapa69 timeout!
+ Marchete: NN weights are called w32?
+ Marchete: best.w32
+ martinpapa69: yes
+ Marchete: probably incorrect binary
+ dbdr: nothing on console?
+ dbdr: even the decoder should print something, right?
+ Marchete: first thing on console is:
+ Marchete: CODINGAMEusing Neural Network 0.0900959
+ Marchete: CODINGAME is even before reading a file
+ martinpapa69: so i guess, for me, the binary doesnt even start
+ Marchete: how did you compile it?
+ martinpapa69: copy pasted the 3 script lines
+ martinpapa69: i changed "$AI_Name" to CGZero
+ Marchete: it should work
+ martinpapa69: not sure if its correct
+ martinpapa69: okay, i guess i have some debug-homework then before i send it to the arena :D
+ Marchete: the problem is that you don't have avx2 in your CPU
+ Marchete: so you can't just test it
+ martinpapa69: i rewrote the code to awx only
+ Marchete: ahh
+ Marchete: then try locally
+ Marchete: create a net dotnet project
+ Marchete: add the cs file
+ Marchete: and dotnet run
+ Marchete: it should decompress and run the code
+ martinpapa69: ye good idea, maybe i get some error messages
+ Marchete: I usually did that to "recover" submitted weights, when I can't recall what generation was
+ Marchete: if not
+ Marchete: use the original NN_Mokka.h, and try to compile
+ Marchete: even if you don't have avx2 it should compile to that target
+ Marchete: your custom avx it's for your PC
+ Marchete: not for CG
+ Marchete: CG has avx2
+ dbdr: beating robo as p2: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/570094556">https://www.codingame.com/replay/570094556</a>
+ Marchete: p2 is really hard to win
+ Marchete: if I ever with Robo is with p1
+ Marchete: (#UNAUTHORIZED): "You are not authorised to view replay 570094556".
+ derjack: huh
+ Marchete: let me in, let me iiiin!
+ derjack: a mere mortals cant see the robo lose
+ dbdr: strange
+ dbdr: this is an IDE match
+ RoboStac: it's ok, I'm happy if there is no proof of me losing
+ Marchete: you can repeat the win?
+ Marchete: NN are very deterministic, at least mine :D
+ Marchete: can you*
+ martinpapa69: it looks like there is something wrong with my upx Marchete. after i run the the upx script on the cgzero executable, and try to run the output exectutable it wont print out the welcome message(using Neural Network 0.0255805), or anything
+ Marchete: then it's wrong, yes
+ Marchete: always test the binary, if it says using Neural Network
+ Marchete: it's OK
+ dbdr: second match as p2 vs robo was a draw
+ Marchete: that's a win for me too
+ Marchete: p2 draw == win
+ dbdr: yours is actually trying to be less deterministic with the bestMoves vector
+ Marchete: it's barely noticeable
+ Marchete: also I tried the jace_k way of mixing mean Score and log(visits)
+ Marchete: maybe it's not enough
+ Marchete: it seems to me that visit counts are very uneven
+ dbdr: I think this helps when a good move is discovered late
+ Marchete: like 1 move taking 95% of visit budget
+ dbdr: that would mean exploration is too low, possibly?
+ dbdr: though it can be good for tree reuse
+ Marchete: in theory it should auto adjust
+ dbdr: how?
+ Marchete: dunno :D
+ dbdr: if exploration is too low it will just exploit
+ Marchete: policy?
+ Marchete: I don't know how it solves the case:
+ derjack: no policy - no probelsm :innocent:
+ derjack: ~
+ PepitoPepe: y
+ Marchete: at some point it thinks move0 has policy 0.98 because it seemed good
+ Marchete: how to change to move1 as best?
+ Marchete: it seems hard
+ Marchete: I was trying to use a higher cpuct on train
+ Marchete: to give more exploration in learning
+ Marchete: but I'm clueless (as in most hyperparameters)
+ martinpapa69: removing the "--ultra-brute"  form the upx command solved my problem
+ Marchete: good
+ Marchete: then pack and test the bot
+ dbdr: if move1 is better than the policy thinks, the sample will learn that, even if it does not select it
+ martinpapa69: i sent it already
+ dbdr: then next generation it will try it even more
+ martinpapa69: looks like it wil lend up in mid 10's
+ RoboStac: I found I got really extreme policies when I had too many mcts iterations
+ Marchete: how much training?
+ dbdr: so it might need a few gens to do the switch, if it was not close
+ martinpapa69: I trained it for like an hour, and my network is rly small atm
+ Marchete: 1 hour?
+ Marchete: noice
+ Marchete: I think my pipeline is fast to train to a good level
+ derjack: 51% winrate vs random :tada:
+ Marchete: no no no
+ Marchete: 46% vs random at gen3!
+ dbdr: derjack lol
+ Marchete: :rofl:
+ martinpapa69: ye its surprisingly fast. every other framework i checked suggests days of training
+ PepitoPepe: no no no
+ PepitoPepe: 45% vs random at gen3
+ PepitoPepe:&#160;!
+ Marchete: yeah, like 3 days on GPU
+ Marchete: NN models of 3MB size
+ RoboStac: most online frameworks are for massively deep convolution networks which do take a lot longer
+ Marchete: that's true
+ dbdr: maybe other frameworks replicate alphazero sizes, which does not have the CG size and speed constraints. so you need a lot more training
+ Marchete: but on python
+ dbdr: that too
+ RoboStac: oware seems to learn fairly quickly too
+ RoboStac: my c4 took a lot longer to stabilise
+ dbdr: c4 with convolutions, right?
+ RoboStac: nah
+ dbdr: input of oware is small
+ RoboStac: couldn't get the performance to work for that
+ Marchete: it's a pity C4 goes better with dense
+ Marchete: I wanted to try CNN
+ Marchete: c4 inputs are smaller
+ derjack: you can still do exercise
+ derjack: CNN is just slower
+ RoboStac: it can still get top 10
+ dbdr: ah yes, more squares on c4, but only 3 possible states
+ dbdr: oware has seed counts
+ Marchete: :lifter:
+ Marchete: only 1CNN isn't that slower
+ Marchete: I "converted" it to Dense
+ martinpapa69: i think the main problem with my oware-alphazero implementations was, that is gave the seed counts directly as an input, not in one-hot format
+ derjack: but 63 squares in c4, and 14 things in oware
+ derjack: yeah, who gives inputs directly to NN...
+ Marchete: each input bit in CNN affect X outputs with W
+ Marchete: so I recreated these W as weights[InputBit]
+ RoboStac: direct inputss worked fine for me for a while&#160;:(
+ Marchete: until when?
+ RoboStac: just before last contest when jacek convinced me to try one hot
+ derjack: he was in top4 anyway
+ Marchete: ahh
+ Marchete: i think one-hot are good for CPU constraints
+ Marchete: "more info" with just 1 set
+ Marchete: value_loss: 0.0641
+ Marchete: if I weight more the value loss
+ Marchete: like it doesn't miss
+ Marchete: but  policy_loss: 0.7716 :D
+ dbdr: value_loss: 0.1603 - policy_loss: 0.3325
+ dbdr: and I kept the 1-1 weights
+ dbdr: I think you broke something Marchete
+ Marchete: 2-1 weights
+ dbdr: ah maybe it's that then
+ Marchete: I'm just testing dumb stuff
+ dbdr: try 1-2&#160;;)
+ Marchete: I don't know what's better
+ dbdr: 1-sqrt(2), has better mathematical properties
+ dbdr: *bullshit
+ Marchete: why resubmit martinpapa69?
+ dbdr: while (!first) resubmit();
+ martinpapa69: ^ :D
+ Marchete: have you set your cpuct for submit?
+ martinpapa69: nah
+ martinpapa69: should i modify it before submit&#160;?
+ Marchete: you can do it on IDE
+ Marchete:&#160;;./CGZero");
+ Marchete:&#160;;./CGZero cpuct 0.0 cpuct");
+ Marchete: for example
+ Marchete: at some point of debug text you should see it:
+ Marchete: "parent_F: CPUCTX.X"
+ Marchete: just to test on arena
+ Marchete: I find sometimes best parameters  training&#160;!= arena
+ Marchete: well, 13th
+ Marchete: is not bad
+ martinpapa69: ye i trained the nn for like 1 more hour, wanted to try the most recent one
+ derjack: already better than cosmobytes
+ Astrobytes: shut it pony boy :P
+ Marchete: beat that Astrobyte_s guy :P
+ Astrobytes: What is that now, 8 or 9 NNs?
+ dbdr: top 9 - MSmits + martinpapa69?
+ dbdr: so 9?
+ Astrobytes: oh, and Ille, he's further down but it's NN
+ dbdr: shame
+ derjack: pb4 not NN?
+ Astrobytes: Hm, you may be right there
+ RoboStac: I think there might be a few lower down ones too
+ dbdr: pb4 is suspicious in python
+ RoboStac: quite a few people were asking me questions and trying to get something working when I first did it
+ Astrobytes: Tiramo n had one but think it's still in the lower league
+ dbdr: first other non-compiled language is #42 Zorg1
+ dbdr: and that's a minimax IIRC
+ derjack: :older_man:
+ derjack: i wonder what remi uses <a rel="nofollow" class="external free" href="https://twitter.com/Remi_Coulom/status/1370475619998392328">https://twitter.com/Remi_Coulom/status/1370475619998392328</a>
+ Astrobytes: Surprised he hasn't tried Oware
+ dbdr: different variant?
+ derjack: there are 3 games i think
+ Astrobytes: Plenty mancala variants to choose from
+ Marchete: Smits it's "The indomitable village" from Asterix :rofl:
+ dbdr: excepts dominated&#160;;)
+ Marchete: on top10 he is holding
+ dbdr: yeah
+ Marchete: and imo he can wreck most NN's with his MetaMCTS
+ Marchete: and books
+ Marchete: he just doesn't want to
+ Astrobytes: Yes, he disabled the booking to keep the peace, so to speak
+ dbdr:  //Play as p0
+ dbdr: stopwatch is shared by all threads
+ dbdr: it is also unused in pitplay.
+ dbdr: but that's confusing
+ dbdr: Marchete
+ Marchete: yeah, it would create a race condition
+ Marchete: should be removed from all pitplay and selfplay
+ dbdr: or keep searching indefinitely&#160;:)
+ Marchete: btw adding a #define RELEASE_MODE and conditional removing most training part
+ dbdr: no, just longer
+ Marchete: the binary size is around 30KB when submitting to CG
+ dbdr: yeah, wasted space&#160;:)
+ Marchete: at some point in the past I had some issues with Random class and threads
+ Marchete: like using the same object for all threads wasn't a good idea
+ Marchete: similar to my stopwatch
+ Marchete: a bad implementation
+ Marchete: I should define one instance in each worker, pass it as parameter, etc etc
+ dbdr: in rust thread unsafety is a compilation error, that's good for peace of mind&#160;:)
+ Marchete: indeed
+ Marchete: c++ is more "oh! you want to add to a vector and at the size time clear it? cool! let's do it and see what happens!"
+ dbdr: and keep a reference from inside the vector too
+ dbdr: :upside_down:
+ Marchete: the worst thing is that C++ tends to invalidate references when adding stuff to a vector
+ Marchete: sure chaos
+ dbdr: yeah, as soon as it reallocates
+ Marchete: like always :D
+ Marchete: happened to me a lot on NumberShifting code
+ Marchete: until I found the bug
+ dbdr: well, growth is usually exponential, like double the size
+ dbdr: so many pushes will not reallocate
+ martinpapa69: u can solve it with reservere, when you know the max size
+ martinpapa69: *reserve
+ dbdr: which is worse, some bugs will happen only occasionally
+ dbdr: reserve is good for performance too
+ derjack: welp, like with NNs, threads will work most of time even if they have serious bug
+ dbdr: welcome to top10, martinpapa69&#160;:)
+ martinpapa69: hi :D I wonder how many of marchete's framework will run on hte next contest
+ Marchete: Zero
+ martinpapa69:&#160;?
+ Marchete: CGZero
+ martinpapa69: noo&#160;:(
+ Marchete: I mean, it's feasible
+ Astrobytes: *if the next contest is a multi
+ Marchete: but you need to understand, tweak/recreate
+ dbdr: next contest will be a golf
+ Marchete: my framework should be a reference
+ Marchete: as everybody code in its own way
+ martinpapa69: dont think its hard to modify the code to run on single player games, like CvZ
+ Marchete: 10 out of top11 in oware are NN :D
+ dbdr: to golf, though? the weights take too much space
+ Marchete: reminds me of GA in CSB
+ dbdr: oldjohn is NN?
+ Marchete: lol, it rained since that...
+ Marchete: I guess, C#?
+ dbdr: ah. some people actually use C# tho&#160;;)
+ Marchete: he wasn't C# until recently
+ dbdr: ok
+ Astrobytes: truew
+ Astrobytes: *true
+ Marchete: the dotnet thing is cumbersome
+ Astrobytes: Normally uses C++ iirc
+ derjack: i wonder if the framework were in D, we would see more D people
+ LlaeSevero: Good Morning Good people 
+ dbdr: should not be hard to write a D packer
+ BrucevLee: HIkind of new hey 
+ BrucevLee: how can we learn the basic or practice to code   
+ derjack: try onboarding, the descent or temperatures puzzle
+ BrucevLee: ok thanks 
+ LachlanB: I think im getting a graphical glitch on the AI bot racing, it seems none of the bots move, yet I still win the race. is this a known bug?
+ derjack: can you share the replay
+ LachlanB: the replay is fine when I visit the share URL, just when its in the IDE it does not move a frame
+ dbdr: LachlanB try reloading the IDE webpage
+ LachlanB: Fixed it, thanks guys. I shouldve restarted as troubleshoot step #1...
+ dbdr: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=5UT8RkSmN4k">https://www.youtube.com/watch?v=5UT8RkSmN4k</a>
+ PanGami: :scream:
+ LachlanB: Hahaha, oopsie
+ derjack: :upside_down:
+ Marchete: how do you improve that fast martinpapa69?
+ derjack: cloud computing
+ Marchete: (╯°□°）╯︵ ┻━┻
+ Marchete: ragequit!
+ martinpapa69: haha, no i train on my laptop. I added 1-1 layers to the value and policy head, and trained a bit. now im adding 1 more layer to the common NN
+ derjack: whats 1-1 layer
+ martinpapa69: 1 layer to value, 1 layer to policy
+ martinpapa69: and i use adam optimizer instead of sgd. i think it converges much quicker
+ Marchete: really?
+ Marchete: I've always heard SGD, and momentum
+ Marchete: I mean at some early time I tried Adam, but it was before I get it working
+ dbdr: RL seems like cargo cult programming taken to the next level :D
+ martinpapa69: it seems to be faster... I used to work  with nn-s back than and came to the conclusion, that most of the time you dont have to think about optimizer, just use ADAM :D
+ martinpapa69: it was years ago tho, dont know if there is some better-adam since than
+ derjack: i think in AG(Z?) paper they used SGD + momentum, and didnt used other fancy optimizers for some reason
+ derjack: welp, not that training the NN is big part of learning
+ dbdr: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/c7904d10-3111-4a28-a990-a3034002f15e">http://chat.codingame.com/pastebin/c7904d10-3111-4a28-a990-a3034002f15e</a>
+ martinpapa69: :D
+ Marchete: in fact in many papers they also said momentum=0.9
+ Marchete: like it's SGD yes or yes
+ Astrobytes: The lack of Adamski disspoints me.
+ Astrobytes: *disappoints
+ Marchete: the good thing about using commercial ML frameworks is that you can test all this in no time, bug free
+ derjack: <a rel="nofollow" class="external free" href="https://datascience.stackexchange.com/questions/30344/why-not-always-use-the-adam-optimization-technique/30347">https://datascience.stackexchange.com/questions/30344/why-not-always-use-the-adam-optimization-technique/30347</a>
+ Marchete: pulling a complete ML framework by  oneself it's like creating Linux from scratch...
+ dbdr: recurs@ did it didn't he?
+ Marchete: indeed, and probably CSB guys too
+ derjack: and i did, but i only did basic nn stuff
+ Marchete: it's great for learning, but I just have no idea where to start...
+ derjack: that could be also why i stick to value only
+ dbdr: Marchete: you started, you have the inference
+ dbdr: I guess the next step would be the backpropagation
+ Marchete: lel
+ Marchete: no I'm fine, thanks
+ Marchete: for me ML is just a tool
+ dbdr: "You reached the limit..."
+ dbdr: guess it's time for a break
+ derjack: hm?
+ Marchete: stop pressing that button :D
+ dbdr: it's not me it's my tool&#160;:)
+ Marchete: what tool?
+ dbdr: cgbenchmark-like
+ derjack: use the alt
+ Marchete: I thought it was the play my code
+ dbdr: that's what the tool does, ide matches
+ Marchete: CG lowered a lot the matches count
+ dbdr: yeah'
+ dbdr: also replay lifetime, recently
+ Marchete: they should add a delete button for history&#160;:)
+ dbdr: they could probably reduce replay size by 90% easily
+ dbdr: most of these things look very bloated
+ struct: sdk replays are huge if you use gem
+ dbdr: gem?
+ struct: graphic entity module
+ struct: recurs e doesnt use it on chess
+ struct: one of the reason his replays are so small
+ dbdr: nice
+ eulerscheZahl: you can also do a mix of graphics module and your own.Or just implement your own serialization and still feed it into the SDK module in the end
+ eulerscheZahl: 38 frame replay of Dice Duel<a rel="nofollow" class="external free" href="https://eulerschezahl.herokuapp.com/codingame/replays/analyze/?id=568229737">https://eulerschezahl.herokuapp.com/codingame/replays/analyze/?id=568229737</a>still some redundancy that we can't get rid of
+ Marchete: near 7th place, csip
+ martinpapa69: ye, but its losing its momentum, sp o think if i want to improve further, more training wont be enough
+ Marchete: how big it is?
+ Marchete: maybe space is limited
+ Astrobytes: does renard have NN also? Recent submission
+ Marchete: it forgets to learn new things
+ martinpapa69: my binary is 80kb-ish
+ Marchete: you can add #define RELEASE_MODE to cut a lot of code
+ Marchete: can be reduced to like 32KB
+ Marchete: I do conditional compiling
+ martinpapa69: dunno if the network size is the problem here, but ye ill try that
+ Marchete: adding -D RELEASE_MODE
+ Marchete: to enable or disable it
+ Marchete: maybe you can do a makefile or smth
+ Marchete: when I asked big, I was refering to weights file
+ Marchete: 1st layer is usually faster to calc than later
+ Marchete: as you have a lot of zeros
+ martinpapa69: the w32 file itself is 83k
+ Marchete: ok not that small
+ martinpapa69: ye, i think the netowrk size should be fine, i have to look the hyperparameters now
+ Marchete: I can't help much more, I also hit a ceiling
+ Marchete: the bot seems very sensitive to rollout count
+ Marchete: 10k sims worked better than 5k sims 
+ Marchete: about hyperparameter, no idea :D
+ Marchete: I don't know if it's better to use PROPAGATE_BASE=1.0 (i.e. like Alphazero does), or learning rate, or pretty much anything
+ Marchete: and ofc the damn cpuct
+ Marchete: I think I know how leela chess do
+ Marchete: it's related to visitcount
+ Marchete: but that's visit count doesn't change that much
+ martinpapa69: no idea. i've only tried changing PROPAGATE_BASE, but it didn't seem to have big impact
+ Marchete: but I don't know if cpuct must be 1.0, 1.5, 2.0,2.5 or 3.0
+ Marchete: who knows
+ Marchete: also I haven't tested much about FPU (first play urgency), they said -1.0, others -parentValue
+ Marchete: I also don't know
+ struct:&#160;:)
+ struct: i wonder if i finally should port arimaa
+ struct: I want to know if NNs do well there
+ struct: normal searches dont
+ dbdr: ¯\_(ツ)_/¯
+ struct: if i remember its like 4 moves per turn
+ dbdr: sounds easier for search, low branching
+ struct: maybe
+ struct: i meant that you do 4 moves per turn
+ struct: not 4 moves available
+ dbdr: ah, got it
+ AllYourTrees: Marchete i think noise weight, cpuct, and num simulations are all interconnected. iirc the goal is for the search to overcome noise, so too low num simulations or too high noise will make it so search cannot overcome noise
+ AllYourTrees: err maybe goal is the wrong choice of words - the noise should be at a level where the search can overcome it if it doesnt benefit the probability?
+ Marchete: noise on a big amount of samples should be cancelled
+ Marchete: but I don't have 5000 TPU years to test
+ AllYourTrees: ya haha
+ Marchete: or crazy numbers like Google
+ Marchete: I think dirichlet noise is cancelled
+ Marchete: maybe I should test that
+ AllYourTrees: how would you test it?
+ Marchete: simulating
+ Marchete: one single state, doing N Searches
+ Marchete: and see what it returns as policy
+ AllYourTrees: maybe the divergence between noisy probs &amp; actual search policy?
+ Marchete: with low count it will be noisy
+ Marchete: I mean that my fear is that dirichlet for example can give diversity
+ Marchete: but I don't want that it was at cost of policy accuracy
+ Marchete: I don't know if you understand my point
+ struct: are you training for c4 yet?
+ AllYourTrees: i think i see
+ Marchete: not yet
+ Marchete: don't worry&#160;:)
+ Marchete:  **yet**
+ AllYourTrees: i've only been doing c4 &gt;.&gt;
+ struct: you are still doing c4?
+ Marchete: with alphazero?
+ struct: I dont think ive updated my c4 in 27 days
+ Marchete: hmm robo is also too high in c4...
+ AllYourTrees: ya ive been mainly updating my stuff locally
+ Marchete: I thought it was Smits with his uber books
+ AllYourTrees: haven't pushed a new network in a while
+ Marchete: you have my code for comparison purposes :D
+ AllYourTrees: finally fixed a few bugs in the last week so now im getting stuff rolling
+ AllYourTrees: yeah :D
+ struct: yeah robo bot is the strongest now
+ Marchete: c4 seems easy to implement
+ Marchete: put bit -&gt; check win
+ Marchete: not like the messy oware
+ AllYourTrees: i agree, i tried looking at oware and was like nope
+ struct: same
+ Marchete: you can win before move
+ Marchete: or you can lose when you think you'll win
+ Marchete: so I can't recommend
+ jacek: c4?
+ Marchete: Oware it's like some farmed just pulled random rules out of his a** and put on the game
+ Marchete: then something doesn't please him and added more artificial rules
+ Marchete: farmer*
+ Netsmile: @hyke
+ jacek: :thinking:
+ Marchete: :hugging:
+ Sajarin_M: hi friends. does anyone know how to change keybinding for "playing all test cases" in the editor&#160;?
+ struct: ctrl + enter
+ Sajarin_M: can i change it
+ struct: dont think so
+ Sajarin_M: but there is an option for changing keybindings in editor settings
+ struct: yeah but this keybind is not related to the editor
+ TobiasA: if a line is parallel to the x axis and another to the y axis how does one know if they are perpendicular assuming the "person" is a computer
+ TobiasA:&#160;?
+ BlaiseEbuth: Because the first line is parallel to the x axis and the other to the y axis&#160;?
+ TobiasA: the computer doesn't like division by zero
+ TobiasA: how would it know then?
+ BlaiseEbuth: Oh yes. I always forget that's so hard to add a 'if' to handle an edge case...&#160;:(
+ TobiasA: what do you mean?
+ struct: if (0) dont divide
+ TobiasA: then do what?
+ Astrobytes: add 42
+ TobiasA: really?
+ Astrobytes: ...
+ TobiasA: ...
+ Hilekat: hello world
+ struct: hi
+ Hilekat: how are you
+ Hilekat: I would like to be a very good programmer
+ Hilekat: how can I do
+ struct: practice
+ dbdr: practice
+ BlaiseEbuth: ...
+ jacek: exercise
+ BlaiseEbuth: train
+ BlaiseEbuth: :steam_locomotive:
+ AllYourTrees: programmers hate this 1 simple trick to being better!
+ dbdr: there was supposed to be a third "practice". we failed
+ struct: I don't think there is any shortcut
+ dbdr: no Control-V you mean?&#160;;)
+ AllYourTrees: didn't github release some ML thing that codes for you recently
+ Astrobytes: Failing a lot helps you succeed as long as you're smart about it.
+ BlaiseEbuth: How to enlarge your code in one week with this NN trick&#160;!
+ dbdr: fail smart, not hard
+ struct: ah yes
+ struct: just do a NN then you dont have to code
+ TobiasA: i'm still confused on the perpendicular thing
+ TobiasA: i can't find the answer on google
+ Astrobytes: and not fail soft either dbdr :P
+ AllYourTrees: simply construct a simple NN to easily write your small code easily
+ dbdr: you minimax much Astrobytes? :D
+ Astrobytes: A little :rofl:
+ BlaiseEbuth: <a rel="nofollow" class="external free" href="https://www.letmegooglethat.com/?q=program+to+check+if+lines+are+pependicular">https://www.letmegooglethat.com/?q=program+to+check+if+lines+are+pependicular</a> TobiasA
+ Uljahn: ^ also you can use dot product for vectors
+ KiwiTae: the projection of one onto the other is a dot~
+ TobiasA: what about the "division by zero problem
+ KiwiTae: what?
+ KiwiTae: lol
+ Uljahn: eh?
+ <b>**BlaiseEbuth slaps TobiasA around a bit with a large IF.</b></p><p><img src="/a/19296690220841" /> KiwiTae: you dont need to compute the slopes
+ FalINTOblivion0112: i got babylon tower lol
+ linjoehan: man this retainig water problem is a beast
+ FalINTOblivion0112: first legend achievement
+ BlaiseEbuth: I'm the only beast here.
+ TobiasA: then what do i need to do
+ nulte: grats
+ BlaiseEbuth: שם המפורש
+ FalINTOblivion0112: * FallNTOblivion slaps nulte around a bit with a large IF.
+ FalINTOblivion0112: how do you do that lol
+ Astrobytes: return of the nulte
+ nulte: do what?
+ Wontonimo: hey TobiasA, add an if statement to look for the case before it happens
+ nulte: im back to finish bt maybe
+ TobiasA: yea then what should i put in the if statement if it is true
+ KiwiTae: TobiasA is trolling us no ay hehe
+ KiwiTae: :kissing_heart:
+ TobiasA: i am not
+ BlaiseEbuth: There's no trolls here.
+ TobiasA: i am at my dumbest moments right now
+ Astrobytes: Didn't even know you had a bt bot
+ Wontonimo: PM me the challenge link 
+ nulte: i dont yet
+ nulte: maybe by the end of today I will
+ KiwiTae: TobiasA you can use hough form if you worry about the /0 its not happening there
+ nulte: its mostly copy paste from c4 bot
+ Astrobytes: if (pawn at the other side) win
+ TobiasA: what is hough form
+ Wontonimo: <a rel="nofollow" class="external free" href="https://www.google.com/search?q=hough+transform+formula&amp;oq=hough+form&amp;aqs=chrome.1.69i57j0i22i30l2.5011j0j4&amp;sourceid=chrome&amp;ie=UTF-8">https://www.google.com/search?q=hough+transform+formula&amp;oq=hough+form&amp;aqs=chrome.1.69i57j0i22i30l2.5011j0j4&amp;sourceid=chrome&amp;ie=UTF-8</a>
+ Wontonimo: ^^ TobiasA
+ nulte: tobiasA step 1 to programming is learn how to search
+ BlaiseEbuth: Should be step 0
+ Astrobytes: Points deducted from Wontonimo for not providing a letmegooglethatforyou link
+ dbdr: step 1/0
+ Astrobytes: :D
+ BlaiseEbuth: Yeah, thx Astrobytes
+ Wontonimo: :D 
+ TobiasA: i ask ppl here when i don't get the answer from searching
+ TobiasA: but you guys are beating around the bush
+ Wontonimo: :O
+ Astrobytes: Yes but you're supposed to keep searching with the new info, so that you learn
+ BlaiseEbuth: If you don't find, search more...
+ TobiasA: what if i never find
+ Astrobytes: Then it's all over. 
+ KiwiTae: u get u , v directions from those lines just check u.v = 0
+ nulte: <a rel="nofollow" class="external free" href="https://www.codespeedy.com/python-program-to-check-if-two-lines-are-parallel-or-not/">https://www.codespeedy.com/python-program-to-check-if-two-lines-are-parallel-or-not/</a>
+ BlaiseEbuth: Then stop searching for the solution, and buld your own with what you have
+ TobiasA: sigh
+ KiwiTae: u cn also compute the atan2 between them
+ BlaiseEbuth: Or you can just copy paste the solution given by nulte.
+ dbdr: while True: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/5e916876-dbc3-4341-827c-fe9c1b1e76d7">http://chat.codingame.com/pastebin/5e916876-dbc3-4341-827c-fe9c1b1e76d7</a>
+ Astrobytes: Classy!
+ TobiasA: thanks
+ dbdr: :it's_a_joke:
+ BlaiseEbuth: You mean the angle is involved in the 0 thing?! :o What a surprise
+ KiwiTae: :joy:
+ TobiasA: how do i rotate it -_-
+ <b>**Astrobytes runs away</b></p><p><img src="/a/29546600139885" /> nulte: I dont know
+ BlaiseEbuth: שם המפורש
+ dbdr: :no_mouth:
+ TobiasA: don't you run a way
+ TobiasA: away*
+ KiwiTae: [[cos -sin][sin cos]]
+ BlaiseEbuth: Thx Kiwipedia
+ Astrobytes: hahaha
+ KiwiTae: &gt;&lt; im trying to pospone translating somethin in js&#160;:/
+ TobiasA: this is exactly what i meant by beating around the bush:confounded:
+ TobiasA: if only i was smart enough to know what [[cos -sin][sin cos]] means
+ KiwiTae: its the rotation transform
+ BlaiseEbuth: Stop with this bush, there's a f****n' forest behind.
+ TobiasA: :no_mouth:
+ TobiasA: i know it is the rotation transform
+ KiwiTae: lik ejust take  a paper draw a unit circle 
+ KiwiTae: draw the x axis 
+ TobiasA: but do you believe that if i write that in the if statement it will work?
+ Astrobytes: This is rapidly becoming a derp-endicular situation
+ KiwiTae: and rotate the paper
+ KiwiTae: done
+ linjoehan: AAAGGGRRRHHHHH Process has timed out. This may mean that your solution is not optimized enough to handle some cases.
+ BlaiseEbuth: TobiasA, a serious advice: stop trying to do black magic and start thinking about a logic solution.
+ Astrobytes: fixit
+ TobiasA: i have been thinking for two days
+ nulte: o.o
+ KiwiTae: its for which puzzle?
+ TobiasA: i have probably gone insane
+ linjoehan: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/retaining-water">https://www.codingame.com/ide/puzzle/retaining-water</a>
+ KiwiTae: TobiasA insane is good
+ Astrobytes: There is no sanity here.
+ linjoehan: next idea
+ TobiasA: insane is good except when it isn't
+ BlaiseEbuth: Sanity is so 20th centur'ish
+ Astrobytes: "Sanity, definitely my favourite sin" :P
+ KiwiTae: linjoehan i struggled with that one a bit goodl luck hehe
+ Astrobytes: isn't that one simpler than it looks at first?
+ Astrobytes: iirc, don't think I solved it but I remember when it was in WIP
+ KiwiTae: its not hard once you get it ~
+ TobiasA: in a grid there is a point that has two neighbours how do i know if the neighbours are in this formation &gt;&gt; ".&#160;:" and not this &gt;&gt;". . ."
+ Astrobytes: check to the left, to the right, and up?
+ KiwiTae: +1
+ KiwiTae: def an overkill to check for perp lines there hehe
+ Astrobytes: Ever so slightly lol
+ dbdr: train a NN
+ Astrobytes: A raycasting NN!
+ TobiasA: :pensive:
+ eulerscheZahl: "There is no sanity here."you surely didn't play Code of Kutulu
+ BlaiseEbuth: :cloud_lightning:
+ Astrobytes: But I surely did!
+ BlaiseEbuth: Of course we did. That's precisely why
+ eulerscheZahl: and you lost all your sanity there?
+ TobiasA: at this stage of insanity training a NN might not be a bad idea
+ Astrobytes: TobiasA: You want to check the neighbours of the points on the grid - so check the neighbours of the points on the grid.
+ BlaiseEbuth: That's a trap, I don't trust you
+ TobiasA: you did it again:tired_face:
+ TobiasA: the bush thing
+ Astrobytes: Is this for real?
+ TobiasA: how do you expect me to understand what you mean by that
+ BlaiseEbuth: שם המפורש
+ Astrobytes: TobiasA 06:43PMin a grid there is a point that has two neighbours how do i know if the neighbours are in this formation &gt;&gt; ".&#160;:" and not this &gt;&gt;". . ." - CHECK THE NEIGHBOURS OF THE POINT
+ <b>**BlaiseEbuth give up and grabs some popcorn.</b></p><p><img src="/a/46577089202819" /> AroOmega: Just to confirm. There's not multiple CPUs on the VM that runs your code, right?
+ Astrobytes: Look left, look right, look up!
+ Astrobytes: We get only one core AroOmega
+ AroOmega: Gotcha. Thanks!
+ eulerscheZahl: you can try hyperthreading. but it's not worth the effort
+ eulerscheZahl: AVX can give some boost
+ Astrobytes: ^
+ nulte: performance does not matter
+ Astrobytes: :rofl:
+ dbdr: famous last words
+ eulerscheZahl: if your ranking doesn't matter, then you are right
+ KiwiTae: nulte thats what she said
+ Astrobytes: Kiwi turning into jacek lol
+ eulerscheZahl: jacek = KiwiTae?
+ eulerscheZahl: (╯°□°）╯︵ ┻━┻
+ Astrobytes: mwahaha
+ KiwiTae: :joy: nooo laa 
+ BlaiseEbuth: You have to rotate your pic now kiwik
+ nulte: chats keep crashing for me&#160;:(
+ nulte: chat*
+ eulerscheZahl: are you using the Microsoft Internet Exploder?
+ Astrobytes: You shouldn't let them drive nulte
+ eulerscheZahl: with Adobe Crash Player plugin
+ Astrobytes: :D
+ nulte: just chromium incognito window
+ BlaiseEbuth: You don't want your gf to know that you came on CG?
+ nulte: yes, she banned me from programming&#160;:(
+ Astrobytes: For premature optimization?
+ val-6680: someone code his tron bot less than 200 lines&#160;?:)
+ nulte: She thinks it might be related
+ linjoehan: SOLVED! but it's not the best answer I'm sure
+ KiwiTae: linjoehan GG
+ Wontonimo: val-6680 , mine is 124 lines
+ eulerscheZahl: solved what?
+ Wontonimo: only silver though
+ Astrobytes: Retaining Water
+ Wontonimo: why you ask val-6680&#160;?
+ linjoehan: my solution uses that the height is between 0 and 26. it will fail for 10^9
+ TobiasA: i finally did it, i just had to add "NOT" in front of my badluck
+ BlaiseEbuth: smart
+ TobiasA: the painful part is that all i literally did was add "not":cry:
+ KiwiTae: val-6680 i got 160lines mid gold
+ Wontonimo: val was asking for my src
+ Astrobytes: well that's 2 whole days you'll nver get back TobiasA
+ BlaiseEbuth: Yeah, already kicked it from #fr
+ Astrobytes: Shame on you val-6680
+ BlaiseEbuth: 🔔
+ TobiasA: mhm, i am a victim of time:cry:
+ Wontonimo: nice KiwiTae!  
+ Wontonimo: and in python none-the-less, so one arm tied behind your back
+ KiwiTae: :joy:
+ BlaiseEbuth: 6 lines top100 legend. Can do less
+ KiwiTae: BlaiseEbuth you godlike golfed your solution?
+ Wontonimo: 6 lines?  golfed?
+ BlaiseEbuth: No. I use C++ and I can just remove \n after every&#160;;
+ KiwiTae: :joy:
+ Wontonimo: i'd consider a ';' a new line
+ Wontonimo: semantics 
+ eulerscheZahl: for(int i = 0;i &lt; 100;i++) {
+ BlaiseEbuth: Oh&#160;? What about for(;;)
+ Astrobytes: lol euler
+ BlaiseEbuth: eZ the speedy toad
+ eulerscheZahl: only Fr calls me eZ
+ Wontonimo: Le eZ
+ BlaiseEbuth: And am I not?
+ eulerscheZahl: you are an Fr citizen how took a wrong turn and landed in world
+ Astrobytes: You're just BeelzEbuth. Fr language is just a cover.
+ BlaiseEbuth: Of course.
+ BlaiseEbuth: Very baguette
+ Astrobytes: Blaise hangs around here to improve his killcount
+ BlaiseEbuth: I don't kill anyone. I do business... Words matter
+ Astrobytes: Crushing spammers with his baguette... "BREADSHOT!"
+ BlaiseEbuth: -_-
+ BlaiseEbuth: I laughed
+ Astrobytes: :rofl:
+ Wontonimo: am i about to see a mod kick a mod&#160;?
+ BlaiseEbuth: That's like the zero division
+ Astrobytes: lol
+ val-6680: 236 lines of codes&#160;:)
+ nulte: just use avx then you will have no problem with zero division
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://i.redd.it/qoe0gqe9es371.jpg">https://i.redd.it/qoe0gqe9es371.jpg</a>
+ Astrobytes: Which ones val? Morse? Enigma?
+ Astrobytes: lol
+ eulerscheZahl: mods are immune to kick/bansorry to disappoint you Wontonimo
+ Wontonimo: nice double barrel eZ
+ nulte: maybe they cant kick/ban at all
+ BlaiseEbuth: Use roman numerals -&gt; no problem with zero div
+ Astrobytes: Never divide. Simple.
+ Wontonimo: or only with a numerator of 1 and a denominator of a whole number
+ Wontonimo: i though they had a variant of fraction in the form 1/n where n&gt;=1
+ Wontonimo: and it took a 3 page proof to show that 1/2 = 1/3 + 1/6
+ BlaiseEbuth: Maths these days...
+ Astrobytes: Only 3 pages eh
+ Wontonimo: <a rel="nofollow" class="external free" href="https://en.wikipedia.org/wiki/Roman_numerals#Fractions">https://en.wikipedia.org/wiki/Roman_numerals#Fractions</a>
+ Wontonimo: i don't have the source for the 3 pages claim
+ Astrobytes: I like to leave that reading to mathematicians. I'm cool with taking their word for it mostly.
+ jacek: dont trust mathematicians
+ nulte: mathematicians created 0
+ Astrobytes: Don't trust the numbers either
+ TobiasA: i don't like 0:triumph:
+ Astrobytes: Pretend it's nothing.
+ nulte: in physiscs there is no 0
+ BlaiseEbuth: Right. And dividing by 0 give infinity
+ TobiasA: instead there are black holes
+ Astrobytes: You need to broaden your event horizons.
+ TobiasA: how?
+ Astrobytes: Use the 0s
+ TobiasA: waaaaaht
+ TobiasA: i'll pass 
+ jacek: make some square root of negative number
+ nulte: just play paper soccer there is no 0 there
+ Marchete: I liked paper soccer, 5 stars
+ Marchete: not like damn CSB
+ Marchete: I can't understand why people like that
+ eulerscheZahl: how many stars did you give to CSB?
+ Marchete: 4 :rofl:
+ Marchete: it was long time ago
+ Astrobytes: fixit
+ Marchete: done
+ eulerscheZahl: i only used that star feature 1 single time
+ Marchete: 2 stars
+ eulerscheZahl: 1 star for <a rel="nofollow" class="external free" href="https://www.codingame.com/training/hard/big-bang-theory---sheldons-array-puzzle">https://www.codingame.com/training/hard/big-bang-theory---sheldons-array-puzzle</a>
+ Marchete: 1 star are reserved for broken multis with ugly rules
+ eulerscheZahl: direct copy from hackerrank, I wanted the bot to remove it
+ eulerscheZahl: still rated too high to get cleaned up
+ Marchete: so you solved it to try to clean it up?
+ Astrobytes: darkhorse64: Abalone is ready?
+ eulerscheZahl: you don't have to solve it to rate it
+ eulerscheZahl: just submit 0% is enough
+ Marchete: ahh
+ Marchete: but, but you have 100%
+ eulerscheZahl: i solved it because the task itself is an interesting one. i just don't like direct copies
+ Astrobytes: Could not solve: 1 star
+ <b>**Marchete looks confused</b></p><p><img src="/a/43135502422075" /> eulerscheZahl: except for vindinium :D
+ Astrobytes: That was at least with permission
+ eulerscheZahl: MIT license
+ eulerscheZahl: hackerrank has different terms of service
+ Astrobytes: Indeed
+ Marchete:  Approved by an anonymous CodinGamer an anonymous CodinGamer an anonymous CodinGamer
+ Marchete: looks fine to me
+ Marchete: not suspicious
+ eulerscheZahl: these are supposed to be alt accounts of the creator
+ eulerscheZahl: they also approved Space Maze
+ Marchete: I can't believe that!
+ Astrobytes: :D
+ nulte: alt accounts o.o
+ eulerscheZahl: aka smurfs
+ Astrobytes: You don't know nulte euler?
+ Westicles: you need 20 ratings to delete?
+ eulerscheZahl: should I? wasn't around that much recently
+ nulte: its public class
+ Astrobytes: From a while ago and yes you should
+ eulerscheZahl: then i hereby apologize 
+ eulerscheZahl: if nulte doesn't know me either, it would help to make me feel less guilty&#160;;)
+ Astrobytes: nulte 08:05PMits public class
+ eulerscheZahl: struct?
+ Astrobytes: :tada:
+ eulerscheZahl: why?
+ eulerscheZahl: did he delete again?
+ nulte: i just come here to hide and test random stuff
+ Astrobytes: He accidentally gave it away some time back
+ Astrobytes: But an Astrobytes never forgets
+ eulerscheZahl: wait, struct has a girlfriend? when did that happen?
+ nulte: nah it was joke
+ Astrobytes: I'm not familiar with his personal relationships tbh :D
+ Astrobytes: I'm still proud of the premature optimization joke.
+ Westicles: 2 days on top of golf now.  I thought they would take me out by now
+ Astrobytes: well played Westicles. That effort has payed off it seems. Rather you than me tho lol, I'm not masochistic enough to put myself through all that :D
+ darkhorse64: Yep, Abalone looks ready. I have not yet written a bot for it. My submit is a slightly modified copy of the boss
+ nulte: your solution is in bash=
+ nulte: *?
+ Astrobytes: darkhorse64: ah ok, I've not written anything for it yet 
+ Westicles: I think pardo is the only one who cares enough to whack my scores even if it doesn't improve his, so once he notices I'll fall back
+ Astrobytes: Kudos still, a laborious task.
+ darkhorse64: What a jump&#160;! You found new tricks&#160;?
+ KiwiTae: gg Westicles
+ Westicles: Not really, mostly just optimizing ones from the easy puzzles
+ Astrobytes: Deep diving into the netherworld of each language is not always fun
+ BugKiller_328: Hi
+ BugKiller_328: Can I ask basic question about constructor&#160;?
+ BugKiller_328: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/07770a80-0e88-4d8c-88cf-00667809f4e9">http://chat.codingame.com/pastebin/07770a80-0e88-4d8c-88cf-00667809f4e9</a>
+ BugKiller_328: what's the difference between 1st and 2nd in making constructor
+ BugKiller_328: I saw that it worked differently so I'm asking to know.
+ BugKiller_328: 1st. that default constructor is called even I call another constructor with parameter.
+ BugKiller_328: 2nd is not called.
+ BugKiller_328: sorry nevermind..
+ BugKiller_328: it seems like same for 1st way and 2nd way to make default constructor.
+ Wontonimo: hey BugKiller_328
+ Astrobytes: What language?
+ BugKiller_328: c++
+ BugKiller_328: sorry, I think it's same.
+ BugKiller_328: yes Wontonimo! 
+ Astrobytes: in future, post real code. Otherwise we'll debug the lack of semicolons or something.
+ Astrobytes: Also, there are no access specifiers
+ BugKiller_328: Astrobytes yes I'll.. thanks.
+ Astrobytes:&#160;:+1:
+ nulte: im not sure there is any diference
+ Astrobytes: other than a compiler warning from VS then no
+ BugKiller_328: yeah, nevermind. it's same. I've just confused myself.
+ nulte: I use the 2nd way though
+ nulte: it allows me to do
+ nulte: A(int data):data(data){}
+ Astrobytes: same, it's cleaner
+ BugKiller_328: yes, I always used 2nd, but today I saw 1st way and I thought it could another functionality at first.
+ BugKiller_328:&#160;:)
+ Astrobytes: and that works, sadly. Which is confusing.
+ Astrobytes: @nulte not @BugKiller_328
+ Astrobytes: Sometimes I just think RIIR is a good idea, then I try to RIIR
+ nulte: whats RIIR?
+ Astrobytes: Rewrite It In Rust
+ Astrobytes: not to be confused with RAII
+ nulte: whats RAII ...?
+ Astrobytes: Don't test my patience :P
+ jacek:  
+ Astrobytes: do you have an abalone bot jacek, a real one that is?
+ jacek: no
+ Astrobytes: Meh. Seems ready for approval. Don't do it.
+ jacek: hm?
+ Astrobytes: Don't just blindly approve it I mean. 
+ CSharperDude: Hi there, I just signed up
+ CSharperDude: im testing my c# skills but I cant find a way to test my program to get the debugs, any help?
+ Astrobytes: print to stderr
+ Astrobytes: Or Console.Error in C#
+ CSharperDude: but i dont see a run button, to actuallrun the code 
+ CSharperDude: only the test cases buttons
+ CSharperDude: which only get red since is not complete yet
+ Astrobytes: That runs your code
+ Astrobytes: Check this:<a rel="nofollow" class="external free" href="https://virtual-atom.com/codingame/introduction/">https://virtual-atom.com/codingame/introduction/</a>
+ Astrobytes: Use Console.Error to output debug info when you run a testcase
+ CSharperDude: thank you, 
+ Astrobytes: You're welcome
+ Kozakx: i dont understand what to do
+ Astrobytes: Who does
+ Kozakx: no, seriously, i move my pod and before it reaches 1st checkpoint it says it's too slow
+ Astrobytes: Go faster?
+ Kozakx: how? i set thrust to 100
+ Astrobytes: Maybe you're aiming slightly wrong
+ Kozakx: how do i get coordinates of checkpoint?
+ Astrobytes: you get the coordinates of the next checkpoint, you can store them
+ Kozakx: but where are the coordinates?
+ Astrobytes: checkpointX, checkpointY or something similar
+ Astrobytes: it's given in the input. But only for the next checkpoint, if you want them all you have to save them
+ Astrobytes: *nextCheckpointX, nextCheckpointY, something like that
+ Kozakx: ok i see
+ Kozakx: but i cannot get through that, just says im too slow
+ Kozakx: it starts the code and says im too slow
+ Astrobytes: paste your code, sounds like you might not be outputting anything
+ Kozakx: i just have the first command
+ Kozakx:     print(str(next_checkpoint_x) + "100 " + str(next_checkpoint_y) + " 100")
+ KiwiTae: you are missing spaces
+ Astrobytes: and printing 100 twice
+ KiwiTae: print(next_checkpoint_x, next_checkpoint_y, 100)
+ Kozakx: it works now, thank you
+ Astrobytes: :tada:
+ nulte: bt taking a while to do
+ Astrobytes: I'll happily take any optimisation tips for that
+ nulte: ill see what I can come up with
+ nulte: I was doing a mistake of getting all the moves on rollout
+ nulte: which is a bit expensive
+ Astrobytes: I still have alphabeta, I go between 28th and 21st
+ nulte: Seems good
+ Astrobytes: There are other things I can do but I was thinking MCTS ept might just be the easiest
+ nulte: I never did ept
+ Astrobytes: Once I get a good alphabeta going, switching to EPT isn't so difficult
+ doomento: Guys, I think I will master python
+ doomento: and I figured out why I can't solve these problems
+ doomento: I wasn't thinking programatically
+ Astrobytes: Don't think. Feel! It's like a finger pointing at the moon.
+ doomento: I still don't know how to get [highest] 
+ doomento: cause I can't think
+ doomento: :astonished:
+ KiwiTae: whats the max "highest" between 1 and 10?
+ doomento: 10
+ nulte: seems like a trick question
+ nulte: how did you get 10?
+ doomento: because they said max so I thought get the highest number between 1 and 10
+ nulte: do you know how to do that in code?
+ doomento: I can uh, try
+ nulte: checking 2 numbers is quite simple in most programming languages
+ nulte: if (a &gt; b)
+ Astrobytes: result = max(a, b)
+ nulte: yeah that is simpler
+ KiwiTae: result = (a+b+abs(b-a))*.5
+ nulte: :nauseated_face:
+ KiwiTae: -
+ ANONYMOUS42: print(10)
+ doomento: :fearful:
+ Astrobytes: solved it yet demento?
+ doomento: no, I'm still trying a bunch of other things
+ Astrobytes: everything other than getting the max right :smirk:
+ doomento: I'm supposed to do that?
+ doomento: nvm
+ nulte: well you did say you couldnt get the highest
+ doomento: ok ok:spy_tone4:
+ Astrobytes: maximum and minimum, get those concepts down
+ Astrobytes: It's when you have a huge mother and a tiny mother
+ nulte: check the highest bit that is not present  in the other number
+ nulte: but care on negative numbers
+ Astrobytes: struct
+ Astrobytes: nulte I mean
+ nulte: astro
+ Astrobytes: Is there a  faster way to do this:_tzcnt_u64(_pdep_u64(1ULL &lt;&lt; (rnd64.getRandomInt(_mm_popcnt_u64(board))), board));
+ nulte: whats _tzcnt_u64?
+ Astrobytes: ctzll
+ nulte: is that to get a random move?
+ doomento: So I have to get the highest mountain and then shoot it. Since mountain_h is the mountain height I need to find the index of the highest mountain then shoot it right?
+ Astrobytes: aye
+ nulte: usually i dont need ctzll
+ nulte: because im getting the mask already
+ nulte: then I can simply do board |= move
+ nulte: does that make sence?
+ nulte: currently a move for me in breakthrough is just 2 set bits on a uint64_t
+ Astrobytes: Yes. I need to re-read a few 
+ nulte: then I can dogs.boards[current_player] ^= move;gs.boards[current_player ^ 1] &amp;= ~move;
+ nulte: But im not sure how well this does
+ nulte: I havent finished the bot yet
+ Astrobytes: that makes sense. I currently have mine as 2 uint8 (from, to) and a score (helps with ordering)
+ nulte: yeah it makes sence for minimax
+ nulte: sense or sence?
+ Astrobytes: sense
+ nulte: thanks
+ Astrobytes: np
+ Astrobytes: and for some reason I use bextr to get stuff auto from = _bextr_u32(mv, 0, 6); 
+ nulte: also I dont think there is potential for avx in bt
+ Astrobytes: not for anything useful, eval maybe?
+ nulte: Im not sure its easy to eval moves ehre
+ nulte: here*
+ nulte: but I could be wrong
+ Astrobytes: rank placement of the pawns is important
+ nulte: isnt it more important to keep pieces together?
+ Astrobytes: yes there's the protection part, but think in terms of attack and defense, where is the threat?
+ nulte: Do you take into account other pieces placement when evaling mvoes?
+ Astrobytes: Yes
+ nulte: ah makes more sense then
+ nulte: I thought you were evaling based on piece position only
+ Astrobytes: I should work a little more on the eval tbh.
+ nulte: I wonder if quiescence search can help here
+ Astrobytes: Possibly. I had a little improvement with using killer move, I tried non-capturing only but that doesn't work here (not for me at least)
+ nulte: what is killer move?
+ Astrobytes: easier to link to it than explain:<a rel="nofollow" class="external free" href="https://www.chessprogramming.org/Killer_Heuristic">https://www.chessprogramming.org/Killer_Heuristic</a>
+ nulte: I see
+ Astrobytes: Sorry, I'm quite into my alphabeta minimaxes&#160;:)
+ nulte: its totally fine
+ nulte: I like to do simple mcts
+ nulte: and then optimize and add a few things to the rollout to make it smart
+ nulte: my c4 is the example of it :D
+ Astrobytes: You may as well do EPT in some cases. Where you at now in C4? Still chasing robo?
+ nulte: nah, was never a fight tbh
+ nulte: I havent improved it
+ Astrobytes: Yeah, looked at the Oware board recently?&#160;:(
+ nulte: yeah but its a good thing
+ nulte: One day ill try to do a NN aswell
+ Astrobytes: Yeah same, it's really cool to see actually
+ nulte: only way I could fight him is by adding a book
+ nulte: but even msmits is struggling with it
+ Astrobytes: lol, then you know it's trouble
+ nulte: There is one more person with book
+ nulte: but is only 3 plys or something
+ Astrobytes: I didn't look recently, who has it?
+ nulte: fica
+ Astrobytes: ah right
+ Astrobytes: I remember from the chat actually
+ Astrobytes: Oh yeah, my _tzcnt_u64 thing is from Clobber, not BT
+ Astrobytes: Still have work to do on that one
+ nulte: I still use i though on c4
+ nulte: but only on expand
+ nulte: So I dont need to store the mask on the node
+ nulte: 1 byte vs 8 bytes
+ Astrobytes: Yeah, I need to work on my clobber nodes tbh
+ Astrobytes: Refactoring needed
+ Astrobytes: Anyway, I gotta shoot. Take care man, see ya tomorrow
+ nulte: gn
+ Raibatsu: Chuck Norris puzzle has exactly 80,000 solvers. idk if I should solve it and ruin that perfect number though&#160;:(
+ MorningStar37: You must, because you can.
+ xiaoyaozi: go run main.go

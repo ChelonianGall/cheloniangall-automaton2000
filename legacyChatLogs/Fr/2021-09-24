@@ -1,0 +1,436 @@
+ BlaiseEbuth: Yo tout l'monde&#160;! Automaton2000&#160;!
+ Automaton2000: BlaiseEbuth&#160;: c'est un peu les perfs
+ BlaiseEbuth: Tu m'étonnes
+ philRG: collections.dequeue(), on dirait que c plus rapide que List()
+ philRG: o/
+ BlaiseEbuth: Ca dépends pour quoi...
+ philRG: passé de 700/1010 à 500/1010 en l'implémentant, ça fait un gain de 20%
+ BlaiseEbuth: -s
+ philRG: sur des tuples de 4 éléments dans le dernier est une liste de tuples
+ philRG: s/dans/dont
+ philRG: c tout de même chiant python. Et comment ça se fait que j'ai plus de timeout dans l'IDE que dans l'arène (quoique j'ai pas analysé tous les replays de l'arène: ie 428 replays...)
+ philRG: s/plus/davantage
+ BlaiseEbuth: C'est mieux que quand ça timeout en arène et que tu reproduit pas en IDE...
+ philRG: bot qui bat le boss mais qui monte pas, possible aussi (mais ce scénario, je l'imputais à une stratégie molle)
+ philRG: faudrait que je mette une limite de timeout dans mon code, si l'énoncé indiquait sa valeur :sob:
+ BlaiseEbuth: Sur&#160;?
+ philRG: great escape
+ philRG: sur le forum, des gars parlent de 110-120ms mais c le temps consommé par leur IA
+ BlaiseEbuth: 100ms
+ philRG: ah ok je fais partir dessus :ok_hand:
+ philRG: faudra que je tune ma fonction def can_place(wall): <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/7a94f712-8bde-4fbb-9551-73021c9a30e3">http://chat.codingame.com/pastebin/7a94f712-8bde-4fbb-9551-73021c9a30e3</a>
+ philRG: un petit coup de random.shuffle(possible_walls) avant de jouer mes placement de mur et un temps limite
+ philRG: ah ben non je dois avoir un bug quelque part au tour précédent il me reste 83ms pour simuler mes placements de mur: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/582359761">https://www.codingame.com/share-replay/582359761</a>
+ philRG: dans mon IDE: remaining time before wall placing: -298 ms
+ Stilgart: tu lances bien ton timer juste après avoir lu la première entrée du tour&#160;?
+ philRG: hehe je crois
+ philRG: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/5f8d7672-5efb-4f91-a1b5-db013e1585df">http://chat.codingame.com/pastebin/5f8d7672-5efb-4f91-a1b5-db013e1585df</a>
+ Stilgart: c'est déjà perdu
+ Stilgart: après avoir lu la *première entrée*
+ BlaiseEbuth: Bah c'est après
+ Stilgart: si le referee lag à te donner la deuxième entrée, c'est décompté sur ton temps de calcul
+ philRG: je vais pas péter ma list comprehension pour un millionième de ms quand même&#160;;-)
+ philRG: pourquoi il lagguerait à te donner la deuxième entrée.
+ Stilgart: parce que CG
+ BlaiseEbuth: Bah oui, c'est du java et c'est fait par cg, je vois pas ce qui pourrait merder... :smirk:
+ philRG: tour avant mon timeout: remaining time before wall placing: 86 msmy path = ['LEFT', 'UP', 'UP', 'UP', 'UP', 'RIGHT', 'RIGHT', 'RIGHT']time elapsed = 14 ms
+ Stilgart: philRG: et si java décide de faire un bon gros GC après ta première lecture&#160;?&#160;:)
+ Stilgart: (vu que c'est juste après une IO, c'est un placement assez logique en plus)
+ philRG: au tour du timeout dans le replay, ça marche dans mon IDE, mais ça rame
+ philRG: remaining time before wall placing: -273 msmy path = ['LEFT', 'LEFT', 'UP', 'UP', 'UP', 'UP', 'RIGHT', 'RIGHT', 'RIGHT', 'RIGHT', 'RIGHT']time elapsed = 373 ms
+ Stilgart: après, comment tu gères ton chrono&#160;?
+ Stilgart: si tu checkes après un appel à une fonction qui prend entre 2ms et 300ms ...&#160;:)
+ philRG: ben si je dépasse le remaining time, j'arrête mon processing, enfin j'ai timeout avant
+ philRG: j'ai peut-être un bug dans mon bfs qui me fait timeout dans certaines conditions
+ Stilgart: ça veut dire quoi "si je dépasse"&#160;?
+ Stilgart: parce que si tu dépasses de beaucoup... timeout même avec une grosse marge
+ philRG: avant je calcule les chemins de sortie pour savoir qui est en tête
+ Stilgart: il faut que le temps de calcul soit stable entre chaque check
+ philRG: je gère le timeout seulement si mes simulations de placement de mur pas avant
+ Stilgart: typiquement, si tu fais un bfs et que tu vérifies après chaque profondeur, ça va foirer
+ philRG: ouais je vais peut-être rajouter un timeout dans mon bfs je l'ai pas fait
+ Stilgart: au moins un affichage du temps qu'il prend
+ Stilgart: pour voir si le pb peut venir de là
+ philRG: remaining time after BFS player 0 = 370 ms
+ BlaiseEbuth: 370 sur 100&#160;? Ca va t'es large
+ philRG: remaining time after BFS player 1 = 0 ms
+ Stilgart: juste le plus court chemin vers le bord&#160;?
+ philRG: oui
+ philRG: fonctionnellement marche bien dans mon IDE 
+ Stilgart: donc ça doit pas être ça
+ Stilgart: (je vois mal comment ça pourrait prendre 300ms sur une grille aussi petite
+ Stilgart: )
+ Stilgart: donc vérifie que tu fais un check régulièrement ensuite
+ Stilgart: et aussi que c'est pas ton premier check qui te donne 300ms
+ philRG: à mon avis c la stratégie du bot qui me fait timeout
+ philRG: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/bad65f14-f309-440c-904a-f566a7bdcdff">http://chat.codingame.com/pastebin/bad65f14-f309-440c-904a-f566a7bdcdff</a>
+ philRG: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/582367591">https://www.codingame.com/share-replay/582367591</a>
+ philRG: je timeout au tour suivant
+ BlaiseEbuth: C'est toujours la faut du bot Automaton2000
+ Automaton2000: mais c'est pas bien dur
+ philRG:&#160;:-D 
+ Stilgart: Automaton2000: si, si, tu es bien dur de la tortue
+ Automaton2000: j'ai essayé de faire du pathfinding
+ BlaiseEbuth: philRG aussi Automaton2000
+ Automaton2000: bon c'est pas très clair
+ philRG: Automaton2000 nan mais le boss silver est coriace
+ Automaton2000: est ce qu'on peut faire un coc pour le lolz, et en fait le souci c'est que la valeur de ...
+ BlaiseEbuth: :scream:
+ philRG: ooops j'ai fait déraillé Automaton2000 avec mon bot python
+ Automaton2000: tu dois être un peu à l'arrache
+ philRG: :grimacing:
+ RashidLadj: Bonjour tout le monde, l'und e vous metrise c#&#160;? ( c'est ma premiere uilisation ) , j'ai une list&lt;list&lt;int&gt;&gt; je veut appliquer un slice afin de recuperer chaque colomn a part
+ RashidLadj: qu'elle est la meilleure maniere de faire
+ philRG: cg m'a mis au niveau Silver en optimisation, mais je trouve que c'est bien surfait
+ philRG: je suis légende en algorithmes, à mon avis CG a du compter mon nombre de lignes python&#160;:-o
+ philRG: RashidLadj j'ai fait du C# en formation mais je pratique plus, et ma mémoire courte est très mauvaise. En python, je suis un peu mieux car je pratique sur des thèmes ludiques qui font travailler la partie cognitive de mon cerveau
+ philRG: j'ai une list&lt;list&lt;int&gt;&gt; je veut appliquer un slice afin de recuperer chaque colomn a partqu'elle est la meilleure maniere de faire
+ philRG: Ca me parle pas
+ philRG: as-tu plutôt un exemple de code?
+ philRG: Stilgart BFS player 1 - nodes_count = 434remaining time after BFS player 1 = 1.33 msBFS player 0 - nodes_count = 85594remaining time after BFS player 0 = 362.21 ms
+ RashidLadj: Bonjour Phil RG, je te remercie pour ta reponse, pareil de mon coté, je pratique beaucoup plus python que les autres language
+ RashidLadj: alors, j'ai une matrice&#160;: List&lt;List&lt;int&gt;&gt; sudokuGrid ( je ne sais pas non plus si cest la meilleure maniere dedeclarer une matrice 2D sous c# )
+ Alshock: @RashidLadj Alors je suis pas un spécialiste du C#, mais si je comprends correctement ce que tu veux c'est une transposée non&#160;?
+ RashidLadj: ahh oui , pas con ça, je fais la transposée puis je recup chaque ligne a part ( bonne idée )
+ RashidLadj: mais en realité ce que je demandé c'est ça 
+ Alshock: Ah si la taille est de 9x9 doit y avoir plus simple qu'une list mais ça je te laisse voir avec ton langage
+ RashidLadj: yep
+ RashidLadj: en grops en python c'est ça
+ RashidLadj: test = np.sort(sudokuGrid[i,&#160;:], axis=None)
+ RashidLadj: test = np.sort(sudokuGrid[:, j], axis=None)
+ RashidLadj: jessaye de convertir ça en c#
+ Alshock: Dans les trucs que je vois ils font leurs arrays 2D avec des Type[,]<a rel="nofollow" class="external free" href="https://stackoverflow.com/questions/27427527/how-to-get-a-complete-row-or-column-from-2d-array-in-c-sharp">https://stackoverflow.com/questions/27427527/how-to-get-a-complete-row-or-column-from-2d-array-in-c-sharp</a>
+ Eliondir: Hello, savez vous quand le codinggame fall challenge commencera? impossible de trouver la date
+ Alshock: Elle n'est pas encore donnée sauf erreur de ma part Eliondir
+ Eliondir: Ok
+ Eliondir: Merci&#160;:)
+ RashidLadj: @Alshock je check merci
+ Alshock: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/d3cb5eb2-329f-432c-b899-79576b114ae9">http://chat.codingame.com/pastebin/d3cb5eb2-329f-432c-b899-79576b114ae9</a>
+ RashidLadj:&#160;;)
+ Stilgart: philRG: ton bfs parait bogué du coup
+ Stilgart: faut pas 85k noeuds pour trouver un chemin vers la sortie
+ Bon[]Crayon: Salut les codeuses et les codeurs de l'extrême :ghost:
+ Bon[]Crayon: Salut Automaton2000
+ Automaton2000: je pense qu il y a des devs qui ont fait la remarque
+ Renamed: Yop la commu
+ Pantoine: hello à touset bonjour Automaton2000
+ Automaton2000: il nous a fait une belle jambe
+ Bon[]Crayon: o/
+ philRG: Stilgart: merci&#160;:-)
+ Stilgart: de rien
+ Stilgart: prochain objectif, passer devant moi à TGE
+ Stilgart: (comme ça, ça me motivera peut-être à le refaire ce multi)
+ Stilgart: :D
+ philRG: :thumbsup: je fais çà et ensuite on passe devant leojean&#160;:-)
+ philRG: chercher le bug #soutienpourlesvieux
+ philRG: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/1af585f0-53b0-4153-be31-ef1b0036db0b">http://chat.codingame.com/pastebin/1af585f0-53b0-4153-be31-ef1b0036db0b</a>
+ Air_0: le double egale best_wall == wall à remplacer par un simple&#160;?
+ philRG: ça je viens de le trouver lol
+ Air_0: ma réponse etait pas rapide en effet xD
+ philRG: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/582400780">https://www.codingame.com/share-replay/582400780</a>
+ philRG: bon là c mieux
+ philRG: reste plus qu'à définir une vraie stratégie
+ Alshock: Le "value = max_value" de ton code est collector aussi @philRG
+ Alshock: "Si je trouve une meilleure solution, viens on dit elle est juste aussi bien que la précédente, comme ça pas besoin de changer
+ philRG: AIshock faut l'encadrer&#160;:-D
+ philRG: ah je me rapproche de dwarfie&#160;:)
+ <b>**dwarfie part en courant</b></p><p><img src="/a/26090852120005" /> nicola: dwarfie, tu veux un coup de pouce&#160;? :grin:
+ Alshock: Salut le chat, question existentielle&#160;: pour faire des calculs matriciels optimisés en Python on a Numpy, en C++ sur CG on a pas accès à ma connaissance aux bibliothèques équivalentes. On a quelque chose dans le standard ou faut bricoler soi-même ses opérations&#160;?
+ BlaiseEbuth: Oui.
+ Alshock: Je dirais même plus&#160;: peut-être.
+ <b>**BlaiseEbuth tend <a rel="nofollow" class="external free" href="https://en.cppreference.com">https://en.cppreference.com</a> à Alshock.</b>
+ Alshock: J'ai beau adorer Blaise, après avoir cherché dans la doc et trouvé des fonctions que je n'aurais jamais imaginé, j'me sens quand même trahi et j'vais la lui jeter à la figure
+ BlaiseEbuth: Genre&#160;? :3
+ Alshock: (╯°□°）╯︵ ┻━┻
+ Alshock: Donc, puisqu'on n'a pas d'outil standard pour, vous faites comment, vous&#160;?
+ BlaiseEbuth: Pas
+ Alshock: Tu m'encourages à faire du Python là&#160;?
+ Alshock: .-.
+ BlaiseEbuth: Pourquoi faire du calcul matriciel&#160;?
+ nicola: Pour The barnyard&#160;?
+ Trisard: Salut, vous avez un combat de bots sympas à me conseiller&#160;?
+ BlaiseEbuth: Les bots sympas ne se battent pas.
+ Pantoine: Hello ici&#160;! Si jamais on soumets un puzzle mais qu'on ne passe pas tous les tests, on peut le reprendre après&#160;? 
+ Trisard: Oui
+ Alshock: théoriquement oui, en pratique je te conseille d'éviter de trop t'y fier Pantoine
+ Alshock: Sinon le calcul matriciel c'était pour retenter des bêtises avec un NN
+ Pantoine: Bah en fait je bloque sur l'opti d'un algo et j'aimerais bien avoir des éléments de réponse pour comprendre ce que je peux faire... Parce que mon algo fonctionne mais il est trop lent&#160;:/
+ Alshock: Alors dis nous de quoi tu parles précisément, et ce que tu tentes de faire
+ Pantoine: Je suis sur ce puzzle&#160;: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/surface">https://www.codingame.com/ide/puzzle/surface</a>
+ Pantoine: Et pour les deux derniers cas, impossible de terminer, j'ai un time out
+ Alshock: probablement un problème de complexité de ton algo
+ Alshock: Ah tiens, je l'avais fait en PHP çui là&#160;?
+ Pantoine: yep je pense, mais ça fait maintenant plus d'une semaine et j'ai encore rien trouvé, et je sais pas trop où chercher des réponses (autres que les wikis fournis avec le puzzle)
+ Alshock: passons à la deuxième étape, quelle est ton approche&#160;?
+ Pantoine: Alors j'ai un tableau  2D de bool qui référence chaque case avec 0 une case qui n'est pas de l'eau et 1 une case qui l'est
+ Pantoine: Ensuite pour chaque point je regarde d'abord si ce n'est pas une coordonée que j'ai déjà checkée (pour éviter de reparcourir un lac déjà connu)
+ Pantoine: si ça l'est pas j'ai un algo de spread qui&#160;: vérifie les cases autour (diagonales non incluses) et si la case existe je l'ajoute aux cases à chequer
+ Pantoine: Ensuite tant que la liste à chequer n'est pas vide je continue pour trouver la taille exacte du lac
+ Pantoine: Une fois que je n'ai plus de case je renvoie la taille
+ Alshock: très bien l'algo semble pas choquant en tant que tel, dans quel type de donnée tu mets les coordonnées déjà checkées&#160;?
+ Pantoine: C'est dans une liste de liste de coordonnées
+ Pantoine: (coordonnée qui ne référence que un int x et un int y)
+ Alshock: Ok ça c'est un problème, as-tu déjà entendu parler de notre seigneur le set&#160;?PS&#160;: pour chaque point = pour chaque point qu'on t'envoie ou pour chaque point de la carte&#160;?
+ Alshock: ah non c'est une grille quoi
+ Pantoine: Le set&#160;? Je crois pas
+ Pantoine: Pour chaque point qu'on m'envoie
+ Alshock: nan c'est moi qui t'ai mal compris, t'as juste une grille 2D booléenne qui dit si le point est déjà check ou pas, c'est ça&#160;?
+ Pantoine: En fait c'est une grille qui référence tous les lacs avec toutes les coordonées
+ Pantoine: Et en le disant je me rends compte que c'est hyper lourd :o
+ Pantoine: avec toutes les coordonnées que j'ai déjà parcouru*
+ Alshock: En fait toute la question c'est pas la lourdeur c'est la rapidité&#160;: si tu check qu'un élément pour savoir si ta case est déjà check ou non et si oui à quel lac elle appartient c'est bon, si tu dois itérer dans une liste c'est omega no
+ Alshock: tu peux faire par exemple une carte 2D où chaque coordonnée vaut 0 si c'est pas déjà visité, et sinon la taille du lac dans lequel elle est
+ Pantoine: Bah tu vois je pense que c'est omega no parce que j'utilise LinQ et à mon avis il reloop sur toute la collection...
+ Pantoine: Oui c'est ce que je vais essayer&#160;! Merci beaucoup :p 
+ Alshock: Sinon une bonne option pour un puzzle comme ça c'est de lancer la plus grosse carte en local, et déjà vérifier le temps que tu mets (si c'est infini prendre la plus grosse carte qui passe dans un temps acceptable) et ensuite lancer un profiler dessus
+ Alshock: tu devrais identifier très vite la partie qui pose problème pour éviter de passer une semaine à pas trop savoir où taper
+ Pantoine: Yes c'est des réflexes que je dois choper ça 
+ Pantoine: Pour éviter d'y aller à l'aveugle
+ Pantoine: En tout cas merci bien pour ces éléments&#160;!
+ philRG: c'est plus rapide de tester l'existence d'un élément parmi un ensemble d'éléments avec un set qu'avec une liste (en python)
+ philRG: c pour ça que je fais pas de puzzle, il y a toujours des cas extrêmes dans les tests à gérer
+ philRG: c frustrant
+ Alshock: Yep pour faire simple un set c'est un peu la version généralisée de la carte 2D dans notre exemple, au lieu de juste stocker les données dans une liste et ensuite chercher à l'aveugle où doit être la donnée qu'on cherche, on crée une très grosse armoire, et on déduit de la donnée dans quel tiroir elle doit se ranger. Du coup ya besoin de chercher que dans le tiroir à chaussettes quand on cherche une chaussette
+ Alshock: (en très gros)
+ Alshock: @philRG pour moi c'est plutôt l'inverse, je passe mon temps à essayer de gérer des cas de bords qui au final ne sont pas testés.
+ Stilgart: (pour un unordered_set c'est carrément ça l'image)
+ philRG: le set() python est unordered
+ Alshock: je crois qu'en python les buckets sont des arbres rouges et noirs, donc c'est toujours un poil plus subtil derrière, mais l'idée générale c'est qu'on va chercher le O(1) amorti en recherche
+ Stilgart: donc c'est pas du rouge-noir
+ Stilgart: parce que c'est O(log(n)) la recherche dans un rouge-noir
+ Stilgart: O(1) amorti, je sais pas faire autrement qu'avec une table de hachage (donc c'est du unordered)
+ Alshock: Non c'est une table de hash dont les BUCKETS sont si ne m'abuse des arbres r&amp;b
+ BlaiseEbuth: stoi l'bucket
+ Alshock: les tables de collisions, les pitites cases qui devraient rarement dépasser 3 éléments, les tiroirs du fond, les samuel bucket
+ Stilgart: Alshock: ha, c'est ça que tu appelles bucket
+ <b>**dwarfie prefere les T-Bucket ....</b></p><p><img src="/a/17785582865119" /> dwarfie: <a rel="nofollow" class="external free" href="https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/OLkAAOSwjY5g-mTT/$_86.JPG">https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/OLkAAOSwjY5g-mTT/$_86.JPG</a>
+ dwarfie: (pff un dollar dans le nom de fichier .... really&#160;!? )
+ BlaiseEbuth: php...
+ Alshock: ou bash, deux langages de l'amour :smirk:
+ Zorg1: vache&#160;?
+ BlaiseEbuth: meuh
+ Stilgart: les tortues, c'est quand même vachement moins bruyant
+ Remi_avec_un_i: Salut tout le monde, et automaton2000 s'il ne me fait plus la tête
+ Automaton2000: après je sais pas quand
+ Remi_avec_un_i: T'as raison, tu me diras bonjour plus tard Automaton2000
+ Automaton2000: c'est comme ça que le puzzle de la communauté, il y a des achievements
+ Stilgart: Automaton2000: go go go compléter ta questmap
+ Automaton2000: vous savez si on peut dire que je me souviens plus si je me lance
+ Stilgart: vous croyez que c'est NN qui parle depuis les entrailles de 2000&#160;?
+ dwarfie: :scream: Automaton2000 aurait mangé NN&#160;? 
+ Automaton2000: ah non c'est pas une histoire de géométrie non euclidienne aussi
+ Stilgart: c'est une histoire de bot qui mange un bot Automaton2000
+ Automaton2000: il y a des achievements
+ Stilgart: c'est donc pour ça...
+ Igosuki: je code tous les challenges en rust, car j'aime me faire mal 
+ dwarfie: y'a pire ... y'a swift ...
+ Igosuki: ha oui en effet si on part par la
+ Igosuki: pas touche a swift depuis longtemps mais c'est pas genre NSIntThatCoulbeNullButIsntReally(0.0)
+ Stilgart: go go go farmer du petit carré jaune en rust&#160;!
+ Stilgart: sur ce, je vais peut-être me rentrer moi
+ Stilgart: ça marche comment les ancres en html&#160;?
+ BlaiseEbuth: Pas mal
+ BlaiseEbuth: :3
+ Stilgart: je peux supposer que le comportement des navigateurs sera sensiblement le même sur une url en blabla.html#ancre&#160;?
+ nicola: Le #&#160;?
+ Stilgart: oui
+ nicola: Oui, c’est comme un lien vers une partie précise.
+ <b>**Stilgart se rend compte que ça pouvait aussi vouloir dire la balise &lt;a&gt;</b></p><p><img src="/a/69705346707031" /> BlaiseEbuth: Oui. Ce genre de truc ça devrait pas poser de soucis
+ Stilgart: ok
+ nicola: C’est un lien vers un endroit précis d4une page.
+ nicola: *d’une
+ Stilgart: je vais essayer de centrer mes tableaux dans la fenêtre de l'utilisateur avec ça, donc
+ Stilgart: nicola: je sais ce que c'est... c'est plus la réalisation (et sa portabilité) qui me fait me poser des questions
+ nicola: OK.
+ BlaiseEbuth: (J'espère parceque c'est aussi vieux que html donc si y'a des naviagateurs qui le gèrent pas c'est inquiétant)
+ nicola: Comme c’est un truc ancien, je ne vois pas pourquoi ça ne marcherait pas.
+ nicola: Et ça ne contredit pas les nouvelles normes avec HTML+CSS.
+ BlaiseEbuth: Genre "Ah non, en 28 ans on a pas eu trop le temps d'implémenter ça, on a un planning chargé."
+ Stilgart: BlaiseEbuth: ma peur, c'est plus que certains choisissent de mettre la balise avec l'ancre tout en haut de l'écran, et d'autres de la mettre au milieu (verticalement)
+ BlaiseEbuth: Oui j'me doute.
+ BlaiseEbuth: Ca j'avoue que je sais pas. Tu notera que j'avais répondu sans savoir ce que tu voulais faire avec. ^^
+ BlaiseEbuth: T'as pas moyen de faire autrement&#160;?
+ Stilgart: j'en sais trop rien...
+ BlaiseEbuth: C'est pour où&#160;?
+ Stilgart: je vois ce que je veux faire... mais je me rends compte que je ne sais pas le faire
+ Stilgart: <a rel="nofollow" class="external free" href="https://chadok.info/codingame/puzzles_completion.html">https://chadok.info/codingame/puzzles_completion.html</a> (comme d'hab)
+ Stilgart: je voudrais que la section se retrouve en haut de page une fois qu'on clique dessus
+ nicola: Essaie déjà avec Firefox et avec Chrome, tu auras une idée.
+ Stilgart: (après coup, le js parait plus sain que le css là)
+ Stilgart: avec Cquoi&#160;?
+ nicola: Chromium.
+ Stilgart: encore pire amha
+ Igosuki: si je comprend bien faut virer tout les comms du code généré dans les clashs pour améliorer son score&#160;?
+ nicola: Bon, OK, elinks.
+ Igosuki: ou est-ce que les commentaires sont pas comptabilisés&#160;?
+ Stilgart: hors de question que j'installe l'un ni l'autre&#160;:)
+ BlaiseEbuth: IE6
+ nicola: lynx, alors.
+ Stilgart: (et à choisir, autant avoir Chrome... surtout que techniquement W10 m'impose déjà edge)
+ nicola: Chrome et Edge ont le même moteur, non&#160;?
+ Stilgart: oui
+ Stilgart: avec tout ce qui est caché dedans
+ Zorg1: mais le destinataire n'est pas le même
+ Zorg1: (à moins bien sûr que Google et MS aient créée une JointVenture pour ça)
+ Stilgart: (tout à fait possible en fait)
+ Zorg1: ça m'étonnerait quand même&#160;;-)
+ Stilgart: microsoft gagne un edge qui marche, et google des données en plus
+ Zorg1: bah Microsoft est aussi sur les données
+ Stilgart: on peut imaginer qu'ils partagent
+ BlaiseEbuth: Stilgart: J'ai l'impression, en creusant à travers la verbosité, que "mettre le haut du bloc visé le plus haut possible" fait partie du standard... Mais je ne jure pas <a rel="nofollow" class="external free" href="https://html.spec.whatwg.org/multipage/browsing-the-web.html#scroll-to-the-fragment-identifier">https://html.spec.whatwg.org/multipage/browsing-the-web.html#scroll-to-the-fragment-identifier</a>
+ Zorg1: mais peu importe on sait qui est la dupe ^^
+ Stilgart: BlaiseEbuth: je pense qu'avec un peu de marge ça va bien se passer
+ Stilgart: Zorg1: et ça ne va pas aller en s'améliorant
+ Stilgart: pendant ce temps, boulet doit toujours être en état de choc à cause de firefox
+ Stilgart: (on a tué le sien avec un "ulimit -u 70", sachant qu'il avait moins de 20 process lancés)
+ dwarfie: ca ... il aurait du le savoir ... vu que je lui ai annoncé la cata au debut du mois
+ Stilgart: ouais enfin 50 process quand tu demande en demande que 1
+ Stilgart: faut pas déconner
+ dwarfie: bah ... ps me donne 4 pid ... mais htop m'en donne plus de 70 ... donc a se demander ce qui est vrai en fait ...
+ Stilgart: hum....
+ dwarfie: max user processes
+ Stilgart: en tout cas, ulimit -u 70 =&gt; firefox ko
+ dwarfie: mais ca dit pas si les fork comptent aussi
+ Stilgart: si, parce que c'est pareil
+ Stilgart: un fork ça démarre un nouveau processus
+ Stilgart: les threads ne comptent pas
+ Stilgart: mais là je parle bien de 50 *processus* (avec des pids différents)
+ Zorg1: c'est plus balaise qu'un serveur apache firefox on dirait
+ dwarfie: oui ... d'ou le koikévré ... vu le nombre de pid differents affichés par les pas-ps
+ dwarfie: Zorg1&#160;: chrom{e,ium} c'est pas mieux de ce point de vue
+ Zorg1: je m'en doute ^^
+ Stilgart: c'est pire, ça à imposer la norme
+ dwarfie: n'est normale que la normalité ..... et certaines écoles
+ Stilgart: (jusque dans la façon de numéroter connement les numéros de version)
+ Zorg1: ah une époque il y avait une école normale par département :p
+ Stilgart: (oui, il y a de la redondance pléonasmique dans ce que je viens de dire)
+ Zorg1: ah oui on est passé plusieurs année avec une version 3 ou 4 puis en une année on se retrouve avec une version 30 ^^
+ JBM: sous linux les kernel threads ont des pid différents
+ Zorg1: oui mais je crois qu'ils doivent parler de freebsd en bon puriste&#160;?
+ Stilgart: j'utilise plus vraiment linux depuis plus de 10 ans
+ Zorg1: CQFD
+ Stilgart: mais en toute logique, le p de pid ça veut pas dire thread
+ Zorg1: cet argument ...
+ Zorg1: mort par KO technique en face ^^
+ <b>**dwarfie cherche et trouve pas en esperant que ca soit pas le cas qu'un zouave est pas fait que limité le nombre de process modifie aussi le thread_max ...</b></p><p><img src="/a/17785582865119" /> dwarfie: j'ai quand meme du monter a 2000 je crois pour que ca plante pas au bout de 8 onglets en salle de tp ...
+ dwarfie: (╯°□°）╯︵ ┻━┻
+ JBM: ça veut bien dire process
+ JBM: mais y'a pas de loi qui veut que l'un soit pas sous-ensemble de l'autre
+ pardouin: bonsoir o/
+ pardouin: j'ai proposé un nouveau puzzle, si certains ont la motiv&#160;:)
+ dwarfie: ah ... enfin un truc a refuser :smiling_imp: mouhahahaha
+ Zorg1: après la 3D en ascii art c'est le simulaire de galaxie en ASCII art&#160;?
+ Zorg1: *simulateur
+ Zorg1: ah non, quelle manque d'ambition&#160;:(
+ JBM: verrai ça ce WE
+ dwarfie: bof
+ dwarfie: allez , je vais positiver ... au moins la solution a pas un seul " import " ... tellement rare de nos jour ...
+ Zorg1: c'est une référence à quoi au fait&#160;?
+ Zorg1: on sent que le Manoir de l'Horreur a inspiré pardouin ...
+ Zorg1: ah ok c'est un film japonais
+ Zorg1: on va upvoté ne soyons pas chien 
+ dwarfie: ouaf ouaf
+ Zorg1: :D
+ dwarfie: tu vas me forcer a downvoter pour equilibrer la force ...
+ Zorg1: va falloir que je sorte mes multicomptes de la naphtaline ...
+ Zorg1: honnêtement quand je vois des puzzles pourris genre salade césar à +15 ...
+ dwarfie: peine perdu ... il aura suffit d'un seul sith pour eradiquer les jedi&#160;;)
+ Zorg1: enfin quand tu vois la masse de forteresse cachée ...
+ Stilgart: pain perdu&#160;? :miam:
+ Stilgart: ha zut, c'était :yum:
+ JBM: yum update
+ Zorg1: non pas yum, marre de yum
+ Stilgart: j'ai faim si je veux :p
+ Zorg1: Non.
+ JBM: Non.
+ BlaiseEbuth: Ah&#160;? Y'a un puzzle à démonter&#160;?
+ Zorg1: oui pardouin vient d'un commettre un
+ Zorg1: qui consiste à trouver 49 forteresses cachées sur une grille de 7x7
+ Zorg1: enfin non 51, il y a une astuce en fait
+ BlaiseEbuth: Ca me rappelle un vieux rpg
+ Remi_avec_un_i: Y a 3 forteresses sur la case du milieu&#160;?
+ Zorg1: comme ça spoile&#160;:(
+ Remi_avec_un_i: J'ai dit ça au hasard mdr
+ BlaiseEbuth: Ah voilà <a rel="nofollow" class="external free" href="https://youtu.be/uHQ6SVDVltc?t=650">https://youtu.be/uHQ6SVDVltc?t=650</a>
+ JBM: sans les chiffres ça me rappelait ce morceau d'AoC
+ Remi_avec_un_i: Zorg1 t'es toujours là&#160;?
+ Zorg1: oui
+ Zorg1: je te surveille
+ Remi_avec_un_i: Je ne vais pas te le dire souvent, mais je t'ai dépassé sur un jeu d'optimisation :D
+ Remi_avec_un_i: Code of the rings
+ Zorg1: ah celui là j'ai vraiment un truc pas terrible, un espèce d'AG pour le fun
+ Remi_avec_un_i: quelqu'un qui est 46ème au classement général, et niveau 41 :P
+ BlaiseEbuth: Évidement. Remi_avec_un_i aurait pas battu un truc sérieux. :smirk:
+ Zorg1: :D
+ Remi_avec_un_i: Le début de ma phrase a disparu
+ Zorg1: ha faut être de bonne foi sur ce chat&#160;?
+ Remi_avec_un_i: Je disais, je m'en fout, j'ai battu quelqu'un qui est ... la suite vous l'avre.
+ Remi_avec_un_i: * l'avez
+ BlaiseEbuth: Moi je peut battre les records de vitesse d'Ussain Bolt. (Ceux d'avant ses 7 ans)
+ Remi_avec_un_i: Je vais arrêter d'écrire moi, je ne mets que des conneries.
+ Zorg1: c'est le manque d'expérience ça, j'en ai même plus honte des conneries que je raconte moi
+ Remi_avec_un_i: lol
+ Remi_avec_un_i: Bon du coup je t'interdit de chercher à t'améliorer sur ce puzzle hein ^^
+ BlaiseEbuth: C'est quand il en dit pas qu'il se sent mal. Mais ça va c'est rare
+ Zorg1: de toute façon j'ai Automaton2000 comme backup dans ces cas là
+ Automaton2000: je veux savoir si un point est dans un coin de ma tête
+ Zorg1: ça démarre sur les chapeaux de roues ...
+ Remi_avec_un_i: Ah c'est sûr, niveau connerie il est dur à battre Automaton2000
+ Automaton2000: du coup on peut pas voir le mal partout
+ pardouin: reCurse est classé 473 sur Code of the Ring
+ pardouin: une bonne opportunité pour toi si tu veux booster ton estime de soi&#160;:)
+ Remi_avec_un_i: Pour le battre il faut que je descende à 5113. Je suis à 5512. 400 ça va pas être facile.
+ BlaiseEbuth: Brmmm
+ <b>**Stilgart veut même pas aller voir son score à CotR</b></p><p><img src="/a/69893904259383" /> Stilgart: 5835 /o\
+ Remi_avec_un_i: J'étais content aussi quand je t'ai dépassé ^^
+ Zorg1: nice
+ Stilgart: en vrai, j'arrive pas à voir comment bien attaquer CotR
+ Remi_avec_un_i: Commence par l'attaquer sans kl
+ Remi_avec_un_i: sans les boucles
+ Remi_avec_un_i: Calcule le chemin le plus court jusqu'à la prochaine lettre voulue
+ Remi_avec_un_i: par chemin j'entend les flèches et les +/-
+ Remi_avec_un_i: Ensuite sur le forum il y a magus qui donne des astuces pour les boucles
+ Remi_avec_un_i: A commencer par [+] pour réinitialiser la lettre courante en espace
+ Remi_avec_un_i: Actuellement je me sers des boucles uniquement pour initialiser le tableau
+ Remi_avec_un_i: une lettre sur 2 à la moitié de l'alphabet
+ Remi_avec_un_i: ou une lettre sur 3 à 1/3 et 2/3 de l'alphabet
+ Remi_avec_un_i: Je ne sais pas comment reconnaître les mots périodiques et utiliser les boucles pour les faire avec peu d'instructions
+ Remi_avec_un_i: Et j'ai pas envie de harcoder
+ Remi_avec_un_i: * hardcoder
+ Remi_avec_un_i: Stilgart t'es toujours là&#160;?
+ JeSappelleDio: On peut commencer sur ce site avec vraiment très peu de connaissances&#160;?
+ Remi_avec_un_i: Salut, peu de connaissance en algo ou en IA oui, mais il te faut quand même des connaissances dans un langage de programmation.
+ JBM: jamais la quand il faut le Stilgart
+ Stilgart: je vais préciser... par "bien attaquer"; j'entends "faire un score de moins de 3000"&#160;;)
+ Remi_avec_un_i: Il paraît que les meilleurs sur ce puzzle hardcodent :P
+ JeSappelleDio: ok et si jamais j'ai les bases de chez bases du genre les variables et print et quelques notions basique en math je peux trouver un moyen de combler mon manque de connaissance et passer un peu d'obstacle&#160;?
+ Stilgart: Remi_avec_un_i: c'est certain
+ Remi_avec_un_i: Si tu sais faire une boucle et tester une condition, oui.
+ Stilgart: JeSappelleDio: si tu ajoutes les bases pour récupérer des entrées et afficher des sorties
+ Stilgart: tu peux faire les puzzles easy/medium
+ Remi_avec_un_i: C'est souvent déjà codé ça
+ Stilgart: et voir les solutions des autres
+ JeSappelleDio:&#160;:/ Ok ok je vais devoir bosser la dessus car je vois pas trop de quoi vous parlez les boucle je crois savoir faire en python genre while True: C'est tant que les valeur sont vrai à l'intérieur le code va continuer else c'est un sinon il fera autre chose et for&#160;: c'est la boucle jusqu'a que i ait atteint la valeur demandée non&#160;?
+ Remi_avec_un_i: C'est ça, si tu connais le if/else, et le for ou while, tu peux commencer par les puzzles faciles.
+ JeSappelleDio: donc le premier puzzle ou je doit emmener le bot je peut y arriver en utilisant juste les boucles et les coordonnées donnée&#160;?
+ Remi_avec_un_i: Je ne sais pas de quel puzzle t parles, mais tu peux aller voir ici&#160;: <a rel="nofollow" class="external free" href="https://www.codingame.com/training">https://www.codingame.com/training</a>
+ Remi_avec_un_i: Je dois me déconnecter, bonne nuit à tous.
+ JeSappelleDio: Bonne nuit et mercvi
+ Stilgart: JeSappelleDio: le truc le plus déroutant au début, c'est la partie interaction avec la plateforme... concrétement en python, ça veut dire bien gérer les input() et les print()
+ JeSappelleDio: Ouais je vois je vais essayer d'approfondir et réussir le premier niveau
+ D4ms: il y a t'il une manière d'afficher une variable en log sans que celle ci ne sorte sur stdout dans l'IDE en python&#160;?
+ Stilgart: print(...., file=stderr)&#160;?
+ Stilgart: il devrait y avoir un exemple dans le code par défaut
+ Stilgart: file=sys.stderr, flush=True)
+ Stilgart: (bonne idée de forcer aussi le flush)
+ D4ms: merci bien, je n'ai pas pour habitude de l'utiliser, il faut que cela change ^^'
+ Stilgart: en vrai, c'est plutôt une mauvaise pratique... mais avec l'IDE de CG tu n'as pas d'autre moyen de déboguer
+ Renamed: enfin fini ce truc de custom game of life j aurai vraiment galéré tellement de petites erreurs. 
+ Renamed: ça m aura pris presque une semaine 3 jours juste pour piger l'énoncé xD
+ JBM: mauvaise pratique, c'est vite dit
+ JBM: elle a sa place
+ Renamed: personnellement en dehors de CG je ne l avais jamais utilisée cette ligne de code
+ Renamed: d'ailleurs je ne sais toujours pas trop ce quelle fait même si elle marche également sur les autres IDE
+ Renamed: enfin si je vois ce quelle fait en pratique mais genre le file=sys.stderr je sais pas trop ce que ça fait et le flush=True non plus
+ Renamed: mais bon je vais google ça d ailleurs
+ Renamed: allez sur ces bonnes paroles bonne nuit

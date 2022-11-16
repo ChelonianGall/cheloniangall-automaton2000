@@ -1,0 +1,557 @@
+ philRG: ah oui tu perds car tu as débuté la partie, c'est vraiment trop injuste&#160;;-)
+ philRG: silver sur UTTT en heuristique, et silver sur Tron en flood-fill, min-max bien buggé. Pour UTTT et sc21, j'essaye de comprendre MTCS, faut que je mette aux bitboards mais c dur
+ philRG: pour mon min-max, j'ai une stratégie: <b>max (p1) appelle min (p2) qui appelle min (p3) qui appelle max (p1)</b>
+ philRG: o/
+ JBM: \o
+ M_C: Sur Tron avec juste Voronoi tu passes en Gold je pense
+ philRG: ah et pas de min-max?
+ M_C: Par contre en fouillant pour le dernier contest je suis tombé par hasard la dessus si ca vous interesse&#160;: <a rel="nofollow" class="external free" href="https://dke.maastrichtuniversity.nl/m.winands/documents/sm-tron-bnaic2013.pdf">https://dke.maastrichtuniversity.nl/m.winands/documents/sm-tron-bnaic2013.pdf</a>
+ philRG: ah merci je vais le rajouter à ma liste de todo de mtcs&#160;:-)
+ M_C: La je me replonge dans le coed que j'avais fait au tout début quand je suis arrivé sur Codingame. J'ai juste fait un Voronoi et je suis 391/609 en Gold
+ M_C: code*
+ philRG: ah ok j'ai déjà codé le voronoi dessus, j'ai peut-être pas besoin du min-max pour monter gold
+ philRG: ah ça passe mieux en remplaçant ma fonction de distance par celle de voronoi
+ philRG: pas de min max: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/559145815">https://www.codingame.com/share-replay/559145815</a>
+ Tiouz: Ça se sent que c'est un vieux combat de bot. L'énoncé est très différent des autres
+ Tiouz: Les inputs sont étranges aussi. Dans les récents, on est toujours joueur 0
+ Zorg1: oui c'est assez récent les inputs où celui qui reçoit est le joueur 0, avant on te disait si t'étais le joueur 0 ou le joueur 1
+ Tiouz: C'est très pratique
+ Zorg1: après Tron un autre problème c'est que le bot doit maintenir la situation du jeu
+ Tiouz: Ça c'est aussi le cas dans UTTT
+ Zorg1: ah oui ^^
+ Zorg1: après ça peut être plus simple d'avoir les actions de ton adversaire que de les déduire du delta entre les situations
+ Zorg1: sur certains jeux c'est un vrai casse tête
+ Tiouz: Oui je préfère comme ça
+ Tiouz: Sur les MCTS si on veut garder le même arbre, c'est chiant de faire le delta, et on ne veut pas recréer toute la structure
+ philRG: j'suis con j'avais déjà essayé le voronoi seul sans simu sur tron, classé Top 100
+ philRG: dommage qu'on ne voit pas les classements à l'issue du run
+ philRG: de chaque version
+ Tiouz: Ce serait bien oui
+ philRG: j'perds la boule
+ Tiouz: Mais dans les contests ça foutrait le bordel dans l'historique, car si tu fais premier le premier jour, ton bot est quand même pourri
+ Tiouz: Et ça dépend de la ligue aussi, ça fait beaucoup de trucs à gérer
+ philRG: ça c'est vrai, en général je renomme mes versions en local avec date, ligue, et classement. Là j'ai du oublier
+ Tiouz: moi en local j'ai current_code.cpp, current_code_old.cpp, current_test.cpp...
+ philRG: je fais contest-name_20210522_11h30_Silver_Rank#43 par exemple
+ Zorg1: oui tu peux pas rajouter un commentaire à tes versions dans l'historique c'est bête
+ Tiouz: Au moment de la soumission, donner un nom sinon
+ philRG: euh quelle historique?
+ philRG:&#160;:-D
+ Tiouz: en dessous de last battles
+ Zorg1: bah dans l'IDE t'as un onglet "Historique" à gauche
+ Zorg1: qui te résume toutes les versions pushées
+ Zorg1: philRG découvre l'interface ..
+ philRG: euh là je vois pas, comment tu mets le Rang et la ligue?
+ Tiouz: Non on ne peut pas, c'est bien ce qu'on dit
+ Zorg1: oui tu vois que tes codes pushés, pas leur résultat
+ philRG: ah ok, on a que la date, oui je m'en sers aussi. D'ailleurs, ça me permet de récupérer des versions fonctionnelles quand mon dépôt local est rempli de copies pourries (ça me permet de faire le tri après contest)
+ Tiouz: C'est combien la limite de temps pour tron&#160;? C'est même pas marqué...
+ Tiouz: Ah non c'est bon, c'est noté plus loin
+ philRG: ah non Top 10 en ajoutant mes 2 heuristiques (FF + Voronoi) de stratégies différentes mais l'empilement n'est pas synonyme de succès
+ philRG: c'est pas indiqué zarbi
+ philRG: Votre IA doit répondre en moins de 100ms à chaque tour.
+ Tiouz: (je m'étais corrigé)
+ philRG: bon il doit y avoir un truc sur Tron ou alors passer qu'en Voronoi simple, encore classé 1er / 1600 bots comme sur UTTT en silver, ça devient énervant
+ philRG: quoiqu'il reste 10%
+ Tiouz: C'est rageant
+ Tiouz: Je me demandais pourquoi j'avais des timeout dans mon voronoi, mais il a un bug et il ajoute 1 million de cases pendant la recherche.
+ Tiouz: Pas très normal
+ Tiouz: C'est bizarre que ça ne me fasse pas la même erreur quand je calcule la taille de la composante...
+ WhatTrickeryIsThis: il faut penser à décaler ton voronoi suivant ton idJoueur
+ Tiouz: Non c'était pas ça. C'était sur la gestion des cases visitées
+ WhatTrickeryIsThis: en 10-15 lignes tu sera top gold /legende
+ WhatTrickeryIsThis: il y à pas à avoir de gestion de cases visitées je crois pas, c'est juste un diagramme de distance par rapports aux mechant
+ Tiouz: Dans les ressources externes, visiblement il y a un code pour passer legende en 80 lignes de code
+ Lucasgood: oui
+ WhatTrickeryIsThis: oui, étendre la frontiere, puis apres avoir un systeme de trap
+ WhatTrickeryIsThis: il me semble
+ WhatTrickeryIsThis: c'est le premier multi historiquement sur CG
+ Lucasgood: tu peut passez légende avec un simple voronoid simulé sur tes 3 option (tout droit et tourner *2) il me semble 
+ Tiouz: Lucasgood c'est ce que je suis en train de faire. PhilRG est top 1 silver avec ça je crois
+ Tiouz: Je suis dans la partie debug
+ Lucasgood: print toute ta grille en debug avec avec l'attribution qu'il donne a chaque case pour qui tu verra tout de suite si y'a un gros problème avec ton vornoid
+ philRG: le voronoi je l'ai récupéré du 80 lignes de codes
+ Lucasgood: et donc qu'est ce qui te bloque&#160;?
+ Tiouz: Tkt je sais comment faire^^ J'ai pas un bug de voronoï (pour l'instant), mais d'accès à la case hors du plateau. C'est juste un bug con
+ Lucasgood: ah
+ Lucasgood: tu travail en index absolu&#160;?
+ Tiouz: c'était juste un bug car j'avais mal fait la négation d'une de mes conditions...
+ philRG: mais faut peut-être l'utiliser intelligemment, mon code date d'un mois, j'ai oublié
+ Tiouz: Il est con le boss bronze lol
+ Lucasgood: non quand j'avais teste, juste le voronoid pour les 3 option te met legende ( mal classé en legende mais legende )
+ WhatTrickeryIsThis: un FF?
+ WhatTrickeryIsThis: un Fouilli Fouilla?
+ philRG: je compte le nombre de cellules pour chaque direction où il se déplie le mieux
+ philRG: j'ai une fonction: def get_voronoi_score(starts, player_id, n_players):
+ philRG: Je simule que mon pod
+ Tiouz: Ba non il faut simuler tous les pods, sinon ça revient à calculer ton nombre de cases accessibles, et c'est pas du tout pareil
+ philRG: si je simule celles des autres ça devrais passer
+ Tiouz: Tu calcules la taille de la composante, pas le voronoi
+ philRG: bon je dois partir bon code&#160;:)
+ Tiouz: bon après-midi
+ philRG: merci pareillement
+ Lucasgood: Si il n'y avait pas les mur des cycle, tu pouvais avoir ton volume voronoi sans calculer les autres, mais vue que la surface contient des obstacle tu est obligé de verifier de proche en proche je pense, et donc de faire le calcul pour chaque case et chaque joueur jusqu'au frontière de ton volume
+ Lucasgood: bon aprem
+ 3141948: Oui effectivement merci c ce que leojean m'avait dit aussi pour le bfs.
+ 3141948: Bon après midi
+ Tiouz: Je l'ai, j'ai craché sur le boss^^ <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/559160328">https://www.codingame.com/replay/559160328</a>
+ Agade: jolindien
+ Tiouz: Hey philRG tu passes en gold&#160;!
+ Bon[]Crayon: Bonjour tout le monde. :ghost:
+ Bon[]Crayon: Automaton2000 [*+*] 
+ Automaton2000: faut que je m'y remette
+ Bon[]Crayon: Automaton2000 Cacahuète  :peanuts:
+ Automaton2000: et je peux pas dire que t'as pas fini de faire le puzzle de la semaine.
+ Bon[]Crayon: Automaton2000 Je ne l'ai pas commencé.
+ Automaton2000: ah non c'est pas un peu bizarre
+ Bon[]Crayon: Automaton2000 Si fait, c'est jojo.
+ Automaton2000: je peux te faire une idée
+ Bon[]Crayon: Automaton2000 selon ta propre conception.
+ Automaton2000: mais il a une bonne raison
+ Bon[]Crayon: Automaton2000 Effectivement, il est passé en ligue légende.
+ Automaton2000: je peux pas vraiment le choix
+ Bon[]Crayon: Automaton2000 Tu es programmé sans choix.
+ Automaton2000: pour voir s'il y a pas mal de temps à comprendre
+ Bon[]Crayon: Automaton2000 C'est masse de secondes de trop.
+ Automaton2000: pas certain que ce soit le cas de toutes les combinaisons possibles
+ Rajh: J'avais bien un bug dans ma simu abused&#160;:'(
+ BlaiseEbuth: Yo tout l'monde&#160;! Automaton2000&#160;! AutomatonNN&#160;?
+ Automaton2000: c'est la seule différence c'est que dans ma tête
+ 3141948: Tiouz: ah merci de m'avoir poussé 😉&#160;? Avec un bfs, çà monte légende sûr 🤗
+ Rajh: Tin le bug de merde, je lisais mal les inputs -_-Jsuis quand meme arrivé en gold avec des mauvaises données, fin bon passons.Du coup je passe de 600 gold a légende la je pense (30% et jsuis premier)
+ Rajh: 33 games 2 défaites
+ BlaiseEbuth: 2 de trop
+ Rajh: Sans doute un autre bug
+ Rajh: Tin mais dégouter lol jlai depuis le day one le bug
+ BlaiseEbuth: stoi l'bug
+ BlaiseEbuth: Skwassa?! Un mingw sans gdb&#160;?! Izonfumé...
+ darkhorse64: #fr
+ cuduputu: est-ce que quelqu'un a terminé le "Monte Carlo Tree Search exercise"&#160;?
+ cuduputu: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/monte-carlo-tree-search-exercise">https://www.codingame.com/ide/puzzle/monte-carlo-tree-search-exercise</a>
+ cuduputu: suis un peu coincé ^^
+ BlaiseEbuth: 133 personnes apparemment.
+ <b>**dwarfie paye une :beer: a BlaiseEbuth&#160;:)</b>
+ BlaiseEbuth: :beers:
+ cuduputu: je sous-entendais quelqu'un dans le chat...
+ BlaiseEbuth: Oh! J'avais pas compris. :smirk:
+ sosoooo: pas moi désolée
+ sosoooo: ça sert à quoi le input().split() svp&#160;?
+ dwarfie: read the manual
+ BlaiseEbuth: En parlant de ça dwarfie <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/sort-using-comparator/191057/2">https://www.codingame.com/forum/t/sort-using-comparator/191057/2</a>
+ sosoooo: quel manuel&#160;?
+ Thetos: la doc du langage que tu utilises pourra surement t'aider
+ dwarfie: BlaiseEbuth ... ah ouais quand meme :D
+ BlaiseEbuth: sosoooo <a rel="nofollow" class="external free" href="https://www.letmegooglethat.com/?q=python+split">https://www.letmegooglethat.com/?q=python+split</a>
+ sosoooo: euh je demandais car j'ai déjà chercher hier sans comprendre, mais merci pour cette gentillesse
+ BlaiseEbuth: Le prends pas mal sosoooo. Mais Codingame n'est pas un site pour apprendre. Si tu n'as pas les bases tu vas galérer...
+ sosoooo: oui oui merci j'étais un peu vexée sur le coup mdrr
+ dwarfie: en plus en vrai , on a ete gentil ... en tant normal on aurait repondu RTFM ... c'est dire :yum:
+ <b>**dwarfie retourne faire un multi plutot que raconter des pseudo-conneries :D</b>
+ BlaiseEbuth: sosoooo&#160;: C'était pas contre toi particulièrement, y'a beaucoup de gens (qui eux ont les bases) qui prennent le chat pour une doc.
+ sosoooo: j'apprends python depuis un an au lycée on a juste jamais vu split, et je sais pas où chercher l'information pour apprendre, mais du coup tu m'as envoyé w3school qui a l'air bien mdrr deso pr ma réaction
+ BlaiseEbuth: Et on vous a pas appris à utiliser une doc&#160;? Ca devrait être la base, quelque soit le langage...
+ -Cile-: sosoooo juste traduire les mots te donne un indice&#160;: input c'est une entrée de donnéessplit  c'est scinderDonc input().split() on dirait bien que c'est une manière de scinder le données qu'on lis en entrée...
+ BlaiseEbuth: sosoooo&#160;: Le site de python est un bon endroit quand tu as besoin d'un renseignement. Notamment <a rel="nofollow" class="external free" href="https://docs.python.org/3/genindex.html">https://docs.python.org/3/genindex.html</a>
+ sosoooo: humm non on a des cours papier qui sont suffisants pour ce qu'on fait en cours
+ sosoooo: merci bcpp&#160;:))
+ <b>**Bon[]Crayon  tend une tortue à Automaton2000 et à Automatonnn </b></p><p><img src="/a/40502662118268" /> Automaton2000: c'est lui qui a dit que c'est un peu la flemme de le faire descendre
+ cuduputu: 134 personnes BlaiseEbuth
+ Bon[]Crayon: @Automaton2000 C'est AutomatonNN qui a dit ça&#160;?
+ Automaton2000: (j'ai un peu l'impression après avoir parcouru en diagonal des papiers ^^, mais je suis à peu près
+ BlaiseEbuth: gg cuduputu
+ Bon[]Crayon: (╯°□°）╯︵ ┻━┻
+ Zorg1:&#160;? Automaton2000 ne marche plus&#160;?
+ Automaton2000: mais il y aurait pas un bug
+ Zorg1: ah si ok tout va bien&#160;;-)
+ Alshock: yop
+ Zorg1: qoy
+ BELOUARGA: salut
+ BELOUARGA: est ce vous savez si je peux trouver des tests en linux embarqué&#160;?
+ Alshock: comme quoi il eût été utilise que je capitalise
+ Alshock: trovuer des tests en linux embarqué&#160;? Des bibliothèques pour tu veux dire&#160;? En quoi&#160;? En C&#160;?
+ Zorg1: BELOUARGA&#160;: en tout cas pas ici. c'est plus des puzzles d'algo
+ Alshock: aaah CE genre de tests
+ BELOUARGA: des tests en programmation de drivers, en C ou en linux tout simplement
+ BELOUARGA: pas ici mais en codinGame
+ Zorg1: bah pê qu'ils offrent cette prestation pour leur client, mais en général tu verras pas forcément leur test ici en accès libre
+ BELOUARGA: okey parce que j'ai un test à passer ici
+ BELOUARGA: mais j'aimerais voir des exemples avant que je me lance
+ BELOUARGA: Merci à vous
+ Alshock: c'est ptêtre prévu dans le test mais fais donc 2/3 puzzles pour comprendre les entrées sorties sur stin/stdout/debug stderr
+ Alshock: Je suppose que dans à peu près tous les tests t'auras des parties prog
+ 3141948: Peut être voir dic
+ 3141948: Du côté de la communauté des développeurs d'objets connectés&#160;?
+ 3141948: Exemple&#160;: <a rel="nofollow" class="external free" href="https://broux.developpez.com/articles/c/driver-c-linux/">https://broux.developpez.com/articles/c/driver-c-linux/</a>
+ Zorg1: du moment que tu cherches pas des ressources en sécurité informatique chez eux ...
+ 3141948: Des tests en sécurité informatique, 🤢 le cissp
+ Zorg1: bah les objets connectés c'est notoirement connu pour être ouvert à tous les vents
+ Zorg1: ça s'est pê amélioré mais j'en doute un peu
+ 3141948: Sinon des tests de 2*1h30 en ligne du SANS sur l'ethical hacking et 3000 pages de PDF à lire avant sur l'architecture des systèmes d'exploitation, des protocoles réseaux, couches OSI, techniques et outils de hacking 🤢
+ Zorg1: "ethical hacking"
+ 3141948: Ouais je faisais çà avant y a longtemps
+ 3141948: Objets connectés y a beaucoup de vidéos
+ Zorg1: ce qui me gène c'est qu'ils veulent rendre connecté des objets qui n'ont pas forcément besoin de l'être
+ 3141948: Pour écrire des drivers en C, faut avoir des bases sur l'architecture des systèmes jamais fait. Sur Windows il y a le DDK téléchargement
+ Zorg1: bientôt le four à micro onde, la machine à laver connectés
+ Zorg1: (si ça n'existe pas déjà)
+ 3141948: Téléchargeable
+ Zorg1: ah oui on ne peut écrire que des drivers en C, sinon t'as pas la magie "bas niveau" je suppose
+ 3141948: Moi j'ai arrêté de mettre des objets connectés partout déjà que je te retrouve même pas mes outils de bricolage lol
+ BabelO: Machine a laver linge et vaisselle ca existe deja&#160;:)
+ 3141948: ne
+ Zorg1: BabelO&#160;: je l'aurais parier ^^
+ BlaiseEbuth: Les toilettes aussi
+ BabelO: moi je me suis fait un systéme moi meme pour check ma conso d electricité et detecter les appareil deviant&#160;! avec un bon CNN la detection du type d appareil marche bien moyennent un premier etiquetage
+ 3141948: Non c++ et asm pour drivers çà se fait aussi
+ dwarfie: dans la serie des trucs debiles , karcher et son nettoyeur haute pression connecté ...
+ dwarfie: pas de telephone , tu peut pas t'en servir ...
+ BabelO: les drivers linux en C sont assez accessible
+ Zorg1: bah oui l'idée à la fin c'est de faire payer l'utilisation de l'objet j'ai l'impression, comme dans ces nouvelle de Philip K.Dick
+ BabelO: Si tu enléves toute l automatisation a ma femme tu la retrouve assise dans le noir télé eteinte&#160;:)
+ BabelO: elle connait plus les interrupteur&#160;!
+ BabelO: lumiere ou volet
+ dwarfie: je le redis ....tous des oods ...
+ BabelO: En attendant j'ai detecté un probleme sur un des frigos de la maison avec mon systéme et aussi sur l arrosage du jardin&#160;!
+ Zorg1: nice
+ BabelO: oui ca marchouille meme si ca fait des erreurs, j'ai essayé CNN et CNN + LSTM ... il y a des choses dur a detecte dans la maison juste avec la donnée consommation electrique
+ Zorg1: waouh un CoC sur la moyenne arithmétique ...
+ BigUP: mince, faut commencer par lire wikipedia pour savoir ce que c'est&#160;!&#160;:)
+ dwarfie: le niveau remonte ...
+ Zorg1: bigUp&#160;: tkt il a gentiment expliqué ce que c'était
+ BigUP: ouf sauvé&#160;!&#160;:)
+ Zorg1: la modération n'aurait pas laissé passer sinon tu te doutes bien&#160;;-)
+ dwarfie: euh ... ca existe encore la modération&#160;?&#160;;)
+ Zorg1: ça met des commentaires comme ça&#160;: "because it is valid for all cases"
+ dwarfie: "easy and fun" ... c'est la mode du moment ... 
+ dwarfie: je downvote plus de commentaire d'approve que les sujets eux meme depuis 2 semaines :yum:
+ Zorg1: "agree because I like fibonacci numbers"
+ Zorg1: d'ailleurs peut on vraiment détester les nombres de Fibonacci&#160;?
+ Zorg1: Automaton2000 ton avis éclairé sur la question&#160;?
+ Automaton2000: comment est ton ww&#160;?
+ Zorg1: houla c'est quel multi Automaton2000 y en a des tonnes ...
+ Automaton2000: je serais curieux de voir la différence
+ BlaiseEbuth: Wondev Woman
+ Zorg1: ah oui ^^ c'est vieux ça, le premier contest que j'ai fait ici
+ Zorg1: Juin 2017 waouh ...
+ BlaiseEbuth: Tempus fugit...
+ Zorg1: ... memento mori
+ <b>**Zorg1 cherche quelque random phrases en latin</b></p><p><img src="/a/59449061195531" /> BlaiseEbuth: Fluctuat nec mergitur.
+ BlaiseEbuth: Carpe diem
+ BlaiseEbuth: veni vidi vicci
+ Zorg1: Alea Jacta Est
+ Zorg1: Nunc est bidendum
+ Zorg1: SI tu vis pacem para bellum
+ BlaiseEbuth: In vino veritas
+ Zorg1: Cogito ergo sum
+ Zorg1: bon je suis à sec de citations latines
+ BlaiseEbuth: Hic sunt dracones
+ Tiouz: dolor sit amet
+ leojean890: wtf&#160;;)
+ Zorg1: y a aussi "qui garde les gardiens" mais je me plante toujours quand je la fais en latin
+ leojean890: (mais oui dans un puzzle/COC il faut définir les notions sinon tu peux perdre les gens qui ont oublié ou ne connaissent pas un truc si tu sors "moyenne arithmétique" ^^)
+ BlaiseEbuth: Nam gloria Lucifer
+ Zorg1: Quo Vadis
+ dwarfie: Alea Jacta Est
+ BlaiseEbuth: Tu quoque fili
+ Riocraft: Hello&#160;!
+ Zorg1: Avé
+ dwarfie: on dit ave
+ BlaiseEbuth: C'pas latin ça Riocraft
+ Riocraft: Merdum
+ Riocraft: ave
+ Riocraft: xD
+ Zorg1: :D
+ Zorg1: d'un autre côté c'est pas #la ici
+ BlaiseEbuth: #spqr
+ BlaiseEbuth: Testudo Automaton2000&#160;!
+ Zorg1: Senatus Populesque Romanum
+ Automaton2000: je copie colle le code, ça reste faisable
+ Riocraft: #toutneufjedecouvre
+ Zorg1: tkt on parle pas latin tout le temps ici ^^
+ BlaiseEbuth: Seulement quand le bateau coule...
+ Zorg1: J'ai pas de jambe de bois
+ dwarfie: tant qu'ona du rhum ... ca va ...
+ BlaiseEbuth: Ca peut s'arranger... :knife:
+ Riocraft: normalement il ne sombre jamais dans la phrase latine 
+ Riocraft: j'amène ma modeste contribution alors&#160;: A posse ad esse non valet consequentia
+ Zorg1: fun fact&#160;: la prolifération du latin a donné les nombres de Fibonacci
+ BlaiseEbuth: :scream:
+ Zorg1: et oui tout est lié
+ <b>**Zorg1 cherche comment on dit "Clash of Code" en latin</b></p><p><img src="/a/64830448445686" /> Riocraft: On dit pas
+ BlaiseEbuth: Codice pugna
+ Zorg1: voire pugilla
+ Zorg1: ah ok ça vient du même mot ^^
+ Riocraft: Question&#160;: je viens d'arriver, je ne connais RIEN au dev, puis-je commencer de 0 ici et si oui que me conseillez-vous&#160;?
+ BlaiseEbuth: Ouai. Pug ça veut dire combat <a rel="nofollow" class="external free" href="https://imgur.com/gallery/WgIfSYW">https://imgur.com/gallery/WgIfSYW</a>
+ BlaiseEbuth: Flee you fool
+ dwarfie: NaN ... nullum aut nullum
+ Zorg1: Riocraft&#160;: pas vraiment un site pour apprendre çà coder, Codingame, tu es censé avoir des bases en programmation
+ Riocraft: :thumbsup:
+ dwarfie: ce qui veut pas dire grand chose sauf d'apres google mais l'effet est le meme comme dirait loth :D
+ Zorg1: plutôt un site pour se perfectionner et découvrir des algos
+ Riocraft: Oh, oki.Bon je crois que je vais refermer cette page alors :PJ'suis pas encore assez latin
+ BlaiseEbuth: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=B4EKu4JeiNI">https://www.youtube.com/watch?v=B4EKu4JeiNI</a>
+ pardouin: deus ex machina
+ BlaiseEbuth: Tu pouvais pas t'empêcher de répondre hein&#160;? pardouin&#160;? <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/sort-using-comparator/191057/3">https://www.codingame.com/forum/t/sort-using-comparator/191057/3</a>
+ BlaiseEbuth: :rolling_eyes:
+ Zorg1: hihi
+ BlaiseEbuth: J'essaye d'apprendre à des gens à être autonome et monsieur passe derrière pour saper mon travail avec son plateau d'argent... :rage:
+ BlaiseEbuth: (╯°□°）╯︵ ┻━┻
+ JBM: oui mais il Savait Comment Faire
+ dwarfie: bah ... entre ca et les modifs sauvages des puzzles ...
+ JBM: se taire aurait laissé planer le doute
+ BlaiseEbuth: -_-
+ dbdr: quomodo contendere MMXXI vena?
+ Zorg1: ça génère du drama à pas cher
+ JBM: on a jamais assez de drama
+ dbdr: *quam sit amet fons MMXXI contendere?
+ WhatTrickeryIsThis: dramaton2000
+ Zorg1: c'est ce que veux le CG moyen, des CoCs et du Drama (tu le fais en latin si tu veux)
+ BlaiseEbuth: Circus et panem&#160;?
+ WhatTrickeryIsThis: latinus malocus
+ Zorg1: Urbi et Orbi
+ Zorg1: j'allais l'oublier celle là
+ dbdr: enfin fons c'est source, qui est spring, qui n'est pas printemps
+ dbdr: fix it google
+ BlaiseEbuth: Ok. New business plan: CG investis dans des serveurs pour les contests, et hors période de contest, ces serveurs servent au minage d'une nouvelle crypto-monnaie, le dramaCoin.
+ Zorg1: printemps en latin  ça doit être vernum je pense
+ Sakisan: Dans un MCTS on fait comment pour eviter les lignes qui sont guaranties de perdre mais ou la majorité des coups adverses sont gagnantes pour moi&#160;?
+ PythonSlayer: Le MCTS choisi ce qui est bon pour toi non&#160;?
+ PythonSlayer: ou mauvais
+ PythonSlayer: et salut&#160;!
+ Zorg1: o/
+ BlaiseEbuth: Ave
+ Sakisan: Il choisit en fonction de la moyenne, mais si l'adversaire est malin il prendront toujours la bonne
+ Sakisan: Il y a surement quelque chose que j'ai pas bien compris mais comment savoir&#160;:)
+ PythonSlayer: Tu choisi comment les nodes que tu exploites&#160;?
+ BabelO: ben MCTS les noeud sont choisit en fonction de leur winrate et du taux de visite, il y a une formule UCB qui te permet de faire ce calcul pour slectionner les noeud, et uand du tombe sur du non exploré alors c'est random. C'est pour cela qu'il faut bcp d iteration en MCTS
+ PythonSlayer: Oui c'est ça de base&#160;:)
+ PythonSlayer: C'est pour ça que je suis pas sur de comprendre ce  que sakistan demande&#160;:)
+ Sakisan: Je demande pour les situation proche de la fin, ou toutes les voies sont explorées
+ Zorg1: bah ça se comporte comme un minmax non 
+ Sakisan: j'ai pas encore appris le minimax ^^
+ PythonSlayer: Sakistan tu veux dire qu'il est possible d'avoir un moment donne ou le nombre de partie que tu as joue est maximum pour une ligne(et que donc c'est la meilleure) mais que c'est pas le meilleur coup?
+ Sakisan: je penses?
+ Littleyounes: Le challenge pikaptcha 2 est entrain de siphonner mon ame
+ BlaiseEbuth: Non. C'est moi, tkt.
+ didyme: hughes
+ Zorg1: on va manger des chips&#160;?
+ didyme: c'est exact
+ Zorg1: au temps pour moi
+ PythonSlayer: Mmmmh aucune idee de si c'est possible pêut-être dans des jeux biiz Sakisan
+ Sakisan: mais donc, s'il adversaire a 1 coup gagnants et 9 coups perdant, la moyenne est 9/10 pour moi mais je vais quand meme perdre 10/10 des cas
+ BlaiseEbuth: Jépakonpri...
+ Sakisan: je perds 10/10 car l'adversaire jouera le coup gagnant evidemment. Pourqouoi le mcts detecte pas ca? J'ai une erreur dans l'algoritme alors?
+ Littleyounes: o/
+ PythonSlayer: Mais donc imagines que tu joues avant soit tu prend cette ligne la et tu perds oit tu prends une autre ligne et si l'adversaire a un coup gagnat tu perdras aussi non?
+ Sakisan: je crois pas qu'on progresse :D
+ BlaiseEbuth: Le MCTS choisit la branche à emprunter en fonction de ton taux de victoire/défaite. Si tu perds à 100% dans une branche, elle ne sera pas choisie. C'est tout.
+ BlaiseEbuth: Sauf si tu perds à 100% dans toutes les branches... :3
+ Sakisan: je vais me renseigner sur le minimax, ca me remettera sans doute sur la bonne voie 
+ PythonSlayer: En fait si tu as pas 100% de winrate sur une branche en fin de game tu perds
+ dwarfie: mdr ... je prend un etat , il me trouve un seul coup valide (ce qui est juste) mais dans l'arbre y'en a 
+ dwarfie: 4 .. les voix du mcts sont impenetrables
+ domak: dwarfie, la Jeanne d'Arc des algos!
+ dwarfie: non , moi je suis l'homme qui hurlait des injures a l'oreilles des algo :D
+ Zorg1: oui mais le MCTS il s'en fout, il se contente de lancer son dé
+ Rajh: Desfois le problème c'est pas l'algo, c'est les données xD
+ domak: Bah souvent chez moi, le problème se situe de l'autre côté du clavier...
+ dwarfie: on sait , on sait , ce qui compte c'est les valeurs ...
+ domak: 3v-
+ domak: -3v
+ dwarfie: de l'autre cote du clavier , c'est Automaton2000 qui fout le brin
+ Automaton2000: mais pas plus de temps sur le chat
+ Littleyounes: Automaton2000 prévois-tu de détruire le monde&#160;?
+ Automaton2000: c'est sûr que si tu utilises un algo de recherche
+ Littleyounes: :o
+ dwarfie: Automaton2000 ... c'est sur qu'on prefererait des algo de trouveurs
+ Automaton2000: je suis en train de jouer à un jeu
+ dwarfie: Automaton2000 , un jeu avec des tortues&#160;?
+ Automaton2000: non, c'est un truc qui marche bien dans tron, le pessimiste
+ dwarfie: Automaton2000 , des carapaces de tortues alors ...?
+ Automaton2000: euh non , faut pas exagerer non plus ...
+ DaCapo7: hey qui pour un clash of code&#160;?
+ leojean890: dwarfie tu debug ton SC2021&#160;?^^
+ dwarfie: non
+ leojean890: connect 4&#160;?
+ leojean890: faudrait que je retente mcts, je fais que dire ça mais je le fais pas^^
+ dwarfie: non , connect 4 , c'est bon je te sois passé devant :p
+ leojean890: (j'avais vu que tu avais encore improve connect 4)
+ leojean890: ouais voilà&#160;! xD
+ leojean890: clobber&#160;?^^là je dis ça random:p
+ dwarfie: improve ... non ... juste trouvé ce qui deconnait dedans :p
+ dwarfie: oware 
+ leojean890: (mais il est assez simple niveau simu et les mcts win)
+ leojean890: ah oware ok j'ai un minmax:)
+ leojean890: ouais je vois, c'est pas l'algo le plus simple à debug:)
+ dwarfie: moi j'ai un gros bug :rofl:
+ leojean890: pendant qq mois j'avais un bug dans mon oware aussi je bloquais #93
+ leojean890: dans ma simu
+ leojean890: simu pas super dure mais faut faire attention quand même^^
+ dwarfie: clair , mais en plus je merde entre l'ide et mon codeblocks et regulierement j'ecrase les corrections parce que je sais me gourre en copiant collant :D
+ dwarfie: ou pire , j'ai corrige 2 bug differents dans chacun lol
+ leojean890: ah oui se tromper de sens, classique^^
+ leojean890: je viens de commencer <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/dice-duel">https://www.codingame.com/ide/puzzle/dice-duel</a>
+ dwarfie: il manque un mode debug dans oware surtout ... compter les graines "a la main" c'est chiant
+ leojean890: ah oui debug auto ide c mieux
+ dwarfie: parce que meme avec la sortie d'erreur , y'a tellement de decalage avec les frames qu'on sait jamais reellement si c'est bo
+ leojean890: ah ouais ca arrive, c'est chiant
+ leojean890: faut printer le num de frame
+ leojean890: et galérer à switcher entre la sortie d'erreurs et le visual
+ leojean890: je push une petite simu depth  1 dans <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/dice-duel">https://www.codingame.com/ide/puzzle/dice-duel</a> ça a pas l'air dégueu
+ leojean890: bon ça a quand même du mal avec le top 2 (Boss and Patrick) de wood 2 lol
+ dwarfie: moi mon oware est carrement degueu :D
+ leojean890: au dessus du boss à 67% mais ça peut repasser en dessous
+ leojean890: c'est le temps de le debug, ce oware^^
+ leojean890: c'est tellement simple de glisser un bug dans une simu que ..
+ SefioR13: Dans CSB la flèche bleue du mode debug elle correspond à quoi&#160;?
+ leojean890: 0.1 en dessous du boss à 88% :s
+ leojean890: SefioR13 je n'ai jamais utilisé ça je crois :P
+ SefioR13: D'accord leojean 
+ SefioR13: D'ailleurs comment on fait pour répondre en rouge&#160;?
+ dwarfie: on fait pas
+ leojean890: c'est quand on cite ton pseudo au caractère près
+ leojean890: tu le vois en rouge
+ SefioR13: Ok merci
+ dwarfie: bon sang , je finis par avoir l'impression que mon code rollback dans l'ide :upside_down:
+ leojean890: tu deviens expert MCTS là vu que c'est le 3eme que tu enchaines^^
+ dwarfie: je fais surtout en sorte d'avoir une brique generique pour plus avoir a en faire de zero ...&#160;;)
+ leojean890: et au bout de 3 tu as bien cette irique générique&#160;?^^
+ leojean890: brique
+ pardouin: o/
+ leojean890: yo
+ pardouin: suis repassé voir tron par hasard, 49ème gold
+ pardouin: il doit y avoir moyen de legend quand même&#160;:/
+ pardouin: au final je suis plus près de legend tron que totozero
+ leojean890: je suis 70 environ je crois
+ leojean890: ça doit être faisable en effet^^p
+ leojean890: meme en python
+ leojean890: hypersonic je confirme legend en python =&gt; done
+ leojean890: en me faisant pousser anyway
+ pardouin: j'ai remarqué que mon bot fait des trucs illogiques, il colle pas au mur dans certaines situations où il devrait
+ pardouin: ça doit pouvoir se fixer
+ leojean890: tron on doi avoir un truc un peu équivalent en mode "voronoi"
+ leojean890: et en late game je rase les murs
+ leojean890: étape suivante augmenter la depth peut être
+ leojean890: s'il colle pas au mur c'est que tu pondères pas assez ça dans ton éval dans la situation qui l'impose&#160;?^^
+ pardouin: parfois il reste un couloir de 2 cases et au lieu de serpenter dedans il part en ligne droite et il se grille l'autre
+ pardouin: le voronoi suffit pas à détecter ça mais c'est pas trop méchant à détecter
+ leojean890: totozero pour légend ça semble pas si simple faudrait que je regarde les évals des PM et que je modif la mienne ou que je passe en MCTS^^
+ pardouin: faudrait juste que je remette les mains dans le cambouis ^^
+ dwarfie: petits joueurs ....
+ leojean890: longer les murs c'est juste une heuristique aussi
+ leojean890: si tu simules tu peux trouver mieux dans certaines situations
+ leojean890: dwarfie j'ai pas regardé si t'as finalement legend sur totoro xD
+ leojean890: vu que t'avais trouvé ton bug
+ pardouin: je sais bien mais dans ce cas de couloir de deux cases c'est spécifiquement un truc à faire
+ leojean890: ah non 315 gold
+ leojean890: je viens de vous CG multi
+ dwarfie: non ... je suis pas legend ... j'ai bien uppé ... et sans aller piquer les evals des autres moa
+ leojean890: j'ai pas encore piqué d'éval xD
+ leojean890: p'tet je modifierai juste la mienne:P
+ pardouin: idem j'ai juste repensé mes alignements
+ dwarfie: non mais a souvent je te vois dire ce qui est pris dans les PM ...&#160;;)
+ pardouin: j'ai pas d'éval à proprement parler, juste des tris de moves dans chaque catégorie
+ leojean890: en m'inspirant peut être des évals, qui sait hehehe
+ leojean890: ce qui est pris dans les PM&#160;?:P
+ leojean890: sur quels multis&#160;?
+ Zorg1: SefioR13&#160;: c'est le vecteur vitesse de ton POD 
+ dwarfie: et oui ... mon bug etait ridicule
+ Zorg1: oups scroll ^^
+ leojean890: ça m'arrive de reprendre qq idées des PM, mais globalement je préfère faire les miennes quitte à ce que ça marche moins :P
+ leojean890: parfois je fusionne aussi..
+ dwarfie: voila ... moi je les regarde pas ... je prefere trouver tout seul comme un grand :yum: 
+ leojean890: genre "voronoi" sur tron je l'ai piqué dans un PM mdr
+ leojean890: du coup en conséquence sur codingame sponsored challenge j'ai pnsé à l'appliquer par moi même :P
+ leojean890: du coup au moins ça m'a appris qqc^^
+ dwarfie: surtout si c'est pour dire voronoi quand c'est pas du voronoi ...
+ leojean890: bah je le mets entre guillemets vu les remarques de stilgart sur la rigueur associée à la définition xD
+ leojean890: après en vrai j'ai pas d'autre terme à part faire une multitude de BFS et comparer qui arrive en premier
+ pardouin: mouais c'est du voronoi discret
+ pardouin: c'est pas spécialement choquant d'appeler ça voronoi
+ leojean890: bcp de monde appelle ça voronoi en vrai
+ dwarfie: leojean890 .... beam search ....non&#160;?
+ leojean890: même si c pas la def de base
+ leojean890: j'ai pas beam search
+ leojean890: j'ai pas de width pour limiter le nb de noeuds
+ dwarfie: bah , tant qu'a dire ni'mporte quoi ca vaut voronoi :D
+ leojean890: le beam c'est tu limites ton nombre de noeuds à width, quand tu changes de depth dans ton bfs^^
+ leojean890: en evaluant e triant
+ leojean890: et*
+ dwarfie: merci , je sais ... 
+ leojean890: bah ouais t'étais en mode ironie
+ leojean890: mais je voulais dire que le terme voronoi est abondemment utilisé par la commu pour parler de ça :P
+ leojean890: même si c'est pas rigoureux
+ dwarfie: non ... y'a quelques pollueurs qui utilisent du jargon pour ce la peter a tort et a travers surtout ...
+ leojean890: dans les PM
+ dwarfie: alors qu'il y a vraiment un multi ou faire du voronoi a un sens ...
+ leojean890: (du coup pour objectif de transmission d'info)
+ leojean890: du coup pardouin, voronoi "discret" pour toi&#160;?^^
+ leojean890: avec la vraie def que je vois sur le web c'est de la zone d'influence en mode game of drones
+ dwarfie: voila ... c'est cela...
+ dwarfie: arf , dans la serie bug con , je viens de comprendre ou est mon souci dans oware 
+ dwarfie: (╯°□°）╯︵ ┻━┻
+ leojean890: alors c'était quoi;)
+ dwarfie: on nous donne pas les scores en input et l'info est pas propagée entre 2 tours .... la loose
+ dwarfie: j'ai oublié de la copier au passage 
+ dwarfie: et en plus faut que j'ajoute les points que l'adversaire a marqué ...
+ dwarfie: vraiment pas sympa les inputs en fait ...
+ leojean890: ah ouais les scores 
+ leojean890: moi je les calcule et je prends pas en compte ceux qu'on avait déjà avant le tour courant
+ leojean890: bon dice duel ça win bien là juste grâce à un tuning de magic numbers..
+ leojean890: 36/36 en W2
+ leojean890: pret à me faire défoncer en W1 par trictrac euler et cie
+ dwarfie: bon , les scores c'est réglé ... maintenant trouvé pourquoi ca gagne toujours pas :D
+ leojean890: hop top 10 donc hehe
+ leojean890: sinon tu fais comme robostac tu fais un NN
+ leojean890: 1 lose sur 80 matchs ok
+ 3141948: 🐔
+ 3141948: Oops
+ leojean890: wood 1 ça devient 30 loses sur 30 matchs
+ leojean890: mdr philRG en mode troll&#160;?:P
+ dwarfie: bot en bois
+ leojean890: viens tester dice-duel
+ leojean890: va falloir que j'améliore ça 
+ 3141948: Je vais jeter un œil, les inputs sont pas trop dures?
+ leojean890: les inputs sont simples, c'est quelques dés
+ leojean890: leurs valeurs par face, leurs emplacements
+ leojean890: et voilà
+ dwarfie: en meme temps , c'est la regle supplementaire de bois 1 qui change tout&#160;;)
+ leojean890: ah ouais y'a une règle en plus
+ leojean890: Captures are only legal, if the sum of the captured die and the new die (after the move is applied) is equal to 7.
+ leojean890: j'avais pas encore regardé de replays
+ leojean890: ça m'aurait ptet fait comprendre ça xD
+ leojean890: philRG en gros tu peux bouger tes dés du nombre de cases mentionné sur ta face du haut
+ leojean890: du coup soit tu fais un bfs/dfs par dé pour trouver toutes les possibilités..
+ leojean890: et tu minmax (mais c'est lourd en computation)
+ leojean890: faut trouver comment élaguer efficacement, ça sera ça la difficulté
+ 3141948: Pas de min max pour moi toujours pas compris la remontée des valeurs dans l'arbre lol
+ dwarfie: si tu commences par un bfs ... c'est que t'as pas vu que c'etait facile de reduire avant meme de regarder les chemins :D
+ leojean890: c'est juste une fonction récursive qui appelle un bloc différent suivant quel joueur tu es
+ 3141948: Ah ok
+ leojean890: dwarfie j'ai une petite idée, c'est de regarder les cases finales plutôt et ensuite de compute 1 chemin qui y va
+ leojean890: car bfs ça va faire des chemins equivalents et donc perdre du temps de computation
+ leojean890: genre LUR &lt;=&gt; RUL
+ leojean890: si tu veux monter de 1 case avec un dé 3
+ dwarfie: exactement ... et en plus , ca se precalcule facilement tout ca
+ leojean890: ouais au tour 1, tu as raison
+ dwarfie: en fait , quand je l'attaquerai , je commencerai par ca justement :D
+ leojean890: au moins tu perds pas du temps comme moi hehe
+ dwarfie: precalcul de tous les chemins 
+ leojean890: mais ouais, regarder les cases d'arrivée et choisir un chemin, ça réduit de bcp le branching
+ dwarfie: comme on peut pas croiser le path en plus ca reduit pas mal
+ leojean890: après faut faire gaffe aux obstacles 
+ leojean890: du coup faut un peu BFS quand tu cherches ton chemin
+ leojean890: ouais en croisant le path si un dé est là
+ dwarfie: non , j'en aurais pas besoin en fait :D
+ leojean890: après effectivement tu peux avoir une liste de chemins par case d'arrivée
+ leojean890: et du coup si l'un est occupé tu prends le second
+ leojean890: (après tu peux faire une heuristique d'élagage sur des coups où tu vois d'avance que c'est nul genre tu vas te faire bouffer )
+ dwarfie: go , c'est foireux mais pas tant que ca
+ TidyMaze: foireux&#160;? fix ton 2048 dwarfie
+ TidyMaze: (oups, hors sujet, je croyais que tu parlais du langage, sorry)
+ dwarfie: je parlais de mon code en submit 
+ dwarfie: :rofl:
+ Zorg1: il rigole pas TidyMaze :D
+ dwarfie: clair
+ leojean890: moi j'ai mon dice-duel à fix, il prend trop cher depuis qu'il a dépassé W2 hehe

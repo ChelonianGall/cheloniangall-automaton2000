@@ -1,0 +1,2874 @@
+ jrke: hey how can we command dead pacs
+ njaber: you can't?
+ jrke: so can we see pellets that our dead pellets can see
+ njaber: you can't
+ jrke: so what can dead pacs do
+ eulerscheZahl: they are just there so you know you killed them
+ njaber: nothing, they send the information to you for decdution
+ jrke: means no use just to show how many of our pacs died
+ Neabfi: yeah and to know how many enemy pacs are dead too
+ eulerscheZahl: and where they died
+ jrke: K
+ jrke: means they can't see anything
+ eulerscheZahl: correct
+ njaber: indeed
+ jrke: thanks&#160;:)
+ mohammadhei05: shut
+ Zenoscave: shut what
+ mohammadhei05: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/b836d157-e1b9-4670-9657-94441dc09bb0">http://chat.codingame.com/pastebin/b836d157-e1b9-4670-9657-94441dc09bb0</a>
+ mohammadhei05: give me code
+ Zenoscave: no
+ Zenoscave: do your own homework
+ cegprakash: anyone doing depth 30?
+ cegprakash: :D
+ mohammadhei05: ok
+ mohammadhei05: :joy:
+ njaber: cegprakash I'm curious, when you're talking about depth, do you mean depth in number of turns, or in number of moves?
+ cegprakash: turns
+ cegprakash: ofc
+ Zenoscave: Does speed count as 1 or two turns?
+ cegprakash: 1
+ njaber: so top gold are doing 20-30 turns...
+ njaber: I need to find the answer to my problem quickly so I can implement it
+ Kellthazar: I want to hit gold to tried on Monte Carlo Tree Search again...
+ Kellthazar: to try*
+ Zenoscave: Kellthazar why not try it now
+ Csipcsirip: MCTS works pretty good if you  combine it with a strong rollout heuristics
+ BenWo: I cannot get up the motivation to code tonight :P
+ Neabfi: yeah MCTS should guarantee you at least top 200 gold 
+ Kellthazar: Csiripcsirip, but how to use a heuristic to make the random moves? This part is not clear to me.
+ Neabfi: I never implemented a MCTS on CG, I feel like it is not as simple to make it so that there are enough playout in 50ms
+ Csipcsirip: you only count moves in your random generator that makes sense. for example you dont go left right left right left right
+ cegprakash: I win against someone almost everytime on IDE but I lost 0-5 to him on arena
+ thethiny: randomness ftw
+ SurajMishra2209: I am still stuck at bronze...type F in chat
+ JohnCM: ya i'm a strong believer of monte carlo tree search too
+ JohnCM: just not for codingame, the timeout is killer
+ JohnCM: if it's 1 pac vs 1 pac still got chance
+ JohnCM: but the monte carlo complexity is exponential in the number of agents
+ JohnCM: as you need to multiply num actions per agent * num agent per time step
+ JohnCM: and it quickly explodes to 4 moves per agent per 10 agents (including opponent) = 4^10 calculations per time step
+ JohnCM: that is just only assuming up down left right
+ Csipcsirip: you can have a separate tree for every pacman
+ JohnCM: if you include speed and transform, there'll be more actions
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/36476/smitsimax">https://www.codingame.com/playgrounds/36476/smitsimax</a>
+ JohnCM: well that won't be very accurate if we assume that the other agents are part of the environment
+ AntiSquid: did you see the player count euler? 5605
+ eulerscheZahl: wait, what?
+ AntiSquid: 4605 *
+ Csipcsirip: you run every pacman in the same env
+ eulerscheZahl: was 4.5k
+ eulerscheZahl: ah
+ AntiSquid: but it's bigger than accountant
+ eulerscheZahl: still: all-time highest :tada:
+ eulerscheZahl: might even reach the 5k mark
+ JohnCM: hmm i guess smitsimax might make a good approx. if you know your enemy posit
+ Csipcsirip: I don't count enemy at all yet. except I reset pellets, that are 100% eaten by him
+ Csipcsirip: but when the scores are 0 simmetricity is a good approximation
+ Kellthazar: Dont you consider enemy moves Csripcsirip?
+ Csipcsirip: not yet I just use the  MCTS to make some collaboration between my pacs
+ Csipcsirip: but I guess I'll add the enemy with limited search depth / score, to avaoid chasing pellets, that will be eaten in few turns
+ Kellthazar: Really nice article...
+ eulerscheZahl: damn you random Csipcsirip
+ eulerscheZahl: now i have to debug offline&#160;:/
+ Csipcsirip: you can expect me submitting in every 10minits from now :p 
+ Csipcsirip: but that win was no coincidence :D 
+ JohnCM: haha that's good
+ JohnCM: i'm hoping to implement some advanced kill techniques like euler. hopefully that will give me a boost
+ eulerscheZahl: i clearly have a bug there. i was aware of it before but that match is a good way to reproduce it
+ eulerscheZahl: as advanced as in frame 85? :D<a rel="nofollow" class="external free" href="https://www.codingame.com/replay/464158575">https://www.codingame.com/replay/464158575</a>
+ Csipcsirip: I think I submitted that version again  btw
+ eulerscheZahl: that's the bug i'll address now
+ JohnCM: ah yup that kind
+ JohnCM: kill in a dead end
+ eulerscheZahl: and i miss it
+ eulerscheZahl: i exactly know why
+ JohnCM: that's good:)
+ eulerscheZahl: but needs a bit of cleanup
+ JohnCM: woohoo my recent submit is doing well
+ eulerscheZahl: you are close to 1st python already
+ Csipcsirip: I'm not sure btw to waste 5-10 rounds to kill an opponent pacman. especially at the end of the game
+ JohnCM: i optimized a bit of my heuristics to prioritize exploration more than exploit
+ Csipcsirip: *if its worth it
+ JohnCM: oh it's worth it at the start
+ JohnCM: either way, a sure kill helps remove one moving piece
+ JohnCM: quite worth it
+ JohnCM: romka does it quite often also
+ JohnCM: so funny how changing one of my heuristic by 0.1 can jump me 50 places
+ JohnCM: i feel like i'm the one tuning a "neural network" of heuristics
+ JohnCM: maybe it could be automated
+ vbplaya: I got on day one and did some coding but ran into a problem where on bigger maps the  visible pellet count was not correct so it was failing because it was trying to take 1 too many "input()".  
+ Csipcsirip: I'm almost 100% sure that the problem is not in the inputs given by cg :P
+ JohnCM: great.. happy with this recent submit. hopefully it'll be better after i implement the trap mechanism
+ JohnCM:&#160;:)
+ vbplaya: Ok, I understand that but I tried the starter code and it had the same issue.  I had to change the line: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/de571b75-fd80-4bef-838f-c90f776a4ed6">http://chat.codingame.com/pastebin/de571b75-fd80-4bef-838f-c90f776a4ed6</a>
+ JohnCM: could it be the problem is not in the visible pellet input
+ JohnCM: but in the lines before?
+ JohnCM: like you read a line two times?
+ JohnCM: why not try printing out the inputs given and see if they make sense, maybe this would help you find out where the bug is
+ NapTown: never heard anybody else with that issue, and it would be a big issue
+ vbplaya: I did do the printing out .... I can't imagine nobody else had it but maybe it was something else (it was pretty late).  I was thinking that they might have fixed it.  Who knows ... but it was odd 
+ JohnCM: maybe you could give us the chunk of code where you did the input parsing (only the input)
+ vbplaya: If nobody else saw it ... then it must have been an issue with my code (or a python thing)
+ JohnCM: i could help you debug
+ NapTown: i don't think he still has the issue
+ JohnCM: oh that's good news then
+ JohnCM: don't need to worry about it
+ vbplaya: Ok ... I'll try it with the original again and see if it pops up again.  Thanks
+ vbplaya: BTW, JohnCM ... thanks for offering to help me debug ... very cool of you.
+ Csipcsirip: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/464167359">https://www.codingame.com/replay/464167359</a>
+ Csipcsirip: you shall not pass
+ JohnCM: vbplaya, no worries. i help when i can
+ JohnCM: cause i use python also, so it is easier for me
+ JohnCM: @csipcsirip, actually staying still in a collision seems pretty impressive
+ JohnCM: it is like.. i don't care if you want to go through, i'm not moving
+ JohnCM: wow csipcsirip you sure rose very high up
+ Csipcsirip: thx. my search started to be working...wasted 2 days for not working algos
+ JohnCM: i don't really do monte carlo tree search, but i have an essence of that in my heuristics
+ JohnCM: works much faster for python
+ JohnCM: i think this competition is not settled yet
+ JohnCM: everytime someone becomes 1st, there's a counter-strategy to their strategy
+ JohnCM: it's very hard to be all-rounded
+ Zandy156: It's almost like its a game of paper rock scissors.
+ JohnCM: or rather a game of hide and seek
+ eulerscheZahl: sounds like vbplaya is not flushing the error stream
+ vbplaya: eulerscheZahl ... I'll bite ... what do you mean?
+ eulerscheZahl: looking at your code snippet: you assume that you don't get the last line of input?
+ eulerscheZahl: and that would be wrong. you just don't see it in the error output
+ eulerscheZahl: print(..., flush=True)
+ vbplaya: Yes, in order to not get a timeout waiting for the last input (which never came) 
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/python3-buffering-causes-confusion/181353/">https://www.codingame.com/forum/t/python3-buffering-causes-confusion/181353/</a>
+ eulerscheZahl: read this
+ vbplaya: reading it now
+ vbplaya: very interesting ... I am a little confused on how to implement a "fix" on my end though.  
+ eulerscheZahl: you flush the output yourself
+ vbplaya: are you saying when I send the move command?
+ eulerscheZahl: print("Debug messages...", file=sys.stderr, flush=True)
+ eulerscheZahl: just add the flush=True part to your printing
+ vbplaya: ok ... so put in a flush in the loop which reads in the points.
+ eulerscheZahl: that prints the points
+ vbplaya: Will do ... thanks euler ... always learning things ... 
+ Bernard_Lowe: is anyone else frustrated that silver introduces showing dead pac-men now?
+ Bernard_Lowe: Time to fix up all my code to not avoid dead pac-man.
+ BenWo: not really
+ BenWo: I mean you already had to account for dead ones, now you just have another way to identify them
+ Bernard_Lowe: I didn't account for dead pacmen before. I was thinking about writing code for that.
+ Bernard_Lowe: I wonder what changes will show up in gold league. They said bronze would have all rules, but they kinda lied.
+ thibpat: hello :wave: I'm going live to continue my Spring Challenge bot <a rel="nofollow" class="external free" href="https://twitch.tv/thibpat">https://twitch.tv/thibpat</a>
+ BenWo: but you always had to not send commands to dead pacs
+ Bernard_Lowe: correct.
+ Bernard_Lowe: But, now dead pacs stay in my lists, so now I need to factor them out.
+ Bernard_Lowe: With no changes in my code, bronze --&gt; I lost some optimization in my code.
+ CanisLupus: thats not truw, you can ignore dead status and command them. Game is protected: "- Pac 2 is dead! It cannot be commanded anymore!"
+ BenWo: hm, ok, I'm sure we structured things differently
+ Bernard_Lowe: for friendly pac-man yes.
+ Quidome: or drop the pac when getting the input, minimal change
+ Bernard_Lowe: for enemy dead pac-man, no.
+ MSmits: if(type == "DEAD") continue
+ MSmits: problem solved
+ Quidome: \o/
+ Bernard_Lowe: yeah, but I have many sections of enemy pac-men checks. so I gotta findem all.
+ Bernard_Lowe: Are there any changes in gold?
+ Quidome: no
+ Bernard_Lowe: Start with 20 pac-man? lol
+ BenWo: lol ouch
+ MSmits: if you do it at input, it will be the same for your code
+ MSmits: your 20 checks will be the same
+ Bernard_Lowe: good point MSmits, I'll do that, thanks.
+ MSmits: the enemy pacs wont show up in any lists
+ MSmits: kk 
+ perseverent: hello
+ MSmits: btw, i also found it slightly annoying, but it was mostly my own fault. I had already written 1500 lines and I didn't remember what I did about dead pacs
+ perseverent: still in silver after implementing pathfinding
+ perseverent: hardest silver ever
+ perseverent: what should I do to get to gold?
+ eulerscheZahl: kill all the opponents
+ MSmits: perseverent, my theory is that it's hard because silver was best 300 out of 4000 when it opened
+ eulerscheZahl: and harvest on your way there
+ MSmits: when often it is best 300 out of 1500
+ perseverent: I see
+ MSmits: also more people may have spent more time coding because of stay at home
+ Zandy156: It definitely changes things
+ perseverent: I mostly ignore enemy pac if I can
+ eulerscheZahl: many new players who are probably weaker than veterans on average make it a little less drastic as it sounds. but still harder going by numbers
+ MSmits: there was also little time between ooc and this
+ mlomb: I still don't attack other pacs
+ MSmits: that means people may have gone in more prepared and again, spent more time coding
+ mlomb: I think it's time
+ perseverent: what are you doing in gold if in silver is this level
+ perseverent:&#160;?
+ MSmits: my code hasnt changed much since silver
+ MSmits: still 22 :P
+ perseverent: wow
+ perseverent: great for you
+ MSmits: yeah, but i want to get legend, so to be safe, i do need some real improvement today
+ MSmits: though likely i will be close enough to gold boss that i will get in randomly over the weekend
+ perseverent: real improvement? levitation?
+ BenWo: I'll be pumped if I somehow make Legend
+ BenWo: feel like I can do gold if I get some motivation here
+ MSmits: i still need to hardcode superpellets properly
+ MSmits: get some dead end kills when i detect them
+ MSmits: avoid some dead end losses
+ MSmits: that should be doable today i hope
+ perseverent: do you make some kind of simulations?
+ MSmits: yes, monte carlo
+ MSmits: do random moves, pick the best combination
+ perseverent: is this level necessary to beat the silver boss
+ perseverent: does not seem so hard
+ MSmits: no idea
+ MSmits: gonna get to work. Good luck perseverent
+ perseverent: good luck tou you too MSmits
+ eulerscheZahl: i'm pretty sure that the silver boss itself doesn't do anything fancy
+ eulerscheZahl: CG likes simple bosses with short code and low CPU footprint
+ Rickardo: hi
+ NapTown: hello
+ Rickardo: does anyone know shadow of knoght
+ NapTown: first one?
+ Rickardo: yea
+ NapTown: you need help with it?
+ NapTown: <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/shadows-of-the-knight-episode-1-puzzle-discussion/264">https://www.codingame.com/forum/t/shadows-of-the-knight-episode-1-puzzle-discussion/264</a>
+ Rickardo: yea
+ AntiSquid: someone does know i am sure
+ Rickardo: yea maybe
+ AntiSquid: ah Rickardo bubble sort 
+ AntiSquid: + get an avatar
+ Rickardo: nah not important
+ eulerscheZahl: #1 :othat's a resubmit of my #16 bot
+ eulerscheZahl: and it's gone
+ kovi: so random
+ ScryptAn: Could someone give advice about "Ghost in the Cell" in bronze?
+ eulerscheZahl: ScryptAn did you check the forum? lots of players describing their strategies
+ AntiSquid: random, but some are at specific ranks more often
+ Rickardo: pls y can't someone learn html
+ 351062: The toad going strong
+ AntiSquid: what do you mean?
+ AntiSquid: i know html @_@
+ eulerscheZahl: still the recalc will be fun again
+ NapTown: someone can
+ Rickardo: like when i want to solve a game html isn't part of the options
+ AntiSquid: troll&#160;?
+ Rickardo: wat u mean
+ AntiSquid: use javascript / typescript @_@
+ Rickardo: type script
+ AntiSquid: do you want to learn html&#160;?
+ AntiSquid: i can give you some useful links
+ Rickardo: but i know html well but y can't i use it
+ eulerscheZahl: for bot programming?
+ eulerscheZahl: you must be trolling
+ AntiSquid: then you would know what html is Rickardo
+ AntiSquid: you clearly don't
+ Rickardo: i know wa5t html is
+ eulerscheZahl: hyper text MARKUP language
+ Ramzel: In the night my rank raised by 100 xd
+ eulerscheZahl: not a programming language
+ AntiSquid: also the html joke is shit and old
+ Rickardo: oh no wonder
+ TinfoilSaint: to be fair you can solve fizz buzz with CSS
+ eulerscheZahl: html+css is turing complete
+ Rickardo: well can u show me some useful java and javascript libks
+ eulerscheZahl: because java and javascript are almost the same?
+ AntiSquid: i can show you the way out 
+ TinfoilSaint: If you haven't checked out freecodecamp.org Rickardo then you should
+ eulerscheZahl: calm down AntiSquid
+ TinfoilSaint: some of the best free beginners coding tuition out there
+ Rickardo: yea but do u hav any links
+ TinfoilSaint: ...
+ AntiSquid: yes
+ eulerscheZahl: google.com
+ TinfoilSaint: I just gave you the link
+ Rickardo: funny
+ TinfoilSaint: :joy:
+ AntiSquid: was about to suggest freecodecamp too
+ sgalasso: Hi everyone, does anyone have an idea of how we can get the current  turn of the game&#160;?
+ Washier: haha.
+ AntiSquid: sololearn if you need something easier Rickardo
+ Rickardo: ok i will try out those web and apps
+ AntiSquid: keep track of turns sgalasso
+ AntiSquid: ok bye
+ Rickardo: thnks everyone
+ AntiSquid: np
+ AntiSquid: you just count the turns sgalasso
+ AntiSquid: first turn of inputs = turn 1, increment number afterwards
+ AntiSquid: no point pming me sgalasso 
+ AntiSquid: also that part is what everyone struggles with so idk 
+ Rickardo: gg
+ Rickardo: g
+ AntiSquid: are you a prince btw?
+ Adnmaster: do i need to know pathfinding or something like that to get into silver?
+ Doju: you don't have to but it'll surely help
+ Adnmaster: so just with coding knowledge without any other tricks i can get into silver?
+ Doju: uhh
+ Adnmaster:&#160;?
+ Doju: if you give your pacs sensible commands and have considered other things as well as pellets
+ Doju: then sure
+ Adnmaster: ok
+ Doju: but it'll be hard to make them collaborate for example
+ Doju: if you don't have pathfinding
+ BenWo: heya Doju
+ Doju: heya BenWo!
+ BenWo: it's our day for Gold league, right?
+ AntiSquid: Adnmaster probably more effort to write the if statements for that than doing pathfinding
+ Adnmaster: ok
+ Doju: BenWo yup
+ Doju: AntiSquid i agree
+ Peudoki: how many people do you think will make it to legend?
+ Denebil: I haven't used pathfinding before silver
+ BenWo: Legend, no idea... 200?
+ AntiSquid: 15 max
+ AntiSquid: imo
+ AntiSquid: and from monday it's a multiplayer anyway so i don't see why they would go for bigger legend
+ Doju: Do any of you have a recursive "conflict solver" thing?
+ Doju: where pacs want the same thing or are gonna crash
+ Doju: I think that'd be an easy and best way to go about it but it'll sure be slow
+ AntiSquid: not recursive
+ AntiSquid: but yes
+ Doju: Okay
+ Doju: How can it be not recursive?
+ NapTown: i just check if i'm in stuck in the same spot and whether a friendly is the reason or not
+ Doju: you don't do the same check for the next points?
+ Doju: NapTown i do that too but it wastes so many moves
+ NapTown: doesn't have to
+ NapTown: depends how you handle it
+ Doju: at least 1
+ Doju: or actually 3 in total
+ AntiSquid: people dropped so much, some 150 ranks
+ qjzx1314: so amazing
+ AntiSquid: hi qjzx1314 here's a fun challenge for you <a rel="nofollow" class="external free" href="https://www.codingame.com/contests/spring-challenge-2020">https://www.codingame.com/contests/spring-challenge-2020</a>
+ WINWINWIN: Top 3 is varying a lot
+ BenWo: doing a big rewrite, this is going to have so many bugs by the time I can run it again&#160;:(
+ NapTown: that was me 2 days ago
+ Doju: Oh huh there are a lot of people here from a local company :D
+ Doju: that's cool
+ WINWINWIN: Contest is getting really tough, I`ll be surprised if I can end up in top 1000
+ qjzx1314: yeah
+ qjzx1314: Bless to you
+ thethiny: My Pathfinding went  from 50ms to 3ms
+ thethiny: WOOHOO
+ NapTown: how
+ thethiny: I've never optimized code as much in my life
+ eulerscheZahl: try ultimate tic tac toe if you like speed optimizations
+ thethiny: @NapTown I replaced my "visited" nodes with only 1 node that contains the parents as a reference
+ thethiny: saves me some recursions
+ thethiny: by some, that's 47ms
+ Doju: wow
+ thethiny: NonOpt Total Time 0.04488039016723633Opt Total Time 0.0029914379119873047
+ qjzx1314: so cool
+ dbf: :thumbsup:
+ AntiSquid: recursions are slow
+ thethiny: yes
+ NapTown: nice
+ thethiny: let's hope that I can do something now with all of this
+ Rprades: I am little bit lost on how to find a dead end for an enemy so I can kill him for sure
+ Rprades: any ideas are welcome!
+ Rprades: should I just simulate his moves to see if he can escape?
+ Doju: Rprades i've been thinking about that too
+ NapTown: you can find the locations that are dead ends
+ WINWINWIN: doju have you implemented a pathfinder?
+ Doju: WINWINWIN yes i have BFS
+ jrke: i am trying BFS
+ Csipcsirip: you start a bfs from enemy loc you go until a cell that  more than 2 neighbours. if you count only 1 of them he is in a dead end
+ Doju: hmm
+ Doju: sure
+ Doju: that makes sens
+ Doju: sense
+ NapTown: i have my graph nodes marked as deadend, but that's only for scoring pellets, haven't trapped anybody yet
+ Adnmaster: is it possible to see the ability cooldown of the opponent?
+ [CG]Thibaud: print it and you'll see
+ Adnmaster: ok
+ Adnmaster: is there any place where i can learn pathfinding?
+ Doju: A lot of people linked this page <a rel="nofollow" class="external free" href="https://www.redblobgames.com/">https://www.redblobgames.com/</a>
+ dbf: 'pathfinding algorithm' -&gt; google
+ Doju: but personally i just read this <a rel="nofollow" class="external free" href="https://en.wikipedia.org/wiki/Breadth-first_search">https://en.wikipedia.org/wiki/Breadth-first_search</a>
+ Adnmaster: ok thanks
+ [CG]Thibaud: <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/39380/finding-shortest-path-in-the-plane-with-obstacles">https://www.codingame.com/playgrounds/39380/finding-shortest-path-in-the-plane-with-obstacles</a>
+ [CG]Thibaud: (perhaps not the best)
+ [CG]Thibaud: (best in the sense "adapted to your need")
+ kovi: no leaderboard?
+ kovi: or just sloooow
+ ashelkov: empty)
+ kovi: huh, chat is also slow
+ ashelkov: oh no . seen it/ you 1st
+ ashelkov: congratz!
+ AntiSquid: he and 5 other people or so :D
+ AntiSquid: maybe there should be a counter somewhere showing how long everyone held 1st place for&#160;?
+ Csipcsirip: pb4 made a diagram like that for one of the contest for top10 places
+ Ramzel: I m almost always winning with silver boss in IDE, but i cant reach him while submiting ;c
+ alinde2: 50 in silver, so close! :fearful:
+ BenWo: hey nice
+ BenWo: so you're one of those people who pushed me back over 200&#160;:-/
+ alinde2: I'll put you back under 200 by going to gold :stuck_out_tongue:
+ Ramzel: Domiko congrats gold
+ BenWo: haha great thanks&#160;;)
+ jrke: domiko going in gold
+ LelouchVC2: I don't even wanna check if the bug in the contest is fixed
+ eulerscheZahl: which bug?
+ LelouchVC2: Giving me a dead pac as viable 
+ struct: impossible
+ wlesavo: lol
+ eulerscheZahl: dead pacmen have the type DEAD
+ eulerscheZahl: and that's a feature, not a bug
+ wlesavo: and its not fixed, rather introduced
+ struct: I found the origin of the bug
+ struct: The DEAD pac is for silver+ only
+ LelouchVC2: mentally retarded either way
+ LelouchVC2: It wasn't doing it one day
+ LelouchVC2: The next day it was, I outputted the given pacs after I looked through everything else
+ LelouchVC2: And it definitely gave me a dead pac
+ struct: it gives you dead pacs
+ eulerscheZahl: on purpose
+ eulerscheZahl: the statement got an update too
+ eulerscheZahl: are you in silver? there's a green section
+ eulerscheZahl: highlighting the changes
+ struct: he is in bronze
+ struct: Thats why no dead on typeId
+ LelouchVC2: I didn't touch it since last week 
+ LelouchVC2: silver hadn't even open yet
+ struct: if your pac dies
+ struct: you dont get him in your input
+ struct: at least I think
+ struct: at least you didnt before
+ LelouchVC2: That's what it should have been
+ LelouchVC2: But there it was
+ eulerscheZahl: if type == "DEAD": continue
+ DJDiscoWorm_ce7a: hi
+ Ramzel: 24'th in silver 50'th battel
+ struct: no euler
+ LelouchVC2: Contest pissed me off&#160;:/
+ struct: it wont show dead on bronze
+ DJDiscoWorm_ce7a: is there a way to read the answer for the quiz\
+ Ramzel: Is still a chance to go up yo gold?
+ struct: LelouchVC2 I just checked
+ NapTown: he doesn't have type=DEAD yet
+ struct: if your pac dies
+ LelouchVC2: Pacs were kicking ass and then couldn't win cause of it
+ struct: it doesnt show on input anymore
+ wlesavo: LelouchVC2 thats really sounds like your own bug btw
+ LelouchVC2: Not gonna keep doing it while behind
+ eulerscheZahl: then i will just ignore the chat for the next couple of minutes. you seem to understand the issue better than i do
+ LelouchVC2: I know wlesavo
+ struct: I meant no disrespect euler&#160;:/
+ LelouchVC2: But it really isn't though
+ DJDiscoWorm_ce7a: is there anyone can help me solve the problem
+ eulerscheZahl: i didn't read it that way struct
+ NapTown: LelouchVC2 are you checking the mine flag?
+ eulerscheZahl: just bored of the discussion, your job now&#160;;)
+ struct: LelouchVC2 look
+ struct: Standard Error Stream: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/3f0a9c32-8f37-4053-8ba1-42473e6d56f6">http://chat.codingame.com/pastebin/3f0a9c32-8f37-4053-8ba1-42473e6d56f6</a>
+ LelouchVC2: yep
+ struct: after pac dies it doesnt show anymore
+ wlesavo: LelouchVC2 if that would be the case all the bots would crash instantly, and they dont 
+ LelouchVC2: I outputted the pacs that i was given right after the pac died
+ LelouchVC2: it was clearly there
+ struct: maybe you checked wrong frame
+ wlesavo: error stream may look to be delayed sometimes
+ wlesavo: you need to check coors to be sure you looking at the same frame
+ LelouchVC2: Outputted to standard stream
+ LelouchVC2: I never use the error stream
+ LelouchVC2: Set it to output the pacs given right after a pac died, and it gave me all my pacs
+ LelouchVC2: Maybe fixed now, just saying it pissed me off
+ WINWINWIN: #432 Silver now, its too tough&#160;:(
+ AntiSquid: giving up too soon
+ Ramzel: #9 in Silver after so many tries
+ WINWINWIN:&#160;:( I have no idea how to write a BFS so I dont think I can get any further
+ Ramzel: What language?
+ WINWINWIN: python3
+ Ramzel: Cant help u
+ WINWINWIN:&#160;:) which lang?
+ Ramzel: As i heard graph tasks in pyhon are horrible
+ struct: WINWINWIN there are lots of resources for BFS online
+ dbf: WINWINWIN, what issue do you have with BFS?
+ Ramzel: In c++ it is easily
+ WINWINWIN: Not learnt it and have no idea how to modify it for this
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.geeksforgeeks.org/shortest-distance-two-cells-matrix-grid/">https://www.geeksforgeeks.org/shortest-distance-two-cells-matrix-grid/</a>
+ eulerscheZahl: i bet you can understand the code and apply the logic in python
+ WINWINWIN: Even if I can write one, what is thedifference between my BFS and the in-built pathfinding?
+ eulerscheZahl: even if i'm not completely happy about the coding style in the article i linked. lots of code duplication
+ dbf: WINWINWIN, for example, you can calculate actual distance to pellets
+ struct: How do you calculate distance WINWINWIN?
+ eulerscheZahl: the in-built path finding gives you less flexibility
+ eulerscheZahl: and finding the closest pellet of course. good point dbf
+ WINWINWIN: I copied the distance function in the referee
+ Csipcsirip: yeah codes in articles like that have usually bad quality
+ offroff: how deep are you guys making those searches?
+ eulerscheZahl: only 4 turns&#160;:/
+ Csipcsirip: (2 or 1) * 15
+ eulerscheZahl: but my opponent tracker improved
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/464232411">https://www.codingame.com/replay/464232411</a>that kill...&#160;:)
+ AntiSquid: built in pathfinding does more damage than good
+ offroff: nice one
+ struct: current rank 1 plays coc
+ struct: coc is good 
+ dbf: @eulerscheZahl check your tracker for timeouts: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/464248625">https://www.codingame.com/replay/464248625</a>&#160;:)
+ offroff: I guess 4 turns is enough for some nice tricks
+ BenWo: that was impressive euler
+ Rickardo: i just entered level 4
+ Rickardo: and i am a rookie
+ eulerscheZahl: 16ms to track, 90ms to print an answer
+ eulerscheZahl: i don't see the problem dbj :joy:
+ eulerscheZahl: and i can't type your name. and not tab-complete without pinging dbdr
+ dbf: haha
+ dbdr: thanks :D
+ Ramzel: Clyde has not provided 1 lines in time
+ Ramzel: when bot gets bugged
+ eulerscheZahl: i should add a header before legend opens."This bot has a kill switch. Do you feel confident to remove it or do you want to choose another boss?"
+ NapTown: poor clyde
+ eulerscheZahl: i fear that the boss will be well studied, giving a disadvantage to the player
+ Ramzel: Lets resubmit almost same code
+ struct: you can break your bot and then submit again 
+ struct: But you can also not beat boss :p
+ AntiSquid: tiny change can mean 100 rank difference so
+ Doju: How is it possible that my last bot which wasted a turn every time there was no pellet directly next to the target ranks 200 places higher than the fixed one&#160;:/
+ LelouchVC2: Because Physics allows for E=MC^2
+ LelouchVC2: Which invalidates your logic
+ Ramzel: The funny fact is that i almost always beat boss in ide but i m losing to often with pp close under boss
+ BenWo: no idea Doju
+ zarif98sjs: This randomness sucks
+ BenWo: maybe need some values tweaked
+ NapTown: Doju when you find out why you can fix it again:grinning:
+ BenWo: or just needs time
+ WINWINWIN: The game stops automatically after 200 turns.
+ WINWINWIN: is this true?
+ NapTown: yes
+ BenWo: yes
+ WINWINWIN: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/464277907">https://www.codingame.com/share-replay/464277907</a>
+ BenWo: but it's turns, not frames
+ RoboStac: viewer shows more than 200 frames due to speed though
+ wlesavo: euler how is it usually done, dont boss have to be resubmitted right? 
+ WINWINWIN: 299 turns
+ Doju: NapTown yeah prolly that
+ wlesavo: otherwise cut off wont be so perfect for sure
+ BenWo: 200 turns, plus 99 SPEED frames
+ eulerscheZahl: in the past they did submit the boss again. but now they just take the player and copy the rank
+ wlesavo: i see
+ eulerscheZahl: they even had a test account
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/profile/fc95dc0400be658ec8266b29286952285877531">https://www.codingame.com/profile/fc95dc0400be658ec8266b29286952285877531</a>
+ wlesavo: that make sense in this one for sure
+ Earthborne: Does activating speed boost take up one round?
+ BenWo: yep
+ eulerscheZahl: so we were all chatting and watching default AI climb on the leaderboard which submit slowly finishing
+ Earthborne: Well that explain some of the mess in my rules
+ Doju: Maybe i'm timing out
+ WINWINWIN: Another submit, this time I will start using SPEED&#160;:)
+ Doju: gotta watch some losing games
+ HKTran: when I try to counter some trapped-SWITCH strategy, I lose to some opponent who not even try any strategy
+ HKTran: :joy:
+ NapTown: sounds about right
+ zarif98sjs: how actually is the standings calculated&#160;?
+ AntiSquid: someone manually inserts a rank, if you don't believe me just watch top 10 over a long period of time zarif98sjs
+ Doju: :D
+ eulerscheZahl: with the Trueskill algorithm
+ Scarfield: I thought it said in the faq, but this is actually all the faq says: 
+ Scarfield: How are scores calculated?Your score is awarded when you submit your solution: your code is tested with sets of test cases which cover the game’s specifications. The more test cases your code can pass, the higher your score will be.
+ Ramzel: Removed defence mechanism and winning almost everything
+ AntiSquid: for more detailed read on the ELO algorithm zarif98sjs&#160;: <a rel="nofollow" class="external free" href="https://www.random.org/">https://www.random.org/</a>
+ AntiSquid: (well it feel that way at least)
+ eulerscheZahl: Trueskill and ELO are not the same
+ BenWo: lol
+ NapTown: Gold finally :grinning:
+ NickStahl: Good job NapTown
+ BenWo: nice
+ NapTown: thanks now i can go to bed
+ Ramzel: Lets go GOLD(submit)
+ zarif98sjs: NapTown any suggestion for gold&#160;? been stuck around 250-300 for the past 2 days 
+ eulerscheZahl: share a replay of your bot
+ zarif98sjs: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/464297339">https://www.codingame.com/share-replay/464297339</a>
+ eulerscheZahl: that's some bad coordination at the bottom right corner
+ NapTown: zarif98sjs the biggest thing was enemy tracking, mine is very simple but it shot me up pretty quick
+ Ramzel: Enemy tracking? Isnt is slow much?
+ NapTown: maybe if it was complicated, but mine isn't
+ Ramzel: Would u say sth more?
+ Ramzel: :D
+ NapTown: :stuck_out_tongue_winking_eye:
+ zarif98sjs: The enemy tracking seems to be tricky since I can't always see them&#160;:| 
+ NapTown: if you could see them you wouldn't need tracking&#160;:)
+ zarif98sjs: :cry:
+ eulerscheZahl: but understanding your opponent helps you to know which pellets are gone
+ Doju: yuck, i'm gonna be calling two recursive functions on each move
+ Doju: that might not be a smart idea
+ BenWo: wow, what for?
+ Doju: checking for conflicting targets and paths
+ Doju: im gonna have some functions which grab new targets until none of them are the same
+ Doju: i guess i could just do this with while loops, but i like the idea of recursion
+ Doju: and it cant be that much slower, can it?
+ BenWo: probably not
+ Ramzel: eulerscheZahl are u using some of euler tricks?
+ Doju: actually i think this might lead to an infinite loop :d
+ BenWo: I'd be surprised if it didn't at least in a few cases
+ Doju: having a pen and paper close by is reeeally handy while coding stuff like this
+ SparshMc07: ooooooooooooooooooooooooooo
+ SparshMc07: kpihlk/k
+ Doju: wait, that's supposed to be called "pen and paper", not "a pen and paper", right?
+ Doju: trying to improve my english as well as my coding :p
+ NapTown: i don't see a difference really
+ Doju: Oh you're from the US
+ Doju: i've been wondering why there are very few american people here
+ NapTown: couldn't say
+ Doju: hm
+ Earthborne: Maybe most of them are asleep when we are awake?
+ Doju: maybe i'm usually just sleeping while you're here
+ Doju: yeah
+ [Csongor]: finally silver
+ NapTown: yes probably
+ NapTown: 6:30 am where i am
+ llllllllll: grat!&#160;:)
+ Doju: can you teach me your ways NapTown
+ Doju: is the secret napping?
+ NapTown: napping is the secret to everything
+ alinde2: Consistency winning against the bot in ide, but can't reach it in the leaderboard :upside_down:
+ zarif98sjs: what's your position now
+ Doju: Is there a way to do something like this in python?
+ Doju: for pac in pacs if pac.alive:
+ Doju: it's messy to write this every time
+ Doju: for pac in pacs:
+ Uljahn: if not pac.alive: continue
+ ntroPi: you could just fill an array of living pacs once per loop.
+ Doju: hm
+ Doju: yeah i thought of splitting my existing dict of pacs["my"] and pacs["en"] into pacs["my"]["alive"]
+ Doju: for example
+ Doju: not sure if it's worth it to start modifying everything though
+ NickStahl: Doju, why do you keep a ref to your own dead pacs? Why not remove them at start of the loop?
+ Doju: Hmm, that would make sense as well
+ Earthborne: You can nest in a list comprehension:for pac in [pac for pac in pacs if pac.isalive]
+ Earthborne: Doju
+ ntroPi: Is it known, whether the pac game will stay active after the contest? Will there be a pause period before the eternal season starts?
+ Earthborne: Still messy though&#160;:)
+ NapTown: fond memories of pacs lost
+ Doju: Earthborne ooh yes. Is that fast?
+ Doju: i like list comprehensions
+ Doju: NickStahl i think my logic for not deleting them was something like keeping it consistent
+ Doju: if enemy pacs have ["dead"] and ["alive"] then my pacs should too
+ Earthborne: Dunno, I wouldn't think so since you're iterating and creating a new list before iterating over that one
+ Doju: actually i did do have a delete dead pacs method but it doesn't do anything anymore since it relied on vision
+ ArmoredAssassin: hey guys, am I correct that in step when: Only pacs with the SPEED ability enabled can move, I basically dont get any input and game just moves pacmans if they got cmds to move more than 1 step?
+ Earthborne: Fastest would probably be `if not pac.isalive: continue`
+ NickStahl: Doju, mybe you just pointed out a bug in my code :D
+ Doju: Hahah NickStahl
+ NickStahl: I think I'm still commanding my dead pacs around D:
+ Doju: somebody told me that i was commanding my dead pacs
+ Doju: and then i found that bug
+ Earthborne: But with a length of max 5, I don't think that's where you'll timeout Doju
+ Earthborne: Oh, I did that for a while too!
+ NickStahl: lol Doju, same bug here :D
+ Doju: Earthborne fair point
+ Doju: i'm gonna be doing a lot of recursion through that list so i dont want it to be super slow though
+ Doju: but i guess anything is fast enough with a length of 5
+ Doju: NickStahl you're welcome :P
+ Doju: Earthborne i think your solution is good if you change the brackets to braces instead to make a generator
+ eulerscheZahl: codingame IDE just randomly decided to run a syntax check on my code. now everything is red for no apparent reason
+ RoboStac: you'll have to delete it all and start again
+ eulerscheZahl: :D
+ Doju: yeah your code is just one big syntax error
+ Doju: sorry euler
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://prnt.sc/shada4">https://prnt.sc/shada4</a>so much red
+ NapTown: mine has been doing that too
+ llllllllll: CODE SHARING, ALERT, ALERT
+ eulerscheZahl: luckily i don't use that web IDE
+ dbf: code is shared -&gt; ban
+ llllllllll: ^^
+ dbf: :expressionless:
+ eulerscheZahl: that's only the input parsing from the default code
+ alinde2: That's the default input code @dbf...
+ eulerscheZahl: and an encoding error at using System; because of my bundler
+ dbf: no, you shared your secret dx/dy arrays
+ RoboStac: default c# code has an enemy tracker? :O
+ weegee: hello
+ RoboStac: I knew I should have used c#
+ eulerscheZahl: i beginner's mistake not to take C#
+ Csipcsirip: isnt't it because of that special character before the second using&#160;?
+ eulerscheZahl: actually using System; is my first
+ eulerscheZahl: but the bundler (python) uses a set for unique usings
+ eulerscheZahl: so order changes everytime i compile my bot
+ Csipcsirip: one big file ftw
+ eulerscheZahl: 7 big files
+ BenWo: ok, got a good part of new pathing done
+ BenWo: now I have to recode my pacs to understand the output of it :confounded:
+ llllllllll: MOVE 0 21886 2046702944ok, something is wrong here
+ BenWo: lol wow
+ eulerscheZahl: :D
+ Doju: nah the target is just a bit further away
+ llllllllll: my C++ porting didn't go so well
+ SemChumboPT: those pacs are going to the moon
+ eulerscheZahl: your pacman will reach that cell by the end of the contest
+ NapTown: round to 2 digits :D
+ llllllllll: LOL
+ MahirSez: While being in speed mode, Is it possible for a pac to go 2 steps where the 2nd step would return to its original position?
+ MarekM: yes
+ MarekM: oh so, no probalby
+ BenWo: no
+ BenWo: code is coming up on 900 lines&#160;:/
+ BenWo: though there is a fair bit of redundancy at the moment
+ Rprades: was legend going to be open in 16th always? I thought it was on 15th
+ Rprades: have they changed the date or did I get confused with the dates?
+ eulerscheZahl: 6pm CEST
+ eulerscheZahl: that is in a little less than 5h from now
+ Rprades: check now, it says 16th May
+ eulerscheZahl: as 15th for me
+ Clagus: do I need to beat the boss 100% to advance to gold?
+ eulerscheZahl: i don't know why, but CG has some problems with dates, showing the wrong day to some users
+ Rprades: wow, I refreshed the paged and changed back to 15th
+ Adnmaster: you need to beat more people than the boss Clagus
+ Doju: No, you need to beat him in the rankings Clagus
+ eulerscheZahl: you have to rank above the boss on the leaderboard
+ ntroPi: No you just need to be above him in ranking which is possible even if you beat him &lt;50% of the time
+ Rprades: thanks&#160;:)
+ Clagus: ok, thanks
+ BenWo: actually, where are they announcing the date?
+ BenWo: I haven't even looked for it
+ eulerscheZahl: click the league at the top
+ eulerscheZahl: in the IDE
+ Rprades: it is my first serious contest and i am a little bit excited
+ Rprades: hopefully I can make it Legend!
+ BenWo: oh ok
+ BenWo: thought there was a blog or something
+ RoboStac: refresh, it'll go back to 15th
+ eulerscheZahl: about top10-15 players will be in legend when it opens
+ Clagus: for me it's:"League opening: 5/17/20" :D
+ eulerscheZahl: sorry to tell you, but you have to improve your bot first
+ Rprades: rank 32 atm, hope I can beat the boss later on
+ BenWo: says 5/15 for me
+ eulerscheZahl: you'll probably have to improve a bit for legend
+ Rprades: will try, but Im running out of ideas, python is very slow!
+ eulerscheZahl: on the other hand: that's by far the largest contest for a long time. maybe they show mercy
+ Clagus: ok, so I need to be better in ranking than boss, but how can I tell which ranking boss have?
+ eulerscheZahl: it's even the biggest contest ever
+ eulerscheZahl: the boss will appear on the leaderboard
+ Rprades: let's see then!
+ eulerscheZahl: no way to miss it when it's tehre
+ Clagus: but for silver it should be there already right?
+ kovi: too bad, it is so random
+ BenWo: boss is generally in rank 1
+ eulerscheZahl: only visible if you are in silver
+ BenWo: click on "last battles" at left of IDE&lt;&lt;==========
+ eulerscheZahl: the randomness is frustrating
+ eulerscheZahl: there are some deaths that you just can't avoid
+ BenWo: well gotta run, ttyl
+ Rprades: yes, speed is much more important than switch
+ Rprades: most of the games are decided in the frst 15 turns
+ Adnmaster: well by me, i win by killing my opponent using switch
+ Adnmaster: so theyre equal
+ Rprades: unless he is on a dead end or you have speed activated (thus no switch available), your opponent will always be able to escape
+ Rprades: and if you have speed and he does not, he will be ablw to switch before than you
+ Adnmaster: i dont use speed :sweat_smile:
+ Rprades: I think you should&#160;:)
+ eulerscheZahl: +1 for speed
+ Adnmaster: i made a system that when the enemy isnt near it uses speed if it is near it uses switch
+ Adnmaster: but for some reason the speed part doesnt work
+ Adnmaster: it calculates the distance wrong
+ eulerscheZahl: what means "doesn't work"?
+ Adnmaster: it calculates wrong
+ Adnmaster: calculation works for switch, but by me it doesnt work for speed
+ Adnmaster: even if the enemy is near it uses speed
+ MahirSez: How many people will advance to legend any idea?
+ MahirSez: *on 1st go
+ eulerscheZahl: thibaud discouraging us from reaching legend?
+ eulerscheZahl: about 10-15 players legend opens
+ eulerscheZahl: at least that's the usual size. not sure if it will be a little more given the higher player count
+ Csipcsirip: hm I learned it again that it's not a good idea to make functions like this
+ Csipcsirip: PacmanType counter(PacmanType pt) {
+ dbdr: eulerscheZahl discouraging?
+ Ramzel: Where is legend league?
+ llllllllll: opens at 6
+ weegee: ```jsconsole.log("hi)```
+ Doju: Legend opens today?
+ Doju: oh dear
+ Doju: i gotta get at least to the bottom of gold before that
+ eulerscheZahl: read your emails dbdr
+ eulerscheZahl: i know you stopped doing that
+ eulerscheZahl: The Legend league will open in a few hours, but for many players (including me), it's really difficult to reach it. 
+ eulerscheZahl:  Improve your own scoreIt's easier to try to beat your own record than to aim for the moon. 
+ Chkoupinator: speed doesn't limit the ability to turn right? 
+ Adnmaster: no
+ dbdr: you just cannot turn 180
+ eulerscheZahl: which is sad
+ Chkoupinator: yeah makes sense since you can only input one move statement per turn
+ weegee: how long have you guys been playing?
+ eulerscheZahl: 8 days
+ muy31: 8 days
+ Doju: ^
+ Illedan: eulerscheZahl, did he tell how big the Legend league will be?
+ eulerscheZahl: no
+ dbdr: always a rurprise
+ eulerscheZahl: Hello, <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/2c00f879-4943-4a8c-bb21-12cb6b2d4354">http://chat.codingame.com/pastebin/2c00f879-4943-4a8c-bb21-12cb6b2d4354</a>
+ Illedan: Hope at 22.63 points :D 
+ eulerscheZahl: no way
+ dbdr: OOC was a bad surprise for me, was sure to get in at opening, missed it by an epsilon
+ Illedan: Nah, I hope not
+ eulerscheZahl: more like 25-26
+ Illedan: Yeah
+ Illedan: Then I have to get out of hiding&#160;:(
+ dbdr: 30
+ dbdr: put a boss above everyone :D
+ eulerscheZahl: for OOC i was expecting a larger legend because we already had 3 weeks to code ecent bots
+ Illedan: Take kov i and fix his code? :D
+ eulerscheZahl: decent*
+ Doju: Why even is there a league system?
+ dbdr: take a player bot, improve it, release it as boss
+ dbdr: yeah Illedan
+ Doju: or okay, leagues make sense as "markers" for how far you've gone
+ Illedan: That would be impressive though
+ eulerscheZahl: to get less noise Doju
+ Illedan: W00t, only C++ in the top
+ Doju: Okay, thx eulerscheZahl
+ Illedan: is it getting that hard u there?
+ eulerscheZahl: it's a pain to submit with 3k players and climb up all the way in the ranking
+ eulerscheZahl: 50% of your submit done and you are around rank 100
+ Illedan: *up
+ EchoBravo: pls what are constraints
+ eulerscheZahl: there are some fun observations for tracking Illedan
+ eulerscheZahl: i shared a replay earlier, let's see if i can find it again
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/464232411">https://www.codingame.com/replay/464232411</a>
+ eulerscheZahl: the kill was not a coincidene
+ eulerscheZahl: conincidence
+ eulerscheZahl: requires you to know where the opponent is and what he's about to do next
+ dbdr: you can't be sure what they will do
+ eulerscheZahl: of course not
+ eulerscheZahl: educated guessing
+ Illedan: Nice
+ dbdr: (TM)
+ eulerscheZahl: analyzed my last battles. tried 5 times, 4 kills
+ Illedan: Still only 15th with that tracking
+ eulerscheZahl: was 5th before
+ eulerscheZahl: unlucky submit
+ Illedan: Oh, k. Spammers?
+ Illedan: k
+ eulerscheZahl: just me losing the first battles
+ dbdr: damn, that dbdr arena timesout in the IDE
+ eulerscheZahl: 4 losses in first 10, was at rank 20 when submit finished
+ dbdr: I wanted to play against him&#160;:(
+ Csipcsirip: yeah this first10 games confuses me this time too. usually a top20 bot wins 9/10. now (4-8)/10
+ Rprades: is it normal to have a score between 22 to 25 depending on the submit?
+ Rprades: is it due to randomness?
+ eulerscheZahl: yes
+ Rprades: my code is deterministic and I have not changed it
+ Rprades: ok&#160;:)
+ kovi: robo is on the roll
+ eulerscheZahl: just in time for legend opening
+ eulerscheZahl: tomorrow afternoon he won't have time for us, it's codejam
+ MadKnight: hey eulerscheZahl do u code in c#&#160;?
+ MadKnight: this contest i mean
+ eulerscheZahl: no, i use plain text
+ eulerscheZahl: "if the pacman is chasing you, please SWITCH and kill, thanks"
+ AntiSquid: are you doing codejam euler&#160;?
+ eulerscheZahl: yes
+ eulerscheZahl: that's the tshirt round
+ eulerscheZahl: finals will be online this year btw
+ dbdr: max_value: std::f32::BEG_INFINITY
+ dbdr: what am I tryiing to say there? :D
+ AntiSquid: have you been to the finals? what are they like?
+ AntiSquid: not sure what the finals being online means, do you need to turn on your webcam?
+ eulerscheZahl: either BIG or NEG INFINITY, not sure
+ AlluringChair: is it normal that i have 600 lines of code and i'm not even close to finishing? i think i'm doing something wrong
+ eulerscheZahl: i don't know either. codejam just sent an email announcing that finals will not be in person
+ eulerscheZahl: due to corona
+ Doju: AlluringChair that's perfectly fine
+ AntiSquid: you're begging for a win dbdr
+ dbdr: infinity, I beg you...
+ eulerscheZahl: i can top that AlluringChair, 1400 lines
+ Doju: AlluringChair i have 750 and i have maybe 2/3 of my lines written
+ AlluringChair: ok, thanks for the answers :D
+ AntiSquid: managed to somehow climb a tiny bit
+ Doju: Still have to do a lot of messing around with numpy and probabilities
+ AntiSquid: but need to try harder  
+ Doju: atm pellets either exist or they don't, there's no in between
+ Doju: but i want some schrödinger pellets on my map
+ AntiSquid: ooc felt easier, i just was lazy to fix my mine tracker btw
+ eulerscheZahl: otherwise you would have won the contest?
+ AntiSquid: yes sure
+ AntiSquid: otherwise i would have gotten a better rank
+ AntiSquid: who would you bet wins this contest euler&#160;?
+ eulerscheZahl: no idea
+ eulerscheZahl: some strong players are trying
+ Scarfield: 1:12000 odds on me&#160;;)
+ jrke: what a lucky match i had <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/464384338">https://www.codingame.com/replay/464384338</a>
+ eulerscheZahl: i won't put money on you Scarfield
+ Scarfield: wouldnt be smart xD
+ AntiSquid: 1 penny, return rate is high
+ Scarfield: wonder who would pay :thinking:
+ eulerscheZahl: you. you would have a monitor to sell
+ eulerscheZahl: who needs curved anyways?
+ Scarfield: lol thats true
+ Illedan: Me!
+ eulerscheZahl: wtf Illedan
+ Scarfield: ille will buy, bets on :D
+ Illedan: I need a 3rd monitor for random graphs looking cool
+ Illedan: Now I sit on a coffetable with only laptopscreen and no external mouse :sob:
+ Scarfield: why not sit on a chair?
+ Illedan: haha
+ cegprakash: <a rel="nofollow" class="external free" href="http://cgstats.magusgeek.com/app/multi-codebusters/salim.aboubacar">http://cgstats.magusgeek.com/app/multi-codebusters/salim.aboubacar</a> why is this guy always getting matched against me? He rekt my rank badly
+ AlluringChair: make sure it's alluring
+ Scarfield: xD
+ cegprakash: He played 108 games and all against me?
+ eulerscheZahl: lol
+ cegprakash: oh wait why am I seeing codebusters
+ cegprakash: my bad
+ Illedan: Because you spammed..
+ AntiSquid: no more python RoboStac&#160;?
+ RoboStac: python bot was only meant to unlock bronze rules, it just worked rather well. Need to go faster to get to the top though
+ eulerscheZahl: yeah, ceg submitted last
+ Rprades: it seems I had a timeout sometimes due to many prints!
+ RoboStac: though I did use it for testing some smaller tweaks while writing a better version
+ Amrhossam: why do you love coding
+ Doju: Rprades i feel you hahah
+ Doju: debugged a working function because it was timing out
+ Doju: and it was due to prints
+ Scarfield: lol doju :D 2 hours well spend
+ Doju: indeed
+ Doju: lesson learned: prints take time
+ Scarfield: i think everyone here has done that&#160;:)
+ Doju: maybe
+ muy31: so ive implemented a basic enemy tracking, now im removing switching so i can progress
+ Doju: nice 
+ eulerscheZahl: thibaud didn't promise too much. the leaderboard is indeed much faster now
+ muy31: my code no longer traps opponents tho&#160;:(
+ eulerscheZahl: that's the only thing that my bot does decently well
+ muy31: i beg to differ
+ llllllllll: I was also thinking about creating a 'hunter' bot, which just tries to kill others
+ llllllllll: but im not sure if it worth the effort
+ muy31: dont do it waste of a pac
+ llllllllll: but if you kill all the enemies, then you win
+ muy31: cause winning is about pellets. not killing
+ llllllllll: but it doesn't sounds feasible
+ muy31: but most of the time pellets can escape
+ llllllllll: pacs*
+ llllllllll: but they cant, if you target one with multiple others
+ muy31: maybe make a hunter only if there are more than 3 pacs that you have
+ llllllllll: my plan was that all pacs are hunters
+ muy31: not good...
+ llllllllll: yeah, probably
+ AlluringChair: my pacs are gonna be pacifists, they'll only run, never fight
+ AlluringChair: unless cornered maybe
+ MarekM:&#160;:)
+ kovi: most of has pac-ifists
+ eulerscheZahl: mine fight where the opponent asks for a kill
+ kovi: 3 hungarians in top, where are you dbdr
+ Doju: I bet someone is hiding a killer bot that will be strong in this pacifist meta
+ vtenneke: haha
+ eulerscheZahl: that killing isn't that simple/reliable
+ dbdr: kovi I started working on my real bot
+ Csipcsirip: hm time to add switch command to my repertoire
+ eulerscheZahl: sometimes there's a good chance but harvest is priority
+ lifetimeLearner007: anybody calculating distance from every cell to every other cell?
+ llllllllll: yep
+ lifetimeLearner007: without timeout
+ eulerscheZahl: yes
+ llllllllll: yep, in the first cycle
+ lifetimeLearner007: i tried with diijkstra but timing out
+ eulerscheZahl: takes me 20ms on large maps
+ llllllllll: I do the same, and it doesn't
+ eulerscheZahl: BFS
+ Ramzel: Third in silver
+ Ramzel: 82%
+ llllllllll: just keep in mind that dist(a,b) = dist(b,a)
+ llllllllll: and it should not time out
+ Doju: i don't even do that
+ Doju: and i'm doing it in 100ish ms
+ Ramzel: Second in silver
+ eulerscheZahl: in python
+ lifetimeLearner007: how does that matter if u've to visit the same cell more than once just bcz source  is different
+ Doju: yes
+ Doju: in PYTHON 
+ llllllllll: track visited cells
+ llllllllll: if you visited it, don't update it again
+ vtenneke: Would more seasoned people recommend to use C++ instead of other languages for this?
+ lifetimeLearner007: visited cells set is specific to considered source right?
+ Ramzel: YESSSS
+ llllllllll: @vtenneke im not that seasoned, but yes.
+ eulerscheZahl: just check the top of the leaderboard vtenneke
+ Ramzel: NOOOO
+ Ramzel: Second place in silver
+ eulerscheZahl: top10: 1x C#, 9x C++
+ llllllllll: im currently porting my python code to c++
+ Ramzel: just below boss
+ lifetimeLearner007: so close Ramzel
+ vtenneke: yeah xD I saw but was wondering if people using c++ are just really smart or that the language also actually works better for stuff like this haha
+ vtenneke: or a combination of course
+ llllllllll: probably both
+ eulerscheZahl: i think both
+ Ramzel: Lets go with next submit
+ lifetimeLearner007: visited cells set is specific to considered source right? so definitely same cell has to be visited more than once as source changes... else it wouldn't give shortest distance
+ amriswil-it-1: hola
+ llllllllll: no
+ lifetimeLearner007: I'm kinda stuck at this distance calculation. (facepalm)
+ llllllllll: do bfs and you will get the shortest path for every cell
+ lifetimeLearner007: bfs doesn't guarantee shortest distance right....
+ eulerscheZahl: do floyd warshall and you will timeout
+ Doju: it does
+ eulerscheZahl: A* doesn't guarantee a shortest path
+ lifetimeLearner007: then, I guess there is some bug in my code...
+ muy31: are you snaking?
+ eulerscheZahl: do you use a stack instead of a queue?
+ lifetimeLearner007: what is snaking, muy31?
+ muy31: this sucks! a resubmit and now at 300s
+ alinde2: A* always gives the shortest path! But your heuristic can be wrong (can't simply use euclidean distance here).
+ muy31: lifetimeLearner007 snaking is like moving back and forth
+ muy31: across a map
+ eulerscheZahl: and with an incorrect heuristic it won't give a shortest path
+ eulerscheZahl: hard to tell if your heuristic is 100* correct for all cases though
+ lifetimeLearner007: I'm using queue for bfs,  euler
+ alinde2: With an incorrect heuristic it isn't an A* algorithm.
+ muy31: <a rel="nofollow" class="external free" href="https://www.google.com/url?sa=i&amp;url=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Fsnaking%2Broad&amp;psig=AOvVaw1kuFlKpXbFkN8HacypnRTh&amp;ust=1589634087029000&amp;source=images&amp;cd=vfe&amp;ved=0CAIQjRxqFwoTCMDzrNL2tekCFQAAAAAdAAAAABAD">https://www.google.com/url?sa=i&amp;url=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Fsnaking%2Broad&amp;psig=AOvVaw1kuFlKpXbFkN8HacypnRTh&amp;ust=1589634087029000&amp;source=images&amp;cd=vfe&amp;ved=0CAIQjRxqFwoTCMDzrNL2tekCFQAAAAAdAAAAABAD</a>
+ muy31: like that, except your BFS may look like that w/ incorrect heuristic
+ eulerscheZahl: A* just says that you need a heuristic function to estimate the distance from a node to the target. it can't define that it has to be 100% accurate. otherwise that would mean you know the shortest path already
+ eulerscheZahl: Csipcsirip calm down
+ eulerscheZahl: you scare me
+ Csipcsirip: my last submit crashed when all pellets were eaten during simuation..
+ eulerscheZahl: yet you were on par with me already
+ eulerscheZahl: damn
+ cegprakash: my 1 day old code is still at #41 I'm surprised
+ cegprakash: my latest code is at #120+
+ muy31: what the hell do i need to get out of silver!!
+ eulerscheZahl: beat the boss
+ muy31: shut up
+ WINWINWIN: lol muy31
+ Braykin08: lol
+ eulerscheZahl: :mouth_zipper:
+ cegprakash: get rekt eulerscheZahl
+ cegprakash: muy31 go to closest pellet
+ cegprakash: that's what I did to get to gold
+ muy31: for real
+ cegprakash: yes
+ WINWINWIN:&#160;:( he means with a BFS muy31
+ Doju: Just did a major modification
+ Doju: let the buggening begin
+ WINWINWIN: gold worthy Doju?
+ Doju: for sure WINWINWIN
+ cegprakash: but u have to do pellet tracking + little team cooperation muy31
+ Doju: WINWINWIN i'm just hoping for bugs and not a timeout
+ muy31: so cegprakash, ive been using BFS this whole time
+ muy31: i implemented a score map to track pellets and enemies
+ muy31: and to direct movement
+ muy31: ive independently been choosing my next location
+ muy31: and now you are telling me that i dont need all this
+ cegprakash: yes muy31
+ Clagus: ;_;
+ WINWINWIN: Anyway to get to gold without a BFS?
+ Rprades: who wins if both have same number of pellets? I thought it was the one who took the pellets before, but now I lost and he was the one picking up the last pellet, and I have more pacs standing
+ RavenKZP: how do i know if my pac is dead?
+ eulerscheZahl: it's a tie
+ dbf: RavenKZP, it has status 'DEAD' starting from silver league
+ AlluringChair: you don't get input from it
+ cegprakash: all u need is go to closest pellet + little team cooperation
+ Rprades: ah both are 1st
+ AlluringChair: oh
+ AlluringChair: really?
+ Rprades: I got confused because I was in second position
+ cegprakash: these two are enough to get gold
+ WINWINWIN: @cegprakash any way without a BFS?
+ muy31: team coop as in...?
+ eulerscheZahl: there has to be some order. writing both on top of each other is unreadable
+ muy31: i already have that 
+ eulerscheZahl: hail our new leader
+ cegprakash: without BFS u deserve in Wood1 WINWINWIN
+ Illedan: Damn Csipcsirip :o
+ Scarfield: coop as in not going for the same pellets, not trapping own unit and the like
+ kovi: nice csipcsirip
+ Illedan: The Hungarian top is going to be hard
+ Csipcsirip: tyty
+ Illedan: That should be barely enough for Legend
+ Clagus: damn... and they say that hungarian notation sux...
+ cegprakash: if I find a middeway between yesterday's bot and today's bot I'm sure I can improve much higher
+ RavenKZP: @dbf thanks somehow i miss it
+ cegprakash: I probably have added bugs as I added features
+ eulerscheZahl: you are far away from legend Illedan
+ eulerscheZahl: fix it
+ WINWINWIN: @cegprakash&#160;:) Really no way without BFS?
+ Illedan: I will submit later, just chillin
+ cegprakash: no WINWINWIN BFS is 4 lines of code
+ eulerscheZahl: i know, you code at night
+ cegprakash: learn it WINWINWIN
+ jrke: hey is sim better than BFS?
+ Illedan: Yeah, prime time after 10 PM
+ MarekM: some using recursion in silver or higher?
+ Illedan: Sure MarekM
+ Doju: Umh... does anybody spot the issue here?
+ Doju: print(pac, file=sys.stderr)pac.command()
+ Doju: it prints a pac object
+ cegprakash: BFS can find pellet at 30 distance jrke
+ Doju: but says nonetype object is not callable
+ WINWINWIN: <a rel="nofollow" class="external free" href="https://www.tutorialspoint.com/breadth-first-search-or-bfs-for-a-graph">https://www.tutorialspoint.com/breadth-first-search-or-bfs-for-a-graph</a>
+ cegprakash: if u ca write a sim at depth 30 u donn need BFS
+ WINWINWIN: Is this link good for BFS?
+ cegprakash: sorry BFS can find npellet even at 100 distance
+ eulerscheZahl: or you combine sim with BFS heuristic
+ jrke: ya it can infinite if no time limit is there
+ cegprakash: u can't go depth 100 using sim
+ Doju: MarekM i just implemented a recursive function into my code but still got some bugs
+ cegprakash: not in 50 ms
+ MarekM: i switch to non recursive algo, in python 3 is way too slow with recursion, now i am under 5 ms per turn, with whole field checked
+ WINWINWIN: cegprakash is tutorialspoint a good place to learn BFS?
+ Doju: Okay
+ cegprakash: just write ur own BFS code without looking tutorial. Learn the concept from youtube WINWINWIN
+ cegprakash: all u need is a queue
+ jrke: and push
+ cegprakash: and u push and pop things out
+ cegprakash: it's nothing magical
+ AlluringChair: i have been using python since 4 months and i'm still typing null instaed of none...
+ cegprakash: damn u are a javascript coder AlluringChair
+ Rprades: and multiple at the same time, I am using a modified BFS to return distance of every pac from same pellet
+ WINWINWIN: Hmm, for this I will need a 2D array
+ WINWINWIN: Uptil now I have been using a 1D array of point objects
+ AlluringChair: no, before python i only coded in c c++ and c#
+ cegprakash: use both WINWINWIN
+ AlluringChair: and i usually just type null and press tab
+ cegprakash: or use 2D alone
+ AlluringChair: and it gets me the right null name
+ AlluringChair: but in python i have to type none xd
+ cegprakash: it's not none. It's "None"
+ cegprakash: and null is javascript
+ AlluringChair: yeah but i type none and press tab for N&#160;:)
+ cegprakash: NULL is c++
+ Scarfield: you could add neighbors for the point object i suppose WINWINWIN, but 2d arrays are easier to use for stuff thats on a plane imo anyway
+ AlluringChair: same with NULL nullptr and other crap
+ MarekM: how many people are in GOLD now?
+ WINWINWIN: K, will make a full rewrite&#160;:(
+ Gafagarion: 401
+ MarekM: thx
+ MarekM: now i am 26th in silver, may be waiting is enough&#160;:)
+ Ramzel: Nope its not
+ Beerus: did codin ide always gave warnings?
+ Beerus: nice job anyway
+ muy31: no Beerus
+ eulerscheZahl: we have the Monaco editor now instead of ace
+ jrke: hey python vs c++ which has less reponseime t
+ struct: ofc you can go depth 100
+ jrke: *time
+ struct: is the same as depth 30
+ struct: it wont do well
+ MarekM: anybody uses graph theory? with junctions as vertices?
+ Doju: somebody, yes.
+ Doju: me? no
+ Doju: jrke c++ is much faster
+ jrke: K
+ cegprakash: jrke there are 4^100 paths at depth 100
+ jrke: ya
+ eulerscheZahl: there are pruning possibilities
+ cegprakash: sorry struct*
+ eulerscheZahl: of course you can reach depth 100
+ llllllllll: if you died -&gt; skip
+ llllllllll: if path is bad -&gt;skip
+ eulerscheZahl: just without much exploration
+ cegprakash: someone was asking using sim without a BFS
+ struct: so 4^30 is possible?
+ njaber: can we do parallel computing in our bots? Or is it disabled?
+ alinde2: What are you guys running to need c++? Y'all gold league?With javascript and bfs in bfs I'm high silver.. 
+ cegprakash: can't prune without a BFS
+ struct: good luck
+ eulerscheZahl: i can still prune without BFS
+ eulerscheZahl: just won't do well
+ njaber: Frick there is no info on the performance of bit arrays on google
+ njaber: I'm hesitating between taking sha256 ints or bit arrays
+ eulerscheZahl: sha256?
+ eulerscheZahl: computing hashes?
+ njaber: no just for the size of the int
+ muy31: ok if i win the next three matches against silver bot im submitting
+ njaber: I want to do bitwise operations as fast as possible on large number of bits
+ Uljahn: you mean with AVX2?
+ njaber:&#160;?
+ Csipcsirip: I'd recommend std::bitset if you use c++
+ njaber: I'm in c# saddly
+ njaber: An I don't have time to convert everything to c++
+ Csipcsirip: <a rel="nofollow" class="external free" href="https://stackoverflow.com/questions/8144349/what-is-the-c-sharp-equivalent-of-stdbitset-of-c">https://stackoverflow.com/questions/8144349/what-is-the-c-sharp-equivalent-of-stdbitset-of-c</a>
+ njaber: Ok doesn't seem like sha256 is really what I'm looking for, I'll see if the parallel implementsations of bitwise data structures are available
+ njaber: Yeah I saw those but 32 is way too small, and if I can get a hardware accelerated structure I'll go for that in priority
+ njaber: else I'll just resort to BitArray
+ MarekM: spatial hashing?&#160;:)
+ njaber: not exactly, it's an experiment more then anything
+ njaber: Heavy spoilers if it works tho
+ njaber: So I'm not gonna go into details
+ jrke: hey is 10 turns enough for simming
+ jrke: or more
+ njaber: Hardware acceleration is on, nice
+ struct: all depends
+ struct: on the kind of search you use
+ Doju: njaber what on earth are you doing hahah
+ Doju: hardware acceleration
+ njaber: I'm doing things that need as much optimization as possible
+ Doju: that was a rhetorical question, no need to respond
+ Doju: mmkay
+ Doju: that's a solid answer
+ eulerscheZahl: that's how we lost struct's last account
+ eulerscheZahl: he got mad coding and forgot to submit
+ eulerscheZahl: then rage-deleted his account
+ jrke: is predicting 10 turns are enough for simulation
+ jrke:&#160;?
+ njaber: lol, I don't rage, I just like the challenge, but if I fail oh well, I still had fun
+ muy31: im raging
+ eulerscheZahl: yes jrke. i'm doing 4 turns
+ jrke: what
+ jrke: means then 6 turns are ok
+ eulerscheZahl: wasted
+ Hjax: it depends on how sophisticated your scoring is @jrke
+ muy31: less turns for less sophisticated
+ muy31: so you dont screw yourself over
+ Hjax:&#160;? no
+ muy31: Hjax yes
+ struct: more depth doesnt mean you will get better results
+ Hjax: less turns for more sophisticated, because its slower 
+ muy31: thats what i said
+ muy31: for struct
+ muy31: but Hjjax no
+ muy31: i mean yes, but logically no
+ Hjax: why would you have a simple scoring function with little lookahead? wheres your strength 
+ Hjax: either you have a fast simple scoring function, and can do a lot of lookahead 
+ Hjax: or you have a complex scoring function, but cant search as deep 
+ muy31: no the simple one will screw you...
+ muy31: if you look too far
+ cegprakash: bye all I should close this tab and go do some coding for what I'm being paid.. 
+ cegprakash: this thing is addictive
+ struct: Hjax is right
+ njaber: yes it is
+ njaber: cegprakash
+ Doju: yup but this is not a bad thing to be addicted to imo
+ Hjax: i took today off from work 
+ Hjax: so i could work on this 
+ njaber: indeed
+ eulerscheZahl: same Hjax
+ Doju: unless you're already a coding virtuoso
+ muy31: for example... pac thinks there is # pellets 5 moves away, but there is one right next to you. An unsophisticated algo might choose the pellets 5 moves away, but unfortunately they get eaten before you get there
+ muy31: but if you gave it less depth you would be more "content" with what's in front of you
+ muy31: and probably perform better
+ muy31: do I was talking about logic not runtime
+ Doju: and this is why i'm not doing a sim
+ muy31: *So
+ Doju: also python xD
+ Uljahn: you could use a discounting factor for future rewards&#160;:/
+ muy31: you could, but that makes it more sophisticated does it not?
+ muy31: and then you could do a higher depth
+ Hjax: when i say sophisticated i dont mean little tweaks like discounting based on depth 
+ Hjax: that really wont slow you down much at all 
+ Uljahn: ^
+ muy31: well whatevs i guess, all of y'all are higher ranked than me anyways
+ muy31: im done for the day i think, not getting out of silver
+ Uljahn: not really xd
+ Doju: uh, what
+ Doju: in my function definition i have
+ Doju: "existing_targets=set()"
+ Doju: oh
+ Doju: wait... one sec
+ Doju: found it, nevermind
+ Doju: aha, just what i expected
+ Doju: "RECURSIONRECURS...REC...
+ Doju: "times out
+ Doju: :D
+ MarekM:&#160;:)
+ AntiSquid: i have a feeling most people in gold aren't really improving but just optimizing vs the others in the arena, change my mind
+ Hjax: whats the difference 
+ Hjax: a win is a win
+ IAmNoob: a clean win is not a win
+ IAmNoob:&#160;:)
+ muy31: resubmitting my old code, seeing what happens...
+ muy31: AntiSquid improving your code is counteractive to your ranking, it's been proven
+ AntiSquid: it's ok i have some ideas
+ AntiSquid: euler's bot looks like a juicy boss target
+ AntiSquid: wonder if cg staff noticed
+ Ramzel: Can i chose anyone to fight against?
+ AntiSquid: yes
+ Ramzel: How to do it?
+ AntiSquid: delete opponent in the ide 
+ AntiSquid: then select new one
+ eulerscheZahl: you can only choose top1000, starting from your own league
+ Ramzel: Thanks
+ eulerscheZahl: so you can't fight gold while in silver. or wood because there are too many players in the contest
+ AntiSquid: which sucks imo
+ juanotres33: what tutorial made you guys really understand dynamic programming?
+ muy31: just practiced it
+ muy31: i guess
+ muy31: yo just learn the basic constructs at first
+ Doju: wait, what?
+ muy31: and then you think about how they apply to your situation
+ AntiSquid: google, occasionally duckduckgo
+ Doju: can you modify a default parameter from inside the function
+ Doju: in python
+ AntiSquid: yes
+ Doju: ohhh okay
+ Doju: so i have an empty set as a default value
+ AntiSquid: or did you mean smtg else?
+ juanotres33: my problem with dp is in constructing constructing the (mathematical) recursion. Recognizing patterns I guess... any tips on how to get better on that?
+ Doju: if i call it with no value and then add something to the set
+ Doju: (add inside the function)
+ Doju: and then call it again with no specified values
+ Doju: then the items i added the last time are there?
+ AntiSquid: you need an object or variable
+ Doju: i do have a variable
+ Doju: but i guess it just points to the default value?
+ AntiSquid: can make function part of the object
+ AntiSquid: use global keyword? not sure what you mean
+ Doju: erm
+ Doju: def foo(a=set()):
+ Doju: b=a
+ Doju: b.add("something")
+ Doju: then i call that twice
+ Doju: and on the second time a contains "something"
+ Doju: is that correct?
+ RoboStac: <a rel="nofollow" class="external free" href="https://florimond.dev/blog/articles/2018/08/python-mutable-defaults-are-the-source-of-all-evil/">https://florimond.dev/blog/articles/2018/08/python-mutable-defaults-are-the-source-of-all-evil/</a>
+ RoboStac: yep
+ Doju: oh huh
+ Doju: Yeah i agree with the title of that article
+ Doju: thanks RoboStac and AntiSquid
+ Doju: i think i have these bugs everywhere&#160;:|
+ muy31: im so depressed w/ this right now...
+ muy31: i just submitted my old code, and am in 258th place, 100th higher than my most recent code
+ muy31: i remember a day when i was waiting to promote from 9th place with this same code
+ AntiSquid: interesting URL name
+ muy31: how is it fair that Clyde-bot gets to keep his rank? but i cant keep mine?
+ muy31: silver bot suck about as much as i do
+ muy31: i have a question: What determines the score? like 20.XX?
+ muy31: how does it work? does resubmitting set you back to 0 and start again, or does it just continue from where you are? 
+ RoboStac: it uses the trueskill algorithm
+ RoboStac: resubmit starts from scratch (uses first 10 games to roughly place you in the division then you play games vs people close to you in rank)
+ Hjax: not sure, i dont think it sets you to zero though
+ Zenoscave: Hjax it does
+ Hjax: really?
+ eulerscheZahl: and the boss doesn't keep the rank. whoever gets above, promotes to gold. league size is increasing
+ Hjax: why not just make the variance bigger? 
+ muy31: eulerscheZahl it was supposed to be a joke..
+ muy31: and wimper
+ eulerscheZahl: oh damn, didn't realize to whom i'm replaying
+ muy31: sp RoboStac it's about first 10?
+ muy31: cause i always lose like 2 in the first ten
+ muy31: 2 - 4 variable
+ RoboStac: they've got a big effect at the start, but you can still move ranks a lot afterwards
+ muy31: does it become harder to promote as more people join as well?
+ Hjax: no, it stays the same difficulty, because the boss doesnt get better 
+ Illedan: Might be harder, as some bots are stronger vs others
+ AntiSquid: .-.   | OO| |   | '^^^'
+ muy31: but there's no way someone w/ lazy/simple heuristics is getting better than other players even if we are all better than boss
+ AntiSquid: where are the pacman ghosts
+ Illedan: Add ghosts and remove fog of war :P
+ AntiSquid: ghosts trains&#160;!
+ Over9000: pde-bakk has some nice messages :thinking: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/464488929">https://www.codingame.com/replay/464488929</a>
+ AntiSquid: <a rel="nofollow" class="external free" href="https://youtu.be/0bRTVk5ckYo?t=563">https://youtu.be/0bRTVk5ckYo?t=563</a>
+ muy31: last submit of the day?, 4 losses in first 15 battles
+ SkyDreamer: can someone help me
+ llllllllll: with?
+ SkyDreamer: can i write a function in java that swaps the value of 2 int variables everytime i call it?
+ llllllllll: I guess so
+ SkyDreamer: a function i know returns a value, not the swap
+ isdemus: what do you mean by return a swap?
+ muy31: make the int variables static or something,
+ muy31: or global
+ muy31: you cant swap primitives as parameters
+ muy31: but you can if they are global variables
+ muy31: example: functionName(int a, int b){
+ muy31: a = a +b;
+ muy31: }
+ muy31: but a stays the same after method is called
+ muy31: but if they are not parameters but rather global variables you can do it
+ muy31: so functionName(int a, int b){a = a +b;}
+ muy31: so functionName(int a, int b){a = a +b;}
+ muy31: *oops
+ muy31: messed up
+ muy31: int a = 0;
+ SkyDreamer: but at the end of that funcion i must return something
+ muy31: unctionName( int b){a = a +b;}
+ muy31: make it void
+ muy31: ooh yes, in the 100s again! (silver)
+ SkyDreamer: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/1d7bdfc0-b99b-4672-8339-eb27a37c4828">http://chat.codingame.com/pastebin/1d7bdfc0-b99b-4672-8339-eb27a37c4828</a>
+ SkyDreamer: but it doesnt swap
+ muy31: it wont work
+ muy31: yeah b/c primitive data types as parameters
+ k4ng0u: is the initial number of ppl in legend fixed or does it depend on the number of participants?
+ muy31: it will only work with reference types and objects if you want ou use a and b as a parameters
+ VicHofs: yo superstars
+ VicHofs: any ideas how to improve in bronze from this gameplay? <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/464502929">https://www.codingame.com/replay/464502929</a>
+ muy31: otherwise SkyDreamer you need to make a and b global variables
+ VicHofs: I keep getting close calls like this and have run out of ideas
+ SkyDreamer: thanks
+ muy31: VicHofs you are wasting your speed
+ muy31: you need to choose a location at least two cells away
+ muy31: for you to use it
+ VicHofs: huh
+ VicHofs: ok thanks
+ VicHofs: I don't know how to use it properly
+ muy31: frames 22 - 26 or so
+ VicHofs: I was using if off cooldown
+ muy31: use it off sppedTurnsLeft
+ VicHofs: *it
+ muy31: speedTurnsLeft &gt; 0
+ muy31: using speed
+ Scarfield: you get to move 2 cells per turn when speed is active, but if you only target a cell one cell away, you will only move one cell
+ muy31: also VicHofs you don't always choose the best pellet, either, you might want to keep track of where you know for sure there are no pellets
+ muy31: many times though you ass up visible pellets
+ muy31: *pass
+ VicHofs: I do that already tho
+ VicHofs: keeping track of no pellets that is
+ VicHofs: might not be working properly tho
+ muy31: perhaps
+ muy31: but dont pass up perfectly good pellets
+ VicHofs: ty anyway
+ VicHofs: I think i have an idea what might be contributing
+ muy31: good luck&#160;:)
+ MSmits: errm, with some luck i could be gold boss, but more likely i will just get stuck under it :P
+ eulerscheZahl: i hope for a PHP boss
+ MSmits: that would be smart
+ MSmits: my bot is not a good choice
+ eulerscheZahl: you are too low anyways i think
+ MSmits: right
+ MSmits: 17 now
+ eulerscheZahl: i fear that i have a good rank
+ eulerscheZahl: but i don't want to be the boss :fearful:
+ MSmits: they dont pick rank 7 for gold boss do they?
+ MSmits: i thought it was more like 15?
+ eulerscheZahl: for OOC it was 8
+ MSmits: oh really
+ MSmits: explains why it was so hard to beat i guess
+ eulerscheZahl: they considered dbdr first. but IDE timeouts for a boss? nope
+ dbdr: :D
+ eulerscheZahl: in 30min we will know
+ dbdr: you say they considerd because Apo commented on my indenting?
+ MSmits: thats probably bad yeah
+ MSmits: is something wrong with your indenting?
+ dbdr: destroyed by my byndler
+ eulerscheZahl: because they commented on you timing out and that that's the reason you aren't the boss i think
+ dbdr: my source is beautiful of course&#160;;)
+ eulerscheZahl: on which day was legend opened?
+ MSmits: but you are still *a* boss though dbdr
+ dbdr: using tabs, as God intended&#160;;)
+ dbdr: lol MSmits
+ MSmits: ah, my tabs are atheist
+ dbdr: but you are stilling a coding God, MSmits&#160;;)
+ MSmits: thanks&#160;:)
+ dbdr: *still
+ RockyMullet: if your a god a believe in yourself, it makes you a theist
+ dbdr: MSmits you are in the coin flip zone for legend it seems
+ RockyMullet: self esteem is important
+ MSmits: I wont get legend immediately I think
+ MSmits: but often something happens to cause a flood
+ dbdr: better to prepare for that
+ MSmits: a submitter that has RPS vs gold voss
+ MSmits: boss
+ dbdr: I would be very happy if I do
+ eulerscheZahl: [CG]SaiksyApo: dbdr il a tellement de caractères qu'il doit supprimer l'indentation apparement è_é
+ dbdr: yeah, top gold should be fine. though sometimes the boss starts climbing as well
+ MSmits: yeah
+ MSmits: we'll see
+ dbdr: yeah. not sure if I had to, or my budler just did it anyway. it also included the unit tests in the submission :D
+ eulerscheZahl: and his next sentence: Then you will stay in Gold&#160;!
+ llllllllll: ah I LOVE IT SO MUCH when I timeout and my debug messages are not printed
+ llllllllll: even if I put it in the first line of the game loop
+ eulerscheZahl: timeout in game: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/464473429">https://www.codingame.com/replay/464473429</a>games parsed: 136     timeouts found: 1
+ eulerscheZahl: that's acceptable i guess
+ MSmits: I have them sometimes too, but I dont know why
+ MSmits: pretty rare though
+ llllllllll: yeah it is
+ llllllllll: which makes it specially annoying
+ dbdr: lol, now you are above me MSmits
+ dbdr: 0.01 between 4 bots
+ MSmits: damn
+ Uljahn: llllllllll: put them after the first inputs in the loop also add flush=True if it's py3
+ MSmits: my bot is weird though. I did a submit that ended at 170 as well
+ MSmits: it does relatively well against top bots
+ MSmits: but I still get trap-killed a lot
+ llllllllll: @Uljahn now its C++ &amp; I have a print after each function call in the game loop. still nothing is printed
+ MSmits: I'm not touching my submit until after legend opens
+ eulerscheZahl: same
+ VicHofs: ty muy31
+ YvanTCHOUDIE: Hello everyone
+ AntiSquid: looks like everyone is getting their best bot out of their cupboard
+ alinde2: I'm climbing a rank every couple of minutes, just gotta wait it out eh? 42@silver
+ AntiSquid: python at #27 , is that the boss&#160;?
+ eulerscheZahl: no, too low
+ AntiSquid: maybe they gonna take it and improve it
+ MSmits: if they pick the php, things will get really painful
+ eulerscheZahl: PHP at 4 is too highsome C#/Java around 10-15
+ MSmits: C#/java, might not be better than just c++
+ MSmits: many will use the full calc time
+ eulerscheZahl: or JS. but that's low again
+ MSmits: bah I'm dropping
+ eulerscheZahl: you shall not pass!
+ MSmits: I shall!
+ eulerscheZahl: i want to see you suffer :popcorn:
+ MSmits: :cry:
+ eulerscheZahl: for shooting at my submarine
+ MSmits: oh, right that one
+ MSmits: this is a pretty random ladder,  just like ooc
+ dbdr: some bots suffer in gold, but then zip through great positions in legend...
+ Illedan: 17-18 is a god spot to pick the boss
+ dbdr: why?
+ eulerscheZahl: i bet it will be around 10
+ Illedan: 24-25 score is very close
+ AntiSquid: fingers crossed for top 5 legend
+ Illedan: Need the score around 25.5
+ eulerscheZahl: 25.5 promotes like half of gold
+ MSmits: back in a bit, someone push me while I am gone
+ AntiSquid: push down
+ VicHofs: petition to make it a win if a player gets 69 pellets
+ icecream17: no, do it when a player has 0 pellets but 100 turns have passed
+ VicHofs: that's fine too but dude
+ VicHofs: 69
+ VicHofs: lmao
+ icecream17: 69 turns
+ icecream17: oh well submit
+ icecream17: wow it's updating fast
+ Uljahn: time to make some mass promotions in csb :smirk:
+ eulerscheZahl: where is my boss? :fork: :knife:
+ eulerscheZahl: no fork?
+ eulerscheZahl: :spoon:
+ Scarfield: there is no spoon
+ icecream17: the fork is lost in the cake
+ dbdr: late by several seconds already! ourageous!
+ SurajMishra2209: I have made all the improvements I could and I still cannot get out of bronze
+ SurajMishra2209: I am giving up
+ Doju: Don't give up SurajMishra2209
+ VicHofs: ooh don't give up dude
+ VicHofs: I suck too
+ Uljahn: ye, just gid gud ezpz
+ dbf: SurajMishra2209, don't give up, silver doesn't require complex code, just make sure that there are now visible errors
+ jrke: does legend open yet
+ Doju: ^ words of wisdom right there
+ Doju: (dbf)
+ Doju: xD
+ icecream17: This is aargh. I lose 5x times more often if I lost last time in the submit battles
+ VicHofs: not sure if I agree
+ eulerscheZahl: yes jrke. any minute now
+ Doju: VicHofs is your code timing out?
+ VicHofs: nope Doju
+ VicHofs: I just suck
+ Doju: are your pacs collaborating?
+ VicHofs: lmao
+ VicHofs: what does that mean
+ Doju: at least not crashing into eachother
+ Doju: for extended periods of time
+ Doju: and not following eachother
+ VicHofs: yeah they don't crash
+ VicHofs: I can't stop them from following yet tho...
+ Doju: that not following thing was key for me to getting to silver
+ VicHofs: any tips?
+ Doju: do you have a pathfinding thing working?
+ Doju: (bfs perhaps)
+ daanolav: So does anyone know how late legend is opening?
+ Hjax: soon™
+ Illedan: Any time now
+ BenjaminUrquhart: make kovi the boss /s
+ eulerscheZahl: i want a PHP boss
+ BenjaminUrquhart: but the php guy is 4th
+ Csipcsirip: c# would be much better
+ BenjaminUrquhart: ey
+ eulerscheZahl: boss
+ BenjaminUrquhart: java boss
+ wlesavo: yay
+ BenjaminUrquhart: Npi2Loup
+ wlesavo: big legend
+ eulerscheZahl: yay <a rel="nofollow" class="external free" href="https://prnt.sc/shgjyw">https://prnt.sc/shgjyw</a>
+ Illedan: 25.5 :tada:
+ Illedan: Told ya&#160;;)
+ BenjaminUrquhart: MSmits you just missed it
+ eulerscheZahl: will blow up quickly
+ Illedan: :clap: eulerscheZahl
+ Rprades: 15 ppl to legend i tseems
+ eulerscheZahl: 16
+ wlesavo: so Npi2Loup is the boss?
+ BenjaminUrquhart: I believe so
+ jrke: 16
+ BenjaminUrquhart: or it's another java bot that so happened to have the same score as him
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/464552384">https://www.codingame.com/share-replay/464552384</a><a rel="nofollow" class="external free" href="https://www.codingame.com/replay/464551779">https://www.codingame.com/replay/464551779</a>
+ Illedan: Random boss?
+ Hjax: looks deterministic 
+ eulerscheZahl: i thought my replays show the opposite?
+ dbdr: now we see the real ranking free of spam?&#160;:)
+ eulerscheZahl: no, someone will spam before it finishes
+ Illedan: :D
+ MSmits: 0.32 rating below gold
+ Illedan: haha
+ eulerscheZahl: and late promotions
+ MSmits: thats  like 3 games
+ dbdr: ValGrowth back to #1
+ kovi: finally we will have a real eval
+ kovi: with best versions and quite a few games
+ MSmits: 0.17 below gold boss
+ MSmits: karliso promoted
+ eulerscheZahl: and 2 players already resubmitted
+ dbdr: 3
+ eulerscheZahl: you too dbdr?
+ AlluringChair: can i somehow get the board in text #  #... so i can test it locally?
+ dbdr: no
+ BenjaminUrquhart: print it
+ dbdr: XL* karli* Jir*tech
+ eulerscheZahl: your second one is a promotion actually
+ dbdr: and w*la
+ eulerscheZahl: not a resubmit
+ dbdr: ah possible
+ dbdr: sry
+ solaimanope: will one get promoted if it's better than boss when BATTLES IN PROGRESS
+ eulerscheZahl: no
+ RockyMullet: good legend is out, time to bump my face a couple of times on that gate
+ dbdr: 3 HU in top 5 :D happy kovi?&#160;:)
+ eulerscheZahl: you don't like the boss?
+ Illedan: I'll join RockyMullet
+ dbdr: 3 in top 3
+ dbdr: ok, chnging too fast
+ RockyMullet: good good
+ MSmits: You are better than the boss! You will be promoted to Legend League
+ RockyMullet: ok first game in IDE I win, I might be lucky by spamming the submits :P
+ dbdr: yay, gg MSmits!
+ wlesavo: nice MSmits 
+ RockyMullet: gg MSmits
+ MSmits: no resubmit needed&#160;:)
+ MSmits: thanks
+ RockyMullet: resubmits are for losers
+ RockyMullet: like me...
+ <b>**RockyMullet plays violon</b></p><p><img src="/a/43448306132121" /> dbdr: I have submitted since yesterday morning :D
+ MSmits: first time i get to legend this way. All previous time I was either above boss, or i got it like 2 days later
+ RockyMullet: ok trying my luck
+ RockyMullet: THEN I'll code
+ AlluringChair: i'm probably dumb but how can i print the board, the console only shows 1 line and i can't print another..
+ MSmits: luck before code?
+ icecream17: save each line in an array
+ RockyMullet: AlluringChair you can print in the errors
+ Doju: yeah you need to print in the errors
+ RockyMullet: MSmits yes, cause luck is easy
+ MSmits: if you're lucky&#160;:)
+ alinde2: 30 silver, now winnings against ide bot. Gotta re-submit :grin:
+ AlluringChair: that stil wil be 1 line, \n doesn't work&#160;:/
+ icecream17: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/85b886e4-d0f5-4166-997f-b331bfcbb796">http://chat.codingame.com/pastebin/85b886e4-d0f5-4166-997f-b331bfcbb796</a>
+ RockyMullet: :four_leaf_clover:
+ RockyMullet: gl alinde2
+ AlluringChair: i guess i will separate it later...
+ icecream17: Alluringchair see the pastebin
+ Doju: hmm
+ RockyMullet: oh this luck thing is not looking good lol
+ kovi: we will have good baseline cgstat
+ RockyMullet: oh wait, the luck is coming back
+ Waffle3z: how small is legend?
+ MSmits: 20
+ MSmits: 21
+ RockyMullet: oh, nice
+ RockyMullet: not one of those "10 people in legend"
+ RockyMullet: so you're telling me there's a chance&#160;!?!?!?
+ eulerscheZahl: of course
+ MSmits: this game is pretty random. Get in range of gold boss so you get some battles against him. Overfit vs the boss, then chain submit
+ RockyMullet: trolling aside, I might be able to get legend
+ eulerscheZahl: even for 10 in legend, there is a chance - as these 10 prove
+ RockyMullet: yeah depends if I'm already in the downward spiral of "every I do make it worse" which is, for now, not the case :P
+ MSmits: hope I am not there either... havent really improved much since monday
+ MSmits: even though i did some pretty cool stuff in my bot. It just didnt help :P
+ RockyMullet: yah, I fixed so many edge case that happens once every 100 games, its nice, but doesnt affect the rank much
+ solaimanope: "even though i did some pretty cool stuff in my bot. It just didnt help" sums up my last two days :3
+ MSmits: right
+ RockyMullet: rn most of my game I lose because when tehre is not much pellet left, it takes too much time for me to find them, so I work on my deduction of where enemies have most likely already taken the pellets
+ RockyMullet: should help
+ MSmits: yes, thats on my list as well
+ MSmits: and finally try to kill and avoid dying :P
+ RockyMullet: knowledge is power :sunglasses:
+ MSmits: ye
+ Rprades: same for me RokcyMullet
+ Rprades: that is my bottleneck right now
+ RockyMullet: yah, Rprades, I improved my early gathering A LOT but then I slowly lose if it goes late game
+ RockyMullet: which is usually the case against good bot
+ RockyMullet: so unless I kill pacs (which my bot is ok at) I lose the long games
+ MSmits: you check for dead-end kills RockyMullet?
+ RockyMullet: yes
+ kovi: tiber has nice lead, 2-4 is pretty equal
+ MSmits: did you test how much stronger your bot is with the kill thing RockyMullet?
+ RockyMullet: hum ahrd to tell, I did that a couple days ago
+ Peudoki: time to join the legends for me hopefully
+ RockyMullet: but it doenst happen everygame
+ MSmits: I am going to check the last battles and see how many times it happens to me.
+ wlesavo: 24 already
+ MSmits: do an accurate count
+ wlesavo: looks promising
+ RockyMullet: I dont activly check for a kill, its just if I see an enemy in a dead end that I can reach before they can exit, I go for it
+ Peudoki: half the games done, 0.67 ahead of boss
+ Peudoki: 0.49 now
+ MSmits: RockyMullet thats exactly what i mean
+ RockyMullet: I seen a game once where it wasnt the right choice tho, I was losing by like 3 pellets and chased for the kill while I could have taken pellets and win
+ RockyMullet: killing an enemy pac is not as valuable late game
+ k4ng0u: never chase in end game :P
+ RockyMullet: yeah, I could probably do some dumb check like "if im that close from the end, dont go for kill"
+ k4ng0u: I read somewhere that you could divide the pellets left by the number of alive pacs to get an approximation of the value of killing a pac
+ MSmits: makes total sense
+ RockyMullet: yeah, not a bad idea
+ Doju: isn't it double that?
+ Doju: since they can't collect pellets and you can if their pac is dead
+ MSmits: doesnt matter, there will be a constant anyway
+ Doju: sure
+ MSmits: if the value is doubled, the constant will also and you will fit the constant
+ jrke: now tommorow we can make out who will be the winner 
+ Kellthazar: if myScore &lt; enemyScore, dont ignore the enemypac
+ Kellthazar: ops, I mean the oposite
+ Doju: It took me 8 hours to code a simple collaborative targeting thing ...
+ MSmits: most of my losses are corner kills where I dont know my opponent is around the corner =/
+ Kellthazar: yeah
+ WINWINWIN: SIlver boss occasionally has timeouts, is that ok?
+ eulerscheZahl: yes, it's fine
+ Doju: luckily i can quickly adapt it to work for paths too
+ eulerscheZahl: the boss is just another player like you and me
+ AlluringChair: i have just wasted nearly  3 hours of my life because deque in python with pop() works like a stack
+ Doju: you need to do popleft()
+ AlluringChair: THANKS
+ AlluringChair: I KNOW
+ Doju: sorry xd
+ AlluringChair: why name it DEQUE if it might as well be a stack..
+ Doju: double ended queue?
+ AlluringChair: e maybe i;m just tilted beyond reasoning now
+ kovi: very random. top6 is in a bunch now
+ Peudoki: I'm 0.00 behind the boss, nooo!
+ Peudoki: can't get to legend
+ MSmits: so.. .you have floating point issues?
+ Peudoki: we're both at 25.23 when I finished my games
+ ZarthaxX: lol
+ MSmits: Peudoki, the first one of you to win a game will be 1st
+ MSmits: so just win your next game
+ MSmits: and hope he loses his
+ eulerscheZahl: your score has more decimal digits than shown
+ Peudoki: I have no games left though
+ eulerscheZahl: others submit
+ MSmits: players will play against you..
+ Doju: yeah Peudoki just hype your bot up
+ NinjaDoggy: :O he did it
+ MSmits: .and against the boss
+ NinjaDoggy: the boss lost
+ Peudoki: it happened! I'm legend!
+ Doju: gratz
+ MSmits: grats&#160;:)
+ NickStahl: Peudoki congrats
+ Peudoki: well
+ Peudoki: in 30 sec
+ Peudoki: I have to wait it out
+ Peudoki: and hold
+ MSmits: no
+ ZarthaxX: nah you cant 
+ MSmits: if it gives a popup, you're in
+ ZarthaxX: once u get that msg you promote
+ ZarthaxX: even if you resubmit
+ Peudoki: it's official!
+ eulerscheZahl: it was before
+ Ramzel: YEY GOLD&#160;!
+ WINWINWIN: well donw Peudoki, Ramzel
+ Peudoki: thank you
+ NickStahl: Ramzel congratz
+ Peudoki: I'm dead last in legend, but I'm here ^^
+ Peudoki: the smallest legend known to humanity
+ eulerscheZahl: nah
+ MSmits: it will grow
+ MSmits: it's always small at first
+ eulerscheZahl: 44 at the end of the contest for code of ice and fire, 49 for mean max
+ MSmits: this one will be bigger
+ eulerscheZahl: this one will exceed 100 i think
+ Peudoki: 100 legends? :O
+ eulerscheZahl: just wait till monday
+ alinde2: Edge of my seat <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/464600335">https://www.codingame.com/replay/464600335</a>
+ kovi: its hard to climb with 55% winrates
+ Doju: only 2 days left... i guess it's time for bad coding 
+ Doju: ctrl + c and ctrl + v to the rescue
+ wlesavo: does legend feels less random?
+ kovi: not at all
+ WINWINWIN: I dont understand what you mean by random wlesavo
+ WINWINWIN: Are all the bots deterministic in legend?
+ Xlos: Alright I'm finally beating inky's butt
+ Xlos: silver here we come
+ wlesavo: WINWINWIN random pac deaths are almost unavoidable, so it can result in a loss with nothing you can do about it
+ Rprades: 26% battles and beating the boss!
+ Rprades: hope it lasts until 100%
+ WINWINWIN: Thanks wlesavo, understand now
+ wlesavo: Rprades quite huge advantage actually, 1 point above the boss
+ Rprades: just lost 7 in a row&#160;:(
+ Ramzel: Is there a way to fall a rank down?
+ wlesavo: i think you will make it anyway
+ Ramzel: league down*
+ Rprades: thanks for the trust wlesavo
+ wlesavo: Ramzel no, only in test mode
+ Quidome: Legend is already big, congrats guys
+ Quidome: Well played&#160;:)
+ mpt: still got 800ms to spent on precalc. What should I use it on, I wonder.
+ kovi: increase depth of 1st turn action
+ jacek: make opening book
+ mpt: thanks for the input
+ NinjaDoggy: mtp
+ NinjaDoggy: calculate cuts/trapping :P
+ MSmits: cuts&gt;
+ MSmits:&#160;?
+ MSmits: you mean dead-ending  a pac?
+ NinjaDoggy: yep
+ MSmits: kk
+ MSmits: stil havent coded that
+ MSmits: seems fairly easy, but it will add more mess to my mess
+ NinjaDoggy: how's the enemy tracking going now?
+ MSmits: I dunno.. I have something that works, but it doesnt help me win more
+ eulerscheZahl: trapping is fun
+ MSmits: i mainly try not to die around corners, but it makes my pacs afraid to go around corners :P
+ eulerscheZahl: i try to kill around corners :imp:
+ MSmits: eulerscheZahl have you reduced your trapping? I saw a replay from you where you had 2 pacs travel quite far to kill another pac... thats pretty costly
+ eulerscheZahl: i still do it
+ MSmits: do you take into account the cost though? For example near end games?
+ NinjaDoggy: evil euler :imp:
+ eulerscheZahl: no, i just like kills
+ MSmits: lol ok
+ NinjaDoggy: LOl
+ MSmits: it seems pretty complicated to code with multiple pacs involved
+ MSmits: dead ends are pretty easy
+ eulerscheZahl: like this? <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/464470922">https://www.codingame.com/replay/464470922</a>
+ MSmits: yes that
+ some_person_that_dan_doesnt_know: helo
+ some_person_that_dan_doesnt_know: 14
+ eulerscheZahl: it's not that hard to code if you are happy catching 95% of the cases
+ MSmits: you also need to take into account your other pacs blocking your trap
+ MSmits: stuff like that
+ eulerscheZahl: and that's where i screw up :D
+ MSmits: hehe ok
+ NinjaDoggy: hm...
+ MSmits: thats my problem. I see a problem I dont know how to fix and then I dont code an less effective version that would still work 95%
+ RockyMullet: hu, I could probably improve my "kill in dead ends" algo to make traps like that
+ some_person_that_dan_doesnt_know: where did the button where u can join a random 15min clash go
+ Nerchio: do we know who is the gold boss?
+ NinjaDoggy: wait you didn't detect trap on frame 33 but did on fram 37?
+ NinjaDoggy: you have to have a pac next to them? lame -_-
+ eulerscheZahl: npi2 is the boss
+ NinjaDoggy: that's not 95% :P
+ CodingCarter: 2 hours b4 AP Computer Science A!
+ MSmits: NinjaDoggy
+ MSmits: it's cooldowns
+ MSmits: the opponent can switch
+ MSmits: then you cant trap him
+ NinjaDoggy: oh nvm i'm dumb&#160;:(
+ NinjaDoggy: but you can also switch!
+ NinjaDoggy: ha! lame -_-
+ MSmits: yes, but that doesnt work
+ MSmits: the one who switches first loses
+ MSmits: you get a standoff
+ MSmits: takes too much time, tying up two pacs vs his one
+ MSmits: not good
+ NinjaDoggy: true
+ NinjaDoggy: but he doens't care, he just wants kills
+ MSmits: thats true. Out of character euler, you should park two pacs and wait
+ eulerscheZahl: hey, i won the game
+ NinjaDoggy: :P
+ eulerscheZahl: i also saw my bot doing this in turn 2 with bad start locations
+ MSmits: yeah... seen plenty of those
+ MSmits: all games I lose 
+ DiegoVega: can anyone tell me how the starting positions are chosen? is it truely random or there is a fairness involved so that your pac is not in an impossible starting position?
+ dbdr: it's fair since it's symmetrical
+ Peudoki: my AI just went on a winning stream of 13
+ Peudoki: crazy rampage
+ Peudoki: streak*
+ MSmits: I turned that mode off... felt like cheating
+ Doju: :D
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://prnt.sc/shibdp">https://prnt.sc/shibdp</a> :D
+ MSmits: see, that's sporting. Giving others a chance
+ MSmits: try that Peudoki
+ dbdr: are you on stike euler?
+ some_person_that_dan_doesnt_know: h
+ some_person_that_dan_doesnt_know: h
+ some_person_that_dan_doesnt_know: h
+ some_person_that_dan_doesnt_know: hhhh
+ some_person_that_dan_doesnt_know: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/693a0aea-2cc3-4115-87c3-de3cc25e9b31">http://chat.codingame.com/pastebin/693a0aea-2cc3-4115-87c3-de3cc25e9b31</a>
+ some_person_that_dan_doesnt_know: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/94de7a21-549a-440b-b2b7-b5b58812951d">http://chat.codingame.com/pastebin/94de7a21-549a-440b-b2b7-b5b58812951d</a>
+ some_person_that_dan_doesnt_know: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/c1a425c2-6df8-4463-beb9-d967d756e786">http://chat.codingame.com/pastebin/c1a425c2-6df8-4463-beb9-d967d756e786</a>
+ some_person_that_dan_doesnt_know: hhh
+ njaber: smells like imminent mute/ban
+ NinjaDoggy: where the mods at
+ some_person_that_dan_doesnt_know: h
+ eulerscheZahl: chose your mod
+ NinjaDoggy: euler aren't you a mod?
+ eulerscheZahl: i'll ping antisquid
+ eulerscheZahl: but tab completion doesn't trigger
+ NinjaDoggy: why aren't you a mod&#160;:(
+ struct: I ping MadKnight
+ eulerscheZahl: i'm only on discord&#160;:(
+ NinjaDoggy: weak
+ cegprakash: eulerscheZahl "i also saw my bot doing this in turn 2 with bad start locations" can u show me
+ eulerscheZahl: didn't save it
+ struct: Need top 100 in CSB for mod
+ eulerscheZahl: sqiddy got that?
+ NinjaDoggy: i don't believe it
+ NinjaDoggy: not 1 bit
+ struct: yes
+ cegprakash: what is it about eulerscheZahl
+ struct: rank 91
+ NinjaDoggy: :O
+ some_person_that_dan_doesnt_know: h
+ daanolav: i don't even know what i can do to improve my bot anymore, that's how bad i designed it in the first place
+ Jesus_inn_party: sup every one
+ Doju: sup jesus
+ cegprakash: out off topic: have anyone worked on "sign in with google" on backend? I need help
+ jrke: hey i wanna ask one thing in c++ suppose their is nested loop and if command break; then it will  exit from all loop or one
+ eulerscheZahl: and you can't google for help because you aren't signed in?
+ eulerscheZahl: jrke for my prof that's the only acceptable use of goto
+ cegprakash: eulerscheZahl too many documents
+ cegprakash: don't know which one is right
+ jrke: K euler thanks
+ struct: it only breaks the current loop
+ struct: not nested
+ EvModder: :O they added a new arena
+ EvModder: time to submit again and hope i make the cut
+ eulerscheZahl: which arena?
+ eulerscheZahl: i see no new multiplayer game
+ EvModder: legend
+ eulerscheZahl: oh :D
+ jrke: hey when i add goto to switch it time out else works why is this in c++
+ struct: How does your switch looks?
+ EvModder: idk, should work. i dont use gotos much personall
+ jrke: <a rel="nofollow" class="external free" href="https://pastebin.com/81jcYTqL">https://pastebin.com/81jcYTqL</a>
+ jrke: my switch
+ struct: you need break; on switchs
+ jrke: same timeout then also
+ jrke: what can i do 
+ cegprakash: goto guy spotted
+ jrke: means
+ cegprakash: if something works ship it
+ jrke: Ceg i didn't get you
+ [Csongor]: The boss just timed out...is that normal?
+ cegprakash: you've to type "goto cegprakash;" to get to me
+ eulerscheZahl: yes, the boss can timeout too
+ cegprakash: probably eulerscheZahl is the boss
+ EvModder: noob boss lol
+ EvModder: what causes it to timeout?
+ jrke: hey anybody to my ques plz 
+ cegprakash: EvModder thinking
+ cegprakash: thinnking too much
+ EvModder: i dont beleive in thinking
+ [Csongor]: the boss timed out again
+ struct: jrke what is s4?
+ EvModder: link to game?
+ cegprakash: [Csongor] definitely it's eulerscheZahl
+ cegprakash: if it timeouts often
+ cegprakash: let me guess there are 4 or 5 pacs
+ jrke: its just an int s4
+ struct: What is this switch supposed to do&#160;?
+ struct: What do you want to do?
+ jrke: i am using it for sim
+ struct: Yes but what is it meant to do?
+ jrke: its one of my 6 switch to read all possibilities for next 6 turns
+ jrke: how can i solve this probleme
+ jrke: *problem
+ struct: are you using goto to exit switch?
+ jrke: break and goto both timeout
+ Counterbalance: jrke you forgot the break;
+ jrke: nope its also giving timeout
+ eulerscheZahl: the goto is conditional
+ eulerscheZahl: you still need an unconditional break
+ jrke: means
+ eulerscheZahl: oh wait... just poorly formatted
+ RoboStac: no, it's outside the {} so it's the same as break
+ Counterbalance: right
+ dbf: eulerscheZahl, congrats with legend, boss is in java, so you are happy?&#160;:)
+ Rprades: come on 
+ eulerscheZahl: no, i wanted PHP
+ Rprades: first after the gold boss
+ Rprades: haha
+ jrke: whats wrong in this code
+ Rprades: story of my life
+ RoboStac: theres nothing wrong (other than the formatting) with that code jrke 
+ jrke: so what i am suppose to do?
+ Counterbalance: might be because there are no bounds checks here so maybe you're accessing somearray[-1]&#160;?
+ dbf: Rprades, just leave your bot overnight and check tomorrow morning&#160;:)
+ Rprades: do you think that without submiitting there is a chance to get promoted? if he loses more than me?
+ Rprades: thanks dbf, that is what I was asking
+ Rprades: I wont resubmit then
+ eulerscheZahl: odds are good to get pushed
+ eulerscheZahl: only submit if you have a real improvement
+ dbf: the gap is not small, but there is allways a chance for #1
+ dbf: yes, don't resubmit old code
+ eulerscheZahl: how big is the gap?
+ Rprades: thanks&#160;:)
+ Rprades: 0.9
+ dbf: 0/85
+ eulerscheZahl: still in range of random
+ Rprades: crossing my fingers
+ dbf: close the leaderboard, start working on large improvement and check tomorrow&#160;:)
+ dbf: (pro-tip from a person who was never in legend, lol)
+ Rprades: haha
+ Rprades: thanks
+ cegprakash: dbdr it doesn't work lol.. small iffs are the ones making diff atleast to me
+ Illedan: Open the webpage in Inspect. Remove chat, ranking and leaderboard. Continue to work.
+ eulerscheZahl: add ?disableChat to the URL, way easier
+ dbf: wow
+ Illedan: Wont remove leaderboard and ranking
+ struct: Just dont submit
+ dbf: so I need +4 scores, looks like a major improvement is required&#160;:(
+ eulerscheZahl: hm, i like the idea of removing that distraction too
+ HiIamFriend: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/464686757">https://www.codingame.com/replay/464686757</a> Aham, what was that
+ Illedan: I removed those on that 4 hour sprint :P
+ cegprakash: Illedan I'd love an extension for that
+ eulerscheZahl: looking at the rank too often despite knowing it's meaningless
+ Illedan: ^
+ HiIamFriend: how do u beat that :DDD
+ HiIamFriend: explain pls
+ MSmits: it's a special move. Output SLURP_PELLETS
+ Illedan: I wish this game had a 5 BFS ranged vision instead of along the lines -.-
+ HiIamFriend: hmm
+ MSmits: HiIamFriend i am kidding... you timed out
+ dbf: Illedan, so you can use more code from unleash the geek?&#160;:)
+ HiIamFriend: ow :D
+ MSmits: meaning you didnt provide a proper command
+ Illedan: Or OoC :P
+ HiIamFriend: thanks :D
+ MSmits: np&#160;:)
+ jrke: <a rel="nofollow" class="external free" href="https://pastebin.com/81jcYTqL">https://pastebin.com/81jcYTqL</a>hey anybody just solve this problem plzi am getting timeout on applying break or goto statement and works without break and goto why?
+ MarekM: jrke: which language?
+ jrke: c++
+ MarekM: Use of goto statement is highly discouraged because it makes difficult to trace the control flow of a program, making the program hard to understand and hard to modify. Any program that uses a goto can be rewritten so that it doesn't need the goto.
+ struct: jrke I think someone already mentioned the possible problem
+ jrke: hey but break is also not working
+ MichaelVonWolfen: Try and change that switch to if statements
+ struct: if px - 1 == -1
+ struct: you gonna check array[-1]
+ jrke: K
+ Doju: oh great, my pacs see ghosts
+ HiIamFriend: so if i am rank1 what does that mean O_o "last battles"
+ NapTown: then you're promoted
+ HiIamFriend: so i wrote a single line code and i won&#160;? thats weird
+ Illedan: what league?
+ HiIamFriend: nvmd, wood league
+ HiIamFriend: i am not first now
+ Illedan:&#160;:)
+ Illedan: Wood is introduction
+ HiIamFriend: wood 1 :D
+ HiIamFriend: this is a fun website tbh
+ HiIamFriend: i was searching to code for fun
+ Nerchio: welcome&#160;!
+ HiIamFriend: ty 
+ AntiSquid: hey was away, how many did get promoted initially&#160;?
+ RoboStac: 16
+ cegprakash: AntiSquid I think eulerscheZahl's timeouting bot is th eboss
+ AntiSquid: java
+ cegprakash: oh then Npi2Loup may be
+ HiIamFriend: does enemy is represented by "#" or no&#160;? 
+ cegprakash: no HiIamFriend
+ cegprakash: # is wall
+ [Csongor]: the walls
+ HiIamFriend: k
+ wlesavo: ceg teaching about the rules :smirk:
+ cegprakash: enemy is represented by mine=false
+ cegprakash: I get helped from CG community, I give it back
+ cegprakash: so never troll CEG
+ wlesavo: CeG
+ ashikujjaman: which algo is best for silver league?
+ Peudoki: anything people use in gold and legend
+ wlesavo: btw, cegprakash, what does your nickname mean? is it an actual word?
+ cegprakash: I studied at CEG
+ cegprakash: but everyone in my college call me CEG coz of my handle
+ cegprakash: so I started using it everywhere
+ cegprakash: and when I came to CG everyone started calling me CEG as well
+ wlesavo: is prakash your lastname then?
+ cegprakash: firstnname 
+ wlesavo: oh i see
+ cegprakash: I don't have a lastname
+ struct: if you have a firstname you have a last name
+ Doju: hm
+ Doju: hah
+ Peudoki: you can have only one name
+ Peudoki: that isn't the last
+ Doju: wdym
+ Doju: i have 3 names that aren't the last
+ AntiSquid: but what about 1 first name and 20 middle names?
+ [Csongor]: 3 nicknames
+ wlesavo: struct sounds like a programmer would say
+ wlesavo: like smth
+ wlesavo: nice Illedan 
+ Rprades: yes! congrats!
+ Rprades: that give me hope,  now I am 0.5 away!
+ dbf: :thumbsup:
+ ameler: gg Illedan
+ eulerscheZahl: legend is too crowded already, can we get a new league?
+ dbf: yes, if you take gold boss with you
+ Hjax: In 2 days 12 hours the last league opens, its called champion :P
+ kovi: why wait so long, do it now
+ wlesavo: 40 ppl already wow
+ Jesus_inn_party: how do you know this much stuff?
+ Nerchio: i wish submits were faster so i can spam submit and hope for a lucky legend run
+ Astrobytes: cegprakash "I don't have a last name" - yes you do and I know what it is :P
+ Illedan: w00t
+ Illedan: Still my code from last saturday with isdead tweak :D Just changed some numbers lol
+ Colios13: Tourist is coming :astonished:
+ Illedan: Nice
+ Illedan: Rank 3k
+ Illedan: :D
+ fatrujilloa: Guys I keep getting timed out but I am not sure where the problem comes from... any hints in how to find the problem?
+ Doju: print everything
+ Doju: except if you print too much make sure it doesn't time out because of that
+ Waffle3z: made a change and submitted. 22nd to 175th. resubmitted. 1st
+ MarekM: measure time on code segments
+ fatrujilloa: I am doing it... it gets to the end of the dycle actually :S 
+ fatrujilloa: How do you measure time?
+ Astrobytes: Psyho, tourist... who else will join
+ Illedan: psycho didn't do much right?
+ fatrujilloa: I am using Python
+ Astrobytes: In gold last time I looked
+ MarekM: start = time.time()
+ MarekM: then same at finish
+ fatrujilloa: Thx!
+ MarekM: substract and print
+ Doju: it's hilarious that if you google "pacman mouth angle"
+ Doju: it actually gives you the answer
+ Astrobytes: Still have a small bet with myself that dapo will show up at the end :D
+ Doju: in one of those little handy quick answers
+ kovi: quite a few topcoder marathonists play
+ kovi: i envy how fast romka descended
+ Illedan: Astrobytes :D
+ kovi: at this point my vote is on karliso
+ Illedan: I vote for T1024
+ NapTown: Betrayus switch counter:worried:
+ Illedan: Or myself if I every get this code working xD
+ eulerscheZahl: i bet karlis o too
+ eulerscheZahl: no Illedan. you just aren't a contest killer
+ Illedan: I know, my motivation was done last saturday :P
+ Illedan: I still have 3 beers and a redbull. Will see what the night brings
+ Astrobytes: that's some submit by Romk a
+ MattSOrme: I thought id made loads of improvements. Played against the boss and won a couple games without paying much attention to anything but the final score. Submitted and list 600 places...
+ eulerscheZahl: headache for the next morning
+ Illedan: Used to that
+ MattSOrme: All of the cool stuff that i had working this morning, was broken by the stuff i did this afternoon&#160;:(
+ cegprakash: I think the rate at which I stare at leaderboard has been increased since the leaderboard fast updating from CG
+ Astrobytes: lol, it is a significant improvement
+ struct: Romk a with a new bot?
+ Astrobytes: It's impressive
+ Doju: what on earth
+ Doju: my pac updating method is so broken. How has it worked till now
+ Doju: Or maybe it hasnt&#160;:/
+ Astrobytes: lol just noticed it's a top 10 Hungarian takeover :D 
+ kovi: psyho playing btw
+ MarekM: gold league, after all, in the middle of debugging&#160;:)
+ EvModder: did all of the other top players get a lot better since yesterday or did i get a lot worse lol
+ EvModder: probably both xD
+ MarekM: or out of luck
+ EvModder: ya i agree. i will blame luck
+ Adnmaster: so you work in google
+ Adnmaster: nice
+ AntiSquid: he is part of the search engine itself
+ Icebox: he *is* the search engine
+ EvModder: kind of ironically, i dont think my pellet search algorithm is much good
+ DevLugo: Hello!, about the batman binary search...How i know the current position of batman?
+ Icebox: you track it
+ Icebox: yourself
+ Opeyevil: Am i able to move Coders strike back into visual sutdios to play and debug properly? i still dont understand why next checkpoint x and y change with every loop. 
+ DevLugo: ok i think i have an idea. Thanks!
+ cegprakash: yes u can Opeyevil
+ cegprakash: that's what most of us do Opeyevil
+ tobk: Huh, what's the story behind the Gold boss? Never been much into the Lore of Pacman...
+ Opeyevil: how do i move the cins from the website to my ide? only been coding for 1 year so noob
+ eulerscheZahl: what's the name?
+ tobk: jup
+ Opeyevil: is there an API i can access?
+ Hjax: Lord Betrayus @eulerscheZahl
+ eulerscheZahl: betray us, interesting :D
+ eulerscheZahl: Opeyevil <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/53705/contest-tools-and-workflow/debugging">https://www.codingame.com/playgrounds/53705/contest-tools-and-workflow/debugging</a>
+ cegprakash: Opeyevil use cerr
+ tobk: haven't seen it play yet, maybe a reference to the tactics. just came back here
+ eulerscheZahl: for CSB it is probably easier to import a single turn
+ eulerscheZahl: they usually decide about the names before choosing a bot
+ cegprakash: Opeyevil just print to cerr and copy paste it to ur input file
+ Doju: erm...
+ Doju: anybody else having issues with pac info?
+ Doju: i don't think i changed a thing and my bot is broken
+ Doju: could still very well just be me though
+ cegprakash: #3 in gold time to stare the leaderboard more
+ cegprakash: 97%
+ Chkoupinator: can pacmen see in diagonal? 
+ [Csongor]: Does it matter witch language you choose to write your code in? I chose js for this pac-man competition, but I see that all the top ones use C++.
+ Astrobytes: You can do it cegprakash!
+ cegprakash: I couldn't I'll park my bot for sometime
+ cegprakash: hoping ppl will push me
+ cegprakash: I didn't get enough games against boss
+ Opeyevil: how would you import a class or .h file into this website?
+ eulerscheZahl: you write everything in a single file
+ Astrobytes: You can code everything offline in multiple files then use a script to merge into one file for CG of course
+ EvModder: watching games where players don't activate speed until the 2nd turn, and I didn't understand why....until i played one and they ate my packed because their speed lasted 1 turn longer
+ EvModder: ate my pac*
+ EvModder: it's some next-level thinking to be sure
+ cegprakash: it's a bug EvModder
+ cegprakash: it's same as using speed on first turn
+ EvModder: oh?
+ cegprakash: if u see someone doing that help them by sending them the replay that they have a bug
+ MSmits:&#160;??
+ EvModder: ah ok
+ eulerscheZahl: i disagree ceg
+ Icebox: lol
+ MSmits: what is this bug you're talking about ceg?
+ eulerscheZahl: i don't speed in turn 1, if i spawn next to an opponent that could eat me
+ MSmits: are you smoking your pellets?
+ Icebox: nice try to hide a strat ceg
+ cegprakash: well that's a rare case
+ cegprakash: 1 in 1000 times it can happen
+ EvModder: i agree eulerscheZahl; always save ability if a scary opponent is next to you
+ eulerscheZahl: also saw another player optimize for super pellets: no need to speed, when the first is 1 cell away
+ MSmits: a little bit more often than that cegprakash
+ EvModder: unless they have speed
+ GauravGosain: hello guys im new here
+ EvModder: welcome&#160;:)
+ GauravGosain: thanks a lot :D 
+ Adnmaster: how many lines of code did you write to get out of bronze?
+ eulerscheZahl: hello new i'm here for longer already
+ EvModder: i have programmed strats for a lot lot lot of edge cases / rare maps
+ MSmits: I'm newer than here for longer already
+ eulerscheZahl: let me check...silver opened wednesday evening
+ EvModder: but my general pellet collection is kind of mediocre
+ MSmits: many doubles I take it?
+ eulerscheZahl: my bot which promoted to silver had 1250 lines
+ GauravGosain: just got a problem with a solution of x * (x+y) and my fellow clashers are struggling 
+ Adnmaster: omg
+ eulerscheZahl: oh wait, that was goldlooked at the wrong day
+ Adnmaster: whew
+ EvModder: lots of lines man
+ eulerscheZahl: 1014
+ Adnmaster: nooooooooooooooooo
+ cegprakash: good job kord lets bring down this boss's score
+ eulerscheZahl: then again: i promoted by being top10 when the league opened
+ GauravGosain: lvl52 @eulerscheZahl wow
+ EvModder: mine is like 1000 but it has a lot of stuff in commented out blocks
+ Adnmaster: what strategy did you use? (dont tell if its forbidden to tell) eulerscheZahl
+ EvModder: (cool features i tried to implement but made my rating drop when i tried them out lol)
+ eulerscheZahl: i don't want to go too much into detail. but i'm planning a few turns ahead and tracking my opponent location
+ Adnmaster: so you are going to chase him?
+ MSmits: only if he cant escape
+ EvModder: i chase enemies, if i know i can catch them&#160;:)
+ eulerscheZahl: GauravGosain you saw my rank by hovering over my avatar i suppose. there's also a text "don't invite me to clash of code"
+ GauravGosain: oh im sorry
+ King-Of-Code: My gameboard doesnt show up?
+ Icebox: xd
+ King-Of-Code: new here
+ Astrobytes: Is this the first competition where you haven't "gone into too much detail" eulerscheZahl?
+ eulerscheZahl: yes i chase: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/464470922">https://www.codingame.com/replay/464470922</a>
+ Icebox: eternal struggle euler :D
+ MSmits: eulerscheZahl he just saw clash of code. If you look at the text, both sides of that sentence are a in a different color background
+ Icebox: why isn't there an option to disable invites :D
+ eulerscheZahl: yes, i'm usually too talky Astrobytes&#160;:/
+ Astrobytes:&#160;:)
+ MSmits: he said plenty
+ MSmits: my bot is Euler's idea
+ eulerscheZahl: stop trolling
+ njaber: Anybody knows if we can get perf improvement from parallel computing, or do they prevent threading entierly?
+ Astrobytes: lol
+ MSmits:&#160;:)
+ Adnmaster: lol :D
+ AntiSquid: lol 
+ AntiSquid: (didn't read chat yet)
+ EvModder:  eulerschezahl that replace is quite cool
+ EvModder: replay*
+ EvModder: i still haven't got my pacs to collaborate with eachother to trap enemies
+ MSmits: me neither
+ MSmits: you can get legend without such things
+ MSmits: but it's cool
+ EvModder: ya
+ EvModder: it is cool to watch
+ Hjax: its so hard to understand why my bot wins and loses 
+ EvModder: tell me about it
+ MSmits: I can usually tell... it's just hard to find a generic fix fo rit
+ eulerscheZahl: yeah, you don't see what your bot is seeing
+ perseverent: I still can't believe the silver strength
+ Astrobytes: Hjax - it wins when you beat the opponent, it loses when the inverse is true! (sorry)
+ perseverent: what the hack
+ njaber: I think there's a better way to get the answer to my question, do people in Legend usually use parallel computing?
+ MSmits: noone does
+ perseverent: what do one have to do against that boss
+ MSmits: one core
+ Hjax: like, i write a feature, it makes my bot worse, dont really know why 
+ Hjax: guess i try to write a different feature 
+ EvModder: threads are nasty  anyways
+ njaber: Ok then I guess I need to find another way to optimize my thing
+ EvModder: who wants that
+ Doju: Hjax oh yep
+ MSmits: happens to me as well Hjax. It's discouraging
+ eulerscheZahl: been there too Hjax
+ MSmits: havent gotten a solid improvement since monday
+ eulerscheZahl: but right now i know what i broke
+ Doju: i just spent the day writing things that make my pacs not crash
+ Doju: rank dropped by 200
+ Hjax: but your monday bot is better than my friday bot MSmits
+ Hjax: :D
+ MSmits: I know... that's the silver lining
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://imgur.com/a/6I1Hfvl">https://imgur.com/a/6I1Hfvl</a>some pellets have a probability &gt; 1 to exist&#160;:/
+ MSmits: then the gold lining
+ MSmits: and now legend&#160;:)&#160;:)
+ MSmits: but good to see you got your search working at least Hjax
+ Hjax: yeah it works, i think its just optimizing for terrible things 
+ Doju: eulerscheZahl great then you only need to send 0,76 pacs there
+ EvModder: hmm, that pellet looks very likely to exist
+ cegprakash: makes sense Doju
+ EvModder: also, nice image
+ wlesavo: more than likely
+ MSmits: thats annoying Hjax, your type of search is hard to debug also
+ EvModder: i use cerr in the IDE to debug my grid lol
+ njaber: Ok frick I think I need to switch to c++, I'll have to rewrite everything&#160;:(
+ EvModder: why?
+ njaber: Not enough perf for what I want to do
+ Astrobytes: You need to use the D
+ EvModder: ah, that's unfortunate
+ njaber: I need some precalcs in in turn 1 bue they take 4 times too long with c#
+ <b>**AntiSquid watches the pendulum swing rank up and down</b></p><p><img src="/a/44367721008170" /> EvModder: i wrote in c++ because of familiarity, but my code should be fine in python or anything really
+ njaber: I'm not even sure c++ will give me enough perf
+ EvModder: best of luck antisquid, don't get too wrapped up watching it lol
+ pmor: write in machine code
+ njaber: Actually it's probably more the 4 times too long since I haven't implemented all of the logic yet
+ AntiSquid: it's hypnotizing EvModder
+ zarif98sjs: @eulerscheZahl how are you generating this image
+ Astrobytes: He takes all his output data and manually draws each fram in GIMP
+ Astrobytes: *frame
+ eulerscheZahl: directly in my bot code, with pragma not to do it on submit
+ eulerscheZahl: that's just 30 lines of code to generate them
+ cegprakash: I am waiting for eulerscheZahl's gif after the contest already
+ eulerscheZahl: not that interesting. you see some tracking and path clearing
+ [Csongor]: What is the new thing in gold?
+ cegprakash: thinking about entering legend without having an opponent tracking I must be too greedy
+ eulerscheZahl: silver rules are final
+ [Csongor]: really
+ eulerscheZahl: yes
+ eulerscheZahl: was planned that bronze rules are final. but the missing dead players were a "fix" during the contest
+ cegprakash: even if I'm #2 and there is a big gap from the boss in score I'll get very less matches against the boss?
+ eulerscheZahl: i think only codingame can answer that
+ EvModder: i dont know, i had to resubmit my bot for it to be matched against the boss
+ cegprakash: omg Zylo what did u add
+ cegprakash: u just promoted few ppl
+ Zylo: yee... I'm stronger than boss and weaker than a few others&#160;:-/
+ Kukiss: I see you are almost 1 point ahead now&#160;:)
+ Doju: I seriously need to add some kind of combat logic but i have no idea where to put it or how to even do it&#160;:/
+ Doju: currently my pacs only focus on pellets and not screwing the pathing up
+ llllllllll: thats perfectly fine imo
+ llllllllll: combat wastes time
+ Doju: No but they like run straight into enemies
+ llllllllll: ah ok, thats bad
+ Doju: if there's a pellet in between them and the enemy
+ Doju: and don't even consider killing them even if it's possible in one move
+ zarif98sjs: I still have no idea how to track the enemy 
+ zarif98sjs: looks like without adding that my bot is not improving
+ HiIamFriend: did anyone tried to trap enemy packmans if u have more score&#160;?
+ MarekM: yes, collision resolving is essential, but i have still problem when attacked by the corner, no chance to see him
+ HiIamFriend: to prevent enemy to gain more score
+ romanshevchuk: can someone please explain how this rule works?
+ VicHofs: No
+ VicHofs: SPEED grants an extra move round for those who have it on
+ VicHofs: all other pacs who don't can't move
+ romanshevchuk: I though it's an ability that I can enable from time to time. I don't see anything in the rules about stopping other pacs from moving
+ VicHofs: It is though
+ VicHofs: But that's how it works
+ VicHofs: if any of the pacs has speed on, there will be intermittent rounds when only pacs with speed enabled can move
+ Valiant_Wolf: to rephrase: each round has two movement phases; only pacs with the speed ability enabled can move in the second phase
+ Kellthazar: Wow... I think that Ill be promoted
+ VicHofs: sick @Kellthazar
+ Kellthazar: Thanks... And the @ is not necessary to mention an user VicHofs&#160;;)
+ VicHofs: I am well aware Kellthazar&#160;;)&#160;;)
+ HiIamFriend: how to know if you will get blocked or no
+ HiIamFriend: you always has to check around pacs for that&#160;?
+ VicHofs: wym
+ HiIamFriend: have*
+ romanshevchuk: @VicHofs, @Valiant_Wolf, thanks a lot for explanation, I can see now how it maps to what I see in game summary
+ VicHofs: what league are you in? @HiIamFriend
+ EvModder: you dont always know you will be blocked until it happens
+ HiIamFriend: wood 1
+ VicHofs: I would say not to worry about that just yet
+ HiIamFriend: coliding into each over
+ HiIamFriend: and get stuck
+ EvModder: you can keep track of your position last turn, and if you are in the same spot next turn you can deduce you were blocked
+ HiIamFriend: ow
+ EvModder: and try doing a different move next turn if you want
+ VicHofs: try to improve your pellet algo first HilamFriend
+ Kellthazar: HilamFriend, I check if the bot is stucked by comparing the current and last position
+ HiIamFriend: i am stupid wow
+ HiIamFriend: ... :D
+ VicHofs: nah famm
+ HiIamFriend: ty 
+ VicHofs: focusing on my pellet algo is what got me into bronze tho
+ HiIamFriend: from zero to hero
+ HiIamFriend: lets go
+ HiIamFriend: :D
+ VicHofs: I didn't even have a collision avoidance system just yet
+ VicHofs: np
+ EvModder: is it possible to go down a league if i do badly enough?&#160;:)
+ VicHofs: no
+ HiIamFriend: rank 39/669 but randomly i get stuck by no solving coliding 
+ HiIamFriend: so i cant get promoted
+ HiIamFriend: :D
+ Doju: Ok i give myself an hour to make some super basic combat logic and then imma go to bed
+ VicHofs: huh
+ VicHofs: @HilamFriend well if you feel like your pellet algo's good enough already then go right ahead
+ Kellthazar: If is the case, I try to find another floor to go which not include the "stuck Point" on the path.
+ HiIamFriend: will try
+ Kellthazar: Gold League&#160;:)
+ HiIamFriend: cool
+ VicHofs: damn bro how lmao
+ muy31: come on... almost there...
+ kovi: nice robo
+ RoboStac: and now I fall back down again&#160;:)
+ Akarachudra: but dat was impressive
+ kovi: hungarian pattern
+ kovi: not any more
+ kovi: 5 hungarian now
+ RoboStac: ah, do I need to move to hungary to be able to stay at the top?
+ Astrobytes: lol, told ya it was a Hungarian takeover! Gratulálunk!
+ llllllllll: elég király&#160;:^)
+ kovi: van meg hely&#160;:)
+ VicHofs: yes
+ cegprakash: mataranga leading boss by 2 points
+ cegprakash: u just rekt him like a piece of cake
+ Astrobytes: Other than egészségedre that's about the extent of my Hungarian language skills. Though I used to know the words to Hang és fény by  Kispál és a Borz, and Csillag vagy fecske, and Most múlik pontosan by Csík Zenekar (and Quimby)
+ Doju: Szia, Doju vagyok
+ Doju: that's about all i know
+ Astrobytes: btw cegprakash, thanks for your music playlist :smile:
+ Doju: apart from the obvious swearwords :D
+ cegprakash: wow somebody listens to my playlist
+ cegprakash: :D
+ VicHofs: music playlist?
+ Astrobytes: I only did about half, but some OK stuff on there
+ VicHofs: why on Earth do yall know Hungarian
+ HiIamFriend: this pacman movement makes no sense to me :D
+ Doju: VicHofs i have a hungarian friend
+ VicHofs: oh I see Doju
+ cegprakash: Indian songs playlist VicHofs
+ Astrobytes: I like music from all countries, and my Hungarian friend took me to see Kispál és a Borz, Csík Zenekar, Quimby and Kiss Tibor
+ cegprakash: wait kord got pushed up too :O 
+ Astrobytes: And I love Indian melodies and rhythms
+ cegprakash: 4 legends on the way
+ kovi: vadasz may end up top legend
+ NinjaDoggy: already 50 legends day 1 :O
+ NinjaDoggy: wait... vadasz's submit might end #1 legend
+ NinjaDoggy: how much was he above gold boss ._.
+ Peudoki: Hungarians dominate
+ Vadasz: Its funny, i  hardly beated the gold boss with the same bot. Quite large random factor.
+ HiIamFriend: how to get pacman current possition
+ Doju: HilamFriend it's given in the input
+ NinjaDoggy: "i  hardly beated the gold boss"
+ NinjaDoggy: whelp
+ Astrobytes: if 'mine' is == 1 or true it's your pacman and you can use the x and y HiIamFriend
+ HiIamFriend: inputs[0] and inputs[1] gives the possition he is moving to , the end of the road :D
+ Vadasz: I was better with only 1 score from the gold boss
+ SurajMishra2209: 22 hours spent 
+ HiIamFriend: my frontender skills does not help me in any way :DDD
+ SurajMishra2209: and I still haven't finished bronze
+ HiIamFriend: i feel like a stupid potato
+ King-Of-Code: out of wood after 30 minutes now the fun begins
+ King-Of-Code: gonna have to upgrade the manhattan distance alg
+ kovi: still very nice submit vadasz
+ kovi: legend may have enough players now to catapult submit. and with 50% rate can stay in top
+ HiIamFriend: can someone explain this "MOVE ${x} ${parseInt(inputs[0])} ${parseInt(inputs[1])}" how can he move to left and right with this :DD i am playing around btw
+ HiIamFriend: does move mean "go 3 forward and like 1 right"
+ NapTown: it's a destination
+ Kellthazar: No
+ HiIamFriend: so its a destination like on a map&#160;?
+ HiIamFriend: he tries to move there&#160;?
+ NapTown: yeah
+ HiIamFriend: ow
+ HiIamFriend: gotcha
+ Kellthazar: x,y = coordinates
+ HiIamFriend: i understand that
+ Kellthazar: each coordinate has a "optimal" path  to others coordinates
+ Doju: No they dont
+ Doju: but they do have the shortest
+ Doju: optimal depends on what you value
+ muy31: someone kill me now, im back at 17th place
+ Kellthazar: yeah, Doju is right!
+ Doju: okay muy31 i'm currently making killing logic
+ muy31: thank you
+ Doju: i'll let you know when i'm done
+ Doju: i'm trying to figure out how long travelling a distance will take but can't figure it out with my tired brain&#160;:/
+ Doju: like that's off-by-one-error land right there
+ muy31: once i get to gold im going to use trapping logic
+ muy31: and re-implement my enemy tracking which ive disabled for now
+ muy31: i really dont want to resubmit again, but ive been stuck here for 3 days now... what should i do?
+ muy31: if i win the next three matches against clyde, im resubmitting
+ HiIamFriend: :DDD cool
+ elderlybeginner: how to turn off editor's hints and suggestions?
+ muy31: What I find funny? I get 3/4 superpellets and still lose, AGAINST MYSELF! <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/464866992">https://www.codingame.com/replay/464866992</a>
+ muy31: at this point im just randomly testing different conditions to see how they work in a scenario
+ muy31: Same scenario, different condition, same outcome... but interesting shape on frame 75/76https://www.codingame.com/replay/464870525
+ VicHofs: yeah I love minecraft
+ VicHofs: diamond pickaxe looks dope
+ HiIamFriend: muy31 why keep bumping into each other&#160;? 
+ Scarfield: its the best way to make minecraft recipe pics :p
+ muy31: HilamFriend all of them trying to take shortest path to nearest unexplored location
+ muy31: but actually there are not bumping, only two are
+ muy31: b/c i disabled killing
+ Doju: oh, this was surprisingly easy
+ Doju: tbh it took me an hour to write like 30 lines but anyways
+ muy31: oh im rank 2 hallelujah!
+ VicHofs: damn nice
+ NapTown: it do be like that Doju
+ VicHofs: every day Doju
+ muy31: nvm rank 3 now
+ muy31: how you like that, second place says
+ Clagus: damn... I've got 70% win ratio and still in silver TT
+ muy31: ill play you clagus
+ Clagus:  /o\
+ Clagus: in my IDE I won :P
+ muy31: oh
+ muy31: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/464881345">https://www.codingame.com/replay/464881345</a>
+ Clagus: LOL
+ muy31: Clagus spam matches
+ Clagus: what?
+ muy31: links right here you against me
+ Clagus: why?  :P
+ muy31: idk im bored
+ Clagus: hehe
+ muy31: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/464882923">https://www.codingame.com/replay/464882923</a>
+ muy31: im 4th place
+ Clagus: I need to get out of silver&#160;:/
+ muy31: me too
+ Clagus: i'm 6th
+ VicHofs: I need outta bronze grrr
+ muy31: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/464883370">https://www.codingame.com/replay/464883370</a>
+ VicHofs: 293 still&#160;:(
+ Clagus: no no, don't spam
+ muy31: ok
+ Clagus: that other game was interesting though
+ Clagus: you lost 2 pacs and still won by 1 point :D
+ Clagus: crazy
+ Clagus: <a rel="nofollow" class="external free" href="http://cgstats.magusgeek.com/app/spring-challenge-2020/muy31">http://cgstats.magusgeek.com/app/spring-challenge-2020/muy31</a>
+ Clagus: you've got only 62% win ratio
+ Clagus: DAMN
+ Clagus: :P
+ muy31: i know
+ Clagus: right now I'm 71% 
+ Clagus: <a rel="nofollow" class="external free" href="http://cgstats.magusgeek.com/app/spring-challenge-2020/Clagus">http://cgstats.magusgeek.com/app/spring-challenge-2020/Clagus</a>
+ Doju: Error counter: 8
+ Clagus: what?
+ Doju: that's surprisingly good for an hour's worth of code
+ Doju: oop, 9
+ Clagus: what error counter?
+ Doju: counting errors in my code :P
+ Scarfield: not fixing them?&#160;:)
+ muy31: lol
+ Doju: Scarfield maybe
+ Scarfield: nice, but just joking&#160;:)
+ Doju: 10
+ Clagus: this is crazy I've got 71% win ratio and still not promotion 
+ SurajMishra2209: my name doesn't appear in cgstats
+ SurajMishra2209: can somebody help me out on that?
+ VicHofs: You gotta be top 1000
+ VicHofs: I think
+ SurajMishra2209: the last rank I got was in 200
+ VicHofs: overall
+ muy31: total
+ VicHofs: not in your league
+ SurajMishra2209: okay
+ SurajMishra2209: got it
+ muy31: you are 1699
+ Doju: lets see if this modification did anything
+ VicHofs: 69 lmao
+ SurajMishra2209: lol
+ muy31: 1710 now
+ muy31: 1988
+ muy31: 1698
+ muy31: my bad
+ SurajMishra2209: yeah another version of code
+ SurajMishra2209: :D
+ muy31: 1645
+ muy31: ranks up
+ muy31: nice job
+ SurajMishra2209: thanks
+ SurajMishra2209: still not good enough
+ NapTown: my flee enemy code makes me stand still while they consume me:expressionless:
+ NinjaDoggy: better than runing into them :p
+ VicHofs: looooove falling 1000 ranks when I submit 😒
+ VicHofs: scratch that
+ VicHofs: make it 1500
+ NapTown: slightly NinjaDoggy
+ Doju: oh yes i think it definitely did something
+ Doju: winning like 80%
+ muy31: you submitted it yet doju?
+ Doju: yup, computing
+ muy31: Killing achieved... <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/464891163">https://www.codingame.com/replay/464891163</a>
+ RockyMullet: 44th at 13% :eyes:
+ RockyMullet: my change seems to help
+ RockyMullet: theres hope
+ NapTown: nice
+ MattSOrme: most of the game is pretty standard, couple bugs im still working on. But look at how it ends<a rel="nofollow" class="external free" href="https://www.codingame.com/replay/464889801">https://www.codingame.com/replay/464889801</a>
+ RockyMullet: dont know if its enough to beat gold boss, but definitly an improvement
+ Doju: muy31 it's not actively trying to kill
+ Doju: you just happened to be in the way :P
+ muy31: oh
+ RockyMullet: the munching
+ NapTown: monch monch
+ muy31: i stopped trying to kill though
+ muy31: rank 5
+ muy31: im never going to progress
+ MattSOrme: my bots aren't killers, so getting a win by a double kill is pretty cool
+ AntiSquid: RockyMullet imo too random leaderboard to tell 
+ cegprakash: does anyone else get random timeouts?
+ cegprakash: it started only today for me
+ MarekM: no
+ AntiSquid: either you have a MASSIVE improvement and notice the difference or you get fooled by the randomness
+ MarekM: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/464892869">https://www.codingame.com/replay/464892869</a> close enough
+ cegprakash: exactly AntiSquid
+ Doju: AntiSquid that's very true
+ cegprakash: I was #3 above kovi
+ cegprakash: I should have parked my bot there
+ cegprakash: now kovi reached legend
+ cegprakash: and I'm stuck at #200
+ RockyMullet: oh well AntiSquid I feel, deep down, in my hearth, that its an improvement :P
+ AntiSquid: ya cegprakash very very bad mistakes you made there
+ King-Of-Code: the fact i can land on a pac and they can change type before my eat registers is quite annoying
+ muy31: RIP cegprakash
+ AntiSquid: you might have missed legend because of that cegprakash
+ muy31: that's porb for the best King-Of-Code
+ muy31: *prob
+ AntiSquid: cegprakash are you resubmitting your initial rank 3 bot&#160;? 
+ Doju: oh this was a definite improvement
+ cegprakash: yes with bugfixes
+ AntiSquid: no, submit without the bugfixes
+ cegprakash: infact this is my 2 day old code
+ Doju: 150 ranks up muy31
+ cegprakash: whatever I did in the middle I threw out
+ muy31: sweet Doju
+ AntiSquid: sometimes "bugfixes" drop your rank, it's really stupid leaderboard system
+ AntiSquid: just get the exact saem code and resub
+ cegprakash: I'll have to do it 100 times luckier because those who gave me points got promoted now
+ cegprakash: I had 1 chance
+ AntiSquid: at the very least submit the rank3 code and leave it overnight, you never know
+ AntiSquid: ya sux to miss legend like that
+ cegprakash: AntiSquid do u have the time when I was #3? I lost that version
+ cegprakash: chat got disconnected in the middle
+ cegprakash: and all messages erased
+ AntiSquid: uhm try 3 hours ago&#160;?
+ NinjaDoggy: everyone in gold before you submit make you have &gt;50% winrate against boss please&#160;:)
+ cegprakash: found it
+ cegprakash: saving backup
+ NinjaDoggy: i would like to get to legend without having to be rank 1&#160;:/
+ AntiSquid: ninja i beat boss once on my current sub, don't want any complaints @_@
+ HiIamFriend: my mind is melting
+ muy31: i just got inspiration, what if I...
+ muy31: nope
+ Doju: I think the fancy pathfinding thing i wrote today goes out the window if the pacs are "panicked"
+ Doju: oh well
+ Doju: imma go, cya everybody
+ muy31: lol
+ muy31: gn
+ AntiSquid: ceg i think you fked up big time, looks like you would have been promoted by now
+ HiIamFriend: how come my pacmans moves and stops moves and stops
+ Gonny: ceg don't give up though, there's probably gonna be another 50 promotions before then end of the contest
+ Kellthazar: 2 situations: your pacs arent over speed buff and there is another pac with this buff active...
+ Kellthazar: HilamFriend
+ HiIamFriend: wood
+ HiIamFriend: does not use speed buff&#160;?
+ Colios13: yep no speed in wood
+ Kellthazar: There is speed on "Wood" league?
+ Kellthazar: oh right
+ muy31: no
+ Kellthazar: nvm then
+ HiIamFriend: i am trying to save old possitions of pacman if he gets stuck
+ HiIamFriend: but somehow array is not update'ing  fast enouth i guess
+ HiIamFriend: and every second move he bugs out
+ HiIamFriend: somehow
+ HiIamFriend: because array is not updated
+ HiIamFriend: and brings same numbers of x and y
+ HiIamFriend: my mind is melting
+ HiIamFriend: xd
+ MarekM: HIlamFriend, this is because activated speed
+ HiIamFriend: wood league doest not have speed
+ muy31: am i actually ever going to pass up silver bot?
+ Kellthazar: Maybe your array isn't updated because you create a new one on each loop iteration
+ HiIamFriend: nope
+ HiIamFriend: its global 
+ HiIamFriend: before while loop
+ Colios13: GL muy
+ Kellthazar: In my algorithm I have a pacman object that has a history property
+ Kellthazar: Which is a list
+ Kellthazar: and I add the currentPos of the pacman on each iteration
+ HiIamFriend: const tempPacsPossitions = [];
+ HiIamFriend: i replace
+ HiIamFriend: last
+ HiIamFriend: but same i think
+ Kellthazar: Why not just add?
+ HiIamFriend: why not just replace old one with a new one&#160;?
+ HiIamFriend: :D
+ Kellthazar: and get the last one for stuck verification?
+ Kellthazar: I use this history array to weight my paths
+ HiIamFriend: how will i able to track every pacman that way
+ Kellthazar: Object orientation?
+ PiterYeh: i want to share my masterpiece AI: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/464889354">https://www.codingame.com/replay/464889354</a>
+ PiterYeh: starting at frame 16 you can see my spirit animal
+ HiIamFriend: i will try to figure this out myself xd
+ HiIamFriend: :DD 
+ HiIamFriend: lovely 
+ muy31: impressive PiterYeh
+ HiIamFriend: spirit animal "Stop and give up" :D 
+ HiIamFriend: thats me in 1 hour from now
+ PiterYeh: that's me since 7 days ago
+ muy31: me since two days ago
+ muy31: YO! Silver bot timed out!! <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/464918233">https://www.codingame.com/replay/464918233</a>
+ moojek: lmao
+ NinjaDoggy: yes... bosses are just bots like yours or mine
+ moojek: still
+ NinjaDoggy: they literally select one from the ladder so...
+ muy31: yah but that proves its not just doing a lazy eval to win
+ muy31: its doing some hard computations
+ Kukiss: I think it might be cause by any error. In replays you always see "Time out"  even if the user get normal error
+ muy31: maybe?
+ Kukiss: do sth stupid in code and see that probably you will have a Timed Out tag at  the end of the time line
+ Kukiss: your code crashes to the output is not provided in time - that even makes sense
+ Kukiss: so the output is not provided*
+ butcer0: How do teams collaborate for competition in CodinGame? Is there any way of constructing a more formal team or is a single user supposed to represent a team?
+ muy31: at least three members of your company has to submit code
+ muy31: or school
+ muy31: What is this? <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/464930103">https://www.codingame.com/replay/464930103</a>
+ Kukiss: you danced at the end? :D
+ muy31: i think i finally got a working formula though
+ Kukiss: I understand you
+ Kukiss: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/464929952">https://www.codingame.com/replay/464929952</a>
+ Kukiss: I messed sth up 
+ muy31: yeah that doesnt look good at all
+ Drastic_Loontastic: How do you change the speed?
+ baDcoder: Hello, do player downgrade to any lower league&#160;?
+ Drastic_Loontastic: Or edit the speed, I'm confused
+ Flyingkid: no your safe bad coder! you only move up in leagues.
+ Flyingkid: :grimacing:
+ Kukiss: Drastic you can use two "special" actions: SPEED and SWITCH  once you get to Bronze
+ baDcoder: Thanks Flying Kid , sigh&#160;!&#160;:)
+ butcer0: What is the definition of a "Company" for competition?
+ Flyingkid: good thing too cause you think everything is good then submit and then nothing but timeouts some times.
+ Drastic_Loontastic: Thank you so much Kukiss, I couldn't find where it said that
+ Kukiss: np. there are more details about this topic like cooldowns etc.
+ Drastic_Loontastic: Oh silly me, I didn't read it XD
+ SurajMishra2209: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/464942807">https://www.codingame.com/share-replay/464942807</a>
+ SurajMishra2209: I guess Inky is fed up of me
+ HiIamFriend: i wana die
+ HiIamFriend: burn me
+ muy31: Clagus what? how?
+ muy31: im in a dilemma: the anti-Clyde code beats Clyde 80% of the time, but cant beat everyone else, the everyone else code beats everyone else but cant beat Clyde
+ NormantasStankevicius: I know the feels muy, last challange I could beat everyone in silver besides the boss... tbh I would focus on beating everyone, more score
+ NormantasStankevicius: but that is me and I don't know this system well
+ cegprakash: I'm starting to wonder
+ cegprakash: may the bug was a feature
+ cegprakash: it it's own weird way
+ HiIamFriend: and i am just trying to move to random locations :DD
+ Kayzerg: Yo guys
+ VicHofs: stfu
+ Kayzerg: Fam
+ Kayzerg: Dis ting doesnt support bullying
+ VicHofs: the ting go skrra
+ Kayzerg: Imma find you bro(not a threat)
+ VicHofs: nice
+ Kayzerg: mate
+ Kayzerg: i know the shape of your house
+ Kayzerg: youre sucked
+ VicHofs:&#160;:(
+ Kayzerg: :muscle_tone5:
+ Kayzerg: yur getin fisted m8
+ Cappefra: muy31 I feel you
+ Kayzerg: 1v1 me on coding game vichofs
+ VicHofs: ok
+ Cappefra: I'm also moving around the first 50 positons in silver and I'm just not playing enough against the boss to be able to pass to gold
+ VicHofs: You're fucked Kayzerg
+ HiIamFriend: go to private chat
+ HiIamFriend: submiting code so i can randomly win to bronze xd
+ VicHofs: Is there a Dan here?
+ VicHofs: Kayzerg's looking for you
+ Cappefra: come on gods of random! Work in my favor!
+ cegprakash: lol
+ thethiny: guys when did the competition start
+ seronis: bit over a week ago i think
+ thethiny: yes I want the date if anyone knows it
+ Cappefra: it was thursday last week
+ thethiny: thanks 
+ HiIamFriend: why cant i beat wood 1 :D
+ HiIamFriend: i never get stuck
+ HiIamFriend: still cant get promoted
+ HiIamFriend: so sad
+ ZarthaxX: never get stuck?
+ HiIamFriend: yea
+ ZarthaxX: wdym
+ HiIamFriend: probably because i move to random location until i get stuck
+ HiIamFriend: dunno
+ ZarthaxX: ok..
+ HiIamFriend: can you check if cordinate is a wall or no&#160;?
+ seronis: if you saved that info at the top of the script, then yes
+ seronis: i build a board object with all the cell contents before the while() loop starts
+ thethiny: are we allowed to do multithreading here? and if we are, will it benefit?
+ seronis: i doubt it
+ thethiny: if it's a single core then multithreading won't matter
+ HiIamFriend: i mean where is "readline()"
+ thethiny: @HiIamFriend what's your question
+ HiIamFriend: but can you somehow get like "readline(x, y)"&#160;?
+ thethiny: c++?
+ HiIamFriend: like if (x,y) is a wall 
+ HiIamFriend: js
+ seronis: readline is a user input.  it has nothing to do with xy
+ thethiny: exactly
+ thethiny: what u do is
+ thethiny: let var something something = let var = readline();
+ thethiny: then var[x] == -1
+ thethiny: or '#'
+ HiIamFriend: hmm
+ HiIamFriend: will try 
+ seronis: make your own object to track the board
+ seronis: i do  <a rel="nofollow" class="external free" href="https://i.imgur.com/SkF8ClD.png">https://i.imgur.com/SkF8ClD.png</a>
+ seronis: so for any given cell i can always check if its been visited,  if its a wall/open,  what its last known pellet value was
+ HiIamFriend: okey thanks&#160;!&#160;:)
+ HiIamFriend: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/ac7d0352-80e0-4f6c-baca-7e5990f74326">http://chat.codingame.com/pastebin/ac7d0352-80e0-4f6c-baca-7e5990f74326</a>
+ HiIamFriend: how come i cant use substring on this
+ seronis: what does your 'row' look like&#160;?
+ seronis: is it a string or an array / object&#160;?
+ HiIamFriend: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/32e0eea9-6703-476b-a03e-c97576ba1958">http://chat.codingame.com/pastebin/32e0eea9-6703-476b-a03e-c97576ba1958</a>
+ HiIamFriend: first print does print the character
+ HiIamFriend: and in for loop i get that error
+ HiIamFriend: why tf :D
+ HiIamFriend: ow
+ HiIamFriend: i use array in a very bad way
+ HiIamFriend: sorry
+ seronis: yeah you're using map wrong,  but i read it a few times and cant see a reason  'console.error(mapString.substring(0, 1));' wouldnt work
+ DollarAkshay: Found a nice seed with a lot of action in the middle
+ DollarAkshay: seed=2904725058612385800
+ HiIamFriend: that one works
+ HiIamFriend: console.error(map[i][y]);
+ HiIamFriend: map[i][y].push(mapString.substring(char, char+1))&#160;;
+ HiIamFriend: this one is not working :D
+ HiIamFriend: its ok i will fix it
+ BenjaminUrquhart: thethiny I see your follow
+ DollarAkshay: Guys send me some of your bot replays in this seed seed=2904725058612385800
+ BenjaminUrquhart: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/465026268">https://www.codingame.com/replay/465026268</a>
+ BenjaminUrquhart: now if you excuse me, I have things to fix
+ DollarAkshay: Nice one @BenjaminUrquhart YOu do the switch sometimes. But not always
+ BenjaminUrquhart: well yes
+ BenjaminUrquhart: but actually 
+ BenjaminUrquhart: yes
+ DollarAkshay: :joy:
+ DollarAkshay: *feeling lucky*
+ thethiny: @BenjaminUruqhart yeah if the competition is over I don't wanna lose track of some people
+ bouajajais: do the rules change in silver and more?
+ DollarAkshay: nope
+ bouajajais: so it's only ranking afterwards
+ bouajajais: thanks
+ Icebox: yes it does
+ bouajajais: oh
+ thethiny: silver has Dead
+ Icebox: starting from silver you can see dead pacs
+ thethiny: Gold has more Dead
+ DollarAkshay: Its not really a new rule
+ bouajajais: what are deads?
+ BenjaminUrquhart: deads
+ DollarAkshay: Its some dummy info
+ bouajajais: oh ghosts
+ DollarAkshay: Thye give the info of dead pacs
+ bouajajais: okay
+ DollarAkshay: During turn input
+ DollarAkshay: But everything else is the same
+ bouajajais: thanks good luck
+ DollarAkshay: No changes
+ HiIamFriend: i cant beat wood 1 by moving randomly 
+ HiIamFriend: :D
+ Icebox: DollarAkshay dummy info that allows a brand new substrategy and completely breaks your code if you don't adapt for new inputs
+ HiIamFriend: i had hopes
+ Icebox: "no changes"
+ DollarAkshay: @Icebox Nice banner Image 
+ DollarAkshay: Where did you find it
+ Icebox: I'd be amused if you hadn't asked me this in 2018 and then in 2019
+ Icebox: you can put the checkmark down for 2020 as well now
+ Alp3r: sa ipneler
+ DollarAkshay: I made that banner btw
+ Icebox: yes you told me that multiple times already :D
+ thethiny: lol
+ DollarAkshay: XD
+ DollarAkshay: Sorry have forgotten
+ thethiny: that moment when your code runs offline, but returns -1 in the multiplayer&#160;:)
+ DollarAkshay: -1&#160;? XD
+ thethiny: yes -1 means not found
+ DollarAkshay: What in the world is printign that -1
+ DollarAkshay: Oh
+ thethiny: trying to find the best path
+ thethiny: my adjacency list is wrong
+ thethiny: damn
+ thethiny: found the culprit lol
+ thethiny: woohooo
+ thethiny: 106 - 51 vs Inky
+ DollarAkshay: Nice
+ DollarAkshay: You might even skipp silver
+ thethiny: I don't have collision avoidance
+ thethiny: and I don't have attack modes
+ thethiny: so not yet
+ thethiny: leftover debug code hurts
+ thethiny: "if bla bla bla || True"
+ DollarAkshay: I alwasy add a comment called DEV_CODE
+ DollarAkshay: So that i know if there is any code that should not be submitted
+ DollarAkshay: I just do a Ctrl+F and find that comment
+ BiriyaniCrypt02: Love This Website
+ thethiny: 😂😂
+ EvModder: i used a lot of cheap tricks to get to my current spot on the leaderboard.Like standing still and then turning into the thing that eats them when the move to eat me etc
+ EvModder: i will need to rewrite most of my code to actually be able to challenge any top players

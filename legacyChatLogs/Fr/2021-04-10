@@ -1,0 +1,440 @@
+ Pauloux: Pour le puzzle des temperatures, c'est quoi le truc avec deux temperature identiques&#160;?Je ne vois pas le problème
+ nicola: Il n’y en a peut-être pas.
+ Morkai: quel combat de bot me conseiller vous a part coder strike back pour un débutant&#160;?
+ BlaiseEbuth: Je conseillerais pas csb à un débutant.
+ Morkai: j'arrive pas a sortir de la ligue de bronze sur csb
+ Morkai: ^^
+ BlaiseEbuth: Après y'a le choix...
+ Thyl: comment je pourrais faire en truc simple en C pour que je puisse tirer un élément au hasard dans un tableau et en étant certain que je ne le tirerai plus jamais
+ nicola: Tu peux doubler par un deuxième tableau qui contient les indices des trucs pas encore tirés.
+ nicola: Et tu écrases la valeur du truc que tu tires par une valeur aberrante (du genre −1).
+ Thyl: mais du coup
+ Thyl: si je retombe sur le -1 2 choix
+ Thyl: 1) je continue jusau'à tomber sur une bonne valeur
+ nicola: Ou alors une liste chaînée mais je ne sais plus faire ça.
+ Thyl: 2) j'ajoute 1 à l'index jusqu'à ce que sa marche
+ nicola: Que tu reconstruis à chaque tour.
+ Thyl: nicola je suis entrain de faire une liste chainée
+ Thyl: c'est pour un MCTS
+ nicola: Dès que tu tires une valeur, tu reconstruis ta liste chaînée.
+ nicola: Sinon, tu crées un tableau.
+ nicola: Tu stockes la nombre d’éléments restants.
+ nicola: Dès que tu tires un élément, tu reconstruits ton tableau sans lui et tu décrémentes la taille.
+ nicola: Il y a des valeurs en queue de tableau&#160;? Pas grave.
+ Thyl: AAAA
+ Thyl: pas bête nicola
+ Thyl: je crée un tableau 2 fois plus grand est je m'arrange
+ Thyl: pour d'écalerde 1 à chaque fois
+ Thyl: et je --
+ nicola: Pas besoin de le créer deux fois plus grand.
+ Thyl: a du coup oui
+ nicola: Tu en crées un à la volée pour stocker les résultats intermédiaires.
+ nicola: Même pas.
+ nicola: Tu décales à partir de la valeur tirée.
+ Thyl: oui c'est ça
+ nicola: À moins que l’indice soit important.
+ Thyl: o pire sur un tableau de N
+ Thyl: j'ai du O(N*4)
+ nicola: Hein&#160;?
+ Thyl: oui
+ nicola: Pour faire quoi&#160;?
+ Thyl: parce que 
+ Thyl:&#160;:
+ nicola: Ha, n×4, pas n^4.
+ Thyl: oui
+ Thyl: pardon j'ai oublier litération O(N*5)
+ nicola: Ben heu, en C ça ne va pas être un gros problème.
+ nicola: D’ailleurs, O(4n)=O(5n). :grin:
+ Thyl: t'a quand meme une fois de plus N
+ nicola: Oui mais c’est une notation mathématique piégeuse.
+ Thyl: et zut
+ nicola: En fait, on devrait dire ∈O(n).
+ nicola: Et u(n)∈O(n) veut dire que si n est grand, u(n)/n est borné, 
+ Thyl: ok
+ <b>**Thyl va gentiment retourner sur Khan academy faire ses fonctions puis il va revenir</b></p><p><img src="/a/44847420172903" /> Thyl: :D
+ nicola: Là, je cause dans le langage des maths/suites/fonctions.
+ nicola: Je pense qu’en algorithmique, c’est un poil autre chose.
+ nicola: À mon avis, ça veut dire que le nombre d’opérations critiques (du genre les multiplications) est proportionnel avec n.
+ nicola: Mais c’est à vérifier.
+ Zorg1: houla ça parle de grand O et petit o dès le matin ... les histoires d'O ...
+ Thyl: est-ce qu'on à le droit d'allouer dans une fonction un pointeur est de faire free() pas dans la fonction
+ pardouin: On m'a vu dans le Vercors, sauter à l'élastique.
+ Zorg1: dans le respect des gestes barrières j'espère ...
+ Thyl: en C
+ Thyl: merci
+ Zorg1: là où ça merde c'est si tu renvois un pointeur sur une variable locale à ta fonction
+ Zorg1: par exemple t'as un int i et tu renvoie &amp;i à l'extérieur
+ Thyl: je vois
+ Zorg1: vu que la case mémoire qui contient la valeur n'existera plus quand tu sortiras de ta fonction (elle allouée sur "la pile")
+ Thyl: je vois
+ Zorg1: (c'est pas forcément super compliqué mais il faut une certaine compréhension de la gestion de la mémoire)
+ Thyl: je me suis remis en C
+ Thyl: ya un coté agréable à plus contrôler ce qui ce passe qu'en C++
+ Zorg1: ah t'en avais marre des erreurs chelous du C++&#160;?&#160;;-)
+ kayou: zorg1 ca veux dire que qaund tu utlise malloc dans une fonction ca fait un free quand tu sort de la fonction&#160;?
+ Zorg1: euh non j'ai pas dis ça
+ Zorg1: malloc ça alloue dans le tas, donc quand tu sors de ta fonction la mémoire est toujours réservée
+ kayou: la memoire est toujours occupée mais tu perds la ref vers l'emplacement
+ kayou:&#160;?
+ Thyl: pas si tu te sert d'une struct
+ Thyl: ou d'autres pointeurs externe
+ Thyl: -s
+ Zorg1: oui mais ta fonction peut retourner un pointeur vers cet emplacement
+ Zorg1: (ou màj une globale)
+ kayou: ok
+ Zorg1: après tu peux perdre la réf, et vu que t'as pas de gc, bah c'est comme ça que t'as des memory leaks :D
+ kayou: mes notions de C sont res limitées
+ Zorg1: c'est pas super compliqué (sauf sans doute les histoires de tableau de fonction, je m'y suis toujours perdu)
+ kayou: c'est plus prudent que je me repose sur des languages avec un gc
+ Zorg1: c'est surtout plus confortable ^^
+ kayou: aussi
+ Zorg1: après tu peux aussi avoir des memory leaks dans des langages à gc, si t'as une référence sur un bloc dont en fait tu ne te sers plus
+ kayou: oui, j'avis vu ca sur rootme avec des jail python
+ kayou: par contre je serais incapable de les exploiter, le faire sur un exo ca va (avec de la sueur et des larmes) mais en vrai...
+ Zorg1: c'est bien rootme&#160;? ça me dit qqch mais j'ai plus du utiliser depuis longtemps
+ Zorg1: ah tiens j'y ai déjà un compte
+ kayou: j'ai pas insister longtemps c'est vraiment orienté securité, c'est pas ce qui m'interesse le plsu
+ kayou: j'ai juste faits quelques problemes de bases, et ca devient vite pas evident
+ kayou: c'est mort pour ma carriere de hacker russe&#160;:/
+ Zorg1: oui je crois que ça a été pareil pour moi&#160;;-)
+ Zorg1: bon Automaton2000 quoi de neuf&#160;?
+ Automaton2000: je passe plus de temps pour trouver la plus petite
+ JBM: mauvais choix
+ Bon[]Crayon: Salut :ghost:
+ Bon[]Crayon: Automaton2000 yo
+ Automaton2000: ah non j'ai rien dit
+ Bon[]Crayon: AutomatonNN yo
+ Bon[]Crayon: Automaton2000 C'est celui qui dit qui est&#160;!
+ Automaton2000: mais ça fait des chocapics
+ Bon[]Crayon: Automaton2000 Du coup tu as raison de ne rien dire.
+ Automaton2000: du coup je sais pas j'ai pas encore trouvé la solution en bash
+ Bon[]Crayon: Automaton2000 Du coup tu bash ton temps pour rien, mon ami.
+ Automaton2000: quelqu'un a la solution pour chuck norris
+ Bon[]Crayon: Automaton2000 Tout le monde sauf Chuck Norris et toi.
+ Automaton2000: quand on fait un bon score
+ Bon[]Crayon: Quelqu'un a des nouvelles d'AutomatonNN&#160;?
+ philRG: AutomatonNN
+ philRG: manquant à l'appel
+ philRG: rigolo ça fait 1001 états possibles d'inventaire pour le FC 2020, comme dans les contes des mille et une nuits
+ Bon[]Crayon: Les mille et un inventaires.
+ nicola: &gt; factor 10011001: 7 11 13
+ philRG: comment le démontrer?
+ Zorg1: en multipliant les 3 nombres ensemble&#160;? :p
+ Zorg1: ou tu parlais des états d'inventaires de FC
+ philRG: oui
+ philRG: états d'inventaires potentiels
+ Zorg1: solution bourrin&#160;: tu énumères
+ philRG: c'est ce qu'ont fait les petits gars de H25
+ Zorg1: h25&#160;?
+ Neumann: <a rel="nofollow" class="external free" href="https://twitter.com/h25io">https://twitter.com/h25io</a>
+ Zorg1: merci&#160;:)
+ Zorg1: solution moins bourrin&#160;: tu regardes combien de façon d'avoir 10 avec 5 nombres de 0 à 10
+ Zorg1: par exemple 10=9+1 ça te fait 20 états d'inventaire (1 bleu et 9 cases vides, 1 bleu et 9 jaunes, ...)
+ Zorg1: y a pê plus rusé mais comme ça je vois que cette solution
+ philRG: oui c de la combinatoire
+ Zorg1: après y a pê une formule avec des noms allemands (dont celui de Gauss ou Euler) qui traite ce cas ^^
+ philRG: et en python, ça donne ça:
+ philRG: print(*filter(lambda x: sum(x) &lt;= 10, itertools.product(range(11), repeat=4)), sep='\n')
+ Zorg1: J'image le truc "Théorème de Gauss-Männstreier (dite aussi fomule des 3 chevaux, ou équation du borgne tchèque)"
+ philRG: :joy:
+ philRG: entre imaginer une démonstration, et la réaliser il y a un gap lol
+ philRG: mieux vaut s'arrêter au stade des hypothèses parfois
+ philRG: bon je retourne à mes études, suis une bille en algo
+ philRG: je vais essayer d'intégrer la gestion des sorts 450 en bronze en allant chercher les meilleurs potions pour l'instant avec la technique de h25
+ philRG: pour monter en bronze, rush sur 3 potions (plus courte distance)
+ Zorg1: bah un BFS non&#160;?
+ Zorg1: ah moins que h25 vient de breveter le BFS
+ Neumann: Ce winrate en 1c1 Jeff06 oO
+ Zorg1: toi contre jeff06&#160;?
+ Neumann: Jeff06 contre n'importe qui
+ Neumann: 100% de winrate atm
+ Zorg1: ah ok
+ jft63: ouch ...
+ Neumann: Je lui offre sa première défaite en 1v1
+ jft63: +1
+ jft63: gg
+ jfaixo: vive le timeout&#160;;)
+ Zorg1: ah c'est ça la méta faire time outé le gars en face avant de time outé soi même&#160;?
+ jfaixo: la méta non, mais jeff est le seul a jouer que ca en 1c1, il joue quasi pas la map
+ Bon[]Crayon: C'est HONTEUX&#160;!
+ Zorg1: c'est le jeu ma pauvre simone
+ jfaixo: (en soit, si ca lui donne 100% WR, on peut dire que c'est la meta, je m'auto contredis xD)
+ Zorg1: ah oui il joue vraiment comme un bloqueur CSB
+ Zorg1: après il y a les matchs 3 qui équilibrent un peu
+ Neumann: [CG]Thibaud: tu sais si le moteur du contest utilise l'ancienne version du moteur CSB&#160;? (i.e. chaque tour est découpé en sub-steps)
+ Illedan: Jeff06 changed 1v1 strat?! My Jeff tracker  is now a waste :sob:
+ Thyl: Illedan se met au franglish&#160;?
+ Illedan: Oui
+ Zorg1: :D
+ Illedan: Oh, he did not :D
+ Thyl: Oslo ça habla français&#160;???
+ chouch: philRG<a rel="nofollow" class="external free" href="https://fr.wikipedia.org/wiki/Combinaison_avec_r%C3%A9p%C3%A9tition">https://fr.wikipedia.org/wiki/Combinaison_avec_r%C3%A9p%C3%A9tition</a>Dans ton cas&#160;:10-combinaisons (taille inventaire) dans un ensemble à 5 éléments (vide, bleu, jaune, vert, orange)
+ Illedan: Non, on apprend l’allemand. Mais le Français canal sur CG est plus intéressant
+ Thyl: Tu parle combien de langues&#160;? oO
+ Neumann: Certains français pensent l'inverse et préfèrent le chan World
+ Illedan: Je parle google traduire
+ Thyl: l'intéré du Worl c'est que tu parles avec tout le monde
+ Thyl: illedan mon langage préféré&#160;!
+ Thyl: after C,C++ and python
+ Illedan: :D
+ Thyl: une représentation d'un plateau de jeu 8*8 avec trois état différent sur 128 bits c'est pas mal
+ Thyl:&#160;????
+ BlaiseEbuth: The omelette of the cheese
+ Zorg1: chouch&#160;: ah ok merci ^^
+ Zorg1: thyl&#160;: après ça dépend surtout les opérations que tu veux appliquer à ton bitboard
+ Mm60: bonjour
+ Thyl: en haut à gauche à droite en bas
+ BlaiseEbuth: 'jour
+ Thyl: sur Clobber
+ Zorg1: parfois avoir 2 entiers de 64 bits c'est mieux
+ Thyl: et Bonjour à Mm60
+ Mm60: Ce chat c'est un chat universel ou juste pour le probleme du batman&#160;?
+ philRG: chouch merci je vais mourir moins bête&#160;:-)
+ philRG: factorial(14)/(factorial(10)*factorial(4))Out[130]: 1001.0
+ BlaiseEbuth: na na na na na Batman
+ Zorg1: chat pour tout &amp; n'importe quoi ici
+ Mm60: ça marche merci
+ Bon[]Crayon: et n’importe qui&#160;!
+ philRG: j'ai toujours eu du mal à poser un problème, mais définir les données ça va
+ Mm60: c'est en codant nimporte quoi qu'on devient nimporte qui
+ BlaiseEbuth: Universel si tu considère la France comme nation souveraine du monde dans son intégralité
+ Mm60: Vive la république
+ philRG: Zorg1 la réponse est donnée par chouch: «&#160;Gamma n k&#160;» ce qui a créé Hulk&#160;:)
+ BlaiseEbuth: Donc pas universel
+ Bon[]Crayon: République of cocorico.
+ Zorg1: oui j'ai vu
+ philRG: ok j'suis rassuré du coup&#160;:)
+ Mm60: je voulais juste dire en gros chat global du site savoir si la room du chat était uniquement propre à un problème choisi
+ Zorg1: j'apprend un truc ^^ je suis vraiment "niveau basique" en combinatoire
+ BlaiseEbuth: Je sais.
+ BlaiseEbuth: :3
+ philRG: merci Zorg1 de prendre sur toi&#160;:)
+ Mm60: Balèse Blaise
+ BlaiseEbuth: Assez t'il tout étant, mon bot est toujours bugué...
+ Zorg1: bah FIX IT que veux tu que je te dise d'autre&#160;?
+ BlaiseEbuth: Je l'ai réécrit
+ Zorg1: waouh
+ BlaiseEbuth: Ca a fait un shuffle
+ BlaiseEbuth: J'ai toujours autant de bugs, mais pas les mêmes
+ BlaiseEbuth: Au moins ça change
+ Zorg1: d'un autre côté j'ai écrit mon CSB il y a deux ans, j'arrête pas d'enlever des bugs à ce truc
+ Zorg1: et d'en rajouter aussi d'ailleurs ^^
+ BlaiseEbuth: Awé!  Y tente des trucs&#160;: '2133283840 5420 BOOST'
+ Zorg1: nice
+ Zorg1: Thyl&#160;: perso sur clobber j'utiliserais deux entiers 64 bits, un pour les blancs et un pour les noirs
+ BlaiseEbuth: Apartheid&#160;!
+ BlaiseEbuth: Bon. Que les témoins prennent acte de mon rage quit sur slcc.
+ Thyl: pourquoi C me dit ça&#160;: 
+ Thyl: corrupted top size
+ Thyl: aaaaaaaa
+ Zorg1: Je soussigné Zorg1 avoir assisté à un rage quit de bonne facture de la part du Sieur BlaiseEbuth ce Samedi 10 Avril de l'an de grâce 2021
+ BlaiseEbuth: tatoo pété
+ BlaiseEbuth: Merci monsieur l'arbitre.
+ BlaiseEbuth: Thyl me fait découvrir de nouveaux messages d'erreurs.
+ Thyl: j'alloue juste un ***de tableau
+ Thyl: pourquoi
+ Thyl: tu veux pas m'allouer 16 bits
+ Thyl: pourquoi
+ Thyl: au grand GCC
+ Zorg1: mais c'est quoi ton code pour provoquer ça&#160;?
+ BlaiseEbuth: C'est un gros mot ou un pointeur de pointeur de pointeur&#160;?
+ Zorg1: je me suis posé la même question ^^
+ Thyl: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/d98fd553-6997-4543-958d-efc8a57b6b4f">http://chat.codingame.com/pastebin/d98fd553-6997-4543-958d-efc8a57b6b4f</a>
+ Thyl: un gros ****
+ Thyl:&#160;:)
+ struct: :scream:
+ Thyl: strcut pête un boulon
+ Thyl: j'alloue de trop gros pointeur de pointeur de pointeur de pointeur
+ BlaiseEbuth: Ce matin CG me disais ça: "Code failed: your program was terminated before reaching the main entry point for your language"
+ BlaiseEbuth: C'est un record
+ struct: whats your compilation time?
+ BlaiseEbuth: Me&#160;?
+ struct: yes
+ BlaiseEbuth: No idea. But that was a stupid error. Found it
+ Zorg1: déjà le sizeOf(coup) =&gt; pas sûr que ça fait ce que tu veux
+ Thyl: c'est le nom d'une struct
+ Zorg1: ah oui excuse moi
+ Zorg1: c'est le free qui te fait l'erreur
+ Zorg1:&#160;?
+ Thyl: non
+ Thyl: c'est ça
+ Thyl: n-&gt;possibles=malloc(sizeof(Coup));
+ Thyl: ou n-&gt;possibles=malloc(sizeof(Coup)*n-&gt;taille_possible);
+ Thyl: suivant les versions
+ Zorg1: en fait t'as du écrire en dehors de ton tableau max et salopé les pointeurs utilisé par malloc pour identifier la taille des blocs libres/alloués
+ Zorg1: tu dois avoir un problème d'index out of range dans tout_les_coups_possibles
+ Thyl: c'est bon
+ Thyl: merci c'était ça
+ Zorg1: ^^
+ darkhorse64: BlaiseEbuth: j'ai eu cette erreur en allouant un tableau statique trop gros
+ BlaiseEbuth: Ouai. Moi c'était plus con que ça. Une struct qui avait un pointeur membre de son propre type.
+ Zorg1: euh "allouer un tableau statique"&#160;?
+ struct: oui
+ struct: to reserve memory
+ darkhorse64: int tab[huge_number]
+ Zorg1: avec huge_number qui est défini en run time&#160;?
+ Zorg1: ou c'est dans une fonction, donc en fait il alloue dans la pile, et donc il est écrabouille le tas&#160;?
+ struct: struct Tree {	Node* nodes = new Node[MAX_NODES];};array&lt;Tree, 3&gt; Smitsimax::trees;
+ darkhorse64: si tu écris int tab[10000000], ça bombe dans CG à cause de la limite des 768 Mo
+ Zorg1: ah ok
+ darkhorse64: On voit ça quand on essaie d'allouer un gros pool de nodes pour un MCTS par exemple
+ darkhorse64: comme le dit struct
+ Zorg1: ah on parle du message d'erreur de Blaise pas celui de Thyl :flushed:
+ Zorg1: ça fait sens d'un seul coup ^^
+ Zorg1: j'ai mélangé du coup je comprenais plus :p
+ Bon[]Crayon: Faut suivre :smile_cat:
+ Zorg1: bon t'es toujours pas #1 Bon[]Crayon sur le challenge Sofia&#160;? kestufou&#160;? tu hides&#160;?
+ Bon[]Crayon: Non, je rame.
+ Sharki: Bonjour&#160;! y'a t'il quelqu'un qui veut faire des clash of code avec moi&#160;? j'aimerais bien m'améliorer est le faire avec quelqu'un d'autre pourrait etre cool :grinning:
+ egaetan: salut tout le monde
+ <b>**BlaiseEbuth slaps egaetan around a bit with a large dark theme.</b></p><p><img src="/a/59449061195531" /> BlaiseEbuth: :wave:
+ Neumann: Pouet
+ egaetan: o/
+ egaetan: que de monde
+ egaetan: gg Neumann
+ Neumann: Ca va bouger, tkt :D
+ Neumann: Merci
+ egaetan: j'ai regardé rapidment, mais je simule pas correctement les collisions, il y a une subtilité&#160;?
+ Neumann: Pas à ma connaissance
+ egaetan: donc c'est mon code qui est naze
+ BlaiseEbuth: Oui
+ <b>**egaetan remercie BlaiseEbuth</b></p><p><img src="/a/59449061195531" /> BlaiseEbuth: Tkt :thumbsup:
+ nicola: Non, je ne suis pas caté. :p
+ BlaiseEbuth: nicopula -&gt; []
+ Littleyounes: :dancer:
+ Zorg1: il a perdu son badge de shérif nicola&#160;?
+ nicola: Non.
+ Zorg1: ah c'est bon
+ Zorg1: j'y comprend plus rien avec leur reboot du chat
+ JBM: t'y comprenais qqch avant?
+ Zorg1: pas plus, mais j'aime imaginer une époque où j'étais dans le coup&#160;:(
+ Littleyounes: t'a quoi avec les hibou
+ Zorg1: c'est chouette comme avatar, c'est tout
+ Littleyounes: :eyes:
+ LMC7592:   
+ Thyl: c'est mieuwx les avatars fait main
+ BlaiseEbuth: On sait toujours pas ce que c'est le tiens Thyl...
+ Zorg1: un sprong royal de la planète Zoom III
+ Zorg1: c'est pourtant évident
+ BlaiseEbuth: :thinking:
+ Bon[]Crayon: C'est pas un tétard&#160;?
+ Thyl: c'est fait avec Pixart
+ Thyl: un space invader
+ Bon[]Crayon: ok
+ Bon[]Crayon: Il y a une bande blanche en bas.
+ Thyl: c'est la bouche
+ Thyl: ....
+ Thyl: bon je vais aller sur Binary Search
+ Bon[]Crayon: Non tout en bas de l'image entre les pattes.
+ Zorg1: oui on dirait un pb de crop
+ BlaiseEbuth: <a rel="nofollow" class="external free" href="https://cdnb.artstation.com/p/assets/images/images/000/356/379/large/tom-carruthers-invaders-blankztools-cu01smaller.jpg?1418677695">https://cdnb.artstation.com/p/assets/images/images/000/356/379/large/tom-carruthers-invaders-blankztools-cu01smaller.jpg?1418677695</a>
+ kayou: ha je pensais que c'etait une tete de python
+ Zorg1: pas vraiment la touch "space invader" ton truc
+ BlaiseEbuth: Trop de pixels&#160;? ^^
+ kayou: il etait pas comme ca sur le ZX81
+ Zorg1: et t'avais pas 36 000 couleurs sur le ZX81 ...
+ Thyl: bon -2v c'est pas mal
+ BlaiseEbuth: Faudra que je rebosse le miens...
+ Zorg1: je suis toujours à -3v moi
+ egaetan: -3v c'est mieux
+ BlaiseEbuth: J'avais 2.1
+ BlaiseEbuth: Apprends à simuler les collisions tu donnera ton avis après. :smirk:
+ <b>**egaetan loupe une collision</b></p><p><img src="/a/16542412157988" /> Zorg1: en plus bon c'est la même formule que CSB (ou FB)
+ Zorg1: avec la demi impulsion machin bidule minimale
+ <b>**egaetan n'est pas une impulsion</b></p><p><img src="/a/59449061195531" /> BlaiseEbuth: Non. Seulement une demie.
+ egaetan: +1
+ Morkai: (╯°□°）╯︵ ┻━┻
+ BlaiseEbuth: ┬─┬ノ( º _ ºノ)
+ Littleyounes: (❁´◡`❁)
+ Littleyounes: ╰(*°▽°*)╯
+ Morkai: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/9ad1df73-0846-4176-ab9e-d5ae9f6334b5">http://chat.codingame.com/pastebin/9ad1df73-0846-4176-ab9e-d5ae9f6334b5</a>
+ Morkai: oups j'ai écrit un roman
+ BlaiseEbuth: ( `'◡'´ ) (╯°□°）╯︵  ❁❁
+ BlaiseEbuth: Sur le principe oui Morkai
+ Morkai: bon je vais essayer alors
+ Morkai: enfin, non, je vais le faire, il n'y a pas d'essais
+ nmcodes: Bonjour, je suis entrain de résoudre un problème sur le french plate number. Je sens qu'il me faudra une astuce math mais je n'arrive pas à trouver laquelle
+ dwarfie: perso , j'ai pas eu d'astuce a utiliser :D
+ nmcodes: mdr. comment t'as fait&#160;?
+ dwarfie: addition , division et multiplication ... du basique 
+ dwarfie: soustraction aussi  :p
+ nmcodes: avec ça je passe 4 étapes mais pas plus. Et pourtant il y en 7 :rage:
+ dwarfie: si t'as un boucle , c'est normal ...
+ nmcodes: je vais revoir mon code alors
+ nmcodes: merci
+ Littleyounes: :spy_tone4:
+ dwarfie: normalement , pas besoin de boucle  pour celui ma
+ dwarfie: la
+ dwarfie: tien , je l'avais validé celui la ... m'en rappelait plus :D
+ Littleyounes: Quand des gens utilisent une boucle pour calculer la somme d'une suite 
+ Littleyounes: c'est bien du O(n)&#160;?
+ Magus: oui
+ Zorg1: en nombre d'additions oui, en mémoire c'est du O(1)
+ jdeveil: tout dépend si on parle de complexité en temps ou de complexité en mémoire
+ jdeveil:&#160;;)
+ dwarfie: forrest gump aurait dit&#160;: n'est complexe que la complexité m'dam
+ Littleyounes: je parlais bien de la complexité de temps
+ Littleyounes: Merci
+ Littleyounes: C'est con tout le monde a fait une boucle pour calculer une somme d'une suite géométrique
+ Littleyounes: au lieu de passer directement pas la formule et résoudre le problème en O(1)
+ Zorg1: dans quel puzzle&#160;?
+ Littleyounes: un clashcode tout à l'heure x)
+ Zorg1: ah après quand tu connais pas la formule c'est pê le plus rapide
+ Zorg1: même si elle facile à retrouver quand tu connais le truc
+ Littleyounes: C'etait un prof qui devais distribuer des bonbons à une classe de n élèves
+ Littleyounes: premier eleve 1 bonbon le deuxieme 2 le troisieme 4 ...
+ Zorg1: et y a 64 élèves bien sûr :D
+ Littleyounes: et il fallait output combien de paquet de 10 bonsbons le prof devait acheter
+ Zorg1: ah oui en plus les puissances de 2, elle est simple la formule
+ kayou: souvent c'est plus rapide de faire ue boucle que se rappeller la formule exacte, les shortests amenent un peu plus de réflexions
+ egaetan: 2**n -1
+ telerama: bonsoir, est-ce que ça pose un problème d'avoir plusieurs break dans un meme for en python?
+ Bon[]Crayon: Je ne pense pas.
+ Zorg1: normalement non
+ telerama: merci
+ Tiouz: Salut, est-ce qu'il y a le code de CSB en ligne quelque part&#160;?
+ Tiouz: Je parle du referee, pour que je regarde comment coder la simu
+ Bon[]Crayon: Je ne sais pas pour le referee. Sinon il y a des starters.
+ Neumann: Partir des starts est sans doute mieux, le referee est largement sous-optimal en terme de perf
+ Neumann: starters *
+ Neumann: Tapes "CSB Magus" sur Google tu trouveras une bonne base déjà
+ Tiouz: Ok, j'avais vu le code de Magus, mais je voulais comparer au "vrai" referee pour être sûr de moi
+ Bon[]Crayon: Si on veut les calcules des positions comme le referee. Vaut mieux le referre.
+ ribensan: Bonsoir, je me souviens d'un probleme avec des camions qu'il fallait remplir, des cartons ayant un poids et une taille. C'était un event je crois. Le problème est-il disponible pour s'entrainer dessus&#160;?
+ Bon[]Crayon: Je ne connais pas. As-tu regarder dans 'activités' 'compétitions'&#160;?
+ ribensan: J'ai regarde un peu de partout, mais pas trouvé
+ Bon[]Crayon:&#160;:(
+ ribensan: C'est une variante du 0/1 knapsack
+ ribensan: pg, merci qd même&#160;:)
+ dwarfie: ribensan&#160;: the great dispatch ... disparu depuis longtemps (au grand regret de beaucoup)
+ ribensan: c'est ca&#160;!
+ ribensan: y a-t-il un problème de type similaire pour se faire au knapsack&#160;?
+ dwarfie: non
+ Bon[]Crayon: 'Rod cutting problem' c'est dans le même genre&#160;?
+ dwarfie: pas vraiment
+ Bon[]Crayon: ok
+ ribensan: 'rod cutting problem', je prends qand même
+ ribensan: faute de grive, on mange du merle :smirk:
+ <b>**dwarfie aurait su dire "vraiment pas" alors ... :D</b>
+ TaMa: hello, je suis un dev (C#) un peu inexpérimenté et j'ai un problème récurent&#160;: dans mes solutions, j'ai souvent besoin d'un tableau à plusieurs dimensions (genre pour récupérer plusieurs stats de plusieurs pièces dans un jeu) et du coup je créé un array d'array... ça m'a l'air bien lourd comme solution et je me demandais&#160;: est-ce que c'est une bonne solution ou est-ce qu'il y a une meilleure façon de faire&#160;?
+ TaMa: déso, si c'est pas le bon endroit pour poser cette question
+ Bon[]Crayon: Une meilleur façon pour aller plus vite&#160;?
+ TaMa: pour mieux faire
+ TaMa: je sais pas si c'est bien en fait
+ TaMa: je fait comme ça parceque c'est ce qui est le plus logique pour moi
+ TaMa: mais peut-être que c'est pas bien de faire comme ça&#160;? (car trop lourd ou autre)
+ Bon[]Crayon: Pour bien faire je ne sais pas.
+ Bon[]Crayon: Par contre tu pourrais essayer avec un tableau de classes ou de structures pour pouvoir accéder aux stats par des noms. Si c'est possible en c#.
+ jdeveil: c'est possible oui. tu peux utiliser un List&lt;ClasseQuelconque&gt;. Ta classe est soit une description de la seconde dimension, soit contient ou est une autre liste.
+ jdeveil: mince j'avais pas vu l'heure :p
+ jdeveil: il doit être couché maintenant
+ coralsnake: le chat c'est sur batman&#160;?
+ KramOi: test
+ coralsnake: il faut utiliser un swith et faire une procedure en fonction de la direction donnée&#160;?
+ LDami: c'est ce que j'ai fait perso
+ coralsnake: premier cas win
+ LDami: Celui de batman j'ai tout pass sauf le dernier test
+ coralsnake: moi les trois premier seulement 
+ coralsnake: en faite au début il fait de grand bond et au fur et a mesure que ils se raproche les pas deviennent plus petit 
+ coralsnake: dichotomie quoi
+ coralsnake: il me reste les deux dernier

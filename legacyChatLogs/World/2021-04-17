@@ -1,0 +1,346 @@
+ NotSureWhyThisWorks: Anybody had any luck with genetic algorithms in python for CSB or search race?
+ MadKnight: NotSureWhyThisWorks how exactly are u gonna use genetic algo for it&#160;?
+ <b>**Mr.Pepper woke up</b></p><p><a href="/wiki/File:Default_avatar.png" class="image"><img alt="Default avatar.png" src="/images/5/56/Default_avatar.png" decoding="async" width="50" height="50" /></a> NotSureWhyThisWorks: simulating the next n moves and using genetic algorithm to pick the best solution. Similar to what is described in the post mortems for CSB (<a rel="nofollow" class="external free" href="http://files.magusgeek.com/csb/csb_en.html">http://files.magusgeek.com/csb/csb_en.html</a> , <a rel="nofollow" class="external free" href="https://www.codingame.com/blog/evolutionary-trajectory-optimization/?utm_source=codingame&amp;utm_medium=details-page&amp;utm_campaign=cg-blog&amp;utm_content=csb">https://www.codingame.com/blog/evolutionary-trajectory-optimization/?utm_source=codingame&amp;utm_medium=details-page&amp;utm_campaign=cg-blog&amp;utm_content=csb</a> , etc)
+ Marchete: happy caturday
+ jacek: happy Caturday
+ MadKnight: NotSureWhyThisWorks it's all actually a lot easier
+ MadKnight: NotSureWhyThisWorks u can just generate 10 000 random 6 depth movements and pick the best one 
+ Mandelbort: n**n
+ Mandelbort: sdfadfad
+ NotSureWhyThisWorks: MadKnight have you implemented that with python and has success? I am fairly new to this and not sure how possible it is to try lots of combinations in a short time (&lt;50ms) with python in particular
+ MadKnight: NotSureWhyThisWorks u would have barely enough sims to randomize a somewhat straight movement
+ MadKnight: well for just 1 pod it would be better
+ Marchete: with python you can't
+ MadKnight: no u actually can
+ MadKnight: my bot worked nice with 600 sims
+ Marchete: "how possible it is to try lots of combinations in a short time (&lt;50ms) with python in particular"
+ Marchete: pretty much impossible
+ Marchete: unless 600 sims is "lots of combinations"
+ MadKnight: u just need to separate pod simulation
+ MadKnight: and they will manage to somewhat move the right direction
+ MadKnight: somewhat
+ NotSureWhyThisWorks: so ~600 sims of completely random 6 depth movements worked well?
+ MadKnight: well not completely...
+ NotSureWhyThisWorks: the real question is did it beat the gold boss?
+ MadKnight: actually if u get at least 1k then it's good
+ yyzl: 我是中国的
+ yyzl: :stuck_out_tongue:
+ jacek: opening book eh
+ Marchete: eeeh
+ Marchete: I think that your jacekmax is somehow an alphazero, you just replace the policy part for a reuse of the value one, via children
+ Marchete: the good thing is that the NN is smaller and simpler to train
+ Marchete: the bad thing is that if the game simulation is costly
+ Marchete: you need many sims to get the policy part (you need to simulate all children and get the NN value)
+ jacek: yes
+ jacek: my training 'framework' mostly looks like a0 one, except theres no policy
+ Marchete: and the MCTS should behave similarly
+ Marchete: I still don't know what "value" to send to train it
+ Marchete: I have 2 random NN weights
+ Marchete: so I have gamestate + value
+ Marchete: but what to send to the training part?
+ Marchete: go to endgame and backtrack -1.0 and 1.0 for winner and loser?
+ jacek: im using the value for root of the search
+ Marchete: I mean replace all gamestate values for -1.0 or 1.0?
+ Marchete: but the value from random weights are just sh*t
+ Marchete: no?
+ jacek: at first yes. but at very least they would be good near endgames
+ jacek: after a while a true values from endgames would be propagated earlier and earlier
+ Marchete: maybe I'd try a mixed approach
+ jacek: that was my issue with temporal difference learning, when you update every step. at first it seems it would adjust to random weights. but eventually it will get into more true values
+ Marchete: k*win/loss + (1-k)*root value
+ jacek: could be, that what connect4 folks did at first
+ Marchete: I think that could take care of short and long term
+ jacek: <a rel="nofollow" class="external free" href="https://medium.com/oracledevs/lessons-from-alphazero-part-4-improving-the-training-target-6efba2e71628">https://medium.com/oracledevs/lessons-from-alphazero-part-4-improving-the-training-target-6efba2e71628</a>
+ Marchete: to be honest
+ Marchete: I trust CG people more than those papers
+ Marchete: most papers are either NN with thousand of nodes
+ Marchete: or python code with questionable performance
+ Marchete: right now my jacekmax code fails at exploring
+ yyzl: Hi,I am chinese
+ Marchete: sometimes it just go for a node and doesn't explore any other
+ Marchete: I need that at least the depth 1 moves are expanded and tested
+ jacek: oh, i didnt mention in UCT im using random [0.9,1.1] * value
+ Marchete: random?
+ Marchete: why?
+ jacek: randomly multiply by 0.9-1.1
+ jacek: so it wont be deterministic, and for training the bounds could be bigger
+ Marchete: ok
+ jacek: and apparently its good against bookers
+ Marchete:&#160;:)
+ Marchete: I'll try to fix my FPU and then I'll check how to train
+ Marchete: at least it can beat a random bot
+ Krishnam_Raju_Ch: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/1696829acdfe29232d5ed874a97a28741645735">https://www.codingame.com/clashofcode/clash/1696829acdfe29232d5ed874a97a28741645735</a>
+ jacek: oO
+ Marchete: Oo
+ caldelta: good afternoon 
+ jacek: hello
+ MangoBunchBoyRazor: heyy
+ yyzl: www
+ Coder_prabhat: heyyyyy
+ yyzl: port
+ yyzl: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/16969551f10014b5bcb92dd3eafb597047e6ddf">https://www.codingame.com/clashofcode/clash/16969551f10014b5bcb92dd3eafb597047e6ddf</a>
+ MangoBunchBoyRazor: aight
+ yyzl: higaidoushou
+ Prifa: hi
+ CALLmeANIKET: python coders are script kiddies
+ MangoBunchBoyRazor: what about javascript?
+ Distilled-Water: lol
+ CALLmeANIKET: javascript is the root cause for global warming
+ Alex-1: hi
+ BhoO: hi
+ caldelta:  HTML?
+ jacek: CSS!
+ jacek: YMCA?
+ TenYearOldBrocolli_bf2: hi
+ Alex-1: hi
+ Alex-1: there
+ HolyJesusYOuPervert: hello world
+ <b>**Mr.Pepper want to kick a ball</b></p><p><a href="/wiki/File:Default_avatar.png" class="image"><img alt="Default avatar.png" src="/images/5/56/Default_avatar.png" decoding="async" width="50" height="50" /></a> BlackCys: Hi all&#160;!!!
+ basem_: gfbdfgd
+ basem_: df
+ basem_: df
+ basem_: d
+ basem_: d
+ struct: stop spamming
+ BlackCys: Please&#160;!! introduce for me , Some games is easy level
+ BlackCys:&#160;:((( I'm newbie
+ Mr.Pepper: do puzzles&#160;: p easy puzzles 
+ HolyJesusYOuPervert: hoho
+ BlackCys: Ohh 
+ BlackCys: Thanks you for much
+ BlackCys: @@
+ BlackCys: &lt;3
+ multii: hi
+ HolyJesusYOuPervert: hello
+ multii: sup
+ BhoO: boo
+ shenshaoning: I don't understand how to play the "coders strike back", what's the meaming of the game?
+ inoryy: to finish a race faster than your opponent
+ Armia_Evil: ...
+ jacek: oO
+ Armia_Evil: ...
+ jacek: to finish a race, you meant to eliminate the race?
+ jacek: <a rel="nofollow" class="external free" href="https://www.reddit.com/r/formula1/comments/bnaceq/if_you_could_eliminate_a_race_within_the_year/">https://www.reddit.com/r/formula1/comments/bnaceq/if_you_could_eliminate_a_race_within_the_year/</a>
+ Ordonnateur: For this puzzle you have to gather all possible stack possible then choose the lowest size one or there is a trick with some instant function doing the job for me (because being easy with having some timeout managment doesn't seems normal for me xd)&#160;? <a rel="nofollow" class="external free" href="https://www.codingame.com/training/easy/container-terminal">https://www.codingame.com/training/easy/container-terminal</a>I'm trying to do it in C++ (yeah that's not the best idea xd) but either I'm blind, either it's "easy" only on specific language ^^'.
+ Armia_Evil: :chocolate_bar:
+ Armia_Evil: :chocolate_bar::lollipop::candy:
+ Ordonnateur: :apple:
+ geppoz: Ordonnateur what do you mean?
+ geppoz: the string is short, max 500 char
+ geppoz: so even a simple search for each char should be enough
+ geppoz: for that dimensions an O(n²) is viable
+ Ordonnateur: yes 500 char but you have a lot of combination with just doing all possible case
+ Armia_Evil: :lollipop::candy::lollipop::candy:Ordon
+ geppoz: scan the next input char, then search if you can put it in an existing position or if you need to add another
+ geppoz: (that is my tought looking at the statement, I didn't solved yet)
+ Ordonnateur: This only don't work on every case
+ geppoz: ok, trying, let you know
+ Ordonnateur: because nothing say what is the "best" to keep before ending the sort (look at the cba spam for ex)
+ Ordonnateur: (sort -&gt; string* mb ;p)
+ geppoz: well solved...
+ geppoz: it is easy...
+ geppoz: I suppose you are thinking too far...&#160;;)
+ Ordonnateur: with the creation of all possible combination&#160;?
+ geppoz: no need
+ geppoz: just examining input as he comes
+ geppoz: you can decide exactly where to best put every char as it comes
+ Yash27: hey in private clashes there's only 1 question per clash right? is there any way we can increase num of ques per game?
+ Uljahn: Yash27: no
+ Yash27: okay
+ Ordonnateur: How can you know if it's better to put c on b or to do 2 column when you check only the current char&#160;? (with cbacba and cba the best choice is different so you have to check the whole thing no&#160;?)
+ Uljahn: no
+ geppoz: put it on the stack where the top is greater, but minimum
+ geppoz: if there is not, then put in another stack
+ geppoz: *greater or equal
+ Ordonnateur: don't work on cba spam...
+ Uljahn: just put it in cbaaaa, cbbb, cc
+ Uljahn: ez
+ geppoz: give me the sequence, i give you the steps
+ Ordonnateur: (imagine having cbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacba)
+ geppoz: well maybe shorter :D
+ Ordonnateur: doing like uljahn show it don't print 3
+ geppoz: with cbacbacba you solve doing:
+ geppoz: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/8e1c5641-9f89-43e6-a7e6-fa5550b2ca67">http://chat.codingame.com/pastebin/8e1c5641-9f89-43e6-a7e6-fa5550b2ca67</a>
+ Uljahn: ['cbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'cbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb', 'ccccccccccccccccccccccccccccccccccccccccccc'] [solved]
+ Ordonnateur: So the validator are too dumb to have a really logic result&#160;? It's not supposed to be sorted like that &gt;&lt;'
+ PatrickMcGinnisII: cbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacbacba  answer is 3
+ Uljahn: ^
+ MadKnight: Automaton2000 banbanbanbanban
+ Automaton2000: get rid of the old ones
+ PatrickMcGinnisII: Container Terminal isn't tower og hanoi on crack
+ PatrickMcGinnisII: og=of
+ Ordonnateur: Ah... well that was quite unexpected to end like this Uljahn ;p thx ^^'
+ CoderDJD: I'm not sure whether I can ask this here, still. I'm working on an open source appliction, which helps developers find contributors for their open source projects. Could someone please join in and help me out? Stack&#160;: SQL, Express GraphQL, React(tsx) and generally, for the whole project, TS.
+ Ordonnateur: (didn't thought there was multiple way of having the same minimal width with different case ^^')
+ kresteodymium: hi
+ kresteodymium: hello world
+ nmortfeus: print("hello world")
+ kresteodymium: cout &lt;&lt; "hello world"
+ jacek: syntax error
+ BhoO: :rofl:
+ BhoO:&#160;;
+ PatrickMcGinnisII: die(eval(0/0));
+ Careeza: Hi in ghost-in-the-cell when youse INC to increase the production rate of a factory can the new production rate be higher than 3&#160;?
+ DhruvaM:  heelllloooanyone for clash of code?
+ Automaton2000: if you use some kind of random search
+ struct: MSmits are you here?
+ jacek: delete yavalath and see
+ TheMUS: what a day ha?
+ sandball: hello, I am new
+ Ambarsariya: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/1697635c7e0b6267e57855b724fe860300367a7">https://www.codingame.com/clashofcode/clash/1697635c7e0b6267e57855b724fe860300367a7</a>
+ BlaiseEbuth: -&gt; #clash Ambarsariya
+ Ambarsariya: ok
+ Cicada001: hola
+ computermagician: can someone please teach me how to become pro at this?
+ BhoO: practice
+ computermagician: I'm new
+ MadKnight: well hi new
+ computermagician: hey there madknight
+ computermagician: care to teach me how to program?
+ TheMUS: well
+ TheMUS: come to discord
+ MadKnight: becoming pro is actually easy u just need to play these PvP bot programming challenges for some time
+ computermagician: I don't know how to program though
+ jacek: use madmax [solved]
+ Cicada001: bruh i dont understand tht bot level where u hv to move from one  check point to other
+ jacek: coders strike back?
+ BhoO: Detective Pikaptcha EP1 everytime time out
+ BhoO:&#160;:\
+ therealbeef: timeout can also be due to a crash
+ BhoO: i see
+ BhoO: thanx found it i think i go outside array
+ jacek: going outside array is illegal
+ BhoO: oh yeah&#160;: p
+ Cicada001: hellonyoone?
+ MrFruit: Helo
+ BhoO: o/
+ proace21: xxx
+ proace21: hi
+ proace21: hi
+ proace21: hi
+ proace21: hi
+ miny: hi
+ computermagician: hey which programming language is the easiest?
+ PatrickMcGinnisII: such a simple question
+ computermagician: hmm?
+ PatrickMcGinnisII: complex answer
+ PatrickMcGinnisII: depends on what u wanna do
+ PatrickMcGinnisII: If you just wanna jump into CG, python probably has the smallest learning curve to start.  for speed use one of the C langs, , for apps etc. java maybe with a little kotlin thrown in, for web there is a variety.  so there u go.
+ computermagician: thanks
+ Luka_BTW: hi
+ BhoO: o/
+ Astrobytes: \o
+ PatrickMcGinnisII: Watching the news... I'm scared /n
+ Astrobytes: Why?
+ BhoO: covid&#160;?
+ PatrickMcGinnisII: Big Pharm saying people need booster shots
+ PatrickMcGinnisII: smh
+ PatrickMcGinnisII: news is bad for my brain
+ Astrobytes: Hm. Haven't seen that here yet
+ Astrobytes: With the new strains it kinda figures, but they need a new vax for those. Greedy shites.
+ PatrickMcGinnisII: all about the $
+ Astrobytes: Yeah. Always.
+ Astrobytes: I mean don't believe the conspiracies, if they had cures for things etc we'd all be robbing banks to get them :P
+ PatrickMcGinnisII: Need a landfill for the 200M needles
+ Astrobytes: They're incinerated.
+ PatrickMcGinnisII: ahh,ok
+ Astrobytes: Also a problem, but less so than landfills full of hypodermic needles :D
+ BlaiseEbuth: Yeah. I made good deal with the subcontracting of incinerations. :smiling_imp:
+ PatrickMcGinnisII: Need to buy stock in those companies
+ jacek: buy doges
+ Astrobytes: Beelzébuth right on cue
+ BlaiseEbuth: Business
+ PatrickMcGinnisII: I'm dragging my feet on night of war
+ jacek: huh
+ Astrobytes: PatrickMcGinnisII: I don't rate it tbh
+ Astrobytes: MSmits: :clap:
+ jacek:&#160;?
+ PatrickMcGinnisII: I got a alpha beta setup, but I'm worried higher leagues are gonna screw it up
+ Astrobytes: You really don't need ab for the first leagues. They are totally pointless leagues.
+ PatrickMcGinnisII: did yall straight minmax?
+ Astrobytes: I think I hardcoded until top league.
+ jacek: minimax now, heuristics in lower leagues
+ PatrickMcGinnisII: I'm thinking about changing the eval to include a null move heuristic, never did that b4
+ Astrobytes: jeez dude
+ jacek: theres WAIT move
+ PatrickMcGinnisII: oh yea, i usually ignore those cause they make the tree too big...but at final action depth it should give better results
+ Astrobytes: You don't need a search and *definitely* don't need to start messing around with the null move heuristic.
+ Astrobytes: Just play to win. The bosses are ridiculously easy.
+ jacek: i mean null move heuristic would be pointless here if its legal action
+ Astrobytes: ^
+ PatrickMcGinnisII: brain fog, i'll make sure my minmax works
+ Astrobytes: I'm not convinced it's a good game tbh
+ jacek: oO
+ Astrobytes: I mean it works, and he did a good job etc.I just don't really feel it.
+ PatrickMcGinnisII: reminds me of the game whre you have to shoot around obstacles
+ PatrickMcGinnisII: hmm
+ PatrickMcGinnisII: ahh, cultist wars
+ Astrobytes: Kinda different
+ PatrickMcGinnisII: and Code of ice and fire
+ Astrobytes: That had a lot more depth to it
+ Astrobytes: imo
+ PatrickMcGinnisII: true
+ PatrickMcGinnisII: waas gonna switch to C++ for next contest, but I'm doing house remodel... took today off
+ Astrobytes: Did you sort out the wrecked property?
+ PatrickMcGinnisII: they screwed a satellite dish to the roof
+ PatrickMcGinnisII: besides them damaging every wall and door,etc. in the house
+ PatrickMcGinnisII: I have to put a new roof on it
+ WannaBeHum1n: fet tesla solar roof 
+ PatrickMcGinnisII: so, not all the way...gonna take 5 weeks
+ WannaBeHum1n: get*
+ PatrickMcGinnisII: when I'm done Imma hafta sell house to recoop my $
+ WannaBeHum1n: oh
+ PatrickMcGinnisII: it's a rental, i don't live in it
+ PatrickMcGinnisII: er was a rental
+ PatrickMcGinnisII: people suck
+ WannaBeHum1n: sorry about it
+ WannaBeHum1n: mate
+ kresteodymium: hello world
+ PatrickMcGinnisII: renter came to the house while I was working there this week
+ MadKnight: Automaton2000 stop creeping on people's houses
+ Automaton2000: i've been thinking about that
+ PatrickMcGinnisII: she wanted her security deposit....like NO.  She went in house and tried arguing with me, I had to call cops and have her trespassed.  people suck. &lt;3 Automaton2000
+ Automaton2000: not sure how it works
+ Astrobytes: PatrickMcGinnisII: Yes, yes they do&#160;:/
+ MadKnight: sounds like a story to tell in a circle of friends
+ MadKnight: Automaton2000 how do i get into a circle of friends&#160;?
+ Automaton2000: and this is the default ai
+ PatrickMcGinnisII: did i miss Phillip's funeral?
+ jacek: was it fun
+ MadKnight: Automaton2000 let's keep randomly popping up in the chat to ping Automaton2000 a few times and never talk to someone else
+ Automaton2000: i'm looking for a job
+ PatrickMcGinnisII: yup i missed it
+ PatrickMcGinnisII: 15 years ago exactly...I was in the UK, i'm getting old
+ MadKnight: naaa i think u can still do it
+ PatrickMcGinnisII: sry going afk
+ kresteodymium: hi
+ MadKnight: hihi
+ kresteodymium: wow level 41
+ kresteodymium: orz
+ Astrobytes: PatrickMcGinnisII: Phil's funeral was today. No one cares :P
+ MadKnight: kresteodymium well everyone is like that at first, but then they realize that bot programming results are much more cool
+ BlaiseEbuth: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=v0UIKhFROCA">https://www.youtube.com/watch?v=v0UIKhFROCA</a>
+ kresteodymium: lol
+ kresteodymium: are you guys in college
+ kresteodymium: adults owo
+ KelvinAndHubbles: How do people even come up with the strategies that win the leagues, is it a lot of guesswork or just very good educated guesses?
+ DetoBot: Read lot of books
+ DetoBot: diligence is the key
+ KelvinAndHubbles: well, no amount of reading the Star Wars books made me better at CSB&#160;:/
+ DetoBot: Not fairy tales
+ DetoBot:&#160;;)
+ KelvinAndHubbles: Ahh, thats where I'm going wrong, thanks
+ KelvinAndHubbles: now I can finally get out of bronze
+ DetoBot: Great but stop torturing NNs
+ DetoBot: make them friends
+ KelvinAndHubbles: naa GANNs are my favorites, take the best Networks and kill the worst
+ DetoBot: :joy:
+ KelvinAndHubbles: altho, I use a self written algorithim for that, so that probably shows why I'm not getting very far
+ DetoBot: keep up the good work
+ DetoBot: good luck bye
+ KelvinAndHubbles: thank you for the advice, wise sage
+ DetoBot: made me look Idiot :stuck_out_tongue:
+ Smelty: o . o
+ JohnnyCodes: a
+ <b>**Smelty falls asleep</b></p><p><a href="/wiki/File:Default_avatar.png" class="image"><img alt="Default avatar.png" src="/images/5/56/Default_avatar.png" decoding="async" width="50" height="50" /></a> Mandelbort: lololololololololoolololo
+ jackthrow893: hi all

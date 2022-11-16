@@ -1,0 +1,1221 @@
+ jacek: happy Caturday
+ dbdr: happy Raturday
+ eulerscheZahl: oh, i got beaten up during the night&#160;:(
+ eulerscheZahl: and someone gave 1 star to jacek's paper soccer
+ dbdr: monitoring multi ratings eulerscheZahl?
+ dbdr: who's beating you up?
+ eulerscheZahl: from time to time. several games were downvoted
+ struct: yeah&#160;:(
+ eulerscheZahl: legend is beating me up
+ struct: I wonder if I even should finish yinsh tbh
+ struct: so many multies now
+ struct: even on pending list
+ struct: is  like 4
+ eulerscheZahl: yeah, impressive
+ eulerscheZahl: moderating them is quite some effort
+ struct: especially during contest
+ eulerscheZahl: did anyone try codejam last night?
+ struct: No&#160;:(
+ eulerscheZahl: me neither, i decided to sleep
+ struct: has yurkov joined ooc long ago?
+ struct: only saw him now
+ eulerscheZahl: i think i saw him before
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://github.com/dbdr/codingame-leaderboards/blob/master/challenge/ocean-of-code.tsv">https://github.com/dbdr/codingame-leaderboards/blob/master/challenge/ocean-of-code.tsv</a>
+ struct: he is top 50 now
+ dbdr: that URL pings me :D
+ eulerscheZahl: guess how i feel with my github and herokuapp
+ dbdr: :nerd:
+ eulerscheZahl: i can even ping myself when i have multiple tabs open
+ dbdr: do they come up often?
+ eulerscheZahl: yes, when i share them :D
+ dbdr: :D
+ struct: dbdr you store leaderboards everyday?
+ dbdr: yes
+ struct: Now just need a website to choose dates and contest
+ dbdr: sure, this is the raw data, not user friendly
+ eulerscheZahl: there was such a website from adrien
+ dbdr: though github does a decent job of displaying tsv as a table
+ eulerscheZahl: but he stopped indexing
+ struct: Good job displaying yes
+ struct: but navigating is a bit meh
+ dbdr: I think it's the right architecture, separate the data from the visualization
+ dbdr: sure, it's not built for that
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.adrienvannson.fr/cg-ranking/">https://www.adrienvannson.fr/cg-ranking/</a>
+ dbdr: before the ranking v2?
+ eulerscheZahl: yeah, old one
+ eulerscheZahl: but it tracked your contest rating every 2h
+ dbdr: anyone could build a visualization on top of the github data, any good frontender?
+ eulerscheZahl: helped finding the "good one" again :D
+ dbdr: with agentid?
+ eulerscheZahl: your github data is 16 day old
+ dbdr: not anymore
+ eulerscheZahl: yes, agentId in the tooltips
+ dbdr: only the push is not automated yet
+ dbdr: should do it
+ eulerscheZahl: afk breakfast
+ struct: you want to just display leaderboard and navigation
+ struct: or something else?
+ dbdr: struct: a lot of things could be done with this data I think
+ struct: yeah
+ dbdr: just display the lb is fine but already on CG
+ dbdr: but graphing over time
+ struct: Can also check last agent id
+ dbdr: dayly/weekly/month changes, ...
+ struct: and see what changed
+ dbdr: right
+ kovi: uh, variance is still high
+ Marcose: anyone?
+ dbdr: kovi same or a bit less?
+ kovi: same code 7th and now 1st (3points diff)
+ dbdr: at least there's more spread in points
+ struct: I havent used javascript in a while
+ struct: but i can give it a try
+ dbdr: if you feel like it, very cool struct!
+ eulerscheZahl: but don't forget about the contest
+ eulerscheZahl: i don't want you to delete your account again
+ struct: Im not doing the contest&#160;:/
+ eulerscheZahl: you said legend or delete
+ struct: :sweat:
+ kovi: legend and delete username is already taken. "not doing the contest" is accessible
+ dbdr: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/447659206">https://www.codingame.com/replay/447659206</a>
+ dbdr: shows 30.73 for me. wonder where that number comes from
+ eulerscheZahl: gold
+ dbdr: looks like it
+ dbdr: but it gold it was updating
+ eulerscheZahl: that's your old bot
+ dbdr: they keep one score per league?
+ dbdr: forever?
+ eulerscheZahl: you need a replay with your most recent agent id
+ eulerscheZahl: the score will remain the same, it doesn't show a rank for old replays
+ dbdr: they keep the score of all agents?
+ eulerscheZahl: yes
+ dbdr: whatever for?
+ eulerscheZahl: bots are bound to an agent id, not to a user
+ dbdr: but past bots will never be shown
+ dbdr: keeping the source I understand
+ eulerscheZahl: fun fact: you can manually set the agent id of your opponent. and then play against kovis tower defense bot in OOC and make him believe that he's crashing :D
+ dbdr: :D
+ dbdr: build a universal bot
+ dbdr: detect which game it is playing based on the input
+ kovi:&#160;:)
+ dbdr: fit it in 100K too ...
+ eulerscheZahl: oh, kovi saw my idea now&#160;:(
+ dbdr: the meta multi
+ eulerscheZahl: well, still some other users to fool
+ dbdr: we should definitely build it
+ kovi: the ultimate leaderboard
+ dbdr: yes
+ dbdr: oh, eulerscheZahl has a trick, need to reverse it&#160;:)
+ eulerscheZahl: what trick?
+ dbdr: "kovi saw my idea"
+ dbdr: I thought that meant you implemented a cheese
+ eulerscheZahl: no, the bot from another game
+ dbdr: ah right
+ dbdr: hum, we will need to build a meta referee too
+ dbdr: any size limit?
+ eulerscheZahl: 10MB
+ eulerscheZahl: including graphics
+ dbdr: just copy all the referee in one and rand() to pick the game first&#160;:)
+ eulerscheZahl: and downscale the graphics
+ dbdr: yeah, worth it
+ dbdr: the variance on that metamulti :D
+ dbdr: yeah, I got lucky, playing PCR in this match
+ kovi: there are generic solvers...eg. one smitsimax with game specific  eval
+ eulerscheZahl: will we tell players which game they play? or do they have to reverse the input format?
+ dbdr: right, a good motivation to factor some generic code
+ kovi: yeah reverse
+ dbdr: reverse
+ dbdr: more fun
+ dbdr: some might be amgiguous
+ dbdr: need to play both for some time
+ dbdr: inspired by OOC
+ dbdr: uncertainty to the next level
+ eulerscheZahl: isn't aCat working on that kind of generic bots?
+ dbdr: ah, can we send the referee source code as the first input?&#160;;)
+ kovi: yeah, i remember he talked about that at locam
+ dbdr: yavalath is part of a generic game framework I think
+ dbdr: where the rules are data
+ jacek: ludi?
+ dbdr: yeah that one
+ jacek: youre talking about implementing general game playing?
+ dbdr: not general, just all the CG multis
+ eulerscheZahl: with regular updates to add new games
+ dbdr: yes
+ dbdr: keep up or you will timeout more
+ navin89098909890: Hi
+ dbdr: a wait bot in everything would probably do quite well&#160;:)
+ eulerscheZahl: just don't crash
+ dbdr: xactly
+ dbdr: <a rel="nofollow" class="external free" href="https://github.com/dbdr/codingame-leaderboards/blob/master/challenge/ocean-of-code.tsv">https://github.com/dbdr/codingame-leaderboards/blob/master/challenge/ocean-of-code.tsv</a>why did I called the directory challenge? should be contest
+ dbdr: *call
+ AntiSquid: hi navin89098909890 join the contest
+ Neozero: I fcking did it Hahahaha
+ Neozero: :D
+ Nerchio: guys before i fell asleep yesterday I had a very important question pop in my mind
+ Neozero: I beat the TAN Network finally
+ Nerchio: in terms of strategy what is better - to start in the middle or on the outside in the ooc
+ eulerscheZahl: in the largest lake
+ Nerchio: that narrows it down for sure :D
+ AntiSquid: is there any reason pragmas could cause bugs? (C++) deactivating them makes my bot run just fine&#160;:/
+ AntiSquid: #pragma GCC optimize "O3,mavx2,omit-frame-pointer,inline,unroll-loops"
+ eulerscheZahl: the optim level might reveal existing bugs like not properly initialized variables
+ eulerscheZahl: memory layout might change too. so an index out of range for an array can have different behaviour
+ AntiSquid: are some bugs probably caused by lack of memory, doubt i reached the limit, but who knows
+ AntiSquid: any way to check how much i use from the total&#160;?
+ eulerscheZahl: seems unlikely to me
+ AntiSquid: ok will check my variables then, thanks
+ eulerscheZahl: google, sorry i don't know it either
+ kovi: what euler said. +add bunch of logs and run the same code with/wo. check difference
+ pb4: AntiSquid&#160;: like eulerscheZahl said, O3 will not initialize variables to 0 by default
+ pb4: O0 will
+ pb4: hence some bugs appear with O3 only
+ AntiSquid: i use array_something = {0} to initialize
+ wlesavo: im trying to use java cg benchmark, the login is successful and after trying to start a game im getting this error  [    wlesavo ][   SEED 0 ] ERROR internal error
+ wlesavo: can you advice what is wrong?
+ AntiSquid: which seed are you using
+ dbdr: wlesavo can you get the stack trace of the error? might put in the  right direction
+ wlesavo: seed was random, but with list getting the same error
+ wlesavo: stack trace?
+ dbdr: "internal error" is a terrible message. should give some info about what went wrong and where
+ wlesavo: oh, maybe its because i use precompiled jar, ill try to rebuild, and then probably will comeback :slight_smile:
+ dbdr: does not sound likely to me
+ dbdr: maybe there's a configuration about how verbose the logs are?
+ dbdr: sorry I don't use cgbenchmark so I don't kno the specifics
+ wlesavo: hm
+ AntiSquid: did you use correct agentID&#160;?
+ AntiSquid: i could send you my configuration file, if i find it, not sure where i placed it @_@
+ wlesavo: ok, it was due to space in Python 3, nwm :slight_smile:
+ Nagatwin: Antisquit I had an issue when using a pragma on my dfs, still haven't investigated why
+ Nagatwin: AntiSquid *
+ AntiSquid: well i found out the bug is related to eliminating possible enemy positions after torpedo shots
+ AntiSquid: i don't clean up the positions properly somewhere ... so it tries to access indexes it shouldn't 
+ Nagatwin: uh rip
+ Nagatwin: xD
+ Nagatwin: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/447931600">https://www.codingame.com/share-replay/447931600</a>
+ Nagatwin: "steering" stuff isn't for me i guess
+ YannT: ahah you made the default stub AI so much worse :D
+ dbdr: playing the same person several times in the first ten
+ dbdr: CG matchup algorithm could be improved...
+ AntiSquid: finally \o/
+ AntiSquid: too many variables Q_Q
+ dbdr: what did you achieve AntiSquid?
+ AntiSquid: i can correctly eliminate positions based on damage/explosions
+ dbdr: nice
+ eulerscheZahl: does that include path backtracking for mine placements on TRIGGER?
+ dbdr: "based on damage/explosions"
+ AntiSquid: no, just torpedo, but the new bot will have the trigger bit as well
+ dbdr: not part of the requirements&#160;;)
+ eulerscheZahl: TRIGGER is an explosion too
+ AntiSquid: with the current arena bot i cut a lot of corners and do some very superficial checks
+ dbdr: true
+ eulerscheZahl: Illedan lat me win C# for once&#160;:/
+ AntiSquid: but will add mines too
+ Illedan: No.
+ AntiSquid: just get 1st place in contest euler, problem solved
+ Nagatwin: ah
+ Nagatwin: thats the 3v
+ eulerscheZahl: exactly :D
+ Nagatwin: rofl
+ eulerscheZahl: now you have the secret algo for gold
+ Nagatwin: yay
+ Nagatwin: finally unlicked the full statement
+ eulerscheZahl: you can still lick the max thrust, will be 200 in legend
+ Nagatwin: unlocked
+ dbdr: be careful what you lick these days
+ Nagatwin: tuning the thrust is enough gor legend&#160;?
+ eulerscheZahl: no
+ Nagatwin: oh
+ eulerscheZahl: i wrote a sim in bronze, had to rewrite for changed gold input
+ Nagatwin: ye
+ eulerscheZahl: completely killed my motivation for that game
+ Nagatwin: thats why I wanted to get that strat before writing anything
+ JasonTruter: How do I use my sonar?
+ Nagatwin: SONAR 5
+ Nagatwin: replace 5 by the sector you want
+ AntiSquid: Nagatwin you could tweak speed / angle turning point variables for legend
+ Nagatwin: angle turning points&#160;? :o
+ eulerscheZahl: did you give up on OOC Nagatwin?
+ AntiSquid: and have a blocker pod and one runner pod
+ JasonTruter: What is a sector?
+ AntiSquid: the big 5x5 squares
+ eulerscheZahl: watch a replay JasonTruterdo you see these numbers in the squares?
+ Nagatwin: eulerscheZahl can't get that code any higher, I have to write a full sim and i'm not godd enough at these thing
+ Nagatwin: good
+ AntiSquid: you can get legend without sim
+ eulerscheZahl: he did
+ Nagatwin: im legend
+ AntiSquid: ah nvm
+ dbdr: in OOC
+ Nagatwin: I really have no idea on how to write a good simu, especially with several actions in the same turn
+ Nagatwin: So far I have a small path simu and killmove simu
+ eulerscheZahl: and the incomplete information
+ Nagatwin: thats not my issue eulerscheZahl
+ AntiSquid: you got legend in OOC without sim?
+ Nagatwin: Yeah
+ AntiSquid: wow . what did you use lol
+ Nagatwin: good pathfinding
+ dbdr: LeChuck is not simming either I think
+ AntiSquid: that's it&#160;?
+ Nagatwin: killing simu
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/447873049">https://www.codingame.com/replay/447873049</a>val growth has a kill avoidance at frame 59
+ Nagatwin: like if hp &lt; 4, I kill
+ JasonTruter: so an example of a sonar would be the following "MOVE N | SONAR 5"?
+ Nagatwin: and perfect detection AntiSquid
+ AntiSquid: jeez ... and i am now writing a sim to get to legend, maybe i should tweak my if-else instead?
+ eulerscheZahl: yeah but you can still charge in your MOVE JasonTruter
+ JasonTruter: charge?
+ eulerscheZahl: MOVE N TORPEDO | SONAR 5
+ JasonTruter: I see, for some reason my sonar result comes back as NA and cooldown still -1
+ JasonTruter: and breaks
+ eulerscheZahl: -1 means that it's not unlocked in your league
+ eulerscheZahl: are you in wood2?
+ JasonTruter: yes
+ Nagatwin: AntiSquid Idk haha I still have a lot involved on my pathfinding that makes it a simu partially. But I only assume I do 1 move per turn (thats why I always silence 1 distance)
+ JasonTruter: I've got basic movement down, where it decides on moves based off islands and visited right now
+ Nagatwin: AntiSquid and torpedo/mine are not any part of the pathfinding
+ eulerscheZahl: not always Nagatwin <a rel="nofollow" class="external free" href="https://imgur.com/a/zHjgB2X">https://imgur.com/a/zHjgB2X</a>
+ Nagatwin: eulerscheZahl that's the killing move
+ Nagatwin: but yeah I agree, I sometimes use silence 4 to kill the opponent
+ eulerscheZahl: you always go by 4 on killing?
+ eulerscheZahl: no 2 or 3?
+ Nagatwin: and the next line is return 0;
+ Nagatwin: eulerscheZahl 0 to 4
+ Nagatwin: the simu is complete for the killing move
+ eulerscheZahl: maybe i need more replays of your bot then
+ eulerscheZahl: only analyzed 22
+ Nagatwin: trigger and torpedo included
+ dbdr: Nagatwin return 0 that's confident, nice&#160;:)
+ Nagatwin: dbdr haha yes
+ dbdr: I'm done here :D
+ Nagatwin: when I do that I do not compute any update on my paths
+ dbdr: saves CPU cycles
+ Nagatwin: So if I do not kill with this part, my bot would be screwed up
+ Nagatwin: so yeah just return 0 for debugging
+ dbdr: that's good. better to crash and investigate than hide the issue
+ Nagatwin: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/2cc8888f-65c3-46dc-9a65-be87d9a4fe99">http://chat.codingame.com/pastebin/2cc8888f-65c3-46dc-9a65-be87d9a4fe99</a>
+ Nagatwin: inside 8 nested for loops :p
+ dbdr: :upside_down:
+ eulerscheZahl: my software engineering prof would hate you
+ dbdr: that's why it does not scale to a sim
+ Nagatwin: I have no sanity checks for my path arrays :p
+ dbdr: you just sim a special case
+ Nagatwin: Yes
+ Nagatwin: But sims are slows as fuck
+ dbdr: does not have to be
+ Nagatwin: I couldn't manage to simulate several turns with this game
+ dbdr: essentially the same work as your  8 loops
+ Nagatwin: With a proper one, not the bruteforcing i'm doing fot the killing move
+ dbdr: right, if you go deeper there is more work, exponentially
+ Nagatwin: essentially sampling some moves for each turn and applying them 
+ Nagatwin: But the update of my possible paths killed the simu count
+ Nagatwin: Otherwise I could make a simu without considering the possible paths at the end but that seem wrong for this game
+ Nagatwin: and it basically is the same as my current pathfinding part
+ JasonTruter: Wouldn't you need sonar to detect within the path?
+ JasonTruter: So you can't really use BFS or DFS as it would be required that you visit the node?
+ JasonTruter: and then go back to the root node, unless you surface everytime you need to go back
+ Nagatwin: I did that on my first version
+ JasonTruter: Not very efficient?
+ Nagatwin: randomized dfs, take the deepest branch as base path and then add some path length using heuristics on 2x2 blocs
+ Nagatwin: JasonTruter that's a way to fill an area
+ JasonTruter: Yeah, I'm considering finding the quickest path between each sector
+ Nagatwin: but let's say that we have to consider more short-term pathing strategy for legend that involve aescaping mines, ...
+ JasonTruter: to use my sonar on each sector
+ Nagatwin: I'm not sure to understand what you mean
+ Nagatwin: sonar is supposed to tell you if the opponent is in a given sector
+ JasonTruter: I'm on wood 2, what would the minimum I need to do right now be?
+ Nagatwin: start on a place with water
+ JasonTruter: Yeah I've done that
+ Nagatwin: and move around without going into islands/visited cells
+ Nagatwin: when you are out of visited cells, you can surface
+ Nagatwin: generating a long path is up to you
+ JasonTruter: Yeah so I've done that too except for surfacing when no possible moves left
+ JasonTruter: So how would I get to the next league?
+ Nagatwin: If you have a path long enough and ensure you are not producting invalid moves, you should be able to get to wood 1
+ JasonTruter: I'm in wood 2
+ Nagatwin: I know
+ Nagatwin: when you reach rank 1 in wood 2 you get promoted to wood 1
+ Nagatwin: Otherwise you can try using  torpedos randomly, this may touch your opponent
+ SabertheLost: my algo sucks&#160;:) it only fins the furthest point, but does not take into consideration what it might block&#160;;)
+ SabertheLost: finds*
+ JasonTruter: Whats a MSG?
+ Nagatwin: MSG is something you display each turn
+ SabertheLost: as in message I think
+ Nagatwin: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/447962016">https://www.codingame.com/share-replay/447962016</a>
+ Scarfield: for debugging or silly comments
+ Nagatwin: here below my nickname you can see the message I display each turn
+ JasonTruter: Oh okay cool
+ MadJetski_58cc: nice
+ SabertheLost: Ok, so I changed from BFS to DFS, then limited to 50 steps. I went from rank 240 to rank 16 in wood 2 with only moving...
+ SabertheLost: ok rank 3 now.
+ JasonTruter: where do you see rank
+ SabertheLost: At the top, where you see the league your in and time left.
+ SabertheLost: ok, i´m actully in wood 1 not 2.
+ SabertheLost: And there i will be promoted by only moving?
+ jrke: guys i am in eight standard i dint know trignometry can you help me for coders strike back gold league that how to find angle in it
+ jrke: please
+ jrke: :pray:
+ wlesavo: missed conversation, but dont use simus as well
+ blasterpoard: jrke <a rel="nofollow" class="external free" href="https://www.khanacademy.org/math/trigonometry">https://www.khanacademy.org/math/trigonometry</a> should be a good source
+ jrke: can you tell me which function to use
+ blasterpoard: nope
+ jrke: like acos
+ jrke: asin
+ tranculent: are we supposed to handle initial "Invalid coordinates" somehow?
+ jrke: or atan2
+ blasterpoard: jrke it's explained in there
+ jrke: ok
+ blasterpoard: which function is used for what
+ tranculent: to find an angle, I use Acos @jrke
+ jrke: ok
+ Scarfield: take note that the angle input of your pods are measured differently than the standard for sin/cos calculations. and the coordinate system has y axis inverted as well
+ SabertheLost: rank 68 in bronze, maybe time to start using mines or torpedoes
+ SabertheLost: 43 now
+ jrke: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/daf2cd30-b498-4a46-bbcc-deedb0b2de8d">http://chat.codingame.com/pastebin/daf2cd30-b498-4a46-bbcc-deedb0b2de8d</a>
+ jrke: can you check it is ok
+ blasterpoard: jrke if you want people to check something, it should be clear what were you trying to achieve
+ blasterpoard: I have no idea what do you want to have in those 1letter variables
+ jrke: can you share your code in private
+ elsinnombre2d2: lmao
+ blasterpoard: I can't
+ jrke: just for angle
+ jrke: only
+ pb4: You should first answer the questions you were asked jrke
+ jrke: what?
+ pb4: read
+ jrke: which question
+ struct: jrke preety much all you need to write a sim for CSB <a rel="nofollow" class="external free" href="http://files.magusgeek.com/csb/csb_en.html">http://files.magusgeek.com/csb/csb_en.html</a>
+ MadKnight: ezpz
+ ThienPhu: give
+ MadKnight: what
+ AntiSquid: kick
+ kovi: top4 is balanced
+ Illedan: Let's try to fix that :P
+ Famout: Guh, been far too long since I did stuff with actual pathfinding. Once this is ready to run though it's gonna be fun seeing how much I have mucked it up. 
+ Famout: And forgot 2D arrays don't like to be passed without their size fixed in stone.. Anyone know if the Ocean of Code challenge ever changes the map size? 
+ Counterbalance: it's constant
+ Famout: That's great, used to lots of things changing in a challenge and was keeping size flexible, that makes it a lot easier. 
+ Counterbalance: whoops <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/448038500">https://www.codingame.com/share-replay/448038500</a>
+ eulerscheZahl: scared of mines? my bot does the same nonsense&#160;:(
+ Famout: The fact the mine blew up and he still didn't leave I think was the larger issue, big fish small pond.
+ Counterbalance: still too many possible mine locations.. Pre detonation:
+ Counterbalance: opp mine blast area: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/eee9b491-353f-4574-94bd-0377def767fb">http://chat.codingame.com/pastebin/eee9b491-353f-4574-94bd-0377def767fb</a>
+ Counterbalance: post:
+ Counterbalance: opp mine blast area: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/b21a5c48-d0b9-46fd-907a-065866944cfb">http://chat.codingame.com/pastebin/b21a5c48-d0b9-46fd-907a-065866944cfb</a>
+ Famout: Ah, fair enough, fear is the sub killer after all.
+ Nerchio: time to add mines to my bot :D
+ Famout: Moment of truth, time to see if I correctly coded full map pathfinding correctly the first time. 
+ Nerchio: probably not :D
+ Famout: The fact it just ran into an Island tells me no....
+ Famout: Huh, bugs in brand new untested code. strange
+ Famout: On the plus side, it did move at least. 
+ Nerchio: is there a better way of checking your 8 neighbouring squares than 8 ifs?
+ NormantasStankevicius: wdym?
+ NormantasStankevicius: 8?
+ Nerchio: when you are at 5,5 you have 8 squares around you
+ Nerchio: or wherever else
+ Valdemar: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/8e32e889-f42e-4296-9a38-866005493d80">http://chat.codingame.com/pastebin/8e32e889-f42e-4296-9a38-866005493d80</a>
+ NormantasStankevicius: well, if you need to check
+ NormantasStankevicius: if something is at range
+ NormantasStankevicius: you can do some range calculations
+ NormantasStankevicius: let's say
+ NormantasStankevicius: if I target cordinate is in those squares around me
+ Nerchio: valdemar its a vector?
+ Nerchio: i will be checking how many island squares there are around x,y
+ Nerchio: i want my mines to be placed with maximum area open
+ Nerchio: its simple
+ Valdemar: vec2i is x,y structure
+ Nerchio: but i am asking if there is anything better or nicer looking than 8 ifs
+ Nerchio: i am writing in java 
+ Valdemar: idea is to use array of shifts
+ JasonTruter: Whats the benefit of using different traversals in DFS?
+ Famout: Hmmm, the response time of 50ms might be an issue...
+ Famout: Great, I kinda need to check how much can be done in that time, to see just how badly I am going over it. 
+ Counterbalance: what language, Famout?
+ Famout: c++ 
+ Counterbalance: do you have the pragma?
+ Famout: I have never done anything with that before. 
+ Counterbalance: put this at the first line of your source file:
+ Counterbalance: that'll turn on compiler optimisations so it will run 10x faster or so.
+ Famout: Ah, that's why! Used to Visual studio where I handle all that stuff via the GUI 
+ Famout: Many thanks
+ D4yBr3ak: ofast = o3&#160;?
+ Counterbalance: O2
+ Counterbalance: more or less
+ D4yBr3ak: does it work for C too&#160;?
+ Counterbalance: It should, yes
+ D4yBr3ak: thank you
+ Famout: OK, much improved, got to turn 115, before I tried to doubleback for some reason. 
+ Famout: Admittedly did have to also put a limiter on the pathfinding, but I think part of that is some nodes doubling up over themselves. 
+ Famout: Huh, it doesn't seem to be respecting the closed node list, that would screw things up alright. 
+ Counterbalance: What are you using the DFS for?
+ JasonTruter: Pathfinding
+ Nerchio: i use bfs for targeting
+ kovi: nice illedan. not top4, but definitely closer
+ AntiSquid: how much rock-paper-scissors is there in legend kovi?
+ Illedan: Thx, let's see how we can fix that&#160;;)
+ kovi: antisquid, there is definitely some
+ kovi: but most of the time i cant tell the reason
+ NormantasStankevicius: I was around 116th in wood1, left wood and played the same code, and now in 5th/300~ in bronze
+ YannT: I can't figure out why I consistently have bad winrates against some bots and good ones against others
+ YannT: there's seemingly no strategy difference or whatever
+ kovi: yeah. even though i cant tell what is under the hood
+ revo1: it's works but what the hill is this game
+ Famout: Something is off with my code still.... but not crashing, and just won twice agaisnt the test bot... and I am way overdue for bed.
+ Famout: Screw it SUBMIT
+ Famout: Zero surprise, so far beating folks who run into islands/off the board....
+ Ran_42: can someone help me with python binascii
+ MadKnight: what's the problem&#160;?
+ Ran_42: i dont understand how to convert a ascii to binary
+ AntiSquid: google it
+ Ran_42: it converts to something weird
+ MadKnight: ord('x') returns u the code of a char
+ AntiSquid: that's what i do
+ Ran_42: i did google it
+ MadKnight: then subtract ord('a') from it
+ MadKnight: and u will get the alphabetical index of x
+ AntiSquid: ah wait you mean the chuck norris puzzle?
+ Ran_42: ye
+ <b>**Famout thinks making a passive aggressive sub that takes 600+ turns to win might be making the test battles take some time. </b></p><p><img src="/a/29443769474274" /> MadKnight: then convert to binary
+ MadKnight: index
+ Ran_42: it convert to this b'\x00\x00
+ Ran_42: instead of 0s and 1s
+ MadKnight: \x00 == 0
+ MadKnight: \x01 == 1
+ AntiSquid: build an array of 7 chars or something and then convert that
+ MadKnight: just replace this stuff
+ Ran_42: but everything is 0 then its worng
+ MadKnight: but it feels like u did something wrong
+ MadKnight: show your code
+ Ran_42: ye probably
+ JasonTruter: How do I progress to wood 1? I've got movement going where it resets surface when theres no other moves.
+ Ran_42: message = input()message = b.a2b_uu(message)
+ Ran_42: this too import binascii as b
+ AntiSquid: JasonTruter you need to track opponent and shoot them
+ Famout: JasonTruter or have REALLY good movement, a mix of both would be best. 
+ MadKnight: no u used the wrong thing
+ MadKnight: u gotta convert ord(message[i]) to binary
+ AntiSquid: also use bfs to save some space when going around the map so you surface less and then you definitely get wood 2 JasonTruter
+ JasonTruter: I'm on wood 2 right now
+ AntiSquid: i mean wood 1
+ JasonTruter: cool
+ JasonTruter: Going to start by firing aimlessly
+ AntiSquid: no
+ Nerchio: everybody has different tips haha
+ AntiSquid: that's a bad idea
+ Famout: I did a bit of overkill and set up pathfinding to dig out a path that uses most of the screen before surfacing, no code for firing torps
+ JasonTruter: Is it
+ Nerchio: i did random shooting and random movement until bronze i think
+ AntiSquid: save shots for when the opponent location is known
+ Ran_42: thanks mad knight i got one more question
+ Famout: With %50 of the battles done, it is ranking me above the king bot. 
+ Ran_42: why does it says 0b100... instead of 100...?
+ AntiSquid: Nerchio the must have overnerfed the bosses then or you submitted when the boss was broken first hour or so&#160;?
+ JasonTruter: So for pathfinding maybe use dfs so that Its faster to get to my opponent?
+ AntiSquid: whatever you like
+ JasonTruter: As BFS can take quite some time, I'll use dfs once I know location
+ Nerchio: no i mean random shooting and when you hit something then it narrows down their position :D
+ Counterbalance: bfs can be much faster than dfs
+ AntiSquid: that's a different story Nerchio
+ JasonTruter: bfs would search through layers, that would take longer?
+ JasonTruter: I guess I could slowly move toward my opponent with bfs
+ Counterbalance: you only visit each node once in bfs
+ JasonTruter: This game really got me working on algorithms lol, I normally work with high level code
+ AntiSquid: have a function with bfs and one with dfs and switch your bot to use either as you see necessary, you will then find out what's best
+ JasonTruter: for building webapps etc
+ Famout: Oh wow, only now I discovered I screwed up using rand and picking my spawn point. 
+ Famout: Also, woo! Wood1
+ AntiSquid: which languages JasonTruter?
+ JasonTruter: Writing in Java right now, but I write in python and javascript at work
+ JasonTruter: Do alot of AWS stuff
+ AntiSquid: nice
+ AntiSquid: why don't you get an avatar?
+ JasonTruter: I should hey
+ JasonTruter: This game has got me hooked right now
+ AntiSquid: the ranks on the leaderboard are like ocean waves, back and forth :D
+ AntiSquid: going *
+ Nerchio: for me its more like a sinking ship but okay
+ NormantasStankevicius: okay, my wood1 code put my in silver
+ JasonTruter: Don't know why my torpedo isn't firing
+ AntiSquid: check the console log in bottom left JasonTruter
+ Nerchio: this gold bot with MSG FATALITY is so annoying :D
+ JasonTruter: Torpedo is working
+ MadKnight: hey guys
+ MadKnight: are there any websites for artists where they can find a contract job&#160;?
+ Famout: OK then, added in extremely limited use of silence, lets see how well I do in wood 2
+ Famout: wood 1*
+ Nerchio: damn this gold bot is really good
+ eulerscheZahl: reaching legend is never easy
+ eulerscheZahl: except for Tron
+ Famout: Yep, bedtime now, but managed to reach rank 50 on wood 2 with just a pathfinding bot, good seafairing! 
+ Famout: wood1 dangit!
+ Nerchio: i guess i will submit and see how i do vs others i dont win too much vs this bot
+ Famout: Ah, wow, 50 outta 596, feeds good
+ JasonTruter: How would you know if opponent surfaced?
+ Counterbalance: it's given in the input
+ JasonTruter: sonarresult?
+ Counterbalance: the one after that
+ Counterbalance: line 3, opponentOrders
+ JasonTruter: Ah ok, thanks!
+ kovi: wow, almost 30, got pushed up
+ AntiSquid: with great power come great bugs!
+ JasonTruter: so true
+ JasonTruter: Fixed up all my bugs now
+ JasonTruter: Won with just movement&#160;:)
+ JasonTruter: But only ranked 300 lol
+ JasonTruter: need to improve
+ AntiSquid: anyone has a seed with almost no islands? please
+ Quidome: 0?
+ AntiSquid: 0 or close to 0, either
+ blasterpoard: seed=-430391657 AntiSquid
+ AntiSquid: thx
+ Nerchio: haha
+ Nerchio: opponent bot broke when i hit hit with torpedo and he used surface  5 times
+ Nerchio: so funny
+ JasonTruter: how would I use bfs without having to surface to get back to the root node
+ Swagboy: Why do you want to get back&#160;?
+ Swagboy: If so, that's np hard i'd say
+ AndrejVelichkovski: @JasonTruter can you write the whole thing you are trying to do with bfs?
+ jrke: any suggetion  coders strike gold league how to find angle
+ JasonTruter: trig
+ Uljahn: atan2
+ jrke: can u tell me algo
+ jrke: because i am in 8th standard so i didn't learn trig
+ jrke: plz
+ Uljahn: jeez, just go play fortnite
+ jrke: plz tell me
+ Astrobytes: plz google it
+ jrke: i can't understand it
+ Astrobytes: Fix it
+ jrke: please just tell me how to use and where to use
+ Astrobytes: No. You should try to learn.
+ AndrejVelichkovski: the thing is, if they tell you, you won't learn anything
+ AntiSquid: that's more than a line in chat worth of learning material
+ jrke: ok 
+ jrke: you are right
+ jrke: i will learn
+ AntiSquid: no, he will learn, but the chat is too small for that kind of classroom
+ jrke: thanks
+ AntiSquid: i would suggest playing a grid based game instead, no trigonometry
+ jrke: ok
+ Nerchio: I just realised that triggering mines gives out a lot of information as well
+ Nerchio: if your enemies can track it well
+ Counterbalance: yup
+ Nerchio: they can remove all the possible positions that weren't there at that time to place the mine at X Y
+ AntiSquid: ya but if you spin in circles and lay a mine in a similar rea?
+ AntiSquid: area *
+ Nerchio: you can remove some not all :P
+ JasonTruter: I have to rewrite my movement&#160;:(
+ Quidome: Zenoscave, are you online?
+ Counterbalance: There's a little icon,
+ Quidome: yes, but it doesn't match the green dot in the leaderboard
+ Quidome: so i thought i give it a try&#160;:)
+ Counterbalance: Sure&#160;:)
+ Quidome: So you can be online and not participating. Meaning you closed your chatr window?
+ Counterbalance: yes
+ Quidome: aha, well, then he won't see it :p
+ Counterbalance: appending something like ?disableChat  to the url does that
+ Quidome: is there another way to reach out?
+ Counterbalance: hmm.. I don't think so. You can send a private message, I think that also sends a notification, but you'd have to be able to click on their username in chat for that, or already have a private chat going
+ Counterbalance: ahh, /msg
+ Counterbalance: see /help
+ Quidome: where is the help
+ Counterbalance: just type /help here
+ Quidome: Nice
+ Quidome: hm, doesn't work either, you have to be on the chat...
+ Quidome: well, a pitty
+ Counterbalance: you can follow him
+ Quidome: I am going to try that
+ Counterbalance: then on your profile page, there's a friends tab, and there's a private message button there. That'll probably work
+ Quidome: After he accepts my follow request, we will see
+ Counterbalance: AFAIK acceptance is not needed
+ eulerscheZahl: to send someone a private message, that person has to follow you, not the other way
+ eulerscheZahl: i recommend sending a private message on the forum
+ eulerscheZahl: triggers an email notification
+ Quidome: :thumbsup:
+ Quidome: He euler, you already in! Congratulations!
+ eulerscheZahl: for a day already :P
+ eulerscheZahl: thanks
+ Quidome: Yeah watched you junoing within the hour or so, nice
+ Quidome: jumping
+ eulerscheZahl: deactivated my mine avoidance to get promoted
+ eulerscheZahl: then activated it again :D
+ JasonTruter: Thinking of storing a node that has 4 different neightbours
+ JasonTruter: What do you guys think?
+ JasonTruter: Would it make it eaier for me to traverse using bfs?
+ eulerscheZahl: somehow avoiding mines performs better in legend but did worse against the boss
+ eulerscheZahl: JasonTruter that's what I do
+ Quidome: interesting.
+ eulerscheZahl: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/e05707fd-9a50-49f0-94e9-18079bf7cf19">http://chat.codingame.com/pastebin/e05707fd-9a50-49f0-94e9-18079bf7cf19</a>
+ Quidome: Now i lost my debugging possibility and am hunting Zenoscave
+ eulerscheZahl: i'm sure others print their stats as well
+ Quidome: OK
+ Quidome: Does anyone else print their remaining locations count
+ Quidome:&#160;???
+ Counterbalance: my bot prints them too - similar rank as zenoscave
+ eulerscheZahl: Risen too
+ eulerscheZahl: don't ask me how accurate these numbers are
+ Quidome: Great, going to compare them with mine, thnxs
+ AntiSquid: i print an useful assessment of the enemy bot
+ Quidome: great thnx
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/448160974">https://www.codingame.com/share-replay/448160974</a>i officially hate this game now
+ eulerscheZahl: so much rock paper scissors
+ Nerchio: why?
+ Quidome: Muda 
+ eulerscheZahl: (or maybe my bot is just bad)
+ Nerchio: your bot moved into enemy territory
+ eulerscheZahl: i'm allowed to move whereever i want
+ Nerchio: :D
+ AntiSquid: my bot is full of bugs
+ Nerchio: you are allowed
+ Nerchio: but don't be surprised when you get shot
+ Counterbalance: too bad we dont get opp's MSG or the bots could communicate
+ dbdr: he didn't get shot by mines
+ dbdr: so territory is not relevant
+ AntiSquid: not sure if i told you but it's these bugs that give it +50 ranksmy new rewritten bot will hopefully get legend though, and no bugs ihope
+ eulerscheZahl: just me fighting an invisible opponent while my location is clear
+ AntiSquid: ya in that replay you give too much info away
+ AntiSquid: also my output is helpful 
+ Counterbalance: you ignore silence?
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/448165415">https://www.codingame.com/replay/448165415</a> maybe i should use it more often?
+ Quidome: @counterbalance, are you pruning remaining enemy positions when to high?
+ Counterbalance: yes, but only &gt; 10k
+ Counterbalance: I have no idea how to prune effectively&#160;:(
+ Nerchio: antisquid silence spammer :O
+ Zenoscave: Quidome how did you get my email?
+ Counterbalance: it works!&#160;:)
+ eulerscheZahl: i told him how Zenoscave
+ darkhorse64: nagatwin removes duplicates but I do not know ho
+ eulerscheZahl: from your github account
+ darkhorse64: *how*
+ Zenoscave: Ah smart
+ Zenoscave: good thinking
+ eulerscheZahl: and also a lie
+ eulerscheZahl: private message on cg forum
+ Zenoscave: yeah i didn't get any notification from that hahah
+ Astrobytes: Eulersche Troll
+ wlesavo:  not a lot of promotions today huh
+ eulerscheZahl: 0 to be precise
+ wlesavo: i expected legend to grow faster
+ eulerscheZahl: all your fault!
+ dbdr: eulerscheZahl and Illedan, please keep it up!<a rel="nofollow" class="external free" href="https://i.snipboard.io/WZS6c9.jpg">https://i.snipboard.io/WZS6c9.jpg</a>
+ eulerscheZahl: but still a week to go and we don't want a huge legend
+ wlesavo: lul
+ YannT: well yesterday people killed the boss so it lowered the bar temporarily, I think he's quite high now
+ eulerscheZahl: Illedan just submitted too
+ YannT: until someone can hurt it proper it's going to be hard to get promoted
+ eulerscheZahl: yeah, we destroyed the boss yesterday
+ eulerscheZahl: but then it recovered
+ dbdr: :innocent:
+ wlesavo: got raided
+ dbdr: great team work
+ eulerscheZahl: you only won 4-2 dbdr
+ dbdr: the straw that broke the camel's back
+ eulerscheZahl: and then this happened: <a rel="nofollow" class="external free" href="http://cgstats.magusgeek.com/app/ocean-of-code/nagrarok">http://cgstats.magusgeek.com/app/ocean-of-code/nagrarok</a>
+ ZarthaxX: boss currently is 31.28 and below 29.97
+ ZarthaxX: it's a bit high
+ Zenoscave: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/448172409">https://www.codingame.com/replay/448172409</a> 
+ Zenoscave: I still timeout
+ eulerscheZahl: directly after SILENCE, suspicious
+ eulerscheZahl: your tree explodes
+ Zenoscave: Yeah
+ Zenoscave: I don't have good tree pruning
+ Zenoscave: I consider every silence option
+ Zenoscave: How often is SILENCE N 0 used?
+ eulerscheZahl: often
+ Zenoscave: Might have to rework my bot to detect it
+ ZarthaxX: how do u detectthat
+ Zenoscave: is that a worthwhile task?
+ eulerscheZahl: top4: <a rel="nofollow" class="external free" href="https://imgur.com/a/YfmRduu">https://imgur.com/a/YfmRduu</a>
+ Zenoscave: back pruning
+ Zenoscave: Would just ignoring silence be good? and resetting if you loose them?
+ eulerscheZahl: sounds like a bad idea to me, losing too much information
+ Zenoscave: hmmmmm
+ eulerscheZahl: maybe considering some states more likely than others could help
+ Zenoscave: ok
+ eulerscheZahl: right now i assume equal probability for each
+ wlesavo: Zenoscave if you already considering such a drastic measures just merge
+ Zenoscave: merge?
+ Zenoscave: I don't understand
+ SavinVadim: Did anyone implement a kinda of circular movement?
+ Zenoscave: merge paths?
+ SavinVadim: I think that my movement (that goes from one side to another) gives too much info and is easy to predict
+ wlesavo: if to paths coming to the same point, take the common part of them and summ up the mines 
+ eulerscheZahl: be the spiral SavinVadim
+ wlesavo: you lose information, but not too much
+ Zenoscave: interesting
+ Zenoscave: I'll try that
+ AntiSquid: walk into your garden and spiral around
+ wlesavo: this is what im doing since wood 1 i believe
+ blasterpoard: wlesavo I have something similar, but I only join pairs of paths
+ eulerscheZahl: including the mines that were added on bronze&#160;;)
+ wlesavo: also only pairs
+ blasterpoard: basically divide the amount by two until it gets under a threshold
+ wlesavo: eulerscheZahl well, most of mine tracking for me was in silver, but the basic concept the same
+ pb4: eulerscheZahl&#160;: What are those graphs&#160;?
+ eulerscheZahl: there's a text above them
+ pb4: and when did you download the replays&#160;?
+ Zenoscave: top 4 player silence dists
+ eulerscheZahl: thank you Zenoscave
+ Zenoscave:&#160;:+1:
+ pb4: one graph = one player&#160;?
+ Zenoscave: yes
+ eulerscheZahl: yes
+ Zenoscave:&#160;;)
+ pb4: Which one am I&#160;? :D
+ Zenoscave: 2
+ pb4: nice graphs by the way
+ eulerscheZahl: but the number of games i used varies a lot
+ eulerscheZahl: pb4 is the 2nd indeed, 32 matches analyzed
+ eulerscheZahl: i just downloaded #1 + meso i got some of yours as well
+ pb4: wow, I surface 0 a lot of the time then&#160;!
+ eulerscheZahl: i didn't share your surface stats
+ pb4: silence*
+ eulerscheZahl: but you do 2x surface per game
+ eulerscheZahl: i remove SURFACE | KILL here
+ pb4: uh&#160;?
+ pb4: I do less than that I think
+ pb4: 1.4
+ pb4: Your sample might be too small
+ eulerscheZahl: 2x per game, 1.75x per 100 turns of your bot
+ eulerscheZahl: ok, i'll check...
+ kovi: which one was mine?
+ eulerscheZahl: 3
+ eulerscheZahl: pb4 1.56 surface in 313 matches
+ eulerscheZahl: and charts for top players are converging towards each other it seems
+ eulerscheZahl: some days ago they looked really different
+ pb4: Agreed
+ eulerscheZahl: kovi even with a bit of sonar now
+ eulerscheZahl: still less than the other players
+ kovi: wow, you track me hard
+ YannT: I assume you didn't do me since I'm lower?&#160;:)
+ pb4: who was #1&#160;?
+ eulerscheZahl: jolin
+ pb4: and #4&#160;?
+ pb4: siman&#160;?
+ AntiSquid: 2000 participants 
+ dbdr: \o/
+ Illedan: 2k \o/
+ ZarthaxX: nice :O
+ eulerscheZahl: of course i got stats for you YannT
+ eulerscheZahl: you haven't submitted in ages, for you i got the most battles
+ eulerscheZahl: and that:
+ eulerscheZahl: crashes: 448128749 447871204 447869471 447863277 447861340 447860809 447859358 447858637 447857329 447855358 447854224 447853683 447853254 447799136 447797590 447782229 447663750 447653728 447648577 447646966 447646750 447641545 447638629 447633505 447632842 447629881 447627069 447627057 447624486 447624038
+ YannT: yeah&#160;:|
+ YannT: next version shouldn't have this
+ Illedan: Hiding?
+ YannT: no, benchmarking
+ YannT: I submited yesterday y'know
+ YannT: so not "ages" :p
+ Illedan: xD
+ eulerscheZahl: compared to the other spam submitters there's a lot of dust on your yellow button
+ AntiSquid: if you keep it up you'll suffer submit withdrawal symptoms 
+ YannT: it's true I  like to be somewhat sure before pushing
+ Zenoscave: 999 submits 
+ Zenoscave: ...
+ YannT: benchmarking against top5 is more relevant than just pushing anyway in my estimation
+ Illedan: :D
+ eulerscheZahl: i have 721 matches for you YannT
+ eulerscheZahl: (your most recent bot that is)
+ AntiSquid: i am surprised i even have 292 submits
+ YannT: also I like that I can "freeze" agentIds used, so I can actually compare results
+ wlesavo: im benchmarking top 6 =)
+ blasterpoard: I have 49 ^^
+ eulerscheZahl: 141 C# submits + 1 Java here
+ blasterpoard: submits
+ YannT: otherwise those guy change their bot 10 times per minute so you can't compare anything
+ DEIZ21: hello, i have a problem with CG Spunk it doesnt work for me a,y idea?
+ eulerscheZahl: that tool broke years ago
+ YannT: I think that's deprecated
+ YannT: you want cgbenchmark
+ eulerscheZahl: and CG Enhancer
+ DEIZ21: ah, i need to run battle in batch mode
+ eulerscheZahl: cg benchmark
+ DEIZ21: i can search for it in CG?
+ eulerscheZahl: or brutaltester to play against yourself offline
+ YannT: (brutaltester I haven't found to be very pertinent with this game)
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://github.com/s-vivien/CGBenchmark">https://github.com/s-vivien/CGBenchmark</a>
+ DEIZ21: cool, thx
+ YannT: I have a version that seems to have a 50% winrate against top5
+ YannT: my rule is to do better than 50% before pushing tho :p
+ eulerscheZahl: my rule is to submit when i'm in a mood to do so
+ eulerscheZahl: or crying in desperation
+ dbdr: yolo
+ Illedan: I'm full on yolo
+ YannT: I can't for the  life of me figure out why kovi is my best winrate and pb4 / siman are my worst ones
+ YannT: there's no strategy difference to explain it
+ eulerscheZahl: Illedan climbing highi can't tolerate that, will fight back tomorrow
+ eulerscheZahl: my old enemy...
+ wlesavo: speaking about 50&#160;% <a rel="nofollow" class="external free" href="https://imgur.com/yVoTQYV">https://imgur.com/yVoTQYV</a>
+ Illedan: :D
+ dbdr: battle for #1 C# is full on
+ Illedan: I'm going for 1st
+ YannT: I think I've won #1 kotlin already :joy:
+ dbdr: well done YannT, you can rest now
+ eulerscheZahl: doesn't seem to be a hard fight
+ YannT: ahah no, not really
+ eulerscheZahl: in the past there were tshirts for the first in each language
+ YannT: it's such a sweet language tho, I don't know why you'd do Java over Kotlin ever
+ eulerscheZahl: but that was long ago
+ eulerscheZahl: i used kotlin recently
+ eulerscheZahl: for kotlin heroes on codeforces
+ YannT: it's so friendly about everything I love it
+ eulerscheZahl: and maybe intelliJ helped a bit to convert java into kotlin :innocent:
+ dbdr: fully automated?
+ YannT: whenever you think "I should be able to write something like this", it turns out you can
+ eulerscheZahl: there's an intelliJ plugin for that
+ eulerscheZahl: still a few minor things (not-null&#160;!!)
+ eulerscheZahl: but did a great job overall
+ eulerscheZahl: and that&#160;!! isn't a bug, just kotlin having other requirements than java
+ YannT: null checking is actually a sweet feature of the language
+ YannT: you can write stuff like
+ eulerscheZahl: yeah
+ YannT: maybeNullVar?.let { ...
+ YannT: and the let will only be done if not null
+ YannT: you never get a NPE again
+ eulerscheZahl: one thing that sometimes annoys me about java: catch every damn exception
+ eulerscheZahl: i understand that you should really do it for an enterprise project
+ eulerscheZahl: but when i code my 10 lines for a small private project, i don't care about exceptions
+ dbdr: throws Exception
+ YannT: kotlin is good for that too
+ YannT: val a: Int? = try { parseInt(input) } catch (e: NumberFormatException) { null }
+ YannT: it's a convenient one liner
+ eulerscheZahl: and add that throws to each function in the call chain up to main
+ dbdr: yes, or script it&#160;;)
+ eulerscheZahl: that wasn't the intention of java inventors
+ dbdr: or catch and wrap in RuntimeException
+ dbdr: sure
+ YannT: actually the "Int?." part here is even for clarity, it's not necessary
+ dbdr: the intention is to have robust code
+ YannT: val i = try { parseInt(input) } catch (e: NumberFormatException) { null }
+ dbdr: that's why python can be good for protoyping
+ dbdr: YannT, eulerscheZahl complains about having to catch exceptions, and you show Kotlin can catch exceptions&#160;;)
+ YannT: except in a very compact way
+ eulerscheZahl: except: pass
+ eulerscheZahl: python style
+ Zenoscave: [empty everything]
+ Zenoscave: js style
+ YannT: oh then
+ YannT: "Kotlin does not have checked exceptions"
+ YannT: :p
+ Astrobytes: noexcept, it either runs or it doesn't
+ dbdr: how do you guarantee you handle them then?
+ YannT: the kotlin standard library abstracts the checked exceptions  of JRE
+ eulerscheZahl: JS on CG <a rel="nofollow" class="external free" href="https://imgur.com/a/QjCX3rJ">https://imgur.com/a/QjCX3rJ</a>
+ YannT: you get nulls and stuff
+ dbdr: I mean, if it's not checke it means you program might crash at runtime
+ YannT: no
+ dbdr: potentially in rare cases
+ YannT: it turns checked ezxceptions into nullables, which in kotlin have to  be handled
+ YannT: so you might have something like 
+ dbdr: null is just one case
+ YannT: val i = parseInt(blah)&#160;?: 0
+ dbdr: what about IO errors?
+ aCat: hey  -when gold boss became nondeterministic&#160;:/
+ Zenoscave: The whole time
+ aCat: that makes testing against him useless
+ YannT: val bufferedReader: BufferedReader = File("example.txt").bufferedReader()    
+ aCat: hmm, why before I had imprssion it is otherwise..
+ dbdr: and if the read fails?
+ YannT: you don't get anything
+ dbdr: empty string?
+ YannT: no, unchecked exception
+ YannT: you can handle it if you want
+ dbdr: and i you don't you crash
+ YannT: otherwise you just get a null string
+ YannT: no
+ YannT: .use has built in exception handling
+ dbdr: ok, then it just does not go into that branch?
+ YannT: yep
+ YannT: that's the idea with kotlin
+ dbdr: sometimes that's fine
+ dbdr: sometimes it's not
+ dbdr: and this could be hiding the issue
+ YannT: well you can catch if you want, or you can use the kotlin abstraction and never have to catch anything , exceptions turn into nullables, so you just handle nullability of things (and the compiler makes you)
+ dbdr: everything looks fine, no error, but it does not do what you wanted, and no indication why
+ dbdr: ok, in that case it goes into the null handling
+ YannT: yes
+ YannT: if you want to handle a specific underlying exception, you can do that, and if you don't wanna it's just nullability handling, which in kotlin is the&#160;? operation
+ dbdr: so that's fine, but it's roughly equivalent to handling exceptions, i.e. you have to handle it someho
+ YannT: operator*
+ YannT: yes, you have to add a&#160;? somewhere
+ Astrobytes: Yeah but it's not as annoying as having to handle them in Java
+ dbdr: only if you want to ignore that case
+ dbdr: which you do sometimes but not always
+ YannT: path?.contains(this)
+ YannT: if path is null,  no exception
+ YannT: that returns a Boolean? type tho, not Boolean, so you have to write
+ dbdr: sure, but if it's a logcal error not to have a path, it's bad to get false
+ YannT: path?.contains(this) == true
+ YannT: no, a Boolean? can be true false or null
+ YannT: basically you cannot get a nullpointer, compiler won't let you
+ dbdr: I know that
+ YannT: Boolean? is not Boolean
+ dbdr: i'm saying a crash is better than incorrect semantics
+ YannT: then you can do
+ YannT: path!!.contains(this)
+ dbdr: right
+ YannT: you assert that path is not null and it will crash if it is
+ YannT: you *can* get nullpointers if you specifically want to&#160;:)
+ dbdr:&#160;:)
+ elsinnombre2d2: which heuristics do u use to get a good path?
+ blasterpoard: elsinnombre2d2 well, I have a 600-line "heuristic" for that that runs for 20 milliseconds
+ blasterpoard: I don't think that there's a knwon, simple algorithm that gives you a "good path" in this game
+ blasterpoard: at least, not really good
+ elsinnombre2d2: ofc, but u use some rules
+ elsinnombre2d2: maybe like choose a cell that is near to one visited
+ blasterpoard: uhm... maybe I use an evaluation
+ blasterpoard: of a long path
+ elsinnombre2d2: and why all use c++?  xD
+ blasterpoard: not just the next cell
+ YannT: a good starting point is using floodfill to calculate the number of available cells
+ blasterpoard: elsinnombre2d2 it's fast
+ elsinnombre2d2: than java too?
+ blasterpoard: java is not quite as fast
+ elsinnombre2d2: hmmm
+ Nerchio: im pretty sure you can get to the top with jkava
+ elsinnombre2d2: using floodfill, which depth do u get?
+ Nerchio: i am using floodfill for the whole map
+ Nerchio: for each of my possible moves
+ Nerchio: dont worry about this i think, you will have more problems with tracking the enemy
+ Nerchio: and potentially running out of time
+ AntiSquid: you can get to the top with python 3, but java is both uglier and slower than c++
+ blasterpoard: and you'll also hit the character limit faster with java
+ blasterpoard: that matters in this game at the top too
+ Nerchio: in intellij i see i have 36k chars
+ Nerchio: how much is the limit?
+ mlomb: 100kB
+ YannT: my bot is like 500 lines :p
+ pb4: -_-
+ Rbee: Is there any way to view the past questions on clash of code?
+ elsinnombre2d2: nah, my problem is finding the path, my  tracking algorithm is not really expensive at this moment
+ Nerchio: it means it's not good enough haha :D
+ AntiSquid: golfed? YannT
+ YannT: nope, kotlined :p
+ Illedan: I'm at 60k chars
+ elsinnombre2d2: why floodfill? i cant see the utility
+ YannT: 561 lines, I just added a thing to test
+ YannT: :p
+ aCat: YannT impressed&#160;;-)
+ Illedan: 2k lines
+ aCat: but I believe the lines are 'write once' never read
+ Illedan: kovi, close enough to top 4 now?&#160;;)
+ aCat: haskell-style ;p
+ YannT: it's really the same kind of thing yes&#160;:)
+ kovi: nice illedan!
+ Illedan: dbdr and pb4 inc to ruin my party&#160;:(
+ wlesavo: wow
+ Nerchio: who are the guys writing Cpt. bots for this game
+ dbdr: wlesavo wrote LeChuck
+ wlesavo: everyone and noone
+ Astrobytes: The Wood bosses are written by the game authors and the other bosses are user-bots chosen by CG
+ Nerchio: so when legend opened the bot was chosen from one of the top at that time?
+ dbdr: yes
+ Astrobytes: Yes, w lesavo's bot (from that time) is the gold boss
+ Nerchio: it's too strong&#160;:(
+ Nerchio: i know who to blame now
+ YannT: consider lucky you didn't get his current bot as boss :p
+ wlesavo: it differs a little codewise, but i actully broke smth in  a boss submit
+ blasterpoard: Nerchio we need a strong boss, because otherwise we'd need more games to climb in legend
+ Nerchio: yea makes sense
+ dbdr: also legend should be legendary&#160;;)
+ Nerchio: it's cool that potential kill shots can be done from like 10 squares away
+ blasterpoard: ...and it's not *that* strong
+ Nerchio: i am working on implementing kill shots like the gold boss who teleports across the map to finish me :D
+ dbdr: TELEPORT X Y
+ blasterpoard: I don't have that in my bot
+ Nerchio: i just died to the cpt
+ Nerchio: imagine this
+ Nerchio: surface -&gt; move and load 1 more power so you can use silence -&gt; torpedo -&gt; trigger mine
+ Nerchio: this was the kill shot from 3 hp
+ Nerchio:&#160;:(
+ Nerchio: feelsbad
+ blasterpoard: quite common
+ wlesavo: only smitsi teleports
+ AntiSquid: stronger boss doesn't solve slow submitsbut it's good to have a strong boss since it will be a multi anyway and it goes straight into multi after this
+ AntiSquid: meaning most people stay active improve and flood legend 
+ AntiSquid: maybe
+ YannT: multi bosses won't necessarily be the same though?
+ AntiSquid: i am sure they will, since the ladder doesn't change
+ AntiSquid: you go straight into same league as you weere in the contest
+ blasterpoard: YannT I think in crystal rush they are
+ kovi: gratz pb4
+ YannT: ahah 33 :D
+ JasonTruter: I'm in wood 1 now
+ Astrobytes: gratz JasonTruter
+ Nerchio: thats not bad congrats
+ JasonTruter: Just movement though
+ Nerchio: that's how most of us start 
+ YannT: gratz JasonTruter&#160;:)
+ JasonTruter: Thanks guys
+ YannT: now time  to fire some torpedoes
+ JasonTruter: Yeah
+ JasonTruter: I have silence and sonar now
+ Nerchio: i used sonar+movement+torpedoes until gold
+ JasonTruter: I've written my code to be more manageable now
+ JasonTruter: hated all the ifs
+ Nerchio: i live and breath if skyscrapers
+ icecream17: 8th place out of 6000, wow
+ JasonTruter: SHWEET
+ icecream17: I used to have a super complicated thing for CSB, but I replaced it with a single if statement. wow
+ Nerchio: what is csb
+ icecream17: coders strike back (i don't feel like doing ocean of code anymore)
+ Nerchio:&#160;:(
+ icecream17: I'm in silver, but can't make anymore progress. Every improvement makes it worse somehow
+ Nerchio: maybe you will come back with fresh mind :D
+ wlesavo: so pb4 was it just lucky submit or real improvements?
+ AntiSquid: go to discord and watch the streams, maybe you'll figure something out icecream17or save the bot and start over and try something new
+ pb4: wlesavo&#160;: real improvements
+ JasonTruter: Question, should you use all the actions?
+ JasonTruter: just because they are there?
+ JasonTruter: I intend on just using sonar and torpedo
+ rwilson: JasonTruter torpedo too early &amp; you give away your position. and if you don't use Silence, you won't be able to re-hide after your position is known.
+ JasonTruter: I see
+ pb4: JasonTruter&#160;: early on focus on torpedo/silence, then add mines
+ JasonTruter: When you fire a torpedo do you give away positon?
+ pb4: somewhat
+ JasonTruter: Oh using your life?
+ rwilson: early leagues easy to pass with torpedo and silence though ... silver &amp; gold seem to be where early torpedos mess you over too hard to pass on.
+ pb4: You show you're somewhere in range of where you shot
+ JasonTruter: I really need to get some decent pathfinding going
+ JasonTruter: I think it's holding me back from moving towards a position
+ JasonTruter: Example if I need to move towards my opponent if I know he's in a specific location, or moving to sectors
+ NormantasStankevicius: Just curious guys, what do you normally do, when your opponent uses silence?
+ JasonTruter: Is it worth rewriting everything?
+ YannT: probably not, optimizing your path to stay underwater longer is generally more important than trying to get to the ennemy
+ Astrobytes: JasonTruter are you floodflilling from each possible direction?
+ Astrobytes: *floodfilling
+ JasonTruter: floodfilling?
+ Astrobytes: Yeah, just checking the most accesible cells from each position
+ Astrobytes: *accessible
+ JasonTruter: Ah I see, no I'm not flood filling right now
+ JasonTruter: I have my own algorithm that uses a bunch of different inputs to detect the area
+ Astrobytes: Flooding with a BFS is useful
+ JasonTruter: Yeah, then Im planning on BFS to location while tracking every move my opponent does and updating my destination everytime
+ Astrobytes: If you go in the direction with the most available accessible cells you'll maximise your tiem under water, for now
+ Astrobytes: *not correcting any more of my typos
+ JasonTruter: Maximizing time just reduces being seen right?
+ JasonTruter: time under water*
+ Astrobytes: Yeah, unless sonar/tracking etc, but it's a good start
+ JasonTruter: A tactic I could use is reset on edge of map, then BFS to opponent
+ JasonTruter: So I have a clear path
+ JasonTruter: Surface on edge of map *
+ Astrobytes: You don't wanna surface too much, you lose life remember
+ JasonTruter: Oh yeah forgot about that. But possibly do it once just to get a clear path
+ Astrobytes: Try going to cell with most available flooded cells and surface when you run out. 
+ rwilson: if you watch the higher league replays, you'll see that most of the time anyone uses SURFACE is to be able to go back over their own path - because they don't want to keep going ( usually a mine field, or face check an enemy that knows their position )
+ JasonTruter: I see
+ JasonTruter: So best advice is find a path where you don't surface at all
+ rwilson: simple flood fill to avoid surfacing should be enough to help get up to bronze/silver ( with a bit extra) 
+ Astrobytes: ^^
+ JasonTruter: I'm fairly new to algorithms&#160;:) so learning along the way
+ Astrobytes: Good time to learn dude!
+ JasonTruter: I work with high level code mostly, and understand data structures well
+ JasonTruter: All the algo's were built already
+ JasonTruter: So now I can actually think
+ rwilson:&#160;;) and a fun way to do it...&#160;;) so much easier to go learn BFS if you'lre make that next League ( versus .. just because  :) )
+ JasonTruter: Yeah dude
+ JasonTruter: I'm actually hooked to this game
+ Astrobytes: You'll get hooked to the others too, I guarantee it :D
+ Astrobytes: Anyway, I'm out for tonight
+ Astrobytes: cya's later
+ JasonTruter: cheers!
+ YannT: it's actually not a bad idea to  go to leaderboards and watch some high rank replays to get an iidea of what you probably should be doing&#160;;)
+ YannT: <a rel="nofollow" class="external free" href="https://www.codingame.com/contests/ocean-of-code/leaderboard">https://www.codingame.com/contests/ocean-of-code/leaderboard</a>
+ YannT: "view last battles"
+ YannT: although you don't have mines yet
+ Nerchio: how do you guys tackle life lost?
+ Nerchio: i mean people can surface/get hit by their/your mine your/their rocket etc.
+ rwilson:&#160;;) life lost plays into a number of scenarios ..   if you're careful, you can use most of them to gain more information
+ rwilson: the 2 main ones being,  1. they SHOULD know where you are down to at least 9 squares, unless it was a surface --- so you might want to run.
+ rwilson: 2. if they got hurt by your stuff, you can narrow your knowledge of where they are
+ Nerchio: i know i do most of this stuff
+ Nerchio: but what i am saying is
+ Nerchio: sometimes you get false positives
+ rwilson:&#160;;) only if you don't code it to account.. 
+ Nerchio: like i hit a guy with direct rocket + a mine so 3hp
+ Nerchio: but i usually think that direct rocket is 2hp
+ rwilson: i.e.  if you assume they lost life from your shot, but they also surfaced...  then you've coded it wrong&#160;;) 
+ Nerchio: so if i code it for 3hp when they combo
+ Nerchio: what if i shot him 2 hp and he shot himself for 1hp
+ Nerchio: then i have false positive and my tracking my fall apart
+ rwilson:&#160;;)   it's only a false positive if you don't take into account the other information you have.. 
+ rwilson: i.e.  you always know if he surfaced, you always know when he triggers, and you always know when they fire a torpedo .. 
+ Nerchio: hmm
+ rwilson: if any of those comibnations could 'confuse' your knowledge of 'did i hit him?' ...  then you must assume you did not
+ Nerchio: i should trust my stats more i guess
+ Nerchio: I do assume i did not and thats why i lost some games
+ rwilson: ....&#160;;)  or split it .. and record it probabilisitically , like MAYBE ..  but can't use it as 100% knowledge like you can while figuring out path movements.. 
+ Nerchio: i already have enough splits because of silence :D
+ Nerchio: but actually you gave me a nice idea
+ rwilson:&#160;;)  might be able to improve that a bit...     most of the time in my games, it looks like silence only hides for usually 1 silence ( meaning, by the time you can silence again, your position &amp; prior path has converged
+ Nerchio: true
+ Nerchio: but i should consider 3hp as 2+1 so direct hit + something
+ Nerchio: i mean there could be stuff like 1+1+1 but that would be crazy :D
+ Nerchio: maybe not worth taking that into account
+ rwilson: my mine, their mine &amp; surface, or a missed torp
+ Nerchio: i mean surface i basically ignore
+ Nerchio: in terms of hp lost
+ Nerchio: so its more like rocket close/rocket close/ mine or something
+ Nerchio: instead of direct rocket + something
+ Nerchio: i guess still lots of possibilities
+ rwilson:&#160;;) unless you thought your mine detonation caused it ...   ;)  i watch to make sure i don't accidentally narrow location due to dmg.. when they actually just surfaced.. 
+ Nerchio: i did narrow down a few times too much and i lost track of everything thats why i want to be careful with this now
+ Nerchio: I need to remember if I shot 100% shot last turn or not
+ rwilson:&#160;;)  gets a bit trickier if you fire a torp and mine ...   he takes 1 dmg..    you can still narrow - but you have to be careful with how you do it.. 
+ Nerchio: i can't make a mistake a direct shot for 2 close-torpedos for 1hp
+ Nerchio: yea
+ Nerchio: the one you are talking about
+ Nerchio: i mean
+ rwilson:&#160;;) you don't really know / care if you THOUGHT it was 100% ... you just know the result ...  use that to correct your 'belief' of where they are.
+ Nerchio: if torpedo and mine don't overlap you can't do much i guess
+ Nerchio: i will need to reconsider this part of my bot
+ Nerchio: still have some mistakes
+ rwilson:&#160;:)  225 cells max,   torp and mine cover at most 18 in a turn ..   even if they don't overlap , you a 1ph hit  would confirm their in one of those 18 ( just don't get confuesd by surface, or enemy self damage )
+ Nerchio: that's what i mean they can hit themselves and unless you know their exact position you can't know
+ rwilson: lots of info ...  and it does look like many of the top guys have that coded in already .. but it doesnt' look like thats the MAIN thing
+ Nerchio: sure but every turn counts so properly assessing this information is important
+ Nerchio: in some cases you probably just have to accept that you can't use the knowledge from hp lost
+ rwilson:&#160;;) it's a giant pile of VEN Diagrams&#160;;)   you can always glean SOME information out of it ...     it may not always be 'THEY ARE HERE "...  but it's always (  are they inside or outside this set of spaces )
+ Nerchio: okay thanks i will think about this tomorrow but maybe focus first on fixing some other stuff 
+ YannT: the only really confusing information is if they hit themselves
+ pb4: Why would it be confusing&#160;?
+ rwilson:&#160;;) was thinking the same thing... 
+ rwilson: but i totally get what YannT is getting at ...    you'd assume MOST of the time they wouldn't shoot themselves 
+ YannT: also if they shoot themselves, you don't know when that happened in their turn (it could be before or after moving)
+ rwilson: but i coded in a special allowance to allow self damage if it wins... ( and i see a lot of top bots do MORE self dmg , even if it's a couple turns till it wins )
+ YannT: you know your torpedo hits before they move, you know when they fired theirs (before or after moving), but you don't know what hit what really
+ rwilson:&#160;;) right,  the area of uncertainty is larger than normal.. but shouldn't be too confusing&#160;;) 
+ YannT: so if they hit themselves, it  can be  confusing
+ YannT: you actually miss the information
+ Nerchio: that's what i am getting at
+ YannT: you fire a torpedo, they fire a torpedo, they lose life, you don't know which hit what
+ Nerchio: if you do damage and you expect it it's all good
+ Nerchio: but if they also fire a torpedo and hit themselves for 1hp or something it gets tricky
+ YannT: there's actually missing information, you can't know
+ rwilson: ... but you know the damage was done whilst inside one of those blast radius ...  so .. keep all potentials inside..  and prune all outside .. 
+ YannT: yep
+ YannT: still, it's confusing :p
+ Nerchio: yeah thats obvious
+ Nerchio: but ideally i would like to say, i see 3 positions i shoot a rocket for '2' hp so I would like to think its a direct hit
+ Nerchio: but if they also shot a rocket, was it really a direct hit?
+ rwilson:&#160;;) and that's exactly what you learn&#160;:) ..   you only get a direct hit, if you fire , do no other dmg, they don't sufrace , trigger or torp..  THEN you know it's a direct hit&#160;;) 
+ rwilson: SOMETIMES you 'KNOW'&#160;;) but sometimes it'll be a cloud of 2 or 3 things .. ( that can still DRASTICALLY narrow down their location ... )
+ wlesavo: lol 40% vs pb4 and 50 vs illedan is enough to push me on their subs
+ rwilson: nice
+ pb4: push you up&#160;?
+ wlesavo: yes
+ pb4: :D
+ wlesavo: from like 10-12 to 7
+ YannT: pushing small improvements&#160;:)
+ YannT: not doing well :D
+ icecream17: oooh 2nd place
+ icecream17: YAS. Cars collide with each other. huh
+ icecream17: What? 20998th? That doesn't even fit on the square...
+ Zenoscave: Are any legend players detirministic?
+ elderlybeginner: how to find which easy puzzles gives bronze achievements
+ elderlybeginner:&#160;?
+ elderlybeginner: maybe achievement showcase shows them all?
+ struct: It shows all yes
+ elderlybeginner:&#160;:(then it's time for medium ones
+ struct: Its a good ting
+ struct: thing*

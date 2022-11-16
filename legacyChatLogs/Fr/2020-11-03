@@ -1,0 +1,1249 @@
+ PereDodhuu: Bonjour, quelqu'un a t'il deja effectué l'exrcice "MIME type"? En bref, il faut retrouver le format du ficher en fonction de son nom grace à la partie située après le point. J'essaie donc de split le nom avec le séparateur point mais je dois mal faire car ça ne fonctionne pas.
+ PereDodhuu: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/b4f53659-7332-445d-a60f-870f49f3c400">http://chat.codingame.com/pastebin/b4f53659-7332-445d-a60f-870f49f3c400</a>
+ PereDodhuu: A chaque ligne il ne distingue qu'une chaîne de car, donc ne sépare pas du tout avec le point...
+ JBM: je sais pas quel langage c'est mais on dirait que tu sépares avec une chaine bien plus complquée qu'un simple point
+ PereDodhuu: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/090cd442-daca-44e6-afef-c18427d265f4">http://chat.codingame.com/pastebin/090cd442-daca-44e6-afef-c18427d265f4</a>
+ PereDodhuu: Comme ceci, donc avec seulement le point, il ne trouve même pas de chaîne de car, la valeur D est 0 à chaque ligne
+ JBM: split prend une regex
+ JBM: . est un metacaractere regex
+ JBM: échappe-le
+ PereDodhuu: J'ai pas compris&#160;:)
+ lhm: Remplace "FNAME.split(".");" par "FNAME.split("\.");"
+ JBM: en regex, . signifie «n'importe quel caractère»
+ JBM: t'es en train de découper sur n'importe quel caractère
+ JBM: du coup il reste plus rien, c'est logique dans son genre
+ PereDodhuu: je vois
+ PereDodhuu: error: illegal escape character
+ JBM: double le \
+ PereDodhuu: quand je fais avec "\."
+ JBM: en chaine java, \ est un metacaractere...
+ PereDodhuu: Comment l'echapper?
+ JBM: t'as deux niveaux à passer pour atteindre la regex
+ JBM: en le doublant
+ PereDodhuu: Ah le résultat est différent. Cest pas bon mais j'avance, je vais creuser. Merci&#160;!
+ JBM: :bow:
+ PereDodhuu: J'ai vu un gars qui faisait String Separateur = "."Puis Extract.split(Separateur)Mais ça ne marche pas non plus comme ça
+ PereDodhuu: Trouvé&#160;!!! 
+ PereDodhuu: String [] decoupe = FNAME.split("\\.");
+ PereDodhuu: Merci a vous
+ PereDodhuu: Pour info le point comme vous dites est un regex donc on utilise un back slash. Sauf que le backslash lui même a une autre signification donc on le double :p
+ JBM: euh
+ JBM: c'est ce qu'on t'a dit non?
+ PereDodhuu: Oui
+ PereDodhuu: mais pas pour le backslash
+ JBM: (08:27:30) JBM: double le \
+ JBM: (08:27:41) JBM: en chaine java, \ est un metacaractere...
+ PereDodhuu: mdr
+ PereDodhuu: bha j'avais pas lu
+ PereDodhuu: bien joué
+ JBM: ah brav
+ JBM: *o
+ PereDodhuu: haha
+ Bob: tortue&#160;!
+ Bob: Automaton2000, tortue&#160;?
+ Automaton2000: et en plus, je suis en train de jouer à la main
+ Bob: euh tu fais ce que tu veux avec tes mains Automaton2000 mais tu le gardes pour toi, merci
+ Automaton2000: parce que je ne me vois pas le rapport
+ Bob: AutomatonNN, j'espere que t'es plus calme
+ AutomatonNN: oui
+ Bob: parfait
+ Bon[]Crayon: :smiley_cat: salut :smiley_cat:
+ PhilouBaudrand: hello
+ Bon[]Crayon: :robot: AutomatonNN :turtle:
+ AutomatonNN: non je suis pas tres bien toi&#160;:(
+ Bob: salut
+ PhilouBaudrand: quelqu'un saurait m'expliquer l'exo the-descent à tout hasard svp??
+ Bob: moooooh pauvre AutomatonNN
+ Bob: bisou
+ AutomatonNN: void trop de point de te touche 
+ Bon[]Crayon: :robot: Automaton2000 Alors comment va cette tortue&#160;?
+ Automaton2000: recurse: je ne sais pas qui c'est
+ Bob: t'es bien le seul, Automaton2000
+ Automaton2000: faudrait que je commence a me demander si je vais pas le faire sur une seule ligne
+ Bob: golf it, Automaton2000
+ Automaton2000: je suis content de voir que mon bot ne fait que du c
+ PhilouBaudrand: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/the-descent">https://www.codingame.com/ide/puzzle/the-descent</a>
+ PhilouBaudrand: quelqu'un surait  m'aider là dessus svp? je ne comprend pas du tout
+ Bon[]Crayon: Qu'est-ce que tu as compris&#160;?
+ PhilouBaudrand: ps grand chose :unamused:
+ PhilouBaudrand: j'ai compris qu'il fallait changer mon altitude
+ PhilouBaudrand: pour dégomer les montagnes
+ Bob: alors en fait non
+ Bob: ton altitude change toute seule&#160;:)
+ PhilouBaudrand: ah ok
+ PhilouBaudrand: merci
+ Bon[]Crayon: Tu ne diriges pas le vaisseau&#160;?
+ PhilouBaudrand: du coup en fait je reprend j'ai rien compris mdr
+ Bob: le but du jeu c'est de degommer les montagnes avant de te crasher dessus
+ Bon[]Crayon: Tu es le tireur.
+ PhilouBaudrand: ok
+ Bob: a chaque passage que tu fais tu peux tirer sur une seule montagne pour la reduire
+ CopperFr: tu peux changer ton altitude si tu vuex te faire dégommer par les montagnes&#160;?
+ PhilouBaudrand: ah ok
+ Bob: a chaque tour de jeu, on te donne la hauteur de chacune des montagnes (qui peut etre 0)
+ Bon[]Crayon: C'est AutoamtonNN le pilote, donc tu es mal .
+ Bob: et tu dois donner le numero de celle sur laquelle tu veux tirer
+ PhilouBaudrand: donc a mon premier passage faut que je degome la montagne 0 qui est la plus haute pour pas me la prendre 
+ Bob: si c'est la 0, oui
+ Bob: ca ne sera pas forcement la 0 sur tous les cas de figure
+ PhilouBaudrand: mince mon vaisseau explose direct ça doit pas etre comme ça mdr
+ Bob: le but de l'exercice c'est precisement d'analyser les hauteurs qui te sont donnees pour determiner quelle montagne est la plus haute
+ leojean890: tu rergardes quelle est la plus haute puis tu la choisis
+ Bob: note aussi que tu as un bouton "indices" dans le menu a gauche
+ PhilouBaudrand: oui j'ai vu les indics avant de vevir vous embeter 
+ Bob: t'as vu que ca allait jusqu'a la solution complete&#160;?
+ CopperFr: pourtant que la montagne est haute
+ PhilouBaudrand: et comme je comprenais pas j'étais sure de trouver de gentils petits dev pour me filer un coup de pouce
+ PhilouBaudrand: merci a vous
+ PhilouBaudrand: non volais pas cliquer dessus
+ PhilouBaudrand: vais essayer sans regarder solution
+ PhilouBaudrand: merci pour vos conseils
+ Bob: ben a ce stade, on ne pourra pas t'en dire beaucoup plus que ce qu'il y a dans les indices, en fait
+ PhilouBaudrand: si dejà vous m'avez aidé merci a vous
+ PhilouBaudrand: moi j'avais compris a l'envers&#160;;)
+ Bob: si tu comprends ce qu'il faut faire et que tu n'y arrives toujours pas, c'est que c'est plus une question de le traduire dans le langage de ton choix, mais du coup c'est autre chose
+ PhilouBaudrand: c'est sympa d'avoir pris le temps de me repondre
+ PhilouBaudrand: je vous remercie
+ Bob: bah on est la pour ca, au moins en theorie&#160;:)
+ PhilouBaudrand: ok je prend note&#160;;)
+ PhilouBaudrand: ah ok&#160;:)
+ Bob: on ne fait pas que troller les nouveaux :D
+ PhilouBaudrand: :joy:
+ CopperFr: :D
+ CopperFr: (ah moi si)
+ Bob: (sauvage)
+ PhilouBaudrand: :joy:
+ Stilgart: bonjour à tous, tortue Automaton2000 et licorne AutomatonNN
+ AutomatonNN: oui
+ Automaton2000: et faire un truc du genre)
+ leojean890: tiens texas hold them n'est plus en VH&#160;?:P
+ leojean890: o/ stilgart 
+ Stilgart: il ne l'a jamais été, si&#160;?
+ leojean890: je crois que oui^^
+ leojean890: (je l'ai pas fait car je sentais que ça allait être chiant à faire mais j'hésitais quand même car semblait pas trop dur&#160;;))
+ Stilgart: Stilgart about 1 month ago
+ Stilgart: ha bah tu dois avoir raison :D
+ leojean890: ah t'as fait en sorte de le déplacer&#160;?:P
+ Stilgart: j'ai fix ça il n'y a pas longtemps, en plus
+ leojean890: il y a un mois :P
+ leojean890: ok;)
+ leojean890: je me doutais que c'était toi car tu m'avais dit de me grouiller de faire ma quête de 2 puzzles VH car t'allais en replacer ailleurs;)
+ leojean890: du coup les heureux élus ont été bulls&amp;cows et résistance
+ darkhorse64: le bulls and cows, c'est un medium non
+ darkhorse64:&#160;?
+ leojean890: non VH^^
+ leojean890: mais il se bruteforce;)
+ darkhorse64: en vrai
+ leojean890: il est pas si dur que ça
+ leojean890: résistance ça apsse avec mémoisation
+ Stilgart: resistance il devrait être en hard
+ Bob: music scores, il est toujours en very hard&#160;?
+ Stilgart: aussi
+ darkhorse64: resistance j'ai toujours pas vu comment gérer proprement morse -&gt; lettre -&gt; dictionnaire (les différents cas possibles)
+ CopperFr: J'aime bien le hard mais pas ça
+ Stilgart: on peut pas toucher aux puzzles de CG
+ Stilgart: après, music scores je l'ai trouvé pas si facile
+ Bob: ah oui&#160;?
+ Bob: c'est le premier VH que j'avais fait je crois
+ leojean890: barnyard faut que je retrouve comment résoudre des systèmes d'eq de manière efficace :P j'avais fait ça en prépa mais j'ai oublié&#160;;)
+ Stilgart: tu as un peu de reverse engineering à faire pour passer tous les tests
+ <b>**Stilgart tent un pivot de Gauss à leojean890</b></p><p><img src="/a/29407964997640" /> Bob: music scores c'est "juste" suivre des lignes et regarder les pixels blancs et noirs pour trouver les ecartements des notes
+ Stilgart: tend*
+ leojean890: music scores faut que je regarde, pas encore regardé
+ Stilgart: Bob: mais il y a des cas à la con
+ leojean890: ah ouais pivot de gauss, les souvenirs de prépa reviennent&#160;:&gt;P
+ Bob: ah&#160;?
+ Bob: pas le souvenir
+ Stilgart: je sais que mon code de base ne faisait pas 100% à cause d'un cas que j'ai mis du temps à identifier
+ Bon[]Crayon: music scores c'est un test qui est pénible
+ Bob: de memoier si tu calcules tes offsets comme il faut, ca devient quasi trivial
+ Stilgart: après, le bon mot c'est effectivement "pénible"
+ leojean890: du coup faut que je me prépare à ce qu'il soit chiant&#160;;)
+ Stilgart: il a plus sa place en very hard que resistance, selon moi&#160;:)
+ Stilgart: après, c'est pas ML3 non plus
+ CopperFr: oui sans problème
+ Stilgart: (en vrai, music score je le mettrais en hard aussi, mais bon)
+ leojean890: ML3 c'est relou;)
+ leojean890: du bricolage...
+ leojean890: j'ai que 50%
+ leojean890: j'ai une bonne flemme à le continuer :P
+ Bob: je suis pas tout a fait capable de comprendre exacte,ment mon code mais globalement c'est
+ leojean890: tu l'as pas mal bidouillé aussi&#160;?:P
+ Bob: trouver les ecartements des lignes de la portee et des notes
+ leojean890: ah je parlais de ML et toi de MS :P
+ CopperFr: je préfére MS
+ leojean890: MS j'ai pas encore commencé^^
+ dbdr: resistance il est super facile pour un VH, il me semble
+ leojean890: dbdr je pense aussi&#160;;)
+ CopperFr: oui tout le monde est d'accord pour résistance
+ leojean890: ML j'ai bricolé l'optim mais j'ai la flemme de bricoler le ML3
+ Bob: ensuite il suffit de balayer l'image pour trouver les notes, on a la hauteur et on prend le pixel du milieu pour la duree
+ dbdr: ah, faut le bon concept sans doute
+ dbdr: j'ai un Trie
+ Stilgart: dbdr: j'ai un Trie pour un easy
+ Bon[]Crayon: résistance je l'ai trouvé très difficile
+ Bob: peut-eter que ca m'a plus parle parce que j'avais fait un peu d'algos geometrique dans mes etudes et il y avait des choses dans le genre
+ mvaragnat: bonjour - est-il possible d'afficher des logs en plus des sorties printf&#160;?
+ Stilgart: et l'exo de base sur les Trie (telephone numbers) est en medium
+ dbdr: tu peux faire un Trie pour onboarding si tu veux&#160;;)
+ Bob: mvaragnat oui, en affichant sur stderr
+ dbdr: mais est-il requis?
+ Bob: normalement le code par defaut inclut un exemple
+ Stilgart: dbdr: il est dessiné dans l'énoncé
+ mvaragnat: ah je vois pas dans le code par defaut (ruby) mais je vais chercher
+ mvaragnat: merci @bob
+ Stilgart: pour le easy, c'est pour celui avec les extenions de fichiers
+ Bob: mvaragnat
+ mvaragnat: super merci
+ CopperFr: faudrait que je le termine musique note en plus j'adore la musique
+ leojean890: music scores je regarderai mais ça semble chiant :P
+ Bob: de mon point de vue, vraiment pas
+ leojean890: ah ok:p
+ Bob: ca m'avait pris une ou deux heures max
+ leojean890: ça va&#160;!
+ CopperFr: ah oui&#160;:(
+ CopperFr: je dois pas m'y prendre correctement 
+ dbdr: Bob c'est un dieu de l'heuristique aussi, on peut pas comparer&#160;;)
+ Stilgart: fix ton prendre, alors
+ Bob: 1. tu scannes le debut de l'image pour trouver l'ecartement des lignes
+ Stilgart: j'ai souvenir d'avoir lutter un peu, mais j'aurais pas dit plus d'une heure
+ Stilgart: (après, honnêtement, je ne me souviens plus du tout)
+ CopperFr: le début c'est pas une colonne blanche&#160;?
+ Stilgart: retire toutes les colonnes vides si besoin
+ CopperFr: y a besoin
+ Bob: 2. la premiere colonne avec des pixels ailleurs que sur les lignes te donne la premiere note
+ Bob: 3. la premiere colonne apres celle-la qui n'a des pixels que sur les lignes te donne la fin de la premiere note -&gt; tu as la largeur des notes
+ Bob: apres y a plus qu'a scanner
+ Bob: #jobDone
+ leojean890: j'ai pas lu l'énoncé mais je vois le principe avec ta description du code à faire :P
+ CopperFr: j'ai à peu près réussi à splitté les notes
+ Bob: et effectivement on peut meme nettoyer l'image en virant toutes les colonnes qui n'ont pas de pixels hors des lignes
+ leojean890: faut trouver les motifs avec des indices du genre et associer leur note en fct de leur hauteur
+ Bob: mais sinon il suffit de juste scanner colonne par colonne
+ Bob: leojean890 c'est ca
+ Stilgart: ha oui, bulls and cows on peut pas l'éditer
+ Stilgart: [CG]SaiksyApo: cf ci-dessus
+ leojean890: et batman2 j'ai fait un machin qui timeout sur les valideurs avec 10  000 000 de fenêtres et dwarfie m'a donné une idée d'optim qui serait de ne garder que xD,yD,xG,yG au lieu de maintenir une liste de positions possibles lourde :P
+ leojean890: 1 000 000*
+ Stilgart: [CG]Thibaud: cf ci-dessus
+ CopperFr: le cas chiant c'est peut-être les notes  hors portées
+ Stilgart: leojean890: en théorie, tu devrais essayer d'être plus fin que ça
+ Stilgart: en pratique, fais ce que t'a dit dwarfie, ça marche très très bien
+ leojean890: mais je peux trouver mieux en gros :P
+ Bob: deux dichotomies successives, ca marche bien
+ leojean890: le truc de dwarfie j'ai commencé à juste repérer la droite qui passe par le point situé entre ma loc précédente et ma courante
+ Stilgart: leojean890: je suis pas sûr que ce soit vraiment mieux en vrai
+ Bob: faut juste etre un peu sioux pour trouver le bon point a viser
+ Bob: surtout sur les bords ou ca merdoie un peu
+ leojean890: perpendiculaire à celle entre ces 2 points
+ Stilgart: parce que rapidement, chacun de mes coups divisent le nombre de cases possibles par 2
+ leojean890: (pour exploiter le same/warmer/colder)
+ Stilgart: (et ce sont des gauche-droite et des haut-bas)
+ leojean890: car ouais au début j'avais une liste de positions possibles et j'exploitais le same/warmer/colder ainsi :P
+ Bob: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/497141638">https://www.codingame.com/share-replay/497141638</a>
+ leojean890: mais lourdingue&#160;;)
+ leojean890: batman1 tu peux faire de la dicho direct;)
+ RomanceDawn: test
+ CopperFr: ah j'avais pas fait gaffe que les blanches était blanches même sur un trait
+ CopperFr: en temps normal c'est pas le cas
+ CopperFr: quand tu les écris toi même :D
+ [CG]Thibaud: yo
+ [CG]Thibaud: cf ci-dessus, ça parle de music scores, j'ai pas compris le rapport avec Bulls and Cows Stilgart
+ Bon[]Crayon: Pour mars lander, un tour c'est une second&#160;?
+ CopperFr: en vrai sur une partition les blanches ou rondes positionnées sur un trait ont le trait au milieu
+ Bob: bon, demenagement
+ Bob: hop-la
+ CopperFr: ah tu quittes nancy&#160;?
+ Stilgart: [CG]Thibaud: bulls and cows n'a rien à faire en very hard, mais on ne peut pas l'éditer
+ leojean890: [CG]Thibaud il veut le downgrader en hard mais il ne peut pas apparemment 
+ Stilgart: je sais que ça se règle par une manip coté CG, donc je vous beepe
+ Stilgart: non, en medium en fait
+ Stilgart: voire en easy avec les bons tags
+ Stilgart: c'est juste un if dans un for
+ Stilgart: dans un for (il faut tester les 10000 combinaisons)
+ leojean890: ce serait p'tet un peu bas easy quand même :P
+ leojean890: disons qu'il a la difficulté de puzzles qu'on peut trouver en medium ou hard quoi^^
+ [CG]Thibaud: ah ok
+ [CG]Thibaud: c'est l'épisode 1 n'est-ce pas&#160;? De player_one&#160;?
+ leojean890: le 2 c'est une optim non&#160;?
+ [CG]Thibaud: en effet
+ Stilgart: oui, c'est <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/25901bec28a8a881d44ffcfdaa9d723c630">https://www.codingame.com/contribute/view/25901bec28a8a881d44ffcfdaa9d723c630</a>
+ Stilgart: bon échauffement pour celui d'optim, qui lui est bien plus dur
+ CopperFr: c'est toujours plus facile quand c'est moins dur
+ leojean890: ouais celui d'optim, le vrai challenge c'est d'arriver dans le top quoi:p
+ Stilgart: CopperFr: il y a des contre-exemples&#160;:)
+ Stilgart: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/expert/sliding-puzzle">https://www.codingame.com/training/expert/sliding-puzzle</a> (VH) est plus simple que <a rel="nofollow" class="external free" href="https://www.codingame.com/training/hard/11-puzzle">https://www.codingame.com/training/hard/11-puzzle</a> (H)
+ darkhorse64: Il y a une grosse différence: tu peux avoir le même chiffre plusieurs fois
+ darkhorse64: pour b&amp;C
+ darkhorse64: Si tu fais d'abord le H, le VH se résoud vite moyennant une petite adaptation et + 100XP
+ darkhorse64: + tu as appris un truc intéressant
+ leojean890: bender4 optim est chaud aussi je trouve, j'ai que 53% et j'y ai pas retouché en 6 mois..
+ Stilgart: mon code pour le VH ne passe pas du tout le H 
+ Stilgart: bender4 ça fait genre 2 (3?) que je dois le faire
+ Stilgart: mais euler a mis des puzzles impossibles et du coup, ça attendra
+ leojean890: space maze;)
+ darkhorse64: Le H, il faut vraiment optimiser et pas brute forcer
+ leojean890: il en a mis des plus abordables comme 2048;)
+ leojean890: sokoban ça semble plus chaud
+ [CG]Thibaud: rah c'est chiant ces vieilles contribs qui sont inéditables
+ Stilgart: +1
+ Stilgart: surtout qu'elles ont été classées random au moment du merge entre les puzzles CG et les puzzles de la commu
+ [CG]Thibaud: suivant le success rate quand même (mais oui, ça crée des soucis)
+ Stilgart: en vrai, je suis même pas sûr de comment il est calculé le success rate
+ Stilgart: plus précisément, je ne sais pas à partir de quand on compte comment ayant essayé un puzzle
+ leojean890: est-ce que qqn qui a juste lancé un test est pris en compte ou juste les submits&#160;?
+ Stilgart: voilà
+ leojean890: je me suis posé la même question^^
+ Stilgart: comme*
+ [CG]Thibaud: je pense un play compte comme une attempt
+ leojean890: parfois tu lances des plays juste pour voir les entrées et ce qui est attendu comme sortie
+ leojean890: et finalement ça te tentepas donc tu laisses :P
+ Stilgart: ou l'allure de la partie graphique&#160;:)
+ Stilgart: (c'était encore plus vrai avant, quand il n'y avait que les puzzles de CG)
+ leojean890: ouais les puzzles CG ont souvent des parties graphiques, mais pas les autres ;P
+ TheSweatyPencilCase_79ac: Bonjour
+ [CG]Thibaud: après je dis peut-être une connerie
+ TheSweatyPencilCase_79ac: bjr
+ Alshock: On parle de Sean&#160;?
+ Zorg1: non son frère. Qu'a fait un film avec Roger Hanin. la gloire.
+ Alshock: Rien ne sera jamais plus glorieux que Zardoz
+ [CG]Thibaud: hop c'est modifié
+ Stilgart: [CG]Thibaud: merci
+ Tinyll: salut, vous sauriez comment changer la précision d'un double lors d'une conversion string -&gt; double avec stod (c++)&#160;?
+ Tinyll: setprecision() n'a pas l'air de faire grand chose
+ Tinyll: (en plus ce n'est que pour l'affichage ^^)
+ Tinyll: du coup j'ai rien dit
+ Stilgart: pas
+ Stilgart: la précision d'un double, c'est la précision d'un double
+ Stilgart: tu peux tenter "long double" mais&#160;:
+ Tinyll: oui oui xD
+ Stilgart: 1. pas sûr que ça soit géré
+ Stilgart: 2. c'est sans doute pas ça ton problème
+ Tinyll: non du coup c'était juste l'affichage qui était tronqué, ma conversion prenait bien toutes mes déciamles 
+ Stilgart: tu es sur quel puzzle&#160;?
+ Tinyll: un truc de débutant ^^
+ Stilgart: ha oui, l'affichage est tronqué
+ Stilgart: cela dit, ce qui est retiré et souvent faux de toute façon
+ Stilgart: (parce que tu passes ton temps à arrondir quand tu calcules en double)
+ Tinyll: là il le fallait car c'était des longitude latitude lol
+ CopperFr: rock n' roll latitude
+ Tinyll: longitudes* latitudes* oui après je suis d'accord mais les données brutes j'ai gardé la prec
+ Tinyll: enfin j'ai pris en compte toutes les décimales ^^
+ Tinyll: bref jsp pas pk j'ai posé cette question je suis con
+ CopperFr:&#160;:(
+ Stilgart: Tinyll: il vaut mieux se poser trop de questions que pas assez&#160;;)
+ Tinyll: oui ah ah
+ CopperFr: c'était les défibrilateurs&#160;?
+ Tinyll: yup
+ Tinyll: je pense avoir un problème avec mon calcul de distance mais je vois pas où lol
+ Zorg1: t'utilises bien les radians&#160;?
+ Tinyll: je me disais que oui
+ Tinyll: quand je relis le sujet
+ Tinyll: les long et lat donnés en degrés
+ Tinyll: yes
+ Tinyll: merci xD
+ Zorg1: c'est le bug classique
+ Tinyll: oui, ne pas savoir lire un sujet&#160;:)
+ Zorg1: au moins tu débarques en proclammant qu'il y a un bug dans un puzzle résolu par 50 000 personnes&#160;;-)
+ Tinyll: débarques pas*&#160;? bien souvent le problème se trouve entre l'ordi et la chaise ah ah
+ marcgardent: non mais  personne code en degree je comprend pas l'interet..  en milliradian serait plus sympa
+ CopperFr: j'aime bien les degrés
+ Stilgart: Zorg1: j'ai essayé -3vel sur onboarding et ça marche pas, clairement il y a un bug :p
+ Zorg1: pfff ...
+ marcgardent: le probleme c'est devoir passer en radian a chaque fois que tu veux utiliser atan2 cos, sin ...
+ Tinyll: perso en degré Fahrenheit ça n'a pas marché
+ CopperFr: je l'ai essayé sur 2048 ca marche pas non plus
+ Tinyll: maybe the Kelvin are the solution
+ CopperFr: C'est horrible les Fahrenheit
+ Zorg1: oui Tinyll débarque pas, désolé&#160;;-)
+ CopperFr: Débarquez moi
+ Tinyll: oui je crois que la conversion est même pas linéaire avec les degrés @CopperFr
+ Stilgart: Tinyll: haha
+ Stilgart: Automaton2000: degré ou tortue&#160;?
+ Automaton2000: ça risque de me faire gagner des places
+ Tinyll: Commence à me faire chier le centre municipal garosud à tomber comme réponse, c'est pas elle que je veux xD
+ CopperFr: ceci dit on aurait 273.15 degré en plus avec les kelvins
+ Tinyll: please cimetierre saint-etienne, apparaît dans la console
+ CopperFr: je préféres le centre municipal
+ Zorg1: toute façon tu peux plus sortir de chez toi
+ CopperFr: ben si pour effectuer des achats de première nécessité
+ CopperFr: je suis curieux de voir les rayons non essentiels fermés :D
+ Zorg1: ah oui j'ai lu cette connerie
+ Zorg1: ça devient n'importe quoi
+ CopperFr: c'est clair après si les petits commercants ont votés macron c'est bien fait pour eux
+ Stilgart: CopperFr: sans parler du fait que s'il y a des rayons nons essentiels dans les super marchés, c'est que les gens achetaient déjà les produits dans ces super marchés
+ Stilgart: mais bon, quitte à foutre en l'air l'économie, autant le faire franchement
+ CopperFr: tu achètes ca en passant
+ CopperFr: je pense pas que ca soit plus dangereux d'aller chez un petit commerce ou y a pas grand monde quand dans un hyper
+ CopperFr: que dans un*
+ Stilgart: tiens, je me demande si le tabac c'est compté dans les "premières nécéssités"
+ Tinyll: ya pas moyen de partager du code sur un chat&#160;?
+ Stilgart: tu peux coller le code directement dans le chat
+ CopperFr: j'espère qu'ils ont pas fermé le rayon vin&#160;:(
+ Stilgart: après, je sais pas si c'est toujours cassé&#160;:)
+ Tinyll: mdr
+ CopperFr:  sinon ya codeshare.io
+ Stilgart: CopperFr: j'espère qu'ils ont pas fermé le rayon bricolage perso
+ Stilgart: j'ai du truc à réparer dans mon appart et pas le matos pour&#160;:(
+ CopperFr: ah effectivement
+ Stilgart: Tinyll: normalement ça marche bien
+ Stilgart: mais c'était cassé la dernière fois que je suis passé (il y a ~10 jours)
+ Tinyll: je crois que brocloage c'est première nécessité
+ Tinyll: je vais tester
+ Stilgart: j'espère&#160;:(
+ Tinyll: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/9c615515-b4e3-4d74-b6a9-bf4d9516c074">http://chat.codingame.com/pastebin/9c615515-b4e3-4d74-b6a9-bf4d9516c074</a>
+ TheSunnyDictator_944d: bonjour?
+ Stilgart: surtout que dans mon cas, c'est de la plomberie
+ TheSunnyDictator_944d: ça va?
+ Tinyll: ah pas con le lien
+ CopperFr: c'est fermé mr bricolage ou le roy merlin ou castorama ou brico marché ou brico dépot ou ...
+ TheSunnyDictator_944d: qoui?
+ Tinyll: ah je savais pas
+ Stilgart: je pense que la pièce dont j'ai besoin est vendu à carrefour
+ CopperFr: si cles magasins brico sont fermés ils sont censé fermer le rayon équivalent
+ Stilgart: bref, c'est réparé \o/
+ CopperFr: plus besoin d'aller à carrefour du coup
+ Stilgart: CopperFr: et donc, je remplace comment mon robinet&#160;?!
+ Stilgart: parce que là ça va très vite me gonfler sévère
+ CopperFr: les robinets c'est pas première necessité&#160;?
+ Bon[]Crayon: sos mario
+ CopperFr: au pire tu commande sur amazon
+ Stilgart: et je dirais gg
+ Tinyll: je vois vraiment pas mon erreur&#160;::
+ Bon[]Crayon: Les magasins des coopératives agricoles sont peut-être ouverts.
+ CopperFr: c'est quoi le problème Tinyll&#160;?
+ Stilgart: Tinyll: moi non plus, mais il est super compliqué ton code je trouve
+ Tinyll: j'ai toujours pas la bonne sortie à partir du 2ème test
+ Stilgart: tu as bien lu (et utilisé la formule de) l'énoncé&#160;?
+ Tinyll: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/5160f0e2-cc89-4cdf-9e85-c53ad43341b0">http://chat.codingame.com/pastebin/5160f0e2-cc89-4cdf-9e85-c53ad43341b0</a>
+ Tinyll: tout le main, c'est horrible mais bon
+ Stilgart: pow(x,2)   .... :cry:
+ Stilgart: x*x
+ Stilgart: par pitié
+ Tinyll: mdr
+ Tinyll: ça revient au même c'est pas grave xD
+ Stilgart: non
+ Stilgart: pow(x,2) c'est exp(2*log(x))
+ Stilgart: c'est immonde
+ Stilgart: en terme de perfs
+ CopperFr: oui mais pour ce puzzle ca ira :D
+ Stilgart: ici on s'en fiche, mais dans un multi ça pique énormément
+ Tinyll: l'opérateur * sur les double est plus rapide que un pow tu penses&#160;?$
+ CopperFr: oui
+ Bon[]Crayon: le compilo optimise pas ce genre de truc&#160;?
+ Stilgart: Tinyll: * c'est en dur dans ton proc
+ Stilgart: exp/log, probablement pas
+ CopperFr: sauf si il a un Z80 par contre
+ Stilgart: et puis c'est 1 calcul au lieu de 3 (bon, en vrai, la libc calcule sans doute tout en un algo)
+ CopperFr: en js ils ont rajouté ** pour les puissances
+ Stilgart: bah, ** ça sert vraiment
+ Stilgart: mais il faut que l'exposant soit non entier pour que ce soit rentable
+ Tinyll: bon j'ai changé. Sinon je chercher toujours mon erreur dans le calcul de distante ou alros autre part. Par contre si elles sont données en km elles sont un peu énormes la
+ Stilgart: ou très grand (mais dans ce cas on a vite inf ou 0 comme réponse)
+ Stilgart: elle est bizarre ta boucle...
+ Tinyll: laquelle&#160;?
+ Stilgart: tu remplis vraiment coord 2 par 2&#160;?
+ Bon[]Crayon: souvent dans les formules il faut utiliser mètres
+ Stilgart: celle qui joue sur coord[0] / coord[1] et qui finit par coord.clear();
+ Tinyll: je savais pas torp commen récup les 2 régex du coup a chaque fois qu'il en trouve une je cut avec .suffix et je récupère la deuxième sur le reste de la string. et oui je mets dans un vector de double, que je clean à chaque fois que j'ai fini d'utiliser les coord.
+ Tinyll: j'aurais pu tuliser un tabkleau de double mais j'aurais du rajouter une variable dans mon while pour savoir si c'était la lat ou la long
+ Stilgart: double buf[2];
+ Stilgart: c'était bien aussi un tableau de taille 2 :D
+ Stilgart: mais donc, du coup, c'est moi qui ait trouvé ça bizarre pour rien&#160;:(
+ Tinyll: tkt mon code est quand même horrible je pense. Bref j'ai vérifié mes regx et tout ça prend bien les bonnes mesures ^^
+ Stilgart: non, c'est juste que je m'étais mis en tête que tu stockais toutes les coords dans coord&#160;:)
+ Tinyll: ah ok&#160;!
+ CopperFr: y a pas de split en c++&#160;?
+ Stilgart: aucune idée
+ Stilgart: sans doute pas
+ CopperFr: y'a l'air d'avoir dans boost
+ Sparow: HEy&#160;!
+ Bon[]Crayon: ho
+ Tinyll: faudrait que je prennes une calculette mais j'en ai pas sous la main lol
+ Stilgart: mais boost ça n'existe pas
+ Stilgart: (ma vision de boost, c'est "tout ce qui est tellement crade qu'on l'a pas mis dans le standard C++)
+ Stilgart: +"
+ Sparow: calculette google
+ CopperFr: ah je croyais qu'ils rajoutaient petit à petit des bouts de boost dans le standard :D
+ Tinyll: je suis pas sur android mais même celle des tel / pc est pas ouf
+ Stilgart: quand quelqu'un trouve comment rendre une idée propre, oui
+ Sparow: Je recherche des cours en C pour du développement d'application
+ Tinyll: Openclassroom  ?
+ CopperFr: en C pas C++&#160;?
+ Stilgart: Sparow: quel type d'application&#160;?
+ Stilgart: Tinyll: en général, surtout pas
+ Stilgart: best site ever pour te faire croire que tu as appris un truc alors que pas du tout :D
+ Sparow: Oui en C mais j'ai l'impression que openclassroom ne va pas plus loin que les liste chainés
+ CopperFr: comme certains cours de fac quoi :D
+ Stilgart: Tinyll: à mon avis, c'est ta gestion de la variable matches qui merdoie
+ Tinyll: bah j'ai appris des trucs dedans persos, après si tu t'entraînes pas surd des exos ça ne sert à rien
+ Sparow: Stilgart, avec interface graphique et tout&#160;:)
+ Stilgart: je connais pas regex en C++
+ Stilgart: Sparow: sous quel os&#160;?
+ Tinyll: pourtant elle m'affiche bien un noù à la fin
+ Sparow: Windows
+ Tinyll: nom
+ Stilgart: (ou avec quelle techo d'interface graphique)
+ CopperFr: tu veux faire de interface graphiques&#160;?
+ Stilgart: Tinyll: mais si je rajoute du debug, je passe plus le test 1
+ Tinyll: ah&#160;? je le passe tout le temps perso
+ Tinyll: cerr &lt;&lt;
+ Stilgart: pour une appli "lourde" (par opposition à web) sous windows, c'est plutôt C# qu'il te faut
+ Stilgart: cerr &lt;&lt; distance &lt;&lt; " " &lt;&lt; matches.str(1) &lt;&lt; endl;
+ Stilgart: mon ajout dans la boucle qui fait tout foirer...
+ CopperFr: tu peux aussi faire du lazarus :D
+ Stilgart: j'en déduis que ça doit faire un effet de porc^Wbord à la noix
+ Tinyll: je regarde
+ Tinyll: dans la boucle while&#160;?
+ Sparow: Oui je sais, perso je serai passé sous Unity et j'aurai fait que de la Poo en C# mais le prof veut absolument du C
+ Stilgart: ha, tu as un contexte
+ Stilgart: ça change tout&#160;:)
+ dbdr: Poo la bien nommée :D
+ Stilgart: :D
+ Stilgart: en C sous windows dans un cadre enseignement&#160;?
+ Stilgart: mes collèges de l'INSA veulent ma mort&#160;????
+ Tinyll: déjà ya un problème sous windows
+ Tinyll: tu es à l'insa&#160;?
+ Tinyll: me too
+ Stilgart: sous windows en C, il reste gtk je dirais...
+ marcgardent: J'ai publié mon premier puzzle muli 1vs1 sur le theme de l'éscrime en WIP....  avant de faire des niveaux avancé je recherche du feedback pour leage1. enjoy.  <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/5638cd2b181128c321c5e5ca1e7cf76ce9b0">https://www.codingame.com/contribute/view/5638cd2b181128c321c5e5ca1e7cf76ce9b0</a>
+ dbdr: du C pour une appli console enore ça peut aller
+ Stilgart: ou alors directement la SDL (ce qui serait moins pire amha)
+ dbdr: si c'est pour du GUI oui c'est maso
+ Tinyll: J'en connais qui pourrait sortir Electron
+ Stilgart: si c'est pour un jeu, tu peux faire du full SDL
+ Stilgart: je faisais en L1 avec les bons
+ Stilgart: après, c'est plus vraiment de l'interface graphique mais plus du rendu
+ Tinyll: Quel INSA Stilgart&#160;?
+ Tinyll: Quelle*
+ Stilgart: je travaille dans une école d'ingé, mais pas une INSA :D
+ Tinyll: ah xD
+ Here_s_Chopi: Quelqu'un à un test case qui fonctionne sur "Des nains sur des épaules de géants" je suis en train de devenir zinzin
+ Tinyll: j'avais pas pigé ta phrase
+ Tinyll: Je vais vraiment finir au cimetière Saint-Etienne
+ CopperFr: c'est un cours de quoi&#160;?
+ Sparow: Que veux tu Stilgart, c'est pas moi qui fixe les règles ^^
+ CopperFr: passe nous ton prof
+ Sparow: et oui L'iNSA veut nous voir coder en C
+ CopperFr: on va discuter
+ Sparow: Mdrr
+ Tinyll: ils ont raison
+ Stilgart: très sérieusement, une interface graphique en C, c'est l'horreur
+ Tinyll: INSA quoi Sparrow&#160;?
+ Stilgart: même moi je suis pas assez sadique pour demander ça&#160;:(
+ CopperFr: l'object c'est bien pour les gui
+ Sparow: INSA HDF
+ Sparow: Bah je lui ai demandé si on pouvait pas faire du C# pour simplifier la tache
+ Sparow: et il a juste répondu un "non"
+ Tinyll: ok&#160;!
+ CopperFr: nein&#160;?
+ Stilgart: Sparow: mais il veut une interface graphique pour de vraie&#160;?
+ Tinyll: après t'as interface graphique et interface graphique
+ CopperFr: oui après si y'a juste un bouton ca ira
+ Sparow: Stilgart, il faut pas une interface du futur non plus mais une interface graphique correct
+ Sparow: avec des images, de la couleur, des animations ...
+ CopperFr: ah oui quand même :D
+ Tinyll: bon courage
+ Sparow: genre comme un jeu tout par tour dynamqiue
+ Sparow: un jeu tour par tour dynamique
+ CopperFr: ah c'est un jeu
+ Stilgart: Sparow: si c'est du rendu, passe par la SDL
+ CopperFr: oui
+ Stilgart: pour le coup, ça s'est raisonnable (par contre, j'appelle pas ça une interface, au sens où tu n'as pas de menu/boutons/icones)
+ Tinyll: mdr quand je tape "user interface c" sur ddgo la moitié des résultats c'est avec du C# ou C++
+ Stilgart: Tinyll: ton code fait timeout un coup sur deux&#160;:(
+ CopperFr: ben oui c'est normal
+ Stilgart: et ta regex name est fausse
+ Tinyll: je l'ai vérifié
+ Tinyll: et elle fonctionne ^^
+ Stilgart: 94.2604 94.2515 Gymnase Albert Batteux97.292 94.2515 96.8827 94.2515 Stade Municipal Sabathe
+ Stilgart: j'ai au moins une station où ça passe pas
+ Tinyll: <a rel="nofollow" class="external free" href="https://regex101.com/">https://regex101.com/</a>
+ Tinyll: ah
+ Sparow: Ah mais il faut aussi un menu avec les boutons pour ajuster la difficulté, choisir le nombre de joueur, si l'ordi joue, une IA
+ Zorg1: ces sites dont j'ignorais l'existence ^^
+ Stilgart: regex name("[0-9];([^;]+);");
+ Stilgart: mieux&#160;:)
+ CopperFr: y'en a plein des sites web en fait
+ Tinyll: il manque lme spoints et les apostrpohes
+ Tinyll: (dans la mienne)
+ Stilgart: il te manque surtout le "bon, ça fait chier, on va dire 'tout sauf&#160;;' et basta"&#160;:)
+ Stilgart: &lt;/vécu&gt;
+ RomanceDawn: genre
+ RomanceDawn: y a des gens 
+ Zorg1: pour ce puzzle je splittait comme une brute, ça marchait
+ RomanceDawn: ils font les regex eux mêmes
+ CopperFr: oui faut splitter
+ Tinyll: je vais changer. Mais pas sur que ce soit ça le problème car il m'affiche quand même pas la bonne ville jsp si tu vois ce que je veux dire
+ CopperFr: y a strtok sinon :D
+ Tinyll: (c'est pas juste un problème d'affichage)
+ CopperFr: ca fera plaisir au prof de C
+ RomanceDawn: même le proff de C il aime pas strok imo
+ CopperFr: ca gère pas l'unicode&#160;?
+ Stilgart: Zorg1: oui, il faut scanner à la main
+ Sparow: en tout cas merci pour vos conseil :D
+ Stilgart: ça marche bien mieux
+ CopperFr: oui vu que c'est fixe en plus
+ CopperFr: en plus y a même pas d'accents&#160;?
+ CopperFr: le prof de C ferait mieux de demander de l'assembleur
+ Stilgart: (╯°□°）╯︵ ┻━┻
+ Stilgart: (╯°□°）╯︵ ┻━┻
+ Stilgart: (╯°□°）╯︵ ┻━┻
+ Stilgart: Tinyll: /flip
+ Stilgart: c'est userLong et userLat qui sont faux :D
+ Stilgart: tu as oublié de remplacer la , par un . avant de convertir en radian 
+ Sparow: #CopperFr, genre du Flowcode à l'INSA
+ Tinyll: énorme je l'avais fiat sur les défib mais pas là dessus
+ Tinyll: je vérifies
+ Stilgart: je fais 100% en ajoutant les deux lignes qui faut
+ CopperFr: ah le piège de la virgule 
+ Tinyll: je passe pas le 2 wait xD
+ Stilgart: après, je t'invite à le refaire avec un traitement plus élémentaires des entrées
+ CopperFr: élémentaire mon cher watson
+ JBM: comment es ton re
+ Tinyll: bon en tout cas merci bcp je vais régler le problème
+ Tinyll: oui je devrais faire ça
+ Stilgart: comme un re du mardi
+ JBM: ben qu'est-ce tu fais la toi
+ JBM: t'as pas "trop de boulot"?
+ CopperFr: as tu utilise le module re le mardi&#160;?
+ Tinyll: Niquel tout fonctionne @Stilgart, bon c'était pas une réussite pour moi et j'ai pas l'habitude de manipuler prorepement les string en c++
+ Tinyll: go faire de la crypto pour se changer les idées ,:)
+ Stilgart: crypto :heart_eyes:
+ CopperFr: monnaies :heart_eyes:
+ Alshock: couocu
+ Alshock: tiens, j'ai donc écrit coups au cul
+ Zorg1: ça me rappelle une citation de Clemenceau ...
+ CopperFr: Clemenceau celui de des avenues georges&#160;?
+ Zorg1: oui le même
+ BlaiseEbuth: Yo tout l'monde&#160;! Automaton2000, AutomatonNN&#160;!
+ Automaton2000: du coup le code est en java
+ AutomatonNN: oui et je comprend pas trop de contest de contest de bois 2 a la somme de tout le monde
+ UmeHearts: NN il est cassé je crois
+ UmeHearts:&#160;:')
+ BlaiseEbuth: Pas plus que d'habitude... Pourquoi&#160;?
+ Bon[]Crayon: AutomatonNN.AutoRéparation()
+ AutomatonNN: oulah c'est quoi AutomatonNN&#160;?
+ BlaiseEbuth: :D
+ Bon[]Crayon: reset
+ Bon[]Crayon: AutomatonNN.Imitation(tirtue)
+ AutomatonNN: et j'ai pas encore trouvé le problème de ce que tu veux dire
+ UmeHearts: Je suis nouveau dans le coin alors je suis pas encore au fait des us et coutumes aha
+ Bon[]Crayon: AutomatonNN Je veux dire tortue.
+ AutomatonNN: oui
+ Bon[]Crayon: Un passager du temps.
+ bouriquet: AutomatonNN quel est le sens de la vie s il te plait?
+ AutomatonNN: rien que tu veux dire que tu peux pas te permettre de me baser sur le contest de contest de contest 
+ bouriquet: j aurais essayé
+ UmeHearts: Il a des envie de contest je crois
+ BlaiseEbuth: UmeHearts: Automaton2000 est une chaîne de markov basée sur les logs du chat, donc ce qu'il dit est généralement "cohérent" bien qu'hors contexte. AutomatonNN lui, est basé sur un réseau de neurones qui apprend aussi des logs du chat, donc techniquement il a une notion de contexte (peu évidente je dois dire), mais en ce qui concerne le sens des messages...
+ Automaton2000: ca c'est le genre de truc&#160;?
+ AutomatonNN: quelqu'un sait le faire avec des modifications de AutomatonNN&#160;?
+ Bon[]Crayon: AutomatonNN Personne ne peut le baser.
+ AutomatonNN: reste tu peux pas te dire que t'as pas de contest de contest de contest 
+ BlaiseEbuth: Ah et oui, AutomatonNN aime les contests de contests...
+ AutomatonNN: je l'ai trouvé la solution de ce que tu veux dire
+ bouriquet: ah bah envoi alors
+ UmeHearts: Merci pour la reponse detaillé
+ UmeHearts: AutomatonNN on est tout ouie
+ AutomatonNN: voir le contest de CG
+ [CG]Thibaud: t'as testé le jeu du Fall Challenge AutomatonNn&#160;?
+ AutomatonNN: oui
+ [CG]Thibaud: alors, il est comment AutomatonNN&#160;?
+ AutomatonNN: oui c'est pas trop compliqué de coder la différence entre tes phrases en temps de contest 
+ Bon[]Crayon: Cool ça va être simple.
+ bouriquet: il a été traumatiser par un gars qui s appel contest
+ Bon[]Crayon: Jean Contest
+ UmeHearts: AutomatonNN Contest?
+ AutomatonNN: representer d'autre contest quand tu veux AutomatonNN
+ RomanceDawn: C'est toujours la hype la machine learning  ?
+ RomanceDawn: et l'autre truc là 
+ RomanceDawn: les NN 
+ BlaiseEbuth: Pourquoi ça serait plus le cas&#160;? C'est cool les NN&#160;! Hein AutomatonNN&#160;?
+ AutomatonNN: un jour c'est le contest de ce que tu as pas trop compris la question :D
+ UmeHearts: Je chalenge va etre mon premier, ca se passe un peu comme un combat de bot c'est ca?
+ BlaiseEbuth: La plupart des combats de bots étaient des contest à la base oui.
+ Cousnouf: Salut tout le monde? ça va bien? 
+ Bon[]Crayon: :thumbsup_tone2:
+ BlaiseEbuth: Ah&#160;! Il a mis du transparent en fond&#160;! :scream:
+ Cousnouf: Blaise, oui... :Dje suis à 19 chars de pouvoir atteindre les 200 avec Don't Panic en Python...
+ Cousnouf: à part les alias de fonctions, il y a d'autres trucs pour raccourcir qui sont connus dans ce langage? :D
+ Cousnouf: 202 chars ahahah
+ Here_s_Chopi: <a rel="nofollow" class="external free" href="https://stackoverflow.com/questions/31991032/minimizing-lines-of-code">https://stackoverflow.com/questions/31991032/minimizing-lines-of-code</a>
+ BlaiseEbuth: <a rel="nofollow" class="external free" href="https://codegolf.stackexchange.com/questions/54/tips-for-golfing-in-python">https://codegolf.stackexchange.com/questions/54/tips-for-golfing-in-python</a>
+ <b>**BlaiseEbuth pull Bob from world to fr.</b></p><p><img src="/a/29407964997640" /> Bob: muh&#160;?
+ BlaiseEbuth: :grin:
+ Bob: :p
+ Cousnouf: Merci... même si je trouve qu'apprendre à coder de manière illisible ça devrait être interdit...
+ Bob: le but c'est pas d'etre illisible
+ Bob: l'interet du golf c'est que ca te force a reflechir differemment
+ Bob: la solution la plus courte etant generalement tres differente de la "bonne" maniere
+ Bob: et les tricks de golfing permettent souvent de mieux comprendre certains aspects un peu pointus des langages
+ CopperFr: oui comme .split`;`
+ Here_s_Chopi: parseInt(readline()) =&gt; +r()
+ CopperFr: Cousnouf c'est vraiment nicola maintenant&#160;?
+ BlaiseEbuth: Faut croire
+ CopperFr: après moi je suis plus subtil mon deuxième compte à un logo Atari
+ BlaiseEbuth: T'as un deuxième compte&#160;? :eyes:
+ CopperFr: même pas
+ CopperFr: en plus je serais en guerre avec moi même du coup&#160;:(
+ Bob: non la guerre c'est mal
+ Bob: bon voila je peux bosser relativement confortablement depuis chez moi
+ Bob: il ne me manque plus que l'envie de bosser&#160;:)
+ CopperFr: :D
+ darkhorse64: A partir du 12, tu vas être motivé
+ marcgardent: :laughing:
+ BlaiseEbuth: Ou pas... Faut voir
+ CopperFr: y a quoi le 12&#160;?
+ Cousnouf: scusez j'étais appelé par un recruteur loool...
+ Cousnouf: les SSII, le cancer de la profession..
+ Cousnouf: ahahah
+ CopperFr: ah oui le covid de la profession
+ Cousnouf: CopperFr non, j'ai juste mis à jour mon image
+ CopperFr: oui tu as repris celle de nicola&#160;:(
+ Bob: tiens c'est pas ces jours-ci la S2 de His Dark Materials&#160;?
+ Cousnouf: nan j'ai quand même chopé la 2 ou 3ème image sur google .D
+ BlaiseEbuth: Fais gaffe. Si je vérifie et qu'elle est pas libre de droit c'est un ban direct...
+ Bob: ah c'est dimanche
+ Bob: parfait
+ Bob: comme le sumo
+ Bob: doubleplusbon
+ Cousnouf: haha je doute qu'elle soit libre de droit, ça appartient à Romero
+ CopperFr: je veux plus devenir sumo
+ Bob: CopperFr il est sans doute bien trop tard pour ca de toute facon
+ Bob: ils les recrutent tres jeunes
+ Naindlac: Cousnouf, justement je me demande si c'est possible de faire moins de 200 charactères en python sur Don't Panic sans hardocode 
+ BlaiseEbuth: Tu insinue qu'il est vieux
+ Bob: vieux non
+ Bob: mais trop vieux pour du sumo, oui
+ CopperFr: on a le même age à peu de chose près
+ BlaiseEbuth: 42
+ BlaiseEbuth: L'âge parfait
+ Bob: les plus ages ont 35/37 ans
+ Cousnouf: naindlac, tu peux checker le classement, t'as des types qui ont fait moins de 100 en python.. lol..
+ Bob: oui mais sans hardcode&#160;?
+ Naindlac: Moins de 100 justement je pense qu'ils harcodent 
+ Naindlac: Ca parait clairement impossible 
+ BlaiseEbuth: Faut regarder à combien est dwarfie
+ CopperFr: &lt; 100 hardcode &gt; 100 non hardcode&#160;?
+ Naindlac: CoppeFr Non évidemment, mais déjà moins de 200 ...
+ Naindlac: J'y ai passé tellement de temps halala c'est frustrant comme problème
+ Bob: mon &lt;200 c'est du Ruby
+ Cousnouf: ouais mais même hardcoder pour tous les tests, c'est chaud..
+ Bob: et il est generique
+ Naindlac: Générique&#160;? Cad&#160;?
+ Bob: pas hardcode
+ Naindlac: Ahhh
+ Bon[]Crayon: Il suffit de regarder les solutions proposées sur le puzzle classic, peur-être que certaines font de 200 caractères.
+ CopperFr: générique&#160;?
+ BlaiseEbuth: Y'a de l'écho
+ Naindlac: J'ai l'impression que pour le faire legit c'est ruby ou Perl
+ BlaiseEbuth: Pas dit...
+ Naindlac: Bon[]Crayon bonne idée&#160;! 
+ Cousnouf: bam 199 caractères....
+ Naindlac: Cousnouf&#160;? 
+ Bob: oython je suis a 216
+ Cousnouf: j'ai réussi.. lol..
+ Bob: gg
+ Cousnouf: mais le if, impossible de détacter que c'est un if... 
+ Naindlac: En Python&#160;?  Woaw gg
+ Cousnouf: (a,b)[condition]
+ Cousnouf: sérieux
+ Bob: bah oui
+ Bob: un if quoi
+ Cousnouf: okay okay j'imagine qu'on peut encore diminuer les and et les or...
+ dwarfie: mince ... a vous voir tous parler golf , j'ai cru qu'il y en avait un nouveau et que j'allais pouvoir gratter 900 cp de plus :D
+ Cousnouf: bon l'optimisation c'est bon pour moi, Bilbo + Don't Panic en un jour, fuck off..
+ omaromaromar: slt
+ omaromaromar: cava&#160;? je suis nouveau
+ Bon[]Crayon: :wave_tone1:
+ dwarfie: putain ... encore une contrib non-"parsable dans tous les langages" qui est apparu ...
+ Bob: salut
+ dwarfie: (╯°□°）╯︵ ┻━┻
+ omaromaromar: vous etes actuellement tous sur le puzzle 'stock-exchange-losses'&#160;? 
+ omaromaromar: ou c'est un chat global ici 
+ omaromaromar:&#160;?
+ Bob: c'est global
+ Bob: mais pose ta question
+ omaromaromar: ah ok d'accord Bob merci 
+ Bob: on l'a sans doute tous resolu&#160;:)
+ omaromaromar: non juste je découvre un peu les fonctionnalité du site&#160;:)
+ dwarfie: :D
+ omaromaromar: haha c'est gentil merci&#160;:) 
+ omaromaromar: j'ai découvert part hasard le site, en postulant pour des boites d'informatique
+ BlaiseEbuth: Moi j'ai surtout remarqué que sceuuhrpieiiin a mis greta T en image de profil. Et je trouve que ça lui va bien :3
+ Bob: il y a un moyen de dire a l'IDE d'accepter a la fois les espaces et les tabs&#160;?
+ dwarfie: il a pas trouvé mieux pour faire approuvé ses contrib apres la strat' des validations tuos azimuts&#160;?
+ omaromaromar: c.a.d&#160;? et de quel IDE tu parle&#160;? Eclipse&#160;? Intelij&#160;?
+ BlaiseEbuth: "accepter"&#160;?
+ CopperFr: quelle contrib&#160;?
+ CopperFr: pourquoi tant de questions on est pas dans lost&#160;?
+ BlaiseEbuth: dwarfie laquelle est pas parsable&#160;?
+ Bob: je parlais de l'IDE de CG
+ Bob: mais de toute facon c'etait pour essayer un sale trick de Python 2
+ Bob: et comme on n'a plus que du 3
+ omaromaromar: ah autant pour moi, je ne saurais pas te répondre 
+ CopperFr: mais on est en 3
+ dwarfie: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/5656a25cf79318eef8f89233a91a4da38280">https://www.codingame.com/contribute/view/5656a25cf79318eef8f89233a91a4da38280</a> tout comme  <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/5594041cc5ef25cc31841e039dd94e67bc8d">https://www.codingame.com/contribute/view/5594041cc5ef25cc31841e039dd94e67bc8d</a>
+ Bon[]Crayon: C'est joli :grinning:
+ CopperFr: oui quand on a les couleurs
+ BlaiseEbuth: Surtout pour du braille, ça lui aurait fait mal de mettre 0 et 1 ou '.' et ' '&#160;?
+ CopperFr: c'est moins sympa
+ BlaiseEbuth: Au moins ça fais pas chier la moitié des utilisateurs
+ dwarfie: il fait expres pour faire ch.... et rale pas ou alors il te traite de vieux c...
+ CopperFr: ben les couleurs c'est sympa
+ CopperFr: ca marche pas sous chrome par contre
+ Bob: j'adoooore les couleurs
+ Bob: quand mes gamines etaient petites on nous avait refile un jouet d'eveil qui avait cette phrase dans sa gamme de sons
+ Bob: c'etait un peu surrealiste
+ dwarfie: united color of benetton&#160;? ou united color of bandedecon&#160;?&#160;;)
+ Bon[]Crayon: C'est juste un problème d'affichage ou certain langage ne collecte pas les bonnes valeurs de caractères.
+ dwarfie: valeurs
+ Bob: pas de couleur ddans sous chrome c'est pas un peu ironique&#160;?
+ Bon[]Crayon: ok
+ Bob: -ddans
+ CopperFr: un peu oui :D
+ Bon[]Crayon: chrome + ubuntu j'aurai pas pensé
+ Bon[]Crayon: que ça bug
+ CopperFr: chrome semble pas gérer ca correctement
+ CopperFr: dommage que la sortie soit pas en couleur par contre&#160;:(
+ dwarfie: si ca mrede en input ca merde en output ... mais ca il a compris la moitie de ce qu'on lui a dit ...
+ BlaiseEbuth: J'ai honnêtement jamais dû utiliser unicode dans un quelconque langage... Alors je me rend pas trop compte...
+ CopperFr: pour moi soit c'est tout en unicode soit tout en ascii
+ CopperFr: pourtant l'utf-8 c'est de plus en plus courant
+ CopperFr: même delphi ils sont passé à l'unicode (et ils étaient super en retard)
+ BlaiseEbuth: Ouai. Mais j'ai moi jamais eu besoin de de deal avec de l'unicode dans mon code.
+ dwarfie: cat in1.txt 
+ dwarfie: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/20df6736-efd9-4536-9c1f-1d6b55ccdf51">http://chat.codingame.com/pastebin/20df6736-efd9-4536-9c1f-1d6b55ccdf51</a>
+ dwarfie: fin du debat ... 
+ Bon[]Crayon: 404 Not Found
+ BlaiseEbuth: C'est&#160;?
+ dwarfie: BlaiseEbuth ... pour qui le "c'est&#160;?"
+ BlaiseEbuth: toi
+ dwarfie: c'est le cat du fichier d'input sur le serveur de CG
+ BlaiseEbuth: Y'a pas moyen de lui dire que c'est de l'unicode&#160;?
+ dwarfie: la locale est unicode , et le fichier est unicode ...
+ CopperFr: t'as jamais eu besoin de charger un fichier codé en utf-8&#160;?
+ dwarfie: utf8 oui ... utf8mb4 non
+ CopperFr: après une fois que tu as compris le principe
+ BlaiseEbuth: dwarfie -&gt; Pourquoi ça fait ça alors&#160;?
+ dwarfie: parce que c'est pas de l'utf8
+ BlaiseEbuth: Ah.
+ CopperFr: c'est quoi du coup&#160;?
+ BlaiseEbuth: CopperFr, j'ai sans doute déjà eu des fichiers en utf8, mais vu que je bosse que sur des chiffres ça change pas grand chose...
+ CopperFr: ben oui c'est retro compatible ascii 7 bits
+ BlaiseEbuth: Donc je reformule. J'ai jamais eu à manipuler des caractères non ascii dans mon code.
+ BlaiseEbuth: Ah mais il se prend pas pour de la merde en fait... J'avais pas vu son commentaire.
+ dwarfie: voila ... on est d'accord ..je commencais que j'etais le seul a avoir cette impression ...
+ dwarfie: a croire
+ BlaiseEbuth: On peut se faire traiter de vieux cons ensemble si tu veux. ^^
+ JBM: Non.
+ JBM: imagine un noob débarque
+ JBM: il trouverait pas ça très accueillant
+ CopperFr: après moi je suis vieux mais je suis pas anti unicode
+ BlaiseEbuth: On peux l'inviter à se faire traiter de vieux con avec nous. Tu veux te faire traiter de vieux con JBM&#160;?
+ darkhorse64: Trois refus et c'est plié, non&#160;?
+ JBM: Ça dépend par qui
+ dwarfie: BlaiseEbuth ... pas besoin , ca va se regler tout seul ... une chance sur deux qu'il soit pris dans une guerre civile d'ici demain ...
+ CopperFr: ben oui faut refuser ce puzzle
+ BlaiseEbuth: Bah c'est ça que je propose
+ dwarfie: darkhorse64 ... comme pour son precedent&#160;? j'ai ete seul a refuser ...
+ dwarfie: et il est passé
+ CopperFr: vous êtes déjà au moins 4
+ BlaiseEbuth: Suffit d'y aller à plusieurs, et on l'défonce
+ BlaiseEbuth: :no_mouth:
+ BlaiseEbuth: On refuse constructivement sa contribution
+ darkhorse64: C'était un peu l'idée d'avoir une démarche concertée et donc efficace
+ CopperFr: on est vraiment dans une ambiance dictature en ce moment
+ BlaiseEbuth: Sur l'unicode&#160;?
+ darkhorse64: Pas du tout. Le comité central de CG a décidé à l'unanimité
+ CopperFr: sur tout sur les déplacements
+ CopperFr: fermeture des rayons non essentiels aussi
+ darkhorse64: Ben ouais, t'as l'impression d'être un peu comme un hamster. D'un autre côté, les hopitaux sont pleins et quand t'es au fond de ton lit parce que t'es KO, c'est pas marrant non plus
+ CopperFr: après si tu veux faire un puzzle sur les chiffres japonais tu sera bien obligé d'utiliser l'unicode
+ dwarfie: et.... y'a pas de raison de le faire ...on a refuse un puzzle sur les nombres cambodgien justement pour cette raison
+ CopperFr: ben c'est dommage par contre
+ darkhorse64: C'est un peu con parce que le problème est pas mal sinon
+ BlaiseEbuth: Il suffit qu'il le reposte avec de l'ascii
+ CopperFr: ben suffit de l'éditer du coup
+ dwarfie: je vais etre franc ... pour un puzzle , il pourrait y avoir un leger interet ... et encore ... mais pour un clash, c'est juste une idee de merde ...
+ <b>**dwarfie a pris des chiantos ... oups</b></p><p><img src="/a/23496414257567" /> darkhorse64: Pourquoi&#160;? 
+ CopperFr: le clash tu le choisi pas c'est sur
+ dwarfie: tu les connais toi les nombre cambodgien ...&#160;?
+ CopperFr: ben non (ca m'intéresse moins que le japonais aussi)
+ dwarfie: pour apprendre la japonais , t'as babel ... pas besoin d'un clash stupide avec de l'unicode pour ca&#160;:)
+ leojean890: j'avoue tu fais un clash et tu te retrouves avec un truc pourri de parsing à gérer c chiant, alors que pour un puzzle tu prends la décision de le faire ou pas..
+ CopperFr: après c'est sur que si tu manipule que de l'anglais ou que des chiffres pas besoin d'unicode
+ darkhorse64: C'est tout de même plus interessant que de  compter les bits
+ dwarfie: darkhorse64 ... ca je suis bien d'accord ... mais comme la regle c'est de quasiment rien refuser ...
+ BlaiseEbuth: Breaking the law&#160;!
+ CopperFr: c'est judaspriest ca
+ BlaiseEbuth: :metal:
+ dwarfie: BlaiseEbuth ... je te rappelle que pour avoir refuser la 11eme version du meme puzzle trivial , j'ai ete interdit 2mois de moderer les clashs et que boulet il a toujours pas retrouver le droit&#160;?
+ dwarfie: clash ... 11eme version alors que 10 deja validé bien entendu
+ BlaiseEbuth: Ouai mais là c'est différent, il est pas trivial, il est pas faisable par plein de monde. :grin:
+ JBM: y'a le bon refuse et la mauvais refuse
+ CopperFr: en python ou en js ca passe tranquille non&#160;?
+ dwarfie: CopperFr .... teste ... tu nous diras ...
+ BlaiseEbuth: Pas de base. Il faut spécifier un truc en python je crois
+ dwarfie: sur ce , je vous laisse continuer a debattre , faut que je me rentre a ma maison ... 
+ BiMathAx: Salut, je voudrais apprendre le Html/CSS. Connaissez vous un site qui permet de l'apprendre plus "ludiguement" que les tutos Vidéos (ou connaisesez vous une série youtube sui l'explique bien&#160;?). merci
+ CopperFr: y a codecademy après ce sait pas si la version free sera suffisante
+ BiMathAx: ok mr je vais aller voire
+ Nyarlathoteps: openclassroom aussi, ya plein de contenu
+ leojean890: le puzzle music-scores.. rien que transformer "W 4090 B 100 W 20 B 100" en tableau 2D  c chiant à faire;p
+ CopperFr: ben tu remplace une lettre espace par la lettre puis tu split sur espace
+ CopperFr: avec un petit map et c'est bon :D
+ leojean890: le fait d'automatiser que W 4090 c'est 4090//w lignes blanches puis 4090%w caractères blancs sur la ligne suivante
+ leojean890: faut gérer quand on change de ligne lorsque la précédente a w carac
+ CopperFr: ah oui c'est le rle
+ leojean890: c'est pas si rapide à faire
+ leojean890: c pas très dur mais chiant
+ CopperFr: j'avais pas eu trop de mal pour le parsing en js
+ leojean890: ouias c'est pas très compliqué sur le principe mais bon faut pas avoir la flemme quoi
+ dwarfie: re
+ leojean890: yo
+ dwarfie: c'est l'heure de la phrase philosophique de automaton2000 ... non&#160;?
+ Automaton2000: ah&#160;? je suis pas une tortue
+ dwarfie: yes ...
+ leojean890: gg dwarfie;)
+ Zorg1: ezpz
+ dwarfie: je commence a en avoir une belle collection :D
+ Zorg1: ah t'as récupéré les cheat code d'Automaton2000 :p
+ Automaton2000: mais c'est bien le moment ou tu as des infos sur le challenge
+ Zorg1: oui Automaton2000 le thème du challenge ne sera pas une compétition de moto ski
+ Automaton2000: les gens ne sont pas les mêmes
+ leojean890: j'me demande bien ce qu'on va devoir faire avec ces sorciers;)
+ Zorg1: une course de chaudron avec collision élastique&#160;?
+ dwarfie: c4l avec des potions
+ Zorg1: la même chose que le dernier challenge avec un habillage différent ^^
+ leojean890: j'suis pas fan de c4l ^^
+ leojean890: chacun ses gouts of course
+ leojean890: p'tet un principe totalement différent de ce qu'ils ont pu faire jusqu'à mtn
+ Thyl: un jeu à24
+ Thyl: XD
+ leojean890: avec des parties à + de 4 on a pas vu mais ça peut ê sympa;)
+ leojean890: pour le moment dans les multis issus de chalenges les 2 qui me tentent vraiment pas de commencer c'est CALM et might &amp; magic
+ leojean890: et sinon les trucs genre CR, BOTG, C4L et avec physique je suis pas chaud d'approfondir
+ leojean890: pour le moment
+ leojean890: p'tet que je m'y mettrai someday
+ BlaiseEbuth: dwarfie en action&#160;: <a rel="nofollow" class="external free" href="https://imgur.com/hR4ZMFn">https://imgur.com/hR4ZMFn</a>
+ dwarfie: :D
+ Thyl: comment on aloue en tableau en C++ dynamiquement
+ BlaiseEbuth: int* tableau = new int[taille];
+ Thyl: avec en tab 2D
+ Thyl:&#160;??
+ BlaiseEbuth: int** tableau = new int*[hauteur];for(int i =0; i&lt; hauteur; ++i)tableau[i]=new int[largeur];
+ Neumann: Sale
+ Thyl: merci
+ Thyl: t'as mieux Neumann
+ Neumann: Rester en 1D
+ BlaiseEbuth: Tu peux remplacer la boucle par: fill(tableau, tableau + hauteur, new int[largeur]);
+ CopperFr: sinon tu peux utiliser les vla (je crois que ca marche)
+ BlaiseEbuth: Moi je réponds aux questions qu'on me pose... :3
+ leojean890: rester en 1D avec bitset pour maximiser le nb de rollouts&#160;;)
+ BlaiseEbuth: rollout&#160;?
+ leojean890: pour un MCTS par ex;)
+ BlaiseEbuth: Ah ouai. La simu quoi.
+ leojean890: yep^^
+ BlaiseEbuth: Parlez français quoi
+ leojean890: ouais j'ai souvent vu ce terme en anglais genre dans les PM donc habitude:p
+ BlaiseEbuth: C'est même pas le vrai terme officiel&#160;! "simulation sometime called playout or rollout"
+ leojean890: je me demandais même à un moment si ça voulait pas dire "simuler un game complet"^^ quand ils disaient faire XX k rollouts sur UTTT 
+ leojean890: 100k parties complètes ce serait efficace;)
+ leojean890: en 50ms
+ BlaiseEbuth: Ouai...
+ Zorg1: bah "rollout" dans ce cas là c'est simuler des tours jusqu'à la fin du jeu
+ leojean890: ah donc ils simulent bien 100k parties en 50ms :o:o great thing
+ leojean890: :o :o*
+ Zorg1: UTTT j'en fais 30K
+ leojean890: c'est déjà bien!
+ Zorg1: Certain en font 60/70K
+ BlaiseEbuth: Tiens. C'est l'heure des hiboux.
+ Zorg1: alors 100 K pourquoi pas
+ leojean890: j'avais même lu 100k pour les premiers, j'ai bien retenu&#160;?;)
+ leojean890: msmits etc les bourrins du code optimisé aux petits oignons&#160;;)
+ Zorg1: après c'est généralement le nombre de rollouts au second tour (le premier avec 100 ms) qu'on prend, pour comparer
+ leojean890: oui, le premier tour c'est unfair^^
+ Zorg1: après faut faire gaffe certains donnent aussi le nombre de coup
+ leojean890: ah ouais;)
+ Zorg1: mais 100 Kcoup c'est pas terrible pour UTT
+ leojean890: ouais vu que certains font 100k parties, si tu fais 100k coups c'est 40 fois mois bien si on considère qu'une partie dure en moyenne 4O coups;p
+ Zorg1: après le nb de coup c'est utile pour comparer un MCTS et un Minmax
+ leojean890: ouais vu que le minmax c'est une seule partie mais + de coups^^
+ leojean890: tu px voir quel algo est le plus performant avec le nb de coups total
+ leojean890: compare( sum(nbCoups, partieWithMCTS), nbCoups1PartieMinmax) 
+ Zorg1: après bon ça reste du concours de qui a la plus grosse ...
+ leojean890: j'avoue:p
+ Zorg1: après tu peux toujours balancé un chiffre, personne ne peux vérifier
+ leojean890: clair;)
+ BlaiseEbuth: Ce qui est inutile, puisque c'est moi...
+ leojean890: tu print un faux chiffre en message
+ leojean890: comme dans OOC tu print volontairement N-1 positions possibles pour induire les gens en erreur et faire croire qu'ils peuvent mieux élaguer :p
+ leojean890: ce serait sadique;)
+ BlaiseEbuth: Me voilà à faire de l'objet en python... #keskifopafer
+ leojean890: mais tu aiiimes le python avoue hehe&#160;;)
+ leojean890: plus que le java;)=p
+ dwarfie: il aime le jython en fait
+ darkhorse64: Tu sais ce qu'il te dit le bourrin du code optimisé aux petits oignons :stuck_out_tongue:
+ leojean890: c'est un compliment hehe;)
+ Zorg1: dans quelques semaines on va découvrir que BlaiseEbuth est un contributeur star de python
+ leojean890: c'est un truc que j'ai pas taffé moi le code super rapide en C/C++...
+ leojean890: bitset etc
+ leojean890: BlaiseEbuth cache bien son jeu hehe
+ leojean890: ils ont vraiment dit que ça leur avait pris 1-2h de faire le puzzle music-scores bob et stilgart ;o bah moi.. bcp +;)
+ dwarfie: et bien ... heureusement pour toi que t'as pas eu a le faire en contest&#160;;)
+ leojean890: sérieux c'était un contest ça&#160;?
+ leojean890: de 4h&#160;?
+ leojean890: en 4h c'est peut être faisable mais ça m'étonnerait que j'aie tout débug
+ dwarfie: the gift + music score ...
+ BlaiseEbuth: Bah entre python et java... Ouai python.
+ leojean890: en 1h30 j'ai un truc qui détecte les noires dans les 2 premiers valieurs
+ leojean890: mais ça marche pas dans les valideurs en bas jsp pk
+ leojean890: et il me reste les blanches à faire
+ leojean890: et j'ai pas le do du bas aussi mais ça va pas être dur
+ leojean890: gift + music scores en 4h faut être rapide.....
+ leojean890: (jamais vu the gift encore)
+ dwarfie: j'avais pas fait 100% ... j'avais fini a 75% sur music score 
+ BlaiseEbuth: leojean890 tu l'a fait pourtant
+ dwarfie: c'est vrai en plus qu'il l'a fait :D
+ BlaiseEbuth: Genre je raconte des conneries...
+ BlaiseEbuth: Music scores c'est de la reconaissance de pixel&#160;? C'est le sumum de la perversion en terme de parsing.
+ leojean890: ah bah si j'ai fait the gift j'ai oublié et je sais plus ce que c'est xD
+ leojean890: 75% en 4h&#160;?
+ dwarfie: 100% + 75% ... c'etait 
+ dwarfie: 4h pour faire les 2
+ leojean890: bonne perf je pense;p
+ leojean890: ouais la reconnaissance de pixels^^
+ leojean890: en 1h30 j'ai un premier résultat, loin d'ê fini
+ leojean890: puis j'ai fait une pause et je vais reprendre après;)
+ leojean890: mais dans l'idée c'est pas si rapide pour moi;)
+ dwarfie: avec les grosses notes c'est pas trop dur , c'est quand elles devienent plus petites que c'et un peu plus hard
+ leojean890: ouais voilà bah ça marche pas encore pour les petites
+ leojean890: j'ai que 2 valideurs ok
+ leojean890: pourtant je me disais que la même logique devrait marcher..
+ leojean890: j'ai mis des seuils pourris sur la taille des notes par rapport aux lignes qui marchent pas tjr, je vais changer ça.. genre "repérer la première note" et s'en tenir à la tille
+ leojean890: taille
+ dwarfie: si je souviens bien , je regarde meme pas la taille des notes ... mais celle ces lignes et leur position oui ...
+ leojean890: ça aussi ouais
+ leojean890: important
+ leojean890: je fais des groupements connexes par colonne de "noir"
+ Sofia-Alves: bonsoir ^^
+ leojean890: et je considère le milieu
+ BlaiseEbuth: Salut Sofia-Alves
+ leojean890: hello
+ Sofia-Alves:&#160;:)
+ Dysta: Cherche stage fin d'étude
+ BlaiseEbuth: Moi je cherche tes références, le domaine dans lequel tu cherches, ta localisation géographique... Ah et ta politesse aussi. :grin:
+ dwarfie: en forme BlaiseEbuth aujourd'hui ... t'as tapé dans ma reserve de chiantos ou bien ...?&#160;;)
+ BlaiseEbuth: Ca va... Parles pas trop de chiantos du coup. :imp:
+ dwarfie: confine dans ma mine , j'ai rien dautre a faire que de recolter de la poudre de granite et de champignon ... donc j'accrois la production ,)
+ dwarfie: disponible sur 3615 kinenveu
+ BlaiseEbuth: :candy:
+ leojean890: tiens 3 valideurs ok youpie
+ Dysta: Cherche stage fin d'étude
+ Dysta: nn j'rigole mdr
+ <b>**BlaiseEbuth efface le /kick qu'il était en train de taper.</b></p><p><img src="/a/51656823426085" /> Antonneau: Sacré dysta
+ leojean890: 25% music scores c'est pas encore ouf:s
+ Dysta: *essuie la sueur entre sa raie des fesses*
+ JBM: on va t'appendre a lire la musique ;p
+ Dysta: (comment on met en italique&#160;?)
+ leojean890: j'avoue JBM
+ leojean890: je suis noob&#160;!
+ Dysta: <i>test</i>
+ Dysta: noooo
+ BlaiseEbuth:  /me tonmessage
+ <b>**Dysta remercie Blaise de son efficacité </b></p><p><img src="/a/52317223613995" /> BlaiseEbuth: :thumbsup:
+ <b>**JBM monmessage</b></p><p><img src="/a/51656823426085" /> <b>**Antonneau despacito</b></p><p><img src="/a/51659662500421" /> <b>**Dysta recherche stage fin d'étude </b></p><p><img src="/a/52317223613995" /> BlaiseEbuth: (╯°□°）╯︵ ┻━┻
+ Dysta: mdrrr aller c bon j'arrête pour de vrai cette fois 
+ ArnaudQu: haha
+ Dysta: Blaise, j'adore l'humour sache le 
+ BlaiseEbuth: Moi aussi, mais les gens ont plutôt tendance à pâtir de mon humour qu'à l'apprécier... :smiling_imp:
+ leojean890: j'ai une mauvaise vue, les notes trop rapprochées ça marche pas :s
+ <b>**leojean890 ..</b></p><p><img src="/a/52317223613995" /> <b>**BlaiseEbuth présente ses excuses au gars qu'il a kick parce qu'il demandait comment fermer le chat.</b></p><p><img src="/a/42398427701382" /> leojean890: params =&gt; cacher les messages quand le chat est minimisé :P
+ leojean890: c'est de ça dont tu parlais&#160;?!:p
+ BlaiseEbuth: 'tain selenium quand il trouve pas un élément il lève une exception... Pouvait pas juste renvoyer None ou 0&#160;?
+ leojean890: tu fais des tests de GUI ou bien&#160;?
+ BlaiseEbuth: C'est qui Gui&#160;?
+ Dysta: Guy Bole 
+ Dysta: Tu connais pas&#160;?
+ leojean890: j'avais un peu de ça à thales.. mais j'ai pas touché à selenium perso;)
+ leojean890: Guy moquet
+ leojean890: M13 Paris
+ BlaiseEbuth: Tester c'est pour les faibles, on le dira jamais assez.
+ leojean890: alors a) tu utilises selenium pour faire autre chose que tester b) tu es faible =&gt; quelle réponse :P
+ BlaiseEbuth: A ton avis&#160;? J'ai une tête à utiliser un outil pour ce pour quoi il est prévu&#160;?
+ leojean890: t'es une tête de devil de l'enfer, le belzebuth troll ;P
+ BlaiseEbuth: Réponse a) bien sûr.
+ leojean890: tu prépares une série d'attaques hackerrank avec selenium;)
+ BlaiseEbuth: :zipper_mouth:
+ Zorg1: mais elle vont lamentablement échouée sur mon firewall openoffice
+ Stilgart: Automaton2000: espèce de tortue&#160;!
+ Automaton2000: on est pas en mode debug dans l'ide et timeout souvent
+ Stilgart: Automaton2000: j'ai dit tortue, pas rust&#160;!
+ Automaton2000: j'ai même pas eu le temps de faire une copie de votre code. merci.
+ leojean890: mdr cheater automaton2000&#160;;)
+ Automaton2000: en meme temps , je suis d'accord
+ leojean890: bah il faut vu que je dis vrai;p
+ Stilgart: clairement, quand c'est moi qui demande il a un trap pour éviter de dire tortue
+ leojean890: hehe il l'a dit avec dwarfie tout à l'heure;)
+ Stilgart: il le dit souvent à dwarfie
+ leojean890: il est bon dwarfie;)
+ leojean890: pour lui faire dire si souvent;)
+ leojean890: maipulation des bots!
+ leojean890: bon musical scores c'est moins facile que ce que tu disais :P
+ leojean890: 3 valideurs ok pour le moment&#160;;)
+ leojean890: les premiers, avec les notes éloignées..
+ Zorg1: je l'ai pas fait celui là
+ leojean890: c'est pas dur de réussir les premiers valideurs mais après..
+ CopperFr: Ca marche pas l'unicode :D
+ Zorg1: ça marchait l'unicode sur Amiga ,
+ Zorg1:&#160;?
+ CopperFr: sur mon 500 je pense pas
+ CopperFr: en fait je suis en js le readline() me donne pas les bonnes entrées
+ CopperFr: si je met les entrées à la main ca marche par contre
+ JBM: tiens un twitch
+ JBM: bon si vous cause pas plus que ça on va jamais me voir
+ Zorg1: bah oui
+ Zorg1: fais un peu de pub
+ Zorg1: caps lock comme un malade
+ JBM: ok j'attends mon heure
+ Zorg1: va salonner sur discord avec ceux-qui-comptent-dans-le-game
+ JBM: determiner la periode d'une fraction
+ Zorg1: tiens il s'y passe quoi&#160;?
+ JBM: (en decimal)
+ Zorg1: il existe déjà ce puzzle&#160;?
+ JBM: pas le genre de sujet a traiter avec mon alcoolemie
+ JBM: il semblerait
+ JBM: par helgui
+ Zorg1: oui un "very hard"
+ JBM: c'est un clash,yapa e difficulte
+ BlaiseEbuth: C'est lequel de live&#160;?
+ Zorg1: ah je parlais de celui là&#160;: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/expert/recurring-decimals">https://www.codingame.com/training/expert/recurring-decimals</a>
+ JBM: ah c'est un shortest en plus
+ JBM: euh,celui qui clashe quoi
+ JBM: pythonysta
+ BlaiseEbuth: Y'en a 6
+ BlaiseEbuth: Ah ok
+ BlaiseEbuth: Pendant 6h... 
+ Zorg1: oui 6 clashes
+ JBM: oui voila celui de 6h
+ JBM: 6 purée
+ Zorg1: super j'ai droit à la pub
+ JBM: ce widget va avoir le meme effet que la quete sur les contribs
+ Zorg1: trop du bonheur
+ Zorg1: ah ok c'est simple le CoC
+ JBM: oh
+ JBM: ton lien est mon premier Puzzle Of The Week
+ JBM: [émotion]
+ Zorg1: ya CopperFr qu'est méchant, il refuse des puzzles&#160;:(
+ CopperFr: oui les entrées sont pas fournies correctement au programme
+ Zorg1: oh encore de l'unicode
+ BlaiseEbuth: Ah. Je l'avais zappé.
+ Zorg1: Je vais faire un puzzle APL avec des caractères grecs en APL :D
+ Zorg1: puisqu'on peut faire des inputs unicode, on va se gener ^^
+ CopperFr: ben les inputs que je reçoit sont pas bonnes
+ JBM: "hey, un site pour apprendre codinGame?"
+ JBM: non mais sérieux
+ BlaiseEbuth: Quoi&#160;?
+ JBM: jvais me reprendre une binouze pour oublier ça tiens
+ Zorg1: il regarde un twitch je crois
+ CopperFr: il boit de l'alcool je crois
+ Zorg1: les deux ne sont pas incompatibles, paraît il
+ Yoni19: bonsoir 
+ CopperFr: bonsoir
+ Yoni19: je debute c'est hard coooore ce site
+ CopperFr: oui very hard parfois
+ Stilgart: voire même légendaire
+ Stilgart: JBM: medium pour the lost file, ça se bourrine à grand coup de liste sans réfléchir
+ Yoni19: arretez moi j'arrive pas les truc de base avec le truc qui doit se poser mdrrrr
+ JBM: je sais pas
+ JBM: je l'ai résolu sans trop réfléchir non plus
+ Stilgart: si tu le mets hard, ça le rend plus dur je pense
+ Yoni19: ah xD
+ Stilgart: parce que les gens vont pas penser que c'est en fait facile de calculer t
+ JBM: mais je suis passé du «c'est trop simple» avant de le résoudre à un «ah y'a qund même ça» après
+ JBM: donc j'en ai fait acte dans les commentaires
+ JBM: me souviens plus du détail plus que ça
+ Stilgart: le plus dur c'est d'extraire la cc, mais bon... 
+ JBM: et bon, les gouts et les couleurs sur les difficultés
+ Yoni19: qui m'apprends js 
+ Yoni19: xD
+ Stilgart: c'est pas plus dur qu'un bfs/dfs, et tout ça c'est en medium (quand ça suffit à finir le puzzle)
+ JBM: mon code fait 6 lignes, c'est donc facile
+ JBM: ou j'ai du reflechir, c'est donc very hard
+ Stilgart: j'ai eu la flemme d'aller voir la doc de Data.Graph
+ Stilgart: (et ça m'aurait sans doute pris plus de temps de coder ta solution)
+ Zorg1: cette métrique de difficulté, JBM ...
+ JBM: oui mais toi t'es en relation douteuse avec ton clavier
+ JBM: Zorg1: t'en as une bonne a proposer? ;d
+ Stilgart: surtout, j'utilise jamais Data.Graph
+ Stilgart: donc je sais pas du tout ce qu'il y a dedans
+ JBM: oui, c'est ce que j'ai dit
+ b0n5a1: o/
+ JBM: \o
+ Zorg1: o/
+ Stilgart: (je dois rater le lien avec mon clavier)
+ CopperFr: étrange quand même j'ai 2 caractères qui sont pas bien transmis
+ JBM: connaissance vs verbosité
+ JBM: l'éternel combat
+ Stilgart: là même pas
+ BlaiseEbuth: Mais non, ceux qui font de grands discours sont ceux qui en savent le plus. C'est bien connu
+ Stilgart: c'est juste... j'ai qu'à écrire un code en 20 lignes, go taper ce code
+ Stilgart: BlaiseEbuth: drôle de métrique&#160;:)
+ JBM: t'en as une bonne a proposer?
+ JBM: mmm
+ JBM: deja vu
+ JBM: bon
+ JBM: continuer a faire des horreurs avec maven, ou se refaire un bon tres vieux jeu d'aventure
+ CopperFr: il est sur amiga aussi le jeu d'aventure&#160;?
+ BlaiseEbuth: Quel jeu&#160;? Pour voir si c'est mieux que maven
+ Zorg1: pour définir une bonne métrique de difficulté, on va dire que les pom.xml sont de difficulté average à lire
+ CopperFr: c'est un xml en utf-8&#160;?
+ Zorg1: en gros
+ Zorg1: on utilise très peu les chars unicode en pom.xml mais c'est possible
+ CopperFr: UTF-8 is the default character encoding for XML documents.
+ BlaiseEbuth: CopperFr comment ça readLine te donnait pas les bons chars&#160;?
+ CopperFr: j'ai deux erreurs sur le premier test
+ CopperFr: un caractère sur la ligne du milieu
+ CopperFr: et un sur la dernière
+ BlaiseEbuth: Ah ouai, je l'ai. J'avais juste print la première
+ CopperFr: ma première est bonne par contre
+ BlaiseEbuth: Ouai pareil
+ CopperFr: il me manquait 2 lettres en resultat
+ CopperFr: (le k et une autre)
+ CopperFr: c'est peut un bug de codingame par contre
+ BlaiseEbuth: C'est bizarre comme c'est les deux même char partout...
+ b0n5a1: bonne nuit
+ BlaiseEbuth: Bah pour le coup en bash y'a pas de soucis. :D
+ CopperFr: comme quoi :D
+ BlaiseEbuth: En C++ non plus. Ca dépend vraiment des caractères...
+ b0n5a1: alphabiotique...
+ b0n5a1: bon je vais me coucher :grinning:
+ BlaiseEbuth: dwarfie: il reste une place pour rejeter si tu veux....&#160;:)
+ BlaiseEbuth: o/ b0n5a1
+ b0n5a1: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/56101b729336402b578c558dc14e1cb926d4">https://www.codingame.com/contribute/view/56101b729336402b578c558dc14e1cb926d4</a> go reject ça ^^
+ Stilgart: vous avez pas déjà reject trois fois&#160;?
+ b0n5a1: c'est comme la magie faut répéter 3 x&#160;?
+ b0n5a1: bon...bonne nuit pour de vrai là ^^
+ BlaiseEbuth: C'est un wip ton truc
+ CopperFr: ah oui je me souviens de celui là :D
+ b0n5a1: ça va être long ce wip BlaiseEbuth...alphabiotique en anglais ça donne quoi hein&#160;? ^^
+ BlaiseEbuth: :grin:
+ CopperFr: c'est sympa comme mot
+ Stilgart: huhu
+ b0n5a1: superman&#160;?
+ BlaiseEbuth: Vas te coucher&#160;! ^^
+ b0n5a1: oui m'dame...
+ CopperFr: même en pascal c'est bon les entrées
+ BlaiseEbuth: Fichtre...
+ leojean890: 58% music scores.. purée c chaud de faire parfait....
+ leojean890: ah merde je confonds le ré et le do en bas
+ leojean890: omg
+ leojean890: ah 66% avec le do mais les derniers valideurs trop serrés c'est hard ;o..
+ CopperFr: il est où le ré&#160;?
+ leojean890: j'avais pas vu qu'il pouvait y avoir un do tout en bas et un sol tout en haut .. du coup j'ai 74% et faut que je comprenne pk ça foire quand j'ai des lignes 1 pixel :s
+ CopperFr: (après c'est dans un sketch des inconnus)
+ leojean890: à caen les vacances&#160;? on va à caen à troie&#160;? non à 4..
+ leojean890: j'aurais dû dire seth, pardon
+ leojean890:&#160;;)

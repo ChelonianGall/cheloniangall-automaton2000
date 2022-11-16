@@ -1,0 +1,2915 @@
+ GenesisWasTaken: testing stuff out on an alt account is within the rules right?
+ NinjaDoggy: idk, i was banned before for it(on my alt)
+ NinjaDoggy: but it's probably fine
+ Zenoscave: your alt&#160;?
+ NinjaDoggy: just namei t differnetly
+ NinjaDoggy: in UTTT
+ NinjaDoggy: i got an email saying i was hogging legend spots and got it removed lol
+ NinjaDoggy: I wasn't too discrete with the name though...
+ GenesisWasTaken: why does it take so long to get out of wood league lol
+ NinjaDoggy: NinjaDoggySmurf :thinking:
+ GenesisWasTaken: is it because there are only 16 people insthis league lmao
+ GenesisWasTaken: it takes forever for me to find 1 match
+ NinjaDoggy: submits are slow right now
+ NinjaDoggy: because servers are overloaded&#160;:(
+ GenesisWasTaken: been sitting here for 10 minutes and I'm still at 50%
+ NinjaDoggy: game's too popular
+ elderlybeginner: what are the basic rules for utilizing learns in silver?
+ NinjaDoggy: learn first 8
+ NinjaDoggy: you can get top of gold with that still
+ NinjaDoggy: my current bot learns index 0 for first 6
+ elderlybeginner: any ratings for learns required
+ LLG: I just learn until I have 8-10 spells, still trying to figure out the optimal number
+ elderlybeginner:&#160;?
+ NinjaDoggy: no, learn first tome for 8 turns is pretty good
+ LLG: I put higher weight on spells with 0 cost
+ NinjaDoggy: was around top 30-40 gold today
+ NinjaDoggy: with that still
+ NinjaDoggy: you can also try to generate a value for each tome
+ NinjaDoggy: and take highest value tome or something
+ LLG: yeah that's what I do
+ elderlybeginner: 5-6 learns at start works best for me, but still got stuck in silver and I am wondering where are my week points
+ NinjaDoggy: probably searching algo
+ NinjaDoggy: and python&#160;:(
+ LLG: maybe your evaluation heuristics
+ elderlybeginner: most certainly it's about heuristics
+ LLG: I've seen people in gold with only about 5000 sims
+ elderlybeginner: I don't rate learns and brews
+ LLG: so it technically could work with good heuristics
+ LLG: one thing you could do is optimize the end game
+ LLG: like if you're at 5, and you can get to 6 before your opponent can brew a single potion
+ LLG: that's a good target to rush
+ LLG: or if they're at 5 and about to get 6
+ NinjaDoggy: yea, end game optimization is pretty big
+ LLG: you can try to cast spell and get bonus points for ingredients at the end
+ NinjaDoggy: having 1 extra potion usually wins
+ elderlybeginner: that would require to look into opponent
+ LLG: you can just track the number of potions each side have brewed, for now
+ Uemu: if you're at five and your score + the potion you will make is higher than opponent's score, rushing the sixth potion when the opponent is ahead is bad imo 
+ elderlybeginner: i am usually first with 6 brews, but loosing with points
+ LLG: yeah I only rush 6th if the 6th potion give me higher score than my opp.
+ LLG: otherwise I look for the second closest, etc.
+ LLG: until I find one
+ LLG: if I can't find one I just optimize ingredients
+ LLG: because you get 1 points for each tier2+ ingredients at the end
+ Uemu: Oh the ingredient part is smart as hell
+ GenesisWasTaken: I do search for both sides though
+ GenesisWasTaken: so I have perfect information on which player can rush a potion first
+ GenesisWasTaken: let's say, they're at 5, and there's no way I'm beating them to 6
+ GenesisWasTaken: I'll optimize ingredients
+ elderlybeginner: still you get more points by brewing 6th then by optimizing end-state with inventory
+ Uemu: Yes but if you can't brew sixth before him stack ingredients 
+ GenesisWasTaken: yeah that ^
+ GenesisWasTaken: if I can't get to 6th before my opponent I stack ingredient
+ elderlybeginner: I must have bigger heuristics weaknesses then that
+ GenesisWasTaken: right now I just evaluate by point/turn
+ GenesisWasTaken: I get the path to each potions, and divide their reward by the number of turns to reach it
+ Zenoscave: GenesisWasTaken do you include current inventory in your eval?
+ GenesisWasTaken: for example, I can brew a 20 points potion in 4 turns, that's 5 points a turn
+ elderlybeginner: in general i'm going for "kill", just trying to brew asap and only rating casts
+ GenesisWasTaken: I used to, but now I don't
+ GenesisWasTaken: the only thing I evaluate is point/turn
+ Zenoscave: Put it back. that's a big part. Just need to tune the eval
+ GenesisWasTaken: then I have some heuristics to determine whether I can get to that potion before my opponent
+ elderlybeginner: do you rate brews in regards to its ingredients usage?
+ Zenoscave: yes
+ elderlybeginner: kind of balance points/ingredients?
+ Zenoscave: t0 &lt; t1 &lt; t2 &lt;t3
+ GenesisWasTaken: well, the potion's reward IS based on it's ingredients
+ GenesisWasTaken: but yeah, could be a thing to look into
+ Zenoscave: But you don't know which potion will be next. having ample t3's but not too many is important
+ GenesisWasTaken: yeah stacking 10 gold ingredients is a very common problem
+ GenesisWasTaken: I've seen it way too many times
+ elderlybeginner: i believe I'm learning and casting improperly
+ GenesisWasTaken: also, multicast
+ GenesisWasTaken: I can't believe I forgot about that up until upper silver
+ elderlybeginner: improperly casting when no solution is founded
+ GenesisWasTaken: I was doing single cast all the way from bronze to like, top 400 silver
+ GenesisWasTaken: before I started generating states for multicasts
+ elderlybeginner: i have multicasting included in simulation only
+ GenesisWasTaken: also, how many states are you able to generate in 50ms?
+ GenesisWasTaken: it's ironic how my old bot was super efficient about generating states (only 1-2k before timing out)
+ Zenoscave: 30-40k
+ elderlybeginner: i don't see big difference between 2k and 5k; thus it's about heuristics
+ GenesisWasTaken: so I tried a solution that doesn't require as much simulation
+ GenesisWasTaken: but then my current bot does 5k sims in 5ms
+ GenesisWasTaken: I'm like
+ GenesisWasTaken: NOW you decide to be fast huh
+ GenesisWasTaken: when I don't need you to be
+ NinjaDoggy: @Zenoscave
+ NinjaDoggy: my secret sauce pruning is finally being useful! :O
+ NinjaDoggy: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/b35c2180-042a-45e0-9c94-24c6d3bb53c1">http://chat.codingame.com/pastebin/b35c2180-042a-45e0-9c94-24c6d3bb53c1</a>
+ NinjaDoggy: I'm computing the best possible set of 6 brews given an initial set of casts, and a fixed 11 brews
+ Zenoscave: Nice NinjaDoggy!
+ NinjaDoggy: it's easily searching depth 40-60 &lt; 1 second XD
+ Zenoscave: I'm trying to do opp blocking
+ NinjaDoggy: ah...
+ NinjaDoggy: it's a pain
+ Zenoscave: any pointers?
+ NinjaDoggy: simulate your opponent for a given depth
+ NinjaDoggy: then simulate your self for that same depth
+ GenesisWasTaken: oh yeah speaking of which, I should do that also
+ NinjaDoggy: compute opp turn 1, then ur turn 1, then opp turn 2, etc
+ Zenoscave: then rinse and repeat?
+ NinjaDoggy: knowing minDist to potions really helps
+ NinjaDoggy: yea
+ GenesisWasTaken: right now what I'm doing is
+ GenesisWasTaken: check which potion has the highest return for my opponent
+ GenesisWasTaken: like, point/turn for him
+ GenesisWasTaken: then if I can get to it in less turns than he can
+ GenesisWasTaken: I'll rush it
+ GenesisWasTaken: but only if he doesn't have a second best option available in 2-3 turns
+ Zenoscave: But what if he has two other potions where p1+p2 / (t1+t2) is &gt;?
+ NinjaDoggy: sry p1+p2/t1+t2 is?
+ Zenoscave: points and turns for items 1 and 2
+ GenesisWasTaken: my thought is, if I go out of my way and do unoptimal things to block him, only to have him brew another potion 1 turn later
+ GenesisWasTaken: that wouldn't be very profitable
+ GenesisWasTaken: so I only do that if my opponent doesn't have a second option available within x turns
+ NinjaDoggy: wait sry i'm prob being dense rn but
+ NinjaDoggy: what's points and turns?
+ Zenoscave: minDist and Price
+ NinjaDoggy: oh like if there's multiple options for opponent
+ Zenoscave: Yeah
+ NinjaDoggy: like if you block potion 1, but they do potion 2
+ NinjaDoggy: hehe ok secret sauce time
+ GenesisWasTaken: yeah that
+ Zenoscave: I chose the wrong one a lot
+ GenesisWasTaken: but yeah, as I said, I only do opponent blocking if they don't have another option within 2-3 turns
+ GenesisWasTaken: probably not the best way to do it
+ GenesisWasTaken: but it kinda improved my bot compared to not doing it at all
+ GenesisWasTaken: another thing I picked up from my colleague is to use a bit field to store spell castable state instead of storing a boolean on each Spell instance
+ GenesisWasTaken: so when you generate a new state, you only need to generate 1 bit field, instead of n booleans
+ GenesisWasTaken: with n being the number of spells
+ GenesisWasTaken: which in turn, means I don't even have to clone the spells, but rather just use the original array
+ GenesisWasTaken: anyway I'm gonna go grab something for lunch while waiting for my bot to reach silver
+ GenesisWasTaken: see you guys later
+ elderlybeginner: any one with python's code contest here? How long is your code?
+ ClockSort: alright, we're submitting. Let's roll.
+ NinjaDoggy: let's see it CLOCKSORT
+ NinjaDoggy: (don't mind if you bump me to legend&#160;;) )
+ miszu: rush B my friend
+ ClockSort: so far, meh results
+ miszu: yeah saw it&#160;:/
+ ClockSort: 16% done, server isn't that bad
+ NoobCod3: guys join the class of code im lonely
+ miszu: question for c++, does a function that returns a primitive can be returned as const?
+ Csipcsirip: it's not tha hard to try out :p
+ miszu: sorry I meant can it always be returned as const?
+ Csipcsirip: I don't understand the question
+ miszu: const before a function definition means the return value won't be modified
+ Good_Coder: Lol
+ Good_Coder: Hi
+ Good_Coder: Hi
+ Csipcsirip: const int f() {return 1;}&#160;?
+ Good_Coder:&#160;???
+ Good_Coder:&#160;???
+ Good_Coder: ...
+ miszu: int is a primitif
+ miszu: primitive*
+ Good_Coder:&#160;??????????????????????????????????????????????????????????????????????????????
+ Good_Coder:&#160;?????????????????????????????????????????????????
+ Csipcsirip: in this case if you do this: int a = f(); a will be modifiable
+ miszu: so could you say that whenever you return a primitive you could always put a const before?
+ Good_Coder:&#160;????????????????????????????????????????????
+ Zenoscave: Good_Coder quit.
+ Csipcsirip: but you can do int f(){return 1;} const int a = f(); in this case a is const
+ PatrickMcGinnisII: Coding with 1 day left in challenge...everyone: FML  ME:<a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=So6uDI0M-40&amp;&amp;tt=666">https://www.youtube.com/watch?v=So6uDI0M-40&amp;&amp;tt=666</a>
+ miszu: yeah I know you can but
+ ClockSort: top 100 Gold and climbing, yess!
+ miszu: primitives will always be const when returned though
+ miszu: even if you don't put const
+ Csipcsirip: wut? no.
+ Zenoscave: nice ClockSort
+ Csipcsirip: int a = f(); a = 69; 
+ miszu: yeah
+ NinjaDoggy: i think he means
+ NinjaDoggy: f() = 69
+ NinjaDoggy: doesn't work?
+ ClockSort: try f() = 420
+ NinjaDoggy: lol
+ NinjaDoggy: maybe compiler will allow it
+ miszu: can't lol
+ miszu: haha
+ miszu: because f() is not an l-value
+ Csipcsirip: oh okay. never tried that :D
+ miszu: if you are interested into why you can't do: 5 = 7, it has to do with l-value in a language
+ ClockSort: also 5 isn't 7
+ miszu: pretty interesting
+ miszu: I really mean 5 = 7 and not 5 == 7
+ The_Duck: 5 isn't 7 until you set it equal to 7, maybe&#160;:)
+ Zenoscave: Prove it ClockSort
+ jlfudev: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/1472982457ca7edb2a85631a12748f195d7ca69">https://www.codingame.com/clashofcode/clash/1472982457ca7edb2a85631a12748f195d7ca69</a>
+ NinjaDoggy: i would be down for some clash of code
+ miszu: from 0 to 13s: people submitting and winning first games13s+: losing at the end and ending below boss bot
+ NinjaDoggy: but dedicating too many cores to offline computing right now :P
+ NinjaDoggy: if only I got my hands on a zen 3 cpu...
+ NinjaDoggy: this would be going more than twice as quick
+ eulerscheZahl: 6,928 results found for «Score - All»
+ NinjaDoggy:&#160;?
+ eulerscheZahl: 7k
+ NinjaDoggy: yea so close
+ NinjaDoggy: 41 off :P
+ Lysk: badoum tss
+ NinjaDoggy: i mean 72 ofcourse&#160;:)
+ wlesavo: we need some smurfs
+ eulerscheZahl: oh, i missed a kick on that&#160;??? spam above
+ Kiat: server unstable?
+ wlesavo: feeling like the old days, wake up earlier to be able to play some games
+ Instafluff: anyone happen to know how to avoid a big gc spike for JS on CG?
+ ClockSort: never lose a reference to any object. then GC doesn't have anything to clean up
+ dbdr: it will still try...
+ Instafluff: hmm...
+ ClockSort: it worked for me in C#, haven't tried JS
+ reCurse: That's not where all the cost is though
+ eulerscheZahl: wlesavo just giving up? <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/508676809">https://www.codingame.com/share-replay/508676809</a>
+ ClockSort: right, @recurse I'm paying in other ways too :P
+ reCurse: It makes GC traversal slower for one
+ reCurse: Not sure it's a benefit but if it works for you
+ wlesavo: assertion triggered, do not know why though eulerscheZahl
+ eulerscheZahl: assert(wlesavo &gt; eulerscheZahl)
+ reCurse: Hmm is it bad to have coffee at 2am
+ dbdr: assert(can_still_win())
+ Ifthel: Instafluff my bet, reuse via a set() command instead of instantiating, keep a bunch of that object type in an array for later reuse.
+ wlesavo: smth like that
+ eulerscheZahl: get some sleep and come back stronger tomorrow reCurse
+ reCurse: But tomorrow will be wasted with servers
+ reCurse: If I stay up longer now I can stay up longer tomorrow
+ reCurse: Or something...
+ eulerscheZahl: did you take off from work?
+ reCurse: Monday? Yeah
+ wlesavo: submits will be dead soon anyways
+ eulerscheZahl: smart move. i did the same :D
+ dbdr: why monday?
+ dbdr: ah, to rest
+ Instafluff: thanks @Ifthel im looking to see if i can force objects to be on the stack in node...
+ reCurse: All nighter
+ eulerscheZahl: chatting after challenge
+ reCurse: This might be my last contest for a while
+ reCurse: So wanna make it count
+ eulerscheZahl: oh, relevant changes in your life?
+ reCurse: Possibly
+ eulerscheZahl: still lurking on the chat?
+ reCurse: Discord yeah
+ reCurse: Webchat unlikely
+ dbdr: good content on discord?
+ reCurse: I prefer the chat on discord and I'm already pretty active on it
+ reCurse: Webchat means another app/window meh
+ benlinn: fk man this game is hard
+ dbdr: not for reCurse&#160;;)
+ reCurse: I beg to differ
+ benlinn: who's that lol
+ reCurse: I'm starting to hate this game with every fiber of my soul
+ benlinn: lol
+ benlinn: nice to meet u guys&#160;:) i just want to get to bronze before time runs out
+ dbdr: inb4 ragequit
+ benlinn: dont give me any hints hto
+ kovi: which was the last game you liked recurse?
+ dbdr: ragequit and still win&#160;:)
+ reCurse: tbh I think it's more the contest effect
+ kovi: (i remember such last day hate for quite a few times...)
+ kovi: yeah...we got tired
+ reCurse: Like I'm sick of watching or thinking about it
+ reCurse: lol
+ kovi: at least its not 4 week long as locm
+ dbdr: burnout
+ wlesavo: felt this way about phd thesesis
+ wlesavo: still do
+ kovi: 4 week without depth. halite3 was good
+ reCurse: Last game I liked is probably FB or WW I think
+ reCurse: On CG
+ Csipcsirip: server is so dead already. rip spamsubmit
+ wlesavo: and it is only 100 ppl computing
+ Gonny: when it's that slow to push because servers are overloaded, does it potentially increase your time outs?
+ wlesavo: would be close to 400 later
+ blasterpoard: I suppose it's so slow because of everyone running cgbenchmark
+ blasterpoard: (not me, my bot is not finished yet, I have nothing to test)
+ Csipcsirip: and games are even much shorter than usual
+ Csipcsirip: usually there are 100+ turns at least
+ wlesavo: yeah imagine 300 turn games
+ blasterpoard: I wonder why there were absolutely no problems during kutulu, 4players and 200 turns...
+ blasterpoard: maybe it depends more on the load of their cloud provider, not CG itself
+ kovi: maybe cause heuristic was enough to reach top gold in kutu
+ eulerscheZahl: or CG still has some problems with the backend
+ Batpapa: Do you know if in C++ there is any way to set the flag fpermissive? Virtual pure inheritance couldn't work without it..
+ Westicles: maybe 
+ Westicles: #pragma GCC diagnostic warning "-fpermissive"
+ Batpapa: I already tried, but without success&#160;:'(
+ Batpapa: I think i'll just recode some classes then
+ Westicles: you could do it the hard way from bash
+ Batpapa: Isn't it considered cheating? Because you by-pass their compiler limitation
+ CommanderCero: nah everyone uses pragmas otherwise c++ would be slow as hell
+ Batpapa: sure, at least for O3
+ Westicles: did you try this
+ Westicles: #pragma GCC diagnostic ignored "-Wunused-result"
+ Westicles: you can list exceptions error by error
+ kovi: wow, new leader. very nice submit bourgeof
+ bourgeof: thank you kovi, but the submit is not finished yet...
+ bourgeof: But it is a very good start&#160;:)
+ kovi: well, impressive start
+ bourgeof: Best ever for me&#160;:)
+ Batpapa: I always get
+ Batpapa: note: (if you use ‘-fpermissive’, G++ will accept your code, but allowing the use of an undeclared name is deprecated)
+ wlesavo: solid lead, nice
+ Batpapa: no worries, I give up!
+ LLG: I changed a tiny bit of how I choose spells to learn
+ LLG: I hope that's enough to push me to gold
+ LLG: I was #15 silver at 50% battles before the submit so maybe I could've been gold anyway, but let's see
+ Csipcsirip: wow bourgeof, calm down
+ bourgeof:&#160;;)
+ Csipcsirip: writing minimax to the endgame is giving me headaches&#160;:(
+ benlinn: battles in progress 0%
+ Instafluff: -1% :joy:
+ GenesisWasTaken: accidentally resubmitted both my smurf and my main
+ GenesisWasTaken: inb4 fighting myself
+ eulerscheZahl: you aren't allowed to use smurfs in contests
+ GenesisWasTaken: 👀 welp time to abandon my smurf
+ eulerscheZahl: last time thibaud was thinking about removing only the smurfs or both smurf and main account
+ eulerscheZahl: CG has some plagiarism check
+ eulerscheZahl: afaik they only run it for gold+legend
+ GenesisWasTaken: can I somehow delete my smurf so my main stay safe? 👀
+ GenesisWasTaken: there's a chance both my accounts get to gold on this submit
+ eulerscheZahl: then resubmit before it finishes
+ eulerscheZahl: a worse bot of course
+ Batpapa: have you any known way to by-pass the 100ko file size limitation?
+ eulerscheZahl: no. the limit is chars, not bytes
+ eulerscheZahl: so fancy unicode can increase it a bit
+ Batpapa: arhhh
+ Batpapa: I guess I have to make different files for differents techniques
+ GenesisWasTaken: what are you guys doing with your files that make it exceed 100 tho 👀
+ The_Duck: you can strip whitespace and comments to save some characters
+ eulerscheZahl: or use tab instead of space if you code in python
+ Batpapa: plenty of classes
+ Instafluff: minify :joy:
+ Batpapa: oh yeah, it's 4 spaces instead of each tab, good guess!
+ GenesisWasTaken: hi instafluff! was just watching the vod of your stream
+ eulerscheZahl: be careful about compression. if it's considered as obfuscation, it can disqualify you
+ GenesisWasTaken: you planning on streaming anytime soon?
+ Instafluff: hi genesis!
+ Instafluff: not anymore til next week :worried:
+ Instafluff: thanks for watching it btw!
+ Instafluff: i didn't know that. thanks for the heads up euler!
+ GenesisWasTaken: you shooting for gold today Instafluff?
+ Instafluff: hopefully. i was struggling vs random GC timeouts tonight and trying potential workarounds
+ Instafluff: it's looking like all of today will be struggling against the servers :joy:
+ GenesisWasTaken: lol xD good luck with that
+ GenesisWasTaken: I'm procrastinating redoing some parts of my heuristics
+ KingKirb64: Yo, how are  we doing 3am gang?
+ GenesisWasTaken: all I've done today is change my spells limit from 12 to 13 and fix 1 faulty comparison (where it compared references instead of values)
+ GenesisWasTaken: and somehow I'm seeing good improvements xD
+ Instafluff: thanks! good luck to you too. hopefully i can get back to working on the heur soon too :D
+ PatrickMcGinnisII: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=4LfJnj66HVQ">https://www.youtube.com/watch?v=4LfJnj66HVQ</a>
+ Westicles: sign in to confirm your age... shame on you!
+ LLG: it's 3pm gang on this side of the planet
+ BabyLearnToCode: it's 3:13pm =))
+ KingKirb64: dang where is that?
+ linjoehan: How about a song to wake you up? <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=ybGOT4d2Hs8">https://www.youtube.com/watch?v=ybGOT4d2Hs8</a>
+ PatrickMcGinnisII: already passed thru the metal playlist
+ lifetimeLearner007: Hey guys, here is what I'm doing:<a rel="nofollow" class="external free" href="https://pastebin.com/K6UdRjxL">https://pastebin.com/K6UdRjxL</a>But its timing out and not getting many iterations in bfs before timeout. Can someone point out my mistake/ suggest improvement?
+ benlinn: does anybody in the higher levels use javascript?
+ Instafluff: im using JS in silver atm :thinking:
+ LLG: there are a bunch of people in gold who uses js
+ benlinn: sweet ^
+ LLG: and 1 guy in legend who uses python
+ LLG: what a legend
+ benlinn: lol wow
+ benlinn: im guessing the best use C++ though?
+ LLG: yeah I think most ppl in legend uses c++ and rust
+ Instafluff: generally ya, if you need the iterations for simulation
+ benlinn: oh i just realized i can look it up myself
+ LLG: yeah that's where I get my information from xD
+ benlinn: 90% C++, 10% java and rust
+ PatrickMcGinnisII: How I wish VPN worked:  <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=2MwA3vatazw">https://www.youtube.com/watch?v=2MwA3vatazw</a>
+ Westicles: Je préfère des chanteuses comme Diane Dufresne ou comme Fabienne Thibeault
+ PatrickMcGinnisII: no Tatiana Shmaylyuk?
+ Westicles: I don't even know who they are... they made us memorize that in high school French and it never went away
+ PatrickMcGinnisII: Lo siento
+ linjoehan: lol PatrickMcGinnisII now you just name dropping.
+ PatrickMcGinnisII: gheesh, I'm running two trees per turn.  One with learns and rests and a quick one with just casts.  can't get depth
+ lowzhao: how to prevent timeout?
+ linjoehan: do it faster.
+ lowzhao: njoe
+ lowzhao: lol cool
+ lowzhao: i will do it faster then
+ PatrickMcGinnisII: I was trying to do 2 consecutive brew pairings eval instead of the single brew logic... but just can't quite get there
+ lowzhao: what if you just change the problem to be a double for loop?
+ lowzhao: and same BFS logic
+ lowzhao: use an array to prevent revisiting
+ PatrickMcGinnisII: I'm depth first, i can reach 20k nodes, but everytime i try to use trim logic to get deeper i timeout
+ PatrickMcGinnisII: sob
+ lowzhao: depth first and stop and second brew?
+ lowzhao: at*
+ PatrickMcGinnisII: I can see all the available brews first occurrences, but can't reach all of the 2nd brews...some but not all
+ lowzhao: I think you should consider ignore some paths if its over a certain best that you already have found
+ kotamanegi: I agree with lowzhao, it's useless to think something like resting 10x times, just use calculation time wisely to find some better answer.
+ PatrickMcGinnisII: I'm not usiing eval functions like yall prolly are,  after i saw top bots winning games in 30 turns, I started looking at combinatorial brew pair paths
+ blasterpoard: PatrickMcGinnisII 30? that's a lot <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/508221358">https://www.codingame.com/replay/508221358</a>
+ kotamanegi: @PatrickMcGinnisll
+ kotamanegi: miss type,sorry
+ Csipcsirip: 26? thats a lot<a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/508699473">https://www.codingame.com/share-replay/508699473</a>
+ kotamanegi: but that's timeout :D
+ Csipcsirip: all I can see is that I won in 6 turns, everything else is BS :p 
+ Csipcsirip: aaand the server is completly frozen
+ kotamanegi: :sweat_smile:
+ kotamanegi: 1 hour ago solution is still 26% progress :disappointed_relieved:
+ PatrickMcGinnisII: running new tree without learns after turn 10 or so, does the trick ... but I have to run local to find optimal learn pathways to desired destination pairings...eww, damn php making me shortcut
+ kovi: i wonder if i submit now, will that finish at the end?
+ PatrickMcGinnisII: i don't remember, does CG recalc, or just let everything running finish?
+ dbdr: recalc legend
+ PatrickMcGinnisII: my last submit was 3 days ago
+ kovi: after finish i think
+ linjoehan: I think I may get to silver now finally!
+ eulerscheZahl: oh, now i know why i gained some ranks&#160;:(
+ eulerscheZahl: system is back, isn't it?
+ kovi: there is progress yeah
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://imgur.com/a/Ors61Dc">https://imgur.com/a/Ors61Dc</a>did the help just call me stupid? :D
+ eulerscheZahl: oh, i can't read. maybe it's right then
+ eulerscheZahl: my mind added a "not" to the description
+ Retroscilo: So I come and say hi&#160;:)
+ PatrickMcGinnisII: Pat()  , this function is already overloaded... don't even try!!
+ wlesavo: blasterpoard is this a new version already?
+ HCCHEN: I'd like to continue working on my achievements but can't find it 
+ blasterpoard: wlesavo kinda, it's still very inconsistent
+ blasterpoard: but it wins against your style of play
+ wlesavo: yeah, i have like 0% winrate against it
+ blasterpoard:&#160;:)
+ blasterpoard: (I'm very greedy and lose vs players who learn 6 or less spells)
+ kovi: cgbench should be limited to current top5....
+ eulerscheZahl: you mean only those should be allowed to use it?
+ eulerscheZahl: or only play vs them in your batch?
+ kovi: yeah. maybe top5-vs-top5 games only
+ AntiSquid: lol
+ LordSkaven: my hashcode code is broken so using a hashset makes my bot dumb, but using a list means I have to stop searching really early. ARRRGH
+ wlesavo: tough battle at the top, recalc would be fun to watch
+ kovi: pb4 took strong lead now
+ AntiSquid: rewrite LordSkaven or fix hashcode @_@
+ rockstar555: hii
+ geppoz: it is happening again&#160;:( , I pick my looses in arena, lost by my timeout, and in IDE I dont timeout at all&#160;:(
+ PatrickMcGinnisII: someone turn the timer off?  I just dropped:  total nodes = 194647
+ PatrickMcGinnisII: holy crap...total nodes = 208735
+ PatrickMcGinnisII: oh, first turn only
+ LLG: dang
+ LLG: rank 16 silver
+ LLG: so close
+ LLG: had a series of close defeats around rank 100... if I won 2-3 more I could've been gold
+ LLG: my winrate in 10-30 is good
+ Cappefra: mmm when's the end exactly?
+ aCat: you have timer om the top of IDE
+ PatrickMcGinnisII: says up top in the ide
+ aCat: 22h 26m
+ WINWINWIN: Well done PB4
+ JFB: Only 50 participants left to 7000&#160;:-)
+ eulerscheZahl: we can do it
+ JFB: Everyone in Legend will add 1 smerf&#160;:-)
+ Westicles: How many in legend are people never heard of before?
+ Westicles: I guess delineate and most of the japanese
+ WINWINWIN: actually its only 4
+ MenoIy: what  is the best way to know  wich  potion i should brew xD I suck at math...
+ Westicles: This is a programming site, not a math site.  So I've been emphatically told
+ MenoIy:&#160;:(
+ kotamanegi: I heard tha score for potions is determined by tier-0 * 1 + tier-1 * 2 + tier-2 * 3 + tier-3 * 4
+ kotamanegi: Of course there's noise x for (-2 &lt;= x &lt;= 2)
+ lainislain: thats actully the price
+ MenoIy: ah ok thx &lt;3
+ Cappefra: are there good resources for beam search? There's an article here in codingame where the GitHub link gives back a 404
+ wlesavo: if you have general understanding you would be fine
+ kotamanegi: If you want to know spells &amp; recipe list, please look at github for info. <a rel="nofollow" class="external free" href="https://github.com/CodinGame/FallChallenge2020/blob/main/src/main/java/com/codingame/game/Deck.java">https://github.com/CodinGame/FallChallenge2020/blob/main/src/main/java/com/codingame/game/Deck.java</a>
+ kotamanegi: @Menoly
+ MenoIy: thx 
+ JFB: Am I correct that when you said beam search - you mean Breadth-first search with pruning&#160;?
+ LLG: I believe so. From what I understand, beam search is a BFS that only explores n most promising nodes at every depth.
+ aCat: yes
+ Q12: How do you determine which node is worth exploring?
+ LLG: that's where heuristics come into play
+ LLG: inventory state, distance towards potions, etc.
+ eulerscheZahl: kotamanegi the "noise" is +1 for 3 colors and +2 for 4 colors
+ Q12: Thanks, maybe I will use it
+ Whiskee: is there anything more reliable than Stopwatch for C#? Because this is honestly getting infuriating, ticks vary too much&#160;:/
+ eulerscheZahl: Stopwatch is good enough
+ Presac: Is the distance towards potions just the ingredients missing?
+ eulerscheZahl: use ElapsedMilliseconds
+ ParticleBeam: Try only starting the stopwatch after the first input read
+ eulerscheZahl: and start the timer after reading the first line of input
+ LLG: ingredients missing, but with different weight on different tiers
+ Whiskee: it's what I'm using, it easily leaps forward 5ms
+ LLG: missing 1 blue is closer than missing 1 yellow
+ Whiskee: same exact loop
+ eulerscheZahl: CG has some problems in general
+ eulerscheZahl: most players use a time limit around 40ms
+ LLG: right now I'm only exploring inventory states
+ ParticleBeam: Also, garbage collector might run in the background
+ LLG: so I don't even exceed 10ms most turns
+ Whiskee: I guess it really is the garbage collector complicating things, because I'm repeating the same identical state several times in a row, same calculations, averaging 38-39 and then getting spikes of 55
+ Icebox: damn
+ Icebox: I wasted 16h
+ LLG: I tried playing against my own bot
+ LLG: and 1 of them took 10ms a turn, the other one took 11ms for the exact turn
+ eulerscheZahl: with what Icebox?
+ eulerscheZahl: debugging?
+ Icebox: no, with sleeping
+ wlesavo: lul
+ Icebox: :D
+ eulerscheZahl: sleep is never wasted
+ kotamanegi: @eulerscheZahi thx for info. I haven't noticed that :D
+ LLG: it is possible to get to a higher rank by just resubmitting without changing your code right?
+ eulerscheZahl: yes. but you can also drop
+ LLG: yeah that's why I'm afraid to do it
+ Icebox: volatiliy giveth, volatility taketh away
+ eulerscheZahl: improving your code is more reliable if you want to gain ranks
+ wlesavo: 50 ppl 5 gameson the start of submit, nice
+ LLG: I'm very close to gold
+ LLG: like, top 10 kind of close
+ LLG: so I was thinking maybe resubmitting could move me up just a little bit
+ eulerscheZahl: it's only to gold, still lots of room for improemvents
+ wlesavo: or not, dam, itis still 3 isnt it
+ LLG: yeah I guess I could actually write a proper BFS for starter
+ LLG: right now I prune all states with the same inventory state, except when I just rested
+ LLG: I guess I could start taking spell states into account lol
+ LLG: been putting that off way too long
+ Whiskee: I'm changing so many things at once that I don't know how to title my commits
+ Whiskee: best development practices out of the window
+ geppoz: :D same here Whiskee
+ Cappefra: honestly if you don't end up with some sort of spaghetti code mad props to you
+ geppoz: I will create a git next contest
+ WINWINWIN: Geppoz, dropbox is better.
+ geppoz: dropbox?? I mean for trace all changes, all back-and-forth ideas
+ geppoz: not for sharing&#160;;)
+ Icebox: magine Version control with dropbox
+ Icebox: kappa
+ geppoz: oh, I didn't know
+ JohnCM: haha once i extended my depth to 10, my code performed worse than it was at 5
+ Icebox: yes, I'm being sarcastic 
+ JohnCM: 'cause i considered multiple brews (which may not have existed by the time)
+ Icebox: dropbox isn't for code :D
+ JohnCM: icebox, how're you?
+ Icebox: I'm doing fine, thanks, how about you?
+ JohnCM: i've been trying the past two days to get into gold, but now still stuck at top 50 silver
+ JohnCM: i even recoded my entire python code into c++
+ JohnCM: which gained me 5+ depths
+ Cappefra: Pretty sure this is the hardest challeng to get into gold
+ JohnCM: that's how inefficient python is
+ Cappefra: it doesn't feel that way but it's so hard
+ JohnCM: it's hard because it's too easy
+ JohnCM: there's too few things you can do
+ Icebox: well there are people in legend with python JohnCM
+ JohnCM: haha i wonder what they did
+ geppoz: same here
+ JohnCM: there must be something i'm missing out
+ geppoz: in python I had 30ms for GC
+ JohnCM: wait for post-mortem to be enlightened
+ geppoz: it is possible to do static allocation in python??
+ JohnCM: memset equivalent in python?
+ Cappefra: It might be because of how many people there are and your bot needs to be performing well against more different strategies at the same time
+ geppoz: (Im newbye in python btw, but i got silver with it, before switch to c++)
+ Icebox: geppoz you just need to know what operators reallocate memory in python
+ Icebox: and then avoid those
+ ParticleBeam: Create a super long list in the beginning as reuse list with an index?
+ geppoz: that: newboards=[]
+ JohnCM: size = ...buffer = bytearray(size)
+ JohnCM: bytearray is implememted in C
+ JohnCM: i think maybe that's why my code is so slow. i used lists, which is super slow
+ JohnCM: geppoz i think you'll be silver soon
+ JohnCM: i mean gold
+ JohnCM: wish i could be bumped up to gold overnight
+ JohnCM: i can win the silver boss 70% of the time already
+ geppoz: seems so...
+ JohnCM: 49th in silver now... come on
+ JohnCM: few more bumps will do it
+ geppoz: I just noticed that i was calling clock() at every explored node :D
+ geppoz: that was big my timeout fear :D
+ JohnCM: my performance actually became better after i removed pruning
+ JohnCM: i think i removed a few important branches
+ geppoz: now i call it every 16th explore and i gained one depth!
+ JohnCM: geppoz how many spells on average do you learn?
+ JohnCM: wondering if there is a sweet spot
+ geppoz: i hardcoded the first 6
+ JohnCM: i hardcorded the first 8 haha
+ geppoz: then it is free to learn if it finds a good reason to
+ JohnCM: yea.. maybe 6, then let the program decide if learning reduces number of turns
+ JohnCM: haha i have some ideas in mind, but very lazy to code out
+ JohnCM: spent the whole day yesterday coding the c++ version alr
+ geppoz: someone top hardcoded 8
+ JohnCM: my first time coding c++, took a while
+ JohnCM: lucky got some kind souls told me how to do struct and vector initialization here
+ JohnCM: so it was easier
+ geppoz: yeah, Im gold&#160;;)
+ JohnCM: yay congrats
+ geppoz: ty
+ JohnCM: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/508832954">https://www.codingame.com/share-replay/508832954</a>
+ JohnCM: oh my algo can win yours
+ JohnCM: maybe i should just wait out
+ JohnCM: oh wait, that's a timeout
+ JohnCM: yours is better
+ geppoz:&#160;:( my timeout again
+ geppoz: and I was winning :D
+ JohnCM: very impressive code there geppoz
+ JohnCM: you beat me by 30 pts
+ geppoz: maybe you learn too much at start, so the tree is too wide&#160;?
+ JohnCM: do you learn only the bottom tree, or the 2nd line also can
+ JohnCM: i was trying to limit my number of actions per turn
+ JohnCM: i have a feeling your code can reach legend geppoz
+ geppoz: I dont think so
+ JohnCM: you are doing 90+ in 40 turns
+ JohnCM: that's very high score
+ geppoz: I dont play opponent, and contest is almost over
+ JohnCM: that timeout though...
+ JohnCM: you might want to reduce a depth
+ geppoz: I need to add opponent, I dont think I can do it today
+ JohnCM: next competition then
+ JohnCM: just a little disappointed i can't make gold
+ LLG: #1 silver now
+ LLG: it would be great if someone were to push me up&#160;:^)
+ JohnCM: soon your turn
+ geppoz: you can get gold johncm
+ LLG: just take the day off tomorrow and grind your ass of&#160;:^)
+ LLG: you're very close
+ JohnCM: haha i hope so, now i'll code in dynamic spell learning
+ JohnCM: hope it pushes me closer
+ JohnCM: then maybe enemy prediction later
+ geppoz: enemy prediction is a big change, and it is not needed for gold, so if you just want to reach gold, i suggest not to sail for it if you cannot spend all day and night on it :D
+ JohnCM: ha yea
+ JohnCM: dynamic spell learning then
+ JohnCM: not much time left anyway
+ rockstar555: hii guys i am felling so tried 
+ rockstar555: because i woke up all night to solve a hard puzzle
+ rockstar555: :tired_face:
+ JohnCM: did you solve it?
+ JohnCM: some hard puzzles i solve only 90%, the last 10% is too hard
+ Cappefra: same
+ Cappefra: I really enjoyed skynet episode 2
+ geppoz: I'm working on the "Nintendo sponsored" puzzle by years :D
+ geppoz: literally
+ WINWINWIN: Up all night for only 1 puzzle?
+ WINWINWIN: You solved like 5 last night
+ LLG: I'm .03 below the boss
+ LLG: this is intense lol
+ MadKnight: u got 21h to get RNG'ed into next league
+ LLG: I'll improve my bot after dinner
+ rockstar555: i solve it only 90%
+ LLG: even if I get to next league I still want high placement, cause my colleague is tailing me very close
+ LLG: and we're competing
+ MadKnight: oh
+ MadKnight: are u doing beam search&#160;?
+ LLG: not really, I'm doing exhaustive bfs
+ LLG: but I don't take into account spell states, only inventory states
+ LLG: so there's only like, 2000ish states to explore
+ rockstar555: I have fever also
+ LLG: I'm doing exhaustive for me and my opponent every turn
+ rockstar555: last night
+ LLG: Siska is looking scary tho
+ LLG: already at #3 at just 63%
+ Zanoshky: guys, i use java for contest, but i lose 66ms just to read input&#160;?? what is this?
+ Zanoshky: in.nextInt() for all states takes between 43 to 62 ms?
+ therealbeef: that probably includes waiting time for something to appear on stdin
+ WINWINWIN: Are you measuring time right around the input statement?
+ LLG: generally you want to start measuring after reading the first line
+ Zanoshky: i use system nanotime on start of the while loop, and at the end of last nextint()
+ LLG: start your timer after reading the first line
+ Zanoshky: sure one sec
+ WINWINWIN: Ok, are there any methods in that area? It could be that.
+ LLG: I had that problem with c# and typescript
+ therealbeef: they should have made this clearer in the game rules, i think
+ LLG: there's a couple milliseconds of nothingness between the start of the while loop and when you read the first input
+ LLG: not sure why, but I'm pretty certain there is
+ Zanoshky: thanks! works much better
+ Beresta: easy example would be if you end turn in 1ms and your enemy ends in 50ms - you will have a delay till next input of 49ms + whatever takes engine to evaluate both moves
+ Beresta: so yea, starting measuring after first input line is a good idea
+ PatrickMcGinnisII: still wierd stuff in output from referee
+ PatrickMcGinnisII: Standard Output Stream: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/ede3e03d-009e-498b-9f39-b4e12bf799f0">http://chat.codingame.com/pastebin/ede3e03d-009e-498b-9f39-b4e12bf799f0</a>
+ PatrickMcGinnisII: same inventory
+ PatrickMcGinnisII: played against myself
+ Beresta: is it really same? looks like lhs has 1 more inv space free
+ LLG: do you have replay link?
+ PatrickMcGinnisII: nothing was lost, inventory not full
+ LLG: rip I lost a game to Orpheo
+ LLG: there goes my plan of getting RNG'd to gold
+ PatrickMcGinnisII: it computed inventory correctly
+ PatrickMcGinnisII: i guess player 1 had 1 more 0 ingredient
+ PatrickMcGinnisII: hmmm
+ Orpheo: @LLG same I'm betting on RNG, sorry&#160;:(
+ LLG: 😔
+ LLG: also the real question is, Patrick
+ LLG: how the hell did you get to 5 taxed blues
+ PatrickMcGinnisII: both players learned 5 turns in a row
+ PatrickMcGinnisII: er, hmmm,, should be even #
+ LLG: and yet none of them touched the bottom spell 👀
+ PatrickMcGinnisII: oh, learned 1 spell above
+ PatrickMcGinnisII: yup 5 learns per
+ PatrickMcGinnisII: testing differrent learn priorities
+ LLG: also, idk if I'm being dumb here
+ LLG: but isn't this kind of thing very easy to test by just looking at the game screen
+ LLG: you can just look at it and see if the output matches with what's happening
+ Beresta: I have a bunch of safety checks end of turn and throw exception if my turn is somehow invalid from expectations :D helped me to found a dozen bugs in my bot
+ LLG: YES!!!
+ LLG: RNG'd to gold
+ PatrickMcGinnisII: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/508856776">https://www.codingame.com/replay/508856776</a>
+ Beresta: gratz
+ Orpheo: gg
+ LLG: Good luck Orpheo
+ PatrickMcGinnisII: the game summary output is just wonky
+ LLG: hopefully I'll see you here soon
+ Orpheo: ty ^^
+ rockstar555: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/508867520">https://www.codingame.com/replay/508867520</a>
+ MadKnight: there's actually 1001, LLG
+ LLG: 1001 for 1 player
+ MadKnight: oh, u want it for 2 players&#160;?
+ MadKnight: but isn't it 1001*1001&#160;?
+ LLG: I'm doing it for 2 players
+ LLG: separately, not in the same bfs
+ MadKnight: ooh
+ LLG: I run bfs once for me, once for my opponent
+ MadKnight: but why&#160;?
+ LLG: then extract the data that I need, like shortest path to each potions etc.
+ eulerscheZahl: to know when the game will end
+ MadKnight: and how do u use the results of your BFS&#160;?
+ MadKnight: of enemy bfs i mean
+ eulerscheZahl: score some more points before opponent completes 6th potion
+ LLG: the result of my bfs is shortest path to each potion
+ eulerscheZahl: or end game early yourself
+ LLG: so, let's say, my opponent has a shorter path towards the best potion
+ LLG: I'll go for the next best
+ LLG: that kind of stuff
+ LLG: and yeah end game optimization also
+ LLG: if he's at 5 and I can't beat him to 6, I'll just stack ingredients for the endgame bonus
+ MadKnight: but what if he isn't going for that potion&#160;?
+ LLG: well, I'm playing for worst case scenario
+ LLG: I think my idea is to maximize my worst outcome
+ MadKnight: worst case is if he's going for multiple possible
+ LLG: I mean worst case when it comes to the 6th potion race
+ LLG: worst case is if he picks his closest potion, and it's a shorter path than whatever i'm going for
+ geppoz: MadKnight what's 1001&#160;?
+ Orpheo: I made it also to Gold :D same code i've been resubmitting since yesterday with minor modifications ^^
+ MuddySneakers: Ha! Link404 timed out!?!
+ kotamanegi: Everyone get timed out. Even Silver Boss does.
+ MuddySneakers: That's the gold boss that timed out.
+ kotamanegi: Ya, my Link404 too lol
+ kotamanegi: I bet program execution time is longer than expected because of it's busy server
+ rockstar555: hii
+ LLG: geppoz 1001 possible inventory states
+ LLG: and congrats Orpheo
+ rockstar555: <a rel="nofollow" class="external free" href="https://www.codingame.com/profile/1f5b0ff230728fcbcecbae143f3ae5148463604/achievements">https://www.codingame.com/profile/1f5b0ff230728fcbcecbae143f3ae5148463604/achievements</a>
+ MadKnight: faster than what&#160;?
+ Zanoshky: Arrays.sort(enemyBfsAction, Comparator.comparing(Result::getKey));
+ Zanoshky: this take 10MS!
+ Zanoshky: wtf?
+ Beresta: what, can't be true
+ LLG: sounds fishy
+ MadKnight: show us more code
+ Zanoshky:  System.err.println("Sort start + " + printRoundTime() + " ms");
+ Zanoshky: this is 10 ms
+ MadKnight: wat
+ MadKnight: cmon
+ MadKnight: obvious
+ Zanoshky: i am stunned
+ MadKnight: your timer also counts the printing time
+ eulerscheZahl: oh, you solved the nintendo puzzle rockstar555. i still struggle with this one. can you give me a clue what algos to look up?
+ Icebox: eulerscheZahl he already solved that yesterday
+ Icebox: you're so late
+ eulerscheZahl: my bad
+ MadKnight: try not counting the printing time Zanoshky
+ DerthekNagra: I am having trouble keeping the number of brews that the opponent has done in the fall challenge. Any suggestions?
+ Beresta: check current and prev turn enemy score, if it changed =&gt; he brewed
+ rockstar555: Sorry guys I am Playing Ultimate Tic-Tac-Toe
+ DerthekNagra: Oh! Thanks! How didnt I think of that :D
+ kotamanegi: Same can be said for Bonus BREW points (just a reminder)
+ struct: Icebox today no sleep?
+ Icebox: nope
+ wlesavo: around the time somebody should ban this cheater guy, atleast from chat
+ Icebox: till the end
+ struct: ok, maybe ill do the same
+ struct: But i reached my goal
+ wlesavo: gogo legend
+ eulerscheZahl: 25 turns \o/<a rel="nofollow" class="external free" href="https://www.codingame.com/replay/508887663">https://www.codingame.com/replay/508887663</a>
+ struct: wow
+ struct: my best was 31, vs a silver boss
+ eulerscheZahl: to be fair: lots of green+blue
+ struct: what strength is default ai?
+ HCCHEN: where are the puzzles?
+ HCCHEN: 1 more puzzle to level up but I can't find the puzzles
+ wlesavo: euler also default feeded you with some blues
+ VizGhar: @HCCHEN top menu -&gt; practice&#160;?
+ ParticleBeam: I'm missing something fundamental
+ HCCHEN: ha, thank you very much
+ rockstar555: hey guys what you do today
+ wlesavo: can someone finally ban this guy? he is really annoying
+ WINWINWIN: rockstar??
+ WINWINWIN: I`m not even sure if he's a guy or someone's chatbot...
+ struct: But he is a genius, he solved nintendo
+ struct: And managed to solve some puzzles exactly with the same code as another player
+ WINWINWIN: :P
+ WINWINWIN: But I'm sure of the chatbot theory...
+ struct: I think he is a troll yeah
+ Westicles: He's just a kid
+ Icebox: I'm already writing up a message to thibaud about the whole impresonation thing besides copying
+ Icebox: for a chat ban he hasn't done anything wrong tbh
+ struct: yeah
+ WINWINWIN: I don't think that anyone would mistake him for Euler :P so not really impersonation...
+ Icebox: still
+ geppoz: congratz struct for gold&#160;;) I just followed you&#160;;)
+ Icebox: imagine someone picks your uni, your location and your job WINWINWIN
+ struct: that geppoz
+ Icebox: wouldn't you be creeped out even if just a little?
+ eulerscheZahl: wlesavo 01:48PMcan someone finally ban this guy? he is really annoying
+ WINWINWIN: Yeah, its pretty weird...
+ Astrobytes: He's still hanging around then
+ Icebox: imagine the weird eye contact once you meet him in your job eulerscheZahl
+ Icebox: would be awkward as hell&#160;:)
+ eulerscheZahl: :D
+ WINWINWIN: :joy:
+ Astrobytes: lol
+ Westicles: Like a sitcom... euler, meet your new boss
+ Astrobytes: Hey, Westicles. did you change your pi digits puzzle? I swear your first solution was even more amusing
+ Astrobytes: *contribution
+ eulerscheZahl: it got too many downvotes
+ eulerscheZahl: so he changed it to add even more digits
+ Astrobytes: hehehe
+ Icebox: ah, classic
+ Westicles: The first one was awesome, but everybody hated the unicode.  Now everybody hate it because too much math
+ PatrickMcGinnisII: too many hairs in your pie?
+ Astrobytes: 3rd time lucky: use both 
+ PatrickMcGinnisII: er pi?
+ eulerscheZahl: just create a clash of code where you have to add up ASCII values. higher chance to get it approved
+ Astrobytes: lol, sadly true
+ Westicles: And thanks to icebox BTW for the algorithm.  I never would have dreamed a million digits in a half second is possible
+ Icebox: &lt;3
+ aCat: what's the cod elimit length??
+ Presac: I wonder, how do you write and test your code? Personally, I write in vs code and copy it to codingame then run it there, but is there an easier way testing?
+ Westicles: 100k characters.  some unicodes count as 1char, some 2
+ PatrickMcGinnisII: Westicles using gmp.h is cheating, GMP in php is disabled in CG last time i checked
+ Q12: Can someone help me? I am trying to use Stopwatch in C# to measure the time so I will be able to escape my recursive function before the time for the time end. But for some reason it doesn't work I checked with stopwatch.ElapsedMilliseconds how much time I have and it says 0 so I didn't escape the recursive function and then CG told me that I didn't provide input in time. what is the problem?
+ ParticleBeam: Did you use stopwatch.Start()?
+ Beresta: garbage collections is a usual suspect
+ WINWINWIN: I don't know about the stopwatch, but there's another way for time
+ Q12: yes ParticleBeam
+ WINWINWIN: DateTime dt = DateTime.now;
+ Westicles: I'm not implementing my own scientific programming package that will get rejected anyway just to avoid using gmp
+ WINWINWIN: time = (dt - DateTime.now).TotalMilliseconds;
+ WINWINWIN: now in capitals both times.
+ Q12: thanks WINWINWIN, I will try this
+ WINWINWIN: np
+ AllYourMCTS: what about stopping like 2ms before you hit the time limit? it takes some time to return from all the recursive functions and output
+ aCat: is it better / faster than stopwatch?
+ Beresta: no
+ eulerscheZahl: stopwatch is the way to go in C#
+ PatrickMcGinnisII: ok, last submit...I'll be sleeping when challenge ends
+ WINWINWIN: Euler is stopwatch faster?
+ WINWINWIN: Because there is object creation in DateTime?
+ Westicles: Do you think CG would put a couple wordlists in the sandbox for use in word puzzles if I asked?  Can think of any other way to get at them
+ PatrickMcGinnisII: I'm really surprised I've been hovering around 1000th place for 3 days
+ Westicles: *can't
+ eulerscheZahl: i don't think there's much of a difference. but when the standard library has a component specifically for that task, use it
+ Beresta: there might be a difference on precision, as stopwatch uses high precision cpu timer, not sure about datetime tho
+ Beresta: also datetime might have bigger overhead because it has a looooot of formatting, etc, capabilities
+ Astrobytes: guess you'd have to ask them to find out tbh Westicles
+ Westicles: Then I will secretly embed 2 million digits of pi
+ Astrobytes: hahaha
+ eulerscheZahl: maybe you can give the wordlist via stdin in an SDK contribution
+ eulerscheZahl: and just use some javascript to completely remove the viewer if you don't need it
+ Westicles: well I was thinking a scrabble optim, so that would work
+ AllYourMCTS: sanity check... you can't cast a spell that gives you an excess of ingredients right?
+ ParticleBeam: i believe so
+ eulerscheZahl: for scrabble you can have a viewer
+ aCat: AllYourMCTS nope
+ Westicles: yeah, it would need to look decent.  It would end up being offline though
+ eulerscheZahl: <a rel="nofollow" class="external free" href="http://azspcs.com/Contest/AlphabetCityLight">http://azspcs.com/Contest/AlphabetCityLight</a>
+ Westicles: That's it exactly!
+ eulerscheZahl: oh, you got 4th
+ Astrobytes: nice!
+ Westicles: Well, this one
+ Westicles: <a rel="nofollow" class="external free" href="http://azspcs.com/Contest/AlphabetCity/Standings">http://azspcs.com/Contest/AlphabetCity/Standings</a>
+ Westicles: I did them manually and came in 3rd
+ aCat: when you resubmit you always start from the bottom?
+ eulerscheZahl: how long are you on CG now aCat?
+ aCat: ew years
+ Astrobytes: manually :D
+ aCat: but at the beginning I didn;t do much
+ aCat: I should knoiw this behaviour?
+ Astrobytes: Probably :P
+ eulerscheZahl: your submit always resets your score
+ eulerscheZahl: so in legend you start at the 2nd-last place
+ eulerscheZahl: right above the deleted emil.
+ aCat: I was pretty sure some time ago the first matchmaking depends on you previous position
+ eulerscheZahl: that's RAIC
+ WINWINWIN: Do you ever have battles with the deleted Emil.?
+ eulerscheZahl: yes
+ Westicles: They all look like this.  Got to get double triples on three words
+ Westicles: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/0ec36cab-c613-4a66-a31b-ce8be0cbc36c">http://chat.codingame.com/pastebin/0ec36cab-c613-4a66-a31b-ce8be0cbc36c</a>
+ eulerscheZahl: instant win as emil times out in turn 1
+ Astrobytes: when is RAIC btw?
+ eulerscheZahl: next week, got delayed
+ Astrobytes: oh?
+ eulerscheZahl: they had problems with their sandbox or whatever
+ eulerscheZahl: as dbf mentioned yesterday
+ WINWINWIN: But Emil as negative TrueSkill, so winning against him would have a negative impact on you?
+ Astrobytes: I missed that
+ Q12: Can somebody help me in private with the implantation of Stopwatch in c#? for some reason I can't make it 
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://imgur.com/a/Ml4alHQ">https://imgur.com/a/Ml4alHQ</a>
+ eulerscheZahl: RAIC preview
+ eulerscheZahl: read first inputStopwatch sw = Stopwatch.StartNew()
+ eulerscheZahl: while (sw.ElapsedMilliseconds &lt; 40) do stuff
+ eulerscheZahl: Console.WriteLine(action)
+ Astrobytes: hmm, racing or fighting I wonder
+ Q12: thanks, I am trying now
+ eulerscheZahl: maybe both?
+ Astrobytes: They didn't email this time? I can't find anything
+ Astrobytes: true
+ eulerscheZahl: and your geometry for collisions will be exactly defined, not just a block or sphere
+ eulerscheZahl: (i don't know anything but at RAIC nothing surprises me anymore)
+ Astrobytes: hahaha, you're not wrong there :D
+ Valdemar: Astrobytes organizers said that it will be strategy game, with buildings and unit production
+ eulerscheZahl: i didn't get an email either
+ eulerscheZahl: just dfb on the chat and someone on their discord
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://cdn.discordapp.com/attachments/610464993883848725/779803527584677898/2020-11-21_23.20.43.png">https://cdn.discordapp.com/attachments/610464993883848725/779803527584677898/2020-11-21_23.20.43.png</a>
+ Astrobytes: Oh I see Valdemar, thank you
+ eulerscheZahl: we had that 2 or 3 years ago already?
+ eulerscheZahl: with the hamburger tshirt
+ Astrobytes: 'CodeCraft" - clue in the name I suppose
+ eulerscheZahl: that's about the only thing i can read
+ Valdemar: eulerscheZahl yes, but it was just battle without resource management
+ AllYourMCTS: what is RAIC?
+ WINWINWIN: Russian AI Cup
+ JohnCM: thibaud rank 2 now in silvr
+ JohnCM: haha
+ LordSkaven: So annoying I lose most of my games by 1-3 points
+ JFB: eulerscheZahl - so it is official web page for RAIC 2020? (I newer received tshirt (I win 2 times) so I play only for fun)
+ JFB:&#160;;-)
+ PatrickMcGinnisII: gratz [CG]Thibaud
+ PatrickMcGinnisII: just jumped
+ Astrobytes: into gold I presume?
+ <b>**PatrickMcGinnisII nods</b></p><p><img src="/a/45097182899192" /> struct: yes
+ Astrobytes: cool, hey struct, well done&#160;:)
+ eulerscheZahl: sorry to hear that JFB
+ struct: thanks Astrobytes
+ Astrobytes: Legend today struct?
+ struct: Doubt it
+ eulerscheZahl: i'm only waiting for the last one from 2019. they gave a like where i had to enter shipping details just 1 or 2 months ago
+ JFB: question: do Gold boss is random? Usually bosses have not been random (=not deterministic) but when I play with gold boss I have different result every time
+ struct: Oh I just remember that if I want to get legend
+ Astrobytes: think it's the timeout/timing issues JFB
+ Valdemar: JFB it is undeterministic unfortunately
+ struct: I need to  beat dbd
+ JFB: eulerscheZahl - OK so maybe I have to wait&#160;:-)
+ struct: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/508929069">https://www.codingame.com/replay/508929069</a>
+ Astrobytes: timing instability so search cutting out at different times = different result
+ struct: Got 1 but I think I need to be faster
+ JohnCM: maybe monte carlo tree search?
+ JFB: OK - thanks Astrobytes Valdemar
+ JFB: So it is a bit a pity that Gold boss is not replaiyable. So probably I have to find sb deterministic near top of the Gold and optimize o win with him&#160;;-)
+ <b>**PatrickMcGinnisII zzzzzzz</b></p><p><img src="/a/45990545847301" /> MuddySneakers: I'm not sure you're going to fine all that many folks who are deterministic near the top of Gold.
+ JFB: True
+ Adi28: hello!
+ Adi28: anyone know how do add the ccompany logo&#160;?
+ eulerscheZahl: i think only codingame staff can do so
+ emh: number of matches in Silver increased from around 80 to 100? great! more time to climb to boss hehe&#160;:)
+ eulerscheZahl: unlikely
+ eulerscheZahl: just more players submitting at the same time
+ struct: Anyone has any idea, why I get this error on brutal tester?
+ struct: ERROR [com.magusgeek.brutaltester.GameThread] Problem with referee output in game1. Output content:WARNING: sun.reflect.Reflection.getCallerClass is not supported. This will impact performance.
+ eulerscheZahl: so you get these extra matches duing your submit
+ emh: ohhh
+ emh: in that way
+ geppoz: eulerscheZahl about inserting logos in company and school, there is someone to ask for?
+ eulerscheZahl: thiabud
+ eulerscheZahl: thibaud
+ Mohammadmh: hi
+ JohnCM: lol it's so hard to get into gold
+ emh: JohnCM true true
+ [CG]Thibaud: thx PatrickMcGinnisII
+ emh: I've been struggling for days
+ [CG]Thibaud: was difficult!
+ JohnCM: i'm hovering 50-100, still have 60% more games
+ JohnCM: and i beat the boss now 80% of the time
+ JohnCM: my AI is improving
+ JohnCM: but so are the top 100 silver ppl
+ struct: 6977 players euler prediction was on point
+ emh: my best was rank 1 in Silver, but that was a few days ago
+ emh: now I'm around 50
+ JohnCM: man.. you should have risen up back then
+ JohnCM: now it's much harder
+ emh: yes
+ Mohammadmh: چه جوری کوه رو حل کنم
+ struct: English please
+ eulerscheZahl: with that prediction i'll quit the cristall ball business&#160;:)
+ eulerscheZahl: crystal*
+ Icebox: eulerscheZahl predict my final rank
+ Astrobytes: hm? Contest participants?
+ Mohammadmh: what are solve the mountian pazzle
+ struct: 30th
+ Beresta: any way to make codingame less laggy / more responsive? annoying to wait several secs each time I get back to browser&#160;:(
+ dbdr: push eulerscheZahl push!&#160;:)
+ Mohammadmh: in payhon
+ Astrobytes: close the IDE window often Beresta
+ eulerscheZahl: am i losing to you dbdr?
+ dbdr: 3-1
+ Mohammadmh: 3
+ dbdr: and same rank
+ Beresta: Astrobytes you mean refresh page? or is there any way to close IDE? :O 
+ eulerscheZahl: where do all these paython programmers suddenly come from?
+ dbdr: in legend?
+ eulerscheZahl: i'm slowly getting frustrated about the contest.
+ eulerscheZahl: no, PAYthon
+ JohnCM: euler you in legend alr?
+ Astrobytes: Beresta: close it completely and open in another tab, I think it's pixi that crashes the tab after a while
+ eulerscheZahl: yesderday someone wrote that on chat
+ JohnCM: lol paython
+ eulerscheZahl: today again (well, payhon, close enough)
+ Beresta: hm I see
+ Icebox: rockstar wrote that yesterday
+ AllYourMCTS: paython?
+ dbdr: payathon
+ Icebox: he always wrote "paython"
+ eulerscheZahl: yes JohnCM, legend
+ Icebox: xD
+ Mohammadmh: penis
+ JFB: One move to late: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/508939587">https://www.codingame.com/share-replay/508939587</a>
+ JohnCM: it's probably a paid version of python
+ eulerscheZahl: floating around rank 20 which is the tshirt bar
+ Astrobytes: papayahon
+ JohnCM: congrats euler! you're doing great again
+ Icebox: refrain from using foul language Mohammadmh
+ eulerscheZahl: too late, he got kicked and can't read it anymore
+ Icebox: :D
+ Icebox: yeah I type to slow
+ JohnCM: one day i'll make it to legend
+ eulerscheZahl: thanks JohnCM
+ Icebox: there goes "warning first"
+ eulerscheZahl: weren't you legend last contest?
+ JohnCM: nah i was gold only
+ struct: I needed to warn?
+ JohnCM: didn't break the speed barrier as i was using python
+ struct: sorry lol
+ struct: I think he knows the cause
+ Icebox: no you don't I guess
+ Icebox: yeah
+ eulerscheZahl: general guideline: warn -&gt; kick -&gt; ban
+ Astrobytes: I think no warning is fair when someone just types something like that&#160;;)
+ JohnCM: but now things have changed, i am using c++ now
+ Icebox: euler just did a rundown for me
+ eulerscheZahl: in extreme cases you can skip 1 or 2 steps
+ Icebox: how modding works
+ Icebox: :D
+ JohnCM: but still struggling to get gold lol... it's not the program, it's the algo
+ eulerscheZahl: i switched to C++ too
+ eulerscheZahl: sadly necessary this time
+ JohnCM: yea.. c++ needed for greater depths
+ JohnCM: 57 and 50% more battles to go.. come on, let me win more
+ JohnCM: oh yea.. rank 44 now
+ BrunoFelthes: WoW, a Java in 4th, nice... I was trying to be the best java... but 4th will be impossible
+ eulerscheZahl: obviously it is possible
+ BrunoFelthes: I have no much more time
+ JohnCM: lol
+ Csipcsirip: dont worry pb4 is mid submit. so he's only 5th
+ Icebox: remember, paython is in legend :eyes:
+ BrunoFelthes: @eulerscheZahl for me ... 
+ JohnCM: i'm really curious how the python code made it to legend
+ Astrobytes: The Power of Payhon
+ JohnCM: what legendary heuristics did he/she use
+ JohnCM: watching my rank rise is like watching the stock market
+ Astrobytes: stonks
+ Icebox: funny story
+ JohnCM: oh i'm in the 30s now
+ JohnCM: rank 36:)
+ Icebox: there was a hackathon in Kosice, slovakia 
+ JohnCM: this is a new record
+ Icebox: like a couple months ago
+ eulerscheZahl: thrilling story :popcorn:
+ Icebox: and couple weeks before the start they announced you couldn't participate live there 
+ Icebox: because of covid
+ eXhaustedUA: JohnCM are you cpp?&#160;:)
+ eulerscheZahl: oh, the one where you qualified for?
+ Icebox: yeah yeah
+ eulerscheZahl: and you paid traveling expenses
+ Icebox: yeah the same one
+ Icebox: :D
+ Icebox: long story short
+ Icebox: I didn't want to burden my team
+ Icebox: because the plan was to work together
+ BrunoFelthes: eulerscheZahl, how many nodes are you visiting?
+ Icebox: but they were already together and me in germany
+ Icebox: so I worked alone
+ eulerscheZahl: about 150k
+ BrunoFelthes: wow
+ Icebox: and demotivated by the fact that I don't have a team I made a troll submission called "Stonks"
+ Icebox: about stock market and fund management
+ Icebox: that got 5th place :D
+ Astrobytes: Did it win
+ Astrobytes: LOL
+ Astrobytes: brilliant
+ BrunoFelthes: funny history, when i increase the deep of my algo, the algo perform worst... I'm visiting +- 10k
+ Icebox: <a rel="nofollow" class="external free" href="https://devpost.com/software/stonks-14y6n3">https://devpost.com/software/stonks-14y6n3</a>
+ eulerscheZahl: my c# was around 50-60k nodes
+ BrunoFelthes: what is the deep?
+ eulerscheZahl: 15-20
+ Astrobytes: well played Icebox. Did your team get a placement at all?
+ Icebox: #1&#160;:(
+ Astrobytes: lol, well, some consolation at least
+ BrunoFelthes: but, do you consider, some how, the new brews?
+ eulerscheZahl: no
+ BrunoFelthes: so, what is the point to get 15-20 deep? because with 10-15, 3 to 5 brews will go away...
+ SirLoxley: how do you get that many nodes?My BFS (with heuristics) hardly generates 500 and then I have seen it all
+ eulerscheZahl: hm, i could try a wider beam and see
+ Icebox: BrunoFelthes because if your inventory state is good enough you can reach any potion in 2-3 moves
+ BrunoFelthes: that is my point Icebox, at legend, you and your opponent, so, with 15 turns, there is no brews anymore, so, why to calculate 20?
+ Csipcsirip: most games last 30-40 turns
+ BrunoFelthes: yes... 
+ Csipcsirip: so thats the point of 20 depth
+ eulerscheZahl: maybe i should switch to chokudai search
+ chokudai: XD
+ eulerscheZahl: oh, hi
+ BrunoFelthes: Csipcsirip are you using what deep?
+ chokudai: hi
+ eulerscheZahl: i still remember your 1 day till legend in the last contest
+ Csipcsirip: fix 15. and yep, im using chokudaisearch btw :p
+ BrunoFelthes: what is chokudai search?
+ eulerscheZahl: fixed depth, dynamic width
+ struct: <a rel="nofollow" class="external free" href="https://twitter.com/chokudai/status/713979313377255425">https://twitter.com/chokudai/status/713979313377255425</a>
+ eulerscheZahl: a bit like beam search bit changing the static and variable thing
+ eulerscheZahl: but*
+ BrunoFelthes: i think that i am using it
+ BrunoFelthes: i'm not sure what is the width
+ Nerchio: so at the start you go depth then width?
+ Nerchio: or smth like this
+ eulerscheZahl: yes
+ Csipcsirip: iterative widening :p
+ BrunoFelthes: I do i with width 0
+ BrunoFelthes: what width do you use?
+ Losh531: hi
+ Csipcsirip: with width 0 this algo does nothing
+ Presac: From when exactly do I have 50ms to do what I want in the fall challenge?
+ Csipcsirip: I increase the width after every iteration.
+ BoBot: could it be described as DFS with max_depth? or am I missing something
+ ClockSort: Presac from first readline
+ eulerscheZahl: after reading the first line of input till the print of your action
+ ClockSort: ^
+ BrunoFelthes: why the width is important at chokudai?
+ Presac: Thanks. 
+ eulerscheZahl: less time checking with higher width
+ BrunoFelthes: i will try to add width 1
+ BrunoFelthes: are you using 1?
+ JohnCM: i like that term. iterative widening
+ Csipcsirip: I start with width 1 and increase it after every iteration 
+ Csipcsirip: not sure if its the good why or i should set it to something like fix 50
+ JohnCM: what C++ function can i use to time?
+ JohnCM: like to stop the loop when time is up
+ geppoz:  elapsed=(clock()-beginTime)*1000/CLOCKS_PER_SEC;
+ geppoz: this is my noob one
+ geppoz: but it works
+ Csipcsirip: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/1dc41ac6-1a08-4bab-ba5e-68db0ca03fbb">http://chat.codingame.com/pastebin/1dc41ac6-1a08-4bab-ba5e-68db0ca03fbb</a>
+ eulerscheZahl: clock() has some precision issues i think. at least i had problems with it in the past
+ DomiKo: <a rel="nofollow" class="external free" href="https://ideone.com/nQQQa8">https://ideone.com/nQQQa8</a>here ChokudaiWidth never change&#160;:/
+ DomiKo: ohhh
+ DomiKo: never mind
+ eulerscheZahl: csipcsi just modified it. is that allowed?
+ JohnCM: thanks euler
+ Csipcsirip: no, i did not! I copied from somwhere else :D
+ Nerchio: so you guys change the width parameter in the whole search
+ Nerchio: but maybe it could be based on the number of potions done in the game? the more the wider you go instead of deeper
+ Csipcsirip: dont think it matter much tbh
+ JohnCM: ok i got it
+ JohnCM: the clock thing
+ JohnCM: how is it possible that the boss is not dropping for silver!
+ JohnCM: pretty sure he lost many battles against the top 100
+ JohnCM: just like me
+ eulerscheZahl: but also won a lot
+ eulerscheZahl: and stronger players get promoted
+ Presac: Poor boss. Never have a chance to be promoted
+ AshKetchum: JohnCM, here is a class I wrote after watching reCurse's stream
+ AshKetchum: <a rel="nofollow" class="external free" href="https://pastebin.com/uQqj4sza">https://pastebin.com/uQqj4sza</a>
+ AshKetchum: Usage:Timer timer;timer.start();while (timer.isElapsed(0.04)): // 40 ms
+ JohnCM: thanks, basically functions to start clock and check time elapsed
+ AshKetchum: yes
+ LLG: wow I really need to improve my bot
+ JohnCM: yup got it!
+ LLG: I lose to ppl in gold 80-90% of the time
+ JohnCM: haha this competition is mad
+ JohnCM: how do people even code so efficiently
+ AshKetchum: don't call isElapsed in every iteration, call once in say 200 or so iterations
+ JohnCM: ok
+ SirLoxley: I would love to get there first ... is it possible to win against the silver bot without using that 1s calc time upfront?
+ LLG: wdym 1st calc time
+ LLG: like preprocessing stuff before 1st turn?
+ SirLoxley: yep
+ LLG: if that's the case I never did it
+ LLG: and still made it to gold
+ SirLoxley: because I don't so far
+ LLG: I just do regular bfs
+ LLG: heuristics go a long way
+ Nerchio: i will donate $5 for better CG servers
+ Nerchio: where can i do that
+ Nerchio: :D
+ fermeaux: And what is the goal of your bfs&#160;?
+ struct: 1st doesnt matter much imo
+ LLG: my bfs at the moment find the shortest path to each recipe
+ LLG: then try to maximize points/turn
+ LLG: unless 1 player is at 5 potion then I maximize for the endgame
+ LLG: depending on the situation (both at 5, me at 5, opponent at 5)
+ fermeaux: interesting
+ wlesavo: Csipcsirip did you finish your minimax? :slight_smile:
+ hbouillo: Hey:) Is there anyone here doing MCTS? If so, would you mind sharing your rollout rate per turn?
+ LLG: I thought about MCTS but decided against it since it sounded like a lot of work
+ LLG: especially considering I didn't know what it was prior to this event
+ AllYourMCTS: i'm just doing random depth 1 rollouts
+ AllYourMCTS: but im not doing full game rollouts with all the actions, so not sure what rollout rate would tell ya
+ Csipcsirip: I have 1 ply "minimax". working on some more serious stuff. not sure if i can finish it, wlesavo
+ hbouillo: Same, but seeing my BFS didn't go past silver, I turned towards it :D
+ hbouillo: @LLG
+ hbouillo: I see @AllYourMCTS
+ LLG: if anyone fought against me earlier today in high silver, or right now in low gold
+ TheTenYearOldPanda_57c0: why i can't move the pod on coders strike back? can someone teach me?
+ LLG: I put some emojis in the commands so analyzing matches become a bit less boring
+ LLG: c:
+ wlesavo: Csipcsirip i see, nice
+ reCurse: 394 computing :D
+ SirLoxley: I have spiced up my commands with curses from the fakir fight of "Asterix and the Magic Carpet"
+ SirLoxley: Pushan turn you into an old goat!
+ geppoz: lol, better from "monley Island"
+ geppoz: *Monkey Island
+ SirLoxley: yeah had that one first actually, but it didn't quite fit to these sisters
+ aStar: =.= hey golds, which algorithms are you use?  
+ SirLoxley: you fight like a dairy farmer ...
+ struct: aStar bfs
+ ClockSort: aStar bfs
+ aStar: wow
+ Icebox: damn you use astar?
+ Icebox: :D
+ Michael_Howard: @LLG my console is full of them. Makes it much more intuitive to follow what's going on.
+ aStar: =.= i just use depth-limited search
+ aStar: i can't reach gold
+ ClockSort: usually silver bfs just have fewer sims than gold bfs
+ ClockSort: i am running 100k-150k sims, depth around 8-10
+ aStar: wow
+ ClockSort: and in c# :laughing:
+ aStar: my depth just only 4 =.=
+ LLG: @Michael_Howard I just put them on the chat bubble since I can't be arsed to look at the console unless I'm debugging something
+ LLG: when I'm just analyzing my bot's playstyle I rarely check the console
+ Nerchio: 412 results found for «Score - Computing»
+ aStar: @Icebox i can't find a heuristics
+ Counterbalance: struct, did you get pushed or made an improvement? I knew you'd pass my bot once in gold&#160;:)
+ struct: I got pushed Counterbalance
+ aStar: @LLG
+ eulerscheZahl: no waking up without gold
+ yhyoxx:&#160;:)
+ eulerscheZahl: the boring version of "no sleep till legend"
+ aStar: @LLG anh ơi anh work team nào v ạ
+ struct: I had script to run the alarm only when I got gold
+ Counterbalance: really?&#160;:)
+ aStar: haha
+ struct: nah, but maybe an idea for next time
+ struct: Should I use all my threads for brutaltester?
+ struct: or is not ideal?
+ aStar: have anyone used A*, minimax, or alpha-beta prunning?
+ Counterbalance: you'd definitely need to patch the cg engine for that.. I recommend leaving at least 1 or 2 threads free..
+ struct: ok thanks
+ struct: I only managed to make it run on windows&#160;:/
+ LLG: @aStar I'm still in my probationary period in Viacar
+ ZarthaxX: Csipcsirip you are top 10 with some kind of 1 ply minmax??
+ ZarthaxX: you kidding me
+ Astrobytes: hey Zarthy
+ eulerscheZahl: on top of high depth chokudaisearch
+ Csipcsirip: ^
+ ZarthaxX: ahhh ok, all good
+ LordSkaven: Ok so I found my problem with my BFS the best path it could find was 217 turns long lol
+ ZarthaxX: hey astrobyto&#160;:*
+ Skynse: dfs or bfs?
+ Skynse: oh
+ Skynse: "breadth" first search
+ LLG: very broad, indeed
+ Astrobytes: I don't know whether to continue trying to speed-write my sim + search or just leave it
+ yhyoxx: same
+ yhyoxx: 17 hours 
+ LLG: in my case working on heuristics gave me much better results
+ yhyoxx: do ur best it's gonna be over soon
+ LLG: I'm doing 4k sims per turn at best
+ Astrobytes: I got to silver with just a reflex agent but I reached a "fk it" point lol
+ yhyoxx: same
+ LLG: I reached silver with a super scuffed bfs
+ LLG: decided to rewrite my entire code
+ LLG: it became a less scuffed bfs, lol
+ Astrobytes: I didn't even bother doing a bfs lol, been lacking motivation this time
+ Nerchio: well advancing from gold is impossible now unless you have godly bot
+ LLG: my goal is only high gold anyway
+ LLG: first time experiencing some kind of competitive programming so I'm not aiming too high
+ LLG: I'm happy with mid-high gold
+ Samer: LLG what are you using to store the ingredients?
+ yhyoxx: i just wanna leave silver
+ LLG: uhh... just an array of 4 integers
+ LLG: the regular way, I guess
+ yhyoxx: i think what i need to beat the boxx is a good choice of potions to target
+ Samer: and to store spells and potions? lists or arrays?
+ yhyoxx: predicting the opponent
+ yhyoxx: vector&lt;Action&gt;
+ LLG: I use lists
+ LLG: I honestly don't care that much, since I'm not duplicating the whole list anyway
+ yhyoxx: cool
+ LLG: so performance is not a huge issue for me
+ Samer: dump the lists, use jagged arrays, you're likely to double your sim count
+ Samer: at least that was the case with me
+ Astrobytes: alright, afk for a bit, making bread and spaghetti
+ LLG: my sims are fast
+ LLG: I just don't do a lot of sims
+ yhyoxx: hmm
+ LLG: well, not exactly fast, just not slow lol
+ Icebox: how fast is "not slow"?
+ Samer: 4k sims per turn?
+ LLG: I'm only doing around 4k sims per turn, but I rarely exceed 10ms a turn anyway
+ Icebox: that's extremely slow :D
+ therealbeef: :D adding one forgotten reserve() halved my running time
+ Icebox: 400/ms
+ Icebox: others get 40k/ms
+ Icebox: so I'd say that's slow
+ Samer: you wanna go extreme, store all 4 of them in an int and use bit shift
+ AllYourMCTS: is that 40k/ms number with both players until end of game?
+ LLG: I mean it's still 5x faster than my old scuffed bfs so I'm happy with it
+ AllYourMCTS: or just 40k single action applications/ms?
+ Icebox: depends on the person you ask
+ Icebox: I'm just giving numbers
+ LLG: I'm sure there are a lot of ways I can improve my sims but sim count isn't my focus right now
+ Icebox: the implementations are different
+ Icebox: the numbers are similar
+ LLG: I do use bit shift, just not for ingredients
+ Samer: LLG i actually agree with you
+ Samer: 4k sims got me in gold too
+ LLG: I just a bit field to store my spell states
+ geppoz: uh oh, just notice I forgot to increase the rewards on lower tome spell when I learn &gt;0
+ Samer: because i optimized other aspects
+ LLG: (castable/not castable)
+ geppoz: *lowers tome spells
+ LLG: I use* a bit field
+ Samer: llg
+ Samer: best optimization i made was choosing the right tome spells to learn
+ Samer: and that's still a work in progress
+ LLG: mine's really simple as well
+ LLG: I look at bottom 3
+ LLG: if there's a free spell (no negative delta) I grab it
+ LLG: else I grab whichever one has the best value
+ LLG: most of the time I just grab the bottom one cause it's free
+ Samer: best value, or best value to your existing spells?&#160;;)
+ geppoz: I suppose you didn't see the Euler epic: "learn just to pay dat tax" :D
+ LLG: actually forget about that
+ LLG: I scrapped all of my learning heuristics a while ago
+ LLG: just realized it now when I looked at my code
+ LLG: right now I'm just grabbing all-positive spells in the bottom 3
+ LLG: else I grab the bottom 1 til I have 12 spells
+ geppoz: it was something really
+ Icebox: that happens hella often tho
+ Icebox: as in
+ Icebox: that's really important to have
+ Icebox: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/509019850">https://www.codingame.com/share-replay/509019850</a>
+ Icebox: 26th turn
+ Icebox: learn to discard allowed me to fill inv
+ geppoz: nice :D
+ geppoz: I potentially also have that, but never noticed if I used sometimes
+ eulerscheZahl: but check turn 26 of this <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/508887663">https://www.codingame.com/replay/508887663</a>
+ Icebox: :D
+ BrunoFelthes: wow
+ BrunoFelthes: fastest game ever?
+ BrunoFelthes: my AI with the same seed get 27 turns
+ BrunoFelthes:&#160;:(
+ JohnCM: wow euler your inventory is almost full all the time
+ JohnCM: max efficiency
+ BrunoFelthes: why do you draft 5 tomos eulerscheZahl? Any rules?
+ eulerscheZahl: tomos?
+ BrunoFelthes: learn
+ eulerscheZahl: no fixed rules here
+ BrunoFelthes: humm
+ eulerscheZahl: oh no, Magus submittedthat was my reference if i'm improving or not
+ kreo: hahaha
+ Magus: :D
+ BrunoFelthes: maybe you will gain something
+ eulerscheZahl: magus put back the old version!
+ Magus: wow ... submits are ... very slow
+ eulerscheZahl: almost staff ping slow again
+ eulerscheZahl: i mean sunday staff ping
+ kreo: I thought the mot reliable way to tell if you are improving is to play ~100 games against the old version
+ BrunoFelthes: because the blind draft will help with the current brew and the new  randons.. I just dont know the best balance
+ Michael_Howard: Is there a way to have the codingame web IDE show 2 windows of your code with changes trasferring?
+ eulerscheZahl: too much rock paper scissors for self-play
+ eulerscheZahl: and 100 isn't taht much
+ kreo: I bet you don't play 100 games against Magus, do ya?
+ eulerscheZahl: a diff between bot versions? no
+ eulerscheZahl: i don't
+ eulerscheZahl: i click the yellow button
+ eulerscheZahl: and then wait 2h
+ struct: im doing around 1k is that enough
+ kreo: And what if after 2h you see that you haven't improved or even lost quality? What do you do to debug?
+ eulerscheZahl: 1k what? submits?
+ LLG: lol euler flexing on us
+ LLG: with that 25 turn game
+ rmuskovets: looks like the submits situation is getting ok
+ rmuskovets: there definitely is a problem with my code
+ Nerchio: kappa?
+ eulerscheZahl: to be fair that was mostly blue+green. 25 frames but low score
+ rmuskovets: I timeout too much&#160;:((
+ eulerscheZahl: some timeouts are normal, CG has problems
+ rmuskovets: I mean nearly 80% of my games are 0-turn because I timeout
+ ClockSort: that's too many&#160;;)
+ rmuskovets: yeah
+ rmuskovets: I'll consider rewriting to another language
+ rmuskovets: Kotlin seems like a good choice
+ LLG: I just tried that seed
+ LLG: Link404 won against me in 37 turns, 95 to 44 lol
+ LLG: I still have a long way to go
+ NinjaDoggy: :O I got pushed to legend overnight
+ NinjaDoggy: I was like 2.5 pts away from boss after submit dang...
+ NinjaDoggy: thx ryzen! :D
+ NinjaDoggy: Risen*
+ struct: grats
+ NinjaDoggy: nice, you made gold too!
+ ToshiTuringMachine: that red timer...
+ struct: 17 hours lets go
+ eulerscheZahl: good news NinjaDoggy, now you don't have to delete your account
+ NinjaDoggy: :joy:
+ eulerscheZahl: wait till it starts blinking toshi
+ NinjaDoggy: dw i have some sick improvements today
+ NinjaDoggy: gonna be top 20&#160;;)
+ eulerscheZahl: you have some sick confidence at elast :D
+ ToshiTuringMachine: this contest really destroyed my self esteem. still in silver fighting timeouts
+ struct: rank 1 or delete /ss
+ ZarthaxX: lmao
+ MadKnight: only one account stays on CG after the contest ends
+ ZarthaxX: not everybody is like u structo
+ struct: This time I had to set goal lower
+ struct: No way I can get legend in this contest
+ ZarthaxX: hahaha :P
+ ZarthaxX: coward
+ geppoz: 1st in Italy or delete here :D
+ LLG: did Errichto cancel his stream today?
+ LLG: he should be live right now right?
+ struct: yes canceled I check on his stream now
+ struct: "[canceled] CodinGame Day 4 - Legend League"
+ LLG: rip
+ kovi: maybe legend was too hard for him? (just jking)
+ LLG: I was thinking maybe I could get some ideas from watching it
+ LLG: but I guess I'm on my own now
+ ZarthaxX: kovi he is in silver
+ ZarthaxX: maybe he didnt like it
+ struct: he was 2nd and did not get pushed&#160;:/
+ ZarthaxX: yeah, i saw that, multiple times
+ ZarthaxX: super sad
+ wlesavo: chokudai is still not in legend, that is surprising
+ struct: lets go
+ struct: time to stat
+ rmuskovets: is rewriting from typescript to kotlin worth the time?
+ MenoIy: Its me or no one is getting out of the silver&#160;? 
+ Cappefra: My theory is silver is so crowded it's really hard to write a bot that does well against bottom mid and top silver
+ Cappefra: but it's more likely that I simply suck
+ MenoIy: true and sad&#160;:(
+ casmith789: I managed to just get out of silver yesterday but it required a lot of optimisation
+ MenoIy: I'm getting out of ideas  :/
+ ZarthaxX: running out
+ dreadylein: same, the boss is slightly boosted by the submits but if you win consistnely against him you get out
+ Nerchio: come on bot
+ Nerchio: you can do it
+ MenoIy: Im winning against him  like 80% of times but Im stuck at the mid 
+ Nerchio: just one time lucky pls :D
+ DomiKo: yes you can!
+ Nerchio: i probably jinxed myself
+ Nerchio: that was a bad idea
+ jrke: are battles slow?
+ Nerchio: yeah since 2 days
+ Nerchio: :D
+ delineate: does anyone know how the end of the contest works? are all scores reset before the final set of games are played or not?
+ Icebox: just for the top players
+ NinjaDoggy: the scores are kept i believe
+ NinjaDoggy: as the starting point
+ jrke: just for legend they had megarun for 500 battles
+ Icebox: well yeah he's right, the scores are kept but the code is resubmitted
+ struct: but score starts where you end up
+ struct: If you have 25.00 when rerun starts you start with that score
+ delineate: ah, I see. interesting, thanks. and it's using a trueskill for the score? (so at the end, everyone's variances are set high like a fresh submission (but with the current means? or is it something else))
+ struct: variances are kept I think
+ eulerscheZahl: yeah, increasing variance an 1000 extra battles
+ struct: oh i was mistaken
+ struct: I never reached legend so I dont know&#160;:(
+ eulerscheZahl: i should look into trueskill again, how do you call the confidence there?
+ eulerscheZahl: increase sigma for recalc
+ delineate: okay yeah cool. was trying to understand if there was a disadvantage to submitting late (as your variance will be higher than people who submitted earlier), but it sounds like that isn't the case
+ wlesavo: legend soon will exceed ooc numbers, but the contest is far more popular
+ rmuskovets: my code timeouts far less often now, yay!
+ struct: already 60 in legend
+ struct: damn
+ rmuskovets: looks like I got a OK-ish bot now
+ rmuskovets: at least I'm not the worst in bronze
+ ParticleBeam: Why does nothing work...
+ Kiat: so many submit for silver now... 
+ Kiat: system lag again
+ MadKnight: really?
+ rmuskovets: doesn't look like it lags for me
+ MadKnight: they mean the submits
+ rmuskovets: I know
+ Kiat: BATTLES IN PROGRESS 46%
+ Uemu: Ye I'm stuck after the first 10 matchs
+ Kiat: stuck for 20mins
+ Kiat: silver boss getting beat to positino 9 now
+ rmuskovets: I won't sleep 'till my battles are done... this makes me happy - I'm in the top 1000 *in bronze* for the 1st time
+ rmuskovets: *knocks on a piece of wood*
+ MenoIy: Get me out of silverhell pleassse
+ dreadylein: grats&#160;:)
+ Uemu: I wanna get out of silver tooooo, end my first contest in gold 
+ Samer: will this game be available later for play?
+ Illedan: Yes
+ Samer: great
+ wlesavo: especially with pm wisdom
+ jrke: did c++ got broked on submission?
+ jrke: all timeouts just on resubmits
+ Samer: it's funny when you change your code to make it smarter and less random, you submit and lose 100 ranks&#160;:) i guess randomness can be useful sometimes
+ Apologize: how can i prove i'm not a bot
+ LordSkaven: Ironicly, by coding a bot Apologize
+ geppoz: next contest: a bot that outputs code for another bot :D
+ geppoz: input: minigame rules
+ geppoz: wow not bad uh?
+ Apologize: so cool
+ dreadylein: so General Game Play Competion&#160;? :P
+ Zenoscave: NLP time right geppoz
+ eulerscheZahl: lateGame = Players[0].SamplesFinished &lt; 2;
+ Icebox: huh, samples
+ Icebox: what is this, C4L
+ Zenoscave: lol Icebox
+ struct: Icebox submit already
+ eulerscheZahl: using c4l terminology in the contest :D
+ Icebox: but I did struct
+ Icebox: only testing the sim alone but I did submit :3
+ eulerscheZahl: when gold?
+ Icebox: probably this submit, if not I'll submit same sim with different params
+ Icebox: I need to finetune sim without all the other logic so that I can debug clearly
+ Icebox: sim = eval I mean
+ struct: I think current 1st on silver
+ struct: will go straight to legend
+ kotamanegi: Really? GoGo!!
+ eulerscheZahl: defaultAI is submitting and ranked above you Icebox
+ Icebox: sick
+ Icebox: ¯\_(ツ)_/¯
+ MadKnight: default too strong
+ MadKnight: too icy
+ jrke: icy was first at one moment 
+ MadKnight: not enough icy
+ miszu: how's everyone doing?
+ yhyoxx: terrible
+ miszu: the sound of defeat
+ Samer: pretty good here
+ miszu: I went into UTTT
+ miszu: Samer how's gold for you?
+ eulerscheZahl: getting frustrated
+ Samer: i'm not making progress in gold.. my silver code is still better than the "improvements" i made today
+ Samer: i got plenty of ideas, but not enough time to execute
+ ClockSort: i just had a breakthrough after adding 4 major features that worsened my bot. 
+ Beresta: yea same stuff, my current gold bot is still worth than the one that carried me into gold :D 
+ Rounddice: I don't understand why my old code performs the new one by so much
+ ClockSort: making your bot worse is a common hobby, it seems&#160;:)
+ Beresta: but I've rewrote it completely from heuristics to beam search
+ Beresta: potential is there
+ wlesavo: Rounddice it can be lucky submits also
+ ClockSort: sometimes a new submission takes a long time to rank up to where it belongs, so it seems worse.
+ Samer: not when you lose the first 15 battles :D that's a pretty good sign you belong in the bottom
+ Samer: i'm sticking to my silver code for now
+ NinjaDoggy: what exactly is default AI?
+ NinjaDoggy: do they pick someone's code to be default AI?
+ ClockSort: yeah i think so
+ ClockSort: and ironically they were named Default.
+ ClockSort: in gold they're named Link404 which really confused me
+ NinjaDoggy: I know that bosses are picked from someone's code
+ NinjaDoggy: but idk about default AI(the bot you have by default in the highest divison)
+ JFB: ClockSort - sb can think it is strange type of hobby - spend Sunday writing worse version of your bot. But it really look so it is my hobby too ...
+ struct: Gold is not deterministic right?
+ struct: Gold boss*
+ JFB: It look so 
+ JFB: *looks
+ struct: I think I really need to add pruning
+ miszu: s it not wrong that it is true that
+ miszu: Is it not wrong that it is true that the gold boss is not deterministic, correct?
+ JFB: Is it true that it is not wrong that it is true that the gold boss is not deterministic, is it Automaton2000?
+ Automaton2000: tankers spawn with 1 water
+ ParticleBeam: This statement is false.
+ rmuskovets: &gt; is it true that it is not wrong that it is true that ...
+ miszu: my history teacher in a multiple choice exam made a joke question with that statement but in French.
+ Astrobytes: 2 hour submits...
+ rmuskovets: wow, rank 466! I've never been so high
+ miszu: grats
+ rmuskovets: ty
+ miszu: I am 1946
+ miszu: top 2000
+ rmuskovets: in what league? I'm 466 in bronze
+ Astrobytes: oh, he means overall
+ miszu: oh sorry I mean overall
+ miszu: across all league
+ JFB: At first I think that you are from 1946&#160;:-)
+ JFB: 1946 year
+ sadakatsu: I have long thought that the solution to statements like, "This statement is false," is to implement a rule that any assertion that reflexively refers to its own evaluation should be inherently false.
+ miszu: Hi all, I came from 1946. How's 2020?
+ JFB: So far great&#160;:-)
+ rmuskovets: go to 2019. the grass was greener, trees taller, etc.
+ ParticleBeam: Suddenly all oscillators stop working
+ JFB: covid?
+ struct: Ok I need to submit soon
+ struct: and hope I get pushed
+ miszu: which league are you?
+ NinjaDoggy: yea pushing is pretty important
+ struct: gold
+ NinjaDoggy: i got pushed 2.5 points
+ JFB: It is 14 hours to the end - so 7 submits&#160;:-)
+ geppoz: struct you aim to legend now? :D
+ struct: Ill try, but its not really a goal
+ Zenoscave: I left my debug time limit in my last submit
+ emh: I've given up on Gold
+ ParticleBeam: Bah. My rewrite fails miserably.
+ emh: staying in Silver
+ rmuskovets: NinjaDoggy 2.5? do you mean rank?
+ Zenoscave: 45M ms
+ NinjaDoggy: no, 2.5 points lol
+ struct: lol
+ NinjaDoggy: i was 2.5ish points away from boss after submit
+ Zenoscave: turns out that's too long
+ NinjaDoggy: and got pushed up to legend XD
+ rmuskovets: I actually thought 2.5 was the rank
+ struct: ok im gonna add enemy now
+ struct: then prune
+ Zenoscave: prune first
+ Zenoscave: Enemy is high gold/ legend
+ JFB: Yes, prune first.
+ Zenoscave: Been telling you that for days lol
+ JFB: My bot with added enemy works worse
+ Zenoscave: 2 days exactly
+ struct: True
+ struct: But 2 days ago I rewrote
+ rmuskovets: 14hr 43mn left, I hope I'll not get lower...
+ struct: :p
+ Zenoscave: :P i see
+ struct: Ok I cant be in chat or I lose focus
+ struct: Cya
+ Zenoscave: Bye struct
+ Zenoscave: glhf
+ struct: u2
+ ZarthaxX: 7000 participants
+ ZarthaxX: :O
+ rmuskovets: yeah, that's a lot
+ struct: very nice
+ struct: congrats to cg
+ Zenoscave: struct leave chat!!! You need to focus
+ struct: sorry
+ BrunoFelthes: 7k participants, and servers are stucked&#160;:(
+ Zenoscave: Yeah My submit gets 1 battle a minute or 2
+ miszu: how slow are sumissions?
+ BrunoFelthes: 4 hours i think
+ Zenoscave: 4 HOURS!?
+ BrunoFelthes: my submition 2 hours ago is at 50%
+ miszu: do you think the deadline will be extended?
+ Zenoscave: Will the extend competition if it takes too long? They've done it once
+ Astrobytes: no
+ BrunoFelthes: for sure no
+ Zenoscave: drats
+ kotamanegi: For sure no
+ Astrobytes: have they? Oh well, maybe, who knows
+ Zenoscave: I believe it was the locam sprint. but I can't recall.
+ Zenoscave: but it was a severe situation so most likely no
+ Astrobytes: don't think they extended that did they?
+ Astrobytes: All I know it was a clusterfk :D
+ Zenoscave: it was something. Cant remember which one been so long
+ Astrobytes: wow, submits from around 3:40-ish still going
+ Nerchio: in legend?
+ BrunoFelthes: CG should have a paid version for a faster submision
+ particleflux: mine from 4:30 in bronze also still running, seems like I'm gonna end up *right below* the boss -.-
+ Astrobytes: yeah Nerchio
+ Nerchio: nope
+ Nerchio: dont jinx me
+ Nerchio: i was already here 2 submits ago :D
+ k7n: i losing on submit because my code is timing out and when i rerun the same battle in the ide it doesn't timeout
+ geppoz: usual in these days...
+ k7n: I already hamstrung my bfs by shaving of 3 ms but it's still happening at least 2 out of 10 battles at the moment
+ k7n: c'est la vie, i really had fun with this competition even if I'm only silver
+ Beresta: damn, scoring is hard
+ LLG: I just realize something is not right with my points/turn heuristic
+ ZarthaxX: wat :P
+ LLG: let's say I can brew a 20 points potion in 5 turn, and a 8 points potion in 3 turns; the first 2 moves for both paths are the same
+ LLG: technically the 20pts is better, because 20/5 &gt; 8/3
+ LLG: but after 2 moves
+ LLG: it becomes 20/3 &lt; 8/1
+ Zenoscave: I tried telling this to you last night&#160;;)
+ Zenoscave: Harmonic sums weigh revers
+ Zenoscave: reversed
+ Q12: So how can solve it? @LLG
+ Q12: I am doing exactly like you and I suspected there was a problem in it, Love to hear what you will do :slight_smile:
+ theycallmedavid: Don't forget where did you start from
+ dbdr: that start eulerscheZahl&#160;:+1:
+ Zenoscave: there's two options both are viable but meh
+ TC9792: dont change it if you already have a target potion?
+ Zenoscave: *3 options ^
+ wlesavo: euler coming for top1
+ ParticleBeam: Add the existing game step counter to your depth value?
+ wlesavo: dam sorry for ruining perfect submit euler :smiley:
+ Zenoscave: no just total points / total turns or sum(order.price * pow(1.0-discount, order.turns) for order in order)
+ eulerscheZahl: :D
+ Zenoscave: discount should be very very small
+ Zenoscave: but greater than zero
+ eulerscheZahl: is urgency bonus worth adding to the sim?
+ eulerscheZahl: seems unreliable with opponent interfering
+ Csipcsirip: dont think so
+ ParticleBeam: Isn't it already included in the price?
+ Zenoscave: That's why their both meh
+ eulerscheZahl: ParticleBeam for later potions when you remove one with bonus
+ ParticleBeam: Ah ok
+ SabertheLost: wow takes 1 hour to play all battles now
+ eulerscheZahl: only 1?
+ eulerscheZahl: you must be in wood
+ dbdr: What did you do eulerscheZahl?&#160;:)
+ ZarthaxX: sit tight and wait&#160;:)
+ eulerscheZahl: rage repush an old version
+ Csipcsirip: ichyo submitted almost 3 hours ago xd
+ dbdr: really? :D
+ ZarthaxX: frustrated toad?
+ eulerscheZahl: yes ZarthaxX, i'm pretty much done with the game
+ ZarthaxX: you got what you wanted toad, it's fine right? :D
+ eulerscheZahl: i want that tshirt
+ dbdr: again?
+ ZarthaxX: you got many..
+ dbdr: is there a new one?
+ wlesavo: my version that got to #6 yeasterday cant reach 30 now. also tryed to rage push that one couple of times :smiley:
+ eulerscheZahl: i don't think so
+ eulerscheZahl:&#160;:(
+ eulerscheZahl: it's just that i haven't won anything in 2020
+ LordSkaven: you have won my admiration euler :heart_eyes:
+ eulerscheZahl: codejam? nopekotlin heroes? yes but retour to russia
+ eulerscheZahl: RAIC? no tshirts this time
+ eulerscheZahl: oh, nice LordSkaven. this will totally keep me warm in the winter :D
+ Astrobytes: :rofl:
+ Icebox: Zenoscave the total turns vs total score is tragic, no hate &lt;3
+ Zenoscave: what do you mean tragic?
+ Zenoscave: only love Icebox
+ Icebox: imagine you're in late game (turn 45 or 44 or something), you have 30ish points and have two options
+ ZarthaxX: eulerscheZahl go do ctfs and change the topic :P
+ wlesavo: MichaelPu gratz!
+ ZarthaxX: Icebox wassup bro
+ Icebox: 10 score potion in 1 turn or 11 score potion in 2 turns
+ Icebox: according to your "total score/total turns"
+ Zenoscave: I prefer to use the discount version
+ Icebox: the 11 in 2 is better than 10 in 1
+ dbdr: count time from the previous potion
+ Icebox: so if the formula fails on such easy cases imo it's not that good :D
+ Zenoscave: I agree
+ Q12: so which formula do you suggest?
+ Zenoscave: I was giving options to solve the harmonic sum
+ Icebox: ZarthaxX not much I was gonna change a couple of variables in my code, but you know the moment you change ABSOLUTELY nothing in your code but next time you test it the neighbors house is on fire and your code segfaults?
+ Icebox: something like that
+ Astrobytes: and Zeno did state they were "meh"
+ Zenoscave: meh is right
+ BoBot: thinking that you need to keep going for the bigger one sounds like a fallacy.. before you started both targets were in risk of being stolen by the opponent, now only one of them is risky... the ordering must not stay the same throughout the turns but I might be wrong about this - and I am sure there are many cases where we still want to go for the bigger one
+ ZarthaxX: LOL
+ Zenoscave: Still don't know a non meh
+ Astrobytes: looking good so far euler
+ Zenoscave: sshhh don't jink
+ Zenoscave: jinx*
+ Astrobytes: only another 3 hours to find out
+ eulerscheZahl: i expect it to rank around 20-25
+ Astrobytes: not gonna argue, all your predictions have been 100% this contest :D
+ eulerscheZahl: :D
+ eulerscheZahl: 1 out of 1
+ eulerscheZahl: wait, i predicted Neumann legend
+ Astrobytes: sure there was something else too
+ Neumann: You also predicted a 1.5 ratio
+ wlesavo: 7006! 
+ Neumann: 2 out of 3
+ Zenoscave: 1.5 ratio?
+ Neumann: When he converted his code from C# to C++
+ wlesavo: another eulers prediction become true
+ Zenoscave: Ah right
+ Neumann: 2/3 predictions right, and 0 promises honored
+ Zenoscave: did he promise to eat a hat
+ Neumann: He said he was going to congratulate my legend promotion. He didn't
+ Astrobytes: Shocking!
+ Zenoscave: how rude Euler!
+ numb3r5: what does it mean when it says "pod 1 of player waits for it's engine to reload"
+ eulerscheZahl: you weren't online when i saw you promoted, sorry
+ Zenoscave: Is csb disabled right now?
+ eulerscheZahl: congrats for reaching legend. i'm not even remotely surprised taht you did
+ eulerscheZahl: typing in teh chat is getting laggy again
+ Neumann: Thanks euler, appreciated
+ Astrobytes: Yeah, congrats from me too. Since we're congratulating :D
+ Presac: Why does actions take longer in the arena than when testing?
+ Zenoscave: congratz Astrobytes
+ Astrobytes: congrats Zenoscave
+ Astrobytes: actually, I'll take that. I thought I'd stay in Bronze.
+ Astrobytes: Nothing quite like suddenly getting motivated at the *end* of the contest&#160;:/
+ Astrobytes: Where's robo this time around?
+ Zenoscave: lol Astrobytes penultimate peril
+ Astrobytes: hahaha
+ LLG: Zenoscave what does this do?or sum(order.price * pow(1.0-discount, order.turns) for order in order)
+ MadKnight: Zenoscave did u share your code?
+ Zenoscave: MadKnight on accident I pasted the top ~1/4th
+ eulerscheZahl: robo around 4k it seems. that's unusual for him
+ MadKnight: fixit
+ Zenoscave: Nothing but the spells were shown. same as Deck.jav
+ Zenoscave: Java*
+ eulerscheZahl: usually a safe candidate for legend
+ Astrobytes: yeah, maybe he's busy or just didn't like it
+ MadKnight: write a virus that deletes top-1/4th code fromeveryone's PC
+ Zenoscave: LLG waiting makes a potion worth less. but only exponential decay
+ Astrobytes: smits was busy and also low level
+ eulerscheZahl: he's online. let's ping RoboStac and ask him about his contest performance
+ Zenoscave: not linear
+ Astrobytes: lol
+ Michael_Howard: My bot gets to about #150 in silver without doing any repeatable casts yet - how far can I expect to go up when I add it?
+ MadKnight: smits is busy he doesn't play the contest much
+ Zenoscave: I'd say gold
+ eulerscheZahl: gold++
+ MadKnight: #149&#160;? Michael_Howard
+ Zenoscave: is it that close silver to legend?
+ MadKnight: at least
+ eulerscheZahl: legend will be hard, that needs some more bells and whistles than just repeatable spells
+ Michael_Howard: Oh, and I get about 16 nodes without serious crashing, that's the 2nd next thing I need to sort&#160;:)
+ AntiSquid: next contest should be about optimizing leaderboard submits @_@
+ Michael_Howard: scoring is fast but sim has bottleneck
+ Astrobytes: profile + optimise
+ Michael_Howard: Got to do all the low hanging fruit that might require a brain before it gets to midnight &amp; all-nighter time...
+ MadKnight: people are in legend with python
+ LLG: @Zenoscavefrom what I understand, the order.price * pow(1.0-discount, order.turns) decreases the recipe value by amount of turns to reach it
+ LLG: what does the sum do?
+ Zenoscave: adds all the completed sums together
+ Zenoscave: depends on how you track orders brewed ig
+ LLG: so I'm essentially calculating distance towards all recipe 
+ LLG: right?
+ Zenoscave: no just ones you complete
+ LLG: oh, like the completed ones
+ Zenoscave: yup
+ LLG: gotcha
+ LLG: I calculate all of those post-BFS
+ Michael_Howard: If I can get Swift into legend I'll be so happy&#160;:)
+ Zenoscave: not optimal but it should help
+ LLG: so I don't have a list of completed potions
+ Zenoscave: do you track current state's score?
+ AntiSquid: 2 people MadKnight 
+ AntiSquid: are in legend with py
+ LLG: I do
+ Zenoscave: add a decay score to track for sorting in bfs
+ LLG: oh wait
+ LLG: I don't track every states in the bfs, just the root state lol
+ LLG: my bfs only does 1 thing, get shortest paths towards every potion
+ LLG: all the heuristics comes after BFS returns
+ Zenoscave: and not second or third potions?
+ LLG: all 5 potions actually
+ LLG: I scan all possible inventory states, then get the shortest paths towards the states that can afford each potion
+ Zenoscave: smart.
+ LLG: also Zenoscave, by "discount should be very very small"
+ LLG: how small are we talking
+ Zenoscave: .005-0.1
+ LLG: I'll try playing around with those
+ Zenoscave: But I've never found a good value that always helps
+ LLG: any reason why you prefer it to total points / total turns?
+ Zenoscave: Icebox  had a good example
+ Zenoscave: 10/1 &gt; 11/2
+ Zenoscave: end game points matter more
+ AllYourMCTS: total points / 2 * total turns, fixed!
+ Zenoscave: lol AllYourMCTS
+ BoBot: count turns starting from the end of the game *taps forehead*
+ LLG: I have a deterministic solution for endgame scenario (either player at 5 potions)
+ LLG: if I'm at 5 I'll rush the closest potion that gives me higher score than my opponent
+ LLG: if they're at 5 I'll try to rush a potion, or stack ingredients if I can't rush any fast enough
+ miszu: LLG, if your AI is russian add the Rush B option
+ ANGGEL: hi
+ AntiSquid: what's the reference miszu
+ LLG: it's a csgo reference
+ miszu: AntiSquid in counter strike game, in dust 2 map russians always rush into B site when terrorists
+ miszu: it's a popular reference among gamers
+ AntiSquid: was never a fan
+ miszu: :P
+ AntiSquid: nice improvement Rounddice, become the Edgelord&#160;! 
+ AntiSquid: seriously, congratulations on 3rd place
+ ClockSort: it's getting hard to climb, everyone else is climbing too!
+ miszu: which league?
+ ClockSort: or at least, that's what I blame my slow progress on&#160;:)
+ Nerchio: &lt;legend&gt;  :)
+ Astrobytes: :eyes: eulerscheZahl tho
+ miszu: you guys too good
+ DomiKo: GJ
+ aCat: Grat Nerchio
+ Zenoscave: I'm still waiting for emil's comback
+ ClockSort: congrats to all Legend players -- it's a great achievement!
+ AntiSquid: chodu kai entered the LB
+ AntiSquid: 1 day legend again?
+ Astrobytes: well done Nerchio!
+ eulerscheZahl: oh, looking better than i expected so far
+ ClockSort: I'm #50 Gold, really trying to make Legend in the next 13 hours
+ miszu: good luck ClockSort
+ Nerchio: thanks wasn't so easy to enter legend with java tbh
+ miszu: with java?
+ miszu: ouff
+ AntiSquid: oh gratz nerchio
+ Nerchio: im impressed with vala nice results with java
+ Michael_Howard: All this talk about rushing potions at the end... why aren't people rushing potions all the way through? Serious question.
+ Nerchio: wala*
+ miszu: why you kept with java and not c++?
+ AntiSquid: he likes java
+ ClockSort: thanks miszu
+ Nerchio: i was in the middle of rewriting to C++
+ Nerchio: but saw wala smashing to the top in java
+ Nerchio: so decided to keep going
+ Zenoscave: Michael_Howard which is better 15 points now or 20 points in two turns
+ eulerscheZahl: potion rush empties your ingredients
+ Zenoscave: that's why
+ Michael_Howard: @zenoscave ah I see what you mean. Thanks.
+ eulerscheZahl: with no ingredients you take more turns to recover
+ Michael_Howard: Another good point. Thanks.
+ AntiSquid: poor daiver&#160;:(
+ AntiSquid: was rooting for him
+ mde_deus: hey I need some help with chess board analyzer, how should I make it so the checkmate is identified? 
+ Samer: eulerscheZahl did you manage to fit spells and potions into an int32? this is killing me, i can't figure it out
+ NitMpez: yeah... I'm trying to come up with ways to push higher... but i can't come up with a good heuristic to do a beam search so still stuck at around depth 8 and unfortunately I rush potions which seems hit or miss, looking to adjust my scoring to handle differently
+ Samer: i seem to be 2 bits short
+ eulerscheZahl: onl the inventory part of them
+ eulerscheZahl: which spells i have is more than 32bit
+ Samer: yes that one's easy.. i can even fit the price, but still need 2 bits for castable and repeatable
+ Samer: i guess it's impossible
+ LLG: I guess I'll submit, watch it for a bit then go to sleep
+ eulerscheZahl: i guess i could do a little writeup of my storage after the contest. the rest of my bot really isn't worth writing about
+ Zenoscave: Also how you modify to get a new state needs to be considered. Samer
+ LLG: it's already 3am for me
+ LLG: I need to wake up at 6:45
+ wlesavo: Nerchio gratz :slight_smile:
+ Nerchio: ty :D
+ DomiKo: good start in legend
+ Zenoscave: more operations but smaller storage isn't always optimal
+ Stilgart: gg Nerchio
+ Nerchio: i will grab my spot at the bottom of legend :joy:
+ Zenoscave: (╯°□°）╯︵ ┻━┻
+ kovi: yeah, pm will be boring mostly
+ Zenoscave: TIMEOUT
+ eulerscheZahl: i need very few operations for my inventory
+ Samer: Zenoscave is have fast routines routines to sum 2 inventories and other operations, one liners
+ eulerscheZahl: i know a little of what pb is doing. that could give an interesting read
+ Zenoscave: and number of instructions/cycles in this?
+ wlesavo: kovi i bet python pm's would be helpful 
+ eulerscheZahl: but 20 times "i used beam search and through thousands of simulations steps at the problem", meh
+ Q12: @mde_deus check if the king is attacked and if so then check if he can escape, if he can't then this is a sign that there is checkmate.
+ Nerchio: i want to know how wala can be in top legend with java :D
+ Astrobytes: I'm interested in the more unique approaches, seems there are a few
+ Zenoscave: By being better than bottom  legend
+ elderlybeginner: I have a feeling that I set wrong objectives. And I have a feeling that I started to understand what to go for.  Bit late to start it over again :joy:
+ ClockSort: relevant username
+ Zenoscave: .com
+ wala: Nerchio arrays and primitives mostly
+ eulerscheZahl: how many sims do you get?
+ wala: I don't know but but i think the evaluation is rather important in this contest
+ Nerchio: yeah my evaluation is average at best
+ Nerchio: well i use arrays and bitset and was getting even 200k nodes but it wasn't very useful so i changed to beamsearch and well.. 30k nodes maybe and up to depth 15
+ Nerchio: kinda bad compared to other languages :D
+ pb4: How many people here have tried to see how their rank is impacted by the number of simulations they get&#160;?
+ Zenoscave: o/
+ Zenoscave: My sims greatly impact my score
+ pb4: Was it impacted much&#160;?
+ eulerscheZahl: my answer: not that much after some point
+ Zenoscave: That means my eval is probably inadmissible
+ wlesavo: pb4 i did for montecarlo, 5-15k were almost the same, but this is mid gold
+ eulerscheZahl: to some degree you can counter a worse scoring with more CPU power. but there are limitations
+ pb4: eulerscheZahl&#160;: same answer for me. Can't see a real difference between 30k sim and 150k
+ wlesavo: my opp prediction is 1k rollouts mc, it seems to get all the losses right
+ NitMpez: really depends i guess... kind of like nerichio mentioned, only gets 30k with beam search but the extra depth is more important... 
+ kovi: for mc it did matterfor beam it is notwithout enemy prediction depth over 10+ has diminishing return
+ wlesavo: same, i only have around 20k unique nodes, 
+ NitMpez: I can't wait to hear what people did for their heuristic on the beam search to get to that depth... everything i implement seems to get to same depth or i just do worse
+ Nerchio: i only predict enemy ending 5 turns
+ Mike-yerG: hey all! Just a quick question: I'm just using actionId to brew, but once one of us brew that id my witch will still attempt to cast it. Doesn't my actionId refresh each cycle?
+ AllYourMCTS: it only refreshes after you use the Rest action
+ wlesavo: Mike-yerG you probably dont clear your storing right
+ Mike-yerG: I'm new to all this so it would make sense I'm doing something wrong haha.
+ Mike-yerG: would setting actionId = 0 after each brew do the trick?
+ miszu: so I wrote my UTT game engine without testing it. 200 lines of code. Time to see if it will crash when playing random moves
+ Counterbalance: 37m before the timer starts flashing
+ Astrobytes: lol miszu, you really did give up on the contest :D
+ miszu: *insert 24h tv series sound effect*
+ NitMpez: i'm almost there
+ miszu: Astrobytes, yeah yesterday I realised I don't have enough time to finish writing my game engine and do bfs
+ miszu: I started the competition half way through
+ dbf: Mike-yerG, just read everything from input on each step. All spells are provided to you in correct state
+ Beresta: and I'd stuck in optimizing my heuristics full day today... seems like the more tunes I do the worse it becomes :D 
+ geppoz: my initial idea was to start with values: 1,3,5,7 for ingredients, then change them every time I learn a recipe that make it different
+ miszu: next competition I would start right away in C++ and write my game engine from beginning
+ Mike-yerG: oki I'll recheck everything. 
+ miszu: if you have a correct game engine, the rest is "easy" to test different strategy
+ geppoz: so when I learn [-5,0,+3,0] the weight of  3 drops
+ Astrobytes: miszu, I didn't do much due to lack of motivation until yesterday, now I'm motivated and don't have time to finish my sim never mind search :D
+ Astrobytes: Trying to pick some low-hanging fruit and fix some bugs in my crappy reflex bot
+ miszu: motivation is important haha. I find the applying moves to your game engine quite complex. Lots of corner cases to handle
+ eulerscheZahl: wlesavo <a rel="nofollow" class="external free" href="https://twitter.com/chokudai/status/1330547405268295680">https://twitter.com/chokudai/status/1330547405268295680</a>
+ Astrobytes:  hahaha :D
+ Zenoscave: lol
+ Astrobytes: wlesavo you are now Big In Japan
+ ZarthaxX: LOL
+ ClosetAI: Is chokudai even trying? Maybe he will come back in last hours. Maybe even Psyho comes back.
+ Zenoscave: Psyho I doubt.
+ Zenoscave: But he could
+ eulerscheZahl: he tweets about slow servers and that he wants to go to bed
+ pb4: Psyho&#160;?
+ ClosetAI: Psyho complained about TCO finals but that was like 5 days ago
+ eulerscheZahl: chokuda i
+ kotamanegi: Chokudai does.
+ eulerscheZahl: now you pinged him
+ elderlybeginner: this red color for timer is kind on annoying :unamused:
+ Zenoscave: I have an improvement that increases my w/r against myself by about 20% with like a 1% loss rate increase. Wondering if I should resubmit
+ ClosetAI: Chokudai is doing the 24h thing that he did last time I think
+ eulerscheZahl: elderlybeginner it will start blinging soon
+ Astrobytes: slow servers kinda ruin the last day
+ eulerscheZahl: use the browser developer tools to remove it
+ Zenoscave: I agree astro
+ kovi: wow, iehn won topcoder marathon final
+ pb4: STOP THE COUNT&#160;!!!!
+ Zenoscave: no pb4. not again
+ AntiSquid: :D
+ Zenoscave: I can't take that anymore
+ Astrobytes: lol
+ AntiSquid: contest the results if choku beats you :P
+ eulerscheZahl: i made that joke before
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://discord.com/channels/466965651135922206/711887567590654013/776528048312025179">https://discord.com/channels/466965651135922206/711887567590654013/776528048312025179</a>
+ Zanoshky: pb4 congrats!
+ Zanoshky: would like to hear any advice if youd like to share some?
+ Zenoscave: win matches
+ eulerscheZahl: git gud
+ Astrobytes: lol eulerscheZahl, do you save your jokes for handy reference? :P
+ struct: I tried pruning it was a fail
+ struct: I go for my 2nd attempt
+ AntiSquid: man what's with the snail pace submits Q_Q
+ AllYourMCTS: winning is just magic
+ eulerscheZahl: discord has a search bar at the top right
+ Astrobytes: I knowwww
+ Astrobytes: struct: Time for a Prune Array
+ eulerscheZahl: but write it in paython
+ AntiSquid: but but ... that would actually make sense for once&#160;!
+ Zenoscave: what's a prune array?
+ Astrobytes: *Payhon
+ ParticleBeam: An orchard?
+ Zenoscave: more ceg memes?
+ Astrobytes: Ask ceg Zenoscave
+ eulerscheZahl: the thing that makes GAimax faster
+ Astrobytes: :D
+ Zenoscave: thought so
+ eulerscheZahl: astro yesterday it was paython.
+ AntiSquid: what was the matrix meme Astrobytes&#160;?
+ eulerscheZahl: you missed that i think
+ Astrobytes: Ah yeah, I did euler
+ Astrobytes: AntiSquid&#160;?
+ Astrobytes: for ceg?
+ AntiSquid: in his own words
+ struct: Today I felt the pain of playing vs myself
+ AntiSquid: something about cost matrix&#160;?
+ Zenoscave: struct what's that pain like&#160;;)
+ Astrobytes: Oh god, yeah
+ struct: not fun
+ struct: I think I failed my first attempt of pruning
+ struct: But im going to try again
+ Astrobytes: AntiSquid: When he had the 'payoff matrix', pb4 asked him about it I believe
+ Zenoscave: gl struct
+ AntiSquid: pay off matrix is a real thing, just don't remember ceg's words 
+ struct: Still have 12 hours
+ Illedan: Nice pb4, pure luck?
+ Astrobytes: Yeah I know what a payoff matrix is, but ceg had very far from a payoff matrix :D
+ pb4: It'll go down, but stay in top 3
+ ClosetAI: Agade is still in queue
+ pb4: Normally...
+ AntiSquid: it's like submits get slower by the minute .
+ eulerscheZahl: but this time you can't win a starwars toaster
+ Zanoshky: pb4 do you always program in c++? Do you see any benefits from other langs?
+ AntiSquid: the canvas is okey
+ AntiSquid: sort of
+ miszu: I am using the rand() function in c++ but always give me the same value when I restart the game
+ pb4: Zanoshky&#160;: don't know other languages
+ NitMpez: need to srand it
+ Astrobytes: srand() - call srand() if you must use rand()
+ eulerscheZahl: miszu use srand(TIME(null))
+ NitMpez: set your seed
+ eulerscheZahl: (╯°□°）╯︵ ┻━┻
+ Astrobytes: hahaha
+ miszu: thanks guys
+ Zenoscave: too slow
+ eulerscheZahl: or was it time(NULL)?
+ Zenoscave: time(NULL)
+ Astrobytes: srand(time(NULL))
+ miszu: for MCTS what's your favorite random function?
+ Zenoscave: lol
+ Astrobytes: or 0
+ Astrobytes: same thing
+ dbf: miszu, fastrand
+ eulerscheZahl: xkcd rand
+ Zenoscave: time(0) == time(NULL)??? i thought they were different
+ ddreams: NULL == 0
+ ddreams: so
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://xkcd.com/221/">https://xkcd.com/221/</a>very fast
+ Astrobytes: I use a xorshift
+ Zenoscave: oops duh
+ dbf: very fast, very random
+ BrunoFelthes: I only add the urgency bonus at my code now
+ AntiSquid: isn't that automatically included?
+ BrunoFelthes: for future turns
+ struct: Well if you want to sim
+ Icebox: ok I'm gonna do what I never like to do
+ Astrobytes: sleep? :D
+ dbf: rewrite in c++?
+ Icebox: chat pls help C++ blows my mind I'm lost Q_Q
+ Nerchio: personally i didn't bother implementing taxbonus for spells or urgency bonus in my simulation
+ Nerchio: but maybe taxbonus could've been a little useful
+ Icebox: dbf no I'm in gold with c++ already
+ miszu: just read that rand() generates same randon numbers... that's not random!!!!
+ struct: whats wrong Icebox?
+ Zenoscave: it is. random on input. not output
+ BrunoFelthes: i think that in legend any little thing can make difference
+ struct: it is random
+ struct: but it has default seed
+ Icebox: calling q_ptr-&gt;front() on a queue crashes struct
+ eulerscheZahl: i have the tax return. but don't add tax to new spells when i learn
+ eulerscheZahl: and no urgency bonus either
+ struct: I dont use queue sorry
+ AntiSquid: check if q_ptr == NULL&#160;?!
+ struct: I use plain old array as my queue
+ MrSok: you should seed it with a timer
+ Illedan: Is adding Learning to the search good enough as addon? :thinking:
+ Icebox: neither the ptr is null nor the queue is empty AntiSquid
+ Illedan: Wonder if I should try to wing adding it as a last effort 
+ eulerscheZahl: you don't have that?
+ Illedan: Nah
+ <b>**eulerscheZahl slaps Illedan around a bit with a large fishbot</b></p><p><img src="/a/23052489191875" /> Astrobytes: miszu: start here<a rel="nofollow" class="external free" href="https://en.wikipedia.org/wiki/Xorshift">https://en.wikipedia.org/wiki/Xorshift</a>
+ Illedan: Didn't bother
+ NitMpez: i don't have the depth for it
+ Illedan: Ok eulerscheZahl
+ Illedan: I'll do it
+ Illedan: FINE
+ AntiSquid: what ... i added it
+ Zenoscave: do you mean learning midgame?
+ NitMpez: been trying to get my depth lower to add learning
+ Illedan: You had me and slaps
+ AntiSquid: didn't do much i guess
+ Zenoscave: or beginning
+ BrunoFelthes: Illedan yes at the early turns
+ eulerscheZahl: nice, random drift to top10i'll go to bed before i drop again
+ Zenoscave: gn euler
+ NitMpez: gl
+ Illedan: Oh, BrunoFelthes. You don't do that on later turns?
+ Astrobytes: gn euler, and best of luck&#160;:)
+ Illedan: Intersting :thinking:
+ dbf: gn euler, good submit&#160;:)
+ miszu: so many different ways for randoms
+ BrunoFelthes: i do, but i think that it do not do much difference
+ pb4: Illedan&#160;: what does it mean "add learn to the search"&#160;?
+ miszu: I mean.. I am not creating new encryption algorithm
+ Zenoscave: pseduo-randoms*
+ Icebox: okay antisquid it might be NULL but this doesn't make sense
+ miszu: just something decent for MCTS
+ miszu: yeah pseudo
+ Icebox: if (q_ptr-&gt;size() &gt; 169500) {
+ struct: pb4 learning psells from the tome
+ eulerscheZahl: ille LEARN also helps to your your inventory and get free space for some spells
+ Icebox: oh cmon
+ Icebox: no pastebin
+ Illedan: hmm
+ NitMpez: he learns first part of the game but not after 
+ dbf: miszu, what language do you use?
+ miszu: c++
+ BrunoFelthes: Illedan when you learn, you have more resources when new brew appear
+ Astrobytes: Yeah miszu, they're good rng's
+ miszu: does the random function matters that much in MCTS?
+ NitMpez: also have more cases to search :P
+ miszu: I just want A random move
+ BrunoFelthes: so, if you have same result with learn and without learn, with learn is better at the long run
+ Illedan: pb4, just using Learn as part of my simulation. Now I have it as a separate part
+ Illedan: True
+ dbf: miszu, after some performance tweaks you can get more sims with switch to some faster rng
+ wlesavo: Astrobytes lol im trending :smiley:
+ Illedan: 2 hours should be enough to add something that might work :D
+ Astrobytes: dbf: that's why I linked the xorshifts
+ dbf: but at the beginning just use one from standard lib
+ miszu: okay thanks dbf
+ miszu: I am in silver in UTTT
+ Astrobytes: lol wlesavo
+ struct: ahahaah
+ struct: I cant believe
+ struct: I dont believe thiis
+ miszu: so if I want to use rand() I should call srand() followed by rand() everytime correct?
+ NitMpez:&#160;?
+ struct: this is my apply Aciton
+ MrSok: yup
+ NitMpez: no
+ struct: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/41276ce2-a0b6-4c01-926a-b4efe1f670b8">http://chat.codingame.com/pastebin/41276ce2-a0b6-4c01-926a-b4efe1f670b8</a>
+ struct: anyone sees anything wrong?
+ NitMpez: you should do srand once at the start of ur program
+ AntiSquid: why miszu
+ Astrobytes: no, once per execution miszu
+ struct: this is too good
+ NitMpez: srand(time(null))
+ miszu: right once
+ miszu: as long as it's different everytime
+ NitMpez: then your rand seed will be different every time
+ struct: Astrobytes check and see if you can find the bug
+ MrSok: srand(time(null)) this is much better
+ Icebox: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/0da9ac75-7050-439f-b7b6-9447efba13f6">http://chat.codingame.com/pastebin/0da9ac75-7050-439f-b7b6-9447efba13f6</a>
+ Icebox: so that code AntiSquid
+ Icebox: gives 
+ Icebox: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/faa5a4cc-736e-407b-9939-b040fe4748f4">http://chat.codingame.com/pastebin/faa5a4cc-736e-407b-9939-b040fe4748f4</a>
+ Icebox: I don't understand how it can compare size of pointer
+ Icebox: but can't cerr it
+ Icebox: this is black magic for me I swear
+ NitMpez: srand(time(NULL)) just in case since the null cap matters
+ miszu: ok thanks it worked
+ miszu: sorry for my noob question
+ NitMpez: its ok... i've been stuck in the same spot for the last couple of days... 
+ struct: So my bug was that when I brew, I didnt discount ingredients
+ struct: ...
+ MrSok: np everyone is making noob questions when reaching a new target
+ Tyir: wait a minute, Icebox gave up on Python?
+ NitMpez: yeah that will make a difference
+ Icebox: I switched to C++ on saturday last week Tyir :D
+ theycallmedavid: Too weak
+ NitMpez: my funny thing is.... i overwrote my enemy predictions and sad thing is... i did better with my garbarge enemy preduction than i do with my actual one
+ Tyir: you've betrayed all my expectations, before it was pure heuristics, then you gave up on that. now you gave up on Python
+ wlesavo: struct so you brewed by pure magic, no ingridients involved?
+ Astrobytes: sorry struct, just looked. You didn't take off the cost from your inventory?
+ struct: yes
+ struct: I didnt
+ AntiSquid: (void *)ptr Icebox maybe&#160;?
+ struct: and got me to gold :D
+ Astrobytes: lol
+ struct: new strat
+ AntiSquid: cerr &lt;&lt; (void *)ptr &lt;&lt; 
+ NitMpez: gratz
+ Astrobytes: Having similar issues fixing my bugs
+ wlesavo: easy gold 
+ struct: Time to see now if this was a feature
+ struct: lol
+ Astrobytes: You'll find out in 2-3 hours :P
+ AntiSquid: not sure if &amp;ptr works either
+ wlesavo: skipping ingridients when learning with near full inventory was a fun one
+ AntiSquid: woah barely top 100 silver .
+ AntiSquid: Automaton2000 pass me a bucket of motivation
+ Automaton2000: yeah, i've seen that one
+ Astrobytes: I wish I'd had the motivation earlier in the week. Ah well. Contests always a fun time anyway
+ wlesavo: Astrobytes did you liked the game after all?
+ AntiSquid: would have preferred this as pure optimization contest of sorts instead of the tiny extra bits here and there 
+ Astrobytes: Yeahhh up to a point wlesavo, it's not my favourite, but it's alright
+ BrunoFelthes: if you cast the 4 t0 spell, with only 3 free spaces, the movement is invalid, or you can have 3 t0?
+ AllYourMCTS: invalid
+ Astrobytes: ^
+ Astrobytes: if total exceeds 10 it's invalid
+ Zanoshky: how do  you guys predict enemy movements? I use java and barely do 7 node depth search with timeouts
+ AntiSquid: stick to 20ms Zanoshky
+ AntiSquid: and prune massively
+ BrunoFelthes: i predict only 5 enemy turns...
+ Zanoshky: how to enfroce prune?
+ Astrobytes: if (tooBig) prune;
+ miszu: when you create new object in c++, does int members have value 0 or garbage value?
+ Astrobytes: (sorry, just joking&#160;:) )
+ Zanoshky: A prune is a dried plum of any cultivar, mostly the European plum. :D
+ AntiSquid: just leave at -1 what you can't predict&#160;: distances 0: 5 3 2 5 3distances 1: 1 2 -1 -1 1 
+ Astrobytes: depends if you initialise them or not miszu
+ miszu: the default constructor
+ miszu: I have no constructor in my structs
+ AntiSquid: can have garbage value, depends
+ Zanoshky: do you also take into consideration learning a spell which might be used down the tree branch?
+ Zanoshky: because i always timeout if i include learning
+ Astrobytes: You can either make a constructor to init to 0, set them to 0 as default or zero them when you need them - depends on usage
+ miszu: yeah so if you simply declare member int with no initial value, it will take garbage value when you create an object
+ Zanoshky: does anyone uses a star in this contest?
+ Astrobytes: Undefined, it might, it might not
+ AntiSquid: hard to ask 7k participants that question :P
+ theycallmedavid: I try to build death star
+ miszu: Members of class types have no default values in general case. In order to for a class member to get a deterministic value it has to be initialized
+ miszu: that answers my question
+ Astrobytes: Wait for PMs Zanoshky
+ LordSkaven: so my optimized BFS and A* bots are still being beaten by my own weird search bot that I wrote on Tuesday and has no optimizations FML
+ struct: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/509283176">https://www.codingame.com/replay/509283176</a>
+ Astrobytes: miszu, if this is regarding MCTS nodes be careful with initialisation as it can be costly
+ struct: So many at the same time
+ struct: Almost everyone in legend submiting
+ struct: except 1
+ miszu: Astrobytes, ok yeah thanks for the headsup. I am aiming for correctness for now
+ mojojojo: are the submits still slow?
+ AntiSquid: paint drying speed
+ Astrobytes: Be prepared to throw everything at optimisation miszu, correctness be damned :P
+ mojojojo: just what i wanted to hear
+ Icebox: okay AntiSquid
+ Icebox: this is even more bizzare I swear
+ Icebox: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/39514bd7-4677-4f45-a717-934cf9b685df">http://chat.codingame.com/pastebin/39514bd7-4677-4f45-a717-934cf9b685df</a>
+ Icebox: this code
+ Icebox: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/f8945c1d-0783-4f6b-ae85-8b7d2a9de382">http://chat.codingame.com/pastebin/f8945c1d-0783-4f6b-ae85-8b7d2a9de382</a>
+ Icebox: this output
+ Icebox: so literally after calling the function again
+ Icebox: the the pointer go to shambles
+ Icebox: does*
+ Icebox: absolutely nothing happens inbetween
+ wlesavo: Astrobytes lol that totally desribes my overflowating hash function
+ AntiSquid: isn't q_ptr supposed to give same result there if nothing happens in between&#160;?
+ Icebox: it does
+ AntiSquid: do you use new when you create objects&#160;?
+ Icebox: I use Emplace
+ Icebox: which creates the object in the queue directly
+ Icebox: I assue no new needed there
+ miszu: Astrobytes is optimization important to reach gold? :O
+ struct: for uttt?
+ struct: no
+ Icebox: I meant absolutely nothing happens between cerr U and cerr S
+ Icebox: and U still cerrs a valid pointer address
+ miszu: struct, what about legendary?
+ struct: yes
+ Icebox: while calling the function again cerrs nothing and crashes
+ miszu: do you incorporate some game knowledge it too? Like first few moves?
+ struct: my uttt is vanilla mcts
+ Icebox: I'm completely dumbfounded and don't even know how to debug this
+ Icebox: Q_Q
+ miszu: oh I see
+ miszu: thanks
+ PatrickMcGinnisII: sizeOf(&amp;q-&gt;ptr)&#160;?
+ ZarthaxX: what's happening ice?
+ SirLoxley: still can't beat that silver boss&#160;:/sometimes I do, but not consistently
+ Astrobytes: Pointer problems Zartho
+ ZarthaxX: if you are experiencing some extrain bug, you are probably smashing the stack
+ ZarthaxX: strange*
+ ZarthaxX: mmm okey Astro
+ Astrobytes: Well, I think so
+ Astrobytes: Just had a quick look, don't trust me
+ Astrobytes: trying to be higher in silver
+ AntiSquid: feeling like gold or delete Automaton2000 
+ Automaton2000: yeah, tell me about it
+ Icebox: ZarthaxX you might be onto something
+ Icebox: oh my god you might be onto something
+ AntiSquid: Automaton2000 understands me! 
+ Automaton2000: so, back to the code?
+ miszu: does Automaton2000 throw random txt or it actually reads input?
+ Icebox: what is the stack size?
+ Automaton2000: do you get a lot of time to get back to your old code
+ Icebox: ZarthaxX&#160;?
+ ZarthaxX: i meant that you might be hitting the return address of a function
+ ZarthaxX: or some other variable in the stack
+ ZarthaxX: like a ptr for example if thats the case
+ Icebox: nonoono what is the stack size?
+ ZarthaxX: struct asked
+ Astrobytes: 8 mb
+ Astrobytes: westicles checked the other day with ulimit
+ Astrobytes: @Icebox
+ ZarthaxX: why the @
+ Icebox: AaAaaaaaa
+ Icebox: yup
+ Icebox: or is it yup
+ Astrobytes: just to show who I was talking to ZarthaxX. Meh, so judgemental :P
+ ZarthaxX: :rofl:
+ Q12: If I am in rank 48 (Silver) should I risk a submit that will maybe help me a little?
+ AntiSquid: bedtime now, maybe by tomorrow someone kicks me to gold&#160;:'(
+ AllYourMCTS: whats your goal?
+ Astrobytes: how many hours you got Q12? :D
+ Q12: gold league
+ AllYourMCTS: well you aint getting gold league by not submitting!
+ Icebox: ZarthaxX give me your address
+ Icebox: I'll order you pizza
+ Icebox:&#160;:)
+ Q12: Astrobytes: one
+ AntiSquid: if it's not top 20 you aren't really risking anything (prizes) Q12
+ Astrobytes: the submit might take longer than that Q12
+ Q12: so I should submit...
+ AntiSquid: 2 hours for my last submit
+ AntiSquid: listen to the heart of the bots Q12
+ Q12: I am trying, but he doesn't listen to me :rage: :joy:
+ Q12: Ok, lets do it!!!!
+ ZarthaxX: Icebox what?
+ ZarthaxX: did you manage to fix it?
+ ZarthaxX: i want a pineapple one&#160;:)
+ Icebox: I didn't yet, but it makes too much sense
+ Astrobytes: ZarthaxX you monster
+ ZarthaxX: ah, okey
+ Icebox: I use around 9mb of data
+ ZarthaxX: Astrobytes i just said it so someone commented that lol
+ Zenoscave: blow the stack&#160;!!!!!
+ Astrobytes: Thought so tbh :D
+ ZarthaxX: blow it baby
+ Icebox: and it might or might not be chilling on the stack
+ Icebox: so yeah
+ Astrobytes: recursion Icebox?
+ Icebox: if this fixes
+ Icebox: yeah
+ Icebox: recursion
+ Zenoscave: def a stack blow
+ Icebox: so if this fixes you can pm me your address ZarthaxX
+ Icebox: I'll order you a pineapple  one&#160;:)
+ Astrobytes: and mine, I could well go a pizza :P
+ Astrobytes: sorry, talking Scottish: I could destroy a pizza
+ ZarthaxX: :rofl:
+ ZarthaxX: okey
+ Astrobytes: Welp, given submit times I don't think I can do much more. Hopefully this one stays top half of silver and I'm cool;
+ Astrobytes: or cool.
+ cblte: Hi Guys. 
+ cblte: Just started and getting back into the game of programming&#160;:) this time learning some Go and Python
+ Astrobytes: When you subsitute . with&#160;;&#160;:(
+ Astrobytes: there are 11 hours and 19 mins to submit in the current contest cblte :D
+ Icebox: yup that fixed it ZarthaxX
+ Icebox: making it tail recursive fixed the issue
+ Icebox: \o/
+ Astrobytes: Send me half ZarthaxX, pineapple or not :rofl:
+ Astrobytes: gj Icebox
+ ZarthaxX: nice :O
+ ZarthaxX: Astrobytes you are gonna hate eating each piece :D
+ Astrobytes: Not if it tastes of success :P
+ miszu: given an int that represent a bit like 64, how to get which position is the bit?
+ miszu: 1 = 1st, 2 = 2nd, 4 = 3rd...
+ miszu: wrost case I'll use a counter in my loop and get the position like that
+ Astrobytes: fast way? __builtin_ctzll
+ Lysk: yeah I am using that kind of loop, it's annoying
+ Astrobytes: <a rel="nofollow" class="external free" href="https://gcc.gnu.org/onlinedocs/gcc/Other-Builtins.html">https://gcc.gnu.org/onlinedocs/gcc/Other-Builtins.html</a>
+ Astrobytes: maybe not the best page in hindsight...
+ Lysk: this one maybe <a rel="nofollow" class="external free" href="https://www.geeksforgeeks.org/builtin-functions-gcc-compiler/">https://www.geeksforgeeks.org/builtin-functions-gcc-compiler/</a>?
+ miszu: ah thanks
+ miszu: I guess loops would come to the same thing
+ miszu: I am using a while loop anyways
+ Astrobytes: yeah 'bit' better Lysk, thx&#160;:)
+ Astrobytes: this will be fast
+ BrunoFelthes: pb4 with more than 2 point than the 2nd place...
+ Lysk: I can shorten my loops to avoid going through trailing zeros :thinking:
+ Lysk: from french channel, he has precomputed path to each potion
+ Astrobytes: Yeah, I heard earlier
+ Astrobytes: It's working really well
+ Astrobytes: PM's are gonna be interesting 
+ Lysk: yup, i would like to learn how is the stater representation used
+ Andy176822: anyone know a good way to know how close the opponent is to getting the 6th brew?
+ Andy176822: I might be missing something
+ struct: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/509320386">https://www.codingame.com/replay/509320386</a>
+ struct: :D
+ The_Duck: like, how to know how many brews they've already done?
+ elderlybeginner: servers seems to be red hot
+ Andy176822: yea
+ Andy176822: that doesn't seem to be provided in the input
+ The_Duck: it's not, but you can check each turn to see if your opponent's score changed
+ The_Duck: if it did, then they brewed something
+ Andy176822: aha, good idea
+ Andy176822: thanks
+ Astrobytes: lol struct
+ Astrobytes: oh hi The_Duck, nice to see you back again&#160;:)
+ Nerchio: pb4 29 points 2.2points ahead atm :o
+ Nerchio: BrunoFelthes nice result in java too&#160;:)
+ BrunoFelthes: :D
+ BrunoFelthes: Heuristics &gt; Performance :D
+ Nerchio: interesting ^^
+ BrunoFelthes: I changed some things that was not very good at my code, and the number of visited nodes jumped from 10k to 20k :D
+ Nerchio: i can do more but still much worse
+ Nerchio: but i won't be changing my code anymore :D
+ BrunoFelthes: I'm not confident that this code will get the top20
+ Nerchio: hehe i will be cheering for java player good luck
+ BrunoFelthes: im sure that it is possible to write a top1 code in java...  the best players just dont like to use it... and CG platform do not have a good experience to play with GC languages
+ Rikerslash: a question to the java developers. Do you use soem unusual datastructures to get performance. I use mainly ArrayList and Hashmaps and a lot of custom objects. Any tips?
+ Rikerslash: I am 10th with java atm
+ wlesavo: the real question is it possible to write top1 python code
+ BrunoFelthes: plain arrays
+ ThomasNicoullaud: pb4 you timeout
+ Rikerslash: arrays instead of lists if possible if sized are fixed?
+ Rikerslash: sizes
+ Nerchio: well just try to avoid creating many new objects every round, if you can create them on round 1 and only refresh their state in future rounds
+ Nerchio: its much better
+ BrunoFelthes: reuse as much as possible the objects
+ Rikerslash: this is a very good idea thanks
+ Nerchio: yes this is the first contest where i really needed to do this
+ Nerchio: but basically you don't really want really big garbage collections since they can time you out sometimes
+ Rikerslash: at the moment for example I put all my spells and tomes and stuff in lists at the start
+ Rikerslash: every turn
+ Nerchio: if you create arraylists or whatever make sure they don't auto-resize during your work that can really kill performance
+ Nerchio: ah I also do this it's not enough object to bother with in my opinion
+ Nerchio: we're talking here the big things like search or whatever where you use thousands of objects mostly
+ Nerchio: ideally you don't want to use objects and use plain types
+ meh1001: I just profiled my code for the first time, and found that 16% of my time is spent by my function that determines if I have the ingredients to cast a spell
+ meh1001: :expressionless:
+ Nerchio: you run local instance to profile it?
+ meh1001: yeah
+ Nerchio: kk i rarely do that so can't use profiling&#160;:(
+ meh1001: I scraped input from a match and shoved it in locally
+ meh1001: overrode input() to just read it from a file
+ Nerchio: so you need to print the input to stderr then
+ Nerchio:&#160;?
+ Nerchio: and you just copy 
+ Nerchio: will try it next contest for easy debugging
+ Beresta: yea I did the same
+ meh1001: yeah I just made it WAIT 100 times, so the input is not useful for determining how smart the bot is, but made it possible to do the profile
+ meh1001: wish I'd though of doing it last week when I still had energy to try and improve it
+ Nerchio: isn't it just 1 turn though?
+ meh1001: nope, cause while my side sends WAIT the enemy side is still learning an brewing so the spells and potions still changed some
+ Beresta: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/079e4dee-7a9f-4fbe-9185-a4c65c13db67">http://chat.codingame.com/pastebin/079e4dee-7a9f-4fbe-9185-a4c65c13db67</a>
+ Beresta: oh wow didn't know it works like that :D &gt; as for profiling, I just print every turn, something like that
+ Nerchio: well i mean i use timers inside the code as well but would like to profile in the IDE 
+ meh1001: Well, I can't say it's a great idea... but I'm using python and am also very lazy so I wanted to use the python profiler
+ Beresta: well profiling is kinda dangerous and could easily be misleadingin debug mode its just completely different from release, and in release its not that reliable
+ Nerchio: :grimacing:
+ Beresta: might be helpful early to local some real bottlenecks, but later meh
+ meh1001: I certainly don't know the ins and outs of it
+ meh1001: yeah like, 18% of my time is calculating my heuristics which honestly are of questionable usefulness
+ Beresta: yea, I once added some terrible check to evaluation and it resuced my iterations like 10x :D 
+ Beresta: reduced*
+ meh1001: 17% checking inventory against spell cost  though is pretty ridiculous
+ Nerchio: the more stuff i added to evaluation it slowed down as well
+ Nerchio: even if it was if checks
+ Nerchio: but every thing counts i guess
+ Beresta: meh1001 precalculate it all
+ meh1001: I certainly learned lots of stuff doing this challenge that I didn't know before about optimization. Yeah that's one of em
+ meh1001: sadly I doubt I'll ever use any of this knowledge in my actual job snicker but it's super fun
+ Astrobytes: Fun is the general idea&#160;;)
+ Beresta: yea, true
+ Beresta: I'm waiting for it to finish now so I can look what others did on forums, I wonder what were my biggest mistakes :D
+ geppoz: meh1001 if you want to reduce that time, you can build a lookup table precalculated
+ geppoz: an array of 1001 elements, where index maps all inventory combination,
+ geppoz: and element is an array of possibile recipes (42) with possible/nopossibile and remainder
+ geppoz: and remainder itself is the index where you land after cast that spell
+ meh1001: thats an excellent idea
+ geppoz: I didn't do it, since it is not my issue :D
+ Zenoscave: if you do an array of 82. you can also include the first for spells and all 36 potions. and have a lookup of cast and brew
+ meh1001: it would probably get me 20% reduction in time honestly, well, assuming the lookups are much faster (which they would have to bE) than the list comprehension things I'm currently doing
+ Njitram: Whats with the guy in legend that always times out at turn 1?
+ geppoz: a smurf deleted
+ SkyCoops: Coucou les amis
+ geppoz: salut
+ geppoz: (?)
+ Astrobytes: coucou SkyCoops #fr
+ MuddySneakers: Does anybody know: does threading help, or do you only actually get a single core?
+ Astrobytes: Single unfortunately
+ Astrobytes: multi-core arch but we only get 1
+ SinOfWrath: Gold submission: won two against top100 players, lost one against a lower ranked player: let me place you at rank 300. This is gonna be a long night to wait my rank stabilize. :D
+ Astrobytes: there are submissions still running (in Legend at least) from around 20:00 (GMT)
+ Astrobytes: and hello fellow Scottish person SinOfWrath
+ SinOfWrath: hi Astrobytes, good to know that it's super slow tonight
+ SinOfWrath: I guess 7000+ game on last night is not so unexpected
+ Astrobytes: Yeah, last night of the contest but this is actually the highest number of contestants who submitted if I'm not mistaken
+ miszu: curious, how much $ does it take to run montly the platform?
+ Astrobytes: No idea. You'd have to ask Thibaud
+ Astrobytes: They do have a main business other than this
+ miszu: debugging my UTTT, my game engine has hidden errors
+ Astrobytes: <a rel="nofollow" class="external free" href="https://www.codingame.com/work/">https://www.codingame.com/work/</a>
+ miszu: I find this platform more fun than hackerrank or other stuff
+ Astrobytes: the link I posted is how they make $ or € rather
+ AbundantPuddle: Did they combine the urgency  bonus into the price by default?
+ Astrobytes: Right, not going any further so will stick with my crappy silver rank. GL to the remaining tryharders :D
+ Astrobytes: AbundantPuddle: price the amount of rupees this will win you if this is a potion recipe, 0 otherwise. This includes the urgency bonus.
+ Astrobytes: The urgency bonus is also in tomeIndex: This is also the value of the urgency bonus if this is a potion recipe.
+ AbundantPuddle: Yes, I restarted my code in Python and it didn't specify that. My earlier code I could have sworn you had to add the tome_index to the price to get the overall profit.
+ AbundantPuddle: But thank you, I'm just glad somebody could clarify that for me. I appreciate that.
+ AbundantPuddle: They changed how the default python code reads in the variables as well . Just wanted to make sure I didn't miss something.
+ AbundantPuddle: Oops, I apologize. I did just read that in the Game Protocol.
+ Astrobytes: :D 
+ Astrobytes: goodnight/day all
+ ZarthaxX: astrooooo
+ ZarthaxX: nooooooooooooooooooooo
+ AbundantPuddle: Have a good night Astro. Take care.
+ Astrobytes: zarthooooooooooo
+ ZarthaxX: you cant leave me like that
+ ZarthaxX: wait for my submit to end(?
+ Astrobytes: I have to, I've been MadKnighted
+ ZarthaxX: okey lol
+ ZarthaxX: gn astro
+ Astrobytes: You're way above me anyway
+ Astrobytes: But still, silver fistbump
+ Astrobytes: If you get gold I'll buy you a pineapple ZarthaxX
+ ZarthaxX: i think gold is secured
+ ZarthaxX: :fist:
+ ZarthaxX: gimme pineapple
+ particleflux: when bfs is optimized too much and now it actually gets worse 'cause it looks too much into the future with bad scoring :S
+ ZarthaxX: limit the depth
+ Astrobytes: looks that way :fist: :pineapple: 
+ NinjaDoggy: lol unlucky
+ NinjaDoggy: astro heading out?
+ Astrobytes: yeah, top 50% silver 
+ NinjaDoggy: alrighty, gn m8
+ Astrobytes: or I was at least
+ ZarthaxX: have a good one byto
+ ZarthaxX:&#160;:*
+ Astrobytes: gn NinjaDoggy&#160;:) all the best luck to the late submitters!
+ struct: nn
+ ClockSort: see ya
+ NinjaDoggy: hey clock!
+ NinjaDoggy: u staying till end?
+ ClockSort: trying to
+ ClockSort: i keep adding LEARN to my search in different ways that all make the results worse
+ NitMpez: i'm the opposite i'm trying different ways to prune to get pass depth 8th and having no luck
+ NinjaDoggy: silly trick that sped up my performance a lot in C++:
+ NinjaDoggy: memset all your global arrays to 0 on turn 1
+ NinjaDoggy: that way it forces them to be loaded in memory
+ NinjaDoggy: and then it's much faster to access after that
+ miszu: ok I think my game engine for UTTT is bug free. I can run couple runs with no errors
+ miszu: I had a previous submission for UTT in silver and finished 5th. I totally rewrote my bot and just playing random moves. He was able to draw with the boss  bot. How sad was my previous submission couldn't draw even with sloppy MCTS
+ Michael_Howard: I know how this must sound... but has the Silver boss got harder to gatekeep Gold? :sweat:
+ Michael_Howard: Talking about in IDE, not even arena.
+ Lysk: NinjaDoggy is  it 8*sizeof() or just sizeoff in the memset?
+ Zenoscave: Nah, they don't change bots 
+ SirLoxley: I cant beat him consistently either. Sometimes ... rarely I do
+ Michael_Howard: I went back to my pre-tree version to test it &amp; it got absolutely minced
+ Michael_Howard: At least I know my 10 node tree is doing something lol
+ SirLoxley: my endgame sucks, didn't read properly "tier1 or higher"
+ NinjaDoggy: @lysk just sizeof
+ Lysk: gotcha thanks
+ ClockSort: mizsu what is UTTT?
+ NinjaDoggy: ultimate tic tac toe
+ ClockSort: :thumbsup:
+ miszu: question, what functions you guys use to measure time
+ ClockSort: i use Stopwatch class   (C#, sorry :D)
+ miszu: haha :P
+ cegprakash: I just added simulation and it's tooo bad any tips
+ cegprakash: I've 90K sims at depth 5 clearly something is wrong with my moves
+ cegprakash: I'm last in silver :D
+ miszu: make sure you are returning the best move and not the worst move
+ struct: Dont discount ingredients when you brew
+ ClockSort: eliminate identical positions from your tree
+ MadKnight: where are the static lists in the referee&#160;?
+ MadKnight: of spells and recipes
+ ClockSort: lol this match <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/509440481">https://www.codingame.com/share-replay/509440481</a>
+ ClockSort: best debug output ever
+ Zenoscave: lol He used to do it one word at a time
+ MadKnight: i can't find the list of all recipes/spells
+ MadKnight: Zenoscave maybe u got it&#160;?
+ geppoz: <a rel="nofollow" class="external free" href="https://github.com/CodinGame/FallChallenge2020/blob/main/src/main/java/com/codingame/game/Deck.java">https://github.com/CodinGame/FallChallenge2020/blob/main/src/main/java/com/codingame/game/Deck.java</a>
+ MadKnight: oh thk
+ geppoz: yw
+ Zenoscave: sorry thought you said "why" not "where"
+ Zenoscave: misread
+ MadKnight: does it use the index in this array for the id of spell in the tome&#160;?
+ Zenoscave: I believe so
+ NinjaDoggy: it's... complicated ish
+ MadKnight: can i do allSpells[tome.spells[3].id]&#160;?
+ Ridakz: when u learn a new spell the id changes
+ NinjaDoggy: learns are id'ed properly
+ Ridakz: so u have to track new id
+ MadKnight: yea i know it changes when u learn
+ NinjaDoggy: brews are index + offset(42 i think)
+ MadKnight: i only need the tome id for now
+ NinjaDoggy: yea learn id is the index
+ Michael_Howard: Is the leaderboard getting faster again? 50% in half an hour.
+ Michael_Howard: Sleepy Europeans.
+ ClockSort: maybe so.
+ ClockSort: stupid question: how do you count the number of potions the opponent has brewed?
+ SirLoxley: every time his score changed ... ++
+ ClockSort: brilliant. i was trying to watch potions while factoring in any potions i took. :O
+ SirLoxley: so close ... in IDE I lose to silver boss and it's always by a point or two
+ cegprakash: score tracking I think @SirLoxley
+ hcabel: Someone find a good way to know witch spells learn&#160;?? I try lot of things but the best result was learn first spell all the time ^^
+ SirLoxley: there are certain spells that work well together. I pick them that way. Plus that (4 0 0 0) and (3 0 0 0) are must have
+ PatrickMcGinnisII: hcabel there are 14 learns my bot will never do, that's the simplest way to start
+ Michael_Howard: @hcabel you can give them a score based on tier value, then add+subtract tax bonus/penalties.
+ pedrosorio: that awkward moment when the challenge is almost over and you're looking for ideas on how to rank spells (because you just learn the first thing every time), and everyone responding is way below you on the leaderboard... 
+ PatrickMcGinnisII: lvl and rank may be a better indicator pedrosorio
+ Counterbalance: what I do is I pretend I know all the spells, then find the brews, and see which ones I used
+ pedrosorio: PatrickMcGinnisII&#160;?
+ PatrickMcGinnisII: ^ I only pretend I know 1 at a time, the learn that has the most cross usage is what i pick
+ meh1001: What I did was include spells 1 at a time in my search and if they shaved more than 2 off the distance I'd learn em, but it was too expensive so yeah 
+ meh1001: but since I had horribly unoptimized python I didn't have the nodes to not time out most of the time xD
+ PatrickMcGinnisII: because i use php i have a trimmed down sim, and it's not even perfect
+ ddreams: I had a MCTS for learning the spells, but after seeing recurse jump to the top by simply picking the first 8 I stopped thinking about it
+ miszu: c++ question. I have problem declaring my node class. Something to do with incomplete type:
+ miszu: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/e75c4b7c-6d3f-4804-9115-57e699a77c8e">http://chat.codingame.com/pastebin/e75c4b7c-6d3f-4804-9115-57e699a77c8e</a>
+ Counterbalance: if it's Node:struct Node;struct Node {....}
+ PatrickMcGinnisII: Node *
+ SirLoxley: yeah you have to predeclare it
+ SirLoxley: the compiler doesn't know what a Node is when he sees that vector&lt;node&gt;
+ miszu: same problem
+ miszu: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/acbbe1b8-4a1f-4775-826b-5266defa2eb7">http://chat.codingame.com/pastebin/acbbe1b8-4a1f-4775-826b-5266defa2eb7</a>
+ Zenoscave: If I increase my beam width my search becomes lessaccurate...
+ Zenoscave: not because of time 
+ ddreams: need a pointer, not the class itself
+ SirLoxley: make that a vector&lt;Node *&gt;
+ ddreams: use vector&lt;Node *&gt;
+ Counterbalance: which type can't it find?
+ miszu: the parent
+ miszu: I need a pointer?
+ Zenoscave: struct Node parent; no?
+ SirLoxley: yes. The compiler doesn't know how big a node is before the thing isn't fully constructed
+ miszu: yeah makes sense
+ Zenoscave: ^ that too
+ miszu: ok it works
+ miszu: thanks all
+ miszu: my road to c++ and MCTS has lots of mountains
+ SirLoxley: good luck. I think I give up here.
+ PatrickMcGinnisII: Battles in progress 97%
+ miszu: oh it's for tic tac toe
+ SirLoxley: Is it possible to continue on the bot after the competition?
+ primitive_coding: @miszu if you put a node into a node, that node in the node would have to contain  a node, which would have to contain a node, too, because ist's a node...
+ PatrickMcGinnisII: prolly end up a multi in a bit
+ SirLoxley: I am a bit upset that I didn't make it to Gold
+ miszu: primitive_coding yeah I was thinking about the same. It would be a recursion
+ PatrickMcGinnisII: i tried, but just trying to stay in top 1k was a challenge in itself
+ miszu: i'm trying to do MCTS but it's very easy to make a mistake
+ miszu: in the logic
+ PatrickMcGinnisII: crap, dropped to 1001st
+ PatrickMcGinnisII: oh well, dinnertime glhf
+ MadKnight: tome.add(new TomeSpell(new Recipe(-3, 0, 0, 1)));wait how do i tell if it's repeatable&#160;?
+ ddreams: if any are negative, it's repeatable
+ Batpapa: yes
+ cegprakash: should I go for the smallest rupees one or the highest rupees one?
+ MadKnight: rly? repeatable if any negative&#160;?
+ ddreams: what do you think?
+ ddreams: did I stutter?
+ Batpapa: miszu, I first made MCTS, that was a huge lose of time (for me at least)
+ miszu: I am doing the tic tac toe bot, not the contest
+ MadKnight: can't i be confused and ask again?
+ miszu: I gave up on contest haha. I am happy with silver
+ Batpapa: repeatable = !anyNegative
+ Batpapa: oh ok ahah
+ Lysk: except initial spells
+ Lysk: if 0 &lt;= id &lt; 42 and a negative then repeatable
+ ddreams: you can ask more questions if you're confused, but just repeating the answer with a question mark behind is pointless
+ Icebox: MadKnight fix your bot
+ Icebox: gold when?
+ MadKnight: doing the engine now
+ Lysk: you should stream MadKnight!
+ MadKnight: i'm just learning to speak english cmon
+ miszu: why people are pushing to stream? :P
+ geppoz: you are really starting to play at 8h to end? :D
+ MadKnight: no i'd use an alt for a stream
+ Tyir: Icebox, give me some pointers on how to do this better
+ Icebox: I don't know if I'm a position to give pointers :D
+ BrunoFelthes: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/509504721">https://www.codingame.com/replay/509504721</a>
+ Icebox: I just made a weird improvement that might not be an improvement
+ BrunoFelthes: 26 turns against 1st position
+ BrunoFelthes: not bad :D
+ Tyir: you are working on C++ now, i figured you have tons of pointers
+ cegprakash: 74 turns againt #1000 and still lost
+ cegprakash: not bad
+ ddreams: BrunoFelthes what strategy are you using?
+ BrunoFelthes: same as everyone...
+ BrunoFelthes: chokudai
+ Icebox: where are you Tyir
+ NinjaDoggy: can anyone give some tips/helpers for uploading hardcoded data onto codingame?
+ Tyir: overall ~1300 with some brute force 3-4 depth
+ Icebox: that's silver?
+ NinjaDoggy: say, if I wanted to upload an array of integers how could I compactly do that?
+ Lysk: I have python scripts to put stuff into a single file
+ NinjaDoggy: i'm talking about hard coding an array of size a few thousand
+ The_Duck: maybe you could encode it in a string literal, that gets you one code byte per actual byte of data
+ Tyir: i should also state that i forced it into my code, it doesn't take into account learning
+ NinjaDoggy: The_Duck, yes that's what i'm trying to do but
+ Tyir: my simulations don't look at spells to learn; so definitely not ideal
+ NinjaDoggy: there's apparently some fancy stuff u can do with characters that contain more than 1 byte of info
+ Zenoscave: wanna know how ninja
+ The_Duck: would that be better? does the submission size limit care about characters, or bytes?
+ NinjaDoggy: yes please Zenoscave&#160;:)
+ Zenoscave: Characters
+ NinjaDoggy: yea it just counts 100k
+ The_Duck: huh
+ Zenoscave: unicode
+ NinjaDoggy: yea weird
+ NinjaDoggy: um... unicode is nice and all but...
+ Icebox: that is not true tho
+ Icebox: there is a filesize limit not char size limit
+ NinjaDoggy:&#160;? didn't someone post a pie compression thing
+ Zenoscave: what's the filesize limit?
+ Icebox: so more bytes per char is just less chars
+ Icebox: 100kb
+ Zenoscave: I thought it mattered or is that just shortest
+ NinjaDoggy: actually 1 byte per character is enough for now i guess...
+ Icebox: I mean that's really easy to test...
+ NinjaDoggy: a factor of 4 or 8 won't really impact much
+ Icebox: just upload 100kb file with normal chars
+ Icebox: and 110kb file with unicode
+ Zenoscave: dd time
+ Rodrigo_the_coder: sqrt(12 - 3)
+ Rodrigo_the_coder: downloading data: 99%
+ Rodrigo_the_coder: [emergency meeting]
+ miszu: cyan: I just want to say hiii&#160;:)
+ ddreams: (everyone voted cyan)
+ miszu: cyan was not the imposter
+ NinjaDoggy: um...
+ NinjaDoggy: if i get weird stuff like:
+ NinjaDoggy: ok rip I can't even paste it
+ Rodrigo_the_coder: blue: noo my data gone
+ NinjaDoggy: but basically for each characters, i'm using basic ascii values from 0 -255
+ NinjaDoggy: but it doesn't print nicely?
+ Rodrigo_the_coder: [Dead Body Reported]
+ ddreams: self report, roddy sus
+ Rodrigo_the_coder: no u sus
+ linjoehan: lol have you seen the 3d version?
+ Rodrigo_the_coder: ddreams was not an impostor
+ Rodrigo_the_coder: Victory
+ Rodrigo_the_coder: i'm so lonely&#160;:(
+ linjoehan: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=3SgDWuwTCrU">https://www.youtube.com/watch?v=3SgDWuwTCrU</a> 3D Amouns Us looks really cool I think.
+ <b>**Rodrigo_the_coder slaps linjoehan around a bit with a large fishbot</b></p><p><a href="/wiki/File:Default_avatar.png" class="image"><img alt="Default avatar.png" src="/images/5/56/Default_avatar.png" decoding="async" width="50" height="50" /></a> Rodrigo_the_coder: I'm so lonely...&#160;:(
+ ddreams: code a bot friend
+ Rodrigo_the_coder: how
+ emh: ohh I got to Gold actually
+ emh: with my last submit before I went to bed hehe
+ cegprakash: what is silver to gold strat?
+ cegprakash: go for fastest potions?
+ jrke: ceg i think yes that would work
+ ddreams: I'm pretty sure that's not enough
+ ddreams: though I could be wrong
+ mlemm: you need a good depth sim
+ linjoehan: Dont think so either. Fast ones might get to little gold.
+ AbundantPuddle: Is that like "Code a bot, friend" or "Code a bot-friend?"
+ KrabbyFR: that's my first challenge :D do you have any ressources where I can learn to do sim?
+ ddreams: both work
+ AbundantPuddle: Lmao
+ linjoehan: I did have a try at fastest first but it was quite bad, maybe I'm the problem though.
+ mlemm: im simulating fastest/highest brews and still couldnt climb to gold
+ mlemm: because my depth is too low
+ rockstar555: hii Good morning guys
+ Whiskee: because silver is a very different place now
+ emh: cegprakash I'm doing beam search with brew price / turns
+ emh: so average gain per turn
+ Whiskee: I was very high before the cutoff but had a bugged version when it happened so didn't make it
+ linjoehan: my depth is to low too, I just had an eval for incomplete ones, but that may be the problem mlemm
+ cegprakash: I don't do BFS yet&#160;:(
+ cegprakash: only simu
+ therealbeef: made Gold :D
+ MadKnight: why so cegprakash&#160;?
+ MadKnight: and how do u use simu&#160;?
+ linjoehan: Will MCTS work on this thing? or am I just going to hate myself for trying later
+ Rodrigo_the_coder: this is where true coders cry:<a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=JRhSV_rIsjU">https://www.youtube.com/watch?v=JRhSV_rIsjU</a>
+ ddreams: I used this competition to learn MCTS, but couldn't get it fast enough
+ cegprakash: I use a difficulty rating (difference between required and current inventory) in my scoring MadKnight
+ ddreams: bfs was much easier and stronger
+ cegprakash: why is castable true when the spell is on cooldown
+ Rodrigo_the_coder: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=JRhSV_rIsjU">https://www.youtube.com/watch?v=JRhSV_rIsjU</a>
+ Rodrigo_the_coder: where true coders cry
+ Rodrigo_the_coder: have you watched it
+ Rodrigo_the_coder:&#160;???
+ Murleys: Bots should not be able to submit the first answer to a challenge ...
+ miszu: I am writing my getallpossiblemoves() but it will be super inneficient. Good bye performance
+ Rodrigo_the_coder: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=JRhSV_rIsjU">https://www.youtube.com/watch?v=JRhSV_rIsjU</a>
+ Rodrigo_the_coder: pls watch
+ Csipcsirip: no
+ Rodrigo_the_coder: why
+ linjoehan: is an action that gets you over 10 items totally not allowed or will it fill you up to 10 and disguard the rest?
+ ddreams: not allowed
+ Samer: not allowed and you skip your turn for invalid action
+ linjoehan: thanks
+ Murleys: :croissant:
+ Rodrigo_the_coder: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=JRhSV_rIsjU">https://www.youtube.com/watch?v=JRhSV_rIsjU</a>
+ JohnCM: rank 14 silver now, pls bump me up
+ Zenoscave: Rodrigo_the_coder quit
+ struct: :D
+ DomiKo: wtf
+ struct: Zenoscave gl on submit
+ DomiKo: why am I 4th?
+ Zenoscave: This one might be it...
+ Zenoscave: not win just last
+ DomiKo: rank after recalc will be so random
+ Murleys: no ones playing clash of code :cry:
+ Rodrigo_the_coder:&#160;:(
+ mlemm: wdym by recalc Domiko
+ struct: Illedan stop please
+ struct: or i bring my next one
+ [CG]SaiksyApo: Mercy plz Illedan
+ Illedan: :P
+ struct: grats both
+ Illedan: FINALLY
+ Illedan: Saiksy..
+ Illedan: I have to use 25 MS because of massive timeout now
+ struct: 25? ahahah
+ struct: poor you Illedan
+ [CG]SaiksyApo: My limit is 40 and I'm not even close, fix your timeout
+ struct: same
+ DomiKo: i have 45
+ Illedan: hmmm
+ struct: and I dont even start the timer at right place
+ Illedan:&#160;:(
+ Illedan: Maybe I'm doing something stupid again
+ [CG]SaiksyApo: Profile the memory&#160;?
+ Illedan: Naaah, I wanna sleep
+ Illedan: :P
+ [CG]SaiksyApo: I used to have some code that took 5Go :D
+ struct: yeaeh you can sleep
+ struct: me not yet
+ Illedan: I wanna see my rank in Legend first
+ Illedan: Unless this losestreak kills me :sob:
+ DomiKo: rank  is so random here&#160;;(
+ Illedan: (╯°□°）╯︵ ┻━┻
+ Zenoscave: RIP Illedan
+ DomiKo: does anyone know how recalc after end of contest work?
+ jrke: i have to optimize my code a bit and i will be in legend but its hard to optimize&#160;:(
+ DomiKo: like how many games are played?
+ struct: 500?
+ DomiKo: hmmm
+ DomiKo: hope it will be enoght
+ Zenoscave: total?
+ Zenoscave: or per player
+ struct: per player
+ Illedan: per
+ DomiKo: I have to say that changing meta was so exciting
+ Illedan: What meta?
+ DomiKo: but I love that it is the end
+ Zenoscave: I reverted 10 hours of work...
+ DomiKo: meta of playing
+ DomiKo: I had like 4 different programs
+ Illedan: :pray:
+ NightLuna: oh
+ struct: want a little push?
+ jrke: can anyone give me some c++ pragmas?
+ struct: #pragma GCC optimize("O3","unroll-loops","omit-frame-pointer","inline")
+ jrke: are these enough^^^
+ struct: You want more?
+ Illedan: (╯°□°）╯︵ ┻━┻
+ struct: wait Illedan
+ struct: Ill push
+ jrke: they are already there in my code
+ struct: I hope
+ Illedan: Just everyone push :D
+ ddreams: #pragma GCC option("arch=native","tune=native","no-zero-upper") //Enable AVX
+ ddreams: but I've had them in contests here for years
+ struct: #pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,fma")
+ jrke: thanks&#160;:)
+ Illedan: I'll just push again struct
+ struct: why?
+ struct: you can wait
+ struct: and go to sleep and wake in legend
+ Illedan: Nah
+ Illedan: Watch this go instant legend
+ Illedan: Do believe.
+ jrke: watch what?
+ Illedan: My submit crashing and burning and losing vs bad strats&#160;:(
+ struct:  What is a bad strat Illedan?
+ Illedan: Winning vs me
+ struct: lol
+ struct: sorry CG but I saved my submits for now
+ Illedan: Glad I have tomorrow off work too :D
+ DomiKo: Good for you
+ MadKnight: struct what happened&#160;?
+ MadKnight: hey Illedan nice for u
+ Gonny: How slow are the submits right now?

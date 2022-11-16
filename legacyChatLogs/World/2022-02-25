@@ -1,0 +1,1152 @@
+ UZUHAMA: Is there a way to reset my progress in a league-based game?
+ UZUHAMA: i want to start again from wood league
+ Wontonimo: you have to make a new account
+ Wontonimo: it's sad
+ UZUHAMA: oh no
+ Wontonimo: yeah
+ UZUHAMA: I forgot all about tictactoe&#160;;-;
+ Wontonimo:&#160;??
+ UZUHAMA: Ultimate Tic-Tac-Tpe
+ UZUHAMA: I totally forgot all of the stuff'
+ UZUHAMA: Dang
+ Wontonimo: yeah, i know uttt.  it seems like such a non sequitur though
+ Wontonimo: is that want you want to start back at wood&#160;?
+ UZUHAMA: yeah
+ Wontonimo: why?
+ UZUHAMA: I looked at my previous code, and I recognize nothing
+ Wontonimo: oh, yeah, that happens to me all the time
+ UZUHAMA: comments doesn't help..
+ UZUHAMA: Also code sucks
+ Wontonimo: have strong words with the author
+ Wontonimo: let them know how you feel
+ UZUHAMA: hahaha
+ UZUHAMA: Author says sorry
+ Wontonimo: what algo was it (trying to be)
+ UZUHAMA:&#160;:(
+ UZUHAMA: it's very messy
+ UZUHAMA: hard to understand
+ Wontonimo: yikes
+ UZUHAMA: to summarize
+ Wontonimo: is it bitboard?
+ UZUHAMA: yeah
+ UZUHAMA: full of dots
+ UZUHAMA: You told me to use it?
+ UZUHAMA: right?
+ UZUHAMA: i think i remember that
+ Wontonimo: dots?  that doesn't sound like me
+ Wontonimo: what kind of dots?
+ UZUHAMA: .
+ UZUHAMA: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/05f22599-77dd-480c-875a-323a74a4ec6d">http://chat.codingame.com/pastebin/05f22599-77dd-480c-875a-323a74a4ec6d</a>
+ Wontonimo: no, i'd never recommend such rediculousness 
+ UZUHAMA: yeah, you told me to use it, but I didn't
+ UZUHAMA: I just did it my way
+ UZUHAMA: sad
+ Wontonimo: i'd recommend stuff like this
+ UZUHAMA: Should've listned to you
+ Wontonimo: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/14f00eb1-df4d-4aa6-b29f-cadcd17960c0">http://chat.codingame.com/pastebin/14f00eb1-df4d-4aa6-b29f-cadcd17960c0</a>
+ Wontonimo: and this
+ UZUHAMA: yeah that thinng I remember
+ Wontonimo: return 0b111111111 ^ taken;
+ UZUHAMA: what's that
+ Wontonimo: bitboard stuff
+ UZUHAMA: but bitboard wouldn't work in 9x9 grid, would it?
+ Wontonimo: here is a full example of 3x3 bitboard <a rel="nofollow" class="external free" href="https://tech.io/snippet/LiWPxTS">https://tech.io/snippet/LiWPxTS</a>
+ Wontonimo: yeah, it does for me
+ Wontonimo: i used nine 3x3 bitboards for the smaller boards
+ UZUHAMA: oh
+ Wontonimo: which use exactly the code I had for wood league
+ Wontonimo: and a special 3x3 board that has rules for ties and stalemate and win-by-majority
+ Wontonimo: so ten 3x3 boards.
+ UZUHAMA: :drooling_face:
+ UZUHAMA: my brain goes dead
+ Wontonimo: each board has 2 16 bit ints.  So that's 20 16 bit ints, plus a couple for ties and stalemates 
+ Wontonimo: it took me a few days to code up the 3x3s to work together smoothly.  it's not a 30 min project
+ UZUHAMA: i really don't know what to say
+ UZUHAMA: overwhelmed by knowledge
+ Wontonimo: oh
+ UZUHAMA: ugh ok so 
+ Wontonimo: UTTT is a very technical challenge
+ UZUHAMA: it looked easy...
+ Wontonimo: something like Spring Challenge 2021 or Botters of the Galaxy you can get  further using if/else 
+ UZUHAMA: I have a question:raised_hand_tone1:
+ jrke: yeah SC21 has lot of things to mine just with if/else
+ UZUHAMA: What does it mean by each board having 2 16 bit units?
+ Wontonimo: for a 3x3 board you can keep track of all the positions that 1 player has using a 16bit integer
+ UZUHAMA: 0b000000000 is a 16 bit?
+ Wontonimo: look at the first 9 binary bits of a 16bit integer000 000 000
+ jrke: for 3x3 you need 9bits but there is no such 9 bit int so you need 16 bit int one for each player so 2 16 bit int
+ UZUHAMA: oh
+ Wontonimo: yeah
+ UZUHAMA: and what about other 7 digits?
+ UZUHAMA: You can just get rid of it like that?
+ Wontonimo: hide secret info in them for fun
+ Wontonimo: no, just ignore it
+ jrke: not to use them or just some other info if you want
+ UZUHAMA: haha
+ Wontonimo: it's wasted
+ UZUHAMA: mmmm
+ UZUHAMA: ok I began to understnad a bit now...
+ UZUHAMA: oof
+ Wontonimo: first follow this advice, then after you are at the top 50 in legend, then think of how you can reuse those other bits
+ jrke: now understand 16bits :grimacing:
+ Wontonimo: if player 1
+ Wontonimo: 010 010 000
+ Wontonimo: and player 2 is001 000 010
+ Wontonimo: then you can find all spaces that are used via
+ Wontonimo: used = player1 | player2
+ Wontonimo: used will be011 010 010
+ Wontonimo: all in 1 operation, no loops
+ Wontonimo: to find all the available positions
+ Wontonimo: available = 111111111^used
+ Wontonimo: 100 101 101
+ Wontonimo: again, just 1 operation
+ Wontonimo: very fast
+ UZUHAMA: ^ means substract?
+ Wontonimo: ^ means XOR
+ UZUHAMA: ohh
+ UZUHAMA: reverse thingy
+ jrke: btw wontonimo can minimax give me legend in UTTT?
+ Wontonimo: i don't know.  maybe with NN
+ Wontonimo: hey jrke!  
+ jrke: hey hey
+ Wontonimo: :taco: jrke
+ UZUHAMA: Oh yeah I love your new bot
+ Wontonimo: well that sucks.  where is antiwonto?
+ Wontonimo: hi antiwonto?
+ UZUHAMA: it's still sleeping?
+ jrke: nice name btw `antiwonto` :grinning:
+ UZUHAMA: Thought it was Autonimo at first
+ Wontonimo: i think once it goes to sleep it never wakes up
+ Wontonimo: :taco: jrke
+ antiwonto: [auto] Wontonimo has awarded jrke 10 tacos. jrke now has 1 taco. Wontonimo now has 172 taco
+ UZUHAMA: hey
+ jrke: ohh noice
+ UZUHAMA: hi
+ antiwonto: [auto] 'hi' was defined as ' A common salutation for those who are short of words ' by Wontonimo
+ jrke: where did you hosted it wontonimo?
+ Wontonimo: it's on my pc
+ jrke: oh oki
+ Wontonimo: "hosted" in my living room
+ UZUHAMA: hahahaha
+ UZUHAMA: Making an AI...
+ UZUHAMA: for fun...
+ UZUHAMA: wow
+ UZUHAMA: One day I'll become a computer geek like you
+ UZUHAMA: hopefully
+ UZUHAMA: Bye world
+ Wontonimo: you already are a computer geek by virtue of being on this site
+ Akshat_UNT: Heyy, wassup here!
+ Wontonimo: not much.  i'm falling asleep, so gn 
+ Akshat_UNT: Ouu GN buddy
+ Akshat_UNT: btw do u have discord?
+ Girlperson: um hi 😃
+ YS_Yousef: hi
+ antiwonto: [auto] 'hi' was defined as ' A common salutation for those who are short of words ' by Wontonimo
+ Girlperson: hru
+ Stilgart: Automaton2000 :taco:
+ Automaton2000: automatonnn what is your question?
+ antiwonto: [auto] Hey Stilgart, here is a :taco: for loggin in today while it is quiet.  You now have 21 tacos
+ Uljahn: Stilgart :taco:
+ antiwonto: [auto] Uljahn has awarded Stilgart 10 tacos. Stilgart now has 31 taco. Uljahn now has 97 taco
+ Thorcode: :taco: Uljahn
+ antiwonto: [auto] Thorcode has awarded Uljahn 10 tacos. Uljahn now has 107 taco. Thorcode now has 23 taco
+ KubkoFrano: Yo, how do I create a lobby to play with friends?
+ Thorcode: got to the clash of code section
+ Thorcode: and scroll to the end then click the start a private clash
+ Thorcode: if you want to make a private clash KubkoFrano
+ KubkoFrano: yeah I got it, thanks a lot man
+ Thorcode: np
+ Darleanow: I got a question , are checkpoints numberised&#160;? I mean by this, that checkpoint 1 is associated to something, etc
+ Darleanow: in order for the AI the go on the first one it should right&#160;?
+ 5DN1L: You give them numbers yourself
+ Darleanow: because i want make in sort that it will boost when the distance is the max
+ Thorcode: you will need it until reach gold XD
+ 5DN1L: in the lower leagues you aren't given all the checkpoint positions at the beginning
+ Darleanow: wdym thorcode&#160;?:D
+ 5DN1L: you will have to keep track of them yourself when you go to each checkpoint for the first time
+ 5DN1L: in the Gold league they're given to you at the beginning
+ Darleanow: oh okayyy
+ Thorcode: just learn to drift Darleanow 
+ Darleanow: okay but i don't understand what u mean by this x), i will play the car game&#160;!!
+ Darleanow: okay i do maybe have something, the more speed you have, the further you will go
+ Darleanow: and the wider the angle will be
+ Darleanow: but the less speed you will lose
+ Darleanow: depending on the angle
+ Darleanow: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/6cbeb29a-43c1-4d83-8cd7-4f1963533c19">http://chat.codingame.com/pastebin/6cbeb29a-43c1-4d83-8cd7-4f1963533c19</a>
+ Darleanow: i think i have the drift mechanic here
+ derjack: car game?
+ Darleanow: nope
+ Darleanow: x)
+ Darleanow: its in spaceship
+ derjack: tesla car?
+ Darleanow: wdym?????
+ derjack: <a rel="nofollow" class="external free" href="https://upload.wikimedia.org/wikipedia/commons/1/1a/Elon_Musk%27s_Tesla_Roadster_%2840110297852%29.jpg">https://upload.wikimedia.org/wikipedia/commons/1/1a/Elon_Musk%27s_Tesla_Roadster_%2840110297852%29.jpg</a>
+ Darleanow: lmfaoo
+ Darleanow: kinda 
+ Darleanow: Mad pod racing
+ Darleanow: drifitngs in mar
+ Darleanow: mars
+ 5DN1L: Pods are for the mad
+ 5DN1L: Landers are for the Mars
+ 5DN1L: <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/optimization/mars-lander">https://www.codingame.com/multiplayer/optimization/mars-lander</a>
+ Darleanow: oh shoot, so i meant pod
+ derjack: and theres car with similar physics <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/optimization/search-race">https://www.codingame.com/multiplayer/optimization/search-race</a>
+ Darleanow: what does sending to IDE means&#160;?
+ 5DN1L: means your existing code will be replaced
+ Darleanow: by what ?x)
+ 5DN1L: by the code you have in your history
+ 5DN1L: if you decide to send it
+ 5DN1L: so let's say you have submitted Code 1 to the arena, then you make some changes to your code but do not submit it (Code 2)
+ 5DN1L: If you look for Code 1 in the history and click Send to IDE, then your Code 2 will be replaced by Code 1
+ 5DN1L: i.e. all your changes are gone
+ Darleanow: yeah, bad idea
+ 5DN1L: you're back to Code 1
+ 5DN1L: bad idea unless that's what you want to do
+ Darleanow: okay i see thanks man&#160;!!
+ 5DN1L:&#160;:)
+ DaNinja: send to IDE when looking at Last Battles does not affect your code
+ DaNinja: it just sets opponent and game setting
+ 5DN1L: So there's Send to IDE in code history
+ 5DN1L: and Send Game Parameters in replays history
+ 5DN1L: those are two different things
+ 5DN1L: Send Game Parameters to IDE*
+ Darleanow: I'm so bad, this is frustrating
+ C26_1: I'm gonna paste this link every day in the afternoon to share my contribution, make sure to comment and try to code the solution.
+ Thorcode: lmao
+ Darleanow:&#160;:'(
+ Thorcode:&#160;?
+ Darleanow: MY CODE SUCKS
+ Thorcode: bruh
+ Darleanow: I've been trying so hard, but still
+ Darleanow: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/db0adfbb-6a5b-46fd-bef4-eb4131c32dc6">http://chat.codingame.com/pastebin/db0adfbb-6a5b-46fd-bef4-eb4131c32dc6</a>
+ Darleanow: i cant find how to make it better
+ Thorcode: ok
+ Fasader: C26_1 real men count indexes from 0&#160;!
+ Thorcode: ah he's not rlly good at eng XD
+ Darleanow: guys, is there any games that are easier than mad pod&#160;?
+ Thorcode: no
+ Thorcode: i think you should try puzzle
+ Darleanow: okay sir&#160;! thanks
+ 5DN1L: Try these ones first, Darleanow
+ 5DN1L: The DescentPower of Thor Episode 1Temperatures
+ Darleanow: im at the descent now&#160;!!!
+ 5DN1L: Good
+ Darleanow: I did it&#160;!!!
+ Darleanow: first test i mean
+ 5DN1L: ok :joy:
+ Idk.-_-: hi guys
+ Darleanow: hey&#160;!
+ NasrAllah: hey guys
+ NasrAllah: there was a python code that change the format of your code and make it half size&#160;?
+ NasrAllah: can someone share it?
+ Uljahn: <a rel="nofollow" class="external free" href="https://clemg.github.io/pythongolfer/">https://clemg.github.io/pythongolfer/</a>
+ NasrAllah: thank you very much
+ Andriamanitra: truly the stupidest way to golf
+ Thorcode: hey is anyone has a code for drifting in mad?
+ Thorcode: or could tell me the logic of it?
+ wlesavo: -3vel
+ Thorcode: bruh i used it
+ Thorcode: but it not rlly better than -2vel
+ wlesavo: well you can use a real algo then
+ Uljahn: Thorcode: share a replay with your -3vel
+ Thorcode: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/609659840">https://www.codingame.com/share-replay/609659840</a>
+ Thorcode: here
+ Thorcode: oj i just relize that my pod is fighting with each other
+ Uljahn: ye, try too use boos for one pod at start
+ Uljahn: *boost
+ darkhorse64: Hilarious: <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/death-first-search-episode-2-puzzle-discussion/61/112">https://www.codingame.com/forum/t/death-first-search-episode-2-puzzle-discussion/61/112</a>
+ Uljahn: geez
+ Uljahn: Automaton2000: here we go again
+ Automaton2000: the referee is in java
+ Thorcode: wow lionel_fr is cool
+ Thorcode: oops wrong chat
+ Thorcode: I think i should solve the search race to have more experience 
+ StraumliPerversion: well that's one thing I won't miss about this chat, talking about pods a million times
+ Hackker: yeah
+ Hackker: pod is ez
+ Darleanow: ok the descent is too hard for me
+ Hackker: so that many beginner coder would talk about it
+ 5DN1L: Darleanow you can read the hints on the left
+ Hackker: you can see the solution
+ Hackker: to learn from it
+ Darleanow: yes i did, but i don't like to cheat&#160;:'(
+ Wontonimo: hi
+ antiwonto: [auto] 'hi' was defined as ' A common salutation for those who are short of words ' by Wontonimo
+ Darleanow: Hello wontonimo&#160;!
+ Hackker: also a hint for the des is
+ Wontonimo: hey Darleanow :wave:
+ Darleanow: i went back to mad pods
+ Hackker: make a list to contain all the mountain height
+ Hackker: then print the index of the maxium element in that list
+ Darleanow: is there any way to reduce the gliding of the pod&#160;?
+ Darleanow: yeah hackker i saw the answer, but didnt ctrl+c ctrl+v on the page so i can validate it
+ Darleanow: I'll go back to it after
+ Wontonimo: this site may be too advanced for you atm Darleanow.  It's not really a beginner site.  Don't go away, but definitely try using other sites to learn
+ Hackker: like w3school
+ Wontonimo: turn down the thrust and you'll glide less
+ Darleanow: i did turned down
+ Darleanow: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/e9daaf08-7b74-4759-bd80-fd18677e9b6a">http://chat.codingame.com/pastebin/e9daaf08-7b74-4759-bd80-fd18677e9b6a</a>
+ Hackker: what league you in&#160;?
+ Darleanow: like this&#160;!
+ Darleanow: bronze UwU
+ Darleanow: but sometimes i'm missing checkpoints bc i glide too much
+ datu12: Hey all for the problem mars lander
+ datu12: do I just need to rewrite a single part of it?
+ Hackker: omg I can't see the bot at the bronze league
+ Hackker: 35 pp beated it
+ Darleanow: ranked 13k atm
+ 5DN1L: datu12 you just need to rewrite the part after reading the variables
+ 5DN1L: Darleanow anything up to your second if-block is rendered useless by the line "thurst = 0"
+ 5DN1L: is that your intention?
+ Krait_MkII: anyone done the shield smashing thing&#160;?
+ datu12: yow i just got lost in which part hey
+ datu12: like in the loop section?
+ Hackker: what lander?
+ Hackker: ep 1 or 2?
+ 5DN1L: datu12 read the hints on the left if you're in episode 1
+ derjack: :taco: Automaton2000
+ antiwonto: [auto] derjack has awarded Automaton2000 10 tacos. Automaton2000 now has 81 taco. derjack now has 15 taco
+ Automaton2000: but they are not the same
+ Automaton2000: it should be a bug
+ 5DN1L: datu12 and you're supposed to revise the code below the comment which says "write an action"
+ StraumliPerversion: :taco: derjack
+ antiwonto: [auto] Sorry StraumliPerversion but you are too new.  Get someone to give you tacos first
+ struct: :taco: StraumliPerversion
+ antiwonto: [auto] sorry struct but you can only award tacos once per day
+ Hackker: yeah
+ Hackker: i solved the mars lander 1
+ Wontonimo: yeah!
+ Wontonimo: how?
+ Darleanow: GUYYYYYYSSSS
+ Darleanow: I WENT FIRST BEFORE TIMER
+ Darleanow: AND IM STILL BRONZE
+ Darleanow: THE GAME HATES ME FR
+ 5DN1L: and no all caps please
+ Darleanow: sorry fam&#160;!
+ 5DN1L: do you see any timer in the top left corner now?
+ 5DN1L: next to the league name
+ Darleanow: i mean that before 14h54 (timer time) i was in top 2, now the timer moved to 15h54 and im still in bronze 
+ Darleanow: even though i was ahead of the boss
+ Darleanow: and ranked #2
+ Hackker: chill out
+ Darleanow: i'm chill&#160;:) just explaining 
+ 5DN1L: what's the time in your place now
+ Darleanow: 14h58 rn
+ Hackker: the first mars lander wwas not rlly hard as i thought
+ 5DN1L: do you receive any message that you're promoted? Darleanow
+ Hackker: no
+ Hackker: i think
+ Darleanow: no i didn't 
+ NgamyGianni: <a rel="nofollow" class="external free" href="https://www.google.com/">https://www.google.com/</a>
+ 5DN1L: you can PM [CG]Thibaud Darleanow
+ Hackker: no
+ StraumliPerversion: users!
+ Hackker: i'm at top 8 too
+ Hackker: but wwe can't rankup
+ Hackker: i only saw the top 1 rank up
+ Darleanow: oh
+ Darleanow: i'm silver
+ 5DN1L: oh well
+ Darleanow: hello again hacker
+ 5DN1L: Darleanow patience is the answer then
+ Darleanow: sorry&#160;!! 
+ Hackker: yeah
+ Hackker: just wait XD
+ Darleanow: i'm like a child, i hate having to wait
+ Darleanow: as my brain is already slow enough x)
+ 5DN1L: Remember: even longer wait for higher league promotions
+ Hackker: well solve a puzzle to kill time XD
+ Darleanow: god damn :o
+ Ismaellamgadar: wth i dont get episode 1 of mars lander who can help
+ 5DN1L: read the hints on the left
+ 5DN1L: Ismaellamgadar
+ Hackker: or better read the instruction carefully
+ Ismaellamgadar: which variable shows the distance between lander and surface
+ Hackker: i think you won't need that
+ Hackker: and the surface is0
+ Hackker: you already have your xy
+ Ismaellamgadar: aight thx
+ Darleanow: nooo hacker won&#160;:'(
+ Darleanow: lucky collides
+ Hackker: np
+ 5DN1L: Darleanow no worries
+ 5DN1L: you won't be pushed back to bronze again
+ Darleanow: nah was like a joke ahah&#160;!
+ Darleanow: i don't really mind loosing, if i keep getting better&#160;:)
+ NewCoder09: :taco: Wontonimo
+ antiwonto: [auto] NewCoder09 has awarded Wontonimo 10 tacos. Wontonimo now has 182 taco. NewCoder09 now has 13 taco
+ StraumliPerversion: :taco: NewCoder09
+ antiwonto: [auto] Sorry StraumliPerversion but you are too new.  Get someone to give you tacos first [sleeping]
+ Darleanow: :taco:  Wontonimo
+ StraumliPerversion: imma shell of a man
+ Darleanow: i wanna give tacooooos
+ Hackker: :taco: Darleanow
+ Darleanow: :taco: Hackker
+ Darleanow:&#160;;'(
+ Hackker: ah
+ Hackker: anti has slept
+ Darleanow: how do u make it in red&#160;?
+ Hackker: ah
+ Darleanow: maybe i'm talking too much this why he aint wanna answer me
+ NewCoder09: no hes asleep
+ 5DN1L: just type the name, the other person will see the message in red Darleanow
+ Darleanow: test 5DN1L
+ 5DN1L: yup
+ 5DN1L: it's red to me
+ NewCoder09: no anti is asleep
+ Darleanow: this cool :o
+ Darleanow: can we wake him up&#160;?
+ NewCoder09: no
+ Hackker: no
+ Darleanow:&#160;:'(
+ NewCoder09: he wakes up in 1 hour'
+ Hackker: how do you know that
+ NewCoder09: because im on here alot 
+ NewCoder09: and when hes asleep an hour later hes awake
+ Darleanow: hes lazy 
+ NewCoder09: no hes tired hes been answering all of yall
+ Darleanow: x)
+ Hackker: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/22512231f7d1393e88093f238676cef643eee87">https://www.codingame.com/clashofcode/clash/22512231f7d1393e88093f238676cef643eee87</a>can someone fight with me?
+ 5DN1L: please use the #clash channel for clash invites, thanks
+ Hackker: ok thanks 5d
+ jacek: :taco: Automaton2000
+ Automaton2000: but it's a good place to start
+ jacek: :s
+ Miki09: Automaton2000 do you use deep q learning?
+ Automaton2000: i have done a bit of a challenge
+ Hackker: hey Automaton2000 how to learn deep first search&gt;
+ Automaton2000: has anyone heard of the game is called
+ Scarfield: :taco:
+ jacek: :upside_down:
+ ahozepha: f**** python is so straightforward compared to c#
+ ahozepha: there is not method like isalpha or isdigit in c#
+ Andriamanitra: yes there is :D
+ ahozepha: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/65601896-4e07-485a-a718-d622abcb1dcf">http://chat.codingame.com/pastebin/65601896-4e07-485a-a718-d622abcb1dcf</a>
+ ahozepha: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/07c74509-5fd7-4349-a92f-3aa5e2bbdecf">http://chat.codingame.com/pastebin/07c74509-5fd7-4349-a92f-3aa5e2bbdecf</a>
+ Andriamanitra: <a rel="nofollow" class="external free" href="https://docs.microsoft.com/en-us/dotnet/api/system.char.isdigit?view=net-6.0">https://docs.microsoft.com/en-us/dotnet/api/system.char.isdigit?view=net-6.0</a>
+ jacek: oh my
+ ahozepha: really?? same of isalpha??
+ Andriamanitra: there's a list on the left side of that page
+ Andriamanitra: isLetter is probably the one you want
+ ahozepha: owww thanks i was always eliminating digits by regex
+ jacek: regex :scream:
+ ahozepha: var output = Regex.Replace(S, @"[\d-]", string.Empty);
+ ahozepha: like this 
+ ahozepha: but yeah you've saved my life 
+ ahozepha: thaaaaaaaaaaaaaaaaanks
+ Andriamanitra: you're welcome
+ ahozepha: actually never used is professionally i don't know why
+ jacek: who ever uses c# professionally :v
+ struct: is C# still a thing?
+ Andriamanitra: why wouldnt it be a thing?
+ jacek: because he doesnt wear glasses
+ ahozepha: :no_mouth:
+ KiwiTae: unity programming is in c# usually
+ ahozepha: yeah and .NET core api as well as .NET Microservices 
+ ahozepha: and yeah unity 3D of course they completely gave up unityscripting 
+ ahozepha: the huge problem in C# is it's "too wordy"
+ ahozepha: :sweat_smile:
+ jacek: then dont try java :no_mouth:
+ eulerscheZahl: the huge problem in C# is it's "too wordy"C#9 allows to code without class and Main() function
+ eulerscheZahl: i think C# has just the right amount of wordiness.Also you have List&lt;int&gt; myList = new();since recently
+ eulerscheZahl: while java only has the diamond syntax
+ jacek: :diamonds:?
+ ahozepha: yeah righ
+ Schnretzl: is there a way to make breakpoints or some such in this IDE?
+ Andriamanitra: nope, debug prints are as good as you're going to get
+ Schnretzl: blech
+ NewCoder09: x=4*9+19*0.5
+ antiwonto: [auto] x = 45.49999999940025
+ eulerscheZahl: :taco: struct
+ antiwonto: [auto] eulerscheZahl has awarded struct 10 tacos. struct now has 106 taco. eulerscheZahl now has 58 taco
+ struct: ty
+ NewCoder09: x=4*9+92*12*0.5
+ antiwonto: [auto] x = 588
+ eulerscheZahl2: :taco: eulerscheZahl
+ antiwonto: [auto] Sorry eulerscheZahl2 but you are too new.  Get someone to give you tacos first
+ NewCoder09: :taco: eulerscheZahl
+ antiwonto: [auto] sorry NewCoder09 but you can only award tacos once per day
+ eulerscheZahl: oh, wonto was more thoughtful than i expected
+ eulerscheZahl: eulerscheZahl2
+ eulerscheZahl: deleted manually?
+ struct: You need to receive tacos before you can give
+ jacek: :taco: Automaton2000
+ antiwonto: [auto] jacek has awarded Automaton2000 10 tacos. Automaton2000 now has 91 taco. jacek now has 90 taco
+ Automaton2000: i already have a bot for that
+ Automaton2000: if you didnt do that
+ eulerscheZahl: i can build a chain today (euler =&gt; euler2 =&gt; euler3 =&gt; ...) and benefit tomorrow
+ Wontonimo: good luck with that
+ eulerscheZahl: 91 for automaton? how? did that bot also give tacos once?
+ Astrobytes: y=0xFEED*0xBEEF
+ Wontonimo: i think *someone* pretended to be that bot
+ Astrobytes: hmph, no hex?
+ Wontonimo: and no y
+ Astrobytes: ah
+ Wontonimo: just x
+ Wontonimo: x+7 = x +7
+ antiwonto: [auto] x = 0
+ eulerscheZahl: sagemath is much better than that. and wolframalpha beats antiwonto by miles
+ jacek: x = x^2
+ antiwonto: [auto] x = 0
+ Astrobytes: lol, one would hope so!
+ eulerscheZahl: the opposite would be impressive
+ eulerscheZahl: a random chatbot competing with state of the art math software
+ Astrobytes: CG mathbot
+ Wontonimo: i work on it a bit to try and get it to return multiple solutions if there were some ... but it was kludgy beyond belief
+ Astrobytes: You could call it NumeroHero
+ eulerscheZahl: x = users['eulerscheZahl'].tacos += 100
+ Wontonimo: x = x + 2
+ antiwonto: [auto] x = end of the universe
+ eulerscheZahl: you do some eval, don't you?
+ Wontonimo: yes, but only if /[0-9 x=\-+*^\//
+ eulerscheZahl: no ]&#160;?
+ Wontonimo: typo
+ Wontonimo: yes, a ] at the end
+ Wontonimo: i'm not interested in having injection attacks on my home pc
+ Astrobytes: :D
+ Wontonimo: i guess i could run this on a pi
+ <b>**Wontonimo looks at box on shelf with pi in it</b></p><p><img src="/a/60413902297900" /> Astrobytes: Do it. Don't let it gather dust
+ Wontonimo: meh
+ jacek: x = rm -rf /*
+ jacek: :x
+ Wontonimo: OH MY GOD WHAT HAVE YOU DONE&#160;!
+ Wontonimo: lol
+ struct: o.o
+ Wontonimo: Automaton2000 , format jaceks computer
+ Automaton2000: when would you use a dictionary
+ jacek: antiwonto fold yourself 12 times
+ struct: hi
+ antiwonto: [auto] 'hi' was defined as ' A common salutation for those who are short of words ' by Wontonimo
+ Duculet: heyo
+ NewCoder09: Wontonimo
+ Wontonimo: yeah
+ NewCoder09: How has your day been so far
+ Wontonimo: good thanks
+ Wontonimo: and you&#160;?
+ NewCoder09: Good
+ jacek: oO
+ Wontonimo: how have you been jacek?
+ jacek: im fine
+ Wontonimo: good
+ NewCoder09: Earlier i ranked 33 in mad pod racing on wood league 2
+ Wontonimo: oh, we can get you higher than that!
+ jacek: :tada:
+ NewCoder09: now im 2,143rd
+ NewCoder09: :sad:
+ Wontonimo: share a replay
+ NewCoder09: :cry:
+ NewCoder09: of what
+ NewCoder09: Madpod
+ Wontonimo: yeah
+ NewCoder09:&#160;?
+ NewCoder09: Which one
+ jacek: yes
+ Wontonimo: i'm not sure how to say this any other way ... 1 random replay
+ NewCoder09: ok 
+ xxd: for bot programming games, how do you get a message to appear on the game screen?
+ NewCoder09: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/610564863">https://www.codingame.com/replay/610564863</a>
+ xxd: Oh nvm
+ xxd: shoulda RTFM fully
+ jacek: no. just ask in the chat
+ NewCoder09: how do i share the code 
+ Wontonimo: okay, so you are correctly targeting the X and Y and thrust 100
+ Wontonimo: now you just need to check if abs(angle to checkpoint) &gt; 90
+ Wontonimo: and if so to use thrust = 0
+ jacek: i dont thrust you
+ Wontonimo: :O
+ NewCoder09: where would i input "abs(angle to checkpoint) &gt; 90" using c++
+ Wontonimo: that's english i sent you, not code. you need to translate it into working c++ code
+ xxd: with an MCTS, how would I get the "chance of winning" for debug output
+ NewCoder09: oh ok
+ xxd: i tried doing w_i / n_i but I feel like that's wrong
+ Wontonimo: it depends what w_i is
+ jacek: thats basically it is
+ struct: score/visits?
+ xxd: yeah
+ Wontonimo: is it from 0 to 1, or -1 to 1
+ Wontonimo: or something else
+ xxd: my scoring system uses -1 and 1 
+ xxd: but for some reason score/visits works and not (score+visits)/visits
+ Wontonimo: then 0.5*score/visits + 0.5
+ NewCoder09: would that be " if nectcheckpoint angle . 90 or nextchecpointangle &lt; -90 then thrust = 0 
+ xxd: by "works" i mean the output falls in between [0,1]
+ NewCoder09: else thrust =100 end if print x y thrust"
+ NewCoder09:&#160;?
+ Wontonimo: yeah NewCoder09, but in proper c++
+ NewCoder09: ok 
+ NewCoder09: hold up
+ xxd: Oh cool. 0.5*(score/visits)+0.5 works
+ xxd: i guess i had the right idea with (score+visits)/visits, just didn't divide by 2
+ CatboyCodes: sup
+ xxd: thanks wonto
+ Wontonimo: anytime xxd&#160;!
+ Wontonimo: what are you using mcts for&#160;?
+ xxd: I just wanted to add some output for my C4 bot
+ xxd: since i'm demoing MCTS to my school computer science club today
+ Wontonimo: oh cool&#160;!
+ eulerscheZahl: 0.5*(score/visits)+0.5adding a 0.5 as a constant? looks redundant to me
+ NewCoder09: xxd your at school too?
+ Wontonimo: if you can make it interactive you can show that it will DESTROY THEM
+ eulerscheZahl: interactive version: <a rel="nofollow" class="external free" href="https://tech.io/snippet/UGXgTEg">https://tech.io/snippet/UGXgTEg</a>
+ jacek: [-1,1] to [0,1] is x/2 + 0.5 no?
+ xxd: yea
+ eulerscheZahl: line 100 in the link above is wrong, should use rollouts of parent instead of root
+ jacek: so you get an F for that
+ Wontonimo: sure eulerscheZahl, you could rearrange it to be 0.5*(score/visits + 1)
+ xxd: how would you access the parent from the child?
+ jacek: in my code a node has pointer to parent
+ xxd: are you talking about N being # rollouts of root 
+ struct: o.o
+ eulerscheZahl: just replace N by n in my snippet
+ Wontonimo: are you using that eulers snippet or your own code xxd&#160;?
+ xxd: i'm probably going to use eulers for C4
+ struct: my mcts is just euler code
+ xxd: since TTT is too trivial, UTTT is too arcane
+ xxd: and the C4 impl on CG needs you to input the board 
+ xxd: which is really annoying
+ eulerscheZahl: you really took that inefficient thing struct?
+ struct: ofc not 
+ Astrobytes: of course not lol
+ xxd: also: how do I build this file on macOS
+ eulerscheZahl: i don't get sarcasm&#160;:(
+ Astrobytes: It's not easy being German I guess&#160;;)
+ eulerscheZahl: install netcore
+ eulerscheZahl: or run it on tech.io
+ eulerscheZahl: it's not easy being me. real life friends also made fun about me not understanding irony
+ jacek: well being on spectrum is job requirement for it, no?
+ Astrobytes: lol, it's one of those things. Not everyone gets everything. You're better with numbers so nothing to worry about
+ NewCoder09: eulerscheZahl none of my irl friends even know how to code :joy:
+ jacek: neither do you :V
+ Astrobytes: :fire:
+ eulerscheZahl: story from years ago. other student changed a + for a - while i was gone for a few seconds. i came back, set down, looked at the screen and had a feeling that something is off
+ xxd: :skull:
+ Astrobytes: I was waiting for more
+ jacek: te suspense
+ eulerscheZahl: oh. i quickly spotted and fixed that line of code
+ eulerscheZahl: end of story
+ Astrobytes: Thanks. That was a real gem.
+ eulerscheZahl: sarcasm?
+ Astrobytes: You got it! :tada:
+ eulerscheZahl: got the message, i'll show myself out
+ Astrobytes: lol
+ jacek: oO
+ 5DN1L: oh i thought the moral was either lock your computer or lock other students when you're away
+ Astrobytes: Or: never leave your desk
+ 5DN1L: yup, that too :D
+ Girlperson: im on the couch at school in my classroom
+ xxd: I compiled with `csc $file` but how do I run it now?
+ Astrobytes: sounds like a job for a search engine xxd&#160;;)
+ xxd: I tried
+ Girlperson: HEYYYYYYYYY!!!!!!!!!!
+ jacek: csc?
+ Girlperson: whattssssuppppppppp???????
+ jacek: oh c# compiler?
+ xxd: yeah
+ xxd: I compiled it to an exe and I want to run it on macOS
+ Girlperson: hi people
+ struct: you dont need to say hi 3 times
+ xxd: I can use `mono` but apparently its deprecated in the sense that .NET is the future of C#?
+ jacek: afaik .net is also available to linux now?
+ Astrobytes: it is yes, for some time
+ Girlperson: @struct ok lol
+ Wontonimo: how did you find this site Girlperson&#160;?
+ Wontonimo: the text is red if someone uses your name.  it does't mean anything btw
+ Girlperson: CODING😑
+ Girlperson: and ik
+ Girlperson: thx tho
+ Wontonimo: what's your language of choice
+ Girlperson: wdym?
+ Girlperson: do u mean language i speak?
+ Wontonimo: coding lang
+ Sarstan: Alright, time to get this sorted out. I've got an entityId. Its correlated X and Y, etc. How do I tell the system if it's entityId A, then do something with X and Y for that entityId's values?
+ Girlperson: Wontonimo idk
+ xxd: .___.
+ Wontonimo: probably this site isn't for you then Girlperson.  This is more geared for people who already know functions, arrays, loops, and some basic data structures
+ Astrobytes: if entityId equals A, then entityA.x = someX&#160;?
+ Astrobytes: Girlperson: quit DMing me
+ xxd: if entityId == A, do something with entityId.X and entityId.Y&#160;?
+ Wontonimo: take a break Girlperson.  I've kicked you for a few minutes
+ Wontonimo: go learn basics, then feel free to come back
+ Astrobytes: I sense it's a troll
+ Wontonimo: the force is strong in this one
+ xxd: yeah; username gives it away
+ Wontonimo: they followed antiwonto so they must have good taste :P
+ Sarstan: That's definitely helped. But in doing entityId == "A", I'm getting an error that == can't be used for strings.
+ Wontonimo: what lang?
+ Sarstan: C#
+ Wontonimo: .equals( )  maybe
+ Astrobytes: possibly the equals method yeah
+ xxd: you should reference a C# quick start guide or the documentation
+ Astrobytes: since you're comparing String objects
+ xxd: .Equals() would be it
+ xxd: C# and their weird case conventions
+ Astrobytes: Java to C#: UpperCaseEverything
+ Sarstan: Oh, I'm dumb. It's giving 1 for player and -1 for enemy. And I'm searching for player instead of 1.
+ Sarstan: So essentially when you find an element in the string, it will reference that particular element when looking at other values?
+ Astrobytes: the equals method?
+ Wontonimo: let me know if this gperson is bothering you
+ Wontonimo: :hammer:
+ Wontonimo: it's ready
+ Sarstan: No, like when you have all these inputs and you have something like unitId. It can pull up the related object's values too.
+ Sarstan: So like I have a list of unitId, faction, unitType, health, positionX, positionY, etc. 
+ Wontonimo: isn't that just an array? 
+ Sarstan: Seems like it. I'm still at a loss in wrapping my head around arrays properly.
+ Astrobytes: yeah, you can retrieve the instance of the object with the attributeId that you're looking for
+ Wontonimo: practice arrays.  it's a really useful concept in programme
+ Sarstan: I know you can store values in an array like ratings of 3, 5, 2. But then trying to match them to a separate value throws me off.
+ Astrobytes: Yeah, I would focus on learning those kind of things first before trying to move further
+ Astrobytes: Kind of essential knowledge that you then build on
+ Sarstan: I had a feeling. But I'm confused how that's different from a list.
+ Wontonimo: it's spelt differently
+ Astrobytes: :D
+ c0r3dump: An array is typically static in size, while a list is extensible.
+ Sarstan: I had a friend I mentioned what I was trying to do and he made it sound like it's not an array I'm after.
+ Wontonimo: what language&#160;?
+ Astrobytes: C#
+ Sarstan: C#, but he's more familar with Java I think.
+ Astrobytes: In that respect they are both pretty similar
+ Wontonimo: in java there is something called a Map, and specific implementations like a HashMap, that allows you to make an arbitrary association between a key and a value
+ Wontonimo: in other languages this is called an associative array, or a hash
+ Astrobytes: or a map
+ Wontonimo: a map (aka hash, associative array) is very useful and definitely something you should put on your learning to-do list after you get a firm grip on lists (aka arrays)
+ Sarstan: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/6b8b17af-4bed-4345-9012-0fca9ff7b1b7">http://chat.codingame.com/pastebin/6b8b17af-4bed-4345-9012-0fca9ff7b1b7</a>
+ Wontonimo: use a struct for that
+ struct: you use data structures
+ Wontonimo: or a class
+ Sarstan: Sounds like another item on my checklist to look into.
+ struct: I think class is more common in C#
+ Sarstan: Thanks for pointing that out though. I think I'm thinking too hard on this stuff. Like wondering how to store several types of of information into an array, which sounds like I'm just not looking at it right.
+ Wontonimo: is c# your lang of choice?
+ Sarstan: Yes.
+ Astrobytes: I strongly recommend following some C# or just computer science fundamentals to get a grasp on the foundations
+ Wontonimo: ah.  see if you can find an intro tutorial on it that covers arrays, functions, and basic classes
+ Sarstan: I might go to Java though. Have a new buddy who works in Java.
+ Sarstan: I've gone through Codecademy's basic tutorial and noticed I struggled hard on arrays.
+ Astrobytes: You'll be able to do both when you get the basics down
+ Astrobytes: Right, look for tutorials on that then. And also refresh yourself on how the language works (ie. objects and such)
+ Wontonimo: and don't just go through the tutorial once.  repeat going through it ever week until you can do it without googling answers or looking at hints
+ Astrobytes: ^
+ Sarstan: Sure thing. Nice to get some guidance on that.
+ c0r3dump: Something I like a lot are cheatsheets. Hopefully this one can be of use to you: <a rel="nofollow" class="external free" href="https://www.interviewcake.com/data-structures-reference">https://www.interviewcake.com/data-structures-reference</a>
+ Wontonimo: noone would suggest reading about throwing a ball, then throwing just a couple times until it leaves your hand once.  But for some reason coding tutorial sites seem to leave people thinking that's how it works with coding
+ StraumliPerversion: everyone is so friendly today
+ Astrobytes: A lot of them, yeah. Worthless content.
+ Sarstan: c0r3dump nice! A visual helps a lot.
+ Wontonimo: oh, i just now noticed your name is core-dump.  nice!
+ Sarstan: I noticed programming tutorials like to leave you high and dry with a "google it" mentality. I appreciate not just handing the answer over. But you need that to get a feel for what you're looking for.
+ Sarstan: Nevermind reading dry Microsoft documention.
+ Astrobytes: well, a nudge in the right direction helps. And a good solid tutorial that doesn't leave you googling without knowing what you're doing.
+ Astrobytes: Docs and references are useful, not initially, but very useful once you know the language(s) better
+ StraumliPerversion: easiest for me is to fine a snippet of code that runs with all the basics in it
+ Sarstan: Definitely. It's how I first learned HTML years ago. Just grabbed from somewhere and played with it until I got it how I wanted. Was able to build simple sites from scratch after a while.
+ jacek: HTML is programming language :rofl:
+ StraumliPerversion: Coming from a country who stole Indonesia's flag but hangs it upside down...
+ derjack: :rage:
+ StraumliPerversion: heh heh, nice
+ Astrobytes: lol
+ jacek: 1 2 7 3 down to rockefeller street ~
+ NewCoder09: i need help with mad pod racing 
+ NewCoder09: i can send my link of my coding and what it says each time i run it
+ 5DN1L: what does the console say?
+ NewCoder09: <a rel="nofollow" class="external free" href="https://tech.io/snippet/SSyG8Vg">https://tech.io/snippet/SSyG8Vg</a>
+ NewCoder09: this is word for word of what it says
+ Wontonimo: NewCoder09 , i think this site is too advanced for you.  From working with you I'd say you should do a tutorial on basics, like variables, if/else, functions, and loops
+ NewCoder09: no 
+ 5DN1L: you miss a right bracket there
+ NewCoder09: im good with puzzles
+ Wontonimo: change thisif ((next_checkpoint_angle &gt; 90) || (next_checkpoint_angle &lt; -90) {to this
+ Wontonimo: if ((next_checkpoint_angle &gt; 90) || (next_checkpoint_angle &lt; -90)) {
+ NewCoder09: im good with looping and all the puzles just not ai coding
+ 5DN1L: NewCoder09 the console tells you exactly what the issue is :wink:
+ Wontonimo: it's not ai coding, it's just if/else 
+ 5DN1L: Automaton2000, are you AI?
+ NewCoder09: oh ok 
+ Automaton2000: did you find the puzzle of the week&#160;?
+ jacek: no&#160;:(
+ jacek: :taco: Automaton2000
+ antiwonto: [auto] sorry jacek but you can only award tacos once per day
+ Automaton2000: makes me think about it
+ StraumliPerversion: :taco: jacek
+ antiwonto: [auto] Sorry StraumliPerversion but you are too new.  Get someone to give you tacos first
+ Wontonimo: :taco: StraumliPerversion
+ antiwonto: [auto] sorry Wontonimo but you can only award tacos once per day
+ 5DN1L: Automaton2000, the puzzle of the week is Let's make a cheap ASCII 3D engine
+ Automaton2000: i'm doing the power of 2
+ Wontonimo: who did i give tacos to?
+ StraumliPerversion: puzzle of forever
+ Mrs.GloriaZindlebocker: :taco: StraumliPerversion
+ antiwonto: [auto] Mrs.GloriaZindlebocker has awarded StraumliPerversion 10 tacos. StraumliPerversion now has 3 taco. Mrs.GloriaZindlebocker now has 53 taco
+ StraumliPerversion: hmm
+ StraumliPerversion: :taco: derjack
+ antiwonto: [auto] Sorry StraumliPerversion but you are too new.  Get someone to give you tacos first
+ StraumliPerversion: pretty impressive if that is working as intended
+ jacek: hm?
+ StraumliPerversion: the taco bot seems pretty robustly protected against name changes
+ linjoehan: well hello there.
+ struct: hi
+ antiwonto: [auto] 'hi' was defined as ' A common salutation for those who are short of words ' by Wontonimo
+ NewCoder09: hi
+ antiwonto: [auto] 'hi' was defined as ' A common salutation for those who are short of words ' by Wontonimo
+ NewCoder09: balls
+ antiwonto: [auto] NewCoder09 be respectful and watch your language<a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/40701/help-center/code-of-conduct">https://www.codingame.com/playgrounds/40701/help-center/code-of-conduct</a>
+ NewCoder09: oop sorry 
+ NewCoder09: pogers
+ NewCoder09: men
+ Scarfield: StraumliPerversion :taco:
+ antiwonto: [auto] Scarfield has awarded StraumliPerversion 10 tacos. StraumliPerversion now has 7 taco. Scarfield now has 33 taco
+ Scarfield: you had -3 oO
+ nulte: StraumliPerversion :taco:
+ antiwonto: [auto] nulte has awarded StraumliPerversion 10 tacos. StraumliPerversion now has 15 taco. nulte now has 25 taco
+ nulte:&#160;??
+ nulte: math
+ Scarfield: there is a risk of dropping the awarded tacos i guess
+ Wontonimo: the 10 was hardcoded text.  i've changed it to be the amount awarded
+ nulte: so its random now?
+ Wontonimo: i guess there are tacos on the floor at this moment
+ Wontonimo: no, it is the min( givers taco count , receivers taco count + 1 , 10)
+ nulte: ah
+ StraumliPerversion: :taco: Scarfield
+ antiwonto: [auto] StraumliPerversion has awarded Scarfield 10 tacos. Scarfield now has 43 taco. StraumliPerversion now has 16 taco
+ Astrobytes: Who will help me rake those tacos?
+ Scarfield: om nomnom
+ Wontonimo: raises had
+ Scarfield: taco monster
+ Astrobytes: admittedly I'm more of a burrito guy but I'm not too fussy
+ Wontonimo: just add rice and beans to your taco, and roll it completely closed
+ Astrobytes: More or less yes :D
+ Wontonimo: mmmm ... yeah, i could go for a burrito
+ Astrobytes: Man, when I worked in London as a chef there was an amazing place for burritos on Kings Road in Chelsea, was 5-10 min walk from my work so used to go there around 4pm when I'd finished lunch service and all, then come back, eat it, then be almost comatose for the first hour of evening service :D
+ Astrobytes: they were enormous
+ Scarfield: xD
+ Scarfield: now im getting hungry :angry:
+ Astrobytes: *hangry
+ Scarfield: did you try and read the 100 year old i mentioned?
+ Astrobytes: Not just yet, it's on the list though and not forgotten
+ Scarfield: noice
+ Astrobytes: Was telling my mother and my mate Erik about it not long after you mentioned it (separately I may add), Erik also recommended it
+ Scarfield: i will reach out to the writer and ask for royalties
+ Astrobytes: That will make you rich, I guarantee it
+ Scarfield: i think my next books will be Arthur C. Clarke, or some other scince fiction, havent really read much in that genre
+ Astrobytes: Just tell him your name is Erik Eriksson from Eriksborgensmultronland, Sverige and demand payment
+ Scarfield: actually have a collection of Jules Verne i still need to read, but am open for suggestions&#160;:)
+ Scarfield: xD
+ Astrobytes: Jules Verne definitely worth a read. Also War of the Worlds and HG Wells' other books.
+ Astrobytes: Arthur C. Clarke for sure though
+ Wontonimo: and hitch hikers guide to the galaxy
+ Astrobytes: I loved ACCs Space Odyssey series, and the Rama books
+ Astrobytes: I guess you already read some Asimov
+ Scarfield: heard hitch hikers guide with stephen fry as narator, was great&#160;:)
+ Scarfield: actually not any asimov either, i have so much scifi materil ahead of me 
+ StraumliPerversion: Good to stick with the oldies.  All the new stuff is garbage.  Well, except for the murderbot books
+ NewCoder09: :taco: Scarfield
+ antiwonto: [auto] sorry NewCoder09 but you can only award tacos once per day
+ Wontonimo: asimov is fantastic.  the foundation series is grea
+ Astrobytes: I quite liked some of John Ringo's mil-sci stuff, he gets old really really quickly though
+ Scarfield: went to the library the other day, and realised Asimov, ACC and generally scifi is something i almost havent read
+ Astrobytes: as MrsGloryholeWesticlesPerversion says, stick to the old classics at least initially
+ StraumliPerversion: Yeah, the John Ringo one where the aliens were addicted to maple syrup was pretty good
+ Astrobytes: I preferred the posleen series myself, what was the maple syrup one?
+ Astrobytes: Troy rising?
+ StraumliPerversion: yes
+ Astrobytes: gotcha
+ Astrobytes: Ringo writes some good stuff but if you read a few it gets repetitive real quick, and I think he knows it
+ Scarfield: nice, ty for the "tips"&#160;:) made an actual to read list now
+ Astrobytes: :tada:
+ Astrobytes: If you read any Ringo, best not start with Die Wacht am Rhein
+ Astrobytes: though it is very Iron Sky-ish
+ StraumliPerversion: Sad to see good ones like Neal Stephenson go back.  His latest book is about global warming and Covid-21/23/29.  Great job guy
+ StraumliPerversion: *go bad
+ Astrobytes: Read it, maybe you'll like it :P
+ Scarfield: have to "shoot" some noobs with a friend, ttyl&#160;:)
+ Astrobytes: later Scarfield
+ Astrobytes: I should probably fk off too, got a goddamn annoying fever. Might listen to Jeff Waynes Musical War of the Worlds since I'm feeling nostalgic
+ jacek: <a rel="nofollow" class="external free" href="https://interestingengineering.com/artificial-organic-neuron">https://interestingengineering.com/artificial-organic-neuron</a>
+ jacek: next contest eh
+ Astrobytes: Plus if my fever spikes and I hallucinate it'll be great
+ StraumliPerversion: gn from MrsGloryholeWesticlesPerversion
+ Astrobytes: ooh, I remember their previous work Cheers for the link jacek and gn
+ Astrobytes: StraumliPerversion: :rofl: gn dude
+ jacek: previous work? csb?
+ Astrobytes: naturally
+ AdemDj12: what this two symbols do in brainfuck
+ AdemDj12: [ ]
+ Katespizer: everything
+ jacek: :thinking:
+ Wontonimo: wow, thanks AdemDj12&#160;!
+ Wontonimo: woot, last contrib finally approved
+ AdemDj12: np 
+ Wontonimo: hope you enjoyed it
+ AdemDj12: last .. why
+ AdemDj12: i did 
+ Wontonimo: "last" as in, the most recent one
+ AdemDj12: oh you broke my heart for a moment
+ jacek: "latest"
+ Wontonimo: what algo did you settle on&#160;?
+ AdemDj12: ml
+ AdemDj12: the one i implemented first with dict bug
+ StraumliPerversion: wow, great new puzzle approved!
+ StraumliPerversion: park pilot
+ dexter2601: Anyone gave a test for pelicargo?
+ struct: promotions are still bugged?
+ NewCoder09: hey
+ struct: hi
+ antiwonto: [auto] 'hi' was defined as ' A common salutation for those who are short of words ' by Wontonimo
+ NewCoder09: can someone check my code and tell me where i would put the boost power on madpod racing
+ struct: sure
+ NewCoder09: <a rel="nofollow" class="external free" href="https://tech.io/snippet/BZuyHw9">https://tech.io/snippet/BZuyHw9</a>
+ C26_1: I think to only boost if you have reach the previous pod and make sure the direction of your bot is follow the next pod
+ struct: you can replace 100 by boost
+ struct: <a rel="nofollow" class="external free" href="https://tech.io/snippet/G6izMt9">https://tech.io/snippet/G6izMt9</a>
+ NewCoder09: oh ok thank you
+ C26_1: everyone
+ C26_1: I have a small problem
+ C26_1: In python we have an array right
+ NewCoder09: i think so
+ NewCoder09: i use c++ so imnot real sure about it
+ C26_1: What's the standard way to "Add an element"
+ 5922: in numpy
+ C26_1: Like I have this code
+ C26_1: array = [3,5,4]array.append(10)array[4] = 11print(array)
+ C26_1: In the line 2 and 3
+ 5922: that is a list
+ C26_1: .append() or assign?
+ C26_1: @5922, ok I'm forgot that
+ Krait_MkII: regarding best boost location, im calculating pod distances in 1st lap.then find max distance between pods. there i use boost.
+ Krait_MkII: but make sure to use boost when next pod angle is 0, otherwise will boost in a wrong trajectory 
+ Krait_MkII: is it a good idea&#160;? :thinking:
+ struct: doesnt need to be 0
+ DarkMatriac: I havent work on  pod racing in a while, But I think it is fine to boost even if the angle is not perfectly 0 
+ Krait_MkII: thats correct too but i dnt kw a way to calculate the max angle
+ Krait_MkII: hv u done shielding challenge&#160;? im there dnt much idea abt it 
+ nulte: i would not worry to much about shield
+ C26_1: @Krait_Mkll, Why does your text so weird
+ C26_1: Does the keyboard have a problem?
+ Krait_MkII: how weird&#160;? im using web chat 
+ Krait_MkII: You now have access to SHIELD which lets you slam into your opponents with greater weight.
+ Preza: hi guys
+ Krait_MkII: this one 
+ Krait_MkII: hey 
+ C26_1: @Krait_Mkll, what?
+ DarkMatriac: have there always been shields? I dont remember using those at all. Could be why I never manage to get out of gold league xD
+ struct: shield is not needed until legend league
+ DarkMatriac: Oh well just bad coding then xD
+ Wontonimo: you can use shields as a break
+ Krait_MkII: its kind of 3 or 4th test
+ Wontonimo: because it reduces your speed down to zero
+ Krait_MkII: nice idea mate :thumbsup:
+ Wontonimo: -3v
+ antiwonto: [auto] '-3v' was defined as ' A PID controller reference for mad pod racing. Check out <a rel="nofollow" class="external free" href="https://w3.cs.jmu.edu/spragunr/CS354_F17/handouts/pid.pdf">https://w3.cs.jmu.edu/spragunr/CS354_F17/handouts/pid.pdf</a> ' by Wontonimo
+ Krait_MkII: ;hv to try that 
+ struct: does the shield even help to slow down?
+ Wontonimo: yeah, velocity goes to zero instantly
+ struct: it does?
+ struct: I dont think so
+ Wontonimo: its been a while.  i thought it does.
+ DarkMatriac: I even have memory leak in my code , what was I doing back then lol
+ Krait_MkII: @antiwonto thx
+ Wontonimo: oh, i may be wrong
+ struct: that would mean your pod would instantly stop
+ C26_1: speed = 0
+ C26_1: But you can make your speed turns back through print()
+ struct: all shield does is increase mass by 10
+ struct: 10x
+ Wontonimo: mass effect
+ Krait_MkII: haha
+ Krait_MkII: its better to use it when front of opponent 
+ Wontonimo: idk
+ C26_1: Waiy
+ C26_1: Wait
+ C26_1: How can I made a neural network tho
+ Wontonimo: first get a small mammal or an undesired uncle 
+ Wontonimo: C26_1 someone here named jacek made this great tutorial <a rel="nofollow" class="external free" href="https://tech.io/playgrounds/b51fdf068b6dce96d27cc71eb133ffe113695/neural-network-xor-example-from-scratch-no-libs">https://tech.io/playgrounds/b51fdf068b6dce96d27cc71eb133ffe113695/neural-network-xor-example-from-scratch-no-libs</a>
+ Krait_MkII: im using separate thread to track target's properties. i dnt kw if its best. im just starting to learn
+ C26_1: wait everyone
+ C26_1: I'm using the simplest logic by default in Mad Pod Racing
+ C26_1: But somehow I have reached Rank#1 in Wood leauge
+ C26_1: League
+ C26_1: What
+ C26_1: My bot needs to be better than the boss 3 to be able to reached the next rank
+ Krait_MkII: may be its easy 
+ Krait_MkII: its more like random luck sometimes. i played without changing code :D
+ Rebollo: @struct
+ Rebollo: I remember once you showed a data sctructure in c++ without pointers 
+ struct: The node I use for MCTS?
+ Rebollo: Ye I think so
+ Rebollo: some different data type something strange to me
+ Rebollo: what was that?
+ struct: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/acbfbe12-9633-4b3c-9ffc-c8f73d863f1d">http://chat.codingame.com/pastebin/acbfbe12-9633-4b3c-9ffc-c8f73d863f1d</a>
+ struct: this?
+ Rebollo: yes
+ Rebollo: but not sure if it was exactly this one
+ Rebollo: but anyway
+ Rebollo: how dod you keep the references
+ Rebollo: and move from node to node?
+ struct: I have an array inside the tree
+ struct: MCTSNode**   parents;
+ struct: Every time I select a node I added there
+ struct: I add it there*
+ Rebollo: hum
+ Rebollo: the tree itself is an array?
+ struct: I allocate all the memory at the start 
+ struct: so yes
+ struct: The tree has an arary in it
+ struct: with all the nodes Ill need
+ struct: I allocate 30M+ nodes on first turn
+ Rebollo: would you share a piece of this code?
+ struct: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/a49ca49f-b7e1-4fc5-89a2-0f4d96d37ee1">http://chat.codingame.com/pastebin/a49ca49f-b7e1-4fc5-89a2-0f4d96d37ee1</a>
+ struct: which part?
+ Rebollo: you have N childs?
+ struct: number of children for each node is stored inside the node
+ struct: child_count
+ Rebollo: wow very nice
+ Rebollo: would share the expannd and backpropagate?
+ xxd: first_child and child_count together designate a contiguous segment of the big array as the node's children
+ xxd: bruh are you just tryna steal his algorithm now
+ Rebollo: my goal is to learn
+ Rebollo: I am not stealing anything
+ struct: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/28cc3266-0cad-4854-92c3-e9c38b8dd39d">http://chat.codingame.com/pastebin/28cc3266-0cad-4854-92c3-e9c38b8dd39d</a>
+ Rebollo: I would never copy anything
+ Rebollo: I will try to understand and if so try to implment by my self
+ xxd: why do you have float visits as a parameter?
+ xxd: is visits&#160;!= 1?
+ struct: yes because I rollout all the nodes expanded
+ xxd: or is this for more complicated stuff (and speaking of that, what's the optimization where you can begin to backpropagate results where you're sure of a win)
+ xxd: ah i see
+ xxd: s/a win/a win or a loss/
+ struct: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/157b1bfe-4f24-4c66-8bb5-37fbdf45ce49">http://chat.codingame.com/pastebin/157b1bfe-4f24-4c66-8bb5-37fbdf45ce49</a>
+ xxd: i just want the name by which to refer to it so i can do some research on it
+ struct: MCTS
+ antiwonto: [auto] 'MCTS' was defined as ' Monte Carlo Tree Search ' by Wontonimo
+ Wontonimo: it's called MCTS solver <a rel="nofollow" class="external free" href="https://www.researchgate.net/publication/235985858_A_Survey_of_Monte_Carlo_Tree_Search_Methods">https://www.researchgate.net/publication/235985858_A_Survey_of_Monte_Carlo_Tree_Search_Methods</a>
+ xxd: ah solver, i recall now. thanks!
+ Wontonimo: :avacado:
+ Wontonimo:&#160;;(
+ xxd: :avocado:
+ xxd: :P
+ struct: rollout_score = temp.eval() should be rollout
+ struct: But Im not doing any rollout on that mcts I shared
+ struct: do you understand Rebollo?
+ Rebollo: not yet
+ Rebollo: But I will get there
+ Rebollo: I need some time to digest..
+ Rebollo: but really compact code congrats
+ struct: current_node is selected in the select function
+ struct: which uses UCB
+ struct: I coded my first mcts without even reading the papers
+ struct: But i coded it wrong at the time
+ struct: but it still did well enough
+ struct: was like 100 rank on uttt at the time
+ Rebollo: I wish I had this talent
+ Rebollo: but I am just a struggler
+ xxd: 'tis okay
+ Wontonimo: here is some reference code Rebollo
+ Wontonimo: <a rel="nofollow" class="external free" href="https://tech.io/snippet/UGXgTEg">https://tech.io/snippet/UGXgTEg</a>
+ Rebollo: let me see
+ Rebollo: why do you choose this strategy instead of common data structures?
+ Rebollo: many benefits?
+ Wontonimo: <a rel="nofollow" class="external free" href="https://github.com/panchishin/gMCTS">https://github.com/panchishin/gMCTS</a>
+ xxd: it is good for saving space
+ xxd: less indirection
+ Wontonimo: Rebollo , if you use classic object oriented programming then you code will be nice, readable, modular, reusable
+ Wontonimo: what it won't be is performant 
+ Wontonimo: check out this video Rebollo <a rel="nofollow" class="external free" href="https://www.youtube.com/results?search_query=data+orientated+programming">https://www.youtube.com/results?search_query=data+orientated+programming</a>
+ Wontonimo: about how to program specifically to the task to get the most performance possible
+ Rebollo: cool I got it
+ struct: all you need is cppcon videos
+ Rebollo: whats the goal of the game example you sent?
+ struct: the tech io is four in a row
+ struct: connect 4
+ struct: or w/e its called
+ Wontonimo: hey, i just realized i have 2 of the 4 machine learning puzzles :grin: <a rel="nofollow" class="external free" href="https://www.codingame.com/learn/machine-learning">https://www.codingame.com/learn/machine-learning</a>
+ Rebollo: did not get the goal of this game
+ Rebollo: rs
+ Rebollo: lol
+ struct: The easiest game to test is mcts
+ struct: you can run all the possible states
+ Rebollo: how the AI whin with this?
+ struct: and check if it matches all the possible ones
+ Rebollo: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/886fa971-91ff-45e2-8857-1f8cb5800073">http://chat.codingame.com/pastebin/886fa971-91ff-45e2-8857-1f8cb5800073</a>
+ struct: it knows N moves ahead
+ struct: that it will win
+ Rebollo: hum
+ xxd: how large is your node pool array
+ struct: depends on the game
+ xxd: how would i go about figuring out how big i should make it
+ struct: Usually its 30M plus
+ xxd: branch factor ^ depth?
+ xxd: ok
+ struct: 768MB is the ram you have
+ xxd: uint8_t status inside MCTSNode is for MCTS Solver right?
+ struct: yes
+ struct: I use values to check 
+ struct: 0 unsolved, 1 loss, 2 draw, 3 win
+ xxd: :thumbsup:
+ nulte: promotion keep bugging...
+ Wontonimo:&#160;:(
+ nulte: Its only a bit annoying
+ nulte: Im not even sure if its worth to report it
+ nulte: Not sure if it was reported already
+ nulte: now i get 0.01 away from boss ofc 
+ nulte: I guess its worth to report it now
+ nulte: :p
+ Wontonimo: which multi?
+ nulte: amazonial Im gonna keep resubmiting
+ nulte: I guess
+ Wontonimo: is the boss at 25.64
+ nulte: yes
+ nulte: 2562 now
+ Wontonimo: are you using your usual mcts&#160;?
+ nulte: nah
+ nulte: this is my old code
+ nulte: I just wanted to get all the rules
+ nulte: this is just 1 depth search
+ nulte: ok it worked now
+ nulte: Now I must bitboard this&#160;:)
+ Wontonimo: but what about your gold bot?
+ nulte: The bot is the same
+ nulte: I just prefer to code on this account
+ Timegoeswell: hello 
+ Timegoeswell: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/22523719954417a246f42201870ce745f2d3144">https://www.codingame.com/clashofcode/clash/22523719954417a246f42201870ce745f2d3144</a>
+ antiwonto: [auto] hey Timegoeswell, dont paste those links here.  Use the channel #clash
+ Timegoeswell: sorry 
+ Timegoeswell: :confounded:
+ Wontonimo: nice to see the clash channel get some traffic
+ Ninjatron: I am the traffic man
+ Ninjatron: call me Mistaa Toraffiku from now on
+ Wontonimo: hey trafficman, where is your red stop sign thing?
+ Ninjatron: good point
+ Wontonimo: do you have water?
+ Ninjatron: ok here it is
+ Wontonimo: you have water, then you are a waterboy
+ Ninjatron: no water stop is right here
+ Ninjatron: somehow I feel more authoritative
+ Wontonimo: nice new stop sigh
+ Ninjatron: it is like I am commanding people without commanding them
+ Ninjatron: the guy in the photo must be you old man
+ Wontonimo: nothing compared to the power of my 1000 yard stare which makes people hallucinate lightenbolts 
+ Wontonimo: i bet you see on while you stare at my eyes
+ Ninjatron: what lightenbolt?
+ Wontonimo: unreasonable  denial is the secondary effect
+ Ninjatron: denial of what?
+ Wontonimo: complete befuddlement and repeating yourself is the final effect of the stare before total mental collapse
+ Ninjatron: you talking to me?
+ Wontonimo: :thinking:
+ Wontonimo: anyway ... 
+ Wontonimo: that went nowhere funny.
+ Ninjatron: i said you talking to me?
+ Wontonimo: yeah
+ Ninjatron: why?
+ Ninjatron: i wasn't talking no one...
+ Wontonimo: that's a good question
+ Wontonimo: why was i talkingto you
+ Ninjatron: i don't know you said something about lights in your head
+ Ninjatron: maybe having seizures old man?
+ Ninjatron: oooohhh
+ Ninjatron: now I see
+ Ninjatron: you are a prophet
+ StraumliPerversion: please limit all conversations to MPR
+ Ninjatron: what is MPR?
+ StraumliPerversion: thank you for complying
+ Ninjatron: what is MPR? Map pod racing?
+ MrZee: Mom's perfect rice
+ MrZee: Or possibly, manual propeller rotation

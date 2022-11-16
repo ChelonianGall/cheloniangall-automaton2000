@@ -1,0 +1,265 @@
+ Thyl: yo
+ Thyl: vu que on peut pas déclarer comme argument de fonction
+ Thyl: int a[][]
+ Thyl: comment je pourrais déclarer un double tableau, sans alloc dynamic
+ Thyl: car je ne connais pas la taille à l'avance
+ BlaiseEbuth: Pas
+ BlaiseEbuth: Ou tu fais de l'alloc, ou tu utilises autre chose qu'un tableau, ou tu mets ton tableau en global, ou tu lui mets une taille fixe suffisement grande,etc...
+ JBM: le mettre en global va pas résoudre son  problème de taille dynamique
+ BlaiseEbuth: Bah en ce qui concerne la fonction si. Pas besoin de paramètre.
+ JBM: j'ai pas eu l'impression que la question portait sur la fonction
+ JBM: je peux me tromper
+ JBM: j'ai laissé ma boule de cristal au garage
+ BlaiseEbuth: Ah. BAh j'avais compris l'inverse... -_-
+ BlaiseEbuth: Mais je suis crevé, et j'ai pas ma boule de cristal non plus... Etourdis que nous sommes
+ BlaiseEbuth: Bon. Bah en attendant des précisions, je vais manger.
+ Zorg1: bah quand t'as pas ta boule de cristal, tu tires aux dés, ça a les mêmes vertus oraculaires. tu peux aussi faire des sacrifices animaux, mais faut nettoyer après.
+ BlaiseEbuth: J'ai un tarot de marseille aussi, mais il est rangé avec la boule de cristal.
+ BlaiseEbuth: Les sacrifices c'est cool, mais ouai faut prévoir le nettoyage...
+ Robinsstudio: Suffit de donner en paramètre de la fonction un int**, non&#160;?
+ Robinsstudio: Après faut connaître la taille à l'avance c'est sûr.
+ Robinsstudio: Ah oui, et j'oublie les bonnes manières&#160;: o/
+ Zorg1: \o
+ WhatTrickeryIsThis: c'est pas que la taille qui compte
+ dwarfie: la solution est simple&#160;: ne pas faire de tableau a 2 dimension ... probleme résolu
+ Zorg1: la fameuse méthode "dis moi ce dont tu as besoin je te dirais comment t'en passer" :D
+ dwarfie: en meme temps , ca sert a rien plusieurs dimensions ... c'est pour les faibles&#160;;)
+ dwarfie: exemple ... sokoban , j'ai absolument pas eu besoin :yum:
+ Robinsstudio: Si ça peut éviter pas mal de bitshifting inutile.
+ dwarfie: qui a parlé de bitshifting&#160;? pas moi en tout cas ... je vois pas le rapport d'ailleurs , j'ai pas parlé de mettre une ligne dans un seul int ...
+ Zorg1: bah pour multiplier + rapidement je suppose
+ Robinsstudio: Bah quand tu as un tableau à deux dimensions en général, c'est que tu veux faire une correspondance entre deux entiers et autre chose.
+ dwarfie: et ....?
+ Robinsstudio: Donc si tu veux fusionner ça en un tableau à une seule dimension, faut donc combiner tes deux entiers en entrée en un seul.
+ dwarfie: perdu&#160;!!!!
+ dwarfie: array [ width*heigt ]&#160;; x = index&#160;% width&#160;; y = index / width
+ dwarfie: donc pas de bit shifting
+ Robinsstudio: Oui enfin faire des modulos et des divisions c'est encore pire..
+ dwarfie: ce que fait de toutes facon le code quand il doit aller a l'adresse correspondant au 2 index d'un tableau 2D  ... donc ca fait pas une grande difference ...
+ dwarfie: sauf si tu cree ton array a coup de new int ...
+ Robinsstudio: Heu une multiplication, je veux bien. Mais je vois pas en quoi le modulo est nécessaire pour faire de l'arithmétique des pointeurs. :thinking:
+ dwarfie:  * et + dans un sens ...&#160;% / dans l'autre sens ...
+ dwarfie: index = x + y * width ... c'est vrai que je l'avais pas mise ...
+ Robinsstudio: Une phrase de dwarfie se termine-t-elle nécessairement pas des points de suspension&#160;? Est-ce une sortie de ponctuation alternative&#160;?
+ Robinsstudio: sorte*
+ pardouin: en réalité dwarfie est fanboy de python et de son type "ellipsis"
+ pardouin: il nous mène en bateau depuis le début ^^
+ Robinsstudio: :scream:
+ Robinsstudio: Tu entends ça BlaiseEbuth&#160;?
+ Thyl: c'est bon prob résolu merci BlaiseEbuth
+ Thyl: Code CHef me coup encore la tête
+ dwarfie: normalement , c'est le boulot de la reine rouge ca 
+ Robinsstudio: Mais du coup cette histoire de tableaux à deux dimensions ça m'a fait un peu réfléchir. Au lieu d'utiliser un array[3][3] que j'accède avec array[x][y], ça serait pas plus rapide de faire un array[11] que j'accède avec array[x &lt;&lt; 2 | y]&#160;? :thinking:
+ Robinsstudio: Ça gaspille deux éléments en mémoire par contre.
+ dwarfie: Pluralitas non est ponenda sine necessitate
+ Robinsstudio: J'ai pas séché le latin, c'est pour autant que j'étais attentif.
+ Robinsstudio: Ça donne quoi dans la langue de Molière&#160;?
+ nicola: Tu as léché le satin&#160;?
+ dwarfie: oula si on attaques lse contrepeteries , "il va falloir rimer sans laideur en maniant agilement les verbes"&#160;;)
+ Robinsstudio: Tu as glissé dans la piscine ou pissé dans la glycine&#160;? 
+ Robinsstudio: Mais ça ne me dit pas si c'est plus rapide tout ça dwarfie. Hormis le fait que je gaspille de la mémoire;
+ M_C: Jolie dwarfie, je ne la connaissais pas&#160;:)
+ M_C: J'ai entendue une chanson l'autre jour faite uniquement de contrepeteries (contrepitre le titre je crois)
+ dwarfie: pourquoi j'ai l'impression que <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/train-passenger">https://www.codingame.com/ide/puzzle/train-passenger</a> ca existait deja .... 
+ dwarfie: bon ca fait encore un free xp , mais bon , c'est usant ...
+ dwarfie: a la lngue
+ dwarfie: longue
+ Robinsstudio: T'aimes bien les free xp&#160;?
+ dwarfie: non ... pas quand ils sont ininteressant a ce point
+ Robinsstudio: Quoi t'aimes pas faire un petit BFS en te levant le matin&#160;?
+ dwarfie: ca me derange pas une fois de temps en temps avec un sujet original comme celui de blaisebuth ou pour un gros truc comme sokoban ... mais une fois tous les 2 jours un truc qui se resoud en 4 lignes parce qu'ils ont decouvert ca en cours... ca devient chiant en effet
+ dwarfie: qu'ils collent ca en clash , au moins ca pollue moins 
+ dwarfie: et meme pas sur qu'un bfs soit necessaire vu la haute difficulté des jeux de tests 
+ Robinsstudio: Ah ça c'est un autre problème. ^^'
+ dwarfie: ouah ... meme niako rale sur la contrib ... c'est rare . et il tire sur la solution du contributeur qui est justement une solution grosse mule sans bfs 
+ dwarfie: :champagne:
+ Robinsstudio: Il fait quoi&#160;? Il calcule toutes les possibilités&#160;?
+ dwarfie: ouaip ... tous les chemins et cherche apres celui qui est le bon
+ <b>**dwarfie se retient d'ajouter un jeu de test ou ca marcherait plus</b></p><p><img src="/a/52362003720369" /> Robinsstudio: Tu peux faire ça&#160;? :joy:
+ dwarfie: oui , je peut ... et on deja corrigé tellement de jeux de tests foireux a l'epoque ou la qualité des puzzles primait sur la quantité .... :pensive:
+ Robinsstudio: Bah te retiens pas alors. C'est grave drôle si sa propre solution ne fonctionne plus&#160;! :rofl:
+ Robinsstudio: Voilà moi aussi j'ai le droit à mon free xp.&#160;:)
+ Robinsstudio: Ah c'est vrai qu'on peut pas voir les solutions dans les autres langages c'est nul ça.
+ Robinsstudio: Il l'a fait en quel langage&#160;?
+ dwarfie: dans le langage des suppots de voldemore ... le fourchelangue
+ Zorg1: vaut pê mieux qu'on ne voit pas les solutions dans les autres langages ...
+ Zorg1: avec les gens qui font des expériences scientifiques sur CG ...
+ Zorg1: on a vite fait d'avoir quelques comiques avec des scripts pour compléter les solutions dans les autres langages
+ Zorg1: a y a le Zima Bleu qui a validé votre puzzle, un gage de qualité
+ dwarfie: ah tu parles de celui ou j'ai un reflexe bizarre de vouloir  downvoter tout ce qu'il fait ...
+ Zorg1: oui pareil, une majorité de reverses
+ Zorg1: ah ok un BFS, rien qui casse trois pattes à un canard, rien de super original
+ Zorg1: pas comme si on faisait que ça sur CG des BFS ...
+ Drallieiv: tiens d'ailleur, le sokoban j'ai aucune idée sur comment l'aborder, a part évaluer tous les coups possibles et backtrack les cul de sac
+ dwarfie: je l'ai dit un peu plus haut .... BFS ....
+ -Cile-: tiens en parlant de plein de langages...
+ -Cile-: imaginons que je veuille faire "power of thor" en compet taille de code, est-ce que je peux le faire dans différents langages, et donc être classée dans plusieurs langages&#160;?
+ dwarfie: tu seras classé dans tous les langages ou tu le feras
+ dwarfie: les 5 meilleurs seulement te rapporteront des CP
+ -Cile-: cool, donc j'en conclue que je ne perds pas mon code si je switch de langage
+ -Cile-: merci pour les infos&#160;:)
+ Robinsstudio: Oui mais du coup les succès CG spécifiques à chaque langage nous empêche de voir les bonnes solutions au problème si on a utilisé un langage dans lequel il y a peu de solutions disponibles;
+ Robinsstudio: C'est nul. :disappointed:
+ Zorg1: c'est le jeu ma pov' lucette
+ Robinsstudio: Bah le jeu c'est plus d'apprendre des choses que de remporter des succès à la ***. Enfin bref, je ne suis pas d'accord avec ce choix.
+ Zorg1: bah fais comme Blaise, deviens modo et sale le chat en continu :p
+ Robinsstudio: Surtout des succès où il suffit de traduire son code dans un autre langage pour les remporter...
+ Drallieiv: @dwarfie  mais tu met quoi dans ton arbre, juste les déplacement des caisses ou le déplacement du perso en lui même&#160;?
+ dwarfie: mes etats sont position des caisses+position du bonhomme
+ dwarfie: plus bien sur les cases par ou je suis passé
+ Robinsstudio: Zorg1, ne me tente pas. :stuck_out_tongue_winking_eye:
+ dwarfie: (ou plutot la suite de direction utilisé d'ailleurs)
+ Drallieiv: mais du coup sur une map vide sans mur et loin de toute caisse,
+ dwarfie: non ... c'est le meme cas vu que je mon hash c'est  les caisses et le bonhomme 
+ dwarfie: peu importe comment je suis arrivé la
+ dwarfie: ca ne fait pas de difference 
+ Zorg1: ah ok moi j'ai compris ^^
+ Drallieiv: hum, du coup quand tu construit ton arbre, tu ne rajoute pas un noeud, si il existe déjà sur une autre branche. 
+ BlaiseEbuth: Reuh
+ Robinsstudio: Re
+ Robinsstudio: Qu'est-ce que tu penses de ne pas pouvoir consulter les solutions des puzzles dans d'autres langages que ceux dans lesquels tu les as résolus Blaise&#160;?
+ Thyl: normale
+ Thyl: sionon tu pourrais te mettres des XPs pleins les fouilles
+ Robinsstudio: Non mais justement ça on a compris.
+ Robinsstudio: Mais c'est un choix de considérer que traduire son programme bêtement dans d'autres langages est plus important que d'apprendre du code des autres.
+ dwarfie: le but etant de voir si les autres ont fait autrement ou mieux ... le minimum est bien d'avoir resolu dans le langage en question d'abord
+ dwarfie: donc normal
+ dwarfie: surtout que traduire son programme suffit pas toujours&#160;;)
+ Robinsstudio: Non mais une fois que j'ai résolu l'exo, je vais pas m'amuser à le faire dans 10 langages différents. Pour autant ça m'intéresse de voir des solutions élégantes.
+ Robinsstudio: Je trouve ce choix très discutable surtout pour un site qui prône l'apprentissage en partageant son code aux autres. :thinking:
+ Zorg1: après tu peux demander à CG qu'ils modifient ça sur le forum
+ Robinsstudio: Y a déjà un fil créé par Magus sur le sujet donc je ne crois pas que ça serait vraiment utile.
+ dwarfie: en meme temps , le seul endroit ou je me rappelle que c'est ecrit que l'on apprend grace aux codes partagés , c'est CO
+ dwarfie: les CoC :rofl:
+ <b>**dwarfie sort</b></p><p><img src="/a/59449061195531" /> BlaiseEbuth: Moi je lis pas le code des autres si j'y suis pas forcé.
+ BlaiseEbuth: 23% des clashs en attente de validation sont du même mec. 15 clashs en attente. Et le seul qui n'a pas de un score négatif a... 0. Belle performance. :thinking:
+ dwarfie: moi non plus .... surtout si ca commence par&#160;: import intertools
+ BlaiseEbuth: Le mec est de Mumbai en plus. Un grand plat de NaN donc...
+ dwarfie: et chaque fois qu'on lui signale une merde , il repond " j'ai corrigé , upvote et approuve moi "
+ dwarfie: "Ok ... made it easier to understand, Can you upvote and approve?"
+ dwarfie: par exemple
+ BlaiseEbuth: Faudrait des quotas.
+ dwarfie: a croire qu'il est aussi un peu roumain .... " si vou plé ... doné moa dé xp "
+ dwarfie: et a chaque fois c'est validé par son pote en plus
+ Zorg1: oui avec des commentaires de haute volée "Yes" "I like it" "Good Work" ...
+ Zorg1: ah Mumbai c'est Bombay en fait ^^
+ Zorg1: comme Madras c'est devenu Chennai. je m'y perd
+ <b>**BlaiseEbuth ne va pas poursuivre en parlant de Paris et de La Mecque, parce qu'il semble que les utilisateurs capables de pércevoir le secon degré se fassent rares sur ce chat...</b></p><p><img src="/a/59449061195531" /> BlaiseEbuth: Oups :speak_no_evil:
+ dwarfie: :hear_no_evil:
+ Zorg1: bah Bombay était le nom officiel jusqu'en 1995, changé en Mumbaï. Pas vraiment un truc genre Londres/London en fait
+ ANORAK-MATTFLY: Gédéon vas-y doucement cette foit  
+ Bob: amis de Bombay
+ Bob: o/
+ Zorg1: \o
+ Zorg1: salut Bob
+ Bob: bon moi c'était plutôt Bombay TV mais c'est mort avec Flash ça
+ Bob: faudrait le refaire tiens
+ Zorg1: c'était quoi encore ça&#160;?
+ Bob: un site délicieusement con sur lequel tu pouvais composer des mini-films à partir de courts extraits de films de Bollywood en rajoutant tes propres sous-titres
+ Bob: le film Don, qui est apparemment un grand classique, fournissait une grande partie du panel de clips
+ Zorg1: ah ok ^^
+ Bob: il faudrait se pogner la sélection et le découpage des extraits mais sinon ça doit pas être très sorcier de faire un back pour fusionner une poignée d'extraits et superposer des sous-titres
+ Bob: et un petit front par-dessus
+ Zorg1: c'est genre un peu plus varié que les gars qui sous titraient la scène où Hilter s'énerve de je ne sais plus quel film
+ Zorg1: La Chute
+ Bob: oui, la v2 disposait d'une bonne quantité d'extraits
+ Bob: on pouvait faire des trucs pour ventiler à peu près n'importe quelle emmerde du boulot :D
+ Bob: tu pouvais choisir et réarranger les séquences comme tu voulais
+ Zorg1: je connais surtout les films indiens chroniqués sur Nanarland, alors bon
+ Zorg1: ça doit pas forcément être très représentatif
+ Bob: bon les sous-titres sont nazes mais tu as un aperçu des séquences ici<a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=Uc4-pM-QWPI">https://www.youtube.com/watch?v=Uc4-pM-QWPI</a>
+ Zorg1: l'autre avec son rouleau de PQ sur son baton ...
+ Bob: je te laisse imaginer le genre de détournements débiles qu'on peut faire avec pour cathartiser un collègue chiant ou un client con
+ Zorg1: oui on avait un chef qui se prénommait Bernard toujours avec son sous chef, ça avait permi de recycler les images de Bernard &amp; Bianca ...
+ Zorg1: j'imagine très bien ^^
+ Bob: bon, si je veux être opé pour le stage d'aikido demain, je crois qu'il faut que j'aille dormir
+ Zorg1: bah bonne nuit bob
+ Bob: encore une grosse semaine en vue
+ Bob: demain stage
+ Bob: lundi mardi déplacement à Paris pour découvrir le bureau parisien et mes nouveaux collègues
+ Bob: mercredi retour maison et les filles en vacances à gérer + vaccin #2
+ Bob: dimanche prochain on est censés aller à un parc d'attractions avec le beau-frère
+ Bob: jeudi je donne mon cours d'aikido
+ Bob: je vais mourir&#160;:)
+ Zorg1: ah vous avez des bureaux à Paris
+ 3141948: Mais non tout va bien se passer. Bonne nuit
+ philRG: bon le gamestate de sokoban est simplissime mais j'ai toujours pas maîtrisé le sujet&#160;:-D
+ philRG: new state direction D = 38 [3, 30, 45]path = Cannot reach the goal
+ philRG: merci à pardouin pour l'hint sur le forum
+ Zorg1: commencé à coder, j'avance lentement
+ philRG: ah ok je regarde un peu d'autres codes sur github mais je comprends pas la moitié de la syntaxe du langage python, on peut dire qu'il n'y a pas besoin de crypter son code pour le protéger lol
+ Zorg1: tu connais pas python&#160;?
+ philRG: je me suis inspiré très vaguement de ce code: <a rel="nofollow" class="external free" href="https://github.com/SofyanHalaby/SokobanSolver/edit/master/sokoban.py">https://github.com/SofyanHalaby/SokobanSolver/edit/master/sokoban.py</a>
+ philRG: par contre, ses classes de modélisation et noms de variables me décoiffent
+ Robinsstudio: Boulet repasse 3ème&#160;! :scream:
+ philRG: bon je vais me coucher, j'ai modélisé mon gamestate et méthodes associées, reste plus qu'à débugger mon bfs
+ philRG: ah toujours sur UTTT
+ Robinsstudio: Oui je nourris un espoir de légende..
+ philRG: fais sokoban le gamestate est plus simple, et je crois qu'on peut faire du mtcs aussi
+ philRG: moi je débute en simulation
+ Robinsstudio: Je peux pas. Je suis premier de la ligue or, c'est insupportable.
+ philRG: pour l'instant j'ai fait que des fonctions récursives et simus en bois
+ Robinsstudio: Mais le bot me nique ma race putain.
+ philRG: ah il doit manquer une fonctionnalité. Moi une fois, j'ai utilisé un smurf pour tester mon bot, et ça a fait descendre le boss et suis monté de ligue comme ça
+ philRG: je me suis auto-poussé mais c'était pas intentionnel
+ philRG: les boss légende à mon avis ne rigolent pas, jamais dépassé gold
+ philRG: bonne nuit
+ Robinsstudio: Y a un boss en légende&#160;?
+ Robinsstudio: Rah le boss me défonce j'ai trop le seum.. J'ai l'impression que log(2) c'est de la merde en fait;
+ Robinsstudio: Je perds même des parties contre Boulet, c'est dire.
+ Zorg1: log(2) on avait un peu sorti ça comme une blague en fait ^^
+ Zorg1: faut vraiment que tu règles tes valeurs
+ Robinsstudio: Quoi&#160;?=
+ Robinsstudio: Tu m'avais dit que le top du top disait log(2). Je me suis dit que c'était safe.
+ Robinsstudio: Le mensonge terrible.
+ Zorg1: oui c'est ce qui me semblait que t'avais pas compris la blague
+ Zorg1: c'était une référence à pb4 qui utilisait un log dans une éval à un contest
+ Robinsstudio: Tu viens de me flinguer une soumission... C'est pas écologique ça Zorg.
+ Robinsstudio: En plus dwarfie disait qu'avec 0.30, il était tombé pas loin empiriquement. Comment je pouvais imaginer&#160;?
+ Zorg1: pour le MCTS de dwarfie oui la valeur peut être bonne
+ Zorg1: pour le mien c'en est une autre
+ Zorg1: et pour le tien sans doute une autre encore
+ Robinsstudio: Cette foutue constante me fait descendre 5ème et Boulet est de retour à la 3ème place&#160;! :sob:
+ Robinsstudio: What&#160;? Mais pourquoi on aurait pas tous la même valeur&#160;?
+ Zorg1: bah toi tu compte -1/0/1 moi je compte 0/0.4/1 par exemple
+ Robinsstudio: Oh c'est terrible je viens de pousser le bot au dessus de 34... Je te déteste...
+ Robinsstudio: Bon.. Rollback. Tant pis pour les poneys. De toute façon on est tous morts dans dix ans.
+ Zorg1: en plus j'avais refait mes constantes il y a un an, les valeurs les + efficaces avaient changées
+ Robinsstudio: Mais comment tu sais que je compte -1/0/1&#160;? Je ne crois pas l'avoir dit. :pensive:
+ Zorg1: si tu l'as dit
+ Zorg1: je lis pas encore dans les esprits
+ Zorg1: ou alors c'est la théière 3D qui l'a dit et tu as dit que tu allais faire comme ça
+ Robinsstudio: Mais ça veut dire que pour trouver ce nombre magique, il va falloir que je fasse chauffer une machine toute la nuit... :thinking:
+ Robinsstudio: Un Mac me paraît parfaitement adapté à cet usage.
+ Zorg1: bah déjà essaie 0.5 1.0 1.5 2.0 en gros et afine j'avais fait qq submit à l'époque
+ Robinsstudio: Oui mais c'est difficile, les taux de victoires fluctuent pas mal. Pour avoir quelque chose de précis, il faut simuler des centaines de combats à mon avis.
+ Robinsstudio: Peut-être même des milliers.
+ Robinsstudio: (sans compter le fait que tout est biaisé vers le premier joueur)
+ Zorg1: j'avais mis une seed fixe et je pushais direct dans l'arène
+ Zorg1: pas super scientifique mais ça permet d'avoir une idéee ^^
+ Robinsstudio: Bah non parce que de toute façon il y a la variabilité de l'arène elle-même qui a mon avis est vraiment pas terrible;
+ Zorg1: enfin si j'ai réussi à mettre au point mon truc sans brutal tester tu devrais y arriver avec
+ Zorg1: parfois faut pas trop se faire de noeuds au cerveau non plus
+ Robinsstudio: Non mais faut raisonner sur des données qui ont du sens.
+ Robinsstudio: J'ai peur que ce soit difficile à faire avec Brutal Tester. Avec des milliers de combats c'est peut-être possible.
+ Zorg1: après t'essaie d'être au top dans l'arène pas dans brutal tester
+ Robinsstudio: Oui mais en ne changeant que ce paramètre, ça devrait pas trop mal marcher. En cas de sur-apprentissage, l'arène rappelle à l'ordre de toute façon.
+ Robinsstudio: Avec sqrt(2) comment je remonte beaucoup plus vite&#160;! Ça fait une vraie différence.
+ Robinsstudio: log(2) c'était vraiment de la merde en boîte.
+ Zorg1: ça dépend de ton algo
+ Robinsstudio: J'avais moins d'un demi-point avec MightyCarlo&#160;! Regarde dans quelle galère tu m'as mis.
+ Zorg1: le gars récupère des magics number au pif du chat et il se plaint
+ Zorg1: j'ai du passer deux jours à régler ce bazar en pushant
+ Robinsstudio: Oui parce que c'était pas du tout évident qu'il y avait une blague.
+ Robinsstudio: Boulet 2ème&#160;! :scream:
+ Robinsstudio: Cette soirée est un vrai cauchemar.
+ Robinsstudio: Pffff, ça passera jamais. Je vais vraiment finir par abandonner.
+ Robinsstudio: Mais Boulet 1er&#160;? WHAT?
+ Robinsstudio: je suis en train de pousser tout le monde vers le bas, terrible.
+ Robinsstudio: Par contre ce qui est amusant c'est que j'étais plus fort contre le deuxième avec log(2) j'ai l'impression.
+ Robinsstudio: Oh la la je fous le gros bordel dans le classement&#160;! xD
+ Robinsstudio: C'est quand même assez drôle de soumettre quand on est en haut de la ligue. Ça fait bouscule un peu tout le monde.
+ Zorg1: ouaip genre en contest tu gagnes subitement 20 places parce que le top a tous repush en même temps ^^
+ Robinsstudio: Ah mais c'est moins cool ça. Parce que les réjouissances sont de courtes durées.
+ Zorg1: hop sokoban en lua c'est bon ^^
+ Zorg1: pouvoir aller dormir&#160;:)

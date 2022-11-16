@@ -1,0 +1,86 @@
+ ilt: босса бронзы пока нет&#160;:)
+ gybson_samara: ну тот с которым тренироваться
+ ilt: возьми какого-нибудь лидера и тренируйся
+ BorisZ: TASK_PRIORITIZATION (3). The team will remove one skill card from their hand and put it back on the board.They will then take another available skill card from the board.
+ BorisZ: тут слово board появляется первый раз, что они имеют ввиду? (
+ gybson_samara: Думаю поле и подозревают - любой стол
+ gybson_samara: + бонус
+ gybson_samara: если еще что осталось
+ BorisZ: а сама карта (3) при этом не участвует? она просто в отбой уходит?
+ BorisZ: вобще суть PLAY - не до конца могу понять - это значит берем карту из руки, кастуем залятие и карта уходит в мой discard pile -  так?
+ gybson_samara: "and put it back on the board" - на стол возвращается выходит
+ gybson_samara: просто обмен карты в руке на карту на столе
+ gybson_samara: там разные эффекты
+ gybson_samara: "draws" это я так понимаю в draw pill возвращает
+ BorisZ: я понимаю что разные, но общий то механизм именно такой вроде - карта которая играется всегда уходит в отбой это так или нет?
+ gybson_samara: надо по реплеям посмотреть
+ BorisZ: draws это взять следующую карту из своей кучи несыгранных карт
+ BorisZ: я пытаюсь по реплеям но тяжко (
+ gybson_samara: Вот сейчас смотрю. Карта бонус летит обратно на стол, а карта DAILY_ROUTINE в руку
+ gybson_samara: changes their task prioritization, throws a card BONUS and takes a card DAILY_ROUTINE instead
+ BorisZ: это TASK_PRIORITIZATION (3) rfcnfyek&amp;
+ gybson_samara: да
+ gybson_samara: При рефакторинге карта из руки в колоду уходит
+ gybson_samara: в дроу пилл
+ gybson_samara: а технический долг на стол
+ gybson_samara: При коде-ревью карта коде-ревью летит в дискард и еще два бонуса туда же
+ ilt: TASK_PRIORITIZATION можно любую не тех долг карту с руки поменять на любую карту на столе
+ gybson_samara: думал как так 2 карты скинуть, а там фаза throw 2 раза прилетает
+ gybson_samara: и скидываются карты на стол обратно
+ gybson_samara: При рефакторинге карта просто со всеми в дискард улетает
+ gybson_samara: как только в draw pill заканчиваются карты, туда перелетает дискард
+ ilt: а тех.долг если есть на руке на стол
+ gybson_samara: да, один
+ tutubalin: в Dominion играли?
+ tutubalin: Coding - это деревня
+ Khao: А task prioritization - remodeling
+ tutubalin: Training - лаборатория
+ Khao: Architecture study - как-то из duration
+ Khao: И refactoring - трешалка curse
+ tutubalin: на BGG можно скачать английские правила оригинальной настолки
+ tutubalin: по правилам Сансары с помощью TASK_PRIORITIZATION можно сбросить бонусную карту. а здесь можно?
+ Khao: Да
+ tutubalin: всё, прочитал правила внимательнее, непонятка решилась.BONUS skill card - это тоже skill card
+ gybson_samara: Если я для простоты буду struct делать, а не class, подводные камни есть какие?
+ CyberEcho: Рандом смотрю опять не секъюрный, люди никак не научатся :smiley:
+ BookSaver: А что, это можно проэксплуатировать прямо в страте?
+ CyberEcho: Конечно, и такие люди наверняка найдутся. В Spring Challenge же нашлись, но там это не давало особого выигрыша, а тут это победа без вопросов.
+ BookSaver: Я  в Spring Challenge для галочки поучаствовал, не следил.А можно ссылкой в меня кинуть, если есть в закладках? Или это просто в чатах обсуждалось?
+ CyberEcho: Первый же комментарий в обсуждении: <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/spring-challenge-2022-feedbacks-strategies/195736">https://www.codingame.com/forum/t/spring-challenge-2022-feedbacks-strategies/195736</a>
+ BookSaver: спасибо, попробую разобраться
+ gybson_samara: мдя
+ gybson_samara: Но могут ведь и вычистить потом из топа
+ gybson_samara: Попробую перелезть на с++. app.skills&lt;&lt;CardType::Training&lt;&lt;CardType::DailyRoutine&lt;&lt;CardType::ArchitectureStudy;Красота же
+ ilt: тема с нулевым техническим долгом в итоге не ясна
+ ilt: то ли нужна, то ли нет
+ gybson_samara: в 5 релизе?
+ ilt: во всех релизах
+ gybson_samara: или как оценка?
+ ilt: кто-то делает релизы без долга, кто-то вообще забивает
+ ilt: пятый без вопросов должен быть чистый
+ gybson_samara: я прошел в бронзу потому что выбирал путь наименьшего техдолга
+ gybson_samara: и при релизе и при выборе карт
+ ilt: до бронзы правила другие
+ gybson_samara: но наверное надо держать паритет
+ gybson_samara: скопление ТД снижает шансы релизнуться 5 раз
+ ilt: снижает, но насколько?
+ gybson_samara: Ну это посчитать можно даже на бумаге. Вероятность выбрать из колоды карты на релиз при N картах ТД вполне считатется
+ ilt: при нулевом тех. долге правда легче скилы отладить
+ ilt: не уверен, что они у меня корректно будут работать
+ gybson_samara: вопрос по C++, допустим я хочу реализовать такую конструкциюdeck1&gt;&gt;CardType::Coding&gt;&gt;deck2, это мне надо в CardType перегрузить оператор.
+ ilt: это не ко мне&#160;:)
+ gybson_samara: да мне любой подойдет =)
+ ilt: Фишка первых двух столов в том, что скилов накидать по максимуму
+ ilt: что-то не пойму
+ ilt: с остальными более менее понятно
+ gybson_samara: максимум скилов дает 3 стол вроде как
+ gybson_samara: для бронзы вполне можно хардкодить первый ход на него
+ ilt: это который дайли?
+ gybson_samara: да
+ ilt: топчик это 6
+ ilt: у кого-то на 4 хардкод
+ ilt: первый круг 1 и 2 по любому не вариант
+ gybson_samara: вот прям спать не смогу теперь, как сделать cinn&gt;&gt;i&gt;&gt;cout
+ Hamibar: как по мне нулевой тех долг, не очень хорошая стратка. Пока будешь ждать опп все легкие выпустит
+ nicknamesurname: как в js сделать, когда ввод == 2, то вывод == 00. когда ввод == 4, то вывод == 0000
+ [lazy]Opera: <i>.padStart(n, '0')</i>

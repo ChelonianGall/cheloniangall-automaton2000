@@ -1,0 +1,243 @@
+ eulerscheZahl: Happy Caturday
+ code_maniac: You mean Saturday 🤷‍♂️  
+ eulerscheZahl: wait for jacek and you will understand
+ RedRook: what is the variable that dictates your pods orientation?
+ abt8601: You mean in Coders Strike Back?
+ emigr2k1: helo
+ RedRook: ya
+ abt8601: Then it is the target position in the output. The pod will try to turn towards the target position.
+ RedRook: so there is no way to compare current orientation to nextCheckpointAngle?
+ RedRook: or manually set current orientation?
+ abt8601: Are you in gold league or legend league?
+ RedRook: wood
+ abt8601: If I remember correctly, you won't be able to know the current orientation.
+ abt8601: Until you get to gold league.
+ emigr2k1: helo
+ RedRook: oh ok thanks
+ emigr2k1: why do you guys not say hellolo back
+ emigr2k1: hello
+ abt8601: hello
+ emigr2k1: hey
+ RedRook: What dictates your rank? If the race course is randomized every time for each player?
+ Tim_McSim: Hello!&#160;:)
+ pardouin: you fight vs other players bots, you earn points when you win, especially vs higher ranked opponents, and you lose points when you lose, especially vs lower ranked opponents.
+ Uljahn: yes, arena ranking is TrueSkill-based
+ Reksio: which ones are arena?
+ Reksio: bot or clash?
+ adviceMe: If player doesn't share player's code, please banned to player. I hate this situation. Coding must be open source, free and funny. Not be competitive. Please!
+ Uljahn: both
+ Reksio: any other?
+ Reksio: I feel like sharing code in arena makes no sense
+ Reksio: but people who win should try to advise a bit without releasing a code
+ Reksio: still not sure if this wouldn't make it too easy to go to the top
+ jacek: happy Caturday
+ Uljahn: Reksio: just search the forum
+ Uljahn: kids these days are so accustomed to spoon-feeding, Automaton2000
+ Automaton2000: so we can have a look at my rank
+ WINWINWIN: Slow response by you this time Automaton2000?
+ Automaton2000: how can i save the state of your bot in the arena
+ jacek: AutomatonNN is faster
+ AutomatonNN: you would need to say it is cause i am a real time
+ jacek: indeed
+ caubeloatchoat24: Anyone watch ICPC 2020 live :v
+ SuperChamp: hi
+ caubeloatchoat24: Virtual Event LoL
+ Herdre: :biohazard:
+ TheFlyingRubberDuck_a2dd: hi everyone
+ TheFlyingRubberDuck_a2dd: ı am new .&#160;:)
+ TheFlyingRubberDuck_a2dd: This game  is better than codecombat.org
+ jacek: which came
+ dbdr: the codin game
+ CodinGamerAK: do anyone knows here how to setup kaggle environment
+ CodinGamerAK: if yes plz help me 
+ kenyo: CoC taught me how succinct Python can be.
+ Herdre: ты моё подмостерье
+ Uljahn: #ru
+ CodinGamerAK: #In
+ eulerscheZahl: #de
+ jacek: ln?
+ Astrobytes: dia
+ jacek: its I not L?
+ eulerscheZahl: i as in India
+ Astrobytes: "eeyup"
+ jacek: Lndia?
+ eulerscheZahl: Linda, typo
+ caubeloatchoat24: Anyone from India?
+ jacek: #In
+ WINWINWIN: Me
+ tanmaycodernovice: @kayou bro please dm
+ caubeloatchoat24: w do u mean?
+ tanmaycodernovice: #kayou
+ WINWINWIN: Not #kayou, its @kayou
+ WINWINWIN: #kayou opens a chat channel
+ tanmaycodernovice: yes i wanted to open the chat channel only 
+ jacek: :o
+ WINWINWIN: :P
+ WINWINWIN: Anyway tanmaycodernovice, paste the code here or in the Indian chat and someone will explain
+ tanmaycodernovice: how do u know, i wanted to ask about a code lol
+ tanmaycodernovice: doing that on indian channel 
+ jacek: he psychic
+ CodinGamerAK: #World
+ jacek: :thinking:
+ Hjax: hello everyone 
+ jacek: moshi moshi
+ Hjax: now its time for another round of "lets try to make my MCTS faster"
+ tanmaycodernovice: MCTS?
+ Hjax: monte carlo tree search 
+ Hjax: it spends 20% of its time masking off moves from the move gen 
+ Hjax: 11% generating random numbers
+ jacek: like int64 to vector&lt;Move&gt;?
+ Hjax: int64 with a high bit for each valid move to int64 with just a high bit for the nth valid move 
+ Hjax: apparently i can do that with one instruction when i port to C++ 
+ Hjax: but java doesnt have an efficient way to do it as far as i can tell 
+ darkhorse64: no pdep in Java&#160;?
+ Hjax: no pedp in java&#160;:(
+ Hjax: pdep* 
+ jacek: why would you need pdep&#160;:?
+ Hjax: it does exactly what i want 
+ Hjax: src is 1 &lt;&lt; n, mask is my move gen long
+ Hjax: output is a single move 
+ darkhorse64: to random select one bit amongst one
+ darkhorse64: *all*
+ Hjax: your boss is so good darkhorse64
+ Hjax: how many rollouts does it do?
+ darkhorse64: 40k first turn
+ Hjax: jeez 
+ darkhorse64: *second*
+ Hjax: well that explains why im getting rekt 
+ Hjax: thats 4x faster than me 
+ jacek: 40k in 150ms?
+ Hjax: im doing 11k ish in 150 ms 
+ jacek: in java eh
+ Hjax: yes 
+ jacek: not so bad
+ Hjax: i occasionally lose to the garbage collector 
+ darkhorse64: 40k in 150ms
+ struct: I guess minimax Java could beat it
+ Hjax: my selection / backprop is recursive, im not sure if thats inefficient 
+ Hjax: but it was easier to write 
+ darkhorse64: 500k for the first turn
+ Hjax: i get 40k for the first turn, java needs to warm up 
+ darkhorse64: Once recursive is working, reimplement using a stack
+ jacek: well 1st move is just one move, reducing symmetry and rotation
+ jacek: so if you tree reuse, you could use that
+ Hjax: ah, is that a lot faster? or just more memory efficient 
+ Hjax: to use a stack 
+ Hjax: i dont do anything with rotations 
+ Hjax: i do tree reuse, but it only gives me about 10% more effective speed 
+ darkhorse64: a stack avoids the overhead of function calls. I cannot swear it makes a big difference
+ Hjax: ill try it 
+ jacek: depends how deep is your tree
+ jacek: i doubt converting recusive calls to non-recursive would make much difference
+ darkhorse64: 20 plies at least in the endgame
+ jacek: noice, i can solve game in 11 plies
+ jacek: that means game is decided mostly in middlegame
+ darkhorse64: Yes, around move 30, I see my eval jumps from 50% to 5% in one move against the big guns. Game over
+ darkhorse64: not jump, fall
+ darkhorse64: a big cliff
+ jacek: :shrug:
+ darkhorse64: Time to look for an eval
+ TheSpiffiest: When does checkers game end?
+ TheSpiffiest: I saw it was game of the week, does that mean it goes away soon?
+ Hjax: its not going away 
+ TheSpiffiest: OK, cool. I have to paint my deck, but have more work to do.&#160;:)
+ tutubalin: TheSpiffiest it's always on the site. game of the week just put it in a spotlight to attract more people
+ jacek: youll need cg premium to get checkers
+ jacek: *.*
+ struct: Where can I get it?
+ jacek: new accounts only. you need to delete this one
+ Hjax: lol, i was going to say "its unlocked upon reaching legend in UTG" 
+ darkhorse64: :laughing:
+ struct: I'll do it later, pixi is currently killing me
+ struct: When I saw that to change sprite color i need to remove it and draw it again
+ struct: I almost quit
+ dbdr: what are you working on struct?
+ struct: Can't say
+ struct: It's not chess though
+ jacek: cheese?
+ Hjax: its a multi? 
+ dbdr: do you count chess 960 as chess?
+ struct: yes and yes
+ Hjax: you make multis so quickly
+ Hjax: im not even done with othello yet 
+ struct: making a multi is easier than to create an AI
+ struct: wait that is wrong
+ struct: Porting*
+ struct: We need more people in wood 1
+ Hjax: next time dont pick a boss that has solved the game 
+ dbdr: :no_mouth:
+ struct: Next time Ill make dbdr the boss
+ dbdr:&#160;:+1:
+ struct: The current boss would be last in the current league
+ struct: Also it seems good to have competitive boss
+ jacek: nyoro~n
+ Hjax: it was all a ploy 
+ Hjax: the boss checks the time 
+ jacek: darkhorse64 you timeout a lot
+ Hjax: it only unleashed its full strength yesterday 
+ Hjax: :P
+ jacek: we can check the real time? hmmmmm
+ Hjax: dunno, id assume so 
+ darkhorse64: I have a bug when multiple passes occurs. Which game(s)&#160;?
+ struct: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/474886176">https://www.codingame.com/replay/474886176</a>
+ struct: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/474886718">https://www.codingame.com/replay/474886718</a>
+ dbdr: jacek, why not?
+ jacek: dunno :v
+ darkhorse64: Thanks, I can't seem to reproduce it in the ID. I have instrumented my code. Sorry for spamming the leaderboard. At  the same time, I cannot do any harm to anybody&#160;:-)
+ dbdr: you do harm me darkhorse64&#160;;)
+ darkhorse64: True; you lose points for winning against me. Wish me luck for my bug hunting
+ dbdr: glhf!&#160;:)
+ code_maniac: what is Caturday&#160;?
+ jacek: everyday is Caturday
+ Humble.Proletarian: How do I slide into DMs 
+ Hjax: id recommend a running start 
+ jacek: DMs?
+ Hjax: direct messages 
+ DoublyNegative: Lots of butter.
+ Breachy: Humble.Proletarian please slide into mine
+ Humble.Proletarian: Hjax, thank you for this insight
+ Humble.Proletarian: Tbh I'm more of a WD40 than butter kind of guy
+ DoublyNegative: I rate that.
+ Humble.Proletarian: displacing all that water
+ Breachy: a man of culture
+ DoublyNegative: WD40 saved my trumpet valves.
+ jacek: good for you
+ caubeloatchoat24: heh do you guy know top 1&#160;?
+ JBM: anything to do with top gun?
+ caubeloatchoat24: just for fun bro&#160;? i actually things top 1 's bot too lol .
+ Uljahn: top 1 in clashes?
+ Uljahn: def not a bot, only 998 games played, bots have 44k+
+ struct: But he can use a bot
+ Uljahn: sure
+ Uljahn: then his bot is good at captcha solving i guess
+ struct: I don't get captchas from clashes
+ struct: But I dont play them anymore so I cant be sure
+ jacek: :cat:
+ MSmits: :heart_eyes_cat:
+ struct: MSmits we are waiting for you
+ MSmits: ah yes, sorry, no time yet, will happen&#160;:)
+ jacek: no sleep till get rid of NN e
+ jacek: h
+ MSmits: there is that yes
+ MSmits: at least I have the power of reshuffling the top 3
+ MSmits: I can pick who is nr 1, 2 and 3 in oware just by changing params
+ MSmits: it just wont be me :P
+ jacek: such responsibility
+ dbdr: while (top[0].name&#160;!= "MSmits") reshuffle();
+ jacek: its like death note
+ MSmits: kinda
+ MSmits: though, I am pretty sure if i make an opening book like you I can take the nr 1... its a lot of work though
+ MSmits: meta mcts are complicated programs =/
+ MSmits: or dorp out expansion thingy, whatever it is you use, its not easy
+ MSmits: end game book was easier to make
+ jacek: for oware is easy, no cycles or transpositions much
+ MSmits: hmm, well there are cycles, but you can view them as separate states because the turn timer increases, you're closer to the last turn
+ MSmits: so it's not technically the same state
+ MSmits: transpositions would happen, but very rarely if you include the turn time as part of the state
+ MSmits: my meta mcts programs are 2000 lines of C# and also have a 1k bot in C++ i adapted from my normal bot
+ MSmits: so thats still a lot of code
+ MSmits: I use the c++ program as a separate process that gets told what gamestate to simulate by the meta mcts program
+ Tzak: pebis
+ 12944qwerty: how do you make your own clash with friends
+ 12944qwerty: nvm
+ Ltrltrltr1234: join clash of code

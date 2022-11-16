@@ -1,0 +1,389 @@
+ grateful_tomato: I think there is a problem with the C# backend. I'm playing <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/code-of-kutulu">https://www.codingame.com/ide/puzzle/code-of-kutulu</a> and I get this error, which looks like it causes the player to die immediately "ERROR: ld.so: object 'libstdbuf.so' from LD_PRELOAD cannot be preloaded: ignored."
+ eulerscheZahl: known error, ignore it
+ eulerscheZahl: your crash on stream seems unrelated to the error you just pasted
+ grateful_tomato: ok, but somehow it looks like I die after this error. E.g. I start at 5 6, then the error happens, and next move I'm dead. 
+ eulerscheZahl: try to print the whole stdin given to stderr and debug locally
+ eulerscheZahl: and hover your cursor over the tooltip in the replay timeline for more information
+ grateful_tomato: problem solved, was an infinite loop, thanks again eulerscheZahl. Now I'm first in the wood league&#160;:-) 
+ jacek: happy Caturday
+ pharesmostafa: hi all
+ pharesmostafa:&#160;:)
+ pharesmostafa: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/14331075e491f1bb47e399e0060e87f08405672">https://www.codingame.com/clashofcode/clash/14331075e491f1bb47e399e0060e87f08405672</a>
+ pharesmostafa: 4
+ pharesmostafa: 3
+ pharesmostafa: 2
+ jacek: :c
+ TatsuJoestar: how do i check if no input was provided c++?
+ TatsuJoestar: "Display 0 (zero) if no temperatures are provided. Otherwise, display the temperature closest to 0."
+ Allis: @TatsuJoestar You can check whether the input stream is at EOF, but probably the problem actually provides 0 as the  first line to indicate that there are no further inputs.
+ dotaicode: hello world
+ dotaicode: how to compete with friend
+ dotaicode:&#160;?
+ yamsunsee: chỗ clash of code có dấu ... á
+ yamsunsee: ông có tạo room private được đó
+ dotaicode: ok
+ dotaicode: thanks
+ AntiSquid: yamsunsee #VN
+ AntiSquid: or click username for PM please
+ yamsunsee: Why am I not allowed to answer here in my native language?
+ Raper1798: How to use BOOST in coders strike back&#160;?
+ MSmits: "BOOST"
+ MSmits: it says in the description
+ Raper1798: invalid input. Expected 'x y power' but found '12027 5490 BOOST
+ MSmits: lemme check how i do it
+ Raper1798: its expecting power
+ MSmits: you know you can use boost only once right?
+ Raper1798: yes
+ MSmits: does this error come on the first use?
+ Raper1798: yes
+ MSmits: can you give me the line of code you use to output this?
+ MSmits: btw for anyone reading this. We went to PM. It was another of those: promotion -&gt; input change thingies. They really should do something about it. Many new players run up against this
+ MSmits: nvm... was a different issue
+ MSmits: btw jacek. I'm testing the random move thingy on CG bench. Did a baseline yesterday and will be increasing randomness to the point where it starts to affect my bot too much. So I can find a sweet spot to properly fit params
+ MSmits: base:
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/f0a836fd-7d85-414a-9f21-f73e88aa7f5e">http://chat.codingame.com/pastebin/f0a836fd-7d85-414a-9f21-f73e88aa7f5e</a>
+ MSmits: oh the paste is fixed! Yay
+ MSmits: hmm I am exactly one "e" beyond saying someting profound about time travel
+ zTTK: bruh
+ MSmits: bruh backatcha
+ zTTK: i will jutsu u&#160;:&lt;&lt;&lt;
+ MSmits: scary
+ YurkovAS: MSmits do you have some bonus\penalty in bandas? Stuck and can't understand how to improve: continue search bonus\penalty or increase performance (bitboards play same as byteboard).
+ MSmits: it's actually completely vanilla mcts
+ MSmits: no eval, just loss/draw/win
+ MSmits: however, I do have an endgame DB and high performance
+ MSmits: basically, any board that is 12 squares or smaller, is looked up for L/D/W
+ MSmits: so 3x4, 6x2 at most
+ i_iMatt: hey
+ MSmits: the endgame db got me from rank 7 to rank 2
+ YurkovAS: MSmits about performance: how many rollouts \ sims in first or second move?
+ MSmits: Let me go check, sec
+ MSmits: Rollouts: 55808  in second turn
+ MSmits: turn 1 is bad comparison, because i lose some time calculating endgame db
+ MSmits: one rollout is 4 sims btw
+ YurkovAS: MSmits thanks!
+ MSmits: oh just to be clear. I calculate the end gam db in game, not offline
+ MSmits: so it's not some massive string or anything
+ MSmits: takes me 66 ms in 1st turn
+ MSmits: you might think I could generate a bigger one, but after 12 squares, comes 14 squares and that's 10x bigger and not particularly interesting (7x2)
+ MSmits: ohhh
+ MSmits: i just noticed i do calculate it offline it seems
+ MSmits: i am confused with oware
+ MSmits: then it's the string limitation that stops me from doing 14 squares
+ MSmits: lol... I was looking at my code and thinking: "why is there Chinese in there"
+ YurkovAS: :smile:
+ MSmits: it's interesting, in some games you get a bigger db by doing it in the 1st second and in some games it's better done offline
+ MSmits: cpu vs storage size I suppose
+ YurkovAS: for strings we may use one big chars pool. each string store in this pool in c-style (with null ending). and in db use char* (unordered_map&lt;char*, uint8_t&gt;).i'm used this approach in some contest. new string allocation is very fast
+ MSmits: the problem is the codesize
+ MSmits: in oware i store around 10 million seed counts
+ MSmits: there's no way you can store this in 100k characters
+ MSmits: in Bandas I store L/W/D results that use less than 2 bit each, so i can store more. 
+ MSmits: to be exact, I store 10 L/W/D results in 1 character
+ MSmits: only use 20-30k characters total, for my 12 square DB. If I were to try 14 squares, it would take around 200k characters
+ MSmits: gtg visitors today
+ starmaq: is there any way to get the link to a challenge you did on clash of code
+ LastRick: Try this site created by EulerscheZahl: <a rel="nofollow" class="external free" href="http://eulerschezahl.herokuapp.com/codingame/puzzles/">http://eulerschezahl.herokuapp.com/codingame/puzzles/</a>
+ jacek: mhm
+ SnAp: why is it asking after every round about 'not a robot confirmation'&#160;?
+ jacek: youre clash addict
+ jacek: <a rel="nofollow" class="external free" href="https://www.wired.com/story/how-30-lines-of-code-blew-up-27-ton-generator/">https://www.wired.com/story/how-30-lines-of-code-blew-up-27-ton-generator/</a>
+ AntiSquid: use <a rel="nofollow" class="external free" href="https://github.com/tesseract-ocr/tesseract">https://github.com/tesseract-ocr/tesseract</a> for captchas it's part of the clash challenge :P
+ AntiSquid: SnAp
+ SnAp: :thumbsup:
+ Presac: How do you approve or reject a contribution?
+ eulerscheZahl: reach lvl20 for puzzles or play 50 clashes to moderate a clash contribution. then go to <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/community">https://www.codingame.com/contribute/community</a>
+ zTTK: does anyone know if i can disable noti's for when anyone accepts or rejects any contribution?
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/settings/notifications">https://www.codingame.com/settings/notifications</a>
+ Presac: It is because I have reached that point I'm asking. Just don't see anywhere to actually do it.
+ eulerscheZahl: namely "Enable community contributions notifications"but all are better set OFF
+ eulerscheZahl: Presac try a contribution that doesn't have a WIP in the title
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://prnt.sc/v5zdhf">https://prnt.sc/v5zdhf</a>
+ eulerscheZahl: you might miss those two buttons. level up and you'll unlock them
+ Presac: ah, apparently I have only been looking at ones that was wip
+ eulerscheZahl: the purpose is that you see some puzzles and know how a good contribution should look like
+ PkZ: Does anyone possibly know how to deal with a gradient exercise where you have multiple points and you have to rearrange them?
+ eulerscheZahl: WIP = work in progressauthor wants to get some feedback but not ready yet
+ PkZ: Or if a name for something similar even exists
+ Presac: Does red text in chat mean a whisper or something?
+ eulerscheZahl: red = your name was mentioned
+ eulerscheZahl: only red for you
+ eulerscheZahl: Presac =&gt; red
+ Presac: ok. good to know
+ eulerscheZahl: also: you can autocompleteeul[tab] =&gt; eulerscheZahl
+ Presac: eulerscheZahl
+ Presac: smart
+ Presac: Do the "Win three reverse clashes" only start counting after you reach that point?
+ eulerscheZahl: no, works all the time
+ Presac: Apparently I'm bad at reverse. Only 1/(50+) won...
+ Presac: And that was some n*n*m solution
+ icecream17: i just made up a very bad pun
+ aabbccsmith: Hey
+ wyattsell: hi
+ yusuf007: Hello
+ yusuf007: I'm new in development
+ yusuf007: can you guys help me with logic
+ yusuf007: I want to build my logic
+ icecream17: uh.. you mean the idea of logic or some "thing"?
+ yusuf007: Hmmm... How can I explain it
+ icecream17: do you mean you want to improve your logic
+ yusuf007: yes
+ yusuf007: right
+ yusuf007: skils
+ icecream17: ive never reasearch that before wait a second
+ yusuf007: okay waiting....
+ yusuf007: btw thanks 
+ Presac: A good start is searching about 'and' and 'or'
+ Harrogin: Logic puzzles are a fun way to learn
+ icecream17: great answers here yusuf007
+ icecream17: i guess just do stuff that requires logic
+ yusuf007: wow thats right 
+ yusuf007: Thanks bro @iceream17
+ icecream17: i think presac and harrogin put the better answers
+ yusuf007: Ohh sorry Just read those messages
+ yusuf007: Thanks harrogin and presac
+ yusuf007: harrogin I think your right let me try one of the puzzle game
+ Matrix007: what does this mean and why does this happen?An error occurred (#705): "You are not allowed to access to this solution".
+ icecream17: logic puzzles are actually a game but there's other ones too, like sudoku and nongrams. coding somewhat...
+ icecream17: matrix what did you do beforehand
+ icecream17: usually you can access solutions to a puzzle when you have solved the puzzle already
+ Matrix007: no it was not mine 
+ Matrix007: it was on coc
+ Presac: Are there a way to see stats from all clashes you have participated in?
+ Matrix007: anthers guy code i wanted to see
+ icecream17: oh, they have to click
+ icecream17: some button that lets other people view their solution
+ icecream17: wait
+ Matrix007: no i see VIEW CODE but now its not a problem
+ Matrix007: i am able to see
+ icecream17: ohh
+ icecream17: hmm, guess something with the server, idk
+ midoo: Hello there
+ Skynse: Just solved one problem except, everyone got either 80% or 60%
+ Skynse: probably a problem with one of the test cases
+ AntiSquid: clash? reverse? everyone got it wrong then imo
+ Skynse: it was a clash, but a non reverse one
+ GreatPanda03: tfw you know what to do in a reverse clash 
+ Skynse: lol
+ Skynse: Most of the time I can solve those, but sometimes I just bail because I have no idea what to do
+ AntiSquid: i doubt it's the puzzle, but you can report it on the forums . 
+ Skynse: cool bio quote
+ LastRick: Skynse: do you remember the puzzle, if so we can probably look it up
+ AntiSquid: ya thankstrying to remember something more catchy from a sci-fi book i've read
+ Skynse: I dont remember the name of the puzzle, but it had to do with raising the last digit of a number Nto a power P
+ Skynse: N to a power P*
+ LastRick: Is this it? <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/451883b077fe733859abfc66885dff5debc2">https://www.codingame.com/contribute/view/451883b077fe733859abfc66885dff5debc2</a>
+ Skynse: yeah that was it actually
+ Skynse: ok I see why I got 80 now
+ LastRick: Glad to help
+ Skynse: the process timed out meaning my code was inefficient
+ Skynse: lol print(str(n**p)[-1]) is pretty inefficient
+ AntiSquid: kinda lame puzzle imo, you need to know some of the power tricks when you're in a rush .
+ LastRick: One change I would like to see in the submission page is perhaps clarifying why you missed a problem. Instead of it saying 80% and turning the option red, why not replace the title with TimeOut or incorrect? Would be a lot more informative.
+ AntiSquid: agree with visual's comment lol ... where is visual, haven't seen him in a long time#
+ Skynse: broooo, I forgot I was in a clash
+ AntiSquid: if you get a mini leaderboard with&#160;% at the end it's clash .
+ AntiSquid: &lt; 15 min timer&#160;? = clash
+ Skynse: dang, this one was easy af
+ AntiSquid: ya if you know the trick already it is easy .
+ Skynse: This one was about some chocolate bars and the minimum number of times it could be divided
+ Skynse: where m*n is the dimension of the bar
+ LastRick: Whats the title?
+ Skynse: I don't remember lol
+ Skynse: Do you guys have calculators by your side when solving puzzles?
+ AntiSquid: you can use your OS calculator no?
+ Skynse: That's too slow for me
+ Skynse: I mean clashofcode puzzles btw
+ Skynse: tfw you get 0% in a clash because of a typo
+ Skynse: I worked so hard on that dict and and didn't check for errors(which would be a comma instead of a column)
+ Majeck: Hellooo
+ Skynse: whatsup
+ Majeck: If someone could help me with using the Stub Generator that would be cool
+ Majeck: (Ideally someone that's used it a lot before)
+ Majeck: I need to create a loop that loops N times and reads two ints separated by a space on one line and THEN reads a new string
+ Majeck: I'd like it look like this for python: for i in range(N):
+ RohanasaurusRex: hey im relatively new to programming. Since a lot of you seem pretty experienced, would you say doing the puzzles or clash of code is more beneficial? Thanks
+ Majeck: Oh, no pastebin?
+ Burritos33: Rohana, start with some puzzles to get the basics down. You can see results better.
+ Majeck: I agree with Burritos33 
+ Skynse: I prefer clashofcode, but puzzles are really fun for interactive challenges
+ Majeck: Start with some easy puzzles first then move on to medium puzzles or CoC
+ LastRick: Rohan: The puzzles are going to give you more time (more than 15 minutes) to work. So you'll get to learn the code at your speed. The downside is you can't see the solution code until you solve it. So feel free to ask for help here if you're stuck.
+ AntiSquid: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/cb17930b-561a-454c-97f8-f639ff2da7cd">http://chat.codingame.com/pastebin/cb17930b-561a-454c-97f8-f639ff2da7cd</a>
+ AntiSquid: works lol
+ LastRick: I completely agree with Majeck: Easy, then start mixing in CoC with medium
+ Burritos33: But once you get some basics going, try some CoC indeed. Its easy and fun!
+ LastRick: Yep, I do CoC as a change of pace break when I'm stuck on a puzzle, they're pretty fun
+ Skynse: I like the puzzles way more however since they are visual
+ Skynse: gonna solve the escaping the cat one right now to rank up
+ Skynse: I came up with a literal showerthought solution
+ LastRick: Sounds about right, always when you're doing something else
+ RohanasaurusRex: Thanks for the help
+ RohanasaurusRex: Ill try some of those puzzles
+ Skynse: haha broo wtf, my shower idea actually worked, but the cat and mouse just move in circles lol since the cat is faster
+ Majeck: Yeah, the answer is more complicated than just move to the opposite side from the cat
+ Majeck: sadly
+ Skynse: yup
+ RohanasaurusRex: so about how long have you guys been programming for
+ Skynse: almost 5 years
+ zTTK: 2-3 years
+ inoryy: 10 years
+ Skynse: dang
+ jacek: meow
+ Skynse: so random
+ jacek: its still Caturday
+ RohanasaurusRex: dang nice
+ LastRick: Many many years. 
+ Majeck: zTTK same, 2-3 years
+ jacek: pump those number up
+ Majeck: Doing so one day at a time
+ jacek: do it faster
+ Majeck: Oof, don't have my time machine with me
+ Majeck: Maybe Doc Brown can help me
+ inoryy: rookie mistake
+ RohanasaurusRex: lol
+ Majeck: In any case has anyone here worked with the input generator before?
+ Majeck: I'm literally on the border of tears because I can't do a simple thing lol
+ Majeck: Maybe I'll go mad who knows?
+ jacek: stub generator?
+ Majeck: Yeah, for puzzles and contributions you use a special sort of pseudocode to generate the input stub
+ jacek: its pretty straightforward, isnt it
+ Majeck: I just need to read two different lines in the same loop
+ Majeck: And I haven't figured out how yet
+ Majeck: I need it to generate something like:for i in range(N):
+ RohanasaurusRex: does anyone else keep  getting security checks after doing a puzzle or clash or code?
+ LastRick: "its pretty straightforward, isnt it" HAH! Literal lol. That thing is the reason I've yet to submit a single puzzle. Every time I look at it, I think, not today, Satan.
+ Majeck: Or in C#: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/fa490a5e-cdee-4b3f-822f-d357a626df17">http://chat.codingame.com/pastebin/fa490a5e-cdee-4b3f-822f-d357a626df17</a>
+ zapakh: I get security checks on every clash if I play a whole, whole lot.
+ Majeck: Hey! Pastebin detected it this time!
+ Majeck: Nie
+ Majeck: *Nice
+ Majeck: It's not even my own puzzle that needs this, I volunteered to help out someone else (boy do I regret it lol)
+ Skynse: lol
+ CHackerBoy: try the live stream clashes - great fun
+ Unkmar: And they do NOTHING for you leaderboard status.
+ chinoto: I found it fun to, not everything is about status :P
+ chinoto: I found it fun too, not everything is about status :P
+ chinoto: That is not an edit function...
+ icecream17: yes!!!! <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/495209842">https://www.codingame.com/share-replay/495209842</a>
+ RohanasaurusRex: sorry im pretty new to programming can someone please tell me what's wrong with this:if l in ["olzeasgtb"]:whenever i try with just ["o"] or just any singular letter it returns true
+ RohanasaurusRex: and i thought the in operator could check for substrings in a string but i may be wrong
+ RohanasaurusRex: Thanks
+ Majeck: You don't need to make the string a list
+ Metanoob: if l in "olzeasgtb":
+ Majeck: if I in "olzeasgtb":
+ Majeck: Lol
+ Metanoob: :p
+ Majeck: Yep, that's the problem
+ Majeck: Cause if you do ["abc"] then the "in" operator will only check if I == "abc"
+ Majeck: An open question to the CG community:
+ Majeck: Do you agree, disagree, and why?
+ LastRick: I think it depends on why you code. It seems these days Python is dominating numerical problems but if I'm developing mobile apps, probably wouldn't start with python.
+ Skynse: To be honest, I use python for most of what I do because it has readily available in-built libraries that make a lot of tasks easy and not in requirement of from-scratch algorithms. However, if I'm looking for speed, I'll throw python away for the task lol
+ 123456789LL: Hi
+ 123456789LL: wowowowoo
+ 123456789LL: Trecrvtbyunmiko,mikjuhdgum
+ Majeck: HI 123456789LL
+ Majeck: Nice name
+ Skynse: A bit sus don't you say
+ Majeck: Vote 123456789LL
+ Majeck: I saw him vent
+ Allis: I saw him doing the murder task.
+ Majeck: LOL
+ VusalShahbazade: Hi, I am new here. How I can go to the next boss, I have defeated current boss  and got on top of ranking on areana.
+ Majeck: Allis is the other imposter no cap
+ Majeck: VusalShahbazade what game?
+ Skynse: bruh
+ VusalShahbazade: coders strike back
+ Majeck: I'm rubbish at that game, but almost anyone else here can help you
+ Majeck: Consider slowing down before you reach a checkpoint, that's as far as I could get lol
+ Skynse: lol, the current puzzle on coc is one involving poker
+ Skynse: I haven't played poker before
+ Majeck: Nooooo, I love poker, why didn't I click play again&#160;;(
+ VusalShahbazade: Before it was kinda automatical, It was just skipping to next boss when you get some results in arena
+ Skynse: Im out lol, poker isn't my thing
+ VusalShahbazade: Idk is this end of the game?
+ VusalShahbazade: I am on boss 4
+ Majeck: Up and to the left it should say your league
+ Majeck: And your ranking
+ Skynse: when you see a community success rate less than 70%, you know you're in for a ride
+ Majeck: You need to get to be like in the top 5 of your league AND beat the boss in order to ascend
+ VusalShahbazade: bronze league, rank 1/25,319
+ Majeck: Praise be to you, I could never get out of bronze
+ Majeck: Just wait a little
+ Majeck: In 30 minutes you'll receive the update
+ Majeck: it's not instantaneous
+ VusalShahbazade: K thanks a lot, gotta check tomorrow, gotta sleep now. Bye
+ Majeck: Skynse I disagree, a lot of really easy puzzles have community success rates of less than 70%, especially the beginner ones.
+ Allis: @Skynse Aww, it was a really simplified version and Python's sorted() is clever enough to make it pretty straightforward.
+ Skynse: Im pretty sleep tbh, so I just decided to bail out
+ Allis: Fair enough.
+ Majeck: Now I feel even worse for skipping the poker clash knowing that Allis programmed it
+ Allis: I didn't?
+ Majeck: I love your clashes XD
+ Skynse: wut
+ Majeck: Oh
+ Majeck: Lol
+ Skynse: imagine playing your own clash
+ Majeck: I have, it's awesome
+ Skynse: I should solve more classic puzzles
+ Skynse: I coc too much lol
+ Allis: It's good to strike a balance.
+ Skynse: But I'm in a better position thatn 3 years ago
+ Skynse: Before, I couldn't solve the simplest of problems on my own
+ Majeck: Allis I misunderstood your comment, so I thought you had made the clash, sorry lol
+ Allis: Ah, okay; no worries.
+ Skynse: So what applications have you guys made?
+ Skynse: My current one is a text editor 
+ Majeck: Skynse Yeah same thing, I joined around 2018 and I'm appalled and impressed at the same time by how I coded
+ Allis: I had considered submitting a Clash puzzle like Project Euler #54, but probably too much for fifteen minutes.
+ Skynse: ...
+ Majeck: I remember the temperature puzzle took me days to complete way back when and it was super complicated over 60 lines hahaha
+ Allis: @Skynse Have you implemented wrapping yet?
+ Skynse: The text editor engine handles that for me
+ Allis: Well, that's just cheating.
+ Skynse: lol
+ Majeck: Right now I'm developing an app for a friend (and school)
+ Skynse: what can I say, I was still learning c++ and qt5
+ Skynse: but it's fun to implement things that have already been implemented
+ Majeck: I coded it in Java using Swing (How I regret not learning C# GUI) and so far it can communicate with a database to handle his' students grades
+ Skynse: Java feels like lava for me when I use it to be honest
+ Majeck: Different courses, different tests, different grading styles, all that sweet stuff
+ Skynse: different languages have different feels for me
+ Majeck: Skynse I HATE Java
+ Skynse: lol, I dumped java 4 years ago
+ Majeck: Well only in locker room talk
+ Majeck: Cause I love C# and C# is identical to Java lol
+ Majeck: It's like liking one twin sister over the other hahahah
+ Skynse: C++ feels lightning fast and native, python feels like a rusty cog, java feels like hot coffee (see what I did there)
+ Majeck: Nice
+ Skynse: I refer to python as a cog because well, bruh, you can't make native builds
+ Majeck: Skynse id you don't mind me asking, how old are you?
+ Majeck: *if
+ Skynse: dm
+ Majeck: Sure
+ Harrogin: C# is amazing for the string structure
+ Harrogin: Scanner in java is pretty annoying imo
+ Skynse: yeah
+ Majeck: Harrogin could you elaborate further?
+ MACKEYTH: Speaking of Scanner, I'm trying out using System.in.read() instead in code golf. Has anyone had any luck with that?
+ MACKEYTH: So far, it looks like catching IOException &amp; the extra logic wipe out any character savings
+ Skynse: Java makes it really annoying to golf
+ MACKEYTH: Eh, at least you get to compete against other Java. Java = suicide in CoC.
+ Skynse: most people use python for CoC
+ Camto: Python and Ruby are mad good for CoC
+ Skynse: ruby is even better
+ Skynse: waaaay shorter solutions
+ MACKEYTH: Hm, I'll have to try that.
+ MACKEYTH: Have to learn ruby first.
+ Skynse: I once clashed with a ubisoft programmer
+ MACKEYTH: That's pretty cool. How'd you do?
+ Skynse: Well it was a normal clashofcode actually
+ Skynse: the problem was simpele
+ Skynse: simple*
+ Skynse: He's pretty active on this site
+ Skynse: Im going to solve the easy puzzles, then rank up from there
+ Skynse: I love how the puzzles lists the concepts that will be learned from solving them
+ Lachrymosa: Yea, I love this site and recommend it to anyone I come across interested in coding
+ grateful_tomato: I understand that the bots might be useful to make the clashes look like there are more real people, but in this clash there were 2 bots, and they didn't leave after real player came in (usually they leave when the 5th player joins). Is this a bug? Might be better to disable the bots anyway. <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/report/1434219499b94184653d382a4cc85993581fd2a">https://www.codingame.com/clashofcode/clash/report/1434219499b94184653d382a4cc85993581fd2a</a>
+ grateful_tomato: Once I started a clash with 3 other bots and no other real player, and started another clash before ending the bot clash, to get more people, might be a workaround&#160;:-) 

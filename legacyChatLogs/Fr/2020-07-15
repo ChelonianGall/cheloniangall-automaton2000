@@ -1,0 +1,139 @@
+ JBM: comment es ta weekend
+ Bob: amis de la weekend
+ Bob: burps
+ leojean890: vivement le week-end hehe
+ Bob: tu m'etonnes
+ Magus: Salut tout le monde et Automaton2000
+ Automaton2000: je regarde le classement de la ligue bronze
+ Chepa: yoyo
+ Bob: pika
+ 257832: Yo tout l'monde&#160;! Automaton2000, AutomatonNN&#160;!
+ Automaton2000: donc quand tu as une idée de ce qui se passe
+ AutomatonNN: parle beaucoup plus tard 
+ Bob: j'ai une bete question de TS
+ Bob: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/27041859-79f5-4e4f-a3d1-08428fa2d2bd">http://chat.codingame.com/pastebin/27041859-79f5-4e4f-a3d1-08428fa2d2bd</a>
+ Bob: Le linter de Sonar grogne en disant que faut faire un return direct
+ Bob: mais si je fais return ({ /* blah */})  as T, je perds le type checking de blah
+ Bob: du coup je suis un peu dans le doute sur la bonne maniere de l'ecrire
+ Bob: peut-etreconst foo: () =&gt; T = () =&gt; ({ /* blah */ });?
+ Magus: tiens sur stackoverflow maintenant tu peux dire "merci" à une réponse&#160;:/
+ Magus: c'est quoi l'intérêt&#160;?
+ Magus: genre tu dis merci au lieu de upvote&#160;?
+ John.Fox: Tout le monde peut dire merci ou juste le créateur de la question?
+ 257832: Merci
+ 257832: CA a l'air de marcher
+ Bob12: :laughing:
+ dwarfie: le demandeur dit rarement merci ... surtout quand y'a pas d'autres choix que de lui repondre "apprend a lire" :D
+ BlaiseEbuth: Z'aurait du mettre un bouton "rtfm" sur la question
+ <b>**dwarfie viens de le faire à un mail ... "apprend a lire , c'est rempli automatiquement donc ca sert a rien de me demander de changer le contenu ... patate" :p</b>
+ dwarfie: AutomatonNN... toi au moins , tu sais ce que ca veut dire "automatique"&#160;?
+ AutomatonNN: utiliser un code tout seul sur le chat et tu peux pas te dire que tu peux pas te dire que tu veux pa
+ <b>**dwarfie va noter cette definition pas si fausse que ca</b></p><p><img src="/a/29407964997640" /> Bob: broumpf
+ dwarfie: schtroumpf
+ Bob: vert&#160;?
+ Bon[]Crayon: Salut
+ Bon[]Crayon: Salut AutomatonNN
+ AutomatonNN: merde j'ai fait un truc pareil en fait :D
+ Bon[]Crayon: Salut Automaton2000
+ Automaton2000: tu viens de perdre un tour de jeu&#160;?
+ Bon[]Crayon: :robot:Automaton2000 Non, j'ai trouvé un tour de passe-passe.
+ Automaton2000: o/ tout le monde et Bon[]Crayon
+ Bon[]Crayon: :robot:Automaton2000 o/ :turtle:
+ Automaton2000: je dis ca, je dis rien
+ Bob: salut
+ Magus: Tu bosses tranquillement, tu regardes les logs de ton appli et la tu vois "Sending 963Gb"
+ Magus: c'est beaucoup quand même
+ Magus: en fait il semblerait qu'un collègue a confondu *1000000 avec /1000000
+ Bob: "j'en ai un peu plus, j'vous l'mets quand meme&#160;?"
+ Bob: tiens tant que tu es la
+ Bob: ah non c'est bon j'ai trouve ma reponse tout seul&#160;:)
+ Magus: lol
+ Magus: de rien
+ Bob: je cherchais la syntaxe TS pour specifier le type de retour d'un callback inline dans un appel a map()
+ Bob: apparemment c'est myArray.map((item):ResultType =&gt; { ... }); 
+ Magus: ouai
+ Bob: je viens de passer une heure a chercher pourquoi juste en renommant des props bien proprement j'avais un bug qui apparaissait
+ Magus: enfin il est aussi censé se baser sur le return de ta fonction
+ Magus: mais bon des fois il perd un peu le fil
+ Bob: ouais c'est un peu batard
+ Bob: j'ai une fonction qui doit fournir un Foo[] et qui fait ca avec un map
+ Bob: et j'avais renomme un des fields de Foo
+ Bob: mais le callback du map renvoie juste un truc non type
+ Bob: et du coup le renommage manquant la-dedans n'est pas apparu
+ Magus: typescript ne type pas le résultat d'un map par défaut&#160;?
+ Magus: je pensais qu'il se basait sur le retour de ta fonction
+ Bob: oui c'est c qui est quand meme un peu batard
+ Bob: parce que la le code cree un { bar: string }[] au lieu d'un Foo[]
+ Bob: et il renvoie ca comme une fleur
+ Bob: go home typescript you're drunk
+ Magus: les chainages de types dans les .map ou autre, c'est souvent le bordel
+ Magus: avec underscore (ou lodash) quand tu chaines ... yeurk ...
+ Bob: ca vaudrait peut-etr le coup d'upgrader a 3.9 a tout hasard
+ Magus: ça marche jamais, une fois sur deux t'as un unknown[] au milieu
+ Magus: ah mais vous avez un vieux TS&#160;?
+ Magus: c'est peut être pour ça
+ Bob: 3.8
+ Bob: je vais verifier ouais
+ Magus: ah, c'est pas si vieux que ça
+ Magus: parce que j'ai plein de code avec des .map, et le type est bien celui retourné par ma fonction, j'ai pas besoin de lui rappeler
+ Bob: oui oui
+ Bob: c'est le cas aussi
+ Magus: ah mais attends, vous faites un return { bar: 'coucou' };&#160;?
+ Bob: en revanche le type que ca renvoie n'est pas compatible avec celui que je suis cense renvoyer
+ Bob: oui
+ Magus: aaaaah
+ Magus: ok, effectivement la c'est moche :D
+ Bob: le truc etant que le npm du field attendu au-dessus c'est pas bar mais autre chose
+ Bob: donc ca aurait du gueuler au return du dessus de toute facon
+ Magus: oui
+ Bob: j'ai Foo { foo&#160;: string }
+ Bob: une fonction qui doit renvoyer Foo[]
+ Magus: ton tableau il se transformerait pas en any[] au milieu&#160;?
+ Bob: le map produit un truc qui est un { bar: string }[]
+ Bob: et ca sort tranquillou de ma fonction
+ Bob: va savoir
+ Bob: bon, 3.9.6 gueule pas plus
+ Bob: tres etrange
+ Bob: j'irai demander chez SO quand j'aurait 5 minutes pour reproduire
+ Bob: -t
+ Bob: je vais deja terminer cette putain de PR
+ Thyl: Yo tout le monde&#160;!
+ Thyl: tortue à Automatton2000
+ Thyl: tortue Automaton2000
+ Automaton2000: même si c'est pas sur le chan fr
+ Thyl: Automaton2000
+ Automaton2000: oui mais si tu prends en compte les collisions
+ Thyl: Automaton2000
+ Automaton2000: il a le temps pour faire un contest de 4 semaines
+ Thyl: Automaton2000
+ Automaton2000: on vient de passer en ligue argent
+ Bob12: je t'aime Automaton2000
+ Automaton2000: tu as fais quoi comme algo&#160;?
+ Bob12: l'amour ce n'est pas un algo tu sais , Automaton2000
+ Automaton2000: je me suis rendu compte que je ne comprend pas je suis sur que ca marche
+ Zorg1: salut tout le monde ainsi que les bots Automaton2000 &amp; AutomatonNN
+ Automaton2000: tu fais ça avec une fonction d'eval
+ AutomatonNN: oui et toi&#160;?
+ Zorg1: eval(chat);
+ Zorg1: :thinking: mmmm c'est pas terrible
+ Zorg1: fix it Automaton2000
+ Automaton2000: j'en suis à faire des choses bizarres
+ Zorg1: ah t'as décidé d'utiliser les nouvelles features de ton langages Automaton2000&#160;?
+ Automaton2000: du coup je comprend pas très bien
+ Zorg1: prend un air inspiré, fais toi pousser une barbe de hipster et t'auras l'air cool &amp; compétent Automaton2000
+ leojean890: allez je bench 2 3 trucs faut que je passe légende ds hypersonic :P
+ Automaton2000: oui c'est vrai que le plus gros score
+ Zorg1: ah merde j'ai réveillé le leojean :D
+ leojean890: dès que je me réveille je deviens bavard, tavu :P;)
+ leojean890: j'ai rien qui bench mieux que le boss gold pff mais j'ai des pistes ;P
+ leojean890: le pbm principal c'est qu'un beam search en python avec des objets et du deepcopy c'est lent&#160;;)=&gt;FIX IT&#160;!;)
+ Zorg1: ah hypersonic
+ Zorg1: je dépile lentement le contexte
+ leojean890: yep ça fait un moment que je fais des submits autour de 20-30 gold :P
+ SaadRami: Ahia
+ SaadRami: Bonsoir
+ AliCh: salut les amis
+ AliCh: une idée où je peux m'entrainer pour faire du machine learning?
+ SaadRami: Le machine learning c'est la mort mon gars
+ AliCh: pourquoi?
+ leojean890: kaggle, ou coders-strikes back ;P

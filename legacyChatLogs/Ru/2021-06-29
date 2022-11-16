@@ -1,0 +1,32 @@
+ Uljahn: угу, чего ещё ждать от корпоративного бложика
+ gybson_samara: Uljahn вопрос, в нампи можно как-то считать по индексам элементов, ну скажем средний x и y условно у в двумерном массиве. mgrid не катит для бэтмена2, долго
+ gybson_samara: всё, решил
+ gybson_samara: но все-равно field[y &gt; Y] = 0 долго работает, нужна альтернатива
+ Uljahn: а зачем занулять физически массив, если всё равно с масками работать?
+ nu11try: ВСем привет!
+ Uljahn: Automaton2000: всем привет
+ Automaton2000: а что если кто-то сгенерит случайный токен и получит валидный чужой токен?
+ TheFireCube_2bfd: вселенная схлопнется
+ gybson_samara: Uljahn этот массив и есть маска
+ gybson_samara: 0 - там, где бомбы точно нет
+ gybson_samara: Тогда Y,X = np.nonzero(field)
+ gybson_samara: q = np.around(np.nanquantile(X, [0.25,0.5,0.75]))
+ gybson_samara: ну и в таком духе
+ gybson_samara: В результате произвольная фигура четко делится на две части для бинарного поиска
+ Uljahn: nanquantile по одной оси работает, а тут надо типа Вороного что-то
+ Uljahn: хотя я без него решал, на чистом питоне
+ gybson_samara: по одной и надо
+ gybson_samara: одни по х, другие по у
+ gybson_samara: вместе норм
+ gybson_samara: и опять напоролся на то, что если указать тип int, то здорово падает производительность даже при создании массива
+ gybson_samara: field = np.ones((height, width), dtype=int) не пролезает по таймауту на первый ход
+ gybson_samara: а без инта пролезает
+ gybson_samara: когда массив 8000Х8000 =)
+ gybson_samara: в общем на нампи не очень может получиться
+ gybson_samara: я смотрю в нампи еще много чего интересного, кроме просто массивов, там и геометрия есть
+ Uljahn: в scipy?
+ Uljahn: 7 июля эскейп-рум контест будет командный<a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/finding-sherlock-coding-escape-community-event-on-july-7/191634">https://www.codingame.com/forum/t/finding-sherlock-coding-escape-community-event-on-july-7/191634</a>
+ gybson_samara: Uljahn нет, numpy.linalg и т.п.
+ gybson_samara: np.polyfit([x1,x2], [y1,y2], 1) - линия по двум точкам
+ gybson_samara: numpy.linalg тоже норм
+ gybson_samara: у меня в унивепре по линейке 5 было, надо восстанавливать потенциал

@@ -1,0 +1,845 @@
+ GarethEddies: I wonder why people don't share their core more readily
+ PatrickMcGinnisII: Because CoC code is usually sloppy
+ PatrickMcGinnisII: here, interpret this
+ PatrickMcGinnisII: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/b629e980-236b-4561-90fd-3d7c2604cd6c">http://chat.codingame.com/pastebin/b629e980-236b-4561-90fd-3d7c2604cd6c</a>
+ ANONYMOUS42: what language even is that
+ PatrickMcGinnisII: php
+ ANONYMOUS42: thinking php but averttostring doesn't show up on google
+ PatrickMcGinnisII: ahh, function to change verts to string
+ PatrickMcGinnisII: array of verts
+ PatrickMcGinnisII: blame euler
+ PatrickMcGinnisII: solving Sokoban
+ PatrickMcGinnisII: it's an endstate mapper
+ ANONYMOUS42: oh so it's your function
+ <b>**PatrickMcGinnisII nods</b></p><p><img src="/a/12323424608735" /> PatrickMcGinnisII: i thought he wanted code, rofl ... so i just finished writing it...nutz huh
+ PatrickMcGinnisII: only gets run once
+ ANONYMOUS42: why? do the CG servers go down after running it??!
+ ANONYMOUS42: you must be hacker
+ PatrickMcGinnisII: funny.  Sokoban puzzle is just a b*tch
+ PatrickMcGinnisII: searchtree requires a hashtable to prevent infinite loops
+ PatrickMcGinnisII: driving me insane
+ ANONYMOUS42: i had to do a similar puzzle to it on my second year in CS uni
+ PatrickMcGinnisII: so instead of a bunch of compares at eacj node to determine if search is done i just compute the valid final states, pretty standard
+ PatrickMcGinnisII: but it looks really funky
+ PatrickMcGinnisII:&#160;;)
+ ANONYMOUS42: the difference was there was no blocks to move and whenever the player moved they had to go all the way until they hit a wall
+ ANONYMOUS42: oh i see
+ PatrickMcGinnisII: euler has a few puzzles that have a degree of insanity built in
+ PatrickMcGinnisII: glhf it's 1:46 am
+ ANONYMOUS42: good nigh
+ ANONYMOUS42: night
+ StevensGino: I have tried to use GA for Mars Lander, but end up using Heuristic
+ StevensGino:&#160;:(
+ jacek: try heuristic GA [solved]
+ LazyMammal: FrancoRoura connect-4 in Python, yes.With bitboard minimax depth 3 is possible.For depth 4 you need alpha-beta pruning.
+ LazyMammal: I'm just using wins/losses so far.
+ LazyMammal: If depth reached or board full (haha) then I return tie.
+ jacek: and bitboard in python? w00t
+ Uljahn: bitboards in numpy are quite effective
+ kovi: hmm, it seems that connect4 top5-12 is pretty much the same
+ kovi: jacek you have nn? (vs. msmits books)
+ jacek: no. one of them is rust&#160;:/
+ jacek: self-trained nn. i dont train nn against specific opponents
+ kovi: sorry i meant that
+ kovi: just combined msmits in the same sentence
+ jacek: ah
+ LazyMammal: For me bitboard = built-in int.  Python has arbitrary integers so I don't have to write my own.
+ LazyMammal: I use two integers as bitplanes.  One for each player.  Pretty fast.  I wouldn't expect minimax to work very well if my board was a bit list&#160;:(
+ jacek: connect4 over doubled players this week
+ LazyMammal: It's nice to see the "Puzzle of the Week" actually draws people over
+ StevensGino: connect 4 already have 241 players
+ StevensGino: great
+ jrke: its becomming next D&amp;B
+ StevensGino: yes
+ jacek: or othello, or yinsh...
+ jrke: volcanoes can also gain lot of players easy to start tough to master
+ StevensGino: :relaxed:
+ kovi: but none is as fun as dice duel 3d
+ jacek: but you need gpu for that ~
+ IgnacyJ: who doesnt have gpu???
+ jacek: decent* gpu
+ Ano.code[Love]: hello
+ emh: woow.. there are so many new multis that I haven't done
+ Chainman: heeeyyy
+ Chainman: how many?
+ Chainman: I'm new to this site I wouldn't know
+ emh: 29
+ emh: 29 new and 33 I've done
+ emh: I'm more motivated by the ones with leagues and bosses tho
+ geppoz: question: in MCTS, it make sense to do many rollouts in a single step to have a better evaluation?
+ geppoz: from the same state I mean
+ darkhorse64: less nodes explored but more accurate information on a node, that's a trade off
+ geppoz: and in this case, the n denominator counter for the UCB should be incremented by the numbers of rollouts, or by 1 in any case?
+ geppoz: I suppose if you score as the avg of rollouts, by 1, if you score as the sum of rollouts, then n
+ geppoz: but which is the correct one to keep balance score with other nodes?
+ darkhorse64: 1 rollout = 1 visit. If you do more rollouts, the UCT formula will take care of selecting the "interesting" nodes
+ MSmits: well you can also count 2 rollouts as 1 visit because you will just refit the exploration parameter
+ MSmits: exploration would have to be twice as big
+ MSmits: there's many ways to do these things
+ MSmits: I never get a lot of difference in bot performance from tweaking these things
+ MSmits: just as long as the values arent ridiculous
+ MSmits: (parameters)
+ MSmits: what is very important is a good eval, in case you're terminating  the rollout early and evaluate. In that case parameters are very important
+ geppoz: I'm trying in connect4, so always to the end
+ MSmits: ah ok
+ MSmits: btw, darkhorse and I usually just do a random playout from each child and backpropagate the total result
+ MSmits: though it doesnt always make a big difference for me, it's convenient
+ geppoz: but I mean, if I do 10 rollouts from a new expanded state, and I get a score of 7 (1=win -1=loss), I should backpropagate w=7 and n=10&#160;?
+ geppoz: or w=0.7 and n=1
+ darkhorse64: 7/10
+ MSmits: geppoz likely it doesnt matter
+ MSmits: as long as you fit exploration
+ MSmits: with the second example, exploration would be 10x higher probably
+ MSmits: the param i mean
+ darkhorse64: That's what I do. No brainer
+ MSmits: it's also what i do
+ MSmits: but it doesn't matter
+ MSmits: in our example, high branch nodes are explored more initially
+ MSmits: actually no
+ MSmits: they are explored less 
+ MSmits: because you count it as a lot of visits
+ MSmits: if you average it, it counts as a single visit
+ darkhorse64: It depends if you choose a node by visits or by value
+ MSmits: i mean during selection
+ MSmits: you always select by both
+ darkhorse64: I mean the move to play
+ MSmits: yeah, but it doesnt really matter for that, just the way the exploration happens
+ MSmits: if you get to a node and the first time you immediately count it as 10 visits, you might not go there again if only 1 child was good
+ MSmits: but if you average the result, you might, and you might go to that good child
+ MSmits: in games where branching is mostly uniform it should not matter which way you choose
+ MSmits: like C4, bandas etc. but on a free move in uttt it's going to matter a lot
+ MSmits: anyways, I am using your method darkhorse64, so I guess that works fine.
+ geppoz: ok, let's go for it, thanks both&#160;;)
+ darkhorse64: My point is adding averages is wrong. 
+ darkhorse64: except when the branching is constant
+ darkhorse64: slowly but steadily overtaken by jacek :disappointed:
+ MSmits: ahh
+ MSmits: make a grimoire&#160;:)
+ MSmits: stop the nn menace
+ darkhorse64: afk
+ jacek:  
+ Manchi_o6o7: if someone can help me why is this wrong
+ Manchi_o6o7: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/b470da37-e489-4cbf-b4e6-410078658a3d">http://chat.codingame.com/pastebin/b470da37-e489-4cbf-b4e6-410078658a3d</a>
+ Manchi_o6o7: g is a pointer
+ emh: I just published a writeup
+ emh: of my StC findings
+ emh: regarding the connected components / flood fill bitboards
+ emh: <a rel="nofollow" class="external free" href="https://tech.io/playgrounds/58038/fast-connected-components-for-6x12-bitboard">https://tech.io/playgrounds/58038/fast-connected-components-for-6x12-bitboard</a>
+ emh: MSmits do you perchance have some time to review my article? since you're in education and all :D
+ emh: struct maybe you are interested as well?&#160;:)
+ olaf_surgut: some one know how to good hash function for two unsigned long longs?
+ DaNinja: Manchi_o6o7 try G graph = {1, {'A','B','C','D','E','F'}, NULL}, *g = &amp;graph;
+ DaNinja: or use strcpy() to set g-&gt;vertex
+ LazyMammal: Manchi_o6o7Same advice basically.  You are trying to use "compile time" initialization with a "runtime" variable.  You can't do that directly.  Either set another way or use memory copy as DaNinja said.
+ emh: I try to avoid pointers as much as possible in C++
+ emh: they always make me segfault
+ emh: when I do use them I tend to use the pattern: BitboardComponentTable&amp; bitboardComponentTable = *(new BitboardComponentTable());
+ emh: with no free :p
+ emh: but on singletons with lifetime the scope of the program
+ jacek: olaf_surgut i just use something like (prime_number1 * A) ^ (prine_number2 * B)
+ jacek: :B
+ olaf_surgut: kinda cheating, but i like it
+ Grandmaster-Loading: study hard
+ Manchi_o6o7: Guys, is it okey that I ask here some questions. Not neccessarily connected with CG problems?
+ DomiKo: yes
+ Manchi_o6o7: So, this is my question. I have some code for MST via Prims algorithms
+ Manchi_o6o7: Algorithm*
+ Manchi_o6o7: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/b66eadb9-7225-4ace-b2e6-7ff2f463797d">http://chat.codingame.com/pastebin/b66eadb9-7225-4ace-b2e6-7ff2f463797d</a>
+ Manchi_o6o7: there you have also my question in the comments
+ DaNinja: I think allVisited() will return 1 the first time
+ Manchi_o6o7: so !allvisited will be 0
+ Manchi_o6o7: and the execution will stop?
+ Manchi_o6o7: or you mean !allvisited will be 1
+ Manchi_o6o7: wow, for some reason only the first element in the array is set to 1
+ Manchi_o6o7: not all the elements
+ Manchi_o6o7: isn't array[size]={1}; meaning that all elements are 1
+ DaNinja: use array&lt;int&gt; instead
+ Manchi_o6o7: isn't array[size]={1}; meaning that all elements are 1
+ DaNinja: arrays of local scope are left undefined
+ DaNinja: <a rel="nofollow" class="external free" href="https://www.cplusplus.com/doc/tutorial/arrays/">https://www.cplusplus.com/doc/tutorial/arrays/</a>
+ Manchi_o6o7: thank you very much
+ darkhorse64: Not completely sure but in C++ {1} is an array of size 1, so you are initializing with a size 1 array
+ StevensGino:  array[size]={x} is array of size "size"
+ MSmits: yes and I think you're setting the first value to x and the rest to 0?
+ MSmits: could be wrong
+ emh: hey MSmits
+ MSmits: hey emh
+ emh: did you see my article?
+ MSmits: which
+ emh: <a rel="nofollow" class="external free" href="https://tech.io/playgrounds/58038/fast-connected-components-for-6x12-bitboard">https://tech.io/playgrounds/58038/fast-connected-components-for-6x12-bitboard</a>
+ MSmits: that's awesome. I did not see it, but I am for sure going to use it to get a stc bot at some point
+ emh: thank you. ok&#160;:)
+ MSmits: I will do something like that for uttt when i have time. Probably after 24th of june. That's the deadline for my internship report 
+ emh: ahh I see. where are you interning?
+ emh: thought you are a physics teacher
+ MSmits: well, I am interning at my own job, only as CS teacher instead of physics teacher, same school&#160;:)
+ emh: ahh hehe&#160;:)
+ MSmits: but have to write a report or i wont finish my studies
+ emh: I see
+ MSmits: next year i am mostly CS teacher
+ emh: what's the report on?
+ MSmits: probably only 3 hrs a week physics teacher
+ MSmits: on being a CS teacher&#160;:)
+ MSmits: to get my degree
+ emh: hehe ok
+ StevensGino: yes @MSmits for your question
+ MSmits: have to use a bunch of quesionairres and such filled out by students to prove i dont suck&#160;:)
+ StevensGino: :D
+ MSmits: ahh ok StevensGino, wasnt 100% sure
+ MSmits: I usually just initialize to 0 with { 0 } 
+ emh: and you are teaching in Netherlands&#160;? but from Spain?
+ MSmits: wait what, did someone hack my flag
+ MSmits: nope still says Dutch&#160;:)
+ emh: ohh
+ MSmits: maybe confused with Marchete
+ emh: I must've been color blind last time I checked hehe
+ MSmits: he's from spain
+ emh: oh ok
+ emh: I like Amsterdam
+ MSmits: not at all offended, I like marchete&#160;:)
+ MSmits: happily confused with him
+ MSmits: meh amsterdam is too busy for me
+ MSmits: I like quieter places
+ emh: yeah for me too at this age, but I liked when I was younger
+ MSmits: ahh I see
+ emh: partying and clubbing, but now I don't do that anymore
+ MSmits: ahh, i never did
+ MSmits: I didnt like that sort of thing
+ emh: ok. I used to like club dancing
+ emh: also did couple dancing
+ emh: salsa, bachata and zouk
+ MSmits: I see
+ MSmits: the only time i do physical exercise is on a hometrainer or when i am trying to de-root my backyard
+ emh: hehe I also had a treadmill at home, but don't have it currently due to moving
+ MSmits: ahh ok
+ MSmits: I went to bigger house so finally have room for one
+ emh: ok. only thing I did today was walk to the gas shop to buy energy drinks, and write that article
+ MSmits: it was nice during covid
+ emh: should write my StC bot.. but don't feel like it
+ emh: more like bit fiddling hehe
+ MSmits: true, thats more fun
+ emh: writing the components but not the final result. kinda silly, but well.. someone else can use it. hehe
+ emh: I do have an old StC bot though, from years back
+ MSmits: yeah a bit weird
+ emh: it's in Gold at rank 115
+ emh: yeah
+ emh: my old bot uses some fancy tricks with doubly linked lists for the board. don't remember how well it performs though
+ MSmits: I see, doubly linked list doesnt sound performant, but hey if the algo is good...
+ emh: I think the point of the list was to do incremental flood fills
+ emh: on every change
+ emh: but I'm not sure how it worked now
+ emh: or if it was in that way
+ emh: I'm pretty sure the new algo is better though, so no need to go back and look
+ emh: with bitboards
+ Anequit: I'm suck
+ Anequit: stuck
+ StevensGino: on what&#160;?
+ Anequit: The reverse mode on clash of code
+ StevensGino: I don't play much on coc
+ StevensGino: I don't even know what is reverse mode
+ Dark_bloom: i need help
+ sprkrd: emh What's StC?
+ StevensGino:&#160;?
+ StevensGino: what is StC?
+ sprkrd: Dunno, that's why I'm asking :joy:
+ StevensGino: haha
+ sprkrd: It seems like a Multi, but right now the acronym doesn't ring a bell
+ DaNinja: Smash the Code
+ sprkrd: ah, I see
+ sprkrd: I don't know all the multis by heart :sweat_smile:
+ emh: yup it's Smash the Code&#160;:)
+ StevensGino: very cool multi
+ sprkrd: I've noticed that there haven't been many optimization competitions in the last months/years. When was the last one? Do you remember?
+ sprkrd: (question directed to no one in particular)
+ emh: well Euler has 4 that I didn't do yet
+ emh: haven't been so active lately though
+ StevensGino: I am quite new, and really want to know about this also
+ DaNinja: <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/optimization">https://www.codingame.com/multiplayer/optimization</a>
+ sprkrd: oh, I mean with prizes and such
+ sprkrd: at least the t-shirt
+ sprkrd: Yeah yeah, I know where they are, it's just that I don't know when was the last "official" optimization contest was. Also some of them have been removed (like the bin packing one)
+ sprkrd: when the last official competition was*. God, I wrote that sentence like crap
+ emh: A*craft was optimization. from Oct 19 2018
+ emh: right?
+ emh: I have a number of contests listed after that, but don't remember which of them were optimization
+ emh: if any
+ sprkrd: I guess beating someone else is just more popular :stuck_out_tongue_winking_eye:
+ emh: Spring Challenge 2021, Fall Challenge 2020, Ocean of Code, Unleash the Geek, Detektive Pikaptcha, A code of Ice and Fire, Code a la Mode, Xmas Rush, Klee Hackathon, A*Craft. in that order
+ sprkrd: Ah, Detective Pikaptcha
+ sprkrd: that's the last optimization contest
+ emh: ahh ok
+ sprkrd: Now it's just a puzzle
+ sprkrd: Didn't get to participate on that one
+ sprkrd: I don't know why they removed it from the optimization section
+ sprkrd: Same with Vox Codei
+ StevensGino: :9
+ emh: I barely submitted on Detective Pikaptcha
+ StevensGino:  Unleash the Geek, don't have any problem related to it
+ StevensGino: seems removed
+ sprkrd:&#160;:(
+ sprkrd: but that was a bot contest right? It's probably harder to make that into a puzzle
+ StevensGino: yeah
+ jacek: is this it? <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/bot-programming/crystal-rush">https://www.codingame.com/multiplayer/bot-programming/crystal-rush</a>
+ sprkrd: tbh, I don't know what "unleash the geek" was about, so it could be?
+ StevensGino: thanks, so that's the game
+ StevensGino: I think that is the game
+ sprkrd: good good, so it seems we still have that one, fortunately
+ emh: anyone know if "noexcept" makes a difference in C++ optimization? I copy pasted some operator overloads that used this keyword
+ sprkrd: I don't think it makes any difference, specially with optimization flags
+ emh: ok I would suspect so
+ sprkrd: there's this question in stackoverflow in which the consensus is: "it might make a difference, but it probably won't and in any case it's more for the programmer than for the compiler. Don't use it tho": <a rel="nofollow" class="external free" href="https://stackoverflow.com/questions/16104057/does-noexcept-improve-performance">https://stackoverflow.com/questions/16104057/does-noexcept-improve-performance</a>
+ emh: ahh ok thanks&#160;:)
+ a-zA-Z0-9: where can i speak to admins&#160;? 
+ MSmits: I think there is this canyon somewhere, where you can scream into it and then you hear an echo, which is like confirmation you got heard
+ Westicles: Please hold for my supervisor, Steve.
+ MSmits: but you can also ping someone here 
+ MSmits: or maybe the forum
+ geppoz: MSmits have you way to check if this: 3,4,2,3,1,0,5,3,8,5,5,0 is now a forced loose for red?
+ darkhorse64: MCTS is not dead&#160;!
+ jacek: oh my
+ darkhorse64: more training days :stuck_out_tongue_winking_eye:
+ MSmits: I can try geppoz
+ jacek: more rollouts?
+ MSmits: sec
+ darkhorse64: smarter exploration
+ MSmits: 3,4,2,3,1,0,5,3,8 is already forced loss for red geppoz
+ MSmits: 3,4,1 is the correct way to play for red
+ MSmits: 2 instead of 1 is the mistake
+ MSmits: oh wait, i may not have done it correctly, my board flips automatically sometimes (symmetry), let me recheck
+ MSmits: 2 is a mistake regardless
+ StevensGino: which game are you discussing?
+ darkhorse64: connect4
+ StevensGino: ah
+ StevensGino: I see
+ MSmits: nope i did it correctly
+ darkhorse64: submit your bot, join the party
+ MSmits: oh hey, what'd you do darkhorse64, got pushed?
+ MSmits: or new version?
+ darkhorse64: see PM
+ ja_fica: How do you verify if a play is win? I verify a 13 long integer array match. Is there a better approach using shifts? 
+ StevensGino: already has 245 players, great
+ ja_fica: The more the better, more points to everyone&#160;:)
+ StevensGino: :D
+ darkhorse64: ja_fica: bitboarding is the way
+ ja_fica: Yes i use bitboarding
+ ja_fica: How else could I verify 13 integers as matchs xD
+ ja_fica: I was just wondering if using shifs in the bitboard could be better
+ darkhorse64: yes
+ darkhorse64: it is
+ ja_fica: I'm having doughts as shifting right or left would overflow the row when chekin horizontly
+ jacek: use masks then
+ darkhorse64: ^
+ KOTS98: leave blank spaces at the start and end
+ jacek: darkhorse64 ^ isnt mask :v
+ ja_fica: I could leave blanks but that would require a manual check for the exception on the corners
+ jacek: maybe not the best way but
+ jacek: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/8de734bb-712a-4cd2-bdbc-11c37a372ba4">http://chat.codingame.com/pastebin/8de734bb-712a-4cd2-bdbc-11c37a372ba4</a>
+ ja_fica: right now I use (config[i] &amp; playerstate) == config[i], where there are 13 combinations for each pair (row,col). But I feel this approach provokes cache misses as I read the memory from 63 different position
+ jacek: i see no need for additional masks2 and 3 or bottom etc.
+ MSmits: whats that monstrosity jacek&#160;? :P
+ jacek: one of early versions
+ MSmits: ahh ok
+ MSmits: let me check how i do this. I dont remember 
+ MSmits: well shifting has to be accompanied by masks yes. I don't verify win
+ MSmits: so cant tell you how thats done
+ ja_fica: You don't need to verify win?
+ MSmits: I guess, when you play a move, you check in all directions if there's a thingy
+ MSmits: no i generate winning moves for opponent when i play a move and if there are any, i lose
+ darkhorse64: MSmits bot is so smart it does not need to
+ MSmits: but i dont play the winning moves :P
+ MSmits: well not in the tree, obviously in the last turn
+ MSmits: hmm hey, let me see how i do that
+ ja_fica: Anyone anticipates losing move? I tried but it heavy reduced the rollouts at the beginning
+ MSmits: hmm i guess me and darkhorse64 do this
+ darkhorse64: ^
+ MSmits: it does reduce rollouts, but not if you do it efficiently
+ MSmits: we both use bitboards and simd for this
+ ja_fica: MSmits keeps reducing my points xD
+ MSmits: man what a crap submit =/
+ jacek: why so low
+ MSmits: it's bookless, but i was nr 1 with that every time before this
+ MSmits: darkhorse64 did some fixes so he might be stronger now
+ MSmits: and you could be, because NN
+ ja_fica: I'm not having fast enough rollouts, maybe because of UCT formula
+ ja_fica: 60k is the best at the beggining I can wihout verifying wins
+ MSmits: I wonder if i'll be 1 with latest book
+ ja_fica: How much are you achiving?
+ MSmits: 29k each child 
+ MSmits: so thats 9x 29k
+ ja_fica: much higher
+ ja_fica: than me
+ MSmits: yes, but that's with simd and bitboards
+ MSmits: quickly goes up after turn 2 btw
+ ja_fica: I don't even know how to do it without bitboard xD. Using AVX complicates the code significantly for me. You store evey node you passs through or you do independent rollouts?
+ darkhorse64: I have 150-170K. Still trying to understand why so low
+ MSmits: maybe you have 29k rollouts too
+ MSmits: i am multiplying by 9, might not be correct
+ MSmits: sometimes this is 1 child only, because of forced moves
+ MSmits: early solves etc.
+ darkhorse64: right
+ darkhorse64: it looks good enough right now
+ jacek: and here i am with hmm.. 7k * 9 = 63k nodes?
+ MSmits: this is your NN version no&#160;?
+ nulte: fix it
+ jacek: eeyup
+ MSmits: well then thats fine :p
+ ja_fica: You train your NN on python-keras?
+ darkhorse64: afk
+ jacek: nah, on my home-made NN thingy
+ ja_fica: 63 inputs entries?
+ jacek: 6 * 63 inputs
+ jacek: empty, red, blue. and x2 for side to move
+ MSmits: whats the 6 again? 
+ MSmits: ohh ok
+ MSmits: still no flipping huh
+ MSmits: mmh my book codesize is 7618 according to code golf
+ ja_fica: Using a book sound better then a NN in performance
+ MSmits: this is the number that can be 100k?
+ MSmits: ja_fica it is only for simple games and only with a fixed start
+ Nerchio: and here is me with 10k rollouts
+ Nerchio: :innocent:
+ jacek: MSmits book + code
+ MSmits: ah yeah ofc
+ MSmits: code is not much after minify i think. c4 is among my smallest bots
+ MSmits: I used 33 million nodes to generate abook using 8% of codesize
+ MSmits: so.... half a billion to fill it... nearly?
+ MSmits: assuming its even linear
+ MSmits: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/562280821">https://www.codingame.com/replay/562280821</a>  neat, a draw&#160;:)
+ MSmits: oh and I see another... we draw darkhorse64
+ ja_fica: I am amazed at how performant you algo is, it detects the end result at such early stage of the game
+ MSmits: not just me, tric trac is fast too
+ MSmits: and i assume darkhorse64 as well
+ MSmits: but he doesnt use messg to say
+ MSmits: mcts solver usually solves better than minimax in my experience.Though tric trac is quite good at it
+ kovi: i miss somthing here
+ ja_fica: I just the way you know you will lose against me xD
+ kovi: 300k rollout, but clearly behind top4
+ ja_fica: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/562277348">https://www.codingame.com/replay/562277348</a>
+ MSmits: kovi it depends on your definition of rollout
+ ja_fica: I can only calculate it after a while .=
+ ja_fica:&#160;:)
+ MSmits: i think if you just count playouts i have near 200k
+ MSmits: but this is with loss avoidance. If yours is total random you're gonna have more
+ kovi: i ci tried insta loss avoidance, but it was worse
+ MSmits: you mean you lost a lot of rollouts
+ MSmits: of course if you lose a lot it's gonna be worse, but if you figure out a way to do it efficiently with simd, it doesnt have to be
+ ja_fica: darkhourse vs MSmits, who will win xD
+ MSmits: i will but it's not a fair fight atm. I put book back in
+ ja_fica: I vote MSmits
+ MSmits: darkhorse64 uses no local training for his bot, so if that's your limitation, then he has the best bot I think
+ ja_fica: books are allowed so are NN
+ ja_fica: NN are better for more complex games that can build a pattern (even a fake one)
+ MSmits: sure and i think that is ok. But I try to make an exception for counterbooks. It's really too easy to beat nn's with them
+ jrke: MS so you have something trainned offline in C4 bot?
+ ja_fica: I have built many drl agents using python-keras, c++ is just too new for me to transfer the code
+ MSmits: just meta mcts, I ran 33 million games to get stats to hardcode an opening book
+ jrke: oh
+ MSmits: it's a sort of training
+ MSmits: very simple kind&#160;:)
+ Nerchio: is there a best opening MSmits 
+ Nerchio: i need some help to boost my performance :joy:
+ MSmits: if you incorporate pie rule/steal then it's 1
+ MSmits: second from left or right
+ MSmits: so can be 7 as well
+ MSmits: steal 2, 3 and 4
+ MSmits: dont steal 0
+ Nerchio: so can i hardcode this :D
+ MSmits: sure why not
+ jrke: kaggle also have C4 arena but 6*7 board and also no prizes
+ Nerchio: 1st player random column 1or7, 2nd player steal 2,3,4
+ ja_fica: 6*7 is already solved for best play
+ MSmits: 6*7 is too simple. Pretty sure i would have already solved that by now
+ MSmits: Nerchio yeah, and you can decide to steal 1 or not, it doesnt matter, it's pretty balanced
+ jrke: but MS no cpp on kaggle
+ ja_fica: Pure minmax with fre oppening books is enough <a rel="nofollow" class="external free" href="http://blog.gamesolver.org/">http://blog.gamesolver.org/</a>
+ jrke: python and R on kaggle
+ MSmits: jrke ahh ok, but how much codesize?
+ ja_fica: *few
+ jrke: no code limit i think there file size limit
+ MSmits: lol easy then&#160;:)
+ ja_fica: 6*7 can be solved in 5.490 s without a opening book
+ Nerchio: so you have 100% win ratio with people outside of top4?
+ jrke: kaggle is for pure NN so no code issue atleas
+ MSmits: not 100% I think Nerchio, but pretty good
+ ja_fica: He lost against me&#160;:)
+ MSmits: yes, you have a non-standard opening ja_fica
+ jrke: i installed conda and i need to reinstall every package lol
+ ja_fica: Yes, you steal my piece
+ Nerchio: damn smits bot is bragging about win like 10 turns ahead
+ struct: 10
+ Nerchio: :joy:
+ struct: more like 30
+ MSmits: heh thats the solver, I like it because it helps me figure out bugs
+ MSmits: and other people as well
+ MSmits: well and it's bragging :P
+ Nerchio: btw
+ Nerchio: if you say steal 2,3,4 why not 5 and 6 too
+ MSmits: it's implied
+ MSmits: symmetry
+ Nerchio: ok
+ Nerchio: wanted to make sure :D
+ MSmits: hehe ok
+ MSmits: try yavalath, 61 moves to choose from&#160;:)
+ MSmits: only 9 unique
+ Nerchio: im done with MCTS in java for now
+ Nerchio: was a pain to get it to work
+ MSmits: it always is
+ MSmits: but once you got it working once it gets easy
+ MSmits: different language is another story
+ Nerchio: and i dont know how to speed it up more i am already using bitset
+ MSmits: converted my C# to c++ in two days, was not so bad
+ MSmits: bitset?
+ MSmits: oh, you cant do normal bitboard in java?
+ MSmits: because of that weird integer class?
+ Nerchio: i mean just long yeah
+ MSmits: or whatever that is
+ Nerchio: i misname bitset/bitboard sometimes i guess
+ MSmits: ohh ok
+ MSmits: if this is C4, then you need simd to speed further
+ struct: do you pre allocate memory nerchio?
+ struct: or is this not possible in java?
+ Nerchio: yeah
+ Nerchio: i create 300k states but idk how many get used like 100k probably
+ MSmits: in C# thats really hard somehow, think you need some tricks to preallocate
+ struct: is selection still a bottleneck?
+ jrke: does anyone know how to remove conda from default python version?
+ Nerchio: no struct
+ Nerchio: i will check what is but i think playouts now
+ Manchi_o6o7: guys, how can I count the number of stack frames for a function in C
+ ja_fica: You just also copy/paste the code from UTTT to c4?
+ Nerchio: <a rel="nofollow" class="external free" href="https://i.imgur.com/lSpL1aq.png">https://i.imgur.com/lSpL1aq.png</a>
+ ja_fica: I did and got rank 11 as soon as I submited xD
+ emh: hmm.. I am using 128 bit integers for my StC bitboards. do you think using 8 bits for rows instead of 6 bits would be faster? because of byte lookups instead of shifts?
+ emh: well I guess shifts are rather fast anyway, maybe even faster
+ MSmits: emh no idea, sounds like the kind of thing that needs to be tried
+ MSmits: is this the 128 bit thingy that doesnt work on msvc&#160;?
+ struct: yes
+ emh: <a rel="nofollow" class="external free" href="https://stackoverflow.com/questions/9068631/dereferencing-a-pointer-vs-shifting-for-bytes">https://stackoverflow.com/questions/9068631/dereferencing-a-pointer-vs-shifting-for-bytes</a>
+ MSmits:  i used that for HS
+ emh: HS?
+ struct: hypersonic
+ emh: ok
+ emh: "On any modern computer architecture, the shift operation will complete in a single CPU cycle."
+ MSmits: right
+ DomiKo: no from NN we got to optimizing C4?
+ DomiKo: so*
+ struct: grats on rank 1 btw
+ DomiKo: :grin:
+ MSmits: I think the best possible bot for C4, would be an optimized NN that uses about half the codesize and has the rest filled with opening book&#160;:)
+ DomiKo: yeah opening could be needed
+ jacek: so you need to breed top1 and top3 bots
+ MSmits: yeah
+ emh: struct did you catch my article?
+ emh: from today
+ struct: I saw, I will read it later
+ DomiKo: I like that my MCTS does random move for more than half rounds
+ emh: ok
+ struct: thanks for sharing it
+ emh:&#160;:)
+ MSmits: DomiKo which game?
+ DomiKo: C4
+ MSmits: wow, random for half of the game?
+ jacek: thats the point of mcts isnt it
+ DomiKo: not full random but really close
+ MSmits: oh ok
+ DomiKo: like every move get the same score 
+ MSmits: that can mean many things
+ MSmits: sometimes all moves are nearly equally good
+ MSmits: (clobber)
+ DomiKo: that random early games mean nothing
+ MSmits: well there are some moves that cause early losses, so i am sure there must be some exceptions for you too
+ jrke: i got something very cool for C4 and bitboards today
+ jrke: <a rel="nofollow" class="external free" href="https://github.com/PascalPons/connect4/blob/master/Position.hpp">https://github.com/PascalPons/connect4/blob/master/Position.hpp</a>
+ MSmits: also, people seem to be able to find easily, that move 3 is best
+ jrke: everything coded in bitboards
+ Nerchio: we have bigger board though
+ DomiKo: that one codeed in 128 bits
+ DomiKo: soo not that great
+ emh: hmm.. if shifts are so fast why does commenting out two of them bring perf from 2.25M to 2.5M.. hmm.. puzzled
+ MSmits: usually not a good idea to spend too much time on that sort of thing&#160;:)
+ MSmits: been there
+ emh: yes I know.. should do the algorithm and win the game instead hehe
+ emh: but I just get hooked on microoptimization
+ jacek: premature optimization is the root of all evil
+ emh: true. little evil me&#160;;)
+ Nerchio: is there any trick to finding out a list of moves available 
+ Nerchio: :D
+ MSmits: from a bitboard?
+ Nerchio: yeah
+ MSmits: for C$?
+ MSmits: 4
+ MSmits: hmm
+ Nerchio: i do emptyspaces &amp; topmask
+ Nerchio: which gives columns
+ jacek: there are only 512 possibilities
+ Nerchio: and then some shifts and other stuff to find out actual indexes
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/d274c7b5-adc8-4db1-82bb-878366f465f7">http://chat.codingame.com/pastebin/d274c7b5-adc8-4db1-82bb-878366f465f7</a>
+ MSmits: this is what i use for initial solution
+ MSmits: combined is the sombined bitboard
+ MSmits: so you cant play there
+ MSmits: after this you increment the moves
+ Nerchio: jacek what do you mean only 512?
+ MSmits: so dont keep using this
+ MSmits: const uint64_t COLUMN = 0x40201008040201;
+ MSmits: need that
+ jacek: oh i just use moves from 0..8, looking at top row. the actual move is done via shift
+ Nerchio: and how do you know how much to shift?
+ jacek: lookup heights for each each column
+ Nerchio: i do moves with direct index state.playerChips = state.playerChips | (1L &lt;&lt; cellIndex);
+ MSmits: i do too
+ Nerchio: MSmits thanks i will try to undestand it :D
+ jacek: since move generation/play/undo is not most consuming part of my code, i stopped caring :shrug:
+ MSmits: it just depends on how slow it is, at some point it becomes a problem, but C4 is fairly easy to sim and NN is always expensive
+ Nerchio: my move generation takes too long
+ MSmits: if you're going to some depth, keep your last move generation and increment each column by 1
+ MSmits: dont regenerate all moves each time
+ MSmits: mine isnt particularly fast either, but if you do it only once, it's fine
+ Nerchio: i do it every move atm but
+ Nerchio: i think i have an idea
+ Nerchio: i will just create a map of &lt;cellIndex, columnLong&gt; and i will be able to OR available moves with the columnLong
+ Nerchio: i think that sounds good? 
+ MSmits: a map?
+ MSmits: maps are really slow
+ MSmits: use an array then
+ Nerchio: true in this case array is fine
+ MSmits: i use lookups a lot for boardgames, could be a fine method
+ MSmits: did not do a lot of experimentation for C4. i spent half a day coding it and then ran meta mcts for weeks :P
+ MSmits: hardest part is to get the draws right in the solver
+ MSmits: since they are so rare
+ Nerchio: im just happy it works atm :D
+ jacek: and you are top1 java :o
+ Nerchio: i dont think anyone really tried this with java though lol
+ Nerchio: :joy:
+ Nerchio: next step: NN with Java? :wink:
+ MSmits: If you can do simd in java, i doubt it would underperform much
+ MSmits: NN could wreck everyone in java probably
+ sprkrd: I don't think SIMD is possible in plain Java
+ sprkrd: Anyway, Java is not that bad in terms of performance, is not like a trained NN will take that much time for evaluation, regardless of the language
+ jrke: so many on CG are learning NN now
+ jrke: inspiration reBless peformance in SC21&#160;? :thinking:
+ sprkrd: They're jealous of recurse success in spring2021 :D
+ struct: I dont think jealous is the right word
+ kovi: inspired
+ jrke: its inspiration for me as well
+ sprkrd: let me be playful with my choice of words :upside_down:
+ Nerchio: hmm
+ Nerchio: im inspired and disheartened lol
+ Nerchio: that "normal" methods are trash compared to good NN
+ sprkrd: I on the other hand dream with toppling the mighty NNs with non-learning approaches
+ jrke: which is best NN game to start with&#160;? according to you guys
+ kovi: search race
+ jacek: w00t
+ jrke: yeah i was also thinking SR to no opponent interaction just maximise yourself
+ MSmits: jrke if you want a 2 player game, oware is probably best
+ jrke: for SR trainning my average score is 0.2 after 450 matches is that bad
+ jrke: score i mean 0.2 checkpoints crossed per game
+ MSmits: lol
+ jrke: is that bad or really bad or worst?
+ MSmits: no idea, havent tried nn there
+ darkhorse64: does that mean that you never reach the end&#160;?
+ struct: that gives like 1/2 checkpoints max per game?
+ struct: 1-2
+ jrke: struct exactly
+ jrke: gettin 0 or 1 and rarely 2
+ PatrickMcGinnisII: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=UkgoSOSGrx4">https://www.youtube.com/watch?v=UkgoSOSGrx4</a>
+ DomiKo: SR would be good, because then you can upload that to CSB too
+ DomiKo: my NN got 13K points fairly easily on SR
+ jrke: can you tell me that what could be the average score after 450 matches of training
+ DomiKo: depend of what training method you use
+ jrke: RL with pytorch
+ DomiKo: after 450 full races?
+ jrke: yes
+ jrke: and i think my inputs are wrong
+ DomiKo: I guess you should be easily compliting races
+ jrke: what you use as inputs?
+ DomiKo: right now same as pb in forum about CSB
+ DomiKo: <a rel="nofollow" class="external free" href="https://forum.codingame.com/t/neural-network-ressources/1667/53?u=domiko">https://forum.codingame.com/t/neural-network-ressources/1667/53?u=domiko</a>
+ DomiKo: there is a dataset and you can train NN for that dataset
+ DomiKo: good to start with
+ jrke: why is he using randoms is that for explaination?
+ DomiKo: he explains how he made data
+ jrke: ah
+ VergilX: Hey I need help with a particular question. I tried many times, but my logic doesn't work in one case or another. Where can I ask for help?
+ jacek: you can ask here in the chat
+ dscientist: well, here
+ VergilX: But it's kind of difficult to explain
+ VergilX: You know, without knowing which question I'm doing
+ VergilX: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/medium/aneo">https://www.codingame.com/training/medium/aneo</a>
+ VergilX: This is what I'm doing
+ VergilX: I use Python 3,So basically, the logic I'm using here is I put a list for indicating the status of a light( True when it's green and False when it's red)
+ VergilX: I'll tell the rest, it'll take a while to type it out 
+ dscientist: structs , "Discussions" or the forum?
+ VergilX: Yeah, but nobody has posted anything that can help. They just talk about the way you can correct the approximations(the puzzle has an approximation challenge). But I'm having a problem with the math
+ VergilX: I thought the logic I'm using is right, but it seems only a few test cases are right
+ dscientist: I mentioned structs but the struct know (the moderator)
+ dscientist: I think
+ MSmits: ☕
+ MSmits: this is funny, there's a cup of coffee in my opening book
+ MSmits: also this ⏳
+ VergilX: Is the moderator the guy who made the puzzle?
+ MSmits: hmm, it gets translated to a chat emote in some way when i paste it
+ darkhorse64: your book is typed by an army of :monkey:s
+ struct: which puzzle?
+ struct: ah I didnt made any puzzle
+ MSmits: darkhorse64 might as well be&#160;:)
+ VergilX: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/medium/aneo">https://www.codingame.com/training/medium/aneo</a>
+ struct: nope
+ struct: that is made by cg
+ dscientist: i dont know, but he knows as help him.
+ MSmits: jacek do your NN weights have funny pictures in them like my book?
+ jacek: only chinese characters
+ MSmits: weird
+ MSmits: you must use a different interval for unicode
+ dscientist: ah, he came
+ jacek: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/c2f311c5-edfc-4a65-8675-c686d6230f2e">http://chat.codingame.com/pastebin/c2f311c5-edfc-4a65-8675-c686d6230f2e</a>
+ jacek: 擵昫昨旈敽撺
+ jrke: my weights also having chinese
+ darkhorse64: paste an example, MSmits
+ MSmits: sec 
+ MSmits: ᙯ৑՚ց✛➶ᠮ២᝕⟏◸⏧➂Ώḋ⟀࢈யሡ⟌Ὺࣿց✛➶ᠮ២᝕⟏◸⏧➂ᠯ③̗⁣⛱➾Ԅ౷ᔦ⟏❗־࣋✑⟏ᕞ঻⟏⟆࠷࢈᠚⁺࿭⟈၏◻њ⟏⟆։⟏ԗᠯ⓿἟༳⟋ᾅ֫➑⟏╢ṛ⟏⟃⟏⚂೽ҧ❼ᦿ⟊ᇯ฾⟏␙ੑ⚁ᚿත⟏ܿ⟏
+ jrke: mine -
+ MSmits: look, beach thingy
+ MSmits: i start at the place 'a'  + 95
+ MSmits: otherwise you hit some invalid stuff
+ darkhorse64: can we compare book size and weight size&#160;? (aka what is your book weight?)
+ MSmits: how do you mean weight?
+ jrke: CG chat server crashesh for me when i paste and enter my weights
+ MSmits: i have 13124 moves in around 8k characters
+ MSmits: if that helps
+ darkhorse64: NN weights. A bad joke obviously
+ MSmits: owwww
+ MSmits: :P
+ jacek: :no_mouth:
+ olaf_surgut: does 97.2&#160;% on mnist dataset is good result for handmade NN?
+ olaf_surgut: i see 99.8 best accuracy and think what to do better
+ jacek: training or test accuracy
+ olaf_surgut: test
+ jacek: handmade conv?
+ olaf_surgut: normal, without conv
+ jacek: then its very good
+ jacek: 99.8% is the best possible non-cheating
+ jacek: requires very good convnet, data augmentation, optimal parameters etc
+ olaf_surgut: so now it's time to play with it
+ Smelty: breh i cant make a 4 dimensional list somehow
+ jacek: just make 3 dimensional list and add time
+ Smelty: welp that what i tryin
+ Smelty: kinda
+ ddreams: just remember that time and the first three dimensions are connected relativistically
+ ddreams: hth
+ Smelty: hh
+ MSmits: also remember that the dimensions are curved
+ MSmits: so curve your list
+ Smelty: :eyes:
+ ddreams: nice to have such a helpful chat channel
+ Smelty: yep
+ Smelty: 2 dimensions for the board, 1 dimension for each possible change, and 1 dimension to remember to column
+ Smelty: *the
+ ddreams: what puzzle are you doing?
+ Smelty: connect 4 multiplayer
+ Smelty: trying out minimax
+ Kethryes: Is anyone in top10 using minmax, or is it only MCTS (or NN?)
+ DomiKo: only MCTS  and NN100% 
+ kovi: not sure about trictrac
+ DomiKo: hmmm
+ kovi: he tend to have sophisticated minmax (ab, iterativedeepening, etc)
+ Kethryes: Ok, so I have one of the best minmax around yay \o/
+ kovi: well done
+ Kethryes: (I really shoud try to switch to MCTS though :p)
+ Kethryes: How do you manage to use NN in coding game btw?
+ DomiKo: <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/neural-network-ressources/1667">https://www.codingame.com/forum/t/neural-network-ressources/1667</a>
+ DomiKo: you can read about it here
+ Kethryes: great! Thanks&#160;:)
+ ash_rick: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/1797737854fdee3ed5df9a26a54f55045e47f81">https://www.codingame.com/clashofcode/clash/1797737854fdee3ed5df9a26a54f55045e47f81</a>
+ struct: #clash
+ Smelty: ^
+ MACKEYTH: I'm trying to implement a MCTS for the first time, on Coders of the Caribbean
+ MACKEYTH: <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/bot-programming/coders-of-the-caribbean">https://www.codingame.com/multiplayer/bot-programming/coders-of-the-caribbean</a>
+ MACKEYTH: Not sure how to select enemy actions between levels
+ MACKEYTH: Any advice?
+ MACKEYTH: Maybe point me at a resource/tutorial?
+ Smelty: well you can try plugging it into your algo from opp's perspective
+ Smelty: and select the promising looking ones
+ Smelty: i.e. the moves that are best for opponent
+ MACKEYTH: Since enemy/player actions are evaluated simultaneously, would you have to create a leaf node for every possible combination of actions from both sides?
+ Smelty: idk :p
+ MSmits: MACKEYTH you can do that and it's called DUCT
+ MSmits: decoupled uct
+ MSmits: you won't get much depth with this and require a lot of memory
+ MSmits: but it works
+ MACKEYTH: Yeah, it'd be something like 16-25 children per node
+ MSmits: depends on the game, 16-25 is actually not so bad
+ MSmits: but doesnt cotc have more than 2 players at some point?
+ MACKEYTH: DUCT info links?
+ MSmits: duct becomes hopeless then
+ RoboStac: yeah, in the next league you'll have 3 ships each
+ MSmits: best to read the forum thread
+ MACKEYTH: Yeah, up to 6 agents in the higher leagues. I'm still in Wood
+ RoboStac: so then that number becomes huge
+ MSmits: then duct is useless MACKEYTH
+ MSmits: you could try some form of sequential mcts, but maybe it's better not to use mcts at all
+ MACKEYTH: I have discovered that the manual movement commands work in Wood, they're just not provided in the statement
+ MSmits: oh, thats nice
+ MSmits: I dont know if i even got out of wood in that game
+ MACKEYTH: I'm finding it difficult to avoid mines and collisions using only MOVE x y for navigation
+ MACKEYTH: The forum thread linked from CotC's bot programming page has &lt;10 posts. Is there a better thread for the game somewhere?
+ Smelty: rip
+ RoboStac: look for the contest one rather than the multi version
+ RoboStac: <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/coders-of-the-caribbean-feedback-strategies/2746">https://www.codingame.com/forum/t/coders-of-the-caribbean-feedback-strategies/2746</a>
+ MACKEYTH: That's much better, thx. Game's discussion link should go to that topic instead.
+ emh: I split my loop into two: memory access and processing. That was around half as slow. Probably due to no processing while waiting for memory.
+ emh: now I am thinking should I use two threads, one for memory access and one for processing. or coroutines. or something. or just revert it to how it was..
+ MACKEYTH: Has anyone done benchmark tests to see if a particular language has a processing speed advantage on CG?
+ icecream17: wow, my new bot finally beat my old bot... <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/562331625">https://www.codingame.com/replay/562331625</a>
+ MSmits: MACKEYTH c, c++ and rust are fastest
+ MSmits: which one wins depends on the exact use case and i would not be able to give you examples
+ MSmits: not all competitive coding on CG needs the fastest language though
+ MSmits: the more complicated a game is (more variables, strategy etc.), the more important a well written AI is compared to the choice of language
+ MSmits: for simple games, use fast language or accept being out of top 10
+ MSmits: but no worries, if you like a game, code in whatever language, go as high as you can. You can always convert to c++ later. I did, it's not that hard
+ MACKEYTH: I'm not really fluent in anything but Java
+ MSmits: i wasnt either, I wrote a C# bot for uttt, then converted to C++ in two days, this includes reading on what pointers are and all that sht
+ MSmits: these are two full time days thpugh, so 16 hrs
+ 1415495: MSmits: not fun, no troll bait in your answer&#160;;)
+ MSmits: it helps if you dont use all sorts of fancy stuff in your language
+ MSmits: sorry&#160;:)
+ 1415495: it was the perfect question for one&#160;:)
+ MSmits:  i had like 1 class in my C# bot and the rest was just loops, arrays and functions and such
+ MSmits: ah well, lurk in chat all day like jacek and you have tons of opportunity fenrir&#160;:)
+ 1415495: lol
+ jacek: oO
+ 1415495: but yeah, basically the less fancy stuff (in the perf critical path) the better for perf, and that include anything related to dynamic memory (so no or very few object creation in the critical path)
+ 1415495: and in 'high level' language they are sometime well hidden unless you know the language well
+ MACKEYTH: I am getting the impression that the Wood leagues in CotC are unusually difficult compared to other bot programming games
+ HASCII: hello guys ü
+ MACKEYTH: HI
+ MSmits: MACKEYTH not sure about cotc, but wood leagues aren't all easy
+ MSmits: sometimes they take some work
+ MSmits: and sometimes just a few lines of code
+ Kethryes: Is there a good way to copy/paste all code from the CG interface at once&#160;? When I select all and copy I get only a reduced version with "..." in the middle.
+ NomNick: ctrl+A&#160;? 
+ aCat: need to access directly from the CG relplay data?
+ Kethryes: I mean, I select all (no problem) but when I paste, I only get a small fraction of what is selected...
+ Kethryes: (using Firefox btw, maybe I should try with chrome...)
+ struct: you mean stderr stuff
+ struct:&#160;?
+ Astrobytes: sounds like you're outputting too much to stderr with the ...
+ Kethryes: No just selecting my code to copy it to a text editor
+ Astrobytes: From the CG IDE?
+ Kethryes: Yeah
+ Astrobytes: That is not something I can reproduce I'm afraid
+ Boman: I'm not having an issue either
+ Astrobytes: Which text editor are you pasting into?
+ Kethryes: Ok, probably something with my Firefox then thx
+ Kethryes: anywhere really
+ Astrobytes: Very strange issue
+ Kethryes: Yeah it's weird, it's as if it copy a collapsed version of the code (but I can see everything uncollapsed on the IDE)
+ ja_fica: MSmits, you use UCT?
+ cw477: i need to get good at javascript, like now. coming from c#. any tups
+ cw477: tips
+ cw477: trying clash of code but i keep switching back to c#
+ LazyMammal: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/01364123-b204-4eb9-aa93-ec016e13ff37">http://chat.codingame.com/pastebin/01364123-b204-4eb9-aa93-ec016e13ff37</a>
+ LazyMammal: Too many words again. bah
+ cw477: LazyMammal well said man, that makes sense - will heed your advice!
+ LazyMammal: Cheers.  I always try to follow the "rule of fun".  If I can't motivate then I must be doing it wrong.  Just need to change it up :D
+ cw477: Yep!! Definitely&#160;:)
+ 1mmunity: amogud

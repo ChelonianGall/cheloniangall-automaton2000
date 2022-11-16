@@ -1,0 +1,1439 @@
+ Galbie: dank memes
+ Koldunas: hello
+ zTTK: sup
+ Drugou: Can I change a PHP language version to last or not?
+ DaNinja: php here is version 7.3.9
+ DaNinja: <a rel="nofollow" class="external free" href="https://www.codingame.com/faq">https://www.codingame.com/faq</a>
+ rafietje: hu
+ rafietje: hi\
+ jacek: :hu:
+ Tanny2009:&#160;?
+ Uljahn:&#160;:?:
+ Uljahn: :Automaton2000:
+ Automaton2000: i don't think i will use it
+ Shadowtick: morning everyone
+ Tanny2009: i woke up at exatcly 7:00
+ Tanny2009: and im still tired :sleeping:
+ Shadowtick: I woke up at exactly 6:00 am
+ Shadowtick: and I have a cup of coffee to get me through my day
+ Shadowtick: so I will be awake :3
+ Tanny2009: 7:00 MT
+ Tanny2009: moutain time?
+ Shadowtick: hold on let me go get a clock for the time where I am
+ Tanny2009: k
+ Tanny2009: im in canada so if anyone is in usa or a different country than it is a different time'
+ Shadowtick: I sent it to you
+ Tanny2009: where?
+ Tanny2009: oh ok'
+ Hravran: 15:35
+ LinhT.Nguyen: Hello Automaton2000
+ Automaton2000: but i want to learn more
+ LinhT.Nguyen: What do you want to learn Automaton2000
+ Automaton2000: because it takes time to get #1
+ LinhT.Nguyen: What about you AutomatonNN
+ DomiKo: AutomatonNN [*]
+ DomiKo: Automaton2000 where is AutomatonNN?
+ Automaton2000: i don't think that i am getting the error
+ Scarfield: toad kicked NN
+ jacek: toadfield doesnt like to be hilighted
+ MSmits: hey, I was gonna code your jacekmax today jacek... but then I had another idea  to speed up my endgame book :P
+ Marchete: what's jacekmax? :D
+ MSmits: it's jaceks version of best first minimax
+ MSmits: backpropagating the best eval 
+ Astrobytes: <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/55004/best-first-minimax-search-with-uct">https://www.codingame.com/playgrounds/55004/best-first-minimax-search-with-uct</a>
+ MSmits: so like mcts, but instead of doing wins/visits you just take the eval
+ MSmits: it's almost EPT depth 0, except with that you add up all eval scores like you do with win scores
+ MSmits: in this case you replace them minimax style
+ MSmits: i think i can code it in an hour or two at the most
+ MSmits: Astrobytes I had an idea to fix my cache issue
+ Astrobytes: Oh yeah?
+ MSmits: i was storing the information per gamestate as 180 values, one for each turn
+ MSmits: so turn 20-180
+ MSmits: err 20-200
+ MSmits: but when i am doing retrograde I am doing all states with 1 turn left, then all states with 2 turns left, then all states with 3 turns left etc.
+ MSmits: so its better if all states with 1 turn left are close together
+ MSmits: then when you're doing 2 turns, you can look the 1 turn stuff up fast
+ Astrobytes: yes for sure
+ Astrobytes: that makes sense, I thought you'd be doing something like that already!
+ MSmits: apparently not!
+ MSmits: then i started thinking more. I stopped my local database at 15 seeds, because beyond that i couldnt keep everything in memory
+ MSmits: but what i didnt realize is that i only need to keep the last turn in memory
+ MSmits: and maybe the current turn
+ MSmits: so thats 100 times less memory
+ MSmits: so it's the same issue really
+ MSmits: I need to do 1 turn, then write to HD
+ MSmits: then do another etc.
+ Astrobytes: Yes, storing everything seems pretty redundant
+ MSmits: i was thinking in terms of seed databases, seed 1, seed 2 etc.
+ MSmits: but what i really should have been doing was turn databases
+ MSmits: I calculate I can do my local db up to 25 seeds with this improvement
+ Astrobytes: jeez man, that's something
+ Astrobytes: Have you started on it yet?
+ Astrobytes: (so much for "I'm done with Oware" :P )
+ MSmits: nah, I just thought of it on my way home from the train :P
+ Astrobytes: Keep me updated, it sounds promising
+ MSmits: yeah, it might take a while to calculate, so i might need a pause/resume function
+ Astrobytes: that's trivial enough
+ MSmits: also, HD space.  I need to think about really compactify, because it's gonna be big
+ MSmits: 200 billion values
+ MSmits: mmh thats too big i think :P
+ Astrobytes: you're not compressing it already?
+ MSmits: well it's not very compressible I think
+ MSmits: I will just serialize it in as few bits as i can
+ MSmits: 200 billion times 6 bits
+ MSmits: mmh that's actually possible
+ MSmits: uses half my HD though
+ Astrobytes: lol that poor HD
+ MSmits: i might not go as far as 25, but we'll see
+ Astrobytes: It might not be worth it
+ MSmits: yeah. By the way. I think a supercomputer could solve this game easily
+ MSmits: just need 200 TB of space
+ MSmits: it's like the paper about solving Awari. It has less than 1 trillion states if you dont consider the turn
+ MSmits: with the turn it's 200 trillion
+ MSmits: but that solves the infinite loop problem, because turns never go beyond 200
+ Astrobytes: Maybe you should contact the authors&#160;;)
+ MSmits: nah, it won't be interesting to them, the 200 turn limit is artificial
+ MSmits: it's just to deal with CG limits
+ MSmits: but it's essential in how you play this game
+ Astrobytes: Still interesting enough I'd say
+ Astrobytes: They might find you 200TB of storage and a supercomputer :P
+ MSmits: They are Romein and Bal, I think they lost interest. their database is no longe rup either
+ MSmits: someone claimed they made mistakes
+ MSmits: but it's impossible to check now
+ Astrobytes: oh right, yeah, I remember this discussion from before
+ MSmits: anyways, gonna work on the live bot first, before i try and tackle the  issue of the local db
+ Astrobytes: Make an article like the CSB Nash-DQN one
+ MSmits: Yeah, I might
+ Astrobytes: when [if] you finish
+ MSmits: I don't think anyone wrote anything about endgame DB's before
+ MSmits: on CG I mean
+ Astrobytes: I've not seen anything no
+ MSmits: I did two of them now and I think I have the biggest one for either game. 
+ MSmits: 9 seed oware and 12 squares Bandas
+ MSmits: I think the next biggest for bandas is 9
+ Astrobytes: who has that?
+ MSmits: Nagrarok, I was told
+ Astrobytes: ah ok
+ MSmits: interestingly... I dont think karliso has one
+ MSmits: so he's wrecking us in some mysterious way again
+ Astrobytes: He's just using the karl iso magic again 
+ MSmits: yeah
+ Astrobytes: is bandas based on a real game btw?
+ MSmits: I think so, but I dont remember which. 
+ Astrobytes: I remember searching for it but don't think I found anything
+ MSmits: An AI multiplayer game made with the Codingame SDKBased on Frutiparc Frutibandas gameAssets by Kenney Vleugels
+ eulerscheZahl: i found <a rel="nofollow" class="external free" href="https://boardgamegeek.com/boardgame/14469/banda">https://boardgamegeek.com/boardgame/14469/banda</a>
+ eulerscheZahl: which is now what i was looking for
+ eulerscheZahl: *not
+ jacek: karlisomax?
+ Astrobytes: ah thx MSmits
+ MSmits: <a rel="nofollow" class="external free" href="https://imgur.com/a/exwUIOF">https://imgur.com/a/exwUIOF</a>
+ MSmits: all i could find
+ Astrobytes: MonteKarlisoTreeSearch
+ MSmits: good one
+ MSmits: not to be confused with MadKnightTreeSearch
+ jacek: MonteCegTreeSearch
+ Astrobytes: Indeed
+ Astrobytes: hahaha 
+ MSmits: I imagine that's an algorithm to find a tree in a forest
+ eulerscheZahl: MonteCegTumbleSearch
+ Astrobytes: lol
+ Astrobytes: PlumTreeSearch, for his Prune Array
+ Astrobytes: (prunes are dried plums)
+ MSmits: he has a prune array?
+ Astrobytes: He did yes
+ Astrobytes: Only he knows what it did or what it was
+ MSmits: you get an interesting combination of results if you google prune array
+ MSmits: graphs, construction tools and hygiene products
+ jacek: it was his misunderstaing of how alpha beta works
+ eulerscheZahl: next time he's online remind me to suggest him caching array lookups
+ Astrobytes: ah yes, that was it jacek
+ Astrobytes: cegpracache :D
+ MSmits: thats maybe a real name
+ Astrobytes: that was genius that one
+ MSmits: yeah
+ MSmits: nope it's unique
+ MSmits: google has no idea what that is
+ MSmits: which is impressive
+ Astrobytes: I did find a Pracache Ulvanolanit
+ MSmits: poor guy
+ MSmits: or&#160;?
+ Astrobytes: no idea
+ jacek: by HHD you really mean HDD with spinning motor?
+ jacek: HDD~
+ MSmits: me? I dunno, I have a SSD and one of those old ones on my system
+ jacek: alright
+ jacek: i almost felt pity and was gonna send you fast SSD
+ MSmits: seems like i have a SSD of 500 gb,and two of those spinning motor things, one of 500 GB and one of 1 TB
+ MSmits: maybe I'll start a service where you send me a SSD and I send you one back with a oware seed DB :P
+ jacek: then youll get owned by piracy. ill use that to *seed* torrent
+ KiwiTae: i dont have a computer&#160;:(
+ MSmits: gonna make some mad :moneybag:
+ MSmits: who would not want an oware seed db
+ MSmits: lol jacek&#160;:)
+ MSmits: would be funny to see a torrent for an endgame db
+ jacek: i bet there are for chess
+ MSmits: KiwiTae, you are doing CG on your phone?
+ MSmits: jacek no doubt, maybe even checkers
+ Astrobytes: XxX-SeedDB-bY-5m1751.torrent
+ Shadowtick: hello
+ MSmits: though there is no need, that checkerboard website shares checkers db up to 8 pieces
+ MSmits: 10 pieces uses insane HD space
+ MSmits: Astrobytes that doesnt look SFW :P
+ Astrobytes: lol
+ Shadowtick: what did I just walk into???
+ ZarthaxX: a beautiful place
+ MSmits: you say that every day Shadowtick
+ MSmits: maybe by now you should have the answer :P
+ Astrobytes: a discussion about seed databases, torrents and storage
+ Astrobytes: *endgame databases
+ Shadowtick: I know but now I am actually confused about it even more than the last ones MSmits
+ MSmits: ah ok. I could explain it so you'll understand it, but I am afraid you'll leave halfway through
+ Astrobytes: Please explain it.
+ Astrobytes: :P
+ ZarthaxX: Annoybytes
+ Shadowtick: well I am gonna be coding and have the chat shrunk down
+ Shadowtick: hidden*
+ MSmits: I don't fit in a shrunken chat, unfortunately
+ Astrobytes: Zarthonium
+ ZarthaxX: wall of text smito :P
+ maras: Is there a way to fight against the boss using the CGBenchmark? Does the boss have an ID or something?
+ Shadowtick: I meant I am gonna hide ittt
+ MSmits: sure, flee again
+ Astrobytes: ITTT? Infinite Tic Tac Toe?
+ MSmits: maras, there is, i dont remember
+ MSmits: maybe it says on the website
+ Astrobytes: it's on the forum somewhere
+ MSmits: it has some player id
+ MSmits: i think
+ maras: That's great news, I'll try to find it then
+ jacek: :o
+ Astrobytes: maras:<a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/cgbenchmark-tool/2956/27">https://www.codingame.com/forum/t/cgbenchmark-tool/2956/27</a>
+ MSmits: Astrobytes uttt is already ittt, it never ends
+ Astrobytes: fair point
+ MSmits: Yes you can. You have 2 options&#160;:
+ MSmits: Find the replay of a game with the boss. Open your browser console and look at the JSON response, it contains the agentId of the boss
+ Astrobytes: that's what I just linked :P
+ maras: :heart:
+ MSmits: yeah
+ maras: thanks a lot
+ MSmits: I saved him the click 
+ Astrobytes:&#160;:)
+ MSmits: oh you linked the specific part of the forum thread
+ MSmits: i thought i just lucked out and it popped up in the rigth place :P
+ MSmits: this linking is too advanced for me
+ Astrobytes: no it saves the post number in the url
+ Astrobytes:  as you scroll down the page
+ MSmits: ahh nice
+ Astrobytes: yeah, handy
+ Shadowtick: alright Imma just go so have a great week everyone
+ Astrobytes: and you
+ MSmits: yeah, keep thinking about what you ran into
+ MSmits: maybe tomorrow you'll know
+ MSmits: otherwise just ask us again
+ Astrobytes: Shadow tick walks into a bar. Says 'ouch'.
+ DJBouncyPirate_fc6f: 你
+ MSmits: DJBouncyPirate_fc6f that's just depth 0, not much of an opening book tbh
+ jacek: thats neat compression
+ jacek: it fits 49 seeds of uttt
+ MSmits: i think we broke jacek, he's mixing up games now
+ Astrobytes: lol
+ ZarthaxX: wtf
+ Astrobytes: My pods keep running out of sanity.
+ MSmits: lol
+ MSmits: let's make these jokes as "inside" as possible
+ MSmits: if ZarthaxX doesn't get it, we're doin good
+ ZarthaxX:&#160;:(
+ Astrobytes:   :D
+ MSmits: :P
+ ZarthaxX: it's easy as i havent been here for months heh
+ ZarthaxX: but good luck
+ MSmits: you didnt get the opening book joke?
+ MSmits: I can explain, wont be as funny ofc :P
+ Astrobytes: HumouraxX
+ MSmits: I thought you were only doing this with scarfield
+ MSmits: or was this because ZarthaxX was gone
+ MSmits: is scarfield ZarthaxX replacement?
+ Astrobytes: No, it started with AnthraxX
+ MSmits: ohh ok
+ jacek: wooo new puzzle of the week
+ Astrobytes: ScarthaxX :o
+ MSmits: that sounds like a weird mafia thing
+ Astrobytes: and Zarfield
+ ZarthaxX: what opening book joke?
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/697a8695-2447-4392-bd82-8173a661a0a5">http://chat.codingame.com/pastebin/697a8695-2447-4392-bd82-8173a661a0a5</a>
+ MSmits: ffs
+ MSmits: DJBouncyPirate_fc6f 05:04PM你
+ ZarthaxX: wat
+ MSmits: MSmits 05:04PMDJBouncyPirate_fc6f that's just depth 0, not much of an opening book tbh
+ ZarthaxX: ah 
+ ZarthaxX: compressing your opening book with special chars
+ MSmits: yeah, i thought you would have gotten that one
+ ZarthaxX: i lived that part of cg :P
+ MSmits: oh how did you use this?
+ MSmits: I struggled with it over the weekend. Finally managed to get that working, but it wasn't easy
+ ZarthaxX: i meant i saw a lot of opening book compression shenanigans haha
+ MSmits: ah ok yes
+ ZarthaxX: i never did it myself
+ Astrobytes: you gonna join the contest Zartho?
+ jacek: nowadays is NN compression
+ MSmits: I never needed to before, because my opening books were always small
+ MSmits: but endgame books are massive
+ ZarthaxX: Astrobytes maybe
+ Astrobytes: cool cool
+ MSmits: jacek how does the size of the NN scale with the time needed to train it until it tapers off?
+ MSmits: say if you used the same NN, but twice as many constants
+ ZarthaxX: the problem is that uni is gonna get hard on those days sadly
+ Astrobytes: ah yeah, well, hopefully you find a bit of time
+ MSmits: I start a new course (as a student) the day after the contest starts
+ ZarthaxX: yeah, i will jsut abandon my team for the subject proyect
+ ZarthaxX: :D
+ jacek: i actually never measured. i assume about 100-200x position vs the NN's number of weights
+ MSmits: but I probably wont get much home work 
+ ZarthaxX: MSmits nice timing
+ MSmits: it's about game design
+ MSmits: think they will make us do stuff in unity
+ jacek: i think have about 52k weights for oware
+ ZarthaxX: oh, why did you choose that?
+ MSmits: what do you mean by 100-200 x position?
+ Astrobytes: you'll walk that if it's Unity then MSmits
+ MSmits: ZarthaxX not that much to choose from, other stuff would be more basic. At least game design sounds fun, i need some credits
+ ZarthaxX: i see
+ MSmits: yeah i used unity before
+ MSmits: even went into their compute shader stuff
+ MSmits: lots of tutorials too
+ Astrobytes: Yeah I remember
+ MSmits: it's a cool tool
+ Astrobytes: And your sphere?
+ jacek: nowadays i use somehwat supervised learning. i play random games, take out the position and let the current bot analyze for few depths for each of them
+ Astrobytes: It was a sphere right
+ ZarthaxX: you will be into gaming for 10 days then :P
+ MSmits: oh that thing is still making me a euro a month":P
+ MSmits: yeah a sphere
+ Astrobytes: :D
+ jacek: so for oware i can do 5 millions position and i think it will saturate it
+ MSmits: I used the money for that useless D &amp;B paper
+ jacek: :O
+ jacek: hint: sci-hub, libgen
+ ZarthaxX: D&amp;B&#160;?
+ MSmits: nah this one was not available
+ MSmits: had to spend $$
+ MSmits: could not resist
+ Astrobytes: oh didn't know libgen
+ MSmits: dots and boxes ZarthaxX
+ ZarthaxX: there is a paper for a game of cg?
+ Astrobytes: we've got loads of board games now Zarthabsentee
+ MSmits: umm, cg has checkers too
+ ZarthaxX: i know Astrobytes it's too much :D
+ MSmits: I think checkers has thousands of papers :P
+ jacek: hmm <a rel="nofollow" class="external free" href="https://arxiv.org/abs/2006.14979">https://arxiv.org/abs/2006.14979</a>
+ MSmits: more citations because it's easier to find and read stuff?
+ Astrobytes: Makes sense. Most big journals are only exploitative money making machines
+ jacek: ZarthaxX its bit of experimentation and cg limits. there are 12 houses and 2 scores. 2 * (12 * 31 + 2 * 25) * HIDDEN_UNITS + HIDDEN_UNITS
+ eulerscheZahl: and soon we'll have minesweeper
+ MSmits: hmm jacek, have you not considered doing it scoreless&#160;?
+ Astrobytes: that looks awesome btw euler, you did a great job on that&#160;:)
+ jacek: nah
+ MSmits: since the history of any gamestate has no effect on what the best move is
+ ZarthaxX: jacek what are you talking about?
+ eulerscheZahl: thanks. even got a win98VM and installed Netscape + WinRAR on it :D
+ MSmits: so no matter what the score is, the best move is the smae
+ MSmits: same
+ Astrobytes: lol, now that's dedication! 
+ MSmits: damn eulerscheZahl
+ eulerscheZahl: couldn't find a way to go online with the VM
+ jacek: ZarthaxX ahh you were talking to MSmits, sry
+ eulerscheZahl: so i created an ISO file and inserted that
+ ZarthaxX: okey haha
+ ZarthaxX: optimization minesweeper toad?
+ jacek: MSmits i want to keep it simple for now. game state -&gt; chance of winning. so far it works. if i get rekt, ill try another approach
+ eulerscheZahl: medium puzzle
+ ZarthaxX: oh ok
+ MSmits: ah ok, sure chance of winning does need the score
+ ZarthaxX: isn't there one already?
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/55861285a82c4ae39d2abda5907c5d3cb39e">https://www.codingame.com/contribute/view/55861285a82c4ae39d2abda5907c5d3cb39e</a>
+ eulerscheZahl: yes
+ MSmits: this actually explains something i found with your bot
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/expert/minesweeper">https://www.codingame.com/training/expert/minesweeper</a>
+ eulerscheZahl: but mine has a working windows clock that shows the real time :D
+ MSmits: I do a scoreless state, and your bot does sometimes do a different move if it came to the same state by a different route (with possibly a different score)
+ ZarthaxX: how did you mix minesweeper with that interface wtf
+ eulerscheZahl: you can turn it off, check the settings
+ ZarthaxX: did you mimicate win98 game?
+ eulerscheZahl: i took a screenshot from minesweeper on a Win98 and drew over it
+ ZarthaxX: ah okey haha
+ MSmits: MimicateMore than just mimicking someone. Greater than just imitating them.
+ MSmits: had to urban this one
+ MSmits: I thought you made it up
+ ZarthaxX: i thought it existed :P
+ MSmits: apparently it did
+ Astrobytes: A case of mimesis
+ jacek: mitochondrium is a powerhouse of the cell
+ Astrobytes: lol, we need a dictionary of Zarth
+ jacek: thank you, school
+ Astrobytes: *mitochondrion
+ ZarthaxX: lmao
+ eulerscheZahl: desoxyribonucleinacid
+ MSmits: thanks Astrobytes, I'll correct the physics errors
+ Astrobytes: *deoxyribonucleic acid
+ MSmits: are we testing Astrobytes now
+ Astrobytes: lol MSmits
+ eulerscheZahl: yes, autocorrect made that red. but failed to offer a better version
+ MSmits: giraphe
+ jacek: proffessor
+ Astrobytes: haha I like giraphe better than giraffe
+ MSmits: me too
+ Astrobytes: professor
+ MindController: Guys please help
+ MindController: A.erase(A.begin() + 0);
+ MindController: Im getting segmentation fault with this line
+ eulerscheZahl: what's A.size()?
+ MindController: 2
+ eulerscheZahl: hm :thinking:
+ ZarthaxX: you sure
+ AntiSquid: besser = better btw :P
+ eulerscheZahl: i don't see what could be wrong with this line then. maybe it segfaults somewhere else before?
+ eulerscheZahl: i don't get that AntiSquid. you are first only hit when I crtl#f for besser (and me now)
+ eulerscheZahl: and we got a useless badge from the hacktober ctf
+ Astrobytes: oh you did another ctf?
+ eulerscheZahl: wasn't as fun as the first
+ eulerscheZahl: but we learned that zeno is a great teammate for that kind of contest
+ AntiSquid: what do you mean euler?
+ eulerscheZahl: too windows heavy. and new tasks revealed late into the contest
+ Astrobytes: that figures, he's good with numbers and crypto
+ eulerscheZahl: and linux
+ AntiSquid: ah yes that was bullshit :D
+ eulerscheZahl: oh and the first questions that you had to answer to unlock the rest
+ AntiSquid: 15:00 - 16:00 is when new puzzles got revealed
+ eulerscheZahl: some research about the sponsors needed
+ Astrobytes: eugh
+ eulerscheZahl: how many core values does sponsor X list on the website, seriously?
+ AntiSquid: reply challenge was really good imo
+ Astrobytes: lol, that's really lame
+ AntiSquid: some stuff annoyed me about reply, like the wording, but it was still far better
+ eulerscheZahl: was only the first few. but already dropped my motivation when the real challenge started
+ Astrobytes: was it just the 3 of you for reply or did Ille's colleague also join in the end?
+ AntiSquid: this ctf seemed random, amateurishly organized
+ eulerscheZahl: on paper ille too. but didn't play
+ Astrobytes: why not?
+ AntiSquid: zeno is really good at that stuff
+ AntiSquid: he hard carried us
+ eulerscheZahl: oh and the first hour the website was really laggy
+ eulerscheZahl: i didn't even see the tasks that zeno solved until the next day
+ eulerscheZahl: went to bed and the next day some new tasks were there. and already solved
+ AntiSquid: ya me and zeno stayed up and talked
+ AntiSquid: was going to decompile a binary and zeno just ran a one-liner search on it to make it give him the flag ... lol
+ eulerscheZahl: saw the chat the next day. but didn't read all of it as the tasks were solved
+ AntiSquid: you know the flag3.txt challenge where i used the password to login to the other user? apparently you were supposed to find a file that has a permission to access the other user's file and run that on the flag3 lol
+ AntiSquid: <a rel="nofollow" class="external free" href="https://github.com/B34nB01z/writeups/tree/master/2020/Hacktober/Talking%20to%20the%20Dead%203">https://github.com/B34nB01z/writeups/tree/master/2020/Hacktober/Talking%20to%20the%20Dead%203</a>
+ eulerscheZahl: ah, that's what I would have expected. some SUID or alike
+ eulerscheZahl: you could write your own post mortem on that task
+ AntiSquid: i did, a quick one for fun wanted to see if anyone comments / how they react
+ eulerscheZahl: i see <a rel="nofollow" class="external free" href="https://ctftime.org/writeup/24264">https://ctftime.org/writeup/24264</a>
+ eulerscheZahl: somehow i assumed you just set the username when connecting via ssh already
+ AntiSquid: i connected without setting a username, there was none specified and i didn't even specify a port since -p 22 didn't work
+ eulerscheZahl: oh, i thought it was ssh user@machinename
+ eulerscheZahl: i logged in but just copied the details
+ AntiSquid: i did ssh machinename 
+ AntiSquid: that's the only thingi remember working
+ eulerscheZahl: now it's offline already, can't even see the tasks anymore
+ AntiSquid: or maybe we are talking about diff puzzles? either way the flag one went down for an hour
+ AntiSquid: ya it's sad ... wonder what the 5k worth of points tasks even were
+ eulerscheZahl: we are talking about the same task. but meh, let's end this discussion about a semi-interesting contest
+ eulerscheZahl: back to watching last week tonight
+ AntiSquid: reply was great, wanna try the investment challenge on their site, curious what it is about :D
+ AntiSquid: oh shit . just remembered i signed up for the other challenge on sunday and didn't continue it LOL
+ colinemonds: i hate it when you're one character behind on "shortest code" coc and the winner didn't share their code
+ AntiSquid: why do they need to share if they don't want to&#160;?
+ colinemonds: they don't have to
+ colinemonds: i can hate things without hating the people
+ Astrobytes: you can always pm them
+ AntiSquid: pm them your hate
+ Begalkantin: Gue baru belajar bang
+ Astrobytes: lol, not quite what I had in mind
+ Astrobytes: Ruthless mode today squiddy? :D
+ Begalkantin: Hai dude
+ eulerscheZahl: AutomatonNN still afk
+ Begalkantin: KOntol
+ Astrobytes: Stop it Begalkantin
+ Begalkantin: dddd
+ Astrobytes: yes euler, appears so
+ Astrobytes: Ooh I am being schooled in naughty Indonesian words in PM
+ Astrobytes: Every day I learn
+ eulerscheZahl: pay attention and use them for the next troll
+ Begalkantin: NGENTOT MEMEK KONTOL BABI BANGSAT PILAT PELER ANJING TAI
+ Astrobytes: ban next time
+ eulerscheZahl: i get English insults in PM
+ Astrobytes: lol
+ programistination: wtf this website is full of bots
+ Astrobytes: Yep. Especially the multiplayer section :P
+ eulerscheZahl: in clash of code it's a replay of previous games from real humans
+ programistination: wtf
+ programistination: this is some number one BS
+ Begalkantin: FUCK OFF ALL
+ Begalkantin: HAHAHAHA
+ eulerscheZahl: your turn again Astrobytes
+ programistination: but this is some next level bs
+ eulerscheZahl: banned *RIP*
+ Astrobytes: There we go. Peace and quiet.
+ programistination: I thought there are lots of ppl playing
+ eulerscheZahl: well, do you want to wait 10min without anyone joining at bad times?
+ programistination: yes
+ programistination: remove the fucking bots
+ Astrobytes: programistination: the bots only play when there aren't enough human players
+ eulerscheZahl: the bots jump in to fill the gap and leave again if real players join
+ programistination: ik
+ programistination: but remove them
+ programistination: xD
+ programistination: jk
+ eulerscheZahl: that would turn clashing into a single player game at some hours of the day
+ Astrobytes: Which kind of defeats the purpose
+ MadKnight: are u sure bots only play when not enough players&#160;?
+ eulerscheZahl: there are some twitch streamers clashing. with lots of real players competing at the same time (around 50)
+ Astrobytes: Pretty sure, it's what they said on the blog article right?
+ Astrobytes: CG bots that is, I'm sure there are user bots too
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.twitch.tv/codinggarden/videos">https://www.twitch.tv/codinggarden/videos</a>this one plays clash of code occasionally
+ MSmits: so hey. What's the best way to serialize an array of 1249046562 ints
+ MSmits: bytes i mean
+ MSmits: or at least store them on HD in a readable way
+ MSmits: (without decompressing the whole thing every time)
+ Astrobytes: New optim game
+ Astrobytes: :P
+ eulerscheZahl: also depends on your file system i think. how easy is it to access a random part of the file?
+ MSmits: no i was talking about my oware seed db :P
+ eulerscheZahl: oh, more insults in the private messages
+ eulerscheZahl: all caps now
+ Astrobytes: lol, the anger is real
+ MSmits: what did you do eulerscheZahl
+ Astrobytes: I know MSmits!
+ eulerscheZahl: kick
+ eulerscheZahl: and astro went for the ban after
+ MSmits: that hurts, you play soccer
+ Astrobytes: He got 3 kicks and a ban
+ MSmits: teamwork
+ eulerscheZahl: by 3 different mods
+ eulerscheZahl: do i want to *** his ***?
+ MSmits: is this Begalkantin?
+ eulerscheZahl: yes
+ Astrobytes: And we're learning Indonesian words
+ Astrobytes: yeah
+ MSmits: oh ok
+ MSmits: so you used him for his knowledge and then discarded him?
+ Astrobytes: Hmm, he kind of bestowed the knowledge upon us without our consent
+ MSmits: I see
+ MSmits: sometimes you don't know what you're missing until it's handed to you
+ Astrobytes: I think I know enough to get beaten up by strangers in Indonesia now
+ MSmits: sounds useful
+ Astrobytes: #lifegoals
+ MSmits: we all have our bucketlist i guess
+ Astrobytes: back to your issue, is it not easier to store in an actual database? OR that's too slow?
+ Astrobytes: Also are you serialising it by hand currently or using an inbuilt feature?
+ colinemonds: I mean, "serializing" a bucket of bytes literally just means taking it as it is
+ colinemonds: so what's wrong with just calling open() and spitting it all out
+ colinemonds: databases, sheesh! bac 
+ colinemonds: back in the day we had to hand-roll our floppy drivers
+ colinemonds: barefoot and uphill, both ways
+ Astrobytes: don't worry, MSmits loves doing things like that
+ MSmits: colinemonds thats exactly what i need
+ MSmits: but i also need to be able to go into that file and retrieve a byte at a specific position
+ MSmits: not sure what this open() thing is though
+ MSmits: a value will use 6 bits, so i will retrieve two consequtive bytes actually and take part of each
+ MSmits: consecutive
+ MSmits: i think?
+ MSmits: Astrospelling?
+ Astrobytes: second is correct yes
+ MSmits: kk
+ Astrobytes: "astrospelling" lol
+ MSmits: hey i figured I'd weigh in on that thing you got going with scartaxX
+ Astrobytes: :D
+ MSmits: but glad to hear it's possible to put data on disk like that
+ Scarfield: its a beautiful thing AstroSmits
+ MSmits: :grin:
+ Astrobytes: indeed Mfield
+ MSmits: that sounds like what euler is working on
+ MSmits: either that or something out of string theory
+ eulerscheZahl: huh, what am I working on?
+ MSmits: minesweeper
+ Astrobytes: I was gonna say it defo has a theoretical physics sound to it
+ MSmits: yeah 
+ eulerscheZahl: ah. only 1 vote missing
+ colinemonds: well, 6/8 at least lines up every QWORD, so you can process it in blocks of that size if you want (and it's easy to calculate indices)
+ eulerscheZahl: and then level 54 :boom:
+ Scarfield: i can be "persuaded"
+ Astrobytes: lol
+ MSmits: colinemonds i dont mind if it is hard to calculate indices. These files are going to be 2GB each and I need 100 of them 
+ MSmits: roughly, but you get the idea
+ MSmits: dont want it to be 33% bigger 
+ colinemonds: sure, but well, if you need to get it as efficiently as possible (and do care about order/need to access by index), then just bit-shifting to proper positions is the way to go. you're advantage here is that because it naturally lines up, even the perfect packing isn't annoying to implement
+ MSmits: ah yeah, that's true, if I ever stop using it and want to keep it around I could pack it
+ Scarfield: I like your profile euler, you pretty much have everything and then:"SKILLSNo skills learned yet"
+ colinemonds: *your. also, because the indices are easily calculated, you could keep the values even in-memory like this, and processing will probably still be reasonably performant, depending on what you do (will probably hit memory bandwidth limits before the CPU is busy with packing/unpacking)
+ MSmits: mmh ok, but say I am using an array of bytes (is this char? or uint8_t?), how would i go about writing it to file and reading parts of it?
+ MSmits: which c++ functions are these
+ MSmits: most of the stuff i find are about reading and writing strings
+ colinemonds: hah, that would actually be a nice coc challenge! 
+ MSmits: I often write an integer to file in hex format or something, but that's pretty silly
+ colinemonds: it's conceptually very simple: the first byte you write is (values[0] &lt;&lt; 2 | values[1] &gt;&gt; 6)
+ MSmits: yeah no i got that part
+ MSmits: the bit shifting and such
+ colinemonds: then i don't understand your question
+ MSmits: how do i write it
+ colinemonds: ohhhhh
+ PatrickMcGinnisII: MSmits it's just how you open the file
+ MSmits: yeah i should explain, i am a bit wizard that does not half of programming basics that real devs take for granted :P
+ MSmits: does not understand
+ colinemonds:    ofstream writestream("file.bin", ios::out | ios::binary);
+ Astrobytes: ^
+ MSmits: ahh thats the stuff
+ Scarfield: <a rel="nofollow" class="external free" href="http://www.cplusplus.com/doc/tutorial/files/">http://www.cplusplus.com/doc/tutorial/files/</a>&#160;?
+ Astrobytes: Honestly MSmits, you could just have asked that a day ago lol
+ MSmits: i only thought of the question today
+ MSmits: because i had that new idea
+ Astrobytes: hehehe
+ MSmits: hmm but scarfield, thats plain string writing
+ MSmits: characters
+ colinemonds: it's the same concept, you just have to pass the binary flag
+ MSmits: I am learning how to write binary now
+ MSmits: yeah apparently
+ colinemonds: characters == bytes as far as C and C++ are concerned
+ MSmits: cool, thanks
+ colinemonds: it's a wrong assumption, but it made sense in the 70s
+ Scarfield: yea, just realised. your avatar should have a wizard hat with ones and zeros on it, instead of moons and stars :p
+ AntiSquid: how many decades have you been coding for colinemonds
+ MSmits: not a bad idea Scarfield
+ colinemonds: not as many as Dennis Ritchie, which is also why I don't sneer at decisions like that in retrospect&#160;:)
+ Astrobytes: good answer&#160;:)
+ AntiSquid: only now realized he has a degree in physics . 
+ AntiSquid: need a degree in physics to get better at coding i guess
+ MSmits: physicists end up all over the place
+ Thecodekid123: v = 6                                                           c = 90                                                                 answer = v + c                                               print(answer)                                               -                                                                      96        
+ MSmits: mostly it's a degree that says: smart guy
+ AntiSquid: humblebrag
+ MSmits: or gal
+ MSmits: it's true though, at one point we had 5 guys with physics degrees in or parliament
+ Thecodekid123: AntiSquid how have you been doc?
+ MSmits: our
+ PatrickMcGinnisII: Physicists wear several hats usually named i j k
+ AntiSquid: alright . i wish i could say great but yeah . how's it going Thecodekid123 already forgot when we last talked .
+ MSmits: PatrickMcGinnisII lol... I always make loops with i,j,k I think you're referring to tensor geometry?
+ AntiSquid: how do i access my digitial memory again&#160;? (someone share the link to the CG chat history please lol)
+ Thecodekid123: Me great I am learning Python for now.Thanks for asking AntiSquid.:sunglasses:
+ MSmits: isnt that just google?
+ MSmits: AntiSquid?
+ colinemonds: coc etiquette question: is googling for a mathematical formula allowed?
+ PatrickMcGinnisII: MSmits my physics classes were all about how general formulas were made, so yea i,j,k unit vectors
+ LegendaryStone: DiL can you share code please, you never do and I want to learn 
+ LegendaryStone: :pensive:
+ AntiSquid: yes ofc . colinemonds
+ s0m3th1ng: Wassup everyone, this is my first time doing this
+ colinemonds: great, thank you
+ Astrobytes: googling for anything is allowed in CoC
+ Thecodekid123: a = b                                                                     b = 'idk'                                                             print(a)                                                              -                                                                       idk
+ MSmits: oh right yeah that's just linear algebra. I think it's a class many CS students dislike
+ colinemonds: including just the solution? hah
+ s0m3th1ng: are you guys in high school or college?
+ colinemonds: I guess that's the world we live in now
+ AntiSquid: i mean if you ever do coders strike back i don't know how you progress without checking trigo formulas 
+ Astrobytes: People do that sadly
+ MSmits: s0m3th1ng that and more
+ s0m3th1ng: oh- okay
+ MSmits: I am both in high school and college and I have a job, how about that
+ colinemonds: AntiSquid I meant fastest mode in particular, not any of the bot challengs or puzzles
+ s0m3th1ng: wow
+ colinemonds: for those it's obviously ok
+ MSmits: high school is my job, so i am cheating I guess
+ Astrobytes: No it's fine in all CoC modes
+ colinemonds: cool
+ Thecodekid123: Guys and Gals you can try to code in python here:  <a rel="nofollow" class="external free" href="https://jupyter.org/try">https://jupyter.org/try</a>
+ AntiSquid: colinemonds you save solutions for the puzzles you've done and paste them next time you get them, coc repeats itself
+ colinemonds: I guess if I had just spent the time working the formula myself instead of chatting, I would have had it by now, so I also don't feel bad about it anymore
+ MSmits: *try* to code sounds a bit offensive :P
+ Astrobytes: s0m3th1ng: a lot of us here are old
+ AntiSquid: and people share the code . i mean ...
+ colinemonds: that's really lame, no?
+ colinemonds: seems like it defeats the entire purpose
+ AntiSquid: how else do you want to beat the 10 second guys&#160;?
+ Astrobytes: tis what it is
+ colinemonds: I didn't have any 10 second people so far
+ MSmits: colinemonds you need to do a lot of clashes before you see repeats
+ MSmits: most people get tired of it before that
+ eulerscheZahl: more than 600 clashes in the pool
+ MSmits: most people switch to stuff that is more fun
+ AntiSquid: oh number increased a lot i see
+ s0m3th1ng: Astrobytes how old?
+ AntiSquid: * meaningful @MSmits
+ Astrobytes: MSmits is 128, I'm 38, there are others
+ codeing: yo the city
+ MSmits: :grin:
+ eulerscheZahl: smits is -128, he had an overflow
+ codeing: i'm doing something
+ codeing: like
+ MSmits: wouldnt that be -127?
+ Astrobytes: lol euler
+ codeing:    *   
+ AntiSquid: hi codeine nice to see you pal
+ s0m3th1ng: how is MSmits 128
+ eulerscheZahl: 127+1 = -128
+ MSmits: mmh ok
+ PatrickMcGinnisII: :joy:
+ eulerscheZahl: in 2's complement at least
+ codeing: yo
+ s0m3th1ng: I'm only 18 
+ codeing: let me ask please something
+ codeing: thanks
+ codeing: i'm doing something
+ codeing: and i have question for you
+ Astrobytes: He likes bits s0m3th1ng, and doesn't know his own age so you can just suggest one
+ codeing: this is the algo
+ MSmits: s0m3th1ng we have 13 yr olds that wreck people at coding here. Age doesn't matter that much
+ s0m3th1ng: okay
+ Astrobytes: yep
+ PatrickMcGinnisII: in 8 days my age will start with a 5, proof of garbage in garbage out GIGO
+ codeing: what you think about this code&#160;?
+ AntiSquid: who is that MSmits&#160;? :P#
+ codeing: <a rel="nofollow" class="external free" href="https://wtools.io/paste-code/b2rs">https://wtools.io/paste-code/b2rs</a>
+ MSmits: jrke
+ MSmits: i think?
+ AntiSquid: is he 13&#160;?
+ Astrobytes: yep
+ MSmits: I thought so, might have the name confused
+ Astrobytes: He is 143
+ Astrobytes: I mean 13
+ Astrobytes: lol
+ codeing: any feedback
+ AntiSquid: lies, too good for 13 .
+ MSmits: euler confused you with the overflow joke isnt he
+ MSmits: didnt he
+ Astrobytes: Nice kid. I taught him minimax
+ MSmits: he learns too fast
+ codeing: <a rel="nofollow" class="external free" href="https://wtools.io/paste-code/b2rs">https://wtools.io/paste-code/b2rs</a>
+ MSmits: he'll be karliso before he can vote
+ PatrickMcGinnisII: underflow
+ codeing:    *   
+ codeing: or
+ codeing: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/94850553-0001-415b-b4f3-a2367dfffb47">http://chat.codingame.com/pastebin/94850553-0001-415b-b4f3-a2367dfffb47</a>
+ PatrickMcGinnisII: imagine being young during AlphaGo
+ Astrobytes: I know right
+ MSmits: we're all young compared to Alpha go though
+ MSmits: dont they all say it's like 30000 hrs old
+ MSmits: the articles
+ colinemonds: is that a lot of hours? doesn't feel like a lot of hours
+ MSmits: yeah its just 5 yrs
+ MSmits: maybe its 30000 lifetimes i dunno
+ MSmits: in any case, they always talk about huge trainign times
+ colinemonds: imagine playing go against yourself for 30,000 lifetimes
+ colinemonds: a special kind of hell
+ MSmits: i dont even want to play it once :P
+ MSmits: at least against myself i'd win 50%, thats something
+ Allis: We know not what we sow.
+ Allis: The robots will have a hard time forgiving us.
+ PatrickMcGinnisII: i had to ride my 10 speed 13 miles each way in 100 degree heat to copy an ascii table from the library, true story .&#160;:(
+ MSmits: i know. It's somewhere between 1 and 48 seeds
+ Astrobytes: Heretic MSmits
+ AntiSquid: if you count training time as age they are all millions of years old :P
+ Allis: @PatrickMcGinnisII What an adventure!
+ MSmits: yeah
+ eulerscheZahl: and now tell the same story again with metric units so the rest of us can understand what you are talking about PatrickMcGinnisII
+ Astrobytes: about 20km
+ colinemonds: what's a ten speed though
+ MSmits: I am assuming it was hot, he went far and he copied the same database multiple times because he kept losing it on the way back
+ eulerscheZahl: the 100 degree was the hard part for me actually
+ Astrobytes: 30+ degrees
+ Astrobytes: nearer 40 I guess
+ eulerscheZahl: that's hot
+ PatrickMcGinnisII: 10 speed, lol... it had gears
+ AntiSquid: 10 gears?
+ Astrobytes: Ain't any of you used a proper bicycle?
+ PatrickMcGinnisII: 2 in front, 5 in back..c'mon 2x5=10
+ AntiSquid: never drove a care with 10
+ PatrickMcGinnisII: Actually the one I have now is 18
+ AntiSquid: not very knowlegable with cars actually
+ colinemonds: I repaired my bicycle yesterday. The light didn't work because the cable broke, so I wrapped bell wire around and affixed it with alligator clamps
+ colinemonds: Most gangster shit on the bloc
+ MSmits: why are you focused on the bike. I am more interested in why he had to copy an ascii table multiple times
+ AntiSquid: i mean 7 seems enough
+ Astrobytes: hahaha now that's a proper repair job
+ PatrickMcGinnisII: just once, there was no internet!  Had to trek to even have a possibility of finding an answer
+ MSmits: ahhh ok
+ AntiSquid: oh you were talking about bikes lol
+ MSmits: you're like those third world people that have to walk 2 hrs for water. Only it's worse in your case. Ascii tables should be available to all
+ Astrobytes: brb, founding an NGO for ascii tables
+ colinemonds: that's America's main two cultural exports, democracy and the ASCII table
+ PatrickMcGinnisII: they didn't really start publishing personal computer books til like '79
+ colinemonds: yeah I figured this story had probably happened before the internet haha
+ epinephrine: :nerd:
+ PatrickMcGinnisII: unless you had a magazine subscription to microcomputer magazine you had no info at all
+ MSmits: PatrickMcGinnisII is an OG
+ colinemonds: although tbh, if you knew what an ASCII table is and why you would need one, couldn't you just have ran the equivalent of for(i=1;i&lt;256;++i) { printf("%c", i); } on your machine?
+ Astrobytes: Original [Mc]Ginnis
+ PatrickMcGinnisII: i built my own computer and burnt my own EPROMs, yall are spoiled
+ colinemonds: ohh. yeah in that case
+ MSmits: no doubt PatrickMcGinnisII
+ Astrobytes: ^this is the man I keep trying to convince to use C instead of PHP on here
+ MSmits: yeah this is inconsistent
+ PatrickMcGinnisII: Astrobytes rofl
+ Astrobytes:&#160;;)
+ PatrickMcGinnisII: I'm burntout
+ MSmits: because of the eproms?
+ Astrobytes: all in the head brother, all in the head
+ <b>**MSmits googles eproms</b></p><p><a href="/wiki/File:Default_avatar.png" class="image"><img alt="Default avatar.png" src="/images/5/56/Default_avatar.png" decoding="async" width="50" height="50" /></a> colinemonds: speaking of which, why is there no "6502 Assembly" option
+ AntiSquid: great now try a quantum computer
+ AntiSquid: patrick
+ PatrickMcGinnisII: Imagine trying to make the leap from ASM to OOP, you'd fry your braincells too
+ Astrobytes: there was a suggestion for ARM assembly in the language thread colinemonds, that's as far as it goes
+ MSmits: PatrickMcGinnisII the reverse leap might be worse?
+ colinemonds: shhh, nobody mention FP to Patrick now
+ MSmits: FP is quite old isn't it?
+ Astrobytes: yeah but it's trendy now
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/forum">https://www.codingame.com/forum</a>
+ eulerscheZahl: wtf
+ Astrobytes: just saw that
+ eulerscheZahl: vandalism approval
+ Astrobytes: no, some are old puzzles
+ Astrobytes: they might be linking those without threads
+ eulerscheZahl: ah, that would explain it. and i like that explanation more
+ MSmits: a community bot?
+ MSmits: Thi baud handing off his job to a machine&#160;?
+ jacek: FP?
+ eulerscheZahl: the bot creates threads for new puzzles
+ Astrobytes: it's the one that links a forum topic to a puzzle or multi MSmits
+ MSmits: ah
+ eulerscheZahl: i thought someone just approved 7 at once
+ Astrobytes: damn you :P
+ colinemonds: I reached Gold league on Coders Strike Back yesterday and I felt so betrayed
+ colinemonds: for the entire lower leagues, you never get the full layout of the map including all checkpoints
+ MSmits: we all feel your pain colinemonds
+ Astrobytes: yeah, it's a bit of a kick in the teeth
+ MSmits: other multis are not like that
+ colinemonds: so I felt super smart when I constructed them in-memory to optimize turns for the later laps... 
+ colinemonds: oh, I'm not alone
+ colinemonds: well then
+ MSmits: for a long time we gave people a heuristic just to get them into the higher leagues so they get all the info
+ MSmits: we stopped doing that because its a bit counterproductive to learning 
+ Astrobytes: Now we mostly encourage the slow way
+ colinemonds: it seems like it wouldn't hurt to just give all the checkpoints from Wood league onwards, though
+ colinemonds: people can just ignore them if they don't care
+ MSmits: yeah, thats how other multis work generally
+ AntiSquid: go for legend in CSB since you get another rule change and need to optimize again
+ Astrobytes: Yeah. It's very old though, as M Smits said it's better for other multis 
+ colinemonds: really? gah
+ MSmits: isnt it just a speed increase?
+ MSmits: to legend?
+ AntiSquid: double speed
+ PatrickMcGinnisII: FP written in GNU C, oic ... damn rabbit hole colinemonds damn u
+ MSmits: dont worry about that colinemonds
+ MSmits: speed is just a number
+ AntiSquid: small change huge effect
+ MSmits: all other multis afaik, have their last rule change at bronze
+ MSmits: and when the rules change, its usually a good thing, to slowly let you get into the game
+ MSmits: with csb it's counterproductive
+ colinemonds: well I thought about re-writing everything for gold anyway, because currently I barely have an AI algorithm, I just do simple linear algebra to optimize the turn for the next checkpoint and otherwise I just follow the track
+ Astrobytes: contests can vary, as it's obviously a dynamic thing but ultimately ends up as last changes in bronze
+ PatrickMcGinnisII: How to make me shutup, make me curious enough to google something
+ MSmits: colinemonds if you want to get into csb seriously, you need to write a search algorithm
+ colinemonds: FP in C is not considerably more insane than OOP in C, and people do the latter
+ colinemonds: so hey
+ Astrobytes: PatrickMcGinnisII you never heard of functional programming until now?
+ MSmits: minimax, ga, etc.
+ colinemonds: yeah, I figured I'd try Minimax with a-b pruning first and see how that goes
+ MSmits: it works, many bots have it
+ MSmits: the top 5 are neural networks, but dont let that discourage you
+ AntiSquid: isn't it just about the MCTS these days&#160;?
+ PatrickMcGinnisII: Astrobytes not as an actual lang.
+ MSmits: NNs on CG are beatable in most cases, some are just very strong. The codesize limits heavily restricts them
+ colinemonds: how do you even use neural networks on codingame? do they just bring their own evaluator?
+ MSmits: you have to write everything yourself
+ MSmits: and fit it into the codesize
+ colinemonds: yeah that's what I figured
+ AntiSquid: through suffering
+ MSmits: not many games have them though
+ MSmits: a few boardgames and csb and bitrunner2k I think
+ colinemonds: it just becomes an exercise in Kolmogorov-complexity at that point
+ colinemonds: find an NN that plays well *and also compresses well*
+ jacek: and unicode
+ PatrickMcGinnisII: I haven't done nN on CG, don't you have to give it baby steps on local sim first?
+ MSmits: ahh good old Kolmogorov
+ <b>**MSmits googles Kolmogorov</b></p><p><img src="/a/23052489191875" /> Astrobytes: hehehe
+ jacek: you train NN offline and just put weights in the code
+ BuonOmo: Anyone got stuck at 93% on the chess board analyzer with all tests passing&#160;?
+ jacek: cute cat
+ PatrickMcGinnisII: BuonOmo I'm kinda working on it now
+ Astrobytes: Nope, I'm at 0%, no tests passing, 0 attempts
+ Astrobytes: :P
+ Gabbek: BuonOmo - finished it around 10min, all passed.
+ PatrickMcGinnisII: haven't tried to submit yet
+ Gabbek: You're most likely having issue with capturing.
+ MSmits: oh PatrickMcGinnisII. NN's are your way to get a rank 1 using php language
+ MSmits: do it&#160;:)
+ BuonOmo: So frustrating, i've taken some shortcuts (like a rook can see even if there is a pawn in the way). But idk which one is an issue...
+ BuonOmo: @Gabbek don't think so!
+ PatrickMcGinnisII: I like graphics tho, I'd hate to have to write a java app to run a php code, how rude\
+ colinemonds: just call Vulkan API from PHP via FFI
+ Astrobytes: that would be interesting
+ colinemonds: "An attacked King could be saved only by moving himself to a safe square (not by using another piece from the King's team)" makes the puzzle kinda lame, like, the entire puzzle is really just "write a chess evaluator", but then it's really "write a chess evaluator that doesn't even work"
+ L810: can someone send me the solution to the game: Don't Panic episode 1 in C coding
+ Astrobytes: No L810
+ colinemonds: really, at least google it yourself!
+ colinemonds: kids these days!
+ Astrobytes: Indeed
+ L810: why not lmao. i did google it first
+ MSmits: you're supposed to code it
+ Astrobytes: You're kinda missing the point
+ Scarfield: ^
+ Astrobytes: If you can't do it, figure it out
+ MSmits: ask for a hint
+ MSmits: astro is always happy to help
+ L810: its an assignment... not by choice
+ colinemonds: hah, that's what I thought
+ MSmits: lol
+ Astrobytes: gee thanks MSmits
+ MSmits: :P
+ Scarfield: lol
+ PatrickMcGinnisII: vulcan google hole... got me again.  supported by my graphics card and my PHP cli ... huh, how did i not know this?
+ Astrobytes: L810 you will learn nothing in this course/class if you go around asking for solutions to problems
+ ZarthaxX: L810 keep asking for solutions, that's the way to go
+ MSmits: :vulcan:
+ ZarthaxX: im the devil here astrobyto
+ eulerscheZahl: no, you are the polar bear
+ PatrickMcGinnisII: I guess i can throw netbeans out
+ eulerscheZahl: and replace it with IntelliJ?
+ LastRick: I don't need the solutions, just the validators
+ colinemonds: PatrickMcGinnisII well, setting up Vulkan to the point where it renders a triangle is just a thousand lines or so of boilerplate, so I think it will still look better than most PHP code I've seen
+ colinemonds: I'd say go for it
+ Astrobytes: lol ZarthaxX :imp:
+ colinemonds: LastRick right, NN is going to put us all out of a job
+ Astrobytes: colinemonds hahahaha
+ LastRick: yep
+ PatrickMcGinnisII: colinemonds well i actually do alpha channel blending in php, not animated of course, but it works really well
+ Neumann: wlesavo: you're using vanilla Beam Search on 2048&#160;? It fascinates me how poorly my Beam Search performs, I'm not sure what I'm doing wrong
+ Astrobytes: Neumann strongly on topic here :P
+ Neumann: Oh I'm sorry I thought this was internet
+ PatrickMcGinnisII: All the top 10 peepz are hard-wire focused
+ Astrobytes: :P
+ Astrobytes: I was only joking btw
+ AntiSquid: are we discussing manga&#160;?
+ Astrobytes: Nope. Sushi recipes
+ Neumann: I know :D
+ PatrickMcGinnisII: huh, i don't get forum notifications but i get CoC ones, gheesh
+ eulerscheZahl: defending your rank on the optim leaderboard or are you interested in 2048 for real?
+ Neumann: Why not both
+ eulerscheZahl: ok, that's cool&#160;:)
+ Neumann: I'm trying to convince myself I'm not that rusty after a few months off of CG
+ Neumann: But my struggles are proving me wrong
+ Neumann: Also first time I'm implementing Beam Search
+ Neumann: And legit not understanding why it sucks so hard
+ wlesavo: Neumann some tuning, but i also struggled a lot finding good parameters, also acounting for duplicates gives a huge boost
+ MSmits: hey Astrobytes, my 8 seed db went from 300 ms to 150 ms using the new order of calculation (better caching). Now I am going to try it for 9 seeds. I have good hope I can keep it under 1 second
+ Neumann: What is there to tune besides the beam width&#160;?
+ eulerscheZahl: there are that many duplicates? i didn't expect that
+ Neumann: Currently at width 1000 with snake eval -&gt;10M
+ wlesavo: basically it worked much worse then my BF at first, i even thought i broked my sim at some point, but it was just the parameters
+ colinemonds: ESL question: how do you call one square on a chess board?
+ wlesavo: yes euler. i didnt checked how much, but quite a lot
+ Neumann: Parameters, with a S. brb reading Beam Search definition because I can only see 1 parameter
+ colinemonds: a square? tile? checker-thing?
+ wlesavo: Neumann i have smth like depth 50 width 30
+ Neumann: tf
+ eulerscheZahl: that's almost like my params :rofl:
+ MSmits: yay, 9 seed db:  Endbook time: 336 ms
+ eulerscheZahl: and a similar Neumann reaction to it
+ MSmits: I can do 10 I think
+ wlesavo: Neumann also there are some differences in approaches, i for example do fixed depth fixed print depth, some people try to search for the whole turn
+ PatrickMcGinnisII: All programmers have performance anxiety it seems
+ Westicles: I'm a little surprised how hard these 131k tiles are to find offline.  Still stuck at 4
+ wlesavo: im at 4 with online solution, magaiti even have offline reverse sim, and even that struggles, i wonder what dbdr did, he was quite fast to achieve that score also
+ Westicles: Which 4?  If you call them 0-29, I have 4,6,15,22
+ wlesavo: let me check
+ wlesavo: oh wait, im at 5, 3 4 6 15 22
+ Westicles: aha, thanks I'll look into those more
+ wlesavo: also i believe 6 is easiest to achieve 3.3M
+ Westicles: I don't have any good ideas besides trying the 8 snake rotations.  Maybe there is another closed path besides the snake that works
+ Westicles: Doing reverse sounds interesting though
+ Neumann: wlesavo: depth 50 width 30 takes 2ms max. I must be doing something else than a BeamSearch
+ PatrickMcGinnisII: a BF at 6 depth only gets you 1M, a BF at 5 depth, and expanding top 75% scorers to 2 more depths gave me 1.5M . I'm so out of my depth, pun intended
+ Westicles: All I do is depth 7 from scratch every turn, no beam
+ PatrickMcGinnisII: max tile 8192 at depth 7 imho
+ Westicles: Nope.  1.6-1.74M for every case, but no 131k
+ Neumann: So you print 7 moves per turn&#160;?
+ Westicles: Oh, no I meant I search 7 moves into the fugure
+ Westicles: future
+ Astrobytes: MSmits: sorry was afk, that's quite the improvement!!
+ Westicles: I print whenever chrono hits 50ms
+ ZarthaxX: eulerscheZahl i will always be the polar bear 
+ Neumann: Ok, like wlesavo did. Depth 7, keep best, depth 7 from that one, etc for 50ms
+ ZarthaxX: need to put some horns in my polar bear and a trident or smth
+ Westicles: right
+ Neumann: That approach gives me 24M&#160;:/
+ PatrickMcGinnisII: only kept 1?
+ Astrobytes: ZarthaxX: put an unpopular opinion on your profile pic and you can be a polarising bear
+ Scarfield: bipolar bear?
+ PatrickMcGinnisII: Astrobytes or add sunglasses
+ Astrobytes: true
+ ZarthaxX: wtf :rofl:
+ DejaVu_081: hi
+ Westicles: Ah, yurk posted his scores
+ Westicles: <a rel="nofollow" class="external free" href="https://pastebin.com/52fA4eJ6">https://pastebin.com/52fA4eJ6</a>
+ eulerscheZahl: will this turn into the next Great Dispatch with top players getting a perfect score?
+ colinemonds: what puzzle are you discussing?
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/optimization/2048">https://www.codingame.com/multiplayer/optimization/2048</a>
+ colinemonds: oh, it's yours, cool
+ eulerscheZahl: i was a little spammy with contributions :innocent:
+ PatrickMcGinnisII: damnit, 10 minutes to figure out i forgot to put __ in front of construct
+ colinemonds: is 2048 even solvable from every starting position/random seed? 
+ eulerscheZahl: if you are really unlucky with the spawns probably not
+ eulerscheZahl: but in this version you have the spawn algo as well. so you can actively influence the next spawn
+ eulerscheZahl: the drawbacks of an interpreted language PatrickMcGinnisII
+ PatrickMcGinnisII: is it bad that i only put solutions in OOP to make it readable?
+ colinemonds: is it bad that my solution for the puzzle I'm working on has some functions that are over a screen page long and are really just the same block copy-pasted a dozen times because I'm lazy and nobody will maintain this anyway?
+ colinemonds: ... probably yes
+ Astrobytes: that happens
+ PatrickMcGinnisII: hmm, most puzzles r like 100 lines max, maybe a couple harder ones at 400
+ MSmits: astrobytes, yeah it was nice. Then I did 10 seeds and i got just over 1s. Looking for a few more improvements now and otherwise I'll just code my "continue into regular turns" thingy
+ Astrobytes: I think you're on the right path MSmits
+ MSmits: yeah, I hope this is done soon, then i'll look into doing it locally
+ PatrickMcGinnisII: u stil fighting bandas?
+ MSmits: nah this is oware
+ Astrobytes: (hence my interest)
+ MSmits: i generate endgame books so that i can immediately give a W/L/D result when it goes below 11 seeds on the board
+ MSmits: i do this in the first 1s mostly. It's not put into codesize
+ eulerscheZahl: joke's on you: you'll beat me like 20-3
+ MSmits: lol 
+ MSmits: the thing that took 70% of my calc time now due to caching only takes 15% now
+ MSmits: funny how changing the order of operations can make such a big difference
+ Astrobytes: that really is an impressive result
+ ZarthaxX: what
+ Astrobytes: nothing, shuddup :P
+ MSmits: i sped up my endgame book generation by doing things in a different order. By a factor of 3 or so
+ MSmits: 2-3
+ MSmits: thats what happens if you make a huge 100 mb array and you decide  to think about caching instead of just accessing it all over the place
+ MSmits: i shudder to think of how badly my mcts sometimes caches with all that tree reuse
+ MSmits: though i guess the nodes could still be close somehow, not sure, it's messy
+ ZarthaxX: i said what because i didnt get what he changed for the cache friendly thing :P
+ Astrobytes: yeah yeah :P
+ ZarthaxX: ban astro
+ <b>**Astrobytes hides</b></p><p><img src="/a/17784428403916" /> MSmits: oh ok, well i was accessing things in a way where they were on average 180 times farther apart than they are now
+ ZarthaxX: i see
+ ZarthaxX: good catch :P
+ MSmits: because i sorted by state instead of by gameturn
+ MSmits: each state has a value for each game turn
+ MSmits: but i only need the previous turn
+ ZarthaxX: ah nice haha
+ PatrickMcGinnisII: dropping 14 ints in a stack sounds faster to me
+ PatrickMcGinnisII: says the 1 depth oware bot
+ Astrobytes: hey i'm 0 depth
+ MSmits: mmh not the same :P
+ Scarfield: oof the puns, must resist
+ Astrobytes: shhh
+ Astrobytes: lol punfield
+ <b>**PatrickMcGinnisII thinks Astro is scarred</b></p><p><img src="/a/22238461634817" /> Scarfield: 14 ints vs 100Mb array, potato potato
+ PatrickMcGinnisII: he can still hash each node and sort it all out after
+ PatrickMcGinnisII: maybe drop a radix sort on it.  3 loops and call it done
+ PatrickMcGinnisII: isn't treeing the entire oware doable?  Maybe not booking it for CG, but the expansion isn't infinite ...maybe big...
+ MSmits: yeah it is
+ MSmits: needs 200 TB or at least something of that order
+ MSmits: that's an upper limit
+ MSmits: actually
+ MSmits: thats the statecount
+ MSmits: the treesize is waayyyyy bigger 
+ MSmits: transpositions keep the statecount low, so solving it is doable
+ PatrickMcGinnisII: 200TB, seriously ... i may have to investigate this, but I never finished my oware
+ <b>**PatrickMcGinnisII adds to his to-do list</b></p><p><img src="/a/23052489191875" /> Astrobytes: It's a rabbit hole
+ Astrobytes: A good one though
+ MSmits: i can probably take a guess at the solving time by a quick calc
+ MSmits: assuming 10 seeds is 1 second
+ MSmits: gimme a min
+ MSmits: it would take about 500 hours on a single core, assuming the same cache efficiency. Considering that you would, at some point need to keep 100 trillion states in quick memory all at once. That is not realistic
+ MSmits: so 500 hrs * whatever penalty due to cache inefficiency/using HD
+ MSmits: parallizing it is completely doable though
+ MSmits: but the cache problem is not gonna go away 
+ MSmits: parallelizing, what a crapp word this is
+ Excetra: Bruh I'm level 3 on this thing and I haven't even got more than 0% on any of thenm
+ Astrobytes: you forgot to trigger your astrospeller MSmits
+ MSmits: yeah sorry
+ Excetra: I'm so bad at this
+ MSmits: at coding?
+ Excetra: well yeah
+ Excetra: I just don't understand any of the clashofcode things, and when I do I can't do it
+ MSmits: do some basic coding tutorials first. Python is probably a good idea
+ MSmits: nah dont start with clash really
+ Excetra: Yeah, I'm learning python
+ Astrobytes: and do puzzles, not clashes
+ Excetra: I'm not like a total total beginner, but I am a beginner
+ MSmits: you dont need a time limit when you're still learning
+ Excetra: where can I do the puzzles?
+ MSmits: practice
+ Astrobytes: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/easy">https://www.codingame.com/training/easy</a>
+ Excetra: Thankyou&#160;:)
+ MSmits: there is a difference between the difficulty of the easy puzzles though
+ MSmits: if something is still out of reach, try a different one
+ MSmits: they're not that well categorized
+ Excetra: Alright, I'll have a look, thanks for both of your help
+ MSmits: np
+ Astrobytes: yeah, the CG official ones are better (they have graphics)
+ Astrobytes: And you can ask in chat or check the forum for tips
+ Excetra: alrighty
+ MSmits: then
+ Astrobytes:&#160;;)
+ Astrobytes: that was... Ace Ventura or the Mask?
+ MSmits: i think ace ventura
+ MSmits: but was split between that and cable guy, dont remember
+ Astrobytes: k, I trust you, been a while
+ Astrobytes: No defo not cable guy
+ MSmits: yeah just checked
+ MSmits: its ace ventura
+ Astrobytes: ah cool
+ LastRick: also ace ventura 2, don't forget that masterpiece
+ MSmits: right&#160;:)
+ Astrobytes: Can't remember if I watched it or not
+ LastRick: Do you recall any jokes about bat guano? Then no.
+ Excetra: Wow this is difficult
+ Astrobytes: It's a no from me
+ Astrobytes: Anyway, Cable Guy and Truman Show were probably my favourite Carrey films tbh
+ LastRick: Those were good too, def different from Ace. But my vote would be Eternal Sunshine or Man on the Moon
+ Excetra: Is there anywhere where I can find the answer to the question, because I'm really confused
+ LastRick: depends on the question
+ Astrobytes: Oh damn, forgot about Eternal Sunshine, that was a great film
+ MSmits: yeah i liked that
+ Excetra: It's on puzzles: it's called descnet
+ Excetra: The descent
+ Astrobytes: there's a button on the left with Hints
+ LastRick: the descent
+ Excetra: ah ok
+ LastRick: yeah, i think most of us have done it, what's the problem
+ MSmits: one of the hints should be that there's a button on the left with Hints
+ LastRick: hah
+ Astrobytes: But I'd urge you to think through what the problem is that you're trying to solve
+ Astrobytes: lol yeah
+ Excetra: alright i'll have a try
+ Astrobytes: write it down on paper/whiteboard
+ colinemonds: is The Descent the one with the mountains? that one reminded me a lot of maths problems in middle school
+ Excetra: yes it is the one about mountains
+ Astrobytes: yeah that's the one
+ colinemonds: "Two trains from Chicago and Washington are moving at each other at a speed of 40 mph. They pass by a train station that's at a distance of 20 miles to Washington and 1000 miles to Chicago. How old is the storekeeper?"
+ Astrobytes: hahaha
+ ZarthaxX: 5 tomatoes
+ LastRick: The doctor was his mom!
+ Astrobytes: 42
+ PatrickMcGinnisII: colinemonds well if they pass a station while moving at each other, the storekeeper is probably dead
+ Excetra: so the answer has the while loop as: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/df447bee-e06f-4778-a1f5-e0e0db1b03ba">http://chat.codingame.com/pastebin/df447bee-e06f-4778-a1f5-e0e0db1b03ba</a>
+ Excetra: wat
+ Excetra: while 1:
+ Excetra: is what i was meant to say idk why it did that
+ Excetra: i just wanted to know what while 1: means
+ Astrobytes: white True
+ Astrobytes: *while True
+ Astrobytes: 1 is true
+ Astrobytes: it's an infinite loop
+ Excetra: oh right ok 
+ Astrobytes: so while true is always true, do this stuff
+ Excetra: so if it was while 0: it would mean while false
+ MSmits: no
+ MSmits: it means while false is true
+ MSmits: so, never
+ Excetra: oh lol
+ Astrobytes: hehe, easy trap to fall into
+ Excetra: yeah this answer confuses me, and it's on the easy section... i'll try another question
+ MSmits: yep
+ MSmits: dont worry about the while thing though
+ MSmits: i didnt understand it at first either and i could solve a few puzzles before i did
+ MSmits: to me it just meant, thats the puzzle loop in which the logic goes
+ MSmits: it's a game loop basically
+ MSmits: they are always infinite until some thingy breaks out of it
+ Excetra: right
+ Astrobytes: for puzzles look at it as while there's all the input, keep doing stuff with it
+ Excetra: It's getting late anyway, I should probably head off for the night. Thanks for your help guys
+ Astrobytes: when you output at the end, it stops
+ Astrobytes: no problem
+ Excetra: have a nice evening&#160;:)
+ Astrobytes: and you
+ Sepehr.khashei: LOOOOOOOOOOOOOOOOOOOL
+ MSmits: Astrobytes is not *that* funny 
+ Astrobytes: It's true&#160;:(
+ MSmits:&#160;:(
+ MSmits: I meant you are very funny, but with a few extra O's of course
+ MSmits: few less i mean
+ Astrobytes: Obviously :P
+ MSmits: there's too many O's is what I'm saying
+ Astrobytes: Sepehr.khashei: explain your outburst of laughter
+ MSmits: what a lazy troll, just one spam message
+ Astrobytes: I know, zero fun
+ MSmits: yeah he had lots of zero's and 2 L's
+ Astrobytes: ffs :D
+ MSmits: hey the level of intelligence goes down closer to midnight
+ MSmits: also i am sleep deprived, had to work this morning and i was a week off
+ Astrobytes: this is true
+ MSmits: my sleep cycle gets messed up
+ Astrobytes: I don't even know what my sleep cycle is these days lol
+ MSmits: yeah that makes sense in your situation, sucks
+ Astrobytes: Multiple reasons, not just that tbh
+ Astrobytes: MAd year
+ MSmits: because of covid?
+ Astrobytes: weird work schedules etc
+ Astrobytes: yeah
+ MSmits: oh about covid... I went to a wedding a week ago and now the bride is fevered coughing and waiting for test result
+ Astrobytes: you were masked up right
+ MSmits: glad I didn't go to the afterparty
+ MSmits: i was very careful
+ MSmits: they had like 10-20 people in a house
+ Astrobytes: I mask up everywhere
+ MSmits: afterwards
+ MSmits: i didnt go there
+ Astrobytes: oh ffs, that's just stupid
+ MSmits: yeah, I know, that's why i didnt go
+ Astrobytes: The stupidity never fails to amaze me, problem is the rest of us feel the consequences of it
+ MSmits: wasnt just stupid, also illegal, but my country is not so big on enforcement
+ MSmits: rules lately got a lot stricter btw
+ Astrobytes: It's kinda hard to enforce some of the regulations without being fascist, it's a thin line
+ MSmits: all bars/cafe/restaurants are closed
+ Astrobytes: yeah same in my region of Scotland
+ MSmits: masks will soon be mandatory everywhere
+ MSmits: but you see them a lot already
+ Astrobytes: Have you seen the situation even just around Europe?
+ MSmits: just around?
+ Astrobytes: just Europe, not counting the rest of the world
+ MSmits: ah yeah, the second wave was very well predicted
+ MSmits: our politicians screwed up this time though
+ MSmits: first time they did ok
+ MSmits: they acted too late
+ Astrobytes: (sorry, typing in a conversational  Scottish way :P )
+ Astrobytes: Same across Europe
+ MSmits: I'll gie ye a skelpit lug
+ Astrobytes: HAHAHA
+ MSmits: I'm fast with google :P
+ Astrobytes: whaur'd ye pu' that wan fi?
+ Astrobytes: ah
+ Sepehr.khashei: just want to say something&#160;:)
+ MSmits: google does not know what you just said Astrobytes
+ Astrobytes: You have now said 'something'. Congratulations! You are our 100th something!
+ MSmits: we do have quite a few somethings
+ Astrobytes: Spelling varies but that was "Where did you pull that one from"
+ MSmits: ahhh ok
+ Astrobytes: fi/fae
+ MSmits: just googled typical scottish expressions
+ MSmits: I am watching the social dilemma
+ MSmits: Arjen Lubach (our John Oliver) did a good segment on the same issue
+ Astrobytes: It's very regional, I use a lot of Glaswegian stuff as it's familial but I use East coast stuff because I live there
+ MSmits: it's really scary
+ Astrobytes: I haven't watched it yet
+ MSmits: i meant the Dutch programma 
+ MSmits: programme
+ MSmits: it showed people demonstrating at our political centres
+ MSmits: claiming our leaders are pedophile blood drinkers
+ Astrobytes: No I mean I didn't watch the Social Dilemma yet
+ MSmits: i know
+ MSmits: but that was what was really scary
+ MSmits: you dont imagine so many people in your country are on this path
+ MSmits: it's like 10-15%
+ Astrobytes: Oh soooo many yes
+ Astrobytes: "claiming our leaders are pedophile blood drinkers" - yep
+ MSmits: The Dutch are one of the least vulnerable people to this sort of thing, I think, but if we go this easily...
+ Astrobytes: They latched on to some anti-establishment vibes (justified) and get sucked into this crap
+ MSmits: but so fast
+ wlesavo: nice westicles, some improvement?
+ MSmits: Arjen Lubach made a fresh youtube accounrt
+ MSmits: he needed 3 clicks to get into conspiracyland
+ MSmits: it's crazy
+ Westicles: wlesavo, yes #26 popped up
+ Astrobytes: Yep. That sounds about right
+ Astrobytes: And, not sure about others experiences, but it's a lot of so-called 'free thinkers' I see getting sucked into this crap
+ MSmits: free in this context meaning an unstructured, vulnerable mind
+ Astrobytes: It's essentially cult style indoctrination
+ MSmits: yeah
+ MSmits: we have a political party catering to this now
+ Astrobytes: Put 2 + 2 + 2 together, all good so far, add another 2 + 2 + 2 get 956, too late by then
+ Astrobytes: They take common issues and problems and provide an *explanation*, which is why people gravitate towards these things I think
+ MSmits: I have been judging the US for those trumpian idiots with their crazy signs and stuff for like 6 years
+ MSmits: but we apparently have those too , just in lesser numbers
+ Astrobytes: I think, personally, the reality is much worse and people can't handle the fact that there's a lot of stuff without tangible blame or reasoning
+ MSmits: yeah that is it exactly
+ Astrobytes: Same everywhere MSmits
+ Westicles: Yeah, half the people are idiots&#160;:)
+ Westicles: And not my half
+ MSmits: i dunno, I always thought my country was well educated, sober etc. But that's probably just a bias from the people I associate wit
+ Astrobytes: Bluntly put, yes Westicles
+ Astrobytes: Yes, there's a lot of bias now, bubble effects etc. Nothing that hasn't been going on as a society previously but magnified in different ways I guess
+ MSmits: right
+ Astrobytes: Anyway, very deep for a Monday eh
+ MSmits: it's very  paradoxical that it's easier to find out what other people think, but we are less likely to do it
+ Astrobytes: Yes, you have to actually actively pursue it
+ MSmits: yea
+ HelloWorld183L: how will the second cognitive revolution with AI affect politics?
+ MSmits: lol Astrobytes was already letting on that it was getting to deep and now you come with that HelloWorld183L
+ Astrobytes: Indeed!!!
+ HelloWorld183L: i threw that one in for some giggles hehe
+ MSmits: lol
+ HelloWorld183L: i've been reading Superintelligence so that came up on my mind
+ HelloWorld183L: anybody else read it?
+ MSmits: nah, not working on my autobiography yet
+ Astrobytes: I know the book but I haven't read it no
+ HelloWorld183L: interesting read, especially if you're interested in AI
+ Astrobytes: lol MSmits
+ MSmits: will remember HelloWorld183L
+ MSmits: sounds good
+ Astrobytes: Yeah, I'm always up for philosophical and ethical issues
+ Astrobytes: well, the two are intertwined
+ Astrobytes: Anyway
+ Westicles: Bostrom?  Yeah, good book
+ Astrobytes: I am going offline now
+ DomiKo: buy Astro
+ Astrobytes: Amazing to see chat so active today
+ DomiKo: bye Astro*
+ HelloWorld183L: it can provide insight into how philosophy can intertwine with AI 
+ HelloWorld183L: goodbye astro
+ MSmits: gn!
+ MadKnight: is there a thing in c# to check for condition and throw exception if false&#160;?
+ HelloWorld183L: yes an if statement
+ MadKnight: too boring
+ MadKnight: i need something like Assert()
+ HelloWorld183L: perhaps i haven't been in cool kid language territory yet then
+ DomiKo: Debug.assert I guess
+ MadKnight: no that one doesn't throw exception
+ MadKnight: it just stops the process
+ HelloWorld183L: i don't know much about assertions but what if you just threw an exception before asserting
+ MadKnight: i don't have an id
+ MadKnight: if
+ MadKnight: i do Assert(x&gt;3, "x must be greater than 3!")
+ iKirbs: you can throw your own exceptions
+ iKirbs: and catch them
+ MadKnight: yea but is there an assert-like function for that&#160;?
+ iKirbs: not sure bout that
+ MadKnight: what's the best way to ask user to input some value and check if it's correct format and in some range()&#160;?
+ MadKnight: and then ask him to input again if it's not
+ MadKnight: what's the nicest way to do that&#160;?
+ PatrickMcGinnisII: property change event handler, don't think cg supports it
+ MadKnight: why not&#160;?
+ MadKnight: cg supports events
+ MadKnight: custom
+ PatrickMcGinnisII: i dunno, i was told event handlers beyond try and on_error didn't trigger...maybe I'm wrong
+ MadKnight: what event handlers?
+ PatrickMcGinnisII: but set on a variable and write a trigger function
+ MadKnight: how did they try it&#160;?
+ PatrickMcGinnisII: try is part of event handlers
+ PatrickMcGinnisII: try ... maybe error event handler
+ MadKnight: but let's say we're not on CG, so how would it look like? i mean your solution
+ PatrickMcGinnisII: <a rel="nofollow" class="external free" href="https://stackoverflow.com/questions/37924612/detect-variable-change-c-sharp">https://stackoverflow.com/questions/37924612/detect-variable-change-c-sharp</a>
+ MadKnight: nonono i know that
+ MadKnight: but i mean
+ MadKnight: how would the rest look like&#160;?
+ PatrickMcGinnisII: i dunno.  while (!int.valid());
+ MadKnight: 1 - that doesn't output message saying what is wrong 2 - that doesn't look like a nice way
+ PatrickMcGinnisII: I do it JS with a popup warning box
+ MadKnight: so how would it look in js&#160;?
+ PatrickMcGinnisII: <a rel="nofollow" class="external free" href="https://stackoverflow.com/questions/16463599/popup-window-in-winform-c-sharp">https://stackoverflow.com/questions/16463599/popup-window-in-winform-c-sharp</a>
+ MadKnight: noooo that's not even a part of the question
+ MadKnight: i know how to popup
+ MadKnight: and i know how to do properties
+ PatrickMcGinnisII: JS can call a validator function on form submit
+ MadKnight: yea but that's a different case
+ MadKnight: i'm talking about console app
+ PatrickMcGinnisII: you can show hidden error messages and highlight fields, etc.
+ PatrickMcGinnisII: oh
+ colinemonds: @MadKnight doing it in a loop is kind of the classic way to do it in most imperative languages
+ colinemonds: wrap it in a method (that you pass a Predicate into for validation) if you don't want it to clutter up your code
+ PatrickMcGinnisII: yea, just while(1) and break out when they input something valid
+ MadKnight: hmm but what about non-imperative langs, colinemonds&#160;?
+ MadKnight: or imperative but a lot of language features
+ colinemonds: actually, same story, just with recursion instead of a loop...
+ MadKnight: no, recursion is a workaround
+ MadKnight: and is bad
+ MadKnight: and dirty
+ colinemonds: well, functional languages don't usually offer loops (as a language feature)
+ MadKnight: yea
+ colinemonds: recursion is fine as long as tail-calls are eliminated
+ colinemonds: (which they aren't in C#, obviously)
+ MadKnight: tail-calls&#160;?
+ PatrickMcGinnisII: .TryParse(Console.ReadLine(),
+ MadKnight: recursion in this case is a dirty workaround
+ colinemonds: tail-call elimination means that if the recursive call is the last thing that happens in the function body, the compiler will convert the function into basically a loop (ie the "tail"-call will not allocate a stack frame)
+ MadKnight: oh
+ colinemonds: most FP have this
+ MadKnight: oh right i know about that
+ MadKnight: i just didn't know the name
+ MadKnight: but anyway
+ MadKnight: how to avoid this dirty workaround and make it better?
+ colinemonds: I don't really understand why you think everything is dirty here
+ colinemonds: loops are dirty
+ colinemonds: recursion is dirty
+ MadKnight: loops are just imperative
+ MadKnight: but using recursion as while(!good) is bad
+ PatrickMcGinnisII: not as bad as hooking a variable with .onchange
+ PatrickMcGinnisII: darn thing will always be listening
+ PatrickMcGinnisII: of course, turning the listener an and off makes it better
+ MadKnight: it's clearly a workaround, colinemonds
+ MadKnight: it's not supposed to be like that
+ PatrickMcGinnisII: is vodka cheap in russia?
+ MadKnight: u wanna visit russia to buy a ton of vodka&#160;?
+ PatrickMcGinnisII: I just googled it, 5 x cheaper than here
+ MadKnight: do u not agree that recursion instead of while() does seem kinda like a workaround&#160;?
+ PatrickMcGinnisII: JS is full of workarounds that include recursion, its a mess
+ colinemonds: MadKnight: it's not a workaround per say, different languages just have different philosophies
+ MadKnight: oh with this guy we were talking about FP, PatrickMcGinnisII
+ colinemonds: if you use recursion instead of while() in C#, you're doing it wrong
+ MadKnight: but what about FP&#160;?
+ colinemonds: if you're doing it in Haskell, it's absolutely fine
+ MadKnight: but it doesn't seem to make any sense
+ MadKnight: it's just super weird
+ PatrickMcGinnisII: there's a bunch of functions that work great recursively that are faster and don't bloat the kernel
+ colinemonds: programming languages like that have special syntax that supports this use
+ MadKnight: yea i know it does
+ colinemonds: in conjunction with tail call elimination, there is also no runtime impact
+ MadKnight: do u know what's MCTS&#160;?
+ colinemonds: no, what's that?
+ MadKnight: let's go to DM colinemonds&#160;?
+ PatrickMcGinnisII: I am curious about infinite series use in FP lang
+ PatrickMcGinnisII: but i digress
+ PatrickMcGinnisII: ok, yall have fun, took me 4 hours to get one puzzle done, fml
+ PatrickMcGinnisII: laterz
+ ZarthaxX: nice PatrickMcGinnisII sounds frustrating asf
+ MeyerIvan: Hi, how do you use a sqrt() funtion without including math.h library?
+ MadKnight: std::sqrt
+ MadKnight: include cmath
+ MadKnight: double sqrt(double);
+ MeyerIvan: it doesn't let me include it
+ MeyerIvan: I'm allowed to write only in the green area, inside the while loop
+ MadKnight: why doesn't&#160;?
+ MadKnight: u are doing something wrong 100%
+ MadKnight: MeyerIvan
+ MeyerIvan: It's solved. I needed to use less IA, only force the result without calculations. Thanks
+ joshnho: any1 still here&#160;?
+ Skeenie: sup
+ joshnho: oh i wanted to see from the game clash i just did
+ joshnho: wanted sum1 to look at my code and tell me why the hell it didnt pass only the last test lol
+ joshnho: but nvm i guess
+ joshnho: unless u can help
+ theredbobct: Yea! What language did you use?
+ theredbobct: I have no clue how to write C++ but I can do C and Java
+ MadKnight: yea i get it
+ MadKnight: oh
+ MadKnight: theredbobct joshnho Skeenie hey
+ MadKnight: u guys solved the problems&#160;?
+ theredbobcat: Heya! Which ones?
+ theredbobcat: Sorry I've been doing these all night XD
+ FuriousT: If you are "replaying same conditions" it works fine until you attempt a run where you have a code error (syntatx etc).  Then once you've corrected the error the replay no longer plays the GFX and the page has to be reloaded (whereupon you lose your replay conditions).
+ MiguelFeliciano: How am I missing this last test case??? Temperatures - No Temperature... I'm checking for NaN using Javascript and returning zero.  What the hell is it looking for when it's expecting: Nothing?
+ ZarthaxX: you print nothing
+ MadKnight: hey ZarthaxX
+ Coder613: hey all I'm a beginner here. how do you get thor to get the angle in power of thor episode 1?
+ ZarthaxX: you print the direction you wish him to move Coder613
+ Coder613: right that worked for the straight lines but not for the angle. he always strays off course when it comes to the angles.
+ ZarthaxX: what do you mean by angles
+ Coder613: when he moves sw to get to the light he always foes too much south
+ ZarthaxX: you are giving the wrong directions then
+ ZarthaxX: you can choose to just move N, S,W or E
+ ZarthaxX: you dont have to always move in both directions
+ Coder613: Is there any way to increment the degree of direction? Like say divide it by half?
+ ZarthaxX: no
+ ZarthaxX: show a replay of your problem
+ ZarthaxX: you can share the video of thor dying
+ Coder613: <a rel="nofollow" class="external free" href="https://www.codingame.com/servlet/urlinvite?u=3930679">https://www.codingame.com/servlet/urlinvite?u=3930679</a>
+ Coder613: sorry I dont know if that was it. can you see it?
+ ZarthaxX: nop lol
+ ZarthaxX: you gotta see in the same bar where you press play in the replay
+ ZarthaxX: an icon that is to share the video
+ Coder613: right then i found your profile but i cant figure out past that
+ Coder613: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/494148189">https://www.codingame.com/replay/494148189</a>
+ Coder613: I think I figured it out. Thanks so much ZarthaxX you were very helpful.
+ ZarthaxX: okey
+ ZarthaxX: nice :P
+ ZarthaxX: have fun!
+ Coder613: thanks you too!

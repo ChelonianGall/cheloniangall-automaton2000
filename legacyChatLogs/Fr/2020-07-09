@@ -1,0 +1,225 @@
+ Bob: tu preches un convaincu
+ Bob: amis des convaincus, bonjour
+ Bob: comment es ton conviction Automaton2000 o/
+ Automaton2000: après, c'est sans doute une bonne idée de faire du c&#160;?
+ Bon[]Crayon: Bonjour
+ Bon[]Crayon: AutonmatonNN Quel est ton nom&#160;?
+ Bon[]Crayon: Autonmaton2000 D'où viens tu&#160;?
+ Bon[]Crayon: AutomatonNN J'ai oublié ton nom&#160;?
+ AutomatonNN: oui
+ Bon[]Crayon: Automaton2000 D'où viens tu&#160;?
+ Automaton2000: par contre tu as des cas où tu peux jouer
+ Starniel: hey
+ sidhantjain90: Salut!
+ Thyl: Hey&#160;! tout le monde et tortue à Automaton2000
+ Automaton2000: pour voir les puzzles que tu as pas le droit de jouer à un jeu
+ Thyl: Sur CVSZ le distance est calculé comment?
+ Bob: euclidienne non&#160;?
+ Thyl: Euclidienne....
+ Bob: ah oui pardon
+ Thyl: L'hypoténuse&#160;?
+ Thyl: genre
+ Bob: l'hypothenuse c'est dans un triangle
+ Bob: la distance c'est entre deux points
+ Thyl: math.sqrt((vx**2)+(vy**2))
+ Thyl: c'est ça?
+ Thyl: l'euclidienne
+ Bob: tu melanges un peu les choses mais en gros oui
+ Thyl: ok
+ Thyl: j'ai dit hypotenuse parce que quand j'ai fait ma fonction j'ai fait un joli dessin....
+ Bob: la distance euclidienne entre (xA, yA) et (xB, yB) c'est effectivement sqrt((xB-xA)**2+(yB-yA)**2)
+ Thyl: :grinning:
+ Thyl: Merci Bob t'es d'une grande aide&#160;!
+ Bob: et si il s'agit juste de comparer des distances, alors en general on prend le carre de la distance
+ Bob: ca evite de rajouter un sqrt dans le temps de calcul
+ Thyl: a oui pas bête merci beaucoup&#160;!
+ Bob: bon de toute facon dans CvZ tu peux deja obtenir de bons resultats sans chercher a optimiser le code
+ Bob: commence par faire un truc qui fonctionne
+ Thyl: J'essaie un AG avec tes conseilles de la dernière fois&#160;!:grinning:
+ Thyl: après si ça marche pas je pars sur un monte carlo tree search
+ Thyl: petite question
+ Thyl: t'es population
+ Thyl: tu les croisent?
+ Thyl: croises pardon
+ Bob: ah ben oui precisement
+ Bob: c'est le but
+ Thyl: Mais tu les croises comment?
+ Bob: tout est imaginable
+ Bob: le premier truc c'est de definir comment tu representes ta solution
+ Thyl: donc une fonction d'évaluation?
+ Bob: le but du jeu etant que ce soit facile de "croiser" deux solutions
+ Bob: non la fonction d'eval c'est autre chose
+ Bob: par exemple dans CvZ tout ce que tu as besoin de faire comme action c'est de bouger
+ Thyl: oui&#160;!
+ Thyl: Je penser à un truc pour ma population de base
+ Thyl: je peux prendre tout les points ou y a un truc
+ Bob: donc *une* maniere de faire (parmi d'autres) est de dire par exemple que tu t'autorises n certain nombre de mouvements
+ Bob: genre tu decoupes en 8 ou 16 directions
+ Thyl: a oui...
+ Bob: donc ta solution c'est une suite de nombres entre 0 et 15
+ Bob: mettons une trentaine de mouvements
+ Bob: ta population de depart c'est 100% random
+ Thyl: ok&#160;!
+ Thyl: :grinning:
+ Bob: tu vas creer, disons, 100 solutions
+ Bob: tu simules les 100 et a la fin tu dois donner un score a chacune
+ Thyl: ok faut en faire plus que je le pensais
+ Bob: ta fonction d'evaluation c'est ce qui donne le score d'un etat final apres application d'une solution
+ Thyl: oui
+ Bob: pour CvZ, la version simple c'est juste de calculer le score tel qu'il est decrit
+ Bob: et mettre un -1 si tout le monde meurt
+ Bob: une fois que tu as tes 100 resultats
+ Bob: on va dire que tu gardes les 20 meilleurs
+ Thyl: hum....
+ Bob: et on va reconstituer une nouvelle population de 100 pour le tour suivant
+ Bob: donc on garde les 20 meilleurs tels quels
+ Bob: on va creer, disons, 60 croisements *entre ces 20 la*
+ Bob: et rajouter 20 completement random pour introduire du sang neuf
+ Thyl: tu les croisent comment
+ Thyl: tu fais 50 50
+ Bob: pareil, il n'y a pas de maniere definie
+ Bob: tu peux dire 50/50
+ Bob: tu peux choisir un point de "coupure" au hasard
+ Thyl: ok
+ Bob: tout est imaginable, la seule contrainte c'est de prendre deux solutions S1 et S2 et d'en faire une nouvelle avec des morceaux des deux
+ User5981: Hello Bob, j'ai une question sur "rugby score"&#160;: Pourquoi il y a deux lignes en output dans l'exemple&#160;? 
+ Bob: a la fin tu as une nouvelle population de 100
+ Bob: le process s'appelle une generation
+ Thyl: ok
+ Bob: ensuite tu reappliques sur ta nouvelle population
+ Bob: User5981: je n'ai plus le puzzle exactement en tete mais je dirais parce qu'il y a deux calculs possibles pour avoir ce score-la
+ Thyl: jusqu'à que tu as plus de temps&#160;?
+ Bob: c'est ca
+ Thyl: ok merci beaucoup Bob
+ Thyl: Je compte plus le nombres d'heure pendant lequel tu ma fais des cours gratos&#160;!
+ Bob: le fait de selectionner les 20 meilleurs va naturellement avoir tendance a faire "remonter" les "bons" specimens
+ Thyl: C'est vraiment super gentil de m'aider
+ Thyl: :grinning:
+ Thyl: En plus t'explique hyper bien...
+ Bob: introduire de nouveaux elements revient a s'autoriser a envisager de nouvelles solutions, ou a reconsiderer des trucs qu'on aurait pu ecarter a tort
+ Thyl: Je vois...
+ Bob: bien entendu, tous les "details" comme la taille de la solution, de la population, le nombre de meilleurs que tu gardes etc, sont des parametres avec lesquels il faut jouer et faire des essais
+ Bob: l'autre truc important c'est la fonction d'evfaluation
+ Bob: parce que tu ne seras peut-etre pas arrive au bout de la partie une fois ta solution appliquee
+ Thyl: j'ai l’habitude de faire une grande classe "SIMU" ça marche aussi&#160;?
+ Bob: du coup ta fonction d'eval doit etre capable de scorer une situation qui n'est pas definitive
+ Bob: a priori oui
+ Thyl: cool dernière PETITE question
+ Bob: au minimum il faut que tu aies une classe (ou equivalent) pour pouvoir representer l'etat du jeu a un tour donne et le faire evoluer en fonction des actions
+ Bob: c'est ca la simu
+ Thyl: mais solution
+ Thyl: je peux l'heure faire prendre une forme de nombre m'es après les réinterprété&#160;? 
+ Thyl: mes solutions pardon
+ Bob: tout a fait
+ Thyl: cool
+ Bob: tu stockes ca comme tu veux
+ Bob: a toi de te demerder pour convertir ca dans le format d'input attendu par le jeu a la fin
+ Bob: pareil&#160;: commence simple
+ Bob: fais un bete tableau d'entiers, ou une string
+ Bob: les tricks d'optimisation qui consistent a dire "mes 4 directions je peux les stocker sur 4 bits donc ma solution tient sur 8 octets au lieu de 240" c'est pour plus tard
+ Thyl: je vois...
+ Thyl: pas
+ Bob: :D
+ Bob: donc&#160;: commence simple&#160;:)
+ Bob: User5981, donc l'exemple
+ Bob: on veut faire 12 points
+ Bob: il y a 2 manieres de le faire
+ Bob: soit tu marques 4 penalites -&gt; 0 0 4
+ Bob: soit tu marques deux essais, dont un transforme (5 + 2) + 5 -&gt; 2 1 0
+ Bob: ce qui est demande c'est de trouver toutes les manieres legales d'aboutir au score donne
+ BigUP: Il y a des joueurs de flute ici&#160;?
+ Bob: de pipeau, eventuellement
+ BigUP: Bob, je cherche a faire de la copie de clipboard et insertion dans le clipboard en flutter (desktop linux)
+ BigUP: mais je ne sais pas si c'est censé marcher
+ Bob: alors non, desole&#160;:)
+ dbdr: system("xclip ...")&#160;:)
+ BigUP: comme pour tout langage on a de magnifique doc qui décrive les fonctions mais aucun exemple pour les assembler
+ JBM: Ça serait quand même une drôle de réponse "non, c'est censé ne pas marcher"
+ BigUP: ha si, un peu en cliquant sur les liens de la doc
+ BigUP: JBM, en meme temps Flutter pour desktop...
+ JBM: Je connais pas flutter pour desktop
+ dbdr: fallait cliquer?
+ BigUP: dbdr, en meme temps le code que je vois je crois que c'est le code de la fonction, pas vraiement comment l'utiliser&#160;!&#160;;)
+ Bob: the truth is that there is no code
+ Bob: tu te laisses abuser par ce que tu vois
+ BigUP: ca sent bien la galère encore cette histoire...
+ Bob: il faut que tu voies a travers le code
+ Bob: et JBM, ameliore ton connaissance
+ Bob: o/
+ BigUP: Bob, je me demande meme s'il ne faudrait pas que je devienne le code
+ Bob: fais juste gaffe a ne pas te faire terminer alors
+ BigUP: Bob, je risque de Null pointer assez vite
+ JBM: Fix it, j'attends donc que qqun m'informe
+ dbdr: on a déjà un jeu à 6 joueurs?
+ BigUP: dbdr, je dirais non
+ Bob: ca ne me dit rien non plus
+ Bob: je me demande meme si le framework le permet seulement
+ Bob: le layout des last battles est prevu pour 4 max
+ dbdr: Skull &amp; Roses en WIP
+ dbdr: de 3 à 6 joueurs
+ Bob: apres, le layout est pas necessairement correle au framework
+ Bob: techniquement je vois rien qui l'empecherait
+ Bob: putain mais Teams...
+ Bob: toute la UI fonctionne, t'as juste un banner bien discret de 12 pixels de haut qui te dit "ah au fait en vrai je suis pas connecte"
+ Bob: (╯°□°）╯︵ ┻━┻
+ dbdr: lol, je sub je suis #1/3 direct avant de jouer un match :D
+ dbdr: bon, il faut trois joueurs, donc personne avait joué
+ dbdr: du coup faut des volontaires pour voir ce que ça donne avec 5+ joueurs
+ Bob: foulah
+ Bob: si y a un move 0 0 qui marche pourquoi pas
+ dbdr: ya une liste d'actions valides
+ dbdr: donc oui
+ dbdr: apres on peut toujours submit le stub
+ Bob: ouais enfin le stub tu meurs au tour 3 quoi
+ dbdr: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=sOsOYtHjyEo">https://www.youtube.com/watch?v=sOsOYtHjyEo</a>
+ dbdr: ça a l'air d'etre extremement random ce truc
+ Bob: je me souviens y avoir joue une fois il y a longtemps pendant une formation Agile avec Monsieur Scrum
+ darkhorse64: Ca donne envie comme référence, un jeu pour l'Agile
+ Bob: ah non c'etait juste pendant la soiree
+ Bob: on avait la bouteille de Jack a cote
+ dbdr: c'est quoi l'équivalent d'une bouteille sur CG?
+ darkhorse64: J'ai des souvenirs douloureux de tour Eiffel en spaghetti
+ dbdr: faut écrire un bot ironiquement?
+ Bob: pas mal la tour eiffel en spaghetti
+ Bob: on avait fait un puzzle d'asterix
+ 257832: La tour en spaghetti... Erf
+ BlaiseEbuth: Yo Tout l'monde&#160;! Automaton2000, AUtomatonNN&#160;!
+ Automaton2000: c'est comme les gens qui n'ont pas les mêmes
+ AutomatonNN: si tu veux pas me parler de ta faute si tu parles de AutomatonNN et Automaton2000
+ Bob: bribe de conversation telephonique d'un collegue
+ Bob: "-help affiche les options qui prennent un seul - et --help les affiche toutes"
+ Bob: :see_no_evil:
+ BlaiseEbuth: :thinking:
+ JBM: Dbdr: de ce que j'ai compris du framework, c'est de 2 à 8
+ pardouin: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/898cb6a0-aab1-4ce3-814c-fb9a3035c6e1">http://chat.codingame.com/pastebin/898cb6a0-aab1-4ce3-814c-fb9a3035c6e1</a>
+ pardouin: et pendant ce temps tous les autres joueurs cherchent encore &lt;3
+ pardouin: et accessoirement, je rentre enfin dans le top 20 CoC :D
+ dbdr: JBM: manque plus qu'un joueur pour tester les last battles à 5
+ dbdr: nudge nudge wink wink
+ leojean890: dans shadows-of-the-knight-episode-1 faut EVIDEMMENT qu'ils collent un valideur pour lequel la recherche dichotomique ne marche pas hehehe;P:P
+ leojean890: tant pis je vais faire du 3/4 au lieu de 1/2et bidouiller ;P
+ leojean890: en vrai en l'appliquant autrement ça peut le faire j'dirais ;P
+ leojean890: c'est qd même dmg que j'aie du hardcoder un truc pour passer le test manquant et avoir 100% quoi..
+ leojean890: if testcase == ... currY += int(deltaY/2)+1
+ leojean890: else currY += int(deltaY/2)
+ leojean890: genre quand on separe un segment en 2 prendre la valeur du dessus ou du dessous lorsqu'on tombe entre 2 nombres entiers ça fait la différence pour 2 testcase, c'est un peu nimp;P
+ leojean890: c'est comme lancer un dé et tirer au hasard
+ Zorg1: ah bon&#160;? ma recherche dicho marche pour tous les cas pour Batman 1
+ Zorg1: o/ à tous et aux bots Automaton2000 &amp; AutomatonNN
+ Automaton2000: ya pas de raison que ce soit le cas de le dire
+ AutomatonNN: une soirée de code en multi
+ GiB: @leojean j'ai obtenu 100% en prenant toujours la valeur du dessous
+ Zorg1: pareil
+ Zorg1: ah et je prend l'x ou l'y un cran après
+ GiB: Et 100% aussi en prenant toujours la valeur du dessus
+ GiB: Est-ce que tu prends bien l'information du détecteur au 1er tour&#160;? Ca rogne une partie de la grille avant même que Batman n'ait bougé
+ GiB: Il ne faut pas se précipiter sur la position (w/2, h/2)
+ Zorg1: ah tiens on fait des tour eiffel en spaghetti en formation Agile&#160;?
+ Zorg1: je ne me souviens même plus de ce qu'on nous avait fait faire pour développer notre esprit agile
+ BlaiseEbuth: Tour en spaghettis, legos...
+ Zorg1: dynamiter le sacré coeur
+ Zorg1: t'avais aussi le truc en rétro de le faire "en jouant". ça m'a toujours gavé ces conneries pseudo ludiques
+ Zorg1: toujours l'impression qu'on essaie de nous infantiliser avec leur méthode de boyscout décérébré
+ JBM: comment es ton re
+ BigUP: en fait, les navigateurs n'ont pas de listener pour détecter un changement de clipboard...&#160;:( obligé de poller
+ leojean890: GiB, Zorg1, ouais je prends bien l'info au premier tour, étrange alors ;o

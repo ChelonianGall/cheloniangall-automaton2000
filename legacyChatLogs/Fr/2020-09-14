@@ -1,0 +1,764 @@
+ Bob: amis du lundi, AutomatonNN, Automaton2000
+ AutomatonNN: tout le monde est dans le top 5 :D
+ Automaton2000: si tu as des soucis de timeout
+ Moctrof: Imaginons que j'ai une carte de longueur 10 et de largeur 10, est ce que ca se fait d'utiliser un dictionaire pour stocker ce que je veux au lieux d'un tableau a deux dimensions&#160;? Donc au lieu de tab[x][y] = value j'aurai par exemple dict[x*11+y] = value. 
+ Bob: bien sur
+ Moctrof: Yaurait pas de problemes et ca serait plus rapide&#160;?
+ Bob: si tu ne te plantes pas dans ton indexage il n'y a aucune raison que ca pose probleme
+ Bob: suivant les langages c'est un petit peu plus rapide
+ Moctrof: Cool ahah merci, je vais tester alors
+ Bob: pour des besoins courants c'est parfaitement overkill mais si tu as besoins de perf pour faire des simulations, c'est un gain d'implementation qui ne coute pas cher a mettre en place
+ Bob: tu peux meme utiliser un tableau plutot qu'un dictionnaire d'ailleurs
+ CopperFr: T'es en quel langage Moctrof&#160;?
+ Moctrof: En C#
+ CopperFr: C'est possible qu'un tableau en 1D soit plsu rapide
+ Moctrof: SI j'utilise un tableau je devrais créer les methodes d'ajout et de lecture moi meme&#160;? Mais au final ca sera quand meme un dictionnaire non&#160;? J'ai jamais codé un dictionnaire mais je crois que je ferais comme ca
+ Bob: comment ca&#160;?
+ CopperFr: un dictionnaire je sais pas si c'est plus rapide par contre
+ Bob: y a surement des arrays de base en C#&#160;?
+ CopperFr: oui
+ Bob: ca me tue cet antispam a la con
+ Bob: t'as release, allow sender, release and allow, block sender et delete
+ Bob: mais t'as pas delete and block
+ Bob: qui est a priori le truc que tu veux faire dans 99&#160;% des cas
+ Moctrof: Je vois pas la différence entre tab[x*10+y] = value et dict[x*10+y] = value  ?
+ Bob: je ne connais pas assez bien C# pour donner une reponse fireproof mais en regle generate "dict" designe un tableau associatif (map, hashtable...)
+ CopperFr: c'est plus complexe un dict qu'un tableau
+ Bob: dont le principe d'indexation est moins direct, donc un peu plus couteux
+ Moctrof: Ah mai c'est ça, en fait un dictionnaire c'est plus rapide quand on sait pas ou va se trouver la valeur alors que sur une carte on sait donc la ca avantage pa trop
+ CopperFr: c'est un simple offset
+ Bob: un tableau, tu calcules ton index tu vas taper direct dans le bloc memoire et baston
+ CopperFr: après en C# je connais pas assez
+ Bob: un dict c'est utile quand ta cle n'est pas un nombre, ou bien est discontinue
+ CopperFr: oui pour la memoisation c'est pratique
+ Bob: pour une carte 1D/2D/3D, la plupart du temps t'as meilleur temps d'utiliser un bon vieux tableau
+ Moctrof: Oui je crois que je vis rester sur le tableau ahah ^^
+ CopperFr: après tu peux toujours bencher on peut avoir des surprises
+ Moctrof: MErci pour vos réponses
+ Moctrof: J'avoue je testerai peut etre
+ Moctrof: Et entre tableau 1D et 2D ya des differences de performances&#160;?
+ Bob: si tu inlines ton 2D en 1D, non
+ Moctrof: C'est a dire inline&#160;?
+ Bob: faire un tableau 1D de 100 au lieu d'un tableau 2D de 10x10
+ Bob: apres ca depend vraiment de beaucoup de facteurs
+ Moctrof: Ok donc je vais pas de tab[][] pour la carte 
+ Bob: la difference peut aller de 0 a quelque chose de significatif
+ Moctrof: Je préfère optimiser direct au cas ou
+ Bob: nonj
+ Bob: mal
+ Bob: pas bien
+ CopperFr: Ca dépend si c'est un tableau 2d ou un tableau de tableau 1d
+ Bob: la regle numero 1, c'est de d'abord faire un truc qui fonctionne
+ Bob: la regle numero 2, c'est de D'ABORD FAIRE UN TRUC QUI FONCTIONNE
+ Bob: une fois que ce fonctionne et si ca s'avere necessaire, alors seulement la tu optimises
+ Bob: -e+a
+ Moctrof: Oui Maître
+ CopperFr: Il faut parfaire ta formation jeune jedi
+ Moctrof: Oui je m'y attele chaque jour Jeune Maitre
+ Bob: tu peux partir directement sur des trucs un peu sioux si
+ Bob: sinon c'est le meilleur moyen de melanger a la fois les problemes lies a la conception de ta solution en tant que telle et ceux lies aux details d'implementation
+ Moctrof: 1 Oui c'est pour simulation +truc
+ Moctrof: 2. l'habitude bof
+ Bob: et meme dans le cas ou tu demarres direct sur un truc sioux, il vaut mieux bien separer les choses
+ Bob: tu mets en place ton systeme de stockage customise, tu verifies qu'il marche bien et si ton langage le permet tu te fais des helpers pour le camoufler
+ Bob: genre en C/C++ tu peux faire un #define VALUE(x,y) (storageArray[y*10+x])
+ Bob: pour conserver une semantique 2D dans le reste de ton code
+ Moctrof: En c# je peux faire une class Tab1D avec des methodes get et set
+ Bob: hm pour le coup non
+ Moctrof:&#160;:(
+ Bob: sauf a ce que C# sache les inliner peut-etre mais sinon ca va te rajouter un surcout a l'appel des fonctions
+ Bob: si tu veux aller vite il faut reduire au maximum les appels de fonctions
+ Moctrof: Ok
+ Moctrof: Dur dur tout ça, j'aime bien le code propre avec pleins de classes et de methode
+ Moctrof: Mais bon je vais tester de faire propre sans
+ Bob: c'est la premiere fois que tu fais une simulation&#160;?
+ Moctrof: Non j'ai fais Mars Lander et smash the code
+ Bob: ok
+ Moctrof: J'ai peut etre trouvé un truc en C# je sais pas si ca ompte comme une fonction
+ Moctrof: <a rel="nofollow" class="external free" href="https://docs.microsoft.com/fr-fr/dotnet/csharp/programming-guide/indexers/using-indexers">https://docs.microsoft.com/fr-fr/dotnet/csharp/programming-guide/indexers/using-indexers</a>
+ Moctrof: Je pense que si finalement
+ CopperFr: ah ben oui
+ Bob: vraiment si y a un bete array de base, utilise ca
+ Moctrof: Yes
+ Bob: les accesseurs c'est tres joli mais en vrai ca casse les couilles a tout le monde pour un benefice assez proche de zero
+ Bob: j'ai lu des articles qui disaient d'arreter de se faire chier avec ca et que les champs de ta structure qui sont read/write, tu les mets juste en public et c'est marre
+ CopperFr: Les accesseur c'est bien quand le code est un peu plus long qu'un simple acces à un tableau
+ CopperFr: ou une proprieté
+ Moctrof: Yes
+ Moctrof: En C# ca peut etre utile pour certains trucs mais la c'est vrai que ca sert a rien
+ Bob: surtout pour des trucs vraiment triviaux
+ Bob: sur CG je me casse pas la tete, je fais que des struct, tout est public et c'est tout
+ Bob: personne ne va tripoter le code a part moi
+ Moctrof: Les struct c'est toujours par valeur non&#160;? C'est pas plus lent&#160;?
+ Moctrof: Désolé je pose beaucoup de questions Maitre ^^
+ Bob: ca depend du langage
+ Bob: en C++ un struct c'est juste une classe dans laquelle tout est public
+ CopperFr: en C# c'est différent
+ Bob: annuler Amazon Prime apres les 30 jours gratuits c'est comme se debarrasser d'un dragueur lourd
+ CopperFr: :D
+ Bob: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/d399b8b0-dc07-4c5e-b3ac-dfc889a08c88">http://chat.codingame.com/pastebin/d399b8b0-dc07-4c5e-b3ac-dfc889a08c88</a>
+ Bob: quoi que si ils ont la s8 d'engrenages, eventuellement...
+ Alshock: coucou
+ JBM: aqueux
+ JBM: comment es ta weekend
+ Alshock: over
+ Alshock: sympathique semaine qui s'annonce, mais du coup je vais peut-être la garder pour lundi prochain
+ Alshock: Et toi JBM, des expériences dominicale à nous partager&#160;?
+ JBM: RAS
+ Bob: c'etait le debut du tournoi de sumo d'automne
+ Bob: et c'etait tres bien
+ Bob: d'ailleurs on doit etre sur la fin de la deuxieme journee la
+ CopperFr: :D
+ Bob: ma petite a appris a faire ses lacets
+ CopperFr: Ok en VB.NET OrElse est équivalent à || 
+ Bob: et comme c'est ma femme qui lui a montre, ben elle les fait en gauchere :D
+ CopperFr: Je veux plus devenir sumo
+ Bob: et le covid n'a pas que des mauvais cotes, cette annee on a eu moins de passage au stand pendant la journee des associations mais ceux qui se sont arretes etaient vraiment interesses donc au final on a eu plus de touches que l'an dernier
+ CopperFr: C'est bien le covid
+ CopperFr: C'est une association de quoi&#160;?
+ Bob: aikido
+ Bob: je ne desespere pas qu'on arrive a accrocher 3-4 nouveaux cette annee
+ CopperFr: Tu es un passionné de japon du coup&#160;?
+ Bob: fortement interesse, on va dire&#160;:)
+ Bob: je m'auto-evalue a "touriste ++"&#160;:)
+ CopperFr: Tu préféres les hiraganas ou les katakanas&#160;? :D
+ Bob: :D
+ Bob: si j'avais des semaines de 12 jours et des journees de 40 heures, je ferais bien de la calligraphie
+ Bob: faudrait deja que je me discipline pour me remettre correctement au boulot sur la langue
+ CopperFr: j'aimerais bien aussi mais ca prend trop de temps
+ Bob: bah le temps ca se trouve
+ Bob: moi le souci c'est plus d'en avoir un usage regulier pour le mettre en pratique
+ CopperFr: (enfin j'ai quand même regardé les vidéos de julien fontanier)
+ Bob: ca fait plusieurs fois que je vois passer ce nom, c'est quoi&#160;?
+ CopperFr: c'est une chaine youtube des cours de japonais
+ CopperFr: faudrait faire tous les exercices associés par contre
+ Bob: au vu de la liste des videos je dois en savoir l'essentiel, mais j'irai jeter un oeil
+ plieuse: bon j'ai officiellement plus rien à faire
+ CopperFr: ah cool ca
+ plieuse: je vais commencer à coûter de l'argent à mon entreprise au lieu de lui en rapporter
+ Bob: bah tu peux te mettre au japonais alors
+ plieuse: ben ça ne peut pas durer éternellement
+ CopperFr: ca va t'occuper le japonais
+ plieuse: j'avais pris des cours de chinois express pendant le confinement mais j'ai tout oublié ça allait trop vite pour moi
+ Bob: le module de cours de la NHK est tres bien aussi
+ CopperFr: ah ben tu connais des kanji du coup
+ Bob: ah oui un peu
+ Bob: j'ai passe le N3 du JLPT il y a une petite quinzaine d'annees
+ Bob: qui doit toujours correspondre a peu pres au N3 actuel
+ plieuse: je suis quand même un peu inquiète... depuis que ma précédente mission s'est terminée j'ai bossé 90 jours
+ CopperFr: ah oui d'accord
+ plieuse: pas grand-chose
+ Bob: touriste++ quoi
+ plieuse: exactement
+ Bob: ce qui est cool c'est que c'est comme le velo, ca reste bien
+ plieuse: d'accord le boulot ça pousse pas sur les arbres, mais là ça va faire un an
+ plieuse: enfin si le bouleau ça pousse sur les arbres
+ CopperFr: le bouleau c'est un arbre&#160;?
+ plieuse: ^^
+ CopperFr: c'est déjà un bon niveau le n3&#160;?
+ Bob: C'est touriste ++&#160;:)
+ Bob: N3, on peut te parachuter a poil au milieu du Japon et tu devrais etre en mesure de te faire ramener a l'ambassade sans mourir, on va dire
+ CopperFr: 600 kanji + 3100 mots de vocabulaires
+ Bob: tu peux y aller en voyage et te demerder totalement seul sans utiliser l'anglais
+ Bob: eventuellement avec un peu de mal par moments
+ CopperFr: oui surtout que tu peux avoir une appli en plus
+ Bob: pas suffisant pour y habiter et bosser en revanche
+ CopperFr: dommage j'aurais du apprendre ca plus jeune
+ Bob: enfin ca peut aller au debut mais il faut continuer a bosser pour aller vers le N@
+ Bob: 2
+ CopperFr: oui mais bon normalement ca doit aider d'habiter là bas
+ Bob: j'ai une copine dont l'aine est parti au Japon il y a un an pour terminer arts et metiers, il va passer le N2 cette annee
+ Bob: le gap entre N3 et N2 est assez consequent
+ Bob: autant tu peux passer le N3 en loisir, autant le N2 il faut mettre le boulot dedans
+ CopperFr: le peu que j'ai vu je déteste les katakanas 
+ Bob: ba pourquoi ils sont tout gentils&#160;?
+ CopperFr: des fois tu peux pas savoir quel mot c'est
+ Bob: meuh si
+ CopperFr: ca peut peut-être light ou right
+ Bob: oui mais en general c'est le contexte qui permet de trancher
+ Bob: t'as jamais un texte purement en kanas
+ CopperFr: oui je me doute
+ Bob: le truc perfide avec les mots etrangers en kanas, c'est qu'il faut vraiment les prononcer comme ils sont ecrits
+ JBM: c'est perfide ca?
+ Bob: et surtout pas comme le mo etranger qu'ils remplacent
+ CopperFr: je pense que oui
+ JBM: dans le grand spectre des langues etrangeres, je trouve ca plutot soft
+ Bob: sinon ton interlocuteur comprendra pas, c'est garanti
+ CopperFr: et puis c'est un joli mot perfide
+ CopperFr: (pas autant que paradigme)
+ Bob: le "vrai" mot c'est pas le mot d'origine c'est bien leur transcription a eux
+ Bob: tu dis pas "team", tu dis "chiimu"
+ CopperFr: ca dépend pas si le mot a été intégré à la langue&#160;?
+ Bob: ben le mot en kana c'est le mot integre&#160;:)
+ CopperFr: ah je croyais que ca servait a écrire des mot des autres langues
+ CopperFr: mais certains sont intégrés car pas d'autre mot
+ CopperFr: comme computer etc
+ Bob: plus exactement ca sert a ecrire des transcriptions de mots d'origine etrangere qui ont ete integres a la langue
+ Bob: les noms propres
+ Bob: et parfois a mettre de l'emphase sur des termes japonais
+ Bob: mais typiquement un truc comme エレベター il faut bien prononcer erebetaa
+ Bob: si t'essayes de dire elevator avec ton meilleur accent british, personne ne captera
+ Bob: les mots vraiment etrangers qui n'ont rien d'autre a faire la, je pense qu'ils seront plutot mis en romaji
+ CopperFr: je suis pas sur qu'en pratique ce soit toujours le cas
+ CopperFr: tu connais le youtubeur louis-san&#160;?
+ Bob: non
+ Moctrof: Ahah louis san etait dans ma classe en terminale
+ CopperFr: C'est vrai&#160;?
+ Moctrof: Oui et en 6eme aussi
+ CopperFr: Tu dois connaitre ses chaines du coup
+ Moctrof: Et charles qui est apparu dans certaines de ses videos aussi 
+ Moctrof: J'aivite fais regardé
+ Moctrof: J'étais pas son meilleur pote non plus. Petite anecdote, sa mere l'amenai en voiture de sport tous les matins
+ Moctrof: et yenvait trois
+ Moctrof: Bref
+ CopperFr: c'est sur qu'ils sont riches
+ Bob: en pratique t'as surtout peu de risque de tomber sur un mot etranger qui, en contexte, puisse preter a confusion
+ Bob: au pire tu vas avoir du mal a remapper la transcription vers le mot d'origine&#160;:)
+ CopperFr: oui on va dire que c'était mon use case du japonais :D
+ CopperFr: (merci google translate)
+ Bob: j'adore le serveur audiotel qui te fait entrer 5 ou 6 choix pour obtenir ton magasin, qui te fait patienter deux minutes sur de la musique de merde et qui finit par te dire "ah en fait on a mis en place un nouveau numero de telephone pour ca (qui accessoirement est facture 20 centimes la minute mais ca on va pas te le dire hein)"
+ Bob: (╯°□°）╯︵ ┻━┻
+ CopperFr: c'est pas novueau
+ Moctrof: J'avais appris hiragana et katakana sur une appli et quelques mots mais tout publié 
+ Moctrof: oublié*
+ CopperFr: oui c'est comme moi quoi
+ Moctrof: Je pensais que ca me suffirait pour commencer a comprendre des phrase quand je regarde des mangas sous titrés
+ CopperFr: mais moi je connais pas de japonais (ni de franco-japonais) :D
+ Bob: bah c'est comme tout, il faut pratiquer pour que ca s'incruste
+ Moctrof: lol je l'ai pas revu depuis la terminale
+ CopperFr: oui je me doute si vous étiez pas pote
+ CopperFr: et c'était une terminale S&#160;?
+ Moctrof: yes
+ Moctrof:  Une question pour MCTS de A*Craft, dans les noeuds je met la prochaine fleche d'un robot (direction et coordonées). Mais si ya plusieurs robots je fais met dans un noeud les fleches de tous les robots ou je fais plusieurs arbres&#160;? Ou autres&#160;? 
+ Moctrof: Ou alors je fais un noeud pour chaque case, puis comme noeud enfant je prends tous les autres cases&#160;? Ca parait plus csimple
+ Moctrof: Enfin ca fait beaucoup de noeud si pour chaque case ya 5 directions possibles
+ Moctrof: Bon je vais regarder des videos sur les tree seach car la c'est un peu flou ce que je dois afire
+ darkhorse64: Le MCTS sur A*Craft, ça n'a pas de sens, il n'y a qu'un seul tour
+ JBM: tu peux voir un tour comme un placement
+ darkhorse64: Les placements sont simultanés
+ JBM: "tu peux voir"
+ darkhorse64: Je vois mal
+ JBM: du simultane, ce n'est qu'une tres forte acceleration du sequentiel
+ darkhorse64: accélération = flou
+ JBM: flou = photos ratees
+ Moctrof: donc premier tour on placerai la fleche sur la premiere case de laplateforme&#160;?
+ JBM: cqfd
+ JBM: ah non mais on va pas faire l'algo pour toi non plus
+ Moctrof: ok&#160;:(
+ CopperFr: il est méchant JBM
+ JBM: je defends l'interpretation charitable contre darkhorse64
+ darkhorse64: Tu pars dans une mauvaise direction
+ JBM: mais ca l'empeche pas d'avoir un doute, et c'est a toi de le lever
+ JBM: ah ca y est je viens de comprendre le "flou"
+ darkhorse64: parce qu'il y a plusieurs robots
+ darkhorse64: parce que
+ darkhorse64: oops
+ Zorg1: copperFr&#160;: "or else" (||) et "and then" (&amp;&amp;) tu les retrouves en ADA&#160;;-)
+ CopperFr: je m'en souviens pas :D
+ CopperFr: en pascal je crois que c'est une option de compilation le short circuit
+ Zorg1: c'est un peu casse gueule d'avoir le comportement de ton code qui dépend d'une option de compil
+ JBM: chez borland c'est des pragmas
+ JBM: {$B+} et {$B-} de memoire
+ Zorg1: y avait bien un flag pour désactiver les checks au runtime
+ CopperFr: tu peux affiner avec des pragma
+ CopperFr: ou
+ CopperFr: oui tu les enlève en mode release
+ Zorg1: c'est dangereux quand même
+ dbdr: "or else" c'est une menace? :D
+ CopperFr: ceci dit en général tu préféres le mode court
+ CopperFr: pour les checks tu parlait des indices de tableau&#160;?
+ Zorg1: oui les indices de tableau, les checks sur les pointeurs, les intervalles (en ADA ça je crois) ...
+ CopperFr: Après le pascal j'aime bien mais qu'est-ce c'est pénible de devoir déclarer toutes les variables au dessus&#160;:(
+ JBM: ca va avec la compilation une-passe rapide
+ JBM: C etait pas si loin
+ PY_himself: .
+ Liam29: 3623
+ PY_himself: (╯°□°）╯︵ ┻━┻
+ Moctrof: In A*Craft there is this line "Automaton2000 will stop functioning if it revisits a state (position + direction) it's been in."
+ Automaton2000: comme ça je peux pas me permettre de faire des if
+ Moctrof: But we can't change the direction of a cell after the beginning so (position +direction) is the same a only position 
+ Moctrof: right&#160;? Or does that mean that if the direction is . it can come back on the cell
+ darkhorse64: You can enter the same from different directions
+ darkhorse64: *same cell*
+ Moctrof: Oh really
+ Moctrof: Thanks I would have never understood that
+ darkhorse64: I did not catch it on first reading but watching my own  replays helped
+ Moctrof: And for the first cell he is in how does it work&#160;?
+ Bob: ah oui on est bien sur fr, j'ai eu un vieux doute
+ Moctrof: Ah mince
+ darkhorse64: même pas fait gaffe
+ darkhorse64: Si tu démarres sur une cellule où il y a une flêche, celle-ci prend le pas sur la direction initiale d'Automaton2000
+ Automaton2000: pour la collision avec le bord de la carte&#160;?
+ darkhorse64: Oui, je te suicide si je veux Automaton2000
+ Automaton2000: vous avez un peu de marge
+ Bob: bon, c'est l'heure du choix
+ Bob: Taketsuru, Aberlour, Lagavulin ou Talisker
+ darkhorse64: Contexte&#160;?
+ Bob: all of the above n'est malheureusement pas une option
+ Bob: contexte&#160;: mon bar est vide
+ Bob: enfin vide de whisky quoi
+ Bob: sinon j'ai aussi Damoiseau vs Dillon pour le rhum
+ darkhorse64: Taketsuru, c'est un nom de whisky&#160;? 
+ Bob: oui, c'est de chez Nikka
+ Bob: les Japonais sont etonnamment doues en whisky
+ darkhorse64: Je ne connais que l'alcool de riz vietnamien. Tu peux rejouer les tontons flingueurs avec
+ Bob: on a fait ca chez un ami cet ete avec un genre d'eau de vie de cidre
+ Bob: c'etait euh
+ Bob: bizarre
+ Bob: assez litteralement
+ darkhorse64: ça peut pas être pire que le cidre basque
+ Bob: rien que le terme pique le nez
+ darkhorse64: C'est du cidre brut avec un degré d'amertume très élévé
+ CopperFr: Ca s'écrit 竹鶴&#160;?
+ Danotris: Maxime encore battu
+ darkhorse64: Je sais pas si c'est prudent d'énerver un mec de CG
+ Moctrof: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/486988012">https://www.codingame.com/share-replay/486988012</a>
+ Moctrof: Je comprend pas pourquoi le score c'est 3 et pas 4
+ Moctrof: Ah si c'est bon
+ Bob: ben tu fais 3 pas et tu meurs
+ Bob: c'est tout
+ Bob: (de memoire le score c'est le nombre de cases parcourues)
+ darkhorse64: Bon, 4k pour un premier jet à A*C. Il y a du boulot pour aller à 10k
+ darkhorse64: :tired_face:
+ BlaiseEbuth: Yo tout l'monde&#160;! Automaton2000, AutomatonNN&#160;!
+ Automaton2000: tu dis ça parce que je connais pas
+ AutomatonNN: a voir les mails de contest de contest de contest de contest de contest de contest quand tu as des t
+ darkhorse64: Automaton2000 (id=2) is starting an infinite loop
+ Automaton2000: il y a trop de chose
+ Bob: ah pardon j'ai mal lu, c'est 7.2k
+ Bob: 6 contest, pas mal AutomatonNN
+ AutomatonNN: sa reviens de la maison et les autres 
+ darkhorse64: Ca dépend aussi surement du choix des cases sur lesquelles tu fais du random 
+ Bob: oui je suis en train de regarder mon code pour voir ce que je trafique&#160;:)
+ Bob: mais a part ne rien mettre dans les couloirs et une bricole que je ne saurais meme plus m'expliquer, j'ai pas de restrictions particluieres
+ CopperFr: Très facile le puzzle de la semaine
+ darkhorse64: J'ai la même chose mais je mute comme un bourrin partout ailleurs. Sur le PM d'Euler, il n'en fait que très peu. Ca doit y faire
+ darkhorse64: Je tenterais un MC plus tard. C'est pas le plus long à faire
+ Bob: ah mais c'est des branques en fait chez But
+ Bob: je veux des infos sur une commande
+ Bob: il y a deux numeros de telephone indiques sur le bon, ce matin j'appelle celui qui n'est pas surtaxe
+ Bob: au bout de deux minutes de serveur vocal il me renvoie sur l'autre
+ Bob: la je viens d'appeler l'autre
+ Bob: le serveur commence par me dire "vous savez pour un suivi de commande vous pouvez aussi appeler &lt;le premier numero&gt; qui n'est meme pas surtaxe"
+ Bob: et au bout d'une minute il termine par "pour mieux vous servir on a mis en place un nouveau numero unique a &lt;le numero auquel je suis connecte&gt;, a bientot"
+ Bob: (╯°□°）╯︵ ┻━┻
+ darkhorse64: But va mal. C'est un signe parmi d'autres quand la relation client est négligée
+ Bob: ouais mais confo va mal et alinea va mal aussi
+ Bob: au bout d'un moment il va rester quoi pour acheter du meuble&#160;?
+ CopperFr: et darty ca va&#160;?
+ BlaiseEbuth: ┬─┬ノ( º _ ºノ)
+ CopperFr: Pourtant c'était bien but quand y'avait le juste prix avec Patrick Roy
+ Bob: t'es pas gentil de nous mettre un coup de vieux
+ CopperFr: c'est la même époque que l'amstrad cpc
+ <b>**BlaiseEbuth essui le sang sur son vieux et le range dans son foureau.</b></p><p><img src="/a/29407964997640" /> Bob: GraphQL error undefined == true
+ Bob: ca sent le gag
+ Bob: on appreciera la finesse du diagnostic
+ BlaiseEbuth: En même temps c'est facebook, alors la finesse...
+ CopperFr: Vous préférez la syntaxe C ou D pour les tableaux&#160;?
+ BlaiseEbuth: Me souviens même pas de celle de D...
+ CopperFr: string[n] map;
+ BlaiseEbuth: bah C alors.
+ Bob: why noth both?
+ Bob: -h
+ CopperFr: ah il a pas l'air de prendre les vla le D&#160;:(
+ <b>**BlaiseEbuth mets son camaille et se tourne vers Bob: "Tu dois choisir judicieusement..."</b>
+ Bob: c'etait des humbles, il avaient pas besoin d'un truc fancy
+ Bob: ils faisaient du C
+ BlaiseEbuth: Tu as choisis judicieusement...
+ Bob: :joy:
+ Bob: ah ca c'est "joy"&#160;?
+ Bob: soit
+ CopperFr: ah non des string non mutable&#160;:(
+ Bob: fix it
+ Alshock: pareil, je sais pas si j'ai grossi mais mes strings son pas mettables
+ BlaiseEbuth: Faits en des tableaux...
+ CopperFr: oui c'est ce que j'ai fait
+ CopperFr: pour le couo même en C c'était plus simple
+ BlaiseEbuth: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/d061821f-bc9c-4f13-9624-cc842d5bdc31">http://chat.codingame.com/pastebin/d061821f-bc9c-4f13-9624-cc842d5bdc31</a>
+ BlaiseEbuth: Wow le pastebin de lien&#160;!
+ Bob: muahaha
+ CopperFr: oh du base64
+ BlaiseEbuth: <a rel="nofollow" class="external free" href="http://gerard.pailloux.free.fr/images/photo/photo603.jpg">http://gerard.pailloux.free.fr/images/photo/photo603.jpg</a>
+ Bob: on dira ce qu'on veut mais internet est quand meme une merveilleuse invention
+ CopperFr: pas autant que le tramway si&#160;?
+ BlaiseEbuth: Dédicace à b0n5a1 pour celle-là...
+ Bob: non le tramway c'est tres bien aussi
+ Bob: dans mon cas c'est l'implementation qui est a chier&#160;:)
+ YuuBey: Salut les gars, je suis nouveau ici, vous savez si il y a moyen d'apprendre à coder simplement en partant de ce site&#160;? Merci beaucoup&#160;! 
+ Bob: reponse&#160;: non
+ BlaiseEbuth: NoN
+ YuuBey: Ok, c'est gentil, merci à vous
+ Bob: c'est un site pour developper des competences que tu as deja
+ CopperFr: ceci dit j'ai appris le D
+ Bob: si tu pars vraiment de zero, il vaut mieux commencer avec un tuto dedie au langage de ton choix
+ YuuBey: Et vous savez ou je peux trouver quelque chose de cohérent pour le C#&#160;? (Excepté youtube...) 
+ BlaiseEbuth: Plus que 22 lettres...
+ Bob: une fois que tu t'y retrouves un peu, tu peux venir ici pour appliquer tes connaissances a la resolution des exercices
+ CopperFr: qui de dit que les apprends dans l'ordre&#160;?
+ CopperFr: te dit que je*
+ Bob: et une fois que tu maitrises bien un langage, tu peux utiliser le site pour te faire la main sur d'autres
+ YuuBey: ça marche Bob merci pour les conseils 
+ Bob: au hasard&#160;: <a rel="nofollow" class="external free" href="https://openclassrooms.com/fr/courses/1526901-apprenez-a-developper-en-c">https://openclassrooms.com/fr/courses/1526901-apprenez-a-developper-en-c</a>
+ CopperFr: oui c'est sur ca aide de connaitre d'autres langages
+ BlaiseEbuth: Naaahhhh pas oc
+ YuuBey: J'ai regardé OC, c'est pas intuitif 
+ plieuse: codecademy&#160;?
+ CopperFr: commence par le JavaScript ou le pyhton&#160;?
+ YuuBey: franchement j'avais envie de me pendre y'a 3 jours 
+ Bob: ceux de tutorialspoint sont pas mal a priori
+ YuuBey: Mais le Java va disparaître fin 2020 non&#160;?
+ CopperFr: l'avantage du JavaScript c'est tu as une sous grammaire commune avec d'autre langage plus prestigieux 
+ Bob: au meme moment qu'Apple, je dirais
+ YuuBey: et j'ai vu que le C# était l'avancée de C et C+
+ Moctrof: Moi je pense qu'une bonne facon de commencer c'est les videos youtube
+ BlaiseEbuth: Euh non
+ Moctrof: LOL TRUE
+ CopperFr: c'est surtout Pascal
+ Bob: et on peut meme dire Java&#160;!= JavaScript, en plus
+ YuuBey: Ok merci les gars, désolé de passer pour une chiure ^^' 
+ CopperFr: y a une sous grammaire commune pour les for par exemple
+ Bob: au sens JS du&#160;!=&#160;:)
+ BlaiseEbuth: Si seulement java pouvait disparaitre
+ CopperFr: ca va disparaitre Java
+ Bob: non non aucun souci YuuBey
+ CopperFr: y a Kotlin :D
+ ThomasNicoullaud: Déjà que le Cobol ne disparaît pas
+ Bob: ^
+ YuuBey: C'est juste que ça m'intéresse de dingue, mais je sais pas où mettre mes pieds pour commencer 
+ BlaiseEbuth: Mais c# c'est plutôt une régression :grin:
+ Bob: on trouve toujours des algos en Fortran, alors pour la disparition de Java vous repasserez
+ Moctrof: C# c'est pas mal en vrai... 
+ CopperFr: oui je suis d'accord
+ BlaiseEbuth: sfdgdfsdqfgergteqgf
+ Moctrof: Peut etre pas aussi rapide que c et c++ mais c'est plus beau&#160;:)
+ BlaiseEbuth: même commentaire
+ BlaiseEbuth: Ca peut être merdique et avoir des perf de merde mais tant que c'est bô...
+ BlaiseEbuth: Tu connais Dogeek&#160;?
+ Moctrof: Nope
+ BlaiseEbuth: Tu devrais, vous avez des choses à vous dire ^^
+ CopperFr: en même temps tu va pas faire du C++ toute ta vie non plus
+ Bob: meme moi j'ai eu envie de faire autre chose c'est dire
+ BlaiseEbuth: Je fais pas que du C++, et je vois pas l'intérêt de remplacer quelque chose qui fonctionne... Surtout par un truc approximatif sans raison d'être autre que commerciale...
+ Moctrof: La rapidité de développement par exemple
+ BlaiseEbuth: Ouai, développer rapidement des trucs bancals c'est une vrai plus-value ^^
+ CopperFr: c'est pas bancal du tout
+ BlaiseEbuth: non...
+ CopperFr: j'ai fait du C# dans unity c'est plutôt fonctionnel
+ BlaiseEbuth: Ah bancal + bancal ça se complète bien ^^
+ Moctrof:  Oui et avec  unity en 2jours  tu as un truc sympa.
+ BlaiseEbuth: Et bancal
+ CopperFr: en tout cas plus sympa que je pourrais faire from scratch en C++
+ CopperFr: (après j'ai pas testé les autres gros moteurs)
+ TanguiVintuitan: Haha les guerres de chapelles
+ BlaiseEbuth: Bah forcément si tu compares un moteur au from scratch... Test Unreal avec c++ on verra
+ CopperFr: après c'est sans doute plus difficile à prendre en main
+ BlaiseEbuth: Qui a dit qu'un résultat correct était simple à produire...
+ TanguiVintuitan: je me suis toujours demandé comment un jeu avec les contraintes de performances pouvait tourner avec un langage semi interprété
+ CopperFr: le moteur est en C++
+ TanguiVintuitan: j'ai jamais fait de jv c'est assez obscur pour moi ^^
+ BlaiseEbuth: Un langage dit interprété peut très bien être compilé si on veux...
+ TanguiVintuitan: ça implique de coder un compilateur non&#160;?
+ BlaiseEbuth: Ouai, mais là on parle d'usines à gaz ça peut bien embarquer un p'tit compilo
+ BlaiseEbuth: Et puis même interprété ça se fait, regarde minecraft...
+ TanguiVintuitan: ouais après la java edition n'est plus développée
+ CopperFr: de toute façon y a pas que du C# y a aussi des shaders
+ TanguiVintuitan: quand tu parles d'embarquer un petit compilateur c'est un peu comme v8 de google&#160;?
+ TanguiVintuitan: genre compilation à la volée
+ CopperFr: il pourrait sans doute faire ca
+ CopperFr: unity utilise mono
+ CopperFr: dans unity le c# est utilisé comme langage de script
+ CopperFr: (avant y'avait aussi JavaScript et un langage proprio)
+ CopperFr: mais ils ont gardé que le C# car c'était le langage le plus utilisé
+ BlaiseEbuth: Pas forcément, à la volée, quand tu génères ton projet tu peux compiler tout le code d'un coup. 
+ BlaiseEbuth: -,
+ TanguiVintuitan: C'est à ce genre de moments que j'aimerais bien me dédoubler pour pouvoir apprendre plusieurs trucs à la fois ...
+ BlaiseEbuth: ^^
+ CopperFr: trop de choses&#160;:(
+ CopperFr: (surtout si tu veux aussi apprendre les kanjis)
+ TanguiVintuitan: entre le mobile, le web, et codingame pour rester habitué aux tests techniques c'est la misère
+ Moctrof: ^^ Moi je cherche un boulot en tant que developpeur .NET, suaf que dans le .NET ya pleins de truc différents  qui sont encore utilisés
+ Moctrof: Rester opérationnel sur tout c'est une galere
+ BlaiseEbuth: va de retro
+ CopperFr: trop de technos dans le .net
+ CopperFr: (surtout que parfois elles sont obsolète avant que tu ne les connaisse)
+ Moctrof: UWP ^^
+ Moctrof: C'est le truc pour les windows phone et tablette windows, et soit diant pour les logiciels windows aussi
+ Moctrof: Mais personne n'a jamais utiisé
+ BlaiseEbuth: Surtout que windows phone... :grin:
+ CopperFr: y a Xamarin aussi 
+ TanguiVintuitan: moi qui pleurait parce que j'essaie de m'extirper comme je peux de PHP ...
+ Moctrof: Oui c'est pour ça ^^ Windows phone ca servrait à rien
+ CopperFr: c'est cool que ca ait disparu Windows Phone
+ CopperFr: malheureusement y a encore apple&#160;:(
+ Moctrof: Ahah un autre débat arrive..
+ CopperFr: sinon ca serait cool le dev mobile :D
+ BlaiseEbuth: J'avais du faire une app windows phone à l'école...
+ Moctrof: En vrai Android c'est une galere aussi nan&#160;? Avec toutes les versions et tous les mobiles différents
+ CopperFr: oui après y a des lib de compatibilité
+ BlaiseEbuth: Bah tu dev pour la dernière version et si les gens ont pas la dernière version c'est leur problème, c'est très simple
+ CopperFr: le problème en android c'est la mise à jour de lo's
+ Moctrof: Ahah mais ya genre 3% des gens qui ont la derniere version
+ CopperFr: oui c'est le problème d'android car c'est trop difficile de mettre à jour les tél
+ BlaiseEbuth: Z'ont qu'à changer de tel, non mais
+ CopperFr: (en plus avec les surcouches)
+ BlaiseEbuth: Ouai c'est plus les surcouches qu'android le problème
+ TanguiVintuitan: Quelqu'un a essayé flutter/dart ici&#160;?
+ BlaiseEbuth: Pas moi
+ CopperFr: Je crois que je l'avais installé et ca avait du planter mon android studio :D
+ Moctrof: Oui c'est pour ça moi j'ai arrété Android, je prefere savoir que quand ca marche chez moi, ca marche partout
+ TanguiVintuitan: c'est pas souvent le cas ça ^^
+ TanguiVintuitan: enfin si ptet pour tout ce qui tourne sur la JVM
+ TanguiVintuitan: hors android
+ Moctrof: Developpement web ca marche quand meme mieux
+ TanguiVintuitan: hmmmm
+ Moctrof: Sauf pour ceux qui sont sur internet explorer
+ Moctrof: mais fuck them
+ TanguiVintuitan: mon dernier projet la semaine avant la mise en prod de mon API je commençait à avoir de sérieuses différences de comportement entre mon environnement de dev et le serveur de test
+ CopperFr: déjà le vieux edge a disparu
+ TanguiVintuitan: ça a été résolu mais le temps de trouver d'où venaient les problèmes c'était coton
+ TanguiVintuitan: après sur le front end c'est clair que c'est cool
+ Bob: franchement quand je vois le nombre de sites qui fonctionnent comme de la merde...
+ Bob: t'as des mecs qui sont foutus de faire un site ou un truc aussi con que cliquer un bouton ne fonctionne pas sur firefox
+ Bob: et sur cette note joyeuse, je rentre a ma maison
+ CopperFr: ca marchait peut-êrte sur d'ancienne version
+ Zorg1: sur IE6 je suppose ^^
+ CopperFr: C'était bien IE6
+ TanguiVintuitan: J'ai eu le droit à une magnifique TypeError sur le site de pôle emploi ce matin en parlant de ça ^^
+ Moctrof: Dans mcts on met une probabilité de choisir un noeud qui est pas le meilleur ou un noeud qu'on a pas exploré c'est ça&#160;?
+ Moctrof: 2270 dans A*Craft aprés avoir fait un mcts&#160;:( Je suis pas sur qu'il soit bien fait
+ Deeluxe: Salut, <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/713bf3e1-e29c-4b03-969c-e8f42d475555">http://chat.codingame.com/pastebin/713bf3e1-e29c-4b03-969c-e8f42d475555</a>
+ Moctrof: Je pense que c'est car console.log revient à la ligne
+ Moctrof: Mais je sais pas dans quel langage tu code alors je sais pas comment faire pour pas renvoyer a la ligne
+ CopperFr: C'est du javascript à mon avis
+ Moctrof: Sinon tuajoutes petit a petit a ton string et tu l'afffiches a la fin
+ Deeluxe: oui js, c'est ce que je me disait crée une string a chaque fois et a la fin toute les concaténés.
+ BlupblupDoux: d
+ BlaiseEbuth: Le chaton se réveille, miaule, je lui demande ce qu'il y'a, il m'écrit "tg" sur le clavier... Qu'est-ce que ça va être l'adolescence...
+ <b>**dwarfie lance une torture sur le chaton ...</b></p><p><img src="/a/17785582865119" /> dwarfie: ...tortue...
+ BlaiseEbuth: On torture pas les chatons&#160;!
+ dwarfie: non , on les noie , c'est plus civilisé
+ JBM: ca detrempe la viande, quelle horrible idee
+ dwarfie: sinon , ca devient des chats et ca rend pessimiste&#160;;)
+ BlaiseEbuth: C'est donc pour ça&#160;!
+ pardouin: o/
+ pardouin: je m'essaie au golf Perl, c'est pas glorieux&#160;:)
+ BlaiseEbuth: Golfer avec une perle c'est forcément plus chaud qu'avec une balle prévue à cet effet...
+ Moctrof: true
+ CopperFr: false
+ nicola: 42
+ Zorg1: λf.λg.f
+ pardouin: to each his Church
+ Zorg1: allons-y&#160;!
+ Zorg1: Automaton2000 la forme olympique&#160;?
+ Automaton2000: j'aurais envie de dire que je peux pas juste faire un shuffle sur la liste des cartes
+ Zorg1: :thinking: AutomatonNN tu peux aider ton frère il a l'air de caler pour faire une bataille
+ AutomatonNN: oui
+ Zorg1: bon esprit AutomatonNN
+ AutomatonNN: ou le chat en fait&#160;:)
+ Zorg1: le gros chat est mort ce soir, AutomatonNN
+ AutomatonNN: Nan par contre c'est pas trop compliqué de faire un truc pareil
+ Moctrof: En fait ils prennent juste des messages au hazards c'est ça&#160;?
+ Moctrof: Aumaton 2000 c'est ça&#160;?
+ Moctrof:&#160;:(
+ Moctrof: Automaton2000 reconnais tu ton nom avec un espace&#160;?
+ Automaton2000: ca sert a quoi&#160;?
+ Moctrof: Automaton2000 Ca fait un plus joli nom
+ Automaton2000: j'ai regardé le code de agade
+ Moctrof: Automaton2000 il est bon son code&#160;?
+ Automaton2000: je pense que le boss est à combien le boss gold&#160;?
+ Moctrof: Automaton2000 3
+ Automaton2000: j'ai jamais été bon en immitation.
+ Moctrof: AutomatonNN imite Automaton2000
+ AutomatonNN: pose ta question&#160;:)
+ Automaton2000: tu es en minimax&#160;?
+ Moctrof: Bah répond AutomatonNN
+ AutomatonNN: sur le dernier test j'ai pas trop de connaissance sur ce que tu as pas encore recupérer&#160;:(
+ Moctrof: Automaton2000
+ Automaton2000: faut dire qu'il est pas à jour
+ Moctrof: AutomatonNN
+ Moctrof: AutomatonNN&#160;?
+ AutomatonNN: nicola le problème de ce que tu veux dire tu peux aller faire un truc qui peut etre parti en fin de 
+ Moctrof: Ok
+ Zorg1: Automaton2000 c'est une chaîne de markov basé sur les conversations du chat, avec un prefix de deux ou trois mots je ne sais plus
+ Automaton2000: c'est un peu le but
+ Zorg1: AutomatonNN c'est un NN qui gnénère aussi en fonction des conversations du chat, char par char jusqu'à un max de 100 chars (ce qui explique parfois les fins abruptes de ses phrases)
+ AutomatonNN: oui je suis tout seul au moins j'ai juste pas mis le parsing en tout cas&#160;:(
+ Moctrof: Ok
+ Moctrof: Ca serait marrant un challenge entre les joueurs de coding gamepour essayer de faire mieux 
+ Moctrof: Bon ca doit prendre du temps
+ Moctrof: Automaton NN ca te dirait un nouveau petit frere
+ Moctrof: Automaton NN&#160;?
+ Zorg1: de temps en temps il y a des essais
+ Moctrof: AutomatonNN
+ Zorg1: mais bon
+ AutomatonNN: vry: Automaton2000&#160;?
+ leojean890: finalement j'ai cédé je modif mon COK :P
+ leojean890: y'a un puzzle de Magus "crée ton automaton"
+ leojean890: j'avais un truc à tenter encore sur COK&#160;: ajouter un voronoi
+ leojean890: faut voir comment je pondère ça
+ ZooooX: Salut, j'ai un soucis sur le puzzle facile 'hunger games', j'ai l’impression que mon résultat en sortie est le bon mais il me trouve&#160;: Trouvé&#160;: Killer: WinnerEnd of line (\n) Attendu&#160;: Rien
+ ZooooX: a quoi correspond ce rien exactement&#160;?
+ pardouin: tu dois print un \n en trop
+ pardouin: leojean890 je te vois pas dans le leaderboard COK
+ ZooooX: je vais essayer de le virer mais je trouves juste bizarre qu'il attende Rien et non pas Killer Foo
+ leojean890: je me suis pas inscrit au nouveau tournoi pour le moment juste j'ai tenté de modif mon code et resubmit mais ça ne m'a pas fait marcher
+ leojean890: monter*
+ pardouin: tu es en quelle ligue&#160;?
+ leojean890: gold
+ pardouin: ok
+ Zorg1: bah c'est déjà mieux que moi ^^
+ leojean890: mon submit est bof je suis 104 gold alors que 75 avant submit :P
+ pardouin: en fait il attend bien un résultat, mais il attend rien après
+ pardouin: donc si tu print un truc en trop il dit "attendu&#160;: rien"
+ leojean890: mieux que toi&#160;? t'es pas motivé par cok&#160;?:P
+ pardouin: j'avais à peine commencé, j'étais en wood 2
+ pardouin: j'avais oublié ce multi, et genre 3 semaines après je vois que je monte bronze
+ leojean890: d'accord :P
+ pardouin: XD
+ leojean890: je l'ai fait en novembre :P
+ leojean890: (je répondais à zorg1 qui disait "mieux que moi"
+ leojean890: ah donc on t'a bien poussé en bronze&#160;?;)
+ pardouin: apparemment
+ pardouin: je voyais bien que j'étais pas loin mais j'avais laissé tombé car pas trop le temps de creuser
+ pardouin: sinon ce contest ça peut rapporter des trucs sur CG&#160;? genre exp, succès&#160;?
+ Zorg1: bah non c'est pas du off
+ leojean890: unofficial =&gt; pas de gains ;P
+ Zorg1: c'est vraiment pour la gloire
+ leojean890: moi j'ai copié mon code voronoi de tron, j'ai fait 2-3 adaptations, et je tente des pondérations là
+ leojean890: on verra si ça m'aide ornot
+ leojean890: dernier submit large pire que le précédent
+ ZooooX: @pardouin effectivement ça marches mieux merci :D
+ leojean890: limite je lance un cg bench avec 20 combinaisons de paramètres
+ BlaiseEbuth: Reuh
+ leojean890: yo!
+ BlaiseEbuth: o/
+ Zorg1: \o
+ leojean890: tiens ça marche pas dans COK sur CG benchmark, de mettre -2 pour affronter un boss;)
+ leojean890: (marche dans cultist-wars)
+ BlaiseEbuth: Nan faut mettre "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn"
+ Zorg1: mais tu risques d'invoquer un machine pas cool qui glandouille entre les dimensions
+ Zorg1: enfin j'ai lu ça dans le Petit Necronomicon Illustré
+ leojean890: hehe
+ BlaiseEbuth: Tu t'es mis sur kutulu finalement leojean890&#160;?
+ leojean890: ouais j'ai juste fait un voronoi:)
+ JBM: un voronoi ;p
+ leojean890: mais je pense pas que je vais faire bcp de kutulu cette semaine :P
+ leojean890: et toi&#160;?
+ leojean890: du coup j'ss remonté 58 gold à l'instant (75 tout à l'heure, ça a pas trop changé pour le moment)
+ Zorg1: Le soleil vient juste d'exploser, encore une belle fin du monde et il va bientôt arriver l'ami Kutulu ...
+ leojean890: ah 61 en fait fin de submit
+ BlaiseEbuth: J'ai drop mon vieux code et j'ai codé deux trois trucs, mais j'ai rien submit encore.
+ leojean890: ah^^ franchement j'ai tout gardé et ajouté ça à mon éval c tt:)
+ leojean890: et je fais tourner un cg benchmark avec 21 pondérations diff pour voir ce qu'il ene st
+ leojean890: en est
+ leojean890: 17.59% de winrate sur les 3 top gold&#160;;)
+ BlaiseEbuth: T'as quoi comme algo&#160;?
+ leojean890: juste une éval :P
+ leojean890: je simule depth 1
+ leojean890: et des heuristiques pour plan
+ BlaiseEbuth: Simu complète&#160;? Y'a dy random c'est chiant
+ leojean890: pas de yell ni light
+ leojean890: non je simu pas l'ennemi
+ leojean890: juste moi cad bouger d'un cran quoi
+ BlaiseEbuth: Faut que j'écrive la simu...
+ leojean890: mon éval fait 250 lignes par contre
+ leojean890: quand je dis que j'ai qu'une éval :P
+ leojean890: tu veux simu les slashers&#160;?
+ BlaiseEbuth: Sais pas, ça dépendra de mon niveau de motivation...
+ leojean890: t'as l'air assez motivé :p
+ BlaiseEbuth: Vâchement... :cow:
+ leojean890: je sais pas ce qu'il me fait CG benchmark là il me sort que tlm crash régulièrement alors que quand je regarde les replays associés, aucun crash ;P
+ leojean890: pk tu dis qu'il y a du random&#160;?
+ leojean890: quand 2 personnes sont à la même dostance d'un wanderer&#160;?
+ BlaiseEbuth: ouai
+ leojean890: tu sais pas qui il va choisir&#160;?
+ leojean890: j'avoue
+ leojean890: mais si tu simu c'est chaud de prévoir où iront les autres joueurs aussi déjà
+ Zorg1: il a des distances préférées le wanderer. par contre la perte de santé mentale est random
+ leojean890: tu veux faire un smitsimax&#160;?
+ leojean890: random ouais en fonctipn des autres exploreurs
+ BlaiseEbuth: Zorg1&#160;?
+ leojean890: le wanderer va vers l'explorateur le plus proche
+ Zorg1: bah tu perds entre 3 et 6 santé mentale par tour
+ BlaiseEbuth: Pas pour les autres explorateurs c'est pas plus chiant de simuler que sur un autre multi
+ BlaiseEbuth: Nan ça c'est fix en début de game
+ leojean890: ah oui, en fonction de la partie il te donne la valeur de perte de santé
+ Zorg1: ah ok en cas de distance equivalente, il conserve sa cible sinon c'est au pif
+ leojean890: en effet c fix en début de game
+ leojean890: ouais je vois
+ Zorg1: ah ok
+ leojean890: petit rand ici aussi donc
+ BlaiseEbuth: Ouai mais tant que c'est constant au cours de la partie on s'en fout...
+ leojean890: sanity_loss_lonely, sanity_loss_group, wanderer_spawn_time, wanderer_life_time = [int(i) for i in input().split()]
+ leojean890: # sanity_loss_lonely: how much sanity you lose every turn when alone, always 3 until wood 1
+ BlaiseEbuth: AHHH python
+ leojean890: oui on s'en fout
+ leojean890: python en effet, j'avais pas envie de tryhard les perfs hehe
+ BlaiseEbuth: Mais pour les wanderer faut voir dans le referee, y'a ptet moyen de seed de la mêm manière...
+ leojean890: ouais j'avoue
+ leojean890: et comme tu dis, simuler les déplacements des joueurs et wanderers c'est pas la mer à boire
+ leojean890: les slashers faut être motivé
+ BlaiseEbuth: Au moins c'est déterministe
+ leojean890: les wanderers ouais
+ BlaiseEbuth: Nan les slashers,
+ leojean890: mais si tu simules trop de coups à l'avance.. tu risques de faire des erreurs sur le déplacement des expl
+ leojean890: les slashers ouais 
+ leojean890: mais bon pareil selon ce que font les autres expl.. par ex certains aiment trigger les slashers
+ leojean890: pour qu'il te tue&#160;;)
+ BlaiseEbuth: Mouai, 'fin j'ai une bonne marge de progression avant d'avoir à me soucier de ça...
+ leojean890: j'crois que c'est seulement en top gold et légende ça
+ leojean890: y'a moins de 50 personnes en légende
+ leojean890: c'est pas le multi le plus simple pour légende
+ Zorg1: y avait aussi le pb que l'A* pour les chemins des wanderers était buggés pour tenir compte de la lumière
+ Zorg1: vaut mieux repomper ce qui est fait dans le referee
+ leojean890: ah si le referee est bugué on est mal barrés ;P
+ BlaiseEbuth: Bon. Le random est pas seed...
+ leojean890: parti pour tout simuler&#160;?:P
+ BlaiseEbuth: Bah du coup c'est pas possible...
+ leojean890: une simu approx du coup;)
+ Zorg1: faut juste espérer que les approxs se compensent entre elles ...
+ leojean890: j'avoue
+ leojean890: tu vas coder une simu toi?:)
+ Zorg1: bah j'ai regardé un peu, et je suis pas super motivé de me replonger dans ce truc ^^
+ BlaiseEbuth: T'es juste devant moi tiens...
+ Zorg1: mon code ragequité de contest&#160;?
+ BlaiseEbuth: bah c'est aussi mon code ragequité de contest ^^
+ Zorg1: exigez la qualité "RageQuit" 
+ jj-404: Pouvez-vous ajouter Julia aux languages de programmation svp? j'attends que ca
+ Zorg1: y a un topic sur le forum pour demander ça
+ Zorg1: après j'ai l'impression que la liste des langages sur la plate-forme soit gelé
+ Zorg1: ça doit faire un an qu'ils ont rajoutés les deux derniers (D &amp; TypeScript)
+ BlaiseEbuth: On s'en serait passé...:grin:
+ Zorg1: oui je comprend pas pourquoi il y a tous ces langages, le C suffit amplement ^^
+ BlaiseEbuth: P't'êt pas. Mais on remplissait déjà le quota de langages handicapés...
+ Zorg1: comme toujours en informatique, on justifie les horreurs par un "c'est historique" :D
+ BlaiseEbuth: Faux toujours effacer l'historique...
+ BlaiseEbuth: *faut
+ Zorg1: après c'est toujours bien d'avoir un large choix, mais quand tu vois le bazar que ça peut être une màj d'un langage
+ Zorg1: me rappelle quand tous les bots C++ ne compilaient plus en arène ...
+ leojean890: j'ai plutôt fini bender 2 pendant que mon cok se benche.. en fait il était pas si dur, suffisait de stocker le max qu'on peut obtenir à partir d'une salle, pour optimiser au lieu de faire un backtracking pur..
+ leojean890: par contre perso je trouve escaliers et the lucky number plus chauds que ça
+ Zorg1: lucky number est chiant, je l'ai commencé
+ leojean890: j'ai une idée de comment faire mais je pense que niveau perfs ça va être insuffisant ..
+ leojean890: par récurrence
+ leojean890: faut vraiment que je me mette à la prog dyna
+ Zorg1: moi je pensais adapter le truc que j'avais fait pour "fair numbering"
+ Zorg1: (pour lucky numbers)
+ leojean890: je l'ai pas fait fair numbering je crois
+ Zorg1: si si
+ leojean890: ah ok
+ leojean890: donc j'ai oublié le nom
+ Zorg1: Alice et Bob qui écrivent des numéros de page, si tu préfères
+ leojean890: ah oui
+ leojean890: j'ai fait :P
+ leojean890: en effet je voulais faire ce genre de choses
+ leojean890: par récurrence d'une puissance de 10 à l'autre
+ leojean890: mais je trouve que c'est le niveau au dessus :P
+ BlaiseEbuth: 'nuit les gens.
+ leojean890: same
+ leojean890: comment es ton cok&#160;;)
+ MadKnight: why are u saying it like that lol
+ leojean890: it's JBM's way to say it, ow MK CSB guru&#160;;)
+ MadKnight: have u guys been doing that same thing for over 2 years&#160;?
+ MadKnight: is that what getting older means, Automaton2000&#160;?
+ Automaton2000: il te donne une idée de contest&#160;?

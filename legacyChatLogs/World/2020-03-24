@@ -1,0 +1,1287 @@
+ lord8266: is there a source size limit to ocean of code?
+ struct: 100k chars
+ lord8266: ok peace
+ lord8266: and is the response time same for all languages, im already hitting ~7ms on python for almost nothing
+ struct: same time for all languages yes
+ lord8266: damn thats bad
+ struct: Do you start the timer after reading first input?
+ lord8266: yeah after every update, i made my own environment in python and stuff..
+ lord8266: sorry for being stupid, how do you run this locally
+ Nixerrr: Depends what you want to do lord8266
+ Nixerrr: You can clone the repo and run it locally. Here is the SDK's documentation: <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/25775/codingame-sdk-documentation/introduction">https://www.codingame.com/playgrounds/25775/codingame-sdk-documentation/introduction</a>
+ Nixerrr: Or you could recreate the simulation from scratch
+ lord8266: thank you
+ dbdr: Nixerrr thanks for taking the early shift!&#160;;)
+ eulerscheZahl: yes i don't see how the documentation helps to just run it
+ eulerscheZahl: i answered him on discord, where he asked the same
+ eulerscheZahl: by linking to that question on the forum
+ Nixerrr: tbf I haven't checked if the documentation gives instructions to running it. Just assumed it did
+ Nixerrr: It was a false assumption it seems
+ eulerscheZahl: you deserve a not helpful answer for asking the same questions at different places
+ FlyingMoustache_e541: hi
+ FlyingMoustache_e541: can you help me 
+ Nixerrr: Depends
+ Nixerrr: If you want money, no
+ Nixerrr: If you need coding advice, maybe
+ eulerscheZahl: yes, you can help memy opponent tracking needs improvement
+ eulerscheZahl: thanks for your offer
+ Nixerrr: :P
+ lord8266: im sorry, im really new around here
+ eulerscheZahl: check discord, i linked a helping answer there
+ eulerscheZahl: but it's not trivial if you don't know java and maven
+ lord8266: ok so I ran mvn clean install and it installed dependencies 
+ lord8266: then how do you run main.java
+ lord8266: im on ubuntu 18.04
+ lord8266: running it with java src/test/java/Main.java throws some compilation error
+ eulerscheZahl: i never tried from command line, i always used eclipse or intelliJ
+ lord8266: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/ea756345-9719-4ccb-a949-c80730967ff9">http://chat.codingame.com/pastebin/ea756345-9719-4ccb-a949-c80730967ff9</a>
+ yfprojects: Where do you run mvn on Windows?
+ yfprojects: @eulerscheZahl
+ eulerscheZahl: import somehow failed
+ Nixerrr: Looks like some dependency issue
+ eulerscheZahl: don't ask me windows questions, i'm on linux myself
+ Nixerrr: lord8266 Why do you want to run it locally btw?
+ lord8266: java --versionopenjdk 11.0.6 2020-01-14OpenJDK Runtime Environment (build 11.0.6+10-post-Ubuntu-1ubuntu118.04.1)OpenJDK 64-Bit Server VM (build 11.0.6+10-post-Ubuntu-1ubuntu118.04.1, mixed mode, sharing)
+ lord8266: I thought I could use little grid search for parameters to see where the opponent will be using given directions
+ Uljahn: good question Nixerrr
+ eulerscheZahl: not a java problem, you somehow failed to import the codingame SDK from maven
+ Tiramon: so classpath is not set properly
+ Nixerrr: lord8266 I don't think you need to run the game locally to add enemy detection to your bot
+ lord8266: so i have for each tile a surrounding value which tells how many islands or corners are obstructing it 
+ lord8266: not obstrucing, i meant like around it
+ lord8266: so then given enemy moves i can place those moves on top of each square assuming the player was there
+ Nixerrr: One thing you could do is keep track of the cells the enemy could occupy and keep reducing that list of cells
+ Nixerrr: 1st round - it's every cell that isn't an island
+ Nixerrr: Then enemy moves north
+ lord8266: exactly im doing something like that
+ Nixerrr: Okie
+ Nixerrr: Also, you'll hit computational boundaries sooner with Python than with other languages
+ lord8266: so just find the right values for surrounding if it is an island or corner to see why the player turned and grid search for which values (like 0.5,1,2..) i can find at the earliest which sector the opponent is in
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://imgur.com/a/uXHgaVh">https://imgur.com/a/uXHgaVh</a>you don't need a local copy of the referee for this
+ dbdr: pub const INITIAL_COOLDOWN: u8 = 3;
+ dbdr: what was I thinking?
+ eulerscheZahl: saving bits by using u8 i guess
+ dbdr: yes. the issue is there is no such constant
+ dbdr: it depends on the power
+ eulerscheZahl: oh, that's a combined const for all of them...
+ eulerscheZahl: you wrote that in wood2 maybebefore knowing about the rest
+ dbdr: yes, must be it
+ dbdr: pub const POWERS: [Charge; POWERS_COUNT] = [Mine, Silence, Sonar, Torpedo];pub const INITIAL_COOLDOWN: [u8; POWERS_COUNT] = [3, 6, 4, 3];
+ dbdr: better
+ sudomakeinstall2: how to know if i got a timeout?
+ eulerscheZahl: you mean for all games of your last submit combined?
+ eulerscheZahl: or a single game?
+ sudomakeinstall2: no just the on i am testing in ide
+ eulerscheZahl: what does it say at the last frame?
+ Uljahn: Nixerrr: this game is very numpy friendly btw
+ sudomakeinstall2: -1 life
+ eulerscheZahl: there are red and orange rectangles on the progress bar below the replay
+ eulerscheZahl: hover over the last one
+ sudomakeinstall2: oh yeah i saw it
+ sudomakeinstall2: thanks
+ eulerscheZahl: and check the output area below the replay for error messages
+ eulerscheZahl: you might see a line number where it crashed
+ sudomakeinstall2: thanks it was the timeout.
+ Nixerrr: Uljahn Good to know
+ dbdr: it's a bit painful to submit when I'm #6 :D
+ AntiSquid: ^ just remember there's a full month ahead and things change a lot :p
+ dbdr: sure, it's not rational&#160;:)
+ dbdr: there, I as brave
+ dbdr: *was
+ AntiSquid: #4
+ AntiSquid: are you learning rust or are you using it daily?
+ dbdr: with 20% timeouts
+ dbdr: I don't use it for my job
+ dbdr: only for CG and hobby programming
+ AntiSquid: why rust over c++&#160;?
+ dbdr: much cleaner
+ dbdr: no segfaults
+ dbdr: same perf
+ dbdr: oOo
+ egaetan: Hello dbdr oOO
+ dbdr: you still beat me 2-0 so far&#160;:)
+ egaetan: 2/0 is not significant enough
+ dbdr: I know
+ thibpat: hi all, I'm going to stream my Ocean of Code progress on twitch.tv/thibpat, feel free to come say hello :wave:
+ thibpat: Sorry I mean <a rel="nofollow" class="external free" href="https://twitch.tv/thibpat">https://twitch.tv/thibpat</a>
+ dbdr: cool. did you announce on #streaming on discord thibpat?
+ egaetan: Aaah my lost game vs dbdr is a timeout&#160;:(
+ thibpat: I didn't dbdr, good point!
+ egaetan: dont feed mchi12
+ dbdr: is it a silly timeout egaetan?
+ dbdr: or too many paths?
+ dbdr: ok
+ dbdr: :D
+ egaetan: a silly first turn, class loading from java
+ dbdr: ah
+ dbdr: good for you, should be fixable no?
+ egaetan: if i only know what exactly...
+ dbdr: what's your output?
+ dbdr: real victory this time&#160;:)
+ egaetan: nothing... everything is fine, debug fine too, except timeout fro mplateforem
+ egaetan: gg dbdr
+ dbdr: merci!
+ dbdr: nothing on stderr?
+ egaetan: nothing
+ dbdr:&#160;:(
+ dbdr: I seem firmly in top 3 now, big gap with #4
+ dbdr: egaetan do you have a print early on that does not show?
+ dbdr: oh I think I know. it might very well be the issue I talked about on the forum
+ egaetan: dbdr i hate you
+ dbdr: will you love me if I fix your timeouts?&#160;;)
+ egaetan: Ahh maybe
+ dbdr:&#160;:)
+ dbdr: only turn 1 is 1s
+ dbdr: you need to exercise your main code
+ dbdr: to load the classes and start the JIT
+ dbdr: otherwise they will load on turn 2, when you only have 50ms
+ egaetan: ok so far i did that, i should have miss one
+ egaetan: i did warmup streams and optionals
+ dbdr: maybe run them several times
+ dbdr: the JIT does not quick in if a method is called only once
+ egaetan: it more a class loading issue that a jit i think
+ dbdr: ouch, streams are hard for performance
+ dbdr: and a lot of classes to load...
+ egaetan: yes, but easy to write
+ dbdr: I had such issues when I used Java
+ dbdr: my solution was to avoid streams
+ dbdr: sure
+ dbdr: I use them in rust, zero cost abstraction and all
+ MadKnight: a better solution was to avoid java
+ dbdr: I'm sure they get reasonably fast in Java, but startup is a killer
+ AntiSquid: new #1
+ mchl12: yeah, thanks for feeding guys
+ dbdr: np :D
+ AntiSquid: lol
+ mchl12: &lt;3
+ dbdr: within the margin of error though
+ dbdr: egaetan will wreck us when he fixes his timeouts
+ dbdr:     self.enemy.retain(|e| sector(e.pos) == surface_sector);
+ dbdr: it's quick nice way to filter a vector
+ MadKnight: dbdr discovers filter function
+ dbdr:&#160;:)
+ Nixerrr: Looks succinct
+ dbdr: and fast at the same time
+ dbdr: that's the great part
+ egaetan: gg mchl12
+ dbdr: well, only in release more. without optimizations it must be horrible
+ dbdr: egaetan by the way, there are ways to monitor which classes load
+ dbdr: but that might not help, you already know the problem I think
+ dbdr: wait, you timeout on turn 2 right?
+ egaetan: the first turn @ 50ms
+ dbdr: yeah
+ dbdr: that  means classes were loaded, if you warmed up correctly
+ dbdr: so it might be the JIT
+ egaetan: i dont know, jit should not impact when i run in 1 ms
+ dbdr: there are several passes of compilation
+ dbdr: first few executions are interpreted, to collect stats
+ dbdr: then a quick compilation
+ dbdr: then if enough calls, recompiled with optimizations
+ Nangini: dbdr rust is nice compact powerful but sometimes it can be tricky
+ Nangini: with the ownership thing
+ Nangini: when you have to use Box or Arc etc...
+ dbdr: yes, you need to get used to it
+ dbdr: I almost never do use those
+ eulerscheZahl: ownerSHIP
+ dbdr: you need to design your data model differently
+ eulerscheZahl: sorry, couldn't resist
+ dbdr: nice one eulerscheZahl
+ dbdr: :D
+ dbdr: Nangini what other language do you use most?
+ Nangini: that's why i finally gave up on rust
+ Nangini: and use Go
+ Nangini: i cant wrap my head properly around graph in rust
+ dbdr: right, in Go you have a GC so you just let it do it work
+ Nangini: but the experience of learning/using rust was really worthwhile
+ Nangini: and an other thing at the time on CG rust was not in release mode
+ dbdr: yes, many ppl say that, it's useful even for programming in other languages
+ Nangini: so the perf were not up to what the language can really achieve&#160;:)
+ dbdr: for graphs, the simple solution is to use a vector and to model links as indexes
+ dbdr: it's a bit weird at first but easier I think
+ dbdr: and it's also good for cache locality
+ dbdr: better than references all over  the heap
+ dbdr: so good for performance
+ Nangini: i might give rust an other try but not on CG
+ Nangini: perhaps looking at servo or sth...
+ dbdr: sure. it would be nice if CG did at least -O1 in debug mode
+ dbdr: I had a 40x slowdown the other day
+ dbdr: between debug and release
+ Nangini: of course!!
+ Nangini: sometimes you can't run properly a code in the ide which will perform great in the arena...
+ YannT: it climbed to #10 while sleeping
+ dbdr: in that case, I replace a for .. by a while and got 30x speedup :D
+ YannT: who's a goood submarine
+ YannT: it's youuu
+ Nangini: dbdr nice trick ;D
+ dbdr: Nangini otherwise the workaound is to compile locally and to send the binary to CG
+ dbdr: but a bit of a pain
+ dbdr: need to get the binary small enough
+ pb4: it's made easier with Agade's send tool
+ pb4: but it's forbidden during contests
+ pb4: also beware, in some cases I NEVER even approached the performance of code on CG + pragma with send-tool
+ pb4: Notably on vindinium, I still don't understand why but I lost 75% performance
+ MadKnight: it probably compiles for any cpu so it doesn't use fancy things or maybe it compiles for x86, pb4
+ dbdr: pb4 I don't think it's forbidden in the IDE
+ dbdr: you can submit the source
+ YannT: it is, there's a no obfuscation rule 
+ YannT: I think
+ dbdr: sure, for what you submit
+ dbdr: what does it matter what runs in the IDE?
+ dbdr: it affects nobody else
+ YannT: oh yeah for IDE probably no one cares&#160;:)
+ AntiSquid: 2 weeks of bronze?
+ Tunga: Newbie here, are you all here talking about bot contests? And what is the best performance language for bot, C++? How is python performance&#160;?
+ 735487: AntiSquid: 1 week as I see
+ emh: I broke everything with big refactor.. now don't know where to begin
+ AntiSquid: oh lol ... i somehow read it as 3rd of april, didn't wake up properly
+ Uljahn: Tunga: python is worst unless you know how to vectorize with numpy
+ AntiSquid: unless you're a cat with a cat avatar
+ 735487:  emh: start from rollback of backup&#160;:)
+ AntiSquid: history tab yeah
+ emh: I have git history as well... but hate going back
+ Tunga: Uljahn Thanks!
+ dbdr: emh&#160;:(
+ dbdr: I know the feeling
+ dbdr: small refectorings rule, but not always possible
+ emh: dbdr thx for sympathy
+ dbdr: when you do a big refactoring, it's ok to expect some debbugging afterwards, no?
+ emh: yes but could have doner smaller steps
+ emh: got too eager
+ dbdr: yeah, live and learn
+ dbdr: sometimes I has two implementations of the same thing, just to assert they find the same result
+ dbdr: sometimes I was less clever
+ dbdr: I mean keeping the old implementation until the new one is proven
+ pb4: Can you trigger several mines in the same turn&#160;?
+ dbdr: "you can use each type of action only once per turn"
+ pb4: thanks
+ accorp: how about with torpedo?&#160;:)
+ YannT: when doing big refactors, I try to find any reproducible battle (in the IDE), and check that the frames are the same after refactor
+ dbdr: that's a good idea
+ egaetan: emh where are you&#160;?
+ emh: egaetan down and broken
+ emh: but at least I got my tea order today
+ emh: gunpowder green tea
+ emh: jasmine tea
+ emh: christmas tea
+ emh: licorice tea
+ egaetan:&#160;:)
+ egaetan: dbdr that's not nice
+ dbdr: at least I don't feed mchl12 as much
+ dbdr: but yeah, sorry
+ YannT: you knocked me down 5 slots dbdr please never push again :p
+ dbdr: sure thing :D
+ dbdr: ending the contest right now would fulfill your request
+ dbdr: I would not mind
+ YannT: okay for me too, I'm in top20 so   I get the tshirt
+ dbdr: I only beat you twice
+ dbdr: pretty close TS scores
+ YannT: we went 8-1 in my last battles
+ dbdr: probably from my previous push then
+ dbdr: <a rel="nofollow" class="external free" href="http://cgstats.magusgeek.com/app/ocean-of-code/YannT">http://cgstats.magusgeek.com/app/ocean-of-code/YannT</a>
+ dbdr: 24%
+ AntiSquid: what sort of random magic are you using mchl12&#160;?
+ emh: yay found a bug. but there are more
+ dbdr: emh I love the licorice taste!
+ dbdr: seems like you are set for the month tea-wise :D
+ emh: dbdr me too. brewing first cup now. yes 500g or so hehe
+ dbdr: clever in these times
+ dbdr: what are you changing?
+ emh: just "compressing" code
+ emh: removing redundancies
+ emh: and some small changes I run into
+ emh: when I see it
+ dbdr: oh, then indeed small steps would have been better
+ dbdr: I thought you changed the approach
+ emh: nah
+ dbdr: still you will sort it out
+ emh: hope so
+ emh: and btw it's licorice chilli hehe
+ emh: I put a lot of tea in it. it's black now hehe
+ dbdr:&#160;:)
+ dbdr: mchl12 beats dbdrdbdr beats egaetanegaetan beats mchl12
+ dbdr: hm
+ egaetan: hum hum
+ egaetan: if only mchl12 resubmit i will be #1 again&#160;?
+ dbdr: possibly
+ egaetan: and you will be third&#160;?
+ dbdr: though sample is small, who knos...
+ dbdr: knows
+ egaetan: if i resubmit you will be first&#160;?
+ dbdr: only one way to know for sure...&#160;;)
+ dbdr: you have nothing to lose
+ dbdr: Schnee is far
+ egaetan: let's try
+ dbdr: :popcorn:
+ dbdr: you lose against bottom lb, probably timeouts
+ dbdr: that must hurt
+ egaetan: ouch in first 10 , 5 timeouts
+ wlesavo: probably its the silence spamers
+ egaetan: only loose are timeouts
+ egaetan: wlesavo no, something weird with first turn
+ emh: found another bug. more remains
+ YannT: egaetan; maybe you should preload .split() too&#160;;)
+ wlesavo: egaetan maybe its related to that 20ms discussion?
+ emh: and another. looking better now
+ dbdr: great
+ egaetan: dbdr nothing to loose&#160;? hmmm&#160;!
+ dbdr: :D
+ dbdr: looking better
+ egaetan: only 3 timeouts in first 20
+ egaetan: that's awfull
+ YannT: how do you timeout anyway do you have a sim already?
+ egaetan: no something with first turn @50ms
+ dbdr: strange that kotlin does not have the issue
+ YannT: I did have the issue
+ dbdr: :phew:
+ YannT: classloading on split on the first turn
+ dbdr: lol
+ YannT: first call of split cost 20ms for whatever classloading reason, so I put a junk one in the initial 1s thing to fix it
+ YannT: fun main(args: Array&lt;String&gt;) {
+ egaetan: dsl YannT i didn't timeout vs you
+ YannT:&#160;:(
+ YannT: maybe you could put a sleep in to maximize timeouts?
+ dbdr: Illedan, would there be a way to see the last frame?
+ dbdr: now it's hidden by the end screen
+ egaetan: 27 timeouts on 93 game =&gt; #22
+ Illedan: Yeah, I know. I will rewrite this code into actually doing 1 command at a time. And add an empty frame at the end
+ Illedan: But it might be a few days
+ Illedan: You know, life, my own bot and all that
+ Illedan: And yeah, work
+ dbdr: sure
+ dbdr: there is time&#160;:)
+ YannT: top20 gets shuffled everytime someone in it pushes
+ yfprojects: Is threading a thing in CG?
+ Scarfield: only one core is available
+ jrke: anyone of you can hack any website
+ Uljahn: Automaton2000: can you hack google.com?
+ Automaton2000: but i like the idea of a good one
+ MSmits: holy :poop:  They just cancelled my exams
+ Illedan: Damn, more time for OOC?
+ MSmits: no, it's after OCC
+ MSmits: OOC
+ Illedan: Let your class know they are graded based on OOC?
+ Illedan: :D
+ MSmits: during the other planned contest
+ MSmits: I mean my physics class btw, my CS class has no exams
+ MSmits: so they will get their diploma based on tests they did in our school as opposed to national exams
+ MSmits: it's really weird. Never happened before
+ MSmits: what if they screwed up our tests? They normally would get a (long) shot at the national exams to compensate. That's now gone
+ YannT: I'm sure they canceled CS exams during the dark plague too
+ dbdr: yeah, priorities
+ MSmits: it may cost some students a year of studying though
+ MSmits: some might not be happy about this
+ Scarfield: just have them do the exams from home, and tell them not to cheat
+ MSmits: hah we can't even do that. 
+ MSmits: minister of education decided they're cancelled so they're cancelled
+ YannT: can't give some home assignement anbd then on the school level decide to give it a bigger coefficient than the other school tests
+ YannT: that would be like an exam
+ ThunderbirdOne: Cpt. Levine just torped himself... what a nerf
+ MSmits: YannT, we can, but that would be slippery slope. Would lead to some obviously unqualified students to get their diploma
+ egaetan: dbdr only 10 timeouts for 92 games
+ ThunderbirdOne: give students online exams with access to internet... yeah... sounds like a good idea
+ YannT: for CS you can give some assignement that is more practice than theoratical no?
+ MSmits: it's physics, not CS
+ YannT: one where having google doesn't matter
+ YannT: ahhh
+ YannT: yeah that's harder
+ MSmits: also, it's not just, me it's all my colleagues as well. French, German, chemistry, biology etc.
+ YannT: have them screw around witrh pendulums at home ahah
+ MSmits: lol..
+ ThunderbirdOne: i have a friend whos doing physics in uni... all labs cancelled... so yeah :P
+ tonowak: Illedan it seems that I don't see any of my MSG on the visualizer on the IDE, nor the text saying what actions a player did. It isn't normal, right?
+ dbdr: egaetan now you pull me down
+ egaetan: it'seems i correct my timeouts
+ egaetan: for sure i pull you down i want to climb upper
+ dbdr: whatever for?&#160;;)
+ dbdr: mchl12 just never submit again and you'll be fine&#160;;)
+ dbdr: egaetan what did you do against your timeouts?
+ egaetan: lot of small things
+ egaetan: i think the biggest win was a stream on a array from a split
+ Illedan: tonowak, can you give a replay?
+ mchl12: I will probably submit once someone takes my place, or when I get too impatient haha
+ YannT: egaetan: ah so it WAS the split for you too :D
+ tonowak: Illedan all of the games don't show any text
+ dbdr: split probably pulls lots of unicode data
+ tonowak: and btw, I'm on another laptop than normally
+ YannT: isn't the bottom of the viewer just cut off? :p 
+ tonowak: but there is also some text above the bottom, if I recall correctly?
+ tonowak: i do not see any letter
+ egaetan: YannT yes it seems to be related
+ Illedan: Wierd
+ Illedan: I can't see your messages in the viewer either
+ Illedan: do you use some wierd |? :P 
+ YannT: egaetan: would make sense, if Kotlin has a classloading thing with split, Java would have it too
+ tonowak: no, my submitted code doesn't use any MSG
+ tonowak: <a rel="nofollow" class="external free" href="https://imgur.com/a/XseX9d5">https://imgur.com/a/XseX9d5</a>
+ tonowak: but my in the IDE does
+ YannT: oh yeah you've got no text at all
+ tonowak: yeah, zero letters :P
+ YannT: missing font or CSS style?
+ tonowak: probably yes
+ Illedan: Inspect it
+ Illedan: and check if you get any errors
+ Illedan: we are using Arial
+ Illedan: should be fine..
+ YannT: not on a stock linux install maybe
+ YannT: no ttf by default
+ tonowak: I'm on Arch linux
+ tonowak: that's possible
+ dbdr: another font should always be used as a fallback
+ YannT: do you have that ttf package thing on it?
+ tonowak: Arial? I would have to check
+ YannT: <a rel="nofollow" class="external free" href="https://wiki.archlinux.org/index.php/Microsoft_fonts">https://wiki.archlinux.org/index.php/Microsoft_fonts</a>
+ YannT: maybe
+ dbdr: "I don't have the exact font specified? let's ignore the text"I don't think that's how it works
+ YannT: shouldn't but who knows
+ dbdr: yeah, can be a bug
+ dbdr: display driver possibly
+ tonowak: on my main PC I have Arch and I remember that I installed microsoft fonts. Here probably I didn't
+ tonowak: I just installed the ms fonts. Still the same problem
+ YannT:&#160;:(
+ YannT: did you do 
+ YannT: fc-cache -f
+ YannT: to regenerate the cache?
+ tonowak: shouldn't it do it automatically?
+ YannT: can't hurt&#160;:)
+ tonowak: still
+ dbdr: start your browser from the terminal
+ dbdr: see if there is any error message
+ dbdr: you probably need to quit it first
+ tonowak: hmm on chromium it is working
+ dbdr: otherwise it does not really start
+ tonowak: I'm using Brave
+ dbdr: report a bug on brave&#160;:)
+ YannT: oh, probably it's some CSS compatibility thing with that browser then
+ tonowak: brave is chromium-based&#160;:(
+ tonowak: I'll first update the system and brave
+ YannT: maybe it is insufficiently chromium based :p 
+ tonowak: yeah but remember that on my second device with Arch and Brave it is working
+ dbdr: software is not correct when it sometimes works, but when it always works&#160;;)
+ emh: Illedan what happened? broke it?
+ Illedan: hm?
+ Illedan: Broke what?
+ emh: your placement. your bot
+ AntiSquid: emh's heart :p
+ Illedan: Yeah, it's only doing silence and move
+ Illedan: Working on a new bot.
+ Illedan: And I kept losing focus of being too high ranked
+ Illedan: As this is a Marathon, not a Sprint :P
+ emh: ah hehe
+ Illedan: Should be done with something tomorrow or thursday
+ Illedan: Want to try and break the Mine strategy. Else we have to consider nerfing something
+ Illedan: +1 charge makes it 33% worse. Which might be a good idea. But I don't know yet
+ AntiSquid: is last change happening this friday?
+ Illedan: I was thinking yesterday, but cg says on friday. So I'll follow CG and try to find some good balance point if needed.
+ mchl12: Giving mines +1 cd also makes hybrid strategies weaker, because you cannot place 'some' mines and still do other things.
+ AntiSquid: even if it's just about adjusting heuristics, i think there should be a clear deadline somewhere
+ AntiSquid: where no more changes are made until after contest
+ Illedan: Was just one of the idea mchl12&#160;:) Have to test it properly.
+ Illedan: Games is fun anyway at the moment, don't want to break that
+ mchl12: Just wanted to share my thoughts, but I agree that the games are fun currently.
+ mchl12: I think no matter what you do, sometime there will be an optimal strategy.
+ YannT: I'm #8 with literally nothing coded regarding mines
+ YannT: not sure it's actually *that* powerful in the end
+ YannT: (and I still have some improvements possible without even touching mines still)
+ Illedan: Of course mchl12, but mines feels a little too random sometimes&#160;:) 
+ TomerBG: Hey guys, can split your code to files and submit it?
+ Illedan: Yeah, but you have to merge them before you submit
+ Illedan: What lang?
+ TomerBG: cpp
+ Illedan: <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/quom-split-your-code-base-into-multiple-files/79324">https://www.codingame.com/forum/t/quom-split-your-code-base-into-multiple-files/79324</a>If that doesn't work. Try to search the forum for other options&#160;:)
+ TomerBG: thanks
+ AntiSquid: italy 6k wtf 
+ ZarthaxX: AntiSquid at least it's going down in new cases
+ AntiSquid: how's your bot Zarbas&#160;?
+ AntiSquid: ZarthaxX 
+ ZarthaxX: there is a guy called zarbas here?
+ ZarthaxX: evolving i guess, how is yours squido
+ AntiSquid: i barely managed to get rid of some persistent bugs regarding enemy position
+ AntiSquid: don't have a real bot strategy in place yet
+ ZarthaxX: i see, plenty of time anyway
+ AntiSquid: and plenty of headaches 
+ ZarthaxX: lol :rofl:
+ ZarthaxX: annoying game for you
+ AntiSquid: very much so
+ AntiSquid: i got an idea but it will take a while to write and then to sort out any possible bugs or issues
+ ZarthaxX: perfect contest for that then&#160;:)
+ egaetan: i hope 
+ egaetan: maybe not enough
+ AntiSquid: to think that might not even be the gold boss&#160;:(
+ mchl12: Did you fix the timeout egaetan?
+ egaetan: it seems, will check at the end of the submit
+ Azkellas: Yeah, how do you evaluate your current bot compared to usual leagues? Would you say you have a top (10-day) gold bot? Lower / higher? 
+ mchl12: I honestly have no clue, this is the first contest where I get out of wood.
+ mchl12: Looks like it was enough egaetan, wp
+ egaetan: ouufff
+ egaetan: was close
+ egaetan: mchl12 your turn to broke the leaderboard
+ mchl12: I'm on it
+ mchl12: Your bot is already in the IDE
+ egaetan: no play against others&#160;!
+ egaetan: Azkellas, i've got a top silver bot i think
+ Azkellas: Only top silver? :o I expected higher
+ Azkellas: Thanks!
+ egaetan: i could not the tuesday have a top gold bot ... :p
+ Azkellas: It's sometimes possible, depends on the challenge
+ AntiSquid: probably top gold bot
+ YannT: too early to tell
+ YannT: no one's written a simulation yet AFAIK
+ YannT: it's usually pretty gamechanging
+ AntiSquid: isn't enemy prediction part of the simulation?
+ YannT: turn 0 prediction no, that's just a heuristic
+ egaetan: Now that i don't have any timeouts, i can rewrite all for simulations... :p
+ pb4: How does the game handle a command like MOVE N TORPEDO when I already have full charges on the torpedo&#160;?
+ pb4: does it discard the whole move command as invalid&#160;?
+ YannT: doesn't do anything
+ pb4: or just not charge anything&#160;?
+ pb4: thanks
+ mchl12: Your move goes through and you charge nothing
+ AntiSquid: how important is it to keep track about what the enemy's tracking 
+ mchl12: I'd say that it is pretty important, you will know when to silence and when you can continue chasing the opponent for example.
+ mchl12: You can also use it to find out how much information certain actions will reveal.
+ HuyCuto: hello
+ Scarfield: hi
+ HuyCuto: goodbye
+ Scarfield: :wave:
+ HuyCuto: hello
+ egaetan: hello
+ Schneewittchen: hey ho
+ HuyCuto: kono dio da
+ HuyCuto: i'm stuck man
+ HuyCuto: mar lander ep 1
+ HuyCuto: how tf can i do that
+ HuyCuto: i'm disabled
+ Uljahn: go play fortnite, Automaton2000
+ Automaton2000: which is what i heard
+ HuyCuto: no
+ HuyCuto: don't disappoint me
+ HuyCuto: i can still do it
+ HuyCuto: where is the solution button
+ Scarfield: dont exceed max velocity
+ HuyCuto: :ok_hand:
+ HuyCuto: i dont get it
+ ZarthaxX: just crash dude
+ HuyCuto:&#160;:(
+ HuyCuto: vertical is what
+ HuyCuto:&#160;:(
+ HuyCuto: i don't learn engrisk very well
+ Uljahn: rest in rip
+ Scarfield: there is downwards acc of 3.711 iirc, and max thrust is 4. so to reduce downwards velocity, you need thrust of 4
+ HuyCuto: oke
+ HuyCuto: thank
+ HuyCuto: just printf 0 4 okay&#160;?
+ Scarfield: try it
+ Scarfield: its almost enough&#160;;)
+ HuyCuto: no
+ HuyCuto: it's fly upward
+ HuyCuto: i hate you
+ HuyCuto: how could you lie me
+ ZarthaxX: scarfo he is just trollling
+ Scarfield: yea seems like it
+ HuyCuto: no
+ HuyCuto: this task donot have a solution button
+ HuyCuto:&#160;:(
+ HuyCuto: okay
+ HuyCuto: EZ
+ HuyCuto: i solve it
+ HuyCuto: haha
+ HuyCuto: i'm a genius
+ Uljahn: you're level 4 while Automaton2000 is level 14 so he is 3.5 times more genius than you :smirk:
+ Automaton2000: or do you make a ga for any of the other moves
+ HuyCuto:&#160;:(
+ HuyCuto: can so help me pls&#160;:(((
+ egaetan: Automaton2000 do you want to help&#160;?
+ Automaton2000: i'm trying to solve the ascii art puzzle?
+ OmidSafari: hi
+ Uljahn: Automaton2000: 15 level soon?
+ Automaton2000: if you just want to get a 100% winrate
+ Scarfield: me too
+ yfprojects: Did Automaton2000 get all his Xp by its own or did he get help?
+ Automaton2000: i didn't think that would be great
+ HuyCuto: he is a bot
+ yfprojects: Thats why I am asking
+ tonowak: so if two players have trueskill a and b, what is the expected winrate for player a? Do we know it?
+ AntiSquid: ask magus about Automaton2000
+ Automaton2000: and now i have to type it
+ RalphMcCrackenIII: Hey, all!
+ PJA: is it possible that printing a lot to stderr takes a lot of time
+ PJA:&#160;?
+ 735487: PJA: sure it is
+ PJA: amurushkin ty
+ ZarthaxX: PJA there was a contest where i timeouted everytime because of lots of stderr
+ ZarthaxX: so try to disable them for submit
+ PJA: ok thx
+ Magus: i needed to get Automaton2000 level 3 for the chat
+ Automaton2000: but how can you see what i do know
+ Magus: so i copy/pasted my nintendo solution
+ Magus: but after that, Automaton2000 earned 2500xp "by itself" with the A*C contest
+ Automaton2000: you don't see the point of that
+ Scarfield: xD
+ Earthborne: First submition yey! How do you think I'll do Automaton2000&#160;?
+ Automaton2000: how did you write a bot that has a good bot for it
+ BenjaminUrquhart: ah yes write a bot for a bot
+ BenjaminUrquhart: Earthborne my first submission does nothing but move to a valid location lol
+ Earthborne: Haha, I didn't want to submit until I could beat the boss
+ PJA: in bronze against who do u run your bot in test?
+ mchl12: Personally I run versus egaetan. You can also consider nagrarok, he is rank 45 with only torpedoes, great to test your basics against.
+ PJA: ty
+ PJA: and btw nagrarok uses sonar now
+ mchl12: ah I wasn't aware, as long as he doesn't use silence I'm happy
+ egaetan: stop playing against me mchl12
+ mchl12: don't think I can cancel a submission&#160;;)
+ egaetan: or i will start to use silence&#160;!
+ mchl12: not silence! anything but silence!
+ egaetan: better silence X x|MOVE x SILENCE
+ BenjaminUrquhart: SILENCE
+ BenjaminUrquhart: thanks for coming to my ted talk
+ BenjaminUrquhart: have a nice day
+ Insta-x: how to do custom match with someone?
+ Insta-x: owh nvm
+ Insta-x: i just got it
+ darkhorse64: Do you remember that ocean is sometimes called "the worl of silence"
+ darkhorse64:&#160;?
+ darkhorse64: *world*
+ eulerscheZahl: yesterday evening i was #19now #10 without submitting anything :thinking:
+ Waffle3z: resubmit and end up in 30th
+ eulerscheZahl: no
+ eulerscheZahl: maybe because the mine bug was fixed and my tracker is no longer broken
+ ZarthaxX: code fixing itself, innovative toad
+ darkhorse64: If you can't fix your bot, fix the referee
+ AntiSquid: what's wrong with the referee now?
+ eulerscheZahl: nothing afaik
+ Illedan: Only visuals.
+ eulerscheZahl: but fixing visuals can add logic bugs, as the past taught us
+ darkhorse64: What if the map was a twisted torus&#160;?
+ eulerscheZahl: twisted?
+ eulerscheZahl: i know what a torus is. but twisted?
+ Scarfield: mobiius torus :thinking:
+ AntiSquid: twisted torus<a rel="nofollow" class="external free" href="https://cdna.artstation.com/p/assets/images/images/014/187/774/large/keir-3d-infinitorus2-smooth-0-00-01-27.jpg?1542868184">https://cdna.artstation.com/p/assets/images/images/014/187/774/large/keir-3d-infinitorus2-smooth-0-00-01-27.jpg?1542868184</a>
+ eulerscheZahl: we should give an instruction how to build it with paper instead of a proper definition for sure
+ darkhorse64: like the one for detective pikatcha
+ AntiSquid: ya lol why not make the game worse than it is&#160;:/
+ eulerscheZahl: this image gives me headache
+ AntiSquid: sorry, no disrespect meant
+ Scarfield: i guess you mean that the map "wraps" in West-East and North-South?
+ Scarfield: there is a term for it, but cant recall
+ darkhorse64: Yes. Ofc, I was kidding although a circular map would make tracking a bit more difficult
+ mchl12: Are you ready for more matches egaetan?
+ egaetan: no
+ egaetan: mchl12 i said no
+ AntiSquid: the number 1 hair band is hard to keep
+ mchl12: you were too late&#160;:)
+ mchl12: wala is holding me back though
+ Swagboy: Illedan a nice visual fix would be to display the last frame when a submarine is destroyed
+ Swagboy: Right now you don't see the last torpedo fired when you destroy your opponent, would be much more pleasant if we did!
+ eulerscheZahl: he knows that already :D
+ pb4: Is there a way to highlight your timeouts in a submit nowadays&#160;?
+ pb4: by random sampling, it seems that I lose a lot by timeout
+ egaetan: i developped a simple tool for that
+ egaetan: parsing replays one by one
+ pb4: shareable&#160;? ^^
+ egaetan: -&gt; mp
+ PJA: how do u choose where to move to? just trying to avoid been tracked?
+ egaetan: it may be a beginning
+ struct: Are the mines going to be changed or you dont know?
+ Illedan: Most likely not.
+ AntiSquid: what do you plan to change anyway
+ Slash-Dev: Hi, I'm wondering if there is not a (another?) mine bug. If a mine is at [2, 5] and a ship is right below the mine (South of the map so [2, 6]), and writes:MOVE N SILENCE|TRIGGER 2 5Should it get hit by 1 or 2?
+ struct: 1 i think
+ BenjaminUrquhart: actions are processed in order
+ Illedan: give a replay?
+ Slash-Dev: OK so 2 in that case?
+ Illedan: Should be 2 yeah
+ Slash-Dev: OK, then there is no bug&#160;:)
+ struct: ah rihgt 2
+ Slash-Dev: Thank you
+ struct: read wrong
+ Illedan: phew
+ struct: no more bugs&#160;:)
+ jrke: can anyone of you come in clash of code:slight_smile:
+ BenjaminUrquhart: no
+ BenjaminUrquhart: do sub wars
+ jrke: why
+ BenjaminUrquhart: ocean of code
+ struct: but I find a viewer "bug"
+ Slash-Dev: I thought I read somewhere that the damage was determined on the position at the beginning of the turn so I was confused.
+ struct: I dont think it needs fix though
+ struct: A bit hard to fix
+ BenjaminUrquhart: struct there's no such things as no bugs
+ jrke: i have bored working on it so i am playing clash of code
+ BenjaminUrquhart: smh
+ struct: If I use arrows to navigate, the viewer can look like this
+ struct: <a rel="nofollow" class="external free" href="https://i.imgur.com/SLcVnLG.png">https://i.imgur.com/SLcVnLG.png</a>
+ AntiSquid: clash of code discussions to only be carried out in isolation in private chat rooms during the contest jrke
+ BenjaminUrquhart: struct what's that seed again?
+ struct: seed=-430391657
+ BenjaminUrquhart: thanks
+ BenjaminUrquhart: lmao boss committed suicide<a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/442010527">https://www.codingame.com/share-replay/442010527</a>
+ AntiSquid: doesn't load
+ BenjaminUrquhart: works for me in incognito
+ dbdr: works forme
+ dbdr: some replays fail to load, need to refresh them
+ jrke: thanks
+ AntiSquid: welcome to CG enjoy your stay jrke
+ jrke: yeah
+ Slash-Dev: Just double checking, if an opponent does a wrong command, it goes to surface but will I get a SURFACE signal or their wrong command?
+ BenjaminUrquhart: yes
+ Slash-Dev: yes SURFACE or yes wrong command?
+ BenjaminUrquhart: idk
+ AntiSquid: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=5v15U2uaV6k">https://www.youtube.com/watch?v=5v15U2uaV6k</a>
+ Slash-Dev: Means don't know?
+ AntiSquid: means ignore weird replies from weird people and ask someone else
+ BenjaminUrquhart: :thumbsup:
+ struct: you get the surface command
+ Slash-Dev: Thank you&#160;:)
+ AntiSquid: no problem, any time
+ Slash-Dev: And that's called a moderator&#160;:)
+ AntiSquid: i gave moral support
+ egaetan: i need some AntiSquid
+ mchl12: moral support won't give you those .01 elo points egaetan...
+ egaetan: oops spotted
+ AntiSquid: you used java and the gap is very narrow, so that's definitely good
+ AntiSquid: c++ is the fastest i mean
+ AntiSquid: actually you didn't give up, i am taking a break until i find the motivation to rewrite a big chunck
+ AntiSquid: stay positive
+ AntiSquid: ok forget everything i just said you dropped another 0.01, it's all over now
+ BenjaminUrquhart: alright my tracker is finished enough, time for me to join the fight
+ struct: Just add java optimization flags
+ BenjaminUrquhart: not sure you can add flags to the jvm at runtime
+ mchl12: egaetan, I found this match where you get an error message about the codingame referee? Did you know about this? <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/442025948">https://www.codingame.com/replay/442025948</a>
+ eulerscheZahl: "SILENCE 69 2 "
+ eulerscheZahl: ascii(69) = E
+ AntiSquid: direction 69 :thinking: Automaton2000
+ Automaton2000: i am trying to make it even worse
+ wlesavo: am i understanding this correctly that if player kills and suicides he is gonna win? <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/442026278">https://www.codingame.com/replay/442026278</a>
+ eulerscheZahl: and east would be straight into an island here
+ eulerscheZahl: if both die, it's a draw
+ eulerscheZahl: 2 stars below the viewer confirm that
+ wlesavo: oh i see
+ wlesavo: thx
+ wlesavo: maybe adding a win/lose/draw message to summary would be a good idea
+ eulerscheZahl: you have the endscreen showing the ranking
+ eulerscheZahl: both 1st = it's a draw
+ wlesavo: oh im really stupid
+ wlesavo: never noticed that
+ eulerscheZahl: inexperienced with the CG platform
+ eulerscheZahl: the endscreen is a standard module, not done specifically for this contest
+ wlesavo: the replay is still funny though
+ egaetan: mchl12 SILENCE 69 2
+ egaetan: eulerscheZahl <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/442025948">https://www.codingame.com/replay/442025948</a>
+ eulerscheZahl: yes?
+ egaetan: why am i the looser , i'm not the one writing wrong output
+ eulerscheZahl: are you sure?
+ eulerscheZahl: the colors below the replay are wrong
+ egaetan: sure
+ eulerscheZahl: CG somehow fails to indicate the player for 1 player per turn games
+ egaetan: i write my output msg like this MOVE E MINE|MSG 6/6
+ wlesavo: MOVE S MINE|MSG 6/6
+ eulerscheZahl: <a rel="nofollow" class="external free" href="http://eulerschezahl.herokuapp.com/codingame/replays/reproduce/442025948">http://eulerschezahl.herokuapp.com/codingame/replays/reproduce/442025948</a>indeed
+ egaetan: and i dont do move + surface
+ eulerscheZahl: ILLEDAN
+ wlesavo: lul thats a nice bug
+ eulerscheZahl: i better try it on discord, easier to catch him there
+ BenjaminUrquhart: nice enum fail
+ eulerscheZahl: so that's why mchl12 is so high? making the opponent lose by printing nonsense?
+ BenjaminUrquhart: lmao
+ AntiSquid: blame that on not being first! :p
+ egaetan: yes i think
+ egaetan: mchl12 you are discovered
+ AntiSquid: probably bribed Illedan
+ wlesavo: 69 is a secret code to win
+ Uljahn: does it summon Automaton2000?
+ Automaton2000: just had to say it
+ sacre: are there shortcuts to run individual test cases&#160;?
+ eulerscheZahl: CTRL+ENTER for one
+ sacre: thx 
+ eulerscheZahl: CTRL+SHIFT+ENTER for all
+ jacek: ALT+F4
+ AntiSquid: get a macro editor :p
+ BenjaminUrquhart: eulerscheZahl here's a short reproduction <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/442030445">https://www.codingame.com/share-replay/442030445</a>
+ eulerscheZahl: thanks
+ eulerscheZahl: luckily i only have to forward it :imp:
+ struct: Strange bug
+ blasterpoard: eulerscheZahl I think there's a very minor mistake in the statement
+ blasterpoard: at the very bottom, there is a list of actions
+ Zenoscave: the space after silence?
+ Zenoscave: err surface
+ blasterpoard: SONAR should be SONAR x
+ eulerscheZahl: can't blame Illedan on that one&#160;:/
+ Zenoscave: dont mind me I need new glasses. I have bad vision for spaces
+ eulerscheZahl: will fix but not deploy before a more relevant fix is done toothanks for reporting blasterpoard
+ mchl12: noo, you found my strategy
+ BenjaminUrquhart: smh
+ muy31: is there a way to be sure that your torpedo hit the enemy?
+ BenjaminUrquhart: no
+ BenjaminUrquhart: was just working through that myself lol
+ muy31: i'm thinking if the change in the opponent's life is 2
+ BenjaminUrquhart: what if they hit themselves though
+ muy31: exactly
+ muy31: so is it probably smart to not do that
+ AntiSquid: chance they hit themselves on same turn =&#160;?
+ muy31: or to do it with a lot of conditions?
+ muy31: yes
+ AntiSquid: if they hit themselves they are nearby / tried hitting you&#160;? if you got hit then you know?
+ muy31: i just want input in case someone else kind of figured it out
+ muy31: that's kind of makes sense
+ muy31: thanks
+ BenjaminUrquhart: or wait
+ BenjaminUrquhart: if they took damage and they didn't fire a torpedo
+ AntiSquid: if they hit themselves you know through enemy command and proximity of their torpedo to your torpedo 
+ muy31: ok that makes even better sense
+ Zenoscave: Good idea
+ mchl12: The basic idea of what I used is: 1) make a list of all explosions on the map 2) calculate how much hp the opponent lost 3) for each possible position, find out the hp they would have lost to all the explosions on the map 4) if the hp they should have lost does not equal the acutal lost hp, they cannot be at this position
+ muy31: dang
+ muy31: i'm just gonna copy that into my notes
+ muy31: thank you very much
+ Zenoscave: thanks mchl12
+ muy31: maybe i'll beat you with it later&#160;;)
+ mchl12: No problem, just make sure you keep track of the opponent's movements as well and adjust this algorithm accordingly
+ muy31: yeah
+ AntiSquid: if you beat him you need to get #1, nobody wants to lose to 2nd best
+ muy31: lol
+ muy31: I'm just trying
+ muy31: right now
+ egaetan: same as mchl12 but in java
+ accorp: no one else remembers that batman problem on CG?
+ mchl12: the binary search one?
+ Uljahn: shadow of the knight?
+ accorp: exactly
+ accorp: if the guy moves to the right, he can't be possibly on the far left
+ AntiSquid: but he might be just trying to cause confusion?
+ muy31: no accorp is exactly correct
+ muy31: if by far left he means leftmost
+ AntiSquid: if he means the edge .
+ muy31: yeah
+ muy31: or actually rightmost edge
+ accorp: that's right
+ AntiSquid: well yeah that was obvious? i mean how else did you get to bronze lol
+ muy31: haha
+ accorp: furthermore, apply and island map and info is suddenly appearing...
+ accorp: an*
+ muy31: you are still stating the obvious
+ accorp: newcomers can't possibly know that, right?
+ muy31: as soon as we read the game description, i'm sure most realized it
+ muy31: but maybe ou are right
+ muy31: about some newcomers
+ AntiSquid: they deserve the wood if they don't realize this
+ accorp: harsh
+ muy31: hey i'm in wood 1 right now
+ muy31: but im getting there
+ AntiSquid: just use silence in wood 1, easy promotion .
+ muy31: yeah
+ muy31: But i like to develop my AI as much as possible
+ AntiSquid: yeah i mean if you promoted to wood 1 then you done the tedious first part
+ muy31: before submitting
+ AntiSquid: there's more headaches to come
+ muy31: i guess
+ accorp: I think mines will be the OP solution here
+ AntiSquid: easier to integrate it all if you can see all commands
+ muy31: it's really annoying when there are newly added rules
+ muy31: that's exactly true
+ RalphMcCrackenIII: Coming from C++ to Python3, for loops in Python3 are so different.
+ AntiSquid: why are mines OP&#160;? 
+ muy31: but i have a sense of what to expect
+ AntiSquid: reduce enemy possible positions without immediately revealing self?
+ muy31: so im building towards that
+ AntiSquid: no trust me, it won't be enough
+ accorp: yeah, only what you think about
+ AntiSquid: stuck here at the edge of getting pushed out of top 100 because i didn't plan correctly 
+ muy31: AntiSquid you are talking to me or accorp
+ AntiSquid: to you
+ muy31: oh
+ muy31: ok
+ AntiSquid: this should be enough for silver, won't bother changing anything until i need to promote .
+ dbdr: nice kovi!
+ kovi: thx
+ accorp: i'm having my bot trigger mines even if one cell is reduced and it works wonders
+ dbdr: more and more people in top 10
+ Scarfield: xD
+ AntiSquid: there can only be 10
+ pb4: dat... statement...
+ dbdr: AntiSquid genius
+ AntiSquid: highlander movie thought me
+ muy31: agreed
+ AntiSquid: taught *
+ accorp: dealing with silence is a bitch, isn't it?
+ AntiSquid: ya
+ AntiSquid: dull
+ accorp: i'm having it expand by 1 so far but if i make it to higher leagues i'll have it to 4
+ Illedan: pb4, nice
+ pb4: thanks
+ kovi: gratz
+ AntiSquid: ah that's why you figure out where i am, i don't really bother to move far away, being greedy on space i cover for surface
+ AntiSquid: accorp
+ accorp: yeah&#160;:)
+ Glenn: If you move and torpedo in the same turn, is the max range of the torpedo 4 tiles from your location before or after the move?
+ muy31: before
+ dbdr: after
+ Tiramon: the actions are handled in the order you give
+ Glenn: Always? Or does it matter which order the commands are issued?
+ muy31: you torpedo when you are on (x,y)
+ AntiSquid: which order are you doing the actions lol
+ muy31: for real!
+ Tiramon: so move|torpedo = aftertorpedo|move = before
+ Glenn: I'm calculating for my opponent, so I need to handle both.
+ AntiSquid: yes
+ Glenn: Ok, thanks Tiramon, that's what I'm looking for.
+ Scarfield: you could silence 4 N|move N|torpedo for even more range
+ Glenn: Lol, good point, but I'm not quite there yet.&#160;:)
+ accorp: I thought you can't silence and move at the same round?
+ AntiSquid: you can
+ AntiSquid: you can use all actions at once apparently
+ muy31: so is the only command that can come by itself "SURFACE"?
+ Scarfield: only one charge though (?)
+ AntiSquid: one charge
+ AntiSquid: charge is always on the move command
+ muy31: yeah
+ muy31: ok
+ AntiSquid: quite sure you can still use surface with the rest, but why would you
+ AntiSquid: unless it's the last square
+ Scarfield: or a minefield ahead
+ muy31: so i should always check for everything?
+ Tiramon: surface followed by silence to obscure where you are is not the worst move
+ accorp: why wouldn't you silent move after surface?
+ muy31: every command?
+ Scarfield: the commands that you see your opponent has done
+ Glenn: You can also surface and then move which might put you in a different sector
+ Uljahn: muy31: MSG could be used by itself too
+ Glenn: if you were on the border. That'll mess up a lot of people
+ AntiSquid: lol Uljahn
+ muy31: Uljahn i meant only by itself
+ Uljahn: ye
+ muy31: like no pipe
+ Uljahn: ah
+ AntiSquid: then i just MSG enemy and stand still all day
+ Uljahn: i thought you mean without arguments
+ muy31: i understand
+ Scarfield: MSG MOVE N|MINE E|TORPEDO 3 6
+ AntiSquid: good that will show him
+ Scarfield: has ille gone in hiding?
+ AntiSquid: testing enemy prediction
+ Illedan: I'll submit in a few days
+ Illedan: Had to stop my bot code and rewrite the referee now. So that I can keep my sanity.
+ Scarfield: :muscle:
+ Illedan: Unit test inc. :relieved:
+ accorp: huh, you can actually silence and move
+ BenjaminUrquhart: yes
+ Illedan: Sure thing
+ BenjaminUrquhart: it's both a blessing and a curse
+ accorp: so you want to silence first
+ Illedan: Not always
+ AntiSquid: the options are endless
+ Illedan: Nah
+ Illedan: only 100 rush
+ Illedan: *ish
+ accorp: why would I move first?
+ Illedan: For the first action of a round :D
+ Illedan: move to get better torpedo range. Torpedo to damage. Surface to clear old path. Silence to get away accorp
+ accorp: that would be an extreme edge case
+ Illedan: Those are what brings you to legend :D
+ accorp: don't agree
+ BenjaminUrquhart: :eyes:
+ Scarfield: why would you silence first anyway, 4 + 1 = 1 + 4
+ JBM: i'll be streaming haskell nonsense again in like ~5'<a rel="nofollow" class="external free" href="https://www.twitch.tv/cg_jbm/">https://www.twitch.tv/cg_jbm/</a>
+ BenjaminUrquhart: screw with enemy prediction
+ accorp: I'm thinking that if you silence and then move, that would really eef up prediction
+ Scarfield: but it should be the same as move then silence
+ Scarfield: or i am getting too tired
+ accorp: not the same
+ muy31: i'm thinking it doesn't matter if your enemy isn't trying to predict you
+ muy31: but just find you
+ AntiSquid: depends which one gets you more move space on the silence ... so either could be better
+ Scarfield: thats true though
+ accorp: hm, instersting
+ blasterpoard: I've been debugging an off by one error in my bitboards for the last 2 hours... turns out I forgot that 1st line of input is width/height
+ accorp: but if you wanna screw prediction, like  BenjaminUrquhart said...
+ blasterpoard: and that's why my maps were wrong
+ ZarthaxX: im sorry for you blasty that's sad
+ ZarthaxX: are you using a 256 bits variable?
+ blasterpoard: no, 15x uint16_t
+ Illedan: is that faster?
+ blasterpoard: maybe?
+ Scarfield: in open water the enemy prediction will be the same no matter the order of silence and move, but as squid said, what gives silence the most cells to reach will screw the most
+ blasterpoard: easier to wrok with, imho
+ ZarthaxX: bitset isn't comparable?
+ accorp: the problem is that if you expand every position you already have for op for 4 cells in every direction, when they move, you have to expand those too
+ accorp: this is an exponential...
+ accorp: island or no island, you can't rely on that
+ mlomb: I rely on that
+ mlomb: kinda
+ mlomb: I store the visited cells on each stat
+ mlomb: state*
+ mlomb: if you remove all the possibilities it ends up not being that much
+ ZarthaxX: he is just lying, it's a hell
+ AntiSquid: "not much"
+ mlomb: I have a trigger if they are too many I just cut down some
+ mlomb: but its high
+ Scarfield: the way i track silence is i check for cells the opponent could be, that touches water where i know the opponent cant be, then apply the 1-4 cells in different directions
+ accorp: I don't think too many bots are doing more than 1 cell per silent move. That would be a turning point for this league, but not now
+ Scarfield: i am not yet :p
+ BenjaminUrquhart: I am, but you can't tell through all the timeouts from not handling surface correctly :eyes:
+ accorp: Scarfield, try only 1, I'm pretty sure of this, and it can't hurt to try. Although, I have a failsafe, which resets the assumption and starts all over...
+ Scarfield: i am silencing, but only by one, thats what i meant&#160;:)
+ kingofnumbers: "Are there any prizes to win?In the current situation, we're unable to ensure the delivery of prizes to winners."
+ kingofnumbers: does it mean there will be no prizes for sure 
+ kingofnumbers: or it means it could be&#160;? 
+ mchl12: it's not about the prizes, it's about the fun we have together in this bot programming competition&#160;:)
+ Scarfield: but my point was just the way i do the silence tracking, the order shouldnt really make that much of a difference, since i find the "edges", but of course the will be more edges if move is done first, i just dont think it will mean that much
+ kingofnumbers: mchl12, still my question is valid&#160;:) 
+ AntiSquid: don't care about prizes, although there usually are t-shirts at least, this contest was done last minute for the sake of keeping people busy during the covid lockdown
+ AntiSquid: i wouldn't expect more than t-shirts for top 20 or so kingofnumbers
+ kingofnumbers: AntiSquid I know this, but just asking because that sentences wasn't really clear 
+ AntiSquid: welcome to CG
+ kingofnumbers: I feel like you are treating my like a greedy guy just because I asked this question 
+ AntiSquid: no
+ AntiSquid: you missunderstand
+ AntiSquid: the lack of clarity happens from time to time
+ kingofnumbers: two guys immediately said "it's not about prizes it's more about fun "
+ kingofnumbers: even though my question was valid 
+ AntiSquid: i didn't say fun
+ AntiSquid: this game ain't fun for me
+ Scarfield: we all think that you are greedy :p
+ kingofnumbers: Scarfield lol ok 
+ Uljahn: you shouldn't ask random guys, ask community manager :smirk:
+ AntiSquid: ya i didn't mean it that way, as in it's not about the prizes ... i mean i just don't care in this instance if i say magically got 1st place and didn't win anything
+ Scarfield: honestly the contest is the prize in itself right now
+ accorp: there are prizes?
+ kingofnumbers: Scarfield, as I said: still my question was valid, please don't make such replies to my question 
+ AntiSquid: IT'S NOT ABOUT THE PRIZE ACCORP!! /s
+ muy31: BIG BRUH MOMENT
+ Scarfield: it was a joke, hence the smiley&#160;;)
+ Uljahn: the main prize is another contest in may if you'll be still alive :smiley:
+ muy31: lol
+ Scarfield: can cats get the virus?
+ accorp: :D
+ AntiSquid: well if it mutates the right way i guess so&#160;?
+ kingofnumbers: if the contest is "not about prizes" 
+ kingofnumbers: I would ask the organizers please go to FAQ page 
+ kingofnumbers: under question "Are there any prizes to win?" 
+ kingofnumbers: please put this as reply "it's not about prizes, this contest is the prize itself" 
+ kingofnumbers: instead of " In the current situation, we're unable to ensure the delivery of prizes to winners."
+ AntiSquid: kingofnumbers let's forget about this please, the chat will take any opportunity to talk random gibberish about anything, since it's usually very quiet in here
+ AntiSquid: don't read too much into it
+ muy31: are you kind of salty
+ AntiSquid: @_@
+ muy31: that was for kingofnumbers
+ AntiSquid: i take it personally muy31
+ AntiSquid: if you have a problem with me, i'll let you know that Automaton2000 is my paid bodyguard
+ Automaton2000: i can't even get to silver
+ muy31: RIP me #7 wants to take me down
+ Astrobytes: chill out kingofnumbers
+ AntiSquid: wow i am cutting you pay Automaton2000
+ Automaton2000: still working on my own
+ Scarfield: and i dont think anyone knows if there will be prices anyway, im just saying the contest is very much appreciated in this time of staying at home
+ mchl12: wanted to clarify that my reply was not meant seriously, it was not my intent to disregard your question kingofnumbers
+ accorp: so, if a torpedo or a mine is exploded, there's only 3 options, right?
+ Scarfield: how so?
+ Uljahn: it depends
+ AntiSquid: what do you mean by 3 options&#160;?
+ Scarfield: you mean 1, 2 or 3 damage?
+ Scarfield: 0,1,2 *
+ AntiSquid: if they overlap it's 4 damage
+ Scarfield: if the opponent moved before exlpoding torpedo/mine the turn after you exploded torp/mine its a headache :p
+ AntiSquid: i need sleep, will kick myself out, good night
+ Scarfield: gn
+ muy31: bye bye
+ muy31: it's 5:30 where I am
+ muy31: pm
+ muy31: how about you?
+ accorp: a guy could be hit dead center, adjacent or not at all
+ Scarfield: 11.30 pm, so Altered Carbon is imminent :p
+ muy31: lol
+ Scarfield: yea if only on explosion went of, there are those 3
+ Uljahn: accorp: with separate explosion yes
+ Scarfield: but if you fired, and next turn the opponent moves then fires, there are some cases that will be tricky
+ Scarfield: if simultaneous explosions (no movement in between) its just adding the damage up for each cell
+ accorp: Uljahn, only an isolated explosion would do it, right?
+ accorp: One that occurred alone in a round
+ accorp: my god this got complicated&#160;:)
+ Scarfield: yup
+ Scarfield: so dont fire anything the turn after i fired!
+ accorp: firing can be dangerous, yes
+ accorp: but you can fire and reveal
+ Scarfield: yea, i havent implemented using sonar yet, my torpedos are my sonar :p
+ accorp: my bot actually fires only when certain, but I need to work on that
+ BenjaminUrquhart: my game controller doesn't like surfacing &gt;.&gt;
+ kingofnumbers: my understanding that every torpedo or mine doesn't interfere with other torpedo or mine, damage for each one will be calculated separately
+ OmidSafari: hi
+ mchl12: Scarfield, try keeping a list of all explosions, and as soon as the enemy moves, change the locations of all explosions in the direction of their move. This should help with opponents firing after moving.
+ Scarfield: yea, started implementing that, "shifting" a map of the explosions, then i thought what if they silenced as well :P
+ Scarfield: will have to be for tomorrow
+ Scarfield: but ty for the tip&#160;:)
+ accorp: does anyone see any good in sonar? i'm struggling to see a benefit, but all see are edge cases...
+ kingofnumbers: well, if you have good prediction system, sonar could help increase its accuracy 
+ Scarfield: i think it will matter more, when more people start silencing further
+ kingofnumbers: I think sonar will not matter in low leagues 
+ kingofnumbers: but only in advanced matches 
+ accorp: but thinking about its nature
+ mchl12: So far I find sonar most useful when the opponent has many possible positions, as soon as I have more certainty on the opponent's whereabouts I switch to mines. Not sure if this is a good strategy though.
+ mchl12: Having 2 mines directly next to eachother seems unecessary, which means you sometimes have a turn or two to charge your sonar.
+ accorp: having sonar on 1 possible location in a sector?
+ accorp: that would either eliminate or have one
+ TheFlashDemon_6b40: hi guys, where are you?
+ mchl12: if you want to play consistently (which you do), you want to sonar the sector with the highest chance of the opponent's presence
+ mchl12: anything else is high risk, high reward
+ accorp: that would eliminate the less..?
+ mchl12: using sonar on the sector with the least possibilities, would also result in less, because the answer will most likely be no
+ mchl12: if the answer is no on a big sector, you can eliminate multiple places
+ accorp: because he would move out, reacting on the sonar?
+ Illedan: You also want to eliminate closer sectors first. 
+ kingofnumbers: Illedan, do you mean closer to my submarine? why&#160;?
+ accorp: open fire
+ Scarfield: bigger threat, than being further away
+ Illedan: If you are correct. Fire.
+ Illedan: If he is far away. Nothing will happen in a lot of rounds anyway..
+ Illedan: Closer and you can start shooting to narrow further
+ Scarfield: well, gonna call it a day - gn
+ mchl12: good point
+ kingofnumbers: it doesn't seem good strategy to me 
+ Illedan: Good thing there is no right approach&#160;;)
+ kingofnumbers: yeah, I said "seem" and "to me" 
+ Illedan: ^^
+ accorp: I play defence in most games until I understand them, but when I find a good offence I usually get to lefend
+ accorp: legend*
+ accorp: that's why I think mines are the way to go on this one
+ BenjaminUrquhart: so when my bot isn't throwing nullpointers it looks decent I guess<a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/442088595">https://www.codingame.com/share-replay/442088595</a>
+ OmidSafari: hello
+ icecream17: what's a tooltip?
+ BenjaminUrquhart: the little tabs on the progress bar
+ icecream17: ok. I wish this would always happen: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/442078610">https://www.codingame.com/share-replay/442078610</a>
+ BenjaminUrquhart: before I click
+ BenjaminUrquhart: is it a 1x1 hole someone spawned in
+ BenjaminUrquhart: close enough
+ icecream17: yes?
+ kingofnumbers: icecream17, lol 
+ kingofnumbers: I think you should report that to the creators 
+ kingofnumbers: or actually maybe it's intended, since you can choose your starting cell 
+ BenjaminUrquhart: they know
+ BenjaminUrquhart: intended
+ kingofnumbers: ok then
+ icecream17: i just delete every space that has less than 2 other spaces next to it.
+ icecream17: but for a rectangle.... hmm
+ BenjaminUrquhart: I floodfill and pick the largest area
+ accorp: largest area / distance to starting point
+ BenjaminUrquhart: I'm 2 bugs away from getting out of the bottom of wood 1:MOVE null TORPEDOInvalid MOVE: obstacle or already visited cell
+ accorp: it will make you reveal the least
+ accorp: provided you picked the largest area starting point
+ kingofnumbers: accorp or just go to largest area, and rely on silence to stay unknown 
+ accorp: every move you make is powering something, but also reveling your position
+ Zenoscave: oops. eulerscheZahl
+ Zenoscave: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/442095173">https://www.codingame.com/replay/442095173</a>
+ struct: it happened :p
+ Zenoscave: Am I not the first to report?
+ struct: It can happen, I posted seeds here yesterday of it 
+ Zenoscave: nice
+ Zenoscave: still on those seeds huh
+ struct: nah
+ struct: that was yesterday
+ struct: But I think of it happening is very low
+ struct: and also enemy should always choose the area with most ocean available
+ Zenoscave: how many trials before you saw one?
+ Zenoscave: 1M?
+ struct: I tried to split in half
+ struct: seed=1874286978
+ Zenoscave: oops
+ struct: I had better seed for splitting map in half, but lost it
+ YannT: kovi: you have the sneakiest submarine in the realm :o
+ YannT: I can't seem to torpedo you
+ phaberthur: i need a good code
+ Secundus: System.out.println("Hello World");
+ Secundus: here you go
+ phaberthur: :rage:
+ icecream17: oooh, i can play my code against my code
+ icecream17: oh, they pick the same square at the beginning...
+ YannT: heyy ça push fort!
+ YannT: par contre, bon, va vraiment falloir gérer les mines là
+ YannT: #6, on peut aller se coucher&#160;:)
+ Zenoscave: wrong channel&#160;;)
+ YannT: oh shit&#160;;)
+ YannT: sorry
+ YannT: I blame it on the latenessq of the hour
+ Zenoscave: No worries&#160;:) it must be quite late
+ YannT: about time yeah
+ YannT: I can't go any higher without having some description of mine handling I think
+ kovi: nice submit
+ YannT: I trained on you kovi
+ YannT: you're the sneakiest submarine
+ YannT: you've got good incertitude maximization&#160;:)
+ Zenoscave: Kovi. do you do full path or just current position for filtering positions
+ icecream17: ok, icecream17, stop delaying, you know floodfill is the easiest way
+ icecream17: this is harder than it seems. oh no
+ BenjaminUrquhart: floooood
+ BenjaminUrquhart: I finally found my invalid move issue. I forgot to update coordinates when silencing&#160;:)
+ BenjaminUrquhart: it's now fixed well enough that I don't get a million losses instantly
+ sudomakeinstall2: can you mine and trigger the same mine in one turn?
+ BenjaminUrquhart: try it an see
+ sudomakeinstall2: The default AI does it but the mine doesn't trigger, but I was under the assumption that you can do this. Wanted to make sure.
+ mlomb: You can't
+ BenjaminUrquhart: I've somehow managed to attempt to divide by zero
+ BenjaminUrquhart: looks like my tracking needs some more work
+ aangairbender: which positions do you guys have? e.g. I am top102 in bronze
+ BenjaminUrquhart: 69 wood 1 due to some issues that cause my bot to crash
+ PatrickMcGinnisII: What's the news from the world?
+ PatrickMcGinnisII: Trucks are spraying down our streets with some gas, and its not for mosquitos.
+ BenjaminUrquhart: oh hey maybe I'll make it out of wood
+ aangairbender: I guess u need just to move without using SURFACE very often and track enemy
+ BenjaminUrquhart: yep I'm moving on to bronze
+ BenjaminUrquhart: time fore more headaches
+ aangairbender: bronze introduce mines, but I am just ignoring them for now
+ aangairbender: there are still a lot places for improvement
+ aangairbender: i track enemy, but i dont hide for tracking well
+ BenjaminUrquhart: I have an interesting way of hiding, won't say more just yet&#160;:)
+ aangairbender: just charging and using SILENCE when I dont know where the enemy is
+ BenjaminUrquhart: I actively hunt the enemy
+ aangairbender: but care, if you dont know where the enemy is and use TORPEDO, enemy will know that you are close to that shot
+ BenjaminUrquhart: that's part of my hiding
+ BenjaminUrquhart: :eyes:
+ BenjaminUrquhart: or I should say it's handled by my hiding
+ aangairbender: then it's ok
+ aangairbender: go to bronze so I could make some pvp matches with you xD
+ BenjaminUrquhart: just got there
+ BenjaminUrquhart: having some move issues
+ aangairbender: first match, a win for me
+ BenjaminUrquhart: I know
+ BenjaminUrquhart: there was a subtle bug in my state management
+ aangairbender: oh, actually you won, but then you tried to go to already visited cell
+ BenjaminUrquhart: ik
+ aangairbender: how many lines of code do you have?
+ BenjaminUrquhart: 814
+ aangairbender: c++?
+ BenjaminUrquhart: java
+ aangairbender: ok, i have 500 c#
+ SolForecast: Hey there, anyone up?
+ aangairbender: y
+ SolForecast: I'm seriously confused how to get the elevator floor from Don't Panic &gt;&gt;
+ aangairbender: dont know the rules sorry
+ aangairbender: do ocean of code!
+ SolForecast: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/don&#39;t-panic-episode-1">https://www.codingame.com/ide/puzzle/don't-panic-episode-1</a> It's over here if you could help ^^;
+ SolForecast: gee. im still stuck on conditionals. I dont think i should head there yet
+ aangairbender: i can see reading of elevator floor from the input in the default code
+ aangairbender: what language do you use?
+ SolForecast: python currently
+ SolForecast: My idea right now is to just compare the position together to the direction, but I don't know how to call for said elevator position
+ aangairbender: wait a min
+ SolForecast: &gt;~&gt;?
+ aangairbender: you could have two bool variablesfirst is whether elevator located to the left from the clonesecond is whether clone is going LEFTnow if these variables are equal you should print WAIT else BLOCK
+ aangairbender: i guess
+ SolForecast: er.Problem i had right now is I have no idea how do I call for the elevator's position
+ SolForecast: I did get the basic gist so far. I just- don't understand what I'm supposed to do to call for each floor
+ SolForecast: *'s elevator
+ aangairbender: but you have reading of elevator_floor and elevator_position
+ aangairbender: you could store that and use
+ SolForecast: I can't seem to call it. It only gives out error that it simply doesnt exist
+ aangairbender: i would create an array outside that for loop and append pairs of elevator_floor and elevator_pos to that arrat
+ aangairbender: and then use it in my game cycle
+ aangairbender: game loop*
+ SolForecast: @-@
+ aangairbender: because everything creating inside for disappears outside for loop
+ aangairbender: it is called variable scope
+ SolForecast: I honestly have no idea how python array works yet honestly-
+ aangairbender: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/d0812619-d59c-4af8-a15d-24b59fdd27ec">http://chat.codingame.com/pastebin/d0812619-d59c-4af8-a15d-24b59fdd27ec</a>
+ aangairbender: btw that can be googled
+ aangairbender: i am not good with python, but basic idea to store that elevator data to some global variable
+ SolForecast: waitSo array is just, a queue or something?
+ aangairbender: yep
+ aangairbender: kinda list
+ SolForecast: fair enough. I'll give that a try
+ aangairbender: good luck

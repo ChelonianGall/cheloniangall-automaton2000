@@ -1,0 +1,1000 @@
+ izik1: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/9afff8c7-f9b9-47da-977d-d3926c89e5b7">http://chat.codingame.com/pastebin/9afff8c7-f9b9-47da-977d-d3926c89e5b7</a>
+ izik1: beauty 
+ Zenoscave: what is that izik1
+ izik1: See the image for the shape that a torp can fire given some obstacles?
+ izik1: That's that, but I did the logic without any kind of queue
+ izik1: Which is nice for me
+ Zenoscave: how'd you do it?
+ izik1: layering
+ Zenoscave: nice
+ izik1: I stared at ascii art of diamonds for a while
+ izik1: the neighbor check is nice too
+ izik1: because bitmask
+ Scarfield: that seems like something you should not have shared during the contest :p im maybe gonna steal it, nice idea!
+ izik1: Honestly, I'd be shocked if nobody else came up with it
+ izik1: I'm not even sure if it's the most efficient way
+ eulerscheZahl: i just cache which cells are in range of each other at turn 0. so i don't see a need to optimize for speed using bitmasks
+ izik1: So you just make a LUT for every possible torp position?
+ eulerscheZahl: a LUT?
+ izik1: Look up Table
+ eulerscheZahl: cell =&gt; int[,] dist to other cells
+ eulerscheZahl: and dist &lt;= 4 means that i can shoot
+ izik1: What about walls?
+ eulerscheZahl: dist is a BFS
+ izik1: ah
+ izik1: Don't you still need to find which cells are &lt;= 4?
+ eulerscheZahl: yes, i have to compare the dist to 4. but i'm far away from the 50ms, so why should i bother?
+ Scarfield: for each cell he stores a table of the distances (found with BFS) for all of the cells, as i understand
+ izik1: yeah, but you still need to floodfill or whatever for  checking distance, if you're using it for prediction
+ eulerscheZahl:&#160;?
+ izik1: if you want to use opponent torps to check where opponent is
+ Scarfield: not if you did it beforehand, the distances are stored
+ izik1: yeah, but the _mask_ isn't
+ eulerscheZahl: i have a List&lt;Cell&gt; with possible opponent candidates
+ izik1: we're going from &gt;= 4 to true/false
+ eulerscheZahl: then i do: candidates.Where( c =&gt; c.CurrentPosition.InTorpedoRange(explosion))
+ izik1: I mean, I guess you could just use the comparision
+ eulerscheZahl: of course i could cache it as a boolean instead of dist to gain a bit of speed
+ izik1: Honestly, I think I'm going to make a lookup table for all cells at the start, since it's only 2*15^2 = 450 bytes of storage if stored optimally, 512 if not
+ eulerscheZahl: but so far it really doesn't matter
+ izik1: yeah...
+ Scarfield: any idea how many has started searching for OoC yet? 
+ izik1: bleh, I need to fix my bundler
+ izik1: so that it doesn't bundle tests lol
+ Scarfield: or searching in OoC *
+ izik1: oof, #2 by 0.34 points
+ eulerscheZahl: so you can already smell the mines
+ izik1: I'm hoping to get into bronze without using anything but torps lol
+ izik1: and a really sucky movement algo
+ izik1: and a super advanced opponent tracker, of course
+ wlesavo: finally reasonable 44% against ko vi
+ eulerscheZahl: your tracking can't be super advanced before bronze (when you have to track mines)
+ Marchete: any recommendation of strategy for the game?
+ Marchete: I'm not into it
+ Marchete: but if I someday have some time
+ eulerscheZahl: bruteforce opponent positions, heuristic movements i think
+ izik1: euler: I can back in time even if there are no mines to track
+ izik1: and _technically_ I _can_ track mines
+ Marchete: is bitmaps noticeable?
+ eulerscheZahl: no idea, i don't use them
+ Marchete: or I can go to simpler structures
+ Marchete: ok
+ izik1: I find the bitmap to be the simpler structure, but that's probably just me
+ Marchete: vector&lt;&gt;, arrays  and stuff then
+ eulerscheZahl: for some players constantly doing SILENCE i struggle and have to prune a bit
+ eulerscheZahl: usually not needed
+ Marchete: a lot of players in the game
+ izik1: just 2, but you don't know where they are 
+ eulerscheZahl: be one of them
+ izik1: oh, that's what you're talking about
+ eulerscheZahl: 1245 players so far
+ Marchete: I'm not really in the mood
+ Marchete: butr maybe later
+ eulerscheZahl: 1244 if i don't count illedan + illestream as 2
+ Marchete: it seems there are many non C++ in top10
+ Marchete: cool
+ izik1: 1243 if you don't count me because I suck .-.
+ eulerscheZahl: is it the leagues you dislike Marchete?
+ Marchete: that too
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/demo/8392839245e18c46e2dac324152a05070dcc91">https://www.codingame.com/demo/8392839245e18c46e2dac324152a05070dcc91</a>
+ Marchete: coding a cripple bot to have bronze
+ eulerscheZahl: i voted for a CHEAT command to instantly win in wood
+ izik1: I don't really cripple my bot :v
+ izik1: I mean, I'm intentionally not implementing some things that I could
+ izik1: but why would I waste dev time on a bot that I'll scrap?
+ Marchete: I dislike do it in parts
+ izik1: mm
+ Marchete: doing
+ k4ng0u: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/443953550">https://www.codingame.com/replay/443953550</a>So wanted to check top ai bots path detection... Apprarently kovi can go up to 50-60k paths, I personnally timeout at 5k...
+ eulerscheZahl: i start pruning at 1k :D
+ eulerscheZahl: i guess i could go a little higher - also depends on the path length covered
+ eulerscheZahl: but you found a way to beat some players, submit time :D
+ izik1: Ah, gotta track their life now, ran into a situation where they hit themselves with torp
+ k4ng0u: I am getting nowhere with this one :P with a lot of fake accounts maybe I can lock down some players in the lower ranks :sweat_smile:
+ eulerscheZahl: do the silence for the first few turns, then play for real if the opponent doesn't want to crash
+ Marchete: what happens with silence on wood?
+ Marchete: it does something?
+ eulerscheZahl: yes, in wood1 it does
+ Marchete: I mean, bronze bot can work the same on wood?
+ eulerscheZahl: no
+ Marchete: or it will WAIT instead?
+ Marchete: or crash?
+ eulerscheZahl: crash
+ Marchete: yay
+ Marchete: so cooldowns tweaks
+ eulerscheZahl: but the contest will be pushed directly into the multiplayer area
+ eulerscheZahl: with all contestants
+ eulerscheZahl: no more saving wood code just for promotion
+ eulerscheZahl: no more missing top players
+ Marchete: that's great
+ Marchete: with 20 days I'll do the same top players did in 3 :D
+ eulerscheZahl: and you have these 20 days&#160;:)
+ Marchete: yeah, 3 days worth of good coders :D
+ izik1: Hey, that's gotta be like 30 days of me
+ izik1: :p
+ eulerscheZahl: Marchete might not be the fastestbut when he got into it, he's constantly beating me
+ eulerscheZahl: same goes for smits
+ izik1: _sigh_, the one downside of bitmaps is that I keep accidentally masking out the wrong extra bit
+ izik1: I should just make a `MAP_ROW_MASK` const
+ izik1: so that I stop doing that
+ Marchete: because you just get bored and stop working on it
+ izik1: I'm a derp, I wrote a thing to predict opponent health and _totally_ forgot to account for my own torps
+ izik1: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/443958939">https://www.codingame.com/share-replay/443958939</a> lol, okay, so I need to make  my spawning slightly less naive too I guess
+ izik1: Like, <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/443959095">https://www.codingame.com/share-replay/443959095</a> seriously
+ dbdr: the player 2 advantage
+ izik1: tfw I make my bot better but get a worse rank and lose more&#160;;-;
+ AntiSquid: there's player advantage for this game?
+ izik1: Yeah, if you both spawn trapped player 2 wins
+ izik1: See both of those replays
+ dbdr: otherwise, I think small player 1 advantage
+ dbdr: you can shoot once earlier
+ AntiSquid: isn't p2 at advantage, they are the first to get enemy movement as input?
+ izik1: I think the general case should be a wash then?
+ dbdr: another factor, true
+ izik1: p1 gets extra charge, p2 gets input
+ izik1: p1 gets better map control
+ dbdr: but p1 at turn 3 has again more info
+ izik1: but not as much as p2 has at turn 4 :p
+ eulerscheZahl: izik1 08:19AM"and a super advanced opponent tracker, of course"
+ dbdr: well, 1 info from p2 move, that's symmetrical, but also his info from his previous action
+ eulerscheZahl: hm, not that advanced after all?&#160;;)
+ dbdr: so I still vote for p1
+ izik1: lol
+ izik1: Call it a bug in the advanced opponent tracker :p
+ AntiSquid: are the bots at the top constantly improving or just shuffling the ladder?
+ Csipcsirip: yesterday I subbmitted a 2days old rank6 code and it ended up at rank15
+ Zpooks: Is someone able to provide a hint or pointer to how I should approach "roaming" (which I guess is my current plan) for Ocean of code?
+ Zpooks: I can pathfind to something i know where it is, but not sure how to apply it when the enemy isnt yet located and I need to just roam around.
+ izik1: Think tron or snake in that case
+ izik1: (you don't want to hit yourself, or force yourself to surface)
+ Zpooks: Alright, i'll start there. Thanks&#160;:)
+ izik1: Not that I actually do that lol, I have the stupidest movement possible
+ izik1: Hopefully about to graduate wood on my tracker alone
+ Zpooks: Haven't progressed past Cpt. Levine yet haha
+ Quidome: In the leader board some have a green dot on the picture what does that mean?
+ AntiSquid: premium membership
+ wlesavo: guys, when i use cg enhancer sometimes i lose all comments and ranks in submit history, why would that be?
+ Uljahn: AntiSquid: coronavirus infected
+ dbdr: Quidome: green dot = online
+ Quidome: Ah, thnxs&#160;:)
+ izik1: Now you too can spy on the fact that I never shut my computer down :p
+ izik1: Oh, it's 2 in the morning, I should probably sleep after this submit finishes going through
+ izik1: fixed _another_ bug with my tracker, I keep getting coordinate spaces mixed up, since I have like... at least 3 to keep track of sometimes
+ Zpooks: I don't see how that could *ever* happen :upside_down:
+ daffie: in coders strike back does anyone know the acceleration value or can it be calculated knowing the friction value??
+ AntiSquid: Quidome already sent you a private message before dbdr, just didn't want to go offtopic in here
+ izik1: Hmm, tomorrow I'll try time travel, if that doesn't get me out of wood, I'll give up on only torps / bad movement / good tracking and throw in some silence
+ Revhack: Hello all, I'm new here
+ Tunga: Greetings fellas 
+ Tunga: Welcome Revhack 
+ Revhack: Where are you from?
+ Tunga: If you hover on my avatar 
+ Tunga: Turkey 
+ Revhack: Ouh cool, I'm from Indonesia
+ Tunga: Nice to hear that
+ Tunga: This is a practice website for coding and also competitive ai bot matches also happening here 
+ Tunga: How old are you Revhack
+ yfprojects: If go to /home you cn see some puzzle suggestions Revhack
+ AntiSquid: Revhack you need an avatar
+ yfprojects: AntiSquid for what?
+ AntiSquid: to avoid confusion
+ Tunga: AntiSquid are you a staff on codinggame or just a regular user 
+ Tunga: Damn internet is so slow, everyone using it instead going out :p 
+ Uljahn: staff has [CG] in their nicks
+ Tunga: Nice info
+ Tunga: Thanks Uljahn!
+ struct: Its not your internet, its chat
+ Tunga: I was talking about my internet&#160;:( 
+ struct: But chat is slow too
+ struct: sometimes you type and message only goes after n secoinds
+ AntiSquid: i would have put codingame in my bio if that was the case Tunga
+ Tunga: You are right struct 
+ Tunga: I dont know that, that is why I asked AntiSquid 
+ Tunga: I like this place, it is alive
+ Tunga: Damn hackerrank was empty and sad. This chat feature is brilliant idea along with discord 
+ Quidome: Yes, just hit silver, full rebuild from python to java :D, I am happyWithout using Silence and Mines ...
+ aangairbender: Quidome top2 player Nagrarok doenst use silence btw
+ aangairbender: and sonar
+ Quidome: Really... Cool
+ Evedel: Keep this language/league interpolation, the legend one is pure C, right?
+ struct: I dont think I understand
+ AntiSquid: Evedel there's a python bot on #6
+ Quidome: Top players all use heavy mine strategies so it looks. 
+ Quidome: Got to focus on that :D
+ AntiSquid: probably
+ Evedel: Yep, that was more like a joke. I'm pretty comfortable with python too, especially when there is more heuristic then have number-crunching
+ Evedel: heavy
+ jrke: heavyyy:joy:
+ AntiSquid: i would have expected this to give an error:TORPEDO 10 4 | | MOVE N TORPEDO
+ AntiSquid: but it's perfectly valid it seems
+ struct: yes
+ struct: but before it created a tooltip
+ struct: doesnt create anymore
+ struct: even ||||||||||||||||||||||MOVE N TORPEDO is valid
+ emh: pb4 you there? got just over a million BFS per 50ms with new method :D
+ AntiSquid: and it's still not enough for #1 place?
+ struct: wtf
+ struct: are you doing emh?
+ struct: I undertand if you dont want to reveal
+ struct: but are you going to talk about it after contest ends?
+ emh: well my submission is still C#
+ emh: don't have any bot logic in my C++ yet
+ emh: just BFSes heheheheh and bit grids
+ pb4: Yes I'm here
+ pb4: That's fast :D
+ emh: pb4 should I share the secret sauce with everyone? I already described it a bit in chat here yesterday but maybe it was not specific enough hehe
+ AntiSquid: are you going to swap to c++ for 2 mil bfs?
+ pb4: Your call emh&#160;:)
+ emh: AntiSquid the 1 mill is C++
+ pb4: I don't think it matters much in this contest
+ struct: I am interested, but I can wait until contest ends
+ struct: AntiSquid if he switched from C# to C++ it would be 10 times faster
+ pb4: If you're motivated by a small write-up I'm sure many people will be interested
+ pb4: You can show the various possibilities you tried in the write-up
+ AntiSquid: struct then he should switch to D, someone said it's 10 times faster than C++
+ emh: well, basically it's just 2 lines from which you can deduce the rest. I can give the 2 lines now and maybe writeup later
+ emh: we use 4 64 bit as before, but fill them with bits using these 2 lines:
+ emh: intIndex = (x&#160;% 2) + ((y&#160;% 2) * 2);
+ AntiSquid: 'we'
+ emh: I
+ emh: hehe
+ emh: well me and pb4 and probably others too use 4 x 64 bits
+ emh: and WP is 16
+ emh: any questions?
+ emh: if the indices of the 4 64 bit ints are 0,1,2 and 3, then the bits on the board are placed into them as follows:
+ emh: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/b1094afd-8452-44da-804c-ae63e06ca8da">http://chat.codingame.com/pastebin/b1094afd-8452-44da-804c-ae63e06ca8da</a>
+ emh: you can see that 0s and 3 have only 1s and 2s as neighbours and vice versa. that halves the amount of work done on each neighbour expansion. furthermore for half of the neighbours the indices are the same for a cell and its neighbour when you go from black to white or vice versa. this eliminates half the bit shifts
+ emh: 0s and 3s are white and 1s and 2s are black. just like a chess board
+ wlesavo: one could get a phd on this :slight_smile:
+ emh: hehe
+ Zpooks: What exactly does this solve, emh? As a genuine question, i don't get it
+ wlesavo: bremh first search
+ Zpooks: Huh, thats pretty cool
+ Illedan: Nice emh
+ heesu77: hello
+ emh: thx Illedan
+ Insta-x: is this BFS for the contest?
+ Insta-x: or it is for other problem?
+ emh: it can be used for contest although it is probably overkill
+ emh: premature optimization hehe
+ Insta-x: so you create this for other problems?
+ Insta-x: but 1 mil BFS in 50 ms, thats so fast, good job
+ emh: thanks&#160;:) I created it for contest but was thinking it can be used for smash the code maybe also
+ emh: not sure about that though
+ struct: and its a big distnace bfs
+ struct: the origin is always 7 7 emh?
+ Insta-x: 1 mil BFS, if i have that power, i still dont know what im going to do with it in this contest :joy:
+ Insta-x: smash contest?
+ Insta-x: is there any description of the contest?
+ struct: smash the code is a multi
+ struct: <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/bot-programming/smash-the-code">https://www.codingame.com/multiplayer/bot-programming/smash-the-code</a>
+ Insta-x: oo, ok thx
+ Insta-x: i thought smash the code is the name for the next contest
+ darkhorse64: emh, what you describe is a kind of parallel BFS where you compute all neighbours in a given direction. How do you handle the fact that search stops at different times&#160;?
+ emh: struct I only tried with origin 7 7 but should work for any, just that you need to know if it starts on black or white. and if multiple starts all must be same color
+ emh: darkhorse64 I just check when there is no difference between previous cells and expanded
+ Insta-x: if c++ could do 1 mil in 50 ms, how many python could do in 50 ms? i just want to know how slow python is compared to c++
+ struct: hard to tell Insta-x
+ struct: I would say less than 100k
+ Insta-x: about 10-20 times slower?
+ darkhorse64: I am to busy debugging my tracker to give it a serious thought. Let's hope you'll share your secret weapon in a playground. Otherwise, we know it can be done ...
+ darkhorse64: *too*
+ struct: probably 20x Insta-x
+ struct: but hard to tell
+ struct: also C++ doesnt run with release flags on
+ struct: So it is even faster
+ Insta-x: flags?
+ struct: <a rel="nofollow" class="external free" href="https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html">https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html</a>
+ Insta-x: ok thx
+ struct: On release -O3 is enabled
+ Bastett: This is weird. I seem to be timing out... I put a timer across some code and am losinng 88ms just reading the input from stdin
+ SmokingJoe: does anyone here can help me out with merging *cs files to on single&#160;?
+ SmokingJoe: one *
+ Illedan: SmokingJoe<a rel="nofollow" class="external free" href="https://github.com/Illedan/CG-sharpmerger">https://github.com/Illedan/CG-sharpmerger</a>
+ SmokingJoe: great, exactly what i was looking for &lt;3 
+ dbdr: Bastett you need to start your timer after the (first) input
+ dbdr: we need a FAQ on the wiki&#160;:)
+ JBM: if only we had a wiki
+ dbdr: :P
+ JBM: also why does thor keep going E
+ Illedan: Thor?
+ dbdr: Illedan it's reserved to levels 40+
+ Illedan:&#160;?
+ dbdr: that's why you don't know what Thor is
+ Illedan: ^^
+ JBM: but mayby you do know why my pod keeps circling the checkpoint instead of finishing first
+ dbdr: did you change leagues recently?
+ dbdr: wait...
+ dbdr: never mind
+ JBM: lol
+ dbdr: JBM, it looks as if your goal was to be above dwarfie&#160;;)
+ JBM: which multi?
+ elderlybeginner: Is sonar useful in the contest?
+ JBM: if you want it to be
+ JBM: which generalizes to "yes" after two rounds of noticing you have an opponent to whom the same rules apply
+ pb4: sonar&#160;: depends who you ask...
+ struct: if it costed less
+ struct: maybe
+ pb4: Look at kovi&#160;: doesn't use it. Look at siman&#160;: uses it all the time. Look at Nagrarok&#160;: doesn't use it. Look at me&#160;: use it a lot
+ pb4: Does it cost that much&#160;?
+ pb4: For less than the cost of silence you largely mitigate a silence
+ cocoche007: Hi all! When I want to submit my subscription to OOC&#160;: ""(#-1)&#160;: "internal error"." "
+ cocoche007: Any idea?
+ emh: hmm.. getting from 1-1.35 mill. so varies by 35%. I wonder why. is server park heterogeneous?
+ struct: not always same machine
+ Quidome: Can you switch from AI when playing your code?
+ Quidome: In Silver you get the default AI which is not so usefull&#160;:)
+ yfprojects: There is  delete button
+ Quidome: I see that now, but what happens, can I add another one?
+ Quidome: The Bronze Boss would be OK
+ dbdr: pb4 sonar can only cut positions in 2 (yes or no), so it's far from mitigating silence, isn't it?
+ dbdr: Quickdome: yes, click on it to add someone. you be the bronze boss, or another player
+ dbdr: *could be
+ Quidome: O, wow, that is really nice. Thnxs!
+ pb4: dbdr&#160;: silence is already self-mitigating after a few moves
+ pb4: Though I do agree with your argument&#160;:)
+ pb4: emh&#160;:   // system("cat /proc/cpuinfo | grep \"model name\" | head -1 &gt;&amp;2");
+ pb4: at the beginning of main
+ struct: seems like that there are at least 3#
+ emh: found Haswell 2.2GHz and 2.4GHz
+ struct: model name	: Intel Core Processor (Haswell, no TSX)cpu MHz		: 2992.968
+ emh: ah there found that one as well
+ emh: the 2.4 GHz one is the one that gives 1.3 mill. the other give 1 mill
+ struct: how much does the 3 give?
+ emh: 1 mill strangely
+ emh: so the 2.4 is faster than the 3.0
+ emh: 200g of chocolate down. now for some black tea. maybe I should do something useful soon instead of bit fiddling hehe
+ reCurse: It's not
+ reCurse: Each type has its own variance
+ reCurse: I'm assuming depending on VM server load maybe
+ reCurse: But from my testing the 3.0 ghz is always the fastest one
+ reCurse: incl. regular and AVX code
+ AntiSquid: are you joining the contest reCurse&#160;?
+ JBM: sure he is
+ JBM: oops too soon
+ reCurse: I'm roleplaying this contest
+ reCurse: You'll have to figure this out
+ JBM: i got the easy position: can't be contradicted
+ reCurse:&#160;?
+ JBM: either you show your AI at contest end -5s
+ JBM: or you don't because you haven't convinced yourself it scored top 3
+ reCurse: So your position is "either you do or either you don't" :clap:
+ JBM: my position is: you're working on it
+ AntiSquid: lol
+ JBM: so, in a word, yes
+ eulerscheZahl: my position is that reCurse isn't playing the contest
+ reCurse: So you can be contradicted
+ JBM: that's a braver one
+ eulerscheZahl: i will stick to it until he submits to prove me wrong
+ AntiSquid: roleplaying = alt, that's how i understood it
+ reCurse: No
+ JBM: yeah but i don't know his alt
+ reCurse: Roleplaying as in I'm taking the role of a sub during this contest
+ Astrobytes: (aka hiding)
+ reCurse: You know I'm here but you don't know what I'm doing
+ AntiSquid: fascinating 
+ reCurse: I know right
+ Astrobytes: :D
+ JBM: well, *I* know XD
+ JBM: according to my position on the subject
+ reCurse: Based on completely arbitrary stuff
+ reCurse: You think you know me :P
+ JBM: and you haven't proved me wrong yet
+ reCurse: Why would I?
+ JBM: so... maybe i do
+ reCurse: I made it clear I have zero intention of saying what I do
+ reCurse: Frankly because it's a bit annoying to have this pressure
+ JBM: yup, I read you the first time
+ JBM: what pressure?
+ JBM: from your POV, you're only 50% playing
+ reCurse: I'm just speaking from experience
+ JBM: oh
+ AntiSquid: SILENCE N 0
+ reCurse: ^ This guy gets it
+ JBM: i thought we established S was the way to not go
+ reCurse: Arguing about the direction of a zero vector?
+ reCurse: Sounds like my cup of tea
+ JBM: well that's what the stream chat concluded anyway
+ reCurse: Oh I missed your stream
+ JBM: it's on youtube if *really* you're into that
+ JBM: there's some canadian guy making overpraising comments there, it feels really uncanny
+ AntiSquid: someone was doing a bot with some probabilities and trying to beat wood2 with that over more than 1 stream, he was still stuck last i checked
+ reCurse: ouch
+ JBM: uh-oh
+ JBM: that was my evolution plan
+ dbdr: JBM, I at least understood the irrefutability of your position&#160;:)
+ JBM: that's nice of you dbdr
+ JBM: but I think they all did&#160;;)
+ dbdr: reCurse did not seem to
+ JBM: rp
+ dbdr: maybe he's pretending :D
+ JBM: (or sincere annoyance, i dunno)
+ reCurse:&#160;? I agree that "Either you do or you don't" is irrefutable
+ JBM: but irrefutability is the name od *this* ga;e
+ dbdr: no, his position is that you do work on it
+ dbdr: and you can't prove that you don't
+ reCurse: Oh I see
+ dbdr: well, I guess a 24/7 stream could&#160;:)
+ JBM: edTv
+ reCurse: I thought there was more substance to it
+ reCurse: Oh well
+ reCurse: Boring
+ eulerscheZahl: and today: errichto stream
+ JBM: oh, that one has potential ^^
+ eulerscheZahl: we could watch so many stream that we don't have time to compete ourselves anymore
+ eulerscheZahl: watched him a bit at xmas rush, was disappointed
+ eulerscheZahl: he explains everything in detail and didn't make much progress
+ JBM: oh
+ JBM: ok i'
+ eulerscheZahl: also didn't go for the sim-based approach, while it was obvious to do so for xmas rush
+ JBM: 'll wait for the feedback then
+ Astrobytes: Think he did CalM too
+ JBM: i did neither contest nor multi on XR
+ eulerscheZahl: maybe, didn't watch
+ JBM: no idea what it's about
+ eulerscheZahl: do you know "Das verrückte Labyrinth"?
+ eulerscheZahl: German board game
+ JBM: oh
+ JBM: i *have* it
+ eulerscheZahl: then you know the contest
+ JBM: that's the one
+ JBM: ok i did know the contest
+ JBM: didn't associate it with "XR"
+ eulerscheZahl: a little modified for parallel movements, but still heavily based on the board game
+ dbdr: das verrücXte LabyRinth
+ dbdr: ezpz
+ JBM: the board game was all about getting the last one
+ JBM: nothing else really mattered
+ JBM: so... huge minmax?
+ eulerscheZahl: in the contest each player had 12 tasks to complete
+ eulerscheZahl: minimax is hard with parallel movement
+ JBM: ah, the extended version :D
+ eulerscheZahl: and high branching, as you can push and move to other cells
+ eulerscheZahl: i went for some kind of nash equilibrium to predict and counter the opponent, minimax was too pessimistic
+ JBM: and for OOC?
+ eulerscheZahl: like: if i do A and opponent does B, i loseif I do C and he does D, i lose tooso I do E, that doesn't block B or D
+ Bastett: Boom. Bronze league :D
+ eulerscheZahl: OOC seems a bad fit for minimax too
+ JBM: gg
+ eulerscheZahl: congrats
+ tempux: i have like 1000 lines of code in python but I think I should migrate to C++. I can't go very deep, too many timeouts
+ Bastett: is it hubris to resubmit the same bot and hope for the best?
+ JBM: not on cg
+ eulerscheZahl: too many uncertainties, you don't even know the torpedo cooldown of your opponent
+ JBM: you can bound it
+ JBM: but yeah, there's a risk of it being pessimistic
+ dbdr: eulerscheZahl isn't Nash equil when the stable strategy is probabilistic?
+ AntiSquid: any idea what time errichto's stream is?
+ eulerscheZahl: yeah, both players agree on an action that won't harm any of them too much
+ JBM: there's a counter on his twitch
+ JBM: I recall 1800, but not so sure
+ AntiSquid: oh
+ JBM: oh wait
+ dbdr: no, I mean you do A with p=04 and B with p=0.6
+ JBM: that's like pretty soon
+ AntiSquid: 15 mins from now
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.youtube.com/errichto2/live">https://www.youtube.com/errichto2/live</a>
+ JBM: well, go check the homepage
+ dbdr: that's the game theoretic solution. not sure if you can base a bot on that
+ eulerscheZahl: yeah, in 15min
+ eulerscheZahl: it helped me to predict and counter where minimax failed
+ eulerscheZahl: if the opponent has 2 possible ways to get the item and both have a counter that might work depending on the opponent action, i tried to prevent it at least
+ eulerscheZahl: my minimax was like "he will get the item anyways, i'll do something else"
+ eulerscheZahl: so i still can't be sure that i will block the opponent but at least increase my chances
+ AntiSquid: gave up on XR for now, was at #2 a few times lol just needed a push
+ dbdr: yeah. but then you should chose randomly which one you block
+ eulerscheZahl: #2 in gold?
+ AntiSquid: yes
+ dbdr: otherwise he could predict it, at least theoretically
+ dbdr: and do the other move
+ Csipcsirip: I'm trying some kind of mcts. after a round the next player has a virtual command to choose of his possible states. if it would work it'd very cool
+ eulerscheZahl: i implemented it as some kind of markov chain, giving probabilities for each possible opponent action
+ eulerscheZahl: so, back to my braindead bot of the current contest
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/444069771">https://www.codingame.com/share-replay/444069771</a>whoops :D
+ Csipcsirip: nice "kill"
+ eulerscheZahl: i should debug that one
+ eulerscheZahl: i killed one of the players at least
+ AntiSquid: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/443963328">https://www.codingame.com/replay/443963328</a>
+ tempux: silence w 5&#160;:))
+ dbdr: eulerscheZahl is there a known bug about taking damage when you shoot and move into the damage zone later?
+ eulerscheZahl: nothere was a week ago but fixed
+ eulerscheZahl: any new bug?
+ dbdr: ok. Stilgart seems to think it still happens, but no replay yet
+ kovi: cheat code
+ dbdr: to damage yourself? :D
+ kovi: silence w 5
+ dbdr: -&gt; mess up with opponent's predictions
+ dbdr: could be worth one life&#160;:)
+ eulerscheZahl: submit time
+ AntiSquid: you surface, but they get correct prediction afaik 
+ AntiSquid: i mean correct command
+ kovi: invalid command is not shown
+ eulerscheZahl: my bugfix wins the game at frame 137 for the replay above already
+ AntiSquid: all you need to do is type here your current rank every 5% of your submit
+ reCurse: Ah yes, the cegprakesh technique
+ eulerscheZahl: sorry, the progress doesn't update often enough anymore
+ eulerscheZahl: CG made the ranking update laggy
+ reCurse: Yeah what's up with that
+ AntiSquid: stream started - movie time
+ eulerscheZahl: i'm not in a mood for coding anyways, so why not...
+ eulerscheZahl: he's at 52% profile completion, I have 80 :trophy:
+ icecream17: oh sorry everyone, silence is not teleport
+ AntiSquid: he mnetioned sudoku &gt; obv a sudoku algo will win this game then! :D
+ izik1: Huh, I got into bronze over night
+ izik1: neat
+ MadKnight: gj izik1
+ MadKnight: izipizik
+ izik1: \o MadKnight
+ MadKnight: how's your izipizi legend&#160;?
+ izik1:&#160;? csb?
+ izik1: Haven't been around&#160;:/ Probably needs some love
+ MadKnight: no i mean your contest
+ izik1: oh
+ AntiSquid: there's no legend yet madao
+ MadKnight: but it will be
+ AntiSquid: where's your bot?
+ izik1: It sucks honestly, I intentionally didn't implement a lot of stuff to see if I could get to bronze without silence/mines/etc
+ izik1: well, mines didn't exist :v
+ izik1: So, all I have is torps a good enemy tracker and really bad movement
+ AntiSquid: lol he deleted the statement
+ eulerscheZahl: no, just the bot outputsand spawned on an island without realizing
+ MadKnight: lol u could spawn on an island&#160;?
+ eulerscheZahl: yes, but it will make you lose
+ izik1: I'm really good at not spawning on islands, I'm really bad at not spawning in tiny corners
+ AntiSquid: madao why you don't do contests anymore?
+ MadKnight: not this one u mean?
+ MadKnight: i kind of didn't like this game
+ wlesavo: always exited about new ways to kill yourself
+ AntiSquid: generally
+ eulerscheZahl: what was your last contest MadKnight? xmas rush?
+ AntiSquid: you always submit some bronze /. silver bot
+ eulerscheZahl: i don't count 500-ish ranks as playing
+ AntiSquid: bits!! :o
+ eulerscheZahl: catch-it-all headercommon among codeforces users
+ icecream17: the only way to improve my bot is to rewrite whole sections of code
+ AntiSquid: JUST DO IT!
+ Uljahn: just do your TODO
+ elderlybeginner: what's your strategy for locating opponent in the contest?
+ ZarthaxX: random shooting
+ blasterpoard: bruteforce
+ ZarthaxX: until you hit him
+ ZarthaxX: :bird:
+ wlesavo: banch of heuristics
+ elderlybeginner: random doesn't let me get out of wood1
+ ZarthaxX: was kidding
+ wlesavo: random with tracking
+ ZarthaxX: bruteforce it
+ AntiSquid: silence until they time out, then you find out where they were
+ elderlybeginner: I didin't&#160;:)
+ ZarthaxX: start with all possible locations for enemy elderlybeginner
+ ZarthaxX: and then when he does an aciton, do that aciton for all his possible locations
+ ZarthaxX: eventually you will discard a lot and you will have some idea of where he can be
+ wlesavo: yeah, silence N 0 is a way to bronze
+ ZarthaxX: AntiSquid lol
+ elderlybeginner: ZarthaxX, thats a lot of coordinates to copy each time opponent moves
+ wlesavo: enemy elderlybeginner
+ blasterpoard: elderlybeginner it might be somewhat challenging in python
+ AntiSquid: 'infidel' elderlybeginner
+ ZarthaxX: elderlybeginner initially 225 is the cap until he starts doing silence , but well if you are in python for example it's bad
+ AntiSquid: there's a python on #6, no excuses&#160;!
+ AntiSquid: get #7
+ wlesavo: got my fair 40% against kovi
+ wlesavo: but im up to something
+ elderlybeginner: do you suggest tracking every movement of opponent and excluding positions due to island collision and so on?
+ blasterpoard: exactly
+ elderlybeginner: that's a bit of comutation, and then there is a silence
+ elderlybeginner: computation
+ Uljahn: you can ignore silence in wood1
+ elderlybeginner: calculating only the last turn is probably not enough, to cut possibilities fast enough
+ elderlybeginner: you have to calculate whole track of an opponent starting from the first round, right?
+ wlesavo: that would help, but even moderate tracking without considering whole path is ok 
+ elderlybeginner: maybe drawing a path of an opponent and then bitwise xor or and on map
+ Uljahn: yep, in python you can easily do a rolling window with numpy
+ elderlybeginner: did you see my nick? not that level yet&#160;:)
+ wlesavo: &gt;xor on mapthat similar to what im doing
+ Uljahn: i'm using bitwise and for path checks
+ Counterbalance: you don't need the path; just update the possible locations each turn, like this:
+ Counterbalance: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/4f33f4c9-3971-4b57-9639-624918c8a3a5">http://chat.codingame.com/pastebin/4f33f4c9-3971-4b57-9639-624918c8a3a5</a>
+ icecream17: i did possible locations but I can't think of any other way to improve tracking
+ eulerscheZahl: do you handle explosions in your tracking?
+ eulerscheZahl: you shoot somewhere and hit the opponent =&gt; opponent in explosion
+ eulerscheZahl: or not there if you don't hit
+ icecream17: torpedo, silence, and mine on both sides
+ eulerscheZahl: then you are done tracking i guess
+ icecream17: well, not opponent mine, but that's..... also hard
+ elderlybeginner: Counterbalance, yep, I was thinking about exact the same solution and also about drawing path and xor. I see there is no shortcuts and there is no easy way
+ icecream17: and no, i'm not done, other people show "27" and mine shows "29 possible"....
+ eulerscheZahl: replay?
+ Counterbalance: once you narrow it down to 1 possible location, you can backtrack previous turns to find the path so you know which cells the opponent has visited, but that's a later optimisation
+ Counterbalance: dinnertime, bbl
+ icecream17: i'm in the middle of rewriting my code, so i can't
+ eulerscheZahl: do you keep the full path or only the current cell icecream17?
+ wlesavo: icecream17 thats barely meaningful
+ wlesavo: most like your bottleneck womewhere else
+ wlesavo: damn my typing is bad
+ icecream17: [rightNow, [where opponent silenced], 'string of NSEW opponent did']
+ icecream17: instead of [possible starting position]
+ icecream17: and "main string for all position of NSEW"
+ icecream17: wlesavo i need ideas
+ eulerscheZahl: the storage as a string alone is something most of us probably do differently
+ eulerscheZahl: do you check that the opponent doesn't cut the own path?
+ icecream17: Only in silence, otherwise I assume the opponent doesn't do it because otherwise "Lives -1"
+ icecream17: But wait....
+ eulerscheZahl: there is some move history you don't completely know because of silence
+ eulerscheZahl: but the movements disallow some positions as it would result in a cycle
+ wlesavo: icecream17 selftracking, minimization of information given by your actions, mine tracking
+ icecream17: If silence I add the appropiate amount of N,S,E,orW to a specific possibleOpp
+ icecream17: wlesavo, I take 28ms so self tracking may be hard
+ icecream17: Back then I used to have many for loops, but now I combined them into one
+ izik1: what language?
+ icecream17: js
+ izik1: hmm
+ wlesavo: icecream17 you possibly need to prune better, 28 seems a lot
+ izik1: I'm still at 0 in debug mode rust .-.
+ izik1: Which clearly means that I'm not using information
+ izik1: But yeah, 28 seems like a lot
+ icecream17: Turn=0 -&gt; 1ms, Turn = 1-&gt; 113ms 5 for loops... many hoisted functions and 18 variables, so not that much considering
+ izik1: speaking of major refactors, I'm going to have to do that with paths probably
+ izik1: Hmm, 18 variables doesn't sound like that many, unless you're like... Changing all of them in a tight loop?
+ icecream17: Rest of turns = 1 for loop, other smaller for loops, functions "within() [torpedoing]", "trig() [mine and trigger]", "handleOpponent()", and quite a few calls to "avail()". And no....
+ icecream17: variables are ...inputs, time, width, height, myId, board, path, torpedoed, exploded, prevOppLives, turn, sameDir[], noShoot, mines[], water[], possCharges[], type[], Iserror[], available[], land[], nextboard[], possibleOpp[], availOpp[] in turn 0.
+ izik1: Iserror?
+ icecream17: And other variables, gone[], first[], x, y, myLife,oppLife, tC sC mC, opponentOrders, otherm, random, m, evil, t, w, charge.
+ icecream17: Iserror = "Ugh, the random bug where 0 possibleOpp positions....."
+ izik1: That's a pretty bad bug
+ izik1: I get it too sometimes
+ icecream17: It's pretty helpful, discovered many more bugs with that.
+ k4ng0u: better be pessimistic than have 0 poss opp position :P I guess this happens when he inflicts damage to himself or you triggered a mine and a torpedo at teh same turn?
+ icecream17: The array = [false, turn]
+ izik1: It happens if you don't track them correctly, before I implemented stuff to do with silence, I'd get that bug if they silenced (because it just didn't change any state in my tracker)
+ icecream17: k4ng0u, no I don't consider the position if two things happen....
+ izik1: them self torping and you torping can cause it
+ icecream17: Maybe that's why my tracking is worse than others
+ izik1: or really any other way of confusing your tracker
+ k4ng0u: what is land?
+ icecream17: No, inside the handleOpponent() there's more variables move, surface, torped, ohno, order, theybomb, and previously mentioned torpedoed and exploded, which handle all cases
+ icecream17: land = spaces tht are land
+ icecream17: ohno = silence, torped = opponent, torpedo = you, theybomb and exploded = they, you
+ icecream17: *torpedo -&gt; torpedoed
+ k4ng0u: what i like to do with discrete games like this is to compute for each cells all their neighbouring accessible cells in the first turn. Then you only have to loop on those possible cells during the rest of the game instead of checking each 4 possibilities each time
+ izik1: Honestly, checking "any neighbor" is just 3 array accesses
+ izik1: for me
+ izik1: and some bitshifts
+ BenjaminUrquhart: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/7d77ed36-f685-48f9-b711-7cb7cdb32200">http://chat.codingame.com/pastebin/7d77ed36-f685-48f9-b711-7cb7cdb32200</a>
+ icecream17: Someone takes the total damage for each square and checks like that. That seems much faster and better. Checking any neighbor is done by logic. Checking if neighbor=water is done by avail(x, y)
+ icecream17: k4ng0u, I coded that but I commented it out because I felt too lazy to change my code...
+ k4ng0u: icecream17 no pain no gain :p
+ izik1: The pain I'm about to go through... _sighs_
+ icecream17: I wish there was more time
+ izik1: more than 50 ms?
+ icecream17: more than 19D 14H
+ izik1: oh
+ izik1: I mean, I started 10 days late and I don't really feel pressed for time yet
+ icecream17: I always procrastinate in school so I divide the number of days by 10.
+ izik1: I'm pretty sure one of your days is around the same value as mine, and I only divide the number of days by 2 :v
+ icecream17: Huh. I wonder what :v would look lie in real life
+ jrke: which is the shortest launguage
+ icecream17: Befunge?
+ icecream17: Or maybe that language with colors and pixels...
+ icecream17: what's that called?
+ Raptor0816: Has anyone completed Shadows of the Knight?
+ ZarthaxX: y
+ Raptor0816: I am failing on the last test case lol
+ Raptor0816: Trying to figure out if there is anything different or tricky about it
+ dbdr: kovi, wow, looks like you broke away above the rest
+ Beerus: how can you save your code except from play button
+ icecream17: ctrl+enter lol. save milliseconds
+ kovi: we need to wait for resubmit at least
+ kovi: i had some lucky seq each day
+ dbdr:&#160;:)
+ kovi: oh, nice submit btw dbdr!
+ dbdr: thanks
+ dbdr: back in top 3&#160;:)
+ dbdr: aaaaand, it's gone
+ wlesavo: :slight_smile:
+ kovi: sorry
+ dbdr: np&#160;:)
+ icecream17: Okay, I rewrote my code but there's a lot of bugs
+ MadKnight: Automaton2000 how to catch bugs&#160;?
+ Automaton2000: i got it to work for me
+ MadKnight: Automaton2000 just get yourself an Uljahn
+ Automaton2000: i don't even try to get as close as possible to get a t-shirt
+ kovi: ok, its really working
+ jrke: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/11711155c6382f1d3fc564dd6e47de8640eee71">https://www.codingame.com/clashofcode/clash/11711155c6382f1d3fc564dd6e47de8640eee71</a>
+ jrke: come fast
+ jrke: 30 s
+ eulerscheZahl: i like your southpark reference dbdr
+ dbdr:&#160;:+1:
+ icecream17: you know what, i give up, i'm not path tracing
+ eulerscheZahl: so, kovi destroying us again?
+ eulerscheZahl: (╯°□°）╯︵ ┻━┻
+ kovi: 19 days to go...
+ kovi: it might be close to a legend submit though
+ eulerscheZahl: in legend already
+ eulerscheZahl: in the last marathon legend was about 50 players on the start
+ eulerscheZahl: longer contest -&gt; lower ranked boss
+ dbdr: what?
+ dbdr: boss was about #15 at opening in locam
+ eulerscheZahl: i'm pretty sure it was lower
+ dbdr: how many at the end?
+ yfprojects: Automaton2000 I would compete just for prices too!
+ Automaton2000: yeah that's what i wanted to ask that
+ eulerscheZahl: with the reasoning of already having pretty advanced bots
+ dbdr: with one week to improve, that would be a huge legend at the end...
+ eulerscheZahl: 88 in legend
+ eulerscheZahl: and it's reasonable to take a lower ranked boss on a marathon
+ dbdr: yeah
+ dbdr: are you use only 40 made it to legend after opening?
+ eulerscheZahl: can you rephrase that?
+ dbdr: I'm surprised it was 50 at opening and 88 one week later
+ AntiSquid: for local play of the game is there a gamerunner.stop()&#160;? i don't know how to run multiple batches Q_Q
+ dbdr: 10 days even, 2 week-ends
+ eulerscheZahl: at some point a player won't get better, skill cap for that specific person reached
+ dbdr: true
+ dbdr: they just have more time for spam submits&#160;;)
+ kovi: and push others into legend&#160;:)
+ dbdr: only get you a certain way
+ eulerscheZahl: the league size also depends on the type of game
+ eulerscheZahl: heuristic contests have larger legend leagues than sim based, when you take a boss around #15 in both cases
+ eulerscheZahl: mean max being the extreme for sim based
+ dbdr: ╰─➤  grep TODO **/*.rs|wc -l18
+ dbdr: 18 TODOs
+ eulerscheZahl: oh :D
+ eulerscheZahl: you don't have to do them though
+ eulerscheZahl: get some rest
+ eulerscheZahl: rest &gt; rust
+ dbdr: that's just in code, I have a separate list too
+ dbdr: :D
+ kovi: my todo list is at the start/end of code
+ kovi: (besides the incode ones)
+ Illedan: All my code is Todo :P
+ dbdr: often I write code, and this I can make it better later, or need to check something but don't want to interrupt
+ dbdr: in that case the TODO is at that point in code
+ dbdr:  //TODO optimize winning chances
+ Stilgart: eulerscheZahl: thanks for the great fun <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/444131081">https://www.codingame.com/replay/444131081</a>
+ Nagatwin: kovi do you have the perfect handle of the opponen't actions&#160;?
+ Nagatwin: I mean, including his triggers
+ Nagatwin: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/444131982">https://www.codingame.com/share-replay/444131982</a>
+ Nagatwin: :D
+ kovi: ggwp
+ Nagatwin: I have the same count of paths:endpoints as you
+ Nagatwin: but I time-out more often&#160;:(
+ kovi: dbdr on top!
+ Nagatwin: So I have to prune the paths sometimes in order to be able to answer
+ dbdr: for one refresh&#160;;)
+ eulerscheZahl: Stilgart you solved it :onice!
+ ZarthaxX: what?
+ eulerscheZahl: click the replay above ZarthaxX
+ Stilgart: eulerscheZahl: well, only 33%
+ eulerscheZahl: a good start
+ Stilgart: I agree
+ wlesavo: also wanted to do the spaze maze, but contest happened
+ ZarthaxX: holy f
+ Stilgart: now is the time to find a good heuristic for my A*
+ wlesavo: litteraly was next on my list :slight_smile:
+ PandarinDev: go
+ icecream17: what do I do against silence spam hmmm.....
+ eulerscheZahl: a killing torpedo
+ eulerscheZahl: works against any type of submarine if placed well
+ Nagatwin: Sounds like your STB strat
+ Nagatwin: STC*
+ eulerscheZahl: STC has no torpedoes&#160;:(
+ Nagatwin: like "bury him under skulls"
+ eulerscheZahl: yeah, show no mercy
+ Stilgart: torpedo is the new skull row
+ Nagatwin: Keep pushing Euler &lt;3
+ eulerscheZahl: dbdr on stream <a rel="nofollow" class="external free" href="https://www.youtube.com/errichto2/live">https://www.youtube.com/errichto2/live</a>
+ LoganGunn: hi
+ icecream17: Everyone's silencing 0 or 4, ergo, silence 3
+ dbdr:  kovi, errichto analyzed our game live on twitchyou won of course&#160;:)
+ kovi: yeah, i saw&#160;:)
+ dbdr: :D
+ dbdr: you did get lucky right?
+ dbdr: at least to get that critical hit
+ kovi: yeah, but there were many mines
+ dbdr: so?
+ dbdr: I mean you were ahead, no question
+ dbdr: lol my sub: matches 1 to 16: looking good!17 to 21: wait...
+ Errichto: it seems that kovi knew exactly where red is ;p
+ wlesavo: dbdred
+ Tunga: What is the optimization ranking for?
+ dbdr: I read that as dbdr-ed, wlesavo :D
+ dbdr: you got dbdr-ed
+ dbdr: Tunga: optimization puzzles
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/optimization">https://www.codingame.com/multiplayer/optimization</a>
+ wlesavo: dbdr well this was half intended, double pun, although would work better if you would've won :slight_smile:+
+ dbdr: indeed
+ dbdr: need to work on it&#160;;)
+ Tunga: Thanks fellas
+ eulerscheZahl: or if the question was "who red is" instead of "where"
+ wlesavo: to dbdreckt everybody
+ eulerscheZahl: who is red? dbdred!
+ JBM: red's dead
+ eulerscheZahl: on the ground of the ocean
+ wlesavo: eulerscheZahl where would you place your current bot at the end of marathon
+ eulerscheZahl: 50-60
+ eulerscheZahl: hard to tell, these long contests are rare
+ dbdr: that high?
+ eulerscheZahl: yes, that high
+ eulerscheZahl: i'm high af
+ dbdr: :D
+ dbdr: good for you
+ wlesavo: hm, that is really kinda high
+ eulerscheZahl: usually a contest ends after 10 days
+ dbdr: we can actually try in on the last sunday
+ eulerscheZahl: so we don't have much experience
+ dbdr: submit some old bots
+ eulerscheZahl: remind me of the date we wanted to check
+ eulerscheZahl: contest ends on a monday, 10am
+ eulerscheZahl: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/e0b69787-5917-4272-a206-83bc1cc0b1a6">http://chat.codingame.com/pastebin/e0b69787-5917-4272-a206-83bc1cc0b1a6</a>
+ AntiSquid: yellow didn't understand what's going on Automaton2000
+ Automaton2000: you have more than 6
+ Stilgart: best inefficiency ever <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/444151599">https://www.codingame.com/replay/444151599</a>
+ BenjaminUrquhart: but hey, it works
+ Stilgart: well, 33% -&gt; 36%... somewhat disappointing actually
+ dbdr: Stilgart you needed a contest to start working on it?
+ dbdr: the power of procrastination&#160;;)
+ dbdr: what next, bender 4 next week?
+ Stilgart: nope, i needed an idea
+ Stilgart: it was not as good as expected but at least I solved it at 40% now
+ Stilgart: 20 more submits to go :D
+ dbdr: is that submit spam?
+ Stilgart: ThomasNicoullaud showed me the way
+ Stilgart: seriously... 43%&#160;?!
+ BenjaminUrquhart: this is why I never got around to validating space jam
+ BenjaminUrquhart: oh it's space maze
+ BenjaminUrquhart: I swear it was space jam at some point
+ BenjaminUrquhart: ok time to finally do new ocean strat
+ Stilgart: there were two puzzles at some point
+ BenjaminUrquhart: hm
+ Tunga: I just joined the Ocean of Code and this is thrilling for me 
+ BenjaminUrquhart: :thumbsup:
+ dbdr: yay, a case for higher order function monomorphization
+ BenjaminUrquhart: what?
+ Tunga: Controlling bot thing is a complex yet joyful 
+ Tunga: I like the idea 
+ Tunga: Do I have to submit my code in any time? 
+ JFB: Yes
+ Tunga: When&#160;? 
+ JFB: Any time
+ Asterixk: this contest ends in 19 days. just make sure you submit before that
+ Asterixk: check top left corner
+ Zenoscave: Does anyone have a brutaltester compliant ooc ref
+ sirsatan: hi, how does silence work&#160;?
+ sirsatan: if i do SILENCE N 4 that i will teleport 4 cell north in one turn orr next four turn&#160;?
+ Astrobytes: 1
+ sirsatan: really&#160;?
+ Astrobytes: Yep. 
+ sirsatan: do you have any replay  to confirm&#160;? that mean i write correct funcion but i change it 
+ Astrobytes: sirsatan <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/444179854">https://www.codingame.com/replay/444179854</a>
+ Astrobytes: (just a quick example, frame 14-15)
+ Astrobytes: 13-15
+ sirsatan: wow great example
+ Astrobytes: Well I just stuck the code in so it will crash
+ Astrobytes: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/444180825">https://www.codingame.com/replay/444180825</a>
+ sirsatan: thank you sir Astrobytes
+ JeffSioufi: hello world!
+ Astrobytes: no probs sirsatan
+ icecream17: I realize something - you can figure out more about the opponents position when the opponent triggers a mine
+ dbdr: wlesavo #1
+ wlesavo: lol while two top players are resubmiting
+ wlesavo: 2 days old submit :slight_smile:
+ dbdr: :D
+ Zenoscave: I made a brutal tester version of ooc
+ Zenoscave: Finally Local testing can start
+ AntiSquid: congratz on #1 in python wlesavo
+ AntiSquid: that's special
+ dbdr: not to be confused with python #1
+ wlesavo: well i screenshooted that, while kovis resubmit not finished   :smiley:
+ Zenoscave: lol dbdr
+ wlesavo: back to normal :wink:
+ Zenoscave: Nearly top 10!!!! This is the best I've ever done
+ dbdr: gz Zenoscave!
+ Zenoscave: thanks!
+ Archibaldo: is silver the highest rank right now? I am talking about ranks that include players ofc
+ darkhorse64: Gold league opens in three days
+ sirsatan: can I do SILENCE N 0&#160;?
+ darkhorse64: Yes
+ MSmits: mmh if you cast a uint32_t* to a uint64_t* will the pointer still point to the same memory location?
+ MSmits: I wonder if it may shift by 32 bit in a 32 bit system or something
+ pb4: yes
+ MSmits: 64 bit system i mean
+ MSmits: so it never shifts?
+ MSmits: I wanted to xor a 32 bit array together to get a hash, I figured if i cast it to 64 bit first, I dont have to xor so much and can use a 64 bit hash key
+ emh: MSmits can also use unions. or memcpy (usually optimized out).
+ emh: for small values I mean
+ MSmits: yeah  i used those before
+ MSmits: unions are a bit inconvenient to use imho... but I could be using them wrong
+ MSmits: also if my 32 bit array has 15 elements, it doesnt fit perfectly in a 64 bit array
+ MSmits: so union is a bit annoying there
+ icecream17: Weird, for some reason the bottom right corner disappears from the ocean.....
+ MSmits: finally, proof the earth is flat!!!
+ icecream17:&#160;?
+ Astrobytes: heh heh
+ MSmits: icecream17 that's the place where the Earth ends...
+ Counterbalance: y = 0&#160;; y &lt; HEIGHT - 1; y ++&#160;?
+ icecream17: at space?
+ Counterbalance: Nah the earth doesn't end. It just goes round and round.
+ MSmits: like the wheels
+ icecream17: Counterbalance, it happened at move 43
+ MSmits: on the :bus:
+ Astrobytes: go round and round
+ Asterixk: you broke the ocean?
+ Astrobytes: allll daaaay loooong
+ MSmits: Astrobytes getting into it now
+ icecream17: it dissappeared 2 moves after the opponent lost a life, which is the best i got and probably misleading
+ struct: another portuguesse
+ struct: Im 1st on OOC from portugal
+ struct: im the only one though
+ Asterixk: yoo struct
+ struct: hi
+ Astrobytes: Hell yeah MSmits, I used to make up loads of verses for that for my nephews :D
+ Asterixk: lol gz
+ struct: Im not really playing it yet though 
+ Counterbalance: you're last in your country, struct?
+ struct: yes&#160;:(
+ MSmits: cool Astrobytes
+ Asterixk: so you'r the one who took my 1st place in contests fro portugal
+ Counterbalance: i'm tempted to un-nerf my bot to get to silver but I'm so close...
+ struct: And Im not very active on contests
+ struct: I'm a bit of a slow coder
+ Asterixk: me too lazy af. was more active during college.
+ Astrobytes: *I'm a bit of an account deleter
+ Astrobytes: :P
+ MSmits: why is your bot nerfed Counterbalance?
+ Csipcsirip:  <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/444204817">https://www.codingame.com/replay/444204817</a>
+ MSmits: you trying to give other players a chance?
+ Astrobytes: Hiding MSmits :D
+ struct: Im not sure about it, the game type just isnt for me
+ Counterbalance: just checking if the basics are working good before adding more commands
+ MSmits: Csipcsirip lol... just floodfill your start locations :P
+ MSmits: Counterbalance I am still doing that&#160;:)
+ Csipcsirip: idk what happened here :p 
+ MSmits: rank 148 silver now... not using any mines still
+ Counterbalance: wow what a map
+ struct: lol
+ icecream17: Everyone does the corners or the middle, but doing the sides are just as effective
+ MSmits: as a start location? I think most do random
+ icecream17: really?
+ Counterbalance: i do random with a fixed seed
+ Counterbalance: so it's always the same position
+ icecream17: that game was amazing
+ MSmits: me too Counterbalance
+ icecream17: var variable ..later... "Error: undefined"
+ struct: There might be better options than random
+ icecream17: i wonder... expert rules is just the source code. is there anything important? hmm
+ struct: What do you mean?
+ struct: Ah I see what you mean now
+ struct: Is just the referee, so the rules in code
+ icecream17: oh ok
+ Counterbalance: 0.4 under boss at 2.. fixed horrible bugs.. resubmit probably wont come close to that, as usual
+ TheAtomicBreakfastInSpace_7c6f: k
+ TheAtomicBreakfastInSpace_7c6f: :persevere
+ TheAtomicBreakfastInSpace_7c6f: :grimacing:
+ Counterbalance: :sweat_smile:
+ D1WhoWins: yeh
+ Counterbalance: terminate called after throwing an instance of 'std::logic_error'
+ D1WhoWins: :rage:
+ Counterbalance: :scream:
+ Malterin: :flag_cp:
+ qamykaze: hello
+ Asterixk: found ya struct, bottom wood1
+ MostComplicatedUsername: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/444229731">https://www.codingame.com/replay/444229731</a>
+ MostComplicatedUsername: Nixerrr forgetting to reset trail after surfacing?
+ ToshiTuringMachine: i have a question. first turn 1 sec only to output the starting position?
+ MostComplicatedUsername: Yes
+ MostComplicatedUsername: And the move
+ MostComplicatedUsername: So 2 output lines first turn
+ ToshiTuringMachine: and move? i don't get it
+ ToshiTuringMachine: first player 1 choses position... second player 2 .. after player 1 has 50 ms to move
+ ToshiTuringMachine: however it times out in dart after first 700ms so I have no clue
+ D1WhoWins: nextCheckpointAngle and nextCheckpointDist both show up as nil in the error stream when I use them.
+ ToshiTuringMachine: in what league are you TheAtomicBreakfastInSpace_7c6f
+ D1WhoWins: I'm in Wood 2 League, it just told me I can use them
+ ToshiTuringMachine: ah yes i think i remember
+ ToshiTuringMachine: sometimes it will output nil, just ignore it
+ D1WhoWins: k thx
+ ToshiTuringMachine: next turn it will be ok
+ MostComplicatedUsername: ToshiTuringMachine Turn1: Player 1 choose starting positions AND movePlayer 2 chooses starting position and move
+ ToshiTuringMachine: oh now i see
+ ToshiTuringMachine: thank you

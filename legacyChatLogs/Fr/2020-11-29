@@ -1,0 +1,876 @@
+ dbdr: mouais, je viens de resub le meme code, j'ai fait une fois #37 et là #12, devant ThomasNicoullaud
+ dbdr: donc je suis pas sur que ce soit le niveau qui ait monté, Stilgart
+ dbdr: en fait je suspecte que j'ai une faiblesse contre le milieu de tableau
+ dbdr: j'évite d'etre en position de défaite pour le endgame de façon assez aggressive
+ dbdr: du coup j'arrete souvent plus ou moins de jouer au milieu de partie, alors que j'aurais peut-etre pas vraiment perdu
+ dbdr: surtout contre les bits moins optimaux
+ dbdr: &lt;/mur&gt;
+ dbdr: s/bits/bots/ :D
+ dbdr: enfin, les bots sont faits de bits, in fine
+ pb4: Yop&#160;!
+ pb4: dbdr, à une époque tu avais l'historique du chat dans un wiki quelquepart
+ pb4: C'est encore le cas pour le chat du contest&#160;?
+ dbdr: pb4: cg.spdns.eu/
+ pb4: Merci&#160;:)
+ ThomasNicoullaud: dbdr t"as surtout pris 80% de tes looses contre Royal je crois
+ dbdr: oui
+ dbdr: j'ai vu&#160;:)
+ dbdr: après il a du rouler sur pas mal de monde, mais c'est possible qu'il surperforme contre moi
+ ThomasNicoullaud: mais ca reste random de toute façon
+ ThomasNicoullaud: Magus vari entre 18 et 35
+ dbdr: et toi?
+ ThomasNicoullaud: 11 - 23
+ ThomasNicoullaud: t'aurais pu me dire que ce que c'était un beam pandant le contest dbdr :D
+ ThomasNicoullaud: ca m'aurait fait gagner 80 places en 3 lignes
+ dbdr: le chat parlait que de ça
+ ThomasNicoullaud: j'ai rien vu haha
+ ThomasNicoullaud: sur world&#160;?
+ dbdr: le 2 je pense
+ dbdr: mezelcop en parlait aussi
+ Palmipedus: sur le fr ca parlait pas trop de beam
+ dbdr: *mazelcop
+ Palmipedus: plus de BFS
+ dbdr: ah tiens, c'est en rapport avec Mazel Tov?
+ Bon[]Crayon: Salut tout le monde.
+ Bon[]Crayon: AutomatonNN He He
+ AutomatonNN: je dois donner la conf de la base de ton code de quel contest&#160;?
+ Bon[]Crayon: Automaton2000 Ha Ha
+ Automaton2000: c'est depuis que j'ai changé un truc&#160;?
+ JBM: comment es ton csb
+ dbdr: c'est si bon
+ JBM: t'as le chic de citer de vieux tubes que j'ai pas écouté depuis 20 ans
+ dbdr: c'est mon superpouvoir
+ dbdr: à la HeroCorp
+ pb4: o/ JBM
+ pb4: Bien ton post-mortem&#160;:)
+ JBM: merci
+ dbdr: pb4, ton classement alternatif, tu as publié le code?
+ JBM: jsuis en train de te répondre
+ dbdr: ou des infos?
+ Stilgart: dbdr: j'ai hate de voir le power de la saison 3-4
+ pb4: dbdr, je crois que j'avais mis ça avec le code source de bit-runner
+ pb4: Mais je me suis rendu compte que le code était mauvais depuis, je l'ai un peu changé
+ pb4: Tu veux la dernière version&#160;?
+ pb4: Sinon les infos c'est pas compliqué
+ dbdr: Stilgart je citerai les tubes du futur&#160;;)
+ Stilgart: ça pourrait être sympa d'en faire un message sur le forum
+ pb4: <a rel="nofollow" class="external free" href="https://wikimedia.org/api/rest_v1/media/math/render/svg/344dce0612734997ef5e313ec52341fb3ffe7dbd">https://wikimedia.org/api/rest_v1/media/math/render/svg/344dce0612734997ef5e313ec52341fb3ffe7dbd</a>
+ pb4: que tu trouves sur cette page&#160;: 
+ pb4: <a rel="nofollow" class="external free" href="https://en.wikipedia.org/wiki/Elo_rating_system">https://en.wikipedia.org/wiki/Elo_rating_system</a>
+ dbdr: pb4 si c'est pas secret je veux bien le code, oui
+ dbdr: mais ELO c'est un système en ligne, ou l'ordre de matchs est important, non?
+ pb4: L'idée c'est de calculer les Q_i de chaque joueur qui expliquent le mieux les pourcentages de victoires observés
+ pb4: ELO met à jour progressivement les Q_i de manière itérative par descente de gradient
+ pb4: mais là justement je ne fais pas ça
+ dbdr: voila
+ pb4: Je prends tous les matchs observés, et je cherche ce qui colle le mieux
+ pb4: Donc je n'utilise pas la partie "descente de gradient"
+ pb4: Juste la partie "espérance de winrate = Q_a / (Q_a + Q_b)
+ pb4: "
+ pb4: ah zut c'est sur le PC cassé -_-
+ JBM: FIX IT
+ pb4: Il faut que je le branche sur la télé pour te donner ça :D
+ JBM: Ça, C'est Fait
+ dbdr: ya un modele avec e^Qa / (e^Qa + e^Qb) aussi non?
+ pb4: JBM&#160;: j'attends la dalle...
+ pb4: dbdr&#160;: pas exactement cette formule, mais oui 
+ pb4: le Q_a c'est pas le score elo
+ pb4: Q = 10 ^ (R/400)
+ pb4: avec R le score ELO
+ dbdr: ah voila
+ dbdr: tu as des incertitudes / variances aussi?
+ pb4: Ca change la tête des formules mais au fond tu résous la même chose
+ pb4: J'ai trouvé plus simple de résoudre pour les Q_a, et convertir et R_a pour l'affichage
+ pb4: Non je n'ai pas de notion d'incertitude/variance
+ pb4: Je ne saurais pas aller jusque là
+ dbdr: ok
+ pb4: en revanche j'ai une notion de "upset" quand le winrate observé est très différent du winrate attendu
+ pb4: Mais c'est juste pour l'affichage des résultats à la fin
+ pb4: bon, brb je vais brancher le pc à la télé
+ pb4: ...
+ jolindien: salut codeurs du dimanche
+ dwarfie: moi j'ai des functions upset parce que j'en ai ras le bol :D
+ dwarfie: salut jolindien
+ dbdr: _Royale veut vraiment la #1 sur FC on dirait&#160;:)
+ _Royale: dbdr: haha, c'est reparti&#160;!
+ dbdr: tu me refais chuter?
+ dbdr: préviens moi quand tu auras fini, que je resub&#160;;)
+ Stilgart: _Royale il veut la #1 partout
+ JBM: qui lui en voudrait
+ Stilgart: surement pas moi
+ PhOeNyX: Pom pom
+ Zorg1: o/ à tous et à toutes
+ Zorg1: PhOeNyX&#160;: tu fais du maven&#160;? :p
+ PhOeNyX: Pas en ce moment
+ Stilgart: pourtant... tu as fait doublement du maven&#160;:(
+ Vry: Yo PhOeNyX Zorg1 Stilgart JBM dbdr _Royale dwarfie jolindien pb4
+ Stilgart: oy Vry le légendaire
+ Zorg1: o/ vry 
+ Zorg1: ah oui gg vry
+ JBM: \o Vry
+ PhOeNyX: C'est vry ça, t'es légende&#160;?
+ <b>**PhOeNyX ----&gt; []</b></p><p><img src="/a/16542412157988" /> Zorg1: :thinking:
+ dwarfie: bon c'est le moment de ressortir cgbenchmark ... parce que la j'ai aucune visibilité de si c'est mieux ou pas :D
+ Vry: PhOeNyX&#160;: sur FC&#160;? oui
+ dwarfie: pff ... pas mieux ...
+ Bob: pouec la foule
+ Bob: Automaton2000, AutomatonNN, bon dimanche
+ Automaton2000: mais j'ai peur que ce soit un truc du genre
+ AutomatonNN: voir le contest de contest de contest de compilation et comme si tu es en train de faire un truc de 
+ PhOeNyX: AutomatonNN de faire un truc de... Contest&#160;?
+ AutomatonNN: oui mais il est pas trop dur que la fac a la terre a des tables de niveau de test de codingame 
+ Bob: non PhOeNyX
+ Bob: un truc contest de contest de contest
+ Bob: et estime-toi heureux il en a mis que trois
+ Bob: AutomatonNN est capable de pire
+ AutomatonNN: oui et toi&#160;?
+ PhOeNyX: BAM
+ Bob: :D
+ PhOeNyX: Ste répartie
+ Bob: je peux faire du contest de contest de contest de contest de contest si je veux, AutomatonNN
+ AutomatonNN: tol
+ Zorg1: ça fait longtemps que j'ai pas dit bonjour au fleuron de l'IA Automaton2000 &amp; AutomatonNN
+ Automaton2000: oui mais y a des cas où je suis top3 (bronze) à sc
+ AutomatonNN: une pour l'implémenter de ton optim qui a un peu de temps pour contacter tout le monde et AutomatonN
+ PhOeNyX: Automaton2000 &amp; AutomatonNN = Automaton
+ AutomatonNN: oui
+ Automaton2000: ca a l'air de le faire dans un seul fichier
+ dwarfie: rahhhhhh .... rage-quit a la boulet ... je verrais a passer legend plus tard parce que la j'enrage pire que Stilgart hier ...
+ Zorg1: bah quand il ragequit boulet, il ne reste pas jusqu'à devenir légende&#160;?
+ Zorg1: (tout en râlant ofc)
+ dwarfie: :thinking: ouais ...mais j'ai plus le temps et l'energie de raler donc ca va pas le faire&#160;:)
+ Zorg1: à cours de chiantos&#160;?
+ dwarfie: ouais ... il parait que ca fait pas partie des produits de premiere necessité
+ Zorg1: faut regarder le taux de TVA :p
+ dwarfie: Taux de Violence Acceptable&#160;? c'est clairement lié à la QBI ...
+ JBM: qqun a compris l'exo 6 de la battledev?
+ Bob: AutomatonNN, un indice pour l'exo 6&#160;?
+ JBM: je trouve pas leurs termes faciles a suivre
+ AutomatonNN: vendredi soir en fait je suis pas dans le bon truc que je suis pas sur que c'est pas une liste de co
+ Zorg1: t'as un lien sur l'exo6 de la battledev&#160;?
+ <b>**Zorg1 a une grossse flemme</b></p><p><a href="/wiki/File:Default_avatar.png" class="image"><img alt="Default avatar.png" src="/images/5/56/Default_avatar.png" decoding="async" width="50" height="50" /></a> JBM: euh
+ JBM: ils sont pas top pour les liens
+ JBM: je le retrouve toujours en "isograd battledev" sur google
+ Zorg1: ah Meritis a fait un PM&#160;: <a rel="nofollow" class="external free" href="https://meritis.fr/actualites/battledev-post-mortem/">https://meritis.fr/actualites/battledev-post-mortem/</a>
+ JBM: puis clic sur "exo 6"
+ JBM: houla, des solutions
+ JBM: ne surtout pas lire
+ Zorg1: comme je spoile ^^
+ JBM: le 5e pb concerne la programmation dynamique?! wtf
+ JBM: j'ai pas du toutfait ca
+ JBM: bon, manger
+ Zorg1: ah tiens pas con comme idée ça
+ Vry: Bon appétit&#160;! :D
+ philRG: sympa le PM&#160;:)
+ Zorg1: ah tiens j'avais pas vu le tetris 3D d'eZ
+ Stilgart: bon, il n'y a rien à sauver chez aCat 
+ Stilgart: je pense que je vais me mettre à flinguer ses contributions à vue
+ dbdr: eZpZ
+ Stilgart: faut monter deux comptes lvl 20 quand même
+ dbdr: je rebomdissais sur Zorg1
+ dbdr: en tout bien tout honneur, bien sur
+ dbdr: Zorg1, il est passé ton puzzle?
+ Stilgart: mon cerveau n'avait pas vu le eZ de Zorg1
+ Zorg1: c'est quoi encore le dernier puzzle d'unChat, "construisez une compilateur comme indiquer par le chapitre 5 du dragon book"&#160;?
+ Stilgart: Zorg1: je réagis à son message du forum où il me dit qu'il ne voit pas le problème dans ses contributions
+ Stilgart: en réponse à mon invitation d'utiliser tech.io&#160;:/
+ Zorg1: ah ^^
+ Stilgart: ça m'apprendra à être constructifs
+ dbdr: obsolete programming je crois
+ Zorg1: sameGame était pas mal
+ Zorg1: dbdr&#160;: petit malin
+ Stilgart: [CG]Thibaud: tu vois, les gens, il faut leur rentrer dans le lard tout de suite, ça évite de perdre son temps
+ dbdr:&#160;?
+ Zorg1: ah ok non faut que je le resoumette en fait dbdr
+ Stilgart: il est pas en wip&#160;?
+ dbdr: il était toujours wip non?
+ Zorg1: oui mais je ne l'ai pas resoumis
+ Zorg1: il est chez moi
+ Zorg1: attend je le remet en "WIP"
+ dbdr: demande à kovi si tu as besoin d'aide, il est très fort pour resoumettre
+ Stilgart: go go go farmer les upvotes&#160;;)
+ Stilgart: huhu
+ Stilgart: bien vu dbdr
+ Zorg1: comme ça trolle ...
+ dwarfie: :rofl: bien vu en effet
+ Zorg1: heureusement que je suis là pour élever le débat :p
+ dbdr: il est meme pas sur #fr
+ dbdr: parle nous de la litterature russe, Zorg1
+ Zorg1: la peinture russe plutôt
+ Sparow: Hey hey&#160;!!
+ nicola: Sparow&#160;: même la longue chanson se termine.
+ Zorg1: la littérature russe à part quelques auteurs russes dont je massacrerais le nom ...
+ Sparow: nicola aha oui, mais toute chanson a une fin&#160;;)
+ nicola: Je faisais référence un épisode de Doctor Who.&#160;:)
+ Zorg1: hop ressoumis
+ dwarfie: ce moment ou dwarfie est tellement schlasse qu'il la pire boulette de l'histoire ... attention les yeux
+ Sparow: nicola oui moi aussi j'avais bien compris la ref&#160;;)
+ dwarfie: for(int i = 0&#160;; i &lt;&lt; 5&#160;; i++)
+ nicola:&#160;;)
+ <b>**dwarfie a honte</b></p><p><img src="/a/16542412157988" /> Zorg1: faudrait peut être que je rajoute un test avec des nombres premiers tiens
+ dbdr: Ya ponimayu
+ dbdr: pour bien farmer, faudrait copier coller dans une nouvelle contrib
+ dbdr: comme ça on pourrait revoter
+ Zorg1: ^^
+ Zorg1: oui bon je vais pas tarder à la mettre au vote aussi
+ dbdr: mais bon faut pas donner d'idées à J*M
+ dwarfie: fun fact Zorg1 ... dans ta contrib , les commentaires sont triées en ordre inverse ... encore un big de CG&#160;?&#160;;)
+ Zorg1: bah il a farmé combien de XP avec son troll
+ dbdr: J8M c'est mieux
+ Zorg1: dwarfie&#160;: ça dépend, je comprend plus rien
+ dwarfie: dbdr ... pas obligé de l'invoquer non plus :D
+ dbdr: je l'ai pas invoqué
+ Zorg1: il est parti manger de toute façon
+ <b>**dwarfie hesite a faire comme tout le monde et valider les puzzles de Zorg1 sans avoir testé ... heureusement , ypeupa</b></p><p><img src="/a/17785582865119" /> dwarfie: (avec le commentaire "i love programming" bien sur :D )
+ Sparow: J'ai deux trois question sur Java, est ce que quelqu'un peut m'aider&#160;?
+ dwarfie: oui ... etape 1&#160;: changer de langage , etape 2&#160;: a pu problem :D
+ Sparow: Je commence le java depuis peu, et un prof nous a donné un zip avec plein de classe en java
+ Sparow: dedans il y a des public interface
+ Sparow: c'est quoi et ça sert à quoi&#160;?
+ Sparow: ^^
+ <b>**dwarfie a oublié l'etape 0&#160;: buter le prof ....</b>
+ Sparow: mdr
+ Zorg1: bah l'interface ça va être plus dans l'idée "contrat" tu définis des méthodes que va devoir définir une classe qui implémente l'interface
+ <b>**Zorg1 se dit qu'il est vachement troll free aujourd'hui</b></p><p><img src="/a/19676617947328" /> Sparow: dwarfie attend le plus drole c'est que l'on ne peut pas modifier le contenue des classes on peut juste rajouter du code dedans ouu créer de nouvelle classe pour utiliser celle qui l'a fait
+ dwarfie: <a rel="nofollow" class="external free" href="http://blog.paumard.org/cours/java/chap07-heritage-interface-interface.html">http://blog.paumard.org/cours/java/chap07-heritage-interface-interface.html</a>
+ Sparow: Zorg1 oui c'est ce que j'ai fait mais quelle est leur utilité&#160;?
+ Sparow: dwarfie merciii
+ dwarfie: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/f2ab2fc2-be12-4494-8911-43586046707c">http://chat.codingame.com/pastebin/f2ab2fc2-be12-4494-8911-43586046707c</a>
+ Zorg1: bah List c'est une interface, tout ce qui t'intéresse ce sont les méthodes offertes, l'implem tu t'en fou
+ Zorg1: (par exemple)
+ dwarfie: Techniquement, une interface s'écrit comme une classe, à la différence que l'on remplace le mot-clé class par interface.
+ dwarfie: ca veut tout dire ... :D
+ Zorg1: après interface ça va pouvoir définir un comportement partagé par plusieurs classes qui font des trucs différents, par exemple Comrable
+ Zorg1: *Comparable
+ MrHydeal: Les interfaces servent à créer des comportements génériques: si plusieurs classes doivent obéir à un comportement particulier, on créé une interface décrivant ce comportement, on est la fait implémenter par les classes qui en ont besoin. Ces classes devront ainsi obéir strictement aux méthodes de l'interface (nombre, type et ordre des paramètres, type des exceptions), sans quoi la compilation ne se fera pas.
+ Sparow: J'ai implémenter les méthodes de mes interfaces dans chaque classe correspondante
+ JBM: haha ca clashe sur leChat
+ J8M: ça trolle même
+ Zorg1: pff ...
+ Zorg1: "J8M"
+ JBM: c'est pas moi c'est l'autre
+ J8M: :angel:
+ Zorg1: ah tiens J8M a viré son flag Hongrois ...
+ Zorg1: comme par hasard ...
+ J8M: encore un coup de kovi
+ Zorg1: sûr
+ Zorg1: kovi-19 c'est un de ses multis&#160;?
+ dbdr: c'est plutot un coup de Nixerrr, il parle parfaitement français
+ dbdr: kovi d19, grand joueur de JdR
+ nicola: Un D19&#160;?
+ dwarfie: ah bravo dbdr ... je cherchais comment l'amener celle la :D
+ nicola: C’est un D20 avec un trou.
+ dbdr: dé à 19 faces
+ Zorg1: dans une géometrie non euclidienne ça doit marcher
+ nicola: Même pas sûr.
+ dbdr: en 19 D peut-etre?
+ nicola: La gueule de la poupée.
+ dbdr: mais bon, moi meme les 2.5 D de pikachu ça me dépasse, alors...
+ nicola: Je préfère ceux de Duke Nukem 2.5D.
+ dwarfie: ca se vend ... <a rel="nofollow" class="external free" href="https://www.des-en-folie.fr/240-des-en-totalite#/nb_de_faces-19_faces">https://www.des-en-folie.fr/240-des-en-totalite#/nb_de_faces-19_faces</a>
+ Zorg1: oui mais il y a Moebius et son ruban
+ nicola: Rêve de dragon avait son D7.
+ dbdr: mais sont-elles équiprobables?
+ nicola: Je me pose la même question.
+ Zorg1: d10 je crois que oui
+ Zorg1: alors qu'il n'est pas régulier à la base
+ dbdr: prenons une vache sphérique
+ nicola: D10 oui, il est fait avec deux pyramides à 6 faces collées.
+ Zorg1: le d60 ou le fameux 'ballon de foot"
+ nicola: À base pentagonale.
+ dbdr: fullerene?
+ nicola: C’est le D32.
+ Zorg1: attend je me plante
+ Zorg1: oui c'est 60 sommets
+ Zorg1: le "footballene" 60 atomes de carbones je crois
+ nicola: C’est un D20 adouci ou un D12 adouci aussi.
+ Zorg1: ah c'est fllerene
+ Zorg1: *fullerene
+ Zorg1:&#160;?
+ Zorg1: oui une mélange d'hexagone et de pentagone
+ nicola: Le genre de truc sympa à faire avec des Geomag.
+ dbdr: tiens Zorg1 il est pas français non plus
+ Zorg1: bah si non&#160;?
+ dbdr: "une mélange"
+ dbdr: typique des étrangers
+ Zorg1: ah damned je suis découvert
+ Zorg1: toujours fait marrer que Herbert parlait du "mélange" pour l'épice
+ Zorg1: ça faisait trop mobilette dans mon esprit à l'époque où je le lisais
+ dbdr: les français ils disent Dame Ned aussi
+ Zorg1: Dame Naide plutôt
+ dbdr: voila
+ dbdr: j'avais lu Hilbert, je me demandais s'il y avait des épices dans son hotel :D
+ Zorg1: il avait un chapeau
+ Alshock: coucou à tous, tortue Automaton2000
+ Automaton2000: bien bien, et toi&#160;?
+ Zorg1: o/
+ Alshock: wouah&#160;! ça va super Automaton2000 merci pour ce magnifique cadeau de nowel en avance
+ Automaton2000: y a une solution pour le puzzle de la semaine ...
+ Alshock: \o Zorg1
+ Zorg1: la forme Alshock&#160;?
+ BlaiseEbuth: Yo tout l'monde&#160;! Automaton2000, AutomatonNN&#160;!
+ AutomatonNN: oui
+ Automaton2000: c'est juste que le chat est mort&#160;?
+ BlaiseEbuth: fix ta superposition quantique Automaton2000.
+ Automaton2000: tant que je suis en argent
+ Alshock: ça va super, même si j'ai l'impression d'être un légume de moins en moins comestibles au fur et à mesure des confinements
+ Alshock: si je continue comme ça je vais finir par coder en PHP
+ ThomasNicoullaud: le php c'est trop bas de gamme pour l'école 42&#160;?&#160;:-]
+ dwarfie: trop complexe surtout :D
+ BlaiseEbuth: Alshock est à 42&#160;? :scream: Cruelle désilusion...&#160;:(
+ Stilgart: Automaton2000: tu te contentes de peu aujourd'hui
+ Automaton2000: et du coup c'est quoi qui te pose problème&#160;?
+ Stilgart: Automaton2000: ton manque d'ambition, et surtout ton manque de tortue
+ Automaton2000: en fait je suis le seul à avoir fait ça
+ MaximeMazet1: Alshock que reproche tu au PHP&#160;?
+ PhOeNyX: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/8af30fa6-115d-4b8d-ba2f-efdd65cd8caa">http://chat.codingame.com/pastebin/8af30fa6-115d-4b8d-ba2f-efdd65cd8caa</a>
+ PhOeNyX: Est-ce que cette fonction est coûteuse&#160;?
+ Stilgart: je suis pas fan du switch
+ Stilgart: switch (nextY &amp; 0x30)&#160;?
+ PhOeNyX: if (nextY &lt; 4) { ... } else if (nextY &lt; 8) { ... } ...&#160;?
+ Stilgart: 0xb plutôt
+ Stilgart: j'aime bien les if () else if () else () perso
+ dbdr: switch (nextY / 4) non?
+ MaximeMazet1: ça évite une loop donc les if sont mieux
+ Stilgart: dbdr: je suis parti du principe que l'entrée valait jamais &gt;14
+ dbdr: moi aussi
+ BlaiseEbuth: Ouai 'fin mis à part l'esthétique, switch ou if...
+ Stilgart: du coup, &amp; 0b1100
+ Stilgart: ou encore &gt;&gt; 2
+ PhOeNyX: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/19aecc30-74d9-4b4f-ad5b-3f3b6074b0f0">http://chat.codingame.com/pastebin/19aecc30-74d9-4b4f-ad5b-3f3b6074b0f0</a>
+ Stilgart: et 0b1100 ça fait 0xb après recalcule
+ MaximeMazet1: Blaise ce n'est pas de l'esthétique les switch son a éviter car en realité il créer une loop pus couteuse qu'une condition
+ PhOeNyX: Effectivement l'entrée est en 0 et 14 inclus
+ dbdr:  / 4 c'est compilé en &gt;&gt;2
+ Stilgart: dbdr: je parierai pas là dessus
+ Vry: PhOeNyX&#160;: tu as un profiler pour tester&#160;?
+ dbdr: Stilgart: fix ton compilo
+ PhOeNyX: Non, pas de profile. :D
+ Stilgart: dbdr: fix mon confiance plutôt
+ ThomasNicoullaud: faudrait surtout voir la complexité de tes 2 premières instructions car le reste est probablement négligeable PhOeNyX
+ PhOeNyX: La première opération c'est accès mémoire
+ PhOeNyX: La deuxième c'est copie de 1 int et 4 long
+ BlaiseEbuth: Beuh si t'utilises un compilo des années 80 peut-être...
+ PhOeNyX: Enfin, accès mémoire + if avec incrément d'un index
+ dbdr: Stilgart: elle est pas infondée. après ça dépend du compilo/langage. mais si cest vraiment important, je finirai par voir l'asm dans perf
+ PhOeNyX: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/f32f17ae-2676-4122-b4b0-557ad2453096">http://chat.codingame.com/pastebin/f32f17ae-2676-4122-b4b0-557ad2453096</a>
+ Stilgart: dbdr: idem...
+ Stilgart: avec un peu de chance, il y a même une instruction plus futée que asr
+ BlaiseEbuth: Btw il semble qu'en C++ le switch fera rarement pire et souvent mieux qu'un if/else...
+ dbdr: tiens, il y a moins de 500 matches dans les last battles de <a rel="nofollow" class="external free" href="https://www.codingame.com/contests/fall-challenge-2020/leaderboard/global">https://www.codingame.com/contests/fall-challenge-2020/leaderboard/global</a>
+ BlaiseEbuth: JBM a renversé un chat...
+ JBM: comme tu y vas
+ BlaiseEbuth: :3
+ JBM: j'ai juste présenté une opinion différente
+ J8M: mèdekoiilsparlent?
+ Stilgart: je vois comme un B changé en 8&#160;???? :fearful:
+ Alshock: @MaximeMazet1 Rien en vrai, je déteste les guerres de paroisses, même le JS que j'aime vraiment pas, je ne lui reproche rien en particulier il a juste fait des choix qui me vont pas trop. Par contre je profite à fond de ces petites gueguerres pour troll gratuitement :D
+ JBM: oh mon dieu mais c'est horrible
+ J8M: oui, JBM cherche à créer la confusion avec moi
+ Alshock: @BlaiseEbuth La vérité éclate au grand jour
+ BlaiseEbuth: Skilui?
+ Alshock: (╯°□°）╯︵ ┻━┻
+ J8M: JBM? un trolleur qui cherche à se faire passer pour moi
+ Alshock: _/nick JBIVI
+ J8M: :D
+ J8M: inb4 un chat remplis de clones de J8M
+ Alshock: bon à plus les enfants x)
+ Stilgart: à plus Alshock
+ Tinyll: salut, est-ce qu'il y a un moyen de voir le contenu des fichiers de test&#160;? j'avais réussi à les afficher une fois mais je ne retrouve plus comment faire. Merci&#160;!
+ BlaiseEbuth: Tu as une icône de liste au dessus de la zone de test.
+ Tinyll: ah, elle y est pour tous les puzzle&#160;?
+ BlaiseEbuth: Pour les puzzles I/O oui, pas pour les puzzles tour par tour
+ Tinyll: étrange, je suis sûr un puzzle I/O et je ne la vois pas
+ BlaiseEbuth: Lequel&#160;?
+ Tinyll: Mars Lander épisode 2 ^^
+ Tinyll: ou alors je suis aveugle
+ BlaiseEbuth: Bah c'est un tour par tour
+ Tinyll: ah bon ok ah ah
+ Tinyll: merci&#160;:)
+ Tinyll: ah oui il y a masse entrée-sorties en fait
+ Tinyll: bref
+ BlaiseEbuth: A partir du moment où chaque tour dépend de ce que tu as fait au précédent y'a pas de "fichier de test" forcément
+ Tinyll: oui je vois, c'est juste que certaines variables ne changent pas donc je pensais pouvoir les avoir quand même
+ Tinyll: (genre les 6 poins formants le sol de mars)
+ BlaiseEbuth: Tu peux les afficher sur la sortie d'erreur
+ Tinyll: mais mdr, je suis vraiment con
+ Tinyll: ... à la ramasse aujourd'hui, merci quand même ^^
+ BlaiseEbuth: C'est pas grave, t'inquiètes... ^^
+ BlaiseEbuth: Beh... Quand c'est les steam awards et que tu te rends compte que tu n'as en tout et pour tout que deux jeux sortis cette année...
+ Zorg1: faudra m'expliquer le principe de ce truc
+ BlaiseEbuth: Les jeux&#160;?
+ BlaiseEbuth: Ou les dates de sortie&#160;?
+ Zorg1: le "steam award"
+ dwarfie: en meme temps , la plupart des jeux sont pas des reeditions de jeux sortis les 30 denieres années&#160;?&#160;;)
+ BlaiseEbuth: Beuh... Ca permet de mettre en avant des jeux que t'aime bien. Et de gagner des points pour débloquer des cosmétiques inutiles.
+ BlaiseEbuth: Vais être obligé de nominer des jeux auxquels j'ai jamais joué pour pouvoir acheter mon emoji...
+ BlaiseEbuth: Ah non 3 en fait...
+ BlaiseEbuth: Et on peux pas nominer un jeu dans deux catégories&#160;? Mais ils font chier&#160;!
+ BlaiseEbuth: (╯°□°）╯︵ ┻━┻
+ Stilgart: je peux quasi rien nominer moi&#160;:(
+ Stilgart: j'ai pas de jeu 2020 dans ma bibliotèque
+ BlaiseEbuth: Bah j'ai nominé mes trois jeux, plus un dans la catégorie où tu peux en mettre un vieux... Pour le reste j'ai triché :imp:
+ BlaiseEbuth: Hades -&gt; Game of the year.Ori -&gt; Meilleurs graphismes.Radio general -&gt; Gameplay originalPath of Exile -&gt; Amour indefectible
+ BlaiseEbuth: Et le reste :shrug:
+ Malow44: Personne ne fais du Dart ici&#160;? j'ai un erreur que je ne comprend pas
+ Stilgart: Mini Metro -&gt; Amour indefectible
+ Stilgart: et si j'achète hades et ou ori, je compléterais
+ Stilgart: mais je suis pas chaud pour dépenser sur les promos en cours
+ BlaiseEbuth: J'ai pas encore regardé...
+ BlaiseEbuth: Malow44 c'est quoi l'erreur&#160;?
+ Stilgart: hint: pousse une caisse à sokoban, c'est une action
+ Malow44: Unhandled exception: RangeError (index): Invalid value: Only valid value is 0: 1
+ <b>**Stilgart savait bien qu'il y avait une merde dans le moteur</b></p><p><img src="/a/54779247324224" /> Malow44: et ça viens des int.parse de l'énoncé (je n'y ais pas touché)
+ BlaiseEbuth: quel puzzle&#160;?
+ Malow44: Shadows of the Knight - Episode 1
+ BlaiseEbuth: Bon. J'ai pas d'erreur avec le code de base dart sur shadows of the knight.
+ Malow44: ah d'accord
+ PhOeNyX: ((1 &lt;&lt; 30) &gt;&gt; 30) = 1((2 &lt;&lt; 30) &gt;&gt; 30) = -2((3 &lt;&lt; 30) &gt;&gt; 30) = -1
+ Stilgart: depends
+ Stilgart: conseil, en C-like
+ Stilgart: mets 1L
+ Stilgart: voire 1ul même
+ PhOeNyX: Je suis en java
+ PhOeNyX: Et effectivement (3l &lt;&lt; 30) &gt;&gt; 30 ça fait 3 mais si la valeur était stockée dans un int ça renvoie -1
+ PhOeNyX: Je suppose qu'il est plus sage de n'utiliser que 31 bits d'un int dans un bitset en java
+ Stilgart: 1ul
+ jolindien: pas de unsigned en java&#160;?
+ Stilgart: bon bon bon... j'ai plus le courage pour me remettre à space maze&#160;:/
+ <b>**dwarfie tend un " kage bunshin no jutsu " a Stilgart</b></p><p><img src="/a/29054906001010" /> Stilgart: ça va faire un an qu'il traîne en tête de mes "Best suggestions"
+ Stilgart: 3 décembre 2019...
+ Stilgart: je me disais aussi que j'arrivais plus à me souvenir du temps où j'avais 100% en solo
+ dwarfie: en meme temps , tu l'as ete ... moi avec des merdes comme minesweeper de EZ validées , je desespere que ca arrive un jour
+ Stilgart: tiens... j'ai pas fait Resistance en Haskell...
+ <b>**Stilgart devait avoir un code tout prêt en C++ à copy-paste</b></p><p><img src="/a/16542412157988" /> Zorg1: cette honte
+ dwarfie: bon , j'ai 2 tableaux avec les meilelurs coups et je sais pas quoi en faire ... c'etait bien la peine .... :rage:
+ Stilgart: clair
+ <b>**dwarfie demande a Zorg1 s'il joue bien les boulets en mode rage-quit :D</b>
+ Zorg1: bah quand je rage qui on me voit plus pendant un mois normalement
+ BlaiseEbuth: Ah. Je pensais que tu hibernais...
+ Zorg1: un peu des deux en fait
+ dwarfie: non , je parle de moi ... c'est toi qui a dit qu'un "rage-quit qui finit legende " ca continue quand meme en ralant :D
+ Zorg1: j'aimais bien le FC en fait
+ Zorg1: même si à la fin c'était un peu du "Magic Number TUning"
+ Zorg1: pour retrouver des valeurs que j'aurais pu prendre depuis le début ^^
+ Stilgart: j'ai qu'un seul magic number
+ Stilgart: et c'est 7 ou 8 selon l'endroit que tu veux torcher en ligue or
+ Zorg1: "un magic number pour tous les générer et dans le hack les lier"
+ Zorg1: (je vous laisse pour la traduction en noir-parler"
+ BlaiseEbuth: Moi je suis plutôt en mode Gandalf&#160;: "Je ne me souviens pas de cet endroit..." en regardant certtains titre de ma liste de souhaits Steam...
+ Zorg1: Fuyez Pauvres Fous&#160;!
+ Stilgart: BlaiseEbuth: toi aussi tu wishes n'importe quoi 3 fois par jours à noel et en été pour loot des trucs :D
+ BlaiseEbuth: Non. C'est sans doute des trucs qui m'ont semblé pas mal sur le moment... Mais là...
+ Stilgart: perso, je refais le ménage à la fin des promos, sinon j'aurais un wishlist de 1000 jeux
+ Zorg1: ça oui je cleane un peu ma wishlist
+ Zorg1: par contre j'y met pas trop de trucs encore
+ Stilgart: 155 entrées ici /o\
+ <b>**BlaiseEbuth ajoute des jeux soldés à son panier en évitant de regarder le total...</b></p><p><img src="/a/29054906001010" /> Stilgart: it's over 9000!!!!
+ BlaiseEbuth: C'est over trop.
+ BlaiseEbuth: Va falloir prun un peu
+ <b>**dwarfie note sur un post-it&#160;: ne plus jamais mettre une variable first dans un struct comme un gros naze ....</b>
+ BlaiseEbuth: J'ai dit pruner, pas ajouter&#160;!
+ <b>**BlaiseEbuth slaps BlaiseEbuth around a bit with a large fishbot</b></p><p><img src="/a/29054906001010" /> Stilgart: ajoute des coupons de réduction, ça ira mieux
+ BlaiseEbuth: Bon. C'est mieux.
+ nicola: Prendre une prune&#160;? Non merci.
+ dwarfie: toi aussi tu preferes la poire&#160;? ou le calva&#160;? ou l'armagnac&#160;?&#160;;)
+ BlaiseEbuth: L'umeboshi c'trop bon...
+ BlaiseEbuth: 'tain. Y'a une licorne qui a vomi sur mon écran... <a rel="nofollow" class="external free" href="https://imgur.com/qrEXnAD">https://imgur.com/qrEXnAD</a>
+ Zorg1: la coloration syntaxique en folie ^^
+ BlaiseEbuth: Je vais pour dl un theme moins violent, et la première proposition c'est "puking unicorne" c'est un complot
+ Zorg1: le dark theme n'arrange rien avec les couleurs qui pétent ^^
+ BlaiseEbuth: Bon vais me le faire moi même mon thème grmbl...
+ Zorg1: avec harmonie et sobriété bien sûr
+ BlaiseEbuth: Bah c'est le but. Sinon j'ai qu'à laisser celui par défaut...
+ <b>**BlaiseEbuth se deamande si il commencera à coder un jour...</b></p><p><img src="/a/16542412157988" /> Zorg1: ah les projets qui foirent par excès de préparation
+ Zorg1: après t'a ceux où tu vas à poil sur la banquise
+ nicola: Akala jingle bells, BlaiseEbuth.
+ BlaiseEbuth: Ouai...
+ mrBen: Si tu veux un theme assez discret, y a Nord, mais faut aimer le bleu
+ BlaiseEbuth: Ouai fin après il faut qu'il soit dispo pour kdevelop
+ FroggEater: city lights et midnight owl aussi
+ FroggEater: ah ouais
+ mrBen: ah
+ Zorg1: midnight owl c'est mignon ça ^^
+ Tinyll: salut, on est d'accord qu'on ne peut pas ajouter des fichiers autre que celui par défaut&#160;?
+ dwarfie: how can we code while the eart is turning .....
+ mrBen: non Tinyll
+ Tinyll: ok merci
+ BlaiseEbuth: Il a de l'huile ton hiboux&#160;?
+ Zorg1: ^^
+ Zorg1: ouaip c'est la chouette du "Choc des titans" (le premier)
+ Zorg1: "bubo"
+ BlaiseEbuth: Le choc des titans c'est le blocknanar qui reprend vaguement l'histoire de percé&#160;?
+ Zorg1: Persée, oui c'est ça
+ Zorg1: en mélangeant deux trois trucs
+ BlaiseEbuth: Ouai. Mais là c'est percé
+ Zorg1: celui de 1981
+ dwarfie: donc pas le bolcnanar ... vu qu'on parle du premier
+ dwarfie: meme si la chouette est visible environ 5 seconde
+ BlaiseEbuth: Ah y'en a un vieux&#160;?
+ Zorg1: oui celui de 1981
+ Zorg1: y a eu un remake en 2010
+ Zorg1: après c'est vrai que celui 1981 y a un look un peu viellot
+ dwarfie: ouais ... mais de politiquement correct , pegase est bien blanc dans le premier :D
+ Zorg1: mais la princesse en transe qui grimpait dans une cage transbahutée par un vautour géant j'aimais bien
+ Zorg1: t'avais un côté "on prend tous les mythes qui trainent"
+ dwarfie: ca passait quand meme mieux que jason et les argonautes 
+ Zorg1: ça bosse forte et ça darde à Nelles&#160;?
+ dwarfie: (bientot le remake sur vos ecrans ... rigolez pas , ils en sont capable :D )
+ Zorg1: jamais  vu "Jason et les Argonautes"
+ Zorg1: par contre un petit remake de Ben Hur pour rigoler ^^
+ Zorg1: avec la course de char et la galère sinon c'est pas drôle 
+ dwarfie: pas de bol , c'est deja fait
+ Zorg1: ah&#160;?
+ Zorg1: ah oui 2016
+ Zorg1: tiens y a pas Dune dans les tuyaux ou il est déjà sorti&#160;?
+ dwarfie: grumpfgngangangannganganngaggannaaa
+ Zorg1: honnêtement je serais curieux de voir le résultat en fait
+ dwarfie: plus j'en vois des bouts , moins ca me tente twilight dans l'espace ...
+ Zorg1: bon après il y a le risque de voire les soeurs BG faire du kung fu
+ BlaiseEbuth: Ah toi aussi tu trouves que ça fait twilight&#160;?
+ Zorg1: c'est à cause de l'acteur qu'ils ont pris pour jouer Paul&#160;?
+ dwarfie: j'ai du etre le premier vu que c'est moi qui en ai parlé le premier ici :D
+ Zorg1: oui je crois que moi aussi ^^
+ Zorg1: ah oui je viens de revoir la BO ^^
+ dwarfie: alors qu'est ce qui colle a l'histoire ... une planete qui s'appelle dune .... habite par des fremen .... un petit con y viens avec sa famille ... et stop ... apres aucun personnage de colle ... a part peut etre raban
+ <b>**dwarfie va se consoler en regardant les versions de 1984 et de 2000</b></p><p><img src="/a/16542412157988" /> Zorg1: y a des vers géants aussi paraît il ^^
+ BlaiseEbuth: C'pour ça qu'il faut faire cuire la viande...
+ dwarfie: ah oui ... les verts geants et les orni ... les seuls trucs bien fait dasn ce que j'ai vu 
+ Zorg1: oui
+ Zorg1: tiens il nous font un film sur WH40K quand&#160;? qu'on ait un peu un truc subtil ...
+ BlaiseEbuth: Non.
+ Zorg1: tant qu'à faire dans le bourrinage
+ BlaiseEbuth: Oui mais non.
+ Zorg1: oui ils sont capables de se rater sur l'univers
+ TitouanT: y'a moyen d'avoir un fichier de config pour l'éditeur&#160;?
+ Zorg1: je crois pas
+ TitouanT: dac 
+ BlaiseEbuth: Pour configurer quoi&#160;?
+ TitouanT: les mappings
+ BlaiseEbuth: Bah si tu peux. Dans les params à gauche
+ Zorg1: mais tu peux pas sauver/charger tes réglages dans un fichier
+ BlaiseEbuth: Bah techniquement c'est sauvé dans un fichier sur le serveur... ^^
+ PhOeNyX: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/511987047">https://www.codingame.com/replay/511987047</a>
+ PhOeNyX: bois 2
+ PhOeNyX: who needs torpedos&#160;?
+ TitouanT: j'avais loupé ce menu, merci&#160;! faut que je vois la syntaxe de visual studio du coup
+ Zorg1: c'était l'intérêt de ce jeu de pouvoir torpiller à tout va ^^
+ PhOeNyX: Bah moi ne vais le faire sans utiliser de torpilles&#160;! :D
+ Zorg1: le gars triste&#160;:(
+ PhOeNyX: En fait c'est juste la phase 1 de mon programme
+ Zorg1: la fameuse phase 2
+ PhOeNyX: C'est un BFS dont l'évaluation cherche à aller le plus profond possible
+ BlaiseEbuth: Normal pour un sous-marin...
+ PhOeNyX: C'est le BFS qui va profond, pas le sous-marin
+ Zorg1: y a une profondeur limite faut faire gaffe
+ BlaiseEbuth: C'nul.
+ PhOeNyX: Après l'idée c'est de calculer les positions possibles de l'adversaire tour après tour et append des lancés de torpilles à mon action de move
+ PhOeNyX: ça c'est la phase 2
+ PhOeNyX: Après faudra voir les règles du sonar &amp; cie
+ Zorg1: et le SILENCE
+ Zorg1: ça casse tout ça
+ PhOeNyX: silence inclus dans "&amp; cie&amp;
+ PhOeNyX: C'est du fow&#160;?
+ Zorg1: bah SILENCE t'avance de 0 à 4 cases dans une direction, et ton adversaire sait seulement que tu as fais un SILENCE sans plus de précision
+ PhOeNyX: Ah, ça va tu peux quand même continuer à guess les positions
+ Zorg1: oui mais ça augmente les possibilités
+ PhOeNyX: Je m'attendais à un truc du genre "l'adversaire n'entends plus vos commandes pendant x tours"
+ Zorg1: après faut qu'il le joue bien le SILENCE
+ PhOeNyX: ça aurait été pire, non&#160;?
+ Zorg1: aucune idée
+ PhOeNyX: bah si "x tours" c'était avec x &gt;= 4 je trouve ça pire
+ PhOeNyX: si c'est x = 1 c'est nul, x = 2 ça doit être équivalent
+ PhOeNyX: Bon par contre mon BFS 35ms de compute par tour avec 300 tours par game, ça fait des submits un peu lents
+ Zorg1: après c'est du calibrage du jeu, c'est un jeu de plateau à la base je fais confiance à leur phase de test
+ Zorg1: (c'est d'ailleurs l'intérêt de s'inspirer des jeux de plateau populaires)
+ PhOeNyX: tout à fait
+ PhOeNyX: surtout que des jeux de plateaux simples mais super cool il y en des pelletés
+ Zorg1: OoC est quand même un minimum compliqué
+ Zorg1: par rapport au Spring Challenge
+ Zorg1: t'as plusieurs ordres, tu peux pas ignorer l'adversaire, ...
+ Zorg1: (enfin si tu peux dans les premiers temps les fameux "silence spammer")
+ dwarfie: ce moment ou je sens que je vais devoir bricoler un truc pour post-traiter mon BS (genre minimax ou mcts) 
+ dwarfie: et je dis genre parce que ca sera pas ca de toutes facons ... ca attendra ... je suis a un point ou le code peut attendre ... va falloir passe a un autre pour se changer les idees
+ dwarfie: y'a des clashers a massacrer :D&#160;?
+ JBM: tant qu'il y aura des clashs il y aura des clashers
+ J8M: mais sont-ils humains?
+ JBM: ah t'es encore là toi&#160;:|
+ BlaiseEbuth: Ca peux s'arranger... :imp:
+ dwarfie: ahh ... un bon golf ca fait du bien ... et en perl , ca fait penser a d'autres choses ... mais c'est un peu du masochisme aussi :D
+ laPetiteGrenouille: Salut quelqu'un saurait en python comment
+ laPetiteGrenouille: afficher 1.1 
+ laPetiteGrenouille: et afficher 1 a la place de 1.0
+ laPetiteGrenouille: svpppp
+ JBM: print "1.1"
+ JBM: print "1 a la place de 0"
+ laPetiteGrenouille: grrr
+ laPetiteGrenouille: stpp je sais que tu sais en plus
+ laPetiteGrenouille: tu fais des exo
+ JBM: mais je fais pas de python
+ Etoiline: print (1)
+ laPetiteGrenouille: enlevé la partie decimal si c'est un 0
+ laPetiteGrenouille: ah oki&#160;:'(
+ dbdr: print(int(x) if is_integer(x) else x)
+ dbdr: un truc comme ça
+ laPetiteGrenouille: merchi
+ dwarfie: tout ce qu'on peut te dire , c'est de taper sur ceux qui ont validé un sujet ou c'est mis de mettre avec une decimale et ou elle n'est pas dans les reponses attendues
+ dbdr: la petite grenouille deviendra-t-elle un crapaud (allemand)?
+ laPetiteGrenouille: (la petite grenouille est une petite grenouille point)
+ dbdr: n'est point une petite grenouille
+ dbdr: ah, it's a not joke!
+ laPetiteGrenouille: un&#160;?
+ laPetiteGrenouille: bah chavais pas quoi maitre
+ dwarfie: dbdr a un disciple on dirait ...
+ laPetiteGrenouille: bah au début jvoulais me defendre en méttant un
+ laPetiteGrenouille: mais j'ai vu la place ^^
+ nicola: <a rel="nofollow" class="external free" href="https://forum.codingame.com/t/division/188023/6">https://forum.codingame.com/t/division/188023/6</a>
+ laPetiteGrenouille: bouaaa y'a tous les mecs qui font des exo&#160;!:
+ laPetiteGrenouille: j'adore tes exo nico&#160;!
+ nicola: Merci.
+ nicola: Ils sont un peu trop matheux pour le coin mais bon.
+ laPetiteGrenouille: oui rstrip en str
+ nicola: :p
+ laPetiteGrenouille: mais en clash 
+ nicola: print(int(x) if x.is_integer(x) else x)
+ nicola: ou int(round(x))
+ nicola: Mais non en fait.
+ nicola: print(x if x==int(x) else x)
+ laPetiteGrenouille: va falloir le retenir oui mais le mec veut un 1 ou un 2.28 et j'avais trouvé un natif mais jai pas save et j'ai test de taper toutes les combi dans les url et jtrouve pas
+ nicola: print(int(x) if x== int(s) else x)
+ laPetiteGrenouille: str(a).rstip(".0")
+ laPetiteGrenouille: ba on peut meme mettre des compré dans un print chavais pas merciii 
+ nicola: Pas mal le coup du rstrip.
+ laPetiteGrenouille: pas à moi^^
+ nicola: Sauf que pour 59.04…
+ Zorg1: "le coup du rstrip" une aventure de L'Incroyable Homme Python
+ nicola: Ha ben si, ça marche.
+ Tinyll: salut, des personnes ont réussi Mars Lander épisode 2&#160;?
+ philRG: ou un petit sed des fagots ou re. python 's/\.[0-9]*$//g'
+ dwarfie: Tinyll&#160;: oui 10161 personnes
+ Tinyll: je demandais à des personnes dans le chat bien sûr ^^
+ Vry: Tinyll&#160;: oui, avec le code de la v1 trafiquée
+ Vry: *trafiqué
+ philRG: moi je crois mais y a longtemps et j'ai utilisé des maths (équations de droite) et distances 
+ Tinyll: ah&#160;! bon je vais retourner voir ma v1
+ philRG: à l'épisode 3, j'ai flanché, trouvé un code utilisant l'algorithme génétique sur Git faisant bien 500 lignes
+ Vry: Après ma solution est crade et ne fonctionne pas de manière générale mais sur les validateurs ça passe ... :D
+ philRG: avec des maths ça permet souvent de faire les choses simplement
+ Tinyll: philRG je fais ça tous les jours xD
+ Tinyll: (d'ailleurs, le simple fait d'écrire le pseudo dans le chat permet de faire apparaître le message en rouge?)
+ philRG: ah ok bon c cool, le 1 la soluce tient en 2 lignes comme souvent sur les puzzles, bon exo pour débuter
+ philRG: Tinyll oui en rouge
+ Tinyll: bah au début j'ai déterré mes bons souvenirs de méca et après je me suis dit que ça devait pas être aussi compliqué
+ Tinyll: après je suis une bite intersidérales en algorithmie donc bon
+ Tinyll: intersidérale*
+ philRG: sur la plateforme, il faut essayer les commandes les plus simples, cela permet de bien comprendre les règles aussi
+ Tinyll: oui pour le 1 ça tient en 2 lignes c'est clair
+ nicola: Magenta, non&#160;?
+ philRG: pour la poussée, j'ai du faire ça par observation et tatonnement mais y a sûrement possible de faire une petite dichotomie
+ philRG: nicola oui magenta&#160;:)
+ Tinyll: je voyais plus de la trigo pour l'optimisation
+ Tinyll: bon je vais continer mes test
+ Tinyll: tests*
+ Tinyll: continuer*
+ philRG: Tinyll, l'algo c chaud parfois
+ dwarfie: ML3 , ma solution fait 150 lignes tres aérée ...
+ Tinyll: c'est clair philRG
+ dwarfie: faite pendant le contest
+ Tinyll: on est pas tous des dieux
+ dwarfie: non mais pas besoin d'etre un dieu ... la solution est toute simple en faite ... c'est juste des if
+ Tinyll: mdr ok, bah je vais déjà tenté de faire le 2 ah ah
+ dwarfie: avec du bol , tu feras comme moi ... ma solution du 3 est la meme que pour le 2 :D
+ philRG: Tinyll distance d'un point à une droite, et découpage des différents quadrants de la zone. Mais sûrement une solution + simple en algo, je suis pas le roi des if
+ philRG: Tinyll j'ai fait 50 lignes de if-else sur l'ep 2
+ dwarfie: trouver la zone d'atterissage , se diriger vers cette zone , detection d'un mur sur le route ... si oui passer au dessus ... se poser ... trois fois rien&#160;:)
+ Tinyll: le taux de réussite du prob est de 29% ah ah
+ Tinyll: c'était ce que j'essayais d'implémenter dwarfie
+ philRG: et 2 classes (Capsule et Segment) avec leurs méthodes associées paske j'ai souvent du mal à me relire :o)
+ dwarfie: bon , donc t'es sur une piste qui fonctionne
+ Tinyll: oui c'est déjà ça
+ philRG: faut prendre le coefficient directeur (a,b) d'un mur et aller en (-b, a) à mon souvenir, ah pardon j'adore faire le prof de math :o)
+ philRG: on peut aussi jouer sur l'axe de rotation de la capsule, mais il est limité par sa mécanique
+ philRG: Tinyll un joli puzzle
+ Tinyll: clairement je trouve que certains moyens sont plus difficiles que d'autres genre batman il était easy ^^
+ Zorg1: on peut débattre des heures sur les niveaux de difficulté des puzzles ^^
+ Tinyll: par contre des fois j'ai un rotate à 15 je sais absolument pas d'où il sort
+ Tinyll: celui par défaut&#160;?
+ dwarfie: Zorg1 ... on A debattu des heures ... :D
+ plieuse: Coucou 
+ Zorg1: on peut facilement en faire d'autres encore si on se fatigue de troller sur python, java, ...
+ Zorg1: o/ plieuse
+ plieuse: ça va&#160;?
+ Tinyll: (perso C++)
+ Zorg1: ça va et toi la forme&#160;?
+ plieuse: ouui oui&#160;:-)
+ plieuse: alors ce contest&#160;? Ça s’est bien passé&#160;? Comme tu voulais&#160;?
+ Zorg1: ouaip ^^
+ plieuse: Super
+ plieuse: de quoi parlez vous&#160;?
+ Zorg1: le puzzle batman ou Mars Lander je crois ^^
+ dwarfie: du fait de pas sortir l'artillerie lourde quand un simple algo fonctionne :D
+ dwarfie: pas comme ce screugneugneu de contest :D
+ plieuse: Mon prof de maths appelait ça sortir un marteau pilon pour écraser une noisette ^^
+ Tinyll: vous êtes aussi du genre à écrire à print du OUIII en sortie d'erreur pour vérifier si vous êtes passé dans une condition&#160;? xD
+ dwarfie: c'est une facon de faire .... qui marche
+ Tinyll: ^^
+ Tinyll: quand tu passes pas le test 1 parce que ta vitesse vertical est limite+1
+ Tinyll: YES
+ Tinyll: verticale*
+ philRG: j'fais pas mal de print jusqu'à en avoir marre, je charge les données d'entrée dans mon IDE, et je lance mon debugger. Sinon, j'ai plusieurs alias de print pour gérer mes différentes traces
+ philRG: def iprint(msg):
+ philRG: jprint, kprint, un print pour chaque fonction
+ philRG: zprint
+ Zorg1: print("pas de bug ici");
+ philRG: c'est l'environnement CG
+ philRG:&#160;:-D
+ philRG: quand mon code principal disparaît dans des fonctions, je suis heureux
+ philRG: Zorg1 faut que je la rajoute à ma collection&#160;:)
+ Zorg1: c'est cadeau
+ Doraa: Bonjour&#160;:) 
+ Bon[]Crayon: salut
+ Doraa: juste une question, quelqu'un saurais ou je pourrais bien apprendre les bases en python&#160;?
+ nicola: Ici&#160;?
+ Doraa: si il y a ici, j'ai pas mal de mal a comprendre les enigmes faciles 
+ Etoiline: tu comprends pas comment les résoudre ou comment écrire ce que tu veux faire en python&#160;?
+ Bon[]Crayon: Pas de python pour comprendre les puzzles
+ Bon[]Crayon: oui voilà
+ Doraa: comment écrire, je n'ai pas toutes les fonctions en tête, et parfois a me faire un plan
+ nicola: Commence par les plus simples.
+ nicola: Sinon, tu peux aller voir chez France IOI avant.
+ Doraa: dac
+ Etoiline: te faire un plan ça serait plutôt de l’algorithmique. Pour les fonctions, ça vient en t'en servant&#160;: tu fais des recherches sur une fonction que tu veux utiliser, puis tu appliques et la prochaine fois tu galèreras moins&#160;;-) 
+ Bon[]Crayon: trouve un livre
+ nicola: Par exemple Python pour les kids.
+ Zorg1: ou Python pour les Data Analysts 
+ JBM: c'est la meme serie que python pour les nuls?
+ sRanch: :grinning:
+ Zorg1: JBM&#160;: oui avec l'auto ironie en moins
+ MrHydeal: Dans les clash, je peux voir le code de certains et pas d'autres, est ce que cela dépend d'un paramètre qu'on peut choisir&#160;?
+ sRanch: Oui, c'est un param, chacun peut partager son code ou pas!
+ JBM: y compris toi
+ MrHydeal: C'est le partage automatique des solutions alors&#160;? ^^ Ça partage aussi les solutions aux puzzles automatiquement alors&#160;?
+ JBM: bon
+ JBM: j'arrive toujours pas à comprendre ce que cet exo 6 demande
+ JBM: ça m'énerve
+ Zorg1: en fait c'est une ancienne méthode de calcul des dernières décimales de pi
+ JBM: oui, ça saute aux yeux
+ JBM: en chiffres maya
+ Zorg1: c'est un plaisir d'indiquer le chemin de la lumière à ceux qui sont perdus dans le noir
+ dbdr: Zorg1, ce Guru
+ dbdr: c'est même approprié
+ JBM: quel talent
+ JBM: ah ok y'a les trois quarts de la formule qui sont dans le pdf mais pas le html
+ JBM: bon ça résoud pas tout
+ DqmnJyres: Vous savez comment je peux améliorer mon classement en CSB&#160;?
+ DqmnJyres: ( je suis en ligue gold )
+ <b>**Zorg1 se retient de parler de starter ou d'essayer d'imiter l'accent russe</b></p><p><img src="/a/13586498256488" /> Vry: -3v&#160;?
+ Zorg1: il est déjà en gold
+ DqmnJyres: -3v&#160;?
+ DqmnJyres: Le bot à un score 2 fois supérieur au miens ...
+ Zorg1: c'est une heuristique efficace pour atteindre la ligue gold
+ Zorg1: sinon tu peux commencer à regarder les PM, par exemple le + connu&#160;: <a rel="nofollow" class="external free" href="http://files.magusgeek.com/csb/csb.html">http://files.magusgeek.com/csb/csb.html</a>
+ Zorg1: c'est l'approche par "Algo Génétique" de CSB
+ DqmnJyres: Attend mais pour appliquer les vecteurs vitesse il faut utiliser la triho
+ DqmnJyres: trigo&#160;?
+ DqmnJyres: Moi j'ai juste fait ça             tox -= vx;
+ DqmnJyres:             tox -= vx;
+ Zorg1: et t'es gold avec ça&#160;?
+ Zorg1: nice
+ DqmnJyres: Ouai ^^
+ Zorg1: bravo
+ DqmnJyres: Pourquoi&#160;?
+ JBM: bon ça sent le sprague-grundy en dp
+ JBM: mais quelle horreur cet énoncé
+ BlaiseEbuth: quel énoncé&#160;?
+ Zorg1: exo 6 du battle dev
+ Zorg1: il râle dessus depuis midi
+ BlaiseEbuth: Ah
+ JBM: hihi
+ Zorg1: enfin je me suis levé vers midi, il râlait dessus pê avant :D
+ JBM: j'ai ralé à midi et je recommence maintenant
+ JBM: j'ai quand même pris une grande pause pour râler sur d'autres choses entretemps
+ Zorg1: t'as raison faut gérer son râlage sinon il y a risque de claquage
+ BlaiseEbuth: Bon. :beer: time
+ Zorg1: nice
+ JBM: t'as pas du ralage en retard sur des mises en prod toi?
+ Zorg1: j'ai fini ma MEP samedi
+ Zorg1: elle a traine deux semaines
+ Zorg1: donc là ça va
+ Zorg1: je regarde mon PM pour FC
+ JBM: et il te réfléchit?
+ Zorg1: quand je regarde mon PM il me regarde aussi
+ JBM: mais qui arrêtera le premier?
+ dbdr: Zorg1: tu paraphrases Nietzsche maintenant?
+ PhOeNyX: On est d'accord que si j'ai 0 &lt; x,y &lt; 15 alors pour chaque combinaison possible de (x,y) j'obtiens un hash unique avec la formule&#160;: (y + (x &lt;&lt; 4))
+ <b>**Stilgart tend printf et une double boucle for à PhOeNyX</b></p><p><img src="/a/44680749324682" /> Bon[]Crayon: Es-tu en accord AutomatonNN&#160;?
+ AutomatonNN: t'inquiète pas tu peux pas te dire que tu te passes de la place de chaque contest en Python
+ Stilgart: après, 16*x+y ou y | (x &lt;&lt; 4) eut été plus cohérent
+ PhOeNyX: Pourquoi&#160;?
+ PhOeNyX: N'utiliser que des opérations arithmétiques ou que des opérations booléennes ,
+ PhOeNyX:&#160;?*
+ Stilgart: bah, soit tu adoptes un point de vue arithmétique, soit tu adoptes un point de vue binaire
+ Stilgart: mais pour rendre les choses plus lisible, mieux vaut ne pas mélanger les deux
+ PhOeNyX: Sûrement, mais je suis un fifou moi
+ PhOeNyX: Le coût opératoire de | est le même que +&#160;?
+ Stilgart: c'est beaucoup plus simple | (pas de retenue)
+ Stilgart: après, pour être honnête, ce que tu veux c'est un lea ici 
+ BlaiseEbuth: lea passion binaire
+ Stilgart:&#160;:)
+ Stilgart: mais bon, je pense pas que tu en sois à ce niveau de perf
+ PhOeNyX: Probable, mais pour la culture
+ Bon[]Crayon: 'lea' c'est un style de hash&#160;?
+ Stilgart: lea c'est une instruction assembleur qui fait
+ Stilgart: a + 2^n * b
+ Stilgart: pour certaines valeurs de n
+ Bon[]Crayon: ok merci
+ Stilgart: (Load Effective Address, ça sert à calculer la vraie adresse de la case d'un tableau à la base)
+ PhOeNyX: Après là je redéfini moi-même le hashCode mais en java il fait quoi quand on appelle `Objects.hash(x, y)`&#160;?
+ PhOeNyX: Sûrement un truc similaire, non&#160;?
+ JBM: les arcanes de java, faut demander a Zorg1
+ Stilgart: aucune idée, moi le java, je fais comme si c'était du C++ et j'allume un cierge
+ JBM: y'a que lui qui a assez la foi pour aller vérifier le standard quand j'ai des questions a la con
+ PhOeNyX: Ou egaetan
+ JBM: pas encore observé ça chez lui
+ PhOeNyX: Oh put** je me demandais pourquoi mon IA évitait parfois les bords
+ PhOeNyX: J'avais un &lt;&lt; 5 au lieu d'un &lt;&lt; 4
+ JBM: parce que tu l'as codée comme ça?
+ PhOeNyX: Du coup mes dx c'était -2/+2 au lieu de -1/+1
+ PhOeNyX: Donc l'IA croyait sortir de la map
+ PhOeNyX: SILENCE X 0 dans OOC on fait du surplace&#160;?
+ Stilgart: oui
+ Bon[]Crayon: GG boumagik
+ boumagik: thx
+ boumagik: ça devrait passer pour toi bientot
+ Bon[]Crayon: ouais
+ PhOeNyX: Quand on donne de multiples ordres dans un même tour, MOVE + TORPEDO ou TORPEDO + MOVE, la range de la TORPEDO (4) se compte à partir de la position du tour courant ou à partir de la position atteinte si on MOVE avant&#160;?
+ Stilgart: à ton avis&#160;?
+ PhOeNyX: 1ère solution je pense
+ Stilgart: ouch
+ Stilgart: tu devrais tester
+ Stilgart: et te demander comment le referee est codé&#160;:)
+ Stilgart: clairement, la 2e c'est beaucoup moins pénible à coder
+ PhOeNyX: Donc si on tire, puis qu'on bouge OU si on bouge puis qu'on tire il faut déduire différemment
+ Stilgart: c'est dépend de où tu tires :D
+ PhOeNyX: ça veut aussi dire qu'on peut TORPEDO puis SILENCE pour rendre l'analyse de TORPEDO inutile
+ PhOeNyX: (dans le même tour)
+ Stilgart: souvent, c'est pareil, parfois tu es obligé de tirer avant, et parfois tu es obligé de tirer après
+ Stilgart: tu peux surtout silence 4 + move + torpedo pour nuke à range 7 (ou 9&#160;?)
+ Stilgart: -9+8
+ PhOeNyX: 4 + 1 + 4 = range 9
+ Stilgart: c'est 4 le range de torpedo&#160;?
+ PhOeNyX: oui
+ <b>**Stilgart pensait que c'était 2 ou 3</b></p><p><img src="/a/29054906001010" /> <b>**Stilgart a une mémoire de merde</b></p><p><a href="/wiki/File:Default_avatar.png" class="image"><img alt="Default avatar.png" src="/images/5/56/Default_avatar.png" decoding="async" width="50" height="50" /></a> DqmnJyres: Peut-on m'aiguiller sur comment faire des générations "virtuelles" du tour pour les pods dans CSB car je ne vois pas comment obtenir la vitesse la plus adéquate pour les pods autrement
+ Stilgart: <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/bot-programming/coders-strike-back">https://www.codingame.com/multiplayer/bot-programming/coders-strike-back</a>
+ Stilgart: ce ne sont pas les liens qui manquent&#160;;)
+ Stilgart: le post mortem de Magus étant celui qui devrait le mieux répondre à ta demande
+ DqmnJyres: Je voyais pas comment utiliser la solution de malgus excuse moi ^^
+ DqmnJyres: Magus*
+ PhOeNyX: Youhou, je track super bien la position de l'adversaire
+ PhOeNyX: Mais je ne tire toujours aucune torpille :D
+ PhOeNyX: Je verrais ça demain.
+ PhOeNyX: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/512082424">https://www.codingame.com/replay/512082424</a>lol ce path
+ boumagik: gg crayon
+ PhOeNyX: Ou pas, torpille chirurgicale codée
+ PhOeNyX: lol 100% winrate
+ PhOeNyX: Et l'IA qui passe de bois 1 à Silver sans ajout
+ MadKnight: hey

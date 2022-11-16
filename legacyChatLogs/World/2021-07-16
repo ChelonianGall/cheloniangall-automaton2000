@@ -1,0 +1,718 @@
+ bini0823: how to make clash of code game?
+ bini0823: I find
+ awesomeinsan: hello
+ awesomeinsan: can anyone help me with robot show puzzle solving&#160;?
+ awesomeinsan: i need some hints
+ DaNinja: click Forum on the left for hints
+ DaNinja: its easier than it seems at first
+ DaNinja: draw each step on paper then do what Stan Lucian suggests
+ dbdr: nice progress Marchete
+ Marchete: not a lot
+ Marchete: but it's good to have an alternative UCT formula
+ Marchete: I'm training with AZ
+ Marchete: but on arena I'm testing the new
+ Marchete: I tried to add regularization to limit weights range
+ Marchete: PolValKernel:-2.6428108/1.7513872/-0.01126709
+ Marchete: higher range than I expected
+ Marchete: I wanted to try some kind of quantization
+ Marchete: but on an unorthodox wayç
+ float: he;;p wpr;d
+ float: hello world*
+ Marchete: :wave:
+ float: brb game
+ martinpapa69: adding weight regulazation usually helps. but i think it has bigger effect on bigger networks
+ Marchete: regularization is an indirect way I think I have to limit weights a bit
+ Marchete: not only for avoiding unnecesary model complexity
+ Marchete: but -2.64 .. 1.75 range is higher than I liked
+ martinpapa69: oh sure. you want to compress your net to 8bit&#160;?
+ Marchete: I wanted to test 16 bit first
+ Marchete: I want to check all max values per range and kernel/bias
+ Marchete: then do -32765..32765 per layer
+ dbdr: regularization would slow down inference, no?
+ Marchete: inference?
+ Marchete: in fact it doesn't appear
+ Marchete: L2 regularization for example I think only goes on losses
+ martinpapa69: it only effects the training
+ Marchete: i.e. weight values add loss
+ Marchete: then TF add it to total loss
+ Marchete: and train with that
+ dbdr: right, that one&#160;:)
+ Marchete: it's some weird way to say "don't overthink model complexity"
+ Marchete: and batch normalization layers are "similar"
+ Marchete: but they do have weights
+ Marchete: but in the end
+ Marchete: they are just tweaks to previous kernel+bias
+ Marchete: so on SaveModel you can "mix" all
+ Marchete: and you don't need a real batchnorm layer on inference
+ dbdr: i see
+ Marchete: and doesn't affect inference performance
+ dbdr: tf does the mixing automatically?
+ Marchete: I'm not using it now
+ Marchete: but it's kind of like that
+ Marchete: def SaveModel(my_model,fileSTR,debugPrint=False): <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/ce9f8552-a1b2-4ee7-8f81-88d2bebbc15f">http://chat.codingame.com/pastebin/ce9f8552-a1b2-4ee7-8f81-88d2bebbc15f</a>
+ Marchete: not TF
+ Marchete: myself with pen and paper :D
+ Marchete: watch out
+ Marchete: that SaveModel has policy+value concatenation
+ Marchete: if the model isn't as expected it will explode
+ Marchete: it's not for general use
+ Marchete: gamma beta moving_variance, etc
+ Marchete: are from a BatchNorm layer just between Dense and Relu layers
+ Marchete: Dense -&gt; BatchNorm -&gt; Relu
+ Marchete: good thing -&gt; it's free from inference PoV
+ Marchete: bad thing -&gt; more complexity, and probably L2 regularization does similarly
+ dbdr: the concatenation only saves one avx iteration on the output layer, right? is it worth it?
+ Marchete: shrugs
+ Marchete: one avx iteration is one iteration
+ dbdr: only proportions matter
+ dbdr: if it's one in 1000 it's noise
+ Marchete: first layer is cheap thanks to one-hots
+ Marchete: I need to reprofile
+ Marchete: I wanted to try quantization, robo used int8 and it was much faster than int16
+ Marchete: int16 was 20%, int8 a 50%
+ Marchete: but I was expecting 80-100% improvement in int16
+ Marchete: half size
+ Marchete: ah, also this SaveModel adds layer counts at start
+ Marchete: because this way I don't need to manually add it on code
+ dbdr: yes, strange that speeds are not bigger
+ martinpapa69: Marchete BN layer is not included in your published inference source?
+ Marchete: Batch Normalization?
+ martinpapa69: yes
+ Marchete: as I said
+ Marchete: if BN is after a dense in inference is just a tweak to weights + bias
+ Marchete: but no, I haven't it in published either
+ martinpapa69: ah okay. and tf does this merge automagically?
+ Marchete: nope
+ martinpapa69: aight
+ Marchete: if ('/kernel' in x.name): <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/d82e7f93-7b1b-4f17-a7e0-3d530a4a06e8">http://chat.codingame.com/pastebin/d82e7f93-7b1b-4f17-a7e0-3d530a4a06e8</a>
+ Marchete: its that part
+ Marchete: I even pasted my "hacked" SaveModel just 5 min ago
+ Marchete: hacked as with some header data
+ Marchete: about layers and neuron count
+ martinpapa69: ah okay, i failed to scroll up two pages
+ Marchete: TLDR: gamma,beta,moving_mean,etc are used to change weight and bias
+ Marchete: and I think it's correctly done
+ Marchete: so inference wise, both BN and L2 regularization are free/cost 0
+ Marchete: the latter seems simpler
+ dbdr: isn't L2 just to keep weights small?
+ dbdr: BN is supposed to speed up training too
+ martinpapa69: L2 is too prevent neurons to be too dominant in a layer. it can help generalization
+ martinpapa69: and also it prevets float overflow
+ martinpapa69: dunno if it speeds up training
+ Marchete: BN in theory let's you use higher learning rates
+ Marchete: so learns faster
+ Marchete: I did a single test
+ Marchete: maybe bugged
+ Marchete: and it wasn't that good
+ martinpapa69: its interesting that there is a point in every training, where the actual state of the nn plays a lots of draws in the actual submitted code
+ martinpapa69: it looks like there are not many different directions in the training
+ Marchete: yeah with some cpuct and after some point
+ Marchete: diversity is lower
+ Marchete: just try to add more random
+ Marchete: like on pickBest
+ Marchete: more turns and more random percentage
+ Marchete: it shouldn't affect sample quality
+ Marchete: I went from 60% winrate to 37% in the next gen
+ martinpapa69: ye i noticed these random noice stuff rly help the training. the result is much better if the TRAIN_NOISE_RANDOM is a bit higher
+ Marchete: and it hardly goes over 44% after 7 gens...
+ Marchete: it is?
+ Marchete: If I recall that noise is applied to NN value eval
+ martinpapa69: if i set TRAIN_NOISE_RANDOM to something like 0.001 i never get good result
+ Marchete: so it could affect samples more
+ Marchete: but good to know
+ Marchete: that noise comes from jacekmax
+ Marchete: jace_k applied some +-0.0x% to his NN values
+ martinpapa69: i dont like, it because it looks a bit hacky for me, but it rly helps
+ Marchete: like what value you seem it's working?
+ Marchete: I also barely use it
+ martinpapa69: I use the value that you commented after the line (0.03)
+ Marchete: I have like 0.03 rn
+ Marchete: ahh
+ Marchete: ok
+ Marchete: that's only 0.97..1.03
+ Marchete: I always used that value so I haven't tested more :D
+ martinpapa69: ye, but I was about to completly remove that noise, but apparently i cant
+ Marchete: maybe it's a bug on my code
+ martinpapa69: i thought the noise added by the exploration param (cpuct?) should be enought. ye it could be a bug idk
+ Marchete: the noise from dirichlet
+ Marchete: cpuct isn't noisy
+ martinpapa69: oh, the dirichlet noise, ye. 
+ Marchete: if you set both dirichlet and TRAIN_NOISE to 0
+ Marchete: it should be deterministic
+ Marchete: ah not
+ Marchete: I added in selfplay more diversity at pickBest
+ dbdr: hardcoded&#160;:)
+ Marchete: yeah
+ Marchete: it shouldn't
+ dbdr: WE WANT MORE HYPERPARAMETERS
+ martinpapa69: you mean this stuff:
+ martinpapa69: int randomPick = rnd.NextInt(rootNode-&gt;ChildCount);
+ dbdr: yes
+ Marchete: no
+ Marchete: the prior one
+ Marchete: rnd.NextInt(1000) &lt; XX
+ Marchete: just before picking that line
+ Marchete: that can be improved
+ Marchete: like if ChildCount ==1 don't try to change
+ Marchete: and also move the random pick before the normal selection, and check if randomPick it's the same as selected
+ martinpapa69: yee it looks a bit hacky too :D did it improve the result a lot&#160;?
+ Marchete: in that case don't do anything, don't invalidate samples
+ Marchete: it gives more diversity, yes
+ dbdr: if ChildCount == 1 it's harmless, no?
+ Marchete: it is
+ dbdr: apart from losing the samples
+ Marchete: but can invalidate samples
+ Marchete: so it's undesired
+ dbdr: yeah
+ Marchete: maybe I'm finicky on these
+ dbdr: it's quite standard, epsilon-greedy to add variety
+ dbdr: so not so hacky I say
+ Marchete: neither me
+ Marchete: the hack it's maybe ignore these samples
+ Marchete: gotta go, cya!
+ dbdr: bye!
+ martinpapa69: bb
+ derjack: epsilon-greedy is meh
+ martinpapa69: ye, i dont like it either
+ Marchete: what alternative then?
+ Marchete: e-greedy is simple and gives exploration, sampling discarding also avoids bad samples
+ Marchete: it's a win-win
+ martinpapa69: ye, idk but it feels hacky. same with the temperature used in AZ
+ Marchete: temperature without some epsilon would need thousands of matches to cancel out all that noise
+ Marchete: if they just pick a random weighted sample in all cases
+ Marchete: that's a lot of noise
+ martinpapa69: i like how the give it the letter τ, so it sounds more scientific
+ Marchete: <a rel="nofollow" class="external free" href="https://arxiv.org/pdf/2012.11045.pdf">https://arxiv.org/pdf/2012.11045.pdf</a>
+ Marchete: section 5.2
+ Marchete: my a** pulled random has a name, e-greedy and it's an improvement to avoid local optima
+ derjack: 5.1 talks about mcts solver?
+ Marchete: also "However, in practice, we see that a lot of the times thefully deterministic PUCT algorithm from AlphaZero needsan unpractical amount of simulations to revisit optimal actions where the value evaluations of the first visits are misleading."
+ Marchete: probably
+ martinpapa69: ye sure, i understand it's necessary, and can help the training, but i still dont like it
+ Marchete: "Following this regime, we propose to use disconnected trajectories for e-greedy exploration. In other words, we intentionally create an information leak."
+ Marchete: that's like my sample discard on parents
+ Marchete: so you may not like it
+ martinpapa69: :D
+ Marchete: but it has some reference in formal papers 
+ Marchete:&#160;;)
+ martinpapa69: i didnt check that part yet
+ dbdr: why is it information leak?
+ Marchete: reading it they like disconnect the graph when greedy
+ Marchete: if the mechanism is utilized at nodes deeper in the tree, we disregard the value expectation formalism and corrupt all its parent nodes on its trajectory.
+ Marchete: I think it's similar
+ Marchete: see graphs at page 9
+ Marchete: e-greedy alone gives +100ELO
+ Marchete: so it's a good thing to have it
+ Marchete: either that or have 5000TPUs and do like 3-years train in 3 days
+ dbdr: yes, I always cringe at the "learned chess in 4 hours"
+ dbdr: push Marchete to #2, martinpapa69&#160;;)
+ Marchete: \o/
+ Marchete: only 0.07
+ martinpapa69: haha, anything can happen. i submit a lot
+ dbdr: what's your TRAINING_POOL_SIZE? I have 800K, and it seems if I increase it further I have memory issues
+ dbdr: maybe I need to try the minibatch feature
+ martinpapa69: would be nice to have a copy of these multis, just to throw your ais, to test them
+ dbdr: sorry, I mean TRAINING_SUBSET_SIZE
+ dbdr: you can create a contribution with the same code
+ martinpapa69: TRAINING_SUBSET_SIZEis not used in my code, i just keep the last 15 raw selfplay result, without using the NNSampler
+ dbdr: well, how many samples is that?
+ Marchete: with 16GB I use 850k, no problems
+ martinpapa69: i dont know i dont count it. its size is 400MB on the disk :D
+ Marchete: just a lot of gc.collect
+ Marchete: I don't know how to properly do the minibatch
+ dbdr: 1.1GB here
+ martinpapa69: its the size of the samples.dat, right&#160;?
+ dbdr: yes
+ dbdr: for 800K
+ Marchete: with sample deduplication
+ martinpapa69: there you go Marchete
+ dbdr:&#160;:+1:
+ Marchete: :D
+ Marchete: it was //v24 gen0054
+ dbdr: btw, dedup is nice, but a sample that comes up a lot might be more important to learn
+ Marchete: guess how many versions and generations :rofl:
+ Marchete: sample_weight in model.fit
+ Marchete: if you really want to
+ dbdr: aha, interesting
+ Marchete: maybe limit the upper bound
+ Marchete: 1..10 or so
+ martinpapa69: dbdr, thats what i was thinking about. no idea if its worth it to pack duplications
+ Marchete: or whatever that sample_weight parameter needs
+ Marchete: disk and memory wise, hell yes
+ dbdr: if you care about disk...
+ Marchete: as at some point used /run/shm memdisk, yes
+ Marchete: a lot
+ Marchete: and it was much faster
+ dbdr: storing 1 hots as float32 is not super efficient&#160;;)
+ Marchete: I know
+ Marchete: if you ever zip samples
+ Marchete: they have like 95% compression
+ dbdr: a simple gzip divides size by 30&#160;:)
+ Marchete: I thought about that, zipping samples
+ Marchete: python is easy
+ Marchete: as always
+ Marchete: c++....
+ dbdr: there must be a lib
+ dbdr: or system("gzip ...")&#160;;)
+ Marchete: system gzip destroys the purpose to reduce IO
+ Marchete: and c++ libs are like 
+ Marchete: well, like c++ libs are
+ dbdr: :D
+ Marchete: I just want oneliner memory zipper
+ Marchete: like python C# etc
+ dbdr: print the samples to stdout, pipe to gzip
+ derjack: or write one hots more efficiently
+ derjack: i have only 14 integers as input
+ martinpapa69: maybe you could add a one-hot converter layer to the nn
+ martinpapa69: so yo ucan store the input as integer
+ Marchete: I wanted to keep the sample agnostic
+ Marchete: all values as floats
+ Marchete: I think it's simpler to add a zip layer
+ Marchete: than any other tweak
+ Marchete: and it's more transparent
+ Marchete: selfplay-&gt;zip-&gt;sampler-&gt;zip-&gt;tensorflow
+ Marchete: low IO, no weird one-hot exception
+ derjack: and during learning you dont use any fancy sparse vectors or something?
+ Marchete: beg your pardon?
+ Marchete: what's sparse vector?
+ derjack: dunno how its called exactly
+ dbdr: a holy vector&#160;;)
+ Marchete: ah yes
+ Marchete: googled it
+ derjack: but as you can exploit one hots to being more efficient, the same you can do for learning
+ derjack: no need to multiply all those zeroes
+ Marchete: I don't multiply on C++
+ Marchete: on TF I don't care
+ dbdr: yeah, most time is spent on selfplay
+ martinpapa69: btw you can add regularization to the layers in the layer declaration like
+ martinpapa69: x = tf.keras.layers.Dense(69,activation='relu',name='Dense1', kernel_regularizer=regularizers.l2(0.01))(inputs)
+ Marchete: I know, I'm doing it rn
+ martinpapa69: ah okay :d
+ Marchete: but I went all in
+ martinpapa69: i tried to add it to the loss func
+ martinpapa69: but its more simple
+ Marchete: x=tf.keras.layers.Dense(96,name='Dense1',kernel_regularizer=tf.keras.regularizers.l1_l2(l1=L2_REGULARIZATION/10.0, l2=L2_REGULARIZATION),bias_regularizer=tf.keras.regularizers.l2(L2_REGULARIZATION/10.0))(inputs)
+ Marchete: lol
+ Marchete: like all to red!
+ martinpapa69: ahh :D
+ Marchete: it's a buffet meal
+ Marchete: free? add it!
+ Marchete: :hamburger::taco:
+ Marchete: martinpapa69
+ Marchete: I think you don't need to manually change the loss
+ Marchete: model.fit auto add it, it seems
+ Marchete: so regularizers are just these configs, nothing more
+ martinpapa69: ye, i hope is it works automatically
+ martinpapa69: even though it wont show up in the model.fit() log
+ martinpapa69: like
+ martinpapa69: 4511/4511 - 7s - loss: 0.4414 - value_loss: 0.1847 - policy_loss: 0.2567 - value_mean_absolute_percentage_error: 244826.9688 - policy_categorical_accuracy: 0.8383
+ dbdr: this is just changing the loss, so no other change is needed?
+ martinpapa69: but ye if add the policy and value loss, its smaller than the summ :D
+ Marchete: <a rel="nofollow" class="external free" href="https://github.com/keras-team/keras/blob/master/keras/engine/training.py#L749-L752">https://github.com/keras-team/keras/blob/master/keras/engine/training.py#L749-L752</a>
+ dbdr: value_mean_absolute_percentage_error is garbage
+ Marchete: no loss in change
+ Marchete: no change in loss :D
+ Marchete: I think model.fit auto adds it
+ Marchete: on the other hand, if you do your training loop manually (I have no idea how), you must add it
+ dbdr: I mean, model saving and moka don't need changes?
+ martinpapa69: regularization dont add new weights to the nn
+ Marchete: l2 regularization affects how weights + bias change on training
+ dbdr: ok, thx
+ Marchete: it isn't any inference change
+ Marchete: so it's free use
+ Marchete: no change in Mokka/c++, neither on loss calculation
+ Marchete: only declaration on layers
+ dbdr: high level problem: arena is RPS, selfpit is not always meaningful
+ dbdr: how do we measure progress?
+ martinpapa69: you need to submit your code twice an hour
+ Marchete: :D
+ dbdr: RPS
+ Marchete: while (!first()) { resubmit(); }
+ dbdr: robo is another league tho
+ dbdr: so that's an infinite loop&#160;;)
+ Marchete: make slight changes to cpuct
+ Marchete: resubmit more
+ Marchete: also my cpuct on selfplay is different from arena
+ Marchete: I tweak it
+ Marchete: in fact right now it's a completely different formula
+ Marchete: I think in selfplay I prefere more exploration than in arena
+ dbdr: makes some sense
+ justin-tse: Hello, world! How to better understand and use javascript's higher-order function?Could anyone give me some suggestions?
+ chop-chop: @justin-tse official react documentation has a good article about HOC
+ chop-chop: * react.js
+ justin-tse: @chop-chop thank you! 
+ Thyl: Hi&#160;!
+ SamOrton: hai, i just got this &gt;.&lt; um im only 15 and wanna start coding and i dont know where to start
+ martinpapa69: write a sneak game with console visualizer
+ SamOrton: whats that?
+ martinpapa69: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=KcpRyIFU7Eg">https://www.youtube.com/watch?v=KcpRyIFU7Eg</a>
+ Saunuri: freecodecamp has plenty of beginner friendly tutorials
+ SamOrton: OH SNAKE! i know this yes. you put sneak sorry so i was like wait what haha
+ Saunuri: I'd suggest first thinking about what you want to do and then picking a language
+ SamOrton: which is the easiest for me as a teen who is only learning computing at school so far? I saw its like Python? (when im older ill obiously try study java at university etc)
+ Saunuri: Python is a good starting point but I don
+ Thyl: Python is very good for starting and coding
+ Saunuri: I think you can still go with C# or javascript if you want to
+ SamOrton: okay thank you :D its just all confusing because this website is abit too hard for my small brain ha
+ Saunuri: The tutorials are free so you can get a feel for which languages you feel comfortable with
+ SamOrton: okay thank you :D
+ derjack: :upside_down:
+ SamOrton:&#160;:&gt;
+ Marchete: <a rel="nofollow" class="external free" href="https://github.com/lightvector/KataGo">https://github.com/lightvector/KataGo</a>  -&gt; "If tuned well, a training run using only a single top-end consumer GPU could possibly train a bot from scratch to superhuman strength within a few months."
+ Marchete: le what?
+ Marchete: a few months if tuned well?
+ Marchete: ohmy
+ RoboStac: go's very complicated
+ derjack: well, 6 years ago computer go was very far from professional players
+ derjack: and its again very far, but from opposite direction
+ derjack: and 5000TPU in days -&gt; 1 gpu in few months is progress
+ derjack: hmm <a rel="nofollow" class="external free" href="https://arxiv.org/pdf/2105.06136.pdf">https://arxiv.org/pdf/2105.06136.pdf</a>
+ derjack: so they use vanilla mcts moves as expert in first iterations?
+ derjack: well not only vanilla, but rave etc
+ RoboStac: they do mention having good smaller networks as well but the site seems to be down so can't tell how long they trained for
+ Marchete: my trainer keeps giving me best models, and all are worse on arena...
+ dbdr: same here
+ derjack: lets breed those models for GA
+ Marchete: I think it just ends in the overfitting area
+ RoboStac: from your discussions earlier I think your sample counts may just be really low
+ dbdr: yes, and finding the magic weights that happen to trip up the arena
+ Marchete: it's probably low
+ Marchete: but I don't want to go to the "500k matches"
+ derjack: for oware i had buffer of 12m positions
+ Marchete: lol dbdr
+ Marchete: so true
+ RoboStac: my current bot was 600k matches
+ Marchete: arena is deterministic
+ Marchete: so a 0.03 change is +100% winrate vs some
+ Marchete: 600k matches in total?
+ RoboStac: yeah
+ dbdr: how big buffer robo?
+ Marchete: 72 gen * 2k matches = 144k
+ Marchete: 600k is a lot of time...
+ RoboStac: I think 15m samples (may have been 10, can't remember if that change was before or after)
+ Marchete: but many of these are discarded at some time, no?
+ RoboStac: yeah, it's a rolling queue of that many samples, oldest get discarded
+ Marchete: but a queue of 500k?!
+ Marchete: 500k matches?
+ RoboStac:&#160;?
+ Marchete: or how do you know it's 500k matches
+ RoboStac: 150 trainining iterations
+ RoboStac: of 4000 self play matches
+ Marchete: hmm
+ Marchete: I do like 2.5k per iteration/generation
+ RoboStac: (I make snapshots every 50 iterations to test in arena / benchmark)
+ Marchete: ahh ok
+ Marchete: you go more like AZ, I messed up with AlphaGoZero
+ Marchete: so I use it differently
+ dbdr: so 3 snapshots?
+ RoboStac: well, I did let it go to 200 iterations but it didn't seem to be much stronger (though it's not obvious to tell)
+ dbdr: or 3rd was best
+ dbdr: yeah
+ derjack: only cool kids ignore pits
+ Marchete: they don't pit
+ RoboStac: I don't do any sort of winrate checking between my own versions
+ derjack:&#160;:+1:
+ Marchete: but I saw sometimes a drop to 33% winrate vs best
+ derjack: but, did you test it in leaderboard anyway?
+ RoboStac: yeah, but is that reflected in actual results against other people or is it an overfitting issue?
+ Marchete: I see more overfitting issues by always playing vs itself
+ Marchete: instead of pitting vs 2 bests
+ dbdr: the thing is, if you have a long replay buffer, you are not overfitting
+ Marchete: define long
+ dbdr: long enough&#160;;)
+ Marchete: I'm doing 800k right now
+ prenisbones: fuck
+ dbdr: like robo's 10/15M
+ Marchete: so I can't overfit even if I use previous samples
+ Marchete: or 800k is low?
+ derjack: 800k samples?
+ dbdr: robo's is much bigger
+ Marchete: yes
+ RoboStac: I'd say low, but not sure how dedup / weighting affects it
+ thoustgenitals: FUCK
+ derjack: i have 12m
+ thoustgenitals: i have a 12m cock 
+ Marchete: it doesn't explode on TF?
+ Creedo: ok
+ RoboStac: I'm not learning off all of them each iteration
+ Marchete: minibatches I guess
+ Creedo: Im the loudest on discord
+ Marchete: take some small subset and all that
+ derjack: and i dont use libs ~
+ BlaiseEbuth: dbdr saved him, I banned
+ derjack: oO
+ dbdr: all handmade derjack?
+ RoboStac: I did struggle a lot with python memory usage though, was stuck at about 3m
+ derjack: dbdr yes
+ Marchete: well, I'll investigate that part
+ RoboStac: my none python sample history is 15m and uses less memory
+ Marchete: I'm more confident with C++ about memory management
+ Marchete: I have no idea what's python doing
+ RoboStac: yeah
+ dbdr: copying all over the place
+ prenisbones: guys i cum red
+ prenisbones: lkasnajdad
+ derjack: BlaiseEbuth
+ prenisbones: i hack into blockchain
+ prenisbones: kpodskfop\d
+ prenisbones: =0dskspl\
+ BlaiseEbuth: (╯°□°）╯︵ ┻━┻
+ dbdr: \o/
+ Creedo: ok
+ sausaugechomper: dbdr is a massive fucking nerd
+ sausaugechomper: nerd
+ sausaugechomper: nerd
+ sausaugechomper: nerd
+ Creedo: a
+ Creedo: ok
+ BigD398:  can't dissagree
+ BigD398: blaiseebuth is also a nerd
+ BigD398: quit it with the dumb faces
+ BlaiseEbuth: Others? Say it now, I'll gonna eat after that.
+ derjack: Automaton2000 what do you think
+ Automaton2000: i was talking to you
+ donbenarfa: wus poppin b
+ Mnky: ayy my slime
+ srtewc: fuck ur mom
+ Mnky: Same
+ srtewc: :rage:
+ dan_w_meatball69: 👽
+ Creedo: ok
+ Creedo: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/5f8f8d92-c71e-4c1a-bed1-0c869e16ad1f">http://chat.codingame.com/pastebin/5f8f8d92-c71e-4c1a-bed1-0c869e16ad1f</a>
+ Creedo: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/1b2fd06f-bf05-4102-aca3-3c31073727ce">http://chat.codingame.com/pastebin/1b2fd06f-bf05-4102-aca3-3c31073727ce</a>
+ Bundajcheeks: :ok_hand_tone2:
+ brokenfingerman: hi
+ dan_w_meatball69: by the rivers of babylon 
+ dan_w_meatball69: where we sat down
+ dan_w_meatball69: yeah we wept
+ AFUFAFU: yeeeeeee
+ KiwiTae: there is a kid class ongoing?
+ Astrobytes: Was
+ Astrobytes: Most were kicked/banned
+ KiwiTae: o/
+ Astrobytes: greetings&#160;:)
+ dbdr: \o Astrobytes
+ Awanpro: hai
+ Awanpro: i'm new user
+ Astrobytes: dbdr :wave:
+ Astrobytes: hello new user
+ sadaecho: this is a great site 
+ sadaecho: long time ago I was looking for stuff like this 
+ sadaecho: glad I found it 
+ Astrobytes: Enjoy!
+ derjack: this site is something more than clashes
+ Astrobytes: don't be sillly
+ derjack: silly filly
+ Astrobytes: ...
+ derjack: woah nice jump
+ Astrobytes: hm?
+ derjack: i'd say, a breakthrough in ranking eh
+ Astrobytes: Meh. Slight improvement, not much. Was 22nd last night
+ Astrobytes: Just been experimenting today
+ Astrobytes: Bot isn't consistent enough.
+ Astrobytes: Definite improvement since I added null move pruning though.
+ derjack: null move? but breakthrough is so blitzkrieg
+ derjack: no blitzkrieg... the other german word
+ Astrobytes: zugzwang?
+ derjack: yeah
+ Astrobytes: Yet it works
+ derjack: or maybe you have some sign bug, and it canceled out
+ Astrobytes: No sign bugs as far as I can tell.
+ darkhorse64: you have transposition tables too, I guess&#160;?
+ Astrobytes: yep, replace if &gt;=
+ Astrobytes: *depth
+ Astrobytes: Tried to get tric's trick working but the value of k eludes me currently
+ derjack: tric trick?
+ darkhorse64: ^
+ Astrobytes: Yes, it's a secret.
+ derjack: have you tried trac track?
+ Astrobytes: Oh. That must be it...
+ nulte: astro keeps bullying my bot
+ Astrobytes: sorry&#160;:)
+ NgonTran: hello
+ NgonTran: hello guys
+ Skinjbir: hello
+ AllYourTrees: whats a null move Astrobytes
+ AllYourTrees: :eyes:
+ Art3m1s_F0w1: unrelated, but does anyone use Java for clash of code?
+ BlaiseEbuth: That combo...
+ Astrobytes: AllYourTrees: sorry was afk <a rel="nofollow" class="external free" href="https://www.chessprogramming.org/Null_Move_Pruning">https://www.chessprogramming.org/Null_Move_Pruning</a>
+ AllYourTrees: interesting ty!
+ Astrobytes: np
+ Marchete: [..] with Chrilly Donninger, who popularized null move by his Null Move and Deep Search paper in the ICCA Journal 1993 
+ Marchete: it's from 1966
+ Marchete: :D
+ 21stCenturyPeon: @Art3m1s_F0w1 I do, but I'm old and set in my ways. Naturally, it's terrible for Shortest mode
+ AllYourTrees: do they have language specific leaderboards for shortest mode?
+ AllYourTrees: also is there a way to only do shortest mode in CoC?
+ BlaiseEbuth: No language lb in coc
+ BlaiseEbuth: And yes, but only in private clashs
+ Art3m1s_F0w1: yeah Java is the only language I know well enough to do speed challenges in but I figured it was a terrible choice
+ jacek: python or ruby are faster to write
+ jacek: if you know only java, why bother with clash of codes at all :v
+ BlaiseEbuth: Why bother wirh clash of codes?
+ Art3m1s_F0w1: idk its fun
+ Electroxd988: hi
+ jacek: oO
+ Marchete: :O
+ Wontonimo: hey Art3m1s_F0w1 Electroxd988 , try some of the challenges like <a rel="nofollow" class="external free" href="https://www.codingame.com/training/easy/mars-lander-episode-1">https://www.codingame.com/training/easy/mars-lander-episode-1</a>
+ Wontonimo: warning - turn off your volume 
+ Wontonimo: 21stCenturyPeon you may enjoy this bot battle <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/bot-programming/tic-tac-toe">https://www.codingame.com/multiplayer/bot-programming/tic-tac-toe</a> or this one <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/bot-programming/connect-4">https://www.codingame.com/multiplayer/bot-programming/connect-4</a>
+ nulte: o.o
+ nulte: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/570532520">https://www.codingame.com/replay/570532520</a>
+ jacek: Oo
+ Wirmi: how can i put debugger mode?
+ Wirmi: or set
+ jacek: you can write to stderr
+ nulte: hmm, I wonder if ept will help
+ eulerscheZahl: why turn down the volume? there's nothing more relaxing than  <a rel="nofollow" class="external free" href="https://www.codingame.com/servlet/fileservlet?id=955564061908">https://www.codingame.com/servlet/fileservlet?id=955564061908</a>
+ nulte: (╯°□°）╯︵ ┻━┻
+ nulte: euler your bt bot is minimax?
+ eulerscheZahl: i think so
+ eulerscheZahl: but not looking at the full board at once
+ eulerscheZahl: minimaxing on smaller regions
+ nulte: hmm
+ nulte: Maybe ill try pruning more moves after I add EPT
+ nulte: Currently i only prune moves if they are forced moves
+ eulerscheZahl: forced moves? this is not checkers
+ nulte: if opponent has a piece in 7th rank
+ nulte: its a forced capture
+ jacek: what if both you and opponent have piece on 7th and its your turn?
+ nulte: then i win
+ grateful_tomato: what crates are available in Rust? I couldn't find a list, but e.g. "use time" works
+ jacek: crates?
+ grateful_tomato: that's how Rust calls packages
+ grateful_tomato: like Python Numpy
+ jacek: oh
+ grateful_tomato: would be also interesting to know what's available in Python and Ruby&#160;:-) 
+ grateful_tomato: ok, found it: <a rel="nofollow" class="external free" href="https://www.codingame.com/faq">https://www.codingame.com/faq</a>
+ grateful_tomato: Rust	1.51.0Includes chrono 0.4.19, itertools 0.10.0, libc 0.2.93, rand 0.8.3, regex 1.4.5, time 0.2.26
+ Electroxd988: hi
+ jacek: good evening
+ Wirmi: The game is not showing img, does anyone know why?
+ nulte: which game?
+ Wirmi: coders strike back
+ jacek: reload the page
+ nulte: have you tried to refresh?
+ Wirmi: yes but 1m later, again
+ Wirmi: im using opera, this may be the reason
+ jacek: :thinking:
+ Wirmi: np, thanks for the help&#160;:)
+ Art3m1s_F0w1: opera probably isnt fully supported though ogx hasnt given me a problem so idk
+ jacek: oO
+ ramankala: why are the solutions to the classic puzzles locked?
+ Astrobytes: You have to solve them first in that language. A contentious feature.
+ Astrobytes: Locking all solutions before you solve it at all is fine though, don't want you cheating eh
+ ramankala: gotcha
+ nulte: my mcts is writing in memory that it shouldnt&#160;:/
+ AllYourTrees: :scream:
+ AllYourTrees: bad mcts!
+ Astrobytes: reusing nodes?
+ AllYourTrees: you need to keep your mcts on a shorter leash&#160;:)
+ nulte: im reusing yes
+ nulte: but its overwriting a var that isnt even used in mcts
+ Astrobytes: lol what
+ nulte: yep
+ nulte: Dont know how it happens
+ nulte: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/570543394">https://www.codingame.com/replay/570543394</a>
+ nulte: here i make an illegal move
+ nulte: should have played f2e3
+ nulte: but it rotates it and it prints that 
+ nulte: because the player_id has been overwritten
+ Astrobytes: I saw you had this issue yesterday, I posted a replay but I think you were offline
+ nulte: strange bug
+ Astrobytes: You debugged it in VS?
+ nulte: it didnt happen
+ nulte: with the same gamestate at least
+ nulte: maybe when i reuse it causes a bug
+ Astrobytes: Yeah, I'd look there first
+ Astrobytes: forgetting to reset the parent node? Surely not that
+ Astrobytes: or next node rather
+ jacek: or initialization problem?
+ nulte: maybe
+ nulte: It doesnt happen a lot
+ Astrobytes: Definitely the hallmark of node reuse imo
+ nulte: I might have a bug in c4 then since the mcts code is the same
+ nulte: o.o
+ <b>**Astrobytes wonders why we're helping here...</b></p><p><img src="/a/29546600139885" /> nulte: my bot is still far from the goal
+ jacek: for humanity advancement?
+ Astrobytes: catgirls obviously
+ nulte: oh no
+ nulte: I thought i fixed it with a hack
+ nulte: but still happens
+ nulte: (╯°□°）╯︵ ┻━┻
+ Astrobytes: often the nature of hacky fixes&#160;;)
+ jacek: use fixy hacks
+ Astrobytes: :thinking:
+ jacek: happy Caturday
+ nulte: I think i was writing outside of array
+ jacek: thinking outside of the box eh
+ Diptastic: im assuming test06 no temperature on temperatures challenge is broken...
+ nulte: dont think so
+ Diptastic: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/cdf2028b-81f8-4efb-a4bc-92ba00db0492">http://chat.codingame.com/pastebin/cdf2028b-81f8-4efb-a4bc-92ba00db0492</a>
+ nulte: are you printing "0" or 0
+ Diptastic: it doesnt matter, in c# 0 gets converted to string in console write line
+ Diptastic: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/9098a045-e606-432e-9d55-0d225b19b313">http://chat.codingame.com/pastebin/9098a045-e606-432e-9d55-0d225b19b313</a>
+ nulte: ah
+ nulte: you are outputing 0 twice
+ nulte: if (tempnumbq == 0) {
+ Diptastic: that is just checking if targetTemp is the default value and has not been set to a potential target value. 
+ Diptastic: My block is returning 0 as apporpiate
+ Diptastic: but the unit test fails, says it expects nothing
+ Diptastic: so when I log an empty console.writeline then it fails also saying it found nothing but expects "0"
+ nulte: yes
+ nulte: but your code keeps runnig
+ nulte: which makes it output twice
+ Diptastic: to break this sol down. 
+ Diptastic: line 20 
+ Diptastic: oh ignore me
+ Diptastic:  I just guessed that when you write console.writeline the test resolves 
+ Diptastic: thanks!
+ nulte: np
+ MorningStar37: yw
+ KiwiTae: nulte o/
+ nulte: hi kiwi
+ KiwiTae: helping the newbies? :D
+ nulte: it was a simple question and he pasted the code
+ KiwiTae: hehe
+ nulte: I still need to figure on what to do next on breakthrough
+ KiwiTae: Astrobytes &lt;= this person never sleeps Oo
+ KiwiTae: breakthorugh? is that a puzzle?
+ nulte: board game
+ nulte: its a multi
+ nulte: <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/bot-programming/breakthrough">https://www.codingame.com/multiplayer/bot-programming/breakthrough</a>
+ KiwiTae: ooh havent check that one
+ nulte: simple rules
+ nulte: get to 8th rank
+ KiwiTae: gjob
+ KiwiTae: oh worth up to 2k cgpts
+ Astrobytes: never sleeps eh
+ KiwiTae: i just finished work &gt;&lt; should I begin on HS or go to bed?
+ KiwiTae: zzz ~ see ya in a couple hours
+ nulte: cya
+ KiwiTae: good luck on breakthrough
+ nulte: thanks
+ Astrobytes: very quick decision there Kiwi :D
+ KiwiTae: you better be top 10 when i come back &gt;&lt;
+ nulte: gap from 20 to 10 is massive
+ Astrobytes: Don't encourage him!
+ Astrobytes: It really is
+ nulte: I think ept might improve my bot though
+ nulte: it still does rollouts until game ends
+ Astrobytes: I'm thinking I may have to switch from my alphabeta to ept, I am not trictrac unfortunately 
+ nulte: the problem with EPT is that I need an eval&#160;:(
+ Astrobytes: Heh
+ nulte: I feel like minimax is harder to implement
+ nulte: at least if you add features
+ Astrobytes: Yeah but I kinda like that
+ nulte: is tric the only one using minimax?
+ nulte: in top  10
+ Astrobytes: Looking at the list I think so
+ Astrobytes: Eric perhaps
+ Necromonkey: 0
+ ja_fica: I have lots of entries that require 95k code size...
+ ja_fica: Im using 64bits numbers
+ ja_fica: how to convert it to base 65535?
+ MiyamuraIzumi: what is EPT&#160;?
+ ja_fica: early playout termination, i think
+ Zenoscave: nulte what do you use?

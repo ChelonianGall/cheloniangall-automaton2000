@@ -1,0 +1,387 @@
+ ADMAAVADMAAVYT: hi
+ brand: hows it going 
+ kaz-png: good
+ FrancoisB: great!
+ jacek: good morning
+ kovi: morning
+ BrokenGiant_95fb: hello
+ BrokenGiant_95fb: anyone here develop app using asp.net core?
+ Tuanas: simp
+ Tuanas: simp.exe
+ jacek: :thinking:
+ ParallaxWave: 8D
+ MSmits: 2 more and you got string theory
+ jacek:&#160;:?:
+ MSmits: jacek sry, lemme add some more context on that
+ MSmits: 8 + 2 = 10
+ jacek: :drum:
+ kovi: night changes +3position uttt, -5 bt
+ MSmits: nice job on uttt
+ jacek: not so nice on bt
+ kovi: i didnt submit at all!
+ MSmits: I'm also working on uttt, new bot
+ kovi: 5-10 is pretty close in both
+ MSmits: but did you submit on bt?
+ kovi: no
+ MSmits: mmh ok
+ kovi: jacek made it very close. and pamp pushed me to back
+ jacek: huh? i see youre submiting now
+ kovi: ofc. after i got back of the pack
+ kovi: also i had ideas, which were mostly failed
+ kovi: i was thinking that in bt with early termination it would be better to not reuse tree or at least clear scores
+ kovi: but that made it worse
+ jacek: youre not using solver yet?
+ kovi: i think i do
+ jacek: at least based on your output, at the end youre doing gazillion sims with score like 0.00001
+ kovi: what i display is rate. last number is winner (-2=not fixed)
+ jacek: ah
+ kovi: (and yeah, i still run mcts even if winner is found from root)
+ MSmits: yeah, heat up those server farms
+ kovi: msmits you do mcts on bt with eptany thoughts on no tree reuse/weaking of previous scores?
+ MSmits: i just reuse the tree
+ MSmits: keep the scores
+ MSmits: unless my node pool runs out, then i just reset it
+ jacek: yeah, no point on clearing
+ jacek: even if youre previous sims were misguided, current ones could be too. but at least you have some warm start now
+ MSmits: if you got to some depth, the only score that was added to the node there, were from even deeper nodes. So if this node becomes the root, it's basically just  a headstart
+ kovi: yeah, make sense it slowly changes to the right direction
+ MSmits: the only thing that might be in favor of resetting is cache misses
+ MSmits: your nodes might be spread out in memory due to dead branches being in between
+ jacek: hmm maybe i should add tree reuse in bt :thinking:
+ MSmits: the more branching a game has, the less useful it is
+ MSmits: if you havent added it in oware, you really should, but i think you have
+ jacek: yes
+ jacek: bt has relatvely high bf
+ kovi: interesting msmitsthan tree compression would make sense (keeping score)
+ MSmits: well it would if it wasnt so expensive to actually compress a tree
+ kovi: i dont think it is
+ MSmits: might take several milliseconds and be worse than just resetting the tree I think. But worth a try I guess
+ kovi: at least it is cheaper than no-reuse building the whole from scratch and no scores
+ MSmits: it's basically copying maybe 50 megabytes of data spread out over 600 megabytes
+ MSmits: in little chunks
+ kovi: but if you do it in each turn it is not 600mb
+ MSmits: true, but still a lot
+ MSmits: if i do 100k rollouts and i expand 40 bytes worth of node * Nchildren with 10 children i get 40 megabytes of new data
+ MSmits: i doubt it would be worth it
+ kovi: yeah, i guess you copy 10mb from 50mb
+ kovi: (just checked and i have similar numbers)
+ MSmits: it's worth it when you're trying to solve locally and have memory constraints
+ kovi: good point
+ jacek: do you still run c4 solver?
+ MSmits: solving using mcts solver is very memory intensive
+ MSmits: yeah, when i am not at the computer, sec
+ jacek: the suspence is killing me
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/3fc9677f-7610-4112-8ba9-412735877b02">http://chat.codingame.com/pastebin/3fc9677f-7610-4112-8ba9-412735877b02</a>
+ MSmits: 3 is only going up
+ MSmits: 0 and 1 might both be draws hard to say, or neither one of them is
+ MSmits: i changed my bot to start with 1
+ MSmits: and it doesnt steal 0
+ kovi: hmm, copying is especially cheap with array-node-childblock...
+ MSmits: true, you dont copy per child, you copy per set of children
+ MSmits: btw, you also need to update your parent references
+ MSmits: i have a "childindex"
+ kovi: true
+ kovi: same yeah
+ MSmits: some people use a pointer for this
+ MSmits: but I am obsessed with makign my nodes small
+ kovi: we use array indexing at work
+ MSmits: it's 32 bit vs 64 bit
+ MSmits: my node is only 16 byte currently
+ MSmits: so 128 bit
+ MSmits: in uttt that is
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/8262bb79-f359-4924-9fe9-4836808bd8fa">http://chat.codingame.com/pastebin/8262bb79-f359-4924-9fe9-4836808bd8fa</a>
+ kovi: wow, that is nice. 128bit game state?
+ MSmits: no, the game state is not on there at all
+ MSmits: it's just a boardindex and a move index
+ BhavYea: hellooo
+ kovi: oh ok, i pack all together
+ MSmits: you have the gamestate on the node?
+ kovi: yes
+ MSmits: so thats 10 integers on every node?
+ kovi: yes
+ MSmits: thats expensive to do
+ MSmits: memory wise anyway
+ MSmits: what i do is, i apply the moves during selection, but very simple, just 
+ MSmits: inline void ApplyMove(int player)	{		boards16[player][boardIndex] |= 1 &lt;&lt; moveIndex;	}
+ kovi: i see
+ MSmits: i dont check for wins and all that
+ kovi: for bt/uttt that make sense
+ kovi: for bandas that would not work
+ MSmits: in bt i do keep the state on the node
+ MSmits: in bandas i do also
+ MSmits: most games actually
+ MSmits: but most board games have a 128 bit or even 64 bit gamestate
+ MSmits: uttt can theoretically fit into 128 bit but it takes extreme compression, more likely it's 192 bit or more
+ kovi: yeah it is easier to reproduce than decompress
+ MSmits: I have my oware and onitama in 64 bit. Pretty sure noone else does this. I did some weird stuff to achieve this
+ MSmits: not sure it's worth it
+ jacek: *spoiler alert* its not :v
+ MSmits: probably not&#160;:)
+ MSmits: but my nodes are small
+ kovi: i dont think either. 40 or 48 byte
+ kovi: but for uttt it may make sense
+ MSmits: for oware i have 5 bit per house, adds up to 60 bit, but a house may have more than 31 seeds, but because there can only be 1 house with more than 31 seeds, i store the overflow of seeds in the leftover 4 bit&#160;:)
+ kovi:&#160;:)(even if i dont know oware at all)
+ MSmits: it's 12 pits, each have seeds in them, simpest gamestate I know
+ MSmits: simpler than uttt
+ kovi: im having motivational problems after reaching top10
+ MSmits: yeah, i did too and moved on, but i keep coming back after a few months
+ MSmits: if you do what is fun, you'll be back eventually, nor not
+ MSmits: or
+ kovi: for a multiplayer which already runs for years
+ jacek: chess?
+ kovi: hard to tell what amount of additional work is needed
+ kovi: for chess it could be infinite. looking at the literature
+ kovi: at least in cg it is new
+ kovi: i guess being new and having community focus raises motivation level
+ MSmits: yeah
+ jacek: 5% focus
+ kovi:&#160;:)
+ MSmits: also a game being on CG for years doesnt necessarily mean people spent years on it. For uttt this is true, but for most other games it will not be. People spend at most a few weeks and then dont look back, with some rare exceptions
+ jacek: :soccer:&#160;:/
+ kovi: paper soccer is relatively new isnt it?
+ jacek: it came at the same time bt did
+ MSmits: not that new. Over a year for sure
+ MSmits: there's nothing wrong with the game, it just never got popular
+ MSmits: just like twixt
+ MSmits: eric made both twixt and dots, for some reason dots and boxes got popular
+ kovi: that is new for mei have only concentrated on cg contests up to now
+ jacek: well its rather obscure. i played it at school on real paper
+ jacek: as twixtpp is probably popular in france and nowhere else
+ MSmits: ah I see
+ kovi: yeah, we did d&amp;b and car racing
+ ngdangtu: Do you guy know what is Tests Cases Relevancy?
+ jacek: do test cases cover most cases and the edge cases
+ kovi: msmits are you using mcts on d&amp;b?
+ MSmits: no, I have no traditional search on D&amp;B. It's a weird game
+ MSmits: after halfway through the game. The game is solvable
+ MSmits: i use a complicated 1590 line solver for that part, but it's not so important
+ MSmits: the 10 plies before that i use nimstring analysis
+ MSmits: that's everything
+ MSmits: when i came up with it, i was nr 1
+ MSmits: then mikkla did it better
+ MSmits: first 40 or so plies it's just random moves
+ MSmits: mikkla said he just picks the first move (which imho is worse than random)
+ kovi: that is why im thinking about mcts
+ MSmits: well you could do a mcts with a short nimstring analysis at the end, i've thought about it
+ kovi: with ept...and i would add my depth0 assessment in the end
+ MSmits: but without the math, it's hopeless
+ kovi: i dont even know what is nimstring...just parity
+ MSmits: it's mostly parity yes
+ MSmits: but has a lot of rules in D&amp;B
+ MSmits: basically, you turn the entire game around with one well, or wrongly placed line
+ kovi: true
+ MSmits: i spent more time reading papers on D&amp;B than any other game combined
+ MSmits: and there arent even that many papers on D&amp;B
+ MSmits: i just read them many times :P
+ jacek: please no spoilers
+ MSmits: it's because you really *need* the math, as opposed to most other games
+ MSmits: lol
+ MSmits: i wont, dont worry&#160;:)
+ kovi: that is the problem with these simple games
+ MSmits: what is?
+ kovi: that they have been already researched
+ MSmits: hmm well, I had to think of a lot of new rules for my D&amp;B solver
+ MSmits: they were not in the papers
+ MSmits: the nimstring stuff was though
+ MSmits: uttt is poorly researched as well
+ MSmits: also CG often has somewhat different variations of the real game that have a real effect
+ MSmits: like time limits
+ kovi: i agree
+ jacek: most games have time limit *.*
+ MSmits: oware has a different best move soemtimes, depending on how close to the end you are
+ kovi: and code limit to prevent heavy books/nn
+ MSmits: it only works to prevent endgame books though
+ MSmits: nns get enough space
+ MSmits: and i never had an opening book over 10kb
+ MSmits: even running one for months
+ kovi: well...for std chess that would not be enough
+ MSmits: the thing is, it's easy to get a large opening book, it's not easy for them to be good moves
+ MSmits: good moves require tons of calculation time
+ MSmits: that's the real bottleneck
+ MSmits: not codesize
+ jacek: its easy. just be google
+ MSmits: my oware book is currently probably 4 kb if i properly compressed it
+ MSmits: it is based on 8.5 million games
+ MSmits: months of runtime on a single core
+ MSmits: still losing half my games vs jacek as player 1 btw :P
+ jacek: my bt bot is based on 3.8 mills games now. 2.5 days. use your resources efficiently
+ MSmits: sure, but they are not all good games&#160;:)
+ MSmits: my games are played by my bot, not semi-randomly
+ Rocky[K.G.F.]: hii to all
+ MSmits: hi Rocky[K.G.F.]
+ karliso: why is codesize not a problem for nns?
+ MSmits: it is a problem, it's not prohibiting though, for these simple boardgames.  Iam just going by what the NN-ers told 
+ MSmits: did not try it myself
+ MSmits: for a more complex game it could be a bigger problem
+ Rocky[K.G.F.]: hi UIjahn
+ jacek: i could use a bigger NN
+ jacek: but i can't&#160;:(
+ jacek: dat grammar
+ kovi: yeah instead of 4x4 conv, use 8x8 direct solver&#160;:)
+ zalnaRs:                             b b b               
+ YSF8: i have a question
+ YSF8: i am currently trying to code in a game and it says i need to win to go to the next level
+ YSF8: but i keep winning and staying the the same area and loose rank for some reason i was 4 and know 23k
+ YSF8: what is the reasoning
+ MadKnight: u have to submit and have it win the boss
+ YSF8: how do i submit
+ YSF8: i can play my code 
+ YSF8: and i win the boss al the time
+ YSF8: all*
+ YSF8: Game Summary:YSF8 rank: 1Boss 4 rank: 2End reached
+ jacek: test in arena, not play my code
+ geppoz: puzzle of the week "Encounter surface" solved using only sum and products... not a single division nor any goniometric function or segment intersections
+ geppoz: there is any extra prize? :D 
+ jacek: now solve the previous puzzle of the week
+ geppoz: the previous was not a puzzle&#160;;)
+ JockTalk: gold
+ MasterCoderxD: yo
+ komple1: hio
+ komple1: :apple:
+ MohamedElhakim: hello guys,searching for remote backend developer C#,Any help?
+ jrke: is there any link for the referee of great escape
+ jrke:&#160;?
+ MSmits: I think it's on the forum somewhere
+ jrke: forum not opening :thinking:
+ 257832: jrke: <a rel="nofollow" class="external free" href="https://github.com/eulerscheZahl/RefereeCollection/tree/master/TheGreatEscape">https://github.com/eulerscheZahl/RefereeCollection/tree/master/TheGreatEscape</a>
+ jrke: oh thankds
+ jrke: thanks*
+ kovi: is it just me or bandas strongly favors p1?
+ MSmits: I think it does, but it also favors whomever received the best position through random generation
+ MSmits: this is why re curse hates it. If you can get past this, it's a fun game to code a bot for
+ kovi: you mean there is no heuristic to catch a winner/saver move?
+ MSmits: not sure what you mean
+ kovi: other than being lucky and find it early
+ MSmits: people play this game the way they do UTTT, mostly through random rollouts
+ kovi: yeah, i meant that.and now i see the importance of book
+ MSmits: it shortens the rollout
+ kovi: giving 3-4 plies more
+ kovi: yeah
+ MSmits: but you can get to top 10 without it 
+ MSmits: I think maybe 3-4 people use an endgame book
+ MSmits: karliso, nagrarok and I. Maybe one more I missed
+ kovi: maybe my rolloutcnt is low. i can only get 15-20
+ MSmits: what do you mean 15-20?
+ kishor_max: how to submit?submit button is not working'
+ jrke: click on bottom right button 
+ MSmits: Test in Arena?
+ kishor_max: in clash of codes
+ kishor_max: right bottom button is not working
+ MSmits: kovi, let me do some tests so i can tell you rolloutcount
+ reCurse: kovi: I warned you, games almost always start extremely favored for one player :p
+ MSmits: yeah but thats not that bad really. All that does is make the top 10 less reliable. You can have fun writing a bot, get into top 10 and then not worry about whether you're really rank 8 or 3
+ MSmits: then just move on
+ reCurse: Not sure which language you're speaking right now
+ reCurse: Is it Dutch?
+ MSmits: lol, sometimes I reply to you, but it's really meant for everyone else :P
+ reCurse:&#160;:(
+ MSmits: just letting them know you can have fun with imperfect games&#160;:)
+ reCurse: Forever outlier
+ MSmits: whats that
+ reCurse: 5% of 5%
+ MSmits: that's you I think
+ MSmits: well me too, but for different reasons maybe 
+ jrke: i just discovered bandas is also interesting lol
+ MSmits: kovi rollout count close to 50k * 4 sims per expansion. So 200k random playouts from 50k parent nodes
+ MSmits: a little below that
+ MSmits: in round 2
+ MSmits: but this is with endgame book, i might get a small increase from cutting playouts short. Or the conditional check + lookup might cost too, i dunno
+ reCurse: Endgame book for bandas?!
+ MSmits: yeah
+ reCurse: Why?
+ MSmits: I look up every state with 12 or less squares
+ MSmits: makes random rollouts better
+ MSmits: more exact
+ MSmits: and shorter
+ MSmits: i solve much sooner, it's why i am ranked 3 on average and not 10
+ reCurse: I didn't think it mattered since game is so skewed in your favor (or not)
+ MSmits: it matters less on average because of that, but this favor thing cancels out over many games
+ reCurse: And since there's no pairing, your ranking is even more dependent on which side you got
+ reCurse: So your improvement gets entirely drowned out
+ MSmits: yes, so the margin is smaller
+ MSmits: it doesnt, i tested it
+ MSmits: it's pretty significant
+ reCurse: Hmm
+ reCurse: Maybe your eval is bad then? :P
+ MSmits: what eval
+ MSmits: i do it uttt-style
+ reCurse: Oh random rollouts
+ MSmits: i simply cut short the random rollout
+ MSmits: it's like using a lookup for the last uttt board
+ MSmits: the last miniboard
+ MSmits: btw, this works fine, but no matter how hard I try, i can't seem to figure out how to do 2  miniboard lookup. Just too many states
+ MSmits: can maybe do it locally, but definitely not in a live bot
+ kovi: sorry was afk15-20 is leadeboard positionsim below 100k rollouts, so need to work on that
+ MSmits: ahh ok
+ ADMAAVADMAAVYT: can someone help me please i am new to the program
+ KiwiTae: ADMAAVADMAAVYT welcome what do you need
+ ADMAAVADMAAVYT: i would like like a tutoril like a vidieo is there something like that on this?
+ ADMAAVADMAAVYT: also can u use this websit to code a game?
+ Wontonimo: @ADMAAVADMAAVYT there are no video tutorials that I know of.  You can check out the live streams
+ AntiSquid: there are some video tutorials
+ AntiSquid: what tutorial are you looking for capsman&#160;?
+ Wontonimo: You can make contributions on this site, like a clash-of-code, or a bot competition.  It isn't a stand-alone game that you could put on an app store
+ Wontonimo: I didn't now about the videos, sorry.  There is definitely a lot of learning material here <a rel="nofollow" class="external free" href="https://www.codingame.com/learn">https://www.codingame.com/learn</a>
+ AntiSquid: capsman&#160;? ADMAAVADMAAVYT
+ jacek: this site is not for complete beginner who doesn't know how to code at all. no total beginner tutorials here
+ AntiSquid: nonsense, AutomatonNN and Automaton2000 both started here and look at their level progress
+ Automaton2000: i haven't even started yet
+ AutomatonNN: why do you think that it is a good one?
+ AntiSquid: damn bots berating me ...
+ jacek: AutomatonNN where is frog
+ AutomatonNN: no zigo
+ AntiSquid: ZigoZigo: Is and Uber Cool Guy, He Pwns everyone and Katelyins seem attracted to him. He Owns the internets and is uber.He is also the pwnage of Byond.
+ AntiSquid: <a rel="nofollow" class="external free" href="https://www.urbandictionary.com/define.php?term=Zigo">https://www.urbandictionary.com/define.php?term=Zigo</a>
+ jacek: mhm
+ AntiSquid: i thought it's funny someone nicknamed himself zigo and posted that on urban dictionary, that's all
+ AntiSquid: Zigo Leader Stroller Bike&#160;: <a rel="nofollow" class="external free" href="http://www.myzigo.com/">http://www.myzigo.com/</a>
+ Waffle3z: p`factor`.count(' ')==2&#160;?????? what is going on here
+ Waffle3z: what is `factor`
+ OnceAndFutureKing: repr() in python2
+ Teddy.py: print all prime factors
+ Waffle3z: where is `factor` documented, why does it specifically get the next thing out of stdin, convert it to a number, and get the number's factors, how is that specific behavior built into the language
+ Waffle3z: and what's that notation
+ OnceAndFutureKing: <a rel="nofollow" class="external free" href="https://portingguide.readthedocs.io/en/latest/syntax.html#backticks">https://portingguide.readthedocs.io/en/latest/syntax.html#backticks</a>
+ Waffle3z: it's ruby
+ OnceAndFutureKing: hah, that explains why it sounds weird
+ Teddy.py: and in bash also work
+ breadward: the back ticks in ruby call a system command if I understand correctly, in this case it's running the bash 'factor'
+ Teddy.py: oh that makes sense
+ breadward: if I'm understanding correctly lol, just learned about from a challenge on here yesterday
+ Teddy.py:&#160;: p
+ OnceAndFutureKing: that's actually genius XD
+ breadward: right?! now I need to brush up on bash
+ Teddy.py: :p
+ jacek: or hash
+ Teddy.py: oO
+ jacek: Oo
+ KiwiTae: im from taiwan hash :D
+ jacek: huh
+ KiwiTae: <a rel="nofollow" class="external free" href="http://taiwanhash.com/">http://taiwanhash.com/</a> just sharing
+ jacek: oh my
+ YurkovAS: jacek "opening move" in onitama mean you use open book?
+ jacek: its just my trolling
+ YurkovAS: onitama more easy than d&amp;b and othello
+ jacek: there are over 100k combinations in onitama in the beginning
+ YurkovAS: jacek n-tuples for othello is NN (network) and need train this network in offline? i'm read and don't understand anything.
+ jacek: yes
+ YurkovAS: thanks
+ jacek: <a rel="nofollow" class="external free" href="https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.108.5111&amp;rep=rep1&amp;type=pdf">https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.108.5111&amp;rep=rep1&amp;type=pdf</a>
+ Westicles: I'm down to the crappy puzzles.  CYK algorithm, smh
+ ADMAAVADMAAVYT: ok
+ taha-lyousfi: hi guys
+ taha-lyousfi: does anyone have some advice for me to start competetive programming
+ MSmits: seems pretty broad subject. 
+ MSmits: There are speed-programming challenges. Those are very different from the bot coding we do here
+ MSmits: the botcoding we do is more relaxed. Even contests give you 10 days generally. If you're not too busy with work or family stuff, it should be enogu
+ MSmits: enough
+ MSmits: but in any case, the advice is practice
+ AntiSquid: taha-lyousfi yes
+ nunu2021: hi all, i am soooooo excited to start!
+ Sky_Rhett: where do i start programming as a high school student who knows nothyingf
+ nunu2021: omg, im also a highschooler, but i do have some cs experience
+ nunu2021: i would say learn one language a little bit, then practice the language on this site
+ LuaCultist: I too am a highschooler! I would say start on a project you think you would enjoy making
+ LuaCultist: You'll learn as you go
+ LuaCultist: Make sure to know the basics of the languages/frameworks you will use first or it'll not end up too well

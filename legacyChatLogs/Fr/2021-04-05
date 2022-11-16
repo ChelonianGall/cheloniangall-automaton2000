@@ -1,0 +1,166 @@
+ nicola: Ça dépend.Ça marche bien dans Unix, C dièse&#160;?
+ philRG: faut utiliser mono, en principe oui. Mais au niveau des frameworks, il y a un bon décalage
+ philRG: enfin tiré de mon expérience d'utiliser C# sur macOS qui a un noyau unix, même type d'archi
+ philRG: sinon VS Code permet de faire du C# sur linux sûrement
+ ZacDonald: Salut tout le monde&#160;!
+ jfaixo: Vous pouvez faire tourner du C# dans .Net Core, ca cible linux, windows, macos 
+ jfaixo: et c'est pas "le mieux", c'est bien pour certains contextes, moins bien pour d'autre (sinon, tout le monde ferait du C#&#160;;) )
+ philRG: bah ce qui compte, c'est de réussir à prédire les mouvements des bots adverses
+ philRG: le reste on s'en fout&#160;:)
+ philRG: d'ailleurs j'avais oublié de définir des mouvements pour ma simulation justement 
+ Thyl: bon je passe à l'AG
+ Thyl: j'arrive pas à trouver comment choisir les Cible
+ philRG: bon moi j'arrive à pousser l'adversaire
+ philRG: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/538164745">https://www.codingame.com/share-replay/538164745</a>
+ philRG: à partir de la simulation de magus remaniée
+ Thyl: ça donne
+ philRG: seulement le début, ma simulation me renvoie la meilleure action Move(angle, thrust) comme documenté dans le PM
+ philRG: basiquement je simule thrust 100 (et 650 s'il me reste des boosts), et angle compris entre 0 et 359, je rentre les actions présumées de l'adversaire, et je lance la fonction play des pods, puis si mon score s'améliore par rapport à mon mouvement de base, je lance cette action
+ Thyl: JE SIMULE PAS LES COLLISIONS
+ Thyl: pardon maj état appuyé
+ philRG: ça pourrait faire le sujet d'un cours de géométrie
+ philRG: en fait l'algo de magus se charge de les simuler
+ philRG: c'est la fonction pod.score() de l'algo qui va déterminer la meilleure action
+ philRG: c la fonction bounce() qui va effectuer les collisions et les déplacements associés
+ darkhorse64: J'ai fait un mélange de mon code PCR, SR et CSB.:poop:
+ philRG:&#160;:-D
+ Thyl:&#160;:-D
+ philRG: je découvre un peu la simulation c sympa
+ darkhorse64: J'ai pas tout perdu, j'ai trouvé un bug dans mon code PCR et je suis rentré dans le top 10
+ darkhorse64: OK, je suis passé de #11 à #10
+ darkhorse64: mais j'ai passé rebless
+ darkhorse64: Ca compile, yapluka tester
+ philRG: :thumbsup:
+ jfaixo: haha, pour ma part cete nuit j'ai terminé de déboguer émulateur &amp; simulateur dans le bot, paramétrer un peu le tout.. aujourd'hui c'est banalisé chasse aux oeufs encore&#160;:(
+ jfaixo: mais ya toutes les bases pour faire un joli PSO et tweaker tout ca, j'espère pousser des 1ers trucs sympas d'ici mercredi&#160;! #fingerscrossed
+ egaetan: hello
+ darkhorse64: Mon AG dit "Go West, young man" à mon pod mais le pod timeout avant d'atteindre les Amériques
+ SefioR13: Est ce que quelqu'un a fait&#160;: The Travelling Salesman Problem&#160;? 
+ nicola: Oui, je pense.
+ nicola: Celui avec l’algorithme glouton&#160;?
+ nicola: SefioR13&#160;?
+ SefioR13: Yes, est-ce que t'as arrondi pour chaque calcul de distance ou seulement à la fin après les avoir additionné
+ nicola: J’ai arrondi à la fin.
+ SefioR13: D'accord merci
+ philRG: bon encore du taf. Je dis à l'algo de magus d'aller à l'est mais il va au Nord&#160;:-( J'ai pas du bien capter ses conventions de calcul d'angles
+ dwarfie: comme tout le monde depuis le brexit&#160;;)
+ egaetan: en fait -3v c'est pas si mal
+ BlaiseEbuth: Yo tout l'monde&#160;! Automaton2000, AutomatonNN&#160;!
+ Automaton2000: heureusement que je suis un noob
+ philRG: Automaton2000 à qui le dis-tu!&#160;:-)
+ Automaton2000: j'ai l'impression d'être le seul
+ Eltech: tout le monde commence debutant :3
+ telerama: t'inquiète je te soutiens
+ BlaiseEbuth: Mais certains le restent.
+ telerama: aïe
+ BlaiseEbuth: Pas vrai Automaton2000&#160;?
+ Automaton2000: il est bien ce contest
+ Zanbez: Quel contest Automaton2000&#160;?
+ Automaton2000: j'ai fait un truc du genre
+ BlaiseEbuth: o/ Zanbez
+ PythonSlayer: Automaton2000
+ Automaton2000: c'est déjà pas mal&#160;:)
+ PythonSlayer: tu as raison Automaton2000 c'est deja pas mal d'être sois-même
+ Automaton2000: (ça doit être un bon plan ça
+ Zanbez: \o/ BlaiseEbuth :grinning:
+ BlaiseEbuth: :hugging:
+ Zanbez: Ca faisait longtemps
+ BlaiseEbuth: Tu te fais rare
+ Zanbez:&#160;:)
+ Zanbez: Faut que je me prépare pour le prochain contest
+ BlaiseEbuth: <a rel="nofollow" class="external free" href="https://www.codingame.com/hackathon/sofia-labs-coding-challenge/details">https://www.codingame.com/hackathon/sofia-labs-coding-challenge/details</a>
+ Zanbez: T'es en train de me dire que j'ai déjà 5 jours de retards :flushed:
+ BlaiseEbuth: 4
+ Zanbez: Merci, j'y go...
+ BlaiseEbuth: Wé
+ Zanbez: Go go go
+ PythonSlayer: Non je vais passer 62ieme rhooo
+ PythonSlayer: ^^
+ BlaiseEbuth: Fix it
+ PythonSlayer: kk
+ Syj: pourquoi il n'apparait pas dans les challange Amadeus Sofia Labs Coding Challenge&#160;?
+ BlaiseEbuth: C'est un semi-privé
+ BigUP: Syj, c'est un challenge privé
+ BlaiseEbuth: non
+ jfaixo: question (sans doute bête): les 100ms par tour, je peux les mesurer avec un timestamp (genre un Instant)&#160;? Ou c'est de l'"équivalent temps cpu pouvant être interrompu", et auquel cas, faut que je trouve une autre facon de faire&#160;?
+ BlaiseEbuth: Chrono lancé quand le referee envoie le premier input à ton bot et arrété à ton input (ou à 100ms)
+ BlaiseEbuth: *à ton output
+ jfaixo: ok merci&#160;! :D
+ Neumann: Pouet
+ Neumann: Tu fais le contest jfaixo&#160;?
+ BlaiseEbuth: Pwet
+ Neumann: (c'est ce jeu avec lequel Sopra avait hésité pour leur contest, btw)
+ ThomasNicoullaud: c'est encore un jeu ou si t'as rien codé a part -3v c'est pas la peine non&#160;? :D
+ BlaiseEbuth: C'est ça. Va t'en
+ BlaiseEbuth: :3
+ Neumann: Pas vraiment, c'est un jeu "light" pour 10 jours, t'as le temps de partir from scratch et de rattraper les autres
+ Neumann: Surtout vue la quantité de tutos/starters dispos
+ Neumann: En bref t'as aucune excuse
+ Neumann: Au boulot
+ BlaiseEbuth: Ménon.
+ ThomasNicoullaud: je passe mon tour Neumann, pas le temps cette semaine pour moi
+ ThomasNicoullaud: hf 
+ Neumann: A dans 1 mois
+ SylvainLemore: Bonjour à tous, j'ai une question sur le prochain Contest CG car je voudrais faire une team d'entreprise. J'ai lu sur Linkedin qu'ils avaient dévoilé le sujet, mais je ne vois rien à part une photo de Pokemon. Oui puis je trouver "les infos qui ont été dévoilées&#160;?" 
+ slims78200: il faut demander à Pikachu
+ SylvainLemore: OK, tu me présentes&#160;?  
+ SylvainLemore: Bon, il n'y a pas d'infos en fait, surprise dans un mois. 
+ Saelyos: Yo, je débarque, le contest semi privé avait été annoncé quelque part&#160;?
+ Zorg1: j'avais vu un truc sur le chat, mais c'est tout
+ BlaiseEbuth: "Pokémons"... :expressionless:
+ <b>**BlaiseEbuth envoie des ondes positives à Mr Myazaki.</b></p><p><img src="/a/13586498256488" /> Vry: lol
+ jfaixo: Oui Neumann je fais le contest&#160;:)
+ datiti: Automaton2000
+ Automaton2000: j'ai pas envie de me faire engueuler
+ jfaixo: d'une pierre deux coups, comme ca dans la foulée je ferai le CSB originel
+ x300: :carrot:
+ Eltech: C'est quand meme super satisfaisant de faire des simu mine de rien
+ jfaixo: mais j'ai pas eu masse de temps à y consacrer, j'entre dans le game courant de semaine x)
+ jfaixo: si ca marche, je pourrai streamer des trucs cools haha
+ BlaiseEbuth: Oh, même si ça marche pas. Ce sera même drôle
+ jfaixo: haha j'avoue
+ darkhorse64: du fait de la rotation instantanée et du pod unique, c'est tout de même différent de CSB. Pour l'instant mon heuristique à deux balles marche beaucoup mieux que mon AG. Je n'ai pas encore trouvé la bonne fonction de fitness. Mon pod s'obstine à collisionner l'adversaire
+ BlaiseEbuth: J'en suis pas au paramétrage de l'ag, mais à son débugage...
+ darkhorse64: Ellle marche mieux que la mienne on dirait
+ scogliani: Bonjour, <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/f3b5b134-2613-4217-9e12-cb2dec7a446e">http://chat.codingame.com/pastebin/f3b5b134-2613-4217-9e12-cb2dec7a446e</a>
+ BlaiseEbuth: En arène j'ai la simu, mais pas l'AG. Juste un tri sur des moves choisis depth1.
+ scogliani: Le message&#160;: J'ai un ami Un de vos invités s'est incrit. +10 J'ai 3 potes Trois de vos invités se sont incrits. Il manque les "s"
+ BlaiseEbuth: :thinking:
+ BlaiseEbuth: Rien compris. :sweat_smile:
+ scogliani: Dans les succès "Social"
+ scogliani: Il y a incrit au lieu de inscrit
+ scogliani: Pour les 2 badges bronze de "j'ai des potes"
+ scogliani: Si un PO ou un dév de CG passe par là
+ BlaiseEbuth: Un jour férrié&#160;?
+ scogliani: Bonne remarque 
+ BlaiseEbuth: Fait un poste sur le forum, ils le verront demain.
+ scogliani: Il y a une catégorie spécifique pour des remontés de "bugs"&#160;?
+ BlaiseEbuth: Feedback &amp; bugs
+ scogliani: Merci
+ Eltech: dites
+ BlaiseEbuth:  
+ Eltech: vous utilisez quoi pour calculer le temps avant un timeout en python?
+ BlaiseEbuth: Pas de python pas de timeout.
+ Eltech:&#160;?
+ BlaiseEbuth: Bah je fais pas de python.
+ Eltech: ah, je vois, merci quand meme!
+ PythonSlayer: regardes le module time
+ PythonSlayer: tu as time,perfcounter
+ PythonSlayer: j'utilises mais je sais pas si c'est le mieux:
+ PythonSlayer: from time import perf_counter as pc
+ PythonSlayer: t0 = pc()
+ PythonSlayer: code
+ PythonSlayer: t1 = pc()
+ PythonSlayer: et puis t1-t0
+ philRG: il est time.time() pour moi bonne nuit&#160;:-)
+ BlaiseEbuth: T'étais là&#160;? Oo
+ philRG: ouais je vais joujou avec un MC (full random) c assez moche, demain j'essaye autre chose
+ philRG: fais
+ philRG: j'ai réussi à décoder l'algo de magus
+ philRG: enfin je me suis surtout emmêlé avec les angles
+ Zorg1: plein de gens qui sont là mais en mode discret&#160;;-)
+ BlaiseEbuth: Ouai mais du coup c'est bizare de te signaler juste quand tu t'en vas... ;no_mouth:
+ philRG: c quoi le mode discret?
+ leojean890: être là sans parler sur le chat par ex :p
+ Zorg1: par exemple ^^
+ Eltech: j ai utilisé time_ns au final ^^

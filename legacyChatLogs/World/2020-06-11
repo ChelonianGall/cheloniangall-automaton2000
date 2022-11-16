@@ -1,0 +1,1164 @@
+ jrke: what can i add in PR2
+ Pappu_Kumar_Pashi: Hi, Everyone Hope you all are doing well :blush:Let's be friends
+ LelouchVC2: WE can NEVER be friends
+ jacek: :O
+ WINWINWIN: jacek, did not enjoy the contest?
+ jacek: didnt get hooked up really
+ jacek: but i dont enjoy contests overall
+ eulerscheZahl: you are a board game player
+ jacek: eeyup
+ FaizanRizvi: hi
+ jacek: ohai
+ FaizanRizvi: has anyone solved ANEO Sponsored Puzzle?
+ WINWINWIN: I have
+ jacek: ok i fiddled with pr2. now im at top half
+ eulerscheZahl: not that impressive tbh
+ Astrobytes: I got to 234th and got a bit bored
+ Astrobytes: Might go back to it, if it wasn't for the 'contest' I probably wouldn't have started it so, all good I guess
+ WINWINWIN: Othello released today morning
+ WINWINWIN: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/5106941b8347f7341a4dbe2f39dabce52586">https://www.codingame.com/contribute/view/5106941b8347f7341a4dbe2f39dabce52586</a>
+ WINWINWIN: Looks perfect
+ Astrobytes: Yea I know, I'm 1st :P
+ Astrobytes: He's done a good job
+ cegprakash: The aim of this game is to win.
+ cegprakash: You lose if:You mess up.
+ wlesavo: standart statement
+ cegprakash: (╯°□°）╯︵ ┻━┻
+ wlesavo: it is great though
+ cegprakash: aren't games made to have fun?
+ cegprakash: "The aim of this game is to win." sounds harsh to noob players like me
+ cegprakash: who play for fun
+ Astrobytes: cegprakash it's just the default HTML, he's not done the statement yet
+ MSmits: cegprakash wants it to be: "This game has no aim, enjoy!"
+ MSmits: btw, guess what this is:
+ Astrobytes: Also "noob players like me who play for fun" - ceg?!
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/6a3b6027-a402-414b-a606-ede6b68e1621">http://chat.codingame.com/pastebin/6a3b6027-a402-414b-a606-ede6b68e1621</a>
+ MSmits: I ran out of memory after n = 21&#160;:(
+ Astrobytes: Oware endgames?
+ MSmits: yep!
+ Astrobytes: Jeez lol
+ MSmits: i just enumerated them, i didnt solve 
+ Astrobytes: That's... a few
+ MSmits: it might be crazy hard to solve seeds over 10
+ MSmits: because of loops
+ MSmits: so i doubt memory is the bottleneck here
+ Astrobytes: Yeah, I'd imagine that'd be the case
+ Astrobytes: brb
+ Astrobytes: back, doctor checking up on me
+ MSmits: ah, ok, hope it's getting better
+ Astrobytes: Nah, no change. MRI on Tuesday. Most probably a bulging disc
+ MSmits: can do they help you with that?
+ Astrobytes: Depends. That's just one option (the most likely one). Depending on severity then surgery is the last resort. Otherwise, physiotherapy and pain management
+ MSmits: I see
+ Astrobytes: Can only speculate until the MRI, everything's hinging on the results
+ MSmits: yeah I imagine 
+ Astrobytes: Anyway, back to Oware endgames. Do you plan to try to create a book?
+ MSmits: not sure if I will actually use it. It's not that useful inside of CG I think
+ MSmits: could use it in a meta mcts though
+ MSmits: but I first want to see how hard it is to deal with the loops
+ Astrobytes: Yeah I was thinking that, could be your next long-term PC overheating project :P
+ MSmits: problem with using it inside of CG is that you wont go beyond 6-7 seeds
+ Astrobytes: Yep
+ Astrobytes: Seems to help out tric trac though
+ MSmits: Might not help him out at all, could just be his eval that is improving
+ MSmits: i've seen him high before
+ jacek: does he smoke? o.O
+ Astrobytes: Beat me to it jacek
+ MSmits: lol
+ Astrobytes: I think he said it was helpful
+ Astrobytes: The book, not smoking that is
+ MSmits: ah ok, then it;s a tradeoff between endgame book and opening book
+ jacek: i benefit from opening book
+ MSmits: maybe I'll do bothj
+ jacek: i created it months ago, might as well update it
+ MSmits: probably using half the size for one and half the size for the other is probably going to be better than either
+ Astrobytes: I'd be interested in the results
+ MSmits: I'm pretty sure an opening book here will wreck any opposition if I do it like i did it on uttt and yavalath. 
+ MSmits: (the cheesy way)
+ Astrobytes: It should wreak utter havoc with the NNs anyway
+ MSmits: yeah
+ Astrobytes: especially re curse's one I think
+ MSmits: just have to find their one mistake. They're already losing games so there are mistakes
+ MSmits: the best bots are easiest to counter because they play narrowly
+ MSmits: but writing a good opening book generator that makes use of transpositions in this game is not that easy
+ MSmits: you will want to combine results from gamestates with different scores, but same seed layout
+ MSmits: and different turns
+ Astrobytes: Yep. Nightmare
+ MSmits: dont think jacek does this, but it could be good even without this. I'd want to use these transpositions though... purist
+ Astrobytes: Definitely sounds like something you'd enjoy doing :P
+ MSmits: yes
+ Astrobytes: Well, ultimately the transpositions are pretty important
+ MSmits: it's hard to say, the game sure gives the impression that they are
+ jacek: well i use transpositions
+ jacek: but they are rarely happen in the beginning
+ MSmits: do you use transpositions with different scores
+ jacek: no
+ MSmits: you can do that if you, instead of keeping the winrate, keep the expected seedcount from the current position
+ MSmits: seedscore
+ MSmits: it's messy and hard to implement but possible
+ jacek: im doing alphabeta thing, not meta mcts
+ MSmits: hmm ok
+ MSmits: not sure how it would work in that case
+ MSmits: thats the drop out expansion stuff right?
+ jacek: yeah
+ jacek: though not exactly as described there. i dont understand the algo *.*
+ MSmits: i didnt get too much into it. I like meta mcts
+ Astrobytes: drop-out expansion?
+ Astrobytes: Is that the article thing on techio you did jacek?
+ MSmits: it's a way to do meta-minimax 
+ jacek: but i expand leaf based on their score - depth penalty. somewat like UCB
+ MSmits: best first search 
+ jacek: i wrote about meta mcts
+ MSmits: yeah I know
+ jacek: <a rel="nofollow" class="external free" href="https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/146939/eth-25905-02.pdf">https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/146939/eth-25905-02.pdf</a>
+ jacek: this is doe
+ Astrobytes: cool, thx
+ Astrobytes: Nice paper
+ jacek: hmm he deals with cycles on endgame i think?
+ MSmits: awari doesnt have cycles
+ MSmits: it has a rule to resolve loops
+ MSmits: thats why oware abapa is unsolvable
+ MSmits: you can resolve loops with unlimited cpu, but it might involve going to a depth of 200 or something in some cases
+ MSmits: it's kinda strange. the game has a tiny statespace but a giant tree complexity
+ MSmits: for awari, both of those are tiny
+ struct: Hello
+ MSmits: hi
+ Astrobytes: Hey
+ Astrobytes: good job getting Othello up and running so quickly
+ struct: Thanks, I still have some stuff done that I did not submit yet
+ struct: Now the flip doesnt go outside the square
+ jacek: phew
+ haukc: hi hooman
+ Uljahn: hi, Automaton2000's brother
+ Automaton2000: that is a problem for me
+ struct: Im not sure what time I set for Othello
+ struct: I might increase it though
+ struct: <a rel="nofollow" class="external free" href="https://i.imgur.com/boUZeai.png">https://i.imgur.com/boUZeai.png</a>
+ Astrobytes: Holy board size Batman
+ struct: Are tooltips needed?
+ MSmits: I think I speak for cegprakash when I say there should be a tooltip that reminds you to have fun
+ eulerscheZahl: huh?
+ MSmits: you missed that I guess&#160;:)
+ eulerscheZahl: i guess so too
+ MSmits: he was criticizing the statement earlier
+ MSmits: because it said the aim is to win&#160;:)
+ eulerscheZahl: ah, the default statement
+ MSmits: yes
+ Astrobytes: Cause he's like the *least* competitive guy on CG :P
+ jrke: any suggestion for PR2
+ Mr_Luc1f3r: Guys are there any challenges without graphics?
+ eulerscheZahl: there are puzzles without. but no multiplayer games
+ Mr_Luc1f3r: Nice.How can i find these kind of puzzles?
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/easy">https://www.codingame.com/training/easy</a>just open some. the community puzzles (with an author shown) are almost always without animations
+ Mr_Luc1f3r: Ok thanks
+ Astrobytes: jrke, not being funny but at a certain point you have to start trying to think of strategies by to improve by yourself. It's kinda the point
+ struct: Soon I get sued for porting games
+ struct: nice tomatoes top 5
+ tomatoes: :blush:
+ WINWINWIN: which multi tomatoes?
+ tomatoes: uttt
+ MSmits: gold?
+ WINWINWIN: Really well done! I thought that the only non NN in UTTT top 5 was MSmits
+ MSmits: no
+ MSmits: thats oware and it's top 3
+ MSmits: uttt has no succesful nn
+ MSmits: re curse made a nn that is good enough for legend though
+ WINWINWIN: Oh. So UTTT is only Minimax / MCTS?
+ MSmits: as far as i know, yes
+ MSmits: and it's mostly mcts variants, minimax is less succesful
+ MSmits: but some are in/near top 10
+ MSmits: it's notoriously hard to write a good eval for uttt which makes minimax worse than mcts at uttt
+ MSmits: oh wow, it's actually legend uttt rank 5
+ MSmits: that is really impressive tomatoes
+ WINWINWIN: Understandable, there is only 1 easy factor of how many boxes controled
+ MSmits: you can do 2 in a row and such
+ WINWINWIN: But 2 in a row is not always a win chance, so you have to evaluate the whole board right?
+ MSmits: I managed to get a working eval for early playout termination that is probably top 10 if i submitted it, but it is still weaker than just random
+ MSmits: WINWINWIN eval doesnt have to be perfect
+ MSmits: you can give 50 points for 2 in a row and 100 points for a won board
+ MSmits: or something like that
+ MSmits: oh i do of course mean unblocked 2
+ MSmits: otherwise it is useless
+ WINWINWIN: That would make sense, but it seems really hard to get an eval in which ties are uncommon
+ MSmits: with enough detail you can avoid tied scores
+ MSmits: but then your eval might be slow or wrong
+ WINWINWIN: Yes, slow is a major issue for a detailed eval
+ WINWINWIN: what depth do you reach?
+ MSmits: mcts doesnt have a fixed depth
+ WINWINWIN: I meant what depth do you normally reach
+ MSmits: i dont know what that means though
+ MSmits: mcts will have branches that go 5 deep and branches that go 20
+ Uljahn: what depth does you opening book has? :smirk:
+ Uljahn: *have
+ MSmits: between 3 and 40
+ struct: mcts is meant to reach end game
+ WINWINWIN: Sorry, I have a very basic understanding of MCTS and minimax
+ struct: right?
+ MSmits: ah mcts uses statistics to explore good branches deeper than other branches
+ Uljahn: with enough rollouts
+ tomatoes: minimax has depth. mcts no
+ MSmits: my opening book usually doesnt go deeper than 10-12
+ struct: But I know what he means
+ struct: I saw someone using mcts with fixed depth and eval
+ jacek: oO
+ Snef: how do you call a mcts with fixed depth and no rollout then&#160;?
+ MSmits: but i can make an exception when another player is using one, i will just force down a specific branch and go 40 deep if i want to 
+ MSmits: Snef by no rollout you mean no random sim?
+ Snef: yea only moves from nodes
+ MSmits: it's mostly just a UCB guided search, it's no longer mcts, even though i still refer to it as mcts also
+ MSmits: mc stands for monte carlo = random
+ MSmits: and there is no random so...
+ Snef: the first X moves are chosen randomly before applying ucb :p
+ MSmits: i dont do that in any bot
+ Snef: oh
+ MSmits: either I pick the first one I havent explored or i pick them all
+ MSmits: uttt i pick 1, yavalath, oware onitama I pick all
+ Snef: yea i do the same i explore unvisited first but i still do random for like first 100/200 iterations
+ MSmits: you can backprop the highest score of all chldren or an average, whatever works
+ MSmits: Snef maybe it works well I dunno, havent tried that much
+ Snef: 100 iterations won't change much anyway
+ MSmits: I see only one advantage to that and it might be a big advantage
+ MSmits: you do a lot less UCB
+ MSmits: but instead of random you might as well just iterate
+ MSmits: if you're doing that many
+ Snef: sure
+ MSmits: btw tomatoes is also using teclles heuristic
+ MSmits: it really does improve any bot
+ MSmits: teccles that is
+ Snef: but for mcts if one brach at depth 5 isn't promising you won't expand it right&#160;?
+ jacek: tickles
+ Snef: branch*
+ MSmits: probably not, depends on exploration parameter
+ MSmits: it's all automated anyway
+ Snef: yeah.. but i feel you can ignore branch that would be better at a deeper depth
+ MSmits: if you think your bot has that problem you need to raise your exploration parameter
+ MSmits: it's really just a matter of fitting the parameter
+ jacek: and i used to be 5 in uttt&#160;;(
+ Snef: i don't have this problem i don't have a real mcts yet :pit's just thoughts
+ MSmits: do you have an opening book there too?
+ MSmits: ah ok
+ jacek: just center and teccless stuff
+ MSmits: ah, good enough really
+ MSmits: I think my current leaderboard version has no opening book for player 2
+ MSmits: there's no point when everything solves as a loss, you're just making it easier for the other guy
+ jacek: you could at least choose furthest loss
+ jacek: or one with most visits, hoping he wont notice
+ struct: how many rollouts jacek?
+ MSmits: kar liso tried that, I have him solved between ply 25 and ply 40 and his bot is deterministic to ply 25 :P
+ Uljahn: btw karli so seems to be weak against the side opening
+ MSmits: Uljahn probably he is just strong against corner opening because that is where his book is
+ jacek: struct about 100k at first turn at 1s
+ struct: o.o
+ Uljahn: MSmits: yep
+ struct: ah ok 
+ struct: 1 s
+ struct: what about 2nd turn?
+ jacek: well 10k
+ Uljahn: are your rollouts that heavy?
+ MSmits: yeah... that seems really heavy
+ MSmits: esp. if you reach that high in the top 10
+ jacek: or just slow
+ MSmits: that wont cut it
+ jacek: well i have 1-ply check for win
+ MSmits: you wouldnt even be able to get into legend with that speed
+ MSmits: unless you did something else
+ jacek: and moves that can win small board are twice as likely chosen as others
+ jacek: i dont have any pool node or log table or other fancy optimizators
+ jacek: oh sh... which reminded me, i reuse tree in uttt
+ jacek: when in oware i dont
+ jacek: time for another submit in oware!
+ MSmits: hmm
+ Astrobytes: I can hardly wait
+ MSmits: yeah in uttt it does help to favor some kinds of moves
+ MSmits: never got it to work that well though
+ jacek: and how many rollouts do you have
+ MSmits: 90-130k on turn 2
+ MSmits: this is normal for top 10
+ jacek: oO
+ MSmits: re curse has more
+ Astrobytes: (65 trillion on first turn ofc)
+ jacek: or maybe we count rollouts differently
+ MSmits: maybe, i count it as a selection, expansion and  a single sim
+ MSmits: to end of game
+ jacek: so do i
+ jacek: hmm
+ jacek: so you say i could optimize it for 10x speed?
+ MSmits: depending on what you do, sure
+ MSmits: maybe your random rollout is just very good
+ jacek: my board has 10 bitboards
+ MSmits: my yavalath random rollout is super slow, but it makes it better
+ MSmits: i use 9 x uint16_t and 1x uint32_t
+ jacek: why uint32_t
+ MSmits: big board needs it
+ MSmits: needs 27 bit
+ MSmits: or was it 18
+ MSmits: anyways doesnt fit in 16
+ MSmits: miniboards do
+ jacek: actually how do you fit Xs and O in 16 o.O
+ Hjax: TIL scipy can run the Hungarian algorithm for me 
+ MSmits: 3^9  &lt;  2^16
+ jacek: youre using ternany?
+ MSmits: for some parts of the bot yes
+ MSmits: I use 3 different systems
+ jacek: oh my
+ MSmits: big board is binary
+ Astrobytes: bitboards, titboards and s**tboards
+ MSmits: opening book has a crazy coord system
+ MSmits: right call that the s**board
+ Uljahn: polar?
+ Astrobytes:&#160;;)
+ MSmits: It's a coordinate system that takes into account finished boards
+ MSmits: all finished boards where X wins have the same code
+ MSmits: because it doesnt matter what the board looks like
+ Uljahn: ah, sort of a mask
+ MSmits: it uses transpositions maximally, only 8692 possible boards out of 9^3 = 19863
+ MSmits: 3^9 that is
+ MSmits: i only use that to store opening books though
+ MSmits: because it's extremely slow
+ MSmits: also makes the whole board fit in 128 bit
+ Uljahn: and accounts for symmetry i guess
+ MSmits: yeah
+ Uljahn: that's nice
+ MSmits: it also does this:
+ MSmits: XX000.XX0
+ MSmits: X0000.XX0
+ MSmits: board looks different, but has the same future
+ struct: How are they equal?
+ jacek: why
+ MSmits: if X plays, X wins
+ MSmits: sorry
+ MSmits: draw
+ MSmits: if O plays, O wins
+ MSmits: so it's the same board
+ struct: if X plays in first he wins
+ MSmits: this is a miniboard
+ MSmits: i should have said that sry
+ MSmits: the two miniboards are identical
+ struct: ah right
+ struct: I see
+ MSmits: of course the overall board might be different, but thats encoded in other miniboards
+ MSmits: so the fact that there's an extra X in the first doesnt matter for the code for that particular miniboard
+ MSmits: there arent that many transpositions like that, but half of the possible boards are ended games and there are only 3 of those really... so plenty of possible  transpositions there
+ struct: Do you think opening books will be essential in Othello?
+ MSmits: but anyways, this is only useful for opening book, you would have to convert this to ternary or binary every time you needed to make a move
+ MSmits: more useful than it is in uttt, it's really not that useful in uttt
+ MSmits: in uttt, opening books work well vs opening books, if there was only one guy using them he would barely have any advantage
+ MSmits: in yavalath, their use is extreme because games can end so early
+ struct: yeah
+ struct: On some games it should be hard to implement though, like Yinsh
+ struct: Where starting positions are too many
+ MSmits: Yes, like Onitama as well
+ MSmits: and Bandas
+ jacek: you dont have book for onitama? O:
+ struct: Also there is no chains in Othello
+ MSmits: I dont, how would I use it?
+ MSmits: 300k starts
+ struct: I thought there was because I didn't read the rules
+ MSmits: I couldnt even do the first move for all starts :P
+ jacek: 131k possible card placements
+ MSmits: two possible players you can be
+ MSmits: 1 or 2, that doubles it
+ struct: Is it even worth to have opening book for 1 move?
+ MSmits: might be yeah
+ jacek: toad blacklisted those with 6 plies win
+ MSmits: but thats a handful, less than 1%
+ MSmits: opening books are useful for moves that seem almost equally good, but one of them is much better in the long term
+ MSmits: like in oware, the first move is useless in a book, because apparently, any search will find it
+ jacek: 5 is like 4 4 in uttt
+ MSmits: yeah
+ jacek: and 11 is only possible counter
+ MSmits: from what i read on solving awari there are 3 viable counters that lead to a solved draw
+ MSmits: but thats a slightly different game so who knows
+ jacek: no tric trac yet on othello leaderboard?
+ MSmits: maybe he's protesting
+ Astrobytes: lol
+ Astrobytes: jacek why are you timeout-ing a lot
+ jacek: which one
+ Astrobytes: Oware
+ jacek: which replay
+ Astrobytes: I watched quite a few
+ MSmits: did you just change your bot to keep the tree jacek?
+ MSmits: because thats dangerous in oware
+ jacek: yes
+ Astrobytes: Did you reset the parent
+ jacek: well it works most of the time
+ MSmits: you need to do a check at the beginning of your turn if you're nearing the end of your node pool
+ MSmits: if you are, reset the tree
+ jacek: i dont have node pool, so "shrug:
+ MSmits: then check the size of your dynamic node array so you dont hit 750 mb&#160;:)
+ struct: also I made first turn 2 sec and 100 ms following
+ Astrobytes: Yeah, if you don't reset the parent you'll be keeping the whole thing in memory
+ MSmits: happens in Bandas too
+ Astrobytes: oh, no node pool?
+ Astrobytes: How big is your Oware node pool MSmits?
+ MSmits: let me check
+ MSmits: const int NODE_MAX = 25000000;
+ Astrobytes: Do you use a lot of that?
+ MSmits: I think I use a lot when a game is long
+ Astrobytes: I've got 10000000 and don't run out
+ MSmits: nah, i think i usually use no more than 10 million
+ MSmits: but some games are weird
+ Astrobytes: I think the highest I saw was 8.5 or 9M
+ MSmits: let me check some games
+ jacek: too unstable, im gonna turn it off
+ jacek: im not sure if its memory issue or bug in code
+ Astrobytes: I reuse my tree and it's fine jacek
+ Astrobytes: brb, shopping arrived
+ MSmits: node index: 16303231
+ MSmits: I found this one after a few tries
+ MSmits: thats 16 million
+ Scarfield: Wow othello already a thing, nice work structo
+ MSmits: jacek how big is your node?
+ struct: tnaks
+ MSmits: and dont make it into a dirty joke :P
+ jacek: oh
+ MSmits: mine is 24 byte, so effectively 3x uint64_t
+ jacek: i know i could get rid of some
+ jacek: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/679cff36-7620-44ef-a0ae-7ffbd9a95b90">http://chat.codingame.com/pastebin/679cff36-7620-44ef-a0ae-7ffbd9a95b90</a>
+ jacek: and children
+ MSmits: wait, you have the list of children on the parent node?
+ jacek: vector&lt;MoveMcts*&gt; children;
+ MSmits: thats painful
+ MSmits: your node is 80 byte
+ MSmits: mine is 24byte... big difference
+ MSmits: and I even save the full boardstate on the node
+ jacek: so mine is bigger
+ jacek: ah yeah, i dont have bitboard
+ MSmits: this might be why you run out of memory, but as you say, could also be other bugs
+ MSmits: a trick you can use to shrink nodes is to use integer indices instead of pointers. Might be some small effect on speed, but your node will be 4 byte smaller for every pointer reduced in size
+ Scarfield: I started doing no. of children and pointer/index of first child, and have an array of the traversel down the tree, so no need for parent pointers at all&#160;:)
+ MSmits: oh yeah, no parent needed either
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/2a5dbb01-b3aa-4dd3-a195-e0b75552df6f">http://chat.codingame.com/pastebin/2a5dbb01-b3aa-4dd3-a195-e0b75552df6f</a>
+ MSmits: my oware node
+ struct: does board need to  be 64?
+ MSmits: i think i am the only one who uses 64
+ MSmits: it's really hard to squeeze it into 64
+ MSmits: because you need to use 5 bit per pit
+ MSmits: and that holds 31 seeds
+ MSmits: so I use the last 4 bit (60-63) for the overflow
+ MSmits: I do something similarly crazy in Onitama, where it is actually pretty useless to be that compact
+ MSmits: it's just fun for me to squeeze gamestates as small as possible. It would be more useful if I could actually use a transposition table or something, but most games apparently have no use for them&#160;:(
+ jacek: do you squeeze your students like that as well?
+ MSmits: you mean do I make comments during class that make them feel as small as possible?
+ MSmits: not sure, you'll have to ask them&#160;:)
+ MSmits: Nagrarok's bot is really amazing
+ MSmits: holding up after years
+ jacek: struct w00t? white starts?
+ struct: its reverse?
+ jacek: its othello, not reversi
+ jacek: starting position is good, but blacks start
+ struct: you right
+ struct: Ill fix it
+ struct: Ill change black chips owner to 0
+ jacek: and no one who has bot there didnt notice? :v
+ Snef: i know rules but i don't remember which color start :p
+ MSmits: Checkers is funny like that, it has red  pieces but it talks about W and B in input
+ darkhorse64: my bot is as usual rand()% actionCount
+ MSmits: I start every bot that way to test sim
+ MSmits: then you dont have to deal with mcts and all its annoyances
+ struct: I think I only needed to change 2 vars
+ struct: I think its fixed but ill try to be sure
+ darkhorse64: It'll take a few hours to get the engine ready
+ Snef: darkhorse64 to sim othello&#160;?
+ darkhorse64: The only thing a random bot may not test is when a player has no moves. Sure, I'll write a MCTS for it and bitboard to hell
+ MSmits: at least it's easy to bitboard, two 64 bit is about all you can do here
+ MSmits: maybe some lookups for checking whether you need to flip
+ Scarfield: (╯°□°）╯︵ ┻━┻
+ <b>**MSmits dodges</b></p><p><img src="/a/22238461634817" /> Scarfield: xD
+ darkhorse64: The only annoying thing is the no moves. It messes all my exploration and backpropagation code
+ MSmits: You can just make another node
+ MSmits: same state
+ struct: Should be fixed
+ struct: I dont know why its fixed
+ struct: butg it works
+ darkhorse64: There are some assumptions here and there that players alternate
+ Scarfield: yea black starts now
+ MSmits: well yeah, but if you make an extra node when you dont move, you still alternate
+ MSmits: it's a no-move node
+ MSmits: just save the gamestate on the node, then the game doesnt care about moves
+ MSmits: two nodes will just have the same gamestate and thats all
+ MSmits: except for who's turn it is obviously
+ darkhorse64: A "PASS" node. I have never played Othello. I don't know if it happens a lot. If ti does, it may be worth sparing the node and the traversal
+ Snef: darkhorse64 with random bots it nearly never happen, don't know with real bots
+ MSmits: You can create the node and then give it a UCT penalty
+ MSmits: -0,3 or so
+ MSmits: it only starts to be visited when other nodes have sufficient visitcounts
+ Scarfield: if neither player can move, the player with the most discs win, so not necessarily a bad thing
+ MSmits: and then it will quickly stop after a few visits, because its probably going to be bad
+ darkhorse64: Not sure if is bad. I know Othello can drastically change in a few moves. If there is a PASS node, it is single by design
+ MSmits: seems this is just something you can experiment with
+ MSmits: code the framework, make some parameters and test&#160;:)
+ Scarfield: hmm probably true, was just quoting the rules i just read&#160;:)
+ darkhorse64: You are absolutely right. The PASS node saves my current code but may impact performance. This is going to be a "squeeze water from stone" multi
+ darkhorse64: And then you'll write an opening book and rekt me
+ Scarfield: i guess the only way to have neither player being able to move, all the discs will have to be the same color, or no empty cells of course
+ struct: no, i havent tested this
+ MSmits: darkhorse64 that is also my guess, but I will try to rek people without an opening book first :P
+ struct: but I think there are more cases
+ struct: and I took that into account in referee
+ struct: imagine board was  like this011111111
+ MSmits: not sure when though, I will for sure do Othello within a week or two
+ struct: and 0 was the only piece that player 0 had
+ MSmits: I love this type of game
+ struct: he cant move
+ struct: neither cant player 1
+ MSmits: Btw darkhorse64, I was about to start breakthrough
+ MSmits: it's been pushed to nr 2 now :P
+ MSmits: structs fault
+ eulerscheZahl: the struggle of having too many games
+ MSmits: but they're all so much fun&#160;:)
+ darkhorse64: I failed badly on my own game. I picked the eval recommanded by Wanderer authors but my bot sucks
+ MSmits: EPT?
+ MSmits: depth 5 or something?
+ jacek: yes, they suck
+ jacek: you should refute their paper
+ darkhorse64: Yes, I wrote the bot just to test that
+ darkhorse64: depth 4
+ darkhorse64: I think it's my bot that sucks
+ MSmits: if you want to sink more time into it, there's a lot to try
+ MSmits: did you try lookups for local board layouts?
+ MSmits: also lookups for racing conditions
+ darkhorse64: Anyway, I have applied EPT with lot of success on Oware and Onitama. All in all, it has been useful. You mean consider samller areas to find "breakthroughs"&#160;?
+ darkhorse64: Or look for patterns that call for attack&#160;?
+ MSmits: from what I read it is good to give score to certain configurations of pawns
+ MSmits: yes patterns
+ RahilMavani: How much programming knowledge should I have for this platform on a scale of 1 to 10&#160;?
+ MSmits: also if a pawn is maybe 3 rows before the end, you can lookup whether it is unblockable
+ jacek: 2.137
+ MSmits: i think it's more like 2.146
+ RahilMavani: 2.137&#160;? Woah&#160;!!
+ darkhorse64: 3.151592654
+ MSmits: the dot is a decimal separator RahilMavani
+ darkhorse64: 3.14
+ MSmits: its not 2 thousand
+ RahilMavani: Are you guys answering my question&#160;?
+ MSmits: yeah
+ darkhorse64: joking a bit
+ MSmits: but RahilMavani, you just need to understand your language somewhat
+ MSmits: loops, functions, classes 
+ RahilMavani: Oh Okay
+ MSmits: start with easy puzzles
+ MSmits: you need to get the hang of the input/output structure
+ RahilMavani: Actually I have very basic knowledge of C
+ MSmits: then progressively try harder stuff
+ MSmits: I'd suggest you learn python 
+ RahilMavani: Working on Python and I stopped learning C
+ RahilMavani: Learning on SoloLearn
+ Scarfield: i can see you have solved the descent, so you should know enough to continue with other puzzles
+ Scarfield: also remember to have a look at the "What will i learn" and the external ressourses given for a puzzle before pressing "solve it"&#160;:)
+ RahilMavani: I know some loops
+ RahilMavani: I solved descent with some help of hints 
+ RahilMavani: Also needed some help from solution 
+ darkhorse64: From what I have seen, my BT bot suffers from the horizon effect and the large branching factor. When there is a pattern of attack involving sacrifices, it goes unnoticed. Pattern recognition would help a lot. That's beyod my current abilities
+ Scarfield: not many puzzles have hints (?) but the external ressources will help you getting an idea of the approach you need to solve a puzzle
+ RahilMavani: OKay
+ RahilMavani: Now I think I should learn python and then try my hands at this platform.
+ JackJohnson: Hi, does "Tower Dereference" only have one league?
+ jacek: yes
+ RahilMavani: Okay Guys&#160;!! Thanks for  your help
+ JackJohnson: oh, was wondering why it is so hard to get promoted, thx&#160;:)
+ RahilMavani: I will be back sooner as I complete my python.
+ jacek: complete python eh
+ RahilMavani:&#160;:) Sooner&#160;!!
+ RahilMavani: Is anyone present in sololearn
+ RahilMavani:&#160;?
+ jacek: im not :v
+ RahilMavani: Oh Okay
+ jacek: do you have some programming at school?
+ RahilMavani: Yes
+ RahilMavani: C
+ RahilMavani: C  - Programming
+ RahilMavani: It was on very basic level
+ struct: I can leave the coord system as it is right? 0-7
+ jacek: a think ah 1-8 is better
+ struct: ok I guess I can do that without breaking the current bots
+ struct: I would like a8 though
+ jacek: yea
+ darkhorse64: +1. Makes it more "professional"
+ darkhorse64: Break bots. It's a WIP
+ struct: ok
+ struct: So output and input will change, sorry
+ darkhorse64: No problem. I'll be first for a moment
+ Snef: input will change&#160;?
+ reCurse: And stdout will need to be base64 encoded
+ darkhorse64: x y to chess notation
+ jacek: and promotion
+ darkhorse64: no leagues, no promotion
+ Snef: both char or first char and second int struct
+ darkhorse64: a string&#160;?
+ struct: it will be a string
+ Snef: ok my code is ready tell me when it's live :p
+ jacek: you have working bot?
+ Snef: what do you mean by working bot&#160;?
+ darkhorse64: more than one liner bot 
+ jacek: no actions[random]
+ Snef: then yes
+ Snef: but still not smart at all
+ Snef: depth 0 with shitty eval is almost like random
+ struct: Should be updated
+ jacek: Exception in thread "main" java.util.InputMismatchException
+ jacek: when parsing legal actions from referee
+ struct: referee error?
+ struct: or java?
+ struct: because now stub changed
+ jacek: maybe i should refresh
+ struct: I see the error
+ jacek: yeah, refresh done
+ Astrobytes: thanks struct
+ Astrobytes: (for making that change)
+ struct: np
+ jacek: <a rel="nofollow" class="external free" href="https://i.imgur.com/1ddLjKh.png">https://i.imgur.com/1ddLjKh.png</a>
+ jacek: he says f7 is invalid. yet he sayd f5 as possible action
+ jacek: black to move
+ Astrobytes: lol, round the wrong way
+ struct: shit
+ struct: I had
+ Snef: yea just  saw a replay with same problem jacek
+ struct:  return Character.toString((char)(97 + y)) + "" + (x + 1);
+ struct: im dumb
+ jacek: struct youre just not accustomed to classes
+ struct: Should be fixed
+ jacek:&#160;:+1:
+ Snef: bye #1&#160;:(
+ struct: So for rest of UI I was thinking on puting players on left
+ struct: and the list of all moves on the right
+ eulerscheZahl: return Character.toString((char)(97 + y)) + "" + (x + 1);that's a weird coding style
+ jacek: like chess PGN?
+ Astrobytes: With a toggle to hide the list of moves?
+ Astrobytes: I mean, you already have the toggle buttons, don't think we need a hex viewer&#160;;)
+ struct: I forgot to remove those buttons :p
+ Scarfield: discs as hexes toggle ftw
+ Astrobytes: Othellex
+ Astrobytes: Othalath
+ eulerscheZahl: *Othexo
+ jacek: <a rel="nofollow" class="external free" href="https://alternatezone.com/electronics/images/hex3101.gif">https://alternatezone.com/electronics/images/hex3101.gif</a>
+ struct: Like this jacek
+ struct: <a rel="nofollow" class="external free" href="https://i.imgur.com/IdxaUGS.png">https://i.imgur.com/IdxaUGS.png</a>
+ jacek: mhm
+ struct: I guess it doesnt have much use
+ jacek: you could add how many discs user has
+ struct: yeah Ill add that
+ MSmits: not sure I dont still have bugs, but with 3 seeds I found at least one 75 depth loop :P
+ Astrobytes: lol wut
+ MSmits: It solves when it hits a repeated state
+ MSmits: apparently its possible to make 3 seeds go around and find 75 different states
+ Astrobytes: No I got that part, I was amazed at the 3 seeds and 75 states thing
+ MSmits: either that or I am still bugged
+ MSmits: 4 seeds is still calculating, depth 36 now
+ MSmits: it's basically stuck for a long time until it solves a few states and then it quickly finishes all of them
+ MSmits: because once you solve a state, you break other loops
+ Astrobytes: gotcha
+ MSmits: this reminds me of number shifting :P
+ Astrobytes: lol, I never did write a solver for that
+ Astrobytes: got to 60 or something by hand
+ MSmits: ah ok, yeah theres a hard one around 60
+ Astrobytes: Don't fancy doing this by hand
+ MSmits: err no, seems hard to play oware 
+ MSmits: seeds goin around
+ Astrobytes: Ah no, level 65
+ Astrobytes: (number shifting that is)
+ struct: oh well, I have no ideas for players ui
+ struct: Ill just do simple stuff
+ Astrobytes: Doesn't need to be all singing all dancing struct, simple, clean and informative
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/4209d670-0c00-4905-b21f-7663379b918f">http://chat.codingame.com/pastebin/4209d670-0c00-4905-b21f-7663379b918f</a>
+ struct: If you could navigate in the viewer by clicking the viewer I would add moves
+ struct: moves history*
+ MSmits: thats my endgame book up to a part of 4 seeds
+ MSmits: of course you need to decode the boardstate, but you can see it doesnt produce weird seedcounts
+ MSmits: so theres that
+ Astrobytes: nice
+ Astrobytes: Did you make a change when you submitted btw?
+ MSmits: thats just one of my versions with the sigmoid
+ MSmits: still trying to find one thats better than my other version
+ Astrobytes: It didn't seem as good as the previous bot
+ MSmits: really hard to say, it's in the ballpark
+ MSmits: <a rel="nofollow" class="external free" href="http://cgstats.magusgeek.com/app/multi-oware-abapa/msmits">http://cgstats.magusgeek.com/app/multi-oware-abapa/msmits</a>
+ MSmits: just weak to recurse
+ MSmits: but most of my versions are
+ MSmits: i have a rare few with 50% but they are worse vs others
+ Astrobytes: Maybe it was just my perception
+ Astrobytes: Can't beat either of them without losing hard to others
+ MSmits: its just bad statistics with so few games really
+ Astrobytes: *either of them well
+ MSmits: cant beat both of them and do that no
+ MSmits: i have versions that have 50% against everyone
+ MSmits: but thats very bad
+ Astrobytes: Just a wee bit
+ jacek: so you have endgame state and seeds score you can get right?
+ MSmits: yes
+ MSmits: if i encounter the same state twice, the branch is terminated with the current score
+ jacek: so what if there is 23-24, and endgame says its +2
+ MSmits: then p1 wins
+ jacek: hmm i was thinking of an example
+ MSmits: i ignore the time limit though
+ jacek: when you get good seed count, but opponent will win before that
+ MSmits: yeah I know it feels intuitive that previous score matters, but it really doesnt
+ MSmits: it's always best to get the maximum number of seeds out of the board
+ MSmits: just sometimes the max is not enough
+ jacek: so you set the game to endgame position and set scores to 0-0?
+ MSmits: yes
+ MSmits: i hope i have a bug though, either that or these loops are insanely hard to deal with
+ MSmits: still on 4 seeds
+ MSmits: running it in C# on debug mode, but still
+ jacek: how did you enumerate possible positions? sounds like postage stamp problem
+ Astrobytes: debug mode wtf
+ jacek: or number partition?
+ MSmits: i am still debugging
+ Astrobytes: lol
+ MSmits: sec
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/22b77820-dc55-4646-86e3-be213d8fd41b">http://chat.codingame.com/pastebin/22b77820-dc55-4646-86e3-be213d8fd41b</a>
+ MSmits: recursive
+ jacek: smitsi number partition
+ MSmits: the zero makes sure the previous player has at least one empty pit
+ MSmits: otherwise it's an impossible state
+ MSmits: ohhh
+ MSmits: I goofed there I think
+ MSmits: wait no
+ MSmits: I confused my ab solver with my state generator, state generator doesnt alternate players
+ MSmits: north houses are always player 2 in that case
+ jacek: still there cant be 6 zero houses
+ MSmits: why not, i can simply call that a loss or win
+ MSmits: it happens
+ MSmits: but it solves at depth 0
+ jacek: exactly
+ MSmits: i need all possible states because my 1 seed book depends on 0 seed book and 2 seed depends on 1 seed etc.
+ jacek: unless you want just to lookup the table anyway and dont bother
+ MSmits: Current seed count: 4Current max depth: 38Current max states: 1365Current solved states: 432
+ MSmits: I do it iteratively. Do all states depth 1, then all state depth 2 etc.
+ MSmits: it's been stuck at 432 states since depth 20 or something
+ MSmits: so these must all have massive loops
+ MSmits: and there I was worrying about how to fit 20 seed endgame books in memory :P
+ MSmits: still hoping I got bugs though
+ jacek: welp <a rel="nofollow" class="external free" href="https://cdn.discordapp.com/attachments/642051038257348648/720389289896181802/102564724_2377326155904068_2867471856047122041_n.png">https://cdn.discordapp.com/attachments/642051038257348648/720389289896181802/102564724_2377326155904068_2867471856047122041_n.png</a>
+ MSmits: lol
+ MSmits: mmh maybe I need to be smarter at my ab pruning
+ MSmits: i did -inf +inf, but with a maximum seed of 4 it is actually between -4 and +4
+ jacek: technically doesnt matter
+ MSmits: well if it can find a branch with +4, wont it keep looking in my case?
+ MSmits: it shouldnt, because it is already max
+ jacek: +4 is the upper bound, it takes place of +INF
+ MSmits: yes but what if beta becomes +4 and alpha is still +inf
+ jacek: hmm
+ MSmits: maybe I am too hazy on ab pruning though
+ jacek: then use meta mcts to solve :v
+ MSmits: in the end the mcts is just to guide, you're still doing minimax for the solver part, only without ab
+ MSmits: I think it would be several orders of magnitude slower
+ jacek: slower than debug?
+ MSmits: I mean if you're looking to prove a solved position where guiding isn't   that helpful, then mcts is really silly 
+ MSmits: currently trying release. It is a lot faster 
+ MSmits: but still having trouble with 4 seeds
+ MSmits: starting to see what they mean here:  <a rel="nofollow" class="external free" href="https://www.slideshare.net/XavierBlanvillain/abstract-oware-solutionxavierblanvillain120226">https://www.slideshare.net/XavierBlanvillain/abstract-oware-solutionxavierblanvillain120226</a>
+ jacek: and it only took it few hours on mediocre PC to prove that
+ MSmits: I dont get why a 2-seed loop solution would have to be entered manually though
+ MSmits: is my method wrong?
+ Astrobytes: Try using the results
+ MSmits: I assume an infinite loop is a tied score on the second occurrence of the state
+ jacek: what happens if 1 seed is on house 0 and the other on house 6?
+ jacek: wont it loop?
+ MSmits: yes it will
+ MSmits: but it will also repeat that state
+ MSmits: and my method will end up giving it 0 score
+ MSmits: I dont see why that would be wrong
+ DragonJ: how do you strip a string in python?
+ MSmits: if either player could get a higher score, it would have been free to exit the loop at any point
+ MSmits: so it doesnt seem to restrict anything
+ Astrobytes: Take it's clothes off DragonJ
+ jacek: string.strip()&#160;:?
+ WINWINWIN: DragonJ s.strip(char)
+ WINWINWIN: Or,
+ WINWINWIN: s.replace(char, <i>)</i>
+ Astrobytes: I strongly prefer my reply.
+ Astrobytes: Yes that seems correct btw MSmits
+ MSmits: why would a python be wearing a string anyway
+ WINWINWIN:&#160;:)
+ struct: Do you want the piece counter numbers to change at frame start
+ struct: or at end?
+ DragonJ: WINWINWIN thank you
+ struct: Should I add a tooltip for skip?
+ WINWINWIN: np DragonJ
+ struct: isnt called tooltip
+ struct: oh it is
+ struct: tooltip yeah
+ struct: Like the bar things in the viewer
+ Astrobytes: As in on the timeline? A tooltip appears when you mouseover the bars in the timeline
+ struct: yeah
+ struct: So its easier to spot skips
+ Astrobytes: could do I guess, best thing is to try it out and see
+ jacek: yeah, skip on timeline would be good
+ DonnySte: bucchiiiii
+ Astrobytes: Are you unwell?
+ DragonJ: I stripped the line in python but I still cant split or do any other string operations
+ Astrobytes: Why not?
+ DragonJ: I found a way around it but some reason I cant access library string
+ WINWINWIN: if you strip the line to remove spaces...
+ WINWINWIN: How will you split along space?
+ Astrobytes: Paste your code and tell us what you want to do
+ DragonJ: I made it work but I just wish I didnt have to bypass the issue
+ Astrobytes: Are you doing a puzzle? 
+ DragonJ: Fantastic Bits
+ DragonJ: and am having problems with bits...
+ Astrobytes: You know python?
+ DragonJ: a bit am learning it
+ Astrobytes: Don't start with FB then
+ Astrobytes: Any other languages?
+ DragonJ: know some java some c++ some javascript a little C
+ Astrobytes: Define *some*. Which do you know the best?
+ eulerscheZahl: if-else and for loopsenough to put it on your resumé
+ Astrobytes: :P
+ DragonJ: I probably know python best because I took a college course on it, but I still have a decent understanding of other languages
+ Astrobytes: You took a college course on python and never stripped or split strings? Bit odd.
+ DragonJ: I did but for some reason the codingame isnt letting me use the string libraries
+ Astrobytes: I assure you, everything works on here (well, the odd hiccup)
+ Astrobytes: paste the section of code that's giving you trouble and tell us what you wanna do
+ DragonJ: I started programming when I was like 6 but I still suck XD
+ Astrobytes: You shouldn't need any 'hacks' just to split a string
+ eulerscheZahl: at that age i couldn't even read :D
+ Astrobytes: I started around 5? But it was just copying my dad's BASIC from his textbook
+ eulerscheZahl: these days when software was shared by printing it :D
+ Astrobytes: Oh yeahhhh
+ Astrobytes: One wrong character...
+ DragonJ: I learned programming about the same time as english am still better at programming than english...
+ Astrobytes: Your English seems fine
+ Astrobytes: But you have a programming issue, so...
+ Astrobytes:&#160;:)
+ eulerscheZahl: that means he's really good at coding then
+ Astrobytes: lol
+ Gedzius: Yo has anyone done the Forest Fire thing
+ Gedzius: thanks for the help aprreciated
+ Astrobytes: If you have a question, please ask it
+ eulerscheZahl: i started ignoring these "who has solve problem X" questions completely. sometimes it's a follow-up question that i'm not in a mood to answer. too much risk :D
+ Astrobytes: I bite sometimes, sometimes I'll troll them and sometimes ignore. Totally mood/business dependent
+ struct: Hey anyone played Othello?
+ Astrobytes: Had to sort out j r k e a bit earlier, kept bugging me for how to win PR2 as he was out of ideas
+ eulerscheZahl: ah yeah, ignored that too a few times
+ eulerscheZahl: just asked what to do next, as if we knew what his current bot is doing
+ Astrobytes: Exactly.
+ Astrobytes: I told him there comes a time when you have to think for yourself
+ Astrobytes: Haven't heard anything since
+ jacek: struct as in real game?
+ Astrobytes: Btw eulerscheZahl, I love how that Forest Fire guy waited about 10s after asking before a sarcastic thank you. Kids have no patience these days :P
+ eulerscheZahl: and then disappeared completely
+ Astrobytes: :D
+ Astrobytes: Instant-gratification culture
+ struct: sorry jacek i was trolling
+ Astrobytes: :D
+ jacek: i see foxy on it
+ jacek: now wait for tt
+ Astrobytes: Indeed
+ struct: I got ui updated
+ struct: submiting
+ struct: I always forget to save intro replay
+ struct: ..
+ Scarfield: remember to update the default code btw&#160;:)
+ struct: What do you mean?
+ Scarfield: i hit restore default code, and it is stil x y and not a string for the actions
+ Scarfield: in c++ at least
+ struct: Do you have the right link?
+ struct: I just tried and it works
+ struct: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/demo/843257e808c280174462ae480c45d0629921f7">https://www.codingame.com/ide/demo/843257e808c280174462ae480c45d0629921f7</a>
+ Scarfield: oh, have been on the same page for a while probably not then
+ Scarfield: ah my bad
+ Astrobytes: Silly Duhfield
+ Astrobytes: :P
+ Scarfield: premium revoked
+ struct: i will add a + - pieces change in viewer I guess
+ struct: or not
+ struct: I don't think I will need to create images to explain this game
+ Scarfield: just link to a page with the rules for the game for people not knowing them by heart
+ Astrobytes: Yeah, 'detailed rules' or whatever
+ Scarfield: would be like explaining chess rules, might as well be a link&#160;:)
+ Astrobytes: Sorry, meant 'detailed rules'  as a link&#160;;)
+ Counterbalance: no rules so my first try is         cout &lt;&lt; actions[rand()&#160;% actions.size()] &lt;&lt; endl;
+ struct: yeah, statement takes more time than to write the referee
+ Counterbalance: yeah
+ Counterbalance: you're cranking out games at a high rate
+ Scarfield: You lose if:you mess up
+ Scarfield: what more does it have to say really :p
+ Astrobytes: struct is a Multi Machine Counterbalance
+ JBM: just write a good stub and refre to it
+ Astrobytes: "Put stones on the board. Win."
+ JBM: or at the very least, don't lose
+ JBM: that would be Bad
+ Scarfield: If you flip a full line of 6 pieces it should say BOOM Tetris
+ Astrobytes: "Put stones on the board. Don't lose. Losing is bad." - better?
+ Scarfield: missing M'kay
+ Astrobytes: Good point.
+ Astrobytes: Full statement; "Losing's bad, m'kayyy?"
+ Scarfield: a watermark of a sligtly darker green hexagon would be nice&#160;:)
+ Scarfield: perfect  Mr. Macstrobytes
+ Counterbalance: the rules as I deduce them from a replay are that you must place a stone next to an opponent's stone (or pass if that's impossible) and any opponent stones between that one and another one of your stones in a horizontal/diagonal line gets 'turned'. Is that the whole of it?
+ Scarfield: yea
+ Counterbalance: cool
+ Astrobytes: In a nutshell yeah
+ Scarfield: then the player with its pieces having the closests resemblance to a swastika wins of course
+ Counterbalance: that goes without saying
+ Astrobytes: ffs :P
+ Counterbalance: 8x8, nice optim potential
+ Astrobytes: Wait til he breaks out the fog of war boards
+ Counterbalance: and the 17x33 boards
+ jacek: 8.5x8.5
+ Scarfield: wrapping borders
+ struct: Where are the upvotes?
+ struct: I need my exp
+ eulerscheZahl: i upvoted already
+ Scarfield: +1
+ Astrobytes: The Harry Potter square, 64 3/4
+ struct: 120 exp 
+ struct: Yinsh got me 140 + 250 from approval
+ eulerscheZahl: space maze got me 880+250
+ struct: Not bad
+ eulerscheZahl: was pending for months
+ JBM: wouls have been so much more hadn't it been approved
+ struct: Yeah thats a nice idea
+ struct: Ill never leave WIP
+ struct: and farm upvotes forever
+ JBM: i'm kind of peaking on tvc
+ struct: I dont remember how many Yavalath had
+ struct: can anyone show me the contribution page?
+ struct: I dont have high enough level
+ Scarfield: There is a certain troll that would fit as an avatar JB, and im not talking about Shrek
+ JBM: tibo's off, here's the link for those who haven't upvoted^Wi mean tried it yet: <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/troll-vs-castles-brainstorm/184827">https://www.codingame.com/forum/t/troll-vs-castles-brainstorm/184827</a>
+ eulerscheZahl: 28 up 0 down
+ darkhorse64: <a rel="nofollow" class="external free" href="http://www.tedlandau.com/files/Othello-B%26B.pdf">http://www.tedlandau.com/files/Othello-B%26B.pdf</a> for concise rules with only one diagram
+ eulerscheZahl: top3 upvoted contributions afaik: space maze, bandas, 11-puzzle
+ struct: This seems nice
+ struct: <a rel="nofollow" class="external free" href="https://i.imgur.com/VJD944H.png">https://i.imgur.com/VJD944H.png</a>
+ struct: To see order of placement
+ struct: Should I  add it?
+ JBM: absolutely not
+ darkhorse64: In debug mode only
+ eulerscheZahl: looks messy. and there's something wrong with the image
+ eulerscheZahl: i mean it doesn't show the final board state
+ eulerscheZahl: you can see white is always even, black is odd
+ eulerscheZahl: so there is no flipping shown
+ Astrobytes: You need to use all the pages from that brief and concise guide struct
+ struct: I see
+ struct: Yeah, I will even add a tutorial how to code in the statement
+ darkhorse64: Page 1 is enough. The remaining pages must be read by the bot coders
+ JBM: i really don't think giving AI tips has any place in that kind of statement
+ JBM: just give the rules
+ darkhorse64: Make your life easier. Let us figure out the code
+ Astrobytes: Yeah, I thiiiink that was a troll&#160;;)
+ JBM: star trek &gt; star wars
+ Scarfield: ^
+ Astrobytes: That's truth tho'
+ jacek: stargate!
+ JBM: oops confused &gt; and &lt;
+ Scarfield: \\//
+ Scarfield: nooo
+ JBM: there you go
+ Scarfield: btw that was me trying with low effort to make the star trek hand sign thingy
+ Astrobytes: :star_trek_hand_sign_thingy:
+ Scarfield: xD
+ JBM: ezpz
+ Astrobytes: :vulcans_yo:
+ eulerscheZahl: starwhat?
+ Astrobytes: :live_long_and_prosper:
+ JBM: that bright thing in the night sky eZ
+ Astrobytes: stupid non-emoji making chat thing
+ MSmits: damn
+ MSmits: Current seed count: 4Current max depth: 343Current max states: 1365Current solved states: 570
+ Scarfield: loop de loop&#160;:)
+ Astrobytes: Three hundred and forty three you say
+ MSmits: I wonder if my search really goes 343 moves deep without finding duplicates
+ MSmits: there are enough unsolved states for it I guess
+ MSmits: and I guess also it is easy with 4 seeds to mix and match to all combinations
+ eulerscheZahl: $ factor 343343: 7 7 7
+ MSmits: Current seed count: 4Current max depth: 344Current max states: 1365Current solved states: 570
+ eulerscheZahl: $ factor 13651365: 3 5 7 13
+ MSmits: who turned euler into a bot?
+ eulerscheZahl: you like highly composite numbers, don't you?
+ MSmits: apparently :P
+ NightScap3: wtf
+ NightScap3: codingame &amp; kotlin = trash
+ NightScap3: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/report/1252320cd0e0d261e0649525c111bd9c22415ee">https://www.codingame.com/clashofcode/clash/report/1252320cd0e0d261e0649525c111bd9c22415ee</a>
+ NightScap3: my code is 100&#160;% right
+ NightScap3: and it tells me 0&#160;%
+ NightScap3: i've had all testcases right
+ jacek: hm?
+ MSmits: that's supposed to be &amp;&amp; I think
+ NightScap3: and it told me i got them wrong
+ MSmits: otherwise it's bitwise
+ Scarfield: lol
+ Scarfield: there are validaters, that are not the same as the test you see
+ NightScap3: it didn't even pass the testcases
+ darkhorse64: PIBCAC&#160;?
+ NightScap3: although it showed me in the output everything like the supposed output
+ struct: paste your code her
+ Scarfield: EPICAC?
+ struct: here*
+ NightScap3: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/bcdcd365-2833-4763-9e09-666e6991ce59">http://chat.codingame.com/pastebin/bcdcd365-2833-4763-9e09-666e6991ce59</a>
+ NightScap3: i've tried around too if the testcase wants some delimiter or reacts allergic to space
+ NightScap3: s
+ NightScap3: but didn't help
+ Uljahn: "it didn't even pass the testcases" :upside_down:
+ Uljahn: wth, Automaton2000
+ Automaton2000: and you should not have been a good idea
+ Astrobytes: Hover over my avatar NightScap3
+ struct: the last space before the \n probably messes it up
+ struct: it wants1 2\nnot1 2 \n
+ Counterbalance: or maybe for(i in 0..N) loops N+1 times
+ struct: LeRenard you have a search yet or random?
+ LeRenard: a search. I have retrieve my very old program
+ jacek: oh my
+ LeRenard: it is one of my first IA bot
+ Astrobytes: Setting the bar high before it's even published&#160;;)
+ LeRenard: I think 1990
+ struct: damn
+ Astrobytes: Nice
+ struct: your AI is older than me
+ Scarfield: but what has it learned in its lifetime :p
+ Astrobytes: lol, you young ones struct
+ struct: How do you save an AI for 30 years
+ struct: damn
+ LeRenard: because it is my first big program
+ LeRenard: in c/C++
+ Astrobytes: I like that you kept that&#160;:)
+ struct: <a rel="nofollow" class="external free" href="https://i.imgur.com/ZpDtEVQ.png">https://i.imgur.com/ZpDtEVQ.png</a>
+ struct: Seems strong
+ struct: lol
+ struct: poor jacek
+ Scarfield: oof
+ Astrobytes: lol
+ MSmits:&#160;:)
+ Astrobytes: gotta love that massive lose streak at the end of a submit&#160;:/
+ Astrobytes: FFS
+ Astrobytes: So close I was to catching darkhorse64
+ Scarfield: <a rel="nofollow" class="external free" href="https://prnt.sc/sy5cdp">https://prnt.sc/sy5cdp</a>
+ Scarfield: so close
+ Astrobytes: (Oware for me)
+ struct: 1 chip left not bad
+ darkhorse64: Wow. Near miss
+ Counterbalance: hit?
+ darkhorse64: Not yet
+ Astrobytes: I'm still coming for you. Soon
+ Illedan: Anyone has a link to dbdr's chatlog?
+ JBM: anyone know what happens to the rankings and which league the players are in (both in draft and published) when a game is updated?
+ struct: <a rel="nofollow" class="external free" href="https://cg.spdns.eu/wiki/Main_Page">https://cg.spdns.eu/wiki/Main_Page</a>
+ struct: <a rel="nofollow" class="external free" href="http://cg.spdns.eu/wiki/Chat:World/2020-06-05">http://cg.spdns.eu/wiki/Chat:World/2020-06-05</a>
+ struct: last update was on that date&#160;:/
+ JBM: is that what we pay for
+ struct: nothing happens jbm
+ JBM: not sufficient an answer
+ struct: you update the game
+ JBM: yes...?
+ struct: if no boss is added, it doesnt happen anything
+ JBM: ok
+ JBM: if boss is added?
+ struct: Boss will submit
+ struct: all players above it after submit is done will get promoted
+ JBM: and a new league will come to life
+ JBM: if boss is removed?
+ struct: Never tried
+ struct:&#160;:)
+ JBM: so we're not that clearly on "nothing" are we?
+ struct: yeah, I might try it though
+ Astrobytes: I think toad could clear that up, but ofc, clashing time schedules
+ JBM: ofc
+ struct: everytime this convo comes up toad is not here
+ JBM: if only there was a reference page to turn to
+ JBM: it's like, i don't do much tvc development during business hours
+ JBM: What A Surprise
+ Astrobytes: lol yeah
+ Astrobytes: It might be an idea to see if we can come up with a user wiki with info from discord and general tips etc from SDK users
+ Astrobytes: Other than the 'official documentation' for now I mean
+ Astrobytes: Maybe dbdr would accept that on his wiki page
+ struct: imo stuff that is very poorly documented is how to use custom modules
+ JBM: it's a wiki
+ JBM: it's an implied yes
+ Astrobytes: lol, fair point
+ Astrobytes: I've made a note of it, I'll float the idea on discord tomorrow if nobody does before me
+ Astrobytes: Since most community-game stuff is found there rather than the forum
+ JBM: well here we go <a rel="nofollow" class="external free" href="https://cg.spdns.eu/wiki/SDK-related_development">https://cg.spdns.eu/wiki/SDK-related_development</a>
+ dbdr: Astrobytes: it's a wiki, I don't need to approve it
+ JBM: thank you
+ dbdr: if you think you have useful info, just edit
+ Astrobytes: Cool ta, yeah JBM pointed that out :D
+ JBM: may i contribute a logo for the upper-left corner?
+ Astrobytes: Just need to get people to add useful information now
+ dbdr: sure JBM. logos/avatars are your forte, right?&#160;;)
+ JBM: you bet
+ JBM: coming right up
+ JBM: what pixel size?
+ JBM: not sure we need HD for that
+ dbdr: no idea
+ dbdr: whatever works&#160;:)
+ JBM: ill start in 720x720
+ dbdr: :D
+ Astrobytes: Alright, posted in the discord
+ dbdr: I see you don't believe there is much info to dosplay besides the logo
+ JBM: hey somedays i get the feeling i contributed *most* of that wiki
+ Astrobytes: :thinking:
+ Astrobytes: :D
+ dbdr: depends if you count the chat logs&#160;;)
+ JBM: those are teamwork
+ dbdr: meta
+ JBM: how's this <a rel="nofollow" class="external free" href="https://imgur.com/a/1372dNa">https://imgur.com/a/1372dNa</a>
+ JBM: if you scale down, be sure to use the pixellating kind
+ struct: Good
+ struct: I would pay you to do logo for Othello
+ Astrobytes: :rofl:
+ JBM: please do
+ Astrobytes: Epic JBM. Epic.
+ struct: JBM also i fixed the thing you mentioned yesterday
+ JBM: oh cool
+ Astrobytes: For those not on discord my post is thus: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/47bcc8e0-9ccd-4b41-8f6c-fd6b4dcfda0e">http://chat.codingame.com/pastebin/47bcc8e0-9ccd-4b41-8f6c-fd6b4dcfda0e</a>
+ darkhorse64: TvC style graphics but the kid that did it is younger
+ JBM: i added the pixellated 135*135 version below <a rel="nofollow" class="external free" href="https://imgur.com/70wQQmi">https://imgur.com/70wQQmi</a>
+ darkhorse64: JBM please don't. There are kids here
+ JBM: if they only knew the pixels...
+ pluieciel: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/2db18238-4ee2-45be-a44a-cb60d45bf93e">http://chat.codingame.com/pastebin/2db18238-4ee2-45be-a44a-cb60d45bf93e</a>
+ pluieciel: Hello, I am stucked at The Resistance for several days... is there anyone so kind to help? I'm trying with Clojure, but get 0 for the 4th test.
+ pluieciel: Thanks a lot in advance
+ JBM: your code is most likely doing too much work
+ pluieciel: 0 means too long time?
+ JBM: most likely
+ JBM: or wrong
+ JBM: where do you read that 0?
+ pluieciel: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/6eb2793f-f8da-4f67-8314-3a5364aaf6ca">http://chat.codingame.com/pastebin/6eb2793f-f8da-4f67-8314-3a5364aaf6ca</a>
+ JBM: ok ok plain wrong
+ pluieciel: when submit, can pass 2 3 4 6 7
+ JBM: if you don't pass 1, you may want to concentrate on that first
+ JBM: wait
+ JBM: do you even pass the tests?
+ pluieciel: test 1 2 3 passed
+ struct: I have to start statement
+ struct:&#160;:(
+ Astrobytes: Take a rest man, do it later
+ JBM: do it never
+ JBM: who needs a statement
+ JBM: we can't even have the html rendered properly before submitting
+ struct: it can be decent JBM
+ struct: you dont know about the statement.html JBM?
+ JBM: way more than I'd like
+ struct: <a rel="nofollow" class="external free" href="http://localhost:8888/statement.html">http://localhost:8888/statement.html</a>
+ JBM: it felt like i bumped into each and every one of its limitations
+ JBM: password?
+ struct: 123456
+ JBM: thx
+ JBM: funny how your pwd is all stars like mine
+ struct: I think its a chat feature
+ JBM: so yeah, i know about statement.hml, and the others htmls too
+ JBM: and no, that statement.html is really not "rendered properly"
+ struct: yeah its far from perfect
+ JBM: see <a rel="nofollow" class="external free" href="https://forum.codingame.com/t/misleading-html-in-the-sdk-skeleton/184828/8?u=jbm">https://forum.codingame.com/t/misleading-html-in-the-sdk-skeleton/184828/8?u=jbm</a> for my latest woes
+ JBM: it's like it's not even trying
+ JBM: statement.html and the IDE are two completely separate rendering pipelines
+ JBM: and i'm kind of offended one poses as the other
+ JBM: given i'm bumping in the differences one after the other without even trying
+ DragonJ: fantastic bits is a bit annoying XD
+ Dan4Life: Who knows how to use your own template code cuz the coode at the start is kinda stupid
+ Snef: The starter code is used to take input from the game you're playing and showing you how to output
+ Snef: of course it won't be smart
+ Dan4Life: I mean from Clash of Code
+ LelouchVC2: DAMMIT MOM I DONT WANT ANYMORE CORNFLAKES
+ jrke: sighs got rank 94 in PR2
+ sidinfinity: :atom:
+ sidinfinity: hello
+ sidinfinity: what problems are you guys doing
+ jrke: some are doing unofficial contest some other things
+ sidinfinity: ok
+ sidinfinity: what are you doing
+ jrke: unofficial contest
+ jrke: Platinum Rift 2
+ sidinfinity: ok nice

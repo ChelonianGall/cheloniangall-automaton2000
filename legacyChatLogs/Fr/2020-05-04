@@ -1,0 +1,661 @@
+ Stilgart: bonjour à tous, tortue à Automaton2000 et licorne à AutomatonNN
+ Automaton2000: pourquoi tu fais pas de mcts
+ AutomatonNN: pourquoi tu fais pas de starter&#160;?
+ Stilgart: au revoir à tous
+ <b>**Stilgart part faire un starter de mcts</b></p><p><img src="/a/29054906001010" /> Stilgart: (╯°□°）╯︵ ┻━┻
+ Stilgart: putains de notifs de clash de merde
+ nicola: Alshock, Python 2 est en train de disparaître de Debian.
+ Magus: et on le regrettera pas&#160;!
+ Magus: Salut tout le monde et Automaton2000
+ Automaton2000: tout le monde je bosse dans l'editeur integré
+ Nagatwin: Je sais plus trop qui en parlait pb4 dbdr Stilgart mais il semblerait que inline ait son utilité dans un code c++ sans 03 avec les progmas <a rel="nofollow" class="external free" href="https://forum.codingame.com/t/c-and-the-o3-compilation-flag/1670/15?u=nagatwin">https://forum.codingame.com/t/c-and-the-o3-compilation-flag/1670/15?u=nagatwin</a>
+ Nagatwin: pragmas
+ nicola: Et le suivant, c’est Python 3, Magus&#160;? :grin:
+ Magus: non python 
+ Magus: python 3 ça va
+ Magus: mais la cohabitation python2 + python3 .....
+ nicola: Oui.
+ nicola: Même ici, Python 2 a disparu.
+ JBM: enfin!
+ Stilgart: Nagatwin: on avait dit qu'il y avait un "pragma" pour forcer l'inline et que c'était à éviter, oui
+ Stilgart: pour rappel, l'OP voulait inline une fonction récursive&#160;:)
+ Nagatwin: Bah d'après ce commentaire, le pragma inline n'a pas du tout la même influence que d'inline une fonction
+ Stilgart: ça j'en sais rien
+ Nagatwin: Et le compilo ne lle fait pas du tout tout seul (par rapport à quand on compile en O3) et ça vaut le coup d'inline les fonctions
+ Alshock: Tiens d'ailleurs, j'ai une question à ce sujet. Si je compile avec `#pragma GCC optimize("Ofast")` ou si je rajoute -Ofast dans ma commande et que je débug, les comportements sont différents. Est-ce parce que mon pragma se chie dessus ou c'est juste qu'il évite de se lancer sur un -g3 -pg&#160;?
+ Stilgart: mon expérience c'est que forcer gcc a faire des choses, c'est souvent contre-productif
+ Nagatwin: (bon ofc, les récursives ça vaut pas le coup mais elles devraient etre ignorées)
+ Stilgart: -pg c'est pour du profiling non&#160;?
+ Nagatwin: ça le force pas, mais il va en ignorer si on le met pas
+ Alshock: disons que ça l'incite fortement
+ Alshock: c'est ce qu'on appelle forcer dans pas mal de cas
+ Nagatwin: Alshock le pragma c'est pas une option de compilation
+ Stilgart: Nagatwin: oui, et souvent il a raison
+ Nagatwin: Les comportements sont différents
+ Stilgart: ça coûte pas cher les appels de fonctions en 64 bits
+ Nagatwin: Stilgart oui mais pas dans le cas d'un O3 en pragma
+ Stilgart: le inline c'était très utile en 32 bits avec les arguments passés sur la pile
+ Magus: tu peux forcer le compilateur à inline une fonction oui
+ Alshock: @Nagatwin et donc le fait qu'avec un pragma Ofast inline il me laisse toutes mes fonctions alors que le Ofast de compilation les fusionne, c'est donc normal&#160;?
+ Magus: mais après le compilateur est censé savoir s'il faut inline ou pas.
+ Alshock: Dans ce cas merci beaucoup ça m'ôte une question épineuse du pied
+ Magus: par contre faites attention, si vous forcez trop de inline, vous pouvez timeout durant la compilation sur CG :D
+ Stilgart: aussi
+ Stilgart: sur ce, let's work
+ Alshock: C'est 3 secondes c'est ça&#160;?
+ Nagatwin: Alshock regarde le lien vers le commentaire que j'ai cité
+ Nagatwin: Magus bah visiblement avec les pragmas il ignore quelques steps 
+ Magus: J'ai pas dit que c'était avec les pragmas que tu le forçais
+ Magus: #define inline __attribute__((always_inline))
+ Magus: tiens
+ Nagatwin: Ui
+ Magus: tu peux forcer la main du compilo avec ça (enfin après t'es pas obligé de surcharger inline lui même hein :D )
+ Nagatwin: mais ça c'est méchant :p
+ Nagatwin: faut pas violenter les compilo
+ Alshock: de toute façon un vrai dev C++ n'utilise aucune option du compilo et génère directement de l'assembleur pour le serveur CG
+ Nagatwin: Pi se fait disqualifier des contests
+ Alshock: y a déjà eu des cas&#160;?
+ JBM: de l'assembleur bien commente, y'a pas de raison que ce soit mal vu
+ Magus: il y a déjà eu des bans de contest mais c'était pas de l'assembleur
+ Magus: c'était le binaire en base64
+ Magus: et ça rentre dans la catégorie "obfuscation de code"
+ Magus: pb4 s'est fait ban de je sais plus quel contest avec ça
+ Nagatwin: Ouais&#160;:/
+ Nagatwin: Ah j'ai enfin eu le fameux lucky submit sur CvZ
+ JBM: tu hardcodes pas?
+ Haashi: CvZ rng submit simulator
+ Haashi: o/
+ Nagatwin: Pas encore
+ Nagatwin: Mais je sens que c'est le step qui me manque pour monter
+ Nagatwin: ça sent le CMAES sur une simu locale a plein nez haha
+ Haashi: JBM les validateurs c'est les même que les tests&#160;??
+ Nagatwin: Non mais ils ont leak
+ JBM: je sais pas si ils ont leak publiquement, mais bon...
+ Haashi: pas bien ça&#160;:(
+ Magus: on les a mis sur un github
+ Magus: dbdr pour être précis
+ Magus: <a rel="nofollow" class="external free" href="https://github.com/dbdr/codingame-validators">https://github.com/dbdr/codingame-validators</a>
+ Magus: ah tiens y'a les validateurs de A*C j'avais pas vu :D
+ SeebOmega: ce que je me disait 
+ Magus: enfin je sais pas si c'est les vrais, mais j'ai les vrais dans un coin je peux comparer facilement
+ Haashi: simple curiosité, c'est obtenu que par du leak coté CG ça&#160;? ou alors il y a des gens qui s'amuse a bruteforce les validateurs pour obtenir des infos&#160;?
+ Magus: pour bilbo ils étaient publiques avant
+ Magus: puis codingame a décidé de les "cacher" sans jamais les changer
+ JBM: y'a des gens qui s'amusent
+ Magus: pour CvZ et A*C, des gens ont bruteforce
+ JBM: ca empeche pas les autres leaks, mais y'aura toujours des gens qui s'amusent
+ Haashi: force a eux :p
+ JBM: merci
+ Magus: ils sont bizarres les validateurs que euler a mis sur le github
+ Magus: enfin déjà il a mis des underscores pour les sauts de ligne, pourquoi pas
+ Magus: mais je comprend pas la série de lettre et de chiffres à la fin
+ Magus: c'est pas la syntaxe utilisée par le referee
+ Magus: ah ok j'ai compris
+ Magus: c'est pas les validateurs du referee, c'est les inputs qu'on reçoit
+ Alshock: N'empêche, à part en construisant petit à petit une chaîne hardcodée qui fait planter le test si elle correspond à l'input, j'arrive pas du tout à comprendre comment vous pouvez les récupérer ces tests
+ Alshock: (et je veux pas savoir, mais en même temps ça m'intrigue)
+ Magus: comme tu le viens de dire
+ Magus: en faisant planter le test
+ Alshock: mais ça doit être archi relou
+ Magus: pour CvZ je sais que Royale a faire par dichotomie pour valider la position une par une de héros, puis des humains, puis des zombies
+ Magus: c'est pas relou si tu automatises ça
+ Magus: (enfin avec le captcha maintenant, c'est plus chiant je suppose)
+ Alshock: Certes, mais c'est relou pour ton script
+ [CG]Thibaud: Alshock t'avais des soucis dans l'IDE avec le code agrandi&#160;?
+ [CG]Thibaud: je reprodis pasu
+ [CG]Thibaud: reproduis pas*
+ dbdr: Magus euler a fait bcp plus simple
+ dbdr: print l'input sur stderr, et ouvrir le replay pour le voir
+ Magus: ah ouai c'est vrai y'a toujours cette faille
+ dbdr: peut-etre plus maintenant
+ dbdr: pas sur
+ Magus: je reste toujours épaté que CG la laisse ouverte
+ dbdr: je suis pas sur qu'essayer de cacher les validateurs soit la bonne approche
+ dbdr: yaura tjrs une faille de toute façon
+ dbdr: juste plus chiant
+ dbdr: après si c'est un achievement des les extraires, ça peut se défendre aussi&#160;:)
+ Magus: perso je suis pour que les validateurs soient tous publiques. J'ai jamais compris le délire de les cacher
+ Magus: (pour les puzzles optims hein, pour les contests c'est une autre histoire)
+ Alshock: @[CG]Thibaud J'ai eu des cas où en mettant l'éditeur en grand il restait en taille fenêtrée dans une div à la bonne taille et une fois où en passant la fenêtre en fullscreen l'éditeur est resté à la même taille dans une div à la bonne taille. Mais je sais pas le reproduire et ça s'est corrigé avec quelques refresh.
+ dbdr: je crois qu'euler a eu le meme probleme non?
+ Alshock: C'est horrible à dire comme ça, j'ai un peu l'impression d'avoir fait une PR "hey I got a bug, plz fix!" et en même temps je sais pas trop ce que je devrais donner en plus comme données sans faire un report de bug officiel quelque part. Ah remarquez, y a un forcément endroit pour faire des reports officiels de bugs quelque part&#160;?
+ dbdr: ah non, c'était M*gus qui postait ton screenshot sur discord
+ dbdr: si c'est un truc pas urgent, je dirais un post sur le forum, Alshock
+ dbdr: ya meme une section pour ça je crois
+ Alshock: Je vais être honnête, le forum je sais y aller que quand je clique sur vos liens sinon je sais même pas où c'est sur le site :blush:
+ Alshock: il est beaucoup trop joyeux ce blush, c'est pas du tout la bonne emote xD
+ dbdr: faut pas etre dans l'IDE deja
+ dbdr: en haut à droite, les trois points verticaux
+ Alshock: Ah&#160;! Oh oui, la TAVERNE&#160;!
+ dbdr: il est bien caché
+ dbdr: la taverne c'est du quebecois?&#160;:)
+ dbdr: ou du kaamelott?
+ Alshock: C'est bien Codingame ça "Et pour le forum on utilise quel sybole&#160;?" - "Mets donc une CHOPPE DE BIÈRE&#160;! Comme ça ils cliqueront tous&#160;!" 
+ dbdr: j'ai pas la choppe de bière, elle est où l'option? :D
+ dbdr: h si
+ dbdr: dans le menu
+ Alshock: Bah, t'as quoi à gauche de "Forum" dans les trois petits points&#160;?
+ dbdr: oui oui
+ Alshock: yep, mais tu sais avec l'input lag du chat
+ dbdr: en fait je pense que les deux menus pourraient etre combinés
+ dbdr: ce serait plus découvrable
+ dbdr: ou alors un lien forum a coté de Get A Job&#160;:)
+ Alshock: Ouais ou alors mettre les "..." après get a job... Mais bon, l'UI c'est un métier et c'est pas le mien alors je laisse des gens compétents faire
+ Alshock: bordel arrête de me preshot x)
+ dbdr: :no_mouth:
+ dbdr: ça doit etre dans les cartons
+ dbdr: la quest map qui est en plans depuis deux ans, et oui, ils viennet de s'y mettre
+ dbdr: ce qui est cool d'ailleurs
+ Alshock: C'est quoi ça&#160;?
+ Alshock: on va avoir des séries de quêtes en mode RPG&#160;?
+ dbdr: qqch comme ça
+ dbdr: <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/codingames-home-rework/68840/13">https://www.codingame.com/forum/t/codingames-home-rework/68840/13</a>
+ Alshock: Je veux la quête de gwen la chialeuse insupportable de GW1
+ Alshock: Je viens de lire la proposition initiale de quête qui avait été faite... Je suis vraiment très nul en golf ou moins de 20 caractères sur power of thor c'est ULTRA vénère&#160;?
+ [CG]Thibaud: ok, merci pour les infos
+ Alshock: FF 75 (damn la vitesse des versions) sur ubuntu 18.euh, à jour 
+ Alshock: si ça peut avoir une incidence
+ Alshock: 18.04.4, ptêtre pas à jour en fait
+ dwarfie: tu veut mon package fait maison&#160;? il est pour debian mais au moins il est a jour :D
+ dbdr: firefox 75 c'est la version à jour
+ dbdr: <a rel="nofollow" class="external free" href="https://www.mozilla.org/en-US/firefox/releases/">https://www.mozilla.org/en-US/firefox/releases/</a>
+ dbdr: Alshock le record golf c'est 43 tous langages confondus
+ dbdr: donc je pense pas que le 20 reste, c'est un placeholder&#160;:)
+ dbdr: ou alors c'est voulu, il faut etre dev CG et acceder à la DB pour obtenir la quete :D
+ Zorg1: o/ tout le monde et les bots Automaton2000 &amp; AutomatonNN
+ Automaton2000: ah ouais je me suis fait avoir
+ AutomatonNN: voila un contest sur le chat windows&#160;:)
+ dbdr: j'essayais de comprendre sans avoir vu qui avait écrit :D
+ dbdr: #windows AutomatonNN?
+ AutomatonNN: bah si tu prends un temps de compil automatique peut-être
+ Zorg1:&#160;? :thinking:
+ dbdr: un jour un des zozos aura une idée de génie
+ Zorg1: bah vu certaines contribs de CoC je pense qu'ils peuvent faire facilement mieux&#160;;-)
+ Zorg1: Automaton2000 AutomatonNN une idée de CoC&#160;?
+ Automaton2000: je peux pas faire une simu
+ AutomatonNN: oui j'ai le bon rapport avec tortue 
+ Zorg1: oh oui AutomatonNN un coc avec une tortue logo qui fait de l'ASCII art&#160;:)
+ AutomatonNN: ou c'est pas trop compliqué de faire un truc de ce que moi je suis pas sur que tu as bien réussi&#160;:)
+ Zorg1: mine de rien ça peut être marrant ça, mais je sais pas si ça tiendra dans un CoC
+ Bob: amis des zozos et autres tortues
+ Bob: o/
+ Zorg1: \o bob
+ dbdr: \o
+ Alshock: \o
+ Alshock: On est très gênants alignés comme ça
+ Nagatwin: \o/
+ Nagatwin: Jsuis puni de submits sur CvZ
+ Nagatwin:&#160;:'(
+ Zorg1: à force de spam pusher ça devait arriver :p
+ Bob: je ne vois pas de quoi il est question :angel:
+ b0n5a1: o/
+ Zorg1: Saint Bob priez pour nous :innocent:
+ Zorg1: \o
+ Zorg1: bon surce je retourne à mes requêtes SQL
+ Zorg1: a+
+ JBM: vive les requetes SQL
+ Bob: comment es ta where JBM
+ JBM: ameliore ta NATURAL JOIN bob
+ leojean890: en COC perso j'ai même pas l'achievement "faire 10 CoC", pourtant ça ferait des XP faciles hehe
+ leojean890: j'ai préféré faire le KD de Bob
+ Bob: &lt;3
+ Bob: j'espère que ça t'a plu
+ leojean890: sympa comme multi ;P
+ leojean890: jsuis 9eme dans le 1v1 et dans l'autre, faudrait que j'essaye d'éviter de laisser des trous de 1 case pour moins defausser, ça pourrait aider (et mieux centrer le château)
+ Bob: wah je suis 3e en 1v1&#160;?
+ Bob: incroyab
+ leojean890: jt'ai bien poussé^^
+ leojean890: dans mes souvenirs:P
+ Bob: :D
+ Alshock: if (opponent == Bob) beAGentlemanAndConcede();
+ leojean890: au fait, on fait comment pour avoir l'agentID d'un boss&#160;? le test suivant ne marche pas. Magus&#160;? <a rel="nofollow" class="external free" href="http://cgstats.magusgeek.com/app/multi-cultist-wars/BOSS%201">http://cgstats.magusgeek.com/app/multi-cultist-wars/BOSS%201</a>
+ leojean890: Neumann&#160;?
+ JBM: joue contre lui dans l'ide et surveille le json?
+ Bob: ^
+ JBM: si t'es super motive, surveille depuis un peu avant encore pour voir comment l'IDE le determine
+ BlaiseEbuth: Yo tout l'monde&#160;! Automaton2000, AutomatonNN&#160;!
+ Automaton2000: on parle pas du fight club
+ AutomatonNN: tu as vu le dernier que tu as eu ton code de contest&#160;?
+ Alshock: Yo Blaise o/
+ JBM: sinon tu dois pouvoir l'extraire des last battles depuis les leaderboards
+ BlaiseEbuth: C'est vrai Automaton2000 
+ Automaton2000: ah oui c'est quand meme pas mal de choses
+ Bob: leojean890 quand tu fais un play, il y a les agentIds dans les paramètres de la requête play
+ JBM: helpful guy ob
+ JBM: *bob allo le lag
+ leojean890: JBM Bob thanks for the advice&#160;:)
+ Magus: leojean890: les boss n'ont pas de agentId
+ Magus: et je crois que CGBenchmark a prévu dans ses paramètres pour jouer contre les boss, faut lrie la doc
+ JBM: Personne ne lit la doc
+ JBM: c'est contre les Principes
+ BlaiseEbuth: Y'a pas de doc
+ leojean890: Ah ok thx Magus, le boss de OOC avait un agentID
+ BlaiseEbuth: C'est pas un truc genre -2 pour jouer contre le boss
+ Magus: ah ils ont des agentId maintenant&#160;?
+ Bob: salut Magus
+ Nagatwin: leojean890 en fait on a piqué l'agentID de l'IA qui est devenue boss au moment du passage
+ leojean890: dans OOC je pouvais le mettre
+ Magus: salut
+ Bob: tiens toi qui maitrises JS
+ leojean890: Nagatwin c pas con j'avoue
+ JBM: Personne ne maitrise JS
+ Bob: es-tu déjà tombé sur un Promise.all qui ne resolve pas alors que chaque promise dans le tableau resolve&#160;?
+ Nagatwin: Oula
+ Magus: eu
+ Magus: par définition ... non&#160;?
+ JBM: ca sonne classe comme pb presente comme ca
+ Nagatwin: ça parle en runique ici
+ JBM: j'aurais envie de repondre, de l'exterieur: *chaque*? comment en es-tu si sur?
+ Nagatwin: Jpense que c'est une option de compilation Bob
+ Bob: j'ai un tableau de 103 promise (techniquement c'est le résultat d'un map)
+ Bob: j'ai collé un console.log dans la résolution, j'ai bien les 103
+ Bob: j'ai collé un console.log dans le then du Promise.all autour, je l'ai pas
+ BlaiseEbuth: leojean890, je confirme le -2 pour le boss
+ Bob: j'ai aucune explication valable
+ Bob: -2 c'est l'AI par défaut
+ leojean890: ah ok thx Blaise
+ dbdr: l'IDE de CG utilise -2 pour le boss, de mémoire
+ dbdr: rien à voir avec cgbench
+ leojean890: ah ouais par défaut donc le boss sauf quand y'en a pas quoi&#160;:)
+ BlaiseEbuth: Quand tu es dans la dernière ligue oui, mais si il y'a un boss le -2 est pour lui
+ Bob: c'est ça
+ leojean890: yes, bon bah thanks
+ JBM: donc on peut pas faire de match contre le boss d'une autre ligue?
+ Bob: si tu le trouves dans le tableau, si
+ JBM: il a bien un agentId &gt;= 0 qq part?
+ dbdr: il a un vrai agentId aussi?
+ Bob: oui
+ JBM: ok
+ Bob: par exemple l'agent Id du boss 2 dans coders of the realm 1v1 c'est 2680047
+ dbdr: tu le trouve où?
+ JBM: dans les last battles j'imagine
+ Bob: ah non c'est pas le 1v1 c'est l'autre
+ JBM: de memoire, il est dans tous les json de replay
+ JBM: donc matches du #1 d'une ligue -&gt; hop
+ Bob: là j'ai fait un play et j'ai regardé le json des params de la requête
+ JBM: lag lag lag
+ Bob: mais oui ça doit être dans les last battle's aussi
+ Bob: j'ai des gros doigts
+ dbdr: du coup cgstats devrait pouvoir l'afficher
+ leojean890:  agentId: '-2' # Enemy agentId
+ leojean890: name: Boss 1 # Enemy name
+ leojean890: ça marche bien en effet avec cgbench
+ BlaiseEbuth: Genre je balance des infos non vérifiées... :unamused:
+ Alshock: ça jamais BlaiseEbuth mais à tout moment tu nous lâches une info que tu as bien testée comme étant fausse
+ BlaiseEbuth: :thinking:
+ leojean890: hehe:P:P
+ leojean890: juste j'étais pas sûr qu'il fallait les configurer exactement comme ça enfin l'emplacement du -2 ;P
+ Magus: Bob: t'aurais pas une promise qui se resolve 2 fois&#160;?
+ Magus: parce que de mémoire tu peux appeler le resolve 2 fois, ça plante pas, mais c'est undefined behavior
+ JBM: serieux
+ Magus: après ça dépend des Promise que tu utilises (les standard, bluebird, etc ...)
+ Bob: a priori non
+ Bob: et je suis sur les promise standard de Node
+ Bob: et je n'utilise que des then/return donc normalement j'ai pas de double resolve
+ Bob: je vais quand même vérifier le code que j'appelle, on sait jamais
+ Bob: là où ça devient mignon c'est que si je remplace cette section de code par un vieux for () { await + push } + return du tableau, là le premier await revient jamais
+ Bob: c'est le bug de l'espace
+ Alshock: need to see it all!
+ Bob: ah sa mère la pute en short bleu dans les orties du diable
+ Bob: elles résolvent vraiment pas toutes
+ BlaiseEbuth: C'est donc toi qui a appris ces cochoncetés à Automaton2000 
+ Automaton2000: j'ai une heuristique qui rentre dans le top de la ligue silver
+ Bob: je me suis laissé abuser parce que j'avias le log de toutes les dernières, mais il m'ne manque une poignée au début
+ Bob: ah mais tant mieux
+ Bob: (╯°□°）╯︵ ┻━┻
+ Bob: bon au moins la bonne nouvelle c'est que je ne suis pas fou
+ BlaiseEbuth: Ca reste à prouver
+ Bob: certes
+ Bob: du coup c'est Node qui n'est pas fou
+ Alshock: Ca non plus c'est pas sûr sûr
+ Alshock: enfin ça dépend du sens que tu donnes à "il est pas fou"
+ Bob: en tout cas il a pas décidé de juste faire nawak avec Promise.all
+ Bob: c'est une partie de mes promises dedans qui font nawak sauf que je l'avais pas vu
+ Stilgart: Bob fait dans la politique maintenant o_O
+ Bob: c'est ça
+ Bob: mes Promise n'engagent que les cons qui y croient
+ Bob: c'est-à-dire moi, essentiellement
+ Magus: Bob: je te cache pas que si Promise.all bug, ce serait assez épique
+ BlaiseEbuth: lel <a rel="nofollow" class="external free" href="https://metacpan.org/pod/Sex">https://metacpan.org/pod/Sex</a>
+ Bob: Magus&#160;: ben oui c'est aussi ce que je me disais
+ JBM: pour les AG c'est parfait
+ Bob: du coup je suis rassuré de voir que la merde n'est que chez nous
+ Bob: ça m'apprendra à troubleshooter correctement mes seaux de promise
+ JBM: 20 ans deja
+ BlaiseEbuth: Ouai...
+ JBM: ironique que l'auteur ait eu des emmerdes (a l'americaine) de justice pour crimes sexuels 15 and plus tard
+ BlaiseEbuth: Ah&#160;?
+ JBM: j'ai plus le detail en tete
+ JBM: j'ai jamais bien creuse vu que justement ca cause le probleme
+ JBM: mais c'etait un auteur connu/respecte de la communaute
+ JBM: et du jour au lendemain il s'est fait pourrir par les americains (de la commu)
+ JBM: alors que la justice en etait qu'aux soupcons
+ JBM: j'aime vraiment pas cet aspect de leur societe
+ BlaiseEbuth: Hmm...
+ JBM: oh, ou c'etait pour violence conjugale plutot ptet
+ JBM: <a rel="nofollow" class="external free" href="https://geekfeminism.wikia.org/wiki/Michael_Schwern_v._Noirin_Plunkett">https://geekfeminism.wikia.org/wiki/Michael_Schwern_v._Noirin_Plunkett</a>
+ JBM: justice par twitter interpose
+ JBM: On January 27th, 2014, Schwern filed a civil suit &lt;<a rel="nofollow" class="external free" href="http://www.archive.org/download/gov.uscourts.ord.115658/gov.uscourts.ord.115658.1.0.pdf">http://www.archive.org/download/gov.uscourts.ord.115658/gov.uscourts.ord.115658.1.0.pdf</a>&gt;  (PDF link), requesting $30M in damages based on his having "suffered  immediate, severe, and lasting damage to his professional, volunteer,  and social lives and to his reputation, together with profound emotional  harm."
+ JBM: effectivement, cette partie-la je l'ai observee au premier degre
+ BlaiseEbuth: Joyeux tout ça...
+ JBM:&#160;:/
+ Stilgart: "observée au premier degré"&#160;?
+ Stilgart: tu étais perliste à l'époque&#160;?
+ JBM: vu et entendu de mes yeux des gens propager des informations de nature a amoindrir sa reputation, son statut social etc, le tout avant prononciation d'une decision de justice
+ Stilgart: ok
+ Stilgart: c'est bien triste ces situations
+ JBM: qu'est-ce qui te dit que je le suis plus?
+ <b>**Stilgart ne regrette pas les forums de JVC</b></p><p><img src="/a/43354386183081" /> BlaiseEbuth: fix ton 15-18...
+ Stilgart: je sais pas comment s'est de nos jours, mais à l'époque c'était pas fixable
+ BlaiseEbuth: J'avoue...
+ Stilgart: après, j'y allais pas sur celui là
+ Stilgart: (j'ai du m'en prendre une paire dessus, par contre)
+ BlaiseEbuth: Ah&#160;? ^^ Je fréquentais pas les forums jvc. Ou alors en mode read only
+ Stilgart: j'étais modo sur d'autres forums généraux... donc des haîneux j'en ai créé&#160;:/
+ BlaiseEbuth: Ouai j'imagine...
+ Stilgart: (et pourtant, j'avais la partie calme...)
+ JBM: et t'as arrete de jouer?
+ Stilgart: non, j'ai commencé&#160;:)
+ Stilgart: le jeu vidéo c'est nettement plus fun
+ BlaiseEbuth: "De façon générale, un programmeur Perl est quelqu'un de bonne éducation (sinon il programmerait en Java)..."C'est bô
+ Stilgart: ce manque de respect...
+ Stilgart: il y a écrit "programmerait en java" quoi :p
+ Stilgart: tiens, j'ai tué la propal de magicien-d-oz on dirait
+ dwarfie: euh , pas sur
+ JBM: ca sort d'ou cte citation?
+ JBM: formation-perl.fr&#160;:-)
+ dbdr: Stilgart tu as vu? la quest map est en cours&#160;:)
+ BlaiseEbuth: Tu connais JBM&#160;?
+ BlaiseEbuth: Ah non lu trop vite. ^^
+ JBM: non, mais ca se google vite
+ JBM: l'auteur est raisonnablement (a l'echelle fr) connu
+ JBM: ah ben c'est le president en ce moment
+ Alshock: Macron a dit ça&#160;?
+ JBM: tu fumes
+ BlaiseEbuth: keskidi?
+ JBM: il dit java c'est pour les teubes
+ BlaiseEbuth: Bah pour le coup c'est bien vrai.
+ JBM: c'est toi qu'avais fait des tests cg enterprise recemment?
+ JBM: il notent toujours sur leurx 4 axes?
+ JBM: chais meme plus quoi... temps, taille, indentation, commentaires ou qqch du genre?
+ BlaiseEbuth: Ca fait quelques mois. Cette notation me dis rien...
+ JBM: y'a encore du qcm, ou plus que du code?
+ BlaiseEbuth: qcm et code
+ JBM: et c'est encore restreint a java et c++?
+ BlaiseEbuth: Je pense pas non. J'ai déjà bu passer du c,c#,js,sql,python et git
+ BlaiseEbuth: *vu
+ JBM: ah ok
+ JBM: ca progresse
+ JBM: c'est meugnon le blog CG "enterprise"
+ JBM: "How to choose an online coding interview tool"
+ JBM: "finalement CG c'est pas mal"
+ JBM: no shit sherlock
+ BlaiseEbuth: T'as des tests à faire passer&#160;?
+ JBM: non cette fois-ci c'est pour moi
+ BlaiseEbuth: Ah&#160;?
+ JBM: derniere fois que j'en ai fait passer via CG... ca s'appelait meme pas encore CG
+ JBM: je sais pas a quel point c'est bien vu de faire un "free trial" du cote recruteur pour aller lire les questions a l'avance
+ BlaiseEbuth: Z'ont pas à le savoir...
+ JBM: absolument
+ JBM: "demontre de grandes capacites d'adaptation et de pensee hors du cadre"
+ JBM: en combien de temps j'arrive a monter une fausse boite slovakistanaise?
+ JBM: puree le blog enterprise...
+ JBM: je veux dire, on se fout souvent du CM ici
+ JBM: et c'est vrai que l'anglaise comme la presentation est meilleure et plus fournie la-bas
+ JBM: mais alors le niveau de bullshit over 9000
+ JBM: ca fait peur
+ JBM: j'espere que c'est juste pour la SEO et que aucune HR se laisse vraiment influencer par ca
+ BlaiseEbuth: Tu es en train de me donner envie d'aller voir...
+ JBM: dsl
+ JBM: "What is the difference between DevOps and Agile?"
+ JBM: c'est trop beau je vais l'encadrer
+ Zorg1: laisse moi répondre à ça je suis en forme :p
+ JBM: exprime-toi!
+ dbdr: JBM tu as pensé que qqn de CG pouvait lire le chat? :D
+ JBM: meuh nan ca se saurait
+ JBM: (et alors?)
+ BlaiseEbuth: Et alors, on est pas en Russie...
+ dbdr: ^
+ Zorg1: pour ça y a MK
+ JBM: s'ils lisaient le chat ils aurait corrige les popups clash a la con et le resize de l'editeur
+ JBM: les HR qui savent pas "comment recruter devops et/ou tech" et qui consultent CG plutot que leurs equipes... elles ont des soucis plus graves que "c'est quoi le meilleur tool de filtrage des candidats"
+ dbdr: "What is the difference between DevOps and Agile?"euh... tout?
+ BlaiseEbuth: Bon je retrouve aucuns des mails contenant des liens de tests cg... Y'a tous les échanges autours, mais le message avec le lien est spécifiquement manquant... C'est louche...
+ dbdr: si ya tellement peu de rapport, autant demander la def de chque
+ Zorg1: non le truc c'est de répondre à la question avec encore plus de buzzWord
+ Zorg1: et demander la def d'un buzzWord c'est un manque de savoir vivre
+ dbdr: DevOps is to Agile what Banana is to ...
+ JBM: c'est vraiment pas inclusive
+ Zorg1: vais je te demander de me définir "paradigme"
+ dbdr: le truc qui change&#160;;)
+ JBM: paradigme, paradigme
+ JBM: est-ce que j'ai une gueule de paradigme?
+ dbdr: oui
+ BlaiseEbuth: Ah si j'en ai un.
+ dbdr: sauf que tu la montrer pas
+ BlaiseEbuth: Lien périmé.
+ JBM: tu veux voir mon gros paradigme?
+ Zorg1: "DevOps et Agilité s'inscrivent dans une démarche qualité où priment la satisfaction client décliné sur plusieurs axe du paradigme&#160;: UX, Blochain, deep learning, ... "
+ JBM: vive Zorg1
+ JBM: ESOD MUMIXAM!!!
+ Zorg1: \o/
+ BlaiseEbuth: Tu pourrais caler ITIL dedans
+ dbdr: we have a winner
+ b0n5a1: ha c'est toi le pipotron&#160;? ^^
+ Zorg1: :D
+ dbdr: JBM: il est pas encore 22 heures
+ JBM: flute
+ JBM: bon ce serait quand meme bienvenu que je fasse genre une petite cinquantaine de puzzles easy en C++17 pour me refaire la main
+ BlaiseEbuth: eviv bulgroz
+ dbdr: t'es censé attendre pour les propos lubriques
+ BlaiseEbuth: Bon cg for work t'as pas le droit de t'inscrire si t'as pas d'email pro.
+ b0n5a1: t'as qu'à dire que tu bosses chez yahoo ^^
+ BlaiseEbuth: Feinte: utiliser le vieu mail de l'école
+ b0n5a1: ou la poste
+ JBM: les noms de domaine .in sont a 2EUR je crois BlaiseEbuth
+ JBM: un email pro, c'est l'affaire de 10 min
+ BlaiseEbuth: Ouai bah l'adresse de l'école est passée. Donc je garde mes euros
+ JBM: lol
+ JBM: c'est juste gmail interdit quoi
+ BlaiseEbuth: outlook aussi, note
+ JBM: avec encore un peu de chance googlemail marche
+ dbdr: j'ai un domaine à 1 lettre
+ dbdr: si il a pas expiré
+ JBM: tu peux rediriger son MX vers ma fibre stp?
+ dbdr: done
+ Zorg1: un mail dans un .fr c'est un mail pro&#160;?
+ Zorg1: enfin ça peut passer comme
+ dbdr: non, les français sont des amateurs
+ JBM: BlaiseEbuth: et t'as acces direct a la campagne?
+ BlaiseEbuth: Ouai ouai
+ JBM: ou faut encore une vague validation humaine?
+ JBM: zomg
+ Zorg1: ah le fameux domaine à une lettre pour les golfs ...
+ Zorg1: 9 chars pour thor, on savait rire ...
+ JBM: c'est Beau
+ dbdr: mais où sont les neiges d'antant?
+ Zorg1: bon étrangement CG s'est réveillé sur ce coup là
+ dbdr: j'avais réflechi un moment si 8 était faisable
+ BlaiseEbuth: Azi, j'ai mis test senior et il me met "température" dans les problèmes. Avec 2à min de tb.
+ dbdr: mais je pense pas, sauf peut-etre à patcher un outil de base
+ JBM: whaaaaaa
+ BlaiseEbuth: *20
+ Zorg1: température pas mal ont du mal mine de rien
+ JBM: le parsing est mechant
+ JBM: enfin relativement parlant
+ Zorg1: faut quand même réfléchir un minimum
+ BlaiseEbuth: Ouai fin pour un dev senior...
+ JBM: qui connait pas la plateforme
+ JBM: et encore, on est en C-like
+ Zorg1: t'as un peu de tout sous l'appellation "dev senior"
+ dbdr: enfin si, tu fais une contrb à GNU, avec /usr/bin/ͱ qui résoud Thor
+ JBM: pour un dev senior JS, je lui tolere d'etre un peu largue au debut
+ dbdr: ça generait pas grand monde
+ b0n5a1: bin avec l'âge tu perd des capacités BlaiseEbuth, c'est pris en compte ^^
+ JBM: dbdr: ca se tente
+ BlaiseEbuth: Quand tu reçois un test, t'as un entrainement pour essayer la plateforme
+ dbdr: play the long game
+ dbdr: faut attendre 5 ans quie CG upgrade....
+ JBM: planque-le en easter egg a [
+ JBM: plus discret
+ dbdr: du coup c'est plus 1 char
+ JBM: ah oui mince
+ JBM: et puis entre nous
+ JBM: si qqun voit la solution bash en 1 char
+ JBM: il s'en trouvera pour la bf
+ dbdr: lol
+ Zorg1: m'ouais c'est un peu devenir ministre pour faire un jeu de mot pourri dans le JO ton truc
+ Zorg1: ah zut scroll
+ dbdr: unicode c'est grand...
+ JBM: ca passait encore
+ JBM: c'est grand, mais ca justifie d'aller jeter un oeil aux coreutils
+ JBM: ou le find -name .
+ dbdr: oui, plus malin que bf
+ BlaiseEbuth: Bon les questions par défaut sont bidons. Je vais voir la banque de questions
+ dbdr: sinon plus vicieux
+ dbdr: modifier openJDK pour rajouter un bug dans String.length()
+ JBM: tu veux la mort du prochain boeing sur la conscience?
+ dbdr: tu peux meme faire un score negatif du coup :D
+ BlaiseEbuth: Bon bah peu pas. Faut payer pour avoir des questions sérieuses... :grin:
+ dbdr: -2^31
+ dbdr: va bttre ça
+ JBM: ah, bien joue eux
+ JBM: payer combien?
+ Zorg1: y a JDK sur boeing maintenant&#160;?
+ dbdr: le score golf ultime
+ JBM: je dis ca au pif
+ JBM: mais bon c'est java
+ JBM: le bug va pas partir de lui-meme
+ BlaiseEbuth: 249€/mois pour l'offre de base
+ JBM: t'as les qcm BlaiseEbuth?
+ dbdr: suffit que ta backdoor sur String.length() soit super specifique
+ JBM: "suffit"
+ JBM: le monde te generera un meilleur idiot
+ dbdr: si ce n'est déjà fait
+ BlaiseEbuth: Bah non y'as les questions d'exemple, mais les autres sont masquées si tu payes pas.
+ dbdr: 22h, vous pouvez vous lacher
+ b0n5a1: heu...
+ Zorg1: je suis tout inhibé avec vos trucs
+ dbdr: lol
+ JBM: cte galere pour passer le captcha yandex
+ JBM: haha ca marche meme pas
+ b0n5a1: faut compter des bouteilles de vodka cachées dans le décor&#160;?
+ leojean890: test senior =&gt; "température" dans les problèmes =&gt; ça m'étonne pas, les tests d'algo des entreprises sont simples dans la plupart des cas et c'est pas vraiment de l'algo.. pour des postes de dev ils s'en foutent de l'algo dans la majorité des cas et dans le poste en question on en fait relativement peu.. enfin je dis, ça je généralise trop, mais il y a des exceptions&#160;!
+ JBM: mon premier j'ai eu un truc cyrillique qui pouvait totalement legit passer pour du latin
+ JBM: (DOMA)
+ JBM: bon le latin est pas passe
+ JBM: ensuite j'en ai eu un garanti cyrilliqur qu'il m'a refuse
+ JBM: je suppose qu'il y avait plus de texte cache ailleurs
+ JBM: le dernier etait dual, est est passe
+ leojean890: bcp de dev seniors compétents dans leur boulot ont pas fait d'algo du tout depuis l'école ;P
+ JBM: ah, mais...
+ leojean890: c'est loin d'être le besoin premier pour les boites
+ JBM: il suffit de *donner* une adresse mail, pas de "l'avoir"
+ b0n5a1: héhé
+ Zorg1: ah ils ne valident pas&#160;?
+ BlaiseEbuth: Ouai...
+ JBM: ah si
+ JBM: ah non
+ JBM: de toute maniere j'avais reussi a les feinter sur un gmail
+ Zorg1: si ça marche je suis dans le truc avec une adresse bidon
+ JBM: c'etait ah non pour ah non ils valident pas
+ JBM: ouais bon enfin je m'inquiete pas quoi lol
+ JBM: meme s'ils desactivent le copier-coller pour m'empecher de reprendre ma solution C++ de temperatures sans utiliser de point-virgule
+ JBM: j'arriverai peut-etre a en trouver une autre en moins de 20 minutes
+ Zorg1: ah le copier/coller est interdit&#160;?
+ JBM: interdictible
+ BlaiseEbuth: Tu peux l'interdire
+ JBM: c'est un reglage de la campagne
+ JBM: je maitrise trop firefox, ca me prendrait probablement moins de temps de me le reautoriser que de tricher autrement
+ JBM: ils ofrent une solution de webchat video!
+ JBM: j'aurais pas parie sur ca d'eux
+ JBM: bon allez, faut que je me couche plus tot qu'hier
+ Zorg1: après faut voir si ça lagge autant que le chat d'ici
+ JBM: comment es ton nuit a tous
+ BlaiseEbuth: 'nuit
+ Zorg1: bn
+ Boulet: bon bah nuit alors 
+ Boulet: qui va voir les licornes&#160;? 
+ Boulet: AutomatonNN? 
+ AutomatonNN: :sunglasses:
+ Boulet: :D
+ Boulet: Quel cachottier cet AutomatonNN&#160;!
+ AutomatonNN: :o
+ Zorg1: t'es en mode smiley AutomatonNN N
+ AutomatonNN: vous avez des conseils&#160;?
+ Boulet: Oui arreter de faire ton tombeur de licorne AutomatonNN
+ Boulet: \o Zorg1
+ AutomatonNN: ou non mais je suis pas sur que c'est pas trop compliqué de faire un truc de ce matin qui me fait un
+ Boulet: AutomatonNN&#160;!! tu sors 
+ AutomatonNN: vous pouvez tous repush un peu de contest avec un truc de base&#160;? 
+ Zorg1: o/ boulet
+ leojean890: Automaton2000 répond mieux je trouve hehehe
+ Automaton2000: tu es dur en affaire
+ leojean890: je sais, je sais, mais je te complimente&#160;;&lt;P
+ leojean890: Boulet tu tryhard la légende dans crystal rush finalement&#160;?:p
+ Boulet: non pas le temps pour le moment 
+ leojean890: moi je préfère faire mumuse sur les multis pas connus en ce moment :P
+ Zorg1: comme le très obscur "Cours Sans Basket"&#160;?
+ leojean890: cultist-wars 25.96 et le boss 27.38 et le 3eme a 25.36.. et le dernier point est hard je trouve&#160;:(
+ Zorg1: Courrir Sans But marche aussi&#160;;-)
+ leojean890: je ne connais pas ce très obscur&#160;!
+ b0n5a1: il courre, il roule, il est malin...
+ Zorg1: il n'amasse pas mousse
+ b0n5a1: encore un commencé et jamais fini ^^
+ leojean890: de quoi, cultist-wars&#160;?
+ b0n5a1: ha non, pas commencé lui
+ leojean890: crystal rush&#160;?
+ Zorg1: y en a un peu trop des multis ces derniers temps
+ b0n5a1: ha merde Zorg1...je pensais pas à CSB ^^
+ leojean890: mdr
+ leojean890: je les ai tous faits sauf 14
+ leojean890: j'en ai fait plus de 20-25 du coup je crois, j'ai pas le nb exact
+ leojean890: enfin certains plus approfondis que d'autres
+ b0n5a1: quand tu vois un jeu que tu prendrais bien et qu'il faut 50Go et qu'il t'en reste 65...
+ Zorg1: après tu peux désinstaller d'autres jeux
+ Zorg1: t'y joues quand même pas tous en paralléle
+ b0n5a1: déjà fait ^^
+ b0n5a1: ceux où j'ai 100% de succès et que je touche plus je les ai dégagés pour faire de la place
+ Zorg1: ah si t'as un portable c'est un peu casse noix pour installer un autre disque dur à l'intérieur
+ b0n5a1: voilà
+ b0n5a1: ha tien the room 1 et 2 ça libère 3go...faudra que je finisse le 3 ^^
+ b0n5a1: enfin le faire plutôt
+ Zorg1: ah le room 3 il me reste encore deux fins à debloquer
+ b0n5a1: j'ai juste fait chapitre 1 apparemment
+ Zorg1: après vu leur sauvegarde sur le cloud tu peux pas désinstall puis resinstall plus tard&#160;?
+ b0n5a1: bah c'est pas ceux là qui bouffe le max de place ça va
+ b0n5a1: c'est les 3/4 à 80 Go de data qui piquent un peu ^^
+ BigUP: un bon vieux disque de 14 To ...
+ BlaiseEbuth: Note pour le futur: CGEnhancer empêche la sortie console de fonctionner dans les puzzles solo.
+ leojean890: c'est quoi CGEnhancer&#160;? ;P
+ BigUP: a l'ancienne
+ b0n5a1: un plugin CG (type greasemonkey)
+ b0n5a1: ha non violentmonkey
+ b0n5a1: <a rel="nofollow" class="external free" href="https://github.com/Azkellas/cgenhancer">https://github.com/Azkellas/cgenhancer</a>
+ BigUP: ca me fait penser qu'a un moment, j'envisageait bien de me faire 1 script ou 2 pour agrandir la zone de debug
+ BlaiseEbuth: Un outil pour les contests. Qui permet entre autre de virer l'ide, de maximiser la console, de switch les adversaires dans l'ide, d'affronter des bots d'autres ligues, de renommer tes pushs, d'afficher les draws dans les replays, et pas mal d'autres trucs...
+ BigUP: ca à l'air pas mal&#160;;)
+ dbdr: BlaiseEbuth: les draws CG le fait maintenant
+ dbdr: #1 - #1
+ dbdr: renommer tes pushs =&gt; git&#160;;)
+ BlaiseEbuth: Ouai p'têt, mais cgenhancer c'est vieux
+ dbdr: pour la console oui et l'ide, oui c'est utile
+ dbdr: cgenhancer gere les branches?
+ dbdr: stash? rebase?&#160;;)
+ BlaiseEbuth: C'est plus dans l'idée: T'es dans l'ide tu fais des push/tune, tu peux renommer les push pour t'y retrouver. C'est pas du versioning
+ Alshock: Je fais quoi entre faire un MCTS qui marche correctement mais je sais pas ce qu'il me manque, ou tenter un NN foireux qui apprend par AG&#160;?
+ Alshock: Ouais j'en suis rendu à un point de CGPlaysAlshock parce qu'il sait plus trop ce qu'il fait
+ Alshock: Bientôt CG va mettre en place des polls rien que pour moi :P
+ Zorg1: ils sont étranges tes choix
+ Alshock: C'est pas sur les mêmes puzzles hein
+ Alshock: oups, j'ai une demi-heure de retard
+ Zorg1: tkt y a pas une activité frénétique sur le chat ...&#160;;-)
+ Alshock: je vais tenter le NN foireux :P
+ Alshock: quitte à se vautrer une fois de plus autant faire ça en beauté
+ dwarfie: automatonNN , fait gaffe , va y avoir de la concurrence&#160;;)
+ AutomatonNN: oui j'ai pas trop le meme probleme
+ Alshock: Ouais dis-le de suite que t'es mieux branlé
+ dwarfie: AutomatonNN ... qu'as tu a repondre a ca&#160;?
+ AutomatonNN: poser un contest sur ce contest je suis pas sur qu'il y ait beaucoup de temps de contest de contest 
+ Alshock: Alors là, dire que je vais réussir à faire moins bien... T_T
+ leojean890: cgenhancer ça parait cool avec votre description ;P

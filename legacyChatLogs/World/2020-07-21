@@ -1,0 +1,355 @@
+ RealJasomo: y'all should press share code more
+ fachryadhitya: hi
+ jacek: aww
+ fatboysticks: Hi, can someone tell me why it's important to have the mountain height if you just need the index? 
+ Uljahn: to compare and select the highest?
+ pedrosorio: best time ever
+ Dlx: and why can't I get to finish my code when the clash is over, come on... I bet 95% of people here care most about solving it, not really winning it... so unsatisfying that i copied my code and finished it in a  jupyter notebook lol
+ pedrosorio: that's pretty lame, they should let you go back
+ Dlx: yep..
+ pedrosorio: and run the test cases
+ Dlx: hello admin, fix it ;p
+ Dlx: I just staret codingame, it's pretty fun :D just bitchin about some minor stuff...
+ Dlx: isn't there a suggestion box here...
+ pedrosorio: submitted to early
+ Dlx: Also, best score/most tests passed should count, not randomly last test run or last code... and also, frigging warn 60 seconds left with red flashing&#160;:)
+ Dlx: Dang I'm doing this coding style for my next pair programming... will be working so fast and dirty on first pass that buddy will have no chanse to follow what I'm doing, just for fun, and then refactor refactor refactor after ;p
+ Uljahn: Automaton2000: fix it
+ Automaton2000: what if you could do a better job
+ Dlx: what, lol&#160;:)
+ fachryadhitya: :worried:
+ _Feri_: hi
+ Balki: hi
+ Balki: fatboysticks because 1 shot doesnt destroy the mountain entirely and you need to shoot the highest
+ MSmits: morning
+ MSmits: guys, I have an othello version that can take dbdr off nr 1 
+ MSmits: it just wont be me up there, but tric trac :P
+ dbdr: stats?
+ MSmits: 25% win vs you, 11% vs tric trac
+ dbdr: OK, what do you want MSmits?&#160;;)
+ dbdr: oh
+ MSmits: nothing, i am not submitting this :P
+ MSmits: its just funny
+ dbdr: I thought you were over 50% against me
+ MSmits: no
+ MSmits: but i can spam you down :P
+ dbdr: but I would just need to resub, no?
+ MSmits: yeah
+ MSmits: its often like that
+ dbdr: check what trictrac offers you&#160;;)
+ MSmits: lol
+ MSmits: i have no idea why btw, i just try to fit the params and these versions pop up
+ dbdr: right
+ MSmits: it also does 50% vs jacek which is ok, but does poorly vs Robo
+ dbdr: probably hits a blind spot
+ MSmits: yeah
+ dbdr: an opening bool would probably help with that
+ MSmits: win = true&#160;?
+ dbdr:&#160;?
+ MSmits: an opening bool
+ dbdr: book :D
+ MSmits: hehe
+ MSmits: yeah that would probably help yes
+ MSmits: how much space do you have left?
+ MSmits: opening books dont require that much space if you're selective with what you put in
+ dbdr: I could probably compress source more if needed
+ MSmits: ahh ok
+ dbdr: and yes, a targeted book would be small
+ whay: i love axis
+ MSmits: btw this does assume your error happens in the first 20 plies or so
+ dbdr: given my lead, I'm happier to have a compiled version ppl can test against
+ dbdr: indeed
+ dbdr: I've also looked at binary compression
+ whay: you
+ dbdr: interesting rabbit hole
+ MSmits: though it's not unlikely. My bot is not very good compared to yours so it should be making mistakes fairly soon
+ whay: you have boot?
+ MSmits: you probably wont even get near your mistake when you make a book, because you already exploit an earlier one of mine
+ MSmits: yeah compression is interesting
+ MSmits: I was looking at the EDAX eval and figuring out if i could compress that
+ MSmits: but its just a tad bit too large I think
+ dbdr: I was talking about compressing the executable
+ MSmits: ohh ok
+ MSmits: well you have to be able to decompress and run any other precalculation in 2 seconds right?
+ dbdr: right
+ dbdr: decompression is usually fast forCG-sizes, unless you go into NN type compression&#160;:)
+ MSmits: whats different about that?
+ dbdr: the (de)compressor is a NN
+ MSmits: ohh ok
+ dbdr: are you CG-vacationing?&#160;:)
+ whay: listen
+ whay: wait
+ MSmits: pretty much, i do have 2 things I have to do for work, but most of the time will be CG
+ whay: you can listen me
+ MSmits: I was on vacation last week
+ dbdr: I thought you were traveling
+ dbdr: ah ok
+ dbdr: that's why it took so long&#160;;)
+ MSmits: my wife tells me not to advertise it online because of burglary
+ MSmits: i was actually working on othello during my vacation :P
+ dbdr: :D
+ MSmits: most importantly I made stuff into AVX
+ whay: you have wife
+ dbdr: it's true your real life collides with C because of your students, right?
+ MSmits: with C?
+ dbdr: CG
+ MSmits: oh
+ MSmits: hmm rarely yes
+ MSmits: might happen more often in the future
+ dbdr: collisions with C are dangerous, because it does not have much safety features&#160;;)
+ MSmits: that's true I guess
+ MSmits: the students i get here are really not that type though
+ MSmits: CG is more used as an extracurricular activity
+ MSmits: since they're mostly not good enough to do stuff here
+ MSmits: it's funny, I had one student here a week or two ago that wasn't even in my CS class, I taught him physics
+ MSmits: he didn't pick CS because the previous curriculum seemed too easy for him
+ jacek: im still at figuring out what patterns would be useful
+ jacek: dbdr your 300k weights, those are NTuples?
+ MSmits: jacek why not look at edax
+ jacek: edax too complicated
+ whay: hi
+ MSmits: not really, there is 1 pattern you wont be able to fit
+ whay: hi
+ MSmits: you can fit 9-tuples, 10 is too much
+ MSmits: also edax has different eval for every ply
+ jacek: 3^9?
+ MSmits: just dont do that
+ whay: :angry:
+ MSmits: yeah jacek
+ MSmits: 3^9 bytes is doable
+ jacek: that would require fancy compression
+ MSmits: that's 10k characters
+ MSmits: fits
+ jacek: it has just one 3^9?
+ MSmits: one or two, not too many
+ jacek: is it 3x3 corner?
+ MSmits: think it might be yes
+ MSmits: eval.c is the file
+ MSmits: you can find out yourself
+ jacek: my preliminary results didnt show much gain
+ whay: msmits telle me
+ jacek: but perhaps i need to gib more training to it
+ MSmits: maybe
+ MSmits: how fast is your bot with that eval?
+ MSmits: how many states does it eval?
+ jacek: 30k evals per turn
+ jacek: 145ms
+ MSmits: ahh, so somewhere between Robo and mine
+ MSmits: kind of a halfway NN
+ jacek: 4 8x1 patterns, 16 lookups
+ jacek: + mobiility and frontiers
+ MSmits: Robo: 3k, you: 30k, me; 1 million
+ jacek: work smarter not faster
+ MSmits: exactly
+ MSmits: mobility and frontiers I tought is supposed to be replaced by your eval?
+ MSmits: thought
+ MSmits: i think edax does just his ntuples
+ jacek: it improved the strength
+ jacek: perhaps those see game as global and patterns are more local
+ MSmits: might be because the ntuples just arent trained enough, or the patterns not complicated enough
+ MSmits: could be your approach is best for CG
+ MSmits: limits
+ jacek: the perks of machine learning. you dont know if there is bug in the code, or just training framework is bad, or you need to tweak the hyperparameters or change the model whatsoever
+ MSmits: yeah that seems annoying
+ jacek: and i recall tdgammon gained strength too when they added mroe advanced features to the raw board network
+ MSmits: your argument about global vs local makes a lot of sense
+ MSmits: mobility especially
+ MSmits: because all it does is give you more choices
+ MSmits: i dunno about frontiers though, havent been able to make it work very well.
+ MSmits: i am refittign mobility now, will try frontiers after, it's at a low value
+ jacek: it works for me, it always gives quite big negative weight
+ MSmits: hmm ok
+ MSmits: it's at -100 now for me. With mobility at +900
+ MSmits: probably i just havent explored it enough
+ MSmits: it's probably heavily correlated with mobility also
+ MSmits: might need to fit them together
+ jacek: its -0.057, while mobility is +0.11
+ MSmits: ok so half the size
+ MSmits: will try that later
+ jacek: ymmv of course
+ MSmits: all the versions I get lately are mostly strong against you and Renard, weak against the rest. Maybe telling me this helps you :P
+ jacek: and yes, those 9 are 3x3 corners
+ MSmits: ahh ok
+ MSmits: the smaller ones may be of interest?
+ MSmits: the release section also has a dat file with actual fitted values if you can decipher it
+ jacek: could be, so far i dont have any diagonals
+ MSmits: you might have to pick ply 20 or 30 or so 
+ MSmits: because it is fitted by ply
+ MSmits: they use 16 bit values
+ MSmits: but the largest value is 2k something, so divide everything by 10.3 if i remember correctly
+ MSmits: assuming you use bytes
+ MSmits: I might have gone too far down this rabbit hole on my vacation :P
+ jacek: i fell in NN rabbit hole and i cant get out
+ YCS-Venom: me too&#160;:)
+ DanielWebb: Hey, does anyone know where I would report an issue with a puzzle? (one where the expected output is actually wrong for the input)
+ beyonik: why do my test cases keep expecting Nothing sometimes and other times they expect what I output
+ MSmits: low expectations?
+ MSmits: you obviously have a bug
+ beyonik: what bug
+ beyonik: how is it my fault
+ MSmits: and it can be many things
+ beyonik: that the test cases sometimes expect Nothing
+ beyonik: and other times they expect something
+ MSmits: i dont think they expected nothing, maybe your input/output is not synced?
+ MSmits: as in, you provide output when you havent gotten new input yet
+ MSmits: also, i dont know which puzzle or multi this is
+ Astrobytes: Or an extra newline, missing newline, one answer when multiple are expected, the list goes on...
+ MSmits: so its hard to comment
+ MSmits: what Astrobytes said
+ Astrobytes: But of course, it's the puzzle that has the bug. Clearly.
+ MSmits: thats probably it, something like that
+ beyonik: It surely wasn't newlines
+ beyonik: also they only expected one answer
+ beyonik: not multiple
+ MSmits: link the puzzle
+ beyonik: thing is I tried it for the first time, it didnt work, then I tried it again to see if I fixed my bug and it started just expecting "Nothing"
+ Astrobytes: Yes, it does that when your output is incorrect.
+ jacek: wooo another cat avatar
+ zjzoloo: :joy:
+ jacek: MSmits do you expand every children at once? as in, eval every children at once?
+ MSmits: I do yes
+ MSmits: That seems often better even when you do a full random rollout
+ MSmits: so it makes sense that it would be better for a quick eval also
+ jacek: so how do you count visits then
+ MSmits: visits += childCount
+ jacek: oh
+ MSmits: well you get the point
+ jacek: then in that case i have rather 300k games, not 30k
+ MSmits: ahh ok, that makes more sense if your eval is fast
+ MSmits: btw:
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/aa016d8e-4989-4f0e-be24-f7d2b5f77b83">http://chat.codingame.com/pastebin/aa016d8e-4989-4f0e-be24-f7d2b5f77b83</a>
+ MSmits: to be more precise
+ maddoggg: print("Hi")
+ daeun: hi
+ GoAsT: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/1302824921383d3b9f8e0b4d155c1451af12a69">https://www.codingame.com/clashofcode/clash/1302824921383d3b9f8e0b4d155c1451af12a69</a>
+ hoxy: hello
+ daeun: i'm korean
+ daeun: python is difficult
+ tomatoes: its sometimes weird, but not difficult
+ daeun: thank you. 
+ jrke: can anyone make me explain movement of ant in langton's ant?
+ itzblinkzy: share code please
+ jacek: oO
+ Illedan: jrke, I have no idea why you have such low time in SR&#160;:( But I heard others complained in other games too..
+ jrke: yeah dunno why i can use only 37-38ms 
+ jrke: there is bug in csb also maybe  i can use only 55-60ms in csb also&#160;:(
+ Illedan: I guess something CG did, added some weird overhead on the bots :shrug:
+ jacek: welcome scarfield
+ jrke: np i will manage something 
+ Crypticsy: hey is anyone here really really good in bash?
+ Scarfield: :wave:
+ jacek: is anyone ever good in bash?
+ Crypticsy: XD 
+ jrke: btw how much time you are using in SR illedian
+ Scarfield: the level just increased by a lot
+ Crypticsy: so one guy tried solving my Van Eck's sequence puzzle and pointed out that he couldn't pass the final test
+ Crypticsy: i tried myself but couldn't either
+ Crypticsy: would you give it a try and tell me if it is possible?
+ Crypticsy: (in bash)
+ Crypticsy: anyone?
+ Illedan: jrke, what do you mean by time? Time to create it? Time to play it myself?
+ jrke: i mean like im using 37-38ms.
+ Illedan: Ah, I use 35 ms
+ jrke: hmm
+ Illedan: My code usually converges way faster anyway..
+ jacek: java? maybe too long warmup or gc
+ wlesavo: Crypticsy the last one requires optimized performance, last test works fine
+ Crypticsy: so you solved it in bash?
+ wlesavo: oh, sry, didnt notice bash
+ Crypticsy: XD also i am the one who created it
+ wlesavo: oh lol
+ wlesavo: i need to learn reading at some point
+ Crypticsy: yeah and i need to learn to explain bettter
+ itfibonacci: start it man
+ itzblinkzy: SHARE YOUR CODE!!
+ ARatherLongUsername: prech itzblinkzy
+ Logiman09: What dis?
+ AbundantPuddle: Dis codingame.
+ _Akira_: how do you friend request someone?
+ pedrosorio: friends are just people you follow who also follow you afaik
+ macobo: stalker^2
+ dtinth: gets
+ dtinth: oops, the chat pops up while I am in CoC
+ dtinth: it moves the focus to the chat input, which is a bit unfortunate
+ AbundantPuddle: Yes, that has happened to me as well.
+ AbundantPuddle: I believe it is intentional to keep you on your toes.
+ macobo: Thanks for sharing the code, dtinth :bow: Learned a lot&#160;:)
+ whay: hi
+ whay: i have chanel
+ itzblinkzy: whay why you keep quitting clashes how will you learn
+ itzblinkzy: give it a try at least
+ whay: what do you mean
+ whay: :star_and_crescent:
+ whay: level up
+ jacek: :tada:
+ whay: thanx
+ whay: :hugging:
+ macobo: Woop, top 100 in CoC
+ jacek: good for you
+ Astrobytes: good submit for robo in Oware
+ eulerscheZahl: top 2500 in CoC :trophy:
+ dbdr: top NaN in CoC
+ eulerscheZahl: you didn't play a single clash?
+ dbdr: nope
+ dbdr: should I?
+ Astrobytes: Nah
+ eulerscheZahl: not much interesting content you are missing out
+ eulerscheZahl: except for the ascii value challenges
+ dbdr: it'll be needed for the quest map though
+ DomiKo: i wish there was no "shortest mode"
+ eulerscheZahl: i an live with a not completed quest map on my profile page
+ eulerscheZahl: an =&gt; can
+ Astrobytes: hacker.org had a quest map of sorts iirc
+ dbdr: it might block progress
+ dbdr: <a rel="nofollow" class="external free" href="https://forum.codingame.com/uploads/default/original/3X/4/6/46676874ed9d718c72e12a6767621d5c77c649d7.jpeg">https://forum.codingame.com/uploads/default/original/3X/4/6/46676874ed9d718c72e12a6767621d5c77c649d7.jpeg</a>
+ dbdr: not a Power User without CoC&#160;;)
+ dbdr: (that was a prototype, of course)
+ macobo: hacker.org was super fun, I guess it's dead though.
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://imgur.com/a/3T4w7IG">https://imgur.com/a/3T4w7IG</a>
+ eulerscheZahl: i miss hacker.org&#160;:(
+ eulerscheZahl: countless hours of challenges
+ dbdr: pretty
+ eulerscheZahl: i learned a lot of stuff there. like sending web requests or image manipulation
+ macobo: Spiral bits drives me mad still&#160;:)
+ eulerscheZahl: that one was quite easy for me, once i finally unlocked it :D
+ eulerscheZahl: define start cell. then always flood fill to find the next bit. expand from the center of that region to find the nearest interesting color of another bit
+ macobo: Doing that, the grainy image is providing headaches though&#160;:)
+ eulerscheZahl: <a rel="nofollow" class="external free" href="http://www.hacker.org/challenge/img/spiral3.png">http://www.hacker.org/challenge/img/spiral3.png</a>that was the crazy one :D
+ macobo: I think I'm off by ~20 bits or smth and too lazy to struggle through :D 
+ macobo: lol&#160;:)
+ eulerscheZahl: after spiral bits there are some more fun ones. like a zip file with 4800 small images. you have to assemble them together to a large image
+ eulerscheZahl: just to unlock a harder version with about 18k pieces
+ eulerscheZahl: but these puzzles were always easier for me than the obscure crypto/stegano ones
+ eulerscheZahl: <a rel="nofollow" class="external free" href="http://www.hacker.org/challenge/img/the-maths.png">http://www.hacker.org/challenge/img/the-maths.png</a>this one was cool too, having an extra twist after you solve the first part of it
+ oogabooga1: is there a tutorial/suggested reading/whatever to get started with the bots' programming games? I don't even know how to start!
+ JBM: just avoid csb
+ DomiKo: 1. pick the game2. do your best3. read forum
+ oogabooga1: ty, is there some suggested challenges to tackle on first? or I just choose randomly hoping I don't get stuck,lol
+ jacek: csb can be done with few ifs up to gold
+ pedrosorio: what is csb?
+ jacek: <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/bot-programming/coders-strike-back">https://www.codingame.com/multiplayer/bot-programming/coders-strike-back</a>
+ DomiKo: pick something you like
+ DomiKo: that would be the best choice
+ jacek: i.e. paper soccer :v
+ Astrobytes: Naturally :smirk:
+ pinarica: CSB is super fun!
+ jacek: O:
+ AbundantPuddle: Clever TNtube
+ TNtube:&#160;?
+ TNtube: Yes what&#160;?
+ AbundantPuddle: Your answer on the clash. It was clever.
+ TNtube: Thx 
+ TNtube: What was the exercice&#160;? 
+ TNtube: I forgoted it xD
+ SirTarragon: Is there a way to grab the opponents distance to his checkpoint for csb?
+ JakeCubes: how does and AND work?
+ SirTarragon: &amp;&amp; works as if (x1 == x2 AND y1 == y2) then when both x1 == x2 and y1 == y2 are true, then what's inside the if statement will run.
+ SirTarragon: Otherwise it won't.
+ SirTarragon: if(x1==x2 &amp;&amp; y1 == y2)
+ jrke: good mningor
+ jrke: *morning
+ SirTarragon: Ugh was just doing the Power of Thor Episode 1, was trying to figure out what was wrong. Just read that X, Y starts in the top left instead of bottom left so had to change some calculations around wooo
+ SirTarragon: Mainly flip alot of my newYs from += to -= and the opposite
+ jokzyz: yowhat is dn aioeverybody keeps talking about it
+ el19oc: deez nuts
+ jacek: hmm

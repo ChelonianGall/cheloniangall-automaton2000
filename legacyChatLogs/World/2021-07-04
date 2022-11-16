@@ -1,0 +1,601 @@
+ jacek: rick roll eh
+ jacek: oh my <a rel="nofollow" class="external free" href="https://www.taiwannews.com.tw/en/news/4239365">https://www.taiwannews.com.tw/en/news/4239365</a>
+ relay: :rabbit:
+ MSmits: With that article, and well.. you, I feel like I am learning a lot about the Polish&#160;:)
+ MSmits: that cactus though.. lol
+ MSmits: if anything was singing cocaine rap songs it would have to be a cactus like that
+ Marchete: ok, I'm getting Conv2D to work
+ Marchete: but it's painfully slow....
+ jacek: c4?
+ Marchete: any board with neighbours
+ Marchete: c4 first
+ Marchete: maybe spring challenge later
+ Marchete: I precalculate the output per each 1.0 input, and I keep that in a weight[totalInputs]
+ Marchete: so this way it's similar to a Dense layer
+ Marchete: output = bias + sum(inputVal * weight[inputindex])
+ Marchete: but, it's slow...
+ jfaixo: in which language Marchete&#160;?
+ jfaixo: I am not arrived at the "reimplement the feed forward" part of my journey, but I suppose one will want to look at SIMD optimized implementation
+ Marchete: C++
+ Marchete: and it has SIMD
+ jfaixo: ok&#160;:) long journey incoming&#160;! :D
+ jfaixo: just found that paper, i'll add it to me "to read" list&#160;: <a rel="nofollow" class="external free" href="https://arxiv.org/pdf/1808.05567.pdf">https://arxiv.org/pdf/1808.05567.pdf</a>,
+ jfaixo: my*
+ anton123401: Hello
+ Marchete: my Dense layers seems fast
+ Marchete: Conv2D isn't
+ KP56: my cpp clock tells me the code has been executed in 95ms, but i still get a timeout...
+ KP56: in UTTT
+ sprkrd: what are you measuring, wall or user time?
+ sprkrd: KP56 clock() or steady_clock::now()?
+ Chonapatc: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/5d33779d-01ea-4eaa-b62d-2a6fd1e37703">http://chat.codingame.com/pastebin/5d33779d-01ea-4eaa-b62d-2a6fd1e37703</a>
+ KP56: clock()
+ KP56: sprkrd
+ sprkrd: better use steady_clock::now()
+ sprkrd: I think CG measures real time, not CPU time
+ sprkrd: with real time measures you will be more conservative
+ KP56: ok
+ KP56: thanks
+ sprkrd: also some people recommend doing 90 ms or so... I've never cared for that, I want my full time budget of 100 ms and I don't get timeouts even if my function takes 100.something ms
+ sprkrd: but of course, you may have to consider doing 95 ms or 90 ms if that doesn't work for you
+ princess_of_zeal: I was wondering, if there is a C equivalent of steady_clock::now() or would you basically say that one should always use C++ over C for these problems?
+ sprkrd: there's an equivalent for C for measuring real time, of course, but I'd say it's platform dependent
+ sprkrd: I think gettimeofday is an option?
+ sprkrd: but that's just for unix-like systems
+ RoboStac: you probably want clock_gettime with CLOCK_MONOTONIC 
+ RoboStac: but yeah, theres not a standard way across platforms
+ sprkrd: yeah, I'd say clock_gettime is what you wanna go for
+ sprkrd: at least for CG
+ geppoz: well found another weird JS behaviour :D
+ princess_of_zeal: thanks! I basically hate C/C++ and I'm just using it because of performance&#160;;-) any chance Julia is coming to CG?
+ KatMan911: Stupid beginner question - can I turn off this chat and take it off my screen for good? I've just started, and the site insists on opening and showing me new things I'm not interested in.
+ sprkrd: You hate C/C++? You break my heart
+ geppoz: 3599627370496&gt;&gt;38 guess what says JS&#160;?
+ sprkrd: KatMan911 yup, append ?disableChat to the end of your URL, dunno why that option isn't more visible
+ geppoz: (it is inside the max integer declared 2^52)
+ princess_of_zeal: I guess I only hate C++, C is fine ...
+ sprkrd: I think I've been told that a few days ago (precisely by RoboStac, if my memory doesn't fail me&#160;:) )
+ sprkrd: princess_of_zeal My heart is still broken&#160;:(
+ KatMan911: sprkrd - thanks!
+ sprkrd: KatMan911 welcome
+ Marchete: I've finally added Convolutional 2D to my NN inference, but I think it's sloooooow. 14x slower than simple Dense
+ Marchete: <a rel="nofollow" class="external free" href="https://github.com/marchete/Mokka">https://github.com/marchete/Mokka</a>
+ JosephTheVibin: Hey, new here. How does the input work? Is it just a string with multiple lines&#160;?
+ KP56: in the puzzle description you get an information about what data you receive in input
+ KP56: if you are using python, input is a string you need to parse
+ MSmits: Marchete did you also add those performance improvements you found earlier (for simple dense networks)
+ MSmits: I think it was one hot optimization
+ HassanAli4651: can any one help me in this?
+ Marchete: yeah
+ MSmits: that's really cool, thanks for sharing that
+ Marchete: I precalc any conv per input
+ Marchete: so each inputs adds some weights to output
+ HassanAli4651: The game mode is REVERSE: You do not have access to the statement. You have to guess what to do by observing the following set of tests:
+ Marchete: if input ==0.0 it skips
+ Marchete: 1.0 is addition
+ Marchete: etc.
+ KP56: we cannot help you in COC since it would be cheating sorry
+ MSmits: makes sense
+ HassanAli4651: what
+ KP56: you are literally competing against other people
+ KP56: we cannot help you
+ MSmits: HassanAli4651 coc is competitive
+ Marchete: but maybe I'm doing something wrong
+ MSmits: if you want help, try doing practice puzzles
+ Marchete: anyways I'll plan to use it for a C4 bot
+ MSmits: Marchete probably everyone is doing something wrong and it's just a matter of degree&#160;:)
+ Marchete: what I have doubts it's how I can add/concatenate non grid inputs
+ Marchete: e.g. on spring I have the grid + external values
+ MSmits: i dont know enough to give you advice there
+ Marchete: those external values shouldn't go into conv
+ MSmits: ahh ok
+ MSmits: well you can skip the layer
+ Marchete: I guess adding it after the conv
+ MSmits: just pass it to the next layer unchanged
+ Marchete: I can't "break" things on c++ if tensorflow doesn't do the same
+ MSmits: maybe this eats into the simplicity of the keras model though..
+ Marchete: grid inputs -&gt; conv
+ Marchete: other inputs-&gt;dense
+ Marchete: then concatenate conv+dense
+ Marchete: and do a second dense on combined
+ Marchete: too messy :confused:
+ MSmits: mmh don't you just put everything through conv, but you mask the input thats supposed to go to dense, then everythign goes to dense, but you mask the conv input. You keep the process linear
+ Marchete: 2 inputs -&gt; concatenate-&gt;2 outputs
+ Marchete: I can have 2 inputs without any problem I guess
+ Marchete: inputs are just used when needed
+ MSmits: right
+ Marchete: I'll tell you once I work on C4
+ Marchete: Conv2D are messy
+ MSmits: sure
+ Marchete: I'm still not sure I implemented it 100% correct
+ Marchete: stride, paddings, kernel, etc etc
+ Marchete: but... it gives the same output as TF
+ MSmits: I'm not sure if C4 is the best place to do this
+ Marchete: just as expected
+ Marchete: why?
+ MSmits: because it's so close to being solved
+ MSmits: it's hard to beat non-NN's
+ Marchete: solved games are in fact better
+ Marchete: simpler to check if the best move is accurate
+ Marchete: if you mean it won't go high in leaderboards
+ Marchete: then well
+ MSmits: thats true, but you're sooner to think your bot failed when in fact it 's just beaten by brute force
+ Marchete: it's OK
+ MSmits: ah ok
+ Marchete: but it's good to test Conv2D
+ MSmits: well as long as you go in with that in mind it's fine i guess
+ Marchete: it has only grid2D inputs
+ Marchete: no score, sun or whatever
+ MSmits: well you have to know whose turn it is, unless you flip it, which you should
+ MSmits: then you lose that input requiremebnt
+ Marchete: I'll flip, as in oware
+ MSmits: good
+ Marchete: I just need what to do about steal
+ MSmits: oware can be done scoreless too
+ MSmits: but it's messy
+ Marchete: I hate oware with "passion"
+ Marchete: I don't want to touch it anymore
+ MSmits: hehe not me, I am indifferent to the game
+ Marchete: rules are cancer
+ MSmits: well that's only annoying when you need to write the sim, once thats done its np
+ Marchete: even Robo had some endgame issues until recently
+ MSmits: oh right, the last turn issue
+ Marchete: no, it's not
+ Marchete: you may think it's OK
+ Marchete: but maybe it's not
+ MSmits: mmh maybe
+ MSmits: but that's mostly due to the way it's implemented on CGT
+ MSmits: CG
+ MSmits: with the turn limit
+ MSmits: that makes it messy
+ Marchete: I needed to DL a lot of replays, parse them and validate vs my simulation
+ MSmits: for training I dont need it to be accurate
+ Marchete: C4 seems simple
+ MSmits: at least in regard to turn limit
+ Marchete: simulate(move)
+ Marchete: check if isEndgame()
+ Marchete: no other BS
+ MSmits: you don't have "turns left" as input right?
+ Marchete: no
+ MSmits: then for training, the sim doesnt need to be turn-sensitive
+ Marchete: this can be problematic
+ Marchete: but well
+ MSmits: well i've proved many times over that turnsleft matters a lot
+ MSmits: it gives different "best moveS"
+ MSmits: but the search can fix it
+ MSmits: if you go deep enough
+ MSmits: so for eval you probably dont need it
+ MSmits: also endgame book fixes part of it
+ Marchete: I think I don't go deep enough
+ MSmits: well at the end you may
+ Marchete: I've seen loops that at start seemed a good move
+ Marchete: and in the end it was a loss
+ Marchete: you know
+ Marchete: those cycles with low seeds
+ MSmits: yeah, it only needs +2 seeds or so and it's a loss. Since the game is near to or exactly solved as draw...
+ Marchete: that just rotates
+ MSmits: yes, but i solve those with endgame book if they are totalling &lt;= 9 seed
+ Marchete: I don't
+ MSmits: i have also seen the other NN's mess up there
+ MSmits: but usually they dont
+ MSmits: just sometimes
+ Marchete: mine does
+ Marchete: I waste first turn building up MCTS trees with visits
+ Marchete: to further turns
+ MSmits: is this jacekmax or ept btw?
+ MSmits: do you average or max?
+ Marchete: no, A0 like
+ Marchete: average
+ MSmits: thats ept i think
+ Marchete: similar
+ MSmits: well with policy i guess
+ MSmits: but the value is ept
+ MSmits: makes more sense to me
+ MSmits: I have to start using my 36 seed book still. It's pretty difficult to incorporate it in meta mcts book free
+ MSmits: turn free i mean
+ MSmits: my current meta mcts incorporates the turn
+ MSmits: but i will get loops now that select the same node
+ Marchete: will you do RL then?
+ MSmits: supervised yeah
+ MSmits: based on meta mcts 48-37, 36 seed book at 36-10
+ MSmits: the last 9 are unnecessary
+ MSmits: the hard part will mostly be what states to pick for training
+ MSmits: and in what proportion
+ MSmits: getting the values should be easy
+ Marchete: do you keep count of states?
+ Marchete: or visits
+ MSmits: in meta mcts the nodes will have visit counts yes
+ MSmits: the endgame book is just a list of all possible states with their values on perfect play
+ MSmits: (expected maximum seed score)
+ MSmits: it seems complicated that i have all the states, but they're not all states that would often occur in games
+ MSmits: so maybe I would have to randomly create games that select from the available states using some probability of picking worse moves
+ MSmits: even picking from endgame book this way, finishing games down to 9 seeds
+ Marchete: worse moves for what?
+ MSmits: for expected seed gain (player - opponent)
+ MSmits: so one move is 0, another is -2 etc.
+ MSmits: so 0 has the highest probability
+ MSmits: and then there's some decay for worse moves
+ MSmits: I eliminate score from the equation so it's all based on the maximum net seed gain
+ MSmits: I can use the network and just add player - opponent score to it
+ MSmits: because this represents the past gains
+ MSmits: in a sense this is what you guys are doing as well. You are using the score as input and this is combined in some way to maximize the score. Because that's all you're doing. Maximizing score = maximizing win probability
+ MSmits: i just take it out of the network and add it outside of it
+ Marchete: well
+ Marchete: my approach is different
+ MSmits: but you input score right?
+ Marchete: I don't have a solved game
+ MSmits: it has to evaluate the board so it has to combine the value for the score with the value of the board somehow
+ Marchete: if I had a "solved" game, I can just add a value 1/-1 and a policy with 1.0 on the best move
+ Marchete: and fully train that
+ MSmits: that might be worse in some way though
+ MSmits: not all wins are the same
+ MSmits: winning by +2 seeds should be less good than winning by +10 seeds
+ jacek: its kinda the same. we just dont have the luxury of perfect score
+ MSmits: no, but you dont want your bot to give away score
+ MSmits: otherwise it will weaken its position
+ MSmits: there has to be some gradual increase from worse states to best states
+ MSmits: well maybe the search can fix that because you average
+ MSmits: jacekmax wont do this though
+ MSmits: it's kinda like what re curse mentioned in his totozero bot, once it knew it lost, it stopped trying sometimes
+ MSmits: if it could somehow recognize the difference between states where he loses by a lot and states where he loses by a little, he could crawl back up
+ MSmits: the netscore-as-value thing can do this for you, at least in some games
+ MSmits: I have read papers  that said that this was worse in games like D&amp;B for example, but I think that conclusion does not translate to every other board game
+ jacek: d&amp;b is all or nothing
+ MSmits: yeah, the nim game is central
+ MSmits: with some exceptions for games that are close
+ MSmits: I think score also doesnt work as a good evaluator in othello, since the score flips so much during the game
+ MSmits: pretty meaningless
+ stivens: Hi. Do you have any idea why Im getting such error when uploading contribution? """parse error: Invalid numeric literal at line 1, column 10Generated id: """. As you can see, this error message is kinda useless&#160;:/. Full log: <a rel="nofollow" class="external free" href="https://pastebin.com/HgmsLRuK">https://pastebin.com/HgmsLRuK</a>
+ BlaiseEbuth: So. Have you checked the 10th column of the first line&#160;?
+ stivens: Of which file? XDD
+ stivens: Error doesnt specify that
+ BlaiseEbuth: Don't know. But you don't have so much file (I speak of the files you writed/edited), and one position to check in once...
+ BlaiseEbuth: *each not once
+ BlaiseEbuth: I'm tired...
+ stivens: I think my files are ok. The game works fine in my local machine
+ BlaiseEbuth: Random guess: What about your stub generator file&#160;?
+ stivens: stub.txt:1 "gameloop"
+ BlaiseEbuth: That's all&#160;? Nothing else in the file&#160;?
+ stivens: its the first line
+ stivens: "parse error: Invalid numeric literal at line 1, column 10Generated id:"
+ stivens: <a rel="nofollow" class="external free" href="https://pastebin.com/kMW0FtkF">https://pastebin.com/kMW0FtkF</a>
+ JohnyDaison: could it be windows vs linux line endings?
+ stivens: Which one is prefered? \n or \r\n?
+ BlaiseEbuth: The site environment is on Linux
+ TipuTare: while True: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/95880944-9aa4-495c-980b-f4e9483ba9ee">http://chat.codingame.com/pastebin/95880944-9aa4-495c-980b-f4e9483ba9ee</a>
+ TipuTare: whats wrong with this
+ TipuTare: code
+ BlaiseEbuth: Your attitude?
+ TipuTare: sorry
+ TipuTare: but can you tell me
+ stivens: Im Linux user so there should be \n encoding
+ stivens: Ill check it for sure
+ BlaiseEbuth: Perhaps the problem isn't that, or even not in that file. That was just an idea since the stub isn't needed when you run locally...
+ stivens: od -c stub.txt 0000000   g   a   m   e   l   o   o   p  \n  \n   r   e   a   d       n
+ JohnyDaison: TipuTare your question is not specific enough. What do you want it to do and what is it doing?
+ stivens: second line is empty, thats why there is \n \n. But there is no \r character
+ TipuTare: well
+ TipuTare: its the puzzle pwoer of thor episode 1
+ BlaiseEbuth: So that's not the problem...
+ TipuTare: it needs to get to  a specific location
+ TipuTare: but in test case number 2 its going down instead of up
+ JohnyDaison: Well, does y increase in south direction or in north direction?
+ TipuTare: it goes south instead of north
+ jacek: because you print S instead of N?
+ BlaiseEbuth: :o
+ jacek: and you have something like initial_ty = initial_tx - 1
+ jacek: is this alright?
+ TipuTare: i messed the ifs
+ TipuTare: it should be &lt; 0 to go south
+ jacek: thats not the only problem
+ BlaiseEbuth: Right. It's in python
+ sprkrd: Yo TipuTare, check lines 3-4
+ TipuTare: ithose do nothing
+ TipuTare: i fixed the code
+ sprkrd: what? lines 3-4 In your pastebin
+ jacek: :tada:
+ sprkrd: I don't have access to your IDE code :joy:
+ sprkrd: good then
+ ValidityFail: Hello, everyojnen
+ whylikethat: hello fren
+ ValidityFail: Is it possible to save a puzzle error output to a file?
+ sprkrd: ValidityFail Not that I know. Why do you want to do that? Is the error so long that it doesn't show completely in the IDE?
+ ValidityFail: yea
+ TipuTare: hey
+ TipuTare: i got a problem with a code can someone help me?
+ ValidityFail: sure
+ BlaiseEbuth: Change of language, or don't make error.
+ whylikethat: try searching the error that you have without the stuff you cant see
+ TipuTare: while True: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/99122b5a-3dc0-42d2-b1bc-0dadfc92b1db">http://chat.codingame.com/pastebin/99122b5a-3dc0-42d2-b1bc-0dadfc92b1db</a>
+ sprkrd: ValidityFail no idea, then, sowwy, you'll have to circumvent that and work with what you see&#160;:(
+ TipuTare: i get a error on the fourth test case of power of thor episode 1
+ TipuTare: u can put the code there
+ BlaiseEbuth: What code?
+ sprkrd: TipuTare lemme guess, before you changed every S to a N and vice versa, and now your Thor is walking left instead of right?&#160;:)
+ TipuTare: nope
+ TipuTare: like
+ TipuTare: its going SE
+ TipuTare: then difference y == 0
+ TipuTare: and its still going SE
+ TipuTare: Game information:Thor's moving...Thor position = (17,17). Light position = (36,17). Energy = 19
+ TipuTare: it should go E
+ geppoz: operator precedence "==" and "and"&#160;?
+ sprkrd: geppoz nah, that's alright, == takes precedence
+ sprkrd: code would look like lisp otherwise
+ BlaiseEbuth: Origin is top-left.
+ BlaiseEbuth: and y increase when you go south
+ BlaiseEbuth: You're doing the inverse
+ sprkrd: yup, pretty much that
+ therealbeef: you also have a copy paste error just below halfway
+ geppoz: my grandpa said "parenthesis are free"
+ geppoz: so wise man
+ sprkrd: your grandpa is a lisp practitioner
+ SherlockSage: good parens are free.good parents are priceless
+ sprkrd: oh god, didn't know we had so many lisp fanboys here
+ sprkrd: the cult of the parenthesis
+ therealbeef: initial_ty = initial_tx - 1
+ TipuTare: i aw the copy paste error
+ TipuTare: but it doesnt change  the result
+ TipuTare: origin is top
+ TipuTare: oh
+ sprkrd: also, my I suggest something, TipuTare... you're doing thor_position - light_position. Usually (at least for me) you want to think the opposite way (target - your_position). It's easir to think of a vector that goes from where you are to where you want to go than of a vector that goes from your target to yourself
+ sprkrd: may I suggest*
+ BlaiseEbuth: Yeah... That's why reading the statement is sometime useful...
+ TipuTare: yeah but i need to change the entire code
+ TipuTare: and ahhhh
+ TipuTare: im lazy
+ TipuTare: while True: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/b7ccff7c-da82-4c3e-9212-4be2fec14c6e">http://chat.codingame.com/pastebin/b7ccff7c-da82-4c3e-9212-4be2fec14c6e</a>
+ TipuTare: i changed the thing with the origin
+ sprkrd: I mean, you have to change the entire code anyway at some point, those 8 cases are a bit too verbose :D
+ sprkrd: you'll see when you submit your first working code and can study other's solutions
+ punter147: hello all, i had a doubt on the sokoban puzzle problem. rn i am using A* search and have cooked up what should in principle work. Should i be finding the solution in the 10s alloted in the beginning or should i also use the 50ms time allowed in the later turns? In other words, should any good AI converge and find the solution in the allotted 10s?
+ Wontonimo: Good question punter147.  I haven't attempted <a rel="nofollow" class="external free" href="https://www.codingame.com/training/hard/sokoban">https://www.codingame.com/training/hard/sokoban</a>
+ Westicles: People have been doing it in a few ms, depending on language
+ Westicles: Most doing BFS
+ Wontonimo: do you know if it's common to use a hash of previous configs to remove duplicate states?
+ Westicles: I don't think so.  Mostly just some pruning if time is an issue
+ geppoz: Wontonimo yes
+ geppoz: in this game it makes no sense to be in same state 2 times, where state is pusher+block positions
+ geppoz: (so I just don't add to the tree a state already explored)
+ geppoz: punter147 I think everyone solved all in first turn, then playback the solution, I wonder if someone really explore during next turns...
+ Westicles: man, look at that guy.  17 contribs
+ BlaiseEbuth: Yup and all above a 0 score.
+ BlaiseEbuth: Except one that has 0.
+ punter147: geppoz oh i see, ok then i will do the same. 
+ punter147: BlaiseEbuth :joy: who are we talking about?
+ Westicles: And 18 more approved in the last couple months
+ BlaiseEbuth: :zipper_mouth:
+ punter147: BlaiseEbuth oh i see. well congrats to the person then.
+ Westicles: join /ru
+ Westicles: oops
+ jacek: :scream:
+ PatrickMcGinnisII: Happy Blow Shit up day!
+ Westicles: Many people don't know this, but the USA is actually the oldest country on the planet
+ PatrickMcGinnisII: oh, so we are doomed to fail then
+ PatrickMcGinnisII: i think france is 7 years older
+ PatrickMcGinnisII: hence their support
+ PatrickMcGinnisII: *shrug* Not a history person
+ Westicles: oh, not really.  I was just trying to get the euros stirred up so I can ask golf questions
+ geppoz: someone would say that some sioux tribe would have been older if... :D
+ Westicles: Well, actually those guys came 2nd and killed the first wave guys.
+ pci: Sokoban is giving me trouble 3-4 and 3-5 timeout... all others pass.. wish I could see the final time to see how close I am.
+ geppoz: you could launch on your computer with same input
+ pci: when I run sim on my computer it's 7-seconds... not sure how my PC compares to the server.
+ pci: I can time all the others and they are 2-seconds or less on the server... thought it was strange these two stand out.
+ PatrickMcGinnisII: well there's 30 test cases on sokoban
+ PatrickMcGinnisII: I did it in php
+ PatrickMcGinnisII: test case 27 is the longest
+ pci: my solver does 27 in 0.4 seconds... must be something weird about my algorithm... but just a simple wide path search
+ PatrickMcGinnisII: do you hash explored boards?
+ PatrickMcGinnisII: if not you are probably re-exporing bad solution leafs
+ pci: Yeah... I'm using C# which probably isn't helping, but think I'm pretty optimized with no dynamic memory.
+ pci: HashSet&lt;ulong&gt; encoding player position and boxes in ulong
+ PatrickMcGinnisII: it is a straight BFS w/ a hash, worked for me, php is slow compared to c#
+ PatrickMcGinnisII: my time on server using php on test case 27 is exe time:3.4612550735474
+ PatrickMcGinnisII: I'm not using recursion
+ pci: maybe my invalid move check is too simple... pushing boxes into walls, boxes and corners
+ PatrickMcGinnisII: precompute a map with valid box positions
+ PatrickMcGinnisII: maybe speed it up, but still should run faster than 10 seconds
+ Runner87: how many slow is python than c++?
+ PatrickMcGinnisII: depends on how good you are, but i would say 3 to 6 times slower
+ pci: I do precompute bool[] Wall -- but check box offsets for each step
+ Runner87: Sokoban BFS test case over 10 takes 45 seconds&#160;! Maybe I do something wrong
+ PatrickMcGinnisII: well boxes can't be in a corner, and a few other places
+ PatrickMcGinnisII: if you have an recursion in there, get rid of it...  you can explore the entire breadth of the tree at each depth quite easily, I think all of them solve in under 200k nodes
+ PatrickMcGinnisII: total
+ PatrickMcGinnisII: i think i counted them at one point, i think one testcase was 129k board states
+ PatrickMcGinnisII: easily doable in 10 seconds
+ PatrickMcGinnisII: my board is one linear array of 121 bytes.  hashset of boxes and player loc in a ulong should be fine as well
+ PatrickMcGinnisII: I spent alot of time with sokoban, like a week ... so don't get discouraged
+ jacek: i thought it was doable in 10 seconds?
+ PatrickMcGinnisII: actually in C++ prolly 1 second, but i used php
+ PatrickMcGinnisII: smart alec
+ pci: I am doing a breath first search... I'll keep at it, might covert to C++ to see if that helps.
+ pci: breadth?
+ PatrickMcGinnisII: breadth and butter
+ pci: I'll try holding breath... I can do 10 seconds.
+ PatrickMcGinnisII: just did "Cosmic Love" overkilled it with BCMATH, smh...oh well.  i'm done for today. glhf.
+ Malek_BOUFAHJA: Hello all
+ Malek_BOUFAHJA: I'm new&#160;:) 
+ BlaiseEbuth: Hello new, I'm Blaise
+ Malek_BOUFAHJA: nice to meet you 
+ jacek: :no_mouth:
+ Kervyi: hi imm new and I have a big incomprehension on the game tests .  hope this chat is useful
+ MSmits: it should be, we are big on comprehension
+ BlaiseEbuth: Hi. Hope you know how to ask.
+ Kervyi: yes I do thank you very much 
+ BlaiseEbuth: Great.
+ mao_fujita: Can somebody explain how the Parse SQL Queries work here? I'm brand new to CodinGame and confused by what to submit for SQL.
+ BlaiseEbuth: You mean the puzzle "parse sql querries"&#160;?
+ mao_fujita: yes
+ mao_fujita: I didn't find the SQL in the language
+ BlaiseEbuth: You don't have to use sql
+ BlaiseEbuth: You have to write an 'interpretor' for sql
+ mao_fujita: I'm using python 3. So in this case, just print out what is in the sql table?
+ BlaiseEbuth: In function of the given request yes
+ mao_fujita: but print(table_row) only prints from the second line of the table.
+ mao_fujita: I'm really confused here.
+ mao_fujita: Also, is there a way to do the real SQL practices?
+ BlaiseEbuth: No sql on the site no.
+ mao_fujita: Ok, thanks.
+ punter147: hello all, its me again, i was wondering what is the heuristic yall used in sokoban? i used the manhattan distances of the closest not taken target for each box
+ BlaiseEbuth: About table_row, that's normal. The variable is overwritten each turn of the loop.
+ BlaiseEbuth: In all the puzzles you have to store the given data by yourself.
+ mao_fujita: I mean it starts from printing out the 2nd row but not the first.
+ mao_fujita: well, the problem now is how to print out the table_header
+ sprkrd: punter147 most people (me included) don't use any heuristic at all
+ sprkrd: in fact, if the heuristic is too heavy, it may do more bad than good
+ BlaiseEbuth: I understood what you said mao_fujita. But you don't understood what I said. :p
+ punter147: sprkrd oh do you use bfs? i am starting to question why i chose A* now :sweat_smile:
+ mao_fujita: BlaiseEbuth I think I get your point, my question now is about the table_header. 
+ mao_fujita: I know the overwriting thing, just confused about how to print out the table_header.
+ sprkrd: punter147 yup, bfs with some pruning&#160;:)
+ punter147: sprkrd wow, i guess i will start implementing bfs on the side. Thanks for the tip!
+ BlaiseEbuth: mao_fujita take a look to the "input" section at the end of the statement. I think you don't understand how the inputs are given.
+ mao_fujita: ok, I'll look at it again, but thanks.
+ sprkrd: punter147 you can press on doing heuristic search if you really like, it's not impossible but it's harder
+ sprkrd: you sounded like you were describing the quadratic assignment problem, which is a well-known heuristic for sokoban (in fact, there are not many effective heuristics for sokoban...): <a rel="nofollow" class="external free" href="https://en.wikipedia.org/wiki/Quadratic_assignment_problem">https://en.wikipedia.org/wiki/Quadratic_assignment_problem</a>
+ sprkrd: sorry, not the quadratic assignment problem, it's just the assignment problem: <a rel="nofollow" class="external free" href="https://en.wikipedia.org/wiki/Assignment_problem">https://en.wikipedia.org/wiki/Assignment_problem</a>
+ Westicles: two sided BFS search is most common
+ eulerscheZahl: I just reused my sokoban solver I wrote for sokobanonline.com
+ eulerscheZahl: still in top100 <a rel="nofollow" class="external free" href="https://www.sokobanonline.com/community/profile/eulerschezahl">https://www.sokobanonline.com/community/profile/eulerschezahl</a>
+ sprkrd: two sided BFS is hard if you don't know the final position of your character, isn't it? Westicles
+ eulerscheZahl: there aren't that many final positions
+ eulerscheZahl: you just have multiple possible final states and expand all of them at once
+ sprkrd: and that works better?
+ eulerscheZahl: haven't tried, but i think it does
+ eulerscheZahl: tree size possibly explodes, the deeper you go
+ eulerscheZahl: (not for the testcases here on CG, these are relatively simple)
+ sprkrd: theoretically it should expand fewer states, but there are a few hidden constants here and there that may make it worse for smaller problems
+ sprkrd: I believe it should be better on the long run, though
+ eulerscheZahl: CG levels are toy problems, I didn't want to make it too hard
+ Westicles: yeah, two-sided came into play for an optim where you had to design longest paths.  those had around a thousand turns and I had to anneal around it
+ sprkrd: I wouldn't say the ones in CG are the easiest ones, tho
+ eulerscheZahl: you did that for another website too Westicles? did Al Zimmerman host such a contest?
+ eulerscheZahl: my solver failed on most of the official sokoban levels
+ eulerscheZahl: too many boxes
+ sprkrd: eulerscheZahl thanks for nerd sniping me with that link (sokobanonline.com)
+ eulerscheZahl: but it's for human players actually
+ Westicles: not AlZ, but a similar setup
+ eulerscheZahl: i just wrote a small script but then stopped after reading their terms of service
+ eulerscheZahl: i found another sokoban website. but that one had no server-side verification of your solution, so I just placed 1st with 1 move takes to solve a level. was too easy :D
+ sprkrd: ah, ok, so you didn't solved 1500+ sokoban levels by hand
+ eulerscheZahl: only 2 or 3 to understand how to automate it
+ eulerscheZahl: and I did not solve 1500 levels in just 5h :P
+ eulerscheZahl: compare that to the profile of the player right above me: <a rel="nofollow" class="external free" href="https://www.sokobanonline.com/community/profile/puri2725">https://www.sokobanonline.com/community/profile/puri2725</a>
+ eulerscheZahl: play time: 11 days to reach such a score
+ eulerscheZahl: and some non-optimal solutions. that gold trophy means that mine is the shortest path
+ sprkrd: oh god
+ eulerscheZahl: if i would keep going and climb the ranks, i'd probably just get banned :D
+ sprkrd: you also tackled the ones with portals, magnets, twins and all those fancy things?
+ eulerscheZahl: and i failed to submit proper web requests (weird API), so I sent key presses to move the player, then close the tab and open the next level in a new tab
+ eulerscheZahl: no, just the standard levels
+ punter147: sprkrd damn, and here i am trying to find a good heuristic function. I will start investing in breadth and butter :joy:
+ princess_of_zeal: Trying the Sokoban puzzle as well now - it feels like Bender - Episode 4 light&#160;:-)
+ princess_of_zeal: boxes instead of garbage balls and a pusher / bender ...
+ eulerscheZahl: bender was never supposed to be hard to solve, it's an optim game&#160;:(
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/expert/space-maze">https://www.codingame.com/training/expert/space-maze</a>that's the hard one
+ Astrobytes: didn't hacker.org have a sokoban-ish game?
+ eulerscheZahl: do you mean pusher-boy? very different
+ BlaiseEbuth: The best in sokoban is ban
+ Astrobytes: hence the -ish
+ eulerscheZahl: no, the best is "soko"
+ eulerscheZahl: short for Sonderkommission
+ eulerscheZahl: some special police unit in German
+ princess_of_zeal: freilich
+ BlaiseEbuth: Like the ss&#160;?
+ Astrobytes: No Blaise
+ BlaiseEbuth: Godwin point reached!
+ Westicles: you can make soko2 with this one
+ Westicles: <a rel="nofollow" class="external free" href="http://sokoban-gild.com/podiumlev.cgi?which=R2_21">http://sokoban-gild.com/podiumlev.cgi?which=R2_21</a>
+ eulerscheZahl: that would break a lot of CG constraints
+ eulerscheZahl: so, Abalone
+ BlaiseEbuth: The best in abalone is alone
+ eulerscheZahl: i considered porting that too, was a bit worried that it would be too tie-heavy
+ eulerscheZahl: but now we get it, cool
+ Astrobytes: With the German and Belgian Daisy starting positions I believe it reduces chance of draws
+ Astrobytes: Also, they've made a few modifications to it that I cannot remember right this second
+ eulerscheZahl: that's what I would have used
+ eulerscheZahl: read the wikipedia about different starting positions
+ eulerscheZahl: when i was a child, I had that abalone PC game that I liked to play
+ Astrobytes: I suggested it to DomiKo yesterday
+ eulerscheZahl: but was a demo version, just valid for 14 days
+ Astrobytes: I had loads of games like that, some you could get around some not
+ eulerscheZahl: also had some mode modes. like holes in the middle of the board, on some cells
+ eulerscheZahl: more modes*
+ Astrobytes: That's interesting
+ Westicles: someone needs to port that kingkiller trilogy game...TAK?
+ BlaiseEbuth: This site more and more looks like this shelf full of board game you stand in front of, unable to decide what to play, to finally decide to play nothing...
+ Astrobytes: Be the change you want to see! :D
+ BlaiseEbuth: Yeah. This shelf need a big clean up.
+ sprkrd: BlaiseEbuth For instance?
+ Astrobytes: Still think some kind of categorical separation would be nice
+ eulerscheZahl: so 1 star votes to every game to get them removed by CG bot? :evil:
+ eulerscheZahl: :imp:
+ BlaiseEbuth: Already done
+ sprkrd: which games do you consider the worst?
+ Westicles: one of my clashes got relegated today.  I thought it was a nice one
+ eulerscheZahl: i agree, more categories could help. also for community puzzles: easy, mediam, hard, expert, community
+ eulerscheZahl: and a chance for community to get promoted to the official sections if they are good enough
+ Astrobytes: Yeah, I agree with the puzzles too
+ jacek: 1 star for onitama?
+ BlaiseEbuth: Westicles: It was probably more complicated than a + b...
+ eulerscheZahl: no, onitama is fine as a tutoriakl
+ sprkrd: oh ok, if you mean for puzzles, yeah, big cleanup needed, but I don't think there's any multi that should go away?
+ Astrobytes: sprkrd: blaise was just being moany
+ sprkrd: Astrobytes :grin:
+ sprkrd: I think having all these games here is good even for AI research
+ BlaiseEbuth: 0.1% consideration...
+ Astrobytes: heh
+ eulerscheZahl: just some sub-categories for multis maybe. e.g. board games
+ Astrobytes: And yeah sprkrd, it's a really strong point of CGs platform
+ Astrobytes: Yep, board, physics, maze/grid or something. Would possibly encourage development of non-board games too
+ BlaiseEbuth: Good idea ez&#160;! Lets put 99% of the multi in this category.
+ sprkrd: tha's not a bad idea
+ sprkrd: it's not 99%
+ sprkrd: maybe most games are board games, but it's definitively not a 99%
+ Westicles: You get legend in one multi and that's like top 2000?
+ BlaiseEbuth: Oh satan... People that don't get second degree...
+ jacek: hm?
+ Westicles: I can't figure out how pardo runs c code from go with only 42 characters overhead.  Quite the puzzler
+ Wontonimo: more like top 5000 I think Westicles
+ katanaut: guys, can someone tell me, how do I print consecutive actions In games?  I'm getting this error all the time: ``` your code did not read all available input before printing an instruction```
+ KiwiTae: its a warning
+ katanaut: do i need to use a setInterval-like function?
+ KiwiTae: it means u wrote your output before reading all the lines in cin
+ punter147: katanaut do you read all the input described in the input section? 
+ katanaut: For example, i'm playing now Fall Action 2020 where i need to brew two potions. Which output i need to read before brewing second potion/taking second action?
+ KiwiTae: just check default code parsing 
+ KiwiTae: uff pcr seem so rand
+ KiwiTae: oupsi im boosting the boss ~
+ jacek: oO
+ Marchete: Oo
+ BlaiseEbuth: OO
+ Wontonimo: oO
+ punter147: oo
+ BlaiseEbuth: Wontonimo -&gt; []
+ Wontonimo: sigh ... 
+ KiwiTae: Promoootion hehe
+ Wontonimo: where to Kiwi
+ KiwiTae: silver pokerchip
+ KiwiTae: with my broken sim&#160;:"=
+ Wontonimo: broken sim &gt; no sim
+ KiwiTae: truuue
+ Wontonimo: what algo you throwing at piker?
+ Wontonimo: *pokerchip
+ KiwiTae: I swapped full random beams to GA
+ KiwiTae: and eval with area i control 
+ DomiKo: fix your sim first
+ Wontonimo: area of the board, or area of your chips surface?
+ KiwiTae: of my chips
+ KiwiTae: DomiKo im trying but im retarded ~ i gotta read through the referee again
+ DomiKo: it isn't easy 
+ Wontonimo: later
+ DomiKo: wasn't for me at least
+ KiwiTae: oh turned out 1st in silver ~ i might just resubmit and hope for the best
+ KiwiTae: maybe add a check for winnin frame so i just pass WAIT if i cant loose anymore
+ Salman2301: hi
+ binjn: hi
+ kitty_2310: hi I'm new
+ human37: whats up guys
+ okokok123: Hi guys

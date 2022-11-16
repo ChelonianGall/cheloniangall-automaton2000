@@ -1,0 +1,1895 @@
+ dbdr: \o
+ Mazelcop: o/
+ dbdr: le top 3-8 est serré...
+ Mazelcop: l'elo du #1 est assez hallucinant quand même
+ dbdr: oui il se détache
+ dbdr: tu te classe où Mazelcop?
+ Mazelcop: je soupçonne une approche différente
+ Mazelcop: là j'ai refait la moitié, donc aucune idée
+ Mazelcop: mon ancienne version était vers les #5
+ dbdr: wow, refait?
+ Mazelcop: sans changer l'engine
+ dbdr: la recherche?
+ Mazelcop: ouep
+ Mazelcop: pour prendre en compte l'adversaire un peu plus correctement
+ dbdr: oh, proprement? nice!
+ Mazelcop: j'espère en tout cas :p
+ Mazelcop: finalement #7
+ dbdr: pareil quoi, non?
+ Mazelcop: ouep, en fait j'ai surtout un winrate plus élevé avec mon ancienne version contre les bots moins bien classés
+ BlaiseEbuth: Faut poutrer les noobs&#160;!
+ BlaiseEbuth: o/
+ Mazelcop: o/
+ VilBoub: ^^
+ Oioi: Mazelcop&#160;: à partir du moment où tu prends en compte les mouvements de l'adversaire, c'est presque inévitable, non&#160;?
+ Mazelcop: Ouep, mon bot précédent jouait de manière un peu abusive, et ça fonctionnait bien pour monter le classement
+ dbdr: mets un timer&#160;;)
+ Mazelcop: :D
+ BlaiseEbuth: En heures le timer par contre.
+ Mazelcop: pour le resubmit final ça pourrait presque être viable&#160;?
+ dbdr: normalement si tu prévois bien l'adversaire et que le vrai est moins bon que ce que tu prévois, ça devrait pas etre trop grave
+ BlaiseEbuth: dbdr&#160;: C'est pour tromper l'ennemi le lag immonde et les bad gateway sur cg.spdns.eu&#160;?
+ dbdr: oui, mesure spéciale contest
+ dbdr: en fait j'ai aucune idée et pas vraiment la motiv d'investiguer maintenant
+ BlaiseEbuth: Bon. Dépanne moi, alors. ^^ C'est quoi déjà la formule magique pour le decay&#160;? Un truc en 0.9^jesaisplusquoi&#160;?
+ dbdr: 0.9 ^ depth
+ Gronahak: eval * 0.9 ^ (prof)
+ BlaiseEbuth: :bow:
+ dbdr: avec ^ = xor si tu veux t'arracher les cheveux&#160;;)
+ Gronahak: ahahah
+ BlaiseEbuth: Je la redemande à chaque fois. Veut pas rentrer.
+ dbdr: 0.9, 0.81, ... decroissance exponentielle, quoi
+ BlaiseEbuth: Wé wé... Je te dirais "Bon sang mais c'est bien sûr&#160;! Suis-je bête&#160;!" après 2-3 cafés.
+ OldJohn: Hum, ces temps ci nous sommes plus habitués aux croissances exponentielles
+ Gronahak: Pour la retrouver facilement tu peux te dire que tu veux que toutes tes évals courrantes valent la valeur max ( donc x 1 ) , que tes évals dans 1 tours sont moint certaines, donc ( x un peu moins -&gt; 0,9 ) 
+ Gronahak: Et du coup pour avancer dans le futur, tu multiplies par 0,9 à chaque fois
+ Gronahak: Et il se trouve que x^0  = 1 , la nature est bien faite
+ Thyl: yo!
+ Thyl: comment vous faites pour faire juste un MC
+ Thyl: sans calculer à chaque fois tout les coups possibles&#160;???
+ mrBen: o/
+ dbdr: Thyl tu fais tous les coups du premier tour. puis des coups au hasard
+ Gronahak: Quelqu'un avait posté un lien trop bien sur les MCTS y'a qqes jours et je croyais l'avoir bookmarké mais en fait non...
+ philRG: ah ouais sympa, pour se déplacer en coordonnées cubiques: cell + direction
+ Thyl: Oui dbdr mais dans la partie technique pour les parties random&#160;?
+ Thyl: <a rel="nofollow" class="external free" href="https://int8.io/monte-carlo-tree-search-beginners-guide/">https://int8.io/monte-carlo-tree-search-beginners-guide/</a>
+ mrBen: <a rel="nofollow" class="external free" href="https://jeffbradberry.com/posts/2015/09/intro-to-monte-carlo-tree-search/">https://jeffbradberry.com/posts/2015/09/intro-to-monte-carlo-tree-search/</a>
+ philRG: #procrastination&#160;:-D
+ mrBen: et int8.io aussi
+ dbdr: oui, pour faire un coup au hasard il faut connaitre les coups possibles
+ Thyl: ok
+ Gronahak: Yes c'était lui Thyl&#160;! Merki&#160;!
+ Thyl: je vais le lire du coup&#160;!
+ Thyl: Y a le book de Tristan Cazenave
+ Thyl: aussi
+ mrBen: LE book&#160;? lequel&#160;? <a rel="nofollow" class="external free" href="https://www.chessprogramming.org/Tristan_Cazenave#Selected_Publications">https://www.chessprogramming.org/Tristan_Cazenave#Selected_Publications</a>
+ mrBen: J'ai trouvé son cours sur Monte Carlo Search&#160;: <a rel="nofollow" class="external free" href="https://www.lamsade.dauphine.fr/%7Ecazenave/MonteCarlo.pdf">https://www.lamsade.dauphine.fr/%7Ecazenave/MonteCarlo.pdf</a>
+ philRG: bon dommage que j'ai déjà calculé mon tableau de distances au début. cell + direction_soleil en coordonnées cubiques, ça m'aurait bien plu&#160;:-(
+ Thyl: mrBen Intelligence artificielle une aproche ludique
+ Thyl: approche
+ mrBen: ah, je crois que j'en ai déjà lu des morceaux&#160;! merci
+ mrBen: lol son cours est en anglais, et switch au français à mi-chemin...
+ Thyl: :D
+ Thyl: :joy:
+ mrBen: ah non, c'est juste 10 slides en fait
+ Thyl: bon plateau
+ Thyl: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/553911891">https://www.codingame.com/share-replay/553911891</a>
+ mrBen: ah nice
+ mrBen: bon, j'ai tentez d'implementer un cache, bah j'ai perdu 50% de perf...
+ mrBen: *tenté
+ BrainSolver: Au moins au centre de ce plateau y a du soleil.
+ BlaiseEbuth: Pour ceux qui veulent voir un draw <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/553882092">https://www.codingame.com/replay/553882092</a>
+ <b>**dwarfie slaps dwarfie ... oublier le decay ... mais quel con&#160;!!! around a bit with a large fishbot</b></p><p><img src="/a/17785582865119" /> dwarfie: l'art de se couper une jambe avant un concours de coup de pied au cul ...
+ dwarfie: juste je le met et je suis parti pour passer gold large 
+ dwarfie: 32 matchs , 2 defaites ... alors que je stagnais vers les 400 silver ...
+ BlaiseEbuth: De rien
+ dwarfie: bon , maintenant , je vais regarder le draw exceptionnel de BlaiseEbuth ... parce que c'est quand meme une rareté :D
+ BlaiseEbuth: L'est pas de moi, je relais juste.
+ <b>**Thyl slap Thyl</b></p><p><img src="/a/44847420172903" /> Thyl: le slap ça fait rien
+ dwarfie: Thyl ... toi aussi t'as oublié le decay&#160;?&#160;;)
+ Thyl: non
+ Thyl: j'ai des messages d'erreurs de 30 lignes
+ dwarfie: de 6 points en dessous du boss a +2 au dessus de moins de 15 chars ...
+ BlaiseEbuth: Ca vaut mieux qu'un crash sans erreur.
+ dwarfie: je me colle des baffes, je vous jure
+ Thyl: dwarfie tu as un algo&#160;???
+ BlaiseEbuth: Bon. Il me faut un truc un peu énergique là... Genre la BO de Doom.
+ Skygge: On a un message d'erreur spécifique dans l'IDE si on dépasse la mémoire max dispo&#160;? (C++)
+ dwarfie: avec un pauvre mc qui tente meme pas de jouer l'adversaire ....
+ Thyl: dwarfie trop cool
+ Thyl: je sais ce que je vais faire&#160;:)
+ BlaiseEbuth: Je pense pas que tu puisses dépasser la mémoire dispo même en le faisat exprès Skygge
+ BlaiseEbuth: *faisant
+ Thyl: dwarfie deep combien pour les parties au hasard
+ dwarfie: ouais ... sauf que j'ai essayer jusqu'a 3h du mat de trouver ou ca clochait et que j'avais pas trouvé ...
+ dwarfie: parties completes
+ egaetan: dwarfie pa smieux
+ BlaiseEbuth: En dark theme t'aurais trouvé egaetan... :rolling_eyes:
+ <b>**egaetan passe en dark</b></p><p><img src="/a/40590448621674" /> WhatTrickeryIsThis: :sunglasses:
+ BlaiseEbuth: Back in black.
+ dwarfie: bon +3 a 60% ... je crois qu'il y apas de risque que je redescende en dessous cette fois ... petit dej' maintenant :croissant:
+ WhatTrickeryIsThis: Blaise, tu dors pas aujourd'hui?
+ dbdr: gg dwarfie
+ BlaiseEbuth: Et non WhatTrickeryIsThis 
+ Beretta_Vexee: On est d'accord que le serveur ne donnent pas l'ensemble des coups valides mais juste les diagonales pour les SEED&#160;?
+ WhatTrickeryIsThis: heu
+ Gronahak: dans possible_actions tu as toutes les actions possibles
+ egaetan: si
+ Gronahak: avec WAIT en position 0 par exemple
+ Beretta_Vexee: Gronahak je calcul des seed à distance 2 qui ne sont pas dans possible_actions.
+ Beretta_Vexee: Et qui sont des coups valides.
+ dbdr: Beretta_Vexee ton arbre est pas dormant?
+ Gronahak: un arbre qui vient juste de grow&#160;?
+ dbdr: oui
+ Gronahak: un sol caillouteux&#160;?
+ Gronahak: une case en dehors de la carte ,
+ Gronahak: replay + frame sinon fake ^^
+ Beretta_Vexee: je vais continuer a faire des deltas je me suis peu être emmêlé les pinceaux. 
+ Thyl: In file included from /usr/include/x86_64-linux-gnu/c++/10/bits/c++allocator.h:33, <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/9300bcef-e55e-4164-b37f-c6413e9dd760">http://chat.codingame.com/pastebin/9300bcef-e55e-4164-b37f-c6413e9dd760</a>
+ Thyl: ça dit quelque chose à quelqu'un&#160;?
+ BlaiseEbuth: C'est Thyl qui a volé les stacktraces de tout l'monde&#160;!
+ Tiouz: Thyl est-ce que tu fais un emplace_back à un moment&#160;?
+ Thyl: non
+ Tiouz: Moi j'avais ça quand je faisais un emplace_back avec des paramètres d'un constructeur qui n'existait plus
+ Tiouz: o/ au passage
+ Thyl: o/
+ BlaiseEbuth: Bah c'est clair: Ton constructeur prends une ref non constante et ça lui plait pas.
+ Thyl: aok
+ BlaiseEbuth: Move(Move &amp;m) -&gt; Move(const Move &amp;m)
+ Gronahak: <a rel="nofollow" class="external free" href="https://stackoverflow.com/questions/18565167/non-const-lvalue-references">https://stackoverflow.com/questions/18565167/non-const-lvalue-references</a>
+ Gronahak: J'ai trouvé ça
+ Thyl: merci
+ Thyl: merci
+ Thyl: comment tu fais pour comprendre ça&#160;??
+ dwarfie: bon ... a mi-chemin du lvl 49 avec ce gold ... mais pour le legend , je peut d'ores et deja oublier :D
+ BlaiseEbuth: Faut chercher les lignes qui concernent ton code, pas celui des includes, et la description de l'erreur.
+ BlaiseEbuth:  error: cannot bind non-const lvalue reference of type ‘Move&amp;’ to an rvalue of type ‘Move’
+ BlaiseEbuth: Et après:
+ BlaiseEbuth:  /tmp/Answer.cpp:341:16: note:   initializing argument 1 of ‘Move::Move(Move&amp;)’
+ nicola: Du Slayer, quoi.
+ nicola: Pour la BO de Doom.
+ nicola: Gah, encore du retard.
+ dwarfie: BlaiseEbuth&#160;: <a rel="nofollow" class="external free" href="https://www.dailymotion.com/video/xz2kl">https://www.dailymotion.com/video/xz2kl</a>
+ dwarfie: ca va te motiver&#160;;)
+ -TheWalder-: Il reconnaît l'URL
+ dbdr: dm a si peu de videos que ça? 4 chars?
+ Merome: 'lo world
+ Merome: Maintenant que je suis gold, il est temps de lire la règle
+ BlaiseEbuth: Ouai. C'est un groupe de Hardcore Melunais.
+ Merome: Et donc, en lisant la règle, je bute sur le scoring
+ nicola: Bon d’là.
+ nicola: J’ai connu un groupe de death melunais à l’époque.
+ Merome: l'action Complete doit scorer nutrient + bonus
+ Merome: Or c'est pas ce que j'observe
+ Merome: Au dernier tour, nutrient=1
+ BlaiseEbuth: Pourquoi&#160;?
+ Merome: Donc abattre un arbre en périphérie au dernier tour devrait me rapporter 1+0 = 1, non&#160;?
+ Mazelcop: c'est pas nutrient + bonus
+ Mazelcop: le score est égal à zéro si nutrient = 1
+ BlaiseEbuth: euh...
+ Merome: "Compléter le cycle de vie d'un arbre vous rapportera autant de points que la valeur actuelle de nutriments (nutrient) + un bonus basé sur la richesse (richness) de la case&#160;:"
+ egaetan: c'est score[bonus]+nutrient
+ Mazelcop: ah oui non, je délire
+ egaetan: score[]={0,2,4}
+ Merome: ben oui
+ BlaiseEbuth: Oui. Mais pourquoi nutrients serait == 1 au dernier tour&#160;?
+ Mazelcop: par contre Merome tu dépenses 4 sun pour complete, donc tu perds au moins un point
+ Merome: oui, 3 sun = 1 point
+ Merome: Mais au moment où j'abats l'arbre, je vois les points que je gagne
+ Merome: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/553932361">https://www.codingame.com/share-replay/553932361</a>
+ Merome: Au tour 139, je fais complete 34
+ Merome: Merome is ending their tree life on cell 34, scoring 2 points
+ BlaiseEbuth: 139: GROW 19
+ Merome: 138 pardon
+ Mazelcop: ben oui nutrients = 2
+ Merome: log viewer de merde
+ Tiouz: nutrients = 2, richness = 0, c'est normal de gagner 2 pts
+ Merome: ok, c'est le log viewer qui me gave
+ BlaiseEbuth: Tu confonds nutrients et richness Merome
+ Merome: non non, j'ai bien saisis la différence
+ Merome: C'est le décalage entre le log viewer et le game viewer qui me fout dedans à chaque fois
+ Merome: Je vois Nutrients: 1 dans le jeu
+ Merome: Alors que dans le log, Nutrients est toujours à 2
+ Merome: Ah bordel, nutrients baisse au moment de COMPLETE, j'avais pas capté ça&#160;:(
+ BlaiseEbuth: Oui
+ BlaiseEbuth: voilà
+ Merome: Quand on connaît le jeu original, c'est presque un handicap en fait
+ BlaiseEbuth: Non.
+ dbdr: welcome back Mazelcop&#160;:)
+ BlaiseEbuth: Suufit de lire l'énoncé
+ BlaiseEbuth: :smirk:
+ Merome: Ben dans Photosynthesis, si tu coupes du niveau 1, ça fait pas baisser le score d'un niveau 3
+ Mazelcop: thx dbdr
+ Merome: Lire l'énoncé, c'est pour les faibles
+ BlaiseEbuth: Et les forts se plaignent pas, alors chut.
+ Merome: Je ne me plains pas
+ Merome: Je rage
+ dbdr: tu désespoires?
+ Merome: Je vieillesse ennemie
+ dbdr: voila
+ Littleyounes: J'avoue pourquoi lire l'énoncé quand l'algorithme peut simuler toutes les possibilitées
+ Littleyounes: j'rigole
+ mrBen: j'ai fait un peu de profiling, et c'est mes fprintf qui ralentissenmt ma simu :sweat_smile: je suppose que je vais utiliser 3 int pour mes action, plutôt que de gérer des string
+ Tiouz: Vraiment, sur tes 100ms tu en passes combien à faire des fprint&#160;?
+ mrBen: c'est ce qui me prend le plus d'alloc  memoire
+ mrBen: att je te trouve le temos
+ Tiouz: Tu veux dire, gérer des strings. Un print ça ne prend pas de mémoire, et surtout tu en fais un seul
+ mrBen: (je suis en Go)Si, ça céer une nouvelle chaine, et du coup il doit l'alouer qqpart
+ Tiouz: Mais tu le fais une seule fois. En go j'imagine qu'un print ça prend pas 50ms
+ mrBen: de l'ordre de 20&#160;% du temps
+ mrBen: (un peu au dessus d'1s, je fait des tests sur 5s en local)
+ Tiouz: Mais tu affiches quoi&#160;? Si tu affiches un seul coup ça va pas prendre 20% du temps
+ Tiouz: En effet, si à chaque play tu affiche tout ton état, là oui tu fais beaucoup de prints
+ Tiouz: Mais c'est pas la faute des prints
+ mrBen: en fait, je gère mes actions avec des strings, donc dans ma fonction PossibleActions() je créer des string sans arret 
+ Tiouz: Oui, donc c'est pas la faute aux print
+ mrBen: je vais essayer d'utiliser une enum et 2 int pour voir, et créer la string que si j'en ai besoin
+ jfaixo: protip: tu peux print ton debug *après* avoir envoyé ton coup pour ce tour ci
+ mrBen: nan mais mes fprint me servent à crée les chaines
+ mrBen: c'est pas des print de debug
+ jfaixo: ok oui je viens de voir
+ jfaixo: oui, moi me actions tiennent sur 2 octets&#160;;)
+ Tiouz: En fait c'est connu qu'il ne faut jamais utiliser des chaines pour faire des calculs, c'est beaucoup trop long
+ mrBen: bah je suppose que j'avais jamais eu besoin de perf sur ce point
+ mrBen: je le saurait pour la prochaine fois
+ mrBen: (bon après j'ai commencé avec une base en Python, donc j'avais pas un gros focus perf)
+ Bon[]Crayon: Salut les totoros et les totorolles.
+ Tiouz: Salut
+ Bon[]Crayon: slt Automaton2000
+ mrBen: o/
+ Automaton2000: va falloir que je me couche
+ Bon[]Crayon: \o
+ mrBen: déjà fatigué Automaton2000&#160;?
+ Automaton2000: même si c'est un mc
+ Tiouz: Est-ce que vous savez si on peut forcer le saut d'une ligne dans l'output de notre tororo&#160;? J'ai essayé \n et ça foire les outputs, et \\n ça va afficher \n
+ Bon[]Crayon: Pour le message de bulle&#160;?
+ BlaiseEbuth: Tu veux pas des balises de mises en forme aussi&#160;?
+ mrBen: ah, j'ai pas tenté... mais à part \n je sais pas comment tu pourrai faire
+ Tiouz: BlaiseEbuth et de la coloration syntaxique stp
+ Bon[]Crayon: Et le l'unicode.
+ mrBen: ça serai pas mal BlaiseEbuth, pour déconcenter l'adversaire avec du text cliniotant par exemple
+ BlaiseEbuth: De quelle couleur le dragon&#160;?
+ dwarfie: Bon[]Crayon ... t'as ete plus rapide que moi ... mais vu la phrase
+ <b>**dwarfie slaps Bon[]Crayon around a bit with a large fishbot</b></p><p><img src="/a/59449061195531" /> BlaiseEbuth: Surtout qu'on peut déjà l'unicode...
+ mrBen: le contraire m'aurais étonné
+ nicola: ⻯
+ dwarfie: :scream:
+ dwarfie: pitie , me dite pas que totoro parle l'unicode&#160;;..
+ BlaiseEbuth: :dragon:
+ <b>**dwarfie realise a retardement grace a jfaixo que les coups possibles sont moins nombreux que ce qu'il avait en tete ... merci :D</b>
+ BlaiseEbuth: Qu'est-ce que t'imaginais&#160;?
+ dwarfie: plus qu 65536 ... en vrai ,j'y avais pas reflechi :D
+ dwarfie: ca m'ouvre des nouvelles pistes de precalc ...
+ -TheWalder-: Le MCTS commence à fonctionner&#160;! Il est très nul mais au moins il joue sans crash
+ Thyl: j'ai plus de prpocesseur qu'autre chose dans mon code&#160;:)
+ Thyl: #PasunIDEquimarcheavecWindows
+ Thyl: #NoLocalCoding
+ Thyl: join india
+ BlaiseEbuth: Non
+ BlaiseEbuth: C'est dangeureux l'inde.
+ dwarfie: la mafia indienne sevit ... encore ... a ce que je vois...
+ BlaiseEbuth: N'y vas pas&#160;!
+ dwarfie: pas beson d'y aller pour savoir ...
+ BlaiseEbuth: Tu vas retrouver pleins de NaN dans tes résultats&#160;!
+ BlaiseEbuth: (Au fromage)
+ dwarfie: mais c'est bien sur ... un CoC foireux fait par un indien et validé par ses potes ... ca s'appelle un NaN ... je le note .... merci BlaiseEbuth :D
+ BlaiseEbuth: :D
+ Tiouz: Les stratégies de #1 bowwowforeach sont assez différentes des autres. Il n'a pas beaucoup d'arbres à chaque fois sur son terrain, et il a beaucoup de soleils à la fin (genre 80)
+ BlaiseEbuth: Et des pièces bleues&#160;?
+ dwarfie: et rouges&#160;? et jaunes&#160;?&#160;;)
+ dwarfie: ca manque de champi :D
+ jolindien: o/
+ Tiouz: \o
+ BlaiseEbuth: C'est Automaton2000 qu'a tout pris.
+ Automaton2000: si tu sais pas où se trouve l'adversaire
+ nicola: 🀄
+ dwarfie: bon , ben maintenant , je suis bon pour ressortir la gamecube , j'ai envie d'y rejouer a sunshine&#160;;)
+ nicola: 🐉
+ BlaiseEbuth: &lt;3 
+ Ylec: hello tout le monde
+ mrBen: o/
+ BlaiseEbuth: o/
+ jdeveil: bijour à tous
+ BlaiseEbuth: \o
+ PRJELLYFISH: bonjour
+ Vry: o/ *
+ Vry: dwarfie, tu as réussi à passer Gold avec un MC&#160;? GG&#160;!
+ Tiouz: #18 gold&#160;!!! wouhou&#160;!
+ Vry: GG&#160;!
+ Vry: Bon go MCTS pour moi&#160;!
+ Tiouz: Et toujours avec mes 800 pauvres rollouts...
+ Tiouz: Si seulement je savais coder...
+ BlaiseEbuth: Autobots!
+ mrBen: what
+ BlaiseEbuth: <a rel="nofollow" class="external free" href="https://imgur.com/t/autobots_roll_out/Gxz2Pbz">https://imgur.com/t/autobots_roll_out/Gxz2Pbz</a>
+ mrBen: nice, bon j'ai du debug à faire moi, mon MC performe pas comme ça&#160;!
+ dwarfie: et apres on s'etonne que le chat deconne .... :D
+ Vry: Tiouz tu es en MCTS&#160;?
+ Tiouz: yes, mais pas mal amélioré
+ Vry: Oui, je me doute&#160;!&#160;;)
+ Tiouz: Je n'arrive pas à réduire le temps que je passe à générer mes coups. Je ne sais pas du tout comment faire
+ BuluBulu27: Génère un coup sur deux
+ dwarfie: les generer une fois pour toutes ...?
+ Tiouz: C'est la génération des seeds qui est trop longue
+ Vry: En garder une partie avec une table de hashache&#160;?
+ dwarfie: la generations des seed , c'est ce que j'ai fait en premier et c'est ce qui prend le moins de temps ...
+ nicola: Avec de l’eau ferrugineuse, Vry&#160;?
+ BuluBulu27: Comment ça peut prendre moins de temps que la génération des Grow&#160;?
+ Vry: WOUAI
+ BuluBulu27: Les Seed tu dois prendre en compte toutes les cases cibles et si t'as déjà un arbre dessus
+ Vry: Oui dwarfie ... chez moi c'est le plus long
+ Tiouz: Je ne parle pas de la génération exactement, mais de la recherche des seeds possibles
+ Vry: Ou pas ...
+ dwarfie: moi j'ai juste a passer par des op binaire et ca va tres vite ... c'est pas ca qui me ralenti ...
+ Vry: En fait les trouver c'est rapide ... mais en faire une liste c'est long
+ dwarfie: (meme si je cherche encore a booster le truc)
+ BuluBulu27: J'ai pas assez fait de challenge pour voir comment binariser ce genre de truc...&#160;:(
+ Tiouz: Mais c'est genre for(voisin in Voisins[tree]), on ne peut pas faire mieux
+ Vry: Tiens ça me donne une idée à creuser pour optimiser ... si je ne faisais ma liste que "à la demande" ... mais ça rendre le truc bien complexe
+ SeebOmega: BuluBulu27 c est pas bien grave deja si tu fais une belle structure tu as pleins d axes d optimisation 
+ BlaiseEbuth: A wild pony appear...
+ dbdr:  gg Tiouz!
+ BuluBulu27: SeebOmega Je dis pas que c'est la seule chose qui pèche, mais je trouve ça intéressant. Je regrette juste de passer à côté
+ Vry: BuluBulu27&#160;: bit 0 = cell 0 ....
+ SeebOmega: Tiouz tour 0 je generes toutes les seed possibles depuis toutes les cases possibles (sauf richness0) et ensuite tout le long de la game j ai juste a piocher dedans 
+ SeebOmega: (pour toutes les tailles d arbre)
+ BlaiseEbuth: pony pony pioche pioche
+ SeebOmega: BuluBulu27 je suis en plein refacto de tout faire rentrer dans un int il n est jamais trop tard
+ BuluBulu27: Merci pour la motivation&#160;:)
+ Tiouz: SeebOmega Il faut bien que tu testes si la case de départ ne dors pas, et qu'il n'y a rien dans la case d'arrivée
+ SeebOmega: mais d etre passe par mes classes implementer le moteur debug etc me fera gagner du temps sur le long terme
+ Beretta_Vexee: putain 1h pour débugger un typo qui faussait la validation des celllules comme seedable un tour sur six  ...
+ dbdr: Tiouz, ton MCTS il alterne les joueurs ou c'est sur des paires d'actions?
+ BlaiseEbuth: [CG]Typo
+ Vry: Oui Tiouz mais ça tu le fais en une instruction&#160;!
+ SeebOmega: oui Tiouz comme dit vry 
+ Vry: arbres &amp; quiDortPas
+ dwarfie: oui Tiouz ... comme j'ai fait&#160;;)
+ <b>**dwarfie ferait mieux de coder ... a une ligne minute, a force de lire le chat , ca va pas avancer :rofl:</b>
+ SeebOmega: voire arbre &amp;(quidortpas|ismine)
+ Tiouz: dbdr Il choisit le coup pour le 2ème joueur qui maximise son score, et ensuite il prend le coup du premier joueur qui maximise le sien
+ Vry: Moi je mélange pas les arbres :p
+ BlaiseEbuth: ismine c'est une gauloise&#160;?
+ dwarfie: Vry est contre les hybridations ... c'est bien&#160;:)
+ dbdr: Tiouz ok, donc il est paranoiaque
+ SeebOmega: je sais pas moi j essayes de rentrer tout l etat du board dans un int grid[37]
+ BlaiseEbuth: c'est.. bôcou&#160;?
+ SeebOmega: mieux que mes objets etc que j ai fait jusque la j y vais par paliers
+ Vry: Moi j'ai 45 octets par joueur
+ Vry: Et 10 pour le plateau
+ Vry: Donc 100 pile-poile actuellement
+ Tiouz: Stabilisé à #12
+ BlaiseEbuth: J'ai moitié moins.
+ Oioi: J'ai resubmit mon code de samedi soir&#160;: il fait aussi bien que mon code actuel :sob:
+ dbdr: Oioi&#160;:(
+ VincentBab: Moi j'arrive pas a faire marcher un MCTS&#160;:(
+ Vry: Tu as vu ce lien posté un peu plus haut&#160;: <a rel="nofollow" class="external free" href="https://int8.io/monte-carlo-tree-search-beginners-guide/">https://int8.io/monte-carlo-tree-search-beginners-guide/</a>
+ BlaiseEbuth: Ah non, my bad. Presque le quart
+ VincentBab: ca a l'air pas mal
+ VincentBab: mais bon j'ai repris 99% de mon code de UTTT
+ VincentBab: la merde doit être dans le 1%&#160;:/
+ dwarfie: le 1% probable ...c'est enormre 1%  . c'est la difference d'adn entre le singe et l'homme ..
+ dwarfie:&#160;;)
+ Vry: La seule différence par rapport à UTTT c'est la simultanéité ...
+ Vry: ... je dois faire la même chose après manger ...
+ Vry: dwarfie&#160;: tu as une éval. dans ton MC tout court&#160;?
+ VincentBab: je pars du principe que c'est chacun son tour pendant l'exploration, et au moment du playout je fait en simultané
+ Vivien82: Est ce que vous savez comment fait on pour réinitialiser son rang sur un jeu bot&#160;?
+ dwarfie: j'ai juste partie complete avec application des scores + decay
+ Vry: Ok, donc si j'ajoute un decay je passe Gold alors (... ou pas :upside_down:)
+ SeebOmega: Vivien82 qu entends tu par reinitialiser son rang&#160;?
+ Arthurmtro: Yoo petite question svppppComment on sais si une cellulle est seche? c'est store ou cette info&#160;?
+ Beretta_Vexee: cell richness
+ dwarfie: ca m'a fait gagne les 400 places necessaires a moi
+ SeebOmega: c est donne dans les input richness = 0 
+ Vivien82: Je suis bronze et je voudrai descendre pour avoir accés aux notions vu dans les ligues en dessous 
+ mrBen: yes, changer mes string en struct me fait passer de 250 à 1000 rollout&#160;!
+ Arthurmtro: Ahh okay merci les guys vous etes les meilleurs
+ SeebOmega: Vivien82 tu peux pas descendre et tu as les notions finales en bronze 
+ -Cile-: Vivien&#160;: je suis passée bronze aussi un peu trop facilement à mon goût, faut s'accrocher mais ça va aller&#160;;)
+ BlaiseEbuth: Chat!
+ -Cile-: tortue&#160;?
+ BlaiseEbuth: Nan. Je suis presque sûr que c'est un chat.
+ -Cile-: non, les chats ça ne vole pas, c'est forcément une tortue
+ BlaiseEbuth: :thinking:
+ nicola: Tu ne connais pas les félorns&#160;?
+ SeebOmega: Le but des ligues de bois c est pour aider ceux qui decouvrent la plateforme et debutent. LE contest commence "vraiement" en bronze la ou tu as les regles definitives et bosser sur un code plus durable
+ dwarfie: Automaton2000 ... chat ou tortue&#160;?
+ Automaton2000: il te manque juste un peu plus loin
+ dwarfie: Automaton2000 ... chat ou tortue ...ou chien&#160;???
+ Automaton2000: merci pour votre aide&#160;:)
+ dwarfie: Automaton2000&#160;: pas merci pour l'absence de la tienne
+ Automaton2000: je viens de le faire, mais ça a pas l'air de le faire en c
+ egaetan: ça le fait en C Automaton2000
+ Automaton2000: en fait je me demande si c'est pas un truc genre
+ dwarfie: Automaton2000 , ca le fait toujours en C ... d'ailleurs python fait toujours tout en C 
+ Automaton2000: c'est peut-être pas le bon résultat
+ dwarfie: Automaton2000&#160;: c'est surtout pas la bonne facon de faire ... autant le faire en C directement
+ Automaton2000: je suis à la recherche
+ Vivien82: Le problème c'est que je suis passé trop vite sur certaine notion que j'aurai du mieux comprendre... Maintenant, je suis obligé de gérer d'autres paramètres qui rajoute de la complexité dans la compréhension 
+ BlaiseEbuth: Fallait être moins bon. :shrug:
+ SeebOmega: Vivien82 c est ton premier contest&#160;? 
+ Vivien82: contest&#160;?
+ SeebOmega: concours 
+ Vivien82: Je suis en train de faire ça Coders Strike Back, je ne sais pas si ça répond à la question
+ SeebOmega: ah ok non il y a un concours en cours le spring challenge 
+ SeebOmega: mais sur CSB du coup les regles evoluent jusqu en legende 
+ Vivien82: Oui c'est ce que j'ai compris
+ Vivien82: Avec des paramètres en plus à gérer
+ SeebOmega: c est la rancon de la gloire
+ pardouin: dwarfie j'ai fait une partie contre toi pour voir, au tour 23 tu avais un arbre richness 2 restant que tu n'as pas complete alors que ça t'aurait fait un point de plus
+ dwarfie: pardouin .. c'est ca les joies du random ....&#160;:)
+ pardouin:&#160;:)
+ BlaiseEbuth:&#160;:)
+ BlaiseEbuth: (╯°□°)╯︵ :upside_down:
+ BlaiseEbuth:&#160;:) ノ( º _ ºノ)
+ dwarfie: :relaxed: :upside_down: :relaxed: :upside_down: :relaxed: :upside_down: :relaxed: :upside_down: :relaxed: :upside_down: :relaxed: :upside_down: :relaxed: :upside_down: :relaxed: :upside_down: :relaxed: :upside_down: 
+ dwarfie: et ca roule encore
+ BlaiseEbuth: Une animation sur deux frames... C'est nul
+ pardouin: rebelotte avec un arbre de richness 4
+ pardouin: tu devrais dérandomiser au moins le tour 23 :p
+ BlaiseEbuth: Les arbres n'ont pas de richness. Et la richness ne va pas au delà de 3.
+ BlaiseEbuth: Fix ta précision
+ pardouin: je parle de la case de l'arbre qui rapporte 2 ou 4
+ BlaiseEbuth: Oui.
+ Vry: (3-1)*2 :p
+ Vivien82: SeebOmega en tout cas merci pour tes réponses
+ -Cile-: Vivien, au départ dans Bronze essaie d'identifier le ou les paramètres que tu juges les plus importants et laisse de côté les autres. Rien qu'en faisant ça il est possible d'arriver en ligue or... je sais de quoi je parle... je ne gère toujours pas les ombres ni le placement de l'adversaire, ni pas mal de choses...
+ Vivien82: D'accord merci du conseil
+ BlaiseEbuth: Le plus important c'est de gagner. Donc laisse la défaite de côté, et go Gold&#160;!
+ -Cile-: X)
+ JBM: tiens c'est mignon ça, je découvre ce matin: <a rel="nofollow" class="external free" href="https://twitter.com/0x26d/status/1392335643888422912">https://twitter.com/0x26d/status/1392335643888422912</a>
+ SeebOmega: -Cile- il est sur CSB pas sur le concours actuel 
+ dbdr: JBM lol
+ pardouin: pas mal&#160;:)
+ Vry: C'est étonnant mais mon MC est vachement plus nul avec le decay ...
+ BlaiseEbuth: y tho
+ Vry: ... on doit pas avoir le même "MC" :upside_down:
+ SeebOmega: j ai retire le decay perso ca forcais la coupe d arbre trop tot j ai compense par un bonus relatif aux soleils gagnes ou perdus 
+ SeebOmega: (ca veut pas dire que c etais une bonne idee hein ...)
+ Vry: Je submit pour voir&#160;: 634 avant decay ...
+ Vry: Oh le massacre ... 100% de pertes :joy:
+ dbdr: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/739f13ef-5d80-4293-9920-4755bf328309">http://chat.codingame.com/pastebin/739f13ef-5d80-4293-9920-4755bf328309</a>
+ dbdr: on y croit?
+ SeebOmega: le mec essayes de int overflow par le bas pour aller au top du classement
+ dwarfie: t'aurait pas fais la meme boulette que moi vry ... genre strocker les score dans un int ...
+ Vry: Nan j'ai pris un double pour le decay
+ Vry: C'est bien en fonction du day&#160;?
+ Vry: J'ai vérifié la formule elle donne le résultat attendu
+ Tiouz: Le decay de nutrients c'est en fonction des complete pas des jours
+ dwarfie: tu fais bien (nodeday-currentday) ..? j'ai fais aussi la boulette ...
+ Vry: Ah pas con ...
+ Vry: :upside_down:
+ dbdr: bah un facteur constant pour tout le monde, ça change rien dwarfie
+ dwarfie: moi ca changeait tout quand j'ajoutais les sun a la fin ... apres , oui , sans doute que j'appliquais mal a la fin&#160;;)
+ Vry: Ah mon avis il doit y avoir des différences sur nos simulations je pense
+ dbdr: si tu appliques pas le decay sur tout oui ça change
+ dwarfie: Vry ... surement , je viens de regarder une de tes parties et pas une fois t'as tenté de faire un seed ...
+ dbdr: seedless
+ Vry: Ben c'est au "hasard" ... :upside_down:
+ dwarfie: comme dirait manwe (il me semble que c'etait lui)&#160;; il y a bon random et mauvais random&#160;;)
+ JoPich: salut à tous, j'ai l'impression qu'un arbre qui est sous le coup d'une ombre menacante ne peut pas faire de seed. Hors je ne trouve pas ça dans la regle. Qu'en est il&#160;?
+ BuluBulu27: Bon, le mauvais random, tu lui donnes une liste de moves, il t'en retourne un au hasard
+ BuluBulu27: Le bon random, lui, tu lui donnes une liste de moves, et il t'en retourne un au hasard
+ BuluBulu27: Mais c'est un bon random
+ Vlavv: Hello JoPich, non ça ne l'empêche pas de seeder, tu as vérifié si tu avais assez de points de soleil (notamment s'il y a déjà d'autres graines plantées)&#160;?
+ dwarfie: mais la liste de move n'est pas forcement celle du mauvais en integralité
+ JoPich: ah ben oui, que je suis con. Merci
+ JoPich: Et concernant le bon et le mauvais Random, ça vient d'ici&#160;: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=QuGcoOJKXT8">https://www.youtube.com/watch?v=QuGcoOJKXT8</a>
+ BlaiseEbuth: Non. Ca c'est les bons et les mauvais chasseurs. Rien à voir.
+ Vry: Bon osf du MC, passons au choses sérieuses&#160;: le MCTS&#160;!
+ Vry: *osef
+ egaetan: osef
+ dwarfie: Vry , donc mon indication en mp te sers pas ...? dommage ...
+ Vry: J'ai pas vu ... lol
+ BlaiseEbuth: Orbital Sacred Elephant Fighter
+ BlaiseEbuth: Tiens. Comon lisp is the new D...
+ BlaiseEbuth: +m
+ philRG: je vends ma fonction de calcul d'ombres en numpy et coordonnées cubiques
+ dwarfie: aller ... submit de ma derniere versions qui sera en MC ... et apres , reposer les neurones ...
+ philRG: c assez rigolo, suffit d'additionner 2 tuples pour se déplacer dans la grille 
+ philRG: hex + direction + direction + direction
+ dwarfie: rah , c'est quoi tous ces bots qui me font chuter des que j'arrive a depasser stilgart :D
+ Arthurmtro: Les guys y'a moyen de savoir la shadowsize d'une cell dans le code &gt;&gt;
+ Arthurmtro:&#160;??
+ Littleyounes: non
+ Arthurmtro: SADNESS 
+ Littleyounes: yep
+ R4N4R4M4: Salut tout le monde
+ Vry: o/ R4N4R4M4
+ Littleyounes: c quoi vos délires de o/
+ R4N4R4M4: \o/
+ BlaiseEbuth: Stoi qui délire
+ Littleyounes: Oh
+ philRG: direction soleil = 0 revient à un tuple de (1, -1, 0)
+ philRG: c rigolo
+ philRG: le contest est aussi une manière de découvrir les coordonnées cubiqus
+ philRG: es
+ BlaiseEbuth: Même si on voulait pas, puisque tu nous en fait profiter...
+ dwarfie: ah ... parce que le plateau de jeu c'est une grille ... j'aurais peut etre du regarder :yum:
+ dwarfie: (mais c'est vrai que les 2-3 premiers jours , j'avais le viewer qui marchait pas)
+ R4N4R4M4: JoPich le bon et le mauvais random, ça vient de là :D <a rel="nofollow" class="external free" href="https://youtu.be/8kBQMQyLHME?t=1667">https://youtu.be/8kBQMQyLHME?t=1667</a>
+ Magus: c'est quoi la marche à suivre quand tu cherches un algo et que la seule chose que tu trouves c'est des pdf scientifiques avec des formules mathématiques dans tous les sens et au mieux des pseudos codes inutilisables&#160;? 
+ Neumann: Lire et comprendre lesdits papiers
+ Neumann: gl
+ philRG: BlaiseEbuth en gros j'ai récupéré le taf d'un/une cg du challenge, et j'ai rajouté un attribut dans ma classe Cell du starter, puis je déplace ma petite fourmi sur la grille
+ philRG: <a rel="nofollow" class="external free" href="https://razdva122.github.io/CODINGAME-SPRING/">https://razdva122.github.io/CODINGAME-SPRING/</a>
+ R4N4R4M4: Fix les pseudo codes Magus
+ BlaiseEbuth: 1- Fermer l'onglet.2- Se mettre en PLS et sanglotter.3- Chercher une autre solution.
+ Magus: j'ai fait que les 2 dernières étapes pour l'instant
+ philRG: quitte à faire un contest avec des grilles hexas, autant profiter des contributions des 6000 inscrits
+ Magus: mais sérieusement je comprend pas, je dois pas être le seul à être juste pantois devant ces pdf incompréhensible
+ BlaiseEbuth: Non&#160;:(
+ Magus: je comprend pas qu'en tape "&lt;insérez un algo&gt; code example" on trouve rien à chaque fois &gt;&lt;
+ Magus: *tapant
+ Littleyounes: bande d'amateurs
+ philRG:&#160;:-D
+ BlaiseEbuth: philRG quels "contributions des 6000 inscrits"&#160;?
+ philRG: parmi les 
+ VincentBab: Non t'inquiete Magus, je me suis retrouvé en PLS devant un article qui parle de DUCT ^^
+ tenukiUser: j'ai une question , j'ai battue le dernier bosse de la ligue bois dans coders srike back mais je passe pas en ligue bronze... comment je dois faire x)&#160;?
+ R4N4R4M4: super ta map philRG
+ dwarfie: tenukiUser ... finir devant lui au classement avec le run a 100%
+ tenukiUser: mais je suis déjà premier de la ligue bois 1
+ Tiouz: Attends 10 secondes
+ Tiouz: Ton score est encore en train d'être calculé
+ tenukiUser: yep
+ tenukiUser: juste ma co qui pue
+ tenukiUser: merci&#160;!
+ tenukiUser: en tous cas c'est vraiment fun
+ dbdr: tu cherches quoi comme algo magus?
+ JBM: la pêche à l'info
+ JBM: mmm
+ JBM: pèche
+ JBM: rha
+ WhatTrickeryIsThis: avec gaetan on a enventer le beamcts
+ dbdr: joli nom
+ WhatTrickeryIsThis: je viens de faire un peu de perfs pour plus de rollout, ça devrait taper dans le top 50
+ dbdr: gogogo
+ WhatTrickeryIsThis: c'est comme un mcts mais avec un dummy et une profondeur de random
+ WhatTrickeryIsThis: c'est pas encore connu comme technique, mais je crois qu'on va comprendre pourquoi
+ Magus: dbdr je voulais voir à quoi ressemble un mcts DUCT vu que j'en ai jamais fait (la dans l'arène j'ai un beamsearch maintenant). Mais je trouve juste des pdf scientifiques et absolument aucun indice de quoi coder en fait ....&#160;:/
+ VincentBab: Pareil Magus xD
+ WhatTrickeryIsThis: ou pire t'as un tuto youtube avec un indou qui parle anglais
+ WhatTrickeryIsThis: La vache j'ai gagné contre une mouette
+ WhatTrickeryIsThis: Grillaume, c'est quoi ce plan?
+ WhatTrickeryIsThis:  /add enemies *Grillaume
+ WhatTrickeryIsThis: Error&#160;: maximum enemies reached, plz remove  either Neuman, Recurse, AutomatoNN
+ Zorg1: c'est un indien plutôt, tu la connais pas sa religion&#160;;-)
+ Tiouz: Sérieusement, j'ai un int[37] pour les sizes et deux bitset&lt;37&gt; pour  savoir si les arbres sont à moi ou dorment, et je passe 30% de mon temps à aller chercher les valeurs
+ Tiouz: Qu'est-ce que je fais mal&#160;?
+ Vry: La cuisine&#160;?
+ pardouin: un hindou qui parle dans un langage non identifié et tu mets les sous titres anglais et au bout de 5min tu percutes qu'il parlait anglais
+ yuyu: c'est vraiment performant bitset pour un random access read/write? y'a quand meme un petit overhead à chaque operation pour extraire le bit qui va bien
+ pardouin: 've been there, 've seen that
+ Tiouz: yuyu par rapport à un bool[]&#160;?
+ BlaiseEbuth: Il a un t-shirt &lt;front-end&gt; l'indien&#160;?
+ yuyu: par rapport à un bool[37] par exemple oui (je parle en terme de perfs, pas de memoire)
+ pardouin: je parlais plus de ce genre de video:<a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=jhoXO1XF6Fk">https://www.youtube.com/watch?v=jhoXO1XF6Fk</a>
+ BlaiseEbuth: L'intérêt principal du bitset c'est de minimiser la quantité à copier (ton état de jeu quand tu simules par exemple), si c'est un truc statique...
+ pardouin: dans le même style:<a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=Y4lGw4hkBnY&amp;t=32s">https://www.youtube.com/watch?v=Y4lGw4hkBnY&amp;t=32s</a>
+ yuyu: bien sur, mais si ce qui est limitant est le temps passé à read/write, j'imagine que la question se pose
+ pardouin: je mets ça en audio quand j'ai du mal à m'endormir
+ BlaiseEbuth: C'est un calcul...
+ YannT: perso je copie pas de states  sur ce jeu, je joue des coups et je reset  le board
+ BlaiseEbuth: Autre méthode.
+ YannT: du coup  pas convaincu de l'intéretde bitboarder
+ BlaiseEbuth: Sais pas.
+ YannT: j'ai un  Array(37)&lt;Tree&gt;,  mais  comme je copie pas ça  doit être  plus perf que de transformer tout ça en un paquet d'opérations bitwise
+ BlaiseEbuth: J'ai fait ça comme ça, mais en fait je me rends compte que je pourrait encore virer des trucs du state, et que du coup pour ce qui reste... Bah ta méthode est sans doute mieux.
+ Tiouz: YannT en c++&#160;?
+ YannT: non
+ yuyu: c'est aussi ce que je pense, si le game n'est pas copié mais modifié souvent, vaut mieux minimiser cout du read/write
+ Tiouz: Et pour minimiser le coût c'est mieux les tableaux c'est ça&#160;?
+ YannT: ça dépend
+ Rajh: YannT quand tu reset ton state tu dois bien recopier les trees que t'as eu en input non&#160;?
+ YannT: ben non
+ YannT: je reset les tree du board de simu en fonction de ceux du board d'origine
+ Rajh: Ah tu les copies une fois, et après tu les reset
+ Rajh: ou tas un state d'init stocké qqpart
+ WhatTrickeryIsThis: Neumam il m'a bousillé mon submit&#160;:(
+ YannT: j'ai un board qui s'update avecc les  inputs, et un board pour la simu
+ Rajh: ok ok
+ Rajh: Moi je recopie tout le state, mais au final on le fait qu'une fois par rollout donc c'est pas si enorme non&#160;?
+ BlaiseEbuth: Rajh&#160;: Es tu bien sûr de ce que tu avances dans ta bio&#160;?
+ YannT: si, c'est énorme
+ BlaiseEbuth: TWSS
+ Rajh: BlaiseEbuth c'est ma bio, c'est toujours un peu romancé une autobio
+ BlaiseEbuth: Hmm
+ YannT: (surtout avec un language JVM, parce que faire des new te fout dedans avec le GC)
+ Rajh: YannT bah du coup si tu fais 2k rollout, tu economise 2K copie&#160;? Mais sur 300000 simulation de tour ca me semble dérisoir
+ Magus: Même si c'est moins en C++, les new c'est "lent"
+ Magus: en général on évite d'en faire dans les parties critiques
+ Rajh: Ouai d'ailleurs j'ai stocké tout les output possibles a l'init en variable static
+ WhatTrickeryIsThis: y à un truc pour créer tes objets au premier tour et faire un coups de GC pour avoir de la perf en java
+ WhatTrickeryIsThis: je me rappel plus
+ YannT: ouais mais ça a tendance à pas marcher
+ WhatTrickeryIsThis: le 3em en Java il fait ça
+ BlaiseEbuth: Comme java en fait...
+ Rajh: Mais du coup YannT t'utilise pas de List pour tes Trees&#160;?
+ YannT: tu peux faiire genre un System.getRuntime().gc() ou un truc du genre sur la fin du premier tour
+ YannT: mais s'il décide de se  lancer plus tard et de te  flinguer  un tour suiivant,  c'est  le même tarif après
+ WhatTrickeryIsThis: bhne justement je crois c'est pas tout à fait à la fin
+ Magus: e
+ Magus: en théorie, si tu appels le gc à la fin du premier tour et que tu ne crées jamais d'objet plus tard, le gc repassera jamais
+ yuyu: la difference pour read/write n'a pas l'air négligeable, surtout pour l'ecriture <a rel="nofollow" class="external free" href="https://godbolt.org/z/M8nrcdWhn">https://godbolt.org/z/M8nrcdWhn</a>
+ Magus: (mais bon, "ne pas créer d'objet" en java, c'est compliqué. Dés que tu vas utiliser une fonction de java, ça va en créer)
+ yuyu: entre bitset et bool[]
+ WhatTrickeryIsThis: rien qu'une looop, je sais pas si ça réveil le gc
+ BlaiseEbuth: std::bitset&#160;?
+ yuyu: oui
+ YannT: l'idée c'est de tout instancier  au premier tour puis  plus  jamais faire de new  le  reste du jeu et croiser les doigts pour qu'il  décide pas de se réveiller en gros :D 
+ BlaiseEbuth: Jamais utilisé ça, je sais pas ce que ça vaut.
+ pardouin: je change mon heuristique pour où semer les graines par un truc radicalement différent
+ pardouin: je finis avec exactement le même classement -_-
+ Vry: GG&#160;!
+ Vry: Courage ...
+ mle-faou: Dites, le chrono de 100ms, il commence quand&#160;? je suis en C++ et std::chrono me dis que mes tours font 200-500ms mais le jeu ne m'arrète pas
+ Pedrito_B: a partir du premier read
+ Pedrito_B: cin
+ cuduputu: Petite question de noob ^^, c'est déjà quoi la commande pour pinrt dans stderr dans l'IDE CG en python&#160;? merci&#160;;)
+ cuduputu: *print
+ mrBen: print(..., file=sys.stderr) je crois
+ mrBen: normalement t'as un commentaire avec le code initial
+ cuduputu: yep, c'était le plan b ^^
+ cuduputu: merci, c'est bien ça&#160;:)
+ mrBen: (j'ai un doute sur sys.stderr, vu que c'est os.Stderr en GO, je confond)
+ mle-faou: Pedrito_B merci je ne comprenais pas :thumbsup:
+ pardouin: print(..., file=sys.stderr, flush=True) idéalement
+ pardouin: et utilise un f-string si tu veux plusieurs données sur la même ligne, tu peux pas afficher plusieurs éléments
+ mrBen: +1 c'est vrais qu'il y avais aussi flush=True dans le commentaire de base
+ Pedrito_B: pas probleme, j'ai posé la meme question il y a 5 jours
+ pardouin: genre f"{donnée1} {donnée2}"
+ cuduputu: yep, merci @pardouin
+ Tiouz: print(donnée1,donnée2,...)
+ Vry: C'est grave docteur&#160;?
+ Vry: warning: ‘fastlog2’ is static but used in inline function ‘fastlog’ which is not static
+ BlaiseEbuth: C'est un warning... On s'en fout&#160;!
+ mrBen: oui et non, on peut s en foutre seulement si on sais pourquoi c'e3st pas grave
+ BlaiseEbuth: -&gt; C'est un warning
+ BlaiseEbuth: Si c'était grave ce serait une erreur.
+ mrBen: :no_mouth:
+ Kafeine: Ca dépent
+ BlaiseEbuth: Non.
+ Kafeine: if(i=2)
+ YannT: mrBen:  non, c'est on s'en fout tant  qu'on  a pas prouvé que c'est grave
+ mrBen: le choix entre mon approche et ton aproche, c'est selon la deadline...
+ YannT: :D
+ BlaiseEbuth: Bon. J'avais besoin d'un dummy pour ma simu. Donc j'ai codé un truc fini à la pisse avec des coeffs de l'instinct du pif, et pour voir je l'ai branché à stdout... Et vu les résultats je l'ai submit... Là je suis 1er bronze, avec +8ELO sur le 2eme, et un winrate de 100% à 55% du run... Preuve s'il en est qu'il vaut mieux ne pas réfléchir.
+ Arthurmtro: Blaise tu est en bronze toi &gt;
+ Arthurmtro:&#160;?*
+ Vlavv: Je veux bien un peu d'inspiration sur tes coeffs de l'instnct du pif, parce que moi dès que j'en modifie un je recule de 3 places
+ YannT: il faut mettre un log()
+ Vlavv: des logs j'en ai une tapée, ça compte&#160;? 😇
+ YannT: et du decay, c'est biien aussii le decay
+ Vlavv: je préfère le vrai cafay
+ BlaiseEbuth: J'avais encore rien submit. A part le même truc que tout le monde pour passer bronze et avoir les règles complètes. Donc ouai bronze Arthurmtro
+ BlaiseEbuth: A flute, j'ai perdu le 61eme match...
+ leojean890: ça a cut super haut la gold je m'attendais à tout sauf ça&#160;;)
+ leojean890: (suis pas revenu sur CG depusi..)
+ Arthurmtro: D'acc chef je pensais que tu etait dans les tous premiers&#160;:)
+ BlaiseEbuth: Et le 75...
+ mrBen: tu vas finir top Silver voir Gold
+ BlaiseEbuth: Pas encore. Mais ça va venir... :3
+ leojean890: BlaiseEbuth t'es parti sur quoi&#160;? MCTS/MC/beam&#160;?^^
+ BlaiseEbuth: dummy
+ leojean890: ah oui je viens de remonter le chat pardon
+ leojean890: moi pareil je suis en heuristique eval simu depth 1
+ BlaiseEbuth: Pas simu.
+ leojean890: ah ok
+ leojean890: (vu qu'hier tu parlais de bitsets)
+ BlaiseEbuth: Enfin j'en ai une, mais le dummy joue sans
+ leojean890: ouais j'ai connu ça, l'heuristique sans simu qui joue mieux que la simu avec eval
+ BlaiseEbuth: C'est 4 ifs et des coeff s...
+ leojean890: (mais depuis, j'ai amélioré l'éval pour que ça joue mieux que mon dummy d'avant)
+ leojean890: je vais me tuner sur Vlavv vu qu'il est en heuristique (je crois encore&#160;?^^)
+ leojean890: je me suis fait pousser legend sur hypersonic avec mon bfs en python depth 3 (qui finit bottom legend) ;o les mecs tryhardent les multis pendant les contests (et les bons qui me montent et baissent les boss^^')
+ BlaiseEbuth: Wé silver&#160;! Y'a de nouvelles règles&#160;? Elle ouvre quand la league gold&#160;?
+ Arthurmtro: Gold c'est ouvert la il me semble
+ leojean890: mdr ce troll
+ BlaiseEbuth: Il est mignon ^^
+ Tiouz: :facepalm:
+ Arthurmtro:&#160;:|
+ BlaiseEbuth: :rofl:
+ leojean890: comment tu imites les mecs qui sortent ça sérieusement ça régulièrement;)
+ Arthurmtro: chips
+ leojean890: ah non il est pas déterministe vlavv lol
+ Vaurtitoux: Rajouter des lignes de codes pour au final avoir un moins bon résultat, mon passe-temps favoris :flushed:
+ bamax: le passe temps de plein de codeur xD
+ leojean890: ouais ça arrive ça
+ leojean890: vive les biais cognitifs
+ Littleyounes:&#160;:'(
+ BlaiseEbuth: Code un dummy, go legend
+ leojean890: sur CG ça se fait
+ leojean890: bamax t'es le pote de Paul Lemair, non&#160;?^^
+ bamax: yep
+ bamax: c'est ca
+ leojean890: enchanté&#160;;)
+ bamax: enchaté
+ bamax: tu est le no life passioné de CG c'est ca&#160;? :D
+ bamax: (tu travail des fois&#160;?! )
+ leojean890: quoi&#160;?? :P:P
+ BlaiseEbuth: :rofl:
+ leojean890: non je fais pas que du CG, faut pas abuser xD
+ bamax: je te vois quand emme souvent xD
+ leojean890: ça va ouais, et parfois je lance des submits de bench de params mais ça veut pas dire que je suis là^^
+ BlaiseEbuth: Si tu le vois c'est que t'es là aussi... :rolling_eyes:
+ Vaurtitoux: Fiction: Mon rang augmente passivement, mon code est bon.
+ bamax: BlaiseEbuth chuuut
+ bamax: par contre leojean tu me decois, tjr pas top 100 :O
+ leojean890: mdrr
+ leojean890: déjà j'ai pas fait de CG today, j'étais dans la famille de ma copine&#160;;)
+ leojean890: (ni hier soir) mais j'allais m'y remettre justement^^
+ Vaurtitoux: "dans"? :flushed:
+ pardouin: t'es combien leo&#160;?
+ bamax: j'essaye d'amelioré mon code. Mais c'est chaud
+ leojean890: top 100 c'est chaud en fin de contest j'ai réussi que pour OOC^^
+ leojean890: j'ai du mal en tout cas^^
+ leojean890: faudrait que je fasse QUE ça^^
+ Trisard: je crois qu'on en est tous la bamax ^^
+ pardouin: pile 200 tiens
+ bamax: deja j'ai commencer le python object.
+ bamax: le code est plus propre
+ leojean890: pardouin ouais ce code a fait 130 au ieux
+ bamax: plus qu'as upgrade
+ BlaiseEbuth: python, propre...
+ leojean890: mais ça baisse depuis
+ dwarfie: :nauseated_face:
+ pardouin: tu finiras peut-être legend vu que le cut est assez généreux
+ k4ng0u: bamax "python object" why??? quand t'as des vrai langages objets plus rapide :p
+ leojean890: ah ouais pour gold ils ont été généreux^^
+ bamax: sur CG je code uniquement en python
+ Arthurmtro: Python et js &gt;&gt;&gt;&gt; all
+ Arthurmtro: x)
+ BlaiseEbuth: juste "des vrais langages" ça suffit
+ leojean890: comme ça tu t'emmerdes pas^^
+ dwarfie: leojean890 ... tu dis ca juste parce que tu t'es pas fait claquer la porte au nez toi
+ dwarfie: :D
+ bamax: c'est la que je suis le plus a l'aise et c'est le lenguage que je connais le mieux
+ leojean890: dwarfie arf t'es passé juste en dessous&#160;?^^
+ dwarfie: j'ai galéré connement pour passer ...
+ k4ng0u: Arthurmtro apres le mec qui ferait du js objet plutot que du typescript ca serait vraiment next level
+ leojean890: python ça permet de coder vite en effet (plus accessibles), dans d'autres langages ça demande plus de boulot^^
+ bamax: bon par contre, je sais tjr pas ecrire apparament&#160;;(
+ dwarfie: vite et mal ... ou lentement et bien .... moi j'ai choisi ... et vous&#160;?
+ bamax: c'est pas mal. Exagere pas
+ Arthurmtro: Moi je suis en js... road to top 10 en js ^^' 
+ dwarfie: je parle en connaissance de cause ... pas comme les pythonovistes qui ont jamais codé dans d'autres langages ... justement ...
+ mrBen: oof
+ bamax: nan mais je sais. Le python est pas le plus adapat". Mais de la a dire "mal"
+ BlaiseEbuth: Ah si.
+ BlaiseEbuth: Vraiment
+ Arthurmtro: loul, en vrai par contre dans ce genre de challenge le language importe reellement&#160;? je veux dire on recherche pas la ms de fou la non&#160;? on cherche un algo il me semble 
+ BlaiseEbuth: :3
+ mrBen: sur des algo d'exploration graph, tu cherche un peu les ms quand même
+ bamax: ouai mais il parle pas en terme de temps de calc la je pense
+ k4ng0u: le top 20 principalement en c++, rust et java c'est juste un concours de circonstance :p
+ Vlavv: Oui leojean890 je suis toujours en heuristique&#160;;)
+ BlaiseEbuth: Oui java c'est une erreur
+ dwarfie: rappel ... on a 100 ms au lieu de 50 ... sinon vous verriez que la chasse aux ms ca compte
+ BlaiseEbuth: ^
+ mrBen: en fait 110 ça passe, il ont prit large
+ Arthurmtro: Oui mais dans ce cas sa compte pas tant que sa&#160;?
+ Mazelcop: si
+ leojean890: Vlavv mais t'es pas déterministe ^^ quand je mets "rejouer dans les mêmes conditions" tu changes :P Alors que GuillaumeBardy est déterministe :P
+ <b>**dwarfie va pas dire que c'est parce que certains langages ont ete mis a jour et ont moins de perf ... mais peut etre que si</b></p><p><img src="/a/4332025763976" /> Vlavv: leojean890, ça ça vient uniquement des hash de perl dont l'ordre des clés est aléatoire&#160;:)
+ leojean890: ah d'accord^^
+ leojean890: thanks pour l'explication ;P
+ Arthurmtro: Non mais je ne voit pas vraiment l'impact du language pour le moment
+ Arthurmtro: Pour un probleme d'algo a 100 ms
+ Arthurmtro: dumoin
+ Vaurtitoux: j'avoue go bash
+ Arthurmtro: go Brainfuck
+ Vlavv: actuellement je finis une partie avec une moyenne de 3.3 ms par tour :D
+ Vlavv: j'aimerais bien que les tours soient limités à 10 ms, les simus feraient moins les malins
+ BlaiseEbuth: Carrément
+ jdeveil: +1
+ Trisard: J'avoue que ça ferais des heureux
+ Arthurmtro: Sa serais styler pour le rang legende de diminuer les ms
+ BlaiseEbuth: Bon. 796 argent le dummy.
+ Vaurtitoux: Vlavv tu parse les actions possibles pour toi et ton adv dans ces 3.3ms&#160;?
+ Vlavv: éventuellement une ligue "gros bourrins" pour les simulateurs
+ k4ng0u: apres l'eval des simu c'est heuristique. c'est juste que l'heuristique change selon le reste de l'algo :p si on diminuait le temps, les langages rapides pourraient quand meme pousser leurs heuristiques plus loin et seraient tjs avantages. C'est juste les devs qui auraient une approche differente
+ Magus: bon, j'ai pas d'idée, il est temps de jouer ma carte secrète
+ Magus: je vais faire un gateau au chocolat
+ dwarfie: miam
+ bamax: xD
+ bamax: je prend note
+ Vlavv: Vaurtitoux, je compte à partir de la fin du parsing des inputs (qui est quasi négligeable de toute façon) jusqu'au tour suivant
+ bamax: ca a l'air d'etre une bonne astuce
+ BlaiseEbuth: The caki is a lie
+ Magus: (ça marche vachement plus souvent qu'on ne le croit :D )
+ bamax: xD
+ Arthurmtro: Miam
+ foufou: Ça s'appelle sortir le tête du sac
+ Vry: MCTS codé \o/ (maintenant il va falloir comprendre pourquoi il est plus mauvais que mon MC égocentré) ... :expressionless:
+ VincentBab: Je suis sur le meme problème depuis 2j xD
+ Mazelcop: trop de branching je dirais
+ bamax: c'est tellement horrible quand tu passe des heure a coder qqe chose. Et qu'il marche moin bien
+ Tiouz: bamax j'ai passé la journée à essayer d'augmenter mon nombre de rollouts et pas moyen
+ bamax: chiant
+ Arthurmtro: Tiouz c'est quoi des rollouts&#160;??
+ Arthurmtro: (1er degré)
+ BlaiseEbuth: Autobots!
+ BlaiseEbuth: <a rel="nofollow" class="external free" href="https://imgur.com/t/autobots_roll_out/Gxz2Pbz">https://imgur.com/t/autobots_roll_out/Gxz2Pbz</a>
+ bamax: xD
+ Vry: En même temps du est top #10 Gold&#160;!!! 
+ Vry: *tu es
+ mrBen: tu vas la mettre combien de fois celle-là Blaise&#160;?
+ BlaiseEbuth: Autant de fois que nécessaire.
+ Arthurmtro: x) merci pour l'explication 
+ Vry: Moi j'ai 6k rollouts ... mais coincé au fonds de Silver
+ BlaiseEbuth: Ah ouai Vry, qu'est-ce tu fais là en bas&#160;? Code un dummy
+ Vry: rollout = joue une partie juqu'au bout "au hasard"
+ Vry: J'ai un dummy en MC qui fait top 600 silver :upside_down:
+ Arthurmtro: Ahh dacc
+ Arthurmtro: Tellement de termes xp Mc, dummy etccc
+ mrBen: avec 1200 rollout je suis #1600, avec mon dummy #900
+ Tiouz: Avec 700 je suis #10
+ Tiouz: (j'ai peut-être fait d'autres améliorations)
+ Tiouz: jpp
+ mrBen: bon ça me rassure, j'ai pas besoin d'opti ma simu
+ BlaiseEbuth: Ouai fin c'est des super-dummy
+ Vry: Je pense qu'il faut le guider un peu dans la sélection des coups sinon il ne va jamais bien jouer
+ VincentBab: Tu es en MC Tiouz&#160;?
+ Tiouz: MCTS
+ Vry: Parce qu'en regardant quelques parties on voit bien qu'il n'est pas très futé ...
+ VincentBab: avec une eval du coup&#160;?
+ Tiouz: pas vraiment
+ VincentBab: tu rollout jusqu'a la fin&#160;?
+ Tiouz: Oui
+ Tiouz: Mais déjà le score c'est la diff des scores, et pas seulement +-1
+ VincentBab: oué j 'ai essayé ca parraissait logique car quand il pense avoir perdu ou gagner tout les moves sont scoré pareil sinon
+ philRG: maître dwarfie: tu crois que meilleures perfs en python depuis la maj?
+ philRG: ça va peut-être me motiver pour coder une simulation au lieu de procrastiner devant la beauté des coordonnées hexagonales
+ Zakaoai: Tiouz cette fois c'est toi qui m'a mit une sacrée avancé ^^' Je galère à monter plus haut
+ Tiouz: Oui, j'ai bien avancé
+ dwarfie: je laissais plutot a pender le contraire&#160;;) vu le nombre de truc inutiles qu'ils ont rajouté dans les lib par defaut ... :p
+ dwarfie: penser
+ pardouin: oh bordel tiouz enorme progression j'avais pas vu, gg&#160;!
+ Tiouz: haha merci
+ Vry: Wow, j'ai une victoire contre le boss Silver dans l'IDE ... je suis tout chose ... :upside_down:
+ Vry: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/554208603">https://www.codingame.com/share-replay/554208603</a>
+ 1gui2gui: salut, pour le challenge, on peut couper un arbre endormi ou pas&#160;?
+ Tiouz: J'en ai marre d'essayer d'augmenter mes rollouts, donc je vais implémenter améliorer mon heuristique
+ Vry: Non 1gui2gui
+ Vry: Tiouz, à nous deux on fini premier :p
+ 1gui2gui: ok, c'est bien ce que je pensais merci pour la confirmation&#160;:)
+ Tiouz: Vry En vrai il faudrait que je te montre mon code plus tard pour avoir ton avis. C'est pas normal
+ Vry: On fera un partage post-contest ...
+ 1gui2gui: bon j'arrive en ligue argent, mon bot survole un peu la ligue bronze  (en même temps j'ai commencé il y a quelques heures seulement à coder la stratégie avec les nouvelles règles donc j'ai plusieurs jours de retard) :grin:
+ b0n5a1: o/
+ Tiouz: \o
+ Vry: o/
+ Littleyounes: o/
+ Zakaoai: o/
+ b0n5a1: tain je maudis les débiles qui ont fait les formulaires en ligne de déclaration d'impôts là...
+ Littleyounes: o/
+ b0n5a1: adresses full ascii, pas d'accent, pas d'apostrophes...
+ Littleyounes: o/
+ b0n5a1: et ça essaye de e forcer à remplir un formulaire 2047 alors que tu bosses plus à l'étranger depuis plus de 10 ans 
+ Kafeine: Perso je met n'importe quoi et j'attend le controle fiscal
+ Kafeine: Comme ça t'es sur que c'est bon
+ b0n5a1: et c'est bien planqué l'endroit où ça se désactive, d'une débilité sans nom
+ b0n5a1: il faut cocher la case "déclaration de comptes à l'étranger" qui est DEJA cochée...pour faire apparaître une popup avec 3 cases à cocher dont le formulaire 2047 à décocher...non mais sérieux&#160;???
+ b0n5a1: ils embauchent les devs en segpa ceux là
+ Kafeine: C'est beau la bureaucratie Française
+ Kafeine: Ca a sa place au louvre
+ Littleyounes: o/
+ Kafeine: Après cents lignes de code modifié mon bot a perdu deux place ~o~
+ Tiouz: J'ai soumis mon bot, on verra bien
+ BlaiseEbuth: A coup de fouet le bot&#160;!
+ b0n5a1: mais LOL, mon frangin sur sa déclaration y'a marqué qu'il est né à Strasbourg...dans le 68&#160;! Et c'est pas modifiable (c'est dans le 67)
+ Anone13: CatBoss il est chaud
+ egaetan: nmahoude tu as des timeouts <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/554230647">https://www.codingame.com/share-replay/554230647</a>
+ Stilgart: Automaton2000: fais péter mes logs
+ Automaton2000: et je ne comprends toujours pas ce que fait le referee
+ BlaiseEbuth: Normal c'est du java...
+ BlaiseEbuth: o/ Stilgart
+ Stilgart: Automaton2000: moi je compte ton nombre de tortues
+ Automaton2000: faut pas faire de simu
+ Stilgart: \o BlaiseEbuth
+ b0n5a1: o/ Stilgart
+ Stilgart: Automaton2000: pour "const 0" j'ai pas besoin de simu, en effezt
+ Automaton2000: en fait j'ai eu un doute sur le fait que j'ai pas mal de gens
+ Stilgart: \o b0n5a1
+ Stilgart: bon, 1k en gold c'est juste complétement abusé
+ Stilgart: j'en ai fait plus à SC 2020 et j'étais mid silver
+ BlaiseEbuth: Etrangment, mes perfs sont (ridicules) moins bonnes quand la simu tourne effectivement. :thinking:
+ dwarfie: Stilgart ... c'est toujours moins abusé que boulet top bronze :D
+ BlaiseEbuth: Bon. Bah ça va partir sur un refacto
+ dwarfie: et encore Stilgart ... t'etais encore 100 places plus haut y'a pas si longtemps ...
+ Vry: Je magouille ma fonction backPropagate ... on sait jamais sur un malentendu ...
+ dwarfie: Vry ... j'en suis encore pas la ... j'en suis meme loin ...
+ dwarfie: j'ai perdu le peu de motivation que j'avais pour ce contest en fait ...
+ Vry: Mais bizarrement ça ne change rien au comportement du MCTS, un peu comme si la fonction n'avait aucune utilité ...
+ Vry: Moi de toute façon, je termine ce soir quoi qu'il arrive ...
+ dwarfie: ca risque  donc d'etre la premiere fois ou je finirais devant toi depuis longtemps ... (a moins que je me trompe) ... et pas pour les bonnes raisons
+ Vry: en plus j'en profite pour ajouter des bugs ... gene toujours jouer la dernière commande de la liste
+ Vry: Mais au final ça marche mieux que le MCTS :upside_down:
+ dwarfie: la derniere , c'est pas genre .... un seed&#160;?
+ BlaiseEbuth: Seeeeed, Priiiiiiiinnnnce des flammes.
+ Vry: Nan hcez moi c'est les COMPLETE
+ Vry: Quand ils sont possibles ...
+ Vry: Je liste d'abord les SEED, ensuite les GROW et enfin les COMPLETE
+ Vry: C'est chiant ces algo qui ne fonctionnent pas tout seul&#160;!
+ Vry: Il faut le coder et ensuite comprendre ce qu'on a fait ... c'est trop de travail ...
+ Vry: Une opti. de ouf ... pas besoin de faire des seeds le dernier jour&#160;! :p
+ dwarfie: sauf s'il coute 0 ... en cas d'egalite , ca fait +1 pour les arbres
+ YannT: meme sii ça coute jusqu'à 2, selon le nombre de points de sun que tu as :p 
+ dwarfie: indeed
+ Vry: Bon de toute façon mon MCTS n'en faisait pas pour une raison indéterminée ...
+ YannT: t'as besoin d'optimiser le dernier tour avecc un MCTS? :p 
+ Vry: Ben, j'ai surtout besoin de comprendre ce qui se passe dans un MCTS parce que là je plafonne tope 700 en silver ... c'est honteux a priori pour un MCTS
+ Vry: *top
+ Mazelcop: tu prends en compte tous les coups possibles ou tu filtres un peu&#160;?
+ Mazelcop: si tu filtres pas tu va te retrouver avec 90% de seed
+ Vry: Bizarrement sur le dernier coup le referee me donne un bon paquet de seed et moi j'en vois aucun :upside_down:
+ Vry: donc oui j'ai un filtre (sur les cases du bord) mais là plus aucun seed, c'est louche
+ Vry: Ah non ça va ... input en décalage
+ LESOURDINGO: sans MCTS je passé gold
+ Vry: GG LESOURDINGO
+ Xmaster6: Mon mcts galère aussi Vry
+ YannT: mon MCTS sans fioritures et très mal optimisé fait top200 là, donc en tout cas le concept général est valié
+ Vry: Le concept, j'y crois YannT&#160;!
+ Xmaster6: Je pense la clé c'est de select les meilleurs actions quand même
+ YannT: (reste le soucis que comme il fait peu de rollouts, il joue les débuts de partie pratiquement random quoi)
+ Vry: Mon implémentation (pourtant Légende sur UTTT) moins ...
+ Vry: ... la seule piste que je vois c'est la gestion du résultat ... et donc un parcours de l'arbre pas top.
+ Troph: mettre quelques règles simples en début de parties je pense que ça ne te ralentira pas de beaucoup
+ Vry: Mais ça va m'obliger à soulever le capot ...
+ dwarfie: passe par le chassis 
+ BuluBulu27: Est-il possible qu'un arbre nous fasse de l'ombre dès le début du jeu&#160;?Et qu'on ne gagne qu'un seul point de soleil&#160;?
+ BlaiseEbuth: Bawé
+ BuluBulu27: C'est moche
+ BlaiseEbuth: Jeu pas symétrique
+ dwarfie: c'est le jeu ma pov' lucette
+ YannT: s'toi pas symétrique
+ Vry: MCTS suicidaire&#160;: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/554285868">https://www.codingame.com/share-replay/554285868</a>
+ dwarfie: ils vont calmer leurs bips  a valider des NaN ...?
+ YannT: Vry: je trouve que t'as beaucoup de rollouts (si c'est bien ce que ton bot affiche en messages) pour le résultat...
+ Xmaster6: T'es sur que c'est un mcts Vry mdr
+ dwarfie: ca a failli me reveiller ...
+ VilBoub: GG Vry pour la technique du suicide ^^
+ Vry: Oui je suis pas mal en rollout ... mais totalement inefficace ... les rollout c'est sXXXX
+ YannT: ouais ben j'ai 2k rollouts donc bon
+ Vry: nXXXX c'est le nombre de coups joués
+ YannT: imo tes rollouts sont buggués
+ Vry: C'est la gestion du résultat qui est foirée je pense
+ YannT: ou ta simu
+ Vry: La simu est bonne en théorie c'est la même que le MC je n'y ai pas touché.
+ YannT: mais t'as  un truc qui va clairement pas parceque vu le nb de rollouts tu devraiis être trop100 sans forcer là si tout marche biien
+ Vry: Mais de toute façon il va falloir vérifier tout ça élément par élément
+ Troph: hmm, tu joues des milliers de coups quand tu as 0 coups dispo à la base&#160;?
+ Vry: Y'a toujours des coups à jouer ... comme WAIT pour moi et le coup de l'adversaire
+ Xmaster6: Normal, il a implémenté le passage de jour dans le mcts
+ Vry: Oui voilà, le rollout fait les 24 jours
+ VilBoub: même avec 0 soleil tu peux quand même planter une graine... tu ne la fais même pas ^^ (bon, après t'es coincé)
+ Zakaoai:&#160;;) VilBoub tu peut planter une graine si tu as un arbre sur le terrain
+ VilBoub: oups&#160;!
+ VilBoub: oui c'est vrai =)
+ YannT: Vry:  je pense que  tes  rollouts s'arrêtent  avant les 24 jour là, vu le nombre que t'as et les résultats aléatoires&#160;;) 
+ Zakaoai: Vry c'est suicider :D
+ Vry: lol
+ BlaiseEbuth: Vry! Le dernier dinosaure...
+ BlitzProg: est ce que le c++ support des entiers 128 bits?
+ BlaiseEbuth: Nein
+ fenrir: __int128_t
+ fenrir: c'est une extension mais elle souvent présente
+ BlaiseEbuth: Awé mais les DLC...
+ VincentBab: faudrait un int256 pour le bitboard du state xD
+ BlitzProg: en train de considérer un algo greedy, du coup j'explore un peu les options de bitboard
+ BlaiseEbuth: On dit algo wolverine, c'plus classe.
+ Oioi: Bon sang, 3 jours que je m'étais perdu dans mon propre code... Alleluiah&#160;! j'ai retrouvé mon chemin&#160;!
+ dbdr: gg Oioi :D
+ Tiouz: Combo de 32 victoires&#160;!
+ dbdr: tu arrives à la partie sérieuse Tiouz&#160;;)
+ Tiouz: C'est ça
+ Gr0mph: Bravo :money_mouth:
+ Tiouz: Il faudrait changer les adversaires choisis pour arriver plus vite en haut
+ dbdr: demain l
+ dbdr: égende
+ BigUP: Tiouz, non ne t'embete pas, fais directement une IA qui écrase tout le monde
+ JBM: y'a un stream "clojure et CG"
+ JBM: en ce moment ça promet
+ dbdr: la fête aux timeouts?
+ BlaiseEbuth: Bah vu que clojure est apprement pas réparé...
+ BlaiseEbuth: apparement
+ BlaiseEbuth: lapsus
+ dbdr: lol
+ BlaiseEbuth: Mais tout va bien y'a un mec et ses smurfs qui milittent pour l'ajout de common lisp.
+ b0n5a1: avec un Windows en japonais
+ b0n5a1: faut mettre le son au taquet pour que ce soit audible
+ b0n5a1: bon, dog time :grinning:
+ BlaiseEbuth: Moi qui supporte déjà pas le white theme... Avec la font en rose pale, c'est encore mieux...
+ BlaiseEbuth: C'est un français... Déception
+ Tiouz: Comment ça se passe les streams en terme de copie de code&#160;? Si un streamer est bien classé il suffit que je prenne sa VOD et que je copie non&#160;?
+ JBM: "il suffit"
+ BuluBulu27: ^^
+ BuluBulu27: Bonne chance pour suivre ligne par ligne sur un stream
+ JBM: fais comme b0n5a, regarde 5 streams en parallele et chope les meilleures idées
+ BlaiseEbuth: Ce pokémon est fou...
+ b0n5a1: si le mec est assez bête pour tout montrer oui...après tu peux risquer une élimination si c'est détecté (ou pas) 
+ R4N4R4M4: Tu peux copier le mien Tiouz, et je prends le tien :D
+ Tiouz: Mouais
+ b0n5a1: JBM ça marche pas c'est pas des streams CG
+ JBM: ah mince
+ b0n5a1: c'est que du game dev + 2D/3D art
+ b0n5a1: bon, la chienne râle ^^
+ BlaiseEbuth: *par des jolies dames.
+ b0n5a1: hmmm non, Alexandre pas jolie dame :grinning:
+ b0n5a1: JBM non plus
+ BlaiseEbuth: JBM c'pas du game dev...
+ JBM: non pas trop
+ b0n5a1: JBM est l'exception oui ^^
+ BlaiseEbuth: Et qu'est-ce que t'en sais qu'Alex est pas non-binaire&#160;? Qu'elle se considère comme une femme, et que tu l'insultes avec tes "Alexandre pas jolie dame"&#160;?
+ BlaiseEbuth: Vieux con
+ pardouin: ddb BlaiseEbuth
+ stronglite: Bonjour
+ stronglite: Je suis nouveau sur ce site et javoue etre quelque peu perdu
+ BuluBulu27: <a rel="nofollow" class="external free" href="https://www.perdu.com/">https://www.perdu.com/</a>
+ stronglite: Je connais un peu de C++ mais plus arduino quoi
+ pardouin: Bonjour, qu'as-tu fait pour l'instant&#160;?
+ stronglite: Donc jsp si y a des cours sur ce site ou sil faut s'y preparer
+ stronglite: J'ai teste les clashs et un puzzle 
+ pardouin: Disons qu'idéalement il faut avoir les bases de ton langage avant
+ BlaiseEbuth: Skoi ddb pardouin&#160;?
+ Sakisan: gg JBM pour la gold
+ pardouin: (demande de ban)
+ stronglite: Ah d'acc merci
+ JBM: mici Sakisan
+ pardouin: un bon site pour apprendre les bases c'est france IOI
+ pardouin: il y a pas mal de langages dispos
+ stronglite: nickel
+ BlaiseEbuth: firefox
+ Magus: bon, les idées que j'ai eu pendant que je faisais mon gateau au chocolat ont l'air pas trop mal
+ WhatTrickeryIsThis: hmm?
+ Rajh: Un space cake&#160;?
+ WhatTrickeryIsThis: plus de choco dans la simu?
+ Rajh: Sinon je vois pas
+ Magus: Non non, un gateau au chocolat tout ce qu'il y a de plus normal
+ Magus: et vachement bon en plus&#160;!
+ Thyl: Magus
+ WhatTrickeryIsThis: avec du nut?
+ Thyl: Y aquelque chose qui me dit que tu aimes la cuisine :D
+ WhatTrickeryIsThis: des graines plantée dans le nut
+ Magus: oui j'aime bien cuisiner en effet
+ Thyl: WhatTrickeryIsThis tu veux tuer ta photo de profile&#160;???
+ WhatTrickeryIsThis: moi? non je veux juste gagner le contest
+ Thyl: alors pas de nut
+ Rajh: Magus tu milite pour le support du langage Chef par CG&#160;?
+ dbdr: Magus, il trouve des id
+ dbdr: ées en faisant un gateau au chocolat
+ dbdr: c'est ça l'experience CG
+ Thyl: dbdr je trouve des idées en faisnt du vtt :D
+ dbdr: oui le sport ça marche aussi
+ BlaiseEbuth: Moi je torture des gens pour qu'ils me donnent les leurs.
+ dbdr: tiens Tiouz a amélioré!
+ WhatTrickeryIsThis: accro branche ça marche?
+ Magus: je l'ai déjà dit, mais perso la plupart de mes idées ne viennent pas quand je suis devant le code
+ Rajh: Donc plus Magus monte dans le classement plus il grossi. Et plus Thyl monte plus il gagne des muscles
+ Magus: non ça va, j'ai une femme pour partager mon gateau&#160;!
+ Tiouz: dbdr non, pas vraiment amélioré. J'essaie des petites modifications
+ VincentBab: #150 avec mon MCTS, #100 avec mon MC&#160;:(
+ egaetan: il est bon ton MC
+ Rajh: Essayes un M tu seras 50
+ VincentBab: :joy:
+ dbdr: avec "" tu fais #50 VincentBab
+ dbdr: arf
+ Magus: M comme Monte, la meilleur technique pour monter dans le classement
+ BuluBulu27: ...
+ Rajh: Faut que je me renomme en Carlo enfaite.Comme ça tout ceux qui veulent pour faire monter Carlo
+ Rajh: pourront*
+ BlaiseEbuth: Tirelipimpon...
+ Sakisan: apporte-moi mon thé, Carlo&#160;!
+ Vry: GG JBM
+ Vry: GG VincentBab pour le MC&#160;! :joy:
+ Bon[]Crayon: Quel temps de tortue, Automaton2000! 
+ Automaton2000: et tu vois ce que tu écris
+ Victorien_aka_TL: Au bout de combien de temps on passe à la ligue suivant quand on est premier&#160;? 
+ Kafeine: Quand tu as finis tes matches
+ Bon[]Crayon: Automaton2000 Oui, c'est le printemps pluvieux.
+ Automaton2000: un jeu où il faut trouver le plus court chemin
+ Victorien_aka_TL: Il y a combien de matchs à faire&#160;? 
+ Kafeine: Un certain nombre
+ Victorien_aka_TL: Niquel, merci mdr
+ Kafeine: Regarde last battle y'a ton pourcentage de match fait
+ WhatTrickeryIsThis: et un peu plus en ligue or
+ Bon[]Crayon: Victorien_aka_TL Quand tu cliques sur leaderboard, c'est indiqué.
+ Bon[]Crayon: Pour l'heure de passage.
+ Victorien_aka_TL: Ok j'étais à 94% et je passe en bronze c'est bon
+ Victorien_aka_TL: Merci
+ Victorien_aka_TL: Plus de 10min de matchs
+ BlaiseEbuth: Comment est ton reuh&#160;?
+ JBM: mici Vry
+ BlaiseEbuth: :thumbsup:
+ b0n5a1: re
+ b0n5a1: gold JBM&#160;?
+ JBM: ça commence à faire un moment, mais oui
+ JBM: de dépit devant mon eval qui avançait pas j'ai submit le nid de ifs à la place
+ JBM: maintenant j'ai trois versions de front
+ b0n5a1: erf, basé sur la discussion de hier sur Twitch&#160;?
+ JBM: le temps pour en fignoler aucune
+ JBM: lol oui mais non
+ JBM: j'ai essaye mais ça passait pas le boss
+ BlaiseEbuth: GG&#160;! :champagne: :fireworks::tada:
+ b0n5a1: ouais en même temps j'ai pas full détaillé, juste les grosse lignes...et ça m'a fait passé de justesse
+ BlaiseEbuth: 'tain. Z'ont encore remis la grosse boule de feu juste à ma fenêtre...
+ JBM: j'aurais envie de te dire que c'est plus basé sur la strat d'Aveuh
+ b0n5a1: boule de feu&#160;?
+ JBM: mais ça marche mieux pour moi que pour lui alors j'ai du me rater dans l'implem
+ b0n5a1: lol
+ BlaiseEbuth: :sunny:
+ b0n5a1: ha
+ b0n5a1: fenêtre juste plein ouest c'est chiant quand ça se couche ^^
+ nicola: :cow::cow::cow::cow::cow::cow::cow::cow::cow::cow::cow::cow::cow::cow:
+ nicola: C’est une foule de bœufs.
+ WhatTrickeryIsThis: :monkey::monkey:
+ BlaiseEbuth: Lourd ce truc... Vais lui envoyer Elon Musk, il va rien comprendre.
+ kiminox: qui a réussi le niveau silver?
+ Tiouz: 1198 personnes kiminox
+ kiminox: à passer au niveau gold?
+ BlaiseEbuth: On parle bien de la ligue silver du jeu de Molki&#160;?
+ kiminox: ha non 
+ kiminox: je parle du spring challenge 
+ BlaiseEbuth: Ha&#160;!
+ BlaiseEbuth: Précise.
+ kiminox: oui dsl
+ b0n5a1: youhou je suis 8ème gold...en notation binaire
+ BlaiseEbuth: Si t'as une question autre que "qui a réussi le niveau silver?" pose la kiminox
+ kiminox: j'ai une question&#160;: y a t il une différence dans l'énoncé entre la league bronze et silver?
+ kiminox: j'ai l'impression que l'énoncé du problème n'a pas changé?
+ BlaiseEbuth: Non.
+ kiminox: ha ok
+ kiminox: comment tenez-vous compte de l'ombre??
+ BlaiseEbuth: Bronze c'est les règles définitives.
+ kiminox: je ne sais pas quoi faire avec cette variable  
+ Kafeine: En général j'aime mieux être au soleil
+ Kafeine: Ca bronze mieux
+ kiminox: lol
+ kiminox: je n'arrive pas à dépasser les 150 points
+ R4N4R4M4: kiminox c'est déjà énorme 150
+ kiminox: ha bon mais en fait ça dépend&#160;: ma moyenne tourne autour de 125 en fait
+ Kafeine: Moi mon IA elle se voit pas gagné donc elle fait 0 à chaque tour
+ R4N4R4M4: Ah ok pareil
+ Kafeine: Je pense qu'elle est dépressive
+ BlaiseEbuth: Suicide la
+ R4N4R4M4: Sur les derniers tours, mon bot s'arrête de jouer car il croit que tous ses coups sont gagnants... alors que non
+ Mourfette: j'ai atteint gold en heuristique, mais ma derniere version est incomplète, manque de temps, du coup je suis descendu de 599 à dans les derniers de gold mais tant pis, je me serais amusé&#160;:)
+ R4N4R4M4: Tu peux faire top 100 en heuristiques Mourfette
+ Kafeine: Tu peut faire mieux que ça même
+ Mourfette: sûrement, mais j'ai trop de cas en tête à gérer et 2 gamins dont l'école est fermée demain (+ férié aujourd'hui) donc niveau temps restant, je vais laisser tel quel je pense, on verra
+ BlaiseEbuth: Vends les
+ Mourfette: pas bête, les mixe franco asiat ça rapporte pas mal
+ BlaiseEbuth: Au pire les pièces détachées.
+ R4N4R4M4: Si ils ont pas école, tu les fais coder à ta place Mourfette
+ WhatTrickeryIsThis: si t'es pas sage tu va coder avec papa :raised_hand:
+ pardouin: ben après 125 points ça dépend contre qui
+ pardouin: 125 points contre le boss silver c'est pas fou mais contre le top gold c'est très bien
+ Mourfette: j'en ai un de 3 ans et demie, il parle 3 langues mais code encore en 0 langages, faut que j'y travaille. la 2eme a 3 mois, à ce niveau là... a part du python a la rigueur
+ Mourfette: (haha :D)
+ VilBoub: LoL
+ BlaiseEbuth: NGL
+ R4N4R4M4: :thumbsup:
+ pardouin: j'essaye d'apprendre le binaire à ma fille de 10 mois
+ pardouin: pour l'instant c'est un échec
+ BlaiseEbuth: Une baffe pour oui, deux pour non.
+ Kafeine: Moi à ta place j'en ferais un générateur de nombre aléatoire
+ pardouin: déjà elle dit papa indifféremment pour moi ou sa mère&#160;:/
+ BlaiseEbuth: Et tu préférerais qu'elle dise zéro&#160;?
+ BlaiseEbuth: Apprends lui le bibi binaire. C'est sans doute plus adapté à sa gamme de sons.
+ kiminox: quand on lance le code pour tester, on voit une info du type 0/140, 1/140...  située à droit des actions
+ kiminox: cela signifie quoi?
+ kiminox: y a t il un rapport avec la direction du soleil?
+ mrBen: c'est les tours
+ mrBen: à ne pas comfondre avec les jours, qui eux donne la direction du soleil
+ kiminox: nb jours * nb de directions du soleil?
+ kiminox: ha ok
+ Kafeine: non
+ kiminox: un tour = 1 action lancée par un joueur?
+ mrBen: direction du soleil = jour&#160;% 6
+ mrBen: oui pour les tour
+ Xmaster6: Wow j'ai battu le boss argent!! Je post et on vera si ça passe ... Ce serait ma première ligue gold <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/554430258">https://www.codingame.com/replay/554430258</a>
+ Kafeine: 24 jours
+ Kafeine: gg
+ kiminox: puisqu'on ne lance qu'une action par tour
+ kiminox: le nb de tours est limité à combien?
+ kiminox: je confonds tour et jour...
+ Kafeine: Ca dépend du nombre d'action par jour des joueurs
+ Xmaster6: aucune limitation pour le nb de tour
+ kiminox: 1 jour contient 6 directions de soleul
+ kiminox: on lance une action à la fin d'une journée? 
+ Xmaster6: non 1jour=1 dir de soleil
+ Xmaster6: non à la fin d'un tour
+ kiminox: 6 directions =&gt; 6 * 24 = 144 tours alors?
+ mrBen: non, le soleil ne fait que 4 tour de plateau
+ -TheWalder-: kiminox le soleil bouge uniquement à la fin d'un jour. Il y a un nombre indéfini de tours par jour. Un tour = une action de 1 ou 2 joueurs.
+ mrBen: donc 6 * 4 = 24
+ dwarfie: 1 jour , une direction , plein de tours
+ kiminox: ok merci
+ dwarfie: bon mon mcts est pret ... maintenant ... tout reverifier 3 fois avant de le tester 10 fois (au moins) ...
+ JBM: nain de peu de foi
+ kiminox: pour passer le niveau silver du spring challenge
+ kiminox: il faut être classé combien?
+ kiminox: ou avoir combien de points?
+ mrBen: faut être devant le boss Bronze
+ kiminox: ok
+ kiminox: Bossoot?
+ dwarfie: mon foie va tres bien ... je l'entretiens et le fournies en alcool regulierement 
+ dwarfie: (ca c'est de la pirouette :D)
+ JBM: moi qui suis justement e ntrain d'en manger un
+ dwarfie: blague a part , vu que j'ai enterre 500 ignes de code mort , j'ai interet a verifier&#160;;)
+ kiminox: j'en suis à 1200 lignes de code
+ kiminox: en javascript
+ dwarfie: je suis descendu a 400
+ kiminox: et vous? quel language?
+ dwarfie: c++
+ Xmaster6: rust
+ dwarfie: hic
+ Kafeine: 287 en c++
+ kiminox: bon je pense qu'on pourrait diviser par 2 car j'ai fait beaucoup de log...
+ mrBen: ~400 en Go, mais j'ai pas fini mon MCTS
+ kiminox: MCTS?
+ dwarfie: Kafeine ... quand j'etais vers ton classement , ca devait etre 40 lignes de php&#160;;)
+ mrBen: Monte Carlo Tree Search
+ Kafeine: Je suis chauffeur poids lourd
+ Kafeine: faut pas trop en demander
+ dwarfie: 400 Go mrBen ... t'exagere :rofl:
+ mrBen: c'est propre et tout, avec plein de logs
+ mrBen: ah, mince , je vien de comprendre
+ BenPix: le boss en gold fait 20 points... je suis pas sûr que battre ce boss soit le critère pour passer en légendaire 
+ mrBen: joilie
+ dwarfie:&#160;;)
+ mrBen: c'est pas encore le boss en gold
+ dwarfie: il existe pas ... mais tout le monde ne le sait pas encore
+ mrBen: il sera décidé à l'ouverture de Legend justement
+ BenPix: aaaaaaaaah ok merci pour l'info mrBen&#160;;)
+ BenPix: je comprenais pas pq les boss était si nul dans chaque ligue, en fait j'ai pas eu le temps d'afronter les vraies versions
+ BenPix: à votre avis, sur les 1203 en gold, combien passeront en legend&#160;? ce sera plus 50% ou 10%&#160;?
+ Zorg1: en général 15 à l'ouverture, mais ça peut changer
+ YannT: ce sera 15-30
+ b0n5a1: 15 au départ
+ JBM: s'ils se ratent pas avec le code du boss
+ Vry: Je crois que j'ai trouvé le BUG dans mon MCTS, c'est la gestion de l'aternance entre les joueurs qui était dyslexique ... du coup à générer les coups d'un joueur pour l'autre c'est foireux ...
+ BenPix: vachement + sélectif que les autres ligues dis donc&#160;! 
+ dwarfie: tiens , je continue a monter moi ... a se demander si j'aurais besoin de mon mcts avant le passage en mutli :D
+ Vry: Du coup, jour #23 mon MCTS arrivait à générer un abre monstrueux alors qu'il ne restait que quelques coups à jouer ...
+ foxalfabravo: pour le moment en ligue argent sans mcts, mais c'est le ventre mou du championnat
+ Gloopy: Vry, dans ton MCTS, chaque noeud comprend les coup d'un jour complet pour chaque player&#160;?
+ Vry: Non, un noeud = un seul joeur
+ Vry: J'applique le coup uniquement sur les noeuds de l'adversaire
+ Vry: Donc pour un jour, on a un nombre pair de nœuds (avec les deux derniers qui sont WAIT WAIT) ... genre root -&gt; me -&gt; opp -&gt; me -&gt; opp -&gt; me -&gt; opp ....
+ Vry: Si au moins un joueur fait deux coups
+ Gloopy: ok
+ Vry: Que de nœuds au cerveau ...
+ Victorien_aka_TL: Si une cellule n'a pas de voisin est-ce que la variable neighX renvoi -1 ou fait autre chose&#160;? 
+ CPomSa: -1 en effet
+ BigUP: -1
+ CPomSa: Je l'ai appris douloureusement&#160;;-)
+ Victorien_aka_TL: Ok, j'ai un stack overflow sur un truc que je ne comprends pas
+ Victorien_aka_TL: J'ai fait un algo recursif pour parcourir les cases possibles pour planter une graine
+ Victorien_aka_TL: Et avec 1 arbre 1 et 1 arbre 2 il part en stack overflow
+ Vry: Bon testons ce MCTS directement dans l'arène .. on verra bein ce qu'il a dans le ventre&#160;!
+ jolindien: gogo Vry
+ Vry: o/ jolindien
+ jolindien: o/
+ jolindien: MCTS&#160;?
+ mrBen: c'est à ça que sert l'Arène non&#160;?
+ Vry: Oui
+ jolindien: t'es chaud patate
+ Vry: Mais MCTS malade ...
+ dwarfie: en fait , avoir une pre-arene ca serait pas mal ...
+ Vry: Je me suis dis que c'était le plus simple vu que j'en avais déjà un sur UTTT
+ mrBen: detaille dans quel cas, parce que je vois pas dwarfie
+ Vry: Et ça m'évitait de réfléchir ... et ben je me suis trompé finalement
+ dwarfie: pour pouvoir tester sur un pool d'adversaire ... au hasard ...
+ jolindien: pas le jeu le + simple pour faire du mcts
+ mrBen: certe jolindien, mais quand on est des quiche en heuristiques y a pas trop le choix
+ Vry: C'est pas faux mais si tu le traites comme un tour par tour en bouchant les trous avec des wAIT c'est pas déconnant
+ Leoduyanh: Who was in Paris&#160;?
+ jolindien: ah oui ok
+ Leoduyanh: Ça parle moins hein
+ dwarfie: meme pas a boucher les trous ... juste des tours avec plusieurs fois de suite le meme joueur ...
+ Vry: Si j'avais su je serais probablement parti sur une heuristique comme pour C4L ou CalM ... mais trop tard
+ pardouin: dwarfie pour l'instant tu fais juste un MC&#160;?
+ dwarfie: mon code en arene oui , mon code en preparation non
+ Vry: Nous dwarfie pour mon arbre je dois alterner les joueurs sinon je vais foirer la backProp
+ Vry: *Non
+ Chaos_Architect: est ce qu'on peut avancer seulement une league par jour?
+ dwarfie: back tu backpropagate qui a gagné ... donc si comme moi tu sais quel est le joueur du noeud , t'as ce qu'il faut ...
+ JBM: Chaos_Architect: non y'a pas de limite
+ Xmaster6: Le joueur du noeud??? c'est simulatané nan?
+ mrBen: ouais, mais c'est plus compliqué à coder simultané
+ mrBen: (et ça se gère bien en tour par tour, y a que les collition de SEED qui sont vriement simultané, mais ça ce gère)
+ jolindien: Agade tu la joues discret&#160;?
+ Agade: Je ne suis pas la
+ jolindien: ah, t'es où&#160;?
+ Vry: dwarfie&#160;: non je vais pas faire la min à ce niveau là ... j'ai déjà galéré pour réparer le bordel ... je n'y touche plus&#160;! :p
+ Zorg1: jolindien&#160;: bah tu vois bien où il est, dans ton chat ...
+ jolindien: ben voui
+ dwarfie: ca fait image
+ Agade: J'etais en silver jusqu'a ce matin :sweat:
+ jolindien: ^^
+ jolindien: en progrès
+ foxalfabravo: @mrBen je suis en train d'essayer le mcts avec un random sur le couple d'action player/opponent, étant donné que les 2 ont la même information quand ils jouent leur coup
+ Agade: J'ai une vision moins positive de la chose
+ mrBen: ça te fait pas trop de children par node&#160;?
+ jolindien: bah avec toi, 1 jour ou 2 ça suffit
+ jolindien: faut que j'arrête de le motiver moi
+ egaetan: non ça ne lui suffira pas
+ <b>**egaetan n'en rajoute pas</b></p><p><img src="/a/14585204616953" /> jolindien: défi
+ foxalfabravo: ca en fait moins en fait
+ mrBen: heu, ah bon&#160;?
+ Magus: ce serait bête de pas avoir un t shirt parce que Agade rentre dans le top 20 et que t'étais 20ème
+ Magus: full win jusqu'à la 18ème place
+ Magus: j'aime bien ce submit
+ Magus: argh, Neumann
+ Vry: Bon, je dois faire un gâteau au chocolat si je pouvoir avancer ...
+ nabaztag: Quelqu'un aurait le lien qui a été partagé cet après midi (vers une url github.io) pour simuler le soleil sur la gris en fonction du jour&#160;?
+ Zorg1: vry&#160;: oui la tarte au citron ça a pas l'air d'être ça
+ Schneu: <a rel="nofollow" class="external free" href="https://razdva122.github.io/CODINGAME-SPRING/">https://razdva122.github.io/CODINGAME-SPRING/</a>
+ Romii: Merci
+ mrBen: <a rel="nofollow" class="external free" href="https://razdva122.github.io/CODINGAME-SPRING/">https://razdva122.github.io/CODINGAME-SPRING/</a>
+ mrBen: ah 
+ Magus: bon, ça fera pas top 10, c'est naze
+ Magus: faut que je fasse mieux
+ jolindien: marrant ce lien
+ Zorg1: oui j'aime bien ^^
+ Vry: J'ai plus de citron Zorg1 ... alors qu'il me reste encore ce qu'il faut pour le gâteau au chocolat&#160;!
+ Zorg1: bah go alors, ça a l'air d'être la stratégie gagnante ^^
+ Vry: bon le MCTS est un peu moins débile mais il y a encore du boulot si je veux arriver au niveau de Tiouz
+ Magus: j'ai un MCTS la qui est top 15
+ Magus: (c'était avant de commencer à implémenter MCTS DUCT pour la première fois)
+ Magus: ah bah d'ailleurs je suis juste derrière Tiouz :D
+ VincentBab: tu as combien de rollout Magus&#160;? ^^
+ Magus: dépend beaucoup des tours. Vu que ce qui est lent c'est de changer de jour et de regarder les ombres des arbres
+ Magus: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/554491519">https://www.codingame.com/share-replay/554491519</a> mon IA elle donne le nombre de rollout et le score du noeud dans le message
+ egaetan: tu gères comment l'adversaire&#160;?
+ Magus: bah c'est un MCTS paranoid pour l'instant, tant que j'ai pas réussi à faire un DUCT
+ VincentBab: ah cool jvais regarde par rapport a la mienne
+ mrBen: DUCT&#160;?
+ VincentBab: omg tu as genre 100k rollout, c'est des vrai rollout jusqu'a la fin&#160;? :O
+ Magus: euh bah oui, je rollout jusqu'à la fin, c'est le principe d'un rollout
+ Magus: mais 100k rollout c'est quand il n'y a pas beaucoup d'arbres ça
+ Magus: regarde en milieu de partie, les chiffres font moins rêver :D
+ mrBen: enfin moi je suis à 1k, donc bon
+ VincentBab: 20k en milieu de partie quand meme ^^
+ Rajh: Pareil mrBen ...
+ Syj: sur MCTS , vous gérez comment l'adversaire&#160;?
+ Syj: et vous allez à quel profondeur
+ Syj:&#160;?
+ dwarfie: en mc , j'e suis a 20k ... curieux de voir ce que donnera mon mcts une fois fini :D
+ Vry: C'est beaucoup 100k, GG Magus
+ Zorg1: 20k&#160;? de tours ou de parties complétes&#160;?
+ dwarfie: parties
+ VincentBab: Dernier tour: 8M de rollout :joy:
+ Gr0mph: Bonsoir
+ Syj: Dernier tour j'arrive à Simuler 10k&#160;:-(
+ Gr0mph: Vous savzez si il y a une méthode pour récupérer la sortie de console et pouvoir la copier dans un fichier&#160;?
+ Gr0mph: (savez)
+ Syj: et pendant la partie au mieux 200 à 7 de profondeur
+ Syj: Gr0mph: En modifiant ce programme,  j'y étais arrivé <a rel="nofollow" class="external free" href="https://github.com/s-vivien/CGBenchmark">https://github.com/s-vivien/CGBenchmark</a>
+ Syj: çà te permet de lancer des parties sans l'UI
+ Gr0mph: Merci&#160;:)
+ Vry: Je suppose que Magus a bien du travailler sur les mouvements explorés ...
+ Rajh: T'as tuné les playout Magus&#160;? pour les finir plus vite&#160;?
+ Magus: j'ai tuné plein de chose, c'est le principe d'un MCTS
+ Magus: ma liste d'action est tuné, mon rollout est tuné
+ Magus: mon éval est tuné aussi
+ VirtualAtom: et tes jantes alu aussi&#160;?  ^^
+ Magus: par contre la formule ucb ça c'est bon, c'est la classique :D
+ Vry: Tu l'a pimpé à mort du coup ... tu es un pro du tuning ... :sunglasses:
+ dwarfie: roh , genre t'as pas tuné la constante&#160;;)
+ Magus: si, la constante est tuné
+ pardouin: *log(3)
+ Vry: Je fais une salade ... l'inspiration va venir ... :upside_down:
+ Rajh: Ton eval est tuné&#160;? mais ya pas d'éval sur MCTS
+ egaetan: oui c'est curieux ça
+ Magus: comment ça y'a pas d'éval en MCTS&#160;?
+ Magus: le fait que win = 1.0; lose = -1.0; c'est déjà une éval
+ Rajh: C'est un constat
+ Magus: une éval c'est un constat
+ Rajh: C'est un résultat d'une simu
+ Magus: c'est un constat de l'était du jeu
+ Rajh: Bah une éval c'est évaluer, la c'est constater
+ Magus: *état
+ dwarfie: surtout quand les bouquins disent 1 et 0 ... c'est deja que ca tune ...
+ Magus: bah voit ça comme une constatation de plus de choses que victoire ou défaite :D
+ jolindien: :popcorn:
+ Rajh: Dac&#160;:)
+ Vry: Mais laissez le tranquille bande de jaloux&#160;! :p
+ pardouin: tu fais des fins de playout full random ou tu utilises une eval pour orienter magus&#160;?
+ Rajh: On s'intéresse aux gateaux au chocolat
+ Magus: ouai laissez moi galérer à implémenter mon DUCT :D
+ Magus: pardouin: c'est pas full random
+ Magus: sinon avec les SEED ce serait n'importe quoi je pense
+ VincentBab: si tu reussi, je veux bien que tu m'explique (après le contest ^^)
+ jolindien: total free style Magus
+ Zorg1: si ça marche c'est l'essentiel ^^
+ Syj: Donc si, je comprends bien, vous arrivez tous à simuler des parties complétes dès les premiers tours
+ pardouin: les gens qui te cockblock dans le top d'une ligue parce qu'ils ont eu la flemme de pousser un peu pour battre le boss, du coup tu galères à monter alors que tu bats le boss à peu près 50-50&#160;:'(
+ jolindien: nan mais y'a un certain respect envers le mcts quand même
+ pardouin: je vais devoir coder un vrai truc
+ jolindien: :rage:
+ pardouin: (je suis sur UTTT)
+ jolindien: ah ben tic tac toe, l'heuristique c'est bouillant
+ Vry: Syj ... oui (mais pas tous parce que certain ne l'ont pas fait)
+ Zorg1: pardouin&#160;: ah ok t'as décidé de faire le rebelle et de pas parler du contest ...
+ Magus: Simuler une partie complète c'est pas dur
+ Magus: Le problème est de le faire assez rapidement pour le faire plein de fois par tour :D
+ pardouin: en fait je voulais faire un mcts sur un truc un peu plus simple
+ Zorg1: bon j'ai fini ma simu yapukadebugger
+ pardouin: avant de me lancer sur le contest
+ dwarfie: mcts simple , ca s'appelle bandas
+ pardouin: mais c'est pas si simple UTTT et je vois aucun python en legend
+ pardouin: pas très encourageant XD
+ pardouin: oui limite bandas
+ pardouin: pas fan des multis commu mais bon
+ Zorg1: bah UTTT c'était la course à la perf
+ pardouin: &lt;- vénal
+ Magus: vénal&#160;? Parce que tu penses que les gens dans le top 20 du contest actuel ils font ça pour la valeur pécuniaire du t shirt&#160;? :D 
+ Zorg1: de toute façon les gars vénaux ils hident :p
+ Palmipedus: Magnus MCTS DUCT c'est le nom officiel?
+ pardouin: vénal en achievement
+ pardouin: et les multis commu ben...
+ dwarfie: dixit le gars qui a fait tout et n'importe quoi en golf .... :rolling_eyes:
+ Magus: Palmipedus: je crois que c'est le nom officiel oui
+ Magus: mais vu mon code, la on dirait plutôt MCTS duct tape
+ Palmipedus: haha, j'essaie de trouver de la doc pour plus tard, mais je tombe sur des trucs bizarre avec cette recherche
+ Zorg1: ha&#160;? ça désigne aussi une pratique sexuelle bizaroïde&#160;? :thinking:
+ TidyMaze: hmm etrange sur 2048, BFS avec profondeur fixe et quand j'output plus de coups (mais sans changer la profondeur) mon score diminue ... mystere
+ Vry: Moins de perf.&#160;?
+ TidyMaze: normalement je calcule la meme chose mais en stockant un peu plus les premiers tours&#160;:/
+ pardouin: ah c'est bon j'avais juste un typo énorme
+ pardouin: (qui ne m'empêchait pas d'être premier bronze o_O)
+ Magus: bon, première tentative d'implémentation de DUCT = échec total
+ Magus: recommençons
+ pardouin: CTRL+A, DEL
+ jolindien: c'est comme les gateau, faut respecter les ingrédients
+ jolindien: et les doses
+ Palmipedus: complete les arbres ca ne fait pas reduire les sun points?
+ dwarfie: si ... -4
+ Palmipedus: je viens de voir ca dans un replay mais je le trouve pas dans la doc
+ dwarfie: action complete ... premiere ligne qui suit
+ Palmipedus: ....
+ dwarfie:  Action CompleteCompléter le cycle de vie d'un arbre coûte 4 points de soleil.
+ Palmipedus: bon on va rajouter dans ma simu ca devrait aider...
+ pardouin:&#160;:)
+ Flaaamort: DUCT?
+ pardouin: palmipedus il utilise une variante, DUCK
+ jolindien: c'est du flan au chocolat
+ WhatTrickeryIsThis: :yum:
+ Palmipedus: pardouin, :D
+ dwarfie: c'est pas le mechant dans kickboxer&#160;? fan duct oh&#160;?&#160;;)
+ dwarfie: ah non , c'est dans un autre truc , je confond ...
+ dwarfie: ca doit etre dans good morning vietnam ...
+ BigUP: dwarfie, t'as un trou&#160;? .............................duct.......
+ pardouin: 34,94 vs le boss à 30,86 à 90% de combats, je pense pouvoir dire sans m'avancer que c'est plié&#160;:)
+ pardouin: dommage qu'il n'y ait pas de truc avance rapide passé un certain seuil
+ BlitzProg: je patauge un peu avec mon full heuristique, vous savez si un beamsearch obtiendrez de meilleurs résultats?
+ jolindien: gg pardouin
+ BlitzProg: obtiendrait*
+ jolindien: pas facile le beam search
+ jolindien: le MC m'a donné de bons résultats
+ WhatTrickeryIsThis: le beamcts aussi
+ WhatTrickeryIsThis: qu'on a inventé avec gaetan
+ pardouin: (et j'ai pas du tout pris en compte la règle qui veut que l'autre rejoue sur la minimap des modulo de notre coup lol)
+ BlitzProg: beamcts je connais pas x)
+ pardouin: (ça sera pour le boss silver&#160;? XD)
+ WhatTrickeryIsThis: c'est un mélange de search et de rollout
+ BlitzProg: monte carlo je sais bien faire mais je coince quant à ce que je dois gérer pour l'adversaire.
+ jolindien: laisse l'adversaire sans rien faire
+ BlitzProg: hmmm
+ jolindien: au moins au début
+ WhatTrickeryIsThis: dans ce contest l'adversaire qui dors et tout c'est bien con à coder
+ BlitzProg: Oui à la fin j'imagine qu'il faudrait lui faire faire des complete
+ WhatTrickeryIsThis: t'embête pas pour l'instant
+ BlitzProg: okay voyons ça x) merci
+ WhatTrickeryIsThis: le fait de m'avoir coder un dummy et de faire des rollouts avec ça m'a boosté bien méchemment
+ Palmipedus: jolindien mais si ton dummy fait rien, ca ne va pas donner des resultats foireux les rollouts?
+ WhatTrickeryIsThis: Ce contest soit tu t'en tire avec une heuristique tombé du ciel, soit tu sort la grosse pétoire
+ Vry: Pour l'instant mon MC sans l'adversaire fait 600 Silver ... le MCTS 1200 ...
+ dwarfie: mon MC sans l'adversaire&#160;: 700 gold
+ jolindien: difficile de savoir ce qu'il va faire
+ BlitzProg: hey, me suggérez pas un truc qui me fasse downer lol
+ jolindien: mieux vaux qu'il fasse rien plutôt que du mauvais
+ BlitzProg: bon en même temps x)
+ WhatTrickeryIsThis: en plus de ça t'économise les perfs :D
+ BlitzProg: Monte Carlo je saisis pas pourquoi ça ferait du silver. Peut être mauvais eval? :o
+ jolindien: faut que t'arrive à profiter de ton heuristique
+ jolindien: le traduire en éval
+ Palmipedus: donc tu ne gardes pas ton arbre entre les tours?
+ jolindien: ou guider ton MC avec
+ BlitzProg: hmm
+ Magus: Palmipedus: ça dépend des jeux
+ Magus: en théorie garder l'arbre c'est bien
+ Magus: mais faut pouvoir raccrocher l'arbre avec ce que la joueur adverse a fait
+ pardouin: lol 5ème en ligue argent
+ Magus: la par exemple dans ce contest, si tu fais WAIT et que ton adversaire il a enchainé 5 actions, bonne pour retrouver ça dans ton arbre ...
+ Magus: *bonne chance
+ pardouin: je disais ça pour rigoler mais ça peut vraiment passer juste en ajoutant ce truc de modulo ^^'<b></b>
+ Palmipedus: oui je vois, donc en fait tout le monde est parti sur des MCTS avec un dummy qui wait, pas vraimetn ce que j'ai fait
+ WhatTrickeryIsThis: mon beamcts il joue avec un dummy, mais c'est une chèvre
+ Palmipedus: je fait juste simu sur jour la journee avec des heuristiques pour contruire un arbre et un eval a la fin du jour.... mais bon c'est loin du compte
+ WhatTrickeryIsThis: wut? un mcts sur 1j
+ WhatTrickeryIsThis: autant passer un bruteforce :duck:
+ Palmipedus: comme d'hab avec le temps que je peux allouer sur les contests (et mes skills), mon plafond c'est top silver mid gold
+ Palmipedus: jamais pris le temps d'implementer un MCTS, c'est beam search modifie (beam aprec chaque action) Je fait Complete &gt; GROW &gt; SEED
+ BigUP: plus que 280 places a gratter avant de passer en Gold&#160;! ... Tristesse&#160;!
+ Vry: gg BigUP&#160;! :p
+ Zorg1: go go gold BigUP&#160;!
+ BigUP: si seulement j'avais une idée pour améliorer ...
+ Vry: Tu as une heuristique&#160;?
+ BigUP: oui
+ Bon[]Crayon: Automaton2000 Ça pousse&#160;?
+ Automaton2000: je suis à la ramasse
+ Bon[]Crayon: Automaton2000 Aux fraises le bot.
+ Automaton2000: ah ah ah ah ah je vais regarder ça
+ Bon[]Crayon: Automaton2000 Prends ton temps.
+ Automaton2000: bah je me suis dit qu'il y a un gros bug
+ Bon[]Crayon: Automaton2000 Si tu tournes en rond, c'est qu'il y a un centre.
+ Automaton2000: à part que ça fait chier
+ Bon[]Crayon: Automaton2000 Je comprend, tourner en rond ça donne mal à la tête.
+ Automaton2000: et il ne reste plus que le premier
+ Vry: Test d'un petit trick pour voir ... :nerd:
+ Vry: 8/10 mon meilleur démarrage Silver ... :blush:
+ Bon[]Crayon: Petit trick, grand trac.
+ Vry: Du coup, il fait des parties vachement plus "crédibles" ... c'est beau&#160;!
+ Drangoht: Salut, quand je vous vois causer ici, j'avoue suis perdu, faut vraiment que je comprenne ces algos. Là avec mon code sans simu, ni arbre, je cales autour du rang 600 argent. Si vous avez des références pour que je me documente et qui font pas trop saigner du nez, je suis preneur&#160;;)
+ VilBoub: sans arbre tu peux être 50 en Gold
+ Vry: Mais il faut aimer les ifs ...
+ VilBoub: ou avoir des idées ^^
+ Vry: <a rel="nofollow" class="external free" href="https://jeffbradberry.com/posts/2015/09/intro-to-monte-carlo-tree-search/">https://jeffbradberry.com/posts/2015/09/intro-to-monte-carlo-tree-search/</a>
+ Vry: <a rel="nofollow" class="external free" href="http://www.baeldung.com/java-monte-carlo-tree-search">http://www.baeldung.com/java-monte-carlo-tree-search</a>
+ Vry: Ces deux liens ne font pas mal au crâne ...
+ Drangoht: Merci, je vais zieuter ça, c'est cool
+ Vry: Wow top 500 Silver ... :heart_eyes:
+ Vry: Je ne pensais pas pouvoir dire ça un jour (pour ce contest) ...
+ pardouin: fini mon mcts sur UTTT, il se fait éclater par mon explo bidon de depth 1&#160;:(
+ pardouin: je sens le long débug à venir ^^""
+ Rajh: C'est quoi UTTT&#160;?
+ Vry: Ouais à debug c'est chiant ... surtout quand il te balance des liens à la pelle ... 
+ Vry: ... des nodes à la pelle
+ pardouin: ultimate tic tac toe
+ pardouin: j'essaye d'apprendre mcts dessus
+ pardouin: pas franchement concluant pour le moment XD
+ Drangoht: je vais regarder ça aussi pour train merci
+ Vry: Sinon commence avec un tic tac toe simple pour la mise au point
+ YannT: MCTS c'est très chiant à débugguer comme algo
+ pardouin: ah je comprends mieux j'ai que 33 rollouts &gt;_&gt;
+ Vry: :upside_down:
+ Drangoht: ouep 
+ pardouin: je peux plus revenir en ligue wood
+ YannT: le  mieux pour débugguer le MCTS,  c'est de faire afficher  le ratio  score  / visits du  coup que tu joues
+ pardouin: dommage ça aurait été pratique
+ YannT: ça  te  donne l'evaluation entre -1 et  +1 de ce que  pense  le bot  de la situation
+ pardouin: oui j'affiche ce genre de truc: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/4e19f3b3-800b-4488-9538-ab28cf56df2d">http://chat.codingame.com/pastebin/4e19f3b3-800b-4488-9538-ab28cf56df2d</a>
+ pardouin: mais on voit que le nombre de rollouts est ridicule
+ YannT: et donc tu peux voir si t'as  des problèmes  si ce  qu'il  pense  est pas en adequation  avec la realité
+ Vry: Oui, et moi j'ai dû afficher le début de l'arbre pour voir si j'avais foiré mes nodes ...
+ YannT: je fais ça aussi
+ YannT: mon arbre de nodes juste sous le  root + l'arbre  des  nodes  adversaire du coup que je joue
+ YannT: ça  relève déjà pas  mal  d'incohérences  possibles  de  faire  ça  :)  
+ Vry: Par contre quand tu as 7k rollout c'est la mort, faut faire des fichiers ...
+ Vry: Du coup je me suis fait des input où je n'avais que deux coups possibles et quasiment toutes les cases avec richness nulle
+ Vry: Et là j'ai vu que mon arbre explosait ... alors qu'il ne devait faire que 6 nodes
+ pardouin: ou c'est juste que mes structures sont trop lentes en Python
+ pardouin: mais à ce point quand même&#160;:/
+ pardouin: j'ai essayé de changer le timer mais ça timeout donc à pripri il est bien calibré
+ Magus: MCTS tu peux aussi avoir ta propagation qui est foireuss
+ Magus: *foireuse
+ Magus: tu fais des + la ou tu devrais faire des -
+ Magus: ou l'inverse
+ BigUP: Vry, on battle dans la meme zone&#160;!&#160;:)
+ pardouin: ah j'ai tenté le 0.099 au lieu de 0.049 et ça a l'air de passer
+ Vry: Moi j'avais tout j'avais foiré mon flag "player" (me / opp) du coup quand je parcourais l'arbe je jouer les coups de mon adversaire pour me ...
+ BigUP: Vry, comme d'hab&#160;!&#160;;)
+ pardouin: et de donner de meilleurs résultats
+ pardouin: on va voir
+ Vry: ... ma propagation était aussi foirée ...
+ YannT: la logique du me/opp dns  la backprop me  fait  vriller à  chaque   fois
+ YannT: instinctivement je fais l'inverse de  ce qu'il faut à chaque fois
+ VincentBab: Petite question sur le MCTS: après avoir expand un node, tu selectionne ce node pour le rollout, ou un des enfant random de ce node&#160;?
+ Vry: Un des enfant
+ Vry: Ou le node s'il n'a pas d'enfant&#160;!
+ YannT: enfant oui, mais en  vrai ça change rien je pense
+ Vry: C'était aussi une des mes boulettes ... vers l'infini est au delà&#160;!
+ VincentBab: ok merci ^^
+ YannT: au pire ça te fait un rollout sur le parent qui aurait pu partir d'un enfant
+ pardouin: bon en fait ça change rien je me fais défoncer quand même
+ YannT: je   pense que ça change strictement  rien  dans les  faits  :D 
+ VincentBab: si il a pas d'enfant tu fais meme pas le rollout a priori car la partie est fini nan&#160;?
+ YannT: perso je lance le rollout et le rollout  s'arrête tout de  suite et backprop
+ VincentBab: oui je fais pareil en fait
+ pardouin: time=0.110 ça passe, time=0.111 ça timeout
+ pardouin: intéressant ^^
+ Rajh: Qqun peut m'aider sur brutaltester&#160;?
+ Vry: Non je lance pas le rollout, je prends le résultat qui est dans le node ...
+ Vry: ... mais ça revient au même au final
+ Vry: 256 / 2007 c'est pas mal même si je dois pouvoir encore gratter 2000 places  ! :money_mouth:
+ Vry: Ah non, juste 1200 ...
+ Gr0mph: Tu te rapproches&#160;!&#160;:) bon courage
+ Vry: Mais je n'en reviens pas ... ce trick à la con qui fait gagner 1500 places
+ BigUP: Vry, bah voila ... 259 vs 263&#160;;)
+ Vry: Tu es au même niveau qu'un MCTS&#160;! :p
+ BigUP: Je devrais m'appeler MCTS
+ Vry: Tu affiches un nombre random de rollout pour le fun
+ BigUP: il me manque un bon gros tricks a 1000 places ...
+ Vry: ... il m'en faut un deuxième
+ Vry: Mais vu que certains MCTS pimpés sont dans le top 100, c'est largement jouable
+ BigUP: tin que j'ai du mal à analyser mes parties&#160;!&#160;;(
+ Magus: *top 158
+ Magus: *top 15
+ Vry: Ouais ben c'est bon ...
+ Vry: :p
+ Magus: :D
+ Magus: bon la j'ai pas réussi à implémenter DUCT, j'essaierais demain la tête plus fraiche
+ Vry: GG en tout cas
+ Vry: Moi c'est fini pour le contest, je ne vais plus avoir de dispo. ...
+ Vry: Quelqies minutes éventuellement si je trouve un truc en faisant un gateau au chocolat ... si c'est que ça je vais en faire pendant trois jours avec les gamins&#160;!
+ pardouin: je timeout à fond dans l'arène alors que dans l'ide cg non, c'est normal&#160;?
+ Vry: c'est plus strict l'arène
+ Vry: Dans l'iDE tu peux déborder un peu
+ pardouin: là c'est du simple au triple
+ bananaMixer: À force de vous entendre parler de MCTS, j'ai fini par en coder un... Ça marche pas trop mal. Je viens de passer Gold&#160;! Merci à tous pour les infos que vous mettez sur le chat&#160;:) 
+ Vry: GG bananaMixer, donc ça confirme bien que j'ai pas encore enlevé le frein à main&#160;!
+ Vry: Le tien est bio&#160;? Ou pimpé&#160;?
+ Vry: *tiens
+ VincentBab: quand tu va corriger ton bug ca va faire mal Vry ^^
+ VirtualAtom: bon, j'ai passé 4h à faire un tool qui parse les replays, pour simuler les coups et vérifier si j'ai des bugs dans ma simu.
+ Vry: Honnêtement je ne pense plus avoir de gros bug, ce qui me manque c'est le fait de "guider" le MCTS dans son rollout je pense.
+ VirtualAtom: le résultat est ... appréciable&#160;:-
+ BigUP: bon bah ... dodo, avec un peu de chance, demain j'aurais des idées
+ bananaMixer: J'ai pimpé une seule petite chose&#160;: je n'autorise pas à seed s'il y a déjà une graîne sur le plateau. Vu que j'ai assez peu de rollout, ça diminue l'espace de recherche et ça améliore les résultats.
+ Vry: Wow, c'est violent ...
+ pardouin: non mais là il y a un soucis, arène avec time=0.010 je timeout
+ Vry: Mais c'est clair que trop de seed tue le seed
+ pardouin: alors que dans l'ide je peux légèrement déborder le 0.100
+ bananaMixer: C'est pas si déconnant au final . Tous les actions SEED sont gratuites dans la partie et ça force à faire pousser les arbres existants avant d'en planter d'autres.
+ bananaMixer: Ça a bien marché en Silver. En Gold, c'est moins bon par contre... Je me prends une claque&#160;!
+ pardouin: quelqu'un qui a l'habitude de faire des simu timées en python&#160;?
+ Vry: Pas moi
+ pardouin: j'ai un truc comme ça: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/20be297b-291a-41b1-8277-8afd6759879a">http://chat.codingame.com/pastebin/20be297b-291a-41b1-8277-8afd6759879a</a>
+ jolindien: time.time()&#160;?
+ pardouin: je sais pas si c'est la pratique courante&#160;?
+ pardouin: oui sinon je vais essayer avec time
+ pardouin: mais je fais des gros timeouts là avec le truc actuel
+ jolindien: attend je vais regarder
+ jolindien: oui j'utilise t0 = time.time()
+ jolindien: et while time.time() &lt; ...
+ pardouin: ok merci je vais essayer avec ça
+ pardouin: c'est en secondes je crois
+ jolindien: oui en s
+ pardouin: bon ça me gave j'ai des timeout même avec 0.009 et que en arène
+ jolindien: tu mets le t0 au bon endroit&#160;?
+ pardouin: oui
+ pardouin: dans l'ide jamais aucun timeout même avec 0.100
+ jolindien: t'as enlevé les prints&#160;?
+ pardouin: oui
+ pardouin: j'avais flush=True mais j'ai quand même tout dégagé au cas où
+ YannT: tu  timeout au premier tour ou un tour en cours de partie?
+ pardouin: toujours au début
+ pardouin: ça fait des replay à 2 tours
+ YannT: attention à mettre tes precalc après la  lecture  du  premier input
+ YannT: avant t'es  pas dans  les 1s  et ça  timeout si  tu met trop  de temps avant  de  lire  ton premier input
+ YannT: j'ai eu le soucis
+ jolindien: 1er joueur/ 2eme joueur, pareil&#160;?
+ pardouin: je crois qu'on joue toujours en premier sur UTTT
+ YannT: non
+ pardouin: j'ai pas de precalc
+ YannT: opponent  peut jouer en premier
+ pardouin: ah, peut-être un truc comme ça alors
+ jolindien: verifie dans l'IDE, mets toi 2eme joueur
+ pardouin: ok
+ jolindien: i.e?
+ pardouin: aaaaaaaaah
+ pardouin: merci&#160;!
+ Luksis: hello,j'ai une petite question&#160;: à la fin d'un challenge toutes les ia sont resubmit&#160;? ou c'est juste en légende&#160;?
+ jolindien: welcome
+ Luksis: j'ai un doute
+ jolindien: juste legende
+ Luksis: ok c'est bien ce qu'il me semblait
+ Luksis: merci
+ -Cile-: comment ça resubmit&#160;?
+ Luksis: oui en legende
+ Luksis: elles sont retesté
+ jolindien: y'a un grand nombre de combats supplémentaire pour bien classer
+ Vry: #158 ... ça avance ... merci bananaMixer&#160;! :blush:
+ pardouin: et les historiques sont sauvegardés pour le passage en multi&#160;?
+ Vry: Non pardouin
+ Vry: Sur le dernier challenge j'ai rien
+ pardouin: ok, faudra bien faire des sauvegardes alors
+ Vry: Et ton bot sera dans la même ligue
+ pardouin: ok
+ Vry: Plus possible de recommencer du début (snif)
+ -Cile-: merci pour les infos (après... je ne serai pas en legend donc...)
+ Vry: Mais si, encore trois jours&#160;!
+ Vry: Je bats le boss Silver à 100% seulement y'a 150 gugusses entre lui et moi ...
+ -Cile-: ça commence à être compliqué pour ma petite éval à coup de if-else
+ -Cile-: mais j'essaie de me maintenir dans le 1er tier de gold
+ pardouin: bon j'ai fait un mix mcts, simu 1 depth
+ Vry: Pour les heuristiques, le plus dur c'est de garder le code bien rangé ...
+ pardouin: quand j'ai pas de bon coup dans ma simu 1 depth je joue le coup proposé par le mcts
+ -Cile-: j'ai fait une grosse restructuration-rangement hier&#160;:) 
+ pardouin: c'est un poil mieux, je peux peut-être faire #1 silver mais je pense pas que ça battra le boss&#160;:/
+ Vlavv: Je commence à être à court d'idées d'amélioration moi...
+ Vry: C'est pas grave, si tu bats tous les autres tu passeras
+ pardouin: au pire je fais un minimax alpha beta c'est sûr que ça battra le boss silver mais je faisais UTTT surtout pour progresser en MCTS &gt;_&gt;
+ jolindien: gg Vlavv
+ Pedrito_B: c'est quoi UTTT
+ jolindien: t'as pensé à compter les arbres&#160;?
+ pardouin: ultimate tic tac toe un autre multi
+ pardouin: censé être bien pour bosser mcts
+ Pedrito_B: ah ok
+ pardouin: (sinon bandas apparemment)
+ Pedrito_B: merci
+ Vlavv: Merci, wp aussi&#160;;)
+ jolindien: rejoins le coté obscur de la simu
+ Trisard: J'aime pas le java en fait .. c'est dommage de m'en rendre compte arriver maintenant
+ VincentBab: Top10 dans simu&#160;? c'est fort
+ jolindien: oui chapô
+ Rajh: Mon bot s'arrête de jouer au tour 17/24 pourtant jsuis gold lol
+ jolindien: toute cette belle heuristique qui pourrait être mis au service de la simu...
+ Vry: C'est pas faux&#160;! :D
+ jolindien: dépassement mémoire&#160;?
+ Trisard: bon je crois que l'objectif top 20 il est mort pour moi je vais déjà essayer de passer légende ça seras pas si mal ^^
+ Vlavv: La prochaine fois pour la simu :D
+ Vry: Passe Légende, tu feras top 20 juste après
+ Trisard: ^^ ça serais si beau
+ Vry: Wow, je crois que j'avais un trick de trop ... avec deux seulement ça à l'air mieux.
+ Vry: 14/15 pour l'instant je sers les fesses ...
+ Vry: J'ai trouvé la martingale Silver :nerd:
+ Vry: 24/25 ... juste une perte contre le #450 ...
+ Vry: Déjà dans le top #10&#160;!
+ Vry: Il est beau ce submit&#160;! :popcorn:
+ Trisard: gg
+ Zorg1: bon j'ai fini de debug ma simu, y a quelques une de mes "optimisations" qui étaient en fait des bugs&#160;:(
+ Vry: Incroyable ... un petit commentaire sur une ligne de code
+ nepage-l: #1 silver comment on passe or&#160;?
+ Vry: Attendre la fin des tes combats
+ Vry: Tu dois être #1 à la fin
+ nepage-l: Ah
+ b0n5a1: faut attendre la fin (100% de matchs) + un délai
+ Zorg1: enfin être au dessus du boss surtout
+ nepage-l: Ah tu ma depasse xd
+ Vry: Là tu es à 45% mais vu ton score ça devrait passer
+ Zorg1: b0n5a1 enfin le délai sur les contests ça va ça dépasse rarement les 5 minutes
+ Vry: Oui mon bot est chaud pour le coup ...
+ Zorg1: J'ai des interfaces de débug que qualitay&#160;:
+ Zorg1: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/4d9b319b-f7db-4be1-8d48-99ee725a7697">http://chat.codingame.com/pastebin/4d9b319b-f7db-4be1-8d48-99ee725a7697</a>
+ nepage-l: Je vois sa
+ Vry: Pas mal Zorg1 ... pour l'instant j'ai juste ça&#160;:
+ b0n5a1: ho un space invaders
+ YannT: c'est bôôô
+ Zorg1: ^^
+ Vry: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/f5adae9e-8b27-46e1-8b3d-e34e09569596">http://chat.codingame.com/pastebin/f5adae9e-8b27-46e1-8b3d-e34e09569596</a>
+ Vry: Pour afficher les bitboards ...
+ Vry: +3 sur le boss Silver ça va le faire ...
+ Vry: Mais pourquoi ajouter un commentaire peut transfigurer un bot à ce point là&#160;?
+ Zorg1: "transfigurer"&#160;???
+ nepage-l: Ah ouais des fois tu repond pas
+ Vry: 6/58
+ Vry: Oui, mais un seul timeout sur 65 ça va ...
+ Vry: Merci
+ nepage-l: En tout cas gg
+ Vry: J'y crois toujours pas merci ...
+ Gr0mph: t'es premier en argent çà va être bon
+ Vry: J'espère ne pas te repousser sous le Boss ...
+ pardouin: bon j'arrive pas à faire plus d'une quarantaine de rollouts sur UTTT je dois mal m'y prendre
+ Vry: Oui à +5 du boss en plus
+ Vry: Oui pardouin, même en Python ça me parait peu
+ pardouin: j'ai repris dans les grandes lignes le truc de jeff bradberry
+ nepage-l: je pense sa devrait aller
+ pardouin: il doit y avoir une bottleneck quelque part qui me fait perdre un temps monstre, je regarderai ça demain
+ Vry: Oui nepage-let en plus dans 4% c'est bon pour toi
+ nepage-l: Yes
+ Vry: GG
+ nepage-l: incroyable
+ nepage-l: merci
+ nepage-l: dodo
+ nepage-l: bonne nuit et courage a tous
+ Vry: Moi aussi il faut que j'aille me coucher ... mais je veux voir le passage quand même&#160;!
+ nepage-l: je check et je dodo ^^
+ nepage-l: bruh je peux pas voir les combats silver
+ Vry: Encore 30%
+ Vry: 6 minutes en gros ...
+ pardouin: retour sur spring challenge avant de dodo histoire de pleurer ma mère
+ pardouin: 709ème&#160;:'(
+ Rajh: J'ai passé ma soirée a opti mon code, j'ai doublé mes rollouts, je perds contre mon bot plus lent -_-
+ Vry: J'ai quand même 31 victoires de suite dans le submit
+ pardouin: je crois que je vais laisser tomber mcts et améliorer mon heuristique, et si je finis ma simu l'utiliser au moins pour soigner la fin de partie, peut-être un peu de MC on verra
+ pardouin: bonne nuit
+ Vry: bn
+ nepage-l: Je pense cet win
+ nepage-l: c'est
+ Vry: Oui
+ Vry: +7 points au dessus du boss ...
+ Vry: Mon dino est le nouveau dogecoin :p
+ nepage-l: J'ai bien envie de savoir tu vas arriver cb golden
+ nepage-l: je suis 1000
+ Vry: Moi aussi, mais le match de classement va être encore plus long qu'en Silver ...
+ AntiSquid: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/554667429">https://www.codingame.com/share-replay/554667429</a> jolindien fix it
+ jolindien: thanks AntiSquid
+ b0n5a1: bonne nuit
+ Vry: +8 avec le boss :heart_eyes:
+ Zorg1: bonne nuit
+ Vry: bonne nuit b0n5a1
+ Vry: et Zorg1
+ Zorg1: ^^
+ Zorg1: je bosse moi demain
+ Vry: Pas moi, mais je récupère les gamins ...
+ Vry: Promotion Gold avec level 42 en bonus&#160;! :p
+ nepage-l: gg
+ Vry: 10/12 ça commence pas mal
+ nepage-l: rahh ouais mdr
+ nepage-l: Je vois la diff
+ VincentBab: gg Vry ^^
+ Vry: Donc en résumé, le MCTS ça marche ... faut juste l'aider un peu en réduisant la liste de move à tester.
+ Vry: Merci VincentBab
+ Rajh: Vry combien de rollout par tour&#160;?
+ Vry: Et du coup, j'ai juste testé un truc et ça a tout changer
+ Vry: 7k au minimum a priori
+ Rajh: Wtf&#160;:(
+ Vry: Et ça augmente petit à petit au fil de la partie ...
+ nepage-l: En tout gg t'etais pas 1st silver pour rien allez dodo glhf
+ Rajh: T'as fait des optis particulières&#160;? Ou ya vraiment *4 en perf entre java et C :s
+ jolindien: oui *4 c'est l'ordre de grandeur
+ Vry: Je pense que dès le départ j'ai du code assez bien optimisé (
+ Rajh: C'est pénible -_-
+ Vry: je suis sur CG depuis plus de 3 ans même si je fais plus que les contests actuellement
+ jolindien: 7k rollout avec des coups pour les 2 joueurs&#160;?
+ Vry: Oui
+ Vry: Le bot arrive à faire 700k "makeMove"
+ jolindien: ah ouais grosses perfs
+ Vry: Et chez moi un makeMove c'est bien le fait de jouer en simultané les deux coups
+ Rajh: 100k maxi chez moi :s
+ Vry: Je devrais me stabiliser dans le top 300 gold au final
+ jolindien: tu devrais cut avant la fin 
+ Vry: Oui, il faut que je travaille sur cet aspect là ... car à part pour le seed le bot explore trop de truc
+ jolindien: ça prend 5min
+ Vry: J'ai aucune heuristique, donc j'ai pas mal de gains possibles si j'arrive à bien guider l'xploration
+ jolindien: juste coupe: dis lui que c'est fini avant
+ Vry: Oui je te crois, mais je vais d'abord aller me reposer&#160;! :sleeping:
+ Rajh: jolindien comment ça&#160;?
+ Rajh: tu fais pas les playouts jusqu'a la fin&#160;?
+ Vry: Genre tu ne travailles que sur 20 jours
+ Vry: Ou moins ...
+ jolindien: tu fais comme si la partie durait pas 24 jours
+ Vry: un magic number à régler
+ Rajh: Mais ca fausse pas le truc&#160;?
+ jolindien: si
+ jolindien: c'est pipé comme dirait Vry
+ Vry: Oui mais en même temps si tu râtes quelques jours c'est pas gêant
+ Rajh: genre tu playout que 15 tours, donc les 10 premiers tours tu regarde pas la fin et ensuite t'as jusqu'a la fin&#160;?
+ jolindien: voilà
+ Vry: Parce que regarder 24 jours à l'avance ça représente probablement 100 coups joués, c'est énorme
+ Rajh: Ah ok nice je tenterai ça
+ jolindien: de toute manière le hasard  fini par n'imp
+ Vry: Oui, un très bon exemple c'est le mode full seed
+ Vry: Où là le bot ne voit rien
+ YannT: jolindien: je me posais la question justement, tu  penses  quoi d'interdire  les  wait  dans les rollouts tant qu'il y a d'autres  coups?
+ jolindien: dans uttt pas trop le choix parce qu'on comprend rien avant
+ Vry: C'est ça qui me fait monter top 350
+ YannT: jme  demandais  si  ça   fausserait  pas  un peu les  rollouts de  potentiellement  wait en début  de  journée
+ Vry: Dans UTTT je coupe quand je vois un coup gagnant
+ jolindien: bonne question, pas d'avis tranché
+ Vry: C'est un bon boost
+ YannT: a tester ouais, parceque les  waits  intempestifs  ça donne p'tet des rollouts pas realistes en fait
+ Vry: Dans ce contest, qu'est-ce qu'un "coup gagnant"&#160;?
+ VincentBab: dans UTTT c'est quoi la coup gagnant&#160;?
+ Vry: Remplir la grille
+ jolindien: le dernier
+ Vry: Si l'exploration voit qu'il peut remplir la bonne grille il prend le coup
+ Vry: il ne s'emmerde pas à tirer au hasard et continuer pour rien
+ VincentBab: ah bah oui si la partie est fini il s'arrete c'est normal
+ Vry: Nan, juste avant ...
+ Vry: ... si l'un descoups possible permet de gagner il le force.
+ VincentBab: ah ok je vois
+ Vry: Sinon il pourrait continuer à faire des tirages au hasard
+ Vry: Merci le chat&#160;!
+ Vry: Et bonne nuit
+ VincentBab: bonne nuit
+ MomoLand: Yo les gars
+ MomoLand: je suis nouveau ici :D 
+ Vlavv: Bienvenue&#160;!
+ idembele70: Bvn

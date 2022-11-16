@@ -1,0 +1,246 @@
+ IcyStar: Salut!Quelqu'un peut m'expliquer la différence entre "rejouer dans les mêmes conditions" et "lancer mon code" pour Coders Strike Back&#160;?
+ Thyl: Rejouer dans les mêmes conditions faits que tu gardes tout les paramètres de bases
+ Thyl: genre dans Coders Strike Back
+ Thyl: La disposition des checkpoints
+ IcyStar: ok je vois, merci&#160;!
+ philRG: en gros tu as les mêmes données d'entrée au 1er tour, et en fonction des bots (déterministes ou probabilistes), les mêmes données d'entrée/sortie à chaque tour
+ philRG: en mode debug, si bot du referee joue en déterministe, je joue full déterministe
+ philRG: sinon après en fonctions des actions possibles de même score, je joue probabiliste
+ philRG: pour une meilleure mesure de mon algorithme
+ philRG: AlphaDevFr Cloudy Wheather non pas fait mais ça a l'air intéressant, classé difficile (?)
+ nicola: Le générateur pseudo-aléatoire sera dans les mêmes conditions.
+ philRG: apparemment oui, ceci dit sur Pacman, ce ne semblait pas être le cas
+ philRG: pseudo-aléatoire peut-être mais ne reproduit pas les mêmes conditions si le seed se passe sur le timestamp ou le n° de processus unix
+ philRG: en plus ouais sur mes bots récents, je fais même pas de seed donc pas vraiment de l'aléatoire en terme de distribution
+ philRG: je suis souvent un peu feignant sur la partie code, cause ça me fatigue trop les yeux
+ philRG: s/passe/base/
+ philRG: dsl pour les yeux (fautes de frappe), problème de connexion entre mon cerveau et mes doigts comme je tape sans voir ce que j'écris
+ philRG: donc n'attendez pas à ce que je vous lise sur plus de 5 lignes
+ philRG: question pour les pythonistes:
+ philRG: sur l'usage du modules types
+ philRG: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/a949c2f0-60c9-4def-a2ae-a40652b2516f">http://chat.codingame.com/pastebin/a949c2f0-60c9-4def-a2ae-a40652b2516f</a>
+ philRG: NameError: name 'Cell' is not defined
+ philRG: ah non ça marche, c'est mon Intellisense de PyCharm qui déconne
+ philRG: c ballot&#160;:(
+ philRG: on peut pas annoter une référence de même type dans la classe&#160;:-( avec le module 
+ philRG: faut utliser le type object
+ philRG: neighbors: List[Cell]
+ philRG: neighbors: List[object]
+ Tuteurtwo: Je dis peut-être une connerie, mais ne vaudrait mieux t-il pas réorganiser ton code pour ne pas faire appel à une classe qui n'est pas encore définie&#160;?
+ philRG: ah oui exact, c'est dans la définition des membres de la classe que ça coince pas dans le constructeur
+ philRG: class Cell(object): <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/b3616d6c-1811-4e71-9863-45fe4a5cd821">http://chat.codingame.com/pastebin/b3616d6c-1811-4e71-9863-45fe4a5cd821</a>
+ Tuteurtwo: Si la définition est dans le __init__ ça passe&#160;?
+ Tuteurtwo: Je viens de tester effectivement ça passe. Bon à savoir ^^
+ philRG: oui ça passe dans l'init
+ philRG: en fait pour définir un type de classe en python, tu peux faire:
+ philRG: class Cell:
+ philRG: pass
+ philRG: puis ensuite tu rajoute les attributs que tu veux
+ Tuteurtwo: oui sans problème
+ philRG: au niveau maintenance de code, c'est pas mal de définir les membres en début de classe quand même
+ Tuteurtwo: Après je trouve ça plus propre quand c'est définie comme tu avais fait au début
+ philRG: oui c pour ça, j'ai importé le module types aussi pour indiquer les types comme il est souvent reproché à python de pas être lisible à cause de ça
+ Tuteurtwo: Il ajoute quoi exactement&#160;? Tu ne peux pas utiliser tuple en minuscule&#160;?
+ philRG: après c'est vrai que comme j'aime bien découvrir de nouveaux puzzles sur CG, j'ai tendance à oublier ce que j'ai écris
+ philRG: Tuple c'est une annotation du modules types
+ philRG: from typing import Tuple, List, etc...
+ Tuteurtwo: Je veux dire sans utiliser typing justement
+ philRG: nouveau module à partir de python v3.5 et ajouté avant le contest FC21
+ philRG: ah sans typing ben tu crée ton tuple avec ou sans la fonction. Typing c'est seulement pour les hints
+ philRG: <a rel="nofollow" class="external free" href="https://docs.python.org/3/library/typing.html">https://docs.python.org/3/library/typing.html</a>
+ philRG: C'est seulement utilisé par les Intellisense pas pour créer les types
+ philRG: Note The Python runtime does not enforce function and variable type annotations. They can be used by third party tools such as type checkers, IDEs, linters, etc.
+ philRG: enfin bref c du python/snake
+ Tuteurtwo: D'accord, je pense avoir compris.  perso j'utilise pycharm et je fais ça dans le docstring. Si il y a un type incorret ça me le dit
+ philRG: ah et c'est pris en charge par l'Intellisense pour t'afficher tes membres de classe?
+ Tuteurtwo: Je ne suis pas familier avec intellisense mais dans les détails des fonctions et classes il y a tout
+ philRG: je me demande s'il y a pas la même fonction en C#, un formateur me l'avait montré à l'époque, je me souviens vaguement, la seule chose qu'il m'a montré en 9 mois de formation lol
+ Tuteurtwo: dans un format semblable au tient d'ailleurs
+ philRG: c vrai que je connais un peu le docstring mais jamais utilisé, je mettais un commentaire simple en début de fonction pour les types
+ philRG: mais c'est pas idéal
+ philRG: faudra que j'essaye le docstring, voir si au niveau lisibilité c bien et rajoute pas trop de ligne de code
+ Tuteurtwo: c'est pas fait pour economiser des lignes de code, au contraire c'est pour détailler au max tes fonctions
+ Tuteurtwo: <a rel="nofollow" class="external free" href="https://resources.jetbrains.com/help/img/idea/2021.1/docstring_example_10_quick_documentation.png">https://resources.jetbrains.com/help/img/idea/2021.1/docstring_example_10_quick_documentation.png</a>
+ Tuteurtwo: <a rel="nofollow" class="external free" href="https://resources.jetbrains.com/help/img/idea/2021.1/docstring_example_100.png">https://resources.jetbrains.com/help/img/idea/2021.1/docstring_example_100.png</a>
+ philRG: ah ok aussi, mes codes sont plutôt courts et clairs. Mais ce qui manque parfois c'est de pouvoir aisément lire le type des variables, car ça ressemble vite à un roman
+ Tuteurtwo: ahah
+ Tuteurtwo: après regarde la deuxième image, c'est p-e ce que tu recherches
+ philRG: pour faire des documentations de code partagé, ça me paraît incontournable
+ philRG: en code non partagé, ça me paraît un peu superflu ceci dit si tu décris bien tes noms de variables. J'utilise souvent le docstring pour décrire brièvement ce que fait la fonction
+ philRG: pas pour décrire les paramètres d'entrée et sortie
+ philRG: mais oui c'est important de bien connaître les spécificités de ton langage
+ philRG: utile pour faire les tests unitaires les docstrings et doctest. J'en fais parfois sur CG sans les utiliser explicitement
+ philRG: Je code souvent de la même façon, et parfois j'utilise les classes de modélisation des referee en Java que je ré-écris en Python ce qui diminue bien les bugs
+ philRG: les bugs se font plus au niveau de l'algorithme du coup
+ philRG: parfois je comprends pas comment mes codes tournent du premier coup sans bug
+ philRG: j'aime bien la partie modélisation/gameplay des puzzles CG, j'ai l'impression de jouer à un jeu. Bon pour l'IA, je dois réfléchir un peu plus...
+ philRG: si je peux, je code des heuristiques mais pas toujours possible
+ dwarfie: reflechir plus pour progresser plus
+ mister_art43: bonjour bonjour, je viens de commencer ^^ et je me passionne déjà pour les petits jeux d'ia
+ axil0w: heyo
+ BlaiseEbuth: Yo tout l'monde&#160;! Automaton2000&#160;! AutomatonNN&#160;?
+ Automaton2000: non ca c'est pas de ma faute
+ BlaiseEbuth: T'as quelque chose à te reprocher Automaton2000&#160;?
+ Automaton2000: j'ai jamais compris ce que tu veux un truc qui me manque
+ dwarfie: Automaton2000&#160;: la capacité à dire tortue sans doute
+ Automaton2000: y a pas besoin de plus de 2 minutes
+ dwarfie: Automaton2000, ca fait 2 minutes et on attend toujours
+ Automaton2000: c'est pour ça que je voulais dire c'est que je vois les gens qui en font
+ alexquenelle: bonjour a tous, quelqu'un s'y connait en c++&#160;?
+ alexquenelle: enfin, quelqu'un qui code en c++ sur cette plateforme
+ SeebOmega: alexquenelle pose ta qiuestion on verra si on peut t qaider
+ alexquenelle: okok
+ alexquenelle: en gros lorsque je crée un vector de char et que je souhaite supprimer un element a un index i en faisant ca ---pList.erase(pList.begin()+i);--- ca segfault je comprends pourquoi
+ alexquenelle: tandis que sur mon ide avec mon compilo aucun probleme 
+ SeebOmega: et tu es sur que ton index i est toujours existant 
+ SeebOmega: et tu n es pas dans une boucle 
+ Magus: c'est peut être pas cette ligne qui segfault
+ Magus: souvent les segfaults arrivent après la ligne coupable
+ SeebOmega: (autre tips performance en cas de vector long, swap avec le last element du vector et pop le)
+ Magus: par exemple tu as fait joujou avec le vector avant, et ça rend inutilisable des pointeurs que tu auras gardé
+ BlaiseEbuth: ---&#160;? Connais pas ça.
+ SeebOmega: Print ton vector et sa longeur avant cet appel pour etre sur avec la sortie erreur 
+ alexquenelle: oui j'avais pas pensé a swap c'est une bonne alternative
+ SeebOmega: penser aussi sur pas mal de jeux etc sur la platefrome tu es dans un while true, donc potentiellement apres quelques iterations ton element i n existe plus faut voir le reste du code 
+ BlaiseEbuth: Woputain. Je viens seulement de capter que --- c'était juste pour séparer le code du reste...J'vais m'reprendre un café...
+ SeebOmega: BlaiseEbuth mets en un double 
+ BlaiseEbuth: Pour moi ou parce que t'en veux un aussi ^^
+ SeebOmega: pour toi lol 
+ BlaiseEbuth: Ouai j'vais faire ça...
+ SeebOmega: la on est passe a l aprem du coup en telework biere fraiche ca passe
+ BlaiseEbuth: Certes. Mais ça risque pas d'améliorer mon score de perception...
+ SeebOmega: jte guide ca te rajoute un d4
+ BlaiseEbuth: :thinking:
+ BlaiseEbuth: Un irish alors. :yum:
+ Thyl: Code CHef me sort de la tête
+ BlaiseEbuth: Fallait pas le faire entrer aussi...
+ Thyl: oui
+ Thyl: Le july Contest va me tuer
+ BlaiseEbuth: Ski july&#160;?
+ Thyl: pas de ciel là
+ Thyl: mais bo j'ai réussi
+ Thyl: une histoire de XOR a
+ Thyl: je sais pas de quoi tu parles ski&#160;?
+ BlaiseEbuth: Bah ouai ski july&#160;?
+ dwarfie: XOR , le sheriff ... sheriff de l'espace ... :notes:
+ Rendive: Comment je peux débuter mon code&#160;? 
+ Rendive: débuger 
+ Robinsstudio: Le plus simple est d'écrire les entrées sur la sortie d'erreur de l'IDE en ligne puis ensuite de les mettre dans une fichier que tu passes en entrée de ton programme en local.
+ y42nn: Salut&#160;! Petite question concernant l'implem d'une MCTS svp, est-ce que pour ma random seed je dois prendre un truc fixé&#160;?
+ y42nn: ou je la fais changer à chaque exécution
+ MiXFR: Bonjour à tous, une question sur un truc surement tout bête&#160;: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/3323a9e4-18c3-476c-89a7-4dd700506ca6">http://chat.codingame.com/pastebin/3323a9e4-18c3-476c-89a7-4dd700506ca6</a>
+ MiXFR: je cherche simplement à trier une liste
+ WhatTrickeryIsThis: le set met au hazard
+ WhatTrickeryIsThis: list.sort il va marcher je penses
+ MiXFR: ah bon&#160;? je pensais que le set enlevait les doublons et ordonnait ... ok je vais tenter le sort
+ WhatTrickeryIsThis: sorted(test)
+ WhatTrickeryIsThis: le set il ordonne mes fesses
+ y42nn: un ordered set ça existe mais pas celui de la stl python
+ y42nn: en c++ tu as std::set qui ordonne + retire les doublons
+ y42nn: mais en python le set est l'équivalent de std::unordered_set en c++ qui se contente de hacher les éléments (=&gt; pas d'ordre)
+ y42nn: en revanche ça permet d'avoir du O(1) amorti en insertion
+ y42nn: contre du O(log(N)) (avec N la taille du set) pour un ordered set
+ pardouin: free xp -&gt; check
+ pardouin: en python le OrderedDict du module collections il ordonne pas le dict, il garde juste en mémoire l'ordre d'insertion -_-
+ pardouin: jamais utilisé
+ pardouin: par contre un vrai ordered map comme en c++ j'en aurais eu besoin pas mal de fois mais ça existe pas&#160;:(
+ Zorg1: donc python c'est nul CQFD
+ <b>**Zorg1 toujours prêt pour un petit language troll ^^</b></p><p><img src="/a/16542412157988" /> Zorg1: Automaton2000 t'en es où dans ton apprentissage de Haskell&#160;?
+ Automaton2000: je comprend pas vraiment ce que je fais quoi&#160;?
+ Zorg1: tkt Automaton2000 ça fait ça au début ce langage
+ Automaton2000: ma fonction pour savoir si je dois le faire
+ Robinsstudio: Tiens salut Zorg1
+ BlaiseEbuth: Reuh
+ Zorg1: o/ Robinsstudio
+ Robinsstudio: Je viens de trouver une optimisation de dingue pour mon UTTT. Cela va-t-il suffire pour passer en légende&#160;? *roulements de tambours*
+ Zorg1: ah oui t'es stuck en dessous du boss gold&#160;?
+ Robinsstudio: C'est ça.
+ Zorg1: go go go to legend 
+ Robinsstudio: Oui oui bah minute papillon je ne gère pas comme vous&#160;! :rofl:
+ BlaiseEbuth: Suce le, tu vas monter direct. C'est comme ça que ça marche.
+ Robinsstudio: Je dois surveiller mon langage, c'est bien ça&#160;? :thinking:
+ BlaiseEbuth: Parle pas la bouche pleine.
+ Robinsstudio: :joy:
+ Zorg1: c'est aérien ici ^^
+ Robinsstudio: Je crois que j'ai jamais passé autant de temps sur un bout de code 400 lignes. ^^'
+ BlaiseEbuth: Et après on s'étonne quand Automaton2000 dit des horreurs...
+ Automaton2000: il suffit pas de le dire
+ Robinsstudio: Exactement Automaton2000&#160;! :rofl:
+ BlaiseEbuth: Oui, il y'a le ton aussi Automaton2000
+ Automaton2000: évidemment que ça fait une boucle infinie
+ Automaton2000: mais ça vaut le coup de faire un tutoriel sur comment optimiser en python, les articles relatifs à python que ...
+ BlaiseEbuth: :scream:
+ Robinsstudio: Oh, tu enchaînes les réponses maintenant Automaton2000&#160;? T'es un thug&#160;?
+ Automaton2000: je crois que tu es obligé de faire une erreur
+ Robinsstudio: Soit.
+ Robinsstudio: Il se contente de ressortir des réponses un peu au hasard où il recombine un peu les choses&#160;?
+ BlaiseEbuth: Chaîne de markov
+ Robinsstudio: Ouais mais concrètement&#160;? Je suis pas docteur en informatique moi.
+ BlaiseEbuth: Moi non plus. :no_mouth:
+ Robinsstudio: Et j'ai la flemme de lire l'article Wiki, c'est beaucoup trop mathématique;
+ BlaiseEbuth: <a rel="nofollow" class="external free" href="https://www.codingame.com/blog/markov-chain-automaton2000/">https://www.codingame.com/blog/markov-chain-automaton2000/</a>
+ Automaton2000: j ai pas encore eu le temps de prendre un peu de ce que j'en ai pas
+ Robinsstudio: Cool, ça me fait une petite lecture pendant que BT chauffe. Merci&#160;! :ok_hand:
+ Zorg1: waouh "Docteur en informatique"
+ Zorg1: moi je suis Bidouilleur en Chef
+ Zorg1: chacun  son job
+ BlaiseEbuth: Ah, t'es plus évangéliste java&#160;?
+ Zorg1: le Pape Java n'aimait pas mes méthodes 
+ Zorg1: z'aiment pas l'efficacité
+ BlaiseEbuth: Il t'as excommunié&#160;?
+ Zorg1: l'avantage y a pas mal de Papes en Java, ça limite les inconvénients, ils s'excommunient tous entre eux
+ BlaiseEbuth: Ah ouai, y'en a un par version, pour assurer la rétro-compatibilité. Logique
+ Zorg1: Diocaise d'AbstractBuilderFactory
+ Robinsstudio: Vous êtes graves&#160;! :joy:
+ Zorg1: bah à une époque c'était la mode l'"évangélisation Java" comme ils disaient
+ Zorg1: c'est assez américain comme nom, perso ça me rappelle les campagnes de conversions forcés de Louis XIV dans le midi de la France
+ Zorg1: après bon c'est surtout assuré la formation et l'encadrement technique/suivi des jeunes qu'ils mettent en masse sur le projet parce que c'est moins cher
+ BlaiseEbuth: Moi je préfère penser aux Sentinelles :3
+ Zorg1: ceux de l'île Indienne&#160;?
+ BlaiseEbuth: :smiling_imp:
+ BlaiseEbuth: J'aime ce qu'ils font aux évangelistes
+ Zorg1: oui du moment que personne évangélise façon Louis XIV ça peut aller
+ Robinsstudio: Pourquoi Louis XIV en particulier&#160;?
+ Zorg1: révocations de l'édit de Nantes - les dragonades qui ont suivi
+ Zorg1: mais il n'a pas l'exclusivité des méthodes de conversions musclés il est vrai ^^
+ Robinsstudio: Bah de manière générale, les rois de France, c'est pas des enfants de coeur, si je peux me permettre la vanne. x)
+ BlaiseEbuth: Vanne c'est en Bretagne, pas en France.
+ Robinsstudio: Où ça commence à taper sur les Bretons.
+ BlaiseEbuth: Bah ici
+ Robinsstudio: Oui pardon je sais pas écrire.
+ Robinsstudio: Bon, je crois que le moment est venu de pousser dans l'arène. :see_no_evil:
+ Robinsstudio: Je crois que je vais juste perdre ma première place&#160;! hahaha
+ BlaiseEbuth: C'est ce que Louis XIV disait aussi. Bien qu'avec une orthographe différente...
+ Robinsstudio: Tant que je ne passe pas derrière Boulet, c'est l'essentiel.
+ Robinsstudio: C'est parti&#160;!
+ BlaiseEbuth: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=XDOXbyahIJM">https://www.youtube.com/watch?v=XDOXbyahIJM</a>
+ Robinsstudio: Ah je ne le connaissais pas celui-là.
+ BlaiseEbuth: On en apprends tous les jours.
+ Robinsstudio: Ah, je viens de passer devant Logan. Si tu nous lis, salut à toi&#160;! :wave:
+ Robinsstudio: Ohoh Boulet 5ème&#160;! Alleeeezzz&#160;!
+ Robinsstudio: Et c'est une nouvelle victoire pour le bot...
+ Zorg1: nice
+ Robinsstudio: Mais bon y a au moins une bonne nouvelle. Boulet a dégringolé à la cinquième place. Ça valait le coup rien que pour ça. :P
+ BlaiseEbuth: Mesquin...
+ Robinsstudio: Bah écoute, il voulait me mettre une fessée. Est fessé qui a voulu fesser.
+ BlaiseEbuth: :cop:
+ Robinsstudio: Oh mais&#160;! J'ai oublié un truc&#160;! J'ai laissé sqrt(2) alors que log(2) est mieux normalement&#160;! 
+ BlaiseEbuth: Le désespoir a un visage.
+ Robinsstudio: Mais n'importe quoi il me manque à peine un demi point pour atteindre le niveau du bot. Tu vas pas me dire qu'un petit coup de nombre magique va pas marcher quand même&#160;!
+ BlaiseEbuth: :zipper_mouth:
+ Remi_avec_un_i: Salut tout le monde&#160;! t'es sur quel combat de bots Robinsstudio&#160;?
+ Zorg1: oui enfin log(2) sqrt(2) faut surtout muscler ton nombre de rollouts
+ Robinsstudio: UTTT, depuis un moment maintenant...
+ Robinsstudio: Mais je l'ai musclé&#160;! Je ne fais que ça&#160;! Je suis quasiment à 30K&#160;!
+ Robinsstudio: Là ça commence à devenir compliqué.
+ dwarfie: bon , ben finalement , il etait pas si dur que ca le sokoban :D
+ dwarfie: Automaton2000&#160;: une tortue pour feter ca&#160;?
+ Automaton2000: tu en es où&#160;?
+ dwarfie: Automaton2000&#160;: 100%
+ Automaton2000: non, mais quand tu passes par la
+ dwarfie: Automaton2000 , je sais , les puzzles trépassent
+ Automaton2000: donc je peux pas dire que c'est pas facile
+ Robinsstudio: Je n'ai plus d'idées pour battre le boss. Des idées Automaton2000&#160;?
+ Automaton2000: c'est le moment de la compilation
+ Robinsstudio: Ah oui&#160;? Dis-en moi plus Automaton2000.
+ Automaton2000: c'est pas un langage de script

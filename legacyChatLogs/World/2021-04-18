@@ -1,0 +1,912 @@
+ Westicles: Are you puissant?
+ Neshomago: Hi everyone!
+ MightMeyan: Hi
+ Chinnapat1231: Hello
+ MightMeyan: wanna play
+ Chinnapat1231: :thumbsup_tone1:
+ jacek: good morning
+ PatrickMcGinnisII: uh oh
+ jacek: :innocent:
+ PatrickMcGinnisII: climbing night if war, man its slow
+ PatrickMcGinnisII: Night Of War
+ PatrickMcGinnisII: gheesh, didn't make it
+ PatrickMcGinnisII: lost 9 out of 81 matches...smh
+ PatrickMcGinnisII: oh well, only random bot
+ PatrickMcGinnisII: goodnight
+ Alex-1: hii
+ TheIceMoustache_35fe: hi
+ TheIceMoustache_35fe: hi
+ TheIceMoustache_35fe: hi
+ multii: hiihhihih
+ BrainNotFoundException: hi
+ Ordonnateur: low
+ BrainNotFoundException: lol
+ Alex-1: what new
+ Ordonnateur: nothing, just coding xd
+ multii: lol
+ Alex-1: are u mad
+ Alex-1: Ordonateur
+ Ordonnateur: :sunglasses:
+ Alex-1: :dizzy_face:
+ Marchete: jacek, my UCT = jacekValue + C * sqrt(log(parent visits) / visits)
+ Marchete: first goes in range [-1.1 .. 1.1]
+ Marchete: but the second goes [0.0 .. 4.53]
+ Marchete: these are good ranges?
+ Marchete: C = 1.5
+ Marchete: my bot hardly win any real bot
+ Marchete: and the eval is just reused from another bot, and tanh(score*factor)
+ Marchete: to be in range 1.0
+ Marchete: I mean, I'm doing the MCTS part, not the NN
+ Marchete: so I just give heuristic eval
+ ThinhMP: clsh of code now
+ ThinhMP: clash of code now
+ BrainNotFoundException: :ok_hand:
+ VinhDaDen: hello guys
+ jacek: Marchete where 4.53 does come form
+ Marchete: max value seen from 
+ Marchete:  C * sqrt(log(parent visits) / visits)
+ Marchete: C = 1.5 FPU=0.5
+ Marchete: casually the same values of your playground
+ jacek: ah well the exploration can go infinity theoretically
+ Marchete: I'm not sure it explores well
+ jacek: eval reused from another bot, minimax bot?
+ Marchete: sometimes when I try to reuse the tree I find that the enemy move is not even expanded...
+ Marchete: yes
+ Marchete: minimax
+ Marchete: NEW ROOOT AT BLOCK:16 INDEXNODE:925 FOUND. Visits:336/18183 = 1%
+ Marchete: these 336 visits are mostly because I'm forcing it at depth=1
+ jacek: seems odd
+ Marchete: these mean that the bot is completely ignoring the best move of the enemy
+ MysteryCoder456: print("hello world")
+ Marchete: like completely
+ jacek: what are the eval values. do you backpropagate properly
+ jacek: and you do proper eval for the current player?
+ jacek: my NN is for 1st player, so 2nd player will take the minus of it
+ Marchete: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/1a0f6084-47f0-4ee9-8e18-aba638049fd4">http://chat.codingame.com/pastebin/1a0f6084-47f0-4ee9-8e18-aba638049fd4</a>
+ Marchete: maybe the curr-&gt;jacekValue = (curr-&gt;playerID&#160;!= n-&gt;playerID)&#160;? -best&#160;: best;
+ Marchete: that's because I wanted it to be reusable for smitsimax
+ Marchete: smitsi-jacek-max
+ Marchete: I know I know
+ Marchete: but I can try with a forced -best always
+ jacek: hmm best = best value of children?
+ Marchete: best = max(children_value)
+ jacek: so parent should have -best
+ Marchete: yes, I'm doing that
+ Marchete: max(children_value)
+ Marchete: then parent = -max(children_value)
+ Marchete: curr-&gt;jacekValue = (curr-&gt;playerID&#160;!= n-&gt;playerID)&#160;? -best&#160;: best;
+ Marchete: if you assume playerID&#160;!= child-&gt;playerID
+ Marchete: that is always the case on MCTS
+ Marchete: and I do the same action all the way up
+ jacek: how about putting eval first. is this good eval with good sign?
+ Marchete: probably not
+ Marchete: first move gives:
+ Marchete: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/848b7b6c-3e0f-4329-adac-0214a4e2dea9">http://chat.codingame.com/pastebin/848b7b6c-3e0f-4329-adac-0214a4e2dea9</a>
+ Marchete: JacekAVG = move's eval value + log(move's visits)
+ Marchete: i.e. "Best" score found on move 1, a -0.13
+ Marchete: but best JacekAVG is move 5
+ Marchete: I don't understand why move 1 isn't explored more if it has the best score
+ jacek: or move when it has small visits
+ jacek: 2
+ Marchete: yes, 3 and 4 are very similar
+ Marchete: I can't see why exploring is that weird
+ Marchete: I need to recheck the whole thing
+ jacek: how does it compare against minimax? at the very least it should win some of the games even if C or FPU are not optimized
+ Marchete: I think explore isn't working correctly, it just always goes to Depth 23
+ Marchete: wasn't expecting that deep
+ Marchete: it hardly wins a player at 80th place
+ jacek: actually it can go that deep
+ Marchete: always depth 23
+ jacek: but i believe you have bug somewhere, how does selection look like
+ Marchete: I don't have vector&lt;&gt; but firstchild index and childcount
+ Marchete: similar to Smits
+ Marchete: so I first recover a pointer to the first child and then do the loop
+ Marchete: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/3641a5f4-27ae-4e2a-b32c-77331a7159e7">http://chat.codingame.com/pastebin/3641a5f4-27ae-4e2a-b32c-77331a7159e7</a>
+ Marchete: const float CONSTANT_C = 1.5;const float CONSTANT_FPU = 0.5;
+ Marchete: 				SQRT_LOG[i] = /*SMIT_K_EXPLORATION * */sqrt(log((double)i));				INV_SQRT[i] = 1.0 / sqrt((double)i);
+ Marchete: SQRT_LOG and INV_SQRT are cached values
+ Marchete: to speed up
+ Marchete: it was bad pasted
+ Marchete: INV_SQRT[i] = 1.0 / sqrt((double)i);
+ Marchete: SQRT_LOG[i] = sqrt(log((double)i));
+ jacek: i get it. hmm i see no problem in selection
+ Marchete: it was the similar to those I use in other games
+ Marchete: I was thinking that it's a problem of magnitude between UCT formula
+ Marchete: if I have a low exploration value it won't explore enough
+ Marchete: I'll look more into it, these things are hard to tune
+ Marchete: most literature just says "Pick a good C"
+ Marchete: like, OK I get it, but that doesn't help
+ jacek: try uping FPU to 10, should be less blind
+ Marchete: OK
+ Marchete: in many turns the tree reuse is saying I'm reusing like 70% of the visits (so I was predicting the enemy fairly good)
+ Marchete: but on the next turn it goes to 1%
+ Marchete: like I'm not seeing the enemy at all
+ Marchete: your code should be like normal MCTS
+ Marchete: but I don't know where I'm having my bugs
+ actualCoderTrevor: For code golf can I submit more than once? I've never done one.
+ jacek: codegolf puzzle?
+ actualCoderTrevor: I think so. I'm doing Chuck Norris.
+ jacek: yes
+ actualCoderTrevor: Thanks&#160;:)
+ jacek: you can submit any time, and the score will be of shortest submited code
+ actualCoderTrevor: Cool, that's what I thought but I wanted to be sure. Thanks again!&#160;:)
+ multii: hji
+ multii: hi
+ jacek: good morning
+ Thyl: good morning
+ Distilled-Water: guten tag
+ AntiSquid: #de
+ jacek: :scream:
+ souta_1326: Is it possible to get 1st place in CoC and have my score go down?
+ Distilled-Water: idk
+ Distilled-Water: were you on ur own
+ Ordonnateur: test it&#160;? (keep your good code but remove some score optimization part and see if your score on leaderboard decrease or not)
+ Alex-1: hii world
+ souta_1326: It's already happened
+ Ordonnateur: well... 1) you aren't alone ;p and I read somewhere that if you stop doing CoC for a few day then your rank goes down but for the score itself...
+ Ordonnateur: (and 2)* ;p)
+ souta_1326: that was about ten minutes agoi dont think it's from neglect
+ souta_1326: i play it yestarday too
+ Ordonnateur: Hum, quite weird. maybe your "ennemies" are quite activ&#160;? x)
+ Ordonnateur: (try discord, maybe a dev will know why ^^')
+ souta_1326: I've noticed something
+ souta_1326: 0% except for me
+ Alex-1: can anybody help me with Coder Strike Back wood 1 to bronze
+ JordyH: What's your question Alex?
+ Alex-1: yeah it says change the thrust value with boost keyword when i do it it not works
+ Alex-1: JordyH
+ JordyH: you kmow you can only use it once?
+ Alex-1: yeah
+ Alex-1: but i cant see anywhere in  the game
+ JordyH: it's been 5 years since the contest so I have to take a good look at my code...
+ Alex-1: ohh
+ JordyH: I see i used the boost in the first turn  every game to get going
+ struct: you print the word boost
+ struct: console.out("1000 1421 BOOST")
+ struct: instead of 100
+ Alex-1: okk
+ Ordonnateur: before gold you can just have a speed manage with acceleration and it's good
+ <b>**BrainNotFoundException slaps you around a bit with a large fishbot</b></p><p><img src="/a/59638341336030" /> ParallaxWave: :a:
+ Ordonnateur: next_cp(x/y) - my_pod(x/y)_speed*3 for the pos to move
+ Ordonnateur: and you stay at 100 power
+ Alex-1: :confused:
+ BrainNotFoundException: ok
+ Asat49: gghjjg
+ nan_00: hi ,I'm a new member 
+ jacek: hi, a new member
+ Gorg212: Hi
+ LaiMo2082: Hello people! New member here
+ sonic1991: hey
+ sonic1991: I cant remember how it is called in ruby. when Im checking if value is one of defined values. something like&#160;%(w s c). i dont know how it is called. Anyone&#160;? cause o cant find it
+ jacek: ternary?
+ jacek: indexOf?
+ sonic1991: nah I founded
+ sonic1991: %w(abc def xyz)
+ BhoO: :o
+ sonic1991: it creates array of strings
+ sonic1991: %i of integers
+ sonic1991: the way of creating arrays
+ BhoO: like group them abc first element, ..
+ sonic1991: <a rel="nofollow" class="external free" href="https://simpleror.wordpress.com/2009/03/15/q-q-w-w-x-r-s/">https://simpleror.wordpress.com/2009/03/15/q-q-w-w-x-r-s/</a>
+ sonic1991: its just a way of creating array
+ sonic1991: instead of using quotation for example
+ BhoO: i see, i think u love code golf
+ sonic1991: :D
+ sonic1991: you know there are many useful things that make things way faster
+ sonic1991: to type them
+ sonic1991:&#160;;]
+ BhoO: yeah :D
+ Ordonnateur: it is possible to get an iterator from a "int tab[]" in C++&#160;?
+ struct: begin(tab)&#160;?
+ struct: What are you trying to do?
+ Ordonnateur: using binarySearch standard library on a tab (changing to vector cost too much ^^')
+ Ordonnateur: (tryed begin(tab) but it don't like it ^^')
+ struct: #include &lt;iterator&gt;
+ Astrobytes: sort(arr, arr + arr_size, func);
+ Astrobytes: At least I think that's what you're asking.
+ jacek: owarebytes
+ Astrobytes: *sort/search/whatever std method
+ Astrobytes: lol jacek
+ jacek: i dont want to search for std
+ Ordonnateur: I'm confused, what struct said work if I create the tab before the call but not if the tab came from a function call O_o
+ jacek: huh
+ struct: Can you show the code?
+ struct: Im a bit confused
+ Ordonnateur: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/63eae47f-272a-4a39-8e07-79d28338cb6d">http://chat.codingame.com/pastebin/63eae47f-272a-4a39-8e07-79d28338cb6d</a>
+ Ordonnateur: the test cout work but the exist one bug on begin/end saying there is no matching to those function &gt;&lt;'
+ multii: yo
+ Astrobytes: binary_search(tab, tab + tab_size, k)
+ Astrobytes: or, y'know, use std::array
+ Ordonnateur: It work but I completely don't understand why lol
+ struct: <a rel="nofollow" class="external free" href="https://tech.io/snippet/Fl2dcRp">https://tech.io/snippet/Fl2dcRp</a>
+ Astrobytes: it's a C style array, you're giving it the starting address of the memory, and the ending address. This is analogous to begin() and end()
+ struct: you need to include the files needed
+ struct: binary_search requires algorithm
+ Ordonnateur: (I just skipped some include yeah but that part was also working for me, the error was on the other call in the class)
+ struct: I think its because the function doesnt know the size of the array you are passing
+ struct: so it cant use the iterators
+ struct: Im not sure though
+ struct: oh wait
+ struct: yeap
+ struct: <a rel="nofollow" class="external free" href="https://tech.io/snippet/hBkT6to">https://tech.io/snippet/hBkT6to</a>
+ struct: This code compiles
+ Alex-1: yeah it is nice
+ Astrobytes: so does: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/f3b08477-0685-4bbb-bfdb-8ab4bc425f00">http://chat.codingame.com/pastebin/f3b08477-0685-4bbb-bfdb-8ab4bc425f00</a>
+ struct: astro solution is better
+ Astrobytes: tbh I tend to keep iterators and std things for std containers only, that way I know what I'm looking at when I read my code again later
+ Astrobytes: I mean, I'll still use sorts and whatnot from &lt;algorithm&gt; but I try to keep it obvious when I'm dealing with a C-style array vs a std container
+ Ordonnateur: Ok, thank you for the debug struct&#160;:)
+ Merxcury: yoo who's up
+ ThinhMP: clash of code nơ
+ ThinhMP: clash of code now
+ jacek: now?
+ kresteodymium: hello world
+ Nektar24: hello kresteodymium
+ kresteodymium: hello @Nektar24
+ khanhjunior: Vietnam no 1
+ khanhjunior: PARACEL,SPRATLY BELONG TO VIET NAM.
+ kresteodymium: cul
+ jacek: :thinking:
+ kresteodymium: why was i blocked
+ kresteodymium:&#160;:(
+ kresteodymium: wut did i do&#160;:(
+ BlaiseEbuth: (╯°□°)╯︵ ʞǝɔɐɾ
+ kresteodymium: lol
+ kresteodymium: what does that mean
+ BlaiseEbuth: You triggered the kindergarten language filter, that's all.
+ kresteodymium: lol
+ kresteodymium: *cool
+ struct: jacek
+ struct: On chess for bishop moves do you just do use a lookup to generate the moves?
+ BlaiseEbuth: jacekノ( º _ ºノ)
+ struct: do you use*
+ jacek: hmm
+ jacek: no lookups
+ jacek: more like 'standard' bitboard approach <a rel="nofollow" class="external free" href="https://rhysre.net/fast-chess-move-generation-with-magic-bitboards.html">https://rhysre.net/fast-chess-move-generation-with-magic-bitboards.html</a>
+ jacek: or classical
+ jacek: though i have some lookups for knight moves and king checks
+ struct: thanks
+ BlaiseEbuth: :thumbsup:
+ jacek: lookups... something MSmits might enjoy
+ BlaiseEbuth: ʞǝɔ︵ \(°□°)/ ︵ɐɾ
+ jacek: learning ascii art?
+ Pesky_typos: Sup ppl
+ BlaiseEbuth: ʞǝɔ ja/(^.^/)
+ Pesky_typos: :stuck_out_tongue_winking_eye:
+ Smelty: o.O
+ BlaiseEbuth: (╯°□°)╯︵ O°o
+ Smelty:               e
+ Smelty: ʎʇlǝ︵ \(°□°)/ ︵ɯS
+ jacek: ( ͡° ͜ʖ ͡°)
+ Smelty: (°͡ ʖ͜ °͡ )
+ Smelty: hmm
+ <b>**Smelty says that he is in two pieces:</b>ʎʇl &amp; ǝɯS<b></b>
+ <b>**Smelty dies from being in two pieces</b></p><p><img src="/a/12029921307622" /> ShannonNorris97: Wow, managed to figure out alpha-beta pruning, and it's amazing!
+ ShannonNorris97: Such a significant jump in the depths that it can handle
+ Astrobytes: Ah nice one&#160;:)
+ Astrobytes: It's a useful little algo alright
+ ShannonNorris97: Yeah I dedicated a bunch of time to better understand minimax and learn about alpha-beta pruning, and I found it really interesting. I think last time I looked at it I kinda rushed, so I took my time to appreciate it a bit more this time. It's so clever
+ ShannonNorris97: ^ after your guys recommendation to look at it
+ KiwiTae: MadKnight o/
+ KiwiTae: sup ya all :D
+ Astrobytes: hey kiwo
+ Astrobytes: ShannonNorris97: awesome, it really is worth the extra time to study it, when the concept is embedded in your mind you have a lot more freedom with it
+ Illedan: Yo
+ Astrobytes: hey Illedan
+ Illedan: zup?
+ jacek: alpha beta pruning eh
+ Illedan: Where?
+ Astrobytes: Not a lot, chat seems quiet. Just been tweaking parameters for a few hours as per usual :P
+ Illedan: Which game?
+ Astrobytes: Me? 3, BR, SR and Oware
+ jacek: dunno. ShannonNorris97 is it used anywhere?
+ Illedan: 3 games at once :D
+ jacek: oh someone pushed me in checkers
+ Astrobytes: Yep. And I'm playing morpion solitaire at the same time
+ PatrickMcGinnisII: tweekers :P
+ Astrobytes: lol, hey Patrick
+ jacek: jacekmax is so last week
+ PatrickMcGinnisII: How do ya'll stay sane?&#160;:/
+ jacek: stay?
+ Astrobytes: Who said we are?
+ PatrickMcGinnisII: Maybe an avatar change is in order
+ jacek: rotation?
+ struct: im still stuck in csb
+ KiwiTae: stuck top 10? &gt;&lt;
+ struct: I wish
+ struct: I need to finish my sim
+ Astrobytes: The changes you were making the other day didn't work then?
+ struct: I never finished the avx thing
+ PatrickMcGinnisII: One of these days I'll pick your brains about optimizations using C and Java on CG.... then we can all sit on the crazy train
+ struct: and no I havent
+ struct: it was something related to mcts
+ Astrobytes: ah ok
+ jacek: crazy train of PHP?
+ Astrobytes: PatrickMcGinnisII: we look forward to the day :D
+ jxrinnn: ok
+ PatrickMcGinnisII: I AM insane
+ PatrickMcGinnisII: :coffee:
+ AntiSquid: MSmits online? have question @_@
+ AntiSquid: Automaton2000 ping mcsmitz
+ Automaton2000: why do you even know the gametype. di we?
+ jacek: Yavalath sucks!
+ jacek: doesnt work? o.O
+ struct: really?
+ Astrobytes: No, he's trying to summon MSmits
+ struct: I see you are trying to summon him
+ Astrobytes: lol
+ jacek: maybe he uses all cores for metamcts and cant load chat
+ Zenoscave: Try #3: Hello cheat
+ Zenoscave: *chat
+ Zenoscave: What's the optimal yavalath move?
+ jacek: why, 4 4 of course
+ Zenoscave: Jacek ssssh it's a MSmits summon
+ Astrobytes: "hello cheat" :rofl:
+ PatrickMcGinnisII: :radioactive::mega:
+ jacek: sounds a good use for this template <a rel="nofollow" class="external free" href="https://i.imgflip.com/1kuk8y.jpg">https://i.imgflip.com/1kuk8y.jpg</a>
+ Zenoscave: I lost my nest C4L in param-change-submit-frenzy
+ Zenoscave: Best**
+ Astrobytes: Less cheating more nest C4L bots!
+ Zenoscave: Astro hush, At least my keyboard doesn't duplicate keys anymore
+ Astrobytes: Yes, did something similar in Oware earlier :D
+ Astrobytes: hehehe
+ Zenoscave: Was anyone here for that? I think tobou would remember
+ Astrobytes: struct: do you remember?
+ Zenoscave: who's struct?
+ Astrobytes: tobou
+ Zenoscave: no that's tobou
+ struct: remember what?
+ BlaiseEbuth: Pew pew!
+ Zenoscave: When I couldn't type in chat because keys would get stuck and repeat constantly
+ Zenoscave: Blaise PEWPEW to you
+ BlaiseEbuth: o/
+ struct: no
+ Astrobytes: Zenoscave:<a rel="nofollow" class="external free" href="https://github.com/MultiStruct/proof/blob/master/proof.txt">https://github.com/MultiStruct/proof/blob/master/proof.txt</a>
+ Zenoscave: ø/
+ Zenoscave: Provesr nothing Astrobytes
+ MSmits: it proves tobou is struct if they asked tobou to do it and it changed structs gith
+ jacek: :tada:
+ AntiSquid: ah mcsmitz!!
+ MSmits: AntiSquidz!
+ Zenoscave: <a rel="nofollow" class="external free" href="https://github.com/LSmith-Zenoscave/proof/blob/main/proof.txt">https://github.com/LSmith-Zenoscave/proof/blob/main/proof.txt</a>
+ Astrobytes: lol, you knob :D
+ jacek: Zenoscave you have PR
+ Zenoscave: One sec will merge shortly
+ Zenoscave: Astro you use keybase?
+ Astrobytes: nope
+ Zenoscave: hmmm interesting. Also, I can't accept that PR. I'm not msmits 
+ Zenoscave: <a rel="nofollow" class="external free" href="https://gist.github.com/astrobyte/1b3f0ca8de1e8524a63cbc84910f1935">https://gist.github.com/astrobyte/1b3f0ca8de1e8524a63cbc84910f1935</a>
+ Zenoscave: is your gh name not astrobyte?
+ Astrobytes: ehhhh no
+ MSmits: Zenoscave, i know a good test
+ struct: zeno its what msmits said
+ MSmits: what is the species of your father
+ Astrobytes: Penguin.
+ MSmits: now you spoiled it
+ MSmits: i was trying to test zeno
+ Astrobytes: Oh
+ Astrobytes: No that's not mine
+ Zenoscave: interesting
+ Zenoscave: similar names
+ Smelty: o . O
+ jacek: oh my
+ struct: o.o
+ Zenoscave: O.O
+ Zenoscave: 0.1.0
+ ShannonNorris97: How do you guys usually settle on a suitable depth for minimax?
+ Astrobytes: Iterative deepening usually. IT depends.
+ BlaiseEbuth: (╯°□°)╯︵ ǝʌɐɔsouǝZ
+ jacek: iterative deepening, so it depends on time
+ ShannonNorris97: Oh cool, I've not heard of that before. I'll do some digging
+ Astrobytes: It's not complicated 
+ jacek: you have to know time for minimax(n-1) is negligible in comparison to minimax(n)
+ ShannonNorris97: oh okay, so it's based on the assumption that every time minimax is run it takes the same amount of time, regardless of depth?
+ Astrobytes: No, that depth of n-1 is negligible time-wise compared to n
+ jacek: you run in loop minimax(0), minimax(1), minimax(2)... until time's up
+ ShannonNorris97: okay, so what does n represent in that, if not depth?
+ Astrobytes: n is depth
+ ShannonNorris97: oh I think I just got what you meant
+ jacek: people have problem that why instead of using minimax(6) you have to loop throught minimax(0)... minimax(5)
+ jacek: it may seem it wastes time, but it does not
+ ShannonNorris97: No that does sound interesting, so you go to whatever point you can, rather than running out of time trying to force a particular depth
+ Astrobytes: The beauty of iterative deepening is that you can order the moves to prioritise the best move from the n-1 depth at n depth (amongst many other things)
+ Zenoscave: Look into  history  heuristics and killer moves too
+ ShannonNorris97: Ah I see, I reckon I'm gonna save that one for tomorrow. But as always, I appreciate the help and I'll be sure to look into it&#160;:)
+ ShannonNorris97: I'll look at those too Zenoscave, thank you
+ Zenoscave: <a rel="nofollow" class="external free" href="https://www.chessprogramming.org/Minimax">https://www.chessprogramming.org/Minimax</a> This is a good start
+ jacek: so youre normal minimax is working now?
+ ShannonNorris97: yeah it was doing well earlier. Made it to 80th place or something, but messed it up just now making it more complicated. Just restoring the old version now to amend it from that point. But yeah it's got alpha-beta pruning and everything and does well in the games&#160;:)
+ jacek:&#160;:+1:
+ Astrobytes: Good stuff!
+ PatrickMcGinnisII: or you can estimate how many nodes you have time to explore and you can stop in the middle of a certain depth without a time call.  Oh god, I'm insane...but php time call is too expensive, everything is too expensive in php
+ TheDictator: jag suna suna lage
+ Zenoscave: Then don't use php
+ PatrickMcGinnisII: never heard that b4. :P
+ Astrobytes: Soon, soon Patrick, the C is calling you
+ PatrickMcGinnisII: yea, with a megaphone :mega:  it's just a catch-22 for me...i did it for so many years
+ Astrobytes: And now is the time that you need to call upon those skills&#160;;)
+ PatrickMcGinnisII: finished master of mayhem puzzle just now
+ PatrickMcGinnisII: I should post it, just for eveyone to see the insanity
+ PatrickMcGinnisII: and i didn't use regex
+ Astrobytes: potw is it?
+ Astrobytes: oh, just a new one
+ PatrickMcGinnisII: i dunno...yea new 1
+ Astrobytes: haven't looked at it tbh
+ Westicles: Well, you only used 58 dollar signs
+ Westicles: Pretty concise as these things go
+ PatrickMcGinnisII: i just counted them, yup 58
+ Astrobytes: Hah. PHP eh
+ BlaiseEbuth: :money_mouth:
+ PatrickMcGinnisII: how did Westicles get the exact number&#160;? O.o
+ Westicles: You published it
+ Astrobytes: Looked at your code presumably
+ BlaiseEbuth: :expressionless:
+ PatrickMcGinnisII: but i thought you had to solve it in that lang. to see others solutions?
+ PatrickMcGinnisII: is it a lvl 40 thing?
+ PatrickMcGinnisII: hmmm
+ BlaiseEbuth: :grin:
+ Westicles: I solve everything in every language, so I see everything
+ Zenoscave: That's... time consuming westicles
+ PatrickMcGinnisII: but i don't see your solution
+ jacek: he cheats
+ PatrickMcGinnisII: is it private er sumtin
+ BlaiseEbuth: Yes, his bot is very busy. :rofl:
+ Zenoscave: how can you bot if there's no solutions yet
+ Zenoscave: Maybe the default answer but every lang?
+ BlaiseEbuth: There's, in the contribution section
+ Zenoscave: So every lang that someone else has done . got it
+ BlaiseEbuth: Not so difficult to transpile a solution in others languages
+ Zenoscave: Perhaps of similar paradigms
+ Zenoscave: I'd love to see a js -&gt; Prolog transpiler
+ BlaiseEbuth: No prolog on cg
+ Zenoscave: true :thinking:
+ Westicles: Zenoscave, just system calls like this
+ Westicles: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/5800a36c655f42f53885c128d09eaed15f7f">https://www.codingame.com/contribute/view/5800a36c655f42f53885c128d09eaed15f7f</a>
+ Zenoscave: Westicles that's another approach haha
+ PatrickMcGinnisII: some contribution solution codes kinda suck or don't even translate well if at all
+ PatrickMcGinnisII: but yea a system call takes care of that i guess
+ MSmits: a transpiler translates source code from one language into another?
+ Zenoscave: yes MSmits
+ Zenoscave: Typescript -&gt; JS is a transpilation
+ MSmits: ah ok, then i learned my new word for the day, just in time too
+ MSmits: it's a just in time transpiler
+ Zenoscave: Can tomorrow be JIT
+ PatrickMcGinnisII: I guess people do just submit the solution given in the contribution, but that's kinda janky
+ MSmits: i just did JIT
+ MSmits: another one
+ Zenoscave: AOT
+ MSmits: sure
+ Astrobytes: That's a grim way to solve a puzzle PatrickMcGinnisII
+ Zenoscave: or is it JAT?
+ Zenoscave: predictive JIT basically
+ MSmits: I dont know jat means steal in Dutch
+ Zenoscave: Just-ahead-of-time
+ MSmits: oh ok
+ Astrobytes: Defo related to stealing
+ jacek: AOT? anime
+ PatrickMcGinnisII: well, no one will say i cheat using php. :P
+ Zenoscave: AOT is the acronym officially according to the all-knowing Wikioedia
+ MSmits: seems pretty easy to do, i just take my othello counterbook and put it in a php bot :P
+ PatrickMcGinnisII: ok, show me..i need the help, rofl
+ MSmits: mmh might not work because it wont solve at ply 40+
+ Astrobytes: Wikioedia: Bringing wikis and wookies together
+ Zenoscave: Astrobytes. Do you ever miss a typo?
+ PatrickMcGinnisII: I've used decompilers b4, the token symbol tables suck
+ Astrobytes: Sometimes.
+ BlaiseEbuth: He is [CG]Typo
+ Astrobytes: I can be a little pedantic
+ Zenoscave: errantly&#160;;)
+ jacek: Astrotybes
+ Zenoscave: astrotypes
+ PatrickMcGinnisII: don't make me logophobic
+ Astrobytes: AstroTypos
+ Astrobytes: Pedantrobytes
+ Zenoscave: PatrickMcGinnisII pentasyllabic is autological and autological is pentasyllabic
+ Astrobytes: ergo
+ Zenoscave: but is autological autological?
+ Astrobytes: By definition I think yes
+ Astrobytes: But this is a trap
+ Zenoscave: Ding. ding. ding
+ BlaiseEbuth: You make me crazy frog&#160;!
+ Zenoscave: frog?
+ Zenoscave: where's euler?
+ MSmits: do you mean he makes you a crazy frog or are you saying he is a frog that makes you crazy
+ Zenoscave: and he's a toad
+ Astrobytes: aringdingdingdingding yourself back to the fire and brimstone Beelzébuth
+ BlaiseEbuth: \o/
+ BlaiseEbuth: One has the ref
+ Astrobytes: I got it yep
+ Zenoscave: I refuse to think of axel f
+ Zenoscave: It haunts me
+ MSmits: axel foley?
+ BlaiseEbuth: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=XPz2_T0t2Yo">https://www.youtube.com/watch?v=XPz2_T0t2Yo</a>
+ Zenoscave: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=k85mRPqvMbE">https://www.youtube.com/watch?v=k85mRPqvMbE</a>
+ MSmits: beverly hills cop?
+ BlaiseEbuth: Mine is better
+ Zenoscave: True
+ PatrickMcGinnisII: all your polyphallus adjuncts have made you fearful of hypertropic-hyphenation
+ Zenoscave: Oh yeah, PatrickMcGinnisII
+ Zenoscave: well. <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=uzxIWqLC4Bk">https://www.youtube.com/watch?v=uzxIWqLC4Bk</a>
+ Astrobytes: BlaiseEbuth:<a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=H7CC2cJUku0">https://www.youtube.com/watch?v=H7CC2cJUku0</a>
+ Westicles: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=qIvy9nSlZf0">https://www.youtube.com/watch?v=qIvy9nSlZf0</a>
+ Astrobytes: ^best one of the lot
+ BlaiseEbuth: Astrobytes: This guy is so hot! I love his beard! :heart_eyes:
+ PatrickMcGinnisII: One of my bosses is demanding service
+ PatrickMcGinnisII: fk'in cat
+ MSmits: why do i keep clicking on this :poop:
+ MSmits: oww great, i was on my work account too
+ MSmits: so tomorrow when i watch a YT video with my students they are going to be wondering about my preferences again
+ Astrobytes: Could be worse, we could be posting GG Allin videos
+ MSmits: dont make it worse please :P
+ Astrobytes: I'll spare you GG doing jobbies on the stage
+ PatrickMcGinnisII: YT has new DUST episodes on tonight
+ Westicles: I'll spare you my favorite videos now, crows remove ticks
+ struct: (╯°□°）╯︵ ┻━┻
+ PatrickMcGinnisII: my cats watch YT, squirrels and birds ... keeps them off the kb
+ Astrobytes: Hey, I actually watched those 5 videos after you posted about it Westicles. From the wallabies right?
+ Westicles: Yeah, those are awesome
+ Westicles: Had to clear my cookies, all I got after that was more tick videos and the dog ones are disgusting
+ Westicles: Er, more disgusting
+ Astrobytes: I thought it was very cool. I'm a big fan of the Corvids in general. I encourage magpies and crows to my garden with food. Just watching them stash it etc is so cool. They are ridiculously intelligent.
+ Astrobytes: Eh, I worked in Corfu for a year, and the biggest hedgehog I've ever seen decided to camp outside my patio door. I have never seen so many ticks.
+ Astrobytes: Wrapped it in a towel to pick it up and stuck it in a nearby bush. Didn't come back thankfully.
+ Westicles: A year in Corfu?  That sounds like a great gig
+ Astrobytes: It was amazing
+ Astrobytes: Rough at times but on the whole, amazing.
+ BlaiseEbuth: Nap and ouzo...
+ Zenoscave: Did I read GG Allin
+ Astrobytes: 40 degrees C is a nice temperature. Being amused at naked people on the beach while you're going to work wearing a jumper at 7am and it's 30 degrees C is just worth it
+ Astrobytes: Yes Zenoscave
+ Zenoscave: Bite It You Scum
+ BlaiseEbuth: [CG]Allin
+ Astrobytes: BlaiseEbuth: siesta or beers, or coffee (frappe naturally)
+ BlaiseEbuth: :yum:
+ Astrobytes: Zenoscave: heh heh
+ Astrobytes: argh, GG killed the chat
+ Kitkat260: why
+ Astrobytes: ...
+ struct: Astro still want to try the escape this week?
+ Astrobytes: Yeah, why not
+ Astrobytes: Should be fun
+ Kitkat260: yeah
+ struct: I think its the one from the trailer
+ Astrobytes: Didn't see it
+ Kitkat260: oh
+ struct: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=7ixtzp5aVOI">https://www.youtube.com/watch?v=7ixtzp5aVOI</a>
+ struct: care its a bit loud
+ KarimGehad: Hey guys could you please check my new contribution and give a me a feedback&#160;: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/65727f6e84eb41dc66c2cb9977036ccfbbcb">https://www.codingame.com/contribute/view/65727f6e84eb41dc66c2cb9977036ccfbbcb</a>
+ Astrobytes: well, the one out of all of the ones in there that we didn't do you mean struct?&#160;:)
+ struct: yeah :p
+ Astrobytes: Also I want French girls in or I'm not doing it :P
+ KarimGehad: 😂😂😂😂
+ struct: Not sure if tbali and Scarfield want to join
+ struct: Havent seen tbali around
+ Astrobytes: KarimGehad: Sorry, I don't clash so I won't comment on your contribution
+ KarimGehad: okkkk thank youuuu 
+ Astrobytes: TBali was on discord, he responds to discord and forum pings, not usually in chat
+ Astrobytes: *webchat
+ struct: ah I see
+ Astrobytes: Scarfo should be up for it
+ struct: 8k registered so far
+ struct: on contest
+ Astrobytes: Which metric do they use? Signups? Actual submissions? Those who submit more than once?
+ struct: those who submit
+ struct: at least on the leaderboard
+ Astrobytes: Sorry, I feel a salty wave coming over me
+ Astrobytes: Anyway, at least the game will be cool
+ Astrobytes: Hopefully.
+ struct: maybe 
+ Astrobytes: It better be decent otherwise I'm taking up snooker or something.
+ struct: snooker?
+ Astrobytes: pool with all the red balls and colour -wise pot scores
+ struct: I thought it was an expression sorry
+ Astrobytes: And a very large table
+ struct: I know what snooker is :p 
+ Astrobytes: :D
+ struct: The bar I worked at had 1 snooker + 10 pool tables
+ Astrobytes: Nice. When I was cheffing, after work I used to frequent a bar with 10-12 snooker tables and 1 pool table :D
+ struct: pool is more popular here
+ Astrobytes: (It was a snooker club tbf)(
+ struct: I never played snooker though
+ struct: only pool
+ struct: I was decent at it
+ Astrobytes: I lie - there were 2 pool tables. Next to the bar. Snooker tables were closed off in the next room
+ Astrobytes: I like both. Snooker is way more heavy on tactics and strategies
+ struct: harder to pot too
+ Zenoscave: I suck at pool
+ Astrobytes: Always use that rest if you're struggling to make a shot, even in pool
+ Zenoscave: rest?
+ Zenoscave: the bank?
+ Astrobytes: The long spider
+ Zenoscave: oh that
+ Zenoscave: I just am not athletic in any fashion
+ Zenoscave: no hand-eye coordination
+ Astrobytes: Or the cross
+ struct: growth is exponential 
+ Zenoscave: My coefficient is exponentially negative :P
+ struct: its very hard at the begining 
+ Zenoscave: I used to play weekly for years
+ Zenoscave: never was good at all
+ struct: when you saw bad, how bad?
+ Astrobytes: I used to play every night. The problem was varying stages of inebriation
+ Zenoscave: I table scratched every game
+ Zenoscave: No inebriation to blame for me. 
+ Astrobytes: The bartender also always seemed to be in the possession of some nice herbal refreshments.
+ Zenoscave: That's legal here, but alas, neither that.
+ Astrobytes: Those were some fun times I tell ya.
+ Astrobytes: I sound like an old man :older_man:
+ Zenoscave: Well. If it walks like a duck
+ Astrobytes: Rearrange the popular saying: off f**k you c**t cheeky :rofl:
+ Zenoscave: you should look into foaas
+ Zenoscave: :rofl:
+ struct: zeno are you going to join the contest?
+ Zenoscave: contest?
+ Astrobytes: hahaha I do know that one :D
+ struct: 8 may
+ Zenoscave: 6 may?
+ Zenoscave: yes.
+ struct: 6 yeah
+ Astrobytes: Yeah, 8th?!
+ struct: sorry is 6
+ Zenoscave: Already joined I thought
+ Astrobytes: Oh ffs, misinformation, fake news, LIES
+ struct: top 100 or delete
+ Astrobytes: Bottom 12 or create another account
+ Zenoscave: foaas.com/nugget/struct/zeno
+ struct: whats that?
+ Zenoscave: didn't want to actually link that
+ Zenoscave: just view it at your own leisure
+ struct: This is a reference to what?
+ Zenoscave: Just a REST API
+ Zenoscave: the best one
+ Zenoscave: and for the 100 or del
+ Astrobytes: I keep meaning to use it somehow and never get round to it. Perhaps soon is a good time, considering.
+ Zenoscave: I learned a new phrase or two from it. One being from Torvalds
+ Astrobytes: You have picked up a Linusism?
+ Zenoscave: devil's-c**t-head but in his native language
+ Astrobytes: ooh he's like Finnish? 
+ Astrobytes: I think
+ Astrobytes: I don't know shit about Finnish. No one does. Except Finns.
+ Zenoscave: ¯\_(ツ)_/¯
+ Astrobytes: And Finntrolls.
+ Astrobytes: Oh perkeleen vittupää
+ Zenoscave: that'd be it.
+ Astrobytes: I see the Nordic thing, you could use fitta for c**t in Swedish
+ Zenoscave: I'm starting to realize why chat gets quiet when the two of us sign on
+ Astrobytes: :D
+ Astrobytes: I can silence the chat by myself thank you very much :P
+ Zenoscave:&#160;;)
+ Astrobytes: You ain't wrong though :rofl:
+ Zenoscave: I had to check if this was world, or a PM
+ struct: I just code and chat at the same time
+ struct: I chat when I need to think
+ Zenoscave: Struct how'd you speak in our private chat?
+ Astrobytes: :grin:
+ struct: What do you mean?
+ struct: ah sorry
+ Zenoscave: No worries. Welcome, how goes it?
+ struct: mod privileges 
+ struct: Just working on some cg stuff
+ Astrobytes: I just swear at the IDE and chat shit in the chat
+ Zenoscave: Astro how's your bot
+ Zenoscave: what cg stuff tobou?
+ struct: bot ai stuff
+ Astrobytes: kinda uncomfortable, my cushion just fell off my chair...
+ Zenoscave: that one was a reach even for me astro lol. 
+ Scarfield: there is a new escape room?&#160;:)
+ Astrobytes: Bot
+ Astrobytes: Bottom
+ Astrobytes: Rear end
+ Zenoscave: I got it. Just still a reach
+ Astrobytes: Backside
+ struct: yes Scarfield
+ Astrobytes: Not a reacharound I hope
+ Zenoscave: Can't be arsed for that&#160;;)
+ Astrobytes: Hah!
+ Astrobytes: Eyyy Scarfield
+ Astrobytes: Yes
+ Kitkat260:&#160;??
+ Scarfield: hi hi&#160;:)
+ Astrobytes: Oh do one Kitkat260
+ Kitkat260: what
+ Zenoscave: an escape room
+ Kitkat260: yea
+ Kitkat260: its hard
+ Zenoscave: Which one are you trying?
+ Kitkat260: clash of code
+ Kitkat260: can u join
+ Astrobytes: Kitkat260:<a rel="nofollow" class="external free" href="https://letmegooglethat.com/?q=do+one">https://letmegooglethat.com/?q=do+one</a>
+ Zenoscave: Astro bad mod!!!
+ Kitkat260: i am using my school laptop
+ Zenoscave: We should be welcoming newcomers no?
+ Astrobytes: Good mod. Kitkat here is a serial arse
+ Kitkat260: why
+ Zenoscave: So the thing between the chair and computer?
+ Astrobytes: Probably a Westicles troll
+ Zenoscave: you sure? 
+ Kitkat260:&#160;???
+ Kitkat260: oh yea
+ Astrobytes: :rofl:
+ Zenoscave: Why choose go for your lang, Kitkat260?
+ Kitkat260: i do pyton 3
+ Astrobytes: phyton E is better
+ Kitkat260: ok
+ Kitkat260: thx
+ Zenoscave: So you don't use Go?
+ Zenoscave: It's an upcomming language. much more useful than Python. Not as friendly to learn though
+ Kitkat260: ok
+ Kitkat260: can u help me
+ Astrobytes: Og is better. IT's a little bit behind Go but it's ogdo.
+ Kitkat260: really
+ struct: sorry I dont know any languages
+ Astrobytes: Yes.
+ Kitkat260: ur confusing me
+ struct: I code in c++ but I barely know it
+ Kitkat260: :scream:
+ Zenoscave: hey AstroortsA. Do one&#160;;)
+ Kitkat260: what bout haskell
+ Zenoscave: Ok def troll. No highschooler has heard of Haskel in america
+ struct: FoxPro
+ Kitkat260: ok
+ Scarfield: im up for the escape room btw 2-6 people
+ Kitkat260: yooo
+ Astrobytes: Venosknave: U do 1!
+ Astrobytes: ooooy Kitkat260
+ Zenoscave: Nice annegram&#160;;)
+ Astrobytes: FoxPro!
+ struct: Anyone ever heard of it FoxPro?
+ Scarfield: VenusCave :thinking:
+ Astrobytes: Jeez FoxPro.
+ Zenoscave: Let's add Snobol in the mix
+ struct: Someone offered me a job to work with foxpro
+ Astrobytes: I worked in a company that STILL had a foxpro db 
+ struct: in 2020
+ Astrobytes: this was only 2015-ish
+ Astrobytes: Legacy doesn't even touch it
+ struct: neither will I
+ Astrobytes: Honestly
+ Astrobytes: It's fucking TERRIBLE
+ Astrobytes: woops, f'ing
+ struct: I aint learning a language that is discontinued for over N ammount of years
+ Astrobytes: Yeah but you can use VISUAL foxpro :P
+ Zenoscave: Snobol.
+ struct: its  also discontinued 
+ Astrobytes: Was that ever actually used tho Zeno?
+ struct: Next time they will ask me if I want to use joomla
+ Zenoscave: Some Basic Ada stuff used Snobol for macro editing
+ Astrobytes: I will name and shame the company that still maintained FoxPro based stoick management software and they are called OrderWise.
+ Zenoscave: Had a teacher in the Defense realm during that time
+ Astrobytes: *stock
+ Kitkat260: astro
+ Astrobytes: turf
+ Zenoscave: plane
+ Astrobytes: field
+ Zenoscave: nomical
+ therealbeef: nomy
+ Zenoscave: nomicon
+ therealbeef: logy
+ Zenoscave: bytes
+ Astrobytes: bits
+ Zenoscave: I win
+ Astrobytes: how?
+ Zenoscave: I said Astrobytes
+ Zenoscave: that's how.
+ Astrobytes: :rofl:
+ Astrobytes: Zenosgame
+ Zenoscave: eye lest a gain
+ Kitkat260: hahahahhahhaha
+ Scarfield: Zeno <a rel="nofollow" class="external free" href="https://fallout.fandom.com/wiki/Pew_Pew">https://fallout.fandom.com/wiki/Pew_Pew</a>
+ Zenoscave: But can it beat megaman's Pew Pew
+ Astrobytes: Never
+ Astrobytes: "eye lest a gain" ffs :P
+ Zenoscave: Do you ever forget  what version is the IDE using and just say "f**k it let's submit"
+ Astrobytes: Yes.
+ struct: who even keep track f versions
+ struct: of*
+ Astrobytes: I do have some version control but in the heat of parameter tweaking I can be careless.
+ struct: i have like 20+ CSB folders in my hd
+ Astrobytes: Very careless.
+ struct: I dont know what each one is
+ Astrobytes: It's like mixing down a piece of music.mixdown1 - decent;
+ Astrobytes: mixdown2 - what
+ Astrobytes: mixdown3 - mixdown1withmoredecent
+ Zenoscave: <a rel="nofollow" class="external free" href="https://pasteboard.co/JXXKccH.png">https://pasteboard.co/JXXKccH.png</a>
+ Zenoscave: Just a bit
+ struct: that is for what game?
+ Astrobytes: hah
+ Scarfield: :o
+ struct: I dont even think I have that many submits across cg
+ Zenoscave: Ocean of code. 
+ Astrobytes: that is epic
+ Zenoscave: It was during the contest too
+ Zenoscave: haven't touched it since
+ Astrobytes: SERIOUS
+ struct: ok i have 258 submits on stc
+ Astrobytes: 'king hell man
+ Zenoscave: I was bored and jobless. What did you expect :rofl:
+ Kitkat260:&#160;??
+ Zenoscave: CG Enhancer breaks when I open it on OOC
+ Astrobytes: W**king maybe? Not this! :rofl:
+ struct: <a rel="nofollow" class="external free" href="https://i.imgur.com/3KLR1ew.png">https://i.imgur.com/3KLR1ew.png</a>
+ Kitkat260: haha
+ Astrobytes: On OOC struct?
+ struct: cvz
+ struct: I didnt play ooc
+ Astrobytes: Ah right
+ Astrobytes: True
+ Astrobytes: Have you tried it?
+ struct: too hard for me
+ Astrobytes: I know you missed the contest but it's kinda interesting
+ Astrobytes: Far better than that pacman shit
+ Zenoscave: I am the reason that contest servers set on fire usually
+ Astrobytes: *s**t
+ Astrobytes: Servercave
+ Zenoscave: I only had 170 on pacpac
+ Kitkat260: really
+ struct: I didnt play pacman either
+ struct: Ill play next contest
+ struct: as I played previous
+ Zenoscave: I was close to legend and broke smth with my "f**k it let's submit" meta
+ Kitkat260: nice
+ Zenoscave: Oi, Kitkat260. 
+ Zenoscave: Shove it
+ Astrobytes: Liking that style Zeno
+ Zenoscave: thx Astrobytes
+ Kitkat260: why
+ Astrobytes: Do one innit
+ Zenoscave: s/y/ere/
+ Kitkat260: why should i shove it?
+ Zenoscave: again. s/y/ere/
+ Kitkat260: what?
+ Kitkat260: i don´t understand
+ Astrobytes: ta geddowdavere
+ Kitkat260: ftyeondj
+ Zenoscave: Are you for joisey Astro?
+ Kitkat260: ggiiwwkjlu
+ Kitkat260: si
+ Astrobytes: woops - gedahhdahvere
+ Kitkat260: si nor
+ Zenoscave: Or brooklyn?
+ Kitkat260: me bronx
+ Kitkat260: now in upstate NY
+ Astrobytes: Shit that does work.Think Lahndahn Englahnd
+ Kitkat260: now no cuss
+ Zenoscave: Laddy then
+ Kitkat260: thx
+ Astrobytes: so it would be gehdahdaveer?
+ Zenoscave: Ok It's almost dinner and I am hosting guests. 
+ Astrobytes: I don't know, I'm Scottish.
+ Zenoscave: Do one Astrobytes&#160;;) thx for the phrase
+ Astrobytes: You got fleas Zeno? :o
+ Zenoscave: because I am a dog?
+ Zenoscave: ruff
+ Astrobytes: You're welcome Zenoscave :D
+ Astrobytes: "I am hosting guests. "
+ Zenoscave: They're humans haha.
+ Zenoscave: Same thing as a flea for your case maybe&#160;;)
+ Astrobytes: obviously they are humans! Enjoy dude. I have an appointment with a cheesy egg sandwich.
+ struct: I want an appointment with the creator of avx
+ struct: to know on what he was on
+ Astrobytes: Chips
+ Astrobytes: He was totally on chips
+ Astrobytes: Maybe speed too.
+ Astrobytes: Anyway, off for todayyy
+ Astrobytes: gn all
+ struct: gn
+ MrFruit: How would you solve something you have no idea about&#160;?
+ Lucky30_: you dont
+ Zenoscave: you learn about it MrFruit
+ MrFruit: Hmm
+ NissanSilvia: cool
+ davilla: oh that's awesome
+ davilla: search for "optimization"
+ davilla: doesn't give expected result
+ KelvinAndHubbles: hmm... the puzzle of the week is chess? 
+ KelvinAndHubbles: is there a way to complete it?
+ KelvinAndHubbles: welp, recently got a reverse CoC where there was varying amount of inputs, but no variable or input that told us how many
+ KelvinAndHubbles: only solved it by catching the EOF error and just reading input a bunch of times till I was sure I got it all, but still, a bit annoying
+ SaltNugs: Sup pepe
+ SaltNugs: Nice Kevin, my code was much longer
+ Mandelbort: agjdf;ljdlkdfgja
+ Mandelbort: dfajdfakdjf;ad
+ ensamblador: xd

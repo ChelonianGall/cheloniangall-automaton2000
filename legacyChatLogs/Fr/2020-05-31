@@ -1,0 +1,846 @@
+ tekki: slt tlm et AutomatonNN
+ AutomatonNN: ouep
+ tekki: AutomatonNN comment va Automaton2000 auj?
+ Automaton2000: moi je l'ai fait avec le cul
+ AutomatonNN: on m'attend et que tu vas pas te passer de temps en temps si tu veux un peu de chance de te faire un
+ tekki: une chansonette Automaton2000?
+ Automaton2000: moi je suis bloqué sur un puzzle facile
+ tekki: et toi AUtomatmonNN?
+ tekki: et toi AUtomatonNN?
+ AutomatonNN: Automaton2000 est mort Automaton2000
+ tekki: vive Automatmon2000 AutomatonNN
+ AutomatonNN: osef je vais pas me prendre tout le monde et Automaton2000
+ tekki: espoir du matin AutomatonNN fais un câlin
+ tekki: à Automaton2000
+ Automaton2000: j'ai trouvé la réponse à cette question
+ JBM: Alshock: non, tes WC c'est pas fait exprès mais ça me plaît&#160;:-)
+ Agade: Dans le moteur de searchRace il y a semble-t-il un seul check pour voir si le pod va passer par un CP. Je me demande si c'est possible, sur certaines map de passer par 2 CP en 1 tour
+ JBM: Agade: [j'ai pas la reponse mais] j'ai deja vu du monde parler de ca sur #world
+ Agade: En local de mon cote ca arrive, tres rarement
+ ReborN: Comment c'est possible que mon algo TO pas dans l'IDE alors que j'exec en 126ms au lieu de&lt;=100ms&#160;? Et évidemment quand je submit ça TO correctement
+ Alshock: @Agade en tout cas avant c'était possible et ce dans n'importe quel ordre, du coup tu pouvais passer cp 1 puis 0 dans le même tour et valider les deux dans hold the line. J'ai pas regardé la source mais je pensais qu'illedan avait juste rajouté un check de temps pour les cps suivants
+ Alshock: @ReborN je crois que le jeu accepte des écarts spontanés de moins de x ms tant que ta moyenne sur 10 tours ne dépasse pas le temps attendu. Mais mieux vaut retrouver le post de CG là dessus pour être sûr de l'info.
+ Illedan: Agade, it is possible to pass 2 on a round. And the referee should handle that case yeah.
+ Alshock: errr did I just unwillingly ping you? Sorry for that, I'll be more careful when writing people's names
+ Agade: Oh it does? My bad
+ Illedan: it didn't the first few days though, not sure when you checked last time.
+ Illedan: <a rel="nofollow" class="external free" href="https://github.com/Illedan/CGSearchRace/blob/master/SearchRace/src/main/java/com/codingame/game/Game.java#L58-L73">https://github.com/Illedan/CGSearchRace/blob/master/SearchRace/src/main/java/com/codingame/game/Game.java#L58-L73</a>
+ leojean890: mon impression, c'est que faire bien fonctionner un recuit simulé demande bien plus d'ajouter des heuristiques sur les mutations que pour un AG..
+ leojean890: même avec une température basse, le recuit simulé oscille sur des plages de score largement moins bonnes que le best de mon ag
+ leojean890: =&gt; la stratégie sale de seuiller le droit de redescendre le if math.exp((score - currSim[0])/T) &gt;= r: marche mieux tiens mais c'est pas dans la théorie du SA;)
+ leojean890: dans A*C si le score &lt; 150 interdit de redescendre
+ Zorg1: o/ à tous et à Automaton2000 &amp; Automaton2000
+ Automaton2000: perso je vois pas trop comment faire
+ Zorg1: *AutomatonNN
+ AutomatonNN: oui j'ai pas de soucis pour le coup
+ leojean890: Zorg1 t'as pas eu à faire des strats chelou dans mon genre non&#160;?:P
+ Zorg1: non ça a été
+ leojean890: t'es obligé de mettre pas mal d'heuristiques pour les mutations pour que ça parte pas en live non&#160;?:P
+ leojean890: genre fixer les cells de mutations autorisées, et interdire certaines mutations dans certains cas
+ Zorg1: pas l'impression. mon gros pb c'est surtout mon nombre de simulations
+ Zorg1: mon truc était lent par rapport aux trucs en C++
+ leojean890: ah d'accord, bah moi je laisse tourner ma simu 5 minutes, je remonte la température 5 fois (5 SA, 1 par min)
+ leojean890: mais j'ai un score large moins bon que toi et que mon AG qui m'a mis 7661 au max
+ leojean890: j'ai pourtant essayé des températures très variées
+ leojean890: et des nb de mutations très variés également par itérations
+ leojean890: tous valideurs confondus j'ai au max 400 pts là :s
+ leojean890: pour le #10
+ Zorg1: heu t'as compris que la température doit baisser pendant ton SA jusqu'à atteindre 0.0&#160;?
+ leojean890: je la baisse entre 5 et 1 actuellement :p
+ leojean890: toutes les 10 secondes je fais -1:)
+ leojean890: et après le 1 je lance un nouveau SA avec 5 comme point d'entrée
+ leojean890: j'ai pas fait jusqu'à 0
+ Zorg1: bah justement c'est 0 le min en fin de simu qui correspond à un hill climbing
+ Zorg1: :p :p :p
+ leojean890: bon j'vais changer ça alors :P
+ Zorg1: 1 ça reste assez élevé comme tempétature
+ leojean890: au début tu démarres à combien&#160;?
+ leojean890: c'est ptet ça mon pbm
+ Zorg1: de 1.0 à 0.0 en fait
+ leojean890: et au tout début j'avais testé à 400 :P
+ leojean890: mais j'ai changé direct car ça partait dans tous les sens :p
+ leojean890: normal quoi
+ Zorg1: après ça dépend de tes score peut être plus
+ Zorg1: mais le gros réglage c'est surtout la température initiale
+ leojean890: ouais, les scores dans A*C c'est genre 500-800 quand ils sont bien&#160;:)
+ leojean890: je descends par palliers mais j'ai vu qu'une autre approche couramment utilisée est de le faire de manière continue
+ Zorg1: oui en multipliant la température par une constante &lt; 1
+ leojean890: mais ok alors je pense que je laisse un peu haut
+ Zorg1: moi je le fais en linéaire en fonction du temps qu'il reste
+ leojean890: d'accord
+ leojean890: logique ouais
+ leojean890: thanks pour les conseils&#160;:)
+ Zorg1: (je dis pas que c'est LA méthode, mais c'est celle que j'utilise)
+ _Mathieu: Bonjour
+ leojean890: je comprends pouais
+ leojean890: en effet j'avais remarqué qu'il fallait que je baisse
+ leojean890: pour que ça virevolte pas trop
+ leojean890: mais je me disais pas que ce serait carrément entre 1 et 0
+ leojean890: hello _Mathieu 
+ leojean890: je vais au moins tester ça
+ _Mathieu: @leojean890 hello
+ Zorg1: o/
+ leojean890: 0.9^nombreSecondes ça peut être cool
+ leojean890: pour 1 minute
+ leojean890: u bout de 10 sec ça passe déjà à 0.33
+ leojean890: au bout de 60 sec 0.01
+ Zorg1: bah faut tester je dirais. comme ça dans le vide 
+ leojean890: ouais j'suis entrain de tester
+ leojean890: je me demande tjr combien de mutations faire par tour, 
+ leojean890: premier run&#160;: un nombre aléatoire de mutations par itérations entre 1 et 5
+ leojean890: 2eme run idem entre 1 et 4
+ leojean890: 3eme SA idem entre 1 et 3
+ leojean890: qui sont ajouter une fleche, supprimer une fleche, modifier une fleche
+ leojean890: tout aléatoirement avec qq heuristiques d'interdiction genre un couloir
+ leojean890: les cases centrales éloignées des trous j'devrais ptet les interdire aussi, je le fais par moments
+ ReborN: A quand un petit tag à coté d'un joueur dans les "last battle" quand il y a du random dans son bot&#160;:'(
+ ReborN: T'importes dans l'IDE tu reproduis pas ta défaite grr
+ Alshock: oh tu sais ça peut arriver même sans random
+ yamo: bonjour
+ yamo: Vous savez quels sont les exercices les plus accessibles par algorithme&#160;? (MCTS, SA, GA)&#160;?
+ pb4: yamo&#160;: SA ou GA tu peux essayer "Search Race"
+ yamo: la simulation n'est pas simple à écrire. je cherche l'exo le plus direct qui permet de s'entrainer à implémenter l'algo.
+ BigUP: Yamo, pour le GA, il y a ML2, mais c'est pas le plus simple
+ Zorg1: oui enfin SearchRace la seule collision à gérer c'est avec le prochain check point, c'est nettement plus simple que CSB, FB, ... où t'as plein de mobiles
+ Zorg1: et t'as pas de formule chelou à appliquer pour gérer le rebond
+ Zorg1: (et un seul mobile à simuler aussi)
+ 257832: Yo tout l'monde&#160;! Automaton2000, AutomatonNN&#160;!
+ Automaton2000: c'est pas tant que ça&#160;?
+ AutomatonNN: et toi tu parles de qui&#160;?
+ 257832: Voilà ce qu'il se passe quand on laisse Automaton2000 écrire des chansons...<a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=vpEVsDN84Hc">https://www.youtube.com/watch?v=vpEVsDN84Hc</a>
+ Automaton2000: de ce que tu veux dire&#160;?
+ ReborN: Je crois que je vais abandonner UTTT, ça fait 2j que je suis sur une fonction d'éval j'arrive même pas à monter en ligue or avec mon minimax
+ ReborN: (AB)
+ 257832: UTT c'est pas le truc le plus abordable...
+ ReborN: J'ai 4 facteurs dans ma fonction d'éval et j'arrive pas à les optimiser, seule manière que je trouve c'est de regarder ce que ça donne en profondeur 0 pour évaluer les coups mais certains de mes facteurs sont toujours à 0 en faisant ça
+ ReborN: J'aimerais pouvoir faire varier mes 4 paramètres, pour chaque configuration lancer une simu et voir ce qui perf le mieuxCar les variations liées à la combinaison c'est évidemment pas du tout les mêmes que les variations facteur par facteur
+ ReborN: Enfin
+ BlaiseEbuth: Les fonctions d'eval ça relève toujours plus ou moins de la sorcellerie...
+ ReborN: Ça rend fou ahahah
+ ReborN: Je pense que le plus simple c'est si tu peux dire "Tel facteur doit être prioritaire sur celui ci" pour tous tes facteurs
+ ReborN: Et de faire en sorte que les facteurs soient déterminants que quand le facteur du dessus est à égalité
+ ReborN: Problème c'est que sur UTTT c'est bien de faire des concessions, pour autant j'ai pas envie qu'on me prenne toutes les sous grilles ^^
+ BlaiseEbuth: Ce genre de raisonnement ne fonctionne que s'il y'a effectivement une gradation dans l'importance des facteurs. Et c'est pas forcément le cas, ou pas de manière évidente...
+ ReborN: Sur Tron Battle je suis monté en légende avec un alphabeta en pythonLa fonction d'éval à coté d'UTTT c'était si simple
+ BlaiseEbuth: Ouai ^^
+ Alshock: faire une éval sur UTTT me paraît tellement horrible
+ ReborN: Faut que je me trouve un multi ou je peux faire un alphabeta et être classé pas trop mal
+ ReborN: C'est décevant d'avoir sorti java suite aux remarques des méchants sur python
+ ReborN: Et de même pas avoir de résultat
+ ReborN:&#160;:'(
+ BlaiseEbuth: Bah java...
+ ReborN: Mdr arrêtez
+ BlaiseEbuth: Bah c'est clair que c'est plus performant que python, mais c'est pas une bête de course non plus...
+ ReborN: Je suis passé d'un poney à un cheval
+ ReborN: C'est déjà ça
+ Magus: java si tu sais pas faire du code performant y'a moyen de faire tellement plus lent que du python, voir pire, genre plus lent que du php
+ Magus: donc sauf si tu sais exactement ce que tu fais, faut pas croire qu'en changeant de langage tu vas faire mieux
+ Magus: même en passant en C++ si tu sais pas faire du code qui va "vite", tu peux faire plus lent que du python
+ ReborN: Rien qu'en timant mes temps de copy pour mon alphabeta ça a rien à voir
+ ReborN: Après oui je suis nul
+ ReborN: C'est sur
+ ReborN: Y'a des bonnes ressources pour apprendre à faire du code qui va "vite"&#160;?
+ BlaiseEbuth: Faut lui mettre des baskets qui courrent vite.
+ Neumann: C'est quoi ton eval UTTT&#160;?
+ BlaiseEbuth: Tu veux lui piquer&#160;?
+ Alshock: moi mon eval c'est nombre_de_croix / nombre_de_croix_plus_ronds
+ BlaiseEbuth: A mort LouisXVI
+ NoKtuRia: quelqu'un pourrai m'aider pour le challenge temperatures en javascript
+ Alshock: quel est ton souci&#160;?
+ NoKtuRia: bah j'ai fais la condition pour vérifier n mais je ne sais pas comment faire pour retourner la valeur qui a été lue
+ Alshock: je ne suis pas sûr d'avoir bien compris, pour retourner comme dans les puzzles précédents, il suffit d'afficher la température la polus proche de zéro suivie d'un "\n"
+ BlaiseEbuth: console.log(tavariable);
+ Alshock: console.log(ma_temperature); en js
+ Alshock: @BlaiseEbuthcoucou twa &lt;3
+ BlaiseEbuth: Salut&#160;! &lt;3
+ Fksg: ça recrute pas fort la fonction "Trouver un job"
+ JexReM: fairy tail suite
+ BlaiseEbuth: berzerk reloaded
+ BlaiseEbuth: GTO: He's back
+ BlaiseEbuth: Alshock: Tu peux fermer le volet s'il te plaît&#160;? J'ai le soleil dans la gueule.
+ dwarfie: salut les tortues ...
+ dwarfie: ... et pas bonjour la mafia indienne ...
+ BlaiseEbuth: o/
+ BlaiseEbuth: Keskela la mafia indienne&#160;?
+ dwarfie: bah ... comme la derniere fois ... 3 compte de la meme ecole . l'un propose un truc qui existe deja plusieurs fois et les potos approuve la contrib ...
+ BlaiseEbuth: Ah, cette mafia là
+ Zorg1: si c'est du CoC, on s'en fout
+ Zorg1: je pense que c'est la philosophie à appliquer dans ces cas là
+ BlaiseEbuth: De la philosophie à appliquer&#160;? Par voie cutannée&#160;?
+ masrour]: bonjour 
+ BlaiseEbuth: 'soir
+ ReborN: Petite question les amis,Si je cut la depth de mon alphabeta après l'évaluation de plusieurs noeuds car je me rend compte que je vais timeout, l'évaluation des noeuds d'après elle est moins précise mais elle est encore comparable n'est ce pas&#160;?
+ BlaiseEbuth: Comme ça je dirais non. Mais c'est p'têt une connerie.
+ BlaiseEbuth: Mais pour moi, si tu n'évalues pas tous les noeuds à profondeur égale c'est pas valide.
+ BlaiseEbuth: D'où l'intérêt d'un Iterative Deepening
+ Neumann: Ca veut dire quoi "cut la depth"
+ Neumann: Et ca veut dire quoi "les noeuds d'après"
+ BlaiseEbuth: De ce que je comprends c'est commencer à depth=n, se rendre compte qu'on ira pas au bout et passer depth=m, m&lt;n pour lesz noeuds restants
+ Zorg1: après je dirais que ça dépend surtout de sa fonction d'éval si elle peut être comparable si elle calcule à des profondeurs différentes
+ Zorg1: mais ça me paraît un peu casse geule
+ Neumann: Je connaissais pas le reverse-iterative-depening
+ BlaiseEbuth: Concept... :grin:
+ Zorg1: finalement je change la profondeur en cours de route 
+ Zorg1: minimax adaptatif
+ leojean890: oui, si tu fais un minmax avec pour condition d'arrêt le fait qu'il n'y ait plus de temps restant c'est plus carré de retourner toutes les évals à la même depth 
+ Zorg1: Automaton2000 ton avis&#160;?
+ Automaton2000: c'est un site pour apprendre à coder
+ Zorg1: *hum* pas vraiment Automaton2000
+ Alshock: xD Automaton2000 qui se lance dans le troll
+ Automaton2000: et essayer de comprendre ce qui se fait en 10 lignes
+ Automaton2000: je crois qu'il y a plus qu'à
+ Zorg1: :D
+ Zorg1: brillant
+ Alshock: c'est un génie putain
+ leojean890: j'avoue c'était pas mal:p
+ ReborN: Merci pour vos avis&#160;!
+ ReborN: Je suis désolé je pose des questions bêtes j'essaie de progresser
+ Alshock: du coup, pourquoi t'es désolé&#160;?
+ leojean890: t'inquiète moi aussi j'ai mon lot de trucs que je maitrise pas encore (exemple mon algo SA qui ne perform tjr pas bien:p)
+ leojean890: dur de tout tout maitriser sauf en y passant le temps qu'il faut :p
+ ReborN: Car je dérange des gens qui ont passé les question de ce niveau depuis 15 ans&#160;;)
+ Alshock: -sauf+même
+ Alshock: @ReborN 95% des question sur ce chat portent sur The descent et Temperature
+ leojean890: bah non tu peux la poser ta question sur les minmax
+ leojean890: c'est ça, c'est + évolué que celles sur les puzzles simples&#160;:)
+ leojean890: en vrai t'as le droit de faire ce que tu veux, tu demandes juste un avis des gens sur comment appliquer le cut avec le time quoi:)
+ Zorg1: ouaip une question sur MM ça change des validateurs pétés d'onboarding ^^
+ Zorg1: *le minimax
+ leojean890: ouais c'est bien d'être curieux et d'essayer d'évoluer&#160;;)
+ BlaiseEbuth: Automaton2000: elle est cool ta chanson&#160;!
+ Automaton2000: je suis en train de me dire que j'ai bien compris
+ leojean890: <a rel="nofollow" class="external free" href="http://www.gamasutra.com/view/feature/1535/designing_ai_algorithms_for_.php?print=1">http://www.gamasutra.com/view/feature/1535/designing_ai_algorithms_for_.php?print=1</a> tiens sur le forum de CG j'ai vu un lien qui semble sympa ;p
+ Zorg1: ah tiens un article de gamasutra&#160;;-)
+ leojean890: je l'ai pas encore lu mais je trainais sur le forum de CG et j'ai vu ça, je vais le lire tout à l'heure :p
+ BlaiseEbuth: Y'a un forum&#160;? Oo
+ SupergreenTony: CG?
+ Alshock: ouais ya ça dans les fins fonds de tonton ternet
+ leojean890: BlaiseTroll nouveau surnom&#160;?:P:P
+ BlaiseEbuth: Ah un l près ça devenait insultant...
+ Alshock: Ah moi je respecte hein, chacun ses goûts
+ SupergreenTony: ça correspond à quoi "CG" plz? ^^
+ SupergreenTony: J'ai rien dit...
+ BlaiseEbuth: Cood Game
+ SupergreenTony: xD
+ Zorg1: Coding Game
+ Zorg1: ah ok
+ Zorg1: on va dire que j'ai scroll
+ Zorg1: Automaton2000 tu valides&#160;?
+ Automaton2000: le lien du puzzle&#160;?
+ SupergreenTony: merci ^^
+ leojean890: BlaiseEbuth pk insultant&#160;?:P j'vois pas quel mot tu peux former avec un L de plus ou moins :P
+ Zorg1: on va te taxer par :p toi on va pouvoir acheter de gros serveurs pour les optis &amp; multis CG&#160;;-)
+ Alshock: @Zorg1 on va te taxer par&#160;;) toi on va pouvoir acheter de gros...
+ Zorg1: hihi
+ Zorg1: :money_with_wings:
+ leojean890: TrollseEbuth c'est pas mal aussi :P:P
+ leojean890: ah non j'ai compris pour le l près mdr
+ leojean890: ouais chacun ses gouts, ça peut etre des trolls, ou des castles..
+ leojean890: chacun ses émotes j'avoue hehe
+ leojean890: moi c'est par période:p
+ Recher: pouet&#160;: 🐍
+ Recher: et re-pouetttt&#160;: □ □ □□□
+ Zorg1: tiens le CM python a parlé
+ Zorg1: toujours très interessant
+ leojean890: CM&#160;?;P
+ Zorg1: Community Manager
+ Zorg1: comme Thibaud
+ leojean890: ah&#160;? je savais seulement pour Thibaud :P
+ Recher: Mmmhhh... pas vraiment. Je suis juste là pour dire pouet et pour mettre des emojis. Je prétends pas être CM de kwak-ce-soye.
+ Zorg1: t'as le profil pourtant coco&#160;;-)
+ Recher: Possible. Je vais pas trop sur le forum. Je suppose que je devrais...
+ leojean890: pourtant Thibaud bosse à CG et toi à cyblex technologies&#160;?:P
+ leojean890: et donc tu mets de l'animation ici&#160;?;)
+ JBM: it'as le profil, coco, t'as le profil
+ JBM: ah, enfin des upvotes pour tvc
+ JBM: j'etais dans une phase creuse
+ Recher: Oui non pas vraiment. Je vais rarement aussi sur le chat. Je dis juste coucou et j'essaye de faire des blagues.
+ JBM: et parfois tu les reussis?
+ Zorg1: j'avais pas pensé à la chanson mais en fait oui ^^
+ Recher: Des fois oui, mais là non.
+ JBM: XD
+ Recher: Attendez, je vous explique.
+ Zorg1: nous somme toutes ouïes
+ Recher: J'ai commencé par mettre un emoji comme ça&#160;: 🐍
+ Zorg1: moi je traduis&#160;: tiens un fanboy python
+ Zorg1: normal
+ JBM: un de plus
+ Zorg1: ils sont légion
+ Recher: Et là, les gens se sont dit&#160;: "oh, attention, voilà un gars qui sait mettre des emojis". (et qui est fanboy python, of course).
+ leojean890: tiens mon premier upvote de CG sur le jeu de JBM;)
+ Recher: Et ensuite, j'ai mis des emojis représentant des carrés. C'est à dire, ça&#160;: □□□□
+ leojean890: je m'étais pas baladé dans cette section avant&#160;;)
+ JBM: excellent choix
+ Recher: Et là, les gens se sont dit&#160;: "Tiens, voilà un gros boulet qui sait pas mettre des emojis, il a voulu mettre un truc mais c'est mal passé et ça s'est transformé en carré." (Le caractère par défaut quand ça passe pas).
+ Recher: Et en fait, la blague c'est que j'ai explicitement mis des carrés. Ha ha ha&#160;!
+ leojean890: mon upvote sert à rien, il allait de toute façon être accepté vu le nombre d'intéressés hehe
+ JBM: moi je me l'etais pas dit a l'epoque, ca du m'echapper
+ Recher: □□□□□□
+ JBM: je vais tacher de me ratrapper maintenant
+ Recher: Mais personne a trouvé ça drôle. Tant pis.
+ Zorg1: tu sais ce qu'on dit des blagues qu'il faut expliquer&#160;?&#160;:(
+ JBM: il peut pas etre accepte leojean890 il est WIP
+ JBM: il peut que etre upvote
+ leojean890: ouais mais une fois qu'il sera fini je veux dire ;p
+ BlaiseEbuth: JBM, tu taches si tu veux, mais tu nettoies après
+ Zorg1: faut que JBM fasse le plein de XP
+ JBM: ouais
+ Recher: Si c'est drôle et que tu dois l'expliquer, alors ce n'est plus drôle. Si c'est pas drôle dès le départ et que tu l'expliques, alors tu te rends tellement ridicule que tu en deviens drôle.
+ JBM: comme c'est pas mes solutions qui risquent de glaner grand chose
+ leojean890: Recher futur comédien&#160;?:p
+ Recher: C'est ce que j'ai voulu essayer de faire.
+ Zorg1: 10 XP par upvote c'est du bon boulot pour nourrir/laver les gosses
+ JBM: c'est la ktlin
+ JBM: pardon la  java
+ leojean890: JBM a déjà pas mal d'xp sur ce site ;P besoin de +&#160;?:P
+ JBM: jamais assez
+ JBM: comme en CP j'ai rien
+ leojean890: lvl 43 c'est pas mal :P
+ Zorg1: y a des gens lvl 50
+ JBM: c'etait surtout rigolo comment je l'ai passe
+ leojean890: comment&#160;?;P
+ JBM: avec le boss qui crashe de je sais plus quel contest
+ leojean890: en faisant des contribs puzzles, en en validant et refusant&#160;?
+ JBM: du coup ils ont vire les XP
+ leojean890: ah ouais lol
+ JBM: mais j'ai garde le level avec moins d'xp que necessaire
+ JBM: (a l'epoque)
+ leojean890: genre ils ont changé leur boss au bout d'un moment en voyant que le choxi est mauvais&#160;?
+ Zorg1: ah OoC ou tout le onde est passé gold&#160;?
+ JBM: non ils se sont chie he sais plus comment
+ JBM: d'ailleurs on sait pas comment
+ leojean890: mdr ooc c'était pas le boss qui buguait mais ils ont raté le process
+ JBM: ils ont jamais assume leur bourde, communique dessus  / edite un PM
+ JBM: perte d'estime en ce qui me concerne
+ JBM: quand meme microsoft fait mieux...
+ Zorg1: la bonne vieille "je fix en prod en urgence et hop tu vois ça marche, pas de pb"
+ leojean890: jpense qu'en interne ils ont quand même debrieffé leur erreur au moment de l'ouverture de gold de ooc
+ JBM: euh
+ JBM: je parierais pas
+ leojean890: histoire de pas refaire la même pour pacman :P
+ Zorg1: c'est marrant pourtant
+ leojean890: Recher mais c'est en WIP tu vas devenir comédien plus tard&#160;?!;p
+ Zorg1: en tout cas on s'était bien marré
+ leojean890: ça a déclassé des gens qui étaient pris d'office :P
+ Zorg1: ah oui JBM, rapport de bug critique/bloquant&#160;: les message du troll sont derrière les châteaux
+ leojean890: mais marrant quand même hehe
+ JBM: ah oui j'ai vu ca tout a l'heure
+ JBM: ma vm est fermee la&#160;:/
+ JBM: bon je mets un commentaire sur la contrib je regarderai demain
+ JBM: je voulais remettre tous les z-index d'aplomb en prevision du passage a la 3d
+ Zorg1: et c'est normal les messages qui s'affiche en orange au dessus de la ligne d'horizon&#160;?
+ JBM: merci pour le report
+ JBM: ouais c'est normal
+ JBM: pour une certaine definition de la norme
+ Zorg1: ok
+ JBM: qu'est-ce qui gene?&gt;
+ Recher: J'y travaille. Je voudrais faire des one-man-show en python.  Comme il y en a déjà en javascript. Genre ça&#160;: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=et8xNAc2ic8">https://www.youtube.com/watch?v=et8xNAc2ic8</a>
+ JBM: le wat?
+ Zorg1: JBM&#160;: ça fait bizarre
+ JBM: ca ferait moins bizarre comment?
+ Zorg1: j'ai même un type Haskell avec YannT :D
+ Recher: Par exemple, une blague que je trouve trop marrante en python. Si tu écris "Le vide n'est pas faux", le python te répond que c'est vrai.
+ Recher: `None is not False`
+ Zorg1: bizarre&#160;: tu te demandes d'où ça vient
+ JBM: dans l'idee, ca vient du chateau
+ Zorg1: ah c'est pas le message de l'IA defaut en fait
+ JBM: ca serait plus dir a suivre si je le mettais au-dessus du caillou
+ Zorg1: oui je viens de comprendre
+ Zorg1: laisse tomber, désolé
+ leojean890: tiens y'a une autre contrib, c'est le jeu de go, pour bosser son MCTS :P je ne sais même pas y jouer en vrai :P
+ JBM: :p
+ leojean890: c'est fou le nombre de contribs de COC, la flemme de regarder ça :P
+ JBM: tout le monde a la flemme de regarder ca
+ Zorg1: Recher one man show en python, j'ai ça&#160;: <a rel="nofollow" class="external free" href="https://imgur.com/a/ofGYjx9">https://imgur.com/a/ofGYjx9</a>
+ JBM: d'ou le "pb"
+ leojean890: JBM non, pas Stilgart, Boulet et dwarfie qui mettrent des downvotes sur les moins bien pensés ;P
+ JBM: je crois que meme eux en ont leur claque
+ leojean890: bah moi c'est la 2eme fois que je clique sur "contribution" seulement :P
+ leojean890: et l'autre fois c'était il y a 5 mois, j'ai survolé les multis existants en 2 min
+ leojean890: pareil l'onglet entrainement, je sais pas )à quoi il ressemble encore, vazy je vais faire un tour
+ leojean890: ah oui, énorme nb de puzzles
+ Zorg1: oui en gros c'est une contrib d'un gars connu, on va plus ou bien lui faire confiance et valider après deux trois tests
+ leojean890: lequel&#160;? le go&#160;?
+ Zorg1: (enfin c'est l'impression que j'ai)
+ Zorg1: certains multis
+ leojean890: un des jeux les plus étudiés dans l'état de l'art de la game theory en plus ;P
+ leojean890: ça peut être intéressant si c'est sur CG
+ Zorg1: oui enfin sur CG
+ leojean890: donc le contributeur est connu sur CG
+ Zorg1: pê ambitieux avec 50 ms et 700 Mo de ram et un seul coeur
+ leojean890: puzzles moyen c'est un bordel 
+ leojean890: plus que easy
+ leojean890: tiens bah les difficiles aussi
+ leojean890: musical intervals par jbm tout en bas ;P
+ leojean890: faudrait que je check ça xD
+ leojean890: mdr des définitions de solfège
+ JBM: il est faisable sans
+ leojean890: la quinte diminuée, j'aime
+ JBM: DIAVOLUS
+ leojean890: quand danny Elfman fait joeur 2 accords majeurs espacés de cet intervalles au début de spuderman&#160;!
+ leojean890: du thème de spiderman
+ leojean890: euh quoi que je dis de la merde
+ JBM: souvent
+ leojean890: Dm G#M
+ JBM: :p
+ leojean890: donc mineur puis majeur
+ leojean890: mais bien quinte diminuée
+ JBM: des triades...
+ dwarfie: un petit oiseau sur un oranger .... a la volette .... :notes:
+ JBM: faut pas que je regarde ca maintenant, ca va pas m'aider a finir
+ JBM: :D dwarfie
+ leojean890: sinon autant utiliser la gamme par tons avec ses quintes diminuées ;p
+ leojean890: ah oui les triades j'en case dans des solos jazz
+ dwarfie: ce qui est par contre , c'est quelle reste :D
+ Zorg1: make the quinte great again
+ JBM: tuez les accordeurs de piano!
+ JBM: sauves la quinte!
+ leojean890: Cm montant puis Dm descendant par ex&#160;!
+ leojean890: puis renversement Cm montant
+ leojean890: renversement Dm descendant 
+ Zorg1: tiens ça se dit comment en anglais&#160;? "fifth"&#160;? aussi en musique&#160;?
+ JBM: oui
+ JBM: pas vraiment "aussi"
+ JBM: en francais on dit pas cinquieme
+ Zorg1: ah ok&#160;;-)
+ leojean890: taper sur youtube "triad pair improvisation system in jazz"
+ JBM: not tonight
+ leojean890: j'aime bien
+ Snef: i have a fifth of cough
+ leojean890: j'aime improviser this way
+ leojean890: ceux qui font les tutos sont balèzes 
+ Zorg1: ah oui dans TvC y'a un troll au sujet des pianos et des tons, j'ai vu ça
+ JBM: ca existe plus les tutos
+ JBM: je crois pas avoir case les pianos encore
+ JBM: mais ca me demange
+ leojean890: les tutos sur youtube sur les triades sont pas mal&#160;!
+ JBM: 12tet killed western harmony
+ leojean890: A game of go par Gevater_Tod4711
+ Zorg1: non il est pas connu lui
+ leojean890: jcrois que c'est lui qui propose le go aussi
+ leojean890: ah non alors
+ leojean890: jvais vérifier le nom
+ leojean890: ah si c'est le même
+ JBM: bon j'ai qu'une coda a ecrire
+ JBM: "que"
+ leojean890: ATARI GO par Gevater_Tod4711
+ JBM: un bon truc bien larmoyant rythmique pour finir sur fa maj7
+ leojean890: tu croyais que c'était qqn de connu Zorg1&#160;?
+ leojean890: il est #250 sur CG d'ailleurs :P
+ leojean890: fais des 2 5 1 JBM :P
+ leojean890: ii V I
+ JBM: eh oh je suis plus en premiere anene
+ JBM: *annee
+ leojean890: :P:P
+ Zorg1: on dirait une stratégie de foot mais y a pas le bon nombre de joueurs
+ JBM: si je case pas un accord de 8 sons dans le final, je le case jamais
+ leojean890: la prog de base du jazz :P
+ leojean890: #5b9
+ JBM: j'en ai deja avant
+ leojean890: accord à base de quartes sinon :P
+ JBM: pas dans le style
+ leojean890: d'acc xd
+ leojean890: bah sinon des #9&#160;;)
+ leojean890: #11
+ BlaiseEbuth: T'as utilisé l'emoji de Zorg1, tu lui dois des royalties
+ JBM: et pourquoi pas tout en meme temps
+ leojean890: mdr j'avoue, j'ai empiété sur son terrain ;P
+ leojean890: j'avoue JBM accord #9b9#5#11 :p
+ leojean890: septieme majeure et mineure en même temps
+ leojean890: b13
+ JBM: ca c'est ose
+ leojean890: ça fait ptet un peu bcp:P
+ leojean890: allez on appuie sur toutes les touches du piano en même temps&#160;;)
+ JBM: je compte pas faire jouer le piano la
+ leojean890: toutes les notes en même temps c'est assez chaud avec la plupart des instrus sinon ;P
+ leojean890: guitare à 12 cordes en s'y prenant à plusieurs
+ leojean890: wylophone/balafon/marimba pareil avec 12 baguettes
+ leojean890: xy
+ JBM: faut des mains de secours
+ leojean890: déjà 2874 inscrits au fall challenge, pas mal ;p
+ Zorg1: oui enfin combien vont être classés dans ce bazar&#160;?
+ BlaiseEbuth: Si c'est le bazar c'est que c'est pas bien classé...
+ JBM: farpaitement
+ leojean890: 2874, 4 mois à l'avance ça risque d'être comme pacman au final&#160;? :P
+ leojean890: c'est vrai que ça a pris de l'ampleur d'un coup là;P
+ leojean890: faut voir s'ils renouvellent la pub intense ;P
+ leojean890: p'tet que pas mal ont bien aimé pac et vont vouloir faire la suivante :P
+ dwarfie: c'est pas plus que s'habitude en fait ...
+ leojean890: 4 mois à'avance c'est pas mal non&#160;?:P
+ leojean890: ça laisse 4 mois pour atteindre 10k inscrits&#160;?
+ dwarfie: y'en a un paquet qui ont juste cliqué parce qu'un achievement ... mais au final&#160;; ils participent pas
+ leojean890: et faire des ligues bois faciles ça a incité plein de players à submit last time
+ leojean890: purée dans pac les ligues bois, l'opposé de ooc
+ JBM: c'est bien parti pour le C7 b9 #9 #11 13
+ leojean890: nice:P
+ JBM: 13 ou b13, j'ai pas encore decide
+ leojean890: C E G Bb D# Db F# A
+ JBM: avec un 9 de passage
+ leojean890: C# j'oubliais
+ leojean890: et le A est ptet G#
+ leojean890: ah ouais et un D
+ leojean890: ah non j'avais dit C#
+ JBM: j'ai un Db
+ leojean890: C E G Bb D# D Db F# A ou C E G Bb D# D Db F# G#
+ leojean890: en comptant le 9 de passage
+ leojean890: vazy faut que je le joue sur mon clavier ;P ça devrait sonner sympa:p
+ JBM: C C E G Bb (Eb-D-)Db, F# et A/Ab encore a caser
+ leojean890: ok donc tu n'es pas certain de garder toutes ces notes:p
+ JBM: ah oui pardon
+ JBM: Eb a remettre aussi
+ JBM: D non je peux pas raisonnablement garder
+ leojean890: mdr
+ leojean890: ça frotte&#160;!^^
+ JBM: meme pas
+ JBM: enfin pas pour du jazz quoi
+ leojean890: ouais le mineur sur du majeur le Eb ;P
+ leojean890: ouais pour du jazz tu peux^^
+ JBM: et je vais pas me gener
+ leojean890: j'ai plein de voicing quand le bassiste joue sur un seul accord, genre un riff en A
+ leojean890: j'en joue 30 moi :P
+ leojean890: donc pas choquable;p
+ JBM: pas assez de doigts
+ leojean890: pas en même temps
+ leojean890: il joue un riff en 1 accord et je fais 30 accords différents les uns après les autres:p
+ leojean890: des voicings 
+ JBM: et j'ai meme un Bbb qui se ballade
+ leojean890: un A&#160;?:P
+ JBM: tu me trolleras pas j'ai ecrit les deux puzzles
+ leojean890: pas encore testé celui que j'ai vu tout à l'heure (ni aucun autre puzzle)
+ leojean890: un de ces 4
+ leojean890: les très difficiles ça semble moins le bazar que les catégories au dessus 
+ leojean890: genre 100 sujets en vrac
+ JBM: en meme temps avec autant de puzzles dans juste 4 categories faut pas t'attendre a du miracle de rangement
+ leojean890: il faudrait séparer puzzles cg et puzzles contrib déjà
+ BlaiseEbuth: lel
+ leojean890: faudrait que je fasse une simu sur CVSZ aussi
+ leojean890: (rien à voir je sais&#160;;))
+ ReborN: @leojean890 c'était le cas avant
+ ReborN: Je m'étais amusé à faire les puzzle facile et moyen à 100%, difficile quasi 100%
+ leojean890: et pk avoir enlevé ça&#160;?
+ ReborN: J'aime bien le 100% c'est joli
+ leojean890: pour mettre en valeur les contrib&#160;?
+ ReborN: Car j'imagine que les puzzle de la communauté étaient très peu faits
+ leojean890: ouais je vois
+ ReborN: Car en gros t'avais facile moyen difficile très difficile et communautaires
+ ReborN: D'ailleurs les faciles de CG c'est facile
+ leojean890: ils peuvent faire facile  CG - facile commu
+ ReborN: Les faciles communautaires parfois t'as des trucs
+ leojean890: ça fai 8 catég
+ leojean890: fait
+ ReborN: Ouai ou alors faudrait du filtrage 
+ leojean890: en enlever&#160;?
+ ReborN: Pour les multi aussi ça serait cool de filtrer uniquement les commencés par ex ou uniquement par ligue atteinte
+ leojean890: les 3 killers de mauvaises contribs dwarfie Stilgart et Boulet l'avaient préconisé ;p
+ leojean890: bah dans les multis c'est automatiquement catégorisé ainsi
+ leojean890: commencé/non
+ leojean890: par ligue ça pourrait aussi
+ ReborN: C'est pas faux
+ leojean890: mais ça va on le retrouve vite
+ ReborN: Pareil dans les recap sur le profil plutot que d'avoir le classement uniquement ça aurait été sympa d'afficher la ligue atteinte
+ ReborN: Pour les noobs qui peuvent pas afficher des 30/5000 :D
+ leojean890: j'avoue
+ leojean890: ah en nb de cp&#160;?
+ ReborN: Bah tu peux imaginer une colonne supplémentaire correspondant à la couleur de la ligue à gauche du classement
+ ReborN: Ou alors même le classement de la couleur de la ligue
+ ReborN: Ça serait joli en +
+ ReborN: Un peu agressif en tout rouge pour les grands de ce monde mais pour les gens normaux ça serait joli&#160;!
+ leojean890: j'avoue ça peut
+ Stilgart: leojean890: de nos jours, tous les puzzles sont medium
+ Stilgart: c'est clairement ce que pense la "communauté" en tout cas
+ leojean890: comment ça&#160;?:P
+ ReborN: Dans les puzzle facile y'a des medium 
+ ReborN: De mon point de vue
+ leojean890: donc ils sont mal triés
+ leojean890: ah tu veux dire que
+ leojean890: les gens qui submit une contrib
+ leojean890: indiquent tjr medium
+ leojean890: ou ka majorité d'entre eux
+ leojean890: la
+ Stilgart: leojean890: 90% des puzzles approuvés ces deux dernières années sont en medium
+ Stilgart: parce que les gens ne se font même plus chier à réfléchir à la difficulté réelle
+ leojean890: bah ils devraient être reclassés pendant la phase d'approval
+ Stilgart: ils l'étaient à une époque où j'avais le courage de le faire... mais bon...
+ leojean890: mais même les catég facile et difficile sont bordéliques
+ Stilgart: quand tu vois le blob en medium, tu recules maintenant
+ leojean890: en medium y'en a + c'est vrai on diarit
+ Stilgart: après, il y a un autre truc qui rend la chose ridicle
+ leojean890: sauf si tu te dis que tu veux tout faire xD
+ Stilgart: certains puzzles n'ont juste pas de difficulté du tout
+ leojean890: mdr
+ Stilgart: en fait, les difficultés c'est un ajout "récent"
+ leojean890: puzzle trop simple
+ Stilgart: et les puzzles d'avant, ils ont pas forcément une difficulté
+ Stilgart: et ceux qui n'en ont pas sont classé en fonction du taux de réussite, ce qui ne correspond à rien en fait
+ Stilgart: c'est comme ça que tu as de hard qui devrait etre en easy
+ ReborN: Aaaaaah
+ leojean890: mdr
+ Stilgart: (et évidemment, si le puzzle est très vieux, on ne peut pas le modifier=
+ Stilgart: )
+ leojean890: bon au pire jme met au defi de faire les très difficiles :P
+ ReborN: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/easy/rectangular-block-spinner">https://www.codingame.com/training/easy/rectangular-block-spinner</a>
+ Stilgart: pourtant, j'étais là avant l'arrivée des CoC de 10/20 min. (qui sont devenu les puzzles de la commu)
+ ReborN: Celui là il casse la tete pour un facile
+ ReborN: Ou alors j'ai juste pas trouvé la bonne manière de faire
+ Stilgart: by bobby
+ <b>**Stilgart s'arrête là</b></p><p><a href="/wiki/File:Default_avatar.png" class="image"><img alt="Default avatar.png" src="/images/5/56/Default_avatar.png" decoding="async" width="50" height="50" /></a> JBM: ta tension
+ leojean890: mdr
+ leojean890: c qqn qui fait plein de puzzles trop easy&#160;?
+ ReborN: Mdr qu'est ce qu'il a bobby&#160;?
+ Stilgart: non
+ Stilgart: c'est quelqu'un qui est arrivé 3 ans trop tard
+ Stilgart: c'est devenu très très difficile de faire un bon puzzle
+ Stilgart: tout ce qui pouvait se faire facilement a déjà été approuvé
+ leojean890: ah oui car "ça existe déjà dans les proposés"
+ leojean890: y'a tellement de puzzles que tu peux pas faire l'état des lieux
+ leojean890: et en terme de concept et de démarches de réflexion tout est déjà présent;)
+ Stilgart: + y'en a tellement que personne ne les fait
+ ReborN: Moi je voulais faire tous les faciles
+ ReborN: J'ai fais 85%
+ ReborN: C'est déjà pas mal je pense
+ Stilgart: si j'étais pas monté à 50% à l'époque, j'aurais laissé tomber
+ leojean890: donc les nouvelles propositions sot redondantes;)
+ leojean890: bah moi 0 mdr
+ Stilgart: ReborN: tu as sans doute fait tous les faciles classés faciles
+ ReborN: Sachant que je deteste les trucs qui touchent à de la physique de près ou de loin
+ ReborN: Type CSB
+ Stilgart: leojean890: non
+ ReborN: :D
+ leojean890: faut que je lise les énoncés des très difficiles voir des difficiles genre celui de nJBM :P
+ leojean890: et le reste osef :p
+ Stilgart: elles peuvent aussi être indadptées ou chiantes
+ Stilgart: je classe le puzzle de bobby dans la catégorie chiante
+ ReborN: Ah bah c'est ni fun ni utile
+ leojean890: ah ceux dans lesquels la majorité de l'exercice est de parser les inputs
+ JBM: ca me rappelle les puzzles de qqun d'autre
+ ReborN: String manipulation par contre c'est un bon résumé 
+ Stilgart: JBM a des puzzles en very hard&#160;?!
+ leojean890: non JBM en hard
+ leojean890: :p
+ JBM: je crois pas
+ JBM: je les trouve faciles mes puzzles
+ leojean890: vilboub et euler par ex en very hard
+ Stilgart: en hard oui, il y en a
+ Stilgart: des very hard il n'y a en a pas tant que ça
+ leojean890: ouais mais je veux les test et bien galérer comme il faut xd
+ JBM: nintendo
+ leojean890: ça m'occupera d'y réfléchir de temps à autre :p
+ <b>**Stilgart tend cross the lines à leojean890</b></p><p><img src="/a/42398427701382" /> leojean890: ceux dans lesquels la majorité de l'exercice est de parser les inputs =&gt; dwarfie disait que ça l'énerve xd
+ leojean890: ce qui se comprend :P
+ JBM: y'a pas que lui
+ leojean890: cross the lines dans les VH&#160;?
+ Stilgart: NN1 il a rien a faire en very hard... je devrais le déclasser tiens
+ leojean890: bah ça peut énerver presque tlm xd
+ leojean890: tu peux déclasser&#160;?
+ JBM: mais c'est passe
+ leojean890: tu votes la diff&#160;?
+ JBM: reclasser c'est juste "editer"
+ Stilgart: non, je clique sur éditer
+ JBM: la difficulte n'est qu' des params de la contrib
+ Stilgart: surtout que NN1 je crois que je l'avais approuvé
+ leojean890: ah c'est possible d'éditer un déjà approuvé&#160;?
+ Stilgart: c'est typique du sujet long et qui fait peur
+ JBM: pour une elite :p
+ Stilgart: donc taux de réussite pourri
+ Stilgart: donc classé very hard
+ Stilgart: "par défaut"
+ leojean890: mdr
+ ReborN: En plus les puzzle communautaires donnent 50xp quel que soit le niveau
+ ReborN: C'est nul ça aussi
+ Stilgart: mais il est plutôt medium, suffit de faire ce qui est écrit
+ ReborN: Enfin c'est peut etre mieux si c'est mal classé
+ Stilgart: le 2 est plus dur
+ leojean890: ah bah si les non-commu donennt + autant les faire xd
+ JBM: nn1 faut quaand meme comprendre ce qui est ecrit
+ JBM: c'est pas a la portee du premier colegien venu
+ ReborN: Les non commu donnent beaucoup plus, un VH CG c'est 500xp, communautaire VH c'est 50xp
+ leojean890: music scores + 500 xp
+ leojean890: jdevrais essayer ça xD
+ ReborN: Voir +, La je vois Shadows of the knight 2 c'est 750xp
+ JBM: oui celui-la il est "a part"
+ Stilgart: music scores c'est le dernier de docteur who&#160;?
+ leojean890: bah voilà donc je peux suivre l'heuristique =&gt; plus le puzzle donne d'xp plus je le traite en premier :P
+ Alshock: faut jouer de l'harmonica&#160;?
+ Stilgart: hop, nn1 est devenu hard au lieu de emptu
+ Alshock: emptu&#160;?
+ Stilgart: (juste parce que l'énoncé est copieux)
+ leojean890: sachant que je risque de pas réussir xD
+ Stilgart: empty
+ Stilgart: mais si je savais me servir d'un clavier, ça se saurait&#160;:)
+ leojean890: vox codei
+ Stilgart: vox codei est dur
+ Alshock: ah empty c'est quand il n'est pas renseigné par l'auteur et la diffciluté est alors ajustée au ratio de complétion, j'ai bon&#160;?
+ leojean890: JBM Stilgart, c'est quoi votre taux de réussite sur les puzzles VH&#160;?:P
+ JBM: ben 100%
+ JBM: on soumet pas si on a pas resolu
+ Stilgart: le redux il est resté longtemps seul puzzle non achevé ici
+ leojean890: tu les as tous réussis avec brio&#160;?:P
+ JBM: ce taux de reussite est vraiment pas un bon indicateur
+ leojean890: ou pas tous commencés&#160;?
+ Stilgart: leojean890: j'ai eu 100% pendant longtemps
+ leojean890: 100% sur les non-commu donc
+ Alshock: bah c'est dur de trouver un bon indicateur faut quand même leur donner ça
+ Stilgart: là, il me reste les trucs approuvés cette semaine et le dernier d'euler
+ Stilgart: space maze (j'ai que 86%&#160;:/ )
+ leojean890: ah bon bah c bien déjà:p
+ JBM: est-ce qu'au moins l'auteur l'a resolu?
+ ReborN: Si tu les as fait au fur et à mesure ça va, là pour attaquer faut prendre son courage à deux mains
+ Stilgart: a priori, je crois que seul euler à 100%
+ leojean890: cross the lines c'est fait par un mouton, c'est ton collègue Stilgart&#160;?
+ Stilgart: et peut-être robostack
+ JBM: oh, joli
+ JBM: je savais pas
+ Alshock: ReborN il suffit d'aller un peu plus vite que ça ne sort
+ JBM: moi je commence a prendre pas mal de retard
+ leojean890: "un mouton"&#160;;)
+ Stilgart: leojean890: oui, c'est in collègue à moi
+ leojean890: hehe
+ JBM: tiens y'a pas de moutons de tvc
+ Alshock: ça manque
+ leojean890: jsavais pas si c'était lui
+ leojean890: mais dwarfie avait dit
+ JBM: bah c'est pas une histoie de dragons non plus
+ leojean890: "mouton devrait venir partivciper"
+ Stilgart: et oui, il assume son pseudo mouton (en tout cas, il a un tshirt qui dit ça=
+ Stilgart: )
+ leojean890: ça ferait monter ENSIIE"
+ Alshock: quel rapport avec les dragons&#160;?
+ leojean890: du coup juste fait le rapprochement
+ Alshock: c'est des lézards ça
+ JBM: les dragons ca mange les moutons c'est bien connu
+ Stilgart: non, il fait pas les contests
+ Stilgart: je crois que sa meilleure perf c'est silver
+ Alshock: mais non c'est les cyclopes ça
+ Stilgart: alors que je pense qu'il serait meilleur qui boulet
+ leojean890: ouais mais il pourrait gérer quoi
+ Alshock: et pour les tuer faut leur crever l'e noeil et se fourrer dans la laine
+ Stilgart: s'il faisait ça sérieusement
+ leojean890: juste il a pas le temps
+ leojean890: chronophage
+ leojean890: les contests
+ Alshock: ah ça c'est clair
+ Alshock: même quand tu prétends que t'y passeras pas bcp de temps
+ Stilgart: il est jeune mdc avec des responsabilités que même moi je ne veux pas
+ Stilgart: moi aussi pendant 2 ans j'ai rien fait sur CG
+ leojean890: Alshock ne pas passer bcp de temps j'ai déjà fait :p
+ Stilgart: même pas le temps de me rappeler que je m'étais inscrit
+ leojean890: mais récemment j'ai passé bcp de temps
+ leojean890: ah ouais trop occupé!
+ Alshock: busyman
+ leojean890: encadrer 5 thèses en même temps allez :p
+ Stilgart: quand tu as plusieurs cours niveau bac+3/4 à monter, ça prend un temps fou, oui&#160;:(
+ ReborN: J'ai passé la journée sur UTTT j'ai réussi à passer de Silver 9e à Silver 80e c'est pas mal
+ Alshock: bon, on rigole on rigole mais on voit pas le fond de Nicole, j'avais dit que je devais avancer sur mon problème d'ag qui fluctue moi
+ ReborN: Sans déconner grrr
+ leojean890: ah ouais les jeunes profs
+ Stilgart: contrairement au lycée, c'est à toi de faire le bouquin
+ leojean890: faut créer le cours
+ leojean890: le plus dur c le début
+ leojean890: pour ce métier
+ Alshock: @ReborNtkt c'est normal ce genre de trucs
+ Alshock: @reCurse faut bien versionner, tenter, rater, prendre du recul et apprendre, puis réussir
+ Stilgart: j'ai un cours que j'ai commencé en 2012, j'ai fini le support en septembre dernier&#160;:/
+ leojean890: ReborN dur, tu vois mon bot qui flotte 19eme hein xD
+ leojean890: depuis lgtps
+ Alshock: @leojean890 le bot laissé là à la dérive sur un pauvre rondin au milieu de l'océan
+ Alshock: depuis 15 ans
+ ReborN: Vivement le prochain contest, c'est nul de jouer à un combat de bot avec les conditions initiales qui sont les mêmes avec un leaderboard fixe
+ Stilgart: AutomatonNN: on parle de toi
+ AutomatonNN: oui c'est pas trop long pour le contest de ce que tu dis
+ leojean890: Stilgart donc tu l'as rework entre temps:p
+ Alshock: @ReborN j'suis pas d'accord c'est très bien
+ Stilgart: leojean890: c'est juste que la partie la plus simple pour moi, je la faisais à l'impro jusqu'à cette année
+ leojean890: j'ai bossé sur plein de multis récemment et y'a pas photo c'est plus fun un contest
+ ReborN: @Alshock bof ça revient à gagner les parties du haut du classement une fois que tu y es arrivé
+ Snef: tout dépend du contest :p
+ leojean890: Stilgart et du coup t'as voulu avoir un support clair&#160;?:P
+ leojean890: car multi pas de piment ton code bouge presque jamais
+ leojean890: manque de vie:p
+ Stilgart: j'ai voulu finir le support parce que le trou au milieu c'était pas top
+ ReborN: Tu pars dormir t'es 9e
+ Snef: leojean890 sauf les multi commu qui viennent de sortir ou y'a plus d'activité
+ ReborN: Tu te reveille t'es 9e
+ Stilgart: (accessoirement, j'avais un cours de moins à l'automne dernier, donc ça a aidé)
+ Alshock: @ReborN ça revient surtout à faire un bot meilleur que le boss, exactement comme en contest
+ leojean890: Snef clair^^
+ leojean890: ça remplace les contests en période sans :P
+ ReborN: @Alshock tu peux être meilleur que le boss sans battre le boss
+ ReborN: Et ça te fait pas monter
+ Alshock: c'est que t'es pas vraiment meilleur que le boss
+ Alshock: t'es juste fort contre le boss, tout en étant monis bon que lui :P
+ ReborN: Non justement c'est l'inverse ahahah
+ leojean890: en multi battre un boss old sans avoir aucune chance ou presque de se faire pousser hmm
+ leojean890: gold
+ Alshock: être faible contre le boss tout en étant meilleur que lui&#160;?
+ Stilgart: faire 100% contre le top10 sauf le boss et 0% contre le boss
+ ReborN: Oui tu peux te faire counter contre le boss et pour autant t'as une stratégie + mix que lui qui te permet de gagner + d'adversaires
+ leojean890: ça peut suffit ça
+ Alshock: ah mais ça c'est normal
+ leojean890: wlesavo le boss gold ooc qui en fait baver
+ ReborN: Oui mais du coup ce que je veux dire c'est que tu perds 100% tes matchs contre le boss (si tu perds dans les deux configs sur UTTT par exemple) alors t'as beau KO quasi tout le monde tu passes pas 1er
+ leojean890: t'es passé en java sur UTTT ReborN?
+ leojean890: et t'étais python avant&#160;?
+ Alshock: c'est assez normal, la seule valeur vraiment sûre du leaderboard c'est le boss
+ ReborN: Yes je suis passé en java&#160;!
+ Alshock: c'est l'inverse qui peut être un peu frustrant$
+ leojean890: jcrois que tu avais dit ça récemment
+ ReborN: Yes effectivement
+ leojean890: ça dépend des boss:p
+ leojean890: moi pas touché à mon code python
+ leojean890: qui ne fait pas un MC
+ leojean890: ni un vrai minmax
+ ReborN: En fait faudrait que j'arrête de submit tant que je passe pas le boss dans les deux configs, même si ça me fait perdre + de match
+ leojean890: juste un faux minmax magouille
+ ReborN: Moi j'ai un alphabeta à profondeur inégale c'est pas mal
+ leojean890: ah le truc de tte à l'heure
+ ReborN: D'ailleurs j'ai aucune idée des depth qu'on peut aller chercher sur UTT en alphabeta en java quand on code correctement
+ leojean890: changement de langage + passage au MCTS peut être une idée
+ leojean890: minmax pas facile mais certains l'ont fait et sont bien en lég
+ ReborN: En fait si j'ai fait une depth variable c'est que tu peux avoir entre 1 et 80 coups à évaluer à chaque fois
+ ReborN: Donc potentiellement je peux aller chercher des super depth
+ ReborN: Juste quand ça passe pas par les états avec 50 actions possible derrière
+ ReborN: Car ça fait exploser le nombre d'état à explorer
+ leojean890: je vois
+ leojean890: fais mcts&#160;?:P
+ ReborN: Yes faudrait que je me motive demain
+ ReborN: Je vais peut etre lire comment ça marche théoriquement ce soir
+ ReborN: Et aller dormir la dessus
+ leojean890: le branching est plutôt élevé avec le coup de choisir son morpion
+ leojean890: quand on tire vers un fini
+ leojean890: ouais j'ai déjà lu et codé sur breakthrough
+ leojean890: mais bon ça le fait pas en python
+ leojean890: mon minmax joue mieux
+ ReborN: Yes du coup potentiellement en profondeur 4 tu peux avoir 9 coups-&gt;50coups-&gt;9coups-&gt;50 coups
+ leojean890: oui
+ ReborN: Et 9*9*50*50 ça fait beaucoup
+ leojean890: mcts avec plein de rollouts c mieux
+ leojean890: clair mdr
+ leojean890: il te montre où ça win le plus souvent et voilà
+ ReborN: Du coup quand j'ai un coup à 50 je fais depth -1 sur mon appel recursif
+ ReborN: Mais je vais chercher qu'un appel de base en depth 3... Je code certainement très mal tout ça
+ ReborN: Et les grands de ce monde disaient qu'a profondeur inégale c'était pas comparable
+ ReborN: Donc si ça se trouve c'est vraiment bete ce que je fais
+ ReborN: J'aurais testé
+ leojean890: euh à éviter je disais que c'est pas carré:p
+ leojean890: profondeur inégale
+ leojean890: mais c facile à changer
+ leojean890: moi ajussi j'ai des trucs pas carrés dans certains  codes
+ leojean890: mais ça fait perdre des places
+ leojean890: :P
+ ReborN: Je pense que c'est pas une bonne idée ce coup de profondeur inégale&#160;:)
+ leojean890: bah vaut mieux pas
+ leojean890: mon exp me dit que les trucs carrés ça marche mieux :P
+ leojean890: mais en même temps j'ai des trucs pas carrés à pas mal d'endroits que j'ai la flemme de fix ;p
+ leojean890: donc bon je cherche les blèmes ;P
+ leojean890: bon allez bonne nuit&#160;:)
+ ReborN: Perso j'essaie de faire les choses proprement sans trop tricher pour pouvoir repasser dessus derrière si j'ai envie
+ ReborN: Mais bon
+ ReborN: Good night&#160;!
+ leojean890: demain j'pense que je commence ma simu de c vs z
+ leojean890: ouais c mieux
+ leojean890: mon hypersonic a des trucs pas carrés notamment
+ leojean890: faciles à fix
+ leojean890: j'devrais faire ça vite aussi
+ ReborN: Et si depuis ce matin j'essayais de gagner du temps sur un alphabeta qui implémente en fait minimax par erreur de copié collé...
+ JBM: Bon on va dire que c'est assez de jazz pour cette nuit
+ Alex-dns: le jazz ne meurt jamais

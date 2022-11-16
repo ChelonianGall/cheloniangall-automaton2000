@@ -1,0 +1,906 @@
+ rememberThis: Hellooo
+ rememberThis: how is everybody
+ WhaIe: if anyone wants to join a clash of code livestream: <a rel="nofollow" class="external free" href="https://www.twitch.tv/senamonry">https://www.twitch.tv/senamonry</a>
+ CodeAce: Hello World
+ dbdr: hey martinpapa69
+ martinpapa69: morning 
+ dbdr: making progress?
+ martinpapa69: ye it looks like. I removed like 10 different stuff from the code, that i thought to be "hacky"
+ dbdr: minimalism is good&#160;:)
+ dbdr: from the training?
+ martinpapa69: from the training, and now from the "core"
+ HippocratesLlama: So I'm doing a league based challenge, my first that I've tried, and It says that I got the the ranking 1 spot but I can't see how I move on to the next higher league
+ HippocratesLlama: Any tips?
+ HippocratesLlama: Nevermind
+ HippocratesLlama: I have to wait a few minutes apparently lol
+ HippocratesLlama: Sorry P
+ dbdr: no problem. there should be a countdown timer at the top of the screen before promotion
+ lawlmanx: hey guys I have problem that I am doing the exercise "Coders strike back"
+ lawlmanx: the racing game 
+ lawlmanx: but it sometimes doesn´t even load 
+ lawlmanx: It just says the boss won
+ Marchete: I'd like to know what's hacky :thinking:
+ Natjisu-Kid: so hard for newbie like me
+ martinpapa69: wouldn't say every stuff i removed is hacky, more like unnecessary complexity. I like my code as simple as possible. but, ye, once i get decent result, i can make a list :D 
+ dbdr: top 2 to 5 is pure RPS I think
+ Marchete: :confused:
+ dbdr: I was #2 this morning
+ Marchete: indeed dbdr
+ Marchete: I find winrates as snowballing
+ Marchete: either 0% or 100%
+ Marchete: single initial gamestate
+ jacek: oh my
+ Marchete: rather deterministic NNs
+ Marchete: so RPS
+ Marchete: you were 1st for some time yesterday
+ dbdr: during a robo submit? :D
+ Marchete: no
+ dbdr: :o
+ dbdr: I thought at least robo was clearly betterI mean he is
+ Marchete: he is
+ Marchete: spam submits, and at some point he tied and you don't
+ LINDI_SHAH: yo
+ LINDI_SHAH:&#160;:)
+ devguy: do enybody can help me out
+ jacek: with?
+ devguy: a puzzel with the name Temperatures
+ jacek: and whats the problem
+ devguy: i cant get the second number right
+ jacek: and what number do you get
+ devguy: first i need to type 1 thats good but by te second analasy i need a -5 
+ jacek: because its closest to 0. or rather its absolute value is closest to 0
+ devguy: but how do i swith the numbers
+ jacek: dont hardcode the answers. for each test case you get different numbers and you need to print the right one
+ devguy: do you maen that i need to type te closest numer out of the optoins i get
+ jacek: yes
+ devguy: thats 0
+ devguy: end it dont work
+ LINDI_SHAH: what this discord is useful for
+ LINDI_SHAH: :O
+ LINDI_SHAH: :nerd:
+ Marchete: anything I try is worse than all previous ones
+ MSmits: damn, I just replaced my hash table by unordered set and my bot is a factor of 3  faster :P
+ MSmits:  i had a lossy hash table that overwrites previous results on conflict, usually thats so much faster that it doesnt matter you lose some results
+ MSmits: it bothers me though, that there's implementations of hash tables out there that are 2-3x faster than the std implementations
+ Marchete: don't you have some kind of "queue" on collisions?
+ Marchete: like a loop 0..4
+ Marchete: to check free spaces
+ MSmits: usually that is slower, for example when doing minimax
+ MSmits: at least that is my experience
+ MSmits: but if the hash table is not a bottleneck at all, then losing results is unacceptable
+ MSmits: did anyone ever convert one of those custom implementations that are faster than std, to something workable on CG?
+ MSmits: they're all huge projects
+ MSmits: but probably most of it is unnecessary
+ MSmits: like this: <a rel="nofollow" class="external free" href="https://github.com/Tessil/robin-map">https://github.com/Tessil/robin-map</a>
+ jacek: TT?
+ jacek: whats wrong if unordered_map ~
+ Marchete: your TT is turn based? like clearing data at some point?
+ jacek: for minimax i clean tt at the start of my turn
+ MSmits: unordered map works well, but benchmarks show it to be inferior
+ MSmits: <a rel="nofollow" class="external free" href="https://tessil.github.io/2016/08/29/benchmark-hopscotch-map.html">https://tessil.github.io/2016/08/29/benchmark-hopscotch-map.html</a>
+ Parceni: k
+ Marchete: I don't know, I see a custom hashmap better
+ Parceni: is this discord or is it something else
+ MSmits: something else
+ Marchete: imo all these libraries are huge
+ MSmits: yeah thats what i said, but i think you dont need most of it
+ Marchete: I do the simple way, take some bytes from hash to point to a big array
+ Marchete: from there, check up to 4 hashes
+ MSmits: why 4?
+ Marchete: or 5
+ Marchete: whatever
+ Marchete: some small loop to avoid collisions
+ MSmits: so does that mean the hash key leads to a maximum of 5 results?
+ jacek: there was some custom hashtable implementation in connect4 solver eh?
+ Marchete: also you can add some key to "invalidate" hashes
+ Marchete: as a fast way to clean up
+ MSmits: yeah i usually have a counter
+ MSmits: next search has a higher index
+ Marchete: and that's slower than unordered_map/set?
+ MSmits: no, but it's lossy
+ MSmits: unordered_map/set does not lose a single result
+ MSmits: so do the others on the benchmark i just shared
+ Marchete: if you are losing
+ MSmits: and some are 2-3 times faster than unordered map
+ Marchete: then either your hash is bad or you don't have enough space
+ MSmits: your space is never going to be used homogeneously
+ MSmits: even with a good hash function
+ MSmits: so you're always going to need more room than you actually need
+ Marchete: on law of big numbers
+ Marchete: yes
+ Marchete: it will be mostly homogeneous
+ Marchete: it's like a random()
+ Marchete: it should be homogeneous on the whole range
+ Marchete: if not
+ MSmits: anyways, my point was not to compare lossy hashmap to lossless
+ Marchete: then it's bad
+ MSmits: i know a lossy hashmap can minimize loss to a small amount
+ Marchete: lossless can imply resizing
+ Marchete: clears() are costly
+ MSmits: yes, but you can reserve
+ MSmits: if you know how many irems
+ MSmits: items
+ MSmits: you can guess this
+ Marchete: just try
+ martinpapa69: do you put your object directly in the  hashmap/set?
+ Marchete: debug to see collisions
+ martinpapa69: like unordered_set&lt;MyType&gt;
+ Marchete: I'd say with a big size
+ Marchete: like 2x your expected storage
+ MSmits: with a big size it becomes really slow
+ Marchete: a loop of 5 it should have near zero collisions
+ MSmits: but it would need to be 5 times as big right?
+ Marchete: 2x
+ MSmits: why 2?
+ MSmits: i mean if you store 5 items per key
+ MSmits: you need 5 times the roo
+ MSmits: room
+ Marchete: no
+ Marchete: I'm saying
+ Marchete: that your hash can have collisions
+ MSmits: where would you store the overflow of colliding hash keys?
+ Marchete: so to avoid them you allow some little search
+ Marchete: to find the nearest free spot
+ Marchete: that's the 5
+ Marchete: it should have a formal name
+ MSmits: oh
+ MSmits: i get it now
+ Marchete: you can also "save" the overflow on a reserve array
+ Marchete: if it's that important
+ martinpapa69: there is a built in stuff for that, dunno if you heard about it&#160;: unordered_multiset
+ RoboStac: they're normally called buckets
+ Marchete: "buckets"
+ Marchete: thx :D
+ MSmits: buckets arent normally in a fixed size array are they?
+ MSmits: aren't they like a vector structur?
+ MSmits: or something
+ Marchete: you can also have that
+ RoboStac: it depends on the implementation
+ Marchete: array of buckets then vectors
+ Marchete: but vectors will resize
+ MSmits: yes, but you would need those only on collision
+ Marchete: I'd say prefer static
+ RoboStac: for a lossless map you'll always need some sort of resizeable storage for hash collisions
+ Marchete: and collisions should be rare
+ MSmits: RoboStac Marchete *nearly* solves this by doing a search for empty places in static array
+ MSmits: but he still has some loss i guess
+ RoboStac: yeah, but at some point thats lossy
+ RoboStac: or really slow if you don't limit the search
+ RoboStac: (I do the same)
+ MSmits: I think this depends on how much loss you can tolerate
+ MSmits: do you have a percentage Marchete?
+ MSmits: for your general use of this&#160;?
+ Parceni: @everyone
+ RoboStac: yeah - and sizes of buckets etc depends on hash collision rate / calculation times / chance of repeated lookups
+ RoboStac: so it's all very dependant on the exact problem
+ MSmits: yeah
+ MSmits: I am using it for D&amp;B where a loss of 10% is apparently unacceptable. 
+ MSmits: switching to unordered set gave me 3x speedup
+ Marchete: make a big array
+ MSmits: thats what i had
+ MSmits: but without the search you mention
+ Marchete: and if and only if you really need to be lossçless
+ Marchete: then add some resizeable alternative storage
+ Marchete: for when that little search failed
+ Marchete: 99% of the lookup/set will be fast
+ MSmits: i wonder how this will compare with unordered set
+ Marchete: 1% will be slow
+ Marchete: internally will be similar
+ Marchete: I imagine
+ RoboStac: unordered_* is usually slightly slow because the std spec places quite large restrictions on the implementation
+ MSmits: well thanks, I will put this on my list. Seems like a usefull skill/standard piece of code i need to have
+ MSmits: good to know RoboStac
+ RoboStac: iirc it's something to do with not invalidating pointers/iterators on changes to other parts of the map
+ MSmits: in other words, it's proper safe coding. Who needs that :P
+ MSmits: brb
+ VinhDaDen: i use Pascal hehe
+ Marchete: I feel your pain
+ jacek: use delphi
+ martinpapa69: ye, thats a rly good extension to pascal
+ Parceni: is this discord?
+ Parceni: what is this place
+ Parceni: where am i
+ Parceni: ahhhh
+ Parceni: AHHHHH
+ TheViralClovers: amogus
+ TabulaRasa: hey, where can I find python libs available for bot challenges?
+ TabulaRasa: is there a wiki somewhere with a list?
+ RoboStac: <a rel="nofollow" class="external free" href="https://www.codingame.com/faq">https://www.codingame.com/faq</a>
+ TabulaRasa: nice, thanks!
+ codeing: holla
+ codeing: what does anyone thing about RNN for classification problems&#160;?
+ codeing: forecast prediction
+ codeing: in deep learning
+ MSmits: weather forecast?
+ codeing: yeah
+ MSmits: go do it I'd say
+ codeing: hmm
+ codeing: cool
+ MSmits: could have used your NN last week when i was on vacation
+ MSmits: they got it wrong every day
+ codeing: NN mean neural network
+ codeing: right&#160;?
+ MSmits: yes
+ codeing: kk
+ codeing: why do they get wrong&#160;?
+ MSmits: because weather forecast models are inaccurate
+ codeing: hmm
+ codeing: less that 0.5&#160;?
+ codeing: right&#160;?
+ codeing: than*
+ codeing: inaccurate like&#160;?
+ MSmits: what is?
+ MSmits: no idea
+ MSmits: they say it rains and then it doesn't
+ MSmits: if you want to put a number to that i'd say 1/pi
+ codeing: cheap
+ codeing: 1/pi = 0.3
+ MSmits: kinda
+ codeing: what model NN did you used 
+ MSmits: i didnt
+ codeing: k
+ codeing: deep learning pretty cool
+ codeing: tata, cya
+ dbdr: weather forecast: today will be exactly like yesterday
+ dbdr: it's correct at ~75%
+ dbdr: after years of work and multi-million $ machines, you can get to 85%
+ MSmits: nice
+ dbdr: it's more satisfying to watch a bot go to random play to expert in one hour of training&#160;:)
+ dbdr: *from
+ codeing: @dbdr, with what deep learning model you get your 85&#160;%&#160;?
+ codeing: RNN or NN&#160;?
+ dbdr: not me, just what I heard about that field
+ codeing: k
+ codeing: thx
+ IcyStar: does anyone know if there's a way not to reload the page when an error occurs&#160;? Because it makes me lose the current map..
+ AllYourTrees: for producing a hash value for C4, can you just add the two bitboards together?
+ MSmits: no
+ MSmits: I usually use:
+ MSmits: inline uint64_t xorshift(uint64_t x) { x ^= x &gt;&gt; 12; x ^= x &lt;&lt; 25; x ^= x &gt;&gt; 27; return x * 0x2545F4914F6CDD1D; }
+ MSmits: with 
+ MSmits: p1 ^ xorshift(p2)
+ MSmits: might not be the best way 
+ AllYourTrees: :eyes:
+ MSmits: you'll get collisions for sure, the questionis how many
+ AllYourTrees: kk
+ Astrobytes: Why not Zobrist?
+ MSmits: zobrist might work I guess. Don't know how they compare
+ Astrobytes: Zobrist is pretty standard for a lot of board games
+ MSmits: I would be interested to know in what way it might be better
+ RoboStac: for simple gamestates like this it's probably not worth it
+ RoboStac: it's good when generating a hash from the full gamestate is slow
+ MSmits: I see
+ RoboStac: it's basically the same idea as nnue - do small updates every move instead of getting to the end and trying to calculate everything from scratch. Good if you need the hash every move or if it takes a long time 
+ MSmits: yeah that makes sense, it also prevents you from taking into account things about your state that stay the same
+ MSmits: which makes it more efficient
+ MSmits: full state hash tends to take everything into account
+ nulte: hi
+ MSmits: hi
+ linjoehan: hi
+ linjoehan: how often fo you play clash of code?
+ nulte: never
+ Astrobytes: 0 clashes/year
+ nulte: astro I dont think you should have lost this game
+ nulte: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/570771728">https://www.codingame.com/replay/570771728</a>
+ Astrobytes: :rofl:
+ Astrobytes: No shit
+ nulte: im still trying to find an eval, its not easy, I managed to get 70% locally but bot gets placed around same rank on leaderboard&#160;:/
+ Astrobytes: I'm tweaking mine, hence the daft blunders :D
+ nulte: my eval has range of 0.01 - -0.01, might be bugged
+ nulte: lol
+ nulte: should be 1 - -1
+ Astrobytes: :D
+ jacek: oh my
+ Astrobytes: lol, I have a lop-sided eval
+ Astrobytes: I clearly need another coffee
+ Astrobytes: ffs&#160;:/
+ Astrobytes: that is a tough top 20
+ nkc20: ....................
+ ericlovesmath: I wasn't sure, but is Google/StackOverflow during Clash of Code allowed?
+ jacek: :scream:
+ jacek: anything is allowed frankly
+ Alex000reid: imagine if you couldn't use stackoverflow 
+ Shozy: don't need to imagine
+ Shozy: or do you mean in general couldn't use stackoverflow?
+ Alex000reid: lmao even for coc I need that 
+ derjack: hmm top20 with just 1ply search (ok, with 3ply 'solver')
+ derjack: the policy could be something
+ dbdr: bt?
+ derjack: now resubmited to random bot
+ nulte:&#160;:(
+ derjack: :upside_down:
+ nulte: I read that 4 depth is optimal
+ nulte: for ept
+ dbdr: 3 depth is optimal for ept
+ nulte: on bt?
+ dbdr: now you read two contradictory statements
+ nulte: ...
+ jacek: then try 3.5 depth
+ dbdr: which one is true?
+ jacek: depends on game and your eval obviously
+ dbdr: right. probabilistic depth
+ nulte: Still need to figure eval I guess
+ nulte: I thought this would be a simple game to evaluate
+ nulte: also on ept im doing player0_score - player1_score
+ nulte: Is this ok?
+ nulte: I never did EPT before
+ jacek: do you propagate the eval as-is, or scale it to win/lose?
+ nulte: no
+ nulte: i propagate the eval
+ nulte: so if player0 had eval of 0.8 and player1 0.7 I would backpropagate 0.1
+ jacek: ok
+ nulte: Should I backpropagete 1 / -1 instead?
+ nulte: if score0 &gt; score1
+ jacek: nah, its alright
+ jacek: but you may want to adjust the C exploration
+ Wontonimo: what game are you two working on&#160;?
+ Wontonimo: breakthrough i'm guessing from the recent submit
+ nulte: yes bt
+ nulte: yeah i think the C is a bit of a problem
+ nulte: I run out of nodes, never happened before to me
+ jacek: your eval is faster than simulating the game eh
+ nulte: hmm I have 5M+ evals on first turn
+ Wontonimo: wow
+ nulte: maybe my eval is just bad
+ nulte: :D
+ Wontonimo: that's a lot of evals
+ Wontonimo: for 3x3 tictactoe with bitboard i was only getting 200k-500k evals in 100ms
+ Wontonimo: (mcts)
+ nulte: this is with ept
+ jacek: evals?
+ nulte: 8 plays
+ Wontonimo: in 3x3 TTT, there are only 9 plays at the start, so i think it is a pretty good apples-to-apples comparison to ept with 8 plays
+ nulte: wont i have problem if I change C
+ nulte: but i still backpropagate 1 sometimes?
+ Wontonimo: a low C means spending more time building depth, and high C means exploring more unvisited (possibly better) branches
+ Wontonimo: i don't think C changes anything other than that
+ nulte: I see
+ nulte: problem might still be on eval I guess
+ Wontonimo: C=0 is like greedy DFS, C=inf is like BFS, C~= (max(score)-min(score))*2 is close optimal tradeoff
+ Wontonimo: so if you change your scoring functions range then you will have to change C
+ nulte: my scoring range is [-1,1]
+ jacek: bad sign while backpropagating?
+ nulte: Dont think so
+ Astrobytes: Did you try scaling your eval?
+ nulte: scaling eval?
+ Astrobytes: between 0 and 1 or -1 and 1
+ MSmits: lol, just made my D&amp;B bot another 10 times faster and still not enough :P
+ nulte: its always in -1 and 1 range
+ nulte: the problem is that is almost close  to 0.0
+ MSmits: D&amp;B is really unique in that the algorithm is so much more important than any performance consideration
+ MSmits: nr 1 could translate his bot to python and still wreck everyone
+ nulte: o.o
+ Marchete: maybe all games are like that...
+ nulte: not the game for me then
+ MSmits: nah, not to this extent i am sure
+ MSmits: D&amp;B has a divide and conquer approach that noone else uses. You split the board into subproblems
+ MSmits: that's why the nr 1 is so much better and also why I am able to get such ridiculous speed increases
+ Marchete: chains?
+ MSmits: well that's part of it. But it's more about floodfilling the board. As soon as a part of the board splits off, you can solve it separately
+ MSmits: not the score mind you, just whomever ends up in control
+ Marchete: chains and chain count
+ Marchete: i.e. domain knowledge
+ MSmits: yes domain knowledge
+ jacek: :unamused:
+ Marchete: so I repeat, maybe all games are like that... just we don't know how to get the domain knowledge
+ MSmits: then that's the difference
+ MSmits: the fact that we don't
+ AllYourTrees: what's D&amp;B?
+ Astrobytes: dots and boxes
+ BlaiseEbuth: Dungeons and bacon
+ Astrobytes: :D
+ Wontonimo: or you could just train some kind of artificial intelligence to learn the domain knowledge :P 
+ MSmits: it's the only game on CG my wife knows how to play 
+ Marchete: :point_up_2:
+ MSmits: Wontonimo there's a very key difference though
+ MSmits: a NN will never be an exact solver in this sense
+ Wontonimo: yeah, i'm just joking
+ MSmits: it will only approximate
+ MSmits: it's a good point though
+ MSmits: even if it's a joke
+ MSmits: this is precisely why NN's are used
+ Wontonimo: just making a reference to the NN crazy that's sweeping CG (that I'm really loving btw)
+ MSmits: because the domain knowledge is too hard to incorporate otherwise
+ Wontonimo: and this is why git-copilot will not take our jobs (yet)
+ MSmits: what is git copilot?
+ Wontonimo:&#160;!?!?!  
+ MSmits: I don't fly
+ Astrobytes: Smits lives under a rock Wontonimo
+ MSmits: that too
+ Wontonimo: google it, watch some yt videos about it.  it does autocomplete for coding 
+ MSmits: ah VS too
+ Astrobytes: :grin:
+ Wontonimo: it is really quite futuristic
+ nulte: # eval breakthrough
+ nulte: nothing&#160;:(
+ Wontonimo: and can code whole functions for you just using the description and name of the function
+ MSmits: nice
+ nulte: Should I take into account pieces row positions on eval?
+ Astrobytes: I would advise it
+ nulte: im kinda lost
+ Astrobytes: What happened to brute-force and ignorance? :D
+ MSmits: a while ago VS asked me whether i wanted it to use AI to make coding suggestions (beyond intellisense). Is this like copilot?
+ nulte: it only gets you so far
+ MSmits: I said no btw... so i dont know how that works
+ nulte: the brute force got top 20 which is not completely bad :p
+ Astrobytes: This is true
+ Wontonimo: copilot uses openAIs GPT-3 network but instead of being trained on language, it is trained on github public repos.  It is scifi, truly 
+ MSmits: cool
+ MSmits: GPT-3 is language processing?
+ jacek: nulte hmm, the home row seems important eh
+ Wontonimo: it is not autocomplete or suggestion, it is auto-coding of complete functions from just a description.  it can write unit tests for the function also
+ jacek: "ai, make me the top1 d&amp;b bot" and itll write it?
+ Wontonimo: haha
+ Wontonimo: no
+ reCurse: I'll be surprised if anyone remembers it as anything but a gimmick one year from now
+ jacek: oO
+ Astrobytes: Yeah, pretty much just poc currently I think
+ Wontonimo: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=FHwnrYm0mNc">https://www.youtube.com/watch?v=FHwnrYm0mNc</a>  "GitHub Copilot CRUSHES Leetcode Interview Questions!"
+ Astrobytes: also hi&#160;:)
+ Wontonimo: to your point reCurse, it does require API calls to do, and so I'm guessing the cost of using it will be staggering.
+ reCurse: That's the least of my concerns
+ Wontonimo: what other concersn?
+ reCurse: It's kind of hard coming up with a short version but there's plenty of criticisms that I align with
+ AllYourTrees: aren't there licensing concerns?
+ AllYourTrees: like it puts code that has a license from github into your code and the original authors dont get credit
+ reCurse: Namely it doesn't save you any time because you either trust the code blindly, which you will pay later by having to understand and fix subtle bugs, or end up having to read it all again, which again is slower than writing it
+ reCurse: Writing code is the least concern while coding
+ reCurse: It's just a gimmick
+ reCurse: A very nice technical achievement but with questionable practical use
+ BlaiseEbuth: +100
+ MSmits: this is the first thing i thought when watching the video
+ MSmits: wait... he's checking all the code
+ MSmits: so...
+ reCurse: Those who were fearing for their jobs are either joking or ignorant
+ MSmits: i am also not sure what it does. These code snippets are so small that it might be like the CG clash bots
+ jacek: reCurse afraid of losing game developer job
+ Wontonimo: i can see great value of having this for junior devs who are having a mental block, which happens all too often
+ reCurse: No I think it's just a crutch that won't help them either
+ MSmits: there might be some unforeseen benefits
+ MSmits: when people cant find a solution they often look on stack overflow
+ reCurse: It's like saying there's a benefit by having those automated proofs
+ MSmits: the AI does that for you now
+ reCurse: Not really if you don't end up applying it yourself
+ reCurse: You don't learn anything
+ Wontonimo: i'd like it, just to see a different way of coding than i would.  I'd certainly use it to improve my skills, just like I use pair programming to do that
+ Wontonimo: and i learn stuff even when pair programming with someone much more junior than i am
+ reCurse: The stackoverflow answer often comes with very valuable context
+ reCurse: I'll still take that over gpt-3
+ nulte: I just hope no one has to use the code I wrote
+ jacek: you dont blindly copy paste code from stackoverflow? :o
+ reCurse: I'd probably ban its usage in a workplace if up to me
+ Wontonimo: indeed, if it came with the context and discussion/alternatives that are in SO, that would add huge value.  
+ MSmits: say I am trying to code something and trying to come up with a description to help copilot solve it for me
+ Wontonimo: i don't think it will be a silver bullet, and unless the cost to use it is near zero I think it won't get adoption at-this-time
+ MSmits: the effort itself is a form of rubber ducking
+ MSmits: once you have the description right, you might no longer need the code it provides for you
+ MSmits: which is useful, you can use the decription you came up with, in your code base as comments
+ jacek: sometimes it could give you very bad code, but fixing or even rewriting bad code seems easier than making one from scratch
+ jacek: like with that godwin's law
+ reCurse: Imagine having to do something like that with copilot <a rel="nofollow" class="external free" href="https://aiweirdness.com/post/655607559221379072/the-art-of-asking-nicely">https://aiweirdness.com/post/655607559221379072/the-art-of-asking-nicely</a>
+ jacek: noice. its like asking your sunconciousness to create something in lucid dream
+ Wontonimo: it's not going to write a whole system for you.  I wouldn't use it on the NN work I do, but at where I work there is a lot of dumb repetitive angular code where i see copilot would crush it
+ reCurse: If I have to review what's written to make sure it's actually doing what's intended I didn't save anything
+ reCurse: Anyway'
+ reCurse: !remindme 1 year
+ jacek: Automaton2000 are you behind the copilot?
+ <b>**Wontonimo sends calendar reminder</b></p><p><img src="/a/40502662118268" /> Automaton2000: or is it because i am not good at programming
+ jacek: hm
+ Wontonimo: HAHA
+ Wontonimo: my last €0.02, i don't think copilot is going to change much, and i also think it is going to have a crisis of marketability/profit.  It would be fun to play with and I think useful as a teaching tool for super junior coders.
+ Wontonimo: <a rel="nofollow" class="external free" href="https://www.reddit.com/r/ProgrammerHumor/comments/hx7xfy/were_safe/">https://www.reddit.com/r/ProgrammerHumor/comments/hx7xfy/were_safe/</a>
+ Marchete: from my work: "A project is always ####, except when it doesn't"
+ Marchete: and I replied, then it isn't a ####
+ Marchete: "no no no, it is, except in some cases"
+ KiwiTae: :joy: Marchete makes you feel good about your motivation &gt;&lt;
+ Marchete: copilot would explode with user requeriments
+ Marchete: until that they they keep thinking the same
+ Marchete: even with counter examples of why that's a bad idea
+ jacek: then make ai that would know what they want
+ KiwiTae: its like ok google for programming lol
+ reCurse: True, one of the first things I turn off
+ KiwiTae: its gonna be handy for next cg contest, shortcutter:// i want my bot to win this game
+ reCurse: Reminder: First contest not to mention multiplayer or bot in advance :P
+ MSmits: we did have detective pikaptcha
+ jacek: you think its gonna be one long clash of code?
+ reCurse: Maybe some escape room contest shrug
+ reCurse: Who knows
+ BlaiseEbuth: :nauseated_face:
+ struct: another one?
+ reCurse: The fact they didn't copy the multiplayer contest template directly like so many others before says a lot imo
+ reCurse: Removing type, duration, faq, etc
+ struct: They did say in discord that they do not know what the next contest will be
+ reCurse: I'm fine with it being over actually
+ BlaiseEbuth:&#160;:(
+ jacek: youre retiring?
+ reCurse: Would be the smart thing to do
+ BlaiseEbuth: :cry:
+ jacek: :no_mouth:
+ Westicles: 500 tied winners with raffled prizes is a better way to push traffic than same old guys winning over and over
+ reCurse: And chess will keep that itch scratched for a while
+ jacek: huh
+ MSmits: there have been plenty of different winners over time though
+ MSmits: many that won only 1 time
+ MSmits: like closetAI, I think Robo (not sure if he won another), jolindien
+ reCurse: Heh used to have that contest leaderboard thing
+ reCurse: Most winners only won once
+ MSmits: yeah
+ reCurse: Only 7 did more than once
+ MSmits: there are a few guys that, when they participate have a high likelyhood of winning
+ MSmits: but they dont always participate and sometimes there's more than 1 of them
+ MSmits: like when you and pb 4 are both in, I would not predict
+ reCurse: Put your money on pb4, easy
+ MSmits:  i would not put any money in 
+ jacek: :money_with_wings:
+ Wontonimo: how's your newest NN doing reCurse?
+ Wontonimo: the one in diapers 
+ reCurse: Trying to get him to sleep
+ Wontonimo: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=AF_nfazQaek">https://www.youtube.com/watch?v=AF_nfazQaek</a>
+ Wontonimo: "Naptime"
+ Wontonimo: product innovation
+ jacek: any cheesy NN lately?
+ reCurse: Think I almost worked my magic but it's still buggy sometimes
+ reCurse: Crossing fingers now
+ jacek: kindergarten magic?
+ reCurse: Sleep spell
+ Wontonimo: aka rocking chair&#160;?
+ Plantchant: tmw u get #2 in the league so you cant advance D:
+ Wontonimo: which league&#160;?
+ Plantchant: only bronze
+ reCurse: Before I went MIA for 3 weeks I had a SL NN kick my ass at chess with 1k nodes, which might only indicate how terrible I am
+ struct: Whats SL NN?
+ reCurse: supervised learning
+ reCurse: Just took a bunch of engine games
+ struct: wasnt your ranking above 1.6k?
+ struct: elo*
+ jacek: and MIA?
+ struct: missing in action
+ jacek: oh
+ reCurse: I was still climbing on lichess when I was playing
+ reCurse: Almost 1.9k
+ jacek: SL, just like nnue guys train
+ reCurse: Though I'm pretty sure it was just a lucky streak
+ linjoehan: I'm 1.3k on chess.com and 1.5 on lichess, but thats for blitz I think I'm better at standard but I don't thave the time to test that
+ reCurse: That's weird, your ratings should have a bigger gap
+ linjoehan: 1.9 is massive man
+ reCurse: Not really
+ reCurse: 1.9 on lichess is like 1.2 on chesscom
+ reCurse: Or was it 1.3
+ struct: i think 1.3k
+ reCurse: Percentile wise anyway
+ Wontonimo: Plantchant, which multi&#160;?
+ linjoehan: is that just because all the top dudes play at chess over lichess?
+ reCurse: Hard to do it accurately because lichess only shows distribution for last week and chesscom does alltime
+ reCurse: I'd tend to think lichess favors player with more skill under titled
+ struct: I think they use diferent rating system
+ reCurse: Glicko is still calibrated to have similar rating gap vs winrate if I'm not mistaken
+ reCurse: chesscom is very mainstream and the bigger numbers are usually on the lower ends
+ linjoehan: ah ok which one is closer to the one fide uses?
+ reCurse: Neither because it's more about the player pool than the rating system
+ reCurse: Your best bet is to use percentile until the top 1-2% then you're screwed
+ reCurse: IMHO
+ dbdr: what's a node in 1k nodes, reCurse?
+ reCurse: mcts node
+ reCurse: So a game state
+ jacek: using policy?
+ dbdr: aha, that's tiny then. limiting to make deterministic?
+ reCurse: Limiting to give me a fighting chance
+ reCurse: It's ruthless
+ dbdr:&#160;:)
+ jacek: youre playing chess960?
+ reCurse: No standard chess, that's what I have the data for anyway
+ jacek: oh
+ dbdr: do you beat  the NN alone without search?
+ reCurse: Same framework as usual except without the RL part
+ reCurse: It's probably very easy at 2 nodes
+ reCurse: Let me try
+ dbdr: famous last words&#160;;)
+ dbdr: I think alphazero chess NN alone was at 3000 elo. of course they have a huge net
+ reCurse: Yeah mine is the usual minimalist
+ reCurse: That's the angle I want to dig anyway
+ reCurse: CG-style constraints
+ reCurse: Not blundering so far...
+ reCurse: I'm surprised
+ jacek: you?
+ reCurse: lol
+ dbdr: I guess even inside the constraints, there must be a NN size / search speed tradeoff
+ reCurse: touché
+ reCurse: Yeah of course
+ reCurse: Something that doesn't seem too looked at as well which I like
+ jacek: usual CNN?
+ reCurse: Yeah conv is life
+ jacek: one hots are life
+ jacek: did you miss the cgzero craze
+ reCurse:&#160;?
+ jacek: <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/58137/alphazero-like-implementation-for-oware-abapa-game-codingame/alphazero-like-implementation-for-oware-abapa-game">https://www.codingame.com/playgrounds/58137/alphazero-like-implementation-for-oware-abapa-game-codingame/alphazero-like-implementation-for-oware-abapa-game</a>
+ jacek: now 10+ oware bots are NN
+ reCurse: Eh...
+ reCurse: I don't mean to be disrespectful but I'm a bit... disappointed? Not sure.
+ jacek: oO
+ MSmits: marchete lowered the bar of entry I suppose
+ Wontonimo: oO also
+ Wontonimo: i think it's fab that marchete shared and so many people tried.  it's a huge cost of entry, and this made it a lot more accessible  to many
+ reCurse: I don't mean to diss the effort or say it's not great
+ reCurse: Just a very personal feeling
+ MSmits: I know why
+ MSmits: it took you a lot of effort to make everything work
+ MSmits: and now other people can get a jumpstart you did not get
+ MSmits: it's a very human response imho
+ reCurse: No it's not even really that
+ MSmits: hmm ok
+ reCurse: It's kind of robbing you of the reward for the effort you put?
+ MSmits: yours or the ones using it?
+ reCurse: You can't have as much motivation to get something to work if you can already see the end result
+ reCurse: Speaking for myself anyway
+ Astrobytes: Valid point
+ MSmits: sure, but something can be so hard to put off almost everyone
+ reCurse: That's why I speak for myself
+ reCurse: I'm sure for most it's great
+ MSmits: I will probably use parts of it sometime in the next few weeks
+ reCurse: But the presence of a solution would probably have killed my motivation if I hadn't started
+ Astrobytes: You'd already started though right MSmits? Prior to this
+ MSmits: well just getting the endgame book
+ MSmits: 36 seed book is on my drive
+ MSmits: finished
+ MSmits: uses like 40 GB total :P
+ Astrobytes: Dearie me
+ MSmits: still havent started on the meta mcts for 37-48, got sidetracked by D&amp;B
+ MSmits: it's such a cool game&#160;:)
+ reCurse: Marchete if you read this don't take it the wrong way
+ Marchete: I don't, and I knew you thought that way
+ Marchete: I've heard having this conversation like 1 year ago
+ reCurse: Ok just making sure no hard feelings
+ reCurse: It's great work really
+ reCurse: Just makes me sad for some stupid reason&#160;:)
+ Marchete: don't worry
+ Marchete: It's OK, you are more competitive than me
+ reCurse: Why is 2 nodes still winning
+ reCurse: I'm sad now
+ reCurse: I'll blame lack of sleep or something
+ Marchete: enjoy parenthood
+ reCurse: Thanks
+ Marchete: and I mean it, even with sleep deprivation
+ reCurse: Oh it's 3 nodes (&lt;=) that's why
+ Marchete: you'll miss those moments, they grow up FAST
+ jacek: 3 nodes vs 2 nodes?
+ reCurse: No 3 nodes is still bullying me
+ reCurse: Yeah that's what everyone keeps saying hehe
+ reCurse: Took 3 months off for that reason among others
+ BlaiseEbuth: Oh. There's babyCurse&#160;! :o
+ Astrobytes: ah yeah, congrats man! Enjoy every moment&#160;:)
+ BlaiseEbuth: gg
+ reCurse: Thanks
+ Manchi_o6o7: How can I check integer overflow in C
+ martinpapa69: what is the operation you want to check&#160;?
+ reCurse: 1 coffee &gt; 3 nodes
+ Astrobytes: hehehe&#160;:)
+ reCurse: This is fun
+ reCurse: It baffles me how a small net with no search holds its own
+ jacek: how small though
+ reCurse: :zipper_mouth:
+ reCurse: It should fit on CG but barely
+ jacek: and what was the data, stockfish trainer?
+ reCurse: No I used CCRL
+ reCurse: So a few millions of engine games
+ reCurse: No filter
+ reCurse: I didn't think SL would work that well and yet
+ reCurse: So much stuff to try now
+ jacek: hmph
+ reCurse:&#160;?
+ jacek: nothing~
+ reCurse: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/60c100f6-613c-4a83-93bc-2c8dc9ce46ed">http://chat.codingame.com/pastebin/60c100f6-613c-4a83-93bc-2c8dc9ce46ed</a>
+ reCurse:&#160;:)
+ Xezs2774: where can i report a bug on here?
+ reCurse: Forum or #bug-report on discord
+ Astrobytes: Or triage it here beforehand
+ BlaiseEbuth: Yet another bug in temperature, I guess...&#160;:(
+ FalINTOblivion0112: hey blaiseeburth
+ FalINTOblivion0112: how do you optimize mean max
+ FalINTOblivion0112: the contest
+ Astrobytes: Just use True AI and make it go brrrr
+ nulte: AVX
+ BlaiseEbuth: I don't
+ FalINTOblivion0112: i make init
+ FalINTOblivion0112: and create random crap
+ nulte: init?
+ FalINTOblivion0112: i initiate classes of cars
+ nulte: meanmax might be one of the harder games to make a decent AI
+ nulte: I never tried it though
+ FalINTOblivion0112: yeah
+ FalINTOblivion0112: it is very hard actually
+ FalINTOblivion0112: but im doing well
+ Wontonimo: have you tried GA for meanmax?
+ FalINTOblivion0112: what is GA
+ reCurse: garbage algorithm
+ FalINTOblivion0112: yes i have
+ FalINTOblivion0112: that is the algorithm im using right now
+ FalINTOblivion0112: reapers desecrate
+ Wontonimo: Genetic Algorithm
+ Wontonimo: Genetic Algos are pretty good at many things.  If you'd like some tips, let me know
+ Wontonimo: PM if you'd like FalINTOblivion0112
+ FalINTOblivion0112: thank you man
+ FalINTOblivion0112: but generic algorithms are decent
+ Wontonimo: what algo are you currently using in meanmax&#160;?
+ FalINTOblivion0112: distance thing
+ FalINTOblivion0112: am i even using an algorithm
+ nulte: are you doing any multi Wontonimo?
+ FalINTOblivion0112: dunno man
+ Wontonimo: i've been lazy lately nulte.  Tron and C4 are probably next and shouldn't be much work at all porting what i have in other multis
+ Wontonimo: i really do like what Marchete did with NNs, and it so that is also high on my list to replicate
+ Wontonimo: i'm curious how i'd translate that into convolution for square/hex board games
+ Wontonimo: within the constraints of CG
+ martinpapa69: you worry about the codesize constraints&#160;?
+ reCurse: This meme needs to die&#160;:)
+ jacek: what meme
+ Astrobytes: lol
+ Astrobytes: The codesize 
+ jacek: it will die if they get rid of codesize limit
+ reCurse: It seems everyone's first thought of NNs on CG is worrying about size when it's the easiest obstacle
+ reCurse: A bit like worrying about O3 when pragmas are available
+ jacek: it is a problem with one-hots. the peasant convs guys won't get it
+ AllYourTrees: lol
+ reCurse: You're just not trying enough&#160;:)
+ reCurse: Besides I did NNs on CG for over a year without convs
+ martinpapa69: I'm pretty sure tho, that there must be a better way to encode, and input your data, than one-hot encoding, in a game like oware. 
+ reCurse: Most likely
+ Westicles: Is it possible to make a contribution where you penalize based on codesize?
+ reCurse: Yes, it's called code golf
+ Westicles: I don't mean clashes...
+ reCurse: Me neither
+ Westicles: Then I don't get it
+ reCurse: Oh my bad for some reason I thought the SDK allowed it
+ reCurse: Guess not
+ Astrobytes: 'platform limitation' I guess
+ Westicles: Hmm, seems like it should be possible.  Something along the lines of CGFunge Prime
+ reCurse: Well I guess you could print the source code on first turn and have the referee somehow compile it and... :P
+ Astrobytes: Definitely your territory Westicles :D
+ Westicles: Well, it is very possible I am too dumb to figure out the SDK
+ MSmits: yeah it works for CGFunge, so it's possible
+ MSmits: look at eulers code i guess
+ Astrobytes: If any past experience is to be taken at value I do believe you have this down Westicles :D
+ Westicles: Ha, well thanks Astrobytes for the vote of confidence :P
+ MSmits: +1
+ Astrobytes:&#160;;)
+ MSmits: I think I almost cracked the D&amp;B secret
+ MSmits: I feel it
+ reCurse: You didn't use enough bass?
+ Astrobytes: :rofl:
+ Astrobytes: well played reCurse
+ MSmits: that went woosh&#160;:(
+ Astrobytes: You forgot to make a cut around 100hz for the kick to get through?
+ MSmits: still woosh
+ MSmits: does this have something to do with me living under a rock?
+ MSmits: it's not that kind of rock though
+ reCurse: <a rel="nofollow" class="external free" href="https://en.wikipedia.org/wiki/Drum_and_bass">https://en.wikipedia.org/wiki/Drum_and_bass</a>
+ Astrobytes: MSmits:<a rel="nofollow" class="external free" href="https://youtu.be/Mg9YWdSkEXs?t=87">https://youtu.be/Mg9YWdSkEXs?t=87</a>
+ MSmits: oo
+ MSmits: ack, please go back to rickrolling me instead
+ Astrobytes: Dude please. That is A Tune.
+ MSmits: giving me A headache
+ reCurse: ngl it's kinda meh :p
+ Astrobytes: I picked it as a mid-point between current DnB and emergence of DnB from jungle tbh
+ Astrobytes: It kicks at a rave though, trust me
+ reCurse: Prefer when there's more melody shrug
+ Astrobytes: Ah see, this is neuro stuff, you want the liquid
+ reCurse: ...sure
+ Astrobytes: No really, liquid dnb is more melodic
+ reCurse: If there's something giving me a headache it's music categorization
+ Astrobytes: There's nothing worse, I agree. Especially when it's sub-genres of genres
+ Astrobytes: and sometimes sub-genres of sub-genres
+ Astrobytes: But hey, neither you nor me made those categories
+ reCurse: I'll just leave that to spotify to figure out what I want to hear
+ Astrobytes: Check stuff on Hospital/Hospitality label, should be decent
+ Astrobytes: Good Looking Records,  Soul:R etc
+ nulte: spotify sometimes finds good musics
+ Astrobytes: Doesn't for me. I'm a fussy f***er
+ reCurse: Sure thanks, just gonna say d&amp;b not that high on my favorite genres though
+ nulte: not even if you pick a song and choose play from this song?
+ nulte: play radio*
+ Astrobytes: Nor mine these days, but I have a rich past history with it&#160;;)
+ MSmits: I like celtic music
+ reCurse: Play radio kinda sucks, but when you start building a playlist with a few songs not too far from each other you get pretty good suggestions in my experience
+ Astrobytes: I like digging for music myself (when I have time)
+ Astrobytes: MSmits: which kind? Quite a few Celtic nations
+ MSmits: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=jiwuQ6UHMQg&amp;t=864s">https://www.youtube.com/watch?v=jiwuQ6UHMQg&amp;t=864s</a>
+ MSmits: i like many of those 
+ MSmits: they use a lot of music like that in games as well. There's a famous skyrim mod that just uses music from this composer I believe
+ Astrobytes: I prefer my Celtic music along the lines of (it won't rip your ears off btw):<a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=HlmOliCPMZ8">https://www.youtube.com/watch?v=HlmOliCPMZ8</a>
+ MSmits: the music is fine. I don't need the singing though
+ Astrobytes: You like that Disney woman
+ MSmits: yeah that's one of the few where I like the singing
+ nulte: is the bot finally doing something
+ nulte: or just luck
+ MSmits: which bot?
+ nulte: mine, breakthrough
+ Astrobytes: I'm not sure what I did to mine tbh
+ MSmits: oh ok
+ Astrobytes: Looks good man!
+ nulte: thanks
+ nulte: I made it solve sooner
+ nulte: I fee like my eval still has  a long way to go though
+ Astrobytes: That worked well either way
+ nulte: yeah
+ nulte: top 10 is close now
+ Astrobytes: yeah, good work&#160;:)
+ nulte: my goal is to beat robo bot 1 match
+ Astrobytes: hehehe
+ Astrobytes: C4 vengeance
+ MSmits: code a meta mcts, put in his moves, let it run for a week :P
+ Astrobytes: lol the SmitsiHax
+ MSmits: yeah
+ MSmits: but really, don't do that :P robo doesn't deserve it
+ Astrobytes: oard
+ Astrobytes: woops
+ Astrobytes: lol
+ Astrobytes: wrong text area
+ MSmits: dont paste your bot here :P
+ nulte: I think i might have better chances if I improve the eval
+ Astrobytes: no pasting lol
+ nulte: i only want to beat him 1 time
+ nulte: i dont want to take his rank
+ Astrobytes: Yeah yeah
+ Astrobytes: :P
+ MSmits: well considering how deterministic his bots are, beating him once, may mean beating him many times
+ MSmits: but beating him once is the hard part :P
+ Astrobytes: And the awful thing is that they'll just retrain on you and you're screwed. But this is where MSmits comes in with his Grimoires 
+ MSmits: yeah, well that works up to a point and only in some games
+ Astrobytes: True
+ MSmits: would be really easy to do in C4, harder in BT
+ MSmits: I mean in C4 it's even strong, nontargeted. Just letting the algo figure it out for itself. The statespace is that small
+ Astrobytes: I didn't realise BT was so deep tbh
+ MSmits: combined with mcts being that good
+ MSmits: BT has way more branching than C4
+ Astrobytes: Yeah ofc, but strategy-wise I mean
+ MSmits: BT is a very pretty game imho. It makes me sad that I can't write a better bot fo rit
+ nulte: I hate writing eval
+ Astrobytes: it's a great game, I totally love and hate it
+ MSmits: well I like experimenting with eval features, but i hate fitting the numbers
+ Astrobytes: I like seeing how it changes the behaviour, you gotta pick the right features first though
+ MSmits: yeah and I never really succeeded at that with BT
+ MSmits: it seems messy because of complex interaction between pieces
+ MSmits: it's what I ran into when trying to eval br2k compared to eval of csb
+ MSmits: at least csb has some low hanging fruit when it comes to eval
+ Astrobytes: Yeah, br2k had me at a wall. Must get back to that at some point, was a cool game
+ MSmits: yeah thats why i mentioned it. It also felt like a pretty game, but  I also failed at that, relatively speaking
+ MSmits: I got stuck right before last boss
+ Astrobytes: Did better than me D:
+ Astrobytes: * :D
+ nulte: im done
+ nulte: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/570865902">https://www.codingame.com/replay/570865902</a>
+ nulte: cya next multi
+ MSmits: gj!
+ MSmits: you beat the boss
+ Astrobytes: Nice sneaky win there&#160;:)
+ nulte: oh he didnt update his bt bot yet
+ nulte: he is gonna crush my dreams
+ MSmits: but he'll be polite and nice about it
+ Astrobytes: Alright I'm out fortoday, still logged in but don't expect a reply :P
+ Astrobytes: Goodnight/afternoon/evening everyone
+ Astrobytes: reCurse: Nice to see you back dude&#160;:)
+ MSmits: gn
+ nulte: gn
+ KiwiTae: <a rel="nofollow" class="external free" href="https://imgur.com/a/TLaRCVC">https://imgur.com/a/TLaRCVC</a> :joy:
+ KiwiTae: gotta make it fancy :grimacing:
+ nulte: wow
+ nulte: very nice
+ nulte: Will you make it frame by frame KiwiTae?
+ GrantSan: lol
+ GrantSan: lol
+ GrantSan: hold up how do you know the position of the checkpoints in coders strike back
+ nulte: you need to store them&#160;:/
+ nulte: and keep track of it I guess
+ nulte: Im not sure if checkpoint id is given on lower leageus
+ nulte: leagues*
+ FriendlyKh: in lower league
+ FriendlyKh: it automaticly change the checkpoint if the pod touch the checkpoint
+ FriendlyKh: but from the gold league 
+ FriendlyKh: it gives you id of the checkpoint
+ FriendlyKh: so you have to change it by yourself
+ prINTint: can someone help me with my school project
+ prINTint: :confounded: plese
+ Wontonimo: nope, but i can help you with something on this site
+ prINTint: @Wontonmino no issues
+ prINTint: can someone help me with my school project
+ prINTint: it is simply to write source code for shopping software
+ nulte: im sure you can do it
+ Wontonimo: or if you can't, your teacher will show you afterwards

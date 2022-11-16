@@ -1,0 +1,1733 @@
+ emh: good morning
+ MSmits: meurning
+ Poligraph: ok boys
+ Poligraph: how to code
+ MSmits: is that rhetorical?
+ aCat: morning MSmits&#160;:-)
+ MSmits: hi aCat
+ emh: this game is not so bad after all. it's probabilistic so it's suitable for heuristics. no?
+ emh: and if you start with the published boss you can use arrays immediately and don't have to worry about long names haha
+ MSmits: ohh i did that on my own. Did not know i could get it from boss
+ emh: but then you'd have to do Java
+ MSmits: it's the first thing i did, before i even understood any of the rules
+ MSmits: but I agree, it seems cool
+ MSmits: It is somewhat similar to locam
+ MSmits: but locam had 2 problems. 1) cards were unbalanced, which killed the complexity of the game, you could just set a card order
+ kovi: array? i was hesitating on bitmap instantly
+ MSmits: 2) too much uncertainty
+ MSmits: i dont know if this game has 1), but it does not have 2)
+ MSmits: kovi how would you do a bitmap here?
+ MSmits: bitboard i think you mean
+ kovi: yes
+ MSmits: you can have a hand with up to 5 cards of each
+ MSmits: thats 3 bits times 8
+ MSmits: if you include bonus its harder
+ MSmits: but the bits dont necessarily makes things better because you cant shift them
+ MSmits: it's still just addition
+ MSmits: so the only advantage i think would be storage. If you foresee having to store millions of gamestates, then yeah
+ kovi: or calculate quicker
+ MSmits: not necessarily
+ MSmits: why would bits be faster here?
+ MSmits: sure you can subtract an app from a hand in 1 go
+ MSmits: but you have to check if you're allowed first
+ MSmits: and that's not doable with bit ops afaik
+ MSmits: (unless you use 5 bits per card type and use 64 bit state)
+ MSmits: still hard i think
+ kovi: i have some ideas
+ MSmits: I'm going to focus on the search algo and on figuring out a way to fit params which I will inevitably have to do
+ kovi: i wonder how nn would do in this game
+ MSmits: I think the question is how hard is it to come up with a working NN 
+ MSmits: the input is weird and has a difficult structure
+ emh: yayy I'm 29 in Bronze and all I did was change ~10 lines of boss
+ MSmits: :cry:
+ MSmits: I worked on it for hours last night and am 31
+ kovi: hmm, did they already shared github link?
+ MSmits: I guess most time is spent understanding how the game works
+ emh: lazy coding ftw
+ MSmits: yeah, someone will have it kovi
+ Westicles: <a rel="nofollow" class="external free" href="https://github.com/societe-generale/GreenCircle">https://github.com/societe-generale/GreenCircle</a>
+ kovi: thx
+ MSmits: hey, i have a question
+ MSmits: you can chain multiple coding cards right?
+ MSmits: which means you can have several play phases
+ MSmits: is there anyway to know from the current turn input, how many play phases are queued?
+ MSmits: or do you need to keep track?
+ MSmits: say you play a coding card. Another play phase happens, but it is only the first of two. So if you sim this phase, you have to know there is another
+ MSmits: also, you should be able to play infinite coding cards if you have enough in your deck
+ kovi: i havent checked play_card, but i guess we need to track (use state) ourselves
+ MSmits: yeah, it seems a bit out of character for this game though since almost everything is given in input
+ pedrosorio: they don't tell you how many throw phases you have either
+ pedrosorio: also, afaict they don't tell you which turn it is in the game (?)
+ MSmits: but you dont need these
+ MSmits: throw is just at most 1 and only when you passed admin 
+ pedrosorio: the game turn seems pretty relevant
+ j4at: why is there 4 levels&#160;?
+ kovi: hmm, turn might be needed
+ MSmits: not really if all good games stay below 200 phases
+ MSmits: all you need to know is your opponent score
+ kovi: are they? (i dont know yet)
+ MSmits: they are
+ MSmits: if bots do well and there is no bug (like the training bug) it's usually below or near 100
+ kovi: but will they? (when we also try to disrupt opponent)
+ MSmits: yeah, i dont think its possible to disrupt the opponent to a sufficient degree so as to double the length of the game
+ MSmits: you can influence the cards in the desk, but this just gives your opponent bonus cards
+ MSmits: and you can block his desk, but this is not a major issue
+ MSmits: and it's always a temporary block for which you can find workarounds
+ MSmits: it's really a low interaction game
+ MSmits: almost an optim, with probabilistic elements
+ MSmits: oh right and of course you can take his apps, but thats happening now and is not going to change in the future i thnik
+ aCat: Smits you have 2 discards when going thdough desk
+ MSmits: sorry i meant the 8 type desks
+ MSmits: not the admin
+ aCat: and if you go via desk and enear the opponent - 3 discards in a row&#160;;]
+ MSmits: i know, dont do that :P
+ MSmits: train arriving, working for 4 hrs and then back to green circle&#160;:)
+ MSmits: ttyl
+ aCat: bb
+ j4at: Iwood 2 is level 1, wood 1 is level 2 bronze is level 3? But there is 4 levels in <a rel="nofollow" class="external free" href="https://github.com/societe-generale/GreenCircle/tree/master/config">https://github.com/societe-generale/GreenCircle/tree/master/config</a> 
+ j4at: why is that&#160;?
+ Nerchio: still 1 :upside_down:
+ j4at: ow
+ j4at: okay 
+ aCat:&#160;:+1:
+ pedrosorio: task prioritization action failed because I don't have a card which I do have&#160;?<a rel="nofollow" class="external free" href="https://imgur.com/BjFdzLk">https://imgur.com/BjFdzLk</a>
+ pedrosorio: funny thing is the replay never says what's wrong, just "timed out" (which is unlikely since I print at 35ms): <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/641723290">https://www.codingame.com/replay/641723290</a>
+ MSmits: perhaps there was no 6 card in the desk and the error message is bad
+ pedrosorio: I am keeping track of the cards on the desks, so that is strange but possible, I guess
+ pedrosorio: I've seen the error a few times. A bit suspicious that it's always complaining about continuous integration not being available.
+ pedrosorio: on turn 11 lol:<a rel="nofollow" class="external free" href="https://www.codingame.com/replay/641727183">https://www.codingame.com/replay/641727183</a>
+ pedrosorio: hand and cards on the board counts in my stderr output as well:<a rel="nofollow" class="external free" href="https://imgur.com/APbbm9h">https://imgur.com/APbbm9h</a>
+ NotSureWhyThisWorks: can someone explain why the game gets stuck in an infinite loop at around turn 64 <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/641729397">https://www.codingame.com/replay/641729397</a>
+ NotSureWhyThisWorks: I think it must be something to do with the use skill phase, I am just printing RANDOM, but I wouldn't have thought that the game would allow an infinite loop
+ pedrosorio: as I suspected, there is a bug:<a rel="nofollow" class="external free" href="https://github.com/societe-generale/GreenCircle/blob/d57c4a5659da1ff5558363b88bc5fab9cc73842d/src/main/java/com/codingame/game/CommandManager.java#L238">https://github.com/societe-generale/GreenCircle/blob/d57c4a5659da1ff5558363b88bc5fab9cc73842d/src/main/java/com/codingame/game/CommandManager.java#L238</a>
+ aCat:&#160;:+1:
+ aCat: please raport here <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/contest-green-circle/196455">https://www.codingame.com/forum/t/contest-green-circle/196455</a> or discord
+ emh: are desk 7 and desk 0 considered to be next to each other?
+ Illedan: Not in my code
+ PiterYeh: yes emh
+ Illedan: They are?
+ PiterYeh: in my head i'm sure they are, i think i saw that in a replay last night
+ PiterYeh: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/641730814">https://www.codingame.com/replay/641730814</a>
+ PiterYeh: turn 9
+ Rafarafa: does anyone know how the list of possible applications is generated at the start?
+ j4at: Badly written statement&#160;:)  reading the source code is the only reasonable way to understand this.
+ aCat: but the source is complicated mess
+ eulerscheZahl: so is the statement&#160;;)
+ eulerscheZahl: and i have a feeling that not all bronze changes are highlighted in green
+ eulerscheZahl: either that or i missed a lot while reading wood1
+ Rafarafa: can't read java&#160;:(
+ eulerscheZahl: you should appreciate that it's not Kotlin this time
+ eulerscheZahl: code royale memories...
+ aCat: <a rel="nofollow" class="external free" href="https://github.com/societe-generale/GreenCircle/blob/d57c4a5659da1ff5558363b88bc5fab9cc73842d/src/main/java/com/codingame/game/Game.java#L537">https://github.com/societe-generale/GreenCircle/blob/d57c4a5659da1ff5558363b88bc5fab9cc73842d/src/main/java/com/codingame/game/Game.java#L537</a>
+ aangairbender: isnt Kotlin easy to read? I was doing code-a-la-mode recently, it was nice kotlin
+ aCat: here is checking distance to opponent
+ eulerscheZahl: code royale and code a la mode are from the same author
+ Rafarafa: so I'm getting from the ApplicationFactory file that it just randomly pulls 12 big applications at the start from a preset database of what, 25 or so big applications?
+ Rafarafa: you never get to work with small applications in bronze?
+ aCat: 28
+ aCat: <a rel="nofollow" class="external free" href="https://github.com/societe-generale/GreenCircle/blob/d57c4a5659da1ff5558363b88bc5fab9cc73842d/src/main/java/com/codingame/game/ApplicationFactory.java#L13">https://github.com/societe-generale/GreenCircle/blob/d57c4a5659da1ff5558363b88bc5fab9cc73842d/src/main/java/com/codingame/game/ApplicationFactory.java#L13</a>
+ eulerscheZahl: even the promotion popup told you that all applications are big
+ aCat: ids are just indexes in the table
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://cdn.discordapp.com/attachments/903337608606789755/987024511427809361/unknown.png">https://cdn.discordapp.com/attachments/903337608606789755/987024511427809361/unknown.png</a>
+ NotSureWhyThisWorks: yeah I couldn't see the highlighted differences in bronze
+ aCat: you are reading the promotion popup :scream_cat:
+ eulerscheZahl: sometimes. rarely
+ aangairbender: Rafarafa I think those are not preset database, but actually just all possible big applications
+ aangairbender: they just decided to precompute them
+ aCat: random 12 from preset 28
+ aCat: ids 0 to 27
+ aangairbender: yes, 12 applications from all possible big applications (it just happen to be 28 in total)
+ Rafarafa: I didn't remember the popup&#160;:(
+ Rafarafa: ok thanks everyone
+ Illedan: Uhm, I do Training and can still do TASK_PRIORITIZATION from my hand, but I just go straight to RELEASE?&#160;:/ 
+ aangairbender: if no shoddy skill used why not?
+ MSmits: 28 applications = (8*7) / 2?
+ MSmits: it picks 12 random from these 28?
+ emh: is there a way to skip the admin post? I see in replays that sometimes the player jumps past it
+ MSmits: Illedan task prioritization does require a second card
+ jacek: wood replays?
+ aangairbender: 28 applications = C(8, 2)combinations to put 2 skills into 8 buckets
+ MSmits: perhaps the new cards are not counted as possible cards to play 
+ MSmits: aangairbender yeah that's 8*7/2 :P
+ aangairbender: MSmits in this case infinite loop would not exist:joy:
+ MSmits: we really need to study the source to know what really happens
+ pedrosorio: emh you jump past the admin post if you have &lt;= 2 skill cards, there's no decision to make in that case, you just spend the cards/get the tech debt, no need to request the player for input
+ MSmits: so many weird things happen
+ emh: pedrosorio ahhh
+ eulerscheZahl: not even sure if i want to understand or just copy the source to put it into my sim (which doesn't exist yet)
+ MSmits: I want to understand and I need the sim to be c++
+ aangairbender: pedrosorio statements says action will be performed automatically in this case
+ pedrosorio: yep
+ MSmits: which is problematic because the viewer isnt that informative
+ kovi: yeah, rewrite and painful check of compare diff
+ MSmits: it might have been better to let players do the phases even if there is no choice to be made
+ eulerscheZahl: i just hope there won't be any significant referee changes/bugfixes
+ MSmits: i hope there will be, because there's some bad bugs to fix
+ eulerscheZahl: the bad one, sure
+ eulerscheZahl: the infinite loop
+ eulerscheZahl: at a previous contest i ported the referee. then the referee was changed. and again and again
+ eulerscheZahl: botg
+ aangairbender: it would be cool to see applications and automated cards in the viewer
+ MSmits: yeah thats annoying
+ eulerscheZahl: i still have to understand those concepts from the rules
+ MSmits: viewer could just have little dots for apps, should not take up too much space
+ MSmits: which concepts?
+ eulerscheZahl: what's an automated card?
+ MSmits: it's a card you can use for finishing apps
+ eulerscheZahl: or a permanent skill card
+ MSmits: but not play as a skill
+ MSmits: permanent skill card is a bonus that stays until next app finish
+ MSmits: it has separate input
+ aangairbender: automated card is never discarded, but can be used ONLY for release
+ eulerscheZahl: can there be multiple automated ones?
+ aangairbender: yes
+ MSmits: yeah
+ eulerscheZahl: of any type?
+ MSmits: you can use a bonus card for it
+ MSmits: yes
+ aangairbender: I am thinking automating bonuses it a good idea
+ kovi: like nerchio did smartly
+ MSmits: and Illedan
+ NotSureWhyThisWorks: does an automated card get removed after a single release?
+ aangairbender: seems no
+ eulerscheZahl: do i see automated cards in the viewer?
+ MSmits: no it doesnt
+ MSmits: not sure
+ NotSureWhyThisWorks: so technically you could automate all the cards you need for a release instead of waiting for them to get drawn?
+ kovi: with CI yes
+ MSmits: yeah, but this takes time
+ MSmits: it's also a popular desk
+ MSmits: so expect opponent to go there
+ Illedan: Hm, I do anything smartly?
+ NotSureWhyThisWorks: hmm ok
+ aangairbender: worker placement mechanics:sunglasses:
+ MSmits: it's possible in theory Illedan
+ kovi: sorry Illedan not sure who did it first, just noticed the smart use of many automated bonus
+ Illedan: Ah
+ Illedan: So it is better to automate bonuses?
+ Illedan: :eyes:
+ aangairbender: it seems so, you can use it for all releases in theory
+ aangairbender: so huge value
+ MSmits: should just make bots that do various things and test them
+ kovi: i let the communinity do that for me&#160;:)
+ MSmits: I don't think this game will have much of a "meta" as opponent influence is limited. It's more about figuring out what works.
+ aangairbender: I even wanted to do paper copy of this game and play with friends a bit to understand the game better
+ MSmits: also the bot needs to be flexible to deal with the available apps and the deck you've built uop
+ MSmits: up
+ aangairbender: maybe it's worth checking out Samsara board game. maybe best strategies can be applied here
+ MSmits: depends on how different it is
+ aangairbender: as it was with contest about potions
+ eulerscheZahl: will automated cards disappear when i use them to build an app?
+ aangairbender: they dont disappear
+ kovi: that is why 2-4 bonus is uber
+ eulerscheZahl: so with 8 bonus cards in auto, i can just complete one project after another and win?
+ kovi: it seems
+ eulerscheZahl: (if the opponent lets me get those 8 cards in the first place)
+ aangairbender: with 4 bonuses you can complete any of first 4 apps
+ aangairbender: need to finish without shoddy though
+ kovi: yes only last need 8
+ Illedan: MSmits, do you disagree with the screenshot I put on the forum?
+ eulerscheZahl: that's one of the few rules i got, aangairbender
+ kovi: it is hard to prevent getting bonus...
+ Illedan: I should be able to do ArchStudy right?
+ aangairbender: each player starts with 4 bonuses, I guess just going for CI will be nice strat
+ MSmits: Illedan i havent seen it, let me look at it
+ aangairbender: also TRAINING seems good, using that card give more opportunities (unless you need that card for app)
+ kovi: considering these...meta might evolve
+ kovi: anti-automated-bonus strat
+ MSmits: IlledanI have no explanation other than bug
+ MSmits: would be best if you located the bug in the source
+ Illedan: I tried
+ Illedan: <a rel="nofollow" class="external free" href="https://github.com/societe-generale/GreenCircle/blob/d57c4a5659da1ff5558363b88bc5fab9cc73842d/src/main/java/com/codingame/game/Referee.java#L152">https://github.com/societe-generale/GreenCircle/blob/d57c4a5659da1ff5558363b88bc5fab9cc73842d/src/main/java/com/codingame/game/Referee.java#L152</a>Maybe this?
+ eulerscheZahl: :popcorn:thank god i'm not the creator or tester here. after reading the forum, i predict a busy day
+ MSmits: canPlayActionCard(activePlayer)
+ MSmits: that function should contain the bug
+ aCat: so true euler...
+ Illedan: They should discard the used card after it is done. For training and Coding it would solve the bugs
+ Illedan: Ah
+ TINOUAINANI: Hi, what should I print if I don't want to use the skill card?
+ aCat: WAIT&#160;?
+ MSmits: ye
+ emh: ohh number of initial battles increased to 20?
+ eulerscheZahl: are there mirrors?
+ emh: yes seems like
+ MSmits: mirrors are good
+ Illedan: Makes sense
+ TINOUAINANI: in PLAY_CARD phase , i don,t whant to play a card can I&#160;?
+ MSmits: yes WAIT
+ TINOUAINANI: thanks
+ MSmits: maybe someone can go to their desk and disturb them to give them a code review card?
+ Ayushman965: Hello
+ Ayushman965: anybody on chess.com here?
+ MSmits: our motto is: "Why play a game when you can code a bot to do it for you"
+ MSmits: we have a chessbot arena though
+ Ayushman965: oh
+ Ayushman965: chess programming is interesting
+ MSmits: but i am sure some users play chess on chess.com
+ Ayushman965: yeah
+ MSmits: i have in the past
+ jacek: chess programming wiki?
+ Ayushman965: so you've quit chess.com?
+ MSmits: i just did it casually
+ MSmits: i didnt consciously quit
+ Ayushman965: so you quit it when you were dreaming?
+ MSmits: no i just stopped without actively making the decision&#160;:)
+ Ayushman965: why do you speak like that?
+ Ayushman965: like you were coding something?
+ Ayushman965: "actively making the decision"
+ aangairbender: politeness
+ Ayushman965: ahh
+ Rafarafa: so how do I make my python class subscriptable? I'm googling a bit the __getitem__ constructor but I can't seem to figure out what to do, any pointers?
+ aangairbender: I also play chess.com sometimes just to spend some time
+ Ayushman965: you into cubing? @aangairbender
+ Illedan: Hmm, we didn't really need mirror match yet :thinking:
+ aangairbender: what is cubing? Ayushman965
+ Ayushman965: solving rubik's cubes blazing fast
+ aangairbender: Rafarafa python:worried:
+ Ayushman965: because you have a pfp of a rubik's cube
+ aangairbender: nah, just random paint drawing
+ Ayushman965: oh
+ eulerscheZahl: Hundertwasser called that art
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://hundertwasser.com/jart/prj3/hundertwasser/images/cache/f7de0a2eb634f415fbac493adf6cc9c7/0xBD5B2DC9C36CB949D59DC124A8444D59.jpeg">https://hundertwasser.com/jart/prj3/hundertwasser/images/cache/f7de0a2eb634f415fbac493adf6cc9c7/0xBD5B2DC9C36CB949D59DC124A8444D59.jpeg</a>
+ aangairbender: it is imo
+ j4at: Creating a simulation for this will be a pain in the ass. It's also weird that they don't use small applications at all but mention it the statement just to confuse us&#160;:)
+ aangairbender: rather to teach us in wood leageues
+ aangairbender: with small apps games finished in 10-20 phases
+ j4at: ow
+ emh: I hope infinite training bug will be fixed. I lost a bunch of battles to it
+ BugKiller_328: hi, Can you suggest me bot programming puzzle which is easist for training minimax?
+ BugKiller_328: purpose of minimax programming traning
+ MSmits: well ultimate tic tac toe has an easy simulation, but it's difficult to come up witha  good evaluation function
+ MSmits: so if you dont mind using a bad eval function and just want to practice minimax
+ MSmits: it's fine
+ Uljahn: <a rel="nofollow" class="external free" href="https://www.codingame.com/learn/minimax">https://www.codingame.com/learn/minimax</a>
+ aCat: if you make wait on apply action you are skipping release phase?
+ Illedan: Not using training or coding is better. Because of the bug&#160;:(
+ Illedan: apply aCat?
+ aCat: nvm - we found the reason&#160;;-)
+ Illedan: We? Teamwork? :O
+ Illedan: ^^
+ wlesavo: the rules with shaddy cards are so obsure, i still cant figure out the whole rules. it seems like releasing an app with shaddy = good is not possible, is that true?
+ Illedan: Can you rephrase wlesavo?
+ jacek: you cant release 5th application with shaddy
+ wlesavo: jacek oooooh
+ aCat: Zylo is showing me his errors ;p
+ jacek: BugKiller_328 you can try connect 4
+ Illedan: Tell him he is stacking too much Technical debt
+ aCat: he just found out that 5th release cannot use shooddy :P
+ therealbeef: When you 'play' a card, where does it go? the rules don't tell this
+ Illedan: Discard pile
+ therealbeef: thanks
+ therealbeef: the UI doesn't show all steps, can be confusing to figure out what's going on
+ aCat: board state is unknown?
+ aCat: and you cannot actualy reason about it - because of opponent actions hidden?
+ jacek: in FoW games you can see everything in viewer
+ therealbeef: which part is unknown (besides oppo's hand)?
+ aCat: lik e he used daily routine to remove some skill from some table
+ Illedan: You can just count the cards in all hands to figure what he did
+ aCat: still seems stupid to not simple give BOARD state
+ therealbeef: you want even more lines of input?&#160;;)
+ aCat: useful
+ aCat: yes
+ aCat: If i deal with 454 lines I can deal with 454+1
+ kovi: board state you mean how many cards on desks?
+ Illedan: Could just add a BOARD line in the card list
+ aCat: y
+ Illedan: Which is the count of all remaining cards
+ kovi: isnt it 5-allother?
+ Illedan: yes
+ aCat: but they can go back and forth with  TASK_PRIORITIZATION and there are 36 bonus skills
+ kovi: true. we cant know bonuses
+ Illedan: You can?
+ Illedan: 36-allother
+ kovi: sorry, didnt care about bonus/td till now, they are also tracked
+ Illedan: What do you think about:
+ Illedan: Check if the last N actions are coding or train and stop the next one.
+ Illedan: Just to prevent the loops
+ Illedan: You can force it with smarter plays, but then you really try
+ jacek:     private void initGameFromState(String state) {
+ jacek: oh my
+ Illedan: :D 
+ MSmits: Illedan i am looking for your bug. This trainride is 30 min. If my wifi holds, i might find it
+ GroutchKeu: o/
+ therealbeef: Do desks 0 and 7 count as adjacent?
+ Illedan: yes
+ therealbeef: but there's the admin desk in between&#160;:-/
+ MSmits: it's very thin, negligible in width. This is why the admin guy is so cranky and stealing your cards
+ aCat: :D
+ therealbeef: When a play let's you draw cards but you have none, you just draw nothing?
+ wlesavo: so turned out the best way to get bronze is to ask for rules in chat. still a mystery for me why this rule is not in release section
+ eulerscheZahl: that's when the infinite loop kicks in therealbeef
+ eulerscheZahl: first replay in forum discussion
+ Illedan: They are working on a fix
+ Illedan: Hmm, need to track the amount of actions I have left, once the bugs are fixed
+ MSmits: Illedan your train bug is being worked on too?
+ Illedan: No
+ Illedan: not as I know
+ MSmits: ok i am searching for it still
+ MSmits: good excuse to learn the referee
+ therealbeef: there is a second bug?
+ MSmits: <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/contest-green-circle/196455/12">https://www.codingame.com/forum/t/contest-green-circle/196455/12</a>
+ Sheeesh---: if i use task_prio... skill does it mean i lose two cards and add one card? 
+ MSmits: yes
+ MSmits: well not exactly
+ MSmits: task prio goes in discard, but you trade another card with a card on the board
+ Sheeesh---: oh i see
+ Sheeesh---: thanks!
+ MSmits: if you're not using the task prio that turn for an app, there is not much reason not to use it to swap another card
+ MSmits: its still your card, part of your deck
+ therealbeef: Continuous Integration sounds like it would be a permanent skill
+ Astrobytes: I thought I understood this game when I went to bed last night, now that Iook at it again it feels like I've never seen it before&#160;:)
+ NotSureWhyThisWorks: same 
+ MSmits: Illedan sorry couldnt find it, learned a lot about the referee though. I hope to run into the bug myself once i start using these cards
+ Illedan: Can't find it either
+ Mortis_666: hello, i have a question, what does technical debt cards  do besides tie breaking?
+ aangairbender: dont let you draw good gards:joy:
+ aangairbender: *cards
+ Illedan: Mortis_666, it is a dummy card you can draw instead of something usefull
+ Mortis_666: oh but u will get it from using shoddy skills, so it wont actually matters if u use shoddy skills?
+ Kururugi: it's a surprise tool that will help us later
+ Mortis_666: 🤔
+ Ayushman965: anybody use pygame?
+ Ayushman965: here?
+ Astrobytes: there is a contest currently ongoing, it's doubtful you will get a meaningful reply for such a non-codingame-related question
+ MSmits: Mortis_666 it does matter. If in future turns you get your hands full of dummy cards you will regret it
+ Mortis_666: ok thx
+ TINOUAINANI: there is a bug in CODING and TRAINING&#160;?
+ Illedan: Yeah
+ Illedan: Check the forum
+ b0ot: Could someone help me figure out why my code is so slow?Goal: You have two coins with values a,b. How close can you get to a target value:
+ b0ot: I tried a dynamic programming approach
+ b0ot: However it doesn't look like my memo is ever used
+ b0ot: which kind of defeats the gains of dp
+ b0ot: My code works if the target is small, but if I change that from 100 to 1000 for example
+ b0ot: it breaks
+ b0ot: nvm, I'm an idiot... i didn't pass the memo
+ Astrobytes: rubber duck debugging ftw
+ b0ot: My updated approach: <a rel="nofollow" class="external free" href="https://jsfiddle.net/yz1h47ut/">https://jsfiddle.net/yz1h47ut/</a>
+ Astrobytes: kinda busy with the contest tbh
+ Astrobytes: Possibly get a better response on the discord I think
+ eulerscheZahl: he answered himself already
+ eulerscheZahl: i was about to suggest the same: add val to memo instead of x,y
+ Astrobytes: I know, read the following statements
+ eulerscheZahl: he asked the same on discord?
+ eulerscheZahl: i still have to start coding for the contest. motivation, where are you?&#160;:(
+ Astrobytes: No, I was suggesting he might get better feedback on the discord
+ eulerscheZahl: but he doesn't need it anymore. that's what i said
+ BrunoFelthes: why sometime the card that i draw go to the pile, not to my hand?
+ Astrobytes: eulerscheZahl: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/26becfc7-0b19-43c7-a7d7-aca457cb1633">http://chat.codingame.com/pastebin/26becfc7-0b19-43c7-a7d7-aca457cb1633</a>
+ eulerscheZahl: oops
+ Astrobytes: :D
+ eulerscheZahl: clicked the link, then missed that line
+ eulerscheZahl: my first thought was a bool[] reachable for lookup
+ eulerscheZahl: more efficient than the dict with hashing
+ Astrobytes: As for motivation, this is the last time we will have a contest with the chat
+ Astrobytes: So you must motivate yourself, for old times sake
+ eulerscheZahl: or i take a nap first
+ Astrobytes: Whichever works for you&#160;;)
+ emh: Astrobytes so sad. will discord be online tho?
+ Astrobytes: emh yeah it is. Sure, the discord will still be there
+ emh: ok
+ Illedan: BrunoFelthes  got an example?
+ Astrobytes: oops, missed your question BrunoFelthes, apologies!
+ eulerscheZahl: referee with bugs and they are patching java starter code
+ Astrobytes: easier to fix quickly I guess
+ eulerscheZahl: oh wait, they did something about the infinite loop too
+ VizGhar: grumpy euler
+ BrunoFelthes: i already understood, i is because i passed at the administration poste, and discarted my card, so i buy one card without action... and pass my actions and the card go to  the pile
+ eulerscheZahl: no, not grumpy
+ struct: hi
+ Astrobytes: hey struct
+ Ayushman965: hey struct!
+ Harsh_Chourasiya: Hey
+ Sheeesh---: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/641837166">https://www.codingame.com/replay/641837166</a>
+ Sheeesh---: turn 9
+ Sheeesh---: how did i go back without passing the poste&#160;?
+ struct: you did pass I guess viewer just didnt show it properly 
+ struct: you lost 2 bonus cards
+ Sheeesh---: oh i see
+ Sheeesh---: my bad then
+ struct: but on turn 16-17
+ struct: opponent passes and it does the same?
+ struct: its strange
+ struct: It seems like a bug to me
+ struct: Opponent goes from table 7 to 0 and doesnt throw cards
+ Sheeesh---: yup i saw that too
+ Sheeesh---: she lost 1 bonus card
+ struct: Yeah but shouldnt it be throw card phase?
+ struct: Anyone that understands the rules better can confirm if this is a bug or not?
+ Sheeesh---: actually the bonus card vanished
+ struct: oh 1 card is gonne from discard pile?
+ j4at: I'm writing a Green Circle simulation in Python. I'm pretty tired  :( anyone else writing a simulation&#160;?
+ struct: yes i am
+ j4at: C++&#160;?
+ struct: yes
+ Astrobytes: why python j4at?
+ j4at: NN&#160;:)
+ Astrobytes: oh for offline purposes
+ j4at: yep
+ Astrobytes: was gonna say&#160;:)
+ Astrobytes: good luck!
+ jacek: just copy paste referee. ezpz.
+ j4at: ty&#160;:)
+ struct: so if I only have 1 skill type in hand it automatically discards those when I go throw admin? 
+ struct: through*
+ putibuzu: yes, it should
+ Snef: Anyone have a abug with permanent card not showing&#160;?
+ putibuzu: but I think there is a bug when it comes to bonus cards, as in the example above (turn 16-17 as you mentioned) only 1 bonus card is discarded
+ Snef: putibuzu discard is one by one
+ asdf1234562456: wow I just discovered this website, this is so cool!
+ asdf1234562456: think I'm gonna do one of these every day from now on, I can't believe I didn't find this earlier
+ putibuzu: Snef hmm weird I thought it is supposed to discard 2 here
+ Snef: putibuzu when you do a whole turn&#160;?
+ putibuzu: Snef yeah, when you pass the admin desk :thinking:
+ putibuzu: probably need to study the Referee a bit better
+ Snef: You get to throw one card
+ Snef: but twice
+ Snef: so two turn for two throw
+ putibuzu: aah I see, thank you&#160;!
+ putibuzu: sorry if I confused someone! :sweat_smile:
+ AryanTripathi: sup
+ eulerscheZahl: i like this comment :D<a rel="nofollow" class="external free" href="https://github.com/societe-generale/GreenCircle/blob/master/src/main/java/com/codingame/game/Game.java#L116">https://github.com/societe-generale/GreenCircle/blob/master/src/main/java/com/codingame/game/Game.java#L116</a>
+ Astrobytes: someone posted that earlier, absolute classic :D
+ eulerscheZahl: was afk-ing. should get my travelling passport in 4-6 weeks
+ Astrobytes: oh nice, when are the finals?
+ eulerscheZahl: you instantly know what for :Dnov 15th-18th
+ eulerscheZahl: The Encore, Boston
+ eulerscheZahl: hotel/casino. looks expensive
+ Astrobytes: lol :DNo expense spared eh! Nice :D
+ eulerscheZahl: in the past TCO was in las vegas. they even put up extra security staff to oversee the nerds
+ eulerscheZahl: worried of card counting or such
+ Voleur2Poules: coucou les nullos
+ Astrobytes: hahaha
+ Astrobytes: "oversee the nerds" :D
+ Astrobytes: Is it streamed live? 
+ eulerscheZahl: there will be a live-cast i think
+ eulerscheZahl: rip my anonymity
+ Astrobytes: Cool, will have to watch that for sure :D
+ Astrobytes: Well, you could go in disguise. False moustache and hat!
+ struct: gl euler and have fun
+ eulerscheZahl: for now there is only this announcement: <a rel="nofollow" class="external free" href="https://youtu.be/UVxvcbzXerM?t=883">https://youtu.be/UVxvcbzXerM?t=883</a>fast cuts and with zoom lag
+ Uljahn: "worried of card counting or such" reminded me of <a rel="nofollow" class="external free" href="http://physicsbuzz.physicscentral.com/2015/09/one-winning-move.html">http://physicsbuzz.physicscentral.com/2015/09/one-winning-move.html</a>
+ Astrobytes: Nikolay: the least excited person 
+ struct: Yeah I remembered that aswell uljahn
+ bobth: wat, I just was in two clashes at once and didn't know about one of them
+ Astrobytes: hahaha yes :D
+ jacek: so 200 is game phases, not players turns
+ struct: isnt it the same?
+ darkhorse64: count move phases for turns
+ jacek: is it 200 inputs total?
+ jacek: or more
+ struct: 200 inputs
+ Astrobytes: afk
+ Westicles: Did you guys decide the contest is fun?
+ emh: yes hehe
+ emh: after initially thinking it was not
+ Illedan: I want to buy the boardgame and play it :P
+ jacek: oO
+ struct: A bit of a pain to sim but I think its fun
+ jacek: viewer could be more descriptive
+ struct: yeah
+ struct: Do they accept pull requests?
+ struct: push
+ struct: or w/e its called
+ Illedan: yes
+ struct: Maybe I can add a debug toggle?
+ Illedan: And break all previous replays? :D 
+ Dapps: debug toggle would be nice
+ struct: It doesnt break
+ Illedan: oh
+ Illedan: Do it anyway
+ Illedan: show the applications below the admin desk as 2 squares with the color of requirement :D
+ struct: impossible to fit all the applications
+ struct: I havent decided if I will do it or not yet, havent even looked at referee
+ j4at: Why the statement doesn't mention the sizes of the card piles at all :thinking:&#160;?
+ struct: what card piles?
+ j4at: bonus / debt
+ emh: Each of those desks contains 5 skill cards at the beginning of the game.
+ j4at: <a rel="nofollow" class="external free" href="https://github.com/societe-generale/GreenCircle/blob/f561d3bdcbd3ed9154caa26c8f644df641af363d/src/main/java/com/codingame/game/Game.java#L90">https://github.com/societe-generale/GreenCircle/blob/f561d3bdcbd3ed9154caa26c8f644df641af363d/src/main/java/com/codingame/game/Game.java#L90</a>
+ struct:  36 BONUS skill and 100 Technical Debt cards available on the board.
+ j4at: Yep, its not in the statement
+ struct: I guess its only available on bronze
+ j4at: ow
+ Illedan: Hmm, what to do with the dance when both player swap on jumping above each other :thinking:
+ struct: wdym?
+ Illedan: When both players avoid to stop next to the other
+ struct: no idea
+ emh: ohh just realized MOVE can take two parameters
+ emh: thought it was automatic to get from other desk if it was empty
+ FrankR: what does it mean for Training and Coding to be able to "play X more card(s) from their hand"? Can you immediately play Training and then another card like Refactoring?
+ struct: yes I think it means you can play N more cards  on that turn
+ struct: So you could do that yeah
+ struct: since training allows you to play 1 more card
+ eulerscheZahl: i checked the referee and can confirm
+ FrankR: and if you draw another training or coding, you can just keep it going and draw through your deck further?
+ eulerscheZahl: there is a bug active currently where you can keep training until the game ends
+ FrankR: I thought all cards you play just go to discard and you reuse them next round?
+ struct: The bug happens if you use training and have no cards to draw
+ FrankR: oh.. or did you mean training until turn 200?
+ eulerscheZahl: yes, you can currently block your opponent from ever playing
+ Dapps: any word when it will be fixed?
+ eulerscheZahl: check the forum. they have a fix but not deployed yet
+ struct: We are out of task prio cards sorry
+ MSmits: hey, when moving, in what order does move (gain card)/give/throw happen?
+ FrankR: how does it work? does the played training go immediately into discard, is reshuffled into draw and then drawn?or is discard reshuffled into draw, it draws and the played training is then discarded?
+ Illedan: move, throw, give, gain
+ Illedan: I think
+ MSmits: so you gain the card last?
+ struct: So I must give before gaining?
+ struct: (╯°□°）╯︵ ┻━┻
+ JohnyDaison: Speaking of Task priority, can someone explain this?<a rel="nofollow" class="external free" href="https://pastebin.com/U8ufuyJN">https://pastebin.com/U8ufuyJN</a>
+ MSmits: time to look at referee again..
+ Illedan: A bug JohnyDaison, it is fixed. not deployed
+ Illedan: MSmits<a rel="nofollow" class="external free" href="https://github.com/societe-generale/GreenCircle/blob/e2537b2b5ae176e2b7face51ba6b2d35c3cc3267/src/main/java/com/codingame/game/Referee.java#L126">https://github.com/societe-generale/GreenCircle/blob/e2537b2b5ae176e2b7face51ba6b2d35c3cc3267/src/main/java/com/codingame/game/Referee.java#L126</a>
+ Illedan: Throw first
+ Illedan: Then give
+ JohnyDaison: ok, so we're not supposed to play Task prio at all for now, or is there a workaround?
+ Illedan: Don't do it without CONTINUOUS_INTEGRATION on your hand :D
+ Illedan: And don't do it on CONTINUOUS_INTEGRATION without 2 of CI in your hand :P
+ JohnyDaison: you mean _with_?
+ Illedan: No
+ Illedan: Copy paste bug
+ JohnyDaison: so if I had 2 CI, it would work?
+ struct: so when I move next to opponent the tech cards go to the discard pile?
+ Illedan: mhm
+ MSmits: Illedan i saw that but still trying to find where it says you gain the card after throw/give
+ struct: MSmits from what I undestand from the viewer thats what happens
+ struct: you throw, give and then gain
+ MSmits: from viewer sure... i'd like to know from the referee though, just to be sure
+ struct: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/641838474">https://www.codingame.com/share-replay/641838474</a>
+ struct: check frame 83-84
+ struct: Moves: 3GIVE 4GIVE 8RANDOM
+ struct: HAND 0 0 0 0 1 0 0 0 1 3
+ MSmits: looks like it happens at the same time...
+ Illedan: Oh, the player tooltip contains more info, nice
+ struct: it just looks
+ MSmits: ahh but the order does not contain GIVE 5, so i guess you gain last
+ struct: They should have added empty action frames for some animations
+ MSmits: yeah
+ Illedan: ^
+ Mohebs: hello world
+ Mohebs: 🀱
+ AryanTripathi: btw we get 300 or 250 XP for our contribution getting approved?
+ AryanTripathi: demn so many people online in the chat
+ Ayza: 250 XP
+ Tanvir: I'm in the first league(wood 2), what are the usage of the cards which are in DRAW location? As application can only be released using the cards which are in HAND 
+ AryanTripathi: kk
+ JohnyDaison: your new HAND is drawn from DRAW
+ AryanTripathi: how to solve happy numbers I m confused
+ Tanvir: JonyDaison when it happens?
+ Mortis_666: At the beginning of your turn, your team draws 4 cards at random from their draw pile.
+ Tanvir: Are the cards in HAND replaced with the DRAW or juses added to the HAND
+ Tanvir: just*
+ struct: Can I use task prioritization to remove itself?
+ struct: Like TASK_PRIORITIZATION 3 5
+ MSmits: nooo don't break the game struct
+ MSmits: I am guessing you can't. If you can, that is a bug
+ struct: at least it doesnt show in moves 
+ MSmits: makes sense
+ struct: if you have 2 task prio you can though
+ MSmits: also makes sense
+ struct: yes
+ struct: same for Continuous integration I guess
+ MSmits: indeed
+ AryanTripathi: idk what's wrong with my solution
+ AryanTripathi: I am getting tle everytime
+ struct: Maybe you are not using the right algo
+ Ayza: are you talking about this puzzle <a rel="nofollow" class="external free" href="https://www.codingame.com/training/easy/happy-numbers">https://www.codingame.com/training/easy/happy-numbers</a>?
+ AryanTripathi: hmm
+ AryanTripathi: yep
+ AryanTripathi: uhm wait a second
+ AryanTripathi: is it from java coffe cup?
+ Ayza: yeah
+ AryanTripathi: then it is the one Im talking bout
+ AryanTripathi: here is my code
+ AryanTripathi: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/8f919c35-8767-45eb-85e4-00f55b830892">http://chat.codingame.com/pastebin/8f919c35-8767-45eb-85e4-00f55b830892</a>
+ j4at: infinite loop
+ Ayza: not sure what's going on
+ Ayza: different from what I did
+ Ayza: but you're not checking for the infinite cycle
+ Ayza: or at least not correctly
+ DaNinja: and you have to output N lines, not just one
+ j4at: he is not even reading the inputs correctly
+ Ayza: huh your right the input isnt read
+ Ayza: only n
+ emh: submissions are starting to get pretty slow
+ BrunoFelthes: welcome to the jungle
+ GNye22: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/8cedf1b2-7a41-4b9e-a994-b56a8d8a04ba">http://chat.codingame.com/pastebin/8cedf1b2-7a41-4b9e-a994-b56a8d8a04ba</a>
+ Ayza: 10 minutes thinking about what I am doing wrong
+ Ayza: just had to change toString(s) to s.toString()
+ thoip2: planté? les runs ne bougent plus
+ Ayza: love javascript
+ GNye22: Has anyone done Death First Search Part 2?
+ GNye22: Or have an understanding of some basic BFS?
+ GNye22: I'm going through this algorithm in the posted article, but the cost calculation isn't making sense 
+ FrankR: I still don't understand this Task Prioritization.. If I have 3 cards of that type and my opponent 2.. why is it still possible to get one more via task prioritization?
+ MSmits: maybe you get a bonus card?
+ MSmits: damnit, i cant find a good opponent to test against. Either they are too strong or they keep doing the training bug
+ GNye22: Could someone take a quick peek at this for me and see if I'm just missing something here?
+ GNye22: I just am not understanding this line here: if connected_gw[i] &gt; 0 and parent &gt;= 0
+ GNye22: I don't understand why the cost would remain the same rather than be cost[cur_node] + 1
+ GNye22: article linked here: <a rel="nofollow" class="external free" href="https://www.codingame.com/blog/dfs-agent-skynet/?utm_source=codingame&amp;utm_medium=details-page&amp;utm_campaign=cg-blog&amp;utm_content=skynet-2">https://www.codingame.com/blog/dfs-agent-skynet/?utm_source=codingame&amp;utm_medium=details-page&amp;utm_campaign=cg-blog&amp;utm_content=skynet-2</a> Looking at the Thinking as the Player section
+ VizGhar: Hey guys, any news?
+ maxlabinch: war in ukraine (it's a good news
+ maxlabinch: )
+ aangairbender: :confused:
+ maxlabinch: :innocent:
+ JohnyDaison: GNye22 that specific line handles the case when you reach the last node before the gateway, so the path is finished, no need to +1, the else below does +1 in every other case
+ MSmits: If the team goes through the administrative task desk (between the desks 7 and 0), they lose 2 skills cards from their hand (they can choose which ones).  
+ MSmits: Discard or back to board?
+ aangairbender: back to board
+ MSmits: ah that's painful
+ aangairbender: that's helpful I think, no other way to get rid of trash cards (except give or prioritize)
+ elderlybeginner: amount of input data is overwhelming
+ GNye22: JohnyDaison but I'm confused, if you take a look at the graph used in that article, it's trying to calculate shortest turn cost from the source node, but using that algorithm, that specific line would initialize the cost of Node 2 to 1, but the cost of Node 2 should be 2, or am I doing something wrong?
+ MSmits: aangairbender do you get so many trash cards then? You get to choose which desks you go to right?
+ JohnyDaison: GNye22 the "cost" is not the distance the robot has to travel, but distance to nearest gateway
+ GNye22: ok, so then how is the cost of Node 1 come out to 1? 
+ JohnyDaison: you are running the code?
+ GNye22: Because starting with the node vertex, whose cost is 0, node 1 is reachable from the source and is not visited and then because it is not connected to a gateway its cost becomes cost[source] + 1, so its cost would be 1
+ GNye22: And no, I'm tracing it on paper cuz its just pseudocode, I'm just not following
+ GNye22: Running through that algorithm basically just marked every non-gateway as a cost of 1 and all gateways as a cost of 2 for that specific graph so I'm majorly confused
+ BrunoFelthes: can I see the applications at the visual interface?
+ JohnyDaison: GNye22 hm, looking at it again, I'm confused too. Seems like maybe something was omitted in the pseudo code or there is logical error 
+ GNye22: Ok, at least I'm not crazy haha, I was starting to think I was lmao
+ BrunoFelthes: Can someone help me? I have 2 bonus cards + 1 skill card. And an applications that costs 4 from on skill, and 4 from the skill from my card, should I be able to release the application?
+ therealbeef: BrunoFelthes nope, and nope
+ BrunoFelthes: why? what i'm missing?
+ eulerscheZahl: if the skill card is one of the required, why not?
+ eulerscheZahl: no and yes to my understanding
+ struct: I would say yes?
+ therealbeef: sorry, nope and yes indeed
+ struct: since you have 4 good points and 4 bad
+ GNye22: Which program are we discussing here ^
+ struct: Green circle
+ therealbeef: Irony Circle
+ MSmits: what is confusing about this game is you don't know what phases just happened
+ struct: wdym MSmits?
+ MSmits: even with throwing cards. If you have to throw 2 cards, it's 2 different phases
+ MSmits: so if you already threw 1 card, there is no way to know from the input you did so
+ kovi: im just implementing phase que
+ struct: check previous phase MSmits
+ MSmits: is that given in input?
+ struct: no
+ struct: you are right  yes
+ MSmits: that's what i meant, it's weird
+ struct: but its easy to work around it
+ MSmits: yeah it can be worked around, but it's painful when connecting your sim to the real game
+ BrunoFelthes: it is at the input MSmits
+ MSmits: the gamephase is
+ struct: yes bruno but you can distinguish between 1st thor and 2nd
+ MSmits: but not the previous gamephase
+ struct: cant*
+ MSmits: same with training 
+ struct: Since they are both THROW_PHASE
+ MSmits: i mean coding, the thingy that lets you play 2 cards
+ aangairbender: you can check amount of cards in your hand maybe
+ MSmits: you just need to record your previous phase i suppose
+ MSmits: but that doesnt work when you chain coding cards
+ aangairbender: yeah that's the easiest way
+ MSmits: you basically need to record the number of plays left, like in the referee
+ aangairbender: also if action is performed automatically this doesnt work
+ struct: yes MSmits
+ BrunoFelthes: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/641931584">https://www.codingame.com/replay/641931584</a> at the turn 80, i have a application with the following requirement: [0,4,0,0,0,0,4,0], why it did not opened the release fase?
+ JohnyDaison: The fifth App is not allowed to have shoddy skills used for it
+ BrunoFelthes: hummmmm
+ BrunoFelthes: ok
+ MSmits: pfft shoddy coders
+ therealbeef: Seems they didn't exactly follow the way of working that is advertised in this game
+ MSmits: what are you referring to therealbeef?
+ MSmits: (I don't disagree btw)
+ SonByrne: is this one shorter or longer than the last challenge?
+ MSmits: same
+ therealbeef: the game could have benefitted from some more code review, architecture study, daily routines, etc
+ MSmits: :grin:
+ [SG]Sebastien: I agree. If you want to review the next version before we ship it, it's here&#160;: <a rel="nofollow" class="external free" href="https://github.com/societe-generale/GreenCircle">https://github.com/societe-generale/GreenCircle</a>
+ struct: games always make it through its normal
+ struct: I still remember double HULK
+ eulerscheZahl: tower pull was funnier
+ jacek: double hulk?
+ eulerscheZahl: were you around at BotG contest jacek?
+ jacek: nope. im quite newbie here
+ eulerscheZahl: you are too young to our community
+ eulerscheZahl: there was a hero selection in the game. with WAIT for default hero
+ eulerscheZahl: you could spawn a HULK and then WAIT for another hulk
+ jacek: is hulk op?
+ eulerscheZahl: yes
+ eulerscheZahl: and ceg was complaining in chat about a guy with 2 hulks at the top of gold. didn't believe him until he shared a replay
+ eulerscheZahl: hilarious
+ eulerscheZahl: and you could also move the tower that represents your base with skill effects
+ Illedan: -.-
+ jacek: do you have some script for joining multiple java files into one?
+ struct: <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/cgfilemerge-merge-multi-file-workspace-into-one-cg-conform-file/168545/3">https://www.codingame.com/forum/t/cgfilemerge-merge-multi-file-workspace-into-one-cg-conform-file/168545/3</a>
+ [SG]Sebastien: The tower was movable too?
+ MSmits: jacek i also wasn't there, we are both too young. 
+ jacek: thx
+ MSmits: I joined almost immediately after though
+ MSmits: or maybe it was after meanmax
+ struct: lets not forget that SC 2021 had a massive bug too on day 1
+ struct: and I tested for it ...
+ MSmits: did you? Or were you too busy with StC?
+ struct: I dont remember
+ struct: I spent so much time on it
+ struct: hard to say
+ jacek: bug?
+ jacek: hex games are perfect
+ MSmits: indeed
+ struct: <a rel="nofollow" class="external free" href="https://github.com/CodinGame/SpringChallenge2021/commit/81b70c8726e3f6f89365c603853214aaa5fef421">https://github.com/CodinGame/SpringChallenge2021/commit/81b70c8726e3f6f89365c603853214aaa5fef421</a>
+ struct: if you had more seeds and crashed your bot you would win
+ struct: if the scores were the same
+ IAmTheBestPlayer: hello I am the best player
+ MSmits: confidence
+ PatrickMcGinnisII: gotta go to a bday party, but I'm thinking MCTS is best for Green circle... anyone else trying this?
+ MSmits: PatrickMcGinnisII take into account the fact that there are probabilistic elements. a move does not always lead to the same gamestate
+ MSmits: so you can't directly connect actions to nodes
+ MSmits: unless the nodes don't represent gamestates
+ MSmits: for example, when playing a training card
+ MSmits: you draw 2 cards, but you dont know which
+ MSmits: you might think: States not connected to nodes? No opponent interaction? Let's use smitsimax. But the probability thing is like an opponent interacting with your bot, it is an outside influence
+ Ayushman965: where are you guys coding this?
+ jacek: at home
+ MSmits: in a nuclea bunker
+ MSmits: +r
+ PatrickMcGinnisII: yea, I just finished my structures and gamestate stuff.  There's so much stuff, I'm not sure what to trim as far as making cloning faster.  But if I were able to run 1k sims for each possible move, that sounds like a probability curve could be generated
+ kovi: i agree msmits, but maybe we can simplify random draw and assign to action groups
+ BrunoFelthes: i will just add a million if else
+ MSmits: sure yeah, it just needs some kind of dirty solution
+ struct: never again
+ MSmits: or a if else tree, which is in line with the company policy. Save energy
+ BrunoFelthes: much better than run ten minutes finding a solution
+ Illedan: Ah, we need to code green?
+ BrunoFelthes: lets save energy
+ MSmits: yeah Illedan
+ Illedan: Should only allow 1 submit during the contest
+ Scarfield: less computation time should give more points
+ BrunoFelthes: hauhauhuhuahua
+ PatrickMcGinnisII: gamestate eval seems kinda simple... number of releases adjusted by remaining required somehow
+ BrunoFelthes: 1ms each turn
+ MSmits: ye let's penalize all those python users&#160;:)
+ struct: This is why Im not using a NN for this contest
+ MSmits: Oh yeah me too
+ MSmits: Also, I am not  a multi-millionaire because they have a high carbon-footprint
+ PatrickMcGinnisII: gtg, i'll think about the linear algebra involved while eating cake.&#160;;)
+ MSmits: wait, before you do this
+ MSmits: there's lots of math about dividing cake fairly between cake eaters
+ MSmits: don't miss the opportunity
+ struct: CONTINUOUS_INTEGRATION give the same skills and shoddy right?
+ struct: as if it was in hand
+ struct: for release
+ MSmits: yeah
+ MSmits: and it stays till end of game
+ struct: thanks
+ PatrickMcGinnisII: let them eat cake, i'll eat the icing
+ PatrickMcGinnisII: :birthday:
+ MSmits: congrats
+ Dream1234: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/319fe3ed-219c-46bc-a81e-dd11d6dbc097">http://chat.codingame.com/pastebin/319fe3ed-219c-46bc-a81e-dd11d6dbc097</a>
+ MSmits: :balloon:
+ MSmits: (there is no blimp emote&#160;:( )
+ jacek: can we recreate game state from the inputs?
+ MSmits: no
+ MSmits: some things are missing
+ MSmits: opponent hand is secret
+ MSmits: also you need to keep track of the phase
+ jacek: :rage:
+ MSmits: if the previous phase was throw and the current phase is throw you need to throw 1 more card, if the previous phase was not throw and the current one is, you need to throw 2 cards
+ struct: Ill just ignore opponent
+ MSmits: well you do need to know his current position
+ MSmits: and what cards he has in total
+ MSmits: otherwise you cant sim yourself
+ struct: I mean Ill act like he cant move
+ MSmits: there's a better way
+ MSmits: act like he's not on the board for subsequent rounds
+ MSmits: otherwise you will bias your search toward dealing with that permanent location he is on
+ struct: I see
+ struct: Il ltry
+ Dream1234: Hello
+ struct: I only have coded move gen yet
+ MSmits: I am working on sim, but it is messy
+ MSmits: trying without playing cards first
+ Dream1234: do people swear or its community freindly
+ MSmits: dont even know what including training and coding will do
+ MSmits: those are not mutually exclusive Dream1234
+ MSmits: I can be friendly, yet swear
+ MSmits: or be unfriendly and not swear
+ Dream1234: okay thx
+ jacek: bloody hell, why
+ Dream1234: language
+ linjoehan: with chrono how do I add a duration to a timepoint?  time_point endtime = starttime + timelimit;
+ Dream1234: language bro
+ Ayushman965: where in website are you coding this?
+ Scarfield: c++
+ Dream1234: hello
+ Ayushman965: hello
+ MSmits: I am coding in Visual studio
+ Ayushman965: how do i join the card game coding contest?
+ MSmits: <a rel="nofollow" class="external free" href="https://www.codingame.com/events">https://www.codingame.com/events</a>
+ Scarfield: <a rel="nofollow" class="external free" href="https://www.codingame.com/contests/green-circle">https://www.codingame.com/contests/green-circle</a>
+ Scarfield: bah
+ MSmits: Slowfield
+ linjoehan: std::chrono::duration&lt;double&gt; timelimit (0.090);std::chrono::high_resolution_clock::time_point starttime = std::chrono::high_resolution_clock::now();std::chrono::high_resolution_clock::time_point endtime = starttime + timelimit;
+ Scarfield: Greenfield
+ linjoehan: Sigh that didn't work
+ Scarfield: dont waste resourses
+ MSmits: no it needs to go in the IDE linjoehan
+ Scarfield: xD
+ linjoehan: <a rel="nofollow" class="external free" href="https://pastebin.com/MKXBrLwK">https://pastebin.com/MKXBrLwK</a>
+ MSmits: anyone ever paste his entire bot in the chat? 
+ MSmits: accidentally/
+ MSmits: I almost did this once or twice when i was in a hurry and the site was slow
+ linjoehan: anyway how do I do this right <a rel="nofollow" class="external free" href="https://pastebin.com/MKXBrLwK">https://pastebin.com/MKXBrLwK</a>
+ MSmits: I can paste a snippet form my bot
+ Dream1234: join my clash:
+ MSmits: sec
+ Dream1234: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/246454335db471c0b7808da4fbb50225c473a5d">https://www.codingame.com/clashofcode/clash/246454335db471c0b7808da4fbb50225c473a5d</a>
+ antiwonto: [auto] hey Dream1234 dont paste those links here.  Use the channel #clash
+ Dream1234: okay
+ Scarfield: i just calc the duration, and when its over some threshold break
+ Dream1234: #clash
+ MSmits: start = std::chrono::high_resolution_clock::now();
+ MSmits: 			now = std::chrono::high_resolution_clock::now();			calcTime = std::chrono::duration_cast&lt;std::chrono::microseconds&gt;(now - start).count();
+ MSmits: this works linjoehan
+ linjoehan: thats getting the duration I want to add the duration to the starttime
+ MSmits: hmm i dont know how that works. Never needed that
+ Dream1234: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/7138cba6-38b4-44f4-917f-1b4d0124e69a">http://chat.codingame.com/pastebin/7138cba6-38b4-44f4-917f-1b4d0124e69a</a>
+ MSmits: why do you need it?
+ Illedan: Refresh the page everyone
+ Illedan: new game update
+ Illedan: to get the new viewer
+ Illedan: :D
+ [SG]Sebastien: yup, the new version is here
+ Dream1234: okay
+ linjoehan: I guess I do my timing a little different
+ MSmits: I see the apps!
+ Dream1234: join: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/246454335db471c0b7808da4fbb50225c473a5d">https://www.codingame.com/clashofcode/clash/246454335db471c0b7808da4fbb50225c473a5d</a>
+ linjoehan: I jump out of calculations when now &gt; endtime
+ struct: nice the tooltips help
+ Dream1234: @antiwonto are you admin?
+ MSmits: you mean to avoid having to calculate a duration many times?
+ MSmits: that's smart
+ Dream1234: lol
+ MSmits: never considered that
+ struct: just check the timer every N iterations
+ struct: thats what I do
+ MSmits: yeah but you still calculate a duration every time
+ MSmits: that's wasteful
+ Dream1234: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/246454335db471c0b7808da4fbb50225c473a5d">https://www.codingame.com/clashofcode/clash/246454335db471c0b7808da4fbb50225c473a5d</a>
+ antiwonto: [auto] hey Dream1234 dont paste those links here.  Use the channel #clash
+ Dream1234: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/246454335db471c0b7808da4fbb50225c473a5dhttps://www.codingame.com/clashofcode/clash/246454335db471c0b7808da4fbb50225c473a5d">https://www.codingame.com/clashofcode/clash/246454335db471c0b7808da4fbb50225c473a5dhttps://www.codingame.com/clashofcode/clash/246454335db471c0b7808da4fbb50225c473a5d</a>
+ Dream1234: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/246454335db471c0b7808da4fbb50225c473a5d">https://www.codingame.com/clashofcode/clash/246454335db471c0b7808da4fbb50225c473a5d</a>
+ antiwonto: [auto] hey Dream1234 dont paste those links here.  Use the channel #clash
+ antiwonto: [auto] hey Dream1234 dont paste those links here.  Use the channel #clash
+ struct: next one will be a ban
+ MSmits: antiwonto is spamming too :P:
+ kovi: lovely tooltips, thx [SG]Sebastien
+ [SG]Sebastien: you're welcome
+ struct: only thing missing now imo is empty frames
+ linjoehan: MSmits I don't calculate it everytime just at the start of my turn I do a ton of if now &gt; endtime
+ MSmits: yes, that was my point
+ MSmits: it is smart
+ MSmits: you avoid calculating durations
+ MSmits: I recognize your genius
+ linjoehan: Ah yes "That's the reason I did it)
+ linjoehan: Now I need to figure how to do it
+ linjoehan: Ok chrono documentation where are you
+ AbrahamJLR: Rip, 504 Gateway Time-out error while i'm playing.&#160;:'D
+ emh: me too
+ MSmits: same
+ TINOUAINANI: Helllllllppp :joy:
+ aangairbender: I guess it for everybody
+ MSmits: at least we can still chat. That is the important part
+ linjoehan: me too
+ MSmits: yes you are also an important part
+ MSmits: without you there would be no checkers
+ linjoehan: No not that I was me tooing on the 504
+ jacek: checkers? that tutorial game?
+ TINOUAINANI: its back
+ linjoehan: Its a tutorial game now?
+ MSmits: no jacek = sarcasm
+ jacek: in other words: jacek = no sarcasm
+ MSmits: that's meta-sarcasm
+ Scarfield: no jacek =&#160;?
+ linjoehan: sarcasm is not allowed in chat, also I never get sarcasm goes over my head everytime
+ BrunoFelthes: no technical debit is the new meta?
+ Illedan: There is a meta?
+ BrunoFelthes: yeah, you are the first you, you are the meta
+ BrunoFelthes: i will copy you
+ Illedan: I played a lot of card building board games :P
+ MSmits: linjoehan this is a good thing. It makes you feel jacek is complimenting you all the time
+ linjoehan: yeah his #1 in checkers using a NN. that's amazing
+ MSmits: yep
+ TINOUAINANI: the application needs are the given by number of cards or number of skills neded&#160;?
+ jacek: how do you know its NN?
+ MSmits: we know its jacek
+ struct: its jacekmax
+ linjoehan: man I don't know how to read documentation
+ Westicles: Something is missing... why aren't people as when silver opens over and over like usual?
+ Westicles: *asking
+ MSmits: they are too busy reading the statement for the 23rd time
+ MSmits: or maybe the previous contest wasnt that long ago and many players here are not 1st timers
+ jacek: by now youd get 2k in bronze
+ MSmits: game is hard
+ MSmits: btw, another thing that is missing from input
+ struct: I should have released backgammon before the contest
+ struct: so people could practice for this
+ MSmits: once you're throwing away cards at admin desk, you dont know where your bot is going&#160;:)
+ MSmits: you really need to keep track of a lot of decisions your bot made
+ struct: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/641969770">https://www.codingame.com/replay/641969770</a>
+ struct: I think this is a bug
+ struct: I release 5th app and game still goes on
+ MSmits: opponent gets same number of turns
+ struct: ah
+ MSmits: i am guessing you are player 1
+ struct: "The hackathon stops as soon as one team releases its 5th application."
+ struct: So I guess the statement is wrong?
+ MSmits: well just poorly worded. It's corrected further down
+ Scarfield: "When a team has released 5 applications, the game will end once all teams have played the same amount of turns."
+ struct: ah but then its corrected
+ struct: I see
+ struct: A bit confusing sorry
+ MSmits: this game has a lot of those
+ MSmits: I remember with ooc the only confusing part was that I thought you could teleport using surface
+ therealbeef: very agile: working software over documentation
+ Scarfield: yea the statement is lacking unfortunately, but statements are hard to write when you know how the game works, and dont know what people will question
+ pedrosorio: "very agile: working software" hmm
+ MSmits: yeah, i am not criticizing the achievement of making this game, just stating the obvious. I wouldn't be able to pull this off anyway
+ MSmits: making games is hard as struct said
+ AdemDj12: is there an event running rn
+ MSmits: yes
+ AdemDj12: where i can find it
+ MSmits: click on events
+ Scarfield: <a rel="nofollow" class="external free" href="https://www.codingame.com/home">https://www.codingame.com/home</a>
+ Scarfield: <a rel="nofollow" class="external free" href="https://www.codingame.com/events">https://www.codingame.com/events</a>
+ Myrky: Hey
+ Westicles: what a great name
+ Westicles: University of Kasdi Merbah Ouargla
+ MSmits: Sounds like you're casting a spell Westicles
+ Myrky: Can someone give me a tip on the Body weight is a girl's secretproblem?
+ Myrky: What`s the math trick?
+ jacek:  / 0
+ Westicles: you can solve it on a piece of paper with simple formulas
+ Myrky: I tried a system of ecuations
+ Myrky: But you don`t know the order of the pairs
+ Westicles: the biggest number is sum of two heaviest, same with smallest, etc.  you can logic it out
+ AdemDj12: omg whats this
+ Myrky: ok got 
+ Myrky: Thank you
+ Myrky: That`s what I was missing
+ MSmits: AdemDj12 are you blown away by the statement of the event?
+ AdemDj12: yup too much to read specially when my english is on the weak side
+ Westicles: there's are french version if that helps...
+ AdemDj12: so the application need some ingrediants to be released am i right
+ Myrky: Thank you guys, I did it. You rock
+ AdemDj12: Westicles why would you assume my french is better than my eng
+ Westicles: because french is the language of love? :P
+ MSmits: :heart:
+ AdemDj12: lol i would love if we could translate statments &lt;3
+ MSmits: there's chrome addons
+ MSmits: maybe if you translate it back and forth between several languages it would resolve some of the confusion
+ AdemDj12: yup but memebers can do better job 
+ pedrosorio: MSmits xD
+ struct: This contest is hard
+ jacek: :no_mouth:
+ MSmits: yes
+ pedrosorio: so maaaany rules
+ struct: im already exhausted and its been 1 day
+ struct: maybe its the heat
+ AdemDj12: i am confused a bit
+ pedrosorio: you can feel the competition, buggy code 12h ago ~40th place, drops to 80th over time, fix all the bugs, 40th place again
+ pedrosorio: AdemDj12 aren't we all
+ MSmits: he only just read it, which is why he is only confused a bit
+ pedrosorio: lol
+ MSmits: it will get worse before it gets better AdemDj12
+ AdemDj12: every application need one bunch of this things to  ( 
+ AdemDj12: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/789275f4-4330-42ef-9acc-85887efcd183">http://chat.codingame.com/pastebin/789275f4-4330-42ef-9acc-85887efcd183</a>
+ MSmits: you need to turn the wordy stuff into array indices
+ AdemDj12: i need to move my character in optimal way to complete every app and release it 
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/f2c21552-9e42-408d-8679-37ce2e1f3c65">http://chat.codingame.com/pastebin/f2c21552-9e42-408d-8679-37ce2e1f3c65</a>
+ AdemDj12: right&#160;?!
+ MSmits: sure thats part of it
+ AdemDj12: what the card part i am missing
+ MSmits: you are missing a lot
+ AdemDj12: whats*
+ MSmits: i cant explain it in a few sentences
+ AdemDj12: yup i think
+ MSmits: try wood first
+ MSmits: dont worry about cards
+ AdemDj12: i am in wood 
+ MSmits: i mean playing cards
+ MSmits: just do the releases
+ UndyingDictator_c722: I need a hint on problem Object Insertion
+ MSmits: move and release
+ linjoehan: Ah ok solved the timer thin no more timeouts
+ MSmits: nice
+ linjoehan: I set the duration as a double and it didnt like I found the alias thingys and used that
+ struct: oh we get 2 matches now
+ struct: nice
+ linjoehan: std::chrono::high_resolution_clock::time_point endtime = starttime + std::chrono::milliseconds(timelimit);
+ MSmits: I am saving that snippet
+ linjoehan: I knew you would, right now I got to figure how to not get stuck in draws
+ jacek: in checkers? impossibru
+ struct: it is really impossible
+ struct: I shared end game database here before
+ linjoehan: lol Im actuall playing checkers again. Some dude sent me a msg to tell me that he is finally ahead of me now I got to gofix the damn thing
+ jacek: w00t
+ linjoehan: It is possible for me <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/641982256">https://www.codingame.com/replay/641982256</a>
+ linjoehan: I don't save the game history I bet you can tell
+ jacek: i do. maybe thats why i can escape some draws
+ Westicles: UndyingDictator_c722, I just used 4 nested loops
+ linjoehan: Do you have a punish for reaching the same position when you are ahead? jacek
+ linjoehan: Oh no you would not you use a NN
+ struct: Here are the endgame db
+ struct: <a rel="nofollow" class="external free" href="http://www.edgilbert.org/EnglishCheckers/KingsRowEnglish.htm">http://www.edgilbert.org/EnglishCheckers/KingsRowEnglish.htm</a>
+ struct: if you want
+ jacek: i have transposition table and if i encounter the same position, i just use 0.5 * NN's eval + 0.5 * draw
+ struct: 102gb
+ linjoehan: Now how do I get that into my CG code 
+ struct: I think recurse tried to use this
+ linjoehan: Ah jacek some mathemagic nice
+ struct: not sure if he succeeded or not 
+ struct: Can you paste the NN's eval jacek?
+ struct: ty
+ jacek: its simple: repeated position are meh. if NN thinks its good position, it will avoid it. if its bad, it will be encouraged to draw
+ jacek: only second layer. you can easily reconstruct the rest
+ jacek: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/e7efcd85-e777-400d-8dd4-362f3050dcea">http://chat.codingame.com/pastebin/e7efcd85-e777-400d-8dd4-362f3050dcea</a>
+ linjoehan: It is simple but simple is often rather pretty and genius
+ struct: ty, I will now reverse engineer this and make counter book against you
+ linjoehan: It's only simpole once you've seen the answer
+ Scarfield: is jacek a simpole?
+ linjoehan: Does that say that your father played a cello in the band
+ linjoehan: I think without the timeouts I will pass him again then I don't have to fix the draw thing
+ linjoehan: I haven't touched this thing in over 2 years it's funny what a little ego can make you do
+ MSmits: it's even funnier what a large ego can make you do
+ linjoehan: how big is the database for all of checkers. I know it exists.
+ MSmits: no it does not
+ MSmits: there exists an endgame DB of 10 pieces
+ MSmits: and there exists a partially stored game tree that proves a draw
+ MSmits: on perfect play
+ jacek: next step since oware?
+ MSmits: otherwise you'd need to store around 10^21 states
+ linjoehan: The dudes that crunched the game to determine that the starting position is a draw, they must have it
+ MSmits: no
+ jacek: they weakly solved it
+ linjoehan: ah it's a perfect play db 
+ MSmits: the genius of their result is that they did not need all of the states
+ MSmits: it's weakly solved, not strongly solved
+ MSmits: oware is strongly solved
+ MSmits: I am trying to weakly solve it
+ jacek: an interesting read <a rel="nofollow" class="external free" href="http://www.fierz.ch/cake186.php">http://www.fierz.ch/cake186.php</a>
+ struct: Even I am able to strongly solve games like TTT
+ MSmits: kudos&#160;:)
+ jacek: even the guy got convinced into n-tuples
+ Scarfield: i only managed to solve TT
+ MSmits: no Toe?
+ Scarfield: nope, to difficult
+ MSmits: or no Tic?
+ Scarfield: actually just TicTic
+ MSmits: ahh ok
+ Scarfield: i struggle to get motivated on this contest, you guys enjoy it?
+ Illedan: Sure
+ MSmits: kind of yeah, but it's a lot of work
+ Illedan: I didn't do anything serious yet though
+ Scarfield: okay, just need to get over the implementation i suppose
+ MSmits: no sim Illedan?
+ MSmits: i am working on mine, sort of, but it's a mess
+ Illedan: Me?
+ Illedan: haha
+ struct: Mine is a mess too 
+ Illedan: 300 lines
+ struct: But I just want a bugless sim for now
+ Illedan: IF partty
+ Illedan: Like this:
+ MSmits: I am near 500, but it can be refactored into something much smaller probably
+ struct: 800 lines...
+ NNWWSS: im new and i have programed a lego robot with no training
+ MSmits: do you mean the robot has no training or you don't&#160;?
+ NNWWSS: no i have no training
+ BrunoFelthes: changing from js to java :P
+ MSmits: and the robot does?
+ NNWWSS: it got past a big obstical
+ MSmits: did it destroy the obstacle?
+ NNWWSS: it passed it
+ NNWWSS: and the lego robot can also pick up a lego brick and move it to another spot
+ MSmits: any spot?
+ NNWWSS: also the robot have a color sensor and a button that if pressed does an action and it also has a camera and a ultra sonic sensor
+ NNWWSS: yes any spot
+ MSmits: ok
+ MSmits: sounds cool
+ NNWWSS: and it also can make any sound that you want it to
+ NNWWSS: and im only just passed 5th grade
+ MSmits: ahh I see
+ NNWWSS: i was told from testing that if i was in a class of 100 kids i would be the smartest one
+ MSmits: ah, I think most of us here would
+ linjoehan: how tells you that?
+ MSmits: except jacek
+ linjoehan: *who tells you that?
+ NNWWSS: i was also getting extra work caus i got my work done way before everyone else
+ NNWWSS: my teacher
+ NNWWSS: and my mom
+ NNWWSS: and my other teacher
+ MSmits: ahh ok, this site is only right for you if you can do some python coding or some other written language
+ MSmits: if you've only used coding blocks in lego mindstorms, that might not be enough
+ NNWWSS: my teacher thinks that i should become a programmer
+ MSmits: probably you should yes
+ NNWWSS: so im gonna learn more and program more
+ linjoehan: do you like math?
+ NNWWSS: like math?
+ MSmits: sure, but as i said, if you have no programming experience at all, this site will be too hard.  you need to know how to use loops, if/elses, input and output
+ NNWWSS: I love math
+ NNWWSS: ok
+ MSmits: if you dont know those yet, you'll learn them in less than a week on a different site
+ MSmits: not sure which is best
+ NNWWSS: ok
+ NNWWSS: scratch maybe?
+ MSmits: just saying, you can learn a lot here, but it's not for complet ebeginners
+ MSmits: no, scratch is also visual, with coding blocks
+ NNWWSS: ye
+ MSmits: you need real code
+ linjoehan: Oh no not scratch
+ NNWWSS: ok
+ MSmits: you can experiment with python turtle maybe
+ MSmits: to start with
+ MSmits: and then do stuff with the console
+ NNWWSS: also for the lego robot i programmed it all by myself
+ NNWWSS: no help at all
+ VizGhar: go for python, easiest if you don't need to know what is going on HW level
+ MSmits: yeah, i am sure you got the computational thinking/logic down, but you need to learn about written code too, that takes some time
+ linjoehan: I hate python so much
+ NNWWSS: yes i bet it does
+ MSmits: dont listen to linjoehan
+ MSmits: python is great
+ MSmits: but other languages are great too, they just take more time to setup sometimes
+ NNWWSS: everyone has their own opinions never judge someone elses opinion just because you dont like it
+ linjoehan: yeah I guess I hate it because I didn't learn it first
+ VizGhar: go perl :D
+ MSmits: NNWWSS go here: <a rel="nofollow" class="external free" href="https://trinket.io/">https://trinket.io/</a>
+ MSmits: import turtle
+ linjoehan: haha perl
+ NNWWSS: ok
+ MSmits: then turtle.forward(100)
+ MSmits: look up the documentation
+ MSmits: and make drawings
+ MSmits: good place to start
+ MSmits: but you need a real course after that
+ MSmits: python starter course
+ MSmits: on some website
+ MSmits: brb
+ NNWWSS: ok
+ linjoehan: Is there a decent gamified coding thing for new coders?
+ linjoehan: Asking for a friend
+ NNWWSS: well ima go bye
+ BoBot: of course when I changed the code to not moving next to opponent, I did not check that I would not move to the same room where I was....ez bronze now
+ VizGhar: linjoehan I didn't find such resource (for free). Would like to see one... So I'm working on my own. But I have close to 0 time for that, so it will probably fade away
+ JohnyDaison: VizGhar do you know about Scratch&#160;?
+ VizGhar: I know about scratch... but block coding is not enough to teach high schoolers
+ MSmits: I agree
+ MSmits: It's not enough for this 5th grader either I think, not for long
+ MSmits: block coding is only good to introduce computational thinking, so as not to get distracted by syntax
+ VizGhar: I think breaking point is somewhere between 5-7 grade (switch to normal typing)
+ MSmits: it depends a lot on the student
+ Rafarafa: is the default ai in green circle entirely deterministic or it has random moves mixed in?
+ Mario_dev: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/59e7805b-f81e-4afc-bbf4-fcde933a6807">http://chat.codingame.com/pastebin/59e7805b-f81e-4afc-bbf4-fcde933a6807</a>
+ JohnyDaison: Do you know <a rel="nofollow" class="external free" href="https://regexr.com/">https://regexr.com/</a>&#160;?
+ JohnyDaison: Click on Cheatsheet on the left
+ emh: when computing cards left in a desk should I take into account automated cards?
+ MSmits: yea
+ Illedan: All the input cards summed
+ emh: ok
+ struct: Good thing we have tooltips
+ struct: I though it was 100 tech+ 8
+ Illedan: 8?
+ struct: the 8 we start with
+ struct: 4 + 4 from opponent
+ Dream1234: print("hello")
+ Dream1234: answer = "Hello"
+ Dream1234: if answer == "Hello":
+ struct: dont spam
+ Dream1234: print("Good and you")
+ Dream1234: I am not!!
+ Dream1234: stop
+ Dream1234: hello
+ Dream1234: gg
+ Dream1234: xd
+ Dream1234: lol
+ Dream1234: coding for life
+ struct: next one will be a ban
+ cegprakash: Green circle! Wood to Bronze!Now Live!<a rel="nofollow" class="external free" href="https://www.twitch.tv/cegprakash">https://www.twitch.tv/cegprakash</a>
+ jacek: :tada:
+ struct: What are you going to code? search?
+ VizGhar: music too loud&#160;:|
+ Sarzorus: @cegprakash just starting or already bronze?
+ jacek: wood to bronze: print("RANDOM") [solved]
+ cegprakash: still in wood2 Sarzorus
+ Sarzorus: :thumbsup:
+ jacek: there are 198 distinct actions - am I right?
+ VizGhar: IDK, but your NN will be huge&#160;;)
+ jacek: just curious
+ struct: 198? I think thats wrong jacek
+ jacek: ok, 198 + RANDOM
+ jacek: at least that copy pasted referee and its action across thousand random games tell me
+ struct: 56 possible actions just for "move"
+ jacek: 28 for release
+ struct: 64*
+ struct: for move sorry
+ VizGhar: 64?MOVE 0/1/2/3/4/5/6/7
+ BrunoFelthes: MOVE 1 2
+ BrunoFelthes: MOVE 2 3
+ VizGhar: ah... ok
+ VizGhar: cardTypeToTake... Havent reached that point yet :P
+ MSmits: there's also that card with 2 indices
+ BrunoFelthes: i never use it
+ jacek: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/f4e7d554-2169-47f4-b1a7-dcdf8341653f">http://chat.codingame.com/pastebin/f4e7d554-2169-47f4-b1a7-dcdf8341653f</a>
+ MSmits: TASK_PRIORITIZATION
+ struct: task prio is 9*8
+ struct: so 72
+ BrunoFelthes: i use only 2 task prio
+ jacek: sorted
+ jacek: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/f7176bfc-4014-4fa7-97f6-70058ca689a0">http://chat.codingame.com/pastebin/f7176bfc-4014-4fa7-97f6-70058ca689a0</a>
+ MSmits: oh yeah, i forgot that daily routine thing
+ MSmits: that is annoying
+ struct: is not too bad
+ jacek: in game or real life
+ BrunoFelthes: why 28 release?
+ Illedan: All possible actions?
+ struct: mod 8
+ MSmits: no i mean it explodes by brute force&#160;:)
+ MSmits: my
+ struct: ah
+ jacek: there are 28 possible applications to randomly choose from
+ struct: well but you dont have 28 at the start do you?
+ struct: ah but they are all the same
+ struct: so id 0 is always equal for each game?
+ MSmits: yes
+ MSmits: they have fixed id
+ MSmits: you can tell from the fact that their numbers go up to 27
+ jacek: say, hypothetically if someone would train policy net, one would choose all possible moves as output layer. like in chess they use over 5000 nodes
+ jacek: so in this game, 198 is the output. most of them of course illegal
+ struct: I see
+ MSmits: and we are not criminals here
+ struct: Have you read the game name?
+ wlesavo: does DAILY_ROUTINE gives reach to both sides from the table, or only forward? 
+ struct: both sides
+ wlesavo: thx
+ jacek: actually it can be. since there are only 12 applications, we could artifically give them 0-11 ids
+ MSmits: for training purposes you want the ids to be fixed
+ MSmits: all apps can show up in a game
+ BrunoFelthes: for all games, the apps is always the same?
+ MSmits: the possible apps to choose 12 from are always numbered the same
+ MSmits: so number 26 in one game is the same app as number 26 in another game
+ MSmits: but number 26 is not always part of the game
+ BrunoFelthes: ok, 12 apps from 26
+ MSmits: from 28
+ BrunoFelthes: ok
+ MSmits: 8*7 / 2
+ MSmits: because there are 8 different skills
+ MSmits: and you dont pick 2 of the same type
+ MSmits: and the reversed order is the same app, so divided by 21
+ MSmits: 2
+ MSmits: I sort of have an endgame solver for the last app, but it almost never gets to the last app
+ VizGhar: I cant imagine how can somebody squish trained net to 100k chars...
+ MSmits: so not particularly helpful. But it helped me get the sim up and running and debug it
+ jacek: VizGhar yeah its unimaginable
+ MSmits: if my bot has a smiley face it solved (ignoring play cards still)
+ struct: MSmits this is not oware
+ MSmits: you can still solve it on your turn&#160;:)
+ MSmits: you control everything in your turn, all phases in a row
+ MSmits: the winning moves can be very bad moves in general. Just counting on the same if-forest for the whole game is not a good idea.
+ MSmits: like.. you may have to throw good cards away just to get a specific card from a desk, or even a bonus card
+ MSmits: so I brute forced my final turn
+ struct: I see
+ MSmits: but i havent included play_card uet
+ MSmits: yet
+ struct: Im still far away from having anything working
+ struct: But at least my move gen doesnt seem to have any more bugs
+ MSmits: task prio could get you a winning move also
+ MSmits: or maybe training or coding
+ MSmits: possibly training, probably not coding
+ struct: yeah
+ kovi: i still dont get it how they do without testing/debugging
+ struct: Need to search for searches that take into account&#160;%
+ MSmits: when you use that, you dont get a winning move, you get the move with the highest win probability
+ TINOUAINANI: is there is a bug whene we RELEASE application , i always validit it with less 1 skill or 2&#160;?
+ struct: wdym kovi?
+ MSmits: i think kovi is referring to the fact that testing and debugging is not a desk in the game?
+ kovi: yes&#160;:)
+ struct: ah lol
+ MSmits: I am not a professional coder and i got that one :P
+ struct: Im not a professional either
+ Rafarafa: so you don't have access to opponent deck
+ MSmits: of course you are, you work for CG
+ MSmits: hammering trolls
+ Rafarafa: you have to keep track of it or sth?
+ struct: Im a professional chat moderator 
+ wlesavo: btw is there any updates regarding infinite loops bug?
+ MSmits: i guess so&#160;:)
+ MSmits: isnt it fixed yet?
+ wlesavo: idk
+ kovi: afaik fixed
+ struct: what was the fix?
+ struct: What happens now if you use training and dont have cards to draw?
+ kovi: there is a played_cards pile
+ kovi: which is separate from discard pile
+ wlesavo: oh thx
+ MSmits: so you cant play a card twice in the same turn?
+ kovi: that is what i understand
+ MSmits: yet another thing to put into the sim
+ wlesavo: PLAYED_CARDS the cards you played during this turn and that will go to your discard pile at the end of your turn
+ kovi: i still dont use play
+ struct: Just make the used cards go into disacard pile MSmits
+ struct: or isnt it the same thing?
+ MSmits: yeah, but i could have infinite training in my sim if i am not careful&#160;:)
+ struct: how if the card goes into the discard pile?
+ MSmits: discard gets resuffled into draw pile
+ MSmits: even during a turn
+ struct: o.o
+ OldJohn: OK so silver (wo opening book!)
+ MSmits:&#160;?
+ jacek: hm?
+ struct: Where is the part that makes discard pile go into the draw pile 
+ struct: I cant find it in the statement
+ OldJohn: So time to stop for tohight... 
+ MSmits: i found it earlier today, sec
+ kovi: And their personal discard pile will be reshuffled into the draw pile when it gets empty.
+ jacek: you dont find many stuff in that statement
+ jacek: line racing?
+ OldJohn: No Green Circle
+ jacek: no silver in green circle oO
+ OldJohn: Ces cartes seront sa pioche personnelle et sa défausse sera recyclée pour refaire une pioche quand cette dernière sera épuisé
+ MSmits: ohh i thought you meant in the source struct
+ OldJohn: So yes Bronze&#160;:-)
+ MSmits: i saw it there earlier
+ struct: ah ok
+ struct: so how could the training loop happen?
+ OldJohn: 3 paragraph of the rules in french
+ struct: if the draw pile was empty shouldnt it get the cards from discard?
+ OldJohn: third
+ MSmits: yeah but the training card will go in there
+ MSmits: i will draw it again&#160;:(
+ MSmits: <a rel="nofollow" class="external free" href="https://github.com/societe-generale/GreenCircle/blob/62fb2c43108c1dd7d7fd2da8041f43567be36774/src/main/java/com/codingame/game/Player.java#L301">https://github.com/societe-generale/GreenCircle/blob/62fb2c43108c1dd7d7fd2da8041f43567be36774/src/main/java/com/codingame/game/Player.java#L301</a>
+ struct: So the exact moment the draw pile gets to 0 cards
+ Dream1234: lol hello
+ struct: then it should get all the cards from discard?
+ MSmits: yeah
+ struct: ok thanks
+ MSmits: np
+ MSmits: going to take a break
+ struct: same
+ TINOUAINANI: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/642039595">https://www.codingame.com/replay/642039595</a>
+ TINOUAINANI: at 48 i shold get one dept card
+ TINOUAINANI: becouse the applecation need 4 from tow deferent skills
+ TINOUAINANI: i have 4 from one skill and 2 from the ather one plus one bonus card i still need one skill but i didnt get dept card whay&#160;?
+ Illedan: MSmits, infinity draw is fixed
+ Illedan: Any cards used go into the PLAYED_CARDS list and you get them back when you are done with your round
+ cegprakash: holaa!!
+ cegprakash: promotion to wood1! streaming live!
+ cegprakash: next step Bronze!
+ wlesavo: wood to legend submit day 1
+ struct: close to imposible
+ MSmits: Illedan you dont get this in your input though right?
+ Illedan: You do
+ Illedan: Updated a few hours ago
+ MSmits: but there is no such card location is there?
+ Illedan: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/d3fb2fb8-4f76-4687-82db-2b232b930817">http://chat.codingame.com/pastebin/d3fb2fb8-4f76-4687-82db-2b232b930817</a>
+ MSmits: wouldnt this make us crash?
+ Illedan: You can read the tooltip on your discard pile
+ wlesavo: HAND, DRAW, DISCARD , PLAYED_CARDS
+ MSmits: whats the difference between the discard pile and the played pile then?
+ Illedan: You can't draw your played cards
+ Illedan: So you can only play a card once during a sequence of PLAY_CARD
+ MSmits: yeah ok, but how do you know whats in your discard pile
+ Illedan: To prevent infinite loops
+ MSmits: if you no longer get it as input
+ Illedan: YOu get it
+ Illedan: mine was just empty in that input
+ Illedan: You don't get empty card lists
+ Illedan: sadly
+ MSmits: ok, but does this break bots then?
+ struct: impossible to break my bot with this
+ Illedan: most people aren't advanced enough yet
+ MSmits: have to take a look at this tomorrow
+ kovi: technically it can, but ...
+ MSmits: it will probably miscount the cards in desks
+ kovi: yeah
+ struct: oh right, thanks MSmits
+ MSmits: it's a good fix though
+ struct: oh I dont even need to update my code for it
+ MSmits: just not a pretty one to have to add during the contest. Good thing it has been only 1 day
+ struct: PLAYED_CARDS dont show in HAND do they?
+ MSmits: no
+ MSmits: but if you want to know whether a desk will give you bonus or a normal skill card, you need to know where all the cards are
+ struct: yeah
+ struct: that I keep track of
+ PiterYeh: do you guys actually understand what is going on when watching replays?
+ MSmits: barely
+ struct: no
+ PiterYeh: cool
+ kovi: with tooltips now it is a bit better
+ PiterYeh: oh they added the tooltip for apps? nice
+ kovi: apps, desks
+ struct: and player I think
+ kovi: afaik player worked before
+ PiterYeh: they did
+ Edulol-1: I wen humbled
+ Edulol-1: went*
+ kovi: hmm...admin desk is adjacent to trainindesk?
+ kovi: is this new?
+ kovi: nvm...user error
+ jacek: its alright, this is their 1st contest. on 5th contest they cant do shoddy
+ kovi: hmm, training and coding doesnt seem to workno draw or more play, the game continues with opponent move phase comes
+ Illedan: Only if you have nothing else to play, but there might be an Action bug
+ Illedan: I just haven't found it after the update
+ Illedan: And I couldn't find it while reading the source code
+ kovi: yes, both cases those were the only skillcard in hand
+ kovi: (solo skillcard)
+ Illedan: And if there is nothing usable to play or no RELEASE to be done with the cards picked. Then it would end your turn
+ kovi: i c.but there were no draws performed
+ Illedan: I guess it just ends it, if you can't do anything anyway?
+ kovi: well...technically draw should be done to deplete the draw pile
+ Illedan: oh
+ Illedan: it is not done?
+ emh: did they update with the fix for infinite train/code bug?
+ Illedan: yes
+ Illedan: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/d3fb2fb8-4f76-4687-82db-2b232b930817">http://chat.codingame.com/pastebin/d3fb2fb8-4f76-4687-82db-2b232b930817</a>
+ Illedan: You get the PLAYED_CARDS
+ Illedan: Which you can't redraw until the next round
+ emh: ahh ok
+ struct: im not getting that input what
+ jk_java: anyone into music?
+ struct: ah I get it how it works now
+ struct: PLAYED_CARDS will always have only 1 value set to 1 right?
+ struct: since you cant play 2 cards in 1 turn
+ Illedan: wrong
+ Illedan: You can have 5 TRAINING
+ Illedan: and play them in sequence
+ Illedan: PLAYED_CARDS are reset when you move to RELEASE/MOVE phase
+ struct: ah thanks Illedan
+ 8swaglord24: just checking -- we're not given the current count of skill cards per location, we need to keep track of those ourselves?
+ kovi: minor issue: there is no sense for p2 last turn if the opponent is already winning by 2
+ kovi: (having 5:3 or better i mean)
+ struct: thats a good suggestion
+ struct: yes 8swaglord24 you need to keep track of it
+ kovi: lets make it green: save a turn, save the planet
+ 8swaglord24: thank you
+ darkhorse64: I do not think you can because you can move to a desk and pick a skill from another place
+ Donotalo: the training skill - it says the team draws 2 cards and play 1 more card from their hand
+ Donotalo: what does playing a card mean?
+ [lazy]Opera: what is AUTOMATED and OPPONENT_AUTOMATED card locations?
+ Westicles: 3 puzzles with 2 approvals, which will be next?
+ jacek: frontgammon
+ AbrahamJLR: Can I start a conversation with someone online by visiting their profile?
+ jacek: only if they follow you
+ AbrahamJLR: Rip. Thanks for answering me.
+ Westicles: through the forum is the best way
+ Westicles: finally crawled into bronze with first available move
+ jacek: but RANDOM/WAIT are last ~
+ PiterYeh: after turn 44, why does it not allow me to play another training? it just skips to the opponent's turn...
+ PiterYeh: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/642083294">https://www.codingame.com/replay/642083294</a>
+ Sarzorus: The Turn description doesn't make a lot of sense to me. Does move, use skill, release all happen in order? Do I need to check for which part of the turn I'm on? I keep getting invalid option when I try to release an application on purpose
+ PiterYeh: Sarzorus when you read game state in the input you're told in which phase you're into
+ PiterYeh: you can play only some actions depending on which phase you're in
+ PiterYeh: you can only play release in release phase
+ Sarzorus: Ah, thanks. I see the variable. It just isn't documented well in the rules
+ PiterYeh: it takes a bit of trial and error to figure out what's valid when, but at least error messages are helpful
+ FADED_C0RE: im not understand the clash of code stuff
+ FADED_C0RE: im super new to c++
+ FADED_C0RE: but i just cant figure it out at all
+ PiterYeh: FADED_C0RE, try out some solo puzzles to get started on the platform
+ FADED_C0RE: alr thanks
+ PiterYeh: clas of code is just that but faster
+ FADED_C0RE: ah ok
+ struct: darkhorse64 you can keep track of it I think because you get all the cards that all players have
+ darkhorse64: When you throw a card, it returns to its place&#160;? Yeah, I did not think of summing all cards. 
+ struct: yes
+ wlesavo: wait, permanent skills are consumed when used until you release?
+ wlesavo: thats totally not obvious
+ struct: Daily and continuous I think
+ struct: Architecture*
+ wlesavo: thats explains at least some of my bugs
+ Illedan: That worked :tada:
+ struct: nice
+ struct: still if else?
+ Illedan: Ofc
+ Illedan: Doing sim on the side
+ Illedan: But I'm not sure of the direction I want yet
+ Illedan: Hmm
+ Illedan: And some unlucky in the end
+ struct: Can I use refactoring even if I dont have any tech in my hand?
+ Illedan: Think it transfers to a wait
+ Illedan: but it makes no sense
+ struct: yeah
+ struct: it ends up being the same result
+ struct: I guess
+ Illedan: :P
+ Illedan: Might save some CPU time, if you could have done application with shoddy, but wasted the card to do it 
+ aCat: hah again the same issue Illedan 
+ aCat: like hey should I make state on bits and go try some search or keep normal arrays and heuristics
+ Illedan: Normal array with sim
+ Illedan: Then optimize when needed
+ aCat: won't be too slow?
+ Illedan: Nah
+ aCat: all this array creation&#160;;]
+ Illedan: Huh?
+ Illedan: Cache the array
+ aCat: ok, ok I stated it badly
+ Illedan: 
+ aCat: not creation, but more 'writing to space'
+ aCat: for now I have some visualization
+ struct: Im also using arrays for now
+ struct: I just want something working before optimizing
+ struct: I think im learning
+ Illedan: Nah, you started too early on Legend or Delete :P
+ struct: Legend here might be very hard
+ struct: low player count
+ Illedan: mhm
+ aCat: <a rel="nofollow" class="external free" href="https://imgur.com/a/FnxiPSg">https://imgur.com/a/FnxiPSg</a>
+ wearelegend: yeah
+ wearelegend: dont know what I ll do
+ wearelegend: ı didnt understand what ı will write
+ Illedan: I like that aCat
+ jacek: now buy the board game
+ wlesavo: is there any info about will the game be available as multi after or not?
+ aCat: #if DEBUGstatic class DebugImage
+ aCat: all my code has this&#160;;]
+ Westicles: wlesavo, thib said yes on discord
+ aCat: wlesavo it will be
+ aCat: thib confirmed, yep
+ wlesavo: oh nice
+ wlesavo: thx
+ wearelegend: can you guys advise to me for 0 to learn
+ wearelegend: ı have nothing
+ wearelegend: but ı want to start it
+ wearelegend: ı have time
+ Sraiti: just do it 
+ Sraiti: start
+ wearelegend: do what
+ Sraiti: with JavaScript  
+ wearelegend: first java?
+ aCat: OK, thanks for support Ille I will think about 'not optimizing prematurely
+ Sraiti: java will work too
+ Sraiti: anything just start
+ wearelegend: zero information
+ Sraiti: everything else will come with time
+ aCat: but usually I like to have final state as fast as possible, to not waste time on rewriting 
+ Illedan: Abstraction is key
+ wearelegend: ım starting thx.
+ Sraiti: here there's more than enough resources here <a rel="nofollow" class="external free" href="https://www.theodinproject.com/">https://www.theodinproject.com/</a>
+ Illedan: Abstract away what you suspect you might want to rewrite
+ jacek: wearelegend this site is for someone who knows the basics
+ aCat: but - here bits does not seem big advatage as you have to take them and plus/minus all the time
+ aCat: no idea what I want to write
+ aCat: :D
+ aCat: except 100 of ifs
+ Illedan: Only 44 ifs yet
+ Illedan: can go bigger
+ wearelegend: thx jacek .
+ wearelegend: yes not for me
+ wearelegend: dont have basic too
+ jacek: oh my, the half-assed nn actually works
+ wearelegend: theodin project ı ll check it
+ Illedan: For this game jacek?
+ jacek: yeah
+ Sraiti: good luck
+ wlesavo: wow
+ Illedan: :D
+ wearelegend: good night guys
+ Illedan: what is half-assed?
+ wearelegend: thx for my first 
+ jacek: not optimized architecture, trainig for half an hour etc.
+ Illedan: Got replay?
+ jacek: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/642102582">https://www.codingame.com/share-replay/642102582</a>
+ jacek: i still dont know the game by heart so i dont know how smart or stupid it is
+ Illedan: hmm
+ Illedan: crazy
+ wlesavo: is it the submited version?
+ jacek: yes. im 12th
+ struct: nice jacek
+ wlesavo: yeah, really nice for such a short period
+ Illedan: makes me scared
+ Illedan: xD
+ Illedan: But all bots are crap now
+ Sarzorus: How do you train the NN? mock everything or somehow send information back to yourself?
+ jacek: for now, playing games against the random bot locally
+ jacek: once it reached 99.5%, i submited to check if it actually works
+ jacek: so excited i dont know if im gonna be able to sleep oO
+ struct: lol
+ struct: I told it was a NN contest jacek
+ jacek: :imp:
+ j4at: My dude decided to copy past the referee while im here writing my simulation&#160;:'(
+ Illedan: MCTS jacek? Or just 1 action?
+ j4at: Are you using brutal tester&#160;?
+ j4at: jacek
+ jacek: Illedan just action. i dont have simulator in the code
+ Illedan: Cool&#160;:)
+ jacek: j4at no. i copy pasted referee and modified slightly to my needs
+ Illedan: brutal tester is too slow for local training
+ j4at: well, teach me how to run it?
+ Illedan: No idea, didn't try since LOCM
+ j4at: jacek help :c
+ jacek: i dont use brutal tester
+ j4at: you already said that :3
+ jacek: then how could i help you oO
+ j4at: I don't to know how to run the referee
+ j4at: I'm tired of writing a simulation
+ jacek: i copied most sutff had to modify to run without viewer and most CG SDK stuff. and its still in java :c
+ j4at: Well, I don't know how to do any of that. Don't know java either. I guess will continue writing my simulation
+ struct: ok so if I go over 4 on Daily routines it will give repeated moves
+ struct: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/39194053-b5ae-463e-ae1d-9e08858e2b19">http://chat.codingame.com/pastebin/39194053-b5ae-463e-ae1d-9e08858e2b19</a>
+ Illedan: xD
+ struct: Im betting on you to win jacek, no pressure
+ struct: Just ask dbdr to not store the chat history from today
+ jacek: oO
+ jacek: Automaton2000 do you have history
+ Automaton2000: it is a good choice
+ emh: I'm having fun with heuristics. no plan to write a sim
+ emh: ranked number 4 with 1000 lines of heuristics. I'm happy
+ struct: o.o
+ Sraiti: can anyone help me with the thor game
+ Sraiti: as far as i understand there's no variable for the current position of thor  
+ Sraiti: am i right 
+ Sraiti: or am i missing something
+ jk_java: its TX
+ Sraiti: i'm talking about this one <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/power-of-thor-episode-1">https://www.codingame.com/ide/puzzle/power-of-thor-episode-1</a>
+ jk_java: and TY
+ jacek: you have starting position. you have to update them yourself
+ jk_java: as in ThorX
+ Sraiti: so i need to create new variables for that 
+ Sraiti: ah okay i will try that 
+ jk_java: and as jacek says you have to keep track
+ jk_java: good luck, it is a fun game
+ Sraiti: thank you guys 
+ jk_java: :rocket:
+ struct: jacek when are you submiting again?
+ struct: oh you jsut did
+ struct: :p
+ jacek: imma sleep. there are so many ways to improve it...
+ struct: gn
+ emh: gn
+ struct: I'm probably gonna rewrite, I didn't understand all the rules before starting to write the sim
+ struct: It was a bad idea
+ jacek: you dont read statements eh
+ struct: I tried
+ Westicles: RTFM 5 times
+ emh: good night
+ struct: Here I was thinking the game was making my pc lag
+ struct: but its the chat
+ struct: I forgot
+ john.reumont: &lt; 
+ struct: There is no way to know the current turn is there?
+ BrunoFelthes: sum your turns + cardsPlayed?
+ struct: But I dont know how many turns opponent played
+ struct: But I guess it wont matter much
+ VladTheInstaller: Hi all, I just got promoted to a higher league.  any idea how to refresh the default code in the IDE?
+ struct: top right
+ struct: of the IDE
+ struct: there is a thing that looks like a circle
+ VladTheInstaller: I see it - thank you&#160;:-)
+ struct: np
+ square1001: Seems like there's no way to know the current number of turns, right?
+ struct: yeah square1001
+ square1001: Okay, thanks
+ struct: Maybe it wont be relevant for later leagues
+ SubwayMan: how to copy from the editor in vim mode?
+ SubwayMan: "+y does not work
+ RIT: wood 1, is there any way to know how many skill cards are left in each category to pick up?
+ tribiettt: wasa

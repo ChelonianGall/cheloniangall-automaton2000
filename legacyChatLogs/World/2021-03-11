@@ -1,0 +1,1092 @@
+ Manhar: cout&lt;&lt;"hello my love"
+ AGroatEatingGoat: C# can be good for speed, if that's what you're most comfortable with
+ AGroatEatingGoat: Python is one of the best, though, in both the speed and golf categories
+ AGroatEatingGoat: I'm (re)learning a lot about python from doing these!
+ AGroatEatingGoat: Python is literally executable psuedocode, it's just beautiful &lt;3
+ void_main_sucks: Nooo not using namespace std; &gt;&#160;: (
+ AGroatEatingGoat: bruh, void_main_sucks but you don't include a return statement in main
+ AGroatEatingGoat: :kekw:
+ void_main_sucks: forgot to lol i just use the starting code
+ AGroatEatingGoat: hehe
+ Aa_Ku_Ttp: hello world
+ CaptainKitten_322e: salom
+ CaptainKitten_322e: kim bor. yaxshimisizlar?
+ Godofdeath1: hello
+ CaptainKitten_322e: qayerdansiz
+ Redbladexix: theres is nothing better at a boring job than to train ur brain by playin some pod race :D
+ void_main_sucks: sometimes i think some players are bots
+ acuto: g0 g0 g0
+ derjack: oO
+ magaiti: do you sometimes think you are a bot too?
+ derjack: how many symmetries clobber has from starting position? just normal and rotate180?
+ MSmits: 28 moves
+ MSmits: 112/4
+ MSmits: simplest way is to just move each piece to the right and ignore down, left and up
+ MSmits: then you have all unique moves
+ derjack: im talking about board
+ derjack: if you rotate by 90, youll get white in left down corner. it seems not the same board anymore
+ MSmits: me too 
+ MSmits: ah, then dont do the 90
+ MSmits: you can do 180
+ derjack: right now im doing 180
+ MSmits: you can also mirror diagonally
+ MSmits: I think
+ derjack: :tada:
+ derjack: so i may get 4 positions per move to label
+ MSmits: you may get 8
+ MSmits: the starting board has 4
+ MSmits: but maybe later boards have more
+ MSmits: you should just use the othello scheme
+ MSmits: its the same 8x8 squares
+ MSmits: so the same transformations apply. Just most of them aren't reachable
+ derjack: i think it may mess up the 'real' representation of game
+ derjack: because whites will be on entire different squares
+ derjack: maybe near endgames it doesnt matter
+ MSmits: yes they will when you transform them, but that doesnt mean the transformation is wrong
+ MSmits: it just means its not a reachable state
+ MSmits: this is true for every game, all states in the treespace are reachable, but not all states in the statespace are
+ MSmits: well almost every game I guess
+ MSmits: for example oware has many states where all pits have seeds
+ MSmits: but they are all unreachable except the start
+ MSmits: because after every move there is an empty pit
+ derjack: still gotta work on better inputs. fairly trained agent wins 15% vs mcts
+ darkhorse64: I am surprised that mcts works so well. tric gave up on ab and started his first mcts
+ derjack: mcts works better if you dont have any good eval
+ derjack: i wonder if clobber will become performant mcts-fest like uttt
+ darkhorse64: true but it turns out that all papers that I read were based on heuristics. 
+ darkhorse64: However, these look quite difficult to bitboard. There will be a tradeoff between number of light/heavy rollouts
+ derjack: welp 10x10 is difficult to bitboard anyway
+ darkhorse64: In retrospect, 8x8 was a wise decision
+ derjack: until i solve it, yes
+ darkhorse64: I trust NN to bambozzle MCTS
+ MSmits: if you find the right heuristics for ab, you can also use them for a mcts with eval, or a jacekmax
+ MSmits: either way mcts could come out ahead
+ MSmits: or you could just keep the random rollout and use heuristics there
+ MSmits: depending on whether they are pruning heuristics or heavy rollout heuristics
+ MSmits: NN might not bamboozle mcts here depending on how important the math is. NN can simulate mathematical heuristics of course, but it doesnt do it more efficiently than the math itself. 
+ MSmits: or you could combine the math with an NN... that would probably be best
+ YurkovAS: how to find 4 in row with pdep? for example: horizontal line from left to right. we check 3 left and check 3 right separately (i'm understand hot to do) or need only 1 time check?
+ MSmits: which game?
+ MSmits: yavalath or connect 4?
+ YurkovAS: connect4 or yavalath
+ YurkovAS: yes
+ MSmits: well its different
+ MSmits: i wouldnt use pdep/pext for connect 4 so...
+ MSmits: in yavalath what I do is this:
+ MSmits: in the first 1s, for each of the 61 hexes I generate a star pattern around it in bitform
+ MSmits: the start pattern goes 3 steps in each direction
+ MSmits: at max this will be 18 bits around it
+ MSmits: these 18 bits are all located somewhere on the 61 bit board
+ MSmits: Then I generate all possible combinations of these bits
+ MSmits: set/not set
+ MSmits: when I play a hex, i PEXT the star pattern
+ MSmits: and then do  a lookup to see if its a win
+ MSmits: so the lookup handles all 6 directions at once
+ derjack: YurkovAS i used this to generate patterns <a rel="nofollow" class="external free" href="https://github.com/skeeto/yavalath">https://github.com/skeeto/yavalath</a>
+ YurkovAS: MSmits, derjack thanks!
+ MSmits: yeah, there's various levels of calculation vs lookup
+ MSmits: you can also do 3 lookups, one for each axis, then you use 6 bits, but have to do 3 PEXTs
+ MSmits: some players do this
+ MSmits: also YurkovAS, if you still want to know how to do it in connect 4. Use SIMD to check 4 directions at once
+ MSmits: so no lookups, no pext/pdep. Full calculation
+ darkhorse64: ^
+ MSmits: and if you're afraid of simd, just do it without simd first to get the bot working. That may motivate you to experiment with Simd after. It's not the hardest game to parallelize (othello is far harder)
+ YurkovAS: yes, easy rules, i'm try simd, thanks!
+ MSmits: np
+ darkhorse64: YurkovAS: write bitboarding for C4 first, do not jump straight to simd if you have no prior experience. Once your bitboarding code is OK, you will see more easily the parallel code patterns
+ MSmits: also lots of unit testing&#160;:)
+ MSmits: use your working normal win checking and then your simd version
+ MSmits: run them both for every move your bot makes, see if they are ever different and if so, produce an error
+ MSmits: I didn't actually do this, but I am an idiot and don't follow my own advice
+ MSmits: my method: Just do the simd thing, see the bot fail and stare at code for hours
+ darkhorse64: improved method: print the bit patterns and stare at them for a few minutes
+ MSmits: yeah
+ magaiti: staring intensely at machine code is the popularized method of debugging
+ MSmits: indeed
+ yoyokid: Hi
+ MSmits: yoyo
+ AntiSquid: MSmits how do you define you vars for bitboarding&#160;? typedef unsigned long long  U64;&#160;?
+ darkhorse64: uint64_t
+ MadKnight: yea there's a built-in type for that
+ AntiSquid: ok looking at the differences
+ darkhorse64: it works also for VS
+ AntiSquid: so much info on bitboards for chess specifically, but not in mood to do chess right now 
+ MadKnight: they added chess multi to CG&#160;?
+ AntiSquid: community made
+ MadKnight: Automaton2000 we gotta go rekt everyone in chess
+ Automaton2000: now that's a good thing
+ AntiSquid: well recurz made and community approved
+ MadKnight: well if recurz made it....
+ MadKnight: no it's still the same
+ AntiSquid: odd though he didn't submit anything
+ MadKnight: probably wasn't interested
+ MadKnight: too common and too much solved
+ MadKnight: so actually not a surprise
+ AntiSquid: ah so you already have the #1 bot in your mind but you need to write it
+ AntiSquid: as expected of MadAsAJazzer
+ AntiSquid: MadKnight *
+ MadKnight: wait wat?
+ MadKnight: what is that about
+ AntiSquid: referring to how you improve your bots when the time comes ...
+ LearnerDuck: hi guys
+ LearnerDuck: im new here
+ LearnerDuck: whats up
+ AntiSquid: hello new here&#160;! welcome&#160;!
+ MadKnight: well i can probably analyze game strats better but #1&#160;?
+ LearnerDuck: thanks  dude
+ LearnerDuck: #2
+ MadKnight: ez
+ AntiSquid: MadKnight it's just a joke, ignore me. And yes your exact words from another time, long forgotten now.
+ MadKnight: but #1&#160;?
+ LearnerDuck: ok
+ LearnerDuck: #1
+ MadKnight: AntiSquid i mean i didn't understand the joke
+ MadKnight: still no idea where it is
+ derjack: :drum:
+ derjack: and this is chess960
+ derjack: <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/bot-programming/chess">https://www.codingame.com/multiplayer/bot-programming/chess</a>
+ derjack: bitboarding is relatively easy. king checks and castlings are meh
+ AntiSquid: oh my D bot still wrecking noobs
+ derjack: oh your
+ 6cdh: My bad English even can't understand the problem description.
+ derjack: oO
+ AntiSquid: which problam
+ derjack: and hes from usa. hmmm
+ AntiSquid: he migrated and didn't learn the language i guess
+ zedd001: Hello everyone, I just want to ask where do you learn advanced programming?
+ AntiSquid: on your own? you can do it here too
+ zedd001: Thanks for your sharing so much&#160;!
+ MadKnight: what is advanced programming zedd001&#160;?
+ MSmits: it's a natural follow-up on basic programming MadKnight
+ MadKnight: but to what degree?
+ MSmits: 7
+ dirty_code: 42
+ MadKnight: well that's easy just go finish 6 
+ MadKnight: Automaton2000 imagine asking what goes before 7
+ Automaton2000: it's better to use a neural net
+ MSmits: anyone here that solved bender 4 100%?
+ MSmits: I have an approach I want to bounce off someone
+ MSmits: before i code it
+ AntiSquid: no but i think i have the solution figured out&#160;? :P
+ MSmits: allright, so I want to do something like this:
+ MSmits: the boulders are walls, at least at first
+ MSmits: to make it easy
+ MSmits: you can change the map with the levers
+ MSmits: so i make a tree of map changes as opposed to a tree of movement
+ MSmits: the parent is the first state, the children are new mapstates that are reached by doing the toggles that are within reach 
+ MSmits: (without actually crossing other toggles)
+ AntiSquid: ah i am thinking of a tree of moves, just keep looking till solution is found
+ MSmits: thats too expensive i think
+ MSmits: you get cycles and such
+ MSmits: my way only requires a tree with a few 1000 nodes at most
+ MSmits: then when you find a path, all you need to do is bfs from one node of the tree to the next
+ MSmits: if you know a toggle is reachable by bfs without crossing other toggles it doesnt really matter what the route
+ MSmits: is
+ AntiSquid: damn ... you make me want to look into it and solve it now lol, i am quite sure that in worst case scenario i can use some conditions to ignore some moves
+ MSmits: so basically i have a high level BFS where i chain toggles together instead of squared
+ AntiSquid: or break the path into multiple searches
+ MSmits: then a low level BFS to connect the toggles
+ MSmits: i do a floodfill to find out which toggles are reachable from a current toggle position
+ MSmits: (no matter the route used)
+ AntiSquid: my reason for thinking this will work is the ooc bot i have which is highly unoptimized and the amount of stuff it can look for, think this problem is less demanding
+ MSmits: oh I guess it is less demanding, but i want to expand it to also use boulders later, which are also map changes, like toggles. But they branch much much more
+ MSmits: this is the approach i used in hypersonic and it was very fast there
+ AntiSquid: i mean your way is basically same as breaking path into multiple ones to find otpimal one
+ MSmits: in hypersonic, my bomber dude is every where at once and only gains a position when he changes the map
+ MSmits: AntiSquid yes it is
+ AntiSquid: and actually you can have tree of map states where each state has trees of paths or whatever ugh ... then prune / ignore less promising trees 
+ MSmits: imho the way to go for bender4 is basic solution no boulders -&gt; add boulders to get better solutions -&gt; add functions 
+ MSmits: AntiSquid thats the thing, i dont generate the paths
+ MSmits: i only generate the changed map states
+ MSmits: i dont care how bender gets to the next spot, only that he can (found by floodfill)
+ MSmits: i only generate the path later, when fry is reached
+ MSmits: so it's really a simple tree, not a tree of trees
+ AntiSquid: ok how about finding all paths for all possible switch / bolder / stuff change and then finding out which combination of paths leads to solution  ?
+ AntiSquid: i mean you precompute paths then look for combo
+ MSmits: that may work, but i dont see why you need a precomputed pat
+ MSmits: path
+ MSmits: maybe a precomputed floodfill for each map state
+ AntiSquid: less floodfills 
+ AntiSquid: yes that's what i mean
+ MSmits: ah ok, well thats a neat optimization
+ MSmits: I want to try to at least solve it this weekend. I have some other stuff to do as well but hope to find some time
+ MSmits: only 41 people have solved it 100%
+ AntiSquid: is that your motivation&#160;?
+ AntiSquid: low solver count&#160;?
+ MSmits: also i told a student to do it
+ MSmits: without realizing how hard it was
+ AntiSquid: ah that changes everything
+ MSmits: so i kinda feel like i have to. And I think it is interesting
+ AntiSquid: idk, when i finally get around doing it i will start it with just first test case and then add rules for 2nd ... then 3rd etc .. and then a big rewrite at the end if needed :P
+ MSmits: yeah that often makes sense
+ MSmits: but i got an algorithm in mind i am sure works, so i want to try it as a whole
+ MSmits: then optimize it, your suggestion is good
+ MSmits: i did that in kutulu
+ MSmits: calculate all that stuff beforehand
+ AntiSquid: which suggestion&#160;?
+ AntiSquid: ah
+ MSmits: I think your way is what i suggested to the student
+ MSmits: plot a direct path to the target
+ AntiSquid: i only said that because you said it takes too long, will try it headon without precomputation first probably :D
+ MSmits: if there are obstacles, make a direct path to the toggle you ned
+ MSmits: if there are obstacles to that, make a direct path to anothe toggle etc.
+ MSmits: until you get there
+ MSmits: thats another way to do it
+ MSmits: but i think he may get stuck on cyclic toggles, where you untoggle something important when moving to a different toggle
+ MSmits: sometimes they are in the way
+ AntiSquid: this one has functions 
+ MSmits: that too, but thats like loops in code of the ring
+ AntiSquid: i think it was the function bits you can encode reason why i left it for later
+ MSmits: its just intended to make the solution shorter
+ AntiSquid: seems very time consuming
+ AntiSquid: 889 CP max, it was lower back then too, maybe 200 max
+ MSmits: I think i can do the simple solution in a few hrs, then i'd be rank 42 at least
+ MSmits: so it's worth it
+ MSmits: brb
+ AntiSquid: i stopped improving my fireworks / pengu for now, need full rewrite to progress so kinda aiming for lower hanging stuff instead
+ AntiSquid: ah right unoptimized solution shouldn't take that much, but with only rank 42 you get a drop in a bucket as CP
+ AntiSquid: top 10 min @ 2,243 
+ MSmits: thats a lower limit, assuming the worst possible solution though
+ MSmits: i can easily adapt to find shorter solutions and get somewhat better rank
+ MSmits: if i include boulders (lots of coding) it should get a lot better
+ MSmits: then with functions, you can get any rank you want if you do it well enough
+ MSmits: probably the validators are known as well, so you might be able to make use of that
+ AntiSquid: "you can get any rank you want if you do it well enough" 
+ MSmits: till i get bored
+ AntiSquid: or are willing to spend 
+ MSmits: i did code of the rings till top 20, which is quite good for a game with so many players
+ AntiSquid: not asking you superficially, just generally speaking
+ MSmits: ah yes
+ AntiSquid: maybe i should do another hex game&#160;? 
+ MSmits: do you like boardgames?
+ AntiSquid: on CG&#160;? no
+ MSmits: ah ok
+ MSmits: well coders of the carribean is not really a board game and is hex, but you probably did that already
+ AntiSquid: maybe i should at least try to do something on my own game
+ MSmits: yavalath is a boardgame so doesnt qualify then
+ MSmits: oh cool, did not know you were working on something
+ AntiSquid: pengu is different because you eliminate tiles and that changes a lot
+ MSmits: yeah
+ MSmits: but boardgame-wise it's just a bit mask
+ AntiSquid: also check the amount of hex / line
+ AntiSquid: they are not the same, that cause me some headaches
+ AntiSquid: figured something new out just to make it work :P
+ AntiSquid: initially thought i have to check if row is odd or even
+ MSmits: makes sense
+ AntiSquid: and i have the board in one array, so if i rewrite i should use uint64
+ MSmits: probably
+ AntiSquid: ideally .
+ MSmits: unless you do a minimax
+ MSmits: then do/undo works fine on any type of board
+ AntiSquid: no won't do that
+ MSmits: assuming you dont use transpositions, hashing complicated gamestates is expensive
+ MSmits: uint64_t helps a ton with hashing
+ AntiSquid: i have minmax on some games and i feel like i could have done much more with mcts 
+ MSmits: i guess it depends on where your skill/knowledge lies
+ MSmits: i suck at minimax, compared to what i can do with mcts
+ Astrobytes: It depends. If minimax is performing well but you've run out of ideas, some kind of EPT MCTS might be better.
+ AntiSquid: even make some custom selection of my own, doesn't matter if it's weird
+ Astrobytes: You do have to invest some effort in an a/b to make it good
+ MSmits: yeah
+ MSmits: btw gotta go, class starts in 5 mins (as a student, not teacher)
+ MSmits: dont want to make teach mad :P
+ Astrobytes: FP?
+ MSmits: nope
+ MSmits: educational research
+ Astrobytes: Oh right
+ MSmits: FP is every other friday, next friday again
+ MSmits: ttyl!
+ Astrobytes: later
+ AntiSquid: see you next friday :P
+ Astrobytes: doesn't quite work as well as Tuesday or Thursday eh
+ Astrobytes: working on penguins?
+ AntiSquid: no
+ Astrobytes: yava?
+ AntiSquid: he was comparing coders of caribbean to pengus  and i was saying it's not the same
+ AntiSquid: tiles keep getting removed that's major diff
+ Astrobytes: Oh, yeah, quite different indeed
+ Astrobytes: And penguins is a board game
+ AntiSquid: and really odd board shape for pengus
+ AntiSquid:  you get 8 hex for odd 7 for even
+ AntiSquid: very important detail
+ Astrobytes: Only in your indexing
+ Astrobytes: I like penguins, good game. Must get back to it soon.
+ AntiSquid: maybe yinsh if i do another hex game, it looks weird and i don't really get it 
+ derjack: are yo hex excited
+ Astrobytes: It's quite complicated compared to some others, but not to hard to get if you spend some time learning it. Haven't a clue for a good algo though
+ derjack: still need to make sim for it
+ Astrobytes: Yeah same
+ derjack: no boss so it cant become potw
+ Astrobytes: Not necessarily a bad thing - do you think explaining yinsh to every Tom, Dick and Harry on cg every 5 minutes for a week? :D
+ Astrobytes: *think you'd enjoy
+ Redbladexix: looking for the most beginner friendly bot games. To advance on my questmap need another one to reach bronze league.
+ derjack: tryangle is potw and yet no one asks about it
+ derjack: coders strike back
+ Astrobytes: True... are many people playing it?
+ Astrobytes: TC I mean not CSB
+ derjack: 24 now. before it was less than 20
+ derjack: not much boost
+ derjack:&#160;:(
+ derjack: AutomatonNN where is the creator
+ AutomatonNN: with page in the top right
+ Astrobytes: That must be the Disappointment aspect.
+ AntiSquid: Redbladexix botters of the galaxy
+ AntiSquid: oh wait it asks for legend at the end
+ AntiSquid: probably CSB and you can't play any community games for this lol
+ AntiSquid: CSB easiest legend do that Redbladexix, rules change in gold
+ Redbladexix: CSB already at bronze need another one for this quest
+ AntiSquid: what quest is it&#160;?
+ Redbladexix: reach bronze in 2 games
+ AntiSquid: oh you need later silver in 2 games
+ AntiSquid: hmmm
+ derjack: ultimate tic tac toe&#160;:?
+ AntiSquid: is it 3x3 until silver&#160;?
+ derjack: is 3x3 only in wood
+ AntiSquid: in silver it's more complicated, more headaches
+ AntiSquid: do botters of the galaxy until silver should be very easy
+ Redbladexix: ok, will try. thx for the help
+ AntiSquid: mean max for silver also very little coding actually
+ AntiSquid: and maybe code royale too? but can't remember anymore for sure
+ KelvinAndHubbles: tron bike till silver isn't too hard too
+ MrPizzadur: yes
+ MrPizzadur: Hi everyoone!
+ Lucaslgd02: tg
+ MrPizzadur: Pas très sympa mec
+ Taubeth: hi everyone, am I allowed to use snippets(or bigger parts) of code from stackoverflow during clash of code challenges?
+ MrPizzadur: yeno
+ BoatBuilder: you can, but it's less fun than doing all by yourself
+ dirty_code: is tychkord bot?
+ LiudasStaniulis: yes
+ owlSaMuRaI: www
+ Butanium: dirty_code: you can check it on it's profile
+ KelvinAndHubbles: beat the boss 9/9 times and won 29/32 battles, yet in a wood league still says I'm worse then the boss&#160;:/
+ jacek: what game
+ KelvinAndHubbles: Botters of the Galaxy
+ KelvinAndHubbles: just in wood league 5
+ KelvinAndHubbles: have a basic bot that pretty much just buys damage and hits
+ KelvinAndHubbles: just kept submitting and eventually got it :D
+ AntiSquid: nice
+ ill-be-waiting-outside: hi 
+ HunterEhrenfeld: hi
+ ill-be-waiting-outside: how are you
+ Saphine: #clash
+ ill-be-waiting-outside: thaks
+ FrancoisLetourneau: did anyody ever had a technical assement fof job using codingame?
+ ill-be-waiting-outside: kinda 
+ ill-be-waiting-outside: mad it was hard for me
+ FrancoisLetourneau: I have to do 1, I got the link by email, it says there are 40 questions in the test and it takes on average 25min to do. 
+ FrancoisLetourneau: How can this be? It is for a junior position
+ ill-be-waiting-outside: idk
+ HunterEhrenfeld: youre have a technical assessment using this site? lol ask antisquid for answers lol
+ FrancoisLetourneau: what/who is antisquid?
+ BlaiseEbuth: Why :no_entry_sign::squid: should know the answers&#160;?
+ ill-be-waiting-outside: idk maybe he knows
+ BlaiseEbuth: Anyway, FrancoisLetourneau there is a lot of mcq in the 40, so taht is pretty quick.
+ BlaiseEbuth: *that
+ ill-be-waiting-outside: true
+ AntiSquid: no worries, i wouldn't tell you
+ AntiSquid: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/botters-of-the-galaxy">https://www.codingame.com/ide/puzzle/botters-of-the-galaxy</a>
+ AntiSquid: best way to prepare FrancoisLetourneau
+ FrancoisLetourneau: yeah that's what I thought
+ FrancoisLetourneau: thanks!
+ BlaiseEbuth: Oo
+ jacek:&#160;?
+ BlaiseEbuth: Sorry, that's your catch phrase.
+ ill-be-waiting-outside: how do you do ​Pythagorean Theorem it is hella hard
+ BlaiseEbuth: a²=b²+c²
+ jacek: you need it in tryangle catch?
+ AntiSquid: a^2 + b^2 = c^2
+ jacek: why xoring by 2?
+ AntiSquid: that's power
+ BlaiseEbuth: xoring is powa!
+ ill-be-waiting-outside: ik that 
+ CryptoZenith: xoring vs power
+ ill-be-waiting-outside: but its something else and thats it thatnks
+ BlaiseEbuth: clear question -&gt; clear answer
+ CryptoZenith: unclear question -&gt; unclear answer
+ AntiSquid: why is clear question a node
+ CryptoZenith: what
+ CryptoZenith: what's the lightning symbol next to your name
+ CryptoZenith: oh wait
+ CryptoZenith: nevermind
+ AntiSquid: pokeball&#160;?
+ CryptoZenith: horseshoe?
+ CryptoZenith: i have a small monitor
+ AntiSquid: woah
+ BlaiseEbuth: I choose you AntiSquid!
+ CryptoZenith: takes up like 3 pixels
+ BlaiseEbuth: It totaly can be a pokemon name.
+ CryptoZenith: anti-squid
+ CryptoZenith: like a squid, but not
+ AntiSquid: <a rel="nofollow" class="external free" href="https://ultimatemotorcycling.com/2015/03/02/motorcycle-squid-on-the-rise-join-the-anti-squid-movement/">https://ultimatemotorcycling.com/2015/03/02/motorcycle-squid-on-the-rise-join-the-anti-squid-movement/</a>
+ CryptoZenith: whoa  anitsquid is 11th on the global leaderboard
+ CryptoZenith: *anti
+ BlaiseEbuth: tentacles...
+ AntiSquid: "The true motorcyclist – the Anti-Squid – examines these crashes, and attempts to fix things."
+ AntiSquid: quote from article linked
+ ill-be-waiting-outside: cool
+ jrke: is there any way i can identify traps in crystal crush?
+ JLukeSkywalker: i dont think so
+ JLukeSkywalker: entityType: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/63c86544-ede3-4d3b-a7af-7228cd3e0b5b">http://chat.codingame.com/pastebin/63c86544-ede3-4d3b-a7af-7228cd3e0b5b</a>
+ JLukeSkywalker: that is whats given, in addition to just ore values
+ ET_BB-8: if the enemy stops at the base for 1 turn it could mean the have picked up a trap
+ darkhorse64: the whole game revolves around traps and efficient farming
+ jrke: ET_BB-8 what if he picked radar not trap?
+ ET_BB-8: thats the problem with that system
+ ET_BB-8: but its better not digging up a radar position than digging up a trap position
+ ET_BB-8: unless your going to kamikaze 
+ jacek: is that utg?
+ BlaiseEbuth: ya
+ BlaiseEbuth: name changed for the multi
+ darkhorse64: or if you dig a potential trap, make sure you will destroy one opponent bot at the same time
+ jacek: or delete your account
+ BlaiseEbuth: Oo
+ ET_BB-8: in later leagues some players wait at the base for 1 turn also to throw off those systems
+ jacek: it was fun to watch the replays
+ BlaiseEbuth: Advanced kamikaze strategy was my greatest idea during the contest...
+ darkhorse64: even better, they stop at several holes to puzzle you when trying to guess traps
+ AntiSquid: have to fix that bot at some point . was close to legend
+ AntiSquid: oh i dropped ...
+ AntiSquid: now free pushes&#160;?
+ AntiSquid: no*
+ ill-be-waiting-outside: cool
+ JohnnyHotBody: Hello
+ JLukeSkywalker: hello
+ JohnnyHotBody: how u doin
+ ill-be-waiting-outside: good
+ JLukeSkywalker: decent
+ JohnnyHotBody: cool
+ JLukeSkywalker: stuck at work, watching the other cyclists out the window on the road
+ JLukeSkywalker: wishing i could take the day off
+ ill-be-waiting-outside: me too 
+ JohnnyHotBody: Same
+ JLukeSkywalker: at least this website counts as work some days
+ JohnnyHotBody: Well I got to go
+ JohnnyHotBody: Bye
+ ill-be-waiting-outside: ok
+ SoumyaCodes2020: hi
+ ill-be-waiting-outside: hi
+ Lachrymosa: hi
+ ill-be-waiting-outside: wyd
+ Lachrymosa: Rock Paper Scissors Lizard Spock
+ ill-be-waiting-outside: holy shit i love that game
+ jacek: are you winning son
+ Lachrymosa: Theres a nifty little puzzle in easy for it
+ Lachrymosa: I'm close
+ ill-be-waiting-outside: really
+ ill-be-waiting-outside: i have a test to do 
+ Wilster: -=W=-
+ ill-be-waiting-outside: its more like T-T
+ jacek: UwU
+ ill-be-waiting-outside: yep
+ JLukeSkywalker: lol, just demolished the wood leaderboard in crystal rush
+ KelvinAndHubbles: is it possible to solve the puzzle of the week?
+ jacek: you need to advance the league
+ JLukeSkywalker: darn, almost made it to silver completely ignoring the existance of emps
+ Westicles: Huh, somehow my cout &lt;&lt; "0" &lt;&lt; endl; advanced to wood1 in connect4
+ JLukeSkywalker: yeah, i think he is working on fixing the boss
+ jacek: hm?
+ JLukeSkywalker: think it might have been darkhorse, said he was trying to fix the connect 4 wood bot
+ JLukeSkywalker: the current one is really bad
+ jacek: blame the approvers
+ darkhorse64: No, I did not write the boss
+ JLukeSkywalker: ik, but the other day thought you said you were writing a new one
+ Astrobytes:  I think that was a joke
+ darkhorse64: It was a half serious joke
+ JLukeSkywalker: maybe was a joke, but the boss is a joke
+ JLukeSkywalker: someone does need to fix it
+ struct: connect 4 is just depth 3 minimax
+ struct: iirc
+ struct: At least is what I  remember from when I saw the code
+ Astrobytes: It's a what, depth 2? 
+ Astrobytes: Oh 3
+ JLukeSkywalker: and people are beating it with random
+ JLukeSkywalker: maybe there is a bug in it
+ Astrobytes: I can't remember. I remember it  looked really inefficient.
+ darkhorse64: tbh, I did not checked it
+ Astrobytes: If it's that bad then I personally nominate darkhorse64 to write a new one :P
+ darkhorse64: You know, it's hard to nerf a bot
+ Astrobytes: This is true. Just copypaste your alphabeta from Clobber
+ Astrobytes: (not the eval perhaps :P )
+ darkhorse64: I could also copypaste euler's C# bot
+ Astrobytes: Is that any good? I'm sure I beat that by hand
+ ZarthaxX: rude
+ darkhorse64: MCTS with a solver.
+ Astrobytes: Yeah, but it was weak iirc
+ Astrobytes: ZarthaxXamaton
+ darkhorse64: If it beats cout &lt;&lt; "0" and random, it's OK
+ ZarthaxX: Astronaut
+ ZarthaxX: howdy
+ imathwee: oi oi lads
+ Astrobytes: darkhorse64: that's fair
+ Astrobytes: How's it going ZarthaxX?
+ imathwee: how you gunna find the highest rated playa here
+ MadKnight: js even crashes when u start a number with 0
+ ZarthaxX: all gud
+ MadKnight: Automaton2000 imagine crashing from x=025;
+ Automaton2000: i'm pretty sure you can do all that stuff
+ ZarthaxX: trying to learn new stuff, was cleaning the house until now
+ ZarthaxX: you astrobyto
+ MadKnight: hey ZarthaxX
+ Astrobytes: Cleaning the house is new Zartho? :PYeah, same shit different day here lol
+ ZarthaxX: hey mado
+ ZarthaxX: Astrobytes NO LOL i just said 2 different things
+ Astrobytes: ZarthaxX I know! :P
+ ZarthaxX: *today i learned what a broom is guys!*
+ Astrobytes: #winning
+ ZarthaxX: so same shit eh
+ ZarthaxX: fair fair
+ Astrobytes: Yep
+ ZarthaxX: what's up with that clobbeer game?
+ Astrobytes: Not my bot anyway. It's last :D
+ Astrobytes: Interesting game.
+ ZarthaxX: real or invented
+ jacek: whats the difference
+ jacek: all games are invented
+ ZarthaxX: wanted to know if it was a port
+ darkhorse64: It is
+ Astrobytes: Yeah, abstract board game, been around for 20 years
+ ZarthaxX: aight ty guys
+ ZarthaxX: also looks super simple, nice
+ Astrobytes: Yeah, very easy sim.
+ ZarthaxX: i bet right
+ Astrobytes: The rest however...
+ Tuo: looks can be desieving :D
+ Tuo: my python bot was so slow it was useless
+ Tuo: and c++ is hard
+ ZarthaxX: also, random question but where is toad?
+ ZarthaxX: has he been here the past couple days?
+ Astrobytes: Long story best saved for another day ZarthaxX
+ ZarthaxX: bad or nah?
+ Astrobytes: Well, he's fine but it's a crappy thing.
+ ZarthaxX: can you tell me another day?
+ ZarthaxX:&#160;;(
+ Astrobytes: Yes. Not today.
+ ZarthaxX: ty
+ ZarthaxX: hope he is doing well
+ Astrobytes: All good afaik
+ ZarthaxX: and another random thing, i got banana plants in my house, and the last one had 110 bananas approximately
+ ZarthaxX: 27kg of bananas
+ Astrobytes: Dude
+ darkhorse64: He is OK but he has stepped down for a while
+ ZarthaxX: aight aight , good then
+ Astrobytes: 27 KILOS OF BANANAS
+ Astrobytes: GROWN IN YOUR HOUSE
+ Astrobytes: Wtf am I doing in this country
+ ZarthaxX: LOL
+ ZarthaxX: it's hard to keep them like.. not rotten
+ ZarthaxX: eating all of them before they rot is hard, we freeze them but it's still a fuckton
+ Wilster: you can make banana n.ut bread with ripe ones
+ Astrobytes: Yeah, make some banana pureé  and stuff, less space when you freeze it
+ Wilster: banana ice cream
+ Astrobytes: And sell the skins to vegans, they like that kind of thing.
+ Astrobytes: Or throw them in front of unsuspecting people and film the cartoon slip
+ jacek: bananas with coke?
+ Astrobytes: (the last two were jokes)
+ jacek: its so hard to slip on banana
+ ZarthaxX: oh we never tried the banana bread one, nice
+ ZarthaxX: neither the pureé, we did the ice cream one
+ ZarthaxX: Astrobytes LOL the skins are thrown but to make compost 
+ Astrobytes: Ah that's cool
+ Astrobytes: Can you make some kind of alcohol from bananas? Or at least use as a flavouring.
+ Astrobytes: You can make banana wine and beer apparently.
+ Astrobytes: And therefore banana brandy
+ Astrobytes: Stop this computer nonsense and open a brewery + distillery
+ ZarthaxX: :rofl:
+ Astrobytes: :grin:
+ ZarthaxX: isnt it kind of hard to achieve a good wine/beer?
+ Astrobytes: Well, yeah. Takes practice. You have many bananas. 
+ ZarthaxX: and who will be the victims that try it?
+ Astrobytes: :P
+ ZarthaxX: family? :D
+ Astrobytes: Ofc!
+ ZarthaxX: *and that's how you poison all your beloved ones*
+ ZarthaxX: i think the ice cream one is safer hehe
+ Astrobytes: Start with beer and wines, don't try and distill anything if you want to keep your eyesight/loved ones
+ ZarthaxX: i bought a chocolate licour in the holidays, now that i reemember
+ DaciaN0: are you pros?
+ ZarthaxX: good one
+ ZarthaxX: okey Astrobytes :rofl:
+ ZarthaxX: bananas is the future
+ Astrobytes: Sell them to Elon Musk
+ ZarthaxX: DaciaN0 noob here
+ ZarthaxX: Astrobytes i will make him tweet about my bananas
+ ZarthaxX: easy money
+ ZarthaxX: bananastocks raising
+ Astrobytes: BananaX
+ ZarthaxX: gotta find a good cryptocoin name
+ Astrobytes: SparthanaxX
+ ZarthaxX: :rofl: wtf
+ Astrobytes: ooh wait: BanX
+ ZarthaxX: nailed it :O
+ Astrobytes: Yeah, that's actually decent lol
+ ZarthaxX: ye :P
+ Astrobytes: Then when you're uber-rich you can get a gf called Dirt or something like him
+ Astrobytes: (Elon's gf is called Grimes, grime = dirt, if anyone needed an explanation)
+ Astrobytes: btw I am not beating the boss in Connect4 with random
+ ZarthaxX: oh i didnt get it at first lol
+ ZarthaxX: deception
+ Astrobytes: Maybe I random wrong
+ ZarthaxX: change your distribution
+ jacek: you can beat the boss if you write only one column
+ Astrobytes: really? lmao
+ ZarthaxX: astro :sweat:
+ UnnamedCodinGamer: I have been looking at bitboard stuff for connect4 and all of them refer to 6*7 board
+ jacek: 63 bits still fits
+ UnnamedCodinGamer: I would be nice if there was a site with basic implementation for different games
+ UnnamedCodinGamer: yes
+ UnnamedCodinGamer: but i have to do it myself
+ Astrobytes: Yeah, all the stuff you see about using the spare bits for this or that you can just do with some masks
+ UnnamedCodinGamer: I am thinking in this direction
+ Astrobytes: Don't overthink it
+ Astrobytes: It's just the same as every other bitboard game
+ Astrobytes: *bitboardable
+ UnnamedCodinGamer: I lack experience
+ UnnamedCodinGamer: I guess at some point it becomes relatively easy
+ Astrobytes: Some stuff yeah, but it always requires a degree of care!
+ Ordonnateur: We can register to the codinggame spring challenge 2021 up to when&#160;? up to last minute&#160;?
+ jacek: yes
+ Astrobytes: Up to any point throughout the challenge Ordonnateur
+ Ordonnateur: ok thank you&#160;:)
+ UnnamedCodinGamer: the other thing about bitboards is that once you try them it seems there is no way back
+ Ordonnateur: (I will register later so, better than forgetting about it then being sad having a 0score on my history ;p)
+ Astrobytes:&#160;:)
+ Astrobytes: Yes UnnamedCodinGamer, for some games to be competitive it's really a requirement anyway
+ jacek: its easier for me to bitboard stuff than to use good old 2d array nowadays
+ UnnamedCodinGamer: jacek yes, especially move generation
+ UnnamedCodinGamer: in terms of performance I was actually surprised to see that in breakthrough my array implementation was a bit faster than the first bitboard implementation
+ KiwiTae: ZarthaxX o/
+ jacek: move generation is one thing. eval stuff like counting is also fast
+ ZarthaxX: hey kiwo&#160;:*
+ UnnamedCodinGamer: then I implemented the move extraction using ffsl and it got 2 times faster
+ UnnamedCodinGamer: jacek, that too yes
+ jacek: ffsl/
+ jacek: hmm looks like ctz or clz
+ UnnamedCodinGamer: yes, they are similar 
+ ZarthaxX: first set bit for long
+ UnnamedCodinGamer: I did not know about them then
+ struct: Returns one plus the index of the least significant 1-bit of x, or if x is zero, returns zero.
+ UnnamedCodinGamer: struct, exactly
+ UnnamedCodinGamer: in terms of performance i did not find it worse than __builtin_ctzl, but I may be wrong
+ Astrobytes: oh nice
+ UnnamedCodinGamer: actually darkhorse64 and you Astrobytes suggested that 
+ jacek: probably came from msmits
+ UnnamedCodinGamer:&#160;:)
+ MSmits: nope
+ jacek: oO
+ MSmits: always use ctz
+ Astrobytes: ffsl? No that's a new one on me
+ UnnamedCodinGamer: I meant move extraction, not the particular method
+ Astrobytes: Ohhh right, gotcha
+ MSmits: yeah i use ctz/ctzl for move extraction
+ MSmits: ffsl also works
+ Astrobytes: Never used ffsl
+ MSmits: probably on compilation it works out to be equally fast somehow, compilers are smart
+ Astrobytes: Any particular advantage to it?
+ MSmits: i think it wont break on 0
+ MSmits: clz has undefined behavior on 0, not sure about ctz
+ jacek: well code is written it will never reach 0
+ MSmits: exactly
+ MSmits: thats why i dont bother with it
+ ZarthaxX: those instructions compile to a single assembly one
+ MSmits: i like my stuff to break when i screw up
+ Astrobytes: I guess could be useful in some situations but I'll stick with ctz/clz
+ Astrobytes: on here
+ UnnamedCodinGamer: it is nice if it breaks, and tells you so
+ MSmits: c++ telling you whats wrong?
+ Astrobytes: What sorcery is this????
+ Astrobytes: You must find out where you were wrong yourself and hit yourself with a c++ branch 100 times.
+ ZarthaxX: c++ branch LOL
+ Jake_Dubz: hi guys i am new to coding:grin:
+ Astrobytes: :P
+ MSmits: arent we all, to some extent
+ MSmits: hi
+ ZarthaxX: hi new to coding :grin:
+ Astrobytes: Hi new to coding, we are not new to coding
+ ZarthaxX: worst mod :P
+ Astrobytes: I am not!
+ Astrobytes: AntiSquid is way worse, and don't forget about BlaiseEbuth!
+ darkhorse64: defensive programming is a very bad practice performance wise
+ ZarthaxX: :rofl:
+ ZarthaxX: defensive? what
+ Jake_Dubz: i am new to coding, probably not you, but meeee
+ Astrobytes: Defensive in #debug
+ darkhorse64: checking always whether assumptions are wrong
+ ZarthaxX: ah ye branching is super bad :D
+ MSmits: I start doing that when i cant find a bug after X hours of staring
+ AntiSquid: Astrobytes&#160;?
+ MSmits: i drop in like 10 conditional cerr statements and thats usually enough
+ Astrobytes: asserts and if (I'm fking up here) go in #debug mode
+ darkhorse64: that's debugging. It's different
+ ZarthaxX: astro knows :D
+ MSmits: well it's all i do
+ MSmits: never used an assert
+ Astrobytes: darkhorse64: the point being that's not the code you use in your main program
+ ZarthaxX: use asserts D:
+ darkhorse64: I know
+ Astrobytes: You never used assert MSmits?!
+ MSmits: nope
+ ZarthaxX: this guy is crazy
+ ZarthaxX: someone hold him
+ <b>**ZarthaxX brings the c++ branch</b></p><p><img src="/a/58491929211531" /> AntiSquid: why use asserts? you should know what your program does
+ <b>**Astrobytes holds MSmits and lets ZarthaxX beat him with the C++ branch</b></p><p><img src="/a/17784428403916" /> MSmits: I dont have any strong reason not to us eit, i just never tried
+ MSmits: lots of things i never did with c++
+ <b>**ZarthaxX starts beating Msmits with the branch nonstop</b></p><p><img src="/a/17784428403916" /> MSmits: i never made a file with .h at the end
+ Astrobytes: AntiSquid: we're only hooman
+ ZarthaxX: MSmits :I
+ ZarthaxX: *shit*
+ jacek: oO
+ Astrobytes: Oo
+ AntiSquid: MSmits if you already have some efficient way to to debug you probably still don't need it
+ MSmits: possibly i could save some time if i did use it, i dunno
+ MSmits: I am very noob with C++
+ AntiSquid: oh this again ...
+ Astrobytes: It's in c too
+ ZarthaxX: lmao
+ Astrobytes: Honestly it's a good sanity check
+ MSmits: it's just a very tiny part of c++ i use, 1 file solutions with very few features from c++
+ ZarthaxX: im tired of doing this already astro
+ AntiSquid: remember that c++ meme with a guy learning c++? and then discovering immortality elixir, then time travel and then going into the past to kill his former self before he could waste time on learning all of c++&#160;? MSmits
+ <b>**ZarthaxX gives c++ branch to astro</b></p><p><img src="/a/17784428403916" /> MSmits: nope, dont know that meme
+ AntiSquid: ya
+ <b>**Astrobytes beats the **** out of MSmits to probably no real positive outcome</b></p><p><img src="/a/17784428403916" /> MSmits: torture won't make me code better :P
+ Astrobytes: :D
+ AntiSquid: <a rel="nofollow" class="external free" href="https://img-comment-fun.9cache.com/media/aKxWNeb/akm0d6Nr_700w_0.jpg">https://img-comment-fun.9cache.com/media/aKxWNeb/akm0d6Nr_700w_0.jpg</a> MSmits
+ ZarthaxX: GIVE IT TO HIM ASTRO, YE
+ ZarthaxX: MSmits we will see
+ <b>**ZarthaxX brings the c branch</b></p><p><img src="/a/17784428403916" /> MSmits: I think this is true for any language btw. Euler is horrified about how i use C# also
+ Astrobytes: AntiSquid: but that's a meme about the 'teach yourself C++ in 21 days' books
+ AntiSquid: same end result
+ ZarthaxX: LOL squido
+ ZarthaxX: MSmits how do you use it?
+ ZarthaxX: i get it tho, the use you give to those lnaguages is purely for bots
+ MSmits: like a c++ without segmentation faults, very simply, using very few features
+ ZarthaxX: doesnt require you to know a lot
+ Astrobytes: Let's just say, generics don't get a look-in
+ ZarthaxX: thought so haha
+ ZarthaxX: linq, what is that? :D
+ MSmits: yeah i barely ever use linq
+ MSmits: when i do, its because i copied some code from somewhere
+ MSmits: but doing FP class, so maybe i'll start using it more
+ Astrobytes: And you declare strange lists
+ MSmits: how do you mean strange?
+ MSmits: it just normal lists
+ MSmits: objects, ints etc.
+ MSmits: but generally I do it the same way as in C++ and just declare arrays that are large enough
+ jacek: weird names
+ Astrobytes: List&lt;T&gt;
+ AntiSquid: well higher contest rank results means either linq is bad or best to focus on what matters, not how ugly the code is
+ MSmits: linq is good for when coding speed matters and performance does no
+ MSmits: t
+ MSmits: would be great in code a la mode for example
+ Astrobytes: List&lt;T&gt; is what you don't use
+ MSmits: i dont, no
+ MSmits: i just know the type of the list
+ jacek: :scream:
+ Astrobytes: You miss out on the whole power of generics
+ MSmits: i dont template in c++ either
+ MSmits: yep
+ Astrobytes: Heathen.
+ MSmits: its not like i dont understand it, i just dont have practice with it
+ struct: in cg it doesnt have much use tbh
+ MSmits: these bots are all fairly short and at some point it just works
+ AntiSquid: wait c++ template programming is like a programming language of its own
+ Astrobytes: Practice! It can only improve your skills&#160;;)
+ Astrobytes: AntiSquid: C++ templates don't have to mean full on template metaprogramming insanity
+ therealbeef: compile time limitations mostly prevent any serious template meta programming
+ therealbeef: (ive tried)
+ Astrobytes: Masochist!
+ therealbeef: i'd be unfair anyway
+ MSmits: why is it unfair?
+ AntiSquid: you take a step in that direction, why would you ever stop
+ MSmits: i dont see how i would get more performance using templates?
+ therealbeef: you can do calculations at compile time, which other languages cant do
+ MSmits: hmm
+ MSmits: I see
+ MSmits: but in many cases that doesnt matter
+ Astrobytes: because you can simply template functions and simple things without going nuts AntiSquid
+ therealbeef: i calculated part of the uttt eval function at compile time
+ MSmits: the first 1 second in most bots is already overkill
+ Astrobytes: There is templates and then there is template metaprogramming
+ AntiSquid: i know
+ MSmits: because you need calculation time later on in the game, when moves have been made, not in the first second
+ MSmits: exception is games where you use the full 1 second to precalculate endgame db or something
+ Astrobytes: &lt;insert time banking comment here&gt;
+ AntiSquid: 1 second to decode an entire book of most important moves and positions, think about it
+ MSmits: actually in oware i dont decode, i calculate
+ MSmits: i decode the opening book though
+ MSmits: 9 seed db in 500 ms or so and a little bit of time for the 2-3k moves from opening book
+ Tuo: uint64_t f = 1 &lt;&lt; i;such a simple line of code, the problem must be somewhere else
+ AntiSquid: does this count as obfuscation&#160;? it does right?
+ Tuo: hours of life wasted&#160;:(
+ MSmits: what does?
+ jacek: Tuo 1ULL &lt;&lt; i
+ darkhorse64: tuo 1ULL &lt;&lt; i
+ Astrobytes: Tuo: 1ULL &lt;&lt; i
+ AntiSquid: books MSmits
+ Tuo: y :D
+ AntiSquid: tuo&#160;: 1ULL &lt;&lt; i
+ MSmits: my oware book is very readable atm
+ Astrobytes: :rofl:
+ MSmits: havent needed to compress
+ AntiSquid: ah k
+ MSmits: {5{5{1{2{4{2{2  ... etc
+ Tuo: i figured it out in the end, it just took way too long
+ MSmits: it's a tree
+ AntiSquid: what are you working on tuo
+ MSmits: start with move 5, on move 5 from opponent, you play 1 etc.
+ Astrobytes: Tuo: we've all been there
+ MSmits: yeah
+ MSmits: i still do that
+ Astrobytes: I would bet that tuo is working on Clobber
+ MSmits: it's really annoying
+ MSmits: VS warns me though
+ darkhorse64: Read: we all made the mistake
+ MSmits: get a green squiggle
+ Tuo: y globber but im not that far :S
+ MSmits: clobber is a nice game to start doing bitboards
+ UnnamedCodinGamer: I wasted 10 minutes on it the other day
+ MSmits: i wasted hours on this before
+ MSmits: you're lucky UnnamedCodinGamer
+ CryptoZenith: its not wasting if you enjoyed it
+ MSmits: but then again, i dont assert so..
+ Astrobytes: MSmits :P
+ UnnamedCodinGamer: I was trying to print a bitboard and it printed half of it
+ MSmits: ah yeah, typical
+ MSmits: thats sometimes how i find otu
+ Astrobytes: lol, there should be a list of common bitboard issues
+ darkhorse64: LeRenard joins the party
+ Astrobytes: Yay nice one
+ MSmits: i sometimes shift a 32 bit 32 places to the left and then or it to a 64 bit
+ MSmits: thats a similar error
+ MSmits: does nothing
+ ZarthaxX: what party¡
+ MSmits: fox party&#160;?
+ darkhorse64: Top 4 Clobber in 0.5
+ AntiSquid: they call clobber a party
+ MSmits: Sweeper, no swiping!
+ MSmits: :fox:
+ jacek: clob clob clopper
+ ZarthaxX: hell of a party brothers
+ Astrobytes: I think LeRenard just needs another submit, boss is probably boosted. His game history looks good
+ LeRenard: I try a second submit with a updated weight
+ Astrobytes: Looks a lot stronger LeRenard
+ jacek: alpha beta?
+ MSmits: a boardgame leaderboard is not the same without LeRenard on it
+ Astrobytes: ^
+ LeRenard: MCTS
+ MSmits: cool, you usually do ab right?
+ LeRenard: First good result with MCTS
+ MSmits: ahh ok
+ LeRenard: I try a MCTS on UTT but with bad result
+ MSmits: your ab bots tend to be pretty strong. Yavalath one is hard to beat
+ Astrobytes: It really seems MCTSy this game
+ MSmits: LeRenard your uttt problem is probably optimization + lack of heuristics. Add some teccles magic
+ LeRenard: But I copy paste may UTT MCTS in Clobber. 
+ LeRenard: Yes I could retry on UTT
+ UnnamedCodinGamer: what is teccles?
+ MSmits: play 0 on empty 0 board
+ MSmits: 1 on empty 1 board
+ MSmits: 2 on empty 2 board
+ MSmits: etc.
+ MSmits: send opponent to same board
+ BlaiseEbuth: Oh. I was pinged an hour ago...
+ darkhorse64: It's a Clobber chat only. Where is your bot&#160;?
+ Astrobytes: sorry BlaiseEbuth, just saying that you're a worse mod than me to ZarthaxX :P
+ UnnamedCodinGamer: MSmits, thanks
+ MSmits: sometimes teccles is a losing move though, if you check karliso vs recurse, recurse often wins/draws as player 2, because karliso uses teccles in a late 20s play move
+ MSmits: ply
+ MSmits: i solved this move as a loss
+ BlaiseEbuth: That's true. And probably THE worse. Pretty proud of that.
+ darkhorse64: evil mod
+ ErrorRazor: Othello boss timed out&#160;:&gt;
+ jacek: who made it!?!?!?
+ darkhorse64: don't know
+ Astrobytes: :D
+ Astrobytes: BlaiseEbuth: :japanese_ogre:
+ Westicles: Is the MILA clobber code published?  Be interesting to see how it does against you guys
+ darkhorse64: won't fix if it does not happen too often
+ ErrorRazor: First time I've seen it happen
+ ErrorRazor: Usually I'm the one timing out
+ Astrobytes: oh it was played as an 8x8 I see  Westicles
+ Astrobytes: darkhorse64: It's rare
+ darkhorse64: I usually don't have safety margins: I search full time 
+ Astrobytes: Ahh, there I go, back to my safe place at the bottom of Clobber Wood 1. The balance is restored!
+ Astrobytes: (didn't finish porting to mcts yet)
+ struct: this is all I can find
+ struct: <a rel="nofollow" class="external free" href="https://dke.maastrichtuniversity.nl/m.winands/">https://dke.maastrichtuniversity.nl/m.winands/</a>
+ struct: and this, is from lines of action bot
+ struct: <a rel="nofollow" class="external free" href="https://dke.maastrichtuniversity.nl/m.winands/loa/">https://dke.maastrichtuniversity.nl/m.winands/loa/</a>
+ struct: Called Mia
+ jacek: the author of mcts solver paper?
+ struct: Is it him?
+ struct: Well I guess he is also the creator of Mila
+ jacek: he wrote many mcts papers
+ Astrobytes: Yeah winands
+ Astrobytes: <a rel="nofollow" class="external free" href="https://research.cyber.ee/~janwil/publ/clobreport05.pdf">https://research.cyber.ee/~janwil/publ/clobreport05.pdf</a>
+ struct: Westicles 
+ struct: <a rel="nofollow" class="external free" href="https://dke.maastrichtuniversity.nl/m.winands/loa/download.html">https://dke.maastrichtuniversity.nl/m.winands/loa/download.html</a>
+ UnnamedCodinGamer: this guy is the mcts master - look at his Ph.D. Students supervision section
+ struct: "GameMaster 2.0 is an abstract board-game playing computer environment. It plays LOA, Breakthrough, Clobber, Domineering, Knightthrough, and Surakarta."
+ struct: Not sure if the code is public though
+ ZarthaxX: holy f
+ Westicles: Looks like it is just an executable
+ Astrobytes: there are java decompilers
+ ZarthaxX: mcts-minmax hybrid papers too
+ AntiSquid: sounds like some generalized ML 
+ Astrobytes: Also, UnnamedCodinGamer, Rémi Coulom is also on this site (CG that is)
+ jacek: quite old. before that nn hype
+ Astrobytes: Crazy_Remi = Rémi Coulom
+ UnnamedCodinGamer: who is he?
+ Astrobytes: Uh, he invented MCTS for starters&#160;:)
+ AntiSquid: NLP goes very far back, not necessarily NN indeed
+ MSmits: he's on the D&amp;B leaderboard. Miklla beat him though (i did by a small margin as well)
+ Astrobytes: Nice! I hope he gets into some other games
+ UnnamedCodinGamer: I think I have come across the referred as originator MCTS paper from 2006 I think
+ UnnamedCodinGamer: I do not remember his name
+ UnnamedCodinGamer: I might be wrong
+ Astrobytes: "In 2006, inspired by these predecessors, Rémi Coulom described the application of the Monte Carlo method to game-tree search and coined the name Monte Carlo tree search"
+ UnnamedCodinGamer: really nice 
+ Astrobytes: Incorporation of the UCB formula was later, but still. The guy's a legend
+ jacek: remi, winands and Teytaud are common names in mcts papers
+ Astrobytes: Very strong Go engine too
+ Astrobytes: Yes jacek
+ struct: I skip the name part
+ AntiSquid: ya same
+ AntiSquid: but maybe worth keeping track who writes the good papers :P
+ jacek: there are many references
+ Astrobytes: You would do well to look at names so you can read the references.
+ AntiSquid: he gets a lot of citations&#160;?
+ jacek: you read paper and see [name, 2009]
+ Astrobytes: They all do. Read the names and check the references that are in every paper&#160;:|
+ Astrobytes: *every paper related to the subjects we speak of
+ jacek: i wonder have many cites that aerodynamic paper has
+ jacek: dat grammar
+ MSmits: you wonder about that paper too much
+ Astrobytes: Poor jacek needs some (o)(o) in his life
+ therealbeef: an owl?
+ MSmits: yes, for the sake of the children, lets assume it's an owl :P
+ Astrobytes: I'm no good at these things
+ MSmits: :owl:
+ Astrobytes: Assume owl for safely
+ Astrobytes: *safety
+ Astrobytes: Other than that: he needs BREASTS
+ Astrobytes: Women, etc etc
+ MSmits: ah i was going to assume chicken next, protein etc.
+ therealbeef: what are the etc etc?
+ Scarfield: xD
+ Astrobytes: He's into anime and catgirls
+ MSmits: ponies
+ Astrobytes: Hence the etc
+ jacek: who isnt?
+ Astrobytes: Aaaaand the ponies
+ Astrobytes: I'm not into anime. Or ponies.
+ Astrobytes: Catgirls...
+ Scarfield: to each their own
+ jacek: you have cat avatar
+ MSmits: and she is a girl
+ Astrobytes: Both of my cats are
+ Scarfield: and you say you are not into them :thinking:
+ Astrobytes: That doesn't mean I'm into human-woman-cat hybrids
+ AntiSquid: they can wear a costume
+ Astrobytes: They might be aesthetically pleasing, they might not. Either way they'd be fking terrifying
+ Scarfield: meh frog girls are where its at
+ AntiSquid: hybrids are creepy
+ Astrobytes: Elon can take his cat girls to MArs
+ Scarfield: he likes car girls?
+ AntiSquid: elon is playing along with the memes for popularity
+ Scarfield: cat *
+ MSmits: probably car also
+ Scarfield: xD
+ AntiSquid: someone joked about elon creating cat-girls and then elon reacted that it's an interesting idea, forgot exact story
+ AntiSquid: he already sent a tesla roadster to space MSmits, but you probably already know about it
+ MSmits: nope
+ MSmits: do you mean a toaster?
+ AntiSquid: oh
+ ErrorRazor: Lmao
+ AntiSquid: no, a car
+ MSmits: that doesnt make sense
+ MSmits: space has no roads
+ AntiSquid: it does if you look at the story behind it
+ MSmits: ok
+ AntiSquid: well it achieved multiple things
+ AntiSquid: including advertising
+ AntiSquid: point was to send a heavy load into space and prove his rockets can deliver this task
+ MSmits: I see
+ AntiSquid: so he used one of his cars to advertise ...
+ Nachosauce: Or maybe space is one large road
+ Scarfield: road theory
+ AntiSquid: oh and it was orbiting Mars at some point MSmits, comon you should know Mars' satelites
+ MSmits: phobos and deimos
+ AntiSquid: and tesla roadster
+ AntiSquid: for a while
+ MSmits: i refuse to memorize the tesla toaster
+ AntiSquid: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=msn7xbfEHoA">https://www.youtube.com/watch?v=msn7xbfEHoA</a>
+ AntiSquid: car is displayed at 8:39
+ AntiSquid: has an astronaut dummy too
+ Nachosauce: Are you an octopus?
+ AntiSquid: one moment Nachosauce
+ MSmits: I see
+ AntiSquid: Nachosaucehttps://ultimatemotorcycling.com/2015/03/02/motorcycle-squid-on-the-rise-join-the-anti-squid-movement/ read this @_@
+ MSmits: dont trigger him about the motorcycle thing
+ Scarfield: you seem impressively unimpressed smitsi&#160;:)
+ MSmits: it's not very scientific
+ AntiSquid: until&#160;! an alien species finds it, equips it with AI and fancy gadgets and the car returns to earth looking for its master next millennia 
+ AntiSquid: referencing star trek here, voyager returned to earth on its own :P
+ Astrobytes: I sent a heavy load into space once, that was a great night, she was... I never did find it in the morning anyway so I assume it went to space ...
+ MSmits: I'm thinking first contact will be a traffic accident&#160;:(
+ AntiSquid: tunguska style&#160;?
+ AntiSquid: not saying it was aliens, could be a car equiped with AI from another civilization
+ MSmits: that's just a meteorite :P
+ struct: The car is still travelling right?
+ therealbeef: the squid article mentions 'google+', so quaint
+ AntiSquid: yes, don't think it hit anything, maybe he should have mounted a satellite on the back of the car?
+ Astrobytes: Wait til it collides with my load, AB2014
+ Astrobytes: Anyway, without further innuendo I shall say goodnight
+ AntiSquid: do you know about starlink btw?
+ ZarthaxX: cya astro :P
+ AntiSquid: gn8
+ MSmits: gn
+ struct: gn
+ Scarfield: gn
+ UnnamedCodinGamer: <a rel="nofollow" class="external free" href="https://twitter.com/Remi_Coulom/status/1311426326868430849">https://twitter.com/Remi_Coulom/status/1311426326868430849</a>
+ MSmits: btw, if anyone is interested in the teccles fail at ply 28 for karliso vs recurse. I just reproduced it in IDE and got solved status from my meta mcts
+ struct: "easy to beat"
+ UnnamedCodinGamer: is he saying that he used alpha zero?
+ struct: he is saying it doesnt work
+ struct: for d&amp;b
+ MSmits: it really doesn't
+ MSmits: also hard to use NN, but not impossible ofc. NN can do anything, but might be too constrained in CG
+ UnnamedCodinGamer: then it is not clear what he used 
+ MSmits: he used some form of nimstring analysis
+ MSmits: like mikkla and I do
+ MSmits: it's the most math-y game on CG
+ MSmits: have to get into combinatorial theory
+ UnnamedCodinGamer: yes, he mentions it in the reply to the question
+ MSmits: clobber uses some of this too, but it's less critical there
+ MSmits: ah ok
+ MSmits: i cant read the reply, no twitter account
+ struct: "Dots and boxes is not a game where you build an intuition of who is ahead. You have to calculate exactly. And it is a combinatorial game. It may be possible to make AlphaZero work with the right network architecture, but I have not found it."
+ struct: You dont need a twitter account 
+ MSmits: ah ok, yes
+ MSmits: thats it, you do have to calculate exactly
+ MSmits: any infinitesimal error in a "rough eval" would completely turn the game around
+ MSmits: it's in permanent zugzwang
+ MSmits: the only feature you could evaluate is whomevers turn it is basically
+ MSmits: even the score is useless, because the score has no bearing on what the best move is
+ MSmits: you can supposedly count chains and get a likelyhood that you will end up ahead, but it's basically a halfassed nimstring analysis
+ EmbeddedIs77: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/1634293c8c92adc0b0de4e5c3845ea517cc6045">https://www.codingame.com/clashofcode/clash/1634293c8c92adc0b0de4e5c3845ea517cc6045</a>
+ struct: MSmits do you think NN would work on STC?
+ AntiSquid: why would it not struct&#160;?
+ struct: I think it should
+ AntiSquid: i am assuming #1 on stc is NN
+ AntiSquid: #clash EmbeddedIs77
+ MSmits: it might be a bit complicated. the interaction between player and opponent is weird in stc
+ MSmits: same as with hypersonic. If you use a NN there, you lose the powerful beam search that ignores opponent
+ MSmits: using a NN in boardgames is just different
+ MSmits: might be that it's useful to use a NN partially, in a bot. Do some parts with pure math or brute force and do other parts with NN
+ Kyuujin: hello to night coders
+ Nick_Svaki: the problem description is hard to understand.
+ ZarthaxX: which one Nick_Svaki?
+ Nick_Svaki: I don't know how to seek the problem that I can't solve.
+ ZarthaxX: what problem is it

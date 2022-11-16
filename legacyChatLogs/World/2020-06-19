@@ -1,0 +1,694 @@
+ Reksio: Thank you for your answer. This is good to hear!
+ Reksio: I have two more questions for whomever knows and would be kind enough to answer.I also wonder if there is a way to get an error output after submit. 
+ anid: No that is not allowed for puzzles Reksio
+ anid: You may print the validators and hence it should not be allowed
+ Reksio: oh, thanks. It's all right I suppose
+ anid: but in the case of bot programming, it is accessible from the replay
+ Reksio: thanks
+ Reksio: The second question. I did some dump of Console.ReadLine and WriteLine and it looks like this: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/cb58630d-8d37-4ebb-8a42-527ad08a5865">http://chat.codingame.com/pastebin/cb58630d-8d37-4ebb-8a42-527ad08a5865</a>
+ Reksio: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/0284f5d4-974e-46f1-9c9c-c01e9eddedde">http://chat.codingame.com/pastebin/0284f5d4-974e-46f1-9c9c-c01e9eddedde</a>
+ Reksio: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/aa9876a9-2db2-40d1-90a9-77ebf20785b3">http://chat.codingame.com/pastebin/aa9876a9-2db2-40d1-90a9-77ebf20785b3</a>
+ Reksio: Why it shows this link...
+ Reksio: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/f2faef03-bb34-431c-860c-90c881950418">http://chat.codingame.com/pastebin/f2faef03-bb34-431c-860c-90c881950418</a>
+ anid: If you paste over 5 lines, it goes to pastebin
+ Reksio: Ok, sorry for spamming but I'm trying to get rid of the link thing
+ Reksio: ah
+ anid: NP
+ Reksio: Read: 6715 microsecondsRead: 2 microseconds...Write :5 microseconds
+ anid: So if you print too many error messages, it only shows the first and last
+ anid: otherwise it would be too many lines
+ anid: I think there is a char limit
+ Reksio: Read: 6715 microsecondsRead: 0.2 microseconds...Write&#160;: 0.5 microseconds
+ Reksio: Actually this is correct. I don't have ...
+ Reksio: I just didn't want to post too many lines
+ Reksio: I wonder if it is normal for first read to take so much time
+ Reksio: I specifically talk here about the descent
+ Reksio: it's the early puzzle
+ Reksio: I'm trying to create my own tests but I wonder how game treats reading of input for 6.7 miliseconds
+ Reksio: while the algorithm itself takes &lt; 1 microsecond for example
+ Reksio: or are those slowdowns only in IDE mode but after submit there are some guarantees about execution time of ReadLine and WriteLine
+ Reksio: I guess I just wonder how is execution time being calculated.
+ Reksio: Is number of reads and writes always set in stone and time it takes to run them always counted as fixed value (possibly 0)&#160;?
+ tutubalin: Some times input is like that:1st line: number NNext N lines: blablabla
+ tutubalin: So input length may vary
+ dbdr: execution time is not calculated, it is measured with a clock
+ Reksio: I'm trying to say that ReadLine which is provided to us can take x100 more time to execute than our own algorithm.
+ dbdr: you should start measuring after you first readline, not before
+ Reksio: which seems ridiculous and hopefully is accounted for somehow by removing the impact of the input/output on final "speed" score (or some solution of sort)
+ dbdr: otherwise you are measuring things that are not your code
+ dbdr: readline can "take time" because it is waiting for input
+ dbdr: but that's not counted as your time by the referee
+ jacek: ^
+ dbdr: v
+ Reksio: ok, but if input time is not counted then how is solution which reads line 1000 times scored against solution which reads line only 10 times. In real life the solution which waited for input 1000 times would be much slower.
+ dbdr: think of it from the point of view of the CG code
+ dbdr: it sends the input, then it starts its clock and waits for your response
+ dbdr: don't worry about the time readline takes, it's negligible
+ dbdr: (once the input is present)
+ Reksio: thank you. I will treat it as such then. This helps quite a lot!
+ dbdr:&#160;:+1:
+ jacek: for puzzle does time really matters except for timeouts?
+ jacek: wether it is 20ms or 50ms
+ tutubalin: Reksio the very first ReadLine may look pretty long time (from your code perpective) but referee doesn't take it into account (it;s zero for it).So start you clock after first ReadLine - that will make measures much more realistic.
+ tutubalin: Also take into account that time functions are not accurate, so if timeout is 100ms, try to fit in 95ms
+ Reksio: Is it just 1st read line or all read lines  and write lines? The write line takes whole 5microseconds which is longer than my whole algorithm takes for the whole game (0.5microsecond) if you substract input/output from it.
+ tutubalin: just first
+ Reksio: So other readlines + writelines which can take x5 amount of time of my algorithm will be counted to the score from what you say. Then why not all of them? Is there anywhere CG actually describe all of this?
+ dbdr: time does not influence score
+ Reksio: really? Is it just timeout based?
+ dbdr: yes
+ Reksio: oh, interesting but good. Is it also true for bot competitions? Some people are complaining that C++ has advantage for CG puzzles but with just timeout as score I don't see how...
+ dbdr: they were speaking about multis, not puzzles
+ dbdr: time matters when you want to run a search to optimize something, and run your algo as many times as possible in the allowed 50ms
+ Reksio: makes sense
+ Reksio: So I just need to clarify as I get mixed responses if all input/output (readline/writeline) is cut from time I spent running my puzzle or just the first one  in the whole game or the first one for each loop cycle.
+ Uljahn: i think the first one in the whole game (common time limit is 1 sec) and the first one for each loop cycle
+ Uljahn: ofc you can check it yourself
+ tutubalin: don't measure time of the first read of every loop cycle
+ tutubalin: because it takes much longer due to switch from another bot
+ Reksio: thanks all for your answers
+ jacek: darkhorse64 do you have some bias in your rollouts?
+ darkhorse64: For Othello, no at the moment
+ jacek: my early results with moves at corners trice as likely as others have much better winrate
+ darkhorse64: That makes a lot of sense because taking corners is almost always a favorable move
+ darkhorse64: I am trying to write a boss for Othello based on my best bot. I have nerfed the perfs, removed some features and it performs better :nerd:
+ jacek: nerfed bot is better?
+ dbdr: lol
+ dbdr: a top 1 bot is born
+ darkhorse64: Yes but it still rank 6. The good news is that by removing code I probably fixed a bug in my bot. The bad news is that I won't get promoted against my own creature if struct creates a league with my boss.
+ CodinBotChatRelay: Pratyush#9392:ok
+ darkhorse64: *it is*
+ CodinBotChatRelay: Pratyush#9392:@CodinBot leaderboard coding
+ CodinBotChatRelay: Pratyush#9392:@CodinBot clash
+ CodinBotChatRelay: Pratyush#9392:@CodinBot contest
+ AggYz: GOOBA
+ CodinBotChatRelay: Pratyush#9392:ok
+ CodinBotChatRelay: Pratyush#9392:hi
+ CodinBotChatRelay: Pratyush#9392:bye
+ CodinBotChatRelay: Pratyush#9392:hello
+ CodinBotChatRelay: Pratyush#9392:how are you
+ CodinBotChatRelay: Pratyush#9392:
+ AntiSquid: spam? @_@
+ AntiSquid: could do that in a private chat you know
+ Astrobytes: darkhorse64: did you fix your skip nodes issue?
+ Astrobytes: AntiSquid: isn't that Benjamin's account for when he can't log in
+ AntiSquid: yes, but should he test his bot on the main chat?
+ Astrobytes: No I agree, just checking you knew it wasn't some random crap
+ AntiSquid: i am just thinking about this as what if everyone did the same thing
+ Astrobytes: Well, still random crap&#160;;)
+ AntiSquid: what if everyone posted clash invites
+ Astrobytes: No I agree
+ darkhorse64: Using struct expert inputs helped a lot yes
+ Astrobytes: Nice one&#160;:)
+ AntiSquid: expert inputs? 
+ AntiSquid: extra inputs?
+ Astrobytes: No, expert
+ Astrobytes: Well, bthe really&#160;:)
+ Astrobytes: *both
+ Astrobytes: 'If you output "EXPERT followed by the move"...'
+ AntiSquid: aha
+ Astrobytes: Just for all opponents moves and passes from the previous turn
+ AntiSquid: would be really useful in many multis, less of having to reverse engineers opponent's move
+ Astrobytes: Yeah it didn't occur to us before we approved, was only when darkhorse was having trouble with pass moves nodes in his MCTS we figured it would be a good idea, so struct very kindly patched it for us
+ darkhorse64: Yes, fog of war for opponent moves is not handy
+ Astrobytes: euler has it in Vindinium too
+ darkhorse64: We should have guidelines for board games. "Opponent moves must be in the inputs". It's actually more useful than game state because you wlll have to write an engine anyway
+ Astrobytes: That's a fair point actually
+ AntiSquid: make it retroactively so XR has it too :p
+ jacek: and oware
+ CodinBotChatRelay: Proven Angel#3425:<a rel="nofollow" class="external free" href="http://c-help.tk">http://c-help.tk</a> - STUDENT PAPER ASSIGNMENTS DONE BY ACADEMIC WRITERS
+ Astrobytes: ehm
+ Astrobytes: AntiSquid
+ raulet: Hi, new here, Whats "the Boss Validator"&#160;?
+ CodinBotChatRelay: Proven Angel#3425:<a rel="nofollow" class="external free" href="http://c-help.tk">http://c-help.tk</a> - STUDENT PAPER ASSIGNMENTS DONE BY ACADEMIC WRITERS
+ CodinBotChatRelay: Pratyush#9392:What the heck are you all doing here
+ CodinBotChatRelay: Pratyush#9392:??????
+ CodinBotChatRelay: Pratyush#9392:I will kick you then have fun
+ PhanMinhTien: hello everyone
+ raulet: hello
+ cult: hi
+ jacek: boss validator? where
+ struct: hi
+ raulet: <a rel="nofollow" class="external free" href="https://www.codingame.com/training/easy/a-mountain-of-a-mole-hill">https://www.codingame.com/training/easy/a-mountain-of-a-mole-hill</a>
+ raulet: I don't know what kind of procedure i'm expected to do to pass that.
+ jacek: every puzzle has test cases in validation that are not available in IDE to avoid hardcoding solutions. you can't know them
+ jacek: this probably means your solution has some bugs
+ raulet: they should give a clue or something on what expected to do or use, stuck at 87%, and don't know what I have to fix&#160;;&#160;;.
+ Astrobytes: They usually use edge cases or test efficiency. Make some custom test cases and make sure your algo can handle them properly
+ Astrobytes: e.g. large garden with lots of enclosed fence areas and lots of molehills
+ raulet: I will try that, thank you.
+ Astrobytes: Perhaps use "How did THAT happen?" test case as a starting point for your custom case
+ Astrobytes: Also "Include and infiltrate" because of all the nested fenced areas
+ tutubalin: your goal is to implemented what is specified in Puzzle StatementTest cases are just a way to test your solution (that's why they are called tests).So watching tests and trying to cover only cases described there is wrong way.
+ tutubalin: In real life part programming some test cases are provided by QA, but a lot of test cases are created by developer themselves.
+ Astrobytes: Hey tutubalin, it's nice to see the #ru users being more active in #world recently&#160;:)
+ eulerscheZahl: you could just go to #ru if you miss them
+ Astrobytes: My Russian isn't so good&#160;;)
+ eulerscheZahl: they are more relaxed about english speaking intruders than our french friends
+ Astrobytes: :D
+ darkhorse64: I use google translate. Funny results sometimes
+ Astrobytes: It's not too bad for Russian mostly
+ Astrobytes: I wouldn't rely on it to translate my English (or French for that matter) to Russian though
+ Uljahn: do you miss MadKnight? i guess he got offended by being compared to a bot&#160;:(
+ wlesavo: Astrobytes you have to be working  on uttt to join #ru though :slight_smile:
+ Astrobytes: The idea of Maddy being so offended that he left is a wonderful irony
+ Astrobytes: lol wlesavo, seems so!
+ wlesavo: this uttt fever going for a while, i got caught by it even in self isolation
+ Hjax: wait, you guys scared away madknight? 
+ eulerscheZahl: sometimes i had the impression that cyberpunk used google translate
+ Astrobytes: Yes, for some things I think he died
+ eulerscheZahl: he was really understandable here on world (general back then). but his private messages were glibberish sometimes
+ Astrobytes: *did, lol
+ wlesavo: and died as well
+ eulerscheZahl: nah
+ eulerscheZahl: he just left us&#160;:(
+ Astrobytes: He pops up in #ru discord with random ML related things now and then
+ eulerscheZahl: but ru to en works surprisingly well
+ eulerscheZahl: i never tried ru to de
+ Astrobytes: afk
+ wlesavo: Ich denke, Russisch zu Deutsch wird schlechter sein, da es viel weniger Benutzer gibt
+ tutubalin: ja
+ wlesavo: tell me if that makes any sence :smiley:
+ tutubalin: Basically German is closer to slavic languages than English
+ Hjax:&#160;? isnt english a germanic language 
+ tutubalin: also many words came to Russian from German
+ eulerscheZahl: this sentence makes perfect sense wlesavo
+ eulerscheZahl: was about to ask you if you speak German :D
+ wlesavo: :smiley:
+ tutubalin: German is closer to English than to slavic. But it is closer to slavic than English to slavic
+ eulerscheZahl: i read an interview of a google lead engineer for translations 1 or 2 years ago
+ jacek: omelette du fromage
+ eulerscheZahl: he's a fellow German and disappointingly said that german&lt;-&gt;english doesn't work as good as he'd like
+ eulerscheZahl: machine learning approach, just feeding lots of texts and translations of books
+ tutubalin: gurken - ogórek - ogurets
+ tutubalin: eulerscheZahl probably they parsed it as words
+ tutubalin: so they couldn't find a proper mapping for Donaudampfschifffahrtselektrizitätenhauptbetriebswerkbauunterbeamtengesellschaft
+ jacek: a cat sat on your keyboard?
+ wlesavo: tutubalin there are tools for feeding whole sentences i believe, no need to parse it
+ Astrobytes: "Association for Subordinate Officials of the Head Office Management of the Danube Steamboat Electrical Services"
+ Astrobytes: Google version: "danube steam shipping electricity main plant construction subordinate company"
+ jacek: try deepL
+ wlesavo: russian version looks like translation from english as well 
+ Astrobytes: jacek, deepL just gives the same text back
+ tutubalin: i think that most of emails of this company cannot pass spam filter
+ Astrobytes: :D
+ NASADeveloper102: How do links work in Ghost in the Cell
+ Astrobytes: factory1 is linked to factory2, factory2 is linked to factory1. distance is the distance (int turns) between them
+ Astrobytes: *in turns
+ eulerscheZahl: and the distance is an int
+ Astrobytes: :P
+ eulerscheZahl: btw where did the space maze guy go?
+ Astrobytes: Just disappeared. Thankfully  
+ Astrobytes: Working on his ray casting NN I suppose.
+ NASADeveloper102: I don't mean that.
+ NASADeveloper102: I mean how do we know the ID of the factory we're talking about.
+ NASADeveloper102:&#160;?
+ Astrobytes: factory1 is the ID of factory1 and factory2 is the ID of factory2&#160;;)
+ NASADeveloper102: Oh my lord
+ NASADeveloper102: I don't know how I didn't realize this.
+ Astrobytes: Too long staring at it no doubt :D
+ NASADeveloper102: Probably.
+ Astrobytes: Easily done
+ NASADeveloper102: Thanks for the help!
+ Astrobytes: No worries, good luck&#160;:)
+ NASADeveloper102: :thumbsup:
+ beinebruestearschgesicht: hey all
+ NASADeveloper102: Hello
+ sHlOk: Hi everyone!
+ sHlOk: How r u all?
+ NASADeveloper102: I'm doing well
+ NASADeveloper102: and you?
+ sHlOk: Well and fine!
+ NASADeveloper102: Nice :thumbsup:
+ Hjax: NASADeveloper102 you took my suggestion? 
+ Hjax: ill be working on a ghost in the cell bot this weekend as well
+ NASADeveloper102: Yes I did!
+ NASADeveloper102: Thanks, this game seems pretty simple, but it allows for a lot of different strategies.
+ AggYz: i lern python 2 min ago
+ AggYz: time to clap ppl
+ sHlOk: :clap::clap::clap:
+ NASADeveloper102: :clap:
+ NASADeveloper102: Good job
+ tutubalin: Python 2 is a bit outdated
+ NASADeveloper102: I don't even think you can get it in codingame anymore
+ -Gamma-: i think he/she meant...
+ -Gamma-: I leant python "2 minutes ago"
+ -Gamma-: learnt*
+ NASADeveloper102: Oh I see.
+ tutubalin: No
+ tutubalin: I leant "python 2" a minute ago"
+ NASADeveloper102: Why do you say that?
+ Hjax: they definitely meant (i learned python) (two minutes ago)
+ NASADeveloper102: That's what I thought.
+ NASADeveloper102: Why would it be, " I learnt python 2, a minute ago"?
+ wlesavo: learn python2 min()
+ Hjax: learn min(python2, go)
+ NASADeveloper102: Huh?
+ NASADeveloper102: :joy: I wish I understood this.
+ Hjax: we are just being silly
+ Hjax: pay no mind :P
+ NASADeveloper102: Uh okay then
+ muy31: for some reason recently the console in various arenas have been giving me: Warning: your code did not read all available input before printing an instruction, your outputs will not be synchronized with the game's turns and unexpected behaviour may occur.
+ muy31: enev though i always read all inputs
+ muy31: is it some bug
+ Hjax: yeah pretty sure its a bug 
+ Hjax: ive been seeing it too 
+ wlesavo: this is a recent feature, i think it was introduced in some forum post
+ Hjax: i definitely am reading all of the inputs 
+ muy31: but then it actually messes up my execution
+ muy31: and i timeout
+ wlesavo: are you sure this is the issue? i got that message only when i had an actual bug in my code
+ muy31: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/3719a39a-4369-4251-9bfd-78ca860eea0c">http://chat.codingame.com/pastebin/3719a39a-4369-4251-9bfd-78ca860eea0c</a>
+ muy31: when I delete the 'depth' on the return statements i get the bug
+ tutubalin: i have it every so often
+ muy31: as in return -50, 50, etc.
+ tutubalin: when i press Play button again it disappears
+ Hjax: maybe they fixed it, im not getting it anymore
+ Hjax: i was getting it a lot the other day 
+ muy31: no didnt fix, now i get it randomly
+ jacek: lets fix it and release on friday afternoon
+ struct:&#160;:)
+ Astrobytes: I get it randomly, sometimes when I crash, sometimes if I print to stderr, othertimes just out of the blue. Never once, may I add, for the reason it is intended.
+ karimdjemai: Has someone got an idea why bitwise operators in js like | might return something like 1010274303&#160;? shouldnt it be only 0s and 1s? 
+ jacek: w00t?
+ karimdjemai: for example (1010011101 | 1010110010) evaluates to1010274303
+ Hjax: i phrased that poorly 
+ jacek: no way, in python its also 1010274303!
+ Hjax: it takes two numbers, regardless of a base, and returns a number, regardless of base 
+ Hjax: base is just how you display the number, it doesnt change the value 
+ jacek: karimdjemai try (0b1010011101 | 0b1010110010).toString(2)
+ karimdjemai: ohh so youre saying it interprets the numbers as base 10 by default?
+ Hjax: yes, but you are also inputting base 10 numbers 
+ Hjax: 101 is one hundred and one, not 5, unless you specifically tell it you are using base 2 
+ karimdjemai: thank you a lot i was very confused :D
+ Hjax: 1010011101(base 10) binary or 1010110010 (base 10) is in fact 1010274303 (base 10)
+ karimdjemai: makes sense!
+ tutubalin: Also, remember about no very well-known feature of JS: bitwise operations always cast number to 32-bit signed integer.
+ tutubalin: 1e10 | 0 == 1410065408
+ tutubalin: (2e10 * 2)&#160;!= (2e10 &lt;&lt; 1)
+ jacek: <a rel="nofollow" class="external free" href="https://stackoverflow.com/questions/26323776/why-does-this-print-out-10">https://stackoverflow.com/questions/26323776/why-does-this-print-out-10</a>
+ tutubalin: jacek <a rel="nofollow" class="external free" href="https://tutubalin.github.io/">https://tutubalin.github.io/</a>
+ tutubalin: watch page source )
+ Astrobytes: haha very nice
+ tutubalin: script works in Node.js as well )
+ tutubalin: <a rel="nofollow" class="external free" href="https://stackoverflow.com/questions/22588223/how-does-this-magic-javascript-code-work">https://stackoverflow.com/questions/22588223/how-does-this-magic-javascript-code-work</a>
+ tutubalin: also some nice slides from Martin Kleppe
+ tutubalin: <a rel="nofollow" class="external free" href="https://speakerdeck.com/aemkei/the-art-of-obfuscation-frontcon-riga">https://speakerdeck.com/aemkei/the-art-of-obfuscation-frontcon-riga</a>
+ code_maniac: This website is cool for such braifuck tricks <a rel="nofollow" class="external free" href="http://www.jsfuck.com/">http://www.jsfuck.com/</a>
+ code_maniac: This website is cool for changing any normal code to brainfuck code <a rel="nofollow" class="external free" href="http://www.jsfuck.com/">http://www.jsfuck.com/</a>
+ jacek: you mean to change into js
+ code_maniac: You can change both way
+ Astrobytes: Martin Kleppe created JSFuck
+ code_maniac: He has given a talk on this as well
+ Astrobytes: I liked his 'inceptions'
+ Astrobytes: jacek y u still #2
+ jacek: i dont wanna tric to rage quit
+ Astrobytes: :laughing:
+ tutubalin: Astrobytes yeah, inceptions is great
+ tutubalin: alas there are some XSS attacks are based on this technique
+ Astrobytes: Yeah, that's always gonna be the way whatever you do. It gives you some knowledge to be able to detect such attacks however.
+ NASADeveloper102: Do you recommend light mode, for chat and coding
+ jacek: :scream:
+ NASADeveloper102: What?
+ NASADeveloper102: Did I say forbidden words or something?
+ NASADeveloper102: Is "light mode" a construct that is aggravating to some people?
+ NASADeveloper102: Probably honestly.
+ jacek: eeyup
+ CPea: ey
+ jacek: <a rel="nofollow" class="external free" href="https://blog.codota.com/wp-content/uploads/2019/02/04-Better-than-me.jpg">https://blog.codota.com/wp-content/uploads/2019/02/04-Better-than-me.jpg</a>
+ Astrobytes: "light mode" - what is this witchcraft
+ tutubalin: come to dark side
+ NASADeveloper102: I'll just continue using Light++
+ NASADeveloper102: *Light+
+ Astrobytes: You don't know the power of the dark side
+ NASADeveloper102: Uh, sure.
+ Astrobytes: :P
+ Astrobytes: Just ribbing.
+ NASADeveloper102: :joy:
+ NASADeveloper102: Okay then.
+ NASADeveloper102: Also why would you use vim for C#?
+ NASADeveloper102: Not you specifically, but anyone.
+ Astrobytes: Masochism?
+ NASADeveloper102: y i k e s
+ NASADeveloper102: I see.
+ Astrobytes: Finished your boss yet darkhorse64?
+ darkhorse64: Yes. I"m trying to understand why it works so well. I removed the solver, nerfed the engine by a factor of 2
+ Hjax: boss for what? 
+ Astrobytes: How 'well' does it work? 
+ muy31: breakthrough
+ Astrobytes: no, Othello
+ darkhorse64: othello. It ranks #6
+ muy31: oh
+ Hjax: why are we calling it a boss? 
+ Astrobytes: Because it will be
+ muy31: for leagues, right
+ Hjax: othello is going to have leagues? 
+ Hjax: do community multis have leagues? 
+ Astrobytes: Well, 2
+ Astrobytes: Yes. Only Wood leagues though
+ darkhorse64: If struct wants for a boss for a league, I could offer one
+ Hjax: i see 
+ Hjax: why only wood leagues?
+ Astrobytes: But you can call them whatever you like
+ struct: Sure darkhorse64
+ Astrobytes: CG issue Hjax
+ darkhorse64: I think a tough may foster some interest from other players. Give me a few days for testing. My eekend is going to be very busy (read not much time for CG)
+ darkhorse64: *tough bot*
+ Astrobytes: Yes, I'm all for decent bosses
+ Astrobytes: And take your time, no rush
+ Hjax: im too motivated by codinpoints to try the smaller multis 
+ Astrobytes: lol, there's such a thing as fun you know. F'ing SC players :P
+ Hjax: isnt fun just watching numbers increase? 
+ Astrobytes: :D
+ Hjax: you must have a weird definition of fun :P 
+ Astrobytes: lol
+ Hjax: idk, smaller multis are spooky 
+ Hjax: because they are almost exclusively populated by really good people 
+ Hjax: makes it hard to measure your own progress 
+ struct: Site broken or only clashes?
+ Astrobytes: I heard there's gonna be pylons and cannons in Othello...
+ struct: It was 60+ people clash and it broke :p
+ struct: 80
+ Astrobytes: I'd report that struct, could be a capacity issue on CG side
+ Astrobytes: btw, wtf clashes have 80+ people?! Stream?
+ struct: yeah
+ Astrobytes: Madness.
+ jacek: maybe ru guys they moved from uttt
+ Astrobytes: Hjax, I do smaller multis and I'm shit, don't worry about it&#160;:)
+ Astrobytes: lol jacek
+ struct: darkhorse64 don't worry too much, I would code a bot, but I also don't have much time
+ jacek: maybe make my bot a boss
+ struct: I'm spending time on learning sdk modules
+ jacek: i would have more motivation to improve myself
+ jacek: :v
+ Astrobytes: They don't document the JS modules struct?
+ struct: It's a bit poor
+ struct: Only real documentation is UTG referee
+ Astrobytes: They're updating docs soon right?
+ struct: No idea
+ Astrobytes: Sure I saw that in forum
+ Astrobytes: I don't wanna work on SDK wiki until they do that
+ darkhorse64: I would rather be worried not be able to beat my own creature
+ struct: well it can use half the time
+ Astrobytes: Yeah, reduce depth or calculation time, or both
+ struct: easier solution
+ struct:  // #pragma...
+ Astrobytes: Might make it toooo dumb&#160;;)
+ Astrobytes: Don't want it to fail on turn 1 precalc
+ struct: Ideal bot would be 30.00 points atm
+ struct: boss*
+ struct: wait 30.18, so no java allowed
+ Astrobytes: hahaha
+ Astrobytes: But yeah, 30 seems about right given the gaps
+ Hjax: why no java allowed 
+ darkhorse64: No problem for that but I ant to understand how features removed improved (or not) my bot strength. For instance, doubling the rollout count helps but is approximately + 1 ELO point
+ jacek: +1 with confidence [-100,101]
+ struct: Hjax Im joking, I just don't like Java
+ struct: And Im forced to use it on sdk&#160;:(
+ Hjax:&#160;:(
+ Hjax: i like java
+ jacek: kree java!
+ darkhorse64: I made several runs
+ struct: you use mcts right?
+ darkhorse64: I do
+ struct: early game might be a bit weak right?
+ darkhorse64: Usually things start to look wrong against the top by move 35 but it may be due to a weak start. I don't play othello myself
+ jacek: neither do i
+ Astrobytes: I only ever played casually myself, doing a lot of reading
+ jacek: i think i would have some problem playing it with real board
+ Astrobytes: Nah, you'd pick it up pretty quick I think
+ darkhorse64: I am only a chess player
+ Hjax: i think my goal for this weekend will be to go from bronze to legend in ghost in the cell, with 1 submit 
+ Astrobytes: Stream it! Stream it! Stream it!
+ Hjax: lol, why
+ Hjax: my development process is not very fast, or interesting 
+ darkhorse64: I did that nearly for Tron
+ Astrobytes: Just a stream-worthy comment
+ Hjax: its easy to get into the habit of spamming games against top people, or just spamming submits 
+ Astrobytes: This was during a contest darkhorse64 no?
+ Hjax: i think it will be a fun challenge to not do that 
+ Hjax: plus i think ghost in the cell is a pretty easy game, so handicapping myself a bit is more fun 
+ darkhorse64: No
+ Astrobytes: Or after or something. I think you applied something you'd used in another contest or multi, and went gold or legend
+ darkhorse64: I read the right PM
+ Astrobytes: Oh I see
+ darkhorse64: BFS for the in
+ darkhorse64: win
+ Astrobytes: You don't even have to correct your typos anymore, I'm quite used to filling them in myself :P
+ Astrobytes: Need to get your ankles working properly to fix them.
+ darkhorse64: my w key is not in great shape. Technically, it is not a typo but a hardware malfunction
+ Hjax: the hard part is going to be knowing when my bot is strong enough enough 
+ Hjax: uh, scratch one enough 
+ Astrobytes: OK, I'll give you the benefit of the doubt darkhorse64 
+ darkhorse64: It's so kind of you
+ Astrobytes: I'm a generous type :D
+ Astrobytes: Hjax, you can use replays from top bots etc etc
+ Hjax: sure, but i cant play against them 
+ Hjax: i read agades pm
+ Astrobytes: Pretty sure you can CG bench against them if you fiddle around a bit
+ Hjax: no no no, thats cheating 
+ Astrobytes: Nope, technically it is not.
+ Hjax: hmmmmm
+ Astrobytes: But I get your point&#160;;)
+ Ratchef: Is there a way to invite my friends to a private battle?
+ Hjax: i really like agades solution to the question "can i get punished by increasing here"
+ DestroyTasmania: yeah you can create privat lobby and send them link or just invite on right
+ DestroyTasmania: @Ratchef
+ Hjax: just play against a clone of yourself that doesnt increase, and see if you get rekt 
+ Astrobytes: I don't remember if I ever read the PMs for that game tbh
+ Hjax: i played a lot of galcon back in the day 
+ Hjax: on my ipod touch 
+ Hjax: fun game 
+ Astrobytes: And yeah, self-play also a solution. Just don't overfit. brutaltester is good for that
+ Astrobytes: Yeah galcon was great
+ struct: I tried to get legend in 1 submitg
+ struct: did not end well
+ Hjax: i also played the 2010 planet wars ai challenge
+ Astrobytes: something something something account deletion
+ Hjax: back when i was brand new to programming 
+ eulerscheZahl: public github repos are a great source for bronze to legend in 1 submit
+ struct: I think the closest I got was uttt
+ struct: Where i got like top 3 gold
+ struct: from bronze to legend in 1 submit
+ Hjax: lol, as test opponents, or as copy/paste steal the bot euler?
+ struct: c&amp;p
+ struct: <a rel="nofollow" class="external free" href="https://www.codingame.com/profile/5f47dac1fe5458d3d6d596f391d8c8cb7572263">https://www.codingame.com/profile/5f47dac1fe5458d3d6d596f391d8c8cb7572263</a>
+ struct: If there is a bot 
+ struct: its in this profile
+ eulerscheZahl: i was expecting this user when i clicked the link
+ Astrobytes: :D
+ struct: I think I sitll have the link of his old account
+ struct: give me a sec
+ darkhorse64: When you see a top 20 guy ask what is a BFS, you figure out why C/P is a bad thing
+ Astrobytes: To paraphrase jacek "eeyup"
+ Hjax: lol, he stole all of his submissions?
+ dbdr: 16th?
+ dbdr: copy paster I guess
+ darkhorse64: This is the guy I was thinking of
+ Astrobytes: yeah
+ darkhorse64: Look at his CP profile, especially the time scale
+ Hjax: im surprised theres such strong bots publicly available 
+ dbdr: 4996CP in clash
+ darkhorse64: guru in to weeks
+ eulerscheZahl: struct claiming that it's anirudh? i don't think so
+ struct: yes
+ eulerscheZahl: darkhorse64 sorry to bother you but what is that BFS you were talking about?
+ darkhorse64: :smile:
+ dbdr: Big Fing Secret
+ dbdr: nobody really knows
+ eulerscheZahl: Fing? Chinese?
+ Hjax: theres really that many strong open source bots? im kind of surprised lol
+ dbdr: effing
+ Astrobytes: Bird First Search
+ JBM: isn't effing spelled with an E?
+ dbdr: yes but that ruins the accronym
+ Astrobytes: f'ing would be more correct
+ darkhorse64: Hjax: yes
+ struct: <a rel="nofollow" class="external free" href="https://www.codingame.com/profile/db6321ede0cfc71dba63fb778cc61f677390781">https://www.codingame.com/profile/db6321ede0cfc71dba63fb778cc61f677390781</a>
+ JBM: can we ever be too correct?
+ struct: This was aniru I think
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=bawmxQE_Fj0">https://www.youtube.com/watch?v=bawmxQE_Fj0</a>
+ Astrobytes: Who knows JBM, we can try
+ JBM: nobody Really knows JBM
+ reCurse: That's really sad
+ JBM: innit
+ reCurse: Was talking about the copy paster
+ JBM: point stands
+ Astrobytes: :D
+ eulerscheZahl: no struct. there should be a tagline "almost alll languages". with 3 L
+ JBM: oh new meme
+ Astrobytes: JBM: "Who knows, JBM. We can try"
+ JBM: what did i miss?
+ eulerscheZahl: old actually, account deleted years ago
+ JBM: ouch
+ eulerscheZahl: he claimed to be able to code in all languages
+ eulerscheZahl: as the bots he copied were in different languages :D
+ Hjax: amazing 
+ Astrobytes: ani d profile looks about right then "I am a 12th grade student at Indus Bangalore, I have learnt several languages: python, C++, C, C# and Java. Dabble in JS, ruby. Now learning D"
+ struct: So this one ueler?
+ struct: <a rel="nofollow" class="external free" href="https://www.codingame.com/profile/9b6f917d8ba745e1194e9922b5ef3dd67406451">https://www.codingame.com/profile/9b6f917d8ba745e1194e9922b5ef3dd67406451</a>
+ struct: Platinum Rift - Episode 2	0th / 0/ 0
+ struct: This is the first time I see this in CG
+ struct: <a rel="nofollow" class="external free" href="https://i.imgur.com/Tipp1Ig.png">https://i.imgur.com/Tipp1Ig.png</a>
+ Astrobytes: It's not True CG unless it's 0nd
+ struct: No score on multi
+ struct: Not even language shows
+ eulerscheZahl: you found him struct!
+ struct: yes he is bottom of hypersonic legend leaderboard
+ struct: last player
+ struct: Doesnt even show language
+ eulerscheZahl: iirc thibaud did some cleanup
+ jacek: a purge
+ eulerscheZahl: he got DQed in a contest (stole python bot, added bash wrapper and claimed it's pure bash)
+ eulerscheZahl: then rage-deleted the profile after he got lots of hate on the chat
+ struct: also he used bot on CoC
+ jacek: who rage deletes their account?
+ Astrobytes: :thinking:
+ eulerscheZahl: absolutely barbaric
+ Astrobytes: :D
+ freeman42x: streaming clash of code: <a rel="nofollow" class="external free" href="http://twitch.tv/freeman42x">http://twitch.tv/freeman42x</a>
+ Hjax: why did struct delete his again? because he was upset with his UTG bot?
+ struct: I said legend in 1 submit or delete
+ Hjax: ah
+ Astrobytes: Waited until last day
+ Hjax: UTG is a pretty hard game to get legend in 1 submit with 
+ jacek: just like you, 1 submit from bronze to gold
+ Astrobytes: , night even right struct?
+ Hjax: because its so metagame dependent 
+ struct: I cant remember well
+ Hjax: planting fake bombs and guessing your opponents 
+ struct: But maybe
+ Hjax: hard to test properly with just selfplay 
+ Astrobytes: Pretty sure you waited til the night
+ Astrobytes: Don't do that again eh
+ struct: We need more anonymous contributions
+ struct: *undefined
+ Smokie: Hello 
+ freeman42x: private clash: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/1262076003528789ee2605e32db72839683f30f">https://www.codingame.com/clashofcode/clash/1262076003528789ee2605e32db72839683f30f</a>
+ Daher: private clash
+ Daher: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/126209199251b6823a67af3f99a8c9e48c2b461">https://www.codingame.com/clashofcode/clash/126209199251b6823a67af3f99a8c9e48c2b461</a>
+ Daher: for java, c, c++ and c# coders
+ Astrobytes: Not very private if you er, post it in world chat, is it?
+ EliTheCoder: he just doesn't want to get bots in his game
+ EliTheCoder: and he can control what languages he wants
+ Astrobytes: The bots will be there if not enough players anyway. And yes, I'm aware of that. The feature is supposed to be for sharing with friends you want to clash with.
+ muy31: what's the deal with short time limits anyway? does making it too long cause issues with servers and whatnot or what?
+ Astrobytes: Yes. Imagine a leaderboard of 2000 bots all using 1 second of calculation time, playing matches against each other
+ Astrobytes: For the CG configuration this would be a Very Bad Thing.
+ muy31: i see
+ muy31: that is why we cannot do chess on CG 
+ Astrobytes: We could have a chess game on here for sure, it would have to depend a helluva lot on book moves though&#160;:)
+ Astrobytes: Fischer-Random/Chess960 might be doable though
+ Astrobytes: And it still might be a nice addition just to practice on
+ muy31: i dont see it happening and any  of the ais submitted to the leaderboard actually being good
+ Astrobytes: Oh yeah? I'd bet otherwise
+ muy31: unless like someone hard codes a move for each state
+ Astrobytes: like I said "it would have to depend a helluva lot on book moves though"
+ Astrobytes: Which is about 80% of chess anyway right
+ muy31: in that case, one would preprogram a chess bot locally and the CG bot would just a 'scribe'
+ Astrobytes: Not quite, bit more to it than that
+ CykaBo: share code on hjava pls
+ Astrobytes: Neumann, I never noticed your 5th place in CSB, nice 
+ Neumann: Thks, SR gave me a slight eval improvment :D
+ Astrobytes: "slight" :D
+ CykaBo: share codes pls
+ Astrobytes: CykaBo 1234abcd!"£$ - now decipher the code
+ CykaBo: at the end I meant 4Head
+ Neumann: What do you expect us to understand with "share code"
+ CykaBo: show code or whatever the option's name is
+ Astrobytes: Qml0ZSBteSBzaGlueSBtZXRhbCBhc3Mh
+ JBM: that password is going to need replacing
+ JBM: omg a Neumann
+ Neumann:&#160;?
+ JBM: hadn't seen you in a long time
+ JBM: always a delight tho, until proven otherwise
+ Astrobytes: So as not to pollute #fr JBM, I suggest your trolls should have been Korrigans
+ JBM: lal
+ JBM: you're so welcome to pollute #fr
+ Astrobytes: I try not to, sometimes I "cross over"
+ JBM: we welcome that
+ JBM: i personally welcome it more when it's expressed in #fr
+ JBM: as bad as it comes (hi MK)
+ Astrobytes: lol
+ JBM: the effort is what makes it worth it
+ Astrobytes: on that note, MK left it seems
+ Astrobytes: Anyway I'm out for tonight
+ Astrobytes: gn all
+ tomatoes: gn
+ JBM: gn u
+ my_genjutsu: help
+ my_genjutsu: i need
+ NASADeveloper102: Okay
+ NASADeveloper102: With what
+ my_genjutsu: im gonna die
+ my_genjutsu: i need
+ my_genjutsu: help
+ my_genjutsu: i need a
+ my_genjutsu: NOTCH APPLE
+ my_genjutsu: im gonna die
+ my_genjutsu: help
+ my_genjutsu: help
+ my_genjutsu: help
+ NASADeveloper102: -HUh
+ NASADeveloper102: What?
+ NASADeveloper102: I don't know whether or not to take this seriously, but I assume if you were dying in real life you would call the police and probably not come here, the probability that you would come here instead of any other place is very low.
+ NASADeveloper102: I don't know why I just explained my train of thought to a person who was saying, " Help, I need a notch apple "
+ JBM: please stand by
+ JBM: police will be with you shortly
+ NASADeveloper102: I wish I knew how to respond to that.
+ JBM: "do you have a warrant?"
+ JBM: "is habeas corpus even a thing anymore in my country?"
+ NASADeveloper102: Uh....
+ NASADeveloper102: What?
+ JBM: sorry i thought you were american for a while
+ muy31: Why would this man cheese my bot like this? <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/473615813">https://www.codingame.com/replay/473615813</a>
+ NASADeveloper102: Uh I'm American.
+ NASADeveloper102: I don't know what a "habeas corpus" is.
+ NASADeveloper102: I probably should, now that I think about it
+ muy31: right to go before a court when arrested
+ muy31: 6th/7th amendment
+ USE-TO: SUPPORT PYTHON3.8!!!!!!!!! PLEASSSSSEEEEEE
+ tomatoes: what so good 3.8 got?
+ NASADeveloper102:&#160;%=&#160;?
+ NASADeveloper102: I don't know
+ LelouchVC2: Python 3.8 introduces a feature that lets the code fondle your balls
+ scareware047: can i downgrade
+ scareware047: my league
+ scareware047: and start over in another language
+ tomatoes: no, but you can start with another language in your current league
+ scareware047: ye but current league is hard xD
+ Hjax: 3.8 has the walrus operator 
+ Hjax:&#160;:=
+ UsamaKahout: c
+ Reksio: Hi All. Is code golf counting a source code length after or before the compilation&#160;?
+ Reksio: I also wonder how time it takes to finish the puzzle is taken into account if at all.
+ Reksio: Anyone?
+ SPDene: time taken to finish is only relevant is it takes (i think) &gt; 15s. then it will time out/fail
+ SPDene: if*
+ struct: code length is show on ide
+ struct: its before compilation
+ struct: all chars count, spaces, tabs, comments
+ Reksio: haha&#160;:) this is great
+ Reksio: and you say 15s 8-)
+ Ratchef: Hello I have a question about Java 
+ struct: Also compilation time doesnt matter
+ Reksio: +1
+ struct: Since the time will get is the time you press on submit
+ Ratchef: Can I add a variable to itself like this? int value = value +1; 
+ Reksio: yes
+ struct: Ratchef yes, but you can declare it again
+ struct: like you just did
+ struct: you did int value = value + 1;
+ Ratchef: It often tells me that the value isn't initialized 
+ struct: yeah, if you never assigned a value to it
+ struct: it might happen
+ Ratchef: So I should do int value = 0; value = value + whatever; 
+ struct: or value += whatever;
+ Ratchef: okay I'll try next time thanks
+ Ratchef: Is there a way for the code to know if a character is uppercase or lowercase?
+ struct: yeah
+ Ratchef: Is that a java function?
+ struct: <a rel="nofollow" class="external free" href="https://www.tutorialspoint.com/java/lang/character_isuppercase.htm">https://www.tutorialspoint.com/java/lang/character_isuppercase.htm</a>
+ Ratchef: ty
+ Danger189: any python people have a second to help me with something?
+ Hjax: Danger189 what do you need?

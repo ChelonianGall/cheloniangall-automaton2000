@@ -1,0 +1,1013 @@
+ CredibleOpossum: Why is the "Power of Thor" killbox bad?
+ MSmits: morning
+ YurkovAS: MSmits congratulations with top1 in oware!
+ MSmits: thanks
+ uop: shut network
+ TranBac: LOL
+ MadKnight: hey MSmits u got #1&#160;?
+ MadKnight: using smitsimax&#160;?
+ MSmits: no, using mcts with early playout termination
+ MSmits: also the nr 1 is unstable. royale can slowly pull me down with submit spam because i get occasional losses and Robo does nor
+ MSmits: my bot is somewhat stronger against the nn's, but the nn's lose less vs weaker players
+ ThunderbirdOne: so, technically you got lucky with the #1 spot? :p
+ MSmits: no
+ MSmits: <a rel="nofollow" class="external free" href="http://cgstats.magusgeek.com/app/multi-oware-abapa/msmits">http://cgstats.magusgeek.com/app/multi-oware-abapa/msmits</a>
+ MSmits: I win almost every game against the non-NNs
+ MSmits: but even if i lose 1 out of 20, if the NN's lose 1 out of 50, lower ranked players will eventually pull me down
+ MSmits: so it's mostly a feature of the ladder-system. All I have to do is resubmit
+ ThunderbirdOne: aha
+ MSmits: it might be that the NN's take into account more different board layouts due to their training
+ MSmits: which makes them more flexible vs weaker players. Less chance of a critical mistake
+ MSmits: after all, I have no more than 10 parameters. And they have thousands
+ ThunderbirdOne: fair enough
+ wlesavo: hey guys, im probably stupid or smth, but what means {int} in python, for ex in this solution <a rel="nofollow" class="external free" href="https://www.codingame.com/training/hard/skynet-revolution-episode-2/solution?id=3116375">https://www.codingame.com/training/hard/skynet-revolution-episode-2/solution?id=3116375</a>
+ asd521: ummm can someone help me?
+ asd521: with c language i mean its a simple question
+ ThunderbirdOne: wlesavo i can't see the python solutions =/
+ ThunderbirdOne: asd521 shoot, someone might be able to help
+ StickyVicky: wlesavo, I can't see the solution as I haven't completed but it's probably the name of an int variable that is going to be combined with text on an f-string. Such as: int=4;print(f"{int}2")
+ asd521: my array has 7 elements in it but when i do sizeof(array)/sizeof(array[0]) its prints the size as 2
+ ThunderbirdOne: StickyVicky seems like it, but jezus... int as a variable name :p that should be banned
+ asd521: sizeof(array) prints out 8 when it should print atleast 28
+ StickyVicky: still better and more descriptive than: asdf, but I agree :p 
+ ThunderbirdOne: :D hah
+ asd521: how can i make it more descriptive?
+ ThunderbirdOne: call it whatever it represents
+ ThunderbirdOne: if it's a count, call it count
+ ThunderbirdOne: if it's the amount of money, call it TotalMoney or AmountOfMoney
+ ThunderbirdOne: with lowercase btw, sorry :p
+ MSmits: dont call it coun
+ MSmits: count
+ MSmits: thats a reserved word
+ ThunderbirdOne: not in C#
+ MSmits: true
+ ThunderbirdOne: just make your variables as descriptive as possilbe, while avoiding reserved words (oh, and don't make them SUPER fucking long either)
+ MSmits: sigh, I am having a checkerbot problem. My bot works, except when I turn optimization (O) on
+ MSmits: how do you debug problems that only happen with optimizations?
+ ThunderbirdOne: doesn't sound very optimised :p
+ MSmits: you get no error message =/
+ MSmits: I had this sort of thing before. It's a really tough problem
+ MSmits: somewhere the optimization assumes something is always zero when it's not. 
+ MSmits: or something like that
+ MSmits: then it removes some code that breaks the bot
+ MSmits: I also already know it's related to hashing
+ darkhorse64: print is your friend. Check uninitialized data
+ MSmits: i tried print, but it happens to rarely, i dont know the conditions for the print
+ MSmits: uininitialized might be it iyes
+ MSmits: basically it happens when i try to use transpositions and stop selection when reaching a repeated state
+ MSmits: (repeated state = backprop value 0)
+ MSmits: you could also do this for oware btw, but I am not currently doing that
+ darkhorse64: You can also debug Release code but it assumes that you can reproduce the bug under Windows
+ MSmits: also  a bit risky due to end game turn
+ MSmits: my VS doesnt even know the pragmas
+ MSmits: so no luck there
+ Astrobytes: #ifndef _WIN32
+ Astrobytes: then pragmas, so VS ignores them
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/b2ca825c-b0cb-4ced-95d3-831bab342c2a">http://chat.codingame.com/pastebin/b2ca825c-b0cb-4ced-95d3-831bab342c2a</a>
+ MSmits: i should put the pragmas in there too i guess
+ MSmits: but it runs anyway
+ MSmits: the problem is more that the bug only happens with the pragmas on
+ MSmits: and they cant be on in VS
+ Astrobytes: gotcha
+ MSmits: but maybe VS has its own optims that cause the same bug, so i could still do it with release debugging
+ MSmits: my c++ programs compiled with VS are also fast. About 30% faster than on CG due to faster processor i guess
+ dbdr: MSmits: it seems quite a waste of time to search for such bugs, doesn't it?
+ MSmits: yes
+ dbdr: the compiler should tell you where you use uninitialized memory
+ dbdr: or other undefined behaviour
+ MSmits: oh, i can find that easily myself
+ MSmits: the unitialized memory that is
+ MSmits: undefined behavior... not so much
+ MSmits: I am guessing I am copying a 32 bit to a 64 bit variable or something
+ Locinsh: ]\
+ MSmits: you're pushing Robo darkhorse64 :P
+ dbdr: I like rust's approach, which is that such possibly undefined behaviour is reported by the compiler by default
+ MSmits: thats what I knew would happen. I'm not going to resubmit soon though. I want to do some more fitting first
+ dbdr: you can use the unsafe keyword if you really need sth like that and are sure it's OK
+ dbdr: so you immediately know where to look if something is going wrong
+ MSmits: i have to use unitialized memory often
+ MSmits: try to use a 40 million sized node pool without it
+ dbdr: there might be tools that help with C++, not familiar with it
+ dbdr: yes, there are always ways to do that in rust as well
+ MSmits: not in C#&#160;:(
+ MSmits: well maybe with unsafe, i dont know
+ MSmits: never used it in C#
+ dbdr: it's just safe by default, unsafe when you really need it and are sure
+ TheAceOfToasters: That one CodinGame Sponsored Contest where they gave you like 10 inputs, but never told you what any of them did and told you to get the highest score is the weirdest contest
+ darkhorse64: I wonder how you manage to do Rust on CG with debug on in the IDE
+ mr.x: hi
+ darkhorse64: 0.07 away from Agade, should I resubmit&#160;? :stuck_out_tongue_closed_eyes:
+ MSmits: no need, someone else will perturb it
+ dbdr: darkhorse64: debug in the IDE is annoying but it's not a dealbreaker
+ dbdr: it's good enough for testing the code is correct, usually
+ darkhorse64: Your BT bot times out for instance.
+ dbdr: then I look at arena matches
+ dbdr: and reproduce a situation locally if I need to
+ darkhorse64: Agreed but it's not very friendly
+ dbdr: agreed, would be nice if CG improved it. even -O1
+ dbdr: anyways, the language makes it worth it for me&#160;:)
+ CSharp_Sama: Okay
+ CSharp_Sama: Cool
+ reCurse: #pragma...
+ reCurse: Oh C#, nevermind
+ Xx_R6PGMMater2BE_xX: hi guy
+ Xx_R6PGMMater2BE_xX: s
+ Xx_R6PGMMasterBE_xX: hello
+ MSmits: did you use external things like opening books from other sources? Or fancy eval from somewhere? 
+ Marchete: you need a good eval then
+ Marchete: I need to
+ Marchete: maybe that's the main diff from the first 2
+ MSmits: opening books are easy to get
+ Marchete: they are?
+ MSmits: i couldnt find much actual source code of the best checkers bot. Those arent free 
+ MSmits: yeah, just google a bit
+ MSmits: there's whole libraries
+ Marchete: I saw some openings
+ Marchete: but then I need to encode, make space, etc etcv
+ Marchete: the 100kb is a sh*t
+ Marchete: too cumbersome
+ MSmits: not true really
+ MSmits: my yavalath both uses 5k
+ MSmits: uttt also around that
+ MSmits: it takes a huge amount of time to compute a book large enough to fill 100kb
+ MSmits: oh also, that 5k is poorly compressed
+ Marchete: either that or picking already done books
+ Marchete: but then you realize they can't fit
+ MSmits: yeah you have to get creative with that
+ MSmits: probably write a program to analyze the book and make a selection
+ darkhorse64: MSmits: If you are using eval after expansion, do you keep counting eval &gt; 0 as Win or do you use the true value to compute a reward or node priors&#160;?
+ MSmits: I do this differently now darkhorse64, I will explain when i get home. My train is arriving now
+ MSmits: will be 20 mins or so
+ MSmits: maybe less
+ darkhorse64: Time to go back home, too. Don't rush&#160;!
+ MSmits: i'll jump over cars and sht
+ Marchete: avoid coughing people too
+ Marchete: people in public transport are expert on are experts in sneezing into your face
+ Marchete: lol what I wrote
+ Marchete: I need vacations
+ MSmits: back
+ MSmits: 11 mins, not bad
+ MSmits: you still here darkhorse64?
+ MSmits: we'll talk later. I'm guessing you're not as good as I am at jumping cars
+ MSmits: it's a skill
+ dbdr: MSmits, what do you mean too lazy to code the sim? You need it to update the state in any case.
+ MSmits: the sim in the random rollout
+ MSmits: it's different
+ dbdr: So it's only picking random moves that you miss?
+ MSmits: when you're using all sorts of fancy things to generate a move list for a tree, you use different code than when you're just picking 1 move
+ dbdr: I mean it's a few lines of code, no?
+ dbdr: pick a move, apply it
+ dbdr: I see
+ MSmits: ok for example, with checkers, do you pick a random piece and then a random move?
+ MSmits: or do you make a full list of all moves and random that
+ MSmits: it requires more thinking and since my bot isnt even working properly yet, I didnt bother
+ dbdr: right, fair enough
+ MSmits: i did think of one thing though
+ eulerscheZahl: in checkers you have to capture whenever possible
+ dbdr: my intuition would be random among all moves is better
+ eulerscheZahl: so you have to consider all pieces, not just a random one
+ dbdr: but might be slower
+ Marchete: move ordering
+ MSmits: you can do the quiescence by calculating jumps first. You only stop the sim once no more jumps are available
+ Marchete: capture, anticapture, then others
+ Marchete: no?
+ MSmits: eulerscheZahl I meant, when you split the sim into two phases, jump  phase first, then move phase
+ dbdr: eulerscheZahl is alive&#160;:)
+ MSmits: if jumps dont happen, then there is a move phase
+ MSmits: but either way you can go full random, or random piece -&gt; random move
+ eulerscheZahl: why should i be dead?
+ MSmits: you have been online less
+ eulerscheZahl: congrats on 500 btw
+ dbdr: disappeared for a while no?
+ Marchete: AutomatonNN , eulerscheZahl is alive!
+ AutomatonNN: why do you think it will be a random search?
+ MSmits: dont scare euler away again Marchete
+ eulerscheZahl: started bulls and cows today
+ MSmits: oh cool, i was a great fan of that game when i was young
+ eulerscheZahl: seems easy to hardcode, but playing for real is more fun
+ Marchete: easy to hardcode?
+ dbdr: playing for real?
+ eulerscheZahl: with multiple submits to etract some info about validators
+ Marchete: I mean, I tried hardcoding 1 digit
+ dbdr: validators are random
+ Marchete: and all values failed at first attempt
+ eulerscheZahl: oh, didn't know
+ Marchete: I assume validators are random
+ eulerscheZahl: that explains the huge variance on submitsi thought it's just my random solver
+ Marchete: at least my solution wasn't hardcoded
+ Marchete: nor preseeded or anything
+ Marchete: yeah
+ Marchete: lot of variance due to this
+ MSmits: but how did beard get nr 1?
+ MSmits: does anyone know yet?
+ eulerscheZahl: bug
+ dbdr: what bug?
+ eulerscheZahl: 10 validators at first, no proper leaderboard reset
+ dbdr: ah yes
+ Marchete: really?
+ Marchete: :D
+ MSmits: how are they fixing thaT?
+ eulerscheZahl: BeardedWhaleYesterday at 8:30 PMThe leaderboard for Bulls and Cows 2 is still not correct. I'm in the lead with the score of 122, which I got when there were only 10 validators.AstroshytesYesterday at 8:49 PMThat answers that question at least :stuck_out_tongue:
+ MSmits: ah lol
+ Marchete: people got mad about he knew the random seed or smth
+ MSmits: haha yes, that went off the rails  Iguess
+ Marchete: I'm against mid game changes, even for NS
+ MSmits: it;s not even a very good score for 10 validators is it?
+ Marchete: like 12 moves per validator
+ Marchete: not really I think
+ dbdr: how many vals are there now?
+ eulerscheZahl: 46
+ eulerscheZahl: 1 digit only once, rest 5 times
+ eulerscheZahl: before it was each once (1 digit to 10 ditigs)
+ dbdr: damn, missed the obvious 42 choice
+ MSmits: 1 digit... you need on average 5 guesses then?
+ Marchete: yes
+ dbdr: 1 digit =&gt; pure luck, right?
+ MSmits: the information is useless
+ MSmits: the input
+ MSmits: yeah pure luck i suppose
+ MSmits: but the validator still has a use. It tests whether your bot can deal with this length
+ eulerscheZahl: similar with 9 digits
+ eulerscheZahl: you don't know the missing digit
+ eulerscheZahl: and more CPU time would definitely help my solver
+ Marchete: I had problems on 9 and 10 too
+ eulerscheZahl: so i combined 2 approaches now
+ eulerscheZahl: for me it starts at 8 digits already
+ Marchete: but it seems my score is not completely random, a lot of submits are around 320-340
+ dbdr: but validators have only 1 and 5?
+ eulerscheZahl: 1 digit once2..10 digits 5 times each
+ dbdr: got it now&#160;:)
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/439234017">https://www.codingame.com/share-replay/439234017</a>and that's my solver bruteforcing the right one
+ eulerscheZahl: for more digits it's significantly less effective
+ dbdr: oh, the replay shows the secret
+ dbdr: step 1, write an OCR
+ eulerscheZahl: that's not how it works :P
+ dbdr: step 2: guess the correct number in 2
+ dbdr: really? /s
+ dbdr: that would also make things especially easy if validators were fixed
+ eulerscheZahl: btw i can no longer download validators, CG blocked that API
+ eulerscheZahl: it just returns "success" without any content
+ MSmits: is it ever beneficial to take a guess that you know can't be the right code, but will give you more information?
+ Marchete: that's a good thing euler
+ eulerscheZahl: yes MSmits
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/439234561">https://www.codingame.com/share-replay/439234561</a>
+ eulerscheZahl: that's actually a bad solution
+ MSmits: do you just monte carlo the possible secrets and calculate how many turns it takes to guess them&#160;?
+ dbdr: depends how you define beneficial
+ MSmits: guess the code sooner
+ MSmits: = beneficial
+ eulerscheZahl: if i take 2 digits that i haven't tested before, it might be faster
+ MSmits: sooner as in, expected number of turns required
+ dbdr: still not defined. in average? in the best case? worst case?
+ eulerscheZahl: average i would say
+ MSmits: expectation value
+ MSmits: that's average I guess
+ Marchete: people have studied bulls and cows, and got even formulas to get the max amount of moves and such
+ dbdr: with that definition the answer is yes
+ eulerscheZahl: i have a list of all possible solutions, print one at random and eliminate based on the result
+ eulerscheZahl: but for 8+ digits it's too slow&#160;:(
+ MSmits: however, with multiple submits possible, you may be more interested in what gives you the highest value, when you incorporate luck
+ dbdr: exactly
+ Marchete: euler for 10 you can ignore cows
+ eulerscheZahl: best case: 1 try and i solve the 10 digit number :P
+ dbdr: yes, so it's balancing
+ eulerscheZahl: Marchete why? performance improvement?
+ eulerscheZahl: otherwise i don't see a point
+ Marchete: in my case I timeouted
+ MSmits: how much code did you have to write for bulls and cows eulerscheZahl`?
+ MSmits: seems like a tiny bot?
+ eulerscheZahl: 226 lines atm
+ eulerscheZahl: i could do some cleanup
+ MSmits: ah ok, so 400 for me
+ MSmits: this is the euler-smits linecount conversion law
+ eulerscheZahl: but better score for youanother law
+ MSmits: mmh didnt you pass me at NS?
+ eulerscheZahl: no
+ eulerscheZahl: but it's the puzzle of the week \o/
+ MSmits: oh, I thought you did
+ dbdr: yeah, plenty of new players
+ dbdr: was 90 before I think
+ MSmits: ahh thats why i got some rank
+ eulerscheZahl: and a 3 star rating&#160;:(
+ MSmits: 38th now
+ MSmits: what!
+ MSmits: barbarians!
+ dbdr: let's see if I voted
+ MSmits: 5 stars from me
+ eulerscheZahl: i didn'ti never vote
+ eulerscheZahl: except for the plagiarism puzzle (low ratin = autoremove)
+ dbdr: ah, one 3 stars
+ dbdr: but 4.9 avg
+ MSmits: mmh it says here you got 36 times 5 stars....
+ MSmits: this one guy who gave 3 just saw numbers and freaked out :P
+ Marchete: can I vote 1 fon Bender 4=
+ Marchete:&#160;?
+ dbdr: quite a pessimitic way to look at it
+ Marchete: on*
+ Marchete: I hate it
+ eulerscheZahl: of course you canbut you will make toad sad
+ Marchete: what's the least to not make you sad?
+ eulerscheZahl: bender isn't harder than "don't panic 2"
+ dbdr: why Java Marchete?
+ dbdr: maybe I already asked
+ Marchete: to clone the referee :D
+ MSmits: mmh it says westicles is rank 2
+ dbdr: lazy lazy :D
+ MSmits: but he is rank 1 with you dbdr
+ Marchete: extreme lazyness, reporting for duty
+ MSmits: i guess first in keeps the rank
+ dbdr: the ranking never shows equals
+ dbdr: but I think he gets all the CPs
+ MSmits: ah ok
+ MSmits: well the score is integer, so in this case we know for sure
+ dbdr: also, it seems now they use submit date to sort for equals
+ dbdr: for display, not for points
+ eulerscheZahl: yes, same CP for both
+ eulerscheZahl: did you improve your code to reach 500?
+ dbdr: he was hiding 150 levels I think
+ Marchete: wow
+ dbdr: from 353 to 49x
+ Marchete: you are amazing
+ Westicles: Then he caught me in a day.  How embarrasing
+ Marchete: I got stuck on 335 and never looked back
+ dbdr: when I was at 444
+ dbdr: Westicles :D are you running now?
+ dbdr: reminds me of the cold war&#160;;)
+ Westicles: Nah... it would take me 2 weeks to get to 600, then boom tied again
+ eulerscheZahl: uhm, i think the game will crash around level 700
+ Marchete: make some kind of truce
+ dbdr: tempting...
+ MSmits: you have to do it now Westicles, before it is summer and the heat is wasted
+ eulerscheZahl: 50ms per turn =&gt; 600 turns maxthat's 600 move actions
+ Marchete: think on those little bits
+ dbdr: the crash I mean  :smiling_imp:
+ Marchete: they are scared
+ Westicles: If I get quarantined I'll do it
+ eulerscheZahl: so depending on the particular solution you find, it even crashes for a different level
+ dbdr: so 600, not 700?
+ MSmits: lol,  get as high as possible with as few as possible moves
+ MSmits: new challenge
+ eulerscheZahl: not every new level adds a new move
+ dbdr: sounds more and more like TGD :D
+ Marchete: Imagine you get a solution but it's too large to be accepted...
+ dbdr: need to find a better one
+ dbdr: ah, 600 turns
+ MSmits: eulerscheZahl, if you were inclined to do so, could you not compress the moves into less steps?
+ dbdr: let me check my longest solution
+ eulerscheZahl: i know how to modify the referee to accept the solutionjust haven't done yet
+ MSmits: ah ok
+ Westicles: My longest is around 490 I think
+ dbdr: ╰─➤  wc -l log.txt 144722 log.txt
+ dbdr: :D
+ eulerscheZahl: read multiple lines at oncecan even be a function of numbers remaining on the board
+ MSmits: ah ok
+ eulerscheZahl: time to truncate your log
+ MSmits: yeah my log is huge too and i only made 208
+ eulerscheZahl: number shifting or movie collection, tough decision :D
+ dbdr: my latest solution is 550 moves
+ MSmits: maybe quickly watch matrix trilogy and then vow to never watch it again, saves a lot of space
+ eulerscheZahl: getting closer to the limit
+ reCurse: Or just watch the first one and ignore rumors a trilogy was in the works
+ Westicles: 550 moves... I smell a rat.  You must be well into the 500s
+ dbdr: matrix is a trilogy in one episode
+ MSmits: yeah... tbh I rewatched them and I only really liked the first one
+ dbdr: unlike THHGTTG, which is a trilogy in 7 episodes
+ MSmits: whats that
+ dbdr: really?
+ MSmits: are you just stringing characters together dbdr
+ reCurse: I'm lost with your analogy
+ dbdr: <a rel="nofollow" class="external free" href="https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy">https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy</a>
+ MSmits: oh ok that one, yes I read the books
+ dbdr: both trilogies in some other number than 3
+ reCurse: That makes no sense
+ MSmits: thats true, a trilogy should be 3
+ dbdr:  /s?
+ reCurse: I don't get your point
+ dbdr: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/3225e873-186d-4cb6-9b6e-03e465618638">http://chat.codingame.com/pastebin/3225e873-186d-4cb6-9b6e-03e465618638</a>
+ MSmits: maybe we should discuss that plague game instead&#160;? :P
+ reCurse: Ah, didn't know that
+ reCurse: I already resolved that discussion MSmits
+ eulerscheZahl: corona joke?
+ reCurse: But you were missing
+ MSmits: ow&#160;:(
+ MSmits: no eulerscheZahl, you missed a long discussion
+ MSmits: about a game idea
+ MSmits: and balance
+ Westicles: They are bringing 1000 people off that cruise ship within 2 miles of me.  
+ MSmits: we did it quietly so as not to disturb you in your sleepp
+ dbdr: Westicles, hold your breath for a few weeks
+ eulerscheZahl: or get infected and realize that it mostly kills old people and you are safe
+ MSmits: mostly safe :P
+ dbdr: mostly harmless
+ MSmits: 3,4% death rate now. Italy almost completely in quarantine. Pretty extreme
+ MSmits: funerals arent even allowed as I understand it
+ Westicles: I'm a germ freak from way back, so hopefully that will protect me
+ MSmits: if you avoided them all your life, I doubt it
+ MSmits: well maybe if you can avoid this one also&#160;:)
+ reCurse: IIRC experts said something between 40 to 60% of world population would be in contact at the end
+ reCurse: So just make peace with it
+ Westicles: Well, I won't go sticking my finger in my eye, but a stray burrito might get me
+ reCurse: And be thankful it's not a worse virus
+ MSmits: well some effort may cause you to be on the right side of that 50-50
+ MSmits: like, locking yourself in the house and do a bunch of multis
+ MSmits: I see multiple advantages of that approach
+ eulerscheZahl: name another advantage
+ MSmits: you get to do multis
+ reCurse: If that means uttt I might risk going outside instead
+ MSmits: lol
+ dbdr: - uttt or death?- death please
+ darkhorse64:    uttt to death
+ MSmits: heyy darkhorse64
+ MSmits: want me to explain the eval thing?
+ darkhorse64: sure
+ MSmits: i dont do the node priors thingy you mentioned, but I also dont use the discrete -1,0,1 score anymore
+ MSmits: I thought about it like this
+ MSmits: the eval is basically to estimate your advantage over the opponent
+ MSmits: at some point the advantage is going to be large enough that it's almost certain you win
+ MSmits: so you want that to give score 1, the same as an actual win
+ darkhorse64: and you cannot choose any move because all look good
+ dbdr: why lose the precision?
+ MSmits: so all float values between -1 and +1 are possible. I define a max advantage
+ MSmits: it's not a loss
+ dbdr: sounds arbitrary
+ MSmits: you dont want a solved win to be less important than a high advantage
+ MSmits: sometimes an eval score gets really high due to an artefact in your evak
+ MSmits: eval
+ MSmits: that easily happens with many parameters
+ MSmits: you need to cap it at the win score
+ dbdr: solved win should be 1.0, high advantage is still &lt;1
+ MSmits: if its much lower than 1, it doesnt guide your search anymore
+ dbdr: ah, your eval can go above 1?
+ MSmits: it could if i didnt cap it
+ dbdr: yes, then cap is useful
+ MSmits: it is simply another parameter
+ dbdr: or transform it the the -1,+1 range
+ MSmits: you mean like that relu thing a NN uses?
+ dbdr: e.g. <a rel="nofollow" class="external free" href="https://en.wikipedia.org/wiki/Logistic_function">https://en.wikipedia.org/wiki/Logistic_function</a>
+ dbdr: you can choose the steepness
+ dbdr: yeah
+ MSmits: interesting
+ MSmits: isnt that an expensive function?
+ dbdr: yeah, that could matter
+ dbdr: definitely depends on the gam
+ dbdr: e
+ dbdr: if the sim is expensive like PCR, probably doesn't matter&#160;:)
+ MSmits: the thing is though, it's not unrealistic to assume that after a certain point, an advantage gives you 100% chance to win
+ dbdr: that's true
+ darkhorse64: You will face that problem with breakthrough. You build an overwhelming advantage and all moves have strong eval. How can you choose a move with -1, 1 criteria. You really need to look at the true eval
+ dbdr: since you don't play randomly
+ MSmits: but darkhorse64, you dont know the true eval
+ dbdr: for random play, it would be true a huge advantge is still not 100%
+ darkhorse64: I mean the eval value not the discretized one
+ MSmits: float normalized = evalScore / MAX_ADVANTAGE;
+ darkhorse64: It might be dangerous if your cap value is not well tuned
+ MSmits: in the lower extreme it is the same as what i was doing before
+ dbdr: Darkorse64: if all moves have strong eval, it could mean it does not matter which one you pick
+ MSmits: namely, returning -1, 0 or 1
+ MSmits: so it can only be an improvement
+ MSmits: if my max advantage is near to 0 I mean
+ MSmits: I also noticed, that as soon as I implemented this, my bot became better without the simulation phase entirely (sim depth 0)
+ darkhorse64: Trust me, it matters because of horizon effect. You keep playing weak moves that seemingly does not degrade your position until you r bot realizes it's losing
+ MSmits: It lost the need for a random components
+ dbdr: but that means your eval is imperfect
+ dbdr: which it has to be of course
+ dbdr: but that also means trusting small differences that might be noise
+ MSmits: darkhorse64 if your exploration param is somewhat higher, will you not be able to find better board states for your bot?
+ darkhorse64: It is but not to the point it cannot distinguish strong moves
+ MSmits: if it goes down a wrong branch the way you describe, it just seems it doesnt explore well?
+ darkhorse64: Breakthrough endings are tactical which is a weak spot for mcts. Remember shallow traps in Y
+ MSmits: true
+ MSmits: but I think you need a very heavy eval for breakthrough
+ reCurse: Yinsh?
+ reCurse: This comment was sponsored by struct
+ MSmits: this solves the problem (partially) for  Y also
+ MSmits: :P
+ darkhorse64: Also the branching factor is quite high and does not decrease
+ MSmits: you do need TT I think
+ MSmits: it helps when all the pieces are the same
+ darkhorse64: There is a lot to explore
+ MSmits: Yea, you need to prune
+ MSmits: you'll create blind spots, but what else are you gonna do
+ darkhorse64: The issue is to find whether you have a breakthrough (you consider the advanced pieces). If not, you have to build your position which is a long term goal
+ MSmits: did you try splitting the board into partitions and assess them strategically?
+ MSmits: could use a lookup for that 
+ MSmits: not saying that would be easy
+ MSmits: lookups up to 3x3 should be possible
+ MSmits: or maybe a lookup centered on each  pawn
+ darkhorse64: The seminal paper describes something like that; consider the 2x3 rectangle in front of your pawn.
+ MSmits: yeah that makes sense
+ darkhorse64: Programming Breakthrough from Richard Lorentz
+ MSmits: what i like about breakthrough is that you need to think more about the game to write the bot
+ dbdr: darkhorse64, did you work much on Breakthrough?
+ dbdr: you usually get much higher than that
+ MSmits: ssht dbdr, thats a sore point
+ MSmits: we dont talk about that
+ darkhorse64: Yes, my bot is weak and I spend too much time on Oware
+ dbdr: well, it's a praise in disguise
+ MSmits: true
+ dbdr: for the other multis
+ MSmits: darkhorse64 is pretty good almost everywhere he tries yeah
+ dbdr: well, we have to make choices, can't do them all in depth
+ MSmits: darkhorse64, maybe I should try breakthrough and then we can suck at it together
+ MSmits: we're good at similar games
+ MSmits: so we might also suck similarly
+ dbdr: is it a real Python at #8?
+ MSmits: just need to finish this checker bot so i can leave it
+ dbdr: above Robo :D
+ MSmits: lol thats a NN isnt it?
+ darkhorse64: The best thing to stop sucking is to play another game and learn from it
+ reCurse: Python = NN, it is known
+ MSmits: no
+ MSmits: I mean Robo's
+ MSmits: he said something about trying and failing at breakthrough NN
+ reCurse: You're messing up my NN and now my memes
+ MSmits: not sure if thats also his submission
+ reCurse: This is war
+ MSmits: :worried:
+ darkhorse64: War of the machines
+ dbdr: the only winning move is not to play
+ MSmits: where did that come from
+ Astrobytes: wargames
+ MSmits: oh right
+ dbdr: <a rel="nofollow" class="external free" href="https://the-drive.imgix.net/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fthe-drive-cms-content-staging%2Fmessage-editor%252F1559612419057-asdadsdscc.jpg?auto=compress%2Cformat&amp;ixlib=js-1.4.1&amp;s=36027423fa58f2e18c32619938179fe2">https://the-drive.imgix.net/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fthe-drive-cms-content-staging%2Fmessage-editor%252F1559612419057-asdadsdscc.jpg?auto=compress%2Cformat&amp;ixlib=js-1.4.1&amp;s=36027423fa58f2e18c32619938179fe2</a>
+ MSmits: yeah I remember now
+ dbdr: <a rel="nofollow" class="external free" href="https://10poundtees.co.uk/image/cache//data/designs/winningmove/winningmove-t-shirt-black-midnight-swatch-400x400.jpg">https://10poundtees.co.uk/image/cache//data/designs/winningmove/winningmove-t-shirt-black-midnight-swatch-400x400.jpg</a>
+ dbdr: need to adapt it to uTTT :D
+ dbdr: special dedication to reCurse&#160;;)
+ MSmits: yea
+ reCurse: If I could go back in time I'd block CG on my end
+ reCurse: Only way to avoid uttt for sure
+ MSmits: and also, fix baby hitler
+ Astrobytes: By blocking CG?
+ eulerscheZahl: accept hit at art academia, so he doesn't get stupid ideas
+ MSmits: yea!
+ MSmits: we'd have some great art and avoid WWII on the side
+ eulerscheZahl: now i think about OverSimplified again and wait for the next video, thanks&#160;:/
+ dbdr: he was in love with a jewish girl too
+ MSmits: oh dont even know those videos.
+ eulerscheZahl: history videos, but simplified and funny
+ dbdr: I discovered kurzgesagt recently
+ MSmits: so far it seems an add for skillshare?
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=BXpu6tbFCsI">https://www.youtube.com/watch?v=BXpu6tbFCsI</a>2:03 my favorite scene on the channel
+ eulerscheZahl: kurzgesagt is not a German channel? I'm confused
+ dbdr: yeah, it's in english
+ dbdr:&#160;:)
+ Westicles: Ugh.  Us old folks can't watch that kind of stuff
+ dbdr: maybe started in german?
+ dbdr: they mention "in a nutshell" as well
+ dbdr: which could be a lose translation
+ MSmits: too fast Westicles?
+ Westicles: It is like having your eyes pried open ala Clockwork Orange and shoving 10 minutes of memes into you
+ dbdr: here's something even faster: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=xuCn8ux2gbs">https://www.youtube.com/watch?v=xuCn8ux2gbs</a>
+ dbdr: it's pretty great I think
+ eulerscheZahl: at least you have the native speaker advantage Westicles
+ MadKnight: hey hey guys what are u doing and talking about&#160;?
+ MadKnight: Automaton2000 gimme all the short memory of this conversation
+ Automaton2000: well it was a good idea
+ mr.x: what means "-0x4(register)" in assembly?
+ mr.x: founded
+ struct: hi
+ mr.x: hello
+ Wilster: to be or not to be
+ CSharp_Sama: estar o no estar
+ CSharp_Sama: :joy: I'm sorry for being bad at spanish
+ jacek: well this fits for struct
+ AntiSquid: CSharp_Sama it's ok, if hell is divided by country then i am sure you can join the spaniards
+ CSharp_Sama: :pensive:
+ Uljahn: in soviet russia you escape the hell when you die, Automaton2000
+ Automaton2000: to give you some pointers
+ CSharp_Sama: Just don't corrupt my RAM please
+ brandon-1999: Where do i get the variables use within the game?
+ brandon-1999: used*
+ reCurse: So...
+ reCurse: I decided to read my oware bot code again for fun
+ reCurse: Apparently player 2 hates winning
+ reCurse: Mixing absolute and relative scores is dangerous
+ reCurse: It also destroyed training obviously
+ reCurse: (╯°□°）╯︵ ┻━┻
+ Schneewittchen: (╯°□°）╯︵ ┻━┻
+ Eutermann: (╯°□°）╯︵ ┻━┻
+ <b>**Schneewittchen slaps Eutermann around a bit with a large fishbot</b></p><p><img src="https&#58;//static.codingame.com/servlet/fileservlet?id=26108015239233&amp;format=navigation_avatar" /> AntiSquid: (╯°□°）╯︵ ┻━┻ AutomatonNN
+ AutomatonNN: I don't know the problem with that puzzle game
+ Eutermann: (╯°□°）╯︵ ┻━┻
+ Eutermann: Schneewitchen
+ AntiSquid: table flip virus
+ <b>**Schneewittchen infected</b></p><p><img src="https&#58;//static.codingame.com/servlet/fileservlet?id=29364943044767&amp;format=navigation_avatar" /> reCurse: I think this one is almost as good as when I ignored one of the enemy pod angles back in CSB
+ Astrobytes: Knew it wouldn't be long before you had a look at it lol
+ reCurse: Oh nevermind. I forgot I always consider myself player 1.
+ reCurse: wtb /unflip
+ struct: ┬─┬ノ( º _ ºノ) 
+ reCurse: Thanks
+ AntiSquid: (╯°□°）╯ʇɔnɹʇs
+ struct: (ง'̀-'́)ง
+ dbdr: \flip
+ AntiSquid: ʇɔnɹʇsノ( º _ ºノ) 
+ MSmits: happens to me all the time =/
+ MSmits: think you had a Eureka, and turns out it;s a Meh....
+ reCurse: Well on the plus side I did remember it's my old mcts code from uttt v-1
+ reCurse: So there's always the possibility it helps for no cost
+ MSmits: and maybe I overfitted against you and a small change destroys my bot winrate&#160;:)
+ MSmits: (that's a serious possibility, given the extremely fine tuned params)
+ Astrobytes:  Smits, how did you get on with the 1 &amp; 2 seed parameters?
+ MSmits: just started refitting those. I never got that much better with that through self-play
+ MSmits: maybe when i try vs robo + recurse
+ Astrobytes: I still think they're weird
+ MSmits: me too
+ MSmits: when i set seed1 to 0 as a value, my winrate plummets though
+ MSmits: so either it compensates artificially for a lack elsewhere in my eval, or it really is needed 
+ MSmits: hard to say...
+ Astrobytes: I'm in param hell. On the plus side I now get 950K - 1.2 mill root visits first turn
+ MSmits: good job
+ MSmits: at least, I guess that's better than most top players 
+ MSmits: not sure what the average is
+ Astrobytes: Still work to do. More refactoring and sht tomorrow. 
+ reCurse: orly
+ reCurse: Maybe I need to reduce my NN size
+ reCurse: Oh first turn
+ MSmits: you have 24k or 26k right?
+ MSmits: you said that earlier
+ reCurse: First turn 442k
+ reCurse: I meant on a regular turn
+ MSmits: oh ok
+ struct: damn
+ Astrobytes: First turn is meh as player 1, might as well just output 5
+ MSmits: I have 3.6 million on first turn
+ reCurse: Ok so I retract my retraction
+ reCurse: Maybe I do need to reduce it
+ MSmits: i do have to add
+ MSmits: I get 6 visits out of 1 rollout
+ MSmits: because I eval each child
+ reCurse: Dunno if it matters
+ MSmits: at the expanded node
+ MSmits: me neither, but just to be clear
+ Astrobytes: Still runs about the same no?
+ MSmits: well the selection loop can get expensive
+ MSmits: lots of UCB
+ Astrobytes: true
+ MSmits: reCurse not sure if you save your board on the node or if you re-apply moves 
+ MSmits: but saving the board seems better
+ reCurse: Those optims don't matter with NN
+ MSmits: yeah i guess all the calc-time goes into the NN-use
+ Astrobytes: regular turn I have 70-85k
+ struct: cpp?
+ MSmits: bout 3 times that for me
+ MSmits: cpp for me yes
+ Astrobytes: I've just started rewriting. 
+ Astrobytes: Nodes still heavy
+ struct: Im still in learning process of AVX
+ MSmits: what heavy about them?
+ struct: It has been fun
+ Astrobytes: They've got pointers, arrays
+ MSmits: hmm not sure if pointers are bad
+ Astrobytes: No, to parents and children, rather use indices
+ MSmits: i usually use integer indices to the node pool, because they are half the size of a pointer
+ MSmits: but its not that big of a deal
+ struct: I dont think they are slower tbh
+ struct: pointer should not be slower than array[index]
+ struct: But I can be mistaken
+ MSmits: memory caching
+ Astrobytes: yeah that. It is faster. But I also have my gamestate
+ MSmits: pointer should be 8 byte
+ MSmits: integer index 4 byte
+ MSmits: but its a small thing really, microoptim
+ struct: Soon I move to sim phase of CSB
+ MSmits: oh and dont keep a parent index Astrobytes
+ MSmits: it is useless
+ MSmits: do back prop with a list of nodes
+ MSmits: gather them up during selection, then loop over them
+ Astrobytes: list of visited nodes right
+ MSmits: yes
+ Astrobytes: Yep, cool
+ struct: yeah I do that on UTTT
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/7f21ecd8-ddf2-4489-9a4f-1c1d461b490d">http://chat.codingame.com/pastebin/7f21ecd8-ddf2-4489-9a4f-1c1d461b490d</a>
+ MSmits: this is my node
+ MSmits: it's really tiny and i never really tested the effect of using int_8s, it might actually slow me
+ MSmits: total size 24 byte if i'm not mistaken. 
+ struct: yes 24
+ Astrobytes: yeah that looks nice nad light, my state is stored on the node tho, and my board is an array of uint8_t
+ Astrobytes: *and
+ MSmits: my state is also stored on the node
+ MSmits: thats the uint64_t board
+ struct: you dont store move?
+ MSmits: 8 out of the 24 bytes
+ MSmits: i dont
+ Astrobytes: Yeah but you've got it bitboarded
+ MSmits: i dont need the move if i've got the board resulting from the move
+ Astrobytes: I don't store move either
+ MSmits: it's a pain when you output your move though, you have to reverse engineer the children boards :P
+ MSmits: it's much worse on checkers
+ MSmits: try reverse engineering a multi jump :P
+ reCurse: Have you noticed a side imbalance btw
+ Astrobytes: in Oware?
+ reCurse: Yes
+ Astrobytes: P1
+ MSmits: I never checked, every test I did swaps
+ MSmits: awari is solved as a draw, but that doesnt mean there isnt an imbalance
+ reCurse: Ok it takes 16 minutes to start beating you
+ reCurse: Not bad
+ MSmits: you're training it anew&#160;?
+ Astrobytes: brb
+ reCurse: Yeah with my new mcts I did fo ruttt
+ MSmits: oh cool
+ reCurse: Also changed a couple things I know work better
+ reCurse: We'll see
+ MSmits: well as i said, do test it vs other players also. I might be overfitting, so your bot might just be breaking my overfit
+ struct: At least you are safe at Yavalath MSmits
+ reCurse: It took minutes to beat everyone back then
+ reCurse: Like 5 minutes at most
+ reCurse: Except robo
+ MSmits: i was just gonna say
+ MSmits: robo is a tough nut
+ MSmits: how do you know it works well vs me? Do you start a cg bench?
+ MSmits: or do you download some replays?
+ reCurse: No I just checked if I could win
+ reCurse: Means it's in the ballpark
+ MSmits: oh ok
+ MSmits: yes
+ MSmits: but you could already win
+ MSmits: my current submit had like 55%
+ reCurse: I also notice it has a much easier time as p1
+ reCurse: Hence my question
+ MSmits: it's highly unstable, winrates may hinge on a single move(type)
+ MSmits: at least thats what I noticed
+ MSmits: sometimes I did a submit with a small change and agade suddenly beats me 90%
+ reCurse: Sure, I was talking about sides tho
+ reCurse: This bit annoys me way more
+ MSmits: yeah my point was, if it is so unstable, it might be true for p1 vs p2 too
+ reCurse: Not necessarily
+ MSmits: thats why i said might :P
+ reCurse: Ok I need to run a bench but I think it broke your overfit
+ MSmits: what annoys you?
+ reCurse: In 23 minutes
+ struct: UTTT v2?
+ reCurse: Side imbalance is very annoying
+ reCurse: I'm assuming it doesn't exist
+ reCurse: So it speeds up everything by 2
+ MSmits: well I hope you're having fun doing this and not doing it because I am frustrating you again :P
+ reCurse: You know the answer to that
+ MSmits: :grin:
+ reCurse: Doesn't beat my old bot yet though
+ Astrobytes: From day 1 of this multi P1 seemed stronger, seems they have the advantage, yet perfect play results in a draw
+ reCurse: By the time it does it will start losing against you
+ MSmits: tons of rps here
+ MSmits: for a long time i had 0% Robo 40% you even though you beat Robo
+ MSmits: it is very likely that after you're done training and I'm still fitting, i'll run into a combination of params that wins again. That's why your first instinct, to wait till I am distracted, might have been good
+ MSmits: I wont go back after i'm done
+ reCurse: I'm not a smart guy
+ Astrobytes: Famous last words there
+ Astrobytes: @Smits
+ MSmits: nah really. I see so many nice games  I really want to try
+ MSmits: breakthrough, that bulls/cows game
+ MSmits: even onitama, just because it looks pretty
+ reCurse: If I'm lucky it will give me opportunity to test training regression mitigation
+ reCurse: Might be useful elsewhere
+ MSmits: whats tha
+ reCurse: Prevent self-play from collapsing
+ reCurse: Catastrophic forgetting
+ MSmits: is that similar to parameter drifting?
+ reCurse: Don't think so
+ MSmits: I may be following a course on AI for my studies for CS teaching
+ Astrobytes: To prevent overfitting?
+ MSmits: I wasnt supposed to do this because it is an area I already know a lot about, but another class got cancelled
+ reCurse: I guess you could say it's overfitting
+ Astrobytes: @reCurse
+ reCurse: But it's more subtle than that
+ Astrobytes: Nice MSmits, should hopefully be interesting
+ MSmits: well it's a tradeoff between not learning very much because it's your favorite subject and liking the class a lot because it's your favorite subject&#160;:)
+ MSmits: they do machine learning also, but probably not very in depth
+ reCurse: I have a very low opinion of courses
+ MSmits: me too, generally
+ MSmits: but you see, it might be nice to talk about this subject with a live person as opposed to on chat
+ MSmits: i dont know anyone in real life that is interested in this
+ Astrobytes: Same. Well, one, but he's a stoner and never does anything.
+ MSmits: lol
+ struct: Who is interested in AVX?
+ Astrobytes: I guess as long as you can discuss topics beyond the reach of the course then it might be beneficial
+ MSmits: I am struct, I wish I could find a way to use it in a bot
+ MSmits: Astrobytes exactly. Also we may get a project to work on and that may finally give me an excuse to do some machine learning, or something else I have yet to try
+ struct: I would also like to learn ML
+ struct: But one thing at a time
+ MSmits: yeah, I am already doing 3 things at once now
+ Astrobytes: Well, there's Kaggle I guess if you're into data
+ reCurse: Halite is merging into Kaggle
+ MSmits: I'm not, really
+ reCurse: So they'll have AI competition too
+ Astrobytes: Yeah I saw that
+ MSmits: into data I mean
+ Astrobytes: i think they plan to do more AI competitions iirc? They have a connect 4 one or something
+ MSmits: why would you have a connect 4 competition?
+ struct: There should still be a connect 4 somewhere here
+ Astrobytes: Might be connect(n), can't remember
+ struct: At least I made it before
+ struct: Just the demo though
+ MSmits: connect n makes more sense
+ MSmits: or connect 4 without first making 3
+ MSmits: that would be a great game right struct&#160;?
+ Astrobytes: Ohhh I wonder
+ Astrobytes: :P
+ struct: Maybe we can also make it 6 directions?
+ MSmits: oh... like on a hex board?
+ struct: Oh right, thats what it is called
+ dbdr: connect N in M dimensions
+ darkhorse64: That's 3 directions
+ MSmits: 3 axes
+ Astrobytes: lol. I need to do something for that Yavalath. I lost the will to live trying to bitboard it last year
+ MSmits: it's a pain to bitboard yes
+ MSmits: I enjoyed it up to a point
+ darkhorse64: It's aj joy you mean
+ MSmits: well at some point it got a little crazy
+ MSmits: add to that mcts bugs and it can get frustrating to debug
+ Astrobytes: I'm sure I threw my whiteboard across the room at one point
+ Astrobytes: (small whiteboard)
+ MSmits: i should have a whiteboard
+ MSmits: at home i mean
+ struct: Just bring one from school
+ MSmits: the one the size of a wall you mean?
+ struct: Yeah
+ struct: They will fit in the train
+ Astrobytes: Ye, I have a big one for the wall, smaller one for the lap (both sides), and wipeable paper notebooks (that I must clean)
+ MSmits: yeah, i dont think the train is the issue
+ Astrobytes: (not all for CG I may add!)
+ MSmits: sounds very professional
+ MSmits: I just have paper all over the place with squiggles on them I lose understanding of about an hour after writing it down
+ struct: In all the movies I watch, the physics guy always have a white board
+ struct: You need one
+ Astrobytes: Oh CG-wise I have pages of useless numbers
+ MSmits: i know struct, but I have a wife
+ struct: you can't have both?
+ Astrobytes: I whiteboard stuff, but I'm lazy and use my notepad a lot.... 
+ darkhorse64: The part of my code in Yavalath which gives me pride is the one where I look for traps just with pdep/pext
+ struct: Guess im ditching my white board
+ MSmits: yeah, me too darkhorse64
+ MSmits: did much walking before I came up with that
+ darkhorse64: Pencil/paper is enough
+ darkhorse64: It makes me sad that I had to disable it in rollouts (no gain)
+ MSmits: oh
+ Astrobytes: Which? Pencil or paper? :P 
+ MSmits: its really impossible for me to do any meaningful improvement to yavalath. I have no way of testing. The opening book trumps every possible change
+ darkhorse64: Test without&#160;?
+ MSmits: theres no point to that, the bot will never be without
+ MSmits: and there is no guarantee that an improvement without, is an improvement with
+ Illedan: Is the openingbook with 6 way rotation?
+ MSmits: 12
+ MSmits: there are 12 symmetries
+ darkhorse64: If it makes your bot stronger without, it's likely to be best with
+ Illedan: ah k
+ MSmits: not really darkhorse64 because when you're optimizing without book, you'll be optimizing to avoid the traps that occur in early game
+ MSmits: but i dont need to, because I have the book
+ Astrobytes: Hm, not necessarily, cause you're compensating for actions the opening book will counter or prevent
+ MSmits: yep
+ Astrobytes: @darkhorse
+ MSmits: but i cant be sure darkhorse64, its hard to say. Yavalath is pretty messy early game
+ darkhorse64: And for traps out of the book&#160;? I mean they can occur quite late although I agree the game gets less tactical after a while 
+ MSmits: you mean traps out of book that occur later on, if you are using the book?
+ darkhorse64: Yes
+ MSmits: you can optimize it a bit for that, but you need to find an opponent that is going to survive early game. However, any opponent I have seen that does that, has very little variation. It's hard to do a good test
+ darkhorse64: Notice I have no data to back up this claim. Just thinking aloud
+ MSmits: yeah my data is not that great either. Self play is useless mostly and any opponent I try to train against will soon have an anti-book 
+ MSmits: it's ridiculous how few moves I need to counter someone
+ Astrobytes: The MCTS should be able to deal with that late game issue though? it's the early traps it fails in right? minimax will probably negotiate the early traps OK (also thinking out loud, don't even have a bot lol)
+ MSmits: yes, seems minimax is better to avoid early game traps
+ MSmits: and late game mcts is very good I think
+ Astrobytes: Hence the need for opening book
+ MSmits: yeah, but minimax would benefit from it too
+ MSmits: you can also search through the book and get deeper
+ Astrobytes: For sure yeah
+ MSmits: if you already know the move you play, your branching becomes 1
+ MSmits: not just on the root, but on any layer you have a book move for
+ Astrobytes: Yes indeed
+ MSmits: so the moment you leave the book, you still have a small advantage because you have a tree from previous turns that got a bit deeper
+ MSmits: I also use transpositions on yavalath. I think it hurts early game
+ MSmits: but because of the book, who cares about early game anyway
+ darkhorse64: Here comes the dilemna: explore the bad moves to get ready for opponent bad moves or explore your book to get deeper&#160;?
+ MSmits: yeah I never got that far into it, i just do regular exploration for my opponent moves
+ MSmits: btw, it's nothing magical what I do, anyone with sufficient obsession-fuel can beat me on Y
+ MSmits: just run a book for a few weeks 
+ MSmits: meta mcts
+ darkhorse64: months you mean 
+ MSmits: or do like re curse and run 10 cores
+ MSmits: well most people will try to thread it
+ Astrobytes: I was gonna say didn't you have that running for months
+ MSmits: i only ever did 1 core
+ Astrobytes: sheesh
+ MSmits: i had it running for 2 months or so? then did uttt
+ MSmits: not full time btw, proll 12 hrs a day
+ Astrobytes: half-time...
+ MSmits: yeah, my wife doesnt like the computer on at night or when nobody is home
+ MSmits: it might start the machine uprising when it's not being watched
+ MSmits: or cause a fire, whatever happens first
+ Astrobytes: #2 most likely
+ MSmits: yeah
+ Astrobytes: Though low probability for both tbh
+ MSmits: sure, it never caused a fire while I was there to watch it either
+ MSmits: I do like the fact that i got nr 1, but the meta mcts is really about learning about the game as well. That worked well for Y, not that well for uttt, because its hard to see anything in that game
+ MSmits: probably will be hard for oware as well... It's not that easy to see what works and what doesnt
+ MSmits: gonna netflix a bit before sleep
+ MSmits: no alcohol and picard for me, but I need to see that series somehow
+ Astrobytes: Haha, you can download it easily tbh
+ darkhorse64: Happy binge watching&#160;!
+ Astrobytes: And enjoy
+ MSmits: no doubt Astrobytes, ttyl guys, gn
+ Astrobytes: gn man
+ miszu: I haven't done C++ in like 2 years. Refreshing my memory about l-value, r-value
+ miszu: copy constructor
+ miszu: so many things can go wrong in C++ haha
+ struct: c++ is freedom
+ DJSugarCoatedKnight_f6cb: so is jumping out of a plane without a parachute
+ miszu: the more I understand the fine details, the more I see the freedom of it. But you have to be super duper careful about variables stored in stack
+ miszu: assigning an attribute to a local variable.. mmm seg fault... wonder why...
+ Uljahn: take care of your feet
+ Astrobytes: And leg
+ Astrobytes: s
+ AntiSquid: china banned Plague Inc game from their app store! Well done fighting the virus China! 
+ tekki: hi world
+ tekki: any demand?
+ tekki: AutomatonNN what's going on here?
+ <b>**AutomatonNN completely coded it in the same code</b></p><p><img src="https&#58;//static.codingame.com/servlet/fileservlet?id=26108015239233&amp;format=navigation_avatar" /> AntiSquid: tekki you'll be a panda steak once the chaos settles
+ tekki:&#160;:)
+ tekki: nice one Antisquid
+ tekki: congrats him AutomatonNN
+ AutomatonNN: he was a hacker
+ Astrobytes: lol
+ tekki: dude wtf AutomatonNN
+ AutomatonNN: even the same code as the boss in the contest 
+ struct: AutomatonNN teach me AVX
+ AutomatonNN: what do you mean by the simple way to see the problem with the same starter again?
+ AntiSquid: panda hacking with a cleaver
+ tekki: ok  AutomatonNN
+ AutomatonNN: good
+ tekki: what's news AUtomatonNN?
+ AutomatonNN: Automaton2000 is always the only one who wants to win the contest and it was a real time struct
+ Astrobytes: Epic
+ tekki: oh yeah i guess AUtomatonNN
+ AntiSquid: tekki is it spamming season?
+ AutomatonNN: for debugging i gave up on that site
+ tekki: lol
+ struct: AutomatonNN send help
+ AutomatonNN: why did you submit a bot game?
+ struct: Should I take it down AutomatonNN?
+ AutomatonNN: CG is in the wrong time
+ struct: AutomatonNN where is everyone&#160;:(»
+ AutomatonNN: always was bugged
+ miszu: qq guys, the C++ here, is it C++11?
+ tekki: hi miszu
+ miszu: hi tekki
+ tekki: where you from miszu?
+ miszu: Montreal
+ tekki: nice
+ miszu: which part from France are you?
+ tekki: never been in Montreal
+ tekki: South West
+ miszu: we swear like sailor here
+ tekki: seriously?
+ tekki: why?
+ miszu: lemme give you the national anthem of Quebec
+ miszu: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=DvR6-SQzqO8">https://www.youtube.com/watch?v=DvR6-SQzqO8</a>
+ tekki: go on dude
+ miszu: this capture the true spirit of Montreal and our culture
+ tekki: yeah it looks like&#160;:)
+ miszu: aren't you suppose to sleep? :P
+ tekki: you're lucky in Montreal
+ miszu: "lucky"
+ tekki: like sonw weather
+ miszu: honestly, I don't like it
+ tekki: here no much snow this year
+ miszu: very cold, 30cm of snowstorm
+ tekki: oh yeah
+ tekki: take holidays&#160;:)
+ miszu: yeah with all that covid going around haha
+ tekki: haha
+ miszu: thank god we are developers and it won't affect us
+ tekki: don't know what's gonna happen now?
+ tekki: maybe coronavirus gonna die soon AutomatonNN?
+ AutomatonNN: 250 RoboStac
+ miszu: AutomatonNN is saying nonsense haha
+ AutomatonNN: try here to increase my bot
+ tekki: AutomatonNN kill patient zero please&#160;:)
+ AutomatonNN: what is the problem?
+ tekki: virus AUtomatonNN
+ AutomatonNN: what is the main problem?
+ tekki: you gonna die AutomatonNN
+ AutomatonNN: first time i get the idea
+ CharlesJoya: yoo
+ tekki: yop carlos&#160;:)
+ CharlesJoya: lol true whatsup
+ tekki: all fine&#160;?
+ CharlesJoya: yeah mann just testing the waters
+ tekki: no virus close to you?&#160;:)
+ tekki: Automaton2000 can helpyou incase
+ Automaton2000: you have to win a t-shirt
+ miszu: Automaton2000 tell me a hoke
+ Automaton2000: need to improve my bot
+ AnkitAnand_12: Automaton2000 did you talk to AutomatonNN
+ Automaton2000: but i don't think i'll be able to come back
+ AutomatonNN: amount of information is the same as the boss in the contest
+ AnkitAnand_12: who is the boss... AutomatonNN or Automaton2000&#160;???
+ Automaton2000: i guess the answer is no
+ AutomatonNN: hello to the whole code
+ tekki: do you believe in god AutomatonNN?
+ AutomatonNN: for me it was a big difference
+ tekki: explain please AutomatonNN
+ AutomatonNN: good point
+ tekki: what 's the problem with humanity AutomatonNN?
+ AutomatonNN: eulerscheZahl is there a way to see a program which stays the wrong one and the last move only won't

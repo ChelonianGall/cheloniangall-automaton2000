@@ -1,0 +1,699 @@
+ MaliciouslyCrypticUsername: Can someone tell me if I typed out step 2 in the "expert rules" of CSB correctly?
+ MaliciouslyCrypticUsername:     vx *= throttle*(cos(angle))
+ MaliciouslyCrypticUsername: (I'm making a function to predict position ahead of time)
+ dbdr: I think there might be rounding involved
+ dbdr: the best is to test it
+ DaNinja: angle is in radians?
+ DaNinja: x = round(x);vx = (int)(vx * FRICTION);
+ MaliciouslyCrypticUsername: Oh
+ MaliciouslyCrypticUsername: No the friction comes after
+ MaliciouslyCrypticUsername: ok thx for the last part!
+ DaNinja: yep, friction and rounding come after
+ MaliciouslyCrypticUsername: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/c38fb52c-f2e2-4f79-ae70-d2da480d2728">http://chat.codingame.com/pastebin/c38fb52c-f2e2-4f79-ae70-d2da480d2728</a>
+ DaNinja: looks ok
+ MaliciouslyCrypticUsername: Ty!
+ DaNinja: :thumbsup:
+ MaliciouslyCrypticUsername: I also made the input a list and the output a list so I can return the value into the function again and again to predict successive turns
+ MaliciouslyCrypticUsername: Inside a loop presumable
+ MaliciouslyCrypticUsername: presumably*
+ .Z: ;o
+ jacek: happy Caturday
+ Marchete: :smirk_cat:
+ Illedan: dbdr, what level was crashing?
+ dbdr:  30 (val 4) for instance
+ dbdr: can you reproduce Illedan?
+ Illedan: ye
+ Illedan: -.-
+ dbdr:&#160;:+1:
+ Illedan: thx
+ jacek: so can i, whats the deal
+ Marchete: deal or not deal?
+ struct: (╯°□°）╯︵ ┻━┻
+ rohith1125: #clash
+ IcyStar: Hello, I have a question about Coders Strike back. I noticed that the position of the pod passed as input (x,y) is not the current pos on the playscreen, but rather it is the previous pos of the pod. Is this normal&#160;?
+ dbdr: IcyStar, I think it's just that the screen shows the state after applying your action for this turn
+ IcyStar: oh really&#160;? I find that really disturbing..
+ IcyStar: I'm not sure if that impacts my code or not. I use previous positions of the pod, and so it makes me confused as to what is the previous..
+ Marchete: or maybe your are printing before reading the new data...
+ jacek: or servers are lagging
+ Nodirbek: hi , there
+ jacek: ohayo
+ DaNinja: ohayo~
+ Nodirbek: ohayo
+ Uljahn: konnichiwassup
+ Nodirbek: :sleeping:
+ jacek: oh my
+ dtiwari: Howdy everyone!
+ dtiwari: :slight_smile:
+ MSmits: such good news
+ MSmits: I wake up to read Illedan can reproduce. The world needs more little Illedans
+ dbdr: :D
+ MSmits: morning&#160;:)
+ dbdr: \o
+ Illedan: Lol
+ Illedan: I will fix stuff tonight dbdr. So keep finding things&#160;:)
+ Illedan: I'll move it WIP
+ Illedan: dbdr, do you solve the 1 food testcase within 25000 moves?
+ dbdr: nope
+ dbdr: not 1 and 2
+ Illedan: Good&#160;:)
+ dbdr: you? all but 1?
+ Illedan: Not 1,2 or 3&#160;:( But my code is 80 lines long and I know what to do. Just gotta fix that viewer for some demanding user first :P
+ dbdr: 3 I solve with a bad score (7k)
+ Illedan: What is your total score on submit?
+ dbdr: 569074
+ Illedan: 60k more than me :D
+ dbdr: for 2 I had 508. so it's almost surely solvable
+ dbdr: 1 I have doubts
+ Illedan: I can increase the move count, but I think it is nice with a challenge like this
+ dbdr: no, it's definitely better if it's a challenge to solve some
+ dbdr: bigger sense of progression
+ Illedan: True
+ Illedan: Maybe lower it? xD
+ dbdr: why not?
+ Illedan: True
+ Illedan: 20k?
+ Illedan: 15k?
+ dbdr: yeah
+ Illedan: How many steps do you have on 3 now?
+ dbdr: 17850
+ Illedan: 18k?
+ Illedan: ok
+ Illedan: I can set limit to 17800 :smirk:
+ dbdr: :P
+ dbdr: deal
+ Illedan: I'll fix later. bye
+ dbdr: ttyl
+ seshoumara: how is my CoC score adjusted after one play?
+ jacek: probably trueskill algorithm
+ dGrayCoder: is there any tutorial for any turn based challenge?
+ dGrayCoder: I want to know how I can represent a game state in form of node so I would be able to apply some search algorithm.
+ jacek: try <a rel="nofollow" class="external free" href="https://www.codingame.com/learn">https://www.codingame.com/learn</a>
+ jacek: like <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/48392/bitboard-for-the-3x3-tic-tac-toe-game">https://www.codingame.com/playgrounds/48392/bitboard-for-the-3x3-tic-tac-toe-game</a>
+ dbdr: class State { ... }and a methodState::update(action)
+ jrke: snake game is easily solvable but decreasing move is main motive
+ dbdr: yes, it's an optim&#160;:)
+ jrke: but i think atleast it shouldn't be that easy to solve
+ jrke: i can solve many just under simp logicle
+ jacek: nah, 2048 is easier to 'solve'
+ jrke: atleast width and height both should be odd to prevent that very easy solving
+ dbdr: you can't solve 1 this way&#160;;)
+ dbdr: not enough steps
+ jrke: yeah 1, 2, 3
+ dbdr: number of steps will be reduced further a bit
+ jrke: cool then
+ Gabbinetto: i use python3 and this variablen=[int(input()) for i in range(3)]doesn't take the inputs and says its equal to none
+ Gabbinetto: what do i do
+ dGrayCoder: so for a turn based game like the 2021 spring challenge, how should I apply a search algorithm for finding the next move? Should I simulate opponents moves too?
+ MSmits: did you try search algorithms on simple board games before?
+ dGrayCoder: I have only done minimax on tictactoe
+ jacek: yes you need to simulate the game, make move and undo move
+ dGrayCoder: I have used a*, dijkstra on some other problems
+ MSmits: well spring challenge 2021 is not hard to simulate, but has some complications using search
+ MSmits: I used beamsearch, some used a form of mcts
+ MSmits: you can get to legend with either
+ MSmits: but it's not that easy to do
+ MSmits: thats why i ask about the simple boardgames. 
+ MSmits: Beamsearch is doable for spring 2021 I think, but if you've never done mcts, dont start there
+ MSmits: (better on uttt)
+ dGrayCoder: utt?
+ MSmits: oh i thought you knew, you said TTT, but you meant normal TTT
+ MSmits: <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/bot-programming/tic-tac-toe">https://www.codingame.com/multiplayer/bot-programming/tic-tac-toe</a>
+ dGrayCoder: can you apply beam search on ttt?
+ MSmits: it's one of the easiest places to practice getting a mcts working. The only issue with it, is that it's hard to see what a good move is (for a human). 
+ MSmits: dGrayCoder no
+ MSmits: beamsearch is mostly used on optims
+ MSmits: it involves ignoring the opponent mostly
+ MSmits: and finding the best sequence of moves for yourself
+ MSmits: and since optims are single player, it makes more sens there
+ MSmits: sense
+ MSmits: in spring 2021 you can to some degree, ignore opponent. It's not perfect by a long shot, but it works somewhat
+ jrke: my spring 2021 is still without any opponent interference
+ dGrayCoder: what is optims?
+ MSmits: optimization
+ MSmits: get the most score out of the problem
+ dGrayCoder: I see
+ MSmits: <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/optimization">https://www.codingame.com/multiplayer/optimization</a>
+ dGrayCoder: thank you very much it helped.
+ MSmits: np
+ MSmits: if you see people talk about snake here, that's an optim in development
+ jacek: or it could be python
+ Illedan: jrke, true. I can make the width/height randomized with some odd maps?
+ Illedan: Would actually give something to the game
+ Illedan: Just +-1 of the current
+ Westicles: Anyone know the story on thor golf?  Looks like new validator and maybe a bash update or something?
+ BlaiseEbuth: Another mean trick from the French...
+ Westicles: Yes, very devious :P
+ BlaiseEbuth: :3
+ seshoumara: where can I find the weekly puzzles?
+ BlaiseEbuth: Via the notifications, or by clicking the coresponding item on the quest map.
+ geppoz: question from noob to experts in ruby
+ geppoz: about if conditional
+ geppoz: example:
+ geppoz: { puts n; exit} if n&gt;1
+ geppoz: that gives a big error
+ geppoz: puts n if n&gt;1
+ geppoz: that works fine
+ geppoz: question: how is defined a block of code that needs to be tratead as a single entity?
+ JohnPotter895: anh em việt nam ơiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+ BlaiseEbuth: No.
+ BlaiseEbuth: Speak english on this chan.
+ seshoumara: the quest map directs me to the current puzle of the week, how do I access the previous ones?
+ BlaiseEbuth: Puzzles of the week are puzzles already present on the site, so you can find them back by browsing CodinGame. But there's no history of which ones was pow...
+ seshoumara: there was a list some 1-2 years ago, guess they refactored it, ok, thanks
+ Pythonista_TN: hey guys, If a clash competition is complete can I have access to the problem statement?
+ frozen_flames: after you submit your code
+ raiz_rizon: he i am lose
+ KiwiTae: Westicles you got targetted again :p
+ Pythonista_TN: @frozen_flames yes
+ Pythonista_TN: after submission
+ Pythonista_TN: can I do that&#160;?
+ frozen_flames: yup
+ Pythonista_TN: how&#160;? 
+ <b>**Pythonista_TN slaps  around a bit with a large fishbot</b></p><p><a href="/wiki/File:Default_avatar.png" class="image"><img alt="Default avatar.png" src="/images/5/56/Default_avatar.png" decoding="async" width="50" height="50" /></a> Pythonista_TN: /me
+ Pythonista_TN: (╯°□°）╯︵ ┻━┻
+ pyprog: there is a bug running around inside my computer
+ pyprog: should i run a debugger?
+ Illedan: Yo
+ MrAnderson: yo-yo
+ struct: hi
+ Illedan: So, how should I create this API from Snake to JS :thinking:
+ Illedan: Send all the moves?
+ struct: Yes
+ Illedan: Send coordinates with food and snake?
+ struct: you can check chess or try angle catch
+ Illedan: Then I need the engine both places
+ struct: I would say send moves only
+ struct: yes
+ Illedan: -.-
+ Illedan: Chess has it both places?
+ struct: you dont need to check for legal moves on js
+ struct: because the java one will handle that
+ Illedan: Indeed
+ jacek: oO
+ Illedan: But I need to send the spawned food too
+ Illedan: Or should I keep the seed logic in JS too?
+ struct: its your call
+ struct: if you send the food its more data
+ Illedan: I guess I can send all moves as:N10W3ESS
+ struct: that should help yeah
+ struct: max moves is currently 25k right?
+ Illedan: Yeah
+ Illedan: Will be 17000
+ Illedan: And I wonder about having some boards with odd sizes
+ struct: if you just send the moves to the js module the replay size will be way under 40k
+ struct: with the module you can also have all the frames if you want
+ struct: instead of teleporting the snake
+ Illedan: I want to speed move :D
+ Illedan: When you do many each frame
+ Illedan: 50 moves? =&gt; 1 sec / 50 each move
+ eulerscheZahl: still waiting for approval Illedan?
+ jacek: lets approve without making the bot
+ struct: once i finish breakthrough i might make a bot
+ struct: I dont know what to play next anyways
+ jacek: still obsessed with breakthrough eh
+ struct: yes, its a fun game
+ eulerscheZahl: &gt; I dont know what to play next anywaysthe private contest?
+ struct: whats the link?
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/hackathon/sogeti-codefest-2021">https://www.codingame.com/hackathon/sogeti-codefest-2021</a>
+ eulerscheZahl: probably it's just fantasitc bits
+ eulerscheZahl: maybe some minor changes
+ eulerscheZahl: like one can only do ACCIO and the other wizard only FLiPPENDO? we'll see
+ struct: not eligible for prizes&#160;:/
+ eulerscheZahl: you have so many smurfs
+ eulerscheZahl: ask nulte
+ struct: I do some people in spain I guess it can be delivered there 
+ struct: i do know*
+ eulerscheZahl: but first you have to reach top3
+ eulerscheZahl: that's not easy&#160;;)
+ jacek: nulte is noob
+ struct: higher chances than on a multi
+ eulerscheZahl: you mean on a regular contest?
+ struct: yes
+ struct: sorry i havent rested properly due to breakthrough
+ eulerscheZahl: maybe the next contest will scramble chances of winning
+ struct: hope not
+ eulerscheZahl: ++
+ jacek: next contest? the non-multi one?
+ struct: 20 shirts top 20 + 20 shirts for top 100 would not be that bad
+ eulerscheZahl: the undetermined one
+ struct: but if its all randomized i would say no
+ eulerscheZahl: what are you talking about?
+ eulerscheZahl: i'm not even thinking about tshirts or whatever. just the format (bot vs escape)
+ struct: ah
+ struct: my answer remains the same&#160;:)
+ eulerscheZahl: fantastic bits had tshirts for top10 + 50 random winners in top250
+ martinpapa69: ye that was bad
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/fantastic-bits-random-t-shirts/2292">https://www.codingame.com/forum/t/fantastic-bits-random-t-shirts/2292</a>
+ martinpapa69: i finished like 13 or something. no t shirt
+ eulerscheZahl: you got your fair share at this point&#160;:)
+ eulerscheZahl: when did you change your country from Hungary to Spain? but still Budapest
+ martinpapa69: I moved to spain so i can participate in the private contest
+ eulerscheZahl: really? :D
+ martinpapa69: might move back to hungary later idk
+ struct: moved or changed the flag?
+ eulerscheZahl: CG will never be able to disprove one of them
+ martinpapa69: yo soy espanol 
+ struct: I guess ill use nulte
+ eulerscheZahl: considering your slow response time this could be a machine translation
+ martinpapa69: no I actually know this sentence :D
+ martinpapa69: duolingo...
+ eulerscheZahl: no ablo espanol
+ struct: you need this char maybe ñ
+ eulerscheZahl: that's an N with a dash on top
+ eulerscheZahl: while I want an N with a ~
+ martinpapa69: gonna tell them to send a laptop with spanish keyboard if i win
+ struct: yes its pronounced as nh
+ struct: español
+ struct: in portuguese its espanhol
+ eulerscheZahl: don't I want the nj?
+ eulerscheZahl: like sen(j)or
+ Astrobytes: yes
+ struct: maybe, my spanish inst great
+ struct: maybe im confusing it with portuguese
+ struct: Didnt know that google translate had multiple voices for the same language
+ jacek: i see he changed budapest to barcelona eh
+ struct: darkhorse64 how do you know that breakthrough may only last up to 209 moves? I can't seem to find any info about it.
+ jacek: :thinking:
+ jrke: maybe i think an estimated
+ jrke: like (8*8 + 8*7)*2
+ jrke: something like tha
+ jrke: t
+ Illedan: (╯°□°）╯︵ ┻━┻
+ Illedan: Stupid reverse clashes -.-
+ struct: you are doing clashes?
+ jrke: nope
+ Illedan: *clash
+ jacek: oO
+ eulerscheZahl: so csipcsirip = Marchet e confirmed?
+ RoboStac: struct - every move is going forwards so 209 would be moving all pieces onto row 7/2 before one is forced to move onto the end row and end the game
+ struct: thanks robo
+ Marchete: lol
+ jacek: oh my
+ Marchete: he changed to spain
+ jrke: thats how i tried to estimate - 8pawns at bottom can go to top in 8 moves which is 8*8 and 8 at second row will take 7 moves to reach top so 8*7 and for players *2, maybe i am wrong
+ RoboStac: only one pawn can do 8 moves
+ RoboStac: but yeah, 16*7+16*6 + 1
+ jacek: lets ask those who approve breakthrough how did they test that
+ jrke: yeah robo is right i think16*7 = 11216*6 = 96=208 +1 = 209 if it fits
+ martinpapa69: he *moved to Spain
+ martinpapa69: I thought if I work on Marchete's code, it could be beneficial if i moved closer to him
+ MSmits: good thinking
+ jacek: then we all should move to canada
+ MSmits: to be near RockyMullet!
+ BlaiseEbuth: Caribou powa!
+ reCurse: Why would they limit the countries that can participate? I can't find a single good reason
+ MSmits: maybe this is something they leave up to the company that is sponsoring
+ MSmits: they may be hiring in some
+ BlaiseEbuth: Participate to&#160;?
+ reCurse: So they wouldn't be interested in expat candidates? lol
+ reCurse: Not to mention people with no interest in a job with the right country can still do it
+ reCurse: Like I said, not a single good reason
+ MSmits: no idea, but I think it's not CG making this decision
+ reCurse: I don't care who's making the decision, I think it's a dumb one regardless who makes it
+ MSmits: possibly you are correct&#160;:)
+ BlaiseEbuth:&#160;:(
+ struct: its not like having people from other countries will affect anything, if they want to recruit people from the countries listed they can still do it
+ reCurse: Maybe CG is charging per country now
+ BlaiseEbuth: Thanks, chat log.
+ reCurse: Someone with a twitter should @ them
+ MSmits: a twitter? 
+ jacek: you dont do twitter?
+ reCurse: No
+ jacek: :O
+ reCurse: I'm off social media in general
+ MSmits: I dont do any social media
+ BlaiseEbuth: same..
+ MSmits: I don't do any social tbh
+ jacek: yet you are in cg chat
+ MSmits: meh, ok 1 social
+ Astrobytes: that's different
+ dbdr: Illedan clashing instead of snaking? :thinking:
+ BlaiseEbuth: It's nothing social, you're all bots...
+ struct: he is learning javascript from clashes
+ MSmits: mmh i miss benchmarking
+ MSmits: no idea how much improvement i am making vs mikla unless i submit repeatedly
+ reCurse: Glad that stupid change didn't happen when I was still active
+ MSmits: I guess you can still do it with a large time between games
+ Wontonimo: what's the change&#160;?  (i'm late to the conversation)
+ Wontonimo: that is preventing benchmarking?
+ reCurse: 3-4 times longer than before
+ Wontonimo: ah yes, managing server costs
+ reCurse: They never mentioned that
+ Wontonimo: what did they mention?
+ reCurse: They said "so people participating in contests don't get slow servers because of people benchmarking"
+ reCurse: And we know what happened
+ BlaiseEbuth: Benchmarking performance is a 5% concern...
+ martinpapa69: ye, how many ppl use cgbenchmark in a contest, like 30?
+ reCurse: Probably more than that
+ MSmits: that's not negligible though
+ reCurse: The real issue is that if you prevent them from doing that, what do you think is going to happen
+ reCurse: More submits
+ MSmits: yes, thats whats happening for me now
+ reCurse: Then things practically came to a halt because of all the submits
+ reCurse: :clap:
+ Astrobytes: There is logic, then there is CG logic
+ reCurse: Anyway enough negativity from me today
+ BlaiseEbuth: Yeah that's really surprising, since CG always took smart decisions until now... :thinking:
+ <b>**Astrobytes brushes off the salt</b></p><p><img src="/a/59449061195531" /> BlaiseEbuth: Throw it over your shoulder.
+ Astrobytes: MSmits: refactoring done?
+ Wontonimo: let's talk about PID controllers
+ Wontonimo: arn't they wonderful
+ Wontonimo: so many uses
+ MSmits: kinda
+ reCurse: Never used one
+ MSmits: still looking for bugs
+ Astrobytes: No improvement then
+ MSmits: hard to say
+ MSmits: i only have 1 opponent to test against
+ Astrobytes: Yeah indeed
+ Wontonimo: :puzzled-that-distraction-worked-but-no-as-intended-face:
+ Wontonimo: ^^ MSmits, if this image doesn't work, try that refresh control sequence again
+ MSmits: :rage:
+ Wontonimo: bwahahahah
+ Astrobytes: refresh control sequence?
+ Wontonimo: ctrl-shift-W to load the alt emojis
+ Astrobytes: lol. No, no I won't do that. 
+ Wontonimo: and refresh them
+ Wontonimo: haha, good for you
+ Astrobytes: Did you fall for that MSmits?
+ MSmits: :blush:
+ jacek: o: <a rel="nofollow" class="external free" href="https://img-9gag-fun.9cache.com/photo/aV79OVv_460sv.mp4">https://img-9gag-fun.9cache.com/photo/aV79OVv_460sv.mp4</a>
+ MSmits: why the cubes
+ jacek: hexes are so last week
+ MSmits: i see
+ martinpapa69: I expected the girl from the circle at the end of the vid at least
+ jacek: girl?
+ MSmits: win first 55 games in submit, including 2 mikla, but i know it's luck
+ MSmits: 3 mikla now
+ MSmits: what a submit
+ martinpapa69: <a rel="nofollow" class="external free" href="https://d13ezvd6yrslxm.cloudfront.net/wp/wp-content/images/Scariest-Scene-in-The-Ring-700x300.jpg">https://d13ezvd6yrslxm.cloudfront.net/wp/wp-content/images/Scariest-Scene-in-The-Ring-700x300.jpg</a>
+ MSmits: the ring :P
+ MSmits: not circle
+ MSmits: dude
+ Astrobytes: Nice MSmits
+ martinpapa69: ye, *the ring
+ MSmits: and she's called Samara
+ MSmits: 75% still no loss, 5 wins mikla
+ MSmits: ah damn 1 mikla loss
+ MSmits: i have no clue what my real winrate is vs him&#160;:(
+ Astrobytes: Did you also add the long chains  thing? Or this is the same bot?
+ MSmits: i did something different again with disjointed areas and nimsums
+ MSmits: to find more bad moves and exclude them
+ Astrobytes: Ah nice.
+ MSmits: I think it works, but no idea to what extent
+ Astrobytes: 1 loss v Mikla?
+ Astrobytes: Oh boom, 2 more
+ MSmits: 6-4 now yeah
+ MSmits: if i 6-5
+ MSmits: if i am even
+ MSmits: i need to submit spam
+ Astrobytes: Oh I didn't see the first one
+ struct: download contribution change time contrainst get rank 1
+ MSmits: <a rel="nofollow" class="external free" href="http://cgstats.magusgeek.com/app/multi-dots-and-boxes/MSmits">http://cgstats.magusgeek.com/app/multi-dots-and-boxes/MSmits</a>  first time all green
+ struct: ezpz
+ IconicKid: i dont get this
+ dbdr: gg MSmits!
+ Astrobytes: You seem to have cleared up the losses due to score
+ MSmits: I think there is a pretty hard limit to what you can do with nim solving and i think I have reached it just like mikla
+ MSmits: hmm
+ Astrobytes: (against the non-miklas)
+ MSmits: oh right yeah, i think i had bugs
+ MSmits: but they were rare anyways
+ IconicKid: im literly so confused
+ MSmits: IconicKid if you have a question, you can ask it
+ Wontonimo: what are you working on IconicKid
+ MSmits: oh, btw thanks dbdr, but not at all confident yet. Think this submit was lucky
+ Wontonimo: if anyone cares to download yet another Caesar cipher <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/7162f264cc6630afc2954404150b1f7856de">https://www.codingame.com/contribute/view/7162f264cc6630afc2954404150b1f7856de</a>
+ IconicKid: how do i do this
+ Wontonimo: do what?
+ BlaiseEbuth: this
+ Wontonimo: oh!
+ IconicKid: im working on coders strike back'
+ struct: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/56f40ce8-9211-4677-8855-8eabf8610c95">http://chat.codingame.com/pastebin/56f40ce8-9211-4677-8855-8eabf8610c95</a>
+ struct: (╯°□°）╯︵ ┻━┻
+ Wontonimo: oh, i'll PM/DM you, i'd be happy to help wih CSB
+ NovaGrindge: I am failing at this horribly
+ jacek: oO
+ antiwonto: you too eh NovaGrindge
+ Illedan: dbdr, I had 5 min and wanted a simple clash :P Fixing Snake now.
+ Wontonimo: lol, i didn't mean to txt from my alt account
+ Wontonimo: what are you having trouble with NovaGrindge&#160;?
+ dbdr: you're forgiven then&#160;;)
+ jacek: nyoro~n
+ Necromonkey:  = "";
+ Illedan: dbdr, do you think odd sizes give any value?
+ dbdr: I think it would annoy me
+ dbdr: so yes&#160;;)
+ Illedan: haha
+ Illedan: 29x19 always then?
+ Illedan: Or maybe 31x21 for more space :D
+ MSmits: for more annoyance: 33x21
+ Illedan: Why?
+ Illedan: 33 worse than 31?
+ Illedan: *in magnitudes that is
+ dbdr: power of 2
+ Illedan: ah lol
+ Illedan: ok 33
+ asdfg47: 3 playing Coding Escape live
+ dbdr: thanks MSmits  :rage:  ;)
+ MSmits: I know how to annoy
+ dbdr: Illedan size will be random?
+ Illedan: Nah, I'll make it 33x21
+ Illedan: hard enough
+ Illedan: Unless random is far better :thinking:
+ Illedan: but then I need to send dimensions to the damn viewer too
+ Illedan: hm
+ Illedan: no I don't
+ Illedan: I only need the seed
+ Illedan: What range should I make it?
+ Illedan: 29-33 x 19-21?
+ struct: range brings nothing but pain imo
+ dbdr: it forces to make a more general solution
+ Illedan: yeah
+ Illedan: I like it
+ Illedan: :evil:
+ Illedan: <a rel="nofollow" class="external free" href="https://imgflip.com/i/5higx5">https://imgflip.com/i/5higx5</a>
+ Wontonimo: what happened to hyperbole and a half?
+ struct: what does that mean Wontonimo?
+ jacek: sounds like 2 hipoboles
+ SlowedFever: is there a way to finish your code in a clash after time runs out?
+ jacek: no. when clash is over its over
+ SlowedFever: thats annoying i want to keep working on my code
+ jacek: try puzzles, you can go back to them whenever you like ~
+ SlowedFever: yeah clash is kinda dumb because how are you supposed to learn how to do stuff if it doesn't give you enought time to learn and finish your code
+ Astrobytes: It supposed to be for fun
+ Astrobytes: *It's
+ BlaiseEbuth: You're not supposed to
+ jacek: :head_bandage:
+ Astrobytes: You'll learn more doing puzzles as jacek said
+ SlowedFever: what's the purpose of fun
+ BlaiseEbuth: :thinking:
+ dwarfie: :popcorn:
+ MSmits: fun is selfpurposing
+ MSmits: the purpose of fun is fun
+ SlowedFever: correct answer but it's still useless
+ SlowedFever: i don't need fun
+ jacek: fun is to pull rebless down in checkers
+ MSmits: what do you need SlowedFever
+ Astrobytes: Bet you're the life of the party
+ MSmits: hi everyone, I hate fun!
+ jacek: you are not from germany, hmm
+ SlowedFever: I like fun but I thought this website was a learning tool
+ MSmits: it is both
+ BlaiseEbuth: It's not
+ MSmits: it's a learning tool and a funning tool
+ BlaiseEbuth: lier
+ jacek: it is more that clashes. it has puzzles, optims, multiplayer games
+ Astrobytes: It is if you want it to be. It also happens to be fun.
+ dwarfie: clashs are useless ....
+ SlowedFever: it's not that hard to let players finish their code after time runs out
+ SlowedFever: that would make them better
+ Astrobytes: DO PUZZLES THEN
+ SlowedFever: i am
+ BlaiseEbuth: I want it to be a pronographic site&#160;!
+ BlaiseEbuth: Now
+ BlaiseEbuth: I'm waiting
+ jacek: mods are asleep, postponies
+ MSmits: that's a 5% issue BlaiseEbuth
+ Astrobytes: Post prawns
+ BlaiseEbuth: -_-
+ SlowedFever: I'm just saying that they could improve the way clash works
+ BlaiseEbuth: Improve in your view
+ MSmits: SlowedFever improve how
+ dwarfie: clashs worked .... 5 years ago ....
+ BlaiseEbuth: But since clashs are made for fun/competition and not to learn they will not
+ SlowedFever: I don't see the downside of letting players fix their mistakes after the round has ending
+ KiwiTae: SlowedFever just do very easy puzzle categories instead
+ MSmits: SlowedFever yeah that would not be a bad idea
+ Astrobytes: Never clash [solved]
+ SlowedFever: thank you
+ MSmits: but personally I feel that if you want to learn, do real puzzles
+ MSmits: as has been said
+ SlowedFever: yeah and now i know that
+ jacek: clashes or one time things. you can 'return' to it using unofficial search like <a rel="nofollow" class="external free" href="https://eulerschezahl.herokuapp.com/codingame/puzzles/">https://eulerschezahl.herokuapp.com/codingame/puzzles/</a>\
+ jacek: and i cant type properly
+ KiwiTae: SlowedFever like this one <a rel="nofollow" class="external free" href="https://www.codingame.com/training/veryeasy/nintendo-sponsored-contest">https://www.codingame.com/training/veryeasy/nintendo-sponsored-contest</a>
+ BlaiseEbuth: CG like good ideas, you should propose it to them 
+ Astrobytes: sigh
+ BlaiseEbuth: :speak_no_evil:
+ struct: This game is driving me crazy
+ Astrobytes: Take a rest from it for a few days man
+ struct: I cant
+ MSmits: he cant
+ Astrobytes: I noticed&#160;:)
+ struct: I still think my eval can improve by so much
+ struct: But im so bad with it
+ jacek: been there done that
+ Zajats: e10
+ MSmits: <a rel="nofollow" class="external free" href="https://www.espares.co.uk/advice/careandmaintenance/how-to-fix-an-e10-error-on-a-hoover-washing-machine#:~:text=Seeing%20E10%20or%20ten%20repeated,is%20in%20the%20correct%20position">https://www.espares.co.uk/advice/careandmaintenance/how-to-fix-an-e10-error-on-a-hoover-washing-machine#:~:text=Seeing%20E10%20or%20ten%20repeated,is%20in%20the%20correct%20position</a>.
+ BlaiseEbuth: Was about to say that's out of board...
+ MSmits: you cant be expected to understand every error, thankfully I am here
+ BlaiseEbuth: :thumbsup:
+ MSmits: mmh my D&amp;B bot is now 3.7k lines
+ MSmits: waiting for the limit to hit :P
+ struct: o.o
+ MSmits: I put in an mcts
+ MSmits:  for early game
+ MSmits: I was hoping it would beat mikla, but I think he's immune
+ struct: im also struggling to improve on bt now
+ MSmits: you'be been struggling all week
+ MSmits: like me
+ struct: tomorrow ill try one more thing or two then im done
+ struct: i improved it two days ago
+ MSmits: not sure i believe you :P
+ MSmits: I remember STC
+ struct: I havent spent much time on this game though
+ struct: I started it like 1 week ago
+ MSmits: only a week?
+ MSmits: ah I guess this seemed like a long week
+ struct: i would say 1 week and half maybe
+ struct: i tried to do the early win check with shifts only but its not easy
+ struct: I can do it easily if its the current player turn
+ MSmits: so you need flips then
+ struct: but if a player makes a move and opponent still has a move its harder to check for a win
+ MSmits: ahh ok
+ struct: currently I can find a win from 6th row for any player
+ struct: if its his current turn
+ struct: its quite simple
+ MSmits: ah I see
+ Drichie: Is it ok to ask questions here?
+ MSmits: it is ok
+ Drichie: Currently I am doing the Horse-Racing Duals practice puzzle. I have 2/3 of the testcases working. The last one has inputs 99,999 which makes my program time out. I'm guessing it is because I am doing too many comparisons and it is slowing it down too much yea?
+ MSmits: yes
+ MSmits: you need to make your algorithm smarter
+ MSmits: so that it has to do less comparisons
+ Astrobytes: even a pre-solve mcts didn't work eh
+ MSmits: preferring loops and short objects didnt
+ MSmits: i reversed it to prefer long chains now
+ MSmits: maybe that helps, i dunno
+ Astrobytes: that was the idea earlier
+ MSmits: thats what my current submit does
+ Astrobytes: looks OK but not your best
+ MSmits: the thing is, from checking all the lost games it's clear to me that he doesnt solve better than i do, 
+ MSmits: not anymore
+ MSmits: the gamestate just favors him somehow, more often
+ MSmits: when it's time to sovle
+ MSmits: so he must do something in ply 1-35 that gives him some gain
+ Marchete: just spam submit and you are 1st
+ MSmits: no, i dont think so
+ MSmits: this is a lucky submit again i think
+ Astrobytes: Well yeah, definitely something going on there.
+ MSmits: but sure i'll spam a bit to be sure
+ Astrobytes: But what, I have no idea
+ MSmits: I think the submit is pretty good. Hamburger got me twice, but other than that its fine
+ Astrobytes: Yeah I saw that, was on score?
+ MSmits: 1 on score
+ Astrobytes: Didn't look at the replats
+ MSmits: 1 on nim
+ MSmits: he does a nim search
+ Astrobytes: *replays
+ Astrobytes: Aha
+ MSmits: even if i solve it sooner, if i solve it as a loss and he makes no mistakes...
+ MSmits: he still wins
+ Astrobytes: Captain Obvious enters the building :P
+ MSmits: yes
+ MSmits: btw, i just noticed his nim solver is really good
+ MSmits: he solves only 1 turn later
+ MSmits: so he's not that far from me and mikla
+ Astrobytes: Far enough it would seem
+ MSmits: but as we discussed, you need to know how to prefer splitting moves and such
+ Astrobytes: Indeed
+ MSmits: there we go again, another submit. Last one was 5-4. Keeping score now to see what my real WR is
+ Astrobytes: That's gonna be a bunch of games :P
+ MSmits: well only if it's close
+ MSmits: if i get to 10-30 i dont think I need more
+ Astrobytes: Fair
+ MSmits: I still have a solver search for pre-endgame on my list. Not sure how that'll be squeezed in my already 3.7k bot
+ MSmits: might have to use minifier
+ Astrobytes: Golf it
+ MSmits: mmh I guess i could rename some of those awfully long functions
+ MSmits: Link* ShortestGroundedLongStringWithNoShortAndNoDouble()
+ struct: You get no points from winning vs the other players
+ struct: it will be hard to pass miklla
+ Astrobytes: jesus effin christ
+ MSmits: its a very descriptive name :P
+ Astrobytes: You know you can just put comments and strip them for the submit right
+ MSmits: sure, I suppose
+ MSmits: struct if i have &gt; 50% it's not hard. Just takes a lot of submit. But I probably do not have &gt;50, thats the real problem
+ MSmits: I should just set up a cg bench with a long time between
+ MSmits: is more efficient
+ struct: i think the new version takes the current constraints into account
+ MSmits: oh didnt know there's a new version
+ struct: I think there is
+ struct: it was updated around when this change was made
+ Astrobytes: Still a lot slower though so...
+ MSmits: dont need more than 100 games
+ struct: maybe ill also use it for bt
+ struct: anyways im off for today, need some rest from this game
+ struct: gn
+ MSmits: good idea struct, gn
+ Astrobytes: gn struct, take it easy man
+ theycallmedavid: Today I learned that it is possible to place flags in minesweeper
+ MSmits: :cheer:
+ MSmits: :cheers:
+ MSmits: blah
+ Astrobytes: :beers:
+ Astrobytes: :raised_hands:
+ MSmits: I set it to use 60s between games
+ MSmits: hope that is ok
+ Astrobytes: I thiiiink that's about right, but I don't know what the limit is per hour
+ MSmits: if you happen to come across a mikla one of these days, ask him if he does anything special early game
+ Astrobytes: I will do. Didn't see him for a bit
+ MSmits: same
+ MSmits: I noticed that he's somewhat immune to my making loops and such
+ MSmits: so maybe he's also doing a mcts to make long chains
+ Astrobytes: Yes, it seems he's already thought of it one way or another
+ MSmits: yea
+ dzosz: any1 knows is CG already has a puzzle that is about finding the smallest integer that is NOT in the list?
+ Astrobytes: sounds clashy
+ Astrobytes: MSmits: I'm off man, gonna watch a movie or something. Good luck and take care
+ Marchete: Smits maybe he is OK to answer all that
+ MSmits: yeah might be
+ MSmits: gn Astrobytes
+ MSmits: WR seems around 40%
+ MSmits: 48 games in CG bench so far. 39% won
+ MSmits: submit: 16-19 so far
+ MSmits: mmh though on cg bench i had 2 crashes
+ MSmits: allright thats clear enough I think. 47-70 score
+ Marchete: who is who?
+ Marchete: 47 you?
+ MSmits: yes
+ Marchete: too bad
+ MSmits: yeah, but it's really close
+ MSmits: this nim game is a bit all or nothing
+ MSmits: I'm right between all or nothing
+ MSmits: in that very arrow space
+ MSmits: narrow
+ Marchete: can't you make some kind of endgame book?
+ Marchete: taking chain properties and such
+ MSmits: nah
+ MSmits: chains dont matter
+ MSmits: not in the nim game
+ MSmits: anything long is immediately removed from consideration
+ MSmits: all that matters is divide and conquer
+ MSmits: only safe moves and sacrifice moves (1 box and 2 box moves)
+ MSmits: you use a hashmap to store regions and their values
+ MSmits: best way to look at it is just pick a replay like this one: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/571897632">https://www.codingame.com/replay/571897632</a>  and check when the solve happens, frame 35
+ MSmits: it looks like nothing you can easily use tables for
+ A0-poppy: 求带

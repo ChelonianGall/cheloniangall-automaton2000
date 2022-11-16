@@ -1,0 +1,420 @@
+ srinivasTheDeveloper: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/18937070d4951513b610bf8cb5127c9d9f0cc28">https://www.codingame.com/clashofcode/clash/18937070d4951513b610bf8cb5127c9d9f0cc28</a>
+ srinivasTheDeveloper: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/18937070d4951513b610bf8cb5127c9d9f0cc28">https://www.codingame.com/clashofcode/clash/18937070d4951513b610bf8cb5127c9d9f0cc28</a>
+ Bentel_Inside: reeeeeeeeeeeeeeeeeeeeee
+ Bentel_Inside: :heart_eyes:
+ aetrnm: Moderators should reach an agreement on whether duplicate versions of a puzzle can be accepted or not.
+ aetrnm: Is there a way to call moderators on a CoC?
+ aetrnm: Just check it: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/7170e2aa0081c811d945e5e90a5d08c92a2c">https://www.codingame.com/contribute/view/7170e2aa0081c811d945e5e90a5d08c92a2c</a>and this<a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/71972d794a714711601e2052f8325ceb5f51">https://www.codingame.com/contribute/view/71972d794a714711601e2052f8325ceb5f51</a>
+ eulerscheZahl: duplicates in clashes are allowed
+ eulerscheZahl: CoC close duplicates are not forbidden.<a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/40701/help-center/contribution-guidelines">https://www.codingame.com/playgrounds/40701/help-center/contribution-guidelines</a>
+ aetrnm: It's up to moderators, as I said before
+ aetrnm: ok then
+ eulerscheZahl: it's not up to moderators. it's an official statement from CodinGame that duplicate clashes are explicitly allowed
+ aetrnm: Moderators should reach an agreement on whether duplicate versions of a puzzle can be accepted or not.
+ <b>**eulerscheZahl stopped moderating because I personally disagree on this rule</b></p><p><img src="/a/68313901314721" /> aetrnm: Haha, ok
+ dbdr: this statement says it's up to moderators, no?
+ aetrnm: yeah it does
+ eulerscheZahl: wait, did this get changed? i could swear this rule was stronger in the past
+ eulerscheZahl: However, moderators should reach an agreement on whether a trivial CoC contribution is worth being added to the pool of CoCs.
+ eulerscheZahl: maybe after Boulet created that "add nothing" clash
+ eulerscheZahl: just to prove a point
+ dbdr: :D
+ eulerscheZahl: sounds very much like him, doesn't it? :D
+ dbdr: imo a few clashes with the same task expressed in very different words is not useless, readhing comprehension is important
+ dbdr: yep&#160;:)
+ eulerscheZahl: also spelling abilities
+ juice0: lol
+ juice0: gotem
+ dbdr: for spelling abilities, seed FB/sogeti&#160;;)
+ dbdr: *see
+ eulerscheZahl: why? did CG sneak in a few typos there?
+ <b>**dbdr hints there is a joke in there</b></p><p><img src="/a/43135502422075" /> eulerscheZahl: because I didn't register and can't see it?
+ eulerscheZahl: aaaah
+ eulerscheZahl: spell
+ dbdr:&#160;:+1:
+ EdwinJagger: Is there a way to turn off the autocomplete suggestion box in the editor?
+ eulerscheZahl: no
+ masongtxr: hi
+ martinpapa69: any1, who is good at running sse/avx code on codingame here?
+ dbdr: what's the question martinpapa69?
+ martinpapa69: how do i get rid of this kind of errors, when i run avx code directly on cg&#160;:
+ martinpapa69: error: inlining failed to call always_inline
+ martinpapa69: error: inlining failed in call to ‘always_inline’ ‘float _cvtsh_ss(short unsigned int)’: target specific option mismatch
+ dbdr: seems C/C++ specificmaybe pragmas are needed
+ darkhorse64: I already got this error with gcc when trying to setup a constant simd value using an intrinsic function eg  static __m256i s= _mm256_set_epi64x (a, b, c, d);*
+ darkhorse64: This is OK with MSVC
+ martinpapa69: yep. works with clang too
+ darkhorse64: I guess the compiler is unable to fill the SIMD register using the intrinsic during compilation and complains
+ martinpapa69: gcc is lame
+ martinpapa69: ok i needed the #pragma GCC target("f16c")
+ darkhorse64: half precision weights&#160;? :slight_smile:
+ martinpapa69: ye. I wanted to make an alpha_zero, that i can run on CG without precompilating, and compressing it on my pc
+ jacek: is it faster?
+ jacek: like quantization?
+ martinpapa69: nah, i think its a little slower actually. but you cant submit precompiled code on contests, because of obfuscation rules
+ martinpapa69: I planned to use it on the current contest, but it took way too much to build the framework, no time for the contest itself
+ jacek: the spaghetti one?
+ martinpapa69: ye i wanted to give it a try
+ Lotuses: awawa
+ Lotuses: qaq:joy:
+ struct: darkhorse64 I think I found how to do it during compilation
+ struct: constexpr __m256i a = (__m256){1,2,3,4};
+ struct: for msvc the (__m256i) is not needed
+ struct: I mean it doesnt work for mscvc
+ struct: msvc*
+ struct: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/35d45563-56aa-4a77-827a-75105622bead">http://chat.codingame.com/pastebin/35d45563-56aa-4a77-827a-75105622bead</a>
+ darkhorse64: nice
+ MSmits: sigh.... so I was trying this new nimsolver method that makes cutoffs like abpruning. From a paper
+ MSmits: I test it, for some reason it's 5x slower
+ MSmits: so i thought it was a bug
+ MSmits: then I looked closely in the paper and it turns out the pruning method becomes worse after around 200 TT-size
+ MSmits: from their test
+ MSmits: who has a TT smaller than 200&#160;??
+ MSmits: paper from 2018 too
+ struct: lol
+ MSmits: i guess the 200 is for small solvable games, but for larger games they have a TT limit too. Since I use a TT of 400k or so, it's never gonna be worth it i think
+ MSmits: I guess it's similar to the effect of ab pruning weakening when you add TT. You get "lower" and "upper" limits instead of exact values when you cutoff. Except with nimsolver you don't even have these
+ MSmits: any cutoff prevents an entry to TT
+ MSmits: maybe I could adapt their method to  make it better
+ struct: cache misses will always be a problem
+ MSmits: dont think it's that
+ struct: how big is each entry?
+ MSmits: tiny
+ MSmits: the smallest possible TT
+ MSmits: TT entry i mean
+ MSmits: it has nothing to do with cache really
+ struct: Im not really familiar with TT
+ MSmits: it has to do with storing stuff in TT or not
+ struct: ah ok
+ MSmits: when you do a cutoff halfway through the function, you save having to do the function
+ MSmits: but you dont store the function result in the TT
+ MSmits: so next time you're in the same state
+ MSmits: you again have to do half the function to get the same cutoff
+ MSmits: if you had finished it the first time
+ MSmits: you would have a TT entry and immediately leave the function on the next time
+ MSmits: so basically, i have to somehow store the half-finished work in the TT too
+ MSmits: so  i can resume the next time i hit this state
+ MSmits: in ab pruning + TT this is akin to storing upper and lower limits
+ struct: you store, but you dont have to access it?
+ MSmits: a transposition table basically gives you the immediate value of a state
+ MSmits: if you look it up
+ MSmits: but the state has to actually be in there, or it won't help you
+ MSmits: so if it's not in there, you have the analyze the entire state
+ MSmits: if, halfwaythrough the analysis, you realize this state is pointless to finish analyzing. You save time
+ struct: yeah, but checking 500k entries might be slow no?
+ MSmits: you dont check 500k entries
+ MSmits: it's a hashtable
+ MSmits: like unordered_set or map
+ MSmits: or set() in python
+ MSmits: or dictionary in c#
+ MSmits: key-value pair
+ MSmits: key = hashed state
+ struct: I see
+ MSmits: so anyways, like ab-pruning causes early cutoff, this method does too. Which means the state doesn't get fully analyzed and doesn't enter the TT
+ struct: are you using unordered_map?
+ MSmits: no a much faster way
+ struct: custom?
+ MSmits: yeah, but very simple
+ struct: buckets are fixed?
+ struct: You dont move stuff from buckets right?
+ MSmits: no
+ MSmits: i am not sure there are buckets even, if you could call them that
+ MSmits: it's just an array
+ MSmits: i make a hashkey 
+ MSmits: then do&#160;% HASH_CAPACITY
+ MSmits: then if that spot is already taken i look within 5 entries to find an empty spot
+ MSmits: if i can't find it, i randomly put it in around those 5 
+ MSmits: overwriting previous entry
+ MSmits: when looking stuff up, i check if an entry is already filled by a different state and then also check 5 items to see if it got put somewhere else
+ MSmits: it's just an easy way to solve most collisions
+ struct: I see
+ struct: I once tried to implement a structure like map
+ struct: Its not easy
+ MSmits: not if you're not allowing any loss
+ MSmits: if it can be lossy, it's easy to do
+ MSmits: for a negamax with ab pruning + TT, lossy is good
+ MSmits: lossy makes it faster
+ MSmits: sometimes you have to recalc something due to a collision, but they are rare enough that the performance increase compensates for it
+ jacek: :drooling_face:
+ darkhorse64: still very far from the 4M rollouts in C4 but this version looks a bit faster
+ struct: I would not stress about it
+ struct: it performs the same
+ struct: very rps
+ darkhorse64: yep same code, two submits end with 2 ELO points diff
+ jacek: ELO?
+ jacek: thats not much
+ darkhorse64: but every optimization bit is worth trying. Maybe I should say TrueSkill points
+ jacek: phew, thats better
+ struct: also dont forget that my rollout might be a little less smart than yours
+ struct: ill submit my bot with 1/10 of the time again, just to see where it places
+ jacek: <a rel="nofollow" class="external free" href="https://ahseeit.com//king-include/uploads/2019/01/50061675_2144288655663538_6930558001217457010_n-6341318478.jpg">https://ahseeit.com//king-include/uploads/2019/01/50061675_2144288655663538_6930558001217457010_n-6341318478.jpg</a>
+ geppoz: in a CoC statement you find: "rounded down to the nearest integer" 
+ geppoz: do you know any more confused definition&#160;?
+ geppoz: "rounded" "down" "nearest"
+ geppoz: loooool
+ eulerscheZahl: i don't find this confusing
+ eulerscheZahl: "rounded" =&gt; how the rounding shall work
+ eulerscheZahl: "down" =&gt; ok
+ eulerscheZahl: "nearest": don't go in steps of 0.1 or 10
+ eulerscheZahl: of course one could just say floor
+ geppoz: in a "fastest" CoC, of course as you read "rounded", you are already reading the next line&#160;;)
+ eulerscheZahl: of, you are cegpoz
+ geppoz: so you spend 2 min wondering how you fail tests, then you see it :D
+ Astrobytes: 'cegpoz' lol
+ KiwiTae: :joy:
+ jacek: oO
+ dbdr: &gt; The Danish Meteorological Institute reported temperatures of more than 20 degrees Celsius, more than twice the normal average summer temperature, in northern Greenland.
+ dbdr: twice the temperature? :thinking:
+ svetn001: who cares
+ jacek: 0C * 2 is 0C, phew
+ dbdr: 0C * 2 is 273.15C&#160;:)
+ eulerscheZahl: doesn't even make sense when we assume that the initial sentence was in fahrenheit
+ dbdr: it's probably 10C -&gt; 20C, just very incorrect wording
+ eulerscheZahl: yes, makes little sense to multiply values with an arbitrary definition of 0
+ eulerscheZahl: in German the word "Quantensprung" (quantum jump) is popular to describe some great change or progress made. while the actual meaning is the exact opposite
+ dbdr: it might make sense in K. twice the kelvins means two times more heat energy? a physicist can confirm?
+ eulerscheZahl: not when there are aggregate changes involved
+ jacek: if we only had a physicist in the chat...
+ eulerscheZahl: "state of matter"shouldn't try to translate 1:1
+ dbdr: "quantum leap" is the en expression
+ eulerscheZahl: i looked that one up&#160;:/<a rel="nofollow" class="external free" href="https://en.wikipedia.org/wiki/Quantum_jump">https://en.wikipedia.org/wiki/Quantum_jump</a>
+ dbdr: well, quantum physics was a big leap in knowledge&#160;;)
+ dbdr: oh ok, but that's the scientific expression, right?
+ eulerscheZahl: yes
+ dbdr: I hear quantum leap in the vernacular meaning of a big jump
+ eulerscheZahl: in german we (at least the less knowledgeable of us :P ) use the scientific word to describe the exact opposite
+ jacek: schmetterling!
+ eulerscheZahl: i don't find anything odd about that word
+ jacek: you hear german all you life, its not odd to you
+ jacek: <a rel="nofollow" class="external free" href="https://i.imgur.com/CBYMf0x.png">https://i.imgur.com/CBYMf0x.png</a>
+ jsonwebdev: Is it possible to turn off getting any of the shortest clashes? I personally don't find them useful
+ Xascoria: only if private clash i think
+ KiwiTae: jsonwebdev other clashes are useful?
+ FalINTOblivion0112: i like shortest mode
+ jacek: oh my
+ jsonwebdev: yeah I don't like shortest mode because it's not per programing languae... some programming languages have features that others don't
+ Saint_Rose: Agreed. Plus i think its great, cause we can learn on how to make our code more efficient.  
+ FalINTOblivion0112: i always use python or ruby when doing shortest
+ martinpapa69: what could be the worst lang for that? c# i guess&#160;?
+ AllYourTrees: i enjoy shortest mode
+ AllYourTrees: helps me learn things about python i never knew about!
+ eulerscheZahl: with C#9 this will change martinpapa69
+ eulerscheZahl: i would say Java
+ FalINTOblivion0112: yes
+ martinpapa69: Java is also bad for your mental health
+ eulerscheZahl: as long as it doesn't harm my dental health
+ PatrickMcGinnisII: eulerscheZahl good catch on the conjecture... i'll remove it...wanted to make sure I gave you props first
+ eulerscheZahl: sorry for the bad news though
+ eulerscheZahl: hope it didn't take you too long to create it
+ PatrickMcGinnisII: it's all good.  watched a veritasium video... thought it would make a puzzle.  I musta forgot I solved the other puzzle b4.  Nah, good practice for some better ideas tho.&#160;;)
+ FalINTOblivion0112: the collatz conjecture one?
+ eulerscheZahl: yes
+ FalINTOblivion0112: I also made a contribution on that
+ AllYourTrees: just watched that too
+ PatrickMcGinnisII: yeah it has like 5 differrent names
+ AllYourTrees: great video
+ FalINTOblivion0112: if someone can upvote any of my contributions that would make my day
+ FalINTOblivion0112: because i need to level up a skill tree
+ AllYourTrees: FalINTOblivion0112 how the heck did you get code size 30 in this clash
+ PatrickMcGinnisII: I'll drop it now
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://eulerschezahl.herokuapp.com/codingame/puzzles/?q=collatz&amp;category=ANY&amp;title=on&amp;statement=on&amp;tests=on&amp;comments=on&amp;tags=on&amp;author=on">https://eulerschezahl.herokuapp.com/codingame/puzzles/?q=collatz&amp;category=ANY&amp;title=on&amp;statement=on&amp;tests=on&amp;comments=on&amp;tags=on&amp;author=on</a>that's how I found it
+ AllYourTrees: im sitting at 51 :scream:
+ eulerscheZahl: what was the task?
+ eulerscheZahl: "if someone can upvote any of my contributions"these statements always motivate me to downvote
+ FalINTOblivion0112: get 5 upvotes on your contributions
+ FalINTOblivion0112: its for collaboration gold level
+ jsonwebdev: Meh I just think shortest overall is a bad idea. It rewards unreadable code, which is very bad in real environments
+ eulerscheZahl: make a contribution worthy of upvotes and you'll get the achievement with ease
+ FalINTOblivion0112: well i made a quadratic formula one
+ AllYourTrees: not so sure about that, for instance i just learned about the built in python function str.title(), id argue that is way more readable than the solution i came up with lol
+ FalINTOblivion0112: yes
+ FalINTOblivion0112: .title()
+ FalINTOblivion0112: python is so broken at shortest mode
+ eulerscheZahl: what does that do? something like capitalize()?
+ FalINTOblivion0112: the python devs should nerf it
+ FalINTOblivion0112: it capitalizes every first letter of every word
+ AllYourTrees: credit to ^ for teaching me
+ FalINTOblivion0112: no problem
+ FalINTOblivion0112: there is legit a entire python library for algebra
+ FalINTOblivion0112: remember how i solved the equation clash under 30 sec
+ FalINTOblivion0112: thats how i used the library
+ Anduril: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/1894487439fba99c189dfdc18ba15d49663b5c3">https://www.codingame.com/clashofcode/clash/1894487439fba99c189dfdc18ba15d49663b5c3</a>
+ jacek: :upside_down:
+ Kittim: hey folks, how do you get better at python 3
+ Neehier: practice makes perfect brother
+ EdwinJagger: Is there a way to turn off the auto complete suggestion prompt in the editor?
+ oxydowe: I also would like to turn it off!
+ jacek: no, there isnt ~
+ MrRobot9: hello 
+ Uljahn: yes, there is, but it's kinda hacky
+ Uljahn: you should block lcp-community.codingame.com host using umatrix addon or hosts file
+ reCurse: [2 months later] "Why is this feature not working?" :P
+ oxydowe: messing with hosts files? LGTM
+ Astrobytes: Use an external IDE with one of the sync plugins
+ BlaiseEbuth: Use notepad. No autocompletion, no bullshits.
+ reCurse: Why not just use a hex editor and put in the assembly directly, no bullshit
+ jacek: oO
+ BlaiseEbuth: Why not, hey. But perhaps a little tricky for beginners...
+ Dash201: helo
+ Husoski: Machine code would be entered in hex.  Assembly needs an assembler.
+ jstl3ARNINGKNWLE: hello im new to this but i having trouble understanding why the easy and optimal angle test are not working can i get some help 
+ jstl3ARNINGKNWLE: and this is for the Power of Thor 
+ jstl3ARNINGKNWLE: game 
+ martinpapa69: ye assambly is a bloatware
+ Husoski: Expecially the way I code it...&#160;!!!
+ reCurse: Sure, opcodes
+ Husoski: I use those curious 20th century things called "comments"...lots of them.
+ reCurse: Where I'm from it's called "bloat"
+ Husoski: Yep.  21st century, alrightie
+ Husoski: PS: In olden times, "bloat" referred to the size of the object program, not the source...
+ theycallmedavid: I remember that once a puzzle is solved it could be shared. But now I don't see the option. Did that change?
+ theycallmedavid: I mean share the solution
+ jacek: huh? dbdr is from france?
+ theycallmedavid: I found the button
+ theycallmedavid: No, that's just social media share
+ jacek: you mean puzzle or clash
+ theycallmedavid: Puzzle
+ jacek: in profile settings there is auto publish solutions
+ theycallmedavid: I see. That is turned on. Thanks
+ Husoski: you can publish without auto-publish
+ Husoski: @jacek Can auto-publish be turned off once it's turned on?
+ jacek: its on by default
+ jacek: so you cant turn it off ~
+ jacek: can*
+ jacek: argh
+ Husoski: It's off for me and I don't recall turning it off.  Oh well.
+ Husoski: Thanks, btw.  Appreciate the info.
+ Husoski: Okay, now I see.  In "profile settings" just like you said!  (I only remembered seeing that setting in the Results tab after submitting a solution.)
+ jacek: :tada:
+ FalINTOblivion0112: recurse has not played a single game of clash of code?
+ jacek: oh my!
+ reCurse: If I waste my time I usually try to get something out of it :P
+ Illedan: Never gamed something repetitive?
+ Illedan: :tada:
+ martinpapa69: good old metin2 days
+ Illedan: Soon Legend&#160;:) :dance:
+ KiwiTae: oh i played that tiii martinpapa69
+ martinpapa69: metin2 is basically the definition of a repetitive game
+ KiwiTae: i even got married in that game  :joy:
+ martinpapa69: so lucky
+ BlaiseEbuth: Woa! Kiwi python furious ninja :o <a rel="nofollow" class="external free" href="https://chadok.info/codingame/leaderboard_languages.html">https://chadok.info/codingame/leaderboard_languages.html</a>
+ KiwiTae: &gt;&lt;
+ KiwiTae: its on puzzle solving?
+ BlaiseEbuth: Yup
+ KiwiTae: I been on a row solving all the easy ones  since friday lol
+ KiwiTae: im almost at 80%
+ BlaiseEbuth: Well 203 puzzles/week is a pretty good yield.
+ KiwiTae: its this week?
+ KiwiTae: lol
+ KiwiTae: no way
+ BlaiseEbuth: Don't know exactly, but this leaderboard is only a few hours old, and you're the only one with this progression ^^
+ KiwiTae: hehe
+ Illedan: Promotion to Legend League in&#160;:05H 55MN 23SC-.-
+ KiwiTae: gg Illedan which one?
+ Illedan: FB
+ KiwiTae: hoho
+ BlaiseEbuth: :santa:
+ KiwiTae: with NN?
+ Illedan: 3 points above gold boss :P
+ Illedan: nah
+ Illedan: Just moving and flipp spell. 
+ AntiSquid: let's clash&#160;! yah&#160;! Automaton2000
+ Automaton2000: or does it depend on the game
+ martinpapa69: is AutomatonNN still alive&#160;?
+ martinpapa69: or is he called AutomatoNN?
+ struct: NN is not available
+ AntiSquid: it dieded long ago, why no fix
+ BlaiseEbuth: The toad's lobby use its power to keep him dead.
+ AntiSquid: shit . now i have clash on my landing page's  activity board&#160;:/
+ AntiSquid: how do i get rid of it ...
+ BlaiseEbuth: Do 4 other things to shift clashs out :p
+ AntiSquid: it doesn't shift it
+ AntiSquid: ok it did now ... that gave me a heart attack
+ BlaiseEbuth: :disappointed_relieved:
+ FalINTOblivion0112: you can swear in chat
+ FalINTOblivion0112: interesting
+ FalINTOblivion0112: new moderators in codingame?
+ Astrobytes: you can swear in chat contextually
+ Astrobytes: preferably when there are no minors present
+ tommaso.castello: can anyone recommend me a fun challenge for bot programming?
+ Astrobytes: Illedan: gratz dude!
+ FalINTOblivion0112: fuck yes astrobytes
+ FalINTOblivion0112: i can swear now *when no minors present*
+ Astrobytes: tommaso.castello: it's kinda subjective. You like board games? Physics games? Soemthing inbetween?
+ tommaso.castello: I loved coders strike back and was looking for a similar one
+ Astrobytes: FalINTOblivion0112: that was without context, I will kick you next time
+ FalINTOblivion0112: oh?
+ FalINTOblivion0112: sry
+ Astrobytes: tommaso.castello: there's Fantastic Bits, Mean Max, Poker Chip Race, Bit Runner 2048 or Search Race (that one's in Optim games)
+ tommaso.castello: thanks I'll try them
+ Astrobytes: enjoy&#160;;)
+ tommaso.castello: sure
+ FalINTOblivion0112: i really like mean max
+ FalINTOblivion0112: coders strike back is really simple
+ FalINTOblivion0112: and ghost in the cell is also very fun
+ FalINTOblivion0112: doing clash of code can also optimize your coding speed
+ ericlovesmath: Why can't I hover over people to see their info anymore?
+ FalINTOblivion0112: i dont know, same happened to me
+ BlaiseEbuth: A CG's technique to avoid you seeing my new bio...
+ FalINTOblivion0112: uh-
+ FalINTOblivion0112: but i can still search you up
+ FalINTOblivion0112: t(ಠ_ಠt)
+ BlaiseEbuth: Of course, but then YOU searched me. But you can't see it hovering my pic by mistake. :smirk:
+ AntiSquid: FalINTOblivion0112 i suggest real world work experience, have a good day
+ FalINTOblivion0112: oh okay
+ FalINTOblivion0112: thanks
+ idkk: d
+ BlaiseEbuth: There's 3 things I don't understand in this sentence: "real world", "work" and "day" Oo
+ FalINTOblivion0112:&#160;???
+ AntiSquid: his referencing his elite programmer status
+ AntiSquid: he's *
+ FalINTOblivion0112: are you assuming my gender
+ AntiSquid: wasn't even part of the discussion
+ FalINTOblivion0112: huh?
+ AntiSquid: is it relevant&#160;?
+ FalINTOblivion0112: i am very confused
+ AntiSquid: about what?
+ FalINTOblivion0112: whos elite programmer status
+ BlaiseEbuth: You can't be non-binary on a computer...
+ FalINTOblivion0112: true
+ AntiSquid: was answering your ambiguous triple question marks, that was an indirect question asking to clarify blaise's comment @_@ 
+ BlaiseEbuth: Questionception!
+ AntiSquid: my fidget's still spinning 
+ FalINTOblivion0112: ohhhh
+ FalINTOblivion0112: now i get it
+ BlaiseEbuth: <a rel="nofollow" class="external free" href="https://imgur.com/gallery/s44i2t8">https://imgur.com/gallery/s44i2t8</a>
+ BlaiseEbuth: Sorry ^^'
+ FalINTOblivion0112: hold up-
+ AntiSquid: <a rel="nofollow" class="external free" href="https://youtu.be/Hhavsmsi_5M?t=52">https://youtu.be/Hhavsmsi_5M?t=52</a> this kind of fidget 
+ grateful_tomato: is it just me, or is this puzzle broken?<a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/5665ce9c4cad0e677b11263274dcce354cf2">https://www.codingame.com/contribute/view/5665ce9c4cad0e677b11263274dcce354cf2</a>when I click "test in IDE" I get an error message "couldn't find the question related to this contribution".
+ BlaiseEbuth: Try it now grateful_tomato
+ grateful_tomato: thanks, now it works
+ BlaiseEbuth: If you have the contribution moderation rights, just click 'edit' and then 'submit' without changing anything...
+ FalINTOblivion0112: this is huge im top 3000 in clash of code
+ FalINTOblivion0112: i need to get to top 1000
+ AllYourTrees: gl
+ FalINTOblivion0112: thank you!
+ BlaiseEbuth: AllYourLuck
+ aloui: how i can have the solution&#160;??&#160;:)
+ BlaiseEbuth: 42
+ aloui: what ??
+ BlaiseEbuth: That's the Solution.
+ aloui: 42&#160;?? i search the solution for clash code
+ BlaiseEbuth: There's no such thing there, I'm afraid...
+ aloui: thks
+ BlaiseEbuth: My pleasure.
+ FalINTOblivion0112: 4 2 i s a v e r y s p e c i a l n u m b e r
+ FalINTOblivion0112: plus you guys google up solutions?
+ FalINTOblivion0112: huh, doesn't that break the codingame spirit?
+ BlaiseEbuth: :ghost::hammer:
+ FalINTOblivion0112: :money_mouth:
+ enervate: hi
+ WakimMRT: hey
+ Wontonimo: I've released my Connect 4 bot
+ Wontonimo: it's doing okay so far
+ PatrickMcGinnisII: oh no
+ Wontonimo:&#160;?
+ Wontonimo: ah, I'm ahead of you&#160;;)
+ PatrickMcGinnisII: i hope so
+ Wontonimo: why do you say that?
+ Phoenix.: <a rel="nofollow" class="external free" href="https://escape.codingame.com/game-session/sjC-LLw-ML5-r7Z">https://escape.codingame.com/game-session/sjC-LLw-ML5-r7Z</a>

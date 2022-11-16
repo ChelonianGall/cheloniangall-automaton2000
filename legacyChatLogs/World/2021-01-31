@@ -1,0 +1,1277 @@
+ Cybersick: I love you
+ Cybersick: :heart_eyes:
+ Angelburgie22: wrong chat dude
+ N_Flamel: lmao
+ N_Flamel: lmao
+ v1nam: lol
+ henriq-88: Is it possible to avoid certain clashes? Don't like the shortest code ones, makes me write terrible code lol
+ zhoubou: Not on public ones, no.
+ Totomns: in shortest you have time to practice languages like ruby, python, js, or bash
+ Totomns: there is a code golf section on stackexchange, you should look 
+ Ludwigdn: ^ +1
+ kovi: 1st uttt game won vs ka'liso timeout 
+ karliso: nice
+ kovi: nice would be a real vs. top2
+ kovi: real win
+ kovi: and there it is!
+ DomiKo: wow GG
+ kovi: thx
+ DomiKo: top10 in such a short time very nice
+ Angecide: wow kovi ur bot suddenly got very strong
+ kovi: fixed a bug in mcts yesterdayand now some heurstics work
+ eulerscheZahl: now poor smits has to amend his book
+ kovi: yay, vs. rebless as well
+ Angecide: do you do any books?
+ kovi: no
+ DomiKo: heurstics are teccles and that one with not giving free move?
+ kovi: yes
+ kovi: another one, so karliso back to #1
+ Angecide: do you do rollout from each expanded children?
+ Angecide: casue the numbers look low, I guess maybe just very good heuristics
+ kovi: only if the same parent is chisen
+ kovi: almost 50% vs top2, wtf
+ MSmits: gj kovi
+ MSmits: btw, contrary to popular belief, books do almost nothing in uttt, unless someone else uses it and you hardcounter them
+ MSmits: or someone is very deterministic and thus also counterable
+ MSmits: I tested my bot vs top 10 without any book and it basically does 40% win vs top 2, 50% vs tomatoes and &gt; 50% below
+ Angecide: interesting, I imagined if you always encounter the same openings, perhaps it could be helpful, but I can see how just using faster bot + heuristics can achieve the same
+ MSmits: most of the action happens due to mistakes after ply 20 I believe
+ MSmits: the only way to make a book go that deep is to  have an opponent that is very predictable
+ MSmits: there was a book war on uttt for a while, i won that  and now everyone stopped using them, more or less
+ MSmits: and we're all better for it&#160;:)
+ MSmits: I guess miarem still has one, but it's not countering anyone anymore because all the bot versions it countered are gone
+ kovi: top10 was lucky. leaderboard of 2 game inparity, still depends on fast early advancement. if i reach top20 i can get 1:1 vs. top10 and reach high.i still resubmit because i have enough new ideas. i am thinking about some weaken-teccles thing. also i still wasnt able to enable the wider win position assessment
+ MSmits: what do you mean weaken-teccles?
+ MSmits: like... capping it to early game&#160;?&gt;
+ MSmits: that's probably wise
+ kovi: currently i give up center a lot as p2
+ MSmits: also... i wouldn't worry so much about the submit. It really is not very reliable. Set up a CG bench test pool. Even if you use the same number of games as a submit, the test will be better because you don't waste games vs weaker players
+ MSmits: so you wouldnt even be taxing the server any worse than you do now
+ MSmits: giving up the center as p2 is not necessarily a bad thing
+ MSmits: p1 already has a huge advantage there
+ MSmits: the sacrifices you need to make to still win in the center might not be worth it
+ MSmits: In general, losing miniboards can be a good thing if the opponent needed to play far more squares there than you did
+ MSmits: (means he has less elsewhere)
+ kovi: valid points
+ MSmits: it depends a lot on the game too... uttt is hard to analyze as a human
+ kovi: escpecially after a week
+ MSmits: a week?
+ MSmits: oh you mean you've played uttt for a week?
+ kovi: i start it a week ago. deliberately skipping all chatting before
+ MSmits: ahh ok
+ RachitSingh: hi all
+ RachitSingh: I am here to learn python and get expertise in it
+ MSmits: well you can get into uttt fairly quickly. It has serious diminishing returns though 
+ MSmits: RachitSingh welcome
+ kovi: hello RachitSingh
+ MSmits: you did pretty well i'd say kovi, comparable to how quickly karliso got good 
+ RachitSingh: greetings and thanks
+ MSmits: cant speak for my own speed at this, i couldnt even code very well when i started this. It's a good starter multi
+ kovi: well, i have switched to uttt to make my mcts working. not sure if i want to finetune it more than top10
+ MSmits: well it's pretty addictive and the fact that it keeps coming up in chat risks drawing you back in
+ MSmits: but it's probably better not to get stuck on it
+ kovi: true. for most contest it is easier to give up after contest ends and spending a few days
+ MSmits: kovi, did you use a lookup for the big board? Like a 18 bit?
+ MSmits: I am trying to cut down on lookups, but i wonder if it's worth turning that one into a calculated value instead of looking it up
+ kovi: currently i use two lookups for global
+ MSmits: ok so, lookup p1, lookup p2 
+ MSmits: that works I suppose
+ kovi: right...actually three 
+ kovi: p1, p2, done
+ MSmits: ah
+ kovi: not utilizing draw yet
+ MSmits: I have a single lookup for this
+ kovi: (could be done - p1-p2)
+ MSmits: uint8_t bigBoardStatus[65536];
+ kovi: makes sense
+ MSmits: it's 18 bit, but needs 2 bit per result
+ MSmits: i mean 2 out of the uint8_t, so one lookup is actually 4 lookups out of which i shift 1 result
+ MSmits: makes it smaller
+ MSmits: you can do more complicated stuff in the lookup this way, like count drawn boards and such
+ kovi: i havent spent much on optimizing, but there seems to be single chokepoint
+ MSmits: what is it?
+ kovi: no single point
+ kovi: sorry
+ MSmits: no right
+ MSmits: you're right
+ MSmits: many little things
+ kovi: playout reach select/expand cost
+ MSmits: the big board lookup is about 10% of the total runtime though
+ MSmits: for me
+ MSmits: but it does a lot so...
+ kovi: keep single board heuristic reduced the cost of 9table action collection
+ MSmits: 9table action?
+ MSmits: whats that?
+ kovi: giving free pick
+ MSmits: oh ok
+ MSmits: yeah thats an expensive part
+ MSmits: one you can optimize though
+ MSmits: and there's 2 main ways to random too
+ MSmits: single random with loop or double random (random board, random square)
+ MSmits: double random is faster, but it always reduced my winrate a little bit
+ kovi: i know, i may add thateven thought it is not correct
+ MSmits: could be different for everyone though, as with a lot of uttt things. Stuff interacts
+ MSmits: best to try it yourself
+ EliteDaMyth: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/15704147627e6fd27076e30a8dd8ddcf940dbf1">https://www.codingame.com/clashofcode/clash/15704147627e6fd27076e30a8dd8ddcf940dbf1</a>
+ MSmits: gotta go for a bit, hf 
+ FunPlanet: is there a codingame api? (suppose not)
+ eulerscheZahl: yes
+ eulerscheZahl: but not documented
+ eulerscheZahl: unofficial: <a rel="nofollow" class="external free" href="https://pypi.org/project/codingame/">https://pypi.org/project/codingame/</a>
+ eulerscheZahl: how to get the requests manually: <a rel="nofollow" class="external free" href="https://www.codingame.com/playgrounds/53705/contest-tools-and-workflow/the-codingame-api">https://www.codingame.com/playgrounds/53705/contest-tools-and-workflow/the-codingame-api</a>
+ MetehanBayraktar: guys do you know how to print like this in c++ /// 1 2 3 4/// I mean with spaces&#160;?
+ MetehanBayraktar: not like cout &lt;&lt; 1 &lt;&lt;  " "&lt;&lt; 2
+ MetehanBayraktar: I mean output an array
+ MetehanBayraktar: int a [4] = {1,2,3,4} how to output this like 1 2 3 4      without space at the end
+ Andriamanitra: a for loop is probably your best bet
+ eulerscheZahl: cout &lt;&lt; a[0]for (int i = 1; i &lt; 4; i++) cout &lt;&lt; " " &lt;&lt; a[i];
+ MetehanBayraktar: man thats happen space at the end
+ MetehanBayraktar: hmm I understand what you mean ok thank you
+ eulerscheZahl: much easier in other languages
+ eulerscheZahl: like ' '.join(array) in python
+ eulerscheZahl: or string.Join(" ", array) in C#
+ Andriamanitra: or array*" " in ruby
+ ErrorRazor: Did someone get 100% in this puzzle? <a rel="nofollow" class="external free" href="https://www.codingame.com/training/easy/chuck-norris">https://www.codingame.com/training/easy/chuck-norris</a>
+ Andriamanitra: not yet but give me 4 minutes
+ 1400179: No I got 0 0 00 00%
+ ErrorRazor: lol
+ ErrorRazor: I was just wondering if you could explain this part in the expected output: "0 000000 0 0000"
+ Maxim251: How I can resize wondows, that I can see game info and standard output&#160;? 
+ ErrorRazor: Looks like two consecutive blocks of ones to me
+ Maxim251: I can move midlle one to left and right, but I cant move down, up..
+ ErrorRazor: You can expand the game info window
+ Maxim251: Oh yes, I see... 
+ Maxim251: and window for the code? I am on laptop and I dont see to much in coding window
+ ErrorRazor: Yeah that can be expanded as well
+ Maxim251: but I want keep game info and window code..
+ Maxim251: I want move only bottom part litlle more to the bottom
+ Andriamanitra: @ErrorRazor i don't see "0 000000 0 0000" anywhere in the expected outputs
+ ErrorRazor: Test case 4
+ zhoubou: &gt;&gt;&gt; testcase.find("0 000000 0 0000")-1
+ ErrorRazor: I wonder why it shows this then <a rel="nofollow" class="external free" href="https://prnt.sc/xxfjci">https://prnt.sc/xxfjci</a>
+ zhoubou: Is that your debug output?
+ ErrorRazor: <a rel="nofollow" class="external free" href="https://prnt.sc/xxfkhw">https://prnt.sc/xxfkhw</a>
+ zhoubou: Weird
+ ErrorRazor: Very weird
+ Andriamanitra: which test case is it?
+ ErrorRazor: 4
+ zhoubou: 4
+ ErrorRazor: I think it also shows my output wrong
+ ErrorRazor: nvm
+ Maxim251: how I can stop program after first line? that game will not play while loop? Is that  posible
+ zhoubou: exit()?
+ zhoubou: In Python
+ Maxim251: C++
+ zhoubou: I think C++ has exit too
+ Maxim251: Ok, I check
+ Sony541: if it's part of "main" function you can use "return"
+ Maxim251: No call function exit(). I think this is not that
+ esfes: dude
+ esfes: the one that needed help with the cuck norris problem 
+ Maxim251: I can Try... But in main function there is while loop,
+ esfes: do  you still need help?
+ Andriamanitra: there definitely is exit() function in c++, might need to include stdlib.h though
+ Sony541: return will still work in "while" loop&#160;:)
+ esfes: it should be in a function tho
+ esfes: return must be in a function
+ Sony541: Yeah, he said it's the case
+ esfes: oh, i didn't read that lol
+ esfes: sorry
+ ErrorRazor: esfes yeah I'm still here
+ esfes: do you need help?
+ Maxim251: No game is still running.
+ esfes: wdym?
+ ErrorRazor: Well, I was just wondering why the expected output is displayed incorrectly
+ esfes: wrong person lol
+ Westicles: exit(1);
+ zhoubou: Correct response though esfes :P
+ Sony541: Yeah, or "return 0;"&#160;:) 
+ Sony541: Didn't write on C++ for 7 years :D 
+ zhoubou: Yeah, but why is the expected output wrong? esfes
+ esfes: you must append 0 before to make it a 7 bit if its can be represented in less bits
+ esfes: its not wrong for me it worked
+ zhoubou: Look at his screenshot <a rel="nofollow" class="external free" href="https://prnt.sc/xxfkhw">https://prnt.sc/xxfkhw</a>
+ ErrorRazor: It's not wrong, the IDE shows it wrong
+ Maxim251: IS still running, Ok never mind, I will do like olways, stop playing and rewind messages to beginning 
+ esfes: show me your code
+ Maxim251: Thanks for help
+ esfes: zhoubou
+ Andriamanitra: @Maxim251 oh i understand what you were trying to do now, the game won't stop even if your code stops, i don't think there's any way to abort a game mid-way through
+ zhoubou:&#160;? esfes
+ esfes: send a screen shot of your game
+ zhoubou: My code works fine
+ esfes: of your code*
+ esfes: you sure?
+ zhoubou: Yeah, it passes all test cases
+ ErrorRazor: That screen shot was from me
+ esfes: oh lol
+ esfes: Error show your code please
+ zhoubou: There is something wrong with your binary conversion I reckon
+ zhoubou: But I don't get why expected output is wrong
+ ErrorRazor: Yeah I know my solution is wrong
+ ErrorRazor: It's not the point
+ esfes: what was the problem?
+ esfes: if the solution is wrong it would show a problem with your answer
+ zhoubou: It's showing a wrong solution
+ esfes: the expected output is not wrong
+ esfes: how do you know that?
+ zhoubou: As per screenshot
+ struct: it is wrong
+ ErrorRazor: It's not? 2 other people checked and got a different expected output
+ ErrorRazor: Now 3
+ esfes: how did you identified the wrong part?
+ zhoubou: There are 2 strings of 1s
+ struct: There is a red circle on it
+ zhoubou: And I copy pasted a real testcase and used str.find, and it didn't find what was in the screenshotž
+ zhoubou: screenshot*
+ esfes: what if you copy his solution and check on your ide
+ esfes: and if its right he will just submit
+ zhoubou: Hmm?
+ esfes: you are getting the right test output right?
+ zhoubou: Yeah
+ esfes: copy his code test if its right and if it is he will just submit
+ esfes: it tests server side before confirming the solution at the submit point
+ ErrorRazor: Well here's my code if you want to try to reproduce it <a rel="nofollow" class="external free" href="https://pastebin.com/8c7pxGC5">https://pastebin.com/8c7pxGC5</a>
+ ErrorRazor: I know it's long
+ esfes: its wrong at the end for me too
+ zhoubou: Oh I can reproduce it
+ zhoubou: It's language related then
+ zhoubou: Or something
+ esfes: or maybe the is a bug with longer strings
+ zhoubou: And the testcase is different...
+ esfes: wdym?
+ zhoubou: Let me see one more time
+ zhoubou: Oh nvm
+ esfes: i think there is a bug that only shows on longer strings
+ esfes: or there is a bug with the c++ checker
+ ErrorRazor: When I search for that part with ctrl+f, it doesn't find it in my console output
+ esfes: compile that program on your pc
+ esfes: and check the string
+ esfes: send us the string when you get the output on your pc 
+ esfes: we will check it 
+ zhoubou: Oh you're right, it isn't in stdin
+ zhoubou: stdout*
+ esfes: wdym?
+ zhoubou: It isn't printed, but it's shown as his solution
+ esfes: wdym it isn't printed?
+ ErrorRazor: By my program
+ esfes: cout is a print in c++?
+ esfes: i am a noob when it comes to c++
+ ErrorRazor: Yeah stands for character output
+ esfes: so it is printed right?
+ esfes: or am i missing something?
+ ChristianPR: ive just started on codinggame, Just beat the Othello bot and im still in league 2? how do I move up?
+ ChristianPR: or does it take time?
+ ErrorRazor: If you've submitted your code and you got first place, then you just need to wait
+ ChristianPR: cool, thanks
+ ErrorRazor: Anyway, I'm gonna go get groceries. Don't lose your sanity over this bug guys, the puzzle still works, only the error is displayed incorrectly
+ esfes: try to run it on your pc
+ esfes: like compile it 
+ struct: ChristianPR you need to be above the boss
+ struct: Its not easy
+ ChristianPR: hmmm, how come there are lots in league 1 but lower than the bot?
+ struct: Their bot is not better than the boss
+ struct: Stronger bots get promoted
+ ChristianPR: o i thought i just needed to beat the boss hahah
+ jacek: oh my
+ jacek: maybe next week will be othello puzzle :V
+ eulerscheZahl: 1 minute left for blockout
+ eulerscheZahl: hurry up!
+ kovi: not approved?
+ jacek: needs 2 approves
+ eulerscheZahl: nope
+ kovi: omg
+ jacek: and i dont have 20lvl on my alt
+ eulerscheZahl: on a sidenote i'm having fun with topcoder this time
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://i.pinimg.com/originals/6b/b0/04/6bb00405fb6d769f3f3eca3da46c23f3.jpg">https://i.pinimg.com/originals/6b/b0/04/6bb00405fb6d769f3f3eca3da46c23f3.jpg</a>
+ eulerscheZahl: wait what?
+ PatrickMcGinnisII: eulerscheZahl, ha
+ eulerscheZahl: i was kidding with the hurry up
+ kovi: too bad&#160;:)
+ PatrickMcGinnisII: it did say 1 minute
+ eulerscheZahl: oh, I forgot the cover image
+ kovi: duh, who approved that without ci
+ kovi: another swap in top1-2
+ PatrickMcGinnisII: illedan's fault
+ eulerscheZahl: join us on topcoder, we swap every few minutes
+ eulerscheZahl: something is wrong with the platform
+ kovi: still?
+ eulerscheZahl: "Thank you both. Yes it could be a problem with multiple testing machines. We will look into it."and that guy from topcoder could start at CG right away
+ kovi: wow, top3?
+ eulerscheZahl: i think siman is overrated atm, that submit had like 80 points before
+ eulerscheZahl: weird system
+ eulerscheZahl: and still 3 days to go
+ Angecide: I am a bit confused about topcoder, which games/puzzles are u working on and which leaderboard?
+ jacek: jewel
+ eulerscheZahl: leaderboard: <a rel="nofollow" class="external free" href="https://www.topcoder.com/challenges/b846362a-218e-4a3d-b86c-3d38f472e199?tab=submissions">https://www.topcoder.com/challenges/b846362a-218e-4a3d-b86c-3d38f472e199?tab=submissions</a>
+ eulerscheZahl: task: <a rel="nofollow" class="external free" href="https://imgur.com/a/myiwKh2">https://imgur.com/a/myiwKh2</a>
+ eulerscheZahl: swap any 2 cells. 3 in a row (not diagonally) remove that row and can cause a chain reaction
+ eulerscheZahl: points for long lasting chains and low rows
+ Angecide: ohh that looks interesting
+ kovi: bugged relative scoring? (happened a lot with the "new" - two years old system)
+ eulerscheZahl: yeah, it's their relative scoring again. not updating the total best properly, thus giving wrong partial scores
+ JLukeSkywalker: what do i do if i made a clash, it got approved, then someone copy-pasted it and got theirs approved a couple days later?
+ JLukeSkywalker: do we just let both exist?
+ eulerscheZahl: real 1-1 copy-paste?
+ jacek: oO
+ eulerscheZahl: the only thing we can do is getting staff involved. the question: is it worth bothering them for it?
+ jacek: for the 5%?
+ kovi: anyone using something different than uct? maybe something faster?
+ Angecide: u mean like a different equation or algorithm?
+ jacek: do you do lookup table for your log and sqrt?
+ struct: is the lookup even worth it?
+ kovi: first try failed on too big numbers
+ MSmits: I used to do lookup table and I never succeeded in making it faster without that. But I threw it away anyway. 
+ MSmits: mostly because i had to cap my rollouts
+ MSmits: it's just annoying
+ jacek: oO
+ MSmits: kovi there are many different ways to change the selection mechanism a little bit. Never seen much of an effect in uttt
+ jacek: and i never did UCB-tuned for example
+ MSmits: i just use basic uct
+ kovi: yeah, i just noticed that sqrt is a chokepoint now
+ jacek: math formula :unamused:
+ jacek: sqrt has its own instruction
+ MSmits: oh kovi, sec, there's a way to speed that up if you havent already
+ Angecide: u can do sqrtf instead of sqrf, keeping it as float instead of double, I think that performes faster
+ kovi: i just did that&#160;:)
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/3da0b2e0-c5b6-4202-b881-b2539e2f2edd">http://chat.codingame.com/pastebin/3da0b2e0-c5b6-4202-b881-b2539e2f2edd</a>
+ MSmits: thats what i do in othello, not in uttt because i add a bonus to value, so it doesnt work then
+ MSmits: I use these as well:
+ MSmits: inline float fastlogf(const float&amp; x) { union { float f; uint32_t i; } vx = { x }; float y = vx.i; y *= 8.2629582881927490e-8f; return(y - 87.989971088f); }inline float fastsqrtf(const float&amp; x) { union { int i; float x; }u; u.x = x; u.i = (1 &lt;&lt; 29) + (u.i &gt;&gt; 1) - (1 &lt;&lt; 22); return(u.x); }inline float rsqrt_fast(float x) { return _mm_cvtss_f32(_mm_rsqrt_ss(_mm_set_ss(x))); }
+ MSmits: it's not my code so i dont mind sharing
+ kovi: oh, interesting
+ MSmits: just some crap off stack overflow or some other google
+ MSmits: it is just a tiny bit slower than caching your sqrts :P
+ MSmits: for me it was anyway
+ MSmits: oh and using AVX to calculate 8 sqrts in parallel didnt help me either
+ MSmits: in case you wanted to try that
+ kovi: i havent thought about that
+ kovi: i used a big array for vparent, vchild pairs 
+ kovi: calculation the whole formula at once
+ kovi: but it was too big
+ 1400179: Feels like 2019 again
+ MSmits: well new people keep trying the game so it's gonna keep coming up reCurse&#160;:)
+ jacek: just before final episode of mlp?
+ Angecide: 2019 was the peak of uttt?
+ 1400179: Dunno, could be 2018 too, time flies
+ MSmits: nah uttt peaks several times a year
+ kovi: yeah, sorry as i said today...i totally tried to avoid uttt discussions all along
+ MSmits: it's just someone starts talking about it and then a bunch of players join in
+ 1400179: Wasn't complaining actually, sorry it seemed that way
+ MSmits: it's fine kovi, don't worry about it
+ jacek: but you alawys complained about uttt
+ MSmits: dont bite reCurse :P
+ kovi: at least with all these resubmit, it seem that recurse is better vs. me than karliso
+ MSmits: the other way around for me it seems
+ 1400179: A boost working my way? No way
+ kovi: and i might push msmits to #3
+ MSmits: let me strip my book and resubmit, it's not like there's any point to it now
+ MSmits: dont think its doing anything
+ MSmits: think this is the right version
+ MSmits: damn those submits are fast
+ MSmits: I am used to community submits
+ MSmits: oh nvm it's the 10x + swap
+ MSmits: that makes it seem fast
+ jacek: community?
+ MSmits: contrib
+ jacek: uttt is contrib?
+ MSmits: no, thats why it surprised me the games came so fast
+ MSmits: i havent submitted a non-contrib for a long time
+ kovi: wow, i badly hurt jacek placement
+ jacek: i just resubmited
+ kovi: oh, nvm
+ MSmits: good... more games
+ jacek: now lets csb do the promotion
+ MSmits: dont touch csb!
+ MSmits: it will wreck the server :P
+ MSmits: uttt games are weird in that a draw + win is just as good as win + win
+ MSmits: with swaps i mean
+ reCurse: How is that weird
+ MSmits: it's not wrong i mean
+ MSmits: it looks weird
+ MSmits: i guess with the older games, swaps were more common, like in tron
+ reCurse: You mean back when they were trying? :P
+ reCurse: Sorry lost my zen
+ MSmits: the good old days&#160;:)
+ jacek: no longer amd?
+ jacek: you bought that intel?
+ reCurse: Wonder if you ever lose your trolling
+ MSmits: doubt it
+ eulerscheZahl: a worthy follower of Cyberpunk
+ struct: new intel seems to be good for the winter
+ reCurse: Besides gotta keep some energy for tomorrow :p
+ jacek: hm?
+ MSmits: it's not cyberpunk, jacek does not fill the right side of my screen
+ eulerscheZahl: true, no flooding
+ eulerscheZahl: and jacek doesn't even know cyberpunk, does he?
+ MSmits: probably not
+ jacek: the game?
+ reCurse: He's waiting for the cyberpony mod
+ kovi: blame msmits for another swap
+ MSmits: just lost to him again
+ MSmits: and drew karliso
+ MSmits: so its ok
+ MSmits: again draw karliso
+ struct: How do i see contests leaderboards?
+ MSmits: finally some wins vs supson, hes pretty tough also
+ struct: Its so confusing
+ struct: I cant get there
+ MSmits: where?
+ struct: Any past contest leaderboard
+ MSmits: what do you mean by "get there"
+ struct: navigate the page
+ MSmits: weird
+ struct: and get to the page where it shows the leaderboard
+ reCurse: Random thought experiment: do you think a better way to solve draws (e.g. in uttt) would be to make the one who won quicker the winner instead?
+ jacek: would that favor p1 more?
+ kovi: interesting...add that into mcts?
+ MSmits: mmh
+ reCurse: No in a pairing
+ reCurse: Not a single draw game
+ Angecide: winning faster sounds really cool
+ reCurse: If pairing ends in W-L then one who won quickest gets the series
+ MSmits: i do wonder if that would just make the leaderboard more volatile
+ reCurse: Depends
+ reCurse: Would stronger bots win faster reliably? Or lose longer?
+ reCurse: If it's more reliable then it's less volatile
+ MSmits: yeah you could be right
+ reCurse: Might pervert the game itself a bit though
+ reCurse: I don't know
+ MSmits: but the source of the draws is mostly the p1 advantage i think. You're applying a patch when its better to attack the root cause i think
+ reCurse: Or is the right word in english subvert
+ jacek: hentai the game?
+ reCurse: The root solution is to delete uttt
+ reCurse: So next best thing
+ MSmits: best thing would be steal option
+ reCurse: More of a game design thought process
+ reCurse: I hate that
+ MSmits: it's such an easy solution
+ reCurse: It's so lazy
+ MSmits: yes, easy and lazy
+ MSmits: it works
+ reCurse: Pushes the burden of balance on the player
+ reCurse: It's stupid
+ reCurse: I think it's horrible design
+ MSmits: if you dont have time for extensive playtest, it's great
+ MSmits: sure, playtest with real balance would be better
+ reCurse: And you don't even prove there exists a neutral state
+ reCurse: You just hope
+ reCurse: It's garbage
+ MSmits: it's impossible to make it worse, and because there are 15 unique moves, it is certain one of them is at least better  if not nearly balanced
+ MSmits: I think top board middle edge was nearly 50% on meta mcts
+ MSmits: with the center square being close to 70%
+ reCurse: If you're going to rely on meta mcts as an estimate
+ struct: just make the 1st move random
+ reCurse: You can rely on meta mcts as an estimate to not garbage design
+ reCurse: Design it so it starts as a neutral state
+ MSmits: but my point is, it can only improve things and it is very likely to. Especially if it is uncertain which starting move is most balanced, that leads to more openings and causes books to be even less attractive
+ reCurse: It's only improving things because you failed your job as a designer
+ MSmits: you can frame it that way, sure, doesnt invalidate my point :0
+ reCurse: I think relying on that is an admission of failure
+ reCurse: I can't figure out if the game I designed is even balanced so do it for me
+ MSmits: well it's a simple fact that interesting boardgames are sometimes hard to balance
+ reCurse: Sure but it's a copout
+ MSmits: sure
+ reCurse: And if there exists no neutral states you didn't improve much
+ MSmits: well, removed full book, based on 2 million+ games. Same rank on submit. That's how useful books are on uttt&#160;:)
+ reCurse: Or did you just hit under the margin of the leaderboard reliability
+ reCurse: I know where I put my money on
+ MSmits: nah, i did cg bench tests. It's just that books are only useful when hardcountering players. 
+ reCurse: Ah ok
+ MSmits: on uttt that is
+ reCurse: You only mentioned submit so
+ MSmits: ah yes, i guess its not real proof
+ MSmits: I'm completely redoing my bot, getting rid of most lookups, going back to simple binary representation and such. 
+ reCurse: If you can hardcounter kar a bit more
+ reCurse: Would appreciate
+ MSmits: I have a book version that wins vs his p2 100% 
+ MSmits: his current version
+ MSmits: never submitted it
+ reCurse: Well I didn't mean counterbook but ok
+ MSmits: nah i am done with that
+ MSmits: he can just submit a new version
+ MSmits: then the effect is gone
+ MSmits: i like that noone books now
+ MSmits: afaik
+ reCurse: No one?
+ MSmits: tomatoes doesnt
+ MSmits: karliso doesnt
+ MSmits: the rest is lower so... dunno
+ MSmits: miarem still has his, but its not good
+ reCurse: 17?!
+ MSmits: he always got his rank from countering players
+ MSmits: his bot was weak
+ reCurse: I see
+ MSmits: everyone has new versions now
+ reCurse: I could improve mine now but meh
+ reCurse: It's all about the checkers
+ MSmits: improve your bot or improve your book?
+ MSmits: i'm assuming bot
+ jacek: im assuming book
+ reCurse: My last clean training could inch the rank 1 but not very convincingly
+ jacek: checkers?
+ struct: did you manage to use the dtw db?
+ MSmits: it's my belief karliso is not that far from perfect play
+ reCurse: Yeah
+ struct: nice
+ reCurse: My new training with 8piece db does a very good job at landing a good position
+ reCurse: But doesn't know how to win it
+ reCurse: That's next
+ MSmits: ah the WLD db
+ reCurse: I got wld + dtw thanks to struct
+ MSmits: how so
+ MSmits: did he find something?
+ reCurse: Yeah
+ reCurse: It's 40gb lol
+ MSmits: thats cool
+ MSmits: wow!
+ reCurse: It's totally where the edge is
+ reCurse: Analyzing positions with my clean bot
+ reCurse: It was often good but has no idea how to win
+ reCurse: Lots of shuffling necessary
+ MSmits: yes, just like every other bot
+ MSmits: except yours is more likely to win i guess
+ reCurse: All except db dr
+ reCurse: There it's all draws
+ reCurse: Few rare wins
+ reCurse: I could tweak to 75% winrate but then the others take a drop
+ reCurse: Like tric drops to 35% for whatever reason
+ MSmits: tric trac does some great ab bots
+ reCurse: True but the normal params give me 70% iirc
+ struct: Do you want the link too MSmits?
+ reCurse: So seeing it drop that much is surprising
+ MSmits: struct of course&#160;:)
+ MSmits: reCurse probably down to determinism again. 
+ struct: <a rel="nofollow" class="external free" href="http://edgilbert.org/EnglishCheckers/KingsRowEnglish.htm">http://edgilbert.org/EnglishCheckers/KingsRowEnglish.htm</a>
+ struct: Scroll to the end
+ reCurse: According to game lengths it shouldn't be that much deterministic
+ reCurse: But maybe
+ reCurse: I'm really surprised how an innocuous move can change a win in a draw
+ MSmits: cant beleive i missed that struct. I am sure i saw that page
+ MSmits: thanks
+ struct: np
+ MSmits: reCurse i am not at all surprised. At least in othello it happens all the time
+ MSmits: complexity is similar
+ reCurse: Yeah but othello is messy and unreadable
+ MSmits: true, AI doesnt care about that though
+ reCurse: Yeah but my human eyes care about it
+ reCurse: So they can see surprises when otherwise it's generally readable
+ MSmits: mine too... checkers is so much better in that regard
+ BetterPolu: Hey, i saw someone reading the test file in python with open()
+ BetterPolu: but now i can't find the contest anymore. Does anyone know, what the test file is called?
+ MSmits: I saw a squirrel the other day
+ BetterPolu: oh nice&#160;:)
+ reCurse: Did you run after it? If so you may be a dog.
+ MSmits: lol
+ MSmits: woof
+ MSmits: not sure what you're talking about BetterPolu
+ BetterPolu: hmm, with open("file.txt","w") you can open files in python. And since I am playing a lot of Clash of Code, it would be useful to read the entire file at once for shortest for example. However, if I don't know the file name, I can't open it&#160;:/
+ MSmits: you saw someone use open in a clash?
+ eulerscheZahl: let's just switch to bash and run "ls"
+ eulerscheZahl: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/cbb81c0f-c5ff-401d-9a34-294210381c1d">http://chat.codingame.com/pastebin/cbb81c0f-c5ff-401d-9a34-294210381c1d</a>
+ BetterPolu: yes MSmits
+ MSmits: better listen to eulerscheZahl
+ eulerscheZahl: so it's the in&lt;xxx&gt;.txt files
+ MSmits: he's a guru literally. My title is just eyecandy
+ eulerscheZahl: and on the out files you have the solution. but it says permission denied
+ eulerscheZahl: hey, i'm the one playing the candy crush contest right now&#160;;)
+ MSmits: with a bot?
+ eulerscheZahl: of course
+ BetterPolu: thx, eulerscheZahl. But for the testing process you are giving only one test file, right?
+ eulerscheZahl: topcoder optim contest
+ MSmits: ahh i see, well good luck with the candy then&#160;:)
+ eulerscheZahl: i see multiple files BetterPolu
+ Westicles: back to lvl 55, congrats
+ eulerscheZahl: and this time honestly (kind of)
+ eulerscheZahl: i jokingly said "hurry up, 1 minute remaining to approve Blockout"
+ eulerscheZahl: now it's approved
+ MSmits: lol
+ Westicles: oh good, didn't deserve a 3rd loop
+ eulerscheZahl: was indeed 1 minute before the codinbot would have kicked it again
+ BetterPolu: btw huge fan of eulerscheZahl and MSmits lol
+ struct: just dd in bash
+ BetterPolu: how did you get so pro
+ struct: and you get the entire file
+ struct: on ruby I usually do
+ jacek: oh my
+ struct: p `dd`
+ struct: and rest of the code after
+ eulerscheZahl: is cat broken?
+ struct:  no
+ MSmits: mmh i am only "pro" in a very limited type of botcoding... not general at all. euler can do everything
+ eulerscheZahl: too much of the honors
+ BetterPolu: oh, ok cool. Unfortunately I am not so good with either ruby or bash
+ struct: sometimes i also use tail -1 to get last line 
+ eulerscheZahl: but can you also get the last line using head?
+ MSmits: BetterPolu i can do C#, a bit of c++ and python
+ MSmits: no ruby or bash or clashing very well either
+ MSmits: most of us dont clash
+ MSmits: we write bigger programs for the other types of competition
+ BetterPolu: why tho?
+ MSmits: it's not interesting to us to fight short 15 min battles
+ BetterPolu: ohh, ok. Maybe i will try the other types too
+ MSmits: you can spend weeks on a single one and keep finding new ideas and improving
+ MSmits: much more rewarding
+ struct: <a rel="nofollow" class="external free" href="https://github.com/siman-man/ruby-golf-style-guide">https://github.com/siman-man/ruby-golf-style-guide</a>
+ struct: I think that siman is the same from the contests
+ MSmits: mmh that name is wrong. It sounds like he wants you to golf in style
+ MSmits: but I'm sure he wants you to golf better
+ BetterPolu: hmm maybe i should learn ruby
+ adilmarghadi1: hi
+ Zenoscave: MSmits it makes sense to me. perhaps translation issues?
+ VladimirAngelov: you can do 45
+ Zenoscave: pewpew
+ MSmits: maybe... i was thinking more like this: If there is a python "style guide" it's not about making your python faster and shorter, it's just about making your compatible with the rest of the industry so they can read it. I interpreted it in that way.
+ Zenoscave: I read ruby golf-style guide. not ruby golf -style-guide
+ Zenoscave: slight nuance i guess
+ MSmits: sure, but it's still style, that is more about form, not substance, could be translation I dunno
+ Zenoscave: For me the golf-style means a golf form of coding. synonymous to my eyes
+ MSmits:  ohh ok, sure that makes sense
+ Zenoscave: What are you working on now MSmits? I've been away for too long not sure whats popular now
+ MSmits: i might be the wrong guy to ask, i always relapse into older games
+ Zenoscave: Same&#160;;)
+ MSmits: unfortunately i am rewriting uttt again :P
+ Zenoscave: I should revisit. Minimax is slow for it
+ MSmits: not slow, just less effective
+ MSmits: hard to eval
+ Zenoscave: No, mine is also slow lol
+ MSmits: ahh ok&#160;:)
+ MSmits: I did an early playout termination version
+ MSmits: basically mcts with no random rollout, just eval
+ Zenoscave: Where is the compete tab? I cna't find it
+ MSmits: worked ok, got around rank 20-30 back then
+ Zenoscave: did the layout change?
+ MSmits: if you try from here its the same:
+ MSmits: <a rel="nofollow" class="external free" href="https://www.codingame.com/multiplayer/bot-programming/tic-tac-toe/leaderboard">https://www.codingame.com/multiplayer/bot-programming/tic-tac-toe/leaderboard</a>
+ MSmits: they are messing with it yes
+ Zenoscave: gotcha
+ struct: Still need to finish fireworks ai
+ MSmits: go go&#160;:)
+ kovi: ok, now i see what you meant by uttt and heuristics
+ MSmits: stop helping people with your google mastry and you gamedesign skills and start botting
+ MSmits: how so kovi?&gt;
+ kovi: i slowly weakened my heuristic which pushed me from 100-&gt;50 and now i can reach 10 without it
+ MSmits: not sure what you mean by heuristic though?
+ MSmits: or weakening it
+ MSmits: do you mean doing it in stages of the game and not in other stages?
+ kovi: using it less/more
+ MSmits: like teccles in 1-20, avoid free move 1-25, that sort o fthing
+ MSmits: right
+ kovi: only one thing is consistent
+ kovi: utilizing early detect for non 3inaro wins still hurt
+ MSmits: yeah
+ kovi: i think i wiill settle with a top10 and move along
+ MSmits: makes sense
+ egaetan: Daporan&#160;?
+ MSmits: well think of it this way, even if you somehow get top 3 or something, it's always temporary in uttt. This is the game that never stops&#160;:)
+ MSmits: eh hi egaetan
+ MSmits: are you looking for him specifically?
+ DomiKo: I'm so jealous of your work kovi 
+ egaetan: yes
+ egaetan: appearing in sopra sterai challenge
+ MSmits: havent seen him here in a long time
+ egaetan: last minutes
+ reCurse: Didn't he get the memo about the prize? :rofl:
+ reCurse: :popcorn:
+ struct: pm him on forum egaetan
+ Zenoscave: oh no recurs            e brought out poopcorn
+ MSmits: :poop: :corn:&#160;?
+ reCurse: This is going to be entertaining
+ Zenoscave: My keyboard is duplicating strokes again
+ MSmits: and making everything funnier
+ Zenoscave: yuup
+ kovi: im really thinking about nn
+ kovi: when the heuristics are so...weird
+ MSmits: the heuristics in uttt are not weird, just a bit harder to see
+ kovi: what is the difference in finetuning a few
+ struct: Do you have experience with it kov i?
+ kovi: yeah, i meant that
+ kovi: not yet struct
+ MSmits: btw, there is no reason you cant still use heuristics with a nn
+ kovi: thx domiko, but really it is just fast mcts + solver. not much else left
+ MSmits: the few heuristics do make the difference 
+ kovi: simple heuristics are probably better encapsulated by nn
+ kovi: better finetuned
+ MSmits: sure, but if a heuristic is 100% reliable, you're lightening the load on the nn, by taking it out maybe. 
+ kovi: true
+ MSmits: I'm just thinking about limiting training time and maybe the size of the network and such
+ MSmits: personally i would fit as much domain knowledge in there if i could. It's not how robo and re curse do it
+ MSmits: Jacek does this sometimes i think
+ kovi: yeah, but if domain knowledge is simple our own nn's discoveries?
+ reCurse: Oh and it's not even that clear on the page that it's prizes for fr only
+ MSmits: kovi yeah obviously i dont have experience to prove it. Just thinking out loud
+ kovi: and what if it is only 95% reliable...well trained nn can realize the 5% (pun intended)
+ MSmits: thats true
+ MSmits: though... I have not seen a nn on CG that evaluated perfectly
+ MSmits: so it might not beat a nearly perfect heuristic
+ MSmits: I think they mostly shine with complex patterns you can't separate with simple heuristics. Most games have those
+ kovi: the problem is that heuristics overlap
+ kovi: and if you cant separate them (optimize them)
+ MSmits: you mean eval heuristics now
+ MSmits: thats true
+ MSmits: pruning heuristics are different though
+ kovi: i meant heuristics in more complex games
+ MSmits: ah ok
+ MSmits: it's hard to compare a NN to a "regular" bot anyhow. They're so different
+ MSmits: regular bot uses much more brute force
+ MSmits: as in sims, treesize, depth etc
+ MSmits: pb 4 told me the other day his csb has 3k sims, compared to my 300k and it's a lot stronger
+ kovi: yeah heavy rollouts
+ MSmits: super heavy
+ MSmits: I do heavy rollouts in a lot of games and they're nothign like this
+ MSmits: at most they maybe halve my simcount
+ MSmits: kovi what did you do for board representation?
+ kovi: i willl be interesting that in chess
+ kovi: 2xuint16
+ MSmits: for each miniboard?
+ kovi: yes
+ MSmits: I was thinking of trying this:
+ MSmits: uint16_t boards16[2][16] = { 0 };
+ Zenoscave: why not 0x88 it?
+ MSmits: can union for som avx magic maybe
+ kovi: hmm
+ kovi: but you step 1
+ kovi: at once
+ MSmits: step 1?
+ kovi: i dont see how avg help on that
+ MSmits: yeah i figured maybe for some of the heavier heuristics in the rollout
+ MSmits: not to apply moves
+ MSmits: i hadnt given it much thought yet
+ kovi: i c. that may makes sense if you find out how to use it
+ MSmits: i did find a way to wincheck with avx
+ MSmits: not sure yet if it is faster than a lookup
+ struct: you want to play on 16 mini boards at once?
+ MSmits: if that were possible, sure struct
+ MSmits: but the jumps make it impossible i think
+ MSmits: hey struct, do you want to judge my wincheck for uttt?
+ MSmits: see if it can be improved?
+ MSmits: it's avx
+ MSmits: it's a small function
+ struct: Im not an avx guru, but I can check sure
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/7eed8efd-7801-4c6b-b9e1-4282f76e3759">http://chat.codingame.com/pastebin/7eed8efd-7801-4c6b-b9e1-4282f76e3759</a>
+ MSmits: not sure if it's not faster to just look it up
+ struct: not sure if there is an operation that does this
+ struct: (result64[0] | result64[1])
+ MSmits: i looked
+ MSmits: could not find a check for "any 1's in vector" 
+ ZarthaxX: what is that&#160;?
+ ZarthaxX: you want to do an extract and compare?
+ MSmits: i want to know if it's all zeroes
+ ZarthaxX: the 128&#160;?
+ MSmits: or that there is at least 1 bit set
+ MSmits: yes
+ ZarthaxX: ah
+ ZarthaxX: but u can compare it with a 0 mask
+ MSmits: then i would need a constant 0 vector?
+ struct: yeah
+ ZarthaxX: right
+ ZarthaxX: or do some packing
+ MSmits: mmh would that be faster?
+ MSmits: because the result would not be boolean would it?
+ ZarthaxX: i haven been doing a project for uni, we used SSE, AVX and AVX-512
+ ZarthaxX: maybe i can help you :P
+ MSmits: cool
+ ZarthaxX: yes it's not boolean
+ MSmits: so there's more ops needed then
+ ZarthaxX: maybe you are looking for a better compare
+ ZarthaxX: mmm
+ MSmits: mine is just two uint16_t or-ed and then &gt; 0
+ MSmits: seems hard to beat
+ MSmits: uint64_t
+ MSmits: i mean
+ ZarthaxX: what?
+ MSmits: i split the 128i in two
+ MSmits: then or them together
+ MSmits: and check if the result is nonzero
+ ZarthaxX: but how are you splitting it?
+ MSmits: union
+ ZarthaxX: ah that thing
+ MSmits: 	static union { __m128i result; uint64_t result64[2]; };
+ ZarthaxX: i mean, it's not cheap
+ MSmits: the union is expensive?
+ MSmits: does it even cost anything?
+ ZarthaxX: because if you load the 128 into a register, and do the ops, then u gotta store it to access via array index
+ kovi: wow, double win vs. rec
+ ZarthaxX: if you want to do that in the register itself, you have to do an extract
+ ZarthaxX: of the upper part
+ ZarthaxX: so in one case you access memory, the other you do an extract in the register which is faster
+ MSmits: hmm this happens under the hood you mean?
+ ZarthaxX: right
+ ZarthaxX: union just helps when working with stuff in memory, but you are manipulating the data in between
+ ZarthaxX: if you can do all of these things in the register itself it's obv better
+ ZarthaxX: you can check how that translates btw by yourself
+ MSmits: so when i do a union and i access it by uint64_t it copies it to a different register?
+ ZarthaxX: it may do different things based on optimizaction
+ MSmits: hm ok
+ ZarthaxX: i would just check how it is compiled
+ ZarthaxX: you know this&#160;?  <a rel="nofollow" class="external free" href="https://godbolt.org/">https://godbolt.org/</a>
+ MSmits: ah yes
+ ZarthaxX: you can paste your code and check with the different flags of optim
+ ZarthaxX: i think it's just better to check that 
+ MSmits: compilation failed
+ ZarthaxX: well the thing u pasted before was not legal, missing types
+ MSmits: what types?
+ ZarthaxX: the thing is that union is just for you to make it easier to code, but internally you dont know how it's managed
+ ZarthaxX: idk what are you pasting in there smits :P
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/83ab551e-b95a-48b0-b97c-2f7b09809c01">http://chat.codingame.com/pastebin/83ab551e-b95a-48b0-b97c-2f7b09809c01</a>
+ darkhorse64: try _mm_testz_si128 (result, result)
+ MSmits: i saw that
+ MSmits: but not sure what it does darkhorse64
+ MSmits: Compute the bitwise AND of 128 bits (representing integer data) in a and b, and set ZF to 1 if the result is zero, otherwise set ZF to 0. Compute the bitwise NOT of a and then AND with b, and set CF to 1 if the result is zero, otherwise set CF to 0. Return the ZF value.
+ struct: bits at a &amp; bits at b
+ MSmits: whats the CF?
+ ZarthaxX: Carry flag
+ darkhorse64: if it returns 1, all bits are 0
+ ZarthaxX: you jsut care of the ZF anyway
+ MSmits: so does this do exactly what i want then?
+ struct: int _mm_test_all_zeros (__m128i a, __m128i mask)
+ MSmits: i saw that one too, but it didnt do what i want
+ ZarthaxX: yeah it should
+ ZarthaxX: if there is a 1 with the and it survives doing the testz result result
+ struct: why doesnt it work?
+ MSmits: well it requires a mask
+ MSmits: why a mask?
+ kovi: why there is no flag for draws in last games?
+ ZarthaxX: it's just a var name MSmits
+ ZarthaxX: if you check it, it's the same instruction under the hood
+ struct: cout &lt;&lt; _mm_test_all_zeros(Vec8s(0), Vec8s(1)) &lt;&lt; endl;
+ struct: returns 1
+ struct: 0 &amp; 1 == 0
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/56fd8460-4ce4-40b1-9370-ce38d76e38bf">http://chat.codingame.com/pastebin/56fd8460-4ce4-40b1-9370-ce38d76e38bf</a>
+ struct: I think godbolt has this library one sec
+ ZarthaxX: nice
+ kovi: dapo win sopra?
+ MSmits: mmh that one isnt working yet
+ ZarthaxX: what?
+ MSmits: i need to do an "and" for each 16 bit
+ MSmits: not for the whole thing at once
+ MSmits: so and + equality cant be done at once
+ ZarthaxX: im confused
+ MSmits: _mm_testz_si128
+ MSmits: this cant replace the "and"
+ ZarthaxX: but it does the and
+ MSmits: oh i see what i am doing wrong
+ MSmits: i need to and, then check for comparison with the masks
+ MSmits: then check for zero
+ MSmits: (board &amp; mask) == mask
+ MSmits: thats the win check i do 8 times
+ ZarthaxX: mmm
+ MSmits: the thing struct suggested might be a better fit
+ ZarthaxX: struct suggestion is the same instruction..
+ struct: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/ccc44656-b803-4911-99a6-4330bb2bd021">http://chat.codingame.com/pastebin/ccc44656-b803-4911-99a6-4330bb2bd021</a>
+ MSmits: _mm_testz_si128  and _mm_test_all_zeros
+ struct: upsa
+ struct: wait
+ struct: its wrong
+ struct: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/4670060f-a443-40b0-a1f1-d88c0a2deeb7">http://chat.codingame.com/pastebin/4670060f-a443-40b0-a1f1-d88c0a2deeb7</a>
+ ZarthaxX: MSmits yeah same
+ MSmits: dont i need to "not" that struct?
+ MSmits: now it gives false when you win right?
+ ZarthaxX: struct why did u change the instr?
+ struct: return !_mm_test_all_ones(result);
+ MSmits: seems to work with a simple test
+ MSmits: 	cerr &lt;&lt; CheckWin(5) &lt;&lt; endl;		cerr &lt;&lt; CheckWin(7) &lt;&lt; endl;
+ MSmits: 10
+ MSmits: 7 is 3 in a row
+ MSmits: 0b111
+ MSmits: and i didnt "not" it yet
+ struct: Im not sure the first one worked ZarthaxX
+ ZarthaxX: but it's the same instruction
+ ZarthaxX: whatever
+ MSmits: mmh
+ MSmits: why would there be 2 different ones
+ MSmits: if they are the same?
+ ZarthaxX: there are many cases where diff instrinsics use the same instruction
+ struct: I think all ones instruction is not great
+ struct: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/a2010df5-3980-4e65-ab78-de3cab0b0939">http://chat.codingame.com/pastebin/a2010df5-3980-4e65-ab78-de3cab0b0939</a>
+ ZarthaxX: why?
+ MSmits: so guys... do you think this function would be faster than a wincheck[512] lookup?
+ struct: zarthax for loop
+ struct: Im not sure, isnt wincheck a  cache miss everytime?
+ ZarthaxX: pseudo code might not be what it happens
+ ZarthaxX: you can set a register with all ones in 1 op
+ struct: Maybe you are right
+ ZarthaxX: as the instruction shows right there
+ ZarthaxX: Instruction: pcmpeqd xmm, xmm
+ struct: it says its faster
+ MSmits: it's 64 bytes struct... not a big array
+ ZarthaxX: you set all ones with pcmpeqd
+ ZarthaxX: then ptest your a with the all ones from before
+ MSmits: wait no 
+ MSmits: 512 bytes
+ ZarthaxX: that's small
+ MSmits: 64 if i compress it to 1 bit per result
+ reCurse: That's not 1 op
+ ZarthaxX: i said 2 ops
+ ZarthaxX: as it states there
+ reCurse: Ah
+ MSmits: reCurse what do you think, parallel calculation or lookup?
+ ZarthaxX: ah missing the not in a maybe
+ struct: MSmits even normal loop performed the same for me as lookup
+ ZarthaxX: struct btw the other day i found out a wrong explanation of an intrinsic
+ ZarthaxX: :D
+ MSmits: really struct
+ ZarthaxX: hate that documentation
+ MSmits: it's hard to test if its not a bottleneck
+ struct: But my uttt code is poor
+ MSmits: or did you do a clean test?
+ struct: clean?
+ MSmits: yeah a test where it's not using 2% of your total calculation time
+ MSmits: meaning the error in any test is larger than the actual use of time for the lookup
+ MSmits: btw, i realize this is microoptimizing, but the point is for me to try and write a bot with less lookups&#160;:)
+ struct: yes
+ ZarthaxX: what is the final code then?
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/002824c2-c250-4e82-86ff-32061f3f0749">http://chat.codingame.com/pastebin/002824c2-c250-4e82-86ff-32061f3f0749</a>
+ ZarthaxX: cant you do 1 less thing there? 
+ ZarthaxX: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/7a13e49f-1726-4fba-9ad0-883cbc9f3228">http://chat.codingame.com/pastebin/7a13e49f-1726-4fba-9ad0-883cbc9f3228</a>
+ MSmits: no, you need to 'and" first
+ ZarthaxX: mmmm
+ MSmits: basically its like this
+ ZarthaxX: you sure that doesnt work
+ MSmits: my board is 000111111
+ MSmits: say i have a mask of 000000111
+ YurkovAS: MSmits "_mm_set1_epi16(1)" may change to static
+ MSmits: I and them together
+ MSmits: to get 000000111
+ MSmits: then check if 000000111 is equal to 000000111
+ MSmits: if i didnt and first they wouldnt be equal
+ ZarthaxX: ah because u just care of some bits
+ MSmits: yeah
+ ZarthaxX: not exactly the same
+ MSmits: YurkovAS what would that do?
+ ZarthaxX: you are hard to plase smito
+ MSmits:&#160;:)
+ ZarthaxX: cant' you test all zeroes against itself anyway?
+ ZarthaxX: why the set1 there?
+ MSmits: hmm i worry about that part
+ MSmits: not sure that works
+ MSmits: doesnt it make all 16 bit values 1
+ MSmits: so you got 8 1's
+ ZarthaxX: that's the set yes
+ ZarthaxX: so?
+ MSmits: well if it is a mask, doesnt it check only the first bit now?
+ MSmits: ohhh
+ ZarthaxX: the cmpeq? no
+ MSmits: thats where it gets deposited anyway
+ MSmits: the cmpeq dumps a 1 bit
+ MSmits: the first
+ MSmits: so thats fine
+ ZarthaxX: cmpeq sets all 1s in the correct place
+ MSmits: yeah 8 of them
+ ZarthaxX: no i mean
+ ZarthaxX: a mask of 0xffff
+ ZarthaxX: in this case
+ ZarthaxX: if the cmp is true for a given position, it sets all bits to 1
+ MSmits: oh, well thats fine too
+ MSmits: as long as the first bit is 1
+ ZarthaxX: but you can do a test against itself, or not?
+ MSmits: how?
+ ZarthaxX: if there is a 1 then the and gives 1 and gives false
+ MSmits: ohh ok
+ MSmits: let me check it
+ ZarthaxX: aight
+ MSmits: brilliant, it works
+ ZarthaxX: nice
+ MSmits: thanks guys
+ struct: I got lost
+ ZarthaxX: the setr thing from the beginning i guess it just ends being a global variable or smth right
+ ZarthaxX: i hope
+ MSmits: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/87b43522-9bb4-4105-afc0-0ef4ac4c656b">http://chat.codingame.com/pastebin/87b43522-9bb4-4105-afc0-0ef4ac4c656b</a>
+ MSmits: we changed it like this struct
+ MSmits: ZarthaxX yeah i do that in other games too
+ MSmits: othello for example
+ MSmits: it was quite fast
+ ZarthaxX: so it's not done every time?
+ MSmits: nah it's a global constant
+ MSmits: static means the memory is always reserved
+ ZarthaxX: excellent, but you can see the whole code together
+ ZarthaxX: that's cool
+ ZarthaxX: never saw that usage
+ MSmits: yeah i learned that from finding code on othello
+ MSmits: someone shared how to write an othello bot
+ MSmits: and it included avx code
+ MSmits: I used avx succesfully all on my own for the first time in connect4
+ ZarthaxX: nice :O
+ MSmits: it's kinda fun to figure out, but also quite hard 
+ ZarthaxX: yeah i remember the thing with the shifts, i never got that haha
+ MSmits: oh yeah thats it
+ ZarthaxX: avx512 is a whole new world, sadly now available
+ ZarthaxX: not*
+ ZarthaxX: what were you doing with the shifts again?
+ MSmits: I got it to the point that it stuck for me for a few hrs and then when i looked at it again i forgot and didnt get it anymore
+ MSmits: shifts were mostly about finding moves and flipping them
+ MSmits: in connect4 it's finding winning moves for me
+ ZarthaxX: okey
+ ZarthaxX: so you cant really explain what you did right
+ MSmits: in connect4?
+ ZarthaxX: yes
+ ZarthaxX: i didnt get what you parallelize
+ MSmits: oh, i parallelize looking in multiple directions
+ MSmits: say you place a token
+ MSmits: you can check in multiple directions if this gave you winning moves
+ MSmits: i do it two times
+ MSmits: because 8 directions
+ MSmits: and 63 bit
+ ZarthaxX: okey
+ struct: Main problem is to find the instructions
+ ZarthaxX: thought you couldnt because you had to shift in diff directions
+ MSmits: you can have a shift vector
+ MSmits: that shifts different amounts
+ ZarthaxX: i found out so many interesting instructions while doing my project
+ MSmits: there's 4 left shift amounts and  4 right shift amounts
+ MSmits: yeah i guess thats why you need 2
+ MSmits: aside from the fact that you dont have avx512
+ ZarthaxX: but you cant shift individually
+ MSmits: you can
+ ZarthaxX: i mean
+ ZarthaxX: different amounts
+ MSmits: yeah you can shift diffeent amounts
+ MSmits: just not left and right at the same time
+ ZarthaxX: but not all at the same time
+ MSmits: let me find the instruction sec
+ ZarthaxX: ah nvm
+ ZarthaxX: stap
+ ZarthaxX: lol
+ ZarthaxX: i just never used it like that hehe
+ MSmits: _mm256_srlv_epi64
+ ZarthaxX: i didnt use those shifts in my project i already forgot
+ struct: ZarthaxX you are ready for csb now
+ MSmits: it's quite strange though that you can
+ ZarthaxX: it's in 128 bits too MSmits but i get it
+ ZarthaxX: why so MSmits?
+ MSmits: it just seems weird, mostly parallizing seems to be doing the same thing to ever part
+ ZarthaxX: struct na :P
+ MSmits: but shifting differently is not doing the same
+ ZarthaxX: ah, you mean it's weird that you are not treating all the data the same way
+ MSmits: yeah
+ ZarthaxX: i see
+ MSmits: i mean i am fine using it, i dont have to know all of how it works
+ MSmits: just seemed weird
+ ZarthaxX: btw this instruction, not worth for u here because it just replaces the test all zeroes
+ ZarthaxX: _mm_movemask_epi8
+ ZarthaxX: when i found it out i was happy
+ ZarthaxX: MSmits the circuit logic for it is not hard, tho who cares about that :rofl:
+ MSmits: hey
+ MSmits: that thing is interesting
+ ZarthaxX: many usages
+ ZarthaxX: hehe
+ MSmits: thats like parallel __builtin_ctz
+ MSmits: isnt it?
+ ZarthaxX: i mean that just collapses the bits so you can apply that
+ MSmits: or clz
+ ZarthaxX: i used it to apply first one builtin
+ ZarthaxX: so similar
+ ZarthaxX: do you know blend?
+ MSmits: what does it do?
+ struct: Improvement: 172.457% over the for loop one
+ ZarthaxX: you have for example 2 regs with 16 bytes
+ MSmits: +172%
+ MSmits:&#160;?
+ struct: 72% gain
+ ZarthaxX: and you use another reg of 16 bytes as a selector
+ struct: 100 = equal
+ MSmits: is that pdep/pext?
+ ZarthaxX: for each position you select the byte from one or the other register based on the most sig bit of the selector
+ MSmits: sounds similar to pdep/pext ZarthaxX
+ ZarthaxX: _mm_blendv_epi8
+ MSmits: got it struct, good gain
+ ZarthaxX: i will check those again
+ MSmits: is it just a mask selector or does it do something with the order?
+ ZarthaxX: no, its different as that stores contiguous
+ MSmits: ah yes
+ ZarthaxX: this preserves position
+ MSmits: is there a pdep/pext also?
+ ZarthaxX: i know those for 512
+ ZarthaxX:&#160;:(
+ MSmits: ah
+ MSmits: it's useful to know a lot of these functions
+ MSmits: often you just dont know what to even look for
+ ZarthaxX: pdep would be expand and petr compress i guess?
+ MSmits: pext is compress yes
+ ZarthaxX: yeah haha, and do you know shuffles?
+ MSmits: i know yeah
+ ZarthaxX: well the compress and expand exists but just in 512
+ MSmits: havent used them
+ ZarthaxX: i see
+ MSmits: ah ok
+ ZarthaxX: if some day 512 is available here it will get wild
+ MSmits: pext is super useful to take a pattern from a board, compress it and then do a lookup with it
+ ZarthaxX: i remember u used that for yavalath
+ MSmits: i did and i used it elsewhere too
+ MSmits: you can also use pdep as a random selector
+ MSmits: create a random number
+ MSmits: then expand that to the pattern you're randoming from
+ ZarthaxX: mmmm
+ MSmits: int selectedBit = _pdep_u32(1 &lt;&lt; rnd, movesPossible);
+ ZarthaxX: so you select random moves?
+ MSmits: for uttt you can do this
+ ZarthaxX: nice
+ MSmits: i'm not sure if pdep is maybe slow
+ MSmits: some people use lookups here too
+ ZarthaxX: besides benchmarking you can find info about the #clocks it takes
+ ZarthaxX: as in intrinsics
+ MSmits: ah is that compiled somewhere?
+ ZarthaxX: you have the intel manuals
+ MSmits: ahh ok
+ ZarthaxX: do you want to find pdep and pext?
+ ZarthaxX: mmm
+ MSmits: sure yeah
+ ZarthaxX: lemme check
+ ZarthaxX: sadly it doesnt appear, just the instruction info
+ ZarthaxX: <a rel="nofollow" class="external free" href="https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-instruction-set-reference-manual-325383.pdf">https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-instruction-set-reference-manual-325383.pdf</a>
+ ZarthaxX: you can do ctrl+f and pdep or pext
+ ZarthaxX: in the intrinsics thing it says the clocks based on cpu arquitecture, but in that manual it just doesnt appear
+ MSmits: ohh ok
+ struct: Doesnt the intel intrinsics guide tell the clock?
+ MSmits: well good know this exists
+ ZarthaxX: struct i just said that lmao
+ struct: ah sorry
+ ZarthaxX: MSmits found it <a rel="nofollow" class="external free" href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/#expand=5452,4067,4729,94,76,270,3622,3874,4152&amp;text=pdep">https://software.intel.com/sites/landingpage/IntrinsicsGuide/#expand=5452,4067,4729,94,76,270,3622,3874,4152&amp;text=pdep</a>
+ MSmits: is it 1?
+ ZarthaxX: <a rel="nofollow" class="external free" href="https://cs.stackexchange.com/questions/80859/what-is-instruction-throughput-and-instruction-latency#:~:text=Latency%20is%20the%20number%20of,after%20it%20starts%20its%20execution">https://cs.stackexchange.com/questions/80859/what-is-instruction-throughput-and-instruction-latency#:~:text=Latency%20is%20the%20number%20of,after%20it%20starts%20its%20execution</a>.
+ ZarthaxX: no, 3
+ MSmits: how does that compare with other instructions?
+ MadKnight: it's just terrible guys
+ ZarthaxX: read that about latency and throughput
+ MadKnight: just ignore me everyone
+ ZarthaxX: MSmits what do you mean?
+ ZarthaxX: hi mado :P
+ MSmits: well say popcount
+ MSmits: or ctz
+ MadKnight: no hi to me zart
+ MadKnight: just keep on going
+ MadKnight: okay while i'm here
+ MSmits: hi MadKnight, we're discussing avx instructions
+ MadKnight: yea i get it
+ ZarthaxX: MSmits do you mean comparing the clocks?
+ MadKnight: i'm looking into that link
+ MSmits: yeah
+ MSmits: i was just wondering if 3 cycles is particularly slow or fast
+ MSmits: dont have any signposts
+ ZarthaxX: tbh, when i searched through the manual, i saw avg 3 
+ MadKnight: wow guys u just gotta learn every single low-level rule
+ MadKnight: okay i'm back out guys
+ ZarthaxX: i would say it's ok, but anyway uou are better off benchmarking
+ MadKnight: i dunno anything else
+ MSmits: will do MadKnight
+ ZarthaxX: just that sometimes you may find it cool to check combination of instructions that waste less
+ MSmits: yeah
+ MadKnight: ZarthaxX knows more than me
+ ZarthaxX: 1-3  is smth common
+ MadKnight: it's terrible guys
+ ZarthaxX: i found one that wasted 10 for example
+ MadKnight: i just found it out
+ MSmits: bit ops and addition are 1 i guess
+ MadKnight: i have to fix that
+ MadKnight: i have to learn new info
+ ZarthaxX: yes MSmits mainly
+ MSmits: multiplication is 4&#160;?
+ MadKnight: MSmits teach me
+ ZarthaxX: MadKnight update yourself
+ MadKnight: i need to learn more
+ MadKnight: i'm open to learning 
+ MadKnight: MSmits
+ MSmits: depends if its int or float i guess
+ MadKnight: i just need to know more than ZarthaxX
+ MadKnight: no it's not in floats
+ ZarthaxX: im seeing 5 for mul 
+ MadKnight: i only need ints 
+ MSmits: ah ok
+ MadKnight: teach me any info MSmits
+ MadKnight: i gotta learn more than ZarthaxX
+ MSmits: impossible
+ MadKnight: oh right
+ MadKnight: we gotta PM
+ MadKnight: or else he will learn the same info
+ MSmits: no, not today, i should have been asleep 2 hrs ago
+ MadKnight: u are so smart MSmits
+ MSmits: have to get up in 5
+ MadKnight: wat
+ MadKnight: sleeping before 5am
+ MadKnight: so cringe
+ ZarthaxX: so are you going to sleep now smitty? :p
+ MadKnight: okay i need to find another way of learning
+ MSmits: yeah i think so ZarthaxX. Busy day tomorrow. Thanks a lot for the help
+ MadKnight: tomorrow is monday
+ MadKnight: who goes to sleep early before monday?
+ ZarthaxX: yw&#160;:)
+ MadKnight: cringe
+ MSmits: gn!
+ ZarthaxX: hey i didnt know there was a swap byte instruction
+ ZarthaxX: bb 
+ MadKnight: someone said gn
+ MadKnight: cringe
+ MadKnight: oh wait i ruined it
+ MadKnight: i missed the "... gn to ... (something)
+ MadKnight: "
+ MadKnight: now it makes no sense and just looks dumb
+ MadKnight: gddamnity
+ Rbee: its the time of the night where we lag
+ Rbee: lets gooo
+ MadKnight: just ignore me
+ MadKnight: its so terrible
+ MadKnight: i<i>ll just disappear myself</i>
+ MadKnight: with msmits
+ MadKnight: i'll just pretend i left for sleep
+ MadKnight: zairnaim
+ MadKnight: ZarthaxX
+ MadKnight: come
+ MadKnight: here
+ MadKnight: tell us
+ MadKnight: about your code
+ MadKnight: write an essay 
+ MadKnight: in 20 messages
+ MadKnight: i need u to write 20 messages about it
+ MadKnight: don't ask why 20
+ MadKnight: just do it
+ MadKnight: it's actually an important number
+ ZarthaxX: i have cute graphics explaining parallel things
+ MadKnight: wat
+ ZarthaxX: u are crazy tonight mado
+ MadKnight: no way
+ MadKnight: what does "parallel things" mean ZarthaxX&#160;?
+ ZarthaxX: wanna see my cute graphics with latex
+ ZarthaxX: i meant the AVX stuff
+ MadKnight: what kind of latex
+ ZarthaxX: latex the language for documents
+ MadKnight: the meme one or the normal one&#160;?
+ MadKnight: oh right
+ MadKnight: the normal one
+ MadKnight: yea let's see it
+ MadKnight: gimme it
+ MadKnight: i'm still counting my 20 things ZarthaxX
+ ZarthaxX: <a rel="nofollow" class="external free" href="https://cdn.discordapp.com/attachments/317691315712163841/805594453367980042/unknown.png">https://cdn.discordapp.com/attachments/317691315712163841/805594453367980042/unknown.png</a>
+ MadKnight: what mask is this
+ ZarthaxX: the normal one LMAO
+ MadKnight: and what is this for
+ ZarthaxX: that's just showing how we used an instruction to do smth
+ ZarthaxX: load stuff from memory
+ ZarthaxX: it's crazy, you can select the bytes you want to load from memory
+ MadKnight: well we used each bit X byte
+ MadKnight: bit per byte
+ MadKnight: wow
+ MadKnight: so
+ MadKnight: what was it about&#160;?
+ CamiloRodriguezG: hey everyone
+ ZarthaxX: this is from a project we are doing with people from uni MadKnight
+ ZarthaxX: we implemented 2 algorithms that use dynamic programming using SSE, AVX and AVX512 stuff
+ 3ataja: server errors, here we go again
+ Severed: for tic-tac-toe: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/202e92c3-07ff-4fc1-b834-dbea41c6ae30">http://chat.codingame.com/pastebin/202e92c3-07ff-4fc1-b834-dbea41c6ae30</a>
+ struct: Why not check for winning first?
+ Severed: yeah, made that change after typing that out
+ struct: you are still in the first league right?
+ struct: Also if you are first player, play always on the center
+ Severed: bronze i think, 9 games at once, hard to deal with random chance giving enemy same square 3 times in a row
+ Severed: yeah got that in there too, think only improvement i could make is to program in strategies instead of picking random choice if no winning moves or blocking moves available
+ struct: A heuristic used by top players is to force opponents to play on the same board that you just played, if it's empty
+ Severed: you can choose what board they play on?
+ struct: So if board on top right is empty, you should play on top right to force him to play there
+ Severed: oh, i see the pattern now
+ Severed: where i play decides what game they play
+ struct: yeah
+ Severed: thanks
+ struct: if the place where they should go is already full, then they can play anywhere
+ struct: full or completed by any player
+ shuo502: Which live chat tool do you use
+ Severed: guessing not me since im clueless as to what youre talking about
+ shuo502: qq

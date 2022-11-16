@@ -1,0 +1,1436 @@
+ OldJohn: Ah quoi cela sert que je me réveille tôt, si mon bot est passé tout seul en argent sans mon aide&#160;!
+ Littleyounes: rendort toi soldat
+ lsarrazi: Bonjour, est-ce que quelqu'un peut m'expliquer pourquoi les scores affichés à a fin d'une partie diffèrent des scores affichés au dernier tour&#160;? Je ne comprend pas
+ Oioi: Score de fin de partie = score obtenu par l'abattage d'arbres + (sun restant)//3
+ Mazelcop: salut&#160;!
+ dbdr: \o
+ Oioi: salut&#160;:-)
+ jolindien: o/
+ Pink: salut
+ Pink: quelqu'un sait le ratio de passage gold habituel?
+ Mazelcop: vers les 30-50&#160;% je dirais
+ Pink: Oioi je te comprend, je me suis ramasser avec du code "spagetti"(if à volonté)..lolll 
+ Oioi: Pink&#160;: tu veux parler du "cul de sac" dont on discutais avec dbdr tout à l'heure&#160;?
+ Pink: tant que ca... bah tant mieux alors, je vais peut-etre passer légende...lolll
+ Oioi: *discutait
+ Pink: Oioi yep viens un temps ou on sais plus ou améliorer
+ Pink: je tourne en rond
+ Pink: mais je ne sais pas faire les simulations alors cela me bloque
+ Oioi: Oui, voire où l'amélioration consiste à couper du code...
+ Oioi: C'est ce que je suis en train de faire&#160;: élagage de code pour couper les arbres plus efficacement :yum:
+ Pink: faudrais que je m'y colle... Perso j'ai tone de copier/coller... faut que je mette en fonction générique
+ Littleyounes: Les gars comment on calcule la distance entre deux hexagones&#160;:'(
+ Littleyounes: Pourquoi je me retrouve à étudier des espaces discrets 6-connexes
+ Littleyounes: c'est pas censé être aussi dur&#160;:'(
+ Littleyounes: je veux juste calculer une distance&#160;:'(
+ Oioi: Comment représentes-tu ta map&#160;?
+ Littleyounes: Comme donnée, le centre 0
+ Oioi: Sur un tableau 2D&#160;? Sur une liste à 37 éléments&#160;?
+ Pink: ouf Oioi je vous croyais pas si pres du sommet, félicitation 
+ Littleyounes: une liste de 37 elements
+ Oioi: merci :blush:
+ Pink: J'ajoute les gens gentil sur le chat pour me tester mais je suis pas de niveau...loll
+ Oioi: Alors le mieux Littleyounes, c'est de coder ça en dur
+ pb4: Tu les ajoutes comme adversaire dans l'IDE&#160;? :D
+ Littleyounes: Ah on est d'accord
+ Littleyounes: c'est pas évident
+ Littleyounes: de faire le truc générique
+ Oioi: Tu précalcules toutes les distances
+ Troph: HEllo o/
+ Littleyounes: Mercii 
+ jdeveil: il y en a juste 36*35&#160;:)
+ Littleyounes:&#160;:'(
+ caduk: Littleyounes au début, je construit la liste des voisins à distance 1, 2 et 3 en prenant les neighbors puis les neighbors de neighbors etc... en enlevant les doublons
+ Pink: pb4 oui, c'est pratique cette option
+ Littleyounes: okkkkkk caduk bg
+ Troph: ah tiens Pink on se talonne litéralement au classement
+ pb4: Littleyounes&#160;: juste au cas où, les gens ne te suggèrent pas de faire le précalcul à la main
+ Littleyounes: Comment ca pb4
+ Pink: merci Troph je vous ajoute comme ref
+ pb4: Tu fais le précalcul avec un algo lent au tour 0 avant de jouer, tu stockes ça dans un tableau, tu lis le tableau quand tu as besoin rapidement de la distance par la suite
+ Bob: Littleyounes&#160;: tu fais du code pour calculer ca une seule fois
+ pb4: Tu as une idée de comment faire ça&#160;?
+ Littleyounes: Vous êtes tous des bg
+ Littleyounes: Ouii merci
+ Pink: en quoi est-ce utile de faire ce précalcul? je l'ai pas fait encore et je ne sais pas pourquoi le faire alors que tout le monde en parle 
+ pb4: Aucune idée :D
+ Pink: c'est un truc de simulation?
+ caduk: Ca enleve des calculs inutiles par la suite pour les seed
+ pb4: Hmmm, peut être pour savoir ce que tu peux seed&#160;?
+ Littleyounes: x)
+ Beretta_Vexee: Par exemple si tu cherches toutes les cases de distance 2 d'une autre, tu retrouves directement cela dans ton tableau. Tu n'as pas a refaire une exploration itérative des voisins de ta case.
+ Bob: de la meme maniere tu peux precalculer les ombres
+ Bob: pour chaque case x direction x taille d'arbre
+ Beretta_Vexee: Ou passer par des trucs complexe comme les coordonnées cubiques avec de conversions de coordonnées.
+ Littleyounes: Pour les plus matheux d'entre nous il y a des formules pour calculer la distance directement
+ jdeveil: je fais le BFS au moment des seed, mais comme ils sont donnés dans les actions... je pense que je me fais chier un peu pour rien...
+ Littleyounes: mais j'ai fais un avc
+ Troph: ça passerait en coordonnées polaires pour les distances&#160;?
+ Bob: sans doute mais pourquoi se compliquer la vie&#160;?
+ Littleyounes: oéé y a des changements de bases bizarres
+ Bob: tu as des index et les listes de voisins
+ Littleyounes: les voisins à distnce 1
+ Beretta_Vexee: Littleyounes j'avais essayé, au final la complexité était reporté sur la conversion de coordonnées et il y avait aussi une table de conversion, l'intéret était donc très faible ...
+ pardouin: pour i entre 0 et 35, pour j entre i+1 et 36: lance un BFS depuis i et compte à quel tour il atteint j
+ pardouin: et tu stockes ce truc quelque part
+ Littleyounes: Beretta_Vexee ah bon&#160;!!!!
+ Bob: meme pas besoin de BFS, tu fais une fonction de 4 lignes pour rajouter les voisins d'une case dans un tableau et tu l'appelles trois fous de suite
+ Bob: fois*
+ Beretta_Vexee: Bob, et une petite passe pour virer les doublons et la casse d'origine&#160;;-)
+ Bob: la gestion des doublons c'est dans la fonction de 4 lignes
+ Bob: ou bien utiliser une structure qui fait ca toute seule, comme un set
+ Pink:  je fait beaucoup de récursifs, je trouve que c'est un essentiel
+ Beretta_Vexee: Tu peux même en profiter pour virer les cases inutiles genre avec une richness à 0.
+ Littleyounes: C'est une commu de bg quand même, vous m'avez tous proposé des solutions intéréssantes
+ Littleyounes: mercii
+ Pink: Littleyounes bg? (je suis newbee sms)
+ Littleyounes: bogoss
+ Littleyounes: x)
+ Pink: c'est vrai qu'ils sont nice et c'est souvent les plus beau classement qui sont les plus aidant... je me sens choyé ici
+ Littleyounes: lov
+ jdeveil: il faut dire qu'ils sont les plus apte à aider les beaux classements
+ jdeveil: les moins bons classements, ils sont en train de s'aracher les cheveux devant leur code qui marche pas :p
+ jdeveil: comme moi :D
+ Littleyounes: :d
+ Pink: ils pourrais snober, ce qui n'est pas le cas
+ jdeveil: c'est très gentil oui
+ Beretta_Vexee: Quelqu'un connait une implémentation du MCTS en python qui ne soit pas trop pourrie&#160;?
+ jdeveil: :kissing_heart:
+ jdeveil: Beretta_Vexee: je suis intéressé aussi&#160;:)
+ jdeveil: j'ai plus de cheveux là&#160;!
+ Beretta_Vexee: J'ai un simu, une fonction d'éval, mais mon code fait très peu de rollout et sort donc des résultats ... étonnant.
+ Troph: c'est quoi un rollout&#160;?
+ jdeveil: la roulette&#160;?
+ Pink: Troph idem
+ Beretta_Vexee: De plus je vide mon graph à chaque tour ce qui n'est pas optimale.
+ Beretta_Vexee: Troph le nombre de partie jouer en simulation pour faire simple.
+ Troph: oh, merci
+ Pink: merci, j'avais confondu avec rollback
+ pardouin: tu es parti de l'article de bradberry&#160;?
+ Beretta_Vexee: MCTS, tu joues des paries au hasard et tu donnes des points récursivement aux coups qui finissent sur des parties victorieuses. Pour que cela marche il faut jouer beaucoup de partie.
+ pardouin: j'ai pas l'impression qu'il vide son graphe à chaque fois:<a rel="nofollow" class="external free" href="https://jeffbradberry.com/posts/2015/09/intro-to-monte-carlo-tree-search/">https://jeffbradberry.com/posts/2015/09/intro-to-monte-carlo-tree-search/</a>
+ pardouin: mais pas regardé en détail
+ Beretta_Vexee: il y a moyen d'avoir deux codes sur le site et de faire s'affronter deux versions complétements différentes&#160;?
+ BuluBulu27: Tu en mets un dans l'arène, et un en local. Dans les options, tu affrontes ta version qui est dans le classement
+ pardouin: après il y a sans doute pas mal d'opti à faire sur sa version vu qu'il utilise à fond la POO donc dico à gogo même quand c'est pas nécessaire
+ -TheWalder-: Est-il possible de chronométrer son programme puis de le forcer à donner une solution au bout d'un certain temps afin d'éviter le timeout&#160;?
+ pardouin: déjà ne serait-ce qu'ajouter des __slots__ = (liste des attributs) un peu partout
+ pardouin: oui mais chronomètre à partir de ton preier input
+ BuluBulu27: Les 1000ms du premier tour correspondent à quoi alors&#160;?
+ Beretta_Vexee: -TheWalder- oui, aucun problème en python. Ton programme dois d'ailleur fournir un ordre en moins de 100ms
+ pardouin: ben ici en 1000ms tu peux precalc pas mal de truc
+ pardouin: des masques d'ombres, les distances entre toutes les cases, définir toutes tes structures, etc
+ BuluBulu27: Et t'as pas besoin de couper tes calculs avant d'atteindre les 1000ms&#160;? (Je dis ça parce que tu as dit de chronométrer à partir du premier input)
+ pardouin: je pense que d'ailleurs le nombre de truc intéressant à calculer fait que tu n'as pas franchement besoin d'autant
+ BuluBulu27: Est-ce que ça veut dire que le timer commence quand tu lis pour la première fois&#160;?
+ -TheWalder-: Bah je me dis qu'une seconde c'est peut-être un peu court pour tout précalculer donc savoir si je dépasse la limite peut-être intéréssant.
+ -TheWalder-: Au pire je verrais si je me fais timeout
+ Bob: BuluBulu27&#160;: pour le moteur du jeu cote CG, ton tour de jeu commence quand tu lis le premier input
+ pardouin: si tu veux calculer des trucs indépendants du plateau genre les masques d'ombres tu peux le faire avant tout input oui
+ BuluBulu27: :o
+ Bob: -TheWalder- une seconde c'est gigantesque
+ Bob: precalculer les ombres et les cibles de seed c'est virtuellement instantane
+ JE_SUIS_MOI: Bonjour, est ce que vous savez précisément jusqu'à quand dure ce challenge&#160;? Merci :smiley::wave:
+ -TheWalder-: Il y a un timer dans l'IDE
+ BuluBulu27: Merci pardouin&#160;! Je ne savais pas 
+ pardouin: tu as un timer en haut de l'ide
+ Troph: il se finit dans 6jour 1h et 34 min JE_SUIS_MOI
+ Gr0mph: C'est écrit en haut à gauche.&#160;:)
+ JE_SUIS_MOI: Je pensais que c'était un timer pour la prochaine ligue :sweat_smile:
+ -TheWalder-: Juste une dernière question&#160;: dans un cas général est-il préférable d'utiliser le minmax ou MCTS (ou comment savoir lequel utiliser&#160;?).
+ pardouin: ici ce qui rend ce challenge particulier c'est que ce n'est pas totalement alterné
+ Pink: Troph heuseusement car si tu étais autrui on comprendrais pas
+ pardouin: tant que tu as des trucs à faire tu peux les faire
+ pardouin: donc il faut dans tous les cas légèrement adapter les algos classiques
+ Bob: -TheWalder- il n'y a pas de reponse absolue a ta question
+ pardouin: mais minimax classique, meme alpha bete ça explose trop je pense
+ Beretta_Vexee: Dans ce cas le minmax est galère, car les joueurs n'ont pas le même nombre de coup. Il n'est pas évident de trouver une fonction d'éval potable pour évaluer un tableau et déterminer l'avantage d'un joueur sur l'autre.
+ Bob: minmax c'est plus adapte quand tu as chaque joueur qui joue un coup a son tour en alternant
+ pardouin: MCTS ça repose moins sur l'eval donc ça peut être intéressant si tu n'as pas de bonne idée d'eval
+ pardouin: sinon je pense que beamsearch c'est top avec une bonne eval
+ Troph: pour votre mcts vous jouer en solo ou vous simulez l'adversaire aussi&#160;?
+ pardouin: il y en a qui font juste du MC aussi mais ça n'a pas l'air de donner des résultats foufous
+ pardouin: tu peux tester les deux, solo ou pas
+ Beretta_Vexee: perso j'essais de faire un MCTS parce que cela marche sans éval. Et qu'il est relativement facile d'ajouter une éval sur un MCTS pour le transformer en pseudo beam search.
+ Bob: Troph&#160;: MCTS si j'ai bien compris l'idee c'est de jouer des parties entieres et de voir qui gagne a la fin
+ Bob: donc tu es oblige de simuler l'adversaire
+ Beretta_Vexee: Et le MCTS te sert de base de comparaison à tes évals.
+ pardouin: oui mais tu peux le faire jouer random
+ pardouin: donc simulation minimale
+ BuluBulu27: Je comprends le BFS, dans des cas simples de recherche de chemin le plus court.Je crois comprendre que le beamsearch c'est pareil mais avec une fonction d'éval à chaque fois, et on prend les n meilleurs.
+ pardouin: oui
+ philRG: la plupart du temps si timeout, c'est soit la commande print(action) non effectuée dans le code due à un bug (ou boucle infinie). Et si on met un timer dans le code, il faut le démarrer après le premier input(), sinon la mesure est incohérente comme l'IDE Codingame ne lit que le code après le premier input
+ BuluBulu27: Dans ce cas, mon problème est que je n'arrive pas à voir comment l'appliquer à un problème comme ça, parce que je ne sais pas ce qui pourrait constituer un "chemin le plus court" à trouver
+ Bob: BuluBulu27&#160;: l'aspect chemin le plus court, c'est juste un detail interessant du BFS
+ BuluBulu27: Comment on pourrait formuler son application générale&#160;?
+ Bob: le principe general c'est de jouer tous les coups de profondeur N avant de jouer les coups de profondeur N+1
+ pardouin: ici tu gardes juste celui qui donne le meilleur score en fin de depth
+ Beretta_Vexee: BuluBulu27 le problème du BFS pure c'est qu'il teste tous les chemins du graph. Avec nos parties cela explose et devient impraticable. 
+ BuluBulu27: Je vous aime
+ BuluBulu27: Merci
+ Bob: donc soit tu vas a une profondeur donnee, soit tu vas aussi loin que possible dans le temps imparti
+ -TheWalder-: Merci beaucoup pour vos conseils
+ philRG: si votre timer affiche 1s au delà du 1er tour, c'est qu'il est inséré avant le premier input, sinon le process Codingame afficherait: Timeout
+ Bob: note que tu peux reduire le nombre de possibilites en ne jouant que certains coups
+ Bob: par exemple tu peux dire "je ne fais pas de complete avec les N derniers tours"
+ Bob: ou "je ne fais pas de seed si j'ai deja N seeds sur le plateau"
+ Bob: parce que ca sert pas a grand chose de plomber le plateau avec des graines
+ Beretta_Vexee: Je ne fais pas de wait tant que j'ai plus de X pts de sun.
+ Bob: ^
+ BuluBulu27: J'ai peur d'utiliser ce type de logique, parce qu'avec le nombre de nutrients qui diminue, je me dis que si j'attends la fin, je perdrai trop de points sur le score final
+ Bob: ah ben apres ca s'ajuste, il y a de l'essai-erreur
+ Bob: des seuils a trouver
+ Beretta_Vexee: Si tu as déjà une heuristique que marche, tu peux t'en servir de base pour générer que X actions valides à explorer.
+ BuluBulu27: Merci Bob 
+ BuluBulu27: Et Beretta&#160;:)
+ Beretta_Vexee: BuluBulu27 tu peux implémenté une heuristique en dur pour snatcher le premier arbre et prendre le bonus de nutriment.
+ Bob: dans les jeux tres bases sur les heuristiques comme celui-ci, ce type de seuil peut faire toute la difference
+ Bob: si tu prends Code4Life, il y a une notion de "combien je fais de produits de niveau N avant de commencer a faire des produits de niveau N+1"
+ Beretta_Vexee: Actuelement mon algo est pourrie et tous les gains ont été fait avec des optimisations du genre. Début de partie et fin de partie en heuristique pure et seul le milieu en MCTS.
+ BuluBulu27: Beretta_Vexee Les nutrients diminuent de façon linéaire. Pas trop d'intérêt à snatch uniquement le premier
+ Bob: rien qu'en jouant la-dessus tu peux changer de 1000 places
+ Bob: BuluBulu27&#160;: un truc que tu peux envisager aussi, c'est le nombre d'arbres de taille 3
+ Bob: est-ce utile de garder 10 arbres geants sur le plateau&#160;?
+ BuluBulu27: Certes
+ Bob: qui ne rapportent pas des points et font aussi de l'ombre aux tiens
+ Beretta_Vexee: BuluBulu27 si 100 places à peu prêt&#160;;-)
+ philRG: la directive __slots__ python en début de classe permet de faire gagner du cpu potentiellement. Et la commande list(set(liste_python)) permet de virer les doublons d'une liste/tableau python
+ BuluBulu27: Le terme "produits de niveau N" ça veut dire quoi&#160;?
+ Bob: il faudrait que tu ailles regarder le jeu pour te faire une idee
+ Bob: le fond de l'histoire c'est que le seuils en fonction desquels tu choisis de faire ou pas une action peuvent etre tres significatifs en termes de resultats
+ BuluBulu27: Génial, merci.Bon, trop d'informations, il faut que je commence à coder tout ça, sinon je vais tout oublier&#160;!&#160;:)
+ jdeveil: Putain Bob merci&#160;!
+ Bob: imagine que tu dis "je recolte seulement a partir du tour N"
+ jdeveil: j'étais en train de me faire des noeuds au cerveau sur des heuristiques à la con&#160;!
+ Bob: suivant que tu mets N a 5 ou 22, c'est pas pareil
+ philRG: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/2b108e7e-a651-4081-b214-25d0fb19c774">http://chat.codingame.com/pastebin/2b108e7e-a651-4081-b214-25d0fb19c774</a>
+ jdeveil: ton discours m'a fait tenter un truc simple et hop... c'est beaucoup mieux :D
+ Bob: donc la il faut jouer un peu avec tes nombres magiques
+ Bob: jdeveil&#160;: c'est juste 2 idees que j'ai chipees a Zorg1 en regardant des matches contre lui
+ philRG: oh je me suis transporté sur Pastebin hehe
+ Bob: c'est tres instructif de regarder des parties contre des gens mieux classes et d'essayer de reperer des comportements de ce type
+ Mazelcop: si vous voulez essayer de coder un MCTS, je recommanderais de se faire la main sur Ultimate Tic Tac Toe d'abord
+ jdeveil: le problème c'est que j'ai fait comme toi, je joue contre lui dans l'IDE... Mais j'y avais pas pensé jusque là :p
+ Bob: des trucs comme "tiens il a jamais plus de N seeds" c'est facile a repere
+ Mazelcop: sur ce contest c'est jouable, mais super dur à mettre en place efficacement
+ Bob: +r
+ philRG: et aussi mettre ses notifications de clients de chat codingame en sourdine quand on essaye de s'endormir&#160;:-D
+ jdeveil: philRG il faut éteindre le PC la nuit, c'est bon pour la planète&#160;;)
+ Bob: jdeveil&#160;: rajouter un check sur le nombre de seeds et un autre pour faire des complete en milieu de partie, hier ca m'a fait passer de 800 a 300
+ jdeveil: le nombre de seed je l'ai déjà, c'est justement le nombre de complete que je cherche à réduire depuis hier...
+ jdeveil: j'en ai mal dormi tellement je me suis pris la tête pour un truc con comme la lune&#160;!
+ philRG: jdeveil il est éteint mais j'ai une application XMPP pour lire les message car j'ai une hernie cervicale et fatigue visuelle, je suis bien qu'allongé
+ philRG: sinon en lisant tous les messages, je ne pourrais même plus coder
+ jdeveil: clair ça prends un temps monstre :p
+ jdeveil: mais il y a de bonnes idées à piocher dedans... Du coup c'est dur de trouver le bon ratio :p
+ jdeveil: j'aurai dû dire la bonne heuristique :p
+ Beretta_Vexee: Snatcher des arbres en millieu de partie c'est super efficace. Le mieux c'est de comparer sa population d'arbre à celle de l'adversaire.
+ jdeveil: Bon go sous la douche sinon je vais être en retard moi...
+ jdeveil: ++
+ Beretta_Vexee: Si son flux de sun, et son nombre d'arbre 3 sont plus faible il y a peu de risque a commencer à couper tôt.
+ philRG: le tip du produit scalaire de Oioi (pseudo rigolo), (OLight, OTree) paraît intéressant, mais je vois pas  trop à quoi ça servirait pas réfléchi aux maths ici, comme passage en coordonnées cubiques un peu useless comme voisins fournis dans les inputs
+ philRG: je fais des snatchs d'arbres en milieu de partie aussi (si trop exposés à l'ombre) mais je compare pas avec la population de l'adversaire ceci dit
+ Oioi: (je me demande si je vais pas supprimer mon prod.scal. moi-même)
+ BuluBulu27: Le passage en coordonnées cubiques est pas nécessaire pour le calcul des ombres&#160;?
+ philRG: oki tout ce qui touche au maths attire mon attention j'ai été prof en collège quand j'étais jeune avant de me reconvertir dans l'informatique
+ philRG: et ma mère prof aussi
+ BuluBulu27: Ah bah nan, t'as la liste des voisins, et tous les voisins dans une direction ont le même index, je suis stupide
+ BuluBulu27: Enfin, le même index parmi les voisins
+ philRG: je donne parfois des cours de maths, ma conseillère pole emploi m'a demandé de postuler au rectorat de nice comme vacataire car ils manquent de profs à cause de la crise (?)
+ philRG: mon frère a fait l'X et était une tronche en maths sinon, moi un peu moins, mais j'aime bien
+ Beretta_Vexee: BuluBulu27 non pas besoin des coordonnées cubiques pour les ombres, les voisins sont présentés dans l'ordre. Si tu peux tracer un ombre direction X, tu prends le Xiéme voisin, puis son Xiéme voisin, etc.
+ philRG: BuluBulu27 non pas nécessaire, tu stockes dans un tableau précalculé au 1er tour les voisins de chaque cellule à une distance 1, 2, 3 puis à chaque tour tu vas calculer tes ombres en les parcourant
+ philRG: un petit peu de codage quand même mais ça reste encore de la logique
+ BuluBulu27: C'est ce que je m'étais dit après avoir posé la question. Sacré rubber ducky
+ Beretta_Vexee: idem tu précalculs, les ombres portés pour chaque case en début de partie, plus simple et plus rapide.
+ philRG: oui aussi c'est plus rapide 
+ philRG: si on fait une simu
+ philRG: tu précalcules les ombrs portées pour un arbre de taille 1, 2, 3
+ philRG: sans oublier 0
+ philRG: puis à chaque tour, et chacun de tes arbres, tu parcoures ton tableau d'ombres
+ Vry: Du coup ça en fait 666 :nerd:
+ Vry: Sans la taille 0
+ 3141948: Marrant sur le FC 2020, on avait 1001 combinaisons d'inventaires
+ 3141948: Là c'est "die hard" lol
+ 3141948: Ou try hard
+ Littleyounes: 1926 la taille du tableau précalculé&#160;:'(
+ Littleyounes: Ah mais y a les doublons
+ Littleyounes: dist(a,b)=dist(b,a)
+ Mourfette: j'ai un truc récursif tout bête pour les ombres qui va de neighbor en neigbour dans la direction voulue et tag les arbres qu'il trouve en inShadow et inSpookyShadow. mais du coup pas besoin de gérer toutes les cases, juste les arbres. c'est si mauvais que ça?
+ Vry: Comme dirait l'autre faut tester&#160;!&#160;;)
+ polpoul: mourfette je fais pareil
+ Mourfette: mon temps dispo pour ce jeu est limité, boulot + 2 gamins :D je n'ai pas le temps de faire plusieurs méthodes pour comparer :D la mienne fonctionne et je suis loin d'un truc formidable. je suis silver 1800 et j'ai encore aucune logique de simulation ou minimax, juste une logique de choix parmis mes actions, qui est encore fortement à améliorer
+ Emperatrice: mourfette tu as besoin de la données pour planter aussi (sur des case vide)
+ Mourfette: Emperatrice, j'ai une autre méthode assez similaire pour sortir le meilleur seed possible pour chaque arbre. je n'utilise pas encore a fond ses possibilités (prendre en compte les choix de l'adversaire)
+ Emperatrice: 👍
+ Stilgart: Automaton: tu as vraiment dit de tester&#160;? o_O
+ Stilgart: Automaton2000&#160;?
+ Automaton2000: je vais peut etre pas mal
+ Littleyounes: Automaton2000
+ Automaton2000: philrg: tu as le lien vers le referee dans le langage de ton choix
+ <b>**Stilgart veut voir le referee en D&#160;!</b></p><p><img src="/a/43152009653961" /> 3141948: Automaton2000: hehe non pas encore mon ami
+ Automaton2000: moi faudrait que je vois pas ce qui peut faire des classes
+ Littleyounes: ptdr
+ Stilgart: Automaton2000: on t'avait dit que java et pyhton c'était de la merde&#160;;)
+ Automaton2000: je vais le faire en java
+ Stilgart: (╯°□°）╯︵ ┻━┻
+ Gr0mph: (^_^)
+ Bob: Automaton2000 t'es vraiment qu'un troll
+ Automaton2000: dans la plupart des cas
+ Vry: Mourfette&#160;: j'ai le même "problème" (gamins + boulot)
+ Vry: Je suis #302 en Bronze&#160;! :sunglasses:
+ Vry: o/ Bob
+ Oioi: Mais lucide, Automaton2000
+ Automaton2000: il va falloir que je fix ça
+ Littleyounes: Automaton2000 aide moi&#160;:'(
+ Automaton2000: réussi à atteindre la ligue bronze et la relance des matchs de ça implique
+ Littleyounes: ok il est craqué
+ El_PaJojo: bonjour, comment fonctionne le classement dans coders strike back&#160;? on est 30 000  j'etais dans les 8000 eme et la je suis 13 eme sur 30000. Le matin ej suis au top le soir je suis 8000 ème  ?: joy:
+ El_PaJojo: :joy:
+ R4N4R4M4: Salut tout le monde
+ Stilgart: El_PaJojo: ça marche au cookie
+ Stilgart: si tu passes de 13e à 8k sans rien faire, c'est que c'est pas le même classement
+ El_PaJojo: Je viens de lancer le site du coup mon classement actuel est bien le dernier en date&#160;? 
+ Stilgart: il faut faire gaffe avec les options de classements qui sont un peu trop persistantes
+ El_PaJojo: J'ai du mal à croire que je sois 13 eme
+ Stilgart: genre le filter sur les follows et sur le pays
+ El_PaJojo: ok
+ Tiouz: El_PaJojo le jeu est divisé en ligues. Tu n'es peut-être pas premier le la ligue legend
+ Tiouz: 13ème*
+ El_PaJojo: Ligue bronze
+ Stilgart: tu es entre 3k et 4k de la bronze
+ Tiouz: être 13ème de la ligue bronze ce n'est pas trop difficile
+ Stilgart: ha non, j'ai oublié la gold :D
+ El_PaJojo: Ah ok 
+ El_PaJojo: Oui je comprend mieux 
+ Stilgart: tu es 13e de la bronze, et 34k au général
+ El_PaJojo: d'acc
+ Stilgart: Tiouz: si, c'est super chaud ça en fait
+ Stilgart: normalement, quand tu atteins cette zone, tu double-jumpes en gold
+ El_PaJojo: la il se passe rien
+ Tiouz: ah oui^^
+ El_PaJojo: je me dis que c est temporaire 
+ Tiouz: Sur UTTT j'avais réussi à être 3ème gold, frustrant
+ El_PaJojo: c'est deja beau 
+ poloch0n: top 300 pour moi , j'suis plutôt content, ma première aussi haut il me semble meme si toutes les leagues ne sont pas encore ouverte
+ Stilgart: bon, voyons comment eZ me plie en 4
+ Stilgart: je perds que de 55 points...&#160;:)
+ Mourfette: omg, je viens de découvrir qu'on pouvait seed à une distance de 2 sans que ce soit en ligne droite...
+ Stilgart: no comment, j'ai eu la même révélation hier midi&#160;:)
+ Mourfette: :D bon rework a faire sur mon detecteur de bestSeedTarget
+ Stilgart: go go go top silver
+ Stilgart: ok, eZ il me fait grave de l'ombre
+ Bon[]Crayon: Salut :ghost:
+ Bon[]Crayon: Automaton2000 Il fait beau.
+ Automaton2000: je veux dire, c'est que tu vois le code des autres
+ Stilgart: Automaton2000: tu voulais pas plutôt dire tortue&#160;?
+ Automaton2000: les personnes qui ont fait une simu en python
+ dwarfie: revelation revelation ... quelqu'un te l'a dit surtout&#160;;)
+ Stilgart: true
+ Stilgart: bon, il peut y avoir du non fertile en 1-6
+ dwarfie: moi par contre , j'ai eu une autre revelation hier soir ... mais ca pas forcement etre facile d'en tirer partie ...
+ Mourfette: éclaire nous, oh swarfie!
+ Mourfette: dwarfie (pardon)
+ dwarfie: :candle: :candle: :candle: :candle: :candle: :candle: :candle: :candle: :candle: :candle: :candle: :candle: :candle: :candle: :candle: :candle: :candle: :candle: :candle: :candle: :candle: :candle: :candle: :candle: :candle: :candle: :candle: 
+ dwarfie: :D
+ Stilgart: 35 candles...
+ Stilgart: il y a 37 cases...
+ Aveuh: Plop ici
+ Mourfette: je n'utilise pas encore les ombres. Je cherche ses logiques. 
+ Mourfette: A part favoriser les seeds non voisins, voir non en ligne avec un autre arbre, j'ai pas d'idée, et ça je ne l'ai pas encore implémenté non plus
+ Mourfette: je n'arrive pas a rajouter mon pote comme adversaire, pourtant il est silver aussi. une idée?
+ khealer: Tu ne peux prendre que les 1000 premiers Silver.
+ antomuz: comment on passe au rang superieurs&#160;?
+ fenrir: Mourfette: quand tu veux choisir to adversaire, an haut il y'a des filtres (genre par pays, etc)
+ fenrir: vérifie que tu n'as pas un filtre qui t'empêche de voir la personne que tu veux
+ Bob: antomuz&#160;: une fois que tu as envoye ton AI dans l'arene, elle doit etre classee au-dessus du boss apres avoir joue tous ses matches
+ Mourfette: fenrir, j'ai eu la réponse coté world. on peut que choisir un top 1000
+ Luksis: hello,generalement la ligue or elle ouvre à combien en général&#160;?
+ Luksis: top 200-250&#160;?
+ Bob: ca depend
+ Kh4z: La derniere fois c'etait le top 100 je crois
+ fenrir: Mourfette: merci, bon à savoir
+ Luksis: top 100 ouf c'est serré
+ Kh4z: Oui mais comme Bob l'a dit ca depend des challenges, donc bon&#160;: O
+ Luksis: oui 
+ Luksis: comme la argent actuel
+ Luksis: elle a ouvert à 1800
+ Luksis: alors que d'hhabitude c'est - de 1000
+ Luksis: Mais merci pour vos réponses :P
+ dwarfie: la derniere fois c'etait bien plus que 100 ....
+ Bob: de toute facon visez au plus haut et vous verrez bien demain
+ Neumann: Il est fort ton MCTS jolindien :o
+ Tiouz: Au pire il y aura encore 4 jours pour passer gold
+ Bob: il faut aussi se dire que quand le cut est mis a N places, en vrai ca recupere facilement 30-40&#160;% de rab dans la nuit qui suit
+ jolindien: qui a parlé de MCTS&#160;?
+ Bob: regarde hier, cut a ~2000 en comptant ceux qui etaient en repush au moment de l'ouverture, ce matin 2500
+ Neumann: Ton background parle de lui-même
+ Mazelcop: un peu tout le monde il y a 3 heures jolindien
+ jolindien: je sais pas faire grand chose d'autre mais ça m'arrive
+ Neumann: :eyes:
+ Arnaud.Net: allez lache nous un tips ou 2 ^^
+ jolindien: Non.
+ Beretta_Vexee: jolindien on en a un peu parler ce matin.
+ Beretta_Vexee: de MCTS
+ Oioi: Là, il commence à y avoir du concentré de bons algos quand même...
+ jolindien: j'ai loupé la discussion
+ jolindien: Oioi, y'a de la marge je pense
+ Oioi: Oui, mais ça commence à être chaud pour mon pauvre truc heuristique :joy:
+ jolindien: je pense que ça va être de plus en plus chaud pour les heusticiens
+ Oioi:&#160;:-)
+ Luksis: oui je confirme :D hahaha
+ Mazelcop: j'ai un peu peur que les winrate soient un peu trop proches de 50% sur la fin de ce contest
+ jolindien: et les heuristiciennes
+ Vlavv: Mes heuristiques n'ont pas dit leur dernier mot 8)
+ Oioi: Coucou Vlavv&#160;:-)
+ Vlavv: Hello&#160;!
+ jolindien: pour les perl c'est carrément mort&#160;;)
+ Oioi: On se demandait avec dbdr ce matin si tu avais fait un MC&#160;?
+ Luksis: ah un autre lyonnais :D
+ Luksis: Vlavv
+ jolindien: Peut-être.
+ jolindien: c'est un(e) polytech
+ Luksis: en fait il a tout fait en paquet de if et il a juste une intuition divine
+ Vlavv: Héhé, non pas de MC
+ Oioi: ok, perdu alors&#160;;-)
+ Beretta_Vexee: Il a brute force la majorités des parties sur un cluster de sa fac et il a juste des tables de recherches dans son algo.
+ Luksis: HAHAHAHA
+ Vlavv: Le Perl est un langage tellement avancé qu'il y a une fonction pickTheRightMove() dans la bibliothèque standard, je me contente de l'appeler
+ Beretta_Vexee: Oui mais avec combien de parenthèses&#160;?
+ jolindien: ^^
+ Vlavv: Oui, ça ressemble plutôt à @{\*pickTheRightMove()}-&gt;()-&gt;%*
+ Beretta_Vexee: Mon modèle heuristic, défonce toujours mon algo MCTS, cela devient balsant. 
+ polpoul: Beretta_Vexee taka nerf un peu ton heuristique
+ Beretta_Vexee: Ca c'est une idée&#160;;-)
+ fenrir: Beretta_Vexee: au cas où si ton heuristique est très légère, tu peux aussi la plugger dans ton MCTS (à plusieurs endroits: genre pour choisir le premier coup sur un noeud nouveau, ou bien dans le rollout)
+ fenrir: pa forcément gagnant mais des fois ça peut aider
+ Vlavv: Est-ce qu'on ne peut pas déduire en partie le type d'algo utilisé par l'adversaire à partir du temps que ça prend pour le lancer dans l'IDE&#160;?
+ Bob: pas vraiment
+ Vlavv: Parce que perso mes coups prennent une dizaine de ms à calculer en moyenne, mais avec certains opposants j'ai l'impression que ça mouline pas mal :eyes:
+ Bob: tu peux chronometrer le temps entre ton output et ton premier input, qui correspond au temps de traitement du referee + temps de jeu de l'adversaire
+ Bob: mais tout ce que ca te dira c'est si il prend du temps ou pas, pas ce qu'il en fait
+ Bob: tu ne pourras pas te base la-dessus pour faire la difference entre un MCTS ou autre chose
+ Gronahak: Je vais rajouter un wait() dans mon code pour pas me faire reverse engineering
+ AlphaBril: hello, des personnes qui se sont bases sur le code initial en C et qui aurais aussi le soucis suivant&#160;: "Attention&#160;: votre code n'a pas lu toutes les données disponibles depuis l'entrée standard avant d'avoir écrit sur la sortie standard. Ceci cause une désynchronisation qui peut entraîner des comportements inattendus." (effectivement mes printf ne respectent pas du tout mes conditions) :grin:
+ OldJohn: Bon c'était quoi ma dernière modif qui m'a fait gagner 1000 places que je la réitère&#160;!
+ Gronahak: ça arrive si tu print plusieurs actions par tour, tu es sensé en print une seule par round d'input
+ Dahll: Vous utilisez quel modèle&#160;? Je suis partis sur une beam search mais je sais pas si c'est incroyable
+ AlphaBril: :thumbsup:
+ Bob: j'ai des heursitiques moches et une eval pourrie sur deux coups
+ Vlavv: Oui, mais ça aurait pu faire la différence entre des heuristiques simples et des trucs plus en profondeur ^^ En tout cas ça prend 3-4 secondes de plus de lancer un match contre vous que contre l'IA par exemple
+ Bob: mais en pratique ca t'apporte quoi de le savoir&#160;?
+ Vlavv: Ah, en pratique, pas grand-chose 😁
+ fenrir: en général, une fois le challange fini, il y a un post dans le forum où les personnes qui veulent décrivent ce qu'ils ont fait (post-mortem)
+ fenrir: c'est après coups, mais ça permet d'apprendre, c'est intéressant
+ jolindien: Théorème 1: si tu vois du C, C#, C++, Rust c'est de la simu
+ Bob: dans le haut du board, s'entend
+ Gronahak: ^^
+ Bob: sinon c'est juste des guignols comme moi ;D
+ Troph: je plussoie bob
+ VilBoub: LoL Bob
+ jolindien: Si tu vois du python, c'est de l'heuristique
+ Troph: Salut AlphaBril&#160;!
+ jolindien: Si tu vois du Perl ... euh qu'est-ce que tu fous là&#160;?
+ VilBoub: Pour l'instant on peut encore être top 50 en python...
+ Troph: jolindien et si tu vois du PHP&#160;?
+ jfaixo: ouais mais après, dans la famille de la simu, ya foule&#160;;)
+ jolindien: PHP&#160;? ... on est en 2021
+ boumagik: le mec qui fait du php répare probablement sa bagnole lui même
+ jolindien: ^^
+ boumagik: vous avez combien de noeuds évalués dans vos simus&#160;?
+ Trisard: j'ai failli le faire en php juste pour le délire ^^
+ Trisard: ouais je sais j'ai des délires chelou :D
+ Vlavv: Vous pouvez continuer mais je vous préviens, à chaque fois que quelqu'un fait une blague sur Perl, je gagne une place 😇
+ Trisard: Aïe moi je patine la je les perd 10 par 10
+ yuyu: Pour ceux qui ont une simu qui tourne, par curiosité ca vous prend combien de temps de simuler par exemple 10 jours?
+ Guilaume: il y a une taille max de ce qu'on peut logger&#160;?au jour 1 mes logs marche bien et au jour 26 mes grandes lignes sont tronquées "..."
+ Bob: oui l'affichage de CG tronque stderr
+ Guilaume: ok thx
+ Bob: il faut te de brouiller pour ne logger que le strict necessaire
+ yuyu: ca me prend 50ms de simuler 10 jours, ce qui parait super lent mais c'est peut etre le bon ordre de grandeur
+ Guilaume: C'est le strict necesaire&#160;:)
+ Bob: c'est pas tellement le nombre de jours que le nombre de tours
+ Bob: = 1 coup pour toi + 1 coup pour l'autre
+ yuyu: je prefere compter par nombre de jours car la simu d'un tour de ne prend pas forcement en compte la simu de la fin du jour
+ Bob: sauf que dans un algo de recherche on ne compte pas en tours de jeu mais bien en positiions de jeu, ce qui n'est pas pareil
+ yuyu: au final je suis juste curieux de l'ordre de grandeur du temps de simu, peu importe à quelle echelle ^^
+ Bob: avec mon moteur tout naif et pas optimise, je peux passer 100 000 tours sur 100 ms
+ OldJohn: Moi sans la gestion des transpositions c'était plutôt 300 000 tours et codé avec les pieds...
+ yuyu: soit 1µs par tour en moyenne, ca correspond à peu à ce que j'ai, merci&#160;:) 
+ GuillaumeBardy: comment peut on savoir le temps qu'on met entre chaque action (avant de lancer l'écriture dans le stdout) . Enfin comment savoir quand le referee nous redonne la main
+ GuillaumeBardy:&#160;?
+ Bob: le referee te rend la main au premier input
+ GuillaumeBardy: ok merci bob
+ Bob: c'est juste apres qu'il faut commencer a mesurer ton temps
+ Bob: et tu termines a l'output
+ GuillaumeBardy: j'ai pas fait de reel algo de recherche mais je vais voir combien de temps ça met alors ^^
+ Oioi: Vlavv, encore un petit effort et tu t'assois sur le ++ de jolindien&#160;:-)
+ WhatTrickeryIsThis: quand nut il vaut 0, on gagne même pas la richesse?
+ Troph: Oioi tu es toujours en heuristique&#160;?
+ Oioi: Oui mais c'est de plus en plus dur&#160;:/
+ GuillaumeBardy: ouep j'ai clairement le temps&#160;: 30ms à l'init et  269ms sur le total de tous mes tours ^^
+ Troph: oui enfin aux dernières news t'étais top 15 donc bon XD
+ Oioi: C'est pas tant ma place qui m'inquiète, c'est ma dynamique ^^
+ Troph: mais ta fonction d'éval elle regarde juste sur le tour courant ou elle tente plusieurs suites de coup&#160;?
+ Troph: Ta dynamique&#160;?
+ Vlavv: J'essaye Oioi, j'essaye :D
+ Oioi: Ben, mon classement ne fait que descendre depuis 24h
+ Oioi: Et non, je teste pas même deux coups. J'ai plusieurs eval suivant la situation qui me donnent le coup à jouer
+ GuillaumeBardy: ouep je pense qu'on a clairement a peut pret le meme algo oioi
+ GuillaumeBardy: peu*
+ Oioi: Idem, heuristique pure&#160;?
+ POLOB: je trouve ça cool que vous teniez aussi bon en heuristique pure
+ POLOB: meme si ça me parait impossible à faire&#160;:)
+ POLOB: il faut une bonne analyse du jeu&#160;!
+ Oioi: Bah, ça fait partie du jeu&#160;:-) on a un challenge supplémentaire à réaliser
+ GuillaumeBardy: je t'avoue que je fais quasiment jamais d'algo donc j'ai pas la def exacte d'heuristique ^^&gt;Mais globalement je cherche si ça vaut le coup de faire un coup ou non et s'il me parait bien ^^
+ GuillaumeBardy: et je l'améliore en essayant de voir pourquoi je perds
+ Oioi: C'est ça l'heuristique. Tu cherches à priori les bons coups, tu ne fais pas mouliner la machines pour en tester des milliers (ou des centaines de milliers)
+ POLOB: disons que ma def d'heuristique c'est&#160;: je regarde l'état du jeu, j'ai une série de rêgles que j'applique, et ça me donne la sortie
+ GuillaumeBardy: ok bah c'est ce que j'ai 
+ GuillaumeBardy: c'est tout a fait ça
+ Oioi: Ok, pareil alors&#160;:-)
+ POLOB: la liste de rêgles, elle doit être veulue, non&#160;?
+ Bob: top 50 en heuristique pur c'est deja superbe
+ Oioi: Pour l'instant... comme je le disais la dynamique n'est pas bonne&#160;!
+ Oioi: J'aimerais bien refaire un top 10, ça me redonnerait le moral&#160;;-)
+ Trisard: Je suis dans le même état d'esprit mais avec un top 30 ^^
+ POLOB: pareil en top 1000 :D
+ jdeveil: Wow c'est quoi ce bordel&#160;!
+ jdeveil: Je gagne 200 places ce matin
+ jdeveil: je file en réunion
+ jdeveil: Et je reviens retour à la case départ&#160;!
+ GuillaumeBardy: ouep moi j'avais réussi hier mais là depuis je n'y arrive plus non plus
+ Vlavv: Courage Oioi&#160;! Il y aurait bien besoin de mettre un peu d'ordre au milieu de cette tripotée de C*
+ Oioi: Ha ouais, là ça bataille sévère je crois
+ Oioi: Je tente de prendre ton aspiration Vlavv&#160;!
+ jdeveil: c'est dingue&#160;! j'ai même pas encore mangé, j'hésite à y aller ça va encore descendre&#160;:'(
+ WhatTrickeryIsThis: Wut, j'ai calculé mon nbr de rollouts par curiosité
+ WhatTrickeryIsThis: 50ms  pour 1053353
+ Trisard: bon déja j'ai 100% de win contre moi même c'est bon signe ^^
+ WhatTrickeryIsThis: wtf mes perfs
+ WhatTrickeryIsThis: heh, j'ai trouvé le bug, je suis plus dans les 10k rollouts :p
+ Ylec:  est ce qu'avec python on peut faire autre chose que de l'heuristique sans timeout()&#160;? :p
+ Oioi: Au contest d'automne dernier, j'ai fait un BFS... pytoyable&#160;!
+ Oioi: Qui faisaient des timeout à profondeur 2...
+ Ylec: J'avais tenté un BFS aussi mais j'allais pas plus loin que la profondeur 1 lol
+ Oioi: :upside_down:
+ Ylec: pareil à 2 ca timeout()
+ POLOB: si tu es un magicien numpy, tu peux faire des choses incroyables
+ POLOB: mais pas sur que ça s'applique à ce jeu là
+ Oioi: Un gars avait été jusqu'en Legend avec Python/Numpy au FC2020
+ Oioi: Je me souviens plus son nom
+ Ylec: faudrait que je me mette à Numpy alors&#160;!&#160;:) je n'ai jamais testé encore
+ POLOB: oui, je me souviens, genre top 15
+ Oioi: Oui
+ Ylec:  ca donne espoir de reussir quelque chose avec python 
+ POLOB: bon, c'est un peu faire du C avec une api sympa quand tu utilise numpy
+ Beretta_Vexee:  Numpy peu avoir de très bonne perfs pour ce qu'il sait faire, c'est a dire des tableaux, du matriciel, des index booléen, etc. Pour les graphs je vois pas trop comment l'utiliser. 
+ POLOB: tu peux bourriner tes calculs de state
+ POLOB: c'est souvent ça qui est déterminent
+ POLOB: + le bon alog de parcours de graphe
+ POLOB: l'implémentation du graph en lui-même, bof bof
+ TidyMaze: y'a un interet à faire du Perl Vlavv&#160;? Ou tu aurais été aussi à l'aise avec du python/Go/whatever&#160;?
+ Vlavv: Je pense que certaines fonctionnalités sont pratiques mais la grande majorité des choses auraient pu être faites facilement avec d'autres langages aussi (ce n'est pas comme s'il y avait une grosse utilisation de regex etc. dans ce challenge ^^)
+ Vlavv: J'ai surtout pris Perl pour le fun, je fais déjà du C++, Python, JS etc. toute la journée au boulot alors que le Perl je trouve quand même ça assez fun
+ GuillaumeBardy: Vlavv si c'est pas trop indiscret, ton algo pour décider où planter dépend des positions de ton adversaire&#160;:)&#160;? j'ai pas encore étudié cette piste ^^
+ Vlavv: oups, répétition
+ TidyMaze: oki belle performance&#160;:)
+ Vlavv: Je prends en compte les ombres, donc indirectement oui&#160;:)
+ Vlavv: Merci TidyMaze&#160;;) Et ça me tenterait bien d'essayer du Go à l'occasion&#160;!
+ GuillaumeBardy: ok je regardais que mes propres ombres. Je pense que je peux m'améliorer là dessus alors. avant que les gros algos viennent surement tout dépasser ^^
+ Vlavv: J'ai essayé pendant un moment de ne pas trop m'embêter avec les ombres, mais quand je voyais qu'un tour sur deux je me récoltais 5 pauvres points de soleil alors que l'adversaire en avait 15, j'ai bien été forcé de mettre les mains dedans :D
+ GuillaumeBardy: bon en tout cas ton algo m'a l'air pas mal du tout&#160;:)
+ GuillaumeBardy: et je pense que ya un gros truc a faire sur les cases inutilisables*
+ Troph: Purée désolé Oioi au moment où j'ai posé mes questions mon internet a planté ^^'
+ Troph: Du coup je te demandais un peu comment tu faisais pour savoir si je peux me hisser dans le top du classement avec une bonne fonction d'eval
+ Troph: Et...j'ai pas vu tes réponses, du coup tu eval justes les coups disponibles pour le tour courant ou tu regardes un peu plus loin&#160;?
+ Colin_data: Salut, vous savez comment sont calculés les scores affichés dans le classement&#160;? 
+ Oioi: Je n'évalue que le tour courant
+ Troph: ça ressemble a du winrate, mais je ne suis sûr de rien
+ Troph: Oioi, d'acc&#160;! Merci tu me redonnes l'espoir
+ Haashi: un espece de trueskill maison Colin_data
+ Colin_data: c'est ce que je me disais, on ne peut pas vraiment se fier à ce score pour suivre la perf de l'algo, ça donne plutôt une idée de la perf par rapport aux autres
+ kiminox: qui a terminé le niveau silver?
+ kiminox: ou quel est votre score max dans silver?
+ Troph: on peut pas terminer les niveau silver tant que la ligue or est pas ouverte
+ kiminox: sur le challenge spring
+ kiminox: quel est votre score max dans silver?
+ Troph: là je suis 426
+ kiminox: ok
+ egaetan: kiminox sur un adversaire qui wait tout le temps&#160;?
+ egaetan: sur seed=-1348346850365840130 je fais 220 points  <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/552153883">https://www.codingame.com/share-replay/552153883</a>
+ Troph: comment tu fais pour avoir un bot normal et un bot qui wait tout le temps&#160;?
+ Alshock: c'est-à-dire&#160;?
+ Hubcan: Saaaaaaaaaaaaalut
+ Troph: pour que les deux soient à toi je veut dire
+ Troph: Alshock sur son replay il joue contre lui meme et un des deux bots wait, mais visiblement c'est pas celui qui est dans l'arene
+ egaetan: Troph celui qui au premier tour à l'arbre sur la case d'id la plus basse ne fais que des wait
+ Alshock: ah, bah sur l'ide faut en avoir un de submit et un dans l'ide, ou alors faut lui mettre des triggers
+ Vlavv: Oh un nouveau C++ en 1er&#160;:&lt;
+ Troph: eagaetan ohhhhhh, pas bete&#160;!
+ egaetan:&#160;;)
+ Troph: je n'y avais aps pensé
+ Oioi: Je ne me décourage pas Vlavv&#160;:-) Je viens te soutenir dès que possible :joy:
+ egaetan: Troph tu as la complétion sur les pseudos dans le chat avec TAB
+ Vlavv: Merci Oioi&#160;! :D
+ Luksis: Vlavv tu es un heuristicien&#160;?
+ Luksis: ou un simulien
+ Vlavv: Heuristicien ^^
+ Vlavv: Mon objectif est de châtier les simuliens comme ils le méritent
+ Luksis: AAAAH
+ Luksis: tu me donnes de l'espoir
+ Luksis: je suis heuristicien aussi
+ Vlavv: Quand les simuliens seront arrivés au bout de toutes les optimisations possibles (et auront consommé l'équivalent annuel de la Finlande), ils seront bien coincés. Alors que la créativité d'un heuristicien ne connaît point de limite :relieved:
+ Luksis: toi et oioi vous montrez que la voie est possible pour l'ecole heuristicienne 
+ Switch64: salut les ploucs
+ Luksis: (ok je pars trop loin là hahaha )
+ Luksis: Vlavv :thumbsup: 
+ Oioi: Quelle magnifique élégance&#160;:-)
+ POLOB: le truc que je vois avec les cases inutilisable, c'est que tu as un peu plus de temps avant d'avoir de l'ombre venant de là
+ POLOB: oups, gros décalage de chat&#160;:)
+ Oioi: Bon, je viens de lancer dans l'arène ma meilleure idée depuis longtemps... Voyons voir ce que ça donne
+ leyo: Oioi retour en bronze&#160;?
+ Trisard: j'ai fais la même j'ai perdu 80 places ..
+ Oioi: Non non, c'est une vraie bonne idée&#160;: simple, évidente
+ Oioi: Que j'aurais dû avoir dès le début
+ Trisard: et ça partage même pas ^^
+ Rajh: T'as rajouté des messages de menaces à l'autre pour l'intimidé pendant le combat&#160;?
+ Gronahak: :eyes:
+ Oioi: Bah, si tu veux, si
+ leyo: Rahj moi je rickroll pour destabiliser
+ Oioi: Pour savoir où seeder, je n'utilisais que très peu l'ombre jusqu'à maintenant
+ Luksis: au fait Oioi j'aime bien m'entrainer contre ton ia dans l'ide (avant de submit ) je sais pas pourquoi j'aime bien  
+ Oioi: Ce que je viens de faire, c'est que je compte, pour chaque case, en début de tour, le nombre d'arbre susceptibles de lui faire de l'ombre
+ Luksis: donc merci d'être là :D
+ egaetan: c'est de la simu ça Oioi&#160;!
+ Trisard: ah ouais moi je fais pour chaque case un test sur 6 jours pour savoir si il va y avoir de l'ombre
+ Luksis: t'avais toujours pas implémenté ça&#160;? 
+ Oioi: Et j'essaye - entre autres - de minimiser ce nombre lorsque je seede
+ Trisard: ça reviens plus ou moins au même du coup non&#160;?
+ Oioi: simu egaetan&#160;? Non, c'est l'utilisation de l'information disponible
+ egaetan: haha
+ Oioi: et ça marche du feu de dieu
+ Luksis: mais tu seedais comment avant du coup&#160;? au hasard&#160;? sur la richness des cases&#160;?
+ Oioi: Quoique... en général, c'est aux alentours de #25 que je tombe sur un os
+ Luksis: je trouve impressionnant que tu sois monté si haute sans avoirdéjà implementé ça
+ Luksis: haut*
+ Oioi: Ben oui, j'ai un peu honte aussi :joy:
+ Luksis: HAHAHA
+ Luksis: au contraire c'est super&#160;!
+ Vlavv: C'est de la simulation chirurgicale, on a le droit 😇
+ philRG: pour les adaptes de la visualisation des grilles hexas: <a rel="nofollow" class="external free" href="https://razdva122.github.io/CODINGAME-SPRING/">https://razdva122.github.io/CODINGAME-SPRING/</a>
+ egaetan: joli philRG
+ philRG: vu ce post sur discord à l'instant ça peut donner des idées
+ philRG: celui-ci aussi joli pour le ranking: <a rel="nofollow" class="external free" href="https://clist.by/standings/spring-challenge-2021-23198985/">https://clist.by/standings/spring-challenge-2021-23198985/</a>
+ philRG: comme ça pas besoin de répondre quand la ligue Gold va ouvrir hein!
+ philRG: osef
+ Luksis: haha pas mal le dernier lien
+ Luksis: il y a les dates de derniere soumission bien visible
+ Rajh: ya les stats aussi si tu cliques sur un joueur 
+ Rajh: win ratio contre les autres
+ leojean890: je ne sais pas si CG ont changé leurs seuils, mais on ne peut pas utiliser CGBenchmark avec un intervalle de 20 secondes entre 2 games sans se taper "You reached the limit of plays for a period of time."
+ Luksis: ah oui c'est énorme ça y a aussi le winrate
+ Luksis: ça peut etre superutile pour choisir de train son IA :P
+ Trisard: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/552180764">https://www.codingame.com/replay/552180764</a> Au bout de 20 essais j'ai enfin réussi à en gagner une contre Oioi, ya toujours de l'espoire ^^
+ leojean890: j'ai tjr utilisé CG benchmark pour tuner des params auto en faisant autre chose, mais là je sais pas ce qu'ont fait CG ^^'
+ leojean890: du coup le seul moyen de tuner c'est de spam submit bêtement&#160;;)
+ Vlavv: Oui, j'ai vu passer cette info aussi, d'ailleurs j'ai réussi à atteindre la limite sans même quitter l'interface Web
+ leojean890: mais dans l'interface web parfois on clique plus vite que 1 fois toutes les 20 sec aussi^^
+ Oioi: :thumbsup: trisard
+ leojean890: mais bon ce seuil de 20 sec il l'ont sûrement modifié
+ leojean890: c'est peut être dans la FAQ ou autre
+ Troph: c'est quoi CG benchmark&#160;?
+ leojean890: un outil pour simuler plein de parties automatiquement
+ leojean890: contre des joueurs de ton choix qui ont submit
+ Troph: pratique :o
+ leojean890: tu peux comparer plusieurs versions perso
+ leojean890: <a rel="nofollow" class="external free" href="https://github.com/s-vivien/CGBenchmark/releases/tag/1.2.0">https://github.com/s-vivien/CGBenchmark/releases/tag/1.2.0</a>
+ leojean890: mais bon dommage ça marche pas trop today
+ leojean890: à cause de ce que je viens de mentionner
+ leojean890: obligation de spam submit ;p
+ Troph: je vais tester ça&#160;! merci
+ leojean890: ur welcome^^
+ pikjy: hello hello mes zouzou 
+ Oioi: o/
+ pardouin: coucou
+ pardouin: perdu que 100 places 8)
+ pardouin: suis à peu près classé comme bob, zorg etc
+ pardouin: on a perdu leojean par contre, paix ) son âme
+ pardouin: (à moins qu'il soit en cours de submit)
+ leojean890: pardouin spam submit pour tuner des params vu que CG bench ne marche pas mdr
+ pardouin: je me suis tuné sur toi, hier, j'ai fait 220eme max
+ pardouin: mais ça tournait plutôt dans les 350
+ pardouin: et là 479
+ leojean890: moi mes meilleures versions font 250 now
+ leojean890: j'arrive pu à faire mieux pour le moment ^^'
+ pardouin: ah cool
+ pardouin: tu as commencé la simu&#160;?
+ pardouin: il me manque juste à calculer les coups valides
+ leojean890: ouais j'en ai une^^
+ pardouin: tu fais un beamsearch finalement&#160;?
+ leojean890: pas encore j'ai pas assez de perfs^^
+ leojean890: je vais ptet migrer en go ce soir je verrai
+ pardouin: d'ailleurs ça se passe comment quand tu changes de language en cours de route&#160;?
+ pardouin: imagine tu passes legend en C++ et au dernier moment tu changes pour un language tout pété
+ Zorg1: sont pénibles ces gens qui passent dessus mon IA et la fon descendre&#160;:(
+ leojean890: ça prendra 2-3 h pour ce sujet je pense c'est pas la simu la plus hard
+ Zorg1: pardouin&#160;: ça ne pose pas de problème
+ leojean890: ptet 4-5 max si je fail
+ pardouin: tu finis quand même premier du language pété si il y a personne en legend&#160;?
+ Zorg1: oui c'est une technique classique
+ pardouin: ok
+ pardouin: dernier challenge j'ai eu 8 CP
+ pardouin: je pense que dans tous les cas je ferai mieux XD
+ Trisard: Je viens de me rendre compte que depuis le début je faisait mon calcul d'ombre avant de mettre a jour la liste des arbres ... -_-"
+ pardouin: gain de places potentiel ça&#160;:&gt;
+ pardouin: moi j'ai gagné 300 places en corrigeant un bug dans ma fonction d'ombre
+ Trisard: ya interet :D
+ pardouin: genre 600 -&gt; 300
+ Trisard: ba j'aimerais bien faire du 200-50 au moins
+ Zorg1: moi j'arrive pas à me motiver sur ma simu&#160;:(
+ pardouin: fais par petit bout, quand il te manquera quasi rien à faire tu auras moins la flemme
+ pardouin: fais déjà le next_state
+ pardouin: par ex
+ darkhorse64: Elle est pas si dure
+ Zorg1: c'est ce que je fais
+ Zorg1: darkhorse64&#160;: je ne dis pas le contraire
+ egaetan: procrastine
+ egaetan: joue avec qqs if&#160;?
+ pardouin: j'ai 100% en puzzle medium sans avoir fait celui d'aujourd'hui
+ pardouin: la classe à dallas 8)
+ pardouin: "check if the brackets are valid"
+ dwarfie: en meme temps . celui d'aujourd'hui , c'est pas un medium ...
+ pardouin: ça sent l'otiginalité
+ dwarfie: vu ceux qui existait deja
+ pardouin: originalité*
+ dwarfie: c'est le meme que ceux d'avant avec juste "penser a retirer les brackets entre guillemets"
+ pardouin: mince je vais pouvoir juste copier coller je vais devoir lire ma solution
+ pardouin: ils sont durs avec nous
+ pardouin: vais pas*
+ dwarfie: free xp fait .. 3 lignes de moins et 2 lignes de plus par rapport a un des autres ... ouah que c'etait dur ...
+ Milceryse: trop ez (c fo)
+ pardouin: j'essaye de le faire en full regex pour changer un peu
+ dwarfie: j'etais deja en regex ...
+ M_C: J'ai plus d'idée pour améliorer mon IA :cold_sweat:
+ Tiouz: Fais un ... MC...
+ M_C: Inutile en python, trop lent&#160;:(
+ Trisard: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/552246694">https://www.codingame.com/replay/552246694</a> Et ba voila avec un calcul d'ombre correct on en fait des choses ;D
+ Trisard: aller ça pars en arène
+ Emperatrice: vous avez un exemple d'un autre chanllenge/context d'un code de MC pour voir à quoi cela ressemble?
+ M_C: Sur Tictactoe le MC marchait bien
+ Troph: après "amélioration" du nombre d'arbre que je conserve... -100 places x) hourra
+ leojean890: sur clobber ou connect-4 aussi
+ b0n5a1: o/
+ Oioi: :thumbsup: :thumbsup: :thumbsup: Trisard
+ GuillaumeBardy: je pense que je vais devoir mettre un peu d'aléatoire dans mon heuristique ^^ impossible de tenter d'améliorer mon algo avec les meilleurs vu que leurs décisions changent continuellement 
+ GuillaumeBardy: ça part aussi ^^
+ Trisard: Malheureusement mes règles de complete sont toujours bof bof et mes victoires en deviennent trop aléatoire 
+ yanic94: Bonjour 
+ pardouin: o/
+ yanic94: comment voir les entrée svp
+ pardouin: quel puzzle, multi, challenge&#160;?
+ b0n5a1: en allumant la lumière
+ b0n5a1: tu les lis et les dump en console d'erreur
+ pardouin: je viens seulement maintenant de rajouter "vérifier que le complete fait effectivement gagner des points"
+ pardouin: <a rel="nofollow" class="external free" href="https://www.codingame.com/replay/552270239">https://www.codingame.com/replay/552270239</a>
+ pardouin: D:
+ M_C: Affiche les
+ Emperatrice: la lumière attire les arbres automaton
+ egaetan: _Royale&#160;! tu t'arrêtes encore juste devant moi
+ egaetan: zut
+ pardouin: suis redescendu sous le 400 du coup&#160;:)
+ Guilaume: question de noob , on peut importer des librairies? je vois des personnes qui parlent de MonteCarlo, elles font tout à la main&#160;?
+ Oioi: On peut importer des librairies mais pour MC, faut faire à la main
+ Tiouz: Well, à moins que tu trouves une librairie inclue de base dans le langage qui fasse du MC^^
+ Bob: non, et oui
+ Bob: oui voilà, tu peux importer uniquement ce qui est fourni
+ Bob: genre en python je crois que tu as droit à numpy, ce qui est limite cheaté :D
+ dwarfie: +1M
+ Guilaume: ok c'est pas importer des librairies ca
+ dwarfie: (pour le "cheaté)
+ Bob: mais genre tu vas pas ramener boost pour C++
+ Tiouz: genre en C++ tu as le droit à -O3...
+ Bob: ah ben chacun ses tricks hein :p
+ Tiouz: import numpy c'est pas importer une librairie&#160;?
+ Bob: si mais c'est une qui est dispo chez CG
+ Tiouz: Bob je rebondissait sur son comm qui disait que c'était pas importer des librairies
+ Tiouz: Je sais que c'est dispo
+ Bob: tu ne peux pas "importer" une lib qui n'est pas fournie par CG
+ Guilaume: @Tiouz a moitié oui je dirais mais comme je n'ai pas envie de numpy.... mais une autremerci pour les réponses
+ Bob: importer dans ce sesn-là, pas dans le sens technique "import"
+ Bob: en tout cas pur ce qui est des algos type MC &amp; co, oui c'est tout refait à la main
+ WhatTrickeryIsThis: importer dans le sens ne pas porter
+ Bob: même si les plus féroces ont sans doute dans un coin les templates prêts à réutiliser
+ Magus: J'ai un fichier qui s'appelle "base.cpp" qui fait 300 lignes de code
+ Magus: après j'ai plusieurs fichiers du genre mcts.cpp, beamsearch.cpp, minmax.cpp ...
+ Magus: dans lesquelles j'ai mes fonctions/classes déjà prête à copier/coller
+ Lait-o: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/report/1745835da6aa1c834d14e83db77352c96ffa397">https://www.codingame.com/clashofcode/clash/report/1745835da6aa1c834d14e83db77352c96ffa397</a>
+ WhatTrickeryIsThis: tiens Neumam vient de perdre contre mon dummy, gros nul
+ WhatTrickeryIsThis: fallait péparer un classe tree
+ WhatTrickeryIsThis: c'est tellement déstabilisant
+ Magus: j'ai pas de class tree dans mon code
+ Bon[]Crayon: Automaton2000 :deciduous_tree:
+ Magus: j'ai une class Cell par contre
+ Automaton2000: je croyais que tu me disais que ce serait trop facile
+ dwarfie: class tree&#160;??? pour quoi faire ... quelle ideee ...
+ WhatTrickeryIsThis: qui a une classe Soleil? 
+ Switch64: svp bannez ach il m'a insulté pv 
+ WhatTrickeryIsThis: c'était surement mérité
+ Magus: Si c'est juste en pv, tu peux le bloquer
+ WhatTrickeryIsThis: si on envoie une insulte en privée, est-ce qu'on peut bloquer juste après pour empêcher la réponse?
+ WhatTrickeryIsThis: est-ce que ça marcherait avec Automaton sachant qu'il a un statut particulier
+ Bob: on peut bloquer des gens en PM&#160;?
+ Magus: on peut pas&#160;?
+ Magus: avec pidgin je peux :D
+ Bob: sur le chat CG, pas possible
+ WhatTrickeryIsThis:   /private *AumoatonNN sale mouette&#160;! 
+ [nico]: vous avez un bot "boss" pour la ligue argent&#160;? J'ai juste defaultIA (qui n'est pas très performant)&#160;:)
+ WhatTrickeryIsThis: c'est demain
+ WhatTrickeryIsThis: 18h
+ WhatTrickeryIsThis: :skull:
+ [nico]: ah ok
+ Proxiwity: Salut p'tite question on peut envoyer des liens unique pour tester des personnes en recrutement&#160;?
+ b0n5a1: DIY
+ Glucozen: Proxiwity je dirais que oui mais ca fiat longtemps que j'en ai pas fait
+ Oioi: [CG]Thibaud&#160;: Proxiwity a une question pour vous
+ [CG]Thibaud: c'est un peu le principe de CodinGame for Work Proxiwity<a rel="nofollow" class="external free" href="https://www.codingame.com/work/offers/screening/">https://www.codingame.com/work/offers/screening/</a>
+ BenP: Petite question par rapport au concours&#160;: les point de soleil sont transférés d'un jour à l'autre&#160;? Genre si je termine un jour avec 2 points et que j'en gagne 10, j'en ai 12 au début du jour suivant&#160;?
+ Troph: oui
+ OldJohn: yep
+ BenP: Ok merci bien&#160;!
+ Tiouz: 300&#160;places de gagnées en copiant le 1er, cool
+ BrainSolver: simpa cette seed=-4262506714176784400
+ BrainSolver: -4262506714176784400
+ BrainSolver: (avec le -)
+ Vlavv: Ah oui, je crois que j'avais jamais vu une map comme ça ^^
+ jdeveil: vous faite comment pour la charger&#160;?
+ BrainSolver: dans OPTIONS / MANUEL
+ Oioi: Paramètres (à gauche)&gt; Mode expert d'abord
+ Oioi: si tu ne vois pas OPTIONS/MANUEL
+ jdeveil: Ah exacte, j'ai l'onglet qui s'est affiché... cool&#160;:) merci les gars
+ jdeveil: pour rejouer des matchs de l'arène ça va être sympa :D
+ Vlavv: Oui c'est bien pratique, mais pour l'arène tu peux aussi simplement faire "envoyer les paramètres de jeu dans l'IDE"
+ Vlavv: (puis "rejouer dans les mêmes conditions")
+ jdeveil: exacte :p
+ GuillaumeBardy: Oioi j'ai réussi à refaire une 10eme place là (a voir si ça reste un peu) mais ça risque d'etre compliqué là ^^
+ jdeveil: j'ai pas encore l'habitude de tous les tips &amp; tricks :nerd:
+ jdeveil: woa toujours en heuristique pure&#160;?
+ Oioi: :thumbsup: GuillaumeBardy&#160;!
+ Tiouz: gg
+ pizza6: 👍
+ Oioi: Moi j'ai fait beaucoup de conneries depuis quelques heures...
+ Vlavv: Moi aussi, si je commite mon code actuel je perds 500 places ^^"
+ Oioi: Mais je crois que j'ai tout réparé. Bref, je sature. Demain, je me remets au vrai boulot
+ _Royale: egaetan: ah on dirait que ça n'a pas tenu longtemps&#160;!
+ egaetan: le monde est injuste _Royale
+ Neumann: calimegaetan
+ GuillaumeBardy: ouep heuristique .. haha vlavv c'est que tu vas faire un gros changement alors ^^ objectif 1er&#160;:)
+ egaetan: calime Neumann&#160;?
+ Neumann: Calimero+egaetan
+ Neumann: C'est une ref de boomer, tu devrais l'avoir
+ Zorg1: "c'est vraiment trop injuste"
+ BlaiseEbuth: En plus calimero il est en dark theme.
+ BlaiseEbuth: Yo tout l'monde&#160;! Automaton2000&#160;! AutomatonNN&#160;?
+ Automaton2000: a priori je dirais oui
+ Zorg1: o/
+ BlaiseEbuth: \o
+ SophiaLegacy: Le petit moment rigolo, mettre sont code en mode WAIT and see afin d'analyser le comportement de l'IA du/des 1er....
+ Magus: c'est encore d'actualité les randoms timeouts sans aucune explication&#160;?
+ Magus: même avec une marge de 10ms, j'ai l'impression d'en avoir quelques uns
+ Oioi: C'est lié à la surcharge du serveur non&#160;?
+ Magus: aucune idée
+ jdeveil: c'est fort probable
+ egaetan: j'ai cru en voir aussi, mais mon code pourrait être pourri également, et on a plus les stacks
+ Magus: bah c'est un peu le souci egaetan
+ Magus: on a plus de stack en C++ ...
+ Magus: donc tu vois juste ton code qui timeout, tu peux pas savoir si c'est un timeout random du serveur ou si t'as une vraie stack .....
+ Oioi: Je suis pas contre un random timeout contre jolindien tout de suite pendant mon submit&#160;:-)
+ egaetan: c'est la punition
+ BlaiseEbuth: Magus t'as toi même dit il y'a quelques jours que c'était pas un souci pour toi qu'il n'y ait pas de stack trace en C++. :smirk:
+ Magus: c'est un souci pour tout le monde. t'as juste ceux qui vont le contourner et ceux qui vont changer de langage :D
+ BlaiseEbuth: :3
+ Neumann: J'en ai eu mais c'était du à mon code
+ Neumann: Et j'en ai encore -_-
+ Oioi: Vlaav #11GuillaumeBardy #15et oim #16
+ Oioi: On est dans un mouchoir de poche
+ WhatTrickeryIsThis: vous êtes des tricheurs je savais, normalement c'est toujours moi qui gagne
+ BlaiseEbuth: La faute à la mouette
+ WhatTrickeryIsThis: :bird:
+ WhatTrickeryIsThis: Tips and Tricks&#160;: faîtes toujours un petit seed même hardcodé au dernier tour
+ WhatTrickeryIsThis: ça fait gagnre au tie breaker
+ WhatTrickeryIsThis: et ça  coûte 0 sun si vous en avez pas
+ Neumann: #protip
+ WhatTrickeryIsThis: toi je t'ai battu tout à l'heure
+ WhatTrickeryIsThis: avec mon dummy
+ Neumann: Je sais
+ Neumann: gg
+ WhatTrickeryIsThis: cte honte
+ WhatTrickeryIsThis: j'espere je pourrai passer légende cette fois, comme ça je pourrai continuer à te battre
+ Kojiro: Hello, comment on fait pour print un truc dans la bulle du jeu&#160;?
+ El_PaJojo: Tu ajoute une variable a la fin 
+ ZVRKK: Tu met ce que tu veux print après ton instruction 
+ El_PaJojo: il ajoute une bulle avec les infos sorties
+ Kojiro: ah nice merci&#160;!
+ VirtualAtom: pour détecter la différence entre un crash et un timeout en c++, un signal handler semble faire la blague
+ VirtualAtom: mais certes, c'est pas très user friendly ̂ ̂ 
+ Oioi: 35 victoires d'entrée de jeu pour mon submit
+ Oioi: ça faisait longtemps que ça m'était pas arrivé
+ WhatTrickeryIsThis: y à eu un perfect en contest?
+ Oioi: jamais moi en tout cas
+ WhatTrickeryIsThis: pb4 perfect submit?
+ EricSMSO: Moi j'ai fait loose all
+ WhatTrickeryIsThis: xD
+ Oioi: :joy:
+ WhatTrickeryIsThis: c'est pas si simple
+ WhatTrickeryIsThis: faut arriver à perdre avant l'adversaire
+ WhatTrickeryIsThis: y à toujours un troll qui a un submit qui compile pas en bas de classement
+ Thyl: vous pensez qu'une recherche deep 1 avec une bonne eval ça peut etre top silver&#160;???
+ Oioi: On est 3 dans le top 15 à faire uniquement de l'eval, donc je dirais oui
+ Thyl: ok
+ Thyl: je voudrais me lancé dans un algo est être sur de l'efficacité
+ Thyl:&#160;:)
+ fenrir: j'aimerai jouer au loto et être sûr de gagner&#160;;)
+ Thyl: oui 
+ Thyl: aussi :D
+ BlaiseEbuth: git commit -m "Simulation (seems to be) ready."Toujours modérer son propos...
+ fenrir: là je suis plutôt à -m "sc21 WIP"
+ Beretta_Vexee: Bon c'est le moment de se lancer dans le deuxième refactoring de code.
+ BlaiseEbuth: Si tu refactor trop ton code va finir par être plus le fils du facteur que le tiens...
+ Zorg1: on va déjà finir le premier avant d'entamer le second :p
+ Zakaoai: Bon, j'aime le fait que bcp disent qu'une eval est viable pour le légend. Ça donne de l'espoire
+ BlaiseEbuth: Faut encore en avoir une bonne
+ Zakaoai: Ca c'est une autre histoire, on est d'accord
+ -TheWalder-: Grâce à vos conseils je commence a pigé le fonctionnement du MCTS, merci beaucoup, c'est rare une commu aussi sympa&#160;!!
+ -TheWalder-: *piger
+ BlaiseEbuth: :hugging:
+ Bon[]Crayon: Prends-en de la graine! Automaton2000
+ Automaton2000: je sais plus, je suis pas là
+ VirtualAtom: et ça marche bien le MCTS&#160;? J'avais prévu de tenter ça ce soir
+ BlaiseEbuth: Automaton2000 se cache.
+ Automaton2000: mais je trouve ça plutôt fun
+ BlaiseEbuth: Sale gosse.
+ nicola: Pourtant, elle a des modérateurs.
+ nicola: :imp:
+ -TheWalder-: VirtualAtom pour le moment je test une première sur un tic-tac-toe pour me familiariser avec l'algo donc je ne peux pas vraiment te dire si ça fonctionnera au cours du challenge.
+ VirtualAtom: ah merle ^^ j'allais à la pêche aux infos&#160;:-}
+ jdeveil: j'ai mis tic tac toe dans ma liste d'exercice pour la semaine prochaine. Il faut que je regarde d'un peu plus prés ce fameux algo&#160;;)
+ -Cile-: moi aussi, c'est sympa de découvrir des algo ici&#160;:)
+ jdeveil: VirtualAtom: si c'est ton premier, tu risque de galérer un peu le temps de mettre l'algo en place et surtout paufiner les fonctions d'éval
+ VirtualAtom: nope, c'est pas mon premier&#160;:-}
+ VirtualAtom: pas d'eval dans un MCTS il me semble
+ jdeveil: On va se donner RDV sur l'exo à ce rythme&#160;:)
+ BlaiseEbuth: C'est tout l'intérêt qu'il n'y ait pas d'éval.
+ VirtualAtom: (désolé pour la self promotion) <a rel="nofollow" class="external free" href="https://virtual-atom.com/codingame/langton/">https://virtual-atom.com/codingame/langton/</a>
+ jdeveil: ah ben alors lance toi&#160;;)
+ jdeveil: t'as l'air de le maîtriser plus que moi :p
+ jdeveil: BlaiseEbuth c'est dans lequel qu'il y a une éval pour déterminer le fils à parcourir en premier&#160;?
+ jdeveil: MC, MCTS, BS&#160;?
+ BlaiseEbuth: Ah t'appelles ça une eval.
+ BlaiseEbuth: Oui bah MCTS.
+ jdeveil: t'appelles ça comment alors&#160;?
+ VirtualAtom: la sélection du nœud&#160;? 
+ BlaiseEbuth: Quand on dit eval c'est plus pour une fonction qui attribue un score à un état de jeu.
+ jdeveil: c'est pas une évaluation avant la fin de la simu&#160;?
+ jdeveil: enfin du parcours pardon
+ jdeveil: j'ai cru comprendre qu'il fallait scorer les noeuds avant de les parcourir
+ jdeveil: du coup j'en ai conclu à une éval...
+ BlaiseEbuth: Bah l'idée du MCTS c'est justement d'aller au bout de la partie pour pas avoir à se casser la tête avec l'évaluation d'état non-terminaux.
+ Haashi: scorer les noeuds avant de parcourir c'est beamsearch
+ jdeveil: la sélection c'est juste de l'élagage alors&#160;?
+ VirtualAtom: c'est pour ça que j'aime cet algorithme, car je suis nul pour pondre une éval ^^
+ jdeveil: ok, my bad...
+ jdeveil: j'ai fait un petit mélange de tout ça je crois :p
+ jdeveil: t1 c'est dingue les choses qu'on apprend ici&#160;:)
+ VirtualAtom: la sélection je le vois comme un moyen de pondérer entre l'exploitation des stats que tu as déjà obtenu, et l'exploration des états que t'as pas encore vu. Ça te dis comment descendre dans l'arbre d'états déjà construits
+ BlaiseEbuth: Y'a bien un "score" sur les noeuds pour choisir le fils à explorer, mais c'est fonction des stats d'exploration, pas de l'état du jeu.
+ jdeveil: oui c'est ce que j'avais cru comprendre mais comme on parle de MCTS et BS assez souvent ces derniers temps, j'ai pas du voir le changement d'algo :p
+ jdeveil: BlaiseEbuth: tu me paume avec les stats d'exploration. Il faut vraiment que j'aille voir cet algo la semaine prochaine
+ jdeveil: quand j'entends stats, j'entends proba et du coup éval...
+ VirtualAtom: imagine ratio de victoire, ça ira mieux&#160;:-}
+ jdeveil: mais j'ai ptet rien compris... 
+ jdeveil: ok donc tu parcours l'arbre jusqu'en bas (en élaguant avant) et en remontant tu garde les branches qui ont le plus de victoires
+ jdeveil: c'est ça&#160;?
+ VirtualAtom: tu gardes tout je dirais
+ VirtualAtom: pas vraiment d'élagage, à moins de mettre une heuristique pour virer des coups possibles qui sont bêtes
+ jdeveil: pas d'élagage&#160;? c'est pas un peu bourrin quand il y a autant de possibilité d'action comme ici&#160;?
+ VirtualAtom: comme t'ajoutes un nœud (en gros) par rollout (itération de la boucle mcts), ça t'en fait pas tellement
+ VirtualAtom: les nœuds restent petits en taille, donc on peut en loger pas mal dans la RAM avant d'atteindre les limites sur CG
+ jdeveil: tu ajoutes des noeuds&#160;?
+ jdeveil: tu as pas dit tout à l'heure qu'on parcourait tout l'arbre&#160;?
+ mrBen: c'est pas qu'il y a pas d'élaguage, c'est que quand t'explore, tu choisi un seul chemin à la fois, tu branche pas
+ VirtualAtom: pour construire cet arbre, t'es obligé d'en ajouterC'est l'étape 2 du MCTS, l'expansion
+ VirtualAtom: comme tu y vas itérativement, ça fait un bon compromis
+ jdeveil: ok, construction en même temps que l'exploration
+ jdeveil: compris
+ -TheWalder-: Au pire wikipedia en anglais explique très bien xD
+ jdeveil: du coup c'est plus un parcours en profondeur le MCTS
+ VirtualAtom: code-le une fois, après tout sera clair ^^
+ jdeveil: argl je me suis arrêté pour le moment à la page en français qui est une daube sans nom
+ mrBen: +1 pour le parcours en profondeur, sauf que c'est pas exaustif
+ VirtualAtom: j'ai galéré avec les articles de recherches avant de comprendre que c'était tout simple une fois codé
+ jdeveil: VirtualAtom: clair, je me le fais la semaine prochaine le tic tac toe avec cet algo...
+ -TheWalder-: jdeveil en vrai tu vas sur le wiki anglais faut s'y pencher un peu puis une fois que t'as compris les trucs ça va tout seul
+ mrBen: <a rel="nofollow" class="external free" href="https://jeffbradberry.com/posts/2015/09/intro-to-monte-carlo-tree-search/">https://jeffbradberry.com/posts/2015/09/intro-to-monte-carlo-tree-search/</a> et <a rel="nofollow" class="external free" href="https://int8.io/monte-carlo-tree-search-beginners-guide/">https://int8.io/monte-carlo-tree-search-beginners-guide/</a>
+ jdeveil: zut je voulais paufiner mon placement de graines ce soir...
+ jdeveil: au pire je me couche pas... ça sert à rien de dormir :p
+ jdeveil: Merci mrBen, j'avais pas le second lien...
+ mrBen: faut voir si t'as assez de café :sweat_smile:
+ jdeveil: Bon allez j'ai un peu de lecture moi...
+ jdeveil: héhé... pas de bol, j'aime pas ça :p
+ mrBen: ah zut
+ jdeveil: je carbure à l'activité cérébrale :laughing:
+ jdeveil: mince le smiley a plus l'air de chier que de se marrer...
+ WhatTrickeryIsThis: l'un n'empêche pas l'autre
+ jdeveil: lol ouais pourquoi pas...
+ jdeveil: ça dévie dangereusement là...
+ mrBen: ce sont des choses qui arrivent
+ BlaiseEbuth: Je m'absente 10 minutes et on est là...
+ VirtualAtom: quand le chat n'est pas là...
+ jdeveil: zut devancé :p
+ BlaiseEbuth: Le chat n'a pas bougé, c'est moi qui suis parti... :rolling_eyes:
+ jdeveil: :mouse: :mouse: :mouse:
+ BlaiseEbuth: Tiens question, est-ce qu'il y'a une dernière récolte de sun jour 24&#160;? Ou ça s'arrête vraiment quand les deux joueurs passent en wait day 23&#160;?
+ Oioi: pas de récolte après le tour 23
+ Beretta_Vexee: il n'y a pas de jour 24.
+ BlaiseEbuth: Hmm.. Ok thx. Faut que j'ajuste ça
+ VirtualAtom: pas de récolte au jour 24, t'ajoutes seulement un tiers des sun restants aux points des joueurs
+ toma69: comment est-ce qu'on fait parler l'esprit de foret sur le coté&#160;?
+ ZVRKK: Ajoute ton msg à la fin de l'action
+ Blaireau: c'est la sortie standart après l'action et un espace
+ toma69: je rajoute un print sur la ligne après l'action&#160;?
+ Oioi: Non, dans le même print, après un espace, mets tes messages
+ toma69: nickel ça marche merci&#160;!
+ kuraima: matrixage tiktok mdr 
+ kuraima: dans la jungle que des animaux le plus sauvage peut devenir rigolo 
+ BigUP: il y avait aussi, dans la jungle personne ne t'entend crier...
+ BlaiseEbuth: Si. WhatTrickeryIsThis t'endend. :hear_no_evil:
+ Zorg1: le 8éme Totoro
+ pardouin: bonjour blaiseebuth
+ pardouin: tu en es où du challenge&#160;?
+ BlaiseEbuth: Yo pardouin. 
+ BlaiseEbuth: En local ^^
+ pardouin: (et zorg1 tu te fais bizuter sur ton puzzle sur le forum, ils veulent que tu rajoutes des edge cases lol)
+ pardouin: (genre def de fonction dans une fonction)
+ WhatTrickeryIsThis:&#160;?
+ BlaiseEbuth: J'ai une simu. Des bitboards. Là je code un algo test.
+ WhatTrickeryIsThis: :see_no_evil:
+ pardouin: tu as rien submit du tout&#160;?
+ BlaiseEbuth: Si une connerie pour avoir les règles complètes.
+ pardouin: ok
+ Skygge: Quelqu'un aurait une idée de pourquoi je timeout quasi systématiquement vers la fin du jeu quand je met un #pragma GCC optimize("O3")&#160;?
+ fenrir: au hazard: un bug du genre variable non init/débordement de pile, et selon la compilation c'est génant ou pas
+ pardouin: mets #pragma disable("timeout")
+ Skygge: ça boost pas mal les perfs 95% du jeu et à la fin ça timeout
+ egaetan: parce qu(avec ce pragma Skygge tes structs sont paquées
+ fenrir: ou alors si de la simu: en O3 t'en fait plus et arrive quelque chose de mal géré 
+ b0n5a1: plutôt un segfault Skygge (et c'est pas loggé depuis des mois pour C et C++...plus de stacktrace)
+ egaetan: alors le moindre out of bound sur un tableau ou pointeur te fait un segfault
+ VirtualAtom: pas sûr que ça change le packing, il me semble qu'il faut l'indiquer par struct pour modifier le packing. 
+ BlaiseEbuth: des mois qu'il dit. :rofl:
+ b0n5a1: bon ok années maintenant probablement
+ Skygge: mmh d'accord merci je vais regarder de ce côté là
+ VirtualAtom: sinon, tu peux vérifier que ça crash
+ VirtualAtom: tu installes un signal handler, qui te permet d'afficher qch dans la console lorsque tu crash
+ b0n5a1: tu peux gérer les signaux
+ b0n5a1: voilà
+ Skygge: je n'ai jamais fait ça je vais regarder comment ça fonctionne&#160;:)
+ egaetan: je sais pas faire les signaux 
+ egaetan: c'est comment&#160;?
+ pardouin: \o
+ pardouin: o/
+ pardouin: \o/
+ VirtualAtom: quand ça crash chez moi, ça donne ça maintenant[CRASH] SIGSEGV: address not mapped to object/tmp/Answer(+0x3ccb)[0x5653d72a4ccb][0x0]/tmp/Answer(+0x3728)[0x5653d72a4728]/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xea)[0x7ffb2d92cd0a]/tmp/Answer(+0x396a)[0x5653d72a496a]
+ pardouin: ce genre de trucs
+ jfaixo: =\
+ jfaixo: mdr, c'était vachement mieux avant le smiley
+ VirtualAtom: si tu utilises la STL, penses à rattraper les exceptions aussi, toujours utile 
+ WhatTrickeryIsThis: reentrantThread.getCondition().signal()
+ WhatTrickeryIsThis: presque
+ WhatTrickeryIsThis: newCondition() *
+ VirtualAtom: ça marche ce lien <a rel="nofollow" class="external free" href="https://www.codepile.net/pile/NyekYpXo">https://www.codepile.net/pile/NyekYpXo</a> egaetan&#160;? 
+ egaetan: ça marche VirtualAtom
+ egaetan: mais ça à l'air compliqué
+ VirtualAtom: on doit pouvoir faire plus simple, c'est sûr ^^
+ VirtualAtom: j'avais un truc qui traîné dans un projet perso, je l'ai recyclé et certes, c'est un peu velu ^^
+ JBM: et voilà, qui c'est qu'est en train de faire des emotes à la con plutôt que de debug son eval
+ Stilgart: .o/
+ BlaiseEbuth: \o
+ mrBen: \o/
+ mrBen: comment vous stoker les arbres dans vos state&#160;?
+ BlaiseEbuth: Je les COMPLETE, comme ça pas besoin de les stocker
+ mrBen: certe, mais quand c'est des graines ça marche pas
+ Zorg1: pardouin&#160;: oui j'ai vu ^^
+ BlaiseEbuth: SEED pas
+ mrBen: ouais, mais c'est c'est mon algo actuel, je voulais faire mieux
+ BlaiseEbuth: :p
+ dwarfie: bon , un peu de code ce soir , un peu mieux , mais vaut pas le coup d'etre submit ....
+ dwarfie: ... tout comme demander tortue a Automaton2000 en fait ....
+ Automaton2000: c'est vraiment pas cool pour les autres
+ Palmipedus: question, est-ce qu'on joue au tour 23?
+ mrBen: oui
+ mrBen: c'est le tour 24 qui n'existe pas
+ Palmipedus: ok merci
+ Yab94: on peut récup son code de l'arene qd on a fait de la marde pdt 30 min et qu'on a tout casser&#160;? :p
+ mrBen: oui
+ Zorg1: "historique"
+ Zorg1: à gauche
+ mrBen: History (à gauche)
+ Yab94: Ah merci&#160;:)
+ BlaiseEbuth: Bon. Mon bot simmule 10k games par tour, mais conclut la plupart du temps que la meilleure action c'est de rien foutre... On dirait moi sérieux&#160;! 
+ BlaiseEbuth: (╯°□°）╯︵ ┻━┻
+ GoodOasis: :joy:
+ POLOB: J'ai eu le même pb hier soir
+ dbdr: gg BlaiseEbuth
+ Drangoht: Bsoir, la menace sur les arbres n'impacte que les points de soleil que celui-ci rapporte, c'est bien ça&#160;?
+ POLOB: le menace&#160;?
+ Yab94: il parle de l'ombre je pense
+ Drangoht: l'ombre menaçante
+ BlaiseEbuth: Les ombres. Oui Drangoht
+ Drangoht: dac sanx
+ BlaiseEbuth: Un bot flemmard, moi j'dit c'est une forme d'émegence.
+ dbdr: \o/
+ darkhorse64: BlaiseEbuth: tu as le pb de tous ceux dont le bs foire, à savoir qu'il faut faire une eval à la fin d'un jour et pas sur les actions
+ darkhorse64: un wait rapporte des sun, les autres actions les dépensent
+ BlaiseEbuth: J'ai pas de bs, et j'eval qu'en fin de game.
+ darkhorse64: bon alors, t'as un bot feignant
+ BlaiseEbuth: Mais ouai, y'a clairement un biai quelque part, le wait est surévalué...
+ dbdr: wait and win
+ BlaiseEbuth: Regarderai ça après.
+ ThunderChief: Salut
+ Greg237: Hello&#160;! Vous partez plutôt sur un beam search ou un MCTS&#160;? Vous prenez comment en compte l'adversaire&#160;?
+ ThunderChief: Une estimation du nombre de pers qui passeront en gold direct&#160;?
+ ThunderChief: Et pour rejoindre Greg y'en a qui compte partir sur des graphes&#160;?
+ 154906: un peu vague «partir sur des graphes»
+ JBM: ah tiens
+ JBM: ça coupe souvent en période de contest
+ dbdr: lalala, la...
+ ThunderChief: Ok moi je pense partir sur un BFS + minimax + alpha beta pruning
+ -Cile-: bien joué dbdr
+ ThunderChief: Je considere aussi le beam search
+ Oioi: gg&#160;!
+ dbdr: merci :blush:
+ Greg237: Bien joué&#160;!&#160;:) 
+ Trisard: gg dbdr
+ dbdr: fallait changer un false en true, c'était tout bete en fait :D
+ ThunderChief: gg
+ Greg237: Comme quoi, parfois il suffit de peu.
+ JBM: avais-tu seulement des unit tests
+ Rajh: dbdr lequel&#160;? je trouve pas
+ -Cile-: tout à l'heure j'ai pris remonté 400 places en changeant 1 chiffre...
+ dbdr: meme pas
+ dbdr: mais ça change pas la correction, juste la strategie
+ Spifflejedi: o/
+ -Cile-: c'est vraiment dommage qu'on n'ait pas accès aux codes des autres à la fin
+ pardouin: j'ai changé tous mes false en true
+ pardouin: ça n'a pas marché
+ JBM: t'as mal lu, c'était un seul
+ pardouin: ah ça doit être ça
+ pardouin: j'investigue
+ Rajh: Faut faire un graph de tout les false/true et faire un beamsearch dessus pour savoir lequel changer&#160;?
+ dbdr: :D
+ JBM: pour ça, fais plutôt un AG
+ Rajh: Qqun a deja essayé de générer une eval via un AG sur des parties en boucle en local&#160;?
+ JBM: pas mal de monde je pense
+ Rajh: Je parlais de générer vraiment le code hein
+ Rajh: :D
+ JBM: ah en PG complète
+ JBM: j'ai pas été jusque là perso
+ JBM: mais ça se trouve sûrement
+ JBM: (des gens qui ont _essayé_)
+ Rajh: C'est compliqué, faut une eval de l'eval
+ JBM: l'eval de l'eval, c'est tes issues de parties locales
+ JBM: c'est pas ça la partie délicate
+ Rajh: Mais si tu veux une eval au tour 2, tu fais quoi pour finir la partie&#160;? et voir si ton eval était bonne&#160;?
+ JBM: ton eval a le droit de dépendre du numéro du tour
+ JBM: (si ton AG l'y mène)
+ WhatTrickeryIsThis: si vous voulez, j'ai une video sur moi en train de coder mon evale
+ WhatTrickeryIsThis: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=xwycTWc7dpo">https://www.youtube.com/watch?v=xwycTWc7dpo</a>
+ dbdr: RR?
+ WhatTrickeryIsThis: avec ça vous serez top 200 facil
+ mrBen: au moins&#160;!
+ WhatTrickeryIsThis: j'en ai chié ce jour là
+ WhatTrickeryIsThis: :grinch:
+ WhatTrickeryIsThis: :grin:
+ Aeneas: Mais quel enfoiré xD
+ WhatTrickeryIsThis: merci, toi aussi
+ Zakaoai: Meh, et j'ai cliqué&#160;:'(
+ Magus: et beh ... ça fera pas légende mon truc ...
+ Zakaoai: Moi pour le moment mon algo fera pas gold
+ mrBen: pour le moment, pas gold non plus
+ pardouin: 56 c'est quand même très bien magus
+ Magus: c'est tout pourri ouai
+ Sakisan: prochain checkbox: [ ] introduire des Falses pour pouvoir les changer par après
+ Magus: mon ratio temps/rank sur ce contest est pas terrible
+ WhatTrickeryIsThis: là faut viser top 3-5 pour legende
+ Greg237: Il te manque quoi, 20 places pour faire légende&#160;?
+ dwarfie: Sakisan ... mais non ... programme quantique et comme ca c'est con , ca sera toujours la bonne valuer :D
+ philRG: moi je partirais bien sur un ou 2 ifs
+ mrBen: cry in #1781
+ Magus: plus que 20 places, le niveau va monter avant que légende ouvre
+ WhatTrickeryIsThis: le niveau va monter jusqu'à vendredi soir, et là il prendront 10 places
+ philRG: et une hache bien affutée
+ Magus: top 50 maintenant quand légende va arriver ce sera top 100
+ Greg237: Magus, tu es parti sur quoi&#160;? un mcts&#160;?
+ Magus: la c'est un beamsearch, sans grand succès
+ Magus: mcts j'ai pas encore essayé
+ dbdr: vu comme le top 7 est serré, je suis meme pas sur que mon bot passe légende en l'état
+ Zakaoai: ton affichage c'est le nombre d'action simulé et le temps Magus&#160;?
+ YannT: "Finished 52 rollouts in 75ms"
+ WhatTrickeryIsThis: nice
+ YannT: ça va statistiquement c'est significatif, good game
+ WhatTrickeryIsThis: tu pourra tenter 100 rollout avec 100 ms si t'es bon
+ Magus: Zakaoai: nombre de noeuds visités par le beamsearch, et l'éval
+ YannT: houlà, ça risque d'être trop après
+ dbdr: lol YannT. tu les faits à la main?
+ JBM: en 75ms, gg
+ dbdr: dixit le speedcubeur
+ YannT: jpense mon bot il regarde le replay de chaque rollout pour bien vérifier
+ Luksis: c'est vraiment méga lent
+ pardouin: je suis sûr qu'il y en a qui affichent des fake nombres de rollouts pour déstabiliser
+ philRG: pas moi, je tourne à 0.1ms par tour et 2 ifs
+ pardouin: je vais afficher mon nombre de ifs tiens
+ Magus: pardouin: ah ouai pas con comme idée
+ Magus: je vais mettre un petit x10 sur mon nombre de noeuds pour faire peur
+ philRG: Ca rame un peu ce soir
+ JBM: ce soir
+ TidyMaze: hmm implementer un truc pour ne pas couper des arbres s'ils rapportent moins qu'ils ne coutent ... perdre 200 places
+ JBM: ils coutent un emplacement à l'adversaire
+ dbdr: c'est a la fin, donc je pense pas
+ JBM: il a pas précisé
+ dbdr: mumble mumble correlation mumble mumble causation
+ Magus: pas besoin de préciser
+ Magus: les arbres qui rapportent moins que ce qu'ils coutent c'est forcément à la fin
+ philRG: à la limite envoyer le code ça serait plus court
+ TidyMaze: yep
+ JBM: vas-y envoie
+ Magus: je me souviens d'un contest et j'ai rippé et j'ai ctrl+v mon code sur le canal
+ JBM: l'accident bête
+ Magus: par contre je me souviens plus c'est lequel, c'est vieux
+ TidyMaze: heureusement le script qui convertit en pastebin a planté&#160;?
+ dbdr: celui à la légende à 500
+ Magus: ah non non, il est parti
+ philRG: j'ai rajouté len(my_big_trees) &lt; 5, gagné 400 places mais peut-être aussi que j'ai pas mal réduit mes ifs aussi avant
+ Magus: mais c'était au début du contest, mais bon c'était moche quand même :D
+ philRG: en fait c'est écrit dans les règles du jeu officiel, arbres de grande taille limité à 2-3 par joueur
+ philRG: c plus facile quand on supprime du code inutile qui rapporte rien
+ TidyMaze: +1
+ Rajh: philRG comment ça 2-3 arbre de grande taille&#160;?
+ -Cile-: c'est toujours assez grisant de faire une petite modif et de monter d'un coup
+ -Cile-: dans le jeu officiel (celui auquel on joue autour d'une table avec des vrais gens) il n'y a que 2 grands arbres par personne
+ pardouin: je vais afficher ça je crois:"~"*((23-game.day)//2) + ["\o_", "_o/"][game.day%2] + "~"*(game.day//2)
+ TidyMaze: des vrais ... gens&#160;?
+ pardouin: testez-le (l'essayer c'est l'adopter)
+ dbdr: tu golfes le contest?
+ -Cile-: TidyMaze&#160;: oui je sais, ça fait peur
+ WhatTrickeryIsThis: mince, j'ai rippé et j'ai mis le lien de ma video ou je code dans le chat&#160;:(
+ philRG: j'attends que quelqu'un trouve le -3v légendaire
+ cyppan: Compliqué en Clojure... timeout au startup et j'ai que de simples filtres
+ JBM: demande ses astuces à BlaiseEbuth cyppan
+ JBM: c'est le spécialiste
+ cyppan: ah des astuces je suis preneur
+ WhatTrickeryIsThis: 100ms en clojure, tu pourra peut être lire les inputs
+ dbdr: il timeout comme un pro
+ JBM: avec brio
+ TidyMaze: generalement l'astuce quand tu timeout sur la JVM:1/ changer de langage2/ y'a pas de 2
+ cyppan: :stuck_out_tongue:
+ JBM: oh si y'a des paquets d'astuces jvm
+ cyppan: ben c'est ce que je vais faire ouais
+ JBM: après choisir de...
+ JBM: enfin
+ JBM: ce que j'en dis
+ Magus: [CG]Thibaud a indiqué sur le discord que malheureusement ils n'ont pas trouvé pourquoi Clojure est cassé. Il peut timeout au premier tour sans que tu puisses rien faire.
+ cyppan: c'était pour le sport
+ Magus: Et il a malheureusement conseillé de changer de langage en attendant, faute de mieux.
+ cyppan: ok
+ cyppan: merci
+ Magus: Je suppose que ce sera corrigé en même temps que l'absence de stack en C++
+ JBM: tu passes à quoi?
+ Magus: Jamais
+ Magus: lolololol²
+ cyppan: Python je pense
+ JBM: j'aurais pas dû demander
+ JBM: mea maxima
+ cyppan: l'an dernier j'ai recodé 3 fois en typescript Python Scala  j'ai toujours pas compris la leçon XD
+ JBM: c'est vrai que j'ai fait un salto arrière haskell-c assez sur le fil au dernier
+ JBM: pour l'adrénaline
+ Luksis: OK
+ Luksis: Je ne peux plus jouer
+ JBM: ben ne joue plus alors
+ Luksis: j'appuie sur lancer mon code j'ai la limite
+ Luksis: 5 min apres c'est tjs le cas 
+ Luksis: en fait ça doit meme faire 10 bonnes minutes
+ Magus: ça veut dire qu'il est temps d'aller dormir :D
+ dbdr: fais un break
+ Luksis: HAHAHAHA Magus
+ Luksis: j'ai pas encore mangé 
+ JBM: comme les faibles
+ dbdr: CG veille sur nous
+ Luksis: il est peut-être temps d'aller manger du coup
+ cyppan: JBM passer de haskell à C ça doit faire mal quand même, même si rentable
+ cyppan: x100 LoC
+ BlaiseEbuth: Clojure est encore cassé&#160;? Izabuz...
+ JBM: ouais c'est un peu l'idée
+ JBM: doit y avoir les chiffres exacts dans mon PM
+ BlaiseEbuth: Bref. Bonne nuit.
+ philRG: moi pareil. Gardez des forces pour la ligue Gold&#160;:-)
+ JBM: 719 lignes de Haskell, 1177 de C dixit le PM
+ JBM: y'a probablement eu élision de pas mal de features au passage
+ Oioi: trop tard, j'ai plus de force
+ Oioi:&#160;:-)
+ cyppan: intéressant, oui j'imagine 
+ Romii: C'est prévu pour quand la ligue gold&#160;?
+ JBM: je m'étais plus amusé à rédiger le PM qu'à convertir/debug le C, ça c'est sûr
+ Oioi: demain aprem
+ Romii: ok merci
+ pardouin: l'algo de blaise marche pas très bien:<a rel="nofollow" class="external free" href="https://www.codingame.com/replay/552635215">https://www.codingame.com/replay/552635215</a>
+ Syj: moi, il fait des arbres&#160;:)
+ pardouin: (avec mon vrai algo il me bat 150 à 112&#160;:'()
+ Proxiwity: Dans les clash of code, il y a pas moyen d'avoir la correction à la fin&#160;?&#160;:/
+ SefioR13: Est-ce qu'on peut simuler un grand nombre de bataille contre son propre code&#160;?
+ JBM: oui
+ JBM: lance un referee en local, t'as pas de limite là
+ SefioR13: C'est quoi le referee en local c'est là où je teste mon code ide&#160;?
+ JBM: t'as un lien vers le source sur github qq part dans l'énoncé
+ SefioR13: Ah d'accord
+ JBM: ayayaye yapu de stream
+ JBM: on va s'ennuyer
+ MatthieuF: Est-ce que qqn sait la taille max du code&#160;?
+ JBM: 100k je crois
+ MatthieuF: okep, merci&#160;:)
+ benjamin15: Quelqu un sait comment faire parler son esprit&#160;? Je vois ca dans certains combats, ca semble pas etre le debug qui permet de le faire
+ JBM: rajoute ton message en fin de ligne après une commande
+ jdeveil: c'est le texte qui suit l'action
+ MatthieuF: tu met un espace puis ton message quand tu ecris la repnse
+ jdeveil: oula mais il reste du monde ici&#160;!&#160;:)
+ benjamin15: merci guyz
+ NoRabbit: qqun sait comment faire un tarte au chocolat avec des pistaches&#160;?
+ MatthieuF: r += toNDigit(""+state.day, 2);
+ no_XENSK: avec du chocolat quand meme ou juste des pistache&#160;? 
+ jdeveil: de la pâte herta, du chocolat, ...
+ NoRabbit: du chocolat, mais les pistaches à min 2 de distance
+ NoRabbit: pour l'ombre, tout ça
+ NoRabbit:&#160;:)
+ jdeveil: et présentée sur une board hexagonale
+ no_XENSK: homogénéité des bouchées 
+ NoRabbit: et dont l'index 0 commence en haut à gauche
+ NoRabbit: j'ai toujours pas compris l'index 0 au centre
+ NoRabbit: enfin ça oui
+ NoRabbit: mais après que ça se déroule...
+ NoRabbit: enfin bref&#160;:)
+ NoRabbit: vais me coucher
+ NoRabbit: ça fait toujours plaisir de voir d'autres gens coder à cette heure
+ NoRabbit: a+ tt le monde et bon coding
+ JBM: qui te dit qu'ils codent?
+ no_XENSK: :zzz:
+ NoRabbit: j'en sais rien... je présume, après une bonne tarte aux pistaches
+ NoRabbit: ++
+ Vinyard: Vous exploitez comment les ombres vous&#160;?
+ Littleyounes: les possibleActions on les as toujours en ligue argent&#160;?
+ Littleyounes: x)
+ ZVRKK: Yes
+ Skia: Comment sont calculés les points du classement svp&#160;??
+ R4N4R4M4: Skia avec Trueskill&#160;: <a rel="nofollow" class="external free" href="https://en.wikipedia.org/wiki/TrueSkill">https://en.wikipedia.org/wiki/TrueSkill</a>
+ R4N4R4M4: Vinyard pour les ombres, tu peux planter une graine sur une case qui est potentiellement moins ombragée qu'une autre
+ Skia: Merci R4N4R4M4, j'aurais pu essayer de l'estimer encore longtemps ^^'....
+ Skia: On sait quelles informations précises sont prises en compte&#160;??
+ Oioi: coucou
+ Littleyounes: Salut prof
+ Oioi:&#160;:-)
+ Littleyounes: Oioi tu peux me dire en très bref
+ Littleyounes: la différence entre un MCTS
+ Littleyounes: et un arbre normal avec toutes les possibilitées de jeu
+ Littleyounes: je comprend pas&#160;:'(
+ Oioi: Dans un MCTS, tu ne vas pas parcourir tout l'arbre
+ Littleyounes: on l'arette aprés un temps
+ Littleyounes:&#160;?
+ Oioi: Tu choisis une des actions possibles au premier coup - aléatoirement
+ Littleyounes: :O
+ Oioi: Puis, une seconde - aléatoirement
+ Oioi: Etc...
+ Oioi: Dans l'idéal, tu vas jusqu'au bout de la partie
+ Oioi: Tu regardes qui gagne
+ Littleyounes: Ah
+ Littleyounes: mais un DFS fait ca aussi
+ Oioi: Tu remonte ton chemin en attribuant à chaque action faite le score +/-1 suivant la victoireou la défaite
+ Oioi: Tu recommences
+ Littleyounes: aaaaaaoki
+ Littleyounes: je vois
+ Oioi: En faisant ça, tu construis **partiellement** ton arbre au fur et à mesure
+ Littleyounes: clairrr
+ Littleyounes: merci
+ Oioi: Sur chaque noeud de l'arbre, ton score évolue avec le pourcentage de victoire ou de défaite
+ ZVRKK: Salut 
+ Littleyounes: C'est à peu prés pareil que minmax alors
+ Oioi: Il y a un truc supplémentaire permettant d'avantager dans tes tirages aléatoires les noeuds qui ont tendance à conduire à plus de victoire
+ ZVRKK: Oioi t'aurais des ressources permettant de débuter sur ce genre d'algo&#160;? je suis débutant..
+ Oioi: Ya eu des liens qui sont passés hier...
+ Oioi: Je vais tenter de les retrouver
+ Littleyounes: y  a ca
+ Littleyounes: <a rel="nofollow" class="external free" href="https://jeffbradberry.com/posts/2015/09/intro-to-monte-carlo-tree-search/">https://jeffbradberry.com/posts/2015/09/intro-to-monte-carlo-tree-search/</a>
+ Oioi: Oui&#160;!
+ Littleyounes: qui est passé hier
+ ZVRKK: Merci, parceque j'entends tout le monde parler d'algo, et moi pour l'instant je fais le challenge avec des if else ...
+ Littleyounes: Moi aussi&#160;:'(
+ Littleyounes: j'ai pas le courage de générer un arbre avec autant de possibilitées
+ Littleyounes: j<i>vais faire crash la jvm</i>
+ Oioi: Moi aussi&#160;!&#160;:-)
+ Littleyounes: x)
+ Oioi: Je challenge avec des if/else et si vous voulez mon avis, c'est le bon contest pour le faire
+ Littleyounes: Oui
+ Littleyounes: je me suis dit la même chose
+ ZVRKK: Ah bah si c'est le prof qui le dit en plus 
+ Oioi: Celui de l'automne dernier, au contraire, il fallait sortir l'artilleire lourde
+ Oioi: Mais là...&#160;:-)
+ Littleyounes: Je pense que les gens sont tous parti d'un mcts comme pour le précedent contest
+ ZVRKK: Mais tu intègre un systeme d'évaluation quand même ou pas du tout&#160;? 
+ Littleyounes: mais je pense aps que c'est super intéressant
+ Littleyounes: oé
+ Oioi: Ha ben oui&#160;!
+ Littleyounes: Oioi pourquoi tu pense
+ Oioi: Mes if portent sur différentes évaluations
+ Littleyounes: que c'est pas intéréssant
+ ZVRKK: Ah c'est ça qu'il me manque donc 
+ Littleyounes: le mcts&#160;?
+ Littleyounes: Moi je pense que si on a la bonne strat
+ Littleyounes: elle peux marcher sur à peu pres tout les matchs
+ Oioi: Je ne dis pas que c'est pas intéressant&#160;!
+ Littleyounes: donc on peux coder en dur en quelques sortes
+ Oioi: A peu près tout m'intéresse en informatique&#160;:-)
+ Littleyounes: Je parle de ce contest
+ Littleyounes: en particulier
+ Oioi: Mais, disons, que se jeter sur la grosse machinerie avant même d'avoir commencer à réfléchir m'apparaît être une erreur&#160;:-)
+ Littleyounes: :o
+ Oioi: J'aime beaucoup ce contest
+ ZVRKK: C'est mon premier donc moi je pourrais pas dire le quel est mieux que l'autre mais en tout cas il est cool&#160;:)
+ Littleyounes: Codingame c'est quelque chose quand même
+ Littleyounes: Dommage que ca a perdu en popularité
+ Littleyounes:&#160;:'(
+ Oioi: oui, superbe projet, superbe réalisation
+ ZVRKK: Yes pas mal du tout
+ Oioi: Ha bon&#160;?
+ Littleyounes: Mias mon preféré
+ Littleyounes: ca reste le circuit
+ Oioi: Perdu en popularité&#160;?
+ Littleyounes: full géometrie
+ Littleyounes: Bah oui
+ Littleyounes: il y a quoi 4000
+ Littleyounes: participants
+ Littleyounes: rien que la battledev
+ Littleyounes: francais
+ Littleyounes: y avais 6000 participants
+ Littleyounes: alors que codingame c'est une échelle mondiale
+ ZVRKK: On est 6103 là pas 4000
+ Littleyounes: ca reste quand même très peu
+ Littleyounes: la battleDev c'est juste un tournoi francais
+ Littleyounes: sur 2 heures
+ Littleyounes: d'algo
+ Littleyounes: ZVRKK t'es en 467 argent avec des if else
+ Littleyounes: solide
+ Littleyounes: x)
+ ZVRKK: Haha j'ai 6 conditions dans mon truc final 
+ Littleyounes: tu prend en compte les ombres
+ Littleyounes: ou pas encore&#160;?
+ ZVRKK: Pas du tout pour l'instant 
+ Littleyounes: Solide
+ ZVRKK: Merci ^^

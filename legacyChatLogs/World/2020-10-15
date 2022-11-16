@@ -1,0 +1,884 @@
+ Laminator: He keeps his secrets. Hence never sharing his code
+ ImaNoob: bruh
+ ImaNoob: bghtmd,
+ Harrogin: i feel like everyone who codes in Ruby comes up with crazy elegant solutions really fast
+ ImaNoob: ok
+ Laminator: They have access to more tools
+ ImaNoob: But which is the best way to learn ruby
+ Ugu_Ugu: University
+ ImaNoob: university?
+ Ugu_Ugu: yes~
+ ImaNoob: ok
+ ImaNoob: University is a website?
+ Ugu_Ugu: if u study hard, you can reach there
+ ImaNoob: ok
+ ImaNoob: ima learn on oy youtube
+ ImaNoob: and maybe i'll learn c++ too
+ Ugu_Ugu: good job
+ ImaNoob: ok
+ ImaNoob: it's seem like python is easy for me so i'll use Pyton
+ ImaNoob: :money_mouth:
+ KcalbCube: hello all!
+ VizGhar: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/7a7e1a11-b0e2-427c-a955-ca65f6f70b34">http://chat.codingame.com/pastebin/7a7e1a11-b0e2-427c-a955-ca65f6f70b34</a>
+ random12313: A164
+ random12313: input output
+ random12313: InputExpected outputF474
+ random12313: t8124
+ random12313: (869-829
+ random12313: %89889025
+ random12313: someone has any idea?
+ BorisH: @random12313: You are a cheater. Anyhow - consider ascii and mod 
+ random12313: empty...
+ xlr4829: cheater
+ jacek: oO
+ KiwiTae: lol 
+ ChattrBox: hi
+ LinhT.Nguyen: please guys enough with the accusations. it's about learning and improving not cheating 
+ Uljahn: there is no learning and improving in being fed with the answers
+ KiwiTae: ooh Uljahn o/ 
+ Uljahn: hihi Kiwo
+ MSmits: it's kiwi, look at the avatar. Its the fruit!
+ MSmits: and it's also a bird
+ MSmits: KiwiTae I am fascinated by your avatar
+ Einwickler: It's a visual teapot
+ MSmits: <a rel="nofollow" class="external free" href="https://www.codingame.com/share-replay/493152117">https://www.codingame.com/share-replay/493152117</a>
+ MSmits: look what my dude does at the end
+ MSmits: it's a real problem with solving games. He's like, screw it -&gt; Geronimooooo,
+ MSmits: this game I solved at ply 10.
+ MSmits: (as a loss)
+ Einwickler: Oh dear. But you would have been losing at that point anyway right?
+ MSmits: yes
+ MSmits: 3 moves left, last being my opponents, so it was a lost cause
+ Einwickler: So it's kind of a neat feature to shorten the replays&#160;;)
+ MSmits: problem is, i solve much earlier
+ MSmits: i know at ply 10 I have lost
+ MSmits: so what move to do? If everything is a loss
+ MSmits: frame 10 sry, that's ply 9 i guess
+ Einwickler: Take the worst move available to shorten the replay? Dunno :thinking:
+ MSmits: that would be a bad idea. The thing is, my opponent doesn't know he has won
+ MSmits: so he might still make a mistake
+ MSmits: so i should still do the best move. At the end it doesn't really matter, as my opponent surely knows, but at ply 9 it really does
+ Einwickler: Ah yes of course. :joy:
+ MSmits: so what I do know, because it's mcts, I take the move with the most visits
+ MSmits: which is likely the best move and if not, at least the one hardest to solve and giving the longest game
+ Einwickler: Whats the mieaning of visits in this context?
+ MSmits: it keeps growing the tree by making simulations from a leaf of the tree
+ MSmits: preferring better branches of course
+ MSmits: as opposed to minimax, which just does all branches to equal depth
+ Einwickler: So its minimax with a brain?&#160;:)
+ MSmits: mmh i guess so, it's a bit more involved yeah
+ MSmits: it's used in uttt as well
+ MSmits: but people do ok with minimax
+ MSmits: top 10 is probably all mcts, below that minimax gets more common as you go down
+ MSmits: in some games minimax works better
+ MSmits: but you should learn minimax before mcts
+ Einwickler: I still didnt do the minimax implementation for uttt. Im kinda stuck with the idea of finally doing things in c++ in favor of the languages im comfortable with because they kinda suck in performance
+ MSmits: mmh i wouldnt start with C++
+ MSmits: I did my first UTTT in C#
+ Einwickler: And Im reaaally slow in doing things in c
+ Einwickler: *c++
+ MSmits: then converted to C++ in 2 days, having never coded anything in c++ before that
+ MSmits: (1000 lines!)
+ MSmits: so conversion is doable
+ Einwickler: Yeah I had some C in my classes but the prof was kinda bad so I didnt really learned that much
+ Einwickler: Since then i am avoiding this subject of low level like languages :D
+ MSmits: same, i think i had a very short class, with no explanations, just muddle along on your own, i copied what my fellow students did. This was 20 yrs ago
+ MSmits: this was in the context of coding for physics
+ MSmits: we were supposed to solve the schrodinger equation for an infinite well using c
+ Einwickler: This is so sad. We had a really good class using ruby and I learned a lot about it. But I would exchange that knowledge for finally being able to properly code in c++ at any time
+ MSmits: you need to know very little c++ to effectively code for boardgames on CG
+ Einwickler: My biggest problem for the basic stuff actually is handling collections
+ MSmits: mostly it is learning about pointers and memory, forward declaration and such
+ MSmits: ahh, well the thing is. Once you are optimizing for a boardgame, you use the collection types less and less
+ Einwickler: It's so convenient in high level languages
+ MSmits: until in the end, you're just using giant arrays
+ MSmits: you dont realize though, with the higher languages, how slow your fancy collection types are
+ Einwickler: But arrays are of static size? So you just declare them with a huge size at the beginning?
+ MSmits: yes
+ MSmits: Node nodes[NODE_MAX];
+ MSmits: const int NODE_MAX = 25000000;
+ MSmits: (thats a lotta nodes)
+ Einwickler: Oh boy, that doesn't really sound more performant to me but I guess it is?
+ MSmits: the thing that makes it performant is that you dont need to create new objects during run time
+ MSmits: they're there
+ MSmits: you're just using them
+ MSmits: and creating a new object is just incrementing an index to the array
+ MSmits: nodeIndex++
+ Einwickler: Ah yeah sure because in board games you only care about performance/run time per move right?
+ MSmits: yeah pretty much
+ MSmits: well
+ MSmits: if you do minimax
+ MSmits: evaluation of the board is super important
+ MSmits: but if you take that as a given, the next step would be performance
+ Einwickler: Yes but I mean you can do the setup of your huge arrays at the start and then just reuse them?
+ MSmits: minimax doesnt use a node array though
+ MSmits: you dont store your nodes
+ MSmits: this is a mcts thing
+ MSmits: well technically you can store them, but you dont need to
+ MSmits: minimax doesnt use memory at all 
+ MSmits: well.. a negligible amount
+ Einwickler: But you still store your board state at least once at any given time
+ MSmits: yeah just that
+ MSmits: do / undo moves
+ MSmits: mcts keeps statistics
+ MSmits: so you need lots of memory
+ Einwickler: But for a 3x3 board thats really to be ignored I guess :D
+ MSmits: for any size really
+ MSmits: a 9x9 board is still very small
+ Einwickler: sure
+ MSmits: in mcts the board size matters
+ MSmits: because if the board size is small, you can save it on the node
+ MSmits: and then you dont need to do/undo moves when moving through the tree
+ MSmits: since the boards are already fully on the nodes
+ programistination: Hello
+ programistination: Mr Physics
+ MSmits: hi
+ Einwickler: Don't want to deep dive into this at this point but what is the point of storing the board states in the nodes in mcts? Or did I get this wrong? Whats wrong with just storing its rating if thats all you care about?
+ Einwickler: Just tell me if thats a question you would have to go deep into it
+ MSmits: oh, well, when you go down the tree, you modify your board, by applying the move that goes with the node
+ MSmits: sometimes applying a move, is a complicated thing that takes time
+ Einwickler: Dont want to get confused before I even started with minimax :D
+ MSmits: if the next boardstate is already on the node, you dont have to apply the move
+ MSmits: since you already have the result of it
+ Einwickler: Ah so its kind of trading memory against computing time for next depth?
+ MSmits: generally, if a boardstate is 128 bit or smaller, i keep it on the node
+ MSmits: exactly
+ Einwickler: Got it
+ Einwickler: Makes sense
+ programistination: mr Physics what are Differentiel equations used for in physics
+ MSmits: for coming up with new formula's using the physical constraints that come with the situation you're looking at
+ MSmits: basically, everywhere in physics
+ MSmits: it's the most important math 
+ programistination: I did them in math last year
+ MSmits: for example waves, waves are everywhere
+ programistination: linear , bernoulli , homogenoeus
+ MSmits: the second derivative of the function is equal to minus that function
+ MSmits: that gives a wave
+ programistination: interesting
+ MSmits: well add some constants
+ MSmits: remove the minus
+ MSmits: and you have an exponential
+ MSmits: waves are everywhere in physics
+ MSmits: exponentials also
+ MSmits: i dont remember all the ways of solving them as we stop just short of this in my physics classes
+ programistination: but when you study them in math classes
+ programistination: it's bs
+ programistination: you just solving some equations
+ programistination: and you don't know nothing about the physical aspect of it xD
+ programistination: idk
+ MSmits: thats annoying about math yes
+ MSmits: and why i didnt like it when i was younger
+ programistination: well there are two types of ppl
+ programistination: there are the ones who can't study something that can't be experienced or touched 
+ programistination: and there is the opposite
+ Einwickler: But It's really dependent of the teacher you got too
+ MSmits: well I am somewhere in between. Usually i didn't matter that much, but often in the math classes i did, they went really really abstract
+ programistination: yep it's kinda boring , when you can't relate it to something in the real word
+ programistination: world*
+ MSmits: they would be talking about matrices A and B and then someone would ask for an example
+ MSmits: then the professor would say
+ MSmits: well for example take this matrix:
+ MSmits: a,b,cd,e,fg,h,i
+ MSmits: etc.
+ MSmits: You get the idea
+ programistination: lol
+ programistination: yeah
+ programistination: abstract vs concrete
+ Einwickler: My girlfriend just asked me what I did the whole day before I knew this site
+ TheManeatingPonyVanDerSwag_d59d: Hi all
+ Einwickler: I dont know anymore :D
+ Einwickler: HI :wave:
+ MSmits: it's a good question though
+ sunksuperset370: hi
+ Einwickler: MSmits do you know "Selected Papers on Fun and Games" by Don Knuth? Seems to be a book made just for you&#160;:)
+ sunksuperset370: hey ellis
+ sunksuperset370: allis
+ Allis: Oh, hi.
+ sunksuperset370: sorry long time no see
+ Allis: No worries.
+ A.F: hi
+ sunksuperset370: i code during class
+ Allis: As is only right and proper.
+ sunksuperset370: no i am in science right now
+ A.F: how to pass CODERS STRIKE BACK
+ A.F:&#160;?
+ A.F: help me please
+ A.F: :sob:
+ Uljahn: how may I help you?
+ sunksuperset370: problem i just rage quit that puzzle
+ sunksuperset370: i hate the collision part
+ sunksuperset370: sorry it was just too much for javascript on me
+ sunksuperset370: any one want to join my clash
+ sunksuperset370:&#160;?
+ sunksuperset370: hello?
+ sunksuperset370: any one want to join my clash of code
+ sunksuperset370: hey allis
+ sunksuperset370: any one else?
+ Allis: Are you streaming?
+ sunksuperset370: noo
+ sunksuperset370: nonono
+ sunksuperset370: i am just in class feeling lonely
+ sunksuperset370: plus i am not a streamer
+ sunksuperset370: i am on a chromeboo
+ sunksuperset370: chromebook
+ sunksuperset370: i am just asking people on codingame to joining me
+ Allis: Makes sense.
+ sunksuperset370: 10 sec
+ Allis: Probably best to do so in the #clash channel in future.
+ LastRick: or share a link?
+ sunksuperset370: ok
+ sunksuperset370: i will
+ sunksuperset370: after this clash
+ MSmits: Einwickler will check it out
+ sunksuperset370: hold on
+ sunksuperset370: i will finish this clash then i will put the link in the chat bin
+ Astrobytes: sunksuperset370: asking for participants in world chat is cool, but post links in #clash as Allis said or in PM
+ sunksuperset370: ok thx
+ sunksuperset370: i think i am really bad at this clash
+ sunksuperset370: i just quit for this one
+ sunksuperset370: the link is in the #clash
+ sunksuperset370: please join
+ sunksuperset370: thx
+ sunksuperset370: hello
+ sunksuperset370: please join my clash in #clash
+ Astrobytes: (and don't spam it, people can still see your original request)
+ sunksuperset370: oh sorry
+ jacek:  Oo
+ jacek: hmm, how come d&amp;b has more players than onitama, despite being much newer? :thinking: :eyes:
+ MSmits: onitama is an acquired taste
+ jacek: so d&amp;b is for plebs
+ MSmits: sure
+ Marchete: agree
+ jacek: is there some intrinistic for getting list of indexes of bits of integer?
+ Marchete: yes
+ jacek: like 0b10001 = {0,4}
+ jacek: for now i have good old loop
+ jacek: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/0be7bb9e-2afe-464f-b3eb-55e0e786758f">http://chat.codingame.com/pastebin/0be7bb9e-2afe-464f-b3eb-55e0e786758f</a>
+ jacek: :s
+ Marchete: it's so ugly it broke the pastebin
+ jacek: <a rel="nofollow" class="external free" href="https://pastebin.com/3BUjncqv">https://pastebin.com/3BUjncqv</a>
+ Illedan: Hi Marchete. Long time. Zup?
+ Marchete: I can't see pastebin but I imagine 1ULL&lt;&lt;index
+ Marchete: yeah
+ Marchete: doing pleb games
+ Illedan: pleb?
+ Marchete: for pleb people
+ Illedan: Never heard the word pleb before :P 
+ jacek: so nobel
+ jacek: noble even
+ Marchete: plebeian
+ Illedan: aha
+ Marchete: intrinsic for loop of bitsets is with  
+ Marchete: count_zeroes_right == __builtin_ctzll == _BitScanForward64(&amp;idx, x); in Windows
+ jacek: thats plebeian system
+ Marchete: I have some macro for loops
+ Marchete: a First() then a Next(I)
+ Marchete: Next takes the last index as parameter
+ Marchete: #define BOXLOOP(i,bLOOP)  (int i = (bLOOP).First(); i &gt;=0; i = (bLOOP).Next(i) )
+ jacek: is it much faster?
+ Marchete: no
+ Marchete: others use a while(){}
+ Marchete: but in that case you need to remember to do stuff inside the while loop
+ Marchete: I picked the approach "for BOXLOOP(i, values){}"
+ Marchete: anyways Msmits_ is the master bitmasker here
+ MSmits: hi
+ MSmits: lemme reread your problem jacek
+ MSmits: ahh
+ MSmits: lemme give you a code example i use for this. Have to look through a bot or two, i do this a lot
+ MSmits: I am guessing uttt
+ jacek: checkers
+ MSmits: also yeah, sec
+ jacek: but probably also othello
+ MSmits: this is how i do it in uttt apparently:
+ MSmits: <a rel="nofollow" class="external free" href="https://pastebin.pl/view/316093c6">https://pastebin.pl/view/316093c6</a>
+ MSmits: but i do it differently in other games
+ MSmits: probably better to get the index first, then do 1ULL &lt;&lt; index to get the bit to remove
+ MSmits: instead of doing moves &amp; -moves
+ jacek: pastebin.pl?
+ MSmits: no idea, it was the first thing that came up on google :P
+ MSmits: dunno why
+ jacek: uint16? its for uttt?
+ MSmits: this is with a ternary bitboard
+ MSmits: kind of
+ jacek: so its triboard
+ MSmits: not entirely, the moves are binary
+ MSmits: the board is ternary
+ MSmits: so i pick the moves with this system off a uint16_t
+ MSmits: then apply the move to tritboard
+ jacek: ah so its looped __builtin_ctz. i thought it would be something more fancy
+ MSmits: if that i exists, i dont know it
+ jacek: so it doesnt exist then
+ MSmits: well fancy builtin stuff usually doesnt return lists
+ MSmits: at most it's an integer or an array fitting in a simd register or something
+ zapakh: How do I disable the autocomplete box in the IDE?
+ eulerscheZahl: jacek 02:40PMhmm, how come d&amp;b has more players than onitama, despite being much newer? :thinking: :eyes:
+ eulerscheZahl: and how did it get a straight 5 star rating? :o
+ eulerscheZahl: 27 votes, all 5 stars. not a single hater yet
+ Marchete: because it's a nice puzzle
+ Marchete: no weird rules
+ Marchete: just a single move type
+ MSmits: it is, but it's not art, like Onitama&#160;:)
+ eulerscheZahl: but i thought every game gets a 1 star troll at that point
+ MSmits: did you rate it yet?
+ eulerscheZahl: i never rate
+ eulerscheZahl: neither mine nor others
+ MSmits: hmm ok
+ MSmits: I rate everything 5 stars :p
+ eulerscheZahl: i upvote on the contrib page
+ MSmits: but whats this about stuff getting removed with too many negative votes, is this real?
+ MSmits: ratings i mean
+ eulerscheZahl: yes. i think you need 20 votes in total and a low average
+ MSmits: I see
+ jacek: challenge accepted
+ Westicles: Has anyone looked at how many 2048 tests can get the 131k tile?  It looks like 14/30 to me
+ eulerscheZahl: 0 for me. but i'm not a reliable source here
+ Westicles: I mean in theory.  I know that is the upper limit based on the spawns, but might be lower
+ MSmits: hey Westicles, do you also do bot programming or just optims?
+ Westicles: You gotta spawn a 4 at the right time, and have no 2s around
+ Westicles: Never tried the bots.  I'm not much good at writing tight fast code
+ MSmits: you may not have to be if you're this good at writing smart search algo's
+ jacek: 2048 has 2 1 starts
+ eulerscheZahl: you don't become a puzzle of the week like that
+ eulerscheZahl: shame on you 2048
+ MSmits: who does that
+ MSmits: seriously
+ eulerscheZahl: i script. and i'd really like to know how it works
+ eulerscheZahl: a script*
+ MSmits: did you say something snarky and they 1 starred you?
+ eulerscheZahl: or one didn't like the game, no idea
+ eulerscheZahl: votes are anonymous
+ MSmits: makes no sense, everyone knows what the game is before starting
+ MSmits: it's 2048
+ eulerscheZahl: you can know and hate it at the same time
+ MSmits: yeah but then just dont start :P
+ eulerscheZahl: then maybe i got a hater, who knows
+ MSmits: I'm surprised you're still nr 1 btw. You're not actively working on keeping that rank and royale seemd to be
+ jacek: :innocent:
+ MSmits: would have expected him to pass you by now
+ eulerscheZahl: onitama gained popularity so i climbed back up
+ eulerscheZahl: he was above me
+ MSmits: oh, you got boosted
+ eulerscheZahl: and i did the teccles opening for UTTT :D
+ MSmits: haha!
+ MSmits: good man
+ jacek: did you go up then?
+ eulerscheZahl: from 140 to 100 approx
+ MSmits: it's one of the nice heuristics that actually works well
+ MSmits: though not 100%,you can lose by applying it, I've seen cases
+ MSmits: kar liso once told me his bot is 3k+ lines
+ MSmits: mine is big at 1k
+ MSmits: I can't imagine what fancy heuristics are in there. 
+ eulerscheZahl: in my ranking range it's a boost for sure
+ MSmits: yeah, my bot even uses it still
+ jacek: it even me god boosted by acout 10 ranks
+ MSmits: in all cases
+ jacek: tttt
+ jacek: i cant type today
+ MSmits: teccles tic tac toe?
+ MSmits: btw you can also do the teccles within the search
+ MSmits: not just for picking the move
+ MSmits: you can get much deeper that way
+ jacek: i only use it in the opening
+ eulerscheZahl: no i can't. would require refactoring
+ MSmits: ah ok
+ MSmits: i have a few pruning rules that are not 100% guaranteed, so my search tree resets a lotr
+ MSmits: because my opponent does a move i didnt search
+ MSmits: like teccles, if he doesnt do teccles, my search tree is gone
+ eulerscheZahl: i don't have that problem. i don't reuse my tree :D
+ MSmits: ahh, yeah, well i end up not reusing it much either this way
+ eulerscheZahl: do you see a way to expand a node without listing all possible next moves first and then picking one?
+ eulerscheZahl: to allocate memory for all children right away
+ jacek: nah i always expand by every children
+ MSmits: yeah i do too
+ eulerscheZahl: ok, then i waste time somewhere else
+ jacek: actually i cant imagine one node at a time, like in early mcts go literature
+ MSmits: a small bias toward avoiding moves that give your opponent a free move, helps
+ MSmits: in selection i mean
+ jacek: or adding bonus for moves that win small board
+ MSmits: because these moves are generally very bad and also cause lots of branching
+ MSmits: yeah supposedly that works, i have not been able to see much difference though
+ MSmits: might depend on the rest of the bot
+ eulerscheZahl: nah, not going back to it. i'd rather give 2048 a more serious shot
+ MSmits: eulerscheZahl once you have all the basic stuff done, most gains will be gotten from optimizing the random rollout
+ MSmits: and that's not fun for you
+ eulerscheZahl: you know me
+ _Royale: MSmits: eulerscheZahl: I will probably start Onitama soon&#160;:)
+ MSmits: that's cool _Royale&#160;:)
+ MSmits: you'll like it
+ MSmits: beware bugs with card rotation and such, you can get stuck a little bit
+ eulerscheZahl: oh dear, rip #1
+ MSmits: there's always yavalath&#160;:)
+ eulerscheZahl: :poop:
+ MSmits: hey it's fun&#160;:)
+ MSmits: FB probably has room for improvement for you eulerscheZahl
+ MSmits: if you were looking for cp
+ eulerscheZahl: i know
+ eulerscheZahl: or golfing
+ MSmits: vindinium too
+ MSmits: your own game :P
+ MSmits: you can do better than 26 for sure
+ eulerscheZahl: 25?
+ MSmits: i dunno , but you lack 1500 cp there, so a few ranks help a ton
+ Westicles: golfing is fun.  love those vb.net and pascal system calls
+ eulerscheZahl: i had vindinium on my TODO for ages. back when it was still hosted on vindinium.org
+ eulerscheZahl: then suddenly it was offline so i decided to port and play on CG
+ eulerscheZahl: still on my TODO&#160;:(
+ MSmits: lol
+ MSmits: i should go back and give that a try
+ MSmits: now that i am better at the whole minimax thing
+ eulerscheZahl: or GitC
+ MSmits: oh yeah
+ MSmits: i never got the hang of that
+ eulerscheZahl: i remember your struggle
+ Illedan: One of the prettiest games though
+ MSmits: i love that part of it yeah
+ eulerscheZahl: codebusters and hypersonic have the best graphics IMO
+ MSmits: it's really one of those games that makes you think, wow that's great. And then when you start: umm now what?
+ MSmits: they look cool yeah
+ MSmits: wow i am 2nd in HS!
+ MSmits: oh it's yurkovas
+ Westicles: Hey Illedan, I'm having to turn my snake different directions per test case for 2048.  Did you have that problem?
+ MSmits: he was asking me questions the other day, i guess he boosted me
+ Illedan: I have code for it yeah
+ Illedan: but I lost motivation at that point
+ Illedan: But I didn't need it for that score
+ MSmits: 'turning the snake" is 2048 jargon?
+ Illedan: ye
+ wlesavo: ru chat is all about 2048  :slight_smile:
+ Illedan: Nice
+ eulerscheZahl: i was stalking you Russians a bit
+ Westicles: Do the russians agree with me that only 14 of the test cases can possibly get the 131k tile?
+ eulerscheZahl: validators are public. and the same as the visible testcases
+ wlesavo: Westicles yes, and only 4 for 131 + 65
+ Westicles: oh, I didn't get that far.  only have 3 131k so far
+ wlesavo: quite nice distribution actually, i wonder if it was meant to be this way
+ Illedan: :D
+ Illedan: Euler at 10 mill be like. Yeah, 100&#160;% planned
+ eulerscheZahl: definitely planned that way :D<a rel="nofollow" class="external free" href="https://tech.io/snippet/rb4qLL4">https://tech.io/snippet/rb4qLL4</a>
+ Illedan: Seed generator?
+ eulerscheZahl: yes
+ eulerscheZahl: RNG from project euler, repeats only after 6 million random numbers
+ eulerscheZahl: "random"
+ wlesavo: :smiley: well anyway dbdr should be very close to optimum
+ sDCrAZzE: ELMOP
+ sDCrAZzE: es delanka po feef rejup
+ sDCrAZzE: poof de fuef le jeje
+ eulerscheZahl: 6308949 numbers in the cycle to be exact
+ wlesavo: cycles of 80k would be ok :slight_smile:
+ Westicles: I was really surprised you can get 50M using only 3 dirs
+ Illedan:&#160;:)
+ Illedan: Helps to know where numbers spawn
+ dbdr: oh, russian speakers are squatting the top 5
+ Illedan: I keep only 3 dirs until a certain point to get more simulations
+ Illedan: And I count the number of that last dir. It never goes above 5 in total
+ Illedan: Meaning I can just disable it under certain conditions
+ eulerscheZahl: i would give them a friendly hi but all i know is "cyka blat"
+ Illedan: :P
+ wlesavo: this will count
+ dbdr: and #8 has 54M :D
+ eulerscheZahl: and then: nothing
+ Illedan: Was nicer 1 week ago when I was chilling here alone :P
+ dbdr: Illedan is a sprinter
+ Illedan: Always
+ eulerscheZahl: and then he gets a cramp
+ Illedan: Did a few marathons though :P
+ dbdr: 2km marathons?&#160;;)
+ Illedan: 42km, but best is only 4 hours :P
+ eulerscheZahl: marathons in real life? wow
+ dbdr: sounds pretty good already
+ Ferreato: hy
+ Illedan: Sure did 2. And 2 months ago I did a half-marathon in the mountains
+ Ferreato: i'm new here
+ eulerscheZahl: i need a ball to motivate me to run
+ Astrobytes: "Fetch euler!"
+ eulerscheZahl: woof
+ Astrobytes: "good boy"
+ KiwiTae: Illedan trail runner? :D
+ KiwiTae: im doing a 75km in the jungle next month 
+ Astrobytes: that sounds fairly brutal
+ sDCrAZzE: es lamle kil toeb fer feuf
+ sDCrAZzE: im american ididot
+ sDCrAZzE: s'
+ Shadowtick: hello everyone
+ KiwiTae: Shadowtick o/
+ Einwickler: Good evening (or whatever it is in your tz) :wave:
+ KiwiTae: Einwickler o/
+ Einwickler: Kiwi *nod*
+ Einwickler: I dont like this emoticon KiwiTae. As a german this angled raised arm has a really bad taste to it :fearful:
+ MSmits: I agree, everyone but Germans should use it :P
+ KiwiTae: o/&lt;3 better? 
+ Astrobytes: If you look at it the other way, it's actually the other arm
+ KiwiTae: haha
+ Einwickler: So we are checking who is german and who isn't again? I dont think thats a good idea too :joy:
+ MSmits: true
+ eulerscheZahl: we already know that anyways
+ eulerscheZahl: i'm not even allowed to declare my stringstream ss
+ Astrobytes: hahaha
+ KiwiTae: tough
+ Hjax: hello everyone ^_^
+ KiwiTae: and im forbidden to use c++
+ Astrobytes: hey Hjax, where you been hiding
+ Einwickler: oh boy this conversation really went sideways fast :D
+ MSmits: <a rel="nofollow" class="external free" href="https://www.facebook.com/thedailyshow/videos/an-amusement-parks-accidental-swastika-ride/378869629388741/">https://www.facebook.com/thedailyshow/videos/an-amusement-parks-accidental-swastika-ride/378869629388741/</a>  this is one of the funniest mistakes ever
+ Einwickler: Cheers Hjax :wave:
+ KiwiTae: ah no my bad lol failed
+ Hjax: ive been pretty lazy, havent really started a code of ice and fire yet 
+ echossouth: Sup everyone
+ Astrobytes: I don't want to click the link MSmits but I remember that story
+ Hjax: i read the post mortems and understand how the game works i think 
+ Astrobytes: Nerchio got legend Hjax, now you must
+ MSmits: yeah, i can't believe noone thought of this&#160;:)
+ Einwickler: MSmits yeah I know this one :D
+ Hjax: nerchio has been working hard
+ Astrobytes: He has indeed
+ eulerscheZahl: <a rel="nofollow" class="external free" href="https://3dcad.websharecloud.com/?v=pv&amp;t=p:default,c:panoramaview,h:f,m:t&amp;pv=pv1&amp;pv1=vt:p,u:a5d6a02a-4fea-4c35-8794-49584fbfaf06,cf:47.36,dh:f,st:f,p:0.07139,t:-0.97708&amp;p=hanssachsgymnasium">https://3dcad.websharecloud.com/?v=pv&amp;t=p:default,c:panoramaview,h:f,m:t&amp;pv=pv1&amp;pv1=vt:p,u:a5d6a02a-4fea-4c35-8794-49584fbfaf06,cf:47.36,dh:f,st:f,p:0.07139,t:-0.97708&amp;p=hanssachsgymnasium</a>that's my old school, check the floor
+ MSmits: hey guys, does anyone know how to use a random seed from all positions in cg benchmark?
+ Hjax: so the game, as i understand it, is about cutting off your opponents income and preventing your opponent from doing the same 
+ Hjax: the fact that you can make a big path of soldiers in a single turn is pretty unique 
+ Einwickler: eulerscheZahl ohhh dear :scream:
+ eulerscheZahl: took me years to notice :D
+ MSmits: Hjax how do you mean unique?
+ eulerscheZahl: to be fair the floor is way older than 1930
+ Hjax: you can spawn a soldier next to the soldier you placed on this turn 
+ Astrobytes: wow, oh no :D
+ Hjax: ive never seen a game like that before 
+ MSmits: oh right
+ MSmits: it's a pretty cool part of the game though
+ MSmits: it's not just used to finish the game either
+ eulerscheZahl: chain kills were a bit too powerful IMO
+ MSmits: you can also use it to cut off territory
+ Hjax: yeah its used for those big territory cuts people do 
+ MSmits: yeah
+ Astrobytes: The whole game was cool, but yeah the chain kill meta was a bit annoying
+ eulerscheZahl: still among my favorites
+ MSmits: it puts a timer on the game, I like it
+ MSmits: if you let your opponent amass too much gold, you're dead
+ Hjax: it does look fun, i expect to find time to work on it 
+ Astrobytes: Yeah, was a really enjoyable contest
+ Hjax: ive been busy some days and lazy the others so far :D 
+ Astrobytes: lol
+ Astrobytes: I'm still lazy to rewrite my contest code, I already updated it a while ago
+ MSmits: never redone any contest yet
+ Astrobytes: yeah but you're 1337
+ MSmits:&#160;:)
+ MSmits: I want to redo kutulu most of all
+ MSmits: because i used c++ and my eval is crap
+ MSmits: used C# i mean
+ Aliot2000: hi baby
+ Astrobytes: You just used sanity right?
+ KiwiTae: did my sim in python for kutulu &gt;,&lt; terrible buggy 
+ MSmits: yeah
+ MSmits: i was afraid to go back right after contest
+ MSmits: because if i improve it i might have been 1 at that point =/
+ MSmits: that would have been frustrating
+ MSmits: so better avoid it :P
+ KiwiTae: :joy: MSmits trouble of the gods 
+ MSmits: yeah
+ Astrobytes: Top 25 problems
+ MSmits: hey, Astrobytes you coded a few mcts bots right?
+ Astrobytes: Sure
+ MSmits: did you ever do the 1 child continued expansion?
+ Shadowtick: I made a song but I dont know what to title it
+ MSmits: i am trying this in bandas, if 3 of the children are immediately solved, keep expanding
+ MSmits: saves you from doing the whole selection thing again
+ Astrobytes: No I don't believe I've tried that, sounds worthwhile
+ MSmits: for some games yeah
+ Shadowtick: :3 anyways I am gonna go do some puzzles or play doom
+ MSmits: in oware it is nice, especially if you have a endgame db, so if all moves except one go below 7 seeds, keep going with the one move
+ MSmits: unless you found a win ofc
+ MSmits: puzzles or doom...
+ MSmits: or doompuzzles
+ Astrobytes: makes sense, seems much more efficient
+ MSmits: if i search doom, i get 6 users named doom, but no puzzle
+ MSmits:&#160;:(
+ Shadowtick: no I meant the game
+ MSmits: we got this
+ Astrobytes: Now we need a Doom multi
+ Shadowtick: huh?
+ MSmits: we got cultist wars :P
+ Astrobytes: Nothing, just ignore us
+ Shadowtick: MSmits If you have google sites I can give you the embed code for doom
+ MSmits: no need
+ MSmits: but thanks
+ MSmits: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=x-VTfcmrLEQ">https://www.youtube.com/watch?v=x-VTfcmrLEQ</a>
+ Shadowtick: welp they blocked doom
+ MSmits: this is seems great
+ MSmits: for teaching search algo's. They got one for DFS too
+ Shadowtick:&#160;;-; I cant play it on my google site anymore
+ Astrobytes: lol, nice MSmits
+ Aliot2000: hi dude
+ Astrobytes: The music really worked haha. Great visualisation though
+ Astrobytes: Explains the whole thing in one go
+ Astrobytes: DFS one is just as good
+ MSmits: only thing it lacks is a pathfinding goal. But I guess this is fine. I can use it in the course and say things like: "Say our goal is node 75, which algorithm finds the goal fastest"
+ Astrobytes: Well yeah, you can adapt to your needs. But this demonstrates the algorithm prefectly
+ Astrobytes: *perfectly
+ MSmits: yeah, as a video is perfect
+ MSmits: also nice would be an animation with settings that you can control
+ MSmits: like the physics apps here: <a rel="nofollow" class="external free" href="https://phet.colorado.edu/">https://phet.colorado.edu/</a>
+ Astrobytes: You could do that in C# or python yourself
+ MSmits: sure, but might be a lot of work
+ MSmits: a
+ MSmits: also the visual part is hard
+ MSmits: for me anyway
+ Astrobytes: doesn't need to be fancy
+ MSmits: it helps if it is though, when teaching
+ MSmits: or at least looks minimally good
+ Astrobytes: there are graph visualisation libs 
+ MSmits: hmm
+ Astrobytes: python man, import universe
+ MSmits: true&#160;:)
+ MSmits: I think I am going to go with the video and improve the course later
+ MSmits: need to get something functional first
+ MSmits: I am starting in 3 weeks
+ Astrobytes: sure, you can work on it as a small project
+ Astrobytes: The vid will be great
+ MSmits: I am thinking of maybe an unplugged activity where they have to apply the algorithm to a map on paper
+ Astrobytes: I would definitely recommend that
+ Astrobytes: It's a great exercise, it solidifies the process when you work it by hand
+ MSmits: yeah
+ Hjax: @MSmits have you seen this? <a rel="nofollow" class="external free" href="https://qiao.github.io/PathFinding.js/visual/">https://qiao.github.io/PathFinding.js/visual/</a>
+ Astrobytes: ooh yeah, totally forgot about that, good one
+ MSmits: thats great Hjax, thanks&#160;:)
+ Astrobytes: that'd work great
+ Shadowtick: can someone tell me if my song is bad?
+ Shadowtick: because I need to know if I should quit while I am just starting
+ KiwiTae: Shadowtick sure
+ KiwiTae: share 
+ Majeck: Sure
+ Shadowtick: I sent the link to you two
+ professional_dumbass: me too!
+ Bouuuuuh: yes share the link
+ Shadowtick: ok but I dont do it in here
+ Astrobytes: why not
+ Shadowtick: because I feel like i would be advertising more and getting kicked for it
+ Astrobytes: hardly advertising if you want an opinion on it
+ eulerscheZahl: KiwiTae link your youtube channel to counter the advertising
+ Bouuuuuh: this is your first song&#160;?
+ Astrobytes: what style is it?
+ <b>**eulerscheZahl is italic</b></p><p><img src="/a/23052489191875" /> Astrobytes: :smirk:
+ KiwiTae: :joy:
+ Astrobytes: Someone give me the link, I'm intrigued
+ Bouuuuuh: me to please
+ KiwiTae: eulerscheZahl let me stream somth first hehe
+ Astrobytes: Taking free jazz to new levels
+ KiwiTae: eulerscheZahl <a rel="nofollow" class="external free" href="https://www.facebook.com/1310547387/videos/pcb.10224137915378209/10224137915178204">https://www.facebook.com/1310547387/videos/pcb.10224137915378209/10224137915178204</a> here haha
+ Shadowtick: oh I dont know what kind of genre or style it is
+ Shadowtick: it's my first time
+ Astrobytes: Random. Chromatic tone clusters.
+ Majeck: I'd recommend getting a rhythm down and maybe adding chords or something to counter the melody
+ Shadowtick: well it is my first song so I didn't know how to do it
+ Shadowtick: and I put one of my songs on my latest youtube video
+ Bouuuuuh: you don't have any music theory&#160;? 
+ Astrobytes: I would strongly recommend learning how to play something first
+ Majeck: As always the internet is full of help for whatever you want to learn
+ Bouuuuuh: you can find many ressources on youtube
+ Shadowtick: well I was using that website to make the song
+ Shadowtick: but the song on my dbd/dead by daylight video I uploaded is different
+ BiMathAx: who is Top 1&#160;?
+ Hjax: top 1 on this site? either euler or royale depending on the day 
+ Hjax: currently euler 
+ BiMathAx: on this site (i want to be sick&#160;:-) )
+ emvebence: hi
+ Pitorendo: Na csá
+ emvebence: Csaaaaaaaaaaaaaa
+ emvebence: Halo
+ Lun4rIum: Hi everyone&#160;! Check my contribution ^^&#160;: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/5564aafe65d5fdf713895c668ead67421c97">https://www.codingame.com/contribute/view/5564aafe65d5fdf713895c668ead67421c97</a>
+ jacek: meh, now i see checkers lack good statement
+ shiplu: heya
+ emvebence: sad
+ emvebence: HI e
+ jacek: how may we help you, Sir/Madam
+ Lun4rIum: Look my contribution sir
+ BiMathAx: Hello, I have do a new contribution but I don't have the place to the english test... How to have the 2 explanation (French and English with the limitation. Please
+ jacek: Lun4rIum i think you cant change from puzzle to clash. youd need to make new contribution
+ Lun4rIum: Oof
+ Zenoscave: shame
+ Lun4rIum: I need to turn on my pc to copy everything in a new CoC project
+ BiMathAx: Test my clash please&#160;: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/55526ca30089ca8ac0f61c126457a59ef39c">https://www.codingame.com/contribute/view/55526ca30089ca8ac0f61c126457a59ef39c</a>
+ BiMathAx: ok... dommage
+ Wizard_Aesthetics: How do you guys recommend learning C#?
+ ZefusToutCourt: How i made * all around à Sorel un a print 
+ ZefusToutCourt: worls* not Sorel tf  si that
+ ZefusToutCourt: is*
+ ZefusToutCourt: like
+ ZefusToutCourt: *******
+ ZefusToutCourt: * Hey *
+ ZefusToutCourt: *******
+ emvebence: hey
+ AntiSquid: hey
+ Zenoscave: hey
+ jacek: c-c-c-combo breaker
+ Zenoscave: yw jacek
+ AntiSquid: spoilsport&#160;!
+ jacek: party pooper?
+ kill-code: nah
+ kill-code: all of u
+ jacek: i see, so pm of external client makes the number tabs
+ Allis: But they're always empty?
+ kill-code: right
+ jacek: kill code pmed me and im conversing
+ kill-code: wow
+ jacek: though tab is still some number
+ kill-code: nope
+ kill-code: this shit is hard
+ kill-code: <img src="https&#58;//mail.google.com/mail/u/0?ui=2&amp;ik=a322ca2aa4&amp;attid=0.1&amp;permmsgid=msg-a:r7409525609710122407&amp;th=17521fd6a6d61e3c&amp;view=fimg&amp;sz=s0-l75-ft&amp;attbid=ANGjdJ8QJCAF-6Bo5-7Ipnt_6ad5peTt06Z6Y-ide9mNfXfhkIHHuPrzXdAi_VeEnyo4CBCzS1nUc_GD6ZYd5R_E8BwwkKxtoPNIpR_JMiEKdiVH7fKSxLs3WxNp618&amp;disp=emb&amp;realattid=ii_kg7yixg70" alt="image.png" />
+ kill-code: click this\
+ jacek: some hacking stuff?
+ kill-code: nope
+ kill-code: just click
+ kill-code: <img src="https&#58;//mail.google.com/mail/u/0?ui=2&amp;ik=a322ca2aa4&amp;attid=0.1&amp;permmsgid=msg-a:r7409525609710122407&amp;th=17521fd6a6d61e3c&amp;view=fimg&amp;sz=s0-l75-ft&amp;attbid=ANGjdJ8QJCAF-6Bo5-7Ipnt_6ad5peTt06Z6Y-ide9mNfXfhkIHHuPrzXdAi_VeEnyo4CBCzS1nUc_GD6ZYd5R_E8BwwkKxtoPNIpR_JMiEKdiVH7fKSxLs3WxNp618&amp;disp=emb&amp;realattid=ii_kg7yixg70" alt="image.png" />
+ OmerDrk: I cant f---ing solve Rectangle Partition puzzle
+ Zenoscave: why are you trying to make me spam email kill-code
+ kill-code: no wrong thing
+ kill-code: <img src="https&#58;//mail.google.com/mail/u/0?ui=2&amp;ik=a322ca2aa4&amp;attid=0.1&amp;permmsgid=msg-a:r7409525609710122407&amp;th=17521fd6a6d61e3c&amp;view=fimg&amp;sz=s0-l75-ft&amp;attbid=ANGjdJ8QJCAF-6Bo5-7Ipnt_6ad5peTt06Z6Y-ide9mNfXfhkIHHuPrzXdAi_VeEnyo4CBCzS1nUc_GD6ZYd5R_E8BwwkKxtoPNIpR_JMiEKdiVH7fKSxLs3WxNp618&amp;disp=emb&amp;realattid=ii_kg7yixg70" alt="image.png" />
+ kill-code: nvm 
+ Zenoscave: please stop putting email links in the chat
+ kill-code: wrong thing
+ jacek: oO
+ Zenoscave: You can't embed images in chat btw
+ kill-code: thank
+ kill-code: s
+ kill-code: this is not working
+ kill-code: :rage:
+ kill-code: <a rel="nofollow" class="external free" href="https://mail.google.com/mail/u/0?ui=2&amp;ik=a322ca2aa4&amp;attid=0.1&amp;permmsgid=msg-a:r7409525609710122407&amp;th=17521fd6a6d61e3c&amp;view=fimg&amp;sz=s0-l75-ft&amp;attbid=ANGjdJ8QJCAF-6Bo5-7Ipnt_6ad5peTt06Z6Y-ide9mNfXfhkIHHuPrzXdAi_VeEnyo4CBCzS1nUc_GD6ZYd5R_E8BwwkKxtoPNIpR_JMiEKdiVH7fKSxLs3WxNp618&amp;disp=emb&amp;realattid=ii_kg7yixg70">https://mail.google.com/mail/u/0?ui=2&amp;ik=a322ca2aa4&amp;attid=0.1&amp;permmsgid=msg-a:r7409525609710122407&amp;th=17521fd6a6d61e3c&amp;view=fimg&amp;sz=s0-l75-ft&amp;attbid=ANGjdJ8QJCAF-6Bo5-7Ipnt_6ad5peTt06Z6Y-ide9mNfXfhkIHHuPrzXdAi_VeEnyo4CBCzS1nUc_GD6ZYd5R_E8BwwkKxtoPNIpR_JMiEKdiVH7fKSxLs3WxNp618&amp;disp=emb&amp;realattid=ii_kg7yixg70</a>
+ jacek: are you trying to post image?
+ SzBence: what is that?
+ jacek: x.X
+ kill-code: can yall see it tho
+ Zenoscave: kill-code you can't post images. it just doesn't work in chant
+ Zenoscave: post a public image link not an email one
+ kill-code: f****
+ Astrobytes: an imgur link or something would work. Just stop posting links like that please
+ RustyRobot_c9c7: ight
+ kill-code: whtt
+ kill-code: whya\
+ RustyRobot_c9c7: nm
+ RustyRobot_c9c7: nvm
+ Astrobytes: Right. Now stop talking nonsense laddie and do something productive
+ kiil-code: hi
+ kiil-code: like whta
+ Zenoscave: Astro just ban. He's doing similar in PM
+ Astrobytes: K. Thought as much.
+ Astrobytes: He been kicked yet?
+ Zenoscave: Don't know how to tell
+ Zenoscave: So Probably not
+ Zenoscave: give him fair warning ig.
+ Astrobytes: kill-code: stop your crap or you'll get a kick, then a ban if you continue
+ DejaVu_081: hi
+ DejaVu_081: (╯°□°）╯︵ ┻━┻
+ AntiSquid: he randomly pmed me
+ Pitorendo: Hey
+ AntiSquid: Hey
+ Majeck: Weird question: Are the banners and art that appear in Clash of Code and the Optimization leaderboard drawn by CG employees?
+ Majeck: The art that appears as if out of a Marvel comic or something
+ MadKnight: no i think they paid some guy
+ Majeck: Oh, but they are like specifically donde for Codingame?
+ MadKnight: yea they paid him to draw these
+ Majeck: *done/made
+ magaiti: Donde esta la biblioteca
+ Zenoscave: Donde esta mi pantelones. No mas cervecas por favor
+ AntiSquid: anyone here wants to join a CTF&#160;?
+ Zenoscave: when Anti
+ AntiSquid: tomorrow
+ Zenoscave: Link?
+ AntiSquid: one sec
+ AntiSquid: <a rel="nofollow" class="external free" href="https://blog.cyberhacktics.com/hacktober-2020/">https://blog.cyberhacktics.com/hacktober-2020/</a>
+ Zenoscave: Sure pm me
+ Yanis.Gaultier: hello everyone&#160;:) i'm new there
+ programistination: holy moly number 9 is here
+ programistination: xD
+ Yanis.Gaultier:&#160;??
+ programistination: I gotcha you're new here
+ Yanis.Gaultier: oh i'm the 9th&#160;? 
+ programistination: lmao
+ AntiSquid: hi news
+ AntiSquid: newies&#160;? 
+ MadKnight: newbies*
+ petr_step: I am new
+ AntiSquid: awesome, welcome to CG new!
+ Yanis.Gaultier: i'm new too
+ PatrickMcGinnisII: hacktober, kewl... looks like you need a little php exploitation there
+ Yanis.Gaultier: since 30 mn
+ PatrickMcGinnisII: a 'lil SQL, a crawler, some JS injection
+ PatrickMcGinnisII: then some Kali, some router analytics, not bad
+ MSmits: yay finally made unicode work. What a pain
+ MSmits: my size 3 bandas endgame book: 
+ MSmits: 鱝䓱
+ MSmits: size 4: 鱝䓱ᦹ햫㮋䛗ᆵᦹ햫ࡉ
+ MSmits: not sure if those squares will work, might be invalid
+ jacek: squares will work, you just cant print them
+ MSmits: ok, but if i paste them into the IDE they will be recognized?
+ jacek: yes
+ MSmits: cool thanks
+ MSmits: this is way easier than I thought it would be
+ MSmits: well the encoding
+ MSmits: not the c++ syntax of it
+ MSmits: whoever designed that wstring/wchar stuff should be shot :P
+ jacek: hm?
+ MSmits: i tried so many different ways to get a wchar from a number and then add it to a wstring
+ MSmits: I ended up doing:
+ MSmits: wstring output = L"";wstring b = L"a";b[0] += encodedNumber;output += b;
+ MSmits: could only add numbers to the wstrings accessed as arrays, nothing else worked for me
+ MSmits: there might be an easier way I missed of course
+ jacek: why adding number?
+ jacek: you want int16 number into wchar?
+ MSmits: well that, but also add the wchar to the wstring i am building
+ MSmits: first few characters of unicode seemed like they wouldnt work so i decided to start at "a"
+ MSmits: I am storing in ternary anyway, so i can store 10 values in a unicode char, using most of the range
+ MSmits: 1* first + 3* second + 9* third etc. up to 10
+ MSmits: makes a number below 65k so it fits in unicode
+ MSmits: when decoding i just subtract 'a' and then use powers of 3 to get the values back
+ MSmits: basically this way, I can store maybe 80k or so unicode characters holding 800k loss/win/draw values for my bandas endgames
+ MSmits: using symmetry, a few million even
+ jacek: how does improve your winrate
+ MSmits: i am testing that now. I currently have a size 9 endgame book, so max is 3x3 
+ MSmits: book vs book as 1p gives me 70%
+ MSmits: no book vs book as 1p gives me 49%
+ MSmits: p1 has an advantage of 70-30 in bandas
+ MSmits: kind of like uttt
+ MSmits: so it's pretty damned strong to have an endgame book
+ MSmits: and I'd like it to be bigger&#160;:)
+ MSmits: up to 12 is possible
+ MSmits: 13 doesnt exist and 14 is way too big to fit
+ ImaNoob: what is the best tips to learn python
+ MSmits: <a rel="nofollow" class="external free" href="https://www.w3schools.com/python/">https://www.w3schools.com/python/</a>
+ ImaNoob: thx
+ pluieciel: codecombat:smile:
+ ImaNoob: ok
+ ImaNoob: I know about w3shools
+ ImaNoob: thanks for the tips
+ dance546: hi
+ dance546: i don know how to code can you guys help me plz
+ ImaNoob: ok
+ ImaNoob: codecombat is the best to
+ ImaNoob: or you can screach on yt
+ dance546: :smiley:
+ AntiSquid: nah nobody can help you, everyone here was born with coding skills
+ LastRick: I just come here for the chat. Didn't even know this was a coding site.
+ Laminator: typing is a computer skill
+ Laminator: osu is actually pretty useful for mouse usage. I really should get better at navigating my cursor
+ Hjax: osu being good for mouse accuracy is a lie they tell you to get you addicted 
+ JohnIsTaken: e
+ hiljusti: π
+ Laminator: I mean it literally trains you to move the mouse more quickly and accurately. 
+ iCaNhaCkBrO69: niger
+ Laminator: usa
+ LinhT.Nguyen: lol
+ nerdboi: gamer
+ GameBot: Hi everyone
+ doduyphuong: :smiley:
+ RenzoT: Hi, <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/e96b503e-41b4-4a2a-8748-15627a87cdab">http://chat.codingame.com/pastebin/e96b503e-41b4-4a2a-8748-15627a87cdab</a>
+ GameBot: what is funny?
+ GameBot: how did you solve the Descent code?
+ KiwiTae: lol
+ KiwiTae: GameBot that puzzle is quite hard have you try solving Onboarding first?
+ GameBot: Not yet
+ KiwiTae: tough
+ RenzoT: Hi, <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/d4504985-9daf-43cc-9432-456e876bdc5f">http://chat.codingame.com/pastebin/d4504985-9daf-43cc-9432-456e876bdc5f</a>
+ GameBot: How to shoot in the game? is print function a way to shoot?
+ KiwiTae: which game? read the rules its explained
+ GameBot: Descent
+ GameBot: I am sorry. I am new and I don't know where the rules are.
+ KiwiTae: if u open ide u see them 
+ GameBot: The comments?

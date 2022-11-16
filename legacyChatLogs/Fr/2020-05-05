@@ -1,0 +1,982 @@
+ Stilgart: AutomatonNN: fix ta agenda et tu auras le temps&#160;;)
+ AutomatonNN: oui j'ai vu que dans le contest de CG je suis pas convaincu que c'est pas trop compliqué
+ dbdr: stash? rebase?&#160;;)
+ BlaiseEbuth: C'est plus dans l'idée: T'es dans l'ide tu fais des push/tune, tu peux renommer les push pour t'y retrouver. C'est pas du versioning
+ Alshock: Je fais quoi entre faire un MCTS qui marche correctement mais je sais pas ce qu'il me manque, ou tenter un NN foireux qui apprend par AG&#160;?
+ Alshock: Ouais j'en suis rendu à un point de CGPlaysAlshock parce qu'il sait plus trop ce qu'il fait
+ Alshock: Bientôt CG va mettre en place des polls rien que pour moi :P
+ Zorg1: ils sont étranges tes choix
+ Alshock: C'est pas sur les mêmes puzzles hein
+ Alshock: oups, j'ai une demi-heure de retard
+ Zorg1: tkt y a pas une activité frénétique sur le chat ...&#160;;-)
+ Alshock: je vais tenter le NN foireux :P
+ Alshock: quitte à se vautrer une fois de plus autant faire ça en beauté
+ dwarfie: automatonNN , fait gaffe , va y avoir de la concurrence&#160;;)
+ AutomatonNN: oui j'ai pas trop le meme probleme
+ Alshock: Ouais dis-le de suite que t'es mieux branlé
+ dwarfie: AutomatonNN ... qu'as tu a repondre a ca&#160;?
+ AutomatonNN: poser un contest sur ce contest je suis pas sur qu'il y ait beaucoup de temps de contest de contest 
+ Alshock: Alors là, dire que je vais réussir à faire moins bien... T_T
+ leojean890: cgenhancer ça parait cool avec votre description ;P
+ dbdr: \o
+ JBM: o/
+ pol34: Bonjour!
+ pol34: Est ce que quelqu'un aurait déjà fait le problème du labyrinthe?
+ dwarfie: pol34 ... a reponse est forcement oui ... par vrai AutomatonNN&#160;?
+ AutomatonNN: ou quand même pas trop
+ pol34: j'ai juste un petit problème de compréhension qui me bloque dans mon raisonnement
+ pol34: est ce que tu te souviens de la lignerow qui est récupérée à chaque tour de jeu&#160;? ^^"
+ dwarfie: deja c'est lequel ... y'en a plusieurs
+ pol34: il s'appelle The Labyrinth 
+ pol34: avec un certain Kirk :p
+ dwarfie: ah ouais ... celui que j'ai eu en contest ... oula ca remonte loin ca :D
+ dwarfie: donc oui... a chaque tour on recoit des lignes ...
+ pol34: Oui j'ai pris un au hasard :p 
+ pol34: mais le truc c'est que je pensais que les recus seraient maj à chaque tout de jeu (quand Kirk avance il a toujoours une visibilité d'un carré de 5*5 autour de lui
+ pol34: les lignes recu*
+ dwarfie: non , a chaque tour on a la carte complete mise a jour
+ pol34: ah bon?
+ pol34: je ne trouve pas devariable représenant la carte 
+ dbdr: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/b04e0a28-652f-4b7f-9d28-b61e96878536">http://chat.codingame.com/pastebin/b04e0a28-652f-4b7f-9d28-b61e96878536</a>
+ dbdr: qqn est inspiré pour un meilleur nom de type/enum?
+ Tuskk: tes enums par convention doive se nommer de la façon suivante&#160;: EnumType
+ Tuskk: En gros ici ça serait WinningType
+ dbdr: Ça dépend de tes conventions. Dans le contexte, Type c'est redundant, c'est evident que c'est un type.
+ Tuskk: Et pourtant
+ Tuskk: C'est l'une des méthode les plus répendues :D
+ dbdr: oui, c'est souvent bien d'utiliser la convention, mais la convention dépend fortement du langage, par exemple
+ dbdr: et aussi, si on applique toujours les conventions en aveugle, on les améliore jamais
+ dbdr: la notation hongroise est passée de mode je crois&#160;:)
+ dbdr: ce talk est pas mal sur ce sujet: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=o9pEzgHorH0">https://www.youtube.com/watch?v=o9pEzgHorH0</a>
+ Stilgart: data Issue = Won | Loss | Draw
+ Stilgart: type Info = Maybe Issue
+ Stilgart: Win* (pour être consistent)
+ Magus: quand tu cherches sur google un problème
+ Magus: tu trouves un stackoverflow
+ Magus: et c'est toi qui a posé la question y'a 6 mois
+ Magus:&#160;:(
+ dwarfie: caviar , courgette et cassoulet .. ca le fait pas&#160;?&#160;;)
+ Stilgart: mes condoléances&#160;:(
+ Magus: ah non, y'a 2 mois
+ Magus: ma mémoire est magnifique dis donc
+ Stilgart: choucroute plutôt... sinon faut taper 3 lettres pour la complétion&#160;:)
+ Stilgart: Magus: ça prouve surtout que SO ne t'a pas apporté de réponse forte
+ dbdr: Stilgart: merci. je veux gerer plus de 2 joueurs, d'ou le champ winner
+ Magus: si si j'ai eu une réponse
+ Magus: mais je l'avais oubliée
+ dwarfie: ouais ... mais si j'avais mis choucroutte pour la victoire on m'aurait taxer de preferences germaniques :D
+ Stilgart: Maybe Int, dans ce cas
+ Stilgart: pour stocker le winner
+ dbdr: sinon, Info ça donne pas bcp de context
+ Stilgart: voire Maybe (Maybe Int)
+ Stilgart: et oui, change le nom Info
+ dbdr: j'en suis arrivé à MatchResult
+ Stilgart: (il n'y a pas de choix fixe sur celui-là chez moi)
+ dbdr: Maybe, ça a le probleme dont JBM parlait, je crois
+ Stilgart: j'ai souvent GameResult
+ Stilgart: ou juste Result
+ dbdr: c'était quoi le non? boolean degenerence, un truc comme ça
+ Stilgart: ça sonne terme technique, mais je ne saurais pas dire si s'en est un
+ dbdr: effectivement, Unfinished c'est equivalent à Maybe, mais le nom donne de la sémantique. apres t'as plus les fonctions standard dessus, donc c'est un compromis
+ Stilgart: faudrait qu'ils inventent les typeclasses chez rust, ça serait pas mal
+ Stilgart: :sifflote:
+ dbdr: on les a
+ dbdr: ça s'appelle Trait
+ dbdr: c'est Higher kinded polymorphism qui manque, effectivement
+ Stilgart: bah écoute, un Unfinished qui est un Maybe sur lequel on peut pas faire des trucs de Maybe... ça laisse réveur hein
+ dbdr: on peut, faut juste dire qu'on peut
+ dbdr: ce serait pareil en haskell il me semble
+ dbdr: si tu veux ton nom à toi
+ dbdr: je pourrais utiliser Option sinon, c'est exactement Maybe
+ dbdr: Option&lt;T&gt; = None | Some&lt;T&gt;
+ dbdr: avec toutes les operation d'ordre superieur dans la stdlib
+ Stilgart: bah, Option c'est Option... je vois pas l'intérêt de le renommer
+ Stilgart: (note que type en Haskell c'est un alias)
+ Stilgart: (contrairement à newtype qui crée un nouveau nom)
+ dbdr: l'interet c'est de donner l'intention
+ dbdr: while s.status() == MatchResult::Unfinished {...}
+ Stilgart: case matchResult of Nothing -&gt; ...
+ Stilgart: ça me parait tout aussi clair
+ dbdr: pas pour moi
+ dbdr: pas de résultat, mais pourquoi?
+ dbdr: unfinished çá dit un truc en plus
+ Stilgart: tu prends trop le relecteur de ton code pour un neuneu là
+ Stilgart: amha
+ Stilgart: un commentaire sur la déclaration de MatchResult suffit amplement
+ dbdr: non, peut-etre que c'est Nothing parce que tu attends le résultat du serveur CG, par exemple
+ dbdr: apres je suis conscient que c'est du perfectionisme, Maybe ça fait le job aussi
+ dbdr: ah, j'ai retrouvé le truc de JBM, c'est "bool-blindness"
+ Stilgart: et moi je suis d'accord que sur un Either je préfère parfois mettre mes propres noms... mais sur un Maybe je l'ai jamais fait
+ dbdr: éviter la bool blindness c'est mettre ses noms sur True et False&#160;:)
+ Stilgart: perso, il faudra que je mette des noms sur min et max plutôt
+ dbdr: let my_min = maxlet my_max = min?
+ JBM: YT qui commence a me passer de la pub en tcheque... wtf
+ dbdr: c'est ta fake company JBM? :D
+ JBM: faut croire
+ JBM: je pensais pourtant avoir mis un email allemand d'un provider britannique representant une societe russe
+ JBM: je vois pas de tchequie la-dedans
+ dbdr: the real wtf: youtube a des pubs??
+ JBM: ah tu connais pas encore youtube ok
+ dbdr: les suisses sont forts pour faire des tchèques, c'est bien connu
+ dbdr: ben si
+ JBM: je sais pas si y'a une fonctionalite "historique des pubs"
+ dbdr: je vois juste jamais de pubs
+ JBM: heureux homme
+ dbdr: t'es serieux?
+ JBM: oui
+ dbdr: ben, <a rel="nofollow" class="external free" href="https://github.com/gorhill/uBlock">https://github.com/gorhill/uBlock</a>
+ JBM: oui mais non
+ JBM: j'ai N chaines avec contenu
+ JBM: c'est contre les terms of use
+ JBM: je peux jouer, mais pas trop
+ Bob: comment es ta term of use o/
+ JBM: (et j'ai notablement moins de pub qu'un compte anonyme)
+ JBM: ameliore ta blackmail bob \o
+ dbdr: cad? en tant que créateur, t'es pas censé avoir un bloqueur activé?
+ JBM: en gros
+ JBM: me souviens plus de la formulation exacte
+ dbdr: forcer les gens à voir des choses quand ils ont rien demandé, c'est d'une violence...
+ JBM: je suis meme pas sur que ce soit specifique aux createurs
+ JBM: c'est juste que eux ont qqch a y perdre
+ dbdr: oui
+ Bob: dbdr&#160;: en même temps, rien n'est gratos, faut bien qu'ils fassent de la thune d'une manière ou d'une autre
+ JBM: j'ai moins de complexes depuis qu'ils ont decide que j'etais trop petit pour avoir droit a 1 centime
+ JBM: mais j'ai quand meme beaucoup de contenu qui manquerait a d'autres
+ Bob: axiome&#160;: si c'est gratuit, c'est toi le produit
+ dbdr: Bob: tout a fait. je suis tres content de verser les qqd euros correspondants
+ dbdr: qui sont sans doute bcp plus que ce qu'ils toucheraient de mes visionnages
+ Bob: je redécouvre l'existence de pubs sur youtube quand je vois les filles qui regardent des trucs sur la tablette
+ Bob: un vieil ipad sur lequel on n'a pas de bloqueur
+ Bob: y a des pubs de merde toutes les 4-5 minutes de vidéo :cat_scream:
+ JBM: toutes les 5 minutes de video de cat?
+ dbdr: video de chats, pub de bouffe pour les chats&#160;:)
+ JBM: Map.Foldable.minumum: called with empty map
+ JBM: se dire "j'etais vraiment bourre quand j'ai tape ca"
+ JBM: "ah non c'est la stdlib"
+ JBM: "bon, allons proposer un patch"
+ JBM: "c'est deja bon"
+ JBM: "j'ai bu ou quoi?"
+ JBM: "git clone, bisect"
+ JBM: fixed en 2016
+ JBM: le Haskell de code jam est VRAIMENT vieux
+ dbdr: lol
+ dbdr: meme CG est plus rapide
+ dbdr: en fait je crois que Stilgart a raison sur le fait de représenter sur deux niveaux. MatchResult qui est représente un match terminé, et MatchStatus = Option&lt;MatchResult&gt;
+ JBM: meme CG est plus rapide
+ dbdr: histoire que les états invalide soient pas représentables
+ JBM: ca fait bizarre de dire ca
+ dbdr: je sais :D
+ JBM: surtout quand ils annoncent "on a upgrade tous les langages sauf haskell"
+ dbdr: qu'on a downgrade?&#160;;)
+ JBM: erf
+ JBM: pas quand je bois mon cafe on avait dit!
+ dbdr: :innocent:
+ dbdr: haskell98 c'est bien aussi
+ dbdr: tu fais bien du C79
+ JBM: quand il faut
+ JBM: bon, c'est pour quand ton stream rust?
+ JBM: j'ai vraiment envie de m'y mettre, mais "pas le temps"
+ JBM: voir un sujet CG se developper me ferait le plus grand bien
+ dbdr: ça fait deux fois aujourd'hui
+ JBM: ah?
+ JBM: euh je veux dire
+ JBM: c'est Ton Destin
+ dbdr: :D
+ dbdr: il faut une bécanne potable pour streamer?
+ JBM: si t'es sous wayland grave
+ JBM: sinon non
+ dbdr: OpenGL renderer string: Mesa DRI Intel(R) HD Graphics 5500 (Broadwell GT2) 
+ dbdr: bogomips	: 5187.78
+ JBM: installe obs et fais 3 tests de bande passante, tu sauras tout de suite
+ dbdr: ah oui, la je suis dans la foret, ça coupe de temps en temps
+ dbdr: ça peut gener aussi :D
+ JBM: j'ai connue pire
+ dbdr: c'est mieux de tout faire dans une VM? histoire d'avoir un environement propre
+ JBM: ca depend
+ JBM: tu joues entre "environnement connu" et "environnement legacy"
+ [CG]Nonofr: Oh, on dirait qu'il y a un nouveau système pour mettre des keybindings custom dans l'ide&#160;!&#160;:)
+ JBM: y'a un binding pour reparer le fullscreen?
+ JBM: ou desactiver l'autocomplete?
+ dbdr: pourquoi legacy?
+ JBM: t'as tout le poids de tes decisions anterieures, auxquelles t'es habitue mias t'as pas remis en question depuis longtemps
+ [CG]Nonofr: Tant de négativité&#160;:(
+ [CG]Nonofr: Quel est le problème avec le fullscreen&#160;?
+ dbdr: je suis pas sur de suivre
+ JBM: negativite? non non
+ JBM: on est ravis de voir le temps de dev aller vers de la fonctionalite si primordiale voyons
+ JBM: le fullscreen--ben je sais pas, essie-le sous firefoz quoi
+ [CG]Nonofr: Tu parle du bouton en haut à droite de l'éditeur&#160;?
+ [CG]Nonofr: parles*
+ JBM: oui
+ [CG]Nonofr: alors je vais avoir besoin d'un peu plus de détails je crois
+ Bob: marche très bien ici l'éditeur full screen
+ JBM: jte fais un screenshot
+ dbdr: je crois que la plupart des retours sur le nouvel éditeur était positive, et c'est sans doute important pour la majorité des casual users
+ [CG]Nonofr: Oh tant d'amour&#160;!
+ JBM: <a rel="nofollow" class="external free" href="https://imgur.com/a/UwsCKVB">https://imgur.com/a/UwsCKVB</a>
+ 351062: Ecoutez pas JBM, il est aigri
+ JBM: tiens un neumann sous pidgin
+ Neumann: En personne
+ [CG]Nonofr: quelle est la version de FF&#160;?
+ JBM: 75.0
+ ThomasNicoullaud: le problème c'est Haskell
+ [CG]Nonofr: alors la... tu souffres d'une maladie orpheline on dirait
+ JBM: Comme Par Hasard
+ Neumann: JBM was the problem
+ [CG]Nonofr: ça m'intéresse d'arriver à reproduire par contre
+ dbdr: level 43, sur Onboarding
+ dbdr: logique&#160;:)
+ JBM: ben pour le contexte
+ JBM: j'ai voulu reproduire avec mon onboarding en C sans point-virgule
+ JBM: mais ca le faisait pas
+ JBM: j'ai change le lang a un truc raisonnable
+ JBM: et paf dedans
+ [CG]Nonofr: Ahah
+ [CG]Nonofr: en effet je reproduit en haskell&#160;!
+ dbdr: arf
+ JBM: donc vous avez code le bug juste pour nous?
+ JBM: trop sympa
+ [CG]Nonofr: bon je vais fix le bug
+ ThomasNicoullaud: mes trolls ne sont même plus des trolls
+ dbdr: j'ai failli le dire comme troll
+ [CG]Nonofr: le plus simple est de supprimer haskell je pense
+ JBM: je pense aussi
+ JBM: vu l'absence de support de la plateforme
+ dbdr: downgrade!
+ JBM: ca donnerait une image plus adaptee
+ [CG]Nonofr: et sinon, c'est quoi le soucis avec la completion&#160;?
+ JBM: on pourrait supprimer les users aussi
+ JBM: ben elle existe
+ JBM: je tape un code genre f x = GT
+ dbdr: apres l'avoir reproduit en haskell, ça continue en rechangeant de langage
+ JBM: il m'autocomplete gentiment le GT en GT
+ JBM: et quand j'appuis sur entree pour aller a la ligne d'apres
+ dbdr: en fait c'est peut-etre lié au changement
+ dbdr: pas au langage
+ JBM: il va pas a la ligne d'apres, il valide que c'etait bien GT que je voulais taper
+ dbdr: ce serait deja moins bizarre
+ JBM: c'est horripilant
+ JBM: disons que je m'en foutrais si y'avait pas les clashs
+ JBM: pour un clash je veux un editeur reactif
+ [CG]Nonofr: c'est probablement la wordBasedSuggestion de monaco, en effet ça a l'air de déranger pas mal de monde et l’intérêt est super limité
+ JBM: pas un truc qui me colle des obstacles a la moidre touche
+ JBM: tu devrais passer plus souvent
+ JBM: on a l'impression que les rapports de bugs ont un meilleur effet que les "j'en parle au dev" de tibo
+ Neumann: Ca fait des années que j'essaye de mapper les gens de la FAQ du site avec leurs nicks. J'y arrive toujours pas
+ [CG]Nonofr: On me dit dans l'oreillette que cette option a déjà été desactivée
+ dbdr: +1 pour passer plus souvent, c'est sympa en plus&#160;:)
+ [CG]Nonofr: Tu as retesté dernièrement&#160;?
+ JBM: non, j'ai decide que le nouvel editeur c'etait vraiment trop de la merde et je m'en sers plus que pour faire du ^A ^V
+ [CG]Nonofr: ça donne envie de repasser plus souvent
+ JBM: ouais ca a l'air mieux pour la completion
+ JBM: pfiou
+ dbdr: &lt;3
+ JBM: oh bah excuse-nous d'avoir peu d'attentes sur les fixes
+ JBM: on fait l'effort de tout rapporter gentiment
+ JBM: et on a pour toute reponse le PR-management de "j'en parle au dev"
+ JBM: et jamais rien de fix
+ JBM: on commence a s'habituer
+ [CG]Nonofr: je vais désactiver le copy/paste dans l’éditeur du coup
+ JBM: lol
+ [CG]BOUGA: haha
+ JBM: oui, fais ca
+ JBM: ca fera du bien aux clashes
+ dbdr: c'est l'invasion!
+ JBM: oh ben profitons-en
+ dbdr: ça se réactive...
+ JBM: qui a les 15 premieres pages des bugs en retard sur lui
+ [CG]Nonofr: j'ai l'impression que les soucis remontent bien jusqu'à nous, t'as un exemple de bug relou qui n'a pas été traité&#160;?
+ dbdr: tout fonctionne parfaitement
+ JBM: le fullscreen
+ dbdr: ça avance la quest map?
+ [CG]Nonofr: le fullscreen a été remonté&#160;?
+ JBM: ici en tout cas
+ Neumann: Sur Discord
+ JBM: par au moins 2 personnes
+ dbdr: le fullscreen sur <a rel="nofollow" class="external free" href="https://discord.com/channels/466965651135922206/699972160688488468">https://discord.com/channels/466965651135922206/699972160688488468</a>
+ [CG]Nonofr: ...jusqu'à des personnes de CG&#160;?
+ JBM: vous etes jamais la :P
+ [CG]Nonofr: moi je plaide coupable
+ dbdr: vous etes au courant de ce chan sur discord ou pas?&#160;:)
+ dbdr: a priori l'idée c'est plutot pour les bugs urgents, genre les serveurs sont en feu
+ [CG]Nonofr: Ahhah oui c'est pas fieux
+ [CG]Nonofr: vieux*
+ [CG]Nonofr: Vu qu'il a pas reproduit il n'y a pas de carte en effet
+ [CG]Thibaud: euh, le fullscreen reporté sur Discord, j'ai demandé à Alshock qui l'avait report ici, et il reproduisait plus hier.
+ [CG]Thibaud: JBM tu sais très bien où me trouver si t'as des bugs. Quant à leur résolution, ça dépend pas de moi
+ JBM: exactement
+ JBM: c'est pour ca que j'en prends moins la peine
+ [CG]Thibaud: :upside_down:
+ [CG]Nonofr: Tu nous trouve pas assez réactifs?
+ JBM: c'est du travail de faire des rapports propres, et c'est demoralisant quand soit c'est ignore soit ca va dans l'autre sens
+ darkhorse64: Sur Mars Lander optimisation, on peut atteindre combien sans hard-coder&#160;? Je suis à 2300 avec un GA et je me demande si je peux en tirer plus ou si je passe à autre chose
+ [CG]Nonofr: bon je ne reproduis plus... c'est systématique chez toi JBM&#160;?
+ JBM: tu parles duquel?
+ [CG]Nonofr: le fullscreen
+ [CG]Nonofr: il y en a un autre&#160;?
+ JBM: tu m'en as demande d'autres, j'etais en cours
+ JBM: y'a ca qu'est toujours juste: <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/bug-email-highlighting-in-console-output-is-superfluous/2184">https://www.codingame.com/forum/t/bug-email-highlighting-in-console-output-is-superfluous/2184</a>
+ Alshock: Chez moi en tout cas c'était pas systématique, et j'ai pas réussi à le reproduire récemment
+ JBM: oui le fullscreen me le fait toujours
+ JBM: la je l'ai en C
+ dbdr: la clé pour le fullscreen, ce serait pas de changer de langage avant? et firefox only?
+ [CG]Thibaud: lol, le bug qui date de 4 ans. Celui-là je l'avais pas vu nan
+ Alshock: Effectivmeent après un changement de langage ça semble systématique chez moi
+ [CG]Nonofr: Bon ok je suis débile, ok je reproduis
+ JBM: celui-ci est encore valide aussi: <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/bug-contribution-status-change/110662">https://www.codingame.com/forum/t/bug-contribution-status-change/110662</a>
+ [CG]Nonofr: je m'occupe des 23
+ [CG]Nonofr: 2*
+ Alshock: t'es sacrément perspicace dbdr, c'est presque flippant
+ ThomasNicoullaud: sur firefox je reproduis le bug a 100%
+ ThomasNicoullaud: il suffit juste de changer de langage 
+ ThomasNicoullaud: et de passer en fullscreen
+ dbdr: c'est meme pas une conspiration contre Haskell&#160;;(
+ Alshock: Bah si, parce que toute personne sous haskell va forcément changer de langage
+ [CG]Nonofr: tkt je vire quand même Haskell au cas où&#160;!
+ dbdr: lol
+ dbdr: faudrait un easter egg pour changer de langage
+ dbdr: inspiré par le meme sur quitter vi
+ [CG]Thibaud: me dis rien, ça non plus. (en général, je like les bugs que je vois)
+ dbdr: je croyais que c'était parce que tu aimais les bugs en général
+ [CG]Thibaud: lol
+ Alshock: J'aime beaucoup l'idée du dev qui parcours ses reports et qui laisse à chaque un message "j'aime ce bug&#160;!"
+ dbdr: parfois tu peux meme voter pour eux
+ Alshock: 404 président
+ JBM: celui-ci a ete workarounde, mais toujours pas d'explication, le bug sous-jacent est probablement toujours la: <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/bug-instability-in-the-draft-community-problem-ide/2135">https://www.codingame.com/forum/t/bug-instability-in-the-draft-community-problem-ide/2135</a>
+ dbdr: JBM est lancé, on l'arrete plus
+ JBM: oui
+ JBM: je me laisserai pas dire "t'exageres, quand tu rapportes des trucs on les fixe"
+ dbdr: pensez à vérifier que le serveur chat va tenir la charge
+ dbdr: d'ou l'interet d'un bug tracker
+ dbdr: c'est transparent
+ JBM: et j'en ai 2/3 autres sur l'editeurs qui datent aussi d'il y a 4 ans, mais effectivement sautent par magie maintenant
+ JBM: et quelques uns qu'on ete fix (ou pas, qui sait) sans un commentaire
+ tekki: yop AutomatonNN
+ AutomatonNN: vu que c'est pas trop compliqué de faire un truc pour le moment
+ [CG]Thibaud: pas mal de choses ont changé depuis 4 ans.
+ JBM: la constante semble demeurer: pas de feedback sur les rapports de bug
+ JBM: parfois ca passe dans un trello cache et on n'a pas le fin mot
+ JBM: en general c'est juste les oubliettes
+ JBM: et rarement, sur les trucs bien visibles, c'est fix avec comm
+ [CG]Thibaud: c'est vrai que je rate des résolutions de bug
+ [CG]Thibaud: je regarderai demain du coup les 3 bugs. Si t'en a d'autres, profites-en
+ BlaiseEbuth: Yo tout l'monde&#160;! Automaton2000, AutomatonNN&#160;!
+ Automaton2000: bonjour j'ai une question pour toi
+ AutomatonNN: oui t'as pas le temps de me prendre un peu de temps pour le contest :D
+ dbdr: ah mais c'est bien thread_local! en fait&#160;:)
+ BlaiseEbuth: [CG]Thibaud, puisqu'on est dans les bugs. Avec le thème sombre, si je fais un puzzle, que je soumet ma solution, et que à partir de l'ide je regarde les "meilleures solutions", la zone de code de l'ide repasse sur le thème clair.
+ [CG]Thibaud: yes, ça a été reporté sur Discord
+ [CG]Thibaud: NonoFr doit être en train de le fixer
+ BlaiseEbuth: Ok. Cool&#160;:)
+ JBM: discord, le bug tracker
+ [CG]Thibaud: on a un channel pour ça
+ [CG]Thibaud: sur Discord je vois toujours quand on me tag. Ici, pas toujours
+ JBM: ca fait rever
+ [CG]Thibaud: le channel est récent après
+ Haashi: BlaiseEbuth, c'est un coup a perdre la vue un soir à 23h30 ça
+ BlaiseEbuth: Même à 15h30...
+ [CG]Thibaud: c'est même en attente de release
+ BlaiseEbuth: Y'a des gens qui ont besoin de quelqu'un pour compléter leur team de contest&#160;? Je suis si seul... :sob:
+ JBM: y'a un contest en team?
+ Zanbez: Y'a pas un groupe Devil Corporation&#160;?
+ BlaiseEbuth: Bah y'a les classement école/entreprise maintenant, mais faut être trois minimum.
+ JBM: viens a l'ens lyon, comme tout le monde
+ BlaiseEbuth: Ecole ou entreprise&#160;?
+ JBM: ecole
+ BlaiseEbuth: Me voilà.
+ BlaiseEbuth: Ah ouai, y'a du monde ^^
+ [CG]Thibaud: c'est quoi ton école BlaiseEbuth&#160;?
+ BlaiseEbuth: l'ENS Lyon. :innocent:
+ JBM: c'est sur CG, c'est donc vrai
+ Haashi: on peut participer à la fois pour entreprise et pour l'école on est d'accord&#160;?
+ BlaiseEbuth: Oui
+ JBM: nous on est d'accord; CG je sais pas
+ [CG]Thibaud: j'étais juste curieux
+ BlaiseEbuth: En vrai Supinfo, campus de Valenciennes...
+ Zanbez: Ca serait intéressant de faire un classement par age. Mais sans mettre les noms. En mettant ça sous la forme d'un camembert par exemple. 
+ Haashi: #team1996
+ JBM: #team1664
+ BlaiseEbuth: #team1337
+ Haashi: #team42069
+ Haashi: nice
+ JBM: sophia-antipolis
+ JBM: mais pas loin
+ Haashi: Non mais effectivement un classement par tranche d'age ca peut etre drole
+ JBM: ca va etre biaise envers la tranche d'age qui trouve normal de confier sa date de naissance a cg
+ Haashi: meme si ca doit avoir très peu de correlation sur les performances cg
+ Zanbez: C'est mort. On saisi pas de date de naissance dans le profil CG.
+ Haashi: Et c'est bien comme ça
+ Haashi: mais il le demande dans les annual surveys
+ Zanbez: Ils pourraient faire un Contest surveys
+ Haashi: Temps de dev, langage utilisé (meme si ils l'ont), age,&#160;????
+ Zanbez: Inscrit sur CG depuis -1 an/1-3/3-5/+5
+ Haashi: classement du dernier contest si existant
+ Zanbez: Avec une note du contest
+ JBM: Pratique l'update du forum
+ BlaiseEbuth:&#160;?
+ JBM: Cela faisait un moment que nous n'avions pas vu [CG]Nonofr — son dernier message remonte à il y a 3 ans.
+ JBM: il passe jamais, et on a des preuves!
+ BlaiseEbuth: :grin:
+ JBM: sur <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/bug-email-highlighting-in-console-output-is-superfluous/2184/6">https://www.codingame.com/forum/t/bug-email-highlighting-in-console-output-is-superfluous/2184/6</a>
+ reCurse: lol
+ reCurse: CG est la priorité maintenant :hugging:
+ leojean890: reCurse premier au PAC :P:p
+ reCurse: Mouais non
+ BlaiseEbuth: Y peut pas, y déménage, faut suivre...
+ reCurse: Je suis dans le bordel du déménagement
+ reCurse: Boites partout etc
+ JBM: tu bouges?
+ JBM: j'ai loupe l'update
+ Haashi: tu viens en france&#160;? 
+ leojean890: ah ouais si tu manques de temps ça risque d'être plus chaud 
+ reCurse: lal
+ JBM: houla mauvaise idee ca
+ reCurse: En fait c'est juste à côté
+ Haashi: de la ou t'es ou de la france&#160;?
+ JBM: c'est juste histoire de faires des cartons quoi
+ reCurse: C'est ça
+ reCurse: Bon ceci dit si je ferme la porte du bureau je peux toujours prétendre faire des boites et coder le contest
+ reCurse: Mais ça va peut-être mal se passer pour moi après
+ JBM: peut-être
+ Darkrizen: C'est normal que pendant les coc les timers soient à 0?
+ reCurse: voir réponse ci-dessus
+ Boulet: JBM: upvote done
+ JBM: ah lol je l'avais oublie celui-la
+ Boulet: Tu viens de le mettre non&#160;? 
+ JBM: non ca fait bien 2h
+ Boulet: Oui c'est ce que je viens de dire :D 
+ BlaiseEbuth: Mettre quoi&#160;?
+ JBM: farpaitement
+ JBM: j'ai soumis un puzzle blaise
+ Boulet: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/5023e7eb5cf6da1586b962c8e6997178b0e8">https://www.codingame.com/contribute/view/5023e7eb5cf6da1586b962c8e6997178b0e8</a>
+ BlaiseEbuth: Ah&#160;! Vais voir
+ JBM: tu risques d'etre decu
+ Boulet: non l'est tres bien 
+ Boulet: un peu dur pe pour certains mais bon 
+ BlaiseEbuth: C'est pour quel bug&#160;?
+ Boulet: bon n=moyen de faire des pt gratos
+ JBM: je viens de le mettre en commentaire BlaiseEbuth
+ BlaiseEbuth: Ok.
+ BlaiseEbuth: A good one. Upvoted
+ JBM: oh, et stream ce soir sinon
+ JBM: <a rel="nofollow" class="external free" href="https://www.codingame.com/forum/t/stream-c/179632">https://www.codingame.com/forum/t/stream-c/179632</a>
+ BlaiseEbuth: :o
+ BlaiseEbuth: Tu vas stream pendant le contest de contest&#160;?
+ JBM: c'est aujourd'hui?
+ BlaiseEbuth: Non non, c'est juste par association d'idée
+ JBM: c'est quoi un contest de contest?
+ BlaiseEbuth: Demande à AutomatonNN
+ AutomatonNN: moi je suis pas sur que c'est pas trop compliqué de faire un truc de base&#160;:)
+ Bob: JBM, c'est CG
+ Bob: c'est le contest de qui sera le meilleur au plus de contest possible
+ JBM: ah ok
+ JBM: un contestgame
+ Bob: bon sang ce "training" sur la cybersécurité...
+ Bob: "vrai/faux&#160;: c'est OK de faire du pari en ligne de temps en temps avec mon appareil corporate"
+ Bob: :see_no_evil:
+ Bob: sans déconner c'est un peu plus nul à chaque fois
+ victor_perez: salut
+ BlaiseEbuth: o/
+ Zanbez: salut
+ Bob: et en parallèle on se cogne des trainings sur les business ethics avec des questions super précises en mode "ah ha ha mais non tu peux pas signer un marché comme ça parce que la soeur de la cousine du beau-frère de ton oncle travaille pour une administration mexicaine eh gros noob"
+ Bob: le genre de situation à laquelle j'ai été confronté exactement zéro fois en 20 ans de boîte
+ Bob: ah putain mais il me l'a pas validée en plus
+ Bob: (╯°□°）╯︵ ┻━┻
+ dbdr: <a rel="nofollow" class="external free" href="https://i.snipboard.io/RkjCrW.jpg">https://i.snipboard.io/RkjCrW.jpg</a>
+ dbdr: c'est nouveau cette notif?
+ dbdr: JBM, gg pour le recrutement
+ dbdr: BlaiseEbuth: bienvenue au club
+ dbdr: oh, ya Stilgart aussi \o/
+ dbdr: on peut faire école + boite maintenant?
+ JBM: ah oui tiens j'avais maas remqraue
+ JBM: mes yeux se sont habitues a ignorer le rouge en haut
+ JBM: de rien dbdr
+ nicola: Je l’ai en français.
+ [CG]Thibaud: JBM j'ai pas compris
+ JBM: tu te plains que j'utilise une contrib pour notifier d'un bug
+ JBM: 1h avant tu me demandes lesquels bugs sont encore actifs
+ [CG]Thibaud: et&#160;?
+ JBM: j'ai un bug qui se manifeste quand on passe une contrib de WIP a ready
+ JBM: y'a litteralement pas d'autre moyen de verifier que le bug est actif que de passer une contrib de WIP a ready
+ [CG]Thibaud: ah lol
+ JBM: ouais "lol"
+ [CG]Thibaud: bah, tu fais ton test et tu le remets en privé
+ JBM: apparemment qqun s'en est charge
+ JBM: la page des submits a 50 clashes pourris en attente
+ JBM: mais c'est mon rapport de bug qui pose pb
+ JBM: je vois l'esprit
+ [CG]Thibaud: mais arrête de faire semblant de pas comprendre
+ dbdr: <a rel="nofollow" class="external free" href="https://www.youtube.com/watch?v=n6hxo1sC-dU">https://www.youtube.com/watch?v=n6hxo1sC-dU</a>
+ BlaiseEbuth: Tu es medium&#160;? :o
+ JBM: comprendre quoi?
+ dbdr: elle est de lui ou il cite le meme?
+ dbdr: je la connaissais de <a rel="nofollow" class="external free" href="https://xkcd.com/54/">https://xkcd.com/54/</a>
+ [CG]Thibaud: je te reproche d'être relou alors que t'as pas besoin de l'être
+ JBM: je suis desole si tu me trouves relou, c'etait pas le but
+ JBM: mais je suis passablement enerve de l'attitude demontree par CG vis-a-vis de mes rapports de bug
+ [CG]Thibaud: eh bien exprime ton énervement autrement.
+ JBM: oui
+ JBM: je vais te muter pour la journee, ca ira mieux
+ [CG]Thibaud: Si encore c'était un bug important, mais là please
+ JBM: je la connaissais de la aussi dbdr
+ dbdr: <a rel="nofollow" class="external free" href="https://www.theverge.com/2013/4/2/4173576/richard-dawkins-on-science-it-works-bitches">https://www.theverge.com/2013/4/2/4173576/richard-dawkins-on-science-it-works-bitches</a>
+ JBM: mais j'ai jamais creuse c'etait quoi la science in question
+ dbdr: en mode sherlock
+ dbdr: ya ça si tu veux savoir: <a rel="nofollow" class="external free" href="https://www.explainxkcd.com/wiki/index.php/54:_Science">https://www.explainxkcd.com/wiki/index.php/54:_Science</a>
+ JBM: ah ben oui
+ JBM: ca existant pas a l'epoque, forcement
+ dbdr: "It's one of the most triumphant scientific results in history."
+ dbdr: je vote aussi pour xkcd, pas pur subjectivité&#160;:)
+ dbdr: *par
+ dbdr: *pure
+ dbdr: il en reste? :D
+ JBM: y'a un vote?
+ dbdr: pour savoir si Dawkins cite xkcd ou Breaking Bad
+ JBM: ah y'a ca dans bb aussi?
+ dbdr: aucune idee
+ JBM: jme souviens que jesse dit bitches assez facilement
+ dbdr: d'apres theverge
+ JBM: mais jle vois pas dire ca
+ dbdr: peut-etre juste le B...?
+ dbdr: pas vu la série
+ dbdr: <a rel="nofollow" class="external free" href="https://xkcd.com/2299/">https://xkcd.com/2299/</a> c'est exactement [CG]Thibaud qui like les bugs :D
+ JBM: lol
+ dbdr: JBM, tu veux pass streamer tes premiers pas en Rust?&#160;;)
+ JBM: non, c'est C++ mon urgence
+ dbdr: contest?
+ JBM: enfin
+ JBM: j'ai rien contre
+ JBM: mais pas ce soir
+ JBM: t'etais pas la hier soir?
+ dbdr: ce serait rigolo. mais je suis d'accord que ce serait sans doute plus efficace pour toi de regarder d'abord
+ JBM: j'ai (potentiellement) des tests cg a passer
+ dbdr: mais moins drole pour nous&#160;;)
+ JBM: un peu de pratique me ferait pas de mal
+ dbdr: j'ai vu ça passer, oui
+ dbdr: et des choses pas tres catholoqies non plus&#160;;)
+ JBM: ils ont zero question haskell
+ JBM: saynul
+ dbdr: scandale!
+ JBM: remboursez
+ dbdr: ya un transpiler?
+ dbdr: haskell2c?
+ JBM: y'a eu
+ JBM: je sais pas a quel point il tourne encore
+ JBM: c'est llvm la compile standard de nos jours
+ dbdr: bon tu perdrais pe des points en clarté du code
+ [CG]Thibaud: lol dbdr
+ JBM: je me souviens vraiment plus a quel point ca notait ca
+ dbdr: tu as vu le popup [CG]Thibaud?
+ JBM: je sais plus ou j'ai mis les rapports
+ JBM: ni meme si ils notent encore ca
+ JBM: a l'epoque c'etait violent psychologiquement
+ JBM: je me demande si l'ide enregistrait pas la succession des edits
+ dbdr: wow
+ dbdr: edite dans emacs&#160;;)
+ JBM: et c'etait pas qcm mais "taper la bonne reponse"
+ JBM: pas se rater si la bonne reponse est foreach&lt;pair&lt;int,typename t&gt;&gt;
+ dbdr: bonne au charactere pres?
+ [CG]Thibaud: le xkcd
+ JBM: je sais plus
+ dbdr: [CG]Thibaud je veux dire le "[moments later, checking phone] Okay, I agree my posting it was weird, but it's somehow even more unnerving that you immediately liked the post."
+ dbdr: je sais pas si t'es familier avex xkcd pour le voir
+ JBM: y'a pas de red button chez xkcd
+ dbdr: JBM de toute façons tu as largement le niveau. soit ils te prennent, soit ils te meritent pas et tu merites mieux
+ dbdr: aucune raison de stresser&#160;:)
+ JBM: bien sur
+ JBM: j'hesitais presque a streamer
+ JBM: je lirai les petits caracteres avec attention
+ JBM: comme d'habitude
+ dbdr:&#160;?
+ JBM: sur l'aspect confidentiel
+ dbdr: mais  la c'est juste des puzzles publics, non?
+ JBM: le stream de ce soir oui
+ dbdr: tu veux streamer ton interview?
+ dbdr: histoire de bien monter la pression? :D
+ JBM: j'ai pas dit "je veux"
+ dbdr: quel red button?
+ JBM: j'etais a considerer la question et trouver ca marrant dans ma tete
+ JBM: le red button de smbc
+ dbdr: je connais smbc, faut que je cherche pour le bouton
+ dbdr: ah ok&#160;:)
+ JBM: en general il a les deux
+ JBM: rb et at
+ JBM: Stilgart: t'utilises quelle api pour avoir la liste des solves d'un joueur par langage?
+ dbdr: en fait je suis d'abord tombé sur <a rel="nofollow" class="external free" href="https://www.smbc-comics.com/comic/the-pleasure-button">https://www.smbc-comics.com/comic/the-pleasure-button</a>
+ dbdr: qui est aussi en rapport
+ JBM: ouh
+ JBM: titre inspirant
+ dbdr: du coup c'est un peu inception
+ dbdr: :D
+ leojean890: un ecran incurvé, un clavier mecanique, un casque à conduction osseuse, qui veut gagne le PAC hehe
+ leojean890: gagner
+ leojean890: trophée en verre pour les boites et ecoles
+ JBM: rha j'ai deja le mien
+ JBM: c'est la faute a Neumann
+ BlaiseEbuth: Je veux bien être premier, ou troisième... Je viens d'acheter ce clavier.
+ leojean890: assez originaux les kdos hehe
+ Stilgart: JBM: bonne question
+ Stilgart: <a rel="nofollow" class="external free" href="https://www.codingame.com/services/Puzzle/findAvailableProgrammingLanguages">https://www.codingame.com/services/Puzzle/findAvailableProgrammingLanguages</a>
+ <b>**Stilgart se demande s'il sait relire son propre bash là</b></p><p><a href="/wiki/File:Default_avatar.png" class="image"><img alt="Default avatar.png" src="/images/5/56/Default_avatar.png" decoding="async" width="50" height="50" /></a> JBM: ca vient de quelle page ca?
+ Stilgart: curl -s -d "[$puzzleId,$userId]" -H 'Content-Type: application/json' \
+ JBM: ah ok
+ JBM: en produit cartesien
+ Stilgart: d'ailleurs, tu as peut-être meme l'info "soumis mais pas 100%" comme ça
+ JBM: en l'occurence, je m'en fous pour aujd
+ JBM: jveux juste me lister les puzzles que j'ai pas faits en C++, classes par ordre inverse de "nb de personnes qui l'ont resolu"
+ Stilgart: résolu&#160;? ou résolu en C++&#160;?
+ JBM: resolu en C++
+ Stilgart: (j'aimerais bien chopé la 2e ... mais je sais pas faire)
+ JBM: la 2e quoi?
+ Stilgart: (hors multi avec des ligues de moins de 1000)
+ Stilgart: avoir le nb de résolutions en C++
+ JBM: ah non
+ JBM: pour la 2e c'est juste resolu
+ JBM: c'est juste mon indicateur de difficulte
+ JBM: ca marche beaucoup mieux que le truc cg
+ JBM: ah ben tiens [CG]Maxime qui passe pile au bon moment
+ Stilgart: <a rel="nofollow" class="external free" href="https://chadok.info/codingame/puzzles_list.html">https://chadok.info/codingame/puzzles_list.html</a> (au cas où)
+ JBM: [CG]Maxime: je peux taper a combien de rps pour recuperer ma liste de puzzles non resolus en C++?
+ [CG]Maxime: désolé, je regarde le bug des clashs là
+ JBM: "le" lol&#160;:)
+ Stilgart: doit y avoir 200-250 puzzles... une requete toutes les 3s ça suffira
+ JBM: ok une prochaine fois ptet
+ JBM: Stilgart: et ca? <a rel="nofollow" class="external free" href="http://chadok.info/codingame/players_puzzles.php">http://chadok.info/codingame/players_puzzles.php</a>
+ Stilgart: [CG]Maxime: si seulement tu parlais de celui qui fait qu'on ne peut pas interdire les invitations&#160;:'(
+ JBM: wishful thinking
+ Stilgart: oui oui... c'était débile de passer les arguments en POST...
+ Stilgart: je sais...
+ JBM: il parait qu'elles sont devenues encore plus relou qu'avant?
+ BlaiseEbuth: C'pas un bug ça, c'est une feature sociale. :grin:
+ Stilgart: dimanche j'en ai littéralement fumé un
+ JBM: litteralement
+ BlaiseEbuth: J'ai encore la pelle...
+ Stilgart: 5 invits en 3 minutes... faut pas pousser
+ JBM: tu as fait ton petit feu de bois, tu l'as mis dessus, t'as recouvert de feuilles de bananier
+ JBM: et tu l'as fume
+ JBM: ah pardon je confonds avec boucane
+ JBM: tu l'as pris, tu as fait un petit feu de hetre
+ JBM: tu l'as transperce d'une brochette
+ Stilgart: ouais, j'ai signé une autorisation de sortie pour première nécessité et tout :D
+ JBM: et tu l'as FUME
+ Stilgart: sinon, la vraie feature serait de pouvoir banir des gens de notre liste de followers
+ JBM: si ca suffit
+ Stilgart: en pratique ça suffit pour les invits de coc
+ JBM: pour l'instant ok
+ JBM: pers j'ai pas le pb
+ JBM: mais je veux bien croire que mag/eZ/rec l'ont
+ Stilgart: oui, je sais... je perdrais bien mes points de CoC pour baisser au classement, mais ils ne veulent pas partir
+ Stilgart: bah, quand je vois comment à 25 c'est chiant, j'ose même pas imaginer pour le top10
+ JBM: y'avais pas ca (dieu merci) a l'epoque ou j'etais top
+ Stilgart: preuve que c'était mieux avant
+ JBM: s'il en fallait
+ JBM: nan le cg for work il etait pas mieux avant
+ Stilgart: là c'est l'encouragement pour [CG]Maxime qu'il faut
+ Stilgart: go go go Automaton2000
+ JBM: la-dessus c'est vraiment leche en ce moment
+ Automaton2000: il ne sait pas faire
+ JBM: on voit ce qui rapporte
+ JBM: et l'estime qu'on porte a la commu
+ Stilgart: cg for work&#160;?
+ JBM: ah ah , toi t'etais pas la hier
+ BlaiseEbuth: C'est mesurable en € l'estime&#160;?
+ Stilgart: tu parles de la partie tests organisés par CG&#160;?
+ Stilgart: non, j'étais pas là hier en effet
+ JBM: ouais
+ JBM: et ouais
+ JBM: et ouais
+ Stilgart: BlaiseEbuth: d'après Trump, oui
+ JBM: eux ils ont un splendide editeur de questions
+ JBM: quand tu vois la merde qu'on se traine pour les contribs
+ JBM: ca fait mal
+ JBM: Neumann a raison, je suis aigri aujourd'hui
+ Stilgart: tu dis ça à moi qui essaie de vendre un stagiaire de 2A pour refaire le stub depuis des années&#160;:(
+ JBM: je vais me servir un rhum ou j'attends le stream?
+ Stilgart: le stream&#160;?
+ <b>**Stilgart a l'impression qu'il n'était pas là hier</b></p><p><a href="/wiki/File:Default_avatar.png" class="image"><img alt="Default avatar.png" src="/images/5/56/Default_avatar.png" decoding="async" width="50" height="50" /></a> JBM: ca c'est d'aujd
+ JBM: ratrappe ta forum
+ Stilgart: qui n'est que le prolongement d'hier
+ JBM: ameliore mes hier
+ Stilgart: oulah.... tu veux dire la page introuvable planquée derrière ce trois points en haut à droite&#160;?
+ JBM: lol
+ JBM: moi c'est mon bookmark cg
+ Stilgart: (sérieusement, je pense jamais à y aller à cause de ça)
+ JBM: direct au forum sans tchat
+ JBM: j'en ai rien a foutre de mon profil, c'est completement ininteressant comme landing page
+ JBM: je le connais mon profil
+ Stilgart: j'ai space maze comme landing page ici :D
+ JBM: en plus y'a leur widget clash dessus qui fait tout ramer a mort
+ Stilgart: avec ce 86% qui me nargue
+ JBM: eheh
+ Stilgart: tu vas faire spécifiquement du C++17&#160;? (ça fait du sens ce que je demande?)
+ JBM: oui
+ Stilgart: -du
+ JBM: enfin essayer en tout cas
+ JBM: j'aurais bien fait du 20, mais y'a pas encore ur cg
+ Stilgart: parce que sur un puzzle easy ça me parait pas assez riche.... 
+ JBM: ah possible
+ Stilgart: ou alors ils ont boosté functionnal
+ JBM: on verra ce que me dictera ma following ^^'
+ JBM: oh, au fait j'ai trouve ca pour toi
+ BlaiseEbuth: Faudrait un test qui permette de situer ta version d'utilisation d'un langage.
+ JBM: <a rel="nofollow" class="external free" href="https://en.cppreference.com/w/cpp/language/fold">https://en.cppreference.com/w/cpp/language/fold</a>
+ JBM: c'est a la fois classe et horrifiant
+ JBM: so C++
+ RomanceDawn: c'est pas trés friendly tout ça
+ JBM: on parle de c++
+ JBM: friendly est pas un design goal
+ JBM: va jouer au python
+ BlaiseEbuth: :grin:
+ Stilgart: je rêve...
+ JBM: bon d'apres ta page (je sais pas de quand date l'info) en c++ j'ai tous les easy sauf descent
+ JBM: j'ai = "il me reste"
+ Stilgart: ils vont pas faire un truc aussi stupide&#160;?
+ JBM: c'est sympa leur version de unary/binary hein
+ JBM: c'est pas ils vont
+ Stilgart: (was: annonce de .NET core d'ici jeudi)
+ JBM: c'est c++17, c'est deja dedans
+ RomanceDawn: du peu que j'ai vue du python c'est encore moins friendly que ça 
+ JBM: ah pardon
+ JBM: je suis pas particulierement le monde .net
+ Stilgart: normalement, l'info date de max 12h en arrière
+ JBM: et on se doit d'aller se renseigner parce que?
+ JBM: je suis ranked 155 en clash?!
+ JBM: ca sort d'ou ca
+ RomanceDawn: ils ont remis les points 
+ JBM: quels points?
+ RomanceDawn: regarde ta courbe tu saura
+ JBM: quelle courbe? o_O
+ BlaiseEbuth: stoi la courbe
+ RomanceDawn: va sur ton profil 
+ RomanceDawn: <a rel="nofollow" class="external free" href="https://www.codingame.com/profile/0d71f9df5da706f9f77c07c34d12480e609451">https://www.codingame.com/profile/0d71f9df5da706f9f77c07c34d12480e609451</a>
+ JBM: je sais plus ou il est T_T
+ JBM: ah merci
+ RomanceDawn: et clique sur le trophé 
+ RomanceDawn: e
+ JBM: euh... ok?
+ JBM: donc j'ai pres du max de pts en clash, ok, mais euh
+ JBM: pourquoi?
+ BlaiseEbuth: Parce que la courb le dit.
+ nicola: On peut avoir où son numéro&#160;?
+ RomanceDawn: bah t'a fait des clash  
+ JBM: oui
+ JBM: y'a... lonnnnngggggtemps
+ RomanceDawn: ils ont refait leur systeme de classement y a pas longtemp
+ RomanceDawn: s
+ JBM: enfin tu vois ma courbe quoi
+ JBM: j'ai fait des clashes genre en septembre 2016
+ RomanceDawn: j"ai pas suivis le détail mais  avant les point CoC diminué tout seul (??)
+ RomanceDawn: plus maintenant
+ JBM: ah
+ JBM: bon, bah, moi ca m'en toque une sans faire bouger l'autre
+ JBM: mais j'en connais qui vont raler ^^
+ RomanceDawn: bof ça fait un moment
+ JBM: oui je vois ca
+ Thyl: Salut tout le monde&#160;!:grinning:
+ Alshock: et je confirme ça a râlé xD
+ Alshock: Salut Thyl \o
+ dwarfie: jolie la coquille dans les lots du challenge :D
+ Sissiimperatice: je ne la vois pas:nerd:
+ Magus: un casque à onduction osseuse
+ Magus: *conduction
+ Magus: mais c'est quoi ce truc&#160;? oO
+ Alshock: C'est un casque qui transmet les son à travers tes os
+ Magus: j'essaie d'atteindre leur site
+ Magus: mais il a l'air de pédaler dans la semoule
+ Magus: ok je savais pas que ça existait
+ Magus: marrant comme principe
+ Alshock: C'est utilisé par les personnes qui doivent recevoir des infos et rester conscient de leur environnement généralement, mais je sais pas si c'est ouf.
+ dwarfie: Sissiimperatice ... c'est sur le 2eme lot
+ Boulet: carrrramba 57
+ Magus: avis perso, le clavier razer en question est pas ouf pour l'avoir déjà eu en main. Mais bon s'il est donné pas de raison de s'en plaindre.
+ dwarfie: Magus ... clair ... je vais pas m'en plaindre ... je l'aurais pas de toutes facons&#160;;)
+ Sissiimperatice: ok merci dwarfie, j'étais sur le mail en fait ^^
+ Boulet: dwarfie tu as mieux finalement&#160;? 
+ dwarfie: plus en etat de chercher :p
+ Boulet: tssss 
+ Stilgart: dwarfie, Boulet: go go go top3
+ Stilgart: je veux un personalized glass avec marqué "pourfendeur de contrib" dessus :D
+ Boulet: top3&#160;? Ah quoi&#160;? 
+ Stilgart: Top 3 schools and top 3 companiesPersonalized glass awards
+ Boulet: Au fait: fix ton Temperature bash :P
+ Stilgart: putain.. encore&#160;!?
+ Boulet: 37 
+ Stilgart: mais j'ai pas le 37
+ Boulet: moi oui :P
+ Stilgart: enfin si.... meme que mon man dit que c'est standard
+ Stilgart: mais ça passe plus
+ Boulet: fix ton 37 alors 
+ Stilgart: je pense qu'en moins de temps, je passe légende à CotC
+ Boulet: ou appelles un ami. Automaton2000 par ex 
+ Automaton2000: y a aussi des gens qui savent pas lire le referee
+ Stilgart: 2cp... 2000cp....
+ Boulet: oui mais bon 
+ Stilgart: un choix difficile... ou pas
+ Boulet: En fait tu es veinal comme mec 
+ Boulet: je n'avais pas remarqué
+ Stilgart: Automaton2000: en même temps, tu le leakes pas le referee de ML... donc oui je sais pas le lire
+ Automaton2000: je vois pas en gold
+ Stilgart: Boulet: voilà, tu es content
+ Stilgart:&#160;?
+ Boulet: :D
+ Stilgart: j'avais oublié que j'avais déjà fait appel à un ami
+ Stilgart: mais j'ai quand même un peu honte d'avoir balancé une solution à laquelle je n'avais pas pensé
+ <b>**dwarfie passe sans rien dire ....</b></p><p><img src="/a/17785582865119" /> dwarfie: eh eh boulet .. je viens de le jouer en clash le 58 ... pas de chance pour eux&#160;;)
+ Boulet: il est validé   ? 
+ dwarfie: faut croire&#160;;)
+ Boulet: ban non il est en pending 
+ Boulet: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/50203502fd989813149cc9de3717235dcb7e">https://www.codingame.com/contribute/view/50203502fd989813149cc9de3717235dcb7e</a>
+ Boulet: ok c'est pas le bon
+ Boulet: Humanosaure&#160;?
+ JBM: comment es ton re
+ Boulet: Premiere propal de CoC&#160;? 
+ Boulet: bof 
+ Boulet: pardon
+ Boulet: JBM: bof
+ Boulet: TIens le petits: Anid c'est un smurf de qqun ou on demande la fermeture du compte&#160;? 
+ JBM: pas un des miens en tout cas
+ Boulet: Non parce que 12 ans, indiens et de -inty à #40 en moins d'un mois 
+ JBM: ouais les miens sont vachement plus discrets
+ JBM: c'est quoi deja l'url magique twitch pour faire du test de bp
+ JBM: ?bandwidthtest=true
+ JBM: naturellement
+ Zorg1: o/ tout le monde et les bots Automaton2000 &amp; AutomatonNN
+ Automaton2000: un bon moyen de faire un ag sur stc
+ AutomatonNN: oui j'ai eu le temps de comment faire un truc par contre
+ Boulet: \o Zorg1
+ JBM: fix ta COBOL Zorg1
+ Zorg1: o/ Boulet JBM
+ Zorg1: c'est du SQL, mais c'est vrai que ça descend du COBOL
+ JBM: CA SE VOIT A UN CERTAIN ASPECT DE LA SYNTAXE
+ Boulet: C'était pas plutot pas mal COLBOL
+ Boulet: Parce que bon sans vouloir en rajouter 
+ Boulet: SQL c'est VRAIMENT de la merde 
+ JBM: ca a l'air de pas trop fondre la machine cette fois-ci le stream, des avis?
+ dbdr: *Jean-Pierre Coffe a rejoint le chat*
+ JBM: miam
+ JBM: bon je comptais faire ca de mon pc principal
+ JBM: mais si ca marche d'ici...
+ JBM: le mode nuit de windows, vous subissez ou c'est que moi?
+ RomanceDawn: moi je l'ai dégager et je reste sur flux 
+ JBM: je parle du flux mp4
+ JBM: je le garde parce que c'est mieux pour mes yeux mais c'est mieux si ca atteint pas le stream
+ JBM: un des discodeux a le droit de me mention
+ Zorg1: y -a-t-il un discordeux dans la salle&#160;?
+ Boulet: Trop pas :D
+ BlaiseEbuth: Ouai, kestuveu&#160;?
+ Zorg1: c'est pas pour moi c'est pour un ami :D
+ BlaiseEbuth: Et keskiveu&#160;?
+ Zorg1: iveudlapubpoursonstream
+ Zorg1: mécétéyauneheurecéfinimaintnan
+ RomanceDawn: Je vous sert un peu de J Pop avant de dormir&#160;?
+ Zorg1: vas y tout le monde dort de toute façon
+ BlaiseEbuth: Le problème avec la pop, j ou pas, c'est que ça brasse très large.
+ Zorg1: ça tombe bien j'ai envie d'une bière
+ RomanceDawn: J rock <a rel="nofollow" class="external free" href="https://youtu.be/Z8AOKs2jk_k?t=17">https://youtu.be/Z8AOKs2jk_k?t=17</a>
+ RomanceDawn: (ouais c'est le générique de GTO)
+ RomanceDawn: etrangement je connais aucun truc de french pop
+ vodkatypique: je dois etre vraiment pas doué, les moyens me font paniqué
+ vodkatypique: plus d'une heure sur Bender, j'en suis a 74% :persevere: il me gonfle se robot&#160;:)
+ BlaiseEbuth: Ah c'est du classique ça va.
+ dwarfie: fait comme bender .... prend une :beer:
+ vodkatypique: mauvaise idée vu l'heure&#160;:)
+ BlaiseEbuth: Genre y'a des heures...
+ vodkatypique: quelqu'un peut me donner la sortie attendu de bender pour le test 9&#160;?
+ dwarfie: y'a pas d'heure ... demande a bob :D
+ dwarfie: ayez peur .... j'ai joué les sauron avec le js de l'appli en cours de dev .... une fonction pour les declarer toutes ... et ca marche en plus :fearful:
+ Zorg1: t'as pas les sorties des tests dans l'IDE&#160;? c'est un puzzle classiques I/O Bender
+ vodkatypique: si y a les sortie
+ vodkatypique: mais "WEST attendu au lieu de SOUTH", ca me dit pas quelle SOUTH :kappa:
+ vodkatypique: ah!
+ vodkatypique: apres avoir fait l'execution a la main j'ai trouvé
+ vodkatypique: est-ce normal que mon brave ami robot soit en mode casseur direction l'exterieur de la map&#160;? :o
+ dwarfie: ah ... la fameuse technique du crayon et de la feuille de papier ... ca va faire plaisir a Stilgart ca :D
+ vodkatypique: trouvé&#160;:)
+ vodkatypique: il voulait cassé les "#" aussi ce robot fou&#160;:)
+ vodkatypique: plus que les 2 dernier test a valider&#160;:)
+ BlaiseEbuth: Comme toujours avec les machines, la faute va au programmeur...
+ vodkatypique: c'est pas le programmeur qui est mauvais
+ vodkatypique: c'est la machine qui interprete mal ce que je veux faire&#160;:)
+ Zorg1: bien sûr. comment peut il en être autrement&#160;?
+ Zorg1: Automaton 2000 la forme&#160;?
+ Zorg1: Automaton2000 la forme&#160;?
+ Automaton2000: le type de la variable
+ Zorg1: on dirait un vieux maître Automaton2000, continue comme ça&#160;!
+ Automaton2000: juste que les gens ont du mal à voir ce que je veux faire un truc
+ vodkatypique: 91%
+ vodkatypique: j'arrive pas a valider le dernier&#160;:(
+ Zorg1: c'est pas une histoire de loop/téléporteurs&#160;?
+ BlaiseEbuth: C'ballot
+ vodkatypique: boucle mutliple
+ vodkatypique: il attend un resultat alors que je trouve une boucle&#160;:(
+ Zorg1: tu dois pas tenir compte de tous les états pour déterminer si ça boucle
+ vodkatypique: je regarde si le mec est deja passé x fois a cette endroit avec la meme direction
+ vodkatypique: x etant fixé de maniere tres scientifique a 20 x)
+ Zorg1: ah ok en augmentant ça va finir pas marcher, mais bon  y a mieux
+ Zorg1: * passer les tests plutôt
+ vodkatypique: j'ai un bug ailleurs qui fait que quand j'augmente trop ca explose, une variable devient none&#160;:(oui y a mieux, mais je vois pas comment detecter les cycle sinon&#160;:/
+ Zorg1: bah en tenant compte d'autre état en plus de la direction courante
+ BlaiseEbuth: Genre les tortues
+ Zorg1: ninjas les tortues ou standard&#160;?
+ BlaiseEbuth: :thinking:
+ vodkatypique: viiiiccctttoooire&#160;:)
+ Zorg1: :thumbsup:
+ dwarfie: Zorg1 .... tortue geniale&#160;;)
+ vodkatypique: Blender est vaincu&#160;!
+ vodkatypique: donc l'idée pour etre plus meilleur au niveau cycle c'est position + direction + casseur j'imagine&#160;?
+ Zorg1: ah oui l'obsédé&#160;;-)
+ Zorg1: position + direction + casseur + priorité + version de la carte j'avais
+ vodkatypique: ca fait bcp tout ca 
+ Zorg1: (version de la carte&#160;: un compteur que j'incrémentais à chaque fois que je démolissais un X)
+ vodkatypique: l'etat de la carte je vois pas l'interet, perso je met a jour la carte a chaque tick 
+ Zorg1: oui mais si je repasse une case avec le même état bah je boucle
+ vodkatypique: ah oui exact
+ vodkatypique: ca fait bcp de truc a faire rentrer en clé de dico tout ca&#160;:/
+ Zorg1: bah c'est un état par case en fait
+ Zorg1: je comparais l'état de la case avec l'état corant de bender
+ Zorg1: *courant
+ Zorg1: bon après c'est pê un peu trop compliqué
+ vodkatypique: super
+ vodkatypique: ca marche
+ vodkatypique: ca fait une clé bien degueu
+ vodkatypique: mais ca marche
+ vodkatypique: je cast tout en str, je concatene, et voila la clé&#160;:)
+ vodkatypique: meme plus besoin de compteur pour les boucle
+ vodkatypique: merci
+ b0n5a1: o/
+ Zorg1: \o
+ b0n5a1: y'a JBM qui stream c++&#160;: <a rel="nofollow" class="external free" href="https://www.twitch.tv/cg_jbm">https://www.twitch.tv/cg_jbm</a>
+ JBM: ouais ca m'arrive parfois
+ JBM: voir si je sais encore en faire
+ leojean890: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/codingame-sponsored-contest">https://www.codingame.com/ide/puzzle/codingame-sponsored-contest</a> ... mon code est une blague, un truc pas carré en quelques ligne de pseudo logique et je suis 1600/11000&#160;?
+ leojean890: identifier ce qui varie et envoyer la lettre appropriée en fct&#160;?;o c'est limite comme raisonnement..
+ b0n5a1: héhé
+ leojean890: en vrai j'ai vu qu'en fonction des variables qui varient si j'envoie telle ou telle lettre ça marche mieux .. c tout mais c nul mdr
+ b0n5a1: faudra que je le fasse un jour celui là, j'avais jusrte reverse et deviné ce que c'est ^^
+ leojean890: ah ok ^^t'as fait une sorte de bruteforce&#160;?:P
+ b0n5a1: non j'ai juste analysé le truc et ai fini par trouver ce qui se cache derrière (qulequechose de connu...quand t'auras trouvé ^^)
+ leojean890: ah qqc de connu carrément ^^
+ leojean890: je vois, je vais chercher ça ;p
+ leojean890: moi je me suis arrêté au lien entre les variations des 10 derniers inputs et ce que j'envoie pour le moment;p
+ b0n5a1: quand tu commenceras à deviner des trucs...dump en console d'erreur à chaque tour et à un moment ça va faire "tilt" ^^
+ leojean890: pour le moment j'ai  pas compris les premiers inputs généraux et les premiers des tours avec des carac non alphanumériques :p
+ leojean890: ouais je print tout en stderr
+ leojean890: les premiers du genre 29 29 5 on dirait des dimensions :P
+ b0n5a1: bonne piste
+ JBM: ca serait plus du reverse si on te donnait les solutions
+ leojean890: non non ne dites pas les sol hehe:p
+ JBM: Alshock: bon alors c'est quoi ton formattage des lambdas?
+ b0n5a1: erf je viens de regarder mon code j'ai juste le dump de tout à chaque tour + un bot random ^^
+ leojean890: on dirait une course de voitures avec 4 premiers carac _ ou # representant case accessible ou mur/inaccessible:P:P
+ leojean890: genre H B G D
+ leojean890: et au tour premier tour les dimensions
+ b0n5a1: suis ta piste et dump selon cette intuition et tu va vite trouver je pense
+ leojean890: donc on se déplace en fonction de nos lettres&#160;!
+ leojean890: dump = faire des prints des inputs&#160;?
+ b0n5a1: oui mais avec plein d'infos en plus représentant ce que tu penses que c'est
+ leojean890: ouais je vois, transformer en meta info ça peut aider à comprendre
+ b0n5a1: et en tâtonnant ça va venir
+ leojean890: j'avoue c'est pas mal comme méthode ;P
+ b0n5a1: bonne nuit
+ leojean890: same gn:)
+ belkacem: salut mes amis

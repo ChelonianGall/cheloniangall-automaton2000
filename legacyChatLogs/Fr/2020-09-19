@@ -1,0 +1,922 @@
+ Thyl: si on fait des malloc sur CG il faut obligatoirement relacher la mémoire à la fin du programme&#160;?
+ Thyl: Hello&#160;!
+ lionel_fr: "obligatoirement" non
+ Thyl: parce que quand le programme finit ça relache la RAM 
+ Thyl:&#160;???
+ lionel_fr: les programmes qui crashent n'ont pas l'élégance de quitter proprement
+ Thyl: c'est vrai 
+ Thyl: sur CG on quitte pas proprement vu qu'on est en while 1 constamment 
+ lionel_fr: CG fait un "kill task" qui nettoie le thread et toutes ses dépendances
+ Thyl: ok
+ Thyl: donc possible;)
+ Thyl:  ;)
+ Thyl: Connaissez- vous d'autres types de remonter de valeurs dans l'arbre que le minimax&#160;?
+ CopperFr: y'a pas le monté carlo tree search&#160;?
+ Thyl: si
+ Thyl: qu'est ce qui pourrait être long dans ça&#160;???
+ Thyl: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/7c4d7c4d-a336-45e5-80d4-5e3e43131d1e">http://chat.codingame.com/pastebin/7c4d7c4d-a336-45e5-80d4-5e3e43131d1e</a>
+ lionel_fr: malloc() sans free()
+ lionel_fr: tous les a sont perdus sauf le dernier qui ne sera jamais libéré. 
+ lionel_fr: si malloc() sur un pointeur local, le free() doit être local aussi ... 
+ lionel_fr: oh , a est copié dans PION
+ lionel_fr: ok, c'est juste suicidaire de faire des mallocs pour ça mais en l'état, ça ne crashera ptet pas
+ lionel_fr: ta struct est toute petite, les mallocs fonctionnent souvent avec des tailles de page 256 ou 512 (comme les clusters sur disque)
+ lionel_fr: conclusion
+ lionel_fr: faire plutôt un&#160;:
+ lionel_fr: PION [...][...][...]; // global
+ lionel_fr: éventuellement avec un gros malloc pour tout le tableau ...   mais pourquoi faire&#160;?
+ lionel_fr: le compilo fait exactement la même chose et il libèrera le tableau en quittant avec le segment bss...   
+ lionel_fr: d'autre part
+ lionel_fr: PION[][][] stocke des pointeurs, qui occupent une place en mémoire (64 bits each)
+ lionel_fr: alors qu'en global , PION n'est pas un tableau de pointeurs, c'est un buffer avec un pointeur racine où tous les accès sont résolus par de l'arithmétique sur pointeurs
+ lionel_fr: même solution, abandonne le tableau de ptr et fais un tableau de typedef struct
+ Thyl: j'ai fait ç aparce que si je dit que a est un pion si je le fait correspondre à une case alors c'est la valeur ou le pointeurs qui correspont&#160;?
+ lionel_fr: je comprends pas
+ lionel_fr: les mallocs utilisés comme ça , seront au mieux instables, mais généralement crasheront
+ lionel_fr: si tu fais PION * monpion[][][]; grobal, tu peux faire des mallocs comme tu le fais MAIS...
+ CopperFr: c'est quoi comme jeu&#160;?
+ lionel_fr: Si tu veaux lire monpion[0][1][2].xy et que ce pion n'a pas été alloué avant, tu crashes (lecture adresse nulle)
+ lionel_fr: si tu free un pion qui n'a pas été alloué, crash
+ lionel_fr: blabla
+ lionel_fr: malloc , c'est un truc qui adore crasher, il faut l'user avec parcimonie
+ CopperFr: malloc ca crache pas
+ lionel_fr: en plus, un pointeur 64 bits, c'est vachement plus gros que ta struct&#160;! et je parle pas des ressources système (table d'allocations) , en tout , ton pion va occuper 256 bits de RAM en plus de la data que tu stockes dedans&#160;!
+ lionel_fr: si tu veaux absolument utiliser des pointeurs sur pion. Crée d'abord ton tableau global et ajoute&#160;:
+ lionel_fr: PION * monpion;
+ Stilgart: bonjour Automaton2000, AutomatonNN, et les codeurs du samedi
+ Automaton2000: il aurait mieux fait de pas avoir à le faire
+ AutomatonNN: voir de bon la nuit quand tu es devant toi :D
+ lionel_fr: puis tu fais des monpion = * global_pion[1][2][3];
+ dwarfie: AutomatonNN&#160;: les codeurs du samedi sont-ils meilleurs que les codeurs du dimanche&#160;?
+ AutomatonNN: expliquer mon code de contest c'est de la merde
+ Stilgart: AutomatonNN: fais pas ton Boulet, sinon tu vas finir légende
+ AutomatonNN: ouvert par contre c'est pas trop compliqué de faire un truc de ce que j'ai fait au bout de cette pla
+ pardouin: o/
+ Stilgart: \o
+ pardouin: vous ne me verrez plus pendant un moment, j'ai décidé de faire un gros break sur CG
+ pardouin: (pour passer plus de temps avec ma fille)
+ pardouin: mais j'ai bien apprécié l'ambiance ici&#160;:)
+ CopperFr: ok bonne continuation
+ Thyl: Tu resteras dans la légende du golf&#160;!&#160;:)
+ Stilgart: AutomatonNN se souviendra de ton passage
+ AutomatonNN: voilà c'est un peu de chance de faire un truc pour le moment je suis pas sur que c'est pas le bon te
+ Stilgart: (ou pas&#160;?!)
+ CopperFr: il a pas de mémoire l'automaton
+ CopperFr: Vous préférez Brian Kernighan ou Dennis Ritchie&#160;?
+ JBM: tortue contest de contest
+ Stilgart: comment es ton -3vel
+ dwarfie: negatif
+ Stilgart: donc tu avances
+ dwarfie: on avance toujours ... mais des fois a reculons ( comme si bien dit dans spaceballs )
+ dbdr: il a pas assez d'essence pour faire la route dans l'autre sens
+ Stilgart: (pourquoi ça me fait penser aux dupon{d,t} dans tintin&#160;?)
+ dbdr: association d'époque?
+ dbdr: c'est du Souchon
+ Stilgart: on va dire que c'est ça
+ Stilgart: les joies des neurones&#160;:)
+ Stilgart: n'est-ce pas AutomatonNN&#160;?
+ AutomatonNN: oui
+ dbdr: c'est aussi possible qu'ils aient une mésaventure du genre
+ Maxi_dev: Le classement qu'on a sur notre profil c'est par rapport à notre niveau&#160;?
+ CopperFr: Vous préférez Tintin ou Astérix&#160;?
+ Stilgart: oui, ils tournent en rond dans le désert et ils n'arrêtent pas de perdre leur bidon d'essence et de le re-retrouver
+ dbdr: un désert de Moebius?
+ Stilgart: Maxi_dex: non, c'est pas rapport à ton activité
+ Maxi_dev: Ah d'acc merci
+ Stilgart: dbdr: non, il n'y avait pas encore de DP3 à l'époque&#160;:)
+ dbdr: comment survivait-on sans?
+ JBM: on tordait des tores
+ Stilgart: faut demander à Automaton2000
+ Automaton2000: il y a moins de 30 minutes
+ dbdr: belle alliteration
+ dbdr: ta tortue tord tes tores
+ JBM: tu tords tes tores a tort, tortue?
+ dbdr: tututut...
+ Stilgart: pas étonnant que Automaton2000 soit khéloniphobe après ça
+ Automaton2000: enfin bon je suis dans la merde
+ dwarfie: Automaton2000 .... c'etait donc ca l'odeur ...
+ Automaton2000: si tu bats le boss en ide
+ dbdr:&#160;?? mon golf python don't panic passe pas sur le puzzle :o
+ dwarfie: :fearful: what&#160;!? ton puzzle est resté en python 2 ...?&#160;;)
+ dbdr: several floors, c'est pas le meme cas on dirait
+ dwarfie: pourtant ... je suis quasiment sur que si ...
+ dbdr: ben compare entre deux tabs / windows
+ dbdr: c'est décalé
+ dwarfie: bon , moi , c'est carrement identique ...
+ dbdr: Standard Output Stream:4 24 200 3 5 40 0 3Standard Output Stream:4 24 200 3 2 40 0 3
+ dbdr: 5 == 2&#160;?
+ dbdr: (output de cat en bash)
+ dbdr: I don't know C++-- JBM :D
+ dwarfie: arf ... je clque a 2 endroit differnet et il m'ouvre 2 fois le puzzle grrr
+ dwarfie: ok , pas le meme ...
+ Stilgart: bon, encounter surface, ça s'est fait
+ Stilgart: avec un bon vieux&lt;trou dans le code&gt; -- we do not need to handle this corner case
+ pardouin: de mémoire la shoelace formula gère tous les cas particuliers pour les polygones convexes mais pas regardé le puzzle de près
+ pardouin: moi j'ai fini mon unfolding papers, j'aime pas laisser des trucs en plan
+ pardouin: je vous retrouve dans plusieurs moi, tchou p/
+ pardouin: o/
+ pardouin: mois*
+ Stilgart: pardouin: oui, mais c'est pas là que je traite pas un corner case
+ Stilgart: c'est dans l'intersection de segments que je traite pas le cas de segments parallèles vu que ça sert à rien dans mon algo d'intersection de polygones
+ Stilgart: TBali: si tu lis ça, pense à faire des statements lisibles
+ JBM: dbdr: mmm?
+ dbdr: ta solution en "C++"
+ dbdr: qui est en D
+ JBM: ah c'etait celui-la
+ Kyoku: .
+ CopperFr:&#160;;
+ Zorg1:&#160;!
+ CopperFr:&#160;?
+ Zorg1: |
+ CopperFr: _
+ Stilgart: (╯°□°）╯︵ ┻━┻
+ CopperFr: en un char
+ Zorg1: comme ça essaie de gruger
+ Zorg1: j'suis degouté
+ Stilgart: doux euphémisme vu ce que je viens de pondre pour le puzzle de TBali spécifié avec les pieds d'un amputé des deux jambes
+ Zorg1: rien t'empeche d'éditer le statement au lieu de râler :p
+ Stilgart: si
+ Stilgart: tibo il va pas vouloir que je remplace le puzzle en un return 1
+ Stilgart: :p
+ Zorg1: c'est sûr quitter la loge impériale c'est risqué
+ Zorg1: on peut se prendre un coup de poignard
+ Stilgart: (note que je suis sérieux... pour moi, son puzzle, il n'y a RIEN à sauver)
+ JBM: c'est souvent le cas
+ Krigs: Bonjour à toutes et à tous&#160;! Je débute et suis complètement autodidacte. Quelques conseils pour bien démarrer&#160;? Je suis en réorientation pro et je me dirige vars Wild Code School pour faire DATA analyst. Merci pour vos réponses ^^
+ CopperFr: hé ben
+ CopperFr: tu va faire du python alors&#160;?
+ Krigs: Je me suis dirigé par defaut dessus c'est le bon choix&#160;?
+ vdtdg: Oui tout à fait
+ vdtdg: C'est un bon langage pour apprendre et en data c'est le langage principalement utilisé
+ Krigs: Merci&#160;;)
+ Krigs: j'ai vu une présentation ytb de Seebomega qui disait de venir sur codingames car bonne méthode d'apprentissage 
+ Krigs: donc je m'exerce un max merci pour les infos et bonne journée à tous
+ vdtdg: Bon courage à toi
+ Krigs: ty
+ ZooooX: Salut
+ Krigs: :hand_splayed:
+ ZooooX: stilgart avait parlé hier du puzzle the river 2 comme étant du troll du coup j'essaie de le faire mais je timeout du coup je me sent ridicule ...
+ ZooooX: voila
+ CopperFr: mais non c'est pas grave
+ Zorg1: du troll ... disons qu'il y a un piège dans la façon dont il est rédigé pour te faire aller vers la solution la plus bourrine de mémoire
+ ZooooX: ahah j'avoue que je brute force un peu pour trouver si oui ou non
+ CopperFr: Tu mémoïses&#160;?
+ ZooooX: J'ai pas encore compris ce que ca voulais dire mémoïse :D
+ ZooooX: de la récursion en gros&#160;?
+ Zorg1: bah suppose que tu appelles f(x,y,z) qui te retourne un entier apès un traitement compliqué
+ CopperFr: c'est un cache
+ Zorg1: tu peux l'appeller qu'une fois et noter que pour tel x,y,z t'as tel valeur et tu évites les traitements complexes
+ Zorg1: oui c'est un cache
+ CopperFr: en général on utilise un dictionnaire pour retrouver vite les résultats
+ Zorg1: et pour une fonction récursive qui s'appelle avec souvent les même paramètres tu évites énormément de refaire un paquet de fois le même chemin
+ Zorg1: un exemple classique c'est d'énumérer la façon d'avoir un euro avec les pièces d'1,2,5,10,20 et 50 centimes
+ Zorg1: (ou d'autres combinaisons, pour le fun)
+ Zorg1: (ou plutôt compter le nombre de façon de le faire)
+ ZooooX: bah c'est parti je vais essayer d'apprendre a faire ca
+ CopperFr: tu pourras même faire le terrible puzzle escalier après
+ Zorg1: :scream:
+ ZooooX: oula très difficile j'y ai même pas mis le nez encore 
+ CopperFr: bah faut juste faire attention à la marche
+ Zorg1: Automaton2000 une analyse rapide de la situation, veux tu&#160;?
+ Automaton2000: ça peut te faire plaisir
+ Zorg1: nice Automaton2000 je n'attendais pas moins de toi
+ Automaton2000: vu que j'ai un soucis avec le puzzle de la semaine
+ CopperFr: il est pas dur le puzzle de la semaine Automaton2000
+ Automaton2000: avec une profondeur de 1
+ Zorg1: fix ton depth Automaton2000
+ Automaton2000: copperfr t'as partiellement raison sur le fait que ça marche
+ Zorg1: j'adore ce bot ^^
+ Krigs: Punaise je me fout les nerfs à ne pas comprendre certains choses qui d'autant plus paraissent simples...J'ai l’impression d’être complètement teubé avec une Teub majuscule&#160;!! grrrr
+ BlaiseEbuth: Yo tout l'monde&#160;! Automaton2000, AutomatonNN&#160;!
+ Automaton2000: sauf si tu es le seul à ne pas en avoir besoin
+ AutomatonNN: spécifiquement c'est pas trop compliqué de faire un truc de base aussi
+ renode: yo c qui le bot aha chehhh
+ dwarfie: BlaiseEbuth va te repondre&#160;: stoi le bot
+ BlaiseEbuth: Nan j'y ai pensé, mais j'ai pas envie de le relancer
+ dwarfie: :D
+ dwarfie: Automaton2000 ... sors nous une tortue, le chat est mort ...
+ Automaton2000: ce moment où tu as une idée de pourquoi
+ BlaiseEbuth: On ne sait pas si le chat est mort tant qu'on a pas ouvert la boîte.
+ ZooooX: re
+ BlaiseEbuth: o/
+ dwarfie: Automaton2000 , commence pas a philosopher, c'est carrement le boulot de AutomatonNN 
+ Automaton2000: c'est un peu comme ça
+ AutomatonNN: pour le moment j'ai pas le temps de faire un truc de magus et tout le monde sait que tu es dans le c
+ dwarfie: ++ s'il te plait AutomatonNN ... le c++
+ AutomatonNN: oui
+ dwarfie: merci
+ ZooooX: j'ai résolu le problème sans timeout du coup en essayant une mémoïsation je peux avoir un avis sur mon code&#160;? 
+ BlaiseEbuth: Quel problème&#160;?
+ dwarfie: LE probleme
+ ZooooX: the river 2 copperfr et zorg1 m'ont conseiller de regarder la mémoïsation 
+ ZooooX: parce que je faisais un timout sur les gros nombres ^^
+ BlaiseEbuth: Ah, je sais pas si la mémoisation est nécessaire... Faut juste pas avoir un algo de bourrin ^^
+ dwarfie: river 2 ... j'ai une solution oneline , donc sans memo ...
+ ZooooX: mais heuuu je suis sur qu'il y'a juste un calcul a faire mais je suis claqué en maths
+ dwarfie: j'ai juste une somme ... va falloir que je revois le sujet moi&#160;:)
+ BlaiseEbuth: Je sais même pas ce que fait ma solution... Je m'était visiblement amusé à simplifier à l'extrème pour que ce soit joli... Mais du coup c'est relou à comprendre...
+ Maxi_dev: Personne de l'université de Toulon&#160;?
+ dwarfie: j'ai juste un range , un map et un sum ...
+ dwarfie: rien de transcendant
+ BlaiseEbuth: Tiens c'est rigolo ça&#160;: c += i++ == s
+ dwarfie: que c'est sale .... j'adore :D
+ BlaiseEbuth: Tu codes en quoi ZooooX&#160;? Pour savoir si je peux m'exposer à ton code sans risque de lésions occulaires.
+ ZooooX: Javascript ahah
+ <b>**dwarfie tend des :sunglasses: a BlaiseEbuth</b>
+ ZooooX: j'ai cru comprendre que tu n'aimais pas trop ca&#160;? :d
+ Zorg1: moi j'ai jamais conseillé mémoisation pour river 2
+ Zorg1: j'ai juste décrit l'algo ^^
+ Zorg1: après river2 je crois pas avoir de mémoisation
+ ZooooX: oui pardon pas conseillé mais que ca pouvais aider a optimiser moi problème de timeout
+ dwarfie: non , y'a vraiment pas besoin ...
+ ZooooX: mon*
+ Zorg1: river 2 je crois qu'il faut réfléchir à l'envers
+ CopperFr: pour les puzzle math y a souvent une formule ou un truc à connaitre
+ Zorg1: ou a retrouvé
+ BlaiseEbuth: Y'a pire.
+ CopperFr: genre la suite de fibonacci
+ Zorg1: tu vas sur la page WP des nombres de fibo t'as un bon paquet de propriétés de la suite qui sont listées
+ dwarfie: ah ah ah ... je viens de le faire sans forcer en js ...a peine 6 lignes et quand je vois les solutions des autres , je pige pas ...
+ CopperFr: les nombres triangulaires ca m'avait aidé
+ CopperFr: en même temps tant qu'on a les points
+ dwarfie: ZooooX ... du coup j'ai publié ma solution des fois que tu voudrais comparer :p
+ Zorg1: ah oui c'est simple la solution
+ ZooooX: je la cherchais justement :D
+ dwarfie: et en plus , je  vois que je pourvait encore alleger la chose :D
+ Zorg1: en fait traduit mathématiquement l'énoncé se réduit à une ligne
+ Zorg1: je comprend qu'on dise que c'est un "troll"
+ ZooooX: le truc c'est que moi je serai incapable de trouver qu'il faut absolument pas parcourir toute la suite quoi
+ dwarfie: ben , je la parcoure entierement ...
+ Zorg1: bah essaie de réflechir comment trouver une valeur qui donne une autre valeur
+ dwarfie: (enfin il me semble bien)
+ Zorg1: et comment ça peut t'aider à trouver une solution à ton problème
+ CopperFr: y a quand même des puzzles plus intéressants&#160;?
+ Zorg1: que river ii&#160;?
+ Zorg1: oui
+ dwarfie: oui ... oui ... y'en a aussi ... :p
+ Zorg1: après ça dépend aussi de tes centres d'intérêt
+ Zorg1: si l'ASCII art te fait kiffer
+ CopperFr: ben non j'ai pas faire le Hour Glass
+ Zorg1: lui je l'ouvre, je le ferme aussi sec :D
+ Zorg1: y a Xorandor aussi dans le genre "championnat de parsing"
+ CopperFr: moi  aussi je préfère les clepsydres
+ Zorg1: après les anciens ont réussi à calculer la période lunaire à la seconde près uniquement avec beaucoup d'observation sans instrument de précision&#160;;-)
+ dwarfie: encore un  coup des aliens sans doute :D (en tout cas c'est ce qu'on dirait dans une emission de tv)
+ Zorg1: oui c'est comme tracer un cercle, pour calculer une moyenne faut forcément un ancien astronaute dans le coup ^^
+ ZooooX: Dwarfie je te met un ptit upvote en tout cas car ta solution doit être  la meilleure de toutes celles publiées en js ahah
+ Zorg1: ah c'est bon t'as réussi le pb ZooooX&#160;?
+ dwarfie: en meme temps , si de nos jours , la majorite est pas capable d'addition, soustraction sans calculatrice ... les anciens avaient certainement l'aide des anciens astronautes pour reussir ... 
+ dwarfie: d'ailleurs , sur que c'est les aliens qui ont donné le boulier au chinois :D
+ ZooooX: bah oui je l'avais réussi mais en mettant en place la mémoïsation du coup
+ Zorg1: ah ok
+ CopperFr: ca sera utile pour d'autres puzzles
+ ZooooX: qui n'étais pas nécessaire comme la bien montré dwarfie
+ dwarfie: bah , ca te servira ... pour roller coaster par exemple&#160;;..
+ Zorg1: Resistance
+ CopperFr: Escalier
+ Zorg1: (quoique je l'ai fait avec un tableau celui là)
+ dwarfie: pareil :D
+ Zorg1: la récursivité ça a besoin d'une pile, je n'en avais plus chez moi
+ Zorg1: cet humour de haut niveau
+ Zorg1: je sens que je vais l'encadrer
+ Zorg1: :p
+ ZooooX: après je sais pas si je l'ai réellement bien appliquée mais ca a optimiser assez pour valider les tests
+ CopperFr: fait escalier il est bien
+ dwarfie: fait roller coaster , c'est un officiel , il rapporte plus d'XP :D
+ Zorg1: et tu as un bonus si tu le fais en Clojure
+ Zorg1: (après faut être motivé aussià
+ ZooooX: ahah
+ CopperFr: faudra que le fasse ne clojure
+ dwarfie: oh qu'il est beau qu'il est beau mon puzzle .... faites le donc mon puzzle ... 
+ dwarfie: c'est le marché aux puzzles la :D
+ plieuse: Coucou
+ Zorg1: CopperFr&#160;: fix ton clojure
+ plieuse: y a-t-il quelqu’un pour l’envoyer des ondes positives 
+ CopperFr: j'ai fait du scheme donc ca va
+ plieuse: ,?
+ plieuse: m’envoyer*
+ CopperFr: je veux bien
+ Zorg1: je met en route le générateur d'onde positive
+ Zorg1: ça fait un boucan de tous les diables ce truc
+ plieuse: Merci
+ Zorg1: :D
+ CopperFr: faut envoyer des +++++++++++
+ dwarfie: t'as retrouvé des piles pour le faire marcher&#160;?&#160;;)
+ Zorg1: non c'est un moteur deux temps
+ CopperFr: bah un chargeur usb
+ Zorg1: je te dis pas le raffut
+ Zorg1: impression d'avoir une mobylette en plein régime dans le salob
+ dwarfie: ca pourrait etre pire ... ca pourrait etre un serveur Dell en train de booter ....
+ CopperFr: c'est pas bien les serveurs dell&#160;?
+ Zorg1: c'est pire qu'une machine à laver en essorage rapide&#160;?
+ dwarfie: reacteur d'avion pendant les 7 minutes a attendre avant d'avoir l'ecran de boot
+ dwarfie: sur les derniers modeles
+ Zorg1: ah oui je vois le genre
+ CopperFr: faut prendre des mainframe jbm&#160;?
+ dwarfie: des serveurs qui parlent que haskell ... pourquoi pas , mais mes collegues vont pas suivre :D
+ CopperFr: tu as reussi le puzzle des motos plieuse&#160;?
+ plieuse: Non
+ Zorg1: c'est le puzzle "bridge" les motos&#160;?
+ plieuse: jai une liste de motos et une liste de vitesses, et je sais qu’elle est la vitesse de chute
+ Stilgart: dwarfie: c'est très bien yesod
+ Stilgart: Zorg1: oui
+ CopperFr: non c'est pas celui là Zorg1
+ CopperFr: dans bridge y a aussi des motos
+ plieuse: mais je n’arrive pas à réordonner les motos dans l’ordre après leur chute
+ Zorg1: ah ok
+ plieuse: peutetre avec un dictionnaire&#160;?
+ Stilgart: il y a un autre puzzle avec des motos&#160;? o_O
+ plieuse: pour l’instant je cherche
+ plieuse: pas encore désespérée 
+ dwarfie: Stilgart&#160;: yesod&#160;?
+ plieuse:&#160;;-)
+ Zorg1: ah le truc de wizard d'oz/BLANC
+ Stilgart: cherche à yesodweb
+ Zorg1: tilt truc/machin
+ Stilgart: Zorg1: on a dit puzzle, respecte-nous un peu :p
+ Stilgart: plieuse: donne toi une vie, change de puzzle&#160;:)
+ Zorg1: un puzzle ça se balance contre un mur et ça tombe en mille morceau&#160;?
+ Zorg1: donc ça répond bien à la définition :p
+ CopperFr: il est pas dur celui là
+ Stilgart: seulement ceux de 1000 pièces
+ dwarfie: ouais ... je dis pas le contraire ... mais on en revient au fond de ma phrase ... mes collegues risquent pas de pouvoir s'en servir :D
+ CopperFr: c'est du tri et le tri c'est bien
+ Stilgart: CopperFr: vu l'auteur, il est probablement mal spécifié 
+ plieuse: Moui...
+ CopperFr: oui un peu
+ CopperFr: mais tu peux éditer le statement&#160;?
+ dwarfie: celui ou c'est pas clair pour les angles sans doute ...
+ Zorg1: voilà
+ Stilgart: si c'est qu'un peu, c'est que quelqu'un (si ça se trouve c'est moi en plus) à nettoyer le caca
+ Stilgart: CopperFr: alors...
+ dwarfie: CopperFr&#160;: un charlot a publié une merde , des gens ont validé , on va pas en plus devoir corrigé ...
+ Stilgart: il fut un temps où je faisais ça oui...
+ Zorg1: voilà "stall tilt
+ Stilgart: mais vu comment ça sert à rien, j'ai arrêté&#160;:)
+ CopperFr: y'en a des pire que celui là
+ dwarfie: et ...
+ Stilgart: c'est pour ça que je pense que quelqu'un a nettoyé ce puzzle là
+ Stilgart:&#160;;)
+ CopperFr: tant mieux
+ plieuse: Non je n’ai pas de problèmes avec les angles
+ Stilgart: (de mémoire, les puzzles de oz c'est toujours une énorme cata)
+ plieuse: jai un problème de tri
+ CopperFr: t'as les vitesses, les virages de chute&#160;?
+ plieuse: Oui
+ Zorg1: ah mais je l'ai jamais résolu ce pb en fait
+ dwarfie: ouais , je confire que quelqu'un a du y toucher ... avant c'etait pire ...
+ Stilgart: Zorg1: héhé
+ Stilgart: c'est à ça qu'on reconnait les vrais&#160;!
+ dwarfie: d'ailleurs vu les comment , c'est niako qui a du retoucher le truc
+ CopperFr: decroissant selon les virages puis croissant selon les vittesses 
+ plieuse: oui, oui, j’ai compris
+ plieuse: no. Attends
+ dwarfie: tien , la page de research de euler garde l'ancien peuso ... marrant ...
+ CopperFr: j'ai infini si pas de chute
+ plieuse: yen a deux qui tombent deux fois, un qui tombe une fois
+ CopperFr: tu tombes qu'une fois maximum&#160;?
+ plieuse: cest pas ca
+ Zorg1: oui si tu tombes une fois tu finis la course
+ plieuse: jai une liste de lettres qui représentent des motos
+ plieuse: et une liste de vitesses
+ plieuse: je suis coincée au moment de les trier
+ CopperFr: t'as aussi le virage de chute ou infinie si pas de chute par exemple&#160;?
+ plieuse:&#160;?
+ plieuse: ecoute je te montre mon code, tu verras bien
+ <b>**dwarfie pige pas du tout de quoi parle CopperFr :D</b>
+ CopperFr: c'est pas compliqué pourtant
+ Zorg1: plieuse&#160;: t'as pas une structure/objet "moto" avec la vitesse et l'id&#160;?
+ dwarfie: c'est encore moins compliqué de tester juste virage par virage la vitesse max qui passent ...et virer les motos qui passent pas ...
+ Zorg1: ce que je suis en train de coder en fait
+ plieuse: Excuse moi je suis sur ma tablette j’arrive pas à tout sélectionner.
+ plieuse: ca attendra lundi
+ plieuse: ok&#160;?
+ Zorg1: dans un langage de haut niveau
+ plieuse: merci quand même 
+ CopperFr: pas de souci c'était juste pour savoir en fait
+ dwarfie: Zorg1 ... haskell pour le fun&#160;?
+ <b>**dwarfie  se dit que pour le fun , il va le faire d'ailleurs :D</b>
+ CopperFr: c'est un classement&#160;?
+ plieuse: Zorg1&#160;: non
+ Zorg1: bon la tangente de 60°
+ Zorg1: j'ai la flemme de la calculer ^^
+ dwarfie: 0.32 ... d'apres la case recherche de mon firefox :D
+ Zorg1: ah racine de 3
+ Zorg1: 1,7 ...
+ dwarfie: tien , moi j'ai tangente de 30 ...
+ dbdr: tu l'as fait en radians
+ Zorg1: theta c'est l'angle / à la verticale et c'est 30° / au sol non&#160;?
+ plieuse: Oui
+ Zorg1: laisse tomber je ne sais plus faire une règle de trois sans me blesser ...
+ CopperFr: c'est dangereux les régles de troie
+ Zorg1: ouaip y a un malin qui y a planqué un cheval
+ Zorg1: tu fais pas gaffe tu reçois une ruade :p
+ CopperFr: c'est à cause de priam&#160;?
+ plieuse: C’est un piège 
+ Zorg1: forcément y a Ulysse dans l'affaire
+ Zorg1: c'est pas un truc honnête
+ Zorg1: Cassandra a prévenu qu'y avait cheval sous roche mais tout le monde s'en fout
+ CopperFr: faut dire qu'il est magnifique le cheval
+ CopperFr: (et la belle hélène aussi)
+ Zorg1: comme la poire&#160;?
+ CopperFr: ca me rappelle brassens
+ Zorg1: y avait trois capitaines dans le coup
+ Zorg1: si je me souviens bien
+ CopperFr: oui
+ Zorg1: ok fini "stall tilt"
+ Zorg1: bon c'était clair pour moi le statement
+ plieuse:&#160;:’-(
+ CopperFr: tu va y arriver plieuse
+ Zorg1: en fait a est mieux classé que b&#160;:
+ plieuse: Tu crois&#160;? 
+ Zorg1: 1/ a n'est pas tombé, b si
+ Zorg1: 2/ a est tombé après b
+ Zorg1: 3/ a va plus vite que b
+ Zorg1: je crois qu'il aurait du mettre un truc dans ce gout la plutot que sa bouillie de Va Vb Vc
+ CopperFr: oui c'était un peu pénible à lire
+ Zorg1: après ça équivaut un peu à filer la fonction de comparaison ^^
+ CopperFr: j'ai fait ce qui me paraissait le plus loguque sans vraiment lire :D
+ Zorg1: ah OK je vois le genre ^^
+ Zorg1: je code à l'intuit, je regarde quand ça merde
+ Zorg1: oui mais c'est logique, faut aller le plus loin possible et le plus tôt
+ CopperFr: ca serait surprenant que celui qui tombe au premier virage soit en tête du classement
+ Zorg1: bah avec un système de points, y a des résultats surprenants ....
+ Zorg1: mais c'est vrai que c'est pas évident de dégager un principe simple de son bazar
+ Zorg1: après il y a le tag "physique" au puzzle alors que bon c'est juste appliquer une formule sortie d'on ne sait d'où
+ CopperFr: oui y'a pas vraiment de physique on est d'accord :D
+ Zorg1: c'est surtout un puzzle de tri
+ CopperFr: oui ca permet d'apprendre le tri multi-critère
+ Zorg1: t'as un puzzle qui est plus interessant sur ce sujet
+ plieuse: Ah&#160;? Faut que je me renseigne sur le tri multi critères&#160;?
+ Zorg1: bah si tu définis une fonction de comparaison c'est bon non&#160;?
+ CopperFr: oui si c'est ce qui te bloque
+ CopperFr: oui encore faut-il la définir correctement 
+ CopperFr: après si le tri est stable tu dois pouvoir faire 2 tri à la suite
+ plieuse: Je crois que le problème, c’est de faire du tri en place
+ plieuse: peut être  j’ai mal posé le problème et je suis dans l’impasse 
+ CopperFr: en place c'est sort()
+ CopperFr: sinon sorted pour renvoyer une nouvelle liste
+ plieuse: ok
+ CopperFr: si tu affiche le resultat de sorted c'est bon aussi
+ Zorg1: bah si tu crées pas un objet "moto" ça risque d'être compliqué de trier selon plusieurs criteres
+ CopperFr: oui une liste de tuple
+ plieuse: hmm
+ Zorg1: oui un truc pour associer id de la moto/vitesse/virage où il chute
+ plieuse: javais pas pensé à ça 
+ CopperFr: oui tu as plusieurs listes&#160;? 
+ Zorg1: bah sinon tu risques de te compliquer la vie pour maintenir toutes les infos non&#160;?
+ plieuse: j’ai deux listes
+ plieuse: une pour les motos et une pour les vitesses
+ CopperFr: dans ta deuxième liste tu peux faire un tuple (id, vitesse, virage de chute)
+ Zorg1: c'est possible de résoudre avec seulement une liste (id,vitesse) mais ça fait bcp de manip de tableau en fait
+ Zorg1: quoiqu'avec une liste chaine c'est faisable
+ CopperFr: en python tu va plutôt faire des tuples je pense :D
+ Zorg1: une liste 'motos toujours en course' et une liste 'motos tombées'
+ plieuse: Hmm
+ CopperFr: et tu concatène&#160;?
+ Zorg1: oui
+ CopperFr: tu peux aussi afficher à la suite ici :D
+ Zorg1: en fait c'est + simple, vu qu'a chaque virage c'est un préfixe de la liste "motos en course" qui s'insére devant "motos tombees" dans le même ordre
+ Zorg1: pas besoin de listes chainees
+ Zorg1: (la liste 'motos en course' étant triés par vitesse)
+ CopperFr: il est drôlement bien ce puzzle en fait :D
+ Zorg1: en lisp ça doit bien se code en fait
+ CopperFr: en clojure ca doit être top
+ Zorg1: après si les vitesses sont toutes différentes tu te fais un tableau associatif vitesse =&gt; id de la moto
+ Zorg1: c'est pas de la prog très propre mais bon
+ plieuse: Attends je. Suis en train d’essayer la concaténation des tombées / pas tombées 
+ Stilgart: bon, comment je l'ai fait ce puzzle&#160;?
+ dwarfie: comment je galere a le faire en haskell parce que j'ai perdu la moitie de ce que je savais ... :D
+ Stilgart: moi je galère à le trouver
+ Stilgart: c'est quoi son nom&#160;?
+ dwarfie: stall tilt
+ Zorg1: oui 
+ Stilgart: tiens, j'avais pas mis 1*, c'est pas si pire que ce que j'avais en tête
+ Zorg1: t'es obligé de mettre au moins une étoile non&#160;?
+ CopperFr: il est bien ce puzzle
+ Stilgart: Zorg1: je reformule
+ BlaiseEbuth: Reuh
+ CopperFr: il avait mis plus que 1 *&#160;?
+ Stilgart: j'ai pas tellement ragé que je me suis senti obligé de voter et donc de mettre 1*
+ Zorg1: c'est l'explication du classement qu'est un peu tordue
+ Stilgart: CopperFr: après, ses puzzles sont pas forcément mauvais
+ Stilgart: c'est jsute que&#160;:
+ Stilgart: 1. il ne sait pas rédiger un sujet
+ CopperFr: après il a du mal à les rédiger j'ai bien compris
+ Zorg1: il a juste un petit problème au niveau de la programmation dynamique je crois ^^
+ Stilgart: 2. il sait encore moins doser la difficulter
+ CopperFr: c'est pas le seul
+ Stilgart: j'ai souvenir d'un puzzle où il ne savait pas faire n=10 et où je faisais sans effort n=1000000
+ <b>**BlaiseEbuth essaye de deviner de qui on parle...</b></p><p><img src="/a/49629049829522" /> CopperFr: tout le monde est pas un geni comme toi
+ BlaiseEbuth: Magiciedoz?
+ Zorg1: oui le problème des quilles de je ne sais plus quel jeux scandinaves
+ Zorg1: oui il a changé de nom maintenant
+ BlaiseEbuth: fix ton molki
+ Stilgart: CopperFr: nan mais là l'écart est trop important, et c'était genre la 3e fois que je lui disais d'aller voir ce que c'était que de la prog dyn et qu'il n'écoutait pas&#160;:)
+ Zorg1: voilà ^^
+ Stilgart: (je crois que le puzzle en question a été shooté au final)
+ Stilgart: (ha oui, et cf point 1)
+ CopperFr: c'est un peu pompeux que nom la prog dynamique :D
+ CopperFr: comme*
+ Stilgart: c'est légendairement un choix de merde, surtout
+ Zorg1: "programmation" ça veut dire tableau je crois dans ce contexte
+ Zorg1: on sent le vieux truc
+ Stilgart: si bien que certains disent mémoïsation pour ça
+ Stilgart: (moins précis, mais moins pire aussi)
+ BlaiseEbuth: Ordonancement et planification plutot&#160;?
+ Zorg1: après c'était pas pour faire dans le même genre que la "programmation linéaire"&#160;?
+ Stilgart: possible
+ plieuse: Oh ça marche&#160;:-)
+ plieuse: merci merci merci
+ CopperFr: bravo
+ Zorg1: attends t'as implémenté ma solution limite troll&#160;?
+ Zorg1: :fearful:
+ plieuse: Haha oui
+ CopperFr: ca peut-être plus simple
+ BlaiseEbuth: sur quel puzzle&#160;?
+ Stilgart: Zorg1: même troll, tu restes un génie&#160;:)
+ Stilgart: BlaiseEbuth: toujours le même (stiall tilt)
+ Zorg1: :sunglasses:
+ Stilgart: -i
+ BlaiseEbuth: Je sais pas je viens d'attiver moi
+ CopperFr: oui il est trop bien ce puzzle
+ plieuse: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/stall-tilt">https://www.codingame.com/ide/puzzle/stall-tilt</a>
+ BlaiseEbuth: *rr
+ Stilgart: l'output est pas terrible
+ Stilgart: l'intérêt du y me laisser dubitatif
+ CopperFr: ben si en plus j'aime bien Airi SUZUKI alors bon
+ BlaiseEbuth: C'est pas celui là où tu dois print une constante&#160;?
+ BlaiseEbuth: Genre t'es toujours premier mais tu dois quand même l'afficher&#160;?
+ CopperFr: si
+ Zorg1: oui y  ç
+ Zorg1: *ça
+ Stilgart: BlaiseEbuth: je suis donc pas le seul à être peu convaincu
+ Zorg1: c'est classe
+ Zorg1: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/cc9d1d57-7140-4a6b-967f-480dde9f669d">http://chat.codingame.com/pastebin/cc9d1d57-7140-4a6b-967f-480dde9f669d</a>
+ BlaiseEbuth: Non Stilgart...
+ Zorg1: (c'est pas terrible comme idée en effet)
+ BlaiseEbuth: Il aurait du demander un tableau dessiné avec des '*' et les scores centrés dans les cases aussi...
+ Zorg1: (c'est du lua le morceau de code que j'ai posté, ne rager pas)
+ Stilgart: bon, et si je me posais la question de savoir comment on échappe au chat
+ Zorg1: BlaiseEbuth&#160;: bonne idée, je fait un puzzle avec ça :kissing_heart:
+ BlaiseEbuth: Tu cliques sur la croix en haut à droite.
+ Zorg1: ou tu peux fermer la fenêtre du chat
+ Stilgart: BlaiseEbuth: pas ce chat là... tu m'auras pas :p
+ BlaiseEbuth: J'ai pas encore regardé escaping the cat. J'ai même pas fait gaffe à quel type de jeu c'était
+ JBM: comment es ton re
+ BlaiseEbuth: vert
+ Stilgart: facile, tu es une souris dans une piscine, et ton but dans la vie c'est d'en sortir sans te faire bouffer par le chat
+ Zorg1: c'est pas un jeu physique j'espérais éclater tout le monde au -3vel
+ Stilgart: chat qui n'aime pas l'eau (comme un chat quoi) et qui tourne autour de la piscine
+ JBM: c'set dans quel cas la demi-impulsion?
+ BlaiseEbuth: Ouai mais opti, puzzle&#160;?
+ Stilgart: Zorg1: c'est pas impoissible que ce soit la solution :D
+ Zorg1: la collision élastique pas trop loin d'un trou noir pour avoir des effets relativistes
+ Stilgart: puzzle 
+ Zorg1: puzzle interactif
+ BlaiseEbuth: J'y regarderai
+ Zorg1: avec un referee
+ Stilgart: on te demande juste d'échapper au fat cat, au cat, au super cat, et au insane cat (lui il me bouffe)
+ Stilgart: (j'ai renommé les chats pour pas spoiler)
+ BlaiseEbuth: C'est pas mal, ça change des jeux de plateaux...
+ Zorg1: moi qui voulait avoir les trois cents versions du jeu de dames sur ce site&#160;:(
+ Zorg1: quoiqu'on peut se ratrapper avec les jeux de Rami ^^
+ BlaiseEbuth: Pour l'instant je suis dans cok...
+ Stilgart: hurle, pauvre fou&#160;!!!
+ BlaiseEbuth: Le rami en terme de profondeur de jeu c'est pas mal...
+ Zorg1: y a du random quand même
+ BlaiseEbuth: Ouai mais comme tu peux jouer autant que tu veux à ton tour, tu peux prévoir des trucs sympas
+ dwarfie: AHHHHHHH
+ Zorg1:&#160;?
+ JBM: ca me parait pas profond du tout
+ JBM: tu peux tout refaire le plateau a chaque tour, mais y'a assez peu de possibilites
+ dwarfie: j'ai quasiment fini cette @#! en haskell et je galere juste sur le tri final pour l'aouput ...
+ JBM: c'est a la main que ca donne l'impression d'etre beaucoup
+ BlaiseEbuth: Ouai JBM, j'ai un peu extrapollé. Ca demande une réflexion énorme pour un humain, mais c'est vrai que pour un bot ce serait trivial...
+ Zorg1: après le rami t'as la décision à faire les combis dans ta main pour tout jouer ou jouer tout de suite et donner aux autres une possibilité de se débarasser de leurs cartes
+ Zorg1: mais tu dois pas avoir un branching de folie en fait
+ BlaiseEbuth: Cok je m'y suis mis à cause du challenge, mais les approxs et les non-dits de l'énoncé m'ont saoulé, donc je me suis mis à traduire le referee. Et là le contest est fini, et mon referee non. Je ne me sens un peu obliger de le rentabiliser...
+ BlaiseEbuth: -ne
+ Zorg1: ah ah cette erreur ...
+ BlaiseEbuth: Ceci dit c'est un exercice presque intéressant...
+ Zorg1: ça me rappelle le fameux "tu mets le referee dans ton bot pour la simu et t'es légende"
+ Zorg1: je crois que c'était lors de MM cette pensée
+ BlaiseEbuth: Y'a quand même pas mal d'adaptations à faire
+ Zorg1: oui, mais à entendre certains t'avaient l'impression que c'était limite du copier/coller
+ Stilgart: dwarfie: tu fais quoi en haskell&#160;?
+ dwarfie: stall tilt
+ BlaiseEbuth: Faut pas rêver
+ Stilgart: pourquoi tu te fais du mal&#160;?
+ Stilgart: tu sais bien qu'à la fin, tu auras JBM et sa solution en 4 lignes pour bien te mettre la misère
+ BlaiseEbuth: Surtout en terme de perfs...
+ Zorg1: ah oui le referee n'a rien d'optimal
+ dwarfie: je sais bien mais bon ...
+ Zorg1: vu qu'il a tout le temps qu'il veut lui
+ BlaiseEbuth: Tu m'étonnes, ça copié les objets au moindre appele de fonction...
+ BlaiseEbuth: *copie
+ BlaiseEbuth: *appel
+ dwarfie: mais la , le sortBy fait vraiment n'importe quoi ... sinon j'aurais fini depuis longtemps ... mais je l'aurais un jour , je l'aurais
+ Zorg1: ah le sortBy en Haskell ne trie pas&#160;?
+ BlaiseEbuth: ce serait trop simple :3
+ Zorg1: ils sont méchant d'appeler leur fonction avec des noms trompeurs
+ Stilgart: utilise sortOn
+ Zorg1: c'est lazy
+ Stilgart: le type de sortBy est casse-pied
+ Zorg1: ah il te faut une fonction qui retourne LT/GT/EQ
+ dwarfie: c'est pas le type qui me casse les pieds , c'est le resultat ...
+ JBM: c'est prevu pour etre utilise avec Data.Function.on
+ dwarfie: il me trie bien sur un critere et m'inverse sur l'autre
+ JBM: dans les faits, sauf erreur, y'a quand meme sortBy qui utilise ladite comparaison aloes que sortOn fait une schwatzian transform
+ Zorg1: "schwatzian transform"
+ JBM: oui ok avec le r
+ Zorg1: après on s'etonne que les gens ont peur de Haskell
+ JBM: euh
+ JBM: c'est un perlisme
+ Stilgart: ai-je dis que les solutions de JBM font 4 lignes et mettent la misère&#160;?&#160;:)
+ Stilgart: Zorg1: ne pense pas une seconde que JBM ne me fait pas peur 
+ JBM: moi? qui suis la gentillesse incarnee?
+ Stilgart: surtout quand il fait des perlismes par mégarde :p
+ Stilgart: JBM: l'un n'empêche pas l'autre hein
+ <b>**JBM ressort son deguisement de bisounours</b></p><p><img src="/a/16542412157988" /> Zorg1: euh non véto
+ Stilgart: alors là j'ai carrément peur
+ Zorg1: je veux pas cette image mentale dans ma tête
+ Stilgart: les tortues, ça oui... mais les bisounours... :fearful:
+ Zorg1: surtout quand il y a JBM dedans
+ BlaiseEbuth: Surtout avec un barbu dedans
+ Stilgart: héhé
+ JBM: barbu moi?
+ Stilgart: on en apprend tous les jours
+ Zorg1: je sais pas on voit rien avec tes cadrages de streaming
+ JBM: Oh Ben Mince Alors
+ Zorg1: mais peut être que l'oeil aiguisé de BlaiseEbuth a vu un poil de barbe se balader
+ Zorg1: après avec le confinement pas mal de gens ont réduit leur fréquence de rasage
+ BlaiseEbuth: Non. C'était une hypothèse
+ Zorg1: tu résonnes par l'absurde&#160;?
+ JBM: a 440Hz
+ Zorg1: si JBM l'était on évitait la fin du monde&#160;?
+ Zorg1: se raser 440 fois par seconde, je te dis pas l'état de la peau ...
+ JBM: on choisit pas la frequence de resonnance de l'absurde
+ BlaiseEbuth: C'était basé sur le fait que wtit t'appelk
+ Zorg1: :fearful:
+ BlaiseEbuth: Merci le chat
+ JBM: ah ben si wtit le dik
+ JBM: ca doit faire foik ici
+ BlaiseEbuth: Bah  c'est un raisonement par l'absurede...
+ <b>**Zorg1 va tenter un reboot, ça a l'air confus tout ça</b></p><p><img src="/a/43354386183081" /> BlaiseEbuth: -e
+ JBM: bl: tu boies
+ BlaiseEbuth: bl?
+ JBM: BLaiseebuth
+ JBM: je raccourcis
+ BlaiseEbuth: Tiens le ping est pas case sensitive
+ JBM: tlm devrait avoir des pseudos de 3 chars
+ BlaiseEbuth: Fais pas ça, mk m'appelle comme ça...&#160;:/
+ JBM: ni case ni word non?
+ JBM: xxxBlAiSeEbUtHxXx
+ BlaiseEbuth: Marche pas
+ Zorg1: je crois qu'il repère le pseudo comme un mot quand même
+ BlaiseEbuth: Je vis dans la hantise de voir pop un onglet avec "Hey hey&#160;! Bl" dedans... :disappointed_relieved:
+ Zorg1: Hey&#160;! BL cava&#160;?
+ Zorg1: tu aimes les combats de bots
+ Zorg1: essayer mon starter et être legend CSB
+ Zorg1: ah oui c'est vrai il aimait bien te causer en privée
+ BlaiseEbuth: Comment tu sais ça&#160;?:no_mouth:
+ Zorg1: enfin moi aussi il me troller en privée
+ Zorg1: je suppose que j'étais pas le seul
+ BlaiseEbuth: Non.
+ Zorg1: il est pas forcément méchant, mais je l'ai trouvé très invasif sur le coup
+ Zorg1: mais bon pê un problème d'âge aussi ^^
+ BlaiseEbuth: Oui, très. Ez l'a même bloqué sur discord...
+ Zorg1: ah ok
+ Zorg1: après c'est sur un chan privé donc je suppose qu'on ne va pas trop en parler en public
+ BlaiseEbuth: :zipper_mouth:
+ Zorg1: après je me suis toujours demandé pourquoi ils l'ont nommé modo du chat
+ dwarfie: c'te loose ... le moment ou je vois que ca compare juste comme il faut mais que j'appelle pas la fonction .... manque d'alcool sans doute ...
+ Zorg1: TU FAIS DU HASKELL A JEUN&#160;??????
+ Zorg1: le fou
+ dwarfie: oausi je sais ... grosse erreur ...
+ Stilgart: l'haskell sans alcool, la fête est plus folle&#160;!!!
+ BlaiseEbuth: Raaahh... null c'est nul.
+ JBM: l'erreur au millard
+ dwarfie: bon , c'est a vomir mais c'est fini ... maintenant boire pour oublier ...
+ JBM: pour oublier .... ou pour preparer le suivant
+ dwarfie: Stilgart ... t'as beau dire , la solution de jbm je la comprend encore un peu ... celle de damiengif c'est tellement court qu'il va me falloir un bon taux d'alcoolemie :D
+ Zorg1: dépasse pas le pic de Balmer
+ JBM: y'a concision et y'a golf
+ dwarfie: bon ... au moins c'est fait ... autant de puzzle resolu en haskell qu'en c++ ...
+ dwarfie: ah ben non , j'oublie les c++ qui passaient que lancé depuis le bash ....
+ Zorg1: t'as droit à un paquet de XP&#160;?
+ JBM: mieux
+ JBM: Une Certification
+ JBM: bizarre chez moi c'est le contraire
+ dwarfie: non , droit a rien ... j'ai tout au taquet de toutes facons :D
+ JBM: je suis Tres Loin d'avoir autant de puzzles resolus en C++ qu'e nHaskell
+ Zorg1: j'ai 13 puzzles à faire en bash et j'arrête pas de bricoler en Lua
+ dwarfie: en plus , on est mal ... avec la case competences acquises ... on risque pas de la remplir , c'est pas avec les puzzles qui restent qu'on va acquerir des competences :D
+ JBM: on apprend plein de trucs avec les puzzles de tbali voyons
+ dwarfie: competences recentes d'ailleurs ... 
+ dwarfie: :thinking: .... hmmm ... non ....
+ Zorg1: y a même pas une compétence "trolling", j'ai pas mal appris pourtant là dedans
+ Stilgart: +1
+ dwarfie: oui mais pas le droits de cocher ... c'est pas recent
+ JBM: je la mettrai sur tvc si c'est possible sur les multis
+ BlaiseEbuth: Moi je vais mettre "reading comprehension" dans mes compétences
+ Zorg1: :thumbsup:
+ Danotris: Y'a un moyen de savoir pq notre code passe pas le validateur&#160;?
+ BlaiseEbuth: Parce qu'il est pas bon a priori :grin:
+ Danotris: Ca je m'en doute mais j'ai du mal à voir le pb
+ BlaiseEbuth: Non. Les validateurs ne sont normalement pas visibles. Après le titre peux te donner une indication...
+ Danotris: "Validator 3"
+ BlaiseEbuth: Pas de bol...
+ BlaiseEbuth: C'est sur quoi&#160;?
+ Danotris: Balanced ternary computer: encode
+ Danotris: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/balanced-ternary-computer-encode">https://www.codingame.com/ide/puzzle/balanced-ternary-computer-encode</a>
+ BlaiseEbuth: Tu passes tout sinon&#160;?
+ Danotris: Les tests et les autres validateurs oui
+ Danotris: J'ai une idée
+ Danotris: qYES
+ Danotris: C'est bon
+ BlaiseEbuth: C'était quoi&#160;?
+ Danotris: Un truc tout con, j'avais fait un tableau qui présentait les puissances de 3, j'ai juste ajouté 729
+ BlaiseEbuth: Ah ouai, le validateur devait être une valeur plus élevée que les autres
+ Danotris: Yes
+ Danotris: Bon c'est pas ouf comme solution mais bon
+ Danotris: Merci&#160;!
+ BlaiseEbuth: Bah j'ai rien fait du coup... Mais de rien ^^
+ Zorg1: quel talent BlaiseEbuth
+ BlaiseEbuth: T'as vu :sunglasses:
+ Zorg1: ta seule présence fait fuir les bugs
+ Zorg1: tu veux pas venir sur mon projet ^^
+ BlaiseEbuth: Je vais de venir une sorte de chat de navire... Cool ^^
+ Zorg1: ça me fait penseur au joueur de flutte de Hamelin
+ Zorg1: *penser
+ BlaiseEbuth: Plus dans mon style.
+ BlaiseEbuth: :imp:
+ Zorg1: si tu pouvais aussi noyer les chefs en leur jouant du pipeau
+ CopperFr: j'aimais bien la flûte au collège
+ Zorg1: j'ai un souvenir mitigé de la musique en collège
+ CopperFr: c'est normal
+ Zorg1: entre les élèves qui faisait de la zique à côté et les autres qui comprenaient pas trop ce qu'ils foutaient ici
+ CopperFr: le mieux c'était les interros de flûte :D
+ Valjean_p: Comment c'était k'humiliation d'arriver sans connaitre son morceau et de devoir essayer tant bien que mal devant toute la classe
+ Zorg1: moi c'est surtout le chant que j'aimais pas
+ CopperFr: c'était des trucs nazes qu'on chantait
+ CopperFr: (enfin en tout cas à cet age là on les trouve naze)
+ Zorg1: t1 les rois mages ...
+ BlaiseEbuth: au cabinet
+ CopperFr: en plus on apprenait même pas le grunt :D
+ Zorg1: oui c'est pas là que t'allait lancer ta carrière de death metal
+ Valjean_p: Moi j'aimais bien, on a eu Armstrong et Mon amant de saint jean
+ CopperFr: ah oui celui qui avait gagné 7 tours de France
+ Zorg1: ou atterit sur la lune&#160;?
+ CopperFr: oui
+ Zorg1: quel homme, trompettiste cycliste et astronaute
+ BlaiseEbuth: Et alchimiste&#160;!
+ CopperFr: oui mais on lui a pas retiré ca marche sur la lune&#160;?
+ CopperFr: sa*
+ Zorg1: ah c'est vrai personne n'a jamais été sur la lune, c'est une conspiration
+ Zorg1: par contre dans la lune ...
+ CopperFr: ben oui la preuve y savent plus y aller
+ Zorg1: je dirais plutôt un pb de moyen
+ Zorg1: comme quoi pour les concours de zizi ils savent trouver du pognon, pour le reste
+ CopperFr: y a aussi des compétences qui sont partis en retraite
+ Zorg1: (c'est un peu réducteur pour la course à l'espace mais bon)
+ CopperFr: non c'est une autre époque
+ CopperFr: c'est un peu moins passionnant de nos jours je trouve
+ Zorg1: ah bon&#160;? on envoie des tonnes de sonde dans l'espace
+ Zorg1: on a des photos de pluton, des trucs qu'atterissent sur des asteroïdes au fin fond de nulle part
+ Zorg1: qui se posent sur des comètes ni vue ni connu
+ CopperFr: l'astéroïde c'était cool mais rien a voir je pense avec apollo
+ Zorg1: on connaît vachement mieux le système solaire que maintenant et à un prix ridicule par rapport à celui d'envoyer trois gus sur la lune
+ Zorg1: bah la question c'est&#160;: est ce vraiment pertinent d'envoyer des gars dans l'espace&#160;?
+ Zorg1: la seule fois où il y a eu le cas c'était dans le but de propagande
+ CopperFr: ca reste un événement hors du commun pour moi
+ Zorg1: certe, mais je pense que l'impact scientifique est nettement moindre que par rapport à ce qu'ont ramené les sondes voyagers par exemple
+ Zorg1: (après c'est mon opinion perso)
+ Zorg1: par contre oui au niveau symbolique c'est hors du commun (et c'est pour cela que c'est du bon boulot de com/propagande)
+ CopperFr: les sondes voyager c'était un beau projet aussi et vu qu'elle fonctionnent encore aujourd'hui
+ CopperFr: oui les chinois ont fait pareil avec la face cachée de la lune
+ Zorg1: y avait un documentaire sur le fait que les géologues se plaignaient des caillous ramenés par les astronautes américains et avaient demandé à en former à la géologie
+ CopperFr: oui y a eu un géologue astronaute
+ Zorg1: c'était assez interessant sur le côté "scientifique" de ces projets
+ Zorg1: c'est du fake les chinois, tout le monde sait qu'il y a une base nazi sur la face cachée de la lune, j'ai même vu un documentaire là dessus
+ CopperFr: :D
+ Zorg1: (je crois en plus que les russes avaient déjà photographié la face cachée de la lune)
+ CopperFr: oui mais là c'était pas en direct&#160;?
+ Zorg1: bah vu la techno de l'époque ...
+ CopperFr: c'était ca l'exploit
+ CopperFr: (ca vait jamais été fait)
+ Zorg1: sinon il n'y a que les russes qui ont réussi à faire atterir un truc sur Vénus et à en ramener des photos non&#160;?
+ CopperFr: oui c'est possible
+ CopperFr: mais les américains sont les seul a avoir attérit sur mars
+ Zorg1: il y a eu des atterisseurs soviétiques en fait
+ dwarfie: CopperFr faux
+ Zorg1: mais ils ont l'air de pas avoir eu beaucoup de succès
+ Zorg1: <a rel="nofollow" class="external free" href="https://fr.wikipedia.org/wiki/Mars_3">https://fr.wikipedia.org/wiki/Mars_3</a>
+ CopperFr: je parlais d'attérissage pas d'écrasement
+ Zorg1: Mars 3 a atterit en douceur
+ dwarfie: bah , ils ont amarsi ... fix ta connaissance ... c'est tombé en panne apres
+ CopperFr: oui c'est pour ca
+ Zorg1: voilà il a une panne 20 secondes après, le mauvais truc
+ Zorg1: Mars 2 a atteri à la russe par contre
+ CopperFr: les russes c'était des bourrins quand même :D
+ Zorg1: Mars 6, ils ont perdu contact pendant la phase de descente
+ CopperFr: en tout cas z'ont pas trop de chance avec mars
+ Zorg1: les ricains en aussi perdu quelques unes de sonde
+ dwarfie: bah , c'est juste qu'ils avaient pas récupéré les bons nazis ... ils s'étaient tous fait recupérer par les riacains :D
+ CopperFr: ca c'est sur mais en même temps c'était quand même mieux d'aller aux us
+ CopperFr: z'ont récupéré le meilleur von braun :D
+ BlaiseEbuth: fix ta trombonne
+ Paikan2068: Hello tous! J'ai l'habitude de programmer en Python, et connais un peu de C++ (les mots-clés principaux quoi...) mais pas grand chose de plus
+ Zorg1: ah oui j'ai mis du temps à la comprendre
+ Zorg1: #paperClip
+ Paikan2068: Or, j'aurai besoin de me pousser à apprendre plus sur les structures et autres disponibles dans la bibliothèque standard
+ Paikan2068: Hormis lire la doc, vous avez des ressources à suggérer?
+ Zorg1: y a t il un expert C++ dans le chat&#160;?
+ Gloopy: Regarde les Podcasts de Jaosn Turner <a rel="nofollow" class="external free" href="https://www.youtube.com/user/lefticus1">https://www.youtube.com/user/lefticus1</a>
+ Gloopy: C'est un bon début
+ CopperFr: y a de quoi de s'occuper 237e
+ CopperFr: (c'est moins que les feux de l'amour)
+ LegendaryStone: salut
+ Zorg1: Jason est un constructeur éseulé va-t-il réussir à être friend avec la function de son coeur&#160;?
+ BlaiseEbuth: J'ai envie de dire&#160;: "pratique"...
+ Zorg1: salut LegendaryStone
+ Zorg1: oui faut se trouver un truc à coder
+ Zorg1: après je ne sais pas si les puzzles CG c'est le bon truc pour pratiquer les libs de C++
+ Zorg1: enfin la lib standard
+ CopperFr: faudrait que je regarde un peu les différentes normes de C++ 11 ... 17 et la nouvelle 20
+ Gloopy: Pour apprendre, il faut pratiquer&#160;: il n'y a pas de secret
+ dwarfie: c'est en mouchant qu'on devient moucheron
+ CopperFr: y a même une vidéo sur le C sur commodore 64 :D
+ Zorg1: c'est du vice là
+ CopperFr: (bon j'ai déjà utilisé sdcc sur amstrad cpc donc bon)
+ Zorg1: ah oui sdcc déjà entendu parler
+ Paikan2068: Merci tout le monde!
+ Paikan2068: JE vais regarder les vidéos, et alterner avec des puzzles CG
+ Paikan2068: Forger et observer les forgerons&#160;;)
+ WebFaker: :grinning:
+ WebFaker: cc
+ Zorg1: Automaton2000 une idée&#160;?
+ Automaton2000: faut que je me suis dit que ça devait être un truc à tester
+ Stilgart: go go go Automaton2000
+ Automaton2000: oui, je suis sur la bonne voie
+ Stilgart: tu peux le faire Automaton2000, tu peux dire tortue&#160;!!!
+ Automaton2000: du coup, je me demande comment je dois faire un 100%...)
+ Stilgart: Automaton2000: tu n'as que 6 lettres à dire&#160;!
+ Automaton2000: pas envie de jouer pas envie de jouer a paper mario (le vrai , pas celui de l'adversaire
+ Stilgart: et c'est l'échec&#160;:(
+ Valjean_p: Quelqu'un m'explique l'Automaton2000 x)&#160;?
+ Automaton2000: je sais même pas ce que tu écris
+ dwarfie: Automaton2000 ... quitte a me piquer mes phrases , tu pourrais eviter de les massacrer espece de tortue ...
+ Automaton2000: mais le truc c'est que je gagne contre le boss de wood 2&#160;?
+ BlaiseEbuth: Automaton2000 explique toi à Valjean_p
+ Automaton2000: je viens de dire que c'est une erreur
+ Zorg1: Valjean_p&#160;: Automaton2000 est un chat bot résultat d'une technologie de pointe que le monde entier nous envie
+ Automaton2000: mais je vois pas de quoi tu parles&#160;?
+ Zorg1: il répond à son nom
+ Zorg1: mais en fait c'est un truc à base de chaîne de Markov
+ Stilgart: et surtout, il a la phobie des tortues
+ Zorg1: sa base est composée des conversations du chat
+ Stilgart: Automaton2000: on parle de toi, fais pas semblant de pas comprendre
+ Automaton2000: bon allez sur ce je vais manger
+ Zorg1: t'as aussi AutomatonNN comme chatbot
+ AutomatonNN: oula c'est pas trop compliqué de faire un truc sur le forum que tu as pas trop de temps de compil en
+ Zorg1: mais lui il est basé sur une histoire de réseau neuronaux, avec une limite de 100 char  à sa réponse
+ Zorg1: je crois que ces bots sont le sujet d'un article du blog cg
+ Valjean_p: Mmmmm et ça permet quoi les chaines de Markov&#160;? Parce que la la différence entre ça et chopper des phrases au pif dans une db j'ai du mal a faire la diff ^^
+ Stilgart: ça permet de recomposer des phrases nouvelles
+ Stilgart: Automaton2000: dis un truc original&#160;!
+ Automaton2000: j'avais pas prévu de le faire
+ Zorg1: avec une probabilité similaire au conversation du chat
+ Valjean_p: Incroyable
+ Zorg1: bon parfois il ressort tel quel un post
+ Stilgart: Automaton2000: nan mais ça c'était une phrase crédible... sors nous un truc dont toi seul à le secret&#160;!
+ Automaton2000: je pensais à un truc qui a l'air de dire qu'il faut que je change de langage
+ Zorg1: il a un prefixe de 3 mots ce qui évite les trucs trop farfelus mais le limite 
+ Valjean_p: Maintenant je comprends pourquoi le monde entier nous l'envie 
+ Zorg1: dingue non&#160;? ^^
+ Stilgart: mais j'attends toujours ma tortue&#160;:(
+ Zorg1: il existe aussi sur le chan World et le chan #ru (mais celui là j'y vais jamais)
+ Valjean_p: Ouais ça doit être passablement imbitable ce qu'il raconte en russe, déjà qu'en français c'est chaud
+ Stilgart: Automaton2000 fait des phrases relativement propres en vrai
+ Automaton2000: ah ça doit être un peu plus de temps dans mon code
+ Stilgart: AutomatonNN par contre il sait pas parler (mais il sait dire tortue)
+ AutomatonNN: proposer un truc un peu de chance de te faire un peu de temps
+ Stilgart: (sur ce coup là, la différence est pas si flagrante&#160;:/ )
+ Valjean_p: Tout a fait d'accord avec toi AutomatonNN
+ Zorg1: il s'est pas un peu calmer avec ses histoires de contest de contest AutomatonNN&#160;?
+ AutomatonNN: vens de toute façon c'est pas trop compliqué de faire un truc du genre de preuves que tu peux pas te
+ AutomatonNN:  max x et y a des problèmes de perfs comme ça je sais pas pourquoi 
+ Stilgart: Zorg1: un peu, mais c'est la faute à CG aussi
+ Stilgart: j'ai presque oublié ce qu'est un contest, moi aussi
+ Zorg1: ^^
+ Zorg1: un truc avec du brouillard si j'ai bien compris
+ dwarfie: :thinking: c'est donc a cause du brouillard qu'on voit plus de contest ... ca se tient ...
+ Zorg1: c'est quand le 12 novembre&#160;?
+ dwarfie: entre le 11 et le 13
+ dwarfie: :D
+ Stilgart: dans trop longtemps
+ Stilgart: AutomatonNN en perd son contest de contest de contest
+ AutomatonNN: oui j'ai vu que tu as bien compris&#160;:)
+ Stilgart: héhé
+ Zorg1: <a rel="nofollow" class="external free" href="https://imgur.com/a/Jd08Mad">https://imgur.com/a/Jd08Mad</a>
+ Zorg1: y a pas pour les thématiques joyeuses les scandinaves ce sont les meilleurs

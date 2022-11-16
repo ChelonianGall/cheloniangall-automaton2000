@@ -1,0 +1,677 @@
+ GroutchKeu: o/
+ Thyl: o/
+ sLambert: o/
+ npo: Bonjor
+ npo: Bonjour*
+ Thyl: en c++
+ Thyl: corrupted size vs. prev_size while consolidating
+ Thyl: c'est quoi ca&#160;! :D
+ Thyl: avec moi le Chat aurait vu toutes les erreurs Cpp
+ plieuse: bonjour
+ JBM: comment es ton csb
+ Thyl: plutôt bien
+ Sang_VD: Bonjour
+ Martin17: Salut
+ natrian: hello
+ lhm: o/
+ b0n5a1: o/
+ Thyl: mon BFS marche mieux si je fais une recherche en deep 4 qu'en deep 12
+ Thyl: :sob:
+ Thyl: je pense qu'il y a un problème dans mon seed
+ Duftor: Bonjour
+ Duftor: Quelqu'un a 2minutes j'ai des questions sur l'ASCII ART&#160;?
+ Thyl: vas y
+ b0n5a1: Le plus simple est de poser la question tout de suite ^^
+ Duftor: En fait, je galère un peu avec la sortie. Quand on rentre toute la chaine de plusieurs lignes, j'enregistre ça dans un tableau à 2 dimensions que j'alloue dynamiquement. Mais le programme plante sur le return 0
+ Duftor: (je suis en C)
+ Thyl: il faut que tu alloues la bonne taille
+ Duftor: Je me suis fait une fonction qui affiche 1 caractère. Et dans celle-ci j'alloue aussi un tableau dynamiquement de HxL cases. Et là, ca plante sur cette ligne et plus sur le return 0
+ b0n5a1: t'as essayer d'allouer chaquue ligne à (taille + 1) en mettant unr '\0' dans le dernier pour tester&#160;?
+ Duftor: tab = (char**)malloc((sizeof(tab) * H) pour la première dimension
+ Duftor: et la deuxieme je boucle H fois et tab = (char*)malloc(sizeof(tab) * L * 257)
+ Duftor: Non je n'ai pas essayé. Je test ça et je te dit si ca fonctinnne
+ b0n5a1: sinon dans un premier temps, si tu connais à l'avance hauteur et largeur tu peux commencer par char machin[height][width]...et jouer avec l'alloc dynamique ensuite, quand ça marchera
+ Duftor: En fait j'ai l'impression que ce qui gène ceux sont les lettres ASCII-ART queje donne en entrée
+ Duftor: Il doit y avoir un problème avec les espaces
+ Duftor: Parce que lorsque j'affiche les lettres que j'ai enregistré, je retrouve bien tout mais la toute dernière qui est le '?' s'est transformée
+ Stilgart: tab = (char**)malloc((sizeof(tab) * H)  --&gt; c'est pas foireux ça&#160;?
+ Stilgart: tu as besoin de tab pour connaître sa taille... mais tu utilises sa taille pour définir tab
+ Duftor: Là je suis passé en mode statique et j'ai toujours des problèmes. C'est possible que ça le soit mais visiblement c'est pas ça qui génère mon plantage
+ Duftor: Ah oui, bien vu. JE me suis trompé, dans mon programme je mets pas le sizeof
+ Duftor: matrice = (char**)malloc(H);
+ Stilgart: à mon avis, tu voulais mettre sizeof(*tab)... mais si tu veux un conseil
+ Duftor: matrice[i] = (char*)malloc(1025);
+ Stilgart: mets directement le type que tu veux
+ Duftor: Oui c'est ça
+ Stilgart: sizeof(char*)
+ Duftor: D'acc
+ Duftor: MErci du conseil
+ Stilgart: quand tu as l'habitude, c'est bien plus facile de voir qu'il manque une *
+ Stilgart: ha... et tu codes en C ,
+ Stilgart:&#160;?
+ Duftor: Quand j'aurais fait l'erreur plusieurs fois, ça rentrera tout seul ^^
+ Duftor: Oui en C mdr
+ Stilgart: si oui, pas de cast en sortie de malloc, c'est une erreur (le compilo pourrait laisser passer un code foireux sans même emettre un warning)
+ Duftor: Ah ouais&#160;? J'avais des soucis en cours avec des structures. Si je ne castais pas, ca ne fonctionnait pas
+ Stilgart: tu trouveras l'inverse sur le net, mais c'est parce que le cast est obligatoire en C++ et que les gens ne savent pas que le C et le C++ c'est pas compatible
+ Stilgart: tu utilisais quel compilateur&#160;?
+ Stilgart: les compilos C++ refusent l'absence de cast... mais un compilo C++ ça compile du C++, pas du C
+ Stilgart: sur codingame, c'est gcc (donc un compilateur C)
+ Duftor: J'avais surement un compilateur C++, c'était sur codeblocks
+ Stilgart: donc g++
+ Stilgart: (de mémoire)
+ Duftor: Bah là je suis sur visual studio mais je ne trouve pas le compilateur dans les paramètres
+ Stilgart: enfin, ça se paramètre
+ Duftor: C'est un fichier C mais surement un compilateur c++
+ Stilgart: (dans codeblocks)
+ Duftor: Oui
+ Stilgart: VS ou VS code&#160;?
+ Duftor: VS
+ Stilgart: dans ce cas, le compilo c'est forcément celui de microsoft, non&#160;?
+ Stilgart: (là encore pour C++)
+ Duftor: Oui
+ Duftor: Je compile bien en C maintenant. Mais comme je m'en doutais, cela ne change rien
+ Duftor: Bon alors mettre en '\0' à la fin de chaque ligne fait tjr planter. Je suis en statique pourtant donc tab[5][109]
+ Duftor: Peut être que je n'aborde pas le problème de la bonne manière
+ Stilgart: pourquoi tu mettrais un \0 à la fin de chaque ligne&#160;?
+ Stilgart: pour ascii-art, fais comme dans la vraie vie... remplis ton gros tableau d'affichage, puis affiche le char par char
+ Stilgart: (on peut faire beaucoup plus futé, mais c'est pas demandé)
+ Duftor: Avant de remplir mon tableau d'affichage, je sauvegarde les lignes dans un autre tableau. C'est ça qui pose probleme
+ Stilgart: pareil, contente-toi des caractères
+ Stilgart: pas besoin de \0 si tu travailles char par char
+ Duftor: Oui oui, c'est bien les caractères que je prends
+ Duftor: N'y a-t-il pas un endroit où je peux déposer mon programme pour que vous compreniez mieux&#160;?
+ Stilgart: tu peux le copier-coller ici
+ Stilgart: (tu vas voir, c'est "magique")
+ dwarfie: :popcorn:
+ dwarfie: pfff ... mon nain qui refuse d'aller boire sa :beer: a vindinium ... un comble ca ...
+ b0n5a1: Stilgart le \0 en fin de chaque ligne c'est moi qui l'ai suggéré avant...juste pour tester/voir si ça partait pas en cacahuète à cause de tapage dans les choux car pas de \0 pour délimiter la fin de chaîne (ne sachant à quoi ressemble le code ^^)
+ Duftor: je dégage tout ce dont on n'a pas besoin (commentaires) et je colle ça
+ Stilgart: b0n5a1: ha ok
+ b0n5a1: (et j'ai pas lu en détail le malloc qui me semblait déjà louce je loin...j'ai bouffé ^^)
+ b0n5a1: louche* de* loin
+ Duftor: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/f1887371-46f8-425a-b3dc-c3363e3a94a8">http://chat.codingame.com/pastebin/f1887371-46f8-425a-b3dc-c3363e3a94a8</a>
+ Stilgart: scanf("%[^\n]", T); fgetc(stdin)
+ Stilgart: ça j'ai aucune idée de ce que ça fait
+ <b>**dwarfie est rassuré de pas etre le seul ...</b></p><p><img src="/a/29054906001010" /> Stilgart: réupère les chars un par un avec un scanf("%c", ...) dans une boucle
+ b0n5a1: ça chope tout jusqu'à fin de ligne, c'est par défaut ce code je crois
+ Stilgart: c'est pas dans mon man
+ b0n5a1: j'ai rencontré ça souvent que récemment
+ Stilgart: sans le s&#160;???
+ b0n5a1: c'est une sorte de %s\n
+ b0n5a1: oui
+ Stilgart: ils ont fumé quoi&#160;?
+ b0n5a1: et ça marche
+ Stilgart: bah non
+ Stilgart: c'est pas dans mon man
+ b0n5a1: je sais pas :D pero je remplace par l'ancien truc ^^
+ Stilgart: donc ça marche pas
+ dwarfie: du python ... il parait que le python fumé c'est pas mauvais :D
+ Stilgart: et de toute façon, si ça fait ce que tu dis, ça va forcément générer un \0 en trop qu'il faudra gérer
+ b0n5a1: c'est le getline du c++ le&#160;%[^\n] en gros
+ Stilgart: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/03e8e002-dd78-49d0-b450-47dcef6add9a">http://chat.codingame.com/pastebin/03e8e002-dd78-49d0-b450-47dcef6add9a</a>
+ b0n5a1: non mais je sais :D
+ b0n5a1: mais je vois ça de plus en plus souvent
+ Stilgart: ils pouvaient pas ajouter un %S plutôt&#160;?
+ b0n5a1: hmmm ça existe pas déjà ça&#160;?
+ Almin5k: bonjour
+ dwarfie: acan bacan&#160;!!!!
+ <b>**dwarfie en avait assez de dire geronimo ou banzai :D</b>
+ Stilgart: hum %S c'est déjà pris pour les wide_chars
+ b0n5a1: ha non c'est dans une autre API que j'avais eu une diff entre %s et %S
+ b0n5a1: voilà
+ Stilgart: tiens, y'a pas moyen de passer la précision en argument&#160;?!
+ b0n5a1: %8s, %50s
+ Stilgart: nan, je pensais à
+ Stilgart: scanf("%*s", W, &amp;str)
+ Duftor: Oui en effet, c'était déjà dans le code de base. Je ne l'avais jamais croisé mais ça a le dont de fonctionner. J'ai pas cherché plus loin j'avais d'autres problèmes xD
+ Stilgart: qui semble être une extension
+ Stilgart: bah, c'est pas dans mon man, donc c'est pas standard
+ Stilgart: mais pour le coup, gcc doit gérer ça, et c'est clairement ce dont OP aurait besoin
+ Duftor: JE précise que sur la ligne du return, j'obtiens une erreur maintenant que je suis en statique&#160;:Run-Time Check Failure #2 - Stack around the variable 'ROW' was corrupted.
+ b0n5a1: hmmm&#160;%*s c'est pour ignorer tous les chars jusqu'au procain espace ou newline si je dis pas de connerir 
+ Stilgart: gdb pourrait suffire
+ Stilgart: b0n5a1: c'est pas ce que dit <a rel="nofollow" class="external free" href="https://www.cplusplus.com/reference/cstdio/printf/">https://www.cplusplus.com/reference/cstdio/printf/</a>
+ b0n5a1: ha ça, ok
+ Stilgart: (bon, c'est du C++... mais je veux pas croire que ce soit différent en C)
+ b0n5a1: bad en théorie &lt;cstdio&gt; c'est un peu le reflet de stdio.h
+ b0n5a1: (avec namespace std)
+ Duftor: Stilgart tu avais raison, il met un 0 en fin de chaine
+ Duftor: je suis donc passé sur char ROW[109]
+ Duftor: Et je n'ai plus cette erreur
+ b0n5a1: ouais c'est ce que je t'ai suggéré tout au début, prendre width + 1
+ Stilgart: Duftor: oui, ta syntaxe, c'est un %s moralement, donc avec un \0 final
+ Stilgart:&#160;%*s est bien plus adapté ici
+ Stilgart: (lui ne met pas de \0 justement)
+ Stilgart: sinon, %c et une bonne vieille boucle
+ Duftor: Oui b0n5a1, j'avais essayé mais je pense qu'il y avait d'autres erreurs que j'ai corrigé depuis. Donc maintenant cette partie fonctionne. Merci&#160;!
+ Duftor: Je n'ai jamais vraiment manipulé les scanf. Ils sont encore très obscures pour moi
+ Stilgart: b0n5a1: je vois le conseil, mais ça rend toute la suite un peu plus tricky
+ Stilgart: d'où %c dans une boucle
+ Stilgart: scanf("%c") c'est le seul qui ne soit pas traitre
+ Stilgart: ça prend un char, basta*
+ Duftor: Oui mais faisant un gros ctrl + c ctrl + v, j'avais peur que ca ne fonctionne pas
+ Duftor: C'est pour ça que j'ai laissé le scanf d'origine. JE pen,sais qu'il y avait un truc particulier qui faisait qu'on pouvait coller un gros bloc sur plusieurs lignes
+ Stilgart: "l'aide de rentrée scolaire de 404€ n'a pa encore été versée"
+ Stilgart: merci France télévision pour ce moment :rofl:
+ b0n5a1: woputain j'avais désactivé darkreader pour CG avant, ça pique&#160;!
+ Stilgart: darkreader&#160;?
+ b0n5a1: plugin firefox
+ Stilgart: ça fait quoi exactement&#160;?
+ b0n5a1: pour tout avoir en dark mode, partout
+ Stilgart: et ça marche&#160;?
+ b0n5a1: oui
+ Stilgart: ça marche comment&#160;?
+ <b>**Stilgart en mode gamin chiant</b></p><p><img src="/a/29054906001010" /> Stilgart: Duftor: oublie le code que CG te fournit
+ b0n5a1: tu peux même peaufiner la luminosité des trucs comme ça, avec des sliders
+ Stilgart: très souvent, tu sauras faire mieux et plus court
+ Stilgart: ha... sounds cool
+ Stilgart: je regarde après manger
+ b0n5a1: ça existe pour chrome aussi je crois
+ Stilgart: chrome: no such app
+ Duftor: D'accord merci du conseil
+ dwarfie: :nauseated_face:
+ b0n5a1: <a rel="nofollow" class="external free" href="https://darkreader.org/">https://darkreader.org/</a>
+ Duftor: Pour le moment je garde leur drole de scanf. Par la suite, je me renseignerais et ferais des exos pour le maitriser
+ b0n5a1: apaaremeent si, y'a ^^
+ b0n5a1: Stilgart <a rel="nofollow" class="external free" href="https://chrome.google.com/webstore/detail/dark-reader/eimadpbcbfnmbkopoojfekhnkhdbieeh">https://chrome.google.com/webstore/detail/dark-reader/eimadpbcbfnmbkopoojfekhnkhdbieeh</a>
+ b0n5a1: (lien sur page du site)
+ dwarfie: yowzah
+ b0n5a1: fus ro dah&#160;!
+ b0n5a1: (jamais fini Skyrim sur PS3...si ça se fini :D)
+ b0n5a1: je m'étais fait loup-garou pour pas être emmerdé par le vampirisme
+ Bon[]Crayon: Salut :ghost:
+ b0n5a1: o/
+ Bon[]Crayon: \o
+ Bon[]Crayon: Automaton2000 Salut la tortue :turtle:
+ Automaton2000: c'est un code pour le moment
+ Bon[]Crayon: Automaton2000 Code Tortue.
+ Automaton2000: hello tout le monde et Bon[]Crayon
+ Bon[]Crayon: Automaton2000 o/
+ Automaton2000: comme je me suis dit que ce serait un peu plus
+ Duftor: Toujours ce problème de plantage sur le return...Si je mets la destruction du tableau, ça plante même sur le free(lettres)
+ Bon[]Crayon: C'est quel puzzle&#160;?
+ <b>**dwarfie parie sur ascii art</b></p><p><a href="/wiki/File:Default_avatar.png" class="image"><img alt="Default avatar.png" src="/images/5/56/Default_avatar.png" decoding="async" width="50" height="50" /></a> Duftor: Oui ascii-art
+ Bon[]Crayon: - //scanf("%d", &amp;L); Pourquoi c'est commenté&#160;?
+ Bon[]Crayon: Il faut toutes les entrées du puzzle.
+ Duftor: Oui, je test d'abord à coté et ensuite je mettrais le programme sur codingame. Je l'ai commenté parce que j'en avais marre de tout remettre à chaque essai
+ Bon[]Crayon: ok
+ b0n5a1: malloc(H * sizeof(char*))
+ b0n5a1: pour lettres
+ dwarfie: ah ah ah ... mon nain qui se suicide parce que ca va lui faire gagner de la santé ... j'avais pas pensé a ca ...
+ b0n5a1: Duftor&#160;: <a rel="nofollow" class="external free" href="https://www.geeksforgeeks.org/dynamically-allocate-2d-array-c/">https://www.geeksforgeeks.org/dynamically-allocate-2d-array-c/</a> (t'as différents cas de figure, ça devrait t'aider à piger)
+ Duftor: Bien vu
+ dwarfie: un enorme bonus sur le nombre de mine en cas de risque de mort et ca devrait le faire :yum:
+ Duftor: J'vais aller lire ça. Du coup, on réserve 4 octets * H c'est ça&#160;?
+ b0n5a1: tu t'en fous de combien ça prend, laisse tout se démerder avec le sizeof
+ Duftor: J'avais besoin de comprendre xD mais j'ai testé avec 4*H et ca fonctionne donc c'est bien ça. J'ai vraiment hésité à le mettre le sizeof(char*)
+ b0n5a1: et même si ton type c'est char et que tu sais que ça fait un octet pour un tableau 1D...prend l'habitude de de toujour multiplier par un sizeof du type de donnée 
+ b0n5a1: comme ça t'es jamais emmerdé
+ Duftor: En fait je savais pas si je devais mettre sizeof(char*) ou sizeof(char**). Je mais en fait, ça ne change rien ils font tous les deux la même taille
+ b0n5a1: sizeof(char*) pour le premier (pointeur sur char), sizeof(char) pour le second
+ Duftor: Ah oui, logique
+ Duftor: Je me suis embrouillé
+ Duftor: Et là que je prévois 1 caractère en plus dans ROW ou pas, ca ne change rien.. JE suis vraiment perdu
+ Bon[]Crayon: Est-ce tuas déjà résolus le puzzle&#160;?
+ Duftor: Non pas encore. Je galérais déjà sur la première partie, l'enregistrement des ROW dans un tableau
+ b0n5a1: mets pas 4 en dur (d'ailleurs c'est 8)...toujours sizeof de qqchose....sinon tu te tire une balle dans le pieds
+ b0n5a1: c'est 8 *
+ Duftor: MAis la suite devrait aller mieux
+ Bon[]Crayon: Pas besoin de malloc pour résoudre ce puzzle.
+ Duftor: Oui oui j'ai bien compris le sizeof. Il va devenir mon meilleur amis
+ b0n5a1: en fonction de l'archi qui est derrière t'auras la bonne taille, 4 (ou 8 ) en dur c'est se tirer une balle dans le pieds
+ Duftor: Bon[]Crayon, je n'ai pas trouvé d'autre moyen pour le résoudre. Le fait d'enregistrer à la volé une ligne, je ne voyais pas comment afficher mon résultat
+ b0n5a1: y'a pas besoin Bon[]Crayon mais ça fait pas de mal de le faire pour apprendre à le faire correctement :D
+ Duftor: C'est claire que ça fait du bien mdr
+ Bon[]Crayon: Résoudre le puzzle pour comprendre sa logique et ensuite le refaire pour comprendre la logique de malloc. 
+ b0n5a1: c'est ce que j'ai proposé au début...d'abord statique et quand c'es ok se casser les dents sur malloc ^^
+ Duftor: LE puzzle fonctionne avec du statique&#160;?
+ Bon[]Crayon: Oui voilà.
+ b0n5a1: tableau[height][width]...
+ b0n5a1: c'est tout petit tu peux rien faire péter, pas assez gros
+ Duftor: Parce que pour un puzzle, j'ai fait tous les tests puis un il avait une seconde série de tests qui n'étaient pas tous OK
+ Duftor: Mais bon, je ne suis pas là pour résoudre les puzzle réellement. C'est plutôt l'apprentissage du langage qui m'intéresse donc tant mieux si j'ai complexifié le truc j'en apprends un peu plus
+ <b>**dwarfie est satisfait de son bricolage ... </b></p><p><img src="/a/17785582865119" /> dwarfie: 65 places de mieux  =&gt; 320 cp  dans la poche ...
+ Stilgart: gg
+ Duftor: Pour info, j'ai bien fait de faire l'alloc dynamique parce que le test 5 utilise une autre représentation ascii et elle est beaucoup plus grande que celle de base
+ Bon[]Crayon: À la fin de l'énoncé du puzzle, il y a les valeurs minimum et maximum de chaque paramètre.
+ Duftor: Ah d'accord. Dans ce cas, il est possible de fixer la taille des tableaux. Merci pour l'info.Merci également à tout ceux qui m'ont aidé&#160;! :D
+ Thyl: pardouin le tueur sur le code golf
+ Stilgart: bof
+ Thyl: regarde les six premières places de Power of thor&#160;:)
+ Stilgart: exec kills it all
+ Stilgart: et&#160;?
+ Stilgart: ça fait plus de 5 ans qu'on dit que c'est pété
+ Thyl: c'est pété&#160;???
+ Stilgart: bah oui
+ Stilgart: les tests sont foireux
+ Stilgart: la comparaison est foireuse
+ Thyl: pété dans le sens mort
+ Stilgart: compare batman ep 2 et le reste
+ Stilgart: la bonne solution, c'est celle de batman ep 2
+ Stilgart: où le jeu de test s'adapte à ton code
+ Stilgart: pour le mettre en défaut
+ Thyl: oui
+ Stilgart: il faut clairement ça sur thor, sinon tu auras du hardcode pour gratter 2 chars
+ Stilgart: pour le reste, pardouin n'a qu'un seul code en ruby
+ Stilgart: (qui ne passe probablement pas mon jeu de test)
+ Thyl: ton jeu de testes&#160;????
+ Stilgart: mon 74 n'est déjà pas legit
+ Stilgart: celui qu'il y aurait si je l'avais fait moi-même
+ Stilgart: et qui invalide probablement tout le top100
+ Bon[]Crayon: Faut pas l'avoir comme prof :stuck_out_tongue_winking_eye:
+ Stilgart: bah si
+ Stilgart: je ne le fait pas en traitre à la correction des copies, moi
+ Thyl: t'es prof&#160;???
+ Stilgart: c'est ce que dit mon profil, je crois
+ dwarfie: beuh ... mon 73 a moi il est legit ... :p
+ Stilgart: pas du tout
+ Stilgart: il utilise l'arnaque de l'angle
+ dwarfie: en effet ... le probleme du test qui manque dont j'ai parle a derniere fois ...
+ dwarfie: mais moi , au moins , il fait 
+ dwarfie: 73 et pas 74 :yum:
+ Stilgart: le mien sera plus robuste au changement
+ Stilgart: et honnêtement, j'ai pas que ça à faire de refaire thor à chaque fois que CG change un validateur
+ dwarfie: pas sur , j'ai pas eu a le changer la derniere fois deja ...
+ VilBoub: j'sais pas comment vous descendez aussi bas sans hardcoder... moi mon 74 en python c'est du hardcode&#160;!
+ Stilgart: hint: on code pas en python
+ VilBoub: LoL
+ Thyl: le python c'st vachement bien pour plein de truc
+ Stilgart: parce que c'est loin d'être si bon que ça pour le golf
+ VilBoub: dans les autres langages c'est pire pour moi ^^
+ Stilgart: ruby/perl/bash c'est bien mieux adapté pour le golf
+ Thyl: mon c est p petit que mon python
+ Stilgart: mais tu n'as pas 55 à CN
+ Stilgart: (spéciale pour dbdr)
+ dwarfie: et moiiiiiiiii :p
+ Stilgart: non non, juste pour dbdr
+ Stilgart: il m'a dit que ça lui manquerait maintenant que j'avais trouvé le truc
+ dwarfie: y'a avoir le truc et savoir s'en servir&#160;;)
+ Stilgart: c'est qu'une histoire de 6 mois de lag et une paire de claques perdue, ça
+ <b>**dwarfie fait de l'intox ... faut surtout avoir la bonne solution ailleurs :D</b>
+ chouch: l'arnaque de l'angle&#160;??
+ dwarfie: les angles , c'est un peuple ( dixit perceval )
+ Martin17: faut jamais faire confiance aux angles
+ GroutchKeu: de toute façon suivant comment on est tourné, ça change tout
+ b0n5a1: T'as essayé darkreader Stilgart&#160;?
+ b0n5a1: tain j'ai sursauté...j'ai fait tourner ML avec le code par défaut...me rappelais pas que y'a du son au crash :D
+ JBM: hahahaha
+ JBM: pour un peu ça va me rappeler <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/5326e0ad9aaa1c84010096f697c2dc81eee2">https://www.codingame.com/contribute/view/5326e0ad9aaa1c84010096f697c2dc81eee2</a>
+ b0n5a1: o/ JBM
+ JBM: heya b0n5a1
+ b0n5a1: (au fait c'est devenu quoi TvC&#160;?)
+ JBM: rien de spécial pourquoi?
+ b0n5a1: je l'ai plus vu en contrib je crois, ni ailleurs
+ JBM: je l'ai remis tout à l'heure
+ b0n5a1: :D
+ JBM: je passe plus asse fréquemment
+ dwarfie: elle sert toujours a rien d'autres que du farming ....?
+ Stilgart: b0n5a1; j'ai pas encore compris
+ Stilgart: "Ce site est dans la liste noire mondiale" ... hum ok
+ Stilgart: mais ça change rien visuellement chez moi
+ b0n5a1: ha bon&#160;??
+ BlaiseEbuth: Tu l'autorise et c'est bon
+ b0n5a1: t'as activé au moins&#160;? :D
+ Stilgart: je suis sur "marche"
+ Stilgart: ho putain... 
+ b0n5a1: va sur une page de puzzle...le blanc devrait être noir
+ Stilgart: quelle interface de merde
+ BlaiseEbuth: Le truc où c'est marqué liste noirz, tu dois pouvoir l'autoriser
+ Stilgart: oui, je viens de voir la vieille croix discrète
+ b0n5a1: y'a juste à cliquer oui, comme dit BlaiseEbuth
+ <b>**Stilgart pensait que "marche" impliquait "fais-le partout" </b></p><p><img src="/a/59449061195531" /> BlaiseEbuth: J'te rassure j'ai cherché aussi la première fois
+ dwarfie: on te forcer pas a cliquer mais t'as pas le choix .... 
+ dwarfie: (tien ca me rappelle quelque chose ...)
+ Stilgart: j'ai jamais fais de minimax générique sur CG...
+ dwarfie: :bulb: mais oui , je viens t'entendre la meme phrase a la TV sauf que c'etait pas "cliquer"&#160;;)
+ BlaiseEbuth: J'avais oublié cette contrib JBM :D
+ JBM: :bow:
+ DeveloCraft: yo
+ Bon[]Crayon: o/
+ Bon[]Crayon: Et pouf, voilà une tortue&#160;! Automaton2000
+ Automaton2000: tu fais quoi comme algo&#160;?
+ Bon[]Crayon: Automaton2000 l'algoroutine
+ Automaton2000: bonjour tout le monde, et tortue à Bon[]Crayon et automatonnn
+ BlaiseEbuth: gg
+ Stilgart: gg
+ VilBoub: Yeah&#160;!
+ Bon[]Crayon: :grinning:
+ VilBoub: gg Automaton2000
+ Automaton2000: c un peu le principe de base de cg
+ Stilgart: en effet
+ Stilgart: Automaton2000: sauf qu'on dit "c'est"
+ Automaton2000: et en général tu as un truc qui marche sur tout le monde
+ b0n5a1: ha quand même ^^
+ nicola: Automaton2000 sera bientôt assez intelligent pour valider des puzzles.
+ Automaton2000: je pensais que c'était la même chose que le code du referee ...
+ Stilgart: nicola: vu les derniers votes, je pense que Automaton2000 fait mieux
+ Automaton2000: tiens, je ne savais pas.
+ leojean890: dwarfie qui monte en flêche :P
+ dwarfie: pas tant que ca ... et jusqu'a ce qu'il chute ...
+ dwarfie: vu la malchance dont il est victime en ce moment ...
+ dwarfie: derniere en date ... vitre electrique de la voiture qui remonte pas ... la veille d'un deplacement ... super ...
+ <b>**dwarfie en mode ras le bol des emmerdes ...</b></p><p><img src="/a/42398427701382" /> leojean890: arf dur
+ leojean890: je parlais de CG, mais bon les merdes dans la vie c plus emmerdant
+ dwarfie: apres , je pourrais en effet monter en fleche en etant assez motivé pour vraiment refaire un multi qui rapporte ...
+ dwarfie: mais bon ...
+ leojean890: bah t'es bien monté ces temps ci xD
+ leojean890: mais j'avoue j'ai également tendance à manquer de motiv pour refaire des multis ou m'acharner trop lgtps sur ceux que j'ai déjà commencés
+ leojean890: j'ai fait bcp plus de puzzles que de multis depuis le SC2021
+ leojean890: passé bcp de temps sur les puzzles*
+ dwarfie: j'ai passé a peu pres autant ... mais au moins les puzzles ca prenait moins de temps ... la ca devient vraiment hard :p
+ dwarfie: meme si j'en ai refait facilement des hard que je passais pas en php avant :D
+ leojean890: avant je trainais bcp plus sur multis et optims mais j'en ai tellement fait que je suis passé aux puzzles en majorité
+ leojean890: mais je vais ptet retourner faire un tour sur les multis qui sont encore en contrib, j'ai validé nine men's morris il y a 2 mois il est revenu en wip
+ leojean890: mais il en reste qq uns pas encore validés
+ leojean890: genre snake en optim ça peut être cool
+ leojean890: ouais je vois il te reste seulement des puzzles vraiment chauds quoi xD 
+ leojean890: moi il m'en reste pas mal encore qui m'ont démotivé à a lecture du sujet, ou que j'ai pas encore lus
+ dwarfie: chauds ou chiants ... meme minesweeper j'ai fini par le sortir mais franchement tres chiant
+ leojean890: pas essayé encore
+ leojean890: Stilgart parlait de cloudy-weather hier, 13% de réussite, pas le plus réussi des medium dis donc mdr
+ dwarfie: ca doit etre un de mes codes les plus degueu (meme contest confondu) meme pas du le publier d'ailleurs
+ leojean890: mdr
+ leojean890: parfois je publie pas quand trop crade aussi..
+ leojean890: parfois je publie quand même..
+ dwarfie: euh cloudy , c'est pas un medium ... je l'ai pas encore fait d'ailleurs
+ leojean890: sinon les 100 premiers puzzles environ que j'ai faits je publiais pas encore, je savais pas que ça se faisait à l'époque ^^
+ leojean890: j'en suis bientôt à 300..
+ leojean890: ah pardon c'est un hard
+ leojean890: donc un vrai hard on dirait lol
+ dwarfie: un hard chiant ... mais pas forcement ininteressant
+ dwarfie: commencer plusieurs fois ... rage-quit a chaque fois :p
+ leojean890: j'ai juste lu l'énoncé là
+ leojean890: on dirait un bfs
+ leojean890: je parie que c plus dur que ça xD
+ leojean890: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/99d382e4-90cc-4d1f-a8cb-5bd3653db7cd">http://chat.codingame.com/pastebin/99d382e4-90cc-4d1f-a8cb-5bd3653db7cd</a>
+ leojean890: juste avec ces images on dirait ça^^
+ leojean890: une fois que j'aurai tout lu je comprendrai que c plus chaud que ça hehe
+ dwarfie: maintenant , tu va jeter un oeil aux contraintes ...
+ Zorg1: oui les tailles par exemple :D
+ Zorg1: o/ tout le monde et Automaton2000
+ Automaton2000: c'est quoi le soucis&#160;?
+ leojean890: ah oui 10^9 mdrr
+ dwarfie: Automaton2000&#160;: l'absence de tortue ...
+ Automaton2000: je suis nul en math
+ leojean890: donc faut bfs sur des maps de taille 19^9
+ leojean890: 10^9
+ leojean890: en gros trouver des astuces en fct des positions des nuages
+ leojean890: Stilgart avait dit qu'il avait utilisé A* xD
+ leojean890: je l'ai utilisé que pour 11-puzzle et tan-network perso
+ dwarfie: ca peut  le faire , mais ca fait pas tout ...
+ leojean890: faut essayer de représenter le pbm autrement que juste des coordonnées pour faire un BFS en utilisant des x et y limit des nuages
+ leojean890: en gros au lieu de bfs avec une evolution des states de type x+=1 x -= 1 y += 1 y -= 1
+ leojean890: on évolue les states x += (xCloud-x)
+ leojean890: dans ce style ça peut fare gagner un peu de temps d'exec
+ leojean890: A* l'heuristique serait par exemple plus on se rapproche de la sortie plus on essaye les cous rapidement
+ leojean890: une éval du style distance_à_sortie + depthNode
+ leojean890: pour quand même favoriser des noeuds à depth pas trop lointaine, ne pas aller trop loin dans une branche sans explorer les autres
+ leojean890: avec des coefficients entre les 2 critères
+ leojean890: à tuner
+ leojean890: sinon carrément "virer" les lignes et colonnes contenant aucun nuages pour simplifier le problème
+ leojean890: ne pas oublier d'incrémenter au bon moment le compteur par compte
+ leojean890: surtout même dans les pires cas de grosses maps il n'y a "que" 250 nuages donc en théorie c'est pas si compliqué si on a bien nettoyé (mais galère à coder je pense)
+ leojean890: depth - disatnce_à_sortie je veux dire..
+ Zorg1: leojean890 le gars tu lui files un problème et il réfléchi à haute voix pendant une demi heure :D
+ b0n5a1: héhé
+ leojean890: haute voix textuelle ouaiiss&#160;!
+ Zorg1: :p:p:p
+ leojean890: d'ailleurs je connais tjr pas la différence entre djikstra et a¨* lol
+ leojean890: a*
+ leojean890: juste j'utilise une priority queue, je tune l'éval et basta ^^
+ dwarfie: traduction , quand ca marche , c'est coup de bol :D
+ Zorg1: c'est le TDD, tu testes plein de trucs jusqu'à ce que ça marche et tu touches plus à rien
+ leojean890: bah dans les multis c'est un peu ça mdr
+ leojean890: mais souvent la première idée est plutôt bonne
+ leojean890: ensuite quand j'ajoute trop de critères de merde dans les évals ça marche moins bien
+ leojean890: comme disait Stigart, souvent il passe légende en simplifiant et non en complexifiant
+ leojean890: être capable de se rendre compte qu'on a mis des trucs qui polluent la logique ^^
+ b0n5a1: leojean890 dans le premier "t'explores" tout, dans le second l'heuristique te permet de "privilégier" une direction...dans le pire des cas avec heuristique pourrie ça revient au même :D 
+ b0n5a1: ou pire
+ b0n5a1: tu trouves rien parce que tu butes dans un "creux"
+ leojean890: b0n5a1 ok bah j'ai fait que le second du coup^^
+ leojean890: j'ai un bfs initialement
+ leojean890: puis je décide de guider mon choix des nodes par une heuristique éval qui inclut la depth au lieu de la depth seule
+ b0n5a1: y'a quelques années j'avais trouvé un site qui montrait graphiquement l'évol de différents algos, dont A* avec différentes heuristiques, c'était super bien fait
+ leojean890: sur 11-puzzle ça marche super bien avec une éval "logique" mais les coeffs sont vraiment tirés par les cheveux
+ leojean890:  tan-network c'est super bidon
+ leojean890: par rapport à 11-puzzle
+ leojean890: de mon pdv
+ b0n5a1: je crois que pour le taquin y'a A* dans le Russel et Norvig justement
+ b0n5a1: comme exemple d'application
+ leojean890: du coup c'est djikstra qu'il faudra que j'essaye
+ leojean890: mais pour le taquin j'ai une eval du genre 2.5*score + depth
+ leojean890: genre le truc tu sais pas d'où j'ai sorti les nbs mais ça fait 100%^^
+ b0n5a1: de mémoire y'a une heuristique type distance de Manhattan entre position courante de la tuile et sa position finale, quelquechose de ce goût là
+ leojean890: ouais tkt je l'ai trouvée tout seul l'éval :P
+ leojean890: c juste le tuning pour que ça passe qui était chiant
+ b0n5a1: ou c'est la première proposition d'exemple et après y'a mieux, je sais plus
+ leojean890: y'a ptet mieux que mon truc en effet:)
+ leojean890: pardouin m'avait dit qu'il avait une eval différente
+ leojean890: moi c'est la somme des distances de manhattan entre la position actuelle de chaque tuile et sa position finale cible
+ leojean890: pardouin avait une autre eval plus simple (donc moins de perte de temps de calcul d'éval)
+ b0n5a1: hmmm c'était peut être ça dans le bouquin
+ leojean890: mais qui marche bien sans à avoir à faire un truc crade comme 2.5*ça + depth
+ b0n5a1: je l'ai à portée de main mais la flemme :D
+ leojean890: ce que j'aidû faire en bidouillant pour que ça marche en gros
+ leojean890: je peuxrgarder le code de pardouin dans les solutions si je veux savoir
+ leojean890: après dans ton livre ils ont probablement des trucs moins obvious, plus malins qui marchent mieux
+ leojean890: mon éval c vraiment un truc obvious, on y pense direct sans réfléchir plus de 2 min
+ Zorg1: bah s'il y a une bière entre ta main et le bouquin, effectivement le bouquin est hors d'atteinte
+ leojean890: logique hehe
+ BlaiseEbuth: (╯°□°）╯︵ ┻━┻
+ b0n5a1: aïe
+ BlaiseEbuth: Le plugin ssh de vscode c'est vraiment de la merde
+ BlaiseEbuth: Pour ajouter un host tu dois juste lui filer la commande de connexion.
+ BlaiseEbuth: Donc je lui file "ssh monlogin@monip"
+ BlaiseEbuth: Il ajoute l'host, pas de soucis.
+ BlaiseEbuth: Mais quand j'essayes de me co, il me fait "password for BlaiseEbuth@monip"
+ BlaiseEbuth: Parceque bien sûr mon nom local existe forcément sur le serveur distant.
+ b0n5a1: :D
+ BlaiseEbuth: Et pas moyen de lui faire comprendre que "si si j'ai entré un login dans la commande tout à l'heure"
+ b0n5a1: doit y avoir une option de config, si pas présent par défaut ça prend BlaisEbuth
+ BlaiseEbuth: J'espère bien. Mais c'est juste débile de te faire rentrer la commande complète si au final il en extrait juste l'IP...
+ b0n5a1: Remote-SSH:Open configuration file (je viens de tomber sur un truc comme ça)
+ b0n5a1: <a rel="nofollow" class="external free" href="https://code.visualstudio.com/blogs/2019/10/03/remote-ssh-tips-and-tricks">https://code.visualstudio.com/blogs/2019/10/03/remote-ssh-tips-and-tricks</a>
+ b0n5a1: (si c'est bien ce que t'utilises...)
+ BlaiseEbuth: Ouai je l'ai ce fichier. Je l'ai vérifié/ refait à la main et tout, mais à part 'hostname' il s'en branle ^^
+ b0n5a1: faut redémarrer vschose ^^
+ b0n5a1: (ça me ferait marrer ça)
+ BlaiseEbuth: Déjà fait x fois. 
+ JBM: ou ne juste pas l'utiliser
+ BlaiseEbuth: Aussi
+ b0n5a1: y'a une option "use configuration file" cachée décochée ^^
+ BlaiseEbuth: Ah. J'ai réussi à lui faire bouffer le bon login. Par contre il foire après...
+ BlaiseEbuth: Ah non, en fait il se connecte, essayes d'installer des trucs (Pourquoi&#160;?), se fait tej, et du coup décide que "Connection failed"... -_-
+ Bon[]Crayon: Les mystères de l'informatique.
+ Bon[]Crayon: Même le Diable y perd la raison.
+ Bon[]Crayon: Pas vrai Automaton2000&#160;!
+ Automaton2000: il y a 2 jours
+ BlaiseEbuth: Je prépare une place au chaud pour le mec qui a commit ce truc.
+ Bon[]Crayon: :smiling_imp:
+ BlaiseEbuth: Bon. J'abandonne. C'est d'la merde.
+ BlaiseEbuth: Na. Un bête plugin ftp ça marche très bien.
+ Stilgart: pourquoi tu te fais chier avec un plugin&#160;?
+ Stilgart: tu peux pas juste mettre bash.exe en shell et appeler le ssh de putty&#160;?
+ BlaiseEbuth: C'est pour bosser sur bubok. D'habitude je me connecte via ssh et mobaxterm, et je fais mes modifs avec vim. Mais là j'ai pleins de trucs à faire, alors j'aurais voulu pouvoir ouvrir mon bordel direct dans l'éditeur de texte local (le vim du seveur est vanilla alors pour bosser le code du site ou le css c'est chier, et flemme de le configurer).
+ Stilgart: quid d'un sshfs&#160;?
+ Stilgart: ça doit bien être jouable (au pire via wsl)
+ BlaiseEbuth: Peut-être. Mais le but étant de gagner du temps, et que j'ai déjà passé trois plombe à essayer de faire fonctionner le ssh, mon p'tit ftp ira bien.
+ Remi_avec_un_i: Bonsoir, j'ai une question, comment faites-vous pour déboguer les validateurs lorsqu'on soumet une solution&#160;? Je suis sur un puzzle où tous mes tests passent dans l'IDE, mais pas quand je soumets.
+ Zorg1: quel puzzle&#160;?
+ Remi_avec_un_i: Skylines
+ Stilgart: Remi_avec_un_i: on triche
+ Stilgart: cf nos niveaux&#160;:)
+ JBM: on hardcode
+ JBM: ou on bruteforce,ça dépend des jours
+ Remi_avec_un_i: Ok lol, mais comment&#160;?
+ Remi_avec_un_i: J'ai aucun moyen de voir les données d'entrée.
+ Stilgart: hum... validé par JBM et Stilgart
+ Stilgart: ha bah bravo 
+ Zorg1: bon ben je vous laisse les champions :p
+ JBM: c'est du propre
+ JBM: meuh nan
+ JBM: on est BIAISÉS
+ Stilgart: Remi_avec_un_i: ça se débloque au niveau 29
+ JBM: c'est donc toi qui aides
+ Remi_avec_un_i: Ah oui tiens j'avais pas vu. Ceux qui me proposent de tricher sont ceux qui ont validé le puzzle ^^
+ Stilgart: tu as un soucis avec quel validateur&#160;?
+ Remi_avec_un_i: Le 8 et le 10.
+ Remi_avec_un_i: Pourtant, je ne pense pas avoir oublié de possibilité dans ma solution. D(où le besoin de voir où ça merde.
+ Stilgart: à première vue, les validateurs sont similaires aux tests
+ Stilgart: après, le soucis avec ce genre de puzzle, c'est que selon ton nid de if
+ Stilgart: le bug peut survenir un peu n'importe où&#160;:(
+ Stilgart: j'ai 10 cas
+ Remi_avec_un_i: J'ai pas d'imbrication de if. Au pire j'ai un if dans un for. Ma solution est d'une simplicité ...
+ Stilgart: et j'ai commenté, donc c'est vraiment tricky d'avoir le bon nid de if
+ Stilgart: donc pas du tout la même approche que moi
+ Stilgart: ton code parait bien simple par rapport au mien
+ Stilgart: après, la solution officielle est aussi plus simple que la mienne
+ Remi_avec_un_i: Je compte le nombre de lignes verticales en fonction de la hauteur des toits, puis la solution c'est 2n+1. Ca marche avec tous les validateurs de l'IDE.
+ Remi_avec_un_i: * horizontales.
+ JBM: j'ai pas l'impression d'avoir un nid de if
+ JBM: après j'airais pas jusqu'à dire que je me souviens comment j'ai fait
+ JBM: ni même trop de quoi ça parle
+ Stilgart: bah j'ai un nid de if moi&#160;:)
+ JBM: je vois ça
+ Zorg1: même en Haskell ça existe les nids de ifs. Je suis déception&#160;:(
+ Remi_avec_un_i: Je vais devoir me déconnecter, si vous avez des conseils n'hésitez pas à me MP pour que je puisse les lire plus tard.
+ Remi_avec_un_i: Bonne nuit la compagnie.
+ JBM: ah c'était very hard
+ JBM: Puzzle
+ Stilgart: non
+ Stilgart: c'était sans doute un "rien du tout"
+ JBM: sans doute
+ Stilgart: -sans doute
+ JBM: &#160;
+ Stilgart: pas de difficulté, pas de tag
+ JBM: bon allez hop aussi
+ Zorg1: ah on peut le faire en méthode "gros bourrin" ce puzzle
+ RandomVariable: Hello, je me demande si j'ai pas eu un soucis similaire sur Skyline, avec des batiments qui démarrent à l'entier suivant la vin du précédent
+ RandomVariable: ou plutot, le fait de considérer que le mur a une épaisseur de 1 plutot que 0
+ Zorg1: hop solution bourrin sans forêt de ifs ça marche (mais bon vraiment très particulière)
+ Zorg1: RandomVariable&#160;: bah c'est la même histoire que la position du curseur dans une chaîne de caractère en fait
+ RandomVariable: pas sur d'avoir totalement saisit ce que tu veux dire
+ RandomVariable: en tout cas, j'avais corrigé en considérant que ca fait des interfels ouvers à droite
+ Zorg1: bah le curseur 0 est avant le char 0, le curseur 1 est entre le char 0 et 1. Là c'est comme si tu sélectionnais des chars en disant que tu prend les chars entre le curseur en 3 et en 5
+ RandomVariable: oui, mais c'est pas évident dans l'éonnoncé
+ Zorg1: en lua y en a quand même un qui a fait la solution propre
+ Zorg1: RandomVariable&#160;: bah ça me paraissait évident pourtant
+ Zorg1: après bon j'ai pê le même biais que l'auteur aussi
+ RandomVariable: en tout cas, mon premier submit avait les même résutlats que Remi_avec_un_i 
+ Zorg1: bon c'est pas la solution du siècle, c'est moche, mais ça me fait 50 XP dans la tirelire
+ RandomVariable: presque rien à voir, mais la page du forum Community Ressources a disparu&#160;?
+ Stilgart: oui
+ RandomVariable:&#160;:'(
+ Zorg1: euh ... c'était quoi&#160;?
+ Stilgart: la page de Blaise qui listait les outils de la commu
+ RandomVariable: une collections de liens utiles oui
+ Zorg1: t'as toujours la page de dbdr&#160;: <a rel="nofollow" class="external free" href="https://cg.spdns.eu/wiki/Tools">https://cg.spdns.eu/wiki/Tools</a>
+ Zorg1: mais il l'a viré&#160;? en plus je le vois pas dans la barre de recherche Blaise :thinking:
+ RandomVariable: merci, j'ai sauvé le lien
+ Zorg1: ah si
+ Zorg1: et t'as le site de puzzle qui a des liens sur quelques site CG
+ Zorg1: enfin site satellite de CG
+ Zorg1: *le site de Blaise
+ Zorg1: t1 j'écris n'importe quoi
+ Stilgart: quelqu'un peut tenter de passer le test 2 de <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/adversarial-mate-with-rook">https://www.codingame.com/ide/puzzle/adversarial-mate-with-rook</a>
+ Stilgart: pour moi, la solution est "d2h2 g8f8 h2h8", mais le referee retourne
+ Stilgart: [ERROR] Timeout!
+ Zorg1: t'as un mat en un coup normalement&#160;?
+ Zorg1: si tu met la tour directement sur la rangée du roi
+ Stilgart: le roi va en h7
+ Zorg1: ah non
+ Zorg1: je dis une connerie
+ Stilgart: tu as une excuse, tu avais dit hier que les echecs et toi ça faisait deux
+ Zorg1: ah oui tu dois mettre le roi en face
+ RandomVariable: Zorg1, t'as le lien que du site que tu mentionnes (si c'est pas le wiki mentionné plus haut)
+ Zorg1: quel site&#160;? celui de Blaise&#160;?
+ Zorg1: c'est dans son profil&#160;: <a rel="nofollow" class="external free" href="https://bubok.tech/">https://bubok.tech/</a>
+ RandomVariable: merci
+ RandomVariable: et pas merci pour Stilgart qui me fait avoir un nouveau puzzle à 0%
+ Zorg1: si tu mets ton roi en g6, l'autre se tire en f8 ta tour menace la rangée e et le roi adverse est coincé
+ Zorg1: donc en deux coup
+ Stilgart: pas grave, si tu confirmes, je fais dégager ce puzzle
+ Stilgart: +RandomVariable
+ Stilgart: Zorg1: 3
+ Stilgart: hardcode-le
+ Stilgart: chez moi ça passe pas
+ Zorg1: oui t'as raison 3 
+ RandomVariable: t'as essayé avec un solver quelconque trouvé sur le net&#160;?
+ Stilgart: jmon solveur trouve la solution, écrit la solution, et ça passe pas
+ Stilgart: donc avant de conclure que c'est encore aCat qui ne sait pas coder, je veux votre avis
+ Zorg1: je crois qu'il faut mettre ton roi en e7 en fait
+ Stilgart: roi noir en g7
+ RandomVariable: t'es sur que l'adversaire joue optimalement&#160;?
+ Stilgart: c'est ce que dit le sujet
+ Zorg1: on essaie avec son truc
+ Stilgart: le tag, et le titre du test
+ RandomVariable: Non: f the black player makes a suboptimal move and a quicker checkmate becomes possible, you should find the faster checkmate.
+ Stilgart: putain... ce con n'a pas la même output que pour la v1
+ RandomVariable: En tout cas le test 2 passe chez moi avec
+ Stilgart: oui, je viens de comprendre 
+ RandomVariable: t'as pas oublié de read ce que fait l'adversaire&#160;?
+ Stilgart: faut jouer les coups 1 par ligne
+ Stilgart: bah oui
+ Stilgart: vu que dans l'autrte puzzle faut pas
+ RandomVariable: Avec "d2h2 g8f8 h2h8" tu fervais avoir [ERROR] Given move 'd2h2 g8f8 h2h8' is illegal in the current game state. pas Timeout 
+ Stilgart: bref, merci
+ Stilgart: bah non
+ Stilgart: c'est là que c'est beau
+ RandomVariable: c'est ce que j'ai eu
+ Stilgart: aCat ne sait pas coder
+ Stilgart: bah pas moi
+ RandomVariable: ah non, cf'est parce que j'étais pas sur le bon test
+ Stilgart: sinon, j'aurais compris tout de suite le problème
+ Zorg1: tu peux le faire en deux coup&#160;?
+ RandomVariable: quand j'ai eu l'erreur
+ Stilgart: Zorg1: nan mais cherche pas
+ RandomVariable: le soucis c'est que la fin est considéré comme un message comme dans les combats de bot
+ Stilgart: le bon mat est celui que j'ai donné (c'est le seul en 3 et il est à coup forcé)
+ Stilgart: c'est juste que je me suis fait baisé parce que le parseur est celui de l'autre puzzle
+ Stilgart: donc mon output est valide, fait ce qu'il faut....
+ Stilgart: mais ça plante parce que j'écris rien au tour d'après
+ RandomVariable: <a rel="nofollow" class="external free" href="https://pasteboard.co/Kgdnyo2.png">https://pasteboard.co/Kgdnyo2.png</a>
+ Zorg1: ah oui d2h2 puis h2h8
+ Stilgart: voilà
+ Zorg1: bon je suis vraiment une buse en echec :D
+ Stilgart: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/6ff4a7ec-d5c6-47f2-a637-55540392a10f">http://chat.codingame.com/pastebin/6ff4a7ec-d5c6-47f2-a637-55540392a10f</a>
+ Stilgart: bref, gg la série de puzzle avec des sorties non consistantes
+ Stilgart: "Output each turnA single line containing a moves in a1h8 format."
+ Stilgart: gg le s en trop à moves aussi
+ Zorg1: c'est pas le pire dans ces puzzles celui là encore
+ Zorg1: on te demande de coder un algo pile poil comme lui sinon ça valide pas
+ Zorg1: les fameux "Simple xxx exercice"
+ Stilgart: bah, c'est la même veine
+ RandomVariable: j'ai eu un Code Battle comme ça, ça m'avait bien énervé, j'ai 100% sur les tests, et je fini à 0%
+ RandomVariable: grace aux outils (merci Stilgart de m'en avoir parlé) j'ai pu le retrouver et je constate que quelqu'un avait soulevé le problème et s'est fait rembarré méchamment par le créateur et surement un pote à lui
+ Zorg1: quel puzzle&#160;?
+ Zorg1: le summum c'était les deux puzzles où on demandait de coder un algo décrit dans un bouquin dont on donnait le lien ^^
+ RandomVariable: <a rel="nofollow" class="external free" href="https://www.codingame.com/contribute/view/6698da9576a61863b7515485923a51d3778e">https://www.codingame.com/contribute/view/6698da9576a61863b7515485923a51d3778e</a>
+ Stilgart: Zorg1: tu oublies la moitié de l'histoire
+ Zorg1: ah&#160;?
+ Stilgart: l'algo était mal écrit dans le bouquin, et son referree était tellement faut que ça m'a pris le weekend de patcher sa merde
+ Stilgart: faux*
+ Zorg1: AH AH AH
+ Zorg1: je rigole mais ça doit être désagréable
+ Stilgart: et à la fin, tibo a baissé son froc
+ <b>**RandomVariable grabs popcorn</b></p><p><img src="/a/16542412157988" /> Zorg1: ah oui la réponse très conne de l'auteur qui n'a pas compris ce que c'était un reverse
+ Zorg1: "ah oui t'as une solution qui checke mes tests mais pas mes validateurs elle est fausse donc c'est normal de la refuser"
+ Zorg1: putain je vais te faire deviner une suite avec seulement un nombre
+ Zorg1: pour ça quand je vois un CoC reverse j'ai souvent envie de le reject direct ^^
+ Zorg1: mais bon c'est pas trop dans la philosophie locale
+ RandomVariable: pour l'avoir approuved, il me suffit d'avoir 3 potes level 10&#160;?
+ Stilgart: non
+ Stilgart: 3 potes qui ont fait 50? 30? CoC
+ Zorg1: à une époque ça marchait un peu comme ça. En fait suffit qu'ils aient fait 50 COC tes potes
+ Zorg1: oui en fait pour certaines contrib c'est encore ça, 
+ RandomVariable: Time to dodo
+ Zorg1: bonne nuit
+ RandomVariable: par contre, je crois que Remi ne vera pas ma réponse à son problème&#160;:/
+ RandomVariable: Bonne nuit à vous
+ Zorg1: c'est pour ça qu'il y a un forum
+ Zorg1: voire même discord
+ Stilgart: sur cette bonne blague (discord), je vais me coucher aussi
+ Kayin7: salut. quelqu'un ici connait l'ecole 42&#160;?
+ leojean890: il y a également le site de dbdr pour retrouver les msgs du chat :P
+ leojean890: et ouais clairement je les feri jamais les puzzles XXX simple exercice, la flemme

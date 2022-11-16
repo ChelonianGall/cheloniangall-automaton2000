@@ -1,0 +1,310 @@
+ Waffle3z: clash of code is an event now?
+ Mohamed_Kharrat: PatrickMcGinnisII  thanks man, although I did end up solving it with recursion just like knapsack, I used a dictionary
+ Mohamed_Kharrat: turned out easier than i thought
+ PatrickMcGinnisII: of course u did. :clap:
+ Mohamed_Kharrat: :D
+ PatAPizza56: how do we invite redninja???
+ Mohamed_Kharrat: i invited both of u 
+ Mohamed_Kharrat: 30 sec left
+ Mohamed_Kharrat: tick
+ Mohamed_Kharrat: tock
+ Mohamed_Kharrat: have to go get some sleep bye guys
+ Andy12: HEY.
+ Andy12: hi
+ RandomSteve: hello there
+ Redninja106: WHATS UP EVERYONE
+ RandomSteve: not much, how you doing?
+ RandomSteve: I'm working on the temperatures puzzle
+ Redninja106: well thanks!
+ Redninja106: im in COC right now!
+ RandomSteve: cool
+ RandomSteve: yay I solved it
+ RandomSteve:&#160;:)
+ RandomSteve: I kinda have a trauma becaus ein the puzzle shadows of the knight everytime I tought I had it I didn't have it but this time it actually worked
+ RandomSteve: now I actually feel like I am learning and taht I have learned a lot
+ RandomSteve: thanks to all those people that showed me support
+ PatAPizza56: hey everyone!
+ Redninja106: <a rel="nofollow" class="external free" href="https://www.codingame.com/clashofcode/clash/241452997be16b3e9adc2717a70e5b305eb250a">https://www.codingame.com/clashofcode/clash/241452997be16b3e9adc2717a70e5b305eb250a</a>
+ jacek: happy Caturday
+ jacek: oh my <a rel="nofollow" class="external free" href="https://www.deepmind.com/publications/a-generalist-agent">https://www.deepmind.com/publications/a-generalist-agent</a>
+ DomiKo: published 2 days ago?
+ jacek: 12 may
+ DomiKo: ohh ok I see
+ MSmits: hey, I just had a really good idea about my local meta mcts
+ MSmits: I switched to a normal mcts (with book lookups) for my local and it only did 200-300 rollouts/second because it has to take the data from the drive
+ MSmits: So I made a shadow-dictionary that caches all the data on the drive that is being used with a capacity of around 1M. I do everything from that cache and flush it when it reaches 1M. It sped my program up a factor of 10!
+ jacek: now do it in GPU
+ MSmits: no way :P
+ jacek: i finally hunted down the bug, but i still dont know why it happens in the first place
+ MSmits: weren't you at that place already or is this a different bug?
+ jacek: i was, but it reappeared when i added another car
+ jacek: i learned some of the gdb
+ jacek: i assumed it was some null pointer
+ MSmits: oh ok
+ jacek: but it isnt, the pointer points to some deleted object
+ MSmits: weird
+ jacek: but i dont see at code why it would happen
+ jacek: and it still happens once in few hours
+ jacek: i was lucky i caught that while in gdb
+ jacek: $57 = {&lt;Point&gt; = {x = -1.0228604160514661e+263, y = 479.0564462702327}, _vptr.Unit = 0x7fffdc000, id = 0, vx = 132, vy = 100, beforeColvx = 132, beforeColvy = 100, radius = 100, mass = 1, friction = 0}
+ jacek: nice x
+ MSmits: oh yeah
+ MSmits: I think i know what happened
+ MSmits: the car went to a different universe with the same y coordinate
+ MSmits: but same x
+ MSmits: different x that is
+ MSmits: there's a wormhole in your code
+ eulerscheZahl: would be cool if you can somehow apply that concept in the real world
+ MSmits: Like pointing to something that doesn't exist and then you're teleported to a different universe?
+ MSmits: That's be fun
+ MSmits: 'd
+ RivalRickson: hi
+ rabee12: hi
+ jacek: finally i found it!
+ jacek: it was pointing to the beginning of vector. but if you add something to the vector, it will resize and copy and the address will be invalid
+ jacek: stupid c++ and its memory management
+ DaNinja: that auto resize can be extremely annoying. it breaks references as well as pointers
+ MSmits: ohh that is indeed annoying. I haven't had this problem because I use vectors as a cache with a large capacity at the start
+ MSmits: good to know that this can happen
+ Teerach: heloooooooooooooooooo
+ Teerach: helloooooooooooooo*
+ ben517: do private clash of code games affect your rank
+ bojgus: no
+ ben517: cool thanks
+ therealbeef: it's basic property of std::vector interface&#160;:-/
+ struct: jacek does that happen only if the vector gets empty and then add something?
+ therealbeef: "If the new size() is greater than capacity() then all iterators and references (including the past-the-end iterator) are invalidated. Otherwise only the past-the-end iterator is invalidated."
+ struct: so if I had vector&lt;int&gt; vec(1);int* p = &amp;vec[0];and then add more than 1 int, it will cause problems?
+ therealbeef: depends if capacity is also 1
+ struct: isnt vec(n) the capacity?
+ struct: or is it something else?
+ therealbeef: n is the size
+ TINOUAINANI: Top 50 or delete :grin:
+ TINOUAINANI: :joy:
+ therealbeef: capacity is the size of the reserved memory
+ struct: vector&lt;int&gt; vec(1);cout &lt;&lt; vec.capacity() &lt;&lt; endl;vector&lt;int&gt; vec2(2);cout &lt;&lt; vec2.capacity() &lt;&lt; endl;
+ struct: 12
+ therealbeef: most implementations apparently set the initial capacity to the initial size, but the standard doesn't specify anything
+ struct: ah ok
+ struct: thanks for explaining
+ therealbeef: a high-performance implementation could use a small initial stack array for example
+ jacek: struct it happened when i added 3rd ball to vector of capacity of 2
+ jacek: i never knew there could be 3 balls during collisions handling
+ jacek: this is what you get when copying code straight from java
+ TINOUAINANI: Ho did puzzel named "Bank Robbers" , i am stack in last test with slite differnece in the resulte&#160;?
+ 5DN1L: Probably because your solution is wrong?
+ TINOUAINANI: my be not , may be i lose some peregent becouse the resule is so close
+ jacek: oO
+ 5DN1L: btw what language are you using? is that English? TINOUAINANI
+ TINOUAINANI: :joy:
+ TINOUAINANI: i am lezy to use tradiction sory hhh
+ jacek: :thinking:
+ 5DN1L: that's a language puzzle
+ TINOUAINANI: Q&#160;: if you whant to find number of combination of password thats 3 first characters are digit and the last tow are from [a,b,c,d]&#160;?
+ TINOUAINANI: the result is pow(10,3)*pow(4,2) wright&#160;?
+ 5DN1L: it took me a few seconds to interpret tow as two...
+ 5DN1L: wright
+ 5DN1L: i mean, right
+ TINOUAINANI: no percegent lose right&#160;?
+ 5DN1L: sorry, no idea about what you're asking
+ 5DN1L: translate it for me
+ 5DN1L: thank you
+ jacek: hm?
+ emyilmaz: holaaa
+ Husoski: TINOUAINANI That's correct, provided that repeated characters are allowed.
+ Husoski: With no repetitions, its C(10,3)*C(4,2)
+ Darleanow: Hello gello
+ Darleanow: 5DN1L
+ Darleanow: i need u bro
+ TINOUAINANI: ok thanks
+ Darleanow: i'm doing 1d fire bushes
+ Darleanow: i've made a regex 
+ Darleanow: to split by 3 all the bushes and its working, almost
+ 5DN1L: Don't ask me about regex :scream:
+ Darleanow: for some the quantity of bushes isnt dividable by 3 xD
+ Darleanow: <a rel="nofollow" class="external free" href="https://www.codingame.com/ide/puzzle/1d-bush-fire">https://www.codingame.com/ide/puzzle/1d-bush-fire</a>
+ Darleanow: U SHOULD LEARN AT LEAST THE BASICS&#160;!!
+ 5DN1L: :cry:
+ zakacat: Give :taco: 5DN1L
+ Ayza: still suffering darlean lol
+ 5DN1L: what is the logic of your code, Darleanow?
+ Tien118: taco?
+ Husoski: Darelanow This is a simple loop to write without regex.  WIth regex you have the problem of a fire in a final string of length 1 or 2.
+ Ayza: someone did solve this puzzle with one line of regex
+ Ayza: but it's not necessary 
+ Husoski: Sounds like someone has a golf complex.
+ Darleanow: Hello Ayza and Husoki&#160;!!
+ Darleanow: idk what you're talking about --'
+ Darleanow: 5DN1L it searches for f's in strings cutted in 3
+ Darleanow: but i just need to know like when u split a string
+ Darleanow: if like it has not a length of 3, how can i get the last part of this string
+ Husoski: I have an idea to try in the IDE...brb
+ Ayza: I didn't split the string for my solution
+ 5DN1L: that regex solutions checks for end of word boundary
+ 5DN1L: solution*
+ Ayza: didn't seem to work out easily
+ 5DN1L: or rather, end of line boundary i think
+ zakacat: Is there a way that I can do only fastest claseh?
+ Darleanow: mmmh
+ zakacat: *clashes
+ 5DN1L: Join clash event or do a private clash
+ zakacat: nice, thanks
+ Husoski: Okay, regex is pretty easy but probably wasteful, CPU-wise.  The leftmost fire must be put out, no matter what, right?  Think about what happens after that.
+ 5DN1L: np&#160;:)
+ zakacat: Oh, I got it apparently anyways. whoop whoop 
+ Darleanow: Husoki i didnt understood everything
+ Darleanow: like leftmost etc
+ Gedela: taco
+ jacek: :upside_down:
+ jacek: Automaton2000 where is he?
+ Automaton2000: yeah but it's not the case
+ jacek: round and round <a rel="nofollow" class="external free" href="https://streamable.com/op6fsl">https://streamable.com/op6fsl</a>
+ TINOUAINANI: new puzzel "Calculator"
+ struct: now all you need is to avx the sim
+ ChrisKoehlerjr: can anyone help me with some puzzles
+ VirtualRealityRocks: I code C# too ChrisKoehlerjr , what do you need?
+ isaadi: AAAAAAAAAAAAAAAAAAAAAA
+ isaadi: mfw C
+ isaadi: pointers
+ TINOUAINANI: hhhhh pointres are great :joy:
+ TINOUAINANI: 1/a = 1/x1 + 1/x2
+ TINOUAINANI: is there a formola that faind all x1 and x2 that that fitting this eqution&#160;???
+ TINOUAINANI: ps&#160;: x1 and x2 are unknown
+ j4at: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/f70e8513-9df6-4955-8e25-87c5643ccea7">http://chat.codingame.com/pastebin/f70e8513-9df6-4955-8e25-87c5643ccea7</a>
+ j4at: Didn't test it, but even if i made a mistake the idea is there
+ j4at: TINOUAINANI
+ jacek: assuming x1, x2&#160;!= 0
+ j4at: well in our case its&#160;!=0 :3
+ j4at: Didn't bother write the prove
+ j4at: proof*
+ j4at: (forgot to remove x1=x2=0)
+ j4at: and a=[] lol
+ TINOUAINANI: i test your programme is,s working but what if x1 and x2 are great than a&#160;?
+ TINOUAINANI: for ex your program
+ TINOUAINANI: 1/2 = 1/1 - 1/2
+ TINOUAINANI: but i whant those&#160;?
+ TINOUAINANI: 1/2 = 1/6 + 1/31/2 = 1/4 + 1/4
+ TINOUAINANI: ist apuzzel named "Unit Fractions" that till this
+ j4at: ops made a mistake
+ TINOUAINANI: thi problem that they rich number big us 999999999 so thir is some thing with out for loop with i++
+ j4at: Well you can break if x2&gt;2
+ j4at: incase of positive x1 and x2
+ j4at: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/0078f6c3-00aa-40be-9a91-a5465cce94ac">http://chat.codingame.com/pastebin/0078f6c3-00aa-40be-9a91-a5465cce94ac</a>
+ j4at: Didn't test it again
+ j4at: This works if x1&gt;0
+ j4at: <a rel="nofollow" class="external free" href="http://chat.codingame.com/pastebin/8a68c74a-2d2b-4ec7-9819-9a91dc9b41cc">http://chat.codingame.com/pastebin/8a68c74a-2d2b-4ec7-9819-9a91dc9b41cc</a>
+ j4at: if a &gt; 0 then a small change will make it work on all cases
+ j4at: I helped enough you can guess the reset alone
+ j4at: TINOUAINANI 
+ TINOUAINANI: thi big problem is in +1 every time you will get time out , thanks for your time
+ j4at: yeah it should be x2&lt;2 lol
+ j4at: TINOUAINANI 
+ j4at: nvm its correct :3
+ j4at: THis is what happens when you don't test&#160;:
+ jacek: oO
+ TKirishima: Automaton2000
+ Automaton2000: this time i did it
+ TKirishima: Nice
+ aissvm: Nice
+ Remi.: Automaton2000&#160;: turtle or not turtle&#160;? that is the question
+ Automaton2000: i need to change the value
+ 4kTre0912: Hola
+ Darleanow: j4at u online&#160;?:)
+ waterproofsodium: i lost 2 CP :O
+ waterproofsodium: 2!!
+ waterproofsodium: that's 1 more than 1
+ mdfarhansadiq: hi
+ mdfarhansadiq: :grin:
+ waterproofsodium: hi
+ waterproofsodium: "sadiq"
+ waterproofsodium: I knew that was either indian or pakistan
+ mdfarhansadiq: Bangladesh
+ mdfarhansadiq: :D
+ waterproofsodium: oh bangladesh is its own
+ waterproofsodium: ignorant me
+ mdfarhansadiq: oh...no problem
+ waterproofsodium: is it still like
+ waterproofsodium: 50 degrees celsius there?
+ waterproofsodium: "in that region"
+ mdfarhansadiq: no...now it's 30 degrees
+ waterproofsodium: oh wow "lucky you"
+ mdfarhansadiq: :D
+ waterproofsodium: but it was like 40, wasn't it?
+ mdfarhansadiq: yeah...kind of...but it's like 27
+ mdfarhansadiq: now
+ waterproofsodium: feels like too early in the year
+ waterproofsodium: here it's already 30
+ mdfarhansadiq: o
+ waterproofsodium: but if we're lucky we stay below 35 most of the time
+ mdfarhansadiq: wow
+ waterproofsodium: anyways it gets crazy
+ waterproofsodium: once you go above body temperature sweating does no more help the body
+ mdfarhansadiq: exactly
+ waterproofsodium: I wish we wouldn't depend on "climate change just playing out" as we currently do lol
+ mdfarhansadiq: hahaha
+ mdfarhansadiq: sounds interesting
+ mdfarhansadiq: what's your real name?
+ mdfarhansadiq: :grin:
+ waterproofsodium: but what can you expect in an age where it's still ok for countries to attack other countries to acquire territory
+ waterproofsodium: oh I don't say my real name in here sorry
+ mdfarhansadiq: it's ok
+ mdfarhansadiq: i think if a matter can be solved by discussion then why do war
+ waterproofsodium: in this situation because the psychological disorders some people have can't be solved by discussion :p
+ mdfarhansadiq: yeah...maybe
+ mdfarhansadiq: we need a world where people are friendly and live peacefully
+ mdfarhansadiq: there is no arrogance, ego, hatred, fight
+ mdfarhansadiq: :relaxed:
+ weptdog: Im completely new to coding where should I start??
+ mdfarhansadiq: i think you can start from practice
+ mdfarhansadiq: by using practice option
+ mdfarhansadiq: <a rel="nofollow" class="external free" href="https://www.codingame.com/training">https://www.codingame.com/training</a>
+ Lisa-Has-Ideas: Welcome weptdog... careful, its addictive. :wink:
+ Lisa-Has-Ideas: Question for anyone: Why does the Clash of Code get referred to as "5 minute coding battles" but they really are 15 minutes&#160;??
+ Ayza: probably because you are supposed to solve it in 5 minutes or so
+ waterproofsodium: Lisa-Has-Ideas
+ waterproofsodium: marketing
+ RandomSteve: it should theorically be posible to solve them in 5 minutes
+ RandomSteve: but you are given 15 to solve them
+ RandomSteve: but yes, it is a 15 minute battle
+ waterproofsodium: it's theoretically possible to solve each and everyone of them in &lt; 1 min ig
+ RandomSteve: I highly doubt that
+ RandomSteve: some are very hard
+ waterproofsodium: i mean
+ waterproofsodium: "theoretically possible"
+ waterproofsodium: just taking you by your words
+ RandomSteve: All right my phrase was a bit open for interpretation but you know what I mean
+ waterproofsodium: a reasonable constraint for a theoretical limit might be typing speed of the world champion
+ RandomSteve: true
+ waterproofsodium: meaning you could theoretically solve most of them in 20 sec&#160;;)
+ RandomSteve: a lot of them are solvable in that amount of time yes
+ waterproofsodium: I would go by what a experienced clasher does
+ waterproofsodium: and yeah most of them may be even solvable in 3 min
+ Lisa-Has-Ideas: ha, okay
+ Lisa-Has-Ideas: ha, okay
+ Lisa-Has-Ideas: ha, okay
+ RandomSteve: xd
+ Lisa-Has-Ideas: ha, okay
+ RandomSteve: all right you might wanna stop doing that I mean a mod might get mad
+ waterproofsodium: once is an accident
+ waterproofsodium: maybe 2
+ Lisa-Has-Ideas: Sorry... it was my computer.  I thought it wasn't taking it.  (Sorry)
+ waterproofsodium: three?
+ waterproofsodium: no that's a pattern :P
+ Lisa-Has-Ideas: Yeah, I'm dumb 
+ waterproofsodium: (fav movie quote)
+ RandomSteve: I'm sure you're very smart Lisa
+ waterproofsodium: finding out it's not a movie quote
+ Lisa-Has-Ideas: (I didn't see all these wonderful responses to my question earlier either.  Thank Ya!!)
+ RandomSteve: my pleasure
+ RandomSteve: No, I am your father
+ Lisa-Has-Ideas: It varies depending on what movie I just watched, but this is a good one: “This is the day you will always remember as the day you almost caught Captain Jack Sparrow”
+ RandomSteve: yeah that is a nice one
+ briankings: I have no idea what im doing
+ xiaoping: share code
+ xiaoping: i want to see
+ RandomSteve: me too
+ RandomSteve: How am I top 5% in this website if I started programming about two months ago? do 95% of people quit after two months?
+ RandomSteve: actually top 4% now!
+ LeJordy: maybe you just do it more often
+ RandomSteve: I guess it's something like that
+ RandomSteve: I am really happy with the progress I am making so far
