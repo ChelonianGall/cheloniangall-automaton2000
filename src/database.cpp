@@ -1,6 +1,9 @@
 #include "database.hpp"
 
-DataBase::DataBase (const string _baseName): m_baseName(_baseName), m_results(0)
+DataBase::DataBase (const string _baseName):
+    m_logStream(LogStream::getLogStream()),
+    m_baseName(_baseName),
+    m_results(0)
 {
     try {
 
@@ -31,6 +34,7 @@ void DataBase::clearResults ()
     if (m_results) {
 
         delete m_results;
+
         m_results = 0;
     }
 }
@@ -70,9 +74,9 @@ string DataBase::getColumnAsString (const string _column) const
 
 void DataBase::error (const sql::SQLException& _exception) const
 {
-    cout << "ERROR: " << _exception.what() << " (MySQL error code: "
-        << _exception.getErrorCode() << ", SQL state: "
-        << _exception.getSQLState() << " )" << endl;
+    m_logStream->log("ERROR: " + string(_exception.what())
+        + " (MySQL error code: " + to_string(_exception.getErrorCode())
+        + ", SQL state: " + string(_exception.getSQLState()) + " )");
 }
 
 const string DataBase::M_ADDRESS = "tcp://127.0.0.1:3306";

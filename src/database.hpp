@@ -1,3 +1,7 @@
+#pragma once
+
+#include "log.hpp"
+
 #include <cppconn/driver.h>
 #include <cppconn/exception.h>
 #include <cppconn/resultset.h>
@@ -29,6 +33,8 @@ class DataBase {
 	static const string M_ADDRESS;
 	static const string M_USERNAME;
 	static const string M_PASSWORD;
+
+	shared_ptr<LogStream> m_logStream;
 
 	string m_baseName;
 	sql::Driver* m_driver;
