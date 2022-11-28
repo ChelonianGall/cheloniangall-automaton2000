@@ -8,6 +8,7 @@ add_executable(
     Automaton2000 
     src/main.cpp
     src/database.cpp
+    src/configuration.cpp
     src/log.cpp)
 
 target_link_libraries(Automaton2000 mysqlcppconn)
